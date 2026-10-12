@@ -1,0 +1,73 @@
+{
+  "phase": "R2c",
+  "version": "0.30.48",
+  "commit": "28b8fdd0928bce59d3cfe0676765263ff65f9937",
+  "source_zip_sha256": "cc8ed8c8788e9e93533e11817fc7781793ed432488c89cf748f93c257b3a2765",
+  "source_tree_sha256": "69d4fa39b68ecb61a191a7518e695fad9db4018d440e399f712389e778b98e3c",
+  "bundle_sha256": "8f1da9f8be9f8b8040f7560fd217aeac484fc8035edf4f589a91d8138189a7af",
+  "source_files": 987,
+  "all_saved_files_readback_sha256": "PASS",
+  "ZIP_CRC": "PASS",
+  "bundle_verify_clone_HEAD": "PASS",
+  "tests": {
+    "files": 78,
+    "passed": 857,
+    "failed": 0
+  },
+  "files": [
+    {
+      "name": "列國征途_原始碼_v0.30.48_R2c_Recovery.zip",
+      "library_file_id": "libfile_607e7d60ce78819181117e1a92f5b45a",
+      "sha256": "cc8ed8c8788e9e93533e11817fc7781793ed432488c89cf748f93c257b3a2765",
+      "size": 86868369
+    },
+    {
+      "name": "列國征途_v0.30.48_R2c_Complete_Git.bundle",
+      "library_file_id": "libfile_af869c25e664819192d60b12a987449f",
+      "sha256": "8f1da9f8be9f8b8040f7560fd217aeac484fc8035edf4f589a91d8138189a7af",
+      "size": 85541331
+    },
+    {
+      "name": "列國征途_v0.30.48_R2c_source-tree.sha256",
+      "library_file_id": "libfile_fce688d0a10081918579c4ca4ec1ae93",
+      "sha256": "69d4fa39b68ecb61a191a7518e695fad9db4018d440e399f712389e778b98e3c",
+      "size": 102738
+    },
+    {
+      "name": "列國征途_v0.30.48_R2c_SHA256SUMS.txt",
+      "library_file_id": "libfile_36e8af2e4c308191a8f1bebe2d6bdde7",
+      "sha256": "1f1d03a50d7dbe830e037ca77fbebea8861d39589ba69ae7263a322c3e7b564c",
+      "size": 1871
+    },
+    {
+      "name": "列國征途_v0.30.48_R2c_checkpoint.json",
+      "library_file_id": "libfile_c38562f0de6c819195884b8490795bc6",
+      "sha256": "0128c6c9b0348697c57fa0f5e1a2b26452950c73a3acc4015244edb214021f20",
+      "size": 884
+    },
+    {
+      "name": "列國征途_v0.30.48_R2c_Regression_Evidence.zip",
+      "library_file_id": "libfile_04b345a1cacc8191906eff307fc091c7",
+      "sha256": "91df2a48580b0e522fd793469cd17e69f5cff56b87675d7c5dcb10f480551e26",
+      "size": 95225
+    },
+    {
+      "name": "R2_Formal_Integration_Matrix.md",
+      "library_file_id": "libfile_579738feb9188191a7293491137ea879",
+      "sha256": "7f1176c6b961d964d103d62a39b779526dd3e40abdb305d8b1ee468aac850ff7",
+      "size": 1555
+    },
+    {
+      "name": "R2c_Implementation_Report.md",
+      "library_file_id": "libfile_91df6245b3d08191b7d6dc3cbdbbdc1f",
+      "sha256": "21cd84635f167a23fef5d92c32efc502a29aed7997c4ae7831dfcd8560775ce5",
+      "size": 3639
+    },
+    {
+      "name": "R2c_R3_Handoff.md",
+      "library_file_id": "libfile_0fb2a24842348191bd35716ce0c1c873",
+      "sha256": "0fe40bdab96e1c994618adfe6cc73e5e2c094babd6ce9f2c315ee363223637d0",
+      "size": 669
+    }
+  ]
+}
