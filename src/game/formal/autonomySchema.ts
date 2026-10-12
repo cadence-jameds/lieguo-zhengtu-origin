@@ -6,7 +6,7 @@ const id=(prefix:string)=>z.string().regex(new RegExp('^'+prefix+':[A-Za-z0-9_.-
 const int=z.number().int().safe().nonnegative(),fraction=z.number().finite().min(0).max(1);
 const memory=z.object({factionId:id('faction'),trust:z.number().min(-1).max(1),hatred:fraction,threat:fraction,at:int}).strict();
 const intel=z.object({cityId:id('city'),ownerFactionId:id('faction'),at:int,source:z.enum(['scout','battle','shared']),units:z.record(int),coarse:z.enum(['personnel','armor','siege'])}).strict();
-const agent=z.object({factionId:id('faction'),traits:z.object(Object.fromEntries(TRAITS.map(k=>[k,fraction])) as Record<keyof Traits,typeof fraction>).strict(),decisions:int,nextAt:int,eventId:id('event').nullable(),active:z.boolean(),budgetPercent:int.max(100),lastWarAt:int,memory:z.array(memory).max(32),intel:z.array(intel).max(32)}).strict();
+const agent=z.object({seenSignals:z.array(z.string()).max(64).optional(),factionId:id('faction'),traits:z.object(Object.fromEntries(TRAITS.map(k=>[k,fraction])) as Record<keyof Traits,typeof fraction>).strict(),decisions:int,nextAt:int,eventId:id('event').nullable(),active:z.boolean(),budgetPercent:int.max(100),lastWarAt:int,memory:z.array(memory).max(32),intel:z.array(intel).max(32)}).strict();
 export const autonomySchema:z.ZodType<Autonomy>=z.object({version:z.literal(1),agents:z.array(agent),accepted:int,rejected:int}).strict() as unknown as z.ZodType<Autonomy>;
 export function validateAutonomy(w:FormalWorld,fail:(s:string)=>void){
  const auto=w.autonomy;if(!auto){if(w.events.some(e=>e.type==='ai.decide'))fail('AI event without autonomy');return;}

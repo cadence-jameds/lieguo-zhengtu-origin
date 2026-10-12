@@ -1,3 +1,4 @@
+import {politicalDecision,militaryDecision,expansionDecision,updatePublicMemory} from './aiActions';
 import type {FormalCity,FormalCommand,FormalEvent,FormalReport,FormalWorld,Resources} from './model';
 import {resourceKeys,zeroResources} from './model';
 import {commandId,eventId,sequenceKey,type FactionId} from './ids';
@@ -55,6 +56,8 @@ export function handleAutonomy(w:FormalWorld,e:FormalEvent,s:EventScheduler,subm
  const cities=spatial(w).owned(a.factionId);if(!cities.length){a.eventId=null;a.active=false;return[];}
  a.decisions++;a.active=aiRandom(w.seed,a.factionId,a.decisions+100)<.3+.65*a.traits.activity;
  a.nextAt=w.time+Math.round((20+(1-a.traits.activity)*40+(1-a.traits.reaction)*15+aiRandom(w.seed,a.factionId,a.decisions+200)*10)*AI_MINUTE);a.eventId=eventId(sequenceKey(w.sequences.event++));s.push({id:a.eventId,type:'ai.decide',factionId:a.factionId,at:a.nextAt});
- const c=cities[(a.decisions-1)%cities.length];settleCity(w,c);const chosen=a.active?chooseEconomic(economicChoices(w,c,a),a,w.seed,c):undefined;
- return submitAutonomous(w,s,e,a.factionId,chosen?[chosen]:[],submit);
+ const c=cities[(a.decisions-1)%cities.length];settleCity(w,c);updatePublicMemory(w,a,c);const chosen=a.active?chooseEconomic(economicChoices(w,c,a),a,w.seed,c):undefined;
+ const political=politicalDecision(w,c,a),military=militaryDecision(w,c,a),expand=expansionDecision(w,c,a);
+ const commands:FormalCommand[]=[...(chosen?[chosen]:[]),...(political?[political]:[]),...military,...(expand?[expand]:[])];
+ const before=w.armies.length;const reports=submitAutonomous(w,s,e,a.factionId,commands,submit);if(w.armies.length>before)w.autonomy!.agents.find(t=>t.factionId===a.factionId)!.lastWarAt=w.time;return reports;
 }

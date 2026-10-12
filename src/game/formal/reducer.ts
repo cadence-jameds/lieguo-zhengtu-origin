@@ -1,3 +1,4 @@
+import {politicalMemory} from './aiKnowledge';
 import {handleAutonomy,retireAutonomy} from './autonomy';
 import {applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
 import {applyPolitics,reconcilePolitics,reconcilePoliticalEvents} from './politics';
@@ -66,7 +67,7 @@ export function submitFormalOrder(current:FormalWorld,value:unknown):FormalTrans
   try{const scheduler=new EventScheduler(w.events);
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
    if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
-   else if(p.type==='politics')applyPolitics(w,city,order,p,scheduler);
+   else if(p.type==='politics'){politicalMemory(w,order.issuerId,p);applyPolitics(w,city,order,p,scheduler);}
    else if(p.type==='defense.set'||p.type==='defense.dispatch'||p.type==='joint.create'||p.type==='joint.join')applyCooperation(w,city,order,p,scheduler);
    else if(p.type==='research.start')startResearch(w,city,order,p.techId,scheduler);
    else if(p.type==='age.start')startAge(w,city,order,scheduler);

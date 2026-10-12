@@ -4,7 +4,7 @@ export const TRAITS=['military','economy','expansion','diplomacy','risk','reveng
 export type Traits=Record<typeof TRAITS[number],number>;
 export type RelationshipMemory={factionId:FactionId;trust:number;hatred:number;threat:number;at:number};
 export type Intelligence={cityId:CityId;ownerFactionId:FactionId;at:number;source:'scout'|'battle'|'shared';units:Record<string,number>;coarse:'personnel'|'armor'|'siege'};
-export type Agent={factionId:FactionId;traits:Traits;decisions:number;nextAt:number;eventId:EventId|null;active:boolean;budgetPercent:number;lastWarAt:number;memory:RelationshipMemory[];intel:Intelligence[]};
+export type Agent={seenSignals?:string[];factionId:FactionId;traits:Traits;decisions:number;nextAt:number;eventId:EventId|null;active:boolean;budgetPercent:number;lastWarAt:number;memory:RelationshipMemory[];intel:Intelligence[]};
 export type Autonomy={version:1;agents:Agent[];accepted:number;rejected:number};
 export type Choice={command:FormalCommand;cost:Resources;score:number;category:'economy'|'population'|'military'|'research'};
 /** Stateless seeded stream: restored event/decision identities reproduce each draw. */
