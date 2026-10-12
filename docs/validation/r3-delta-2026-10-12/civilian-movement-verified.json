@@ -1,0 +1,86 @@
+{
+  "before": {
+    "worldTime": 14781922,
+    "routes": [
+      {
+        "id": "shipment:0000000000000005",
+        "glyph": "商",
+        "position": {
+          "x": 292.9990100507349,
+          "y": 70.9990100507349
+        }
+      },
+      {
+        "id": "project:0000000000000004",
+        "glyph": "拓",
+        "position": {
+          "x": 292.99868006920207,
+          "y": 70.99868006920208
+        }
+      },
+      {
+        "id": "craftsman:0000000000000003",
+        "glyph": "工",
+        "position": {
+          "x": 292.99868006851074,
+          "y": 70.99868006851072
+        }
+      }
+    ],
+    "overlay": {
+      "routes": 0,
+      "markers": 0,
+      "animated": false,
+      "cacheSize": 0,
+      "hits": 0,
+      "misses": 0,
+      "civilianMarkers": 3,
+      "civilianCacheMisses": 3,
+      "visibleBattles": 0,
+      "visibleImpacts": 0,
+      "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+    }
+  },
+  "after": {
+    "worldTime": 14973082,
+    "routes": [
+      {
+        "id": "shipment:0000000000000005",
+        "glyph": "商",
+        "position": {
+          "x": 290.7461683660141,
+          "y": 68.7461683660141
+        }
+      },
+      {
+        "id": "project:0000000000000004",
+        "glyph": "拓",
+        "position": {
+          "x": 289.99489469623524,
+          "y": 67.9948946962352
+        }
+      },
+      {
+        "id": "craftsman:0000000000000003",
+        "glyph": "工",
+        "position": {
+          "x": 289.99489312221414,
+          "y": 67.99489312221414
+        }
+      }
+    ],
+    "overlay": {
+      "routes": 0,
+      "markers": 0,
+      "animated": false,
+      "cacheSize": 0,
+      "hits": 0,
+      "misses": 0,
+      "civilianMarkers": 3,
+      "civilianCacheMisses": 3,
+      "visibleBattles": 0,
+      "visibleImpacts": 0,
+      "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+    }
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "createdAt": "2026-10-12T15:41:55.6784124Z",
+  "commit": "4ed0f1073aafbc675b24bf8351818e76a45a76a9",
+  "branch": "work/r3-browser-verification",
+  "node": "v24.19.0",
+  "browser": "Chrome 154.0.8037.98",
+  "playwright": "1.64.0",
+  "files": [
+    {
+      "file": "01-home.png",
+      "bytes": 1061894,
+      "sha256": "9dce24dc93f8edc808c5edd688ee39707c9208c59936e24654a15d86530d9510"
+    },
+    {
+      "file": "02-new-game-form.png",
+      "bytes": 1536887,
+      "sha256": "c201a4dfa427e1474e31a0287b47c29561314187cdd25afaf57b36aa691fb2ac"
+    },
+    {
+      "file": "03-new-city.png",
+      "bytes": 1147673,
+      "sha256": "29f0731471345ac5469b48c99eba6375b0f2f4248cdb154628dc8e25905c0106"
+    },
+    {
+      "file": "04-world-map.png",
+      "bytes": 1339315,
+      "sha256": "74c258590c88898b690c81d786e3aa1404dc1a2809630c3ae650a78d18f06cf3"
+    },
+    {
+      "file": "05-map-zoom-in.png",
+      "bytes": 1507408,
+      "sha256": "2c43611c14309e9a2f835d2b12bd59cc8d480c23a1af78c98041a3254ea19018"
+    },
+    {
+      "file": "06-map-pan.png",
+      "bytes": 1625853,
+      "sha256": "ba1dec196a8de779b3bec7d3957f6d9b261352e395e6416a11ab6f0c41a3f0fd"
+    },
+    {
+      "file": "07-map-overview.png",
+      "bytes": 821205,
+      "sha256": "2335c99d603062292964351fc86b2106f71b80713df76bb7909a019918ec50b7"
+    },
+    {
+      "file": "08-map-home-selected.png",
+      "bytes": 395549,
+      "sha256": "649ee0457ea8fb95fe6e532ba271f4f40bc897ae9d943f7abed070e081c687da"
+    },
+    {
+      "file": "09-field-detail.png",
+      "bytes": 342353,
+      "sha256": "8a774fff39adeb702129b9b9830171d32c6b57978feca5754817f61a328d4de6"
+    },
+    {
+      "file": "10-field-construction.png",
+      "bytes": 964002,
+      "sha256": "41837d4980b53a14a6297bb5ef195d39f1581254672ebce6fa8a1db33dff8972"
+    },
+    {
+      "file": "11-governance-prerequisite.png",
+      "bytes": 136879,
+      "sha256": "2db20a68d838adaabc9ed3ffc6fd1f369ac13b0b12fa13b2ed3936f366e5b79b"
+    },
+    {
+      "file": "12-ai-vs-ai-lv15-siege.png",
+      "bytes": 1423195,
+      "sha256": "cb78f5940f6fd075fbfb0f20638c870f1f6781ec56320fcdd6320413788dd775"
+    },
+    {
+      "file": "13-siege-next-round.png",
+      "bytes": 1830643,
+      "sha256": "0fc1a354261b9513f90759b2c44f345a4d4572b5bf37c6122492bb17e7a0e3c4"
+    },
+    {
+      "file": "14-100-armies-overview.png",
+      "bytes": 999813,
+      "sha256": "c92d9cc12490953e9506d66174ab56996f62ed8188a5ff3d77680e0257eb3a20"
+    },
+    {
+      "file": "15-governor-commission.png",
+      "bytes": 141869,
+      "sha256": "3239b571f19fd239678c5d4b0c563043ea2b91fd0baae83e343d2bd8641b8f46"
+    },
+    {
+      "file": "16-governor-stopped.png",
+      "bytes": 145437,
+      "sha256": "4d7a991646941ed28bff5c5f9ebdcb8fd9e957f088ea1128302c643ed2cefc5a"
+    },
+    {
+      "file": "17-city-interior.png",
+      "bytes": 1728275,
+      "sha256": "ebd5e3003652822cb13f609b4c003514de08997acbbf63a910c936192fd05f5b"
+    },
+    {
+      "file": "18-townhall-detail.png",
+      "bytes": 388109,
+      "sha256": "370e56a92c913c95a3452543ddcda5f5feebf29637791ff31406b5ea29cd9718"
+    },
+    {
+      "file": "19-reloaded-city.png",
+      "bytes": 1865993,
+      "sha256": "046ab597eb2e0a91a9dcea06c752c737998836f1ba4d78ae9c48382bb1dc780b"
+    },
+    {
+      "file": "20-mobile-map.png",
+      "bytes": 356247,
+      "sha256": "5c4fc8936961644942f93d1bebe41f50966a58c02d83e0ec9f16a859c2bc9b39"
+    },
+    {
+      "file": "21-mobile-touch-pinch.png",
+      "bytes": 305463,
+      "sha256": "518755d2186754e0f7724c5cc754938dd3ed73bd48826fa5977749f7bccc1e90"
+    },
+    {
+      "file": "22-siege-reduced-motion.png",
+      "bytes": 1441096,
+      "sha256": "739946276d42cc17cc7a6668f25b9648182443fbcace1d62de6812829a108d5b"
+    },
+    {
+      "file": "23-siege-live-before-final.png",
+      "bytes": 1629919,
+      "sha256": "55251c5d223c32e1cbc24e2a3b9e4cc1f01beae0e313dfb38aaf71a006f0c6b4"
+    },
+    {
+      "file": "24-siege-final-marker-removed.png",
+      "bytes": 1818427,
+      "sha256": "77c52871cb7d84bd131a6d25dbe51ada294b9bb9b722d678389c27ff79045bb8"
+    },
+    {
+      "file": "25-autonomous-ai-before.png",
+      "bytes": 1179201,
+      "sha256": "a9174b5e8ca89a568a6b4a58c79bd52ca553bdfa04955c035fa3211bcb12c10f"
+    },
+    {
+      "file": "26-autonomous-ai-after.png",
+      "bytes": 1613697,
+      "sha256": "9837ff8c6993c3b5c9b0ca47c02bb6c8cae9ba17a650287e84b0f9ca934d4315"
+    },
+    {
+      "file": "27-quiet-governor-commission.png",
+      "bytes": 135011,
+      "sha256": "64c112f5340a8cdc295d9bfa5b3a2a17542023d8fe523394f9f7ce2eb632f039"
+    },
+    {
+      "file": "28-governor-reserve-applied.png",
+      "bytes": 138702,
+      "sha256": "1ceab4eb3db59ed502d184bc6e09375e7e5e07ce5c446f51a5d97823d73e9629"
+    },
+    {
+      "file": "29-quiet-governor-stopped.png",
+      "bytes": 133975,
+      "sha256": "137142958c3263af715b36f1ba19e956ca10bb512ba1e6d48e07cc1d8d188ef6"
+    },
+    {
+      "file": "actions.json",
+      "bytes": 61396,
+      "sha256": "e58d49fd442285221726fab27319f99359a9b4e7bfb042909317bd0e807da3f1"
+    },
+    {
+      "file": "autonomous-ai.realm-save",
+      "bytes": 614333,
+      "sha256": "63a356283c36e032183eee36c4fb46e131362444c0bb0e4a6d06e8ccf4e694ff"
+    },
+    {
+      "file": "autonomous-final-state.json",
+      "bytes": 61460,
+      "sha256": "90f8adf37df5dccdd5f064f861fe746f6e912d70b07ad4e9bb26537c4629886e"
+    },
+    {
+      "file": "autonomous-loaded-state.json",
+      "bytes": 16021,
+      "sha256": "2d153f9d4fe26f0b0852d8b7a2ef628ee6f1e9c7970f4b55857e8d5f7570fd28"
+    },
+    {
+      "file": "autonomous-map.mjs",
+      "bytes": 2493,
+      "sha256": "ae46805b05b59f1031aace48236919d9e4c6d5c58a8a2395cd241ebc71045c88"
+    },
+    {
+      "file": "autonomous-movement.json",
+      "bytes": 1278,
+      "sha256": "cb4809cabac4d52699acbbb030b00d5103f179fab1249a43a590330eeac60cf7"
+    },
+    {
+      "file": "browser-driver.mjs",
+      "bytes": 2862,
+      "sha256": "cbf8d101f433536957979c137edc5f38b31f683eda8896ca3859b8823d3e938e"
+    },
+    {
+      "file": "console.json",
+      "bytes": 3272,
+      "sha256": "1574308d52dbf5bdf2cf1848de439194044be822530571209bbf440c31c9007c"
+    },
+    {
+      "file": "controlled-100-siege.realm-save",
+      "bytes": 968750,
+      "sha256": "5631b3c668ca41c28a39accfbdba691d0028ef397e4e5ee504d09fbbf53b242a"
+    },
+    {
+      "file": "controlled-final.realm-save",
+      "bytes": 784890,
+      "sha256": "0e3b13caa62c37a2f03f84e763d4f097823d1e94420ea93001ed5c93f2316e46"
+    },
+    {
+      "file": "controlled-loaded-state.json",
+      "bytes": 1271840,
+      "sha256": "a8785b188c35cf39ea1a73b6e4cd532de7325c66fc5ce0041bfd1f27fd7d478d"
+    },
+    {
+      "file": "controlled-next-siege-round.realm-save",
+      "bytes": 968970,
+      "sha256": "890a50b8fc43066f2cf2d6b24344a6ff5d3664173210808b99749b953cabe957"
+    },
+    {
+      "file": "finish-scenario.mjs",
+      "bytes": 1260,
+      "sha256": "f1148456527812022d81c562f9cc0e9cef5754e0b747be1c11a9c3ed09c50a7b"
+    },
+    {
+      "file": "governance-quiet.realm-save",
+      "bytes": 449907,
+      "sha256": "57a5b0fbcd0744258f90a5ffbbf327051294bcee41e64e3411479a43b1ca74ff"
+    },
+    {
+      "file": "governor-commission-state.json",
+      "bytes": 1289139,
+      "sha256": "a53916583cfc93d3ab2864ffe9059ecdafc157de34a7b5a049fbe928259fa036"
+    },
+    {
+      "file": "governor-executed-state.json",
+      "bytes": 1160742,
+      "sha256": "5a0ff9d694259da40eabe460987b16b3f7f9e78aadaae0a6312e4f48f73665b0"
+    },
+    {
+      "file": "mobile-verification.mjs",
+      "bytes": 2178,
+      "sha256": "bab0faa44aee7c9bf48641229bad432796890eb95f2aa392bf1e49ae63d9e73b"
+    },
+    {
+      "file": "normal-new-game.realm-save",
+      "bytes": 647665,
+      "sha256": "8039b9ed91f5f1ac08dd870b356e3b45d13c78b78fcd11e3f42be15a79e059a3"
+    },
+    {
+      "file": "quiet-governor-comparison.json",
+      "bytes": 13464,
+      "sha256": "2af0bc1ff536078aac086b720350fc9989458e7d211e67d81665cdf872ddbaac"
+    },
+    {
+      "file": "reload-state-comparison.json",
+      "bytes": 1761551,
+      "sha256": "24260204d17c4a415cf6674b1def48997668cef1484d24ce1897c8f32d65bffc"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 8728,
+      "sha256": "47943b29982eccc931c174a5d0581f48acb0035f41570fac36f055d471728cbe"
+    },
+    {
+      "file": "scenario-metadata.json",
+      "bytes": 37839,
+      "sha256": "d770542ffd4d655bca972983e6d043ce03d13025a530cf8bff0ec8e6ece1e62c"
+    },
+    {
+      "file": "scenarios.mjs",
+      "bytes": 7724,
+      "sha256": "fa80c025afc21493ecde5470a49b8078a757be722347e6670d66e5dd02cb00a1"
+    },
+    {
+      "file": "siege-final-live-state.json",
+      "bytes": 766316,
+      "sha256": "db7747851fdb1e3acc1e34c86ea0f78c251db6ed8c3b621f79bb8e51f8874964"
+    },
+    {
+      "file": "siege-final-metadata.json",
+      "bytes": 2254,
+      "sha256": "1dffa32406373bcc8343ff50a7485b3600ddff33c31e5c778a04aa62912a917c"
+    },
+    {
+      "file": "siege-live-next-round-state.json",
+      "bytes": 1272430,
+      "sha256": "b8b5a7f1f499f40b21cf9ba6c5cace4317b06dbe76caf40eecd76adfb61cc839"
+    },
+    {
+      "file": "siege-near-final-live-state.json",
+      "bytes": 764524,
+      "sha256": "702e59515dc59d770caf4ae6ca223c67517936ec75fad0e348321b70a1423668"
+    },
+    {
+      "file": "trace-governance.zip",
+      "bytes": 28048644,
+      "sha256": "58366b3e1d9e32aae02a532f83035613c4b4289cef45fa3d5a633aaa150419bc"
+    },
+    {
+      "file": "trace.zip",
+      "bytes": 355990348,
+      "sha256": "7f1fe6b8f07ff52b22a1b6b6cf8b70abc9903f18e608e7ba1ba056399aae0a3e"
+    }
+  ]
+}

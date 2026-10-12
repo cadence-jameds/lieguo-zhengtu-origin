@@ -73,7 +73,9 @@ export default function FormalWorldMap({world,focusCityId,focusPoint,onSelect,on
    layers.sort((a,b)=>a.depth-b.depth).forEach(l=>l.draw());
    const civilians=paintCivilians(ctx,g,displayTime,cam,w,h,screen,civilianCache);
    const armyPaint=paintArmies(ctx,g,displayTime,cam,w,h,screen,armyRoutes,reduced,started);
-   if(flags.current.labels)paintMapGlyphs(ctx,glyphs);
+   // Ordinary glyphs are collected only when labels are enabled; exile identity
+   // is collected independently and must remain visible with labels hidden.
+   paintMapGlyphs(ctx,glyphs);
    if(flags.current.hover){tilePath(ctx,flags.current.hover,screen);ctx.strokeStyle='#ffffffb0';ctx.setLineDash([3,2]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
    // Last Canvas paint, above every label and marker.
    const impacts=battleImpacts.update(g,started,reduced);let visibleImpacts=0;for(const impact of impacts){const p=screen(impact.point);if(p.x< -40||p.x>w+40||p.y< -40||p.y>h+100)continue;paintBattleMarker(ctx,p,cam.z,started,false,true);visibleImpacts++;}

@@ -1,0 +1,27 @@
+
+> guozhan-game-mvp@0.30.49 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2K
+transforming...✓ 152 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/manifest.webmanifest                          0.33 kB
+dist/index.html                                    0.80 kB │ gzip:   0.53 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js           3.43 kB
+dist/assets/runtime.worker-CPqSkQJI.js           426.31 kB
+dist/assets/b5Lab.worker-B-LpqQEQ.js             427.97 kB
+dist/assets/index-cYazwSEx.css                   167.76 kB │ gzip:  34.24 kB
+dist/assets/workbox-window.prod.es5-Cch4wiA5.js    5.71 kB │ gzip:   2.25 kB │ map:    13.08 kB
+dist/assets/index-C0eA4uLd.js                    666.07 kB │ gzip: 202.42 kB │ map: 2,139.46 kB
+
+✓ built in 998ms
+PWA v1.3.0
+mode      generateSW
+precache  192 entries (54957.33 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-2fbc6a65.js.map
+  dist/workbox-2fbc6a65.js

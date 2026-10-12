@@ -1,0 +1,302 @@
+{
+  "target": {
+    "id": "city:003",
+    "ownerFactionId": "faction:003",
+    "name": "白馬塔拉新營",
+    "x": 12,
+    "y": 26,
+    "population": 15000,
+    "housing": 30400,
+    "stock": {
+      "food": 13337,
+      "wood": 12222,
+      "stone": 11111,
+      "gold": 9999
+    },
+    "buildings": {
+      "center": 1,
+      "warehouse.0": 15,
+      "residence": 15
+    },
+    "military": {
+      "units": {
+        "militia": 777,
+        "scout": 111
+      },
+      "queue": [],
+      "unpaidFood": 0
+    },
+    "autoLogistics": [],
+    "economy": {
+      "lastSettledAt": 959928,
+      "productionRemainder": {
+        "food": 0.3989199999999755,
+        "wood": 0.9990999999999985,
+        "stone": 0.5992800000000216,
+        "gold": 0.1994600000000446
+      },
+      "milestones": [],
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1
+      },
+      "construction": [],
+      "promotion": null,
+      "reservedIncoming": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "settlementEventId": "event:0000000000000004"
+    },
+    "fields": [
+      {
+        "slot": 0,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 1,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 2,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 3,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 4,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 5,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 6,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 7,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 8,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 9,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 10,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 11,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 12,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 13,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 14,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 15,
+        "resource": "gold",
+        "level": 0
+      },
+      {
+        "slot": 16,
+        "resource": "gold",
+        "level": 0
+      },
+      {
+        "slot": 17,
+        "resource": "gold",
+        "level": 0
+      }
+    ],
+    "wallLevel": 7,
+    "cityPromotionCompleted": false,
+    "integrationWorkHours": 0,
+    "integrationTotalWorkHours": 0,
+    "startingCity": true
+  },
+  "formalInitial": {
+    "id": "city:003",
+    "ownerFactionId": "faction:003",
+    "name": "白馬塔拉新營",
+    "x": 12,
+    "y": 26,
+    "population": 15000,
+    "housing": 30400,
+    "stock": {
+      "food": 13337,
+      "wood": 12222,
+      "stone": 11111,
+      "gold": 9999
+    },
+    "buildings": {
+      "center": 1,
+      "warehouse.0": 15,
+      "residence": 15
+    },
+    "military": {
+      "units": {
+        "militia": 777,
+        "scout": 111
+      },
+      "queue": [],
+      "unpaidFood": 0
+    },
+    "autoLogistics": [],
+    "economy": {
+      "lastSettledAt": 959928,
+      "productionRemainder": {
+        "food": 0.3989199999999755,
+        "wood": 0.9990999999999985,
+        "stone": 0.5992800000000216,
+        "gold": 0.1994600000000446
+      },
+      "milestones": [],
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1
+      },
+      "construction": [],
+      "promotion": null,
+      "reservedIncoming": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "settlementEventId": "event:0000000000000004"
+    },
+    "fields": [
+      {
+        "slot": 0,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 1,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 2,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 3,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 4,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 5,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 6,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 7,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 8,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 9,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 10,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 11,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 12,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 13,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 14,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 15,
+        "resource": "gold",
+        "level": 0
+      },
+      {
+        "slot": 16,
+        "resource": "gold",
+        "level": 0
+      },
+      {
+        "slot": 17,
+        "resource": "gold",
+        "level": 0
+      }
+    ],
+    "wallLevel": 7,
+    "cityPromotionCompleted": false,
+    "integrationWorkHours": 0,
+    "integrationTotalWorkHours": 0,
+    "startingCity": true
+  },
+  "panel": "聚落 · （12, 26）\n白馬塔拉新營\n玩家\n木華黎・那日松\n文明\n蒙古\n軍團\n尚未開放\n帝國\n獨立領主\n關係\n中立\n已知駐軍\n尚未偵察\n城防\n尚未偵察\n人口\n15,061\n\n駐軍情報未知，請先派遣斥候偵察。\n\n偵察資源情報\n\n資源庫存未知\n\n派遣斥候\n掠奪物資\n佔領據點",
+  "dispatch": "掠奪 · 白馬塔拉新營\n×\n長寧安平郡\n出發城市\n→\n白馬塔拉新營\n木華黎・那日松\n—\n單程行軍\n編入部隊\n投入全部戰鬥兵\n民兵\n可用 1,000\n\n戰利品受存活部隊載量限制，隨部隊返回後入庫。\n\n返回\n下達掠奪命令"
+}

@@ -14,7 +14,7 @@ import {LABELS,cityArtAge} from './artMap';
 import {mapEntityKey} from './mapSemantics';
 import FormalCityPanel from '../FormalCityPanel';
 import {displayClock} from './liveClock';
-const dir='docs/ui-v03028',noop=()=>{};mkdirSync(dir,{recursive:true});
+const dir=process.env.BUILDING_DETAIL_EVIDENCE??'docs/ui-v03028',noop=()=>{};mkdirSync(dir,{recursive:true});
 function setup(kind:string,level=4){const w=make(),c=rich(w);w.factions[0].age=3;c.buildings.center=10;c.fields!.forEach(f=>f.level=10);const key=['warehouse','bunker'].includes(kind)?kind+'.0':kind;if(kind==='wall')c.wallLevel=level;else build(c,key,level);c.population=Math.min(c.population,c.housing);for(const r of ['food','wood','stone','gold'] as const)c.stock[r]=Math.min(c.stock[r],storageCapacity(c));return {w,c,key};}
 afterEach(()=>{displayClock.stop();vi.restoreAllMocks();});
 const matrix:unknown[]=[];

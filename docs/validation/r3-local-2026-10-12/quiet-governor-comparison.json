@@ -1,0 +1,626 @@
+{
+  "before": {
+    "campaignId": "campaign:r3-browser-governance-quiet",
+    "revision": 2008,
+    "time": 10573,
+    "dimensions": {
+      "width": 384,
+      "height": 384
+    },
+    "factions": 100,
+    "sites": 432,
+    "home": {
+      "id": "city:000",
+      "ownerFactionId": "faction:000",
+      "name": "長寧安平郡",
+      "x": 293,
+      "y": 71,
+      "population": 200.0029697786258,
+      "housing": 400,
+      "stock": {
+        "food": 560,
+        "wood": 470,
+        "stone": 440,
+        "gold": 510
+      },
+      "buildings": {
+        "center": 1,
+        "townhall": 1,
+        "warehouse.0": 0
+      },
+      "military": {
+        "units": {},
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 257,
+        "productionRemainder": {
+          "food": 0.0038550000000441287,
+          "wood": 0.003212500000017826,
+          "stone": 0.0025699999999915235,
+          "gold": 0.001927499999965221
+        },
+        "milestones": [],
+        "slots": {
+          "townhall": 0,
+          "warehouse.0": 1
+        },
+        "construction": [
+          {
+            "eventId": "event:0000000000004018",
+            "commandId": "command:ai-0000000000004016-0",
+            "lane": 0,
+            "target": {
+              "kind": "building",
+              "key": "warehouse.0"
+            },
+            "fromLevel": 0,
+            "toLevel": 1,
+            "createdAt": 257,
+            "startsAt": 257,
+            "durationMs": 667000,
+            "qualificationHousing": 400,
+            "paidResources": {
+              "food": 40,
+              "wood": 130,
+              "stone": 160,
+              "gold": 90
+            }
+          }
+        ],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000001"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "armies": [],
+    "battles": [],
+    "finalReceipts": [],
+    "governors": [
+      {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 40,
+          "wood": 130,
+          "stone": 160,
+          "gold": 90
+        },
+        "period": 0,
+        "eventId": "event:0000000000004017",
+        "nextAt": 3600000,
+        "decisions": 1,
+        "blocked": "已下達正式economy命令"
+      }
+    ],
+    "autonomy": {
+      "accepted": 1,
+      "rejected": 0,
+      "decisions": 0
+    }
+  },
+  "applied": {
+    "campaignId": "campaign:r3-browser-governance-quiet",
+    "revision": 2010,
+    "time": 20782,
+    "dimensions": {
+      "width": 384,
+      "height": 384
+    },
+    "factions": 100,
+    "sites": 432,
+    "home": {
+      "id": "city:000",
+      "ownerFactionId": "faction:000",
+      "name": "長寧安平郡",
+      "x": 293,
+      "y": 71,
+      "population": 200.23889348734156,
+      "housing": 400,
+      "stock": {
+        "food": 560,
+        "wood": 470,
+        "stone": 440,
+        "gold": 510
+      },
+      "buildings": {
+        "center": 1,
+        "townhall": 1,
+        "warehouse.0": 0
+      },
+      "military": {
+        "units": {},
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 20673,
+        "productionRemainder": {
+          "food": 0.31009500000004664,
+          "wood": 0.2584125000000199,
+          "stone": 0.2067299999999932,
+          "gold": 0.15504749999996648
+        },
+        "milestones": [],
+        "slots": {
+          "townhall": 0,
+          "warehouse.0": 1
+        },
+        "construction": [
+          {
+            "eventId": "event:0000000000004018",
+            "commandId": "command:ai-0000000000004016-0",
+            "lane": 0,
+            "target": {
+              "kind": "building",
+              "key": "warehouse.0"
+            },
+            "fromLevel": 0,
+            "toLevel": 1,
+            "createdAt": 257,
+            "startsAt": 257,
+            "durationMs": 667000,
+            "qualificationHousing": 400,
+            "paidResources": {
+              "food": 40,
+              "wood": 130,
+              "stone": 160,
+              "gold": 90
+            }
+          }
+        ],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000001"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "armies": [],
+    "battles": [],
+    "finalReceipts": [],
+    "governors": [
+      {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 40,
+          "wood": 130,
+          "stone": 160,
+          "gold": 90
+        },
+        "period": 0,
+        "eventId": "event:0000000000004020",
+        "nextAt": 3600000,
+        "decisions": 2,
+        "blocked": "資源儲備方針：保留庫存"
+      }
+    ],
+    "autonomy": {
+      "accepted": 1,
+      "rejected": 0,
+      "decisions": 0
+    }
+  },
+  "stopped": {
+    "campaignId": "campaign:r3-browser-governance-quiet",
+    "revision": 2011,
+    "time": 20985,
+    "dimensions": {
+      "width": 384,
+      "height": 384
+    },
+    "factions": 100,
+    "sites": 432,
+    "home": {
+      "id": "city:000",
+      "ownerFactionId": "faction:000",
+      "name": "長寧安平郡",
+      "x": 293,
+      "y": 71,
+      "population": 200.24249898755716,
+      "housing": 400,
+      "stock": {
+        "food": 560,
+        "wood": 470,
+        "stone": 440,
+        "gold": 510
+      },
+      "buildings": {
+        "center": 1,
+        "townhall": 1,
+        "warehouse.0": 0
+      },
+      "military": {
+        "units": {},
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 20985,
+        "productionRemainder": {
+          "food": 0.3147750000000542,
+          "wood": 0.2623125000000073,
+          "stone": 0.2098500000000172,
+          "gold": 0.15738749999997026
+        },
+        "milestones": [],
+        "slots": {
+          "townhall": 0,
+          "warehouse.0": 1
+        },
+        "construction": [
+          {
+            "eventId": "event:0000000000004018",
+            "commandId": "command:ai-0000000000004016-0",
+            "lane": 0,
+            "target": {
+              "kind": "building",
+              "key": "warehouse.0"
+            },
+            "fromLevel": 0,
+            "toLevel": 1,
+            "createdAt": 257,
+            "startsAt": 257,
+            "durationMs": 667000,
+            "qualificationHousing": 400,
+            "paidResources": {
+              "food": 40,
+              "wood": 130,
+              "stone": 160,
+              "gold": 90
+            }
+          }
+        ],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000001"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "armies": [],
+    "battles": [],
+    "finalReceipts": [],
+    "governors": [
+      {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 40,
+          "wood": 130,
+          "stone": 160,
+          "gold": 90
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 20985,
+        "decisions": 2,
+        "blocked": "已停止"
+      }
+    ],
+    "autonomy": {
+      "accepted": 1,
+      "rejected": 0,
+      "decisions": 0
+    }
+  }
+}

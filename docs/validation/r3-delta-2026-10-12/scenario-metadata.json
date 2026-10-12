@@ -1,0 +1,991 @@
+{
+  "civilians": {
+    "home": {
+      "id": "city:000",
+      "ownerFactionId": "faction:000",
+      "name": "長寧安平郡",
+      "x": 293,
+      "y": 71,
+      "population": 15075.717850097939,
+      "housing": 30400,
+      "stock": {
+        "food": 40011,
+        "wood": 42184,
+        "stone": 38147,
+        "gold": 46110
+      },
+      "buildings": {
+        "center": 10,
+        "warehouse.0": 15,
+        "residence": 15,
+        "townhall": 5,
+        "academy": 5,
+        "market": 5,
+        "castle": 1
+      },
+      "military": {
+        "units": {
+          "militia": 980,
+          "scout": 1
+        },
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 14781838,
+        "productionRemainder": {
+          "food": 0.6084258333357866,
+          "wood": 0.7729749999998603,
+          "stone": 0.8183799999969779,
+          "gold": 0.8637850000013714
+        },
+        "milestones": [
+          10000,
+          15000
+        ],
+        "slots": {
+          "warehouse.0": 0,
+          "residence": 1,
+          "townhall": 2,
+          "academy": 3,
+          "market": 4,
+          "castle": 5
+        },
+        "construction": [],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000404"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "destination": {
+      "id": "city:001",
+      "ownerFactionId": "faction:000",
+      "name": "柳灣泰晤士堡",
+      "x": 281,
+      "y": 59,
+      "population": 15431.62238011526,
+      "housing": 30400,
+      "stock": {
+        "food": 0,
+        "wood": 1184,
+        "stone": 1147,
+        "gold": 1110
+      },
+      "buildings": {
+        "center": 10,
+        "warehouse.0": 15,
+        "residence": 15,
+        "townhall": 5,
+        "academy": 5,
+        "market": 5
+      },
+      "military": {
+        "units": {
+          "militia": 1000
+        },
+        "queue": [],
+        "unpaidFood": 2884.338541111111
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 14781838,
+        "productionRemainder": {
+          "food": 0,
+          "wood": 0.7729750000000877,
+          "stone": 0.8183799999999337,
+          "gold": 0.8637850000000071
+        },
+        "milestones": [
+          10000,
+          15000
+        ],
+        "slots": {
+          "warehouse.0": 0,
+          "residence": 1,
+          "townhall": 2,
+          "academy": 3,
+          "market": 4
+        },
+        "construction": [],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 100,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000405"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 18,
+      "startingCity": true
+    },
+    "exile": {
+      "id": "wild:exile-0000000000000006",
+      "exile": true,
+      "sourceFactionId": "faction:006",
+      "civilizationId": "civ_japan",
+      "createdAt": 14781838,
+      "spawnSlot": 439,
+      "generation": 0,
+      "region": 33,
+      "x": 289,
+      "y": 67,
+      "resource": "bandit",
+      "level": 1,
+      "phase": "active",
+      "defenders": {
+        "militia": 12
+      },
+      "initialDefenders": {
+        "militia": 12
+      },
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      }
+    },
+    "routes": [
+      {
+        "id": "shipment:0000000000000005",
+        "owner": "faction:000",
+        "path": [
+          {
+            "x": 293,
+            "y": 71
+          },
+          {
+            "x": 292,
+            "y": 70
+          },
+          {
+            "x": 291,
+            "y": 69
+          },
+          {
+            "x": 290,
+            "y": 68
+          },
+          {
+            "x": 289,
+            "y": 67
+          },
+          {
+            "x": 288,
+            "y": 66
+          },
+          {
+            "x": 287,
+            "y": 65
+          },
+          {
+            "x": 286,
+            "y": 64
+          },
+          {
+            "x": 285,
+            "y": 63
+          },
+          {
+            "x": 284,
+            "y": 62
+          },
+          {
+            "x": 283,
+            "y": 61
+          },
+          {
+            "x": 282,
+            "y": 60
+          },
+          {
+            "x": 281,
+            "y": 59
+          }
+        ],
+        "start": 14781838,
+        "end": 15800072,
+        "glyph": "商"
+      },
+      {
+        "id": "project:0000000000000004",
+        "owner": "faction:000",
+        "path": [
+          {
+            "x": 293,
+            "y": 71
+          },
+          {
+            "x": 292,
+            "y": 70
+          },
+          {
+            "x": 291,
+            "y": 69
+          },
+          {
+            "x": 290,
+            "y": 68
+          },
+          {
+            "x": 289,
+            "y": 67
+          },
+          {
+            "x": 288,
+            "y": 66
+          },
+          {
+            "x": 287,
+            "y": 65
+          },
+          {
+            "x": 286,
+            "y": 64
+          },
+          {
+            "x": 285,
+            "y": 63
+          },
+          {
+            "x": 284,
+            "y": 62
+          },
+          {
+            "x": 283,
+            "y": 61
+          }
+        ],
+        "start": 14781838,
+        "end": 15418235,
+        "glyph": "拓"
+      },
+      {
+        "id": "craftsman:0000000000000003",
+        "owner": "faction:000",
+        "path": [
+          {
+            "x": 293,
+            "y": 71
+          },
+          {
+            "x": 292,
+            "y": 70
+          },
+          {
+            "x": 291,
+            "y": 69
+          },
+          {
+            "x": 290,
+            "y": 68
+          },
+          {
+            "x": 289,
+            "y": 67
+          },
+          {
+            "x": 288,
+            "y": 66
+          },
+          {
+            "x": 287,
+            "y": 65
+          },
+          {
+            "x": 286,
+            "y": 64
+          },
+          {
+            "x": 285,
+            "y": 63
+          },
+          {
+            "x": 284,
+            "y": 62
+          },
+          {
+            "x": 283,
+            "y": 61
+          },
+          {
+            "x": 282,
+            "y": 60
+          },
+          {
+            "x": 281,
+            "y": 59
+          }
+        ],
+        "start": 14781838,
+        "end": 15545514,
+        "glyph": "工"
+      }
+    ]
+  },
+  "castles": [
+    {
+      "file": "castle-0.realm-save",
+      "owner": "civ_britannia",
+      "source": "civ_zhongguo",
+      "city": "city:000",
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1,
+        "townhall": 2,
+        "academy": 3,
+        "market": 4,
+        "castle": 5
+      }
+    },
+    {
+      "file": "castle-1.realm-save",
+      "owner": "civ_byzantium",
+      "source": "civ_britannia",
+      "city": "city:000",
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1,
+        "townhall": 2,
+        "academy": 3,
+        "market": 4,
+        "castle": 5
+      }
+    },
+    {
+      "file": "castle-2.realm-save",
+      "owner": "civ_mongolia",
+      "source": "civ_byzantium",
+      "city": "city:000",
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1,
+        "townhall": 2,
+        "academy": 3,
+        "market": 4,
+        "castle": 5
+      }
+    },
+    {
+      "file": "castle-3.realm-save",
+      "owner": "civ_japan",
+      "source": "civ_mongolia",
+      "city": "city:000",
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1,
+        "townhall": 2,
+        "academy": 3,
+        "market": 4,
+        "castle": 5
+      }
+    },
+    {
+      "file": "castle-4.realm-save",
+      "owner": "civ_frankia",
+      "source": "civ_japan",
+      "city": "city:000",
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1,
+        "townhall": 2,
+        "academy": 3,
+        "market": 4,
+        "castle": 5
+      }
+    },
+    {
+      "file": "castle-5.realm-save",
+      "owner": "civ_zhongguo",
+      "source": "civ_frankia",
+      "city": "city:000",
+      "slots": {
+        "warehouse.0": 0,
+        "residence": 1,
+        "townhall": 2,
+        "academy": 3,
+        "market": 4,
+        "castle": 5
+      }
+    }
+  ],
+  "raid": {
+    "home": {
+      "id": "city:000",
+      "ownerFactionId": "faction:000",
+      "name": "長寧安平郡",
+      "x": 293,
+      "y": 71,
+      "population": 15000,
+      "housing": 30400,
+      "stock": {
+        "food": 50000,
+        "wood": 50000,
+        "stone": 50000,
+        "gold": 50000
+      },
+      "buildings": {
+        "center": 10,
+        "warehouse.0": 15,
+        "residence": 15,
+        "townhall": 5,
+        "academy": 5,
+        "market": 5
+      },
+      "military": {
+        "units": {
+          "militia": 900
+        },
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 0,
+        "productionRemainder": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "milestones": [],
+        "slots": {
+          "warehouse.0": 0,
+          "residence": 1,
+          "townhall": 2,
+          "academy": 3,
+          "market": 4
+        },
+        "construction": [],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000001"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "target": {
+      "id": "city:001",
+      "ownerFactionId": "faction:001",
+      "name": "柳灣泰晤士堡",
+      "x": 285,
+      "y": 63,
+      "population": 200,
+      "housing": 400,
+      "stock": {
+        "food": 600,
+        "wood": 600,
+        "stone": 600,
+        "gold": 600
+      },
+      "buildings": {
+        "center": 1
+      },
+      "military": {
+        "units": {},
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 0,
+        "productionRemainder": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "milestones": [],
+        "slots": {},
+        "construction": [],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000002"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "army": {
+      "id": "army:0000000000000001",
+      "battleId": "battle:0000000000000001",
+      "commandId": "command:delta-18",
+      "ownerFactionId": "faction:000",
+      "originCityId": "city:000",
+      "units": {
+        "militia": 100
+      },
+      "initialUnits": {
+        "militia": 100
+      },
+      "mission": "raid",
+      "target": {
+        "kind": "city",
+        "cityId": "city:001"
+      },
+      "status": "outbound",
+      "path": [
+        {
+          "x": 293,
+          "y": 71
+        },
+        {
+          "x": 292,
+          "y": 70
+        },
+        {
+          "x": 291,
+          "y": 69
+        },
+        {
+          "x": 290,
+          "y": 68
+        },
+        {
+          "x": 289,
+          "y": 67
+        },
+        {
+          "x": 288,
+          "y": 66
+        },
+        {
+          "x": 287,
+          "y": 65
+        },
+        {
+          "x": 286,
+          "y": 64
+        },
+        {
+          "x": 285,
+          "y": 63
+        }
+      ],
+      "segmentTimes": [
+        0,
+        63640,
+        127280,
+        190919,
+        254559,
+        318199,
+        381838,
+        445478,
+        509117
+      ],
+      "marchSecondsPerTile": 45,
+      "position": {
+        "x": 293,
+        "y": 71
+      },
+      "departedAt": 0,
+      "arrivalAt": 509117,
+      "movementEventId": "event:0000000000000101",
+      "returnCityId": null,
+      "cargo": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      }
+    }
+  }
+}

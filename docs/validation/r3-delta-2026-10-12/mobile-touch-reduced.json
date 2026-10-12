@@ -1,0 +1,86 @@
+{
+  "touch": {
+    "type": "Chrome desktop with mobile viewport and trusted CDP touch emulation; not physical phone",
+    "before": {
+      "x": 4460,
+      "y": 3590,
+      "z": 0.75
+    },
+    "afterDrag": {
+      "x": 4540,
+      "y": 3536.666666666666,
+      "z": 0.75
+    },
+    "afterPinch": {
+      "x": 4539.9999923706055,
+      "y": 3536.666666666666,
+      "z": 1.5000000715255737
+    },
+    "dragChanged": true,
+    "pinchChanged": true,
+    "overflow": {
+      "viewport": 390,
+      "document": 390,
+      "touchPoints": 2
+    }
+  },
+  "trusted": [
+    {
+      "trusted": true,
+      "type": "touch"
+    },
+    {
+      "trusted": true,
+      "type": "touch"
+    },
+    {
+      "trusted": true,
+      "type": "touch"
+    },
+    {
+      "trusted": true,
+      "type": "touch"
+    },
+    {
+      "trusted": true,
+      "type": "touch"
+    },
+    {
+      "trusted": true,
+      "type": "touch"
+    }
+  ],
+  "overlay": {
+    "routes": 26,
+    "markers": 6,
+    "animated": true,
+    "cacheSize": 100,
+    "hits": 1500,
+    "misses": 100,
+    "civilianMarkers": 0,
+    "civilianCacheMisses": 0,
+    "visibleBattles": 1,
+    "visibleImpacts": 0,
+    "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+  },
+  "governor": {
+    "cityId": "city:000",
+    "ownerFactionId": "faction:000",
+    "enabled": true,
+    "policy": "reserve",
+    "budget": 2400,
+    "reserve": 180,
+    "spent": {
+      "food": 0,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    },
+    "period": 0,
+    "eventId": "event:0000000000004233",
+    "nextAt": 3600000,
+    "decisions": 1,
+    "blocked": "資源儲備方針：保留庫存"
+  },
+  "physicalPhone": "MANUAL PENDING"
+}

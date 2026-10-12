@@ -1,0 +1,1740 @@
+{
+  "controlled": {
+    "armies": 100,
+    "aiArmies": 99,
+    "battles": [
+      {
+        "id": "battle:0000000000000001",
+        "cityId": "city:002",
+        "attackerFactionId": "faction:001",
+        "startedAt": 75000,
+        "round": 1,
+        "nextRoundAt": 1575000,
+        "roundEventId": "event:0000000000000102",
+        "attackers": [
+          {
+            "key": "army:0000000000000001/militia",
+            "armyId": "army:0000000000000001",
+            "ownerFactionId": "faction:001",
+            "sourceCityId": "city:001",
+            "unitId": "militia",
+            "count": 30,
+            "initialCount": 30,
+            "hp": 1650,
+            "hpPerUnit": 55,
+            "contacted": false
+          },
+          {
+            "key": "army:0000000000000001/ram",
+            "armyId": "army:0000000000000001",
+            "ownerFactionId": "faction:001",
+            "sourceCityId": "city:001",
+            "unitId": "ram",
+            "count": 1,
+            "initialCount": 1,
+            "hp": 250,
+            "hpPerUnit": 250,
+            "contacted": false
+          }
+        ],
+        "defenders": [],
+        "participants": [
+          {
+            "ownerFactionId": "faction:001",
+            "cityId": "city:001",
+            "armyId": "army:0000000000000001",
+            "before": {
+              "militia": 30,
+              "ram": 1
+            },
+            "after": {
+              "militia": 30,
+              "ram": 1
+            }
+          },
+          {
+            "ownerFactionId": "faction:002",
+            "cityId": "city:002",
+            "armyId": null,
+            "before": {},
+            "after": {}
+          }
+        ],
+        "wallBefore": 15,
+        "populationBefore": 15002.166784032015,
+        "ownerBefore": "faction:002",
+        "developmentBefore": 42,
+        "phase": "siege",
+        "siegeRound": 1,
+        "wallDamage": 66.3,
+        "wallDamageLevel": 15,
+        "catapultBatchDone": true,
+        "developmentLost": 0,
+        "siegeChanges": [],
+        "siegeHistory": [
+          {
+            "round": 1,
+            "at": 75000,
+            "wallBefore": 15,
+            "wallAfter": 15
+          }
+        ],
+        "history": [
+          {
+            "at": 75000,
+            "kind": "siege-start",
+            "combatRound": 1,
+            "siegeRound": 0
+          },
+          {
+            "at": 75000,
+            "kind": "catapult-batch",
+            "combatRound": 1,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 0
+      }
+    ],
+    "home": {
+      "id": "city:000",
+      "ownerFactionId": "faction:000",
+      "name": "長寧安平郡",
+      "x": 293,
+      "y": 71,
+      "population": 15002.166784032015,
+      "housing": 30400,
+      "stock": {
+        "food": 50000,
+        "wood": 50000,
+        "stone": 50000,
+        "gold": 50000
+      },
+      "buildings": {
+        "center": 10,
+        "warehouse.0": 15,
+        "residence": 15,
+        "townhall": 1,
+        "castle": 1
+      },
+      "military": {
+        "units": {
+          "militia": 20
+        },
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 75000,
+        "productionRemainder": {
+          "food": 0.5,
+          "wood": 0.9375,
+          "stone": 0.75,
+          "gold": 0.5625
+        },
+        "milestones": [
+          10000,
+          15000
+        ],
+        "slots": {
+          "warehouse.0": 0,
+          "residence": 1,
+          "townhall": 2,
+          "castle": 3
+        },
+        "construction": [],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000001"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 0,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "target": {
+      "id": "city:002",
+      "ownerFactionId": "faction:002",
+      "name": "拉文納紫冠關",
+      "x": 291,
+      "y": 68,
+      "population": 15002.166784032015,
+      "housing": 30400,
+      "stock": {
+        "food": 50001,
+        "wood": 50000,
+        "stone": 50000,
+        "gold": 50000
+      },
+      "buildings": {
+        "center": 10,
+        "warehouse.0": 15,
+        "residence": 15,
+        "townhall": 1,
+        "castle": 1
+      },
+      "military": {
+        "units": {},
+        "queue": [],
+        "unpaidFood": 0
+      },
+      "autoLogistics": [],
+      "economy": {
+        "lastSettledAt": 75000,
+        "productionRemainder": {
+          "food": 0.125,
+          "wood": 0.9375,
+          "stone": 0.75,
+          "gold": 0.5625
+        },
+        "milestones": [
+          10000,
+          15000
+        ],
+        "slots": {
+          "warehouse.0": 0,
+          "residence": 1,
+          "townhall": 2,
+          "castle": 3
+        },
+        "construction": [],
+        "promotion": null,
+        "reservedIncoming": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "settlementEventId": "event:0000000000000003"
+      },
+      "fields": [
+        {
+          "slot": 0,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 1,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 2,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 3,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 4,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 5,
+          "resource": "food",
+          "level": 0
+        },
+        {
+          "slot": 6,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 7,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 8,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 9,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 10,
+          "resource": "wood",
+          "level": 0
+        },
+        {
+          "slot": 11,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 12,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 13,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 14,
+          "resource": "stone",
+          "level": 0
+        },
+        {
+          "slot": 15,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 16,
+          "resource": "gold",
+          "level": 0
+        },
+        {
+          "slot": 17,
+          "resource": "gold",
+          "level": 0
+        }
+      ],
+      "wallLevel": 15,
+      "cityPromotionCompleted": false,
+      "integrationWorkHours": 0,
+      "integrationTotalWorkHours": 0,
+      "startingCity": true
+    },
+    "nextBattles": [
+      {
+        "id": "battle:0000000000000001",
+        "cityId": "city:002",
+        "attackerFactionId": "faction:001",
+        "startedAt": 75000,
+        "round": 1,
+        "nextRoundAt": 3075000,
+        "roundEventId": "event:0000000000000202",
+        "attackers": [
+          {
+            "key": "army:0000000000000001/militia",
+            "armyId": "army:0000000000000001",
+            "ownerFactionId": "faction:001",
+            "sourceCityId": "city:001",
+            "unitId": "militia",
+            "count": 30,
+            "initialCount": 30,
+            "hp": 1650,
+            "hpPerUnit": 55,
+            "contacted": false
+          },
+          {
+            "key": "army:0000000000000001/ram",
+            "armyId": "army:0000000000000001",
+            "ownerFactionId": "faction:001",
+            "sourceCityId": "city:001",
+            "unitId": "ram",
+            "count": 1,
+            "initialCount": 1,
+            "hp": 250,
+            "hpPerUnit": 250,
+            "contacted": false
+          }
+        ],
+        "defenders": [],
+        "participants": [
+          {
+            "ownerFactionId": "faction:001",
+            "cityId": "city:001",
+            "armyId": "army:0000000000000001",
+            "before": {
+              "militia": 30,
+              "ram": 1
+            },
+            "after": {
+              "militia": 30,
+              "ram": 1
+            }
+          },
+          {
+            "ownerFactionId": "faction:002",
+            "cityId": "city:002",
+            "armyId": null,
+            "before": {},
+            "after": {}
+          }
+        ],
+        "wallBefore": 15,
+        "populationBefore": 15002.166784032015,
+        "ownerBefore": "faction:002",
+        "developmentBefore": 42,
+        "phase": "siege",
+        "siegeRound": 2,
+        "wallDamage": 132.6,
+        "wallDamageLevel": 15,
+        "catapultBatchDone": true,
+        "developmentLost": 0,
+        "siegeChanges": [],
+        "siegeHistory": [
+          {
+            "round": 1,
+            "at": 75000,
+            "wallBefore": 15,
+            "wallAfter": 15
+          },
+          {
+            "round": 2,
+            "at": 1575000,
+            "wallBefore": 15,
+            "wallAfter": 15
+          }
+        ],
+        "history": [
+          {
+            "at": 75000,
+            "kind": "siege-start",
+            "combatRound": 1,
+            "siegeRound": 0
+          },
+          {
+            "at": 75000,
+            "kind": "catapult-batch",
+            "combatRound": 1,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 0
+      }
+    ],
+    "endedBattles": [
+      {
+        "id": "battle:0000000000000001",
+        "cityId": "city:002",
+        "attackerFactionId": "faction:001",
+        "startedAt": 75000,
+        "round": 1,
+        "nextRoundAt": 4575000,
+        "roundEventId": "event:0000000000000203",
+        "attackers": [
+          {
+            "key": "army:0000000000000001/militia",
+            "armyId": "army:0000000000000001",
+            "ownerFactionId": "faction:001",
+            "sourceCityId": "city:001",
+            "unitId": "militia",
+            "count": 30,
+            "initialCount": 30,
+            "hp": 1650,
+            "hpPerUnit": 55,
+            "contacted": false
+          },
+          {
+            "key": "army:0000000000000001/ram",
+            "armyId": "army:0000000000000001",
+            "ownerFactionId": "faction:001",
+            "sourceCityId": "city:001",
+            "unitId": "ram",
+            "count": 1,
+            "initialCount": 1,
+            "hp": 250,
+            "hpPerUnit": 250,
+            "contacted": false
+          }
+        ],
+        "defenders": [],
+        "participants": [
+          {
+            "ownerFactionId": "faction:001",
+            "cityId": "city:001",
+            "armyId": "army:0000000000000001",
+            "before": {
+              "militia": 30,
+              "ram": 1
+            },
+            "after": {
+              "militia": 30,
+              "ram": 1
+            }
+          },
+          {
+            "ownerFactionId": "faction:002",
+            "cityId": "city:002",
+            "armyId": null,
+            "before": {},
+            "after": {}
+          }
+        ],
+        "wallBefore": 15,
+        "populationBefore": 15002.166784032015,
+        "ownerBefore": "faction:002",
+        "developmentBefore": 42,
+        "phase": "siege",
+        "siegeRound": 3,
+        "wallDamage": 198.89999999999998,
+        "wallDamageLevel": 15,
+        "catapultBatchDone": true,
+        "developmentLost": 0,
+        "siegeChanges": [],
+        "siegeHistory": [
+          {
+            "round": 1,
+            "at": 75000,
+            "wallBefore": 15,
+            "wallAfter": 15
+          },
+          {
+            "round": 2,
+            "at": 1575000,
+            "wallBefore": 15,
+            "wallAfter": 15
+          },
+          {
+            "round": 3,
+            "at": 3075000,
+            "wallBefore": 15,
+            "wallAfter": 15
+          }
+        ],
+        "history": [
+          {
+            "at": 75000,
+            "kind": "siege-start",
+            "combatRound": 1,
+            "siegeRound": 0
+          },
+          {
+            "at": 75000,
+            "kind": "catapult-batch",
+            "combatRound": 1,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 0
+      }
+    ],
+    "finalReceipts": []
+  },
+  "autonomous": {
+    "steps": 15,
+    "time": 4500000,
+    "armies": [
+      {
+        "id": "army:0000000000000002",
+        "owner": "faction:084",
+        "status": "outbound",
+        "mission": "scout",
+        "path": [
+          {
+            "x": 311,
+            "y": 313
+          },
+          {
+            "x": 312,
+            "y": 314
+          },
+          {
+            "x": 313,
+            "y": 315
+          },
+          {
+            "x": 314,
+            "y": 316
+          },
+          {
+            "x": 315,
+            "y": 317
+          },
+          {
+            "x": 316,
+            "y": 318
+          },
+          {
+            "x": 317,
+            "y": 319
+          },
+          {
+            "x": 318,
+            "y": 320
+          },
+          {
+            "x": 319,
+            "y": 321
+          },
+          {
+            "x": 320,
+            "y": 322
+          },
+          {
+            "x": 321,
+            "y": 323
+          },
+          {
+            "x": 322,
+            "y": 324
+          },
+          {
+            "x": 323,
+            "y": 325
+          },
+          {
+            "x": 324,
+            "y": 326
+          },
+          {
+            "x": 325,
+            "y": 327
+          },
+          {
+            "x": 326,
+            "y": 328
+          },
+          {
+            "x": 326,
+            "y": 329
+          },
+          {
+            "x": 327,
+            "y": 330
+          },
+          {
+            "x": 327,
+            "y": 331
+          },
+          {
+            "x": 327,
+            "y": 332
+          },
+          {
+            "x": 328,
+            "y": 333
+          }
+        ],
+        "arrivalAt": 4547544,
+        "departedAt": 4006711,
+        "target": {
+          "kind": "city",
+          "cityId": "city:061"
+        }
+      },
+      {
+        "id": "army:0000000000000003",
+        "owner": "faction:062",
+        "status": "outbound",
+        "mission": "scout",
+        "path": [
+          {
+            "x": 354,
+            "y": 53
+          },
+          {
+            "x": 354,
+            "y": 54
+          },
+          {
+            "x": 354,
+            "y": 55
+          },
+          {
+            "x": 354,
+            "y": 56
+          },
+          {
+            "x": 354,
+            "y": 57
+          },
+          {
+            "x": 354,
+            "y": 58
+          },
+          {
+            "x": 354,
+            "y": 59
+          },
+          {
+            "x": 354,
+            "y": 60
+          },
+          {
+            "x": 354,
+            "y": 61
+          },
+          {
+            "x": 354,
+            "y": 62
+          },
+          {
+            "x": 354,
+            "y": 63
+          },
+          {
+            "x": 354,
+            "y": 64
+          },
+          {
+            "x": 354,
+            "y": 65
+          },
+          {
+            "x": 354,
+            "y": 66
+          },
+          {
+            "x": 354,
+            "y": 67
+          },
+          {
+            "x": 354,
+            "y": 68
+          },
+          {
+            "x": 354,
+            "y": 69
+          },
+          {
+            "x": 354,
+            "y": 70
+          },
+          {
+            "x": 354,
+            "y": 71
+          },
+          {
+            "x": 354,
+            "y": 72
+          },
+          {
+            "x": 354,
+            "y": 73
+          },
+          {
+            "x": 354,
+            "y": 74
+          },
+          {
+            "x": 354,
+            "y": 75
+          },
+          {
+            "x": 354,
+            "y": 76
+          },
+          {
+            "x": 354,
+            "y": 77
+          },
+          {
+            "x": 354,
+            "y": 78
+          },
+          {
+            "x": 354,
+            "y": 79
+          },
+          {
+            "x": 354,
+            "y": 80
+          },
+          {
+            "x": 354,
+            "y": 81
+          },
+          {
+            "x": 354,
+            "y": 82
+          },
+          {
+            "x": 355,
+            "y": 83
+          },
+          {
+            "x": 355,
+            "y": 84
+          },
+          {
+            "x": 355,
+            "y": 85
+          },
+          {
+            "x": 356,
+            "y": 86
+          },
+          {
+            "x": 357,
+            "y": 87
+          },
+          {
+            "x": 357,
+            "y": 88
+          },
+          {
+            "x": 357,
+            "y": 89
+          },
+          {
+            "x": 358,
+            "y": 90
+          }
+        ],
+        "arrivalAt": 4946659,
+        "departedAt": 4173521,
+        "target": {
+          "kind": "city",
+          "cityId": "city:074"
+        }
+      },
+      {
+        "id": "army:0000000000000004",
+        "owner": "faction:019",
+        "status": "outbound",
+        "mission": "scout",
+        "path": [
+          {
+            "x": 133,
+            "y": 55
+          },
+          {
+            "x": 132,
+            "y": 54
+          },
+          {
+            "x": 131,
+            "y": 54
+          },
+          {
+            "x": 130,
+            "y": 53
+          },
+          {
+            "x": 129,
+            "y": 52
+          },
+          {
+            "x": 128,
+            "y": 52
+          },
+          {
+            "x": 127,
+            "y": 51
+          },
+          {
+            "x": 126,
+            "y": 51
+          },
+          {
+            "x": 125,
+            "y": 50
+          },
+          {
+            "x": 124,
+            "y": 50
+          },
+          {
+            "x": 123,
+            "y": 49
+          },
+          {
+            "x": 122,
+            "y": 49
+          },
+          {
+            "x": 121,
+            "y": 48
+          },
+          {
+            "x": 120,
+            "y": 48
+          },
+          {
+            "x": 119,
+            "y": 48
+          },
+          {
+            "x": 118,
+            "y": 47
+          },
+          {
+            "x": 117,
+            "y": 47
+          },
+          {
+            "x": 116,
+            "y": 46
+          },
+          {
+            "x": 115,
+            "y": 46
+          },
+          {
+            "x": 114,
+            "y": 45
+          },
+          {
+            "x": 113,
+            "y": 45
+          },
+          {
+            "x": 112,
+            "y": 44
+          },
+          {
+            "x": 111,
+            "y": 44
+          },
+          {
+            "x": 110,
+            "y": 43
+          },
+          {
+            "x": 109,
+            "y": 43
+          }
+        ],
+        "arrivalAt": 4847372,
+        "departedAt": 4267960,
+        "target": {
+          "kind": "city",
+          "cityId": "city:054"
+        }
+      },
+      {
+        "id": "army:0000000000000005",
+        "owner": "faction:089",
+        "status": "outbound",
+        "mission": "scout",
+        "path": [
+          {
+            "x": 70,
+            "y": 33
+          },
+          {
+            "x": 71,
+            "y": 32
+          },
+          {
+            "x": 72,
+            "y": 32
+          },
+          {
+            "x": 73,
+            "y": 31
+          },
+          {
+            "x": 74,
+            "y": 31
+          },
+          {
+            "x": 75,
+            "y": 30
+          },
+          {
+            "x": 76,
+            "y": 30
+          },
+          {
+            "x": 77,
+            "y": 29
+          },
+          {
+            "x": 78,
+            "y": 29
+          },
+          {
+            "x": 79,
+            "y": 28
+          },
+          {
+            "x": 80,
+            "y": 28
+          },
+          {
+            "x": 81,
+            "y": 27
+          },
+          {
+            "x": 82,
+            "y": 27
+          }
+        ],
+        "arrivalAt": 4586089,
+        "departedAt": 4296383,
+        "target": {
+          "kind": "city",
+          "cityId": "city:077"
+        }
+      },
+      {
+        "id": "army:0000000000000006",
+        "owner": "faction:095",
+        "status": "outbound",
+        "mission": "scout",
+        "path": [
+          {
+            "x": 261,
+            "y": 237
+          },
+          {
+            "x": 261,
+            "y": 236
+          },
+          {
+            "x": 261,
+            "y": 235
+          },
+          {
+            "x": 261,
+            "y": 234
+          },
+          {
+            "x": 261,
+            "y": 233
+          },
+          {
+            "x": 261,
+            "y": 232
+          },
+          {
+            "x": 261,
+            "y": 231
+          },
+          {
+            "x": 261,
+            "y": 230
+          },
+          {
+            "x": 261,
+            "y": 229
+          },
+          {
+            "x": 261,
+            "y": 228
+          },
+          {
+            "x": 261,
+            "y": 227
+          },
+          {
+            "x": 261,
+            "y": 226
+          },
+          {
+            "x": 261,
+            "y": 225
+          },
+          {
+            "x": 261,
+            "y": 224
+          },
+          {
+            "x": 261,
+            "y": 223
+          },
+          {
+            "x": 261,
+            "y": 222
+          },
+          {
+            "x": 261,
+            "y": 221
+          },
+          {
+            "x": 261,
+            "y": 220
+          },
+          {
+            "x": 261,
+            "y": 219
+          },
+          {
+            "x": 261,
+            "y": 218
+          },
+          {
+            "x": 261,
+            "y": 217
+          },
+          {
+            "x": 261,
+            "y": 216
+          },
+          {
+            "x": 261,
+            "y": 215
+          },
+          {
+            "x": 261,
+            "y": 214
+          },
+          {
+            "x": 261,
+            "y": 213
+          },
+          {
+            "x": 261,
+            "y": 212
+          },
+          {
+            "x": 261,
+            "y": 211
+          },
+          {
+            "x": 261,
+            "y": 210
+          },
+          {
+            "x": 261,
+            "y": 209
+          },
+          {
+            "x": 261,
+            "y": 208
+          },
+          {
+            "x": 261,
+            "y": 207
+          },
+          {
+            "x": 261,
+            "y": 206
+          },
+          {
+            "x": 261,
+            "y": 205
+          },
+          {
+            "x": 261,
+            "y": 204
+          },
+          {
+            "x": 261,
+            "y": 203
+          },
+          {
+            "x": 261,
+            "y": 202
+          },
+          {
+            "x": 261,
+            "y": 201
+          },
+          {
+            "x": 261,
+            "y": 200
+          },
+          {
+            "x": 261,
+            "y": 199
+          },
+          {
+            "x": 261,
+            "y": 198
+          },
+          {
+            "x": 261,
+            "y": 197
+          },
+          {
+            "x": 261,
+            "y": 196
+          },
+          {
+            "x": 261,
+            "y": 195
+          },
+          {
+            "x": 261,
+            "y": 194
+          },
+          {
+            "x": 261,
+            "y": 193
+          },
+          {
+            "x": 261,
+            "y": 192
+          },
+          {
+            "x": 261,
+            "y": 191
+          }
+        ],
+        "arrivalAt": 5262468,
+        "departedAt": 4342468,
+        "target": {
+          "kind": "city",
+          "cityId": "city:071"
+        }
+      }
+    ],
+    "accepted": 117,
+    "rejected": 0,
+    "decisionCount": 169,
+    "receipts": [
+      {
+        "commandId": "command:ai-0000000000000196-0",
+        "issuer": "faction:096"
+      },
+      {
+        "commandId": "command:ai-0000000000000194-0",
+        "issuer": "faction:094"
+      },
+      {
+        "commandId": "command:ai-0000000000000104-0",
+        "issuer": "faction:004"
+      },
+      {
+        "commandId": "command:ai-0000000000000175-0",
+        "issuer": "faction:075"
+      },
+      {
+        "commandId": "command:ai-0000000000000195-0",
+        "issuer": "faction:095"
+      },
+      {
+        "commandId": "command:ai-0000000000000186-0",
+        "issuer": "faction:086"
+      },
+      {
+        "commandId": "command:ai-0000000000000116-0",
+        "issuer": "faction:016"
+      },
+      {
+        "commandId": "command:ai-0000000000000118-0",
+        "issuer": "faction:018"
+      },
+      {
+        "commandId": "command:ai-0000000000000129-0",
+        "issuer": "faction:029"
+      },
+      {
+        "commandId": "command:ai-0000000000000188-0",
+        "issuer": "faction:088"
+      },
+      {
+        "commandId": "command:ai-0000000000000107-0",
+        "issuer": "faction:007"
+      },
+      {
+        "commandId": "command:ai-0000000000000147-0",
+        "issuer": "faction:047"
+      },
+      {
+        "commandId": "command:ai-0000000000000125-0",
+        "issuer": "faction:025"
+      },
+      {
+        "commandId": "command:ai-0000000000000153-0",
+        "issuer": "faction:053"
+      },
+      {
+        "commandId": "command:ai-0000000000000192-0",
+        "issuer": "faction:092"
+      },
+      {
+        "commandId": "command:ai-0000000000000119-0",
+        "issuer": "faction:019"
+      },
+      {
+        "commandId": "command:ai-0000000000000198-0",
+        "issuer": "faction:098"
+      },
+      {
+        "commandId": "command:ai-0000000000000159-0",
+        "issuer": "faction:059"
+      },
+      {
+        "commandId": "command:ai-0000000000000187-0",
+        "issuer": "faction:087"
+      },
+      {
+        "commandId": "command:ai-0000000000000117-0",
+        "issuer": "faction:017"
+      },
+      {
+        "commandId": "command:ai-0000000000000145-0",
+        "issuer": "faction:045"
+      },
+      {
+        "commandId": "command:ai-0000000000000180-0",
+        "issuer": "faction:080"
+      },
+      {
+        "commandId": "command:ai-0000000000000163-0",
+        "issuer": "faction:063"
+      },
+      {
+        "commandId": "command:ai-0000000000000134-0",
+        "issuer": "faction:034"
+      },
+      {
+        "commandId": "command:ai-0000000000000136-0",
+        "issuer": "faction:036"
+      },
+      {
+        "commandId": "command:ai-0000000000000183-0",
+        "issuer": "faction:083"
+      },
+      {
+        "commandId": "command:ai-0000000000000164-0",
+        "issuer": "faction:064"
+      },
+      {
+        "commandId": "command:ai-0000000000000169-0",
+        "issuer": "faction:069"
+      },
+      {
+        "commandId": "command:ai-0000000000000178-0",
+        "issuer": "faction:078"
+      },
+      {
+        "commandId": "command:ai-0000000000000133-0",
+        "issuer": "faction:033"
+      },
+      {
+        "commandId": "command:ai-0000000000000162-0",
+        "issuer": "faction:062"
+      },
+      {
+        "commandId": "command:ai-0000000000000166-0",
+        "issuer": "faction:066"
+      },
+      {
+        "commandId": "command:ai-0000000000000190-0",
+        "issuer": "faction:090"
+      },
+      {
+        "commandId": "command:ai-0000000000000102-0",
+        "issuer": "faction:002"
+      },
+      {
+        "commandId": "command:ai-0000000000000110-0",
+        "issuer": "faction:010"
+      },
+      {
+        "commandId": "command:ai-0000000000000185-0",
+        "issuer": "faction:085"
+      },
+      {
+        "commandId": "command:ai-0000000000000189-0",
+        "issuer": "faction:089"
+      },
+      {
+        "commandId": "command:ai-0000000000000170-0",
+        "issuer": "faction:070"
+      },
+      {
+        "commandId": "command:ai-0000000000000131-0",
+        "issuer": "faction:031"
+      },
+      {
+        "commandId": "command:ai-0000000000000157-0",
+        "issuer": "faction:057"
+      },
+      {
+        "commandId": "command:ai-0000000000000149-0",
+        "issuer": "faction:049"
+      },
+      {
+        "commandId": "command:ai-0000000000000150-0",
+        "issuer": "faction:050"
+      },
+      {
+        "commandId": "command:ai-0000000000000156-0",
+        "issuer": "faction:056"
+      },
+      {
+        "commandId": "command:ai-0000000000000146-0",
+        "issuer": "faction:046"
+      },
+      {
+        "commandId": "command:ai-0000000000000172-0",
+        "issuer": "faction:072"
+      },
+      {
+        "commandId": "command:ai-0000000000000193-0",
+        "issuer": "faction:093"
+      },
+      {
+        "commandId": "command:ai-0000000000000151-0",
+        "issuer": "faction:051"
+      },
+      {
+        "commandId": "command:ai-0000000000000130-0",
+        "issuer": "faction:030"
+      },
+      {
+        "commandId": "command:ai-0000000000000142-0",
+        "issuer": "faction:042"
+      },
+      {
+        "commandId": "command:ai-0000000000000128-0",
+        "issuer": "faction:028"
+      },
+      {
+        "commandId": "command:ai-0000000000000135-0",
+        "issuer": "faction:035"
+      },
+      {
+        "commandId": "command:ai-0000000000000132-0",
+        "issuer": "faction:032"
+      },
+      {
+        "commandId": "command:ai-0000000000000197-0",
+        "issuer": "faction:097"
+      },
+      {
+        "commandId": "command:ai-0000000000000148-0",
+        "issuer": "faction:048"
+      },
+      {
+        "commandId": "command:ai-0000000000000184-0",
+        "issuer": "faction:084"
+      },
+      {
+        "commandId": "command:ai-0000000000000144-0",
+        "issuer": "faction:044"
+      },
+      {
+        "commandId": "command:ai-0000000000000106-0",
+        "issuer": "faction:006"
+      },
+      {
+        "commandId": "command:ai-0000000000000115-0",
+        "issuer": "faction:015"
+      },
+      {
+        "commandId": "command:ai-0000000000000109-0",
+        "issuer": "faction:009"
+      },
+      {
+        "commandId": "command:ai-0000000000000173-0",
+        "issuer": "faction:073"
+      },
+      {
+        "commandId": "command:ai-0000000000000168-0",
+        "issuer": "faction:068"
+      },
+      {
+        "commandId": "command:ai-0000000000000105-0",
+        "issuer": "faction:005"
+      },
+      {
+        "commandId": "command:ai-0000000000000160-0",
+        "issuer": "faction:060"
+      },
+      {
+        "commandId": "command:ai-0000000000000220-0",
+        "issuer": "faction:016"
+      },
+      {
+        "commandId": "command:ai-0000000000000232-0",
+        "issuer": "faction:025"
+      },
+      {
+        "commandId": "command:ai-0000000000000213-0",
+        "issuer": "faction:095"
+      },
+      {
+        "commandId": "command:ai-0000000000000240-0",
+        "issuer": "faction:019"
+      },
+      {
+        "commandId": "command:ai-0000000000000209-0",
+        "issuer": "faction:004"
+      },
+      {
+        "commandId": "command:ai-0000000000000256-0",
+        "issuer": "faction:041"
+      },
+      {
+        "commandId": "command:ai-0000000000000230-0",
+        "issuer": "faction:047"
+      },
+      {
+        "commandId": "command:ai-0000000000000254-0",
+        "issuer": "faction:080"
+      },
+      {
+        "commandId": "command:ai-0000000000000207-0",
+        "issuer": "faction:094"
+      },
+      {
+        "commandId": "command:ai-0000000000000261-0",
+        "issuer": "faction:055"
+      },
+      {
+        "commandId": "command:ai-0000000000000269-0",
+        "issuer": "faction:069"
+      },
+      {
+        "commandId": "command:ai-0000000000000245-0",
+        "issuer": "faction:059"
+      },
+      {
+        "commandId": "command:ai-0000000000000251-0",
+        "issuer": "faction:001"
+      },
+      {
+        "commandId": "command:ai-0000000000000247-0",
+        "issuer": "faction:087"
+      },
+      {
+        "commandId": "command:ai-0000000000000316-0",
+        "issuer": "faction:093"
+      },
+      {
+        "commandId": "command:ai-0000000000000325-0",
+        "issuer": "faction:028"
+      },
+      {
+        "commandId": "command:ai-0000000000000224-0",
+        "issuer": "faction:029"
+      },
+      {
+        "commandId": "command:ai-0000000000000307-0",
+        "issuer": "faction:050"
+      },
+      {
+        "commandId": "command:ai-0000000000000228-0",
+        "issuer": "faction:007"
+      },
+      {
+        "commandId": "command:ai-0000000000000234-0",
+        "issuer": "faction:053"
+      },
+      {
+        "commandId": "command:ai-0000000000000219-0",
+        "issuer": "faction:067"
+      },
+      {
+        "commandId": "command:ai-0000000000000257-0",
+        "issuer": "faction:063"
+      },
+      {
+        "commandId": "command:ai-0000000000000289-0",
+        "issuer": "faction:002"
+      },
+      {
+        "commandId": "command:ai-0000000000000305-0",
+        "issuer": "faction:049"
+      },
+      {
+        "commandId": "command:ai-0000000000000276-0",
+        "issuer": "faction:033"
+      },
+      {
+        "commandId": "command:ai-0000000000000263-0",
+        "issuer": "faction:036"
+      },
+      {
+        "commandId": "command:ai-0000000000000280-0",
+        "issuer": "faction:012"
+      },
+      {
+        "commandId": "command:ai-0000000000000301-0",
+        "issuer": "faction:031"
+      },
+      {
+        "commandId": "command:ai-0000000000000294-0",
+        "issuer": "faction:085"
+      },
+      {
+        "commandId": "command:ai-0000000000000271-0",
+        "issuer": "faction:074"
+      },
+      {
+        "commandId": "command:ai-0000000000000362-0",
+        "issuer": "faction:016"
+      },
+      {
+        "commandId": "command:ai-0000000000000215-0",
+        "issuer": "faction:086"
+      },
+      {
+        "commandId": "command:ai-0000000000000343-0",
+        "issuer": "faction:006"
+      },
+      {
+        "commandId": "command:ai-0000000000000267-0",
+        "issuer": "faction:064"
+      },
+      {
+        "commandId": "command:ai-0000000000000201-0",
+        "issuer": "faction:096"
+      },
+      {
+        "commandId": "command:ai-0000000000000298-0",
+        "issuer": "faction:070"
+      },
+      {
+        "commandId": "command:ai-0000000000000298-1",
+        "issuer": "faction:070"
+      },
+      {
+        "commandId": "command:ai-0000000000000360-0",
+        "issuer": "faction:060"
+      },
+      {
+        "commandId": "command:ai-0000000000000314-0",
+        "issuer": "faction:072"
+      },
+      {
+        "commandId": "command:ai-0000000000000336-0",
+        "issuer": "faction:084"
+      },
+      {
+        "commandId": "command:ai-0000000000000336-1",
+        "issuer": "faction:084"
+      },
+      {
+        "commandId": "command:ai-0000000000000242-0",
+        "issuer": "faction:098"
+      },
+      {
+        "commandId": "command:ai-0000000000000364-0",
+        "issuer": "faction:025"
+      },
+      {
+        "commandId": "command:ai-0000000000000281-0",
+        "issuer": "faction:062"
+      },
+      {
+        "commandId": "command:ai-0000000000000281-1",
+        "issuer": "faction:062"
+      },
+      {
+        "commandId": "command:ai-0000000000000348-0",
+        "issuer": "faction:015"
+      },
+      {
+        "commandId": "command:ai-0000000000000368-0",
+        "issuer": "faction:019"
+      },
+      {
+        "commandId": "command:ai-0000000000000368-1",
+        "issuer": "faction:019"
+      },
+      {
+        "commandId": "command:ai-0000000000000296-0",
+        "issuer": "faction:089"
+      },
+      {
+        "commandId": "command:ai-0000000000000296-1",
+        "issuer": "faction:089"
+      },
+      {
+        "commandId": "command:ai-0000000000000239-0",
+        "issuer": "faction:065"
+      },
+      {
+        "commandId": "command:ai-0000000000000366-0",
+        "issuer": "faction:095"
+      },
+      {
+        "commandId": "command:ai-0000000000000366-1",
+        "issuer": "faction:095"
+      },
+      {
+        "commandId": "command:ai-0000000000000312-0",
+        "issuer": "faction:046"
+      }
+    ]
+  }
+}

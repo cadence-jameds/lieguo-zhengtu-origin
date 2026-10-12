@@ -1,0 +1,86 @@
+{
+  "before": {
+    "routes": 1,
+    "markers": 1,
+    "animated": true,
+    "cacheSize": 1,
+    "hits": 1437,
+    "misses": 2,
+    "civilianMarkers": 0,
+    "civilianCacheMisses": 0,
+    "visibleBattles": 0,
+    "visibleImpacts": 1,
+    "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+  },
+  "after": {
+    "routes": 1,
+    "markers": 1,
+    "animated": true,
+    "cacheSize": 1,
+    "hits": 1502,
+    "misses": 2,
+    "civilianMarkers": 0,
+    "civilianCacheMisses": 0,
+    "visibleBattles": 0,
+    "visibleImpacts": 1,
+    "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+  },
+  "elapsed": 442,
+  "samples": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "restoredMotion": {
+    "routes": 1,
+    "markers": 1,
+    "animated": true,
+    "cacheSize": 1,
+    "hits": 1293,
+    "misses": 2,
+    "civilianMarkers": 0,
+    "civilianCacheMisses": 0,
+    "visibleBattles": 0,
+    "visibleImpacts": 0,
+    "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+  },
+  "finals": [
+    {
+      "targetPoint": {
+        "x": 285,
+        "y": 63
+      },
+      "mission": "raid",
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "eventId": "event:0000000000000101",
+      "at": 509117,
+      "round": 1,
+      "kind": "final",
+      "outcome": "raid-return",
+      "ownerBefore": "faction:001",
+      "ownerAfter": "faction:001",
+      "qualificationBefore": "none",
+      "qualificationAfter": "none"
+    }
+  ]
+}

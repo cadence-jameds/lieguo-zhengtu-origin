@@ -1,0 +1,616 @@
+[
+  {
+    "direction": "response",
+    "at": 1597.9000000357628,
+    "type": "state",
+    "passiveRevisionBase": 0
+  },
+  {
+    "direction": "response",
+    "at": 24525.100000023842,
+    "type": "switched",
+    "revision": 0
+  },
+  {
+    "direction": "response",
+    "at": 25128,
+    "type": "switched",
+    "revision": 101
+  },
+  {
+    "direction": "request",
+    "at": 26178.5,
+    "type": "command",
+    "order": {
+      "commandId": "command:25ec6425-c8e5-456b-976d-24ad5ac43bc8",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 75000,
+      "expectedRevision": 101,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "e3a2a0e7-15e5-46b5-8b9c-1be878fb7b8b"
+  },
+  {
+    "direction": "response",
+    "at": 26467.80000001192,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:25ec6425-c8e5-456b-976d-24ad5ac43bc8",
+      "status": "committed",
+      "revision": 102
+    }
+  },
+  {
+    "direction": "response",
+    "at": 26482.30000001192,
+    "type": "state",
+    "revision": 102,
+    "passiveRevisionBase": 102
+  },
+  {
+    "direction": "request",
+    "at": 26575,
+    "type": "command",
+    "order": {
+      "commandId": "command:dc71427f-00f5-49cf-9116-c9169e22d06b",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 128080,
+      "expectedRevision": 102,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "63e205ac-8efe-4959-b420-b9fd2cba2050"
+  },
+  {
+    "direction": "response",
+    "at": 26779.900000035763,
+    "type": "state",
+    "patch": {
+      "base": 102
+    },
+    "passiveRevisionBase": 103
+  },
+  {
+    "direction": "response",
+    "at": 26795.30000001192,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:dc71427f-00f5-49cf-9116-c9169e22d06b",
+      "status": "rejected",
+      "revision": 103,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 26795.400000035763,
+    "type": "state",
+    "patch": {
+      "base": 103
+    },
+    "passiveRevisionBase": 103
+  },
+  {
+    "direction": "request",
+    "at": 26864.900000035763,
+    "type": "command",
+    "order": {
+      "commandId": "command:45e03051-619c-442e-807b-1b32b7e83283",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 142780,
+      "expectedRevision": 103,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "e474db15-4127-4490-a96e-cc65049237b2"
+  },
+  {
+    "direction": "response",
+    "at": 27136.700000047684,
+    "type": "state",
+    "patch": {
+      "base": 103
+    },
+    "passiveRevisionBase": 104
+  },
+  {
+    "direction": "response",
+    "at": 27152.5,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:45e03051-619c-442e-807b-1b32b7e83283",
+      "status": "rejected",
+      "revision": 104,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 27152.600000023842,
+    "type": "state",
+    "patch": {
+      "base": 104
+    },
+    "passiveRevisionBase": 104
+  },
+  {
+    "direction": "request",
+    "at": 27221,
+    "type": "command",
+    "order": {
+      "commandId": "command:d7ca1d46-3ba4-4c99-8fd4-50b491cf2286",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 162390,
+      "expectedRevision": 104,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "b0efc86d-8253-4e36-ada6-6b07ef9f2821"
+  },
+  {
+    "direction": "response",
+    "at": 27392.600000023842,
+    "type": "state",
+    "patch": {
+      "base": 104
+    },
+    "passiveRevisionBase": 105
+  },
+  {
+    "direction": "response",
+    "at": 27411.700000047684,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:d7ca1d46-3ba4-4c99-8fd4-50b491cf2286",
+      "status": "rejected",
+      "revision": 105,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 27411.700000047684,
+    "type": "state",
+    "patch": {
+      "base": 105
+    },
+    "passiveRevisionBase": 105
+  },
+  {
+    "direction": "request",
+    "at": 27483.600000023842,
+    "type": "command",
+    "order": {
+      "commandId": "command:278bdd43-7cd6-41ed-895c-4622b5f6606e",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 175909,
+      "expectedRevision": 105,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "450d0b0f-c4b6-4450-a249-e2cfd7a819ac"
+  },
+  {
+    "direction": "response",
+    "at": 27662.700000047684,
+    "type": "state",
+    "patch": {
+      "base": 105
+    },
+    "passiveRevisionBase": 106
+  },
+  {
+    "direction": "response",
+    "at": 27676,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:278bdd43-7cd6-41ed-895c-4622b5f6606e",
+      "status": "rejected",
+      "revision": 106,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 27676,
+    "type": "state",
+    "patch": {
+      "base": 106
+    },
+    "passiveRevisionBase": 106
+  },
+  {
+    "direction": "request",
+    "at": 27734.400000035763,
+    "type": "command",
+    "order": {
+      "commandId": "command:b6de9c35-d7b9-4e1f-afa1-27ce4fd84532",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 188684,
+      "expectedRevision": 106,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "4f61fbe4-d936-4a2d-83d7-88a5b38dab6a"
+  },
+  {
+    "direction": "response",
+    "at": 27995.80000001192,
+    "type": "state",
+    "patch": {
+      "base": 106
+    },
+    "passiveRevisionBase": 107
+  },
+  {
+    "direction": "response",
+    "at": 28009.600000023842,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:b6de9c35-d7b9-4e1f-afa1-27ce4fd84532",
+      "status": "rejected",
+      "revision": 107,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 28009.600000023842,
+    "type": "state",
+    "patch": {
+      "base": 107
+    },
+    "passiveRevisionBase": 107
+  },
+  {
+    "direction": "request",
+    "at": 28075.100000023842,
+    "type": "command",
+    "order": {
+      "commandId": "command:565d786e-bf41-4a3f-a32c-8bf5934fe21c",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 203769,
+      "expectedRevision": 107,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "58755a90-226c-4d6e-9d37-d4ff9fcca997"
+  },
+  {
+    "direction": "response",
+    "at": 28321.80000001192,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:565d786e-bf41-4a3f-a32c-8bf5934fe21c",
+      "status": "committed",
+      "revision": 108
+    }
+  },
+  {
+    "direction": "response",
+    "at": 28331.600000023842,
+    "type": "state",
+    "patch": {
+      "base": 107
+    },
+    "passiveRevisionBase": 108
+  },
+  {
+    "direction": "request",
+    "at": 28421.700000047684,
+    "type": "command",
+    "order": {
+      "commandId": "command:647e5a81-7b57-43c4-aa25-03c78ccae918",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 222905,
+      "expectedRevision": 108,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "7af3848c-4f27-420d-9fc0-40567f07ec2d"
+  },
+  {
+    "direction": "response",
+    "at": 28649.200000047684,
+    "type": "state",
+    "patch": {
+      "base": 108
+    },
+    "passiveRevisionBase": 109
+  },
+  {
+    "direction": "response",
+    "at": 28663.30000001192,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:647e5a81-7b57-43c4-aa25-03c78ccae918",
+      "status": "rejected",
+      "revision": 109,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 28663.400000035763,
+    "type": "state",
+    "patch": {
+      "base": 109
+    },
+    "passiveRevisionBase": 109
+  },
+  {
+    "direction": "request",
+    "at": 28733.100000023842,
+    "type": "command",
+    "order": {
+      "commandId": "command:d0a94d19-9023-4697-80c4-9f21e250fa53",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 235534,
+      "expectedRevision": 109,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "66b9fe8a-da53-435b-9e49-3d45bed336d9"
+  },
+  {
+    "direction": "response",
+    "at": 28962.80000001192,
+    "type": "state",
+    "patch": {
+      "base": 109
+    },
+    "passiveRevisionBase": 110
+  },
+  {
+    "direction": "response",
+    "at": 28976.700000047684,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:d0a94d19-9023-4697-80c4-9f21e250fa53",
+      "status": "rejected",
+      "revision": 110,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 28976.80000001192,
+    "type": "state",
+    "patch": {
+      "base": 110
+    },
+    "passiveRevisionBase": 110
+  },
+  {
+    "direction": "request",
+    "at": 29040,
+    "type": "command",
+    "order": {
+      "commandId": "command:3c178ad6-c0e7-4096-8486-78b35fcf5012",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 253740,
+      "expectedRevision": 110,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "018813d3-88c4-4883-8a86-76660af72637"
+  },
+  {
+    "direction": "response",
+    "at": 29261.700000047684,
+    "type": "state",
+    "patch": {
+      "base": 110
+    },
+    "passiveRevisionBase": 111
+  },
+  {
+    "direction": "response",
+    "at": 29275.5,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:3c178ad6-c0e7-4096-8486-78b35fcf5012",
+      "status": "rejected",
+      "revision": 111,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 29275.5,
+    "type": "state",
+    "patch": {
+      "base": 111
+    },
+    "passiveRevisionBase": 111
+  },
+  {
+    "direction": "request",
+    "at": 29343.80000001192,
+    "type": "command",
+    "order": {
+      "commandId": "command:3d7ec767-aad6-4e27-bf09-d65103ea0add",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 269205,
+      "expectedRevision": 111,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "9a37b09a-4efd-417d-9ac7-091b5d86e7ce"
+  },
+  {
+    "direction": "response",
+    "at": 29522.5,
+    "type": "state",
+    "patch": {
+      "base": 111
+    },
+    "passiveRevisionBase": 112
+  },
+  {
+    "direction": "response",
+    "at": 29537.80000001192,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:3d7ec767-aad6-4e27-bf09-d65103ea0add",
+      "status": "rejected",
+      "revision": 112,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 29537.900000035763,
+    "type": "state",
+    "patch": {
+      "base": 112
+    },
+    "passiveRevisionBase": 112
+  },
+  {
+    "direction": "request",
+    "at": 29602.100000023842,
+    "type": "command",
+    "order": {
+      "commandId": "command:1a7c7f91-4813-49e3-89b1-cf3cc7490d57",
+      "campaignId": "campaign:r3-browser-controlled-100",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 283715,
+      "expectedRevision": 112,
+      "payload": {
+        "type": "governance.set",
+        "cityId": "city:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180
+      }
+    },
+    "requestId": "b3b63f1f-47a7-4561-9e3b-4011b847865a"
+  },
+  {
+    "direction": "response",
+    "at": 29868.30000001192,
+    "type": "state",
+    "patch": {
+      "base": 112
+    },
+    "passiveRevisionBase": 113
+  },
+  {
+    "direction": "response",
+    "at": 29890.200000047684,
+    "type": "commandAck",
+    "ack": {
+      "commandId": "command:1a7c7f91-4813-49e3-89b1-cf3cc7490d57",
+      "status": "rejected",
+      "revision": 113,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    }
+  },
+  {
+    "direction": "response",
+    "at": 29890.200000047684,
+    "type": "state",
+    "patch": {
+      "base": 113
+    },
+    "passiveRevisionBase": 113
+  },
+  {
+    "direction": "response",
+    "at": 30136.5,
+    "type": "state",
+    "patch": {
+      "base": 113
+    },
+    "passiveRevisionBase": 114
+  },
+  {
+    "direction": "response",
+    "at": 30435.900000035763,
+    "type": "state",
+    "patch": {
+      "base": 114
+    },
+    "passiveRevisionBase": 115
+  }
+]

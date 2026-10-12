@@ -1,0 +1,908 @@
+[
+  {
+    "started": "2026-10-12T15:23:39.902Z",
+    "finished": "2026-10-12T15:23:40.539Z",
+    "id": "new-game-form",
+    "code": "await page.getByRole('button', {name:'開始新遊戲',exact:true}).click();",
+    "shot": "02-new-game-form.png",
+    "text": "列國征途\n始源 · v0.30.49\n\n六個文明，一百位獨立領主\n\n選擇你的文明\n\n建設城邦，讓你的旗幟越過群山與河流。\n\n中國\n發展經濟、研究科技、連弩支援\n拜占庭\n築起防線、反制敵軍、披甲騎兵\n法蘭克\n重騎突破、主動近戰進攻\n不列顛\n長弓箭雨、保持距離作戰\n日本\n步兵主力、武士進攻\n蒙古\n騎射機動、支援遠方城邦\n文明特色\n\n以繁盛的田野與精巧的工藝壯大城邦，再用科技帶領軍隊前進。中國適合先打穩經濟，再以連弩的密集箭雨支援前線；考工制度能減少符合條件的研究花費。\n\n均衡的近戰、遠程與步兵護具科技\n文明專屬科技\n戰鬥定位供整備軍隊參考，戰鬥功能將於後續開放。\n城堡時代代表兵種\n\n連弩衛隊\n\n徒步連弩手能連續射出密集箭雨，從後方支援前線；需要近戰部隊保護。\n領主名稱\n🎲\n1～24 字。\n戰役速度\n1X（現實 1 秒 = 世界 1 秒）\n3X（現實 1 秒 = 世界 3 秒）\n6X（現實 1 秒 = 世界 6 秒）\n10X（現實 1 秒 = 世界 10 秒）\n50X（現實 1 秒 = 世界 50 秒）\n離線世界推進\n0h · 隨時玩，離線即停止\n1h · 輕鬆玩\n6h · 標準節奏\n24h · 持續世界（預設）\n世界種子碼\n🎲\n\n384×384 持續世界 · 玩家＋99 領主。每位領主從人口200、住房400、四資源各600及18塊零級資源田開始。本局開始後不再切換速度。\n\n返回\n升起旗幟 · 開始戰役\n純單機 · 本機存檔 · 無付費加速"
+  },
+  {
+    "started": "2026-10-12T15:23:56.414Z",
+    "finished": "2026-10-12T15:23:57.174Z",
+    "id": "start-new-campaign",
+    "code": "await page.getByLabel('領主名稱',{exact:true}).fill('R3瀏覽器驗收'); await page.getByLabel('新局速度',{exact:true}).selectOption('50'); await page.getByLabel('離線世界推進',{exact:true}).selectOption('0'); await page.getByLabel('世界種子碼',{exact:true}).fill('92049'); await page.getByRole('button',{name:'升起旗幟 · 開始戰役',exact:true}).click(); await page.locator('.game-shell').waitFor({timeout:30000});",
+    "shot": "03-new-city.png",
+    "text": "列國征途\n始源 · v0.30.49\n穀\n600\n+54／時\n木\n600\n+45／時\n石\n600\n+36／時\n金\n600\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n200 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n200 人\n\nR3瀏覽器驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n長寧安平郡\n（293, 71）\n✎\n城內\n城郊\n農田 6\n林地 5\n石場 4\n金礦 3\n顯示名稱\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口與住房\n200 / 400\n自然成長 +41.8／世界時\n城市規模\n聚落\nCity 尚未正式晉升\n城市狀態\n治理完成\n產量按本城田地與科技結算\n城牆 Lv0\n每類倉儲\n800\n地庫保護 0／類\n庫存尚有空間\n已用建地 0/15\n人口里程碑\n10,000\n下一個永久里程碑\n同時施工 1 · 同時訓練 1\n15k解鎖第二施工 · 20k解鎖第二訓練\n建造工程 0/3\n同時施工 0/1\n\n目前沒有建造工程。\n\n部隊訓練 0/3\n同時訓練 0/1\n\n目前沒有部隊訓練。\n\n城郊資源地名冊\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍"
+  },
+  {
+    "at": "2026-10-12T15:24:37.500Z",
+    "id": "world-map",
+    "code": "await page.getByRole('button',{name:'世界地圖',exact:true}).click(); await page.locator('.map-canvas').waitFor({timeout:5000}).catch(()=>{}); return await page.locator('canvas').count();",
+    "shot": "04-world-map.png",
+    "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '世界地圖', exact: true })\u001b[22m\n",
+    "stack": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '世界地圖', exact: true })\u001b[22m\n\n    at eval (<anonymous>:3:79)\n    at eval (<anonymous>:3:208)\n    at G:\\Projects\\Lieguo\\docs\\validation\\r3-local-2026-10-12\\browser-driver.mjs:34:136"
+  },
+  {
+    "started": "2026-10-12T15:24:48.247Z",
+    "finished": "2026-10-12T15:24:49.146Z",
+    "id": "world-map",
+    "code": "await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'世界地圖'}).click(); return {canvas:await page.locator('canvas').count(),scale:await page.locator('.formal-map-scale').innerText()};",
+    "shot": "04-world-map.png",
+    "result": {
+      "canvas": 2,
+      "scale": "384×384 · 75%"
+    },
+    "text": "列國征途\n始源 · v0.30.49\n穀\n639\n+54／時\n木\n632\n+45／時\n石\n626\n+36／時\n金\n619\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n230 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n229 人\n\nR3瀏覽器驗收\n\n384×384 · 100 勢力\n432 野外據點\n河谷世界 ·\n長寧安平郡（293, 71）\n0時 43分 · 50X · 世界運行中\n1 世界小時 = 1.2 現實分\n＋\n−\n⋯\n點選地格查看　拖曳移動　滾輪縮放\n384×384 · 75%\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍"
+  },
+  {
+    "started": "2026-10-12T15:25:00.806Z",
+    "finished": "2026-10-12T15:25:02.175Z",
+    "id": "map-zoom-pan-overview",
+    "code": "const scales=[await page.locator('.formal-map-scale').innerText()]; await page.getByRole('button',{name:'放大地圖',exact:true}).click(); scales.push(await page.locator('.formal-map-scale').innerText()); await page.screenshot({path:path.join(outDir,'05-map-zoom-in.png')}); await page.getByRole('button',{name:'縮小地圖',exact:true}).click(); scales.push(await page.locator('.formal-map-scale').innerText()); const b=await page.locator('.map-overlay').boundingBox(); await page.mouse.move(b.x+b.width/2,b.y+b.height/2); await page.mouse.down(); await page.mouse.move(b.x+b.width/2+180,b.y+b.height/2+100,{steps:12}); await page.mouse.up(); await page.screenshot({path:path.join(outDir,'06-map-pan.png')}); await page.getByRole('button',{name:'展開地圖工具',exact:true}).click(); await page.getByRole('button',{name:'全區',exact:true}).click(); scales.push(await page.locator('.formal-map-scale').innerText()); return {scales};",
+    "shot": "07-map-overview.png",
+    "result": {
+      "scales": [
+        "384×384 · 75%",
+        "384×384 · 98%",
+        "384×384 · 75%",
+        "384×384 · 8%"
+      ]
+    },
+    "text": "列國征途\n始源 · v0.30.49\n穀\n649\n+54／時\n木\n640\n+45／時\n石\n632\n+36／時\n金\n624\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n237 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n237 人\n\nR3瀏覽器驗收\n\n384×384 · 100 勢力\n432 野外據點\n河谷世界 ·\n長寧安平郡（293, 71）\n0時 54分 · 50X · 世界運行中\n1 世界小時 = 1.2 現實分\n＋\n−\n⋯\n回城\n全區\nXY\n定位\n帝國\n版圖\n顯示\n標示\n★ 最愛\n0/5\n點選地格查看　拖曳移動　滾輪縮放\n384×384 · 8%\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍"
+  },
+  {
+    "started": "2026-10-12T15:25:38.792Z",
+    "finished": "2026-10-12T15:25:39.235Z",
+    "id": "xy-select-home",
+    "code": "await page.getByRole('button',{name:'回城',exact:true}).click(); await page.getByRole('button',{name:/XY.*定位/}).click(); await page.getByRole('textbox').count().catch(()=>0); await page.getByLabel('X 座標').fill('293'); await page.getByLabel('Y 座標').fill('71'); await page.getByRole('button',{name:'前往',exact:true}).click(); const b=await page.locator('.map-overlay').boundingBox(); await page.mouse.click(b.x+b.width/2,b.y+b.height/2); return await page.locator('.map-overlay').getAttribute('aria-label');",
+    "shot": "08-map-home-selected.png",
+    "result": "正式384×384等距世界地圖，可拖曳和縮放；方向鍵移動，Enter選取",
+    "text": "列國征途\n始源 · v0.30.49\n穀\n676\n+54／時\n木\n663\n+45／時\n石\n651\n+36／時\n金\n638\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n259 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n259 人\n\nR3瀏覽器驗收\n\n384×384 · 100 勢力\n432 野外據點\n河谷世界 ·\n長寧安平郡（293, 71）\n1時 25分 · 50X · 世界運行中\n1 世界小時 = 1.2 現實分\n＋\n−\n⋯\n回城\n全區\nXY\n定位\n帝國\n版圖\n顯示\n標示\n★ 最愛\n0/5\n點選地格查看　拖曳移動　滾輪縮放\n384×384 · 75%\n長寧安平郡\n☆\n×\n聚落 · （293, 71）\n長寧安平郡\n玩家\nR3瀏覽器驗收 · 己方\n文明\n中國\n軍團\n尚未開放\n帝國\n獨立領主\n關係\n己方\n駐軍\n0\n城防\n0 級\n人口\n259\n進入城市\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍"
+  },
+  {
+    "started": "2026-10-12T15:26:17.345Z",
+    "finished": "2026-10-12T15:26:18.992Z",
+    "id": "city-field-upgrade",
+    "code": "await page.getByRole('button',{name:'進入城市',exact:true}).click(); await page.locator('.plot-register summary').click(); await page.locator('.plot-register-grid button').filter({hasText:/農田 1 /}).click(); await page.screenshot({path:path.join(outDir,'09-field-detail.png')}); await page.getByRole('button',{name:'升級至 Lv1',exact:true}).click(); await page.locator('.city-overview').scrollIntoViewIfNeeded();",
+    "shot": "10-field-construction.png",
+    "text": "列國征途\n始源 · v0.30.49\n穀\n686\n+54／時\n木\n618\n+45／時\n石\n581\n+36／時\n金\n583\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n282 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n282 人\n\nR3瀏覽器驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n長寧安平郡\n（293, 71）\n✎\n城內\n城郊\n農田 6\n林地 5\n石場 4\n金礦 3\n顯示名稱\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口與住房\n282 / 400\n自然成長 +41.1／世界時\n城市規模\n聚落\nCity 尚未正式晉升\n城市狀態\n治理完成\n產量按本城田地與科技結算\n城牆 Lv0\n每類倉儲\n800\n地庫保護 0／類\n庫存尚有空間\n已用建地 0/15\n人口里程碑\n10,000\n下一個永久里程碑\n同時施工 1 · 同時訓練 1\n15k解鎖第二施工 · 20k解鎖第二訓練\n建造工程 1/3\n同時施工 1/1\n農田 1 → Lv1\n施工中 · 剩餘 1秒\n×\n部隊訓練 0/3\n同時訓練 0/1\n\n目前沒有部隊訓練。\n\n城郊資源地名冊\n農田 1\nLv0\n農田 2\nLv0\n農田 3\nLv0\n農田 4\nLv0\n農田 5\nLv0\n農田 6\nLv0\n林地 7\nLv0\n林地 8\nLv0\n林地 9\nLv0\n林地 10\nLv0\n林地 11\nLv0\n石場 12\nLv0\n石場 13\nLv0\n石場 14\nLv0\n石場 15\nLv0\n金礦 16\nLv0\n金礦 17\nLv0\n金礦 18\nLv0\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍\n命令已提交。"
+  },
+  {
+    "started": "2026-10-12T15:26:54.295Z",
+    "finished": "2026-10-12T15:26:54.495Z",
+    "id": "governance-new-game-prerequisite",
+    "code": "await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click(); return {disabled:await page.getByRole('button',{name:'委任總督',exact:true}).isDisabled()};",
+    "shot": "11-governance-prerequisite.png",
+    "result": {
+      "disabled": true
+    },
+    "text": "列國征途\n始源 · v0.30.49\n穀\n719\n+66／時\n木\n641\n+45／時\n石\n598\n+36／時\n金\n596\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n303 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n303 人\n\nR3瀏覽器驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n治理方針\n\n各城市獨立治理、支付及施工。\n\n長寧安平郡（293, 71）\n城市總督\n\n未委任／已停止 · 均衡\n\n需要本城市政廳 Lv1\n\n治理方針\n均衡\n經濟\n人口\n軍事\n資源儲備\n每世界小時支出上限\n每種資源最低保留量\n\n四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。\n\n本小時已支出 0 · 等待委任\n\n委任總督\n上一頁下一頁\n城市運輸\n\n建立第二座城市後可安排商隊。\n\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍"
+  },
+  {
+    "started": "2026-10-12T15:27:58.686Z",
+    "finished": "2026-10-12T15:28:04.208Z",
+    "id": "build-controlled-fixtures",
+    "code": "return await (await import('./scenarios.mjs')).fixtures(page,outDir);",
+    "snapshot": false,
+    "result": {
+      "controlled": {
+        "armies": 100,
+        "aiArmies": 99,
+        "battle": [
+          {
+            "id": "battle:0000000000000001",
+            "phase": "siege",
+            "nextRoundAt": 1575000
+          }
+        ],
+        "target": {
+          "x": 291,
+          "y": 68
+        },
+        "nextPhase": "siege",
+        "finalBattles": 1
+      },
+      "autonomous": {
+        "time": 4500000,
+        "armies": 5,
+        "accepted": 117,
+        "decisions": 169
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:28:35.929Z",
+    "finished": "2026-10-12T15:28:36.815Z",
+    "id": "import-controlled-100",
+    "code": "const s=await (await import('./scenarios.mjs')).importFixture(page,outDir,'controlled-100-siege.realm-save'); await fs.writeFile(path.join(outDir,'controlled-loaded-state.json'),JSON.stringify(s,null,2)); return {armies:s.armies.length,ai:s.armies.filter(a=>a.owner!=='faction:000').length,battles:s.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound}))};",
+    "snapshot": false,
+    "result": {
+      "armies": 100,
+      "ai": 99,
+      "battles": [
+        {
+          "id": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 1
+        }
+      ]
+    }
+  },
+  {
+    "started": "2026-10-12T15:28:46.718Z",
+    "finished": "2026-10-12T15:28:47.912Z",
+    "id": "ai-vs-ai-lv15-siege-map",
+    "code": "return await (await import('./scenarios.mjs')).mapTarget(page,291,68);",
+    "shot": "12-ai-vs-ai-lv15-siege.png",
+    "snapshot": false,
+    "result": {
+      "armyOverlay": "{\"routes\":26,\"markers\":6,\"animated\":true,\"cacheSize\":100,\"hits\":1600,\"misses\":100,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":1,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+      "renderMs": "6.90",
+      "backgroundRedraws": "14",
+      "terrainCache": "{\"tiles\":0,\"bytes\":468512,\"pending\":36,\"hits\":0,\"misses\":1}",
+      "sceneryCache": "{\"tiles\":26,\"bytes\":11556480,\"pending\":18,\"hits\":116,\"misses\":26,\"spriteDraws\":775}",
+      "camera": "{\"x\":4460,\"y\":3590,\"z\":0.75}"
+    }
+  },
+  {
+    "started": "2026-10-12T15:29:27.704Z",
+    "finished": "2026-10-12T15:29:28.750Z",
+    "id": "siege-live-round-persistence",
+    "code": "const s=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'siege-live-next-round-state.json'),JSON.stringify(s,null,2)); const overlay=await page.locator('.map-overlay').evaluate(e=>JSON.parse(e.dataset.armyOverlay)); return {time:s.time,battles:s.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound})),overlay};",
+    "shot": "13-siege-next-round.png",
+    "snapshot": false,
+    "result": {
+      "time": 2641319,
+      "battles": [
+        {
+          "id": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 2
+        }
+      ],
+      "overlay": {
+        "routes": 26,
+        "markers": 6,
+        "animated": true,
+        "cacheSize": 100,
+        "hits": 374000,
+        "misses": 100,
+        "civilianMarkers": 0,
+        "civilianCacheMisses": 0,
+        "visibleBattles": 1,
+        "visibleImpacts": 0,
+        "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:29:40.693Z",
+    "finished": "2026-10-12T15:29:42.078Z",
+    "id": "100-armies-overview-and-frame-sample",
+    "code": "await page.getByRole('button',{name:'全區',exact:true}).click(); return await page.evaluate(async()=>{const samples=[];let last;for(let i=0;i<121;i++){const t=await new Promise(requestAnimationFrame);if(last!==undefined)samples.push(t-last);last=t;} const sorted=[...samples].sort((a,b)=>a-b);return {frameSample:{count:samples.length,medianMs:sorted[Math.floor(sorted.length/2)],p95Ms:sorted[Math.floor(sorted.length*.95)],rafFps:1000/(samples.reduce((a,b)=>a+b,0)/samples.length)},canvas:{...document.querySelector('.map-overlay').dataset},viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio}};});",
+    "shot": "14-100-armies-overview.png",
+    "snapshot": false,
+    "result": {
+      "frameSample": {
+        "count": 120,
+        "medianMs": 7,
+        "p95Ms": 13.900000000023283,
+        "rafFps": 113.69019422074847
+      },
+      "canvas": {
+        "armyOverlay": "{\"routes\":99,\"markers\":97,\"animated\":true,\"cacheSize\":100,\"hits\":494500,\"misses\":100,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":1,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+        "renderMs": "1.50",
+        "backgroundRedraws": "59",
+        "terrainCache": "{\"tiles\":35,\"bytes\":13678368,\"pending\":0,\"hits\":630,\"misses\":36}",
+        "sceneryCache": "{\"tiles\":38,\"bytes\":14801280,\"pending\":0,\"hits\":1082,\"misses\":38,\"spriteDraws\":1143}",
+        "camera": "{\"x\":0,\"y\":3830,\"z\":0.07916666666666666}"
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1.0000000149011612
+      }
+    }
+  },
+  {
+    "at": "2026-10-12T15:30:36.291Z",
+    "id": "governor-commission",
+    "code": "await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click(); await page.getByLabel('治理方針',{exact:true}).selectOption('economy'); await page.getByLabel('每世界小時支出上限').fill('2400'); await page.getByLabel('每種資源最低保留量').fill('180'); await page.getByRole('button',{name:'委任總督',exact:true}).click(); await page.getByRole('button',{name:'套用治理設定',exact:true}).waitFor(); const s=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'governor-commission-state.json'),JSON.stringify(s,null,2)); return s.governors;",
+    "shot": "15-governor-commission.png",
+    "error": "TimeoutError: locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('治理方針', { exact: true })\u001b[22m\n",
+    "stack": "locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('治理方針', { exact: true })\u001b[22m\n\n    at eval (<anonymous>:3:154)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-local-2026-10-12/browser-driver.mjs:34:20"
+  },
+  {
+    "at": "2026-10-12T15:31:11.736Z",
+    "id": "governor-apply-stop",
+    "code": "await page.getByLabel('治理方針',{exact:true}).selectOption('reserve'); await page.getByRole('button',{name:'套用治理設定',exact:true}).click(); await page.waitForFunction(()=>document.querySelector('.governance-controls p').textContent.includes('資源儲備')); await page.getByRole('button',{name:'停止總督',exact:true}).click(); await page.getByRole('button',{name:'委任總督',exact:true}).waitFor(); const s=await (await import('./scenarios.mjs')).inspect(page); return s.governors.filter(g=>g.ownerFactionId==='faction:000');",
+    "shot": "16-governor-stopped.png",
+    "error": "TimeoutError: locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('治理方針', { exact: true })\u001b[22m\n",
+    "stack": "locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('治理方針', { exact: true })\u001b[22m\n\n    at eval (<anonymous>:3:66)\n    at eval (<anonymous>:3:530)\n    at G:\\Projects\\Lieguo\\docs\\validation\\r3-local-2026-10-12\\browser-driver.mjs:34:136"
+  },
+  {
+    "started": "2026-10-12T15:31:11.738Z",
+    "finished": "2026-10-12T15:31:12.645Z",
+    "id": "governor-commission-correct-locators",
+    "code": "page.setDefaultTimeout(5000); await page.locator('.governance-controls select').selectOption('economy'); await page.locator('.governance-controls input').nth(0).fill('2400'); await page.locator('.governance-controls input').nth(1).fill('180'); await page.getByRole('button',{name:'委任總督',exact:true}).click(); await page.getByRole('button',{name:'套用治理設定',exact:true}).waitFor(); const s=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'governor-commission-state.json'),JSON.stringify(s,null,2)); return s.governors.filter(g=>g.ownerFactionId==='faction:000');",
+    "shot": "15-governor-commission.png",
+    "result": [
+      {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "period": 2,
+        "eventId": "event:0000000000002146",
+        "nextAt": 7849854,
+        "decisions": 0,
+        "blocked": "等待正式治理排程"
+      }
+    ],
+    "text": "列國征途\n始源 · v0.30.49\n穀\n50,032\n+24／時\n木\n50,028\n+45／時\n石\n49,988\n+36／時\n金\n49,989\n+27／時\n文明時代\n城堡\n0\n20\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n15,228 / 30,400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n15,228 人\n\nR3受控驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n治理方針\n\n各城市獨立治理、支付及施工。\n\n長寧安平郡（293, 71）\n城市總督\n\n治理中 · 經濟\n\n治理方針\n均衡\n經濟\n人口\n軍事\n資源儲備\n每世界小時支出上限\n每種資源最低保留量\n\n四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。\n\n本小時已支出 250 · 已下達正式economy命令\n\n套用治理設定停止總督\n上一頁下一頁\n城市運輸\n\n建立第二座城市後可安排商隊。\n\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 民兵 20"
+  },
+  {
+    "started": "2026-10-12T15:31:12.646Z",
+    "finished": "2026-10-12T15:31:14.182Z",
+    "id": "compute-formal-siege-final",
+    "code": "return await (await import('./finish-scenario.mjs')).default(page,outDir);",
+    "snapshot": false,
+    "result": {
+      "time": 16575000,
+      "battleId": "battle:0000000000000001",
+      "rounds": [
+        {
+          "time": 75000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 1,
+          "nextAt": 1575000
+        },
+        {
+          "time": 1575000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 2,
+          "nextAt": 3075000
+        },
+        {
+          "time": 3075000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 3,
+          "nextAt": 4575000
+        },
+        {
+          "time": 4575000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 4,
+          "nextAt": 6075000
+        },
+        {
+          "time": 6075000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 5,
+          "nextAt": 7575000
+        },
+        {
+          "time": 7575000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 6,
+          "nextAt": 9075000
+        },
+        {
+          "time": 9075000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 7,
+          "nextAt": 10575000
+        },
+        {
+          "time": 10575000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 8,
+          "nextAt": 12075000
+        },
+        {
+          "time": 12075000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 9,
+          "nextAt": 13575000
+        },
+        {
+          "time": 13575000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 10,
+          "nextAt": 15075000
+        },
+        {
+          "time": 15075000,
+          "battleId": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 11,
+          "nextAt": 16575000
+        }
+      ],
+      "remainingBattles": [],
+      "finalReceipt": {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000701",
+        "at": 16575000,
+        "round": 1,
+        "kind": "final",
+        "targetPoint": {
+          "x": 291,
+          "y": 68
+        },
+        "mission": "conquest",
+        "outcome": "held",
+        "ownerBefore": "faction:002",
+        "ownerAfter": "faction:002",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    }
+  },
+  {
+    "at": "2026-10-12T15:31:48.056Z",
+    "id": "governor-budget-and-stop",
+    "code": "const before=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'governor-executed-state.json'),JSON.stringify(before,null,2)); await page.locator('.governance-controls select').selectOption('reserve'); await page.getByRole('button',{name:'套用治理設定',exact:true}).click(); await page.waitForFunction(()=>document.querySelector('.governance-controls p').textContent.includes('資源儲備')); await page.getByRole('button',{name:'停止總督',exact:true}).click(); await page.getByRole('button',{name:'委任總督',exact:true}).waitFor(); const after=await (await import('./scenarios.mjs')).inspect(page); return {before:before.governors.filter(g=>g.ownerFactionId==='faction:000'),after:after.governors.filter(g=>g.ownerFactionId==='faction:000')};",
+    "shot": "16-governor-stopped.png",
+    "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded.",
+    "stack": "page.waitForFunction: Timeout 5000ms exceeded.\n    at eval (<anonymous>:3:344)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-local-2026-10-12/browser-driver.mjs:34:20"
+  },
+  {
+    "started": "2026-10-12T15:31:48.058Z",
+    "finished": "2026-10-12T15:31:49.027Z",
+    "id": "city-townhall-detail",
+    "code": "await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'城市建設'}).click(); await page.getByRole('tab',{name:'城內',exact:true}).click(); await page.screenshot({path:path.join(outDir,'17-city-interior.png')}); await page.getByRole('button',{name:'市政廳 Lv1',exact:true}).click();",
+    "shot": "18-townhall-detail.png",
+    "text": "列國征途\n始源 · v0.30.49\n穀\n50,050\n+36／時\n木\n50,051\n+45／時\n石\n50,007\n+36／時\n金\n50,002\n+27／時\n文明時代\n城堡\n0\n20\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n15,282 / 30,400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n15,281 人\n\nR3受控驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n長寧安平郡\n（293, 71）\n✎\n城內\n城郊\n收起名稱\n城門 · 0\n城市中心\n10\n倉庫\n15\n民居\n15\n市政廳\n1\n城堡\n1\n＋\n空地 5\n＋\n空地 6\n＋\n空地 7\n＋\n空地 8\n＋\n空地 9\n＋\n空地 10\n＋\n空地 11\n＋\n空地 12\n＋\n空地 13\n＋\n空地 14\n＋\n空地 15\n人口與住房\n15,282 / 30,400\n自然成長 +105.7／世界時\n城市規模\n大城市\nCity 尚未正式晉升\n城市狀態\n治理完成\n產量按本城田地與科技結算\n城牆 Lv0\n每類倉儲\n100,800\n地庫保護 0／類\n庫存尚有空間\n已用建地 4/15\n人口里程碑\n20,000\n下一個永久里程碑\n同時施工 2 · 同時訓練 1\n15k解鎖第二施工 · 20k解鎖第二訓練\n建造工程 0/3\n同時施工 0/2\n\n目前沒有建造工程。\n\n部隊訓練 0/3\n同時訓練 0/1\n\n目前沒有部隊訓練。\n\n城內建築名冊\n市政廳\n×\nLv1最高 Lv15\n\n整備城市行政，作為重要建築及城市晉升的前置。\n\n建造／升級前置\n穀\n105\n木\n175\n石\n205\n金\n145\n\n實際施工時間 22秒 · 含排隊約 22秒\n\n符合升級條件\n\n升級至 Lv2\n拆除建築\n\n有效行政節點 1 → 1（每城一座）\n\n城市總督\n\n治理中 · 經濟\n\n治理方針\n均衡\n經濟\n人口\n軍事\n資源儲備\n每世界小時支出上限\n每種資源最低保留量\n\n四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。\n\n本小時已支出 250 · 已下達正式economy命令\n\n套用治理設定停止總督\nCity 正式晉升\n未達條件\n✓ 人口 15,282 / 10,000\n✓ 住房 30,400 / 10,000\n未達 市政廳 Lv1 / Lv5\n穀\n12,000\n木\n18,000\n石\n18,000\n金\n12,000\n\n6 世界小時 · 現實 7分 12秒\n\n永久獎勵：資源田 Lv11～15、倉庫＋10%、正式 City 美術\n\nCity 正式晉升\n治理方針\n尚未開放 · 目前依正式城市經濟規則運作\n勢力行政網路\n1 / 15 · 統治初定時間倍率 95.3%\n本城統治初定\n已完成／無\n永久人口資格\n✓ 10,000\n✓ 15,000\n未達 20,000\n未達 22,000\n未達 25,000\n未達 30,000\n\n✓ 第二施工佇列 · 未達 第二軍事訓練佇列\n\n未達 步兵精銳化城市人口資格 22,000 · 科技未完成\n\n未達 遠程精銳化城市人口資格 25,000 · 科技未完成\n\n未達 騎兵精銳化城市人口資格 25,000 · 科技未完成\n\n未達 文明衛隊精銳化城市人口資格 30,000 · 科技未完成\n\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 民兵 20\n世界版本已更新，請重新確認狀態。"
+  },
+  {
+    "at": "2026-10-12T15:32:21.608Z",
+    "id": "save-reload-siege",
+    "code": "if(await page.locator('[role=dialog]').count()) await page.locator('[role=dialog] button[aria-label=\"關閉\"]').click(); const before=await (await import('./scenarios.mjs')).inspect(page); await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'戰役設定'}).click(); await page.getByRole('button',{name:'立即保存',exact:true}).click(); await page.reload({waitUntil:'networkidle'}); await page.getByRole('button',{name:'載入進度',exact:true}).click(); await page.locator('.game-shell').waitFor(); const after=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'reload-state-comparison.json'),JSON.stringify({before,after},null,2)); return {before:{campaign:before.campaignId,armies:before.armies.length,battles:before.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound}))},after:{campaign:after.campaignId,armies:after.armies.length,battles:after.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound}))}};",
+    "shot": "19-reloaded-city.png",
+    "snapshot": false,
+    "error": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '戰役設定' })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"\" title=\"戰役設定\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" aria-labelledby=\"_r_9_\">…</dialog> from <main class=\"main-surface \">…</main> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" aria-labelledby=\"_r_9_\">…</dialog> from <main class=\"main-surface \">…</main> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" aria-labelledby=\"_r_9_\">…</dialog> from <main class=\"main-surface \">…</main> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n",
+    "stack": "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '戰役設定' })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"\" title=\"戰役設定\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" aria-labelledby=\"_r_9_\">…</dialog> from <main class=\"main-surface \">…</main> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" aria-labelledby=\"_r_9_\">…</dialog> from <main class=\"main-surface \">…</main> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" aria-labelledby=\"_r_9_\">…</dialog> from <main class=\"main-surface \">…</main> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at eval (<anonymous>:3:287)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-local-2026-10-12/browser-driver.mjs:34:20"
+  },
+  {
+    "at": "2026-10-12T15:32:46.983Z",
+    "id": "governor-retry-and-stop",
+    "code": "if(await page.getByRole('dialog').count()) await page.getByRole('button',{name:'關閉對話框',exact:true}).click(); await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click(); await page.locator('.governance-controls select').selectOption('reserve'); await page.getByRole('button',{name:'套用治理設定',exact:true}).click(); await page.waitForFunction(()=>document.querySelector('.governance-controls p').textContent.includes('資源儲備')); const applied=await (await import('./scenarios.mjs')).inspect(page); await page.getByRole('button',{name:'停止總督',exact:true}).click(); await page.getByRole('button',{name:'委任總督',exact:true}).waitFor(); const stopped=await (await import('./scenarios.mjs')).inspect(page); return {applied:applied.governors.filter(g=>g.ownerFactionId==='faction:000'),stopped:stopped.governors.filter(g=>g.ownerFactionId==='faction:000')};",
+    "shot": "16-governor-stopped.png",
+    "snapshot": false,
+    "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded.",
+    "stack": "page.waitForFunction: Timeout 5000ms exceeded.\n    at eval (<anonymous>:3:373)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-local-2026-10-12/browser-driver.mjs:34:20"
+  },
+  {
+    "started": "2026-10-12T15:32:48.154Z",
+    "finished": "2026-10-12T15:32:50.949Z",
+    "id": "save-reload-confirmed",
+    "code": "const before=await (await import('./scenarios.mjs')).inspect(page); await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'戰役設定'}).click(); await page.getByRole('button',{name:'立即保存',exact:true}).click(); await page.reload({waitUntil:'networkidle'}); await page.getByRole('button',{name:'載入進度',exact:true}).click(); await page.locator('.game-shell').waitFor(); const after=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'reload-state-comparison.json'),JSON.stringify({before,after},null,2)); return {before:{campaign:before.campaignId,armies:before.armies.length,battles:before.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound}))},after:{campaign:after.campaignId,armies:after.armies.length,battles:after.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound}))}};",
+    "shot": "19-reloaded-city.png",
+    "snapshot": false,
+    "result": {
+      "before": {
+        "campaign": "campaign:r3-browser-controlled-100",
+        "armies": 33,
+        "battles": [
+          {
+            "id": "battle:0000000000000001",
+            "phase": "siege",
+            "siegeRound": 9
+          }
+        ]
+      },
+      "after": {
+        "campaign": "campaign:r3-browser-controlled-100",
+        "armies": 33,
+        "battles": [
+          {
+            "id": "battle:0000000000000001",
+            "phase": "siege",
+            "siegeRound": 9
+          }
+        ]
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:33:11.550Z",
+    "finished": "2026-10-12T15:33:11.965Z",
+    "id": "reloaded-state-map",
+    "code": "const s=await (await import('./scenarios.mjs')).inspect(page); return {time:s.time,armies:s.armies.length,battles:s.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound})),governors:s.governors.filter(g=>g.ownerFactionId==='faction:000')};",
+    "snapshot": true,
+    "result": {
+      "time": 13736998,
+      "armies": 32,
+      "battles": [
+        {
+          "id": "battle:0000000000000001",
+          "phase": "siege",
+          "siegeRound": 10
+        }
+      ],
+      "governors": [
+        {
+          "cityId": "city:000",
+          "ownerFactionId": "faction:000",
+          "enabled": true,
+          "policy": "economy",
+          "budget": 2400,
+          "reserve": 180,
+          "spent": {
+            "food": 60,
+            "wood": 100,
+            "stone": 80,
+            "gold": 30
+          },
+          "period": 3,
+          "eventId": "event:0000000000002423",
+          "nextAt": 14400000,
+          "decisions": 2,
+          "blocked": "已下達正式economy命令"
+        }
+      ]
+    },
+    "text": "列國征途\n始源 · v0.30.49\n穀\n50,032\n+41／時\n木\n50,001\n+45／時\n石\n49,967\n+36／時\n金\n50,012\n+39／時\n文明時代\n城堡\n0\n20\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n15,401 / 30,400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n1\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n15,400 人\n\nR3受控驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n長寧安平郡\n（293, 71）\n✎\n城內\n城郊\n農田 6\n林地 5\n石場 4\n金礦 3\n顯示名稱\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n人口與住房\n15,400 / 30,400\n自然成長 +106.4／世界時\n城市規模\n大城市\nCity 尚未正式晉升\n城市狀態\n治理完成\n產量按本城田地與科技結算\n城牆 Lv0\n每類倉儲\n100,800\n地庫保護 0／類\n庫存尚有空間\n已用建地 4/15\n人口里程碑\n20,000\n下一個永久里程碑\n同時施工 2 · 同時訓練 1\n15k解鎖第二施工 · 20k解鎖第二訓練\n建造工程 0/3\n同時施工 0/2\n\n目前沒有建造工程。\n\n部隊訓練 0/3\n同時訓練 0/1\n\n目前沒有部隊訓練。\n\n城郊資源地名冊\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 民兵 20"
+  },
+  {
+    "started": "2026-10-12T15:33:59.278Z",
+    "finished": "2026-10-12T15:34:00.555Z",
+    "id": "siege-reloaded-reduced-motion",
+    "code": "await (await import('./scenarios.mjs')).mapTarget(page,291,68); await page.emulateMedia({reducedMotion:'reduce'}); await page.evaluate(()=>new Promise(requestAnimationFrame)); return {reduced:await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches),overlay:await page.locator('.map-overlay').evaluate(e=>JSON.parse(e.dataset.armyOverlay))};",
+    "shot": "22-siege-reduced-motion.png",
+    "snapshot": false,
+    "result": {
+      "reduced": true,
+      "overlay": {
+        "routes": 16,
+        "markers": 2,
+        "animated": true,
+        "cacheSize": 31,
+        "hits": 837,
+        "misses": 31,
+        "civilianMarkers": 0,
+        "civilianCacheMisses": 0,
+        "visibleBattles": 1,
+        "visibleImpacts": 0,
+        "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:34:03.155Z",
+    "finished": "2026-10-12T15:34:03.721Z",
+    "id": "mobile-touch-emulation",
+    "code": "await page.emulateMedia({reducedMotion:'no-preference'}); return await (await import('./mobile-verification.mjs')).default(page,context,outDir);",
+    "snapshot": false,
+    "result": {
+      "type": "Chrome desktop with mobile viewport and trusted CDP touch emulation; not physical phone",
+      "before": {
+        "x": 4460,
+        "y": 3590,
+        "z": 0.75
+      },
+      "afterDrag": {
+        "x": 4540,
+        "y": 3536.666666666666,
+        "z": 0.75
+      },
+      "afterPinch": {
+        "x": 4539.9999923706055,
+        "y": 3536.666666666666,
+        "z": 1.5000000715255737
+      },
+      "dragChanged": true,
+      "pinchChanged": true,
+      "overflow": {
+        "viewport": 390,
+        "document": 390,
+        "touchPoints": 2
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:34:15.603Z",
+    "finished": "2026-10-12T15:34:16.335Z",
+    "id": "watch-live-siege-final",
+    "code": "const s=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'siege-near-final-live-state.json'),JSON.stringify(s,null,2)); return {time:s.time,battles:s.battles.map(b=>({id:b.id,phase:b.phase,siegeRound:b.siegeRound,nextAt:b.nextRoundAt})),final:s.finalReceipts.filter(r=>r.battleId==='battle:0000000000000001'),overlay:await page.locator('.map-overlay').evaluate(e=>JSON.parse(e.dataset.armyOverlay))};",
+    "shot": "23-siege-live-before-final.png",
+    "snapshot": false,
+    "result": {
+      "time": 16931873,
+      "battles": [],
+      "final": [
+        {
+          "targetPoint": {
+            "x": 291,
+            "y": 68
+          },
+          "mission": "conquest",
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "eventId": "event:0000000000002806",
+          "at": 16575000,
+          "round": 3,
+          "kind": "final",
+          "outcome": "held",
+          "ownerBefore": "faction:002",
+          "ownerAfter": "faction:002",
+          "qualificationBefore": "none",
+          "qualificationAfter": "none"
+        }
+      ],
+      "overlay": {
+        "routes": 10,
+        "markers": 0,
+        "animated": true,
+        "cacheSize": 30,
+        "hits": 50852,
+        "misses": 33,
+        "civilianMarkers": 0,
+        "civilianCacheMisses": 0,
+        "visibleBattles": 0,
+        "visibleImpacts": 0,
+        "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:34:57.731Z",
+    "finished": "2026-10-12T15:34:58.904Z",
+    "id": "live-siege-final-marker-removal",
+    "code": "await page.getByRole('button',{name:'回城',exact:true}).click(); await page.getByRole('button',{name:/XY.*定位/}).click(); await page.getByLabel('X 座標').fill('291'); await page.getByLabel('Y 座標').fill('68'); await page.getByRole('button',{name:'前往',exact:true}).click(); const s=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'siege-final-live-state.json'),JSON.stringify(s,null,2)); return {battleCount:s.battles.length,final:s.finalReceipts.filter(r=>r.battleId==='battle:0000000000000001'),overlay:await page.locator('.map-overlay').evaluate(e=>JSON.parse(e.dataset.armyOverlay))};",
+    "shot": "24-siege-final-marker-removed.png",
+    "snapshot": false,
+    "result": {
+      "battleCount": 0,
+      "final": [
+        {
+          "targetPoint": {
+            "x": 291,
+            "y": 68
+          },
+          "mission": "conquest",
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "eventId": "event:0000000000002806",
+          "at": 16575000,
+          "round": 3,
+          "kind": "final",
+          "outcome": "held",
+          "ownerBefore": "faction:002",
+          "ownerAfter": "faction:002",
+          "qualificationBefore": "none",
+          "qualificationAfter": "none"
+        }
+      ],
+      "overlay": {
+        "routes": 16,
+        "markers": 0,
+        "animated": true,
+        "cacheSize": 30,
+        "hits": 192448,
+        "misses": 37,
+        "civilianMarkers": 0,
+        "civilianCacheMisses": 0,
+        "visibleBattles": 0,
+        "visibleImpacts": 0,
+        "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:35:08.572Z",
+    "finished": "2026-10-12T15:35:09.299Z",
+    "id": "governor-stop-after-reload",
+    "code": "await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click(); await page.getByRole('button',{name:'停止總督',exact:true}).click(); await page.getByRole('button',{name:'委任總督',exact:true}).waitFor(); const s=await (await import('./scenarios.mjs')).inspect(page); return s.governors.filter(g=>g.ownerFactionId==='faction:000');",
+    "shot": "16-governor-stopped.png",
+    "result": [
+      {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "economy",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 60,
+          "wood": 40,
+          "stone": 100,
+          "gold": 50
+        },
+        "period": 5,
+        "eventId": null,
+        "nextAt": 19594469,
+        "decisions": 4,
+        "blocked": "已停止"
+      }
+    ],
+    "text": "列國征途\n始源 · v0.30.49\n穀\n49,989\n+41／時\n木\n49,960\n+57／時\n石\n49,903\n+48／時\n金\n49,946\n+39／時\n文明時代\n城堡\n0\n20\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n15,574 / 30,400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n1\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n15,574 人\n\nR3受控驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n治理方針\n\n各城市獨立治理、支付及施工。\n\n長寧安平郡（293, 71）\n城市總督\n\n未委任／已停止 · 經濟\n\n治理方針\n均衡\n經濟\n人口\n軍事\n資源儲備\n每世界小時支出上限\n每種資源最低保留量\n\n四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。\n\n本小時已支出 250 · 已停止\n\n委任總督\n上一頁下一頁\n城市運輸\n\n建立第二座城市後可安排商隊。\n\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 民兵 20\n命令已提交。"
+  },
+  {
+    "started": "2026-10-12T15:35:12.234Z",
+    "finished": "2026-10-12T15:35:12.666Z",
+    "id": "import-autonomous-ai",
+    "code": "const s=await (await import('./scenarios.mjs')).importFixture(page,outDir,'autonomous-ai.realm-save'); await fs.writeFile(path.join(outDir,'autonomous-loaded-state.json'),JSON.stringify(s,null,2)); return {time:s.time,armies:s.armies.map(a=>({id:a.id,owner:a.owner,status:a.status,mission:a.mission,start:a.path[0],target:a.target})),autonomy:s.autonomy};",
+    "snapshot": false,
+    "result": {
+      "time": 4500000,
+      "armies": [
+        {
+          "id": "army:0000000000000002",
+          "owner": "faction:084",
+          "status": "outbound",
+          "mission": "scout",
+          "start": {
+            "x": 311,
+            "y": 313
+          },
+          "target": {
+            "kind": "city",
+            "cityId": "city:061"
+          }
+        },
+        {
+          "id": "army:0000000000000003",
+          "owner": "faction:062",
+          "status": "outbound",
+          "mission": "scout",
+          "start": {
+            "x": 354,
+            "y": 53
+          },
+          "target": {
+            "kind": "city",
+            "cityId": "city:074"
+          }
+        },
+        {
+          "id": "army:0000000000000004",
+          "owner": "faction:019",
+          "status": "outbound",
+          "mission": "scout",
+          "start": {
+            "x": 133,
+            "y": 55
+          },
+          "target": {
+            "kind": "city",
+            "cityId": "city:054"
+          }
+        },
+        {
+          "id": "army:0000000000000005",
+          "owner": "faction:089",
+          "status": "outbound",
+          "mission": "scout",
+          "start": {
+            "x": 70,
+            "y": 33
+          },
+          "target": {
+            "kind": "city",
+            "cityId": "city:077"
+          }
+        },
+        {
+          "id": "army:0000000000000006",
+          "owner": "faction:095",
+          "status": "outbound",
+          "mission": "scout",
+          "start": {
+            "x": 261,
+            "y": 237
+          },
+          "target": {
+            "kind": "city",
+            "cityId": "city:071"
+          }
+        }
+      ],
+      "autonomy": {
+        "accepted": 117,
+        "rejected": 0,
+        "decisions": 169
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:35:50.597Z",
+    "finished": "2026-10-12T15:35:53.609Z",
+    "id": "autonomous-ai-real-browser-movement",
+    "code": "return await (await import('./autonomous-map.mjs')).default(page,outDir);",
+    "snapshot": false,
+    "result": {
+      "anchor": {
+        "id": "army:0000000000000124",
+        "owner": "faction:039",
+        "mission": "scout",
+        "point": {
+          "x": 25.87657769135584,
+          "y": 145.87657769135583
+        },
+        "time": 6406488
+      },
+      "before": {
+        "id": "army:0000000000000124",
+        "time": 6442778,
+        "point": {
+          "x": 27.159630886720407,
+          "y": 147.1596308867204
+        },
+        "heading": 3.141592653589793,
+        "overlay": {
+          "routes": 1,
+          "markers": 1,
+          "animated": true,
+          "cacheSize": 2,
+          "hits": 74,
+          "misses": 2,
+          "civilianMarkers": 0,
+          "civilianCacheMisses": 0,
+          "visibleBattles": 0,
+          "visibleImpacts": 0,
+          "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+        }
+      },
+      "after": {
+        "id": "army:0000000000000124",
+        "time": 6542024,
+        "point": {
+          "x": 29,
+          "y": 150
+        },
+        "heading": 3.141592653589793,
+        "overlay": {
+          "routes": 0,
+          "markers": 0,
+          "animated": false,
+          "cacheSize": 3,
+          "hits": 818,
+          "misses": 4,
+          "civilianMarkers": 0,
+          "civilianCacheMisses": 0,
+          "visibleBattles": 0,
+          "visibleImpacts": 0,
+          "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+        }
+      },
+      "moved": true
+    }
+  },
+  {
+    "started": "2026-10-12T15:36:49.336Z",
+    "finished": "2026-10-12T15:37:01.660Z",
+    "id": "autonomous-final-state-and-trace",
+    "code": "const s=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'autonomous-final-state.json'),JSON.stringify(s,null,2)); const gl=await page.evaluate(()=>{const c=document.createElement('canvas'),g=c.getContext('webgl');if(!g)return null;const x=g.getExtension('WEBGL_debug_renderer_info');return {vendor:x?g.getParameter(x.UNMASKED_VENDOR_WEBGL):g.getParameter(g.VENDOR),renderer:x?g.getParameter(x.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER)};}); await context.tracing.stop({path:path.join(outDir,'trace.zip')}); await context.tracing.start({screenshots:true,snapshots:true,sources:true}); return {autonomy:s.autonomy,armies:s.armies.length,gl};",
+    "snapshot": false,
+    "result": {
+      "autonomy": {
+        "accepted": 278,
+        "rejected": 0,
+        "decisions": 337
+      },
+      "armies": 13,
+      "gl": {
+        "vendor": "Google Inc. (NVIDIA)",
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 Ti (0x00002482) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    }
+  },
+  {
+    "started": "2026-10-12T15:37:49.530Z",
+    "finished": "2026-10-12T15:37:50.373Z",
+    "id": "quiet-governance-fixture",
+    "code": "const save=await page.evaluate(async()=>{const {createFormalWorld}=await import('/src/game/formal/generator.ts'); const {encodeSave}=await import('/src/game/formal/saveCodec.ts'); const w=createFormalWorld({campaign:'r3-browser-governance-quiet',seed:92049,speed:1,name:'R3治理獨立驗收',offlineHours:0}); w.cities[0].buildings.townhall=1; w.cities[0].economy.slots.townhall=0; return JSON.stringify(await encodeSave(w));}); await fs.writeFile(path.join(outDir,'governance-quiet.realm-save'),save); const s=await (await import('./scenarios.mjs')).importFixture(page,outDir,'governance-quiet.realm-save'); await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click(); await page.locator('.governance-controls select').selectOption('economy'); await page.getByRole('button',{name:'委任總督',exact:true}).click(); await page.getByRole('button',{name:'套用治理設定',exact:true}).waitFor(); return {campaign:s.campaignId,speed:1};",
+    "shot": "27-quiet-governor-commission.png",
+    "result": {
+      "campaign": "campaign:r3-browser-governance-quiet",
+      "speed": 1
+    },
+    "text": "列國征途\n始源 · v0.30.49\n穀\n600\n+54／時\n木\n600\n+45／時\n石\n600\n+36／時\n金\n600\n+27／時\n文明時代\n黑暗\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n200 / 400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n200 人\n\nR3治理獨立驗收\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n治理方針\n\n各城市獨立治理、支付及施工。\n\n長寧安平郡（293, 71）\n城市總督\n\n治理中 · 經濟\n\n治理方針\n均衡\n經濟\n人口\n軍事\n資源儲備\n每世界小時支出上限\n每種資源最低保留量\n\n四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。\n\n本小時已支出 0 · 等待正式治理排程\n\n套用治理設定停止總督\n上一頁下一頁\n城市運輸\n\n建立第二座城市後可安排商隊。\n\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 尚無駐軍"
+  },
+  {
+    "started": "2026-10-12T15:38:10.557Z",
+    "finished": "2026-10-12T15:38:11.185Z",
+    "id": "quiet-governor-apply-stop",
+    "code": "const before=await (await import('./scenarios.mjs')).inspect(page); await page.locator('.governance-controls select').selectOption('reserve'); await page.getByRole('button',{name:'套用治理設定',exact:true}).click(); await page.waitForFunction(()=>document.querySelector('.governance-controls p').textContent.includes('資源儲備')); const applied=await (await import('./scenarios.mjs')).inspect(page); await page.screenshot({path:path.join(outDir,'28-governor-reserve-applied.png')}); await page.getByRole('button',{name:'停止總督',exact:true}).click(); await page.getByRole('button',{name:'委任總督',exact:true}).waitFor(); const stopped=await (await import('./scenarios.mjs')).inspect(page); await fs.writeFile(path.join(outDir,'quiet-governor-comparison.json'),JSON.stringify({before,applied,stopped},null,2)); return {before:before.governors,applied:applied.governors,stopped:stopped.governors};",
+    "shot": "29-quiet-governor-stopped.png",
+    "snapshot": false,
+    "result": {
+      "before": [
+        {
+          "cityId": "city:000",
+          "ownerFactionId": "faction:000",
+          "enabled": true,
+          "policy": "economy",
+          "budget": 2400,
+          "reserve": 180,
+          "spent": {
+            "food": 40,
+            "wood": 130,
+            "stone": 160,
+            "gold": 90
+          },
+          "period": 0,
+          "eventId": "event:0000000000004017",
+          "nextAt": 3600000,
+          "decisions": 1,
+          "blocked": "已下達正式economy命令"
+        }
+      ],
+      "applied": [
+        {
+          "cityId": "city:000",
+          "ownerFactionId": "faction:000",
+          "enabled": true,
+          "policy": "reserve",
+          "budget": 2400,
+          "reserve": 180,
+          "spent": {
+            "food": 40,
+            "wood": 130,
+            "stone": 160,
+            "gold": 90
+          },
+          "period": 0,
+          "eventId": "event:0000000000004020",
+          "nextAt": 3600000,
+          "decisions": 2,
+          "blocked": "資源儲備方針：保留庫存"
+        }
+      ],
+      "stopped": [
+        {
+          "cityId": "city:000",
+          "ownerFactionId": "faction:000",
+          "enabled": false,
+          "policy": "reserve",
+          "budget": 2400,
+          "reserve": 180,
+          "spent": {
+            "food": 40,
+            "wood": 130,
+            "stone": 160,
+            "gold": 90
+          },
+          "period": 0,
+          "eventId": null,
+          "nextAt": 20985,
+          "decisions": 2,
+          "blocked": "已停止"
+        }
+      ]
+    }
+  },
+  {
+    "started": "2026-10-12T15:38:45.512Z",
+    "finished": "2026-10-12T15:38:47.111Z",
+    "id": "finish-browser-session",
+    "code": "await context.tracing.stop({path:path.join(outDir,'trace-governance.zip')}); const version=browser.version(); await browser.close(); return {version,completed:true};",
+    "snapshot": false,
+    "result": {
+      "version": "154.0.8037.98",
+      "completed": true
+    }
+  }
+]

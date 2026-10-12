@@ -1,0 +1,862 @@
+{
+  "matrix": [
+    {
+      "speed": 1,
+      "dense": false,
+      "initialArmies": 0,
+      "replies": [
+        {
+          "commandId": "command:64618a2a-0910-4745-acf6-eff9cbdc4629",
+          "status": "committed",
+          "revision": 2
+        },
+        {
+          "commandId": "command:86837d80-670a-442a-9af7-86a05e385062",
+          "status": "committed",
+          "revision": 4
+        },
+        {
+          "commandId": "command:c8c49a7a-ed63-418c-a7e4-08dfc95ca924",
+          "status": "committed",
+          "revision": 6
+        },
+        {
+          "commandId": "command:f002998a-ba5e-4000-9d7b-ae1e23a22390",
+          "status": "committed",
+          "revision": 8
+        },
+        {
+          "commandId": "command:39f0f5a6-ad28-4fa9-aba8-6495d105af1d",
+          "status": "committed",
+          "revision": 10
+        },
+        {
+          "commandId": "command:6170f669-1bf5-488f-ba99-daaa05851443",
+          "status": "committed",
+          "revision": 12
+        }
+      ],
+      "appliedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": "event:0000000000000312",
+        "nextAt": 1988,
+        "decisions": 5,
+        "blocked": "等待正式治理排程"
+      },
+      "stoppedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 2713,
+        "decisions": 6,
+        "blocked": "已停止"
+      },
+      "receipts": [
+        {
+          "commandId": "command:64618a2a-0910-4745-acf6-eff9cbdc4629",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 2,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:86837d80-670a-442a-9af7-86a05e385062",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 4,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:c8c49a7a-ed63-418c-a7e4-08dfc95ca924",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 6,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:f002998a-ba5e-4000-9d7b-ae1e23a22390",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 8,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:39f0f5a6-ad28-4fa9-aba8-6495d105af1d",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 10,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:6170f669-1bf5-488f-ba99-daaa05851443",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 12,
+          "disposition": "applied"
+        }
+      ]
+    },
+    {
+      "speed": 1,
+      "dense": true,
+      "initialArmies": 100,
+      "replies": [
+        {
+          "commandId": "command:30e8b86c-2e04-40ac-8337-1fae86ced380",
+          "status": "committed",
+          "revision": 102
+        },
+        {
+          "commandId": "command:dfc354b3-4f7e-4516-b0e3-56ad868f8bd0",
+          "status": "committed",
+          "revision": 104
+        },
+        {
+          "commandId": "command:9e102ba0-edb7-4f51-a3ea-e87170456f3e",
+          "status": "committed",
+          "revision": 106
+        },
+        {
+          "commandId": "command:1f49dd35-845e-4f7d-9fc1-a81a9268dc4f",
+          "status": "committed",
+          "revision": 108
+        },
+        {
+          "commandId": "command:a6be6301-1b76-4fcd-901b-8b724413a1f3",
+          "status": "committed",
+          "revision": 110
+        },
+        {
+          "commandId": "command:a23a6ffe-e075-4cec-8c2a-72f3d750c8c3",
+          "status": "committed",
+          "revision": 112
+        }
+      ],
+      "appliedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": "event:0000000000000426",
+        "nextAt": 80077,
+        "decisions": 5,
+        "blocked": "等待正式治理排程"
+      },
+      "stoppedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 81858,
+        "decisions": 6,
+        "blocked": "已停止"
+      },
+      "receipts": [
+        {
+          "commandId": "command:30e8b86c-2e04-40ac-8337-1fae86ced380",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 102,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:dfc354b3-4f7e-4516-b0e3-56ad868f8bd0",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 104,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:9e102ba0-edb7-4f51-a3ea-e87170456f3e",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 106,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:1f49dd35-845e-4f7d-9fc1-a81a9268dc4f",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 108,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:a6be6301-1b76-4fcd-901b-8b724413a1f3",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 110,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:a23a6ffe-e075-4cec-8c2a-72f3d750c8c3",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-1-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 112,
+          "disposition": "applied"
+        }
+      ]
+    },
+    {
+      "speed": 10,
+      "dense": false,
+      "initialArmies": 0,
+      "replies": [
+        {
+          "commandId": "command:6333cc19-744b-4115-97dc-a47196f6ec40",
+          "status": "committed",
+          "revision": 116
+        },
+        {
+          "commandId": "command:cc3faf41-47d2-487d-beba-5de5e5629e61",
+          "status": "committed",
+          "revision": 118
+        },
+        {
+          "commandId": "command:f79f6e5c-24a9-4988-8603-c2342755e2ce",
+          "status": "committed",
+          "revision": 120
+        },
+        {
+          "commandId": "command:f3187afd-764f-40e5-8633-9f44c4c589b3",
+          "status": "committed",
+          "revision": 122
+        },
+        {
+          "commandId": "command:4d552938-ab99-4ee1-8f1d-cf48f07f6eed",
+          "status": "committed",
+          "revision": 124
+        },
+        {
+          "commandId": "command:f42c0143-29ee-43f2-93aa-1bc698e3ca68",
+          "status": "committed",
+          "revision": 126
+        }
+      ],
+      "appliedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": "event:0000000000000540",
+        "nextAt": 15723,
+        "decisions": 5,
+        "blocked": "等待正式治理排程"
+      },
+      "stoppedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 21701,
+        "decisions": 6,
+        "blocked": "已停止"
+      },
+      "receipts": [
+        {
+          "commandId": "command:6333cc19-744b-4115-97dc-a47196f6ec40",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 116,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:cc3faf41-47d2-487d-beba-5de5e5629e61",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 118,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:f79f6e5c-24a9-4988-8603-c2342755e2ce",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 120,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:f3187afd-764f-40e5-8633-9f44c4c589b3",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 122,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:4d552938-ab99-4ee1-8f1d-cf48f07f6eed",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 124,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:f42c0143-29ee-43f2-93aa-1bc698e3ca68",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 126,
+          "disposition": "applied"
+        }
+      ]
+    },
+    {
+      "speed": 10,
+      "dense": true,
+      "initialArmies": 100,
+      "replies": [
+        {
+          "commandId": "command:a11b328c-6635-4555-a8fc-d2c5442bce10",
+          "status": "committed",
+          "revision": 130
+        },
+        {
+          "commandId": "command:d8cc9a1c-270f-44a7-9e88-b4b230b11294",
+          "status": "committed",
+          "revision": 132
+        },
+        {
+          "commandId": "command:5c2cb2c0-e885-4b51-9d53-3b630d9b1966",
+          "status": "committed",
+          "revision": 134
+        },
+        {
+          "commandId": "command:c6956e3e-ab00-4c22-af0e-bf5f29c300e9",
+          "status": "committed",
+          "revision": 136
+        },
+        {
+          "commandId": "command:261300e2-e42a-40fa-9a0b-f6d05c80de35",
+          "status": "committed",
+          "revision": 138
+        },
+        {
+          "commandId": "command:ada18eca-9482-4c19-aef5-cff0c47216d5",
+          "status": "committed",
+          "revision": 140
+        }
+      ],
+      "appliedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 250,
+          "stone": 210,
+          "gold": 180
+        },
+        "period": 0,
+        "eventId": "event:0000000000000654",
+        "nextAt": 105206,
+        "decisions": 5,
+        "blocked": "等待正式治理排程"
+      },
+      "stoppedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 250,
+          "stone": 210,
+          "gold": 180
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 117638,
+        "decisions": 6,
+        "blocked": "已停止"
+      },
+      "receipts": [
+        {
+          "commandId": "command:a11b328c-6635-4555-a8fc-d2c5442bce10",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 130,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:d8cc9a1c-270f-44a7-9e88-b4b230b11294",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 132,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:5c2cb2c0-e885-4b51-9d53-3b630d9b1966",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 134,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:c6956e3e-ab00-4c22-af0e-bf5f29c300e9",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 136,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:261300e2-e42a-40fa-9a0b-f6d05c80de35",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 138,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ada18eca-9482-4c19-aef5-cff0c47216d5",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-10-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 140,
+          "disposition": "applied"
+        }
+      ]
+    },
+    {
+      "speed": 50,
+      "dense": false,
+      "initialArmies": 0,
+      "replies": [
+        {
+          "commandId": "command:7ceb4c85-a80e-4373-af60-3d524c756569",
+          "status": "committed",
+          "revision": 145
+        },
+        {
+          "commandId": "command:53990856-8b24-4bbe-9a01-f9bf0e307f2d",
+          "status": "committed",
+          "revision": 147
+        },
+        {
+          "commandId": "command:ec3af81f-754e-4679-b0b1-c6f4075407c4",
+          "status": "committed",
+          "revision": 149
+        },
+        {
+          "commandId": "command:4127f556-57f6-49b0-9ff5-c2a6a7be6653",
+          "status": "committed",
+          "revision": 151
+        },
+        {
+          "commandId": "command:4e4193a6-975d-4e38-8866-30c9e1e5e58c",
+          "status": "committed",
+          "revision": 153
+        },
+        {
+          "commandId": "command:9bee614b-1557-4145-bd62-86c67cdf9c19",
+          "status": "committed",
+          "revision": 155
+        }
+      ],
+      "appliedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": "event:0000000000000769",
+        "nextAt": 65100,
+        "decisions": 5,
+        "blocked": "等待正式治理排程"
+      },
+      "stoppedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 89715,
+        "decisions": 6,
+        "blocked": "已停止"
+      },
+      "receipts": [
+        {
+          "commandId": "command:7ceb4c85-a80e-4373-af60-3d524c756569",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 145,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:53990856-8b24-4bbe-9a01-f9bf0e307f2d",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 147,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ec3af81f-754e-4679-b0b1-c6f4075407c4",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 149,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:4127f556-57f6-49b0-9ff5-c2a6a7be6653",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 151,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:4e4193a6-975d-4e38-8866-30c9e1e5e58c",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 153,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:9bee614b-1557-4145-bd62-86c67cdf9c19",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-false\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 155,
+          "disposition": "applied"
+        }
+      ]
+    },
+    {
+      "speed": 50,
+      "dense": true,
+      "initialArmies": 100,
+      "replies": [
+        {
+          "commandId": "command:0e336f93-fdf5-416f-ab40-aef66f81aa82",
+          "status": "committed",
+          "revision": 163
+        },
+        {
+          "commandId": "command:abcbf5d1-ec1c-4346-9107-b2320130db9b",
+          "status": "committed",
+          "revision": 165
+        },
+        {
+          "commandId": "command:9cae2997-61bd-497c-9d3a-4920e23a995b",
+          "status": "committed",
+          "revision": 167
+        },
+        {
+          "commandId": "command:ff330c8a-8277-4b2f-9a77-5421557082ce",
+          "status": "committed",
+          "revision": 169
+        },
+        {
+          "commandId": "command:c5516c33-30ea-41f1-9e42-dec09ea391c9",
+          "status": "committed",
+          "revision": 171
+        },
+        {
+          "commandId": "command:aae01ffd-2563-4cb5-a6df-600fba88fffe",
+          "status": "committed",
+          "revision": 173
+        }
+      ],
+      "appliedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": true,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 250,
+          "stone": 210,
+          "gold": 180
+        },
+        "period": 0,
+        "eventId": "event:0000000000000898",
+        "nextAt": 225240,
+        "decisions": 5,
+        "blocked": "等待正式治理排程"
+      },
+      "stoppedGovernor": {
+        "cityId": "city:000",
+        "ownerFactionId": "faction:000",
+        "enabled": false,
+        "policy": "reserve",
+        "budget": 2400,
+        "reserve": 180,
+        "spent": {
+          "food": 130,
+          "wood": 250,
+          "stone": 210,
+          "gold": 180
+        },
+        "period": 0,
+        "eventId": null,
+        "nextAt": 291944,
+        "decisions": 6,
+        "blocked": "已停止"
+      },
+      "receipts": [
+        {
+          "commandId": "command:0e336f93-fdf5-416f-ab40-aef66f81aa82",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 163,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abcbf5d1-ec1c-4346-9107-b2320130db9b",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 165,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:9cae2997-61bd-497c-9d3a-4920e23a995b",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 167,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ff330c8a-8277-4b2f-9a77-5421557082ce",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 169,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:c5516c33-30ea-41f1-9e42-dec09ea391c9",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"economy\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 171,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:aae01ffd-2563-4cb5-a6df-600fba88fffe",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:delta-matrix-50-true\",\"issuerId\":\"faction:000\",\"payload\":{\"budget\":2400,\"cityId\":\"city:000\",\"enabled\":true,\"policy\":\"reserve\",\"reserve\":180,\"type\":\"governance.set\"}}",
+          "committedRevision": 173,
+          "disposition": "applied"
+        }
+      ]
+    }
+  ],
+  "safety": {
+    "replay": {
+      "commandId": "command:efa600b8-ea13-4d12-8cca-1d22578cfb0a",
+      "status": "duplicate",
+      "revision": 185,
+      "originalRevision": 184
+    },
+    "rejected": {
+      "commandId": "command:stale-final-ea29cf34-96c8-49ca-86ea-39c397e79547",
+      "status": "rejected",
+      "revision": 185,
+      "reason": "治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。"
+    },
+    "economicAck": {
+      "commandId": "command:economic-stale-37af6474-704e-4de7-9121-a4fa6c135b66",
+      "status": "rejected",
+      "revision": 185,
+      "reason": "世界版本已更新，請重新確認狀態。"
+    },
+    "beforeGovernor": {
+      "cityId": "city:000",
+      "ownerFactionId": "faction:000",
+      "enabled": true,
+      "policy": "reserve",
+      "budget": 2400,
+      "reserve": 180,
+      "spent": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "period": 0,
+      "eventId": "event:0000000000001015",
+      "nextAt": 3600000,
+      "decisions": 1,
+      "blocked": "資源儲備方針：保留庫存"
+    },
+    "afterGovernor": {
+      "cityId": "city:000",
+      "ownerFactionId": "faction:000",
+      "enabled": true,
+      "policy": "reserve",
+      "budget": 2400,
+      "reserve": 180,
+      "spent": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "period": 0,
+      "eventId": "event:0000000000001015",
+      "nextAt": 3600000,
+      "decisions": 1,
+      "blocked": "資源儲備方針：保留庫存"
+    },
+    "stockBefore": {
+      "food": 49999,
+      "wood": 50000,
+      "stone": 50000,
+      "gold": 50000
+    },
+    "stockAfter": {
+      "food": 49999,
+      "wood": 50000,
+      "stone": 50000,
+      "gold": 50000
+    }
+  },
+  "exile": {
+    "labelsEnabled": false,
+    "paintCount": 47,
+    "paint": {
+      "at": 39734.30000001192,
+      "x": 628,
+      "y": 413.09634210526315
+    },
+    "site": {
+      "id": "wild:exile-0000000000000006",
+      "exile": true,
+      "sourceFactionId": "faction:006",
+      "civilizationId": "civ_japan",
+      "createdAt": 14781838,
+      "spawnSlot": 439,
+      "generation": 0,
+      "region": 33,
+      "x": 289,
+      "y": 67,
+      "resource": "bandit",
+      "level": 1,
+      "phase": "active",
+      "defenders": {
+        "militia": 12
+      },
+      "initialDefenders": {
+        "militia": 12
+      },
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      }
+    }
+  },
+  "civilian": {
+    "before": {
+      "商": {
+        "x": 650,
+        "y": 492.04929220591725
+      },
+      "拓": {
+        "x": 650,
+        "y": 488.23240760091585
+      },
+      "工": {
+        "x": 650,
+        "y": 488.23239960402054
+      }
+    },
+    "after": {
+      "商": {
+        "x": 649.9999999999993,
+        "y": 466.57860472150765
+      },
+      "拓": {
+        "x": 650,
+        "y": 454.2715309783048
+      },
+      "工": {
+        "x": 650,
+        "y": 454.2715051933019
+      }
+    }
+  },
+  "browser": "154.0.8037.98",
+  "url": "http://127.0.0.1:5174/",
+  "workers": [
+    "http://127.0.0.1:5174/assets/runtime.worker-CPqSkQJI.js",
+    "http://127.0.0.1:5174/assets/mapRaster.worker-Bm8EOm9D.js"
+  ],
+  "serviceWorkers": "blocked in this fresh verification context to ensure final build",
+  "success": true
+}

@@ -1,0 +1,31 @@
+{
+  "on": 64,
+  "off": 0,
+  "exile": {
+    "id": "wild:exile-0000000000000006",
+    "exile": true,
+    "sourceFactionId": "faction:006",
+    "civilizationId": "civ_japan",
+    "createdAt": 14781838,
+    "spawnSlot": 439,
+    "generation": 0,
+    "region": 33,
+    "x": 289,
+    "y": 67,
+    "resource": "bandit",
+    "level": 1,
+    "phase": "active",
+    "defenders": {
+      "militia": 12
+    },
+    "initialDefenders": {
+      "militia": 12
+    },
+    "loot": {
+      "food": 0,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    }
+  }
+}

@@ -1,0 +1,1066 @@
+{
+  "schema": 1,
+  "baseline": "4ed0f1073aafbc675b24bf8351818e76a45a76a9",
+  "branch": "work/r3-browser-verification",
+  "createdAt": "2026-10-13T00:53:43.4479312+08:00",
+  "description": "Raw Windows Chrome evidence, including failed attempts and ignored traces. Hashes refer to raw evidence bytes; evidence ZIP preserves these bytes independently of Git line-ending normalization.",
+  "archive": "G:\\Projects\\Lieguo\\artifacts\\r3-browser-delta-2026-10-13\\R3_Browser_Delta_Evidence.zip",
+  "files": [
+    {
+      "path": "docs/validation/r3-local-2026-10-12/01-home.png",
+      "bytes": 1061894,
+      "sha256": "9dce24dc93f8edc808c5edd688ee39707c9208c59936e24654a15d86530d9510",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/02-new-game-form.png",
+      "bytes": 1536887,
+      "sha256": "c201a4dfa427e1474e31a0287b47c29561314187cdd25afaf57b36aa691fb2ac",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/03-new-city.png",
+      "bytes": 1147673,
+      "sha256": "29f0731471345ac5469b48c99eba6375b0f2f4248cdb154628dc8e25905c0106",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/04-world-map.png",
+      "bytes": 1339315,
+      "sha256": "74c258590c88898b690c81d786e3aa1404dc1a2809630c3ae650a78d18f06cf3",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/05-map-zoom-in.png",
+      "bytes": 1507408,
+      "sha256": "2c43611c14309e9a2f835d2b12bd59cc8d480c23a1af78c98041a3254ea19018",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/06-map-pan.png",
+      "bytes": 1625853,
+      "sha256": "ba1dec196a8de779b3bec7d3957f6d9b261352e395e6416a11ab6f0c41a3f0fd",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/07-map-overview.png",
+      "bytes": 821205,
+      "sha256": "2335c99d603062292964351fc86b2106f71b80713df76bb7909a019918ec50b7",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/08-map-home-selected.png",
+      "bytes": 395549,
+      "sha256": "649ee0457ea8fb95fe6e532ba271f4f40bc897ae9d943f7abed070e081c687da",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/09-field-detail.png",
+      "bytes": 342353,
+      "sha256": "8a774fff39adeb702129b9b9830171d32c6b57978feca5754817f61a328d4de6",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/10-field-construction.png",
+      "bytes": 964002,
+      "sha256": "41837d4980b53a14a6297bb5ef195d39f1581254672ebce6fa8a1db33dff8972",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/11-governance-prerequisite.png",
+      "bytes": 136879,
+      "sha256": "2db20a68d838adaabc9ed3ffc6fd1f369ac13b0b12fa13b2ed3936f366e5b79b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/12-ai-vs-ai-lv15-siege.png",
+      "bytes": 1423195,
+      "sha256": "cb78f5940f6fd075fbfb0f20638c870f1f6781ec56320fcdd6320413788dd775",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/13-siege-next-round.png",
+      "bytes": 1830643,
+      "sha256": "0fc1a354261b9513f90759b2c44f345a4d4572b5bf37c6122492bb17e7a0e3c4",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/14-100-armies-overview.png",
+      "bytes": 999813,
+      "sha256": "c92d9cc12490953e9506d66174ab56996f62ed8188a5ff3d77680e0257eb3a20",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/15-governor-commission.png",
+      "bytes": 141869,
+      "sha256": "3239b571f19fd239678c5d4b0c563043ea2b91fd0baae83e343d2bd8641b8f46",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/16-governor-stopped.png",
+      "bytes": 145437,
+      "sha256": "4d7a991646941ed28bff5c5f9ebdcb8fd9e957f088ea1128302c643ed2cefc5a",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/17-city-interior.png",
+      "bytes": 1728275,
+      "sha256": "ebd5e3003652822cb13f609b4c003514de08997acbbf63a910c936192fd05f5b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/18-townhall-detail.png",
+      "bytes": 388109,
+      "sha256": "370e56a92c913c95a3452543ddcda5f5feebf29637791ff31406b5ea29cd9718",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/19-reloaded-city.png",
+      "bytes": 1865993,
+      "sha256": "046ab597eb2e0a91a9dcea06c752c737998836f1ba4d78ae9c48382bb1dc780b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/20-mobile-map.png",
+      "bytes": 356247,
+      "sha256": "5c4fc8936961644942f93d1bebe41f50966a58c02d83e0ec9f16a859c2bc9b39",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/21-mobile-touch-pinch.png",
+      "bytes": 305463,
+      "sha256": "518755d2186754e0f7724c5cc754938dd3ed73bd48826fa5977749f7bccc1e90",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/22-siege-reduced-motion.png",
+      "bytes": 1441096,
+      "sha256": "739946276d42cc17cc7a6668f25b9648182443fbcace1d62de6812829a108d5b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/23-siege-live-before-final.png",
+      "bytes": 1629919,
+      "sha256": "55251c5d223c32e1cbc24e2a3b9e4cc1f01beae0e313dfb38aaf71a006f0c6b4",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/24-siege-final-marker-removed.png",
+      "bytes": 1818427,
+      "sha256": "77c52871cb7d84bd131a6d25dbe51ada294b9bb9b722d678389c27ff79045bb8",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/25-autonomous-ai-before.png",
+      "bytes": 1179201,
+      "sha256": "a9174b5e8ca89a568a6b4a58c79bd52ca553bdfa04955c035fa3211bcb12c10f",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/26-autonomous-ai-after.png",
+      "bytes": 1613697,
+      "sha256": "9837ff8c6993c3b5c9b0ca47c02bb6c8cae9ba17a650287e84b0f9ca934d4315",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/27-quiet-governor-commission.png",
+      "bytes": 135011,
+      "sha256": "64c112f5340a8cdc295d9bfa5b3a2a17542023d8fe523394f9f7ce2eb632f039",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/28-governor-reserve-applied.png",
+      "bytes": 138702,
+      "sha256": "1ceab4eb3db59ed502d184bc6e09375e7e5e07ce5c446f51a5d97823d73e9629",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/29-quiet-governor-stopped.png",
+      "bytes": 133975,
+      "sha256": "137142958c3263af715b36f1ba19e956ca10bb512ba1e6d48e07cc1d8d188ef6",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/actions.json",
+      "bytes": 61396,
+      "sha256": "e58d49fd442285221726fab27319f99359a9b4e7bfb042909317bd0e807da3f1",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/autonomous-ai.realm-save",
+      "bytes": 614333,
+      "sha256": "63a356283c36e032183eee36c4fb46e131362444c0bb0e4a6d06e8ccf4e694ff",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/autonomous-final-state.json",
+      "bytes": 61460,
+      "sha256": "90f8adf37df5dccdd5f064f861fe746f6e912d70b07ad4e9bb26537c4629886e",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/autonomous-loaded-state.json",
+      "bytes": 16021,
+      "sha256": "2d153f9d4fe26f0b0852d8b7a2ef628ee6f1e9c7970f4b55857e8d5f7570fd28",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/autonomous-map.mjs",
+      "bytes": 2493,
+      "sha256": "ae46805b05b59f1031aace48236919d9e4c6d5c58a8a2395cd241ebc71045c88",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/autonomous-movement.json",
+      "bytes": 1278,
+      "sha256": "cb4809cabac4d52699acbbb030b00d5103f179fab1249a43a590330eeac60cf7",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/browser-driver.mjs",
+      "bytes": 2862,
+      "sha256": "cbf8d101f433536957979c137edc5f38b31f683eda8896ca3859b8823d3e938e",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/console.json",
+      "bytes": 3272,
+      "sha256": "1574308d52dbf5bdf2cf1848de439194044be822530571209bbf440c31c9007c",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/controlled-100-siege.realm-save",
+      "bytes": 968750,
+      "sha256": "5631b3c668ca41c28a39accfbdba691d0028ef397e4e5ee504d09fbbf53b242a",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/controlled-final.realm-save",
+      "bytes": 784890,
+      "sha256": "0e3b13caa62c37a2f03f84e763d4f097823d1e94420ea93001ed5c93f2316e46",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/controlled-loaded-state.json",
+      "bytes": 1271840,
+      "sha256": "a8785b188c35cf39ea1a73b6e4cd532de7325c66fc5ce0041bfd1f27fd7d478d",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/controlled-next-siege-round.realm-save",
+      "bytes": 968970,
+      "sha256": "890a50b8fc43066f2cf2d6b24344a6ff5d3664173210808b99749b953cabe957",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/finish-scenario.mjs",
+      "bytes": 1260,
+      "sha256": "f1148456527812022d81c562f9cc0e9cef5754e0b747be1c11a9c3ed09c50a7b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/governance-quiet.realm-save",
+      "bytes": 449907,
+      "sha256": "57a5b0fbcd0744258f90a5ffbbf327051294bcee41e64e3411479a43b1ca74ff",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/governor-commission-state.json",
+      "bytes": 1289139,
+      "sha256": "a53916583cfc93d3ab2864ffe9059ecdafc157de34a7b5a049fbe928259fa036",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/governor-executed-state.json",
+      "bytes": 1160742,
+      "sha256": "5a0ff9d694259da40eabe460987b16b3f7f9e78aadaae0a6312e4f48f73665b0",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/manifest.json",
+      "bytes": 9861,
+      "sha256": "83a75c5a9647e61e85298ed8cf45a6c59d0fc929c5213a233a72685588155f4e",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/mobile-verification.mjs",
+      "bytes": 2178,
+      "sha256": "bab0faa44aee7c9bf48641229bad432796890eb95f2aa392bf1e49ae63d9e73b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/normal-new-game.realm-save",
+      "bytes": 647665,
+      "sha256": "8039b9ed91f5f1ac08dd870b356e3b45d13c78b78fcd11e3f42be15a79e059a3",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/quiet-governor-comparison.json",
+      "bytes": 13464,
+      "sha256": "2af0bc1ff536078aac086b720350fc9989458e7d211e67d81665cdf872ddbaac",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/reload-state-comparison.json",
+      "bytes": 1761551,
+      "sha256": "24260204d17c4a415cf6674b1def48997668cef1484d24ce1897c8f32d65bffc",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/REPORT.md",
+      "bytes": 8728,
+      "sha256": "47943b29982eccc931c174a5d0581f48acb0035f41570fac36f055d471728cbe",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/scenario-metadata.json",
+      "bytes": 37839,
+      "sha256": "d770542ffd4d655bca972983e6d043ce03d13025a530cf8bff0ec8e6ece1e62c",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/scenarios.mjs",
+      "bytes": 7724,
+      "sha256": "fa80c025afc21493ecde5470a49b8078a757be722347e6670d66e5dd02cb00a1",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/siege-final-live-state.json",
+      "bytes": 766316,
+      "sha256": "db7747851fdb1e3acc1e34c86ea0f78c251db6ed8c3b621f79bb8e51f8874964",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/siege-final-metadata.json",
+      "bytes": 2254,
+      "sha256": "1dffa32406373bcc8343ff50a7485b3600ddff33c31e5c778a04aa62912a917c",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/siege-live-next-round-state.json",
+      "bytes": 1272430,
+      "sha256": "b8b5a7f1f499f40b21cf9ba6c5cace4317b06dbe76caf40eecd76adfb61cc839",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/siege-near-final-live-state.json",
+      "bytes": 764524,
+      "sha256": "702e59515dc59d770caf4ae6ca223c67517936ec75fad0e348321b70a1423668",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/trace-governance.zip",
+      "bytes": 28048644,
+      "sha256": "58366b3e1d9e32aae02a532f83035613c4b4289cef45fa3d5a633aaa150419bc",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-local-2026-10-12/trace.zip",
+      "bytes": 355990348,
+      "sha256": "7f1fe6b8f07ff52b22a1b6b6cf8b70abc9903f18e608e7ba1ba056399aae0a3e",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/20-mobile-map.png",
+      "bytes": 292359,
+      "sha256": "c7f2057820aa6e589f6d1bba792d9ebc37a692636c3fd754534aa0b0e41e10fa",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/21-mobile-touch-pinch.png",
+      "bytes": 242112,
+      "sha256": "d09fe6fa50260d7d360ed4f06165144392c2426a0b88ddbe53138a19f020f09e",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/actions.json",
+      "bytes": 72126,
+      "sha256": "8d1cb390562ab3cb1e7cb4b910db9ee6abe491e153de4e8d1bdcab94e78f43b1",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/baseline-governance.png",
+      "bytes": 150919,
+      "sha256": "4d06f75c030270850b413ea1e5ad35bea21b8cddc3a48b3f719424b35f9a9951",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/baseline-regression.json",
+      "bytes": 18783,
+      "sha256": "8b0a03b49d3732ee9a76107d52db6d72488116256799428d437c3b31b6a63daa",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/baseline-runtime.json",
+      "bytes": 14433,
+      "sha256": "27a771bf091ed43fde42e2f43fb8837676acba4d3f1dceea75fa53577bc78687",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/baseline-trace.zip",
+      "bytes": 15853435,
+      "sha256": "072b6648812c01cda9fc1cdc611c5419286be446012220cb0fc076063ddeff35",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/browser.mjs",
+      "bytes": 2915,
+      "sha256": "4d7a9770ce22298f302cff18c623890ea2a54d837538f3890823a6423f187512",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/build-final.txt",
+      "bytes": 1029,
+      "sha256": "8d0cfa2d21686bf1aa8ca5fa3379061b8d049e7ee23e7ee98e6af99f5e6ef640",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/build.log",
+      "bytes": 1031,
+      "sha256": "938930f519f3b79ff6d210a63fb3677d09b36b51de908867b4338381e678a00a",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castle-0.realm-save",
+      "bytes": 451603,
+      "sha256": "e67c6ece8eddf9b821b9458c2194c39e1518040d669a35658a8308fa7f9e7483",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castle-1.realm-save",
+      "bytes": 451605,
+      "sha256": "4d1b4b959ece8c88f785161f827c2c678b3e4eaf4a854c123fba5ea19be43969",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castle-2.realm-save",
+      "bytes": 451606,
+      "sha256": "502d244a6293697d56cc877f2cb888f446740b5d3711123fecd12430c7cdbb30",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castle-3.realm-save",
+      "bytes": 451601,
+      "sha256": "1039df90acf4726c2f105ec5c4b2b9ba6972a26cfdd1a05fb36e59ef363d3f0f",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castle-4.realm-save",
+      "bytes": 451600,
+      "sha256": "7cf775129267d2e9958e77b4d3b0eee689f0fb64ccd06fbbf38f6f52e30db84d",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castle-5.realm-save",
+      "bytes": 451602,
+      "sha256": "6f166fa741b50dd07e184472be57692d39f60f44c8a91e12a089f6fcf3dffa4b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castles-locator-failure-trace.zip",
+      "bytes": 8503173,
+      "sha256": "02f53a79f1971f4cfbdc46a80ec8d6d9944c90196a75dfdb0bee58d4aac2a724",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/castles-trace.zip",
+      "bytes": 24076886,
+      "sha256": "3c17a4b93ad95e13508d2033c15e6093b79f6f106773f2eafe57709560210b71",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-after-verified.png",
+      "bytes": 1830303,
+      "sha256": "4d8b8cfd538b30772698f43765c7ac43b84ee1982e1aaece5fc1768ddd35e0ad",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-after.png",
+      "bytes": 1820539,
+      "sha256": "325a0847ddbb2e50e43c9c958c0c1430ea788dbcafdef88925cd3e402be35894",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-before-verified.png",
+      "bytes": 1793322,
+      "sha256": "1198b7eed8ee7e902636c5c790bf4ba761aca6b7b91791634968736d1477bbfc",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-before.png",
+      "bytes": 1443302,
+      "sha256": "5a6d0c6be5364d926df7bfec911d2bce337fab801b3450bfaacd741289763d15",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-final-after.png",
+      "bytes": 1644645,
+      "sha256": "8887b1c5d75ac9dc7811a9b8ff16e60e16921fdb948f0b190c3ae6f721dc2819",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-final-before.png",
+      "bytes": 1383279,
+      "sha256": "bcacd58d76a455943933a023ac33732822fa0e421f0b6c43385a968aa2564bae",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-movement-verified.json",
+      "bytes": 1934,
+      "sha256": "e9f0fd3201f8bf9dd5bdb5dbf12123395f7dc65f2c7adc6e2d39832df285dce8",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-movement.json",
+      "bytes": 1813,
+      "sha256": "aa2567aab34c7c00287cf05c96e446cfa96216b073361a967817b1a042eb53ba",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-reduced-motion.png",
+      "bytes": 1830435,
+      "sha256": "98ba40824dc08f114e173d0c177fdda84a22aac4c3f743c9b9451835246eb207",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-trace.zip",
+      "bytes": 26147052,
+      "sha256": "d63c0544ee7f6311b9c3736aaec202b88380333229b447a0ca70262916e5b7a9",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilian-verified-trace.zip",
+      "bytes": 16789945,
+      "sha256": "414def76a1d6b10b6abba18d44eb1f9b7cd0d8bbbd3dc69e242a8749ab429533",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/civilians.realm-save",
+      "bytes": 458097,
+      "sha256": "3352b6b9819a20726629249d342b270590bdd2f1817e4f4260272d26eb575004",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/console.json",
+      "bytes": 12439,
+      "sha256": "b752bf04b6be69ac1c483042564a9c1840a13946cca864df49425bd12aae3b89",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/enemy-dispatch-masked.png",
+      "bytes": 391042,
+      "sha256": "1c6dad22622e94c0187782c1021e2f0537ef9e637ee8feedf2cb45d482da8421",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/enemy-intel-masked.png",
+      "bytes": 370249,
+      "sha256": "9d1a9b501e0a6b952c7ae1e37b5321384e4001456016710ae8c9dde42cd62296",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/enemy-intel.json",
+      "bytes": 6236,
+      "sha256": "adf78583edde44028d581bf4f71d479a54f6fa211d309e6fd56d98338d4be3db",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/exile-baseline-trace.zip",
+      "bytes": 11031023,
+      "sha256": "a1a460a9715fc36e2a024082736dee4d193baf7c283f1ec23adf273c2d7cf470",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/exile-labels-baseline.json",
+      "bytes": 544,
+      "sha256": "b4e67fa96868e8b07a9fb24a67d8cd3e408ea962d582422bb362aa1d9c3a17d2",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/exile-labels-off-baseline.png",
+      "bytes": 1323450,
+      "sha256": "677d6e1ddd91c88bee64c0d2f05c52ecdf926cd2e9f4053bff12626f1d844eb1",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/exile-labels-off-fixed.png",
+      "bytes": 1675618,
+      "sha256": "b468480b4ce8c8b1ce8fdc3bb03e04f965171c27663cd36a6c2d108041da8b9f",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/exile-labels-on.png",
+      "bytes": 1449826,
+      "sha256": "5a0721ca812e95a1784d7cffc028464d66ec2bcdb3104bf4d52083b969dd812b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/exile-marker.png",
+      "bytes": 1783148,
+      "sha256": "572e64ce04b839c6e87770593db8888362fdd00ee158dc55a238b67ac4ffaabd",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/final-chrome-trace.zip",
+      "bytes": 76059599,
+      "sha256": "4065499dae280d9cd75c95a34ed2310803bc7fe8bfa2a31e93610687a401c1fc",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/final-chrome.json",
+      "bytes": 31408,
+      "sha256": "e48f076e5a7e5d25dc3d5ab743b5caa51dec0bbe2544aea0ea82d2fac407f4d6",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/final-chrome.mjs",
+      "bytes": 8404,
+      "sha256": "c49f683bde174c9540fdbaab675908ec16a808e0d7dcfedc0cfd1636379e884b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/final-console.json",
+      "bytes": 426,
+      "sha256": "37b96f42bba6fe2984d68bc56cf20e5295a95f6f61c912669d0bb5cf64a9cd94",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/final-production-home.png",
+      "bytes": 1060567,
+      "sha256": "91e23407e4c427e9486997e35f200a4938f71725ba93f987ddea91a2b0cc98a0",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/fixed-CAS-governance.png",
+      "bytes": 142504,
+      "sha256": "c18ac8d92b992bd71796a3c685e5075f06fa72a770ae13229a96cb3125063111",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/fixed-CAS-trace.zip",
+      "bytes": 10233706,
+      "sha256": "1335224ea6f056e1713fcbb7228fd3001c500b87cc5762cdc7fae5c37242db84",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/fixed-governance.png",
+      "bytes": 149890,
+      "sha256": "fcbf7a20a8eb7f80f0ec858c2ba6a2d649e06f3c160c9e76ac349a135181a62b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/fixed-trace.zip",
+      "bytes": 8356564,
+      "sha256": "9a65e17a00fd4707cf1230216e211f87f509b3d709a76c626814fd01e4130d5b",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castle-0.png",
+      "bytes": 409517,
+      "sha256": "afd992d979fa2abc4722f938f099b7a4689e954200e8463348cbaef2963b8fc5",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castle-1.png",
+      "bytes": 411431,
+      "sha256": "7ca01513feea1608e40ce2b0e235145639e9896fe0f5eafbe47d82e788dad3ea",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castle-2.png",
+      "bytes": 393885,
+      "sha256": "81cbcb45ba39a46f45ff4b26940803a61e5794e9e9de3ae26fe71bb351680537",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castle-3.png",
+      "bytes": 411772,
+      "sha256": "b5eebd17af1f4a4ed0f410e4f23ff4c9d21dda8e6c13594faa7a25f3e4196782",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castle-4.png",
+      "bytes": 408935,
+      "sha256": "21a7e5b5f2b01e1128a0cb710eaf43cafba121d4093da53052cf742455bf9455",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castle-5.png",
+      "bytes": 411725,
+      "sha256": "bde2e11eff125c7a53e5eca4b85659e536cb259b8c4a919f11388d58b3806a64",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/foreign-castles.json",
+      "bytes": 7645,
+      "sha256": "518f79a6b496056b9b950164521724728ef90374d28db1c888351a942ec607bf",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/full-regression-final.json",
+      "bytes": 399509,
+      "sha256": "9f4f546ce62dbfbf3bdaa06d022d18575cfabc7e7af23f2743139b1fee626aea",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/full-regression.json",
+      "bytes": 410740,
+      "sha256": "c9b74d03c549e16c409f9947bdb7508ddabd8186eebbdb194b47ff0248316d9a",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-10x-100.png",
+      "bytes": 143035,
+      "sha256": "1bb9270ec3d025ce978170a2bc9d307ead609bf1c049f2aec840217903bc7f69",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-10x-low.png",
+      "bytes": 142639,
+      "sha256": "f6b64304c1fe814f4bc1d26bef5bb2aa6dfd3511372b17eaf7a8b091ed13161d",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-1x-100.png",
+      "bytes": 143829,
+      "sha256": "01909efa2817a5c7a186a5b3f6c2435d28fa7615b93827544c1750d1cffbaa89",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-1x-low.png",
+      "bytes": 147894,
+      "sha256": "ed806ab2707917c5c134e6c1f757e28af2a347a5aa5ea304e54d27a9288b2271",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-50x-100.png",
+      "bytes": 143336,
+      "sha256": "69110d72604fdff4ea8a636bdc2f8afa624c6358f622777a0ed5ae3c363b786d",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-50x-low.png",
+      "bytes": 142161,
+      "sha256": "7a118c2da3d4eee14f1bb0dd4f0e73ba5e38f33adda8c6e6a4507f0909aea728",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-final-10x-100.png",
+      "bytes": 143172,
+      "sha256": "5d78a1aa4e92273de90e8b3f27c41950e20eb9c8dc6f81672f315f5c1e9c9fa5",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-final-10x-low.png",
+      "bytes": 142433,
+      "sha256": "262f7975647627ba57eeea1d2153131e55988d123a49e73b1585640e07560439",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-final-1x-100.png",
+      "bytes": 143879,
+      "sha256": "1748b5180886549e9feb05f5a45bb8339775d97feb1f60659fa208c2c5b441fe",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-final-1x-low.png",
+      "bytes": 147894,
+      "sha256": "ed806ab2707917c5c134e6c1f757e28af2a347a5aa5ea304e54d27a9288b2271",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-final-50x-100.png",
+      "bytes": 143579,
+      "sha256": "78fbbfd6e3817a458f02f18996618726298ab8116439f3fb7fe52296ff2be5d0",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-final-50x-low.png",
+      "bytes": 142031,
+      "sha256": "d5fea7ebeab54b7a855f31bc3d7e8ad75009cae46b19174819cf768ba219eb1e",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-matrix.json",
+      "bytes": 26711,
+      "sha256": "1f768bc083b22b5e487c137c5e43e6c0daa09661f2c1c34960cc0c83c9abb3d6",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/governance-stale-guard.png",
+      "bytes": 150585,
+      "sha256": "7003630e9097cb287a8c7bc2ab0ca8a36870fbebea169858d10f4f3a1e8604bb",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/intel-target.json",
+      "bytes": 2465,
+      "sha256": "f01b48c15dcf849afa5cbc5d512cde3a814a92595cec2ff180e2d7defb87b2df",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/intel-trace.zip",
+      "bytes": 11372573,
+      "sha256": "4671a2ff35db04e53cfce8cb47c04f57659f26fcb3a54c86d5d60ad5868a7e0e",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/intel.realm-save",
+      "bytes": 702306,
+      "sha256": "10c36f9c6a07645baf47ed922fdbbe1ffc67487ba4d6aa3af09052baab4da307",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/intermediate-runtime.json",
+      "bytes": 61650,
+      "sha256": "5e1f34c6d5953a03eb4e86630a8469b623f7febbe50379ca1d5afcd5e2c5c8c9",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-1-false.realm-save",
+      "bytes": 450021,
+      "sha256": "0466367ed729a68a6a3a42c9e64ad9490b1b861fbaaae819167eaaa6d1369738",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-1-true.realm-save",
+      "bytes": 968778,
+      "sha256": "655fdc86a1ce17ccb99d556089a22776a966b835087270435af5cd9dec229caa",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-10-false.realm-save",
+      "bytes": 450023,
+      "sha256": "a8da61a9a62fc64363c17a5de548325c2eb9a9177bf248eb09c91562f30c09d0",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-10-true.realm-save",
+      "bytes": 968780,
+      "sha256": "06ab3ee9677bc1f1e77b079a122b88f218fe4c69f7b3749a9d33bf9aee363ac4",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-50-false.realm-save",
+      "bytes": 450023,
+      "sha256": "95674d01e46662592cb7747681f155b1cbb9f65628d21ea0b18aac4ff011f2d7",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-50-true.realm-save",
+      "bytes": 968780,
+      "sha256": "04c433fa4dabcf727a7d5bdb41b2cb6b3f51b4c533927d2adb0e636d7042cd4f",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/matrix-trace.zip",
+      "bytes": 47040382,
+      "sha256": "66dd53f2b52c5e125dd52f195b49d8b55cf7848c0ebdcdb4de2a88463cfa6fa3",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/mobile-governance.png",
+      "bytes": 82926,
+      "sha256": "88f9ecda09e00162c00a44349bab2b0d1749312add6c632209679b4304e40139",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/mobile-locator-failure-trace.zip",
+      "bytes": 60858459,
+      "sha256": "00a17298626ceea883816ffce39d72e301c39daac15576865730f6a2a5b74e17",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/mobile-touch-reduced.json",
+      "bytes": 1694,
+      "sha256": "8ce239b601d037e3fb50b657f24e2180beffc4d0571bcf1abe8623c091cfd5ac",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/mobile-trace.zip",
+      "bytes": 13897770,
+      "sha256": "cc8fb22a6dce6cffaf88cc1f8fa0dec92e3a3d50cd5982a3fe11d352c984dada",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/production-harness-import-error-trace.zip",
+      "bytes": 86211915,
+      "sha256": "c3a6b3d6d6680fe7cecc1bac1304569c6fb651359027ee5c657ad393e36331d6",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/r3-complete-regression-final.json",
+      "bytes": 389415,
+      "sha256": "0a945cd541b8e7484020458c2235dbf37a2f97d2222a260283942227264bf5de",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/r3-complete-regression.json",
+      "bytes": 388893,
+      "sha256": "eb6272c7a2bfab113d67da9e57e225a876ef28d7ba1fd87c6025727a8b7ed9ff",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-before.png",
+      "bytes": 944874,
+      "sha256": "2581a9c16b2c50c9a0c59d28a4587a6aa5a77f5c2944c44bc32e9a4b8093da1b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-CDP-and-reduced.json",
+      "bytes": 1680,
+      "sha256": "a272618e1e8e9086921048d862ad8759037b1ba7a0471480746ddd2dbf6ce310",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-CDP-reduced-trace.zip",
+      "bytes": 5526781,
+      "sha256": "00e0ea4ab757ab2af23815434ddb290c9940daaa3711d569c0a22527560475f7",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-final-1x.realm-save",
+      "bytes": 662331,
+      "sha256": "3b86020d68a5078fdd48d264141ed0473aee68a5fa63d1a2571aec15b426046b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-final.realm-save",
+      "bytes": 644894,
+      "sha256": "cb4c37259778f53f9069b3230de77b698d455bf0418769daaef8fbc93433fc62",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-hmr-interrupted-trace.zip",
+      "bytes": 513190,
+      "sha256": "5fff792254b6cb4dfcbd5c51683f0ab18756906fcc8587c63119cf60b78baa7b",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-impact-expired.png",
+      "bytes": 1319709,
+      "sha256": "23873449a1021e736eb6983b17e1a0784b02cfed9c1cd3e1b785d7a8771a932a",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-impact-live-CDP.png",
+      "bytes": 2546146,
+      "sha256": "9c7a5773df0c45f90f856b64d41bc2e4664b54fa97e76d4e1e719575939fc261",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-impact.png",
+      "bytes": 1318986,
+      "sha256": "f8ed07f1c6b8d0eacf63346dfe3cd5193a1399b175f3fefb03845789c45de7f8",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-live.json",
+      "bytes": 1882485,
+      "sha256": "36e402de61c2832828fb560372e554f229dde1d60a55ee845d4c75867bc93411",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-load-no-replay.png",
+      "bytes": 1475446,
+      "sha256": "0b483af8dc6fd9270eaf6b659fc14a85604f120a4a927e7e2de3891bd300f668",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-recovery-no-replay.png",
+      "bytes": 1833650,
+      "sha256": "4e498bcbf3b4eaf4681de6861ae2a6a282539b7f6e4f5073ddcafbdd043fd99f",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-reduced-motion.png",
+      "bytes": 1833036,
+      "sha256": "c43d12e1c100c30c78906f22a8f0484bcd2cf8f3135a6e20e524a03513ce3b71",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid-trace.zip",
+      "bytes": 23777503,
+      "sha256": "2357f038370c64fe161c816d0effad17b0446ca80524a8681755343b9b212851",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/raid.realm-save",
+      "bytes": 451191,
+      "sha256": "371cef5e335d4ec5c99805b681da27f7407913f4d21cb7ef8828e506d26eb4d7",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/recovery-stale-point-trace.zip",
+      "bytes": 81063020,
+      "sha256": "49382b75bd9b548869164670e07f1fae264618cc15d8dea127fab1b216a06edb",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/recovery-trace.zip",
+      "bytes": 90870697,
+      "sha256": "95f51166470ac499cd76b1ae2cd84f1ebe50a1ca54253c70f831df2dba50ec22",
+      "gitExcluded": true
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/regression-final.json",
+      "bytes": 45572,
+      "sha256": "0248099cabe3d7fa71e74e2bbd8335b3b657e0d8591c4549d71c4a460e5c3092",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/regression.json",
+      "bytes": 44989,
+      "sha256": "b94a7425eaf73ab0e1ec7c928ce4fe394b4500394e45a4feeed1db58b6c8dfcb",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/REPORT.md",
+      "bytes": 10948,
+      "sha256": "740b9961581d539157e17833eda576b9edccae8b036d3ce2beaa7f63aa8e69c9",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/runtime.json",
+      "bytes": 322803,
+      "sha256": "682956c626941664c4895cf2135896c465f0b5ca88b6c687542526ce9ae1e27a",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/save-load-recovery.json",
+      "bytes": 3282118,
+      "sha256": "4c4f4403acaed58266439601c192e9e7595b227e9bc8ba74b6f1945f455683c1",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/scenario-metadata.json",
+      "bytes": 19501,
+      "sha256": "050316411295c868e74b0e7f382eb3f76715a11b4db5f91a8da5ab18a642b05b",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/scenarios.mjs",
+      "bytes": 7823,
+      "sha256": "afbf22da0bc14e94eeca6406f8c185b164c5ae4bab2a8d73b671433a3e70404e",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/seal.ps1",
+      "bytes": 5978,
+      "sha256": "931cdf64538acc8922aaeb35eca916466ad8e7fa554dbfd86f211f0b7a57362a",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/siege-reduced-motion.png",
+      "bytes": 1606255,
+      "sha256": "1e326da0369cd9547117b50cbad36837509b6ec571c604a2dd1a460281d0a2a2",
+      "gitExcluded": false
+    },
+    {
+      "path": "docs/validation/r3-delta-2026-10-12/townhall-fixed.png",
+      "bytes": 389920,
+      "sha256": "a10b7a1e19c5b370750eaa11e6f1fec9743c1405f7689548506a6866cf012882",
+      "gitExcluded": false
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "time": 16575000,
+  "battleId": "battle:0000000000000001",
+  "rounds": [
+    {
+      "time": 75000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 1,
+      "nextAt": 1575000
+    },
+    {
+      "time": 1575000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 2,
+      "nextAt": 3075000
+    },
+    {
+      "time": 3075000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 3,
+      "nextAt": 4575000
+    },
+    {
+      "time": 4575000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 4,
+      "nextAt": 6075000
+    },
+    {
+      "time": 6075000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 5,
+      "nextAt": 7575000
+    },
+    {
+      "time": 7575000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 6,
+      "nextAt": 9075000
+    },
+    {
+      "time": 9075000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 7,
+      "nextAt": 10575000
+    },
+    {
+      "time": 10575000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 8,
+      "nextAt": 12075000
+    },
+    {
+      "time": 12075000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 9,
+      "nextAt": 13575000
+    },
+    {
+      "time": 13575000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 10,
+      "nextAt": 15075000
+    },
+    {
+      "time": 15075000,
+      "battleId": "battle:0000000000000001",
+      "phase": "siege",
+      "siegeRound": 11,
+      "nextAt": 16575000
+    }
+  ],
+  "remainingBattles": [],
+  "finalReceipt": {
+    "battleId": "battle:0000000000000001",
+    "resolutionId": "resolution:0000000000000001.final",
+    "eventId": "event:0000000000000701",
+    "at": 16575000,
+    "round": 1,
+    "kind": "final",
+    "targetPoint": {
+      "x": 291,
+      "y": 68
+    },
+    "mission": "conquest",
+    "outcome": "held",
+    "ownerBefore": "faction:002",
+    "ownerAfter": "faction:002",
+    "qualificationBefore": "none",
+    "qualificationAfter": "none"
+  }
+}

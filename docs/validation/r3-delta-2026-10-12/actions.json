@@ -1,0 +1,1373 @@
+[
+  {
+    "at": "2026-10-12T16:00:46.097Z",
+    "id": "baseline-100-governance",
+    "code": "await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.getByRole('button',{name:'開始新遊戲',exact:true}).click();await page.getByLabel('領主名稱',{exact:true}).fill('R3 Delta');await page.getByRole('button',{name:'升起旗幟 · 開始戰役',exact:true}).click();await page.locator('.game-shell').waitFor();const s=await import('../r3-local-2026-10-12/scenarios.mjs');await s.importFixture(page,path.resolve(outDir,'../r3-local-2026-10-12'),'controlled-100-siege.realm-save');await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click();let results=[];for(let i=0;i<12;i++){await page.locator('.governance-controls select').selectOption(i%2?'reserve':'economy');await page.locator('.governance-controls input').nth(0).fill('2400');await page.locator('.governance-controls input').nth(1).fill('180');await page.locator('.governance-controls button').first().click();await page.waitForFunction(()=>!document.querySelector('.governance-controls button').disabled);const events=await page.evaluate(()=>window.__runtime);results.push(events.filter(e=>e.type==='commandAck').at(-1));}await page.screenshot({path:path.join(outDir,'baseline-governance.png')});await context.tracing.stop({path:path.join(outDir,'baseline-trace.zip')});return results;",
+    "result": [
+      {
+        "direction": "response",
+        "at": 26467.80000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:25ec6425-c8e5-456b-976d-24ad5ac43bc8",
+          "status": "committed",
+          "revision": 102
+        }
+      },
+      {
+        "direction": "response",
+        "at": 26795.30000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:dc71427f-00f5-49cf-9116-c9169e22d06b",
+          "status": "rejected",
+          "revision": 103,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 27152.5,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:45e03051-619c-442e-807b-1b32b7e83283",
+          "status": "rejected",
+          "revision": 104,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 27411.700000047684,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:d7ca1d46-3ba4-4c99-8fd4-50b491cf2286",
+          "status": "rejected",
+          "revision": 105,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 27676,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:278bdd43-7cd6-41ed-895c-4622b5f6606e",
+          "status": "rejected",
+          "revision": 106,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 28009.600000023842,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:b6de9c35-d7b9-4e1f-afa1-27ce4fd84532",
+          "status": "rejected",
+          "revision": 107,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 28321.80000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:565d786e-bf41-4a3f-a32c-8bf5934fe21c",
+          "status": "committed",
+          "revision": 108
+        }
+      },
+      {
+        "direction": "response",
+        "at": 28663.30000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:647e5a81-7b57-43c4-aa25-03c78ccae918",
+          "status": "rejected",
+          "revision": 109,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 28976.700000047684,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:d0a94d19-9023-4697-80c4-9f21e250fa53",
+          "status": "rejected",
+          "revision": 110,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 29275.5,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:3c178ad6-c0e7-4096-8486-78b35fcf5012",
+          "status": "rejected",
+          "revision": 111,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 29537.80000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:3d7ec767-aad6-4e27-bf09-d65103ea0add",
+          "status": "rejected",
+          "revision": 112,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 29890.200000047684,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:1a7c7f91-4813-49e3-89b1-cf3cc7490d57",
+          "status": "rejected",
+          "revision": 113,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-12T16:03:58.775Z",
+    "id": "fixed-100-governance",
+    "code": "await fs.copyFile(path.join(outDir,'runtime.json'),path.join(outDir,'baseline-runtime.json'));await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'載入進度',exact:true}).click();await page.locator('.game-shell').waitFor();const s=await import('../r3-local-2026-10-12/scenarios.mjs');await s.importFixture(page,path.resolve(outDir,'../r3-local-2026-10-12'),'controlled-100-siege.realm-save');await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click();let results=[];for(let i=0;i<12;i++){await page.locator('.governance-controls select').selectOption(i%2?'reserve':'economy');await page.locator('.governance-controls input').nth(0).fill('2400');await page.locator('.governance-controls input').nth(1).fill('180');await page.locator('.governance-controls button').first().click();await page.waitForFunction(()=>!document.querySelector('.governance-controls button').disabled);const events=await page.evaluate(()=>window.__runtime);results.push(events.filter(e=>e.type==='commandAck').at(-1));}await page.screenshot({path:path.join(outDir,'fixed-governance.png')});await context.tracing.stop({path:path.join(outDir,'fixed-trace.zip')});return results;",
+    "result": [
+      {
+        "direction": "response",
+        "at": 8240,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:1ab79ef1-d02b-4551-9db3-0c833b9d973d",
+          "status": "committed",
+          "revision": 564
+        }
+      },
+      {
+        "direction": "response",
+        "at": 8576.399999976158,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:6462c8c3-db38-473e-87cc-f4d3241451c8",
+          "status": "rejected",
+          "revision": 565,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 8829.800000011921,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:92db6747-a1ab-476b-be78-369403286082",
+          "status": "rejected",
+          "revision": 566,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 9198.300000011921,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:19946fcd-a990-4abf-a398-1a789882152d",
+          "status": "rejected",
+          "revision": 567,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 9471.100000023842,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:a86c7ff7-a9fc-425c-8af4-601b1f0070b9",
+          "status": "rejected",
+          "revision": 568,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 9814,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:2486a98b-65f6-4e2b-9bcb-fef134384933",
+          "status": "rejected",
+          "revision": 569,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 10115,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:e5e35701-2739-42b9-a119-5cebc36ef031",
+          "status": "committed",
+          "revision": 570
+        }
+      },
+      {
+        "direction": "response",
+        "at": 10487.600000023842,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:af40e5c0-eadd-4b34-83ec-5e0fbc6c56b2",
+          "status": "rejected",
+          "revision": 571,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 10833.699999988079,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:86af3c3d-c61e-4cbe-971f-a46893cd13c7",
+          "status": "rejected",
+          "revision": 572,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 11214.199999988079,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:db604f8a-8b7b-47ca-93b4-c0cdc8b37d9e",
+          "status": "rejected",
+          "revision": 573,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      },
+      {
+        "direction": "response",
+        "at": 11678,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:d46bf0ee-4fdc-4837-96b3-ae2337e2fa1e",
+          "status": "committed",
+          "revision": 575
+        }
+      },
+      {
+        "direction": "response",
+        "at": 12011.300000011921,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:e793302c-ba9a-4eb3-82dd-bf7a0a26bf51",
+          "status": "rejected",
+          "revision": 576,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-12T16:05:59.222Z",
+    "id": "served-source-check",
+    "code": "return {runtime:(await (await page.request.get('http://127.0.0.1:5173/src/game/runtime.worker.ts')).text()).includes('governanceAfterCatchup'),source:(await (await page.request.get('http://127.0.0.1:5173/src/game/governanceAdmission.ts')).text()).slice(0,200),events:(await page.evaluate(()=>window.__runtime)).filter(e=>e.type==='switched')};",
+    "result": {
+      "runtime": true,
+      "source": "import { buildingLevel } from \"/src/game/formal/catalogB3.ts\";\n/** Only bridge events caught up inside this serialized command admission.\n* Already-stale orders never enter this path. Configuration wr",
+      "events": [
+        {
+          "direction": "response",
+          "at": 7111.300000011921,
+          "type": "switched",
+          "revision": 562
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-10-12T16:08:17.533Z",
+    "id": "fixed-CAS-100-governance",
+    "code": "await fs.copyFile(path.join(outDir,'runtime.json'),path.join(outDir,'intermediate-runtime.json'));await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'載入進度',exact:true}).click();await page.locator('.game-shell').waitFor();const s=await import('../r3-local-2026-10-12/scenarios.mjs');await s.importFixture(page,path.resolve(outDir,'../r3-local-2026-10-12'),'controlled-100-siege.realm-save');await page.waitForFunction(()=>window.__runtime.some(e=>e.type==='switched'&&e.revision<200));await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click();let results=[];for(let i=0;i<12;i++){await page.locator('.governance-controls select').selectOption(i%2?'reserve':'economy');await page.locator('.governance-controls input').nth(0).fill('2400');await page.locator('.governance-controls input').nth(1).fill('180');await page.locator('.governance-controls button').first().click();await page.waitForFunction(()=>!document.querySelector('.governance-controls button').disabled);const events=await page.evaluate(()=>window.__runtime);results.push(events.filter(e=>e.type==='commandAck').at(-1));}await page.screenshot({path:path.join(outDir,'fixed-CAS-governance.png')});await context.tracing.stop({path:path.join(outDir,'fixed-CAS-trace.zip')});return results;",
+    "error": "TimeoutError: page.waitForFunction: Timeout 10000ms exceeded.",
+    "stack": "page.waitForFunction: Timeout 10000ms exceeded.\n    at eval (<anonymous>:3:450)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:41"
+  },
+  {
+    "at": "2026-10-12T16:08:55.094Z",
+    "id": "fixed-CAS-100-final",
+    "code": "await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click();let results=[];for(let i=0;i<12;i++){await page.locator('.governance-controls select').selectOption(i%2?'reserve':'economy');await page.locator('.governance-controls input').nth(0).fill('2400');await page.locator('.governance-controls input').nth(1).fill('180');await page.locator('.governance-controls button').first().click();await page.waitForFunction(()=>!document.querySelector('.governance-controls button').disabled);const events=await page.evaluate(()=>window.__runtime);results.push(events.filter(e=>e.type==='commandAck').at(-1));}await page.screenshot({path:path.join(outDir,'fixed-CAS-governance.png')});await context.tracing.stop({path:path.join(outDir,'fixed-CAS-trace.zip')});return results;",
+    "result": [
+      {
+        "direction": "response",
+        "at": 48438.40000003576,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:e41fa2ab-86b7-4e56-9970-79786141f031",
+          "status": "committed",
+          "revision": 1255
+        }
+      },
+      {
+        "direction": "response",
+        "at": 48993.200000047684,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:cde62dc2-1802-44b7-b54a-63994c15b249",
+          "status": "committed",
+          "revision": 1257
+        }
+      },
+      {
+        "direction": "response",
+        "at": 49563.700000047684,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:0d20a472-a4e2-4e55-8f42-9def0470ba54",
+          "status": "committed",
+          "revision": 1259
+        }
+      },
+      {
+        "direction": "response",
+        "at": 50206.30000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:e939a002-0d09-4f63-bf7b-37b23d4e9b25",
+          "status": "committed",
+          "revision": 1261
+        }
+      },
+      {
+        "direction": "response",
+        "at": 50780.200000047684,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:04808c94-cb38-4f54-98b7-fb912de44f43",
+          "status": "committed",
+          "revision": 1263
+        }
+      },
+      {
+        "direction": "response",
+        "at": 51380.40000003576,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:083b4b0f-1756-43a8-9d0e-64e2a004194a",
+          "status": "committed",
+          "revision": 1265
+        }
+      },
+      {
+        "direction": "response",
+        "at": 51985.90000003576,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:51106c88-6a0c-4516-93e0-048890420daa",
+          "status": "committed",
+          "revision": 1267
+        }
+      },
+      {
+        "direction": "response",
+        "at": 52575.30000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:d5e76e0b-7c7b-4b05-91a9-828b8ca943e1",
+          "status": "committed",
+          "revision": 1269
+        }
+      },
+      {
+        "direction": "response",
+        "at": 53140.30000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:3f7919a2-d8e0-4db5-bc92-b213a7131e79",
+          "status": "committed",
+          "revision": 1271
+        }
+      },
+      {
+        "direction": "response",
+        "at": 53696.80000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:53ff9272-e7cf-435a-8cd7-f6547521e6d3",
+          "status": "committed",
+          "revision": 1273
+        }
+      },
+      {
+        "direction": "response",
+        "at": 54191.30000001192,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:6ff10db2-2495-4a72-b826-fbb3030a9105",
+          "status": "committed",
+          "revision": 1275
+        }
+      },
+      {
+        "direction": "response",
+        "at": 54736.40000003576,
+        "type": "commandAck",
+        "ack": {
+          "commandId": "command:59ee3b28-4502-4ca4-8b2b-566f879237de",
+          "status": "committed",
+          "revision": 1277
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-12T16:12:35.280Z",
+    "id": "generate-delta-fixtures",
+    "code": "const s=await import('./scenarios.mjs');const m=await s.generate(page,outDir);return {civilianRoutes:m.civilians.routes.map(r=>({id:r.id,glyph:r.glyph,start:r.start,end:r.end})),castles:m.castles,raidArrival:m.raid.army.arrivalAt};",
+    "result": {
+      "civilianRoutes": [
+        {
+          "id": "shipment:0000000000000005",
+          "glyph": "商",
+          "start": 14781838,
+          "end": 15800072
+        },
+        {
+          "id": "project:0000000000000004",
+          "glyph": "拓",
+          "start": 14781838,
+          "end": 15418235
+        },
+        {
+          "id": "craftsman:0000000000000003",
+          "glyph": "工",
+          "start": 14781838,
+          "end": 15545514
+        }
+      ],
+      "castles": [
+        {
+          "file": "castle-0.realm-save",
+          "owner": "civ_britannia",
+          "source": "civ_zhongguo",
+          "city": "city:000",
+          "slots": {
+            "warehouse.0": 0,
+            "residence": 1,
+            "townhall": 2,
+            "academy": 3,
+            "market": 4,
+            "castle": 5
+          }
+        },
+        {
+          "file": "castle-1.realm-save",
+          "owner": "civ_byzantium",
+          "source": "civ_britannia",
+          "city": "city:000",
+          "slots": {
+            "warehouse.0": 0,
+            "residence": 1,
+            "townhall": 2,
+            "academy": 3,
+            "market": 4,
+            "castle": 5
+          }
+        },
+        {
+          "file": "castle-2.realm-save",
+          "owner": "civ_mongolia",
+          "source": "civ_byzantium",
+          "city": "city:000",
+          "slots": {
+            "warehouse.0": 0,
+            "residence": 1,
+            "townhall": 2,
+            "academy": 3,
+            "market": 4,
+            "castle": 5
+          }
+        },
+        {
+          "file": "castle-3.realm-save",
+          "owner": "civ_japan",
+          "source": "civ_mongolia",
+          "city": "city:000",
+          "slots": {
+            "warehouse.0": 0,
+            "residence": 1,
+            "townhall": 2,
+            "academy": 3,
+            "market": 4,
+            "castle": 5
+          }
+        },
+        {
+          "file": "castle-4.realm-save",
+          "owner": "civ_frankia",
+          "source": "civ_japan",
+          "city": "city:000",
+          "slots": {
+            "warehouse.0": 0,
+            "residence": 1,
+            "townhall": 2,
+            "academy": 3,
+            "market": 4,
+            "castle": 5
+          }
+        },
+        {
+          "file": "castle-5.realm-save",
+          "owner": "civ_zhongguo",
+          "source": "civ_frankia",
+          "city": "city:000",
+          "slots": {
+            "warehouse.0": 0,
+            "residence": 1,
+            "townhall": 2,
+            "academy": 3,
+            "market": 4,
+            "castle": 5
+          }
+        }
+      ],
+      "raidArrival": 509117
+    }
+  },
+  {
+    "at": "2026-10-12T16:14:09.900Z",
+    "id": "governance-speed-load-matrix",
+    "code": "await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'載入進度',exact:true}).click();await page.locator('.game-shell').waitFor();const s=await import('./scenarios.mjs');let result=[];await context.tracing.start({screenshots:true,snapshots:true,sources:true});for(const speed of [1,10,50])for(const dense of [false,true]){const initial=await s.load(page,outDir,'matrix-'+speed+'-'+dense+'.realm-save');await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click();const replies=[];for(let i=0;i<6;i++){await page.locator('.governance-controls select').selectOption(i%2?'reserve':'economy');await page.locator('.governance-controls input').nth(0).fill('2400');await page.locator('.governance-controls input').nth(1).fill('180');await page.locator('.governance-controls button').first().click();await page.waitForFunction(()=>!document.querySelector('.governance-controls button').disabled);const ack=await page.evaluate(()=>window.__runtime.filter(e=>e.type==='commandAck').at(-1).ack);if(ack.status!=='committed')throw Error(JSON.stringify(ack));replies.push(ack);}const applied=await s.state(page);await page.screenshot({path:path.join(outDir,'governance-'+speed+'x-'+(dense?'100':'low')+'.png')});await page.getByRole('button',{name:'停止總督',exact:true}).click();await page.getByRole('button',{name:'委任總督',exact:true}).waitFor();const stopped=await s.state(page);const city=initial.cities[0].id,g=stopped.governors.find(g=>g.cityId===city);if(g.enabled||g.eventId||stopped.events.some(e=>e.type==='governance.decide'&&e.cityId===city))throw Error('stop failed');result.push({speed,dense,initialArmies:initial.armies.length,replies,appliedGovernor:applied.governors.find(g=>g.cityId===city),stoppedGovernor:g,governanceReceipts:stopped.commandReceipts.filter(r=>replies.some(a=>a.commandId===r.commandId))});}await fs.writeFile(path.join(outDir,'governance-matrix.json'),JSON.stringify(result,null,2));await context.tracing.stop({path:path.join(outDir,'matrix-trace.zip')});return result.map(r=>({speed:r.speed,dense:r.dense,initialArmies:r.initialArmies,committed:r.replies.length,spent:r.stoppedGovernor.spent,stopped:!r.stoppedGovernor.enabled}));",
+    "result": [
+      {
+        "speed": 1,
+        "dense": false,
+        "initialArmies": 0,
+        "committed": 6,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "stopped": true
+      },
+      {
+        "speed": 1,
+        "dense": true,
+        "initialArmies": 100,
+        "committed": 6,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "stopped": true
+      },
+      {
+        "speed": 10,
+        "dense": false,
+        "initialArmies": 0,
+        "committed": 6,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "stopped": true
+      },
+      {
+        "speed": 10,
+        "dense": true,
+        "initialArmies": 100,
+        "committed": 6,
+        "spent": {
+          "food": 130,
+          "wood": 250,
+          "stone": 210,
+          "gold": 180
+        },
+        "stopped": true
+      },
+      {
+        "speed": 50,
+        "dense": false,
+        "initialArmies": 0,
+        "committed": 6,
+        "spent": {
+          "food": 130,
+          "wood": 190,
+          "stone": 230,
+          "gold": 200
+        },
+        "stopped": true
+      },
+      {
+        "speed": 50,
+        "dense": true,
+        "initialArmies": 100,
+        "committed": 6,
+        "spent": {
+          "food": 130,
+          "wood": 250,
+          "stone": 210,
+          "gold": 180
+        },
+        "stopped": true
+      }
+    ]
+  },
+  {
+    "at": "2026-10-12T16:16:00.618Z",
+    "id": "civilian-live-march",
+    "code": "const s=await import('./scenarios.mjs');await context.tracing.start({screenshots:true,snapshots:true,sources:true});const w=await s.load(page,outDir,'civilians.realm-save');const m=JSON.parse(await fs.readFile(path.join(outDir,'scenario-metadata.json'),'utf8'));await s.center(page,w.cities[0].x-6,w.cities[0].y-5);await page.waitForFunction(()=>JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay).civilianMarkers===3);const observe=()=>page.evaluate(async()=>{const {FormalDatabase}=await import('/src/game/persistence.ts');const {CivilianCache,civilianRoutes}=await import('/src/game/presentation/civilianOverlay.ts');const {displayClock}=await import('/src/game/presentation/liveClock.ts');const db=new FormalDatabase(),row=await db.saves.get('current');db.close();const w=row.data.snapshot,cache=new CivilianCache(),time=displayClock.now(w);return {time,worldTime:w.time,routes:civilianRoutes(w,cache).map(r=>({id:r.id,glyph:r.glyph,position:cache.position(r,time)})),overlay:JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay)};});const before=await observe();await page.screenshot({path:path.join(outDir,'civilian-before.png')});await page.waitForTimeout(3000);const after=await observe();await page.screenshot({path:path.join(outDir,'civilian-after.png')});await fs.writeFile(path.join(outDir,'civilian-movement.json'),JSON.stringify({before,after},null,2));await s.center(page,m.civilians.exile.x,m.civilians.exile.y);await page.screenshot({path:path.join(outDir,'exile-marker.png')});await context.tracing.stop({path:path.join(outDir,'civilian-trace.zip')});return {before,after,exile:m.civilians.exile};",
+    "result": {
+      "before": {
+        "time": 135469.69999998808,
+        "worldTime": 14781898,
+        "routes": [
+          {
+            "id": "shipment:0000000000000005",
+            "glyph": "商",
+            "position": {
+              "x": 293,
+              "y": 71
+            }
+          },
+          {
+            "id": "project:0000000000000004",
+            "glyph": "拓",
+            "position": {
+              "x": 293,
+              "y": 71
+            }
+          },
+          {
+            "id": "craftsman:0000000000000003",
+            "glyph": "工",
+            "position": {
+              "x": 293,
+              "y": 71
+            }
+          }
+        ],
+        "overlay": {
+          "routes": 0,
+          "markers": 0,
+          "animated": false,
+          "cacheSize": 0,
+          "hits": 0,
+          "misses": 0,
+          "civilianMarkers": 3,
+          "civilianCacheMisses": 3,
+          "visibleBattles": 0,
+          "visibleImpacts": 0,
+          "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+        }
+      },
+      "after": {
+        "time": 138872.5,
+        "worldTime": 15010588,
+        "routes": [
+          {
+            "id": "shipment:0000000000000005",
+            "glyph": "商",
+            "position": {
+              "x": 293,
+              "y": 71
+            }
+          },
+          {
+            "id": "project:0000000000000004",
+            "glyph": "拓",
+            "position": {
+              "x": 293,
+              "y": 71
+            }
+          },
+          {
+            "id": "craftsman:0000000000000003",
+            "glyph": "工",
+            "position": {
+              "x": 293,
+              "y": 71
+            }
+          }
+        ],
+        "overlay": {
+          "routes": 0,
+          "markers": 0,
+          "animated": false,
+          "cacheSize": 0,
+          "hits": 0,
+          "misses": 0,
+          "civilianMarkers": 3,
+          "civilianCacheMisses": 3,
+          "visibleBattles": 0,
+          "visibleImpacts": 0,
+          "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+        }
+      },
+      "exile": {
+        "id": "wild:exile-0000000000000006",
+        "exile": true,
+        "sourceFactionId": "faction:006",
+        "civilizationId": "civ_japan",
+        "createdAt": 14781838,
+        "spawnSlot": 439,
+        "generation": 0,
+        "region": 33,
+        "x": 289,
+        "y": 67,
+        "resource": "bandit",
+        "level": 1,
+        "phase": "active",
+        "defenders": {
+          "militia": 12
+        },
+        "initialDefenders": {
+          "militia": 12
+        },
+        "loot": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        }
+      }
+    }
+  },
+  {
+    "at": "2026-10-12T16:17:15.222Z",
+    "id": "civilian-march-correct-clock",
+    "code": "const s=await import('./scenarios.mjs');await context.tracing.start({screenshots:true,snapshots:true,sources:true});const w=await s.load(page,outDir,'civilians.realm-save');await s.center(page,w.cities[0].x-6,w.cities[0].y-5);const observe=()=>page.evaluate(async()=>{const {FormalDatabase}=await import('/src/game/persistence.ts');const {CivilianCache,civilianRoutes}=await import('/src/game/presentation/civilianOverlay.ts');const db=new FormalDatabase(),row=await db.saves.get('current');db.close();const w=row.data.snapshot,cache=new CivilianCache();return {worldTime:w.time,routes:civilianRoutes(w,cache).map(r=>({id:r.id,glyph:r.glyph,position:cache.position(r,w.time)})),overlay:JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay)};});const before=await observe();await page.screenshot({path:path.join(outDir,'civilian-before-verified.png')});await page.waitForTimeout(3000);const after=await observe();await page.screenshot({path:path.join(outDir,'civilian-after-verified.png')});if(before.routes.length!==3||after.routes.length!==3||before.routes.some((r,i)=>JSON.stringify(r.position)===JSON.stringify(after.routes[i].position)))throw Error('missing civilian movement');await fs.writeFile(path.join(outDir,'civilian-movement-verified.json'),JSON.stringify({before,after},null,2));await page.emulateMedia({reducedMotion:'reduce'});await page.waitForTimeout(400);await page.screenshot({path:path.join(outDir,'civilian-reduced-motion.png')});await page.emulateMedia({reducedMotion:'no-preference'});await context.tracing.stop({path:path.join(outDir,'civilian-verified-trace.zip')});return {before,after};",
+    "result": {
+      "before": {
+        "worldTime": 14781922,
+        "routes": [
+          {
+            "id": "shipment:0000000000000005",
+            "glyph": "商",
+            "position": {
+              "x": 292.9990100507349,
+              "y": 70.9990100507349
+            }
+          },
+          {
+            "id": "project:0000000000000004",
+            "glyph": "拓",
+            "position": {
+              "x": 292.99868006920207,
+              "y": 70.99868006920208
+            }
+          },
+          {
+            "id": "craftsman:0000000000000003",
+            "glyph": "工",
+            "position": {
+              "x": 292.99868006851074,
+              "y": 70.99868006851072
+            }
+          }
+        ],
+        "overlay": {
+          "routes": 0,
+          "markers": 0,
+          "animated": false,
+          "cacheSize": 0,
+          "hits": 0,
+          "misses": 0,
+          "civilianMarkers": 3,
+          "civilianCacheMisses": 3,
+          "visibleBattles": 0,
+          "visibleImpacts": 0,
+          "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+        }
+      },
+      "after": {
+        "worldTime": 14973082,
+        "routes": [
+          {
+            "id": "shipment:0000000000000005",
+            "glyph": "商",
+            "position": {
+              "x": 290.7461683660141,
+              "y": 68.7461683660141
+            }
+          },
+          {
+            "id": "project:0000000000000004",
+            "glyph": "拓",
+            "position": {
+              "x": 289.99489469623524,
+              "y": 67.9948946962352
+            }
+          },
+          {
+            "id": "craftsman:0000000000000003",
+            "glyph": "工",
+            "position": {
+              "x": 289.99489312221414,
+              "y": 67.99489312221414
+            }
+          }
+        ],
+        "overlay": {
+          "routes": 0,
+          "markers": 0,
+          "animated": false,
+          "cacheSize": 0,
+          "hits": 0,
+          "misses": 0,
+          "civilianMarkers": 3,
+          "civilianCacheMisses": 3,
+          "visibleBattles": 0,
+          "visibleImpacts": 0,
+          "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+        }
+      }
+    }
+  },
+  {
+    "at": "2026-10-12T16:19:30.031Z",
+    "id": "six-foreign-castles-and-townhall",
+    "code": "const s=await import('./scenarios.mjs'),m=JSON.parse(await fs.readFile(path.join(outDir,'scenario-metadata.json'),'utf8'));await context.tracing.start({screenshots:true,snapshots:true,sources:true});let results=[];for(let i=0;i<m.castles.length;i++){const c=m.castles[i],w=await s.load(page,outDir,c.file);await page.getByRole('button',{name:'城內',exact:true}).click();const node=page.getByRole('button',{name:'城堡 Lv1',exact:true});await node.waitFor();const sprite=await node.evaluate(e=>e.innerHTML);await node.click();const dialog=page.getByRole('dialog'),text=await dialog.innerText();if(!text.includes('外文明城堡'))throw Error('foreign castle description missing');await page.screenshot({path:path.join(outDir,'foreign-castle-'+i+'.png')});results.push({...c,sprite,text,formalSource:w.cities[0].castleCivilizationId});await page.getByRole('button',{name:'關閉對話框',exact:true}).click();if(i===5){await page.getByRole('button',{name:'市政廳 Lv5',exact:true}).click();const text=await page.getByRole('dialog').innerText();if(!text.includes('可委任本城總督')||text.includes('尚未開放 · 目前依正式城市經濟規則運作'))throw Error('townhall copy');await page.screenshot({path:path.join(outDir,'townhall-fixed.png')});await page.getByRole('button',{name:'關閉對話框',exact:true}).click();}}if(new Set(results.map(r=>r.sprite)).size!==6)throw Error('castle artwork signatures not distinct');await fs.writeFile(path.join(outDir,'foreign-castles.json'),JSON.stringify(results,null,2));await context.tracing.stop({path:path.join(outDir,'castles-trace.zip')});return results.map(r=>({source:r.source,owner:r.owner,sprite:r.sprite.slice(0,150)}));",
+    "error": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '城內', exact: true })\u001b[22m\n",
+    "stack": "locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '城內', exact: true })\u001b[22m\n\n    at eval (<anonymous>:3:379)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:41"
+  },
+  {
+    "at": "2026-10-12T16:19:55.272Z",
+    "id": "inspect-castle-ui",
+    "code": "return {text:await page.locator('body').innerText(),panels:await page.locator('.formal-city-panel').count(),buttons:await page.locator('.formal-city-panel button').allTextContents()};",
+    "result": {
+      "text": "列國征途\n始源 · v0.30.49\n穀\n49,319\n-947／時\n木\n49,845\n+45／時\n石\n49,720\n+36／時\n金\n49,845\n+27／時\n文明時代\n城堡\n1\n1,000\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n15,058 / 30,400\n不列顛\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n白崖橡林郡（293, 71）\n白崖橡林郡\n15,058 人\n\n玩家\n\n384×384 · 100 勢力\n432 野外據點\n白崖橡林郡（293, 71）\n白崖橡林郡\n（293, 71）\n✎\n城內\n城郊\n農田 6\n林地 5\n石場 4\n金礦 3\n顯示名稱\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口與住房\n15,058 / 30,400\n自然成長 +104.6／世界時\n城市規模\n大城市\nCity 尚未正式晉升\n城市狀態\n治理完成\n產量按本城田地與科技結算\n城牆 Lv0\n每類倉儲\n100,800\n地庫保護 0／類\n庫存尚有空間\n已用建地 6/15\n人口里程碑\n20,000\n下一個永久里程碑\n同時施工 2 · 同時訓練 1\n15k解鎖第二施工 · 20k解鎖第二訓練\n建造工程 0/3\n同時施工 0/2\n\n目前沒有建造工程。\n\n部隊訓練 0/3\n同時訓練 0/1\n\n目前沒有部隊訓練。\n\n城郊資源地名冊\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 民兵 1,000、斥候 1",
+      "panels": 1,
+      "buttons": [
+        "✎",
+        "城內",
+        "城郊",
+        "顯示名稱",
+        "農田0",
+        "農田0",
+        "農田0",
+        "農田0",
+        "農田0",
+        "農田0",
+        "林地0",
+        "林地0",
+        "林地0",
+        "林地0",
+        "林地0",
+        "石場0",
+        "石場0",
+        "石場0",
+        "石場0",
+        "金礦0",
+        "金礦0",
+        "金礦0",
+        "",
+        "農田 1 Lv0",
+        "農田 2 Lv0",
+        "農田 3 Lv0",
+        "農田 4 Lv0",
+        "農田 5 Lv0",
+        "農田 6 Lv0",
+        "林地 7 Lv0",
+        "林地 8 Lv0",
+        "林地 9 Lv0",
+        "林地 10 Lv0",
+        "林地 11 Lv0",
+        "石場 12 Lv0",
+        "石場 13 Lv0",
+        "石場 14 Lv0",
+        "石場 15 Lv0",
+        "金礦 16 Lv0",
+        "金礦 17 Lv0",
+        "金礦 18 Lv0"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-12T16:20:25.813Z",
+    "id": "castles-correct-tab-locator",
+    "code": "const a=JSON.parse(await fs.readFile(path.join(outDir,'actions.json'),'utf8')).find(a=>a.id==='six-foreign-castles-and-townhall');await context.tracing.stop({path:path.join(outDir,'castles-locator-failure-trace.zip')});const code=a.code.replace(\"page.getByRole('button',{name:'城內',exact:true})\",\"page.locator('.formal-city-panel button').filter({hasText:/^城內$/})\");return await new Function('page','context','browser','fs','path','outDir','return (async()=>{'+code+'})();')(page,context,browser,fs,path,outDir);",
+    "result": [
+      {
+        "source": "civ_zhongguo",
+        "owner": "civ_britannia",
+        "sprite": "<img class=\"building-sprite\" alt=\"城堡\" src=\"/art/castle-civ_zhongguo.webp\"><span class=\"town-label\"><span class=\"town-name\">城堡</span><b>1</b></span>"
+      },
+      {
+        "source": "civ_britannia",
+        "owner": "civ_byzantium",
+        "sprite": "<img class=\"building-sprite\" alt=\"城堡\" src=\"/art/castle-civ_britannia.webp\"><span class=\"town-label\"><span class=\"town-name\">城堡</span><b>1</b></span>"
+      },
+      {
+        "source": "civ_byzantium",
+        "owner": "civ_mongolia",
+        "sprite": "<img class=\"building-sprite\" alt=\"城堡\" src=\"/art/castle-civ_byzantion.webp\"><span class=\"town-label\"><span class=\"town-name\">城堡</span><b>1</b></span>"
+      },
+      {
+        "source": "civ_mongolia",
+        "owner": "civ_japan",
+        "sprite": "<img class=\"building-sprite\" alt=\"城堡\" src=\"/art/castle-civ_mongol.webp\"><span class=\"town-label\"><span class=\"town-name\">城堡</span><b>1</b></span>"
+      },
+      {
+        "source": "civ_japan",
+        "owner": "civ_frankia",
+        "sprite": "<img class=\"building-sprite\" alt=\"城堡\" src=\"/art/castle-civ_japan.webp\"><span class=\"town-label\"><span class=\"town-name\">城堡</span><b>1</b></span>"
+      },
+      {
+        "source": "civ_frankia",
+        "owner": "civ_zhongguo",
+        "sprite": "<img class=\"building-sprite\" alt=\"城堡\" src=\"/art/castle-civ_frankia.webp\"><span class=\"town-label\"><span class=\"town-name\">城堡</span><b>1</b></span>"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-12T16:22:42.647Z",
+    "id": "raid-live-impact",
+    "code": "const s=await import('./scenarios.mjs'),m=JSON.parse(await fs.readFile(path.join(outDir,'scenario-metadata.json'),'utf8'));await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.emulateMedia({reducedMotion:'no-preference'});const before=await s.load(page,outDir,'raid.realm-save');await s.center(page,m.raid.target.x,m.raid.target.y);await page.screenshot({path:path.join(outDir,'raid-before.png')});await page.waitForFunction(()=>JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay).visibleImpacts>0,null,{timeout:20000});const impact=await page.locator('.map-overlay').evaluate(e=>({...e.dataset}));await page.screenshot({path:path.join(outDir,'raid-impact.png')});await page.waitForFunction(()=>JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay).visibleImpacts===0);const after=await s.state(page);await page.screenshot({path:path.join(outDir,'raid-impact-expired.png')});await fs.writeFile(path.join(outDir,'raid-live.json'),JSON.stringify({before,impact,after},null,2));await context.tracing.stop({path:path.join(outDir,'raid-trace.zip')});return {impact:JSON.parse(impact.armyOverlay),final:after.combat.receipts.filter(r=>r.kind==='final'),active:after.combat.battles.length};",
+    "error": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '戰役設定' })\u001b[22m\n",
+    "stack": "locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '戰役設定' })\u001b[22m\n\n    at Module.load (G:\\Projects\\Lieguo\\docs\\validation\\r3-delta-2026-10-12\\scenarios.mjs:6:81)\n    at async eval (<anonymous>:3:288)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:41"
+  },
+  {
+    "at": "2026-10-12T16:24:51.184Z",
+    "id": "production-raid-live-impact",
+    "code": "await context.tracing.stop({path:path.join(outDir,'raid-hmr-interrupted-trace.zip')});await page.goto('http://127.0.0.1:5174/',{waitUntil:'networkidle'});await page.getByRole('button',{name:'開始新遊戲',exact:true}).click();await page.getByLabel('領主名稱',{exact:true}).fill('R3 Production Delta');await page.getByRole('button',{name:'升起旗幟 · 開始戰役',exact:true}).click();await page.locator('.game-shell').waitFor();const a=JSON.parse(await fs.readFile(path.join(outDir,'actions.json'),'utf8')).find(a=>a.id==='raid-live-impact');return await new Function('page','context','browser','fs','path','outDir','return (async()=>{'+a.code+'})();')(page,context,browser,fs,path,outDir);",
+    "error": "Error: page.evaluate: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5174/src/game/persistence.ts",
+    "stack": "page.evaluate: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5174/src/game/persistence.ts\n    at state (G:\\Projects\\Lieguo\\docs\\validation\\r3-delta-2026-10-12\\scenarios.mjs:3:47)\n    at Module.load (G:\\Projects\\Lieguo\\docs\\validation\\r3-delta-2026-10-12\\scenarios.mjs:10:60)\n    at async eval (eval at <anonymous> (eval at <anonymous> (file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:47)), <anonymous>:3:288)\n    at async eval (<anonymous>:3:545)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:41"
+  },
+  {
+    "at": "2026-10-12T16:25:56.553Z",
+    "id": "production-raid-native-readback",
+    "code": "await context.tracing.stop({path:path.join(outDir,'production-harness-import-error-trace.zip')});const a=JSON.parse(await fs.readFile(path.join(outDir,'actions.json'),'utf8')).find(a=>a.id==='raid-live-impact');const code=a.code.replace(\"import('./scenarios.mjs')\",\"import('./scenarios.mjs?native=1')\");return await new Function('page','context','browser','fs','path','outDir','return (async()=>{'+code+'})();')(page,context,browser,fs,path,outDir);",
+    "result": {
+      "impact": {
+        "routes": 1,
+        "markers": 1,
+        "animated": true,
+        "cacheSize": 1,
+        "hits": 1333,
+        "misses": 2,
+        "civilianMarkers": 0,
+        "civilianCacheMisses": 0,
+        "visibleBattles": 0,
+        "visibleImpacts": 1,
+        "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+      },
+      "final": [
+        {
+          "targetPoint": {
+            "x": 285,
+            "y": 63
+          },
+          "mission": "raid",
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "eventId": "event:0000000000000101",
+          "at": 509117,
+          "round": 1,
+          "kind": "final",
+          "outcome": "raid-return",
+          "ownerBefore": "faction:001",
+          "ownerAfter": "faction:001",
+          "qualificationBefore": "none",
+          "qualificationAfter": "none"
+        }
+      ],
+      "active": 0
+    }
+  },
+  {
+    "at": "2026-10-12T16:27:16.666Z",
+    "id": "save-load-recovery-impact-dedup",
+    "code": "const s=await import('./scenarios.mjs?native=1'),m=JSON.parse(await fs.readFile(path.join(outDir,'scenario-metadata.json'),'utf8'));await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'戰役設定'}).click();await page.getByRole('button',{name:'立即保存',exact:true}).click();await page.waitForFunction(()=>document.body.innerText.includes('進度已保存'));const saved=await s.state(page);const download=page.waitForEvent('download');await page.getByRole('button',{name:'快速存檔',exact:true}).click();await (await download).saveAs(path.join(outDir,'raid-final.realm-save'));await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'載入進度',exact:true}).click();await page.locator('.game-shell').waitFor();const loaded=await s.state(page);await s.center(page,m.raid.target.x,m.raid.target.y);const samples=[];for(let i=0;i<20;i++){samples.push(JSON.parse(await page.locator('.map-overlay').getAttribute('data-army-overlay')).visibleImpacts);await page.waitForTimeout(100);}await page.screenshot({path:path.join(outDir,'raid-load-no-replay.png')});await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'戰役設定'}).click();await page.getByRole('button',{name:'查看回復點',exact:true}).click();await page.locator('.backup-list button').last().waitFor();const n=await page.evaluate(()=>window.__runtime.filter(e=>e.type==='switched').length);await page.locator('.backup-list button').last().click();await page.getByRole('button',{name:'確認回復',exact:true}).click();await page.waitForFunction(n=>window.__runtime.filter(e=>e.type==='switched').length>n,n);const recovered=await s.state(page);await s.center(page,m.raid.target.x,m.raid.target.y);const recoverySamples=[];for(let i=0;i<20;i++){recoverySamples.push(JSON.parse(await page.locator('.map-overlay').getAttribute('data-army-overlay')).visibleImpacts);await page.waitForTimeout(100);}await page.screenshot({path:path.join(outDir,'raid-recovery-no-replay.png')});const finals=w=>w.combat.receipts.filter(r=>r.kind==='final').map(r=>r.resolutionId);if(samples.some(Boolean)||recoverySamples.some(Boolean)||JSON.stringify(finals(saved))!==JSON.stringify(finals(loaded))||JSON.stringify(finals(saved))!==JSON.stringify(finals(recovered)))throw Error('duplicate impact or final receipt');await fs.writeFile(path.join(outDir,'save-load-recovery.json'),JSON.stringify({saved,loaded,recovered,samples,recoverySamples},null,2));await context.tracing.stop({path:path.join(outDir,'recovery-trace.zip')});return {saved:{campaign:saved.campaignId,time:saved.time,revision:saved.revision,finals:finals(saved)},loaded:{campaign:loaded.campaignId,time:loaded.time,revision:loaded.revision,finals:finals(loaded)},recovered:{campaign:recovered.campaignId,time:recovered.time,revision:recovered.revision,finals:finals(recovered)},maxLoadImpact:Math.max(...samples),maxRecoveryImpact:Math.max(...recoverySamples)};",
+    "error": "TimeoutError: page.waitForFunction: Timeout 10000ms exceeded.",
+    "stack": "page.waitForFunction: Timeout 10000ms exceeded.\n    at eval (<anonymous>:3:1591)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:41"
+  },
+  {
+    "at": "2026-10-12T16:28:27.627Z",
+    "id": "inspect-save-ui",
+    "code": "return {text:await page.locator('body').innerText(),runtime:(await page.evaluate(()=>window.__runtime)).slice(-14)};",
+    "result": {
+      "text": "列國征途\n始源 · v0.30.49\n穀\n48,464\n-946／時\n木\n50,707\n+45／時\n石\n50,686\n+36／時\n金\n50,664\n+27／時\n文明時代\n黑暗\n0\n1,000\n0\n0\n0\n0\n0\n0\n0\n0\n0\n人口／住房\n15,236 / 30,400\n中國\n1 座聚落\n▧\n世界地圖\n府\n城市建設\n⚑\n軍隊編組\n冊\n科技研發\n印\n天下勢力\n書\n戰報紀事\n1\n政\n治理方針\n引\n任務\n⚙\n戰役設定\n目前城市\n長寧安平郡（293, 71）\n長寧安平郡\n15,236 人\n\n玩家\n\n384×384 · 100 勢力\n432 野外據點\n長寧安平郡（293, 71）\n\n這是你的單機戰役\n\n存檔與戰役設定\n介面主題\n經典\n墨綠與金色\n深色\n深灰底與柔和灰白字\n淺色\n米白底與深色字\n此裝置會記住選擇；地圖、建築及敵我標記保持原有美術。\n開發者模式\n\n在目前戰役中測試。開啟後，你的城市資源持續補滿；建造、科技、人口與兵種前置照常運作。\n\n開啟開發者模式\n保存與搬移戰役\n\n快速存檔不含歷史紀事；完整備份包含紀事。本機進度不會自動同步。\n\n立即保存\n重新讀取\n快速存檔\n完整備份\n匯入存檔\n查看回復點\n正式回復點\n2026/10/13 上午12:27:06 · 1時 08分\n回復\n正式回復點\n2026/10/13 上午12:27:05 · 1時 07分\n回復\n戰役資料 · v0.30.49\n世界種子\n92049\n世界時間\n2時 15分\n速度\n50X\n文明\n中國\n世界\n384×384\n勢力／據點\n100／432\n返回首頁\n開始另一場戰役\n檢查更新\n\n目前已載入 v0.30.49，已確認為最新版本。\n\n帝國成立與加入邀請分別綁定意圖及原帝國；接受時重驗資格，舊未綁定邀請由發起者重新確認。\n帝國剩一軍團持續存在；零軍團立即解除並共用清理失效邀請、工程及外交，不退款或免費繼承。\n戰報於部隊損失下方顯示建築／城牆最終損失，移除逐回合攻城紀錄，保留總回合與真正終戰原因。\nv91征服改為主戰與最多12回合持續攻城，當級牆傷於同一圍城內累積，戰術倍率仍封頂10倍。\n行軍頁可查看交戰中／攻城中部隊的即時戰況；本城駐軍守城也有戰況入口。\n戰中只更新同場摘要，終戰才產生一份完整戰報，清楚說明城牆未破與征服失敗原因。\n援軍與訓練完成可暫停攻城、重回主戰；投石機每戰役只結算一次破壞批次。\nB5測試台同步支援逐事件攻城、剩餘回合、即時战況及讀檔續戰。\n首頁更新狀態、檢查更新與保存並更新移至更新日誌上方。\n電腦版左上方遊戲名稱下方顯示始源與目前載入版本。\n單機世界 · v0.30.49 · 自動存檔\n資源與建設持續進行 · 民兵 1,000",
+      "runtime": [
+        {
+          "direction": "response",
+          "at": 82346,
+          "type": "state",
+          "patch": {
+            "base": 538
+          },
+          "passiveRevisionBase": 539
+        },
+        {
+          "direction": "response",
+          "at": 82741.69999998808,
+          "type": "state",
+          "patch": {
+            "base": 539
+          },
+          "passiveRevisionBase": 540
+        },
+        {
+          "direction": "response",
+          "at": 82967.10000002384,
+          "type": "state",
+          "patch": {
+            "base": 540
+          },
+          "passiveRevisionBase": 541
+        },
+        {
+          "direction": "response",
+          "at": 83537.80000001192,
+          "type": "state",
+          "patch": {
+            "base": 541
+          },
+          "passiveRevisionBase": 542
+        },
+        {
+          "direction": "response",
+          "at": 83628.30000001192,
+          "type": "state",
+          "patch": {
+            "base": 542
+          },
+          "passiveRevisionBase": 543
+        },
+        {
+          "direction": "response",
+          "at": 83942.19999998808,
+          "type": "state",
+          "patch": {
+            "base": 543
+          },
+          "passiveRevisionBase": 544
+        },
+        {
+          "direction": "response",
+          "at": 84353.60000002384,
+          "type": "state",
+          "patch": {
+            "base": 544
+          },
+          "passiveRevisionBase": 545
+        },
+        {
+          "direction": "response",
+          "at": 84578.69999998808,
+          "type": "state",
+          "patch": {
+            "base": 545
+          },
+          "passiveRevisionBase": 546
+        },
+        {
+          "direction": "response",
+          "at": 84751.90000003576,
+          "type": "state",
+          "patch": {
+            "base": 546
+          },
+          "passiveRevisionBase": 547
+        },
+        {
+          "direction": "response",
+          "at": 85251.90000003576,
+          "type": "state",
+          "patch": {
+            "base": 547
+          },
+          "passiveRevisionBase": 548
+        },
+        {
+          "direction": "response",
+          "at": 85571.10000002384,
+          "type": "state",
+          "patch": {
+            "base": 548
+          },
+          "passiveRevisionBase": 549
+        },
+        {
+          "direction": "response",
+          "at": 85936.5,
+          "type": "state",
+          "patch": {
+            "base": 549
+          },
+          "passiveRevisionBase": 550
+        },
+        {
+          "direction": "response",
+          "at": 86034.80000001192,
+          "type": "state",
+          "patch": {
+            "base": 550
+          },
+          "passiveRevisionBase": 551
+        },
+        {
+          "direction": "response",
+          "at": 86240,
+          "type": "state",
+          "patch": {
+            "base": 551
+          },
+          "passiveRevisionBase": 552
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-10-12T16:29:06.662Z",
+    "id": "save-load-recovery-refresh-point",
+    "code": "const a=JSON.parse(await fs.readFile(path.join(outDir,'actions.json'),'utf8')).find(a=>a.id==='save-load-recovery-impact-dedup');await context.tracing.stop({path:path.join(outDir,'recovery-stale-point-trace.zip')});let code=a.code.replace(\"await page.locator('.backup-list button').last().click();\",\"await page.locator('.backup-list button').first().click();\");return await new Function('page','context','browser','fs','path','outDir','return (async()=>{'+code+'})();')(page,context,browser,fs,path,outDir);",
+    "result": {
+      "saved": {
+        "campaign": "campaign:delta-raid",
+        "time": 9460508,
+        "revision": 622,
+        "finals": [
+          "resolution:0000000000000001.final"
+        ]
+      },
+      "loaded": {
+        "campaign": "campaign:delta-raid",
+        "time": 9509713,
+        "revision": 627,
+        "finals": [
+          "resolution:0000000000000001.final"
+        ]
+      },
+      "recovered": {
+        "campaign": "campaign:delta-raid",
+        "time": 9730413,
+        "revision": 637,
+        "finals": [
+          "resolution:0000000000000001.final"
+        ]
+      },
+      "maxLoadImpact": 0,
+      "maxRecoveryImpact": 0
+    }
+  },
+  {
+    "at": "2026-10-12T16:29:57.961Z",
+    "id": "prepare-quiet-final-recovery",
+    "code": "const s=await import('./scenarios.mjs?native=1'),w=await s.state(page);const prep=await context.newPage();await prep.goto('http://127.0.0.1:5173/',{waitUntil:'domcontentloaded'});const text=await prep.evaluate(async w=>{const {encodeSave}=await import('/src/game/formal/saveCodec.ts');w.speed=1;return JSON.stringify(await encodeSave(w));},w);await prep.close();await fs.writeFile(path.join(outDir,'raid-final-1x.realm-save'),text);return {campaign:w.campaignId,finals:w.combat.receipts.filter(r=>r.kind==='final').length,speed:1};",
+    "result": {
+      "campaign": "campaign:delta-raid",
+      "finals": 1,
+      "speed": 1
+    }
+  },
+  {
+    "at": "2026-10-12T16:31:02.330Z",
+    "id": "raid-CDP-fast-capture-and-reduced-motion",
+    "code": "const s=await import('./scenarios.mjs?native=1'),m=JSON.parse(await fs.readFile(path.join(outDir,'scenario-metadata.json'),'utf8'));await context.tracing.start({screenshots:false,snapshots:true,sources:true});await page.emulateMedia({reducedMotion:'no-preference'});await s.load(page,outDir,'raid.realm-save');await s.center(page,m.raid.target.x,m.raid.target.y);const cdp=await context.newCDPSession(page);await page.waitForFunction(()=>JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay).visibleImpacts>0,null,{timeout:20000});const before=await page.locator('.map-overlay').evaluate(e=>JSON.parse(e.dataset.armyOverlay));const start=Date.now(),shot=await cdp.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});await fs.writeFile(path.join(outDir,'raid-impact-live-CDP.png'),Buffer.from(shot.data,'base64'));const elapsed=Date.now()-start,after=await page.locator('.map-overlay').evaluate(e=>JSON.parse(e.dataset.armyOverlay));await page.waitForTimeout(1000);await page.emulateMedia({reducedMotion:'reduce'});await s.load(page,outDir,'raid.realm-save');await s.center(page,m.raid.target.x,m.raid.target.y);let samples=[],w;for(let i=0;i<75;i++){samples.push(JSON.parse(await page.locator('.map-overlay').getAttribute('data-army-overlay')).visibleImpacts);w=await s.state(page);if(w.combat.receipts.some(r=>r.kind==='final'))break;await page.waitForTimeout(200);}if(!w.combat.receipts.some(r=>r.kind==='final')||samples.some(Boolean))throw Error('reduced Raid impact');await page.screenshot({path:path.join(outDir,'raid-reduced-motion.png')});await page.emulateMedia({reducedMotion:'no-preference'});await page.waitForTimeout(300);const restoredMotion=JSON.parse(await page.locator('.map-overlay').getAttribute('data-army-overlay'));await cdp.detach();await fs.writeFile(path.join(outDir,'raid-CDP-and-reduced.json'),JSON.stringify({before,after,elapsed,samples,restoredMotion,finals:w.combat.receipts},null,2));await context.tracing.stop({path:path.join(outDir,'raid-CDP-reduced-trace.zip')});return {captureMs:elapsed,impactBefore:before.visibleImpacts,impactAfter:after.visibleImpacts,reducedMax:Math.max(...samples),motionRestoredImpact:restoredMotion.visibleImpacts};",
+    "result": {
+      "captureMs": 442,
+      "impactBefore": 1,
+      "impactAfter": 1,
+      "reducedMax": 0,
+      "motionRestoredImpact": 0
+    }
+  },
+  {
+    "at": "2026-10-12T16:31:53.062Z",
+    "id": "prepare-secret-enemy-intel-fixture",
+    "code": "const s=await import('./scenarios.mjs?native=1'),w=await s.state(page);w.campaignId='campaign:delta-intel';w.speed=1;w.armies=[];w.events=w.events.filter(e=>!['army.arrive','army.return'].includes(e.type));const c=w.cities[3];c.buildings['warehouse.0']=15;c.buildings.residence=15;c.economy.slots['warehouse.0']=0;c.economy.slots.residence=1;c.housing=30400;c.population=15000;c.military.units={militia:777,scout:111};c.wallLevel=7;c.stock={food:13337,wood:12222,stone:11111,gold:9999};const prep=await context.newPage();await prep.goto('http://127.0.0.1:5173/',{waitUntil:'domcontentloaded'});const text=await prep.evaluate(async w=>{const {encodeSave}=await import('/src/game/formal/saveCodec.ts');return JSON.stringify(await encodeSave(w));},w);await prep.close();await fs.writeFile(path.join(outDir,'intel.realm-save'),text);await fs.writeFile(path.join(outDir,'intel-target.json'),JSON.stringify(c,null,2));return {city:c.id,x:c.x,y:c.y,hiddenUnits:c.military.units,hiddenStock:c.stock};",
+    "result": {
+      "city": "city:003",
+      "x": 12,
+      "y": 26,
+      "hiddenUnits": {
+        "militia": 777,
+        "scout": 111
+      },
+      "hiddenStock": {
+        "food": 13337,
+        "wood": 12222,
+        "stone": 11111,
+        "gold": 9999
+      }
+    }
+  },
+  {
+    "at": "2026-10-12T16:32:37.302Z",
+    "id": "enemy-intelligence-masking",
+    "code": "const s=await import('./scenarios.mjs?native=1'),t=JSON.parse(await fs.readFile(path.join(outDir,'intel-target.json'),'utf8'));await context.tracing.start({screenshots:true,snapshots:true,sources:true});const initial=await s.load(page,outDir,'intel.realm-save');await s.center(page,t.x,t.y);const box=await page.locator('.map-overlay').boundingBox();await page.mouse.click(box.x+box.width/2,box.y+box.height/2-10);await page.getByRole('dialog').waitFor();await page.waitForTimeout(400);const panel=await page.locator('.target-panel').innerText();if(!panel.includes('尚未偵察')||!panel.includes('資源庫存未知')||['777','888','13,337','12,222','11,111','9,999','7 級'].some(v=>panel.includes(v)))throw Error('enemy private intelligence leak');await page.screenshot({path:path.join(outDir,'enemy-intel-masked.png')});await page.getByRole('button',{name:'掠奪物資',exact:true}).click();const dispatch=await page.getByRole('dialog').innerText();if(['777','888','13,337','12,222','11,111','9,999'].some(v=>dispatch.includes(v)))throw Error('dispatch private intelligence leak');await page.screenshot({path:path.join(outDir,'enemy-dispatch-masked.png')});await page.getByRole('button',{name:'關閉對話框',exact:true}).click();await fs.writeFile(path.join(outDir,'enemy-intel.json'),JSON.stringify({target:t,formalInitial:initial.cities.find(c=>c.id===t.id),panel,dispatch},null,2));await context.tracing.stop({path:path.join(outDir,'intel-trace.zip')});return {panel,dispatch};",
+    "result": {
+      "panel": "聚落 · （12, 26）\n白馬塔拉新營\n玩家\n木華黎・那日松\n文明\n蒙古\n軍團\n尚未開放\n帝國\n獨立領主\n關係\n中立\n已知駐軍\n尚未偵察\n城防\n尚未偵察\n人口\n15,061\n\n駐軍情報未知，請先派遣斥候偵察。\n\n偵察資源情報\n\n資源庫存未知\n\n派遣斥候\n掠奪物資\n佔領據點",
+      "dispatch": "掠奪 · 白馬塔拉新營\n×\n長寧安平郡\n出發城市\n→\n白馬塔拉新營\n木華黎・那日松\n—\n單程行軍\n編入部隊\n投入全部戰鬥兵\n民兵\n可用 1,000\n\n戰利品受存活部隊載量限制，隨部隊返回後入庫。\n\n返回\n下達掠奪命令"
+    }
+  },
+  {
+    "at": "2026-10-12T16:35:11.078Z",
+    "id": "mobile-trusted-touch-reduced-siege-and-governance",
+    "code": "const s=await import('./scenarios.mjs?native=1');await context.tracing.start({screenshots:true,snapshots:true,sources:true});const w=await s.load(page,outDir,'matrix-50-true.realm-save'),city=w.cities.find(c=>c.id===w.combat.battles[0].cityId);await s.center(page,city.x,city.y);await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>JSON.parse(document.querySelector('.map-overlay').dataset.armyOverlay).visibleBattles===1);await page.evaluate(()=>{window.__trustedTouches=[];document.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')window.__trustedTouches.push({trusted:e.isTrusted,type:e.pointerType});});});const touch=await (await import('../r3-local-2026-10-12/mobile-verification.mjs')).default(page,context,outDir);const trusted=await page.evaluate(()=>window.__trustedTouches);if(!touch.dragChanged||!touch.pinchChanged||touch.overflow.viewport!==touch.overflow.document||!trusted.every(e=>e.trusted))throw Error('touch/mobile failed');await page.setViewportSize({width:390,height:844});await page.locator('nav[aria-label=\"遊戲主要功能\"] button').filter({hasText:'治理方針'}).click();await page.locator('.governance-controls select').selectOption('reserve');await page.locator('.governance-controls button').first().click();await page.getByRole('button',{name:'套用治理設定',exact:true}).waitFor();await page.screenshot({path:path.join(outDir,'mobile-governance.png'),fullPage:true});const applied=await s.state(page);if(applied.governors.find(g=>g.cityId===w.cities[0].id)?.policy!=='reserve')throw Error('mobile governance failed');await page.getByRole('button',{name:'停止總督',exact:true}).click();await page.getByRole('button',{name:'委任總督',exact:true}).waitFor();await page.setViewportSize({width:1440,height:1000});await s.center(page,city.x,city.y);const overlay=JSON.parse(await page.locator('.map-overlay').getAttribute('data-army-overlay'));await page.screenshot({path:path.join(outDir,'siege-reduced-motion.png')});await page.emulateMedia({reducedMotion:'no-preference'});await fs.writeFile(path.join(outDir,'mobile-touch-reduced.json'),JSON.stringify({touch,trusted,overlay,governor:applied.governors.find(g=>g.cityId===w.cities[0].id),physicalPhone:'MANUAL PENDING'},null,2));await context.tracing.stop({path:path.join(outDir,'mobile-trace.zip')});return {touch,trusted,overlay};",
+    "error": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '治理方針' })\u001b[22m\n",
+    "stack": "locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '治理方針' })\u001b[22m\n\n    at eval (<anonymous>:3:1134)\n    at async file:///G:/Projects/Lieguo/docs/validation/r3-delta-2026-10-12/browser.mjs:35:41"
+  },
+  {
+    "at": "2026-10-12T16:37:47.248Z",
+    "id": "mobile-inspection",
+    "code": "return {text:await page.locator('body').innerText(),buttons:await page.locator('button').allTextContents(),touch:await page.evaluate(()=>window.__trustedTouches)};",
+    "result": {
+      "text": "目前城市\n長寧安平郡（293, 71）\n城堡\n人口\n15,243 / 30,400\n穀\n47,772\n-956 / 時\n木\n50,105\n+45 / 時\n石\n50,084\n+36 / 時\n金\n50,063\n+27 / 時\n0\n1,000\n0\n0\n0\n0\n0\n0\n0\n0\n0\n＋\n−\n⋯\n回城\n全區\nXY\n定位\n帝國\n版圖\n顯示\n標示\n★ 最愛\n0/5\n點據點查看　單指拖曳　雙指縮放\n384×384 · 150%\n▧\n地圖\n府\n城市\n⚑\n軍隊\n書\n戰報\n冊\n科技\n印\n勢力\n政\n治理\n☰\n更多\n›\n新版可用 · 保存並更新",
+      "buttons": [
+        "城堡",
+        "人口15,243 / 30,400",
+        "穀47,772-956 / 時",
+        "木50,105+45 / 時",
+        "石50,084+36 / 時",
+        "金50,063+27 / 時",
+        "0",
+        "1,000",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "＋",
+        "−",
+        "⋯",
+        "回城",
+        "全區",
+        "XY定位",
+        "帝國版圖",
+        "顯示標示",
+        "★ 最愛0/5",
+        "‹",
+        "▧地圖",
+        "府城市",
+        "⚑軍隊",
+        "書戰報",
+        "冊科技",
+        "印勢力",
+        "政治理",
+        "☰更多",
+        "›",
+        "新版可用 · 保存並更新"
+      ],
+      "touch": [
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-10-12T16:38:43.928Z",
+    "id": "exile-label-toggle-baseline",
+    "code": "await context.tracing.stop({path:path.join(outDir,'mobile-locator-failure-trace.zip')});await page.setViewportSize({width:1440,height:1000});await page.emulateMedia({reducedMotion:'no-preference'});const s=await import('./scenarios.mjs?native=1'),m=JSON.parse(await fs.readFile(path.join(outDir,'scenario-metadata.json'),'utf8'));await s.load(page,outDir,'civilians.realm-save');await context.tracing.start({screenshots:true,snapshots:true,sources:true});await page.evaluate(()=>{window.__flowPaints=[];const original=CanvasRenderingContext2D.prototype.fillText;CanvasRenderingContext2D.prototype.fillText=function(text,...args){if(text==='流')window.__flowPaints.push({at:performance.now(),x:args[0],y:args[1]});return original.call(this,text,...args);};});await s.center(page,m.civilians.exile.x,m.civilians.exile.y);if(await page.getByRole('button',{name:/顯示.*標示/}).count())await page.getByRole('button',{name:/顯示.*標示/}).click();await page.waitForTimeout(200);const on=await page.evaluate(()=>window.__flowPaints.length);await page.screenshot({path:path.join(outDir,'exile-labels-on.png')});await page.getByRole('button',{name:/隱藏.*標示/}).click();await page.evaluate(()=>{window.__flowPaints=[];});await page.getByRole('button',{name:'放大地圖',exact:true}).click();await page.waitForTimeout(200);const off=await page.evaluate(()=>window.__flowPaints.length);await page.screenshot({path:path.join(outDir,'exile-labels-off-baseline.png')});await fs.writeFile(path.join(outDir,'exile-labels-baseline.json'),JSON.stringify({on,off,exile:m.civilians.exile},null,2));await context.tracing.stop({path:path.join(outDir,'exile-baseline-trace.zip')});return {on,off};",
+    "result": {
+      "on": 64,
+      "off": 0
+    }
+  },
+  {
+    "at": "2026-10-12T16:40:11.831Z",
+    "id": "mobile-retest-correct-navigation",
+    "code": "await page.setViewportSize({width:1440,height:1000});const a=JSON.parse(await fs.readFile(path.join(outDir,'actions.json'),'utf8')).find(a=>a.id==='mobile-trusted-touch-reduced-siege-and-governance');const code=a.code.replace(\"page.locator('nav[aria-label=\\\"遊戲主要功能\\\"] button').filter({hasText:'治理方針'})\",\"page.getByRole('button',{name:/治理/})\");return await new Function('page','context','browser','fs','path','outDir','return (async()=>{'+code+'})();')(page,context,browser,fs,path,outDir);",
+    "result": {
+      "touch": {
+        "type": "Chrome desktop with mobile viewport and trusted CDP touch emulation; not physical phone",
+        "before": {
+          "x": 4460,
+          "y": 3590,
+          "z": 0.75
+        },
+        "afterDrag": {
+          "x": 4540,
+          "y": 3536.666666666666,
+          "z": 0.75
+        },
+        "afterPinch": {
+          "x": 4539.9999923706055,
+          "y": 3536.666666666666,
+          "z": 1.5000000715255737
+        },
+        "dragChanged": true,
+        "pinchChanged": true,
+        "overflow": {
+          "viewport": 390,
+          "document": 390,
+          "touchPoints": 2
+        }
+      },
+      "trusted": [
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        },
+        {
+          "trusted": true,
+          "type": "touch"
+        }
+      ],
+      "overlay": {
+        "routes": 26,
+        "markers": 6,
+        "animated": true,
+        "cacheSize": 100,
+        "hits": 1500,
+        "misses": 100,
+        "civilianMarkers": 0,
+        "civilianCacheMisses": 0,
+        "visibleBattles": 1,
+        "visibleImpacts": 0,
+        "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+      }
+    }
+  },
+  {
+    "at": "2026-10-12T16:45:51.061Z",
+    "id": "close-evidence-browser",
+    "code": "return {browser:browser.version(),lastUrl:page.url(),evidenceComplete:true};",
+    "close": true,
+    "result": {
+      "browser": "154.0.8037.98",
+      "lastUrl": "http://127.0.0.1:5174/",
+      "evidenceComplete": true
+    }
+  }
+]

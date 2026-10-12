@@ -1,0 +1,57 @@
+{
+  "anchor": {
+    "id": "army:0000000000000124",
+    "owner": "faction:039",
+    "mission": "scout",
+    "point": {
+      "x": 25.87657769135584,
+      "y": 145.87657769135583
+    },
+    "time": 6406488
+  },
+  "before": {
+    "id": "army:0000000000000124",
+    "time": 6442778,
+    "point": {
+      "x": 27.159630886720407,
+      "y": 147.1596308867204
+    },
+    "heading": 3.141592653589793,
+    "overlay": {
+      "routes": 1,
+      "markers": 1,
+      "animated": true,
+      "cacheSize": 2,
+      "hits": 74,
+      "misses": 2,
+      "civilianMarkers": 0,
+      "civilianCacheMisses": 0,
+      "visibleBattles": 0,
+      "visibleImpacts": 0,
+      "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+    }
+  },
+  "after": {
+    "id": "army:0000000000000124",
+    "time": 6542024,
+    "point": {
+      "x": 29,
+      "y": 150
+    },
+    "heading": 3.141592653589793,
+    "overlay": {
+      "routes": 0,
+      "markers": 0,
+      "animated": false,
+      "cacheSize": 3,
+      "hits": 818,
+      "misses": 4,
+      "civilianMarkers": 0,
+      "civilianCacheMisses": 0,
+      "visibleBattles": 0,
+      "visibleImpacts": 0,
+      "paintOrder": "terrain,politics,entities,routes,armies,labels,hover,battle-overlay"
+    }
+  },
+  "moved": true
+}

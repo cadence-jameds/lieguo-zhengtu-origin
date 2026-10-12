@@ -17,7 +17,7 @@ it('formal Worker authority cannot transitively import DEMO repair/storage or pr
   }
  }
  visit(resolve(root,'game/runtime.worker.ts'));
- const paths=[...seen].map(p=>relative(root,p));
+ const paths=[...seen].map(p=>relative(root,p).replace(/\\/g,'/'));
  expect(paths).toContain('game/persistence.ts');expect(paths).toContain('game/engine.ts');expect(paths).toContain('game/world.ts');
  expect(paths.filter(p=>/(^simulation\/|^persistence\/|^hooks\/|^worker\/|^map\/|game\/legacy)/.test(p))).toEqual([]);
 });

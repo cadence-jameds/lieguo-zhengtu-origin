@@ -6,6 +6,7 @@ import {useGame} from './useGame';
 import {createFormalFixture,fixtureIds} from './formal/fixture';
 import {worldPatch} from './worldStream';
 import type {FormalWorld} from './formal/model';
+import {governanceBase} from './governanceAdmission';
 vi.mock('./saveLock',()=>({withSaveLock:async(_locks:unknown,_signal:unknown,run:()=>Promise<void>)=>run()}));
 let root:Root,container:HTMLDivElement,engine:ReturnType<typeof useGame>,port:FakeWorker,w:FormalWorld;
 class FakeWorker {
@@ -37,6 +38,11 @@ it('clock-only refresh retries the same intention once without a gap in busy tra
 it('actual event/command revision changes reject the pending intention without automatic resubmission',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0];
  await act(async()=>{port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'rejected',revision:1,reason:'世界版本已更新，請重新確認狀態。'}});port.emit(state({...w,time:10000,revision:1},1));port.emit({type:'requestDone',requestId:first.requestId});});expect(port.sent).toHaveLength(1);expect(engine.busy).toBe(false);expect(engine.notice).toContain('重新確認');
+});
+it('governance uses the rendered configuration precondition even when a newer snapshot arrives before submission',async()=>{
+ const base=governanceBase(w,fixtureIds.home);await act(async()=>port.emit(state({...w,revision:1,time:1000},1)));
+ await act(async()=>engine.issue({type:'governance.set',cityId:fixtureIds.home,enabled:true,policy:'reserve',budget:2400,reserve:180},base));const r=port.sent[0];expect(r.order.expectedRevision).toBe(w.revision);expect(r.governanceBase).toEqual(base);
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:r.order.commandId,status:'rejected',revision:1,reason:'治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。'}});port.emit(state({...w,revision:1,time:1000},1));port.emit({type:'requestDone',requestId:r.requestId});});expect(port.sent).toHaveLength(1);expect(engine.busy).toBe(false);expect(engine.notice).toContain('再次套用');
 });
 
 it('committed patches keep static world identity and a mismatched stream requests a full snapshot',async()=>{
