@@ -1,3 +1,4 @@
+import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
 /// <reference lib="webworker" />
 import {createFormalWorld} from './world';
@@ -35,18 +36,18 @@ async function advanceAndSave(){
 async function handle(r:RuntimeRequest){
  if(r.stateMode==='patch')patchMode=true;
  if(r.type==='snapshot'){lastPublished=null;state();return;}
- if(r.type==='load'||r.type==='resume'){post({type:'phase',text:'計算離線世界推進'});const result=await loadWithOffline();world=result.game;away=false;reanchor();post({type:'loaded',recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}}});return;}
+ if(r.type==='load'||r.type==='resume'){post({type:'phase',text:'計算離線世界推進'});const result=await loadWithOffline();let loaded=result.game;if(loaded&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;away=false;reanchor();post({type:'loaded',recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}}});return;}
  if(r.type==='away'){await advanceAndSave();away=true;state();return;}
  if(r.type==='reset'){await clearSavedGames();world=null;reanchor();post({type:'resetDone'});state();return;}
  if(r.type==='start'){
   const name=r.name.trim();if(!name||name.length>24||/[\x00-\x1f\x7f]/.test(name))throw new Error('請輸入 1～24 字的名字。');
   const fixture=createFormalWorld({campaign:crypto.randomUUID(),seed:r.seed,speed:r.speed,name,civilizationId:r.civilizationId,offlineHours:r.offlineHours});
-  const committed=await startCampaign(fixture);world=committed;away=false;reanchor();post({type:'switched',transitionId:r.transitionId,world});await publishReportStatus();return;
+  enableAutonomy(fixture);const committed=await startCampaign(fixture);world=committed;away=false;reanchor();post({type:'switched',transitionId:r.transitionId,world});await publishReportStatus();return;
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
   const committed=r.type==='restore'?await restore(r.id):await importSave(r.text);
-  world=committed;away=false;reanchor();post({type:'switched',transitionId:r.transitionId,world});await publishReportStatus();return;
+  let activated=committed;if(!committed.fixture&&!committed.autonomy){const draft=structuredClone(committed);enableAutonomy(draft);draft.revision++;activated=await save(draft,[],committed.revision);}world=activated;away=false;reanchor();post({type:'switched',transitionId:r.transitionId,world});await publishReportStatus();return;
  }
  if(r.type==='cityIntel'){if(!world||r.campaignId!==world.campaignId){post({type:'cityIntel',queryId:r.queryId,error:'戰役已變更，請重新開啟情報窗。'});return;}if(r.generation!==undefined&&(!Number.isSafeInteger(r.generation)||r.generation<0))throw new Error('無效的據點世代。');if(!Number.isSafeInteger(r.reportCursor)||r.reportCursor<1||!Number.isSafeInteger(r.time)||r.time<0)throw new Error('無效的情報游標。');const snapshot={...world,time:Math.min(world.time,r.time),sequences:{...world.sequences,report:Math.min(world.sequences.report,r.reportCursor)}};post({type:'cityIntel',queryId:r.queryId,data:await readCityIntel(snapshot,r.cityId,r.generation)});return;}
  if(!world)throw new Error('請先建立正式世界。');

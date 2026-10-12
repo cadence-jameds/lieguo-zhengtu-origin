@@ -66,12 +66,13 @@ export type FormalEvent = {id:EventId;at:number} & (
   | {type:'army.return';armyId:ArmyId}
   | {type:'combat.round';battleId:import('./ids').BattleId}
   | {type:'wild.respawn';siteId:WildSiteId;generation:number}
+  | {type:'ai.decide';factionId:FactionId}
   | {type:'fixture.marker';marker:string}
 );
 export type CompletionReceipt = {eventId:EventId;projectId:ResearchProjectId;at:number};
 export type CommandReceipt = {commandId:CommandId;issuerId:FactionId;fingerprint:string;committedRevision:number;disposition:'applied'|'rolled-back'};
 export type FormalWorld = {
-  kind:'formal';extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|200};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|6|24;
+  kind:'formal';autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|200};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|6|24;
   dimensions:{width:number;height:number};playerFactionId:FactionId;revision:number;
   sequences:{event:number;report:number;project:number};
   factions:FormalFaction[];cities:FormalCity[];armies:FormalArmy[];events:FormalEvent[];

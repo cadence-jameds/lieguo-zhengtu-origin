@@ -1,3 +1,4 @@
+import {handleAutonomy,retireAutonomy} from './autonomy';
 import {applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
 import {applyPolitics,reconcilePolitics,reconcilePoliticalEvents} from './politics';
 import {applyCooperation} from './cooperation';
@@ -104,7 +105,10 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
  while(scheduler.peek()&&scheduler.peek()!.at<=target){
   const e=scheduler.pop()!;w.time=e.at;
   const returningSource=e.type==='logistics.return'?w.logistics?.find(t=>t.shipmentId===e.shipmentId)?.sourceCityId:undefined;
-  const combatReports=handleCombatEvent(w,e,scheduler);
+  const aiReports=handleAutonomy(w,e,scheduler,submitFormalOrder);
+  const combatReports=aiReports===null?handleCombatEvent(w,e,scheduler):null;
+  if(aiReports!==null)reports.push(...aiReports);
+  else
   if(combatReports!==null)reports.push(...combatReports);
   else if(handleCraftsmanEvent(w,e,scheduler)){}
   else if(e.type==='politics.end-friendly'){if(w.politics)w.politics.relations=w.politics.relations.filter(r=>r.eventId!==e.id);}
@@ -117,9 +121,10 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
    if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
-  resolveExtinctions(w,scheduler);
+  resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
  }
- reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision++;
+ reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
+ for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  validateFormalWorld(w);return{world:w,reports};
 }
