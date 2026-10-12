@@ -175,7 +175,12 @@ const worldSchema:z.ZodType<FormalWorld>=z.object({kind:z.literal('formal'),meta
   if(e.type==='research.complete'&&!w.researchProjects.some(p=>p.projectId===e.projectId&&p.phase==='researching'&&p.completionEventId===e.id&&e.at===p.startedAt+p.durationSnapshot.durationMs))fail('Dangling or mismatched project event');
  }
  for(const r of w.completionReceipts)if(!w.researchProjects.some(p=>p.projectId===r.projectId&&p.phase==='completed'&&p.completionEventId===r.eventId&&p.completedAt===r.at)||r.at>w.time)fail('Invalid completion receipt');
- for(const p of w.largeProjects)if(p.owner.kind==='faction'&&!factions.has(p.owner.factionId))fail('Large project owner missing');
+ for(const p of w.largeProjects){
+  if(p.owner.kind==='faction'&&!factions.has(p.owner.factionId))fail('Large project owner missing');
+  // B1 abstract fixtures can model an empire before B6 politics; actual worlds may never persist an orphan.
+  const empireOwner=p.owner.kind==='empire'?p.owner.empireId:null;
+  if(empireOwner&&(!w.fixture||w.politics)&&!w.politics?.empires.some(e=>e.id===empireOwner))fail('Large project empire owner missing');
+ }
 });
 /** Validation is pure: strict shape and invariants, with no defaults/coercion/transforms/repairs. */
 export function validateFormalWorld(value:unknown):FormalWorld {return worldSchema.parse(value);}

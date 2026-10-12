@@ -10,7 +10,7 @@
     "report": {
       "id": "report:0000000000000001",
       "sequence": 1,
-      "campaignId": "campaign:b5lab-035-0765462c-a1d2-444a-a557-fb2154a5778b",
+      "campaignId": "campaign:b5lab-035-acafe189-7285-46a4-ae1f-d7ede2ae922c",
       "ownerFactionId": "faction:000",
       "at": 2756468,
       "category": "battle",
@@ -71,9 +71,9 @@
         "populationBefore": 15079.790036974304,
         "populationAfter": 15079.790036974304,
         "returnedTrainingPopulation": 0,
-        "realResolvedAt": 1791569703446
+        "realResolvedAt": 1791782694790
       },
-      "realAt": 1791569703446,
+      "realAt": 1791782694790,
       "clockSpeed": 50,
       "read": false
     }
@@ -82,7 +82,7 @@
     "army": {
       "intel": {
         "observedAt": 918823,
-        "observedRealAt": 1791569703920,
+        "observedRealAt": 1791782695257,
         "cityId": "city:035",
         "units": {
           "scout": 5,
@@ -107,7 +107,7 @@
     "resources": {
       "intel": {
         "observedAt": 918823,
-        "observedRealAt": 1791569703920,
+        "observedRealAt": 1791782695257,
         "cityId": "city:035",
         "units": {
           "scout": 5,
@@ -132,7 +132,7 @@
     "defenses": {
       "intel": {
         "observedAt": 918823,
-        "observedRealAt": 1791569703920,
+        "observedRealAt": 1791782695257,
         "cityId": "city:035",
         "units": {
           "scout": 5,
@@ -158,7 +158,7 @@
   "scout-failure-6": {
     "id": "report:0000000000000001",
     "sequence": 1,
-    "campaignId": "campaign:b5lab-035-7dd9eeab-dbd7-496a-8477-2f7fa27f444b",
+    "campaignId": "campaign:b5lab-035-e3582661-34dd-4d8e-b0c7-234772f348b6",
     "ownerFactionId": "faction:000",
     "at": 918823,
     "category": "scout",
@@ -215,16 +215,16 @@
       "populationBefore": 0,
       "populationAfter": 0,
       "returnedTrainingPopulation": 0,
-      "realResolvedAt": 1791569704464
+      "realResolvedAt": 1791782695705
     },
-    "realAt": 1791569704464,
+    "realAt": 1791782695705,
     "clockSpeed": 50,
     "read": false
   },
   "scout-failure-1": {
     "id": "report:0000000000000001",
     "sequence": 1,
-    "campaignId": "campaign:b5lab-035-bc12b1a8-0a6d-4054-990a-6c3a4706a9bd",
+    "campaignId": "campaign:b5lab-035-f3d4129c-334e-4f65-8698-d338b98b5956",
     "ownerFactionId": "faction:000",
     "at": 918823,
     "category": "scout",
@@ -281,9 +281,9 @@
       "populationBefore": 0,
       "populationAfter": 0,
       "returnedTrainingPopulation": 0,
-      "realResolvedAt": 1791569704799
+      "realResolvedAt": 1791782695989
     },
-    "realAt": 1791569704799,
+    "realAt": 1791782695989,
     "clockSpeed": 50,
     "read": false
   },
@@ -339,13 +339,6 @@
     "wallBefore": 3,
     "wallAfter": 0,
     "siege": [
-      {
-        "target": {
-          "kind": "wall"
-        },
-        "before": 3,
-        "after": 0
-      },
       {
         "target": {
           "kind": "building",
@@ -617,6 +610,13 @@
         },
         "before": 15,
         "after": 0
+      },
+      {
+        "target": {
+          "kind": "wall"
+        },
+        "before": 3,
+        "after": 0
       }
     ],
     "ownerBefore": "faction:035",
@@ -624,7 +624,40 @@
     "populationBefore": 15119.804347145713,
     "populationAfter": 400,
     "returnedTrainingPopulation": 0,
-    "realResolvedAt": 1791569705254
+    "conquestReason": "conquered",
+    "siegeRounds": 1,
+    "siegeHistory": [
+      {
+        "round": 1,
+        "at": 4134702,
+        "wallBefore": 3,
+        "wallAfter": 0
+      }
+    ],
+    "history": [
+      {
+        "at": 4134702,
+        "kind": "siege-start",
+        "combatRound": 1,
+        "siegeRound": 0
+      },
+      {
+        "at": 4134702,
+        "kind": "catapult-batch",
+        "combatRound": 1,
+        "siegeRound": 0
+      },
+      {
+        "at": 4134702,
+        "kind": "wall-breached",
+        "wallBefore": 3,
+        "wallAfter": 0,
+        "combatRound": 1,
+        "siegeRound": 1
+      }
+    ],
+    "historyOmitted": 0,
+    "realResolvedAt": 1791782696332
   },
   "conquest-50": {
     "battle": {
@@ -704,7 +737,25 @@
       "wallBefore": 0,
       "populationBefore": 15099.787234587555,
       "ownerBefore": "faction:035",
-      "developmentBefore": 280
+      "developmentBefore": 280,
+      "phase": "combat",
+      "siegeRound": 0,
+      "wallDamage": 0,
+      "wallDamageLevel": 0,
+      "catapultBatchDone": false,
+      "developmentLost": 0,
+      "siegeChanges": [],
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 3445585,
+          "kind": "reinforcement",
+          "ownerFactionId": "faction:035",
+          "combatRound": 0,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0
     },
     "report": {
       "battleId": "battle:0000000000000001",
@@ -763,7 +814,32 @@
       "populationBefore": 15143.383986355035,
       "populationAfter": 14386.214787037283,
       "returnedTrainingPopulation": 0,
-      "realResolvedAt": 1791569706000
+      "conquestReason": "conquered",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 3445585,
+          "kind": "reinforcement",
+          "combatRound": 0,
+          "siegeRound": 0,
+          "ownerFactionId": "faction:035"
+        },
+        {
+          "at": 4945585,
+          "kind": "siege-start",
+          "combatRound": 2,
+          "siegeRound": 0
+        },
+        {
+          "at": 4945585,
+          "kind": "catapult-batch",
+          "combatRound": 2,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0,
+      "realResolvedAt": 1791782696901
     },
     "receipts": [
       {
@@ -881,7 +957,25 @@
       "wallBefore": 0,
       "populationBefore": 15099.787234587555,
       "ownerBefore": "faction:035",
-      "developmentBefore": 280
+      "developmentBefore": 280,
+      "phase": "combat",
+      "siegeRound": 0,
+      "wallDamage": 0,
+      "wallDamageLevel": 0,
+      "catapultBatchDone": false,
+      "developmentLost": 0,
+      "siegeChanges": [],
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 3445585,
+          "kind": "reinforcement",
+          "ownerFactionId": "faction:035",
+          "combatRound": 0,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0
     },
     "report": {
       "battleId": "battle:0000000000000001",
@@ -940,7 +1034,32 @@
       "populationBefore": 15274.742434732689,
       "populationAfter": 14511.005312996054,
       "returnedTrainingPopulation": 0,
-      "realResolvedAt": 1791569707251
+      "conquestReason": "conquered",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 3445585,
+          "kind": "reinforcement",
+          "combatRound": 0,
+          "siegeRound": 0,
+          "ownerFactionId": "faction:035"
+        },
+        {
+          "at": 9445585,
+          "kind": "siege-start",
+          "combatRound": 2,
+          "siegeRound": 0
+        },
+        {
+          "at": 9445585,
+          "kind": "catapult-batch",
+          "combatRound": 2,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0,
+      "realResolvedAt": 1791782697702
     },
     "receipts": [
       {
@@ -983,7 +1102,7 @@
   "defense-raid": {
     "id": "report:0000000000000001",
     "sequence": 1,
-    "campaignId": "campaign:b5lab-035-7f143d5b-9d0d-4cc2-9f6b-3be1845e995b",
+    "campaignId": "campaign:b5lab-035-64d51006-ebf2-46eb-b90b-b4055c2d8a1f",
     "ownerFactionId": "faction:000",
     "at": 4134702,
     "category": "battle",
@@ -1048,21 +1167,21 @@
       "populationBefore": 15119.804347145713,
       "populationAfter": 15119.804347145713,
       "returnedTrainingPopulation": 0,
-      "realResolvedAt": 1791569707963
+      "realResolvedAt": 1791782698236
     },
-    "realAt": 1791569707963,
+    "realAt": 1791782698236,
     "clockSpeed": 50,
     "read": false
   },
   "defense-conquest": {
     "id": "report:0000000000000001",
     "sequence": 1,
-    "campaignId": "campaign:b5lab-035-63ae3ba1-5cf2-4334-8825-55e4cccb0e92",
+    "campaignId": "campaign:b5lab-035-1179820f-0cb6-4658-a370-95711eae2606",
     "ownerFactionId": "faction:000",
     "at": 4134702,
     "category": "battle",
     "title": "征服成功｜玉川望岳陵",
-    "text": "1 回合；征服成功。",
+    "text": "1 主戰回合；征服成功。",
     "battle": {
       "battleId": "battle:0000000000000001",
       "resolutionId": "resolution:0000000000000001.final",
@@ -1117,13 +1236,6 @@
       "wallBefore": 3,
       "wallAfter": 0,
       "siege": [
-        {
-          "target": {
-            "kind": "wall"
-          },
-          "before": 3,
-          "after": 0
-        },
         {
           "target": {
             "kind": "building",
@@ -1347,6 +1459,13 @@
           },
           "before": 5,
           "after": 3
+        },
+        {
+          "target": {
+            "kind": "wall"
+          },
+          "before": 3,
+          "after": 0
         }
       ],
       "ownerBefore": "faction:000",
@@ -1354,9 +1473,49 @@
       "populationBefore": 15119.804347145713,
       "populationAfter": 11974.345049927006,
       "returnedTrainingPopulation": 0,
-      "realResolvedAt": 1791569708863
+      "conquestReason": "conquered",
+      "siegeRounds": 1,
+      "siegeHistory": [
+        {
+          "round": 1,
+          "at": 4134702,
+          "wallBefore": 3,
+          "wallAfter": 0
+        }
+      ],
+      "history": [
+        {
+          "at": 4134702,
+          "kind": "reinforcement",
+          "ownerFactionId": "faction:000",
+          "combatRound": 0,
+          "siegeRound": 0
+        },
+        {
+          "at": 4134702,
+          "kind": "siege-start",
+          "combatRound": 1,
+          "siegeRound": 0
+        },
+        {
+          "at": 4134702,
+          "kind": "catapult-batch",
+          "combatRound": 1,
+          "siegeRound": 0
+        },
+        {
+          "at": 4134702,
+          "kind": "wall-breached",
+          "wallBefore": 3,
+          "wallAfter": 0,
+          "combatRound": 1,
+          "siegeRound": 1
+        }
+      ],
+      "historyOmitted": 0,
+      "realResolvedAt": 1791782698886
     },
-    "realAt": 1791569708863,
+    "realAt": 1791782698886,
     "clockSpeed": 50,
     "read": false
   }
