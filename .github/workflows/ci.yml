@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Full regression in a disposable copy
+        run: node scripts/verify-in-isolation.mjs full
+      - name: Build for project Pages
+        id: build
+        if: ${{ !cancelled() }}
+        run: npm run build
+      - name: Check project Pages paths
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: node scripts/check-pages-build.mjs
+      - name: Preserve regression result
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-${{ github.run_id }}
+          path: artifacts/integration/regression-full.json
+          if-no-files-found: ignore

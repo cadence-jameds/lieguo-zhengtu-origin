@@ -9,3 +9,21 @@ coverage/
 Thumbs.db
 artifacts/
 docs/validation/**/*.zip
+
+# Credentials and local-only data; existing verified evidence stays in history.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.bundle
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.har
+playwright-report/
+test-results/
+local-saves/
