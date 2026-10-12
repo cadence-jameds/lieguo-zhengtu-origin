@@ -66,13 +66,14 @@ export type FormalEvent = {id:EventId;at:number} & (
   | {type:'army.return';armyId:ArmyId}
   | {type:'combat.round';battleId:import('./ids').BattleId}
   | {type:'wild.respawn';siteId:WildSiteId;generation:number}
+  | {type:'governance.decide';cityId:CityId}
   | {type:'ai.decide';factionId:FactionId}
   | {type:'fixture.marker';marker:string}
 );
 export type CompletionReceipt = {eventId:EventId;projectId:ResearchProjectId;at:number};
 export type CommandReceipt = {commandId:CommandId;issuerId:FactionId;fingerprint:string;committedRevision:number;disposition:'applied'|'rolled-back'};
 export type FormalWorld = {
-  kind:'formal';autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|200};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|6|24;
+  kind:'formal';governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|200};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|6|24;
   dimensions:{width:number;height:number};playerFactionId:FactionId;revision:number;
   sequences:{event:number;report:number;project:number};
   factions:FormalFaction[];cities:FormalCity[];armies:FormalArmy[];events:FormalEvent[];
@@ -83,7 +84,7 @@ export type FormalReport = {id:ReportId;sequence:number;campaignId:CampaignId;ow
 export type MilitaryCommand={type:'military.recruit';cityId:CityId;unitId:string;count:number;lane?:0|1}|{type:'military.cancel';cityId:CityId;trainingCommandId:CommandId}|{type:'military.disband';cityId:CityId;unitId:string;count:number};
 export type DevelopmentCommand={type:'research.start';cityId:CityId;techId:string}|{type:'age.start';cityId:CityId}|{type:'settlement.prepare';cityId:CityId}|{type:'settlement.cancel';cityId:CityId}|{type:'settlement.dispatch';cityId:CityId;x:number;y:number;name:string;escort:Record<string,number>}|{type:'logistics.auto.set';cityId:CityId;rules:AutoLogistics[]};
 export type EconomyCommand = {type:'building.demolish';cityId:CityId;key:string}|{type:'field.upgrade';cityId:CityId;slot:number;lane?:0|1}|{type:'building.upgrade';cityId:CityId;key:string;lane?:0|1;slot?:number}|{type:'construction.cancel';cityId:CityId;constructionCommandId:CommandId}|{type:'city.promote';cityId:CityId}|{type:'logistics.dispatch';cityId:CityId;destinationCityId:CityId;resources:Resources};
-export type FormalCommand = import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|200;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
+export type FormalCommand = import('./governance').GovernanceCommand| import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|200;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
 export type FormalOrder = {commandId:CommandId;campaignId:CampaignId;issuerId:FactionId;issuedWorldTime:number;expectedRevision:number;payload:FormalCommand};
 export type CommandAck = {commandId:CommandId;status:'committed'|'duplicate'|'rolled-back'|'rejected';revision:number;originalRevision?:number;reason?:string};
 export type FormalTransition = {world:FormalWorld;reports:FormalReport[];ack?:CommandAck};

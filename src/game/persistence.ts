@@ -1,3 +1,4 @@
+import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
 import {advanceOffline,type OfflineSummary} from './formal/offline';
 import Dexie,{type Table} from 'dexie';
@@ -58,7 +59,7 @@ export class FormalPersistence {
   for(const c of a.campaigns)if(new Set(c.receipts.map(r=>r.commandId)).size!==c.receipts.length||c.receipts.some(r=>r.committedRevision>a.revision))throw new Error('Invalid durable command authority');
   return a;
  }
- private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now()):Promise<FormalWorld>{
+ private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false):Promise<FormalWorld>{
   validateFormalWorld(input);validateReportHistory(input,reportWrites);
   // No memory mutation; caller may switch its displayed world only after this resolves.
   return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,async()=>{
@@ -76,6 +77,7 @@ export class FormalPersistence {
     for(const key of ['event','report','project'] as const)w.sequences[key]=Math.max(w.sequences[key],authority.sequences[key]);
     w.revision=Math.max(current?authority.revision+1:0,w.revision, ...w.commandReceipts.map(r=>r.committedRevision));
    }
+   if(activateAI)enableAutonomy(w);
    const real=(at:number)=>Math.max(0,Math.floor(savedAt-(w.time-at)/effectiveSpeed(input)));
    if(mode==='save'||mode==='start')stampPending(w,real);
    const stampedReports=reportWrites.map(r=>{const copy=structuredClone(r);if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});
@@ -148,18 +150,18 @@ export class FormalPersistence {
   }
   return result;
  }
- async restore(id:number){
+ async restore(id:number,activateAI=false){
   if(!Number.isSafeInteger(id)||id<1)throw new Error('回復點 ID 無效。');
   const b=await this.db.backups.get(id);if(!b)throw new Error('找不到正式回復點。');
-  return this.restoreValidatedCheckpoint(await validateCheckpointCandidate(b));
+  return this.restoreValidatedCheckpoint(await validateCheckpointCandidate(b),Date.now(),activateAI);
  }
- private async restoreValidatedCheckpoint(world:FormalWorld,savedAt=Date.now()){
-  const a=await this.authority();return this.commit(world,[],'restore',a.revision,savedAt);
+ private async restoreValidatedCheckpoint(world:FormalWorld,savedAt=Date.now(),activateAI=false){
+  const a=await this.authority();return this.commit(world,[],'restore',a.revision,savedAt,activateAI);
  }
- async importSave(text:string){
+ async importSave(text:string,activateAI=false){
   if(new TextEncoder().encode(text).length>100*1024*1024)throw new Error('存檔超過 100 MiB。');
   const {world,reports}=await decodeSave(JSON.parse(text)),a=await this.authority();
-  return this.commit(world,reports??[],'import',a.revision);
+  return this.commit(world,reports??[],'import',a.revision,Date.now(),activateAI);
  }
  async exportStoredSave(mode:'quick'|'full'='quick'){
   const {world,reports}=await this.db.transaction('r',this.db.saves,this.db.BattleReports,async()=>{
@@ -214,8 +216,8 @@ export const save=(...args:Parameters<FormalPersistence['save']>)=>active().save
 export const startCampaign=(world:FormalWorld)=>active().start(world);
 export const loadSave=()=>active().loadSave();
 export const backupList=()=>active().backupList();
-export const restore=(id:number)=>active().restore(id);
-export const importSave=(text:string)=>active().importSave(text);
+export const restore=(...args:Parameters<FormalPersistence['restore']>)=>active().restore(...args);
+export const importSave=(...args:Parameters<FormalPersistence['importSave']>)=>active().importSave(...args);
 export const exportStoredSave=(mode:'quick'|'full'='quick')=>active().exportStoredSave(mode);
 export const readReportPage=(world:FormalWorld,page:number,filter?:ReportFilter)=>active().readReportPage(world,page,filter);
 export const reportStatus=(world:FormalWorld)=>active().reportStatus(world);

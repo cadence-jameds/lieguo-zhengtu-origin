@@ -46,8 +46,8 @@ async function handle(r:RuntimeRequest){
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
-  const committed=r.type==='restore'?await restore(r.id):await importSave(r.text);
-  let activated=committed;if(!committed.fixture&&!committed.autonomy){const draft=structuredClone(committed);enableAutonomy(draft);draft.revision++;activated=await save(draft,[],committed.revision);}world=activated;away=false;reanchor();post({type:'switched',transitionId:r.transitionId,world});await publishReportStatus();return;
+  const committed=r.type==='restore'?await restore(r.id,true):await importSave(r.text,true);
+  world=committed;away=false;reanchor();post({type:'switched',transitionId:r.transitionId,world});await publishReportStatus();return;
  }
  if(r.type==='cityIntel'){if(!world||r.campaignId!==world.campaignId){post({type:'cityIntel',queryId:r.queryId,error:'戰役已變更，請重新開啟情報窗。'});return;}if(r.generation!==undefined&&(!Number.isSafeInteger(r.generation)||r.generation<0))throw new Error('無效的據點世代。');if(!Number.isSafeInteger(r.reportCursor)||r.reportCursor<1||!Number.isSafeInteger(r.time)||r.time<0)throw new Error('無效的情報游標。');const snapshot={...world,time:Math.min(world.time,r.time),sequences:{...world.sequences,report:Math.min(world.sequences.report,r.reportCursor)}};post({type:'cityIntel',queryId:r.queryId,data:await readCityIntel(snapshot,r.cityId,r.generation)});return;}
  if(!world)throw new Error('請先建立正式世界。');

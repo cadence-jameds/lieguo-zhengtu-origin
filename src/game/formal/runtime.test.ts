@@ -1,7 +1,9 @@
 import 'fake-indexeddb/auto';
 import {beforeEach,expect,it,vi} from 'vitest';
 import {createFormalFixture,fixtureIds} from './fixture';
-import {createFormalWorld} from './generator';
+import {createFormalWorld as nativeWorld} from './generator';
+import {isolatedAutonomyFixture} from './autonomyTestSupport';
+const createFormalWorld=(...args:Parameters<typeof nativeWorld>)=>isolatedAutonomyFixture(nativeWorld(...args));
 import {order} from './testSupport';
 import type {FormalWorld,FormalCommand} from './model';
 import {researchCity,ownSecond,build} from './developmentTestSupport';

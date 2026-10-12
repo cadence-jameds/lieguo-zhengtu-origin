@@ -1,3 +1,4 @@
+import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
 import {handleAutonomy,retireAutonomy} from './autonomy';
 import {applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
@@ -67,6 +68,7 @@ export function submitFormalOrder(current:FormalWorld,value:unknown):FormalTrans
   try{const scheduler=new EventScheduler(w.events);
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
    if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
+   else if(p.type==='governance.set')applyGovernance(w,city,order,p,scheduler);
    else if(p.type==='politics'){politicalMemory(w,order.issuerId,p);applyPolitics(w,city,order,p,scheduler);}
    else if(p.type==='defense.set'||p.type==='defense.dispatch'||p.type==='joint.create'||p.type==='joint.join')applyCooperation(w,city,order,p,scheduler);
    else if(p.type==='research.start')startResearch(w,city,order,p.techId,scheduler);
@@ -106,7 +108,8 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
  while(scheduler.peek()&&scheduler.peek()!.at<=target){
   const e=scheduler.pop()!;w.time=e.at;
   const returningSource=e.type==='logistics.return'?w.logistics?.find(t=>t.shipmentId===e.shipmentId)?.sourceCityId:undefined;
-  const aiReports=handleAutonomy(w,e,scheduler,submitFormalOrder);
+  const governanceReports=handleGovernance(w,e,scheduler,submitFormalOrder);
+  const aiReports=governanceReports??handleAutonomy(w,e,scheduler,submitFormalOrder);
   const combatReports=aiReports===null?handleCombatEvent(w,e,scheduler):null;
   if(aiReports!==null)reports.push(...aiReports);
   else
@@ -122,7 +125,7 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
    if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
-  resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);
+  resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
  }
  reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;

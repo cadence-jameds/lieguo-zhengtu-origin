@@ -1,0 +1,67 @@
+{
+  "phase": "R2b",
+  "version": "0.30.47",
+  "commit": "3de26db6bf4dc1e5206057e5078e5c7041c58658",
+  "source_zip_sha256": "248498b4d9aa85075d7960fb991fac297574475115c079a7403ce16a0a087e70",
+  "source_tree_sha256": "90d95d58a64b27abf7d6f02fe5dcfc6a0f803a32497569afce3f3b987dc6f248",
+  "bundle_sha256": "70274db84bf41b8810de8360d47ae717689dc83d40fc2290dbd4d971ff1ec2c3",
+  "source_files": 976,
+  "all_saved_files_readback_sha256": "PASS",
+  "ZIP_CRC": "PASS",
+  "bundle_verify_clone_HEAD": "PASS",
+  "tests": {
+    "files": 5,
+    "passed": 49,
+    "failed": 0
+  },
+  "files": [
+    {
+      "name": "列國征途_原始碼_v0.30.47_R2b_Recovery.zip",
+      "library_file_id": "libfile_419b34e1250081918790bb72a826cfd7",
+      "sha256": "248498b4d9aa85075d7960fb991fac297574475115c079a7403ce16a0a087e70",
+      "size": 86850545
+    },
+    {
+      "name": "列國征途_v0.30.47_R2b_Complete_Git.bundle",
+      "library_file_id": "libfile_dbfd44986d48819185d9bcffd35d576a",
+      "sha256": "70274db84bf41b8810de8360d47ae717689dc83d40fc2290dbd4d971ff1ec2c3",
+      "size": 85519160
+    },
+    {
+      "name": "列國征途_v0.30.47_R2b_source-tree.sha256",
+      "library_file_id": "libfile_79d6311d7a288191b8780c5ba3de5db1",
+      "sha256": "90d95d58a64b27abf7d6f02fe5dcfc6a0f803a32497569afce3f3b987dc6f248",
+      "size": 101587
+    },
+    {
+      "name": "列國征途_v0.30.47_R2b_SHA256SUMS.txt",
+      "library_file_id": "libfile_8398df05cab48191bfc66a998658ae9d",
+      "sha256": "254e5af94e0f21e4bf1f620067fc40363ac5b606935bfd9ec1e8f1afac4b69ed",
+      "size": 1222
+    },
+    {
+      "name": "列國征途_v0.30.47_R2b_checkpoint.json",
+      "library_file_id": "libfile_600e5c229d488191a20263c847826608",
+      "sha256": "119042a1deb818b3a7a98105c69622cb3695523e5163d0bc45fd610c694d0751",
+      "size": 882
+    },
+    {
+      "name": "列國征途_v0.30.47_R2b_Regression_Evidence.zip",
+      "library_file_id": "libfile_6e405c2081388191b2f1cee315900544",
+      "sha256": "d17090cc0a77a67f4204e19f15e470e4818917af844c054c38c7a8ecb184bb95",
+      "size": 8474
+    },
+    {
+      "name": "R2b_Implementation_Report.md",
+      "library_file_id": "libfile_54e76c6d84448191bf4cb362c83e3d46",
+      "sha256": "b48d1dd6f5016637ac37bb363aab48a5b99dc12d2cc7013d0079f9ff187d39a4",
+      "size": 2856
+    },
+    {
+      "name": "R2b_Next_Handoff.md",
+      "library_file_id": "libfile_0274b0425f5c8191ab8497ea48b814a7",
+      "sha256": "484aeca46d9384b49f8170fdd11f93c0b9efa3a5c1123fc0aaef9f8a31baa68d",
+      "size": 648
+    }
+  ]
+}
