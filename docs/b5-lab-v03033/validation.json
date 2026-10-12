@@ -1,0 +1,19 @@
+{
+  "release": "0.30.33",
+  "baseline": "0.30.32",
+  "baselineCommit": "a5a975972f793e9e35f1491bd3564f0829204933",
+  "authority": "v90",
+  "regression": {
+    "files": 55,
+    "tests": 560,
+    "passed": 560,
+    "failed": 0,
+    "newLabTests": 23
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "browserManualQA": "NOT_EXECUTED",
+  "manualChecklist": "manual-checklist.md",
+  "scope": "B5 manual combat test tool only",
+  "nextStagesStarted": []
+}

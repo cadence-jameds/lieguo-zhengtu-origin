@@ -1,0 +1,11 @@
+import {FieldDistribution} from './FieldDistribution';
+import {useState} from 'react';
+import {type Game,type Command} from './legacyTypes';
+import {tileReason} from './settlement';
+import {clock} from './ui';
+export function DefeatView({g,issue,busy,onReports,onNew,onLoad,onExport,onMap}:{g:Game;issue:(c:Command)=>void;busy:boolean;onReports:()=>void;onNew:()=>void;onLoad:()=>void;onExport:()=>void;onMap:()=>void}){
+ const [rebuild,setRebuild]=useState(false),[manual,setManual]=useState(false),[x,setX]=useState('128'),[y,setY]=useState('128');const point={x:Number(x),y:Number(y)},reason=manual?(!x||!y?'請輸入座標':tileReason(g,point)):'';
+ return <section className="view-scroll defeat-view"><img className="defeat-art" src={import.meta.env.BASE_URL+'art/report-defeat.webp'} alt="陷落城市、殘破旗幟與灰燼"/><div className="defeat-content"><p className="eyebrow">列國征途：河谷戰役 · {clock(g.defeat?.at??g.time)}</p><h1>{g.defeat?.ended?'本局已結束':'國土盡失'}</h1><p>已被擊敗・世界時間已停止</p><button onClick={onReports}>閱讀敗北戰報</button>{!g.defeat?.ended&&<div className="settings-actions"><button className="primary" disabled={busy} onClick={()=>setRebuild(!rebuild)}>流亡復國</button><button disabled={busy} onClick={()=>issue({type:'end_realm'})}>結束本局</button></div>}
+ {rebuild&&!g.defeat?.ended&&<section className="card"><h2>重建旗幟</h2><p>保留文明與科技。以 400 居民、10 民兵，以及糧木各 600、石 400、金 300 重新開始；獲得六世界小時保護。既有強敵仍在，這是一場艱難的復國挑戰。</p><button className="primary" onClick={onMap}>在大地圖選擇位置</button><label><input type="checkbox" checked={manual} onChange={e=>setManual(e.target.checked)}/>以 XY 輔助指定座標</label>{manual&&<div className="xy-input"><label>X<input inputMode="numeric" type="number" min={0} max={255} value={x} onChange={e=>setX(e.target.value)}/></label><label>Y<input inputMode="numeric" type="number" min={0} max={255} value={y} onChange={e=>setY(e.target.value)}/></label></div>}{manual&&!reason&&<FieldDistribution g={g} point={point}/>}<p>{reason||'確認後才恢復世界時間。未指定時會尋找遠離城市的可用陸地。'}</p><button className="primary" disabled={busy||!!reason} onClick={()=>issue({type:'restore_realm',...(manual?{at:point}:{})})}>確認重建並恢復時間</button></section>}
+ <div className="settings-actions"><button onClick={onExport}>匯出本局紀錄</button><button onClick={onLoad}>載入其他存檔</button><button onClick={onNew}>開始新戰役</button></div></div></section>;
+}

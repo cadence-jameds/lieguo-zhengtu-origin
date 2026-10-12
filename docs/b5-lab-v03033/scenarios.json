@@ -1,0 +1,1363 @@
+{
+  "isolation": {
+    "originalUnchanged": true,
+    "normalImportRejected": true,
+    "labImportRejectedNormal": true
+  },
+  "raid": {
+    "capacity": 1500,
+    "loot": 1500,
+    "report": {
+      "id": "report:0000000000000001",
+      "sequence": 1,
+      "campaignId": "campaign:b5lab-035-0765462c-a1d2-444a-a557-fb2154a5778b",
+      "ownerFactionId": "faction:000",
+      "at": 2756468,
+      "category": "battle",
+      "title": "掠奪結束｜金帳阿爾泰河灣",
+      "text": "1 回合；掠奪結束。",
+      "battle": {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "mission": "raid",
+        "target": {
+          "kind": "city",
+          "cityId": "city:035"
+        },
+        "targetName": "金帳阿爾泰河灣",
+        "targetPoint": {
+          "x": 12,
+          "y": 28
+        },
+        "startedAt": 2756468,
+        "resolvedAt": 2756468,
+        "rounds": 1,
+        "outcome": "raid-return",
+        "attackers": [
+          {
+            "ownerFactionId": "faction:000",
+            "cityId": "city:000",
+            "armyId": "army:0000000000000001",
+            "before": {
+              "militia": 10,
+              "baggage": 1
+            },
+            "after": {
+              "militia": 10,
+              "baggage": 1
+            }
+          }
+        ],
+        "defenders": [
+          {
+            "ownerFactionId": "faction:035",
+            "cityId": "city:035",
+            "armyId": null,
+            "before": {},
+            "after": {}
+          }
+        ],
+        "loot": {
+          "food": 382,
+          "wood": 376,
+          "stone": 373,
+          "gold": 369
+        },
+        "wallBefore": 15,
+        "wallAfter": 15,
+        "siege": [],
+        "ownerBefore": "faction:035",
+        "ownerAfter": "faction:035",
+        "populationBefore": 15079.790036974304,
+        "populationAfter": 15079.790036974304,
+        "returnedTrainingPopulation": 0,
+        "realResolvedAt": 1791569703446
+      },
+      "realAt": 1791569703446,
+      "clockSpeed": 50,
+      "read": false
+    }
+  },
+  "scoutSuccess": {
+    "army": {
+      "intel": {
+        "observedAt": 918823,
+        "observedRealAt": 1791569703920,
+        "cityId": "city:035",
+        "units": {
+          "scout": 5,
+          "militia": 30
+        },
+        "resources": {
+          "food": 10202,
+          "wood": 10176,
+          "stone": 10140,
+          "gold": 10105
+        },
+        "garrison": {
+          "scout": 5,
+          "militia": 30
+        },
+        "reinforcements": [],
+        "wallLevel": 7,
+        "defenses": {}
+      },
+      "owner": "faction:035"
+    },
+    "resources": {
+      "intel": {
+        "observedAt": 918823,
+        "observedRealAt": 1791569703920,
+        "cityId": "city:035",
+        "units": {
+          "scout": 5,
+          "militia": 30
+        },
+        "resources": {
+          "food": 10202,
+          "wood": 10176,
+          "stone": 10140,
+          "gold": 10105
+        },
+        "garrison": {
+          "scout": 5,
+          "militia": 30
+        },
+        "reinforcements": [],
+        "wallLevel": 7,
+        "defenses": {}
+      },
+      "owner": "faction:035"
+    },
+    "defenses": {
+      "intel": {
+        "observedAt": 918823,
+        "observedRealAt": 1791569703920,
+        "cityId": "city:035",
+        "units": {
+          "scout": 5,
+          "militia": 30
+        },
+        "resources": {
+          "food": 10202,
+          "wood": 10176,
+          "stone": 10140,
+          "gold": 10105
+        },
+        "garrison": {
+          "scout": 5,
+          "militia": 30
+        },
+        "reinforcements": [],
+        "wallLevel": 7,
+        "defenses": {}
+      },
+      "owner": "faction:035"
+    }
+  },
+  "scout-failure-6": {
+    "id": "report:0000000000000001",
+    "sequence": 1,
+    "campaignId": "campaign:b5lab-035-7dd9eeab-dbd7-496a-8477-2f7fa27f444b",
+    "ownerFactionId": "faction:000",
+    "at": 918823,
+    "category": "scout",
+    "title": "偵察失敗｜金帳阿爾泰河灣",
+    "text": "1 回合；偵察失敗。",
+    "battle": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "scout",
+      "target": {
+        "kind": "city",
+        "cityId": "city:035"
+      },
+      "targetName": "金帳阿爾泰河灣",
+      "targetPoint": {
+        "x": 12,
+        "y": 28
+      },
+      "startedAt": 918823,
+      "resolvedAt": 918823,
+      "rounds": 1,
+      "outcome": "scout-failed",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "scout": 6
+          },
+          "after": {}
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:035",
+          "armyId": null,
+          "cityId": "city:035",
+          "before": {},
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:035",
+      "ownerAfter": "faction:035",
+      "populationBefore": 0,
+      "populationAfter": 0,
+      "returnedTrainingPopulation": 0,
+      "realResolvedAt": 1791569704464
+    },
+    "realAt": 1791569704464,
+    "clockSpeed": 50,
+    "read": false
+  },
+  "scout-failure-1": {
+    "id": "report:0000000000000001",
+    "sequence": 1,
+    "campaignId": "campaign:b5lab-035-bc12b1a8-0a6d-4054-990a-6c3a4706a9bd",
+    "ownerFactionId": "faction:000",
+    "at": 918823,
+    "category": "scout",
+    "title": "偵察失敗｜金帳阿爾泰河灣",
+    "text": "1 回合；偵察失敗。",
+    "battle": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "scout",
+      "target": {
+        "kind": "city",
+        "cityId": "city:035"
+      },
+      "targetName": "金帳阿爾泰河灣",
+      "targetPoint": {
+        "x": 12,
+        "y": 28
+      },
+      "startedAt": 918823,
+      "resolvedAt": 918823,
+      "rounds": 1,
+      "outcome": "scout-failed",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "scout": 1
+          },
+          "after": {}
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:035",
+          "armyId": null,
+          "cityId": "city:035",
+          "before": {},
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:035",
+      "ownerAfter": "faction:035",
+      "populationBefore": 0,
+      "populationAfter": 0,
+      "returnedTrainingPopulation": 0,
+      "realResolvedAt": 1791569704799
+    },
+    "realAt": 1791569704799,
+    "clockSpeed": 50,
+    "read": false
+  },
+  "siege": {
+    "battleId": "battle:0000000000000001",
+    "resolutionId": "resolution:0000000000000001.final",
+    "mission": "conquest",
+    "target": {
+      "kind": "city",
+      "cityId": "city:035"
+    },
+    "targetName": "金帳阿爾泰河灣",
+    "targetPoint": {
+      "x": 12,
+      "y": 28
+    },
+    "startedAt": 4134702,
+    "resolvedAt": 4134702,
+    "rounds": 1,
+    "outcome": "conquered",
+    "attackers": [
+      {
+        "ownerFactionId": "faction:000",
+        "cityId": "city:000",
+        "armyId": "army:0000000000000001",
+        "before": {
+          "militia": 10,
+          "ram": 100,
+          "catapult": 1000
+        },
+        "after": {
+          "militia": 10,
+          "ram": 100,
+          "catapult": 1000
+        }
+      }
+    ],
+    "defenders": [
+      {
+        "ownerFactionId": "faction:035",
+        "cityId": "city:035",
+        "armyId": null,
+        "before": {},
+        "after": {}
+      }
+    ],
+    "loot": {
+      "food": 0,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    },
+    "wallBefore": 3,
+    "wallAfter": 0,
+    "siege": [
+      {
+        "target": {
+          "kind": "wall"
+        },
+        "before": 3,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "stable"
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "center"
+        },
+        "before": 5,
+        "after": 1
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 13
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.2"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 7
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "archery"
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 9
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 16
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 6
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 8
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.9"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.0"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 10
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.5"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.4"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "workshop"
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.3"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 14
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 1
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 3
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 17
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.7"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.1"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 5
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 4
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.8"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 12
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "barracks"
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 0
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 11
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 2
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "residence"
+        },
+        "before": 15,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "field",
+          "slot": 15
+        },
+        "before": 5,
+        "after": 0
+      },
+      {
+        "target": {
+          "kind": "building",
+          "key": "warehouse.6"
+        },
+        "before": 15,
+        "after": 0
+      }
+    ],
+    "ownerBefore": "faction:035",
+    "ownerAfter": "faction:000",
+    "populationBefore": 15119.804347145713,
+    "populationAfter": 400,
+    "returnedTrainingPopulation": 0,
+    "realResolvedAt": 1791569705254
+  },
+  "conquest-50": {
+    "battle": {
+      "id": "battle:0000000000000001",
+      "cityId": "city:035",
+      "attackerFactionId": "faction:000",
+      "startedAt": 3445585,
+      "round": 1,
+      "nextRoundAt": 4945585,
+      "roundEventId": "event:0000000000000102",
+      "attackers": [
+        {
+          "key": "army:0000000000000001/militia",
+          "armyId": "army:0000000000000001",
+          "ownerFactionId": "faction:000",
+          "sourceCityId": "city:000",
+          "unitId": "militia",
+          "count": 1741,
+          "initialCount": 2000,
+          "hp": 95714.28571428571,
+          "hpPerUnit": 55,
+          "contacted": true
+        },
+        {
+          "key": "army:0000000000000001/ram",
+          "armyId": "army:0000000000000001",
+          "ownerFactionId": "faction:000",
+          "sourceCityId": "city:000",
+          "unitId": "ram",
+          "count": 97,
+          "initialCount": 100,
+          "hp": 24166.666666666668,
+          "hpPerUnit": 250,
+          "contacted": true
+        }
+      ],
+      "defenders": [
+        {
+          "key": "city:035/militia",
+          "armyId": null,
+          "ownerFactionId": "faction:035",
+          "sourceCityId": "city:035",
+          "unitId": "militia",
+          "count": 453,
+          "initialCount": 1000,
+          "hp": 24875,
+          "hpPerUnit": 55,
+          "contacted": true
+        }
+      ],
+      "participants": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "militia": 2000,
+            "ram": 100
+          },
+          "after": {
+            "militia": 2000,
+            "ram": 100
+          }
+        },
+        {
+          "ownerFactionId": "faction:035",
+          "cityId": "city:035",
+          "armyId": null,
+          "before": {
+            "militia": 1000
+          },
+          "after": {
+            "militia": 1000
+          }
+        }
+      ],
+      "wallBefore": 0,
+      "populationBefore": 15099.787234587555,
+      "ownerBefore": "faction:035",
+      "developmentBefore": 280
+    },
+    "report": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:035"
+      },
+      "targetName": "金帳阿爾泰河灣",
+      "targetPoint": {
+        "x": 12,
+        "y": 28
+      },
+      "startedAt": 3445585,
+      "resolvedAt": 4945585,
+      "rounds": 2,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "armyId": "army:0000000000000001",
+          "cityId": "city:000",
+          "before": {
+            "militia": 2000,
+            "ram": 100
+          },
+          "after": {
+            "militia": 1624,
+            "ram": 95
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:035",
+          "armyId": null,
+          "cityId": "city:035",
+          "before": {
+            "militia": 1000
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:035",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15143.383986355035,
+      "populationAfter": 14386.214787037283,
+      "returnedTrainingPopulation": 0,
+      "realResolvedAt": 1791569706000
+    },
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 3445585,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-2",
+        "eventId": "event:0000000000000102",
+        "at": 4945585,
+        "round": 2,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000102",
+        "at": 4945585,
+        "round": 2,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:035",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ],
+    "timing": {
+      "speed": 50,
+      "tacticalSpeed": 10,
+      "roundWorldMs": 1500000,
+      "roundRealMs": 30000
+    }
+  },
+  "conquest-200": {
+    "battle": {
+      "id": "battle:0000000000000001",
+      "cityId": "city:035",
+      "attackerFactionId": "faction:000",
+      "startedAt": 3445585,
+      "round": 1,
+      "nextRoundAt": 9445585,
+      "roundEventId": "event:0000000000000102",
+      "attackers": [
+        {
+          "key": "army:0000000000000001/militia",
+          "armyId": "army:0000000000000001",
+          "ownerFactionId": "faction:000",
+          "sourceCityId": "city:000",
+          "unitId": "militia",
+          "count": 1741,
+          "initialCount": 2000,
+          "hp": 95714.28571428571,
+          "hpPerUnit": 55,
+          "contacted": true
+        },
+        {
+          "key": "army:0000000000000001/ram",
+          "armyId": "army:0000000000000001",
+          "ownerFactionId": "faction:000",
+          "sourceCityId": "city:000",
+          "unitId": "ram",
+          "count": 97,
+          "initialCount": 100,
+          "hp": 24166.666666666668,
+          "hpPerUnit": 250,
+          "contacted": true
+        }
+      ],
+      "defenders": [
+        {
+          "key": "city:035/militia",
+          "armyId": null,
+          "ownerFactionId": "faction:035",
+          "sourceCityId": "city:035",
+          "unitId": "militia",
+          "count": 453,
+          "initialCount": 1000,
+          "hp": 24875,
+          "hpPerUnit": 55,
+          "contacted": true
+        }
+      ],
+      "participants": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "militia": 2000,
+            "ram": 100
+          },
+          "after": {
+            "militia": 2000,
+            "ram": 100
+          }
+        },
+        {
+          "ownerFactionId": "faction:035",
+          "cityId": "city:035",
+          "armyId": null,
+          "before": {
+            "militia": 1000
+          },
+          "after": {
+            "militia": 1000
+          }
+        }
+      ],
+      "wallBefore": 0,
+      "populationBefore": 15099.787234587555,
+      "ownerBefore": "faction:035",
+      "developmentBefore": 280
+    },
+    "report": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:035"
+      },
+      "targetName": "金帳阿爾泰河灣",
+      "targetPoint": {
+        "x": 12,
+        "y": 28
+      },
+      "startedAt": 3445585,
+      "resolvedAt": 9445585,
+      "rounds": 2,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "armyId": "army:0000000000000001",
+          "cityId": "city:000",
+          "before": {
+            "militia": 2000,
+            "ram": 100
+          },
+          "after": {
+            "militia": 1624,
+            "ram": 95
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:035",
+          "armyId": null,
+          "cityId": "city:035",
+          "before": {
+            "militia": 1000
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:035",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15274.742434732689,
+      "populationAfter": 14511.005312996054,
+      "returnedTrainingPopulation": 0,
+      "realResolvedAt": 1791569707251
+    },
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 3445585,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-2",
+        "eventId": "event:0000000000000102",
+        "at": 9445585,
+        "round": 2,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000102",
+        "at": 9445585,
+        "round": 2,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:035",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ],
+    "timing": {
+      "speed": 200,
+      "tacticalSpeed": 10,
+      "roundWorldMs": 6000000,
+      "roundRealMs": 30000
+    }
+  },
+  "defense-raid": {
+    "id": "report:0000000000000001",
+    "sequence": 1,
+    "campaignId": "campaign:b5lab-035-7f143d5b-9d0d-4cc2-9f6b-3be1845e995b",
+    "ownerFactionId": "faction:000",
+    "at": 4134702,
+    "category": "battle",
+    "title": "掠奪結束｜玉川望岳陵",
+    "text": "1 回合；掠奪結束。",
+    "battle": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "raid",
+      "target": {
+        "kind": "city",
+        "cityId": "city:000"
+      },
+      "targetName": "玉川望岳陵",
+      "targetPoint": {
+        "x": 48,
+        "y": 4
+      },
+      "startedAt": 4134702,
+      "resolvedAt": 4134702,
+      "rounds": 1,
+      "outcome": "raid-return",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:035",
+          "cityId": "city:035",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "militia": 500,
+            "ram": 100,
+            "catapult": 100
+          },
+          "after": {
+            "militia": 495,
+            "ram": 100,
+            "catapult": 100
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": null,
+          "before": {
+            "militia": 30
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 6189,
+        "wood": 6188,
+        "stone": 6187,
+        "gold": 6186
+      },
+      "wallBefore": 3,
+      "wallAfter": 3,
+      "siege": [],
+      "ownerBefore": "faction:000",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15119.804347145713,
+      "populationAfter": 15119.804347145713,
+      "returnedTrainingPopulation": 0,
+      "realResolvedAt": 1791569707963
+    },
+    "realAt": 1791569707963,
+    "clockSpeed": 50,
+    "read": false
+  },
+  "defense-conquest": {
+    "id": "report:0000000000000001",
+    "sequence": 1,
+    "campaignId": "campaign:b5lab-035-63ae3ba1-5cf2-4334-8825-55e4cccb0e92",
+    "ownerFactionId": "faction:000",
+    "at": 4134702,
+    "category": "battle",
+    "title": "征服成功｜玉川望岳陵",
+    "text": "1 回合；征服成功。",
+    "battle": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:000"
+      },
+      "targetName": "玉川望岳陵",
+      "targetPoint": {
+        "x": 48,
+        "y": 4
+      },
+      "startedAt": 4134702,
+      "resolvedAt": 4134702,
+      "rounds": 1,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:035",
+          "cityId": "city:035",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "militia": 500,
+            "ram": 100,
+            "catapult": 100
+          },
+          "after": {
+            "militia": 495,
+            "ram": 100,
+            "catapult": 100
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": null,
+          "before": {
+            "militia": 30
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 3,
+      "wallAfter": 0,
+      "siege": [
+        {
+          "target": {
+            "kind": "wall"
+          },
+          "before": 3,
+          "after": 0
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "stable"
+          },
+          "before": 5,
+          "after": 3
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "center"
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 13
+          },
+          "before": 5,
+          "after": 0
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.2"
+          },
+          "before": 15,
+          "after": 12
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 7
+          },
+          "before": 5,
+          "after": 2
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "archery"
+          },
+          "before": 5,
+          "after": 2
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 9
+          },
+          "before": 5,
+          "after": 0
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 16
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 6
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 8
+          },
+          "before": 5,
+          "after": 0
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.9"
+          },
+          "before": 15,
+          "after": 14
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.0"
+          },
+          "before": 15,
+          "after": 14
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 10
+          },
+          "before": 5,
+          "after": 3
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.5"
+          },
+          "before": 15,
+          "after": 13
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.4"
+          },
+          "before": 15,
+          "after": 11
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "workshop"
+          },
+          "before": 5,
+          "after": 2
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.3"
+          },
+          "before": 15,
+          "after": 13
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 14
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 1
+          },
+          "before": 5,
+          "after": 3
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 3
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 17
+          },
+          "before": 5,
+          "after": 3
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.7"
+          },
+          "before": 15,
+          "after": 14
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.1"
+          },
+          "before": 15,
+          "after": 14
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 5
+          },
+          "before": 5,
+          "after": 3
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 4
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "warehouse.8"
+          },
+          "before": 15,
+          "after": 14
+        },
+        {
+          "target": {
+            "kind": "field",
+            "slot": 12
+          },
+          "before": 5,
+          "after": 4
+        },
+        {
+          "target": {
+            "kind": "building",
+            "key": "barracks"
+          },
+          "before": 5,
+          "after": 3
+        }
+      ],
+      "ownerBefore": "faction:000",
+      "ownerAfter": "faction:035",
+      "populationBefore": 15119.804347145713,
+      "populationAfter": 11974.345049927006,
+      "returnedTrainingPopulation": 0,
+      "realResolvedAt": 1791569708863
+    },
+    "realAt": 1791569708863,
+    "clockSpeed": 50,
+    "read": false
+  }
+}

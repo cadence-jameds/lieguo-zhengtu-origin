@@ -1,0 +1,488 @@
+[
+  {
+    "id": "check-1",
+    "stage": "B2",
+    "title": "384 世界、100 勢力、432 固定據點",
+    "spec": "v85 §15.4 B2／D7",
+    "status": "pass",
+    "evidence": "{\"dimensions\":{\"width\":384,\"height\":384},\"factions\":100,\"cities\":100,\"sites\":432}",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-2",
+    "stage": "B2",
+    "title": "相同種子重現地形與座標",
+    "spec": "v85 §15.4 B2",
+    "status": "pass",
+    "evidence": "{\"seed\":90217,\"terrainVersion\":2,\"generator\":\"formal-world-384-v1\"}",
+    "elapsedMs": 77
+  },
+  {
+    "id": "check-3",
+    "stage": "B2",
+    "title": "D7 起始 200 人、400 住房、600×4、18 塊 Lv0",
+    "spec": "v85 D7／§15.4 B2",
+    "status": "pass",
+    "evidence": "{\"checkedCities\":100,\"fields\":[6,5,4,3],\"population\":200,\"housing\":400}",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-4",
+    "stage": "B2",
+    "title": "城市／據點不重疊，全部在合法建城地形",
+    "spec": "v85 世界合法遮罩",
+    "status": "pass",
+    "evidence": "{\"entities\":532}",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-5",
+    "stage": "B2",
+    "title": "Spatial 查詢與 ownership 索引",
+    "spec": "v85 §15.4 B2",
+    "status": "pass",
+    "evidence": "{\"regionSize\":32,\"cities\":100,\"sites\":432}",
+    "elapsedMs": 1
+  },
+  {
+    "id": "check-6",
+    "stage": "B2",
+    "title": "路徑可通河流，不通水域／山脈",
+    "spec": "v85 世界通行規則",
+    "status": "pass",
+    "evidence": "{\"distance\":100.87005768508875,\"pathLength\":94}",
+    "elapsedMs": 10
+  },
+  {
+    "id": "check-7",
+    "stage": "B2",
+    "title": "座標資源配置固定，共 18 塊",
+    "spec": "v85 D7／城郊資源",
+    "status": "pass",
+    "evidence": "[7,4,4,3]",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-8",
+    "stage": "B3",
+    "title": "Lv0 田產量與平民無軍糧",
+    "spec": "v85 經濟／18 資源田",
+    "status": "pass",
+    "evidence": "{\"food\":54,\"wood\":45,\"stone\":36,\"gold\":27}",
+    "elapsedMs": 106
+  },
+  {
+    "id": "check-9",
+    "stage": "B3",
+    "title": "田成本逐項 round_to_5；中心加速",
+    "spec": "v85 資源田成本／工期",
+    "status": "pass",
+    "evidence": "{\"cost\":{\"food\":20,\"wood\":70,\"stone\":90,\"gold\":70},\"center1Ms\":86667,\"center15Ms\":51872}",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-10",
+    "stage": "B3",
+    "title": "倉庫疊加，地洞只保護庫存",
+    "spec": "v85 倉庫／地洞",
+    "status": "pass",
+    "evidence": "{\"capacity\":300800,\"protection\":10000}",
+    "elapsedMs": 79
+  },
+  {
+    "id": "check-11",
+    "stage": "B3",
+    "title": "D2 高階田缺 City 永久資格時拒絕",
+    "spec": "v85 D2",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-65083813-13ef-4105-bce8-1014b129dbe9\",\"status\":\"rejected\",\"revision\":0,\"reason\":\"高階資源田需要永久人口／City 資格與當下住房。\"}",
+    "elapsedMs": 95
+  },
+  {
+    "id": "check-12",
+    "stage": "B3",
+    "title": "D2 有永久資格仍檢查當下住房",
+    "spec": "v85 D2",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-a28e18e6-ab94-4321-94f3-8cf57f3c6abf\",\"status\":\"rejected\",\"revision\":0,\"reason\":\"高階資源田需要永久人口／City 資格與當下住房。\"}",
+    "elapsedMs": 123
+  },
+  {
+    "id": "check-13",
+    "stage": "B3",
+    "title": "15K 第二施工線可平行，人口下降不收回",
+    "spec": "v85 D2／15K 永久里程碑",
+    "status": "pass",
+    "evidence": "[{\"lane\":0,\"startsAt\":0,\"durationMs\":35947},{\"lane\":1,\"startsAt\":0,\"durationMs\":35947}]",
+    "elapsedMs": 88
+  },
+  {
+    "id": "check-14",
+    "stage": "B3",
+    "title": "City 12／18／18／12K、固定 6h、獨立完成",
+    "spec": "v85 City 行政晉升",
+    "status": "pass",
+    "evidence": "{\"durationMs\":21600000,\"paid\":[12000,18000,18000,12000],\"completed\":true}",
+    "elapsedMs": 105
+  },
+  {
+    "id": "check-15",
+    "stage": "B3",
+    "title": "住房封頂、人口小數與永久里程碑",
+    "spec": "v85 人口成長／D2",
+    "status": "pass",
+    "evidence": "{\"population\":10089.89328247553,\"housing\":30400,\"milestones\":[10000]}",
+    "elapsedMs": 77
+  },
+  {
+    "id": "check-16",
+    "stage": "B3",
+    "title": "統治初定產量 ×0.4；行政網動態縮短",
+    "spec": "v85 統治初定",
+    "status": "pass",
+    "evidence": "{\"food\":621,\"remainder\":0.6000000000000227,\"remainingWork\":11,\"adminMultiplier\":0.9533333333333334}",
+    "elapsedMs": 70
+  },
+  {
+    "id": "check-17",
+    "stage": "B3",
+    "title": "商隊實扣、2000 載量、預約、抵達及空車返回",
+    "spec": "v85 市場物流",
+    "status": "pass",
+    "evidence": "{\"distance\":36.55634918610404,\"travelMs\":2193381,\"returnMs\":4386762,\"returned\":true}",
+    "elapsedMs": 107
+  },
+  {
+    "id": "check-18",
+    "stage": "B3",
+    "title": "他國城市禁止直接投入自己的物流",
+    "spec": "v85 Faction 所有權",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-c485db41-8395-47e3-b302-ae0adc711460\",\"status\":\"rejected\",\"revision\":0,\"reason\":\"目的地必須是自己的另一座城市。\"}",
+    "elapsedMs": 90
+  },
+  {
+    "id": "check-19",
+    "stage": "B4",
+    "title": "66 傳統科技／28 傳統兵種資料",
+    "spec": "v85 §15.4 B4",
+    "status": "pass",
+    "evidence": "{\"traditionalTech\":66,\"traditionalUnits\":28,\"modernEntriesAreFundingDataOnly\":true}",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-20",
+    "stage": "B4",
+    "title": "普通科技單城付款、學院 15 為 0.79 工期",
+    "spec": "v85 科技研究",
+    "status": "pass",
+    "evidence": "{\"phase\":\"researching\",\"cost\":{\"food\":600,\"wood\":350,\"stone\":150,\"gold\":900},\"duration\":{\"baseDurationMs\":4500000,\"academyMultiplier\":0.79,\"durationMs\":3555000}}",
+    "elapsedMs": 91
+  },
+  {
+    "id": "check-21",
+    "stage": "B4",
+    "title": "同一勢力只容許一個科技佇列",
+    "spec": "v85 科技佇列",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-713328fc-b355-4d04-8862-c8f671b87519\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"勢力唯一科技佇列已占用或科技已完成。\"}",
+    "elapsedMs": 105
+  },
+  {
+    "id": "check-22",
+    "stage": "B4",
+    "title": "失去起始研究城仍歸原勢力完成",
+    "spec": "v85 D1 ownership／工期快照",
+    "status": "pass",
+    "evidence": "{\"originalOwner\":\"faction:000\",\"recipient\":\"faction:001\",\"tech\":\"blacksmith.melee.1\"}",
+    "elapsedMs": 106
+  },
+  {
+    "id": "check-23",
+    "stage": "B4",
+    "title": "時代與 City／科技獨立佇列",
+    "spec": "v85 時代晉升",
+    "status": "pass",
+    "evidence": "{\"age\":{\"eventId\":\"event:0000000000000103\",\"commandId\":\"command:dev-3df7f7b2-0a2b-446e-b130-a7fd27ba013e\",\"initiatingCityId\":\"city:000\",\"targetAge\":3,\"startedAt\":0,\"durationMs\":57600000,\"populationSnapshot\":22000,\"centerSnapshot\":10},\"city\":{\"eventId\":\"event:0000000000000102\",\"commandId\":\"command:dev-2fc6da95-7c3f-440a-aa1f-79d110e47a26\",\"startedAt\":0,\"durationMs\":21600000,\"populationSnapshot\":22000,\"housingSnapshot\":30400,\"townhallSnapshot\":5},\"research\":\"research:0000000000000001\"}",
+    "elapsedMs": 105
+  },
+  {
+    "id": "check-24",
+    "stage": "B4",
+    "title": "斥候固定 90 秒，不受產兵建築加速",
+    "spec": "v85 D4",
+    "status": "pass",
+    "evidence": "{\"durationMs\":90000}",
+    "elapsedMs": 91
+  },
+  {
+    "id": "check-25",
+    "stage": "B4",
+    "title": "輜重車 1000 載量、2 人口、Lv1 固定 600 秒",
+    "spec": "v85 D4／物流單位",
+    "status": "pass",
+    "evidence": "{\"population\":2,\"carry\":1000,\"baseDurationMs\":600000}",
+    "elapsedMs": 0
+  },
+  {
+    "id": "check-26",
+    "stage": "B4",
+    "title": "徵兵實扣人口，20K 第二線同時訓練",
+    "spec": "v85 軍事訓練",
+    "status": "pass",
+    "evidence": "{\"population\":21998,\"queue\":[{\"unit\":\"militia\",\"lane\":0,\"startsAt\":0},{\"unit\":\"spearman\",\"lane\":1,\"startsAt\":0}]}",
+    "elapsedMs": 98
+  },
+  {
+    "id": "check-27",
+    "stage": "B4",
+    "title": "取消訓練返還未訓練人口與 80% 資源",
+    "spec": "v85 軍事取消",
+    "status": "pass",
+    "evidence": "{\"population\":22000,\"remainingQueue\":0,\"food\":299928}",
+    "elapsedMs": 106
+  },
+  {
+    "id": "check-28",
+    "stage": "B4",
+    "title": "平民免糧耗，駐軍依人口計軍糧",
+    "spec": "v85 軍糧",
+    "status": "pass",
+    "evidence": "{\"population\":22000,\"militaryUpkeep\":23}",
+    "elapsedMs": 74
+  },
+  {
+    "id": "check-29",
+    "stage": "B4",
+    "title": "精銳須勢力科技與本城 22K 里程碑",
+    "spec": "v85 精銳／D2",
+    "status": "pass",
+    "evidence": "{\"withoutLocal\":\"militia\",\"withLocal\":\"swordsman\"}",
+    "elapsedMs": 103
+  },
+  {
+    "id": "check-30",
+    "stage": "B4",
+    "title": "civ_zhongguo 本文明衛隊可生產，外文明拒絕",
+    "spec": "v85 六文明衛隊",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-7dc0a4f1-c0fa-4005-bc15-d1f8bac0eb54\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"此城堡無外文明生產資格。\"}",
+    "elapsedMs": 92
+  },
+  {
+    "id": "check-31",
+    "stage": "B4",
+    "title": "civ_byzantium 本文明衛隊可生產，外文明拒絕",
+    "spec": "v85 六文明衛隊",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-05fa1d6f-9c92-4a60-9695-b24ffcd53064\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"此城堡無外文明生產資格。\"}",
+    "elapsedMs": 89
+  },
+  {
+    "id": "check-32",
+    "stage": "B4",
+    "title": "civ_frankia 本文明衛隊可生產，外文明拒絕",
+    "spec": "v85 六文明衛隊",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-40f4f637-330a-4001-b833-c12a4f8b6bb6\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"此城堡無外文明生產資格。\"}",
+    "elapsedMs": 91
+  },
+  {
+    "id": "check-33",
+    "stage": "B4",
+    "title": "civ_britannia 本文明衛隊可生產，外文明拒絕",
+    "spec": "v85 六文明衛隊",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-a4a9114d-ee57-49cc-8ff5-e34199cd8c2f\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"此城堡無外文明生產資格。\"}",
+    "elapsedMs": 94
+  },
+  {
+    "id": "check-34",
+    "stage": "B4",
+    "title": "civ_japan 本文明衛隊可生產，外文明拒絕",
+    "spec": "v85 六文明衛隊",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-a76a9a99-e7fb-4e1f-a987-e32d1e481515\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"此城堡無外文明生產資格。\"}",
+    "elapsedMs": 94
+  },
+  {
+    "id": "check-35",
+    "stage": "B4",
+    "title": "civ_mongolia 本文明衛隊可生產，外文明拒絕",
+    "spec": "v85 六文明衛隊",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-a1cb1826-4805-4450-8ad7-2be1de366242\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"此城堡無外文明生產資格。\"}",
+    "elapsedMs": 109
+  },
+  {
+    "id": "check-36",
+    "stage": "B4",
+    "title": "D1 funding 不扣創建費、不排完成事件、滿額才計時",
+    "spec": "v85 D1／§12.6.10",
+    "status": "pass",
+    "evidence": "{\"phase\":\"researching\",\"contributors\":2,\"eventCount\":1}",
+    "elapsedMs": 122
+  },
+  {
+    "id": "check-37",
+    "stage": "B4",
+    "title": "拓殖需要 2000 人；1999 人拒絕",
+    "spec": "v85 拓殖 §1",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-71ded734-95e0-4bc7-8f59-134ed1014d5c\",\"status\":\"rejected\",\"revision\":0,\"reason\":\"拓殖需要城堡時代、城堡及2000人口，且來源城不可有既存拓殖隊。\"}",
+    "elapsedMs": 93
+  },
+  {
+    "id": "check-38",
+    "stage": "B4",
+    "title": "拓殖立即扣 400 人與 6／8／12／4K",
+    "spec": "v85 拓殖 §2–3",
+    "status": "pass",
+    "evidence": "{\"population\":1600,\"stock\":{\"food\":294000,\"wood\":292000,\"stone\":288000,\"gold\":296000},\"prepMs\":14400000}",
+    "elapsedMs": 87
+  },
+  {
+    "id": "check-39",
+    "stage": "B4",
+    "title": "城堡 Lv1 完成實體拓殖隊，4h",
+    "spec": "v85 拓殖 §4",
+    "status": "pass",
+    "evidence": "[{\"id\":\"colonization:0000000000000001\",\"kind\":\"colonization\",\"quantity\":1,\"ownerFactionId\":\"faction:000\",\"sourceCityId\":\"city:000\",\"projectId\":\"project:0000000000000001\",\"phase\":\"ready\",\"population\":400,\"producedAt\":14400000}]",
+    "elapsedMs": 95
+  },
+  {
+    "id": "check-40",
+    "stage": "B4",
+    "title": "城堡 Lv15 完成實體拓殖隊，2h",
+    "spec": "v85 拓殖 §4",
+    "status": "pass",
+    "evidence": "[{\"id\":\"colonization:0000000000000001\",\"kind\":\"colonization\",\"quantity\":1,\"ownerFactionId\":\"faction:000\",\"sourceCityId\":\"city:000\",\"projectId\":\"project:0000000000000001\",\"phase\":\"ready\",\"population\":400,\"producedAt\":7200000}]",
+    "elapsedMs": 91
+  },
+  {
+    "id": "check-41",
+    "stage": "B4",
+    "title": "待命隊不能退款，不能再整備第二隊",
+    "spec": "v85 拓殖 §4",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-6f07c86b-8700-4e80-b839-a0c563d715e4\",\"status\":\"rejected\",\"revision\":2,\"reason\":\"拓殖需要城堡時代、城堡及2000人口，且來源城不可有既存拓殖隊。\"}",
+    "elapsedMs": 116
+  },
+  {
+    "id": "check-42",
+    "stage": "B4",
+    "title": "未完成整備取消完整返 400 人／80% 資源",
+    "spec": "v85 拓殖 §2／§4",
+    "status": "pass",
+    "evidence": "{\"population\":2000,\"stock\":{\"food\":298800,\"wood\":298400,\"stone\":297600,\"gold\":299200}}",
+    "elapsedMs": 86
+  },
+  {
+    "id": "check-43",
+    "stage": "B4",
+    "title": "取消住房不足時拒絕，避免吞掉 400 人",
+    "spec": "v85 拓殖人口完整返還",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-7c8ceafd-9445-47a3-a88f-e806034aba40\",\"status\":\"rejected\",\"revision\":1,\"reason\":\"請先擴充住房，以完整接回400名移民。\"}",
+    "elapsedMs": 107
+  },
+  {
+    "id": "check-44",
+    "stage": "B4",
+    "title": "斥候不計 20 護衛；攻城器禁止同行",
+    "spec": "v85 拓殖 §5",
+    "status": "pass",
+    "evidence": "{\"commandId\":\"command:dev-cf156aca-2c54-404c-bc6f-9aae076a3351\",\"status\":\"rejected\",\"revision\":2,\"reason\":\"護衛不存在、不足，或選入不可同行的攻城器。\"}",
+    "elapsedMs": 122
+  },
+  {
+    "id": "check-45",
+    "stage": "B4",
+    "title": "拓殖 45 秒／格、到達消耗單位、新城 400 人和護衛轉籍",
+    "spec": "v85 拓殖 §4–7",
+    "status": "pass",
+    "evidence": "{\"cities\":101,\"newPopulation\":400,\"guard\":{\"spearman\":20},\"remainingColonization\":0,\"integrationWorkHours\":12}",
+    "elapsedMs": 103
+  },
+  {
+    "id": "check-46",
+    "stage": "B4",
+    "title": "1X 建設／徵兵／科研／拓殖邊界與分段一致",
+    "spec": "v85 時間／事件順序",
+    "status": "pass",
+    "evidence": "{\"speed\":1,\"constructionRealMs\":35947,\"trained\":{\"militia\":1},\"tech\":[\"blacksmith.melee.1\"],\"colony\":1}",
+    "elapsedMs": 172
+  },
+  {
+    "id": "check-47",
+    "stage": "B4",
+    "title": "3X 建設／徵兵／科研／拓殖邊界與分段一致",
+    "spec": "v85 時間／事件順序",
+    "status": "pass",
+    "evidence": "{\"speed\":3,\"constructionRealMs\":11982.333333333334,\"trained\":{\"militia\":1},\"tech\":[\"blacksmith.melee.1\"],\"colony\":1}",
+    "elapsedMs": 167
+  },
+  {
+    "id": "check-48",
+    "stage": "B4",
+    "title": "6X 建設／徵兵／科研／拓殖邊界與分段一致",
+    "spec": "v85 時間／事件順序",
+    "status": "pass",
+    "evidence": "{\"speed\":6,\"constructionRealMs\":5991.166666666667,\"trained\":{\"militia\":1},\"tech\":[\"blacksmith.melee.1\"],\"colony\":1}",
+    "elapsedMs": 166
+  },
+  {
+    "id": "check-49",
+    "stage": "B4",
+    "title": "10X 建設／徵兵／科研／拓殖邊界與分段一致",
+    "spec": "v85 時間／事件順序",
+    "status": "pass",
+    "evidence": "{\"speed\":10,\"constructionRealMs\":3594.7,\"trained\":{\"militia\":1},\"tech\":[\"blacksmith.melee.1\"],\"colony\":1}",
+    "elapsedMs": 164
+  },
+  {
+    "id": "check-50",
+    "stage": "B4",
+    "title": "50X 建設／徵兵／科研／拓殖邊界與分段一致",
+    "spec": "v85 時間／事件順序",
+    "status": "pass",
+    "evidence": "{\"speed\":50,\"constructionRealMs\":718.94,\"trained\":{\"militia\":1},\"tech\":[\"blacksmith.melee.1\"],\"colony\":1}",
+    "elapsedMs": 159
+  },
+  {
+    "id": "check-51",
+    "stage": "存檔",
+    "title": "嚴格 schema 拒絕偽造庫存／預約",
+    "spec": "v85 B1／B3 契約",
+    "status": "pass",
+    "evidence": "{\"forgedStock\":801,\"capacity\":800,\"rejected\":true}",
+    "elapsedMs": 74
+  },
+  {
+    "id": "check-52",
+    "stage": "存檔",
+    "title": "正式 encode／decode 保留 v85 拓殖實體",
+    "spec": "v85 B1／拓殖 §4",
+    "status": "pass",
+    "evidence": "{\"ruleset\":\"v85-b4.2\",\"colonizationUnits\":[{\"id\":\"colonization:0000000000000001\",\"kind\":\"colonization\",\"quantity\":1,\"ownerFactionId\":\"faction:000\",\"sourceCityId\":\"city:000\",\"projectId\":\"project:0000000000000001\",\"phase\":\"ready\",\"population\":400,\"producedAt\":14400000}]}",
+    "elapsedMs": 145
+  },
+  {
+    "id": "check-53",
+    "stage": "存檔",
+    "title": "實際 IndexedDB 提交／重讀／匯出／匯入／Recovery 去重",
+    "spec": "v85 B1／R1",
+    "status": "pass",
+    "evidence": "{\"savedRevision\":1,\"importedRevision\":2,\"restoredRevision\":3,\"recoveryPoints\":2,\"replay\":\"duplicate\"}",
+    "elapsedMs": 387
+  },
+  {
+    "id": "check-54",
+    "stage": "存檔",
+    "title": "交易寫入失敗原子回滾，原世界保留",
+    "spec": "v85 B1 atomic commit",
+    "status": "pass",
+    "evidence": "{\"revision\":0,\"population\":10000,\"rollback\":true}",
+    "elapsedMs": 168
+  }
+]

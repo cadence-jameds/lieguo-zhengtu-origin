@@ -1,0 +1,30 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> guozhan-game-mvp@0.30.22 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 109 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/registerSW.js                          0.13 kB
+dist/manifest.webmanifest                   0.33 kB
+dist/index.html                             0.86 kB │ gzip:   0.55 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js    3.43 kB
+dist/assets/runtime.worker-D3k_uAdi.js    278.63 kB
+dist/assets/runtime.worker-gw2KtX0x.js    753.97 kB
+dist/assets/DeveloperMode-CR-9IMDf.css      4.09 kB │ gzip:   1.26 kB
+dist/assets/index-DQFB8Iuk.css            160.51 kB │ gzip:  32.75 kB
+dist/assets/index-Bv59nkCs.js             501.53 kB │ gzip: 154.43 kB │ map: 1,699.97 kB
+dist/assets/DeveloperMode-C8rsCDoq.js     579.20 kB │ gzip: 188.79 kB │ map: 1,063.16 kB
+
+✓ built in 1.01s
+
+PWA v1.3.0
+mode      generateSW
+precache  193 entries (55279.70 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-2fbc6a65.js.map
+  dist/workbox-2fbc6a65.js

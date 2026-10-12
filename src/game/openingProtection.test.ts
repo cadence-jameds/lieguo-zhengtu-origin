@@ -1,0 +1,8 @@
+import {it,expect} from 'vitest';
+import {newGame} from './legacyWorld';
+import {command,node,faction,factionName,advance} from './legacyEngine';
+import {emptyTroops,MINUTE} from './legacyTypes';
+import {decode,envelope} from './legacyPersistence';
+import {lordName} from '../content/lordNames';
+it('三種速度的偵察領主命令立即解除保護，撤回和重讀也不恢復；中立偵察除外',()=>{for(const speed of [1,12,120]){const g=newGame('civ_zhongguo',22,speed,0),n=node(g,faction(g,g.player).capital),enemy=node(g,g.factions[1].capital),camp=g.nodes.find(n=>n.kind==='camp')!;g.events=g.events.filter(e=>e.type!=='ai');faction(g,enemy.owner!).protectionUntil=0;const until=g.protectionUntil;expect(command(g,{type:'march',from:n.id,to:camp.id,kind:'scout',troops:{...emptyTroops(),scout:1}})).toBe('');expect(g.protectionUntil).toBe(until);expect(command(g,{type:'march',from:n.id,to:enemy.id,kind:'scout',troops:{...emptyTroops(),scout:1}})).toBe('');expect(g.protectionUntil).toBe(g.time);expect(g.reports.filter(r=>r.title==='新手保護已解除')).toHaveLength(1);expect(command(g,{type:'retreat',march:g.marches.at(-1)!.id})).toBe('');advance(g,5*MINUTE);expect(decode(envelope(g)).protectionUntil).toBe(0);}});
+it('領主名字依文明及種子固定、不重複，旧代號顯示改名但不改政治身份',()=>{const g=newGame('civ_zhongguo',22,1,0);expect(new Set(g.factions.map(f=>f.name)).size).toBe(36);const names=g.factions.map(f=>factionName(g,f.id));expect(names).toEqual(decode(envelope(g)).factions.map(f=>f.name));expect(lordName(g.player,22)).not.toBe(lordName(g.player,23));const f=g.factions[1],id=f.id,owners=g.nodes.map(n=>n.owner);f.name='領主 02';expect(factionName(g,id)).toBe(lordName(id,g.seed));expect(f.id).toBe(id);expect(g.nodes.map(n=>n.owner)).toEqual(owners);});

@@ -1,0 +1,17 @@
+{
+  "baseline": "列國征途_原始碼_v0.30.23.zip",
+  "baselineSHA256": "71ace29b8f4b74195029cc024a0e989402b6a44ef4f3617ae1a334491d3b41f5",
+  "deltaChangedFiles": [
+    "src/game/formal/battles.ts",
+    "src/game/formal/combatB5.test.ts",
+    "src/game/formal/wildLifecycle.ts",
+    "src/game/formal/banditLoot.ts",
+    "src/game/formal/banditLoot.test.ts"
+  ],
+  "defenderGenerationByteIdentical": true,
+  "isolatedTypecheck": "PASS",
+  "isolatedTests": 36,
+  "integratedTests": 469,
+  "integratedFiles": 52,
+  "B6": "NOT STARTED"
+}

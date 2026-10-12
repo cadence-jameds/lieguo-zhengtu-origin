@@ -1,0 +1,58 @@
+{
+  "authority": "v86 > v85 > v84 > source",
+  "baseline": "列國征途_原始碼_v0.30.22.zip",
+  "inputFiles": {
+    "列國征途_Stage2_B2-B4_Core_Gate_Review_2026-10-07.md": "b4524ad57afb0bde5e6f20f9ae8f5d3571bab7e3d3d14b873e76ea0ea69f4492",
+    "列國征途_Stage2_B5_對話交接與開工基準_2026-10-07.md": "2211e722a700c6982be1b3d5656c85593e9765f315adaf5c844e0e09b9bdcf87",
+    "列國征途_v0.30.22_Core_Regression_Evidence_2026-10-07.zip": "1939f2e3a6e810978a3dab95902015602b2fc047184943d1fbc7ee8b2d44acfb",
+    "列國征途_v0.30.22_SHA256SUMS.txt": "23c0eb5b3378a1ae1119f631ae9f785db04d616084551f5fbc6449d13dfacccf",
+    "列國征途_v0.30.22_Wall_Delta_Fix_Report_2026-10-07.md": "4534d6b34166e03180cfe1462504fa9817eb0774adc4fce63bf2dbc422df3626",
+    "列國征途_v0.30.22_source-tree.sha256": "975debc179b01e7d66a4c6d398ddd3fb1618c8431304c53244fb35bff6cad23e",
+    "列國征途_v0.30.22_下一階段交接_2026-10-07.md": "681a952a53e1c06840ef61b1e1d1fa43e592a805867cc4594dfd2e3b2cc8249b",
+    "列國征途_原始碼_v0.30.22.zip": "814449c413e26e8b1be763200e9d76eca797181802c5e6bc7d1b83013d435490",
+    "河谷戰役_vNext_平衡重構討論_v86.md": "6fd7d3e0381e90a1954fa77389b7c36ea56fed52049a8e596bae99f84e6a04d8"
+  },
+  "checks": {
+    "SOURCE_FILES_SHA256.txt": {
+      "files": 624,
+      "manifestSHA256": "38628d03de19a686fc4b8b91f8c7512c27d08a029b98677809dce7d595e60b78",
+      "mismatches": []
+    },
+    "PACKAGE_FILES_SHA256.txt": {
+      "files": 630,
+      "manifestSHA256": "5044096fbce7ed55d6362ad3c8d80bf6baa1cdc000feaa9d21bae9a6e935d3f1",
+      "mismatches": []
+    },
+    "implementationBaselineCommit": {
+      "commit": "21c1e69",
+      "sourceFiles": 624,
+      "mismatches": []
+    },
+    "列國征途_原始碼_v0.30.22.zip": {
+      "declared": "814449c413e26e8b1be763200e9d76eca797181802c5e6bc7d1b83013d435490",
+      "actual": "814449c413e26e8b1be763200e9d76eca797181802c5e6bc7d1b83013d435490",
+      "pass": true
+    },
+    "列國征途_v0.30.22_Wall_Delta_Fix_Report_2026-10-07.md": {
+      "declared": "4534d6b34166e03180cfe1462504fa9817eb0774adc4fce63bf2dbc422df3626",
+      "actual": "4534d6b34166e03180cfe1462504fa9817eb0774adc4fce63bf2dbc422df3626",
+      "pass": true
+    },
+    "列國征途_v0.30.22_Core_Regression_Evidence_2026-10-07.zip": {
+      "declared": "1939f2e3a6e810978a3dab95902015602b2fc047184943d1fbc7ee8b2d44acfb",
+      "actual": "1939f2e3a6e810978a3dab95902015602b2fc047184943d1fbc7ee8b2d44acfb",
+      "pass": true
+    },
+    "列國征途_v0.30.22_source-tree.sha256": {
+      "declared": "975debc179b01e7d66a4c6d398ddd3fb1618c8431304c53244fb35bff6cad23e",
+      "actual": "975debc179b01e7d66a4c6d398ddd3fb1618c8431304c53244fb35bff6cad23e",
+      "pass": true
+    },
+    "列國征途_v0.30.22_下一階段交接_2026-10-07.md": {
+      "declared": "681a952a53e1c06840ef61b1e1d1fa43e592a805867cc4594dfd2e3b2cc8249b",
+      "actual": "681a952a53e1c06840ef61b1e1d1fa43e592a805867cc4594dfd2e3b2cc8249b",
+      "pass": true
+    }
+  },
+  "allPass": true
+}

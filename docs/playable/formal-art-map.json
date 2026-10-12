@@ -1,0 +1,963 @@
+{
+  "civilizations": {
+    "civ_zhongguo": "civ_zhongguo",
+    "civ_byzantium": "civ_byzantion",
+    "civ_frankia": "civ_frankia",
+    "civ_britannia": "civ_britannia",
+    "civ_japan": "civ_japan",
+    "civ_mongolia": "civ_mongol"
+  },
+  "visualAges": {
+    "Dark": 0,
+    "Feudal": 1,
+    "Castle": 2,
+    "Imperial": 2
+  },
+  "buildingAliases": {
+    "center": "hall",
+    "residence": "house",
+    "warehouse": "warehouse",
+    "bunker": "cellar",
+    "market": "market",
+    "barracks": "barracks",
+    "archery": "range",
+    "stable": "stable",
+    "academy": "academy",
+    "workshop": "workshop",
+    "castle": "castle"
+  },
+  "buildings": [
+    {
+      "id": "center",
+      "name": "城市中心",
+      "alias": "hall",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "residence",
+      "name": "民居",
+      "alias": "house",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "warehouse",
+      "name": "倉庫",
+      "alias": "warehouse",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "bunker",
+      "name": "地洞",
+      "alias": "cellar",
+      "new": false,
+      "path": "art/cellar.webp"
+    },
+    {
+      "id": "market",
+      "name": "市場",
+      "alias": "market",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "townhall",
+      "name": "市政廳",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-townhall.webp"
+    },
+    {
+      "id": "monastery",
+      "name": "修道院",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-monastery.webp"
+    },
+    {
+      "id": "mill",
+      "name": "磨坊",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-mill.webp"
+    },
+    {
+      "id": "lumbermill",
+      "name": "鋸木場",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-lumbermill.webp"
+    },
+    {
+      "id": "masonry",
+      "name": "石匠工坊",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-masonry.webp"
+    },
+    {
+      "id": "mint",
+      "name": "鑄幣所",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-mint.webp"
+    },
+    {
+      "id": "barracks",
+      "name": "兵營",
+      "alias": "barracks",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "archery",
+      "name": "射箭場",
+      "alias": "range",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "stable",
+      "name": "馬廄",
+      "alias": "stable",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "blacksmith",
+      "name": "鐵匠鋪",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-blacksmith.webp"
+    },
+    {
+      "id": "academy",
+      "name": "學院",
+      "alias": "academy",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "workshop",
+      "name": "攻城工坊",
+      "alias": "workshop",
+      "new": false,
+      "path": "art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp"
+    },
+    {
+      "id": "castle",
+      "name": "城堡",
+      "alias": "castle",
+      "new": false,
+      "path": "art/castle-{civilizationAlias}.webp"
+    },
+    {
+      "id": "embassy",
+      "name": "大使館",
+      "alias": null,
+      "new": true,
+      "path": "art/formal/building-embassy.webp"
+    }
+  ],
+  "units": [
+    {
+      "id": "militia",
+      "name": "民兵",
+      "sheet": "units",
+      "index": 0,
+      "path": "art/catalog-units.webp",
+      "origin": "reused"
+    },
+    {
+      "id": "spearman",
+      "name": "槍兵",
+      "sheet": "units",
+      "index": 1,
+      "path": "art/catalog-units.webp",
+      "origin": "reused"
+    },
+    {
+      "id": "archer",
+      "name": "弓兵",
+      "sheet": "units",
+      "index": 2,
+      "path": "art/catalog-units.webp",
+      "origin": "reused"
+    },
+    {
+      "id": "skirmisher",
+      "name": "戰矛兵",
+      "path": "art/formal/unit-skirmisher.webp",
+      "origin": "new"
+    },
+    {
+      "id": "scout",
+      "name": "斥候",
+      "sheet": "units",
+      "index": 5,
+      "path": "art/catalog-units.webp",
+      "origin": "reused"
+    },
+    {
+      "id": "light-cavalry",
+      "name": "輕騎兵",
+      "sheet": "units",
+      "index": 3,
+      "badge": "輕騎",
+      "path": "art/catalog-units.webp",
+      "origin": "derived"
+    },
+    {
+      "id": "knight",
+      "name": "騎士",
+      "sheet": "units",
+      "index": 3,
+      "badge": "騎士",
+      "path": "art/catalog-units.webp",
+      "origin": "derived"
+    },
+    {
+      "id": "ram",
+      "name": "衝撞車",
+      "sheet": "units",
+      "index": 4,
+      "path": "art/catalog-units.webp",
+      "origin": "reused"
+    },
+    {
+      "id": "catapult",
+      "name": "投石機",
+      "path": "art/formal/unit-catapult.webp",
+      "origin": "new"
+    },
+    {
+      "id": "baggage",
+      "name": "輜重車",
+      "sheet": "technologies",
+      "index": 3,
+      "badge": "輜重",
+      "path": "art/catalog-technologies.webp",
+      "origin": "derived"
+    },
+    {
+      "id": "guard.civ_zhongguo",
+      "name": "連弩衛隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 0,
+      "origin": "reused"
+    },
+    {
+      "id": "guard.civ_byzantium",
+      "name": "東羅馬甲胄騎兵",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 1,
+      "origin": "reused"
+    },
+    {
+      "id": "guard.civ_frankia",
+      "name": "法蘭克擲斧衛隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 2,
+      "origin": "reused"
+    },
+    {
+      "id": "guard.civ_britannia",
+      "name": "不列顛長弓衛隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 3,
+      "origin": "reused"
+    },
+    {
+      "id": "guard.civ_japan",
+      "name": "武士侍從隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 4,
+      "origin": "reused"
+    },
+    {
+      "id": "guard.civ_mongolia",
+      "name": "蒙古親衛騎射隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 5,
+      "origin": "reused"
+    },
+    {
+      "id": "swordsman",
+      "name": "劍士",
+      "sheet": "units",
+      "index": 0,
+      "path": "art/catalog-units.webp",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "pikeman",
+      "name": "長槍兵",
+      "sheet": "units",
+      "index": 1,
+      "path": "art/catalog-units.webp",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "crossbowman",
+      "name": "弩手",
+      "sheet": "units",
+      "index": 2,
+      "path": "art/catalog-units.webp",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "heavy-skirmisher",
+      "name": "重裝戰矛兵",
+      "path": "art/formal/unit-skirmisher.webp",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "ranger",
+      "name": "遊騎兵",
+      "sheet": "units",
+      "index": 3,
+      "badge": "ELITE · 輕騎",
+      "path": "art/catalog-units.webp",
+      "origin": "derived"
+    },
+    {
+      "id": "heavy-knight",
+      "name": "重甲騎兵",
+      "sheet": "units",
+      "index": 3,
+      "badge": "ELITE · 騎士",
+      "path": "art/catalog-units.webp",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard.civ_zhongguo",
+      "name": "精銳連弩衛隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 0,
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard.civ_byzantium",
+      "name": "精銳東羅馬甲胄騎兵",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 1,
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard.civ_frankia",
+      "name": "精銳法蘭克擲斧衛隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 2,
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard.civ_britannia",
+      "name": "精銳不列顛長弓衛隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 3,
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard.civ_japan",
+      "name": "精銳武士侍從隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 4,
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard.civ_mongolia",
+      "name": "精銳蒙古親衛騎射隊",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 5,
+      "badge": "ELITE",
+      "origin": "derived"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "blacksmith.melee.1",
+      "name": "近戰武器 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.ranged.1",
+      "name": "遠程武器 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.infantry-armor.1",
+      "name": "步兵護具 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.ranged-armor.1",
+      "name": "遠程護具 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.cavalry-armor.1",
+      "name": "騎兵護具 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.melee.2",
+      "name": "近戰武器 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.ranged.2",
+      "name": "遠程武器 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.infantry-armor.2",
+      "name": "步兵護具 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.ranged-armor.2",
+      "name": "遠程護具 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.cavalry-armor.2",
+      "name": "騎兵護具 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.melee.3",
+      "name": "近戰武器 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.ranged.3",
+      "name": "遠程武器 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.infantry-armor.3",
+      "name": "步兵護具 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.ranged-armor.3",
+      "name": "遠程護具 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "blacksmith.cavalry-armor.3",
+      "name": "騎兵護具 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.food.1",
+      "name": "農業 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 0,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.wood.1",
+      "name": "林業 I",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 1,
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.stone.1",
+      "name": "採石 I",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.gold.1",
+      "name": "採礦 I",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.food.2",
+      "name": "農業 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 0,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.wood.2",
+      "name": "林業 II",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 1,
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.stone.2",
+      "name": "採石 II",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.gold.2",
+      "name": "採礦 II",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.food.3",
+      "name": "農業 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 4,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.wood.3",
+      "name": "林業 III",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 1,
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.stone.3",
+      "name": "採石 III",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "economy.gold.3",
+      "name": "採礦 III",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "badge": "III",
+      "origin": "derived"
+    },
+    {
+      "id": "intel.watch",
+      "name": "城鎮警戒",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived"
+    },
+    {
+      "id": "intel.patrol",
+      "name": "巡邏制度",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived"
+    },
+    {
+      "id": "intel.analysis",
+      "name": "軍情研判",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived"
+    },
+    {
+      "id": "intel.network",
+      "name": "戰場情報網",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived"
+    },
+    {
+      "id": "military.drill",
+      "name": "軍事操典",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "origin": "derived"
+    },
+    {
+      "id": "military.horsemanship",
+      "name": "馬術訓練",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "origin": "derived"
+    },
+    {
+      "id": "military.breeding",
+      "name": "馬匹育種",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "origin": "derived"
+    },
+    {
+      "id": "military.conscription",
+      "name": "徵兵制度",
+      "path": "art/formal/tech-conscription.svg",
+      "category": "conscription",
+      "origin": "derived"
+    },
+    {
+      "id": "logistics.transport",
+      "name": "運輸組織",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived"
+    },
+    {
+      "id": "logistics.auto",
+      "name": "商路管理",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived"
+    },
+    {
+      "id": "logistics.dispatch",
+      "name": "車隊調度",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived"
+    },
+    {
+      "id": "logistics.baggage",
+      "name": "輜重標準化",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived"
+    },
+    {
+      "id": "logistics.rations",
+      "name": "軍糧配給",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived"
+    },
+    {
+      "id": "engineering.masonry",
+      "name": "石造工程",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "origin": "derived"
+    },
+    {
+      "id": "engineering.architecture",
+      "name": "建築學",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "origin": "derived"
+    },
+    {
+      "id": "siege.ram.1",
+      "name": "破城工程 I",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "siege.projection.1",
+      "name": "投射工程 I",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "siege.frame.1",
+      "name": "強化機架 I",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "I",
+      "origin": "derived"
+    },
+    {
+      "id": "siege.ram.2",
+      "name": "破城工程 II",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "siege.projection.2",
+      "name": "投射工程 II",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "siege.frame.2",
+      "name": "強化機架 II",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "II",
+      "origin": "derived"
+    },
+    {
+      "id": "administration.coordination",
+      "name": "行政統籌",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "origin": "derived"
+    },
+    {
+      "id": "administration.register",
+      "name": "領地帳冊",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.infantry",
+      "name": "步兵精銳化",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.ranged",
+      "name": "遠程精銳化",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.cavalry",
+      "name": "騎兵精銳化",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "elite.guard",
+      "name": "文明衛隊精銳化",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.kaogong",
+      "name": "考工制度",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_zhongguo",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.crossbow",
+      "name": "連弩操典",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "civ": "civ_zhongguo",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.themes",
+      "name": "軍區制度",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_byzantium",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.imperial-wall",
+      "name": "帝都城防",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_byzantium",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.knighthood",
+      "name": "騎士制度",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "civ": "civ_frankia",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.charge",
+      "name": "重騎衝鋒",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "civ": "civ_frankia",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.archer-levy",
+      "name": "郡民弓役",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "civ": "civ_britannia",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.warwolf",
+      "name": "戰狼投石",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "civ": "civ_britannia",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.mobilization",
+      "name": "武家動員",
+      "path": "art/formal/tech-conscription.svg",
+      "category": "conscription",
+      "civ": "civ_japan",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.sling",
+      "name": "投石術",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "civ": "civ_japan",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.nomadic",
+      "name": "遊牧補給",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "civ": "civ_mongolia",
+      "origin": "derived"
+    },
+    {
+      "id": "civilization.swift-siege",
+      "name": "疾行攻城",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "civ": "civ_mongolia",
+      "origin": "derived"
+    },
+    {
+      "id": "research.cooperation",
+      "name": "科研協同體系",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived"
+    }
+  ],
+  "fields": {
+    "food": "farm",
+    "wood": "lumber",
+    "stone": "quarry",
+    "gold": "mine"
+  },
+  "wildSites": {
+    "food": 0,
+    "wood": 1,
+    "stone": 2,
+    "gold": 3,
+    "bandit": 6
+  }
+}

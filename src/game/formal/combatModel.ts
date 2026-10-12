@@ -1,0 +1,27 @@
+import type {ArmyId,BattleId,CityId,CommandId,EventId,FactionId,ResolutionId,WildSiteId} from './ids';
+import type {Resources,FormalArmy} from './model';
+import type {CombatPool} from './combatResolver';
+export type Point={x:number;y:number};
+export type ArmyTarget={kind:'city';cityId:CityId}|{kind:'wild';siteId:WildSiteId;generation:number};
+/** Compatibility field for old in-flight missions only; cities have no player-selectable mode. */
+export type ScoutMode='resources-army'|'defenses-army';
+export type CityIntel={army?:IntelObservation;resources?:IntelObservation;defenses?:IntelObservation};
+export type IntelObservation={intel:ScoutIntel;owner:FactionId|null};
+export type ScoutIntel={observedRealAt?:number;observedAt:number;units:Record<string,number>;resources?:Resources;garrison?:Record<string,number>;reinforcements?:{ownerFactionId:FactionId;originCityId:CityId;units:Record<string,number>}[];wallLevel?:number;defenses?:Record<string,number>}&({cityId:CityId;siteId?:never;generation?:never}|{siteId:WildSiteId;generation:number;cityId?:never});
+export type ArmyMissionState={commandId:CommandId;extinctionPending?:true;jointId?:string;creationKind?:'evacuation';units:Record<string,number>;initialUnits:Record<string,number>;mission:'raid'|'conquest'|'scout'|'reinforce';target:ArmyTarget;status:'waiting'|'outbound'|'engaged'|'stationed'|'returning'|'stranded';path:Point[];segmentTimes:number[];marchSecondsPerTile:number;position:Point;departedAt:number;arrivalAt:number;movementEventId:EventId|null;returnCityId:CityId|null;battleId:BattleId;cargo:Resources;scoutMode?:ScoutMode;pendingIntel?:ScoutIntel;pendingReport?:BattleReportPayload};
+export type MissionArmy=FormalArmy&ArmyMissionState;
+export const isMissionArmy=(a:FormalArmy):a is MissionArmy=>a.mission!==undefined;
+export type BattleParticipant={legionName?:string;empireName?:string;ownerFactionId:FactionId|null;armyId:ArmyId|null;cityId:CityId|null;before:Record<string,number>;after:Record<string,number>;departedAt?:number};
+export type SiegeChange={target:{kind:'wall'}|{kind:'building';key:string}|{kind:'field';slot:number};before:number;after:number};
+export type BattleOutcome='raid-return'|'conquered'|'held'|'mutual-destruction'|'wild-cleared'|'wild-held'|'no-target'|'scout-success'|'scout-failed';
+export type ConquestReason='conquered'|'attacker-defeated'|'no-occupiers'|'mutual-destruction'|'siege-timeout'|'protected-target';
+export type BattleLogEntry={at:number;kind:'combat-summary'|'siege-summary'|'siege-start'|'combat-resumed'|'reinforcement'|'wall-breached'|'catapult-batch';combatRound:number;siegeRound:number;ownerFactionId?:FactionId;wallBefore?:number;wallAfter?:number;forces?:{ownerFactionId:FactionId;initial:number;alive:number;casualties:number}[]};
+export type SiegeRoundRecord={round:number;at:number;wallBefore:number;wallAfter:number};
+export type BattleProgress={phase:'combat'|'siege';siegeRound:number;wallDamage:number;wallDamageLevel:number;catapultBatchDone:boolean;developmentLost:number;siegeChanges:SiegeChange[];siegeHistory:SiegeRoundRecord[];history:BattleLogEntry[];historyOmitted:number};
+export type BattleReportPayload={exileReward?:{units:Record<string,number>;craftsmanCivilizationId:string};targetPoint?:Point;targetResource?:string;realResolvedAt?:number;battleId:BattleId;resolutionId:ResolutionId;mission:'raid'|'conquest'|'scout';target:ArmyTarget;targetName:string;startedAt:number;resolvedAt:number;rounds:number;outcome:BattleOutcome;attackers:BattleParticipant[];defenders:BattleParticipant[];loot:Resources;wallBefore:number;wallAfter:number;siege:SiegeChange[];ownerBefore:FactionId|null;ownerAfter:FactionId|null;populationBefore:number;populationAfter:number;returnedTrainingPopulation:number;intel?:ScoutIntel;conquestReason?:ConquestReason;siegeRounds?:number;siegeHistory?:SiegeRoundRecord[];history?:BattleLogEntry[];historyOmitted?:number};
+/** Optional progress is accepted only as an intact pre-v91 native battle. */
+export type BattleState={id:BattleId;jointId?:string;cityId:CityId;attackerFactionId:FactionId;startedAt:number;round:number;nextRoundAt:number;roundEventId:EventId|null;attackers:CombatPool[];defenders:CombatPool[];participants:BattleParticipant[];wallBefore:number;populationBefore:number;ownerBefore:FactionId;developmentBefore:number}&Partial<BattleProgress>;
+export type ResolutionReceipt={battleId:BattleId;resolutionId:ResolutionId;eventId:EventId;at:number;round:number;kind:'round'|'siege-round'|'final'|'scout-delivery';outcome?:BattleOutcome;ownerBefore?:FactionId|null;ownerAfter?:FactionId|null;qualificationBefore?:'none'|'full';qualificationAfter?:'none'|'full'};
+export type CombatState={battles:BattleState[];receipts:ResolutionReceipt[];statistics:{resolved:number;raids:number;conquests:number;scouts:number;wild:number}};
+export type ArmyCommand={type:'army.dispatch';cityId:CityId;mission:ArmyMissionState['mission'];target:ArmyTarget;units:Record<string,number>;scoutMode?:ScoutMode}|{type:'army.recall';cityId:CityId;armyId:ArmyId};
+export const initialCombat=():CombatState=>({battles:[],receipts:[],statistics:{resolved:0,raids:0,conquests:0,scouts:0,wild:0}});

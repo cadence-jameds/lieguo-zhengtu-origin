@@ -1,0 +1,65 @@
+{
+  "scope": "Headless Node simulation; not browser FPS, IndexedDB, or target Windows hardware. Includes actual AI and governor decisions. No debug resource grants.",
+  "results": [
+    {
+      "civilization": "中國",
+      "seed": 90217,
+      "catchup24Ms": 1857,
+      "catchup48Ms": 5011,
+      "saveBytes": 1953286,
+      "finalEvents": 88,
+      "result": "defeat",
+      "simulatorHeapBytes": 65765488
+    },
+    {
+      "civilization": "拜占庭",
+      "seed": 90217,
+      "catchup24Ms": 1663,
+      "catchup48Ms": 4578,
+      "saveBytes": 1965781,
+      "finalEvents": 91,
+      "result": "defeat",
+      "simulatorHeapBytes": 126182400
+    },
+    {
+      "civilization": "法蘭克",
+      "seed": 90217,
+      "catchup24Ms": 1476,
+      "catchup48Ms": 4355,
+      "saveBytes": 1952460,
+      "finalEvents": 90,
+      "result": "defeat",
+      "simulatorHeapBytes": 108860560
+    },
+    {
+      "civilization": "不列顛",
+      "seed": 90217,
+      "catchup24Ms": 1405,
+      "catchup48Ms": 3887,
+      "saveBytes": 1932787,
+      "finalEvents": 89,
+      "result": "defeat",
+      "simulatorHeapBytes": 77697520
+    },
+    {
+      "civilization": "日本",
+      "seed": 90217,
+      "catchup24Ms": 1525,
+      "catchup48Ms": 4225,
+      "saveBytes": 1973416,
+      "finalEvents": 93,
+      "result": "defeat",
+      "simulatorHeapBytes": 190706960
+    },
+    {
+      "civilization": "蒙古",
+      "seed": 90217,
+      "catchup24Ms": 1589,
+      "catchup48Ms": 4214,
+      "saveBytes": 1950023,
+      "finalEvents": 88,
+      "result": "defeat",
+      "simulatorHeapBytes": 134980112
+    }
+  ]
+}

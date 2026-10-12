@@ -1,0 +1,20 @@
+import {it,expect} from 'vitest';
+import {newGame,terrainAt} from './legacyWorld';
+import {validate} from './legacyPersistence';
+import {configureMountains} from './mountainRules';
+import {mountainSprites,mountainFootprint} from './terrainRegions';
+import {travelRoute} from './travel';
+it('舊存檔城市保留座標與內容，山體避讓；同種子新世界不沿用避讓區',()=>{
+ const original=newGame('civ_byzantion',902,1,0),city=original.nodes.find(n=>n.owner===original.player)!;
+ const point=mountainFootprint(mountainSprites(902,1)[0]).find(p=>p.x>1&&p.y>1)!;
+ city.x=point.x;city.y=point.y;const stock={...city.stock},id=city.id;
+ delete original.mountainRevision;delete original.mountainClearings;
+ const saved=validate(original),retained=saved.nodes.find(n=>n.id===id)!;
+ expect([retained.x,retained.y]).toEqual([point.x,point.y]);expect(retained.stock).toEqual(stock);
+ expect(terrainAt(point.x,point.y,902,1)).not.toBe('mountain');
+ expect(validate(saved).mountainClearings).toEqual(saved.mountainClearings);
+ const fresh=newGame('civ_byzantion',902,1,0);expect(terrainAt(point.x,point.y,902,1)).toBe('mountain');
+ configureMountains(saved);expect(terrainAt(point.x,point.y,902,1)).not.toBe('mountain');
+ travelRoute(fresh,fresh.nodes[0],fresh.nodes[1]);expect(terrainAt(point.x,point.y,902,1)).toBe('mountain');
+ for(const n of fresh.nodes.filter(n=>n.kind!=='ruins'&&!n.respawnAt))expect(terrainAt(n.x,n.y,902,1)).not.toBe('mountain');
+});

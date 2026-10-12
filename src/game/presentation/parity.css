@@ -1,0 +1,114 @@
+/* v0.30.2 shell and navigation retain game.css; only Formal extensions live here. */
+.formal-shell.desktop-layout.game-shell{grid-template-columns:184px minmax(0,1fr);grid-template-rows:90px minmax(0,1fr) 28px;height:100dvh;min-height:0;overflow:hidden}.formal-shell .topbar{position:relative;height:auto;min-height:0;flex-wrap:nowrap}.formal-shell .main-surface{grid-column:2;grid-row:2;overflow:hidden}.formal-shell .view-scroll{overflow-y:auto;min-height:0;flex:1}.formal-shell .left-rail{grid-column:1;grid-row:2}.formal-shell .resource-bar{gap:12px}.formal-shell .resource .formal-icon{width:25px;height:25px}.formal-shell .resource strong{font-size:17px}.formal-shell .troop-bar{gap:10px}.formal-shell .troop-bar span{font-size:12px}.formal-shell .troop-bar strong{font-size:14px}.formal-shell .world-map{height:auto;min-height:0;flex:1}.formal-shell .formal-toolbar{margin:12px 0}.formal-shell .formal-city-panel{max-width:1300px;margin:auto}.formal-shell .formal-inspector{border:0;padding:0;margin:0;background:transparent}.formal-shell .formal-inspector .formal-toolbar{margin:0 0 12px}.formal-shell .formal-inspector .formal-toolbar>.formal-new-building{position:relative;width:100px;height:100px}.formal-shell .formal-map-scale{position:absolute;left:12px;top:12px;padding:3px 8px;background:#183127cc;color:#eee5c9;pointer-events:none}.formal-shell .formal-catalog-card{display:flex;flex-direction:column;gap:10px;min-width:0}.formal-shell .formal-catalog-card .section-label{display:flex;align-items:center;gap:14px;margin:0}.formal-shell .formal-catalog-card h2{font-size:18px;margin:0 0 6px}.formal-shell .formal-catalog-card .cost{margin-top:auto;gap:6px 12px;font-size:12px}.formal-shell .cost .formal-icon{width:19px;height:19px}.formal-shell .formal-catalog-card .formal-art{width:82px;height:82px}.formal-shell .formal-queue-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.formal-shell .formal-filter{display:flex;align-items:center;flex-wrap:wrap;gap:15px;margin:20px 0}.formal-shell .formal-filter select{min-width:150px}.formal-shell .formal-era-track{grid-template-columns:repeat(4,1fr)}.formal-shell .research-view>.card,.formal-shell .army-view>.card,.formal-shell .empire-view>.card{margin:16px 0}.formal-shell .city-view .view-heading{margin-bottom:10px}.formal-shell .district-tabs button{min-width:70px}.formal-shell .view-heading h1{overflow-wrap:anywhere}.formal-shell .reports-list{margin-top:20px}.formal-shell .formal-development select{width:auto}.formal-shell .formal-development .dialog-actions{justify-content:flex-start}.formal-shell .formal-development .dialog-actions label{max-width:95px}.formal-shell .formal-development .dialog-actions>input{max-width:120px}.formal-shell .formal-city-summary{font-size:12px}.formal-shell .formal-icon{pointer-events:none}
+@media(min-width:1600px){.formal-shell.desktop-layout.game-shell{grid-template-columns:208px minmax(0,1fr)}}
+@media(max-width:1250px){.formal-shell.desktop-layout.game-shell{grid-template-columns:160px minmax(0,1fr);grid-template-rows:100px minmax(0,1fr) 28px}.formal-shell.desktop-layout .topbar{flex-wrap:wrap;align-content:center;gap:4px 14px}.formal-shell.desktop-layout .troop-bar{flex:0 0 auto;order:0;border:0;padding:0}.formal-shell.desktop-layout .brand{min-width:130px;flex:0 0 auto}.formal-shell.desktop-layout .resource-bar{flex:1;justify-content:center}}
+@media(max-width:1000px){.formal-shell.desktop-layout.game-shell{grid-template-columns:72px minmax(0,1fr)}.formal-shell.desktop-layout .world-clock{margin-left:auto}.formal-shell.desktop-layout .resource .formal-icon{display:none}.formal-shell.desktop-layout .header-era{font-size:12px}}
+.formal-shell.mobile-layout.game-shell{display:flex;flex-direction:column;height:100dvh;min-height:0;overflow:hidden}.formal-shell.mobile-layout .topbar{display:flex;flex-direction:column;align-items:stretch;gap:0;flex:none;padding:4px 10px 5px}.formal-shell.mobile-layout .mobile-hud-main{min-height:35px}.formal-shell.mobile-layout .mobile-resources{width:100%;min-height:48px}.formal-shell.mobile-layout .mobile-resources .formal-icon{width:18px;height:18px}.formal-shell.mobile-layout .hud-resource-stock{display:flex;gap:4px;align-items:center}.formal-shell.mobile-layout .formal-mobile-status{font-size:10px;color:var(--muted);padding:2px 0;text-align:right}.formal-shell.mobile-layout .main-surface{min-height:0;flex:1;overflow:hidden}.formal-shell.mobile-layout .context-strip{min-height:26px;height:26px;flex:none;font-size:11px}.formal-shell.mobile-layout .statusbar{display:none}.formal-shell.mobile-layout .view-scroll{padding:20px 14px;overflow-y:auto}.formal-shell.mobile-layout .city-view{padding:10px 10px 24px}.formal-shell.mobile-layout .world-map{flex:1;min-height:0;height:auto}.formal-shell.mobile-layout .view-heading{margin-bottom:10px}.formal-shell.mobile-layout .view-heading h1{font-size:21px}.formal-shell.mobile-layout .formal-city-summary{gap:5px 12px;font-size:11px}.formal-shell.mobile-layout .district-tabs{gap:4px}.formal-shell.mobile-layout .district-tabs button{min-width:0;padding:7px;min-height:44px}.formal-shell.mobile-layout .formal-era-track>div{padding:13px 4px}.formal-shell.mobile-layout .formal-era-track strong{font-size:14px}.formal-shell.mobile-layout .research-grid{grid-template-columns:1fr}.formal-shell.mobile-layout .unit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.formal-shell.mobile-layout .formal-map-scale{top:7px;left:7px;font-size:10px}.formal-shell.mobile-layout .formal-toolbar{gap:5px}.formal-shell.mobile-layout .map-help{font-size:10px;max-width:calc(100% - 85px)}.formal-shell .map-float-selection-panel .map-float-body p{font-size:13px;line-height:1.5;margin-bottom:10px}.formal-shell .map-float-selection-panel button{margin:3px;min-height:38px}.home-release ul{padding-left:22px}.home-release li{margin:8px 0;line-height:1.6}
+/* v0.30.10: preserve the DEMO scene CSS; only new data surfaces extend it. */
+.formal-world-map .map-background,.formal-world-map .map-overlay{position:absolute;inset:0;width:100%;height:100%}.formal-world-map .map-background{pointer-events:none}.formal-world-map .map-overlay{z-index:1}.formal-world-map .map-tools,.formal-world-map .map-float-panel{z-index:3}.formal-world-map .map-help,.formal-world-map .formal-map-scale{z-index:2}
+.formal-shell .garrison-lines{display:grid;grid-template-columns:repeat(11,32px);gap:2px;flex-shrink:0}.formal-shell .garrison-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1px;min-height:48px;min-width:0;overflow:hidden;background:transparent;border-color:transparent}.formal-shell .garrison-cell .formal-art{width:28px;height:28px;max-width:100%}.garrison-cell .formal-art .formal-badge{display:none}.garrison-cell .catalog-image{display:block;background-size:300% 200%;background-repeat:no-repeat}.formal-shell .garrison-cell strong{font-size:12px;font-variant-numeric:tabular-nums;line-height:1.2}.formal-shell .resource{min-width:66px;background:none;border:0;padding:0;display:flex;gap:5px}.formal-shell .hud-letter{font:16px serif;color:var(--gold)}.formal-shell .topbar{gap:12px;padding-inline:16px}.formal-shell .brand{min-width:150px}.formal-shell .header-era{min-width:46px;padding:2px 5px}.formal-shell .troop-bar{gap:0;padding-left:8px}.formal-shell .troop-bar strong{font-size:13px}.formal-shell .context-strip{min-height:40px}.formal-shell .context-strip>span{margin-left:auto;text-align:right;line-height:1.25}.formal-shell .context-strip small{font-size:11px}
+.formal-city-stats{grid-template-columns:repeat(5,minmax(0,1fr))}.formal-city-stats small{display:block}.formal-city-stats button{padding:3px 8px;min-height:30px;font-size:12px;margin-top:6px}.formal-city-stats strong{font-size:18px}.formal-shell .queue-job button{min-height:28px;min-width:28px;padding:1px 6px;font-size:18px;flex-shrink:0}.formal-shell .queue-job .meter{margin-bottom:0}.building-categories{margin-bottom:14px}.building-title>.formal-new-building{position:relative;width:60px;height:60px;flex-shrink:0}.building-title>.building-sprite{width:60px;height:60px}.formal-catalog-selection>.formal-new-building,.formal-catalog-selection>.building-sprite{position:relative;width:100px;height:100px;flex-shrink:0}
+@media(max-width:1350px) and (min-width:701px){.formal-shell.desktop-layout.game-shell{grid-template-rows:100px minmax(0,1fr) 28px}.formal-shell.desktop-layout .topbar{flex-wrap:wrap;gap:4px 12px;align-content:center}.formal-shell.desktop-layout .garrison-lines{grid-template-columns:repeat(11,30px)}.formal-shell.desktop-layout .resource-bar{flex:1}.formal-shell.desktop-layout .brand{min-width:135px}.formal-shell.desktop-layout .troop-bar{margin-left:auto}}
+@media(max-width:900px){.formal-city-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.formal-city-stats>div{border-bottom:1px solid var(--line)}}
+.formal-shell.mobile-layout .garrison-lines{grid-template-columns:repeat(11,minmax(0,1fr));gap:0;width:100%;margin:2px 0}.formal-shell.mobile-layout .garrison-cell{min-height:42px}.formal-shell.mobile-layout .garrison-cell .formal-art{width:25px;height:25px}.formal-shell.mobile-layout .garrison-cell strong{font-size:11px}.formal-shell.mobile-layout .formal-mobile-status{text-align:right}.formal-shell.mobile-layout .context-strip{height:40px;min-height:40px}.formal-shell.mobile-layout .context-strip>span{font-size:11px}.formal-shell.mobile-layout .formal-city-stats strong{font-size:16px}
+
+/* DEMO phone landscape layout; compact civ cards continue to use the original game.css. */
+@media(max-height:520px) and (orientation:landscape){.formal-shell.mobile-layout .topbar{display:grid;grid-template-columns:minmax(240px,1fr) minmax(260px,1fr);gap:10px}.formal-shell.mobile-layout .garrison-lines,.formal-shell.mobile-layout .formal-mobile-status{grid-column:1/-1}}
+/* v0.30.12 — apply DEMO resource tokens per label; no resource artwork. */
+.formal-shell .hud-letter.res-food{color:var(--ui-224)}
+.formal-shell .hud-letter.res-wood{color:var(--ui-162)}
+.formal-shell .hud-letter.res-stone{color:var(--ui-172)}
+.formal-shell .hud-letter.res-gold{color:var(--ui-237)}
+.formal-shell .formal-scenes .district-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.formal-shell .formal-scenes .field-composition-summary{padding:0;gap:8px 14px;flex:1}
+.formal-shell .formal-scenes .label-toggle{margin-left:auto}
+.formal-shell .formal-scenes .city-heading{margin-bottom:16px}
+.formal-shell .formal-scenes .city-heading-actions{flex:none}
+.formal-shell .construction-menu .formal-new-building{width:80px;height:90px}
+.formal-shell .build-categories{grid-template-columns:repeat(4,minmax(0,1fr))}
+.formal-shell .building-detail .formal-new-building{width:150px;height:150px;flex:none}
+.formal-shell .target-detail .target-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:16px 0}
+.formal-shell .target-detail .target-facts>span{display:flex;flex-direction:column;gap:4px;font-size:14px}
+.target-relation{border-left:4px solid;padding:8px 14px;background:var(--surface)}
+.target-relation h3{margin:0 0 4px}
+.target-relation span{font-size:14px;color:var(--muted)}
+.special-unit-section{border-top:1px solid var(--line);margin-top:24px;padding-top:16px}
+.special-unit-section>.colonization-card{max-width:240px;width:100%}
+.formal-development h3{display:flex;align-items:center;gap:10px}
+.formal-development>small{display:block;line-height:1.6;margin-bottom:12px}
+.plot-register{margin-top:16px}.plot-register summary{min-height:44px;padding:12px 0;cursor:pointer}
+.plot-register-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.plot-register-grid button{display:flex;justify-content:space-between;gap:10px;min-width:0}
+.formal-shell .cost{font-size:14px}
+.formal-shell.mobile-layout .formal-scenes .city-heading{margin-bottom:12px}
+.formal-shell.mobile-layout .formal-scenes .city-title-row{gap:6px;flex-wrap:wrap}
+.formal-shell.mobile-layout .formal-scenes .city-title-row h1{font-size:1.25rem;overflow-wrap:anywhere}
+.formal-shell.mobile-layout .formal-scenes .city-inline-coordinates{font-size:.875rem;white-space:nowrap}
+.formal-shell.mobile-layout .formal-scenes .rename-city{min-width:36px;width:36px;min-height:36px;margin-left:0;padding:0;font-size:20px}
+.formal-shell.mobile-layout .formal-scenes .field-composition-summary{flex:0 0 auto;flex-wrap:nowrap;justify-content:flex-start;font-size:12px;gap:5px}
+.formal-shell.mobile-layout .formal-scenes .district-toolbar{flex-wrap:nowrap;gap:6px}
+.formal-shell.mobile-layout .formal-scenes .label-toggle{flex:none;white-space:nowrap;margin-left:auto;font-size:12px;padding:6px 4px;min-height:44px}
+.formal-shell.mobile-layout .formal-scenes .city-heading-actions{margin-left:auto}
+.formal-shell.mobile-layout .formal-scenes .scene-view-shortcut{font-size:14px;min-height:38px;padding:6px 10px}
+.formal-shell.mobile-layout .formal-scenes .city-heading{flex-wrap:wrap;gap:8px}
+.formal-shell.mobile-layout .catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.formal-shell.mobile-layout .building-detail{gap:12px;align-items:flex-start}
+.formal-shell.mobile-layout .building-detail>.building-sprite,.formal-shell.mobile-layout .building-detail>.resource-field-art,.formal-shell.mobile-layout .building-detail>.formal-new-building{width:92px;height:92px;flex-shrink:0}
+@media(max-height:520px) and (orientation:landscape){.formal-shell.mobile-layout .formal-scenes .city-heading{margin-bottom:6px}.formal-shell.mobile-layout .formal-scenes .field-composition-summary{flex-basis:auto}.formal-shell.mobile-layout .catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+.formal-shell .colonization-escort{width:100%;border:1px solid var(--border);padding:12px}.formal-shell .colonization-escort label{display:flex;align-items:center;gap:8px;margin:6px 0}.formal-shell .colonization-escort label span{flex:1}.formal-shell .colonization-escort input{width:80px}.formal-shell .colonization-escort .unit-line-icon{width:24px;height:24px}
+
+/* Construction art must occupy its grid cell; scene-only sprites keep absolute anchors. */
+.formal-shell .construction-menu>article>.formal-new-building,.formal-shell .building-detail>.formal-new-building{position:relative;inset:auto;flex-shrink:0}
+.formal-shell .construction-menu>article{grid-template-columns:80px minmax(0,1fr);align-items:start}
+.formal-shell .construction-menu>article>div{min-width:0;overflow-wrap:anywhere}
+.formal-shell .construction-menu>article>div .cost{gap:6px 14px}
+.formal-shell .construction-menu>article>.primary{grid-column:1/-1}
+.formal-shell .construction-menu .formal-new-building>.building-sprite{display:block;width:100%;height:100%;object-fit:contain}
+.formal-shell .catalog-card>.formal-art{display:block;width:100px;height:100px;max-width:100%;margin:6px 0}
+.formal-shell .march-open>.formal-art{width:46px;height:46px;flex:none}
+.formal-shell.mobile-layout .construction-menu>article{gap:10px;padding:12px;grid-template-columns:76px minmax(0,1fr)}
+.formal-shell.mobile-layout .construction-menu>article>.building-sprite,.formal-shell.mobile-layout .construction-menu>article>.formal-new-building{width:76px;height:86px}
+.formal-shell.mobile-layout .build-categories button{font-size:14px;min-height:42px}
+@media(max-width:360px){.formal-shell.mobile-layout .construction-menu>article{grid-template-columns:64px minmax(0,1fr)}.formal-shell.mobile-layout .construction-menu>article>.building-sprite,.formal-shell.mobile-layout .construction-menu>article>.formal-new-building{width:64px;height:76px}}
+
+.hud-unit-icon{display:block;width:32px;height:32px;flex:none;background-size:400% 300%;background-repeat:no-repeat}
+.formal-shell .garrison-cell{min-height:48px}
+.formal-shell .garrison-cell .hud-unit-icon{width:30px;height:30px;max-width:100%;aspect-ratio:1}
+.formal-shell.mobile-layout .garrison-cell{min-height:48px}
+.formal-shell.mobile-layout .garrison-cell .hud-unit-icon{width:min(32px,100%);height:auto;aspect-ratio:1}
+
+/* v0.30.17: compact phone HUD and one-row district controls; desktop stays unchanged. */
+.formal-shell.mobile-layout .mobile-hud-main{grid-template-columns:minmax(0,1fr) auto auto;gap:6px}
+.formal-shell.mobile-layout .mobile-city-select{width:fit-content;max-width:100%}
+.formal-shell.mobile-layout .mobile-city-select select{max-width:100%;min-width:0;text-overflow:ellipsis;padding:5px 20px 5px 8px}
+.formal-shell.mobile-layout .mobile-population{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:1px;min-height:44px;padding:2px 0;color:var(--muted);font-size:11px;line-height:1.3;font-variant-numeric:tabular-nums}
+.formal-shell.mobile-layout .mobile-population strong{color:var(--text);font-size:12px;font-weight:600;white-space:nowrap}
+.formal-shell.mobile-layout .formal-scenes .district-tabs{flex:none;gap:2px}
+.formal-shell.mobile-layout .formal-scenes .district-tabs button{padding:7px 5px;font-size:14px}
+.formal-shell.mobile-layout .formal-scenes .field-composition-summary>span{white-space:nowrap}
+@media(max-width:360px){.formal-shell.mobile-layout .formal-scenes .district-toolbar{gap:4px}.formal-shell.mobile-layout .formal-scenes .district-tabs button{padding-inline:4px;font-size:13px}.formal-shell.mobile-layout .formal-scenes .field-composition-summary{gap:3px;font-size:11px}.formal-shell.mobile-layout .formal-scenes .label-toggle{font-size:11px;padding-inline:2px}.formal-shell.mobile-layout .mobile-hud-main{gap:4px}.formal-shell.mobile-layout .mobile-era{padding-inline:4px}}
+
+/* The live playtest frame overrides the DEMO blue shield frame. */
+.game-shell.developer-world::after,.home-screen.developer-world::after{content:"";position:fixed;inset:0;border:4px solid #e5bd5b;box-shadow:inset 0 0 12px #e5bd5b66;pointer-events:none;z-index:10000}.developer-controls label{display:flex;align-items:center;gap:12px;margin:16px 0}.developer-controls select{max-width:180px}.developer-shield input{width:20px;height:20px;margin:0}.formal-shell .reports-toolbar{align-items:center}.formal-shell .report-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.building-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.building-actions>button{width:100%;min-width:0}.building-actions>button:only-child{grid-column:1/-1}.building-detail>div{min-width:0}.city-era-upgrade{margin-top:24px}.formal-demo-target .target-name h2{overflow-wrap:anywhere}
+
+/* v90 operations and overlay hierarchy share mobile/desktop rules. */
+.formal-shell .met,.formal-shell .building-requirements .met{color:#88c78d}
+.formal-shell .unmet,.formal-shell .building-requirements .unmet{color:#e49786}
+.formal-shell .build-name-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:.4rem .8rem}
+.formal-shell .build-name-row small{font-size:.75rem;color:#aeb8a0}
+.formal-shell .construction-menu .build-info-name{background:none;border:0;padding:0;min-height:32px;color:inherit;font-weight:inherit;font-size:inherit;grid-column:auto;text-align:left}
+.formal-shell .build-info-name:focus-visible{outline:2px solid var(--gold)}
+.formal-shell .construction-overlays{position:absolute;inset:0;z-index:200;pointer-events:none}
+.formal-shell .scene-progress-anchor{position:absolute;width:0;height:0}
+.formal-shell .construction-overlays .construction-progress{top:23px;left:0}
+.formal-shell .construction-overlays .field-progress .construction-progress{top:20px}
+.formal-shell .construction-overlays .gate-progress .construction-progress{top:0}
+
+/* Construction prerequisites: normal weight; unmet items use pure red. */
+.formal-shell .building-prerequisite-summary .unmet{color:#FF0000;font-weight:400}
+.formal-shell .building-prerequisite-summary .met{font-weight:400}
+
+.update-alert.formal-mobile-update{bottom:calc(108px + env(safe-area-inset-bottom));font-size:13px;max-width:calc(100vw - 32px)}

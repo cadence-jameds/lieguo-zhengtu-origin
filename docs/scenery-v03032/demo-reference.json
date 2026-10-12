@@ -1,0 +1,7 @@
+{
+  "filename": "列國征途_原始碼_v0.30.2.zip",
+  "sha256": "39b945b23a74ac6aa75412d31459c3efc7954bde40eb99e766ac33029cc5539a",
+  "scenerySource": "lieguo-v0.30.2/src/game/worldScenery.ts",
+  "clearingExcerpt": "// Only city clearings remain. Wild resource lifecycle never changes scenery.\n layer.globalCompositeOperation='destination-out';\n for(const n of s.nodes){if(!['capital','village'].includes(n.kind)||!sceneryNodeVisible(n,c.z))continue;const p=project(n),city=true,size=17*c.z;\n  if(p.x<-80||p.x>w+80||p.y<-80||p.y>h+80)continue;\n  layer.save();layer.translate(p.x,p.y-size*.7);layer.scale(size*(city?2.6:2.15),size*(city?2.4:2.6));\n  const mask=layer.createRadialGradient(0,0,.72,0,0,1);mask.addColorStop(0,'#000');mask.addColorStop(1,'#0000');layer.fillStyle=mask;layer.fillRect(-1,-1,2,2);layer.restore();\n }\n ",
+  "cacheKeyExcerpt": "export const sceneryNodeKey=(nodes:SceneryNode[])=>nodes.filter(n=>n.kind==='capital'||n.kind==='village').map(n=>`${n.id}:${n.x},${n.y}:${n.kind}`).join('|');"
+}

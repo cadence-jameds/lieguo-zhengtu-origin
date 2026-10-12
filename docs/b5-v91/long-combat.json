@@ -1,0 +1,4309 @@
+[
+  {
+    "fixture": "scalar-militia",
+    "round": 1,
+    "initial": {
+      "a": 1000000000,
+      "d": 1
+    },
+    "expected": {
+      "round": 1,
+      "a": 1000000000,
+      "d": 0
+    },
+    "actual": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:001"
+      },
+      "targetName": "塞薩洛尼基特拉比松關",
+      "targetPoint": {
+        "x": 59,
+        "y": 195
+      },
+      "startedAt": 190919,
+      "resolvedAt": 190919,
+      "rounds": 1,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "militia": 1000000000
+          },
+          "after": {
+            "militia": 1000000000
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:001",
+          "cityId": "city:001",
+          "armyId": null,
+          "before": {
+            "militia": 1
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:001",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15005.516198349036,
+      "populationAfter": 14255.240388431585,
+      "returnedTrainingPopulation": 0,
+      "conquestReason": "conquered",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 190919,
+          "kind": "reinforcement",
+          "ownerFactionId": "faction:001",
+          "combatRound": 0,
+          "siegeRound": 0
+        },
+        {
+          "at": 190919,
+          "kind": "siege-start",
+          "combatRound": 1,
+          "siegeRound": 0
+        },
+        {
+          "at": 190919,
+          "kind": "catapult-batch",
+          "combatRound": 1,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0
+    }
+  },
+  {
+    "fixture": "scalar-militia",
+    "round": 10,
+    "initial": {
+      "a": 1000000000,
+      "d": 987091511
+    },
+    "expected": {
+      "round": 10,
+      "a": 113108064,
+      "d": 0
+    },
+    "actual": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:001"
+      },
+      "targetName": "塞薩洛尼基特拉比松關",
+      "targetPoint": {
+        "x": 59,
+        "y": 195
+      },
+      "startedAt": 190919,
+      "resolvedAt": 2890919,
+      "rounds": 10,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "armyId": "army:0000000000000001",
+          "cityId": "city:000",
+          "before": {
+            "militia": 1000000000
+          },
+          "after": {
+            "militia": 113108064
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:001",
+          "armyId": null,
+          "cityId": "city:001",
+          "before": {
+            "militia": 987091511
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:001",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15083.690051450794,
+      "populationAfter": 14329.505548878255,
+      "returnedTrainingPopulation": 0,
+      "conquestReason": "conquered",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 190919,
+          "kind": "reinforcement",
+          "combatRound": 0,
+          "siegeRound": 0,
+          "ownerFactionId": "faction:001"
+        },
+        {
+          "at": 1390919,
+          "kind": "combat-summary",
+          "combatRound": 5,
+          "siegeRound": 0,
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 223704012,
+              "casualties": 776295988
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 987091511,
+              "alive": 180596580,
+              "casualties": 806494931
+            }
+          ]
+        },
+        {
+          "at": 2890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 113108064,
+              "casualties": 886891936
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 987091511,
+              "alive": 0,
+              "casualties": 987091511
+            }
+          ],
+          "combatRound": 10,
+          "siegeRound": 0
+        },
+        {
+          "at": 2890919,
+          "kind": "siege-start",
+          "combatRound": 10,
+          "siegeRound": 0
+        },
+        {
+          "at": 2890919,
+          "kind": "catapult-batch",
+          "combatRound": 10,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0
+    }
+  },
+  {
+    "fixture": "scalar-militia",
+    "round": 30,
+    "initial": {
+      "a": 1000000000,
+      "d": 999999821
+    },
+    "expected": {
+      "round": 30,
+      "a": 195057,
+      "d": 0
+    },
+    "actual": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:001"
+      },
+      "targetName": "塞薩洛尼基特拉比松關",
+      "targetPoint": {
+        "x": 59,
+        "y": 195
+      },
+      "startedAt": 190919,
+      "resolvedAt": 8890919,
+      "rounds": 30,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "armyId": "army:0000000000000001",
+          "cityId": "city:000",
+          "before": {
+            "militia": 1000000000
+          },
+          "after": {
+            "militia": 195057
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:001",
+          "armyId": null,
+          "cityId": "city:001",
+          "before": {
+            "militia": 999999821
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:001",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15258.50513638647,
+      "populationAfter": 14495.579879567145,
+      "returnedTrainingPopulation": 0,
+      "conquestReason": "conquered",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 190919,
+          "kind": "reinforcement",
+          "combatRound": 0,
+          "siegeRound": 0,
+          "ownerFactionId": "faction:001"
+        },
+        {
+          "at": 1390919,
+          "kind": "combat-summary",
+          "combatRound": 5,
+          "siegeRound": 0,
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 203463780,
+              "casualties": 796536220
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 999999821,
+              "alive": 203463182,
+              "casualties": 796536639
+            }
+          ]
+        },
+        {
+          "at": 2890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 41398390,
+              "casualties": 958601610
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 999999821,
+              "alive": 41396394,
+              "casualties": 958603427
+            }
+          ],
+          "combatRound": 10,
+          "siegeRound": 0
+        },
+        {
+          "at": 4390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 8426191,
+              "casualties": 991573809
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 999999821,
+              "alive": 8419526,
+              "casualties": 991580295
+            }
+          ],
+          "combatRound": 15,
+          "siegeRound": 0
+        },
+        {
+          "at": 5890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 1724873,
+              "casualties": 998275127
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 999999821,
+              "alive": 1702615,
+              "casualties": 998297206
+            }
+          ],
+          "combatRound": 20,
+          "siegeRound": 0
+        },
+        {
+          "at": 7390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 385850,
+              "casualties": 999614150
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 999999821,
+              "alive": 311519,
+              "casualties": 999688302
+            }
+          ],
+          "combatRound": 25,
+          "siegeRound": 0
+        },
+        {
+          "at": 8890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1000000000,
+              "alive": 195057,
+              "casualties": 999804943
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 999999821,
+              "alive": 0,
+              "casualties": 999999821
+            }
+          ],
+          "combatRound": 30,
+          "siegeRound": 0
+        },
+        {
+          "at": 8890919,
+          "kind": "siege-start",
+          "combatRound": 30,
+          "siegeRound": 0
+        },
+        {
+          "at": 8890919,
+          "kind": "catapult-batch",
+          "combatRound": 30,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0
+    }
+  },
+  {
+    "fixture": "scalar-militia",
+    "round": 60,
+    "initial": {
+      "a": 150000000000000,
+      "d": 149999999999999
+    },
+    "expected": {
+      "round": 60,
+      "a": 1621797,
+      "d": 0
+    },
+    "actual": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:001"
+      },
+      "targetName": "塞薩洛尼基特拉比松關",
+      "targetPoint": {
+        "x": 59,
+        "y": 195
+      },
+      "startedAt": 190919,
+      "resolvedAt": 17890919,
+      "rounds": 60,
+      "outcome": "conquered",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "armyId": "army:0000000000000001",
+          "cityId": "city:000",
+          "before": {
+            "militia": 150000000000000
+          },
+          "after": {
+            "militia": 1621797
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:001",
+          "armyId": null,
+          "cityId": "city:001",
+          "before": {
+            "militia": 149999999999999
+          },
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:001",
+      "ownerAfter": "faction:000",
+      "populationBefore": 15523.58498900404,
+      "populationAfter": 14747.405739553838,
+      "returnedTrainingPopulation": 0,
+      "conquestReason": "conquered",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 190919,
+          "kind": "reinforcement",
+          "combatRound": 0,
+          "siegeRound": 0,
+          "ownerFactionId": "faction:001"
+        },
+        {
+          "at": 1390919,
+          "kind": "combat-summary",
+          "combatRound": 5,
+          "siegeRound": 0,
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 30519524871005,
+              "casualties": 119480475128995
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 30519524871002,
+              "casualties": 119480475128997
+            }
+          ]
+        },
+        {
+          "at": 2890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 6209609322350,
+              "casualties": 143790390677650
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 6209609322340,
+              "casualties": 143790390677659
+            }
+          ],
+          "combatRound": 10,
+          "siegeRound": 0
+        },
+        {
+          "at": 4390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 1263428841034,
+              "casualties": 148736571158966
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 1263428841000,
+              "casualties": 148736571158999
+            }
+          ],
+          "combatRound": 15,
+          "siegeRound": 0
+        },
+        {
+          "at": 5890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 257061652964,
+              "casualties": 149742938347036
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 257061652852,
+              "casualties": 149742938347147
+            }
+          ],
+          "combatRound": 20,
+          "siegeRound": 0
+        },
+        {
+          "at": 7390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 52302663582,
+              "casualties": 149947697336418
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 52302663208,
+              "casualties": 149947697336791
+            }
+          ],
+          "combatRound": 25,
+          "siegeRound": 0
+        },
+        {
+          "at": 8890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 10641683534,
+              "casualties": 149989358316466
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 10641682284,
+              "casualties": 149989358317715
+            }
+          ],
+          "combatRound": 30,
+          "siegeRound": 0
+        },
+        {
+          "at": 10390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 2165196128,
+              "casualties": 149997834803872
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 2165191954,
+              "casualties": 149997834808045
+            }
+          ],
+          "combatRound": 35,
+          "siegeRound": 0
+        },
+        {
+          "at": 11890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 440544926,
+              "casualties": 149999559455074
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 440530986,
+              "casualties": 149999559469013
+            }
+          ],
+          "combatRound": 40,
+          "siegeRound": 0
+        },
+        {
+          "at": 13390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 89656670,
+              "casualties": 149999910343330
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 89610118,
+              "casualties": 149999910389881
+            }
+          ],
+          "combatRound": 45,
+          "siegeRound": 0
+        },
+        {
+          "at": 14890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 18314852,
+              "casualties": 149999981685148
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 18159396,
+              "casualties": 149999981840603
+            }
+          ],
+          "combatRound": 50,
+          "siegeRound": 0
+        },
+        {
+          "at": 16390919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 3970160,
+              "casualties": 149999996029840
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 3451018,
+              "casualties": 149999996548981
+            }
+          ],
+          "combatRound": 55,
+          "siegeRound": 0
+        },
+        {
+          "at": 17890919,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 150000000000000,
+              "alive": 1621797,
+              "casualties": 149999998378203
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 149999999999999,
+              "alive": 0,
+              "casualties": 149999999999999
+            }
+          ],
+          "combatRound": 60,
+          "siegeRound": 0
+        },
+        {
+          "at": 17890919,
+          "kind": "siege-start",
+          "combatRound": 60,
+          "siegeRound": 0
+        },
+        {
+          "at": 17890919,
+          "kind": "catapult-batch",
+          "combatRound": 60,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 0
+    }
+  },
+  {
+    "fixture": "symmetric-heavy-knight-rams",
+    "expectedRounds": 497,
+    "actualRounds": 497,
+    "views": [
+      {
+        "battleId": "battle:0000000000000001",
+        "cityId": "city:001",
+        "targetName": "塞薩洛尼基特拉比松關",
+        "defending": false,
+        "phase": "combat",
+        "combatRound": 30,
+        "siegeRound": 0,
+        "siegeLimit": 12,
+        "remainingSiegeRounds": 12,
+        "nextRoundAt": 9318199,
+        "wallBefore": 0,
+        "wallLevel": 0,
+        "initial": {
+          "heavy-knight": 1,
+          "ram": 1000000
+        },
+        "alive": {
+          "heavy-knight": 1,
+          "ram": 818177
+        },
+        "casualties": {
+          "heavy-knight": 0,
+          "ram": 181823
+        },
+        "departed": {},
+        "history": [
+          {
+            "at": 318199,
+            "kind": "reinforcement",
+            "ownerFactionId": "faction:001",
+            "combatRound": 0,
+            "siegeRound": 0
+          },
+          {
+            "at": 1518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 5,
+            "siegeRound": 0
+          },
+          {
+            "at": 3018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 10,
+            "siegeRound": 0
+          },
+          {
+            "at": 4518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 15,
+            "siegeRound": 0
+          },
+          {
+            "at": 6018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 20,
+            "siegeRound": 0
+          },
+          {
+            "at": 7518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 25,
+            "siegeRound": 0
+          },
+          {
+            "at": 9018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 30,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 0
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "cityId": "city:001",
+        "targetName": "塞薩洛尼基特拉比松關",
+        "defending": false,
+        "phase": "combat",
+        "combatRound": 60,
+        "siegeRound": 0,
+        "siegeLimit": 12,
+        "remainingSiegeRounds": 12,
+        "nextRoundAt": 18318199,
+        "wallBefore": 0,
+        "wallLevel": 0,
+        "initial": {
+          "heavy-knight": 1,
+          "ram": 1000000
+        },
+        "alive": {
+          "heavy-knight": 1,
+          "ram": 669412
+        },
+        "casualties": {
+          "heavy-knight": 0,
+          "ram": 330588
+        },
+        "departed": {},
+        "history": [
+          {
+            "at": 318199,
+            "kind": "reinforcement",
+            "ownerFactionId": "faction:001",
+            "combatRound": 0,
+            "siegeRound": 0
+          },
+          {
+            "at": 1518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 5,
+            "siegeRound": 0
+          },
+          {
+            "at": 3018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 10,
+            "siegeRound": 0
+          },
+          {
+            "at": 4518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 15,
+            "siegeRound": 0
+          },
+          {
+            "at": 6018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 20,
+            "siegeRound": 0
+          },
+          {
+            "at": 7518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 25,
+            "siegeRound": 0
+          },
+          {
+            "at": 9018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 30,
+            "siegeRound": 0
+          },
+          {
+            "at": 10518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 35,
+            "siegeRound": 0
+          },
+          {
+            "at": 12018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 40,
+            "siegeRound": 0
+          },
+          {
+            "at": 13518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 45,
+            "siegeRound": 0
+          },
+          {
+            "at": 15018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 50,
+            "siegeRound": 0
+          },
+          {
+            "at": 16518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 55,
+            "siegeRound": 0
+          },
+          {
+            "at": 18018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 60,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 0
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "cityId": "city:001",
+        "targetName": "塞薩洛尼基特拉比松關",
+        "defending": false,
+        "phase": "combat",
+        "combatRound": 320,
+        "siegeRound": 0,
+        "siegeLimit": 12,
+        "remainingSiegeRounds": 12,
+        "nextRoundAt": 96318199,
+        "wallBefore": 0,
+        "wallLevel": 0,
+        "initial": {
+          "heavy-knight": 1,
+          "ram": 1000000
+        },
+        "alive": {
+          "heavy-knight": 1,
+          "ram": 117569
+        },
+        "casualties": {
+          "heavy-knight": 0,
+          "ram": 882431
+        },
+        "departed": {},
+        "history": [
+          {
+            "at": 1518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 5,
+            "siegeRound": 0
+          },
+          {
+            "at": 3018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 10,
+            "siegeRound": 0
+          },
+          {
+            "at": 4518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 15,
+            "siegeRound": 0
+          },
+          {
+            "at": 6018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 20,
+            "siegeRound": 0
+          },
+          {
+            "at": 7518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 25,
+            "siegeRound": 0
+          },
+          {
+            "at": 9018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 30,
+            "siegeRound": 0
+          },
+          {
+            "at": 10518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 35,
+            "siegeRound": 0
+          },
+          {
+            "at": 12018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 40,
+            "siegeRound": 0
+          },
+          {
+            "at": 13518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 45,
+            "siegeRound": 0
+          },
+          {
+            "at": 15018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 50,
+            "siegeRound": 0
+          },
+          {
+            "at": 16518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 55,
+            "siegeRound": 0
+          },
+          {
+            "at": 18018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 60,
+            "siegeRound": 0
+          },
+          {
+            "at": 19518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 65,
+            "siegeRound": 0
+          },
+          {
+            "at": 21018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 70,
+            "siegeRound": 0
+          },
+          {
+            "at": 22518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 75,
+            "siegeRound": 0
+          },
+          {
+            "at": 24018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 80,
+            "siegeRound": 0
+          },
+          {
+            "at": 25518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 85,
+            "siegeRound": 0
+          },
+          {
+            "at": 27018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 90,
+            "siegeRound": 0
+          },
+          {
+            "at": 28518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 95,
+            "siegeRound": 0
+          },
+          {
+            "at": 30018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 100,
+            "siegeRound": 0
+          },
+          {
+            "at": 31518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 105,
+            "siegeRound": 0
+          },
+          {
+            "at": 33018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 110,
+            "siegeRound": 0
+          },
+          {
+            "at": 34518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 115,
+            "siegeRound": 0
+          },
+          {
+            "at": 36018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 120,
+            "siegeRound": 0
+          },
+          {
+            "at": 37518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 125,
+            "siegeRound": 0
+          },
+          {
+            "at": 39018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 130,
+            "siegeRound": 0
+          },
+          {
+            "at": 40518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 135,
+            "siegeRound": 0
+          },
+          {
+            "at": 42018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 140,
+            "siegeRound": 0
+          },
+          {
+            "at": 43518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 145,
+            "siegeRound": 0
+          },
+          {
+            "at": 45018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 150,
+            "siegeRound": 0
+          },
+          {
+            "at": 46518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 155,
+            "siegeRound": 0
+          },
+          {
+            "at": 48018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 160,
+            "siegeRound": 0
+          },
+          {
+            "at": 49518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 165,
+            "siegeRound": 0
+          },
+          {
+            "at": 51018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 170,
+            "siegeRound": 0
+          },
+          {
+            "at": 52518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 175,
+            "siegeRound": 0
+          },
+          {
+            "at": 54018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 180,
+            "siegeRound": 0
+          },
+          {
+            "at": 55518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 185,
+            "siegeRound": 0
+          },
+          {
+            "at": 57018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 190,
+            "siegeRound": 0
+          },
+          {
+            "at": 58518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 195,
+            "siegeRound": 0
+          },
+          {
+            "at": 60018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 200,
+            "siegeRound": 0
+          },
+          {
+            "at": 61518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 205,
+            "siegeRound": 0
+          },
+          {
+            "at": 63018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 210,
+            "siegeRound": 0
+          },
+          {
+            "at": 64518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 215,
+            "siegeRound": 0
+          },
+          {
+            "at": 66018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 220,
+            "siegeRound": 0
+          },
+          {
+            "at": 67518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 225,
+            "siegeRound": 0
+          },
+          {
+            "at": 69018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 230,
+            "siegeRound": 0
+          },
+          {
+            "at": 70518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 235,
+            "siegeRound": 0
+          },
+          {
+            "at": 72018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 240,
+            "siegeRound": 0
+          },
+          {
+            "at": 73518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 245,
+            "siegeRound": 0
+          },
+          {
+            "at": 75018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 250,
+            "siegeRound": 0
+          },
+          {
+            "at": 76518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 255,
+            "siegeRound": 0
+          },
+          {
+            "at": 78018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 260,
+            "siegeRound": 0
+          },
+          {
+            "at": 79518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 265,
+            "siegeRound": 0
+          },
+          {
+            "at": 81018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 270,
+            "siegeRound": 0
+          },
+          {
+            "at": 82518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 275,
+            "siegeRound": 0
+          },
+          {
+            "at": 84018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 280,
+            "siegeRound": 0
+          },
+          {
+            "at": 85518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 285,
+            "siegeRound": 0
+          },
+          {
+            "at": 87018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 290,
+            "siegeRound": 0
+          },
+          {
+            "at": 88518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 295,
+            "siegeRound": 0
+          },
+          {
+            "at": 90018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 300,
+            "siegeRound": 0
+          },
+          {
+            "at": 91518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 305,
+            "siegeRound": 0
+          },
+          {
+            "at": 93018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 310,
+            "siegeRound": 0
+          },
+          {
+            "at": 94518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 315,
+            "siegeRound": 0
+          },
+          {
+            "at": 96018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 320,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 1
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "cityId": "city:001",
+        "targetName": "塞薩洛尼基特拉比松關",
+        "defending": false,
+        "phase": "combat",
+        "combatRound": 400,
+        "siegeRound": 0,
+        "siegeLimit": 12,
+        "remainingSiegeRounds": 12,
+        "nextRoundAt": 120318199,
+        "wallBefore": 0,
+        "wallLevel": 0,
+        "initial": {
+          "heavy-knight": 1,
+          "ram": 1000000
+        },
+        "alive": {
+          "heavy-knight": 1,
+          "ram": 68835
+        },
+        "casualties": {
+          "heavy-knight": 0,
+          "ram": 931165
+        },
+        "departed": {},
+        "history": [
+          {
+            "at": 25518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 85,
+            "siegeRound": 0
+          },
+          {
+            "at": 27018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 90,
+            "siegeRound": 0
+          },
+          {
+            "at": 28518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 95,
+            "siegeRound": 0
+          },
+          {
+            "at": 30018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 100,
+            "siegeRound": 0
+          },
+          {
+            "at": 31518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 105,
+            "siegeRound": 0
+          },
+          {
+            "at": 33018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 110,
+            "siegeRound": 0
+          },
+          {
+            "at": 34518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 115,
+            "siegeRound": 0
+          },
+          {
+            "at": 36018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 120,
+            "siegeRound": 0
+          },
+          {
+            "at": 37518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 125,
+            "siegeRound": 0
+          },
+          {
+            "at": 39018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 130,
+            "siegeRound": 0
+          },
+          {
+            "at": 40518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 135,
+            "siegeRound": 0
+          },
+          {
+            "at": 42018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 140,
+            "siegeRound": 0
+          },
+          {
+            "at": 43518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 145,
+            "siegeRound": 0
+          },
+          {
+            "at": 45018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 150,
+            "siegeRound": 0
+          },
+          {
+            "at": 46518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 155,
+            "siegeRound": 0
+          },
+          {
+            "at": 48018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 160,
+            "siegeRound": 0
+          },
+          {
+            "at": 49518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 165,
+            "siegeRound": 0
+          },
+          {
+            "at": 51018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 170,
+            "siegeRound": 0
+          },
+          {
+            "at": 52518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 175,
+            "siegeRound": 0
+          },
+          {
+            "at": 54018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 180,
+            "siegeRound": 0
+          },
+          {
+            "at": 55518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 185,
+            "siegeRound": 0
+          },
+          {
+            "at": 57018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 190,
+            "siegeRound": 0
+          },
+          {
+            "at": 58518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 195,
+            "siegeRound": 0
+          },
+          {
+            "at": 60018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 200,
+            "siegeRound": 0
+          },
+          {
+            "at": 61518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 205,
+            "siegeRound": 0
+          },
+          {
+            "at": 63018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 210,
+            "siegeRound": 0
+          },
+          {
+            "at": 64518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 215,
+            "siegeRound": 0
+          },
+          {
+            "at": 66018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 220,
+            "siegeRound": 0
+          },
+          {
+            "at": 67518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 225,
+            "siegeRound": 0
+          },
+          {
+            "at": 69018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 230,
+            "siegeRound": 0
+          },
+          {
+            "at": 70518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 235,
+            "siegeRound": 0
+          },
+          {
+            "at": 72018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 240,
+            "siegeRound": 0
+          },
+          {
+            "at": 73518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 245,
+            "siegeRound": 0
+          },
+          {
+            "at": 75018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 250,
+            "siegeRound": 0
+          },
+          {
+            "at": 76518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 255,
+            "siegeRound": 0
+          },
+          {
+            "at": 78018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 260,
+            "siegeRound": 0
+          },
+          {
+            "at": 79518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 265,
+            "siegeRound": 0
+          },
+          {
+            "at": 81018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 270,
+            "siegeRound": 0
+          },
+          {
+            "at": 82518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 275,
+            "siegeRound": 0
+          },
+          {
+            "at": 84018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 280,
+            "siegeRound": 0
+          },
+          {
+            "at": 85518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 285,
+            "siegeRound": 0
+          },
+          {
+            "at": 87018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 290,
+            "siegeRound": 0
+          },
+          {
+            "at": 88518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 295,
+            "siegeRound": 0
+          },
+          {
+            "at": 90018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 300,
+            "siegeRound": 0
+          },
+          {
+            "at": 91518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 305,
+            "siegeRound": 0
+          },
+          {
+            "at": 93018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 310,
+            "siegeRound": 0
+          },
+          {
+            "at": 94518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 315,
+            "siegeRound": 0
+          },
+          {
+            "at": 96018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 320,
+            "siegeRound": 0
+          },
+          {
+            "at": 97518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 325,
+            "siegeRound": 0
+          },
+          {
+            "at": 99018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 330,
+            "siegeRound": 0
+          },
+          {
+            "at": 100518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 335,
+            "siegeRound": 0
+          },
+          {
+            "at": 102018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 340,
+            "siegeRound": 0
+          },
+          {
+            "at": 103518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 345,
+            "siegeRound": 0
+          },
+          {
+            "at": 105018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 350,
+            "siegeRound": 0
+          },
+          {
+            "at": 106518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 355,
+            "siegeRound": 0
+          },
+          {
+            "at": 108018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 360,
+            "siegeRound": 0
+          },
+          {
+            "at": 109518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 365,
+            "siegeRound": 0
+          },
+          {
+            "at": 111018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 370,
+            "siegeRound": 0
+          },
+          {
+            "at": 112518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 375,
+            "siegeRound": 0
+          },
+          {
+            "at": 114018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 380,
+            "siegeRound": 0
+          },
+          {
+            "at": 115518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 385,
+            "siegeRound": 0
+          },
+          {
+            "at": 117018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 390,
+            "siegeRound": 0
+          },
+          {
+            "at": 118518199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 395,
+            "siegeRound": 0
+          },
+          {
+            "at": 120018199,
+            "kind": "combat-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 1,
+                "alive": 1,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 400,
+            "siegeRound": 0
+          }
+        ],
+        "historyOmitted": 17
+      }
+    ],
+    "final": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:001"
+      },
+      "targetName": "塞薩洛尼基特拉比松關",
+      "targetPoint": {
+        "x": 59,
+        "y": 195
+      },
+      "startedAt": 318199,
+      "resolvedAt": 149118199,
+      "rounds": 497,
+      "outcome": "mutual-destruction",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "cityId": "city:000",
+          "armyId": "army:0000000000000001",
+          "before": {
+            "heavy-knight": 1,
+            "ram": 1000000
+          },
+          "after": {
+            "ram": 35961
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:001",
+          "cityId": "city:001",
+          "armyId": null,
+          "before": {
+            "heavy-knight": 1,
+            "ram": 1000000
+          },
+          "after": {
+            "ram": 35961
+          }
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 0,
+      "wallAfter": 0,
+      "siege": [],
+      "ownerBefore": "faction:001",
+      "ownerAfter": "faction:001",
+      "populationBefore": 15009.194528391836,
+      "populationAfter": 19806.984030670654,
+      "returnedTrainingPopulation": 0,
+      "conquestReason": "mutual-destruction",
+      "siegeRounds": 0,
+      "siegeHistory": [],
+      "history": [
+        {
+          "at": 54018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 180,
+          "siegeRound": 0
+        },
+        {
+          "at": 55518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 185,
+          "siegeRound": 0
+        },
+        {
+          "at": 57018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 190,
+          "siegeRound": 0
+        },
+        {
+          "at": 58518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 195,
+          "siegeRound": 0
+        },
+        {
+          "at": 60018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 200,
+          "siegeRound": 0
+        },
+        {
+          "at": 61518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 205,
+          "siegeRound": 0
+        },
+        {
+          "at": 63018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 210,
+          "siegeRound": 0
+        },
+        {
+          "at": 64518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 215,
+          "siegeRound": 0
+        },
+        {
+          "at": 66018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 220,
+          "siegeRound": 0
+        },
+        {
+          "at": 67518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 225,
+          "siegeRound": 0
+        },
+        {
+          "at": 69018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 230,
+          "siegeRound": 0
+        },
+        {
+          "at": 70518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 235,
+          "siegeRound": 0
+        },
+        {
+          "at": 72018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 240,
+          "siegeRound": 0
+        },
+        {
+          "at": 73518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 245,
+          "siegeRound": 0
+        },
+        {
+          "at": 75018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 250,
+          "siegeRound": 0
+        },
+        {
+          "at": 76518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 255,
+          "siegeRound": 0
+        },
+        {
+          "at": 78018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 260,
+          "siegeRound": 0
+        },
+        {
+          "at": 79518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 265,
+          "siegeRound": 0
+        },
+        {
+          "at": 81018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 270,
+          "siegeRound": 0
+        },
+        {
+          "at": 82518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 275,
+          "siegeRound": 0
+        },
+        {
+          "at": 84018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 280,
+          "siegeRound": 0
+        },
+        {
+          "at": 85518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 285,
+          "siegeRound": 0
+        },
+        {
+          "at": 87018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 290,
+          "siegeRound": 0
+        },
+        {
+          "at": 88518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 295,
+          "siegeRound": 0
+        },
+        {
+          "at": 90018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 300,
+          "siegeRound": 0
+        },
+        {
+          "at": 91518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 305,
+          "siegeRound": 0
+        },
+        {
+          "at": 93018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 310,
+          "siegeRound": 0
+        },
+        {
+          "at": 94518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 315,
+          "siegeRound": 0
+        },
+        {
+          "at": 96018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 320,
+          "siegeRound": 0
+        },
+        {
+          "at": 97518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 325,
+          "siegeRound": 0
+        },
+        {
+          "at": 99018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 330,
+          "siegeRound": 0
+        },
+        {
+          "at": 100518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 335,
+          "siegeRound": 0
+        },
+        {
+          "at": 102018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 340,
+          "siegeRound": 0
+        },
+        {
+          "at": 103518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 345,
+          "siegeRound": 0
+        },
+        {
+          "at": 105018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 350,
+          "siegeRound": 0
+        },
+        {
+          "at": 106518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 355,
+          "siegeRound": 0
+        },
+        {
+          "at": 108018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 360,
+          "siegeRound": 0
+        },
+        {
+          "at": 109518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 365,
+          "siegeRound": 0
+        },
+        {
+          "at": 111018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 370,
+          "siegeRound": 0
+        },
+        {
+          "at": 112518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 375,
+          "siegeRound": 0
+        },
+        {
+          "at": 114018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 380,
+          "siegeRound": 0
+        },
+        {
+          "at": 115518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 385,
+          "siegeRound": 0
+        },
+        {
+          "at": 117018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 390,
+          "siegeRound": 0
+        },
+        {
+          "at": 118518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 395,
+          "siegeRound": 0
+        },
+        {
+          "at": 120018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 400,
+          "siegeRound": 0
+        },
+        {
+          "at": 121518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 405,
+          "siegeRound": 0
+        },
+        {
+          "at": 123018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 410,
+          "siegeRound": 0
+        },
+        {
+          "at": 124518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 415,
+          "siegeRound": 0
+        },
+        {
+          "at": 126018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 420,
+          "siegeRound": 0
+        },
+        {
+          "at": 127518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 425,
+          "siegeRound": 0
+        },
+        {
+          "at": 129018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 430,
+          "siegeRound": 0
+        },
+        {
+          "at": 130518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 435,
+          "siegeRound": 0
+        },
+        {
+          "at": 132018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 440,
+          "siegeRound": 0
+        },
+        {
+          "at": 133518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 445,
+          "siegeRound": 0
+        },
+        {
+          "at": 135018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 450,
+          "siegeRound": 0
+        },
+        {
+          "at": 136518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 455,
+          "siegeRound": 0
+        },
+        {
+          "at": 138018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 460,
+          "siegeRound": 0
+        },
+        {
+          "at": 139518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 465,
+          "siegeRound": 0
+        },
+        {
+          "at": 141018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 470,
+          "siegeRound": 0
+        },
+        {
+          "at": 142518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 475,
+          "siegeRound": 0
+        },
+        {
+          "at": 144018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 480,
+          "siegeRound": 0
+        },
+        {
+          "at": 145518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 485,
+          "siegeRound": 0
+        },
+        {
+          "at": 147018199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 490,
+          "siegeRound": 0
+        },
+        {
+          "at": 148518199,
+          "kind": "combat-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:001",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 495,
+          "siegeRound": 0
+        }
+      ],
+      "historyOmitted": 36
+    }
+  }
+]

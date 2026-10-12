@@ -1,0 +1,58 @@
+{
+  "version": "0.30.22",
+  "scope": "B5 Pre-Core Wall Construction Delta Fix",
+  "authority": [
+    "v85",
+    "v84",
+    "source"
+  ],
+  "sourceBaseline": {
+    "filename": "列國征途_原始碼_v0.30.21.zip",
+    "sha256": "9da2699a161203fde8b8ee0350394c8c562b8bed0ff500fdd006b01c147508e6",
+    "commit": "1d1d9728b4f83d393b37f3b3fc772a9aae2ac134",
+    "sourceFilesVerifiedBeforeEdit": 608,
+    "handoffSha256": "975b074459aac25f0a6643076a36ec1421a265102991e38694d88c45ab2b7c75"
+  },
+  "v85": {
+    "sha256": "fac5536c86935ccd99ee41cd58076bd1f1a401b4b3bc091c8195728a432439d9",
+    "originalUnchanged": true,
+    "independentReferenceUnchanged": true
+  },
+  "checks": [
+    {
+      "command": "npm ci",
+      "exitCode": 0,
+      "packagesInstalled": 394,
+      "evidence": "Observed successful installation in this task; no synthetic install log is provided."
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "evidence": "typecheck.txt"
+    },
+    {
+      "command": "Formal/B1/R1/B2/B3/B4/developer/spec/presentation regression",
+      "exitCode": 0,
+      "testFiles": 40,
+      "passed": 383,
+      "failed": 0,
+      "evidence": "core-regression.json"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "evidence": "build.txt"
+    }
+  ],
+  "formalScenarioMatches": 715,
+  "formalScenarioTotal": 715,
+  "wallMatrixComparisons": 225,
+  "catalogRows": 140,
+  "formulaMatches": 295,
+  "developerChecks": 54,
+  "civilizationSpeedComparisons": 110,
+  "refundAuthority": "v0.30.21 existing shared construction policy; v85 wording remains unverified",
+  "browserDeviceInspection": false,
+  "b5Started": false,
+  "astraGatePerformed": false
+}

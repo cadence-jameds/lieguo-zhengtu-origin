@@ -1,0 +1,871 @@
+{
+  "report-write": {
+    "revision": 2,
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.siege-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "siege-round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:001",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ],
+    "reports": [
+      {
+        "id": "report:0000000000000001",
+        "sequence": 1,
+        "campaignId": "campaign:b4-829c2dc8-e2db-46df-8820-295631677339",
+        "ownerFactionId": "faction:000",
+        "at": 318199,
+        "category": "battle",
+        "title": "征服成功｜塞薩洛尼基特拉比松關",
+        "text": "1 主戰回合；征服成功。",
+        "battle": {
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "mission": "conquest",
+          "target": {
+            "kind": "city",
+            "cityId": "city:001"
+          },
+          "targetName": "塞薩洛尼基特拉比松關",
+          "targetPoint": {
+            "x": 59,
+            "y": 195
+          },
+          "startedAt": 318199,
+          "resolvedAt": 318199,
+          "rounds": 1,
+          "outcome": "conquered",
+          "attackers": [
+            {
+              "ownerFactionId": "faction:000",
+              "cityId": "city:000",
+              "armyId": "army:0000000000000001",
+              "before": {
+                "militia": 100,
+                "ram": 10
+              },
+              "after": {
+                "militia": 100,
+                "ram": 10
+              }
+            }
+          ],
+          "defenders": [
+            {
+              "ownerFactionId": "faction:001",
+              "cityId": "city:001",
+              "armyId": null,
+              "before": {},
+              "after": {}
+            }
+          ],
+          "loot": {
+            "food": 0,
+            "wood": 0,
+            "stone": 0,
+            "gold": 0
+          },
+          "wallBefore": 1,
+          "wallAfter": 0,
+          "siege": [
+            {
+              "target": {
+                "kind": "wall"
+              },
+              "before": 1,
+              "after": 0
+            }
+          ],
+          "ownerBefore": "faction:001",
+          "ownerAfter": "faction:000",
+          "populationBefore": 15009.194528391836,
+          "populationAfter": 14258.734801972243,
+          "returnedTrainingPopulation": 0,
+          "conquestReason": "conquered",
+          "siegeRounds": 1,
+          "siegeHistory": [
+            {
+              "round": 1,
+              "at": 318199,
+              "wallBefore": 1,
+              "wallAfter": 0
+            }
+          ],
+          "history": [
+            {
+              "at": 318199,
+              "kind": "siege-start",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "catapult-batch",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "wall-breached",
+              "wallBefore": 1,
+              "wallAfter": 0,
+              "combatRound": 1,
+              "siegeRound": 1
+            }
+          ],
+          "historyOmitted": 0,
+          "realResolvedAt": 1791745803270
+        },
+        "realAt": 1791745803270,
+        "clockSpeed": 1,
+        "read": false
+      }
+    ]
+  },
+  "backup-write": {
+    "revision": 2,
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.siege-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "siege-round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:001",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ],
+    "reports": [
+      {
+        "id": "report:0000000000000001",
+        "sequence": 1,
+        "campaignId": "campaign:b4-6c1c843c-0f98-41fb-9d8e-e73121f8f97e",
+        "ownerFactionId": "faction:000",
+        "at": 318199,
+        "category": "battle",
+        "title": "征服成功｜塞薩洛尼基特拉比松關",
+        "text": "1 主戰回合；征服成功。",
+        "battle": {
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "mission": "conquest",
+          "target": {
+            "kind": "city",
+            "cityId": "city:001"
+          },
+          "targetName": "塞薩洛尼基特拉比松關",
+          "targetPoint": {
+            "x": 59,
+            "y": 195
+          },
+          "startedAt": 318199,
+          "resolvedAt": 318199,
+          "rounds": 1,
+          "outcome": "conquered",
+          "attackers": [
+            {
+              "ownerFactionId": "faction:000",
+              "cityId": "city:000",
+              "armyId": "army:0000000000000001",
+              "before": {
+                "militia": 100,
+                "ram": 10
+              },
+              "after": {
+                "militia": 100,
+                "ram": 10
+              }
+            }
+          ],
+          "defenders": [
+            {
+              "ownerFactionId": "faction:001",
+              "cityId": "city:001",
+              "armyId": null,
+              "before": {},
+              "after": {}
+            }
+          ],
+          "loot": {
+            "food": 0,
+            "wood": 0,
+            "stone": 0,
+            "gold": 0
+          },
+          "wallBefore": 1,
+          "wallAfter": 0,
+          "siege": [
+            {
+              "target": {
+                "kind": "wall"
+              },
+              "before": 1,
+              "after": 0
+            }
+          ],
+          "ownerBefore": "faction:001",
+          "ownerAfter": "faction:000",
+          "populationBefore": 15009.194528391836,
+          "populationAfter": 14258.734801972243,
+          "returnedTrainingPopulation": 0,
+          "conquestReason": "conquered",
+          "siegeRounds": 1,
+          "siegeHistory": [
+            {
+              "round": 1,
+              "at": 318199,
+              "wallBefore": 1,
+              "wallAfter": 0
+            }
+          ],
+          "history": [
+            {
+              "at": 318199,
+              "kind": "siege-start",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "catapult-batch",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "wall-breached",
+              "wallBefore": 1,
+              "wallAfter": 0,
+              "combatRound": 1,
+              "siegeRound": 1
+            }
+          ],
+          "historyOmitted": 0,
+          "realResolvedAt": 1791745804137
+        },
+        "realAt": 1791745804137,
+        "clockSpeed": 1,
+        "read": false
+      }
+    ]
+  },
+  "world-write": {
+    "revision": 2,
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.siege-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "siege-round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:001",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ],
+    "reports": [
+      {
+        "id": "report:0000000000000001",
+        "sequence": 1,
+        "campaignId": "campaign:b4-c1d41978-8417-494c-845c-260dc9cb6b68",
+        "ownerFactionId": "faction:000",
+        "at": 318199,
+        "category": "battle",
+        "title": "征服成功｜塞薩洛尼基特拉比松關",
+        "text": "1 主戰回合；征服成功。",
+        "battle": {
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "mission": "conquest",
+          "target": {
+            "kind": "city",
+            "cityId": "city:001"
+          },
+          "targetName": "塞薩洛尼基特拉比松關",
+          "targetPoint": {
+            "x": 59,
+            "y": 195
+          },
+          "startedAt": 318199,
+          "resolvedAt": 318199,
+          "rounds": 1,
+          "outcome": "conquered",
+          "attackers": [
+            {
+              "ownerFactionId": "faction:000",
+              "cityId": "city:000",
+              "armyId": "army:0000000000000001",
+              "before": {
+                "militia": 100,
+                "ram": 10
+              },
+              "after": {
+                "militia": 100,
+                "ram": 10
+              }
+            }
+          ],
+          "defenders": [
+            {
+              "ownerFactionId": "faction:001",
+              "cityId": "city:001",
+              "armyId": null,
+              "before": {},
+              "after": {}
+            }
+          ],
+          "loot": {
+            "food": 0,
+            "wood": 0,
+            "stone": 0,
+            "gold": 0
+          },
+          "wallBefore": 1,
+          "wallAfter": 0,
+          "siege": [
+            {
+              "target": {
+                "kind": "wall"
+              },
+              "before": 1,
+              "after": 0
+            }
+          ],
+          "ownerBefore": "faction:001",
+          "ownerAfter": "faction:000",
+          "populationBefore": 15009.194528391836,
+          "populationAfter": 14258.734801972243,
+          "returnedTrainingPopulation": 0,
+          "conquestReason": "conquered",
+          "siegeRounds": 1,
+          "siegeHistory": [
+            {
+              "round": 1,
+              "at": 318199,
+              "wallBefore": 1,
+              "wallAfter": 0
+            }
+          ],
+          "history": [
+            {
+              "at": 318199,
+              "kind": "siege-start",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "catapult-batch",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "wall-breached",
+              "wallBefore": 1,
+              "wallAfter": 0,
+              "combatRound": 1,
+              "siegeRound": 1
+            }
+          ],
+          "historyOmitted": 0,
+          "realResolvedAt": 1791745804865
+        },
+        "realAt": 1791745804865,
+        "clockSpeed": 1,
+        "read": false
+      }
+    ]
+  },
+  "authority-write": {
+    "revision": 2,
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.siege-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "siege-round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:001",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ],
+    "reports": [
+      {
+        "id": "report:0000000000000001",
+        "sequence": 1,
+        "campaignId": "campaign:b4-b58178cc-c17c-44bd-87bb-ca1377ba749e",
+        "ownerFactionId": "faction:000",
+        "at": 318199,
+        "category": "battle",
+        "title": "征服成功｜塞薩洛尼基特拉比松關",
+        "text": "1 主戰回合；征服成功。",
+        "battle": {
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "mission": "conquest",
+          "target": {
+            "kind": "city",
+            "cityId": "city:001"
+          },
+          "targetName": "塞薩洛尼基特拉比松關",
+          "targetPoint": {
+            "x": 59,
+            "y": 195
+          },
+          "startedAt": 318199,
+          "resolvedAt": 318199,
+          "rounds": 1,
+          "outcome": "conquered",
+          "attackers": [
+            {
+              "ownerFactionId": "faction:000",
+              "cityId": "city:000",
+              "armyId": "army:0000000000000001",
+              "before": {
+                "militia": 100,
+                "ram": 10
+              },
+              "after": {
+                "militia": 100,
+                "ram": 10
+              }
+            }
+          ],
+          "defenders": [
+            {
+              "ownerFactionId": "faction:001",
+              "cityId": "city:001",
+              "armyId": null,
+              "before": {},
+              "after": {}
+            }
+          ],
+          "loot": {
+            "food": 0,
+            "wood": 0,
+            "stone": 0,
+            "gold": 0
+          },
+          "wallBefore": 1,
+          "wallAfter": 0,
+          "siege": [
+            {
+              "target": {
+                "kind": "wall"
+              },
+              "before": 1,
+              "after": 0
+            }
+          ],
+          "ownerBefore": "faction:001",
+          "ownerAfter": "faction:000",
+          "populationBefore": 15009.194528391836,
+          "populationAfter": 14258.734801972243,
+          "returnedTrainingPopulation": 0,
+          "conquestReason": "conquered",
+          "siegeRounds": 1,
+          "siegeHistory": [
+            {
+              "round": 1,
+              "at": 318199,
+              "wallBefore": 1,
+              "wallAfter": 0
+            }
+          ],
+          "history": [
+            {
+              "at": 318199,
+              "kind": "siege-start",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "catapult-batch",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "wall-breached",
+              "wallBefore": 1,
+              "wallAfter": 0,
+              "combatRound": 1,
+              "siegeRound": 1
+            }
+          ],
+          "historyOmitted": 0,
+          "realResolvedAt": 1791745805640
+        },
+        "realAt": 1791745805640,
+        "clockSpeed": 1,
+        "read": false
+      }
+    ]
+  },
+  "exports": {
+    "full": [
+      {
+        "id": "report:0000000000000001",
+        "sequence": 1,
+        "campaignId": "campaign:b4-325abdb9-566d-4e9c-8278-e91045dfb93b",
+        "ownerFactionId": "faction:000",
+        "at": 318199,
+        "realAt": 1791745806201,
+        "clockSpeed": 1,
+        "read": false,
+        "category": "battle",
+        "title": "征服成功｜塞薩洛尼基特拉比松關",
+        "text": "1 主戰回合；征服成功。",
+        "battle": {
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "mission": "conquest",
+          "target": {
+            "kind": "city",
+            "cityId": "city:001"
+          },
+          "targetName": "塞薩洛尼基特拉比松關",
+          "targetPoint": {
+            "x": 59,
+            "y": 195
+          },
+          "realResolvedAt": 1791745806201,
+          "startedAt": 318199,
+          "resolvedAt": 318199,
+          "rounds": 1,
+          "outcome": "conquered",
+          "attackers": [
+            {
+              "ownerFactionId": "faction:000",
+              "armyId": "army:0000000000000001",
+              "cityId": "city:000",
+              "before": {
+                "militia": 100,
+                "ram": 10
+              },
+              "after": {
+                "militia": 100,
+                "ram": 10
+              }
+            }
+          ],
+          "defenders": [
+            {
+              "ownerFactionId": "faction:001",
+              "armyId": null,
+              "cityId": "city:001",
+              "before": {},
+              "after": {}
+            }
+          ],
+          "loot": {
+            "food": 0,
+            "wood": 0,
+            "stone": 0,
+            "gold": 0
+          },
+          "wallBefore": 1,
+          "wallAfter": 0,
+          "siege": [
+            {
+              "target": {
+                "kind": "wall"
+              },
+              "before": 1,
+              "after": 0
+            }
+          ],
+          "ownerBefore": "faction:001",
+          "ownerAfter": "faction:000",
+          "populationBefore": 15009.194528391836,
+          "populationAfter": 14258.734801972243,
+          "returnedTrainingPopulation": 0,
+          "conquestReason": "conquered",
+          "siegeRounds": 1,
+          "siegeHistory": [
+            {
+              "round": 1,
+              "at": 318199,
+              "wallBefore": 1,
+              "wallAfter": 0
+            }
+          ],
+          "history": [
+            {
+              "at": 318199,
+              "kind": "siege-start",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "catapult-batch",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 318199,
+              "kind": "wall-breached",
+              "combatRound": 1,
+              "siegeRound": 1,
+              "wallBefore": 1,
+              "wallAfter": 0
+            }
+          ],
+          "historyOmitted": 0
+        }
+      }
+    ],
+    "quickHasReports": false,
+    "checksum": "2c0f5935a804839a68942ed2f99191b7f83d34f47aa92aa64ea23d9167fe7684"
+  },
+  "recovery": {
+    "before": 2,
+    "after": 4,
+    "battleId": "battle:0000000000000001",
+    "reportCursor": 3,
+    "receipts": [
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.round-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.siege-1",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "siege-round"
+      },
+      {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "eventId": "event:0000000000000101",
+        "at": 318199,
+        "round": 1,
+        "kind": "final",
+        "outcome": "conquered",
+        "ownerBefore": "faction:001",
+        "ownerAfter": "faction:000",
+        "qualificationBefore": "none",
+        "qualificationAfter": "none"
+      }
+    ]
+  },
+  "r1": {
+    "recovered": true,
+    "time": 0,
+    "revision": 3
+  },
+  "offline": {
+    "worldTime": 72000000,
+    "realMs": 1440000,
+    "rounds": 13,
+    "reportCount": 1
+  },
+  "warehouse": {
+    "dispatch": {
+      "shipmentId": "shipment:0000000000000001",
+      "commandId": "command:b4-9",
+      "sourceFactionId": "faction:000",
+      "sourceCityId": "city:000",
+      "destinationCityId": "city:001",
+      "resources": {
+        "food": 0,
+        "wood": 4000,
+        "stone": 0,
+        "gold": 0
+      },
+      "caravans": 2,
+      "path": [
+        {
+          "x": 62,
+          "y": 198
+        },
+        {
+          "x": 61,
+          "y": 197
+        },
+        {
+          "x": 60,
+          "y": 196
+        },
+        {
+          "x": 59,
+          "y": 195
+        }
+      ],
+      "distance": 4.242640687119286,
+      "dispatchedAt": 0,
+      "arrivalAt": 254559,
+      "returnAt": 509118,
+      "arrivalEventId": "event:0000000000000101",
+      "returnEventId": "event:0000000000000102",
+      "phase": "outbound",
+      "authorizationSnapshot": {
+        "sourceCityOwnerFactionId": "faction:000",
+        "contributorEmpireId": null,
+        "checkedAt": 0
+      }
+    },
+    "returning": {
+      "shipmentId": "shipment:0000000000000001",
+      "commandId": "command:b4-9",
+      "sourceFactionId": "faction:000",
+      "sourceCityId": "city:000",
+      "destinationCityId": "city:001",
+      "resources": {
+        "food": 0,
+        "wood": 4000,
+        "stone": 0,
+        "gold": 0
+      },
+      "caravans": 2,
+      "path": [
+        {
+          "x": 62,
+          "y": 198
+        },
+        {
+          "x": 61,
+          "y": 197
+        },
+        {
+          "x": 60,
+          "y": 196
+        },
+        {
+          "x": 59,
+          "y": 195
+        }
+      ],
+      "distance": 4.242640687119286,
+      "dispatchedAt": 0,
+      "arrivalAt": 254559,
+      "returnAt": 509118,
+      "arrivalEventId": "event:0000000000000101",
+      "returnEventId": "event:0000000000000102",
+      "phase": "returning",
+      "authorizationSnapshot": {
+        "sourceCityOwnerFactionId": "faction:000",
+        "contributorEmpireId": null,
+        "checkedAt": 0
+      },
+      "reservedResources": {
+        "food": 0,
+        "wood": 800,
+        "stone": 0,
+        "gold": 0
+      },
+      "returnCargo": {
+        "food": 0,
+        "wood": 3200,
+        "stone": 0,
+        "gold": 0
+      }
+    },
+    "sourceWood": 99206
+  },
+  "qualification": {
+    "battleId": "battle:0000000000000001",
+    "resolutionId": "resolution:0000000000000001.final",
+    "eventId": "event:0000000000000101",
+    "at": 318199,
+    "round": 1,
+    "kind": "final",
+    "outcome": "conquered",
+    "ownerBefore": "faction:001",
+    "ownerAfter": "faction:000",
+    "qualificationBefore": "full",
+    "qualificationAfter": "none"
+  }
+}

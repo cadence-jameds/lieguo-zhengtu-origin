@@ -1,0 +1,64 @@
+{
+  "generator": "built-in image_gen",
+  "reference": "v0.30.2 public/art/building-atlas.webp",
+  "date": "2026-10-04",
+  "assets": [
+    {
+      "id": "townhall",
+      "subject": "a civic town hall, stone municipal office with a clockless bell tower, scroll ledger table and blue civic pennant, clearly distinct from the central hall",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-2829d1ae-6438-4b9f-bbf2-74751fb8c19b.png"
+    },
+    {
+      "id": "monastery",
+      "subject": "a medieval monastery, compact cloister courtyard, chapel bell tower and herb garden",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-8864b470-6771-486b-9dba-4e844edbd860.png"
+    },
+    {
+      "id": "mill",
+      "subject": "a medieval grain processing mill, timber windmill with four sails, sacks of milled flour and millstones, no growing crops",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-904d716d-ffcc-476f-b3f7-4303a10cf0b1.png"
+    },
+    {
+      "id": "lumbermill",
+      "subject": "a medieval industrial sawmill, timber shed with prominent large vertical saw, sawn plank stacks, waterwheel equipment",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-4fa4cb0c-d18f-4698-964d-563fc01ded8f.png"
+    },
+    {
+      "id": "masonry",
+      "subject": "a medieval mason workshop, stonecutters' shelter, cut square masonry blocks, chisels and small stone crane",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-437414f3-9e5e-4d1a-a419-fefd76733603.png"
+    },
+    {
+      "id": "mint",
+      "subject": "a medieval coin mint, secured stone workshop with chimney, ingot crucible and trays of stamped gold coins",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-4b36ddfe-8a78-4569-b543-4d5f6a358e91.png"
+    },
+    {
+      "id": "blacksmith",
+      "subject": "a medieval blacksmith forge, open furnace glowing orange, anvil and hammer and iron tools, smoke chimney",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-b81860e7-1c2a-405f-ab8d-853f94dd06f3.png"
+    },
+    {
+      "id": "embassy",
+      "subject": "a medieval embassy, elegant diplomatic stone pavilion, six small unmarked differently colored hanging banners and reception table",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-1896c109-b01c-4e7e-b92b-321357046b78.png"
+    },
+    {
+      "id": "war_spearman",
+      "subject": "a medieval war spear soldier, single grounded adult soldier with long heavy spear and medium wooden round shield, earthy padded armor, distinguishable from ordinary pike infantry",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-5f5ed2bf-9574-4468-9bec-352efd4d6870.png"
+    },
+    {
+      "id": "catapult",
+      "subject": "a medieval catapult siege engine, compact wooden wheeled stone throwing mangonel with a large spoon arm, twisted rope tension mechanism, stone ammunition",
+      "path": "/workspace/scratch/ac6a00397760/generated_images/exec-42b9207e-d0e8-4f96-806e-bc649e68fb0c.png"
+    }
+  ],
+  "processing": "512x512 lossless WebP encoding; alpha preserved",
+  "correction": {
+    "unit-skirmisher": "Changed to ranged throwing javelin; same style; built-in imagegen editing",
+    "final_source": "generated_images/exec-10311c45-e1e3-42e2-b44c-1426160205bd.png",
+    "prompt": "Edit this production game sprite. Keep the same medieval painterly strategy game style, isometric angle, color palette, realistic adult proportions, shield, armor and small diamond earth base. The formal unit is a ranged javelin skirmisher: replace the tall grounded spear with a SHORT throwing javelin raised in the right hand, add two spare javelins on his back; make the intended throwing function visibly clear. Keep one full-body person only, not a sheet. Clean all stray red/yellow pixels or horizontal lines outside the ground base. Output genuine transparent alpha background, no extra environment, text or border. Center the sprite with an 8% empty transparent margin on every side and bottom-center ground contact at 86% image height."
+  },
+  "shared_prompt_template": "Use case: stylized-concept. Generate ONE independent production game sprite for {id}. Reference image is ONLY the style reference, NOT an edit target. Subject: {subject}. Match the reference medieval strategy game artwork: detailed painted material, muted earth tones, realistic proportions, 45-degree isometric view, high overhead camera, warm light from upper left, clean silhouette. One centered object on a tiny diamond earth base, bottom-center ground anchor at 86% height; full object visible with 8% margin. Square transparent background with true alpha. No text, no labels, no surrounding landscape, no grid, no multiple assets, no concept sheet, no border. Output only this one sprite for direct loading in TownScene or military catalog."
+}

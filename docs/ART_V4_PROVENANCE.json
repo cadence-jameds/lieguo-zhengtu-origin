@@ -1,0 +1,324 @@
+{
+  "created": "2026-09-06",
+  "provenance": "Original artwork generated with built-in image_gen, one request per asset, no reference images, no retries. Files copied unmodified from tool outputs.",
+  "prompts": "/workspace/scratch/16258c9a6a12/game-assets-v4/generation-prompts.json",
+  "assets": [
+    {
+      "key": "terrain",
+      "path": "/workspace/scratch/16258c9a6a12/game-assets-v4/terrain-base.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "source": "/workspace/scratch/16258c9a6a12/generated_images/exec-ec1b3962-53ff-4190-a277-f271b068fb60.png",
+      "sha256": "1948b3f4a6c2ab0d4e6f316364ffc024d8357a8848c445f167b848ba0738aa4d",
+      "inspection": "Broad empty green clearing with edge forests and river, road paths, no buildings or text."
+    },
+    {
+      "key": "atlas",
+      "path": "/workspace/scratch/16258c9a6a12/game-assets-v4/building-atlas.png",
+      "width": 1402,
+      "height": 1122,
+      "mode": "RGBA",
+      "source": "/workspace/scratch/16258c9a6a12/generated_images/exec-9f137a95-2722-4d02-bb11-5b2fecb8679e.png",
+      "sha256": "5a65bc9d487f34e999252bab8283e3e007fee88d7a4129ed06a48d8f9470c0a9",
+      "inspection": "All 20 sprites visibly present in requested 5-column/4-row order. True alpha exists. Most sprite pixels have alpha 251–253. Grid spacing is approximate, so use measured crop rectangles rather than equal 5x4 slicing. No text."
+    },
+    {
+      "key": "siege",
+      "path": "/workspace/scratch/16258c9a6a12/game-assets-v4/siege-report.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "source": "/workspace/scratch/16258c9a6a12/generated_images/exec-78527156-1372-40b4-8e7c-fcdef03d2c6a.png",
+      "sha256": "2d8f6461a49ad42a87ed0070dc979d16ac30ac4d0cf1bfa533c1df7f849eb523",
+      "inspection": "Wide river valley siege with banners, fortified town and siege engines, no text or UI."
+    }
+  ],
+  "atlas": {
+    "indexing": "zero-based row-major",
+    "rectangle_format": "[left,top,right,bottom], right and bottom exclusive",
+    "measured_row_cuts": [
+      0,
+      282,
+      547,
+      805,
+      1122
+    ],
+    "measured_column_cuts_by_row": [
+      [
+        0,
+        282,
+        572,
+        847,
+        1121,
+        1402
+      ],
+      [
+        0,
+        282,
+        572,
+        847,
+        1121,
+        1402
+      ],
+      [
+        0,
+        288,
+        572,
+        855,
+        1127,
+        1402
+      ],
+      [
+        0,
+        296,
+        567,
+        858,
+        1147,
+        1402
+      ]
+    ],
+    "sprites": [
+      {
+        "key": "hall",
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "rect": [
+          0,
+          0,
+          282,
+          282
+        ]
+      },
+      {
+        "key": "farm",
+        "index": 1,
+        "row": 0,
+        "column": 1,
+        "rect": [
+          282,
+          0,
+          572,
+          282
+        ]
+      },
+      {
+        "key": "lumbermill",
+        "index": 2,
+        "row": 0,
+        "column": 2,
+        "rect": [
+          572,
+          0,
+          847,
+          282
+        ]
+      },
+      {
+        "key": "quarry",
+        "index": 3,
+        "row": 0,
+        "column": 3,
+        "rect": [
+          847,
+          0,
+          1121,
+          282
+        ]
+      },
+      {
+        "key": "goldmine",
+        "index": 4,
+        "row": 0,
+        "column": 4,
+        "rect": [
+          1121,
+          0,
+          1402,
+          282
+        ]
+      },
+      {
+        "key": "house",
+        "index": 5,
+        "row": 1,
+        "column": 0,
+        "rect": [
+          0,
+          282,
+          282,
+          547
+        ]
+      },
+      {
+        "key": "warehouse",
+        "index": 6,
+        "row": 1,
+        "column": 1,
+        "rect": [
+          282,
+          282,
+          572,
+          547
+        ]
+      },
+      {
+        "key": "barracks",
+        "index": 7,
+        "row": 1,
+        "column": 2,
+        "rect": [
+          572,
+          282,
+          847,
+          547
+        ]
+      },
+      {
+        "key": "archeryrange",
+        "index": 8,
+        "row": 1,
+        "column": 3,
+        "rect": [
+          847,
+          282,
+          1121,
+          547
+        ]
+      },
+      {
+        "key": "stable",
+        "index": 9,
+        "row": 1,
+        "column": 4,
+        "rect": [
+          1121,
+          282,
+          1402,
+          547
+        ]
+      },
+      {
+        "key": "siegeworkshop",
+        "index": 10,
+        "row": 2,
+        "column": 0,
+        "rect": [
+          0,
+          547,
+          288,
+          805
+        ]
+      },
+      {
+        "key": "academy",
+        "index": 11,
+        "row": 2,
+        "column": 1,
+        "rect": [
+          288,
+          547,
+          572,
+          805
+        ]
+      },
+      {
+        "key": "market",
+        "index": 12,
+        "row": 2,
+        "column": 2,
+        "rect": [
+          572,
+          547,
+          855,
+          805
+        ]
+      },
+      {
+        "key": "wall",
+        "index": 13,
+        "row": 2,
+        "column": 3,
+        "rect": [
+          855,
+          547,
+          1127,
+          805
+        ]
+      },
+      {
+        "key": "chinese_hall",
+        "index": 14,
+        "row": 2,
+        "column": 4,
+        "rect": [
+          1127,
+          547,
+          1402,
+          805
+        ]
+      },
+      {
+        "key": "byzantine_hall",
+        "index": 15,
+        "row": 3,
+        "column": 0,
+        "rect": [
+          0,
+          805,
+          296,
+          1122
+        ]
+      },
+      {
+        "key": "frankish_keep",
+        "index": 16,
+        "row": 3,
+        "column": 1,
+        "rect": [
+          296,
+          805,
+          567,
+          1122
+        ]
+      },
+      {
+        "key": "british_manor",
+        "index": 17,
+        "row": 3,
+        "column": 2,
+        "rect": [
+          567,
+          805,
+          858,
+          1122
+        ]
+      },
+      {
+        "key": "japanese_hall",
+        "index": 18,
+        "row": 3,
+        "column": 3,
+        "rect": [
+          858,
+          805,
+          1147,
+          1122
+        ]
+      },
+      {
+        "key": "mongol_yurt",
+        "index": 19,
+        "row": 3,
+        "column": 4,
+        "rect": [
+          1147,
+          805,
+          1402,
+          1122
+        ]
+      }
+    ]
+  }
+}

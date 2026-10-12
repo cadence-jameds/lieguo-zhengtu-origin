@@ -1,0 +1,373 @@
+{
+  "complete": {
+    "intel": {
+      "observedAt": 114853,
+      "cityId": "city:001",
+      "units": {
+        "scout": 4,
+        "militia": 30,
+        "archer": 3,
+        "knight": 2
+      },
+      "resources": {
+        "food": 100000,
+        "wood": 100001,
+        "stone": 100001,
+        "gold": 100000
+      },
+      "garrison": {
+        "scout": 4,
+        "militia": 30,
+        "archer": 3
+      },
+      "reinforcements": [
+        {
+          "ownerFactionId": "faction:002",
+          "originCityId": "city:002",
+          "units": {
+            "knight": 2
+          }
+        }
+      ],
+      "wallLevel": 7,
+      "defenses": {
+        "castle": 2,
+        "bunker.0": 3
+      },
+      "observedRealAt": 1791745814252
+    },
+    "report": {
+      "id": "report:0000000000000001",
+      "sequence": 1,
+      "campaignId": "campaign:b4-5217cce7-83c1-4b5d-953f-66aaf272eef9",
+      "ownerFactionId": "faction:000",
+      "at": 199706,
+      "category": "scout",
+      "title": "偵察情報送達｜塞薩洛尼基特拉比松關",
+      "text": "1 回合；偵察情報送達。",
+      "battle": {
+        "battleId": "battle:0000000000000002",
+        "resolutionId": "resolution:0000000000000002.delivery",
+        "mission": "scout",
+        "target": {
+          "kind": "city",
+          "cityId": "city:001"
+        },
+        "targetName": "塞薩洛尼基特拉比松關",
+        "targetPoint": {
+          "x": 59,
+          "y": 195
+        },
+        "realResolvedAt": 1791745814252,
+        "startedAt": 114853,
+        "resolvedAt": 114853,
+        "rounds": 1,
+        "outcome": "scout-success",
+        "attackers": [
+          {
+            "ownerFactionId": "faction:000",
+            "armyId": "army:0000000000000002",
+            "cityId": "city:000",
+            "before": {
+              "scout": 10
+            },
+            "after": {
+              "scout": 8
+            }
+          }
+        ],
+        "defenders": [
+          {
+            "ownerFactionId": "faction:001",
+            "armyId": null,
+            "cityId": "city:001",
+            "before": {
+              "scout": 4
+            },
+            "after": {}
+          },
+          {
+            "ownerFactionId": "faction:002",
+            "armyId": "army:0000000000000001",
+            "cityId": "city:002",
+            "before": {},
+            "after": {}
+          }
+        ],
+        "loot": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "wallBefore": 0,
+        "wallAfter": 0,
+        "siege": [],
+        "ownerBefore": "faction:001",
+        "ownerAfter": "faction:001",
+        "populationBefore": 0,
+        "populationAfter": 0,
+        "returnedTrainingPopulation": 0,
+        "intel": {
+          "observedAt": 114853,
+          "observedRealAt": 1791745814252,
+          "cityId": "city:001",
+          "units": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3,
+            "knight": 2
+          },
+          "resources": {
+            "food": 100000,
+            "wood": 100001,
+            "stone": 100001,
+            "gold": 100000
+          },
+          "garrison": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3
+          },
+          "reinforcements": [
+            {
+              "ownerFactionId": "faction:002",
+              "originCityId": "city:002",
+              "units": {
+                "knight": 2
+              }
+            }
+          ],
+          "wallLevel": 7,
+          "defenses": {
+            "castle": 2,
+            "bunker.0": 3
+          }
+        }
+      }
+    },
+    "target": {
+      "army": {
+        "intel": {
+          "observedAt": 114853,
+          "observedRealAt": 1791745814252,
+          "cityId": "city:001",
+          "units": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3,
+            "knight": 2
+          },
+          "resources": {
+            "food": 100000,
+            "wood": 100001,
+            "stone": 100001,
+            "gold": 100000
+          },
+          "garrison": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3
+          },
+          "reinforcements": [
+            {
+              "ownerFactionId": "faction:002",
+              "originCityId": "city:002",
+              "units": {
+                "knight": 2
+              }
+            }
+          ],
+          "wallLevel": 7,
+          "defenses": {
+            "castle": 2,
+            "bunker.0": 3
+          }
+        },
+        "owner": "faction:001"
+      },
+      "resources": {
+        "intel": {
+          "observedAt": 114853,
+          "observedRealAt": 1791745814252,
+          "cityId": "city:001",
+          "units": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3,
+            "knight": 2
+          },
+          "resources": {
+            "food": 100000,
+            "wood": 100001,
+            "stone": 100001,
+            "gold": 100000
+          },
+          "garrison": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3
+          },
+          "reinforcements": [
+            {
+              "ownerFactionId": "faction:002",
+              "originCityId": "city:002",
+              "units": {
+                "knight": 2
+              }
+            }
+          ],
+          "wallLevel": 7,
+          "defenses": {
+            "castle": 2,
+            "bunker.0": 3
+          }
+        },
+        "owner": "faction:001"
+      },
+      "defenses": {
+        "intel": {
+          "observedAt": 114853,
+          "observedRealAt": 1791745814252,
+          "cityId": "city:001",
+          "units": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3,
+            "knight": 2
+          },
+          "resources": {
+            "food": 100000,
+            "wood": 100001,
+            "stone": 100001,
+            "gold": 100000
+          },
+          "garrison": {
+            "scout": 4,
+            "militia": 30,
+            "archer": 3
+          },
+          "reinforcements": [
+            {
+              "ownerFactionId": "faction:002",
+              "originCityId": "city:002",
+              "units": {
+                "knight": 2
+              }
+            }
+          ],
+          "wallLevel": 7,
+          "defenses": {
+            "castle": 2,
+            "bunker.0": 3
+          }
+        },
+        "owner": "faction:001"
+      }
+    }
+  },
+  "failure-5": {
+    "battleId": "battle:0000000000000001",
+    "resolutionId": "resolution:0000000000000001.final",
+    "mission": "scout",
+    "target": {
+      "kind": "city",
+      "cityId": "city:001"
+    },
+    "targetName": "塞薩洛尼基特拉比松關",
+    "targetPoint": {
+      "x": 59,
+      "y": 195
+    },
+    "startedAt": 84853,
+    "resolvedAt": 84853,
+    "rounds": 1,
+    "outcome": "scout-failed",
+    "attackers": [
+      {
+        "ownerFactionId": "faction:000",
+        "cityId": "city:000",
+        "armyId": "army:0000000000000001",
+        "before": {
+          "scout": 5
+        },
+        "after": {}
+      }
+    ],
+    "defenders": [
+      {
+        "ownerFactionId": "faction:001",
+        "armyId": null,
+        "cityId": "city:001",
+        "before": {},
+        "after": {}
+      }
+    ],
+    "loot": {
+      "food": 0,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    },
+    "wallBefore": 0,
+    "wallAfter": 0,
+    "siege": [],
+    "ownerBefore": "faction:001",
+    "ownerAfter": "faction:001",
+    "populationBefore": 0,
+    "populationAfter": 0,
+    "returnedTrainingPopulation": 0
+  },
+  "failure-6": {
+    "battleId": "battle:0000000000000001",
+    "resolutionId": "resolution:0000000000000001.final",
+    "mission": "scout",
+    "target": {
+      "kind": "city",
+      "cityId": "city:001"
+    },
+    "targetName": "塞薩洛尼基特拉比松關",
+    "targetPoint": {
+      "x": 59,
+      "y": 195
+    },
+    "startedAt": 84853,
+    "resolvedAt": 84853,
+    "rounds": 1,
+    "outcome": "scout-failed",
+    "attackers": [
+      {
+        "ownerFactionId": "faction:000",
+        "cityId": "city:000",
+        "armyId": "army:0000000000000001",
+        "before": {
+          "scout": 6
+        },
+        "after": {}
+      }
+    ],
+    "defenders": [
+      {
+        "ownerFactionId": "faction:001",
+        "armyId": null,
+        "cityId": "city:001",
+        "before": {},
+        "after": {}
+      }
+    ],
+    "loot": {
+      "food": 0,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    },
+    "wallBefore": 0,
+    "wallAfter": 0,
+    "siege": [],
+    "ownerBefore": "faction:001",
+    "ownerAfter": "faction:001",
+    "populationBefore": 0,
+    "populationAfter": 0,
+    "returnedTrainingPopulation": 0
+  }
+}

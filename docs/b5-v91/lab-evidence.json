@@ -1,0 +1,341 @@
+{
+  "partial": {
+    "id": "battle:0000000000000001",
+    "cityId": "city:035",
+    "attackerFactionId": "faction:000",
+    "startedAt": 3445585,
+    "round": 1,
+    "nextRoundAt": 6445585,
+    "roundEventId": "event:0000000000000203",
+    "attackers": [
+      {
+        "key": "army:0000000000000001/militia",
+        "armyId": "army:0000000000000001",
+        "ownerFactionId": "faction:000",
+        "sourceCityId": "city:000",
+        "unitId": "militia",
+        "count": 1,
+        "initialCount": 1,
+        "hp": 55,
+        "hpPerUnit": 55,
+        "contacted": false
+      },
+      {
+        "key": "army:0000000000000001/ram",
+        "armyId": "army:0000000000000001",
+        "ownerFactionId": "faction:000",
+        "sourceCityId": "city:000",
+        "unitId": "ram",
+        "count": 1,
+        "initialCount": 1,
+        "hp": 250,
+        "hpPerUnit": 250,
+        "contacted": false
+      }
+    ],
+    "defenders": [],
+    "participants": [
+      {
+        "ownerFactionId": "faction:000",
+        "cityId": "city:000",
+        "armyId": "army:0000000000000001",
+        "before": {
+          "militia": 1,
+          "ram": 1
+        },
+        "after": {
+          "militia": 1,
+          "ram": 1
+        }
+      },
+      {
+        "ownerFactionId": "faction:035",
+        "cityId": "city:035",
+        "armyId": null,
+        "before": {},
+        "after": {}
+      }
+    ],
+    "wallBefore": 15,
+    "populationBefore": 15099.787234587555,
+    "ownerBefore": "faction:035",
+    "developmentBefore": 280,
+    "phase": "siege",
+    "siegeRound": 2,
+    "wallDamage": 120.42,
+    "wallDamageLevel": 15,
+    "catapultBatchDone": true,
+    "developmentLost": 0,
+    "siegeChanges": [],
+    "siegeHistory": [
+      {
+        "round": 1,
+        "at": 3445585,
+        "wallBefore": 15,
+        "wallAfter": 15
+      },
+      {
+        "round": 2,
+        "at": 4945585,
+        "wallBefore": 15,
+        "wallAfter": 15
+      }
+    ],
+    "history": [
+      {
+        "at": 3445585,
+        "kind": "siege-start",
+        "combatRound": 1,
+        "siegeRound": 0
+      },
+      {
+        "at": 3445585,
+        "kind": "catapult-batch",
+        "combatRound": 1,
+        "siegeRound": 0
+      }
+    ],
+    "historyOmitted": 0
+  },
+  "final": {
+    "id": "report:0000000000000001",
+    "sequence": 1,
+    "campaignId": "campaign:b5lab-035-7f48cda8-673e-4684-8cfe-5b283c33f005",
+    "ownerFactionId": "faction:000",
+    "at": 19945585,
+    "category": "battle",
+    "title": "征服未成｜攻城期限已到（城牆未破）｜金帳阿爾泰河灣",
+    "text": "1 主戰回合；征服未成｜攻城期限已到（城牆未破）。",
+    "battle": {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "mission": "conquest",
+      "target": {
+        "kind": "city",
+        "cityId": "city:035"
+      },
+      "targetName": "金帳阿爾泰河灣",
+      "targetPoint": {
+        "x": 12,
+        "y": 28
+      },
+      "startedAt": 3445585,
+      "resolvedAt": 19945585,
+      "rounds": 1,
+      "outcome": "held",
+      "attackers": [
+        {
+          "ownerFactionId": "faction:000",
+          "armyId": "army:0000000000000001",
+          "cityId": "city:000",
+          "before": {
+            "militia": 1,
+            "ram": 1
+          },
+          "after": {
+            "militia": 1,
+            "ram": 1
+          }
+        }
+      ],
+      "defenders": [
+        {
+          "ownerFactionId": "faction:035",
+          "armyId": null,
+          "cityId": "city:035",
+          "before": {},
+          "after": {}
+        }
+      ],
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "wallBefore": 15,
+      "wallAfter": 11,
+      "siege": [
+        {
+          "target": {
+            "kind": "wall"
+          },
+          "before": 15,
+          "after": 11
+        }
+      ],
+      "ownerBefore": "faction:035",
+      "ownerAfter": "faction:035",
+      "populationBefore": 15099.787234587555,
+      "populationAfter": 15584.586405735674,
+      "returnedTrainingPopulation": 0,
+      "conquestReason": "siege-timeout",
+      "siegeRounds": 12,
+      "siegeHistory": [
+        {
+          "round": 1,
+          "at": 3445585,
+          "wallBefore": 15,
+          "wallAfter": 15
+        },
+        {
+          "round": 2,
+          "at": 4945585,
+          "wallBefore": 15,
+          "wallAfter": 15
+        },
+        {
+          "round": 3,
+          "at": 6445585,
+          "wallBefore": 15,
+          "wallAfter": 15
+        },
+        {
+          "round": 4,
+          "at": 7945585,
+          "wallBefore": 15,
+          "wallAfter": 14
+        },
+        {
+          "round": 5,
+          "at": 9445585,
+          "wallBefore": 14,
+          "wallAfter": 14
+        },
+        {
+          "round": 6,
+          "at": 10945585,
+          "wallBefore": 14,
+          "wallAfter": 14
+        },
+        {
+          "round": 7,
+          "at": 12445585,
+          "wallBefore": 14,
+          "wallAfter": 13
+        },
+        {
+          "round": 8,
+          "at": 13945585,
+          "wallBefore": 13,
+          "wallAfter": 13
+        },
+        {
+          "round": 9,
+          "at": 15445585,
+          "wallBefore": 13,
+          "wallAfter": 13
+        },
+        {
+          "round": 10,
+          "at": 16945585,
+          "wallBefore": 13,
+          "wallAfter": 12
+        },
+        {
+          "round": 11,
+          "at": 18445585,
+          "wallBefore": 12,
+          "wallAfter": 12
+        },
+        {
+          "round": 12,
+          "at": 19945585,
+          "wallBefore": 12,
+          "wallAfter": 11
+        }
+      ],
+      "history": [
+        {
+          "at": 3445585,
+          "kind": "siege-start",
+          "combatRound": 1,
+          "siegeRound": 0
+        },
+        {
+          "at": 3445585,
+          "kind": "catapult-batch",
+          "combatRound": 1,
+          "siegeRound": 0
+        },
+        {
+          "at": 7945585,
+          "kind": "wall-breached",
+          "wallBefore": 15,
+          "wallAfter": 14,
+          "combatRound": 1,
+          "siegeRound": 4
+        },
+        {
+          "at": 9445585,
+          "kind": "siege-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:035",
+              "initial": 0,
+              "alive": 0,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 1,
+          "siegeRound": 5
+        },
+        {
+          "at": 12445585,
+          "kind": "wall-breached",
+          "wallBefore": 14,
+          "wallAfter": 13,
+          "combatRound": 1,
+          "siegeRound": 7
+        },
+        {
+          "at": 16945585,
+          "kind": "wall-breached",
+          "wallBefore": 13,
+          "wallAfter": 12,
+          "combatRound": 1,
+          "siegeRound": 10
+        },
+        {
+          "at": 16945585,
+          "kind": "siege-summary",
+          "forces": [
+            {
+              "ownerFactionId": "faction:000",
+              "initial": 1,
+              "alive": 1,
+              "casualties": 0
+            },
+            {
+              "ownerFactionId": "faction:035",
+              "initial": 0,
+              "alive": 0,
+              "casualties": 0
+            }
+          ],
+          "combatRound": 1,
+          "siegeRound": 10
+        },
+        {
+          "at": 19945585,
+          "kind": "wall-breached",
+          "wallBefore": 12,
+          "wallAfter": 11,
+          "combatRound": 1,
+          "siegeRound": 12
+        }
+      ],
+      "historyOmitted": 0,
+      "realResolvedAt": 1791652217031
+    },
+    "realAt": 1791652217031,
+    "clockSpeed": 50,
+    "read": false
+  }
+}

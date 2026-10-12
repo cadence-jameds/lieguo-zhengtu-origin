@@ -1,0 +1,20 @@
+import {it,expect} from 'vitest';
+import {writeFileSync} from 'node:fs';
+import {createFormalWorld} from './generator';
+import {SpatialIndex} from './spatial';
+import {encodeSave} from './saveCodec';
+import {advanceFormal} from './reducer';
+import {rich,build,ownSecond,commit} from './developmentTestSupport';
+it('records reproducible core workload measurements without enforcing device-specific timing limits',async()=>{
+ const t=performance.now(),w=createFormalWorld({campaign:'metrics',seed:90217}),newGameMs=performance.now()-t;
+ const s=performance.now(),index=new SpatialIndex(384,384);for(const c of w.cities)index.addCity(c);for(const n of w.worldLayer!.wildSites)index.addSite(n);const spatialBuildMs=performance.now()-s;
+ const e=performance.now(),save=await encodeSave(w),saveEncodeMs=performance.now()-e;
+ const a=performance.now(),advanced=advanceFormal(w,w.time+3600000);const economyAdvanceMs=performance.now()-a;
+ const data={version:w.metadata.appVersion,newGameMs,spatialBuildMs,saveEncodeMs,saveBytes:Buffer.byteLength(JSON.stringify(save)),entityCounts:{factions:w.factions.length,cities:w.cities.length,wildSites:w.worldLayer!.wildSites.length,armies:w.armies.length},schedulerQueueSize:w.events.length,schedulerAfterHour:advanced.world.events.length,economyAdvanceMs,logisticsEvents:w.events.filter(e=>e.type.startsWith('logistics.')).length,researchProjectCount:w.researchProjects.length,researchProjectBytes:Buffer.byteLength(JSON.stringify(w.researchProjects)),largeProjectBytes:Buffer.byteLength(JSON.stringify(w.largeProjects)),notes:'Node 24, wall timings are indicative; no browser/mobile or long-duration claim.'};
+ let active=structuredClone(w);const c=rich(active),d=ownSecond(active);for(const k of ['academy','barracks','blacksmith','castle','townhall','market'])build(c,k,15);build(c,'center',10);active.factions[0].age=2;
+ const prepare=performance.now();active=commit(active,{type:'research.start',cityId:c.id,techId:'blacksmith.melee.1'});active=commit(active,{type:'age.start',cityId:c.id});active=commit(active,{type:'military.recruit',cityId:c.id,unitId:'militia',count:20});active=commit(active,{type:'settlement.prepare',cityId:c.id});active=commit(active,{type:'logistics.dispatch',cityId:c.id,destinationCityId:d.id,resources:{food:100,wood:100,stone:100,gold:100}});const setupCommandsMs=performance.now()-prepare;
+ const activeAt=performance.now(),activeSave=await encodeSave(active),activeSaveMs=performance.now()-activeAt;const advanceAt=performance.now(),activeHour=advanceFormal(active,3600000).world,activeAdvanceMs=performance.now()-advanceAt;
+ const activeWorkload={setupCommandsMs,saveEncodeMs:activeSaveMs,saveBytes:Buffer.byteLength(JSON.stringify(activeSave)),economyAdvanceMs:activeAdvanceMs,schedulerQueueSize:active.events.length,schedulerAfterHour:activeHour.events.length,logisticsEvents:active.events.filter(e=>e.type.startsWith('logistics.')).length,researchProjects:active.researchProjects.length,researchProjectBytes:Buffer.byteLength(JSON.stringify(active.researchProjects)),settlementProjects:active.settlements!.length,settlementProjectBytes:Buffer.byteLength(JSON.stringify(active.settlements)),trainingJobs:active.cities.reduce((n,c)=>n+c.military!.queue.length,0),trainedUnitsAfterHour:activeHour.cities.reduce((n,c)=>n+Object.values(c.military!.units).reduce((a,b)=>a+b,0),0)};
+ Object.assign(data,{activeWorkload});
+ if(process.env.CORE_METRICS_FILE)writeFileSync(process.env.CORE_METRICS_FILE,JSON.stringify(data,null,2)+'\n');expect(index.cities.size).toBe(100);
+});

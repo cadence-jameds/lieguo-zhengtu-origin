@@ -1,0 +1,3202 @@
+[
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": false,
+    "power": 2.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": true,
+    "power": 2.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": false,
+    "power": 62.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": true,
+    "power": 62.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": false,
+    "power": 302.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": true,
+    "power": 302.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": false,
+    "power": 602.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": true,
+    "power": 602.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1202.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1202.1,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": false,
+    "power": 2.1,
+    "total": 30,
+    "expected": {
+      "needed": 15,
+      "rounds": 12,
+      "wall": 1,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 1,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": true,
+    "power": 2.1,
+    "total": 36,
+    "expected": {
+      "needed": 18,
+      "rounds": 12,
+      "wall": 1,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 1,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": false,
+    "power": 62.1,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": true,
+    "power": 62.1,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": false,
+    "power": 302.1,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": true,
+    "power": 302.1,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": false,
+    "power": 602.1,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": true,
+    "power": 602.1,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1202.1,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1202.1,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": false,
+    "power": 2.1,
+    "total": 330,
+    "expected": {
+      "needed": 158,
+      "rounds": 12,
+      "wall": 7,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 7,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": true,
+    "power": 2.1,
+    "total": 396,
+    "expected": {
+      "needed": 189,
+      "rounds": 12,
+      "wall": 7,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 7,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": false,
+    "power": 62.1,
+    "total": 330,
+    "expected": {
+      "needed": 6,
+      "rounds": 6,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 6,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": true,
+    "power": 62.1,
+    "total": 396,
+    "expected": {
+      "needed": 7,
+      "rounds": 7,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 7,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": false,
+    "power": 302.1,
+    "total": 330,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": true,
+    "power": 302.1,
+    "total": 396,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": false,
+    "power": 602.1,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": true,
+    "power": 602.1,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1202.1,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1202.1,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": false,
+    "power": 2.1,
+    "total": 1420,
+    "expected": {
+      "needed": 677,
+      "rounds": 12,
+      "wall": 15,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 15,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": true,
+    "power": 2.1,
+    "total": 1704,
+    "expected": {
+      "needed": 812,
+      "rounds": 12,
+      "wall": 15,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 15,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": false,
+    "power": 62.1,
+    "total": 1420,
+    "expected": {
+      "needed": 23,
+      "rounds": 12,
+      "wall": 11,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 11,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": true,
+    "power": 62.1,
+    "total": 1704,
+    "expected": {
+      "needed": 28,
+      "rounds": 12,
+      "wall": 12,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 12,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": false,
+    "power": 302.1,
+    "total": 1420,
+    "expected": {
+      "needed": 5,
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": true,
+    "power": 302.1,
+    "total": 1704,
+    "expected": {
+      "needed": 6,
+      "rounds": 6,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 6,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": false,
+    "power": 602.1,
+    "total": 1420,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": true,
+    "power": 602.1,
+    "total": 1704,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1202.1,
+    "total": 1420,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "small",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1202.1,
+    "total": 1704,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": false,
+    "power": 121,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": true,
+    "power": 121,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": false,
+    "power": 181,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": true,
+    "power": 181,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": false,
+    "power": 421,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": true,
+    "power": 421,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": false,
+    "power": 721,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": true,
+    "power": 721,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1321,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1321,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": false,
+    "power": 121,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": true,
+    "power": 121,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": false,
+    "power": 181,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": true,
+    "power": 181,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": false,
+    "power": 421,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": true,
+    "power": 421,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": false,
+    "power": 721,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": true,
+    "power": 721,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1321,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1321,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": false,
+    "power": 121,
+    "total": 330,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": true,
+    "power": 121,
+    "total": 396,
+    "expected": {
+      "needed": 4,
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": false,
+    "power": 181,
+    "total": 330,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": true,
+    "power": 181,
+    "total": 396,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": false,
+    "power": 421,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": true,
+    "power": 421,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": false,
+    "power": 721,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": true,
+    "power": 721,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1321,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1321,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": false,
+    "power": 121,
+    "total": 1420,
+    "expected": {
+      "needed": 12,
+      "rounds": 12,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": true,
+    "power": 121,
+    "total": 1704,
+    "expected": {
+      "needed": 15,
+      "rounds": 12,
+      "wall": 6,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 6,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": false,
+    "power": 181,
+    "total": 1420,
+    "expected": {
+      "needed": 8,
+      "rounds": 8,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 8,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": true,
+    "power": 181,
+    "total": 1704,
+    "expected": {
+      "needed": 10,
+      "rounds": 10,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 10,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": false,
+    "power": 421,
+    "total": 1420,
+    "expected": {
+      "needed": 4,
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": true,
+    "power": 421,
+    "total": 1704,
+    "expected": {
+      "needed": 5,
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": false,
+    "power": 721,
+    "total": 1420,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": true,
+    "power": 721,
+    "total": 1704,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1321,
+    "total": 1420,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "mixed",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1321,
+    "total": 1704,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": false,
+    "power": 466,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": true,
+    "power": 466,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": false,
+    "power": 526,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": true,
+    "power": 526,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": false,
+    "power": 766,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": true,
+    "power": 766,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": false,
+    "power": 1066,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": true,
+    "power": 1066,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1666,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1666,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": false,
+    "power": 466,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": true,
+    "power": 466,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": false,
+    "power": 526,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": true,
+    "power": 526,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": false,
+    "power": 766,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": true,
+    "power": 766,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": false,
+    "power": 1066,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": true,
+    "power": 1066,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1666,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1666,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": false,
+    "power": 466,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": true,
+    "power": 466,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": false,
+    "power": 526,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": true,
+    "power": 526,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": false,
+    "power": 766,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": true,
+    "power": 766,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": false,
+    "power": 1066,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": true,
+    "power": 1066,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1666,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1666,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": false,
+    "power": 466,
+    "total": 1420,
+    "expected": {
+      "needed": 4,
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": true,
+    "power": 466,
+    "total": 1704,
+    "expected": {
+      "needed": 4,
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": false,
+    "power": 526,
+    "total": 1420,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": true,
+    "power": 526,
+    "total": 1704,
+    "expected": {
+      "needed": 4,
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": false,
+    "power": 766,
+    "total": 1420,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": true,
+    "power": 766,
+    "total": 1704,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": false,
+    "power": 1066,
+    "total": 1420,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": true,
+    "power": 1066,
+    "total": 1704,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1666,
+    "total": 1420,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "large",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1666,
+    "total": 1704,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": false,
+    "power": 36,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 0,
+    "byzantine": true,
+    "power": 36,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": false,
+    "power": 96,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 1,
+    "byzantine": true,
+    "power": 96,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": false,
+    "power": 336,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 5,
+    "byzantine": true,
+    "power": 336,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": false,
+    "power": 636,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 10,
+    "byzantine": true,
+    "power": 636,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1236,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 0,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1236,
+    "total": 0,
+    "expected": {
+      "needed": 0,
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 0,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": false,
+    "power": 36,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 0,
+    "byzantine": true,
+    "power": 36,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": false,
+    "power": 96,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 1,
+    "byzantine": true,
+    "power": 96,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": false,
+    "power": 336,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 5,
+    "byzantine": true,
+    "power": 336,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": false,
+    "power": 636,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 10,
+    "byzantine": true,
+    "power": 636,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1236,
+    "total": 30,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 1,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1236,
+    "total": 36,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": false,
+    "power": 36,
+    "total": 330,
+    "expected": {
+      "needed": 10,
+      "rounds": 10,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 10,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 0,
+    "byzantine": true,
+    "power": 36,
+    "total": 396,
+    "expected": {
+      "needed": 11,
+      "rounds": 11,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 11,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": false,
+    "power": 96,
+    "total": 330,
+    "expected": {
+      "needed": 4,
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 4,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 1,
+    "byzantine": true,
+    "power": 96,
+    "total": 396,
+    "expected": {
+      "needed": 5,
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": false,
+    "power": 336,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 5,
+    "byzantine": true,
+    "power": 336,
+    "total": 396,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": false,
+    "power": 636,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 10,
+    "byzantine": true,
+    "power": 636,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1236,
+    "total": 330,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 7,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1236,
+    "total": 396,
+    "expected": {
+      "needed": 1,
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 1,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": false,
+    "power": 36,
+    "total": 1420,
+    "expected": {
+      "needed": 40,
+      "rounds": 12,
+      "wall": 13,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 13,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 0,
+    "byzantine": true,
+    "power": 36,
+    "total": 1704,
+    "expected": {
+      "needed": 48,
+      "rounds": 12,
+      "wall": 14,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 14,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": false,
+    "power": 96,
+    "total": 1420,
+    "expected": {
+      "needed": 15,
+      "rounds": 12,
+      "wall": 7,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 7,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 1,
+    "byzantine": true,
+    "power": 96,
+    "total": 1704,
+    "expected": {
+      "needed": 18,
+      "rounds": 12,
+      "wall": 9,
+      "reason": "siege-timeout"
+    },
+    "actual": {
+      "rounds": 12,
+      "wall": 9,
+      "reason": "siege-timeout"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": false,
+    "power": 336,
+    "total": 1420,
+    "expected": {
+      "needed": 5,
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 5,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 5,
+    "byzantine": true,
+    "power": 336,
+    "total": 1704,
+    "expected": {
+      "needed": 6,
+      "rounds": 6,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 6,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": false,
+    "power": 636,
+    "total": 1420,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 10,
+    "byzantine": true,
+    "power": 636,
+    "total": 1704,
+    "expected": {
+      "needed": 3,
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 3,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": false,
+    "power": 1236,
+    "total": 1420,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  },
+  {
+    "profile": "guard",
+    "wall": 15,
+    "rams": 20,
+    "byzantine": true,
+    "power": 1236,
+    "total": 1704,
+    "expected": {
+      "needed": 2,
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "actual": {
+      "rounds": 2,
+      "wall": 0,
+      "reason": "conquered"
+    },
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,363 @@
+diff --git a/package-lock.json b/package-lock.json
+index 69db487..f3f67d3 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "guozhan-game-mvp",
+-  "version": "0.30.21",
++  "version": "0.30.22",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "guozhan-game-mvp",
+-      "version": "0.30.21",
++      "version": "0.30.22",
+       "dependencies": {
+         "dexie": "^4.4.5",
+         "pixi.js": "^8.20.1",
+@@ -4585,7 +4585,7 @@
+       }
+     },
+     "node_modules/magic-string": {
+-      "version": "0.30.21",
++      "version": "0.30.22",
+       "resolved": "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz",
+       "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
+       "dev": true,
+diff --git a/package.json b/package.json
+index a18fcb8..b8e0444 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "guozhan-game-mvp",
+-  "version": "0.30.21",
++  "version": "0.30.22",
+   "private": true,
+   "type": "module",
+   "engines": {
+diff --git a/public/version.json b/public/version.json
+index 743c6d5..a33924a 100644
+--- a/public/version.json
++++ b/public/version.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "0.30.21",
+-  "date": "2026-10-06",
+-  "title": "v85 Spec Verification and Playable Rule Trials"
++  "version": "0.30.22",
++  "date": "2026-10-07",
++  "title": "B5 Pre-Core Wall Construction Delta Fix"
+ }
+diff --git a/src/game/FormalCityPanel.tsx b/src/game/FormalCityPanel.tsx
+index 1d76101..d80247b 100644
+--- a/src/game/FormalCityPanel.tsx
++++ b/src/game/FormalCityPanel.tsx
+@@ -23,7 +23,7 @@ export default function FormalCityPanel({world,cityId,issue,busy,mobile=false,on
+  const sceneCity=useMemo(()=>citySnapshot(world,cityId),[world,cityId]),c=useLiveCity(world,sceneCity,selection!==null);
+  const selectBuilding=useCallback((key?:string,slot?:number)=>setSelection(key?{key}:{emptySlot:slot!}),[]),selectField=useCallback((field:number)=>setSelection({field}),[]),selectWall=useCallback(()=>setSelection({wall:true}),[]);
+  if(!c?.economy||!sceneCity)return null;
+- const p=cityPresentation(world,c),cap=storageCapacity(c),work=c.integrationWorkHours??0,totalWork=c.integrationTotalWorkHours,eta=work*administrationMultiplier(world,c.ownerFactionId)*HOUR,nextMilestone=MILESTONES.find(n=>!c.economy!.milestones.includes(n)),growth=growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),1)-c.population,full=resourceKeys.filter(r=>c.stock[r]+c.economy!.reservedIncoming[r]>=cap),target=selection&&('key' in selection||'field' in selection)?selection:null,action=target?constructionAction(world,c,target):null;
++ const p=cityPresentation(world,c),cap=storageCapacity(c),work=c.integrationWorkHours??0,totalWork=c.integrationTotalWorkHours,eta=work*administrationMultiplier(world,c.ownerFactionId)*HOUR,nextMilestone=MILESTONES.find(n=>!c.economy!.milestones.includes(n)),growth=growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),1)-c.population,full=resourceKeys.filter(r=>c.stock[r]+c.economy!.reservedIncoming[r]>=cap),target=selection&&('key' in selection||'field' in selection)?selection:selection&&'wall' in selection?{key:'wall'}:null,action=target?constructionAction(world,c,target):null;
+  const build=(key:string,slot?:number)=>{issue({type:'building.upgrade',cityId,key,...(slot===undefined?{}:{slot})});setSelection(null);};
+  return <section className="formal-city-panel"><CityScenes onRename={onRename} onDistrictChange={setDistrict} world={world} city={sceneCity} mobile={mobile} onBuilding={selectBuilding} onField={selectField} onWall={selectWall}/>
+  <details className="city-overview" open={mobile?undefined:true}><summary>城市概況 · {fmt(c.population)} / {fmt(c.housing)} 人 · 建造 {c.economy.construction.length}/3 · 訓練 {c.military?.queue.length??0}/3</summary><div className="city-stats formal-city-stats">
+@@ -33,12 +33,12 @@ export default function FormalCityPanel({world,cityId,issue,busy,mobile=false,on
+  <div><span>每類倉儲</span><strong>{fmt(cap)}</strong><small>地洞保護 {fmt(protection(c))}／類</small><small className={full.length?'negative':''}>{full.length?full.map(r=>LABELS[r]).join('／')+'已滿倉':'庫存尚有空間'}</small><small>已用建地 {Object.keys(c.economy.slots).length}/15</small></div>
+  <div><span>人口里程碑</span><strong>{nextMilestone?fmt(nextMilestone):'全部達成'}</strong><small>{nextMilestone?'下一個永久里程碑':'永久資格已取得'}</small><small>同時施工 {constructionConcurrency(c)} · 同時訓練 {c.economy.milestones.includes(20000)?2:1}</small><small>15k解鎖第二施工 · 20k解鎖第二訓練</small></div>
+  </div><CityQueues world={world} city={c} issue={issue} busy={busy}/></details>
+- <details className="plot-register"><summary>{district==='town'?'城內建築名冊':'城郊資源地名冊'}</summary><div className="plot-register-grid">{district==='town'?p.lots.map(l=><button key={l.slot} onClick={()=>setSelection(l.key?{key:l.key}:{emptySlot:l.slot})}>{l.kind?LABELS[l.kind]:'空地 '+(l.slot+1)} <strong>Lv{l.level}</strong></button>):p.fields.map(f=><button key={f.slot} onClick={()=>setSelection({field:f.slot})}>{FIELD_NAMES[f.resource]} {f.slot+1} <strong>Lv{f.level}</strong></button>)}</div></details>
++ <details className="plot-register"><summary>{district==='town'?'城內建築名冊':'城郊資源地名冊'}</summary><div className="plot-register-grid">{district==='town'?p.lots.map(l=><button key={l.slot} onClick={()=>setSelection(l.key?{key:l.key}:{emptySlot:l.slot})}>{l.kind?LABELS[l.kind]:'空地 '+(l.slot+1)} <strong>Lv{l.level}</strong></button>):p.fields.map(f=><button key={f.slot} onClick={()=>setSelection({field:f.slot})}>{FIELD_NAMES[f.resource]} {f.slot+1} <strong>Lv{f.level}</strong></button>)}{district==='town'&&<button onClick={selectWall}>城牆 <strong>Lv{p.wall}</strong></button>}</div></details>
+ 
+  {selection&&<Dialog title={'emptySlot' in selection?'空地 '+(selection.emptySlot+1)+' · 建築選擇':'wall' in selection?'城門與城防':'field' in selection?FIELD_NAMES[c.fields!.find(f=>f.slot===selection.field)!.resource]+' '+(selection.field+1):LABELS[selection.key.split('.')[0]]} onClose={()=>setSelection(null)}>
+- {'emptySlot' in selection?<><div className="build-categories" role="group" aria-label="建築分類">{BUILDING_CATEGORIES.map(cat=><button key={cat.id} aria-pressed={category===cat.id} onClick={()=>setCategory(cat.id)}>{cat.name}</button>)}</div><div className="construction-menu">{availableBuildings(c,category).length===0&&<p className="empty">此分類的建築皆已建造，可點選城內建築進行升級。</p>}{availableBuildings(c,category).map(kind=>{const key=newBuildingKey(c,kind),a=constructionAction(world,c,{key}),d=BUILDING_CATALOG[kind],preview=constructionPreview(world,c,{key},selection.emptySlot);return <article className="card" key={kind}><FormalBuildingSprite kind={kind} civ={p.civ} age={p.visualAge}/><div><h3>{LABELS[kind]}</h3><p>{BUILDING_DESCRIPTIONS[kind]}</p>{a.cost&&<Cost cost={a.cost} stock={c.stock}/>}<p>施工時間 {realTime(a.duration,world)} · 含排隊約 {preview?realTime(preview.startsAt+preview.durationMs-world.time,world):'—'}</p><small>{AGE_NAMES[d.age]}時代 · 最高Lv{d.maxLevel}</small><p>{a.reasons.join('、')||'符合建造條件'}</p></div><button className="primary" disabled={busy||!a.cost||a.reasons.length>0} onClick={()=>build(key,selection.emptySlot)}>建造{LABELS[kind]}</button></article>;})}</div></>:'wall' in selection?<><p>城牆 Lv{p.wall}。</p><p>目前版本保留城防資料與場景；城防建設尚未開放。</p></>:target&&action?<>{(()=>{const field='field' in target?c.fields!.find(f=>f.slot===target.field):undefined,kind='key' in target?target.key.split('.')[0]:undefined,current=field?.level??('key' in target?c.buildings[target.key]??0:0),jobs=c.economy!.construction.filter(j=>field?j.target.kind==='field'&&j.target.slot===field.slot:j.target.kind==='building'&&'key' in target&&j.target.key===target.key),preview=constructionPreview(world,c,target),effect=kind?buildingEffect(kind,current,Math.min(action.next,BUILDING_CATALOG[kind as keyof typeof BUILDING_CATALOG].maxLevel)):null;return <><div className="building-detail">{field?<ResourceSprite building={FIELD_ALIAS[field.resource]} level={current} era={p.visualAge}/>:kind&&<FormalBuildingSprite kind={kind} civ={p.civ} age={p.visualAge}/>}<div><span className="badge">目前 Lv{current}</span><h3>{field?FIELD_NAMES[field.resource]:LABELS[kind!]}</h3><p>{field?'為城市持續生產'+LABELS[field.resource]+'，零級即有產量。':BUILDING_DESCRIPTIONS[kind!]}</p>{field?<p>基礎產量 {FIELD_PRODUCTION[current]} → {FIELD_PRODUCTION[Math.min(action.next,15)]}／世界時</p>:effect&&<p>{effect}</p>}</div></div>{jobs.map(j=><div className="construction-preview card" key={j.commandId}><strong>{j.startsAt>world.time?'⏳ 排隊中':'施工中'} · Lv{j.toLevel}</strong><p>剩餘 <Countdown at={j.startsAt+j.durationMs} world={world}/></p><button disabled={busy} onClick={()=>{issue({type:'construction.cancel',cityId,constructionCommandId:j.commandId});setSelection(null);}}>取消工程</button></div>)}{action.cost&&<Cost cost={action.cost} stock={c.stock}/>}<p>{action.cost?'施工時間 '+realTime(action.duration,world)+' · 含排隊約 '+(preview?realTime(preview.startsAt+preview.durationMs-world.time,world):'—'):'已達最高等級'}</p><p>{action.reasons.join('、')||'符合升級條件'}</p><button className="primary" disabled={busy||!action.cost||action.reasons.length>0} onClick={()=>{if('field' in target)issue({type:'field.upgrade',cityId,slot:target.field});else build(target.key);setSelection(null);}}>升級至 Lv{action.next}</button>{kind==='castle'&&<FormalDevelopmentPanel world={world} city={c} issue={issue} busy={busy}/>}</>;})()}</>:null}
++ {'emptySlot' in selection?<><div className="build-categories" role="group" aria-label="建築分類">{BUILDING_CATEGORIES.map(cat=><button key={cat.id} aria-pressed={category===cat.id} onClick={()=>setCategory(cat.id)}>{cat.name}</button>)}</div><div className="construction-menu">{availableBuildings(c,category).length===0&&<p className="empty">此分類的建築皆已建造，可點選城內建築進行升級。</p>}{availableBuildings(c,category).map(kind=>{const key=newBuildingKey(c,kind),a=constructionAction(world,c,{key}),d=BUILDING_CATALOG[kind],preview=constructionPreview(world,c,{key},selection.emptySlot);return <article className="card" key={kind}><FormalBuildingSprite kind={kind} civ={p.civ} age={p.visualAge}/><div><h3>{LABELS[kind]}</h3><p>{BUILDING_DESCRIPTIONS[kind]}</p>{a.cost&&<Cost cost={a.cost} stock={c.stock}/>}<p>施工時間 {realTime(a.duration,world)} · 含排隊約 {preview?realTime(preview.startsAt+preview.durationMs-world.time,world):'—'}</p><small>{AGE_NAMES[d.age]}時代 · 最高Lv{d.maxLevel}</small><p>{a.reasons.join('、')||'符合建造條件'}</p></div><button className="primary" disabled={busy||!a.cost||a.reasons.length>0} onClick={()=>build(key,selection.emptySlot)}>建造{LABELS[kind]}</button></article>;})}</div></>:target&&action?<>{(()=>{const field='field' in target?c.fields!.find(f=>f.slot===target.field):undefined,kind='key' in target?target.key.split('.')[0]:undefined,current=field?.level??('key' in target?target.key==='wall'?buildingLevel(c,'wall'):c.buildings[target.key]??0:0),jobs=c.economy!.construction.filter(j=>field?j.target.kind==='field'&&j.target.slot===field.slot:j.target.kind==='building'&&'key' in target&&j.target.key===target.key),preview=constructionPreview(world,c,target),effect=kind?buildingEffect(kind,current,Math.min(action.next,BUILDING_CATALOG[kind as keyof typeof BUILDING_CATALOG].maxLevel)):null;return <><div className="building-detail">{field?<ResourceSprite building={FIELD_ALIAS[field.resource]} level={current} era={p.visualAge}/>:kind&&<FormalBuildingSprite kind={kind} civ={p.civ} age={p.visualAge} constructing={kind==='wall'&&jobs.some(j=>j.startsAt<=world.time)} targetLevel={jobs[0]?.toLevel}/>}<div><span className="badge">目前 Lv{current}</span><h3>{field?FIELD_NAMES[field.resource]:LABELS[kind!]}</h3><p>{field?'為城市持續生產'+LABELS[field.resource]+'，零級即有產量。':BUILDING_DESCRIPTIONS[kind!]}</p>{field?<p>基礎產量 {FIELD_PRODUCTION[current]} → {FIELD_PRODUCTION[Math.min(action.next,15)]}／世界時</p>:effect&&<p>{effect}</p>}</div></div>{jobs.map(j=><div className="construction-preview card" key={j.commandId}><strong>{j.startsAt>world.time?'⏳ 排隊中':'施工中'} · Lv{j.toLevel}</strong><p>剩餘 <Countdown at={j.startsAt+j.durationMs} world={world}/></p><button disabled={busy} onClick={()=>{issue({type:'construction.cancel',cityId,constructionCommandId:j.commandId});setSelection(null);}}>取消工程</button></div>)}{action.cost&&<Cost cost={action.cost} stock={c.stock}/>}<p>{action.cost?'施工時間 '+realTime(action.duration,world)+' · 含排隊約 '+(preview?realTime(preview.startsAt+preview.durationMs-world.time,world):'—'):'已達最高等級'}</p><p>{action.reasons.join('、')||'符合升級條件'}</p><button className="primary" disabled={busy||!action.cost||action.reasons.length>0} onClick={()=>{if('field' in target)issue({type:'field.upgrade',cityId,slot:target.field});else build(target.key);setSelection(null);}}>升級至 Lv{action.next}</button>{kind==='castle'&&<FormalDevelopmentPanel world={world} city={c} issue={issue} busy={busy}/>}</>;})()}</>:null}
+  </Dialog>}
+  </section>;
+ }
+ 
+-function buildingEffect(kind:string,now:number,next:number){if(kind==='residence')return '住房增加 '+HOUSING[now]+' → '+HOUSING[next]+' 人';if(kind==='warehouse')return '每類倉儲 '+WAREHOUSE_CAPACITY[now]+' → '+WAREHOUSE_CAPACITY[next];if(kind==='bunker')return '每類保護 '+BUNKER_PROTECTION[now]+' → '+BUNKER_PROTECTION[next];if(['mill','lumbermill','masonry','mint'].includes(kind))return '對應資源增產 '+now*4+'% → '+next*4+'%';if(kind==='monastery')return '人口成長係數 +'+now*2+'% → +'+next*2+'%';if(['barracks','archery','stable','workshop','castle'].includes(kind))return '生產時間倍率 '+(100*(1-.5*(Math.max(1,now)-1)/14)).toFixed(1)+'% → '+(100*(1-.5*(next-1)/14)).toFixed(1)+'%';return null;}
++function buildingEffect(kind:string,now:number,next:number){if(kind==='wall')return '守軍防禦加成 '+now*3+'% → '+next*3+'%（固定設施，不占自由槽）';if(kind==='residence')return '住房增加 '+HOUSING[now]+' → '+HOUSING[next]+' 人';if(kind==='warehouse')return '每類倉儲 '+WAREHOUSE_CAPACITY[now]+' → '+WAREHOUSE_CAPACITY[next];if(kind==='bunker')return '每類保護 '+BUNKER_PROTECTION[now]+' → '+BUNKER_PROTECTION[next];if(['mill','lumbermill','masonry','mint'].includes(kind))return '對應資源增產 '+now*4+'% → '+next*4+'%';if(kind==='monastery')return '人口成長係數 +'+now*2+'% → +'+next*2+'%';if(['barracks','archery','stable','workshop','castle'].includes(kind))return '生產時間倍率 '+(100*(1-.5*(Math.max(1,now)-1)/14)).toFixed(1)+'% → '+(100*(1-.5*(next-1)/14)).toFixed(1)+'%';return null;}
+diff --git a/src/game/developer/specAudit.test.ts b/src/game/developer/specAudit.test.ts
+index d9c5798..8234538 100644
+--- a/src/game/developer/specAudit.test.ts
++++ b/src/game/developer/specAudit.test.ts
+@@ -8,9 +8,9 @@ it('independent v85 reference includes all catalogs and catches a changed expect
+  expect(V85.buildings).toHaveLength(20);expect(V85.techs).toHaveLength(82);expect(V85.units).toHaveLength(28);expect(V85.sections).toHaveLength(364);
+  const before=V85.buildings[0].baseCost.food;V85.buildings[0].baseCost.food=before+5;
+  try{expect(auditCatalogs().find(r=>r.target==='center')!.dataMatches).toBe(false);}finally{V85.buildings[0].baseCost.food=before;}
+- const rows=auditCatalogs(),curves=formulaCatalog();mkdirSync('docs/player-feedback-v03021',{recursive:true});writeFileSync('docs/player-feedback-v03021/spec-data-comparison.json',JSON.stringify({reference:V85.sha256,rows,curves},null,2));
++ const rows=auditCatalogs(),curves=formulaCatalog();mkdirSync('docs/wall-delta-v03022',{recursive:true});writeFileSync('docs/wall-delta-v03022/spec-data-comparison.json',JSON.stringify({reference:V85.sha256,rows,curves},null,2));
+  console.log('DATA DIFFERENCES',rows.filter(r=>!r.dataMatches).map(r=>r.name));
+- expect(curves.every(c=>c.status==='match')).toBe(true);
++ expect(rows.every(r=>r.dataMatches)).toBe(true);expect(curves.every(c=>c.status==='match')).toBe(true);
+ });
+ it('every supported item has a native-world positive fixture and every declared counterexample executes against the real reducer',()=>{
+  const base=developerWorld(config),results:unknown[]=[],failures:unknown[]=[];
+@@ -18,9 +18,8 @@ it('every supported item has a native-world positive fixture and every declared
+   const req={kind:row.kind,target:row.target,level:row.kind==='field'?11:1,variant:variant.id,config};
+   try{const {world,info}=createTrialWorld(req,base),preview=trialPreview(world,info);results.push({name:row.name,variant:variant.id,expected:info.expectedAdmission,preview});if(preview?.status!=='match'||preview&&'comparisons' in preview&&preview.comparisons?.some(c=>!c.matches))failures.push({name:row.name,variant:variant.id,preview});}catch(e){failures.push({name:row.name,variant:variant.id,error:String(e)});}
+  }
+- mkdirSync('docs/player-feedback-v03021',{recursive:true});writeFileSync('docs/player-feedback-v03021/spec-scenario-comparison.json',JSON.stringify({reference:V85.sha256,results,failures},null,2));console.log('TRIAL FAILURES',failures.map(f=>(f as {name:string}).name));
+- // Existing B4 explicitly defers wall construction. The audit must expose this missing implementation.
+- expect(failures).toHaveLength(1);expect(failures[0]).toMatchObject({name:'城牆',variant:'ready',preview:{actual:'阻擋',expected:'允許',status:'different'}});
++ mkdirSync('docs/wall-delta-v03022',{recursive:true});writeFileSync('docs/wall-delta-v03022/spec-scenario-comparison.json',JSON.stringify({reference:V85.sha256,results,failures},null,2));console.log('TRIAL FAILURES',failures.map(f=>(f as {name:string}).name));
++ expect(results).toHaveLength(715);expect(failures).toEqual([]);
+ },60000);
+ it('production fixture exposes independent formula and real one-hour accumulated outputs',()=>{
+  const {world}=createTrialWorld({kind:'production',target:'all',level:10,variant:'ready',config,production:{level:10,boost:6,tier:3}});const trace=productionTrace(world,world.cities[0]);expect(trace.every(c=>c.status==='match')).toBe(true);expect(trace[0].expected).toBeCloseTo(5040*1.24*1.09);
+@@ -30,5 +29,5 @@ it('six civilizations use the independent v85 blacksmith limits and all five spe
+  const base=developerWorld(config),evidence:unknown[]=[];
+  for(const civ of ['civ_zhongguo','civ_byzantium','civ_frankia','civ_britannia','civ_japan','civ_mongolia'])for(const d of V85.techs.filter(t=>t.id.startsWith('blacksmith.'))){const {world,info}=createTrialWorld({kind:'tech',target:d.id,level:1,variant:'ready',config:{...config,civilizationId:civ}},base);const p=trialPreview(world,info);expect(p?.status).toBe('match');evidence.push({civilization:civ,id:d.id,expected:info.expectedAdmission,actual:p?.actual});}
+  for(const speed of [1,3,6,10,50])for(const lv of [1,5,10,15]){const {world,info}=createTrialWorld({kind:'unit',target:'swordsman',level:lv,variant:'ready',config:{...config,speed}},base);world.speed=speed;const p=trialPreview(world,info);expect(p?.status).toBe('match');if(p&&'comparisons' in p)expect(p.comparisons?.every(c=>c.matches)).toBe(true);evidence.push({speed,producerLevel:lv,worldMs:info.expectedDurationMs,realSeconds:info.expectedDurationMs!/speed/1000});}
+- writeFileSync('docs/player-feedback-v03021/civilization-speed-comparison.json',JSON.stringify(evidence,null,2));
++ writeFileSync('docs/wall-delta-v03022/civilization-speed-comparison.json',JSON.stringify(evidence,null,2));
+ });
+diff --git a/src/game/developer/specAudit.ts b/src/game/developer/specAudit.ts
+index e1a0ffb..853c66c 100644
+--- a/src/game/developer/specAudit.ts
++++ b/src/game/developer/specAudit.ts
+@@ -24,6 +24,7 @@ export function auditCatalogs():AuditItem[]{
+   const prerequisites={...d.buildings};if(prerequisites.center===1)delete prerequisites.center;
+   checks.push(cmp('建築前置（固定中心 Lv1 已由世界保證）',prerequisites,a?.prerequisites));
+   for(const l of d.levels){checks.push(cmp('Lv'+l.level+' 公式成本',specCost(d.baseCost,d.growth,l.level),a?buildingCost(d.id as BuildingKind,l.level):null));checks.push(cmp('Lv'+l.level+' 基礎／中心實際工期 ms',l.durationMs,a?.durationMs[l.level-1]));}
++  if(d.id==='wall')checks.push({label:'一般施工取消退款規格差異',expected:'v85 未明列一般施工退款比例；不推定新規則',actual:'沿用 v0.30.21 共用施工：active 80%、queued 100%；受倉儲容量限制',status:'unverified'});
+   rows.push({id:'building:'+d.id,kind:'building',target:d.id,name:d.name,line:d.line,checks,dataMatches:checks.every(c=>c.status!=='different'),effectNote:(a?'':'此建築施工尚未開放，須納入階段缺口；不可視為驗收通過。')+'此結果核對資料與成本／工期函式。解鎖阻擋與完工效果另由試玩確認；建築核心功能：'+d.effect});
+  }
+  for(const d of V85.techs){
+diff --git a/src/game/developer/specTrials.ts b/src/game/developer/specTrials.ts
+index 26cf0c1..fb8b345 100644
+--- a/src/game/developer/specTrials.ts
++++ b/src/game/developer/specTrials.ts
+@@ -32,7 +32,7 @@ export const variantsFor=(kind:AuditItem['kind'],target:string)=>{
+  }
+  return list;
+ };
+-function setBuilding(c:FormalCity,key:string,lv:number){key=key==='warehouse'?'warehouse.0':key==='bunker'?'bunker.0':key;if(lv>0){if(key==='wall'){c.buildings.wall=lv;c.wallLevel=lv;}else putBuilding(c,key,lv);}else{delete c.buildings[key];delete c.economy!.slots[key];if(key==='residence')c.housing=400;}}
++function setBuilding(c:FormalCity,key:string,lv:number){key=key==='warehouse'?'warehouse.0':key==='bunker'?'bunker.0':key;if(key==='wall'){c.wallLevel=lv;delete c.buildings.wall;delete c.economy!.slots.wall;return;}if(lv>0){putBuilding(c,key,lv);}else{delete c.buildings[key];delete c.economy!.slots[key];if(key==='residence')c.housing=400;}}
+ export function createTrialWorld(req:TrialRequest,template?:FormalWorld):{world:FormalWorld;info:TrialInfo}{
+  const w=template?structuredClone(template):developerWorld({...req.config,scenario:'new'}),c=w.cities[0],f=w.factions[0];f.civilizationId=req.config.civilizationId;w.speed=req.config.speed;
+  if(!Number.isInteger(req.level)||req.level<0||req.level>15)throw new Error('測試等級無效。');
+diff --git a/src/game/formal/catalogB3.ts b/src/game/formal/catalogB3.ts
+index 08ba317..7773eca 100644
+--- a/src/game/formal/catalogB3.ts
++++ b/src/game/formal/catalogB3.ts
+@@ -1,7 +1,15 @@
+ import type {Resources,FormalCity} from './model';
+ import {resourceKeys} from './model';
+-/** v84 formulas and table times. Center table already includes its previous-level accelerator. */
++/** v85 > v84 formulas and table times. Center table already includes its previous-level accelerator. */
+ export const BUILDING_CATALOG = {
++  "wall": {
++    "baseCost": {"food":30,"wood":70,"stone":160,"gold":40},
++    "growth": 1.38,
++    "durationMs": [900000,1080000,1320000,1620000,1980000,2400000,3000000,3600000,4500000,5400000,6600000,8100000,9900000,12000000,16200000],
++    "age": 0,
++    "prerequisites": {"center":2},
++    "maxLevel": 15
++  },
+   "center": {
+     "baseCost": {
+       "food": 30,
+@@ -563,7 +571,8 @@ export function fieldCost(resource:keyof Resources,level:number){if(!Number.isIn
+ export const constructionMultiplier=(center:number)=>.964**(Math.max(1,center)-1);
+ export function fieldDuration(resource:keyof Resources,level:number,center:number){const a={food:1450/3,wood:1780/3,stone:1660/3,gold:2350/3}[resource];return Math.round((a*1.6**(level-1)-1000/3)/3*1000*constructionMultiplier(center));}
+ export function buildingKind(key:string):BuildingKind|undefined {const parts=key.split('.'),kind=parts[0] as BuildingKind;if(!Object.hasOwn(BUILDING_CATALOG,kind))return undefined;if(kind==='warehouse'||kind==='bunker'){if(parts.length!==2||!/^\d+$/.test(parts[1])||+parts[1]>14)return undefined;}else if(parts.length!==1)return undefined;return kind;}
+-export function buildingLevel(c:FormalCity,kind:string){return Math.max(0,...Object.entries(c.buildings).filter(([k])=>k===kind||k.startsWith(kind+'.')).map(([,v])=>v));}
++/** wallLevel is the sole completed-wall authority, including future siege readers. */
++export function buildingLevel(c:FormalCity,kind:string){if(kind==='wall')return c.wallLevel??0;return Math.max(0,...Object.entries(c.buildings).filter(([k])=>k===kind||k.startsWith(kind+'.')).map(([,v])=>v));}
+ export function storageCapacity(c:FormalCity){return 800+Object.entries(c.buildings).filter(([k])=>k.startsWith('warehouse.')).reduce((n,[,lv])=>n+WAREHOUSE_CAPACITY[lv],0);}
+ export function protection(c:FormalCity){return Object.entries(c.buildings).filter(([k])=>k.startsWith('bunker.')).reduce((n,[,lv])=>n+BUNKER_PROTECTION[lv],0);}
+ export function raidable(c:FormalCity):Resources {const p=protection(c);return Object.fromEntries(resourceKeys.map(r=>[r,Math.max(0,c.stock[r]-p)])) as Resources;}
+diff --git a/src/game/formal/economy.ts b/src/game/formal/economy.ts
+index 2638dc6..9b4f44f 100644
+--- a/src/game/formal/economy.ts
++++ b/src/game/formal/economy.ts
+@@ -123,11 +123,12 @@ export function applyEconomyCommand(w:FormalWorld,c:FormalCity,order:FormalOrder
+   if(fromLevel>=10)requireRule(e.milestones.includes(10000)&&c.cityPromotionCompleted&&c.housing>=10000,'高階資源田需要永久人口／City 資格與當下住房。');
+   paidResources=fieldCost(field.resource,fromLevel+1);spend(c,paidResources);durationMs=fieldDuration(field.resource,fromLevel+1,buildingLevel(c,'center'));target={kind:'field',slot:p.slot};
+  }else{
+-  const kind=buildingKind(p.key);requireRule(kind,'建築種類或 identity 無效。');const d=BUILDING_CATALOG[kind];fromLevel=previous.at(-1)?.toLevel??c.buildings[p.key]??0;requireRule(fromLevel<d.maxLevel,'建築已滿級。');
++  const kind=buildingKind(p.key);requireRule(kind,'建築種類或 identity 無效。');const d=BUILDING_CATALOG[kind];fromLevel=previous.at(-1)?.toLevel??(kind==='wall'?buildingLevel(c,'wall'):c.buildings[p.key]??0);requireRule(fromLevel<d.maxLevel,'建築已滿級。');
++  if(kind==='wall')requireRule(p.slot===undefined,'城牆為固定設施，不使用一般建築槽。');
+   const owner=w.factions.find(f=>f.id===c.ownerFactionId)!;requireRule((owner.age??0)>=d.age,'時代未開放建築。');for(const [k,lv] of Object.entries(d.prerequisites))requireRule(buildingLevel(c,k)>=lv,'建築前置未達成。');
+   const resource=({mill:'food',lumbermill:'wood',masonry:'stone',mint:'gold'} as const)[kind as 'mill'];
+   if(resource){const fields=c.fields!.filter(f=>f.resource===resource);requireRule(fromLevel===0?fields.some(f=>f.level>=5):fields.reduce((n,f)=>n+f.level,0)/fields.length>=fromLevel+5,'增產建築資源田門檻未達成。');}
+-  if(kind!=='center'&&e.slots[p.key]===undefined){const slot=p.slot??Array.from({length:15},(_,i)=>i).find(i=>!Object.values(e.slots).includes(i));requireRule(slot!==undefined&&!Object.values(e.slots).includes(slot),'自由建築槽已滿或該位置已使用。');e.slots[p.key]=slot;c.buildings[p.key]=0;}
++  if(kind!=='center'&&kind!=='wall'&&e.slots[p.key]===undefined){const slot=p.slot??Array.from({length:15},(_,i)=>i).find(i=>!Object.values(e.slots).includes(i));requireRule(slot!==undefined&&!Object.values(e.slots).includes(slot),'自由建築槽已滿或該位置已使用。');e.slots[p.key]=slot;c.buildings[p.key]=0;}
+   paidResources=buildingCost(kind,fromLevel+1);spend(c,paidResources);durationMs=buildingDuration(kind,fromLevel+1,buildingLevel(c,'center'));target={kind:'building',key:p.key};
+  }
+  const laneJobs=e.construction.filter(j=>j.lane===lane),startsAt=Math.max(w.time,...laneJobs.map(j=>j.startsAt+j.durationMs),...previous.map(j=>j.startsAt+j.durationMs));
+@@ -140,6 +141,7 @@ export function handleEconomyEvent(w:FormalWorld,event:FormalEvent,s:EventSchedu
+  if(event.type==='construction.complete'){
+   const c=spatial(w).cities.get(event.cityId),job=c?.economy?.construction.find(j=>j.eventId===event.id);if(!c||!job)return true;settleCity(w,c);
+   if(job.target.kind==='field'){const slot=job.target.slot;c.fields!.find(f=>f.slot===slot)!.level=job.toLevel;}
++  else if(job.target.key==='wall'){c.wallLevel=job.toLevel;}
+   else {if(job.target.key==='townhall')settleFaction(w,c.ownerFactionId);c.buildings[job.target.key]=job.toLevel;if(job.target.key==='residence')c.housing=400+HOUSING[job.toLevel];}
+   c.economy!.construction=c.economy!.construction.filter(j=>j.eventId!==event.id);return true;
+  }
+diff --git a/src/game/formal/runtimeB4.test.ts b/src/game/formal/runtimeB4.test.ts
+index a9a12eb..451ab6a 100644
+--- a/src/game/formal/runtimeB4.test.ts
++++ b/src/game/formal/runtimeB4.test.ts
+@@ -13,3 +13,16 @@ it('native stale overlapping commands serialize and only the first commits',asyn
+ it('native Worker rejects AI impersonation while AI simulation shares pure command rules',async()=>{const ai=initial.cities[1];send({type:'command',order:order(initial,{type:'field.upgrade',cityId:ai.id,slot:0},undefined,ai.ownerFactionId)});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(storage.save).not.toHaveBeenCalled();});
+ it('new campaign uses native generator and D7 for all100 factions before switched acknowledgement',async()=>{send({type:'start',seed:271828,speed:1,name:'正式玩家',transitionId:'new-native'});await until(()=>messages.some(r=>r.type==='switched'));const w=storage.startCampaign.mock.calls[0][0] as FormalWorld;expect(w.fixture).toBe(false);expect(w.cities).toHaveLength(100);expect(w.cities.every(c=>c.population===200&&c.stock.food===600&&!Object.keys(c.military!.units).length)).toBe(true);expect(w.factions.every(f=>f.age===0&&f.techIds.length===0)).toBe(true);expect(messages.find(r=>r.type==='switched')!.transitionId).toBe('new-native');});
+ it('restarting native Worker uses durable D1 creation receipt and replay never occupies second queue',async()=>{const cmd=order(initial,{type:'research.start',cityId:initial.cities[0].id,techId:'modern.infantry-weapons'});send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));const saved=messages.find(r=>r.type==='state')!.world;storage.loadWithOffline.mockResolvedValue({game:saved,recovered:false});messages=[];vi.resetModules();await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);});
++it('wall construction and scheduled completion become visible only after each durable Worker commit',async()=>{
++ let finish!:(w:FormalWorld)=>void,draft!:FormalWorld;
++ storage.save.mockImplementation((w:FormalWorld)=>{draft=w;return new Promise<FormalWorld>(resolve=>finish=resolve);});
++ const cmd=order(initial,{type:'building.upgrade',cityId:initial.cities[0].id,key:'wall'});send({type:'command',order:cmd});await until(()=>storage.save.mock.calls.length===1);expect(messages).toEqual([]);expect(draft.cities[0].wallLevel).toBe(0);expect(draft.cities[0].economy!.construction[0].target).toEqual({kind:'building',key:'wall'});
++ const job=draft.cities[0].economy!.construction[0];finish(draft);await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='state')!.world.cities[0].wallLevel).toBe(0);messages=[];
++ vi.spyOn(performance,'now').mockReturnValue((job.startsAt+job.durationMs)/initial.speed);send({type:'sync'});await until(()=>storage.save.mock.calls.length===2);expect(messages).toEqual([]);expect(draft.cities[0].wallLevel).toBe(1);expect(draft.cities[0].economy!.construction).toEqual([]);finish(draft);await until(()=>messages.some(r=>r.type==='synced'));expect(messages.find(r=>r.type==='state')!.world.cities[0].wallLevel).toBe(1);
++ messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(2);
++});
++it('wall Worker save failure rolls back payment and retry plus restart cannot reserve or pay twice',async()=>{
++ const cmd=order(initial,{type:'building.upgrade',cityId:initial.cities[0].id,key:'wall'});storage.save.mockRejectedValueOnce(new Error('wall IDB failure'));send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(initial);
++ messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');const saved=messages.find(r=>r.type==='state')!.world;expect(saved.cities[0].economy.construction).toHaveLength(1);expect(saved.cities[0].stock.stone).toBe(initial.cities[0].stock.stone-160);expect(saved.cities[0].buildings).not.toHaveProperty('wall');
++ storage.loadWithOffline.mockResolvedValue({game:saved,recovered:false});messages=[];vi.resetModules();await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(messages.find(r=>r.type==='state')!.world.cities[0].economy.construction).toHaveLength(1);expect(storage.save).toHaveBeenCalledTimes(2);
++});
+diff --git a/src/game/formal/schema.ts b/src/game/formal/schema.ts
+index 28c9c1f..65833e3 100644
+--- a/src/game/formal/schema.ts
++++ b/src/game/formal/schema.ts
+@@ -127,6 +127,8 @@ const worldSchema:z.ZodType<FormalWorld>=z.object({kind:z.literal('formal'),meta
+   for(const e of w.events){if(e.type==='age.complete'&&!w.factions.some(f=>f.id===e.factionId&&f.ageQueue?.eventId===e.id)||e.type==='military.train'&&!w.cities.some(c=>c.id===e.cityId&&c.military?.queue.some(j=>j.eventId===e.id))||e.type==='settlement.ready'&&!(w.settlements??[]).some(p=>p.projectId===e.projectId&&p.phase==='preparing'&&p.prepEventId===e.id)||e.type==='settlement.arrive'&&!(w.settlements??[]).some(p=>p.projectId===e.projectId&&p.phase==='travelling'&&p.arrivalEventId===e.id))fail('Dangling development event');}
+   for(const n of w.cities){const e=n.economy;if(!e){fail('Native economy missing');continue;}
+    if(e.lastSettledAt>w.time||Object.keys(e.slots).length>15||!unique(Object.values(e.slots).map(String))||!unique(e.milestones.map(String))||!matches(e.settlementEventId,'economy.settle'))fail('Economy anchor/slots/milestones/event invalid');
++   if(Object.hasOwn(n.buildings,'wall')||Object.hasOwn(e.slots,'wall'))fail('Wall must use wallLevel only, without a free-building slot');
++   let wall=n.wallLevel??0,wallEnd=0;for(const job of e.construction.filter(j=>j.target.kind==='building'&&j.target.key==='wall')){if(job.fromLevel!==wall||job.toLevel!==wall+1||job.toLevel>15||job.startsAt<wallEnd)fail('Wall construction level/dependency mismatch');wall=job.toLevel;wallEnd=job.startsAt+job.durationMs;}
+    for(const [key,lv] of Object.entries(n.buildings)){const kind=buildingKind(key);if(!kind||lv>BUILDING_CATALOG[kind].maxLevel||key!=='center'&&e.slots[key]===undefined)fail('Building identity/level/slot mismatch');}
+    for(const key of Object.keys(e.slots))if(!Object.hasOwn(n.buildings,key))fail('Dangling building slot');
+    for(const r of resourceKeys){const reserved=(w.logistics??[]).filter(t=>t.destinationCityId===n.id&&t.phase==='outbound').reduce((v,t)=>v+t.resources[r],0);if(e.reservedIncoming[r]!==reserved||n.stock[r]+reserved>storageCapacity(n))fail('Stock/capacity/reservation ledger invalid');}
+diff --git a/src/game/presentation/CityScenes.tsx b/src/game/presentation/CityScenes.tsx
+index a6ac779..81079b2 100644
+--- a/src/game/presentation/CityScenes.tsx
++++ b/src/game/presentation/CityScenes.tsx
+@@ -2,7 +2,7 @@ import {memo,useEffect,useRef,useState} from 'react';
+ import type {FormalCity,FormalWorld,Construction} from '../formal/model';
+ import {MiniatureCity} from '../MiniatureCity';
+ import {ResourceSprite} from '../ResourceSprite';
+-import {ConstructionSprite} from '../assets';
++import {ConstructionSprite,constructionWallSceneArt,finishedWallSceneArt} from '../assets';
+ import {assetURL,cityPresentation,FIELD_ALIAS,FIELD_NAMES,LABELS,BUILDING_ALIAS} from './artMap';
+ import {FormalBuildingSprite,Badge} from './Art';
+ import {remaining} from './UI';
+@@ -24,8 +24,8 @@ export const CityScenes=memo(function CityScenes({world,city,onBuilding,onField,
+  return <section className="formal-scenes"><div className="city-heading"><div><p className="eyebrow">{cityTitle(city.population)} · {world.factions.find(f=>f.id===city.ownerFactionId)?.name}</p><div className="city-title-row"><h1>{city.name}</h1><small className="city-inline-coordinates">（{city.x}, {city.y}）</small>{onRename&&<button className="rename-city" aria-label="更改城名" title="更改城名" onClick={onRename}>✎</button>}</div></div><div className="city-heading-actions">{mobile&&p.imperial&&<Badge>帝王時代</Badge>}{mobile&&<button className="scene-view-shortcut" aria-pressed={close} onClick={()=>setClose(!close)}>{close?'查看全景':'放大操作'}</button>}</div></div><div className="district-toolbar"><div className="district-tabs" role="tablist" aria-label="城市區域"><button role="tab" id="tab-town" aria-controls="district-scene" aria-selected={district==='town'} onClick={()=>setDistrict('town')}>城內</button><button role="tab" id="tab-outskirts" aria-controls="district-scene" aria-selected={district==='outskirts'} onClick={()=>setDistrict('outskirts')}>城郊</button></div>{district==='outskirts'&&<div className="field-composition-summary">{(['food','wood','stone','gold'] as const).map(r=><span key={r} title={FIELD_NAMES[r]}>{mobile?MOBILE_FIELD_LABELS[r]:FIELD_NAMES[r]} <strong>{p.fields.filter(f=>f.resource===r).length}</strong></span>)}</div>}<button className="label-toggle" aria-pressed={labels} onClick={()=>district==='town'?setInnerLabels(!innerLabels):setOuterLabels(!outerLabels)}>{labels?'收起名稱':'顯示名稱'}</button>{p.imperial&&!mobile&&<Badge>帝王時代</Badge>}</div>
+  <div id="district-scene" role="tabpanel" aria-labelledby={'tab-'+district}>
+  <section className={district==='town'?'town-scene':'outskirts-scene'}><div className="town-viewport" ref={viewport} tabIndex={0} aria-label={district==='town'?'城鎮場景，可橫向捲動':'城郊資源地，放大後可左右滑動'}><div className={district==='town'?'town-composition '+(mobile&&close?'town-close ':'')+(!labels?'quiet-town-labels':''):'outskirts-composition '+(mobile&&close?'outskirts-close ':'')+(labels?'show-field-names':'')}>
+- {district==='town'?<><img className="town-background" src={assetURL(p.wall>0?(p.visualAge===0?'art/city-scene-dark-wood.webp':p.visualAge===1?'art/city-scene-feudal-stone.webp':'art/city-scene-stone.webp'):(p.visualAge===0?'art/city-scene-dark-open.webp':p.visualAge===1?'art/city-scene-feudal-open.webp':'art/city-scene-open.webp'))} alt={p.wall?'城牆與城門沿遠方城市邊界延伸':'城外田野與道路連接中央廣場'} draggable={false}/>
+- <button className="town-gate" aria-label={'城門與城防，城牆 '+p.wall+' 級'} onClick={onWall}><span><span className="town-name">城門 · </span>{p.wall}</span></button>
++ {district==='town'?<><img className="town-background" src={assetURL(p.wallJob&&p.wallJob.startsAt<=world.time?constructionWallSceneArt(p.visualAge):p.wall>0?finishedWallSceneArt(p.visualAge):p.visualAge===0?'art/city-scene-dark-open.webp':p.visualAge===1?'art/city-scene-feudal-open.webp':'art/city-scene-open.webp')} alt={p.wallJob&&p.wallJob.startsAt<=world.time?'城牆沿城市邊界施工中':p.wall?'城牆與城門沿遠方城市邊界延伸':'城外田野與道路連接中央廣場'} draggable={false}/>
++ <button className="town-gate" aria-label={'城門與城防，城牆 '+p.wall+' 級'} onClick={onWall}><span><span className="town-name">城門 · </span>{p.wall}</span>{p.wallJob&&<ConstructionProgress job={p.wallJob} world={world}/>}</button>
+  {p.lots.map((lot,i)=><button data-testid={`town-anchor-${i}`} key={i} className={'town-lot '+(lot.key?'built building-'+(BUILDING_ALIAS[lot.kind!]??lot.kind):'vacant')+(i===0?' town-center':'')+(lot.job?' constructing':'')} style={{left:lot.anchor[0]+'%',top:lot.anchor[1]+'%',zIndex:Math.round(lot.anchor[1])}} onClick={()=>onBuilding(lot.key,lot.slot)} aria-label={lot.key?`${LABELS[lot.kind!]} Lv${lot.level}`:`空地 ${i}`}>
+  {lot.kind?<FormalBuildingSprite kind={lot.kind} civ={p.civ} age={p.visualAge} constructing={!!lot.job} targetLevel={lot.job?.toLevel}/>:<span className="town-empty">＋</span>}<span className="town-label"><span className="town-name">{lot.kind?LABELS[lot.kind]:'空地 '+i}</span>{lot.level>0&&<b>{lot.level}</b>}</span>{lot.job&&<ConstructionProgress job={lot.job} world={world}/>}</button>)}
+  </>:<><img className="outskirts-background" src={assetURL('art/outskirts-landscape-021.webp')} alt="道路穿過城外草地，資源田地環繞中央聚落" draggable={false}/>{p.fields.map(field=><button data-testid={`field-anchor-${field.slot}`} key={field.slot} className={'resource-parcel parcel-'+FIELD_ALIAS[field.resource]+(field.job?' constructing':'')} style={{left:field.anchor[0]+'%',top:field.anchor[1]+'%',zIndex:Math.round(field.anchor[1])}} onClick={()=>onField(field.slot)} aria-label={`${FIELD_NAMES[field.resource]} ${field.slot+1} Lv${field.level}`}>
+diff --git a/src/game/presentation/artIntegration.test.tsx b/src/game/presentation/artIntegration.test.tsx
+index 334d10b..1024598 100644
+--- a/src/game/presentation/artIntegration.test.tsx
++++ b/src/game/presentation/artIntegration.test.tsx
+@@ -21,7 +21,7 @@ describe('B4 art integration authority and asset coverage',()=>{
+  it('visual Dark/Feudal/Castle/Imperial uses only era0-2 and existing walls/cities',()=>{
+  expect([0,1,2,3].map(visualAge)).toEqual([0,1,2,2]);for(const age of [0,1,2,3])for(const civ of Object.keys(CIV_ART)){const era=visualAge(age);exists(eraAtlas(era));exists(`art/cities-age-${era}.webp`);exists(`art/wall-ring-${era}.webp`);const html=renderToStaticMarkup(<MiniatureCity civ={CIV_ART[civ]} era={era} wall={3}/>);expect(html).not.toContain('age-3');expect(html).not.toContain('ring-3');}
+  });
+- it('all 19 formal buildings have valid aliases or independent new assets, including repeated identities',()=>{
++ it('all 20 formal buildings have valid aliases or independent new assets, including fixed wall and repeated identities',()=>{
+  for(const k of Object.keys(BUILDING_CATALOG)){expect(BUILDING_ALIAS[k]||NEW_BUILDINGS.includes(k as typeof NEW_BUILDINGS[number]),k).toBeTruthy();if(!BUILDING_ALIAS[k])exists(`art/formal/building-${k}.webp`);}
+  expect(BUILDING_ALIAS.center).toBe('hall');expect(BUILDING_ALIAS.residence).toBe('house');expect(BUILDING_ALIAS.bunker).toBe('cellar');expect(BUILDING_ALIAS.archery).toBe('range');
+  });
+diff --git a/src/game/presentation/artMap.ts b/src/game/presentation/artMap.ts
+index 93a11e2..9224f00 100644
+--- a/src/game/presentation/artMap.ts
++++ b/src/game/presentation/artMap.ts
+@@ -9,9 +9,9 @@ export function civilizationArt(id:string){const a=CIV_ART[id];if(!a)throw new E
+ export function civilizationIndex(id:string){civilizationArt(id);return CIV_ORDER.indexOf(id);}
+ export const visualAge=(age:number):0|1|2=>age<=0?0:age===1?1:2;
+ export const AGE_NAMES=['黑暗','封建','城堡','帝王'];
+-export const BUILDING_ALIAS:Record<string,string>={center:'hall',residence:'house',warehouse:'warehouse',bunker:'cellar',market:'market',barracks:'barracks',archery:'range',stable:'stable',academy:'academy',workshop:'workshop',castle:'castle'};
++export const BUILDING_ALIAS:Record<string,string>={wall:'wall',center:'hall',residence:'house',warehouse:'warehouse',bunker:'cellar',market:'market',barracks:'barracks',archery:'range',stable:'stable',academy:'academy',workshop:'workshop',castle:'castle'};
+ export const NEW_BUILDINGS=['townhall','monastery','mill','lumbermill','masonry','mint','blacksmith','embassy'] as const;
+-export const LABELS:Record<string,string>={food:'穀',wood:'木',stone:'石',gold:'金',bandit:'盜賊',center:'城市中心',residence:'民居',warehouse:'倉庫',bunker:'地洞',market:'市場',townhall:'市政廳',monastery:'修道院',mill:'磨坊',lumbermill:'鋸木場',masonry:'石匠工坊',mint:'鑄幣所',barracks:'兵營',archery:'射箭場',stable:'馬廄',blacksmith:'鐵匠鋪',academy:'學院',workshop:'攻城工坊',castle:'城堡',embassy:'大使館'};
++export const LABELS:Record<string,string>={wall:'城牆',food:'穀',wood:'木',stone:'石',gold:'金',bandit:'盜賊',center:'城市中心',residence:'民居',warehouse:'倉庫',bunker:'地洞',market:'市場',townhall:'市政廳',monastery:'修道院',mill:'磨坊',lumbermill:'鋸木場',masonry:'石匠工坊',mint:'鑄幣所',barracks:'兵營',archery:'射箭場',stable:'馬廄',blacksmith:'鐵匠鋪',academy:'學院',workshop:'攻城工坊',castle:'城堡',embassy:'大使館'};
+ export const FIELD_ALIAS={food:'farm',wood:'lumber',stone:'quarry',gold:'mine'} as const;
+ export const SITE_INDEX={food:0,wood:1,stone:2,gold:3,bandit:6} as const;
+ // Exact feet anchors from v0.30.2 TownScene / OutskirtsScene.
+@@ -55,7 +55,7 @@ export function cityPresentation(w:FormalWorld,c:FormalCity){
+  const jobs=c.economy?.construction??[];
+  const lots=TOWN_ANCHORS.map((anchor,i)=>{const key=i===0?'center':Object.keys(c.economy?.slots??{}).find(k=>c.economy!.slots[k]===i-1);return{anchor,slot:i-1,key,kind:key?.split('.')[0],level:key?c.buildings[key]??0:0,job:key?jobs.find(j=>j.target.kind==='building'&&j.target.key===key):undefined};});
+  const fields=(c.fields??[]).map(field=>({...field,anchor:FIELD_ANCHORS[field.slot],job:jobs.find(j=>j.target.kind==='field'&&j.target.slot===field.slot)}));
+- return{civ:civilizationArt(faction.civilizationId),formalCiv:faction.civilizationId,age,visualAge:visualAge(age),imperial:age===3,lots,fields,wall:c.wallLevel??0};
++ return{civ:civilizationArt(faction.civilizationId),formalCiv:faction.civilizationId,age,visualAge:visualAge(age),imperial:age===3,lots,fields,wall:c.wallLevel??0,wallJob:jobs.find(j=>j.target.kind==='building'&&j.target.key==='wall')};
+ }
+ export const constructionPercent=(j:Construction,time:number)=>Math.max(0,Math.min(100,(time-j.startsAt)/Math.max(1,j.durationMs)*100));
+ export const assetURL=(path:string)=>globalThis.__FORMAL_EMBEDDED_ASSETS?.[path]??import.meta.env.BASE_URL+path;
+diff --git a/src/game/presentation/cityActions.ts b/src/game/presentation/cityActions.ts
+index fce82c9..dddb433 100644
+--- a/src/game/presentation/cityActions.ts
++++ b/src/game/presentation/cityActions.ts
+@@ -12,7 +12,7 @@ export const BUILDING_CATEGORIES=[
+  {id:'research',name:'科技',kinds:['academy','blacksmith']},
+ ] as const;
+ export function availableBuildings(c:FormalCity,category:string){return BUILDING_CATEGORIES.find(cat=>cat.id===category)?.kinds.filter(kind=>kind==='warehouse'||kind==='bunker'||!Object.hasOwn(c.buildings,kind))??[];}
+-export const BUILDING_DESCRIPTIONS:Record<string,string>={center:'城邦的中心，等級提升能縮短其他建設工期。',residence:'為居民提供住房，讓城市有空間繼續成長。',warehouse:'增加每類資源的儲存容量，可在多塊空地建造。',bunker:'把物資藏入地底，提供各類資源的保護額度。',market:'提供商隊，讓自己的城市互相運送資源。',townhall:'整備城市行政，作為重要建築及城市晉升的前置。',embassy:'領主往來的場所；軍團與外交功能將於後續開放。',mill:'磨製穀物，提高本城農田的產量。',lumbermill:'加工木材，提高本城林地的產量。',masonry:'整備採石工藝，提高本城石場的產量。',mint:'集中冶煉鑄造，提高本城金礦的產量。',barracks:'招募徒步近戰部隊，是軍事建設的起點。',archery:'訓練遠程部隊，為前線提供射擊支援。',stable:'訓練騎兵，整備城邦的機動力量。',workshop:'製造攻城器械與輜重車。',castle:'生產本文明的衛隊與特殊非戰鬥拓殖隊。',blacksmith:'開啟軍事裝備研究，強化部隊。',academy:'研究科技，提升學院等級能縮短適用研究的時間。',monastery:'支持居民自然成長，讓城邦逐漸繁盛。'};
++export const BUILDING_DESCRIPTIONS:Record<string,string>={wall:'環繞城市的固定防線，不占自由建築槽；每級增加3%守軍防禦。',center:'城邦的中心，等級提升能縮短其他建設工期。',residence:'為居民提供住房，讓城市有空間繼續成長。',warehouse:'增加每類資源的儲存容量，可在多塊空地建造。',bunker:'把物資藏入地底，提供各類資源的保護額度。',market:'提供商隊，讓自己的城市互相運送資源。',townhall:'整備城市行政，作為重要建築及城市晉升的前置。',embassy:'領主往來的場所；軍團與外交功能將於後續開放。',mill:'磨製穀物，提高本城農田的產量。',lumbermill:'加工木材，提高本城林地的產量。',masonry:'整備採石工藝，提高本城石場的產量。',mint:'集中冶煉鑄造，提高本城金礦的產量。',barracks:'招募徒步近戰部隊，是軍事建設的起點。',archery:'訓練遠程部隊，為前線提供射擊支援。',stable:'訓練騎兵，整備城邦的機動力量。',workshop:'製造攻城器械與輜重車。',castle:'生產本文明的衛隊與特殊非戰鬥拓殖隊。',blacksmith:'開啟軍事裝備研究，強化部隊。',academy:'研究科技，提升學院等級能縮短適用研究的時間。',monastery:'支持居民自然成長，讓城邦逐漸繁盛。'};
+ export function newBuildingKey(c:FormalCity,kind:string){
+  if(kind!=='warehouse'&&kind!=='bunker')return kind;
+  return kind+'.'+Array.from({length:16},(_,i)=>i).find(i=>!Object.hasOwn(c.buildings,kind+'.'+i));
+@@ -39,12 +39,12 @@ export function constructionAction(w:FormalWorld,c:FormalCity,target:{key:string
+   const cost=fieldCost(field.resource,next);for(const r of resourceKeys)if(c.stock[r]<cost[r])reasons.push(LABELS[r]+'不足');
+   return {next,cost,duration:fieldDuration(field.resource,next,center),reasons};
+  }
+- const kind=buildingKind(target.key)! ,d=BUILDING_CATALOG[kind],next=Math.max(c.buildings[target.key]??0,...e.construction.filter(j=>j.target.kind==='building'&&j.target.key===target.key).map(j=>j.toLevel))+1;
++ const kind=buildingKind(target.key)! ,d=BUILDING_CATALOG[kind],next=Math.max(kind==='wall'?buildingLevel(c,'wall'):c.buildings[target.key]??0,...e.construction.filter(j=>j.target.kind==='building'&&j.target.key===target.key).map(j=>j.toLevel))+1;
+  if(next>d.maxLevel)return {next,cost:null,duration:0,reasons:['已滿級']};
+  const age=w.factions.find(f=>f.id===c.ownerFactionId)!.age??0;
+  if(age<d.age)reasons.push(AGE_NAMES[d.age]+'時代');
+  for(const [k,n] of Object.entries(d.prerequisites))if(buildingLevel(c,k)<n)reasons.push(LABELS[k]+' Lv'+n);
+- if(kind!=='center'&&e.slots[target.key]===undefined&&Object.keys(e.slots).length>=15)reasons.push('15塊空地已使用');
++ if(kind!=='center'&&kind!=='wall'&&e.slots[target.key]===undefined&&Object.keys(e.slots).length>=15)reasons.push('15塊空地已使用');
+  const resource=({mill:'food',lumbermill:'wood',masonry:'stone',mint:'gold'} as const)[kind as 'mill'];
+  if(resource){const fields=c.fields!.filter(f=>f.resource===resource);if(next===1?!fields.some(f=>f.level>=5):fields.reduce((n,f)=>n+f.level,0)/fields.length<next+4)reasons.push(next===1?'至少一座對應資源田Lv5':'對應資源田平均等級 '+(next+4));}
+  const cost=buildingCost(kind,next);for(const r of resourceKeys)if(c.stock[r]<cost[r])reasons.push(LABELS[r]+'不足');
+diff --git a/src/game/presentation/constructionMenuFix.test.tsx b/src/game/presentation/constructionMenuFix.test.tsx
+index c87fa90..a90e74a 100644
+--- a/src/game/presentation/constructionMenuFix.test.tsx
++++ b/src/game/presentation/constructionMenuFix.test.tsx
+@@ -9,7 +9,7 @@ import {Garrison} from './Garrison';
+ import {ArmyView} from './DevelopmentViews';
+ import {CIV_ORDER,NEW_BUILDINGS} from './artMap';
+ it('four construction pages partition every actual buildable type once; storage duplicates remain available',()=>{
+- const kinds=BUILDING_CATEGORIES.flatMap(c=>[...c.kinds]);expect(new Set(kinds).size).toBe(kinds.length);expect([...kinds].sort()).toEqual(Object.keys(BUILDING_CATALOG).filter(k=>k!=='center').sort());expect(BUILDING_CATEGORIES.map(c=>c.name)).toEqual(['民生','經濟','軍事','科技']);
++ const kinds=BUILDING_CATEGORIES.flatMap(c=>[...c.kinds]);expect(new Set(kinds).size).toBe(kinds.length);expect([...kinds].sort()).toEqual(Object.keys(BUILDING_CATALOG).filter(k=>k!=='center'&&k!=='wall').sort());expect(kinds).not.toContain('wall');expect(BUILDING_CATEGORIES.map(c=>c.name)).toEqual(['民生','經濟','軍事','科技']);
+  const w=createFormalWorld({campaign:'construction-menu',seed:90217}),c=w.cities[0];c.buildings.residence=1;c.buildings.monastery=1;c.buildings['warehouse.0']=1;c.buildings['bunker.0']=1;
+  expect(availableBuildings(c,'civil')).not.toContain('residence');expect(availableBuildings(c,'civil')).not.toContain('monastery');expect(availableBuildings(c,'economy')).toContain('warehouse');expect(availableBuildings(c,'economy')).toContain('bunker');
+ });
+diff --git a/src/game/presentation/manifestExport.test.ts b/src/game/presentation/manifestExport.test.ts
+index d7335a6..944226b 100644
+--- a/src/game/presentation/manifestExport.test.ts
++++ b/src/game/presentation/manifestExport.test.ts
+@@ -6,7 +6,7 @@ import {BUILDING_CATALOG} from '../formal/catalogB3';
+ import {unitArt,techArt,BUILDING_ALIAS,CIV_ART,FIELD_ALIAS,SITE_INDEX,NEW_BUILDINGS,LABELS} from './artMap';
+ it('exports complete machine-readable Formal ID to presentation mapping for checkpoint audit',()=>{
+  const map={civilizations:CIV_ART,visualAges:{Dark:0,Feudal:1,Castle:2,Imperial:2},buildingAliases:BUILDING_ALIAS,
+- buildings:Object.keys(BUILDING_CATALOG).map(id=>({id,name:LABELS[id],alias:BUILDING_ALIAS[id]??null,new:NEW_BUILDINGS.includes(id as typeof NEW_BUILDINGS[number]),path:NEW_BUILDINGS.includes(id as typeof NEW_BUILDINGS[number])?`art/formal/building-${id}.webp`:id==='bunker'?'art/cellar.webp':id==='castle'?'art/castle-{civilizationAlias}.webp':'art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp'})),
++ buildings:Object.keys(BUILDING_CATALOG).map(id=>({id,name:LABELS[id],alias:BUILDING_ALIAS[id]??null,new:NEW_BUILDINGS.includes(id as typeof NEW_BUILDINGS[number]),path:NEW_BUILDINGS.includes(id as typeof NEW_BUILDINGS[number])?`art/formal/building-${id}.webp`:id==='wall'?'art/city-scene-{dark|feudal|castle}-construction-v2.webp | art/city-scene-{dark-wood|feudal-stone|stone}.webp':id==='bunker'?'art/cellar.webp':id==='castle'?'art/castle-{civilizationAlias}.webp':'art/buildings-dark.webp | art/buildings-feudal.webp | art/building-atlas.webp'})),
+  units:Object.keys(UNIT_CATALOG).map(id=>({id,name:UNIT_CATALOG[id].name,...unitArt(id)})),technologies:Object.values(TECH_CATALOG).filter(t=>t.scope==='traditional'||t.scope==='research-cooperation').map(t=>({id:t.id,name:t.name,...techArt(t.id)})),fields:FIELD_ALIAS,wildSites:SITE_INDEX};
+- expect(map.buildings).toHaveLength(19);expect(map.units).toHaveLength(28);expect(map.technologies).toHaveLength(67);mkdirSync('docs/playable',{recursive:true});writeFileSync('docs/playable/formal-art-map.json',JSON.stringify(map,null,2));
++ expect(map.buildings).toHaveLength(20);expect(map.units).toHaveLength(28);expect(map.technologies).toHaveLength(67);mkdirSync('docs/wall-delta-v03022',{recursive:true});writeFileSync('docs/wall-delta-v03022/formal-art-map.json',JSON.stringify(map,null,2));
+ });
+diff --git a/src/game/release.ts b/src/game/release.ts
+index c7510e1..732f251 100644
+--- a/src/game/release.ts
++++ b/src/game/release.ts
+@@ -1,6 +1,7 @@
+ import manifest from '../../public/version.json';
+ export const RELEASE=manifest;
+ export const releaseNotes=[
++ '城牆Lv0～15接入正式施工、佇列、取消、存檔與Recovery；復用DEMO城防美術，完工等級只以wallLevel保存。',
+  'v85規格驗證台：獨立規格與程式逐項比對、公式拆解、正反例試玩、操作紀錄與報告；揭露尚未完成項目，不自動宣稱Gate通過。',
+  '新增B2／B3／B4開發者模式：獨立測試情境、五倍數與六文明檢查、快速推進、存檔重讀、Recovery及驗證報告。',
+  '全區低倍率採小型城市標記；一般視距保留v0.30.2圖示、野外據點與標示門檻，恢復深色外圍、地圖邊界及首幀完整底圖。',

@@ -1,0 +1,20 @@
+import {civilizationDetails,cultureName,uniqueCultureName,CIV_STORIES} from './catalog';
+import {useState} from 'react';
+import {BrandMark} from '../BrandMark';
+import {RELEASE} from '../release';
+import {CIV_NAMES} from './artMap';
+import {FormalEmblem} from './UI';
+const randomSeed=()=>crypto.getRandomValues(new Uint32Array(1))[0];
+/** DEMO's selected details sit outside the six compact civilization buttons. */
+export function CivilizationDetails({civ}:{civ:string}){
+ const details=civilizationDetails(civ);
+ return <div className="civ-detail" aria-live="polite">
+  <div><span className="eyebrow">文明特色</span><p>{CIV_STORIES[civ]}</p><small>{details.military}</small><details><summary>文明專屬科技</summary><small>{details.technologies.map(t=>t.name).join('／')}</small></details><small>戰鬥定位供整備軍隊參考，戰鬥功能將於後續開放。</small></div>
+  <div><span className="eyebrow">城堡時代代表兵種</span><p>{details.guard.name}</p><small>{details.guardRole}</small></div>
+ </div>;
+}
+export function Start({busy,hasSave,onClose,onStart}:{busy:boolean;hasSave:boolean;onClose:()=>void;onStart:(civ:string,seed:number,speed:number,name:string,offlineHours:0|1|6|24)=>void}){
+ const [civ,setCiv]=useState('civ_zhongguo'),[name,setName]=useState(()=>cultureName('civ_zhongguo',20260906)),[seed,setSeed]=useState(()=>String(randomSeed())),[speed,setSpeed]=useState(1),[replace,setReplace]=useState(false),[offlineHours,setOfflineHours]=useState<0|1|6|24>(24);
+ const valid=/^\d{1,10}$/.test(seed)&&Number(seed)<=4294967295;
+ return <div className="start-screen"><div className="start-vignette"/><div className="start-content"><div className="start-mark"><BrandMark/><span>列國征途<small>始源 · v{RELEASE.version}</small></span></div><div className="start-heading"><p className="eyebrow">六個文明，一百位獨立領主</p><h1>選擇你的文明</h1><p>建設城邦，讓你的旗幟越過群山與河流。</p></div><div className="civ-grid">{Object.entries(CIV_NAMES).map(([id,n])=><button key={id} className={'civ-option '+(id===civ?'chosen':'')} aria-pressed={id===civ} onClick={()=>setCiv(id)}><FormalEmblem civ={id}/><strong>{n}</strong><small>{civilizationDetails(id).position}</small></button>)}</div><CivilizationDetails civ={civ}/><div className="start-player-name"><label htmlFor="new-player-name">領主名稱</label><div><input id="new-player-name" value={name} maxLength={24} onChange={e=>setName(e.target.value)} placeholder="輸入領主名字"/><button aria-label="依目前文明隨機產生領主名稱" onClick={()=>setName(uniqueCultureName(civ,randomSeed(),'lord',[name]))}>🎲</button></div><small>1～24 字。</small></div><div className="start-options"><label>戰役速度<select aria-label="新局速度" value={speed} onChange={e=>setSpeed(Number(e.target.value))}>{[1,3,6,10,50].map(n=><option key={n} value={n}>{n}X（現實 1 秒 = 世界 {n} 秒）</option>)}</select></label><label>離線世界推進<select aria-label="離線世界推進" value={offlineHours} onChange={e=>setOfflineHours(Number(e.target.value) as 0|1|6|24)}><option value={0}>0h · 隨時玩，離線即停止</option><option value={1}>1h · 輕鬆玩</option><option value={6}>6h · 標準節奏</option><option value={24}>24h · 持續世界（預設）</option></select></label><div className="seed-option"><label htmlFor="world-seed">世界種子碼</label><div className="seed-input-row"><input id="world-seed" inputMode="numeric" value={seed} maxLength={10} aria-invalid={!valid} onChange={e=>setSeed(e.target.value)}/><button aria-label="隨機產生世界種子碼" onClick={()=>setSeed(String(randomSeed()))}>🎲</button></div>{!valid&&<small role="alert">請輸入 0～4294967295 的整數。</small>}</div></div><p className="start-note">384×384 持續世界 · 玩家＋99 領主。每位領主從人口200、住房400、四資源各600及18塊零級資源田開始。本局開始後不再切換速度。</p>{hasSave&&<label className="warning-check"><input type="checkbox" checked={replace} onChange={e=>setReplace(e.target.checked)}/>我了解新遊戲會替換目前戰役；目前進度會先建立回復點。</label>}<div className="start-actions"><button disabled={busy} onClick={onClose}>返回</button><button className="primary large" disabled={busy||!name.trim()||!valid||(hasSave&&!replace)} onClick={()=>onStart(civ,Number(seed),speed,name.trim(),offlineHours)}>{busy?'建立戰役中…':'升起旗幟 · 開始戰役'}</button></div><small className="start-footer">純單機 · 本機存檔 · 無付費加速</small></div></div>;
+}

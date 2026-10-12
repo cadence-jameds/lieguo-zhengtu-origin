@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.0 /workspace/scratch/d827d1cbb5ab/work/lieguo-origins-v0.30.22
+
+ ✓ src/game/interaction.test.ts (10 tests) 335ms
+   ✓ own moving armies invalidate entity imagery while stationary battles and hidden enemy marches preserve its cache 321ms
+ ✓ src/game/formal/combatB5.test.ts (32 tests) 4332ms
+
+ Test Files  2 passed (2)
+      Tests  42 passed (42)
+   Start at  11:24:43
+   Duration  4.90s (tests 84%, transform 13%, import 3%)
+
+JSON report written to /workspace/scratch/d827d1cbb5ab/work/lieguo-origins-v0.30.22/docs/b5-v03023/boundary-regression.json

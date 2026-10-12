@@ -1,0 +1,9 @@
+import 'fake-indexeddb/auto';
+import {it,expect,afterEach} from 'vitest';
+import {FormalPersistence} from '../persistence';
+import {battlefield} from './combatTestSupport';
+import {order,build} from './developmentTestSupport';
+import {submitFormalOrder,advanceFormal} from './reducer';
+import {canonicalJSON} from './canonical';
+const stores:FormalPersistence[]=[];afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
+it('B6 atomic rollback, export/import and Recovery preserve consent, expiry, counters and command uniqueness',async()=>{let failure=false;const db=new FormalPersistence({suffix:'b6-'+crypto.randomUUID(),fault:p=>{if(failure&&p==='world-write')throw Error('B6 fault');}});stores.push(db);const source=battlefield();for(const c of source.cities.slice(0,2)){build(c,'embassy',15);source.factions.find(f=>f.id===c.ownerFactionId)!.age=2;}let w=await db.start(source);const cmd=order(w,{type:'politics',cityId:w.cities[0].id,action:'legion-create',name:'持久'}),t=submitFormalOrder(w,cmd);failure=true;await expect(db.save(t.world,[],w.revision)).rejects.toThrow('B6 fault');expect((await db.loadSave()).game!.politics).toBeUndefined();failure=false;w=await db.save(t.world,[],w.revision);expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');const text=await db.exportStoredSave('full'),copy=new FormalPersistence({suffix:'b6-copy-'+crypto.randomUUID()});stores.push(copy);const imported=await copy.importSave(text);expect(imported.politics).toEqual(w.politics);w=await db.save(advanceFormal(w,w.time+60000).world,[],w.revision);const checkpoint=(await db.backupList())[1];const restored=await db.restore(checkpoint.id);expect(restored.time).toBeLessThan(w.time);expect(restored.sequences.project).toBeGreaterThanOrEqual(w.sequences.project);expect(canonicalJSON(restored.politics)).toBe(canonicalJSON(imported.politics));});

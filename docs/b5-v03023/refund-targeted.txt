@@ -1,0 +1,50 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.0 /workspace/scratch/d827d1cbb5ab/work/lieguo-origins-v0.30.22
+
+ ✓ src/game/formal/refundV86.test.ts (7 tests) 1610ms
+   ✓ v86 refund survives save/load and Recovery without repeated refunds 1006ms
+ ✓ src/game/formal/colonizationV85.test.ts (6 tests) 3383ms
+   ✓ castle produces one separate civilian unit; launch consumes availability; founding consumes entity and transfers guards 1124ms
+   ✓ ready flag without entity and duplicate/mismatched entity are rejected by strict v85 contract 338ms
+   ✓ checksummed v84 native ready unit migrates once and Recovery does not duplicate it 940ms
+   ✓ checksummed v84 preparing and travelling saves migrate without repeating population, escort or reservations 561ms
+ ✓ src/game/presentation/wallDelta.test.tsx (10 tests) 3573ms
+   ✓ desktop age0: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 1048ms
+   ✓ desktop age1: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 527ms
+   ✓ desktop age3: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 517ms
+   ✓ mobile age0: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 313ms
+ ✓ src/game/formal/playerFeedback.test.ts (18 tests) 5796ms
+   ✓ offline 0h caps REAL time then uses Formal speed and scheduler 575ms
+   ✓ offline 1h caps REAL time then uses Formal speed and scheduler 418ms
+   ✓ offline 24h caps REAL time then uses Formal speed and scheduler 542ms
+   ✓ offline load atomically persists the new wall anchor; repeated reload cannot award the same time twice 814ms
+   ✓ offline backup-write failure leaves all stores unchanged and retry advances exactly once 531ms
+   ✓ offline world-write failure leaves all stores unchanged and retry advances exactly once 347ms
+   ✓ offline authority-write failure leaves all stores unchanged and retry advances exactly once 339ms
+   ✓ Recovery catches up from the selected valid checkpoint wall anchor and skips metadata-invalid candidates 308ms
+   ✓ cancelling a new building cancels dependent upgrades, returns its chosen slot and survives save/reload/Recovery 478ms
+ ✓ src/game/formal/wallDelta.test.ts (14 tests) 9173ms
+   ✓ Lv0 to15: independent v85 cost/time, all center accelerators and five speeds; completion alone advances the sole wall authority 7454ms
+   ✓ save/load and native Recovery keep active+queued wall work, final authority and durable dedupe 369ms
+   ✓ R1 automatic Recovery skips metadata-invalid wall completion checkpoint then completes recovered wall exactly once 404ms
+ ✓ src/game/formal/developmentB4.test.ts (60 tests) 9856ms
+   ✓ age 1 uses single-city cost, population/center and fixed 4h without Academy or City requirement 484ms
+   ✓ age 2 uses single-city cost, population/center and fixed 8h without Academy or City requirement 510ms
+   ✓ age fails each start boundary and cannot borrow stock from another owned city 717ms
+   ✓ native funding Recovery preserves command tombstones and project/event high-water after rollback 372ms
+   ✓ recruitment rejects insufficient population/stock/age/producer/housing without spending resources 421ms
+   ✓ settlement start validates age/castle/pop2000 individually, pays30k and transfers400people upfront 420ms
+   ✓ training/settlement prep save, load and native Recovery retain consumed stock/population exactly once 302ms
+
+ Test Files  6 passed (6)
+      Tests  115 passed (115)
+   Start at  04:18:10
+   Duration  10.97s (tests 83%, transform 12%, import 4%, environment 1%)
+
+JSON report written to /workspace/scratch/d827d1cbb5ab/work/lieguo-origins-v0.30.22/docs/b5-v03023/refund-targeted.json
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

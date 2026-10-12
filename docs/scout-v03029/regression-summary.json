@@ -1,0 +1,30 @@
+{
+  "version": "0.30.29",
+  "baseline": "0.30.28",
+  "baseline_commit": "33b1cec2251caa15df1b259e2951e2659b4a3670",
+  "authority": "v90",
+  "runs": [
+    {
+      "evidence": "regression-results.json",
+      "files": 49,
+      "tests": 525,
+      "passed": 525,
+      "failed": 0
+    },
+    {
+      "evidence": "compatibility-regression.json",
+      "files": 7,
+      "tests": 28,
+      "passed": 28,
+      "failed": 0
+    }
+  ],
+  "unique_files": 56,
+  "unique_tests": 553,
+  "passed": 553,
+  "failed": 0,
+  "build": "PASS",
+  "schema_version": 3,
+  "browser_pixel_validation": "not performed; DOM interactions, HTML, CSS hierarchy and canvas paint order verified",
+  "next_stage": "STOP; no B6/B7/B8"
+}

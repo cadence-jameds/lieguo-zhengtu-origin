@@ -1,0 +1,143 @@
+--- a/src/game/formal/battles.ts
++++ b/src/game/formal/battles.ts
+@@ -1,3 +1,4 @@
++import {proportionalResources} from './banditLoot';
+ import {armyId,battleId,reportId,resolutionId,sequenceKey,type EventId,type FactionId} from './ids';
+ import type {FormalCity,FormalEvent,FormalReport,FormalWorld,Resources} from './model';
+ import {resourceKeys,zeroResources} from './model';
+@@ -35,7 +36,7 @@
+ function updateParticipants(w:FormalWorld,c:FormalCity|null,items:BattleParticipant[]){return items.map(p=>p.departedAt!==undefined?p:({...p,after:{...(p.armyId?w.armies.find(a=>a.id===p.armyId)?.units:c?.military?.units??{})}}));}
+ /** Carry allocation conserves each resource and uses only surviving units, in stable ArmyId order. */
+ export function takeLoot(available:Resources,capacity:number){const total=resourceKeys.reduce((n,r)=>n+available[r],0),budget=Math.min(total,Math.max(0,Math.floor(capacity))),out=zeroResources();if(!total)return out;for(const r of resourceKeys)out[r]=Math.floor(available[r]*budget/total);let remainder=budget-resourceKeys.reduce((n,r)=>n+out[r],0);for(const r of resourceKeys){const extra=Math.min(remainder,available[r]-out[r]);out[r]+=extra;remainder-=extra;}return out;}
+-function distributeLoot(w:FormalWorld,armies:MissionArmy[],available:Resources){const result=zeroResources(),remaining={...available};for(const a of [...armies].sort((a,b)=>a.id<b.id?-1:1)){const cargo=takeLoot(remaining,carryCapacity(a.units,w.factions.find(f=>f.id===a.ownerFactionId)));a.cargo=cargo;for(const r of resourceKeys){remaining[r]-=cargo[r];result[r]+=cargo[r];}}return result;}
++function distributeLoot(w:FormalWorld,armies:MissionArmy[],available:Resources,proportional=false){const result=zeroResources(),remaining={...available};for(const a of [...armies].sort((a,b)=>a.id<b.id?-1:1)){const capacity=carryCapacity(a.units,w.factions.find(f=>f.id===a.ownerFactionId)),cargo=proportional?proportionalResources(remaining,Math.min(resourceKeys.reduce((n,r)=>n+remaining[r],0),Math.max(0,Math.floor(capacity)))):takeLoot(remaining,capacity);a.cargo=cargo;for(const r of resourceKeys){remaining[r]-=cargo[r];result[r]+=cargo[r];}}return result;}
+ function applyBaggage(a:MissionArmy,won:boolean){const losses=baggageLoss(a.units,a.initialUnits,won),remaining=Math.max(0,(a.initialUnits.baggage??0)-losses);if(remaining)a.units.baggage=remaining;else delete a.units.baggage;}
+ function basePayload(w:FormalWorld,a:MissionArmy,name:string,c:FormalCity|null):BattleReportPayload{return{battleId:a.battleId,resolutionId:rid(a.battleId,'final'),mission:a.mission==='scout'?'scout':a.mission==='conquest'?'conquest':'raid',target:{...a.target},targetName:name,startedAt:w.time,resolvedAt:w.time,rounds:0,outcome:'no-target',attackers:[participant(a.initialUnits,a.ownerFactionId,a.originCityId,a.id)],defenders:[],loot:zeroResources(),wallBefore:c?.wallLevel??0,wallAfter:c?.wallLevel??0,siege:[],ownerBefore:c?.ownerFactionId??null,ownerAfter:c?.ownerFactionId??null,populationBefore:c?.population??0,populationAfter:c?.population??0,returnedTrainingPopulation:0};}
+ function singleRaid(w:FormalWorld,a:MissionArmy,c:FormalCity,e:FormalEvent,s:EventScheduler){
+@@ -49,7 +50,7 @@
+  const target=a.target;if(target.kind!=='wild')throw new Error('Wild target mismatch');const site=spatial(w).sites.get(target.siteId);if(!site||site.generation!==target.generation){const p=basePayload(w,a,'野外據點',null);finishReceipt(w,p,e.id);returnArmy(w,a,s);return battleReport(w,p);}
+  settleFaction(w,a.ownerFactionId);let attackers=poolsFor(w,a.units,a.ownerFactionId,a.originCityId,a),defenders=poolsFor(w,site.defenders??{},null,null,null),rounds=0;const p=basePayload(w,a,`${site.resource==='bandit'?'盜賊營地':'資源據點'} Lv${site.level}`,null);p.defenders=[participant(site.defenders??{},null,null,null)];
+  while(effectiveCount(attackers)>0&&effectiveCount(defenders)>0){const result=exchange(attackers,defenders,w.factions);attackers=result.attacking;defenders=result.defending;rounds++;}
+- writePools(w,null,attackers);site.defenders=Object.fromEntries(defenders.filter(p=>p.count).map(p=>[p.unitId,p.count]));const won=effectiveCount(attackers)>0&&effectiveCount(defenders)===0;applyBaggage(a,won);p.rounds=rounds;p.outcome=won?'wild-cleared':'wild-held';if(won){p.loot=distributeLoot(w,[a],site.loot??zeroResources());clearWild(w,site,s);}p.attackers=updateParticipants(w,null,p.attackers);p.defenders[0].after={...site.defenders};finishReceipt(w,p,e.id);returnArmy(w,a,s);return battleReport(w,p);
++ writePools(w,null,attackers);site.defenders=Object.fromEntries(defenders.filter(p=>p.count).map(p=>[p.unitId,p.count]));const won=effectiveCount(attackers)>0&&effectiveCount(defenders)===0;applyBaggage(a,won);p.rounds=rounds;p.outcome=won?'wild-cleared':'wild-held';if(won){p.loot=distributeLoot(w,[a],site.loot??zeroResources(),site.resource==='bandit');clearWild(w,site,s);}p.attackers=updateParticipants(w,null,p.attackers);p.defenders[0].after={...site.defenders};finishReceipt(w,p,e.id);returnArmy(w,a,s);return battleReport(w,p);
+ }
+ function scoutBattle(w:FormalWorld,a:MissionArmy,c:FormalCity,e:FormalEvent,s:EventScheduler){
+  settleFaction(w,a.ownerFactionId);settleCity(w,c);const groups=defensiveGroups(w,c),count=a.units.scout??0,defenderCount=groups.reduce((n,g)=>n+(g.units.scout??0),0),attack=count*10,defense=defenderCount*12,success=attack>defense,observedUnits=groups.reduce<Record<string,number>>((out,g)=>{for(const [id,n] of Object.entries(g.units))out[id]=(out[id]??0)+n;return out;},{}),p=basePayload(w,a,c.name,c);p.defenders=groups.map(g=>participant(g.units,g.owner,g.source,g.army?.id??null));p.rounds=1;
+--- a/src/game/formal/combatB5.test.ts
++++ b/src/game/formal/combatB5.test.ts
+@@ -66,7 +66,7 @@
+  it('building/field power uses completed owner engineering, wall uses imperial durability, and storage bookings resize atomically',()=>{const w=battlefield(),c=w.cities[1];c.wallLevel=1;w.factions[1].civilizationId='civ_byzantium';w.factions[1].techIds=['civilization.imperial-wall'];const s=new EventScheduler(w.events),p=makePools({militia:1,ram:1},w.playerFactionId,w.cities[0].id,null,w.factions[0]);const before={...c.stock};resolveSiege(w,c,p,w.armies[0]?.battleId??('battle:0000000000000001' as never));expect(c.wallLevel).toBe(0);expect(c.stock).toEqual(before);expect(WALL_DURABILITY.reduce((n,x)=>n+x,0)).toBe(1420);const old=structuredClone(c.buildings);const result=resolveSiege(w,c,makePools({catapult:1},w.playerFactionId,w.cities[0].id,null,w.factions[0]),('battle:0000000000000002' as never));expect(result.lost).toBeGreaterThanOrEqual(0);expect(c.buildings.center).toBeGreaterThanOrEqual(1);expect(s.size).toBe(w.events.length);expect(old).toBeDefined();});
+  it('conquest loss excludes wall, applies 5%-80%, and fractional carry allocation conserves resources',()=>{expect(conquestLossRate(0,100)).toBe(.05);expect(conquestLossRate(20,100)).toBe(.2);expect(conquestLossRate(40,100)).toBeCloseTo(.35);expect(conquestLossRate(100,100)).toBe(.8);expect(takeLoot({food:9,wood:7,stone:5,gold:3},12)).toEqual({food:6,wood:3,stone:2,gold:1});});
+  it('fixed 432 slots deactivate their index, keep durable cooldown and respawn deterministically off city/reservation cells',async()=>{const w=make(),site=w.worldLayer!.wildSites[0],s=new EventScheduler(w.events),old={x:site.x,y:site.y};clearWild(w,site,s);w.events=s.snapshot();expect(w.worldLayer!.wildSites).toHaveLength(432);expect(spatial(w).at(old.x,old.y).site).toBeUndefined();const loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded.worldLayer!.wildSites[0]).toEqual(site);const t=advanceFormal(w,site.respawnAt!);expect(t.world.worldLayer!.wildSites).toHaveLength(432);const spawned=t.world.worldLayer!.wildSites[0];expect(spawned.phase).toBe('active');expect(spawned.generation).toBe(1);expect(spawned.respawnEventId).toBeUndefined();expect(spatial(t.world).at(spawned.x,spawned.y).site?.id).toBe(site.id);expect(advanceFormal(loaded,site.respawnAt!).world).toEqual(t.world);evidence.lifecycle={old,spawned};});
+- it('wild defenders obey budgets, legal identities, 55% cap, type minimums, stable loot and day anchors across 500 variants',()=>{const w=make(),site=w.worldLayer!.wildSites[0],matrix=[];for(let level=1;level<=10;level++)for(let generation=0;generation<50;generation++){site.level=level;site.generation=generation;site.resource=generation%2?'bandit':'gold';populateWild(w,site);const budget=site.budget!,points=Object.entries(site.defenders!).reduce((n,[id,count])=>n+count*WILD_POINTS[id],0),base=WILD_BUDGET[level-1]*(site.resource==='bandit'?1.2:1);expect(budget/base).toBeGreaterThanOrEqual(.95);expect(budget/base).toBeLessThanOrEqual(1.05);expect(points/budget).toBeGreaterThanOrEqual(.95);expect(points/budget).toBeLessThanOrEqual(1.05);for(const [id,count] of Object.entries(site.defenders!))expect(count*WILD_POINTS[id]/budget).toBeLessThanOrEqual(.550000001);expect(Object.keys(site.defenders!).length).toBeGreaterThanOrEqual(level>=7?4:level>=3?3:2);expect(site.loot!.gold+site.loot!.food+site.loot!.wood+site.loot!.stone).toBe(Math.round(WILD_LOOT[level-1]*(site.resource==='bandit'?1.2:1)));const copy=structuredClone(site);populateWild(w,site);expect(site).toEqual(copy);matrix.push({level,generation,budget,points,units:site.defenders,style:site.style,loot:site.loot});}expect(wildLevelWeights(0)).toEqual([40,30,18,8,4,0,0,0,0,0]);expect(wildLevelWeights(20*86400000)).toEqual([5,6,7,8,10,12,16,14,12,10]);expect(wildLevelWeights(29*86400000)).toEqual(wildLevelWeights(20*86400000));evidence.wildMatrix=matrix;});
++ it('wild defenders obey budgets, legal identities, 55% cap, type minimums, stable loot and day anchors across 500 variants',()=>{const w=make(),site=w.worldLayer!.wildSites[0],matrix=[];for(let level=1;level<=10;level++)for(let generation=0;generation<50;generation++){site.level=level;site.generation=generation;site.resource=generation%2?'bandit':'gold';populateWild(w,site);const budget=site.budget!,points=Object.entries(site.defenders!).reduce((n,[id,count])=>n+count*WILD_POINTS[id],0),base=WILD_BUDGET[level-1]*(site.resource==='bandit'?1.2:1);expect(budget/base).toBeGreaterThanOrEqual(.95);expect(budget/base).toBeLessThanOrEqual(1.05);expect(points/budget).toBeGreaterThanOrEqual(.95);expect(points/budget).toBeLessThanOrEqual(1.05);for(const [id,count] of Object.entries(site.defenders!))expect(count*WILD_POINTS[id]/budget).toBeLessThanOrEqual(.550000001);expect(Object.keys(site.defenders!).length).toBeGreaterThanOrEqual(level>=7?4:level>=3?3:2);expect(site.loot!.gold+site.loot!.food+site.loot!.wood+site.loot!.stone).toBe(Math.round(WILD_LOOT[level-1]*(site.resource==='bandit'?1.5:1)));const copy=structuredClone(site);populateWild(w,site);expect(site).toEqual(copy);matrix.push({level,generation,budget,points,units:site.defenders,style:site.style,loot:site.loot});}expect(wildLevelWeights(0)).toEqual([40,30,18,8,4,0,0,0,0,0]);expect(wildLevelWeights(20*86400000)).toEqual([5,6,7,8,10,12,16,14,12,10]);expect(wildLevelWeights(29*86400000)).toEqual(wildLevelWeights(20*86400000));evidence.wildMatrix=matrix;});
+  it('wild victory removes unused loot, duplicate arrival cannot pay again, and late arrival binds generation',()=>{let w=make();rich(w);w.cities[0].military!.units={knight:500};const site=w.worldLayer!.wildSites[0];const command=order(w,{type:'army.dispatch',cityId:w.cities[0].id,mission:'raid',target:{kind:'wild',siteId:site.id,generation:site.generation},units:{knight:500}});w=submitFormalOrder(w,command).world;const army=w.armies[0],event=w.events.find(e=>e.id===army.movementEventId)!;const t=advanceFormal(w,army.arrivalAt!);w=t.world;expect(w.worldLayer!.wildSites[0].phase).toBe('cooldown');expect(w.worldLayer!.wildSites[0].loot).toEqual({food:0,wood:0,stone:0,gold:0});expect(t.reports[0].battle!.outcome).toBe('wild-cleared');const before=structuredClone(w);handleCombatEvent(w,event,new EventScheduler(w.events));expect(w).toEqual(before);expect(submitFormalOrder(w,command).ack?.status).toBe('duplicate');evidence.wild=t.reports;});
+  it('stores no unrelated AI-vs-AI full report; durable receipts and aggregate counters remain',()=>{let w=battlefield();w.cities[1].military!.units={militia:50};w=dispatch(w,'raid',{militia:50},1,2).world;const t=arrive(w);expect(t.reports).toEqual([]);expect(t.world.combat!.statistics).toMatchObject({resolved:1,raids:1});expect(t.world.combat!.receipts).toHaveLength(1);});
+  it('strict save schema rejects malformed HP, army composition, orphan rounds and missing B5 state',()=>{let w=battlefield();w.cities[0].military!.units={militia:100};w.cities[1].military!.units={militia:100};w=arrive(dispatch(w,'conquest',{militia:100}).world).world;for(const change of [(x:FormalWorld)=>delete x.combat,(x:FormalWorld)=>{x.combat!.battles[0].attackers[0].hp=999999;},(x:FormalWorld)=>{x.armies[0].units={unknown:1};},(x:FormalWorld)=>{x.events=x.events.filter(e=>e.type!=='combat.round');}]){const c=structuredClone(w);change(c);expect(()=>validateFormalWorld(c)).toThrow();}const snapshot=JSON.stringify(w);const b=w.combat!.battles[0],receipt=w.combat!.receipts[0];const duplicate={...b,round:receipt.round-1};expect(resolveCombatRound(w,duplicate,{type:'combat.round',battleId:b.id,id:receipt.eventId,at:receipt.at},new EventScheduler(w.events))).toEqual([]);expect(JSON.stringify(w)).toBe(snapshot);});
+--- a/src/game/formal/wildLifecycle.ts
++++ b/src/game/formal/wildLifecycle.ts
+@@ -1,3 +1,4 @@
++import {banditShares,proportionalResources} from './banditLoot';
+ import type {FormalWorld,WildSite} from './model';
+ import {zeroResources} from './model';
+ import {buildable,seedHash,terrainAt} from './terrain';
+@@ -25,8 +26,8 @@
+   choices.sort((a,b)=>{const score=(id:string)=>(shares[allowed.indexOf(id)]/sum*s.budget!-units[id]*WILD_POINTS[id])/WILD_POINTS[id];return score(b)-score(a)||(a<b?-1:1);});
+   const id=choices[0];if(points>=s.budget!&&points+WILD_POINTS[id]>s.budget!*1.025)break;units[id]++;points+=WILD_POINTS[id];
+  }
+- s.defenders=units;s.initialDefenders={...units};s.loot=zeroResources();const loot=Math.round(WILD_LOOT[s.level-1]*(s.resource==='bandit'?1.2:1));
+- if(s.resource==='bandit'){const food=Math.floor(loot*.4),wood=Math.floor(loot*.3),stone=Math.floor(loot*.2);s.loot={food,wood,stone,gold:loot-food-wood-stone};}else s.loot[s.resource]=loot;
++ s.defenders=units;s.initialDefenders={...units};s.loot=zeroResources();const loot=Math.round(WILD_LOOT[s.level-1]*(s.resource==='bandit'?1.5:1));
++ if(s.resource==='bandit')s.loot=proportionalResources(banditShares(w.seed,s.spawnSlot,s.generation),loot,.15,.35);else s.loot[s.resource]=loot;
+  s.phase='active';delete s.respawnAt;delete s.respawnEventId;
+ }
+ export function clearWild(w:FormalWorld,site:WildSite,s:EventScheduler){site.phase='cooldown';site.defenders={};site.loot=zeroResources();site.respawnAt=w.time+WILD_COOLDOWN[site.level-1]*60000;site.respawnEventId=enqueue(w,s,{type:'wild.respawn',siteId:site.id,generation:site.generation,at:site.respawnAt});invalidateSpatial(w);}
+--- /dev/null
++++ b/src/game/formal/banditLoot.ts
+@@ -0,0 +1,32 @@
++import {resourceKeys,zeroResources,type Resources} from './model';
++import {seedHash} from './terrain';
++
++/** Generation identity only: no wall clock or mutable RNG state. */
++export function banditShares(seed:number,slot:number,generation:number){
++ const shares:number[]=[];let remaining=100;
++ for(let i=0;i<3;i++){
++  const left=3-i,low=Math.max(15,remaining-35*left),high=Math.min(35,remaining-15*left);
++  const share=low+seedHash(seed,slot,generation,700+i)%(high-low+1);
++  shares.push(share);remaining-=share;
++ }
++ shares.push(remaining);
++ // Shuffle so the sequential feasible ranges do not privilege a resource.
++ for(let i=3;i>0;i--){const j=seedHash(seed,slot,generation,710+i)%(i+1);[shares[i],shares[j]]=[shares[j],shares[i]];}
++ return Object.fromEntries(resourceKeys.map((r,i)=>[r,shares[i]])) as Resources;
++}
++
++/** Largest remainders, with resource order as the deterministic tie-break. */
++export function proportionalResources(weights:Resources,total:number,minShare=0,maxShare=1){
++ const sum=resourceKeys.reduce((n,r)=>n+weights[r],0),out=zeroResources();
++ if(!sum||total<=0)return out;
++ const target=Math.floor(total),lower=Math.ceil(target*minShare),upper=Math.floor(target*maxShare),rank=resourceKeys.map((r,i)=>{const exact=weights[r]*target/sum;out[r]=Math.max(lower,Math.min(upper,Math.floor(exact)));return {r,i,exact};});
++ let remainder=target-resourceKeys.reduce((n,r)=>n+out[r],0);
++ 
++ while(remainder!==0){
++ const candidates=[...rank].sort((a,b)=>remainder>0?(b.exact-out[b.r])-(a.exact-out[a.r])||a.i-b.i:(a.exact-out[a.r])-(b.exact-out[b.r])||a.i-b.i);
++ const item=candidates.find(({r})=>remainder>0?out[r]<upper:out[r]>lower);
++ if(!item)throw new Error('Infeasible integer resource bounds');
++ const step=remainder>0?1:-1;out[item.r]+=step;remainder-=step;
++}
++ return out;
++}
+--- /dev/null
++++ b/src/game/formal/banditLoot.test.ts
+@@ -0,0 +1,51 @@
++import {seedHash} from './terrain';
++import {describe,it,expect} from 'vitest';
++import {writeFileSync,mkdirSync} from 'node:fs';
++import {banditShares,proportionalResources} from './banditLoot';
++import {populateWild,WILD_LOOT,WILD_BUDGET} from './wildLifecycle';
++import {resourceKeys} from './model';
++import {battlefield,arrive} from './combatTestSupport';
++import {order} from './developmentTestSupport';
++import {submitFormalOrder,advanceFormal} from './reducer';
++import {encodeSave,decodeSave} from './saveCodec';
++import {carryCapacity} from './combatModifiers';
++import {handleCombatEvent} from './battles';
++import {EventScheduler} from './scheduler';
++const total=(r:Record<string,number>)=>Object.values(r).reduce((a,b)=>a+b,0);
++describe('v87 bandit loot delta',()=>{
++ it('sweeps seeds/slots/generations/Lv1–10 with bounded four-resource exact totals and unchanged defender budgets',()=>{
++  const w=battlefield(),s=w.worldLayer!.wildSites[0],rows=[];
++  for(const seed of [0,1,20261008,4294967295])for(const slot of [0,1,217,431])for(let gen=0;gen<25;gen++)for(let level=1;level<=10;level++){
++   w.seed=seed;s.spawnSlot=slot;s.generation=gen;s.level=level;s.resource='bandit';populateWild(w,s);
++   const shares=banditShares(seed,slot,gen);expect(total(shares)).toBe(100);
++   const pool=WILD_LOOT[level-1]*1.5;expect(total(s.loot!)).toBe(pool);
++   for(const r of resourceKeys){expect(shares[r]).toBeGreaterThanOrEqual(15);expect(shares[r]).toBeLessThanOrEqual(35);expect(s.loot![r]).toBeGreaterThan(0);expect(Number.isInteger(s.loot![r])).toBe(true);expect(s.loot![r]/pool).toBeGreaterThanOrEqual(.15);expect(s.loot![r]/pool).toBeLessThanOrEqual(.35);}
++   expect(s.budget).toBe(level===1?74:Math.round(WILD_BUDGET[level-1]*1.2*(.95+seedHash(seed,slot,gen,101)/4294967296*.1)));
++   const copy=structuredClone(s);populateWild(w,s);expect(s).toEqual(copy);
++   if(level===1)rows.push({seed,slot,gen,shares,loot:s.loot,budget:s.budget,defenders:s.defenders});
++  }
++  expect(new Set(rows.map(r=>JSON.stringify(r.shares))).size).toBeGreaterThan(100);
++  const dir=process.env.BANDIT_EVIDENCE;if(dir){mkdirSync(dir,{recursive:true});writeFileSync(dir+'/seed-slot-generation-matrix.json',JSON.stringify(rows,null,2));}
++ });
++ it('ordinary pools and 30/25/20/10/15 spawn thresholds remain unchanged for all 432 slots',()=>{
++  const w=battlefield();expect(w.worldLayer!.wildSites).toHaveLength(432);
++  for(const site of w.worldLayer!.wildSites){const h=seedHash(w.seed,site.spawnSlot,0,90)%100;expect(site.resource).toBe(h<30?'food':h<55?'wood':h<75?'stone':h<85?'gold':'bandit');}
++  const site=w.worldLayer!.wildSites[0];for(const r of resourceKeys)for(let level=1;level<=10;level++){site.resource=r;site.level=level;populateWild(w,site);expect(site.loot![r]).toBe(WILD_LOOT[level-1]);expect(total(site.loot!)).toBe(WILD_LOOT[level-1]);}
++ });
++ it('integer allocation conserves awkward totals/capacities and stays within one resource of ideal proportions',()=>{
++  const weights={food:157,wood:263,stone:319,gold:261};
++  for(const capacity of [0,1,2,3,7,37,999,1000]){const out=proportionalResources(weights,capacity);expect(total(out)).toBe(capacity);for(const r of resourceKeys)expect(Math.abs(out[r]-weights[r]*capacity/1000)).toBeLessThan(1);}
++ });
++ it('save/load preserves active generation stock; a limited raid uses actual ratios, clears once and cannot pay twice',async()=>{
++  let w=battlefield();const site=w.worldLayer!.wildSites[0];site.resource='bandit';site.level=1;populateWild(w,site);
++  const stock={...site.loot!};w=(await decodeSave(await encodeSave(w))).world;expect(w.worldLayer!.wildSites[0].loot).toEqual(stock);
++  w.worldLayer!.wildSites[0].defenders={};w.cities[0].military!.units={militia:1};
++  w=submitFormalOrder(w,order(w,{type:'army.dispatch',cityId:w.cities[0].id,mission:'raid',target:{kind:'wild',siteId:site.id,generation:site.generation},units:{militia:1}})).world;
++  const event=w.events.find(e=>e.id===w.armies[0].movementEventId)!,capacity=carryCapacity(w.armies[0].units!,w.factions[0]);const t=arrive(w);
++  expect(t.reports[0].battle!.loot).toEqual(proportionalResources(stock,capacity));expect(total(t.reports[0].battle!.loot)).toBe(capacity);
++  w=t.world;const before=structuredClone(w);handleCombatEvent(w,event,new EventScheduler(w.events));expect(w).toEqual(before);
++  expect(w.worldLayer!.wildSites).toHaveLength(432);expect(w.worldLayer!.wildSites[0].phase).toBe('cooldown');
++  const restored=(await decodeSave(await encodeSave(w))).world;expect(restored.worldLayer!.wildSites[0]).toEqual(w.worldLayer!.wildSites[0]);
++  const respawn=advanceFormal(restored,restored.worldLayer!.wildSites[0].respawnAt!).world;expect(respawn.worldLayer!.wildSites[0].generation).toBe(site.generation+1);expect(respawn.worldLayer!.wildSites).toHaveLength(432);
++ });
++});

@@ -1,0 +1,15 @@
+.formal-shell .b5-lab-dialog,.b5-lab-dialog{width:min(1100px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+.b5-lab{border:2px solid var(--gold,#d5b878);padding:12px;min-width:0}
+.b5-lab .b5-lab-isolation{color:var(--gold,#d5b878);font-weight:700}
+.b5-lab-actions,.b5-lab-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.b5-lab-config,.b5-lab-unit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}
+.b5-lab-config label,.b5-lab-unit-grid label{display:flex;flex-direction:column;gap:4px;min-width:0}
+.b5-lab-config input,.b5-lab-config select,.b5-lab-unit-grid input{width:100%;min-width:0;font:inherit}
+.b5-lab-units{margin:12px 0}.b5-lab-units summary{cursor:pointer;font-weight:700}
+.b5-lab form>small,.b5-lab .card>small{display:block;margin:8px 0;color:var(--muted,#b4bea9)}
+.b5-lab pre{overflow:auto;max-height:240px;white-space:pre-wrap;overflow-wrap:anywhere}
+.b5-lab .b5-lab-map{height:65dvh;min-height:360px;position:relative;min-width:0}
+/* Canvas layers are absolute: provide their actual viewport independently of the main shell. */
+.b5-lab.formal-shell .b5-lab-map>.world-map{height:100%;width:100%;min-height:0;flex:none}
+.b5-lab .reports-view{height:auto;overflow:visible}.b5-lab p{overflow-wrap:anywhere}
+@media(max-width:760px){.b5-lab-dialog{width:calc(100vw - 12px);max-height:calc(100dvh - 12px)}.b5-lab{padding:8px}.b5-lab-config,.b5-lab-unit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.b5-lab-actions button{flex:1 1 140px}}

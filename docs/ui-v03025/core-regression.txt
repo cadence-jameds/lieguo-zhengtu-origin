@@ -1,0 +1,190 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.0 /workspace/sites/lieguo-origins
+
+stdout | src/game/developer/specAudit.test.ts > independent v85 reference includes all catalogs and catches a changed expected value
+DATA DIFFERENCES []
+
+ ✓ src/game/formal/combatPersistenceB5.test.ts (11 tests) 6444ms
+   ✓ B5 report-write fault rolls back units, casualties, owner, battle receipts and report table; retry commits once 928ms
+   ✓ B5 backup-write fault rolls back units, casualties, owner, battle receipts and report table; retry commits once 660ms
+   ✓ B5 world-write fault rolls back units, casualties, owner, battle receipts and report table; retry commits once 671ms
+   ✓ B5 authority-write fault rolls back units, casualties, owner, battle receipts and report table; retry commits once 697ms
+   ✓ full/quick exports preserve battle state and separate reports; corruption is rejected before migration or database writes 852ms
+   ✓ manual Recovery truncates future full reports, preserves parent high-water and replays the same battle once in the restored branch 669ms
+   ✓ R1 fallback restores valid pre-resolution world and drops future battle report atomically 636ms
+   ✓ 50X online event stepping equals offline scheduler advancement without extra owner/loss/report resolution 930ms
+ ✓ src/game/formal/playerFeedback.test.ts (18 tests) 6477ms
+   ✓ offline load atomically persists the new wall anchor; repeated reload cannot award the same time twice 571ms
+   ✓ offline backup-write failure leaves all stores unchanged and retry advances exactly once 591ms
+   ✓ offline world-write failure leaves all stores unchanged and retry advances exactly once 598ms
+   ✓ offline authority-write failure leaves all stores unchanged and retry advances exactly once 536ms
+   ✓ Recovery catches up from the selected valid checkpoint wall anchor and skips metadata-invalid candidates 602ms
+   ✓ cancelling a new building cancels dependent upgrades, returns its chosen slot and survives save/reload/Recovery 803ms
+ ✓ src/game/formal/economyB3.test.ts (23 tests) 4177ms
+   ✓ in-transit cargo is conserved across codec and native Recovery; B1 project shipment adapter keeps dispatch snapshot 494ms
+   ✓ offline slices preserve resources, fractional population, integration and construction event results 418ms
+ ✓ src/game/formal/developmentB4.test.ts (60 tests) 12190ms
+   ✓ age 1 uses single-city cost, population/center and fixed 4h without Academy or City requirement 315ms
+   ✓ age fails each start boundary and cannot borrow stock from another owned city 358ms
+   ✓ native funding Recovery preserves command tombstones and project/event high-water after rollback 592ms
+   ✓ recruitment rejects insufficient population/stock/age/producer/housing without spending resources 556ms
+   ✓ settlement start validates age/castle/pop2000 individually, pays30k and transfers400people upfront 624ms
+   ✓ settlement cancellation returns400people and80%costs only while preparing 321ms
+   ✓ settlement reservation survives save/load; escort transfers permanently, newcity400 and initialcities200 remain distinct 370ms
+   ✓ settlement Recovery drops rolled-back reservations and preserves deployment tombstone 555ms
+   ✓ offline event slices agree on research/age/recruitment/settlement economy outcomes and codec 416ms
+   ✓ training/settlement prep save, load and native Recovery retain consumed stock/population exactly once 644ms
+ ✓ src/game/formal/combatB5.test.ts (32 tests) 6043ms
+   ✓ B5 army, raid, scout and conquest scheduler (18)
+     ✓ 10X tactical cap and durable path position 313ms
+     ✓ conquest does not retreat, mutual destruction cannot transfer city and event replay is a no-op 300ms
+     ✓ recalled reinforcement leaves durable HP pools before returning and keeps its departed report snapshot 454ms
+   ✓ B5 siege and wild lifecycle invariants (8)
+     ✓ wild defenders obey budgets, legal identities, 55% cap, type minimums, stable loot and day anchors across 500 variants 329ms
+ ✓ src/game/developer/developer.test.ts (4 tests) 14646ms
+   ✓ all presets/six civilizations use valid native v85 worlds and keep full entity counts 4283ms
+   ✓ browser-available diagnostic cases actually execute and none is a hardcoded PASS 9263ms
+   ✓ developer commands/advance/reload/Recovery stay in a separate store and leave normal authority untouched 878ms
+ ✓ src/game/formal/wallDelta.test.ts (14 tests) 15433ms
+   ✓ Lv0 to15: independent v85 cost/time, all center accelerators and five speeds; completion alone advances the sole wall authority 12183ms
+   ✓ save/load and native Recovery keep active+queued wall work, final authority and durable dedupe 725ms
+   ✓ R1 automatic Recovery skips metadata-invalid wall completion checkpoint then completes recovered wall exactly once 777ms
+   ✓ atomic wall completion rollback and retry at backup-write 305ms
+   ✓ atomic wall completion rollback and retry at world-write 382ms
+   ✓ atomic wall completion rollback and retry at authority-write 342ms
+ ✓ src/game/formal/worldB2.test.ts (15 tests) 2950ms
+   ✓ same inputs reproduce geometry; campaign identity changes no geometry; changed seed changes geometry 664ms
+   ✓ native IndexedDB Recovery skips valid-envelope mismatched row and restores old world geometry 486ms
+ ✓ src/game/presentation/liveInteraction.test.tsx (16 tests) 3716ms
+   ✓ 1X countdown/HUD ticks leave the parent, typed input, focus and scroll intact 318ms
+   ✓ an open recruitment dialog preserves quantity, focus and dialog/outer scroll across an actual training completion 818ms
+ ✓ src/game/presentation/wallDelta.test.tsx (10 tests) 3513ms
+   ✓ desktop age0: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 601ms
+   ✓ desktop age3: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 344ms
+   ✓ mobile age0: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 355ms
+   ✓ mobile age1: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 311ms
+   ✓ mobile age3: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion 369ms
+   ✓ desktop: formal prerequisite, maximum15 and inherited queue refund notice stay visible 392ms
+   ✓ mobile: formal prerequisite, maximum15 and inherited queue refund notice stay visible 326ms
+ ✓ src/game/formal/runtimeB4.test.ts (8 tests) 2720ms
+   ✓ native D1 funding is exposed only after durable transaction resolves 385ms
+   ✓ failed native recruitment commit preserves population/resources and a retry is safe 352ms
+   ✓ new campaign uses native generator and D7 for all100 factions before switched acknowledgement 325ms
+   ✓ restarting native Worker uses durable D1 creation receipt and replay never occupies second queue 356ms
+   ✓ wall construction and scheduled completion become visible only after each durable Worker commit 438ms
+   ✓ wall Worker save failure rolls back payment and retry plus restart cannot reserve or pay twice 393ms
+ ✓ src/game/formal/combatWorkerB5.test.ts (3 tests) 1258ms
+   ✓ B5 dispatch and conquest remain unpublished until persistence resolves, then patches carry armies, receipts, owner and reports 483ms
+   ✓ failed conquest commit keeps previous owner/world and a later retry produces exactly one final resolution 411ms
+   ✓ target intel is a read-only Worker lookup bounded to the requested campaign/cursor; failures do not stop the world 364ms
+stdout | src/game/developer/specAudit.test.ts > every supported item has a native-world positive fixture and every declared counterexample executes against the real reducer
+TRIAL FAILURES []
+
+ ✓ src/game/formal/colonizationV85.test.ts (6 tests) 2069ms
+   ✓ castle produces one separate civilian unit; launch consumes availability; founding consumes entity and transfers guards 486ms
+   ✓ checksummed v84 native ready unit migrates once and Recovery does not duplicate it 522ms
+   ✓ checksummed v84 preparing and travelling saves migrate without repeating population, escort or reservations 478ms
+ ✓ src/game/presentation/playablePersistence.test.ts (2 tests) 2019ms
+   ✓ Playable native new game: durable field/building commands, export, reload and Recovery 1032ms
+   ✓ Advanced inspection save validates and B4 commands persist through native storage 986ms
+ ✓ src/game/presentation/mapViewRules.test.ts (5 tests) 2053ms
+   ✓ first-frame overview covers DEMO 50-cell surroundings and contains real Formal rivers and mountains 2043ms
+ ✓ src/game/formal/wildScout.test.ts (3 tests) 1357ms
+   ✓ wild scouts observe resources/army without consuming loot, damaging defenders or changing 432 slots; delivery and generation lookup persist 983ms
+ ✓ src/game/formal/refundV86.test.ts (7 tests) 1084ms
+   ✓ v86 refund survives save/load and Recovery without repeated refunds 597ms
+ ✓ src/game/formal/cultureNames.test.ts (2 tests) 869ms
+   ✓ new campaigns have unique cultural lord and city names while preserving seed geometry 768ms
+stderr | src/game/formal/persistence.test.ts > formal save/load and durable dedupe survive a database/worker restart
+Another connection wants to delete database 'lieguo-formal-stage2-schema1-test-1'. Closing db now to resume the delete request.
+
+ ✓ src/game/formal/targetIntel.test.ts (1 test) 921ms
+   ✓ target intel spans older report pages, separates observation modes, survives reconnect, and respects save cursor 920ms
+ ✓ src/game/presentation/combatB5.test.tsx (7 tests) 1246ms
+   ✓ desktop: existing dialog dispatches actual Formal order, then raid result renders without HP/formula/ID leakage 372ms
+ ✓ src/game/formal/runtime.test.ts (55 tests) 20063ms
+   ✓ 1X construction completes at its real deadline, not the old ten-second tick 480ms
+   ✓ 3X construction completes at its real deadline, not the old ten-second tick 438ms
+   ✓ 6X construction completes at its real deadline, not the old ten-second tick 417ms
+   ✓ 10X construction completes at its real deadline, not the old ten-second tick 358ms
+   ✓ 50X construction completes at its real deadline, not the old ten-second tick 325ms
+   ✓ 1X a new construction starts at actual admission time and saves a single revision 309ms
+   ✓ 1X a clock checkpoint crossed by a click retries once with the same logical command and strict current revision 314ms
+   ✓ 1X training uses the real deadline and agrees with offline completion 426ms
+   ✓ 1X research uses the real deadline and agrees with offline completion 390ms
+   ✓ 1X settlement uses the real deadline and agrees with offline completion 439ms
+   ✓ 1X logistics uses the real deadline and agrees with offline completion 438ms
+   ✓ 3X a new construction starts at actual admission time and saves a single revision 304ms
+   ✓ 3X a clock checkpoint crossed by a click retries once with the same logical command and strict current revision 314ms
+   ✓ 3X training uses the real deadline and agrees with offline completion 421ms
+   ✓ 3X research uses the real deadline and agrees with offline completion 407ms
+   ✓ 3X settlement uses the real deadline and agrees with offline completion 461ms
+   ✓ 3X logistics uses the real deadline and agrees with offline completion 491ms
+   ✓ 6X a new construction starts at actual admission time and saves a single revision 330ms
+   ✓ 6X a clock checkpoint crossed by a click retries once with the same logical command and strict current revision 329ms
+   ✓ 6X training uses the real deadline and agrees with offline completion 414ms
+   ✓ 6X research uses the real deadline and agrees with offline completion 369ms
+   ✓ 6X settlement uses the real deadline and agrees with offline completion 443ms
+   ✓ 6X logistics uses the real deadline and agrees with offline completion 408ms
+   ✓ 10X a clock checkpoint crossed by a click retries once with the same logical command and strict current revision 315ms
+   ✓ 10X training uses the real deadline and agrees with offline completion 434ms
+   ✓ 10X research uses the real deadline and agrees with offline completion 411ms
+   ✓ 10X settlement uses the real deadline and agrees with offline completion 423ms
+   ✓ 10X logistics uses the real deadline and agrees with offline completion 417ms
+   ✓ 50X a clock checkpoint crossed by a click retries once with the same logical command and strict current revision 314ms
+   ✓ 50X training uses the real deadline and agrees with offline completion 410ms
+   ✓ 50X research uses the real deadline and agrees with offline completion 410ms
+   ✓ 50X settlement uses the real deadline and agrees with offline completion 406ms
+   ✓ 50X logistics uses the real deadline and agrees with offline completion 361ms
+   ✓ a due event crossed by an original click commits first and must not auto-retry a changed intention 305ms
+   ✓ a late event remains unexposed on failed persistence, retries after one second, and never overlaps 359ms
+   ✓ 1X command admission uses real IndexedDB authority and restores the same durable state 743ms
+   ✓ 3X command admission uses real IndexedDB authority and restores the same durable state 702ms
+   ✓ 6X command admission uses real IndexedDB authority and restores the same durable state 651ms
+   ✓ 10X command admission uses real IndexedDB authority and restores the same durable state 647ms
+   ✓ 50X command admission uses real IndexedDB authority and restores the same durable state 632ms
+   ✓ the active presentation stream sends committed patches and can recover a full snapshot 399ms
+ ✓ src/game/formal/persistence.test.ts (26 tests) 663ms
+ ✓ src/game/presentation/mapRaster.test.ts (1 test) 486ms
+   ✓ pixel worker accepts a terrain-only view and returns generation-tagged transferable pixels 485ms
+ ✓ src/game/presentation/artIntegration.test.tsx (11 tests) 612ms
+ ✓ src/game/interaction.test.ts (10 tests) 394ms
+   ✓ own moving armies invalidate entity imagery while stationary battles and hidden enemy marches preserve its cache 370ms
+ ✓ src/game/formal/recoveryR1.test.ts (12 tests) 455ms
+ ✓ src/game/presentation/constructionMenuFix.test.tsx (3 tests) 516ms
+ ✓ src/game/formal/metrics.test.ts (1 test) 511ms
+   ✓ records reproducible core workload measurements without enforcing device-specific timing limits 510ms
+ ✓ src/game/developer/SpecAuditPanel.test.tsx (1 test) 598ms
+   ✓ player picks a v85 negative prerequisite case and can only record a positive result after a real command and completion 597ms
+ ✓ src/game/presentation/mapOverviewInteraction.test.tsx (2 tests) 647ms
+   ✓ 393px all-region rendering skips city/wall atlases and retains accurate city selection and label toggle 422ms
+ ✓ src/game/formal/schema.test.ts (18 tests) 311ms
+ ✓ src/game/presentation/parity.test.tsx (12 tests) 617ms
+   ✓ v0.30.10 DEMO parity with Formal authority (12)
+     ✓ active Home, GameApp and map imports do not reach DEMO gameplay, save or generators 359ms
+ ✓ src/game/worldStream.test.ts (3 tests) 327ms
+ ✓ src/game/formal/runtimeGraph.test.ts (1 test) 270ms
+ ✓ src/game/presentation/feedbackV85.test.tsx (7 tests) 337ms
+ ✓ src/game/formal/scheduler.test.ts (5 tests) 67ms
+ ✓ src/game/developer/DeveloperMode.test.tsx (1 test) 516ms
+   ✓ developer controls use their own worker, block concurrent requests and close only after test-store cleanup 515ms
+ ✓ src/game/developer/specAudit.test.ts (4 tests) 22793ms
+   ✓ every supported item has a native-world positive fixture and every declared counterexample executes against the real reducer 18190ms
+   ✓ six civilizations use the independent v85 blacksmith limits and all five speeds preserve the same unit training world duration 4446ms
+ ✓ src/game/presentation/playerFeedback.test.tsx (7 tests) 201ms
+ ✓ src/game/saveLock.test.ts (3 tests) 14ms
+ ✓ src/game/presentation/DemoMapCache.test.ts (5 tests) 123ms
+ ✓ src/game/presentation/manifestExport.test.ts (1 test) 6ms
+ ✓ src/game/presentation/wildSiteLabels.test.ts (3 tests) 4ms
+ ✓ src/game/useGameInteraction.test.tsx (5 tests) 43ms
+ ✓ src/game/presentation/mapVisualEvidence.test.ts (1 test) 3ms
+ ✓ src/game/presentation/demoEntry.test.tsx (3 tests) 42ms
+ ✓ src/game/presentation/cityParityEvidence.test.tsx (1 test) 3ms
+
+ Test Files  47 passed (47)
+      Tests  449 passed (449)
+   Start at  14:17:22
+   Duration  24.13s (tests 89%, transform 5%, import 5%, environment 1%)
+
+JSON report written to /workspace/sites/lieguo-origins/docs/ui-v03025/core-regression.json
