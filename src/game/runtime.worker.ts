@@ -7,9 +7,10 @@ import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,r
 import type {FormalOrder,FormalWorld} from './formal/model';
 import {worldPatch} from './worldStream';
 import {governanceAfterCatchup,governanceWithBase,type GovernanceBase} from './governanceAdmission';
+import {playerOrderWithBase,type PlayerOrderBase} from './orderAdmission';
 export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'resume'|'reset'}
  | {type:'start';seed:number;speed:number;name:string;civilizationId?:string;offlineHours?:0|1|6|24;transitionId?:string}
- | {type:'command';order:FormalOrder;governanceBase?:GovernanceBase}
+ | {type:'command';order:FormalOrder;governanceBase?:GovernanceBase;playerBase?:PlayerOrderBase}
  | {type:'import';text:string;transitionId?:string}
  | {type:'restore';id:number;transitionId?:string}
  | {type:'export';mode?:'quick'|'full'}
@@ -76,6 +77,7 @@ async function handle(r:RuntimeRequest){
    else if(target>world.time){admission=advanceFormal(world,target).world;admission.revision=world.revision;}
   }
   order=governanceWithBase(admission,order,r.governanceBase,branchRevision);
+  order=playerOrderWithBase(admission,order,r.playerBase,branchRevision);
   const result=submitFormalOrder(admission,order);
   if(result.ack?.status==='committed'){
    const committed=await save(result.world,result.reports,world.revision);

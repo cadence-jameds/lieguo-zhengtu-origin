@@ -6,6 +6,7 @@ import type {CommandAck,FormalCommand,FormalOrder,FormalReport,FormalWorld} from
 import type {OfflineSummary} from './formal/offline';
 import type {RuntimeRequest} from './runtime.worker';
 import {PendingRequests,ClockConflictRetry,reconcileWorld} from './interaction';
+import {playerOrderBase} from './orderAdmission';
 import {displayClock} from './presentation/liveClock';
 import type {CityIntel} from './formal/combatModel';
 import {applyWorldPatch} from './worldStream';
@@ -95,7 +96,7 @@ export function useGame(){
   return()=>{disposed=true;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
  },[]);
  useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume'});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away'});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
- const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=current.current;if(!g||requests.current.busy)return;const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};commands.current.track(order);send({type:'command',order,...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{})});},[send]);
+ const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=current.current;if(!g||requests.current.busy)return;const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};commands.current.track(order);send({type:'command',order,...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});},[send]);
  const importFile=async(file:File)=>{if(file.size>100*1024*1024){setError('存檔超過 100 MiB。');return;}send({type:'import',text:await file.text(),transitionId:crypto.randomUUID()});};
  return{reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
 }
