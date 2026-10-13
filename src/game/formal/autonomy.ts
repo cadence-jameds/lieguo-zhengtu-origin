@@ -19,7 +19,7 @@ export function enableAutonomy(w:FormalWorld){if(w.fixture||w.autonomy)return fa
   w.autonomy.agents.push({factionId:f.id,traits,decisions:0,nextAt,eventId:id,active:false,budgetPercent:Math.round(20+traits.risk*30),lastWarAt:0,memory:[],intel:[]});if(id)s.push({id,type:'ai.decide',factionId:f.id,at:nextAt});
  }w.events=s.snapshot();return true;
 }
-export function retireAutonomy(w:FormalWorld,s:EventScheduler){const removed=new Set<string>();for(const a of w.autonomy?.agents??[])if(a.eventId&&!spatial(w).owned(a.factionId).length){removed.add(a.eventId);a.eventId=null;a.active=false;}if(removed.size){const events=s.snapshot().filter(e=>!removed.has(e.id));while(s.size)s.pop();for(const e of events)s.push(e);}}
+export function retireAutonomy(w:FormalWorld,s:EventScheduler){const removed=new Set<string>();for(const a of w.autonomy?.agents??[])if(a.eventId&&!spatial(w).ownedCount(a.factionId)){removed.add(a.eventId);a.eventId=null;a.active=false;}if(removed.size)s.discard(removed);}
 const affordable=(c:FormalCity,cost:Resources)=>resourceKeys.every(r=>cost[r]<=c.stock[r]);
 /** Quotes use only own-city ledgers and public catalogs; reducer revalidates every admission. */
 export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{const out:Choice[]=[],f=w.factions.find(f=>f.id===a.factionId)!;if(!c.economy||!c.military)return out;
@@ -47,11 +47,12 @@ export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{con
  }}return out;
 }
 export function chooseEconomic(choices:Choice[],a:Agent,seed:number,city:FormalCity){const budget=Object.fromEntries(resourceKeys.map(r=>[r,Math.floor(Math.max(0,city.stock[r]-100)*a.budgetPercent/100)])) as Resources;
- return choices.filter(q=>resourceKeys.every(r=>q.cost[r]<=budget[r])).sort((x,y)=>y.score-x.score||JSON.stringify(x.command).localeCompare(JSON.stringify(y.command),'en'))[Math.floor(aiRandom(seed,a.factionId,a.decisions+40)*Math.min(3,choices.filter(q=>resourceKeys.every(r=>q.cost[r]<=budget[r])).length))]?.command;
+ const eligible=choices.filter(q=>resourceKeys.every(r=>q.cost[r]<=budget[r]));
+ return eligible.sort((x,y)=>y.score-x.score||JSON.stringify(x.command).localeCompare(JSON.stringify(y.command),'en'))[Math.floor(aiRandom(seed,a.factionId,a.decisions+40)*Math.min(3,eligible.length))]?.command;
 }
 export type Submit=(w:FormalWorld,order:unknown)=>import('./model').FormalTransition;
 export function submitAutonomous(w:FormalWorld,s:EventScheduler,e:FormalEvent,factionId:FactionId,commands:FormalCommand[],submit:Submit){const reports:FormalReport[]=[];
- for(let i=0;i<commands.length;i++){w.events=s.snapshot();const t=submit(w,{commandId:commandId('ai-'+e.id.slice(6)+'-'+i),campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]});if(t.ack?.status==='committed'){Object.assign(w,t.world);invalidateSpatial(w);while(s.size)s.pop();for(const q of w.events)s.push(q);if(w.autonomy)w.autonomy.accepted++;reports.push(...t.reports.filter(r=>r.ownerFactionId===w.playerFactionId));}else if(w.autonomy)w.autonomy.rejected++;}return reports;
+ for(let i=0;i<commands.length;i++){w.events=s.snapshot();const t=submit(w,{commandId:commandId('ai-'+e.id.slice(6)+'-'+i),campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]});if(t.ack?.status==='committed'){Object.assign(w,t.world);invalidateSpatial(w);s.replace(w.events);if(w.autonomy)w.autonomy.accepted++;reports.push(...t.reports.filter(r=>r.ownerFactionId===w.playerFactionId));}else if(w.autonomy)w.autonomy.rejected++;}return reports;
 }
 export function handleAutonomy(w:FormalWorld,e:FormalEvent,s:EventScheduler,submit:Submit):FormalReport[]|null{if(e.type!=='ai.decide')return null;const a=w.autonomy?.agents.find(a=>a.factionId===e.factionId);if(!a||a.eventId!==e.id)return[];
  const cities=spatial(w).owned(a.factionId);if(!cities.length){a.eventId=null;a.active=false;return[];}

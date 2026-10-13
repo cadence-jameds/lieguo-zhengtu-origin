@@ -8,7 +8,31 @@ export function compareEvents(a:FormalEvent,b:FormalEvent):number {
 export class EventScheduler {
   private heap:FormalEvent[]=[];
   private ids=new Set<EventId>();
-  constructor(events:readonly FormalEvent[]=[]) { for(const e of events)this.push(e); }
+  constructor(events:readonly FormalEvent[]=[]) { this.replace(events); }
+  /** Validate once, clone once and heapify in O(n). A failed replacement leaves the live queue untouched. */
+  replace(events:readonly FormalEvent[]){
+    const next:FormalEvent[]=[],ids=new Set<EventId>();
+    for(const event of events){
+      if(!Number.isSafeInteger(event.at)||event.at<0||!Object.hasOwn(EVENT_PRIORITY,event.type))throw new Error('Invalid event');
+      if(ids.has(event.id))throw new Error('Duplicate EventId');
+      ids.add(event.id);next.push(structuredClone(event));
+    }
+    for(let i=Math.floor(next.length/2)-1;i>=0;i--){
+      const item=next[i];let at=i;
+      while(at*2+1<next.length){
+        let child=at*2+1;
+        if(child+1<next.length&&compareEvents(next[child+1],next[child])<0)child++;
+        if(compareEvents(item,next[child])<=0)break;
+        next[at]=next[child];at=child;
+      }
+      next[at]=item;
+    }
+    this.heap=next;this.ids=ids;
+  }
+  /** Remove cancelled future events without draining and reinserting the entire heap. */
+  discard(ids:ReadonlySet<string>){
+    if(ids.size)this.replace(this.heap.filter(e=>!ids.has(e.id)));
+  }
   get size(){return this.heap.length;}
   peek(){return this.heap[0];}
   push(event:FormalEvent){

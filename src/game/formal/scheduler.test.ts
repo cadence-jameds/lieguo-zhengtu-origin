@@ -31,3 +31,23 @@ it('large shuffled input drains in deterministic sorted order',()=>{
  const input=Array.from({length:3000},(_,i):FormalEvent=>({id:eventId(String(i).padStart(5,'0')),at:(i*137)%101,type:'fixture.marker',marker:'x'}));
  const q=new EventScheduler([...input].reverse()),out=[];while(q.size)out.push(q.pop()!);expect(out).toEqual([...input].sort(compareEvents));
 });
+
+it('linear heap replacement and cancellation retain identical event ordering and atomic validation',()=>{
+ const input=Array.from({length:2400},(_,i):FormalEvent=>({id:eventId('bulk'+i),at:(i*491)%781,type:'fixture.marker',marker:'bulk'}));
+ const fromPush=new EventScheduler();for(const event of [...input].reverse())fromPush.push(event);
+ const bulk=new EventScheduler([...input].reverse());
+ expect(bulk.snapshot()).toEqual(fromPush.snapshot());
+ const replacement=[...input.filter((_,i)=>i%4!==0),{id:eventId('late'),at:0,type:'fixture.marker' as const,marker:'late'}];
+ bulk.replace(replacement);
+ expect(bulk.snapshot()).toEqual([...replacement].sort(compareEvents));
+ const removed=new Set(replacement.filter((_,i)=>i%7===0).map(e=>e.id));
+ bulk.discard(removed);
+ const expected=replacement.filter(e=>!removed.has(e.id)).sort(compareEvents);
+ expect(bulk.snapshot()).toEqual(expected);
+ const before=bulk.snapshot();
+ expect(()=>bulk.replace([replacement[0],replacement[0]])).toThrow('Duplicate EventId');
+ expect(()=>bulk.replace([{...replacement[0],at:NaN}])).toThrow('Invalid event');
+ expect(bulk.snapshot()).toEqual(before);
+ const drained:FormalEvent[]=[];while(bulk.size)drained.push(bulk.pop()!);
+ expect(drained).toEqual(expected);
+});
