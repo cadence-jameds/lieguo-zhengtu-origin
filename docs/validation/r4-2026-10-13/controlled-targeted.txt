@@ -1,0 +1,15 @@
+
+ RUN  v5.0.0 /workspace/lieguo-zhengtu-origin
+
+ ✓ src/game/formal/integrationR4.test.ts > R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth 1061ms
+ ✓ src/game/formal/integrationR4.test.ts > R4 cross-domain IDB rollback/import/Recovery keeps joint, empire, governor and exile lifecycle atomic 1035ms
+ ↓ src/game/formal/integrationR4.test.ts > R4 fair 100 factions/99 autonomous AI seed 12012: 8h, SaveLoad and sliced equivalence
+ ↓ src/game/formal/integrationR4.test.ts > R4 fair 100 factions/99 autonomous AI seed 92049: 8h, SaveLoad and sliced equivalence
+ ↓ src/game/formal/integrationR4.test.ts > R4 fair 100 factions/99 autonomous AI seed 90217: 8h, SaveLoad and sliced equivalence
+ ✓ src/game/formal/integrationR4.test.ts > R4 AI vs AI Lv15 siege: marker survives save/load and Recovery, one final, no player report leak 679ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 3 skipped (6)
+   Start at  02:52:49
+   Duration  3.83s (tests 75%, transform 17%, import 8%)
+

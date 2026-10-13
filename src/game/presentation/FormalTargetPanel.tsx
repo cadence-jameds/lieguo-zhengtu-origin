@@ -5,6 +5,7 @@ import type {FormalCity,FormalWorld,WildSite} from '../formal/model';
 import type {ArmyMissionState} from '../formal/combatModel';
 import type {CityIntel} from '../formal/combatModel';
 import {canReinforce} from '../formal/armies';
+import {legionOf,empireOf,diplomaticRelation} from '../formal/politics';
 import {citySnapshot} from '../formal/economy';
 import {relationColor} from './mapRelations';
 import {wildSiteName} from './wildSiteLabels';
@@ -15,8 +16,9 @@ export function FormalTargetPanel({world,home,city,site,intel={},intelFailed=fal
  const owner=city?world.factions.find(f=>f.id===city.ownerFactionId):undefined,own=owner?.id===world.playerFactionId,friend=!!city&&canReinforce(world,home.ownerFactionId,city.ownerFactionId),at=city??site!;
  const army=own?Object.values(city!.military?.units??{}).reduce((n,c)=>n+c,0):intel.army?Object.values(intel.army.intel.units).reduce((n,c)=>n+c,0):undefined;
  const wall=own?city!.wallLevel??0:intel.defenses?.intel.wallLevel;
+ const legion=owner?legionOf(world,owner.id):undefined,empire=owner?empireOf(world,owner.id):undefined,relation=owner?diplomaticRelation(world,world.playerFactionId,owner.id):'neutral';
  return <section className="target-panel formal-demo-target"><>{city&&<span className="eyebrow">聚落 · （{at.x}, {at.y}）</span>}</><div className="target-name"><h2>{city?.name??`${wildSiteName(site!).replace(' Lv.','Lv.')}（${at.x}, ${at.y}）`}</h2><span className="owner-stripe" style={{background:city?relationColor(world,city):'#bec1b7'}}/></div>
- {owner?<dl className="target-ownership"><div><dt>玩家</dt><dd>{owner.name}{own?' · 己方':''}</dd></div><div><dt>文明</dt><dd>{CIV_NAMES[owner.civilizationId]}</dd></div><div><dt>軍團</dt><dd>尚未開放</dd></div><div><dt>帝國</dt><dd>{owner.empireId?'同盟帝國':'獨立領主'}</dd></div><div><dt>關係</dt><dd>{own?'己方':friend?'同帝國':'中立'}</dd></div></dl>:<p className="target-owner">中立據點 · 關係：中立</p>}
+ {owner?<dl className="target-ownership"><div><dt>玩家</dt><dd>{owner.name}{own?' · 己方':''}</dd></div><div><dt>文明</dt><dd>{CIV_NAMES[owner.civilizationId]}</dd></div><div><dt>軍團</dt><dd>{legion?.name??'獨立領主'}</dd></div><div><dt>帝國</dt><dd>{empire?.name??'無'}</dd></div><div><dt>關係</dt><dd>{({own:'己方',friendly:'友好',war:'戰爭',neutral:'中立'})[relation]}</dd></div></dl>:<p className="target-owner">中立據點 · 關係：中立</p>}
  <div className="target-facts"><span>{own?'駐軍':'已知駐軍'}<strong>{army===undefined?'尚未偵察':fmt(army)}</strong></span>{city&&<span>城防<strong>{wall===undefined?'尚未偵察':wall+' 級'}</strong></span>}{city&&<span>人口<strong>{fmt(citySnapshot(world,city.id)!.population)}</strong></span>}</div>
  {!own&&(intel.army?<small className="intel-age">{intelAge(intel.army.intel.observedRealAt,now)}，數量可能已變動。{city&&intel.army.owner!==owner?.id?'領主已變更，這是先前的駐軍紀錄。':''}</small>:<p className="muted">{intelFailed?'暫時無法讀取歷史情報，請稍後再開啟。':site?'駐軍情報未知。':'駐軍情報未知，請先派遣斥候偵察。'}</p>)}
  {!own&&full&&<ScoutIntelDetails intel={full} world={world}/>}

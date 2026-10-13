@@ -1,0 +1,323 @@
+{
+  "time": 8569677,
+  "finalReceipts": [
+    {
+      "battleId": "battle:0000000000000009",
+      "resolutionId": "resolution:0000000000000009.final",
+      "eventId": "event:0000000000000207",
+      "at": 3600000,
+      "round": 1,
+      "kind": "final",
+      "targetPoint": {
+        "x": 62,
+        "y": 198
+      },
+      "mission": "conquest",
+      "outcome": "conquered",
+      "ownerBefore": "faction:000",
+      "ownerAfter": "faction:001",
+      "qualificationBefore": "none",
+      "qualificationAfter": "none"
+    },
+    {
+      "battleId": "battle:0000000000000013",
+      "resolutionId": "resolution:0000000000000013.final",
+      "eventId": "event:0000000000000311",
+      "at": 4686397,
+      "round": 1,
+      "kind": "final",
+      "targetPoint": {
+        "x": 69,
+        "y": 215
+      },
+      "mission": "raid",
+      "outcome": "wild-cleared",
+      "ownerBefore": null,
+      "ownerAfter": null
+    }
+  ],
+  "exiles": [
+    {
+      "id": "wild:exile-0000000000000012",
+      "exile": true,
+      "sourceFactionId": "faction:000",
+      "civilizationId": "civ_zhongguo",
+      "createdAt": 3600000,
+      "spawnSlot": 445,
+      "generation": 0,
+      "region": 74,
+      "x": 69,
+      "y": 215,
+      "resource": "bandit",
+      "level": 1,
+      "phase": "cooldown",
+      "defenders": {},
+      "initialDefenders": {
+        "militia": 7,
+        "scout": 11,
+        "ram": 5
+      },
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "defeatedAt": 4686397
+    }
+  ],
+  "foreignCastle": "civ_zhongguo",
+  "rebirth": {
+    "id": "city:rebirth-0000000000000015",
+    "ownerFactionId": "faction:000",
+    "name": "R4復國",
+    "x": 352,
+    "y": 352,
+    "population": 400,
+    "housing": 400,
+    "stock": {
+      "food": 600,
+      "wood": 600,
+      "stone": 600,
+      "gold": 600
+    },
+    "buildings": {
+      "center": 1
+    },
+    "fields": [
+      {
+        "slot": 0,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 1,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 2,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 3,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 4,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 5,
+        "resource": "food",
+        "level": 0
+      },
+      {
+        "slot": 6,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 7,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 8,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 9,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 10,
+        "resource": "wood",
+        "level": 0
+      },
+      {
+        "slot": 11,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 12,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 13,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 14,
+        "resource": "stone",
+        "level": 0
+      },
+      {
+        "slot": 15,
+        "resource": "gold",
+        "level": 0
+      },
+      {
+        "slot": 16,
+        "resource": "gold",
+        "level": 0
+      },
+      {
+        "slot": 17,
+        "resource": "gold",
+        "level": 0
+      }
+    ],
+    "wallLevel": 0,
+    "cityPromotionCompleted": false,
+    "integrationWorkHours": 0,
+    "integrationTotalWorkHours": 0,
+    "startingCity": false,
+    "economy": {
+      "lastSettledAt": 8569677,
+      "productionRemainder": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "milestones": [],
+      "slots": {},
+      "construction": [],
+      "promotion": null,
+      "reservedIncoming": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "settlementEventId": "event:0000000000000415"
+    },
+    "military": {
+      "units": {},
+      "queue": [],
+      "unpaidFood": 0
+    },
+    "autoLogistics": []
+  },
+  "winnerIntel": [
+    {
+      "cityId": "city:000",
+      "ownerFactionId": "faction:000",
+      "at": 3600000,
+      "source": "battle",
+      "units": {},
+      "coarse": "personnel"
+    }
+  ],
+  "qualifications": [
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none"
+  ]
+}
