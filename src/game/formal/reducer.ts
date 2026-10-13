@@ -101,11 +101,8 @@ export function completeResearch(w:FormalWorld,event:Extract<import('./model').F
  w.completionReceipts.push({eventId:event.id,projectId:p.projectId,at:event.at});
  return[report(w,'科研完成','科技研究完成，成果屬於原勢力。',p.ownerFactionId)];
 }
-export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
- if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
- if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=structuredClone(current),scheduler=new EventScheduler(w.events),reports:FormalReport[]=[];
- while(scheduler.peek()&&scheduler.peek()!.at<=target){
+/** One scheduler event. Both ordinary and cooperative replays use this exact reducer. */
+function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[]){
   const e=scheduler.pop()!;w.time=e.at;
   const returningSource=e.type==='logistics.return'?w.logistics?.find(t=>t.shipmentId===e.shipmentId)?.sourceCityId:undefined;
   const governanceReports=handleGovernance(w,e,scheduler,submitFormalOrder);
@@ -127,8 +124,33 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
   resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
- }
- reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
+}
+function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
+  reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  validateFormalWorld(w);return{world:w,reports};
+}
+export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
+ if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
+ if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
+ const w=structuredClone(current),scheduler=new EventScheduler(w.events),reports:FormalReport[]=[];
+ while(scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports);
+ return finishFormalAdvance(current,w,scheduler,reports,target);
+}
+/** Yield between completed events, never between an event's mutations or during an IDB transaction. */
+export async function advanceFormalCooperative(current:FormalWorld,target:number,onProgress?:(time:number,target:number,processed:number)=>void):Promise<FormalTransition> {
+ if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
+ if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
+ const w=structuredClone(current),scheduler=new EventScheduler(w.events),reports:FormalReport[]=[];
+ let processed=0,lastYield=performance.now();
+ while(scheduler.peek()&&scheduler.peek()!.at<=target){
+  advanceOneEvent(w,scheduler,reports);
+  if(++processed%16===0&&performance.now()-lastYield>=50){
+   onProgress?.(w.time,target,processed);
+   await new Promise<void>(resolve=>setTimeout(resolve,0));
+   lastYield=performance.now();
+  }
+ }
+ onProgress?.(target,target,processed);
+ return finishFormalAdvance(current,w,scheduler,reports,target);
 }
