@@ -1,6 +1,6 @@
 import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
-import {advanceOffline,type OfflineSummary} from './formal/offline';
+import {advanceOfflineCooperative,type OfflineSummary} from './formal/offline';
 import Dexie,{type Table} from 'dexie';
 import {z} from 'zod';
 import {isMissionArmy,type CityIntel,type BattleReportPayload} from './formal/combatModel';
@@ -131,14 +131,17 @@ export class FormalPersistence {
   return{game:world!,recovered:false,savedAt:row.at};
  }
  async loadSave(){const {game,recovered}=await this.loadAnchored();return {game,recovered};}
- async loadWithOffline(now=Date.now()):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
+ async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
+  onProgress?.('read');
   const loaded=await this.loadAnchored();if(!loaded.game)return {game:null,recovered:loaded.recovered};
-  const result=advanceOffline(loaded.game,loaded.savedAt??now,now);
+  onProgress?.('offline',0,0);
+  const result=await advanceOfflineCooperative(loaded.game,loaded.savedAt??now,now,(fraction,events)=>onProgress?.('offline',fraction,events));
   // Even 0h refreshes the wall anchor atomically. Expose nothing until save resolves.
   const draft=result.world===loaded.game?{...result.world,revision:result.world.revision+1}:result.world;
   const real=(at:number)=>Math.max(0,Math.floor((loaded.savedAt??now)+(at-loaded.game!.time)/effectiveSpeed(loaded.game!)));
   stampPending(draft,real);
   const reports=result.reports.map(r=>{const copy={...r,realAt:real(r.at),clockSpeed:effectiveSpeed(loaded.game!)};if(copy.battle)stampBattle(copy.battle,real);return copy;});
+  onProgress?.('save');
   const game=await this.commit(draft,reports,'save',loaded.game.revision,now);
   return{game,recovered:loaded.recovered,summary:{...result.summary,recovered:loaded.recovered}};
  }
@@ -224,6 +227,6 @@ export const reportStatus=(world:FormalWorld)=>active().reportStatus(world);
 export const reportAction=(world:FormalWorld,action:'read'|'clear',ids?:string[],filter?:ReportFilter)=>active().reportAction(world,action,ids,filter);
 export const clearSavedGames=()=>active().clearSavedGames();
 
-export const loadWithOffline=()=>active().loadWithOffline();
+export const loadWithOffline=(onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void)=>active().loadWithOffline(Date.now(),onProgress);
 
 export const readCityIntel=(world:FormalWorld,cityId:string,generation?:number)=>active().readCityIntel(world,cityId,generation);
