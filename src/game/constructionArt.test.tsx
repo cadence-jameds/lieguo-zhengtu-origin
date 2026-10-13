@@ -14,7 +14,7 @@ it('all sixteen building types resolve to existing art in every civilization and
  for(const building of buildingIds){
   const civilizationPaths=new Set(civilizations.map(c=>constructionArtPath(building,2,c.id)));
   expect(civilizationPaths.size,building).toBe(building==='hall'||building==='castle'?6:1);
-  for(const civilization of civilizations)for(const era of [0,1,2])for(const targetLevel of [1,4])paths.add(constructionArtPath(building,era,civilization.id,targetLevel));
+  for(const civilization of civilizations)for(const era of [0,1,2])for(const targetLevel of [1,9,10])paths.add(constructionArtPath(building,era,civilization.id,targetLevel));
  }
  expect(paths.size).toBe(56);
  for(const path of paths){const file=new URL('../../public/'+path,import.meta.url);expect(existsSync(file),path).toBe(true);expect(statSync(file).size,path).toBeGreaterThan(10_000);}
@@ -29,9 +29,10 @@ it('all sixteen building types resolve to existing art in every civilization and
  expect(constructionArtPath('warehouse',0,'civ_frankia')).toBe('art/construction-warehouse-dark-v2.webp');
  expect(constructionArtPath('warehouse',2,'civ_frankia')).toBe('art/construction-warehouse-castle.webp');
  expect(constructionArtPath('house',1)).toBe('art/construction-house.webp');
- expect(constructionArtPath('farm',2,undefined,3)).toBe('art/construction-farm.webp');
- expect(constructionArtPath('farm',2,undefined,4)).toBe('art/construction-farm-castle.webp');
- expect(constructionArtPath('lumber',1,undefined,4)).toBe('art/construction-lumber-feudal.webp');
+ expect(constructionArtPath('farm',2,undefined,9)).toBe('art/construction-farm.webp');
+ expect(constructionArtPath('farm',2,undefined,10)).toBe('art/construction-farm-castle.webp');
+ expect(constructionArtPath('lumber',1,undefined,9)).toBe('art/construction-lumber.webp');
+ expect(constructionArtPath('lumber',1,undefined,10)).toBe('art/construction-lumber-feudal.webp');
  expect(constructionArtPath('wall',0)).toContain('scene-dark-construction-v2');
  expect(constructionArtPath('wall',1)).toContain('scene-feudal-construction-v2');
  expect(constructionArtPath('wall',2)).toContain('scene-castle-construction-v2');
@@ -84,7 +85,13 @@ it('a queued castle-age upgrade already displays the era-matched construction ar
  n.build[0].action='demolish';
  expect(town(5_000)).not.toContain('construction-academy-castle.webp');
  const farm=n.plots.find(p=>p.kind==='resource'&&p.building==='farm')!;
- farm.level=3;n.build=[{...n.build[0],id:702,item:'farm',plot:farm.id,started:0,action:'build'}];
- const outer=renderToStaticMarkup(<OutskirtsScene n={n} civ={g.player} era={2} time={5_000} speed={1} mobile={false} labels={true} onEnter={()=>{}} onSelect={()=>{}}/>);
- expect(outer).toContain('construction-farm-castle.webp');
+ farm.level=8;n.build=[{...n.build[0],id:702,item:'farm',plot:farm.id,started:0,action:'build'}];
+ const outer=()=>renderToStaticMarkup(<OutskirtsScene n={n} civ={g.player} era={2} time={5_000} speed={1} mobile={false} labels={true} onEnter={()=>{}} onSelect={()=>{}}/>);
+ expect(outer()).toContain('construction-farm.webp');
+ expect(outer()).not.toContain('construction-farm-castle.webp');
+ farm.level=9;
+ expect(outer()).toContain('construction-farm-castle.webp');
+ n.build[0].started=6_000;
+ expect(outer()).toContain('construction-farm-castle.webp');
+ expect(outer()).toContain('⏳');
 });

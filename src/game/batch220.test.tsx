@@ -34,9 +34,9 @@ it('era panel shows prerequisite and all resource shortages together',()=>{
  const g=setup(),n=owned(g,g.player)[0];n.stock={food:0,wood:0,stone:0,gold:0};
  const html=render(<EraUpgrade g={g} n={n} issue={()=>{}} busy={false}/>);expect(html).toContain('需要學院 1');expect(html).toContain('缺 ');expect(html.match(/缺 /g)!.length).toBeGreaterThanOrEqual(3);
 });
-it('resource art changes at level 4 for every resource type',()=>{
- for(const building of fieldBuildings){for(const level of [0,3])expect(render(<ResourceSprite building={building} level={level}/>)).toContain('field-'+building+'.webp');
- for(const level of [4,5]){const html=render(<ResourceSprite building={building} level={level}/>);expect(html).toContain('building-sprite');expect(html).not.toContain('field-'+building+'.webp');}}
+it('resource art changes at level 10 for every resource type',()=>{
+ for(const building of fieldBuildings){for(const level of [0,4,9])expect(render(<ResourceSprite building={building} level={level}/>)).toContain('field-'+building+'.webp');
+ for(const level of [10,15]){const html=render(<ResourceSprite building={building} level={level}/>);expect(html).toContain('building-sprite');expect(html).not.toContain('field-'+building+'.webp');}}
 });
 it('restoration tile counts match actual generated resource plots',()=>{
  const g=setup(),point={x:100,y:100},counts=fieldCounts(resourceLayout(g.seed,point));const html=render(<FieldDistribution g={g} point={point}/>);

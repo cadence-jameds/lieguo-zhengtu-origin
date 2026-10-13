@@ -1,4 +1,4 @@
-name: Deploy approved release to GitHub Pages
+name: Deploy approved release or preview to GitHub Pages
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Require recorded release acceptance
+      - name: Require recorded release acceptance or preview approval
         run: node scripts/check-release-approval.mjs
 
       - name: Install dependencies
