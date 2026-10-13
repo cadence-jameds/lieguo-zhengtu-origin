@@ -16,9 +16,9 @@ import {reportTime} from './reportClock';
 import FormalCityPanel from '../FormalCityPanel';
 import {constructionArtPath} from '../assets';
 const noop=()=>{},dir='docs/ui-v03027';mkdirSync(dir,{recursive:true});
-it('mobile navigation matches DEMO order and redirects era entry to City Center',()=>{
+it('mobile navigation keeps DEMO order plus the V94 Legion entry and redirects era entry to City Center',()=>{
  const w=battlefield(),c=w.cities[0],html=renderToStaticMarkup(<Shell world={w} city={c} cities={[c]} mobile view="map" onView={noop} onCity={noop} onHome={noop} onResource={noop} onMore={noop} moreOpen={false} busy={false}><p>世界</p></Shell>);
- expect(MOBILE_NAV.map(n=>n.id)).toEqual(['map','city','army','reports','research','diplomacy','empire']);writeFileSync(dir+'/mobile-shell.html',html);
+ expect(MOBILE_NAV.map(n=>n.id)).toEqual(['map','city','army','reports','research','legion','diplomacy','empire']);writeFileSync(dir+'/mobile-shell.html',html);
 });
 it('intel uses fixed real observation time across 1X/50X/200X, consolidates wild name and honestly handles missing history',()=>{
  const now=new Date('2026-10-08T04:30:00Z').getTime(),observed=now-79*60000;vi.spyOn(Date,'now').mockReturnValue(now);

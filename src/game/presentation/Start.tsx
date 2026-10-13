@@ -9,7 +9,7 @@ const randomSeed=()=>crypto.getRandomValues(new Uint32Array(1))[0];
 export function CivilizationDetails({civ}:{civ:string}){
  const details=civilizationDetails(civ);
  return <div className="civ-detail" aria-live="polite">
-  <div><span className="eyebrow">文明特色</span><p>{CIV_STORIES[civ]}</p><small>{details.military}</small><details><summary>文明專屬科技</summary><small>{details.technologies.map(t=>t.name).join('／')}</small></details><small>戰鬥定位供整備軍隊參考，戰鬥功能將於後續開放。</small></div>
+  <div><span className="eyebrow">文明特色</span><p>{CIV_STORIES[civ]}</p><small>{details.military}</small><details><summary>文明專屬科技</summary><small>{details.technologies.map(t=>t.name).join('／')}</small></details><small>戰鬥定位供整備軍隊參考。</small></div>
   <div><span className="eyebrow">城堡時代代表兵種</span><p>{details.guard.name}</p><small>{details.guardRole}</small></div>
  </div>;
 }

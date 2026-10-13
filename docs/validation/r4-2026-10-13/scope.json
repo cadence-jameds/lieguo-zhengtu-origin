@@ -1,0 +1,69 @@
+{
+  "base": "d5c0712b2b7ad1cd580999f97918f132d57c8f21",
+  "r3DeltaAncestor": true,
+  "guardedFiles": [
+    {
+      "path": "docs/b6-v92/\u6cb3\u8c37\u6230\u5f79_vNext_\u5e73\u8861\u91cd\u69cb\u8a0e\u8ad6_v92.md",
+      "sha256": "2bb36aed23595b52b38e15ab5c76be883ec854c57517eaf61187af1f2c43e0e6",
+      "unchangedFromMain": true
+    },
+    {
+      "path": ".github/RELEASE_APPROVAL.json",
+      "sha256": "92241db4cfd624c4d8d3767306cfe94cf6050955b00f1bd0013e61b8b3422e6b",
+      "unchangedFromMain": true
+    },
+    {
+      "path": ".github/PAGES_PREVIEW_APPROVAL.json",
+      "sha256": "99600063ae67c1792b9a08bc672389cc57620b6fe3de3a09fef898d02db80c82",
+      "unchangedFromMain": true
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "sha256": "3cabb4b217c6297113c2c197bc877acb8bd1e468152613c9a437d5b1e1680db6",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "package.json",
+      "sha256": "64980f9954a03333f9262e0e12bccb0ddbf0289b9931c5172a6e1cbe3cf2690f",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "06ce379cd2a5f4cf959cc6c78f023a360868594e427f14bfbe70c24646bc92b3",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "src/game/formal/combatResolver.ts",
+      "sha256": "45aa29bd12c4ea7fc197768a4ec65ec15b3d32d47346feac470100c907042c0a",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "src/game/formal/aiActions.ts",
+      "sha256": "7536b21ac320483acae771df94b7198247fc4ff1aa6f9991f1e9c412037454b1",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "src/game/formal/extinction.ts",
+      "sha256": "8e5b79fcd38c17b8ebdc2d6f1810bc8ef1c310f26d60a1f4d08ab54fc978cf9c",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "src/game/governanceAdmission.ts",
+      "sha256": "3f343ccdaeac63bf3002b80d1a95d8eed456c2b3428c6a11f3fec199c206d667",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "src/game/runtime.worker.ts",
+      "sha256": "2f5e93856b46d913b7ab527b65f18beb56fcbe3a49049bcc7d07a72e845e5f4f",
+      "unchangedFromMain": true
+    }
+  ],
+  "historicalDocsChecked": 585,
+  "historicalDocsChanged": [],
+  "B9": "NOT_STARTED",
+  "B10": "NOT_STARTED",
+  "AstraGate": "NOT_DECLARED_PASS",
+  "B5_E1": "HOLD",
+  "releaseBefore": "695afb6e1f29bbaab7694d864449d48dd53f6103",
+  "latestPagesRunBefore": 38335217984
+}

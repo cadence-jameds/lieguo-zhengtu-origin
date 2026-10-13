@@ -1,0 +1,49 @@
+{
+  "browser": "154.0.8037.57",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "source": "local production build",
+  "cases": [
+    {
+      "name": "governance duplicate and stale revision guards",
+      "status": "PASS",
+      "evidence": {
+        "duplicate": {
+          "commandId": "command:eeab34f3-f884-4eb5-9e70-74279a45c64c",
+          "status": "duplicate",
+          "revision": 4,
+          "originalRevision": 3
+        },
+        "rejected": {
+          "commandId": "command:r4-stale-setting",
+          "status": "rejected",
+          "revision": 4,
+          "reason": "治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。"
+        },
+        "economy": {
+          "commandId": "command:r4-stale-cost",
+          "status": "rejected",
+          "revision": 4,
+          "reason": "世界版本已更新，請重新確認狀態。"
+        }
+      }
+    },
+    {
+      "name": "real IndexedDB export, reload, corrupt import and Recovery",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(restored.commandReceipts.some(r=>r.commandId===applied.commandId&&r.disposition==='rolled-back'))\n"
+    }
+  ],
+  "manualPending": [
+    "physical phone",
+    "hardware GPU FPS",
+    "B5 E1 human Delta Review",
+    "SW update from older deployed build",
+    "Day30 / 168h / 360h / 720h calibration"
+  ],
+  "errors": [],
+  "success": false
+}

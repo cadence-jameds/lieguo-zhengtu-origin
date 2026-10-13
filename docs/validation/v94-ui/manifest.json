@@ -1,0 +1,694 @@
+{
+  "baseMain": "9cf6369097cc7495c99197b83026b09c447f0f19",
+  "preservedR4": "608de8a77a8644b7a3a894685e27ced9d4507ca0",
+  "sourceFingerprintSHA256": "ae9556e946d4e6883756f7ca4ecd50f2523385c1af0fb0a33046b057fef96c66",
+  "source": [
+    {
+      "path": "public/art/formal/unit-craftsman.svg",
+      "gitBlob": "7b3994f66226ec21499a4a7d5591e25c9c575617"
+    },
+    {
+      "path": "scripts/verify-v94-browser-extra.mjs",
+      "gitBlob": "5c56e6982c36712b781fec40752257020bcf25ae"
+    },
+    {
+      "path": "scripts/verify-v94-browser.mjs",
+      "gitBlob": "fe577a82850cf3fae9fb8c762603cfada09ae384"
+    },
+    {
+      "path": "src/game/FormalCityPanel.tsx",
+      "gitBlob": "69baa35a60738272279519d6c9750afdea76da5e"
+    },
+    {
+      "path": "src/game/GameApp.tsx",
+      "gitBlob": "6db5d0a2a14924f655f5a70e2473fa30b4dad615"
+    },
+    {
+      "path": "src/game/formal/diplomacyReports.ts",
+      "gitBlob": "98c8757f6a4aa9dfc8b919d0e60d3bcc586afd06"
+    },
+    {
+      "path": "src/game/formal/diplomacyV94.test.ts",
+      "gitBlob": "ef50e28f668b1be57c7a4eef807d7f0b7cb6d07e"
+    },
+    {
+      "path": "src/game/formal/model.ts",
+      "gitBlob": "baf62e939f4d1070bc28f9a1672c0e86c1094fad"
+    },
+    {
+      "path": "src/game/formal/reducer.ts",
+      "gitBlob": "1cf96089e8a0ec514c38a7a35086487c47d18804"
+    },
+    {
+      "path": "src/game/formal/schema.ts",
+      "gitBlob": "dabe09258b4836ab21c8e7c8a5a9679bb496661e"
+    },
+    {
+      "path": "src/game/persistence.ts",
+      "gitBlob": "ae42fba52e80b8c0814c2d7e4bd49cebe3f8ecea"
+    },
+    {
+      "path": "src/game/presentation/CityScenes.tsx",
+      "gitBlob": "8ffff5406ef206c2cd619b68f2137a4bbea257b3"
+    },
+    {
+      "path": "src/game/presentation/CraftsmanPanel.tsx",
+      "gitBlob": "ae763116ebb92257db23633d724820e66357a3ba"
+    },
+    {
+      "path": "src/game/presentation/DevelopmentViews.tsx",
+      "gitBlob": "a3b4a45fe40823eb39fb49a14c6b3b8b806bacaa"
+    },
+    {
+      "path": "src/game/presentation/ExtinctionView.tsx",
+      "gitBlob": "f90fda37d969cf3d9aa7f93de7004fc16771800a"
+    },
+    {
+      "path": "src/game/presentation/FormalReportsView.tsx",
+      "gitBlob": "eaaa3baf417bbf45ec94a258fc493d99486c7ae1"
+    },
+    {
+      "path": "src/game/presentation/GovernanceView.tsx",
+      "gitBlob": "6075f892c587e5df5e2b2ed31a5a83b565a5a0f4"
+    },
+    {
+      "path": "src/game/presentation/LegionView.tsx",
+      "gitBlob": "1010161ad02572f2337df3161ee58ca152fc0bd8"
+    },
+    {
+      "path": "src/game/presentation/PoliticalAction.tsx",
+      "gitBlob": "de8eb4d968141a8d952cf2e4a7b2f18ab18c10bd"
+    },
+    {
+      "path": "src/game/presentation/PoliticsView.tsx",
+      "gitBlob": "a92c3bf9a8e43f62f222f9b3823ca12d827887df"
+    },
+    {
+      "path": "src/game/presentation/Shell.tsx",
+      "gitBlob": "05d98c2aeda8f483d6abcd21654b3973a9fb6358"
+    },
+    {
+      "path": "src/game/presentation/Start.tsx",
+      "gitBlob": "0c91ee007321dbd9b84c628e5daf972aaadc0025"
+    },
+    {
+      "path": "src/game/presentation/integrationV94.css",
+      "gitBlob": "a77d9e6fa3bf6e5da488a3859aca2023ab3c04f1"
+    },
+    {
+      "path": "src/game/presentation/uiIntegrationV94.test.tsx",
+      "gitBlob": "cd6fc2902b6a227ad53bffb59000b686d4b798f7"
+    },
+    {
+      "path": "src/game/presentation/update27.test.tsx",
+      "gitBlob": "3a6d78ccd1846c88c7d57ec2a6e7844749b10043"
+    },
+    {
+      "path": "src/game/runtime.worker.ts",
+      "gitBlob": "6ad0b92e34291cc116594aeae6e7f1c1ad3f8577"
+    },
+    {
+      "path": "src/game/useGame.ts",
+      "gitBlob": "e6a38b39d7b4100643e83756e61ceb471bf5564e"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-16.png",
+      "bytes": 83655,
+      "sha256": "3729702bc8c404bbe3aa26ecb729e2a32578541af23f4ddedea26300c602ada0",
+      "gitBlob": "60b51679e1868e2e63433ac0d5204f86a9262816"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-17.png",
+      "bytes": 92619,
+      "sha256": "93a0b020ca91f86b058d81015f5c6c7bd9506d35b374da856efce854c59c2884",
+      "gitBlob": "96d863bd434253f80c9e2341f4be59fa861f70c6"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-3.png",
+      "bytes": 120563,
+      "sha256": "d3464b6ee5b9c32f7bd1aae9b25858116c8e087ed74589701c920bc9a906e800",
+      "gitBlob": "39991d5b02d3c457726e71ccef5303761543114e"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-4.png",
+      "bytes": 139593,
+      "sha256": "c0dcab6982146fdb261bc336efd5eb7d0ff57f1ece45ed152c6585a084cc0f86",
+      "gitBlob": "048bccecaff8b9e0a4b32ed4862ad9446d202f6e"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-5.png",
+      "bytes": 142611,
+      "sha256": "816fd55b1eda520c6096808d889cea694729ae740a421dd198c219c5db2d6784",
+      "gitBlob": "a2d83335d9f0064ffbb49a14ed9ede01a6f58b44"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-7.png",
+      "bytes": 152401,
+      "sha256": "761c3b344625df55d00e0f085b74157bc0ae3fed3d212c8b875e81b4658230b0",
+      "gitBlob": "45a06921affa5b933324c7843f3e4563362d264c"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/FAIL-8.png",
+      "bytes": 142162,
+      "sha256": "8e4baedd909b286daf5aa1af4e5cc0b6b343008795f4e19d847ffa2c6d0669bd",
+      "gitBlob": "bde55e41432075a5bfacb5c3d4e4d93ae232f883"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/browser-before-fixture-qualification.json",
+      "bytes": 35279,
+      "sha256": "d361543eac60dd9cdb78d4d2080de6ac24400a5d979d941664d0a29e3aab5d88",
+      "gitBlob": "b068f6c9e5570fa61713b04e9d6e9e4ae09ef171"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/browser-before-pager-fix.json",
+      "bytes": 7359,
+      "sha256": "b437540321813dd32946cacb159a28aa0ce66ce02852b01be6b59692e6949b18",
+      "gitBlob": "1ad2b6b2c5eddfc017901b24c1f25ecf796e9b1e"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/qualification-FAIL-17.png",
+      "bytes": 65160,
+      "sha256": "6056d3fb5ff31615a57489f326adbca7e339b9e283262418f1271d9953b93bc0",
+      "gitBlob": "3656108f7d1017b65fba366002ba602dd74105b6"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/qualification-FAIL-8.png",
+      "bytes": 164421,
+      "sha256": "79feaa26973ba8771ddc3a50b292a7e67a62a3aafb6380678f2507ff98730540",
+      "gitBlob": "46824c45de67aa7805bc09b6b31c8fc9fbb6bffa"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/regression-original-seven-navigation.json",
+      "bytes": 406270,
+      "sha256": "0aebd3174c8d2f222fe6d37e309cd2a25849c4660480bdcecda78e5e076886ed",
+      "gitBlob": "da1d9d3e65cba589068c4fd9641f8ad6fdca4a90"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/regression-original-seven-navigation.txt",
+      "bytes": 292,
+      "sha256": "7bee3fcd4c8cf609ba4cbbeb87a5a16917d8ccd97bc166b0453e63416e999cd5",
+      "gitBlob": "7497527e9fa74a0658912f908d06b9283ce3c36b"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/targeted-before-pager-fix.json",
+      "bytes": 5273,
+      "sha256": "a073f7ea636257d10cfd0a4fcf46e4e1d3df6a87302a0baecef7a525f69611dd",
+      "gitBlob": "e75b4fde45056b2dd28aa92f2190ecb2e26b87c3"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/targeted-default-timeout.json",
+      "bytes": 6587,
+      "sha256": "6947313429d71d19b09f041e5bc38ccd14d85d3e469b395c20c355c274e429f1",
+      "gitBlob": "88f966940f03c21fe55c0f71cbcec4d239d170a8"
+    },
+    {
+      "path": "docs/validation/v94-ui/attempts/targeted-initial.json",
+      "bytes": 6661,
+      "sha256": "2e950b8e713adbf3da450086b30cfe2004f9f5334abaaeb0100aed352f9b2912",
+      "gitBlob": "1f0e27be490d0d04d451016bca1e6cb683ccfc0c"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-desktop-city.png",
+      "bytes": 1613507,
+      "sha256": "76bf96bdcaeab6aa61c47b7b4fcf058f5b033def372059dcfa1396f5af1cf1b5",
+      "gitBlob": "df630ede61a90eaa4d14fa778a44d6334e47d64c"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-desktop-勢力.png",
+      "bytes": 122256,
+      "sha256": "e51907bcf3f4e8f2c577f0c980518c4dadf607142fd9637eaec950d213470fa2",
+      "gitBlob": "dc43437e08ccebe9eedd9c9160de9105f34386cd"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-desktop-戰報.png",
+      "bytes": 97429,
+      "sha256": "106c7c279e199b32aea3838c555c0fc9eed2d97f5cf5583e91765d070b83220f",
+      "gitBlob": "68620060b1c68e9e7d96678e313b89ad62d03a74"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-desktop-治理.png",
+      "bytes": 118883,
+      "sha256": "8c26f18d5d9b2c750d601d148cb38cb51529c56f250e9b8f18224f91c374b390",
+      "gitBlob": "a12781791837f2960d9060126fc4987707cc5ca3"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-desktop-軍隊.png",
+      "bytes": 136583,
+      "sha256": "2475274e9796477ad9694ddfe492f02d32003bb83eb6cef66508f8f3db4a81e5",
+      "gitBlob": "a888794e7a14214c4131556912791763204aa0a4"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-mobile-city.png",
+      "bytes": 417332,
+      "sha256": "e6a6508d719b93f9aae93e849159fa769565134f7069a6cfb5e7d9ffd0048d4e",
+      "gitBlob": "99ed1dfeeba81b7f7ec25adeead0f5a9e8499fdf"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-mobile-勢力.png",
+      "bytes": 65009,
+      "sha256": "94b8ff00cca048e5254eec08d6f7d3829072bd27b6dbd41c9bfbcedfd848b54d",
+      "gitBlob": "07e72da76ab25a894c626c422de634470759c17f"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-mobile-戰報.png",
+      "bytes": 51771,
+      "sha256": "f4cd3351a44a3e5b657fa7f6be917e78effacfc91bff675b489db9022771f27a",
+      "gitBlob": "b55bc19f6536fd18a628ffcbd8386947ac545a80"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-mobile-治理.png",
+      "bytes": 70921,
+      "sha256": "77c289c43f49972e9086c4b88d7d0e67a34aa6fbb3e15cd79d2e911147ae350f",
+      "gitBlob": "df2097b9d54dcddf204ade7c7ed65baeb4cd9d14"
+    },
+    {
+      "path": "docs/validation/v94-ui/before-mobile-軍隊.png",
+      "bytes": 91049,
+      "sha256": "d37952e81dc04d0831a522219b769ffac783b01bfec21bcd80e7cca2f4f52413",
+      "gitBlob": "bcba560fb4256fc7f2540a96696eb7e16e9e26e0"
+    },
+    {
+      "path": "docs/validation/v94-ui/browser-extra.json",
+      "bytes": 2791,
+      "sha256": "207ca74b7590dfb33c35158b0ad658080facdd5ddddf222ebc99669243f64c69",
+      "gitBlob": "2e56e01197eb122bc056b5f17b33dcd2c3bd9a98"
+    },
+    {
+      "path": "docs/validation/v94-ui/browser-progress.json",
+      "bytes": 21430,
+      "sha256": "11d3d171dc850568cb9a47ac166bfe4fb92576b0f7a4ecf67de29eb666797713",
+      "gitBlob": "4ee299c00bb0c34540441cbb7f49cba3a9880e91"
+    },
+    {
+      "path": "docs/validation/v94-ui/browser.json",
+      "bytes": 34927,
+      "sha256": "f22e1f99c20a89416c6345bf7c51066beacc6bbcf9ecfe892300c15d0fd46040",
+      "gitBlob": "ea782a6949fd284a2ee1054a54819cfe1bb2bf28"
+    },
+    {
+      "path": "docs/validation/v94-ui/console.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "gitBlob": "0637a088a01e8ddab3bf3fa98dbe804cbde1a0dc"
+    },
+    {
+      "path": "docs/validation/v94-ui/controlled-chain.json",
+      "bytes": 5571,
+      "sha256": "b6d97e6fb5d0f7f5e40add6539e91a7cbea7cf97a5c092a1a956bf02d68d0f43",
+      "gitBlob": "7b6a5864dacdbbf6460e0fa94589f5165737ac06"
+    },
+    {
+      "path": "docs/validation/v94-ui/controlled-persistence.json",
+      "bytes": 618,
+      "sha256": "6b9e09cbaddbce9c4be8746e2b43c0db5a15a134d352ed408a63995d7240f05d",
+      "gitBlob": "49b5d693738ba6984647155e8aa58ca2dd5ac9b4"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-construction-fullwidth.png",
+      "bytes": 341132,
+      "sha256": "ef99836c15510552fc6f2448473dc40748309801d10e917d0ae3a1810ff05b4b",
+      "gitBlob": "78cd100ab3d551a65cad235f601855a6a546bf1e"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-craftsman-building.png",
+      "bytes": 162052,
+      "sha256": "234c2170fb6927516e93da4b9bf008a5053627809e811edf982055b0e9dc2eb0",
+      "gitBlob": "f1496e4b3acefbb1958f29bfdeac540582955007"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-craftsman-moving.png",
+      "bytes": 161939,
+      "sha256": "0a784910889cbb664e4b06078d27b50c83e5f79dfea31a1fac763e00cd1d8d38",
+      "gitBlob": "fdfd749d6e83b93459658a60e631413dabb2388b"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-created-capacity1.png",
+      "bytes": 150893,
+      "sha256": "04a2f505b428fc2ccf0e4a520e1af88324f4020cbb17046a012320d51cf5e351",
+      "gitBlob": "5029b484b69e25d6a30952cc3000d098e5ac6a2c"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-defense-dispatched.png",
+      "bytes": 139382,
+      "sha256": "7587c9a2c9741f4774d602bfec7a82615d7a1130ff9b75b605f8c0a0e857c6d8",
+      "gitBlob": "1d5eec376c95f0f374d291809db1d713fb13746c"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-diplomacy-reports.png",
+      "bytes": 153866,
+      "sha256": "a381fb65adb73488814be33ba7a61c8199d56e6e390ac766c3717d055d8262e4",
+      "gitBlob": "d51840825f512c96d57565f8df675c5526436232"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-extinct.png",
+      "bytes": 42913,
+      "sha256": "3d1ab9e4466930bbab69ca94ddad2b516c49c3cef42771a7b1d3508966f68827",
+      "gitBlob": "08ab1b5917624c6048ed4682c8983c0ccba7ba27"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-foreign-joint-private.png",
+      "bytes": 135137,
+      "sha256": "018edc42d7b11cda5bc409c073264efd7ebaa8c1baa629b0b3cb5ce963989b46",
+      "gitBlob": "3cf7978177edd250bf15a8d95d2661370165495d"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-foreign-members.png",
+      "bytes": 141758,
+      "sha256": "3501b28734a842a808d3a6bdda0ddfada9d5994cd8fa84c3938864c8bc20a256",
+      "gitBlob": "df9bc72fe71ef668aa968526f9608cb49e0e5163"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-governance-1.png",
+      "bytes": 150055,
+      "sha256": "f141b61233566648f28d70fe8a18354653379a4492c885b4e6017477a20c8b4c",
+      "gitBlob": "742c9740b4ae7cba9913d45ac925318da39fd4dd"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-governance-10.png",
+      "bytes": 169496,
+      "sha256": "155935145103ddcc4430c12d24a21846421a3ee5e99ab50c7422c3d59065c7c8",
+      "gitBlob": "ba5daaa40dbaec78de023f9403e63c3fbe9daff4"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-governance-50.png",
+      "bytes": 150461,
+      "sha256": "12970342f5b4cce1565bfbfd24f3a2f39314be081582c09047a4e60c3c780c46",
+      "gitBlob": "fcea1107de8b38576d2860dc28e68b8926cd22dd"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-joint-committed.png",
+      "bytes": 141411,
+      "sha256": "109398a4e1fb83b0e620a4669282dabcb8872b36919a8faee6949e80023d9bc8",
+      "gitBlob": "b5a44e8a124865b7d318649bba6aca178e853fdc"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-legion-成員.png",
+      "bytes": 142227,
+      "sha256": "03676b7d97e5f90bf8e3ad3acb7663bb4363b3ffe5f2ac9d69bce615d355bc05",
+      "gitBlob": "93a814ec88a0254ae88133a470fc86087b2250a8"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-legion-管理.png",
+      "bytes": 128663,
+      "sha256": "dea13c261b060ef1f0f3ba905ca5ce374c832e4008fd2af1d75a9825be24fac5",
+      "gitBlob": "1c763f63fba98aeb94f833b52052fc5f4ff54ab9"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-legion-總覽.png",
+      "bytes": 143203,
+      "sha256": "ff4982d95a5dff90968ec0f9dc97acef584558e8166d3f97ff5a8e09e3c64ad6",
+      "gitBlob": "9984a0baa34cf4c531fd55cc1165ac403ac175f9"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-legion-聯軍.png",
+      "bytes": 136184,
+      "sha256": "6450a63368520664e2f29a745a5e1ed5ca22014d4d8d99a30c7d4a2b35ea3007",
+      "gitBlob": "3cc581dc04f8701858578a59252d0f9fb24573ec"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-legion-聯防.png",
+      "bytes": 137836,
+      "sha256": "2847400b51754a0bdb7310dd8cfabe2fc4d33ab9a45a7e6ed96541da15ee5c5b",
+      "gitBlob": "fa526814729c080bcdd11a021b021d393e264807"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-ordinary-member.png",
+      "bytes": 136854,
+      "sha256": "6e03f674bcb74b0990503d345eafdfb07cfcf10acbf5918bbad789408ae0d68c",
+      "gitBlob": "e433dab8ec5323b89fc26dd8facb8b8f85be7470"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-queues-3.png",
+      "bytes": 1629067,
+      "sha256": "d60f27da59a9643cfd3299f932912686fcb44b7887cb17dba3026e65efe5fc8c",
+      "gitBlob": "2d197dc287eb18a6d1b105bf6de40914dcb69190"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-special-unit-cards.png",
+      "bytes": 142148,
+      "sha256": "50702fb341c2806e13d4e4e282b37d9b97036b2877f68bbe0d2973404f0408f1",
+      "gitBlob": "f7c2af8299249533fd0bca7123fff84bd933119f"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-stale-retry.png",
+      "bytes": 155722,
+      "sha256": "712f01917d1c33872bcf283ffab5f83afb20be5affe9c7956e48d36766fc770e",
+      "gitBlob": "f3ba9f9cda77bc10729b90214072541f6d9e09e9"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-start-updated.png",
+      "bytes": 1391711,
+      "sha256": "9aa42f870064c5385e459b100563211c04546b959d4986f2d965c28c07ffae6c",
+      "gitBlob": "ef49295569da510f420c1e6cfc57f57df07a9bc3"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-transferred.png",
+      "bytes": 136696,
+      "sha256": "fb7d21da7228a86db34b8833cf02cd23925b44d183f5a4b67149edeb04b4e6e3",
+      "gitBlob": "cbbd2cbffe571f0356e15a8ae8ed7d5575761b5b"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-world-帝國.png",
+      "bytes": 131999,
+      "sha256": "5d193cabb1731ebd09bbf7c9ba38ac193905cb06ca70c28feba02fd98fa7cc0f",
+      "gitBlob": "c530e3b733628d5f04786bac73433e215cfd8a41"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-world-軍團.png",
+      "bytes": 130857,
+      "sha256": "b31105975418465c28653357310ab7ee98e5724a59c42c3d549d73abcfc72c30",
+      "gitBlob": "f71133ac041c6e8771524b27b8c2e79ab8f1521c"
+    },
+    {
+      "path": "docs/validation/v94-ui/desktop-world-領主.png",
+      "bytes": 134947,
+      "sha256": "09fe64ef1aca777f847d956442acc316024140d0b57df95c62510e7517056d47",
+      "gitBlob": "d0d3627f0d607607ecaad347fa4e6b56a41425f3"
+    },
+    {
+      "path": "docs/validation/v94-ui/fair-12012.json",
+      "bytes": 1211,
+      "sha256": "1754f218465bdad83927b8bb6c6cd2d44d5944a98d19ec1b77e4a87fc73d5efc",
+      "gitBlob": "671f4e533f6b58d8f8765b0b0bdac859da688b70"
+    },
+    {
+      "path": "docs/validation/v94-ui/fair-90217.json",
+      "bytes": 1221,
+      "sha256": "3b4da77dde0b39663c62853ceb3a145392ed4b91595a40e6bc03c2c3e94cd39b",
+      "gitBlob": "65a787619801e653853867d707b47e7d153b8a98"
+    },
+    {
+      "path": "docs/validation/v94-ui/fair-92049.json",
+      "bytes": 1218,
+      "sha256": "041c1ebf287f2f0fce294ea85aae28625265674d4cee28bc8aa685f4b39423b3",
+      "gitBlob": "458f9ff9be192d0bdc81db639d95bb0166492f7f"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-construction-fullwidth.png",
+      "bytes": 81130,
+      "sha256": "6e0e1711acac340ff04b2f8dce96a7bcf09b088723ede652a067cebb71709024",
+      "gitBlob": "4e3a4deaedba699f51d3ea8e9b122389ba27ba74"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-craftsman-building.png",
+      "bytes": 70048,
+      "sha256": "03c610ec3d0c8d34e2ec3a46130cb67cb80ca0d61bd858f205639b523690db97",
+      "gitBlob": "85844b9c2619324442265b982b6d0ea85be4417d"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-craftsman-moving.png",
+      "bytes": 70210,
+      "sha256": "b71660be37e09af63ca3b9c53fd1bc885294ce6d5a7d2d05c60af7ff84594e90",
+      "gitBlob": "cbd0b7fde16a62c1e41265488e1eeac43627edc3"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-created-capacity1.png",
+      "bytes": 83549,
+      "sha256": "f435ec77e7b179c7a9bcf98374fec187ae3fd2682a3e759a67be6ceb2fe1f9d1",
+      "gitBlob": "cf9a91291c0f27d52cf29a29b418b0d0d1cd0634"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-defense-dispatched.png",
+      "bytes": 72205,
+      "sha256": "d23f304de28e5834d4ed60febfa5c8f916e53288234d5f604bfe765f724f99cb",
+      "gitBlob": "3a3f6a5f186fa1083792964145ee50187520d947"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-diplomacy-reports.png",
+      "bytes": 83437,
+      "sha256": "67ba45f6aae0c5802d55991979d5d90d68923f299c26ccc28e2ecb755f189818",
+      "gitBlob": "d9f9a197660e1d88cba1b8bace4fcf1a72c32e67"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-extinct.png",
+      "bytes": 41070,
+      "sha256": "f919fd69cf3f9d0d4d403be118a8aac6fb1a7731f1d26dc51c631fd8613a4501",
+      "gitBlob": "ea1be6b8cabecd3d0a9fed7cb2f14bcb16f21081"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-foreign-joint-private.png",
+      "bytes": 75222,
+      "sha256": "e982b16ede0f06a6e604043265babb391588800c996b2fb070b4cd5dbfef3d50",
+      "gitBlob": "ae522c0493ad0485cf39946369ab555ecd7af21e"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-foreign-members.png",
+      "bytes": 64807,
+      "sha256": "a582023bdacce60f8e3f383b8f4b5c4a5691387025eef2228845fe037d33fbd2",
+      "gitBlob": "b07a29368456414792eefc3ad6684d6d2625001e"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-governance-1.png",
+      "bytes": 67273,
+      "sha256": "f27c670b5bd5a6a6b3a17139d8edfe370cd7c53f75e82e1bb08c8a695a03093d",
+      "gitBlob": "157692ff5424d5ee61fbbd7a3364b42532e649e8"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-governance-10.png",
+      "bytes": 67324,
+      "sha256": "3d7af0cce339f907f6be40dba9a24652139dd2bba66517f974dea6538bd7e09d",
+      "gitBlob": "c046506145023eac3204238fc5d47af9bb92ccd8"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-governance-50.png",
+      "bytes": 67580,
+      "sha256": "be67202acde0e9f728f3b9dbb0638ca706cf645b888d5ace6ea551bdd6215290",
+      "gitBlob": "1d6c741db1b65d88442aef5631e4705bc08066c1"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-joint-committed.png",
+      "bytes": 74957,
+      "sha256": "0a440e1bef7cc13429ed37efa8d5bdc7001af1377b2ec18c75697797719be337",
+      "gitBlob": "83d2f1daf0b884ea3507a6c38afa51ef809158da"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-legion-成員.png",
+      "bytes": 68386,
+      "sha256": "6916e7b28a4494a15dba17685718835e914f04f10a16e54ca89972164e0e6a6e",
+      "gitBlob": "d14f13f5678b92cbcda05865032206099b5f3066"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-legion-管理.png",
+      "bytes": 74429,
+      "sha256": "e06e2a4ec6d2041f3661503b00d85770886cabc8da4b4e71cc4f817acf4279cf",
+      "gitBlob": "2c866d00eb9373d678dc2d67ef6900fe8d7f339e"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-legion-總覽.png",
+      "bytes": 78754,
+      "sha256": "f7084e9aa49886806e811dc1af102503176d7bda9b0d9b0a7a474a69db51d3b0",
+      "gitBlob": "cb13438447d99cfddd66b3e1de0d9a29f2ae03df"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-legion-聯軍.png",
+      "bytes": 75856,
+      "sha256": "cbc645b6fc85d97af5081fb913177de17306776b026b01e76e3307ce4ff9b300",
+      "gitBlob": "56a418b3eedac8d922210402adaa4b2d1f7a416a"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-legion-聯防.png",
+      "bytes": 76254,
+      "sha256": "ccb88ee21e19a8572cfee5382f436bdbf5d0e6692e0eb8cb5dd3c6239ae39c2d",
+      "gitBlob": "1d1a3261ddbdced4c1ea29a8acd1a9ea026ac63c"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-ordinary-member.png",
+      "bytes": 82353,
+      "sha256": "2f5518ef99dd5ada5d8e9de6d59d824bca416332d4777b01ee1c79a086fd58f0",
+      "gitBlob": "4e1a6a7a45cf9e1c3c5f9716d8ff9e12105c7fa5"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-queues-3.png",
+      "bytes": 424253,
+      "sha256": "a776ff769ba56507d91dff738f4a25d3ae300736aa627fd75172a4fc3da95703",
+      "gitBlob": "fe86efcb729a31439627e8475798adadb2f04ec4"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-special-unit-cards.png",
+      "bytes": 79244,
+      "sha256": "3a9bbb1cedac7d17eaaa08ed0b3e0d4703a4c0fce16c7a3145a0e98ef8cca223",
+      "gitBlob": "45697dda39423b0a3dfa99d3d88174081515a155"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-stale-retry.png",
+      "bytes": 70328,
+      "sha256": "7ebfe79f58bbbabc364aa9b7d7f404c9e536ecfae53bca446399f748ac78459c",
+      "gitBlob": "bc4d1cd0195e0159fb7d56ac1024b69607c39dae"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-start-updated.png",
+      "bytes": 485722,
+      "sha256": "671bc9c0671274dcec6f53a23b04f55a1534c92e9e2f3f6203e58d6b724a438e",
+      "gitBlob": "96bcd25dcc4aef5fc421e1e228a5517be3960b19"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-transferred.png",
+      "bytes": 80485,
+      "sha256": "05cf3930402b66ef1c23186da9cf5efcc0d797e94b8226305d8aa38b577b7386",
+      "gitBlob": "66e500de2d549ed403d6e90fc92bd0fa9468eaad"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-world-帝國.png",
+      "bytes": 66959,
+      "sha256": "e8c80a2d6abea866f1a2f39b49ba20ba65abc59a5592fcda959ff71c819ea763",
+      "gitBlob": "4c10321aeccef6660b92c56113559cf380fd1bba"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-world-軍團.png",
+      "bytes": 66321,
+      "sha256": "9c78f585c21dbbabd2366e4598bda6e80ef7c876b2d532a8817d96e4db8bef3a",
+      "gitBlob": "fcf4636a48ec3175cf729f8165501c73427d8ec9"
+    },
+    {
+      "path": "docs/validation/v94-ui/mobile-world-領主.png",
+      "bytes": 72901,
+      "sha256": "f24b93b04fc4efb365bb0f521909d30689e41d2ddd8a440ac9fd35615fbc8015",
+      "gitBlob": "0a6f9938a8812fa3e25dbabb2f6ba307e4cc79ae"
+    },
+    {
+      "path": "docs/validation/v94-ui/pages-build.txt",
+      "bytes": 1003,
+      "sha256": "f52ff78e1b228bfd7730536839fb24817cc9c141fe4edfa6feeb1410d595e502",
+      "gitBlob": "748c0ee70e3cffd88f673e02b9b0e65c8fdf5e46"
+    },
+    {
+      "path": "docs/validation/v94-ui/pages-paths.txt",
+      "bytes": 86,
+      "sha256": "03ceeb59584038762b73bbb3912c459f86746d95f0a0fadeb416dc997ff3b961",
+      "gitBlob": "fedf8e60de420765b893f660c2d6037e3b99c7bd"
+    },
+    {
+      "path": "docs/validation/v94-ui/production-build.txt",
+      "bytes": 1384,
+      "sha256": "0489d91b619fb3819ef8eef56b8c5793887fc9bfef4631fe7d212d0581412ff2",
+      "gitBlob": "f093e58780a09b233e16075e9dbe0ecb15504d3f"
+    },
+    {
+      "path": "docs/validation/v94-ui/regression-full.json",
+      "bytes": 405218,
+      "sha256": "a522f11be2b90d6bc9d1ae9cd2f06ba04ef08deb70fda0b7daddcd35469ff448",
+      "gitBlob": "d111490563c101376a9281d3e00e30257e6cb066"
+    },
+    {
+      "path": "docs/validation/v94-ui/regression-full.txt",
+      "bytes": 209,
+      "sha256": "6bd469a9968657b2890d7aebf65741c744142146794b510a69aba2b36b936913",
+      "gitBlob": "4fb5826f3ec0c58a6436845703540ececbc9fea8"
+    },
+    {
+      "path": "docs/validation/v94-ui/summary.json",
+      "bytes": 6867,
+      "sha256": "c0728b23b0203219e5200aa373597fefac53456294a5ae901e1839d8f4ee94cf",
+      "gitBlob": "5fb8b5ee1a5552721d61ed9a7743efdfcf7af751"
+    },
+    {
+      "path": "docs/validation/v94-ui/typecheck.txt",
+      "bytes": 54,
+      "sha256": "8b187ccdf53e12136f6e294efc7e25621dbed7aeceb19e33c7adf6a3b431d598",
+      "gitBlob": "d8030adfb8663e0c3ada5f2803d6790a40feec52"
+    }
+  ],
+  "note": "Final repository tree SHA verified against git write-tree at publication; manifest cannot hash itself."
+}

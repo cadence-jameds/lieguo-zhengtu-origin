@@ -1,3 +1,4 @@
+import {diplomacySnapshot,diplomacyChanges} from './diplomacyReports';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
 import {handleAutonomy,retireAutonomy} from './autonomy';
@@ -80,6 +81,7 @@ export function submitFormalOrder(current:FormalWorld,value:unknown):FormalTrans
    else applyEconomyCommand(w,city,order,p,scheduler);
    promoteCityQueues(w,city,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
+ reports.push(...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
  w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
  validateFormalWorld(w);
@@ -106,6 +108,7 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
  const w=structuredClone(current),scheduler=new EventScheduler(w.events),reports:FormalReport[]=[];
  while(scheduler.peek()&&scheduler.peek()!.at<=target){
+  const beforePolitics=diplomacySnapshot(w);
   const e=scheduler.pop()!;w.time=e.at;
   const returningSource=e.type==='logistics.return'?w.logistics?.find(t=>t.shipmentId===e.shipmentId)?.sourceCityId:undefined;
   const governanceReports=handleGovernance(w,e,scheduler,submitFormalOrder);
@@ -126,9 +129,10 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
   resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
+  if(aiReports===null)reports.push(...diplomacyChanges(w,beforePolitics));
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
  }
- reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
+ const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  validateFormalWorld(w);return{world:w,reports};
 }

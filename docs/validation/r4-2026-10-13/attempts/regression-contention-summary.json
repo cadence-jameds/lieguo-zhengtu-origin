@@ -1,0 +1,44 @@
+{
+  "success": false,
+  "passed": 1116,
+  "failed": 7,
+  "skipped": 1,
+  "failures": [
+    {
+      "file": "game/formal/integrationR4.test.ts",
+      "test": "R4 fair 100 factions/99 autonomous AI seed 12012: 8h, SaveLoad and sliced equivalence",
+      "failure": "Error: Test timed out in 120000ms."
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "failure": "Error: Test timed out in 20000ms."
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+      "failure": "AssertionError: expected 'duplicate' to be 'committed' // Object.is equality"
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "failure": "Error: Test timed out in 20000ms."
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "50X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "failure": "Error: Test timed out in 20000ms."
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "a late event remains unexposed on failed persistence, retries after one second, and never overlaps",
+      "failure": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "a failed governance save never exposes a new setting or receipt and replay commits only once",
+      "failure": "AssertionError: expected [] to have a length of 1 but got +0"
+    }
+  ],
+  "scope": "concurrent real Chromium and builds; preserved unsuccessful run, never counted as PASS"
+}

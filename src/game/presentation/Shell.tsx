@@ -12,10 +12,10 @@ import {CIV_NAMES,AGE_NAMES,LABELS} from './artMap';
 import {Garrison} from './Garrison';
 import {fmt,FormalEmblem,netProduction} from './UI';
 import {CityValue,LiveProgress,WorldClock} from './LiveValues';
-export type View='map'|'city'|'army'|'research'|'diplomacy'|'reports'|'empire'|'tasks'|'settings';
-export const NAV:{id:View;icon:string;name:string}[]=[{id:'map',icon:'▧',name:'世界地圖'},{id:'city',icon:'府',name:'城市建設'},{id:'army',icon:'⚑',name:'軍隊編組'},{id:'research',icon:'冊',name:'科技研發'},{id:'diplomacy',icon:'印',name:'天下勢力'},{id:'reports',icon:'書',name:'戰報紀事'},{id:'empire',icon:'政',name:'治理方針'},{id:'tasks',icon:'引',name:'任務'},{id:'settings',icon:'⚙',name:'戰役設定'}];
-export const MOBILE_NAV=(['map','city','army','reports','research','diplomacy','empire'] as const).map(id=>NAV.find(n=>n.id===id)!);
-const MOBILE_NAMES={map:'地圖',city:'城市',army:'軍隊',research:'科技',diplomacy:'勢力',reports:'戰報',empire:'治理',tasks:'任務',settings:'設定'};
+export type View='map'|'city'|'army'|'research'|'diplomacy'|'legion'|'reports'|'empire'|'tasks'|'settings';
+export const NAV:{id:View;icon:string;name:string}[]=[{id:'map',icon:'▧',name:'世界地圖'},{id:'city',icon:'府',name:'城市建設'},{id:'army',icon:'⚑',name:'軍隊編組'},{id:'research',icon:'冊',name:'科技研發'},{id:'legion',icon:'旗',name:'軍團'},{id:'diplomacy',icon:'印',name:'天下勢力'},{id:'reports',icon:'書',name:'戰報紀事'},{id:'empire',icon:'政',name:'治理方針'},{id:'tasks',icon:'引',name:'任務'},{id:'settings',icon:'⚙',name:'戰役設定'}];
+export const MOBILE_NAV=(['map','city','army','reports','research','legion','diplomacy','empire'] as const).map(id=>NAV.find(n=>n.id===id)!);
+const MOBILE_NAMES={map:'地圖',city:'城市',army:'軍隊',research:'科技',diplomacy:'勢力',legion:'軍團',reports:'戰報',empire:'治理',tasks:'任務',settings:'設定'};
 export function Shell({world,city,cities,mobile,view,onView,onCity,onHome,onResource,onMore,moreOpen,busy,children,unread=0,alerts=0,onEra}:{world:FormalWorld;city:FormalCity;cities:FormalCity[];mobile:boolean;view:View;onView:(v:View)=>void;onCity:(id:FormalCity['id'])=>void;onHome:()=>void;onResource:(r:typeof resourceKeys[number])=>void;onMore:()=>void;moreOpen:boolean;busy:boolean;children:ReactNode;unread?:number;alerts?:number;onEra?:()=>void}){
  const time=useDisplayTime(world),shield=protectedFaction({...world,time},world.playerFactionId);
  const f=world.factions.find(f=>f.id===world.playerFactionId)!,p=netProduction(world,city),units=city.military?.units??{},project=world.researchProjects.find(p=>p.projectId===f.researchQueue);

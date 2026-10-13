@@ -14,7 +14,7 @@ export function useGame(){
  const [world,setWorld]=useState<FormalWorld|null>(null),[status,setStatus]=useState<'loading'|'ready'|'error'|'locked'>('loading');
  const [offline,setOffline]=useState<OfflineSummary|null>(null);
  const [error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false);
- const [transition,setTransition]=useState(''),[synced,setSynced]=useState(0),[reportCount,setReportCount]=useState(0),[reportEpoch,setReportEpoch]=useState(0),[reportStatus,setReportStatus]=useState({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}}),[reportData,setReportData]=useState<{page:number;filter:string;count:number}|null>(null);
+ const [transition,setTransition]=useState(''),[synced,setSynced]=useState(0),[reportCount,setReportCount]=useState(0),[reportEpoch,setReportEpoch]=useState(0),[reportStatus,setReportStatus]=useState({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}),[reportData,setReportData]=useState<{page:number;filter:string;count:number}|null>(null);
  const [backups,setBackups]=useState<{id:number;at:number;label:string;time:number}[]>([]),[reports,setReports]=useState<FormalReport[]>([]);
  const worker=useRef<Worker|null>(null),current=useRef<FormalWorld|null>(null);
  const intelQueries=useRef(new Map<string,{resolve:(value:CityIntel)=>void;reject:(error:Error)=>void}>());
@@ -44,7 +44,7 @@ export function useGame(){
     if(r.type==='state'||r.type==='switched'||r.type==='switchFailed'){
      const incoming=r.patch?applyWorldPatch(current.current,r.patch):r.world;
      if(r.patch&&incoming===undefined){worker.current?.postMessage({type:'snapshot'});return;}
-     const prior=current.current,next=reconcileWorld(prior,incoming);if(r.type==='switched'||prior?.campaignId!==next?.campaignId||(prior?.sequences.report??0)>(next?.sequences.report??0)){setReports([]);setReportData(null);setReportStatus({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}});setReportEpoch(n=>n+1);}current.current=next;setWorld(next);
+     const prior=current.current,next=reconcileWorld(prior,incoming);if(r.type==='switched'||prior?.campaignId!==next?.campaignId||(prior?.sequences.report??0)>(next?.sequences.report??0)){setReports([]);setReportData(null);setReportStatus({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}});setReportEpoch(n=>n+1);}current.current=next;setWorld(next);
      if(next){const anchor=r.clock??{campaignId:next.campaignId,time:next.time,speed:effectiveSpeed(next),running:true};displayClock.adopt({...anchor,running:anchor.running&&!document.hidden});}
      else displayClock.stop();
      if(r.type==='switched'||r.type==='switchFailed')commands.current.clear();
