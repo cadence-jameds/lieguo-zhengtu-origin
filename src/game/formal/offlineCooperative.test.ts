@@ -8,7 +8,7 @@ function busyFixture(){
  const w=createFormalFixture({speed:6});
  // Equal timestamps exercise scheduler ordering without splitting an event batch.
  for(let i=0;i<96;i++){
-  w.events.push({type:'fixture.marker',id:eventId(sequenceKey(w.sequences.event++)),at:Math.floor(i/3)*60_000});
+  w.events.push({type:'fixture.marker',marker:'yield-'+i,id:eventId(sequenceKey(w.sequences.event++)),at:Math.floor(i/3)*60_000});
  }
  return w;
 }
