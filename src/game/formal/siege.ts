@@ -1,3 +1,4 @@
+import {canAcquireConquest} from './politics';
 import type {BattleId} from './ids';
 import type {FormalCity,FormalWorld} from './model';
 import {resourceKeys,zeroResources} from './model';
@@ -6,7 +7,7 @@ import type {SiegeChange} from './combatModel';
 import {baseUnit,combatStats,effectiveUnit,hasTech} from './combatModifiers';
 import {UNIT_CATALOG} from './unitCatalog';
 import {HOUSING,storageCapacity} from './catalogB3';
-import {changeCityOwner,settleCity,settleFaction} from './economy';
+import {requireRule,changeCityOwner,settleCity,settleFaction} from './economy';
 import type {EventScheduler} from './scheduler';
 import {seedHash} from './terrain';
 export const WALL_DURABILITY=[0,30,35,40,45,50,60,70,80,90,105,120,140,160,185,210];
@@ -46,10 +47,11 @@ export function resolveSiege(w:FormalWorld,c:FormalCity,pools:readonly CombatPoo
  reconcileSiegeQueues(c);reconcileSiegeStorage(w,c);return{changes,developmentBefore:before,lost:before-developmentLevels(c),wallDamage:c.wallLevel?Math.max(0,wallPower):0,wallDamageLevel:c.wallLevel??0};
 }
 export function finishConquest(w:FormalWorld,c:FormalCity,owner:FormalCity['ownerFactionId'],lost:number,before:number,s:EventScheduler){
+ requireRule(canAcquireConquest(w,owner),'已滅國或無合法城市的勢力不能接收征服城市。');
  settleFaction(w,c.ownerFactionId);settleFaction(w,owner);const queue=c.military?.queue??[],returnedTrainingPopulation=queue.reduce((n,j)=>n+j.remaining*j.populationPerUnit,0),cancelled=new Set(queue.map(j=>j.eventId));
  const events=s.snapshot().filter(e=>!cancelled.has(e.id));while(s.size)s.pop();for(const e of events)s.push(e);
  if(c.military)c.military.queue=[];
  const populationBefore=c.population+returnedTrainingPopulation,rate=conquestLossRate(lost,before);c.housing=400+HOUSING[c.buildings.residence??0];c.population=Math.min(c.housing,Math.max(0,populationBefore*(1-rate)));c.autoLogistics=[];
- changeCityOwner(w,c,owner,'conquest');return{populationBefore,populationAfter:c.population,returnedTrainingPopulation,rate};
+ changeCityOwner(w,c,owner,'conquest',s);return{populationBefore,populationAfter:c.population,returnedTrainingPopulation,rate};
 }
 export function finalizeSiegeHousing(c:FormalCity){c.housing=400+HOUSING[c.buildings.residence??0];c.population=Math.min(c.population,c.housing);}

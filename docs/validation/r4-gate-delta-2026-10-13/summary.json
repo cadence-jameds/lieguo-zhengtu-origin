@@ -1,0 +1,78 @@
+{
+  "scope": "R4 Astra HOLD B1/M1 minimal delta; not an Astra Gate PASS",
+  "reviewedBaseline": "608de8a77a8644b7a3a894685e27ced9d4507ca0",
+  "branch": "stage2-r4-integration",
+  "pr": 3,
+  "authority": {
+    "main": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+    "path": "docs/b6-v94/河谷戰役_vNext_平衡重構討論_v94.md",
+    "blob": "9dacc5c162003eba442c91c32ac54b02e9f9e9a3",
+    "unchanged": true,
+    "otherMainChangesMerged": false
+  },
+  "regression": {
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "files": 137,
+    "passed": 1150,
+    "failed": 0,
+    "skipped": 1,
+    "success": true,
+    "durationSeconds": 389.8832253417969,
+    "startUtc": "2026-10-13T23:50:29.892000+00:00",
+    "endUtc": "2026-10-13T23:56:59.775225+00:00",
+    "maxWorkers": 2,
+    "testTimeout": 30000,
+    "excludes": []
+  },
+  "newTargeted": {
+    "passed": 27,
+    "failed": 0,
+    "behaviorAssertionCases": 26,
+    "conditionalEvidenceExporterCases": 1
+  },
+  "targetedRelated": {
+    "passed": 52,
+    "failed": 0
+  },
+  "beforeDesiredOutcomeAssertions": {
+    "passed": 4,
+    "failed": 13,
+    "meaning": "Before production fixes; expected legal behavior failed."
+  },
+  "originalNegativeProbe": {
+    "passed": 3,
+    "meaning": "PASS means defect reproduced, not repaired."
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "browser": {
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "screenshots": 9,
+    "chromium": "154.0.8037.57",
+    "production": true,
+    "realWorker": true,
+    "realIndexedDB": true,
+    "reload": true,
+    "recoveryThisBrowserRun": false,
+    "controlled": true,
+    "aiDecisionsDeferredDays": 30
+  },
+  "persistence": "Save/Load/full export/import/Recovery/three atomic write faults/same-time replay covered by Node fake-indexeddb assertions",
+  "historicalEvidence": "Unchanged; original R4 artifacts are not this rerun",
+  "manualPending": "docs/recovery/R4_Gate_Delta_Manual_Pending.md",
+  "githubActions": "Not claimed PASS; check new HEAD after publication",
+  "gate": "HOLD — re-review required",
+  "b5E1": "HOLD — original M3 Lv15 player manual evidence pending",
+  "merge": false,
+  "deploy": false,
+  "uiBranchTouched": false,
+  "b9Started": false,
+  "v93TasksOrV94FiveQueuesImplemented": false,
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "Linux",
+    "packageVersion": "0.30.49"
+  }
+}

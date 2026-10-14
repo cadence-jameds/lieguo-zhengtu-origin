@@ -1,0 +1,103 @@
+{
+  "faultPoint": "world-write",
+  "finals": [
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.round-1",
+      "eventId": "event:0000000000000101",
+      "at": 318199,
+      "round": 1,
+      "kind": "round"
+    },
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.siege-1",
+      "eventId": "event:0000000000000101",
+      "at": 318199,
+      "round": 1,
+      "kind": "siege-round"
+    },
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.siege-2",
+      "eventId": "event:0000000000000102",
+      "at": 618199,
+      "round": 2,
+      "kind": "siege-round"
+    },
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.siege-3",
+      "eventId": "event:0000000000000208",
+      "at": 918199,
+      "round": 3,
+      "kind": "siege-round"
+    },
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.siege-4",
+      "eventId": "event:0000000000000209",
+      "at": 1218199,
+      "round": 4,
+      "kind": "siege-round"
+    },
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.siege-5",
+      "eventId": "event:0000000000000210",
+      "at": 1518199,
+      "round": 5,
+      "kind": "siege-round"
+    },
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "eventId": "event:0000000000000210",
+      "at": 1518199,
+      "round": 1,
+      "kind": "final",
+      "targetPoint": {
+        "x": 62,
+        "y": 198
+      },
+      "mission": "conquest",
+      "outcome": "held",
+      "ownerBefore": "faction:000",
+      "ownerAfter": "faction:000",
+      "qualificationBefore": "none",
+      "qualificationAfter": "none"
+    }
+  ],
+  "sites": [
+    {
+      "id": "wild:exile-0000000000000004",
+      "exile": true,
+      "sourceFactionId": "faction:001",
+      "civilizationId": "civ_byzantium",
+      "createdAt": 1518199,
+      "spawnSlot": 437,
+      "generation": 0,
+      "region": 73,
+      "x": 62,
+      "y": 197,
+      "resource": "bandit",
+      "level": 1,
+      "phase": "active",
+      "defenders": {
+        "militia": 30,
+        "ram": 5
+      },
+      "initialDefenders": {
+        "militia": 30,
+        "ram": 5
+      },
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      }
+    }
+  ],
+  "reports": 1
+}

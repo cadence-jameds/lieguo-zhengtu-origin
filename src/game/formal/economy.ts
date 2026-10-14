@@ -1,4 +1,4 @@
-import {finishCraftsmanCastle} from './extinction';
+import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen} from './extinction';
 import {canReinforce} from './armies';
 import {buildingRequirements,castleSource} from './buildingDetailData';
 import {startDemolition,completeDemolition} from './demolition';
@@ -66,8 +66,9 @@ export function settleCity(w:FormalWorld,c:FormalCity,at=w.time){
 export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).cities.get(id);if(!original)return undefined;const c=structuredClone(original);settleCity(w,c);return c;}
 export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}
 /** B5/B6 interface only: no combat or conquest command is implemented here. */
-export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive'){
+export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive',scheduler?:EventScheduler){
  requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
+ if(w.extinction?.craftsmen.length||c.economy?.construction.some(j=>j.castleCivilizationId)){const s=scheduler??new EventScheduler(w.events);reconcileCityCraftsmen(w,c,s);if(!scheduler)w.events=s.snapshot();}
 }
 export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}
 export function addStock(c:FormalCity,resources:Resources){const cap=storageCapacity(c);for(const r of resourceKeys)c.stock[r]=Math.min(cap-(c.economy?.reservedIncoming[r]??0),c.stock[r]+resources[r]);}
@@ -155,6 +156,7 @@ export function handleEconomyEvent(w:FormalWorld,event:FormalEvent,s:EventSchedu
  }
  if(event.type==='construction.complete'){
   const c=spatial(w).cities.get(event.cityId),job=c?.economy?.construction.find(j=>j.eventId===event.id);if(!c||!job)return true;settleCity(w,c);
+  if(job.castleCivilizationId&&!craftsmanForConstruction(w,c,job)){reconcileCityCraftsmen(w,c,s);return true;}
   if(job.action==='demolish'){completeDemolition(w,c,job);}
   else if(job.target.kind==='field'){const slot=job.target.slot;c.fields!.find(f=>f.slot===slot)!.level=job.toLevel;}
   else if(job.target.key==='wall'){c.wallLevel=job.toLevel;}

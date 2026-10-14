@@ -1,4 +1,4 @@
-import type {FormalWorld,FormalCity,FormalOrder,ResearchProject,WildSite,FormalEvent} from './model';
+import type {FormalWorld,FormalCity,FormalOrder,ResearchProject,WildSite,FormalEvent,Construction} from './model';
 import type {FactionId,CityId,ArmyId,EventId} from './ids';
 import {cityId,wildSiteId,sequenceKey} from './ids';
 import {isMissionArmy,type MissionArmy,type Point} from './combatModel';
@@ -49,4 +49,37 @@ export function applyExtinctionCommand(w:FormalWorld,c:FormalCity|undefined,o:Fo
  requireRule(craft.civilizationId!==w.factions.find(f=>f.id===o.issuerId)!.civilizationId&&!Object.keys(c.buildings).some(k=>k==='castle'||k.startsWith('castle.'))&&!c.economy?.construction.some(j=>j.target.kind==='building'&&j.target.key==='castle'),'每城只可建一座城堡，工匠須為外文明。');applyEconomyCommand(w,c,o,{type:'building.upgrade',cityId:c.id,key:'castle'},s);c.economy!.construction.find(j=>j.commandId===o.commandId)!.castleCivilizationId=craft.civilizationId;craft.constructionCommandId=o.commandId;
 }
 export function handleCraftsmanEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler){if(e.type!=='craftsman.arrive')return false;const craft=w.extinction?.craftsmen.find(c=>c.eventId===e.id&&c.id===e.craftsmanId);if(craft){const dest=w.cities.find(c=>c.id===craft.destinationCityId&&c.ownerFactionId===craft.ownerFactionId);if(!dest){const fallback=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-craft.path.at(-1)!.x,a.y-craft.path.at(-1)!.y)-Math.hypot(b.x-craft.path.at(-1)!.x,b.y-craft.path.at(-1)!.y))[0];if(fallback){const r=route(w,craft.path.at(-1)!,fallback);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=fallback.id;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return true;}w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return true;}craft.cityId=dest.id;craft.eventId=null;craft.arrivalAt=null;craft.destinationCityId=null;craft.path=[];}return true;}
-export function finishCraftsmanCastle(w:FormalWorld,c:FormalCity,command:string){const craft=w.extinction?.craftsmen.find(x=>x.constructionCommandId===command);if(craft){c.castleCivilizationId=craft.civilizationId;w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);}}
+/** Bind special work to its original applied authorization, craft, city and civilization. */
+export function craftsmanForConstruction(w:FormalWorld,c:FormalCity,job:Construction){
+ if(job.target.kind!=='building'||job.target.key!=='castle'||!job.castleCivilizationId)return undefined;
+ const crafts=(w.extinction?.craftsmen??[]).filter(x=>x.constructionCommandId===job.commandId);
+ if(crafts.length!==1)return undefined;
+ const craft=crafts[0];if(craft.cityId!==c.id||craft.ownerFactionId!==c.ownerFactionId||craft.civilizationId!==job.castleCivilizationId||craft.eventId||craft.carrierArmyId||w.extinction?.extinct.includes(craft.ownerFactionId))return undefined;
+ const receipt=w.commandReceipts.find(r=>r.commandId===job.commandId&&r.issuerId===craft.ownerFactionId&&r.disposition==='applied');
+ try{const p=receipt&&JSON.parse(receipt.fingerprint).payload;if(p?.type!=='craftsman.castle'||p.cityId!==c.id||p.craftsmanId!==craft.id)return undefined;}catch{return undefined;}
+ return craft;
+}
+/** Involuntary loss of special authorization, NOT player cancellation: no refunds.
+ * Other buildings/fields/walls keep their payment, durations, start times and events. */
+function discardCraftsmanConstruction(w:FormalWorld,c:FormalCity,job:Construction,s:EventScheduler){
+ if(job.target.kind!=='building')return;const key=job.target.key,e=c.economy!;
+ const cancelled=e.construction.filter(j=>j.target.kind==='building'&&j.target.key===key&&j.fromLevel>=job.fromLevel),ids=new Set(cancelled.map(j=>j.eventId));
+ e.construction=e.construction.filter(j=>!cancelled.includes(j));
+ for(const craft of w.extinction?.craftsmen??[])if(cancelled.some(j=>j.commandId===craft.constructionCommandId))craft.constructionCommandId=null;
+ if((c.buildings[key]??0)===0){delete c.buildings[key];delete e.slots[key];if(key==='castle')delete c.castleCivilizationId;}
+ const retained=s.snapshot().filter(e=>!ids.has(e.id));while(s.size)s.pop();for(const event of retained)s.push(event);
+}
+function evacuateCraftsman(w:FormalWorld,craft:Craftsman,from:Point,s:EventScheduler){
+ const dest=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y)||(a.id<b.id?-1:a.id>b.id?1:0))[0];
+ if(!dest){w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return;}
+ const r=route(w,from,dest);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=dest.id;craft.cityId=null;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});
+}
+/** Called in the same owner-transfer transition, using its active scheduler. */
+export function reconcileCityCraftsmen(w:FormalWorld,c:FormalCity,s:EventScheduler){
+ for(const job of [...c.economy?.construction??[]])if(job.castleCivilizationId&&!craftsmanForConstruction(w,c,job))discardCraftsmanConstruction(w,c,job,s);
+ for(const craft of [...w.extinction?.craftsmen??[]])if(craft.cityId===c.id&&craft.ownerFactionId!==c.ownerFactionId)evacuateCraftsman(w,craft,c,s);
+}
+export function finishCraftsmanCastle(w:FormalWorld,c:FormalCity,command:string){
+ const job=c.economy?.construction.find(j=>j.commandId===command),craft=job&&craftsmanForConstruction(w,c,job);if(!craft)return false;
+ c.castleCivilizationId=craft.civilizationId;w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return true;
+}

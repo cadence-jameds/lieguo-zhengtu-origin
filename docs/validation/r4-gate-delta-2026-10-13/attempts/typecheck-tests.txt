@@ -1,0 +1,11 @@
+
+> guozhan-game-mvp@0.30.49 typecheck
+> tsc --noEmit
+
+src/game/formal/gateDeltaPersistenceR4.test.ts(18,72): error TS2339: Property 'fault' does not exist on type '{ suffix?: string | undefined; fault?: ((point: FailurePoint) => void) | undefined; } | undefined'.
+src/game/formal/gateDeltaPersistenceR4.test.ts(20,192): error TS7006: Parameter 'p' implicitly has an 'any' type.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

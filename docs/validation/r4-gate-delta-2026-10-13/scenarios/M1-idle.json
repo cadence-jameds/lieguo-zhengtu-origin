@@ -1,0 +1,47 @@
+{
+  "craft": {
+    "id": "craftsman:0000000000000003",
+    "ownerFactionId": "faction:000",
+    "civilizationId": "civ_japan",
+    "siteId": "wild:exile-0000000000000001",
+    "cityId": null,
+    "carrierArmyId": null,
+    "eventId": "event:0000000000000104",
+    "destinationCityId": "city:001",
+    "arrivalAt": 835037,
+    "path": [
+      {
+        "x": 62,
+        "y": 198
+      },
+      {
+        "x": 61,
+        "y": 197
+      },
+      {
+        "x": 60,
+        "y": 196
+      },
+      {
+        "x": 59,
+        "y": 195
+      }
+    ],
+    "departedAt": 644118,
+    "constructionCommandId": null
+  },
+  "arrived": {
+    "id": "craftsman:0000000000000003",
+    "ownerFactionId": "faction:000",
+    "civilizationId": "civ_japan",
+    "siteId": "wild:exile-0000000000000001",
+    "cityId": "city:001",
+    "carrierArmyId": null,
+    "eventId": null,
+    "destinationCityId": null,
+    "arrivalAt": null,
+    "path": [],
+    "departedAt": 644118,
+    "constructionCommandId": null
+  }
+}
