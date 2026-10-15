@@ -1,0 +1,362 @@
+{
+  "schema": 1,
+  "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+  "sourceUnchangedBeforeAndAfterFull": true,
+  "fullRegression": {
+    "status": "PASS",
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "final": {
+      "passed": 1197,
+      "failed": 0,
+      "skipped": 1
+    },
+    "initial": {
+      "passed": 1196,
+      "failed": 1,
+      "skipped": 1,
+      "onlyFailure": "New150000receipt lifecycle stress case timed out at30000ms; no assertion failure reported."
+    },
+    "stressCase": {
+      "receipts": 150000,
+      "budgetMs": 120000,
+      "scope": "Localized functional stress budget; no global timeout or product target change; all start/import/restore/digest/revision/immutability assertions preserved.",
+      "aloneDurationMs": 26943.384499,
+      "finalFullDurationMs": 28961.702058,
+      "status": "PASS"
+    },
+    "skip": "Existing optional REALM_REGRESSION_SAVE late-game fixture absent in public suite; actual supplied private save independently tested by0h/6h/24h matrix."
+  },
+  "typecheck": {
+    "status": "PASS",
+    "command": "npm run typecheck"
+  },
+  "productionBuild": {
+    "status": "PASS",
+    "command": "npm run build",
+    "version": "0.30.50"
+  },
+  "pagesPath": {
+    "status": "PASS",
+    "base": "/lieguo-zhengtu-origin/",
+    "checked": [
+      "local assets",
+      "PWA relative scope/start_url",
+      "Service Worker navigation fallback"
+    ]
+  },
+  "artControl": {
+    "currentPassed": 20,
+    "unmodifiedMainPassed": 20,
+    "testFilesUnchanged": true,
+    "historicalThreeFailuresPreserved": true,
+    "notAP0ArtFix": true
+  },
+  "privateConsistency": [
+    {
+      "realHours": 0,
+      "speed": 10,
+      "summaryChecks": {
+        "unchangedInitialWorld": true,
+        "directCooperativeExactWorld": true,
+        "directCooperativeExactReports": true,
+        "segmentedGameplayEqual": true,
+        "segmentedReportsExact": true,
+        "saveLoadGameplayEqual": true,
+        "saveLoadReportsExact": true,
+        "eventOrderingEqual": true,
+        "eventTypeCountsEqual": true,
+        "eventCountEqual": true,
+        "internalAssertions": true
+      },
+      "strategies": [
+        {
+          "strategy": "direct",
+          "events": 0,
+          "durableCommits": 1,
+          "finalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "cooperative",
+          "events": 0,
+          "durableCommits": 1,
+          "finalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "segmented",
+          "events": 0,
+          "durableCommits": 6,
+          "finalRevision": 1387,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "save-load",
+          "events": 0,
+          "durableCommits": 2,
+          "finalRevision": 1383,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        }
+      ]
+    },
+    {
+      "realHours": 6,
+      "speed": 10,
+      "summaryChecks": {
+        "unchangedInitialWorld": true,
+        "directCooperativeExactWorld": true,
+        "directCooperativeExactReports": true,
+        "segmentedGameplayEqual": true,
+        "segmentedReportsExact": true,
+        "saveLoadGameplayEqual": true,
+        "saveLoadReportsExact": true,
+        "eventOrderingEqual": true,
+        "eventTypeCountsEqual": true,
+        "eventCountEqual": true,
+        "internalAssertions": true
+      },
+      "strategies": [
+        {
+          "strategy": "direct",
+          "events": 19569,
+          "durableCommits": 1,
+          "finalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "cooperative",
+          "events": 19569,
+          "durableCommits": 1,
+          "finalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "segmented",
+          "events": 19569,
+          "durableCommits": 6,
+          "finalRevision": 1387,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "save-load",
+          "events": 19569,
+          "durableCommits": 2,
+          "finalRevision": 1383,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        }
+      ]
+    },
+    {
+      "realHours": 24,
+      "speed": 10,
+      "summaryChecks": {
+        "unchangedInitialWorld": true,
+        "directCooperativeExactWorld": true,
+        "directCooperativeExactReports": true,
+        "segmentedGameplayEqual": true,
+        "segmentedReportsExact": true,
+        "saveLoadGameplayEqual": true,
+        "saveLoadReportsExact": true,
+        "eventOrderingEqual": true,
+        "eventTypeCountsEqual": true,
+        "eventCountEqual": true,
+        "internalAssertions": true
+      },
+      "strategies": [
+        {
+          "strategy": "direct",
+          "events": 93720,
+          "durableCommits": 1,
+          "finalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "cooperative",
+          "events": 93720,
+          "durableCommits": 1,
+          "finalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "segmented",
+          "events": 93720,
+          "durableCommits": 6,
+          "finalRevision": 1387,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "save-load",
+          "events": 93720,
+          "durableCommits": 2,
+          "finalRevision": 1383,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        }
+      ]
+    }
+  ],
+  "consistencyNormalization": "ONLY world.revision and commandReceipts[].committedRevision normalized for segmented gameplay hashes; exact durable authority/history/sequence/checkpoint/revision assertions retained. Direct/cooperative world and reports exact.",
+  "speedCoverage": [
+    {
+      "realHours": 0.1,
+      "speed": 1,
+      "aiAgents": 99,
+      "processedEvents": 25,
+      "reloadMatches": true,
+      "patchMatches": true
+    },
+    {
+      "realHours": 0.1,
+      "speed": 10,
+      "aiAgents": 99,
+      "processedEvents": 326,
+      "reloadMatches": true,
+      "patchMatches": true
+    },
+    {
+      "realHours": 0.1,
+      "speed": 50,
+      "aiAgents": 99,
+      "processedEvents": 1622,
+      "reloadMatches": true,
+      "patchMatches": true
+    }
+  ],
+  "speedScope": "Short0.1h private real-save runs at1/10/50X plus native real-AI-overlap UI cases; full0/6/24h at10X. Not the full duration×speed cross product.",
+  "nativeBrowserEvidence": "browser-validation.json",
+  "productionBrowserEvidence": "production-browser.json",
+  "beforeAfterPerformanceAndEventOrdering": "performance.json",
+  "android": "PENDING",
+  "gate": "NO PASS CLAIM;24h and some click latency targets unmet."
+}

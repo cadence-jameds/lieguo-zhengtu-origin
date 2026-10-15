@@ -7,13 +7,15 @@ import {createFormalFixture,fixtureIds} from './formal/fixture';
 import {worldPatch} from './worldStream';
 import type {FormalWorld} from './formal/model';
 import {governanceBase} from './governanceAdmission';
+import {playerOrderBase} from './orderAdmission';
 vi.mock('./saveLock',()=>({withSaveLock:async(_locks:unknown,_signal:unknown,run:()=>Promise<void>)=>run()}));
 let root:Root,container:HTMLDivElement,engine:ReturnType<typeof useGame>,port:FakeWorker,w:FormalWorld;
 class FakeWorker {
  onmessage:((event:{data:unknown})=>void)|null=null;onerror:((event:{message:string})=>void)|null=null;sent:any[]=[];
+ terminated=false;
  constructor(){port=this;}
  postMessage(data:unknown){this.sent.push(structuredClone(data));}
- terminate(){}
+ terminate(){this.terminated=true;}
  emit(data:unknown){this.onmessage?.({data});}
 }
 const state=(world:FormalWorld,base=0)=>({type:'state',world,passiveRevisionBase:base,clock:{campaignId:world.campaignId,time:world.time,speed:world.speed,running:true}});
@@ -29,11 +31,33 @@ it('background state, phase and unrelated request completions never enable a pen
  await act(async()=>port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status:'committed',revision:2}}));expect(engine.busy).toBe(true);
  await act(async()=>port.emit({type:'requestDone',requestId:request.requestId}));expect(engine.busy).toBe(false);
 });
-it('clock-only refresh retries the same intention once without a gap in busy tracking',async()=>{
+it('revision rejection is terminal and later snapshots never resubmit the failed intention',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0],next={...w,time:10000,revision:1};
  await act(async()=>{port.emit(state(next));port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'rejected',revision:1,reason:'世界版本已更新，請重新確認狀態。'}});port.emit(state(next));port.emit({type:'requestDone',requestId:first.requestId});});
- expect(port.sent).toHaveLength(2);const second=port.sent[1];expect(second.order.commandId).toBe(first.order.commandId);expect(second.order.payload).toEqual(first.order.payload);expect(second.order.expectedRevision).toBe(1);expect(second.requestId).not.toBe(first.requestId);expect(engine.busy).toBe(true);
- await act(async()=>{port.emit({type:'commandAck',ack:{commandId:second.order.commandId,status:'committed',revision:2}});port.emit(state({...next,revision:2},2));port.emit({type:'requestDone',requestId:second.requestId});});expect(engine.busy).toBe(false);expect(port.sent).toHaveLength(2);
+ expect(port.sent).toHaveLength(1);expect(engine.busy).toBe(false);expect(engine.notice).toContain('重新確認');
+ await act(async()=>port.emit(state({...next,time:20000,revision:2})));expect(port.sent).toHaveLength(1);expect(engine.notice).toContain('重新確認');
+});
+it('a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once',async()=>{
+ await act(async()=>{engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'});engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'乙'});});
+ expect(port.sent).toHaveLength(1);expect(engine.notice).toContain('受理中');expect(engine.busy).toBe(true);
+ const request=port.sent[0];await act(async()=>port.emit({type:'commandReceived',commandId:request.order.commandId,requestId:request.requestId}));
+ expect(engine.notice).toContain('已受理');expect(engine.notice).not.toContain('已提交');expect(engine.busy).toBe(true);
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status:'rejected',revision:0,reason:'城市實際庫存不足。'}});port.emit(state(w));port.emit({type:'requestDone',requestId:request.requestId});});
+ expect(engine.notice).toBe('城市實際庫存不足。');expect(engine.busy).toBe(false);expect(port.sent).toHaveLength(1);
+});
+it('old receipts, terminal acknowledgements and background notices cannot overwrite the current click',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0];
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'rejected',revision:0,reason:'第一次失敗'}});port.emit({type:'requestDone',requestId:first.requestId});});
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'乙'}));const second=port.sent[1];
+ await act(async()=>{port.emit({type:'commandReceived',commandId:first.order.commandId});port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'committed',revision:1}});port.emit({type:'notice',text:'背景訊息'});port.emit({type:'requestDone',requestId:first.requestId});});
+ expect(engine.notice).toContain('受理中');expect(engine.busy).toBe(true);
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:second.order.commandId,status:'committed',revision:1}});port.emit({type:'requestDone',requestId:second.requestId});});expect(engine.notice).toBe('命令已提交。');expect(engine.busy).toBe(false);
+});
+it('construction stamps the rendered target even if a Worker snapshot changes the ref before React commits',async()=>{
+ const payload={type:'building.upgrade' as const,cityId:fixtureIds.home,key:'center'},renderedIssue=engine.issue;
+ const next=structuredClone(w);next.revision=1;next.cities[0].buildings.center=2;
+ await act(async()=>{port.emit(state(next,1));renderedIssue(payload);});
+ const request=port.sent[0];expect(engine.world!.cities[0].buildings.center).toBe(2);expect(request.order.expectedRevision).toBe(w.revision);expect(request.playerBase).toEqual(playerOrderBase(w,payload));
 });
 it('actual event/command revision changes reject the pending intention without automatic resubmission',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0];
@@ -63,4 +87,28 @@ it('update save waits for its own durable acknowledgement, not an unrelated sync
 it('update save rejects storage failure and rejects a completed request that never acknowledged saving',async()=>{
  let observed!:Promise<string|void>;await act(async()=>{observed=engine.sync().catch(e=>e.message);});const first=port.sent[0];await act(async()=>{port.emit({type:'error',requestId:first.requestId,text:'IDB failure'});port.emit({type:'requestDone',requestId:first.requestId});});expect(await observed).toBe('IDB failure');expect(engine.busy).toBe(false);
  await act(async()=>{observed=engine.sync().catch(e=>e.message);});await act(async()=>port.emit({type:'requestDone',requestId:port.sent[1].requestId}));expect(await observed).toContain('保存未完成');expect(engine.busy).toBe(false);
+});
+it('fresh lower progress after a completed replay keeps a responsive resume alive for more than thirty seconds',async()=>{
+ vi.useFakeTimers({toFake:['setTimeout','clearTimeout']});
+ try{
+  await act(async()=>{port.emit({type:'phase',text:'讀取與驗證本機存檔'});port.emit({type:'phase',text:'推進離線期間的世界'});port.emit({type:'progress',progress:1,events:19569});port.emit(state(w));});
+  expect(engine.status).toBe('ready');expect(engine.loadEvents).toBe(19569);
+  await act(async()=>port.emit({type:'phase',text:'讀取與驗證本機存檔'}));expect(engine.loadEvents).toBe(0);expect(engine.loadProgress).toBeNull();
+  await act(async()=>port.emit({type:'phase',text:'推進離線期間的世界'}));
+  for(const events of [1,16,32]){
+   await act(async()=>{await vi.advanceTimersByTimeAsync(20000);port.emit({type:'progress',progress:events/64,events});});
+   expect(port.terminated).toBe(false);expect(engine.status).toBe('loading');expect(engine.loadEvents).toBe(events);
+  }
+  await act(async()=>port.emit(state(w)));await act(async()=>vi.advanceTimersByTimeAsync(30000));
+  expect(engine.status).toBe('ready');expect(port.terminated).toBe(false);expect(engine.error).toBe('');
+ }finally{vi.clearAllTimers();vi.useRealTimers();}
+});
+it('repeated same-cycle event counts do not conceal a genuinely stalled replay from the watchdog',async()=>{
+ vi.useFakeTimers({toFake:['setTimeout','clearTimeout']});
+ try{
+  await act(async()=>{port.emit({type:'phase',text:'讀取與驗證本機存檔'});port.emit({type:'phase',text:'推進離線期間的世界'});port.emit({type:'progress',progress:.1,events:16});});
+  await act(async()=>{await vi.advanceTimersByTimeAsync(20000);port.emit({type:'progress',progress:.5,events:16});});
+  await act(async()=>vi.advanceTimersByTimeAsync(9999));expect(port.terminated).toBe(false);expect(engine.status).toBe('loading');
+  await act(async()=>vi.advanceTimersByTimeAsync(1));expect(port.terminated).toBe(true);expect(engine.status).toBe('error');expect(engine.error).toContain('超過 30 秒沒有回應');expect(engine.world).toEqual(w);
+ }finally{vi.clearAllTimers();vi.useRealTimers();}
 });

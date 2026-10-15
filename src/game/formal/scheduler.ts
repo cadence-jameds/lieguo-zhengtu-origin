@@ -5,17 +5,32 @@ export const EVENT_PRIORITY: Readonly<Record<FormalEvent['type'],number>> = Obje
 export function compareEvents(a:FormalEvent,b:FormalEvent):number {
   return a.at-b.at || EVENT_PRIORITY[a.type]-EVENT_PRIORITY[b.type] || (a.id<b.id?-1:a.id>b.id?1:0);
 }
+/** Replay events are native-cloned input or engine literals. Preserve native cloning for any other shape. */
+function cloneReplayEvent(event:FormalEvent):FormalEvent {
+  if(Object.getPrototypeOf(event)!==Object.prototype)return structuredClone(event);
+  for(const key of Reflect.ownKeys(event)){
+    if(typeof key!=='string')return structuredClone(event);
+    const descriptor=Object.getOwnPropertyDescriptor(event,key)!;
+    if(!descriptor.enumerable||!descriptor.configurable||!descriptor.writable||!Object.hasOwn(descriptor,'value'))return structuredClone(event);
+    const value=descriptor.value;
+    if(value!==null&&typeof value==='object'||typeof value==='function'||typeof value==='symbol')return structuredClone(event);
+  }
+  return {...event};
+}
 export class EventScheduler {
   private heap:FormalEvent[]=[];
   private ids=new Set<EventId>();
+  private cloneEvent=(event:FormalEvent)=>structuredClone(event);
   constructor(events:readonly FormalEvent[]=[]) { this.replace(events); }
+  /** Internal replay only: the outer native world clone has already rejected proxies and non-cloneable input. */
+  static forReplay(events:readonly FormalEvent[]=[]){const scheduler=new EventScheduler();scheduler.cloneEvent=cloneReplayEvent;scheduler.replace(events);return scheduler;}
   /** Validate once, clone once and heapify in O(n). A failed replacement leaves the live queue untouched. */
   replace(events:readonly FormalEvent[]){
     const next:FormalEvent[]=[],ids=new Set<EventId>();
     for(const event of events){
       if(!Number.isSafeInteger(event.at)||event.at<0||!Object.hasOwn(EVENT_PRIORITY,event.type))throw new Error('Invalid event');
       if(ids.has(event.id))throw new Error('Duplicate EventId');
-      ids.add(event.id);next.push(structuredClone(event));
+      ids.add(event.id);next.push(this.cloneEvent(event));
     }
     for(let i=Math.floor(next.length/2)-1;i>=0;i--){
       const item=next[i];let at=i;
@@ -38,7 +53,7 @@ export class EventScheduler {
   push(event:FormalEvent){
     if(!Number.isSafeInteger(event.at)||event.at<0||!Object.hasOwn(EVENT_PRIORITY,event.type))throw new Error('Invalid event');
     if(this.ids.has(event.id))throw new Error('Duplicate EventId');
-    this.ids.add(event.id);const e=structuredClone(event);let i=this.heap.length;this.heap.push(e);
+    const e=this.cloneEvent(event);this.ids.add(event.id);let i=this.heap.length;this.heap.push(e);
     while(i>0){const p=(i-1)>>1;if(compareEvents(this.heap[p],e)<=0)break;this.heap[i]=this.heap[p];i=p;}this.heap[i]=e;
   }
   pop():FormalEvent|undefined {
@@ -48,5 +63,5 @@ export class EventScheduler {
       if(compareEvents(last,this.heap[c])<=0)break;this.heap[i]=this.heap[c];i=c;}this.heap[i]=last;}return first;
   }
   /** Canonical wire order, independent of heap layout or insertion order. Runtime pop never sorts/shifts. */
-  snapshot():FormalEvent[]{return this.heap.map(e=>structuredClone(e)).sort(compareEvents);}
+  snapshot():FormalEvent[]{return this.heap.map(e=>this.cloneEvent(e)).sort(compareEvents);}
 }
