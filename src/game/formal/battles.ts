@@ -1,5 +1,5 @@
 import {rememberBattle,memoryFor} from './aiKnowledge';
-import {defeatExile,deliverCraftsmen,type ExileSite} from './extinction';
+import {defeatExile,deliverCraftsmen,discardCapturedArmies,type ExileSite} from './extinction';
 import {conquestOwner,legionOf,empireOf} from './politics';
 import {wildSiteName} from './wildSiteNames';
 import {proportionalResources} from './banditLoot';
@@ -145,7 +145,10 @@ export function handleCombatEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler):
  if(!['army.depart','army.arrive','army.return','combat.round','wild.respawn'].includes(e.type))return null;w.combat??=initialCombat();
  if(e.type==='wild.respawn'){const site=w.worldLayer?.wildSites.find(site=>site.id===e.siteId);if(site?.phase==='cooldown'&&site.generation===e.generation&&site.respawnEventId===e.id&&site.respawnAt===e.at)respawnWild(w,site);return[];}
  if(e.type==='combat.round'){const b=w.combat.battles.find(b=>b.id===e.battleId);if(!b||b.roundEventId!==e.id||b.nextRoundAt!==e.at)return[];b.roundEventId=null;return resolveCombatRound(w,b,e,s);}
- if(e.type==='army.depart'){const a=w.armies.find(a=>a.id===e.armyId);if(a&&isMissionArmy(a)&&a.status==='waiting'&&a.movementEventId===e.id&&a.departedAt===e.at){a.status='outbound';a.movementEventId=enqueue(w,s,{type:'army.arrive',armyId:a.id,at:a.arrivalAt});invalidateSpatial(w);}return[];}
+ if(e.type==='army.depart'){const a=w.armies.find(a=>a.id===e.armyId);if(a&&isMissionArmy(a)&&a.status==='waiting'&&a.movementEventId===e.id&&a.departedAt===e.at){
+  if(!w.cities.some(c=>c.id===a.originCityId&&c.ownerFactionId===a.ownerFactionId)||w.extinction?.extinct.includes(a.ownerFactionId)){discardCapturedArmies(w,[a],s);return[];}
+  a.status='outbound';a.movementEventId=enqueue(w,s,{type:'army.arrive',armyId:a.id,at:a.arrivalAt});invalidateSpatial(w);
+ }return[];}
  if(e.type!=='army.arrive'&&e.type!=='army.return')return[];
  const a=w.armies.find(a=>a.id===e.armyId);if(!a||!isMissionArmy(a)||a.movementEventId!==e.id||a.arrivalAt!==e.at)return[];a.position={...a.path.at(-1)!};a.movementEventId=null;
  if(e.type==='army.return'){const c=a.returnCityId&&spatial(w).cities.get(a.returnCityId);const original=spatial(w).cities.get(a.originCityId);if(!c||c.ownerFactionId!==a.ownerFactionId||a.returnCityId!==a.originCityId&&original?.ownerFactionId===a.ownerFactionId){returnArmy(w,a,s);return[];}settleFaction(w,a.ownerFactionId);for(const [id,n] of Object.entries(a.units))c.military!.units[id]=(c.military!.units[id]??0)+n;addStock(c,a.cargo);const returnedToOrigin=c.id===a.originCityId;a.originCityId=c.id;const reports:FormalReport[]=[];

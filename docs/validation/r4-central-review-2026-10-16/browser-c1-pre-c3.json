@@ -1,0 +1,32 @@
+{
+  "browser": "154.0.8037.57",
+  "controlled": true,
+  "aiDecisionsDeferredDays": 30,
+  "cases": [
+    {
+      "label": "C1-reachable",
+      "status": "PASS",
+      "worldAfter": 932433,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C1-blocked",
+      "status": "PASS",
+      "worldAfter": 932867,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    }
+  ],
+  "errors": [],
+  "passed": 2,
+  "failed": 0
+}

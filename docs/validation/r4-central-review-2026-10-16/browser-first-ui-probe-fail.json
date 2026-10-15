@@ -1,0 +1,48 @@
+{
+  "browser": "154.0.8037.57",
+  "controlled": true,
+  "aiDecisionsDeferredDays": 30,
+  "cases": [
+    {
+      "label": "C1-reachable",
+      "status": "PASS",
+      "worldAfter": 932909,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C1-blocked",
+      "status": "PASS",
+      "worldAfter": 932963,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C3-true",
+      "status": "PASS",
+      "worldAfter": 182848,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C3-false",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav[aria-label=\"遊戲主要功能\"] button').filter({ hasText: '戰役設定' })\u001b[22m\n"
+    }
+  ],
+  "errors": [],
+  "passed": 3,
+  "failed": 1
+}

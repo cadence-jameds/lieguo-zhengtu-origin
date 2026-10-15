@@ -1,0 +1,55 @@
+{
+  "browser": "154.0.8037.57",
+  "controlled": true,
+  "aiDecisionsDeferredDays": 30,
+  "cases": [
+    {
+      "label": "C1-reachable",
+      "status": "PASS",
+      "worldAfter": 932767,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C1-blocked",
+      "status": "PASS",
+      "worldAfter": 933096,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C3-true",
+      "status": "PASS",
+      "worldAfter": 182779,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "C3-false",
+      "status": "PASS",
+      "worldAfter": 182862,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99,
+      "recoveryPath": "native Worker sync/load/backups/restore; RebirthView has no settings nav"
+    }
+  ],
+  "errors": [],
+  "passed": 4,
+  "failed": 0
+}
