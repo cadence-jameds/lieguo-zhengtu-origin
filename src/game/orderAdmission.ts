@@ -1,4 +1,6 @@
 import type {FormalCommand,FormalOrder,FormalWorld} from './formal/model';
+import {buildingKind,buildingLevel} from './formal/catalogB3';
+import {buildingRequirements} from './formal/buildingDetailData';
 
 /** The UI records only the intended action's relevant preconditions.
  * Production, elapsed time and unrelated AI factions do not invalidate
@@ -12,12 +14,29 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
  const faction=w.factions.find(f=>f.id===w.playerFactionId);
  if(!faction)return;
  const construction=city.economy?.construction;
+ const targetJobs=(construction??[]).filter(j=>p.type==='field.upgrade'?j.target.kind==='field'&&j.target.slot===p.slot:
+  p.type==='building.upgrade'&&j.target.kind==='building'&&j.target.key===p.key);
+ const jobs=targetJobs.map(j=>[j.commandId,j.eventId,j.fromLevel,j.toLevel,j.action,j.lane]);
+ const secondLane='lane' in p&&p.lane===1?!!city.economy?.milestones.includes(15000):null;
  switch(p.type){
   case 'city.rename':return[city.name];
-  case 'field.upgrade':return[city.fields?.find(f=>f.slot===p.slot),construction,city.cityPromotionCompleted,city.economy?.milestones,city.housing];
-  case 'building.upgrade':
+  case 'field.upgrade':{
+   const field=city.fields?.find(f=>f.slot===p.slot),from=targetJobs.at(-1)?.toLevel??field?.level??0;
+   return[field,jobs,buildingLevel(city,'center'),secondLane,from>=10?
+    [!!city.cityPromotionCompleted,!!city.economy?.milestones.includes(10000),city.housing>=10000]:null];
+  }
+  case 'building.upgrade':{
+   const kind=buildingKind(p.key),level=kind==='wall'?city.wallLevel??0:city.buildings[p.key]??0;
+   const next=(targetJobs.at(-1)?.toLevel??level)+1,slots=city.economy?.slots??{};
+   const requestedSlot=p.slot===undefined?null:Object.entries(slots).find(([,slot])=>slot===p.slot)?.[0]??null;
+   const requirements=kind?buildingRequirements(w,city,kind,next).map(r=>[r.kind,r.id,r.required,r.met]):null;
+   return[level,jobs,slots[p.key]??null,requestedSlot,requirements,kind==='center'?null:buildingLevel(city,'center'),secondLane];
+  }
   case 'building.demolish':return[city.buildings,city.wallLevel,construction,city.economy?.slots,city.economy?.milestones,faction.age,faction.techIds];
-  case 'construction.cancel':return[construction];
+  case 'construction.cancel':{
+   const job=construction?.find(j=>j.commandId===p.constructionCommandId);
+   return[job?[job.commandId,job.eventId,job.target,job.fromLevel,job.toLevel,job.action,job.startsAt>w.time?'queued':'active']:null];
+  }
   case 'military.recruit':return[city.military,city.buildings,city.castleCivilizationId,city.economy?.milestones,faction.age,faction.techIds];
   case 'military.cancel':return[city.military?.queue];
   case 'age.start':return[faction.age,faction.ageQueue,city.buildings];
@@ -40,16 +59,20 @@ export function playerOrderBase(w:FormalWorld,p:FormalCommand):PlayerOrderBase|u
 
 /** A bounded, one-shot rebase of an uncommitted user action.
  * A newer player command is a hard fence, even if its effect was later undone.
+ * The serialized Worker may supply its own durable foreground fence: governor
+ * replay uses the player's issuer too. It never trusts a request or ID prefix
+ * to identify a foreground command. Other callers keep the receipt fence.
  * All serializations are in-memory; save schema and CAS stay unchanged. */
-export function playerOrderWithBase(w:FormalWorld,order:FormalOrder,base?:PlayerOrderBase,branchRevision=0):FormalOrder {
+export function playerOrderWithBase(w:FormalWorld,order:FormalOrder,base?:PlayerOrderBase,branchRevision=0,foregroundRevision?:number):FormalOrder {
  if(!base||!Number.isSafeInteger(order.expectedRevision)||order.expectedRevision<0||
-    base.revision!==order.expectedRevision||!Number.isSafeInteger(branchRevision)||
+    base.revision!==order.expectedRevision||!Number.isSafeInteger(branchRevision)||branchRevision<0||
+    foregroundRevision!==undefined&&(!Number.isSafeInteger(foregroundRevision)||foregroundRevision<0||foregroundRevision>w.revision||order.expectedRevision<foregroundRevision)||
     order.expectedRevision<branchRevision||order.expectedRevision>=w.revision||
     order.campaignId!==w.campaignId||order.issuerId!==w.playerFactionId||
     !Number.isSafeInteger(order.issuedWorldTime)||order.issuedWorldTime<0||
     order.issuedWorldTime>w.time||
     w.commandReceipts.some(r=>r.commandId===order.commandId||
-      r.issuerId===order.issuerId&&r.committedRevision>order.expectedRevision))return order;
+      foregroundRevision===undefined&&r.issuerId===order.issuerId&&r.committedRevision>order.expectedRevision))return order;
  const current=playerOrderBase(w,order.payload);
  if(!current||current.fingerprint!==base.fingerprint)return order;
  return {...order,expectedRevision:w.revision,issuedWorldTime:w.time};

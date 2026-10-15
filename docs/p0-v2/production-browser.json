@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "status": "Functional PASS; engineering latency target partially unmet; NO GATE PASS",
+  "source": {
+    "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+    "workerBundleHash": "330a3cac86e247e0f51303c3ac685ab3de8fe440492e61f206a6201096611adf",
+    "observations": "Served existing production dist. Worker prefix adds controlled Date.now and receipt/IDB/postMessage telemetry only. Main Worker/DOM observer. Service workers blocked to avoid cache. UI import and private current savedAt injection precede actual six-hour UI load."
+  },
+  "environment": {
+    "browser": "154.0.8037.57",
+    "os": "Linux x64 managed container",
+    "cpuQuotaCores": 2,
+    "memoryLimitGiB": 8,
+    "headless": true,
+    "nativeIndexedDB": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "controlledOfflineHours": 6,
+  "load": {
+    "elapsedMs": 23591.400000002235,
+    "processedEvents": 19569,
+    "aiAgents": 99,
+    "target30s": "PASS"
+  },
+  "construction": [
+    {
+      "payloadType": "field.upgrade",
+      "status": "committed",
+      "clickToPendingMs": 7.5,
+      "clickToAckMs": 1932.9000000022352,
+      "clickToQueueDOMMs": 2119.7000000029802,
+      "durableReceipt": true,
+      "durableAuthority": true,
+      "nativeCompletes": 1,
+      "nativeCommitBeforeAckSend": true,
+      "confirmationTarget2s": "PASS",
+      "visibleQueueWithin2s": "FAIL"
+    },
+    {
+      "payloadType": "building.upgrade",
+      "status": "committed",
+      "clickToPendingMs": 11,
+      "clickToAckMs": 3165.599999997765,
+      "clickToQueueDOMMs": 3442.599999997765,
+      "durableReceipt": true,
+      "durableAuthority": true,
+      "nativeCompletes": 2,
+      "nativeCommitBeforeAckSend": true,
+      "confirmationTarget2s": "FAIL",
+      "visibleQueueWithin2s": "FAIL"
+    }
+  ],
+  "pageErrorCount": 0,
+  "scope": [
+    "Existing npm production build served locally with project Pages base path.",
+    "Actual file-input import of the private original, then only private IndexedDB current savedAt adjusted for controlled6h. Original file unchanged. Import may reorder receipt history; this run is not a raw Node-gold comparison.",
+    "Worker Date.now/IDB/postMessage observation prefix and main Worker/DOM observers; no production source edits.",
+    "Trusted Playwright button clicks; native IndexedDB receipts/authority checked after visible queue update.",
+    "Other CPU benchmark paused throughout; resumed in finally.",
+    "This supplements the larger Vite-development browser matrix; no cross-mode performance ratio.",
+    "Physical Android PENDING."
+  ]
+}

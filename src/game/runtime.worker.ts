@@ -3,11 +3,12 @@ import {effectiveSpeed} from './formal/playtest';
 /// <reference lib="webworker" />
 import {createFormalWorld} from './world';
 import {advanceFormal,submitFormalOrder} from './engine';
+import {advanceFormalCooperative} from './formal/reducer';
 import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
 import type {FormalOrder,FormalWorld} from './formal/model';
 import {worldPatch} from './worldStream';
 import {governanceAfterCatchup,governanceWithBase,type GovernanceBase} from './governanceAdmission';
-import {playerOrderWithBase,type PlayerOrderBase} from './orderAdmission';
+import {playerOrderBase,playerOrderWithBase,type PlayerOrderBase} from './orderAdmission';
 export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'resume'|'reset'}
  | {type:'start';seed:number;speed:number;name:string;civilizationId?:string;offlineHours?:0|1|6|24;transitionId?:string}
  | {type:'command';order:FormalOrder;governanceBase?:GovernanceBase;playerBase?:PlayerOrderBase}
@@ -18,13 +19,14 @@ export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'res
  | {type:'reportStatus'}
  | {type:'reportAction';action:'read'|'clear';ids?:string[];filter?:ReportFilter}
  | {type:'reportPage';page:number;filter?:ReportFilter}) & {requestId?:string;stateMode?:'patch'};
-let world:FormalWorld|null=null,queue:Promise<unknown>=Promise.resolve(),tickPending=false,away=false;
-let anchor=performance.now(),anchorTime=0,lastSavedAt=anchor,retryAt=0,passiveRevisionBase=0,branchRevision=0;
+let world:FormalWorld|null=null,draining=false,tickPending=false,tickRunning=false,away=false;
+const requests:RuntimeRequest[]=[];
+let anchor=performance.now(),anchorTime=0,lastSavedAt=anchor,retryAt=0,passiveRevisionBase=0,branchRevision=0,foregroundRevision=0;
 let patchMode=false,lastPublished:FormalWorld|null=null;
 const post=(value:unknown)=>self.postMessage(value);
 const clock=()=>({campaignId:world?.campaignId,time:targetTime(),speed:world?effectiveSpeed(world):1,running:!away});
 const state=()=>{const data={type:'state',clock:clock(),passiveRevisionBase};if(patchMode&&world&&lastPublished?.campaignId===world.campaignId)post({...data,patch:worldPatch(lastPublished,world)});else post({...data,world});lastPublished=world;};
-const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;branchRevision=passiveRevisionBase;lastPublished=null;};
+const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;branchRevision=passiveRevisionBase;foregroundRevision=branchRevision;lastPublished=null;};
 const targetTime=(now=performance.now())=>anchorTime+Math.floor(Math.max(0,now-anchor)*(world?effectiveSpeed(world):1));
 async function publishReportStatus(){if(!world)return;try{post({type:'reportStatus',data:await reportStatus(world)});}catch{post({type:'notice',text:'暫時無法讀取戰報通知，世界仍持續運行。'});}}
 async function advanceAndSave(){
@@ -32,7 +34,9 @@ async function advanceAndSave(){
  const target=targetTime();
  if(target<=world.time)return;
  const hasEvents=world.events.some(e=>e.at<=target);
- const result=advanceFormal(world,target),committed=await save(result.world,result.reports,world.revision);
+ // Only complete events yield. The draft remains private until this entire
+ // target replay and its one durable transaction finish.
+ const result=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8}),committed=await save(result.world,result.reports,world.revision);
  world=committed;lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
@@ -67,21 +71,23 @@ async function handle(r:RuntimeRequest){
  if(!world)throw new Error('請先建立正式世界。');
  if(r.type==='command'){
   if(r.order?.issuerId!==world.playerFactionId)throw new Error('此分頁只能下達玩家勢力命令。');
-  // Catch up the command's admission time without exposing/saving a clock-only
-  // draft. Only unchanged governance configuration may bridge this admission's
-  // own catch-up; economic orders and already-stale orders retain their gate.
-  let admission=world,order=r.order;
-  if(r.order.expectedRevision===world.revision&&!world.commandReceipts.some(c=>c.commandId===r.order.commandId)){
+  // Revalidate the rendered intent before catching up to admission time. A
+  // stale but unchanged click must not start at an old checkpoint's clock.
+  let admission=world,order=governanceWithBase(world,r.order,r.governanceBase,branchRevision);
+  order=playerOrderWithBase(admission,order,r.playerBase,branchRevision,foregroundRevision);
+  if(order.expectedRevision===world.revision&&!world.commandReceipts.some(c=>c.commandId===order.commandId)){
+   const before=admission,catchupBase=r.playerBase?playerOrderBase(before,order.payload):undefined;
    const target=targetTime();
-   if(world.events.some(e=>e.at<=target)){await advanceAndSave();order=governanceAfterCatchup(admission,world!,order);admission=world!;}
+   if(world.events.some(e=>e.at<=target)){
+    await advanceAndSave();admission=world!;order=governanceAfterCatchup(before,admission,order);
+    order=playerOrderWithBase(admission,order,catchupBase,branchRevision,foregroundRevision);
+   }
    else if(target>world.time){admission=advanceFormal(world,target).world;admission.revision=world.revision;}
   }
-  order=governanceWithBase(admission,order,r.governanceBase,branchRevision);
-  order=playerOrderWithBase(admission,order,r.playerBase,branchRevision);
   const result=submitFormalOrder(admission,order);
   if(result.ack?.status==='committed'){
    const committed=await save(result.world,result.reports,world.revision);
-   world=committed;if(r.order.payload.type==='developer.configure')reanchor();lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;post({type:'commandAck',ack:result.ack});state();if(result.reports.length)await publishReportStatus();
+   world=committed;foregroundRevision=world.revision;if(r.order.payload.type==='developer.configure')reanchor();lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;post({type:'commandAck',ack:result.ack});state();if(result.reports.length)await publishReportStatus();
   }else{const ack=result.ack;if(order.payload.type==='governance.set'&&ack?.reason==='世界版本已更新，請重新確認狀態。')ack.reason='治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。';post({type:'commandAck',ack});state();if(result.reports.length)await publishReportStatus();}
   return;
  }
@@ -92,9 +98,8 @@ async function handle(r:RuntimeRequest){
  if(r.type==='export'){await advanceAndSave();post({type:'export',text:await exportStoredSave(r.mode??'quick'),mode:r.mode??'quick'});return;}
  await advanceAndSave();if(r.type==='sync')post({type:'synced',requestId:r.requestId});
 }
-self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
- const r=event.data;
- queue=queue.then(()=>handle(r)).catch((error:unknown)=>{
+async function runRequest(r:RuntimeRequest){
+ try{await handle(r);}catch(error:unknown){
   const text=error instanceof Error?error.message:'正式提交失敗。';
   if(r.type==='command')post({type:'commandAck',ack:{commandId:r.order?.commandId,status:'rejected',revision:world?.revision??0,reason:text}});
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
@@ -103,15 +108,37 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
   else post({type:'error',text,requestId:r.requestId});
   // Failed transitions carry the prior world; failed load remains a visible error.
   if(r.type==='command')state();
- }).finally(()=>{if(r.requestId)post({type:'requestDone',requestId:r.requestId});});
+ }finally{if(r.requestId)post({type:'requestDone',requestId:r.requestId});}
+}
+/** All foreground requests, including campaign/visibility barriers, retain
+ * arrival order. A pending tick never overtakes them; an in-flight replay or
+ * transaction must finish before the next request may mutate the world. */
+async function drain(){
+ try{
+  while(requests.length||tickPending){
+   const request=requests.shift();
+   if(request){await runRequest(request);continue;}
+   tickPending=false;tickRunning=true;
+   try{if(!away)await advanceAndSave();}
+   catch(error:unknown){retryAt=performance.now()+1000;post({type:'notice',error:true,text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}
+   finally{tickRunning=false;}
+  }
+ }finally{draining=false;}
+}
+function scheduleDrain(){if(draining)return;draining=true;void drain();}
+self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
+ const r=event.data;
+ requests.push(r);
+ if(r.type==='command')post({type:'commandReceived',commandId:r.order?.commandId,requestId:r.requestId});
+ scheduleDrain();
 };
 setInterval(()=>{
- if(!world||tickPending||away)return;
+ if(!world||tickPending||tickRunning||away)return;
  // Ordinary checkpoints every ten seconds; due events still commit at 100ms polls.
  // The absolute anchor preserves elapsed time even when persistence takes longer.
  const now=performance.now(),target=targetTime(now);
  if(now<retryAt)return;
  if(now-lastSavedAt<10000&&!world.events.some(e=>e.at<=target))return;
  tickPending=true;
- queue=queue.then(()=>{if(!away)return advanceAndSave();}).catch((error:unknown)=>{retryAt=performance.now()+1000;post({type:'notice',error:true,text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}).finally(()=>{tickPending=false;});
+ scheduleDrain();
 },100);

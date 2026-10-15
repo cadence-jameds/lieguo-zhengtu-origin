@@ -1,5 +1,5 @@
 import {expect,it} from 'vitest';
-import {PendingRequests,ClockConflictRetry,reconcileWorld} from './interaction';
+import {PendingRequests,PendingCommand,reconcileWorld} from './interaction';
 import {createFormalFixture,fixtureIds} from './formal/fixture';
 import {order} from './formal/testSupport';
 import {eventId} from './formal/ids';
@@ -10,11 +10,13 @@ import {battlefield,dispatch,arrive} from './formal/combatTestSupport';
 it('unrelated/background acknowledgements cannot unlock another pending request',()=>{
  const p=new PendingRequests();p.add('build');p.add('reports');p.finish('background');expect(p.busy).toBe(true);p.finish('reports');expect(p.busy).toBe(true);p.finish('build');expect(p.busy).toBe(false);
 });
-it('clock conflict retries are bounded and never cross commands, events, or campaign switches',()=>{
+it('rejections finish the active intention and delayed acknowledgements cannot replace a newer click',()=>{
  const w=createFormalFixture(),o=order(w,'safe',{type:'city.rename',cityId:fixtureIds.home,name:'安全'});
  const ack={commandId:o.commandId,status:'rejected' as const,revision:1,reason:'世界版本已更新，請重新確認狀態。'};
- for(const kind of ['event','command','campaign','missing-base']){const r=new ClockConflictRetry();r.track(o);r.acknowledge(ack);const next={...w,revision:1,time:1000};if(kind==='campaign')next.campaignId=createFormalFixture({campaign:'different'}).campaignId;expect(r.refresh(next,kind==='missing-base'?NaN:1)).toEqual([]);}
- const r=new ClockConflictRetry();r.track(o);r.acknowledge(ack);const latest={...w,revision:1,time:1000},retry=r.refresh(latest,0);expect(retry).toHaveLength(1);r.acknowledge({...ack,revision:2});expect(r.refresh({...latest,revision:2},0)).toEqual([]);
+ const pending=new PendingCommand();pending.track(o.commandId);expect(pending.busy).toBe(true);
+ expect(pending.acknowledge(ack)).toBe(true);expect(pending.busy).toBe(false);expect(pending.matches(o.commandId)).toBe(false);
+ const newer=order(w,'newer',{type:'city.rename',cityId:fixtureIds.home,name:'最新'});pending.track(newer.commandId);
+ expect(pending.acknowledge({...ack,status:'committed'})).toBe(false);expect(pending.matches(newer.commandId)).toBe(true);pending.clear();expect(pending.busy).toBe(false);
 });
 it('unchanged world branches and map drawing keys survive passive snapshots, while changed entities invalidate',()=>{
  const w=createFormalFixture(),next=structuredClone(w);next.time=1000;next.revision++;const merged=reconcileWorld(w,next)!;

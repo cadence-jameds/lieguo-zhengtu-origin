@@ -1,0 +1,1149 @@
+{
+  "schema": "p0-v2-browser-validation-1",
+  "generatedAt": "2026-10-15T06:31:39.811Z",
+  "overall": "NO GATE PASS CLAIM",
+  "provenance": {
+    "baselineCommit": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+    "version": "0.30.50",
+    "finalSourceTreeSha256": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+    "sourceHashes": {
+      "src/game/runtime.worker.ts": "8e8559b68c15dabbb4438cfa6d763b4ba67a3d2349febe8711c1462f2bebfc0f",
+      "src/game/useGame.ts": "c88b1d78060380d0896682ff863a43ec1d99c6665af56f5a8c28714053b43412",
+      "src/game/orderAdmission.ts": "123b28be7bf01b1aedf42f3cf006b9d4e5040a10242356a53be4449164fd94ff",
+      "src/game/interaction.ts": "1d551e4f163d4b1c31a438be44f20849f92651352160ccb97bca777aaf25082c",
+      "src/game/persistence.ts": "4d9a9d7f83f619b724a12ed36371bec3d65a2c1633b5884804a380f9cbec95f5",
+      "src/game/formal/reducer.ts": "9c926ca547957c49630f402fc0e3c0fe2bb05ccd4507c12e39e725c789b4a439",
+      "src/game/formal/schema.ts": "b0bd59f941968236bbc4c2c084cbcb674650883e2bb00512116e4f94e2746ea0",
+      "src/game/formal/combatSchema.ts": "500a1598169349808074b0b8c438310b4066e31b4a196754f09e7409a1be5bfa",
+      "src/game/formal/scheduler.ts": "3f51f818d915876d6bf8887f1aa6d3f0d104d275c9e803719012534bc9e70d9c",
+      "src/game/formal/autonomy.ts": "44cab3cde0d9ed850fdbe703be5819ef046661c38ce28d5b03905b9d1993c520",
+      "src/game/formal/saveCodec.ts": "861ba624c21df7d047b5373e6419950a3a5ce4bf34a574b323a539d94a3553ba",
+      "src/game/formal/offline.ts": "ef978460f8e03f56adf438fd4c031f1e7851c8ad43b6e07dabbe407d20277ab9",
+      "src/game/formal/politics.ts": "ab7d47fa9c07839b74a988cb11622ae67f537ab464503dd184083855223e032f"
+    },
+    "productionSourceEditedByBrowserHarness": false
+  },
+  "environment": {
+    "browser": "Chromium 154.0.8037.57",
+    "os": "Linux x64 managed container",
+    "cpu": "Intel Xeon Platinum 8573C",
+    "cpuQuotaCores": 2,
+    "memoryLimitGiB": 8,
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "nativeIndexedDB": true,
+    "fakeIndexedDB": false,
+    "server": "Vite development server, immutable private source copy",
+    "instrumentation": "Private pre-transform Worker/persistence observation and browser Worker/DOM/IDB hooks; source files unchanged",
+    "timingContention": "Final timing matrix runs while other heavy workloads are paused",
+    "physicalAndroid": "PENDING",
+    "mobileEmulation": "NOT RUN"
+  },
+  "input": {
+    "privateOriginalFileUnchanged": true,
+    "originalFactions": 100,
+    "aiFactions": 99,
+    "originalSpeed": 10,
+    "offlineCapHours": 6,
+    "originalHistoricalCommandReceipts": 13963,
+    "originalPendingEvents": 220,
+    "controlled6hProcessedEvents": 19569,
+    "playerScreenshotProcessedEvents": 20816,
+    "notes": "These are different measurements. Full private saves, names, IDs, stocks, raw traces and screenshots are excluded."
+  },
+  "baselineBrowser": {
+    "source": "7b0390a",
+    "version": "0.30.50",
+    "browser": "Chromium154.0.8037.57",
+    "scenario": "private actual save; 100 factions;10X; controlled0h import",
+    "contention": "shared CPU with instrumented6h profiler; not uncontended baseline",
+    "android": "PENDING",
+    "results": [
+      {
+        "scenario": "field-upgrade",
+        "status": "committed",
+        "clickToSendMs": 0.89990234375,
+        "clickToPendingMs": 117.699951171875,
+        "clickToWorkerReceivedMs": 4192.89990234375,
+        "workerQueueMs": 1102.400146484375,
+        "admissionMs": 384.099853515625,
+        "saveMs": 8391.10009765625,
+        "clickToDurableMs": 14072.60009765625,
+        "clickToAckMs": 14095.5,
+        "clickToVisibleScheduleMs": 18765.10009765625,
+        "receiptInWorld": true,
+        "receiptInAuthority": true,
+        "sameReceipt": true
+      },
+      {
+        "scenario": "baseline-building",
+        "status": "committed",
+        "clickToSendMs": 0.300048828125,
+        "clickToPendingMs": 30.699951171875,
+        "clickToWorkerReceivedMs": 1709.60009765625,
+        "workerQueueMs": 463.89990234375,
+        "admissionMs": 519.199951171875,
+        "saveMs": 5488.800048828125,
+        "clickToDurableMs": 8182.10009765625,
+        "clickToAckMs": 8182.300048828125,
+        "clickToVisibleScheduleMs": 8672.60009765625,
+        "receiptInWorld": true,
+        "receiptInAuthority": true,
+        "sameReceipt": true
+      }
+    ],
+    "comparisonLimit": "Shared CPU baseline timings are descriptive only. Do not divide them by clean after timings to claim a browser improvement ratio."
+  },
+  "loads": [
+    {
+      "name": "6h first",
+      "status": "PASS",
+      "hours": 6,
+      "speed": 10,
+      "factions": 100,
+      "loadToFirstWorldMs": 21771,
+      "processedEvents": 19569,
+      "advancedRealMs": 21600000,
+      "advancedWorldMs": 216000000,
+      "offlinePhasesMs": [
+        {
+          "name": "讀取與驗證本機存檔",
+          "untilNextPhaseMs": 871.6
+        },
+        {
+          "name": "推進離線期間的世界",
+          "untilNextPhaseMs": 19204.5
+        },
+        {
+          "name": "原子保存接續進度",
+          "untilNextPhaseMs": null
+        }
+      ],
+      "worldHash": "da59485305b0ca15d279a0c58304ae83ff663e9cd119920698afd5a0bcbbf6fe",
+      "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+      "crossRuntimeExactEquality": {
+        "worldMatches": false,
+        "reportsMatch": true
+      },
+      "desktopLoadWithin30Seconds": true,
+      "immediateConstruction": {
+        "name": "6h first first field",
+        "status": "PASS",
+        "inputMethod": "trusted Playwright browser click",
+        "clickToSendMs": 1.1,
+        "clickToAcceptingUiMs": 26.8,
+        "clickToWorkerReceiveMs": 3.3,
+        "clickToReceivedUiMessageMs": 43.3,
+        "workerQueueMs": 0,
+        "handleToAdmissionMs": 339.6,
+        "admissionMs": 140.4,
+        "saveSegments": [
+          {
+            "startMs": 483.7,
+            "completeMs": 1224.4,
+            "durationMs": 740.7,
+            "nativeCompleteMs": 1224.2,
+            "beforeAdmission": false
+          }
+        ],
+        "clickToNativeDurableMs": 1224.2,
+        "clickToDurableAckMs": 1225.2,
+        "clickToQueueDomUpdatedMs": 3402.9,
+        "clickToTwoRafPaintProxyMs": 3530.8,
+        "ackToQueueDomMs": 2177.7,
+        "nativeTransactionBeforeAck": true,
+        "savePromiseBeforeAck": true,
+        "savePromiseBeforeWorkerAckSend": true,
+        "observedSaveCompleteMessageBeforeAck": true,
+        "rawCrossContextSaveCompleteToAckMs": 0.800048828125,
+        "receiptInWorld": true,
+        "receiptInAuthority": true,
+        "sameReceipt": true,
+        "normalConfirmationTargetMs": 2000,
+        "confirmationWithinTarget": true,
+        "mainThreadCpuProfileDuringClick": false,
+        "navigation": "first field requested after normal city/field navigation; online simulation continues"
+      }
+    },
+    {
+      "name": "6h retry",
+      "status": "PASS",
+      "hours": 6,
+      "speed": 10,
+      "factions": 100,
+      "loadToFirstWorldMs": 17757,
+      "processedEvents": 19569,
+      "advancedRealMs": 21600000,
+      "advancedWorldMs": 216000000,
+      "offlinePhasesMs": [
+        {
+          "name": "讀取與驗證本機存檔",
+          "untilNextPhaseMs": 606.5
+        },
+        {
+          "name": "推進離線期間的世界",
+          "untilNextPhaseMs": 15329.6
+        },
+        {
+          "name": "原子保存接續進度",
+          "untilNextPhaseMs": null
+        }
+      ],
+      "worldHash": "da59485305b0ca15d279a0c58304ae83ff663e9cd119920698afd5a0bcbbf6fe",
+      "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+      "crossRuntimeExactEquality": {
+        "worldMatches": false,
+        "reportsMatch": true
+      },
+      "desktopLoadWithin30Seconds": true,
+      "immediateConstruction": {
+        "name": "6h retry first field",
+        "status": "PASS",
+        "inputMethod": "trusted Playwright browser click",
+        "clickToSendMs": 1.4,
+        "clickToAcceptingUiMs": 30.2,
+        "clickToWorkerReceiveMs": 1.6,
+        "clickToReceivedUiMessageMs": 798.7,
+        "workerQueueMs": 0,
+        "handleToAdmissionMs": 420.6,
+        "admissionMs": 301,
+        "saveSegments": [
+          {
+            "startMs": 723.2,
+            "completeMs": 1456,
+            "durationMs": 732.8,
+            "nativeCompleteMs": 1455.8,
+            "beforeAdmission": false
+          }
+        ],
+        "clickToNativeDurableMs": 1455.8,
+        "clickToDurableAckMs": 1456.3,
+        "clickToQueueDomUpdatedMs": 2102.9,
+        "clickToTwoRafPaintProxyMs": 2142.5,
+        "ackToQueueDomMs": 646.6,
+        "nativeTransactionBeforeAck": true,
+        "savePromiseBeforeAck": true,
+        "savePromiseBeforeWorkerAckSend": true,
+        "observedSaveCompleteMessageBeforeAck": true,
+        "rawCrossContextSaveCompleteToAckMs": 0.300048828125,
+        "receiptInWorld": true,
+        "receiptInAuthority": true,
+        "sameReceipt": true,
+        "normalConfirmationTargetMs": 2000,
+        "confirmationWithinTarget": true,
+        "mainThreadCpuProfileDuringClick": true,
+        "navigation": "first field requested after normal city/field navigation; online simulation continues"
+      }
+    },
+    {
+      "name": "0h",
+      "status": "PASS",
+      "hours": 0,
+      "speed": 10,
+      "factions": 100,
+      "loadToFirstWorldMs": 4832,
+      "processedEvents": 0,
+      "advancedRealMs": 0,
+      "advancedWorldMs": 0,
+      "offlinePhasesMs": [
+        {
+          "name": "讀取與驗證本機存檔",
+          "untilNextPhaseMs": 710.3
+        },
+        {
+          "name": "推進離線期間的世界",
+          "untilNextPhaseMs": 6.8
+        },
+        {
+          "name": "原子保存接續進度",
+          "untilNextPhaseMs": null
+        }
+      ],
+      "worldHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+      "reportHistoryHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+      "crossRuntimeExactEquality": {
+        "inputMatches": true,
+        "worldMatches": true,
+        "reportsMatch": true
+      },
+      "immediateConstruction": {
+        "name": "0h first field",
+        "status": "PASS",
+        "inputMethod": "trusted Playwright browser click",
+        "clickToSendMs": 0.9,
+        "clickToAcceptingUiMs": 66.5,
+        "clickToWorkerReceiveMs": 122.9,
+        "clickToReceivedUiMessageMs": 411.6,
+        "workerQueueMs": 1127.5,
+        "handleToAdmissionMs": 1890.1,
+        "admissionMs": 134.8,
+        "saveSegments": [
+          {
+            "startMs": 1956.6,
+            "completeMs": 3100.3,
+            "durationMs": 1143.7,
+            "nativeCompleteMs": 3098.3,
+            "beforeAdmission": true
+          },
+          {
+            "startMs": 3275.3,
+            "completeMs": 4424.7,
+            "durationMs": 1149.4,
+            "nativeCompleteMs": 4424.3,
+            "beforeAdmission": false
+          }
+        ],
+        "clickToNativeDurableMs": 4424.3,
+        "clickToDurableAckMs": 4424.9,
+        "clickToQueueDomUpdatedMs": 5143.4,
+        "clickToTwoRafPaintProxyMs": 5354.9,
+        "ackToQueueDomMs": 718.5,
+        "nativeTransactionBeforeAck": true,
+        "savePromiseBeforeAck": true,
+        "savePromiseBeforeWorkerAckSend": true,
+        "observedSaveCompleteMessageBeforeAck": true,
+        "rawCrossContextSaveCompleteToAckMs": 0.199951171875,
+        "receiptInWorld": true,
+        "receiptInAuthority": true,
+        "sameReceipt": true,
+        "normalConfirmationTargetMs": 2000,
+        "confirmationWithinTarget": false,
+        "mainThreadCpuProfileDuringClick": false,
+        "navigation": "first field requested after normal city/field navigation; online simulation continues"
+      }
+    }
+  ],
+  "construction": [
+    {
+      "name": "resource field upgrade",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 1.2,
+      "clickToAcceptingUiMs": 24.2,
+      "clickToWorkerReceiveMs": 1.4,
+      "clickToReceivedUiMessageMs": 46.9,
+      "workerQueueMs": 0,
+      "handleToAdmissionMs": 757.4,
+      "admissionMs": 87.4,
+      "saveSegments": [
+        {
+          "startMs": 255.5,
+          "completeMs": 722.1,
+          "durationMs": 466.6,
+          "nativeCompleteMs": 721.9,
+          "beforeAdmission": true
+        },
+        {
+          "startMs": 846.3,
+          "completeMs": 1371.7,
+          "durationMs": 525.4,
+          "nativeCompleteMs": 1371.6,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 1371.6,
+      "clickToDurableAckMs": 1372,
+      "clickToQueueDomUpdatedMs": 1839.2,
+      "clickToTwoRafPaintProxyMs": 1877.8,
+      "ackToQueueDomMs": 467.2,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.2998046875,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    },
+    {
+      "name": "building center upgrade",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 29.9,
+      "clickToWorkerReceiveMs": 5.3,
+      "clickToReceivedUiMessageMs": 41.7,
+      "workerQueueMs": 0,
+      "handleToAdmissionMs": 225.4,
+      "admissionMs": 82.4,
+      "saveSegments": [
+        {
+          "startMs": 313.3,
+          "completeMs": 971.7,
+          "durationMs": 658.4,
+          "nativeCompleteMs": 971.6,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 971.6,
+      "clickToDurableAckMs": 971.9,
+      "clickToQueueDomUpdatedMs": 1184.7,
+      "clickToTwoRafPaintProxyMs": 1210.3,
+      "ackToQueueDomMs": 212.8,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.199951171875,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    },
+    {
+      "name": "building barracks upgrade",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 19.6,
+      "clickToWorkerReceiveMs": 0.6,
+      "clickToReceivedUiMessageMs": 59.4,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 263,
+      "admissionMs": 101.1,
+      "saveSegments": [
+        {
+          "startMs": 365.4,
+          "completeMs": 843.3,
+          "durationMs": 477.9,
+          "nativeCompleteMs": 843.2,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 843.2,
+      "clickToDurableAckMs": 844.5,
+      "clickToQueueDomUpdatedMs": 1085.3,
+      "clickToTwoRafPaintProxyMs": 1105.8,
+      "ackToQueueDomMs": 240.8,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 1.199951171875,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    },
+    {
+      "name": "building immediately after heavy replay",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 25.5,
+      "clickToWorkerReceiveMs": 0.8,
+      "clickToReceivedUiMessageMs": 100.3,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 222,
+      "admissionMs": 174.9,
+      "saveSegments": [
+        {
+          "startMs": 398,
+          "completeMs": 1036.9,
+          "durationMs": 638.9,
+          "nativeCompleteMs": 1036.7,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 1036.7,
+      "clickToDurableAckMs": 1036.9,
+      "clickToQueueDomUpdatedMs": 1354.7,
+      "clickToTwoRafPaintProxyMs": 1394.4,
+      "ackToQueueDomMs": 317.8,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": false,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": -0.000244140625,
+      "clockAnnotation": "Strict epoch comparison remains false: cross-context performance.timeOrigin double arithmetic differs by one epoch ULP (0.000244140625ms). Same-Worker saveComplete/ackSend timestamps and delivered message order are retained; no tolerance applied.",
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    },
+    {
+      "name": "rapid double click",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 20.6,
+      "clickToWorkerReceiveMs": 0.6,
+      "clickToReceivedUiMessageMs": 29.5,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 239,
+      "admissionMs": 127.4,
+      "saveSegments": [
+        {
+          "startMs": 367.2,
+          "completeMs": 969.5,
+          "durationMs": 602.3,
+          "nativeCompleteMs": 969.2,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 969.2,
+      "clickToDurableAckMs": 969.7,
+      "clickToQueueDomUpdatedMs": 1315.8,
+      "clickToTwoRafPaintProxyMs": 1341.7,
+      "ackToQueueDomMs": 346.1,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.199951171875,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true,
+      "requestsSent": 1
+    },
+    {
+      "name": "1X fill queue 1",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.3,
+      "clickToAcceptingUiMs": 12.9,
+      "clickToWorkerReceiveMs": 0.7,
+      "clickToReceivedUiMessageMs": 80.8,
+      "workerQueueMs": 0,
+      "handleToAdmissionMs": 227.6,
+      "admissionMs": 118.1,
+      "saveSegments": [
+        {
+          "startMs": 346.5,
+          "completeMs": 952.5,
+          "durationMs": 606,
+          "nativeCompleteMs": 952.3,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 952.3,
+      "clickToDurableAckMs": 952.6,
+      "clickToQueueDomUpdatedMs": 1276,
+      "clickToTwoRafPaintProxyMs": null,
+      "ackToQueueDomMs": 323.4,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.10009765625,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true,
+      "speed": 1
+    },
+    {
+      "name": "1X fill queue 2",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 23.9,
+      "clickToWorkerReceiveMs": 0.6,
+      "clickToReceivedUiMessageMs": 46.1,
+      "workerQueueMs": 0,
+      "handleToAdmissionMs": 201.5,
+      "admissionMs": 82.1,
+      "saveSegments": [
+        {
+          "startMs": 284.3,
+          "completeMs": 897.2,
+          "durationMs": 612.9,
+          "nativeCompleteMs": 897,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 897,
+      "clickToDurableAckMs": 898.1,
+      "clickToQueueDomUpdatedMs": 1161.9,
+      "clickToTwoRafPaintProxyMs": null,
+      "ackToQueueDomMs": 263.8,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.89990234375,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true,
+      "speed": 1
+    },
+    {
+      "name": "1X fill queue 3",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.3,
+      "clickToAcceptingUiMs": 36.3,
+      "clickToWorkerReceiveMs": 0.4,
+      "clickToReceivedUiMessageMs": 50.4,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 220.7,
+      "admissionMs": 83.3,
+      "saveSegments": [
+        {
+          "startMs": 304.5,
+          "completeMs": 755.4,
+          "durationMs": 450.9,
+          "nativeCompleteMs": 755.2,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 755.2,
+      "clickToDurableAckMs": 755.4,
+      "clickToQueueDomUpdatedMs": 1032.4,
+      "clickToTwoRafPaintProxyMs": 1063.7,
+      "ackToQueueDomMs": 277,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true,
+      "speed": 1
+    },
+    {
+      "name": "cancel queued construction",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.5,
+      "clickToAcceptingUiMs": 24.5,
+      "clickToWorkerReceiveMs": 0.9,
+      "clickToReceivedUiMessageMs": 55.1,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 132.3,
+      "admissionMs": 92.9,
+      "saveSegments": [
+        {
+          "startMs": 226.3,
+          "completeMs": 934,
+          "durationMs": 707.7,
+          "nativeCompleteMs": 933.7,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 933.7,
+      "clickToDurableAckMs": 934.1,
+      "clickToQueueDomUpdatedMs": 1207.7,
+      "clickToTwoRafPaintProxyMs": 1241.4,
+      "ackToQueueDomMs": 273.6,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.10009765625,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    },
+    {
+      "name": "cancel active construction",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 19.9,
+      "clickToWorkerReceiveMs": 0.5,
+      "clickToReceivedUiMessageMs": 47.3,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 160.7,
+      "admissionMs": 89.4,
+      "saveSegments": [
+        {
+          "startMs": 250.7,
+          "completeMs": 808.9,
+          "durationMs": 558.2,
+          "nativeCompleteMs": 808.7,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 808.7,
+      "clickToDurableAckMs": 809,
+      "clickToQueueDomUpdatedMs": 1323.9,
+      "clickToTwoRafPaintProxyMs": 1382.5,
+      "ackToQueueDomMs": 514.9,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.099853515625,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    },
+    {
+      "name": "field after restore",
+      "status": "PASS",
+      "inputMethod": "trusted Playwright browser click",
+      "clickToSendMs": 0.3,
+      "clickToAcceptingUiMs": 24.2,
+      "clickToWorkerReceiveMs": 0.6,
+      "clickToReceivedUiMessageMs": 48.9,
+      "workerQueueMs": 0.1,
+      "handleToAdmissionMs": 255.5,
+      "admissionMs": 107.5,
+      "saveSegments": [
+        {
+          "startMs": 363.9,
+          "completeMs": 845.4,
+          "durationMs": 481.5,
+          "nativeCompleteMs": 845.2,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 845.2,
+      "clickToDurableAckMs": 845.5,
+      "clickToQueueDomUpdatedMs": 1173.1,
+      "clickToTwoRafPaintProxyMs": 1203.8,
+      "ackToQueueDomMs": 327.6,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.10009765625,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true
+    }
+  ],
+  "aiOverlap": [
+    {
+      "name": "1X positive AI overlap",
+      "status": "PASS",
+      "inputMethod": "DOM button click triggered by positive due-AI background replay observation in real Chromium",
+      "clickToSendMs": 1.2,
+      "clickToAcceptingUiMs": 29.9,
+      "clickToWorkerReceiveMs": 136,
+      "clickToReceivedUiMessageMs": 139.2,
+      "workerQueueMs": 655.8,
+      "handleToAdmissionMs": 137.4,
+      "admissionMs": 87.7,
+      "saveSegments": [
+        {
+          "startMs": 1017,
+          "completeMs": 1566.5,
+          "durationMs": 549.5,
+          "nativeCompleteMs": 1566.4,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 1566.4,
+      "clickToDurableAckMs": 1566.8,
+      "clickToQueueDomUpdatedMs": 3575.4,
+      "clickToTwoRafPaintProxyMs": 3604.9,
+      "ackToQueueDomMs": 2008.6,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.300048828125,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": true,
+      "speed": 1,
+      "factions": 100,
+      "aiFactions": 99,
+      "aiDecisionsDuringWait": 1
+    },
+    {
+      "name": "10X positive AI overlap",
+      "status": "PASS",
+      "inputMethod": "DOM button click triggered by positive due-AI background replay observation in real Chromium",
+      "clickToSendMs": 0.4,
+      "clickToAcceptingUiMs": 19.7,
+      "clickToWorkerReceiveMs": 201.4,
+      "clickToReceivedUiMessageMs": 204.4,
+      "workerQueueMs": 904.7,
+      "handleToAdmissionMs": 111.5,
+      "admissionMs": 83.6,
+      "saveSegments": [
+        {
+          "startMs": 1301.3,
+          "completeMs": 2024.8,
+          "durationMs": 723.5,
+          "nativeCompleteMs": 2024.6,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 2024.6,
+      "clickToDurableAckMs": 2025,
+      "clickToQueueDomUpdatedMs": 2765.4,
+      "clickToTwoRafPaintProxyMs": 2852.5,
+      "ackToQueueDomMs": 740.4,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.2001953125,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": false,
+      "speed": 10,
+      "factions": 100,
+      "aiFactions": 99,
+      "aiDecisionsDuringWait": 1
+    },
+    {
+      "name": "50X positive AI overlap",
+      "status": "PASS",
+      "inputMethod": "DOM button click triggered by positive due-AI background replay observation in real Chromium",
+      "clickToSendMs": 0.5,
+      "clickToAcceptingUiMs": 14.4,
+      "clickToWorkerReceiveMs": 16.5,
+      "clickToReceivedUiMessageMs": 67.4,
+      "workerQueueMs": 1295.9,
+      "handleToAdmissionMs": 1406.5,
+      "admissionMs": 101.8,
+      "saveSegments": [
+        {
+          "startMs": 1787.8,
+          "completeMs": 2667.9,
+          "durationMs": 880.1,
+          "nativeCompleteMs": 2664.3,
+          "beforeAdmission": true
+        },
+        {
+          "startMs": 2820.8,
+          "completeMs": 3784.2,
+          "durationMs": 963.4,
+          "nativeCompleteMs": 3783.8,
+          "beforeAdmission": false
+        }
+      ],
+      "clickToNativeDurableMs": 3783.8,
+      "clickToDurableAckMs": 3784.8,
+      "clickToQueueDomUpdatedMs": 4332.9,
+      "clickToTwoRafPaintProxyMs": null,
+      "ackToQueueDomMs": 548.1,
+      "nativeTransactionBeforeAck": true,
+      "savePromiseBeforeAck": true,
+      "savePromiseBeforeWorkerAckSend": true,
+      "observedSaveCompleteMessageBeforeAck": true,
+      "rawCrossContextSaveCompleteToAckMs": 0.60009765625,
+      "receiptInWorld": true,
+      "receiptInAuthority": true,
+      "sameReceipt": true,
+      "normalConfirmationTargetMs": 2000,
+      "confirmationWithinTarget": false,
+      "speed": 50,
+      "factions": 100,
+      "aiFactions": 99,
+      "aiDecisionsDuringWait": 7
+    }
+  ],
+  "functional": {
+    "sameCommandIdResend": {
+      "status": "PASS",
+      "ack": "duplicate",
+      "resourcesUnchanged": true,
+      "constructionJobsBefore": 1,
+      "constructionJobsAfter": 1
+    },
+    "fullQueue": {
+      "status": "PASS",
+      "capacity": 3,
+      "locallyDisabled": true,
+      "rejectionAckMs": 149.8,
+      "rejectionUiMs": null,
+      "queueBefore": 3,
+      "queueAfter": 3,
+      "inheritedV94CapacityGap": true
+    },
+    "insufficientResources": {
+      "status": "PASS",
+      "scenario": "Isolated real-save copy, 1X, controlled zero player stock",
+      "locallyDisabled": true,
+      "requestToRejectionAckMs": 594.9,
+      "requestToRejectionUiMs": null,
+      "noLaterDurableSuccess": true,
+      "observationAfterRejectionMs": 1100
+    },
+    "refresh": {
+      "status": "PASS",
+      "elapsedMs": 2448,
+      "retainedConstruction": 1,
+      "completedConstruction": 0,
+      "receiptsGrowth": 0
+    },
+    "restore": {
+      "status": "PASS",
+      "checkpoints": 2,
+      "factions": 100
+    },
+    "campaignSwitch": {
+      "status": "PASS",
+      "factions": 100,
+      "oldCampaignCommandRejected": true
+    },
+    "originalImport": {
+      "status": "PASS",
+      "confirmToWorldMs": 1646,
+      "factions": 100
+    },
+    "reimport": {
+      "status": "PASS",
+      "confirmToWorldMs": 1209,
+      "factions": 100
+    },
+    "positiveProgressCancellation": {
+      "status": "PASS",
+      "allThreeStoresUnchanged": true,
+      "counts": {
+        "saves": 2,
+        "backups": 1,
+        "BattleReports": 22
+      },
+      "positiveProgress": {
+        "events": 32,
+        "fraction": 0.002153560185185185
+      },
+      "cancelClickToRetainedNoticeMs": 151,
+      "retryRequired": true,
+      "retryStatus": "PASS",
+      "retryProcessedEvents": 19569,
+      "retryAdvancedWorldMs": 216000000
+    },
+    "secondTabWriterLock": {
+      "status": "PASS",
+      "heldWriters": 1,
+      "secondTabLiveWorkers": 0
+    }
+  },
+  "nativeSaveSafety": {
+    "status": "PASS",
+    "sameFrozenSource": true,
+    "fixture": "Public synthetic fixture; native browser IndexedDB, no fake-indexeddb",
+    "passed": 23,
+    "failed": 0,
+    "allThreeStores": "saves (world + authority), backups, BattleReports",
+    "cases": [
+      {
+        "name": "save rollback report-write",
+        "status": "PASS",
+        "elapsedMs": 235.1,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "save rollback backup-write",
+        "status": "PASS",
+        "elapsedMs": 106.2,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "save rollback world-write",
+        "status": "PASS",
+        "elapsedMs": 48.3,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "save rollback authority-write",
+        "status": "PASS",
+        "elapsedMs": 51.7,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "restore rollback history-modified",
+        "status": "PASS",
+        "elapsedMs": 160.4,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "restore rollback report-write",
+        "status": "PASS",
+        "elapsedMs": 282.8,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "restore rollback backup-write",
+        "status": "PASS",
+        "elapsedMs": 146.8,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "restore rollback world-write",
+        "status": "PASS",
+        "elapsedMs": 84.7,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "restore rollback authority-write",
+        "status": "PASS",
+        "elapsedMs": 86.9,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "import rollback history-modified",
+        "status": "PASS",
+        "elapsedMs": 69.8,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "import rollback report-write",
+        "status": "PASS",
+        "elapsedMs": 71.1,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "import rollback backup-write",
+        "status": "PASS",
+        "elapsedMs": 64.9,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "import rollback world-write",
+        "status": "PASS",
+        "elapsedMs": 84.2,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "import rollback authority-write",
+        "status": "PASS",
+        "elapsedMs": 101.7,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "durable history rejects missing",
+        "status": "PASS",
+        "elapsedMs": 580.8,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "durable history rejects fingerprint",
+        "status": "PASS",
+        "elapsedMs": 520.8,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "durable history rejects issuerId",
+        "status": "PASS",
+        "elapsedMs": 421.1,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "durable history rejects committedRevision",
+        "status": "PASS",
+        "elapsedMs": 490.5,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "durable history rejects disposition",
+        "status": "PASS",
+        "elapsedMs": 631.1,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "durable history rejects duplicate",
+        "status": "PASS",
+        "elapsedMs": 641.1,
+        "allStoreHashesUnchanged": true
+      },
+      {
+        "name": "concurrent two-connection CAS",
+        "status": "PASS",
+        "elapsedMs": 106.5,
+        "durableWinners": 1,
+        "staleLosers": 1
+      },
+      {
+        "name": "checkpoint retention follows primary key order despite clock reversal",
+        "status": "PASS",
+        "elapsedMs": 68.4
+      },
+      {
+        "name": "newest invalid checkpoint fallback and failed automatic Recovery",
+        "status": "PASS",
+        "elapsedMs": 421.2,
+        "allFiveAutomaticRecoveryFailurePointsChecked": true
+      }
+    ]
+  },
+  "consistency": {
+    "native0hExactNodeInputAndWorldAndReports": {
+      "inputMatches": true,
+      "worldMatches": true,
+      "reportsMatch": true
+    },
+    "crossRuntime6hRawWorldHash": "FAIL",
+    "crossRuntime6hReportsHash": "PASS",
+    "repeatedChromium6hWorldHashesExactlyEqual": true,
+    "repeatedChromium6hReportHashesExactlyEqual": true,
+    "exactDiffCategories": [
+      {
+        "category": "cities.population",
+        "count": 3,
+        "maxAbsoluteDifference": 5.46e-12
+      },
+      {
+        "category": "autonomy.memory.threat",
+        "count": 18,
+        "maxAbsoluteDifference": 1.67e-16
+      }
+    ],
+    "allOtherWorldFieldsExact": true,
+    "noFloatToleranceOrNormalizationApplied": true,
+    "sameChromiumBeforeAfter": {
+      "status": "PASS",
+      "comparison": "exact canonical full-world and exact full report-history digest; no tolerance or normalization",
+      "initialization": "Same production decode/encode and exact native IndexedDB seed, original receipt order and controlled wall clock",
+      "baseline": "immutable original main 7b0390a",
+      "timingUse": "Functional hash control only; runs later sharing CPU with old24. No performance ratio.",
+      "browser": "Chromium154.0.8037.57",
+      "baselineSource": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+      "finalSourceTree": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "exactWorldEqual": true,
+      "exactReportHashEqual": true,
+      "baselineWorldHash": "da59485305b0ca15d279a0c58304ae83ff663e9cd119920698afd5a0bcbbf6fe",
+      "finalWorldHash": "da59485305b0ca15d279a0c58304ae83ff663e9cd119920698afd5a0bcbbf6fe",
+      "baselineProcessedEvents": 19569,
+      "finalProcessedEvents": 19569,
+      "baselineFactions": 100,
+      "contention": "CPU shared with original-main old24 profile; elapsed time excluded from performance comparison",
+      "android": "PENDING"
+    }
+  },
+  "mainThreadProfile": {
+    "scope": "Separate 6h-retry first-field navigation/click/render, development React",
+    "durationMs": 4145.7,
+    "selfMs": {
+      "reactDevAddObjectDiffToProperties": 878.7,
+      "jsxDEV": 125.7,
+      "garbageCollection": 141,
+      "idle": 1235.6,
+      "program": 762.6
+    },
+    "limitation": "This file contains development-server timing; production measurements are separately recorded in production-browser.json."
+  },
+  "limits": [
+    "Desktop Chromium engineering evidence; Android physical-device acceptance remains PENDING.",
+    "1–2 second confirmation target is exceeded in 10X and 50X AI overlap and the later busy native0h first command. Queue DOM updates also exceed 2 seconds in several cases. All measured values are retained.",
+    "Current safe implementation persists caught-up simulation before the player command transaction; coalescing is not implemented.",
+    "Queue DOM timestamps mean the visible-layout queue node was updated; two requestAnimationFrame callbacks are a paint proxy, not physical-device pixel verification.",
+    "Raw cross-runtime 6h world equality fails on 21 floating values. Same-Chromium before/after control remains separate and exact.",
+    "Main inherited construction capacity is 3 while v94 specifies 5; no gameplay rule was changed in this work.",
+    "A queued-cancel exploratory attempt lost its queue precondition at10X; controlled1X queued/active cancellation passed. Tail setup in the reused50X scene lacked its import input; fresh isolated tail cases passed. Neither setup failure issued a false rejection command."
+  ]
+}

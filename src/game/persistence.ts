@@ -71,18 +71,20 @@ export class FormalPersistence {
     if(current&&current.kind==='world'&&current.data.snapshot.campaignId!==w.campaignId)throw new Error('Campaign switch requires explicit transition');
     const required=current?authority.revision+1:0;
     if(w.revision!==required)throw new Error('Committed revision must advance exactly once');
-    for(const r of prior){const receipt=w.commandReceipts.find(x=>x.commandId===r.commandId);if(!receipt||canonicalJSON(receipt)!==canonicalJSON(r))throw new Error('Durable dedupe history cannot be dropped');}
+    const receipts=new Map(w.commandReceipts.map(r=>[r.commandId,r]));
+    for(const r of prior){const receipt=receipts.get(r.commandId);if(!receipt||canonicalJSON(receipt)!==canonicalJSON(r))throw new Error('Durable dedupe history cannot be dropped');}
    }else{
     w.commandReceipts=reconcileReceipts(w,prior);
     for(const key of ['event','report','project'] as const)w.sequences[key]=Math.max(w.sequences[key],authority.sequences[key]);
-    w.revision=Math.max(current?authority.revision+1:0,w.revision, ...w.commandReceipts.map(r=>r.committedRevision));
+    w.revision=Math.max(current?authority.revision+1:0,w.revision);
+    for(const r of w.commandReceipts)w.revision=Math.max(w.revision,r.committedRevision);
    }
    if(activateAI)enableAutonomy(w);
    const real=(at:number)=>Math.max(0,Math.floor(savedAt-(w.time-at)/effectiveSpeed(input)));
    if(mode==='save'||mode==='start')stampPending(w,real);
    const stampedReports=reportWrites.map(r=>{const copy=structuredClone(r);if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});
-   validateFormalWorld(w);validateReportHistory(w,stampedReports);
-   // Crypto promises need keep-alive while the read/write transaction owns the revision lock.
+   validateReportHistory(w,stampedReports);
+   // encodeSave fully validates the final world; crypto needs keep-alive under the revision lock.
    const envelope=await Dexie.waitFor(encodeSave(w));
    if(mode==='restore'||mode==='import'){
     const rows=await this.db.BattleReports.where('campaignId').equals(w.campaignId).toArray();
@@ -97,7 +99,7 @@ export class FormalPersistence {
    this.fault?.('report-write');
    // Two valid checkpoints; ordering uses IDB monotonic IDs, not wall-clock ordering.
    await this.db.backups.add({at:savedAt,label:mode==='restore'?'手動回復':mode==='import'?'正式匯入':mode==='start'?'B1 fixture開始':'正式回復點',campaignId:w.campaignId,gameTime:w.time,reportCursor:w.sequences.report,data:envelope});
-   const backups=await this.db.backups.orderBy('id').toArray();if(backups.length>2)await this.db.backups.bulkDelete(backups.slice(0,-2).map(r=>r.id!));
+   const backupIds=await this.db.backups.orderBy('id').primaryKeys();if(backupIds.length>2)await this.db.backups.bulkDelete(backupIds.slice(0,-2));
    this.fault?.('backup-write');
    await this.db.saves.put({id:'current',kind:'world',at:savedAt,data:envelope});this.fault?.('world-write');
    authority.revision=w.revision;authority.sequences={...w.sequences};
