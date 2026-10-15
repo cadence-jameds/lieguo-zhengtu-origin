@@ -2,7 +2,7 @@ import {developerWorld,developerOrder,putBuilding,commitCheck,nearEmptyTarget,ty
 import {CIVILIZATIONS} from '../formal/generator';
 import {advanceFormal,submitFormalOrder} from '../formal/reducer';
 import {validateFormalWorld} from '../formal/schema';
-import {buildable,passable,terrainAt,fieldDistribution} from '../formal/terrain';
+import {buildable,passable,terrainAt,fieldDistribution,terrainTravelMultiplier} from '../formal/terrain';
 import {spatial} from '../formal/spatial';
 import {route} from '../formal/routing';
 import {citySnapshot,productionPerHour,settleCity,changeCityOwner,HOUR,administrationMultiplier} from '../formal/economy';
@@ -28,7 +28,7 @@ export async function runDeveloperChecks(onResult:(r:CheckResult)=>void,config:D
  add('B2','D7 起始 200 人、400 住房、600×4、18 塊 Lv0','v85 D7／§15.4 B2',()=>requireCheck(baseline.cities.every(c=>c.population===200&&c.housing===400&&Object.values(c.stock).every(n=>n===600)&&c.fields?.length===18&&c.fields.every(f=>f.level===0)&&c.buildings.center===1&&!(c.integrationWorkHours??0)&&!Object.keys(c.military?.units??{}).length),{checkedCities:100,fields:[6,5,4,3],population:200,housing:400}));
  add('B2','城市／據點不重疊，全部在合法建城地形','v85 世界合法遮罩',()=>{const nodes=[...baseline.cities,...baseline.worldLayer!.wildSites];return requireCheck(new Set(nodes.map(c=>c.y*384+c.x)).size===nodes.length&&nodes.every(c=>buildable(terrainAt(baseline,c.x,c.y))),{entities:nodes.length});});
  add('B2','Spatial 查詢與 ownership 索引','v85 §15.4 B2',()=>{const i=spatial(baseline),c=baseline.cities[0];return requireCheck(i.at(c.x,c.y).city===c&&i.owned(c.ownerFactionId).length===1&&i.query({minX:0,minY:0,maxX:383,maxY:383}).sites.length===432,{regionSize:i.regionSize,cities:i.cities.size,sites:i.sites.size});});
- add('B2','路徑可通河流，不通水域／山脈','v85 世界通行規則',()=>{const r=route(baseline,baseline.cities[0],baseline.cities[1]);return requireCheck(!buildable('river')&&passable('river')&&!passable('mountain')&&!passable('water')&&r.path.every(p=>passable(terrainAt(baseline,p.x,p.y))),{distance:r.distance,pathLength:r.path.length});});
+ add('B2','路徑可通河流與水域，水域較慢，山脈不通','v94 與玩家核准水域耗時 2 倍',()=>{const r=route(baseline,baseline.cities[0],baseline.cities[1]);return requireCheck(!buildable('river')&&passable('river')&&!passable('mountain')&&passable('water')&&!buildable('water')&&terrainTravelMultiplier('water')===2&&r.path.every(p=>passable(terrainAt(baseline,p.x,p.y))),{distance:r.distance,pathLength:r.path.length});});
  add('B2','座標資源配置固定，共 18 塊','v85 D7／城郊資源',()=>{const a=fieldDistribution(config.seed,178,11),b=fieldDistribution(config.seed,178,11);return requireCheck(canonicalJSON(a)===canonicalJSON(b)&&a.reduce((n,x)=>n+x,0)===18,a);});
  add('B3','Lv0 田產量與平民無軍糧','v85 經濟／18 資源田',()=>{const w=make(),c=w.cities[0],p=productionPerHour(w,c);return requireCheck(canonicalJSON(p)===canonicalJSON({food:54,wood:45,stone:36,gold:27})&&armyUpkeep(w,c)===0,p);});
  add('B3','田成本逐項 round_to_5；中心加速','v85 資源田成本／工期',()=>{const c=fieldCost('food',1);return requireCheck(canonicalJSON(c)===canonicalJSON({food:20,wood:70,stone:90,gold:70})&&fieldDuration('wood',1,15)<fieldDuration('wood',1,1),{cost:c,center1Ms:fieldDuration('wood',1,1),center15Ms:fieldDuration('wood',1,15)});});

@@ -1,0 +1,3940 @@
+{
+  "schemaVersion": 1,
+  "title": "P0 v2 private real-save aggregate performance evidence",
+  "recordedAt": "2026-10-15T07:55:48.581Z",
+  "acceptance": {
+    "targetCoverage": "Controlled private real-save Node runs at 10X with 99 AI; short speed probes do not establish full-duration performance at every speed.",
+    "desktop6hTargetMs": 30000,
+    "desktop6hBothRunsMeetTarget": true,
+    "desktop24hTargetMs": 120000,
+    "desktop24hCleanMeetsTarget": false,
+    "android": "PENDING: no physical Android measurement",
+    "p0Gate": "HOLD: engineering measurements do not grant release or gameplay Gate acceptance"
+  },
+  "sources": {
+    "baselineCommit": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+    "finalSourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+    "version": "0.30.50",
+    "sourceTreeHashMeaning": "SHA-256 over sorted compiled input source files and source JSON, before instrumentation; final tests/browser/build use this same frozen source."
+  },
+  "input": {
+    "bytes": 5897901,
+    "saveVersion": "0.30.49",
+    "schema": 3,
+    "factions": 100,
+    "aiFactions": 99,
+    "cities": 100,
+    "initialCommandReceipts": 13963,
+    "initialAICommandReceipts": 13906,
+    "initialAutonomousCommandIdPrefixReceipts": 13906,
+    "aiReceiptCountBasis": "Issuer faction role; independently verified AI=13906 and player=57 for this save. The autonomous prefix count happens to equal 13906 here; it is a separate category.",
+    "initialPendingEvents": 220,
+    "initialCombatReceipts": 1997,
+    "initialBundledReports": 22
+  },
+  "hardware": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "logicalCPUsReported": 3,
+    "cgroupCpuMax": "200000 100000",
+    "effectiveCPUQuota": 2,
+    "cgroupMemoryLimitBytes": 8589934592
+  },
+  "method": {
+    "clock": "savedAt=1700000000000; now advances by the requested real hours; world duration uses configured speed.",
+    "durationsRealHours": [
+      0,
+      6,
+      24
+    ],
+    "longRunSpeed": 10,
+    "testCopyOnly": "Only decoded test copies change legal 24h cap/speed. Original input is read only.",
+    "storage": "fake-indexeddb; native Chromium persistence and interaction measurements are separate.",
+    "crossRuntime": "Exact digests here compare Node V8 with itself before and after. Chromium uses a separate native before/after control; no world-state numeric tolerance is applied.",
+    "workerTransfer": "Node MessageChannel structured-clone delivery; no rendering or Android storage is implied.",
+    "elapsedReference": "No source/global timing wrappers or V8 CPU sampling. Two solo 6h runs are both retained.",
+    "instrumentation": "Per-event order/type counts and average/max costs require wrapped runs; wrapper costs are material after optimization. Sampled CPU includes input initialization; pipeline CPU covers load/replay/save.",
+    "longBaseline": "Original 24h baseline was cooperatively paused for clean testing and quota waits. Raw wall, paused and active elapsed are distinct. Active CPU percentages exclude V8 idle samples; CPU polling during pause remains included. No uninterrupted 24h speed ratio is claimed.",
+    "privacy": "Aggregates, counts, function names and one-way equality digests only. No save payload, raw world, database rows, raw CPU trace or private filesystem path."
+  },
+  "baseline": {
+    "zeroHour": {
+      "label": "baseline-0h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+        "version": "0.30.50",
+        "instrumented": true
+      },
+      "configuration": {
+        "hours": 0,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700000000000,
+        "offlineCapHours": 6
+      },
+      "measurement": {
+        "instrumented": true,
+        "cpuProfiling": true,
+        "contention": "Not captured by the early harness; see run limitations and the separate uncontended clean 6h reference.",
+        "limitations": [
+          "Original v1 async-return timing ended early for promise-returning persistence functions; phase wall times and synchronous costs are the reliable measures."
+        ]
+      },
+      "load": {
+        "rawWallMs": 2412.6416879999997,
+        "pausedMs": 0,
+        "activeMs": 2412.6416879999997,
+        "readMs": 389.791477,
+        "offlineRawMs": 3.725054,
+        "offlineActiveMs": 3.725054,
+        "saveMs": 2018.8612070000001,
+        "cpu": null
+      },
+      "stagesMs": {
+        "fileRead": 31.74983900000001,
+        "JSON.parse": 30.912090999999975,
+        "decodeSchemaChecksumMigration": 577.322737,
+        "inputDeterministicHash": 221.84310499999992,
+        "encodeSeed": 248.06625800000006,
+        "seedFakeIndexedDB": 130.86709299999984,
+        "loadWithOffline.read": 389.791477,
+        "loadWithOffline.offline": 3.725054,
+        "loadWithOffline.save": 2018.8612070000001,
+        "loadWithOffline": 2412.6416879999997,
+        "outputDeterministicHash": 110.91362900000013,
+        "readPersistedRowsFakeIndexedDB": 192.26132599999983,
+        "reportHistoryHash": 1.3389870000000883,
+        "loadSavePostReplay": 612.5533969999997,
+        "reloadDeterministicHash": 94.96595699999943,
+        "JSON.stringify.fullWorld": 18.98266799999965,
+        "structuredClone.fullWorld": 37.43276699999933,
+        "worldStream.worldPatch": 81.0950640000001,
+        "worldStream.applyWorldPatch": 0.7260070000002088,
+        "patchDeterministicHash": 151.12288400000034,
+        "workerMessageChannel.fullWorld": 36.136303000000225,
+        "workerMessageChannel.worldPatch": 0.5929580000001806
+      },
+      "processedEvents": 0,
+      "perEventType": {},
+      "selectedFunctionCosts": {
+        "structuredClone.world": {
+          "count": 1,
+          "totalMs": 25.777046000000155,
+          "avgMs": 25.777046000000155,
+          "maxMs": 25.777046000000155,
+          "selfMs": 25.777046000000155
+        },
+        "structuredClone.other": {
+          "count": 12,
+          "totalMs": 202.85576100000026,
+          "avgMs": 16.904646750000023,
+          "maxMs": 26.36323900000025,
+          "selfMs": 202.85576100000026
+        },
+        "JSON.stringify.object": {
+          "count": 2,
+          "totalMs": 0.009133999999903608,
+          "avgMs": 0.004566999999951804,
+          "maxMs": 0.008023000000093816,
+          "selfMs": 0.009133999999903608
+        },
+        "receiptLookup.find": {
+          "count": 13963,
+          "totalMs": 1334.2361210000272,
+          "avgMs": 0.09555511859915686,
+          "maxMs": 4.273646000000099,
+          "selfMs": 1334.2361210000272
+        },
+        "receiptLookup.some": {
+          "count": 192,
+          "totalMs": 61.82264999999984,
+          "avgMs": 0.32199296874999916,
+          "maxMs": 1.1645149999999376,
+          "selfMs": 61.82264999999984
+        },
+        "formal/schema.validateFormalWorld": {
+          "count": 5,
+          "totalMs": 371.9013359999999,
+          "avgMs": 74.38026719999998,
+          "maxMs": 83.49277400000005,
+          "selfMs": 310.75965300000007
+        },
+        "formal/reducer.advanceFormalCooperative": {
+          "count": 1,
+          "totalMs": 0.03181700000004639,
+          "avgMs": 0.03181700000004639,
+          "maxMs": 0.03181700000004639,
+          "selfMs": 0.03181700000004639
+        }
+      },
+      "functionSelfTop10": [
+        {
+          "name": "receiptLookup.find",
+          "count": 13963,
+          "totalMs": 1334.2361210000272,
+          "avgMs": 0.09555511859915686,
+          "maxMs": 4.273646000000099,
+          "selfMs": 1334.2361210000272
+        },
+        {
+          "name": "formal/schema.validateFormalWorld",
+          "count": 5,
+          "totalMs": 371.9013359999999,
+          "avgMs": 74.38026719999998,
+          "maxMs": 83.49277400000005,
+          "selfMs": 310.75965300000007
+        },
+        {
+          "name": "structuredClone.other",
+          "count": 12,
+          "totalMs": 202.85576100000026,
+          "avgMs": 16.904646750000023,
+          "maxMs": 26.36323900000025,
+          "selfMs": 202.85576100000026
+        },
+        {
+          "name": "persistence.loadWithOffline",
+          "count": 1,
+          "totalMs": 2412.407963,
+          "avgMs": 2412.407963,
+          "maxMs": 2412.407963,
+          "selfMs": 141.2154129999726
+        },
+        {
+          "name": "formal/saveCodec.encodeSave",
+          "count": 1,
+          "totalMs": 176.23997800000006,
+          "avgMs": 176.23997800000006,
+          "maxMs": 176.23997800000006,
+          "selfMs": 98.03929800000014
+        },
+        {
+          "name": "formal/saveCodec.decodeSave",
+          "count": 1,
+          "totalMs": 242.328982,
+          "avgMs": 242.328982,
+          "maxMs": 242.328982,
+          "selfMs": 91.92067199999997
+        },
+        {
+          "name": "persistence.loadAnchored",
+          "count": 1,
+          "totalMs": 389.66406099999995,
+          "avgMs": 389.66406099999995,
+          "maxMs": 389.66406099999995,
+          "selfMs": 86.10635900000011
+        },
+        {
+          "name": "receiptLookup.some",
+          "count": 192,
+          "totalMs": 61.82264999999984,
+          "avgMs": 0.32199296874999916,
+          "maxMs": 1.1645149999999376,
+          "selfMs": 61.82264999999984
+        },
+        {
+          "name": "persistence.authority",
+          "count": 2,
+          "totalMs": 86.546018,
+          "avgMs": 43.273009,
+          "maxMs": 49.297025000000076,
+          "selfMs": 55.8794740000003
+        },
+        {
+          "name": "structuredClone.world",
+          "count": 1,
+          "totalMs": 25.777046000000155,
+          "avgMs": 25.777046000000155,
+          "maxMs": 25.777046000000155,
+          "selfMs": 25.777046000000155
+        }
+      ],
+      "cpuTop10": [
+        {
+          "name": "receiptLookup",
+          "file": "<benchmark harness>",
+          "line": 15,
+          "selfSampledMs": 676.7119999999991,
+          "activePercent": 18.290319276227542
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/persistence.js",
+          "line": 110,
+          "selfSampledMs": 419.9360000000005,
+          "activePercent": 11.350121640493901
+        },
+        {
+          "name": "(garbage collector)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 258.023,
+          "activePercent": 6.973901823242482
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/persistence.js",
+          "line": 95,
+          "selfSampledMs": 140.162,
+          "activePercent": 3.788329053415054
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/persistence.js",
+          "line": 110,
+          "selfSampledMs": 123.81599999999996,
+          "activePercent": 3.346525806407145
+        },
+        {
+          "name": "mountainFootprint",
+          "file": "src/game/formal/mountains.js",
+          "line": 6,
+          "selfSampledMs": 59.141999999999996,
+          "activePercent": 1.5985028529635217
+        },
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 50.876999999999974,
+          "activePercent": 1.3751146334284445
+        },
+        {
+          "name": "(idle)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 40.553000000000004,
+          "activePercent": 1.0960753135881387
+        },
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 40.49099999999999,
+          "activePercent": 1.0943995640889037
+        },
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 39.24899999999999,
+          "activePercent": 1.0608305176687507
+        }
+      ],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 332144640,
+          "heapUsed": 151128296,
+          "heapTotal": 246587392,
+          "external": 14094834,
+          "arrayBuffers": 6020833
+        },
+        "processLifetimePeakRSSBytes": 365559808
+      },
+      "workerTransfer": {
+        "fullTransferMs": 35.749885999999606,
+        "patchTransferMs": 0.20732700000007753,
+        "patchKeys": [
+          "revision"
+        ]
+      },
+      "output": {
+        "time": 666999586,
+        "revision": 1382,
+        "commandReceipts": 13963,
+        "combatReceipts": 1997,
+        "pendingEvents": 220,
+        "reports": 22,
+        "autonomyDecisions": 20980,
+        "acceptedAI": 13906,
+        "rejectedAI": 64
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "reportHistoryHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "patchHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "sixHoursClean": {
+      "label": "baseline-clean-6h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+        "version": "0.30.50",
+        "instrumented": false
+      },
+      "configuration": {
+        "hours": 6,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700021600000,
+        "offlineCapHours": 6
+      },
+      "measurement": {
+        "instrumented": false,
+        "cpuProfiling": false,
+        "contention": "Uncontended; root and agents paused heavy tests/browser benchmarks",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 658676.777476,
+        "pausedMs": 0,
+        "activeMs": 658676.777476,
+        "readMs": 590.2195360000001,
+        "offlineRawMs": 655871.999346,
+        "offlineActiveMs": 655871.999346,
+        "saveMs": 2214.243785999948,
+        "cpu": {
+          "userMs": 754731.984,
+          "systemMs": 16543.714
+        }
+      },
+      "stagesMs": {
+        "fileRead": 66.99030900000002,
+        "JSON.parse": 23.455058000000008,
+        "decodeSchemaChecksumMigration": 442.76138199999997,
+        "inputDeterministicHash": 117.86412900000005,
+        "encodeSeed": 201.28587000000005,
+        "seedFakeIndexedDB": 131.273864,
+        "loadWithOffline.read": 590.2195360000001,
+        "loadWithOffline.offline": 655871.999346,
+        "loadWithOffline.save": 2214.243785999948,
+        "loadWithOffline": 658676.777476,
+        "outputDeterministicHash": 166.45504100003745,
+        "readPersistedRowsFakeIndexedDB": 121.39968799997587,
+        "IndexedDB.backupEnvelopesToArray": 76.22432499995921,
+        "IndexedDB.backupPrimaryKeys": 0.6372119999723509,
+        "reportHistoryHash": 2.894944000057876,
+        "loadSavePostReplay": 606.8766479999758,
+        "reloadDeterministicHash": 113.16440000000875,
+        "JSON.stringify.fullWorld": 40.15375499997754,
+        "structuredClone.fullWorld": 30.564883999992162,
+        "worldStream.worldPatch": 50.14361899998039,
+        "worldStream.applyWorldPatch": 0.1616619999986142,
+        "patchDeterministicHash": 119.44435500004329,
+        "workerMessageChannel.fullWorld": 33.655397000024095,
+        "workerMessageChannel.worldPatch": 31.35794200003147
+      },
+      "processedEvents": 19569,
+      "perEventType": {},
+      "selectedFunctionCosts": {},
+      "functionSelfTop10": [],
+      "cpuTop10": [],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 1588940800,
+          "heapUsed": 1254512568,
+          "heapTotal": 1338515456,
+          "external": 8231079,
+          "arrayBuffers": 143743
+        },
+        "processLifetimePeakRSSBytes": 1598607360
+      },
+      "workerTransfer": {
+        "fullTransferMs": 32.66544500004966,
+        "patchTransferMs": 31.17215900006704,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 882999586,
+        "revision": 1382,
+        "commandReceipts": 18353,
+        "combatReceipts": 2910,
+        "pendingEvents": 269,
+        "reports": 44,
+        "autonomyDecisions": 26246,
+        "acceptedAI": 18296,
+        "rejectedAI": 96
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "patchHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "sixHoursInstrumented": {
+      "label": "baseline-6h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+        "version": "0.30.50",
+        "instrumented": true
+      },
+      "configuration": {
+        "hours": 6,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700021600000,
+        "offlineCapHours": 6
+      },
+      "measurement": {
+        "instrumented": true,
+        "cpuProfiling": true,
+        "contention": "Not captured by the early harness; see run limitations and the separate uncontended clean 6h reference.",
+        "limitations": [
+          "Some initial browser/test CPU overlap; not the clean elapsed reference. Original v1 promise-return timer limitation applies."
+        ]
+      },
+      "load": {
+        "rawWallMs": 772349.768057,
+        "pausedMs": 0,
+        "activeMs": 772349.768057,
+        "readMs": 916.0690410000002,
+        "offlineRawMs": 769030.196939,
+        "offlineActiveMs": 769030.196939,
+        "saveMs": 2403.3141929999692,
+        "cpu": null
+      },
+      "stagesMs": {
+        "fileRead": 112.37134099999997,
+        "JSON.parse": 139.42330099999998,
+        "decodeSchemaChecksumMigration": 810.4554350000001,
+        "inputDeterministicHash": 202.2828340000001,
+        "encodeSeed": 423.788988,
+        "seedFakeIndexedDB": 161.12471600000026,
+        "loadWithOffline.read": 916.0690410000002,
+        "loadWithOffline.offline": 769030.196939,
+        "loadWithOffline.save": 2403.3141929999692,
+        "loadWithOffline": 772349.768057,
+        "outputDeterministicHash": 251.81221600004937,
+        "readPersistedRowsFakeIndexedDB": 132.29748499998823,
+        "reportHistoryHash": 1.5513360000913963,
+        "loadSavePostReplay": 698.0853209999623,
+        "reloadDeterministicHash": 134.4020020000171,
+        "JSON.stringify.fullWorld": 42.0597200000193,
+        "structuredClone.fullWorld": 42.00075500004459,
+        "worldStream.worldPatch": 43.123124000034295,
+        "worldStream.applyWorldPatch": 0.1540409999433905,
+        "patchDeterministicHash": 130.0936979999533,
+        "workerMessageChannel.fullWorld": 34.830827000085264,
+        "workerMessageChannel.worldPatch": 49.428129000007175
+      },
+      "processedEvents": 19569,
+      "perEventType": {
+        "army.return": {
+          "count": 428,
+          "totalMs": 372.15846500128873,
+          "avgMs": 0.8695291238347868,
+          "maxMs": 17.22788199999968,
+          "selfMs": 33.79211299539429
+        },
+        "military.train": {
+          "count": 3236,
+          "totalMs": 809.6542879989393,
+          "avgMs": 0.25020219035813945,
+          "maxMs": 58.33872800000245,
+          "selfMs": 275.07395999486516
+        },
+        "ai.decide": {
+          "count": 5266,
+          "totalMs": 590647.4144889977,
+          "avgMs": 112.16244103475078,
+          "maxMs": 1450.520365000004,
+          "selfMs": 363.9026330200013
+        },
+        "construction.complete": {
+          "count": 2946,
+          "totalMs": 733.8055049998261,
+          "avgMs": 0.24908537169036868,
+          "maxMs": 107.3494570000039,
+          "selfMs": 164.2966349976491
+        },
+        "army.arrive": {
+          "count": 668,
+          "totalMs": 1252.6473880014773,
+          "avgMs": 1.8752206407207745,
+          "maxMs": 26.712398000003304,
+          "selfMs": 34.95427200019594
+        },
+        "governance.decide": {
+          "count": 951,
+          "totalMs": 170462.362245,
+          "avgMs": 179.24538616719244,
+          "maxMs": 984.4687910000212,
+          "selfMs": 68.42685599513516
+        },
+        "economy.settle": {
+          "count": 6000,
+          "totalMs": 937.0198239993897,
+          "avgMs": 0.15616997066656496,
+          "maxMs": 36.6241920000175,
+          "selfMs": 319.7496739233702
+        },
+        "research.complete": {
+          "count": 13,
+          "totalMs": 6.438287000200944,
+          "avgMs": 0.4952528461693034,
+          "maxMs": 0.951937000034377,
+          "selfMs": 3.2435639988980256
+        },
+        "wild.respawn": {
+          "count": 2,
+          "totalMs": 25.54259899997851,
+          "avgMs": 12.771299499989254,
+          "maxMs": 13.871844000008423,
+          "selfMs": 0.09271900041494519
+        },
+        "combat.round": {
+          "count": 44,
+          "totalMs": 130.73599500005366,
+          "avgMs": 2.9712726136375833,
+          "maxMs": 42.43283499998506,
+          "selfMs": 9.388265000103274
+        },
+        "age.complete": {
+          "count": 15,
+          "totalMs": 2.7641469997761305,
+          "avgMs": 0.18427646665174205,
+          "maxMs": 0.3496749999758322,
+          "selfMs": 1.740491001837654
+        }
+      },
+      "selectedFunctionCosts": {
+        "structuredClone.world": {
+          "count": 4424,
+          "totalMs": 181128.30286600074,
+          "avgMs": 40.942202275316625,
+          "maxMs": 423.3307400000049,
+          "selfMs": 181128.30286600074
+        },
+        "structuredClone.event": {
+          "count": 6179131,
+          "totalMs": 15848.325620873447,
+          "avgMs": 0.0025648146350795036,
+          "maxMs": 126.0944870000003,
+          "selfMs": 15848.325620873447
+        },
+        "structuredClone.other": {
+          "count": 314,
+          "totalMs": 266.9452799996111,
+          "avgMs": 0.8501442038204176,
+          "maxMs": 38.62850099999923,
+          "selfMs": 266.9452799996111
+        },
+        "JSON.stringify.object": {
+          "count": 413420,
+          "totalMs": 235.76157999274483,
+          "avgMs": 0.000570271346313059,
+          "maxMs": 7.127343000029214,
+          "selfMs": 235.76157999274483
+        },
+        "receiptLookup.find": {
+          "count": 18402,
+          "totalMs": 3434.235572003066,
+          "avgMs": 0.1866229525053291,
+          "maxMs": 27.73291399999289,
+          "selfMs": 3434.235572003066
+        },
+        "receiptLookup.some": {
+          "count": 261108,
+          "totalMs": 109720.27400299194,
+          "avgMs": 0.42021031145346727,
+          "maxMs": 176.3635030000005,
+          "selfMs": 109720.27400299194
+        },
+        "formal/schema.validateFormalWorld": {
+          "count": 4396,
+          "totalMs": 537565.7822469993,
+          "avgMs": 122.28520979231104,
+          "maxMs": 963.9645749999909,
+          "selfMs": 427608.92141899624
+        },
+        "formal/reducer.advanceFormalCooperative": {
+          "count": 1,
+          "totalMs": 769028.032969,
+          "avgMs": 769028.032969,
+          "maxMs": 769028.032969,
+          "selfMs": 3220.2834029947408
+        },
+        "formal/autonomy.handleAutonomy": {
+          "count": 18618,
+          "totalMs": 588475.964463004,
+          "avgMs": 31.607904418466216,
+          "maxMs": 1449.2825920000323,
+          "selfMs": 228.86545001433387
+        },
+        "formal/governance.handleGovernance": {
+          "count": 19569,
+          "totalMs": 169725.85437399813,
+          "avgMs": 8.673200182635705,
+          "maxMs": 973.9041280000238,
+          "selfMs": 344.39754599424623
+        },
+        "formal/scheduler.snapshot": {
+          "count": 13238,
+          "totalMs": 10939.512163000665,
+          "avgMs": 0.8263719718235886,
+          "maxMs": 126.89480200000071,
+          "selfMs": 2386.1269428714495
+        },
+        "formal/scheduler.replace": {
+          "count": 8857,
+          "totalMs": 7671.6150720028545,
+          "avgMs": 0.8661640591625669,
+          "maxMs": 80.97475100000156,
+          "selfMs": 1928.0950451223616
+        },
+        "formal/scheduler.push": {
+          "count": 1048808,
+          "totalMs": 3657.1001420076796,
+          "avgMs": 0.0034869109903887838,
+          "maxMs": 37.965383999980986,
+          "selfMs": 953.1390789883435
+        },
+        "formal/scheduler.pop": {
+          "count": 1053114,
+          "totalMs": 2887.034004048766,
+          "avgMs": 0.0027414259083525295,
+          "maxMs": 119.92742799996631,
+          "selfMs": 1698.0656979170617
+        },
+        "formal/scheduler.compareEvents": {
+          "count": 20804794,
+          "totalMs": 2341.508995287301,
+          "avgMs": 0.00011254660802155987,
+          "maxMs": 70.88848600001074,
+          "selfMs": 2341.508995287301
+        }
+      },
+      "functionSelfTop10": [
+        {
+          "name": "formal/schema.validateFormalWorld",
+          "count": 4396,
+          "totalMs": 537565.7822469993,
+          "avgMs": 122.28520979231104,
+          "maxMs": 963.9645749999909,
+          "selfMs": 427608.92141899624
+        },
+        {
+          "name": "structuredClone.world",
+          "count": 4424,
+          "totalMs": 181128.30286600074,
+          "avgMs": 40.942202275316625,
+          "maxMs": 423.3307400000049,
+          "selfMs": 181128.30286600074
+        },
+        {
+          "name": "receiptLookup.some",
+          "count": 261108,
+          "totalMs": 109720.27400299194,
+          "avgMs": 0.42021031145346727,
+          "maxMs": 176.3635030000005,
+          "selfMs": 109720.27400299194
+        },
+        {
+          "name": "structuredClone.event",
+          "count": 6179131,
+          "totalMs": 15848.325620873447,
+          "avgMs": 0.0025648146350795036,
+          "maxMs": 126.0944870000003,
+          "selfMs": 15848.325620873447
+        },
+        {
+          "name": "formal/reducer.submitFormalOrder",
+          "count": 4422,
+          "totalMs": 743675.0515370019,
+          "avgMs": 168.17617628607007,
+          "maxMs": 1274.3999089999706,
+          "selfMs": 4503.354970923607
+        },
+        {
+          "name": "formal/autonomy.economicChoices",
+          "count": 6217,
+          "totalMs": 3856.4255260025247,
+          "avgMs": 0.6203032855078856,
+          "maxMs": 143.40899799996987,
+          "selfMs": 3856.4255260025247
+        },
+        {
+          "name": "receiptLookup.find",
+          "count": 18402,
+          "totalMs": 3434.235572003066,
+          "avgMs": 0.1866229525053291,
+          "maxMs": 27.73291399999289,
+          "selfMs": 3434.235572003066
+        },
+        {
+          "name": "formal/reducer.advanceFormalCooperative",
+          "count": 1,
+          "totalMs": 769028.032969,
+          "avgMs": 769028.032969,
+          "maxMs": 769028.032969,
+          "selfMs": 3220.2834029947408
+        },
+        {
+          "name": "formal/scheduler.snapshot",
+          "count": 13238,
+          "totalMs": 10939.512163000665,
+          "avgMs": 0.8263719718235886,
+          "maxMs": 126.89480200000071,
+          "selfMs": 2386.1269428714495
+        },
+        {
+          "name": "formal/scheduler.compareEvents",
+          "count": 20804794,
+          "totalMs": 2341.508995287301,
+          "avgMs": 0.00011254660802155987,
+          "maxMs": 70.88848600001074,
+          "selfMs": 2341.508995287301
+        }
+      ],
+      "cpuTop10": [
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 132209.92099999826,
+          "activePercent": 17.075635925520963
+        },
+        {
+          "name": "(garbage collector)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 88203.42399999968,
+          "activePercent": 11.39195564308954
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.js",
+          "line": 126,
+          "selfSampledMs": 47296.203000002104,
+          "activePercent": 6.108563842856989
+        },
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 38032.77900000196,
+          "activePercent": 4.912141861425371
+        },
+        {
+          "name": "validateCombatContracts",
+          "file": "src/game/formal/combatSchema.js",
+          "line": 31,
+          "selfSampledMs": 19116.937999999966,
+          "activePercent": 2.469057320583079
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.js",
+          "line": 126,
+          "selfSampledMs": 16888.12999999942,
+          "activePercent": 2.1811945515258437
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.js",
+          "line": 346,
+          "selfSampledMs": 16670.42499999953,
+          "activePercent": 2.153076757558145
+        },
+        {
+          "name": "_parse",
+          "file": "node_modules/zod/v3/types.js",
+          "line": 1934,
+          "selfSampledMs": 12410.52699999985,
+          "activePercent": 1.60288758281497
+        },
+        {
+          "name": "_parse",
+          "file": "node_modules/zod/v3/types.js",
+          "line": 1934,
+          "selfSampledMs": 12068.386999999915,
+          "activePercent": 1.5586983265824008
+        },
+        {
+          "name": "receiptLookup",
+          "file": "<benchmark harness>",
+          "line": 15,
+          "selfSampledMs": 9792.319999999876,
+          "activePercent": 1.2647317986537296
+        }
+      ],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 1430704128,
+          "heapUsed": 1102713784,
+          "heapTotal": 1180274688,
+          "external": 10040297,
+          "arrayBuffers": 143615
+        },
+        "processLifetimePeakRSSBytes": 1463545856
+      },
+      "workerTransfer": {
+        "fullTransferMs": 33.82421600003727,
+        "patchTransferMs": 49.26607599994168,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 882999586,
+        "revision": 1382,
+        "commandReceipts": 18353,
+        "combatReceipts": 2910,
+        "pendingEvents": 269,
+        "reports": 44,
+        "autonomyDecisions": 26246,
+        "acceptedAI": 18296,
+        "rejectedAI": 96
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+        "eventOrderHash": "04a827ec41e0874c5dfdeb8e79ef81327fc52ec0fb99424d98713e52ee4f9fe7",
+        "reloadHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "patchHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "twentyFourHoursInstrumented": {
+      "label": "baseline-24h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751",
+        "version": "0.30.50",
+        "instrumented": true,
+        "harnessVersion": 2,
+        "sourceTreeHash": "2566699a85ed9014aeb1bed3e02d78df12b0a6aed8b8c6c0b7a6ebc6049cd665"
+      },
+      "configuration": {
+        "hours": 24,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700086400000,
+        "offlineCapHours": 24
+      },
+      "measurement": {
+        "instrumented": true,
+        "cpuProfiling": true,
+        "contention": "Paused at cooperative yields for regression/browser/fixed-benchmark windows; raw wall and active elapsed reported separately",
+        "limitations": [
+          "Original long baseline used the earlier raw spanning-function timer. Aggregate corrections subtract completed pause time from the three spanning async timers, and from cooperative reducer self time only; raw private metrics remain unchanged."
+        ]
+      },
+      "load": {
+        "rawWallMs": 33725599.237417996,
+        "pausedMs": 26639302.312696,
+        "activeMs": 7086296.924721997,
+        "readMs": 1632.070851,
+        "offlineRawMs": 33719142.197341,
+        "offlineActiveMs": 7079839.884645004,
+        "saveMs": 4824.555458001792,
+        "cpu": {
+          "userMs": 9053845.387,
+          "systemMs": 959112.54
+        }
+      },
+      "stagesMs": {
+        "fileRead": 31.324198999999993,
+        "JSON.parse": 25.020500000000027,
+        "decodeSchemaChecksumMigration": 395.57694599999996,
+        "inputDeterministicHash": 136.9876539999999,
+        "encodeSeed": 352.714063,
+        "seedFakeIndexedDB": 84.37167999999997,
+        "loadWithOffline.read": 1632.070851,
+        "loadWithOffline.offline": 33719142.197341,
+        "loadWithOffline.save": 4824.555458001792,
+        "loadWithOffline": 33725599.237417996,
+        "outputDeterministicHash": 303.884484000504,
+        "readPersistedRowsFakeIndexedDB": 229.88783399760723,
+        "IndexedDB.backupEnvelopesToArray": 85.52317399531603,
+        "IndexedDB.backupPrimaryKeys": 0.516294002532959,
+        "reportHistoryHash": 4.066592000424862,
+        "loadSavePostReplay": 1791.553452000022,
+        "reloadDeterministicHash": 227.53692799806595,
+        "JSON.stringify.fullWorld": 72.53187300264835,
+        "structuredClone.fullWorld": 76.88760899752378,
+        "worldStream.worldPatch": 76.67076800018549,
+        "worldStream.applyWorldPatch": 0.21254000067710876,
+        "patchDeterministicHash": 220.92656200379133,
+        "workerMessageChannel.fullWorld": 90.62030900269747,
+        "workerMessageChannel.worldPatch": 63.00039499998093
+      },
+      "processedEvents": 93720,
+      "perEventType": {
+        "army.return": {
+          "count": 1466,
+          "totalMs": 1652.6390119562484,
+          "avgMs": 1.1273117407614246,
+          "maxMs": 65.84467799961567,
+          "selfMs": 173.1690657814861
+        },
+        "military.train": {
+          "count": 27393,
+          "totalMs": 9027.624416775176,
+          "avgMs": 0.3295595377204094,
+          "maxMs": 72.13993199914694,
+          "selfMs": 2585.302838210891
+        },
+        "ai.decide": {
+          "count": 18856,
+          "totalMs": 3573655.1937407367,
+          "avgMs": 189.5235041228647,
+          "maxMs": 5249.164280999452,
+          "selfMs": 1865.6173261602817
+        },
+        "construction.complete": {
+          "count": 11125,
+          "totalMs": 3202.127291138832,
+          "avgMs": 0.2878316666192208,
+          "maxMs": 39.92511700093746,
+          "selfMs": 921.7180855784018
+        },
+        "army.arrive": {
+          "count": 2431,
+          "totalMs": 6901.157927986789,
+          "avgMs": 2.8388144500151333,
+          "maxMs": 134.35229099914432,
+          "selfMs": 252.46928955162184
+        },
+        "governance.decide": {
+          "count": 7901,
+          "totalMs": 3445713.78056726,
+          "avgMs": 436.11109740124795,
+          "maxMs": 2974.8986640013754,
+          "selfMs": 976.5794009683887
+        },
+        "economy.settle": {
+          "count": 24000,
+          "totalMs": 5557.537481160602,
+          "avgMs": 0.23156406171502505,
+          "maxMs": 59.90107099711895,
+          "selfMs": 1818.896374342381
+        },
+        "research.complete": {
+          "count": 237,
+          "totalMs": 214.78180301724933,
+          "avgMs": 0.9062523334061153,
+          "maxMs": 46.301419001072645,
+          "selfMs": 111.4875813779654
+        },
+        "wild.respawn": {
+          "count": 113,
+          "totalMs": 2930.6655030266847,
+          "avgMs": 25.935092947138802,
+          "maxMs": 141.17365999892354,
+          "selfMs": 9.601423169020563
+        },
+        "combat.round": {
+          "count": 110,
+          "totalMs": 312.53701499965973,
+          "avgMs": 2.8412455909059977,
+          "maxMs": 41.76538399979472,
+          "selfMs": 11.50517208641395
+        },
+        "age.complete": {
+          "count": 54,
+          "totalMs": 15.733593004755676,
+          "avgMs": 0.2913628334214014,
+          "maxMs": 0.606801999732852,
+          "selfMs": 10.181810822803527
+        },
+        "city.promote.complete": {
+          "count": 14,
+          "totalMs": 2.187385004013777,
+          "avgMs": 0.15624178600098407,
+          "maxMs": 0.4043540023267269,
+          "selfMs": 0.7293719761073589
+        },
+        "logistics.arrive": {
+          "count": 8,
+          "totalMs": 3.543492004275322,
+          "avgMs": 0.44293650053441525,
+          "maxMs": 0.8037739992141724,
+          "selfMs": 0.455503910779953
+        },
+        "logistics.return": {
+          "count": 8,
+          "totalMs": 7.42901099100709,
+          "avgMs": 0.9286263738758862,
+          "maxMs": 1.6189849972724915,
+          "selfMs": 4.38648297265172
+        },
+        "army.depart": {
+          "count": 4,
+          "totalMs": 2.698091998696327,
+          "avgMs": 0.6745229996740818,
+          "maxMs": 0.8977419994771481,
+          "selfMs": 0.20789596065878868
+        }
+      },
+      "selectedFunctionCosts": {
+        "structuredClone.world": {
+          "count": 18632,
+          "totalMs": 1132860.1377969617,
+          "avgMs": 60.80185368167463,
+          "maxMs": 756.2791930027306,
+          "selfMs": 1132860.1377969617
+        },
+        "structuredClone.event": {
+          "count": 30782048,
+          "totalMs": 83095.1402715774,
+          "avgMs": 0.0026994675686158828,
+          "maxMs": 160.6152300015092,
+          "selfMs": 83095.1402715774
+        },
+        "structuredClone.other": {
+          "count": 1346,
+          "totalMs": 486.2533550157639,
+          "avgMs": 0.36125806464767,
+          "maxMs": 76.81375399976969,
+          "selfMs": 486.2533550157639
+        },
+        "JSON.stringify.object": {
+          "count": 1642575,
+          "totalMs": 1145.5493958149787,
+          "avgMs": 0.0006974107092918002,
+          "maxMs": 39.20572900027037,
+          "selfMs": 1145.5493958149787
+        },
+        "receiptLookup.find": {
+          "count": 32638,
+          "totalMs": 18004.81943334953,
+          "avgMs": 0.5516520446519251,
+          "maxMs": 376.1084569990635,
+          "selfMs": 18004.81943334953
+        },
+        "receiptLookup.some": {
+          "count": 4645263,
+          "totalMs": 2550069.477275213,
+          "avgMs": 0.5489612702822667,
+          "maxMs": 256.3332289978862,
+          "selfMs": 2550069.477275213
+        },
+        "formal/schema.validateFormalWorld": {
+          "count": 18511,
+          "totalMs": 5666170.824823683,
+          "avgMs": 306.09750012552985,
+          "maxMs": 2856.564026001841,
+          "selfMs": 3116085.3329536766
+        },
+        "formal/reducer.advanceFormalCooperative": {
+          "count": 1,
+          "totalMs": 7079836.832261,
+          "avgMs": 7079836.832261,
+          "maxMs": 7079836.832261,
+          "selfMs": 28184.878017861396,
+          "rawTotalMs": 33719139.144957,
+          "pausedExcludedMs": 26639302.312696
+        },
+        "formal/autonomy.handleAutonomy": {
+          "count": 85819,
+          "totalMs": 3562484.608884862,
+          "avgMs": 41.51160709032804,
+          "maxMs": 5247.097240999341,
+          "selfMs": 757.6783302612835
+        },
+        "formal/governance.handleGovernance": {
+          "count": 93720,
+          "totalMs": 3437145.0395612754,
+          "avgMs": 36.67461629920268,
+          "maxMs": 2972.77248499915,
+          "selfMs": 1010.6135579045535
+        },
+        "formal/scheduler.snapshot": {
+          "count": 55784,
+          "totalMs": 54704.68531579296,
+          "avgMs": 0.9806518950916564,
+          "maxMs": 99.6418299973011,
+          "selfMs": 11603.376063024018
+        },
+        "formal/scheduler.replace": {
+          "count": 37350,
+          "totalMs": 40707.05039188892,
+          "avgMs": 1.0898808672527154,
+          "maxMs": 161.81808499991894,
+          "selfMs": 10166.20619976416
+        },
+        "formal/scheduler.push": {
+          "count": 5219497,
+          "totalMs": 20234.24424506068,
+          "avgMs": 0.0038766655570566817,
+          "maxMs": 71.33293499995489,
+          "selfMs": 5305.829397989945
+        },
+        "formal/scheduler.pop": {
+          "count": 5237725,
+          "totalMs": 14576.020558331173,
+          "avgMs": 0.002782891533696628,
+          "maxMs": 109.9162119999528,
+          "selfMs": 8803.95963962057
+        },
+        "formal/scheduler.compareEvents": {
+          "count": 100569147,
+          "totalMs": 11247.488939097639,
+          "avgMs": 0.00011183836469347442,
+          "maxMs": 30.696381999994628,
+          "selfMs": 11247.488939097639
+        }
+      },
+      "functionSelfTop10": [
+        {
+          "name": "formal/schema.validateFormalWorld",
+          "count": 18511,
+          "totalMs": 5666170.824823683,
+          "avgMs": 306.09750012552985,
+          "maxMs": 2856.564026001841,
+          "selfMs": 3116085.3329536766
+        },
+        {
+          "name": "receiptLookup.some",
+          "count": 4645263,
+          "totalMs": 2550069.477275213,
+          "avgMs": 0.5489612702822667,
+          "maxMs": 256.3332289978862,
+          "selfMs": 2550069.477275213
+        },
+        {
+          "name": "structuredClone.world",
+          "count": 18632,
+          "totalMs": 1132860.1377969617,
+          "avgMs": 60.80185368167463,
+          "maxMs": 756.2791930027306,
+          "selfMs": 1132860.1377969617
+        },
+        {
+          "name": "structuredClone.event",
+          "count": 30782048,
+          "totalMs": 83095.1402715774,
+          "avgMs": 0.0026994675686158828,
+          "maxMs": 160.6152300015092,
+          "selfMs": 83095.1402715774
+        },
+        {
+          "name": "formal/reducer.advanceFormalCooperative",
+          "count": 1,
+          "totalMs": 7079836.832261,
+          "avgMs": 7079836.832261,
+          "maxMs": 7079836.832261,
+          "selfMs": 28184.878017861396,
+          "rawTotalMs": 33719139.144957,
+          "pausedExcludedMs": 26639302.312696
+        },
+        {
+          "name": "formal/autonomy.economicChoices",
+          "count": 26757,
+          "totalMs": 19239.659705604092,
+          "avgMs": 0.7190514521659414,
+          "maxMs": 109.12717300280929,
+          "selfMs": 19239.659705604092
+        },
+        {
+          "name": "receiptLookup.find",
+          "count": 32638,
+          "totalMs": 18004.81943334953,
+          "avgMs": 0.5516520446519251,
+          "maxMs": 376.1084569990635,
+          "selfMs": 18004.81943334953
+        },
+        {
+          "name": "formal/reducer.submitFormalOrder",
+          "count": 18630,
+          "totalMs": 6927564.499244081,
+          "avgMs": 371.84994628255936,
+          "maxMs": 2967.644427999854,
+          "selfMs": 15234.721428698467
+        },
+        {
+          "name": "formal/scheduler.snapshot",
+          "count": 55784,
+          "totalMs": 54704.68531579296,
+          "avgMs": 0.9806518950916564,
+          "maxMs": 99.6418299973011,
+          "selfMs": 11603.376063024018
+        },
+        {
+          "name": "formal/scheduler.compareEvents",
+          "count": 100569147,
+          "totalMs": 11247.488939097639,
+          "avgMs": 0.00011183836469347442,
+          "maxMs": 30.696381999994628,
+          "selfMs": 11247.488939097639
+        }
+      ],
+      "cpuTop10": [
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.ts",
+          "line": 99,
+          "selfSampledMs": 1273067.538000662,
+          "activePercent": 17.824875423067216
+        },
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 1050194.8790008544,
+          "activePercent": 14.704320336006905
+        },
+        {
+          "name": "(garbage collector)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 942555.4550001327,
+          "activePercent": 13.197205225337436
+        },
+        {
+          "name": "_parse",
+          "file": "node_modules/zod/v3/types.js",
+          "line": 1934,
+          "selfSampledMs": 543014.7110001228,
+          "activePercent": 7.603029130466292
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.ts",
+          "line": 128,
+          "selfSampledMs": 529239.6590000392,
+          "activePercent": 7.410157520344664
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.ts",
+          "line": 171,
+          "selfSampledMs": 485300.63400004833,
+          "activePercent": 6.794944561520899
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.ts",
+          "line": 159,
+          "selfSampledMs": 397759.92900002154,
+          "activePercent": 5.569241985266737
+        },
+        {
+          "name": "validateCombatContracts",
+          "file": "src/game/formal/combatSchema.ts",
+          "line": 32,
+          "selfSampledMs": 212655.92199998867,
+          "activePercent": 2.977505281126197
+        },
+        {
+          "name": "_parseSync",
+          "file": "node_modules/zod/v3/types.js",
+          "line": 99,
+          "selfSampledMs": 169647.5679999875,
+          "activePercent": 2.3753231271415305
+        },
+        {
+          "name": "receiptLookup",
+          "file": "<benchmark harness>",
+          "line": 17,
+          "selfSampledMs": 154510.19500000612,
+          "activePercent": 2.16337695782759
+        }
+      ],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 2199941120,
+          "heapUsed": 601674584,
+          "heapTotal": 699568128,
+          "external": 16010283,
+          "arrayBuffers": 13803785
+        },
+        "processLifetimePeakRSSBytes": 2241323008
+      },
+      "workerTransfer": {
+        "fullTransferMs": 89.35789500176907,
+        "patchTransferMs": 62.77852399647236,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 1530999586,
+        "revision": 1382,
+        "commandReceipts": 32468,
+        "combatReceipts": 5141,
+        "pendingEvents": 332,
+        "reports": 308,
+        "autonomyDecisions": 39836,
+        "acceptedAI": 32411,
+        "rejectedAI": 189
+      },
+      "hashes": {
+        "inputHash": "b53b560fd9eb8a71f7e365019d9b5c57d86f505e7d628d0df433b2bd4dfecbde",
+        "worldHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "reportHistoryHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+        "eventOrderHash": "a9b15374daae39b24f64c73782b8d7504e49f0cfd78f7f1a5a517d6f92ce3a2b",
+        "reloadHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "patchHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    }
+  },
+  "final": {
+    "zeroHourClean": {
+      "label": "final3-clean-0h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": false,
+        "harnessVersion": 3,
+        "recordEvents": false,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 0,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700000000000,
+        "offlineCapHours": 6,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": false,
+        "cpuProfiling": false,
+        "contention": "Solo final source benchmark window; original baseline24 cooperatively paused and root/browser jobs stopped.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 2065.05238,
+        "pausedMs": 0,
+        "activeMs": 2065.05238,
+        "readMs": 1043.1255130000002,
+        "offlineRawMs": 6.743094999999812,
+        "offlineActiveMs": 6.743094999999812,
+        "saveMs": 1014.8208130000003,
+        "cpu": {
+          "userMs": 2148.567,
+          "systemMs": 268.45
+        }
+      },
+      "stagesMs": {
+        "fileRead": 30.714602000000014,
+        "JSON.parse": 23.951848000000012,
+        "decodeSchemaChecksumMigration": 449.597059,
+        "inputDeterministicHash": 207.24119899999994,
+        "encodeSeed": 213.02496500000007,
+        "seedFakeIndexedDB": 218.85704499999997,
+        "loadWithOffline.read": 1043.1255130000002,
+        "loadWithOffline.offline": 6.743094999999812,
+        "loadWithOffline.save": 1014.8208130000003,
+        "loadWithOffline": 2065.05238,
+        "outputDeterministicHash": 234.44314699999995,
+        "readPersistedRowsFakeIndexedDB": 345.7078099999999,
+        "IndexedDB.backupEnvelopesToArray": 80.44446600000038,
+        "IndexedDB.backupPrimaryKeys": 0.39511899999979505,
+        "reportHistoryHash": 1.5153070000005755,
+        "loadSavePostReplay": 949.8613340000002,
+        "reloadDeterministicHash": 313.89206300000023,
+        "JSON.stringify.fullWorld": 125.65534699999989,
+        "structuredClone.fullWorld": 245.68146199999956,
+        "worldStream.worldPatch": 78.25476299999991,
+        "worldStream.applyWorldPatch": 0.16468799999984185,
+        "patchDeterministicHash": 98.48225600000023,
+        "workerMessageChannel.fullWorld": 29.64777999999933,
+        "workerMessageChannel.worldPatch": 0.3200669999996535
+      },
+      "processedEvents": 0,
+      "perEventType": {},
+      "selectedFunctionCosts": {},
+      "functionSelfTop10": [],
+      "cpuTop10": [],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 333152256,
+          "heapUsed": 144901064,
+          "heapTotal": 254623744,
+          "external": 14108233,
+          "arrayBuffers": 6020961
+        },
+        "processLifetimePeakRSSBytes": 367198208
+      },
+      "workerTransfer": {
+        "fullTransferMs": 29.12252499999977,
+        "patchTransferMs": 0.15283700000054523,
+        "patchKeys": [
+          "revision"
+        ]
+      },
+      "output": {
+        "time": 666999586,
+        "revision": 1382,
+        "commandReceipts": 13963,
+        "combatReceipts": 1997,
+        "pendingEvents": 220,
+        "reports": 22,
+        "autonomyDecisions": 20980,
+        "acceptedAI": 13906,
+        "rejectedAI": 64
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "reportHistoryHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "patchHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "zeroHourInstrumented": {
+      "label": "final3-instrumented-0h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": true,
+        "harnessVersion": 3,
+        "recordEvents": true,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 0,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700000000000,
+        "offlineCapHours": 6,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": true,
+        "cpuProfiling": true,
+        "contention": "Solo final source benchmark window; original baseline24 cooperatively paused and root/browser jobs stopped.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 1849.2383570000006,
+        "pausedMs": 0,
+        "activeMs": 1849.2383570000006,
+        "readMs": 748.1582669999998,
+        "offlineRawMs": 5.406631000000289,
+        "offlineActiveMs": 5.406631000000289,
+        "saveMs": 1095.2657910000003,
+        "cpu": {
+          "userMs": 2320.084,
+          "systemMs": 195.042
+        }
+      },
+      "stagesMs": {
+        "fileRead": 159.52848400000005,
+        "JSON.parse": 48.561285,
+        "decodeSchemaChecksumMigration": 746.74116,
+        "inputDeterministicHash": 207.73541099999989,
+        "encodeSeed": 569.7689029999999,
+        "seedFakeIndexedDB": 102.70328000000018,
+        "loadWithOffline.read": 748.1582669999998,
+        "loadWithOffline.offline": 5.406631000000289,
+        "loadWithOffline.save": 1095.2657910000003,
+        "loadWithOffline": 1849.2383570000006,
+        "outputDeterministicHash": 117.75272400000085,
+        "readPersistedRowsFakeIndexedDB": 316.12521299999935,
+        "IndexedDB.backupEnvelopesToArray": 68.25199599999996,
+        "IndexedDB.backupPrimaryKeys": 0.295270999999957,
+        "reportHistoryHash": 1.7713510000003225,
+        "loadSavePostReplay": 616.8065229999993,
+        "reloadDeterministicHash": 92.27674000000025,
+        "JSON.stringify.fullWorld": 33.04418699999951,
+        "structuredClone.fullWorld": 29.34575700000005,
+        "worldStream.worldPatch": 52.30808700000034,
+        "worldStream.applyWorldPatch": 0.18836199999987002,
+        "patchDeterministicHash": 98.5378040000005,
+        "workerMessageChannel.fullWorld": 78.70436400000017,
+        "workerMessageChannel.worldPatch": 0.4885599999997794
+      },
+      "processedEvents": 0,
+      "perEventType": {},
+      "selectedFunctionCosts": {
+        "structuredClone.worldFull": {
+          "count": 1,
+          "totalMs": 32.55663999999979,
+          "avgMs": 32.55663999999979,
+          "maxMs": 32.55663999999979,
+          "selfMs": 32.55663999999979
+        },
+        "structuredClone.other": {
+          "count": 12,
+          "totalMs": 226.59899200000064,
+          "avgMs": 18.883249333333385,
+          "maxMs": 50.29262199999994,
+          "selfMs": 226.59899200000064
+        },
+        "JSON.stringify.object": {
+          "count": 2,
+          "totalMs": 0.014975000000049477,
+          "avgMs": 0.007487500000024738,
+          "maxMs": 0.012611999999990076,
+          "selfMs": 0.014975000000049477
+        },
+        "receiptLookup.some": {
+          "count": 2,
+          "totalMs": 1.2731680000001688,
+          "avgMs": 0.6365840000000844,
+          "maxMs": 0.756123000000116,
+          "selfMs": 1.2731680000001688
+        },
+        "formal/schema.validateFormalWorld": {
+          "count": 4,
+          "totalMs": 862.5243150000006,
+          "avgMs": 215.63107875000014,
+          "maxMs": 366.52291700000023,
+          "selfMs": 861.969204999999
+        },
+        "formal/reducer.advanceFormalCooperative": {
+          "count": 1,
+          "totalMs": 0.0522569999998268,
+          "avgMs": 0.0522569999998268,
+          "maxMs": 0.0522569999998268,
+          "selfMs": 0.0522569999998268
+        }
+      },
+      "functionSelfTop10": [
+        {
+          "name": "formal/schema.validateFormalWorld",
+          "count": 4,
+          "totalMs": 862.5243150000006,
+          "avgMs": 215.63107875000014,
+          "maxMs": 366.52291700000023,
+          "selfMs": 861.969204999999
+        },
+        {
+          "name": "formal/canonical.digest",
+          "count": 2,
+          "totalMs": 302.66149300000006,
+          "avgMs": 151.33074650000003,
+          "maxMs": 159.15168500000027,
+          "selfMs": 302.66149300000006
+        },
+        {
+          "name": "structuredClone.other",
+          "count": 12,
+          "totalMs": 226.59899200000064,
+          "avgMs": 18.883249333333385,
+          "maxMs": 50.29262199999994,
+          "selfMs": 226.59899200000064
+        },
+        {
+          "name": "persistence.commit",
+          "count": 1,
+          "totalMs": 1094.98891,
+          "avgMs": 1094.98891,
+          "maxMs": 1094.98891,
+          "selfMs": 170.4204009999994
+        },
+        {
+          "name": "persistence.loadAnchored",
+          "count": 1,
+          "totalMs": 748.0018479999999,
+          "avgMs": 748.0018479999999,
+          "maxMs": 748.0018479999999,
+          "selfMs": 132.00595199999998
+        },
+        {
+          "name": "persistence.authority",
+          "count": 2,
+          "totalMs": 172.7161799999999,
+          "avgMs": 86.35808999999995,
+          "maxMs": 120.72755099999995,
+          "selfMs": 114.79650199999969
+        },
+        {
+          "name": "structuredClone.worldFull",
+          "count": 1,
+          "totalMs": 32.55663999999979,
+          "avgMs": 32.55663999999979,
+          "maxMs": 32.55663999999979,
+          "selfMs": 32.55663999999979
+        },
+        {
+          "name": "receiptLookup.some",
+          "count": 2,
+          "totalMs": 1.2731680000001688,
+          "avgMs": 0.6365840000000844,
+          "maxMs": 0.756123000000116,
+          "selfMs": 1.2731680000001688
+        },
+        {
+          "name": "formal/spatial.spatial",
+          "count": 4,
+          "totalMs": 2.933053999999629,
+          "avgMs": 0.7332634999999073,
+          "maxMs": 2.9286440000000766,
+          "selfMs": 1.1397839999904136
+        },
+        {
+          "name": "persistence.loadWithOffline",
+          "count": 1,
+          "totalMs": 1848.8915200000001,
+          "avgMs": 1848.8915200000001,
+          "maxMs": 1848.8915200000001,
+          "selfMs": 0.9264530000000377
+        }
+      ],
+      "cpuTop10": [
+        {
+          "name": "(garbage collector)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 536.6129999999998,
+          "activePercent": 14.065536051433636
+        },
+        {
+          "name": "canonicalJSON",
+          "file": "src/game/formal/canonical.ts",
+          "line": 2,
+          "selfSampledMs": 505.43200000000024,
+          "activePercent": 13.24822920344496
+        },
+        {
+          "name": "_parse",
+          "file": "node_modules/zod/v3/types.js",
+          "line": 1934,
+          "selfSampledMs": 427.2300000000001,
+          "activePercent": 11.198422265681216
+        },
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 333.3020000000001,
+          "activePercent": 8.736410219310633
+        },
+        {
+          "name": "JSON.stringify",
+          "file": "<benchmark harness>",
+          "line": 22,
+          "selfSampledMs": 290.7210000000001,
+          "activePercent": 7.6202900533696365
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/schema.ts",
+          "line": 99,
+          "selfSampledMs": 159.90700000000004,
+          "activePercent": 4.191433441561422
+        },
+        {
+          "name": "post",
+          "file": "node:inspector",
+          "line": 115,
+          "selfSampledMs": 138.874,
+          "activePercent": 3.640122869939407
+        },
+        {
+          "name": "readFileSync",
+          "file": "node:fs",
+          "line": 474,
+          "selfSampledMs": 113.52399999999999,
+          "activePercent": 2.975656412913873
+        },
+        {
+          "name": "(anonymous)",
+          "file": "src/game/formal/canonical.ts",
+          "line": 6,
+          "selfSampledMs": 92.69099999999999,
+          "activePercent": 2.4295881802033037
+        },
+        {
+          "name": "executeRefinement",
+          "file": "node_modules/zod/v3/types.js",
+          "line": 3228,
+          "selfSampledMs": 87.42900000000002,
+          "activePercent": 2.2916622434432115
+        }
+      ],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 419495936,
+          "heapUsed": 234794496,
+          "heapTotal": 337846272,
+          "external": 8230983,
+          "arrayBuffers": 6020961
+        },
+        "processLifetimePeakRSSBytes": 452395008
+      },
+      "workerTransfer": {
+        "fullTransferMs": 78.24939599999925,
+        "patchTransferMs": 0.2343959999998333,
+        "patchKeys": [
+          "revision"
+        ]
+      },
+      "output": {
+        "time": 666999586,
+        "revision": 1382,
+        "commandReceipts": 13963,
+        "combatReceipts": 1997,
+        "pendingEvents": 220,
+        "reports": 22,
+        "autonomyDecisions": 20980,
+        "acceptedAI": 13906,
+        "rejectedAI": 64
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "reportHistoryHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "patchHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "sixHoursCleanA": {
+      "label": "final3-clean-a-6h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": false,
+        "harnessVersion": 3,
+        "recordEvents": false,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 6,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700021600000,
+        "offlineCapHours": 6,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": false,
+        "cpuProfiling": false,
+        "contention": "Solo final source reference; old baseline24 paused and no other benchmark/test/browser jobs.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 18423.670534,
+        "pausedMs": 0,
+        "activeMs": 18423.670534,
+        "readMs": 377.886431,
+        "offlineRawMs": 17406.660317,
+        "offlineActiveMs": 17406.660317,
+        "saveMs": 638.7657259999978,
+        "cpu": {
+          "userMs": 20085.766,
+          "systemMs": 1212.906
+        }
+      },
+      "stagesMs": {
+        "fileRead": 41.318827,
+        "JSON.parse": 23.190771000000012,
+        "decodeSchemaChecksumMigration": 336.65793499999995,
+        "inputDeterministicHash": 93.14726700000006,
+        "encodeSeed": 172.099375,
+        "seedFakeIndexedDB": 70.71220100000005,
+        "loadWithOffline.read": 377.886431,
+        "loadWithOffline.offline": 17406.660317,
+        "loadWithOffline.save": 638.7657259999978,
+        "loadWithOffline": 18423.670534,
+        "outputDeterministicHash": 172.78822199999922,
+        "readPersistedRowsFakeIndexedDB": 125.29176000000007,
+        "IndexedDB.backupEnvelopesToArray": 56.92555100000027,
+        "IndexedDB.backupPrimaryKeys": 0.28888200000073994,
+        "reportHistoryHash": 1.2702160000008007,
+        "loadSavePostReplay": 609.9677870000014,
+        "reloadDeterministicHash": 125.4666810000017,
+        "JSON.stringify.fullWorld": 27.976638999996794,
+        "structuredClone.fullWorld": 32.04995699999927,
+        "worldStream.worldPatch": 56.26523400000224,
+        "worldStream.applyWorldPatch": 0.12270399999761139,
+        "patchDeterministicHash": 116.64183100000082,
+        "workerMessageChannel.fullWorld": 36.37540699999954,
+        "workerMessageChannel.worldPatch": 33.02985799999806
+      },
+      "processedEvents": 19569,
+      "perEventType": {},
+      "selectedFunctionCosts": {},
+      "functionSelfTop10": [],
+      "cpuTop10": [],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 465027072,
+          "heapUsed": 275060200,
+          "heapTotal": 360984576,
+          "external": 10057168,
+          "arrayBuffers": 7846077
+        },
+        "processLifetimePeakRSSBytes": 506056704
+      },
+      "workerTransfer": {
+        "fullTransferMs": 35.439164999999775,
+        "patchTransferMs": 32.86684899999818,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 882999586,
+        "revision": 1382,
+        "commandReceipts": 18353,
+        "combatReceipts": 2910,
+        "pendingEvents": 269,
+        "reports": 44,
+        "autonomyDecisions": 26246,
+        "acceptedAI": 18296,
+        "rejectedAI": 96
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "patchHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "sixHoursCleanB": {
+      "label": "final3-clean-b-6h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": false,
+        "harnessVersion": 3,
+        "recordEvents": false,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 6,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700021600000,
+        "offlineCapHours": 6,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": false,
+        "cpuProfiling": false,
+        "contention": "Second solo final source reference; old baseline24 paused and no other benchmark/test/browser jobs.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 18746.478730000003,
+        "pausedMs": 0,
+        "activeMs": 18746.478730000003,
+        "readMs": 367.33949299999995,
+        "offlineRawMs": 17739.219101000002,
+        "offlineActiveMs": 17739.219101000002,
+        "saveMs": 639.6443229999968,
+        "cpu": {
+          "userMs": 20526.918,
+          "systemMs": 1290.439
+        }
+      },
+      "stagesMs": {
+        "fileRead": 29.057805000000002,
+        "JSON.parse": 21.32450800000001,
+        "decodeSchemaChecksumMigration": 322.710783,
+        "inputDeterministicHash": 98.58034900000007,
+        "encodeSeed": 180.02448000000004,
+        "seedFakeIndexedDB": 75.16955300000006,
+        "loadWithOffline.read": 367.33949299999995,
+        "loadWithOffline.offline": 17739.219101000002,
+        "loadWithOffline.save": 639.6443229999968,
+        "loadWithOffline": 18746.478730000003,
+        "outputDeterministicHash": 187.36512100000255,
+        "readPersistedRowsFakeIndexedDB": 168.95018499999787,
+        "IndexedDB.backupEnvelopesToArray": 53.83950000000186,
+        "IndexedDB.backupPrimaryKeys": 0.3127359999998589,
+        "reportHistoryHash": 3.1005030000014813,
+        "loadSavePostReplay": 515.6481190000013,
+        "reloadDeterministicHash": 118.68980300000112,
+        "JSON.stringify.fullWorld": 36.20254299999942,
+        "structuredClone.fullWorld": 49.06765599999926,
+        "worldStream.worldPatch": 50.431118999997125,
+        "worldStream.applyWorldPatch": 0.1120599999994738,
+        "patchDeterministicHash": 124.86974899999768,
+        "workerMessageChannel.fullWorld": 33.835745999997016,
+        "workerMessageChannel.worldPatch": 31.761460999998235
+      },
+      "processedEvents": 19569,
+      "perEventType": {},
+      "selectedFunctionCosts": {},
+      "functionSelfTop10": [],
+      "cpuTop10": [],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 570073088,
+          "heapUsed": 374328504,
+          "heapTotal": 461647872,
+          "external": 10057168,
+          "arrayBuffers": 7846077
+        },
+        "processLifetimePeakRSSBytes": 611102720
+      },
+      "workerTransfer": {
+        "fullTransferMs": 33.4497420000007,
+        "patchTransferMs": 31.54856799999834,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 882999586,
+        "revision": 1382,
+        "commandReceipts": 18353,
+        "combatReceipts": 2910,
+        "pendingEvents": 269,
+        "reports": 44,
+        "autonomyDecisions": 26246,
+        "acceptedAI": 18296,
+        "rejectedAI": 96
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "patchHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "sixHoursInstrumented": {
+      "label": "final3-instrumented-6h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": true,
+        "harnessVersion": 3,
+        "recordEvents": true,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 6,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700021600000,
+        "offlineCapHours": 6,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": true,
+        "cpuProfiling": true,
+        "contention": "Solo final source instrumented profile; old baseline24 paused and no other benchmark/test/browser jobs.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 34674.101148,
+        "pausedMs": 0,
+        "activeMs": 34674.101148,
+        "readMs": 1166.50717,
+        "offlineRawMs": 31830.429158000003,
+        "offlineActiveMs": 31830.429158000003,
+        "saveMs": 1676.8553319999992,
+        "cpu": {
+          "userMs": 34463.037,
+          "systemMs": 5234.508
+        }
+      },
+      "stagesMs": {
+        "fileRead": 27.141909,
+        "JSON.parse": 23.309476999999987,
+        "decodeSchemaChecksumMigration": 555.302466,
+        "inputDeterministicHash": 287.1467640000001,
+        "encodeSeed": 251.72223499999996,
+        "seedFakeIndexedDB": 230.37997300000006,
+        "loadWithOffline.read": 1166.50717,
+        "loadWithOffline.offline": 31830.429158000003,
+        "loadWithOffline.save": 1676.8553319999992,
+        "loadWithOffline": 34674.101148,
+        "outputDeterministicHash": 181.67751399999543,
+        "readPersistedRowsFakeIndexedDB": 186.7957979999992,
+        "IndexedDB.backupEnvelopesToArray": 74.9218949999995,
+        "IndexedDB.backupPrimaryKeys": 0.41230600000562845,
+        "reportHistoryHash": 1.1120019999943906,
+        "loadSavePostReplay": 1052.9744759999958,
+        "reloadDeterministicHash": 134.59837399999378,
+        "JSON.stringify.fullWorld": 36.94980399999622,
+        "structuredClone.fullWorld": 48.462713000000804,
+        "worldStream.worldPatch": 63.14544399999431,
+        "worldStream.applyWorldPatch": 0.14781000000220956,
+        "patchDeterministicHash": 135.26300400000036,
+        "workerMessageChannel.fullWorld": 36.59962099999393,
+        "workerMessageChannel.worldPatch": 34.91043399999762
+      },
+      "processedEvents": 19569,
+      "perEventType": {
+        "army.return": {
+          "count": 428,
+          "totalMs": 353.16561300002377,
+          "avgMs": 0.8251533014019247,
+          "maxMs": 15.764291000001322,
+          "selfMs": 25.392985999769735
+        },
+        "military.train": {
+          "count": 3236,
+          "totalMs": 715.9556350000112,
+          "avgMs": 0.22124710599505906,
+          "maxMs": 33.41147700000147,
+          "selfMs": 202.90531199793577
+        },
+        "ai.decide": {
+          "count": 5266,
+          "totalMs": 21819.085941000027,
+          "avgMs": 4.143388898784662,
+          "maxMs": 405.7613769999989,
+          "selfMs": 413.7331349999813
+        },
+        "construction.complete": {
+          "count": 2946,
+          "totalMs": 619.3780430000502,
+          "avgMs": 0.21024373489478962,
+          "maxMs": 14.852172000000792,
+          "selfMs": 187.78668900061302
+        },
+        "army.arrive": {
+          "count": 668,
+          "totalMs": 1324.4042200000445,
+          "avgMs": 1.9826410479042582,
+          "maxMs": 44.7962150000003,
+          "selfMs": 45.70252300017046
+        },
+        "governance.decide": {
+          "count": 951,
+          "totalMs": 4235.77541699995,
+          "avgMs": 4.4540225205046795,
+          "maxMs": 60.367591999999604,
+          "selfMs": 53.060555999496046
+        },
+        "economy.settle": {
+          "count": 6000,
+          "totalMs": 1051.3917910000523,
+          "avgMs": 0.17523196516667539,
+          "maxMs": 9.458545999999842,
+          "selfMs": 326.78633499835996
+        },
+        "research.complete": {
+          "count": 13,
+          "totalMs": 4.149405000007391,
+          "avgMs": 0.31918500000056854,
+          "maxMs": 1.2537010000014561,
+          "selfMs": 1.8409630000169273
+        },
+        "wild.respawn": {
+          "count": 2,
+          "totalMs": 85.03792800000156,
+          "avgMs": 42.51896400000078,
+          "maxMs": 59.03512000000046,
+          "selfMs": 0.9203250000518892
+        },
+        "combat.round": {
+          "count": 44,
+          "totalMs": 55.297426999999516,
+          "avgMs": 1.2567597045454435,
+          "maxMs": 12.407393999998021,
+          "selfMs": 2.4050149997292465
+        },
+        "age.complete": {
+          "count": 15,
+          "totalMs": 2.1433800000068004,
+          "avgMs": 0.14289200000045335,
+          "maxMs": 0.44218499999988126,
+          "selfMs": 1.0518110000903107
+        }
+      },
+      "selectedFunctionCosts": {
+        "structuredClone.worldFull": {
+          "count": 2,
+          "totalMs": 154.5499099999979,
+          "avgMs": 77.27495499999895,
+          "maxMs": 85.73123099999793,
+          "selfMs": 154.5499099999979
+        },
+        "structuredClone.worldDraft": {
+          "count": 796,
+          "totalMs": 3598.074096999988,
+          "avgMs": 4.520193589195965,
+          "maxMs": 56.22228300000097,
+          "selfMs": 3598.074096999988
+        },
+        "structuredClone.cityDraft": {
+          "count": 3626,
+          "totalMs": 391.42366299997866,
+          "avgMs": 0.10794916243794227,
+          "maxMs": 7.313272999999754,
+          "selfMs": 391.42366299997866
+        },
+        "structuredClone.other": {
+          "count": 314,
+          "totalMs": 507.5547950000382,
+          "avgMs": 1.616416544586109,
+          "maxMs": 103.74296300000424,
+          "selfMs": 507.5547950000382
+        },
+        "JSON.stringify.object": {
+          "count": 413329,
+          "totalMs": 206.06024499928708,
+          "avgMs": 0.000498538077413603,
+          "maxMs": 4.996737999999823,
+          "selfMs": 206.06024499928708
+        },
+        "receiptLookup.find": {
+          "count": 17,
+          "totalMs": 0.26669700000593366,
+          "avgMs": 0.01568805882387845,
+          "maxMs": 0.10884800000030737,
+          "selfMs": 0.26669700000593366
+        },
+        "receiptLookup.some": {
+          "count": 1001,
+          "totalMs": 251.61834400000498,
+          "avgMs": 0.251366977022982,
+          "maxMs": 26.776804000000993,
+          "selfMs": 251.61834400000498
+        },
+        "formal/schema.validateFormalWorld": {
+          "count": 5,
+          "totalMs": 1037.3517670000022,
+          "avgMs": 207.47035340000042,
+          "maxMs": 307.71819200000004,
+          "selfMs": 1036.9315780000654
+        },
+        "formal/reducer.submitOrderDraft": {
+          "count": 4422,
+          "totalMs": 14729.3828449999,
+          "avgMs": 3.3309323484848257,
+          "maxMs": 402.5268759999999,
+          "selfMs": 3475.073946999729
+        },
+        "formal/reducer.cloneReplayCommandDraft": {
+          "count": 796,
+          "totalMs": 3683.0733809999792,
+          "avgMs": 4.626976609296456,
+          "maxMs": 56.28102399999989,
+          "selfMs": 84.99928399999135
+        },
+        "formal/reducer.cloneReplayCityDraft": {
+          "count": 3626,
+          "totalMs": 718.7157589999733,
+          "avgMs": 0.19821173717594412,
+          "maxMs": 8.23341100000107,
+          "selfMs": 327.2920959999947
+        },
+        "formal/reducer.advanceFormalCooperative": {
+          "count": 1,
+          "totalMs": 31816.992122,
+          "avgMs": 31816.992122,
+          "maxMs": 31816.992122,
+          "selfMs": 1056.3206400004165
+        },
+        "formal/autonomy.handleAutonomy": {
+          "count": 18618,
+          "totalMs": 19390.633250999796,
+          "avgMs": 1.0414992615210976,
+          "maxMs": 405.0513099999989,
+          "selfMs": 136.41672300080245
+        },
+        "formal/governance.handleGovernance": {
+          "count": 19569,
+          "totalMs": 3655.556571000034,
+          "avgMs": 0.1868034427410718,
+          "maxMs": 59.802364000000125,
+          "selfMs": 56.995365000011134
+        },
+        "formal/scheduler.cloneReplayEvent": {
+          "count": 5157775,
+          "totalMs": 5069.790840000263,
+          "avgMs": 0.000982941450528622,
+          "maxMs": 36.25662799999918,
+          "selfMs": 5069.790840000263
+        },
+        "formal/scheduler.snapshot": {
+          "count": 13238,
+          "totalMs": 4962.889092000178,
+          "avgMs": 0.37489719685754475,
+          "maxMs": 55.033808000000136,
+          "selfMs": 1207.659850005532
+        },
+        "formal/scheduler.replace": {
+          "count": 13280,
+          "totalMs": 3171.912134000223,
+          "avgMs": 0.23884880527110114,
+          "maxMs": 36.564854000000196,
+          "selfMs": 952.2254460003924
+        },
+        "formal/scheduler.push": {
+          "count": 27452,
+          "totalMs": 110.61853299984205,
+          "avgMs": 0.00402952546261992,
+          "maxMs": 2.4547549999988405,
+          "selfMs": 40.57354399944052
+        },
+        "formal/scheduler.pop": {
+          "count": 27367,
+          "totalMs": 157.64617700004328,
+          "avgMs": 0.005760447875179716,
+          "maxMs": 9.239793999999165,
+          "selfMs": 75.61391400009734
+        },
+        "formal/scheduler.compareEvents": {
+          "count": 9008506,
+          "totalMs": 1057.2023419945594,
+          "avgMs": 0.00011735601241699338,
+          "maxMs": 9.231901999999536,
+          "selfMs": 1057.2023419945594
+        },
+        "formal/politics.reconcilePoliticalEvents": {
+          "count": 4391,
+          "totalMs": 1509.4504859999142,
+          "avgMs": 0.3437600742427498,
+          "maxMs": 55.04938000000038,
+          "selfMs": 59.33502900017538
+        }
+      },
+      "functionSelfTop10": [
+        {
+          "name": "formal/scheduler.cloneReplayEvent",
+          "count": 5157775,
+          "totalMs": 5069.790840000263,
+          "avgMs": 0.000982941450528622,
+          "maxMs": 36.25662799999918,
+          "selfMs": 5069.790840000263
+        },
+        {
+          "name": "structuredClone.worldDraft",
+          "count": 796,
+          "totalMs": 3598.074096999988,
+          "avgMs": 4.520193589195965,
+          "maxMs": 56.22228300000097,
+          "selfMs": 3598.074096999988
+        },
+        {
+          "name": "formal/reducer.submitOrderDraft",
+          "count": 4422,
+          "totalMs": 14729.3828449999,
+          "avgMs": 3.3309323484848257,
+          "maxMs": 402.5268759999999,
+          "selfMs": 3475.073946999729
+        },
+        {
+          "name": "formal/autonomy.economicChoices",
+          "count": 6217,
+          "totalMs": 3156.5497600000335,
+          "avgMs": 0.5077287695029811,
+          "maxMs": 58.059306999999535,
+          "selfMs": 3156.5497600000335
+        },
+        {
+          "name": "formal/spatial.addSite",
+          "count": 4249484,
+          "totalMs": 2283.8748420000397,
+          "avgMs": 0.00053744756822241,
+          "maxMs": 9.768330000000788,
+          "selfMs": 1943.1905709989355
+        },
+        {
+          "name": "formal/spatial.spatial",
+          "count": 3640837,
+          "totalMs": 4746.50902400173,
+          "avgMs": 0.0013036862194055186,
+          "maxMs": 67.73123599999963,
+          "selfMs": 1543.9114240012823
+        },
+        {
+          "name": "formal/scheduler.snapshot",
+          "count": 13238,
+          "totalMs": 4962.889092000178,
+          "avgMs": 0.37489719685754475,
+          "maxMs": 55.033808000000136,
+          "selfMs": 1207.659850005532
+        },
+        {
+          "name": "formal/scheduler.compareEvents",
+          "count": 9008506,
+          "totalMs": 1057.2023419945594,
+          "avgMs": 0.00011735601241699338,
+          "maxMs": 9.231901999999536,
+          "selfMs": 1057.2023419945594
+        },
+        {
+          "name": "formal/reducer.advanceFormalCooperative",
+          "count": 1,
+          "totalMs": 31816.992122,
+          "avgMs": 31816.992122,
+          "maxMs": 31816.992122,
+          "selfMs": 1056.3206400004165
+        },
+        {
+          "name": "formal/schema.validateFormalWorld",
+          "count": 5,
+          "totalMs": 1037.3517670000022,
+          "avgMs": 207.47035340000042,
+          "maxMs": 307.71819200000004,
+          "selfMs": 1036.9315780000654
+        }
+      ],
+      "cpuTop10": [
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 4696.872000000011,
+          "activePercent": 13.191277443632101
+        },
+        {
+          "name": "cloneReplayEvent",
+          "file": "src/game/formal/scheduler.ts",
+          "line": 9,
+          "selfSampledMs": 4407.386000000003,
+          "activePercent": 12.378249083045018
+        },
+        {
+          "name": "now",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 2860.5120000000056,
+          "activePercent": 8.033816425663492
+        },
+        {
+          "name": "(garbage collector)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 2208.755000000003,
+          "activePercent": 6.203341289694416
+        },
+        {
+          "name": "route",
+          "file": "src/game/formal/routing.ts",
+          "line": 5,
+          "selfSampledMs": 1651.0600000000006,
+          "activePercent": 4.637041532339645
+        },
+        {
+          "name": "submitOrderDraft",
+          "file": "src/game/formal/reducer.ts",
+          "line": 101,
+          "selfSampledMs": 1087.5640000000008,
+          "activePercent": 3.0544495276231243
+        },
+        {
+          "name": "buildingLevel",
+          "file": "src/game/formal/catalogB3.ts",
+          "line": 575,
+          "selfSampledMs": 1065.7179999999996,
+          "activePercent": 2.993094513683294
+        },
+        {
+          "name": "spatial",
+          "file": "src/game/formal/spatial.ts",
+          "line": 35,
+          "selfSampledMs": 1047.4100000000008,
+          "activePercent": 2.941676057434539
+        },
+        {
+          "name": "addSite",
+          "file": "src/game/formal/spatial.ts",
+          "line": 17,
+          "selfSampledMs": 977.1270000000002,
+          "activePercent": 2.744284569531356
+        },
+        {
+          "name": "researchRequirements",
+          "file": "src/game/formal/buildingDetailData.ts",
+          "line": 16,
+          "selfSampledMs": 951.2769999999994,
+          "activePercent": 2.671684225745555
+        }
+      ],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 577253376,
+          "heapUsed": 377962768,
+          "heapTotal": 481738752,
+          "external": 10057168,
+          "arrayBuffers": 6020961
+        },
+        "processLifetimePeakRSSBytes": 629149696
+      },
+      "workerTransfer": {
+        "fullTransferMs": 36.25047600000107,
+        "patchTransferMs": 34.73397699999623,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 882999586,
+        "revision": 1382,
+        "commandReceipts": 18353,
+        "combatReceipts": 2910,
+        "pendingEvents": 269,
+        "reports": 44,
+        "autonomyDecisions": 26246,
+        "acceptedAI": 18296,
+        "rejectedAI": 96
+      },
+      "hashes": {
+        "inputHash": "ab4af8814ed6bdd4749e1730fa46f63b7ecccdbf740223abea5af5000b805603",
+        "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reportHistoryHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+        "eventOrderHash": "04a827ec41e0874c5dfdeb8e79ef81327fc52ec0fb99424d98713e52ee4f9fe7",
+        "reloadHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "patchHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "twentyFourHoursClean": {
+      "label": "final3-clean-24h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": false,
+        "harnessVersion": 3,
+        "recordEvents": false,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 24,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700086400000,
+        "offlineCapHours": 24,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": false,
+        "cpuProfiling": false,
+        "contention": "Solo final source benchmark window; original baseline24 cooperatively paused and root/browser jobs stopped.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 147717.46276300002,
+        "pausedMs": 0,
+        "activeMs": 147717.46276300002,
+        "readMs": 830.9458330000002,
+        "offlineRawMs": 144223.54079899998,
+        "offlineActiveMs": 144223.54079899998,
+        "saveMs": 2662.6988540000166,
+        "cpu": {
+          "userMs": 147468.124,
+          "systemMs": 11642.47
+        }
+      },
+      "stagesMs": {
+        "fileRead": 80.197406,
+        "JSON.parse": 27.214562,
+        "decodeSchemaChecksumMigration": 563.532396,
+        "inputDeterministicHash": 500.06743000000006,
+        "encodeSeed": 465.436737,
+        "seedFakeIndexedDB": 110.49708499999997,
+        "loadWithOffline.read": 830.9458330000002,
+        "loadWithOffline.offline": 144223.54079899998,
+        "loadWithOffline.save": 2662.6988540000166,
+        "loadWithOffline": 147717.46276300002,
+        "outputDeterministicHash": 455.64212600002065,
+        "readPersistedRowsFakeIndexedDB": 641.956422999996,
+        "IndexedDB.backupEnvelopesToArray": 140.60254999998142,
+        "IndexedDB.backupPrimaryKeys": 0.3766429999959655,
+        "reportHistoryHash": 39.305672000016784,
+        "loadSavePostReplay": 1651.10334099998,
+        "reloadDeterministicHash": 235.058125999989,
+        "JSON.stringify.fullWorld": 93.00246200000402,
+        "structuredClone.fullWorld": 65.44576400000369,
+        "worldStream.worldPatch": 87.76347000000533,
+        "worldStream.applyWorldPatch": 0.18007900001248345,
+        "patchDeterministicHash": 215.34357799999998,
+        "workerMessageChannel.fullWorld": 97.43605599997682,
+        "workerMessageChannel.worldPatch": 76.18464200000744
+      },
+      "processedEvents": 93720,
+      "perEventType": {},
+      "selectedFunctionCosts": {},
+      "functionSelfTop10": [],
+      "cpuTop10": [],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 634949632,
+          "heapUsed": 462301576,
+          "heapTotal": 541179904,
+          "external": 16010283,
+          "arrayBuffers": 13803785
+        },
+        "processLifetimePeakRSSBytes": 636653568
+      },
+      "workerTransfer": {
+        "fullTransferMs": 96.35379999998258,
+        "patchTransferMs": 76.00258200001554,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 1530999586,
+        "revision": 1382,
+        "commandReceipts": 32468,
+        "combatReceipts": 5141,
+        "pendingEvents": 332,
+        "reports": 308,
+        "autonomyDecisions": 39836,
+        "acceptedAI": 32411,
+        "rejectedAI": 189
+      },
+      "hashes": {
+        "inputHash": "b53b560fd9eb8a71f7e365019d9b5c57d86f505e7d628d0df433b2bd4dfecbde",
+        "worldHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "reportHistoryHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+        "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reloadHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "patchHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    },
+    "twentyFourHoursInstrumented": {
+      "label": "final3-instrumented-24h-10x",
+      "source": {
+        "sha": "7b0390a05e5eea4f9fe190d2e772ad7275745751-plus-p0-v2-working-tree",
+        "version": "0.30.50",
+        "instrumented": true,
+        "harnessVersion": 3,
+        "recordEvents": true,
+        "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1"
+      },
+      "configuration": {
+        "hours": 24,
+        "speed": 10,
+        "savedAt": 1700000000000,
+        "now": 1700086400000,
+        "offlineCapHours": 24,
+        "synthetic": false
+      },
+      "measurement": {
+        "instrumented": true,
+        "cpuProfiling": true,
+        "contention": "Solo final source benchmark window; original baseline24 cooperatively paused and root/browser jobs stopped.",
+        "limitations": []
+      },
+      "load": {
+        "rawWallMs": 134347.369994,
+        "pausedMs": 0,
+        "activeMs": 134347.369994,
+        "readMs": 1179.6313489999998,
+        "offlineRawMs": 131584.493087,
+        "offlineActiveMs": 131584.493087,
+        "saveMs": 1582.6092219999991,
+        "cpu": {
+          "userMs": 132710.69,
+          "systemMs": 15936.063
+        }
+      },
+      "stagesMs": {
+        "fileRead": 52.55169900000001,
+        "JSON.parse": 26.43140600000001,
+        "decodeSchemaChecksumMigration": 400.510606,
+        "inputDeterministicHash": 128.15622000000008,
+        "encodeSeed": 206.96454900000003,
+        "seedFakeIndexedDB": 85.34487499999989,
+        "loadWithOffline.read": 1179.6313489999998,
+        "loadWithOffline.offline": 131584.493087,
+        "loadWithOffline.save": 1582.6092219999991,
+        "loadWithOffline": 134347.369994,
+        "outputDeterministicHash": 293.1282849999843,
+        "readPersistedRowsFakeIndexedDB": 223.3760080000211,
+        "IndexedDB.backupEnvelopesToArray": 88.4674309999973,
+        "IndexedDB.backupPrimaryKeys": 0.3256909999763593,
+        "reportHistoryHash": 18.43715000001248,
+        "loadSavePostReplay": 1195.8363069999905,
+        "reloadDeterministicHash": 341.73605400000815,
+        "JSON.stringify.fullWorld": 180.101576999994,
+        "structuredClone.fullWorld": 57.28903899999568,
+        "worldStream.worldPatch": 86.42513099999633,
+        "worldStream.applyWorldPatch": 0.16818599999533035,
+        "patchDeterministicHash": 227.03552899998613,
+        "workerMessageChannel.fullWorld": 75.02567900001304,
+        "workerMessageChannel.worldPatch": 64.70168299999204
+      },
+      "processedEvents": 93720,
+      "perEventType": {
+        "army.return": {
+          "count": 1466,
+          "totalMs": 1245.705957000113,
+          "avgMs": 0.8497312121419597,
+          "maxMs": 11.926428999999189,
+          "selfMs": 69.94820699496267
+        },
+        "military.train": {
+          "count": 27393,
+          "totalMs": 5942.176508999366,
+          "avgMs": 0.2169231741320544,
+          "maxMs": 79.45666100000017,
+          "selfMs": 1541.9450259871082
+        },
+        "ai.decide": {
+          "count": 18856,
+          "totalMs": 72974.13095900013,
+          "avgMs": 3.8700748281183777,
+          "maxMs": 452.1051690000022,
+          "selfMs": 1144.471352006376
+        },
+        "construction.complete": {
+          "count": 11125,
+          "totalMs": 2370.1591969996466,
+          "avgMs": 0.2130480177078334,
+          "maxMs": 21.969977999997354,
+          "selfMs": 609.3982459997992
+        },
+        "army.arrive": {
+          "count": 2431,
+          "totalMs": 4652.342498000301,
+          "avgMs": 1.9137566836693958,
+          "maxMs": 49.05516499999976,
+          "selfMs": 147.8525360016979
+        },
+        "governance.decide": {
+          "count": 7901,
+          "totalMs": 32617.019382000246,
+          "avgMs": 4.128214071889666,
+          "maxMs": 79.79423800000222,
+          "selfMs": 484.0279289968471
+        },
+        "economy.settle": {
+          "count": 24000,
+          "totalMs": 4556.900634999658,
+          "avgMs": 0.1898708597916524,
+          "maxMs": 50.51238700000249,
+          "selfMs": 1200.335365982356
+        },
+        "research.complete": {
+          "count": 237,
+          "totalMs": 77.58715400002802,
+          "avgMs": 0.3273719578060254,
+          "maxMs": 4.723260000002483,
+          "selfMs": 13.247283000815514
+        },
+        "wild.respawn": {
+          "count": 113,
+          "totalMs": 1967.1438700000017,
+          "avgMs": 17.408352831858423,
+          "maxMs": 28.586248999999953,
+          "selfMs": 6.513061999061392
+        },
+        "combat.round": {
+          "count": 110,
+          "totalMs": 249.97186200000942,
+          "avgMs": 2.2724714727273585,
+          "maxMs": 46.765025000000605,
+          "selfMs": 7.5445320007384
+        },
+        "age.complete": {
+          "count": 54,
+          "totalMs": 9.222974000062095,
+          "avgMs": 0.17079581481596473,
+          "maxMs": 0.774399000001722,
+          "selfMs": 3.4096769997486263
+        },
+        "city.promote.complete": {
+          "count": 14,
+          "totalMs": 3.071328999954858,
+          "avgMs": 0.21938064285391842,
+          "maxMs": 1.1362189999927068,
+          "selfMs": 0.5465879997063894
+        },
+        "logistics.arrive": {
+          "count": 8,
+          "totalMs": 1.988950000013574,
+          "avgMs": 0.24861875000169675,
+          "maxMs": 0.40200100000947714,
+          "selfMs": 0.3183290004526498
+        },
+        "logistics.return": {
+          "count": 8,
+          "totalMs": 5.061509000021033,
+          "avgMs": 0.6326886250026291,
+          "maxMs": 3.3721280000027036,
+          "selfMs": 0.5650519997434458
+        },
+        "army.depart": {
+          "count": 4,
+          "totalMs": 2.5807070000009844,
+          "avgMs": 0.6451767500002461,
+          "maxMs": 0.7396279999957187,
+          "selfMs": 0.18261600016558077
+        }
+      },
+      "selectedFunctionCosts": {
+        "structuredClone.worldFull": {
+          "count": 2,
+          "totalMs": 196.96714399997336,
+          "avgMs": 98.48357199998668,
+          "maxMs": 168.12945699997363,
+          "selfMs": 196.96714399997336
+        },
+        "structuredClone.worldDraft": {
+          "count": 3281,
+          "totalMs": 17229.206566999903,
+          "avgMs": 5.251205902773515,
+          "maxMs": 67.79056000000128,
+          "selfMs": 17229.206566999903
+        },
+        "structuredClone.cityDraft": {
+          "count": 15349,
+          "totalMs": 1729.4184440010167,
+          "avgMs": 0.11267303694058353,
+          "maxMs": 41.097500999996555,
+          "selfMs": 1729.4184440010167
+        },
+        "structuredClone.other": {
+          "count": 1346,
+          "totalMs": 345.3951459999291,
+          "avgMs": 0.25660857800886266,
+          "maxMs": 56.05527899999288,
+          "selfMs": 345.3951459999291
+        },
+        "JSON.stringify.object": {
+          "count": 1641345,
+          "totalMs": 741.1402470031487,
+          "avgMs": 0.0004515444632317695,
+          "maxMs": 5.103265000000647,
+          "selfMs": 741.1402470031487
+        },
+        "receiptLookup.find": {
+          "count": 45,
+          "totalMs": 0.7531020000160424,
+          "avgMs": 0.0167356000003565,
+          "maxMs": 0.13612499999999272,
+          "selfMs": 0.7531020000160424
+        },
+        "receiptLookup.some": {
+          "count": 3444,
+          "totalMs": 1351.269521999948,
+          "avgMs": 0.3923546811846539,
+          "maxMs": 8.418109999998705,
+          "selfMs": 1351.269521999948
+        },
+        "formal/schema.validateFormalWorld": {
+          "count": 5,
+          "totalMs": 1142.196642999965,
+          "avgMs": 228.439328599993,
+          "maxMs": 322.83594700000003,
+          "selfMs": 1141.7289299999861
+        },
+        "formal/reducer.submitOrderDraft": {
+          "count": 18630,
+          "totalMs": 59388.954481000146,
+          "avgMs": 3.187812908266245,
+          "maxMs": 448.52257100000134,
+          "selfMs": 9519.085678998845
+        },
+        "formal/reducer.cloneReplayCommandDraft": {
+          "count": 3281,
+          "totalMs": 17782.009738000103,
+          "avgMs": 5.419692087168578,
+          "maxMs": 67.92147400000249,
+          "selfMs": 552.8031710002001
+        },
+        "formal/reducer.cloneReplayCityDraft": {
+          "count": 15349,
+          "totalMs": 4127.38961899977,
+          "avgMs": 0.26890283529870157,
+          "maxMs": 42.95567099999607,
+          "selfMs": 2397.971174998753
+        },
+        "formal/reducer.advanceFormalCooperative": {
+          "count": 1,
+          "totalMs": 131582.115748,
+          "avgMs": 131582.115748,
+          "maxMs": 131582.115748,
+          "selfMs": 3828.1817749979527
+        },
+        "formal/autonomy.handleAutonomy": {
+          "count": 85819,
+          "totalMs": 65209.67472399814,
+          "avgMs": 0.7598512534986208,
+          "maxMs": 451.5186529999992,
+          "selfMs": 447.65284199887446
+        },
+        "formal/governance.handleGovernance": {
+          "count": 93720,
+          "totalMs": 28003.56302299868,
+          "avgMs": 0.29880028833758726,
+          "maxMs": 79.19706100001349,
+          "selfMs": 326.3558149982341
+        },
+        "formal/scheduler.cloneReplayEvent": {
+          "count": 25695226,
+          "totalMs": 21501.16557099834,
+          "avgMs": 0.0008367766670352827,
+          "maxMs": 41.97594100000424,
+          "selfMs": 21501.16557099834
+        },
+        "formal/scheduler.snapshot": {
+          "count": 55784,
+          "totalMs": 19731.168119001497,
+          "avgMs": 0.35370658466588084,
+          "maxMs": 78.48107599999639,
+          "selfMs": 4195.024463047932
+        },
+        "formal/scheduler.replace": {
+          "count": 55981,
+          "totalMs": 13752.74215599837,
+          "avgMs": 0.24566803301117113,
+          "maxMs": 61.51507799999672,
+          "selfMs": 4276.547544010649
+        },
+        "formal/scheduler.push": {
+          "count": 132675,
+          "totalMs": 506.2199070011043,
+          "avgMs": 0.003815488275870392,
+          "maxMs": 16.022318000002997,
+          "selfMs": 173.31405499622952
+        },
+        "formal/scheduler.pop": {
+          "count": 132397,
+          "totalMs": 583.0300089987609,
+          "avgMs": 0.00440364969749134,
+          "maxMs": 3.4436900000000605,
+          "selfMs": 251.79216799809456
+        },
+        "formal/scheduler.compareEvents": {
+          "count": 38912612,
+          "totalMs": 4175.31638994849,
+          "avgMs": 0.00010729982325392317,
+          "maxMs": 13.814413000000059,
+          "selfMs": 4175.31638994849
+        },
+        "formal/politics.reconcilePoliticalEvents": {
+          "count": 18506,
+          "totalMs": 6232.073171000766,
+          "avgMs": 0.33675960072413086,
+          "maxMs": 31.66016499999978,
+          "selfMs": 216.76075200075638
+        }
+      },
+      "functionSelfTop10": [
+        {
+          "name": "formal/scheduler.cloneReplayEvent",
+          "count": 25695226,
+          "totalMs": 21501.16557099834,
+          "avgMs": 0.0008367766670352827,
+          "maxMs": 41.97594100000424,
+          "selfMs": 21501.16557099834
+        },
+        {
+          "name": "structuredClone.worldDraft",
+          "count": 3281,
+          "totalMs": 17229.206566999903,
+          "avgMs": 5.251205902773515,
+          "maxMs": 67.79056000000128,
+          "selfMs": 17229.206566999903
+        },
+        {
+          "name": "formal/autonomy.economicChoices",
+          "count": 26757,
+          "totalMs": 13848.381001999585,
+          "avgMs": 0.5175610495197364,
+          "maxMs": 107.67945099999633,
+          "selfMs": 13848.381001999585
+        },
+        {
+          "name": "formal/reducer.submitOrderDraft",
+          "count": 18630,
+          "totalMs": 59388.954481000146,
+          "avgMs": 3.187812908266245,
+          "maxMs": 448.52257100000134,
+          "selfMs": 9519.085678998845
+        },
+        {
+          "name": "formal/spatial.addSite",
+          "count": 18064027,
+          "totalMs": 9048.990019960018,
+          "avgMs": 0.0005009397970873282,
+          "maxMs": 41.12725900000078,
+          "selfMs": 7746.976118980989
+        },
+        {
+          "name": "formal/spatial.spatial",
+          "count": 18311285,
+          "totalMs": 18445.285551024164,
+          "avgMs": 0.0010073179217637738,
+          "maxMs": 42.01756799999566,
+          "selfMs": 5971.988389061223
+        },
+        {
+          "name": "formal/governance.retireGovernors",
+          "count": 93720,
+          "totalMs": 5670.0997640020305,
+          "avgMs": 0.06050042428512623,
+          "maxMs": 50.28012700000181,
+          "selfMs": 5384.041169003789
+        },
+        {
+          "name": "formal/scheduler.replace",
+          "count": 55981,
+          "totalMs": 13752.74215599837,
+          "avgMs": 0.24566803301117113,
+          "maxMs": 61.51507799999672,
+          "selfMs": 4276.547544010649
+        },
+        {
+          "name": "formal/scheduler.snapshot",
+          "count": 55784,
+          "totalMs": 19731.168119001497,
+          "avgMs": 0.35370658466588084,
+          "maxMs": 78.48107599999639,
+          "selfMs": 4195.024463047932
+        },
+        {
+          "name": "formal/scheduler.compareEvents",
+          "count": 38912612,
+          "totalMs": 4175.31638994849,
+          "avgMs": 0.00010729982325392317,
+          "maxMs": 13.814413000000059,
+          "selfMs": 4175.31638994849
+        }
+      ],
+      "cpuTop10": [
+        {
+          "name": "structuredClone",
+          "file": "node:internal/worker/js_transferable",
+          "line": 113,
+          "selfSampledMs": 19335.25899999984,
+          "activePercent": 14.522038860936043
+        },
+        {
+          "name": "cloneReplayEvent",
+          "file": "src/game/formal/scheduler.ts",
+          "line": 9,
+          "selfSampledMs": 18936.82099999982,
+          "activePercent": 14.222785971710511
+        },
+        {
+          "name": "now",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 11345.932999999926,
+          "activePercent": 8.521534670912706
+        },
+        {
+          "name": "buildingLevel",
+          "file": "src/game/formal/catalogB3.ts",
+          "line": 575,
+          "selfSampledMs": 8812.204000000009,
+          "activePercent": 6.618539164047258
+        },
+        {
+          "name": "(garbage collector)",
+          "file": null,
+          "line": 0,
+          "selfSampledMs": 6780.6600000000035,
+          "activePercent": 5.092717300698968
+        },
+        {
+          "name": "submitOrderDraft",
+          "file": "src/game/formal/reducer.ts",
+          "line": 101,
+          "selfSampledMs": 4809.66400000001,
+          "activePercent": 3.6123709289875974
+        },
+        {
+          "name": "addSite",
+          "file": "src/game/formal/spatial.ts",
+          "line": 17,
+          "selfSampledMs": 3972.6380000000004,
+          "activePercent": 2.9837098854704616
+        },
+        {
+          "name": "researchRequirements",
+          "file": "src/game/formal/buildingDetailData.ts",
+          "line": 16,
+          "selfSampledMs": 3946.1990000000046,
+          "activePercent": 2.963852474434787
+        },
+        {
+          "name": "spatial",
+          "file": "src/game/formal/spatial.ts",
+          "line": 35,
+          "selfSampledMs": 3617.762000000008,
+          "activePercent": 2.7171748955428137
+        },
+        {
+          "name": "route",
+          "file": "src/game/formal/routing.ts",
+          "line": 5,
+          "selfSampledMs": 3056.048000000014,
+          "activePercent": 2.2952910957586052
+        }
+      ],
+      "memory": {
+        "sampledPeakBytes": {
+          "rss": 701513728,
+          "heapUsed": 457216472,
+          "heapTotal": 533291008,
+          "external": 16010283,
+          "arrayBuffers": 13803785
+        },
+        "processLifetimePeakRSSBytes": 767270912
+      },
+      "workerTransfer": {
+        "fullTransferMs": 74.00336100001005,
+        "patchTransferMs": 64.51917399998638,
+        "patchKeys": [
+          "governors",
+          "autonomy",
+          "extinction",
+          "politics",
+          "worldLayer",
+          "time",
+          "revision",
+          "sequences",
+          "factions",
+          "cities",
+          "armies",
+          "combat",
+          "events",
+          "commandReceipts",
+          "completionReceipts",
+          "researchProjects"
+        ]
+      },
+      "output": {
+        "time": 1530999586,
+        "revision": 1382,
+        "commandReceipts": 32468,
+        "combatReceipts": 5141,
+        "pendingEvents": 332,
+        "reports": 308,
+        "autonomyDecisions": 39836,
+        "acceptedAI": 32411,
+        "rejectedAI": 189
+      },
+      "hashes": {
+        "inputHash": "b53b560fd9eb8a71f7e365019d9b5c57d86f505e7d628d0df433b2bd4dfecbde",
+        "worldHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "reportHistoryHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+        "eventOrderHash": "a9b15374daae39b24f64c73782b8d7504e49f0cfd78f7f1a5a517d6f92ce3a2b",
+        "reloadHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "patchHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+        "reloadMatches": true,
+        "patchMatches": true
+      }
+    }
+  },
+  "comparisons": {
+    "modeParity": {
+      "zeroHour": {
+        "inputWorld": true,
+        "world": true,
+        "reports": true,
+        "processedEvents": true,
+        "outputAggregates": true
+      },
+      "sixHoursA": {
+        "inputWorld": true,
+        "world": true,
+        "reports": true,
+        "processedEvents": true,
+        "outputAggregates": true
+      },
+      "sixHoursB": {
+        "inputWorld": true,
+        "world": true,
+        "reports": true,
+        "processedEvents": true,
+        "outputAggregates": true
+      },
+      "twentyFourHours": {
+        "inputWorld": true,
+        "world": true,
+        "reports": true,
+        "processedEvents": true,
+        "outputAggregates": true
+      }
+    },
+    "consistencyGoldParity": {
+      "0h": {
+        "world": true,
+        "reports": true,
+        "eventCount": true,
+        "eventOrder": true,
+        "eventTypes": true
+      },
+      "6h": {
+        "world": true,
+        "reports": true,
+        "eventCount": true,
+        "eventOrder": true,
+        "eventTypes": true
+      },
+      "24h": {
+        "world": true,
+        "reports": true,
+        "eventCount": true,
+        "eventOrder": true,
+        "eventTypes": true
+      }
+    },
+    "zeroHour": {
+      "inputWorld": true,
+      "world": true,
+      "reports": true,
+      "processedEvents": true,
+      "eventOrder": true,
+      "eventTypes": true,
+      "outputAggregates": true,
+      "reload": true,
+      "patch": true
+    },
+    "sixHours": {
+      "inputWorld": true,
+      "world": true,
+      "reports": true,
+      "processedEvents": true,
+      "eventOrder": true,
+      "eventTypes": true,
+      "outputAggregates": true,
+      "reload": true,
+      "patch": true
+    },
+    "twentyFourHours": {
+      "inputWorld": true,
+      "world": true,
+      "reports": true,
+      "processedEvents": true,
+      "eventOrder": true,
+      "eventTypes": true,
+      "outputAggregates": true,
+      "reload": true,
+      "patch": true
+    },
+    "cleanSixHours": {
+      "beforeMs": 655871.999346,
+      "afterRunMs": [
+        17406.660317,
+        17739.219101000002
+      ],
+      "afterRangeMs": [
+        17406.660317,
+        17739.219101000002
+      ],
+      "afterTwoRunMidpointMs": 17572.939709000002,
+      "offlineImprovementAtMidpoint": 37.32283899034232,
+      "loadImprovementAtMidpoint": 35.44116935327677
+    },
+    "baseline24Ratio": "Not used as an exact wall-time improvement ratio because pause/instrumentation/contention conditions differ."
+  },
+  "speedMatrix": [
+    {
+      "speed": 1,
+      "hours": 0.1,
+      "advancedWorldMs": 360000,
+      "advancedWorldHours": 0.1,
+      "coverage": "Short 0.1 real hour functional probe; not a 6h/24h target measurement.",
+      "aiFactions": 99,
+      "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "loadMs": 1047.0145670000002,
+      "offlineMs": 214.26699499999995,
+      "processedEvents": 25,
+      "worldHash": "3ef6202dfbaa63addf02223f195d803e04cb5bd842810afa1e15ccbf3f49f7b0",
+      "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+      "reloadMatches": true,
+      "patchMatches": true
+    },
+    {
+      "speed": 10,
+      "hours": 0.1,
+      "advancedWorldMs": 3600000,
+      "advancedWorldHours": 1,
+      "coverage": "Short 0.1 real hour functional probe; not a 6h/24h target measurement.",
+      "aiFactions": 99,
+      "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "loadMs": 1265.4113020000002,
+      "offlineMs": 422.68657299999995,
+      "processedEvents": 326,
+      "worldHash": "b3f127151a3d3b7ba4dfb0a3195f701845896ded08c80231fa0728257f2d4b85",
+      "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+      "reloadMatches": true,
+      "patchMatches": true
+    },
+    {
+      "speed": 50,
+      "hours": 0.1,
+      "advancedWorldMs": 18000000,
+      "advancedWorldHours": 5,
+      "coverage": "Short 0.1 real hour functional probe; not a 6h/24h target measurement.",
+      "aiFactions": 99,
+      "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "loadMs": 2275.419336,
+      "offlineMs": 1460.902363,
+      "processedEvents": 1622,
+      "worldHash": "bfd98d8161321b46458b1f56fd09725bdffeae043e29e50181cc49d63f5cbaf9",
+      "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+      "reloadMatches": true,
+      "patchMatches": true
+    }
+  ],
+  "consistency": [
+    {
+      "hours": 0,
+      "speed": 10,
+      "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "normalization": "ONLY world.revision and each commandReceipts[].committedRevision set to0 for gameplay hash; real CAS high-water values and exact history preservation separately asserted.",
+      "checks": {
+        "unchangedInitialWorld": true,
+        "directCooperativeExactWorld": true,
+        "directCooperativeExactReports": true,
+        "segmentedGameplayEqual": true,
+        "segmentedReportsExact": true,
+        "saveLoadGameplayEqual": true,
+        "saveLoadReportsExact": true,
+        "eventOrderingEqual": true,
+        "eventTypeCountsEqual": true,
+        "eventCountEqual": true,
+        "internalAssertions": true
+      },
+      "strategies": [
+        {
+          "strategy": "direct",
+          "segments": 1,
+          "durableCommits": 1,
+          "naturalNoops": 1,
+          "elapsedMs": 6317.232732,
+          "processedEvents": 0,
+          "eventTypeCounts": {},
+          "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "worldHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+          "normalizedGameplayHash": "216d439d0869df4b64742fc2930ba6280885abc46ad0addbde253ba72bd2808f",
+          "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+          "finalRevision": 1382,
+          "expectedFinalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "cooperative",
+          "segments": 1,
+          "durableCommits": 1,
+          "naturalNoops": 1,
+          "elapsedMs": 3700.120164,
+          "processedEvents": 0,
+          "eventTypeCounts": {},
+          "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "worldHash": "efad02143b65497cf9f1a9d838252e1b8fa440d032d5d23dbd17b57783826bd5",
+          "normalizedGameplayHash": "216d439d0869df4b64742fc2930ba6280885abc46ad0addbde253ba72bd2808f",
+          "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+          "finalRevision": 1382,
+          "expectedFinalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "segmented",
+          "segments": 6,
+          "durableCommits": 6,
+          "naturalNoops": 6,
+          "elapsedMs": 11864.266855,
+          "processedEvents": 0,
+          "eventTypeCounts": {},
+          "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "worldHash": "b057521ed7f2325aa4ad867eabec4d763b622141552af5cbef40e74134a1e883",
+          "normalizedGameplayHash": "216d439d0869df4b64742fc2930ba6280885abc46ad0addbde253ba72bd2808f",
+          "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+          "finalRevision": 1387,
+          "expectedFinalRevision": 1387,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "save-load",
+          "segments": 2,
+          "durableCommits": 2,
+          "naturalNoops": 2,
+          "elapsedMs": 9365.613604000002,
+          "processedEvents": 0,
+          "eventTypeCounts": {},
+          "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "worldHash": "dd5d97cbd7f16ab565a7657313c63181fab53077b00c566cc7bbf8c27003d914",
+          "normalizedGameplayHash": "216d439d0869df4b64742fc2930ba6280885abc46ad0addbde253ba72bd2808f",
+          "reportsHash": "ae75211facedd76aeac016965b910912301105e98860ab39e663b360012b31dd",
+          "finalRevision": 1383,
+          "expectedFinalRevision": 1383,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        }
+      ]
+    },
+    {
+      "hours": 6,
+      "speed": 10,
+      "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "normalization": "ONLY world.revision and each commandReceipts[].committedRevision set to0 for gameplay hash; real CAS high-water values and exact history preservation separately asserted.",
+      "checks": {
+        "unchangedInitialWorld": true,
+        "directCooperativeExactWorld": true,
+        "directCooperativeExactReports": true,
+        "segmentedGameplayEqual": true,
+        "segmentedReportsExact": true,
+        "saveLoadGameplayEqual": true,
+        "saveLoadReportsExact": true,
+        "eventOrderingEqual": true,
+        "eventTypeCountsEqual": true,
+        "eventCountEqual": true,
+        "internalAssertions": true
+      },
+      "strategies": [
+        {
+          "strategy": "direct",
+          "segments": 1,
+          "durableCommits": 1,
+          "naturalNoops": 0,
+          "elapsedMs": 19038.149230000003,
+          "processedEvents": 19569,
+          "eventTypeCounts": {
+            "army.return": 428,
+            "military.train": 3236,
+            "ai.decide": 5266,
+            "construction.complete": 2946,
+            "army.arrive": 668,
+            "governance.decide": 951,
+            "economy.settle": 6000,
+            "research.complete": 13,
+            "wild.respawn": 2,
+            "combat.round": 44,
+            "age.complete": 15
+          },
+          "eventOrderHash": "04a827ec41e0874c5dfdeb8e79ef81327fc52ec0fb99424d98713e52ee4f9fe7",
+          "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+          "normalizedGameplayHash": "beb03701be83f8a5abf54a8e1bd979d2ad6bbb036e0af8c088db1801b11c71e0",
+          "reportsHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+          "finalRevision": 1382,
+          "expectedFinalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "cooperative",
+          "segments": 1,
+          "durableCommits": 1,
+          "naturalNoops": 0,
+          "elapsedMs": 18591.130983000003,
+          "processedEvents": 19569,
+          "eventTypeCounts": {
+            "army.return": 428,
+            "military.train": 3236,
+            "ai.decide": 5266,
+            "construction.complete": 2946,
+            "army.arrive": 668,
+            "governance.decide": 951,
+            "economy.settle": 6000,
+            "research.complete": 13,
+            "wild.respawn": 2,
+            "combat.round": 44,
+            "age.complete": 15
+          },
+          "eventOrderHash": "04a827ec41e0874c5dfdeb8e79ef81327fc52ec0fb99424d98713e52ee4f9fe7",
+          "worldHash": "2a0ecf0e64de312491ef67bf7373ae49017dfc337c6303efb86b6c2f0380fef3",
+          "normalizedGameplayHash": "beb03701be83f8a5abf54a8e1bd979d2ad6bbb036e0af8c088db1801b11c71e0",
+          "reportsHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+          "finalRevision": 1382,
+          "expectedFinalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "segmented",
+          "segments": 6,
+          "durableCommits": 6,
+          "naturalNoops": 0,
+          "elapsedMs": 23974.857587,
+          "processedEvents": 19569,
+          "eventTypeCounts": {
+            "army.return": 428,
+            "military.train": 3236,
+            "ai.decide": 5266,
+            "construction.complete": 2946,
+            "army.arrive": 668,
+            "governance.decide": 951,
+            "economy.settle": 6000,
+            "research.complete": 13,
+            "wild.respawn": 2,
+            "combat.round": 44,
+            "age.complete": 15
+          },
+          "eventOrderHash": "04a827ec41e0874c5dfdeb8e79ef81327fc52ec0fb99424d98713e52ee4f9fe7",
+          "worldHash": "fd40cce8a6394681ccad58d5e37e00bb313914801cd72f5de15345c43d470838",
+          "normalizedGameplayHash": "beb03701be83f8a5abf54a8e1bd979d2ad6bbb036e0af8c088db1801b11c71e0",
+          "reportsHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+          "finalRevision": 1387,
+          "expectedFinalRevision": 1387,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "save-load",
+          "segments": 2,
+          "durableCommits": 2,
+          "naturalNoops": 0,
+          "elapsedMs": 22424.637188000008,
+          "processedEvents": 19569,
+          "eventTypeCounts": {
+            "army.return": 428,
+            "military.train": 3236,
+            "ai.decide": 5266,
+            "construction.complete": 2946,
+            "army.arrive": 668,
+            "governance.decide": 951,
+            "economy.settle": 6000,
+            "research.complete": 13,
+            "wild.respawn": 2,
+            "combat.round": 44,
+            "age.complete": 15
+          },
+          "eventOrderHash": "04a827ec41e0874c5dfdeb8e79ef81327fc52ec0fb99424d98713e52ee4f9fe7",
+          "worldHash": "ceb032825ac9349811fdc2144728d15d8c4f5343b5f00cc90ca2fd4c1f1876e7",
+          "normalizedGameplayHash": "beb03701be83f8a5abf54a8e1bd979d2ad6bbb036e0af8c088db1801b11c71e0",
+          "reportsHash": "a240ae542871e0d24d4e14474c4efe829a8a9a04167359bd858a31d33ee99a5b",
+          "finalRevision": 1383,
+          "expectedFinalRevision": 1383,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        }
+      ]
+    },
+    {
+      "hours": 24,
+      "speed": 10,
+      "sourceTreeHash": "25e4fb4d93f066ee42285d3f804eea543bfd8ab54db5146bf0bef286be133ba1",
+      "normalization": "ONLY world.revision and each commandReceipts[].committedRevision set to0 for gameplay hash; real CAS high-water values and exact history preservation separately asserted.",
+      "checks": {
+        "unchangedInitialWorld": true,
+        "directCooperativeExactWorld": true,
+        "directCooperativeExactReports": true,
+        "segmentedGameplayEqual": true,
+        "segmentedReportsExact": true,
+        "saveLoadGameplayEqual": true,
+        "saveLoadReportsExact": true,
+        "eventOrderingEqual": true,
+        "eventTypeCountsEqual": true,
+        "eventCountEqual": true,
+        "internalAssertions": true
+      },
+      "strategies": [
+        {
+          "strategy": "direct",
+          "segments": 1,
+          "durableCommits": 1,
+          "naturalNoops": 0,
+          "elapsedMs": 87925.03283899999,
+          "processedEvents": 93720,
+          "eventTypeCounts": {
+            "army.return": 1466,
+            "military.train": 27393,
+            "ai.decide": 18856,
+            "construction.complete": 11125,
+            "army.arrive": 2431,
+            "governance.decide": 7901,
+            "economy.settle": 24000,
+            "research.complete": 237,
+            "wild.respawn": 113,
+            "combat.round": 110,
+            "age.complete": 54,
+            "city.promote.complete": 14,
+            "logistics.arrive": 8,
+            "logistics.return": 8,
+            "army.depart": 4
+          },
+          "eventOrderHash": "a9b15374daae39b24f64c73782b8d7504e49f0cfd78f7f1a5a517d6f92ce3a2b",
+          "worldHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+          "normalizedGameplayHash": "f8cf13d0ffb8d4be509bb03877d9983e5612cd622312c8b2f0e69b6884aaabcc",
+          "reportsHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+          "finalRevision": 1382,
+          "expectedFinalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "cooperative",
+          "segments": 1,
+          "durableCommits": 1,
+          "naturalNoops": 0,
+          "elapsedMs": 91492.60717300001,
+          "processedEvents": 93720,
+          "eventTypeCounts": {
+            "army.return": 1466,
+            "military.train": 27393,
+            "ai.decide": 18856,
+            "construction.complete": 11125,
+            "army.arrive": 2431,
+            "governance.decide": 7901,
+            "economy.settle": 24000,
+            "research.complete": 237,
+            "wild.respawn": 113,
+            "combat.round": 110,
+            "age.complete": 54,
+            "city.promote.complete": 14,
+            "logistics.arrive": 8,
+            "logistics.return": 8,
+            "army.depart": 4
+          },
+          "eventOrderHash": "a9b15374daae39b24f64c73782b8d7504e49f0cfd78f7f1a5a517d6f92ce3a2b",
+          "worldHash": "77eb9557ea48dee4e3692a958cd2d3776c8ebfae211e88caab307ad10c778b2d",
+          "normalizedGameplayHash": "f8cf13d0ffb8d4be509bb03877d9983e5612cd622312c8b2f0e69b6884aaabcc",
+          "reportsHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+          "finalRevision": 1382,
+          "expectedFinalRevision": 1382,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "segmented",
+          "segments": 6,
+          "durableCommits": 6,
+          "naturalNoops": 0,
+          "elapsedMs": 91733.81164200002,
+          "processedEvents": 93720,
+          "eventTypeCounts": {
+            "army.return": 1466,
+            "military.train": 27393,
+            "ai.decide": 18856,
+            "construction.complete": 11125,
+            "army.arrive": 2431,
+            "governance.decide": 7901,
+            "economy.settle": 24000,
+            "research.complete": 237,
+            "wild.respawn": 113,
+            "combat.round": 110,
+            "age.complete": 54,
+            "city.promote.complete": 14,
+            "logistics.arrive": 8,
+            "logistics.return": 8,
+            "army.depart": 4
+          },
+          "eventOrderHash": "a9b15374daae39b24f64c73782b8d7504e49f0cfd78f7f1a5a517d6f92ce3a2b",
+          "worldHash": "91b827f899942f4658afd695beeeb8c4aa6a91bfe4eefe6887dc0c14a118fe8b",
+          "normalizedGameplayHash": "f8cf13d0ffb8d4be509bb03877d9983e5612cd622312c8b2f0e69b6884aaabcc",
+          "reportsHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+          "finalRevision": 1387,
+          "expectedFinalRevision": 1387,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        },
+        {
+          "strategy": "save-load",
+          "segments": 2,
+          "durableCommits": 2,
+          "naturalNoops": 0,
+          "elapsedMs": 86683.44520900003,
+          "processedEvents": 93720,
+          "eventTypeCounts": {
+            "army.return": 1466,
+            "military.train": 27393,
+            "ai.decide": 18856,
+            "construction.complete": 11125,
+            "army.arrive": 2431,
+            "governance.decide": 7901,
+            "economy.settle": 24000,
+            "research.complete": 237,
+            "wild.respawn": 113,
+            "combat.round": 110,
+            "age.complete": 54,
+            "city.promote.complete": 14,
+            "logistics.arrive": 8,
+            "logistics.return": 8,
+            "army.depart": 4
+          },
+          "eventOrderHash": "a9b15374daae39b24f64c73782b8d7504e49f0cfd78f7f1a5a517d6f92ce3a2b",
+          "worldHash": "ae3b3f3cdee2f135112c1598c4327c5f5b329977237bebb072971731428d23f9",
+          "normalizedGameplayHash": "f8cf13d0ffb8d4be509bb03877d9983e5612cd622312c8b2f0e69b6884aaabcc",
+          "reportsHash": "fe1ca9915c148fbdff2e43abbafefed39cc367ef7af40cdd785d600a3946d180",
+          "finalRevision": 1383,
+          "expectedFinalRevision": 1383,
+          "checks": {
+            "inputImmutable": true,
+            "historyPreserved": true,
+            "naturalTransitionRevision": true,
+            "naturalNoopReportsEmpty": true,
+            "clockBoundaryPrivate": true,
+            "revisionsInRange": true,
+            "durableAuthority": true,
+            "monotonicSequences": true,
+            "checkpointValidity": true,
+            "presentationClock": true
+          }
+        }
+      ]
+    }
+  ],
+  "publicSyntheticSmoke": {
+    "status": "PASS",
+    "configuration": {
+      "hours": 0,
+      "speed": 10,
+      "savedAt": 1700000000000,
+      "now": 1700000000000,
+      "offlineCapHours": 6,
+      "synthetic": true
+    },
+    "sourceTreeHash": "829505f5ea87b64829827faaa2f634d011087d1893e4075cd4f0e4e9a468ab07",
+    "aiFactions": 99,
+    "commandReceipts": 14000,
+    "loadMs": 816.0682350000002,
+    "checks": {
+      "reload": true,
+      "patch": true
+    },
+    "purpose": "Functional execution of the public synthetic benchmark; measured before the final scoped optimization and not an Android or final-source performance claim."
+  },
+  "pauseAccountingSelfCheck": {
+    "checks": {
+      "excludedPause": true,
+      "parentActiveSmall": true,
+      "childActiveSmall": true,
+      "nestedSelfNonnegative": true
+    },
+    "pausedMs": 101.34043200000002,
+    "metrics": {
+      "proof.child": {
+        "count": 1,
+        "totalMs": 0.6341379999999504,
+        "rawTotalMs": 101.97456999999997,
+        "pausedExcludedMs": 101.34043200000002,
+        "selfMs": 0.6341379999999504,
+        "maxMs": 0.6341379999999504,
+        "avgMs": 0.6341379999999504
+      },
+      "proof.parent": {
+        "count": 1,
+        "totalMs": 0.6955719999999701,
+        "rawTotalMs": 102.03600399999999,
+        "pausedExcludedMs": 101.34043200000002,
+        "selfMs": 0.06143400000001975,
+        "maxMs": 0.6955719999999701,
+        "avgMs": 0.6955719999999701
+      }
+    }
+  },
+  "reproduce": {
+    "prepare": "scripts/p0-profile-prepare.mjs",
+    "profile": "scripts/p0-profile-run.mjs",
+    "compare": "scripts/p0-profile-compare.mjs",
+    "consistency": "scripts/p0-profile-consistency.mjs",
+    "instructions": "scripts/p0-profile.md"
+  }
+}

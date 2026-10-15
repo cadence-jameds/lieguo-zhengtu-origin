@@ -1,0 +1,44 @@
+{
+  "browser": "154.0.8037.57",
+  "mode": "production bundle / native IndexedDB",
+  "controlledOfflineTimestamp": true,
+  "cases": [
+    {
+      "name": "foreign",
+      "status": "PASS",
+      "uiCommand": true,
+      "paidResources": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "normalDurationMs": 2072619,
+      "reload": true,
+      "nativeOfflineCompletion": true,
+      "singleConsumption": true,
+      "singleReceipt": true,
+      "aiAgents": 99
+    },
+    {
+      "name": "same",
+      "status": "PASS",
+      "uiCommand": true,
+      "paidResources": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      },
+      "normalDurationMs": 2072619,
+      "reload": true,
+      "nativeOfflineCompletion": true,
+      "singleConsumption": true,
+      "singleReceipt": true,
+      "aiAgents": 99
+    }
+  ],
+  "errors": [],
+  "passed": 2,
+  "failed": 0
+}

@@ -24,7 +24,7 @@ it('432 identified wild sites follow quota 3 per region with level 1–10 and on
  expect(new Set(w.worldLayer!.wildSites.map(s=>s.id)).size).toBe(432);expect(new Set(w.worldLayer!.wildSites.map(s=>s.spawnSlot)).size).toBe(432);expect(w.worldLayer!.wildSites.every(s=>s.level>=1&&s.level<=10)).toBe(true);
 });
 it('river traverses but never builds; water and mountains never build; mountains never traverse',()=>{
- expect(passable('river')).toBe(true);for(const t of ['river','water','mountain'] as const)expect(buildable(t)).toBe(false);expect(passable('mountain')).toBe(false);expect(passable('water')).toBe(false);const codes=new Set(make().worldLayer!.terrain);expect([...codes].sort()).toEqual(['F','L','M','R','W']);
+ expect(passable('river')).toBe(true);for(const t of ['river','water','mountain'] as const)expect(buildable(t)).toBe(false);expect(passable('mountain')).toBe(false);expect(passable('water')).toBe(true);const codes=new Set(make().worldLayer!.terrain);expect([...codes].sort()).toEqual(['F','L','M','R','W']);
 });
 it('same inputs reproduce geometry; campaign identity changes no geometry; changed seed changes geometry',()=>{
  expect(geometry(make())).toEqual(geometry(make('different-campaign')));expect(geometry(make())).toEqual(geometry(make()));expect(geometry(make())).not.toEqual(geometry(make('b2',90218)));

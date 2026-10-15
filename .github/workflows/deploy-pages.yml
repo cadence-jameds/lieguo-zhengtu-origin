@@ -1,8 +1,8 @@
-name: Deploy approved release or preview to GitHub Pages
+name: Auto deploy tested main to GitHub Pages
 
 on:
   push:
-    branches: [release]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,13 +10,13 @@ permissions:
 
 concurrency:
   group: production-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/release' && github.repository == 'cadence-jameds/lieguo-zhengtu-origin'
+    if: github.ref == 'refs/heads/main' && github.repository == 'cadence-jameds/lieguo-zhengtu-origin'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,9 +30,8 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Require recorded release acceptance or preview approval
-        run: node scripts/check-release-approval.mjs
-
+      # This is a public development preview. Formal release acceptance stays separate.
+      # Failed typecheck/regression/build prevents artifact upload and deployment.
       - name: Install dependencies
         run: npm ci
 
@@ -49,7 +48,7 @@ jobs:
           path: dist
 
   deploy:
-    if: github.ref == 'refs/heads/release' && github.repository == 'cadence-jameds/lieguo-zhengtu-origin'
+    if: github.ref == 'refs/heads/main' && github.repository == 'cadence-jameds/lieguo-zhengtu-origin'
     permissions:
       pages: write
       id-token: write

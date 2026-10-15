@@ -100,6 +100,7 @@ export function reconcilePoliticalEvents(w:FormalWorld,s:EventScheduler){
  const p=w.politics;if(!p)return;
  const ids=new Set(w.armies.map(a=>a.id));for(const j of p.joints)j.armyIds=j.armyIds.filter(id=>ids.has(id));
  p.joints=p.joints.filter(j=>j.armyIds.length||w.combat?.battles.some(b=>b.jointId===j.id));
- const events=s.snapshot().filter(e=>e.type!=='politics.end-friendly'||p.relations.some(r=>r.eventId===e.id));
- while(s.pop()){};for(const e of events)s.push(e);
+ const active=new Set(p.relations.map(r=>r.eventId));
+ const stale=new Set(s.snapshot().filter(e=>e.type==='politics.end-friendly'&&!active.has(e.id)).map(e=>e.id));
+ s.discard(stale);
 }

@@ -120,7 +120,8 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreig
   const stock=w.cities[1].stock.stone,tech=[...w.factions[1].techIds];
   w=act(w,1,{type:'craftsman.castle',cityId:w.cities[1].id,craftsmanId:craft.id});
   const job=w.cities[1].economy!.construction.find(j=>j.castleCivilizationId===craft.civilizationId)!;
-  expect(w.cities[1].stock.stone).toBeLessThan(stock);
+  expect(w.cities[1].stock.stone).toBe(stock);
+  expect(job.paidResources).toEqual({food:0,wood:0,stone:0,gold:0});
   expect(w.extinction!.craftsmen).toHaveLength(1);
   w=advanceFormal(w,job.startsAt+job.durationMs).world;
   expect(w.extinction!.craftsmen).toHaveLength(0);

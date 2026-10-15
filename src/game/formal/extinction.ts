@@ -11,6 +11,7 @@ import {initialCity} from './generator';
 import {initialMilitary} from './military';
 import {route} from './routing';
 import type {EventScheduler} from './scheduler';
+import {UNIT_CATALOG} from './unitCatalog';
 export type ExileSite=WildSite&{exile:true;sourceFactionId:FactionId;civilizationId:string;createdAt:number;defeatedAt?:number};
 export type Craftsman={id:string;ownerFactionId:FactionId;civilizationId:string;siteId:WildSite['id'];cityId:CityId|null;carrierArmyId:ArmyId|null;eventId:EventId|null;destinationCityId:CityId|null;arrivalAt:number|null;path:Point[];departedAt:number;constructionCommandId:string|null};
 export type ExtinctionState={extinct:FactionId[];sites:ExileSite[];craftsmen:Craftsman[];cancelledResearch:ResearchProject[];rebirths:number};
@@ -46,7 +47,7 @@ export function applyExtinctionCommand(w:FormalWorld,c:FormalCity|undefined,o:Fo
  if(p.type==='player.rebirth'){requireRule(o.issuerId===w.playerFactionId&&!w.cities.some(c=>c.ownerFactionId===o.issuerId)&&w.extinction?.extinct.includes(o.issuerId),'僅已滅國玩家可復國。');const point=rebirthCandidates(w)[p.candidate];requireRule(point,'復國候選已失效。');const f=w.factions.find(f=>f.id===o.issuerId)!;const newCity=initialCity(f.id,cityId('rebirth-'+sequenceKey(w.sequences.project++)),point.x,point.y,p.name,false,fieldDistribution(w.seed,point.x,point.y));newCity.integrationWorkHours=newCity.integrationTotalWorkHours=0;initializeCityEconomy(w,newCity,s);newCity.military=initialMilitary();newCity.autoLogistics=[];w.cities.push(newCity);w.extinction!.rebirths++;w.extinction!.extinct=w.extinction!.extinct.filter(id=>id!==f.id);f.protectionUntil=w.time+48*HOUR;invalidateSpatial(w);return;}
  requireRule(c,'城市不存在。');const craft=w.extinction?.craftsmen.find(x=>x.id===p.craftsmanId&&x.ownerFactionId===o.issuerId&&x.cityId===c.id&&!x.eventId&&!x.carrierArmyId&&!x.constructionCommandId);requireRule(craft,'工匠團不在此城待命。');
  if(p.type==='craftsman.move'){const dest=w.cities.find(c=>c.id===p.destinationCityId&&c.ownerFactionId===o.issuerId);requireRule(dest&&dest.id!==c.id,'只能轉移至另一座自有城市。');const r=route(w,c,dest);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=dest.id;craft.cityId=null;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return;}
- requireRule(craft.civilizationId!==w.factions.find(f=>f.id===o.issuerId)!.civilizationId&&!Object.keys(c.buildings).some(k=>k==='castle'||k.startsWith('castle.'))&&!c.economy?.construction.some(j=>j.target.kind==='building'&&j.target.key==='castle'),'每城只可建一座城堡，工匠須為外文明。');applyEconomyCommand(w,c,o,{type:'building.upgrade',cityId:c.id,key:'castle'},s);c.economy!.construction.find(j=>j.commandId===o.commandId)!.castleCivilizationId=craft.civilizationId;craft.constructionCommandId=o.commandId;
+ requireRule(!Object.keys(c.buildings).some(k=>k==='castle'||k.startsWith('castle.'))&&!c.economy?.construction.some(j=>j.target.kind==='building'&&j.target.key==='castle'),'每城只可建一座城堡。');applyEconomyCommand(w,c,o,{type:'building.upgrade',cityId:c.id,key:'castle'},s);c.economy!.construction.find(j=>j.commandId===o.commandId)!.castleCivilizationId=craft.civilizationId;craft.constructionCommandId=o.commandId;
 }
 export function handleCraftsmanEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler){if(e.type!=='craftsman.arrive')return false;const craft=w.extinction?.craftsmen.find(c=>c.eventId===e.id&&c.id===e.craftsmanId);if(craft){const dest=w.cities.find(c=>c.id===craft.destinationCityId&&c.ownerFactionId===craft.ownerFactionId);if(!dest){const fallback=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-craft.path.at(-1)!.x,a.y-craft.path.at(-1)!.y)-Math.hypot(b.x-craft.path.at(-1)!.x,b.y-craft.path.at(-1)!.y))[0];if(fallback){const r=route(w,craft.path.at(-1)!,fallback);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=fallback.id;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return true;}w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return true;}craft.cityId=dest.id;craft.eventId=null;craft.arrivalAt=null;craft.destinationCityId=null;craft.path=[];}return true;}
 /** Bind special work to its original applied authorization, craft, city and civilization. */
@@ -69,15 +70,26 @@ function discardCraftsmanConstruction(w:FormalWorld,c:FormalCity,job:Constructio
  if((c.buildings[key]??0)===0){delete c.buildings[key];delete e.slots[key];if(key==='castle')delete c.castleCivilizationId;}
  const retained=s.snapshot().filter(e=>!ids.has(e.id));while(s.size)s.pop();for(const event of retained)s.push(event);
 }
-function evacuateCraftsman(w:FormalWorld,craft:Craftsman,from:Point,s:EventScheduler){
- const dest=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y)||(a.id<b.id?-1:a.id>b.id?1:0))[0];
- if(!dest){w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return;}
- const r=route(w,from,dest);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=dest.id;craft.cityId=null;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});
-}
 /** Called in the same owner-transfer transition, using its active scheduler. */
 export function reconcileCityCraftsmen(w:FormalWorld,c:FormalCity,s:EventScheduler){
  for(const job of [...c.economy?.construction??[]])if(job.castleCivilizationId&&!craftsmanForConstruction(w,c,job))discardCraftsmanConstruction(w,c,job,s);
- for(const craft of [...w.extinction?.craftsmen??[]])if(craft.cityId===c.id&&craft.ownerFactionId!==c.ownerFactionId)evacuateCraftsman(w,craft,c,s);
+ if(w.extinction)w.extinction.craftsmen=w.extinction.craftsmen.filter(craft=>craft.cityId!==c.id||craft.ownerFactionId===c.ownerFactionId);
+}
+/** Successful conquest only. No new departure, refund, exile reward or sequence allocation.
+ * Already outbound/returning units are deliberately outside this city-local transition. */
+export function clearCapturedNoncombatants(w:FormalWorld,c:FormalCity,s:EventScheduler){
+ const removed=new Set<EventId>(),lostArmies=new Set<ArmyId>();
+ const clear=(units:Record<string,number>)=>{for(const id of Object.keys(units))if(['scout','logistics'].includes(UNIT_CATALOG[id]?.combatClass))delete units[id];};
+ if(c.military)clear(c.military.units);
+ const resident=w.armies.filter(isMissionArmy).filter(a=>a.status==='stationed'&&a.target.kind==='city'&&a.target.cityId===c.id||a.status==='waiting'&&a.originCityId===c.id&&a.departedAt>=w.time);
+ for(const a of resident){clear(a.units);clear(a.initialUnits);if(!Object.values(a.units).some(n=>n>0)){lostArmies.add(a.id);if(a.movementEventId)removed.add(a.movementEventId);}}
+ if(w.extinction)w.extinction.craftsmen=w.extinction.craftsmen.filter(craft=>!resident.some(a=>a.id===craft.carrierArmyId));
+ w.armies=w.armies.filter(a=>!lostArmies.has(a.id));
+ if(w.politics){for(const joint of w.politics.joints)joint.armyIds=joint.armyIds.filter(id=>!lostArmies.has(id));w.politics.joints=w.politics.joints.filter(j=>j.armyIds.length||w.combat?.battles.some(b=>b.jointId===j.id));}
+ const lost=(w.settlements??[]).filter(p=>p.sourceCityId===c.id&&p.phase!=='travelling'),projects=new Set(lost.map(p=>p.projectId));
+ for(const p of lost)removed.add(p.prepEventId);
+ w.settlements=w.settlements?.filter(p=>!projects.has(p.projectId));w.colonizationUnits=w.colonizationUnits?.filter(u=>!projects.has(u.projectId));
+ s.discard(removed);invalidateSpatial(w);
 }
 export function finishCraftsmanCastle(w:FormalWorld,c:FormalCity,command:string){
  const job=c.economy?.construction.find(j=>j.commandId===command),craft=job&&craftsmanForConstruction(w,c,job);if(!craft)return false;

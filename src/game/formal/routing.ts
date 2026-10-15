@@ -1,6 +1,8 @@
 import type {FormalWorld} from './model';
-import {passable,terrainAt} from './terrain';
+import {passable,terrainAt,terrainTravelMultiplier} from './terrain';
 type Point={x:number;y:number};
+/** Shared by path selection, military segment snapshots and strict save validation. */
+export const segmentTravelDistance=(w:FormalWorld,from:Point,to:Point)=>Math.hypot(to.x-from.x,to.y-from.y)*terrainTravelMultiplier(terrainAt(w,to.x,to.y));
 /** Indexed grid A*: explicit passability, no hard path/entity limit or illegal straight-line fallback. */
 export function route(w:FormalWorld,from:Point,to:Point):{path:Point[];distance:number} {
  const width=w.dimensions.width,start=from.y*width+from.x,goal=to.y*width+to.x;
@@ -12,8 +14,8 @@ export function route(w:FormalWorld,from:Point,to:Point):{path:Point[];distance:
  push({key:start,g:0,score:Math.hypot(from.x-to.x,from.y-to.y)});
  while(heap.length){const n=pop();if(n.g!==cost.get(n.key))continue;if(n.key===goal){const path:Point[]=[];let k=goal;while(true){path.push({x:k%width,y:Math.floor(k/width)});if(k===start)break;k=parent.get(k)!;}return{path:path.reverse(),distance:n.g};}
   const x=n.key%width,y=Math.floor(n.key/width);
-  for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(dx===0&&dy===0)continue;const nx=x+dx,ny=y+dy;if(!passable(terrainAt(w,nx,ny)))continue;if(dx&&dy&&(!passable(terrainAt(w,nx,y))||!passable(terrainAt(w,x,ny))))continue;
-   const key=ny*width+nx,g=n.g+Math.hypot(dx,dy);if(g>=(cost.get(key)??Infinity))continue;cost.set(key,g);parent.set(key,n.key);push({key,g,score:g+Math.hypot(nx-to.x,ny-to.y)});
+  for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(dx===0&&dy===0)continue;const nx=x+dx,ny=y+dy,t=terrainAt(w,nx,ny);if(!passable(t))continue;if(dx&&dy&&(!passable(terrainAt(w,nx,y))||!passable(terrainAt(w,x,ny))))continue;
+   const key=ny*width+nx,g=n.g+Math.hypot(dx,dy)*terrainTravelMultiplier(t);if(g>=(cost.get(key)??Infinity))continue;cost.set(key,g);parent.set(key,n.key);push({key,g,score:g+Math.hypot(nx-to.x,ny-to.y)});
   }
  }
  throw new Error('No traversable route');

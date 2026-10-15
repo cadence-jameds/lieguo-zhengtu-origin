@@ -9,7 +9,7 @@ import type {FormalWorld,FormalCommand} from './model';
 import {researchCity,ownSecond,build} from './developmentTestSupport';
 import {advanceOffline} from './offline';
 import {validateFormalWorld} from './schema';
-import {ClockConflictRetry} from '../interaction';
+import {playerOrderBase} from '../orderAdmission';
 import {submitFormalOrder} from './reducer';
 import {governanceBase} from '../governanceAdmission';
 import {applyWorldPatch} from '../worldStream';
@@ -29,7 +29,7 @@ beforeEach(async()=>{
 it('active Worker does not acknowledge or switch a draft until persistence resolves',async()=>{
  let finish!:(w:FormalWorld)=>void,submitted!:FormalWorld;storage.save.mockImplementation((w:FormalWorld)=>{submitted=w;return new Promise<FormalWorld>(r=>{finish=r;});});
  const cmd=order(initial,'wait',{type:'city.rename',cityId:fixtureIds.home,name:'已改名'});send({type:'command',order:cmd});await until(()=>storage.save.mock.calls.length===1);
- expect(messages).toEqual([]);finish(submitted);await until(()=>messages.some(r=>r.type==='commandAck'));
+ expect(messages).toEqual([{type:'commandReceived',commandId:cmd.commandId,requestId:undefined}]);finish(submitted);await until(()=>messages.some(r=>r.type==='commandAck'));
  expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');expect(messages.find(r=>r.type==='state')!.world.cities[0].name).toBe('已改名');
 });
 it('failed commit gives rejected ack and prior world; retry and replay only save once successfully',async()=>{
@@ -90,16 +90,14 @@ for(const speed of [1,3,6,10,50]){
   const next=messages.find(r=>r.type==='state')!.world as FormalWorld;
   expect(next.time).toBe(1550*speed);expect(next.cities[0].economy!.construction[0].startsAt).toBe(next.time);expect(next.revision).toBe(w.revision+1);expect(storage.save).toHaveBeenCalledTimes(1);expect(storage.save.mock.calls[0][2]).toBe(w.revision);expect(()=>validateFormalWorld(next)).not.toThrow();
  });
- it(`${speed}X a clock checkpoint crossed by a click retries once with the same logical command and strict current revision`,async()=>{
+ it(`${speed}X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission`,async()=>{
   const w=createFormalFixture({speed});storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
-  const original=order(w,'clock-click',{type:'city.rename',cityId:fixtureIds.home,name:'時鐘不阻擋'}),retry=new ClockConflictRetry();retry.track(original);
+  const original=order(w,'clock-click',{type:'city.rename',cityId:fixtureIds.home,name:'時鐘不阻擋'}),base=playerOrderBase(w,original.payload);
   realNow=10000;(vi.mocked(setInterval).mock.calls[0][0] as ()=>void)();await until(()=>messages.some(r=>r.type==='state'));messages=[];
-  send({type:'command',order:original});await until(()=>messages.some(r=>r.type==='commandAck'));
-  const ack=messages.find(r=>r.type==='commandAck')!.ack;expect(ack.status).toBe('rejected');retry.acknowledge(ack);
-  const s=messages.find(r=>r.type==='state')!,orders=retry.refresh(s.world,s.passiveRevisionBase);expect(orders).toHaveLength(1);expect(orders[0].commandId).toBe(original.commandId);expect(orders[0].payload).toEqual(original.payload);messages=[];
-  send({type:'command',order:orders[0]});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');
+  send({type:'command',order:original,playerBase:base});await until(()=>messages.some(r=>r.type==='commandAck'));
+  expect(messages.filter(r=>r.type==='commandAck').map(r=>r.ack.status)).toEqual(['committed']);
   const next=messages.find(r=>r.type==='state')!.world as FormalWorld;expect(next.commandReceipts).toHaveLength(1);expect(next.cities[0].name).toBe('時鐘不阻擋');
-  messages=[];send({type:'command',order:orders[0]});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(2);
+  messages=[];send({type:'command',order:original,playerBase:base});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(2);
  });
  for(const mode of ['training','research','settlement','logistics'] as const)it(`${speed}X ${mode} uses the real deadline and agrees with offline completion`,async()=>{
   const w=createFormalWorld({campaign:mode+'-'+speed,seed:90217,speed}),city=researchCity(w);let payload:FormalCommand,at:(w:FormalWorld)=>number,done:(w:FormalWorld)=>boolean;
@@ -119,9 +117,9 @@ for(const speed of [1,3,6,10,50]){
 it('a due event crossed by an original click commits first and must not auto-retry a changed intention',async()=>{
  const w=createFormalWorld({campaign:'event-click',seed:90217,speed:50});storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
  send({type:'command',order:order(w,'first',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));const started=messages.find(r=>r.type==='state')!.world as FormalWorld;
- const original=order(started,'second',{type:'field.upgrade',cityId:w.cities[0].id,slot:0}),retry=new ClockConflictRetry();retry.track(original);messages=[];
- realNow=Math.ceil((started.cities[0].economy!.construction[0].startsAt+started.cities[0].economy!.construction[0].durationMs)/50);send({type:'command',order:original});await until(()=>messages.some(r=>r.type==='commandAck'));
- const ack=messages.find(r=>r.type==='commandAck')!.ack;expect(ack.status).toBe('rejected');retry.acknowledge(ack);const state=messages.filter(r=>r.type==='state').at(-1)!;expect(retry.refresh(state.world,state.passiveRevisionBase)).toEqual([]);expect(state.world.cities[0].economy.construction).toEqual([]);
+ const original=order(started,'second',{type:'field.upgrade',cityId:w.cities[0].id,slot:0}),base=playerOrderBase(started,original.payload);messages=[];
+ realNow=Math.ceil((started.cities[0].economy!.construction[0].startsAt+started.cities[0].economy!.construction[0].durationMs)/50);send({type:'command',order:original,playerBase:base});await until(()=>messages.some(r=>r.type==='commandAck'));
+ const ack=messages.find(r=>r.type==='commandAck')!.ack;expect(ack.status).toBe('rejected');const state=messages.filter(r=>r.type==='state').at(-1)!;expect(state.world.cities[0].economy.construction).toEqual([]);expect(state.world.commandReceipts.some((r:any)=>r.commandId===original.commandId)).toBe(false);
 });
 for(const speed of [1,10,50])for(const dense of [false,true])it(`${speed}X governance bridges its own catch-up with ${dense?'100 armies':'low load'} and never duplicates payment or events`,async()=>{
  let w=createFormalWorld({campaign:'governance-'+speed+'-'+dense,seed:90217,speed});build(w.cities[0],'townhall',1);

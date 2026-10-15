@@ -1,6 +1,6 @@
 import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
-import {advanceOffline,type OfflineSummary} from './formal/offline';
+import {advanceOfflineCooperative,type OfflineSummary} from './formal/offline';
 import Dexie,{type Table} from 'dexie';
 import {z} from 'zod';
 import {isMissionArmy,type CityIntel,type BattleReportPayload} from './formal/combatModel';
@@ -71,18 +71,20 @@ export class FormalPersistence {
     if(current&&current.kind==='world'&&current.data.snapshot.campaignId!==w.campaignId)throw new Error('Campaign switch requires explicit transition');
     const required=current?authority.revision+1:0;
     if(w.revision!==required)throw new Error('Committed revision must advance exactly once');
-    for(const r of prior){const receipt=w.commandReceipts.find(x=>x.commandId===r.commandId);if(!receipt||canonicalJSON(receipt)!==canonicalJSON(r))throw new Error('Durable dedupe history cannot be dropped');}
+    const receipts=new Map(w.commandReceipts.map(r=>[r.commandId,r]));
+    for(const r of prior){const receipt=receipts.get(r.commandId);if(!receipt||canonicalJSON(receipt)!==canonicalJSON(r))throw new Error('Durable dedupe history cannot be dropped');}
    }else{
     w.commandReceipts=reconcileReceipts(w,prior);
     for(const key of ['event','report','project'] as const)w.sequences[key]=Math.max(w.sequences[key],authority.sequences[key]);
-    w.revision=Math.max(current?authority.revision+1:0,w.revision, ...w.commandReceipts.map(r=>r.committedRevision));
+    w.revision=Math.max(current?authority.revision+1:0,w.revision);
+    for(const r of w.commandReceipts)w.revision=Math.max(w.revision,r.committedRevision);
    }
    if(activateAI)enableAutonomy(w);
    const real=(at:number)=>Math.max(0,Math.floor(savedAt-(w.time-at)/effectiveSpeed(input)));
    if(mode==='save'||mode==='start')stampPending(w,real);
    const stampedReports=reportWrites.map(r=>{const copy=structuredClone(r);if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});
-   validateFormalWorld(w);validateReportHistory(w,stampedReports);
-   // Crypto promises need keep-alive while the read/write transaction owns the revision lock.
+   validateReportHistory(w,stampedReports);
+   // encodeSave fully validates the final world; crypto needs keep-alive under the revision lock.
    const envelope=await Dexie.waitFor(encodeSave(w));
    if(mode==='restore'||mode==='import'){
     const rows=await this.db.BattleReports.where('campaignId').equals(w.campaignId).toArray();
@@ -97,7 +99,7 @@ export class FormalPersistence {
    this.fault?.('report-write');
    // Two valid checkpoints; ordering uses IDB monotonic IDs, not wall-clock ordering.
    await this.db.backups.add({at:savedAt,label:mode==='restore'?'手動回復':mode==='import'?'正式匯入':mode==='start'?'B1 fixture開始':'正式回復點',campaignId:w.campaignId,gameTime:w.time,reportCursor:w.sequences.report,data:envelope});
-   const backups=await this.db.backups.orderBy('id').toArray();if(backups.length>2)await this.db.backups.bulkDelete(backups.slice(0,-2).map(r=>r.id!));
+   const backupIds=await this.db.backups.orderBy('id').primaryKeys();if(backupIds.length>2)await this.db.backups.bulkDelete(backupIds.slice(0,-2));
    this.fault?.('backup-write');
    await this.db.saves.put({id:'current',kind:'world',at:savedAt,data:envelope});this.fault?.('world-write');
    authority.revision=w.revision;authority.sequences={...w.sequences};
@@ -131,14 +133,17 @@ export class FormalPersistence {
   return{game:world!,recovered:false,savedAt:row.at};
  }
  async loadSave(){const {game,recovered}=await this.loadAnchored();return {game,recovered};}
- async loadWithOffline(now=Date.now()):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
+ async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
+  onProgress?.('read');
   const loaded=await this.loadAnchored();if(!loaded.game)return {game:null,recovered:loaded.recovered};
-  const result=advanceOffline(loaded.game,loaded.savedAt??now,now);
+  onProgress?.('offline',0,0);
+  const result=await advanceOfflineCooperative(loaded.game,loaded.savedAt??now,now,(fraction,events)=>onProgress?.('offline',fraction,events));
   // Even 0h refreshes the wall anchor atomically. Expose nothing until save resolves.
   const draft=result.world===loaded.game?{...result.world,revision:result.world.revision+1}:result.world;
   const real=(at:number)=>Math.max(0,Math.floor((loaded.savedAt??now)+(at-loaded.game!.time)/effectiveSpeed(loaded.game!)));
   stampPending(draft,real);
   const reports=result.reports.map(r=>{const copy={...r,realAt:real(r.at),clockSpeed:effectiveSpeed(loaded.game!)};if(copy.battle)stampBattle(copy.battle,real);return copy;});
+  onProgress?.('save');
   const game=await this.commit(draft,reports,'save',loaded.game.revision,now);
   return{game,recovered:loaded.recovered,summary:{...result.summary,recovered:loaded.recovered}};
  }
@@ -224,6 +229,6 @@ export const reportStatus=(world:FormalWorld)=>active().reportStatus(world);
 export const reportAction=(world:FormalWorld,action:'read'|'clear',ids?:string[],filter?:ReportFilter)=>active().reportAction(world,action,ids,filter);
 export const clearSavedGames=()=>active().clearSavedGames();
 
-export const loadWithOffline=()=>active().loadWithOffline();
+export const loadWithOffline=(onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void)=>active().loadWithOffline(Date.now(),onProgress);
 
 export const readCityIntel=(world:FormalWorld,cityId:string,generation?:number)=>active().readCityIntel(world,cityId,generation);

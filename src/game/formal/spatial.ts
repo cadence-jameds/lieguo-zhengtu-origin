@@ -22,6 +22,7 @@ export class SpatialIndex {
  reserve(x:number,y:number,id:ProjectId){const key=y*this.width+x;if(this.reservations.has(key)||this.cityCells.has(key)||this.siteCells.has(key))throw new Error('Coordinate already occupied');this.reservations.set(key,id);}
  release(x:number,y:number,id:ProjectId){const key=y*this.width+x;if(this.reservations.get(key)!==id)throw new Error('Reservation mismatch');this.reservations.delete(key);}
  owned(owner:FactionId){return [...this.ownership.get(owner)??[]].map(id=>this.cities.get(id)!);}
+ ownedCount(owner:FactionId){return this.ownership.get(owner)?.size??0;}
  visibleRegions(b:Bounds):number[]{const out:number[]=[];for(let y=Math.max(0,Math.floor(b.minY/this.regionSize));y<=Math.min(Math.ceil(this.height/this.regionSize)-1,Math.floor(b.maxY/this.regionSize));y++)for(let x=Math.max(0,Math.floor(b.minX/this.regionSize));x<=Math.min(Math.ceil(this.width/this.regionSize)-1,Math.floor(b.maxX/this.regionSize));x++)out.push(y*Math.ceil(this.width/this.regionSize)+x);return out;}
  query(b:Bounds){const cities:FormalCity[]=[],sites:WildSite[]=[];const inside=(p:{x:number;y:number})=>p.x>=b.minX&&p.x<=b.maxX&&p.y>=b.minY&&p.y<=b.maxY;
   for(const n of this.visibleRegions(b)){const r=this.regions.get(n)!;for(const id of r.cities){const c=this.cities.get(id)!;if(inside(c))cities.push(c);}for(const id of r.sites){const s=this.sites.get(id)!;if(inside(s))sites.push(s);}}

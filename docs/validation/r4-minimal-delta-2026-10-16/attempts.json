@@ -1,0 +1,60 @@
+{
+  "preserved": [
+    {
+      "attempt": "Initial npm ci",
+      "status": "FAIL",
+      "reason": "Read-only default npm cache; retry with workspace cache and supported network permissions passed."
+    },
+    {
+      "attempt": "Initial baseline probe loader",
+      "status": "FAIL",
+      "reason": "Missing public/version.json in temporary probe checkout; copy required input and rerun."
+    },
+    {
+      "attempt": "First after probes",
+      "status": "10 PASS / 4 FAIL",
+      "reason": "Ready-city normal resource settlement and diagonal corridor fixture errors; fixes preserve no-refund and water assertions."
+    },
+    {
+      "attempt": "Default sandbox full runner",
+      "status": "ERROR",
+      "reason": "Node spawnSync git EPERM; supported environment permissions used for subsequent runs."
+    },
+    {
+      "attempt": "Old fixture snapshot full runner",
+      "status": "INTERRUPTED",
+      "reason": "Additional D3 fixtures found; restarted final source snapshot; no timeout changed."
+    },
+    {
+      "attempt": "First completed full regression",
+      "status": "1249 PASS / 3 FAIL / 1 SKIP",
+      "reason": "Stale water diagnostic; captured-city scout survival assertion; dependent evidence count."
+    },
+    {
+      "attempt": "Production duplicate observer",
+      "status": "FAIL",
+      "reason": "Global world job count is unstable while AI is active. Final probe reads durable CommandId target job and canonical receipt/authority counts. Verified global jobs 67 -> 66 while target job/receipt/authority stay 1."
+    },
+    {
+      "attempt": "PR13 before probes",
+      "status": "5 PASS / 10 FAIL",
+      "reason": "Same-civilization rejection and charged Lv1 resources/AI quotes reproduced before D5 implementation."
+    },
+    {
+      "attempt": "PR13 first after probes",
+      "status": "14 PASS / 1 FAIL",
+      "reason": "Queued fixture used a free second lane; fill both legal lanes before queued-cancellation assertion."
+    },
+    {
+      "attempt": "Exec environment",
+      "status": "3 transient transport errors",
+      "reason": "Exec-server disconnected before command creation; short scripts retried without rewriting evidence."
+    },
+    {
+      "attempt": "First full after D5",
+      "status": "1268 PASS / 1 FAIL / 1 SKIP",
+      "reason": "Old R4 cross-batch AI craftsman assertion still expected a stone deduction. Updated to unchanged stock and explicit zero paidResources under user-authorized PR #13; no production change."
+    }
+  ],
+  "gate": "R4 HOLD; automated test results do not constitute Independent Gate PASS."
+}

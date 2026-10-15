@@ -1,4 +1,4 @@
-import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen} from './extinction';
+import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen,clearCapturedNoncombatants} from './extinction';
 import {canReinforce} from './armies';
 import {buildingRequirements,castleSource} from './buildingDetailData';
 import {startDemolition,completeDemolition} from './demolition';
@@ -68,7 +68,7 @@ export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const
 /** B5/B6 interface only: no combat or conquest command is implemented here. */
 export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive',scheduler?:EventScheduler){
  requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
- if(w.extinction?.craftsmen.length||c.economy?.construction.some(j=>j.castleCivilizationId)){const s=scheduler??new EventScheduler(w.events);reconcileCityCraftsmen(w,c,s);if(!scheduler)w.events=s.snapshot();}
+ if(old!==owner&&(reason==='conquest'||w.extinction?.craftsmen.length||c.economy?.construction.some(j=>j.castleCivilizationId))){const s=scheduler??new EventScheduler(w.events);reconcileCityCraftsmen(w,c,s);if(reason==='conquest')clearCapturedNoncombatants(w,c,s);if(!scheduler)w.events=s.snapshot();}
 }
 export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}
 export function addStock(c:FormalCity,resources:Resources){const cap=storageCapacity(c);for(const r of resourceKeys)c.stock[r]=Math.min(cap-(c.economy?.reservedIncoming[r]??0),c.stock[r]+resources[r]);}
@@ -145,7 +145,10 @@ export function applyEconomyCommand(w:FormalWorld,c:FormalCity,order:FormalOrder
   if(kind==='wall')requireRule(p.slot===undefined,'城牆為固定設施，不使用一般建築槽。');
   for(const requirement of buildingRequirements(w,c,kind,fromLevel+1))requireRule(requirement.met,'建築前置未達成：'+requirement.id);
   if(kind!=='center'&&kind!=='wall'&&e.slots[p.key]===undefined){const slot=p.slot??Array.from({length:15},(_,i)=>i).find(i=>!Object.values(e.slots).includes(i));requireRule(slot!==undefined&&!Object.values(e.slots).includes(slot),'自由建築槽已滿或該位置已使用。');e.slots[p.key]=slot;c.buildings[p.key]=0;}
-  paidResources=buildingCost(kind,fromLevel+1);spend(c,paidResources);durationMs=buildingDuration(kind,fromLevel+1,buildingLevel(c,'center'));target={kind:'building',key:p.key};
+  const craftOrder=order.payload.type==='craftsman.castle'?order.payload:undefined;
+  if(craftOrder)requireRule(kind==='castle'&&fromLevel===0&&w.extinction?.craftsmen.some(t=>t.id===craftOrder.craftsmanId&&t.ownerFactionId===order.issuerId&&t.cityId===c.id&&!t.carrierArmyId&&!t.eventId&&!t.constructionCommandId),'工匠城堡授權已失效。');
+  // The original validated command, never a public building payload flag, authorizes Lv1 only.
+  paidResources=craftOrder?zeroResources():buildingCost(kind,fromLevel+1);spend(c,paidResources);durationMs=buildingDuration(kind,fromLevel+1,buildingLevel(c,'center'));target={kind:'building',key:p.key};
  }
  const laneJobs=e.construction.filter(j=>j.lane===lane),startsAt=Math.max(w.time,...laneJobs.map(j=>j.startsAt+j.durationMs),...previous.map(j=>j.startsAt+j.durationMs));
  const id=enqueue(w,s,{type:'construction.complete',cityId:c.id,at:startsAt+durationMs});e.construction.push({eventId:id,commandId:order.commandId,lane,lanePreference:p.lane,target,fromLevel,toLevel:fromLevel+1,createdAt:w.time,startsAt,durationMs,qualificationHousing:c.housing,paidResources});
