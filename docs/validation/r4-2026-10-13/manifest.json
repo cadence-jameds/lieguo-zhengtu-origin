@@ -1,0 +1,294 @@
+{
+  "base": "d5c0712b2b7ad1cd580999f97918f132d57c8f21",
+  "branch": "stage2-r4-integration",
+  "Astra_Gate": "NOT_EXECUTED_NOT_DECLARED_PASS",
+  "B5_E1": "HOLD",
+  "format": "SHA256 exact file bytes; manifest itself excluded",
+  "files": [
+    {
+      "path": "docs/recovery/R4_Astra_Independent_Gate_Handoff.md",
+      "bytes": 4341,
+      "sha256": "6e935a233b540581c5e07cc61c5b004b70cc200250534ef28a4c13ed36e4605c"
+    },
+    {
+      "path": "docs/recovery/R4_Integration_Report.md",
+      "bytes": 9642,
+      "sha256": "d79849690b94624f1e2078ab752801617fc7c36d0f6be0dff3c7238c7a437a8f"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/01-production-home.png",
+      "bytes": 1112351,
+      "sha256": "6daaa4692dc3f32c49f175ebc1157be4706c69dbfd2428d42271931a00dcaa63"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/02-fair-new-campaign.png",
+      "bytes": 1896393,
+      "sha256": "b79814e0ac8b02d9830ecf86a654bc94c254691901a1c2105c29aa5130f8610a"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/03-B6-politics.png",
+      "bytes": 141594,
+      "sha256": "94ffe7fb3d10cabe83198d9870f585a2581f77ca8a81a98c3ec13e61626a5c3f"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/03b-target-politics-fixed.png",
+      "bytes": 371397,
+      "sha256": "1647fa49ce4dbc63d97e5315d6a2187914d31d474581355bf2c6d184e2b6a35e"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/04-empire-fixed.png",
+      "bytes": 1098402,
+      "sha256": "ee5ed6b425ed4091c071c8f1b220f99c65de036af0fb14a20df8967e447fcabf"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/05-governance-1-false.png",
+      "bytes": 136418,
+      "sha256": "bfb1cd79e4508b7ea73badf420b75cfb061a923cf05c9a7dabc0507880a8f873"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/05-governance-1-true.png",
+      "bytes": 136670,
+      "sha256": "ad160af8a0b1635997f69ec2698fb58c5fa32fac7360f9fc4dff2189a8a038c7"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/05-governance-10-false.png",
+      "bytes": 136192,
+      "sha256": "8140019cf671e5e5fff01da6ec5fcf3b9e3d5e2446bdcfdbb3aa87ff1bebf80d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/05-governance-10-true.png",
+      "bytes": 136726,
+      "sha256": "ce276124fb9dbdf0c9b86dcd6f797a64fd7b896e3a737da1d51c5004c051bf39"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/05-governance-50-false.png",
+      "bytes": 135686,
+      "sha256": "7992d02a64d34d421dbbf196644281aaa344bc089293fc7f2b08e436a8f0301d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/05-governance-50-true.png",
+      "bytes": 136141,
+      "sha256": "4d2fe19a4496043c8299951212eae04f52811ad9b765ca9848eaf059e322294a"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/06-stale-guard.png",
+      "bytes": 144658,
+      "sha256": "b1b2b521c0eaead0a2508d1629d0dce3491724e06b2d16fd4eb60bdfdb8541b9"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/07-recovery.png",
+      "bytes": 1887731,
+      "sha256": "df2590f62cf0433517580d15e182d6899ca2bcb6ddab9aa5362ce0eb37aa0dd0"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/08-corrupt-import-rejected.png",
+      "bytes": 164065,
+      "sha256": "0d56f2c8560c991749b5d770d1cab9fe3a2a00fee94a4ceb969cc081657cbe98"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/09-100-owner-march.png",
+      "bytes": 724081,
+      "sha256": "679228db1e55f1d35de3592f092c2fb56755e7ddb9714de54b2b3e88f884f773"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/10-AI-Lv15-siege.png",
+      "bytes": 1148434,
+      "sha256": "a34ddfac111ba83b255fb1653504f7a03a7433efcf61398f7e9634bc57c480e3"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/11-siege-reduced-motion.png",
+      "bytes": 1148455,
+      "sha256": "9377f21dee728f27bd9fcab1b12e7382681f96209db3cba58f0c11856d7c090b"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/12-siege-round11.png",
+      "bytes": 1615686,
+      "sha256": "08d27d686ea73a8584de4beed321343e1d4e1292216ac1e7894299e96877482d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/13-siege-final.png",
+      "bytes": 1703067,
+      "sha256": "9f617a97a7bf853fce629535143fbf82c4e4a8f49e2bf8b9ead43b34220e3676"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/14-final-load-no-replay.png",
+      "bytes": 1735852,
+      "sha256": "537cfe0be22e755f776866d4c3ffc8fe6dcf56761efc4b7ba03b171b4d2967ab"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/15-player-extinct.png",
+      "bytes": 38941,
+      "sha256": "0c2703d264cb577d1991fe65d2432cdb2c51d10c77ab40fb29c0d3b61ed32a02"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/16-rebirth.png",
+      "bytes": 1912999,
+      "sha256": "0cd4b6af3f94630b345dc0fe062b8258cfe98a30fd4344b3fae0877e52c88942"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/17-mobile-touch-reduced.png",
+      "bytes": 182931,
+      "sha256": "78360e8230f89de12230fddb80bfbedd0a80af3a0d5e17a00df43cb0ec53b95f"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/18-PWA-offline-home.png",
+      "bytes": 236749,
+      "sha256": "9ed919f11d4a1ab4c4817ea1bd40d9fb542125b45f3dce220916d0cada10aab2"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/attempts/browser-1.json",
+      "bytes": 24930,
+      "sha256": "ced32b3181b8147546716d813a41ef8f68bbe8be96f76e0dcb86ef1756475ddc"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/attempts/browser-recheck.json",
+      "bytes": 1508,
+      "sha256": "905aff263af8e8aacc374a87915d78cc6b7e9dcb7d1a4d7cc4cf84ce23eb7f6d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/attempts/exclusive-targeted.json",
+      "bytes": 22246,
+      "sha256": "cd1598acb310a6ae636a5030855d6bc6be13d0bcf506d74af585431bb1f007f9"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/attempts/regression-contention-summary.json",
+      "bytes": 1850,
+      "sha256": "46e8ff6cc5308615b21398a40436ebebe316290ccca0e13dc55093bfb52faf34"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/attempts/regression-contention.json",
+      "bytes": 406876,
+      "sha256": "fadceb9431f3ded78c16ca8c5911047ffa8526ca0e7640cf236b130d1c582056"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/browser.json",
+      "bytes": 25288,
+      "sha256": "cba2a592e0fdc4275da36989d4c38527c41d6f777c06ec546ecdb2766e35402d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/console.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/controlled-chain.json",
+      "bytes": 5571,
+      "sha256": "b6d97e6fb5d0f7f5e40add6539e91a7cbea7cf97a5c092a1a956bf02d68d0f43"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/controlled-persistence.json",
+      "bytes": 618,
+      "sha256": "f1d232710f630174ae30ebaa41e2ab46a63e6ff860d111b4267492b135e3691d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/controlled-targeted.txt",
+      "bytes": 1043,
+      "sha256": "dd288d5a1b5d5bdca42cfdecdabbdb522110c8e8f36de66418134761e933e9d7"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/empire-before.json",
+      "bytes": 241,
+      "sha256": "10ebe90b638186024290d8e489e973d70d46364d922f57da287c5352df9cc49c"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/empire-before.png",
+      "bytes": 1102663,
+      "sha256": "c7f34c4d69ddb2137f4ac6e761d28292c08fa4c234bbd21d1c55c589eed2d953"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/fair-12012.json",
+      "bytes": 1211,
+      "sha256": "a3eef43d22d8a12383aaeec5a38ad4536e3bdbc57eff7efea0c46898cb65b80b"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/fair-90217.json",
+      "bytes": 1221,
+      "sha256": "3260b9ed265a39e80a003e4c74aaa1620428385a884365614cb2cf72ad0838d6"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/fair-92049.json",
+      "bytes": 1218,
+      "sha256": "6b0d1a2988e0f547c01bc95244df1f189597e40422c3aa735dbf2053ab455a2e"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/pages-build.txt",
+      "bytes": 1003,
+      "sha256": "9f6a526acb2b77f279bf1ada581c6dbd7317dfc6e128f8448dc1a239fda7fcba"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/pages-path-check.txt",
+      "bytes": 86,
+      "sha256": "03ceeb59584038762b73bbb3912c459f86746d95f0a0fadeb416dc997ff3b961"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/production-build.txt",
+      "bytes": 1315,
+      "sha256": "be587b0d38dde0073eb38e0e9fa50143d45f6e18d4b161424d1d617c8c27faaf"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/regression-full.json",
+      "bytes": 400401,
+      "sha256": "2dc84ad6066af3f57bb696a72882132cbf7f35723bc67910a0ce009f6a2f9b46"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/regression-full.txt",
+      "bytes": 209,
+      "sha256": "0aaca058dd51edc3000b6cdc0ad3f9097a30cb2d2dfbf94ba0c623bfd2ab0aa2"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/scope.json",
+      "bytes": 2351,
+      "sha256": "a39e98b4c7c4aa52c2fa36c56cd573aaeb995596faa9e440840fe3ddc4b0aedd"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/summary.json",
+      "bytes": 2064,
+      "sha256": "e6b53ddcfb7231424a989eedaaaaf02721b55d56dc7af5f80e882b8b47c93df7"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/target-politics-before.json",
+      "bytes": 237,
+      "sha256": "f34e53cf20982d565efcffddaa7ed0f4ee70e56f5ec6c2f7407eb32a69972e1b"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/target-politics-before.png",
+      "bytes": 372449,
+      "sha256": "92b9af4aa088eaf0b2d84879bbc09e34064c61f34c1b5c997176425a94b2e683"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/target-politics.txt",
+      "bytes": 526,
+      "sha256": "98791be631aff5f8e20e2d80dd13d034aedff779592c07e16d90b0b9454b311d"
+    },
+    {
+      "path": "docs/validation/r4-2026-10-13/typecheck.txt",
+      "bytes": 262,
+      "sha256": "02d32dd904542eec6f44e12d9fd795059ea27ffec1fad5cf69bea5846fe8766d"
+    },
+    {
+      "path": "scripts/verify-r4-browser.mjs",
+      "bytes": 21531,
+      "sha256": "e98ad0dce60b684ba5d3a5d3df99f1032d20802264728aa5db5f53f3174d55f5"
+    },
+    {
+      "path": "src/game/FormalWorldMap.tsx",
+      "bytes": 26849,
+      "sha256": "50d19a2b685294831bf465bc8f1b0b06157bc80dc3105abaaa0d9afdc8e7644a"
+    },
+    {
+      "path": "src/game/formal/integrationR4.test.ts",
+      "bytes": 15653,
+      "sha256": "968fd83547530e7b3b68c0dedd03a8e6824c7a0545b91a24d530024f01531d8d"
+    },
+    {
+      "path": "src/game/presentation/FormalTargetPanel.tsx",
+      "bytes": 4467,
+      "sha256": "c8b301e827c5239f66e01ccd647dd7a7366edf44312cc448b3471c5cf87843fe"
+    },
+    {
+      "path": "src/game/presentation/targetPoliticsR4.test.tsx",
+      "bytes": 2361,
+      "sha256": "baad2ad07bdb2fb3da0bd6e2667e35f02e958eb90488302a27aab714b84f3cfa"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "startHead": "a8ae8aa32f1f22421963545694c77913baa46e0f",
+  "integratedMain": "7c52ab738e1ed8be2416c9e9fb95db32dceb020f",
+  "previousMain": "76d68db5ac4da0bdd87656ded56434e564cb1877",
+  "mainDelta": "only v94 document, PR #15 P0-C-7/8/9",
+  "pureMergeTree": "c2fbad31bcf851f3be9571bf065e42305a200546",
+  "specPath": "docs/b6-v94/河谷戰役_vNext_平衡重構討論_v94.md",
+  "specBlob": "8215b2324beeed230057d3164d5fab1fbbdb644c",
+  "sourceDelta": [
+    "scripts/verify-r4-review-browser.mjs",
+    "src/game/formal/battles.ts",
+    "src/game/formal/extinction.ts",
+    "src/game/formal/reviewDeltaR4.test.ts"
+  ],
+  "criticalFilesIdenticalToLatestMain": [
+    "src/game/runtime.worker.ts",
+    "src/game/persistence.ts",
+    "src/game/orderAdmission.ts",
+    "src/game/interaction.ts",
+    "src/game/useGame.ts",
+    "src/game/formal/reducer.ts",
+    "src/game/formal/scheduler.ts"
+  ],
+  "mergeConflicts": [],
+  "forcePush": false,
+  "P0CRuntime": "not implemented"
+}

@@ -1,0 +1,364 @@
+diff --git a/scripts/verify-r4-review-browser.mjs b/scripts/verify-r4-review-browser.mjs
+new file mode 100644
+index 0000000..4b141a7
+--- /dev/null
++++ b/scripts/verify-r4-review-browser.mjs
+@@ -0,0 +1,86 @@
++// Real production Worker / native IndexedDB probes. All inputs are synthetic.
++// node scripts/verify-r4-review-browser.mjs <playwright-core/index.mjs> <fixtures> <output>
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import assert from 'node:assert/strict';
++import {pathToFileURL} from 'node:url';
++const [pw,fixtures,out]=process.argv.slice(2);
++await fs.mkdir(out,{recursive:true});
++const {chromium}=await import(pathToFileURL(path.resolve(pw)).href);
++const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
++const result={browser:browser.version(),controlled:true,aiDecisionsDeferredDays:30,cases:[],errors:[]};
++async function snapshot(page){return page.evaluate(async()=>{
++ const name=(await indexedDB.databases()).find(d=>d.name?.includes('formal'))?.name;if(!name)return null;
++ const db=await new Promise((res,rej)=>{const r=indexedDB.open(name);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});
++ try{return await new Promise((res,rej)=>{const r=db.transaction('saves').objectStore('saves').get('current');r.onsuccess=()=>res(r.result?.data?.snapshot??null);r.onerror=()=>rej(r.error);});}finally{db.close();}
++});}
++for(const label of ['C1-reachable','C1-blocked','C3-true','C3-false']){
++ const expected=JSON.parse(await fs.readFile(path.join(fixtures,label+'-expected.json'),'utf8'));
++ const context=await browser.newContext({viewport:{width:1280,height:900},locale:'zh-TW',serviceWorkers:'block'});
++ await context.addInitScript(()=>{window.__reviewEvents=[];const Native=Worker;window.Worker=class extends Native{constructor(...a){super(...a);if(String(a[0]).includes('runtime.worker'))window.__reviewWorker=this;this.addEventListener('message',e=>{if(['error','switchFailed','switched'].includes(e.data.type))window.__reviewEvents.push(e.data);});}};});
++ const page=await context.newPage();page.setDefaultTimeout(20000);
++ page.on('pageerror',e=>result.errors.push({label,type:'pageerror',text:e.message}));
++ page.on('console',m=>{if(m.type()==='error')result.errors.push({label,type:'console',text:m.text()});});
++ page.on('response',r=>{if(r.status()>=400)result.errors.push({label,type:'http',status:r.status(),url:r.url()});});
++ const check=w=>{
++  assert.ok(w&&w.time>=expected.at,'world stopped before arrival');
++  assert.equal(w.autonomy.agents.length,99);
++  assert.equal(w.events.some(e=>e.id===expected.eventId),false);
++  if(expected.kind==='C3'){
++   assert.equal(w.armies.some(a=>a.id===expected.armyId),false);
++   assert.equal(w.events.some(e=>e.armyId===expected.armyId),false);
++   assert.equal(w.cities.find(c=>c.id===expected.sourceCityId).ownerFactionId,expected.ownerAfter);
++   assert.equal(w.extinction.sites.filter(s=>s.sourceFactionId===expected.originalOwner).length,0);
++   assert.equal(w.politics.joints.some(j=>j.armyIds.includes(expected.armyId)),false);return;
++  }
++  const crafts=w.extinction.craftsmen.filter(c=>c.id===expected.id);
++  assert.equal(crafts.length,expected.mode==='reachable'?1:0);
++  if(crafts.length){assert.equal(crafts[0].destinationCityId,expected.destinationCityId);assert.equal(crafts[0].cityId,null);assert.ok(crafts[0].arrivalAt>w.time);assert.equal(w.events.filter(e=>e.id===crafts[0].eventId).length,1);}
++  else assert.equal(w.events.some(e=>e.type==='craftsman.arrive'&&e.craftsmanId===expected.id),false);
++ };
++ try{
++  await page.goto(process.env.R4_REVIEW_URL??'http://127.0.0.1:4176/lieguo-zhengtu-origin/');
++  await page.locator('input[type=file]').setInputFiles(path.join(fixtures,label+'.realm-save'));
++  await page.getByRole('button',{name:'確認匯入',exact:true}).click();await page.locator('.formal-shell').waitFor();
++  let after;const end=Date.now()+20000;
++  while(Date.now()<end){after=await snapshot(page);if(after?.time>=expected.at+1000)break;await page.waitForTimeout(200);}
++  check(after);assert.equal(await page.evaluate(()=>window.__reviewEvents.some(e=>['error','switchFailed'].includes(e.type))),false);
++  const extinct=expected.kind==='C3'&&label==='C3-false';
++  if(extinct){
++   // The legitimate RebirthView has no settings navigation. Exercise the same
++   // native Worker API directly, without adding a product shortcut or editing DB.
++   const call=async(type,extra={})=>page.evaluate(({type,extra})=>new Promise((resolve,reject)=>{
++    const worker=window.__reviewWorker;if(!worker){reject(Error('runtime Worker unavailable'));return;}
++    const requestId='review-'+crypto.randomUUID(),transitionId=requestId;
++    const expected={sync:'synced',load:'loaded',backups:'backups',restore:'switched'}[type];
++    const timer=setTimeout(()=>{worker.removeEventListener('message',listener);reject(Error(type+' response timeout'));},20000);
++    function listener(e){const d=e.data;if(d.type===expected&&(type!=='sync'||d.requestId===requestId)&&(type!=='restore'||d.transitionId===transitionId)){clearTimeout(timer);worker.removeEventListener('message',listener);resolve(d);}}
++    worker.addEventListener('message',listener);worker.postMessage({type,requestId,transitionId,...extra});
++   }),{type,extra});
++   await call('sync');await call('load');const reload=await snapshot(page);check(reload);
++   const backups=await call('backups');assert.ok(backups.items.length);
++   await call('restore',{id:backups.items[0].id});const recovered=await snapshot(page);check(recovered);assert.ok(recovered.revision>reload.revision);
++   assert.equal(await page.evaluate(()=>window.__reviewEvents.some(e=>['error','switchFailed'].includes(e.type))),false);
++   await page.screenshot({path:path.join(out,label+'.png'),fullPage:true});
++   result.cases.push({label,status:'PASS',worldAfter:after.time,reload:true,recovery:true,recoveryRevision:recovered.revision,realWorker:true,nativeIndexedDB:true,agents:99,recoveryPath:'native Worker sync/load/backups/restore; RebirthView has no settings nav'});
++   continue;
++  }
++  await page.locator('nav[aria-label="遊戲主要功能"] button').filter({hasText:'戰役設定'}).click();
++  await page.getByRole('button',{name:'立即保存',exact:true}).click();
++  await page.getByRole('button',{name:'重新讀取',exact:true}).click();await page.locator('.formal-shell').waitFor();await page.waitForTimeout(800);
++  const reload=await snapshot(page);check(reload);assert.ok(reload.revision>=after.revision);
++  const switches=await page.evaluate(()=>window.__reviewEvents.filter(e=>e.type==='switched').length);
++  await page.getByRole('button',{name:'查看回復點',exact:true}).click();await page.locator('.backup-list button').first().click();
++  await page.getByRole('button',{name:'確認回復',exact:true}).click();
++  await page.waitForFunction(n=>window.__reviewEvents.filter(e=>e.type==='switched').length>n,switches);await page.locator('.formal-shell').waitFor();
++  const recovered=await snapshot(page);check(recovered);assert.ok(recovered.revision>reload.revision);
++  assert.equal(await page.evaluate(()=>window.__reviewEvents.some(e=>['error','switchFailed'].includes(e.type))),false);
++  await page.screenshot({path:path.join(out,label+'.png'),fullPage:true});
++  result.cases.push({label,status:'PASS',worldAfter:after.time,reload:true,recovery:true,recoveryRevision:recovered.revision,realWorker:true,nativeIndexedDB:true,agents:99});
++ }catch(e){result.cases.push({label,status:'FAIL',error:String(e)});await page.screenshot({path:path.join(out,label+'-FAIL.png'),fullPage:true}).catch(()=>{});}
++ finally{await context.close();}
++ console.log(JSON.stringify(result.cases.at(-1)));
++}
++await browser.close();result.passed=result.cases.filter(c=>c.status==='PASS').length;result.failed=result.cases.length-result.passed;
++await fs.writeFile(path.join(out,'browser.json'),JSON.stringify(result,null,2));
++if(result.failed||result.errors.length)process.exitCode=1;
+diff --git a/src/game/formal/battles.ts b/src/game/formal/battles.ts
+index 5e8ca6b..b2692d3 100644
+--- a/src/game/formal/battles.ts
++++ b/src/game/formal/battles.ts
+@@ -1,5 +1,5 @@
+ import {rememberBattle,memoryFor} from './aiKnowledge';
+-import {defeatExile,deliverCraftsmen,type ExileSite} from './extinction';
++import {defeatExile,deliverCraftsmen,discardCapturedArmies,type ExileSite} from './extinction';
+ import {conquestOwner,legionOf,empireOf} from './politics';
+ import {wildSiteName} from './wildSiteNames';
+ import {proportionalResources} from './banditLoot';
+@@ -145,7 +145,10 @@ export function handleCombatEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler):
+  if(!['army.depart','army.arrive','army.return','combat.round','wild.respawn'].includes(e.type))return null;w.combat??=initialCombat();
+  if(e.type==='wild.respawn'){const site=w.worldLayer?.wildSites.find(site=>site.id===e.siteId);if(site?.phase==='cooldown'&&site.generation===e.generation&&site.respawnEventId===e.id&&site.respawnAt===e.at)respawnWild(w,site);return[];}
+  if(e.type==='combat.round'){const b=w.combat.battles.find(b=>b.id===e.battleId);if(!b||b.roundEventId!==e.id||b.nextRoundAt!==e.at)return[];b.roundEventId=null;return resolveCombatRound(w,b,e,s);}
+- if(e.type==='army.depart'){const a=w.armies.find(a=>a.id===e.armyId);if(a&&isMissionArmy(a)&&a.status==='waiting'&&a.movementEventId===e.id&&a.departedAt===e.at){a.status='outbound';a.movementEventId=enqueue(w,s,{type:'army.arrive',armyId:a.id,at:a.arrivalAt});invalidateSpatial(w);}return[];}
++ if(e.type==='army.depart'){const a=w.armies.find(a=>a.id===e.armyId);if(a&&isMissionArmy(a)&&a.status==='waiting'&&a.movementEventId===e.id&&a.departedAt===e.at){
++  if(!w.cities.some(c=>c.id===a.originCityId&&c.ownerFactionId===a.ownerFactionId)||w.extinction?.extinct.includes(a.ownerFactionId)){discardCapturedArmies(w,[a],s);return[];}
++  a.status='outbound';a.movementEventId=enqueue(w,s,{type:'army.arrive',armyId:a.id,at:a.arrivalAt});invalidateSpatial(w);
++ }return[];}
+  if(e.type!=='army.arrive'&&e.type!=='army.return')return[];
+  const a=w.armies.find(a=>a.id===e.armyId);if(!a||!isMissionArmy(a)||a.movementEventId!==e.id||a.arrivalAt!==e.at)return[];a.position={...a.path.at(-1)!};a.movementEventId=null;
+  if(e.type==='army.return'){const c=a.returnCityId&&spatial(w).cities.get(a.returnCityId);const original=spatial(w).cities.get(a.originCityId);if(!c||c.ownerFactionId!==a.ownerFactionId||a.returnCityId!==a.originCityId&&original?.ownerFactionId===a.ownerFactionId){returnArmy(w,a,s);return[];}settleFaction(w,a.ownerFactionId);for(const [id,n] of Object.entries(a.units))c.military!.units[id]=(c.military!.units[id]??0)+n;addStock(c,a.cargo);const returnedToOrigin=c.id===a.originCityId;a.originCityId=c.id;const reports:FormalReport[]=[];
+diff --git a/src/game/formal/extinction.ts b/src/game/formal/extinction.ts
+index 5faf779..326fd05 100644
+--- a/src/game/formal/extinction.ts
++++ b/src/game/formal/extinction.ts
+@@ -49,7 +49,23 @@ export function applyExtinctionCommand(w:FormalWorld,c:FormalCity|undefined,o:Fo
+  if(p.type==='craftsman.move'){const dest=w.cities.find(c=>c.id===p.destinationCityId&&c.ownerFactionId===o.issuerId);requireRule(dest&&dest.id!==c.id,'只能轉移至另一座自有城市。');const r=route(w,c,dest);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=dest.id;craft.cityId=null;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return;}
+  requireRule(!Object.keys(c.buildings).some(k=>k==='castle'||k.startsWith('castle.'))&&!c.economy?.construction.some(j=>j.target.kind==='building'&&j.target.key==='castle'),'每城只可建一座城堡。');applyEconomyCommand(w,c,o,{type:'building.upgrade',cityId:c.id,key:'castle'},s);c.economy!.construction.find(j=>j.commandId===o.commandId)!.castleCivilizationId=craft.civilizationId;craft.constructionCommandId=o.commandId;
+ }
+-export function handleCraftsmanEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler){if(e.type!=='craftsman.arrive')return false;const craft=w.extinction?.craftsmen.find(c=>c.eventId===e.id&&c.id===e.craftsmanId);if(craft){const dest=w.cities.find(c=>c.id===craft.destinationCityId&&c.ownerFactionId===craft.ownerFactionId);if(!dest){const fallback=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-craft.path.at(-1)!.x,a.y-craft.path.at(-1)!.y)-Math.hypot(b.x-craft.path.at(-1)!.x,b.y-craft.path.at(-1)!.y))[0];if(fallback){const r=route(w,craft.path.at(-1)!,fallback);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=fallback.id;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return true;}w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return true;}craft.cityId=dest.id;craft.eventId=null;craft.arrivalAt=null;craft.destinationCityId=null;craft.path=[];}return true;}
++export function handleCraftsmanEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler){
++ if(e.type!=='craftsman.arrive')return false;
++ const craft=w.extinction?.craftsmen.find(c=>c.eventId===e.id&&c.id===e.craftsmanId);if(!craft)return true;
++ const dest=w.cities.find(c=>c.id===craft.destinationCityId&&c.ownerFactionId===craft.ownerFactionId);
++ if(!dest){
++  const from=craft.path.at(-1)!,candidates=[...spatial(w).owned(craft.ownerFactionId)].sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y)||(a.id<b.id?-1:a.id>b.id?1:0));
++  for(const fallback of candidates){
++   let r:ReturnType<typeof route>;
++   try{r=route(w,from,fallback);}catch(error){if(error instanceof Error&&error.message==='No traversable route')continue;throw error;}
++   craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=fallback.id;
++   craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return true;
++  }
++  // No legal continuation: retire only this craftsman, without refunds or rewards.
++  w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);s.discard(new Set([e.id]));return true;
++ }
++ craft.cityId=dest.id;craft.eventId=null;craft.arrivalAt=null;craft.destinationCityId=null;craft.path=[];return true;
++}
+ /** Bind special work to its original applied authorization, craft, city and civilization. */
+ export function craftsmanForConstruction(w:FormalWorld,c:FormalCity,job:Construction){
+  if(job.target.kind!=='building'||job.target.key!=='castle'||!job.castleCivilizationId)return undefined;
+@@ -75,6 +91,15 @@ export function reconcileCityCraftsmen(w:FormalWorld,c:FormalCity,s:EventSchedul
+  for(const job of [...c.economy?.construction??[]])if(job.castleCivilizationId&&!craftsmanForConstruction(w,c,job))discardCraftsmanConstruction(w,c,job,s);
+  if(w.extinction)w.extinction.craftsmen=w.extinction.craftsmen.filter(craft=>craft.cityId!==c.id||craft.ownerFactionId===c.ownerFactionId);
+ }
++/** Owner-approved capture cleanup: no replacement army, exile, refund or award. */
++export function discardCapturedArmies(w:FormalWorld,armies:readonly MissionArmy[],s:EventScheduler){
++ if(!armies.length)return;
++ const ids=new Set(armies.map(a=>a.id)),events=new Set(armies.flatMap(a=>a.movementEventId?[a.movementEventId]:[]));
++ w.armies=w.armies.filter(a=>!ids.has(a.id));
++ if(w.extinction)w.extinction.craftsmen=w.extinction.craftsmen.filter(c=>!c.carrierArmyId||!ids.has(c.carrierArmyId));
++ if(w.politics){for(const joint of w.politics.joints)joint.armyIds=joint.armyIds.filter(id=>!ids.has(id));w.politics.joints=w.politics.joints.filter(j=>j.armyIds.length||w.combat?.battles.some(b=>b.jointId===j.id));}
++ s.discard(events);invalidateSpatial(w);
++}
+ /** Successful conquest only. No new departure, refund, exile reward or sequence allocation.
+  * Already outbound/returning units are deliberately outside this city-local transition. */
+ export function clearCapturedNoncombatants(w:FormalWorld,c:FormalCity,s:EventScheduler){
+@@ -82,10 +107,9 @@ export function clearCapturedNoncombatants(w:FormalWorld,c:FormalCity,s:EventSch
+  const clear=(units:Record<string,number>)=>{for(const id of Object.keys(units))if(['scout','logistics'].includes(UNIT_CATALOG[id]?.combatClass))delete units[id];};
+  if(c.military)clear(c.military.units);
+  const resident=w.armies.filter(isMissionArmy).filter(a=>a.status==='stationed'&&a.target.kind==='city'&&a.target.cityId===c.id||a.status==='waiting'&&a.originCityId===c.id&&a.departedAt>=w.time);
+- for(const a of resident){clear(a.units);clear(a.initialUnits);if(!Object.values(a.units).some(n=>n>0)){lostArmies.add(a.id);if(a.movementEventId)removed.add(a.movementEventId);}}
++ for(const a of resident){clear(a.units);clear(a.initialUnits);if(a.status==='waiting'||!Object.values(a.units).some(n=>n>0))lostArmies.add(a.id);}
+  if(w.extinction)w.extinction.craftsmen=w.extinction.craftsmen.filter(craft=>!resident.some(a=>a.id===craft.carrierArmyId));
+- w.armies=w.armies.filter(a=>!lostArmies.has(a.id));
+- if(w.politics){for(const joint of w.politics.joints)joint.armyIds=joint.armyIds.filter(id=>!lostArmies.has(id));w.politics.joints=w.politics.joints.filter(j=>j.armyIds.length||w.combat?.battles.some(b=>b.jointId===j.id));}
++ discardCapturedArmies(w,resident.filter(a=>lostArmies.has(a.id)),s);
+  const lost=(w.settlements??[]).filter(p=>p.sourceCityId===c.id&&p.phase!=='travelling'),projects=new Set(lost.map(p=>p.projectId));
+  for(const p of lost)removed.add(p.prepEventId);
+  w.settlements=w.settlements?.filter(p=>!projects.has(p.projectId));w.colonizationUnits=w.colonizationUnits?.filter(u=>!projects.has(u.projectId));
+diff --git a/src/game/formal/reviewDeltaR4.test.ts b/src/game/formal/reviewDeltaR4.test.ts
+new file mode 100644
+index 0000000..76efb89
+--- /dev/null
++++ b/src/game/formal/reviewDeltaR4.test.ts
+@@ -0,0 +1,185 @@
++import 'fake-indexeddb/auto';
++import {afterEach,it,expect} from 'vitest';
++import {craftWorld} from './gateDeltaTestSupport';
++import {battlefield,issue,dispatch} from './combatTestSupport';
++import {build} from './developmentTestSupport';
++import {advanceFormal} from './reducer';
++import {changeCityOwner,HOUR} from './economy';
++import {EventScheduler} from './scheduler';
++import {isMissionArmy} from './combatModel';
++import {invalidateSpatial} from './spatial';
++import {route} from './routing';
++import {validateFormalWorld} from './schema';
++import type {FormalWorld} from './model';
++import {handleCraftsmanEvent} from './extinction';
++import {handleCombatEvent} from './battles';
++import {encodeSave,decodeSave} from './saveCodec';
++import {FormalPersistence} from '../persistence';
++import {enableAutonomy} from './autonomy';
++import {mkdirSync,writeFileSync} from 'node:fs';
++import {join} from 'node:path';
++const stores:FormalPersistence[]=[];
++afterEach(async()=>{for(const db of stores.splice(0))await db.db.delete();});
++const store=()=>{const db=new FormalPersistence({suffix:'r4-review-'+crypto.randomUUID()});stores.push(db);return db;};
++const normalize=(w:FormalWorld)=>{const v=structuredClone(w);v.revision=0;for(const r of v.commandReceipts)r.committedRevision=0;return v;};
++async function browserFixture(label:string,fixture:FormalWorld,expected:object){
++ if(!process.env.R4_REVIEW_FIXTURES)return;
++ enableAutonomy(fixture);fixture.offlineHours=0;
++ for(const agent of fixture.autonomy!.agents)if(agent.eventId){agent.nextAt=fixture.time+30*86400000;fixture.events.find(e=>e.id===agent.eventId)!.at=agent.nextAt;}
++ fixture.events=new EventScheduler(fixture.events).snapshot();validateFormalWorld(fixture);
++ mkdirSync(process.env.R4_REVIEW_FIXTURES,{recursive:true});
++ writeFileSync(join(process.env.R4_REVIEW_FIXTURES,label+'.realm-save'),JSON.stringify(await encodeSave(fixture)));
++ writeFileSync(join(process.env.R4_REVIEW_FIXTURES,label+'-expected.json'),JSON.stringify(expected));
++}
++
++function conquer(w:FormalWorld,index:number){const s=new EventScheduler(w.events);changeCityOwner(w,w.cities[index],w.factions[4].id,'conquest',s);w.events=s.snapshot();return w;}
++export function movingCraft(mode:'reachable'|'blocked'|'extinct',speed:1|10|50=1){
++ let w=craftWorld();w.speed=speed;
++ // Static synthetic terrain: all original cities/sites remain legal. Mountain rings
++ // exist before dispatch, outside its path, and only enclose fallback destinations.
++ w.worldLayer!.terrain='L'.repeat(384*384);w.worldLayer!.mountains!.sprites=[];
++ const points=[{x:2,y:10},{x:12,y:10},{x:14,y:10},{x:20,y:10}];
++ for(let i=0;i<4;i++)Object.assign(w.cities[i],points[i]);invalidateSpatial(w);
++ if(mode!=='extinct')for(const i of [2,3])changeCityOwner(w,w.cities[i],w.playerFactionId,'receive');
++ const terrain=w.worldLayer!.terrain.split('');
++ for(const i of mode==='blocked'?[2,3]:mode==='reachable'?[2]:[])for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(dx||dy)terrain[(points[i].y+dy)*384+points[i].x+dx]='M';
++ w.worldLayer!.terrain=terrain.join('');invalidateSpatial(w);
++ const id=w.extinction!.craftsmen[0].id;
++ w=issue(w,{type:'craftsman.move',cityId:w.cities[0].id,craftsmanId:id,destinationCityId:w.cities[1].id}).world;
++ const arrival=w.extinction!.craftsmen[0].arrivalAt!,eventId=w.extinction!.craftsmen[0].eventId!;
++ conquer(w,0);conquer(w,1);validateFormalWorld(w);
++ return {world:w,id,arrival,eventId};
++}
++it.each(['reachable','blocked','extinct'] as const)('R4-C1 lost craftsman destination: %s does not abort the world',async mode=>{
++ const {world:w,id,arrival,eventId}=movingCraft(mode);
++ if(mode!=='extinct')expect(()=>route(w,w.cities[1],w.cities[2])).toThrow('No traversable route');
++ if(mode==='reachable')expect(()=>route(w,w.cities[1],w.cities[3])).not.toThrow();
++ const beforeSites=structuredClone(w.extinction!.sites),receipts=structuredClone(w.commandReceipts);
++ const t=advanceFormal(w,arrival),next=t.world;
++ expect(next.events.some(e=>e.id===eventId)).toBe(false);
++ if(mode==='reachable'){
++  const craft=next.extinction!.craftsmen.find(c=>c.id===id)!;
++  expect(craft).toMatchObject({cityId:null,destinationCityId:w.cities[3].id,departedAt:arrival});
++  expect(craft.arrivalAt).toBeGreaterThan(arrival);
++  const done=advanceFormal(next,craft.arrivalAt!);expect(done.world.extinction!.craftsmen.find(c=>c.id===id)?.cityId).toBe(w.cities[3].id);
++ }else{expect(next.extinction!.craftsmen.some(c=>c.id===id)).toBe(false);expect(next.events.some(e=>e.type==='craftsman.arrive'&&e.craftsmanId===id)).toBe(false);}
++ expect(next.extinction!.sites).toEqual(beforeSites);expect(next.commandReceipts).toEqual(receipts);validateFormalWorld(next);
++ if(process.env.R4_REVIEW_FIXTURES&&mode!=='extinct'){
++  await browserFixture('C1-'+mode,advanceFormal(w,arrival-4000).world,{kind:'C1',mode,id,eventId,at:arrival,destinationCityId:w.cities[3].id});
++ }
++});
++it.each(['reachable','blocked','extinct'] as const)('R4-C1 arrival handler alone retires/redirects once without refunds, rewards or stale-ID reuse: %s',mode=>{
++ const {world:w,id,arrival,eventId}=movingCraft(mode),event=w.events.find(e=>e.id===eventId)!;
++ w.time=arrival;const s=new EventScheduler(w.events.filter(e=>e.id!==eventId));
++ const stocks=structuredClone(w.cities.map(c=>c.stock)),sites=structuredClone(w.extinction!.sites),sequences={...w.sequences};
++ expect(handleCraftsmanEvent(w,event,s)).toBe(true);w.events=s.snapshot();
++ expect(w.cities.map(c=>c.stock)).toEqual(stocks);expect(w.extinction!.sites).toEqual(sites);
++ expect(w.sequences).toEqual({...sequences,event:sequences.event+(mode==='reachable'?1:0)});
++ expect(w.extinction!.craftsmen.filter(c=>c.id===id)).toHaveLength(mode==='reachable'?1:0);
++ const before=structuredClone(w);handleCraftsmanEvent(w,event,s);w.events=s.snapshot();expect(w).toEqual(before);
++});
++it.each([1,10,50] as const)('R4-C1 %sX SaveLoad, full import, Recovery and sliced continuation remain equivalent',async speed=>{
++ for(const mode of ['reachable','blocked','extinct'] as const){
++  const {world:initial,id,arrival}=movingCraft(mode,speed),db=store(),copy=store();
++  const w=await db.start((await decodeSave(await encodeSave(initial))).world),backup=(await db.backupList())[0];
++  const end=arrival+HOUR,direct=advanceFormal(w,end),first=advanceFormal(w,arrival-1),last=advanceFormal(first.world,end);
++  expect(normalize(last.world)).toEqual(normalize(direct.world));expect([...first.reports,...last.reports]).toEqual(direct.reports);
++  const saved=await db.save(direct.world,direct.reports,w.revision);
++  expect((await db.loadSave()).game).toEqual(saved);
++  const imported=await copy.importSave(await db.exportStoredSave('full'));expect(imported.extinction).toEqual(saved.extinction);
++  const restored=await db.restore(backup.id);
++  // Recovery deliberately keeps durable ID high-water marks; it must not rewind
++  // sequences to make its newly allocated event IDs equal the abandoned future.
++  expect({...restored,revision:w.revision,sequences:w.sequences,commandReceipts:w.commandReceipts}).toEqual(w);
++  expect(restored.revision).toBeGreaterThan(saved.revision);expect(restored.sequences).toEqual(saved.sequences);
++  const expected=advanceFormal({...structuredClone(w),revision:restored.revision,sequences:{...saved.sequences},commandReceipts:restored.commandReceipts},end);
++  const replayed=advanceFormal(restored,end),again=await db.save(replayed.world,replayed.reports,restored.revision);
++  expect(normalize(again)).toEqual(normalize(expected.world));expect(advanceFormal(again,end).reports).toEqual([]);
++  expect(again.extinction!.craftsmen.filter(c=>c.id===id)).toHaveLength(mode==='reachable'?1:0);validateFormalWorld(again);
++ }
++});
++
++export function waitingJoint(secondCity:boolean,speed:1|10|50=1){
++ let w=battlefield();w.speed=speed;w.factions[0].age=2;build(w.cities[0],'embassy',14);
++ if(secondCity)changeCityOwner(w,w.cities[3],w.playerFactionId,'receive');
++ w.cities[0].military!.units={militia:10,scout:3,baggage:2};
++ w=issue(w,{type:'politics',cityId:w.cities[0].id,action:'legion-create',name:'來源失守負向測試'}).world;
++ w=issue(w,{type:'joint.create',cityId:w.cities[0].id,targetCityId:w.cities[1].id,units:{militia:10,scout:3,baggage:2},arrivalAt:w.time+HOUR}).world;
++ const a=structuredClone(w.armies.filter(isMissionArmy)[0]);expect(a.status).toBe('waiting');
++ w.cities[2].military!.units={militia:1000};w=dispatch(w,'conquest',{militia:1000},2,0).world;
++ const captureAt=w.armies.filter(isMissionArmy).find(x=>x.ownerFactionId===w.factions[2].id)!.arrivalAt;
++ expect(captureAt).toBeLessThan(a.departedAt);
++ return {world:w,waiting:a,captureAt};
++}
++it.each([true,false])('R4-C3 lost source cannot dispatch a waiting mixed joint; other city=%s',async second=>{
++ const {world:w,waiting:a,captureAt}=waitingJoint(second);
++ const captured=advanceFormal(w,captureAt).world;expect(captured.cities[0].ownerFactionId).toBe(w.factions[2].id);
++ const resident=captured.armies.filter(isMissionArmy).find(x=>x.id===a.id);
++ expect(resident?.units.scout??0).toBe(0);expect(resident?.units.baggage??0).toBe(0);
++ expect(resident).toBeUndefined();
++ expect(captured.extinction?.sites.filter(s=>s.sourceFactionId===a.ownerFactionId)??[]).toEqual([]);
++ expect(captured.politics!.joints.some(j=>j.armyIds.includes(a.id))).toBe(false);
++ expect(captured.events.some(e=>e.id===a.movementEventId)).toBe(false);
++ const after=advanceFormal(captured,a.departedAt+1).world;
++ expect(after.armies.filter(isMissionArmy).some(x=>x.id===a.id&&x.status==='outbound')).toBe(false);
++ expect(after.events.some(e=>e.type==='army.depart'&&e.armyId===a.id)).toBe(false);validateFormalWorld(after);
++ if(process.env.R4_REVIEW_FIXTURES)await browserFixture('C3-'+second,advanceFormal(w,captureAt-4000).world,{kind:'C3',at:captureAt,armyId:a.id,sourceCityId:w.cities[0].id,ownerAfter:w.factions[2].id,originalOwner:a.ownerFactionId,eventId:a.movementEventId});
++});
++it.each([true,false])('R4-C3 capture preserves already departed troops under existing survival/extinction rules; other city=%s',second=>{
++ let {world:w,waiting:a,captureAt}=waitingJoint(second);
++ w.cities[0].military!.units={militia:3};
++ w=dispatch(w,'raid',{militia:3},0,4).world;
++ const departed=structuredClone(w.armies.filter(isMissionArmy).find(x=>x.id!==a.id&&x.ownerFactionId===a.ownerFactionId)!);
++ expect(departed.status).toBe('outbound');expect(departed.arrivalAt).toBeGreaterThan(captureAt);
++ const end=advanceFormal(w,captureAt).world;
++ expect(end.armies.some(x=>x.id===a.id)).toBe(false);
++ if(second)expect(end.armies.find(x=>x.id===departed.id)).toEqual(departed);
++ else{expect(end.armies.some(x=>x.id===departed.id)).toBe(false);expect(end.extinction!.sites.filter(s=>s.sourceFactionId===a.ownerFactionId).map(s=>s.defenders)).toEqual([{militia:3}]);}
++ validateFormalWorld(end);
++});
++it.each([-1,0,1])('R4-C3 departure at capture %+d ms obeys existing priorities; no retroactive death',offset=>{
++ const {world:w,waiting:before,captureAt}=waitingJoint(true),a=w.armies.filter(isMissionArmy).find(x=>x.id===before.id)!,travel=a.arrivalAt-a.departedAt;
++ a.departedAt=captureAt+offset;a.arrivalAt=a.departedAt+travel;
++ w.events.find(e=>e.id===a.movementEventId)!.at=a.departedAt;w.politics!.joints[0].arrivalAt=a.arrivalAt;
++ w.events=new EventScheduler(w.events).snapshot();validateFormalWorld(w);
++ const end=advanceFormal(w,captureAt).world,resident=end.armies.filter(isMissionArmy).find(x=>x.id===a.id);
++ if(offset<=0){expect(resident).toMatchObject({status:'outbound',units:{militia:10,scout:3,baggage:2}});}
++ else{expect(resident).toBeUndefined();expect(end.events.some(e=>e.id===a.movementEventId)).toBe(false);}
++ validateFormalWorld(end);
++});
++it('R4-C3 departure handler rejects a stale legacy waiting army after ownership loss, without grants or sequence allocation',()=>{
++ const {world:w,waiting:a}=waitingJoint(true),event=w.events.find(e=>e.id===a.movementEventId)!;
++ // Deliberately bypass capture cleanup to verify the handler's independent guard.
++ w.cities[0].ownerFactionId=w.factions[2].id;invalidateSpatial(w);w.time=event.at;
++ const s=new EventScheduler(w.events.filter(e=>e.id!==event.id)),stock=structuredClone(w.cities.map(c=>c.stock)),sequences={...w.sequences};
++ expect(handleCombatEvent(w,event,s)).toEqual([]);w.events=s.snapshot();
++ expect(w.armies.some(x=>x.id===a.id)).toBe(false);expect(w.events.some(e=>'armyId' in e&&e.armyId===a.id)).toBe(false);
++ expect(w.politics!.joints.some(j=>j.armyIds.includes(a.id))).toBe(false);
++ expect(w.cities.map(c=>c.stock)).toEqual(stock);expect(w.sequences).toEqual(sequences);expect(w.extinction?.sites??[]).toEqual([]);
++ const before=structuredClone(w);handleCombatEvent(w,event,s);w.events=s.snapshot();expect(w).toEqual(before);
++});
++it('R4-C3 removing one waiting participant preserves the surviving joint member and cannot transfer the lost source back',()=>{
++ let {world:w,waiting:a,captureAt}=waitingJoint(true);w.cities[3].military!.units={militia:3};
++ w=issue(w,{type:'joint.join',cityId:w.cities[3].id,jointId:a.jointId!,units:{militia:3}}).world;
++ const other=w.armies.filter(isMissionArmy).find(x=>x.id!==a.id&&x.ownerFactionId===a.ownerFactionId)!;
++ const end=advanceFormal(w,captureAt).world;
++ expect(end.politics!.joints.find(j=>j.id===a.jointId)!.armyIds).toEqual([other.id]);
++ expect(end.cities[0].ownerFactionId).toBe(w.factions[2].id);expect(end.armies.some(x=>x.id===a.id)).toBe(false);validateFormalWorld(end);
++});
++it.each([1,10,50] as const)('R4-C3 %sX SaveLoad / full import / Recovery / sliced battle clear waiting forces only once',async speed=>{
++ for(const second of [true,false]){
++  const {world:initial,waiting:a,captureAt}=waitingJoint(second,speed),db=store(),copy=store();
++  const w=await db.start((await decodeSave(await encodeSave(initial))).world),backup=(await db.backupList())[0],end=a.departedAt+1;
++  const direct=advanceFormal(w,end),first=advanceFormal(w,captureAt-1),last=advanceFormal(first.world,end);
++  expect(normalize(last.world)).toEqual(normalize(direct.world));expect([...first.reports,...last.reports]).toEqual(direct.reports);
++  const saved=await db.save(direct.world,direct.reports,w.revision),imported=await copy.importSave(await db.exportStoredSave('full'));
++  expect(imported.armies).toEqual(saved.armies);expect(imported.extinction).toEqual(saved.extinction);
++  expect((await db.loadSave()).game).toEqual(saved);
++  const restored=await db.restore(backup.id),replay=advanceFormal(restored,end),again=await db.save(replay.world,replay.reports,restored.revision);
++  expect(again.armies.some(x=>x.id===a.id)).toBe(false);expect(again.events.some(e=>'armyId' in e&&e.armyId===a.id)).toBe(false);
++  expect(again.extinction?.sites.filter(s=>s.sourceFactionId===a.ownerFactionId)??[]).toEqual([]);
++  expect(again.combat!.receipts.filter(r=>r.kind==='final'&&r.outcome==='conquered')).toHaveLength(1);
++  expect((await db.readReportPage(again)).rows).toHaveLength(1);expect(advanceFormal(again,end).reports).toEqual([]);
++  expect(again.revision).toBeGreaterThan(saved.revision);validateFormalWorld(again);
++ }
++});

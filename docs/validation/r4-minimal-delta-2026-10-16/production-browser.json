@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "mode": "production build",
+  "environment": {
+    "browser": "154.0.8037.57",
+    "os": "Linux x64 managed container",
+    "cpuQuotaCores": 2,
+    "memoryLimitGiB": 8,
+    "headless": true,
+    "nativeIndexedDB": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "provenance": {
+    "sourceTreeHash": "81dbacbbecd1618d43a2d1e7e8863592834d2268bd6033fa52ed71e30a7a2e13",
+    "workerBundleHash": "fc35e958f1b765cf84906a2daf191d2fc034f98f4c7cb0cf55c1189ea9a930bc",
+    "observations": "Served existing production dist. Worker prefix adds controlled Date.now and receipt/IDB/postMessage telemetry only. Main Worker/DOM observer. Service workers blocked to avoid cache. UI import and private current savedAt injection precede actual six-hour UI load."
+  },
+  "load": {
+    "elapsedMs": 15154,
+    "events": 19730,
+    "offline": {
+      "elapsedRealMs": 21600000,
+      "advancedRealMs": 21600000,
+      "advancedWorldMs": 216000000,
+      "capHours": 6,
+      "buildingsCompleted": 0,
+      "unitsTrained": 9,
+      "technologiesCompleted": 0,
+      "citiesFounded": 0,
+      "populationChange": 8.506776795562473,
+      "recovered": false
+    },
+    "aiAgents": 99
+  },
+  "construction": [
+    {
+      "payloadType": "field.upgrade",
+      "status": "committed",
+      "clickToPendingMs": 6.799999997019768,
+      "clickToAckMs": 1099.2000000029802,
+      "clickToQueueDOMMs": 1183.9000000059605,
+      "durableReceipt": true,
+      "durableAuthority": true,
+      "ackRevision": 1383,
+      "currentRevision": 1383,
+      "nativeCompletes": 1,
+      "workerStages": [
+        {
+          "phase": "receive",
+          "seq": 5,
+          "workerAt": 16330.90000000596
+        },
+        {
+          "phase": "nativeComplete",
+          "seq": 6,
+          "workerAt": 17428.29999999702,
+          "mode": "readwrite",
+          "stores": [
+            "BattleReports",
+            "backups",
+            "saves"
+          ]
+        },
+        {
+          "phase": "ackSend",
+          "seq": 7,
+          "workerAt": 17428.59999999404
+        }
+      ]
+    },
+    {
+      "payloadType": "building.upgrade",
+      "status": "committed",
+      "clickToPendingMs": 12.5,
+      "clickToAckMs": 1960.8999999910593,
+      "clickToQueueDOMMs": 2049,
+      "durableReceipt": true,
+      "durableAuthority": true,
+      "ackRevision": 1385,
+      "currentRevision": 1385,
+      "nativeCompletes": 1,
+      "workerStages": [
+        {
+          "phase": "receive",
+          "seq": 8,
+          "workerAt": 18554.59999999404
+        },
+        {
+          "phase": "nativeComplete",
+          "seq": 10,
+          "workerAt": 20244.20000000298,
+          "mode": "readwrite",
+          "stores": [
+            "BattleReports",
+            "backups",
+            "saves"
+          ]
+        },
+        {
+          "phase": "ackSend",
+          "seq": 11,
+          "workerAt": 20244.40000000596
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "android": "PENDING",
+  "duplicate": {
+    "status": "duplicate",
+    "before": {
+      "allJobs": 66,
+      "jobCount": 1,
+      "receiptCount": 1,
+      "authorityCount": 1
+    },
+    "after": {
+      "allJobs": 67,
+      "jobCount": 1,
+      "receiptCount": 1,
+      "authorityCount": 1
+    }
+  }
+}

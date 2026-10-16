@@ -1,0 +1,81 @@
+{
+  "gate": "HOLD, awaiting GPT-6 then independent Astra review",
+  "ownerWaived": [
+    "B5 E1 Lv15"
+  ],
+  "deferred": [
+    "P0-C Runtime eligibility and legacy cleanup",
+    "P0-C-7",
+    "P0-C-8",
+    "P0-C-9"
+  ],
+  "main": "7c52ab738e1ed8be2416c9e9fb95db32dceb020f",
+  "newProductionFiles": [
+    "src/game/formal/extinction.ts",
+    "src/game/formal/battles.ts"
+  ],
+  "tests": {
+    "before": {
+      "success": false,
+      "numPassedTests": 2,
+      "numFailedTests": 3,
+      "numPendingTests": 0,
+      "numTotalTests": 5,
+      "numTotalTestSuites": 1
+    },
+    "c3-approved-before": {
+      "success": false,
+      "numPassedTests": 0,
+      "numFailedTests": 2,
+      "numPendingTests": 9,
+      "numTotalTests": 11,
+      "numTotalTestSuites": 1
+    },
+    "c1-persistence": {
+      "success": false,
+      "numPassedTests": 6,
+      "numFailedTests": 3,
+      "numPendingTests": 2,
+      "numTotalTests": 11,
+      "numTotalTestSuites": 1
+    },
+    "targeted-final": {
+      "success": true,
+      "numPassedTests": 21,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "numTotalTests": 21,
+      "numTotalTestSuites": 1
+    },
+    "related": {
+      "success": true,
+      "numPassedTests": 72,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "numTotalTests": 72,
+      "numTotalTestSuites": 7
+    },
+    "regression-full": {
+      "success": true,
+      "numPassedTests": 1290,
+      "numFailedTests": 0,
+      "numPendingTests": 1,
+      "numTotalTests": 1291,
+      "numTotalTestSuites": 177,
+      "files": 145,
+      "durationMs": 513824.7756347656
+    },
+    "browser": {
+      "browser": "154.0.8037.57",
+      "passed": 4,
+      "failed": 0,
+      "errors": []
+    }
+  },
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pages": "PASS",
+  "noMergeNoDeploy": true,
+  "benchmark": "no new long-run performance measurement; prior P0 v2 protected by unchanged critical source and full regression",
+  "fixturePrivacy": "synthetic only; no private save/raw trace committed"
+}

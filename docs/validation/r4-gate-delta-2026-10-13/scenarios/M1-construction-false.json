@@ -1,0 +1,35 @@
+{
+  "cancelledEvents": [
+    "event:0000000000000103",
+    "event:0000000000000104"
+  ],
+  "normal": {
+    "eventId": "event:0000000000000105",
+    "commandId": "command:b4-41",
+    "lane": 1,
+    "target": {
+      "kind": "field",
+      "slot": 0
+    },
+    "fromLevel": 0,
+    "toLevel": 1,
+    "createdAt": 471838,
+    "startsAt": 471838,
+    "durationMs": 14400000,
+    "qualificationHousing": 30400,
+    "paidResources": {
+      "food": 20,
+      "wood": 70,
+      "stone": 90,
+      "gold": 70
+    }
+  },
+  "craftsmen": [],
+  "buildings": {
+    "center": 5,
+    "warehouse.0": 15,
+    "residence": 15,
+    "townhall": 5,
+    "academy": 5
+  }
+}

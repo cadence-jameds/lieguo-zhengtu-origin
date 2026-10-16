@@ -1,0 +1,52 @@
+{
+  "originalPR3Head": "7258b126a7fc33303b24a861e8ac4fd0be54a8d0",
+  "integratedMain": "76d68db5ac4da0bdd87656ded56434e564cb1877",
+  "PR11Main": "49d521003d83975955c2e89e0a05aaa6720e054c",
+  "latestPR12Head": "7527e3968b5fe14041b66847c0dd4a57c9c6fa17",
+  "pureMergeTree": "536050a589f9152c18244482bab4aada2fbc70d8",
+  "conflicts": [],
+  "automaticMerges": [
+    "src/game/formal/politics.ts",
+    "src/game/formal/schema.ts"
+  ],
+  "criticalFiles": [
+    {
+      "path": "src/game/runtime.worker.ts",
+      "sha256": "8e8559b68c15dabbb4438cfa6d763b4ba67a3d2349febe8711c1462f2bebfc0f",
+      "byteEqualToMain": true
+    },
+    {
+      "path": "src/game/persistence.ts",
+      "sha256": "4d9a9d7f83f619b724a12ed36371bec3d65a2c1633b5884804a380f9cbec95f5",
+      "byteEqualToMain": true
+    },
+    {
+      "path": "src/game/orderAdmission.ts",
+      "sha256": "123b28be7bf01b1aedf42f3cf006b9d4e5040a10242356a53be4449164fd94ff",
+      "byteEqualToMain": true
+    },
+    {
+      "path": "src/game/interaction.ts",
+      "sha256": "1d551e4f163d4b1c31a438be44f20849f92651352160ccb97bca777aaf25082c",
+      "byteEqualToMain": true
+    },
+    {
+      "path": "src/game/useGame.ts",
+      "sha256": "c88b1d78060380d0896682ff863a43ec1d99c6665af56f5a8c28714053b43412",
+      "byteEqualToMain": true
+    },
+    {
+      "path": "src/game/formal/reducer.ts",
+      "sha256": "9c926ca547957c49630f402fc0e3c0fe2bb05ccd4507c12e39e725c789b4a439",
+      "byteEqualToMain": true
+    },
+    {
+      "path": "src/game/formal/scheduler.ts",
+      "sha256": "3f51f818d915876d6bf8887f1aa6d3f0d104d275c9e803719012534bc9e70d9c",
+      "byteEqualToMain": true
+    }
+  ],
+  "initialIntegratedMain": "0769b778fb42bb6e95d590f5a98a16ca3aef0872",
+  "PR13Head": "c36c429380554f2e6d06d4b68d3d81f8ae92f667",
+  "PR13Scope": "User explicitly authorized implementation of PR #13 during this task; docs-only remote change preserved."
+}

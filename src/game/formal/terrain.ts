@@ -22,7 +22,9 @@ export function terrainAt(w:FormalWorld,x:number,y:number):TerrainClass|undefine
  return w.worldLayer?classes[w.worldLayer.terrain[y*w.dimensions.width+x]]:'land';
 }
 export const buildable=(t:TerrainClass|undefined)=>t==='land'||t==='forest';
-export const passable=(t:TerrainClass|undefined)=>t==='land'||t==='forest'||t==='river';
+export const passable=(t:TerrainClass|undefined)=>t==='land'||t==='forest'||t==='river'||t==='water';
+/** Player-approved R4 delta: entering a water tile costs twice ordinary land time. */
+export const terrainTravelMultiplier=(t:TerrainClass|undefined)=>t==='water'?2:1;
 /** Legal coordinate's field configuration is visible before settlement; never rerolled at load. */
 export function fieldDistribution(seed:number,x:number,y:number):readonly number[] {
  const roll=(seedHash(seed,x,y,55)%100000)/1000;

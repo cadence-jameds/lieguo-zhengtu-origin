@@ -1,0 +1,56 @@
+{
+  "oldOwner": "faction:001",
+  "targetOwner": "faction:002",
+  "final": [
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "eventId": "event:0000000000000107",
+      "at": 1275000,
+      "round": 1,
+      "kind": "final",
+      "targetPoint": {
+        "x": 60,
+        "y": 195
+      },
+      "mission": "conquest",
+      "outcome": "held",
+      "ownerBefore": "faction:002",
+      "ownerAfter": "faction:002",
+      "qualificationBefore": "none",
+      "qualificationAfter": "none"
+    }
+  ],
+  "exiles": [
+    {
+      "id": "wild:exile-0000000000000003",
+      "exile": true,
+      "sourceFactionId": "faction:001",
+      "civilizationId": "civ_byzantium",
+      "createdAt": 1275000,
+      "spawnSlot": 436,
+      "generation": 0,
+      "region": 73,
+      "x": 60,
+      "y": 194,
+      "resource": "bandit",
+      "level": 1,
+      "phase": "active",
+      "defenders": {
+        "militia": 30,
+        "ram": 5
+      },
+      "initialDefenders": {
+        "militia": 30,
+        "ram": 5
+      },
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      }
+    }
+  ],
+  "reports": []
+}

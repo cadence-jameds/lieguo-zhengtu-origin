@@ -34,7 +34,7 @@ export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{con
    let score=pop? .7+a.traits.expansion:mil?.35+a.traits.military:.65+a.traits.economy;
    if(kind==='residence'&&c.population/c.housing>.8)score+=3;if(kind==='warehouse'&&resourceKeys.some(r=>c.stock[r]>storageCapacity(c)*.7))score+=2;
    if(kind==='center'&&lv<(AGE_CATALOG[(f.age??0) as number]?.center??10))score+=1.1;if(kind==='barracks'&&!lv)score+=.4;
-   const craft=kind==='castle'&&lv===0?w.extinction?.craftsmen.find(t=>t.ownerFactionId===a.factionId&&t.cityId===c.id&&!t.carrierArmyId&&!t.eventId&&!t.constructionCommandId):undefined;offer(craft?{type:'craftsman.castle',cityId:c.id,craftsmanId:craft.id}:{type:'building.upgrade',cityId:c.id,key},buildingCost(kind,lv+1),score-lv*.08,pop?'population':mil?'military':'economy');
+   const craft=kind==='castle'&&lv===0?w.extinction?.craftsmen.find(t=>t.ownerFactionId===a.factionId&&t.cityId===c.id&&!t.carrierArmyId&&!t.eventId&&!t.constructionCommandId):undefined;offer(craft?{type:'craftsman.castle',cityId:c.id,craftsmanId:craft.id}:{type:'building.upgrade',cityId:c.id,key},craft?zeroResources():buildingCost(kind,lv+1),score-lv*.08,pop?'population':mil?'military':'economy');
   }
  }
  const age=AGE_CATALOG[(f.age??0) as number];if(age&&!f.ageQueue&&c.population>=age.population&&buildingLevel(c,'center')>=age.center)offer({type:'age.start',cityId:c.id},{...age.cost},5,'research');

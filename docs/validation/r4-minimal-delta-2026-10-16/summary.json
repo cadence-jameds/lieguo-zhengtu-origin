@@ -1,0 +1,58 @@
+{
+  "gate": "R4 HOLD; Independent Gate not declared PASS",
+  "branch": "stage2-r4-integration",
+  "expectedOriginalHead": "7258b126a7fc33303b24a861e8ac4fd0be54a8d0",
+  "integratedMain": "76d68db5ac4da0bdd87656ded56434e564cb1877",
+  "parents": [
+    "7258b126a7fc33303b24a861e8ac4fd0be54a8d0",
+    "76d68db5ac4da0bdd87656ded56434e564cb1877"
+  ],
+  "full": {
+    "passed": 1269,
+    "failed": 0,
+    "skipped": 1,
+    "files": 144,
+    "elapsedMs": 514438.37353515625,
+    "runner": "Original verify-in-isolation.mjs full; no test exclusions or timeout changes"
+  },
+  "targeted": {
+    "passed": 72,
+    "failed": 0
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "pagesPath": "PASS",
+  "nativeBrowser": {
+    "captureRecovery": 3,
+    "craftsmanUI": 2,
+    "failed": 0,
+    "errors": 0,
+    "realSaveOfflineAndCommands": "PASS",
+    "duplicate": "PASS"
+  },
+  "productionSourceHash": "81dbacbbecd1618d43a2d1e7e8863592834d2268bd6033fa52ed71e30a7a2e13",
+  "scope": [
+    "D1 capture cleanup",
+    "D2 player-approved 2x water time",
+    "D3 lawful fixtures only",
+    "D4 main/PR11 integration",
+    "D5 explicitly user-authorized PR13 free craftsman castle Lv1"
+  ],
+  "waived": [
+    "B5 E1 Lv15 manual acceptance OWNER WAIVED; historical HOLD preserved"
+  ],
+  "deferred": [
+    "P0-C runtime exile eligibility and legacy-save cleanup",
+    "PR9 / 80 tasks / five-slot runtime",
+    "Independent Gate review",
+    "Physical Android/GPU/deployed SW validation"
+  ],
+  "actionsNotTaken": [
+    "merge PR",
+    "update main or release",
+    "deploy Pages",
+    "force push",
+    "P0-C/B9/B10"
+  ],
+  "privateOriginalSaveUntouched": true
+}

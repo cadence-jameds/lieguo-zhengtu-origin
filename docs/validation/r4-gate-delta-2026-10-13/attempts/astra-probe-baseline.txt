@@ -1,0 +1,33 @@
+
+ RUN  v5.0.0 /workspace/work/r4-gate-delta
+
+stdout | src/game/formal/astraGateProbe.test.ts > probe idle craftsman capture
+IDLE_CAPTURE {"craft":{"id":"craftsman:0000000000000003","ownerFactionId":"faction:000","civilizationId":"civ_japan","siteId":"wild:exile-0000000000000001","cityId":"city:000","carrierArmyId":null,"eventId":null,"destinationCityId":null,"arrivalAt":null,"path":[],"departedAt":235919,"constructionCommandId":null},"cityOwner":"faction:002","remainingOwn":["city:001"]}
+
+ ✓ src/game/formal/astraGateProbe.test.ts > probe idle craftsman capture 768ms
+stdout | src/game/formal/astraGateProbe.test.ts > probe construction craftsman capture
+CASTLE_CAPTURE {"time":644118,"completion":2544457,"cityOwner":"faction:002","craft":{"id":"craftsman:0000000000000003","ownerFactionId":"faction:000","civilizationId":"civ_japan","siteId":"wild:exile-0000000000000001","cityId":"city:000","carrierArmyId":null,"eventId":null,"destinationCityId":null,"arrivalAt":null,"path":[],"departedAt":235919,"constructionCommandId":"command:b4-4"},"jobs":[{"eventId":"event:0000000000000103","commandId":"command:b4-4","lane":0,"target":{"kind":"building","key":"castle"},"fromLevel":0,"toLevel":1,"createdAt":471838,"startsAt":471838,"durationMs":2072619,"qualificationHousing":30400,"paidResources":{"food":150,"wood":180,"stone":300,"gold":170},"castleCivilizationId":"civ_japan"}]}
+ENEMY_COMPLETED_CASTLE {"cityOwner":"faction:002","castle":1,"source":"civ_japan","craftsmen":[]}
+
+ ✓ src/game/formal/astraGateProbe.test.ts > probe construction craftsman capture 517ms
+stdout | src/game/formal/astraGateProbe.test.ts > probe extinct engaged AI conquers after last-city loss
+ENGAGED_START {"time":75000,"battles":[{"id":"battle:0000000000000001","next":375000,"wall":14}]}
+ENGAGED_EXTINCT {"time":265919,"extinct":["faction:001"],"battles":[{"id":"battle:0000000000000001","next":375000,"wall":14}],"armies":[{"owner":"faction:001","status":"engaged","pending":true},{"owner":"faction:000","status":"returning"}]}
+
+stdout | src/game/formal/astraGateProbe.test.ts > probe extinct engaged AI conquers after last-city loss
+LOADED_EXTINCT_VALID true
+ENGAGED_FAILURE [
+  {
+    "code": "custom",
+    "message": "Extinct faction ownership invalid",
+    "path": []
+  }
+]
+
+ ✓ src/game/formal/astraGateProbe.test.ts > probe extinct engaged AI conquers after last-city loss 563ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  23:28:37
+   Duration  2.91s (tests 68%, transform 27%, import 5%)
+

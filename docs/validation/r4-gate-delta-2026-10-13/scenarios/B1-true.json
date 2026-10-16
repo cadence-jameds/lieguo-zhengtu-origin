@@ -1,0 +1,240 @@
+{
+  "oldOwner": "faction:001",
+  "targetOwner": "faction:000",
+  "final": [
+    {
+      "battleId": "battle:0000000000000001",
+      "resolutionId": "resolution:0000000000000001.final",
+      "eventId": "event:0000000000000107",
+      "at": 1518199,
+      "round": 1,
+      "kind": "final",
+      "targetPoint": {
+        "x": 62,
+        "y": 198
+      },
+      "mission": "conquest",
+      "outcome": "held",
+      "ownerBefore": "faction:000",
+      "ownerAfter": "faction:000",
+      "qualificationBefore": "none",
+      "qualificationAfter": "none"
+    }
+  ],
+  "exiles": [
+    {
+      "id": "wild:exile-0000000000000003",
+      "exile": true,
+      "sourceFactionId": "faction:001",
+      "civilizationId": "civ_byzantium",
+      "createdAt": 1518199,
+      "spawnSlot": 436,
+      "generation": 0,
+      "region": 73,
+      "x": 62,
+      "y": 197,
+      "resource": "bandit",
+      "level": 1,
+      "phase": "active",
+      "defenders": {
+        "militia": 30,
+        "ram": 5
+      },
+      "initialDefenders": {
+        "militia": 30,
+        "ram": 5
+      },
+      "loot": {
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "gold": 0
+      }
+    }
+  ],
+  "reports": [
+    {
+      "id": "report:0000000000000002",
+      "sequence": 2,
+      "campaignId": "campaign:b4-f25c8655-a54d-4306-a5bd-bdf7961dccda",
+      "ownerFactionId": "faction:000",
+      "at": 1518199,
+      "category": "battle",
+      "title": "攻方無有效占領兵｜明州武陵關",
+      "text": "1 主戰回合；攻方無有效占領兵。",
+      "battle": {
+        "battleId": "battle:0000000000000001",
+        "resolutionId": "resolution:0000000000000001.final",
+        "mission": "conquest",
+        "target": {
+          "kind": "city",
+          "cityId": "city:000"
+        },
+        "targetName": "明州武陵關",
+        "targetPoint": {
+          "x": 62,
+          "y": 198
+        },
+        "startedAt": 318199,
+        "resolvedAt": 1518199,
+        "rounds": 1,
+        "outcome": "held",
+        "attackers": [
+          {
+            "ownerFactionId": "faction:001",
+            "armyId": "army:0000000000000001",
+            "cityId": "city:001",
+            "before": {
+              "militia": 30,
+              "ram": 5
+            },
+            "after": {
+              "militia": 30,
+              "ram": 5
+            }
+          }
+        ],
+        "defenders": [
+          {
+            "ownerFactionId": "faction:000",
+            "armyId": null,
+            "cityId": "city:000",
+            "before": {},
+            "after": {}
+          }
+        ],
+        "loot": {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        "wallBefore": 15,
+        "wallAfter": 0,
+        "siege": [
+          {
+            "target": {
+              "kind": "wall"
+            },
+            "before": 15,
+            "after": 0
+          }
+        ],
+        "ownerBefore": "faction:000",
+        "ownerAfter": "faction:000",
+        "populationBefore": 15009.194528391836,
+        "populationAfter": 15043.907207872235,
+        "returnedTrainingPopulation": 0,
+        "conquestReason": "no-occupiers",
+        "siegeRounds": 5,
+        "siegeHistory": [
+          {
+            "round": 1,
+            "at": 318199,
+            "wallBefore": 15,
+            "wallAfter": 14
+          },
+          {
+            "round": 2,
+            "at": 618199,
+            "wallBefore": 14,
+            "wallAfter": 12
+          },
+          {
+            "round": 3,
+            "at": 918199,
+            "wallBefore": 12,
+            "wallAfter": 10
+          },
+          {
+            "round": 4,
+            "at": 1218199,
+            "wallBefore": 10,
+            "wallAfter": 5
+          },
+          {
+            "round": 5,
+            "at": 1518199,
+            "wallBefore": 5,
+            "wallAfter": 0
+          }
+        ],
+        "history": [
+          {
+            "at": 318199,
+            "kind": "siege-start",
+            "combatRound": 1,
+            "siegeRound": 0
+          },
+          {
+            "at": 318199,
+            "kind": "catapult-batch",
+            "combatRound": 1,
+            "siegeRound": 0
+          },
+          {
+            "at": 318199,
+            "kind": "wall-breached",
+            "combatRound": 1,
+            "siegeRound": 1,
+            "wallBefore": 15,
+            "wallAfter": 14
+          },
+          {
+            "at": 618199,
+            "kind": "wall-breached",
+            "wallBefore": 14,
+            "wallAfter": 12,
+            "combatRound": 1,
+            "siegeRound": 2
+          },
+          {
+            "at": 918199,
+            "kind": "wall-breached",
+            "wallBefore": 12,
+            "wallAfter": 10,
+            "combatRound": 1,
+            "siegeRound": 3
+          },
+          {
+            "at": 1218199,
+            "kind": "wall-breached",
+            "wallBefore": 10,
+            "wallAfter": 5,
+            "combatRound": 1,
+            "siegeRound": 4
+          },
+          {
+            "at": 1518199,
+            "kind": "wall-breached",
+            "wallBefore": 5,
+            "wallAfter": 0,
+            "combatRound": 1,
+            "siegeRound": 5
+          },
+          {
+            "at": 1518199,
+            "kind": "siege-summary",
+            "forces": [
+              {
+                "ownerFactionId": "faction:001",
+                "initial": 30,
+                "alive": 30,
+                "casualties": 0
+              },
+              {
+                "ownerFactionId": "faction:000",
+                "initial": 0,
+                "alive": 0,
+                "casualties": 0
+              }
+            ],
+            "combatRound": 1,
+            "siegeRound": 5
+          }
+        ],
+        "historyOmitted": 0
+      }
+    }
+  ]
+}

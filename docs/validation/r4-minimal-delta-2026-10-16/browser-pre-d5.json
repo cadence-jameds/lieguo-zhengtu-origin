@@ -1,0 +1,122 @@
+{
+  "browser": "154.0.8037.57",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "source": "isolated R4 production build, PR #3 R4 minimal delta with integrated PR #11 main",
+  "controlled": true,
+  "aiDecisionsDeferredDays": 30,
+  "ownerWaived": [
+    "B5 E1 Lv15 artificial/manual validation"
+  ],
+  "cases": [
+    {
+      "name": "B1",
+      "status": "PASS",
+      "worldBefore": 1514199,
+      "eventAt": 1518199,
+      "worldAfter": 1528424,
+      "worldAfterReload": 1529842,
+      "ownerAfter": "faction:000",
+      "finals": [
+        {
+          "battleId": "battle:0000000000000002",
+          "outcome": "conquered"
+        },
+        {
+          "battleId": "battle:0000000000000001",
+          "outcome": "held"
+        }
+      ],
+      "craftsmen": [],
+      "exiles": [
+        {
+          "id": "wild:exile-0000000000000003",
+          "owner": "faction:001",
+          "units": {
+            "militia": 30,
+            "ram": 5
+          }
+        }
+      ],
+      "realIndexedDB": true,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 13
+    },
+    {
+      "name": "M1-false",
+      "status": "PASS",
+      "worldBefore": 640118,
+      "eventAt": 644118,
+      "worldAfter": 654357,
+      "worldAfterReload": 655304,
+      "ownerAfter": "faction:002",
+      "finals": [
+        {
+          "battleId": "battle:0000000000000002",
+          "outcome": "wild-cleared"
+        },
+        {
+          "battleId": "battle:0000000000000004",
+          "outcome": "conquered"
+        }
+      ],
+      "craftsmen": [],
+      "exiles": [
+        {
+          "id": "wild:exile-0000000000000001",
+          "owner": "faction:002",
+          "units": {}
+        }
+      ],
+      "realIndexedDB": true,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10
+    },
+    {
+      "name": "M1-true",
+      "status": "PASS",
+      "worldBefore": 640118,
+      "eventAt": 644118,
+      "worldAfter": 654420,
+      "worldAfterReload": 655059,
+      "ownerAfter": "faction:002",
+      "finals": [
+        {
+          "battleId": "battle:0000000000000002",
+          "outcome": "wild-cleared"
+        },
+        {
+          "battleId": "battle:0000000000000004",
+          "outcome": "conquered"
+        }
+      ],
+      "craftsmen": [],
+      "exiles": [
+        {
+          "id": "wild:exile-0000000000000001",
+          "owner": "faction:002",
+          "units": {}
+        }
+      ],
+      "realIndexedDB": true,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 11
+    }
+  ],
+  "manualPending": [
+    "physical phone",
+    "hardware GPU FPS",
+    "six civilization full manual chain",
+    "deployed old SW upgrade",
+    "private late save",
+    "long-term calibration"
+  ],
+  "errors": [],
+  "passed": 3,
+  "failed": 0
+}

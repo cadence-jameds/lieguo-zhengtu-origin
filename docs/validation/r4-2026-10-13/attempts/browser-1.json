@@ -1,0 +1,791 @@
+{
+  "browser": "154.0.8037.57",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "source": "local production build",
+  "cases": [
+    {
+      "name": "production fresh new campaign",
+      "status": "PASS",
+      "evidence": {
+        "campaign": "campaign:1590bf46-3fdd-4b87-8bc3-340d88f733df",
+        "factions": 100,
+        "AI": 99,
+        "wildSites": 432,
+        "population": 200
+      }
+    },
+    {
+      "name": "existing empire map panel and public B6 UI",
+      "status": "PASS",
+      "evidence": {
+        "empire": {
+          "id": "empire:0000000000000004",
+          "name": "舊帝國",
+          "leader": "faction:000",
+          "legions": [
+            "legion:0000000000000001"
+          ],
+          "color": "hsl(217 58% 57%)"
+        },
+        "text": "帝國版圖\n✥ 拖曳移動\n×\n\n版圖依帝國成員目前持有的城市顯示。\n\n舊帝國 · 1／3 軍團"
+      }
+    },
+    {
+      "name": "R3 Browser Delta governance 1/10/50X low/100 armies",
+      "status": "PASS",
+      "evidence": [
+        {
+          "speed": 1,
+          "dense": false,
+          "initialArmies": 0,
+          "replies": [
+            {
+              "commandId": "command:3b42ec98-64fb-48b3-89d5-940764db31b9",
+              "status": "committed",
+              "revision": 18
+            },
+            {
+              "commandId": "command:8328409e-9d08-4bf5-aef2-2ddb93354873",
+              "status": "committed",
+              "revision": 20
+            },
+            {
+              "commandId": "command:d127ce6c-f732-43d3-81c5-9ea64e8c6cf6",
+              "status": "committed",
+              "revision": 22
+            },
+            {
+              "commandId": "command:625c0ad7-e8b6-40f3-8b57-57d3d440a556",
+              "status": "committed",
+              "revision": 24
+            },
+            {
+              "commandId": "command:5f41fcee-8ff2-403e-b5dd-ee18e250d878",
+              "status": "committed",
+              "revision": 26
+            },
+            {
+              "commandId": "command:4ef57c36-f382-42eb-992b-0a2ef445998b",
+              "status": "committed",
+              "revision": 28
+            }
+          ],
+          "governor": {
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "enabled": false,
+            "policy": "reserve",
+            "budget": 2400,
+            "reserve": 180,
+            "spent": {
+              "food": 315,
+              "wood": 390,
+              "stone": 295,
+              "gold": 535
+            },
+            "period": 0,
+            "eventId": null,
+            "nextAt": 7532,
+            "decisions": 7,
+            "blocked": "已停止"
+          }
+        },
+        {
+          "speed": 1,
+          "dense": true,
+          "initialArmies": 100,
+          "replies": [
+            {
+              "commandId": "command:79017122-9dcb-4806-bfa1-e93ebc39ce53",
+              "status": "committed",
+              "revision": 103
+            },
+            {
+              "commandId": "command:62b30d44-91aa-4d9e-a492-b4458e57cfc8",
+              "status": "committed",
+              "revision": 105
+            },
+            {
+              "commandId": "command:665612d2-d7d9-4dc6-92a1-68d22bc151c0",
+              "status": "committed",
+              "revision": 107
+            },
+            {
+              "commandId": "command:af5a4472-c14f-4aab-b069-60213b9bbfcb",
+              "status": "committed",
+              "revision": 109
+            },
+            {
+              "commandId": "command:7c558230-2d44-41e3-a71e-feb743c194b1",
+              "status": "committed",
+              "revision": 111
+            },
+            {
+              "commandId": "command:af959c6a-c0f2-457f-94ab-b40841d9acd8",
+              "status": "committed",
+              "revision": 113
+            }
+          ],
+          "governor": {
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "enabled": false,
+            "policy": "reserve",
+            "budget": 2400,
+            "reserve": 180,
+            "spent": {
+              "food": 165,
+              "wood": 240,
+              "stone": 295,
+              "gold": 235
+            },
+            "period": 0,
+            "eventId": null,
+            "nextAt": 15267,
+            "decisions": 7,
+            "blocked": "已停止"
+          }
+        },
+        {
+          "speed": 10,
+          "dense": false,
+          "initialArmies": 0,
+          "replies": [
+            {
+              "commandId": "command:7bcbb58e-d572-4c01-ba04-5c2a222114b7",
+              "status": "committed",
+              "revision": 119
+            },
+            {
+              "commandId": "command:bac36e91-9958-4b34-bdc0-3242bc13b846",
+              "status": "committed",
+              "revision": 121
+            },
+            {
+              "commandId": "command:6585193c-bae9-4785-84d2-8e4d4ea8755b",
+              "status": "committed",
+              "revision": 123
+            },
+            {
+              "commandId": "command:d36e5765-e447-4020-8d48-ebc18ef87b10",
+              "status": "committed",
+              "revision": 125
+            },
+            {
+              "commandId": "command:f73f9d55-a1c4-44a5-ba0d-031ce5db734c",
+              "status": "committed",
+              "revision": 127
+            },
+            {
+              "commandId": "command:00fafd76-d3c8-4122-a79a-0d84b3569e71",
+              "status": "committed",
+              "revision": 129
+            }
+          ],
+          "governor": {
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "enabled": false,
+            "policy": "reserve",
+            "budget": 2400,
+            "reserve": 180,
+            "spent": {
+              "food": 315,
+              "wood": 390,
+              "stone": 295,
+              "gold": 535
+            },
+            "period": 0,
+            "eventId": null,
+            "nextAt": 105941,
+            "decisions": 7,
+            "blocked": "已停止"
+          }
+        },
+        {
+          "speed": 10,
+          "dense": true,
+          "initialArmies": 100,
+          "replies": [
+            {
+              "commandId": "command:17584ab0-fa3b-4a56-8000-726b164d4478",
+              "status": "committed",
+              "revision": 138
+            },
+            {
+              "commandId": "command:7a30f8a4-74fd-473d-ab2e-de03c0912ecf",
+              "status": "committed",
+              "revision": 140
+            },
+            {
+              "commandId": "command:987e1160-b625-4153-9de0-b2e6d8ff3255",
+              "status": "committed",
+              "revision": 142
+            },
+            {
+              "commandId": "command:0630ed0b-687c-4cff-99f2-527caf639dc2",
+              "status": "committed",
+              "revision": 144
+            },
+            {
+              "commandId": "command:228eead8-206b-49a4-9258-59d338f9e07b",
+              "status": "committed",
+              "revision": 146
+            },
+            {
+              "commandId": "command:0c8aa410-8b25-4abe-9993-cd30aa58c772",
+              "status": "committed",
+              "revision": 148
+            }
+          ],
+          "governor": {
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "enabled": false,
+            "policy": "reserve",
+            "budget": 2400,
+            "reserve": 180,
+            "spent": {
+              "food": 215,
+              "wood": 320,
+              "stone": 335,
+              "gold": 315
+            },
+            "period": 0,
+            "eventId": null,
+            "nextAt": 240764,
+            "decisions": 7,
+            "blocked": "已停止"
+          }
+        },
+        {
+          "speed": 50,
+          "dense": false,
+          "initialArmies": 0,
+          "replies": [
+            {
+              "commandId": "command:4c4e8a41-4452-469b-8d90-15b092ccb7f0",
+              "status": "committed",
+              "revision": 159
+            },
+            {
+              "commandId": "command:92ed438f-c950-4097-8083-40c149dc9e5c",
+              "status": "committed",
+              "revision": 161
+            },
+            {
+              "commandId": "command:eba520f8-c78d-4b34-bc82-74c8acca0b60",
+              "status": "committed",
+              "revision": 163
+            },
+            {
+              "commandId": "command:bf1c7c11-5b21-4f6a-a9ad-f3a0c9d459c1",
+              "status": "committed",
+              "revision": 165
+            },
+            {
+              "commandId": "command:e250c35d-0814-4f7f-8ae6-da16f33cd956",
+              "status": "committed",
+              "revision": 167
+            },
+            {
+              "commandId": "command:7ea27105-1a51-4632-a653-e8c1f6a37715",
+              "status": "committed",
+              "revision": 169
+            }
+          ],
+          "governor": {
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "enabled": false,
+            "policy": "reserve",
+            "budget": 2400,
+            "reserve": 180,
+            "spent": {
+              "food": 215,
+              "wood": 320,
+              "stone": 335,
+              "gold": 315
+            },
+            "period": 0,
+            "eventId": null,
+            "nextAt": 414319,
+            "decisions": 7,
+            "blocked": "已停止"
+          }
+        },
+        {
+          "speed": 50,
+          "dense": true,
+          "initialArmies": 100,
+          "replies": [
+            {
+              "commandId": "command:520f4532-174a-4bdf-91a5-3b2cfecaff76",
+              "status": "committed",
+              "revision": 182
+            },
+            {
+              "commandId": "command:29cd740f-2b42-490f-8507-4660fa9cbadc",
+              "status": "committed",
+              "revision": 184
+            },
+            {
+              "commandId": "command:5b836e9f-30d7-4cf5-a16e-64ffdd9dd7c0",
+              "status": "committed",
+              "revision": 186
+            },
+            {
+              "commandId": "command:1c3c1e7c-11d9-4eb5-8534-5d7f7ae86637",
+              "status": "committed",
+              "revision": 188
+            },
+            {
+              "commandId": "command:076489fb-cf11-4865-843f-cfecb66809e3",
+              "status": "committed",
+              "revision": 190
+            },
+            {
+              "commandId": "command:b0dab902-8bd7-49c8-8546-1fe3baa72df3",
+              "status": "committed",
+              "revision": 192
+            }
+          ],
+          "governor": {
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "enabled": false,
+            "policy": "reserve",
+            "budget": 2400,
+            "reserve": 180,
+            "spent": {
+              "food": 265,
+              "wood": 400,
+              "stone": 375,
+              "gold": 395
+            },
+            "period": 0,
+            "eventId": null,
+            "nextAt": 2234270,
+            "decisions": 7,
+            "blocked": "已停止"
+          }
+        }
+      ]
+    },
+    {
+      "name": "governance duplicate and stale revision guards",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n+     blocked: '資源儲備方針：保留庫存',\n-     blocked: '等待正式治理排程',\n      budget: 2400,\n      cityId: 'city:000',\n+     decisions: 2,\n-     decisions: 1,\n      enabled: true,\n+     eventId: 'event:0000000000000664',\n+     nextAt: 3600000,\n-     eventId: 'event:0000000000000663',\n-     nextAt: 2743,\n      ownerFactionId: 'faction:000',\n      period: 0,\n      policy: 'reserve',\n      reserve: 180,\n      spent: {\n"
+    },
+    {
+      "name": "real IndexedDB export, reload, corrupt import and Recovery",
+      "status": "FAIL",
+      "error": "Error: Resume button unavailable: 開始新遊戲,載入進度,⚙ 設定,檢查更新"
+    },
+    {
+      "name": "formal 100-owner world movement in Chromium",
+      "status": "PASS",
+      "evidence": {
+        "formalArmies": 100,
+        "before": {
+          "armyOverlay": "{\"routes\":100,\"markers\":100,\"animated\":true,\"cacheSize\":100,\"hits\":10900,\"misses\":100,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":0,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+          "renderMs": "5.50",
+          "backgroundRedraws": "17",
+          "terrainCache": "{\"tiles\":0,\"bytes\":468512,\"pending\":0,\"hits\":0,\"misses\":1}",
+          "sceneryCache": "{\"tiles\":20,\"bytes\":10732800,\"pending\":0,\"hits\":117,\"misses\":24,\"spriteDraws\":634}",
+          "camera": "{\"x\":0,\"y\":3830,\"z\":0.07916666666666666}"
+        },
+        "after": {
+          "armyOverlay": "{\"routes\":100,\"markers\":98,\"animated\":true,\"cacheSize\":100,\"hits\":13000,\"misses\":100,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":0,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+          "renderMs": "3.00",
+          "backgroundRedraws": "17",
+          "terrainCache": "{\"tiles\":0,\"bytes\":468512,\"pending\":0,\"hits\":0,\"misses\":1}",
+          "sceneryCache": "{\"tiles\":20,\"bytes\":10732800,\"pending\":0,\"hits\":117,\"misses\":24,\"spriteDraws\":634}",
+          "camera": "{\"x\":0,\"y\":3830,\"z\":0.07916666666666666}"
+        }
+      }
+    },
+    {
+      "name": "AI vs AI Lv15 ongoing swords and reduced motion",
+      "status": "PASS",
+      "evidence": {
+        "battle": {
+          "id": "battle:0000000000000001",
+          "cityId": "city:002",
+          "attackerFactionId": "faction:001",
+          "startedAt": 75000,
+          "round": 1,
+          "nextRoundAt": 375000,
+          "roundEventId": "event:0000000000000201",
+          "attackers": [
+            {
+              "key": "army:0000000000000001/militia",
+              "armyId": "army:0000000000000001",
+              "ownerFactionId": "faction:001",
+              "sourceCityId": "city:001",
+              "unitId": "militia",
+              "count": 30,
+              "initialCount": 30,
+              "hp": 1650,
+              "hpPerUnit": 55,
+              "contacted": false
+            },
+            {
+              "key": "army:0000000000000001/ram",
+              "armyId": "army:0000000000000001",
+              "ownerFactionId": "faction:001",
+              "sourceCityId": "city:001",
+              "unitId": "ram",
+              "count": 1,
+              "initialCount": 1,
+              "hp": 250,
+              "hpPerUnit": 250,
+              "contacted": false
+            }
+          ],
+          "defenders": [],
+          "participants": [
+            {
+              "ownerFactionId": "faction:001",
+              "armyId": "army:0000000000000001",
+              "cityId": "city:001",
+              "before": {
+                "militia": 30,
+                "ram": 1
+              },
+              "after": {
+                "militia": 30,
+                "ram": 1
+              }
+            },
+            {
+              "ownerFactionId": "faction:002",
+              "armyId": null,
+              "cityId": "city:002",
+              "before": {},
+              "after": {}
+            }
+          ],
+          "wallBefore": 15,
+          "populationBefore": 15002.166784032015,
+          "ownerBefore": "faction:002",
+          "developmentBefore": 31,
+          "phase": "siege",
+          "siegeRound": 1,
+          "wallDamage": 66.3,
+          "wallDamageLevel": 15,
+          "catapultBatchDone": true,
+          "developmentLost": 0,
+          "siegeChanges": [],
+          "siegeHistory": [
+            {
+              "round": 1,
+              "at": 75000,
+              "wallBefore": 15,
+              "wallAfter": 15
+            }
+          ],
+          "history": [
+            {
+              "at": 75000,
+              "kind": "siege-start",
+              "combatRound": 1,
+              "siegeRound": 0
+            },
+            {
+              "at": 75000,
+              "kind": "catapult-batch",
+              "combatRound": 1,
+              "siegeRound": 0
+            }
+          ],
+          "historyOmitted": 0
+        },
+        "before": {
+          "armyOverlay": "{\"routes\":0,\"markers\":1,\"animated\":true,\"cacheSize\":1,\"hits\":65,\"misses\":1,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":1,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+          "renderMs": "3.20",
+          "backgroundRedraws": "19",
+          "terrainCache": "{\"tiles\":0,\"bytes\":468512,\"pending\":37,\"hits\":0,\"misses\":1}",
+          "sceneryCache": "{\"tiles\":32,\"bytes\":13977600,\"pending\":0,\"hits\":198,\"misses\":32,\"spriteDraws\":1041}",
+          "camera": "{\"x\":-2700,\"y\":2550,\"z\":0.75}"
+        },
+        "reduced": {
+          "armyOverlay": "{\"routes\":0,\"markers\":1,\"animated\":false,\"cacheSize\":1,\"hits\":91,\"misses\":1,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":1,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+          "renderMs": "0.30",
+          "backgroundRedraws": "19",
+          "terrainCache": "{\"tiles\":0,\"bytes\":468512,\"pending\":37,\"hits\":0,\"misses\":1}",
+          "sceneryCache": "{\"tiles\":32,\"bytes\":13977600,\"pending\":0,\"hits\":198,\"misses\":32,\"spriteDraws\":1041}",
+          "camera": "{\"x\":-2700,\"y\":2550,\"z\":0.75}"
+        }
+      }
+    },
+    {
+      "name": "AI siege final removes swords once, reload never replays terminal badge",
+      "status": "PASS",
+      "evidence": {
+        "battleId": "battle:0000000000000001",
+        "final": {
+          "targetPoint": {
+            "x": 60,
+            "y": 195
+          },
+          "mission": "conquest",
+          "battleId": "battle:0000000000000001",
+          "resolutionId": "resolution:0000000000000001.final",
+          "eventId": "event:0000000000000211",
+          "at": 3375000,
+          "round": 1,
+          "kind": "final",
+          "outcome": "held",
+          "ownerBefore": "faction:002",
+          "ownerAfter": "faction:002",
+          "qualificationBefore": "none",
+          "qualificationAfter": "none"
+        },
+        "data": {
+          "armyOverlay": "{\"routes\":0,\"markers\":0,\"animated\":false,\"cacheSize\":0,\"hits\":0,\"misses\":0,\"civilianMarkers\":0,\"civilianCacheMisses\":0,\"visibleBattles\":0,\"visibleImpacts\":0,\"paintOrder\":\"terrain,politics,entities,routes,armies,labels,hover,battle-overlay\"}",
+          "renderMs": "0.40",
+          "backgroundRedraws": "11",
+          "terrainCache": "{\"tiles\":34,\"bytes\":13408032,\"pending\":5,\"hits\":645,\"misses\":36}",
+          "sceneryCache": "{\"tiles\":35,\"bytes\":14389440,\"pending\":0,\"hits\":1079,\"misses\":35,\"spriteDraws\":1143}",
+          "camera": "{\"x\":-2700,\"y\":2550,\"z\":0.75}"
+        }
+      }
+    },
+    {
+      "name": "B7 extinction and real UI rebirth",
+      "status": "PASS",
+      "evidence": {
+        "ack": {
+          "commandId": "command:2b4173ee-6cb1-4ff1-9013-847e4a29c5f8",
+          "status": "committed",
+          "revision": 229
+        },
+        "city": {
+          "id": "city:rebirth-0000000000000101",
+          "ownerFactionId": "faction:000",
+          "name": "復國聚落",
+          "x": 352,
+          "y": 352,
+          "population": 400,
+          "housing": 400,
+          "stock": {
+            "food": 600,
+            "wood": 600,
+            "stone": 600,
+            "gold": 600
+          },
+          "buildings": {
+            "center": 1
+          },
+          "military": {
+            "units": {},
+            "queue": [],
+            "unpaidFood": 0
+          },
+          "autoLogistics": [],
+          "economy": {
+            "lastSettledAt": 3601886,
+            "productionRemainder": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "milestones": [],
+            "slots": {},
+            "construction": [],
+            "promotion": null,
+            "reservedIncoming": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "settlementEventId": "event:0000000000000817"
+          },
+          "fields": [
+            {
+              "slot": 0,
+              "resource": "food",
+              "level": 0
+            },
+            {
+              "slot": 1,
+              "resource": "food",
+              "level": 0
+            },
+            {
+              "slot": 2,
+              "resource": "food",
+              "level": 0
+            },
+            {
+              "slot": 3,
+              "resource": "food",
+              "level": 0
+            },
+            {
+              "slot": 4,
+              "resource": "food",
+              "level": 0
+            },
+            {
+              "slot": 5,
+              "resource": "food",
+              "level": 0
+            },
+            {
+              "slot": 6,
+              "resource": "wood",
+              "level": 0
+            },
+            {
+              "slot": 7,
+              "resource": "wood",
+              "level": 0
+            },
+            {
+              "slot": 8,
+              "resource": "wood",
+              "level": 0
+            },
+            {
+              "slot": 9,
+              "resource": "wood",
+              "level": 0
+            },
+            {
+              "slot": 10,
+              "resource": "wood",
+              "level": 0
+            },
+            {
+              "slot": 11,
+              "resource": "stone",
+              "level": 0
+            },
+            {
+              "slot": 12,
+              "resource": "stone",
+              "level": 0
+            },
+            {
+              "slot": 13,
+              "resource": "stone",
+              "level": 0
+            },
+            {
+              "slot": 14,
+              "resource": "stone",
+              "level": 0
+            },
+            {
+              "slot": 15,
+              "resource": "gold",
+              "level": 0
+            },
+            {
+              "slot": 16,
+              "resource": "gold",
+              "level": 0
+            },
+            {
+              "slot": 17,
+              "resource": "gold",
+              "level": 0
+            }
+          ],
+          "wallLevel": 0,
+          "cityPromotionCompleted": false,
+          "integrationWorkHours": 0,
+          "integrationTotalWorkHours": 0,
+          "startingCity": false
+        },
+        "age": 2,
+        "protectionUntil": 176401886,
+        "exiles": [
+          {
+            "id": "wild:exile-0000000000000012",
+            "exile": true,
+            "sourceFactionId": "faction:000",
+            "civilizationId": "civ_zhongguo",
+            "createdAt": 3600000,
+            "spawnSlot": 445,
+            "generation": 0,
+            "region": 74,
+            "x": 69,
+            "y": 215,
+            "resource": "bandit",
+            "level": 1,
+            "phase": "active",
+            "defenders": {
+              "militia": 7,
+              "scout": 11,
+              "ram": 5
+            },
+            "initialDefenders": {
+              "militia": 7,
+              "scout": 11,
+              "ram": 5
+            },
+            "loot": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile viewport real touch pan/pinch and reduced motion",
+      "status": "PASS",
+      "evidence": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "before": {
+          "x": 4440,
+          "y": 3640,
+          "z": 0.75
+        },
+        "panned": {
+          "x": 4333.333333333332,
+          "y": 3586.666666666666,
+          "z": 0.75
+        },
+        "pinched": {
+          "x": 4333.333333333332,
+          "y": 3586.666666666666,
+          "z": 1.5
+        },
+        "physicalPhone": "MANUAL PENDING"
+      }
+    },
+    {
+      "name": "production PWA install and network-offline reload",
+      "status": "PASS",
+      "evidence": {
+        "controlled": true,
+        "offlineHome": true,
+        "scope": "new local PWA install; older-version update MANUAL PENDING"
+      }
+    }
+  ],
+  "manualPending": [
+    "physical phone",
+    "hardware GPU FPS",
+    "B5 E1 human Delta Review",
+    "SW update from older deployed build",
+    "Day30 / 168h / 360h / 720h calibration"
+  ],
+  "errors": [],
+  "success": false
+}

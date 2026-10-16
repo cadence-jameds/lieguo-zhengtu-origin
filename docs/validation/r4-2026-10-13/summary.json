@@ -1,0 +1,66 @@
+{
+  "status": "R4_IMPLEMENTATION_VERIFICATION_COMPLETE_AWAITING_ASTRA",
+  "base": "d5c0712b2b7ad1cd580999f97918f132d57c8f21",
+  "branch": "stage2-r4-integration",
+  "version": "0.30.49",
+  "node": "24.19.0",
+  "chromium": "154.0.8037.57",
+  "regression": {
+    "passed": 1123,
+    "failed": 0,
+    "skipped": 1,
+    "files": 135,
+    "durationSeconds": 384.940857421875,
+    "mode": "full, original isolation runner, maxWorkers=2",
+    "conditionalSkip": "batch210 user late-game save requires REALM_REGRESSION_SAVE"
+  },
+  "browser": {
+    "casesPassed": 11,
+    "errors": 0,
+    "governanceApplications": 36,
+    "screenshots": 26,
+    "realBrowser": true,
+    "physicalPhone": false
+  },
+  "simulation": {
+    "seeds": [
+      12012,
+      92049,
+      90217
+    ],
+    "worldHoursEach": 8,
+    "factions": 100,
+    "AI": 99,
+    "fairNewGame": true,
+    "battlePoliticalChain": "separate controlled fixtures",
+    "Day30_168_360_720h": "MANUAL PENDING"
+  },
+  "B5_E1": "HOLD",
+  "Astra_Gate": "NOT_EXECUTED_NOT_DECLARED_PASS",
+  "B9": "NOT_STARTED",
+  "B10": "NOT_STARTED",
+  "releaseUpdated": false,
+  "pagesDeployed": false,
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "recoverySemantics": "durable sequence high-water is retained; future IDs and exile positions may differ",
+  "testSourceMatches": [
+    {
+      "path": "src/game/FormalWorldMap.tsx",
+      "sha256": "50d19a2b685294831bf465bc8f1b0b06157bc80dc3105abaaa0d9afdc8e7644a"
+    },
+    {
+      "path": "src/game/presentation/FormalTargetPanel.tsx",
+      "sha256": "c8b301e827c5239f66e01ccd647dd7a7366edf44312cc448b3471c5cf87843fe"
+    },
+    {
+      "path": "src/game/formal/integrationR4.test.ts",
+      "sha256": "968fd83547530e7b3b68c0dedd03a8e6824c7a0545b91a24d530024f01531d8d"
+    },
+    {
+      "path": "src/game/presentation/targetPoliticsR4.test.tsx",
+      "sha256": "baad2ad07bdb2fb3da0bd6e2667e35f02e958eb90488302a27aab714b84f3cfa"
+    }
+  ],
+  "pagesPathBuildCheck": "PASS on same final application source in disposable full-regression workspace; build only, no deployment"
+}

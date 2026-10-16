@@ -1,0 +1,11 @@
+
+ RUN  v5.0.0 /workspace/lieguo-zhengtu-origin
+
+ ✓ src/game/presentation/targetPoliticsR4.test.tsx > map city ownership shows actual B6 legion/empire and friendly reinforcement without leaking hidden units/stock 627ms
+ ✓ src/game/presentation/targetPoliticsR4.test.tsx > empire dissolution and war/peace immediately update public map relation instead of showing all enemies neutral 474ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  03:06:14
+   Duration  2.41s (tests 50%, transform 35%, import 14%)
+

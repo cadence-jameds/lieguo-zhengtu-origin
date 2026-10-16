@@ -1,0 +1,172 @@
+diff --git a/src/game/formal/battles.ts b/src/game/formal/battles.ts
+index 8dbdedd..5e8ca6b 100644
+--- a/src/game/formal/battles.ts
++++ b/src/game/formal/battles.ts
+@@ -83,13 +83,16 @@ function scoutBattle(w:FormalWorld,a:MissionArmy,c:FormalCity,e:FormalEvent,s:Ev
+ function evacuateCitySurvivors(w:FormalWorld,c:FormalCity,oldOwner:FactionId,s:EventScheduler){const units={...c.military!.units};c.military!.units={};if(!Object.keys(units).length)return;const key=sequenceKey(w.sequences.project++),a:MissionArmy={id:armyId(key),battleId:battleId(key),commandId:w.commandReceipts.find(r=>r.issuerId===oldOwner&&r.disposition==='applied')?.commandId??w.commandReceipts.find(r=>r.disposition==='applied')!.commandId,creationKind:'evacuation',ownerFactionId:oldOwner,originCityId:c.id,units,initialUnits:{...units},mission:'reinforce',target:{kind:'city',cityId:c.id},status:'stationed',path:[{x:c.x,y:c.y}],segmentTimes:[0],marchSecondsPerTile:1,position:{x:c.x,y:c.y},departedAt:w.time,arrivalAt:w.time,movementEventId:null,returnCityId:null,cargo:zeroResources()};w.armies.push(a);returnArmy(w,a,s);}
+ function finishBattle(w:FormalWorld,state:BattleState,c:FormalCity,e:FormalEvent,s:EventScheduler,reason:ConquestReason){
+  const b=ensureBattleProgress(state,c.wallLevel??0),attacking=w.armies.filter(isMissionArmy).filter(a=>a.status==='engaged'&&a.battleId===b.id),attackCount=effectiveCount(b.attackers),defenseCount=effectiveCount(b.defenders),first=attacking[0];if(!first)throw new Error('Battle has no attacker');
++ const recipient=reason==='conquered'?conquestOwner(w,b.jointId?w.politics?.joints.find(j=>j.id===b.jointId)?.initiator??b.attackerFactionId:b.attackerFactionId,attacking):null;
++ // No legally controlled occupiers remain; preserve damage/final and let B7 convert survivors.
++ if(reason==='conquered'&&!recipient)reason='no-occupiers';
+  const p=basePayload(w,first,c.name,c);p.battleId=b.id;p.resolutionId=rid(b.id,'final');p.startedAt=b.startedAt;p.rounds=b.round;p.wallBefore=b.wallBefore;p.ownerBefore=b.ownerBefore;p.populationBefore=b.populationBefore;p.conquestReason=reason;p.siegeRounds=b.siegeRound;p.siegeHistory=structuredClone(b.siegeHistory);p.history=structuredClone(b.history);p.historyOmitted=b.historyOmitted;p.siege=structuredClone(b.siegeChanges);p.outcome=reason==='mutual-destruction'?'mutual-destruction':'held';
+  p.attackers=b.participants.filter(p=>p.armyId!==null&&attacking.some(a=>a.id===p.armyId));p.defenders=b.participants.filter(item=>!p.attackers.includes(item));
+  for(const a of attacking)applyBaggage(a,attackCount>0);for(const a of stationed(w,c))applyBaggage(a,defenseCount>0);
+  if(defenseCount===0&&c.military)delete c.military.units.baggage;
+  if(reason==='conquered'){
+   if(attackCount===0||defenseCount!==0||(c.wallLevel??0)!==0)throw new Error('Conquest hard conditions not met');
+-  const oldOwner=c.ownerFactionId,pop=finishConquest(w,c,b.jointId?conquestOwner(w,w.politics?.joints.find(j=>j.id===b.jointId)?.initiator??b.attackerFactionId,attacking):b.attackerFactionId,b.developmentLost,b.developmentBefore,s);p.outcome='conquered';p.ownerAfter=c.ownerFactionId;p.populationBefore=pop.populationBefore;p.populationAfter=pop.populationAfter;p.returnedTrainingPopulation=pop.returnedTrainingPopulation;
++  const oldOwner=c.ownerFactionId,pop=finishConquest(w,c,recipient!,b.developmentLost,b.developmentBefore,s);p.outcome='conquered';p.ownerAfter=c.ownerFactionId;p.populationBefore=pop.populationBefore;p.populationAfter=pop.populationAfter;p.returnedTrainingPopulation=pop.returnedTrainingPopulation;
+   p.defenders=updateParticipants(w,c,p.defenders);evacuateCitySurvivors(w,c,oldOwner,s);for(const a of w.armies.filter(isMissionArmy).filter(a=>a.status==='stationed'&&a.target.kind==='city'&&a.target.cityId===c.id))if(!canReinforce(w,a.ownerFactionId,c.ownerFactionId))returnArmy(w,a,s);
+  }else if(b.catapultBatchDone)finalizeSiegeHousing(c);
+  p.attackers=updateParticipants(w,null,p.attackers);if(p.outcome!=='conquered')p.defenders=updateParticipants(w,c,p.defenders);p.populationAfter=c.population;p.wallAfter=c.wallLevel??0;
+diff --git a/src/game/formal/economy.ts b/src/game/formal/economy.ts
+index 2dfda2d..9c02e09 100644
+--- a/src/game/formal/economy.ts
++++ b/src/game/formal/economy.ts
+@@ -1,4 +1,4 @@
+-import {finishCraftsmanCastle} from './extinction';
++import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen} from './extinction';
+ import {canReinforce} from './armies';
+ import {buildingRequirements,castleSource} from './buildingDetailData';
+ import {startDemolition,completeDemolition} from './demolition';
+@@ -66,8 +66,9 @@ export function settleCity(w:FormalWorld,c:FormalCity,at=w.time){
+ export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).cities.get(id);if(!original)return undefined;const c=structuredClone(original);settleCity(w,c);return c;}
+ export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}
+ /** B5/B6 interface only: no combat or conquest command is implemented here. */
+-export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive'){
++export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive',scheduler?:EventScheduler){
+  requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
++ if(w.extinction?.craftsmen.length||c.economy?.construction.some(j=>j.castleCivilizationId)){const s=scheduler??new EventScheduler(w.events);reconcileCityCraftsmen(w,c,s);if(!scheduler)w.events=s.snapshot();}
+ }
+ export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}
+ export function addStock(c:FormalCity,resources:Resources){const cap=storageCapacity(c);for(const r of resourceKeys)c.stock[r]=Math.min(cap-(c.economy?.reservedIncoming[r]??0),c.stock[r]+resources[r]);}
+@@ -155,6 +156,7 @@ export function handleEconomyEvent(w:FormalWorld,event:FormalEvent,s:EventSchedu
+  }
+  if(event.type==='construction.complete'){
+   const c=spatial(w).cities.get(event.cityId),job=c?.economy?.construction.find(j=>j.eventId===event.id);if(!c||!job)return true;settleCity(w,c);
++  if(job.castleCivilizationId&&!craftsmanForConstruction(w,c,job)){reconcileCityCraftsmen(w,c,s);return true;}
+   if(job.action==='demolish'){completeDemolition(w,c,job);}
+   else if(job.target.kind==='field'){const slot=job.target.slot;c.fields!.find(f=>f.slot===slot)!.level=job.toLevel;}
+   else if(job.target.key==='wall'){c.wallLevel=job.toLevel;}
+diff --git a/src/game/formal/extinction.ts b/src/game/formal/extinction.ts
+index 51fdfc0..c810288 100644
+--- a/src/game/formal/extinction.ts
++++ b/src/game/formal/extinction.ts
+@@ -1,4 +1,4 @@
+-import type {FormalWorld,FormalCity,FormalOrder,ResearchProject,WildSite,FormalEvent} from './model';
++import type {FormalWorld,FormalCity,FormalOrder,ResearchProject,WildSite,FormalEvent,Construction} from './model';
+ import type {FactionId,CityId,ArmyId,EventId} from './ids';
+ import {cityId,wildSiteId,sequenceKey} from './ids';
+ import {isMissionArmy,type MissionArmy,type Point} from './combatModel';
+@@ -49,4 +49,37 @@ export function applyExtinctionCommand(w:FormalWorld,c:FormalCity|undefined,o:Fo
+  requireRule(craft.civilizationId!==w.factions.find(f=>f.id===o.issuerId)!.civilizationId&&!Object.keys(c.buildings).some(k=>k==='castle'||k.startsWith('castle.'))&&!c.economy?.construction.some(j=>j.target.kind==='building'&&j.target.key==='castle'),'每城只可建一座城堡，工匠須為外文明。');applyEconomyCommand(w,c,o,{type:'building.upgrade',cityId:c.id,key:'castle'},s);c.economy!.construction.find(j=>j.commandId===o.commandId)!.castleCivilizationId=craft.civilizationId;craft.constructionCommandId=o.commandId;
+ }
+ export function handleCraftsmanEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler){if(e.type!=='craftsman.arrive')return false;const craft=w.extinction?.craftsmen.find(c=>c.eventId===e.id&&c.id===e.craftsmanId);if(craft){const dest=w.cities.find(c=>c.id===craft.destinationCityId&&c.ownerFactionId===craft.ownerFactionId);if(!dest){const fallback=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-craft.path.at(-1)!.x,a.y-craft.path.at(-1)!.y)-Math.hypot(b.x-craft.path.at(-1)!.x,b.y-craft.path.at(-1)!.y))[0];if(fallback){const r=route(w,craft.path.at(-1)!,fallback);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=fallback.id;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});return true;}w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return true;}craft.cityId=dest.id;craft.eventId=null;craft.arrivalAt=null;craft.destinationCityId=null;craft.path=[];}return true;}
+-export function finishCraftsmanCastle(w:FormalWorld,c:FormalCity,command:string){const craft=w.extinction?.craftsmen.find(x=>x.constructionCommandId===command);if(craft){c.castleCivilizationId=craft.civilizationId;w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);}}
++/** Bind special work to its original applied authorization, craft, city and civilization. */
++export function craftsmanForConstruction(w:FormalWorld,c:FormalCity,job:Construction){
++ if(job.target.kind!=='building'||job.target.key!=='castle'||!job.castleCivilizationId)return undefined;
++ const crafts=(w.extinction?.craftsmen??[]).filter(x=>x.constructionCommandId===job.commandId);
++ if(crafts.length!==1)return undefined;
++ const craft=crafts[0];if(craft.cityId!==c.id||craft.ownerFactionId!==c.ownerFactionId||craft.civilizationId!==job.castleCivilizationId||craft.eventId||craft.carrierArmyId||w.extinction?.extinct.includes(craft.ownerFactionId))return undefined;
++ const receipt=w.commandReceipts.find(r=>r.commandId===job.commandId&&r.issuerId===craft.ownerFactionId&&r.disposition==='applied');
++ try{const p=receipt&&JSON.parse(receipt.fingerprint).payload;if(p?.type!=='craftsman.castle'||p.cityId!==c.id||p.craftsmanId!==craft.id)return undefined;}catch{return undefined;}
++ return craft;
++}
++/** Involuntary loss of special authorization, NOT player cancellation: no refunds.
++ * Other buildings/fields/walls keep their payment, durations, start times and events. */
++function discardCraftsmanConstruction(w:FormalWorld,c:FormalCity,job:Construction,s:EventScheduler){
++ if(job.target.kind!=='building')return;const key=job.target.key,e=c.economy!;
++ const cancelled=e.construction.filter(j=>j.target.kind==='building'&&j.target.key===key&&j.fromLevel>=job.fromLevel),ids=new Set(cancelled.map(j=>j.eventId));
++ e.construction=e.construction.filter(j=>!cancelled.includes(j));
++ for(const craft of w.extinction?.craftsmen??[])if(cancelled.some(j=>j.commandId===craft.constructionCommandId))craft.constructionCommandId=null;
++ if((c.buildings[key]??0)===0){delete c.buildings[key];delete e.slots[key];if(key==='castle')delete c.castleCivilizationId;}
++ const retained=s.snapshot().filter(e=>!ids.has(e.id));while(s.size)s.pop();for(const event of retained)s.push(event);
++}
++function evacuateCraftsman(w:FormalWorld,craft:Craftsman,from:Point,s:EventScheduler){
++ const dest=spatial(w).owned(craft.ownerFactionId).sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y)||(a.id<b.id?-1:a.id>b.id?1:0))[0];
++ if(!dest){w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return;}
++ const r=route(w,from,dest);craft.path=r.path;craft.departedAt=w.time;craft.arrivalAt=w.time+Math.max(1,Math.ceil(r.distance*45000));craft.destinationCityId=dest.id;craft.cityId=null;craft.eventId=enqueue(w,s,{type:'craftsman.arrive',craftsmanId:craft.id,at:craft.arrivalAt});
++}
++/** Called in the same owner-transfer transition, using its active scheduler. */
++export function reconcileCityCraftsmen(w:FormalWorld,c:FormalCity,s:EventScheduler){
++ for(const job of [...c.economy?.construction??[]])if(job.castleCivilizationId&&!craftsmanForConstruction(w,c,job))discardCraftsmanConstruction(w,c,job,s);
++ for(const craft of [...w.extinction?.craftsmen??[]])if(craft.cityId===c.id&&craft.ownerFactionId!==c.ownerFactionId)evacuateCraftsman(w,craft,c,s);
++}
++export function finishCraftsmanCastle(w:FormalWorld,c:FormalCity,command:string){
++ const job=c.economy?.construction.find(j=>j.commandId===command),craft=job&&craftsmanForConstruction(w,c,job);if(!craft)return false;
++ c.castleCivilizationId=craft.civilizationId;w.extinction!.craftsmen=w.extinction!.craftsmen.filter(x=>x!==craft);return true;
++}
+diff --git a/src/game/formal/politics.ts b/src/game/formal/politics.ts
+index a44aea6..9d8de78 100644
+--- a/src/game/formal/politics.ts
++++ b/src/game/formal/politics.ts
+@@ -85,7 +85,15 @@ export function applyPolitics(w:FormalWorld,_c:FormalCity,o:FormalOrder,q:Politi
+  }
+  syncEmpires(w);
+ }
+-export function conquestOwner(w:FormalWorld,initiator:FactionId,armies:import('./combatModel').MissionArmy[]){const scores=new Map<FactionId,number>();for(const a of armies){let n=0;for(const [id,count] of Object.entries(a.units))if(!['scout','baggage','ram','catapult'].includes(id))n+=count;scores.set(a.ownerFactionId,(scores.get(a.ownerFactionId)??0)+n);}if((scores.get(initiator)??0)>0)return initiator;const max=Math.max(...scores.values());return politicalDraw(w,[...scores].filter(([,n])=>n===max&&n>0).map(([id])=>id));}
++/** Ownership eligibility is separate from battle damage: extinct troops still finish combat. */
++export function canAcquireConquest(w:FormalWorld,id:FactionId){return !w.extinction?.extinct.includes(id)&&w.factions.some(f=>f.id===id)&&w.cities.some(c=>c.ownerFactionId===id);}
++export function conquestOwner(w:FormalWorld,initiator:FactionId,armies:import('./combatModel').MissionArmy[]):FactionId|null{
++ const scores=new Map<FactionId,number>();
++ for(const a of armies){if(a.extinctionPending||!canAcquireConquest(w,a.ownerFactionId))continue;let n=0;for(const [id,count] of Object.entries(a.units))if(!['scout','baggage','ram','catapult'].includes(id))n+=count;scores.set(a.ownerFactionId,(scores.get(a.ownerFactionId)??0)+n);}
++ if((scores.get(initiator)??0)>0)return initiator;
++ const max=Math.max(0,...scores.values());if(!max)return null;
++ return politicalDraw(w,[...scores].filter(([,n])=>n===max).map(([id])=>id));
++}
+ 
+ /** Close stale metadata without undoing troops already committed to a battle. */
+ export function reconcilePoliticalEvents(w:FormalWorld,s:EventScheduler){
+diff --git a/src/game/formal/schema.ts b/src/game/formal/schema.ts
+index 05e4d68..6f1a492 100644
+--- a/src/game/formal/schema.ts
++++ b/src/game/formal/schema.ts
+@@ -1,3 +1,4 @@
++import {craftsmanForConstruction} from './extinction';
+ import {governorSchema,governanceOrderShape,validateGovernance} from './governanceSchema';
+ import {autonomySchema,validateAutonomy} from './autonomySchema';
+ import {politicsSchema,politicsOrderShapes,validatePolitics} from './politicsSchema';
+@@ -101,7 +102,9 @@ const worldSchema:z.ZodType<FormalWorld>=z.object({kind:z.literal('formal'),gove
+  validateCombatContracts(w,fail);
+  validatePolitics(w,fail);
+  validateAutonomy(w,fail);validateGovernance(w,fail);
+- if(w.extinction){const x=w.extinction,unique=(v:readonly string[])=>new Set(v).size===v.length;if(!unique(x.extinct)||!unique(x.sites.map(s=>s.id))||!unique(x.craftsmen.map(c=>c.id)))fail('Extinction duplicate identity');for(const id of x.extinct)if(!w.factions.some(f=>f.id===id)||w.cities.some(c=>c.ownerFactionId===id)||w.factions.find(f=>f.id===id)?.researchQueue!==null)fail('Extinct faction ownership invalid');for(const s of x.sites){if(!w.factions.some(f=>f.id===s.sourceFactionId&&f.civilizationId===s.civilizationId)||s.createdAt>w.time||Object.keys(s.initialDefenders).some(id=>!UNIT_CATALOG[id])||Object.keys(s.defenders).some(id=>!UNIT_CATALOG[id])||s.phase==='active'&&(s.defeatedAt!==undefined||!buildable(terrainAt(w,s.x,s.y))||w.cities.some(c=>c.x===s.x&&c.y===s.y)||w.worldLayer?.wildSites.some(t=>t.phase!=='cooldown'&&t.x===s.x&&t.y===s.y)||x.sites.some(t=>t!==s&&t.phase==='active'&&t.x===s.x&&t.y===s.y))||s.phase==='cooldown'&&(s.defeatedAt===undefined||Object.keys(s.defenders).length))fail('Exile lifecycle invalid');}for(const c of x.craftsmen){if(!w.factions.some(f=>f.id===c.ownerFactionId)||!x.sites.some(s=>s.id===c.siteId&&s.defeatedAt!==undefined&&s.civilizationId===c.civilizationId)||c.carrierArmyId&&!w.armies.some(a=>a.id===c.carrierArmyId&&a.ownerFactionId===c.ownerFactionId)||c.cityId&&!w.cities.some(a=>a.id===c.cityId)||c.eventId&&!w.events.some(e=>e.type==='craftsman.arrive'&&e.id===c.eventId&&e.craftsmanId===c.id&&e.at===c.arrivalAt)||c.constructionCommandId&&!w.cities.some(a=>a.economy?.construction.some(j=>j.commandId===c.constructionCommandId)))fail('Craftsman reference invalid');}for(const e of w.events)if(e.type==='craftsman.arrive'&&!x.craftsmen.some(c=>c.eventId===e.id&&c.id===e.craftsmanId))fail('Dangling craftsman event');}
++ if(w.extinction){const x=w.extinction,unique=(v:readonly string[])=>new Set(v).size===v.length;if(!unique(x.extinct)||!unique(x.sites.map(s=>s.id))||!unique(x.craftsmen.map(c=>c.id)))fail('Extinction duplicate identity');for(const id of x.extinct)if(!w.factions.some(f=>f.id===id)||w.cities.some(c=>c.ownerFactionId===id)||w.factions.find(f=>f.id===id)?.researchQueue!==null)fail('Extinct faction ownership invalid');for(const s of x.sites){if(!w.factions.some(f=>f.id===s.sourceFactionId&&f.civilizationId===s.civilizationId)||s.createdAt>w.time||Object.keys(s.initialDefenders).some(id=>!UNIT_CATALOG[id])||Object.keys(s.defenders).some(id=>!UNIT_CATALOG[id])||s.phase==='active'&&(s.defeatedAt!==undefined||!buildable(terrainAt(w,s.x,s.y))||w.cities.some(c=>c.x===s.x&&c.y===s.y)||w.worldLayer?.wildSites.some(t=>t.phase!=='cooldown'&&t.x===s.x&&t.y===s.y)||x.sites.some(t=>t!==s&&t.phase==='active'&&t.x===s.x&&t.y===s.y))||s.phase==='cooldown'&&(s.defeatedAt===undefined||Object.keys(s.defenders).length))fail('Exile lifecycle invalid');}for(const c of x.craftsmen){if(!w.factions.some(f=>f.id===c.ownerFactionId)||!x.sites.some(s=>s.id===c.siteId&&s.defeatedAt!==undefined&&s.civilizationId===c.civilizationId)||c.carrierArmyId&&!w.armies.some(a=>a.id===c.carrierArmyId&&a.ownerFactionId===c.ownerFactionId)||c.cityId&&!w.cities.some(a=>a.id===c.cityId&&a.ownerFactionId===c.ownerFactionId)||c.eventId&&!w.events.some(e=>e.type==='craftsman.arrive'&&e.id===c.eventId&&e.craftsmanId===c.id&&e.at===c.arrivalAt)||c.constructionCommandId&&!w.cities.some(a=>a.economy?.construction.some(j=>j.commandId===c.constructionCommandId&&craftsmanForConstruction(w,a,j)?.id===c.id)))fail('Craftsman reference invalid');}for(const e of w.events)if(e.type==='craftsman.arrive'&&!x.craftsmen.some(c=>c.eventId===e.id&&c.id===e.craftsmanId))fail('Dangling craftsman event');}
++
++ for(const city of w.cities)for(const job of city.economy?.construction??[])if(job.castleCivilizationId&&!craftsmanForConstruction(w,city,job))fail('Special castle authorization invalid');
+ 
+  const unique=(values:readonly string[])=>new Set(values).size===values.length;
+  if(w.fixture){if(w.metadata.schemaVersion!==1||w.worldLayer)fail('Fixture contract mismatch');}
+diff --git a/src/game/formal/siege.ts b/src/game/formal/siege.ts
+index ab8086a..e3f57e5 100644
+--- a/src/game/formal/siege.ts
++++ b/src/game/formal/siege.ts
+@@ -1,3 +1,4 @@
++import {canAcquireConquest} from './politics';
+ import type {BattleId} from './ids';
+ import type {FormalCity,FormalWorld} from './model';
+ import {resourceKeys,zeroResources} from './model';
+@@ -6,7 +7,7 @@ import type {SiegeChange} from './combatModel';
+ import {baseUnit,combatStats,effectiveUnit,hasTech} from './combatModifiers';
+ import {UNIT_CATALOG} from './unitCatalog';
+ import {HOUSING,storageCapacity} from './catalogB3';
+-import {changeCityOwner,settleCity,settleFaction} from './economy';
++import {requireRule,changeCityOwner,settleCity,settleFaction} from './economy';
+ import type {EventScheduler} from './scheduler';
+ import {seedHash} from './terrain';
+ export const WALL_DURABILITY=[0,30,35,40,45,50,60,70,80,90,105,120,140,160,185,210];
+@@ -46,10 +47,11 @@ export function resolveSiege(w:FormalWorld,c:FormalCity,pools:readonly CombatPoo
+  reconcileSiegeQueues(c);reconcileSiegeStorage(w,c);return{changes,developmentBefore:before,lost:before-developmentLevels(c),wallDamage:c.wallLevel?Math.max(0,wallPower):0,wallDamageLevel:c.wallLevel??0};
+ }
+ export function finishConquest(w:FormalWorld,c:FormalCity,owner:FormalCity['ownerFactionId'],lost:number,before:number,s:EventScheduler){
++ requireRule(canAcquireConquest(w,owner),'已滅國或無合法城市的勢力不能接收征服城市。');
+  settleFaction(w,c.ownerFactionId);settleFaction(w,owner);const queue=c.military?.queue??[],returnedTrainingPopulation=queue.reduce((n,j)=>n+j.remaining*j.populationPerUnit,0),cancelled=new Set(queue.map(j=>j.eventId));
+  const events=s.snapshot().filter(e=>!cancelled.has(e.id));while(s.size)s.pop();for(const e of events)s.push(e);
+  if(c.military)c.military.queue=[];
+  const populationBefore=c.population+returnedTrainingPopulation,rate=conquestLossRate(lost,before);c.housing=400+HOUSING[c.buildings.residence??0];c.population=Math.min(c.housing,Math.max(0,populationBefore*(1-rate)));c.autoLogistics=[];
+- changeCityOwner(w,c,owner,'conquest');return{populationBefore,populationAfter:c.population,returnedTrainingPopulation,rate};
++ changeCityOwner(w,c,owner,'conquest',s);return{populationBefore,populationAfter:c.population,returnedTrainingPopulation,rate};
+ }
+ export function finalizeSiegeHousing(c:FormalCity){c.housing=400+HOUSING[c.buildings.residence??0];c.population=Math.min(c.population,c.housing);}

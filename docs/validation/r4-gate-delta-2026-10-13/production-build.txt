@@ -1,0 +1,32 @@
+
+> guozhan-game-mvp@0.30.49 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 152 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/manifest.webmanifest                          0.33 kB
+dist/index.html                                    0.79 kB │ gzip:   0.52 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js           3.43 kB
+dist/assets/runtime.worker-BW9hQ8RO.js           429.00 kB
+dist/assets/b5Lab.worker-CVZNOIHe.js             430.68 kB
+dist/assets/index-cYazwSEx.css                   167.76 kB │ gzip:  34.24 kB
+dist/assets/workbox-window.prod.es5-Cch4wiA5.js    5.71 kB │ gzip:   2.25 kB │ map:    13.11 kB
+dist/assets/index-D6qHrqvo.js                    667.32 kB │ gzip: 202.74 kB │ map: 2,131.58 kB
+
+✓ built in 2.15s
+
+PWA v1.3.0
+mode      generateSW
+precache  192 entries (54963.80 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-2fbc6a65.js.map
+  dist/workbox-2fbc6a65.js
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
