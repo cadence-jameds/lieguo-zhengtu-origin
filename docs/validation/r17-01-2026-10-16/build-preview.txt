@@ -1,0 +1,47 @@
+
+> guozhan-game-mvp@0.30.50 prebuild
+> npm run release:prepare
+
+
+> guozhan-game-mvp@0.30.50 release:prepare
+> node scripts/prepare-release.mjs
+
+{"version":"0.30.53","date":"2026-10-16","commitSha":"8aecab3455cb26013540a339b44a1bbf7ce3ed55","dirty":true}
+
+> guozhan-game-mvp@0.30.50 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 154 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package.json                                  0.11 kB │ gzip:   0.12 kB
+dist/manifest.webmanifest                          0.33 kB
+dist/index.html                                    0.85 kB │ gzip:   0.53 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js           3.43 kB
+dist/version.json                                 11.11 kB │ gzip:   5.40 kB
+dist/CHANGELOG.md                                 12.45 kB
+dist/assets/b5Lab.worker-cbsbh5Di.js             437.86 kB
+dist/assets/runtime.worker-FM2g9hPZ.js           439.79 kB
+dist/assets/index-COqNTxOs.css                   167.80 kB │ gzip:  34.27 kB
+dist/assets/workbox-window.prod.es5-Cch4wiA5.js    5.71 kB │ gzip:   2.25 kB │ map:    13.08 kB
+dist/assets/index-xIfBluzO.js                    688.76 kB │ gzip: 211.99 kB │ map: 2,154.60 kB
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vite:worker-import-meta-url (45%)
+  - vite:css (17%)
+  - vite:build-import-analysis (10%)
+  - vite:worker (10%)
+  - vite-plugin-pwa (6%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 8.85s
+
+PWA v1.3.0
+mode      generateSW
+precache  192 entries (55002.39 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-2fbc6a65.js.map
+  dist/workbox-2fbc6a65.js

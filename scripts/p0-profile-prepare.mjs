@@ -1,3 +1,4 @@
+import {pathToFileURL} from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createRequire} from 'node:module';
@@ -5,6 +6,8 @@ import {createHash} from 'node:crypto';
 
 const source = path.resolve(process.argv[2] ?? process.cwd());
 const output = path.resolve(process.argv[3] ?? path.join(source,'artifacts/p0/compiled'));
+const releaseModule=path.join(source,'scripts/release-metadata.mjs');
+const releaseData=fs.existsSync(releaseModule)?(await import(pathToFileURL(releaseModule))).createMetadata(source):JSON.parse(fs.readFileSync(path.join(source,'public/version.json'),'utf8'));
 const require = createRequire(path.join(source, 'package.json'));
 const sourceTreeHash=createHash('sha256');
 const ts = require('typescript');
@@ -88,7 +91,7 @@ function walk(dir){for(const item of fs.readdirSync(dir,{withFileTypes:true}).so
  else if(/\.tsx?$/.test(item.name)&&!/\.d\.ts$|\.test\.tsx?$/.test(item.name)){
   const destination=path.join(output,relative.replace(/\.tsx?$/,'.js'));
   fs.mkdirSync(path.dirname(destination),{recursive:true});
-  const text=fs.readFileSync(absolute,'utf8');sourceTreeHash.update(relative+'\0'+text+'\0');
+  let text=fs.readFileSync(absolute,'utf8');if(relative==='src/game/release.ts'&&releaseData)text=text.replace('__APP_RELEASE_METADATA__',JSON.stringify(releaseData));sourceTreeHash.update(relative+'\0'+text+'\0');
   const result=ts.transpileModule(text,{fileName:absolute,compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,jsx:ts.JsxEmit.ReactJSX,sourceMap:true,inlineSources:true,verbatimModuleSyntax:false},transformers:{before:[transformer(relative)]}});
   fs.writeFileSync(destination,result.outputText);
   fs.writeFileSync(destination+'.map',result.sourceMapText);
@@ -98,6 +101,7 @@ function walk(dir){for(const item of fs.readdirSync(dir,{withFileTypes:true}).so
 }}
 walk(path.join(source,'src'));
 fs.mkdirSync(path.join(output,'public'),{recursive:true});
-fs.copyFileSync(path.join(source,'public/version.json'),path.join(output,'public/version.json'));
+fs.writeFileSync(path.join(output,'public/version.json'),JSON.stringify(releaseData));
+metadata.version=releaseData.version;
 metadata.sourceTreeHash=sourceTreeHash.digest('hex');fs.writeFileSync(path.join(output,'source-metadata.json'),JSON.stringify(metadata,null,2));
 console.log(JSON.stringify({...metadata,output}));

@@ -1,0 +1,80 @@
+{
+  "browser": "154.0.8037.57",
+  "metadata": {
+    "version": "0.30.52",
+    "date": "2026-10-16",
+    "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7",
+    "dirty": true
+  },
+  "cases": [
+    {
+      "label": "desktop",
+      "status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": true,
+      "settings": true,
+      "history": true,
+      "offlineNotes": true,
+      "oldAppVersion": "0.30.50"
+    },
+    {
+      "label": "mobile",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": true,
+      "settings": true,
+      "history": true,
+      "offlineNotes": true,
+      "oldAppVersion": "0.30.50"
+    },
+    {
+      "label": "real-sw-update",
+      "status": "PASS",
+      "sameVersion": "0.30.52",
+      "newSyntheticSha": "ffffffffffffffffffffffffffffffffffffffff",
+      "trace": [
+        {
+          "type": "durable-sync-ack",
+          "requestId": "31fe1aeb-dce3-49a8-afd1-7251838db140"
+        },
+        {
+          "type": "controllerchange"
+        }
+      ],
+      "saveBeforeActivation": true,
+      "nativeWorker": true,
+      "nativeIndexedDB": true,
+      "oldSavePreserved": true,
+      "offlineReloadFromSW": true
+    }
+  ],
+  "errors": [
+    {
+      "label": "desktop",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    },
+    {
+      "label": "real-sw-update",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    }
+  ],
+  "passed": 3,
+  "failed": 0,
+  "unexpectedErrors": []
+}

@@ -1,0 +1,41 @@
+
+> guozhan-game-mvp@0.30.50 build
+> tsc --noEmit && vite build --outDir /workspace/r17-delta-private/site-docs/lieguo-zhengtu-origin
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 154 modules transformed.
+
+(!) outDir /workspace/r17-delta-private/site-docs/lieguo-zhengtu-origin is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/package.json                                  0.11 kB │ gzip:   0.12 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/manifest.webmanifest                          0.33 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/index.html                                    0.85 kB │ gzip:   0.53 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/assets/mapRaster.worker-Bm8EOm9D.js           3.43 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/version.json                                 11.11 kB │ gzip:   5.44 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/CHANGELOG.md                                 12.45 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/assets/b5Lab.worker-CfFCUZaZ.js             437.86 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/assets/runtime.worker-BNaSdN4l.js           439.79 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/assets/index-COqNTxOs.css                   167.80 kB │ gzip:  34.27 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/assets/workbox-window.prod.es5-Cch4wiA5.js    5.71 kB │ gzip:   2.25 kB │ map:    13.11 kB
+../r17-delta-private/site-docs/lieguo-zhengtu-origin/assets/index-BlTOV5I8.js                    688.76 kB │ gzip: 212.03 kB │ map: 2,158.03 kB
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vite:worker-import-meta-url (35%)
+  - vite:css (15%)
+  - vite:worker (15%)
+  - vite:build-import-analysis (12%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 4.42s
+
+PWA v1.3.0
+mode      generateSW
+precache  192 entries (55002.39 KiB)
+files generated
+  ../r17-delta-private/site-docs/lieguo-zhengtu-origin/sw.js.map
+  ../r17-delta-private/site-docs/lieguo-zhengtu-origin/sw.js
+  ../r17-delta-private/site-docs/lieguo-zhengtu-origin/workbox-2fbc6a65.js.map
+  ../r17-delta-private/site-docs/lieguo-zhengtu-origin/workbox-2fbc6a65.js

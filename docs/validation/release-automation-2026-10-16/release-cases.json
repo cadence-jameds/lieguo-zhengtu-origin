@@ -1,0 +1,31 @@
+{
+  "baselineMain": "6405f7e155b5747c93a063799912b66f1362b9c7",
+  "pr3Backfill": {
+    "version": "0.30.51",
+    "date": "2026-10-16",
+    "notes": [
+      "工匠移動途中目的城市失守時，會嘗試改往其他合法可達城市；全部不可達時安全結束移動。",
+      "城市被征服時，尚未出發的待命聯軍依核准規則清算，不再從敵方城市非法出發。",
+      "同文明與外文明工匠團可免費興建對應文明城堡 Lv1，正常工期與建築前置不變。",
+      "新建立的水域行軍路線使用陸地兩倍耗時，既有在途任務保留原抵達時間。",
+      "修正城市失守時非戰鬥單位與失效工匠工程的清算。"
+    ],
+    "repeatedHash": "6839efb96c0923994986b4862da1a285d193543a069737692e4580c118bcfb8d",
+    "repeatIdentical": true
+  },
+  "preview": {
+    "version": "0.30.52",
+    "date": "2026-10-16",
+    "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7",
+    "dirty": true
+  },
+  "CIAndPages": "same immutable HEAD and generator inputs; workflows share scripts, no run-id or clock inputs",
+  "sourcePackageRole": "fixed 0.30.50 baseline",
+  "deployedPackage": {
+    "name": "guozhan-game-mvp",
+    "private": true,
+    "version": "0.30.52",
+    "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7"
+  },
+  "liveDeployment": "not changed by this task"
+}

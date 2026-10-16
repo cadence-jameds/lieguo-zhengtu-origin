@@ -59,3 +59,39 @@ it('invalid and older versions do not offer an update; offline packages never re
 it('browsers without a service worker still save before a cache-busted navigation',async()=>{
  delete (navigator as any).serviceWorker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();await act(async()=>updates.update());expect(save).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledOnce();
 });
+it('same numeric version with different playable content is actionable; identical content is not',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,commitSha:'f'.repeat(40),contentSha:'e'.repeat(40)})});await mount();expect(updates.available).toBe(true);expect(updates.text).toContain('可用更新建置');
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,commitSha:RELEASE.commitSha,contentSha:RELEASE.contentSha})});await act(async()=>updates.check());expect(updates.available).toBe(false);expect(updates.text).toContain('已確認為最新版本');
+ pwa.register.mock.calls[0][0].onNeedRefresh();await act(async()=>Promise.resolve());expect(updates.available).toBe(false);
+});
+it('offline checks retain bundled release notes and never activate or reload',async()=>{fetcher.mockRejectedValue(new Error('offline'));await mount();expect(updates.available).toBe(false);expect(el.textContent).toContain('目前無法確認更新');expect(el.textContent).toContain('近期版本與過往紀錄');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();});
+it('a fully downloaded waiting worker remains usable when the metadata endpoint is offline',async()=>{fetcher.mockRejectedValue(new Error('offline'));await mount();(registration as any).waiting=worker;await act(async()=>{pwa.register.mock.calls[0][0].onNeedRefresh();});expect(updates.available).toBe(true);expect(updates.text).toContain('已下載完成');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();});
+
+it('docs-only deployment changes neither offer an update nor activate a waiting SW, including after going offline',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({...RELEASE,commitSha:'d'.repeat(40)})});await mount();expect(updates.available).toBe(false);expect(updates.text).toContain('已確認為最新版本');
+ (registration as any).waiting=worker;await act(async()=>pwa.register.mock.calls[0][0].onNeedRefresh());expect(updates.available).toBe(false);expect([...el.querySelectorAll('button')].some(b=>b.textContent==='保存進度並載入新版')).toBe(false);
+ fetcher.mockRejectedValue(new Error('offline'));await act(async()=>updates.check());expect(updates.available).toBe(false);expect(save).not.toHaveBeenCalled();expect(worker.postMessage).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+});
+it('docs-only content verified before a worker finishes downloading stays suppressed offline',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({...RELEASE,commitSha:'d'.repeat(40)})});await mount();fetcher.mockRejectedValue(new Error('offline'));(registration as any).waiting=worker;
+ await act(async()=>pwa.register.mock.calls[0][0].onNeedRefresh());expect(updates.available).toBe(false);expect(save).not.toHaveBeenCalled();expect(worker.postMessage).not.toHaveBeenCalled();
+});
+it('a genuine same-version content update remains usable offline and saves before SW activation',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({...RELEASE,commitSha:'f'.repeat(40),contentSha:'e'.repeat(40)})});await mount();expect(updates.available).toBe(true);
+ (registration as any).waiting=worker;fetcher.mockRejectedValue(new Error('offline'));await act(async()=>pwa.register.mock.calls[0][0].onNeedRefresh());expect(updates.available).toBe(true);
+ let saved!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>saved=r));let completed!:Promise<void>;await act(async()=>{completed=updates.update();});expect(worker.postMessage).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ await act(async()=>saved());expect(worker.postMessage).toHaveBeenCalledWith({type:'SKIP_WAITING'});expect(replace).not.toHaveBeenCalled();await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await completed;});expect(save).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledOnce();
+});
+it('deployment SHA alone or malformed content identity never implies a same-version playable update',async()=>{
+ for(const contentSha of [undefined,'invalid','f'.repeat(39)]){fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,commitSha:'f'.repeat(40),contentSha})});if(!fetcher.mock.calls.length)await mount();else await act(async()=>updates.check());expect(updates.available).toBe(false);}
+});
+
+it('a later real content update clears docs-only suppression, and matching content withdraws an earlier offer',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({...RELEASE,commitSha:'d'.repeat(40)})});await mount();(registration as any).waiting=worker;expect(updates.available).toBe(false);
+ fetcher.mockResolvedValue({ok:true,json:async()=>({...RELEASE,commitSha:'f'.repeat(40),contentSha:'e'.repeat(40)})});await act(async()=>updates.check());expect(updates.available).toBe(true);
+ fetcher.mockResolvedValue({ok:true,json:async()=>({...RELEASE,commitSha:'d'.repeat(40)})});await act(async()=>updates.check());expect(updates.available).toBe(false);
+ fetcher.mockRejectedValue(new Error('offline'));await act(async()=>updates.check());expect(updates.available).toBe(false);expect(worker.postMessage).not.toHaveBeenCalled();
+});
+it('matching content identity is sufficient even without a deployment SHA',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,contentSha:RELEASE.contentSha})});await mount();(registration as any).waiting=worker;await act(async()=>pwa.register.mock.calls[0][0].onNeedRefresh());expect(updates.available).toBe(false);expect(updates.text).toContain('已確認為最新版本');
+});

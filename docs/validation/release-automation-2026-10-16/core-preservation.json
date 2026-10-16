@@ -1,0 +1,20 @@
+{
+  "base": "6405f7e155b5747c93a063799912b66f1362b9c7",
+  "byteIdentical": [
+    "src/game/formal/versions.ts",
+    "src/game/formal/schema.ts",
+    "src/game/formal/saveCodec.ts",
+    "src/game/formal/reducer.ts",
+    "src/game/formal/scheduler.ts",
+    "src/game/formal/economy.ts",
+    "src/game/formal/battles.ts",
+    "src/game/formal/autonomy.ts",
+    "src/game/persistence.ts",
+    "src/game/runtime.worker.ts",
+    "src/game/orderAdmission.ts",
+    "src/game/interaction.ts",
+    "src/game/useGame.ts"
+  ],
+  "runtimeRulesChanged": false,
+  "formalCompatibilityConstantsChanged": false
+}

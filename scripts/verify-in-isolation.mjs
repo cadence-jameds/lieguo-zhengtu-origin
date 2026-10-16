@@ -1,10 +1,12 @@
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
+import {loadMetadata} from './release-metadata.mjs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve, sep } from 'node:path';
 
 // Historical tests write evidence into docs. Run them in a disposable copy.
 const root = process.cwd();
+const release=loadMetadata(root);
 const mode = process.argv[2] ?? 'full';
 if (!['full', 'r3', 'smoke'].includes(mode)) throw new Error('Expected full, r3 or smoke.');
 if (!existsSync(join(root, 'node_modules/vitest/vitest.mjs'))) throw new Error('Run npm ci first.');
@@ -17,6 +19,8 @@ for (const file of tracked) {
   mkdirSync(dirname(target), { recursive: true });
   cpSync(join(root, file), target);
 }
+mkdirSync(join(temporary,'.release'),{recursive:true});
+writeFileSync(join(temporary,'.release/metadata.json'),JSON.stringify(release));
 symlinkSync(join(root, 'node_modules'), join(temporary, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
 const resultDir = join(root, 'artifacts/integration');
 mkdirSync(resultDir, { recursive: true });

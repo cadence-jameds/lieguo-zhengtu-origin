@@ -1,0 +1,41 @@
+{
+  "reviewedHead": "8aecab3455cb26013540a339b44a1bbf7ce3ed55",
+  "main": "6405f7e155b5747c93a063799912b66f1362b9c7",
+  "before": {
+    "numPassedTests": 12,
+    "numFailedTests": 3,
+    "numPendingTests": 0
+  },
+  "targeted": {
+    "numPassedTests": 28,
+    "numFailedTests": 0,
+    "numPendingTests": 0
+  },
+  "full": {
+    "numPassedTests": 1306,
+    "numFailedTests": 0,
+    "numPendingTests": 1,
+    "numTotalTestSuites": 179
+  },
+  "browser": {
+    "passed": 4,
+    "failed": 0,
+    "unexpectedErrors": 0
+  },
+  "productionIntegrationCandidateVersion": "0.30.52",
+  "docsOnly": {
+    "sameContent": true,
+    "sameVersion": true,
+    "differentDeployment": true
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "pagesPaths": "PASS",
+  "core13ByteIdenticalToMain": true,
+  "noTimeoutChanges": true,
+  "noTestExclusions": true,
+  "sourceRuntimeChanges": [
+    "src/game/useAppUpdate.ts"
+  ],
+  "gate": "Awaiting GPT-6 review; no independent Gate claimed"
+}

@@ -1,0 +1,56 @@
+{
+  "browser": "154.0.8037.57",
+  "metadata": {
+    "version": "0.30.52",
+    "date": "2026-10-16",
+    "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7",
+    "dirty": true
+  },
+  "cases": [
+    {
+      "label": "desktop",
+      "status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": true,
+      "settings": true,
+      "history": true,
+      "offlineNotes": true,
+      "oldAppVersion": "0.30.50"
+    },
+    {
+      "label": "mobile",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": true,
+      "settings": true,
+      "history": true,
+      "offlineNotes": true,
+      "oldAppVersion": "0.30.50"
+    },
+    {
+      "label": "real-sw-update",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForFunction: Timeout 20000ms exceeded."
+    }
+  ],
+  "errors": [
+    {
+      "label": "desktop",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+    }
+  ],
+  "passed": 2,
+  "failed": 1
+}
