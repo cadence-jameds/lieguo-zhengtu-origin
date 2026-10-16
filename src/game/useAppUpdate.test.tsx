@@ -59,3 +59,10 @@ it('invalid and older versions do not offer an update; offline packages never re
 it('browsers without a service worker still save before a cache-busted navigation',async()=>{
  delete (navigator as any).serviceWorker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();await act(async()=>updates.update());expect(save).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledOnce();
 });
+it('same numeric version with a different deployment SHA is actionable; identical metadata is not',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,commitSha:'f'.repeat(40)})});await mount();expect(updates.available).toBe(true);expect(updates.text).toContain('可用更新建置');
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,commitSha:RELEASE.commitSha})});await act(async()=>updates.check());expect(updates.available).toBe(false);expect(updates.text).toContain('已確認為最新版本');
+ pwa.register.mock.calls[0][0].onNeedRefresh();await act(async()=>Promise.resolve());expect(updates.available).toBe(false);
+});
+it('offline checks retain bundled release notes and never activate or reload',async()=>{fetcher.mockRejectedValue(new Error('offline'));await mount();expect(updates.available).toBe(false);expect(el.textContent).toContain('目前無法確認更新');expect(el.textContent).toContain('近期版本與過往紀錄');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();});
+it('a fully downloaded waiting worker remains usable when the metadata endpoint is offline',async()=>{fetcher.mockRejectedValue(new Error('offline'));await mount();(registration as any).waiting=worker;await act(async()=>{pwa.register.mock.calls[0][0].onNeedRefresh();});expect(updates.available).toBe(true);expect(updates.text).toContain('已下載完成');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();});

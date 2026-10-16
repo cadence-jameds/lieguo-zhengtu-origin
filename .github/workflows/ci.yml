@@ -3,6 +3,7 @@ name: CI
 on:
   push:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
   workflow_dispatch:
 
 permissions:
@@ -20,12 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Prepare deterministic release metadata
+        run: npm run release:prepare
       - run: npm run typecheck
       - name: Full regression in a disposable copy
         run: node scripts/verify-in-isolation.mjs full
@@ -36,6 +40,17 @@ jobs:
       - name: Check project Pages paths
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: node scripts/check-pages-build.mjs
+      - name: Verify release artifacts
+        run: node scripts/check-release-build.mjs
+      - name: Preserve release metadata
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-metadata-${{ github.sha }}
+          path: |
+            dist/version.json
+            dist/package.json
+            dist/CHANGELOG.md
       - name: Preserve regression result
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4

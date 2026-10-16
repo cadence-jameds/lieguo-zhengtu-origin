@@ -24,7 +24,10 @@
     "test:b3": "vitest run src/game/formal/economyB3.test.ts",
     "test:b4": "vitest run src/game/formal/developmentB4.test.ts src/game/formal/runtimeB4.test.ts",
     "test:presentation": "vitest run src/game/presentation",
-    "test:parity": "vitest run src/game/presentation/parity.test.tsx src/game/presentation/mapRaster.test.ts"
+    "test:parity": "vitest run src/game/presentation/parity.test.tsx src/game/presentation/mapRaster.test.ts",
+    "release:prepare": "node scripts/prepare-release.mjs",
+    "prebuild": "npm run release:prepare",
+    "predev": "npm run release:prepare"
   },
   "dependencies": {
     "dexie": "^4.4.5",

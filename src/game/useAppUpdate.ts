@@ -2,12 +2,12 @@ import {useCallback,useEffect,useRef,useState} from 'react';
 import {registerSW} from 'virtual:pwa-register';
 import {RELEASE} from './release';
 
-const newer=(value:unknown):value is string=>{
- if(typeof value!=='string'||!/^\d+\.\d+\.\d+$/.test(value))return false;
- const a=value.split('.').map(Number),b=RELEASE.version.split('.').map(Number);
+export function releaseUpdate(data:{version?:unknown;commitSha?:unknown},loaded=RELEASE){
+ if(typeof data.version!=='string'||!/^\d+\.\d+\.\d+$/.test(data.version))throw Error('Invalid release version');
+ const a=data.version.split('.').map(Number),b=loaded.version.split('.').map(Number);
  for(let i=0;i<3;i++)if(a[i]!==b[i])return a[i]>b[i];
- return false;
-};
+ return typeof data.commitSha==='string'&&/^[a-f0-9]{40}$/.test(data.commitSha)&&data.commitSha!==loaded.commitSha;
+}
 /** Wait for the new cache to finish installing; a normal reload can still use the old cache. */
 export function waitForWaiting(registration:ServiceWorkerRegistration):Promise<ServiceWorker>{
  return new Promise((resolve,reject)=>{
@@ -37,16 +37,17 @@ export function useAppUpdate(save:()=>Promise<void>){
    const url=new URL(import.meta.env.BASE_URL+'version.json',window.location.href);url.searchParams.set('_check',String(Date.now()));
    const r=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error();const data=await r.json();
    if(typeof data.version!=='string'||!/^\d+\.\d+\.\d+$/.test(data.version))throw new Error();
-   if(newer(data.version)){latest.current=data.version;setVersion(data.version);setText('可用新版 v'+data.version+'；可保存進度並更新。');}
-   else if(!latest.current&&!waiting.current)setText('目前已載入 v'+RELEASE.version+'，已確認為最新版本。');
+   if(releaseUpdate(data)){latest.current=data.version===RELEASE.version?(data.commitSha??data.version):data.version;setVersion(data.version);setText((data.version===RELEASE.version?'可用更新建置 v':'可用新版 v')+data.version+'；可保存進度並更新。');}
+   else if(data.commitSha===RELEASE.commitSha){latest.current='';setVersion('');setReady(false);}
+   if(!latest.current){const verified=data.commitSha===RELEASE.commitSha;setReady(waiting.current&&!verified);setText(verified?'目前已載入 v'+RELEASE.version+'，已確認為最新版本。':waiting.current?'網站更新已下載完成，可保存進度並更新。':'目前已載入 v'+RELEASE.version+'；網站未提供相同建置識別，僅確認數字版本。');}
    await registration.current?.update();
-  }catch{if(!latest.current&&!waiting.current)setText('目前無法確認更新；本機戰役仍可繼續。');}
+  }catch{if(waiting.current){setReady(true);setText('更新已下載完成，可保存進度並更新；目前無法連線核對網站。');}else if(!latest.current)setText('目前無法確認更新；本機戰役仍可繼續。');}
   finally{checking.current=false;}
  },[embedded]);
  useEffect(()=>{
   if(embedded){void check();return;}
   let disposed=false;
-  registerSW({immediate:true,onNeedReload(){/* Activation never reloads before the explicit save below. */},onNeedRefresh(){if(!disposed){waiting.current=true;setReady(true);setText('新版已下載完成，可保存進度並更新。');}},onRegisteredSW(_url,r){if(!disposed){registration.current=r;void r?.update().catch(()=>{});}}});
+  registerSW({immediate:true,onNeedReload(){/* Activation never reloads before the explicit save below. */},onNeedRefresh(){if(!disposed){waiting.current=true;void check();}},onRegisteredSW(_url,r){if(!disposed){registration.current=r;void r?.update().catch(()=>{});}}});
   void check();const visible=()=>{if(!document.hidden)void check();};const timer=setInterval(visible,60000);
   document.addEventListener('visibilitychange',visible);window.addEventListener('focus',visible);window.addEventListener('online',visible);
   return()=>{disposed=true;clearInterval(timer);document.removeEventListener('visibilitychange',visible);window.removeEventListener('focus',visible);window.removeEventListener('online',visible);};

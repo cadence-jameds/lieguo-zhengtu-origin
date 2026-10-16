@@ -6,8 +6,10 @@ Use Node 22.13 or newer and npm ci. Run npm run typecheck and npm run build for 
 
 The baseline has three known legacy art failures; B5 E1 is HOLD, Astra Gate is not PASS, and physical-phone testing is pending. Preserve these facts. Never change tests or acceptance records merely to obtain green CI.
 
-Push development to a development branch. Only protected release can deploy GitHub Pages, after genuine acceptance is recorded in .github/RELEASE_APPROVAL.json and full CI passes. Main and ordinary PRs build/test only. Do not publish current R3.
+Push development to a development branch. The current deploy-pages.yml automatically deploys tested main as an authorized public preview; ordinary PRs only validate. Formal release acceptance remains separate. Never merge or deploy without task authorization.
 
 For read-only Cloud validation, report branch/HEAD, run typecheck, build and isolated smoke checks, and verify git status --porcelain stays empty. Do not commit, push, open a PR, edit tracked files, or declare release acceptance. Dependencies and temporary build/test outputs are allowed.
 
 Do not commit credentials, private user saves, node_modules, dist, artifacts, raw browser traces, or ZIP/bundle archives. Existing synthetic scenario evidence remains historical provenance; ignore rules do not remove it from history.
+
+For playable changes, add exactly one new releases/notes/<slug>.json (Traditional Chinese title and 1–10 completed player-visible notes). Copy the same JSON into the PR template release-notes markers; CI validates it from the pull_request event without new permissions. Do not edit merged notes, manually bump the baseline package version, claim spec-only work is finished, or write generated .release/dist files to Git. See docs/RELEASE_METADATA.md.

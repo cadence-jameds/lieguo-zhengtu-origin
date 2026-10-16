@@ -2,7 +2,7 @@
 """Create a self-contained file-openable Playable from an already validated Vite dist."""
 from pathlib import Path
 import sys,base64,mimetypes,json,re
-root=Path(__file__).resolve().parents[1];dist=root/'dist';version=json.loads((root/'public/version.json').read_text())['version'];dest=Path(sys.argv[1] if len(sys.argv)>1 else root/f'Playable1_v{version}.html')
+root=Path(__file__).resolve().parents[1];dist=root/'dist';version=json.loads((dist/'version.json').read_text())['version'];dest=Path(sys.argv[1] if len(sys.argv)>1 else root/f'Playable1_v{version}.html')
 index=next(dist.glob('assets/index-*.js'));css=next(dist.glob('assets/index-*.css'));worker=next(dist.glob('assets/runtime.worker-*.js'));mapworker=next(dist.glob('assets/mapRaster.worker-*.js'))
 js=index.read_text();pattern=r'new URL\([`\"]/?assets/'+re.escape(worker.name)+r'[`\"],(?:``\+)?import\.meta\.url\)'
 js,count=re.subn(pattern,'window.__FORMAL_EMBEDDED_WORKER',js)

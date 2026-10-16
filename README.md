@@ -1,4 +1,4 @@
-# 列國征途：始源 v0.30.49
+# 列國征途：始源
 
 單機持續世界歷史策略網頁遊戲。從一座城邦出發，建設資源田與城市、研究科技、整備軍隊，並透過行軍、偵察與戰報探索河谷世界。支援桌面與手機版面，進度保存在自己的瀏覽器。
 
@@ -6,13 +6,13 @@
 
 **[開啟 GitHub Pages 試玩版](https://cadence-jameds.github.io/lieguo-zhengtu-origin/)**
 
-v0.30.49 已於 2026-10-13 發布到 GitHub Pages。目前為公開試玩，正式驗收仍有待完成項目，詳見下方「驗證與驗收狀態」。目前版本以 [public/version.json](public/version.json) 為準。
+目前為公開試玩，正式驗收與自動部署分開。首頁、戰役設定及已部署的 `version.json` 顯示實際載入版本、日期與 Commit SHA。原始碼 `package.json` 的 0.30.50 是固定計數基準，不代表最新部署版本；詳見 [版本管理](docs/RELEASE_METADATA.md)。
 
 ## 正式主規格（v94）
 
 **[《河谷戰役 vNext》正式整合主規格 v94](docs/b6-v94/河谷戰役_vNext_平衡重構討論_v94.md)** 為目前唯一現行設計基準，完整承接 v93／v92 的有效規則。v94 第 17 章新增：**每座城市從開局即可安排最多 5 筆建築施工與 5 筆軍事訓練排程**（各自計數、包含正在執行與等待中的工作），取代原先各 3 筆上限；第二建築施工佇列仍於該城曾達 **15,000 人口**永久解鎖、第二軍事訓練佇列仍於曾達 **20,000 人口**永久解鎖，各可同時執行 2 筆，但總排程上限仍各 5 筆。
 
-v93 第 16 章已核准的 **80 項一次性玩家任務**（黑暗 14、封建 29、城堡 20、帝王 17）與資源獎勵完整保留；**不新增 B9 終局任務**。歷史規格 [v93](docs/b6-v93/河谷戰役_vNext_平衡重構討論_v93.md) 與 [v92](docs/b6-v92/河谷戰役_vNext_平衡重構討論_v92.md) 均保留供版本追溯。**v94 是設計規格升版，並非遊戲程式更新；GitHub Pages 公開試玩仍以 `public/version.json` 公布的版本為準。**
+v93 第 16 章已核准的 **80 項一次性玩家任務**（黑暗 14、封建 29、城堡 20、帝王 17）與資源獎勵完整保留；**不新增 B9 終局任務**。歷史規格 [v93](docs/b6-v93/河谷戰役_vNext_平衡重構討論_v93.md) 與 [v92](docs/b6-v92/河谷戰役_vNext_平衡重構討論_v92.md) 均保留供版本追溯。**v94 是設計規格升版，並非遊戲程式更新；GitHub Pages 公開試玩以建置產物 `version.json` 公布的版本為準。**
 
 ## 新戰役與存檔
 
@@ -71,11 +71,9 @@ GITHUB_ACTIONS=true GITHUB_REPOSITORY=cadence-jameds/lieguo-zhengtu-origin npm r
 
 ## GitHub Pages 發布流程
 
-`main` 為開發整合分支，`release` 為受保護的 Pages 發布分支。更新 `main` 不會直接發布網站；`dist/`、`node_modules/`、測試輸出及私人存檔不提交到 GitHub。
+`main` 每次更新後，自動執行 Typecheck、完整隔離 Regression、建置與 Pages 路徑／版本一致性檢查；全部成功才由現有 Pages workflow 部署公開試玩。一般 PR 只驗證，不部署；正式驗收狀態仍獨立保留，不能以 CI 綠燈代替。
 
-發布流程需確認核准紀錄所涵蓋的原始碼、通過完整回歸測試與建置、檢查 Pages 路徑，並在 `github-pages` 環境完成部署核准。部署工作流程只允許 `release` 分支執行。
-
-目前公開試玩的授權與來源版本記錄在 [.github/PAGES_PREVIEW_APPROVAL.json](.github/PAGES_PREVIEW_APPROVAL.json)。後續遊戲原始碼、美術資源或建置設定變更，需有涵蓋該來源版本的核准；正式發布則仍須符合 [.github/RELEASE_APPROVAL.json](.github/RELEASE_APPROVAL.json) 的正式驗收條件。詳見 [Pages 試玩發布說明](docs/PAGES_PREVIEW.md)。
+版本資訊於建置時由 Git 歷史及合併 PR 的受控 Release Notes 產生，不回寫 main、不新增版本 PR、不依賴 Actions push 觸發另一流程。`dist/`、`.release/`、依賴、私人存檔與測試暫存不提交。離線仍可查看已載入版本日誌，更新前維持保存進度及等待 Service Worker 安裝的流程。
 
 ## 驗證與驗收狀態
 
