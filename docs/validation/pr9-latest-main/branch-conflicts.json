@@ -1,0 +1,25 @@
+{
+  "baseMain": "7e52d06c3ca83b1ba99d6f28346e0735b0d29aa2",
+  "reviewedPrHead": "c8cf3ef16e01a709b545e4fa0dbe579c15e008b4",
+  "sourceHead": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+  "originalCheckpoint": "checkpoint/pr9-before-main-20261016",
+  "mainCheckpoint": "checkpoint/pr9-main-20261016",
+  "sourceCheckpoint": "checkpoint/pr9-source-integration-20261016",
+  "firstParentMain": true,
+  "secondParentReviewedPr": true,
+  "bothAncestorsVerified": true,
+  "remoteFastForward": true,
+  "forcePush": false,
+  "hardReset": false,
+  "unresolvedConflicts": [],
+  "textConflicts": [
+    "src/game/GameApp.tsx",
+    "src/game/formal/reducer.ts",
+    "src/game/runtime.worker.ts",
+    "src/game/useGame.ts",
+    "src/game/presentation/ExtinctionView.tsx"
+  ],
+  "archivalPngReferencesPreserved": 107,
+  "partialCheckoutLocalGitRenameDiscoveryDisabled": true,
+  "ciWorkflowsUnchangedFromMain": true
+}

@@ -1,0 +1,63 @@
+{
+  "sourceHead": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+  "sourceTree": "23602d36471f2618667b08888df826e54bcc6ca3",
+  "main": "7e52d06c3ca83b1ba99d6f28346e0735b0d29aa2",
+  "reviewedPrHead": "c8cf3ef16e01a709b545e4fa0dbe579c15e008b4",
+  "full": {
+    "numPassedTests": 1338,
+    "numFailedTests": 0,
+    "numPendingTests": 1
+  },
+  "testFiles": 150,
+  "durationMs": 632381.1359863281,
+  "targeted": {
+    "numPassedTests": 107,
+    "numFailedTests": 0,
+    "numPendingTests": 0
+  },
+  "browsers": [
+    {
+      "file": "browser-main.json",
+      "passed": 24,
+      "failed": 0,
+      "expectedOfflineErrors": 0
+    },
+    {
+      "file": "browser-extra.json",
+      "passed": 10,
+      "failed": 0,
+      "expectedOfflineErrors": 0
+    },
+    {
+      "file": "browser-core.json",
+      "passed": 8,
+      "failed": 0,
+      "expectedOfflineErrors": 0
+    },
+    {
+      "file": "browser-pwa.json",
+      "passed": 4,
+      "failed": 0,
+      "expectedOfflineErrors": 5
+    }
+  ],
+  "browserGroupsPassed": 46,
+  "unexpectedBrowserErrors": 0,
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "pagesPaths": "PASS",
+  "releaseConsistency": "PASS",
+  "version": "0.30.53",
+  "history": [
+    "0.30.53",
+    "0.30.52",
+    "0.30.51",
+    "0.30.50"
+  ],
+  "contentSha": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+  "sourceInputsMatchFullRun": true,
+  "protectedMainFiles": 26,
+  "officialRunnerUnmodified": true,
+  "testExclusions": [],
+  "gate": "STOP; awaiting GPT-6 review. No independent Gate PASS."
+}

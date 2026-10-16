@@ -1,0 +1,165 @@
+{
+  "sourceHead": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+  "main": "7e52d06c3ca83b1ba99d6f28346e0735b0d29aa2",
+  "protectedFiles": [
+    {
+      "path": "src/game/formal/extinction.ts",
+      "gitBlob": "326fd05b44a395d2d5ffeb6354e83af8846b73ce",
+      "sha256": "a46c95aff23e0f6a93200368a7a1b716f62b9a9671580a0e168a68b1721dfdba",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/economy.ts",
+      "gitBlob": "6269dac244966c994bbfc04b607731be1b593327",
+      "sha256": "6d2246575efb608795fb9c36e12603c8f0be9684e3901804ff29580a571db369",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/battles.ts",
+      "gitBlob": "b2692d364e263f63e3e3817668f4e81a02096b5b",
+      "sha256": "73e4d54879f75a0e5a6bf8051edd49bc4532c191aa4f4fdd90362cefda5b8db5",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/routing.ts",
+      "gitBlob": "9d054da85de8785bc3cb8fcada31b1119399aa27",
+      "sha256": "ade6fda7a1318da5344859705d99f97b5b602c3b43b21ee6d469d187af2e8367",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/terrain.ts",
+      "gitBlob": "d6bd077045944e4865db466a73ab887cbcf4f52b",
+      "sha256": "0ad1e9eb20f8d022b207c1f85764994e83f929c07a1220fc75a7a0e013c2b13a",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/scheduler.ts",
+      "gitBlob": "9d8fe1c598c6f16fb7e09b2729cee12633e29c0e",
+      "sha256": "3f51f818d915876d6bf8887f1aa6d3f0d104d275c9e803719012534bc9e70d9c",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/saveCodec.ts",
+      "gitBlob": "31e047e5c399edcb784e4ba5cc82ea2b03655747",
+      "sha256": "861ba624c21df7d047b5373e6419950a3a5ce4bf34a574b323a539d94a3553ba",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/versions.ts",
+      "gitBlob": "a4730f6b793482011601e3504289b7ae507ee395",
+      "sha256": "106503bc8dc58e9c91a2bd03b71732ef0cff99a1af59d2746d459d016da8e82d",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/armies.ts",
+      "gitBlob": "38f6c2e9e60fdecf9226279b9b9b27c313469feb",
+      "sha256": "b1cad7420bf78535eb0a61a88121182a538a30f0ba0962bf64658139572e9d61",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/combatModel.ts",
+      "gitBlob": "8f5106a894c377feae4d9f2f776b70c87975620c",
+      "sha256": "2358cb348234488e137abd5421e0f406a611084e59dde48fef627a5faa558c4e",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/governance.ts",
+      "gitBlob": "110f32f1fb1cf9e0a54aea0be0956224142a6879",
+      "sha256": "11ee0a8dbbae233f5eff2595a74674fcecbac1655527d2c226c5a45d56364974",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/cooperation.ts",
+      "gitBlob": "020e50771b96eb68bce7f612d65567ca2a3a2200",
+      "sha256": "e233584576ebab4c1552332fe1d39a0c81af3b9a290deb964116d4266c70a225",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/politics.ts",
+      "gitBlob": "fdcd3ec71cd64c07d1dab5a46c9a7d04b3cdab49",
+      "sha256": "d9f987965be4b0464f11c2b0e6bcb5ce059f87750e533807d48126369a01b378",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/autonomy.ts",
+      "gitBlob": "41873d9f9aeafa13c69581da47ec541ad6151286",
+      "sha256": "74a73329a6e30acf2fb6fb5378458f8a8633c2cdaeb9606450cafd92ba99929f",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/formal/aiKnowledge.ts",
+      "gitBlob": "e887e66f633d6d8337d4a1b17c13cb2d80924767",
+      "sha256": "c1ce91b0c04b8373e8ea2c0e78484a67ca2099aefe3c6476d450eede553a27b2",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/useAppUpdate.ts",
+      "gitBlob": "4e2d6100e9e583452fa47ca0067188c4bfb11968",
+      "sha256": "a06ab29a0d4a3935c9a02078cc5ca410d032e01e61e5fdcdc237a33019b1e6f5",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/release.ts",
+      "gitBlob": "60ba4a1d8895ff723053690bd7a0e87b45853e9f",
+      "sha256": "e5b7b3db3cfaa4488516a3cad68379e2b8f4112f92be66f0a4f2be34becd9251",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/releaseTypes.ts",
+      "gitBlob": "033fe1d7fb7ca15d05fe326f3bb146aa45388f0d",
+      "sha256": "7a63e80a4f6d8b85b98f54ea1108604933bd01cf5293f21c8f672212563770a0",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/ReleaseLog.tsx",
+      "gitBlob": "e288939a0aa875c2418814f16c8e7d68d4a1ca16",
+      "sha256": "93d3a9aa475a8baea4a81ee52ada8786409df7e68b67cb8a8fe3825317689517",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/orderAdmission.ts",
+      "gitBlob": "67c206e86585d68ccc971499109105e625c06f35",
+      "sha256": "123b28be7bf01b1aedf42f3cf006b9d4e5040a10242356a53be4449164fd94ff",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "src/game/interaction.ts",
+      "gitBlob": "dedec21aa41150f61d0e7a24297c707ab5c46c9c",
+      "sha256": "1d551e4f163d4b1c31a438be44f20849f92651352160ccb97bca777aaf25082c",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "scripts/release-metadata.mjs",
+      "gitBlob": "4b2a4bf75cc65afe1195d93a5c61050a295a11db",
+      "sha256": "df4a625c5fbae7a6c91034ccc45c12a463e3f78b442b1f878bf90b125444fde0",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "scripts/prepare-release.mjs",
+      "gitBlob": "249548c5e707244751b35fc06a0a329015ed888a",
+      "sha256": "c448ab2c8d1f36cd3ce2fd221fbb05d14ee503bf6f32d54711e040fd18a01683",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "vite.config.ts",
+      "gitBlob": "48ab80a860757f929edcf6593fbd3d6dd26808c4",
+      "sha256": "8edb0c4fdf43132404e39aa21a70fef23ee63a5f984f4ca4298945ab3e392e24",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "package.json",
+      "gitBlob": "e49b50ee10c889f5f2ca220dc33e1a68d097c667",
+      "sha256": "c1d5dac454d3106a8eef4844ad0a926e734eccb01ac0d5b51659d454ca1e9305",
+      "byteIdenticalToMain": true
+    },
+    {
+      "path": "package-lock.json",
+      "gitBlob": "24cfbb18238e3a5f2235d60374bd882e59c8984d",
+      "sha256": "457d8c769dad462662ddb1faaa74b5a9e65c11285f1f68c545e2f4dfc819963d",
+      "byteIdenticalToMain": true
+    }
+  ],
+  "workerAndUseGameOnlyDiplomacyCountExtension": true,
+  "firstParentMain": true,
+  "reviewedPrHeadPreservedAsSecondParent": true
+}

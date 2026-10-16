@@ -1,0 +1,101 @@
+{
+  "testedSourceHead": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+  "browser": "154.0.8037.57",
+  "controlled": true,
+  "aiDecisionsDeferredDays": 30,
+  "cases": [
+    {
+      "label": "desktop-C1-reachable",
+      "status": "PASS",
+      "worldAfter": 932299,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "desktop-C1-blocked",
+      "status": "PASS",
+      "worldAfter": 932825,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "desktop-C3-true",
+      "status": "PASS",
+      "worldAfter": 182578,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "desktop-C3-false",
+      "status": "PASS",
+      "worldAfter": 182543,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99,
+      "recoveryPath": "native Worker sync/load/backups/restore; RebirthView has no settings nav"
+    },
+    {
+      "label": "mobile-C1-reachable",
+      "status": "PASS",
+      "worldAfter": 932332,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "mobile-C1-blocked",
+      "status": "PASS",
+      "worldAfter": 932640,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 10,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "mobile-C3-true",
+      "status": "PASS",
+      "worldAfter": 182523,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99
+    },
+    {
+      "label": "mobile-C3-false",
+      "status": "PASS",
+      "worldAfter": 182837,
+      "reload": true,
+      "recovery": true,
+      "recoveryRevision": 9,
+      "realWorker": true,
+      "nativeIndexedDB": true,
+      "agents": 99,
+      "recoveryPath": "native Worker sync/load/backups/restore; RebirthView has no settings nav"
+    }
+  ],
+  "errors": [],
+  "passed": 8,
+  "failed": 0
+}
