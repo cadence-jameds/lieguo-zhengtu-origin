@@ -26,8 +26,8 @@ export async function validateCheckpointCandidate(checkpoint:RecoveryRow):Promis
  return world;
 }
 type ReportRow=FormalReport&{key:string};
-export type ReportFilter='all'|'battle'|'chronicle';
-const reportMatches=(r:FormalReport,filter:ReportFilter)=>filter==='all'||(filter==='battle'?r.category==='battle'||r.category==='scout':r.category==='system'||r.category==='research');
+export type ReportFilter='all'|'battle'|'diplomacy'|'chronicle';
+const reportMatches=(r:FormalReport,filter:ReportFilter)=>filter==='all'||(filter==='battle'?r.category==='battle'||r.category==='scout':filter==='diplomacy'?r.category==='diplomacy':r.category==='system'||r.category==='research');
 const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),receipts:z.array(receiptSchema)}).strict())}).strict();
 export class FormalDatabase extends Dexie {
  saves!:Table<WorldRow|AuthorityRow,string>;backups!:Table<RecoveryRow,number>;BattleReports!:Table<ReportRow,string>;
@@ -179,18 +179,20 @@ export class FormalPersistence {
  }
  private reportQuery(world:FormalWorld){return this.db.BattleReports.where('[campaignId+ownerFactionId+sequence]').between([world.campaignId,world.playerFactionId,1],[world.campaignId,world.playerFactionId,world.sequences.report],true,false).filter(r=>r.at<=world.time);}
  async reportStatus(world:FormalWorld){
-  const counts={all:0,battle:0,chronicle:0},unread={all:0,battle:0,chronicle:0};
-  await this.reportQuery(world).each(r=>{const bucket=r.category==='battle'||r.category==='scout'?'battle':'chronicle';counts.all++;counts[bucket]++;if(r.read!==true){unread.all++;unread[bucket]++;}});
+  const counts={all:0,battle:0,diplomacy:0,chronicle:0},unread={all:0,battle:0,diplomacy:0,chronicle:0};
+  await this.reportQuery(world).each(r=>{const bucket=r.category==='battle'||r.category==='scout'?'battle':r.category==='diplomacy'?'diplomacy':'chronicle';counts.all++;counts[bucket]++;if(r.read!==true){unread.all++;unread[bucket]++;}});
   return {counts,unread:unread.all,alerts:unread.battle};
  }
  async readReportPage(world:FormalWorld,page=0,filter:ReportFilter='all'){
-  if(!Number.isSafeInteger(page)||page<0||!['all','battle','chronicle'].includes(filter))throw new Error('無效的戰報頁碼或分類。');
+  if(!Number.isSafeInteger(page)||page<0||!['all','battle','diplomacy','chronicle'].includes(filter))throw new Error('無效的戰報頁碼或分類。');
   const query=this.reportQuery(world).filter(r=>reportMatches(r,filter));
+  // Dexie Collection modifiers mutate the query: count before applying page limits.
+  const count=await query.count();
   const rows=(await query.reverse().offset(page*50).limit(50).toArray()).map(({key:_key,...r})=>r);
-  return{page,filter,count:await query.count(),rows,...await this.reportStatus(world)};
+  return{page,filter,count,rows,...await this.reportStatus(world)};
  }
  async reportAction(world:FormalWorld,action:'read'|'clear',ids?:string[],filter:ReportFilter='all'){
-  if(!['read','clear'].includes(action)||!['all','battle','chronicle'].includes(filter))throw new Error('無效的戰報操作。');
+  if(!['read','clear'].includes(action)||!['all','battle','diplomacy','chronicle'].includes(filter))throw new Error('無效的戰報操作。');
   return this.db.transaction('rw',this.db.BattleReports,async()=>{
    const query=this.reportQuery(world).filter(r=>reportMatches(r,filter)&&(!ids||ids.includes(r.id)));
    if(action==='clear')await query.delete();else await query.modify({read:true});

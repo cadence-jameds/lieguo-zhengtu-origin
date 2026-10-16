@@ -1,3 +1,4 @@
+import {diplomacySnapshot,diplomacyChanges} from './diplomacyReports';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
 import {handleAutonomy,retireAutonomy,type Submit} from './autonomy';
@@ -152,6 +153,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    else applyEconomyCommand(w,city,order,p,scheduler);
    promoteCityQueues(w,city,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
+ reports.push(...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
  w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
  // Replay admissions still use every command rule; the whole private draft is validated at its boundary.
@@ -176,6 +178,7 @@ export function completeResearch(w:FormalWorld,event:Extract<import('./model').F
 }
 /** One scheduler event. Both ordinary and cooperative replays use this exact reducer. */
 function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],submit:Submit){
+  const beforePolitics=diplomacySnapshot(w);
   const e=scheduler.pop()!;w.time=e.at;
   const returningSource=e.type==='logistics.return'?w.logistics?.find(t=>t.shipmentId===e.shipmentId)?.sourceCityId:undefined;
   const governanceReports=handleGovernance(w,e,scheduler,submit);
@@ -196,10 +199,11 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
   resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
+  if(aiReports===null)reports.push(...diplomacyChanges(w,beforePolitics));
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
 }
 function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
-  reconcilePolitics(w);reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
+  const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  validateFormalWorld(w);return{world:w,reports};
 }
