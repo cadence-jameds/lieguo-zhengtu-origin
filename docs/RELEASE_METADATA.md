@@ -26,7 +26,8 @@ PR #3 對應的已合併提交 `6405f7e…` 有固定回補摘要，所以在該
 - `package.json` / lock 根版本 0.30.50 是歷史計數基準；不要求每次人工同步。刪除容易過時的 tracked `public/version.json`。
 - `.release/metadata.json` 是同一建置的完整唯一 metadata，含版號、日期、部署 SHA、最後功能 SHA、dirty 預覽標記、近期與歷史摘要。
 - Vite 將 metadata 編入主程式／Worker，並產生 `dist/version.json`、發行版 `dist/package.json`、`dist/CHANGELOG.md`。`check-release-build.mjs` 比對產物；CI 與 Pages 使用相同腳本及 HEAD，沒有自動回寫 Commit 或觸發循環。
-- `version.json` 不在 SW precache；更新檢查採 no-store。相同數字版號、不同有效部署 SHA 也提示可更新建置；同版同 SHA 不誤報最新更新。離線保留內建日誌，無法檢查時明確說明。
+- `version.json` 不在 SW precache；更新檢查採 no-store。`commitSha` 僅供部署追溯；`contentSha` 是最後可玩整合提交的識別。相同版號但有效 `contentSha` 不同才提示更新建置；純文件部署的 `commitSha` 改變、`contentSha` 不變，不提供更新操作。較新數字版號照常提示，缺少有效內容識別時不單靠部署 SHA 推定同版有新內容。離線保留內建日誌，無法檢查時明確說明。
+- 成功核對相同內容後，即使文件部署 SW 已下載或稍後下載完成、網站又斷線，也不重新提供更新操作；下一次成功核對到真正新內容會恢復通知。已知新內容的 waiting SW 與尚未取得內容核對結果的離線 waiting SW 保留既有手動保存後啟用流程；後者明示無法核對，不宣稱有新遊戲功能。
 - 保存並更新仍等待新版 SW 安裝，先 await 原本 durable save，再 SKIP_WAITING、等待 controllerchange 後導航。保存／下載／啟用失敗均保留原頁，不改資料契約。
 - 版本產生與 build 成功不等於部署成功；只有現有 main Pages workflow 成功才代表該建置已部署。這個 PR 本身僅交付待審建置，不自行部署。
 

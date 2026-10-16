@@ -1,0 +1,100 @@
+{
+  "browser": "154.0.8037.57",
+  "metadata": {
+    "version": "0.30.52",
+    "date": "2026-10-16",
+    "commitSha": "e7441e53debefa98467629dc1eaf8ad4ab41fffb",
+    "contentSha": "e7441e53debefa98467629dc1eaf8ad4ab41fffb",
+    "dirty": false
+  },
+  "cases": [
+    {
+      "label": "desktop",
+      "status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": true,
+      "settings": true,
+      "history": true,
+      "offlineNotes": true,
+      "oldAppVersion": "0.30.50"
+    },
+    {
+      "label": "mobile",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": true,
+      "settings": true,
+      "history": true,
+      "offlineNotes": true,
+      "oldAppVersion": "0.30.50"
+    },
+    {
+      "label": "real-sw-docs-only",
+      "status": "PASS",
+      "sameVersion": "0.30.52",
+      "syntheticDeploymentSha": "8c1b9f25ffef4d434b0e085cb7d819534a1562e1",
+      "unchangedContentSha": "e7441e53debefa98467629dc1eaf8ad4ab41fffb",
+      "waitingWorker": true,
+      "noActionableUpdateOnline": true,
+      "noActionableUpdateOffline": true,
+      "noActivation": true,
+      "oldSavePreserved": true
+    },
+    {
+      "label": "real-sw-update",
+      "status": "PASS",
+      "sameVersion": "0.30.52",
+      "newSyntheticSha": "ffffffffffffffffffffffffffffffffffffffff",
+      "newSyntheticContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "trace": [
+        {
+          "type": "durable-sync-ack",
+          "requestId": "6b8d190d-a5b9-46de-93af-2e508f527daf"
+        },
+        {
+          "type": "controllerchange"
+        }
+      ],
+      "saveBeforeActivation": true,
+      "nativeWorker": true,
+      "nativeIndexedDB": true,
+      "oldSavePreserved": true,
+      "offlineReloadFromSW": true
+    }
+  ],
+  "errors": [
+    {
+      "label": "desktop",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    },
+    {
+      "label": "real-sw-update",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    },
+    {
+      "label": "real-sw-update",
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "expectedOffline": true
+    }
+  ],
+  "passed": 4,
+  "failed": 0,
+  "unexpectedErrors": []
+}
