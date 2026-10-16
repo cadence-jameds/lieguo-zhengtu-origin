@@ -54,7 +54,7 @@ async function handle(r:RuntimeRequest){
     post({type:'progress',progress:fraction,events});
    }
   });
-  let loaded=result.game;if(loaded&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;away=false;reanchor();post({type:'loaded',recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}}});return;}
+  let loaded=result.game;if(loaded&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;away=false;reanchor();post({type:'loaded',recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}});return;}
  if(r.type==='away'){await advanceAndSave();away=true;state();return;}
  if(r.type==='reset'){await clearSavedGames();world=null;reanchor();post({type:'resetDone'});state();return;}
  if(r.type==='start'){

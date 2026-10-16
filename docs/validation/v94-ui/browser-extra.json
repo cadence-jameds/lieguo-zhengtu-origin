@@ -1,0 +1,99 @@
+{
+  "cases": [
+    {
+      "name": "desktop actual construction/training 3/3 occupancy and selected city",
+      "status": "PASS",
+      "evidence": {
+        "ordersCreatedByFormalCommands": true,
+        "capacity": 3,
+        "citySwitch": true
+      }
+    },
+    {
+      "name": "desktop ally joint status visible while exact ally troops remain private",
+      "status": "PASS",
+      "evidence": {
+        "allyCommitment": 13791,
+        "renderedExactAllyTroops": false
+      }
+    },
+    {
+      "name": "desktop request rejection is a real formal response",
+      "status": "PASS",
+      "evidence": {
+        "action": "request-reject"
+      }
+    },
+    {
+      "name": "desktop old R4 extinction save opens Rebirth without own Legion controls",
+      "status": "PASS",
+      "evidence": {
+        "oldR4SaveCompatible": true,
+        "rebirthRoute": true
+      }
+    },
+    {
+      "name": "desktop six civilization combat copy",
+      "status": "PASS",
+      "evidence": {
+        "names": [
+          "中國\n發展經濟、研究科技、連弩支援",
+          "拜占庭\n築起防線、反制敵軍、披甲騎兵",
+          "法蘭克\n重騎突破、主動近戰進攻",
+          "不列顛\n長弓箭雨、保持距離作戰",
+          "日本\n步兵主力、武士進攻",
+          "蒙古\n騎射機動、支援遠方城邦"
+        ]
+      }
+    },
+    {
+      "name": "mobile actual construction/training 3/3 occupancy and selected city",
+      "status": "PASS",
+      "evidence": {
+        "ordersCreatedByFormalCommands": true,
+        "capacity": 3,
+        "citySwitch": true
+      }
+    },
+    {
+      "name": "mobile ally joint status visible while exact ally troops remain private",
+      "status": "PASS",
+      "evidence": {
+        "allyCommitment": 13791,
+        "renderedExactAllyTroops": false
+      }
+    },
+    {
+      "name": "mobile request rejection is a real formal response",
+      "status": "PASS",
+      "evidence": {
+        "action": "request-reject"
+      }
+    },
+    {
+      "name": "mobile old R4 extinction save opens Rebirth without own Legion controls",
+      "status": "PASS",
+      "evidence": {
+        "oldR4SaveCompatible": true,
+        "rebirthRoute": true
+      }
+    },
+    {
+      "name": "mobile six civilization combat copy",
+      "status": "PASS",
+      "evidence": {
+        "names": [
+          "中國\n發展經濟、研究科技、連弩支援",
+          "拜占庭\n築起防線、反制敵軍、披甲騎兵",
+          "法蘭克\n重騎突破、主動近戰進攻",
+          "不列顛\n長弓箭雨、保持距離作戰",
+          "日本\n步兵主力、武士進攻",
+          "蒙古\n騎射機動、支援遠方城邦"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "passed": 10,
+  "failed": 0
+}

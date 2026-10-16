@@ -1,0 +1,1174 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "local production, synthetic prerequisites explicitly granted; AI decisions deferred 30 days",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "cases": [
+    {
+      "name": "desktop five Legion tabs / world browsing / public privacy",
+      "status": "PASS",
+      "evidence": {
+        "fiveTabs": true,
+        "otherLegions": [
+          "山岳軍團",
+          "遠方軍團"
+        ],
+        "privateMilitaryShown": false
+      }
+    },
+    {
+      "name": "desktop no Legion / age1 embassy1 / capacity / ordinary member / succession",
+      "status": "PASS",
+      "evidence": {
+        "unqualifiedBlocked": true,
+        "capacityIncludesLeader": true,
+        "ordinaryManagementAbsent": true
+      }
+    },
+    {
+      "name": "desktop leader approvals / invite / kick / transfer / dissolve",
+      "status": "PASS",
+      "evidence": {
+        "actualCommands": [
+          "request-accept",
+          "legion-invite",
+          "legion-kick",
+          "legion-transfer",
+          "legion-leave",
+          "legion-dissolve"
+        ]
+      }
+    },
+    {
+      "name": "desktop defense real authorization / dispatch and joint commitments",
+      "status": "PASS",
+      "evidence": {
+        "keep": 990,
+        "ownArmyCount": 3,
+        "jointArrivalAt": 6477808,
+        "foreignUnitsVisible": false
+      }
+    },
+    {
+      "name": "desktop governance search/filter/switch/CAS at 1/10/50X",
+      "status": "PASS",
+      "evidence": [
+        {
+          "speed": 1,
+          "editedCity": "city:020",
+          "allPoliciesApplied": true
+        },
+        {
+          "speed": 10,
+          "editedCity": "city:020",
+          "allPoliciesApplied": true
+        },
+        {
+          "speed": 50,
+          "editedCity": "city:020",
+          "allPoliciesApplied": true
+        }
+      ]
+    },
+    {
+      "name": "desktop governance stale CAS / duplicate / legal retry",
+      "status": "PASS",
+      "evidence": {
+        "rejectedReason": "治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。",
+        "duplicateNoExtraReceipt": true,
+        "freshRetry": true
+      }
+    },
+    {
+      "name": "desktop real diplomacy reports / four filters / 50 paging / read clear / reload recovery",
+      "status": "PASS",
+      "evidence": {
+        "reportCursor": 63,
+        "pageSize": 50,
+        "actualEvents": true,
+        "reloadRecovery": true,
+        "clearedCategory": true
+      }
+    },
+    {
+      "name": "desktop craftsmen six civilizations / own transfer / legal castle / normal costs",
+      "status": "PASS",
+      "evidence": {
+        "civilizationOptions": [
+          "中國工匠 · 自有城市待命",
+          "拜占庭工匠 · 自有城市待命",
+          "法蘭克工匠 · 自有城市待命",
+          "不列顛工匠 · 自有城市待命",
+          "日本工匠 · 自有城市待命",
+          "蒙古工匠 · 自有城市待命"
+        ],
+        "distinctSVG": true,
+        "sameCivilizationBlocked": true,
+        "moveCommitted": true,
+        "castleCommitted": true
+      }
+    },
+    {
+      "name": "desktop prior fixes #4 #5 #6 / city switch and build cost geometry",
+      "status": "PASS",
+      "evidence": {
+        "actualCapacity": 3,
+        "selectedCityUpdates": true,
+        "costGeometry": {
+          "card": 608,
+          "facts": 574,
+          "resources": [
+            {
+              "x": 433,
+              "y": 318.5,
+              "width": 133
+            },
+            {
+              "x": 580,
+              "y": 318.5,
+              "width": 133
+            },
+            {
+              "x": 727,
+              "y": 318.5,
+              "width": 133
+            },
+            {
+              "x": 874,
+              "y": 318.5,
+              "width": 133
+            }
+          ],
+          "overflow": false
+        }
+      }
+    },
+    {
+      "name": "mobile five Legion tabs / world browsing / public privacy",
+      "status": "PASS",
+      "evidence": {
+        "fiveTabs": true,
+        "otherLegions": [
+          "山岳軍團",
+          "遠方軍團"
+        ],
+        "privateMilitaryShown": false
+      }
+    },
+    {
+      "name": "mobile no Legion / age1 embassy1 / capacity / ordinary member / succession",
+      "status": "PASS",
+      "evidence": {
+        "unqualifiedBlocked": true,
+        "capacityIncludesLeader": true,
+        "ordinaryManagementAbsent": true
+      }
+    },
+    {
+      "name": "mobile leader approvals / invite / kick / transfer / dissolve",
+      "status": "PASS",
+      "evidence": {
+        "actualCommands": [
+          "request-accept",
+          "legion-invite",
+          "legion-kick",
+          "legion-transfer",
+          "legion-leave",
+          "legion-dissolve"
+        ]
+      }
+    },
+    {
+      "name": "mobile defense real authorization / dispatch and joint commitments",
+      "status": "PASS",
+      "evidence": {
+        "keep": 990,
+        "ownArmyCount": 3,
+        "jointArrivalAt": 6477722,
+        "foreignUnitsVisible": false
+      }
+    },
+    {
+      "name": "mobile governance search/filter/switch/CAS at 1/10/50X",
+      "status": "PASS",
+      "evidence": [
+        {
+          "speed": 1,
+          "editedCity": "city:020",
+          "allPoliciesApplied": true
+        },
+        {
+          "speed": 10,
+          "editedCity": "city:020",
+          "allPoliciesApplied": true
+        },
+        {
+          "speed": 50,
+          "editedCity": "city:020",
+          "allPoliciesApplied": true
+        }
+      ]
+    },
+    {
+      "name": "mobile governance stale CAS / duplicate / legal retry",
+      "status": "PASS",
+      "evidence": {
+        "rejectedReason": "治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。",
+        "duplicateNoExtraReceipt": true,
+        "freshRetry": true
+      }
+    },
+    {
+      "name": "mobile real diplomacy reports / four filters / 50 paging / read clear / reload recovery",
+      "status": "PASS",
+      "evidence": {
+        "reportCursor": 63,
+        "pageSize": 50,
+        "actualEvents": true,
+        "reloadRecovery": true,
+        "clearedCategory": true
+      }
+    },
+    {
+      "name": "mobile craftsmen six civilizations / own transfer / legal castle / normal costs",
+      "status": "PASS",
+      "evidence": {
+        "civilizationOptions": [
+          "中國工匠 · 自有城市待命",
+          "拜占庭工匠 · 自有城市待命",
+          "法蘭克工匠 · 自有城市待命",
+          "不列顛工匠 · 自有城市待命",
+          "日本工匠 · 自有城市待命",
+          "蒙古工匠 · 自有城市待命"
+        ],
+        "distinctSVG": true,
+        "sameCivilizationBlocked": true,
+        "moveCommitted": true,
+        "castleCommitted": true
+      }
+    },
+    {
+      "name": "mobile prior fixes #4 #5 #6 / city switch and build cost geometry",
+      "status": "PASS",
+      "evidence": {
+        "actualCapacity": 3,
+        "selectedCityUpdates": true,
+        "costGeometry": {
+          "card": 356,
+          "facts": 330,
+          "resources": [
+            {
+              "x": 30,
+              "y": 330.625,
+              "width": 72
+            },
+            {
+              "x": 116,
+              "y": 330.625,
+              "width": 72
+            },
+            {
+              "x": 202,
+              "y": 330.625,
+              "width": 72
+            },
+            {
+              "x": 288,
+              "y": 330.625,
+              "width": 72
+            }
+          ],
+          "overflow": false
+        }
+      }
+    }
+  ],
+  "manualPending": [
+    "physical phone",
+    "hardware GPU FPS",
+    "deployed old Service Worker update",
+    "Astra independent Gate Review",
+    "B5 E1 remains HOLD"
+  ],
+  "commandEvidence": [
+    {
+      "viewport": "desktop",
+      "commands": [
+        {
+          "commandId": "command:d4479678-5ef6-45ab-b62a-add3ec061735",
+          "type": "politics",
+          "action": "legion-create",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:7f8ee0c9-cc33-4a75-8019-b96aec2b2d30",
+          "type": "politics",
+          "action": "request-accept",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:06b498a0-8db7-48af-9241-250a142eda52",
+          "type": "politics",
+          "action": "legion-invite",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:bb519d6f-a278-4376-912e-b141ed8b642c",
+          "type": "politics",
+          "action": "legion-kick",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:847fbb25-f673-4640-9c31-432c2127f2af",
+          "type": "politics",
+          "action": "legion-transfer",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:3b4528b3-9f03-4b88-a3b3-b310e6bfd229",
+          "type": "politics",
+          "action": "legion-leave",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:4b5fa462-35ff-41b2-bec0-44d9a9290f67",
+          "type": "politics",
+          "action": "legion-dissolve",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:3b4732d2-b5b5-494f-ab8b-a4b95cdb6804",
+          "type": "defense.set",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:b0591fc9-8201-4885-bfad-1bdda319d9bf",
+          "type": "defense.dispatch",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:a24cae1b-4f5e-4ef2-9308-9bbdb95ddb41",
+          "type": "joint.create",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:6c414a55-251c-4629-ba51-5b1c1c0c8602",
+          "type": "joint.join",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:901eb33b-a9fd-48d9-a55d-08e264ac6ad6",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:dbc3239f-eddb-4566-80e4-8a15544e1ccf",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:a47da7b3-4a77-489d-bd15-0ec80762a104",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:9268de9d-0794-4221-9e33-24369a4bc27b",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:74db1979-384e-4398-9b4b-0104d73b7feb",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:75c08f31-0f29-4638-95b9-de6bd9619924",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:b13f0e68-ca7a-4867-8e52-16b049db1bf4",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:60e49587-c231-4fec-83aa-79d3829da7fa",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:1c5ba708-d5e9-4863-8adc-0dae70a10580",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:d444fabf-0d63-431e-84db-cd512d102b30",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:d5dc0d20-3793-4394-84cf-7d7a290d4f01",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:55e56f5d-2588-4d4e-84ee-e922c5c3d153",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:320c3e05-dc94-4912-b406-c87428cded10",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:77266f09-dce6-4fc5-b5ce-262fb1d64941",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:09b4c12d-7f10-4281-9e7d-e25b7d6d44c1",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:70176878-b7d1-4b41-9278-b5fad15a7963",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:5eee59f9-df4a-42da-a053-e65ad771804d",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:fccc2b76-0b2b-40ae-9931-9c1fb2923a1d",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:f4df8d07-5fce-4785-be50-e8bb05c86b03",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:973b725b-d9e7-4543-b7a2-25b2c01d17d9",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:118863c5-6aaa-49b2-908c-29f15334c7c0",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:9bf69b5c-d882-4e87-8559-66b35863ce38",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:9bf69b5c-d882-4e87-8559-66b35863ce38",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:v94-browser-stale-desktop",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:126afc8f-c788-4daa-b302-ea051b9bdf1d",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:fd83b154-40cb-43ed-a7fb-d5ff3a39a703",
+          "type": "craftsman.move",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:c08a89d0-77e1-4974-8798-e1c1796b2ae2",
+          "type": "craftsman.castle",
+          "cityId": "city:000",
+          "governanceCAS": false
+        }
+      ],
+      "acks": [
+        {
+          "commandId": "command:d4479678-5ef6-45ab-b62a-add3ec061735",
+          "status": "committed",
+          "revision": 14
+        },
+        {
+          "commandId": "command:7f8ee0c9-cc33-4a75-8019-b96aec2b2d30",
+          "status": "committed",
+          "revision": 18
+        },
+        {
+          "commandId": "command:06b498a0-8db7-48af-9241-250a142eda52",
+          "status": "committed",
+          "revision": 19
+        },
+        {
+          "commandId": "command:bb519d6f-a278-4376-912e-b141ed8b642c",
+          "status": "committed",
+          "revision": 20
+        },
+        {
+          "commandId": "command:847fbb25-f673-4640-9c31-432c2127f2af",
+          "status": "committed",
+          "revision": 21
+        },
+        {
+          "commandId": "command:3b4528b3-9f03-4b88-a3b3-b310e6bfd229",
+          "status": "committed",
+          "revision": 22
+        },
+        {
+          "commandId": "command:4b5fa462-35ff-41b2-bec0-44d9a9290f67",
+          "status": "committed",
+          "revision": 24
+        },
+        {
+          "commandId": "command:3b4732d2-b5b5-494f-ab8b-a4b95cdb6804",
+          "status": "committed",
+          "revision": 26
+        },
+        {
+          "commandId": "command:b0591fc9-8201-4885-bfad-1bdda319d9bf",
+          "status": "committed",
+          "revision": 27
+        },
+        {
+          "commandId": "command:a24cae1b-4f5e-4ef2-9308-9bbdb95ddb41",
+          "status": "committed",
+          "revision": 28
+        },
+        {
+          "commandId": "command:6c414a55-251c-4629-ba51-5b1c1c0c8602",
+          "status": "committed",
+          "revision": 29
+        },
+        {
+          "commandId": "command:901eb33b-a9fd-48d9-a55d-08e264ac6ad6",
+          "status": "committed",
+          "revision": 31
+        },
+        {
+          "commandId": "command:dbc3239f-eddb-4566-80e4-8a15544e1ccf",
+          "status": "committed",
+          "revision": 33
+        },
+        {
+          "commandId": "command:a47da7b3-4a77-489d-bd15-0ec80762a104",
+          "status": "committed",
+          "revision": 34
+        },
+        {
+          "commandId": "command:9268de9d-0794-4221-9e33-24369a4bc27b",
+          "status": "committed",
+          "revision": 36
+        },
+        {
+          "commandId": "command:74db1979-384e-4398-9b4b-0104d73b7feb",
+          "status": "committed",
+          "revision": 38
+        },
+        {
+          "commandId": "command:75c08f31-0f29-4638-95b9-de6bd9619924",
+          "status": "committed",
+          "revision": 40
+        },
+        {
+          "commandId": "command:b13f0e68-ca7a-4867-8e52-16b049db1bf4",
+          "status": "committed",
+          "revision": 42
+        },
+        {
+          "commandId": "command:60e49587-c231-4fec-83aa-79d3829da7fa",
+          "status": "committed",
+          "revision": 45
+        },
+        {
+          "commandId": "command:1c5ba708-d5e9-4863-8adc-0dae70a10580",
+          "status": "committed",
+          "revision": 47
+        },
+        {
+          "commandId": "command:d444fabf-0d63-431e-84db-cd512d102b30",
+          "status": "committed",
+          "revision": 48
+        },
+        {
+          "commandId": "command:d5dc0d20-3793-4394-84cf-7d7a290d4f01",
+          "status": "committed",
+          "revision": 50
+        },
+        {
+          "commandId": "command:55e56f5d-2588-4d4e-84ee-e922c5c3d153",
+          "status": "committed",
+          "revision": 52
+        },
+        {
+          "commandId": "command:320c3e05-dc94-4912-b406-c87428cded10",
+          "status": "committed",
+          "revision": 54
+        },
+        {
+          "commandId": "command:77266f09-dce6-4fc5-b5ce-262fb1d64941",
+          "status": "committed",
+          "revision": 56
+        },
+        {
+          "commandId": "command:09b4c12d-7f10-4281-9e7d-e25b7d6d44c1",
+          "status": "committed",
+          "revision": 59
+        },
+        {
+          "commandId": "command:70176878-b7d1-4b41-9278-b5fad15a7963",
+          "status": "committed",
+          "revision": 61
+        },
+        {
+          "commandId": "command:5eee59f9-df4a-42da-a053-e65ad771804d",
+          "status": "committed",
+          "revision": 62
+        },
+        {
+          "commandId": "command:fccc2b76-0b2b-40ae-9931-9c1fb2923a1d",
+          "status": "committed",
+          "revision": 64
+        },
+        {
+          "commandId": "command:f4df8d07-5fce-4785-be50-e8bb05c86b03",
+          "status": "committed",
+          "revision": 66
+        },
+        {
+          "commandId": "command:973b725b-d9e7-4543-b7a2-25b2c01d17d9",
+          "status": "committed",
+          "revision": 68
+        },
+        {
+          "commandId": "command:118863c5-6aaa-49b2-908c-29f15334c7c0",
+          "status": "committed",
+          "revision": 70
+        },
+        {
+          "commandId": "command:9bf69b5c-d882-4e87-8559-66b35863ce38",
+          "status": "committed",
+          "revision": 73
+        },
+        {
+          "commandId": "command:9bf69b5c-d882-4e87-8559-66b35863ce38",
+          "status": "duplicate",
+          "revision": 74,
+          "originalRevision": 73
+        },
+        {
+          "commandId": "command:v94-browser-stale-desktop",
+          "status": "rejected",
+          "revision": 74,
+          "reason": "治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。"
+        },
+        {
+          "commandId": "command:126afc8f-c788-4daa-b302-ea051b9bdf1d",
+          "status": "committed",
+          "revision": 75
+        },
+        {
+          "commandId": "command:fd83b154-40cb-43ed-a7fb-d5ff3a39a703",
+          "status": "committed",
+          "revision": 82
+        },
+        {
+          "commandId": "command:c08a89d0-77e1-4974-8798-e1c1796b2ae2",
+          "status": "committed",
+          "revision": 83
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "commands": [
+        {
+          "commandId": "command:0bc4bc72-8dd0-408c-8feb-3332bc66ec2a",
+          "type": "politics",
+          "action": "legion-create",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:20d9e41f-9697-4808-99bc-48178870ff59",
+          "type": "politics",
+          "action": "request-accept",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:68777ca2-eb76-41c4-80cf-b6748fc909f9",
+          "type": "politics",
+          "action": "legion-invite",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:cb4c9b34-4ef9-49bb-b8f4-f8d90fb83678",
+          "type": "politics",
+          "action": "legion-kick",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:02157cf0-a2a0-4e5f-883b-0a13359d6c93",
+          "type": "politics",
+          "action": "legion-transfer",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:98256120-112c-4e9b-a0b4-06774ec43e9e",
+          "type": "politics",
+          "action": "legion-leave",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:e5dea7ac-871a-46b0-8118-b78cf8160529",
+          "type": "politics",
+          "action": "legion-dissolve",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:4cda3f33-acd1-4e81-9251-a7ea0430c241",
+          "type": "defense.set",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:e3c613b3-3853-449d-a3bc-f28d79935582",
+          "type": "defense.dispatch",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:ecc5e37c-3a4a-4c9f-882e-1ed773cf6c57",
+          "type": "joint.create",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:718b242a-a547-4751-b708-ebf9a5e89bc2",
+          "type": "joint.join",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:6b1d7f4f-69f8-4667-ba87-ad45047f2687",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:8486bafe-0f45-4409-a1b4-856f70b450b3",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:88c0d60d-9439-4481-baf1-b4ac2fcf891a",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:3db69b25-441f-485b-afad-8553d783a4ab",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:349d7448-9012-4e01-bf4f-72934616d826",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:8dbc7ebf-076b-4c42-adf2-498aa43fb7a4",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:b6326273-a750-4eda-8536-744197099dff",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:7bd7ebe4-6898-46ad-9c22-70add29d1a90",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:f42d32b9-678f-4d95-b359-ccece2380b8d",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:ee4de295-9e9e-4b74-b524-ccc0ea17309a",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:555a8abf-0915-4e49-a767-fe332595c7c1",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:b75997cb-bb10-41d8-bf36-e9350407ec1d",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:cafe0747-53c8-457c-ab21-b021aac8225b",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:e80fd038-68fa-4c1f-af76-ea4af98b6825",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:115d25ba-ecf0-4a47-b535-76e7453d626d",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:fe52e906-87eb-498e-bd70-50199f5ac430",
+          "type": "governance.set",
+          "cityId": "city:020",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:cebbfcdf-9022-4146-92cc-168ce38e3665",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:256f00c2-8f87-4276-a744-aa5faf9931a8",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:e2a889c5-d223-4f6b-8eb0-a62b57b99f8c",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:dcd0c7ed-c97c-4e53-a7bd-1dcc24839610",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:84386a4c-cb31-4f91-9c2c-a8ee627b0f76",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:20951563-526a-4d23-a762-d82039762f39",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:20951563-526a-4d23-a762-d82039762f39",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:v94-browser-stale-mobile",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:b7c3853e-a18c-479a-8d8d-b8667a4cc37d",
+          "type": "governance.set",
+          "cityId": "city:000",
+          "governanceCAS": true
+        },
+        {
+          "commandId": "command:d96273f3-7cf1-4e0b-8f6f-12d43b673a69",
+          "type": "craftsman.move",
+          "cityId": "city:000",
+          "governanceCAS": false
+        },
+        {
+          "commandId": "command:640e5ea6-9778-405d-ba17-1402a6dd71fa",
+          "type": "craftsman.castle",
+          "cityId": "city:000",
+          "governanceCAS": false
+        }
+      ],
+      "acks": [
+        {
+          "commandId": "command:0bc4bc72-8dd0-408c-8feb-3332bc66ec2a",
+          "status": "committed",
+          "revision": 14
+        },
+        {
+          "commandId": "command:20d9e41f-9697-4808-99bc-48178870ff59",
+          "status": "committed",
+          "revision": 18
+        },
+        {
+          "commandId": "command:68777ca2-eb76-41c4-80cf-b6748fc909f9",
+          "status": "committed",
+          "revision": 19
+        },
+        {
+          "commandId": "command:cb4c9b34-4ef9-49bb-b8f4-f8d90fb83678",
+          "status": "committed",
+          "revision": 20
+        },
+        {
+          "commandId": "command:02157cf0-a2a0-4e5f-883b-0a13359d6c93",
+          "status": "committed",
+          "revision": 21
+        },
+        {
+          "commandId": "command:98256120-112c-4e9b-a0b4-06774ec43e9e",
+          "status": "committed",
+          "revision": 22
+        },
+        {
+          "commandId": "command:e5dea7ac-871a-46b0-8118-b78cf8160529",
+          "status": "committed",
+          "revision": 24
+        },
+        {
+          "commandId": "command:4cda3f33-acd1-4e81-9251-a7ea0430c241",
+          "status": "committed",
+          "revision": 26
+        },
+        {
+          "commandId": "command:e3c613b3-3853-449d-a3bc-f28d79935582",
+          "status": "committed",
+          "revision": 27
+        },
+        {
+          "commandId": "command:ecc5e37c-3a4a-4c9f-882e-1ed773cf6c57",
+          "status": "committed",
+          "revision": 28
+        },
+        {
+          "commandId": "command:718b242a-a547-4751-b708-ebf9a5e89bc2",
+          "status": "committed",
+          "revision": 29
+        },
+        {
+          "commandId": "command:6b1d7f4f-69f8-4667-ba87-ad45047f2687",
+          "status": "committed",
+          "revision": 31
+        },
+        {
+          "commandId": "command:8486bafe-0f45-4409-a1b4-856f70b450b3",
+          "status": "committed",
+          "revision": 33
+        },
+        {
+          "commandId": "command:88c0d60d-9439-4481-baf1-b4ac2fcf891a",
+          "status": "committed",
+          "revision": 34
+        },
+        {
+          "commandId": "command:3db69b25-441f-485b-afad-8553d783a4ab",
+          "status": "committed",
+          "revision": 36
+        },
+        {
+          "commandId": "command:349d7448-9012-4e01-bf4f-72934616d826",
+          "status": "committed",
+          "revision": 38
+        },
+        {
+          "commandId": "command:8dbc7ebf-076b-4c42-adf2-498aa43fb7a4",
+          "status": "committed",
+          "revision": 40
+        },
+        {
+          "commandId": "command:b6326273-a750-4eda-8536-744197099dff",
+          "status": "committed",
+          "revision": 42
+        },
+        {
+          "commandId": "command:7bd7ebe4-6898-46ad-9c22-70add29d1a90",
+          "status": "committed",
+          "revision": 45
+        },
+        {
+          "commandId": "command:f42d32b9-678f-4d95-b359-ccece2380b8d",
+          "status": "committed",
+          "revision": 47
+        },
+        {
+          "commandId": "command:ee4de295-9e9e-4b74-b524-ccc0ea17309a",
+          "status": "committed",
+          "revision": 48
+        },
+        {
+          "commandId": "command:555a8abf-0915-4e49-a767-fe332595c7c1",
+          "status": "committed",
+          "revision": 50
+        },
+        {
+          "commandId": "command:b75997cb-bb10-41d8-bf36-e9350407ec1d",
+          "status": "committed",
+          "revision": 52
+        },
+        {
+          "commandId": "command:cafe0747-53c8-457c-ab21-b021aac8225b",
+          "status": "committed",
+          "revision": 54
+        },
+        {
+          "commandId": "command:e80fd038-68fa-4c1f-af76-ea4af98b6825",
+          "status": "committed",
+          "revision": 56
+        },
+        {
+          "commandId": "command:115d25ba-ecf0-4a47-b535-76e7453d626d",
+          "status": "committed",
+          "revision": 59
+        },
+        {
+          "commandId": "command:fe52e906-87eb-498e-bd70-50199f5ac430",
+          "status": "committed",
+          "revision": 61
+        },
+        {
+          "commandId": "command:cebbfcdf-9022-4146-92cc-168ce38e3665",
+          "status": "committed",
+          "revision": 62
+        },
+        {
+          "commandId": "command:256f00c2-8f87-4276-a744-aa5faf9931a8",
+          "status": "committed",
+          "revision": 64
+        },
+        {
+          "commandId": "command:e2a889c5-d223-4f6b-8eb0-a62b57b99f8c",
+          "status": "committed",
+          "revision": 66
+        },
+        {
+          "commandId": "command:dcd0c7ed-c97c-4e53-a7bd-1dcc24839610",
+          "status": "committed",
+          "revision": 68
+        },
+        {
+          "commandId": "command:84386a4c-cb31-4f91-9c2c-a8ee627b0f76",
+          "status": "committed",
+          "revision": 70
+        },
+        {
+          "commandId": "command:20951563-526a-4d23-a762-d82039762f39",
+          "status": "committed",
+          "revision": 73
+        },
+        {
+          "commandId": "command:20951563-526a-4d23-a762-d82039762f39",
+          "status": "duplicate",
+          "revision": 74,
+          "originalRevision": 73
+        },
+        {
+          "commandId": "command:v94-browser-stale-mobile",
+          "status": "rejected",
+          "revision": 74,
+          "reason": "治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。"
+        },
+        {
+          "commandId": "command:b7c3853e-a18c-479a-8d8d-b8667a4cc37d",
+          "status": "committed",
+          "revision": 75
+        },
+        {
+          "commandId": "command:d96273f3-7cf1-4e0b-8f6f-12d43b673a69",
+          "status": "committed",
+          "revision": 82
+        },
+        {
+          "commandId": "command:640e5ea6-9778-405d-ba17-1402a6dd71fa",
+          "status": "committed",
+          "revision": 83
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 18,
+  "failed": 0
+}

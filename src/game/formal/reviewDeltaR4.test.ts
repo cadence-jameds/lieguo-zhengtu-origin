@@ -179,7 +179,10 @@ it.each([1,10,50] as const)('R4-C3 %sX SaveLoad / full import / Recovery / slice
   expect(again.armies.some(x=>x.id===a.id)).toBe(false);expect(again.events.some(e=>'armyId' in e&&e.armyId===a.id)).toBe(false);
   expect(again.extinction?.sites.filter(s=>s.sourceFactionId===a.ownerFactionId)??[]).toEqual([]);
   expect(again.combat!.receipts.filter(r=>r.kind==='final'&&r.outcome==='conquered')).toHaveLength(1);
-  expect((await db.readReportPage(again)).rows).toHaveLength(1);expect(advanceFormal(again,end).reports).toEqual([]);
+  // One final battle remains mandatory; extinction now also emits one player-visible diplomacy notice.
+  expect((await db.readReportPage(again,0,'battle')).rows).toHaveLength(1);
+  expect((await db.readReportPage(again,0,'diplomacy')).rows).toHaveLength(second?0:1);
+  expect((await db.readReportPage(again)).rows).toHaveLength(second?1:2);expect(advanceFormal(again,end).reports).toEqual([]);
   expect(again.revision).toBeGreaterThan(saved.revision);validateFormalWorld(again);
  }
 });

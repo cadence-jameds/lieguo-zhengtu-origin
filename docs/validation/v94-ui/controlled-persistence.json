@@ -1,0 +1,26 @@
+{
+  "fault": "authority-write",
+  "atomicRollback": true,
+  "reportCount": 2,
+  "restoredRevision": 15,
+  "replayFinals": [
+    {
+      "battleId": "battle:0000000000000009",
+      "resolutionId": "resolution:0000000000000009.final",
+      "eventId": "event:0000000000000512",
+      "at": 3600000,
+      "round": 1,
+      "kind": "final",
+      "targetPoint": {
+        "x": 62,
+        "y": 198
+      },
+      "mission": "conquest",
+      "outcome": "conquered",
+      "ownerBefore": "faction:000",
+      "ownerAfter": "faction:001",
+      "qualificationBefore": "none",
+      "qualificationAfter": "none"
+    }
+  ]
+}

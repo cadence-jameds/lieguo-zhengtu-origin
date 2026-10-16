@@ -1,6 +1,6 @@
 import {buildingRequirements} from '../formal/buildingDetailData';
 import type {FormalCity,FormalWorld} from '../formal/model';
-import {resourceKeys} from '../formal/model';
+import {resourceKeys,zeroResources} from '../formal/model';
 import {BUILDING_CATALOG,buildingKind,buildingLevel,buildingCost,buildingDuration,fieldCost,fieldDuration} from '../formal/catalogB3';
 import {QUEUE_CAPACITY} from '../formal/economy';
 import {AGE_NAMES,LABELS} from './artMap';
@@ -55,5 +55,15 @@ export function recruitmentPreview(w:FormalWorld,c:FormalCity,unitId:string,coun
  const id=commandId('presentation-recruit-preview');
  const t=submitFormalOrder(w,{commandId:id,campaignId:w.campaignId,issuerId:c.ownerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'military.recruit',cityId:c.id,unitId,count}});
  return t.ack?.status==='committed'?t.world.cities.find(n=>n.id===c.id)?.military?.queue.find(j=>j.commandId===id):undefined;
+ });
+}
+
+/** The real craftsman command on a private draft: ordinary castle payment is irrelevant. */
+export function craftsmanCastleAction(w:FormalWorld,c:FormalCity,craftsmanId:string){
+ return cachedPreview(w,JSON.stringify(['craftsman.castle',c.id,craftsmanId]),()=>{
+  const id=commandId('presentation-craftsman-preview');
+  const result=submitFormalOrder(w,{commandId:id,campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'craftsman.castle',cityId:c.id,craftsmanId}});
+  const job=result.ack?.status==='committed'?result.world.cities.find(city=>city.id===c.id)?.economy?.construction.find(job=>job.commandId===id):undefined;
+  return {allowed:!!job,cost:job?.paidResources??zeroResources(),duration:job?.durationMs??buildingDuration('castle',1,buildingLevel(c,'center')),reason:job?'符合工匠建堡資格':result.ack?.reason??'工匠建堡資格已變更，請重新確認。'};
  });
 }
