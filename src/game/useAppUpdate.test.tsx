@@ -14,9 +14,10 @@ function Surface(){updates=useAppUpdate(save);return <Home theme="dark" onThemeC
 async function mount(){await act(async()=>root.render(<Surface/>));}
 beforeEach(()=>{
  vi.useFakeTimers();vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);save=vi.fn().mockResolvedValue(undefined);fetcher=vi.fn().mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version})});vi.stubGlobal('fetch',fetcher);
- container=Object.assign(new EventTarget(),{getRegistration:vi.fn()}) as unknown as ServiceWorkerContainer;
- worker=Object.assign(new EventTarget(),{state:'installed',postMessage:vi.fn()}) as unknown as ServiceWorker;
- registration=Object.assign(new EventTarget(),{waiting:null,installing:null,update:vi.fn().mockResolvedValue(undefined)}) as unknown as ServiceWorkerRegistration;
+ container=Object.assign(new EventTarget(),{getRegistration:vi.fn(),register:vi.fn()}) as unknown as ServiceWorkerContainer;
+ worker=Object.assign(new EventTarget(),{state:'installed',scriptURL:new URL('/sw.js',location.href).href,postMessage:vi.fn()}) as unknown as ServiceWorker;
+ registration=Object.assign(new EventTarget(),{scope:new URL('/',location.href).href,active:worker,waiting:null,installing:null,update:vi.fn().mockResolvedValue(undefined)}) as unknown as ServiceWorkerRegistration;
+ (container as any).controller=worker;vi.mocked(container.getRegistration).mockResolvedValue(registration);vi.mocked(container.register).mockRejectedValue(new Error('registration unavailable'));
  Object.defineProperty(navigator,'serviceWorker',{configurable:true,value:container});Object.defineProperty(document,'hidden',{configurable:true,value:false});
  pwa.register.mockImplementation(options=>{options.onRegisteredSW('/sw.js',registration);return vi.fn();});
  replace=vi.spyOn(window.location,'replace').mockImplementation(()=>{});el=document.createElement('div');document.body.append(el);root=createRoot(el);
@@ -45,7 +46,7 @@ it('waits for installation to complete before saving; duplicate clicks cannot su
  await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await completed;});expect(replace).toHaveBeenCalledOnce();
 });
 it('save failure never activates or reloads and allows retry',async()=>{
- (registration as any).waiting=worker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});save.mockRejectedValueOnce(new Error('IDB failed'));await mount();await act(async()=>updates.update());expect(worker.postMessage).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();expect(updates.text).toContain('IDB failed');expect(updates.updating).toBe(false);
+ (registration as any).waiting=worker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});save.mockRejectedValueOnce(new Error('IDB failed'));await mount();await act(async()=>updates.update());expect(worker.postMessage).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();expect(updates.text).toContain('未取得保存完成確認');expect(updates.text).not.toContain('IDB failed');expect(updates.updating).toBe(false);
 });
 it('download timeout never saves or reloads, while activation timeout keeps the page',async()=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();let completed!:Promise<void>;await act(async()=>{completed=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(30000);await completed;});expect(updates.text).toContain('新版下載尚未完成');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
@@ -94,4 +95,114 @@ it('a later real content update clears docs-only suppression, and matching conte
 });
 it('matching content identity is sufficient even without a deployment SHA',async()=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version,contentSha:RELEASE.contentSha})});await mount();(registration as any).waiting=worker;await act(async()=>pwa.register.mock.calls[0][0].onNeedRefresh());expect(updates.available).toBe(false);expect(updates.text).toContain('已確認為最新版本');
+});
+
+it('invalid registration before saving gives a Chinese retry message without claiming this attempt was saved',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();
+ vi.mocked(registration.update).mockRejectedValue(new DOMException('The object is in an invalid state.','InvalidStateError'));
+ vi.mocked(container.getRegistration).mockResolvedValue(registration);
+ await act(async()=>updates.update());
+ expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ expect(updates.text).toContain('本次尚未執行保存');expect(updates.text).toContain('重試');
+ expect(updates.text).not.toContain('目前頁面與已保存進度保留');expect(updates.text).not.toContain('invalid state');
+});
+it('recovers a stale registration through the current scope and saves exactly once before activation',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();
+ const fresh=Object.assign(new EventTarget(),{scope:new URL('/',location.href).href,waiting:worker,installing:null,update:vi.fn().mockResolvedValue(undefined)}) as unknown as ServiceWorkerRegistration;
+ vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(fresh);
+ let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ expect(container.getRegistration).toHaveBeenCalled();expect(save).toHaveBeenCalledOnce();expect(worker.postMessage).toHaveBeenCalledOnce();
+ await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('a rejected durable save is never described as successfully saved',async()=>{
+ (registration as any).waiting=worker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});save.mockRejectedValue(new Error('IDB failed'));await mount();await act(async()=>updates.update());
+ expect(updates.text).toContain('未取得保存完成確認');expect(updates.text).not.toContain('目前頁面與已保存進度保留');expect(worker.postMessage).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+});
+
+it('invalid registrations retry at most twice and a later explicit retry can succeed',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockClear().mockRejectedValue(new DOMException('invalid','InvalidStateError'));
+ await act(async()=>updates.update());expect(registration.update).toHaveBeenCalledTimes(2);expect(container.getRegistration).toHaveBeenCalledOnce();expect(save).not.toHaveBeenCalled();expect(updates.updating).toBe(false);
+ (registration as any).waiting=worker;let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledOnce();await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('a missing registration is recreated only at the exact plugin script and scope without deleting site data',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(undefined);
+ const fresh=Object.assign(new EventTarget(),{scope:new URL('/',location.href).href,waiting:worker,update:vi.fn()}) as unknown as ServiceWorkerRegistration;vi.mocked(container.register).mockResolvedValue(fresh);
+ let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(container.register).toHaveBeenCalledOnce();expect(container.register).toHaveBeenCalledWith(new URL('/sw.js',location.href).href,{scope:new URL('/',location.href).href,type:'classic',updateViaCache:'none'});expect(fresh.update).not.toHaveBeenCalled();
+ await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(save).toHaveBeenCalledOnce();
+});
+it('a redundant cached worker is ignored and a fresh pending install is awaited before saving',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();(registration as any).active={state:'redundant'};(registration as any).waiting={state:'redundant'};
+ const fresh=Object.assign(new EventTarget(),{scope:new URL('/',location.href).href,waiting:null,installing:worker,update:vi.fn().mockResolvedValue(undefined)}) as unknown as ServiceWorkerRegistration;vi.mocked(container.getRegistration).mockResolvedValue(fresh);
+ let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).not.toHaveBeenCalled();await act(async()=>{(fresh as any).waiting=worker;worker.dispatchEvent(new Event('statechange'));});expect(save).toHaveBeenCalledOnce();await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});
+});
+it('ordinary network failures are not retried or shown as raw native errors',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockClear().mockRejectedValue(new TypeError('network native stack'));
+ await act(async()=>updates.update());expect(registration.update).toHaveBeenCalledOnce();expect(container.getRegistration).toHaveBeenCalledOnce();expect(container.register).not.toHaveBeenCalled();expect(save).not.toHaveBeenCalled();expect(updates.text).not.toContain('network native stack');
+});
+it('activation exceptions preserve the confirmed save and permit a later retry without duplicate clicks',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;await mount();vi.mocked(worker.postMessage).mockImplementationOnce(()=>{throw new DOMException('native activation failure','InvalidStateError');});
+ await act(async()=>updates.update());expect(updates.text).toContain('本次保存已確認');expect(updates.text).toContain('新版啟用失敗');expect(updates.text).not.toContain('native activation failure');expect(replace).not.toHaveBeenCalled();
+ let done!:Promise<void>;await act(async()=>{done=updates.update();void updates.update();});expect(save).toHaveBeenCalledTimes(2);expect(worker.postMessage).toHaveBeenCalledTimes(2);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('an unrelated controller change cannot cause navigation',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;(container as any).controller=null;await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ await act(async()=>container.dispatchEvent(new Event('controllerchange')));expect(replace).not.toHaveBeenCalled();(container as any).controller=worker;await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('foreground and online events during a save cannot duplicate saves or activation',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;await mount();let saved!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>saved=r));let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ await act(async()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));window.dispatchEvent(new Event('focus'));window.dispatchEvent(new Event('online'));void updates.update();});expect(save).toHaveBeenCalledOnce();expect(worker.postMessage).not.toHaveBeenCalled();
+ await act(async()=>saved());await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(worker.postMessage).toHaveBeenCalledOnce();
+});
+it('an unopened campaign is never described as having performed a save',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockResolvedValue('no-campaign' as never);await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(15000);await done;});expect(updates.text).toContain('目前沒有開啟戰役');expect(updates.text).not.toContain('本次保存已確認');expect(replace).not.toHaveBeenCalled();
+});
+it('loading the old application after a version-targeted reload reports the mismatch without claiming a save',async()=>{
+ const prior=window.location.href;window.history.replaceState(null,'','?_appUpdate='+newVersion);try{await mount();expect(updates.text).toContain('重新載入後仍未取得預期新版');expect(updates.text).not.toContain('本次保存已確認');}finally{window.history.replaceState(null,'',prior);}
+});
+
+it('re-registration cannot begin until a durable save has been acknowledged',async()=>{
+ (container as any).controller=null;
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(undefined);
+ let saved!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>saved=r));let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledOnce();expect(container.register).not.toHaveBeenCalled();
+ const fresh=Object.assign(new EventTarget(),{scope:new URL('/',location.href).href,active:null,waiting:null,installing:worker}) as unknown as ServiceWorkerRegistration;vi.mocked(container.register).mockResolvedValue(fresh);
+ await act(async()=>saved());expect(container.register).toHaveBeenCalledOnce();expect(worker.postMessage).not.toHaveBeenCalled();(fresh as any).installing=null;(fresh as any).active=worker;(worker as any).state='activated';(container as any).controller=worker;
+ await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(save).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledOnce();
+});
+it('a failed save prevents even same-scope registration and automatic activation',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(undefined);save.mockRejectedValue(new Error('durable failure'));
+ await act(async()=>updates.update());expect(container.register).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();expect(updates.text).toContain('未取得保存完成確認');
+});
+it('a background check never recreates an invalid registration or performs a save',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(undefined);
+ await act(async()=>updates.check());expect(container.register).not.toHaveBeenCalled();expect(save).not.toHaveBeenCalled();expect(updates.text).toContain('本次尚未執行保存');expect(updates.available).toBe(true);
+});
+
+it('a native TypeError on a removed reference can recover through a different live registration',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockRejectedValue(new TypeError('Not found'));
+ const fresh=Object.assign(new EventTarget(),{scope:new URL('/',location.href).href,waiting:worker,update:vi.fn()}) as unknown as ServiceWorkerRegistration;vi.mocked(container.getRegistration).mockResolvedValue(fresh);let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledOnce();await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+
+it('re-registering a still-controlled old worker must await the new worker rather than reloading the old controller',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(undefined);
+ const nextWorker=Object.assign(new EventTarget(),{state:'installing',scriptURL:worker.scriptURL,postMessage:vi.fn()}) as unknown as ServiceWorker;
+ const fresh=Object.assign(new EventTarget(),{scope:registration.scope,active:worker,waiting:null,installing:nextWorker}) as unknown as ServiceWorkerRegistration;vi.mocked(container.register).mockResolvedValue(fresh);
+ let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledOnce();expect(replace).not.toHaveBeenCalled();expect(nextWorker.postMessage).not.toHaveBeenCalled();
+ await act(async()=>container.dispatchEvent(new Event('controllerchange')));expect(replace).not.toHaveBeenCalled();
+ (fresh as any).installing=null;(fresh as any).waiting=nextWorker;(nextWorker as any).state='installed';await act(async()=>nextWorker.dispatchEvent(new Event('statechange')));expect(nextWorker.postMessage).toHaveBeenCalledOnce();expect(save).toHaveBeenCalledOnce();
+ (container as any).controller=nextWorker;await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+
+it('a slow background check cannot overwrite the confirmed save status during activation',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;await mount();let finish!:()=>void;fetcher.mockImplementationOnce(()=>new Promise(r=>finish=()=>r({ok:true,json:async()=>({...RELEASE})})));let check!:Promise<void>,done!:Promise<void>;
+ await act(async()=>{check=updates.check();done=updates.update();});expect(updates.text).toContain('本次保存已確認');await act(async()=>{finish();await check;});expect(updates.text).toContain('本次保存已確認');expect(save).toHaveBeenCalledOnce();
+ await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+
+it('a failed background refresh discards a stale waiting reference before the explicit retry',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();(registration as any).waiting=worker;vi.mocked(registration.update).mockRejectedValue(new DOMException('invalid waiting registration','InvalidStateError'));vi.mocked(container.getRegistration).mockResolvedValue(undefined);
+ await act(async()=>updates.check());expect(save).not.toHaveBeenCalled();
+ const newWorker=Object.assign(new EventTarget(),{state:'installed',scriptURL:worker.scriptURL,postMessage:vi.fn()}) as unknown as ServiceWorker;
+ const fresh=Object.assign(new EventTarget(),{scope:registration.scope,waiting:newWorker}) as unknown as ServiceWorkerRegistration;vi.mocked(container.register).mockResolvedValue(fresh);
+ let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(container.register).toHaveBeenCalledOnce();expect(save).toHaveBeenCalledOnce();expect(worker.postMessage).not.toHaveBeenCalled();expect(newWorker.postMessage).toHaveBeenCalledOnce();
+ (container as any).controller=newWorker;await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
 });

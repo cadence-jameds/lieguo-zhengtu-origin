@@ -4,6 +4,7 @@ import {tmpdir} from 'node:os';
 import {join,dirname} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createMetadata,checkNotes,nextVersion,playableChanges,validateNote} from '../../scripts/release-metadata.mjs';
+import {readmeReleaseAssets} from '../../scripts/readme-release.mjs';
 const dirs:string[]=[];
 const git=(root:string,...args:string[])=>execFileSync('git',['-C',root,...args],{encoding:'utf8',env:{...process.env,GIT_AUTHOR_DATE:'2026-10-16T03:00:00Z',GIT_COMMITTER_DATE:'2026-10-16T03:00:00Z'}}).trim();
 function put(root:string,p:string,value:string){mkdirSync(dirname(join(root,p)),{recursive:true});writeFileSync(join(root,p),value);}
@@ -17,3 +18,17 @@ it('tests, evidence, PR workflows and test-only dependencies do not imply playab
 it('missing notes fail closed for production while unmerged previews use conservative wording',()=>{const {root}=fixture();commit(root,{'src/play.ts':'1'});expect(()=>createMetadata(root,{strict:true,working:false})).toThrow('requires exactly one');expect(createMetadata(root,{working:false}).history[0].notes[0]).toContain('待審');});
 it('controlled PR notes must match the committed record and merged records cannot be rewritten',()=>{const {root,base}=fixture();const head=commit(root,{'src/play.ts':'1','releases/notes/one.json':JSON.stringify(note)});const body='<!-- release-notes:start -->\n```json\n'+JSON.stringify(note)+'\n```\n<!-- release-notes:end -->';expect(checkNotes(root,base,head,body).functional).toBe(true);expect(()=>checkNotes(root,base,head,'uncontrolled title')).toThrow('controlled');commit(root,{'releases/notes/one.json':JSON.stringify({...note,title:'擅自改寫歷史'})});expect(()=>checkNotes(root,head,'HEAD')).toThrow('immutable');});
 it('unapproved version carry, plans and internal commit titles are rejected',()=>{for(const pr of [null,{},[],0,1.2])expect(()=>validateNote({...note,pr})).toThrow('positive integer');expect(nextVersion('0.30.50',1)).toBe('0.30.51');expect(nextVersion('0.30.98',1)).toBe('0.30.99');expect(()=>nextVersion('0.30.99',1)).toThrow('owner-approved');for(const text of ['規格已核准，準備施工新的遊戲功能。','Gate HOLD 等待後續正式驗收。','fix(core): change gameplay'])expect(()=>validateNote({title:'測試摘要',notes:[text]})).toThrow();});
+
+it('README automatically follows a functional merge; a docs-only merge retains content, version and history but traces its deployment',()=>{
+ const {root}=fixture();commit(root,{'src/play.ts':'1','releases/notes/one.json':JSON.stringify(note)});
+ const first=createMetadata(root,{strict:true,working:false}),a=readmeReleaseAssets(first);expect(a.svg).toContain('v0.30.51');expect(a.html).toContain(note.notes[0]);
+ commit(root,{'README.md':'new static explanation','scripts/readme-release.mjs':'presentation only'});
+ const docs=createMetadata(root,{strict:true,working:false}),b=readmeReleaseAssets(docs);
+ expect(docs.version).toBe(first.version);expect(docs.contentSha).toBe(first.contentSha);expect(docs.history).toEqual(first.history);expect(b.svg).toContain(docs.commitSha.slice(0,12));expect(b.html).toContain(first.contentSha);expect(b.html).not.toBe(a.html);
+ expect(readmeReleaseAssets(createMetadata(root,{strict:true,working:false}))).toEqual(b);
+});
+it('README SVG and accessible text escape content and provide project-relative archive links without execution or a Gate assertion',()=>{
+ const {root}=fixture(),m=createMetadata(root,{working:false});m.title='<script>測試</script>';m.history[0].notes=['測試文字 <img src=x onerror="alert(1)"> & 遊戲。'];
+ const a=readmeReleaseAssets(m);for(const output of [a.svg,a.html]){expect(output).not.toContain('<script>');expect(output).not.toContain('<img');expect(output).toContain('&lt;');expect(output).not.toContain('Gate PASS');}
+ expect(a.svg).toContain('aria-labelledby');expect(a.svg).not.toContain('<foreignObject');expect(a.svg).not.toContain('href=');expect(a.html).toContain('href="../version.json"');expect(a.html).toContain('href="../CHANGELOG.md"');expect(a.html).toContain('lang="zh-Hant"');
+});

@@ -1,0 +1,67 @@
+{
+  "browser": "154.0.8037.57",
+  "historicalPatchedVersionLabels": "Synthetic 0.30.52/0.30.53 metadata; patched app code",
+  "cases": [
+    {
+      "label": "before-native-invalid-state-old-52",
+      "status": "PASS",
+      "nativeError": {
+        "type": "native-update-error",
+        "name": "TypeError",
+        "message": "Failed to update a ServiceWorker for scope ('http://127.0.0.1:4218/lieguo-zhengtu-origin/') with script ('http://127.0.0.1:4218/lieguo-zhengtu-origin/sw.js'): Not found"
+      },
+      "noSaveAck": true,
+      "misleadingSavedTextReproduced": true,
+      "indexedDBUnchanged": true
+    },
+    {
+      "label": "after-native-stale-reference-safe-recovery",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('本次更新 · v0.30.53', { exact: true }) to be visible\u001b[22m\n",
+      "eventOrder": [
+        "native-update-error",
+        "native-update-error",
+        "durable-sync-ack",
+        "beforeunload"
+      ]
+    },
+    {
+      "label": "after-unrecoverable-registration-keeps-data",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/本次保存已確認。請稍後按更新重試/) to be visible\u001b[22m\n",
+      "eventOrder": [
+        "native-update-error",
+        "native-update-error",
+        "durable-sync-ack",
+        "beforeunload"
+      ]
+    },
+    {
+      "label": "after-docs-only-then-real-content-offline",
+      "status": "PASS",
+      "docsOnlyNoOfferOnlineOffline": true,
+      "sameVersionContentOffer": true,
+      "offlineActivationAndReload": true,
+      "eventOrder": [
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ]
+    },
+    {
+      "label": "actual-release-readme-project-path-and-accessibility",
+      "status": "PASS",
+      "version": "0.30.55",
+      "commitSha": "0a0d6e9278f73ba6d84ceb4b22a0c35a5cda80d7",
+      "contentSha": "0a0d6e9278f73ba6d84ceb4b22a0c35a5cda80d7",
+      "base": "http://127.0.0.1:4218/lieguo-zhengtu-origin/",
+      "svg": true,
+      "readableHistory": true,
+      "notInterceptedByGameSW": true,
+      "mobileNoOverflow": true
+    }
+  ],
+  "errors": [],
+  "passed": 3,
+  "failed": 2
+}
