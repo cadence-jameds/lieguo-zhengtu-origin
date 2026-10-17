@@ -104,7 +104,9 @@ function candidate(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],porti
 describe('P0-C-9 main HEAD isolated seed experiment',()=>{
   it('runs baseline and V1 candidates in the actual Formal world reducer',()=>{
     const results=[];
-    for(const seed of [90217,104729]){
+    const hours=Number(process.env.P0C9_HOURS||6);
+    const seeds=hours>=24?[90217]:[90217,104729];
+    for(const seed of seeds){
       for(const [mode,cutoff] of [['baseline',0],['candidate',45],['candidate',50],['candidate',55]] as const){
         experiment.mode=mode;experiment.cutoff=cutoff;experiment.attempted={wild:0,city:0,scout:0,joint:0};experiment.decisions=0;
         let w=createFormalWorld({campaign:'p0c9-experiment',seed,speed:1});
@@ -119,9 +121,9 @@ describe('P0-C-9 main HEAD isolated seed experiment',()=>{
           agent.intel=w.cities.filter(c=>c.ownerFactionId!==agent.factionId&&Math.hypot(c.x-origin.x,c.y-origin.y)<=48)
             .map(c=>({cityId:c.id,ownerFactionId:c.ownerFactionId,at:0,source:'scout' as const,units:{...c.military!.units},coarse:'personnel' as const}));
         }
-        for(let h=1;h<=6;h++)w=advanceFormal(w,h*3600000).world;
+        for(let h=1;h<=hours;h++)w=advanceFormal(w,h*3600000).world;
         const receipts=w.combat?.receipts??[];
-        results.push({seed,mode,cutoff,worldHours:6,ai:w.autonomy?.agents.length,decisions:experiment.decisions,
+        results.push({seed,mode,cutoff,worldHours:hours,ai:w.autonomy?.agents.length,decisions:experiment.decisions,
           attempted:{...experiment.attempted},accepted:w.autonomy?.accepted,rejected:w.autonomy?.rejected,
           outcomes:Object.fromEntries([...new Set(receipts.map(r=>r.outcome))].map(outcome=>[outcome,receipts.filter(r=>r.outcome===outcome).length])),
           wildWins:receipts.filter(r=>r.outcome==='wild-cleared').length,
@@ -133,7 +135,7 @@ describe('P0-C-9 main HEAD isolated seed experiment',()=>{
     console.log('P0C9_MAIN_ENGINE_RESULTS_BEGIN');
     console.log(JSON.stringify({method:'main HEAD GitHub CI Vitest, 99 AI, same seeds, TEST-ONLY militia/scout and legal preloaded city intel, actual world/reducer/combat, no Zod substitution',results}));
     console.log('P0C9_MAIN_ENGINE_RESULTS_END');
-    expect(results).toHaveLength(8);
+    expect(results).toHaveLength(seeds.length*4);
     expect(results.every(r=>r.ai===99)).toBe(true);
   },900000);
 });
