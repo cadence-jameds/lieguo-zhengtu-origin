@@ -2,9 +2,9 @@ import {describe,it,expect,vi} from 'vitest';
 import type {FormalWorld,FormalCity,FormalCommand,Resources} from './model';
 import type {Agent} from './autonomyModel';
 
-type Mode='baseline'|'fallback'|'contextual'|'proactive';
+type Mode='baseline'|'fallback'|'contextual'|'proactive'|'conquestGuard';
 const trace=vi.hoisted(()=>({
- mode:'baseline' as 'baseline'|'fallback'|'contextual'|'proactive',
+ mode:'baseline' as 'baseline'|'fallback'|'contextual'|'proactive'|'conquestGuard',
  decisions:0,
  attempted:{wild:0,city:0,scout:0,joint:0},
  overrides:{blockedToWild:0,scoutToWild:0,cityToWild:0},
@@ -79,6 +79,7 @@ function chooseV2(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],portio
   ||aiRandom(w.seed,a.factionId,a.decisions+311)>.15+a.traits.military*.55)
    return base;
  if(base.some(cmd=>cmd.type!=='army.dispatch'))return base;
+ if(trace.mode==='conquestGuard'&&base.some(cmd=>cmd.type==='army.dispatch'&&cmd.mission==='conquest'))return base;
  if(base.some(cmd=>cmd.type==='army.dispatch'&&cmd.target.kind==='wild'))return base;
  const own=c.military?.units??{};
  const total=Object.entries(own).reduce((sum,[id,n])=>sum+(effectiveUnit(id)?n:0),0);
@@ -126,7 +127,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
  it('preserves the original engine and compares natural AI worlds',()=>{
    const hours=Number(process.env.P0C9_HOURS||168);
    const seeds=(process.env.P0C9_SEEDS||'90217').split(',').map(Number);
-   const variants:Mode[]=process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive'];
+   const variants:Mode[]=process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
    const results=[];
    for(const seed of seeds)for(const mode of variants){
      trace.mode=mode;trace.decisions=0;
@@ -145,6 +146,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
        attempts:{...trace.attempted},overrides:{...trace.overrides},eligibleWild:trace.eligibleWild,blockedWithWild:trace.blockedWithWild,
        accepted:w.autonomy?.accepted,rejected:w.autonomy?.rejected,
        wildCleared:receipts.filter(r=>r.outcome==='wild-cleared').length,
+       conquered:receipts.filter(r=>r.outcome==='conquered').length,
        actualReturnedLoot:{...trace.returnedLoot},actualReturnedLootSum:sumResource(trace.returnedLoot),
        wildReturnedLoot:{...trace.wildReturnLoot},wildReturnedLootSum:sumResource(trace.wildReturnLoot),
        wildCombatLosses:trace.wildLosses,returnEvents:trace.returns,
