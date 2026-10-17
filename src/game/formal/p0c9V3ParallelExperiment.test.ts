@@ -2,9 +2,9 @@ import {describe,it,expect,vi} from 'vitest';
 import type {FormalWorld,FormalCity,FormalCommand,Resources} from './model';
 import type {Agent} from './autonomyModel';
 
-type Mode='baseline'|'fallback'|'contextual'|'proactive'|'conquestGuard'|'parallel';
+type Mode='baseline'|'fallback'|'contextual'|'proactive'|'conquestGuard'|'parallel'|'adaptive';
 const trace=vi.hoisted(()=>({
- mode:'baseline' as 'baseline'|'fallback'|'contextual'|'proactive'|'conquestGuard'|'parallel',
+ mode:'baseline' as 'baseline'|'fallback'|'contextual'|'proactive'|'conquestGuard'|'parallel'|'adaptive',
  decisions:0,
  attempted:{wild:0,city:0,scout:0,joint:0},
  overrides:{blockedToWild:0,scoutToWild:0,cityToWild:0},
@@ -21,7 +21,7 @@ vi.mock('./aiActions',async(importOriginal)=>{
  const actual=await importOriginal<typeof import('./aiActions')>();
  return {...actual,militaryDecision:(w:FormalWorld,c:FormalCity,a:Agent)=>{
    const base=actual.militaryDecision(w,c,a);
-   const next=trace.mode==='baseline'?base:trace.mode==='parallel'?chooseV3(w,c,a,base,actual.portion):chooseV2(w,c,a,base,actual.portion);
+   const next=trace.mode==='baseline'?base:(trace.mode==='parallel'||trace.mode==='adaptive')?chooseV3(w,c,a,base,actual.portion,trace.mode==='adaptive'):chooseV2(w,c,a,base,actual.portion);
     if(next.filter(cmd=>cmd.type==='army.dispatch').length>=2){trace.parallelOrders++;if(next.some(cmd=>cmd.type==='army.dispatch'&&cmd.mission!=='scout'&&cmd.target.kind==='city'))trace.parallelCombatOrders++;}
    trace.decisions++;
    for(const cmd of next){
@@ -133,7 +133,7 @@ function chooseV2(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],portio
  * Both orders are submitted in the same event if per-unit 35% garrison reserve
  * and outbound army slots permit. No hidden world ledgers or fake units.
  */
-function chooseV3(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],portion:(c:FormalCity,r:number)=>Record<string,number>):FormalCommand[]{
+function chooseV3(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],portion:(c:FormalCity,r:number)=>Record<string,number>,adaptive=false):FormalCommand[]{
  const own=c.military?.units??{},total=Object.entries(own).reduce((n,[id,v])=>n+(effectiveUnit(id)?v:0),0);
  const ext=w.armies.filter(x=>x.ownerFactionId===a.factionId&&x.originCityId===c.id).length;
  if(!a.active||incomingAlerts(w,a.factionId).some(t=>t.ownerFactionId===a.factionId)
@@ -156,8 +156,8 @@ function chooseV3(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],portio
    const p=clamp(1-site.level/Math.max(1,total/80)),distance=clamp(1-d/24);
    return {site,n,score:100*(.30*e+.25*g+.25*p+.15*distance+.05*.5)};
  }).sort((x,y)=>y.score-x.score||String(x.site.id).localeCompare(String(y.site.id)));
- const best=rank[0],units=portion(c,.24);
- if(best.score<43||Object.values(units).reduce((a,b)=>a+b,0)<10)return base;
+ const best=rank[0],units=portion(c,adaptive?.28:.24);
+ if(best.score<(adaptive?35:43)||Object.values(units).reduce((a,b)=>a+b,0)<(adaptive?14:10))return base;
  const wild:FormalCommand={type:'army.dispatch',cityId:c.id,mission:'raid',target:{kind:'wild',siteId:best.site.id,generation:best.site.generation},units};
  const city=base.find((cmd):cmd is Extract<FormalCommand,{type:'army.dispatch'}>=>cmd.type==='army.dispatch'&&cmd.target.kind==='city');
  if(!city)return [wild];
@@ -170,8 +170,8 @@ function chooseV3(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],portio
  const cg=clamp(.3+.35*a.traits.expansion+.2*a.traits.military+(war?.15:0));
  const cp=city.mission==='scout'?.7:clamp(1-enemy/Math.max(1,force+enemy));
  const cs=100*(.30*ce+.25*cg+.25*cp+.15*clamp(1-d/48)+.05*(war?.85:.5));
- const reserve=Object.keys(units).every(id=>(units[id]??0)+(city.units[id]??0)<=Math.floor((own[id]??0)*.65));
- if(total>=140&&ext<=1&&reserve&&cs>=37)return cs>=best.score?[city,wild]:[wild,city];
+ const reserve=Object.keys(units).every(id=>(units[id]??0)+(city.units[id]??0)<=Math.floor((own[id]??0)*(adaptive?.70:.65)));
+ if(total>=(adaptive?90:140)&&ext<=1&&reserve&&cs>=(adaptive?33:37))return cs>=best.score?[city,wild]:[wild,city];
  if(city.mission==='scout')return base;
  return best.score>cs+8?[wild]:base;
 }
@@ -181,7 +181,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
  it('preserves the original engine and compares natural AI worlds',()=>{
    const hours=Number(process.env.P0C9_HOURS||168);
    const seeds=(process.env.P0C9_SEEDS||'90217').split(',').map(Number);
-   const variants:Mode[]=process.env.P0C9_PARALLEL==='1'?['baseline','contextual','parallel']:process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
+   const variants:Mode[]=process.env.P0C9_PARALLEL==='1'?['baseline','contextual','parallel','adaptive']:process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
    const results=[];
    for(const seed of seeds)for(const mode of variants){
      trace.mode=mode;trace.decisions=0;
