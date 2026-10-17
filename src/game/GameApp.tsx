@@ -47,7 +47,7 @@ export default function GameApp(){
  const navigate=(v:View)=>{setMapPoint(undefined);setView(v);setMore(false);if(v!=='army')setTargetPoint(undefined);};
  const transition=(type:'start'|'import'|'restore',data:Record<string,unknown>)=>{const id=crypto.randomUUID();waiting.current=id;if(type==='start')engine.send({type,seed:data.seed as number,speed:data.speed as number,name:data.name as string,civilizationId:data.civilizationId as string,offlineHours:data.offlineHours as 0|1|6|24,transitionId:id});else if(type==='restore')engine.send({type,id:data.id as number,transitionId:id});else engine.send({type,text:data.text as string,transitionId:id});};
  const importFile=async()=>{const file=pendingImport;if(!file)return;if(file.size>100*1024*1024){setToast('存檔超過 100 MiB。');return;}try{const text=await file.text();transition('import',{text});setPendingImport(null);}catch{setToast('無法讀取檔案，原戰役保留。');}};
- const updates=useAppUpdate(async()=>{if(world)await engine.sync();});
+ const updates=useAppUpdate(async()=>{if(!world)return 'no-campaign';await engine.sync();});
  const checkUpdate=updates.check,updateText=updates.text;
  const updateDisabled=busy||updates.updating||status==='loading'||status==='error';
  const fileControl=<input ref={fileInput} hidden type="file" accept=".realm-save,.json" onChange={e=>{const file=e.target.files?.[0];if(file)setPendingImport(file);e.target.value='';}}/>;

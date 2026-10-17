@@ -1,0 +1,30 @@
+{
+  "base": "3d1760864f3b9d9a55108c80225764ef8e3099e1",
+  "preserved": {
+    "src/game/formal": true,
+    "src/game/persistence.ts": true,
+    "src/game/useGame.ts": true,
+    "src/game/runtime.worker.ts": true,
+    "src/game/release.ts": true,
+    "src/game/releaseTypes.ts": true,
+    "scripts/release-metadata.mjs": true,
+    ".github/workflows/deploy-pages.yml": true,
+    ".github/workflows/ci.yml": true,
+    "package.json": true,
+    "package-lock.json": true
+  },
+  "localSourceFiles": {
+    "src/game/useAppUpdate.ts": "8fccf3e21f8197357ea9842d3818800c942e908af2849b2ee2328069f73480e3",
+    "src/game/GameApp.tsx": "1c78e70aa141478e3420331ef1c4c1a53fb903ab80a6f5da1e2d9ff9c992018f",
+    "vite.config.ts": "a1930e8aba86095156975adc9d35e4fc6d576bf2b43e0c61544b5870eac04b09",
+    "scripts/readme-release.mjs": "d1a214f3444902bb94cbd2484fdf5b42c202ae412d592b3f54041220f47c6385"
+  },
+  "beforeUpdaterProvenance": {
+    "deployed52And53UpdaterIdentical": true,
+    "historical52FixtureUpdateFunctionIdentical": true,
+    "fixtureFullHookIdentical": false,
+    "scope": "native before proof applies to byte-identical update() path; historical bundle check() differs"
+  },
+  "workingTreeHeadAtCapture": "fdf442c4fb12fb780359c3f26f5257559e09ed1f",
+  "lastStaleWaitingFixNotYetCommitted": true
+}

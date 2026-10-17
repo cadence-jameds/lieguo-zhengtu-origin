@@ -1,0 +1,50 @@
+{
+  "sourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
+  "browser": "154.0.8037.57",
+  "rawSHA256": "bfb913b14d2037b3ed910ef829414e15724d0094789bfd865218871a06e433a3",
+  "cases": [
+    {
+      "scenario": "r19-docs-waiting-fail",
+      "testExpectation": "reproduce the unsafe original behavior",
+      "testStatus": "PASS",
+      "productOutcome": "FAIL: docs-only D activated while metadata requested C1",
+      "eventOrder": [
+        "native-update-error",
+        "durable-sync-ack",
+        "skip-waiting",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "loaded": "synthetic 0.30.53 C0 → docs-only D",
+      "requestedContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    {
+      "scenario": "r19-docs-waiting-pending",
+      "testExpectation": "reproduce the unsafe original behavior",
+      "testStatus": "PASS",
+      "productOutcome": "FAIL: docs-only D activated while metadata requested C1",
+      "eventOrder": [
+        "durable-sync-ack",
+        "skip-waiting",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "loaded": "synthetic 0.30.53 C0 → docs-only D",
+      "requestedContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    {
+      "scenario": "r19-docs-waiting-race",
+      "testExpectation": "reproduce the unsafe original behavior",
+      "testStatus": "PASS",
+      "productOutcome": "FAIL: docs-only D activated while metadata requested C1",
+      "eventOrder": [
+        "durable-sync-ack",
+        "skip-waiting",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "loaded": "synthetic 0.30.53 C0 → docs-only D",
+      "requestedContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    }
+  ]
+}

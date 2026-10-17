@@ -1,0 +1,43 @@
+{
+  "browser": "154.0.8037.57",
+  "historicalPatchedVersionLabels": "Synthetic 0.30.52/0.30.53 metadata; patched app code",
+  "cases": [
+    {
+      "label": "before-native-invalid-state-old-52",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.formal-shell') to be visible\u001b[22m\n"
+    },
+    {
+      "label": "after-native-stale-reference-safe-recovery",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForURL: Timeout 20000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================"
+    },
+    {
+      "label": "after-unrecoverable-registration-keeps-data",
+      "status": "PASS",
+      "noSaveClaim": true,
+      "noActivation": true,
+      "indexedDBUnchanged": true
+    },
+    {
+      "label": "after-docs-only-then-real-content-offline",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).includes('fffffff'))\n"
+    },
+    {
+      "label": "actual-release-readme-project-path-and-accessibility",
+      "status": "PASS",
+      "version": "0.30.54",
+      "commitSha": "3d1760864f3b9d9a55108c80225764ef8e3099e1",
+      "contentSha": "3d1760864f3b9d9a55108c80225764ef8e3099e1",
+      "base": "http://127.0.0.1:4218/lieguo-zhengtu-origin/",
+      "svg": true,
+      "readableHistory": true,
+      "notInterceptedByGameSW": true,
+      "mobileNoOverflow": true
+    }
+  ],
+  "errors": [],
+  "passed": 2,
+  "failed": 3
+}

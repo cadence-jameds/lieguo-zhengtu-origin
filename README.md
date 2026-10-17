@@ -8,9 +8,20 @@
 
 目前為公開試玩，正式驗收與自動部署分開。首頁、戰役設定及已部署的 `version.json` 顯示實際載入版本、日期與 Commit SHA。原始碼 `package.json` 的 0.30.50 是固定計數基準，不代表最新部署版本；詳見 [版本管理](docs/RELEASE_METADATA.md)。
 
+## 目前線上版本與發布狀態
+
+[![目前部署版本、日期、更新重點及 Commit；文字紀錄請點擊圖片](https://cadence-jameds.github.io/lieguo-zhengtu-origin/release/latest.svg)](https://cadence-jameds.github.io/lieguo-zhengtu-origin/release/)
+
+[![main CI](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/workflows/ci.yml?query=branch%3Amain)
+[![Pages 發布](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/workflows/deploy-pages.yml?query=branch%3Amain)
+
+圖片與[可讀文字／過往版本紀錄](https://cadence-jameds.github.io/lieguo-zhengtu-origin/release/)直接使用遊戲 Release Metadata；只有 Pages 成功發布才會替換線上內容，無需逐版修改 README。無法顯示圖片時可查看[純文字版本資料](https://cadence-jameds.github.io/lieguo-zhengtu-origin/version.json)或[完整文字更新日誌](https://cadence-jameds.github.io/lieguo-zhengtu-origin/CHANGELOG.md)。GitHub 圖片代理可能延遲刷新，請以文字頁與部署 Commit 核對。
+
+CI 與 Pages 為分開的最新工作流程狀態；若最新建置或部署失敗，版本圖片仍顯示上次成功部署的內容。CI 成功、Pages 成功與正式獨立 Gate 結論分開管理。
+
 ## 正式主規格（v94）
 
-**[《河谷戰役 vNext》正式整合主規格 v94](docs/b6-v94/河谷戰役_vNext_平衡重構討論_v94.md)** 為目前唯一現行設計基準，完整承接 v93／v92 的有效規則。v94 第 17 章新增：**每座城市從開局即可安排最多 5 筆建築施工與 5 筆軍事訓練排程**（各自計數、包含正在執行與等待中的工作），取代原先各 3 筆上限；第二建築施工佇列仍於該城曾達 **15,000 人口**永久解鎖、第二軍事訓練佇列仍於曾達 **20,000 人口**永久解鎖，各可同時執行 2 筆，但總排程上限仍各 5 筆。
+**[《河谷戰役 vNext》正式整合主規格 v94](docs/b6-v94/河谷戰役_vNext_平衡重構討論_v94.md)** 為目前現行設計基準，完整承接 v93／v92 的有效規則。**待施工規格**：第 17 章的每城最多 5 筆施工／5 筆訓練排程、第 16 章的 80 項任務，以及 [Issue #14](https://github.com/cadence-jameds/lieguo-zhengtu-origin/issues/14) 的 P0-C-5／7／8／9／10／11／12／13 均為獨立待辦；規格核准不代表 Runtime 已完成。
 
 v93 第 16 章已核准的 **80 項一次性玩家任務**（黑暗 14、封建 29、城堡 20、帝王 17）與資源獎勵完整保留；**不新增 B9 終局任務**。歷史規格 [v93](docs/b6-v93/河谷戰役_vNext_平衡重構討論_v93.md) 與 [v92](docs/b6-v92/河谷戰役_vNext_平衡重構討論_v92.md) 均保留供版本追溯。**v94 是設計規格升版，並非遊戲程式更新；GitHub Pages 公開試玩以建置產物 `version.json` 公布的版本為準。**
 
@@ -77,7 +88,13 @@ GITHUB_ACTIONS=true GITHUB_REPOSITORY=cadence-jameds/lieguo-zhengtu-origin npm r
 
 ## 驗證與驗收狀態
 
-2026-10-13 這次試玩發布已完成：
+PR [#3](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/3)、[#17](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/17)、[#9](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/9) 已合併。對應更新依序包含工匠／失城安全修復、版本與日誌自動化、軍團與治理／外交／工匠介面整合。最新可玩版本與更新摘要以上方動態區塊為準；最新自動測試統計請查看對應 Commit 的 CI 與 PR 驗證報告，不以固定舊統計代表今日結果。
+
+**B5 E1 Lv15 人工驗收：OWNER WAIVED**，原歷史 HOLD 紀錄保留。正式 Sol／Astra 獨立審查以各 PR 核准紀錄為準，README 自動資訊不授權宣告 Gate PASS。實機驗證與一般 Chromium 手機尺寸驗證須分開列示；Android 更新問題追蹤於 [Issue #18](https://github.com/cadence-jameds/lieguo-zhengtu-origin/issues/18)。
+
+### 歷史驗證：2026-10-13
+
+以下為當日紀錄，並非目前測試統計或目前 Gate 結論：
 
 - 三項沿用 Lv4 規格的美術測試已更新為 Lv10 邊界，包含 Lv9／Lv10 外觀及排隊中的施工預覽。
 - 隔離完整回歸測試：**1,115 項通過、0 項失敗、1 項略過**。
@@ -85,7 +102,7 @@ GITHUB_ACTIONS=true GITHUB_REPOSITORY=cadence-jameds/lieguo-zhengtu-origin npm r
 - 本地 Pages 建置的桌面與手機尺寸瀏覽器試跑能開啟首頁並開始新戰役，未發現 JavaScript 錯誤或資源載入失敗。
 - [GitHub Pages 部署成功](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/38335217984)，線上首頁、主程式、樣式、版本檔與 Service Worker 均回傳 HTTP 200。
 
-自動測試與上述瀏覽器試跑不代表正式驗收完成。正式紀錄仍為 **Astra Gate：NOT DECLARED PASS、B5 E1：HOLD、實體手機測試：MANUAL PENDING**；本次試玩發布保留這些狀態。
+當日紀錄為 **Astra Gate：NOT DECLARED PASS、B5 E1：HOLD、實體手機測試：MANUAL PENDING**。這些歷史狀態不覆蓋後續正式核准／OWNER WAIVED 紀錄。
 
 ## 歷史文件
 
