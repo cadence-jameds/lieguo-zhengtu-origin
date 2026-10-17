@@ -21,11 +21,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Run current Formal engine with A / 45 / 50 / 55
+      - name: Run Formal engine natural-start A / fallback / contextual / proactive
         shell: bash
         run: |
           set -o pipefail
-          P0C9_HOURS=168 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9V2Experiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
+          P0C9_SEEDS=90217,104729 P0C9_HOURS=168 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9V2Experiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
       - name: Retain simulation log
         if: always()
         uses: actions/upload-artifact@v4
