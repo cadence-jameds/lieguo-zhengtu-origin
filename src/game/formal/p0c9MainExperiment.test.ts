@@ -105,25 +105,32 @@ describe('P0-C-9 main HEAD isolated seed experiment',()=>{
   it('runs baseline and V1 candidates in the actual Formal world reducer',()=>{
     const results=[];
     const hours=Number(process.env.P0C9_HOURS||6);
-    const seeds=hours>=24?[90217]:[90217,104729];
+    const natural=process.env.P0C9_NATURAL==='1';
+    const seeds=natural?[90217]:(hours>=24?[90217]:[90217,104729]);
+    const variants:[('baseline'|'candidate'),number][]=natural?[['baseline',0],['candidate',50]]:[['baseline',0],['candidate',45],['candidate',50],['candidate',55]];
     for(const seed of seeds){
-      for(const [mode,cutoff] of [['baseline',0],['candidate',45],['candidate',50],['candidate',55]] as const){
+      for(const [mode,cutoff] of variants){
         experiment.mode=mode;experiment.cutoff=cutoff;experiment.attempted={wild:0,city:0,scout:0,joint:0};experiment.decisions=0;
         let w=createFormalWorld({campaign:'p0c9-experiment',seed,speed:1});
-        for(let i=0;i<w.cities.length;i++){
+        if(!natural)for(let i=0;i<w.cities.length;i++){
           const c=w.cities[i];if(c.ownerFactionId===w.playerFactionId)continue;
           c.military!.units={militia:i%4===0?5:100,scout:10};
           c.stock={food:600,wood:100,stone:100,gold:100};
         }
         enableAutonomy(w);
-        for(const agent of w.autonomy!.agents){
+        if(!natural)for(const agent of w.autonomy!.agents){
           const origin=w.cities.find(c=>c.ownerFactionId===agent.factionId)!;
           agent.intel=w.cities.filter(c=>c.ownerFactionId!==agent.factionId&&Math.hypot(c.x-origin.x,c.y-origin.y)<=48)
             .map(c=>({cityId:c.id,ownerFactionId:c.ownerFactionId,at:0,source:'scout' as const,units:{...c.military!.units},coarse:'personnel' as const}));
         }
-        for(let h=1;h<=hours;h++)w=advanceFormal(w,h*3600000).world;
+        let completedHours=0;const began=Date.now();
+        for(let h=1;h<=hours;h++){
+          w=advanceFormal(w,h*3600000).world;completedHours=h;
+          if(natural&&h%24===0)console.log('P0C9_NATURAL_CHECKPOINT',JSON.stringify({seed,mode,hours:h,elapsedMs:Date.now()-began,cities:w.cities.length,wildResolved:w.combat?.statistics.wild,raids:w.combat?.statistics.raids,conquests:w.combat?.statistics.conquests}));
+          if(natural&&Date.now()-began>420000)break;
+        }
         const receipts=w.combat?.receipts??[];
-        results.push({seed,mode,cutoff,worldHours:hours,ai:w.autonomy?.agents.length,decisions:experiment.decisions,
+        results.push({seed,mode,cutoff,worldHours:completedHours,targetHours:hours,natural,completed:completedHours===hours,ai:w.autonomy?.agents.length,decisions:experiment.decisions,
           attempted:{...experiment.attempted},accepted:w.autonomy?.accepted,rejected:w.autonomy?.rejected,
           outcomes:Object.fromEntries([...new Set(receipts.map(r=>r.outcome))].map(outcome=>[outcome,receipts.filter(r=>r.outcome===outcome).length])),
           wildWins:receipts.filter(r=>r.outcome==='wild-cleared').length,
@@ -135,7 +142,7 @@ describe('P0-C-9 main HEAD isolated seed experiment',()=>{
     console.log('P0C9_MAIN_ENGINE_RESULTS_BEGIN');
     console.log(JSON.stringify({method:'main HEAD GitHub CI Vitest, 99 AI, same seeds, TEST-ONLY militia/scout and legal preloaded city intel, actual world/reducer/combat, no Zod substitution',results}));
     console.log('P0C9_MAIN_ENGINE_RESULTS_END');
-    expect(results).toHaveLength(seeds.length*4);
+    expect(results).toHaveLength(seeds.length*variants.length);
     expect(results.every(r=>r.ai===99)).toBe(true);
   },900000);
 });
