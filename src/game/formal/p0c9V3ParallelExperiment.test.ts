@@ -15,7 +15,8 @@ const trace=vi.hoisted(()=>({
  eligibleWild:0,
  blockedWithWild:0,
  parallelOrders:0,
- parallelCombatOrders:0
+ parallelCombatOrders:0,
+ rejectionReasons:{} as Record<string,number>
 }));
 vi.mock('./aiActions',async(importOriginal)=>{
  const actual=await importOriginal<typeof import('./aiActions')>();
@@ -62,6 +63,20 @@ vi.mock('./battles',async(importOriginal)=>{
      trace.wildLosses+=Object.entries(arriving.initial).reduce((n,[id,count])=>n+Math.max(0,count-(alive[id]??0)),0);
    }
    return result;
+ }};
+});
+vi.mock('./autonomy',async(importOriginal)=>{
+ const actual=await importOriginal<typeof import('./autonomy')>();
+ return {...actual,handleAutonomy:(...args:Parameters<typeof actual.handleAutonomy>)=>{
+   const [w,e,s,submit]=args;
+   return actual.handleAutonomy(w,e,s,(world,order)=>{
+     const transition=submit(world,order);
+     if(transition.ack?.status!=='committed'){
+       const reason=transition.ack?.reason??transition.ack?.status??'unknown';
+       trace.rejectionReasons[reason]=(trace.rejectionReasons[reason]??0)+1;
+     }
+     return transition;
+   });
  }};
 });
 import {createFormalWorld} from './generator';
@@ -181,7 +196,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
  it('preserves the original engine and compares natural AI worlds',()=>{
    const hours=Number(process.env.P0C9_HOURS||168);
    const seeds=(process.env.P0C9_SEEDS||'90217').split(',').map(Number);
-   const variants:Mode[]=process.env.P0C9_LONG_PARALLEL==='1'?['baseline','contextual','adaptive']:process.env.P0C9_PARALLEL==='1'?['baseline','contextual','parallel','adaptive']:process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
+   const variants:Mode[]=process.env.P0C9_DIAG==='1'?['adaptive']:process.env.P0C9_LONG_PARALLEL==='1'?['baseline','contextual','adaptive']:process.env.P0C9_PARALLEL==='1'?['baseline','contextual','parallel','adaptive']:process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
    const results=[];
    for(const seed of seeds)for(const mode of variants){
      trace.mode=mode;trace.decisions=0;
@@ -189,7 +204,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
      trace.overrides={blockedToWild:0,scoutToWild:0,cityToWild:0};
      trace.returns=0;trace.returnedLoot={food:0,wood:0,stone:0,gold:0};
      trace.wildReturnLoot={food:0,wood:0,stone:0,gold:0};trace.wildLosses=0;
-     trace.eligibleWild=0;trace.blockedWithWild=0;trace.parallelOrders=0;trace.parallelCombatOrders=0;
+     trace.eligibleWild=0;trace.blockedWithWild=0;trace.parallelOrders=0;trace.parallelCombatOrders=0;trace.rejectionReasons={};
      let w=createFormalWorld({campaign:'p0c9-v2-'+seed,seed,speed:1});
      enableAutonomy(w);
      for(let h=1;h<=hours;h++)w=advanceFormal(w,h*HOUR).world;
@@ -197,7 +212,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
      const receipts=w.combat?.receipts.filter(r=>r.kind==='final')??[];
      const activeAI=w.factions.filter(f=>f.role==='ai'&&w.cities.some(c=>c.ownerFactionId===f.id)).length;
      results.push({seed,mode,completedHours:hours,ai:activeAI,decisions:trace.decisions,
-       attempts:{...trace.attempted},overrides:{...trace.overrides},parallelOrders:trace.parallelOrders,parallelCombatOrders:trace.parallelCombatOrders,eligibleWild:trace.eligibleWild,blockedWithWild:trace.blockedWithWild,
+       attempts:{...trace.attempted},overrides:{...trace.overrides},parallelOrders:trace.parallelOrders,parallelCombatOrders:trace.parallelCombatOrders,rejectionReasons:{...trace.rejectionReasons},eligibleWild:trace.eligibleWild,blockedWithWild:trace.blockedWithWild,
        accepted:w.autonomy?.accepted,rejected:w.autonomy?.rejected,
        wildCleared:receipts.filter(r=>r.outcome==='wild-cleared').length,
        conquered:receipts.filter(r=>r.outcome==='conquered').length,
