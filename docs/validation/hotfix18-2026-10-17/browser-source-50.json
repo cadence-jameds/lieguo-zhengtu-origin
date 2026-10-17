@@ -1,0 +1,69 @@
+{
+  "browser": "154.0.8037.57",
+  "historicalPatchedVersionLabels": "Synthetic 0.30.52/0.30.53 metadata; patched app code",
+  "cases": [
+    {
+      "label": "before-native-invalid-state-old-52",
+      "status": "PASS",
+      "nativeError": {
+        "type": "native-update-error",
+        "name": "TypeError",
+        "message": "Failed to update a ServiceWorker for scope ('http://127.0.0.1:4218/lieguo-zhengtu-origin/') with script ('http://127.0.0.1:4218/lieguo-zhengtu-origin/sw.js'): Not found"
+      },
+      "noSaveAck": true,
+      "misleadingSavedTextReproduced": true,
+      "indexedDBUnchanged": true
+    },
+    {
+      "label": "after-native-stale-reference-safe-recovery",
+      "status": "PASS",
+      "saveBeforeActivation": true,
+      "nativeIndexedDB": true,
+      "nativeWorker": true,
+      "oldAppVersion": "0.30.50",
+      "recoveryPreserved": true,
+      "mobileNoOverflow": true,
+      "eventOrder": [
+        "native-update-error",
+        "native-update-error",
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ]
+    },
+    {
+      "label": "after-unrecoverable-registration-keeps-data",
+      "status": "PASS",
+      "savedBeforeReRegistration": true,
+      "noActivation": true,
+      "campaignAndRecoveryPreserved": true
+    },
+    {
+      "label": "after-docs-only-then-real-content-offline",
+      "status": "PASS",
+      "docsOnlyNoOfferOnlineOffline": true,
+      "sameVersionContentOffer": true,
+      "offlineActivationAndReload": true,
+      "eventOrder": [
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ]
+    },
+    {
+      "label": "actual-release-readme-project-path-and-accessibility",
+      "status": "PASS",
+      "version": "0.30.54",
+      "commitSha": "fdf442c4fb12fb780359c3f26f5257559e09ed1f",
+      "contentSha": "fdf442c4fb12fb780359c3f26f5257559e09ed1f",
+      "base": "http://127.0.0.1:4218/lieguo-zhengtu-origin/",
+      "svg": true,
+      "readableHistory": true,
+      "notInterceptedByGameSW": true,
+      "mobileNoOverflow": true
+    }
+  ],
+  "errors": [],
+  "passed": 5,
+  "failed": 0
+}

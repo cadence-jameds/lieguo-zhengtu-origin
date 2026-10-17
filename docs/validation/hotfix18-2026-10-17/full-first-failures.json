@@ -1,0 +1,46 @@
+{
+  "passed": 1349,
+  "failed": 3,
+  "skipped": 1,
+  "failures": [
+    {
+      "ancestorTitles": [],
+      "fullName": "R4-C1 10X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "status": "failed",
+      "title": "R4-C1 10X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "duration": 31018.005396999994,
+      "failureMessages": [
+        "Error: Test timed out in 30000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at Object.chain (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2869:10\n    at Array.forEach (<anonymous>)\n    at file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2866:10\n    at /tmp/lieguo-verification-NDnozz/src/game/formal/reviewDeltaR4.test.ts:81:27\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/module-evaluator.js:258:4)"
+      ],
+      "meta": {},
+      "tags": [],
+      "benchmarks": []
+    },
+    {
+      "ancestorTitles": [],
+      "fullName": "R4-C1 50X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "status": "failed",
+      "title": "R4-C1 50X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "duration": 30101.046027999997,
+      "failureMessages": [
+        "Error: Test timed out in 30000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at Object.chain (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2869:10\n    at Array.forEach (<anonymous>)\n    at file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2866:10\n    at /tmp/lieguo-verification-NDnozz/src/game/formal/reviewDeltaR4.test.ts:81:27\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/module-evaluator.js:258:4)"
+      ],
+      "meta": {},
+      "tags": [],
+      "benchmarks": []
+    },
+    {
+      "ancestorTitles": [],
+      "fullName": "Lv0 to15: independent v85 cost/time, all center accelerators and five speeds; completion alone advances the sole wall authority",
+      "status": "failed",
+      "title": "Lv0 to15: independent v85 cost/time, all center accelerators and five speeds; completion alone advances the sole wall authority",
+      "duration": 60740.262538999996,
+      "failureMessages": [
+        "Error: Test timed out in 60000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/lieguo-verification-NDnozz/src/game/formal/wallDelta.test.ts:24:1\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-hotfix18/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-hotfix18/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-hotfix18/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-hotfix18/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ],
+      "meta": {},
+      "tags": [],
+      "benchmarks": []
+    }
+  ]
+}

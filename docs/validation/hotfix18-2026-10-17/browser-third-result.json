@@ -1,0 +1,39 @@
+{
+  "browser": "154.0.8037.57",
+  "historicalPatchedVersionLabels": "Synthetic 0.30.52/0.30.53 metadata; patched app code",
+  "cases": [
+    {
+      "label": "before-native-invalid-state-old-52",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForFunction: Timeout 20000ms exceeded.",
+      "eventOrder": []
+    },
+    {
+      "label": "after-native-stale-reference-safe-recovery",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForFunction: Timeout 20000ms exceeded.",
+      "eventOrder": []
+    },
+    {
+      "label": "after-unrecoverable-registration-keeps-data",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForFunction: Timeout 20000ms exceeded.",
+      "eventOrder": []
+    },
+    {
+      "label": "after-docs-only-then-real-content-offline",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForFunction: Timeout 20000ms exceeded.",
+      "eventOrder": []
+    },
+    {
+      "label": "actual-release-readme-project-path-and-accessibility",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForFunction: Timeout 20000ms exceeded.",
+      "eventOrder": []
+    }
+  ],
+  "errors": [],
+  "passed": 0,
+  "failed": 5
+}

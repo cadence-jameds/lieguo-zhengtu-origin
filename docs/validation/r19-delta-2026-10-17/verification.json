@@ -1,0 +1,114 @@
+{
+  "codeCheckpoint": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+  "reviewedPreviousHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
+  "mainUnchanged": "3d1760864f3b9d9a55108c80225764ef8e3099e1",
+  "gate": "HOLD; central review required; no independent Gate PASS",
+  "targeted": {
+    "passed": 52,
+    "failed": 0,
+    "added": 8
+  },
+  "sourceCheckpointCI": {
+    "run": 38996625293,
+    "job": 117290501550,
+    "event": "pull_request",
+    "virtualMergeSha": "979a235e627f17518792908478eb372cb8084d8c",
+    "passed": 1367,
+    "failed": 0,
+    "skipped": 1,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "pagesPath": "PASS",
+    "metadataAndWorkerIdentity": "PASS"
+  },
+  "sourceCheckpointChromium": {
+    "passed": 18,
+    "failed": 0,
+    "unexpectedErrors": 0
+  },
+  "newNegativeChromium": {
+    "passed": 3,
+    "failed": 0,
+    "beforeProductOutcome": "all three unsafe docs-worker activations reproduced",
+    "afterProductOutcome": "all three blocked without save claim, activation or navigation",
+    "strictPreconditionsRetested": true,
+    "offlineRetryAfterTrueC1Downloaded": "PASS"
+  },
+  "sourceCheckpointMetadata": {
+    "version": "0.30.54",
+    "date": "2026-10-17",
+    "commitSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+    "contentSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+    "dirty": false
+  },
+  "physicalAndroid": "NOT TESTED",
+  "timeoutChanges": false,
+  "testExclusions": [],
+  "privacy": "Synthetic scenarios; no raw browser traces or saves uploaded.",
+  "preservation": {
+    "src/game/formal": true,
+    "src/game/persistence.ts": true,
+    "src/game/useGame.ts": true,
+    "src/game/runtime.worker.ts": true,
+    "src/game/release.ts": true,
+    "src/game/releaseTypes.ts": true,
+    "scripts/release-metadata.mjs": true,
+    ".github/workflows/deploy-pages.yml": true,
+    ".github/workflows/ci.yml": true,
+    "package.json": true,
+    "package-lock.json": true
+  },
+  "changedFilesSinceReviewedHead": [
+    "README.md",
+    "docs/hotfix18/R19_Delta_Report.md",
+    "docs/validation/r19-delta-2026-10-17/additional-probe-failures.json",
+    "docs/validation/r19-delta-2026-10-17/chromium-18-current.json",
+    "docs/validation/r19-delta-2026-10-17/chromium-18-previous.json",
+    "docs/validation/r19-delta-2026-10-17/compiled-source-proof.json",
+    "docs/validation/r19-delta-2026-10-17/full-regression-summary.json",
+    "docs/validation/r19-delta-2026-10-17/historical-two-failures.json",
+    "docs/validation/r19-delta-2026-10-17/r19-01-after.json",
+    "docs/validation/r19-delta-2026-10-17/r19-01-before.json",
+    "docs/validation/r19-delta-2026-10-17/verification.json",
+    "scripts/check-release-build.mjs",
+    "scripts/serve-update-boundary-fixtures.py",
+    "scripts/verify-update-worker-boundary-browser.mjs",
+    "src/game/useAppUpdate.test.tsx",
+    "src/game/useAppUpdate.ts",
+    "vite.config.ts"
+  ],
+  "rawEvidenceSHA256": {
+    "r19-targeted.json": "f534131f837cc8cd865c856cd5259128bc923be36374e9cbe9a00933f67aa5bd",
+    "r19-boundary-before-audit.json": "bfb913b14d2037b3ed910ef829414e15724d0094789bfd865218871a06e433a3",
+    "r19-boundary-after.json": "b923a3dd74b580c616f2b30a558657cf71f560e4f0b7ac82583d759884b94b5c",
+    "browser-r19-50.json": "45208925ecedba928d9e7cc07e17b0dc3eb425f4d1fd6257ed6ada957e1c4b14",
+    "browser-r19-52.json": "275d0d32e7af024fc516675b405bc428365af85b6c17e2cbf88f597c84cbe341",
+    "core-browser-r19/browser.json": "a9afc6a2330c4bb40f7d8ae8a18c2ce60dc8d7cf5f687ac624b91b9da91a7dac",
+    "r19-build-source.txt": "c1d1810bb476a3e61aeadaf6b232fe4fc302ca01af62586ce88f1d50b55a53bb",
+    "r19-typecheck.txt": "df36599cf1331fd3aadfb095efe928885a81f7dc8fcf4c6082119a3592fb7b04",
+    "r19-boundary-strict-before.json": "682bbe43c26ba964116d0727deab1adc4dcac8de75304ffc332677b9310aad61",
+    "r19-boundary-strict-after.json": "18ba188c0121984f2808cc2c6666a4083bc67015c96bc409325dd94ec569119b"
+  },
+  "sourceCheckpointPushCI": {
+    "run": 38996622427,
+    "job": 117290492881,
+    "head": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+    "conclusion": "success",
+    "passed": 1367,
+    "failed": 0,
+    "skipped": 1,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "pagesPath": "PASS",
+    "metadataAndWorkerIdentity": "PASS"
+  },
+  "localFullRegression": {
+    "runner": "unmodified scripts/verify-in-isolation.mjs full",
+    "node": "24.19.0",
+    "fileCount": 150,
+    "passed": 1367,
+    "failed": 0,
+    "skipped": 1,
+    "rawSHA256": "844f431f60b6679774f357ad46957681e0981ba29deb3351200f9b4d3f702afd"
+  }
+}

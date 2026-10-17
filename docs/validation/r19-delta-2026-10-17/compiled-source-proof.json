@@ -1,0 +1,86 @@
+{
+  "sourceCheckpoint": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+  "fixtureMetadataMayUseHistoricalSyntheticLabels": true,
+  "rows": [
+    {
+      "fixture": "patched-52",
+      "buildMetadata": {
+        "version": "0.30.52",
+        "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7",
+        "contentSha": "6405f7e155b5747c93a063799912b66f1362b9c7",
+        "dirty": true
+      },
+      "compiledHook": [
+        {
+          "sourcePath": "../../../../lieguo-hotfix18/src/game/useAppUpdate.ts",
+          "matchesSourceCheckpoint": true,
+          "sourceSHA256": "40f0641909d155ef731b363e56ed9907f843e6873778e54a824bc33950faeb00"
+        }
+      ]
+    },
+    {
+      "fixture": "patched-53",
+      "buildMetadata": {
+        "version": "0.30.53",
+        "commitSha": "57949b45a5ce9e131488632da79e4505734cea2d",
+        "contentSha": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+        "dirty": false
+      },
+      "compiledHook": [
+        {
+          "sourcePath": "../../../../lieguo-hotfix18/src/game/useAppUpdate.ts",
+          "matchesSourceCheckpoint": true,
+          "sourceSHA256": "40f0641909d155ef731b363e56ed9907f843e6873778e54a824bc33950faeb00"
+        }
+      ]
+    },
+    {
+      "fixture": "docs-53",
+      "buildMetadata": {
+        "version": "0.30.53",
+        "commitSha": "dddddddddddddddddddddddddddddddddddddddd",
+        "contentSha": "81f686a3867310417c44c564479ac0cc1db8d0a2",
+        "dirty": false
+      },
+      "compiledHook": [
+        {
+          "sourcePath": "../../../../lieguo-hotfix18/src/game/useAppUpdate.ts",
+          "matchesSourceCheckpoint": true,
+          "sourceSHA256": "40f0641909d155ef731b363e56ed9907f843e6873778e54a824bc33950faeb00"
+        }
+      ]
+    },
+    {
+      "fixture": "content-53",
+      "buildMetadata": {
+        "version": "0.30.53",
+        "commitSha": "ffffffffffffffffffffffffffffffffffffffff",
+        "contentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "dirty": false
+      },
+      "compiledHook": [
+        {
+          "sourcePath": "../../../../lieguo-hotfix18/src/game/useAppUpdate.ts",
+          "matchesSourceCheckpoint": true,
+          "sourceSHA256": "40f0641909d155ef731b363e56ed9907f843e6873778e54a824bc33950faeb00"
+        }
+      ]
+    },
+    {
+      "fixture": "actual",
+      "buildMetadata": {
+        "version": "0.30.54",
+        "commitSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+        "contentSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+        "dirty": false
+      },
+      "compiledHook": [
+        {
+          "sourcePath": "../../../../lieguo-hotfix18/src/game/useAppUpdate.ts",
+          "matchesSourceCheckpoint": true,
+          "sourceSHA256": "40f0641909d155ef731b363e56ed9907f843e6873778e54a824bc33950faeb00"
+        }
+      ]
+    }
+  ]
+}
