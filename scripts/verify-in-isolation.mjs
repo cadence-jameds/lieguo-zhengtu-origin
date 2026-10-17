@@ -35,6 +35,17 @@ const result = spawnSync(process.execPath, [join(root, 'node_modules/vitest/vite
   maxBuffer: 32 * 1024 * 1024
 });
 console.log(`Isolated ${mode} regression workspace: ${temporary}`);
+// Isolated experiment only: surface fixed-seed research data from the Vitest stdout.
+// The original main CI behavior and default gate thresholds remain unchanged.
+if (process.env.GITHUB_REF?.includes('experiment/p0-c-9-main-')) {
+  const begin='P0C9_MAIN_ENGINE_RESULTS_BEGIN';
+  const end='P0C9_MAIN_ENGINE_RESULTS_END';
+  const start=result.stdout.indexOf(begin);
+  const finish=start>=0?result.stdout.indexOf(end,start+begin.length):-1;
+  if(start>=0&&finish>=0)console.log(result.stdout.slice(start,finish+end.length));
+  else console.log('P0C9_MAIN_ENGINE_DATA_MISSING: no bounded experiment output in Vitest stdout');
+}
+
 if (result.error) throw result.error;
 if (existsSync(report)) {
   const summary = JSON.parse(readFileSync(report, 'utf8'));
