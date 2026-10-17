@@ -1,0 +1,41 @@
+{
+  "historicalProbeFailures": [
+    {
+      "artifact": "r19-retry-first-failure.json",
+      "rawSHA256": "c5b2bfdfb23f4627fe15ca72ed62635769dcee39f4632b2f58c8a0e4bfbb0328",
+      "passed": 2,
+      "failed": 1,
+      "outcome": "probe advanced before C1 was truly waiting; production safely rejected C0 identity; no durable ACK / activation / navigation",
+      "observedReply": null
+    },
+    {
+      "artifact": "r19-retry-diagnostic.json",
+      "rawSHA256": "aad059962cb753f30e8f506db8a79dcadd4c7558fc6b9d8281d2039190bb5b2d",
+      "passed": 0,
+      "failed": 1,
+      "outcome": "probe advanced before C1 was truly waiting; production safely rejected C0 identity; no durable ACK / activation / navigation",
+      "observedReply": null
+    },
+    {
+      "artifact": "r19-retry-identity-diagnostic.json",
+      "rawSHA256": "90d7d7d06d681d9170ad16f266f7966bfa8064baeb6a0f9c9b0c7a94787eab5d",
+      "passed": 0,
+      "failed": 1,
+      "outcome": "probe advanced before C1 was truly waiting; production safely rejected C0 identity; no durable ACK / activation / navigation",
+      "observedReply": {
+        "version": "0.30.53",
+        "contentSha": "81f686a3867310417c44c564479ac0cc1db8d0a2"
+      }
+    },
+    {
+      "artifact": "r19-retry-c1-verified.json",
+      "rawSHA256": "aad059962cb753f30e8f506db8a79dcadd4c7558fc6b9d8281d2039190bb5b2d",
+      "passed": 0,
+      "failed": 1,
+      "outcome": "probe advanced before C1 was truly waiting; production safely rejected C0 identity; no durable ACK / activation / navigation",
+      "observedReply": null
+    }
+  ],
+  "fix": "Use synchronous registration handle to confirm waiting/no installer; explicitly await native candidate identity in bounded evaluate loop. A Promise returned by a truthiness polling function was not a sufficient precondition. No timeout increased or assertion removed.",
+  "finalStrictAfter": "r19-01-after.json"
+}

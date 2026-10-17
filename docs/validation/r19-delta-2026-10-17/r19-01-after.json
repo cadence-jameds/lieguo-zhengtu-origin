@@ -1,0 +1,77 @@
+{
+  "testedSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+  "browser": "154.0.8037.57",
+  "passed": 3,
+  "failed": 0,
+  "unexpectedPageErrors": 0,
+  "rawSHA256": "18ba188c0121984f2808cc2c6666a4083bc67015c96bc409325dd94ec569119b",
+  "strictPrecondition": "D is waiting with no installer before C1 is published; pending retry waits for C1 own identity rather than changed JS reference",
+  "cases": [
+    {
+      "label": "r19-docs-waiting-fail",
+      "status": "PASS",
+      "mode": "fail",
+      "targetContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "docsWorkerActivated": false,
+      "noNavigation": true,
+      "noSaveClaim": true,
+      "indexedDBUnchanged": true,
+      "blockedEventOrder": [
+        "native-update-error",
+        "release-query"
+      ],
+      "retryAfterDownload": null,
+      "durableSaveAckBeforeC1": "not performed",
+      "controllerchangeBeforeC1": "not observed",
+      "navigationBeforeC1": "not observed",
+      "skipWaitingBeforeC1": "not sent"
+    },
+    {
+      "label": "r19-docs-waiting-pending",
+      "status": "PASS",
+      "mode": "pending",
+      "targetContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "docsWorkerActivated": false,
+      "noNavigation": true,
+      "noSaveClaim": true,
+      "indexedDBUnchanged": true,
+      "blockedEventOrder": [
+        "release-query"
+      ],
+      "retryAfterDownload": {
+        "status": "PASS",
+        "offline": true,
+        "loadedC1": true,
+        "eventOrder": [
+          "release-query",
+          "durable-sync-ack",
+          "skip-waiting",
+          "controllerchange",
+          "beforeunload"
+        ]
+      },
+      "durableSaveAckBeforeC1": "not performed",
+      "controllerchangeBeforeC1": "not observed",
+      "navigationBeforeC1": "not observed",
+      "skipWaitingBeforeC1": "not sent"
+    },
+    {
+      "label": "r19-docs-waiting-race",
+      "status": "PASS",
+      "mode": "race",
+      "targetContentSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "docsWorkerActivated": false,
+      "noNavigation": true,
+      "noSaveClaim": true,
+      "indexedDBUnchanged": true,
+      "blockedEventOrder": [
+        "release-query"
+      ],
+      "retryAfterDownload": null,
+      "durableSaveAckBeforeC1": "not performed",
+      "controllerchangeBeforeC1": "not observed",
+      "navigationBeforeC1": "not observed",
+      "skipWaitingBeforeC1": "not sent"
+    }
+  ]
+}

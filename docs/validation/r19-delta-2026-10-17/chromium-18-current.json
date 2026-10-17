@@ -1,0 +1,413 @@
+{
+  "sourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+  "browser": "Chromium 154.0.8037.57",
+  "nativeServiceWorker": true,
+  "nativeIndexedDB": true,
+  "syntheticFixturesOnly": true,
+  "physicalAndroid": "NOT TESTED",
+  "aiFixtureIsolation": "core 8 cases defer AI decisions 30 days; production AI rules unchanged",
+  "passed": 18,
+  "failed": 0,
+  "rawInputSHA256": {
+    "browser-r19-50.json": "45208925ecedba928d9e7cc07e17b0dc3eb425f4d1fd6257ed6ada957e1c4b14",
+    "browser-r19-52.json": "275d0d32e7af024fc516675b405bc428365af85b6c17e2cbf88f597c84cbe341",
+    "core-browser-r19/browser.json": "a9afc6a2330c4bb40f7d8ae8a18c2ce60dc8d7cf5f687ac624b91b9da91a7dac"
+  },
+  "rows": [
+    {
+      "id": "01",
+      "label": "before-native-invalid-state-old-52",
+      "scenario": "舊版原生無效註冊負向重現（預期故障，測試 PASS 不代表舊程式安全）",
+      "status": "PASS",
+      "testedApplicationSourceHead": null,
+      "fixtureSaveAppVersion": "0.30.50",
+      "loadedApplicationVersion": "0.30.52 (historical original)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "native-update-error",
+        "no-durable-save-ack",
+        "no-controllerchange",
+        "no-navigation"
+      ],
+      "baselineProvenance": {
+        "fixtureVersion": "0.30.52",
+        "fixtureMetadataCommit": "6405f7e155b5747c93a063799912b66f1362b9c7",
+        "fixtureDirty": true,
+        "scope": "historical PR17 preview; update() byte-identical to main 3d176086 and deployed 52/53; whole check() differs; not claimed as final HEAD"
+      },
+      "assertions": {
+        "noSaveAck": true,
+        "indexedDBUnchanged": true
+      }
+    },
+    {
+      "id": "02",
+      "label": "after-native-stale-reference-safe-recovery",
+      "scenario": "註冊失效後，durable save ACK 先於原生重新註冊、控制與導頁",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.50",
+      "loadedApplicationVersion": "0.30.52 → 0.30.53 (synthetic labels)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "native-update-error",
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "saveBeforeActivation": true,
+        "nativeIndexedDB": true,
+        "nativeWorker": true,
+        "recoveryPreserved": true,
+        "mobileNoOverflow": true
+      }
+    },
+    {
+      "id": "03",
+      "label": "after-unrecoverable-registration-keeps-data",
+      "scenario": "重新註冊遇真 HTTP 404，保存已確認但不切換，保留戰役與回復點",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.50",
+      "loadedApplicationVersion": "0.30.52 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "durable-sync-ack (asserted)",
+        "no-controllerchange (asserted)",
+        "no-navigation (asserted)"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "savedBeforeReRegistration": true,
+        "noActivation": true,
+        "campaignAndRecoveryPreserved": true
+      }
+    },
+    {
+      "id": "04",
+      "label": "after-docs-only-then-real-content-offline",
+      "scenario": "docs-only 線上／離線不提示；真實內容離線啟用前先保存",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.50",
+      "loadedApplicationVersion": "0.30.53 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "docsOnlyNoOfferOnlineOffline": true,
+        "sameVersionContentOffer": true,
+        "offlineActivationAndReload": true
+      }
+    },
+    {
+      "id": "05",
+      "label": "actual-release-readme-project-path-and-accessibility",
+      "scenario": "真實建置 Metadata／README SVG／文字歷史／Pages 路徑及手機寬度",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.50",
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "svg": true,
+        "readableHistory": true,
+        "notInterceptedByGameSW": true,
+        "mobileNoOverflow": true
+      },
+      "deployedMetadata": {
+        "version": "0.30.54",
+        "commitSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+        "contentSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb"
+      }
+    },
+    {
+      "id": "06",
+      "label": "before-native-invalid-state-old-52",
+      "scenario": "舊版原生無效註冊負向重現（預期故障，測試 PASS 不代表舊程式安全）",
+      "status": "PASS",
+      "testedApplicationSourceHead": null,
+      "fixtureSaveAppVersion": "0.30.52",
+      "loadedApplicationVersion": "0.30.52 (historical original)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "native-update-error",
+        "no-durable-save-ack",
+        "no-controllerchange",
+        "no-navigation"
+      ],
+      "baselineProvenance": {
+        "fixtureVersion": "0.30.52",
+        "fixtureMetadataCommit": "6405f7e155b5747c93a063799912b66f1362b9c7",
+        "fixtureDirty": true,
+        "scope": "historical PR17 preview; update() byte-identical to main 3d176086 and deployed 52/53; whole check() differs; not claimed as final HEAD"
+      },
+      "assertions": {
+        "noSaveAck": true,
+        "indexedDBUnchanged": true
+      }
+    },
+    {
+      "id": "07",
+      "label": "after-native-stale-reference-safe-recovery",
+      "scenario": "註冊失效後，durable save ACK 先於原生重新註冊、控制與導頁",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.52",
+      "loadedApplicationVersion": "0.30.52 → 0.30.53 (synthetic labels)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "native-update-error",
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "saveBeforeActivation": true,
+        "nativeIndexedDB": true,
+        "nativeWorker": true,
+        "recoveryPreserved": true,
+        "mobileNoOverflow": true
+      }
+    },
+    {
+      "id": "08",
+      "label": "after-unrecoverable-registration-keeps-data",
+      "scenario": "重新註冊遇真 HTTP 404，保存已確認但不切換，保留戰役與回復點",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.52",
+      "loadedApplicationVersion": "0.30.52 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "durable-sync-ack (asserted)",
+        "no-controllerchange (asserted)",
+        "no-navigation (asserted)"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "savedBeforeReRegistration": true,
+        "noActivation": true,
+        "campaignAndRecoveryPreserved": true
+      }
+    },
+    {
+      "id": "09",
+      "label": "after-docs-only-then-real-content-offline",
+      "scenario": "docs-only 線上／離線不提示；真實內容離線啟用前先保存",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.52",
+      "loadedApplicationVersion": "0.30.53 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "docsOnlyNoOfferOnlineOffline": true,
+        "sameVersionContentOffer": true,
+        "offlineActivationAndReload": true
+      }
+    },
+    {
+      "id": "10",
+      "label": "actual-release-readme-project-path-and-accessibility",
+      "scenario": "真實建置 Metadata／README SVG／文字歷史／Pages 路徑及手機寬度",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": "0.30.52",
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "native Service Worker",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "svg": true,
+        "readableHistory": true,
+        "notInterceptedByGameSW": true,
+        "mobileNoOverflow": true
+      },
+      "deployedMetadata": {
+        "version": "0.30.54",
+        "commitSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+        "contentSha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb"
+      }
+    },
+    {
+      "id": "11",
+      "label": "desktop-C1-reachable",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "12",
+      "label": "desktop-C1-blocked",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "13",
+      "label": "desktop-C3-true",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "14",
+      "label": "desktop-C3-false",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "15",
+      "label": "mobile-C1-reachable",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "16",
+      "label": "mobile-C1-blocked",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "17",
+      "label": "mobile-C3-true",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    },
+    {
+      "id": "18",
+      "label": "mobile-C3-false",
+      "scenario": "99 AI 合成情境；工匠改道／無可達城／失城待命軍清算，桌面或手機原生 Worker、IndexedDB、重載及 Recovery",
+      "status": "PASS",
+      "testedApplicationSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "fixtureSaveAppVersion": null,
+      "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
+      "updateEventOrder": [
+        "not-applicable: no explicit application-update switch in this case"
+      ],
+      "baselineProvenance": null,
+      "assertions": {
+        "reload": true,
+        "recovery": true,
+        "realWorker": true,
+        "nativeIndexedDB": true
+      }
+    }
+  ],
+  "privacy": "Only allowlisted assertions and event names. No save payload, request IDs, browser storage, screenshots or credentials."
+}

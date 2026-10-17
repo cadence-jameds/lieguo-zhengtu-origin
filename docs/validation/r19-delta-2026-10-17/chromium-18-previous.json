@@ -19,15 +19,22 @@
       "label": "before-native-invalid-state-old-52",
       "scenario": "舊版原生無效註冊負向重現（預期故障，測試 PASS 不代表舊程式安全）",
       "status": "PASS",
-      "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
+      "testedApplicationSourceHead": null,
       "fixtureSaveAppVersion": "0.30.50",
       "loadedApplicationVersion": "0.30.52 (historical original)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "native-update-error",
         "no-durable-save-ack",
         "no-controllerchange",
         "no-navigation"
       ],
+      "baselineProvenance": {
+        "fixtureVersion": "0.30.52",
+        "fixtureMetadataCommit": "6405f7e155b5747c93a063799912b66f1362b9c7",
+        "fixtureDirty": true,
+        "scope": "historical PR17 preview; update() byte-identical to main 3d176086 and deployed 52/53; whole check() differs; not claimed as final HEAD"
+      },
       "assertions": {
         "noSaveAck": true,
         "indexedDBUnchanged": true
@@ -41,12 +48,14 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.50",
       "loadedApplicationVersion": "0.30.52 → 0.30.53 (synthetic labels)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "native-update-error",
         "durable-sync-ack",
         "controllerchange",
         "beforeunload"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "saveBeforeActivation": true,
         "nativeIndexedDB": true,
@@ -63,11 +72,13 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.50",
       "loadedApplicationVersion": "0.30.52 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "durable-sync-ack (asserted)",
         "no-controllerchange (asserted)",
         "no-navigation (asserted)"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "savedBeforeReRegistration": true,
         "noActivation": true,
@@ -82,11 +93,13 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.50",
       "loadedApplicationVersion": "0.30.53 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "durable-sync-ack",
         "controllerchange",
         "beforeunload"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "docsOnlyNoOfferOnlineOffline": true,
         "sameVersionContentOffer": true,
@@ -101,9 +114,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.50",
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "svg": true,
         "readableHistory": true,
@@ -121,15 +136,22 @@
       "label": "before-native-invalid-state-old-52",
       "scenario": "舊版原生無效註冊負向重現（預期故障，測試 PASS 不代表舊程式安全）",
       "status": "PASS",
-      "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
+      "testedApplicationSourceHead": null,
       "fixtureSaveAppVersion": "0.30.52",
       "loadedApplicationVersion": "0.30.52 (historical original)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "native-update-error",
         "no-durable-save-ack",
         "no-controllerchange",
         "no-navigation"
       ],
+      "baselineProvenance": {
+        "fixtureVersion": "0.30.52",
+        "fixtureMetadataCommit": "6405f7e155b5747c93a063799912b66f1362b9c7",
+        "fixtureDirty": true,
+        "scope": "historical PR17 preview; update() byte-identical to main 3d176086 and deployed 52/53; whole check() differs; not claimed as final HEAD"
+      },
       "assertions": {
         "noSaveAck": true,
         "indexedDBUnchanged": true
@@ -143,12 +165,14 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.52",
       "loadedApplicationVersion": "0.30.52 → 0.30.53 (synthetic labels)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "native-update-error",
         "durable-sync-ack",
         "controllerchange",
         "beforeunload"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "saveBeforeActivation": true,
         "nativeIndexedDB": true,
@@ -165,11 +189,13 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.52",
       "loadedApplicationVersion": "0.30.52 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "durable-sync-ack (asserted)",
         "no-controllerchange (asserted)",
         "no-navigation (asserted)"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "savedBeforeReRegistration": true,
         "noActivation": true,
@@ -184,11 +210,13 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.52",
       "loadedApplicationVersion": "0.30.53 (synthetic)",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "durable-sync-ack",
         "controllerchange",
         "beforeunload"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "docsOnlyNoOfferOnlineOffline": true,
         "sameVersionContentOffer": true,
@@ -203,9 +231,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": "0.30.52",
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "native Service Worker",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "svg": true,
         "readableHistory": true,
@@ -226,9 +256,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -244,9 +276,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -262,9 +296,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -280,9 +316,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -298,9 +336,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -316,9 +356,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -334,9 +376,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,
@@ -352,9 +396,11 @@
       "testedApplicationSourceHead": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
       "fixtureSaveAppVersion": null,
       "loadedApplicationVersion": "0.30.54",
+      "serviceWorkerMode": "blocked for core-only probe; real dedicated Worker and native IndexedDB",
       "updateEventOrder": [
         "not-applicable: no explicit application-update switch in this case"
       ],
+      "baselineProvenance": null,
       "assertions": {
         "reload": true,
         "recovery": true,

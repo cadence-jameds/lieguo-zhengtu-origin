@@ -1,0 +1,52 @@
+{
+  "historical": true,
+  "sourceStage": "pre-final initial Issue #18 browser iteration; not final HEAD",
+  "passed": 3,
+  "failed": 2,
+  "rawSHA256": "95b2bb60b1f32708cf2e81c278480bb064fe46ab11837389708ab619291d6f07",
+  "rows": [
+    {
+      "scenario": "before-native-invalid-state-old-52",
+      "status": "PASS",
+      "eventOrder": [],
+      "failureClass": null
+    },
+    {
+      "scenario": "after-native-stale-reference-safe-recovery",
+      "status": "FAIL",
+      "eventOrder": [
+        "native-update-error",
+        "native-update-error",
+        "durable-sync-ack",
+        "beforeunload"
+      ],
+      "failureClass": "old controller accepted, stale application after reload"
+    },
+    {
+      "scenario": "after-unrecoverable-registration-keeps-data",
+      "status": "FAIL",
+      "eventOrder": [
+        "native-update-error",
+        "native-update-error",
+        "durable-sync-ack"
+      ],
+      "failureClass": "probe selected saves[0] authority row instead of id=current"
+    },
+    {
+      "scenario": "after-docs-only-then-real-content-offline",
+      "status": "PASS",
+      "eventOrder": [
+        "durable-sync-ack",
+        "controllerchange",
+        "beforeunload"
+      ],
+      "failureClass": null
+    },
+    {
+      "scenario": "actual-release-readme-project-path-and-accessibility",
+      "status": "PASS",
+      "eventOrder": [],
+      "failureClass": null
+    }
+  ]
+}

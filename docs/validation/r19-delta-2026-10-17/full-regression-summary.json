@@ -1,0 +1,1064 @@
+{
+  "testedSourceHead": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+  "runner": "unmodified scripts/verify-in-isolation.mjs full",
+  "node": "24.19.0",
+  "sourceAndTestsExcluded": [],
+  "testTimeoutChanged": false,
+  "fileCount": 150,
+  "passed": 1367,
+  "failed": 0,
+  "skipped": 1,
+  "rawSHA256": "844f431f60b6679774f357ad46957681e0981ba29deb3351200f9b4d3f702afd",
+  "files": [
+    {
+      "file": "src/content/civilizations.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/devtools/headless48h.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/devtools/simulation8h.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/acceptance.test.ts",
+      "status": "passed",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch060.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch070.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch080.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch090.test.tsx",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch100.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch110.test.tsx",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch120.test.ts",
+      "status": "passed",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch200.test.tsx",
+      "status": "passed",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch210.test.tsx",
+      "status": "passed",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch220.test.tsx",
+      "status": "passed",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch230.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch240.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch250.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch260.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch263.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch2720.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch290.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/batch295.test.tsx",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/constructionArt.test.tsx",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/continuousWorld.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/game.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/governanceAdmission.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/home.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/interaction.test.ts",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/mapDisplay.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/mountainRules.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/offlineEquivalence.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/offlineLimit.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/openingProtection.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/orderAdmission.test.ts",
+      "status": "passed",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/organizations.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/painterlyGround.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/playerName.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/releaseMetadata.test.ts",
+      "status": "passed",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/releaseSaveCompatibility.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/reportPresentation.test.tsx",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/reportRealTime.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/revision.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/revision059.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/runtime.worker.test.ts",
+      "status": "passed",
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/runtimeLoad.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/saveLock.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/sceneryPlacement.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/storage.test.ts",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/technology.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/terrainWorker.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/townScene.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/update0276.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/useAppUpdate.test.tsx",
+      "status": "passed",
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/useGameInteraction.test.tsx",
+      "status": "passed",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/worldEconomy.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/worldStream.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/worldUiBehavior.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/map/isometric.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/persistence/schema.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/persistence/transfer.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/simulation/world.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/B5BattleLab.test.tsx",
+      "status": "passed",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/B5Lab.test.ts",
+      "status": "passed",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/B5LabV91.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/B5LabWorker.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/DeveloperMode.test.tsx",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/SpecAuditPanel.test.tsx",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/developer.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/developer/specAudit.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/autonomyR2a.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/autonomyR2b.test.ts",
+      "status": "passed",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/autonomyRuntimeR2c.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/banditLoot.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/battleStressV91.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/captureDeltaR4.test.ts",
+      "status": "passed",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/cityV88.test.ts",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/colonizationV85.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/combatB5.test.ts",
+      "status": "passed",
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/combatLongV91.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/combatPersistenceB5.test.ts",
+      "status": "passed",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/combatWorkerB5.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/craftsmanCastleDeltaR4.test.ts",
+      "status": "passed",
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/cultureNames.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/developmentB4.test.ts",
+      "status": "passed",
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/diplomacyV94.test.ts",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/economyB3.test.ts",
+      "status": "passed",
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/empireDeltaR1.test.ts",
+      "status": "passed",
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/extinctionB7.test.ts",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/extinctionPersistenceB7.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/gateDeltaPersistenceR4.test.ts",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/gateDeltaR4.test.ts",
+      "status": "passed",
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/governanceR2c.test.ts",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/integrationR4.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/metrics.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/mountains31.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/offlineCooperative.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/persistence.test.ts",
+      "status": "passed",
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/playerFeedback.test.ts",
+      "status": "passed",
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/playerOrderRuntimeP0.test.ts",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/playtest26.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/politicsB6.test.ts",
+      "status": "passed",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/politicsPersistenceB6.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/recoveryR1.test.ts",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/refundV86.test.ts",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/replayP0.test.ts",
+      "status": "passed",
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/reportPresentation26.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/reviewDeltaR4.test.ts",
+      "status": "passed",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/runtime.test.ts",
+      "status": "passed",
+      "passed": 62,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/runtimeB4.test.ts",
+      "status": "passed",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/runtimeGraph.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/scheduler.test.ts",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/schema.test.ts",
+      "status": "passed",
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/scoutV90.test.ts",
+      "status": "passed",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/siegeV91.test.ts",
+      "status": "passed",
+      "passed": 186,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/targetIntel.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/wallDelta.test.ts",
+      "status": "passed",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/waterDeltaR4.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/wildScout.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/formal/worldB2.test.ts",
+      "status": "passed",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/DemoMapCache.test.ts",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/armyOverlayB6.test.tsx",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/artIntegration.test.tsx",
+      "status": "passed",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/buildConditions31.test.tsx",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/buildingDetail28.test.tsx",
+      "status": "passed",
+      "passed": 52,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/cityParityEvidence.test.tsx",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/combatB5.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/constructionMenuFix.test.tsx",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/craftsmanCastleUI.test.tsx",
+      "status": "passed",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/demoEntry.test.tsx",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/feedbackV85.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/governanceR2c.test.tsx",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/liveBattleV91.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/liveInteraction.test.tsx",
+      "status": "passed",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/manifestExport.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/mapOverviewInteraction.test.tsx",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/mapRaster.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/mapViewRules.test.ts",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/mapVisualEvidence.test.ts",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/mountainRendering.test.ts",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/parity.test.tsx",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/playablePersistence.test.ts",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/playerFeedback.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/scoutV90.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/targetPoliticsR4.test.tsx",
+      "status": "passed",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/uiIntegrationV94.test.tsx",
+      "status": "passed",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/update26.test.tsx",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/update27.test.tsx",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/wallDelta.test.tsx",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/wildSiteLabels.test.ts",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "src/game/presentation/worldDynamicsR3.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    }
+  ]
+}
