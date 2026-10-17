@@ -181,7 +181,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
  it('preserves the original engine and compares natural AI worlds',()=>{
    const hours=Number(process.env.P0C9_HOURS||168);
    const seeds=(process.env.P0C9_SEEDS||'90217').split(',').map(Number);
-   const variants:Mode[]=process.env.P0C9_PARALLEL==='1'?['baseline','contextual','parallel','adaptive']:process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
+   const variants:Mode[]=process.env.P0C9_LONG_PARALLEL==='1'?['baseline','contextual','adaptive']:process.env.P0C9_PARALLEL==='1'?['baseline','contextual','parallel','adaptive']:process.env.P0C9_GUARD==='1'?['baseline','contextual','conquestGuard']:(process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive']);
    const results=[];
    for(const seed of seeds)for(const mode of variants){
      trace.mode=mode;trace.decisions=0;
