@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          P0C9_PARALLEL=1 P0C9_SEEDS=90217,104729 P0C9_HOURS=168 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9V3ParallelExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
+          P0C9_LONG_PARALLEL=1 P0C9_SEEDS=90217 P0C9_HOURS=360 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9V3ParallelExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
       - name: Retain simulation log
         if: always()
         uses: actions/upload-artifact@v4
