@@ -1,0 +1,37 @@
+{
+  "scope": "1440x900, 60 camera positions, real terrain calculations with mock raster context; not browser frame-time measurement.",
+  "results": [
+    {
+      "zoom": 0.13,
+      "draws": 13080,
+      "hits": 12862,
+      "misses": 218,
+      "hitRate": 0.9833333333333333,
+      "fillOperations": 13952
+    },
+    {
+      "zoom": 0.3,
+      "draws": 3065,
+      "hits": 3010,
+      "misses": 55,
+      "hitRate": 0.9820554649265906,
+      "fillOperations": 14080
+    },
+    {
+      "zoom": 0.75,
+      "draws": 900,
+      "hits": 885,
+      "misses": 15,
+      "hitRate": 0.9833333333333333,
+      "fillOperations": 18813
+    },
+    {
+      "zoom": 2,
+      "draws": 240,
+      "hits": 236,
+      "misses": 4,
+      "hitRate": 0.9833333333333333,
+      "fillOperations": 5063
+    }
+  ]
+}

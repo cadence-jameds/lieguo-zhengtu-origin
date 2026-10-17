@@ -1,0 +1,1232 @@
+{
+  "buildings": [
+    {
+      "id": "hall",
+      "name": "城市中心",
+      "symbol": "府",
+      "cost": {
+        "food": 100,
+        "wood": 140,
+        "stone": 120,
+        "gold": 40
+      },
+      "description": "提高人口成長，開放時代研究。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 120,
+          "cost": {
+            "food": 100,
+            "wood": 140,
+            "stone": 120,
+            "gold": 40
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 360,
+          "cost": {
+            "food": 170,
+            "wood": 238,
+            "stone": 204,
+            "gold": 68
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 1080,
+          "cost": {
+            "food": 289,
+            "wood": 405,
+            "stone": 347,
+            "gold": 116
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 3000,
+          "cost": {
+            "food": 492,
+            "wood": 688,
+            "stone": 590,
+            "gold": 197
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 7200,
+          "cost": {
+            "food": 836,
+            "wood": 1170,
+            "stone": 1003,
+            "gold": 335
+          }
+        }
+      ]
+    },
+    {
+      "id": "farm",
+      "name": "農田",
+      "symbol": "田",
+      "cost": {
+        "food": 40,
+        "wood": 80,
+        "stone": 20,
+        "gold": 0
+      },
+      "description": "每座一級產出 110 食物／時，升級增加產能。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 30,
+          "cost": {
+            "food": 40,
+            "wood": 80,
+            "stone": 20,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 120,
+          "cost": {
+            "food": 68,
+            "wood": 136,
+            "stone": 34,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 360,
+          "cost": {
+            "food": 116,
+            "wood": 232,
+            "stone": 58,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1080,
+          "cost": {
+            "food": 197,
+            "wood": 394,
+            "stone": 99,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 2700,
+          "cost": {
+            "food": 335,
+            "wood": 669,
+            "stone": 168,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "lumber",
+      "name": "伐木場",
+      "symbol": "林",
+      "cost": {
+        "food": 40,
+        "wood": 60,
+        "stone": 30,
+        "gold": 0
+      },
+      "description": "每座一級產出 130 木材／時，升級增加產能。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 30,
+          "cost": {
+            "food": 40,
+            "wood": 60,
+            "stone": 30,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 120,
+          "cost": {
+            "food": 68,
+            "wood": 102,
+            "stone": 51,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 360,
+          "cost": {
+            "food": 116,
+            "wood": 174,
+            "stone": 87,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1080,
+          "cost": {
+            "food": 197,
+            "wood": 295,
+            "stone": 148,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 2700,
+          "cost": {
+            "food": 335,
+            "wood": 502,
+            "stone": 251,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "quarry",
+      "name": "採石場",
+      "symbol": "石",
+      "cost": {
+        "food": 45,
+        "wood": 75,
+        "stone": 25,
+        "gold": 0
+      },
+      "description": "每座一級產出 95 石材／時，升級增加產能。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 30,
+          "cost": {
+            "food": 45,
+            "wood": 75,
+            "stone": 25,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 120,
+          "cost": {
+            "food": 77,
+            "wood": 128,
+            "stone": 43,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 360,
+          "cost": {
+            "food": 131,
+            "wood": 217,
+            "stone": 73,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1080,
+          "cost": {
+            "food": 222,
+            "wood": 369,
+            "stone": 123,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 2700,
+          "cost": {
+            "food": 376,
+            "wood": 627,
+            "stone": 209,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "mine",
+      "name": "金礦",
+      "symbol": "金",
+      "cost": {
+        "food": 60,
+        "wood": 80,
+        "stone": 60,
+        "gold": 0
+      },
+      "description": "每座一級產出 75 黃金／時，升級增加產能。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 30,
+          "cost": {
+            "food": 60,
+            "wood": 80,
+            "stone": 60,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 120,
+          "cost": {
+            "food": 102,
+            "wood": 136,
+            "stone": 102,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 360,
+          "cost": {
+            "food": 174,
+            "wood": 232,
+            "stone": 174,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1080,
+          "cost": {
+            "food": 295,
+            "wood": 394,
+            "stone": 295,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 2700,
+          "cost": {
+            "food": 502,
+            "wood": 669,
+            "stone": 502,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "house",
+      "name": "民居",
+      "symbol": "戶",
+      "cost": {
+        "food": 40,
+        "wood": 90,
+        "stone": 40,
+        "gold": 0
+      },
+      "description": "每級增加 400 住房，人口會逐漸移入。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 60,
+          "cost": {
+            "food": 40,
+            "wood": 90,
+            "stone": 40,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 180,
+          "cost": {
+            "food": 68,
+            "wood": 153,
+            "stone": 68,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 600,
+          "cost": {
+            "food": 116,
+            "wood": 261,
+            "stone": 116,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1800,
+          "cost": {
+            "food": 197,
+            "wood": 443,
+            "stone": 197,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 4500,
+          "cost": {
+            "food": 335,
+            "wood": 752,
+            "stone": 335,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "warehouse",
+      "name": "倉庫",
+      "symbol": "倉",
+      "cost": {
+        "food": 60,
+        "wood": 120,
+        "stone": 100,
+        "gold": 0
+      },
+      "description": "每級增加 2,500 各類資源容量。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 60,
+          "cost": {
+            "food": 60,
+            "wood": 120,
+            "stone": 100,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 180,
+          "cost": {
+            "food": 102,
+            "wood": 204,
+            "stone": 170,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 600,
+          "cost": {
+            "food": 174,
+            "wood": 347,
+            "stone": 289,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1800,
+          "cost": {
+            "food": 295,
+            "wood": 590,
+            "stone": 492,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 4500,
+          "cost": {
+            "food": 502,
+            "wood": 1003,
+            "stone": 836,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "barracks",
+      "name": "兵營",
+      "symbol": "兵",
+      "cost": {
+        "food": 70,
+        "wood": 120,
+        "stone": 80,
+        "gold": 0
+      },
+      "description": "招募民兵與槍兵；等級提高會加速訓練。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 90,
+          "cost": {
+            "food": 70,
+            "wood": 120,
+            "stone": 80,
+            "gold": 0
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 300,
+          "cost": {
+            "food": 119,
+            "wood": 204,
+            "stone": 136,
+            "gold": 0
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 900,
+          "cost": {
+            "food": 203,
+            "wood": 347,
+            "stone": 232,
+            "gold": 0
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 2700,
+          "cost": {
+            "food": 344,
+            "wood": 590,
+            "stone": 394,
+            "gold": 0
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 6600,
+          "cost": {
+            "food": 585,
+            "wood": 1003,
+            "stone": 669,
+            "gold": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "range",
+      "name": "靶場",
+      "symbol": "弓",
+      "cost": {
+        "food": 90,
+        "wood": 180,
+        "stone": 100,
+        "gold": 50
+      },
+      "description": "封建時代起招募弓兵。",
+      "era": 1,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 90,
+          "cost": {
+            "food": 90,
+            "wood": 180,
+            "stone": 100,
+            "gold": 50
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 300,
+          "cost": {
+            "food": 153,
+            "wood": 306,
+            "stone": 170,
+            "gold": 85
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 900,
+          "cost": {
+            "food": 261,
+            "wood": 521,
+            "stone": 289,
+            "gold": 145
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 2700,
+          "cost": {
+            "food": 443,
+            "wood": 885,
+            "stone": 492,
+            "gold": 246
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 6600,
+          "cost": {
+            "food": 752,
+            "wood": 1504,
+            "stone": 836,
+            "gold": 418
+          }
+        }
+      ]
+    },
+    {
+      "id": "stable",
+      "name": "馬廄",
+      "symbol": "馬",
+      "cost": {
+        "food": 120,
+        "wood": 180,
+        "stone": 100,
+        "gold": 80
+      },
+      "description": "封建時代起招募騎兵。",
+      "era": 1,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 90,
+          "cost": {
+            "food": 120,
+            "wood": 180,
+            "stone": 100,
+            "gold": 80
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 300,
+          "cost": {
+            "food": 204,
+            "wood": 306,
+            "stone": 170,
+            "gold": 136
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 900,
+          "cost": {
+            "food": 347,
+            "wood": 521,
+            "stone": 289,
+            "gold": 232
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 2700,
+          "cost": {
+            "food": 590,
+            "wood": 885,
+            "stone": 492,
+            "gold": 394
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 6600,
+          "cost": {
+            "food": 1003,
+            "wood": 1504,
+            "stone": 836,
+            "gold": 669
+          }
+        }
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "攻城工坊",
+      "symbol": "械",
+      "cost": {
+        "food": 160,
+        "wood": 260,
+        "stone": 200,
+        "gold": 120
+      },
+      "description": "城堡時代二級工坊可製造攻城器。",
+      "era": 2,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 90,
+          "cost": {
+            "food": 160,
+            "wood": 260,
+            "stone": 200,
+            "gold": 120
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 300,
+          "cost": {
+            "food": 272,
+            "wood": 442,
+            "stone": 340,
+            "gold": 204
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 900,
+          "cost": {
+            "food": 463,
+            "wood": 752,
+            "stone": 578,
+            "gold": 347
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 2700,
+          "cost": {
+            "food": 787,
+            "wood": 1278,
+            "stone": 983,
+            "gold": 590
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 6600,
+          "cost": {
+            "food": 1337,
+            "wood": 2172,
+            "stone": 1671,
+            "gold": 1003
+          }
+        }
+      ]
+    },
+    {
+      "id": "academy",
+      "name": "學院",
+      "symbol": "學",
+      "cost": {
+        "food": 80,
+        "wood": 140,
+        "stone": 120,
+        "gold": 80
+      },
+      "description": "支持時代升級；科技還需各自的建築與前置研究。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 60,
+          "cost": {
+            "food": 80,
+            "wood": 140,
+            "stone": 120,
+            "gold": 80
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 180,
+          "cost": {
+            "food": 136,
+            "wood": 238,
+            "stone": 204,
+            "gold": 136
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 600,
+          "cost": {
+            "food": 232,
+            "wood": 405,
+            "stone": 347,
+            "gold": 232
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1800,
+          "cost": {
+            "food": 394,
+            "wood": 688,
+            "stone": 590,
+            "gold": 394
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 4500,
+          "cost": {
+            "food": 669,
+            "wood": 1170,
+            "stone": 1003,
+            "gold": 669
+          }
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "name": "市場",
+      "symbol": "市",
+      "cost": {
+        "food": 80,
+        "wood": 130,
+        "stone": 100,
+        "gold": 50
+      },
+      "description": "開放運輸；首都與分城皆有市場即連接道路，沿路移動加快 50%。每級產出 15 黃金／時。",
+      "era": 0,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 60,
+          "cost": {
+            "food": 80,
+            "wood": 130,
+            "stone": 100,
+            "gold": 50
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 180,
+          "cost": {
+            "food": 136,
+            "wood": 221,
+            "stone": 170,
+            "gold": 85
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 600,
+          "cost": {
+            "food": 232,
+            "wood": 376,
+            "stone": 289,
+            "gold": 145
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 1800,
+          "cost": {
+            "food": 394,
+            "wood": 639,
+            "stone": 492,
+            "gold": 246
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 4500,
+          "cost": {
+            "food": 669,
+            "wood": 1086,
+            "stone": 836,
+            "gold": 418
+          }
+        }
+      ]
+    },
+    {
+      "id": "wall",
+      "name": "城牆",
+      "symbol": "城",
+      "cost": {
+        "food": 60,
+        "wood": 100,
+        "stone": 220,
+        "gold": 50
+      },
+      "description": "每級提供 18% 守城優勢；攻城器可逐輪破壞。",
+      "era": 1,
+      "levels": [
+        {
+          "level": 1,
+          "seconds": 120,
+          "cost": {
+            "food": 60,
+            "wood": 100,
+            "stone": 220,
+            "gold": 50
+          }
+        },
+        {
+          "level": 2,
+          "seconds": 360,
+          "cost": {
+            "food": 102,
+            "wood": 170,
+            "stone": 374,
+            "gold": 85
+          }
+        },
+        {
+          "level": 3,
+          "seconds": 1200,
+          "cost": {
+            "food": 174,
+            "wood": 289,
+            "stone": 636,
+            "gold": 145
+          }
+        },
+        {
+          "level": 4,
+          "seconds": 3600,
+          "cost": {
+            "food": 295,
+            "wood": 492,
+            "stone": 1081,
+            "gold": 246
+          }
+        },
+        {
+          "level": 5,
+          "seconds": 9000,
+          "cost": {
+            "food": 502,
+            "wood": 836,
+            "stone": 1838,
+            "gold": 418
+          }
+        }
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "militia",
+      "name": "民兵",
+      "cost": {
+        "food": 14,
+        "wood": 8,
+        "stone": 0,
+        "gold": 0
+      },
+      "power": 12,
+      "defense": 12,
+      "minutes": 0.3333333333333333,
+      "speed": 1,
+      "building": "barracks",
+      "era": 0,
+      "role": "便宜的佔領與駐防主力。"
+    },
+    {
+      "id": "spear",
+      "name": "槍兵",
+      "cost": {
+        "food": 18,
+        "wood": 12,
+        "stone": 0,
+        "gold": 3
+      },
+      "power": 16,
+      "defense": 21,
+      "minutes": 0.5,
+      "speed": 1,
+      "building": "barracks",
+      "era": 0,
+      "role": "對騎兵形成槍陣；畏懼弓兵。"
+    },
+    {
+      "id": "archer",
+      "name": "弓兵",
+      "cost": {
+        "food": 18,
+        "wood": 22,
+        "stone": 0,
+        "gold": 7
+      },
+      "power": 25,
+      "defense": 14,
+      "minutes": 0.6666666666666666,
+      "speed": 1.1,
+      "building": "range",
+      "era": 1,
+      "role": "壓制槍兵與民兵；畏懼騎兵突入。"
+    },
+    {
+      "id": "cavalry",
+      "name": "騎兵",
+      "cost": {
+        "food": 40,
+        "wood": 16,
+        "stone": 0,
+        "gold": 24
+      },
+      "power": 43,
+      "defense": 29,
+      "minutes": 1.25,
+      "speed": 1.65,
+      "building": "stable",
+      "era": 1,
+      "role": "快速突擊弓兵；畏懼槍陣。"
+    },
+    {
+      "id": "siege",
+      "name": "攻城器",
+      "cost": {
+        "food": 45,
+        "wood": 70,
+        "stone": 30,
+        "gold": 45
+      },
+      "power": 25,
+      "defense": 12,
+      "minutes": 2,
+      "speed": 0.7,
+      "building": "workshop",
+      "era": 2,
+      "role": "攻城每回合削弱城牆，需要部隊掩護。"
+    },
+    {
+      "id": "scout",
+      "name": "斥候",
+      "cost": {
+        "food": 20,
+        "wood": 10,
+        "stone": 0,
+        "gold": 5
+      },
+      "power": 3,
+      "defense": 4,
+      "minutes": 0.4166666666666667,
+      "speed": 2,
+      "building": "hall",
+      "era": 0,
+      "role": "取得駐軍情報，報告會標明觀察時間。"
+    }
+  ],
+  "signatures": [
+    {
+      "civilization": "中國",
+      "name": "連弩衛隊",
+      "cost": {
+        "food": 36,
+        "wood": 28,
+        "stone": 0,
+        "gold": 20
+      },
+      "power": 42,
+      "defense": 29,
+      "minutes": 1.5,
+      "speed": 1.1,
+      "building": "barracks",
+      "era": 2,
+      "role": "密集弩箭克制輕步兵，近戰防禦較弱。",
+      "family": "ranged"
+    },
+    {
+      "civilization": "拜占庭",
+      "name": "東羅馬甲胄騎兵",
+      "cost": {
+        "food": 52,
+        "wood": 16,
+        "stone": 0,
+        "gold": 36
+      },
+      "power": 55,
+      "defense": 48,
+      "minutes": 1.5,
+      "speed": 1.2,
+      "building": "barracks",
+      "era": 2,
+      "role": "重甲騎兵擅長正面衝擊，受槍陣克制。",
+      "family": "cavalry"
+    },
+    {
+      "civilization": "法蘭克",
+      "name": "法蘭克擲斧衛隊",
+      "cost": {
+        "food": 38,
+        "wood": 20,
+        "stone": 0,
+        "gold": 22
+      },
+      "power": 48,
+      "defense": 35,
+      "minutes": 1.5,
+      "speed": 1,
+      "building": "barracks",
+      "era": 2,
+      "role": "重步兵投斧突擊，適合攻擊輕步兵。",
+      "family": "infantry"
+    },
+    {
+      "civilization": "不列顛",
+      "name": "不列顛長弓衛隊",
+      "cost": {
+        "food": 36,
+        "wood": 32,
+        "stone": 0,
+        "gold": 24
+      },
+      "power": 50,
+      "defense": 22,
+      "minutes": 1.5,
+      "speed": 1,
+      "building": "barracks",
+      "era": 2,
+      "role": "長弓壓制步兵，需前排保護。",
+      "family": "ranged"
+    },
+    {
+      "civilization": "日本",
+      "name": "武士侍從隊",
+      "cost": {
+        "food": 40,
+        "wood": 16,
+        "stone": 0,
+        "gold": 24
+      },
+      "power": 49,
+      "defense": 41,
+      "minutes": 1.5,
+      "speed": 1.1,
+      "building": "barracks",
+      "era": 2,
+      "role": "高防禦步兵，適合持續交戰。",
+      "family": "infantry"
+    },
+    {
+      "civilization": "蒙古",
+      "name": "蒙古親衛騎射隊",
+      "cost": {
+        "food": 44,
+        "wood": 20,
+        "stone": 0,
+        "gold": 28
+      },
+      "power": 44,
+      "defense": 28,
+      "minutes": 1.5,
+      "speed": 1.8,
+      "building": "barracks",
+      "era": 2,
+      "role": "機動騎射，快速襲擾弓兵與補給。",
+      "family": "cavalry"
+    }
+  ],
+  "research": {
+    "agriculture": {
+      "name": "輪作耕作",
+      "cost": {
+        "food": 60,
+        "wood": 80,
+        "stone": 0,
+        "gold": 30
+      },
+      "duration": 180000,
+      "description": "需要農田 1；食物產量 +10%。"
+    },
+    "carpentry": {
+      "name": "木工技術",
+      "cost": {
+        "food": 50,
+        "wood": 100,
+        "stone": 0,
+        "gold": 30
+      },
+      "duration": 240000,
+      "description": "需要伐木場 1；木材產量 +10%。"
+    },
+    "forging": {
+      "name": "基礎鍛造",
+      "cost": {
+        "food": 100,
+        "wood": 80,
+        "stone": 60,
+        "gold": 100
+      },
+      "duration": 720000,
+      "description": "封建時代、兵營 1；部隊戰力 +5%。"
+    },
+    "irrigation": {
+      "name": "灌溉水利",
+      "cost": {
+        "food": 240,
+        "wood": 280,
+        "stone": 180,
+        "gold": 180
+      },
+      "duration": 2700000,
+      "description": "城堡時代、農田 3、輪作耕作；再增加 15% 食物產量。"
+    },
+    "feudal": {
+      "name": "封建制度",
+      "cost": {
+        "food": 400,
+        "wood": 250,
+        "stone": 200,
+        "gold": 150
+      },
+      "duration": 1800000,
+      "description": "城市中心 2、人口 450、學院 1。開放弓兵、騎兵及城牆。"
+    },
+    "castle": {
+      "name": "城堡制度",
+      "cost": {
+        "food": 900,
+        "wood": 650,
+        "stone": 650,
+        "gold": 500
+      },
+      "duration": 5400000,
+      "description": "封建時代、城市中心 3、人口 800、兵營 2。開放文明衛隊與攻城器。"
+    },
+    "logistics": {
+      "name": "補給道路",
+      "cost": {
+        "food": 180,
+        "wood": 220,
+        "stone": 100,
+        "gold": 160
+      },
+      "duration": 1800000,
+      "description": "封建時代、市場 1、木工技術。全國行軍時間縮短 15%；城堡時代將市場道路升為兩倍速度的鋪面道路。"
+    },
+    "steel": {
+      "name": "鍛鋼",
+      "cost": {
+        "food": 260,
+        "wood": 140,
+        "stone": 220,
+        "gold": 280
+      },
+      "duration": 3600000,
+      "description": "城堡時代、兵營 2、基礎鍛造。全國部隊戰力增加 12%。"
+    }
+  },
+  "resourceOutput": {
+    "food": 110,
+    "wood": 130,
+    "stone": 95,
+    "gold": 75
+  },
+  "levelOutput": [
+    0,
+    1,
+    1.8,
+    3,
+    4.8,
+    7.2
+  ]
+}

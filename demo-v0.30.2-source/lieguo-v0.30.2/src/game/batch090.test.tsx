@@ -1,0 +1,24 @@
+import {it,expect} from 'vitest';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {newGame,terrainAt} from './world';
+import {command,node,faction,advance} from './engine';
+import {constructionProgress} from './TownScene';
+import {exportSave,importSave} from './persistence';
+import {troopArt,techArt} from './Catalog';
+import {civilizations} from '../content/civilizations';
+import {technologyIds} from './content';
+import {TileDialog} from './Mission';
+import {ArmyView,ResearchView} from './Views';
+import {terrainRasterScale} from './terrainCache';
+it('新施工起點隨存檔保留；排隊不先跑進度，舊存檔可推算',()=>{
+ const g=newGame('civ_frankia',802,1,0);g.events=g.events.filter(e=>e.type==='pulse');g.sandbox=true;const n=node(g,faction(g,g.player).capital);
+ expect(command(g,{type:'build',city:n.id,building:'farm'})).toBe('');expect(command(g,{type:'build',city:n.id,building:'lumber'})).toBe('');
+ const [a,b]=n.build;advance(g,a.at/2);expect(constructionProgress(n,a,g.time).percent).toBeCloseTo(50);expect(constructionProgress(n,b,g.time).waiting).toBe(true);
+ const saved=importSave(exportSave(g)),nn=node(saved,n.id);expect(nn.build[0].started).toBe(a.started);expect(constructionProgress(nn,nn.build[0],saved.time).percent).toBeCloseTo(50);
+ delete nn.build[0].started;expect(constructionProgress(nn,nn.build[0],saved.time).percent).toBeCloseTo(50);
+ advance(g,a.at);expect(constructionProgress(n,b,g.time).waiting).toBe(false);expect(constructionProgress(n,b,g.time).percent).toBe(0);
+});
+it('一般兵種跨文明同圖，六文明精銳與六科技各有對應圖',()=>{for(const c of civilizations){expect(troopArt('militia',c.id)).toEqual({sheet:'units',index:0});}expect(new Set(civilizations.map(c=>troopArt('signature',c.id).index)).size).toBe(6);expect(technologyIds.map(t=>techArt(t).index)).toEqual([0,1,2,3,4,5]);});
+it('手機建城先展示地塊和成本，尚不出現兵力輸入',()=>{const g=newGame('civ_frankia',802,1,0),n=node(g,faction(g,g.player).capital);let p={x:n.x+8,y:n.y};while(terrainAt(p.x,p.y,g.seed)==='water')p.x++;const html=renderToStaticMarkup(<TileDialog mobile g={g} from={n} point={p} busy={false} issue={()=>{}} onClose={()=>{}}/>);expect(html).toContain('選擇護送部隊');expect(html).toContain('地塊與建城資訊');expect(html).not.toContain('troop-inputs');expect(html).not.toContain('出發建城');});
+it('招募與手機科技初始均為美術小卡，不鋪滿詳細表單',()=>{const g=newGame('civ_frankia',802,1,0),n=node(g,faction(g,g.player).capital);const props={g,n,busy:false,issue:()=>{}};const army=renderToStaticMarkup(<ArmyView {...props} mobile/>),tech=renderToStaticMarkup(<ResearchView {...props} mobile/>);for(const html of [army,tech])expect(html).toContain('catalog-grid');expect((army.match(/class="catalog-card"/g)||[]).length).toBe(7);expect(army).not.toContain('type="number"');expect(tech).toContain('catalog-technologies.webp');});
+it('地形快取限制解析度，格線與城市仍由主畫布繪製',()=>{expect(terrainRasterScale(.75,2)).toBe(1);expect(terrainRasterScale(2,2)).toBe(2);expect(terrainRasterScale(.13,1)).toBe(.125);});

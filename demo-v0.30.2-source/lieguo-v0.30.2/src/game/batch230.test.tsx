@@ -1,0 +1,26 @@
+import {it,expect,vi} from 'vitest';
+import {renderToStaticMarkup as render} from 'react-dom/server';
+import {newGame} from './world';
+import {command,owned,faction,advance,researchReason} from './engine';
+import {refreshBuildingLevel} from './city';
+import {importSave,exportSave} from './persistence';
+import {resourceLayout,fieldCounts,cityFieldCounts} from './resourceFields';
+import {Start} from './ui';
+import {TerrainCache} from './terrainCache';
+import {CivilizationEmblem} from './CivilizationEmblem';
+import {civilizations} from '../content/civilizations';
+import {research} from './content';
+const setup=()=>{const g=newGame('civ_zhongguo',902,1,0);g.events=[];g.sandbox=true;const n=owned(g,g.player)[0];n.stock={food:100000,wood:100000,stone:100000,gold:100000};n.population=900;
+ for(const [i,b] of ['hall','academy','house','barracks'].entries()){Object.assign(n.plots[i],{building:b,level:3});refreshBuildingLevel(n,b as 'hall');}n.plots.find(p=>p.building==='farm')!.level=1;refreshBuildingLevel(n,'farm');return {g,n,f:faction(g,g.player)};};
+it('all 36 initial capitals share 6/5/4/3; normal land stays varied',()=>{for(const seed of [1,902,20260906]){const g=newGame('civ_zhongguo',seed,1,0);expect(g.factions).toHaveLength(36);for(const f of g.factions)expect(cityFieldCounts(g.nodes.find(n=>n.id===f.capital)!)).toEqual({farm:6,lumber:5,quarry:4,mine:3});}
+ const layouts=Array.from({length:20},(_,x)=>JSON.stringify(fieldCounts(resourceLayout(902,{x,y:100}))));expect(new Set(layouts).size).toBeGreaterThan(1);
+});
+it.each(['era-first','tech-first'])('independent queues allow concurrent progress and survive saves: %s',order=>{const {g,n,f}=setup();const keys=order==='era-first'?['feudal','agriculture'] as const:['agriculture','feudal'] as const;const stock={...n.stock};for(const key of keys)expect(command(g,{type:'research',city:n.id,research:key})).toBe('');expect(f.eraUpgrade?.item).toBe('feudal');expect(f.research?.item).toBe('agriculture');
+ expect(n.stock.food).toBe(stock.food-research.feudal.cost.food-research.agriculture.cost.food);expect(researchReason(g,n,'carpentry')).toContain('科技');expect(researchReason(g,n,'feudal')).toContain('晉升');expect(researchReason(g,n,'steel')).toBeTruthy();
+ const copy=importSave(exportSave(g)),me=faction(copy,copy.player);advance(copy,Math.max(me.eraUpgrade!.at,me.research!.at));expect(me.era).toBe(1);expect(me.tech).toContain('agriculture');expect(me.eraUpgrade).toBeNull();expect(me.research).toBeNull();expect(()=>importSave(exportSave(copy))).not.toThrow();
+});
+it('old active era research migrates without resetting its deadline',()=>{const {g,n,f}=setup();command(g,{type:'research',city:n.id,research:'feudal'});const at=f.eraUpgrade!.at;f.research=f.eraUpgrade!;delete f.eraUpgrade;const saved=importSave(exportSave(g)),me=faction(saved,saved.player);expect(me.research).toBeNull();expect(me.eraUpgrade!.at).toBe(at);expect(command(saved,{type:'research',city:n.id,research:'agriculture'})).toBe('');});
+it('new speeds offered, old speed saves still accepted',()=>{for(const speed of [1,3,6,10,50,100,12,120])expect(importSave(exportSave(newGame('civ_zhongguo',902,speed,0))).speed).toBe(speed);
+ const html=render(<Start onStart={()=>{}} busy={false}/>);for(const speed of [1,3,6,10,50])expect(html).toContain('value="'+speed+'"');expect(html).not.toContain('value="100"');});
+it('all civilization emblems have distinct atlas positions and accessible names',()=>{const arts=civilizations.map(c=>render(<CivilizationEmblem civ={c.id}/>));expect(new Set(arts).size).toBe(6);for(const html of arts)expect(html).toContain('文明徽記');});
+it('painterly terrain uploads raster textures and limits chunk work per frame',()=>{const draw=vi.fn(),ctx=new Proxy({putImageData:draw},{get:(obj,k)=>k in obj?obj[k as keyof typeof obj]:k==='createImageData'||k==='getImageData'?(_x:number,_y:number,w?:number,h?:number)=>({width:w??_x,height:h??_y,data:new Uint8ClampedArray((w??_x)*(h??_y)*4)}):()=>{}});vi.stubGlobal('document',{createElement:()=>({width:0,height:0,getContext:()=>ctx})});try{const cache=new TerrainCache();cache.beginFrame();for(let i=0;i<10;i++)cache.request(i*16,0,902,1);const before=cache.misses;cache.pump(2,1000);expect(cache.misses-before).toBe(2);expect(draw).toHaveBeenCalled();expect(cache.pendingCount).toBe(8);}finally{vi.unstubAllGlobals();}});
