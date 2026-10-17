@@ -10,7 +10,7 @@ jobs:
   headless:
     name: Seed comparison (no deploy)
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          P0C9_HOURS=24 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9MainExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
+          P0C9_NATURAL=1 P0C9_HOURS=168 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9MainExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
       - name: Retain simulation log
         if: always()
         uses: actions/upload-artifact@v4
