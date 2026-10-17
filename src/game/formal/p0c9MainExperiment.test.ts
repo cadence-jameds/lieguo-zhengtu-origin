@@ -107,7 +107,7 @@ describe('P0-C-9 main HEAD isolated seed experiment',()=>{
     const hours=Number(process.env.P0C9_HOURS||6);
     const natural=process.env.P0C9_NATURAL==='1';
     const seeds=natural?[90217]:(hours>=24?[90217]:[90217,104729]);
-    const variants:[('baseline'|'candidate'),number][]=natural?[['baseline',0],['candidate',50]]:[['baseline',0],['candidate',45],['candidate',50],['candidate',55]];
+    const variants:[('baseline'|'candidate'),number][]=natural?[['baseline',0],['candidate',35],['candidate',40],['candidate',45],['candidate',50]]:[['baseline',0],['candidate',45],['candidate',50],['candidate',55]];
     for(const seed of seeds){
       for(const [mode,cutoff] of variants){
         experiment.mode=mode;experiment.cutoff=cutoff;experiment.attempted={wild:0,city:0,scout:0,joint:0};experiment.decisions=0;
