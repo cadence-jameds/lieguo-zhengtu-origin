@@ -126,7 +126,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
  it('preserves the original engine and compares natural AI worlds',()=>{
    const hours=Number(process.env.P0C9_HOURS||168);
    const seeds=(process.env.P0C9_SEEDS||'90217').split(',').map(Number);
-   const variants:Mode[]=['baseline','fallback','contextual','proactive'];
+   const variants:Mode[]=process.env.P0C9_LONG==='1'?['baseline','contextual']:['baseline','fallback','contextual','proactive'];
    const results=[];
    for(const seed of seeds)for(const mode of variants){
      trace.mode=mode;trace.decisions=0;
@@ -157,7 +157,7 @@ describe('P0-C-9 V2: baseline, fallback, context and proactive on exact main',()
     mode:'main Formal World natural start; no injected troops or intel, real dependencies and combat, test-only wrapper; revenue counted at army.return',
     seeds,hours,results}));
    console.log('P0C9_V2_RESULTS_END');
-   expect(results).toHaveLength(seeds.length*4);
+   expect(results).toHaveLength(seeds.length*variants.length);
    expect(results.every(r=>r.ai>=0&&r.ai<=99)).toBe(true);
  },900000);
 });
