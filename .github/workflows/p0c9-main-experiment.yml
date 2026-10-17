@@ -1,0 +1,34 @@
+name: P0-C-9 main HEAD headless experiment
+on:
+  push:
+    branches:
+      - experiment/p0-c-9-main-06c4-20261018
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  headless:
+    name: Seed comparison (no deploy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run current Formal engine with A / 45 / 50 / 55
+        shell: bash
+        run: |
+          set -o pipefail
+          node node_modules/vitest/vitest.mjs run src/game/formal/p0c9MainExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
+      - name: Retain simulation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0c9-main-head-engine-log
+          path: p0c9-main-results.log
+          if-no-files-found: ignore
