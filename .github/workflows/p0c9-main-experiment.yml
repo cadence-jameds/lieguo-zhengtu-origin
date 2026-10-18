@@ -21,11 +21,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Run Formal engine V3 parallel natural start main baseline V2B
+      - name: Run wild-priority modes versus original A and V2-B
         shell: bash
         run: |
           set -o pipefail
-          P0C9_DIAG=1 P0C9_SEEDS=90217 P0C9_HOURS=360 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9V3ParallelExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
+          P0C9_WILDFIRST=1 P0C9_SEEDS=90217,104729 P0C9_HOURS=168 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9WildPriorityExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
       - name: Retain simulation log
         if: always()
         uses: actions/upload-artifact@v4
