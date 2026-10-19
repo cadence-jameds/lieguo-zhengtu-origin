@@ -19,6 +19,8 @@ export type FailurePoint='report-write'|'history-modified'|'backup-write'|'world
 type WorldRow={id:'current';kind:'world';at:number;data:FormalEnvelope};
 type CampaignAuthority={campaignId:CampaignId;receipts:CommandReceipt[]};
 type AuthorityRow={id:'authority';kind:'authority';revision:number;sequences:FormalWorld['sequences'];campaigns:CampaignAuthority[]};
+/** Both ledgers are strict receiptSchema records; compare every field without serializing history twice. */
+const sameReceipt=(a:CommandReceipt,b:CommandReceipt)=>a.commandId===b.commandId&&a.issuerId===b.issuerId&&a.fingerprint===b.fingerprint&&a.committedRevision===b.committedRevision&&a.disposition===b.disposition;
 export type RecoveryRow={id?:number;at:number;label:string;campaignId:CampaignId;gameTime:number;reportCursor:number;data:FormalEnvelope};
 /** Pure candidate validation: no database access, history changes, or authority writes. */
 export async function validateCheckpointCandidate(checkpoint:RecoveryRow):Promise<FormalWorld>{
@@ -68,14 +70,19 @@ export class FormalPersistence {
   return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,async()=>{
    const authority=await this.authority(),current=await this.db.saves.get('current');
    if(expectedRevision!==undefined&&authority.revision!==expectedRevision)throw new Error('存檔 revision 衝突，命令未提交。');
-   const w=sanitizeSharedKnowledge(structuredClone(input)),prior=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.receipts??[];
+   // Ordinary saves only stamp pending army reports and sanitize shared AI intel.
+   // Copy those mutable branches now; encodeSave still strictly validates and
+   // deep-copies the entire final candidate before checksum or any DB writes.
+   // Transitions/AI activation retain the general full draft.
+   let w=sanitizeSharedKnowledge(mode==='save'&&!activateAI?{...input,armies:structuredClone(input.armies),...(input.autonomy?{autonomy:structuredClone(input.autonomy)}:{})}:structuredClone(input));
+   const prior=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.receipts??[];
    if(mode==='save'){
     for(const key of ['event','report','project'] as const)if(w.sequences[key]<authority.sequences[key])throw new Error('Durable ID sequence cannot decrease');
     if(current&&current.kind==='world'&&current.data.snapshot.campaignId!==w.campaignId)throw new Error('Campaign switch requires explicit transition');
     const required=current?authority.revision+1:0;
     if(w.revision!==required)throw new Error('Committed revision must advance exactly once');
     const receipts=new Map(w.commandReceipts.map(r=>[r.commandId,r]));
-    for(const r of prior){const receipt=receipts.get(r.commandId);if(!receipt||canonicalJSON(receipt)!==canonicalJSON(r))throw new Error('Durable dedupe history cannot be dropped');}
+    for(const r of prior){const receipt=receipts.get(r.commandId);if(!receipt||!sameReceipt(receipt,r))throw new Error('Durable dedupe history cannot be dropped');}
    }else{
     w.commandReceipts=reconcileReceipts(w,prior);
     for(const key of ['event','report','project'] as const)w.sequences[key]=Math.max(w.sequences[key],authority.sequences[key]);
@@ -89,6 +96,9 @@ export class FormalPersistence {
    validateReportHistory(w,stampedReports);
    // encodeSave fully validates the final world; crypto needs keep-alive under the revision lock.
    const envelope=await Dexie.waitFor(encodeSave(w));
+   // All post-crypto history, metadata, authority and returned state use the
+   // isolated validated snapshot, even if the caller mutates input while awaiting.
+   w=envelope.snapshot;
    if(mode==='restore'||mode==='import'){
     const rows=await this.db.BattleReports.where('campaignId').equals(w.campaignId).toArray();
     const obsolete=mode==='import'?rows:rows.filter(r=>r.at>input.time||r.sequence>=input.sequences.report);
