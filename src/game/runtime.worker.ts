@@ -5,7 +5,7 @@ import {createFormalWorld} from './world';
 import {advanceFormal,submitFormalOrder} from './engine';
 import {advanceFormalCooperative} from './formal/reducer';
 import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
-import type {FormalOrder,FormalWorld} from './formal/model';
+import type {FormalOrder,FormalWorld,FormalReport} from './formal/model';
 import {worldPatch} from './worldStream';
 import {governanceAfterCatchup,governanceWithBase,type GovernanceBase} from './governanceAdmission';
 import {playerOrderBase,playerOrderWithBase,type PlayerOrderBase} from './orderAdmission';
@@ -73,22 +73,27 @@ async function handle(r:RuntimeRequest){
   if(r.order?.issuerId!==world.playerFactionId)throw new Error('此分頁只能下達玩家勢力命令。');
   // Revalidate the rendered intent before catching up to admission time. A
   // stale but unchanged click must not start at an old checkpoint's clock.
+  let caughtUp=false;const catchupReports:FormalReport[]=[];
   let admission=world,order=governanceWithBase(world,r.order,r.governanceBase,branchRevision);
   order=playerOrderWithBase(admission,order,r.playerBase,branchRevision,foregroundRevision);
   if(order.expectedRevision===world.revision&&!world.commandReceipts.some(c=>c.commandId===order.commandId)){
    const before=admission,catchupBase=r.playerBase?playerOrderBase(before,order.payload):undefined;
    const target=targetTime();
    if(world.events.some(e=>e.at<=target)){
-    await advanceAndSave();admission=world!;order=governanceAfterCatchup(before,admission,order);
+    // The completed event replay and foreground command share one durable transaction.
+    // The authoritative world remains unchanged until the combined save succeeds.
+    const replay=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8});admission=replay.world;catchupReports.push(...replay.reports);caughtUp=true;order=governanceAfterCatchup(before,admission,order);
     order=playerOrderWithBase(admission,order,catchupBase,branchRevision,foregroundRevision);
    }
    else if(target>world.time){admission=advanceFormal(world,target).world;admission.revision=world.revision;}
   }
   const result=submitFormalOrder(admission,order);
   if(result.ack?.status==='committed'){
-   const committed=await save(result.world,result.reports,world.revision);
-   world=committed;foregroundRevision=world.revision;if(r.order.payload.type==='developer.configure')reanchor();lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;post({type:'commandAck',ack:result.ack});state();if(result.reports.length)await publishReportStatus();
-  }else{const ack=result.ack;if(order.payload.type==='governance.set'&&ack?.reason==='世界版本已更新，請重新確認狀態。')ack.reason='治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。';post({type:'commandAck',ack});state();if(result.reports.length)await publishReportStatus();}
+   // One transaction has one revision, including all newly replayed AI receipts.
+   if(caughtUp){result.world.revision=world.revision+1;for(let i=world.commandReceipts.length;i<result.world.commandReceipts.length;i++)result.world.commandReceipts[i].committedRevision=Math.min(result.world.commandReceipts[i].committedRevision,result.world.revision);result.ack.revision=result.world.revision;}
+   const committed=await save(result.world,[...catchupReports,...result.reports],world.revision);
+   world=committed;foregroundRevision=world.revision;if(r.order.payload.type==='developer.configure')reanchor();lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;post({type:'commandAck',ack:result.ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();
+  }else{if(caughtUp){world=await save(admission,catchupReports,world.revision);lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;if(result.ack)result.ack.revision=world.revision;}const ack=result.ack;if(order.payload.type==='governance.set'&&ack?.reason==='世界版本已更新，請重新確認狀態。')ack.reason='治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。';post({type:'commandAck',ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();}
   return;
  }
  if(r.type==='backups'){post({type:'backups',items:await backupList()});return;}

@@ -7,7 +7,7 @@ import {z} from 'zod';
 import {isMissionArmy,type CityIntel,type BattleReportPayload} from './formal/combatModel';
 import type {CampaignId} from './formal/ids';
 import type {CommandReceipt,FormalReport,FormalWorld} from './formal/model';
-import {receiptSchema,validateFormalWorld} from './formal/schema';
+import {receiptSchema} from './formal/schema';
 import {canonicalJSON} from './formal/canonical';
 import {decodeSave,encodeSave,validateReportHistory,type FormalEnvelope} from './formal/saveCodec';
 import {FORMAL_DB_NAME} from './formal/versions';
@@ -61,7 +61,9 @@ export class FormalPersistence {
   return a;
  }
  private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false):Promise<FormalWorld>{
-  validateFormalWorld(input);validateReportHistory(input,reportWrites);
+  // Final encodeSave validates the entire stamped candidate before any writes.
+  // Avoid validating the same 2.8MB world twice in this transaction.
+  validateReportHistory(input,reportWrites);
   // No memory mutation; caller may switch its displayed world only after this resolves.
   return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,async()=>{
    const authority=await this.authority(),current=await this.db.saves.get('current');

@@ -119,3 +119,12 @@ it('an actual failed IDB transaction produces only rejection, preserves authorit
   expect(ack('durable-build').status).toBe('duplicate');expect(latest()).toEqual(committed);expect(storage.save).toHaveBeenCalledTimes(2);
  }finally{await p.db.delete();}
 });
+
+it('C4 due events and a player command share one atomic save with one authoritative revision',async()=>{
+ const w=createFormalFixture();w.events=[{id:eventId('combined'),type:'fixture.marker',at:1000,marker:'once'}];await load(w);now=10000;click(w,'combined-click',{type:'city.rename',cityId:fixtureIds.home,name:'合併原子保存'});await until(()=>done('combined-click'));
+ expect(storage.save).toHaveBeenCalledTimes(1);expect(ack('combined-click').status).toBe('committed');expect(latest().events).toEqual([]);expect(latest().revision).toBe(w.revision+1);expect(latest().commandReceipts.at(-1)?.committedRevision).toBe(latest().revision);expect(ack('combined-click').revision).toBe(latest().revision);
+});
+it('C4 combined replay fault exposes neither event draft nor command success',async()=>{
+ const w=createFormalFixture();w.events=[{id:eventId('combined-fault'),type:'fixture.marker',at:1000,marker:'preserved'}];await load(w);storage.save.mockRejectedValueOnce(new Error('combined atomic failure'));now=10000;click(w,'combined-fault-click',{type:'city.rename',cityId:fixtureIds.home,name:'不可提前顯示'});await until(()=>done('combined-fault-click'));
+ expect(ack('combined-fault-click').status).toBe('rejected');expect(latest()).toEqual(w);expect(latest().events).toHaveLength(1);expect(messages.some(m=>m.type==='commandAck'&&m.ack.status==='committed')).toBe(false);
+});
