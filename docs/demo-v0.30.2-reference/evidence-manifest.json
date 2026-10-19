@@ -1,0 +1,146 @@
+{
+  "scope": "Archived existing DEMO evidence; no screenshots or build rerun; original files copied byte-for-byte",
+  "demoCommit": "44728f749044c1a5f1ad4fe47f1eccc391c7d9b2",
+  "files": [
+    {
+      "path": "REFERENCE_BASELINE.md",
+      "size": 10922,
+      "sha256": "154bef87fbea2a16295ca573abd8c1a5b49f08b891835695b30df2d555ff2aed"
+    },
+    {
+      "path": "remote-manifest.json",
+      "size": 105334,
+      "sha256": "45befa519b5001f0c7c4883ee812ee2b57a668c754be4f713f186e50c5b8ebf0"
+    },
+    {
+      "path": "integrity.json",
+      "size": 61757,
+      "sha256": "7668ad33327d02cbe3133a072c4a9b15f3136576960a00c8fecd6ae360e62b1a"
+    },
+    {
+      "path": "integrity-final.json",
+      "size": 149,
+      "sha256": "ab86976bd7d1efbcd5bda1bbfaaa7364644e09e0ae809f5c4dd421eb60a51f83"
+    },
+    {
+      "path": "dependency-audit.json",
+      "size": 179,
+      "sha256": "16c81cf1e6cea9178b58772e7d59a4465e1642171e9d13db217d76ee67e79385"
+    },
+    {
+      "path": "summary.json",
+      "size": 1714,
+      "sha256": "5454489617074545e04980562b46d6106fa159da19a5678d3d7471d068e85165"
+    },
+    {
+      "path": "verify-integrity.py",
+      "size": 860,
+      "sha256": "6ecd3f0b68610710133520deb4d780dd4e9c3ff639da176b0e123a127860d40a"
+    },
+    {
+      "path": "verify-reference.mjs",
+      "size": 3641,
+      "sha256": "72ca88d8fd62802d93dd75812ee888644f01de04a4cb67cea2454c6a2a69b7a1"
+    },
+    {
+      "path": "typecheck-final.log",
+      "size": 53,
+      "sha256": "be95e63d300f75e3579b4e6de708ea04d1323ddce714303810e8408a67e5a05a"
+    },
+    {
+      "path": "build-final.log",
+      "size": 1001,
+      "sha256": "a0dd03fec5fabbbeb47f6943afc9f68213f0a67fc299fc40b228d5e7d696cd30"
+    },
+    {
+      "path": "build-first-incomplete-dependencies.log",
+      "size": 756,
+      "sha256": "85f16f4faba040580ae1d51114663e2cc485859975ce4500109611604d1fa89e"
+    },
+    {
+      "path": "npm-ci.log",
+      "size": 303,
+      "sha256": "b94670d1eb94bcecc8be517616cb3c8da63396a34522490c41106907769ee73c"
+    },
+    {
+      "path": "browser-run.log",
+      "size": 1175,
+      "sha256": "5c683d4cda1dc800b9bb3f24d09e6263239853b156547d2235754863437920fb"
+    },
+    {
+      "path": "browser/result.json",
+      "size": 1174,
+      "sha256": "80a2e0f47456f08d8b4eac85ea22e05e21bbb22ac68723bf5bb89e145b48baf2"
+    },
+    {
+      "path": "browser/desktop-army.png",
+      "size": 168877,
+      "sha256": "b5031f8d1d6a03ad8087b5b6f55b7101ca7e48964bd2dc02613665c997f5a00a"
+    },
+    {
+      "path": "browser/desktop-city.png",
+      "size": 1724536,
+      "sha256": "a1b3d9f5216f0e8c6f530bbb3adc35c81aad38535d9a27d9483462810e83786b"
+    },
+    {
+      "path": "browser/desktop-home.png",
+      "size": 985731,
+      "sha256": "616bed31bdcdc26944acb05ea118147e5819ad98516e56fa0c90d6466f0028d3"
+    },
+    {
+      "path": "browser/desktop-lords-ranking.png",
+      "size": 142578,
+      "sha256": "f48154e99f1e5593cd48eb139b2b4946cde012ec26d9cf1393b78c4388295d72"
+    },
+    {
+      "path": "browser/desktop-map.png",
+      "size": 370145,
+      "sha256": "2621fdbfa041c814b07d609b1422c391e9a65d90ced4f4e529463fe225e2ee58"
+    },
+    {
+      "path": "browser/desktop-start.png",
+      "size": 1523728,
+      "sha256": "c702b845afeb206b38d6cfd511d1a1c462c199a5df58610c5b63ac2cce4841c4"
+    },
+    {
+      "path": "browser/desktop-territory.png",
+      "size": 774010,
+      "sha256": "58201f2dce61107dfd6ddf91f61a60df0a630b828534ab1b80882ae98f6792a6"
+    },
+    {
+      "path": "browser/mobile-army.png",
+      "size": 105359,
+      "sha256": "d7a36756df9f652f9aa766cbf6b128f17e383f488ee835bca4d610772263b083"
+    },
+    {
+      "path": "browser/mobile-city.png",
+      "size": 418017,
+      "sha256": "abcfd7f54cc4ead5df1af571ec8abbed4c2590226765ce123363aa350d5b136e"
+    },
+    {
+      "path": "browser/mobile-home.png",
+      "size": 296331,
+      "sha256": "7c123368c57dee1c135a232bcf75daf4d10e1e44b5ca06e271f8feca2dbe6d42"
+    },
+    {
+      "path": "browser/mobile-lords-ranking.png",
+      "size": 70008,
+      "sha256": "0944b847dfc56cc26b99dbcf764baf056bac3e303bbc016e314aff88eaa27e8e"
+    },
+    {
+      "path": "browser/mobile-map.png",
+      "size": 130177,
+      "sha256": "c880ce7e5556d6d378644cc4fc67e15f8775559e146a30009c5d34db4e597d92"
+    },
+    {
+      "path": "browser/mobile-start.png",
+      "size": 500788,
+      "sha256": "d3c8f30cd5a4f230f02161448f428ac21533f84a22189cce4329b84277ba8ba6"
+    },
+    {
+      "path": "browser/mobile-territory.png",
+      "size": 203820,
+      "sha256": "6a39135d1272ffb9c90c0a76e1c7b71c4f3b79c04f8efa1f5417ebeee2f30b2c"
+    }
+  ]
+}

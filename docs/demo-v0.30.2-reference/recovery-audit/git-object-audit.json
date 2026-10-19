@@ -1,0 +1,271 @@
+{
+  "unreachableCommits": [
+    {
+      "sha": "06eccd0513923976468d779c1621f145d9252369",
+      "subject": "Merge pull request #19 from cadence-jameds/fix/issue18-update-readme\n\nfix(P0): 安全恢復失效 Service Worker 更新與 README 發行資訊同步",
+      "tree": "18ec4ade6d7a043c4be0882d1b11a63c5563e8f1",
+      "sameTreeAsMain": true
+    }
+  ],
+  "historicalMissingTrees": [
+    {
+      "sha": "3a318398329cfcaa295f8c74970f5cbc24eb6fbb",
+      "subject": "fix(pwa): verify waiting worker playable identity before activation\n\nR19-01: reject docs-only or unknown workers for a newer playable target; retain durable-save activation barrier. Preserve all PR #19 history with main as first parent for one release increment.",
+      "isMainAncestor": true,
+      "tree": "0831c4ee450bdf31817cc9aabc63fbed3c700f38"
+    },
+    {
+      "sha": "4118ee3fad5b53cd13d2613088b99a2f8b724a7f",
+      "subject": "fix(pwa): discard invalid waiting handles and deliver Issue18 hotfix evidence",
+      "isMainAncestor": true,
+      "tree": "997c13cae9523e717709aef4b035524d78fc7f76"
+    },
+    {
+      "sha": "fdf442c4fb12fb780359c3f26f5257559e09ed1f",
+      "subject": "fix(pwa): preserve durable-save ordering across recreated registration and controller replacement",
+      "isMainAncestor": true,
+      "tree": "231ddc66a6300974c0cab941b2bc6a1241f3c20a"
+    },
+    {
+      "sha": "0a0d6e9278f73ba6d84ceb4b22a0c35a5cda80d7",
+      "subject": "fix(pwa): recover stale updates after durable save and synchronize README release display",
+      "isMainAncestor": true,
+      "tree": "a7505cb5ba1293248c0f70c9d723ee2385dff64a"
+    }
+  ],
+  "unreachableTrees": [
+    {
+      "sha": "f401c4402867f049478fbfd78e51db167d6b5705",
+      "entries": [
+        "100644 blob 0e2ed1f9c53333fcb35c3ff365e55e315939d801\tDELTA_REPORT.md",
+        "100644 blob 35f0813c37ed61ae6f468e50a641222c95a03b60\tIMPLEMENTATION_MATRIX.md",
+        "040000 tree b6adaaa522c0c17f6deace998a926ef06ac0613d\tevidence"
+      ]
+    },
+    {
+      "sha": "c86a68d883a0cef918e83af2bee288a4ef88a695",
+      "entries": [
+        "100644 blob 6cd552292100c1c2470ce43e9a394b9931acebd6\tAI_UI_DIPLOMACY_REVISION_v0.2.md",
+        "100644 blob e5db6adfe4b825c7bb823c57abe8bb98cb18f2c0\tART_V060_PROVENANCE.json",
+        "100644 blob 4007c465415c553a29a0e7cc0cb200b011f02c9a\tART_V4_PROMPTS.json",
+        "100644 blob 096518094fef769e3f7f59486db93d7c2463b8f9\tART_V4_PROVENANCE.json",
+        "100644 blob 2b3b5578dbe4a0bf06f7e401a8dc7be28f724c5d\tART_v0.21.0.json",
+        "100644 blob 1d322193ee22770f6b54656b1757065487ea825a\tBALANCE_v0.7.0.md",
+        "100644 blob 395b1eedacc900719a5a4f59db96676de5de4648\tBENCHMARK_v0.6.0.json",
+        "100644 blob 6730a128be882e45c0346500c7b2a9c41ed2b46f\tCITY_POPULATION_BUILDING_MODEL_v0.3.md",
+        "100644 blob ff3eacd0e1b355eda5c2311a1ac10ea7ba78a00f\tCITY_SCENE_v0.5.3.md",
+        "100644 blob dd97e5f36612cd26587663d3e6062ea474664592\tDEMO_OPENING_GOVERNOR_REVISION.md",
+        "100644 blob 0233aaf9ee97d6e07a0238ba45a0a9d584e0d89c\tDESIGN_ALIGNMENT_v0.8.0.md",
+        "100644 blob 49da41e71c5a4496041c81842e798150f99450c4\tECONOMY_RESOURCE_MODEL_v0.3.md",
+        "100644 blob 4ed824cd900d9fcdd7fffdc1be04cb623d21b3ab\tERA_TECHNOLOGY_UI_REVISION.md",
+        "100644 blob 02d812fbd820b8822b930bbfca86173aee2554c9\tGITHUB_CLOUD_PAGES_INTEGRATION.md",
+        "100644 blob 9fba42925df79c53b4ff057b6c71d5d54900f5c6\tM0_M6_ACCEPTANCE_v0.4.md",
+        "100644 blob d39d2e7effe8da01af7f07db62979388135e2f8c\tMASTER_DESIGN_DOCUMENT_v0.3.md",
+        "100644 blob 6f491dd62829511aacde8475a20f1562172d9b00\tMASTER_DESIGN_DOCUMENT_v0.4.md",
+        "100644 blob c9c63b13b3c6360e0ec7dc3dea76b6d12487d1e9\tMILITARY_UNIT_COMBAT_MODEL_v0.2.md",
+        "100644 blob 7f6071ad2b370035a532be85b8d7308caa12d620\tMOBILE_CITY_v0.5.2.md",
+        "100644 blob 5a871c774a7ecab071804c7767164a4763d4962d\tMVP_TECHNICAL_PRODUCTION_BLUEPRINT_v0.1.md",
+        "100644 blob 0a9d637c19d6859fe73999bbaae5a38f89e8b858\tMVP_TECHNICAL_PRODUCTION_BLUEPRINT_v0.2.md",
+        "100644 blob 983c991974f86226033491507974518a814613ac\tPAGES_PREVIEW.md",
+        "100644 blob 55ecaec8d23b94927a6f18b670b69a5269758ade\tREADME_RELEASE_DISPLAY.md",
+        "100644 blob b33d677585e7cff8dd12b39e2ff071134339e780\tRELEASE_METADATA.md",
+        "100644 blob 20c0793aec0712af6c6c98e510c1686c999a7216\tREVISION_v0.5.9.md",
+        "100644 blob 2940bd53fa65ba712ad2f7fb1e537303b017bd0b\tSTAGE2_B1.md",
+        "100644 blob b912921e81c1b60f4ce0221b24567b033d5c3b05\tSTAGE2_B2.md",
+        "100644 blob 7ff766c8d9dd82cad24edcbbccfe584f6de93ff2\tSTAGE2_B3.md",
+        "100644 blob 4ef014766830600959a761cdaece14e8750519cb\tSTAGE2_B4.md",
+        "100644 blob 69d8177f67ee40580e97ced97ee59b43321e513f\tTECHNOLOGY_ERA_RESEARCH_MODEL_v0.3.md",
+        "100644 blob f35172a9b6cf9bd8feb75308399aae292e68504e\tUI_DESKTOP_MOBILE.md",
+        "100644 blob 0b42ca8582455c0eb12b097a17e3407124dcc856\tUPDATE_BACKLOG.md",
+        "100644 blob 54ab8c55a1ccb8fceca551f603497e1169aef355\tUPDATE_BATCH_v0.10.0.md",
+        "100644 blob 2c41050fc5e4ef6f4315693e9f997f2c5a8cbcea\tUPDATE_BATCH_v0.11.0.md",
+        "100644 blob 49eac85736e7997ad6bdd8cea8b78069c8a70bd3\tUPDATE_BATCH_v0.12.0.md",
+        "100644 blob f2477ef531a113d3f1ebf80edd9d37d6d902447b\tUPDATE_BATCH_v0.20.0.md",
+        "100644 blob 2703a4b5ba9b4253d08911e5b0941ecbd36ca3c1\tUPDATE_BATCH_v0.21.0.md",
+        "100644 blob 2f46bfeb92143fe397918850897ccf4196757dc7\tUPDATE_BATCH_v0.22.0.md",
+        "100644 blob 5dc3e6f98a8e66baf0f38beb6c61dcf021ed2385\tUPDATE_BATCH_v0.23.0.md",
+        "100644 blob b79685087115e5073d961df02c3001402e242ac9\tUPDATE_BATCH_v0.24.0.md",
+        "100644 blob b5911ae2adb239b9e45d108822610e9816b25882\tUPDATE_BATCH_v0.25.0.md",
+        "100644 blob 78223337fabc7a0ebcd544b2114014844eb42aee\tUPDATE_BATCH_v0.26.0.md",
+        "100644 blob 89d9e426071688a77939b73c035b264bda90b7c9\tUPDATE_BATCH_v0.26.1.md",
+        "100644 blob 110fc742c34f349cbe26ed1ca92ae53e3e47f164\tUPDATE_BATCH_v0.26.2.md",
+        "100644 blob 37a257e799550e3dc4f6eaed6007a26d66b711ff\tUPDATE_BATCH_v0.26.3.md",
+        "100644 blob 51b42668dc6488233a3d3929d1e841b25186d339\tUPDATE_BATCH_v0.26.4.md",
+        "100644 blob 6b925c0ffe70ff2df5df732d86655eed337b68e8\tUPDATE_BATCH_v0.27.19.md",
+        "100644 blob 0c9dd9ec414a6eec23ec862af947072696003a30\tUPDATE_BATCH_v0.27.20.md",
+        "100644 blob bd12c4fedca591600a17e0852773605de6e54d7c\tUPDATE_BATCH_v0.27.21.md",
+        "100644 blob d3f2dbb9da18b2d736bd78ef96447cacb890df39\tUPDATE_BATCH_v0.27.22.md",
+        "100644 blob 4d1b06c8a08ac0954f5c8f2ee508605a03299a1f\tUPDATE_BATCH_v0.6.0.md",
+        "100644 blob fdba6b7d2c33dab001373dcc79d87346200749e0\tUPDATE_BATCH_v0.7.0.md",
+        "100644 blob 3cce7c2b3697f924a8cb5dcf38807d4e12a09281\tUPDATE_BATCH_v0.7.0_REQUESTS.md",
+        "100644 blob 1ff0b0e8a2d132a69a2e3fcb82efdda63144c4fc\tUPDATE_BATCH_v0.8.0.md",
+        "100644 blob 90796612b26aab67f7146582346692d720f728e1\tUPDATE_BATCH_v0.9.0.md",
+        "100644 blob ef13422de9439b66c688be4345014db58039da4c\tV0.5_HEADLESS_RESULTS.json",
+        "100644 blob 23bc5372aa4028e07ca3e5d182684269da350428\tV4_HEADLESS_RESULTS.json",
+        "100644 blob db7caaf3ffb05975ee3f30f7f21e8f5d5fc10dbf\tWORLD_ECONOMY_v0.5.md",
+        "100644 blob 38472561eef8bce8e18af983dfff6d347acd0f0d\tWORLD_MAP_LOGISTICS_MODEL_v0.2.md",
+        "040000 tree 6f6665e694cf9dc61ecb2e7de2386b621653f18a\tarchive",
+        "040000 tree 438bdef8d51f59bcda1a010ed02998a82ae06462\tart-source",
+        "040000 tree 5cfca2adf461c40d6536e9971457d8c55154f6c3\tart",
+        "040000 tree bc900e7b4e7f9f735f5cd9b0f97f4d07d6a50047\tb5-lab-v03033",
+        "040000 tree 7e98f2e913c919180152a99ff809730bb0b37bbd\tb5-map-v03034",
+        "040000 tree 6df80e351fe54956a9017e010e617fce5129d3cb\tb5-v03023",
+        "040000 tree 8f71b03bc788793fed84275fd9e2966051120c2a\tb5-v91",
+        "040000 tree a035e6693073da702826c0161c3c14fc2bb7b273\tb6-b8",
+        "040000 tree d71a5a93a360131b901db3d9015ad5c273578cc0\tb6-v92",
+        "040000 tree 01f3124e967ba52a7348ef7f1d505818d5cc741a\tb6-v93",
+        "040000 tree 57cf828c96c0cace79f5bb25500410e79d0a735a\tb6-v94",
+        "040000 tree 0088b735a4e8cea1b4a164219bb8affc96e72bfb\tb7-v92",
+        "040000 tree b0f62fc71bace20c729f6c34e0979ca939d9b508\thotfix18",
+        "040000 tree 7e1c56f268fa808a6c78161c718dcedd6c9525dc\tmountain-v03030",
+        "040000 tree 45811fb292e6cd6a2eb445bc750e96105635b3e5\tp0-v2",
+        "040000 tree f401c4402867f049478fbfd78e51db167d6b5705\tp0c9",
+        "040000 tree a940e901cc4733d57f5257c5826531e771f6bca4\tplayable",
+        "040000 tree fd6436870efefc4946e89364ce24b40dfac311e1\tplayer-feedback-v03012",
+        "040000 tree 9dec3698801c059eb201d0238df6e8226e79c12f\tplayer-feedback-v03014",
+        "040000 tree 115b597df8782c02c2150613cb26c8701a4f5d87\tplayer-feedback-v03015",
+        "040000 tree ef704267b63225c3d11f2b1c881d6fc1903b97e2\tplayer-feedback-v03017",
+        "040000 tree a3724bae7a5a7c4e8aecace49c6c2a2764ffcfa8\tplayer-feedback-v03018",
+        "040000 tree 6284addb2faed956a0dd656316dfa8aba163bda4\tplayer-feedback-v03019",
+        "040000 tree 3c53d745eca9e2bdd36eaac17939ab032f728dd3\tplayer-feedback-v03020",
+        "040000 tree 54c8651949bcb197b0939603fe1a74de0aaf75f5\tplayer-feedback-v03021",
+        "040000 tree 0665eb4caf6a617ae85c57a7a5f15b91f43d1f49\trecovery",
+        "040000 tree 4cb7f0fa152f7cfbc43bffec31fad567a1382781\tscenery-v03032",
+        "040000 tree 70327004e86bdcb31a4d1fdda18f1debda501f55\tscout-v03029",
+        "040000 tree 00dea4e170720469ef304fa25be5d12a0d24332c\tterrain-v03031",
+        "040000 tree 4509f666744d3a3dd574d0cc5b029a907400f396\tui-v03024",
+        "040000 tree 0ff8ba3d5703a048646b792ca0dc60b9f98b95d4\tui-v03025",
+        "040000 tree ce0fb8eb5aa6f48456dd8be6b72ee7c7a716cdfd\tui-v03026",
+        "040000 tree b2671ce6498f335f5c03ee39b720f3d128498dc7\tui-v03027",
+        "040000 tree 3ecbb92b3981f1cb599b376b463fbf8f74b81c3a\tui-v03028",
+        "040000 tree ba6d4073fa6ff1e84857aeed17ee6f597dda8e63\tupdate-v03036",
+        "040000 tree d54880ed020338984d08c1bcc2d846d4c9eff38f\tv94-ui",
+        "040000 tree 2347bd4ad77e2335393cd5f4f9c9fb415aa5a42d\tvalidation",
+        "100644 blob 99710aac1c1276862f9b51dcf399c638aee6da6b\tverification-0.29.9.md",
+        "040000 tree 3eb4b232163ed336b6ce6208cf22e84b6dcfd0d3\twall-delta-v03022"
+      ]
+    },
+    {
+      "sha": "b30bd41298b9103c1ed58baa2c7e2144c1850946",
+      "entries": [
+        "100644 blob 0309e02dc86fc3bab5593931439ca9289b21028d\t.gitattributes",
+        "040000 tree cca2d04739d9e4094b7f852396d29f6f4b430092\t.github",
+        "100644 blob e29368ce88e7ae75e0c01e15ef2a165197310c1e\t.gitignore",
+        "040000 tree 69c549297596682bc51abe0d8e73bb115a32f5bd\t.openai",
+        "100644 blob e8ddbeb235ad9efded34bf85b26f3ef14fcc5848\tAGENTS.md",
+        "100644 blob 07426253c9d43f6577763299e70dc57911e381d6\tART_ASSETS.md",
+        "100644 blob 447611d075e5e942f86db673c78eaffc95c96b15\tCHANGELOG.md",
+        "100644 blob d27ecd73ef73c8000d03d939624f549212677e43\tDEMO_CHECKPOINT.md",
+        "100644 blob 1b5968b9c9d8c4ee93e8ecab02e673249a1e8af5\tDEVELOPMENT_V4_CHECKPOINT.md",
+        "100644 blob 77d07cf20725fcb53ba4bb1bf47c96ce96353ef0\tM0_CHECKPOINT.md",
+        "100644 blob b47ea4c9efc1345e81ffeb97044563c710ac6a0a\tM1_CHECKPOINT.md",
+        "100644 blob 3924ebd4d9469d59452741ad34635d758ec7505f\tREADME.md",
+        "100644 blob a99a48d36ef29db936c595ebf31fc852a7f2556b\tREADME_PLAYABLE.md",
+        "100644 blob 545605eacecc35d81f3cc6f20de40306a678e183\tREADME_V0.30.10.md",
+        "100644 blob 5d9486d4daa149675dd822767e3d8d07ff4c0dff\tREADME_V0.30.11.md",
+        "040000 tree c86a68d883a0cef918e83af2bee288a4ef88a695\tdocs",
+        "100644 blob 4250bcc5704f23e346a63211c480b44a3b8d8d9a\tindex.html",
+        "100644 blob 24cfbb18238e3a5f2235d60374bd882e59c8984d\tpackage-lock.json",
+        "100644 blob e49b50ee10c889f5f2ca220dc33e1a68d097c667\tpackage.json",
+        "040000 tree a751a9a23f1d51eadbdf1c7743be4d5b61bddfb2\tpublic",
+        "040000 tree 7b61ccefb01a6a5141ffb1726eaead9effc693f4\treleases",
+        "040000 tree ccf0f53912288a71daa0ae9d49d1c8ce0bc001ff\tscripts",
+        "040000 tree cc4f338ea8c99e1958a18ba21c9321881edcab04\tsrc",
+        "100644 blob 6e776d108ea4b2d4e01144a282f9e6a41a3ed8e6\ttsconfig.json",
+        "100644 blob ad6e5efb31fea7bbb70b2d21562e4802a287fa55\tvite.config.ts"
+      ]
+    },
+    {
+      "sha": "b6adaaa522c0c17f6deace998a926ef06ac0613d",
+      "entries": [
+        "100644 blob 5a01482528ef9fd9d9b3552167abcb2c91377649\tafter-valid-candidate.json",
+        "100644 blob 176fb131c721d7ea8a6cb752cac7fbf309228997\tbefore-valid-main.json",
+        "100644 blob 8400b88587eef397c679ef10c8fe7edf71869abb\tbrowser-concurrent.json",
+        "100644 blob 16f48633f66fc8f6ee5e74038074bbdcff3bc454\tbrowser-fixtures-manifest.json",
+        "100644 blob a906691fc721e1759199a02680ad3e48429b0d86\tbrowser-paired-candidate.json",
+        "100644 blob b3b77db4db99b185cc8567a3ec54a6776befd907\tbrowser-paired-main.json",
+        "100644 blob 5982c2a25afabc6f9dd550f493ef188c753aed85\tbrowser-partly-idle.json",
+        "100644 blob 51f8116f481f09bc989137fc41f4438d821df413\tbrowser-reverse-candidate.json",
+        "100644 blob 41961d27971435352552394fbc4e752bf843a7d0\tbrowser-reverse-main.json",
+        "100644 blob 2beec033f97af27faf433f73dfa65e1384044d42\tci-runs.json",
+        "100644 blob 6d1c93a8fc3d32d9e96342a8233388ad0b68e982\tfailure-history.json",
+        "100644 blob 5cb400782c9dc7bf56c76eacde28e200e8648f88\tfull-regression.json",
+        "040000 tree 37a850ed28e51de13b88ac3325ddf5ec87e73e77\tmatrix",
+        "100644 blob 2c7760d5f5c1e571c99822ce5c61098b0b8e86ef\tobservation-equivalence.json",
+        "100644 blob b6964eee8260a7ac89069f7ff2fc336e8c282761\tpersonality-selections.csv",
+        "100644 blob 27140f5544dde1135fd2a0a8cb3961d9902fcc6b\trejection-reasons.csv",
+        "100644 blob 6c5f2df95f9ab69bd94c9e6e1c55b0737d605d2b\tresearch-comparison-original.json",
+        "100644 blob ba47a80555967ae69b56587ba702e539734410f2\tresearch-comparison.json",
+        "100644 blob 51ae8dcf179c19aa99c1130e6de4fedf1b966ce3\truntime-source-hashes.json",
+        "100644 blob 0d0b3a35a2020056e86febdd2f8df9c9802f7e20\tscenarios.json",
+        "100644 blob d1314a1b9def1f79a1961ebde872271a825bd659\tscore-audit.json",
+        "100644 blob 323fc0dbcef67651d579dedffcc822dd9213f23a\tstrategy-selections.csv",
+        "100644 blob e78042f4642beba3116b5e64e8c8d750d736ab25\tsummary.csv",
+        "100644 blob bbc0756750b14f603d9bc9b61029939afec7ede9\ttargeted-candidate.json"
+      ]
+    }
+  ],
+  "unreachableBlobs": [
+    {
+      "sha": "06210adf164efc3d0254986aa2e53682e4961272",
+      "bytes": 17920,
+      "looksLikeUIProgram": false,
+      "classification": "P0-C-9 Markdown report",
+      "firstLine": "# P0-C-9｜正式 Runtime Candidate Delta Report"
+    },
+    {
+      "sha": "75c148e076377ea809da47cd99fedf3cc1f3d08a",
+      "bytes": 3213,
+      "looksLikeUIProgram": false,
+      "classification": "Superseded P0-C-9 workflow YAML, not UI program",
+      "firstLine": "name: P0-C-9 Runtime natural-world matrix"
+    },
+    {
+      "sha": "7862c241da9436845fa3fd55bc3c2edb1084dc39",
+      "bytes": 52758,
+      "looksLikeUIProgram": false,
+      "classification": "aggregated CSV",
+      "firstLine": "seed,hours,policy,dominantTrait,strategy,count,proportion"
+    },
+    {
+      "sha": "c924fc8772ee305ae9727597a274c9c702f64f85",
+      "bytes": 18106,
+      "looksLikeUIProgram": false,
+      "classification": "P0-C-9 Markdown report",
+      "firstLine": "# P0-C-9｜正式 Runtime Candidate Delta Report"
+    },
+    {
+      "sha": "0e2ed1f9c53333fcb35c3ff365e55e315939d801",
+      "bytes": 20569,
+      "looksLikeUIProgram": false,
+      "classification": "P0-C-9 Markdown report",
+      "firstLine": "# P0-C-9｜正式 Runtime Candidate Delta Report"
+    },
+    {
+      "sha": "2770a7b928f3a149b264e2334142acd92b23b870",
+      "bytes": 8628,
+      "looksLikeUIProgram": false,
+      "classification": "aggregated CSV",
+      "firstLine": "seed,hours,policy,strategy,picks,proportion,picksWithOrders,committedTasks"
+    },
+    {
+      "sha": "ecf7003d7aa32a81d4b12ab5e7a6443a41d32c78",
+      "bytes": 4344,
+      "looksLikeUIProgram": false,
+      "classification": "aggregated CSV",
+      "firstLine": "seed,hours,policy,boundary,reason,count"
+    },
+    {
+      "sha": "667f759a07b1cef56a2d83da0fc646255fac3f15",
+      "bytes": 6064,
+      "looksLikeUIProgram": false,
+      "classification": "aggregated CSV",
+      "firstLine": "seed,hours,policy,picks,wildDepartures,wildCleared,actualWildResources,wildCargo,scouts,cityRaids,cityConquere"
+    }
+  ],
+  "oldStagedRootDelta": [
+    "docs/p0c9/DELTA_REPORT.md",
+    "docs/p0c9/evidence/targeted-final.json",
+    "docs/p0c9/evidence/verification.json"
+  ]
+}

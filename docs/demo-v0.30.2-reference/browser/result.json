@@ -1,0 +1,48 @@
+{
+  "commit": "44728f749044c1a5f1ad4fe47f1eccc391c7d9b2",
+  "browser": "154.0.8037.57",
+  "scope": "DEMO reference acquisition; normal new campaign UI; no Formal changes",
+  "cases": [
+    {
+      "viewport": "desktop",
+      "status": "PASS",
+      "seed": 92049,
+      "rankRows": 36,
+      "firstRanks": [
+        "第 1 名 · 羅傑·哈特威爾",
+        "第 1 名 · 休·雷德福",
+        "第 1 名 · 愛德蒙·布萊克伍德"
+      ],
+      "territoryToggle": true,
+      "zoomButtons": true,
+      "databases": [
+        {
+          "name": "guozhan-river-valley-v027",
+          "version": 10
+        }
+      ],
+      "documentOverflow": false
+    },
+    {
+      "viewport": "mobile",
+      "status": "PASS",
+      "seed": 92049,
+      "rankRows": 36,
+      "firstRanks": [
+        "第 1 名 · 羅傑·哈特威爾",
+        "第 1 名 · 休·雷德福",
+        "第 1 名 · 愛德蒙·布萊克伍德"
+      ],
+      "territoryToggle": true,
+      "zoomButtons": true,
+      "databases": [
+        {
+          "name": "guozhan-river-valley-v027",
+          "version": 10
+        }
+      ],
+      "documentOverflow": false
+    }
+  ],
+  "errors": []
+}
