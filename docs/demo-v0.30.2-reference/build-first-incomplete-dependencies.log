@@ -1,0 +1,10 @@
+
+> guozhan-game-mvp@0.30.2 build
+> tsc --noEmit && vite build
+
+src/game/batch210.test.tsx(3,28): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+src/game/batch220.test.tsx(20,26): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+src/game/constructionArt.test.tsx(1,35): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+src/game/townScene.test.ts(4,26): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+vite.config.ts(1,36): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+vite.config.ts(3,30): error TS2307: Cannot find module 'vitest/config' or its corresponding type declarations.
