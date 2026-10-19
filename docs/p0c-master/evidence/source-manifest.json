@@ -1,6 +1,6 @@
 {
   "basePR": "b4faa4e188a4b0a456a4af5b94ade2363bcee247",
-  "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+  "head": "a002ff21398e08a2410eee4077957c549d57b238",
   "changedSourceFiles": [
     {
       "path": "src/game/FormalCityPanel.tsx",
@@ -20,8 +20,8 @@
       "path": "src/game/GameApp.tsx",
       "role": "production",
       "beforeBlob": "14a0c827bb5bb19a146f5873017d1e564828f2d0",
-      "afterBlob": "4913e89cea84ea16d9dce2430b108199683ea896",
-      "sha256": "98944be37518f8477e1e35b461d8ff8435117cf28c66e881d46eac122ed55ed0"
+      "afterBlob": "b42de2beeb28cca62bfed1e5b03f275308a1fcfd",
+      "sha256": "f3d62ecffa432c01bb54cfa846926010b64fd7a8e58f339cd81142fe95d10a5b"
     },
     {
       "path": "src/game/commandFeedback.ts",
@@ -188,8 +188,8 @@
       "path": "src/game/presentation/DevelopmentViews.tsx",
       "role": "production",
       "beforeBlob": "a3b4a45fe40823eb39fb49a14c6b3b8b806bacaa",
-      "afterBlob": "61484f145554369375232841e0e22379f7e772d6",
-      "sha256": "6924d5dfb2a3291c6bae4164944c1e2102753a65082ad4e4ef9752b9b6afdf76"
+      "afterBlob": "a3e24657868541b313ae520d30a30e61647f6352",
+      "sha256": "cb8926452b62916dd60623faa02e99d1df7dcbbb66100922fb7135c80e347753"
     },
     {
       "path": "src/game/presentation/ExtinctionView.tsx",
@@ -230,8 +230,8 @@
       "path": "src/game/presentation/Shell.tsx",
       "role": "production",
       "beforeBlob": "05d98c2aeda8f483d6abcd21654b3973a9fb6358",
-      "afterBlob": "1f086e2dec7c89c432a52c565dbc556fd588171b",
-      "sha256": "fb3624274afdc489b0e8a7a25fe399e7d39080a86ba17743939a04abc57a67e9"
+      "afterBlob": "813e321bea5ca538bfaef5b822ec7daf01b63cd1",
+      "sha256": "d33349f7e6f35dc60a4b1253916a6b0654cc4b137e0a9d95a16c160c43723931"
     },
     {
       "path": "src/game/presentation/craftsmanCastleUI.test.tsx",
@@ -246,6 +246,13 @@
       "beforeBlob": null,
       "afterBlob": "857fa3ab392dc9054bb02859cf2271a479fd9447",
       "sha256": "bf691c62538b7e99b0899461b992e1155d9b6f2eb7e04de4978f07b6bbacf5aa"
+    },
+    {
+      "path": "src/game/presentation/incomingNavigation.test.tsx",
+      "role": "test",
+      "beforeBlob": null,
+      "afterBlob": "85b5aa3dbbd8a37689da1745b5d8ccd8895e187f",
+      "sha256": "a4e759a4ac0331f1652a3610b4f5fcfdfd2d2644c283c7b814367388ac043617"
     },
     {
       "path": "src/game/presentation/mapRelations.ts",
@@ -306,5 +313,22 @@
       "unchanged": true,
       "blob": "95315eec2e2cf05eef70d05bd9a17383a9123aaa"
     }
-  ]
+  ],
+  "runtimeCompatibilityBaseline": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+  "unchangedRuntimePaths": [
+    "src/game/formal",
+    "src/game/runtime.worker.ts",
+    "src/game/persistence.ts",
+    "src/game/orderAdmission.ts",
+    "src/game/useGame.ts"
+  ],
+  "finalTestAssertionAmendment": {
+    "path": "src/game/presentation/incomingNavigation.test.tsx",
+    "productionUnchanged": true,
+    "testedBy": "incoming-after.json; final GitHub CI",
+    "headBlob": "85b5aa3dbbd8a37689da1745b5d8ccd8895e187f",
+    "workingBlob": "5200e1faa04f51eb66b53ac228106a878dccebeb",
+    "sha256": "b170c0bb6b53cad5739a8a5e29c6d9b33dd53f660b3d88a50f6c64b6b286939b",
+    "reason": "Strengthen no-dispatch assertion to query real dialog element; source production remains a002ff2."
+  }
 }

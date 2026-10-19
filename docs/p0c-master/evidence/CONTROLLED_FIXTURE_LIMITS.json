@@ -1,0 +1,8 @@
+{
+  "scope": "Original controlled UI/screenshots and first map CPU redraw benchmark only; not the ABBA natural-world fixtures",
+  "agentRecords": 99,
+  "liveAIOwners": 98,
+  "reason": "The UI fixture transfers one AI city to the player to test switching between two owned cities. The now landless faction is legitimately retired by the Formal resolver; all other schedules are retained. The initial active flag is not a count of living AI: newly generated agents start active=false but already have scheduled decision events.",
+  "correction": "Original result headers say original schedules retained, 99 agents; this means 99 records, not 99 surviving AI. Keep raw results with this explicit qualification. The C4 natural-world fixtures are independent: 0h/96h have 99 live AI, 168h has 81 natural survivors. A separate map99 fixture without the city transfer is used for the final 99-survivor map redraw measurement.",
+  "timingIntegrity": "No AI activity or schedule is reduced in ABBA timing. UI source screenshot fixtures are not reused as C4 performance inputs."
+}

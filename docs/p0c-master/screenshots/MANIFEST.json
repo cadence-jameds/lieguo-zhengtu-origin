@@ -25,7 +25,8 @@
     "bytes": 144833,
     "gitBlob": "9eadcdb59059fa86cab3a162ff5c3acba4f436cd",
     "sha256": "1dbccdd8ad82765de06d960fc67984f15eb78646fbee5835d132ac797d00fa70",
-    "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT"
+    "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT",
+    "qualification": "Before A002 navigation fix: opens army recruitment. Retained before evidence; not proof of march entry."
   },
   {
     "path": "docs/p0c-master/screenshots/ui/desktop-queues-five.png",
@@ -95,14 +96,16 @@
     "bytes": 94169,
     "gitBlob": "346abbabce91efcfbb67eb957e28c7edf8aaf269",
     "sha256": "59ec1f9f3c892124024e0f086d0d42c7e1e8aad9b04e9c069672b94b2f23bd96",
-    "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT"
+    "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT",
+    "qualification": "Before A002 navigation fix: opens army recruitment. Retained before evidence; not proof of march entry."
   },
   {
     "path": "docs/p0c-master/screenshots/ui/mobile-320-incoming.png",
     "bytes": 88512,
     "gitBlob": "54650c0e0fedcb906c94c6e6087f143f0a14786c",
     "sha256": "f9b7e1332e98b7f46ed5169cf12821544cdbf84b252118d3d6ab4c9a82aa05a7",
-    "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT"
+    "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT",
+    "qualification": "Before A002 navigation fix: opens army recruitment. Retained before evidence; not proof of march entry."
   },
   {
     "path": "docs/p0c-master/screenshots/ui/mobile-320-territory-overview.png",
@@ -194,5 +197,26 @@
     "gitBlob": "41bf8492724a583b316926157351259ed7bb5149",
     "sha256": "ec1bf6e0cb8f74e66b590a1132f249e0e5b312ec0e451eac83de2e178f317cfb",
     "captureSource": "C902 or earlier UI module-equivalent candidate; see browser result metadata and DELTA_REPORT"
+  },
+  {
+    "path": "docs/p0c-master/screenshots/ui/320-incoming-march.png",
+    "bytes": 65249,
+    "gitBlob": "7c9335ee1827dee54962e1feb3373bc1fb5f034b",
+    "sha256": "86ba9403fa7b56765902f5cd957eba639a1cdc225358e4fd17aff94965a6385a",
+    "captureSource": "a002ff21398e08a2410eee4077957c549d57b238; Production0.30.64; ui-entrances-final.json; native Chromium1440/390/320"
+  },
+  {
+    "path": "docs/p0c-master/screenshots/ui/1440-incoming-march.png",
+    "bytes": 127951,
+    "gitBlob": "c9888e992b759dc82236f441482c646022306938",
+    "sha256": "acfacf342be107105bc722b570839118e3d6b192379eafeb75e72ce90ed23070",
+    "captureSource": "a002ff21398e08a2410eee4077957c549d57b238; Production0.30.64; ui-entrances-final.json; native Chromium1440/390/320"
+  },
+  {
+    "path": "docs/p0c-master/screenshots/ui/390-incoming-march.png",
+    "bytes": 71058,
+    "gitBlob": "3c4d2d97e8cad9cf277d9c5f9ae69b2fcf2778e4",
+    "sha256": "8157321274462adf7896262ab63a83874e3c55d4ae723f359f868c1aa4d889b9",
+    "captureSource": "a002ff21398e08a2410eee4077957c549d57b238; Production0.30.64; ui-entrances-final.json; native Chromium1440/390/320"
   }
 ]

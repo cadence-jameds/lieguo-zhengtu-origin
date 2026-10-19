@@ -17,6 +17,6 @@ it('C8 alert selects its target city and explicitly requests march, with no pres
   expect(calls).toEqual([['city',city.id],['view','army','march']]);
   const rendered=document.createElement('div');rendered.innerHTML=renderToStaticMarkup(<ArmyView world={w} city={city} issue={()=>{}} busy={false} mobile initialMarch/>);
   expect(rendered.querySelector('.army-tabs button[aria-pressed="true"]')?.textContent).toContain('行軍');
-  expect(rendered.querySelector('.dispatch-view')).toBeNull();
+  expect(rendered.querySelector('dialog')).toBeNull();
  }finally{await act(async()=>root.unmount());host.remove();vi.unstubAllGlobals();}
 });

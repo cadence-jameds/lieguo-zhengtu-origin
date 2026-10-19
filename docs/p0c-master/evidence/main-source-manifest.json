@@ -1,0 +1,288 @@
+{
+  "main": "06c4cb93779f1f679bb77470515fd8aee1c42de9",
+  "productionHead": "a002ff21398e08a2410eee4077957c549d57b238",
+  "files": [
+    {
+      "path": "src/game/FormalCityPanel.tsx",
+      "role": "production",
+      "mainBlob": "69baa35a60738272279519d6c9750afdea76da5e",
+      "headBlob": "eeed52a25613aed7316219579192a802f19354db"
+    },
+    {
+      "path": "src/game/FormalWorldMap.tsx",
+      "role": "production",
+      "mainBlob": "5e66936d79b199641db9a1453c3afcca0bfd8dd5",
+      "headBlob": "4320f6e0a727506f2bbdd2a834af034dfa9d8317"
+    },
+    {
+      "path": "src/game/GameApp.tsx",
+      "role": "production",
+      "mainBlob": "14a0c827bb5bb19a146f5873017d1e564828f2d0",
+      "headBlob": "b42de2beeb28cca62bfed1e5b03f275308a1fcfd"
+    },
+    {
+      "path": "src/game/commandFeedback.ts",
+      "role": "production",
+      "mainBlob": null,
+      "headBlob": "8a74e84b04c9f2585d39476f801cd40989fbf25d"
+    },
+    {
+      "path": "src/game/formal/aiActions.ts",
+      "role": "production",
+      "mainBlob": "eca7a422619283de50e55d0cd776e3333869db0d",
+      "headBlob": "df42dba87054829294c673033dd3de7ffbaece33"
+    },
+    {
+      "path": "src/game/formal/aiAttackStrategies.ts",
+      "role": "production",
+      "mainBlob": null,
+      "headBlob": "028d6d7d723e77c4d0cc771b89e5fffd7903c700"
+    },
+    {
+      "path": "src/game/formal/aiKnowledge.ts",
+      "role": "production",
+      "mainBlob": "e887e66f633d6d8337d4a1b17c13cb2d80924767",
+      "headBlob": "c88c2bdb4d817782a1537d4a5c6854e146c148da"
+    },
+    {
+      "path": "src/game/formal/autonomy.ts",
+      "role": "production",
+      "mainBlob": "41873d9f9aeafa13c69581da47ec541ad6151286",
+      "headBlob": "95315eec2e2cf05eef70d05bd9a17383a9123aaa"
+    },
+    {
+      "path": "src/game/formal/battles.ts",
+      "role": "production",
+      "mainBlob": "b2692d364e263f63e3e3817668f4e81a02096b5b",
+      "headBlob": "73d6bad566be31d6bebed6acc2652fb8660cd3f9"
+    },
+    {
+      "path": "src/game/formal/demolition.ts",
+      "role": "production",
+      "mainBlob": "6bd4169182a6bb9acbd6d9bd5eeeb3bdf774956b",
+      "headBlob": "9e6bbd14fdf6890a836667a257031889a304cd3d"
+    },
+    {
+      "path": "src/game/formal/economy.ts",
+      "role": "production",
+      "mainBlob": "6269dac244966c994bbfc04b607731be1b593327",
+      "headBlob": "1fd48151c1f09901ff2745525c3b306fa2c86a90"
+    },
+    {
+      "path": "src/game/formal/extinction.ts",
+      "role": "production",
+      "mainBlob": "326fd05b44a395d2d5ffeb6354e83af8846b73ce",
+      "headBlob": "c19312459ce8492e8ae4093c07b4cbc0fcff354f"
+    },
+    {
+      "path": "src/game/formal/extinctionB7.test.ts",
+      "role": "test",
+      "mainBlob": "960455a9a59ead046369796eef502e17e25acb2c",
+      "headBlob": "3bdc3ab9fa6f682f15dbceeb0d055ca1c59f96a5"
+    },
+    {
+      "path": "src/game/formal/integrationR4.test.ts",
+      "role": "test",
+      "mainBlob": "c3193650eaef670cd286faa5d58a235d62761a19",
+      "headBlob": "645b46937a6bf704294c4fd22025a75319c50354"
+    },
+    {
+      "path": "src/game/formal/military.ts",
+      "role": "production",
+      "mainBlob": "ba2a6d257173837b7d7e285ae53bea28b22da1b4",
+      "headBlob": "a69cfba4077ad887f803efd1acc3ba0be4cbb19f"
+    },
+    {
+      "path": "src/game/formal/p0c9Attack.test.ts",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "1606bac8cfa670877621792a1a47f6052fdc16ad"
+    },
+    {
+      "path": "src/game/formal/p0c9Strategies.test.ts",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "e109729e65a95befe1c220cc9851c1052a886b56"
+    },
+    {
+      "path": "src/game/formal/p0cExileScout.test.ts",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "eda779993a30dbcc204f128aa5a7bb5c30b67074"
+    },
+    {
+      "path": "src/game/formal/p0cQueues.test.ts",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "e576a69a9da0e8b1d8efdb1c61b832bcf8499302"
+    },
+    {
+      "path": "src/game/formal/playerFeedback.test.ts",
+      "role": "test",
+      "mainBlob": "6f4d86a94075d1bfb54eb5ac445d706a677e1814",
+      "headBlob": "569f5c24ace985d292ade813494916229a8d5770"
+    },
+    {
+      "path": "src/game/formal/playerOrderRuntimeP0.test.ts",
+      "role": "test",
+      "mainBlob": "27f60e7f43d73afe25331eb89cc6c90f17c7d3bc",
+      "headBlob": "46efaa42a8c5e21e7ddcd6f6b97cb8da6348b972"
+    },
+    {
+      "path": "src/game/formal/queueCapacity.ts",
+      "role": "production",
+      "mainBlob": null,
+      "headBlob": "183893f56427344ec34fab4c51e37fe768ed751a"
+    },
+    {
+      "path": "src/game/formal/reducer.ts",
+      "role": "production",
+      "mainBlob": "4f9f3c950a9b3fc34508379218d6389c88743dc9",
+      "headBlob": "ad938ff48ca8020c1a3c6ae16c9ac97485131244"
+    },
+    {
+      "path": "src/game/formal/reportScope.ts",
+      "role": "production",
+      "mainBlob": null,
+      "headBlob": "dcd0ab88fbd508e605a6816ae7e82db019be292f"
+    },
+    {
+      "path": "src/game/formal/saveCodec.ts",
+      "role": "production",
+      "mainBlob": "31e047e5c399edcb784e4ba5cc82ea2b03655747",
+      "headBlob": "522c53e2c6f5bb08fa95aaaf1695266ed85f2bf3"
+    },
+    {
+      "path": "src/game/formal/schema.ts",
+      "role": "production",
+      "mainBlob": "34cee20b94cac203388334e70910f955efe365d9",
+      "headBlob": "46faa38d1d6d2917be139b4b49c25521b6b33edb"
+    },
+    {
+      "path": "src/game/formal/wallDelta.test.ts",
+      "role": "test",
+      "mainBlob": "ccaadf8089f8208ccebb486ccced35f419401fcc",
+      "headBlob": "a5886c031b6d768870e5ca22836b6e560a9424ea"
+    },
+    {
+      "path": "src/game/game.css",
+      "role": "production",
+      "mainBlob": "f7e8d977807188b664b35439101848ebc45cbe0e",
+      "headBlob": "5005f27006f3228565dbd71f93233200eb319fb1"
+    },
+    {
+      "path": "src/game/orderAdmission.test.ts",
+      "role": "test",
+      "mainBlob": "1016f4cec3464d9aeb1522cbd1c6a7cd59a1362b",
+      "headBlob": "e437b9176505a354cf882ca7305d05bd3e5cccc9"
+    },
+    {
+      "path": "src/game/orderAdmission.ts",
+      "role": "production",
+      "mainBlob": "67c206e86585d68ccc971499109105e625c06f35",
+      "headBlob": "245cbad5f13a908342aa23e9de6613e14119bcb8"
+    },
+    {
+      "path": "src/game/persistence.ts",
+      "role": "production",
+      "mainBlob": "8fa5183faa5f4e68f818d0401c1f3dba2395bbcb",
+      "headBlob": "59237a80087f0aaf7f85235fa06946139e50d9cd"
+    },
+    {
+      "path": "src/game/presentation/DevelopmentViews.tsx",
+      "role": "production",
+      "mainBlob": "a3b4a45fe40823eb39fb49a14c6b3b8b806bacaa",
+      "headBlob": "a3e24657868541b313ae520d30a30e61647f6352"
+    },
+    {
+      "path": "src/game/presentation/ExtinctionView.tsx",
+      "role": "production",
+      "mainBlob": "f90fda37d969cf3d9aa7f93de7004fc16771800a",
+      "headBlob": "39f7714d7b94846d021a9ea5c8f48add37175c7a"
+    },
+    {
+      "path": "src/game/presentation/FormalReportsView.tsx",
+      "role": "production",
+      "mainBlob": "eaaa3baf417bbf45ec94a258fc493d99486c7ae1",
+      "headBlob": "4eb3ed0d7e7dd32d9bbfbb9442078d47668024ef"
+    },
+    {
+      "path": "src/game/presentation/IncomingArmyAlert.tsx",
+      "role": "production",
+      "mainBlob": null,
+      "headBlob": "1a8a369070a3924aa55cf69fdfb90d24ce791565"
+    },
+    {
+      "path": "src/game/presentation/LegionView.tsx",
+      "role": "production",
+      "mainBlob": "1010161ad02572f2337df3161ee58ca152fc0bd8",
+      "headBlob": "1d72ec4f14250a812e72d27ebad147e974d2c4a1"
+    },
+    {
+      "path": "src/game/presentation/PoliticsView.tsx",
+      "role": "production",
+      "mainBlob": "a92c3bf9a8e43f62f222f9b3823ca12d827887df",
+      "headBlob": "e499d360bb74260d9739036d584ef8df7d052547"
+    },
+    {
+      "path": "src/game/presentation/Shell.tsx",
+      "role": "production",
+      "mainBlob": "05d98c2aeda8f483d6abcd21654b3973a9fb6358",
+      "headBlob": "813e321bea5ca538bfaef5b822ec7daf01b63cd1"
+    },
+    {
+      "path": "src/game/presentation/craftsmanCastleUI.test.tsx",
+      "role": "test",
+      "mainBlob": "1bdc8c0dfec5b1d1e760166542697b0b02b9de58",
+      "headBlob": "12421f72f8e228642d6dc02d8080baef3e58413b"
+    },
+    {
+      "path": "src/game/presentation/factionRankings.ts",
+      "role": "production",
+      "mainBlob": null,
+      "headBlob": "857fa3ab392dc9054bb02859cf2271a479fd9447"
+    },
+    {
+      "path": "src/game/presentation/incomingNavigation.test.tsx",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "85b5aa3dbbd8a37689da1745b5d8ccd8895e187f"
+    },
+    {
+      "path": "src/game/presentation/mapRelations.ts",
+      "role": "production",
+      "mainBlob": "5187cf1ccb647414a840ad5343518d75a338cfad",
+      "headBlob": "9d852bae03cb9b243bd7fbff6621eeae34711694"
+    },
+    {
+      "path": "src/game/presentation/p0cDemoUi.test.tsx",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "1aae494690354d5e7d28470e070d06e050c1d1c6"
+    },
+    {
+      "path": "src/game/presentation/p0cFeedback.test.tsx",
+      "role": "test",
+      "mainBlob": null,
+      "headBlob": "6abe9133cc37dc2336b88219fa85244858689a52"
+    },
+    {
+      "path": "src/game/presentation/uiIntegrationV94.test.tsx",
+      "role": "test",
+      "mainBlob": "cd6fc2902b6a227ad53bffb59000b686d4b798f7",
+      "headBlob": "389544224cd79d948ddc89c0f6f589e19e5066d4"
+    },
+    {
+      "path": "src/game/runtime.worker.ts",
+      "role": "production",
+      "mainBlob": "bdd53a08afa0dfa15ba253204371639dfe4aa484",
+      "headBlob": "b08129d857bc976b1f726f3c91c9e1224e0ed411"
+    },
+    {
+      "path": "src/game/useGame.ts",
+      "role": "production",
+      "mainBlob": "7c1b134ec3c70e8078e3835336490e86047319b3",
+      "headBlob": "dcf811f09ef14ec77cd2486a75215a388635f2d2"
+    }
+  ]
+}

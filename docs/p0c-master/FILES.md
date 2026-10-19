@@ -1,6 +1,6 @@
 # 本輪正式程式檔案
 
-相對原PR21 `b4faa4e188a4b0a456a4af5b94ade2363bcee247`，正式程式HEAD `ae39092bec61ebf3a52e497bc7f32a9a6c6cf519`。新增與修改以Git blob、SHA256保存於 [source-manifest.json](evidence/source-manifest.json)。
+相對原PR21 `b4faa4e188a4b0a456a4af5b94ade2363bcee247`，正式程式HEAD `a002ff21398e08a2410eee4077957c549d57b238`。新增與修改以Git blob、SHA256保存於 [source-manifest.json](evidence/source-manifest.json)。
 
 |檔案|類別|
 |---|---|
@@ -45,3 +45,12 @@
 |[src/game/presentation/uiIntegrationV94.test.tsx](../../src/game/presentation/uiIntegrationV94.test.tsx)|test|
 |[src/game/runtime.worker.ts](../../src/game/runtime.worker.ts)|production|
 |[src/game/useGame.ts](../../src/game/useGame.ts)|production|
+|[src/game/presentation/incomingNavigation.test.tsx](../../src/game/presentation/incomingNavigation.test.tsx)|test|
+
+## 原PR21已保留的C9程式
+
+相對main共32個正式程式檔：上述本輪29檔，加原五策略三檔。三檔相對b4faa4e逐位元不變；相對main的完整47個程式／測試檔見 [main-source-manifest.json](evidence/main-source-manifest.json)。
+
+- [src/game/formal/aiAttackStrategies.ts](../../src/game/formal/aiAttackStrategies.ts)
+- [src/game/formal/aiActions.ts](../../src/game/formal/aiActions.ts)
+- [src/game/formal/autonomy.ts](../../src/game/formal/autonomy.ts)
