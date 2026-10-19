@@ -1,0 +1,172 @@
+{
+  "passed": 33,
+  "failed": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "C11 pure geometry has radius8, bounded nearby corridor, edges and no far bridge; cached across clock/receipt updates",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C11 water blocks fill and bridges; independent cities reserve their surroundings and cache notices ownership changes",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C13 public lord ranking uses city count then population, competition ties and stable ID, not armies",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C12 legacy descriptions remain in data but no inputs, empty prompts or displays survive",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 army training summary uses the same capacity as city scenes",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 recruitment controls admit fourth and fifth training jobs and disable the sixth",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=false",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=true",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=false",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=true",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 building, field and wall share capacity; cities are independent; completed work frees capacity",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 durable CAS, duplicate and Recovery retain five jobs and never repeat payment/completion",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 demolition shares total capacity and can occupy the fifth slot without changing cancellation rules",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 full codec validation rejects an oversized six-job snapshot without a schema version bump",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "all typed ID constructors validate their wire prefixes",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "minimal formal fixture validates without changing a byte and has no DEMO metadata or capital",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "strict validator rejects raw IDs, unknown fields, negative resources, and performs no repairs",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "funding project roundtrip preserves snapshots and exact phase",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "researching project roundtrip preserves snapshots and exact phase",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "completed project roundtrip preserves snapshots and exact phase",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "funding cannot have fake start or completed timestamps, and funded ledgers cannot remain funding",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "qualification/duration snapshots stay with original Faction after city loss and building downgrade",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "other Faction and same empire do not allow direct research contributions",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "single city research cannot be funded by a supporting city and traditional cannot use direct multi-city mode",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "partial funding remains funding and one full transition schedules one completion",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "completion replay after save/load cannot award technology or reports twice",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "physical project contracts in-transit resource is not included in pool; arrived resource is",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "physical project contracts technology transfer is Faction-only and cannot accept empire payment or foreign contribution",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "duplicate command same ID/payload is a no-op and different payload is a conflict",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "stale revision cannot apply a new command to newer state",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "dedupe is durable after 300 commands and a codec roundtrip, without the old 256 eviction",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "schema rejects orphan completion receipts, rewound event sequences, and contributions without durable command receipts",
+      "status": "passed",
+      "failure": null
+    }
+  ]
+}

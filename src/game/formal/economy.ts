@@ -1,3 +1,4 @@
+import {QUEUE_CAPACITY} from './queueCapacity';
 import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen,clearCapturedNoncombatants} from './extinction';
 import {canReinforce} from './armies';
 import {buildingRequirements,castleSource} from './buildingDetailData';
@@ -72,7 +73,7 @@ export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reaso
 }
 export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}
 export function addStock(c:FormalCity,resources:Resources){const cap=storageCapacity(c);for(const r of resourceKeys)c.stock[r]=Math.min(cap-(c.economy?.reservedIncoming[r]??0),c.stock[r]+resources[r]);}
-export const QUEUE_CAPACITY=5;
+export {QUEUE_CAPACITY} from './queueCapacity';
 export const constructionConcurrency=(c:FormalCity)=>c.economy?.milestones.includes(15000)?2:1;
 export const militaryConcurrency=(c:FormalCity)=>c.economy?.milestones.includes(20000)?2:1;
 /** Fill newly unlocked execution capacity. Existing active work and all payment/time snapshots stay fixed. */
