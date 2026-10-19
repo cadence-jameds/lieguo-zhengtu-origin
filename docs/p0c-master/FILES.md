@@ -1,3 +1,5 @@
+> 下表為原A002／cc4階段42檔的可追溯清單；最新C13／C4另修改其中3個正式檔、新增2個測試，現相對b4為44檔（29正式／15測試）、相對main為49檔（32正式／17測試）。[最新實際檔案與blob](../p0c-final-delta/evidence/source-manifest.json)，不以舊manifest冒稱新內容。
+
 # 本輪正式程式檔案
 
 相對原PR21 `b4faa4e188a4b0a456a4af5b94ade2363bcee247`，正式程式HEAD `a002ff21398e08a2410eee4077957c549d57b238`。新增與修改以Git blob、SHA256保存於 [source-manifest.json](evidence/source-manifest.json)。

@@ -1,3 +1,5 @@
+> 本文件保留cc4階段原交付與HOLD／Pending歷史；最新C13方案B已完成功能驗證、C4另有最終比較，請見[最終Delta](../p0c-final-delta/DELTA_REPORT.md)。
+
 # P0-C 統一施工 Delta Report
 
 本輪依玩家最新統一正式施工令，在原 Draft PR [#21](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/21) 施工。先前僅盤點／Evidence-only限制已由最新授權取消。不是重新找回不存在的UI：復原搜尋已結案，城市／軍隊既有PR9成果先回歸，本輪只實作核准差異及剩餘缺口。

@@ -1,0 +1,248 @@
+{
+  "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+  "sourceTreeHash": "76f64471f93220ecabc0211630d0399000df2c37fc05681d62ee9df9309c6030",
+  "harness": {
+    "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "sourceTreeHash": "76f64471f93220ecabc0211630d0399000df2c37fc05681d62ee9df9309c6030",
+    "compiledTraceHash": "5f1d036a526f08bf432aaee7ebaebc3facc2c88368064647f2dd201a7fc0ff30",
+    "changes": [
+      {
+        "module": "formal/aiAttackStrategies",
+        "name": "pickAttackStrategy",
+        "policyOnly": true
+      },
+      {
+        "module": "formal/aiAttackStrategies",
+        "name": "autonomousDispatchReason",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/aiActions",
+        "name": "militaryDecision",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/autonomy",
+        "name": "submitAutonomous",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/reducer",
+        "name": "advanceOneEvent",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/reducer",
+        "name": "submitOrderDraft",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/battles",
+        "name": "handleCombatEvent",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/battles",
+        "name": "finishReceipt",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/economy",
+        "name": "addStock",
+        "policyOnly": false
+      }
+    ],
+    "authority": "fa038a00d3aa5a500cb055176164a907495b6212",
+    "worldMutations": "none; comparison runs substitute only the pure strategy selector policy"
+  },
+  "seed": 90217,
+  "policy": "V3Parallel48",
+  "hours": 720,
+  "initial": {
+    "ai": 99,
+    "cities": 100,
+    "populationPerCity": 200,
+    "injectedTroops": 0,
+    "injectedIntel": 0,
+    "injectedResources": 0,
+    "speed": 1
+  },
+  "metrics": {
+    "picks": {
+      "V3Parallel48": 8157
+    },
+    "picksWithOrders": {
+      "V3Parallel48": 4080
+    },
+    "submittedByStrategy": {
+      "V3Parallel48": 4315
+    },
+    "choicesByPersonality": {
+      "risk": {
+        "V3Parallel48": 808
+      },
+      "economy": {
+        "V3Parallel48": 1201
+      },
+      "military": {
+        "V3Parallel48": 2927
+      },
+      "expansion": {
+        "V3Parallel48": 1317
+      },
+      "defense": {
+        "V3Parallel48": 745
+      },
+      "raiding": {
+        "V3Parallel48": 1159
+      }
+    },
+    "attempts": {
+      "ordinaryWild": 1530,
+      "exile": 0,
+      "cityRaid": 1260,
+      "cityConquest": 104,
+      "scout": 3034,
+      "reinforce": 0,
+      "joint": 129
+    },
+    "committed": {
+      "ordinaryWild": 1517,
+      "exile": 0,
+      "cityRaid": 1260,
+      "cityConquest": 104,
+      "scout": 3032,
+      "reinforce": 0,
+      "joint": 35
+    },
+    "outcomes": {
+      "ordinaryWildCleared": 1502,
+      "exileCleared": 0,
+      "cityRaids": 1260,
+      "cityConquered": 102,
+      "scouts": 3032
+    },
+    "rejectionReasons": {
+      "此目標不符合任務的勢力授權。": 96,
+      "同類請求已存在。": 11,
+      "軍團名額已滿或超額。": 9,
+      "軍團或申請狀態已變更。": 4,
+      "目的地容量不足或已預約。": 7,
+      "目標沒有可通行的行軍路徑。": 13,
+      "外交權限已變更。": 1
+    },
+    "preflightReasons": {},
+    "actualOrdinaryWildDeposits": {
+      "food": 1601658,
+      "wood": 1590293,
+      "stone": 1381790,
+      "gold": 990241
+    },
+    "ordinaryWildCargoAtReturn": {
+      "food": 2746683,
+      "wood": 2451853,
+      "stone": 1975936,
+      "gold": 1202205
+    },
+    "actualOtherDeposits": {
+      "food": 854925,
+      "wood": 726784,
+      "stone": 609063,
+      "gold": 636454
+    },
+    "lossesByUnit": {
+      "scout": 12098,
+      "spearman": 8145,
+      "militia": 7440,
+      "archer": 8390,
+      "skirmisher": 7803,
+      "light-cavalry": 2827,
+      "knight": 1266,
+      "ram": 5,
+      "catapult": 31,
+      "baggage": 40,
+      "pikeman": 22,
+      "swordsman": 20
+    },
+    "ordinaryWildLossesByUnit": {
+      "spearman": 6286,
+      "militia": 5511,
+      "archer": 7403,
+      "skirmisher": 6998,
+      "light-cavalry": 2600,
+      "knight": 1149,
+      "pikeman": 22,
+      "swordsman": 20
+    },
+    "catalogReplacementCost": {
+      "food": 4230130,
+      "wood": 2346150,
+      "stone": 0,
+      "gold": 2959090
+    },
+    "ordinaryWildCatalogReplacementCost": {
+      "food": 2997205,
+      "wood": 1466880,
+      "stone": 0,
+      "gold": 1488115
+    },
+    "parallelPlanned": 250,
+    "parallelCommitted": 249,
+    "partialParallel": 1,
+    "maxCityArmies": 3,
+    "minParallelGarrisonFraction": 0.3333333333333333,
+    "events": 354634,
+    "eventsByType": {
+      "ai.decide": 58209,
+      "construction.complete": 36469,
+      "economy.settle": 72000,
+      "military.train": 139216,
+      "army.arrive": 5947,
+      "army.return": 3988,
+      "age.complete": 154,
+      "wild.respawn": 1497,
+      "combat.round": 98,
+      "governance.decide": 35853,
+      "research.complete": 834,
+      "logistics.arrive": 147,
+      "logistics.return": 147,
+      "city.promote.complete": 68,
+      "army.depart": 6,
+      "settlement.ready": 1
+    },
+    "returnDeposits": 3988,
+    "distances": {
+      "beyond24": 633,
+      "beyond48": 0,
+      "max": 47.92702786528703
+    },
+    "faults": []
+  },
+  "autonomy": {
+    "accepted": 63508,
+    "rejected": 141,
+    "agents": 99,
+    "decisions": 58209
+  },
+  "final": {
+    "liveAI": 38,
+    "cities": 100,
+    "population": 2840752,
+    "stationedEffectiveUnits": 65299,
+    "awayEffectiveUnits": 516,
+    "armies": 3,
+    "hash": "a438c058635d7b868e2a3335e7b010aeb60ab4c49252745772a6b5f8e6e8c326"
+  },
+  "performance": {
+    "elapsedMs": 333572.876001,
+    "events": 354634,
+    "peakHeapBytes": 453451984,
+    "peakRssBytes": 730886144,
+    "maxRssKiB": 815720
+  },
+  "limitations": [
+    "replacement cost is catalog equivalent, not actual recruitment spending",
+    "Node memory, not Android memory or mobile FPS",
+    "comparison policies override only the pure selector in disposable compiled files; no troops/resources/activity/timing changes"
+  ]
+}

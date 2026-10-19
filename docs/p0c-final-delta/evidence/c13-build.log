@@ -1,0 +1,42 @@
+
+> guozhan-game-mvp@0.30.50 prebuild
+> npm run release:prepare
+
+
+> guozhan-game-mvp@0.30.50 release:prepare
+> node scripts/prepare-release.mjs
+
+{"version":"0.30.65","date":"2026-10-20","commitSha":"cc4f332dbdb6691275138d0ded88160200fb34ce","dirty":true}
+
+> guozhan-game-mvp@0.30.50 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 165 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package.json                                              0.11 kB │ gzip:   0.12 kB
+dist/sw-release-cc4f332dbdb6691275138d0ded88160200fb34ce.js    0.19 kB
+dist/manifest.webmanifest                                      0.33 kB
+dist/index.html                                                0.85 kB │ gzip:   0.53 kB
+dist/release/latest.svg                                        1.04 kB │ gzip:   0.60 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js                       3.43 kB
+dist/CHANGELOG.md                                             14.92 kB
+dist/version.json                                             15.98 kB │ gzip:   6.76 kB
+dist/release/index.html                                       16.38 kB │ gzip:   7.43 kB
+dist/assets/b5Lab.worker-lKzJewxR.js                         454.58 kB
+dist/assets/runtime.worker-DJntmY8U.js                       457.37 kB
+dist/assets/index-CO3VCVkj.css                               173.91 kB │ gzip:  35.49 kB
+dist/assets/workbox-window.prod.es5-Cch4wiA5.js                5.71 kB │ gzip:   2.25 kB │ map:    13.08 kB
+dist/assets/index-Cbc8t7u9.js                                730.15 kB │ gzip: 225.20 kB │ map: 2,240.82 kB
+
+✓ built in 1.96s
+
+PWA v1.3.0
+mode      generateSW
+precache  194 entries (55082.85 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-9c191d2f.js.map
+  dist/workbox-9c191d2f.js

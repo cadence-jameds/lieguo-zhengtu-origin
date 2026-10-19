@@ -36,7 +36,7 @@ it('C13 city-count precedence, population tiebreak, competition ties and stable 
 it('C13 pure ranking never reads armies, technology, resources or private intelligence',()=>{
  const w=empire(join(groups())),expected=[legionRankings(w),empireRankings(w)];
  for(const c of w.cities)for(const key of ['military','stock'])Object.defineProperty(c,key,{get(){throw Error('private '+key);}});
- for(const f of w.factions)Object.defineProperty(f,'technology',{get(){throw Error('private tech');}});
+ for(const f of w.factions)Object.defineProperty(f,'techIds',{get(){throw Error('private tech');}});
  Object.defineProperty(w,'armies',{get(){throw Error('private armies');}});
  expect([legionRankings(w),empireRankings(w)]).toEqual(expected);
 });

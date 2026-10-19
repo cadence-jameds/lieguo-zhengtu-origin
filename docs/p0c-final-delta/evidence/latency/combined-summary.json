@@ -1,0 +1,20 @@
+{
+  "baselineRole": "PR21 cc4f332 before final delta; legacy main key is not repository main",
+  "environment": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpuModels": [
+      "INTEL(R) XEON(R) PLATINUM 8573C"
+    ],
+    "cpuQuota": "200000 100000",
+    "memoryLimit": "8589934592",
+    "logicalCPUs": 3,
+    "totalMemory": 10452471808,
+    "node": "v24.19.0"
+  },
+  "method": "Original 24-pass ABBA, 15 attempts/pass, 30 planned per variant/group; only below-target groups receive an additional matched five-command ABBA. Original failed attempts retained.",
+  "primaryRuns": 24,
+  "supplementaryRuns": 4,
+  "originalPrimarySummary": "primary/summary.json (unchanged)",
+  "primaryHarnessErratum": "Legacy summary text says eight attempts per family; actual 15/pass means six per variant/group. New statistics use actual raw counts."
+}

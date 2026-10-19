@@ -1,0 +1,2513 @@
+{
+  "testedRelease": {
+    "format": 1,
+    "version": "0.30.65",
+    "date": "2026-10-20",
+    "title": "本機建置預覽",
+    "commitSha": "cc4f332dbdb6691275138d0ded88160200fb34ce",
+    "contentSha": "cc4f332dbdb6691275138d0ded88160200fb34ce",
+    "dirty": true,
+    "history": [
+      {
+        "title": "本機建置預覽",
+        "notes": [
+          "本機尚未提交的變更，正式更新資訊以合併後建置為準。"
+        ],
+        "version": "0.30.65",
+        "date": "2026-10-20",
+        "commitSha": "cc4f332dbdb6691275138d0ded88160200fb34ce"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.64",
+        "date": "2026-10-19",
+        "commitSha": "a002ff21398e08a2410eee4077957c549d57b238"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.63",
+        "date": "2026-10-19",
+        "commitSha": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.62",
+        "date": "2026-10-19",
+        "commitSha": "c902fde7d20e46d0ef5f90192569a45c11ce95af"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.61",
+        "date": "2026-10-19",
+        "commitSha": "a7f168ccc6baef381094a043f9e5f2213305cf06"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.60",
+        "date": "2026-10-19",
+        "commitSha": "401f2c3174072d1889b98e69f7c4ccdd3bb8a130"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.59",
+        "date": "2026-10-19",
+        "commitSha": "bbe66fc89d3900cc473608e454163aa2d365b7b9"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.58",
+        "date": "2026-10-19",
+        "commitSha": "2b6148f6bce11b5ce5b451b438db171b4334ed04"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.57",
+        "date": "2026-10-19",
+        "commitSha": "f6956f482d4afaebbf0a35af2f0c232c0770146f"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.56",
+        "date": "2026-10-19",
+        "commitSha": "e99a413b1a52eb7f5941be7c5978d2ae8305a92b"
+      },
+      {
+        "title": "AI 五策略性格加權動態進攻",
+        "notes": [
+          "AI 每次符合軍事行動條件時，會依性格從五種策略重新選擇進攻方式。",
+          "附近仍有敵城時，部分 AI 策略也會評估普通野外據點，並維持正常行軍、戰鬥與戰利品返城。",
+          "多線出征會逐筆確認實際兵力與守軍預留，避免重複使用同一批部隊。"
+        ],
+        "version": "0.30.55",
+        "date": "2026-10-19",
+        "commitSha": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7"
+      },
+      {
+        "title": "更新安全恢復與線上版本資訊同步",
+        "notes": [
+          "更新元件失效時會嘗試安全恢復，無法恢復則提供清楚的繁體中文重試說明。",
+          "保存完成確認前不會啟用新版，更新失敗會明確區分尚未保存、保存未確認與已保存狀態。",
+          "專案首頁會自動展示線上版本、更新重點與部署紀錄，並提供可讀文字的歷史更新頁。"
+        ],
+        "version": "0.30.54",
+        "date": "2026-10-17",
+        "commitSha": "06c4cb93779f1f679bb77470515fd8aee1c42de9"
+      },
+      {
+        "title": "軍團、治理與外交介面整合",
+        "notes": [
+          "新增獨立軍團頁，透過總覽、成員、聯防、聯軍與管理分頁操作自己的軍團。",
+          "天下勢力可瀏覽帝國、所有軍團與領主，並保留他方軍事資料的權限限制。",
+          "多城治理改為城市列表與單城設定表單，套用前核對城市狀態並支援更新後重試。",
+          "新增外交記事分類，支援每頁五十則、閱讀與清理，分頁總數維持正確。",
+          "工匠團集中於軍隊特殊單位介面，可選擇與轉移，同／異文明均可免費興建對應文明城堡 Lv1。",
+          "更新六文明開局文案、所選城市的建造與訓練佇列摘要，並改善手機建築卡片的成本排版。"
+        ],
+        "version": "0.30.53",
+        "date": "2026-10-17",
+        "commitSha": "3d1760864f3b9d9a55108c80225764ef8e3099e1"
+      },
+      {
+        "title": "版本與更新資訊自動同步",
+        "notes": [
+          "首頁與戰役設定共用版本、更新日期及更新重點，可離線查看近期與過往紀錄。",
+          "檢查更新可辨識相同版號的不同建置，仍會先安全保存進度再載入更新。"
+        ],
+        "version": "0.30.52",
+        "date": "2026-10-16",
+        "commitSha": "7e52d06c3ca83b1ba99d6f28346e0735b0d29aa2"
+      },
+      {
+        "title": "工匠與城市失守修正",
+        "pr": 3,
+        "notes": [
+          "工匠移動途中目的城市失守時，會嘗試改往其他合法可達城市；全部不可達時安全結束移動。",
+          "城市被征服時，尚未出發的待命聯軍依核准規則清算，不再從敵方城市非法出發。",
+          "同文明與外文明工匠團可免費興建對應文明城堡 Lv1，正常工期與建築前置不變。",
+          "新建立的水域行軍路線使用陸地兩倍耗時，既有在途任務保留原抵達時間。",
+          "修正城市失守時非戰鬥單位與失效工匠工程的清算。"
+        ],
+        "version": "0.30.51",
+        "date": "2026-10-16",
+        "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7"
+      },
+      {
+        "version": "0.30.50",
+        "date": "2026-10-14",
+        "title": "玩家指令與離線載入改善",
+        "notes": [
+          "改善長時間離線後的世界載入速度。",
+          "背景世界持續推進時，玩家操作可安全重新驗證，減少反覆刷新。"
+        ],
+        "commitSha": "7c52ab738e1ed8be2416c9e9fb95db32dceb020f"
+      }
+    ],
+    "legacyNotes": [
+      "玩家操作跨 AI 背景更新時，相關城市條件未變便以最新世界安全重新驗證，減少反覆要求刷新；戰鬥與外交仍維持嚴格保護。",
+      "帝國成立與加入邀請分別綁定意圖及原帝國；接受時重驗資格，舊未綁定邀請由發起者重新確認。",
+      "帝國剩一軍團持續存在；零軍團立即解除並共用清理失效邀請、工程及外交，不退款或免費繼承。",
+      "戰報於部隊損失下方顯示建築／城牆最終損失，移除逐回合攻城紀錄，保留總回合與真正終戰原因。",
+      "v91征服改為主戰與最多12回合持續攻城，當級牆傷於同一圍城內累積，戰術倍率仍封頂10倍。",
+      "行軍頁可查看交戰中／攻城中部隊的即時戰況；本城駐軍守城也有戰況入口。",
+      "戰中只更新同場摘要，終戰才產生一份完整戰報，清楚說明城牆未破與征服失敗原因。",
+      "援軍與訓練完成可暫停攻城、重回主戰；投石機每戰役只結算一次破壞批次。",
+      "B5測試台同步支援逐事件攻城、剩餘回合、即時战況及讀檔續戰。",
+      "首頁更新狀態、檢查更新與保存並更新移至更新日誌上方。",
+      "電腦版左上方遊戲名稱下方顯示始源與目前載入版本。",
+      "恢復每分鐘、返回頁面與恢復連線時檢查更新；首頁與遊戲內可保存進度並載入新版，不必關閉網頁。",
+      "B5測試地圖填滿容器，沿用正式地圖工具與比例標籤；原戰役與測試台地形快取互不替換。",
+      "建造條件維持單行，未達項目保留#FF0000鮮紅、改回一般字重；已達仍為綠色一般字重。",
+      "開發者模式新增B5戰鬥測試台，另存測試世界與戰報，原戰役照常運作。",
+      "可選AI城市、空城／普通守軍／混編大軍／城牆／反偵察情境，設定玩家兵力、攻城器與敵城庫存。",
+      "可模擬一次敵軍掠奪或征服，逐事件檢查正式戰鬥、攻城、城市易主與玩家守城。",
+      "獨立測試備份支援存檔重讀與中途續接；50／200倍速度的戰術倍率仍封頂10倍，測試庫存保持有限。",
+      "野外資源據點不再清除背景樹木與地景，沿用DEMO世界地圖只替城市清場的顯示方式。",
+      "建造頁移除重複前置清單，單行條件逐項顯示已達綠色／未達紅色。",
+      "完整山脈輪廓同步為正式不可通行／不可建城地形；舊存檔避讓城市、據點與在途路線，保存固定山脈配置。",
+      "世界地圖山脈參考DEMO v0.30.2完整山形，移除切平山峰的格線裁切；保留大型重疊山體與完整山峰。",
+      "v90城市偵察取消情報類型選單，只需選擇斥候數量。",
+      "成功偵察一次保存同時點的四資源、駐軍、援軍、城牆與合法城防，存活斥候返回來源城市後才交付。",
+      "偵察戰報與地圖情報頁共用完整快照，保留現實觀測時間；失敗仍為零情報。",
+      "舊在途情報模式可正常讀檔；未抵達任務統一取得完整快照，舊部分歷史紀錄不補推。",
+      "偵察戰報改用斥候觀察城市的專屬圖片。",
+      "建築資訊頁將前置、成本與操作移到效果說明上方；前置皆滿足時預設收合。",
+      "建造頁名稱可查看資訊，時代與最高等級移至名稱右側；條件以紅／綠色標示。",
+      "選取光暈置於地圖建築下方；施工進度獨立浮在城市建築上方。",
+      "野外戰報採用據點實際名稱，金礦統一顯示黃金礦脈。",
+      "維持既有野外偵察、生成、戰利品、重生與Formal存檔架構；本輪未開始B6／B7／B8。",
+      "20種城市建築共用資訊頁：效果、前置、成本、工期及施工狀態，城郊資源田仍獨立。",
+      "City正式晉升移至市政廳；城市中心只保留時代晉升。",
+      "v88正式City永久倉庫容量＋10%，先加總全部倉庫；城市中心固定800不加成。",
+      "市政廳整合晉升進度、勢力行政網路、統治初定與永久人口里程碑。",
+      "地洞統一更名為地庫，保護機制沿用正式規則。",
+      "城堡保留來源文明，既有外文明生產及未接入政治操作顯示唯讀／尚未開放。",
+      "學院、鐵匠鋪與軍事建築顯示科技或兵種資格；一般施工取消退款維持50%／100%。",
+      "資源田Lv10即顯示進階美術，施工預覽同步。",
+      "手機導覽沿用DEMO順序：地圖、城市、軍隊、戰報、科技、勢力、治理。",
+      "v87盜賊營地資源池改為普通據點1.5倍；四資源各15%～35%，依種子、槽位與世代固定，守軍仍1.2倍。",
+      "時代晉升移至城市中心資訊頁，頂部時代入口直接開啟城市中心。",
+      "建築資訊保留等級，移除重複名稱；升級與拆除按鈕平均排列。",
+      "學院顯示目前與下一級研究時間縮短百分比，精銳化研究除外。",
+      "城市中心顯示目前與下一級施工時間縮短百分比。",
+      "野外地塊名稱、等級與座標合併為一行。",
+      "駐軍情報年齡與資源觀測日期改用現實時間，切換世界速度不改變既有觀測時間。",
+      "城內自由槽建築可整座拆除，每級15世界分鐘且不退建材；保留人口，住房不足時停止成長。",
+      "軍隊徵兵恢復DEMO兵種清單、可招募狀態與數量操作，移除解散兵種設定。",
+      "開發者模式直接留在目前戰役：資源近乎無限、50／200倍世界時間、20世界小時保護罩；最外層金框優先於藍框。",
+      "戰報沿用DEMO緊湊列表、損失表與未讀閃爍通知，日期與觀測時間統一顯示現實時間。",
+      "世界地圖城市圖示移除圍牆，沿用DEMO都市格式及保護罩。",
+      "行軍與偵察改用DEMO三角部隊、敵我色彩、虛線路線與持續移動；征服戰術速度仍封頂10倍。",
+      "野外地塊資訊移除等級、戰利品、重生與載量說明段落。",
+      "野外資源據點開放斥候偵察，固定取得資源與軍隊，沒有情報類型選單；情報返城後顯示。",
+      "所有地塊資訊窗改用名稱旁的☆／★收藏；移除底部收藏及返回地圖按鈕，保留右上關閉。",
+      "世界地圖恢復 Demo 資訊窗與獨立偵察／掠奪／佔領按鈕；在原地圖編組出征，顯示路線與單程時間。",
+      "偵察情報由已保存戰報讀取，保留各次觀測時間；未偵察城防不顯示敵方即時數值。",
+      "v86 一般施工取消：施工中50%、排隊100%；軍事訓練與拓殖整備沿用既有規則。",
+      "B5：正式行軍、掠奪、多回合征服、原子攻城、斥候快照、援軍駐防與戰報；50倍速度的征服戰術倍率封頂10倍。",
+      "戰鬥與結算身分納入正式存檔、離線排程與Recovery；野外432個槽位可擊破、冷卻並決定性重生。",
+      "城牆Lv0～15接入正式施工、佇列、取消、存檔與Recovery；復用DEMO城防美術，完工等級只以wallLevel保存。",
+      "v85規格驗證台：獨立規格與程式逐項比對、公式拆解、正反例試玩、操作紀錄與報告；揭露尚未完成項目，不自動宣稱Gate通過。",
+      "新增B2／B3／B4開發者模式：獨立測試情境、五倍數與六文明檢查、快速推進、存檔重讀、Recovery及驗證報告。",
+      "全區低倍率採小型城市標記；一般視距保留v0.30.2圖示、野外據點與標示門檻，恢復深色外圍、地圖邊界及首幀完整底圖。",
+      "倒數、進度與資源數字獨立更新；一般保存每10秒合併一次，完成事件優先提交，保留操作中的視窗與輸入。",
+      "背景刷新不再解除操作等待；純時鐘版本差異同步後重試一次，實際事件與其他操作仍需重新確認。1／3／6／10／50倍逐一驗證。",
+      "修正高倍速短工程等待10秒才更新的問題；到期事件優先提交，建設與訓練倒數統一顯示現實時間。",
+      "手機右上角改顯示人口，縮短城市選單；農林石金摘要與名稱開關排在城郊右側。斥候移到駐軍列最左邊。",
+      "文明衛隊的頂部駐軍圖示移到騎士右邊，手機與桌機順序一致。",
+      "頂部駐軍圖示改為扁平彩色設計，以色系區分兵種類別並保留各自形狀。",
+      "新兵種分類美術只套用頂部駐軍列；徵兵恢復原兵種美術，建造按民生／經濟／軍事／科技分頁並修正圖片位置。",
+      "野外據點恢復沃野農莊／山林木寨／採石場／黃金礦脈／盜賊營地；開啟標示顯示糧木石金寇。",
+      "v85：城堡生產可持有的拓殖隊，建城後消耗；保留正式成本、400移民與20護衛。",
+      "六文明白話介紹與城堡兵種說明，擴充文化姓名及城市名稱。",
+      "穀木石金恢復DEMO各自文字色彩；11條駐軍分類採簡圖。",
+      "城市建設與軍隊分開還原手機及桌機排版，林地、金礦、石場、農田名稱一致。",
+      "地圖恢復持續選取光暈、城市與空地資訊窗；XY定位保留倍率，全區符合384世界。"
+    ]
+  },
+  "browser": "154.0.8037.57",
+  "hours": 168,
+  "mobile": false,
+  "cases": [
+    {
+      "speed": 1,
+      "mobile": false,
+      "hours": 168,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:e830e2be-ae85-407b-8912-7d72e7c42236",
+          "type": "city.rename",
+          "start": 6001.5999999940395,
+          "postedAt": 6006,
+          "receivedAt": 6032.899999991059,
+          "ackAt": 7075.399999991059,
+          "status": "committed",
+          "renderAt": 7200.0999999940395,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:e830e2be-ae85-407b-8912-7d72e7c42236",
+            "queueMs": 223.69999998807907,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 8,
+                "totalMs": 171.1999999731779,
+                "maxMs": 56.19999998807907
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 207.09999999403954,
+                "maxMs": 86
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 165.19999998807907,
+                "maxMs": 165.19999998807907
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 116.3999999910593,
+                "maxMs": 116.3999999910593
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 117.8999999910593,
+                "maxMs": 117.8999999910593
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 4.5999999940395355,
+                "maxMs": 4.5999999940395355
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 44,
+                "maxMs": 44
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 9.399999991059303,
+                "maxMs": 9.399999991059303
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 72.29999999701977,
+                "maxMs": 72.29999999701977
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 62.900000005960464,
+                "maxMs": 62.900000005960464
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 34.29999999701977,
+                "maxMs": 34.29999999701977
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 108.40000000596046,
+                "maxMs": 108.40000000596046
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 159,
+                "maxMs": 159
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 40.599999994039536,
+                "maxMs": 40.599999994039536
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 53.69999998807907,
+                "maxMs": 53.69999998807907
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 43.5,
+                "maxMs": 43.5
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 51.70000000298023,
+                "maxMs": 51.70000000298023
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 24.299999997019768,
+                "maxMs": 24.299999997019768
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 37.8999999910593,
+                "maxMs": 37.8999999910593
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 531.9000000059605,
+                "maxMs": 531.9000000059605
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 531.9000000059605,
+                "maxMs": 531.9000000059605
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 14.699999988079071,
+                "maxMs": 14.599999994039536
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 887.5,
+                "maxMs": 887.5
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 1073.7999999970198,
+          "renderMs": 1198.5
+        },
+        {
+          "id": "command:be80374c-4b03-4bff-9523-fc81706f4de0",
+          "type": "field.upgrade",
+          "start": 9877.59999999404,
+          "postedAt": 9879.5,
+          "receivedAt": 10002.59999999404,
+          "ackAt": 11289.39999999106,
+          "status": "committed",
+          "renderAt": 11415.29999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:be80374c-4b03-4bff-9523-fc81706f4de0",
+            "queueMs": 558.9000000059605,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 119.09999999403954,
+                "maxMs": 34.30000001192093
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 168.20000000298023,
+                "maxMs": 73.40000000596046
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 125.40000000596046,
+                "maxMs": 125.40000000596046
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 92.20000000298023,
+                "maxMs": 92.20000000298023
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 92.20000000298023,
+                "maxMs": 92.20000000298023
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 4,
+                "maxMs": 4
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 33.79999999701977,
+                "maxMs": 33.79999999701977
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.10000000894069672,
+                "maxMs": 0.10000000894069672
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 8.799999997019768,
+                "maxMs": 8.799999997019768
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 84.19999998807907,
+                "maxMs": 84.19999998807907
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 60.6000000089407,
+                "maxMs": 60.6000000089407
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 39.29999999701977,
+                "maxMs": 39.29999999701977
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 107.20000000298023,
+                "maxMs": 107.20000000298023
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 150.5,
+                "maxMs": 150.5
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 74.5,
+                "maxMs": 74.5
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 81.40000000596046,
+                "maxMs": 81.40000000596046
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 31.200000002980232,
+                "maxMs": 31.200000002980232
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 44,
+                "maxMs": 44
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 23.100000008940697,
+                "maxMs": 23.100000008940697
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 31.600000008940697,
+                "maxMs": 31.600000008940697
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 508.69999998807907,
+                "maxMs": 508.69999998807907
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 508.69999998807907,
+                "maxMs": 508.69999998807907
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 11,
+                "maxMs": 11
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 775.5999999940395,
+                "maxMs": 775.5999999940395
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1411.7999999970198,
+          "renderMs": 1537.7000000029802
+        },
+        {
+          "id": "command:a2cd4a10-23fd-4448-be8c-22d147529db5",
+          "type": "military.recruit",
+          "start": 14098.699999988079,
+          "postedAt": 14099.79999999702,
+          "receivedAt": 14155.59999999404,
+          "ackAt": 15629,
+          "status": "committed",
+          "renderAt": 16101.199999988079,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:a2cd4a10-23fd-4448-be8c-22d147529db5",
+            "queueMs": 570.7000000029802,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 132.59999999403954,
+                "maxMs": 40.30000001192093
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 221.20000000298023,
+                "maxMs": 101
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 119.5,
+                "maxMs": 119.5
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 146.3999999910593,
+                "maxMs": 146.3999999910593
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 146.3999999910593,
+                "maxMs": 146.3999999910593
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0,
+                "maxMs": 0
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 4.200000002980232,
+                "maxMs": 4.200000002980232
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 99.79999999701977,
+                "maxMs": 99.79999999701977
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 13.400000005960464,
+                "maxMs": 13.400000005960464
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 108.79999999701977,
+                "maxMs": 108.79999999701977
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 64.5,
+                "maxMs": 64.5
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 34.19999998807907,
+                "maxMs": 34.19999998807907
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 105.8999999910593,
+                "maxMs": 105.8999999910593
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 162.3999999910593,
+                "maxMs": 162.3999999910593
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 60.599999994039536,
+                "maxMs": 60.599999994039536
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 67.59999999403954,
+                "maxMs": 67.59999999403954
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 35.29999999701977,
+                "maxMs": 35.29999999701977
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 47.79999999701977,
+                "maxMs": 47.79999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 18.400000005960464,
+                "maxMs": 18.400000005960464
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 28.099999994039536,
+                "maxMs": 28.099999994039536
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 637.2999999970198,
+                "maxMs": 637.2999999970198
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 637.4000000059605,
+                "maxMs": 637.4000000059605
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 11.299999997019768,
+                "maxMs": 11.200000002980232
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 958.7999999970198,
+                "maxMs": 958.7999999970198
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1530.300000011921,
+          "renderMs": 2002.5
+        },
+        {
+          "id": "command:4845ed88-b9e6-4afa-8f79-a07cb23fc724",
+          "type": "research.start",
+          "start": 19775.09999999404,
+          "postedAt": 19779.09999999404,
+          "receivedAt": 19828.39999999106,
+          "ackAt": 20624,
+          "status": "committed",
+          "renderAt": 20764.89999999106,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:4845ed88-b9e6-4afa-8f79-a07cb23fc724",
+            "queueMs": 37.099999994039536,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 141.6000000089407,
+                "maxMs": 42.70000000298023
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 206.7999999821186,
+                "maxMs": 80.29999999701977
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 141.3999999910593,
+                "maxMs": 141.3999999910593
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 105.70000000298023,
+                "maxMs": 105.70000000298023
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 105.70000000298023,
+                "maxMs": 105.70000000298023
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 4.9000000059604645,
+                "maxMs": 4.9000000059604645
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 5.200000002980232,
+                "maxMs": 5.200000002980232
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 82.1000000089407,
+                "maxMs": 82.1000000089407
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.19999998807907104,
+                "maxMs": 0.19999998807907104
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 7.799999997019768,
+                "maxMs": 7.799999997019768
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 69.3999999910593,
+                "maxMs": 69.3999999910593
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 78.80000001192093,
+                "maxMs": 78.80000001192093
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 37.79999999701977,
+                "maxMs": 37.79999999701977
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 123.40000000596046,
+                "maxMs": 123.40000000596046
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 187.09999999403954,
+                "maxMs": 187.09999999403954
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 31.700000002980232,
+                "maxMs": 31.700000002980232
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 45.79999999701977,
+                "maxMs": 45.79999999701977
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 33.3999999910593,
+                "maxMs": 33.3999999910593
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 46,
+                "maxMs": 46
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 25.600000008940697,
+                "maxMs": 25.600000008940697
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 36.400000005960464,
+                "maxMs": 36.400000005960464
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 559.2000000029802,
+                "maxMs": 559.2000000029802
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 559.2999999970198,
+                "maxMs": 559.2999999970198
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 10.299999997019768,
+                "maxMs": 10.299999997019768
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 868.7999999970198,
+                "maxMs": 868.7999999970198
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 848.9000000059605,
+          "renderMs": 989.7999999970198
+        },
+        {
+          "id": "command:b98b6a9c-3cb3-4367-9abf-52d3ca02277b",
+          "type": "army.dispatch",
+          "start": 24461,
+          "postedAt": 24463.79999999702,
+          "receivedAt": 24487,
+          "ackAt": 25302.39999999106,
+          "status": "committed",
+          "renderAt": 25431.59999999404,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:b98b6a9c-3cb3-4367-9abf-52d3ca02277b",
+            "queueMs": 0,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 131.7000000178814,
+                "maxMs": 49.400000005960464
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 219.3999999910593,
+                "maxMs": 110.3999999910593
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 153.29999999701977,
+                "maxMs": 153.29999999701977
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 149.30000001192093,
+                "maxMs": 149.30000001192093
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 149.30000001192093,
+                "maxMs": 149.30000001192093
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0,
+                "maxMs": 0
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 8.299999997019768,
+                "maxMs": 8.299999997019768
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 68,
+                "maxMs": 68
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 8,
+                "maxMs": 8
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 76.90000000596046,
+                "maxMs": 76.90000000596046
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 52.8999999910593,
+                "maxMs": 52.8999999910593
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 32.1000000089407,
+                "maxMs": 32.1000000089407
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 91.8999999910593,
+                "maxMs": 91.8999999910593
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 137.09999999403954,
+                "maxMs": 137.09999999403954
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 71.30000001192093,
+                "maxMs": 71.30000001192093
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 80.6000000089407,
+                "maxMs": 80.6000000089407
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 45.3999999910593,
+                "maxMs": 45.3999999910593
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 56.8999999910593,
+                "maxMs": 56.8999999910593
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 19.700000002980232,
+                "maxMs": 19.700000002980232
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 28.400000005960464,
+                "maxMs": 28.400000005960464
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 530.2999999970198,
+                "maxMs": 530.2999999970198
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 530.2999999970198,
+                "maxMs": 530.2999999970198
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 12,
+                "maxMs": 12
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 901.0999999940395,
+                "maxMs": 901.0999999940395
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 841.3999999910593,
+          "renderMs": 970.5999999940395
+        }
+      ],
+      "invalid": []
+    },
+    {
+      "speed": 10,
+      "mobile": false,
+      "hours": 168,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:489add90-099f-4607-826e-fd91cf8e4665",
+          "type": "city.rename",
+          "start": 5649.4000000059605,
+          "postedAt": 5651.5,
+          "receivedAt": 5665.0999999940395,
+          "ackAt": 6428.79999999702,
+          "status": "committed",
+          "renderAt": 6569,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:489add90-099f-4607-826e-fd91cf8e4665",
+            "queueMs": 0.09999999403953552,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 8,
+                "totalMs": 146.99999997019768,
+                "maxMs": 53.8999999910593
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 231.79999999701977,
+                "maxMs": 102.20000000298023
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 175.09999999403954,
+                "maxMs": 175.09999999403954
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 123.20000000298023,
+                "maxMs": 123.20000000298023
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 123.80000001192093,
+                "maxMs": 123.80000001192093
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 1.5999999940395355,
+                "maxMs": 1.5999999940395355
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 12.700000002980232,
+                "maxMs": 12.700000002980232
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 55.900000005960464,
+                "maxMs": 55.900000005960464
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 5.0999999940395355,
+                "maxMs": 5.0999999940395355
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 6.200000002980232,
+                "maxMs": 6.200000002980232
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 62.599999994039536,
+                "maxMs": 62.599999994039536
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 60.900000005960464,
+                "maxMs": 60.900000005960464
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 36,
+                "maxMs": 36
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 103.90000000596046,
+                "maxMs": 103.90000000596046
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 158.5,
+                "maxMs": 158.5
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 31.399999991059303,
+                "maxMs": 31.399999991059303
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 38.599999994039536,
+                "maxMs": 38.599999994039536
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 31.599999994039536,
+                "maxMs": 31.599999994039536
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 43.5,
+                "maxMs": 43.5
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 30,
+                "maxMs": 30
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 40.20000000298023,
+                "maxMs": 40.20000000298023
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 475.5,
+                "maxMs": 475.5
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 475.5,
+                "maxMs": 475.5
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 26.099999994039536,
+                "maxMs": 26
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 852.2999999970198,
+                "maxMs": 852.2999999970198
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 779.3999999910593,
+          "renderMs": 919.5999999940395
+        },
+        {
+          "id": "command:97a23624-dce3-4da0-b784-0aab385f3c1c",
+          "type": "field.upgrade",
+          "start": 9367.70000000298,
+          "postedAt": 9375.29999999702,
+          "receivedAt": 9550.59999999404,
+          "ackAt": 10448.5,
+          "status": "committed",
+          "renderAt": 10552.29999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:97a23624-dce3-4da0-b784-0aab385f3c1c",
+            "queueMs": 155.59999999403954,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 128.90000000596046,
+                "maxMs": 37.8999999910593
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 200.8999999910593,
+                "maxMs": 75.29999999701977
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 120.29999999701977,
+                "maxMs": 120.29999999701977
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 115.5,
+                "maxMs": 115.5
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 115.59999999403954,
+                "maxMs": 115.59999999403954
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.10000000894069672,
+                "maxMs": 0.10000000894069672
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 29.900000005960464,
+                "maxMs": 29.900000005960464
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 64.90000000596046,
+                "maxMs": 64.90000000596046
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 2.4000000059604645,
+                "maxMs": 2.4000000059604645
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 12.100000008940697,
+                "maxMs": 12.100000008940697
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 68.59999999403954,
+                "maxMs": 68.59999999403954
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 56.20000000298023,
+                "maxMs": 56.20000000298023
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 43.79999999701977,
+                "maxMs": 43.79999999701977
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 107.1000000089407,
+                "maxMs": 107.1000000089407
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 163.29999999701977,
+                "maxMs": 163.29999999701977
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 30.700000002980232,
+                "maxMs": 30.700000002980232
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 43.70000000298023,
+                "maxMs": 43.70000000298023
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 32,
+                "maxMs": 32
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 45.70000000298023,
+                "maxMs": 45.70000000298023
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 21,
+                "maxMs": 21
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 30.900000005960464,
+                "maxMs": 30.900000005960464
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 506.1000000089407,
+                "maxMs": 506.1000000089407
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 506.1000000089407,
+                "maxMs": 506.1000000089407
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 9.299999997019768,
+                "maxMs": 9.299999997019768
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 803,
+                "maxMs": 803
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1080.7999999970198,
+          "renderMs": 1184.5999999940395
+        },
+        {
+          "id": "command:9a4f19d5-016c-45a5-a8f2-d20c6f06766b",
+          "type": "military.recruit",
+          "start": 13599,
+          "postedAt": 13600.90000000596,
+          "receivedAt": 13639.20000000298,
+          "ackAt": 14657.59999999404,
+          "status": "committed",
+          "renderAt": 15118.59999999404,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:9a4f19d5-016c-45a5-a8f2-d20c6f06766b",
+            "queueMs": 29.5,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 156.79999996721745,
+                "maxMs": 51.20000000298023
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 248.8999999910593,
+                "maxMs": 107.1000000089407
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 132.29999999701977,
+                "maxMs": 132.29999999701977
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 165.79999999701977,
+                "maxMs": 165.79999999701977
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 165.79999999701977,
+                "maxMs": 165.79999999701977
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0,
+                "maxMs": 0
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 5.399999991059303,
+                "maxMs": 5.399999991059303
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 112.40000000596046,
+                "maxMs": 112.40000000596046
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 11.299999997019768,
+                "maxMs": 11.299999997019768
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 100.90000000596046,
+                "maxMs": 100.90000000596046
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 54.30000001192093,
+                "maxMs": 54.30000001192093
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 46.599999994039536,
+                "maxMs": 46.599999994039536
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 109.70000000298023,
+                "maxMs": 109.70000000298023
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 176.8999999910593,
+                "maxMs": 176.8999999910593
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 52.599999994039536,
+                "maxMs": 52.599999994039536
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 78.59999999403954,
+                "maxMs": 78.59999999403954
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 39.1000000089407,
+                "maxMs": 39.1000000089407
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 52.20000000298023,
+                "maxMs": 52.20000000298023
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 22.200000002980232,
+                "maxMs": 22.200000002980232
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 32,
+                "maxMs": 32
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 688.5,
+                "maxMs": 688.5
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 688.5,
+                "maxMs": 688.5
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 11.299999997019768,
+                "maxMs": 11.299999997019768
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 1038.199999988079,
+                "maxMs": 1038.199999988079
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1058.5999999940395,
+          "renderMs": 1519.5999999940395
+        },
+        {
+          "id": "command:c321d071-daa0-4e62-a384-f5e419d735dd",
+          "type": "research.start",
+          "start": 18624.70000000298,
+          "postedAt": 18627,
+          "receivedAt": 18648.59999999404,
+          "ackAt": 19533.09999999404,
+          "status": "committed",
+          "renderAt": 19668.29999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:c321d071-daa0-4e62-a384-f5e419d735dd",
+            "queueMs": 0,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 186.19999998807907,
+                "maxMs": 63.79999999701977
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 196.8999999910593,
+                "maxMs": 79.79999999701977
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 142.8999999910593,
+                "maxMs": 142.8999999910593
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 135.20000000298023,
+                "maxMs": 135.20000000298023
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 135.20000000298023,
+                "maxMs": 135.20000000298023
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.10000000894069672,
+                "maxMs": 0.10000000894069672
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 12,
+                "maxMs": 12
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 68.6000000089407,
+                "maxMs": 68.6000000089407
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.20000000298023224,
+                "maxMs": 0.20000000298023224
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 11.099999994039536,
+                "maxMs": 11.099999994039536
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 85.20000000298023,
+                "maxMs": 85.20000000298023
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 82.70000000298023,
+                "maxMs": 82.70000000298023
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 50.1000000089407,
+                "maxMs": 50.1000000089407
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 139.80000001192093,
+                "maxMs": 139.80000001192093
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 192.70000000298023,
+                "maxMs": 192.70000000298023
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 29.5,
+                "maxMs": 29.5
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 40.79999999701977,
+                "maxMs": 40.79999999701977
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 45.5,
+                "maxMs": 45.5
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 59.1000000089407,
+                "maxMs": 59.1000000089407
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 49.79999999701977,
+                "maxMs": 49.79999999701977
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 60.5,
+                "maxMs": 60.5
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 626.2000000029802,
+                "maxMs": 626.2000000029802
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 626.3000000119209,
+                "maxMs": 626.3000000119209
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 11.299999982118607,
+                "maxMs": 11.199999988079071
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 969.8999999910593,
+                "maxMs": 969.8999999910593
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 908.3999999910593,
+          "renderMs": 1043.5999999940395
+        },
+        {
+          "id": "command:013ee7a6-c61a-429b-a4e6-61b346f878d5",
+          "type": "army.dispatch",
+          "start": 23441.59999999404,
+          "postedAt": 23446.5,
+          "receivedAt": 23458.70000000298,
+          "ackAt": 24249.5,
+          "status": "committed",
+          "renderAt": 24368.20000000298,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:013ee7a6-c61a-429b-a4e6-61b346f878d5",
+            "queueMs": 0.10000000894069672,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 134.90000000596046,
+                "maxMs": 50.6000000089407
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 190.2000000178814,
+                "maxMs": 82.1000000089407
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 146.80000001192093,
+                "maxMs": 146.80000001192093
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 122,
+                "maxMs": 122
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 122,
+                "maxMs": 122
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 14.5,
+                "maxMs": 14.5
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 68.40000000596046,
+                "maxMs": 68.40000000596046
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0,
+                "maxMs": 0
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 5.5,
+                "maxMs": 5.5
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 71.5,
+                "maxMs": 71.5
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 55.8999999910593,
+                "maxMs": 55.8999999910593
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 41.70000000298023,
+                "maxMs": 41.70000000298023
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 104.59999999403954,
+                "maxMs": 104.59999999403954
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 153.70000000298023,
+                "maxMs": 153.70000000298023
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 60.20000000298023,
+                "maxMs": 60.20000000298023
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 69.30000001192093,
+                "maxMs": 69.30000001192093
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 39.29999999701977,
+                "maxMs": 39.29999999701977
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 52.79999999701977,
+                "maxMs": 52.79999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 20.799999997019768,
+                "maxMs": 20.799999997019768
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 31.399999991059303,
+                "maxMs": 31.399999991059303
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 529.7999999970198,
+                "maxMs": 529.7999999970198
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 529.7999999970198,
+                "maxMs": 529.7999999970198
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 11.299999997019768,
+                "maxMs": 11.199999988079071
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 861.3999999910593,
+                "maxMs": 861.3999999910593
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 807.9000000059605,
+          "renderMs": 926.6000000089407
+        }
+      ],
+      "invalid": []
+    },
+    {
+      "speed": 50,
+      "mobile": false,
+      "hours": 168,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:6d291a25-df3f-45de-a2a5-05d034c2f3ff",
+          "type": "city.rename",
+          "start": 6180.20000000298,
+          "postedAt": 6184.70000000298,
+          "receivedAt": 6377,
+          "ackAt": 7711.29999999702,
+          "status": "committed",
+          "renderAt": 7825.79999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:6d291a25-df3f-45de-a2a5-05d034c2f3ff",
+            "queueMs": 563.1000000089407,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 12,
+                "totalMs": 126.49999998509884,
+                "maxMs": 37.79999999701977
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 2,
+                "totalMs": 126.30000001192093,
+                "maxMs": 120.90000000596046
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 208.2000000178814,
+                "maxMs": 76.40000000596046
+              },
+              "formal/reducer.ts.advanceFormalCooperative": {
+                "count": 1,
+                "totalMs": 142.5,
+                "maxMs": 142.5
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 120.90000000596046,
+                "maxMs": 120.90000000596046
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 5.199999988079071,
+                "maxMs": 5.199999988079071
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 49.69999998807907,
+                "maxMs": 49.69999998807907
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 7.399999991059303,
+                "maxMs": 7.399999991059303
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 70.29999999701977,
+                "maxMs": 70.29999999701977
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 45.5,
+                "maxMs": 45.5
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 32.70000000298023,
+                "maxMs": 32.70000000298023
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 85.09999999403954,
+                "maxMs": 85.09999999403954
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 145.30000001192093,
+                "maxMs": 145.30000001192093
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 66.59999999403954,
+                "maxMs": 66.59999999403954
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 79.40000000596046,
+                "maxMs": 79.40000000596046
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 32.20000000298023,
+                "maxMs": 32.20000000298023
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 44.79999999701977,
+                "maxMs": 44.79999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 23.099999994039536,
+                "maxMs": 23.099999994039536
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 34.79999999701977,
+                "maxMs": 34.79999999701977
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 503.70000000298023,
+                "maxMs": 503.70000000298023
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 503.79999999701977,
+                "maxMs": 503.79999999701977
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 12.799999997019768,
+                "maxMs": 12.700000002980232
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 824.7999999970198,
+                "maxMs": 824.7999999970198
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 1531.0999999940395,
+          "renderMs": 1645.5999999940395
+        },
+        {
+          "id": "command:23a9eece-832c-4932-a7dd-987d677c70d0",
+          "type": "field.upgrade",
+          "start": 11871.20000000298,
+          "postedAt": 11873,
+          "receivedAt": 11963.29999999702,
+          "ackAt": 13411.29999999702,
+          "status": "committed",
+          "renderAt": 13680.29999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:23a9eece-832c-4932-a7dd-987d677c70d0",
+            "queueMs": 250.79999999701977,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 731,
+                "totalMs": 168.89999997615814,
+                "maxMs": 51.5
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 357.8999999910593,
+                "maxMs": 198.20000000298023
+              },
+              "formal/reducer.ts.advanceFormal": {
+                "count": 1,
+                "totalMs": 154.59999999403954,
+                "maxMs": 154.59999999403954
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 106.1000000089407,
+                "maxMs": 106.1000000089407
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 106.1000000089407,
+                "maxMs": 106.1000000089407
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0,
+                "maxMs": 0
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 4.9000000059604645,
+                "maxMs": 4.9000000059604645
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 91,
+                "maxMs": 91
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 3,
+                "maxMs": 3
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 11.5,
+                "maxMs": 11.5
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 105.29999999701977,
+                "maxMs": 105.29999999701977
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 67.1000000089407,
+                "maxMs": 67.1000000089407
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 52.19999998807907,
+                "maxMs": 52.19999998807907
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 128.1000000089407,
+                "maxMs": 128.1000000089407
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 326.30000001192093,
+                "maxMs": 326.30000001192093
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 35.69999998807907,
+                "maxMs": 35.69999998807907
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 80.09999999403954,
+                "maxMs": 80.09999999403954
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 50.8999999910593,
+                "maxMs": 50.8999999910593
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 86.79999999701977,
+                "maxMs": 86.79999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 86.19999998807907,
+                "maxMs": 86.19999998807907
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 121.5,
+                "maxMs": 121.5
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 990.7999999970198,
+                "maxMs": 990.7999999970198
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 990.7999999970198,
+                "maxMs": 990.7999999970198
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 14.599999994039536,
+                "maxMs": 14.599999994039536
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 1391.5999999940395,
+                "maxMs": 1391.5999999940395
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1540.0999999940395,
+          "renderMs": 1809.0999999940395
+        },
+        {
+          "id": "command:9eaddb64-2dbd-4e68-818c-7809520dbe04",
+          "type": "military.recruit",
+          "start": 23608.79999999702,
+          "postedAt": 23610,
+          "receivedAt": 23696.29999999702,
+          "ackAt": 25779.09999999404,
+          "status": "committed",
+          "renderAt": 27009.29999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:9eaddb64-2dbd-4e68-818c-7809520dbe04",
+            "queueMs": 138.20000000298023,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 733,
+                "totalMs": 333.50000001490116,
+                "maxMs": 158.90000000596046
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 369.29999999701977,
+                "maxMs": 135.6000000089407
+              },
+              "formal/reducer.ts.advanceFormalCooperative": {
+                "count": 1,
+                "totalMs": 260.80000001192093,
+                "maxMs": 260.80000001192093
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 1,
+                "totalMs": 289,
+                "maxMs": 289
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 289,
+                "maxMs": 289
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.10000000894069672,
+                "maxMs": 0.10000000894069672
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 10.200000002980232,
+                "maxMs": 10.200000002980232
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 102.1000000089407,
+                "maxMs": 102.1000000089407
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 13.099999994039536,
+                "maxMs": 13.099999994039536
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 196.1000000089407,
+                "maxMs": 196.1000000089407
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 172.3999999910593,
+                "maxMs": 172.3999999910593
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 184.5,
+                "maxMs": 184.5
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 384.3999999910593,
+                "maxMs": 384.3999999910593
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 494.8999999910593,
+                "maxMs": 494.8999999910593
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 92.20000000298023,
+                "maxMs": 92.20000000298023
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 151.5,
+                "maxMs": 151.5
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 125.5,
+                "maxMs": 125.5
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 158.79999999701977,
+                "maxMs": 158.79999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 31.200000002980232,
+                "maxMs": 31.200000002980232
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 74.90000000596046,
+                "maxMs": 74.90000000596046
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 1391.5,
+                "maxMs": 1391.5
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 1391.5,
+                "maxMs": 1391.5
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 70.20000000298023,
+                "maxMs": 70.20000000298023
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 2134.0999999940395,
+                "maxMs": 2134.0999999940395
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 2170.2999999970198,
+          "renderMs": 3400.5
+        },
+        {
+          "id": "command:1cd0215c-49bb-4d80-ba80-1f8f33026522",
+          "type": "research.start",
+          "start": 38369.29999999702,
+          "postedAt": 38374.29999999702,
+          "receivedAt": 39416.79999999702,
+          "ackAt": 41102.90000000596,
+          "status": "committed",
+          "renderAt": 41487.29999999702,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:1cd0215c-49bb-4d80-ba80-1f8f33026522",
+            "queueMs": 354.70000000298023,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 736,
+                "totalMs": 191.8999999910593,
+                "maxMs": 80
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 3,
+                "totalMs": 195.79999999701977,
+                "maxMs": 192.3999999910593
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 346.3999999910593,
+                "maxMs": 145.09999999403954
+              },
+              "formal/reducer.ts.advanceFormalCooperative": {
+                "count": 1,
+                "totalMs": 213.90000000596046,
+                "maxMs": 213.90000000596046
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 192.3999999910593,
+                "maxMs": 192.3999999910593
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 0.09999999403953552,
+                "maxMs": 0.09999999403953552
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 16.299999997019768,
+                "maxMs": 16.299999997019768
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 131.90000000596046,
+                "maxMs": 131.90000000596046
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 0.4000000059604645,
+                "maxMs": 0.4000000059604645
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 58.1000000089407,
+                "maxMs": 58.1000000089407
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 118.09999999403954,
+                "maxMs": 118.09999999403954
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 103.59999999403954,
+                "maxMs": 103.59999999403954
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 68.79999999701977,
+                "maxMs": 68.79999999701977
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 183.19999998807907,
+                "maxMs": 183.19999998807907
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 277.69999998807907,
+                "maxMs": 277.69999998807907
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 60.8999999910593,
+                "maxMs": 60.8999999910593
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 79.8999999910593,
+                "maxMs": 79.8999999910593
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 44.5,
+                "maxMs": 44.5
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 64.29999999701977,
+                "maxMs": 64.29999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 21.700000002980232,
+                "maxMs": 21.700000002980232
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 38.20000000298023,
+                "maxMs": 38.20000000298023
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 921.4000000059605,
+                "maxMs": 921.4000000059605
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 921.4000000059605,
+                "maxMs": 921.4000000059605
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 18.900000005960464,
+                "maxMs": 18.900000005960464
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 1447.2000000029802,
+                "maxMs": 1447.2000000029802
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 2733.6000000089407,
+          "renderMs": 3118
+        },
+        {
+          "id": "command:65389346-2113-48dc-8050-6bbfd217818e",
+          "type": "army.dispatch",
+          "start": 68391.29999999702,
+          "postedAt": 68398.59999999404,
+          "receivedAt": 69470.59999999404,
+          "ackAt": 72711.29999999702,
+          "status": "committed",
+          "renderAt": 73255.90000000596,
+          "profile": {
+            "type": "deltaProfile",
+            "commandId": "command:65389346-2113-48dc-8050-6bbfd217818e",
+            "queueMs": 686.3999999910593,
+            "metrics": {
+              "global.structuredClone": {
+                "count": 715,
+                "totalMs": 421.19999998807907,
+                "maxMs": 126
+              },
+              "formal/reducer.ts.submitOrderDraft": {
+                "count": 3,
+                "totalMs": 372.29999999701977,
+                "maxMs": 369.90000000596046
+              },
+              "formal/schema.ts.validateFormalWorld": {
+                "count": 3,
+                "totalMs": 652.2000000178814,
+                "maxMs": 258.90000000596046
+              },
+              "formal/reducer.ts.advanceFormalCooperative": {
+                "count": 1,
+                "totalMs": 526.4000000059605,
+                "maxMs": 526.4000000059605
+              },
+              "formal/reducer.ts.submitFormalOrder": {
+                "count": 1,
+                "totalMs": 369.90000000596046,
+                "maxMs": 369.90000000596046
+              },
+              "idb.saves.get.authority.submit": {
+                "count": 1,
+                "totalMs": 5,
+                "maxMs": 5
+              },
+              "idb.saves.get.authority.request": {
+                "count": 1,
+                "totalMs": 21.5,
+                "maxMs": 21.5
+              },
+              "persistence.ts.authority": {
+                "count": 1,
+                "totalMs": 219,
+                "maxMs": 219
+              },
+              "idb.saves.get.current.submit": {
+                "count": 1,
+                "totalMs": 2,
+                "maxMs": 2
+              },
+              "idb.saves.get.current.request": {
+                "count": 1,
+                "totalMs": 18.600000008940697,
+                "maxMs": 18.600000008940697
+              },
+              "persistence.historyGuard": {
+                "count": 1,
+                "totalMs": 211.59999999403954,
+                "maxMs": 211.59999999403954
+              },
+              "canonical.stringify": {
+                "count": 1,
+                "totalMs": 174.19999998807907,
+                "maxMs": 174.19999998807907
+              },
+              "canonical.utf8": {
+                "count": 1,
+                "totalMs": 85.70000000298023,
+                "maxMs": 85.70000000298023
+              },
+              "formal/canonical.ts.digest": {
+                "count": 1,
+                "totalMs": 279.8999999910593,
+                "maxMs": 279.8999999910593
+              },
+              "formal/saveCodec.ts.encodeSave": {
+                "count": 1,
+                "totalMs": 472,
+                "maxMs": 472
+              },
+              "idb.backups.add.submit": {
+                "count": 1,
+                "totalMs": 95.5,
+                "maxMs": 95.5
+              },
+              "idb.backups.add.request": {
+                "count": 1,
+                "totalMs": 119.59999999403954,
+                "maxMs": 119.59999999403954
+              },
+              "idb.saves.put.current.submit": {
+                "count": 1,
+                "totalMs": 157.09999999403954,
+                "maxMs": 157.09999999403954
+              },
+              "idb.saves.put.current.request": {
+                "count": 1,
+                "totalMs": 179.29999999701977,
+                "maxMs": 179.29999999701977
+              },
+              "idb.saves.put.authority.submit": {
+                "count": 1,
+                "totalMs": 92.70000000298023,
+                "maxMs": 92.70000000298023
+              },
+              "idb.saves.put.authority.request": {
+                "count": 1,
+                "totalMs": 122.20000000298023,
+                "maxMs": 122.20000000298023
+              },
+              "persistence.ts.commit": {
+                "count": 1,
+                "totalMs": 1643.8999999910593,
+                "maxMs": 1643.8999999910593
+              },
+              "persistence.ts.save": {
+                "count": 1,
+                "totalMs": 1643.8999999910593,
+                "maxMs": 1643.8999999910593
+              },
+              "worker.postMessage": {
+                "count": 2,
+                "totalMs": 24.100000008940697,
+                "maxMs": 20
+              },
+              "worker.handle": {
+                "count": 1,
+                "totalMs": 2822.2999999970198,
+                "maxMs": 2822.2999999970198
+              }
+            }
+          },
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 4320,
+          "renderMs": 4864.600000008941
+        }
+      ],
+      "invalid": []
+    }
+  ],
+  "errors": [],
+  "method": "Real production controls; final pointerdown to native durable receipt and committed UI. Same checkpoint restored before every sample. Only player producers/stock/population/troops are explicit synthetic prerequisites; no AI decision/event frequency, number, orders or traits are changed.",
+  "inputs": [
+    {
+      "speed": 1,
+      "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+      "bytes": 5287838,
+      "agents": 99
+    },
+    {
+      "speed": 10,
+      "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+      "bytes": 5287839,
+      "agents": 99
+    },
+    {
+      "speed": 50,
+      "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+      "bytes": 5287839,
+      "agents": 99
+    }
+  ]
+}

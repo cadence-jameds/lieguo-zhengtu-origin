@@ -1,3 +1,5 @@
+> 本頁保留原1440次ABBA歷史；最新以PR21為before的1100次比較見[最終效能報告](../p0c-final-delta/PERFORMANCE_REPORT.md)。
+
 # C4 效能驗證：HOLD
 
 正式目標是玩家操作至合法處理、durable commit及畫面更新全部在1秒內。最終ABBA已重現超標，因此保持HOLD；功能／資料安全測試PASS不能代替延遲Gate。
