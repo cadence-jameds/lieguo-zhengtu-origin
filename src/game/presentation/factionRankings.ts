@@ -1,0 +1,3 @@
+import type {FormalWorld} from '../formal/model';
+/** Only public city ownership/population; never inspect military, resources or intelligence. */
+export function lordRankings(w:FormalWorld){const counts=new Map<string,{cities:number;population:number}>();for(const c of w.cities){const v=counts.get(c.ownerFactionId)??{cities:0,population:0};v.cities++;v.population+=c.population;counts.set(c.ownerFactionId,v);}let rank=0;return w.factions.map(f=>({faction:f,...(counts.get(f.id)??{cities:0,population:0})})).sort((a,b)=>b.cities-a.cities||b.population-a.population||a.faction.id.localeCompare(b.faction.id,'en')).map((r,i,rows)=>{if(i===0||r.cities!==rows[i-1].cities||r.population!==rows[i-1].population)rank=i+1;return {...r,rank};});}
