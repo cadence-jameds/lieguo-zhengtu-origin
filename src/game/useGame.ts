@@ -1,3 +1,4 @@
+import {feedbackForAck,uncertainFeedback,type CommandFeedback} from './commandFeedback';
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {effectiveSpeed} from './formal/playtest';
 import {withSaveLock} from './saveLock';
@@ -16,6 +17,8 @@ export function useGame(){
  const [offline,setOffline]=useState<OfflineSummary|null>(null);
  const [loadPhase,setLoadPhase]=useState('啟動世界引擎'),[loadProgress,setLoadProgress]=useState<number|null>(null),[loadEvents,setLoadEvents]=useState(0);
  const stopCurrentLoad=useRef<(()=>void)|null>(null);
+ const [feedback,setFeedback]=useState<CommandFeedback>({kind:'idle',text:''});
+ const commandTimer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
  const [error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false);
  const [transition,setTransition]=useState(''),[synced,setSynced]=useState(0),[reportCount,setReportCount]=useState(0),[reportEpoch,setReportEpoch]=useState(0),[reportStatus,setReportStatus]=useState({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}),[reportData,setReportData]=useState<{page:number;filter:string;count:number}|null>(null);
  const [backups,setBackups]=useState<{id:number;at:number;label:string;time:number}[]>([]),[reports,setReports]=useState<FormalReport[]>([]);
@@ -34,7 +37,7 @@ export function useGame(){
   saves.current.set(requestId,{resolve,reject,timer});requests.current.add(requestId);setBusy(true);worker.current.postMessage({type:'sync',requestId});
  }),[]);
  const send=useCallback((r:RuntimeRequest)=>{if(worker.current){const requestId=crypto.randomUUID();
-  if(r.type==='command'){if(commands.current.busy)return;commands.current.track(r.order.commandId);setNotice('指令受理中，正在確認並保存。');}
+  if(r.type==='command'){if(commands.current.busy)return;commands.current.track(r.order.commandId);setError('');setNotice('');setFeedback({kind:'sending',text:'指令已送出，等待引擎受理。'});clearTimeout(commandTimer.current);commandTimer.current=setTimeout(()=>{if(commands.current.matches(r.order.commandId))setFeedback(uncertainFeedback);},30000);}
   requests.current.add(requestId);setBusy(true);worker.current.postMessage({...r,requestId});}},[]);
  useEffect(()=>{
   let disposed=false,release:(()=>void)|undefined;const abort=new AbortController();
@@ -82,7 +85,7 @@ export function useGame(){
      if(r.type==='switched'||r.type==='switchFailed')commands.current.clear();
      if(r.type==='switchFailed'){setError(r.text);setStatus(r.world?'ready':'error');}else{setError('');setStatus('ready');}
     }
-    if(r.type==='error'){loading=false;clearWatchdog();if(r.requestId)finishSave(r.requestId,new Error(r.text));displayClock.stop();setError(r.text);setStatus('error');}
+    if(r.type==='error'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'error',text:r.text});loading=false;clearWatchdog();if(r.requestId)finishSave(r.requestId,new Error(r.text));displayClock.stop();setError(r.text);setStatus('error');}
     if(r.type==='notice'&&(!commands.current.busy||r.error))setNotice(r.text);
     if(r.type==='loaded'&&r.offline&&r.offline.elapsedRealMs>30000)setOffline(r.offline);
     if(r.type==='loaded'&&r.recovered)setNotice('已原子回復最近的有效正式回復點。');
@@ -91,8 +94,8 @@ export function useGame(){
     if(r.type==='reportPage'){setReports(r.data.rows);setReportCount(r.data.count);setReportData(r.data);if(r.data.counts)setReportStatus(r.data);}
     if(r.type==='switched')setTransition(r.transitionId??'');
     if(r.type==='synced'){finishSave(r.requestId);setSynced(n=>n+1);if(!commands.current.busy)setNotice('進度已保存。');}
-    if(r.type==='commandReceived'&&commands.current.matches(r.commandId))setNotice('指令已受理，正在確認並保存。');
-    if(r.type==='commandAck'){const a=r.ack as CommandAck;if(commands.current.acknowledge(a))setNotice(a.reason??(a.status==='duplicate'?'此命令已提交，不會重複執行。':a.status==='committed'?'命令已提交。':'命令未提交，請重新確認狀態。'));}
+    if(r.type==='commandReceived'&&commands.current.matches(r.commandId))setFeedback({kind:'pending',text:'指令已受理，正在確認並保存。'});
+    if(r.type==='commandAck'){const a=r.ack as CommandAck;if(commands.current.acknowledge(a)){clearTimeout(commandTimer.current);setNotice('');setFeedback(feedbackForAck(a));}}
     if(r.type==='export'){
      const url=URL.createObjectURL(new Blob([r.text],{type:'application/json'})),a=document.createElement('a');
      a.href=url;a.download='列國征途-formal-'+r.mode+'.realm-save';a.click();URL.revokeObjectURL(url);
@@ -101,12 +104,12 @@ export function useGame(){
    w.onerror=e=>{loading=false;clearWatchdog();rejectIntel();rejectSaves(new Error(e.message));requests.current.clear();commands.current.clear();displayClock.stop();setError(e.message);setStatus('error');setBusy(false);};w.postMessage({type:'load',stateMode:'patch'});
    await new Promise<void>(r=>{release=r;});w.terminate();worker.current=null;
   },()=>{setStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{if(!disposed){setError(String(e));setStatus('error');}});
-  return()=>{disposed=true;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
+  return()=>{clearTimeout(commandTimer.current);disposed=true;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
  },[]);
  useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume'});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away'});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
  // Capture the rendered world: a Worker message may update current.current
  // before React commits the new target level shown by a construction button.
  const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=world;if(!g||requests.current.busy||commands.current.busy)return;const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};send({type:'command',order,...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});},[send,world]);
  const importFile=async(file:File)=>{if(file.size>100*1024*1024){setError('存檔超過 100 MiB。');return;}send({type:'import',text:await file.text(),transitionId:crypto.randomUUID()});};
- return{reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
+ return{feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
 }

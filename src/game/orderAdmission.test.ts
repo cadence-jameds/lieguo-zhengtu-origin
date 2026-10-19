@@ -42,9 +42,9 @@ it('same-target levels and pending job identities remain exact while current res
  const resourceReject=submitFormalOrder(stockChanged,resourceOrder);expect(resourceReject.ack?.reason).toBe('城市實際庫存不足。');expect(resourceReject.world).toBe(stockChanged);
  const targetChanged=structuredClone(w);targetChanged.revision++;targetChanged.cities[0].buildings.center=2;
  expect(playerOrderWithBase(targetChanged,issued,base)).toBe(issued);
- for(let i=0;i<3;i++)w=submitFormalOrder(w,order(w,'fill-'+i,{type:'field.upgrade',cityId:city.id,slot:i})).world;
+ for(let i=0;i<5;i++)w=submitFormalOrder(w,order(w,'fill-'+i,{type:'field.upgrade',cityId:city.id,slot:i})).world;
  const fullBase=playerOrderBase(w,payload),fullIntent=order(w,'full',payload),clock={...w,time:w.time+1,revision:w.revision+1};
- const full=submitFormalOrder(clock,playerOrderWithBase(clock,fullIntent,fullBase));expect(full.ack?.reason).toContain('3 項上限');expect(full.world).toBe(clock);
+ const full=submitFormalOrder(clock,playerOrderWithBase(clock,fullIntent,fullBase));expect(full.ack?.reason).toContain('5 項上限');expect(full.world).toBe(clock);
  const pending=submitFormalOrder(clock,order(clock,'unused',{type:'building.upgrade',cityId:city.id,key:'center'}));expect(pending.ack?.status).toBe('rejected');
 });
 

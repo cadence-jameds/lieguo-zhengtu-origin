@@ -99,9 +99,9 @@ it('a newer foreground command stays a hard fence even when its ID looks autonom
 for(const kind of ['resources','queue'] as const)it(`current ${kind} conflict rejects without any draft spend or durable save`,async()=>{
  let w=isolatedAutonomyFixture(createFormalWorld({campaign:'conflict-'+kind,seed:90217}));const city=w.cities[0];
  if(kind==='resources')city.stock={food:0,wood:0,stone:0,gold:0};
- else for(let i=0;i<3;i++)w=submitFormalOrder(w,order(w,'fill-'+i,{type:'field.upgrade',cityId:city.id,slot:i})).world;
+ else for(let i=0;i<5;i++)w=submitFormalOrder(w,order(w,'fill-'+i,{type:'field.upgrade',cityId:city.id,slot:i})).world;
  await load(w);const before=JSON.stringify(w);click(w,'illegal',{type:'building.upgrade',cityId:city.id,key:'center'});await until(()=>done('illegal'));
- expect(ack('illegal').status).toBe('rejected');expect(ack('illegal').reason).toContain(kind==='resources'?'庫存不足':'3 項上限');
+ expect(ack('illegal').status).toBe('rejected');expect(ack('illegal').reason).toContain(kind==='resources'?'庫存不足':'5 項上限');
  expect(JSON.stringify(latest())).toBe(before);expect(storage.save).not.toHaveBeenCalled();
 });
 
