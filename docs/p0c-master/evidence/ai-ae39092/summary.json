@@ -1,0 +1,637 @@
+{
+  "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+  "run": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/39250046582",
+  "trigger": "Existing push workflow; no manual redispatch",
+  "jobs": [
+    {
+      "job": 118051367819,
+      "name": "90217-720-traits",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1667,
+      "deposits": {
+        "food": 1819516,
+        "wood": 1678769,
+        "stone": 1443273,
+        "gold": 1083910
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "traits",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051367830,
+      "name": "90217-720-A48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1645,
+      "deposits": {
+        "food": 1798430,
+        "wood": 1606973,
+        "stone": 1323744,
+        "gold": 872322
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "A48",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051367846,
+      "name": "90217-360-A48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 180,
+      "deposits": {
+        "food": 158127,
+        "wood": 97207,
+        "stone": 80675,
+        "gold": 33277
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "A48",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051367847,
+      "name": "90217-360-V2B48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 385,
+      "deposits": {
+        "food": 191580,
+        "wood": 178324,
+        "stone": 162950,
+        "gold": 115587
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V2B48",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051367900,
+      "name": "90217-720-V3Parallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1517,
+      "deposits": {
+        "food": 1601658,
+        "wood": 1590293,
+        "stone": 1381790,
+        "gold": 990241
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V3Parallel48",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051367934,
+      "name": "90217-360-equal",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 360,
+      "deposits": {
+        "food": 218371,
+        "wood": 148884,
+        "stone": 148499,
+        "gold": 108334
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "equal",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051367938,
+      "name": "104729-360-A48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 63,
+      "deposits": {
+        "food": 35367,
+        "wood": 29282,
+        "stone": 20818,
+        "gold": 11949
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "A48",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051367940,
+      "name": "90217-360-V3Parallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 370,
+      "deposits": {
+        "food": 238833,
+        "wood": 188820,
+        "stone": 198192,
+        "gold": 106302
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V3Parallel48",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051367960,
+      "name": "90217-360-WildParallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 297,
+      "deposits": {
+        "food": 196088,
+        "wood": 170852,
+        "stone": 156684,
+        "gold": 99982
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildParallel48",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051368001,
+      "name": "90217-720-equal",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1717,
+      "deposits": {
+        "food": 1757832,
+        "wood": 1896056,
+        "stone": 1588421,
+        "gold": 1132568
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "equal",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051368010,
+      "name": "104729-360-traits",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 361,
+      "deposits": {
+        "food": 262125,
+        "wood": 181812,
+        "stone": 128714,
+        "gold": 95387
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "traits",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051368032,
+      "name": "90217-720-WildPriority60",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1372,
+      "deposits": {
+        "food": 1384789,
+        "wood": 1386836,
+        "stone": 1121755,
+        "gold": 828707
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildPriority60",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051368037,
+      "name": "90217-720-V2B48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1885,
+      "deposits": {
+        "food": 1993610,
+        "wood": 1754281,
+        "stone": 1480930,
+        "gold": 1172424
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V2B48",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051368049,
+      "name": "90217-360-traits",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 387,
+      "deposits": {
+        "food": 275206,
+        "wood": 197319,
+        "stone": 207530,
+        "gold": 131200
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "traits",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051368059,
+      "name": "90217-360-WildPriority60",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 298,
+      "deposits": {
+        "food": 208808,
+        "wood": 151235,
+        "stone": 125122,
+        "gold": 98186
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildPriority60",
+      "hours": 360,
+      "seed": 90217
+    },
+    {
+      "job": 118051368530,
+      "name": "90217-720-WildParallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 1462,
+      "deposits": {
+        "food": 1667241,
+        "wood": 1489810,
+        "stone": 1302841,
+        "gold": 880984
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildParallel48",
+      "hours": 720,
+      "seed": 90217
+    },
+    {
+      "job": 118051370183,
+      "name": "104729-360-WildPriority60",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 213,
+      "deposits": {
+        "food": 108524,
+        "wood": 79477,
+        "stone": 69418,
+        "gold": 52321
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildPriority60",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051370221,
+      "name": "104729-360-V2B48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 375,
+      "deposits": {
+        "food": 243980,
+        "wood": 206664,
+        "stone": 126387,
+        "gold": 75216
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V2B48",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051370414,
+      "name": "104729-360-WildParallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 247,
+      "deposits": {
+        "food": 179088,
+        "wood": 133774,
+        "stone": 91598,
+        "gold": 67101
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildParallel48",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051370478,
+      "name": "90217-168-traits",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 74,
+      "deposits": {
+        "food": 14379,
+        "wood": 9537,
+        "stone": 19985,
+        "gold": 12069
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "traits",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051370578,
+      "name": "104729-360-equal",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 315,
+      "deposits": {
+        "food": 186900,
+        "wood": 152087,
+        "stone": 100527,
+        "gold": 70025
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "equal",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051370619,
+      "name": "90217-168-V2B48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 110,
+      "deposits": {
+        "food": 25677,
+        "wood": 19817,
+        "stone": 24546,
+        "gold": 10870
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V2B48",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051370637,
+      "name": "90217-168-A48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 19,
+      "deposits": {
+        "food": 5449,
+        "wood": 2865,
+        "stone": 1018,
+        "gold": 1608
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "A48",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051370656,
+      "name": "104729-360-V3Parallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 386,
+      "deposits": {
+        "food": 291712,
+        "wood": 231713,
+        "stone": 171096,
+        "gold": 102511
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V3Parallel48",
+      "hours": 360,
+      "seed": 104729
+    },
+    {
+      "job": 118051370901,
+      "name": "90217-168-V3Parallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 73,
+      "deposits": {
+        "food": 12923,
+        "wood": 11727,
+        "stone": 21147,
+        "gold": 7313
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V3Parallel48",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051371247,
+      "name": "90217-168-WildPriority60",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 43,
+      "deposits": {
+        "food": 7288,
+        "wood": 4531,
+        "stone": 12670,
+        "gold": 7821
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildPriority60",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051372328,
+      "name": "90217-168-equal",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 72,
+      "deposits": {
+        "food": 11372,
+        "wood": 9626,
+        "stone": 20866,
+        "gold": 11027
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "equal",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051372471,
+      "name": "90217-168-WildParallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 47,
+      "deposits": {
+        "food": 10754,
+        "wood": 6277,
+        "stone": 15300,
+        "gold": 5609
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildParallel48",
+      "hours": 168,
+      "seed": 90217
+    },
+    {
+      "job": 118051372562,
+      "name": "104729-168-traits",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 69,
+      "deposits": {
+        "food": 18481,
+        "wood": 10727,
+        "stone": 17643,
+        "gold": 4409
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "traits",
+      "hours": 168,
+      "seed": 104729
+    },
+    {
+      "job": 118051372775,
+      "name": "104729-168-V3Parallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 84,
+      "deposits": {
+        "food": 29411,
+        "wood": 14849,
+        "stone": 17942,
+        "gold": 4508
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V3Parallel48",
+      "hours": 168,
+      "seed": 104729
+    },
+    {
+      "job": 118051372798,
+      "name": "104729-168-V2B48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 93,
+      "deposits": {
+        "food": 24061,
+        "wood": 19174,
+        "stone": 19881,
+        "gold": 4804
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "V2B48",
+      "hours": 168,
+      "seed": 104729
+    },
+    {
+      "job": 118051372845,
+      "name": "104729-168-A48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 7,
+      "deposits": {
+        "food": 1070,
+        "wood": 2637,
+        "stone": 1014,
+        "gold": 949
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "A48",
+      "hours": 168,
+      "seed": 104729
+    },
+    {
+      "job": 118051372924,
+      "name": "104729-168-WildParallel48",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 55,
+      "deposits": {
+        "food": 15378,
+        "wood": 8227,
+        "stone": 17988,
+        "gold": 3207
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildParallel48",
+      "hours": 168,
+      "seed": 104729
+    },
+    {
+      "job": 118051372986,
+      "name": "104729-168-WildPriority60",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 35,
+      "deposits": {
+        "food": 5124,
+        "wood": 5407,
+        "stone": 15028,
+        "gold": 3911
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "WildPriority60",
+      "hours": 168,
+      "seed": 104729
+    },
+    {
+      "job": 118051373438,
+      "name": "104729-168-equal",
+      "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+      "initialAI": 99,
+      "faults": [],
+      "ordinaryWild": 66,
+      "deposits": {
+        "food": 18810,
+        "wood": 9720,
+        "stone": 18878,
+        "gold": 4467
+      },
+      "sourceTreeHash": "eb803e54e66da95a9e32d2fdbe2d56993530228c69f213d4e8f7e148e76b3ab1",
+      "policy": "equal",
+      "hours": 168,
+      "seed": 104729
+    }
+  ]
+}

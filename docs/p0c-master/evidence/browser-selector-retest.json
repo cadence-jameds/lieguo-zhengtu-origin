@@ -1,0 +1,77 @@
+{
+  "source": "controlled synthetic prerequisites; original AI schedules retained, 99 agents; production Worker/native IndexedDB",
+  "cases": [
+    {
+      "name": "desktop public lord rankings and legion description removal",
+      "status": "PASS",
+      "detail": {
+        "organizationMilitaryRanking": "PENDING",
+        "legacyDescriptionInputs": 0
+      }
+    },
+    {
+      "name": "desktop building card cost and actions fit viewport",
+      "status": "PASS",
+      "detail": {
+        "width": 660,
+        "scroll": 658,
+        "client": 658
+      }
+    },
+    {
+      "name": "mobile-390 public lord rankings and legion description removal",
+      "status": "PASS",
+      "detail": {
+        "organizationMilitaryRanking": "PENDING",
+        "legacyDescriptionInputs": 0
+      }
+    },
+    {
+      "name": "mobile-390 building card cost and actions fit viewport",
+      "status": "PASS",
+      "detail": {
+        "width": 390,
+        "scroll": 388,
+        "client": 388
+      }
+    },
+    {
+      "name": "mobile-320 public lord rankings and legion description removal",
+      "status": "PASS",
+      "detail": {
+        "organizationMilitaryRanking": "PENDING",
+        "legacyDescriptionInputs": 0
+      }
+    },
+    {
+      "name": "mobile-320 building card cost and actions fit viewport",
+      "status": "PASS",
+      "detail": {
+        "width": 320,
+        "scroll": 318,
+        "client": 318
+      }
+    },
+    {
+      "name": "Issue4 six civilizations 1440",
+      "status": "PASS",
+      "detail": {
+        "civilizations": 6
+      }
+    },
+    {
+      "name": "Issue4 six civilizations 320",
+      "status": "PASS",
+      "detail": {
+        "civilizations": 6
+      }
+    }
+  ],
+  "errors": [],
+  "notVerified": [
+    "physical Android",
+    "C13 organization military ranking authority"
+  ],
+  "passed": 8,
+  "failed": 0
+}

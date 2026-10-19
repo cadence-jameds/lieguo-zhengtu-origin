@@ -1,0 +1,310 @@
+{
+  "basePR": "b4faa4e188a4b0a456a4af5b94ade2363bcee247",
+  "head": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519",
+  "changedSourceFiles": [
+    {
+      "path": "src/game/FormalCityPanel.tsx",
+      "role": "production",
+      "beforeBlob": "69baa35a60738272279519d6c9750afdea76da5e",
+      "afterBlob": "eeed52a25613aed7316219579192a802f19354db",
+      "sha256": "53baf95c834719075c3290510f1c3c1de63fe5cf2d78cff661ed1354c9c02e7a"
+    },
+    {
+      "path": "src/game/FormalWorldMap.tsx",
+      "role": "production",
+      "beforeBlob": "5e66936d79b199641db9a1453c3afcca0bfd8dd5",
+      "afterBlob": "4320f6e0a727506f2bbdd2a834af034dfa9d8317",
+      "sha256": "3d4a410c84de5b3609215d9a00548c36c012e99ce730cebf035a1814b9632fa2"
+    },
+    {
+      "path": "src/game/GameApp.tsx",
+      "role": "production",
+      "beforeBlob": "14a0c827bb5bb19a146f5873017d1e564828f2d0",
+      "afterBlob": "4913e89cea84ea16d9dce2430b108199683ea896",
+      "sha256": "98944be37518f8477e1e35b461d8ff8435117cf28c66e881d46eac122ed55ed0"
+    },
+    {
+      "path": "src/game/commandFeedback.ts",
+      "role": "production",
+      "beforeBlob": null,
+      "afterBlob": "8a74e84b04c9f2585d39476f801cd40989fbf25d",
+      "sha256": "66cd03cac05ea0a2de5969cb8e8b9dc9065c47a5b428783faa9c24f5b255e016"
+    },
+    {
+      "path": "src/game/formal/aiKnowledge.ts",
+      "role": "production",
+      "beforeBlob": "e887e66f633d6d8337d4a1b17c13cb2d80924767",
+      "afterBlob": "c88c2bdb4d817782a1537d4a5c6854e146c148da",
+      "sha256": "d7cb3f2ef062122fac77e26b38f49d7893f238f19e8837723636deac67c12f4e"
+    },
+    {
+      "path": "src/game/formal/battles.ts",
+      "role": "production",
+      "beforeBlob": "b2692d364e263f63e3e3817668f4e81a02096b5b",
+      "afterBlob": "73d6bad566be31d6bebed6acc2652fb8660cd3f9",
+      "sha256": "4faf894907a32dc0e2d510861f687ebfecd17e377f41a78fdc131810d0c65d75"
+    },
+    {
+      "path": "src/game/formal/demolition.ts",
+      "role": "production",
+      "beforeBlob": "6bd4169182a6bb9acbd6d9bd5eeeb3bdf774956b",
+      "afterBlob": "9e6bbd14fdf6890a836667a257031889a304cd3d",
+      "sha256": "94e736049d749ed3179b39e9b36cc4409bfe0d6e068f3f19ccbac6693521b9d3"
+    },
+    {
+      "path": "src/game/formal/economy.ts",
+      "role": "production",
+      "beforeBlob": "6269dac244966c994bbfc04b607731be1b593327",
+      "afterBlob": "1fd48151c1f09901ff2745525c3b306fa2c86a90",
+      "sha256": "edb9bb13b94ab0773e830dd1ae99276082a6a54d5ae53276f0557a33a88f0f5f"
+    },
+    {
+      "path": "src/game/formal/extinction.ts",
+      "role": "production",
+      "beforeBlob": "326fd05b44a395d2d5ffeb6354e83af8846b73ce",
+      "afterBlob": "c19312459ce8492e8ae4093c07b4cbc0fcff354f",
+      "sha256": "a59a96b4d7cc9b0491ec05c764dffe9d49682c487f25d1e1e88fac94921dad91"
+    },
+    {
+      "path": "src/game/formal/extinctionB7.test.ts",
+      "role": "test",
+      "beforeBlob": "960455a9a59ead046369796eef502e17e25acb2c",
+      "afterBlob": "3bdc3ab9fa6f682f15dbceeb0d055ca1c59f96a5",
+      "sha256": "b8b031d1f6f949a632c8eb7d7f3a6ae83d872d396d3f73daafe86be224bfbefc"
+    },
+    {
+      "path": "src/game/formal/integrationR4.test.ts",
+      "role": "test",
+      "beforeBlob": "c3193650eaef670cd286faa5d58a235d62761a19",
+      "afterBlob": "645b46937a6bf704294c4fd22025a75319c50354",
+      "sha256": "bdbd92422e1bcd61825535ac5901388c77095ae27a0011f9b49bac59d9be1170"
+    },
+    {
+      "path": "src/game/formal/military.ts",
+      "role": "production",
+      "beforeBlob": "ba2a6d257173837b7d7e285ae53bea28b22da1b4",
+      "afterBlob": "a69cfba4077ad887f803efd1acc3ba0be4cbb19f",
+      "sha256": "b5a254dd9b8a05c6759f8743164254f38b97c18788c0ccbc19841ff907a79522"
+    },
+    {
+      "path": "src/game/formal/p0cExileScout.test.ts",
+      "role": "test",
+      "beforeBlob": null,
+      "afterBlob": "eda779993a30dbcc204f128aa5a7bb5c30b67074",
+      "sha256": "59b5ece1bf3600ccde9742fac015826bf9bf8d7278a13de68bd7f8f759f52c9e"
+    },
+    {
+      "path": "src/game/formal/p0cQueues.test.ts",
+      "role": "test",
+      "beforeBlob": null,
+      "afterBlob": "e576a69a9da0e8b1d8efdb1c61b832bcf8499302",
+      "sha256": "1317026d9a47894377628dda11977f7d1118cd14e8041abb54771470c0bfbae9"
+    },
+    {
+      "path": "src/game/formal/playerFeedback.test.ts",
+      "role": "test",
+      "beforeBlob": "6f4d86a94075d1bfb54eb5ac445d706a677e1814",
+      "afterBlob": "569f5c24ace985d292ade813494916229a8d5770",
+      "sha256": "b80fc248b00152462a3c328fd9a1afaadd0da6f8b722d9cce6eea09a542706be"
+    },
+    {
+      "path": "src/game/formal/playerOrderRuntimeP0.test.ts",
+      "role": "test",
+      "beforeBlob": "27f60e7f43d73afe25331eb89cc6c90f17c7d3bc",
+      "afterBlob": "46efaa42a8c5e21e7ddcd6f6b97cb8da6348b972",
+      "sha256": "796a5c5066ba30f1a5f2113f715d1ab3137ff373784f32db186db885c96cef9c"
+    },
+    {
+      "path": "src/game/formal/queueCapacity.ts",
+      "role": "production",
+      "beforeBlob": null,
+      "afterBlob": "183893f56427344ec34fab4c51e37fe768ed751a",
+      "sha256": "70f7a53152dad83b981df3bc741043d96119aa6ae65c7900b3c9389f7668456c"
+    },
+    {
+      "path": "src/game/formal/reducer.ts",
+      "role": "production",
+      "beforeBlob": "4f9f3c950a9b3fc34508379218d6389c88743dc9",
+      "afterBlob": "ad938ff48ca8020c1a3c6ae16c9ac97485131244",
+      "sha256": "47d7f0bb2fe02981867c331b3e4339dc2aa12e2fe347a0a29cee19dcd3add757"
+    },
+    {
+      "path": "src/game/formal/reportScope.ts",
+      "role": "production",
+      "beforeBlob": null,
+      "afterBlob": "dcd0ab88fbd508e605a6816ae7e82db019be292f",
+      "sha256": "5c65885c959334a3ffdce3b24672384364139de31cb3c567dc5a964e10544d49"
+    },
+    {
+      "path": "src/game/formal/saveCodec.ts",
+      "role": "production",
+      "beforeBlob": "31e047e5c399edcb784e4ba5cc82ea2b03655747",
+      "afterBlob": "522c53e2c6f5bb08fa95aaaf1695266ed85f2bf3",
+      "sha256": "e22e9ab3662e6775bc93dfcd972287da229e946bb20f064992d634950fd87223"
+    },
+    {
+      "path": "src/game/formal/schema.ts",
+      "role": "production",
+      "beforeBlob": "34cee20b94cac203388334e70910f955efe365d9",
+      "afterBlob": "46faa38d1d6d2917be139b4b49c25521b6b33edb",
+      "sha256": "25868493a63ad0bf486e4406c430d32f2854f96e644bb29490f22b4d4af3b253"
+    },
+    {
+      "path": "src/game/formal/wallDelta.test.ts",
+      "role": "test",
+      "beforeBlob": "ccaadf8089f8208ccebb486ccced35f419401fcc",
+      "afterBlob": "a5886c031b6d768870e5ca22836b6e560a9424ea",
+      "sha256": "53b2e9552c02b719709039236cb6f00a747dfb9ae20756d0f230292220eb4fb8"
+    },
+    {
+      "path": "src/game/game.css",
+      "role": "production",
+      "beforeBlob": "f7e8d977807188b664b35439101848ebc45cbe0e",
+      "afterBlob": "5005f27006f3228565dbd71f93233200eb319fb1",
+      "sha256": "cca8491c46bcf3ee2e8829b989b338391d4b9bf0d038d4c8b734374cc88c39e3"
+    },
+    {
+      "path": "src/game/orderAdmission.test.ts",
+      "role": "test",
+      "beforeBlob": "1016f4cec3464d9aeb1522cbd1c6a7cd59a1362b",
+      "afterBlob": "e437b9176505a354cf882ca7305d05bd3e5cccc9",
+      "sha256": "031204e464fdcdf1abf44b8f8263aa7d2009f8550d896d808bde466b69958170"
+    },
+    {
+      "path": "src/game/orderAdmission.ts",
+      "role": "production",
+      "beforeBlob": "67c206e86585d68ccc971499109105e625c06f35",
+      "afterBlob": "245cbad5f13a908342aa23e9de6613e14119bcb8",
+      "sha256": "19ea79f89082452d1b41fa78113e65efde5426c6e0e4795c01ed98b838c06576"
+    },
+    {
+      "path": "src/game/persistence.ts",
+      "role": "production",
+      "beforeBlob": "8fa5183faa5f4e68f818d0401c1f3dba2395bbcb",
+      "afterBlob": "59237a80087f0aaf7f85235fa06946139e50d9cd",
+      "sha256": "a07c72728b18bb5153deec093c6654c3cfea87dbe1c1f85702ad1114b2f876bf"
+    },
+    {
+      "path": "src/game/presentation/DevelopmentViews.tsx",
+      "role": "production",
+      "beforeBlob": "a3b4a45fe40823eb39fb49a14c6b3b8b806bacaa",
+      "afterBlob": "61484f145554369375232841e0e22379f7e772d6",
+      "sha256": "6924d5dfb2a3291c6bae4164944c1e2102753a65082ad4e4ef9752b9b6afdf76"
+    },
+    {
+      "path": "src/game/presentation/ExtinctionView.tsx",
+      "role": "production",
+      "beforeBlob": "f90fda37d969cf3d9aa7f93de7004fc16771800a",
+      "afterBlob": "39f7714d7b94846d021a9ea5c8f48add37175c7a",
+      "sha256": "c12d376ea1216905ec23c8c8b44bd12e5b1ebfffb00891774377cbffbd130006"
+    },
+    {
+      "path": "src/game/presentation/FormalReportsView.tsx",
+      "role": "production",
+      "beforeBlob": "eaaa3baf417bbf45ec94a258fc493d99486c7ae1",
+      "afterBlob": "4eb3ed0d7e7dd32d9bbfbb9442078d47668024ef",
+      "sha256": "706c1193a906f855077e241dd79094c8c8d9a36716517013eb0d08120fb03bbd"
+    },
+    {
+      "path": "src/game/presentation/IncomingArmyAlert.tsx",
+      "role": "production",
+      "beforeBlob": null,
+      "afterBlob": "1a8a369070a3924aa55cf69fdfb90d24ce791565",
+      "sha256": "8a4c6ff172f808a098cfc9b3899169751e3eb5dbaeee8e5c0aab4374429d5bbe"
+    },
+    {
+      "path": "src/game/presentation/LegionView.tsx",
+      "role": "production",
+      "beforeBlob": "1010161ad02572f2337df3161ee58ca152fc0bd8",
+      "afterBlob": "1d72ec4f14250a812e72d27ebad147e974d2c4a1",
+      "sha256": "f21da108b1f1c25ad84884e4f607ab180aa7b5592881e23fec6b3683ae845778"
+    },
+    {
+      "path": "src/game/presentation/PoliticsView.tsx",
+      "role": "production",
+      "beforeBlob": "a92c3bf9a8e43f62f222f9b3823ca12d827887df",
+      "afterBlob": "e499d360bb74260d9739036d584ef8df7d052547",
+      "sha256": "ea3e954b39c184bbfd82e22bd0cc2104d881708372e9d17cfa4855cca4585db3"
+    },
+    {
+      "path": "src/game/presentation/Shell.tsx",
+      "role": "production",
+      "beforeBlob": "05d98c2aeda8f483d6abcd21654b3973a9fb6358",
+      "afterBlob": "1f086e2dec7c89c432a52c565dbc556fd588171b",
+      "sha256": "fb3624274afdc489b0e8a7a25fe399e7d39080a86ba17743939a04abc57a67e9"
+    },
+    {
+      "path": "src/game/presentation/craftsmanCastleUI.test.tsx",
+      "role": "test",
+      "beforeBlob": "1bdc8c0dfec5b1d1e760166542697b0b02b9de58",
+      "afterBlob": "12421f72f8e228642d6dc02d8080baef3e58413b",
+      "sha256": "145909063555edec05bf5ca92a2b116c1af8f9ec8f3ff63727f995a9caaf16e0"
+    },
+    {
+      "path": "src/game/presentation/factionRankings.ts",
+      "role": "production",
+      "beforeBlob": null,
+      "afterBlob": "857fa3ab392dc9054bb02859cf2271a479fd9447",
+      "sha256": "bf691c62538b7e99b0899461b992e1155d9b6f2eb7e04de4978f07b6bbacf5aa"
+    },
+    {
+      "path": "src/game/presentation/mapRelations.ts",
+      "role": "production",
+      "beforeBlob": "5187cf1ccb647414a840ad5343518d75a338cfad",
+      "afterBlob": "9d852bae03cb9b243bd7fbff6621eeae34711694",
+      "sha256": "459ee3472f20d597e2b26c74d325c594a9118493cf1cf4e81ad6cc3d3e6e2191"
+    },
+    {
+      "path": "src/game/presentation/p0cDemoUi.test.tsx",
+      "role": "test",
+      "beforeBlob": null,
+      "afterBlob": "1aae494690354d5e7d28470e070d06e050c1d1c6",
+      "sha256": "5f8c0d6e04e10bc8ff2ce8813a5d25b07a3e75052165741967fde14600a3337a"
+    },
+    {
+      "path": "src/game/presentation/p0cFeedback.test.tsx",
+      "role": "test",
+      "beforeBlob": null,
+      "afterBlob": "6abe9133cc37dc2336b88219fa85244858689a52",
+      "sha256": "808932daa707bd304765588a49f5b662b864be0bb34d4e804ed0c9e2174b3e86"
+    },
+    {
+      "path": "src/game/presentation/uiIntegrationV94.test.tsx",
+      "role": "test",
+      "beforeBlob": "cd6fc2902b6a227ad53bffb59000b686d4b798f7",
+      "afterBlob": "389544224cd79d948ddc89c0f6f589e19e5066d4",
+      "sha256": "352334d8f6187e3fb5c16d0df4019c5a74373815717297279e720c86800610d9"
+    },
+    {
+      "path": "src/game/runtime.worker.ts",
+      "role": "production",
+      "beforeBlob": "bdd53a08afa0dfa15ba253204371639dfe4aa484",
+      "afterBlob": "b08129d857bc976b1f726f3c91c9e1224e0ed411",
+      "sha256": "636447f7c28edb0c0e0f7e5340d7594c52b61389571f0d1e80c6e4611ba41f6a"
+    },
+    {
+      "path": "src/game/useGame.ts",
+      "role": "production",
+      "beforeBlob": "7c1b134ec3c70e8078e3835336490e86047319b3",
+      "afterBlob": "dcf811f09ef14ec77cd2486a75215a388635f2d2",
+      "sha256": "63ea5e15b520184f20ef6cd7bc5e643fe44c7aafa3f84e6589030b912e0188cb"
+    }
+  ],
+  "protectedC9": [
+    {
+      "path": "src/game/formal/aiAttackStrategies.ts",
+      "unchanged": true,
+      "blob": "028d6d7d723e77c4d0cc771b89e5fffd7903c700"
+    },
+    {
+      "path": "src/game/formal/aiActions.ts",
+      "unchanged": true,
+      "blob": "df42dba87054829294c673033dd3de7ffbaece33"
+    },
+    {
+      "path": "src/game/formal/autonomy.ts",
+      "unchanged": true,
+      "blob": "95315eec2e2cf05eef70d05bd9a17383a9123aaa"
+    }
+  ]
+}

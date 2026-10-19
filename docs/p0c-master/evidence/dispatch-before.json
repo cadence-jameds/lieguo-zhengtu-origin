@@ -1,0 +1,61 @@
+{
+  "numTotalTests": 10,
+  "numPassedTests": 9,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "success": false,
+  "cases": [
+    {
+      "name": "unrelated AI city updates do not prevent the exact player rename order from committing",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "completion of another construction target frees capacity without changing the clicked upgrade",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "same-target levels and pending job identities remain exact while current resource and capacity checks still reject",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an explicit building slot and a replacement same-target pending job invalidate an old intent",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "cancelling the same active job can cross unrelated completion but never crosses its queued-to-active refund phase",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "the trusted foreground fence distinguishes governor receipts and still prevents newer human/ABA overwrites",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "never replays a changed or already-applied player intent",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "never crosses a newer player command, edited payload or branch fence",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "keeps construction, training and research prerequisites tied to the original action",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "P0-C3 dispatch ignores unrelated AI revision but fences owned troops, destination generation/ownership, diplomacy and terrain",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected undefined to be defined\n    at /workspace/lieguo-zhengtu-origin/src/game/orderAdmission.test.ts:135:15\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    }
+  ]
+}

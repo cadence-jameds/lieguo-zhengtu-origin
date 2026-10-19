@@ -1,0 +1,278 @@
+{
+  "source": "controlled synthetic prerequisites; original AI schedules retained, 99 agents; production Worker/native IndexedDB",
+  "cases": [
+    {
+      "name": "desktop five jobs selected-city summary",
+      "status": "PASS",
+      "detail": {
+        "capacity": 5,
+        "citySwitch": true
+      }
+    },
+    {
+      "name": "desktop territory switch overview zoom and drag",
+      "status": "PASS",
+      "detail": {
+        "renderMs": 186.3,
+        "aiAgentRecords": 99,
+        "empireData": [
+          {
+            "id": "city:000",
+            "x": 49,
+            "y": 59,
+            "owner": "faction:000"
+          },
+          {
+            "id": "city:001",
+            "x": 74,
+            "y": 60,
+            "owner": "faction:001"
+          },
+          {
+            "id": "city:002",
+            "x": 50,
+            "y": 100,
+            "owner": "faction:002"
+          },
+          {
+            "id": "city:003",
+            "x": 74,
+            "y": 100,
+            "owner": "faction:003"
+          },
+          {
+            "id": "city:010",
+            "x": 226,
+            "y": 317,
+            "owner": "faction:000"
+          }
+        ],
+        "originalFormalTerrain": true
+      }
+    },
+    {
+      "name": "desktop public lord rankings and legion description removal",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '領主', exact: true })\u001b[22m\n"
+    },
+    {
+      "name": "desktop durable success feedback expires and remains saved after reload",
+      "status": "PASS",
+      "detail": {
+        "durableAck": true,
+        "successDismissal": true
+      }
+    },
+    {
+      "name": "desktop global incoming alert and target-city army navigation",
+      "status": "PASS",
+      "detail": {
+        "count": 1,
+        "noExactEnemyCompositionInAlert": true
+      }
+    },
+    {
+      "name": "desktop building card cost and actions fit viewport",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=town-anchor-0]')\u001b[22m\n"
+    },
+    {
+      "name": "desktop controlled extinction legal entrances and formal rebirth",
+      "status": "PASS",
+      "detail": {
+        "resourcesEach": 600,
+        "army": 0,
+        "protectionWorldHours": 48
+      }
+    },
+    {
+      "name": "mobile-390 five jobs selected-city summary",
+      "status": "PASS",
+      "detail": {
+        "capacity": 5,
+        "citySwitch": true
+      }
+    },
+    {
+      "name": "mobile-390 territory switch overview zoom and drag",
+      "status": "PASS",
+      "detail": {
+        "renderMs": 25.6,
+        "aiAgentRecords": 99,
+        "empireData": [
+          {
+            "id": "city:000",
+            "x": 49,
+            "y": 59,
+            "owner": "faction:000"
+          },
+          {
+            "id": "city:001",
+            "x": 74,
+            "y": 60,
+            "owner": "faction:001"
+          },
+          {
+            "id": "city:002",
+            "x": 50,
+            "y": 100,
+            "owner": "faction:002"
+          },
+          {
+            "id": "city:003",
+            "x": 74,
+            "y": 100,
+            "owner": "faction:003"
+          },
+          {
+            "id": "city:010",
+            "x": 226,
+            "y": 317,
+            "owner": "faction:000"
+          }
+        ],
+        "originalFormalTerrain": true
+      }
+    },
+    {
+      "name": "mobile-390 public lord rankings and legion description removal",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '領主', exact: true })\u001b[22m\n"
+    },
+    {
+      "name": "mobile-390 durable success feedback expires and remains saved after reload",
+      "status": "PASS",
+      "detail": {
+        "durableAck": true,
+        "successDismissal": true
+      }
+    },
+    {
+      "name": "mobile-390 global incoming alert and target-city army navigation",
+      "status": "PASS",
+      "detail": {
+        "count": 1,
+        "noExactEnemyCompositionInAlert": true
+      }
+    },
+    {
+      "name": "mobile-390 building card cost and actions fit viewport",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=town-anchor-0]')\u001b[22m\n"
+    },
+    {
+      "name": "mobile-390 controlled extinction legal entrances and formal rebirth",
+      "status": "PASS",
+      "detail": {
+        "resourcesEach": 600,
+        "army": 0,
+        "protectionWorldHours": 48
+      }
+    },
+    {
+      "name": "mobile-320 five jobs selected-city summary",
+      "status": "PASS",
+      "detail": {
+        "capacity": 5,
+        "citySwitch": true
+      }
+    },
+    {
+      "name": "mobile-320 territory switch overview zoom and drag",
+      "status": "PASS",
+      "detail": {
+        "renderMs": 21,
+        "aiAgentRecords": 99,
+        "empireData": [
+          {
+            "id": "city:000",
+            "x": 49,
+            "y": 59,
+            "owner": "faction:000"
+          },
+          {
+            "id": "city:001",
+            "x": 74,
+            "y": 60,
+            "owner": "faction:001"
+          },
+          {
+            "id": "city:002",
+            "x": 50,
+            "y": 100,
+            "owner": "faction:002"
+          },
+          {
+            "id": "city:003",
+            "x": 74,
+            "y": 100,
+            "owner": "faction:003"
+          },
+          {
+            "id": "city:010",
+            "x": 226,
+            "y": 317,
+            "owner": "faction:000"
+          }
+        ],
+        "originalFormalTerrain": true
+      }
+    },
+    {
+      "name": "mobile-320 public lord rankings and legion description removal",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '領主', exact: true })\u001b[22m\n"
+    },
+    {
+      "name": "mobile-320 durable success feedback expires and remains saved after reload",
+      "status": "PASS",
+      "detail": {
+        "durableAck": true,
+        "successDismissal": true
+      }
+    },
+    {
+      "name": "mobile-320 global incoming alert and target-city army navigation",
+      "status": "PASS",
+      "detail": {
+        "count": 1,
+        "noExactEnemyCompositionInAlert": true
+      }
+    },
+    {
+      "name": "mobile-320 building card cost and actions fit viewport",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=town-anchor-0]')\u001b[22m\n"
+    },
+    {
+      "name": "mobile-320 controlled extinction legal entrances and formal rebirth",
+      "status": "PASS",
+      "detail": {
+        "resourcesEach": 600,
+        "army": 0,
+        "protectionWorldHours": 48
+      }
+    },
+    {
+      "name": "Issue4 six civilizations 1440",
+      "status": "PASS",
+      "detail": {
+        "civilizations": 6
+      }
+    },
+    {
+      "name": "Issue4 six civilizations 320",
+      "status": "PASS",
+      "detail": {
+        "civilizations": 6
+      }
+    }
+  ],
+  "errors": [],
+  "notVerified": [
+    "physical Android",
+    "C13 organization military ranking authority"
+  ],
+  "passed": 17,
+  "failed": 6
+}

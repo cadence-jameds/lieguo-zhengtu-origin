@@ -1,0 +1,124 @@
+{
+  "numTotalTests": 23,
+  "numPassedTests": 23,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "success": true,
+  "cases": [
+    {
+      "name": "unrelated AI city updates do not prevent the exact player rename order from committing",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "completion of another construction target frees capacity without changing the clicked upgrade",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "same-target levels and pending job identities remain exact while current resource and capacity checks still reject",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an explicit building slot and a replacement same-target pending job invalidate an old intent",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "cancelling the same active job can cross unrelated completion but never crosses its queued-to-active refund phase",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "the trusted foreground fence distinguishes governor receipts and still prevents newer human/ABA overwrites",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "never replays a changed or already-applied player intent",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "never crosses a newer player command, edited payload or branch fence",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "keeps construction, training and research prerequisites tied to the original action",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "P0-C3 dispatch ignores unrelated AI revision but fences owned troops, destination generation/ownership, diplomacy and terrain",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "receives a command during cooperative replay without exposing a draft or interleaving its mutation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "foreground FIFO overtakes only a pending tick and remains behind the in-flight durable save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "import and visibility/load barriers preserve arrival order and old-campaign clicks never cross a switch",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an old unchanged construction catches up actual admission time after its revision was rebased",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "actual player-governor catch-up admits an unchanged building without retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "actual player-governor catch-up rejects its changed field target without retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a newer foreground command stays a hard fence even when its ID looks autonomous and its effect is undone",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "current resources conflict rejects without any draft spend or durable save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "current queue conflict rejects without any draft spend or durable save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an actual failed IDB transaction produces only rejection, preserves authority, and deliberate same-ID resend commits once",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "C4 due events and a player command share one atomic save with one authoritative revision",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "C4 combined replay fault exposes neither event draft nor command success",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "C3 a stale dispatch crosses unrelated catch-up exactly once and waits for durable save before ACK",
+      "status": "passed",
+      "failures": []
+    }
+  ]
+}
