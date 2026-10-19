@@ -1,0 +1,307 @@
+{
+  "passed": 60,
+  "failed": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "last city conquest immediately extinguishes AI, turns separate outgoing armies into non-slot exiles",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "mother city lost while another own city remains does not create exiles",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "player rebirth has exact fresh stocks/population, retains tech/age and never regains old troops",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "last successful prebattle remaining composition awards floor25 and one tagged craftsman, no respawn or qualification",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "craftsman foreign castle waives Lv1 resources, keeps normal duration and consumes only on completion, then trains its guard with owner technology",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "extinction cancels paid research and age without refund or ghost completion",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "B7 save/load and sliced offline resolutions preserve unique exile and artisan state",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "B7 atomic world fault never partly creates exiles; full import and Recovery retain lifecycle and sequence",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "P0-C-9 permits ordinary wild targets 25–48 tiles away while enemy cities exist",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "uses the exact approved weights at trait endpoints and preserves all eleven traits",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "reselects deterministically per decision and every strategy remains possible for one faction",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "A48 search boundary 25, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "A48 search boundary 48, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "A48 search boundary 49, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "A48 search boundary 60, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "A48 search boundary 61, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V2B48 search boundary 25, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V2B48 search boundary 48, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V2B48 search boundary 49, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V2B48 search boundary 60, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V2B48 search boundary 61, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V3Parallel48 search boundary 25, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V3Parallel48 search boundary 48, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V3Parallel48 search boundary 49, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V3Parallel48 search boundary 60, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V3Parallel48 search boundary 61, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildPriority60 search boundary 25, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildPriority60 search boundary 48, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildPriority60 search boundary 49, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildPriority60 search boundary 60, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildPriority60 search boundary 61, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildParallel48 search boundary 25, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildParallel48 search boundary 48, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildParallel48 search boundary 49, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildParallel48 search boundary 60, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildParallel48 search boundary 61, retaining the 24-tile score denominator",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "A48 preserves city priority while V2-B retains its capped scouting diversion",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "selected policies use only public site metadata and acquired city intel",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "V3Parallel48 actually allocates two distinct detachments and checks every troop key",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "WildParallel48 actually allocates two distinct detachments and checks every troop key",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "two real reducer admissions consume disjoint troops, preserve reserve, and dedupe the same event",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "partial multiline stale-target preserves successful work and rejects without phantom troops",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "partial multiline troop-shortage preserves successful work and rejects without phantom troops",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "partial multiline reserve-shortage preserves successful work and rejects without phantom troops",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "partial multiline first-rejected preserves successful work and rejects without phantom troops",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "inactive and cooldown gates remain ahead of strategy evaluation",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "1X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "10X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "50X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "Recovery rolls back both real departures atomically and CAS rejects a competing stale writer",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"scout\":8}",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"ram\":8}",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"catapult\":8}",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"baggage\":8}",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"ram\":3,\"baggage\":3,\"scout\":4}",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C5 mixed exile excludes scouts and codec sanitizes old invalid sites idempotently without revoking earned craftsmen",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C7 defender receives arrival alert but never attacker return intelligence",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C7 defender counter-scout victory includes own survivors on failure/tie 5",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C7 defender counter-scout victory includes own survivors on failure/tie 6",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "C7 persistence sanitizes legacy misdelivery at import, load, query and full export; legal attacker delivery remains",
+      "status": "passed",
+      "failure": []
+    }
+  ]
+}

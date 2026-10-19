@@ -1,3 +1,4 @@
+import {sanitizeScoutReport,scoutReportAuthorized} from './formal/reportScope';
 import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
 import {advanceOfflineCooperative,type OfflineSummary} from './formal/offline';
@@ -82,7 +83,7 @@ export class FormalPersistence {
    if(activateAI)enableAutonomy(w);
    const real=(at:number)=>Math.max(0,Math.floor(savedAt-(w.time-at)/effectiveSpeed(input)));
    if(mode==='save'||mode==='start')stampPending(w,real);
-   const stampedReports=reportWrites.map(r=>{const copy=structuredClone(r);if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});
+   const stampedReports=reportWrites.map(r=>{const copy=structuredClone(sanitizeScoutReport(w,r));if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});
    validateReportHistory(w,stampedReports);
    // encodeSave fully validates the final world; crypto needs keep-alive under the revision lock.
    const envelope=await Dexie.waitFor(encodeSave(w));
@@ -95,6 +96,8 @@ export class FormalPersistence {
     if(invalid.length)await this.db.backups.bulkDelete(invalid.map(r=>r.id!));
     this.fault?.('history-modified');
    }
+   // Repair retained legacy rows in the same atomic transition, preserving IDs and history.
+   if(mode==='restore'||mode==='import')await this.sanitizeStoredReports(w);
    if(reportWrites.length)await this.db.BattleReports.bulkPut(stampedReports.map(r=>({...r,key:reportKey(r)})));
    this.fault?.('report-write');
    // Two valid checkpoints; ordering uses IDB monotonic IDs, not wall-clock ordering.
@@ -130,8 +133,10 @@ export class FormalPersistence {
    }
    throw new Error('正式存檔與回復點均無法讀取，資料保留。');
   }
+  await this.sanitizeStoredReports(world!);
   return{game:world!,recovered:false,savedAt:row.at};
  }
+ private async sanitizeStoredReports(world:FormalWorld){await this.db.transaction('rw',this.db.BattleReports,async()=>{const rows=await this.db.BattleReports.where('campaignId').equals(world.campaignId).toArray();const repaired=rows.map(r=>sanitizeScoutReport(world,r) as ReportRow).filter((r,i)=>r!==rows[i]);if(repaired.length)await this.db.BattleReports.bulkPut(repaired);});}
  async loadSave(){const {game,recovered}=await this.loadAnchored();return {game,recovered};}
  async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
   onProgress?.('read');
@@ -172,12 +177,12 @@ export class FormalPersistence {
   const {world,reports}=await this.db.transaction('r',this.db.saves,this.db.BattleReports,async()=>{
    const row=await this.db.saves.get('current');if(!row||row.kind!=='world')throw new Error('沒有正式存檔可匯出。');
    const {world}=await Dexie.waitFor(decodeSave(row.data));
-   const reports=mode==='full'?(await this.db.BattleReports.where('campaignId').equals(world.campaignId).toArray()).filter(r=>r.sequence<world.sequences.report&&r.at<=world.time).map(({key:_key,...r})=>r):undefined;
+   const reports=mode==='full'?(await this.db.BattleReports.where('campaignId').equals(world.campaignId).toArray()).filter(r=>r.sequence<world.sequences.report&&r.at<=world.time).map(({key:_key,...r})=>sanitizeScoutReport(world,r)):undefined;
    return{world,reports};
   });
   return JSON.stringify(await encodeSave(world,reports));
  }
- private reportQuery(world:FormalWorld){return this.db.BattleReports.where('[campaignId+ownerFactionId+sequence]').between([world.campaignId,world.playerFactionId,1],[world.campaignId,world.playerFactionId,world.sequences.report],true,false).filter(r=>r.at<=world.time);}
+ private reportQuery(world:FormalWorld){return this.db.BattleReports.where('[campaignId+ownerFactionId+sequence]').between([world.campaignId,world.playerFactionId,1],[world.campaignId,world.playerFactionId,world.sequences.report],true,false).filter(r=>r.at<=world.time&&scoutReportAuthorized(r));}
  async reportStatus(world:FormalWorld){
   const counts={all:0,battle:0,diplomacy:0,chronicle:0},unread={all:0,battle:0,diplomacy:0,chronicle:0};
   await this.reportQuery(world).each(r=>{const bucket=r.category==='battle'||r.category==='scout'?'battle':r.category==='diplomacy'?'diplomacy':'chronicle';counts.all++;counts[bucket]++;if(r.read!==true){unread.all++;unread[bucket]++;}});
@@ -206,7 +211,7 @@ export class FormalPersistence {
    .between([world.campaignId,world.playerFactionId,1],[world.campaignId,world.playerFactionId,world.sequences.report],true,false)
    .reverse().until(()=>!!result.army&&!!result.resources&&(generation!==undefined||!!result.defenses)).each(r=>{
     const p=r.battle,i=p?.intel;
-    if(r.at>world.time||!i||(generation===undefined?i.cityId!==cityId:i.siteId!==cityId||i.generation!==generation)||!p!.attackers.some(a=>a.ownerFactionId===world.playerFactionId))return;
+    if(!scoutReportAuthorized(r)||r.at>world.time||!i||(generation===undefined?i.cityId!==cityId:i.siteId!==cityId||i.generation!==generation)||!p!.attackers.some(a=>a.ownerFactionId===world.playerFactionId))return;
     const observation={intel:i,owner:p!.ownerBefore};
     result.army??=observation;
     if(i.resources)result.resources??=observation;
