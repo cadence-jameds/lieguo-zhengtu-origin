@@ -40,3 +40,5 @@
 - 本機 GitHub shell egress 僅允許 npm registry，Git objects 透過已連接 GitHub GET API 取得，按原 SHA 驗證還原，基準與樹完整保留；未改寫歷史或繞過網路政策。
 
 最終通過數、模擬數值、CI、待驗與 BLOCKER 必須以本輪 Delta Report 為準。本矩陣不是 Gate PASS。
+
+本輪實際結果與可下載 JSON／CSV 索引：[DELTA_REPORT.md](DELTA_REPORT.md)。距離表達式實測見 `scripts/p0c9-score-audit.mjs` 與報告；理論包絡與受控探針範圍分開列示。

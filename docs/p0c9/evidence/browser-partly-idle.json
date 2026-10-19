@@ -1,0 +1,297 @@
+{
+  "inputHead": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+  "inputSourceTreeHash": "e4593f025c007159d847f5e8603335bda7f0ac27698d0be258e137ef36969b04",
+  "browser": "154.0.8037.57",
+  "platform": "headless Chromium on Linux; native IndexedDB and production Worker",
+  "cases": [
+    {
+      "case": "natural UI durable rename",
+      "speed": 1,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:7f6f97c5-add9-435f-8fbe-d221e311f3aa",
+          "status": "committed",
+          "ackMs": 2304.0999999996275,
+          "renderMs": 2456.0999999996275
+        },
+        {
+          "id": "command:f9c900fe-2402-45d9-add4-f6f8ebd88c65",
+          "status": "committed",
+          "ackMs": 866.9000000003725,
+          "renderMs": 908.3000000007451
+        },
+        {
+          "id": "command:90b563da-786b-4561-8c3a-be1dba002933",
+          "status": "committed",
+          "ackMs": 1001.9000000003725,
+          "renderMs": 1043.800000000745
+        },
+        {
+          "id": "command:50e5dbf0-9d18-4a34-97e5-c5b8b72d1a01",
+          "status": "committed",
+          "ackMs": 546.1999999992549,
+          "renderMs": 588.0999999996275
+        },
+        {
+          "id": "command:000dd6cb-a7fc-48a8-9cee-24cf68bbd860",
+          "status": "committed",
+          "ackMs": 434.59999999962747,
+          "renderMs": 480.69999999925494
+        },
+        {
+          "id": "command:4ba69e1f-a41f-4218-ba94-75b38f0dd17c",
+          "status": "committed",
+          "ackMs": 510.2000000011176,
+          "renderMs": 538.5999999996275
+        },
+        {
+          "id": "command:23570665-5b91-4c75-ae0d-4d144db68d28",
+          "status": "committed",
+          "ackMs": 642.5999999996275,
+          "renderMs": 674.7999999988824
+        },
+        {
+          "id": "command:46907216-569c-4023-a5ac-d09c5e9c2385",
+          "status": "committed",
+          "ackMs": 414.40000000037253,
+          "renderMs": 439.69999999925494
+        }
+      ],
+      "latency": {
+        "n": 8,
+        "p50": 588.0999999996275,
+        "p95": 2456.0999999996275,
+        "max": 2456.0999999996275
+      },
+      "inputHours": 96,
+      "aiRecords": 99,
+      "liveAI": 99,
+      "duplicate": "duplicate",
+      "trueConflict": "世界版本已更新，請重新確認狀態。",
+      "reload": true
+    },
+    {
+      "case": "natural UI durable rename",
+      "speed": 10,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:0a3170cf-7963-4d29-982a-e2bafd73eb96",
+          "status": "committed",
+          "ackMs": 1215.800000000745,
+          "renderMs": 1405.4000000003725
+        },
+        {
+          "id": "command:f74a7e04-7b3c-4dce-ada5-ba78eadf01f8",
+          "status": "committed",
+          "ackMs": 431.5,
+          "renderMs": 461.09999999962747
+        },
+        {
+          "id": "command:8ddb09ee-4621-44f5-a981-9f0f40410d67",
+          "status": "committed",
+          "ackMs": 396.59999999962747,
+          "renderMs": 427.90000000037253
+        },
+        {
+          "id": "command:88235173-13b3-4886-b271-aa553f2635d0",
+          "status": "committed",
+          "ackMs": 980.0999999996275,
+          "renderMs": 1016.6999999992549
+        },
+        {
+          "id": "command:b2056f3f-d52d-4791-acef-fde5fb646d8e",
+          "status": "committed",
+          "ackMs": 462.6000000014901,
+          "renderMs": 493.5
+        },
+        {
+          "id": "command:af2c08cb-0ab6-444f-adb3-4f95740672da",
+          "status": "committed",
+          "ackMs": 495.8999999985099,
+          "renderMs": 531
+        },
+        {
+          "id": "command:59bda36a-f703-46fb-9bc9-759c8366e176",
+          "status": "committed",
+          "ackMs": 493.80000000074506,
+          "renderMs": 652.0999999996275
+        },
+        {
+          "id": "command:6571baa9-ddaf-4660-9669-2e8e8e580acf",
+          "status": "committed",
+          "ackMs": 493.40000000037253,
+          "renderMs": 523.2000000011176
+        }
+      ],
+      "latency": {
+        "n": 8,
+        "p50": 523.2000000011176,
+        "p95": 1405.4000000003725,
+        "max": 1405.4000000003725
+      },
+      "inputHours": 96,
+      "aiRecords": 99,
+      "liveAI": 99,
+      "duplicate": "duplicate",
+      "trueConflict": "世界版本已更新，請重新確認狀態。",
+      "reload": true
+    },
+    {
+      "case": "natural UI durable rename",
+      "speed": 50,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:6bad0601-4f29-4bfa-8f5a-586378cc47b4",
+          "status": "committed",
+          "ackMs": 1319.3999999985099,
+          "renderMs": 1358.0999999996275
+        },
+        {
+          "id": "command:1a468c8c-a39a-4ec7-81fe-132a28e60cab",
+          "status": "committed",
+          "ackMs": 1037.0999999996275,
+          "renderMs": 1073.9000000003725
+        },
+        {
+          "id": "command:d7ca53c6-da97-4ebf-ba6c-d89447a69388",
+          "status": "committed",
+          "ackMs": 735.2000000011176,
+          "renderMs": 767.5999999996275
+        },
+        {
+          "id": "command:8af98744-75cb-483b-ae1a-c7c67b84a2cf",
+          "status": "committed",
+          "ackMs": 790.8000000007451,
+          "renderMs": 826.9000000003725
+        },
+        {
+          "id": "command:0e8beca1-2c70-43a2-8d00-5942eba4bba1",
+          "status": "committed",
+          "ackMs": 469,
+          "renderMs": 499.59999999962747
+        },
+        {
+          "id": "command:9640207f-e5d7-43dd-a497-c6830c9a6428",
+          "status": "committed",
+          "ackMs": 685.9000000003725,
+          "renderMs": 717.6999999992549
+        },
+        {
+          "id": "command:741945ed-ce39-4780-875d-a7669d15a3d3",
+          "status": "committed",
+          "ackMs": 734.1000000014901,
+          "renderMs": 763.6000000014901
+        },
+        {
+          "id": "command:f73340f3-d911-4510-9822-3afeca162e3c",
+          "status": "committed",
+          "ackMs": 686.5999999996275,
+          "renderMs": 731.3000000007451
+        }
+      ],
+      "latency": {
+        "n": 8,
+        "p50": 763.6000000014901,
+        "p95": 1358.0999999996275,
+        "max": 1358.0999999996275
+      },
+      "inputHours": 96,
+      "aiRecords": 99,
+      "liveAI": 99,
+      "duplicate": "duplicate",
+      "trueConflict": "世界版本已更新，請重新確認狀態。",
+      "reload": true
+    },
+    {
+      "case": "controlled real AI parallel / native Recovery",
+      "mobile": false,
+      "status": "PASS",
+      "fixture": {
+        "name": "controlled-parallel.realm-save",
+        "hours": 2,
+        "speed": 1,
+        "agents": 99,
+        "factionId": "faction:001",
+        "cityId": "city:001",
+        "eventId": "event:0000000000000660",
+        "initialUnits": {
+          "militia": 600,
+          "archer": 200,
+          "scout": 10,
+          "ram": 20
+        },
+        "prerequisites": "CONTROLLED: explicit troops, observed-intel fixture, protection removed, decision identity/event set; other 99-AI schedules remain active; NOT natural performance evidence"
+      },
+      "departures": [
+        {
+          "commandId": "command:ai-0000000000000660-1",
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ai-0000000000000660-2",
+          "disposition": "applied"
+        }
+      ],
+      "remainingUnits": {
+        "militia": 265,
+        "archer": 89,
+        "scout": 10,
+        "ram": 20
+      },
+      "revisionBefore": 2,
+      "revisionAfter": 3
+    },
+    {
+      "case": "controlled real AI parallel / native Recovery",
+      "mobile": true,
+      "status": "PASS",
+      "fixture": {
+        "name": "controlled-parallel.realm-save",
+        "hours": 2,
+        "speed": 1,
+        "agents": 99,
+        "factionId": "faction:001",
+        "cityId": "city:001",
+        "eventId": "event:0000000000000660",
+        "initialUnits": {
+          "militia": 600,
+          "archer": 200,
+          "scout": 10,
+          "ram": 20
+        },
+        "prerequisites": "CONTROLLED: explicit troops, observed-intel fixture, protection removed, decision identity/event set; other 99-AI schedules remain active; NOT natural performance evidence"
+      },
+      "departures": [
+        {
+          "commandId": "command:ai-0000000000000660-1",
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ai-0000000000000660-2",
+          "disposition": "applied"
+        }
+      ],
+      "remainingUnits": {
+        "militia": 265,
+        "archer": 89,
+        "scout": 10,
+        "ram": 20
+      },
+      "revisionBefore": 2,
+      "revisionAfter": 3
+    }
+  ],
+  "errors": [],
+  "notVerified": [
+    "physical Android",
+    "mobile GPU FPS",
+    "physical-device memory",
+    "private user saves"
+  ],
+  "concurrency": "idle host; duplicate local simulations stopped; remote CI on separate hosts",
+  "passed": 5,
+  "failed": 0
+}

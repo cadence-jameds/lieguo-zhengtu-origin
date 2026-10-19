@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-19T02:22:12.447119+00:00",
+  "inputHead": "28edce40c45b741c7b1ab62d4f7b3ac5b4a13cb0",
+  "workingDelta": "Additional JS observation helpers, docs and evidence; no production TS delta after functional checkpoint33",
+  "sourceSHA256": {
+    "src/game/formal/p0c9Attack.test.ts": "81d4429a22d335039e53353e0ae53e94e34d520d3124024c64933a73b71fcb30",
+    "src/game/formal/p0c9Strategies.test.ts": "4975affa1437ffd4edcda4c8fa1beb9fe94569a7e17b70a87ffbea96143322d5",
+    "scripts/p0c9-native-browser.mjs": "d1891238844870b9d3f3fa864a00617dba42d104d107dc56196832a2eedd69b8",
+    "scripts/p0c9-score-audit.mjs": "0b63837a5d8dddf2be716e81ee6e296b6db3b5da64d3c02673d57f5d27c10586",
+    "scripts/p0c9-scenarios.mjs": "00e8d137e9f080cd0a0cd9d80ff12973dcd7650bd3864a141361eadc0ee855ac"
+  },
+  "targetedCommand": "npx vitest run src/game/formal/p0c9Attack.test.ts src/game/formal/p0c9Strategies.test.ts src/game/formal/autonomyR2a.test.ts src/game/formal/autonomyR2b.test.ts src/game/formal/autonomyRuntimeR2c.test.ts --reporter=json --outputFile=/workspace/research/p0c9-evidence/targeted-final.json",
+  "targeted": {
+    "passed": 59,
+    "failed": 0,
+    "skipped": 0
+  },
+  "typecheckCommand": "npm run typecheck",
+  "typecheck": "exit0",
+  "node": "v24.19.0",
+  "cpuQuota": "200000 100000",
+  "all35Cases": "head28edce4; see matrix JSON/CSV and CI run39187161204"
+}

@@ -1,0 +1,676 @@
+{
+  "inputHead": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+  "inputSourceTreeHash": "e4593f025c007159d847f5e8603335bda7f0ac27698d0be258e137ef36969b04",
+  "browser": "154.0.8037.57",
+  "platform": "headless Chromium on Linux; native IndexedDB and production Worker",
+  "cases": [
+    {
+      "case": "natural UI durable rename",
+      "speed": 1,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:a166d36a-6c44-4957-9db7-f76eae1e2e25",
+          "status": "committed",
+          "ackMs": 1308.9000000003725,
+          "renderMs": 1352.1000000014901
+        },
+        {
+          "id": "command:522f7837-f013-4ae0-b026-7fa885d09ce1",
+          "status": "committed",
+          "ackMs": 785.5,
+          "renderMs": 886.0999999996275
+        },
+        {
+          "id": "command:733089b9-394c-4451-9cc1-a2da701420f9",
+          "status": "committed",
+          "ackMs": 853,
+          "renderMs": 913.4000000003725
+        },
+        {
+          "id": "command:a39476f7-6fe9-41ec-b207-44cd09cae9ae",
+          "status": "committed",
+          "ackMs": 584.7999999988824,
+          "renderMs": 641.1999999992549
+        },
+        {
+          "id": "command:fbd9dbd0-ab60-496a-9d60-e0e0302501e1",
+          "status": "committed",
+          "ackMs": 1011.2000000011176,
+          "renderMs": 1071.5
+        },
+        {
+          "id": "command:0ef133f7-616c-4a8f-bedd-a05b73677013",
+          "status": "committed",
+          "ackMs": 752.2999999988824,
+          "renderMs": 810.0999999996275
+        },
+        {
+          "id": "command:dcd868cd-0482-4519-a3e4-bba1f81a49d1",
+          "status": "committed",
+          "ackMs": 660.0999999996275,
+          "renderMs": 710.9000000003725
+        },
+        {
+          "id": "command:96bc8a9d-6d15-43f9-b0d8-f55115300277",
+          "status": "committed",
+          "ackMs": 688.6000000014901,
+          "renderMs": 744.4000000003725
+        },
+        {
+          "id": "command:c38511c6-cf62-4395-9883-b51a0c1bf1e8",
+          "status": "committed",
+          "ackMs": 611.4000000003725,
+          "renderMs": 655.8000000007451
+        },
+        {
+          "id": "command:dad7e939-e399-45bf-955e-cb198d7bef49",
+          "status": "committed",
+          "ackMs": 755.5999999996275,
+          "renderMs": 825.8000000007451
+        },
+        {
+          "id": "command:5e68e10b-4f4f-4cec-8bac-6c37fe67ca24",
+          "status": "committed",
+          "ackMs": 781.1999999992549,
+          "renderMs": 835.1999999992549
+        },
+        {
+          "id": "command:8c3725fb-72c4-4689-b744-7db5c1ff40b4",
+          "status": "committed",
+          "ackMs": 830.0999999996275,
+          "renderMs": 881.2999999988824
+        },
+        {
+          "id": "command:00fd0976-dd7f-41a0-910c-c9f6b72914f6",
+          "status": "committed",
+          "ackMs": 737.8000000007451,
+          "renderMs": 799.5
+        },
+        {
+          "id": "command:b463227e-a0ce-4756-961a-14e08760f034",
+          "status": "committed",
+          "ackMs": 755.4000000003725,
+          "renderMs": 816.5
+        },
+        {
+          "id": "command:a64bea77-624f-4157-b707-2ba71c785a12",
+          "status": "committed",
+          "ackMs": 622.2000000011176,
+          "renderMs": 670.4000000003725
+        },
+        {
+          "id": "command:50296008-e386-481f-930d-441c331f97d8",
+          "status": "committed",
+          "ackMs": 957.1999999992549,
+          "renderMs": 1007.5999999996275
+        },
+        {
+          "id": "command:615787d2-4984-4d4f-9d1a-1cf6b4b7d6e4",
+          "status": "committed",
+          "ackMs": 587.4000000003725,
+          "renderMs": 637.4000000003725
+        },
+        {
+          "id": "command:0356d485-bd0c-4d80-88b4-18b8ab174dd8",
+          "status": "committed",
+          "ackMs": 758.5,
+          "renderMs": 826.4000000003725
+        },
+        {
+          "id": "command:26d9d18d-b3f0-4974-9ddf-56d42cda79e8",
+          "status": "committed",
+          "ackMs": 623.5,
+          "renderMs": 717.4000000003725
+        },
+        {
+          "id": "command:158eda38-591b-424e-a8c2-4dd6c92238ea",
+          "status": "committed",
+          "ackMs": 766.6999999992549,
+          "renderMs": 847.2999999988824
+        }
+      ],
+      "latency": {
+        "n": 20,
+        "p50": 816.5,
+        "p95": 1071.5,
+        "max": 1352.1000000014901
+      },
+      "inputHours": 96,
+      "aiRecords": 99,
+      "liveAI": 99,
+      "duplicate": "duplicate",
+      "trueConflict": "世界版本已更新，請重新確認狀態。",
+      "reload": true
+    },
+    {
+      "case": "natural UI durable rename",
+      "speed": 10,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:fe2fc1db-feed-4bb8-87f9-858e27779c8e",
+          "status": "committed",
+          "ackMs": 1731,
+          "renderMs": 1780.699999999255
+        },
+        {
+          "id": "command:197cdcaf-50db-4d58-a668-3e823fb93ad8",
+          "status": "committed",
+          "ackMs": 723.9000000003725,
+          "renderMs": 791.5999999996275
+        },
+        {
+          "id": "command:1b016e9a-39fe-4cea-a6e1-9a323f9123fc",
+          "status": "committed",
+          "ackMs": 1208.4000000003725,
+          "renderMs": 1251.300000000745
+        },
+        {
+          "id": "command:221a3880-a2af-425d-9478-de72e1d59342",
+          "status": "committed",
+          "ackMs": 572.6999999992549,
+          "renderMs": 619.2999999988824
+        },
+        {
+          "id": "command:1b275c8b-4984-4323-a7e9-fcee63d5b78c",
+          "status": "committed",
+          "ackMs": 563.8000000007451,
+          "renderMs": 607.4000000003725
+        },
+        {
+          "id": "command:0f763c7c-6324-40f0-b71e-078ec9ce0111",
+          "status": "committed",
+          "ackMs": 1323.5999999996275,
+          "renderMs": 1386.699999999255
+        },
+        {
+          "id": "command:3c00b97b-78b7-4076-a8d8-c8b5d6e14703",
+          "status": "committed",
+          "ackMs": 489.5,
+          "renderMs": 529.8000000007451
+        },
+        {
+          "id": "command:73c9d58b-8bf3-4f4e-b3b8-bb114228811a",
+          "status": "committed",
+          "ackMs": 710,
+          "renderMs": 761.2999999988824
+        },
+        {
+          "id": "command:709aeef4-f6d8-4281-96ad-c199da173277",
+          "status": "committed",
+          "ackMs": 616.4000000003725,
+          "renderMs": 658.0999999996275
+        },
+        {
+          "id": "command:a1a574ff-5189-46c6-9b8e-89d55064b07a",
+          "status": "committed",
+          "ackMs": 566.2999999988824,
+          "renderMs": 623.1999999992549
+        },
+        {
+          "id": "command:8cf3c21f-c346-4651-bd3b-19237937a411",
+          "status": "committed",
+          "ackMs": 1736.5,
+          "renderMs": 1801.5
+        },
+        {
+          "id": "command:48b00fca-6556-4193-9266-966fdbcdc42c",
+          "status": "committed",
+          "ackMs": 905.7000000011176,
+          "renderMs": 958.7000000011176
+        },
+        {
+          "id": "command:7fd3d1f1-c873-4d59-8dd3-fab9f0fccf81",
+          "status": "committed",
+          "ackMs": 630.1000000014901,
+          "renderMs": 677.1000000014901
+        },
+        {
+          "id": "command:c75fc950-f717-49f5-b09e-d90638e449cd",
+          "status": "committed",
+          "ackMs": 586,
+          "renderMs": 629.5999999996275
+        },
+        {
+          "id": "command:ecb185a3-b868-43d3-bfb6-73105962f96c",
+          "status": "committed",
+          "ackMs": 948.4000000003725,
+          "renderMs": 989.9000000003725
+        },
+        {
+          "id": "command:0a0f1f98-d7a8-400a-90a5-b0d13e457d57",
+          "status": "committed",
+          "ackMs": 656.9000000003725,
+          "renderMs": 709.4000000003725
+        },
+        {
+          "id": "command:d00bfa0d-95a3-4704-8ca3-629760b789a3",
+          "status": "committed",
+          "ackMs": 1258.800000000745,
+          "renderMs": 1317.6000000014901
+        },
+        {
+          "id": "command:278dbd94-72cc-4289-94fe-dbc9e04f5838",
+          "status": "committed",
+          "ackMs": 785.2999999988824,
+          "renderMs": 851.7999999988824
+        },
+        {
+          "id": "command:e0e40cec-e94f-4f03-ad80-056c7cb37492",
+          "status": "committed",
+          "ackMs": 2050.199999999255,
+          "renderMs": 2137.300000000745
+        },
+        {
+          "id": "command:4467245e-a2b7-4fef-acc6-f4c1237e5668",
+          "status": "committed",
+          "ackMs": 838,
+          "renderMs": 905.5
+        }
+      ],
+      "latency": {
+        "n": 20,
+        "p50": 791.5999999996275,
+        "p95": 1801.5,
+        "max": 2137.300000000745
+      },
+      "inputHours": 96,
+      "aiRecords": 99,
+      "liveAI": 99,
+      "duplicate": "duplicate",
+      "trueConflict": "世界版本已更新，請重新確認狀態。",
+      "reload": true
+    },
+    {
+      "case": "natural UI durable rename",
+      "speed": 50,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:b41f777e-e893-499d-9d6c-078744c14b4a",
+          "status": "committed",
+          "ackMs": 2031.9000000003725,
+          "renderMs": 2083.5
+        },
+        {
+          "id": "command:6793394c-70e3-4986-b9e1-6e3ad79655e8",
+          "status": "committed",
+          "ackMs": 1525.3999999985099,
+          "renderMs": 1595
+        },
+        {
+          "id": "command:22657b3c-981b-46ff-98b3-8db1aa684f2d",
+          "status": "committed",
+          "ackMs": 1761.8999999985099,
+          "renderMs": 1823.3999999985099
+        },
+        {
+          "id": "command:87a8d224-e3c7-4565-9f26-71715e3b9bec",
+          "status": "committed",
+          "ackMs": 1847.2000000011176,
+          "renderMs": 1911.1000000014901
+        },
+        {
+          "id": "command:64259a7e-b5da-469f-94a1-ce5d23ecbc2a",
+          "status": "committed",
+          "ackMs": 1407.5999999996275,
+          "renderMs": 1460.800000000745
+        },
+        {
+          "id": "command:1a7dc5a6-bbb3-429f-96dd-ee0137251795",
+          "status": "committed",
+          "ackMs": 1881.199999999255,
+          "renderMs": 1943.0999999996275
+        },
+        {
+          "id": "command:6e5e22df-a092-4b1a-b407-2beacf76796b",
+          "status": "committed",
+          "ackMs": 1494.1000000014901,
+          "renderMs": 1548.800000000745
+        },
+        {
+          "id": "command:66686275-abd0-4b79-9078-958116055c93",
+          "status": "committed",
+          "ackMs": 1265.199999999255,
+          "renderMs": 1327.7999999988824
+        },
+        {
+          "id": "command:2f4d4337-b0e6-444c-b412-e8056eaded11",
+          "status": "committed",
+          "ackMs": 1477.0999999996275,
+          "renderMs": 1532.9000000003725
+        },
+        {
+          "id": "command:cc2d26ab-f901-43d8-9bf9-62a3a65fc4c8",
+          "status": "committed",
+          "ackMs": 1581.5,
+          "renderMs": 1625.1000000014901
+        },
+        {
+          "id": "command:875c4a64-ab28-4b19-b1f9-0f93e4c9a462",
+          "status": "committed",
+          "ackMs": 1189.300000000745,
+          "renderMs": 1243.5
+        },
+        {
+          "id": "command:1ef23970-5ce2-43ac-988e-f1510c98c728",
+          "status": "committed",
+          "ackMs": 1285.9000000003725,
+          "renderMs": 1343.699999999255
+        },
+        {
+          "id": "command:5c216854-56c1-40be-a435-9f3c29f743c0",
+          "status": "committed",
+          "ackMs": 516.1000000014901,
+          "renderMs": 561.1000000014901
+        },
+        {
+          "id": "command:94cff7d2-8bbb-4ac4-b252-8af09addd268",
+          "status": "committed",
+          "ackMs": 983.1000000014901,
+          "renderMs": 1036.5
+        },
+        {
+          "id": "command:f6a94e43-ef8b-40c1-ae62-d5ad6704da3a",
+          "status": "committed",
+          "ackMs": 1644.6000000014901,
+          "renderMs": 1702
+        },
+        {
+          "id": "command:e32c9b33-a75d-47fe-93d5-2a64f8fefddb",
+          "status": "committed",
+          "ackMs": 1538.7999999988824,
+          "renderMs": 1586.699999999255
+        },
+        {
+          "id": "command:907e1f89-82a8-48b7-848e-1438be76a299",
+          "status": "committed",
+          "ackMs": 2077.10000000149,
+          "renderMs": 2135.2000000011176
+        },
+        {
+          "id": "command:a2d9e3a9-0ff2-4ef2-84b4-c15202fb7539",
+          "status": "committed",
+          "ackMs": 1517.800000000745,
+          "renderMs": 1568.300000000745
+        },
+        {
+          "id": "command:7506b725-8df5-4605-897c-7c18c24c5516",
+          "status": "committed",
+          "ackMs": 1589.9000000003725,
+          "renderMs": 1653.5999999996275
+        },
+        {
+          "id": "command:10c171fe-682d-49d8-b941-deb88ae60fe0",
+          "status": "committed",
+          "ackMs": 2112.39999999851,
+          "renderMs": 2188.0999999996275
+        }
+      ],
+      "latency": {
+        "n": 20,
+        "p50": 1586.699999999255,
+        "p95": 2135.2000000011176,
+        "max": 2188.0999999996275
+      },
+      "inputHours": 96,
+      "aiRecords": 99,
+      "liveAI": 99,
+      "duplicate": "duplicate",
+      "trueConflict": "世界版本已更新，請重新確認狀態。",
+      "reload": true
+    },
+    {
+      "case": "controlled real AI parallel / native Recovery",
+      "mobile": false,
+      "status": "PASS",
+      "fixture": {
+        "name": "controlled-parallel.realm-save",
+        "hours": 2,
+        "speed": 1,
+        "agents": 99,
+        "factionId": "faction:001",
+        "cityId": "city:001",
+        "eventId": "event:0000000000000660",
+        "initialUnits": {
+          "militia": 600,
+          "archer": 200,
+          "scout": 10,
+          "ram": 20
+        },
+        "prerequisites": "CONTROLLED: explicit troops, observed-intel fixture, protection removed, decision identity/event set; other 99-AI schedules remain active; NOT natural performance evidence"
+      },
+      "departures": [
+        {
+          "commandId": "command:ai-0000000000000660-1",
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ai-0000000000000660-2",
+          "disposition": "applied"
+        }
+      ],
+      "remainingUnits": {
+        "militia": 265,
+        "archer": 89,
+        "scout": 10,
+        "ram": 20
+      },
+      "revisionBefore": 2,
+      "revisionAfter": 3
+    },
+    {
+      "case": "controlled real AI parallel / native Recovery",
+      "mobile": true,
+      "status": "PASS",
+      "fixture": {
+        "name": "controlled-parallel.realm-save",
+        "hours": 2,
+        "speed": 1,
+        "agents": 99,
+        "factionId": "faction:001",
+        "cityId": "city:001",
+        "eventId": "event:0000000000000660",
+        "initialUnits": {
+          "militia": 600,
+          "archer": 200,
+          "scout": 10,
+          "ram": 20
+        },
+        "prerequisites": "CONTROLLED: explicit troops, observed-intel fixture, protection removed, decision identity/event set; other 99-AI schedules remain active; NOT natural performance evidence"
+      },
+      "departures": [
+        {
+          "commandId": "command:ai-0000000000000660-1",
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:ai-0000000000000660-2",
+          "disposition": "applied"
+        }
+      ],
+      "remainingUnits": {
+        "militia": 265,
+        "archer": 89,
+        "scout": 10,
+        "ram": 20
+      },
+      "revisionBefore": 2,
+      "revisionAfter": 3
+    }
+  ],
+  "errors": [],
+  "notVerified": [
+    "physical Android",
+    "mobile GPU FPS",
+    "physical-device memory",
+    "private user saves"
+  ],
+  "concurrency": "isolated local host; paired main completed first; no local simulations running; remote CI on separate VMs",
+  "mode": "candidate latency and parallel functionality",
+  "testedRelease": {
+    "format": 1,
+    "version": "0.30.55",
+    "date": "2026-10-19",
+    "title": "AI 五策略性格加權動態進攻",
+    "commitSha": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+    "contentSha": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+    "dirty": false,
+    "history": [
+      {
+        "title": "AI 五策略性格加權動態進攻",
+        "notes": [
+          "AI 每次符合軍事行動條件時，會依性格從五種策略重新選擇進攻方式。",
+          "附近仍有敵城時，部分 AI 策略也會評估普通野外據點，並維持正常行軍、戰鬥與戰利品返城。",
+          "多線出征會逐筆確認實際兵力與守軍預留，避免重複使用同一批部隊。"
+        ],
+        "version": "0.30.55",
+        "date": "2026-10-19",
+        "commitSha": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7"
+      },
+      {
+        "title": "更新安全恢復與線上版本資訊同步",
+        "notes": [
+          "更新元件失效時會嘗試安全恢復，無法恢復則提供清楚的繁體中文重試說明。",
+          "保存完成確認前不會啟用新版，更新失敗會明確區分尚未保存、保存未確認與已保存狀態。",
+          "專案首頁會自動展示線上版本、更新重點與部署紀錄，並提供可讀文字的歷史更新頁。"
+        ],
+        "version": "0.30.54",
+        "date": "2026-10-17",
+        "commitSha": "06c4cb93779f1f679bb77470515fd8aee1c42de9"
+      },
+      {
+        "title": "軍團、治理與外交介面整合",
+        "notes": [
+          "新增獨立軍團頁，透過總覽、成員、聯防、聯軍與管理分頁操作自己的軍團。",
+          "天下勢力可瀏覽帝國、所有軍團與領主，並保留他方軍事資料的權限限制。",
+          "多城治理改為城市列表與單城設定表單，套用前核對城市狀態並支援更新後重試。",
+          "新增外交記事分類，支援每頁五十則、閱讀與清理，分頁總數維持正確。",
+          "工匠團集中於軍隊特殊單位介面，可選擇與轉移，同／異文明均可免費興建對應文明城堡 Lv1。",
+          "更新六文明開局文案、所選城市的建造與訓練佇列摘要，並改善手機建築卡片的成本排版。"
+        ],
+        "version": "0.30.53",
+        "date": "2026-10-17",
+        "commitSha": "3d1760864f3b9d9a55108c80225764ef8e3099e1"
+      },
+      {
+        "title": "版本與更新資訊自動同步",
+        "notes": [
+          "首頁與戰役設定共用版本、更新日期及更新重點，可離線查看近期與過往紀錄。",
+          "檢查更新可辨識相同版號的不同建置，仍會先安全保存進度再載入更新。"
+        ],
+        "version": "0.30.52",
+        "date": "2026-10-16",
+        "commitSha": "7e52d06c3ca83b1ba99d6f28346e0735b0d29aa2"
+      },
+      {
+        "title": "工匠與城市失守修正",
+        "pr": 3,
+        "notes": [
+          "工匠移動途中目的城市失守時，會嘗試改往其他合法可達城市；全部不可達時安全結束移動。",
+          "城市被征服時，尚未出發的待命聯軍依核准規則清算，不再從敵方城市非法出發。",
+          "同文明與外文明工匠團可免費興建對應文明城堡 Lv1，正常工期與建築前置不變。",
+          "新建立的水域行軍路線使用陸地兩倍耗時，既有在途任務保留原抵達時間。",
+          "修正城市失守時非戰鬥單位與失效工匠工程的清算。"
+        ],
+        "version": "0.30.51",
+        "date": "2026-10-16",
+        "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7"
+      },
+      {
+        "version": "0.30.50",
+        "date": "2026-10-14",
+        "title": "玩家指令與離線載入改善",
+        "notes": [
+          "改善長時間離線後的世界載入速度。",
+          "背景世界持續推進時，玩家操作可安全重新驗證，減少反覆刷新。"
+        ],
+        "commitSha": "7c52ab738e1ed8be2416c9e9fb95db32dceb020f"
+      }
+    ],
+    "legacyNotes": [
+      "玩家操作跨 AI 背景更新時，相關城市條件未變便以最新世界安全重新驗證，減少反覆要求刷新；戰鬥與外交仍維持嚴格保護。",
+      "帝國成立與加入邀請分別綁定意圖及原帝國；接受時重驗資格，舊未綁定邀請由發起者重新確認。",
+      "帝國剩一軍團持續存在；零軍團立即解除並共用清理失效邀請、工程及外交，不退款或免費繼承。",
+      "戰報於部隊損失下方顯示建築／城牆最終損失，移除逐回合攻城紀錄，保留總回合與真正終戰原因。",
+      "v91征服改為主戰與最多12回合持續攻城，當級牆傷於同一圍城內累積，戰術倍率仍封頂10倍。",
+      "行軍頁可查看交戰中／攻城中部隊的即時戰況；本城駐軍守城也有戰況入口。",
+      "戰中只更新同場摘要，終戰才產生一份完整戰報，清楚說明城牆未破與征服失敗原因。",
+      "援軍與訓練完成可暫停攻城、重回主戰；投石機每戰役只結算一次破壞批次。",
+      "B5測試台同步支援逐事件攻城、剩餘回合、即時战況及讀檔續戰。",
+      "首頁更新狀態、檢查更新與保存並更新移至更新日誌上方。",
+      "電腦版左上方遊戲名稱下方顯示始源與目前載入版本。",
+      "恢復每分鐘、返回頁面與恢復連線時檢查更新；首頁與遊戲內可保存進度並載入新版，不必關閉網頁。",
+      "B5測試地圖填滿容器，沿用正式地圖工具與比例標籤；原戰役與測試台地形快取互不替換。",
+      "建造條件維持單行，未達項目保留#FF0000鮮紅、改回一般字重；已達仍為綠色一般字重。",
+      "開發者模式新增B5戰鬥測試台，另存測試世界與戰報，原戰役照常運作。",
+      "可選AI城市、空城／普通守軍／混編大軍／城牆／反偵察情境，設定玩家兵力、攻城器與敵城庫存。",
+      "可模擬一次敵軍掠奪或征服，逐事件檢查正式戰鬥、攻城、城市易主與玩家守城。",
+      "獨立測試備份支援存檔重讀與中途續接；50／200倍速度的戰術倍率仍封頂10倍，測試庫存保持有限。",
+      "野外資源據點不再清除背景樹木與地景，沿用DEMO世界地圖只替城市清場的顯示方式。",
+      "建造頁移除重複前置清單，單行條件逐項顯示已達綠色／未達紅色。",
+      "完整山脈輪廓同步為正式不可通行／不可建城地形；舊存檔避讓城市、據點與在途路線，保存固定山脈配置。",
+      "世界地圖山脈參考DEMO v0.30.2完整山形，移除切平山峰的格線裁切；保留大型重疊山體與完整山峰。",
+      "v90城市偵察取消情報類型選單，只需選擇斥候數量。",
+      "成功偵察一次保存同時點的四資源、駐軍、援軍、城牆與合法城防，存活斥候返回來源城市後才交付。",
+      "偵察戰報與地圖情報頁共用完整快照，保留現實觀測時間；失敗仍為零情報。",
+      "舊在途情報模式可正常讀檔；未抵達任務統一取得完整快照，舊部分歷史紀錄不補推。",
+      "偵察戰報改用斥候觀察城市的專屬圖片。",
+      "建築資訊頁將前置、成本與操作移到效果說明上方；前置皆滿足時預設收合。",
+      "建造頁名稱可查看資訊，時代與最高等級移至名稱右側；條件以紅／綠色標示。",
+      "選取光暈置於地圖建築下方；施工進度獨立浮在城市建築上方。",
+      "野外戰報採用據點實際名稱，金礦統一顯示黃金礦脈。",
+      "維持既有野外偵察、生成、戰利品、重生與Formal存檔架構；本輪未開始B6／B7／B8。",
+      "20種城市建築共用資訊頁：效果、前置、成本、工期及施工狀態，城郊資源田仍獨立。",
+      "City正式晉升移至市政廳；城市中心只保留時代晉升。",
+      "v88正式City永久倉庫容量＋10%，先加總全部倉庫；城市中心固定800不加成。",
+      "市政廳整合晉升進度、勢力行政網路、統治初定與永久人口里程碑。",
+      "地洞統一更名為地庫，保護機制沿用正式規則。",
+      "城堡保留來源文明，既有外文明生產及未接入政治操作顯示唯讀／尚未開放。",
+      "學院、鐵匠鋪與軍事建築顯示科技或兵種資格；一般施工取消退款維持50%／100%。",
+      "資源田Lv10即顯示進階美術，施工預覽同步。",
+      "手機導覽沿用DEMO順序：地圖、城市、軍隊、戰報、科技、勢力、治理。",
+      "v87盜賊營地資源池改為普通據點1.5倍；四資源各15%～35%，依種子、槽位與世代固定，守軍仍1.2倍。",
+      "時代晉升移至城市中心資訊頁，頂部時代入口直接開啟城市中心。",
+      "建築資訊保留等級，移除重複名稱；升級與拆除按鈕平均排列。",
+      "學院顯示目前與下一級研究時間縮短百分比，精銳化研究除外。",
+      "城市中心顯示目前與下一級施工時間縮短百分比。",
+      "野外地塊名稱、等級與座標合併為一行。",
+      "駐軍情報年齡與資源觀測日期改用現實時間，切換世界速度不改變既有觀測時間。",
+      "城內自由槽建築可整座拆除，每級15世界分鐘且不退建材；保留人口，住房不足時停止成長。",
+      "軍隊徵兵恢復DEMO兵種清單、可招募狀態與數量操作，移除解散兵種設定。",
+      "開發者模式直接留在目前戰役：資源近乎無限、50／200倍世界時間、20世界小時保護罩；最外層金框優先於藍框。",
+      "戰報沿用DEMO緊湊列表、損失表與未讀閃爍通知，日期與觀測時間統一顯示現實時間。",
+      "世界地圖城市圖示移除圍牆，沿用DEMO都市格式及保護罩。",
+      "行軍與偵察改用DEMO三角部隊、敵我色彩、虛線路線與持續移動；征服戰術速度仍封頂10倍。",
+      "野外地塊資訊移除等級、戰利品、重生與載量說明段落。",
+      "野外資源據點開放斥候偵察，固定取得資源與軍隊，沒有情報類型選單；情報返城後顯示。",
+      "所有地塊資訊窗改用名稱旁的☆／★收藏；移除底部收藏及返回地圖按鈕，保留右上關閉。",
+      "世界地圖恢復 Demo 資訊窗與獨立偵察／掠奪／佔領按鈕；在原地圖編組出征，顯示路線與單程時間。",
+      "偵察情報由已保存戰報讀取，保留各次觀測時間；未偵察城防不顯示敵方即時數值。",
+      "v86 一般施工取消：施工中50%、排隊100%；軍事訓練與拓殖整備沿用既有規則。",
+      "B5：正式行軍、掠奪、多回合征服、原子攻城、斥候快照、援軍駐防與戰報；50倍速度的征服戰術倍率封頂10倍。",
+      "戰鬥與結算身分納入正式存檔、離線排程與Recovery；野外432個槽位可擊破、冷卻並決定性重生。",
+      "城牆Lv0～15接入正式施工、佇列、取消、存檔與Recovery；復用DEMO城防美術，完工等級只以wallLevel保存。",
+      "v85規格驗證台：獨立規格與程式逐項比對、公式拆解、正反例試玩、操作紀錄與報告；揭露尚未完成項目，不自動宣稱Gate通過。",
+      "新增B2／B3／B4開發者模式：獨立測試情境、五倍數與六文明檢查、快速推進、存檔重讀、Recovery及驗證報告。",
+      "全區低倍率採小型城市標記；一般視距保留v0.30.2圖示、野外據點與標示門檻，恢復深色外圍、地圖邊界及首幀完整底圖。",
+      "倒數、進度與資源數字獨立更新；一般保存每10秒合併一次，完成事件優先提交，保留操作中的視窗與輸入。",
+      "背景刷新不再解除操作等待；純時鐘版本差異同步後重試一次，實際事件與其他操作仍需重新確認。1／3／6／10／50倍逐一驗證。",
+      "修正高倍速短工程等待10秒才更新的問題；到期事件優先提交，建設與訓練倒數統一顯示現實時間。",
+      "手機右上角改顯示人口，縮短城市選單；農林石金摘要與名稱開關排在城郊右側。斥候移到駐軍列最左邊。",
+      "文明衛隊的頂部駐軍圖示移到騎士右邊，手機與桌機順序一致。",
+      "頂部駐軍圖示改為扁平彩色設計，以色系區分兵種類別並保留各自形狀。",
+      "新兵種分類美術只套用頂部駐軍列；徵兵恢復原兵種美術，建造按民生／經濟／軍事／科技分頁並修正圖片位置。",
+      "野外據點恢復沃野農莊／山林木寨／採石場／黃金礦脈／盜賊營地；開啟標示顯示糧木石金寇。",
+      "v85：城堡生產可持有的拓殖隊，建城後消耗；保留正式成本、400移民與20護衛。",
+      "六文明白話介紹與城堡兵種說明，擴充文化姓名及城市名稱。",
+      "穀木石金恢復DEMO各自文字色彩；11條駐軍分類採簡圖。",
+      "城市建設與軍隊分開還原手機及桌機排版，林地、金礦、石場、農田名稱一致。",
+      "地圖恢復持續選取光暈、城市與空地資訊窗；XY定位保留倍率，全區符合384世界。"
+    ]
+  },
+  "passed": 5,
+  "failed": 0
+}

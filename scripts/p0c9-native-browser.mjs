@@ -4,9 +4,11 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 const [pw,fixtures,outArg,url='http://127.0.0.1:4309/lieguo-zhengtu-origin/']=process.argv.slice(2),out=path.resolve(outArg);
+const samplesCount=Number(process.env.P0C9_LATENCY_SAMPLES??8);assert.ok(Number.isInteger(samplesCount)&&samplesCount>=2&&samplesCount<=100);
 await fs.mkdir(out,{recursive:true});const manifest=JSON.parse(await fs.readFile(path.join(fixtures,'manifest.json'),'utf8'));
 const {chromium}=await import(pathToFileURL(path.resolve(pw)).href),browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
-const result={inputHead:manifest.head,inputSourceTreeHash:manifest.sourceTreeHash,browser:browser.version(),platform:'headless Chromium on Linux; native IndexedDB and production Worker',cases:[],errors:[],notVerified:['physical Android','mobile GPU FPS','physical-device memory','private user saves'],concurrency:process.env.P0C9_CONCURRENT??'not recorded; do not infer an idle host'};
+const result={inputHead:manifest.head,inputSourceTreeHash:manifest.sourceTreeHash,browser:browser.version(),platform:'headless Chromium on Linux; native IndexedDB and production Worker',cases:[],errors:[],notVerified:['physical Android','mobile GPU FPS','physical-device memory','private user saves'],concurrency:process.env.P0C9_CONCURRENT??'not recorded; do not infer an idle host',mode:process.env.P0C9_LATENCY_ONLY==='1'?'common UI latency baseline comparator':'candidate latency and parallel functionality'};
+const identityPage=await browser.newPage();result.testedRelease=await (await identityPage.request.get(url+'version.json')).json();await identityPage.close();
 async function context(mobile=false){
  const ctx=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1440,height:900},isMobile:mobile,hasTouch:mobile,reducedMotion:'reduce'}),page=await ctx.newPage();
  page.on('pageerror',e=>result.errors.push(String(e)));page.on('response',r=>{if(r.status()>=400)result.errors.push(r.status()+' '+r.url());});
@@ -35,7 +37,7 @@ for(const speed of [1,10,50]){
  try{
   console.log(JSON.stringify({phase:'native-start',speed}));
   assert.ok(item.owned>0,'Natural world has no legal player city; do not fabricate one');const initial=await load(page,item.name);console.log(JSON.stringify({phase:'native-loaded',speed}));await page.locator('.formal-shell').waitFor();assert.equal(initial.autonomy.agents.length,99);
-  for(let i=0;i<8;i++){console.log(JSON.stringify({phase:'rename',speed,sample:i}));
+  for(let i=0;i<samplesCount;i++){console.log(JSON.stringify({phase:'rename',speed,sample:i}));
    const name=`P0C9-${speed}-${i}`;await page.getByRole('button',{name:'更改城名',exact:true}).click();await page.getByLabel('城市名稱',{exact:true}).fill(name);await page.getByRole('button',{name:'確認改名',exact:true}).click();
    await page.getByRole('heading',{name,exact:true}).waitFor();
    await page.waitForFunction(()=>{const r=window.__sent.at(-1),t=window.__timings[r?.order.commandId];return t?.status==='committed'&&t.renderedAt;});
@@ -46,13 +48,13 @@ for(const speed of [1,10,50]){
   await page.waitForFunction(n=>window.__messages.filter(m=>m.type==='commandAck').length>n,duplicateCount);assert.equal(await page.evaluate(()=>window.__messages.filter(m=>m.type==='commandAck').at(-1).ack.status),'duplicate');
   const stale={...request,requestId:'p0c9-stale',order:{...request.order,commandId:'command:p0c9-stale-'+speed,payload:{...request.order.payload,name:'不得覆蓋新名字'}}};await rpc(page,stale);
   const staleAck=await page.evaluate(id=>window.__messages.find(m=>m.type==='commandAck'&&m.ack.commandId===id)?.ack,stale.order.commandId);assert.equal(staleAck.status,'rejected');
-  await page.screenshot({path:path.join(out,`native-${speed}x.png`),fullPage:true});await page.reload();await page.getByRole('button',{name:'載入進度',exact:true}).click();await page.getByRole('heading',{name:`P0C9-${speed}-7`,exact:true}).waitFor();const final=await current(page);
+  await page.screenshot({path:path.join(out,`native-${speed}x.png`),fullPage:true});await page.reload();await page.getByRole('button',{name:'載入進度',exact:true}).click();await page.getByRole('heading',{name:`P0C9-${speed}-${samplesCount-1}`,exact:true}).waitFor();const final=await current(page);
   assert.equal(final.autonomy.agents.length,99);assert.ok(final.revision>=initial.revision);
   const xs=times.map(t=>t.renderMs);result.cases.push({case:'natural UI durable rename',speed,status:'PASS',samples:times,latency:{n:xs.length,p50:quantile(xs,.5),p95:quantile(xs,.95),max:Math.max(...xs)},inputHours:96,aiRecords:99,liveAI:item.liveAI,duplicate:'duplicate',trueConflict:staleAck.reason,reload:true});
  }catch(e){result.cases.push({case:'natural UI durable rename',speed,status:'FAIL',error:String(e)});await page.screenshot({path:path.join(out,`failure-${speed}x.png`),fullPage:true});}
  await ctx.close();
 }
-for(const mobile of [false,true]){
+for(const mobile of process.env.P0C9_LATENCY_ONLY==='1'?[]:[false,true]){
  const {ctx,page}=await context(mobile),item=manifest.fixtures.find(f=>f.name==='controlled-parallel.realm-save');
  try{
   await load(page,item.name);await page.locator('.formal-shell').waitFor();

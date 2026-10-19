@@ -1,0 +1,76 @@
+{
+  "head": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+  "sourceTreeHash": "e4593f025c007159d847f5e8603335bda7f0ac27698d0be258e137ef36969b04",
+  "fixtures": [
+    {
+      "name": "natural-96h-1x.realm-save",
+      "hours": 96,
+      "speed": 1,
+      "owned": 1,
+      "agents": 99,
+      "liveAI": 99,
+      "prerequisites": "natural world; only speed/offline cap selected for controlled timing"
+    },
+    {
+      "name": "natural-96h-10x.realm-save",
+      "hours": 96,
+      "speed": 10,
+      "owned": 1,
+      "agents": 99,
+      "liveAI": 99,
+      "prerequisites": "natural world; only speed/offline cap selected for controlled timing"
+    },
+    {
+      "name": "natural-96h-50x.realm-save",
+      "hours": 96,
+      "speed": 50,
+      "owned": 1,
+      "agents": 99,
+      "liveAI": 99,
+      "prerequisites": "natural world; only speed/offline cap selected for controlled timing"
+    },
+    {
+      "name": "natural-168h-1x.realm-save",
+      "hours": 168,
+      "speed": 1,
+      "owned": 1,
+      "agents": 99,
+      "liveAI": 81,
+      "prerequisites": "natural world; only speed/offline cap selected for controlled timing"
+    },
+    {
+      "name": "natural-168h-10x.realm-save",
+      "hours": 168,
+      "speed": 10,
+      "owned": 1,
+      "agents": 99,
+      "liveAI": 81,
+      "prerequisites": "natural world; only speed/offline cap selected for controlled timing"
+    },
+    {
+      "name": "natural-168h-50x.realm-save",
+      "hours": 168,
+      "speed": 50,
+      "owned": 1,
+      "agents": 99,
+      "liveAI": 81,
+      "prerequisites": "natural world; only speed/offline cap selected for controlled timing"
+    },
+    {
+      "name": "controlled-parallel.realm-save",
+      "hours": 2,
+      "speed": 1,
+      "agents": 99,
+      "factionId": "faction:001",
+      "cityId": "city:001",
+      "eventId": "event:0000000000000660",
+      "initialUnits": {
+        "militia": 600,
+        "archer": 200,
+        "scout": 10,
+        "ram": 20
+      },
+      "prerequisites": "CONTROLLED: explicit troops, observed-intel fixture, protection removed, decision identity/event set; other 99-AI schedules remain active; NOT natural performance evidence"
+    }
+  ]
+}

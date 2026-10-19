@@ -1,0 +1,318 @@
+{
+  "head": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+  "sourceTreeHash": "e4593f025c007159d847f5e8603335bda7f0ac27698d0be258e137ef36969b04",
+  "scope": "CONTROLLED expression audit: one level-1 site, 1000 militia, zero stocks, original seeded traits; reduced decision-only world, never submitted or saved. These are observed probe ranges, not natural-world score distributions.",
+  "distanceDenominators": {
+    "V2B48": 24,
+    "V3Parallel48": 24,
+    "WildPriority60": 24,
+    "WildParallel48": 24,
+    "city": 48
+  },
+  "edits": [
+    "const value = 0.45 * need(site) + .3 * (1 - distance / 24) + .2 * safety + .05 * clamp(site.level / 10);",
+    "score: 100 * (.30 * e + .25 * g + .25 * p + .15 * distance + .05 * .5)",
+    "const score = 100 * (.40 * need + .25 * safety + .20 * distance + .15 * (.45 * a.traits.economy + .55 * a.traits.raiding));"
+  ],
+  "rows": [
+    {
+      "mode": "A48",
+      "distance": 1,
+      "eligible": true,
+      "selected": true,
+      "scores": null
+    },
+    {
+      "mode": "A48",
+      "distance": 24,
+      "eligible": true,
+      "selected": true,
+      "scores": null
+    },
+    {
+      "mode": "A48",
+      "distance": 25,
+      "eligible": true,
+      "selected": true,
+      "scores": null
+    },
+    {
+      "mode": "A48",
+      "distance": 48,
+      "eligible": true,
+      "selected": true,
+      "scores": null
+    },
+    {
+      "mode": "A48",
+      "distance": 49,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "A48",
+      "distance": 60,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "A48",
+      "distance": 61,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "V2B48",
+      "distance": 1,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 0.9265000000000001,
+        "max": 0.9265000000000001
+      }
+    },
+    {
+      "mode": "V2B48",
+      "distance": 24,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 0.639,
+        "max": 0.639
+      }
+    },
+    {
+      "mode": "V2B48",
+      "distance": 25,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 0.6265000000000001,
+        "max": 0.6265000000000001
+      }
+    },
+    {
+      "mode": "V2B48",
+      "distance": 48,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 0.3390000000000001,
+        "max": 0.3390000000000001
+      }
+    },
+    {
+      "mode": "V2B48",
+      "distance": 49,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "V2B48",
+      "distance": 60,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "V2B48",
+      "distance": 61,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 1,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 86.55154884012882,
+        "max": 86.55154884012882
+      }
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 24,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.17654884012882,
+        "max": 72.17654884012882
+      }
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 25,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.17654884012882,
+        "max": 72.17654884012882
+      }
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 48,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.17654884012882,
+        "max": 72.17654884012882
+      }
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 49,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 60,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "V3Parallel48",
+      "distance": 61,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 1,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 91.37351103573262,
+        "max": 91.37351103573262
+      }
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 24,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 25,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 48,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 49,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 60,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildPriority60",
+      "distance": 61,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 1,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 91.37351103573262,
+        "max": 91.37351103573262
+      }
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 24,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 25,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 48,
+      "eligible": true,
+      "selected": true,
+      "scores": {
+        "min": 72.20684436906595,
+        "max": 72.20684436906595
+      }
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 49,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 60,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    },
+    {
+      "mode": "WildParallel48",
+      "distance": 61,
+      "eligible": false,
+      "selected": false,
+      "scores": null
+    }
+  ]
+}
