@@ -128,3 +128,12 @@ it('C4 combined replay fault exposes neither event draft nor command success',as
  const w=createFormalFixture();w.events=[{id:eventId('combined-fault'),type:'fixture.marker',at:1000,marker:'preserved'}];await load(w);storage.save.mockRejectedValueOnce(new Error('combined atomic failure'));now=10000;click(w,'combined-fault-click',{type:'city.rename',cityId:fixtureIds.home,name:'不可提前顯示'});await until(()=>done('combined-fault-click'));
  expect(ack('combined-fault-click').status).toBe('rejected');expect(latest()).toEqual(w);expect(latest().events).toHaveLength(1);expect(messages.some(m=>m.type==='commandAck'&&m.ack.status==='committed')).toBe(false);
 });
+
+it('C3 a stale dispatch crosses unrelated catch-up exactly once and waits for durable save before ACK',async()=>{
+ const w=createFormalFixture();w.cities[0].military={units:{militia:20},queue:[],unpaidFood:0};w.events=[{id:eventId('dispatch-clock'),type:'fixture.marker',at:1000,marker:'once'}];await load(w);
+ let finish!:(w:FormalWorld)=>void,draft!:FormalWorld;storage.save.mockImplementationOnce((next:FormalWorld)=>{draft=next;return new Promise<FormalWorld>(resolve=>finish=resolve);});
+ now=10000;const issued=click(w,'dispatch-after-clock',{type:'army.dispatch',cityId:fixtureIds.home,mission:'raid',target:{kind:'city',cityId:fixtureIds.foreign},units:{militia:10}});await until(()=>storage.save.mock.calls.length===1);
+ expect(ack('dispatch-after-clock')).toBeUndefined();expect(messages.some(m=>m.type==='state')).toBe(false);expect(draft.cities[0].military!.units.militia).toBe(10);expect(draft.armies.filter(a=>'commandId' in a&&a.commandId===issued.commandId)).toHaveLength(1);
+ finish(draft);await until(()=>done('dispatch-after-clock'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(latest().revision).toBe(w.revision+1);
+ send({type:'command',requestId:'dispatch-repeat',order:issued,playerBase:playerOrderBase(w,issued.payload)});await until(()=>done('dispatch-repeat'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(messages.filter(m=>m.type==='commandAck').at(-1).ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);expect(latest().cities[0].military!.units.militia).toBe(10);
+});

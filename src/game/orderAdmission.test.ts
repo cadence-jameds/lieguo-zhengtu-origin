@@ -129,3 +129,12 @@ it('keeps construction, training and research prerequisites tied to the original
  expect(playerOrderWithBase(researchWorld,order(w,'tech',tech),techBase).expectedRevision).toBe(0);
  expect(playerOrderBase(w,{type:'developer.configure',cityId:fixtureIds.home,enabled:true,speed:50})).toBeUndefined();
 });
+
+it('P0-C3 dispatch ignores unrelated AI revision but fences owned troops, destination generation/ownership, diplomacy and terrain',()=>{
+ const w=isolatedAutonomyFixture(createFormalWorld({campaign:'dispatch-admission',seed:90217})),c=w.cities[0];c.military!.units={militia:20};const target=w.worldLayer!.wildSites.find(s=>s.phase==='active')!,payload={type:'army.dispatch' as const,cityId:c.id,mission:'raid' as const,target:{kind:'wild' as const,siteId:target.id,generation:target.generation},units:{militia:10}},issued=order(w,'dispatch',payload),base=playerOrderBase(w,payload);
+ expect(base).toBeDefined();const ai=structuredClone(w);ai.revision++;ai.cities[1].stock.food+=1;const admitted=playerOrderWithBase(ai,issued,base);expect(admitted.expectedRevision).toBe(ai.revision);expect(submitFormalOrder(ai,admitted).ack?.status).toBe('committed');
+ for(const mutate of [(n:typeof w)=>{n.cities[0].military!.units.militia=19;},(n:typeof w)=>{n.worldLayer!.wildSites.find(s=>s.id===target.id)!.generation++;},(n:typeof w)=>{n.worldLayer!.terrain=(n.worldLayer!.terrain[0]==='W'?'L':'W')+n.worldLayer!.terrain.slice(1);}]){const n=structuredClone(ai);mutate(n);expect(playerOrderWithBase(n,issued,base)).toBe(issued);}
+ const cityPayload={...payload,target:{kind:'city' as const,cityId:w.cities[1].id}},cityIssued=order(w,'city-dispatch',cityPayload),cityBase=playerOrderBase(w,cityPayload);const changed=structuredClone(ai);changed.cities[1].ownerFactionId=w.factions[2].id;expect(playerOrderWithBase(changed,cityIssued,cityBase)).toBe(cityIssued);
+ const diplomacy=structuredClone(ai);diplomacy.politics??=initialPolitics();diplomacy.politics.relations.push({a:w.playerFactionId,b:w.cities[1].ownerFactionId,state:'friendly'});expect(playerOrderWithBase(diplomacy,cityIssued,cityBase)).toBe(cityIssued);expect(playerOrderWithBase(ai,issued,base,ai.revision)).toBe(issued);
+});
+import {initialPolitics} from './formal/politics';

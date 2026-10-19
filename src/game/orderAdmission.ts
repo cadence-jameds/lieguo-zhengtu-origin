@@ -1,6 +1,10 @@
 import type {FormalCommand,FormalOrder,FormalWorld} from './formal/model';
 import {buildingKind,buildingLevel} from './formal/catalogB3';
 import {buildingRequirements} from './formal/buildingDetailData';
+import {spatial} from './formal/spatial';
+import {canReinforce} from './formal/armies';
+import {diplomaticRelation,politicalScope} from './formal/politics';
+import {protectedFaction} from './formal/playtest';
 
 /** The UI records only the intended action's relevant preconditions.
  * Production, elapsed time and unrelated AI factions do not invalidate
@@ -19,6 +23,17 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
  const jobs=targetJobs.map(j=>[j.commandId,j.eventId,j.fromLevel,j.toLevel,j.action,j.lane]);
  const secondLane='lane' in p&&p.lane===1?!!city.economy?.milestones.includes(15000):null;
  switch(p.type){
+  case 'army.dispatch':{
+   // Stamp public destination identity/authority and the selected own units,
+   // never hidden enemy troops. The reducer rechecks all current legality and
+   // computes a fresh route before the unchanged atomic save/CAS boundary.
+   const requested=p.target;
+   const target=requested.kind==='city'?w.cities.find(c=>c.id===requested.cityId):spatial(w).sites.get(requested.siteId);
+   const destination=target&&('ownerFactionId' in target?
+    [target.id,target.x,target.y,target.ownerFactionId,politicalScope(w,target.ownerFactionId),diplomaticRelation(w,faction.id,target.ownerFactionId),canReinforce(w,faction.id,target.ownerFactionId),protectedFaction(w,target.ownerFactionId)]:
+    [target.id,target.x,target.y,target.generation,target.phase??'active']);
+   return[city.x,city.y,Object.keys(p.units).sort().map(id=>[id,city.military?.units[id]??0]),faction.civilizationId,faction.age,faction.techIds,politicalScope(w,faction.id),destination,w.dimensions,w.worldLayer?.terrain,w.worldLayer?.mountains];
+  }
   case 'city.rename':return[city.name];
   case 'field.upgrade':{
    const field=city.fields?.find(f=>f.slot===p.slot),from=targetJobs.at(-1)?.toLevel??field?.level??0;
@@ -44,7 +59,7 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
   case 'research.contribute':return[w.researchProjects.find(t=>t.projectId===p.projectId),faction.researchQueue];
   case 'city.promote':return[city.cityPromotionCompleted,city.economy?.promotion,city.buildings,city.economy?.milestones];
   case 'logistics.auto.set':return[city.autoLogistics,city.buildings,construction];
-  // No automatic admission for combat, diplomacy, dispatch, withdrawal,
+  // No automatic admission for other combat, diplomacy, withdrawal,
   // disbanding, developer tools or cross-city movement.
   default:return;
  }
