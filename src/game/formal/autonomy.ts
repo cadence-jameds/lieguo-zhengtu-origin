@@ -1,3 +1,4 @@
+import {attackGarrisons,autonomousDispatchReason} from './aiAttackStrategies';
 import {supplyDecision,GOVERNOR_DEFAULTS} from './governance';
 import {politicalDecision,militaryDecision,expansionDecision,updatePublicMemory} from './aiActions';
 import type {FormalCity,FormalCommand,FormalEvent,FormalReport,FormalWorld,Resources} from './model';
@@ -51,8 +52,33 @@ export function chooseEconomic(choices:Choice[],a:Agent,seed:number,city:FormalC
  return eligible.sort((x,y)=>y.score-x.score||JSON.stringify(x.command).localeCompare(JSON.stringify(y.command),'en'))[Math.floor(aiRandom(seed,a.factionId,a.decisions+40)*Math.min(3,eligible.length))]?.command;
 }
 export type Submit=(w:FormalWorld,order:unknown)=>import('./model').FormalTransition;
-export function submitAutonomous(w:FormalWorld,s:EventScheduler,e:FormalEvent,factionId:FactionId,commands:FormalCommand[],submit:Submit){const reports:FormalReport[]=[];
- for(let i=0;i<commands.length;i++){w.events=s.snapshot();const t=submit(w,{commandId:commandId('ai-'+e.id.slice(6)+'-'+i),campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]});if(t.ack?.status==='committed'){Object.assign(w,t.world);invalidateSpatial(w);s.replace(w.events);if(w.autonomy)w.autonomy.accepted++;reports.push(...t.reports.filter(r=>r.ownerFactionId===w.playerFactionId));}else if(w.autonomy)w.autonomy.rejected++;}return reports;
+/** Incremental presence index only; the reducer remains authoritative for fingerprints/dispositions.
+ * Rebuild if a prefix is replaced, so Recovery/test inputs cannot reuse a stale index. */
+const autonomousReceipts=new WeakMap<FormalWorld,{indexed:number;last:unknown;ids:Set<string>}>();
+function hasAutonomousReceipt(w:FormalWorld,id:string){
+ let cache=autonomousReceipts.get(w);
+ if(!cache||w.commandReceipts.length<cache.indexed||cache.indexed&&w.commandReceipts[cache.indexed-1]!==cache.last){
+  cache={indexed:0,last:undefined,ids:new Set()};autonomousReceipts.set(w,cache);
+ }
+ for(;cache.indexed<w.commandReceipts.length;cache.indexed++)cache.ids.add(w.commandReceipts[cache.indexed].commandId);
+ cache.last=w.commandReceipts[cache.indexed-1];return cache.ids.has(id);
+}
+export function submitAutonomous(w:FormalWorld,s:EventScheduler,e:FormalEvent,factionId:FactionId,commands:FormalCommand[],submit:Submit){
+ const reports:FormalReport[]=[],floors=attackGarrisons(w,commands);
+ for(let i=0;i<commands.length;i++){
+  const id=commandId('ai-'+e.id.slice(6)+'-'+i);
+  // Existing identities go to reducer dedupe first, even if their troops have already departed.
+  if(!hasAutonomousReceipt(w,id)&&autonomousDispatchReason(w,factionId,commands[i],floors)){
+   if(w.autonomy)w.autonomy.rejected++;continue;
+  }
+  w.events=s.snapshot();
+  const t=submit(w,{commandId:id,campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]});
+  if(t.ack?.status==='committed'){
+   Object.assign(w,t.world);invalidateSpatial(w);s.replace(w.events);if(w.autonomy)w.autonomy.accepted++;
+   reports.push(...t.reports.filter(r=>r.ownerFactionId===w.playerFactionId));
+  }else if(t.ack?.status!=='duplicate'&&w.autonomy)w.autonomy.rejected++;
+ }
+ return reports;
 }
 export function handleAutonomy(w:FormalWorld,e:FormalEvent,s:EventScheduler,submit:Submit):FormalReport[]|null{if(e.type!=='ai.decide')return null;const a=w.autonomy?.agents.find(a=>a.factionId===e.factionId);if(!a||a.eventId!==e.id)return[];
  const cities=spatial(w).owned(a.factionId);if(!cities.length){a.eventId=null;a.active=false;return[];}
@@ -61,5 +87,5 @@ export function handleAutonomy(w:FormalWorld,e:FormalEvent,s:EventScheduler,subm
  const c=cities[(a.decisions-1)%cities.length];settleCity(w,c);updatePublicMemory(w,a,c);const economic=economicChoices(w,c,a);const currentGovernor=w.governors?.find(g=>g.cityId===c.id&&g.enabled),commissioned=!!currentGovernor,planned=a.active?chooseEconomic(economic,a,w.seed,c):undefined,plannedCost=planned?economic.find(q=>JSON.stringify(q.command)===JSON.stringify(planned))?.cost:undefined,neededBudget=plannedCost?Math.max(GOVERNOR_DEFAULTS.budget,resourceKeys.reduce((n,r)=>n+plannedCost[r],0)):GOVERNOR_DEFAULTS.budget;const commission:FormalCommand|undefined=a.active&&buildingLevel(c,'townhall')>=1&&(!currentGovernor||neededBudget>currentGovernor.budget)?{type:'governance.set',cityId:c.id,enabled:true,policy:currentGovernor?.policy??(a.traits.military>a.traits.economy?'military':'economy'),budget:neededBudget,reserve:currentGovernor?.reserve??GOVERNOR_DEFAULTS.reserve}:undefined;const chosen=a.active&&!commissioned&&!commission?chooseEconomic(economic,a,w.seed,c):undefined;
  const political=politicalDecision(w,c,a),military=militaryDecision(w,c,a),expand=expansionDecision(w,c,a);
  const commands:FormalCommand[]=[...(commission?[commission]:[]),...(chosen?[chosen]:[]),...(political?[political]:[]),...military,...(expand?[expand]:[]),...(supplyDecision(w,c)?[supplyDecision(w,c)!]:[])];
- const before=w.armies.length;const reports=submitAutonomous(w,s,e,a.factionId,commands,submit);if(w.armies.length>before)w.autonomy!.agents.find(t=>t.factionId===a.factionId)!.lastWarAt=w.time;return reports;
+ const before=new Set(w.armies.map(t=>t.id));const reports=submitAutonomous(w,s,e,a.factionId,commands,submit);if(w.armies.some(t=>t.ownerFactionId===a.factionId&&!before.has(t.id)))w.autonomy!.agents.find(t=>t.factionId===a.factionId)!.lastWarAt=w.time;return reports;
 }
