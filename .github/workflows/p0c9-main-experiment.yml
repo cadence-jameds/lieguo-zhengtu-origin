@@ -21,11 +21,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Compare wild 24/48/96 radius over 360 world hours
+      - name: Simulate 99 AI randomized five-mode selection and profiles (2 seeds x 168h)
         shell: bash
         run: |
           set -o pipefail
-          P0C9_RADIUS_LONG=1 P0C9_SEEDS=90217 P0C9_HOURS=360 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9RadiusExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
+          P0C9_MIX=1 P0C9_SEEDS=90217,104729 P0C9_HOURS=168 node node_modules/vitest/vitest.mjs run src/game/formal/p0c9MixedStrategiesExperiment.test.ts --maxWorkers=1 --reporter=verbose 2>&1 | tee p0c9-main-results.log
       - name: Retain simulation log
         if: always()
         uses: actions/upload-artifact@v4
