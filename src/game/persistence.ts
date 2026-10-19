@@ -1,4 +1,4 @@
-import {sanitizeScoutReport,scoutReportAuthorized} from './formal/reportScope';
+import {sanitizeSharedKnowledge,sanitizeScoutReport,scoutReportAuthorized} from './formal/reportScope';
 import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
 import {advanceOfflineCooperative,type OfflineSummary} from './formal/offline';
@@ -68,7 +68,7 @@ export class FormalPersistence {
   return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,async()=>{
    const authority=await this.authority(),current=await this.db.saves.get('current');
    if(expectedRevision!==undefined&&authority.revision!==expectedRevision)throw new Error('存檔 revision 衝突，命令未提交。');
-   const w=structuredClone(input),prior=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.receipts??[];
+   const w=sanitizeSharedKnowledge(structuredClone(input)),prior=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.receipts??[];
    if(mode==='save'){
     for(const key of ['event','report','project'] as const)if(w.sequences[key]<authority.sequences[key])throw new Error('Durable ID sequence cannot decrease');
     if(current&&current.kind==='world'&&current.data.snapshot.campaignId!==w.campaignId)throw new Error('Campaign switch requires explicit transition');

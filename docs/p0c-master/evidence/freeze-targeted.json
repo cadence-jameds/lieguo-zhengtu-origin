@@ -1,0 +1,126 @@
+{
+  "passed": 30,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "background state, phase and unrelated request completions never enable a pending command button",
+      "status": "passed"
+    },
+    {
+      "name": "revision rejection is terminal and later snapshots never resubmit the failed intention",
+      "status": "passed"
+    },
+    {
+      "name": "a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once",
+      "status": "passed"
+    },
+    {
+      "name": "old receipts, terminal acknowledgements and background notices cannot overwrite the current click",
+      "status": "passed"
+    },
+    {
+      "name": "construction stamps the rendered target even if a Worker snapshot changes the ref before React commits",
+      "status": "passed"
+    },
+    {
+      "name": "actual event/command revision changes reject the pending intention without automatic resubmission",
+      "status": "passed"
+    },
+    {
+      "name": "governance uses the rendered configuration precondition even when a newer snapshot arrives before submission",
+      "status": "passed"
+    },
+    {
+      "name": "committed patches keep static world identity and a mismatched stream requests a full snapshot",
+      "status": "passed"
+    },
+    {
+      "name": "historical intel query correlates Worker responses without holding the command button; lookup failure leaves the world ready",
+      "status": "passed"
+    },
+    {
+      "name": "update save waits for its own durable acknowledgement, not an unrelated sync or request completion",
+      "status": "passed"
+    },
+    {
+      "name": "update save rejects storage failure and rejects a completed request that never acknowledged saving",
+      "status": "passed"
+    },
+    {
+      "name": "fresh lower progress after a completed replay keeps a responsive resume alive for more than thirty seconds",
+      "status": "passed"
+    },
+    {
+      "name": "repeated same-cycle event counts do not conceal a genuinely stalled replay from the watchdog",
+      "status": "passed"
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"scout\":8}",
+      "status": "passed"
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"ram\":8}",
+      "status": "passed"
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"catapult\":8}",
+      "status": "passed"
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"baggage\":8}",
+      "status": "passed"
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"ram\":3,\"baggage\":3,\"scout\":4}",
+      "status": "passed"
+    },
+    {
+      "name": "C5 mixed exile excludes scouts and codec sanitizes old invalid sites idempotently without revoking earned craftsmen",
+      "status": "passed"
+    },
+    {
+      "name": "C7 defender receives arrival alert but never attacker return intelligence",
+      "status": "passed"
+    },
+    {
+      "name": "C7 defender counter-scout victory includes own survivors on failure/tie 5",
+      "status": "passed"
+    },
+    {
+      "name": "C7 defender counter-scout victory includes own survivors on failure/tie 6",
+      "status": "passed"
+    },
+    {
+      "name": "C7 persistence sanitizes legacy misdelivery at import, load, query and full export; legal attacker delivery remains",
+      "status": "passed"
+    },
+    {
+      "name": "C7 embassy alarms never authorize another attacker personal scout intel, and legacy shared precision is removed on load",
+      "status": "passed"
+    },
+    {
+      "name": "C11 pure geometry has radius8, bounded nearby corridor, edges and no far bridge; cached across clock/receipt updates",
+      "status": "passed"
+    },
+    {
+      "name": "C11 water blocks fill and bridges; independent cities reserve their surroundings and cache notices ownership changes",
+      "status": "passed"
+    },
+    {
+      "name": "C13 public lord ranking uses city count then population, competition ties and stable ID, not armies",
+      "status": "passed"
+    },
+    {
+      "name": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+      "status": "passed"
+    },
+    {
+      "name": "C12 legacy descriptions remain in data but no inputs, empty prompts or displays survive",
+      "status": "passed"
+    },
+    {
+      "name": "QUEUE5 army training summary uses the same capacity as city scenes",
+      "status": "passed"
+    }
+  ]
+}

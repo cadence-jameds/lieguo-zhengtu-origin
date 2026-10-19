@@ -1,5 +1,5 @@
 import {reconcileExileSites} from './extinction';
-import {sanitizeScoutReport} from './reportScope';
+import {sanitizeSharedKnowledge,sanitizeScoutReport} from './reportScope';
 import {migrateBattleProgress} from './battleProgress';
 import {migrateMountains} from './mountains';
 import {z} from 'zod';
@@ -31,5 +31,5 @@ export async function decodeSave(value:unknown):Promise<{world:FormalWorld;repor
  if(await digest(w)!==e.checksum)throw new Error('正式存檔檢查碼不符。');
  if(e.reports===undefined){if(e.reportChecksum!==undefined)throw new Error('缺少完整備份戰報。');}
  else{if(await digest(e.reports)!==e.reportChecksum)throw new Error('戰報檢查碼不符。');validateReportHistory(w,e.reports);}
- return{world:validateFormalWorld(reconcileExileSites(migrateBattleProgress(migrateMountains(migrateCombatB5(migrateColonizationUnits(w)))))),reports:e.reports?.map(r=>sanitizeScoutReport(w,r))};
+ return{world:validateFormalWorld(sanitizeSharedKnowledge(reconcileExileSites(migrateBattleProgress(migrateMountains(migrateCombatB5(migrateColonizationUnits(w))))))),reports:e.reports?.map(r=>sanitizeScoutReport(w,r))};
 }

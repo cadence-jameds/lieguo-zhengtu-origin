@@ -37,7 +37,7 @@ export function useGame(){
   saves.current.set(requestId,{resolve,reject,timer});requests.current.add(requestId);setBusy(true);worker.current.postMessage({type:'sync',requestId});
  }),[]);
  const send=useCallback((r:RuntimeRequest)=>{if(worker.current){const requestId=crypto.randomUUID();
-  if(r.type==='command'){if(commands.current.busy)return;commands.current.track(r.order.commandId);setError('');setNotice('');setFeedback({kind:'sending',text:'指令已送出，等待引擎受理。'});clearTimeout(commandTimer.current);commandTimer.current=setTimeout(()=>{if(commands.current.matches(r.order.commandId))setFeedback(uncertainFeedback);},30000);}
+  if(r.type==='command'){if(commands.current.busy)return;commands.current.track(r.order.commandId);setError('');setNotice('指令受理中：已送出，等待引擎確認。');setFeedback({kind:'sending',text:'指令已送出，等待引擎受理。'});clearTimeout(commandTimer.current);commandTimer.current=setTimeout(()=>{if(commands.current.matches(r.order.commandId))setFeedback(uncertainFeedback);},30000);}
   requests.current.add(requestId);setBusy(true);worker.current.postMessage({...r,requestId});}},[]);
  useEffect(()=>{
   let disposed=false,release:(()=>void)|undefined;const abort=new AbortController();
@@ -82,11 +82,11 @@ export function useGame(){
      const prior=current.current,next=r.patch?incoming:reconcileWorld(prior,incoming);if(r.type==='switched'||prior?.campaignId!==next?.campaignId||(prior?.sequences.report??0)>(next?.sequences.report??0)){setReports([]);setReportData(null);setReportStatus({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}});setReportEpoch(n=>n+1);}current.current=next;setWorld(next);
      if(next){const anchor=r.clock??{campaignId:next.campaignId,time:next.time,speed:effectiveSpeed(next),running:true};displayClock.adopt({...anchor,running:anchor.running&&!document.hidden});}
      else displayClock.stop();
-     if(r.type==='switched'||r.type==='switchFailed')commands.current.clear();
+     if(r.type==='switched'||r.type==='switchFailed'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'idle',text:''});}
      if(r.type==='switchFailed'){setError(r.text);setStatus(r.world?'ready':'error');}else{setError('');setStatus('ready');}
     }
     if(r.type==='error'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'error',text:r.text});loading=false;clearWatchdog();if(r.requestId)finishSave(r.requestId,new Error(r.text));displayClock.stop();setError(r.text);setStatus('error');}
-    if(r.type==='notice'&&(!commands.current.busy||r.error))setNotice(r.text);
+    if(r.type==='notice'&&(!commands.current.busy||r.error)){setNotice(r.text);setFeedback(r.error?{kind:'error',text:r.text}:{kind:'idle',text:''});}
     if(r.type==='loaded'&&r.offline&&r.offline.elapsedRealMs>30000)setOffline(r.offline);
     if(r.type==='loaded'&&r.recovered)setNotice('已原子回復最近的有效正式回復點。');
     if(r.type==='backups')setBackups(r.items);
@@ -94,8 +94,8 @@ export function useGame(){
     if(r.type==='reportPage'){setReports(r.data.rows);setReportCount(r.data.count);setReportData(r.data);if(r.data.counts)setReportStatus(r.data);}
     if(r.type==='switched')setTransition(r.transitionId??'');
     if(r.type==='synced'){finishSave(r.requestId);setSynced(n=>n+1);if(!commands.current.busy)setNotice('進度已保存。');}
-    if(r.type==='commandReceived'&&commands.current.matches(r.commandId))setFeedback({kind:'pending',text:'指令已受理，正在確認並保存。'});
-    if(r.type==='commandAck'){const a=r.ack as CommandAck;if(commands.current.acknowledge(a)){clearTimeout(commandTimer.current);setNotice('');setFeedback(feedbackForAck(a));}}
+    if(r.type==='commandReceived'&&commands.current.matches(r.commandId)){setNotice('指令已受理，正在確認並保存。');setFeedback({kind:'pending',text:'指令已受理，正在確認並保存。'});}
+    if(r.type==='commandAck'){const a=r.ack as CommandAck;if(commands.current.acknowledge(a)){clearTimeout(commandTimer.current);const feedback=feedbackForAck(a);setNotice(feedback.text);setFeedback(feedback);}}
     if(r.type==='export'){
      const url=URL.createObjectURL(new Blob([r.text],{type:'application/json'})),a=document.createElement('a');
      a.href=url;a.download='列國征途-formal-'+r.mode+'.realm-save';a.click();URL.revokeObjectURL(url);

@@ -8,3 +8,6 @@ export function sanitizeScoutReport(_w:FormalWorld,r:FormalReport):FormalReport{
  return r;
 }
 export const scoutReportAuthorized=(r:FormalReport)=>!r.battle?.intel||r.battle.mission!=='scout'||r.battle.attackers.some(a=>a.ownerFactionId===r.ownerFactionId);
+
+/** Embassy sharing grants alarms, not precise historical enemy garrisons. */
+export function sanitizeSharedKnowledge(w:FormalWorld){for(const a of w.autonomy?.agents??[])if(a.intel.some(i=>i.source==='shared'))a.intel=a.intel.filter(i=>i.source!=='shared');return w;}

@@ -1,0 +1,63 @@
+{
+  "passed": 1427,
+  "failed": 11,
+  "skipped": 1,
+  "failures": [
+    {
+      "file": "game/useGameInteraction.test.tsx",
+      "test": "revision rejection is terminal and later snapshots never resubmit the failed intention",
+      "reason": "AssertionError: expected '' to contain '重新確認'"
+    },
+    {
+      "file": "game/useGameInteraction.test.tsx",
+      "test": "a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once",
+      "reason": "AssertionError: expected '' to contain '受理中'"
+    },
+    {
+      "file": "game/useGameInteraction.test.tsx",
+      "test": "old receipts, terminal acknowledgements and background notices cannot overwrite the current click",
+      "reason": "AssertionError: expected '' to contain '受理中'"
+    },
+    {
+      "file": "game/useGameInteraction.test.tsx",
+      "test": "actual event/command revision changes reject the pending intention without automatic resubmission",
+      "reason": "AssertionError: expected '' to contain '重新確認'"
+    },
+    {
+      "file": "game/useGameInteraction.test.tsx",
+      "test": "governance uses the rendered configuration precondition even when a newer snapshot arrives before submission",
+      "reason": "AssertionError: expected '' to contain '再次套用'"
+    },
+    {
+      "file": "game/presentation/craftsmanCastleUI.test.tsx",
+      "test": "real queue precondition blocks preview and the actual command",
+      "reason": "AssertionError: expected true to be false // Object.is equality"
+    },
+    {
+      "file": "game/presentation/worldDynamicsR3.test.ts",
+      "test": "all100 actual Formal ArmyIds render, cached repeated frames never mutate scheduler or private armies",
+      "reason": "Error: Test timed out in 30000ms."
+    },
+    {
+      "file": "game/formal/integrationR4.test.ts",
+      "test": "R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth",
+      "reason": "AssertionError: expected { militia: 7, ram: 5 } to deeply equal { militia: 7, scout: 11, ram: 5 }"
+    },
+    {
+      "file": "game/formal/playerFeedback.test.ts",
+      "test": "construction capacity is3 total tasks with1 active initially; fourth is rejected without mutations",
+      "reason": "AssertionError: expected 'committed' to be 'rejected' // Object.is equality"
+    },
+    {
+      "file": "game/formal/playerFeedback.test.ts",
+      "test": "military capacity stays3,20k promotes waiting work to2 active, and cancellation preserves completed units and refund semantics",
+      "reason": "AssertionError: expected 'committed' to be 'rejected' // Object.is equality"
+    },
+    {
+      "file": "game/formal/wallDelta.test.ts",
+      "test": "same-wall upgrades remain ordered in one lane; shared capacity is3 and inherited cancellation removes dependent queued work",
+      "reason": "AssertionError: expected 'committed' to be 'rejected' // Object.is equality"
+    }
+  ],
+  "note": "Original raw report retained locally. No timeout was raised. Capacity/exile expectations updated to approved v94; command notice API compatibility restored. Rendering timeout retested without competing jobs."
+}

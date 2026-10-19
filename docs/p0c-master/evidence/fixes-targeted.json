@@ -1,0 +1,295 @@
+{
+  "passed": 72,
+  "failed": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "background state, phase and unrelated request completions never enable a pending command button",
+      "status": "passed"
+    },
+    {
+      "name": "revision rejection is terminal and later snapshots never resubmit the failed intention",
+      "status": "passed"
+    },
+    {
+      "name": "a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once",
+      "status": "passed"
+    },
+    {
+      "name": "old receipts, terminal acknowledgements and background notices cannot overwrite the current click",
+      "status": "passed"
+    },
+    {
+      "name": "construction stamps the rendered target even if a Worker snapshot changes the ref before React commits",
+      "status": "passed"
+    },
+    {
+      "name": "actual event/command revision changes reject the pending intention without automatic resubmission",
+      "status": "passed"
+    },
+    {
+      "name": "governance uses the rendered configuration precondition even when a newer snapshot arrives before submission",
+      "status": "passed"
+    },
+    {
+      "name": "committed patches keep static world identity and a mismatched stream requests a full snapshot",
+      "status": "passed"
+    },
+    {
+      "name": "historical intel query correlates Worker responses without holding the command button; lookup failure leaves the world ready",
+      "status": "passed"
+    },
+    {
+      "name": "update save waits for its own durable acknowledgement, not an unrelated sync or request completion",
+      "status": "passed"
+    },
+    {
+      "name": "update save rejects storage failure and rejects a completed request that never acknowledged saving",
+      "status": "passed"
+    },
+    {
+      "name": "fresh lower progress after a completed replay keeps a responsive resume alive for more than thirty seconds",
+      "status": "passed"
+    },
+    {
+      "name": "repeated same-cycle event counts do not conceal a genuinely stalled replay from the watchdog",
+      "status": "passed"
+    },
+    {
+      "name": "R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth",
+      "status": "passed"
+    },
+    {
+      "name": "R4 cross-domain IDB rollback/import/Recovery keeps joint, empire, governor and exile lifecycle atomic",
+      "status": "passed"
+    },
+    {
+      "name": "R4 fair 100 factions/99 autonomous AI seed 12012: 8h, SaveLoad and sliced equivalence",
+      "status": "passed"
+    },
+    {
+      "name": "R4 fair 100 factions/99 autonomous AI seed 92049: 8h, SaveLoad and sliced equivalence",
+      "status": "passed"
+    },
+    {
+      "name": "R4 fair 100 factions/99 autonomous AI seed 90217: 8h, SaveLoad and sliced equivalence",
+      "status": "passed"
+    },
+    {
+      "name": "R4 AI vs AI Lv15 siege: marker survives save/load and Recovery, one final, no player report leak",
+      "status": "passed"
+    },
+    {
+      "name": "offline 0h caps REAL time then uses Formal speed and scheduler",
+      "status": "passed"
+    },
+    {
+      "name": "offline 1h caps REAL time then uses Formal speed and scheduler",
+      "status": "passed"
+    },
+    {
+      "name": "offline 6h caps REAL time then uses Formal speed and scheduler",
+      "status": "passed"
+    },
+    {
+      "name": "offline 24h caps REAL time then uses Formal speed and scheduler",
+      "status": "passed"
+    },
+    {
+      "name": "clock rollback yields no negative advance; short absence uses the actual elapsed duration; v0.30.9 default is24h",
+      "status": "passed"
+    },
+    {
+      "name": "offline scheduler completes construction and training with the same anchored economy as online advance",
+      "status": "passed"
+    },
+    {
+      "name": "offline load atomically persists the new wall anchor; repeated reload cannot award the same time twice",
+      "status": "passed"
+    },
+    {
+      "name": "offline backup-write failure leaves all stores unchanged and retry advances exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "offline world-write failure leaves all stores unchanged and retry advances exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "offline authority-write failure leaves all stores unchanged and retry advances exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "Recovery catches up from the selected valid checkpoint wall anchor and skips metadata-invalid candidates",
+      "status": "passed"
+    },
+    {
+      "name": "construction capacity is5 total tasks with1 active initially; sixth is rejected without mutations",
+      "status": "passed"
+    },
+    {
+      "name": "15k unlock promotes an existing waiting job to a second lane without altering cost/duration/qualification; permanent after population drops",
+      "status": "passed"
+    },
+    {
+      "name": "cancel waiting refunds100%, removes its scheduler event and promotes subsequent jobs; active cancellation refunds50%",
+      "status": "passed"
+    },
+    {
+      "name": "cancelling a new building cancels dependent upgrades, returns its chosen slot and survives save/reload/Recovery",
+      "status": "passed"
+    },
+    {
+      "name": "military capacity stays5,20k promotes waiting work to2 active, and cancellation preserves completed units and refund semantics",
+      "status": "passed"
+    },
+    {
+      "name": "cancel of waiting military task promotes the next task and does not refund completed units twice",
+      "status": "passed"
+    },
+    {
+      "name": "offline arrival counts founded cities but does not misreport transferred escorts as newly trained units",
+      "status": "passed"
+    },
+    {
+      "name": "Lv0 to15: independent v85 cost/time, all center accelerators and five speeds; completion alone advances the sole wall authority",
+      "status": "passed"
+    },
+    {
+      "name": "dark-age center2 prerequisite, exact resources, identity and fixed-slot rules are enforced without mutation",
+      "status": "passed"
+    },
+    {
+      "name": "same-wall upgrades remain ordered in one lane; shared capacity is5 and inherited cancellation removes dependent queued work",
+      "status": "passed"
+    },
+    {
+      "name": "cancel queued wall does not change completed level; refunds remain bounded by existing warehouse policy",
+      "status": "passed"
+    },
+    {
+      "name": "wall shares the permanent second construction lane and promotes waiting work at15k without changing snapshots",
+      "status": "passed"
+    },
+    {
+      "name": "clock/scheduler snapshots remain fixed after center change; duplicate/stale/id-conflict and completed-cancel cannot pay or complete twice",
+      "status": "passed"
+    },
+    {
+      "name": "save/load and native Recovery keep active+queued wall work, final authority and durable dedupe",
+      "status": "passed"
+    },
+    {
+      "name": "R1 automatic Recovery skips metadata-invalid wall completion checkpoint then completes recovered wall exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "atomic wall completion rollback and retry at backup-write",
+      "status": "passed"
+    },
+    {
+      "name": "atomic wall completion rollback and retry at world-write",
+      "status": "passed"
+    },
+    {
+      "name": "atomic wall completion rollback and retry at authority-write",
+      "status": "passed"
+    },
+    {
+      "name": "wall offline completion equals online and a second elapsed-time application does not repeat it",
+      "status": "passed"
+    },
+    {
+      "name": "native contract rejects a second stored wall authority, consumed slots and malformed wall level chains",
+      "status": "passed"
+    },
+    {
+      "name": "wall preview shares real prerequisites, cost/time and queue state without mutating the campaign",
+      "status": "passed"
+    },
+    {
+      "name": "zero-stock same-civilization craftsman can build without ordinary castle payment",
+      "status": "passed"
+    },
+    {
+      "name": "zero-stock foreign-civilization craftsman can build without ordinary castle payment",
+      "status": "passed"
+    },
+    {
+      "name": "civ_zhongguo craftsman preview is pure, free, and matches real normal-duration construction",
+      "status": "passed"
+    },
+    {
+      "name": "civ_byzantium craftsman preview is pure, free, and matches real normal-duration construction",
+      "status": "passed"
+    },
+    {
+      "name": "civ_frankia craftsman preview is pure, free, and matches real normal-duration construction",
+      "status": "passed"
+    },
+    {
+      "name": "civ_britannia craftsman preview is pure, free, and matches real normal-duration construction",
+      "status": "passed"
+    },
+    {
+      "name": "civ_japan craftsman preview is pure, free, and matches real normal-duration construction",
+      "status": "passed"
+    },
+    {
+      "name": "civ_mongolia craftsman preview is pure, free, and matches real normal-duration construction",
+      "status": "passed"
+    },
+    {
+      "name": "real age precondition blocks preview and the actual command",
+      "status": "passed"
+    },
+    {
+      "name": "real building precondition blocks preview and the actual command",
+      "status": "passed"
+    },
+    {
+      "name": "real existing precondition blocks preview and the actual command",
+      "status": "passed"
+    },
+    {
+      "name": "real queue precondition blocks preview and the actual command",
+      "status": "passed"
+    },
+    {
+      "name": "real ownership precondition blocks preview and the actual command",
+      "status": "passed"
+    },
+    {
+      "name": "real craft precondition blocks preview and the actual command",
+      "status": "passed"
+    },
+    {
+      "name": "ordinary castle Lv1 and Lv2 keep their paid resource rules and normal timing",
+      "status": "passed"
+    },
+    {
+      "name": "all100 actual Formal ArmyIds render, cached repeated frames never mutate scheduler or private armies",
+      "status": "passed"
+    },
+    {
+      "name": "direction follows formal projected path, position is continuous between arrival events",
+      "status": "passed"
+    },
+    {
+      "name": "viewport-crossing route keeps animation alive before marker enters, far routes cull",
+      "status": "passed"
+    },
+    {
+      "name": "real AI vs AI Siege remains until formal final, no renderer-owned battle or duplicate marker",
+      "status": "passed"
+    },
+    {
+      "name": "instant Raid final location drives one-shot impact; hydrate, rewind, expiry and reduced motion never retain ongoing badge",
+      "status": "passed"
+    },
+    {
+      "name": "civilian route projection uses actual departure rather than ready time, all owners and original typed IDs",
+      "status": "passed"
+    }
+  ]
+}
