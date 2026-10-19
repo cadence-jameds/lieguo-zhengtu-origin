@@ -72,7 +72,7 @@ export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reaso
 }
 export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}
 export function addStock(c:FormalCity,resources:Resources){const cap=storageCapacity(c);for(const r of resourceKeys)c.stock[r]=Math.min(cap-(c.economy?.reservedIncoming[r]??0),c.stock[r]+resources[r]);}
-export const QUEUE_CAPACITY=3;
+export const QUEUE_CAPACITY=5;
 export const constructionConcurrency=(c:FormalCity)=>c.economy?.milestones.includes(15000)?2:1;
 export const militaryConcurrency=(c:FormalCity)=>c.economy?.milestones.includes(20000)?2:1;
 /** Fill newly unlocked execution capacity. Existing active work and all payment/time snapshots stay fixed. */
@@ -129,7 +129,7 @@ export function applyEconomyCommand(w:FormalWorld,c:FormalCity,order:FormalOrder
   const id=shipmentId(sequenceKey(w.sequences.project++)),arrivalEventId=enqueue(w,s,{type:'logistics.arrive',shipmentId:id,at:arrivalAt}),returnEventId=enqueue(w,s,{type:'logistics.return',shipmentId:id,at:returnAt});
   (w.logistics??=[]).push({shipmentId:id,commandId:order.commandId,sourceFactionId:order.issuerId,sourceCityId:c.id,destinationCityId:dest.id,resources:{...p.resources},caravans,path:path.path,distance:path.distance,dispatchedAt:w.time,arrivalAt,returnAt,arrivalEventId,returnEventId,phase:'outbound',authorizationSnapshot:{sourceCityOwnerFactionId:c.ownerFactionId,contributorEmpireId:f.empireId,checkedAt:w.time}});return;
  }
- requireRule(e.construction.length<QUEUE_CAPACITY,'建造工程已達 3 項上限。');
+ requireRule(e.construction.length<QUEUE_CAPACITY,'建造工程已達 5 項上限。');
  let lane=p.lane;requireRule(lane!==1||e.milestones.includes(15000),'尚未取得第二施工佇列。');
  const previous=e.construction.filter(j=>p.type==='field.upgrade'?j.target.kind==='field'&&j.target.slot===p.slot:j.target.kind==='building'&&j.target.key===p.key);
  requireRule(!previous.some(j=>j.action==='demolish'),'此建築正在拆除，不能排入升級。');
