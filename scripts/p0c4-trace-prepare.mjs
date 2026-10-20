@@ -1,6 +1,6 @@
 // Diagnostics only: patch a fixed git archive, never the production working tree.
 import fs from 'node:fs';import path from 'node:path';import {execFileSync} from 'node:child_process';import {createRequire} from 'node:module';import {createHash} from 'node:crypto';
-const [source,head,out]=process.argv.slice(2),require=createRequire(path.join(source,'package.json')),ts=require('typescript');
+const [source,requestedHead,out]=process.argv.slice(2),head=execFileSync('git',['rev-parse',requestedHead],{cwd:source,encoding:'utf8'}).trim(),require=createRequire(path.join(source,'package.json')),ts=require('typescript');
 if(fs.existsSync(out))throw Error('Use a new isolated output directory');fs.mkdirSync(out,{recursive:true});
 const archive=path.join(out,'diagnostic-source.tar');execFileSync('git',['archive','--output='+archive,head,'src','public','scripts','releases','vite.config.ts','tsconfig.json','package.json','package-lock.json','index.html'],{cwd:source});execFileSync('tar',['-xf',archive,'-C',out]);fs.symlinkSync(path.join(source,'node_modules'),path.join(out,'node_modules'),'dir');
 // Frozen identity belongs to the archived source, rather than whichever tree last built in source.
