@@ -31,14 +31,14 @@
 
 ## 本輪交付
 
-最新正式程式基準 `ba11a66694a9190074c035f87ce0501d7744dd77`。最新Runtime CI完整隔離 Regression **1458 PASS / 0 FAIL / 1 既有 SKIP**，見 [證據](docs/p0c-final-delta/evidence/ci-runtime.json)。[最終Delta](docs/p0c-final-delta/DELTA_REPORT.md)補齊C13方案B及C4新效能證據。舊AE39092延遲／35組矩陣保留原受測SHA；最新ba11另有C4比較與自動35組相容結果。AI三核心檔逐位元不變，Persistence本輪有明確delta。所有程式檔案、提交與可重現步驟見 [Delta Report](docs/p0c-master/DELTA_REPORT.md)。
+最新正式程式基準 `95d1c0b0f4247de4c5e9489d4e85a6b35be671d2`（本地af43822同tree）。最新CI1467 PASS／0 FAIL／1既有SKIP；C4有界80筆超標19/40→9/40仍HOLD，完整時間軸與兩個待核准架構選項見 [調查報告](docs/p0c-final-delta/c4-investigation/INVESTIGATION.md)。下列ba11數據保留為歷史：最新Runtime CI完整隔離 Regression **1458 PASS / 0 FAIL / 1 既有 SKIP**，見 [證據](docs/p0c-final-delta/evidence/ci-runtime.json)。[最終Delta](docs/p0c-final-delta/DELTA_REPORT.md)補齊C13方案B及C4新效能證據。舊AE39092延遲／35組矩陣保留原受測SHA；最新ba11另有C4比較與自動35組相容結果。AI三核心檔逐位元不變，Persistence本輪有明確delta。所有程式檔案、提交與可重現步驟見 [Delta Report](docs/p0c-master/DELTA_REPORT.md)。
 
 |項目|本輪內容／保全|驗證與交付狀態|
 |---|---|---|
 |C1|成功提示1500ms；送出／受理／durable ACK分開；錯誤回看與手機位置|定向與完整回歸 PASS；原生瀏覽器實際命令驗證|
 |C2|保留前景FIFO與不可中斷保存邊界|playerOrderRuntimeP0、原子保存／故障回歸 PASS|
 |C3|保留CAS、receipt與前景／分支 fence；新增派兵公開意圖與自有兵力快照的一次性重驗|23項定向 PASS；不忽略 revision、不任意重試所有命令；真衝突拒絕|
-|C4|保留既有追算／原子保存；新增普通save可變分支副本、逐欄收據比對，最終strict驗證／checksum／CAS保留|**HOLD**；新1100嘗試／1099有效／1提交前逾時，36組皆至少30；候選189／549超標、max8613.2ms，尾端改善不一致；見最終效能報告，不能以功能PASS代替1秒目標|
+|C4|保留原安全保存；新增嚴格Receipt獨立draft與World Stream長度比較，最終strict驗證／checksum／CAS保留；最新80筆有界ABBA超標19/40→9/40、after max1544.8ms，未跑新完整矩陣|**HOLD**；新1100嘗試／1099有效／1提交前逾時，36組皆至少30；候選189／549超標、max8613.2ms，尾端改善不一致；見最終效能報告，不能以功能PASS代替1秒目標|
 |C5|有效戰鬥兵資格、剔除收編斥候、舊非法據點cooldown tombstone，沒有補發獎勵|單元／codec／Replay／去重與原生IndexedDB遷移 PASS|
 |C6|PR3免費工匠Lv1城堡、工期與完工消耗保留；有效五筆上限回歸|工匠／失城／排程完整回歸 PASS；未重新實作|
 |C7|攻方個人偵察交付，守方本方視角；寫入／查詢／匯入匯出與舊資料修復；移除未授權共享精確情報|完整回歸及原生DB物理資料檢查 PASS；非僅UI隱藏|

@@ -1,0 +1,38 @@
+{
+  "beforeHead": "ba11a66694a9190074c035f87ce0501d7744dd77",
+  "afterHead": "95d1c0b0f4247de4c5e9489d4e85a6b35be671d2",
+  "metricsEqual": true,
+  "autonomyEqual": true,
+  "beforeFinal": {
+    "liveAI": 81,
+    "cities": 100,
+    "population": 457797,
+    "stationedEffectiveUnits": 2998,
+    "awayEffectiveUnits": 157,
+    "armies": 9,
+    "hash": "0d661f693f7949a3f540218488f8a2a89b5c6fe0fbf275e670c684f1e6b11853"
+  },
+  "afterFinal": {
+    "liveAI": 81,
+    "cities": 100,
+    "population": 457797,
+    "stationedEffectiveUnits": 2998,
+    "awayEffectiveUnits": 157,
+    "armies": 9,
+    "hash": "de29113275319f903b88176d7932bc3f0de4de649eeeacbabe39d37c37e03248"
+  },
+  "qualification": "Raw final hash includes release metadata and differs. No normalized full-world 168h hash was recorded; equal behavior metrics do not prove every byte identical. New 1h constant-metadata reducer test verifies exact replay equivalence.",
+  "hourlyBehaviorColumnsEqual": true,
+  "hourlyRows": 168,
+  "comparedColumns": [
+    "hour",
+    "liveAI",
+    "cities",
+    "population",
+    "armies",
+    "events",
+    "ordinaryWildDepartures",
+    "ordinaryWildCleared",
+    "actualOrdinaryWildResources"
+  ]
+}

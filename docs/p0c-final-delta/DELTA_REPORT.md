@@ -1,3 +1,5 @@
+> 2026-10-20 C4 最終定向追查：正式程式95d1c0b（本地固定af43822同tree），80筆未插樁ABBA均成功，超標19/40→9/40；完整1秒仍 **HOLD**。最新分段、raw、安全與架構裁決見 [INVESTIGATION](c4-investigation/INVESTIGATION.md)。以下原1100筆及失敗紀錄完整保留，不能冒稱此次完整矩陣。
+
 # PR21 最終 Delta：C13 公開排行與 C4 保存效率
 
 基準 PR21 `cc4f332dbdb6691275138d0ded88160200fb34ce`。main仍為`06c4cb93779f1f679bb77470515fd8aee1c42de9`。沿用原Draft PR21，沒有修改main、Approve、Merge、Deploy或關閉Issue。

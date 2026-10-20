@@ -1,0 +1,11 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: Execution context was destroyed, most likely because of a navigation
+    at /workspace/lieguo-zhengtu-origin/scripts/p0c-master-mixed-latency.mjs:7:172 {
+  log: [],
+  name: 'Error'
+}
+
+Node.js v24.19.0

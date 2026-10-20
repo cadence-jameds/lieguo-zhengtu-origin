@@ -1,3 +1,5 @@
+> 2026-10-20 C4 最終定向追查：正式程式95d1c0b（本地固定af43822同tree），80筆未插樁ABBA均成功，超標19/40→9/40；完整1秒仍 **HOLD**。最新分段、raw、安全與架構裁決見 [INVESTIGATION](c4-investigation/INVESTIGATION.md)。以下原1100筆及失敗紀錄完整保留，不能冒稱此次完整矩陣。
+
 # C4 最終比較：HOLD
 
 正式目標：玩家確認操作至合法處理、IndexedDB durable commit與畫面更新全部在1秒內。新候選仍超標；功能安全／CI成功不代替C4 Gate。
