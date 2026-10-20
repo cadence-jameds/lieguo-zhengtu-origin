@@ -14,7 +14,7 @@ export function cloneWorldDraft(current:FormalWorld):FormalWorld {
    typeof copy.committedRevision!=='number'||typeof copy.disposition!=='string')return structuredClone(current);
   receipts.push(copy);
  }
- const draft=structuredClone({...current,commandReceipts:[]});
+ const draft:FormalWorld=structuredClone({...current,commandReceipts:[]});
  draft.commandReceipts=receipts;
  return draft;
 }

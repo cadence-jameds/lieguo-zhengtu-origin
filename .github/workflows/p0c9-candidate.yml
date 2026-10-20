@@ -17,16 +17,13 @@ jobs:
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - id: plan
         shell: bash
-        run: |
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          const modes=['traits','A48','V2B48','V3Parallel48','WildPriority60','WildParallel48','equal'];
-          const include=[];
-          for(const hours of [720,360,168])for(const seed of hours===720?[90217]:[90217,104729])for(const policy of modes)include.push({hours,seed,policy});
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,'matrix='+JSON.stringify({include})+'\n');
-          JS
+        run: node scripts/p0c4-ai-scope.mjs
   simulate:
     name: ${{ matrix.seed }} / ${{ matrix.hours }}h / ${{ matrix.policy }}
     needs: plan
