@@ -1,0 +1,116 @@
+{
+  "head": "9f08fd63d8e7928add4048ff5f7c3aa2d1048fc7",
+  "instrumented": true,
+  "provenance": [
+    {
+      "rel": "formal/reducer.ts",
+      "before": "47d7f0bb2fe02981867c331b3e4339dc2aa12e2fe347a0a29cee19dcd3add757",
+      "instrumented": "f015b49b9d646edbd55f460afdc9fd81214cc5eedbd793e001fc539cffe391c1",
+      "found": [
+        "cloneOrderDraft",
+        "submitFormalOrder",
+        "submitOrderDraft",
+        "advanceOneEvent",
+        "finishFormalAdvance",
+        "advanceFormal",
+        "advanceFormalCooperative"
+      ]
+    },
+    {
+      "rel": "formal/saveCodec.ts",
+      "before": "e22e9ab3662e6775bc93dfcd972287da229e946bb20f064992d634950fd87223",
+      "instrumented": "a4742e8db8852ae5d9a056552c8aa2a3b228d710d3a19788e0489275a9de135e",
+      "found": [
+        "encodeSave",
+        "validateReportHistory",
+        "decodeSave"
+      ]
+    },
+    {
+      "rel": "formal/schema.ts",
+      "before": "25868493a63ad0bf486e4406c430d32f2854f96e644bb29490f22b4d4af3b253",
+      "instrumented": "47ff59b2b697eb98c0822aa30649c4512ca7bcba28096151e0e888739cb12998",
+      "found": [
+        "validateFormalWorld"
+      ]
+    },
+    {
+      "rel": "formal/canonical.ts",
+      "before": "9e751b525479ce600e12dd268fa08737f7888cb49265358f5858c067e401206f",
+      "instrumented": "a64985d870f9d1078a30d7a010584ef5ef93e15e88bdb2ad50c15f841e150716",
+      "found": [
+        "digest"
+      ]
+    },
+    {
+      "rel": "persistence.ts",
+      "before": "abcb18d44ceb98eb5adfaea72ec419b48ecbb40bac993e96c718b9717e584aa6",
+      "instrumented": "08f46b3471e6fb9c33a406210d3d487218693b413888fee94f943774e0fcb234",
+      "found": [
+        "authority",
+        "commit",
+        "save",
+        "reportStatus"
+      ]
+    },
+    {
+      "rel": "orderAdmission.ts",
+      "before": "19ea79f89082452d1b41fa78113e65efde5426c6e0e4795c01ed98b838c06576",
+      "instrumented": "629ba957d4c092109c1ad215d3a7fcfc2a00b392ea4ae7d193c0585fa698d040",
+      "found": [
+        "playerOrderBase",
+        "playerOrderWithBase"
+      ]
+    },
+    {
+      "rel": "governanceAdmission.ts",
+      "before": "3f343ccdaeac63bf3002b80d1a95d8eed456c2b3428c6a11f3fec199c206d667",
+      "instrumented": "34c9564ae15be92de7c736a6bbbb66f879ddef8b53955f3e91aaef677d5320c4",
+      "found": [
+        "governanceWithBase",
+        "governanceAfterCatchup"
+      ]
+    },
+    {
+      "rel": "worldStream.ts",
+      "before": "9f48c8da030ef1ceecbc5956a390c381d7cbc2ae7bf0ce04ee99c5b9121a5a2d",
+      "instrumented": "149ecdcd14dbf00e56422903dbf84c9c8a422f5125e7a5b684fb66eb556d983a",
+      "found": [
+        "worldPatch",
+        "applyWorldPatch"
+      ]
+    },
+    {
+      "rel": "formal/autonomy.ts",
+      "before": "179693e2de92a0a493525c0b9758868de0e1e762b5421c0d68a621a214795045",
+      "instrumented": "181f61cd7233c98fcb384fdedf9021fef238d61ed1393b538a1448b48c650ea7",
+      "found": [
+        "handleAutonomy"
+      ]
+    },
+    {
+      "rel": "formal/governance.ts",
+      "before": "11ee0a8dbbae233f5eff2595a74674fcecbac1655527d2c226c5a45d56364974",
+      "instrumented": "1ff45bc453a9495f558629e7c1f0253947bfb4136eb66161912c358f1fd6d038",
+      "found": [
+        "handleGovernance"
+      ]
+    },
+    {
+      "rel": "runtime.worker.ts",
+      "before": "636447f7c28edb0c0e0f7e5340d7594c52b61389571f0d1e80c6e4611ba41f6a",
+      "instrumented": "02718f08bd358221ecc4222b64e38c78b96678642cfc2fc7e0bcdc1ded57e80e"
+    },
+    {
+      "rel": "useGame.ts",
+      "before": "63ea5e15b520184f20ef6cd7bc5e643fe44c7aafa3f84e6589030b912e0188cb",
+      "instrumented": "46530195d34c05fb5f6e125b2fe04c6461bab9df909ae99db5fec832459b6e2e"
+    },
+    {
+      "rel": "GameApp.tsx",
+      "before": "f3d62ecffa432c01bb54cfa846926010b64fd7a8e58f339cd81142fe95d10a5b",
+      "instrumented": "c662de218e7cd8192c2ac78491e2215a201a78c428b7b2531420a320b735fdee"
+    }
+  ],
+  "method": "Absolute performance.timeOrigin + now; inclusive nested spans with parent IDs; object counts, checksum bytes and fixture bytes (no extra synchronous JSON sizing per clone). Diagnostic overhead is not acceptance latency."
+}
