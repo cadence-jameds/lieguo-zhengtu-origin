@@ -1,0 +1,670 @@
+{
+  "files": [
+    {
+      "source": "/workspace/research/p0c4-final/after/0h-desktop-10x/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/0h-desktop-10x/result.json",
+      "sourceSha256": "b253edfd33aba59fa694758e1c07f6c984dfef6d28026db7235f6de6669c91f7",
+      "publishedSha256": "8e2d7c15b350f9ed9a6de956a0c3c3a69e4745343d1f3dc3ddd2ab52eadeb602",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/168h-desktop-50x/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/168h-desktop-50x/result.json",
+      "sourceSha256": "26fcd7e73558d5dc70d67c4a6719c04d428a0eae8a46408c94becd968ef79229",
+      "publishedSha256": "d8a8dc612175fea3ffe1f6ddb6b958c4cf2fc63babe434340cf007ada6f79c35",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/168h-mobile-10x/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/168h-mobile-10x/result.json",
+      "sourceSha256": "74d5c0516c8b53e859b0d16627f9efb3001194a96b7474fe022a4858841bcd36",
+      "publishedSha256": "d36d345dc934f23617e1c106014bbfb57e24edfb3f8bc7a98357b4cf898ab138",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/168h-mobile-50x/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/168h-mobile-50x/result.json",
+      "sourceSha256": "71759911fe2aa7c0c2cc265e81b266c8b3e8727b666596fa99d454f9cc083f26",
+      "publishedSha256": "992a97a55a1b422bd62565bec69a4ded20fb1f340d7f8b1919f1a24329526c7c",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/96h-desktop-10x/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/96h-desktop-10x/result.json",
+      "sourceSha256": "ae400fc16951fd8b8e91c5924f6cee8c7b64d298eb88560982e43f7d7139e4e5",
+      "publishedSha256": "b602c844f38d3b7d884eae17c91b2edf7f18a25ae65c73901dbf583548e3ae18",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/0h-desktop-10x.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/0h-desktop-10x.log",
+      "sourceSha256": "910a6e28da067156200d6fce87636ff1d0d60d5514ee24475378e0191275551e",
+      "publishedSha256": "910a6e28da067156200d6fce87636ff1d0d60d5514ee24475378e0191275551e",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/168h-desktop-50x.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/168h-desktop-50x.log",
+      "sourceSha256": "38928f9ee58c9632b0fc08932aa9ec122eecb8c2147b1d79bf4f88913af0ed1f",
+      "publishedSha256": "38928f9ee58c9632b0fc08932aa9ec122eecb8c2147b1d79bf4f88913af0ed1f",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/168h-mobile-10x.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/168h-mobile-10x.log",
+      "sourceSha256": "c33e19a2a60369a31a48b9574e0279500eecb5284bb0a0dee9ddeb492c5daf99",
+      "publishedSha256": "c33e19a2a60369a31a48b9574e0279500eecb5284bb0a0dee9ddeb492c5daf99",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/168h-mobile-50x.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/168h-mobile-50x.log",
+      "sourceSha256": "3185fad93e260be1f16bcc58b38c79eb043f74afa805c36da35a502f2c53eb6b",
+      "publishedSha256": "3185fad93e260be1f16bcc58b38c79eb043f74afa805c36da35a502f2c53eb6b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/after/96h-desktop-10x.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/after/96h-desktop-10x.log",
+      "sourceSha256": "c05c137363aca61a810ae6be1ec4c7050c9ffd903ee79323fb00cba236290d72",
+      "publishedSha256": "c05c137363aca61a810ae6be1ec4c7050c9ffd903ee79323fb00cba236290d72",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/0h-desktop-10x-0-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/0h-desktop-10x-0-after/result.json",
+      "sourceSha256": "43263ee3a246271003836966184c628ca5bc7da9d16c0ff298af046e0a8dcbee",
+      "publishedSha256": "abd0cf88575647311752218b2aeb3bf20496f9e26a8129ec0ba53955ffff820d",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/168h-desktop-50x-0-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/168h-desktop-50x-0-after/result.json",
+      "sourceSha256": "86bbc7e9aaeb91bc01717fa106fff479212e15718a59fe72ecb79d7512cae878",
+      "publishedSha256": "151a34ac4150256d9a6163ad5181e2d75ea1ff71c497c8455840af92afaa06f3",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/168h-mobile-10x-0-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/168h-mobile-10x-0-after/result.json",
+      "sourceSha256": "e4c38cedae8e702e296d492b860468626e6f2f21f15eaef362973491d8c85fe4",
+      "publishedSha256": "ae83064c48345a1ba09a9cb7a4f95d4ff644975c7b4b7a6fa551526dc06ef9ed",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/168h-mobile-50x-0-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/168h-mobile-50x-0-after/result.json",
+      "sourceSha256": "d2dd5251843126e98f0278a8294f908bb62149b269e7d843d137fbe7d025dd30",
+      "publishedSha256": "60632cf2cfd097e535b67f4fc887ab5a56df51e6881b825270e326b24cbb4113",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/96h-desktop-10x-0-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/96h-desktop-10x-0-after/result.json",
+      "sourceSha256": "7e336917e2a543788bbd68c3d1ad1d20a0354e8ecc33c44603258adf45da7891",
+      "publishedSha256": "b33588f0b55d07c5998249236110840bf8ebe9e118d2b74cae784f6e7e111d03",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/0h-desktop-10x-0-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/0h-desktop-10x-0-after.log",
+      "sourceSha256": "28ce0a6b47f037f29ad2a53c1bb86fc110e25ef52962b7d67515a0db95e4235b",
+      "publishedSha256": "28ce0a6b47f037f29ad2a53c1bb86fc110e25ef52962b7d67515a0db95e4235b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/168h-desktop-50x-0-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/168h-desktop-50x-0-after.log",
+      "sourceSha256": "90ba1061d3dab7b60fe7d6c22183bd23200d06f5422bda6c091d3dd9f395550e",
+      "publishedSha256": "90ba1061d3dab7b60fe7d6c22183bd23200d06f5422bda6c091d3dd9f395550e",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/168h-mobile-10x-0-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/168h-mobile-10x-0-after.log",
+      "sourceSha256": "f6773253b0d4f001b0aa9243b4b399a036612e2115bf004981e7e2cd26704d2b",
+      "publishedSha256": "f6773253b0d4f001b0aa9243b4b399a036612e2115bf004981e7e2cd26704d2b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/168h-mobile-50x-0-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/168h-mobile-50x-0-after.log",
+      "sourceSha256": "a961ed1810facdad85f7a992790da6cd859202adbeeb93e87841e73afde18ea4",
+      "publishedSha256": "a961ed1810facdad85f7a992790da6cd859202adbeeb93e87841e73afde18ea4",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-trace/96h-desktop-10x-0-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-trace/96h-desktop-10x-0-after.log",
+      "sourceSha256": "fc3e259140c15032ab343f3bfc61c5ba4f51e97167275be4a2d1d1fcbf4b133e",
+      "publishedSha256": "fc3e259140c15032ab343f3bfc61c5ba4f51e97167275be4a2d1d1fcbf4b133e",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-0-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-0-before/result.json",
+      "sourceSha256": "4469b77b8ee30d423cb091f02dc94bddad21ff1a3133a25f1413ca7f533f207a",
+      "publishedSha256": "4d3d93d17c4f9e7ec79b679fabc5da309ba2225211235f97fa738afd1929b6cc",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-1-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-1-after/result.json",
+      "sourceSha256": "dadda4e835b85ee8eda8fb5684d2ca2663aaaf4d3149d4b558e1401c8e80bda0",
+      "publishedSha256": "1a84b99be69604e516f0b20e44f6d6b12304bc29fdfdf1113e8779cb7a3fc54d",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-2-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-2-after/result.json",
+      "sourceSha256": "adae4457725f6d6822b69990c0a2ed2c033b3ca4b8925c9f2dea46643ac883dd",
+      "publishedSha256": "35186bf231f8c804b89026b282430df3a56a153ff11bb7b2521cca11071494d7",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-3-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-3-before/result.json",
+      "sourceSha256": "6566332bc9f88a7c958c821a1242eaa8f6a709539a205784de2da589f7f20d0c",
+      "publishedSha256": "720e7f8f0b493f5bd1fc44de23e0c6eec0d69114441b338815c1fcba77f5e405",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-0-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-0-before/result.json",
+      "sourceSha256": "609e069da5b78a21df27f0526811efab7265b65c6848d865521aebaf5ad42c47",
+      "publishedSha256": "f603edd65013db7014739198a7617761c6100ea604e327247bca5d113132d2ae",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-1-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-1-after/result.json",
+      "sourceSha256": "35d2a856d6fe7aff34a679b4594e161dec78aba51707bed69871f5448c78199b",
+      "publishedSha256": "6bc9b7e9695809c831582049e4d8c75ffd478f1425e1639adaeaaa3e0d63e9f8",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-2-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-2-after/result.json",
+      "sourceSha256": "da3208298b8fe86b2a2740a70dfed5cfac845e6662c9e0bbcc5e608083d69315",
+      "publishedSha256": "23e0968457761a380963af7a1d12a11cf64dc8480d52a526c0fa9ed4deed6294",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-3-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-3-before/result.json",
+      "sourceSha256": "be2828dac3e5adcec7a4fabbb4a7a6e763ea6829d563d6be6c7cebd2fa59e163",
+      "publishedSha256": "f87e25fc82c6e355207189598f27e37aee4ffaa07d49b799472d124d7c3bc129",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-0-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-0-before/result.json",
+      "sourceSha256": "90e46064e670a0eb42ce3d194fa8081f482cf39fd1a83a7c55f1beed58a181b3",
+      "publishedSha256": "3513ddfde5951ada674c377e3a070c4257b7fb1b95a77291c62eb0d580b7faca",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-1-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-1-after/result.json",
+      "sourceSha256": "6105f7e1d6392c4cb9353fe0babf0a395ce1b25fa89ec6611ce8286f0b82ae28",
+      "publishedSha256": "88c4b24dc09ca96f4536e671966a1de732f881c1acc5c51aa2075d1e03f5e9ad",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-2-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-2-after/result.json",
+      "sourceSha256": "4c3f129e48a49d47988b3a47a6ed14836f8acb2215a1135b3d4572b74197eac3",
+      "publishedSha256": "227826787b76d7f16e63fe8a677ac9557a16fa04a18d147bd69fbf6785b1b4b2",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-3-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-3-before/result.json",
+      "sourceSha256": "9faa8a9319c37efaed5b242d3a83e1fb61f20c24d44217225a250a951af4e598",
+      "publishedSha256": "1a63dc84cd10e58b4c27d4879cf39d50d17b4614d8f99043c6381df0d25081ff",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-0-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-0-before/result.json",
+      "sourceSha256": "64b011f92a5e3966aaf994ddd8a286ce97586074e4e9dd1ba21b8504dcf9890e",
+      "publishedSha256": "7936f528b1ac26b39eb3ed55bfc9b6c4108481e9d44e8746f245cb016453c3e3",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-1-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-1-after/result.json",
+      "sourceSha256": "6a11b43339476fe13d9b82e61fe9a22e7df03af0a7b7f41c4e4248539eef0fcb",
+      "publishedSha256": "3b6d457c7e7b11e2d61695048e14907d74bddd98285a1108fcce48a66e3f2d1d",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-2-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-2-after/result.json",
+      "sourceSha256": "f81ee6b17ac7216f497aec6fdd6c74db4c84d6b46bfd003c639ec85715c2de1f",
+      "publishedSha256": "a7882d7722392840f1c534915e317b05ebbbfc50f09de8d1b5907e5db7418eca",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-3-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-3-before/result.json",
+      "sourceSha256": "bdee4085f3ae9dd18516dabfc1b6b0561701de94aead17c278721c31a51a8fb2",
+      "publishedSha256": "5644995c62b4479a1f7f0ae93bdce2bf3e02aa70520092ec838858903160b8c9",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-0-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-0-before.log",
+      "sourceSha256": "72af1497a7340f4ac960fb75c6dfd2dee407965aea8c750c451d13e90a616a44",
+      "publishedSha256": "72af1497a7340f4ac960fb75c6dfd2dee407965aea8c750c451d13e90a616a44",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-1-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-1-after.log",
+      "sourceSha256": "c65012961f42ff31052b1ab7f079c82aaae4829ade77db4f919a1167d4128eef",
+      "publishedSha256": "c65012961f42ff31052b1ab7f079c82aaae4829ade77db4f919a1167d4128eef",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-2-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-2-after.log",
+      "sourceSha256": "338b260353bf4896396c814b3dd99f01b33da1c75ddcfe80c13e24ec89b2d4b7",
+      "publishedSha256": "338b260353bf4896396c814b3dd99f01b33da1c75ddcfe80c13e24ec89b2d4b7",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-desktop-50x-3-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-desktop-50x-3-before.log",
+      "sourceSha256": "f0536a28e8939850eb8a11304e6b66ae3b4c3e9717dd910635b51073f171d914",
+      "publishedSha256": "f0536a28e8939850eb8a11304e6b66ae3b4c3e9717dd910635b51073f171d914",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-0-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-0-before.log",
+      "sourceSha256": "62c6701c0684a17f07b44c54480a311dd8f0eb9492a5ea54c8efabfcc4a99311",
+      "publishedSha256": "62c6701c0684a17f07b44c54480a311dd8f0eb9492a5ea54c8efabfcc4a99311",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-1-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-1-after.log",
+      "sourceSha256": "cda6f9ce139a624e56b8c8c9e56081251232a8090f87760a8f086063fd38ecd9",
+      "publishedSha256": "cda6f9ce139a624e56b8c8c9e56081251232a8090f87760a8f086063fd38ecd9",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-2-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-2-after.log",
+      "sourceSha256": "04f1e8d5b5663ed8e9750b321ff67ac384ce791316f992b5dc42da708c649d0b",
+      "publishedSha256": "04f1e8d5b5663ed8e9750b321ff67ac384ce791316f992b5dc42da708c649d0b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-10x-3-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-10x-3-before.log",
+      "sourceSha256": "7eca1d61bd4a16e8d2f19e33f4e0d67ac1327e9bae45d1a4fc4fe6cd0fa80a86",
+      "publishedSha256": "7eca1d61bd4a16e8d2f19e33f4e0d67ac1327e9bae45d1a4fc4fe6cd0fa80a86",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-0-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-0-before.log",
+      "sourceSha256": "f5c99be57264ca1443e5ce237d46805e000b0e55d195c5a8bd017718a0fb66c0",
+      "publishedSha256": "f5c99be57264ca1443e5ce237d46805e000b0e55d195c5a8bd017718a0fb66c0",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-1-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-1-after.log",
+      "sourceSha256": "5a44f15d5c619886ab8eeda843c139f1b76d1699dd017c2487cce6bd3b22cbff",
+      "publishedSha256": "5a44f15d5c619886ab8eeda843c139f1b76d1699dd017c2487cce6bd3b22cbff",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-2-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-2-after.log",
+      "sourceSha256": "743f3bbe39105158c34865c17cf467389706b12aecf50a8d10db234e77fe6c4b",
+      "publishedSha256": "743f3bbe39105158c34865c17cf467389706b12aecf50a8d10db234e77fe6c4b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/168h-mobile-50x-3-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/168h-mobile-50x-3-before.log",
+      "sourceSha256": "4e36e9eba049af66b2076b6f0c3906333938d5e9ec5a97fcc1d0b40d8b1a934e",
+      "publishedSha256": "4e36e9eba049af66b2076b6f0c3906333938d5e9ec5a97fcc1d0b40d8b1a934e",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-0-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-0-before.log",
+      "sourceSha256": "e4825545f498efb9bea38c432ed615313f0a729dae023bdc67dade194e6e45fd",
+      "publishedSha256": "e4825545f498efb9bea38c432ed615313f0a729dae023bdc67dade194e6e45fd",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-1-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-1-after.log",
+      "sourceSha256": "17895b0bf0f583d4813e4dcb26e8ca4405aa44785b77f7a6ed4002f4572aee8b",
+      "publishedSha256": "17895b0bf0f583d4813e4dcb26e8ca4405aa44785b77f7a6ed4002f4572aee8b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-2-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-2-after.log",
+      "sourceSha256": "b6a9a20ba225b6289ca98a2b7b5212a722759631e6ff09b025ebac2e8e93ea1d",
+      "publishedSha256": "b6a9a20ba225b6289ca98a2b7b5212a722759631e6ff09b025ebac2e8e93ea1d",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-abba/96h-desktop-10x-3-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-abba/96h-desktop-10x-3-before.log",
+      "sourceSha256": "f0efdb71dae870b554c5647abc85c43da3d7d4064a383496282f00c8e4a9b33f",
+      "publishedSha256": "f0efdb71dae870b554c5647abc85c43da3d7d4064a383496282f00c8e4a9b33f",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-desktop-50x-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-desktop-50x-after/result.json",
+      "sourceSha256": "de21f5bf2f3bebd83e9fb691a1c07c1577b1f4032573d10443534f4e8ca49f28",
+      "publishedSha256": "36f64f108affe3d9738a8e37ec2f084399fa1eb1577b72c8cc2a25815fa4c131",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-desktop-50x-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-desktop-50x-before/result.json",
+      "sourceSha256": "fbeb7e743fff57bd6bca6c7062215a10013d3eca7853b011ad61dbd4ad5a8a3f",
+      "publishedSha256": "1c61b03eb69d2c6961fe8d88fb3d0e495ad5ebb0a639502c6fd8ddf69f9b519b",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-mobile-10x-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-mobile-10x-after/result.json",
+      "sourceSha256": "3d5e30d58ec7ac4a23fb115530247fa07bbbbc7061d26c02f9b7a783d999d297",
+      "publishedSha256": "aa04d3911f2c55c8ca6df89d9d2ea4b7fd2a8465f789eee62b847cd5f049b294",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-mobile-10x-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-mobile-10x-before/result.json",
+      "sourceSha256": "cf38a00835209bcddd1a339f59ee955ef724cf0e86283b4b47b1c6302502315d",
+      "publishedSha256": "1faed74a4935e96218ff819652ee3af8ed093f98b9dd51339457dab7045f31b5",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/96h-desktop-10x-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/96h-desktop-10x-after/result.json",
+      "sourceSha256": "dac27b9730bf8651b49b554c1a31689b7adc5467166441a43408d3f8f9c9bf73",
+      "publishedSha256": "d2ca7c8ba0bd41f4ed766aa4cbcd5dbd2d0078c73de8e6280a2e4f90f3ecc70c",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/96h-desktop-10x-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/96h-desktop-10x-before/result.json",
+      "sourceSha256": "82c0c8b3b1a000765d9b7315a05f3318d783f545787b2c280e7922a8b22c9aaa",
+      "publishedSha256": "924a49d0d3c4be59daba685e5970cc5a81f8ee316484a2df1f280e8f4d82eead",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-desktop-50x-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-desktop-50x-after.log",
+      "sourceSha256": "f9a84d046f29404c77364d4647fca2f82c7257586518c492765d377d4483cc3c",
+      "publishedSha256": "f9a84d046f29404c77364d4647fca2f82c7257586518c492765d377d4483cc3c",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-desktop-50x-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-desktop-50x-before.log",
+      "sourceSha256": "e38aacc6619805cb0f2a7b8afff6547b050df6c898bee11ddd4549d9962b602a",
+      "publishedSha256": "e38aacc6619805cb0f2a7b8afff6547b050df6c898bee11ddd4549d9962b602a",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-mobile-10x-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-mobile-10x-after.log",
+      "sourceSha256": "d6f1d02b8d3aee60474be16dcd5d0ee04285faad60a8a21bb91d219211b87bbf",
+      "publishedSha256": "d6f1d02b8d3aee60474be16dcd5d0ee04285faad60a8a21bb91d219211b87bbf",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/168h-mobile-10x-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/168h-mobile-10x-before.log",
+      "sourceSha256": "a8362b89b83fac21162a852a311803e4dd8820592c462ca6f6070d861d111d5b",
+      "publishedSha256": "a8362b89b83fac21162a852a311803e4dd8820592c462ca6f6070d861d111d5b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/96h-desktop-10x-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/96h-desktop-10x-after.log",
+      "sourceSha256": "a87113204fe15482be7902b8c501375cf94ff57a17cebd38a662a0a5be60fc2b",
+      "publishedSha256": "a87113204fe15482be7902b8c501375cf94ff57a17cebd38a662a0a5be60fc2b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail/96h-desktop-10x-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail/96h-desktop-10x-before.log",
+      "sourceSha256": "db47e954858978230f2634ee870c1bf089dc41ac4741dbea93898735da2ecb22",
+      "publishedSha256": "db47e954858978230f2634ee870c1bf089dc41ac4741dbea93898735da2ecb22",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-0-before/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-0-before/result.json",
+      "sourceSha256": "ad70de3b710338a5136f4d33275480af24e7ea2f4a79fe2c58242180d83e3afb",
+      "publishedSha256": "6660e15bbfbf72f7d299535417eac04edbd9c69c0905771c722f51b568a8904a",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-1-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-1-after/result.json",
+      "sourceSha256": "5f3e45a7b9e8e1d040d27643c120ed0b6748ff35d5310e1be75027b27af71f1a",
+      "publishedSha256": "9a2afb63ca38ec7a984526956c247924cbd99e06cb28b5586bec1f7472c2f519",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-2-after/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-2-after/result.json",
+      "sourceSha256": "52a418b3334572a9dd2eda259eaccfc8a89168bffcafc73e33b721a910341d26",
+      "publishedSha256": "cbeeffbd4ea7d3256ee8cdbdcf4d6de715c88f3b922128bd63afcb409b91ec0e",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-0-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-0-before.log",
+      "sourceSha256": "ee08ca2e18c8544be24f89e1877db47ee1a22dcda8cdc14eff974c61b23b5592",
+      "publishedSha256": "ee08ca2e18c8544be24f89e1877db47ee1a22dcda8cdc14eff974c61b23b5592",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-1-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-1-after.log",
+      "sourceSha256": "9a0ab6a6d2d65ec574c0320b0bdff6fe196ac87def868c31ceb92ec69b6ed75b",
+      "publishedSha256": "9a0ab6a6d2d65ec574c0320b0bdff6fe196ac87def868c31ceb92ec69b6ed75b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-2-after.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-2-after.log",
+      "sourceSha256": "9ae1d7082c87c3da9683674e6a52c525255c6fb2c26ef9c208d24c77ed33841e",
+      "publishedSha256": "9ae1d7082c87c3da9683674e6a52c525255c6fb2c26ef9c208d24c77ed33841e",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/168h-mobile-10x-3-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/168h-mobile-10x-3-before.log",
+      "sourceSha256": "fdbbab30c0c90db6816932b72be40008d0d1f03cac7b96af3d92ce278df7d4b0",
+      "publishedSha256": "fdbbab30c0c90db6816932b72be40008d0d1f03cac7b96af3d92ce278df7d4b0",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba/96h-desktop-10x-0-before.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba/96h-desktop-10x-0-before.log",
+      "sourceSha256": "fdbbab30c0c90db6816932b72be40008d0d1f03cac7b96af3d92ce278df7d4b0",
+      "publishedSha256": "fdbbab30c0c90db6816932b72be40008d0d1f03cac7b96af3d92ce278df7d4b0",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/environment.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/environment.json",
+      "sourceSha256": "198e8c780d92bfd5f953b9e7516b2c9b085d2435188fe8bea0a3281b3c2048d9",
+      "publishedSha256": "80f4c39574dee0c26be8c71497718e24d2a318d7529163cc40287ee487362753",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/prepared-input-manifest.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/prepared-input-manifest.json",
+      "sourceSha256": "5f4e1644df650181038b5aa92ebc51fe6a98923661104a32bd11dd41a697da28",
+      "publishedSha256": "7a1f10430490a2b4f425140464ffba63d36002b6389fe78d04210723bb1006db",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-detail-progress.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-detail-progress.json",
+      "sourceSha256": "f9f61d00cfd4cf42f4cfe896ba83b57257e2d2575c27168471a3646921c4f605",
+      "publishedSha256": "1cfdb9caac4f92beb95c5d45d1e8c05975692eab4a455baec7c74c517b84ce4d",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/bounded-abba-progress.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/bounded-abba-progress.json",
+      "sourceSha256": "200a1f693c6b0be15ea030caa1d120dc1a9c87d787ec4e5e7c8912f934fe317f",
+      "publishedSha256": "76cee358e25860362d0e4ee540fb25da9b8123e6bd3d5050bbb48bbf479fbd19",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/safety-targeted.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/safety-targeted.json",
+      "sourceSha256": "ddf25a9f903a76e40961d1f1a153d9a2a6e1bf4471f26013a57a8b00fced81b0",
+      "publishedSha256": "188fa896c7d0f753f56328da962b25e93d599d39ba7ccf9c0a53ff3468e11832",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/safety-targeted.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/safety-targeted.log",
+      "sourceSha256": "d12434de665d7e3917104657e4e1083f93da33374ce962dd56e3718ae8894d8c",
+      "publishedSha256": "d12434de665d7e3917104657e4e1083f93da33374ce962dd56e3718ae8894d8c",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/stream-after-targeted.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/stream-after-targeted.json",
+      "sourceSha256": "45eb1ab2a54bb75b6f2b2ccf215e7c9384930abb592be3a2e6420e6f5f5f912a",
+      "publishedSha256": "846ad5b6c6c701a6021306418f3134bc8879dd373d44befd2c2ec780a0e488de",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/stream-after-targeted.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/stream-after-targeted.log",
+      "sourceSha256": "cb66dc3a4aff8ec9c5b67f3e36a63fe7f4f1b7e330d8e79c6905e3413d652b5e",
+      "publishedSha256": "cb66dc3a4aff8ec9c5b67f3e36a63fe7f4f1b7e330d8e79c6905e3413d652b5e",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/stream-before-negative.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/stream-before-negative.json",
+      "sourceSha256": "22ebb5c6f0ef609b9f6e5d811c16d8cfc75b2e27944cb8fa357dadca809f8435",
+      "publishedSha256": "e909e14aef3ec406123dea0d9a9e0390b957f21d1ad4440ffd25847c5c92db61",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/stream-before-negative.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/stream-before-negative.log",
+      "sourceSha256": "0807df739c56057f3bd810362436feb4c713a4251e8853b94ba33d6e9fd30be8",
+      "publishedSha256": "0807df739c56057f3bd810362436feb4c713a4251e8853b94ba33d6e9fd30be8",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/typecheck.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/typecheck.log",
+      "sourceSha256": "2af0d14c71e27145b00a2947787e3a462f1f6bbf645ac71b8f40637ee081b5b3",
+      "publishedSha256": "2af0d14c71e27145b00a2947787e3a462f1f6bbf645ac71b8f40637ee081b5b3",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/typecheck-fixed.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/typecheck-fixed.log",
+      "sourceSha256": "df36599cf1331fd3aadfb095efe928885a81f7dc8fcf4c6082119a3592fb7b04",
+      "publishedSha256": "df36599cf1331fd3aadfb095efe928885a81f7dc8fcf4c6082119a3592fb7b04",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-typecheck.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-typecheck.log",
+      "sourceSha256": "df36599cf1331fd3aadfb095efe928885a81f7dc8fcf4c6082119a3592fb7b04",
+      "publishedSha256": "df36599cf1331fd3aadfb095efe928885a81f7dc8fcf4c6082119a3592fb7b04",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/final-production-build.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/final-production-build.log",
+      "sourceSha256": "b543d7e229e4468b9c435113c2e3a033157c801ccc24e338a8eeab1188db1dd2",
+      "publishedSha256": "b543d7e229e4468b9c435113c2e3a033157c801ccc24e338a8eeab1188db1dd2",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/ai-scope-check-final.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/ai-scope-check-final.log",
+      "sourceSha256": "0d5cac53faa03f62bf2511679923187e0d2afae9aec944a1aa50e0ce03a9824b",
+      "publishedSha256": "0d5cac53faa03f62bf2511679923187e0d2afae9aec944a1aa50e0ce03a9824b",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/fixture-preparation-0h.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/fixture-preparation-0h.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publishedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/fixture-preparation-96h.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/fixture-preparation-96h.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publishedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/fixture-preparation-168h.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/fixture-preparation-168h.log",
+      "sourceSha256": "7cd1056e7a4d801dc0f2fd3ce7502a5e62fb6cf870c8c20be27ab8c7018a2885",
+      "publishedSha256": "7cd1056e7a4d801dc0f2fd3ce7502a5e62fb6cf870c8c20be27ab8c7018a2885",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/fixture-preparation-168h-retry1.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/fixture-preparation-168h-retry1.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publishedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-compat/result.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-compat/result.json",
+      "sourceSha256": "e22ecbf6eeea0cd9474eff29a22df2d57ddcaf9866cd5dda8986d0b17bd075ea",
+      "publishedSha256": "76a21b0c6a66f989d3281754c464136884c31320119a207b954b0abdaf10e786",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/native-compat.log",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/native-compat.log",
+      "sourceSha256": "82c72e5f08184914558d334be2a51198e3dc4c3d9ec1b41ac1bbf4e100988ffc",
+      "publishedSha256": "82c72e5f08184914558d334be2a51198e3dc4c3d9ec1b41ac1bbf4e100988ffc",
+      "normalization": "byte exact"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/trace-after-v1/trace-source.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/trace-after-v1/trace-source.json",
+      "sourceSha256": "3424582cfa8cc25b234cf3b346da7dae1b9d1fda51194f045691ff6a60130e66",
+      "publishedSha256": "c07f36dbc8a4f26d6df4e81269c3262a7b2bb0a28de5925e5095cb41fa6df655",
+      "normalization": "lossless JSON whitespace only"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/trace-final-v1/trace-source.json",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/trace-final-v1/trace-source.json",
+      "sourceSha256": "3311184b0be41a771fb3006e3e967ba590d28f00490f39ff26f6b76e3abe0a11",
+      "publishedSha256": "29018d186a89d184bca0dfbee4fcc2f7c671a5b62898b0069c2e63ead7d29dea",
+      "normalization": "lossless JSON whitespace only"
+    }
+  ],
+  "excluded": "No save bodies, raw Chrome traces, screenshots, archives, dist or dependencies. Existing before evidence and historical failures untouched. Supplemental CDP raw numeric events retained locally; aligned derived GC intervals in native-stage-details.json; clock uncertainty applies."
+}

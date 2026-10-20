@@ -1,0 +1,178 @@
+{
+  "sourceHead": "9f08fd63d8e7928add4048ff5f7c3aa2d1048fc7",
+  "instrumented": true,
+  "groups": [
+    {
+      "name": "0h-desktop-10x",
+      "n": 5,
+      "invalid": 0,
+      "maxMs": 411.20000000298023,
+      "over1000": 0,
+      "input": [
+        {
+          "speed": 1,
+          "sha256": "596ea55a9c20f07ab63c038824850b7e6bfc456a029c0969ea566c7ef0991e5c",
+          "bytes": 507616,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2004eca14e1159490329db259a102a8b3047b662f8a96496bcb50d8636bd8b4a",
+          "bytes": 507617,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "d19e3dc663f38a9585e8f2e89495fd34f0dfadbd8c22988554ff706b2ad14c56",
+          "bytes": 507617,
+          "agents": 99
+        }
+      ]
+    },
+    {
+      "name": "168h-desktop-50x",
+      "n": 5,
+      "invalid": 0,
+      "maxMs": 1351.5,
+      "over1000": 3,
+      "input": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ]
+    },
+    {
+      "name": "168h-mobile-10x",
+      "n": 10,
+      "invalid": 0,
+      "maxMs": 1824.8999999910593,
+      "over1000": 10,
+      "input": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ]
+    },
+    {
+      "name": "168h-mobile-50x",
+      "n": 5,
+      "invalid": 0,
+      "maxMs": 1243.1000000089407,
+      "over1000": 1,
+      "input": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ]
+    },
+    {
+      "name": "96h-desktop-10x",
+      "n": 10,
+      "invalid": 0,
+      "maxMs": 902.0999999940395,
+      "over1000": 0,
+      "input": [
+        {
+          "speed": 1,
+          "sha256": "cb5867be2069141786169075a65d4787ef80b7d01b1d75683c44edad141dec59",
+          "bytes": 2845154,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "87ec0a479e4c346526f5b2315f91121e1381bef0d02cecf1af024eb9b826ecb2",
+          "bytes": 2845155,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "6b9f8d1c9a9e042a4a8ce25604ddb6846827d226ebca4a405a9f4fc09a1b95d4",
+          "bytes": 2845155,
+          "agents": 99
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "/workspace/research/p0c4-final/before/0h-desktop-10x/result.json",
+      "rawSha256": "de8bfbda8686165d5705c41e46e8241f5b818f6b1f8d8b74f8c632940ca9331d",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/before/0h-desktop-10x.json",
+      "publishedSha256": "2801db10f395c1012695bbaeabfa5641bfc9d6c8ebe04e54a72bc02814f0f892",
+      "method": "JSON whitespace compacted; all collected numeric span data preserved"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/before/168h-desktop-50x/result.json",
+      "rawSha256": "bcb06a8eca3b6b7116e3cac8b12831aef85a0c27034590348dc09168f4457d9d",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/before/168h-desktop-50x.json",
+      "publishedSha256": "df1579dafd549a8ba8b39e85e1a3df8cc91083cd1ab126ee07cbb64bb5d3bce9",
+      "method": "JSON whitespace compacted; all collected numeric span data preserved"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/before/168h-mobile-10x/result.json",
+      "rawSha256": "127a5b7c6e1927a03edf27f592016b15a2eb8871f5755b78a7808dc6b6c05c91",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/before/168h-mobile-10x.json",
+      "publishedSha256": "4ad41b15f57c53baf25ab2481b185aa5743ec9e499a392c60f32c49790816d28",
+      "method": "JSON whitespace compacted; all collected numeric span data preserved"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/before/168h-mobile-50x/result.json",
+      "rawSha256": "b21a462fc886e8ec7819dc3c888b6b52579e3284e53d8d3a28356a0d4c9bfbb1",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/before/168h-mobile-50x.json",
+      "publishedSha256": "64add32d72574f7edc2557ed2ac44c52726825848a26e1b20859d197f53318e8",
+      "method": "JSON whitespace compacted; all collected numeric span data preserved"
+    },
+    {
+      "source": "/workspace/research/p0c4-final/before/96h-desktop-10x/result.json",
+      "rawSha256": "eb5e86825c743c4b65615abb12e6e1a5599b4b3786b2ae51d85b323f5c2447b2",
+      "published": "docs/p0c-final-delta/c4-investigation/evidence/before/96h-desktop-10x.json",
+      "publishedSha256": "8a6ba1c67cad3a93440285a89c4a57c746bd2d4c403fe09a738b22a5c1920bc9",
+      "method": "JSON whitespace compacted; all collected numeric span data preserved"
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 import {CivilianCache,paintCivilians} from './presentation/civilianOverlay';
-import {empireOf} from './formal/politics';
 import {ArmyRouteCache,BattleImpacts,paintArmies,battleMarkers,paintBattleMarker} from './presentation/armyOverlay';
 import {displayClock} from './presentation/liveClock';
 import {protectedFaction} from './formal/playtest';
@@ -18,7 +17,7 @@ import {INITIAL_ZOOM,MAX_ZOOM,MIN_ZOOM,overviewZoom} from './presentation/mapPai
 import {cityArtAge,civilizationIndex,SITE_INDEX,CIV_NAMES} from './presentation/artMap';
 import {mapSession,mapImage,drawTerrain} from './presentation/DemoMapCache';
 import {eraAtlas,eraBounds} from './assets';
-import {relationColor,politicalCells,drawPoliticalOverlay} from './presentation/mapRelations';
+import {relationColor,politicalInfluence,drawPoliticalOverlay} from './presentation/mapRelations';
 import {ArmyDispatchDialog} from './presentation/CombatPanel';
 import {FormalTargetPanel} from './presentation/FormalTargetPanel';
 import {useTargetIntel} from './presentation/targetIntel';
@@ -60,10 +59,10 @@ export default function FormalWorldMap({world,focusCityId,focusPoint,onSelect,on
    const key=mapBackgroundKey(g,cam,{width:w,height:h,dpr},flags.current.grid,gesturing,terrainCache.revision,sceneryCache.revision);
    if(key!==backgroundKey){backgroundKey=key;bg.setTransform(dpr,0,0,dpr,0,0);drawTerrain(bg,g,cam,w,h,dpr,gesturing,flags.current.grid,terrainCache);sceneryCache.beginFrame();if(detail)sceneryCache.draw(bg,g,cam,w,h,dpr,gesturing);backgroundRedraws++;}
    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
-   if(flags.current.territory)drawPoliticalOverlay(ctx,politicalCells(g),screen);
+   if(flags.current.territory)drawPoliticalOverlay(ctx,politicalInfluence(g),screen,{width:w,height:h,zoom:cam.z});
    const displayTime=displayClock.projectTime(g.campaignId,g.time),idx=spatial(g),visible=idx.query(bounds),layers:{depth:number;draw:()=>void}[]=[],glyphs:MapGlyph[]=[];
    for(const city of visible.cities){const p=screen(city);if(p.x<-70||p.x>w+70||p.y<-60||p.y>h+60)continue;const f=g.factions.find(f=>f.id===city.ownerFactionId)!,i=civilizationIndex(f.civilizationId),age=cityArtAge(g,city),size=mapNodeSize(true,cam.z),color=relationColor(g,city);layers.push({depth:city.x+city.y,draw:()=>{ctx.save();ctx.beginPath();const marker=mapMarkerSize(cam.z),rx=marker.width,ry=marker.height;ctx.moveTo(p.x,p.y-ry);ctx.lineTo(p.x+rx,p.y);ctx.lineTo(p.x,p.y+ry);ctx.lineTo(p.x-rx,p.y);ctx.closePath();ctx.fillStyle=color+'55';ctx.strokeStyle=color;ctx.lineWidth=detail?2.5:1;ctx.fill();ctx.stroke();const im=cities[age];if(detail)crop(im,eraBounds(14+i,age),{x:p.x,y:p.y+size*.8},size*3.8,size*3.8);if(detail&&protectedFaction(g,city.ownerFactionId,displayTime)){ctx.globalAlpha=.55;crop(dome,{x:0,y:0,w:dome.naturalWidth,h:dome.naturalHeight},{x:p.x,y:p.y+size*.85},size*5,size*5);ctx.globalAlpha=1;}
-    if((f.age??0)===3&&cam.z>.45){ctx.fillStyle='#e9cb75';ctx.font='bold 11px serif';ctx.textAlign='center';ctx.fillText('帝',p.x,p.y-size*2.6);}if(flags.current.territory&&empireOf(g,f.id)&&cam.z<.7){ctx.font='bold 12px serif';ctx.textAlign='center';ctx.fillStyle=empireOf(g,f.id)!.color;ctx.fillText(empireOf(g,f.id)!.name,p.x,p.y-16);}
+    if((f.age??0)===3&&cam.z>.45){ctx.fillStyle='#e9cb75';ctx.font='bold 11px serif';ctx.textAlign='center';ctx.fillText('帝',p.x,p.y-size*2.6);}
     if(flags.current.labels)glyphs.push({text:CIV_NAMES[f.civilizationId][0],x:p.x,y:p.y-size*.65,size:mapGlyphSize(true,cam.z),color,priority:city.x===flags.current.selected.x&&city.y===flags.current.selected.y?3:city.ownerFactionId===g.playerFactionId?2:1});ctx.restore();}});}
    if(wildVisible)for(const site of visible.sites){const p=screen(site);if(p.x<-70||p.x>w+70||p.y<-60||p.y>h+60)continue;const i=SITE_INDEX[site.resource],size=mapNodeSize(false,cam.z);layers.push({depth:site.x+site.y,draw:()=>{ctx.save();const color='#bec1b7';ctx.beginPath();ctx.moveTo(p.x,p.y-size*.55);ctx.lineTo(p.x+size*1.2,p.y);ctx.lineTo(p.x,p.y+size*.55);ctx.lineTo(p.x-size*1.2,p.y);ctx.closePath();ctx.fillStyle=color+'40';ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.fill();ctx.stroke();ctx.restore();crop(resources,{x:i%4*resources.naturalWidth/4,y:Math.floor(i/4)*resources.naturalHeight/2,w:resources.naturalWidth/4,h:resources.naturalHeight/2},{x:p.x,y:p.y+size*1.43},size*3.4,size*4.53);if(flags.current.labels||site.id.startsWith('wild:exile-'))glyphs.push({text:site.id.startsWith('wild:exile-')?'流':WILD_SITE_GLYPHS[site.resource],x:p.x,y:p.y-size*.65,size:mapGlyphSize(false,cam.z),color:'#bec1b7',priority:site.x===flags.current.selected.x&&site.y===flags.current.selected.y?3:0});if(showMapCaption(false,flags.current.labels,cam.z,site.x===flags.current.selected.x&&site.y===flags.current.selected.y,gesturing)){ctx.font='600 12px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';const s=site.id.startsWith('wild:exile-')?'流':'Lv.'+site.level,tw=ctx.measureText(s).width;ctx.fillStyle='#16251ded';ctx.fillRect(p.x-tw/2-5,p.y+size*.4+3,tw+10,20);ctx.fillStyle='#e0e3d2';ctx.fillText(s,p.x,p.y+size*.4+13);}}});}
    // Ground selection glow must remain beneath buildings.

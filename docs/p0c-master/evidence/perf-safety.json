@@ -1,0 +1,258 @@
+{
+  "passed": 63,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "a passive checkpoint transports clock/revision only and preserves all terrain and entity identities",
+      "status": "passed"
+    },
+    {
+      "name": "command and completion patches reconstruct the exact durable world without carrying unchanged terrain",
+      "status": "passed"
+    },
+    {
+      "name": "wrong campaign or missing base revision requires a full snapshot, never a partial corrupt world",
+      "status": "passed"
+    },
+    {
+      "name": "formal save/load and durable dedupe survive a database/worker restart",
+      "status": "passed"
+    },
+    {
+      "name": "Recovery roundtrip keeps increasing revision; post-checkpoint commands become durable rolled-back receipts",
+      "status": "passed"
+    },
+    {
+      "name": "Recovery clears future reports and checkpoints in the same commit as world and authority",
+      "status": "passed"
+    },
+    {
+      "name": "report-write failure rolls back real IDB stores, keeps input revision, and retries exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "backup-write failure rolls back real IDB stores, keeps input revision, and retries exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "world-write failure rolls back real IDB stores, keeps input revision, and retries exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "authority-write failure rolls back real IDB stores, keeps input revision, and retries exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "restore failure after history-modified leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "restore failure after report-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "restore failure after backup-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "restore failure after world-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "restore failure after authority-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "import failure after history-modified leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "import failure after report-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "import failure after backup-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "import failure after world-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "import failure after authority-write leaves world/reports/Recovery coherent and retry works",
+      "status": "passed"
+    },
+    {
+      "name": "full import commits reports and quick import replaces history without borrowing old reports",
+      "status": "passed"
+    },
+    {
+      "name": "checksums and duplicate report IDs are rejected before any writes",
+      "status": "passed"
+    },
+    {
+      "name": "CAS rejects a competing stale revision in the actual transaction",
+      "status": "passed"
+    },
+    {
+      "name": "automatic Recovery uses a valid formal checkpoint, restores atomically, and does not conceal write failure",
+      "status": "passed"
+    },
+    {
+      "name": "reports are independently stored and paged by 50",
+      "status": "passed"
+    },
+    {
+      "name": "DEMO isolation with actual separate IndexedDB databases new formal DB never reads/enumerates/deletes/rewrites DEMO saves or Recovery",
+      "status": "passed"
+    },
+    {
+      "name": "DEMO isolation with actual separate IndexedDB databases schema6 envelope load/import/restore are rejected, never repaired or listed as formal Recovery",
+      "status": "passed"
+    },
+    {
+      "name": "DEMO isolation with actual separate IndexedDB databases new formal save rejects repairable state rather than running old normalize/repair/upgrade",
+      "status": "passed"
+    },
+    {
+      "name": "Recovery retains event/report sequence high-water marks and never reuses a rolled-back EventId",
+      "status": "passed"
+    },
+    {
+      "name": "simultaneous saves from two connections have exactly one durable CAS winner",
+      "status": "passed"
+    },
+    {
+      "name": "large durable history rejects missing without changing stores or caller input",
+      "status": "passed"
+    },
+    {
+      "name": "large durable history rejects fingerprint without changing stores or caller input",
+      "status": "passed"
+    },
+    {
+      "name": "large durable history rejects issuerId without changing stores or caller input",
+      "status": "passed"
+    },
+    {
+      "name": "large durable history rejects committedRevision without changing stores or caller input",
+      "status": "passed"
+    },
+    {
+      "name": "large durable history rejects disposition without changing stores or caller input",
+      "status": "passed"
+    },
+    {
+      "name": "large durable history rejects duplicate without changing stores or caller input",
+      "status": "passed"
+    },
+    {
+      "name": "large history may reorder and grow while applied and rolled-back receipts remain durable",
+      "status": "passed"
+    },
+    {
+      "name": "checkpoint pruning retains the newest primary keys despite wall-clock reversal",
+      "status": "passed"
+    },
+    {
+      "name": "150000 valid receipts survive start, import and Recovery without an argument-count limit",
+      "status": "passed"
+    },
+    {
+      "name": "receives a command during cooperative replay without exposing a draft or interleaving its mutation",
+      "status": "passed"
+    },
+    {
+      "name": "foreground FIFO overtakes only a pending tick and remains behind the in-flight durable save",
+      "status": "passed"
+    },
+    {
+      "name": "import and visibility/load barriers preserve arrival order and old-campaign clicks never cross a switch",
+      "status": "passed"
+    },
+    {
+      "name": "an old unchanged construction catches up actual admission time after its revision was rebased",
+      "status": "passed"
+    },
+    {
+      "name": "actual player-governor catch-up admits an unchanged building without retry",
+      "status": "passed"
+    },
+    {
+      "name": "actual player-governor catch-up rejects its changed field target without retry",
+      "status": "passed"
+    },
+    {
+      "name": "a newer foreground command stays a hard fence even when its ID looks autonomous and its effect is undone",
+      "status": "passed"
+    },
+    {
+      "name": "current resources conflict rejects without any draft spend or durable save",
+      "status": "passed"
+    },
+    {
+      "name": "current queue conflict rejects without any draft spend or durable save",
+      "status": "passed"
+    },
+    {
+      "name": "an actual failed IDB transaction produces only rejection, preserves authority, and deliberate same-ID resend commits once",
+      "status": "passed"
+    },
+    {
+      "name": "C4 due events and a player command share one atomic save with one authoritative revision",
+      "status": "passed"
+    },
+    {
+      "name": "C4 combined replay fault exposes neither event draft nor command success",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-A exact Gate reproduction: initial A, half-funded B, corrupt current, and B gameTime mismatch",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-A skips a metadata-invalid B, restores A atomically, and preserves revision/dedupe/ID high-water marks",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A history-modified failure propagates, rolls back every store, and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A report-write failure propagates, rolls back every store, and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A backup-write failure propagates, rolls back every store, and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A world-write failure propagates, rolls back every store, and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A authority-write failure propagates, rolls back every store, and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-C campaignId mismatch has the same validity in auto Recovery, backupList, and manual restore",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-C gameTime mismatch has the same validity in auto Recovery, backupList, and manual restore",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-C reportCursor mismatch has the same validity in auto Recovery, backupList, and manual restore",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1-D valid current save does not inspect or restore a bad checkpoint or write any store",
+      "status": "passed"
+    },
+    {
+      "name": "B1-R1 automatic Recovery checkpoint fallback R1 pure checkpoint validation does not change its input or any database table",
+      "status": "passed"
+    }
+  ]
+}

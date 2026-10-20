@@ -1,0 +1,47 @@
+
+> guozhan-game-mvp@0.30.50 prebuild
+> npm run release:prepare
+
+
+> guozhan-game-mvp@0.30.50 release:prepare
+> node scripts/prepare-release.mjs
+
+{"version":"0.30.64","date":"2026-10-19","commitSha":"a002ff21398e08a2410eee4077957c549d57b238","dirty":false}
+
+> guozhan-game-mvp@0.30.50 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 165 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package.json                                              0.11 kB │ gzip:   0.12 kB
+dist/sw-release-a002ff21398e08a2410eee4077957c549d57b238.js    0.19 kB
+dist/manifest.webmanifest                                      0.33 kB
+dist/index.html                                                0.85 kB │ gzip:   0.53 kB
+dist/release/latest.svg                                        1.04 kB │ gzip:   0.60 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js                       3.43 kB
+dist/CHANGELOG.md                                             14.82 kB
+dist/version.json                                             15.70 kB │ gzip:   6.68 kB
+dist/release/index.html                                       16.14 kB │ gzip:   7.34 kB
+dist/assets/b5Lab.worker-Djn_GZbd.js                         454.38 kB
+dist/assets/runtime.worker-Cj3hc2Ka.js                       457.17 kB
+dist/assets/index-CO3VCVkj.css                               173.91 kB │ gzip:  35.49 kB
+dist/assets/workbox-window.prod.es5-Cch4wiA5.js                5.71 kB │ gzip:   2.25 kB │ map:    13.08 kB
+dist/assets/index-BWfiXv_n.js                                728.88 kB │ gzip: 224.80 kB │ map: 2,237.99 kB
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vite:worker-import-meta-url (35%)
+  - vite:css (19%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 3.57s
+
+PWA v1.3.0
+mode      generateSW
+precache  194 entries (55081.21 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-9c191d2f.js.map
+  dist/workbox-9c191d2f.js

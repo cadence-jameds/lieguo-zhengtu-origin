@@ -1,0 +1,35 @@
+{
+  "head": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7",
+  "sourceTreeHash": "e4593f025c007159d847f5e8603335bda7f0ac27698d0be258e137ef36969b04",
+  "scope": "CONTROLLED integration states, never natural-world balance evidence; explicit troop/stock/intel/ownership/location/threat prerequisites. Original seeded traits and real militaryDecision/Reducer/Schema retained; no Vitest mocks.",
+  "cases": [
+    {
+      "case": "nearby enemy city and ordinary wild candidates coexist",
+      "status": "PASS"
+    },
+    {
+      "case": "no nearby enemy city",
+      "controlledLocation": {
+        "x": 376,
+        "y": 368
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "food shortage keeps original city gate; approved wild resource opportunity remains possible",
+      "status": "PASS"
+    },
+    {
+      "case": "site levels exceed legal public force heuristic",
+      "status": "PASS"
+    },
+    {
+      "case": "own city threatened; all offensive strategy choices deferred",
+      "status": "PASS"
+    },
+    {
+      "case": "multiple owned cities retain distinct source ledgers",
+      "status": "PASS"
+    }
+  ]
+}

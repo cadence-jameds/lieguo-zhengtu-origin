@@ -1,0 +1,37 @@
+{
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=false",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=true",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=false",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=true",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "QUEUE5 building, field and wall share capacity; cities are independent; completed work frees capacity",
+      "status": "passed",
+      "failure": []
+    },
+    {
+      "name": "QUEUE5 durable CAS, duplicate and Recovery retain five jobs and never repeat payment/completion",
+      "status": "passed",
+      "failure": []
+    }
+  ]
+}

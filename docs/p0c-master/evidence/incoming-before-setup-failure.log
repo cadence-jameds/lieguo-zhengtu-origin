@@ -1,0 +1,30 @@
+failed to load config from /workspace/research/p0c-master/incoming-before-ae39092/vite.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Command failed: git -C /workspace/research/p0c-master/incoming-before-ae39092 rev-parse HEAD
+fatal: not a git repository (or any of the parent directories): .git
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at run (file:///workspace/lieguo-zhengtu-origin/node_modules/.vite-temp/vite.config.ts.timestamp-1792430993239-23ed1ffc202af.mjs:10:32)
+    at createMetadata (file:///workspace/lieguo-zhengtu-origin/node_modules/.vite-temp/vite.config.ts.timestamp-1792430993239-23ed1ffc202af.mjs:114:88)
+    at prepare (file:///workspace/lieguo-zhengtu-origin/node_modules/.vite-temp/vite.config.ts.timestamp-1792430993239-23ed1ffc202af.mjs:183:19)
+    at loadMetadata (file:///workspace/lieguo-zhengtu-origin/node_modules/.vite-temp/vite.config.ts.timestamp-1792430993239-23ed1ffc202af.mjs:190:69)
+    at file:///workspace/lieguo-zhengtu-origin/node_modules/.vite-temp/vite.config.ts.timestamp-1792430993239-23ed1ffc202af.mjs:223:17
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    '',
+    'fatal: not a git repository (or any of the parent directories): .git\n'
+  ],
+  pid: 47287,
+  stdout: '',
+  stderr: 'fatal: not a git repository (or any of the parent directories): .git\n'
+}
+
+
+

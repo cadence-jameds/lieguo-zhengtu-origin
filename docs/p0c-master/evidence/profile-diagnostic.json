@@ -1,0 +1,249 @@
+{
+  "samples": [
+    {
+      "reducerMs": 166.099872,
+      "saveMs": 850.838354,
+      "totalMs": 1016.9422569999999
+    },
+    {
+      "reducerMs": 149.02018199999975,
+      "saveMs": 797.347898,
+      "totalMs": 946.3690979999997
+    },
+    {
+      "reducerMs": 138.5861749999999,
+      "saveMs": 740.6650700000005,
+      "totalMs": 879.2522600000002
+    },
+    {
+      "reducerMs": 118.0755339999996,
+      "saveMs": 695.1936670000005,
+      "totalMs": 813.2701289999995
+    },
+    {
+      "reducerMs": 146.35933999999997,
+      "saveMs": 750.3869880000002,
+      "totalMs": 896.7472710000002
+    },
+    {
+      "reducerMs": 113.4056700000001,
+      "saveMs": 608.3151680000001,
+      "totalMs": 721.7227459999995
+    },
+    {
+      "reducerMs": 94.80121400000007,
+      "saveMs": 698.1655100000007,
+      "totalMs": 792.9674260000002
+    },
+    {
+      "reducerMs": 90.29106899999988,
+      "saveMs": 572.3901180000003,
+      "totalMs": 662.6819439999999
+    },
+    {
+      "reducerMs": 112.28614800000014,
+      "saveMs": 727.0189499999997,
+      "totalMs": 839.3068090000006
+    },
+    {
+      "reducerMs": 100.10807700000078,
+      "saveMs": 728.7298969999993,
+      "totalMs": 828.8394380000009
+    }
+  ],
+  "metrics": {
+    "metrics": {
+      "formal/reducer.orderFingerprint": {
+        "count": 10,
+        "totalMs": 0.4228020000005017,
+        "rawTotalMs": 0.4228020000005017,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.4228020000005017,
+        "maxMs": 0.15433399999983521,
+        "avgMs": 0.04228020000005017
+      },
+      "receiptLookup.find": {
+        "count": 10,
+        "totalMs": 3.5601450000012846,
+        "rawTotalMs": 3.5601450000012846,
+        "pausedExcludedMs": 0,
+        "selfMs": 3.5601450000012846,
+        "maxMs": 1.091087000000698,
+        "avgMs": 0.35601450000012846
+      },
+      "formal/reducer.cloneOrderDraft": {
+        "count": 10,
+        "totalMs": 336.62621099999797,
+        "rawTotalMs": 336.62621099999797,
+        "pausedExcludedMs": 0,
+        "selfMs": 336.62621099999797,
+        "maxMs": 52.61736699999983,
+        "avgMs": 33.6626210999998
+      },
+      "formal/spatial.regionAt": {
+        "count": 5330,
+        "totalMs": 2.2067880000249716,
+        "rawTotalMs": 2.2067880000249716,
+        "pausedExcludedMs": 0,
+        "selfMs": 2.2067880000249716,
+        "maxMs": 1.217316999999639,
+        "avgMs": 0.00041403151970449746
+      },
+      "formal/spatial.addCity": {
+        "count": 1000,
+        "totalMs": 1.8154169999918395,
+        "rawTotalMs": 1.8154169999918395,
+        "pausedExcludedMs": 0,
+        "selfMs": 1.6394590000129483,
+        "maxMs": 0.08893999999963853,
+        "avgMs": 0.0018154169999918394
+      },
+      "formal/spatial.addSite": {
+        "count": 4310,
+        "totalMs": 5.8411400000607046,
+        "rawTotalMs": 5.8411400000607046,
+        "pausedExcludedMs": 0,
+        "selfMs": 3.8149030000188304,
+        "maxMs": 1.2285460000002786,
+        "avgMs": 0.001355252900246103
+      },
+      "formal/spatial.addArmy": {
+        "count": 20,
+        "totalMs": 0.4795280000012099,
+        "rawTotalMs": 0.4795280000012099,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.4749349999970036,
+        "maxMs": 0.12126299999999901,
+        "avgMs": 0.023976400000060495
+      },
+      "formal/spatial.spatial": {
+        "count": 10,
+        "totalMs": 12.447419000000536,
+        "rawTotalMs": 12.447419000000536,
+        "pausedExcludedMs": 0,
+        "selfMs": 4.311333999946783,
+        "maxMs": 2.535276999999951,
+        "avgMs": 1.2447419000000537
+      },
+      "formal/economy.settleCity": {
+        "count": 10,
+        "totalMs": 0.16582799999923736,
+        "rawTotalMs": 0.16582799999923736,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.16582799999923736,
+        "maxMs": 0.07692799999995259,
+        "avgMs": 0.016582799999923736
+      },
+      "formal/mountains.mountainFootprint": {
+        "count": 1380,
+        "totalMs": 26.622765999997,
+        "rawTotalMs": 26.622765999997,
+        "pausedExcludedMs": 0,
+        "selfMs": 26.622765999997,
+        "maxMs": 23.849941999999828,
+        "avgMs": 0.01929185942028768
+      },
+      "formal/schema.validateFormalWorld": {
+        "count": 30,
+        "totalMs": 2736.849583000001,
+        "rawTotalMs": 2736.849583000001,
+        "pausedExcludedMs": 0,
+        "selfMs": 2710.2268170000043,
+        "maxMs": 141.31452899999977,
+        "avgMs": 91.22831943333337
+      },
+      "formal/reducer.submitOrderDraft": {
+        "count": 10,
+        "totalMs": 1227.9765479999983,
+        "rawTotalMs": 1227.9765479999983,
+        "pausedExcludedMs": 0,
+        "selfMs": 18.601300999997193,
+        "maxMs": 165.4644800000001,
+        "avgMs": 122.79765479999983
+      },
+      "formal/reducer.submitFormalOrder": {
+        "count": 10,
+        "totalMs": 1228.5966969999995,
+        "rawTotalMs": 1228.5966969999995,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.62014900000122,
+        "maxMs": 165.97617600000012,
+        "avgMs": 122.85966969999996
+      },
+      "formal/saveCodec.validateReportHistory": {
+        "count": 20,
+        "totalMs": 0.1306339999996453,
+        "rawTotalMs": 0.1306339999996453,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.1306339999996453,
+        "maxMs": 0.010264999999890279,
+        "avgMs": 0.006531699999982266
+      },
+      "receiptLookup.some": {
+        "count": 10,
+        "totalMs": 5.297809999999799,
+        "rawTotalMs": 5.297809999999799,
+        "pausedExcludedMs": 0,
+        "selfMs": 5.297809999999799,
+        "maxMs": 1.2058190000007016,
+        "avgMs": 0.52978099999998
+      },
+      "persistence.authority": {
+        "count": 10,
+        "totalMs": 686.077352,
+        "rawTotalMs": 686.077352,
+        "pausedExcludedMs": 0,
+        "selfMs": 680.7795420000002,
+        "maxMs": 143.89817500000026,
+        "avgMs": 68.60773520000001
+      },
+      "formal/canonical.digest": {
+        "count": 10,
+        "totalMs": 1939.0092040000009,
+        "rawTotalMs": 1939.0092040000009,
+        "pausedExcludedMs": 0,
+        "selfMs": 1939.0092040000009,
+        "maxMs": 232.23992399999997,
+        "avgMs": 193.90092040000008
+      },
+      "formal/saveCodec.encodeSave": {
+        "count": 10,
+        "totalMs": 2794.043092000001,
+        "rawTotalMs": 2794.043092000001,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.5975259999995615,
+        "maxMs": 344.886483,
+        "avgMs": 279.40430920000006
+      },
+      "persistence.commit": {
+        "count": 10,
+        "totalMs": 7168.439942,
+        "rawTotalMs": 7168.439942,
+        "pausedExcludedMs": 0,
+        "selfMs": 2661.9284850000004,
+        "maxMs": 850.6604770000001,
+        "avgMs": 716.8439942
+      },
+      "persistence.save": {
+        "count": 10,
+        "totalMs": 7168.596078000003,
+        "rawTotalMs": 7168.596078000003,
+        "pausedExcludedMs": 0,
+        "selfMs": 0.1561360000030163,
+        "maxMs": 850.6718559999999,
+        "avgMs": 716.8596078000003
+      }
+    },
+    "eventCount": 0,
+    "eventOrderHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pausedMs": 0,
+    "peakMemoryBytes": {
+      "rss": 468402176,
+      "heapUsed": 326928232,
+      "heapTotal": 410656768,
+      "external": 5135124,
+      "arrayBuffers": 2991106
+    }
+  },
+  "limitations": "Instrumented Node + fake-indexeddb diagnostic, not native browser timing. Snapshot sourceTreeHash a23f23e75fc488a4824c2f27a33cba59268e3293d488efa3ab02864711784bcf; original SHA unrecorded. No end-to-end claim."
+}

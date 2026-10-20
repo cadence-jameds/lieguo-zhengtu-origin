@@ -1,0 +1,27 @@
+[
+  {
+    "root": "/workspace/reference-baselines/formal-main-06c4cb9",
+    "checked": 386,
+    "differentFromExpected": []
+  },
+  {
+    "root": "/workspace/research/p0c9-before-main",
+    "checked": 387,
+    "differentFromExpected": [
+      {
+        "path": "src/game/formal/p0c9Attack.test.ts",
+        "gitBlob": "1606bac8cfa670877621792a1a47f6052fdc16ad"
+      }
+    ]
+  },
+  {
+    "root": "/workspace/reference-baselines/demo-v0.30.2/source",
+    "checked": 143,
+    "differentFromExpected": []
+  },
+  {
+    "root": "/workspace/reference-baselines/demo-v0.30.2/runtime",
+    "checked": 143,
+    "differentFromExpected": []
+  }
+]

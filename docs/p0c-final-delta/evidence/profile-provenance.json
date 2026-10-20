@@ -1,0 +1,65 @@
+[
+  {
+    "head": "cc4f332dbdb6691275138d0ded88160200fb34ce",
+    "instrumented": true,
+    "method": "Inclusive nested durations; isolated source instrumentation, not production acceptance timing.",
+    "directoryLabel": "profile-before",
+    "embeddedRelease": {
+      "commitSha": "a002ff21398e08a2410eee4077957c549d57b238",
+      "contentSha": "a002ff21398e08a2410eee4077957c549d57b238",
+      "version": "0.30.64",
+      "dirty": false
+    },
+    "qualification": "Diagnostic preparer copied then-current metadata; source identity is the committed git archive head above, not the embedded release. Instrumentation modifies this source; these are not acceptance Production artifacts.",
+    "instrumentedSourceSha256": {
+      "src/game/persistence.ts": "c1a53420271088bac0e7c35bd33a78da42b2a9bf0297b3397c7c7dc27ca32205",
+      "src/game/runtime.worker.ts": "6b8426beb1154fc76f316411de7c5c47dcc94a0d32c78bfddcd77d20979ae5f3",
+      "src/game/formal/canonical.ts": "83beab4d80d571f646dfc8e04bbabc5c100b6282813d7e6f8c025ca5176a2bdf",
+      "src/game/formal/schema.ts": "37136cc6f380700aa77e01934fb28e6c1a10766df294ae8bb62dc9074518bb11",
+      "src/game/formal/reducer.ts": "fcc1e93edea3c0653d6e39b7a4fb72be8db7a1ff4d933305b3e8fa8d5656c5bd",
+      "src/game/deltaProfile.ts": "f6fa10c726b312c8e970531af4d7875dbecd1b1b4f1e3007b4c4a860fe09d169"
+    }
+  },
+  {
+    "head": "cc4f332dbdb6691275138d0ded88160200fb34ce",
+    "instrumented": true,
+    "method": "Inclusive nested durations; isolated source instrumentation, not production acceptance timing.",
+    "directoryLabel": "profile-before-detail",
+    "embeddedRelease": {
+      "commitSha": "cc4f332dbdb6691275138d0ded88160200fb34ce",
+      "contentSha": "cc4f332dbdb6691275138d0ded88160200fb34ce",
+      "version": "0.30.65",
+      "dirty": true
+    },
+    "qualification": "Diagnostic preparer copied then-current metadata; source identity is the committed git archive head above, not the embedded release. Instrumentation modifies this source; these are not acceptance Production artifacts.",
+    "instrumentedSourceSha256": {
+      "src/game/persistence.ts": "05dc58a48629a85f27498658cbdc2a0bd02e2437f01e848da9a9dd4c3194c46d",
+      "src/game/runtime.worker.ts": "6b8426beb1154fc76f316411de7c5c47dcc94a0d32c78bfddcd77d20979ae5f3",
+      "src/game/formal/canonical.ts": "83beab4d80d571f646dfc8e04bbabc5c100b6282813d7e6f8c025ca5176a2bdf",
+      "src/game/formal/schema.ts": "37136cc6f380700aa77e01934fb28e6c1a10766df294ae8bb62dc9074518bb11",
+      "src/game/formal/reducer.ts": "fcc1e93edea3c0653d6e39b7a4fb72be8db7a1ff4d933305b3e8fa8d5656c5bd",
+      "src/game/deltaProfile.ts": "948eaf8cfe499033936738c2e2c13213b74f241ba2f1a322807f85329e82cdf7"
+    }
+  },
+  {
+    "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "instrumented": true,
+    "method": "Inclusive nested durations; isolated source instrumentation, not production acceptance timing.",
+    "directoryLabel": "profile-after",
+    "embeddedRelease": {
+      "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+      "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+      "version": "0.30.66",
+      "dirty": false
+    },
+    "qualification": "Diagnostic preparer copied then-current metadata; source identity is the committed git archive head above, not the embedded release. Instrumentation modifies this source; these are not acceptance Production artifacts.",
+    "instrumentedSourceSha256": {
+      "src/game/persistence.ts": "0c65042b52dc83ed6b0bf9811211e11f6fc8114f31c371f9e4708b8e7d69278e",
+      "src/game/runtime.worker.ts": "6b8426beb1154fc76f316411de7c5c47dcc94a0d32c78bfddcd77d20979ae5f3",
+      "src/game/formal/canonical.ts": "83beab4d80d571f646dfc8e04bbabc5c100b6282813d7e6f8c025ca5176a2bdf",
+      "src/game/formal/schema.ts": "37136cc6f380700aa77e01934fb28e6c1a10766df294ae8bb62dc9074518bb11",
+      "src/game/formal/reducer.ts": "fcc1e93edea3c0653d6e39b7a4fb72be8db7a1ff4d933305b3e8fa8d5656c5bd",
+      "src/game/deltaProfile.ts": "948eaf8cfe499033936738c2e2c13213b74f241ba2f1a322807f85329e82cdf7"
+    }
+  }
+]

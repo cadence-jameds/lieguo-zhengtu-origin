@@ -1,0 +1,77 @@
+{
+  "passed": 12,
+  "failed": 2,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=false",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=true",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=false",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=true",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 building, field and wall share capacity; cities are independent; completed work frees capacity",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 durable CAS, duplicate and Recovery retain five jobs and never repeat payment/completion",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 demolition shares total capacity and can occupy the fifth slot without changing cancellation rules",
+      "status": "failed",
+      "failure": "AssertionError: 請先等候建造工程完成: expected 'rejected' to be 'committed' // Object.is equality"
+    },
+    {
+      "name": "C11 pure geometry has radius8, bounded nearby corridor, edges and no far bridge; cached across clock/receipt updates",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C11 water blocks fill and bridges; independent cities reserve their surroundings and cache notices ownership changes",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C13 public lord ranking uses city count then population, competition ties and stable ID, not armies",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "C12 legacy descriptions remain in data but no inputs, empty prompts or displays survive",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 army training summary uses the same capacity as city scenes",
+      "status": "passed",
+      "failure": null
+    },
+    {
+      "name": "QUEUE5 recruitment controls admit fourth and fifth training jobs and disable the sixth",
+      "status": "failed",
+      "failure": "AssertionError: expected true to be false // Object.is equality"
+    }
+  ]
+}

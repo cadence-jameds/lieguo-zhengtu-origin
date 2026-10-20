@@ -99,9 +99,9 @@ it('a newer foreground command stays a hard fence even when its ID looks autonom
 for(const kind of ['resources','queue'] as const)it(`current ${kind} conflict rejects without any draft spend or durable save`,async()=>{
  let w=isolatedAutonomyFixture(createFormalWorld({campaign:'conflict-'+kind,seed:90217}));const city=w.cities[0];
  if(kind==='resources')city.stock={food:0,wood:0,stone:0,gold:0};
- else for(let i=0;i<3;i++)w=submitFormalOrder(w,order(w,'fill-'+i,{type:'field.upgrade',cityId:city.id,slot:i})).world;
+ else for(let i=0;i<5;i++)w=submitFormalOrder(w,order(w,'fill-'+i,{type:'field.upgrade',cityId:city.id,slot:i})).world;
  await load(w);const before=JSON.stringify(w);click(w,'illegal',{type:'building.upgrade',cityId:city.id,key:'center'});await until(()=>done('illegal'));
- expect(ack('illegal').status).toBe('rejected');expect(ack('illegal').reason).toContain(kind==='resources'?'庫存不足':'3 項上限');
+ expect(ack('illegal').status).toBe('rejected');expect(ack('illegal').reason).toContain(kind==='resources'?'庫存不足':'5 項上限');
  expect(JSON.stringify(latest())).toBe(before);expect(storage.save).not.toHaveBeenCalled();
 });
 
@@ -118,4 +118,22 @@ it('an actual failed IDB transaction produces only rejection, preserves authorit
   messages=[];send({type:'command',requestId:'duplicate',order:issued,playerBase:playerOrderBase(w,payload)});await until(()=>done('duplicate'));
   expect(ack('durable-build').status).toBe('duplicate');expect(latest()).toEqual(committed);expect(storage.save).toHaveBeenCalledTimes(2);
  }finally{await p.db.delete();}
+});
+
+it('C4 due events and a player command share one atomic save with one authoritative revision',async()=>{
+ const w=createFormalFixture();w.events=[{id:eventId('combined'),type:'fixture.marker',at:1000,marker:'once'}];await load(w);now=10000;click(w,'combined-click',{type:'city.rename',cityId:fixtureIds.home,name:'合併原子保存'});await until(()=>done('combined-click'));
+ expect(storage.save).toHaveBeenCalledTimes(1);expect(ack('combined-click').status).toBe('committed');expect(latest().events).toEqual([]);expect(latest().revision).toBe(w.revision+1);expect(latest().commandReceipts.at(-1)?.committedRevision).toBe(latest().revision);expect(ack('combined-click').revision).toBe(latest().revision);
+});
+it('C4 combined replay fault exposes neither event draft nor command success',async()=>{
+ const w=createFormalFixture();w.events=[{id:eventId('combined-fault'),type:'fixture.marker',at:1000,marker:'preserved'}];await load(w);storage.save.mockRejectedValueOnce(new Error('combined atomic failure'));now=10000;click(w,'combined-fault-click',{type:'city.rename',cityId:fixtureIds.home,name:'不可提前顯示'});await until(()=>done('combined-fault-click'));
+ expect(ack('combined-fault-click').status).toBe('rejected');expect(latest()).toEqual(w);expect(latest().events).toHaveLength(1);expect(messages.some(m=>m.type==='commandAck'&&m.ack.status==='committed')).toBe(false);
+});
+
+it('C3 a stale dispatch crosses unrelated catch-up exactly once and waits for durable save before ACK',async()=>{
+ const w=createFormalFixture();w.cities[0].military={units:{militia:20},queue:[],unpaidFood:0};w.events=[{id:eventId('dispatch-clock'),type:'fixture.marker',at:1000,marker:'once'}];await load(w);
+ let finish!:(w:FormalWorld)=>void,draft!:FormalWorld;storage.save.mockImplementationOnce((next:FormalWorld)=>{draft=next;return new Promise<FormalWorld>(resolve=>finish=resolve);});
+ now=10000;const issued=click(w,'dispatch-after-clock',{type:'army.dispatch',cityId:fixtureIds.home,mission:'raid',target:{kind:'city',cityId:fixtureIds.foreign},units:{militia:10}});await until(()=>storage.save.mock.calls.length===1);
+ expect(ack('dispatch-after-clock')).toBeUndefined();expect(messages.some(m=>m.type==='state')).toBe(false);expect(draft.cities[0].military!.units.militia).toBe(10);expect(draft.armies.filter(a=>'commandId' in a&&a.commandId===issued.commandId)).toHaveLength(1);
+ finish(draft);await until(()=>done('dispatch-after-clock'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(latest().revision).toBe(w.revision+1);
+ send({type:'command',requestId:'dispatch-repeat',order:issued,playerBase:playerOrderBase(w,issued.payload)});await until(()=>done('dispatch-repeat'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(messages.filter(m=>m.type==='commandAck').at(-1).ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);expect(latest().cities[0].military!.units.militia).toBe(10);
 });

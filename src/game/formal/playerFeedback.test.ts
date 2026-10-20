@@ -48,9 +48,9 @@ it('Recovery catches up from the selected valid checkpoint wall anchor and skips
  const row=await p.db.saves.get('current');if(row?.kind!=='world')throw new Error('missing');row.data.checksum='0'.repeat(64);await p.db.saves.put(row);
  const r=await p.loadWithOffline(1000+HOUR);expect(r.recovered).toBe(true);expect(r.summary!.recovered).toBe(true);expect(r.game!.time).toBe(HOUR);expect((await p.loadSave()).game).toEqual(r.game);
 });
-it('construction capacity is3 total tasks with1 active initially; fourth is rejected without mutations',()=>{
- let w=make();const c=rich(w);for(const slot of [0,1,2])w=commit(w,{type:'field.upgrade',cityId:c.id,slot});const before=JSON.stringify(w),jobs=w.cities[0].economy!.construction;
- expect(jobs).toHaveLength(3);expect(jobs.filter(j=>j.startsAt<=w.time)).toHaveLength(1);expect(submit(w,{type:'field.upgrade',cityId:c.id,slot:3}).ack?.status).toBe('rejected');expect(JSON.stringify(w)).toBe(before);
+it('construction capacity is5 total tasks with1 active initially; sixth is rejected without mutations',()=>{
+ let w=make();const c=rich(w);for(const slot of [0,1,2,3,4])w=commit(w,{type:'field.upgrade',cityId:c.id,slot});const before=JSON.stringify(w),jobs=w.cities[0].economy!.construction;
+ expect(jobs).toHaveLength(5);expect(jobs.filter(j=>j.startsAt<=w.time)).toHaveLength(1);expect(submit(w,{type:'field.upgrade',cityId:c.id,slot:5}).ack?.status).toBe('rejected');expect(JSON.stringify(w)).toBe(before);
 });
 it('15k unlock promotes an existing waiting job to a second lane without altering cost/duration/qualification; permanent after population drops',()=>{
  let w=make();const c=rich(w);c.buildings.center=14;c.buildings.residence=14;c.economy!.slots.residence=1;c.housing=400+HOUSING[14];c.population=14999;c.cityPromotionCompleted=true;c.economy!.milestones=[10000];
@@ -73,9 +73,9 @@ it('cancelling a new building cancels dependent upgrades, returns its chosen slo
  expect((await p.loadSave()).game).toEqual(w);expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
  const restored=await p.restore(checkpoint);expect(restored.cities[0].economy!.construction).toHaveLength(2);expect(restored.cities[0].economy!.slots.residence).toBe(8);
 });
-it('military capacity stays3,20k promotes waiting work to2 active, and cancellation preserves completed units and refund semantics',async()=>{
+it('military capacity stays5,20k promotes waiting work to2 active, and cancellation preserves completed units and refund semantics',async()=>{
  let w=make();const c=rich(w);c.buildings.barracks=1;c.economy!.slots.barracks=1;c.housing=30400;c.population=19999;
- for(let i=0;i<3;i++)w=commit(w,{type:'military.recruit',cityId:c.id,unitId:'militia',count:50});expect(w.cities[0].military!.queue.filter(j=>j.startsAt<=w.time)).toHaveLength(1);
+ for(let i=0;i<5;i++)w=commit(w,{type:'military.recruit',cityId:c.id,unitId:'militia',count:50});expect(w.cities[0].military!.queue.filter(j=>j.startsAt<=w.time)).toHaveLength(1);
  const before=JSON.stringify(w);expect(submit(w,{type:'military.recruit',cityId:c.id,unitId:'militia',count:1}).ack?.status).toBe('rejected');expect(JSON.stringify(w)).toBe(before);
  w.cities[0].population=19999;w=advanceFormal(w,HOUR).world;expect(w.cities[0].economy!.milestones).toContain(20000);expect(w.cities[0].military!.queue.filter(j=>j.startsAt<=w.time)).toHaveLength(2);
  const active=w.cities[0].military!.queue[0],trained=w.cities[0].military!.units.militia,paid=w.cities[0].stock.food;w=commit(w,{type:'military.cancel',cityId:c.id,trainingCommandId:active.commandId});expect(w.cities[0].military!.units.militia).toBe(trained);expect(w.cities[0].stock.food).toBe(paid+Math.floor(active.unitCost.food*active.remaining*.8));expect(w.events.some(e=>e.id===active.eventId)).toBe(false);expect(w.cities[0].military!.queue.filter(j=>j.startsAt<=w.time)).toHaveLength(2);

@@ -32,7 +32,7 @@ it.each(['age','building','existing','queue','ownership','craft'] as const)('rea
  if(kind==='age')w.factions[0].age=1;
  if(kind==='building')c.buildings.townhall=0;
  if(kind==='existing')build(c,'castle',1);
- if(kind==='queue'){for(let i=0;i<3;i++)w=submitFormalOrder(w,order(w,{type:'field.upgrade',cityId:c.id,slot:i})).world;c=w.cities[0];expect(c.economy!.construction).toHaveLength(3);}
+ if(kind==='queue'){for(let i=0;i<5;i++)w=submitFormalOrder(w,order(w,{type:'field.upgrade',cityId:c.id,slot:i})).world;c=w.cities[0];expect(c.economy!.construction).toHaveLength(5);}
  if(kind==='ownership')c=w.cities[2];
  const craftId=kind==='craft'?'missing-craftsman':id,quote=craftsmanCastleAction(w,c,craftId),actual=submitFormalOrder(w,order(w,{type:'craftsman.castle',cityId:c.id,craftsmanId:craftId}));expect(quote.allowed).toBe(false);expect(actual.ack!.status).toBe('rejected');expect(quote.reason).toBe(actual.ack!.reason);
 });

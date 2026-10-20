@@ -1,0 +1,111 @@
+[
+  {
+    "file": "before.json",
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "note": "Early reduced regression fixture; superseded by full Schema-valid before/after",
+    "failures": [
+      {
+        "test": "P0-C-9 permits ordinary wild targets 25–48 tiles away while enemy cities exist",
+        "message": "AssertionError: expected false to be true // Object.is equality"
+      }
+    ]
+  },
+  {
+    "file": "strategies-first.json",
+    "passed": 33,
+    "failed": 9,
+    "skipped": 0,
+    "note": "33 PASS / 9 FAIL: controlled fixtures changed seeded traits; restored original traits, Schema unchanged",
+    "failures": [
+      {
+        "test": "two real reducer admissions consume disjoint troops, preserve reserve, and dedupe the same event",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "partial multiline stale-target preserves successful work and rejects without phantom troops",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "partial multiline troop-shortage preserves successful work and rejects without phantom troops",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "partial multiline reserve-shortage preserves successful work and rejects without phantom troops",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "partial multiline first-rejected preserves successful work and rejects without phantom troops",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "1X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "10X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "50X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+        "message": "ZodError: ["
+      },
+      {
+        "test": "Recovery rolls back both real departures atomically and CAS rejects a competing stale writer",
+        "message": "ZodError: ["
+      }
+    ]
+  },
+  {
+    "file": "strategies-second.json",
+    "passed": 41,
+    "failed": 1,
+    "skipped": 0,
+    "note": "41 PASS / 1 FAIL: direct two submissions advanced revision twice; changed test to real single AI event, Persistence unchanged",
+    "failures": [
+      {
+        "test": "Recovery rolls back both real departures atomically and CAS rejects a competing stale writer",
+        "message": "Error: Committed revision must advance exactly once"
+      }
+    ]
+  },
+  {
+    "file": "targeted-candidate.json",
+    "passed": 59,
+    "failed": 0,
+    "skipped": 0,
+    "note": "Final targeted coverage",
+    "failures": []
+  },
+  {
+    "phase": "project Pages check initial",
+    "status": "FAIL",
+    "reason": "check run without required project-base build environment; rebuilt with CI identity and passed original check"
+  },
+  {
+    "phase": "native browser initial",
+    "status": "FAIL",
+    "reason": "Incorrect project URL base produced404; correct production project base used next"
+  },
+  {
+    "phase": "native browser second observer",
+    "status": "TERMINATED",
+    "reason": "Observer retained every state response; observer bounded, production unchanged"
+  },
+  {
+    "phase": "native browser concurrent",
+    "status": "5 PASS,0FAIL",
+    "note": "Shared with two local long simulations, latency reported separately"
+  },
+  {
+    "phase": "local duplicate simulations",
+    "status": "TERMINATED duplicate work",
+    "reason": "35 authoritative remote cases completed independently; local duplicates stopped to isolate browser timing; completed and partial local logs retained outside repository"
+  },
+  {
+    "phase": "paired candidate initial launch",
+    "status": "ENVIRONMENT FAIL",
+    "reason": "sandbox setsockopt Operation not permitted; retried with loopback capability, no Runtime change"
+  }
+]

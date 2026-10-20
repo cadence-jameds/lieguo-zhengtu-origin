@@ -97,7 +97,7 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreig
   expect(w.autonomy!.agents).toHaveLength(99);
   expect(w.extinction!.extinct).toContain(w.playerFactionId);
   expect(w.extinction!.sites).toHaveLength(1);
-  expect(w.extinction!.sites[0].defenders).toEqual({militia:7,scout:11,ram:5});
+  expect(w.extinction!.sites[0].defenders).toEqual({militia:7,ram:5});
   expect(w.worldLayer!.wildSites).toHaveLength(432);
   const site=w.extinction!.sites[0], winner=w.factions[1].id;
   evidence('controlled-extinct.realm-save',await encodeSave(w));
@@ -107,7 +107,7 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreig
   w=advanceFormal(w,raid.arrivalAt).world;
   const returning=w.armies.filter(isMissionArmy).find(a=>a.id===raid.id)!;
   expect(returning.units.militia).toBeGreaterThanOrEqual(1);
-  expect(returning.units.scout).toBe(2);
+  expect(returning.units.scout??0).toBe(0);
   expect(returning.units.ram).toBe(1);
   expect(w.extinction!.craftsmen).toHaveLength(1);
   expect(w.extinction!.sites[0].phase).toBe('cooldown');

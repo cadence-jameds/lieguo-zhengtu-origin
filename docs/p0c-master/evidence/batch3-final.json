@@ -1,0 +1,126 @@
+{
+  "passed": 30,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "bridges unchanged settings once while the reducer keeps strict revision and receipt deduplication",
+      "status": "passed"
+    },
+    {
+      "name": "never bridges already-stale, future-time, foreign-campaign or economic orders",
+      "status": "passed"
+    },
+    {
+      "name": "requires a fresh player decision after ownership, qualification or configuration changes",
+      "status": "passed"
+    },
+    {
+      "name": "rejects ABA writes even when the newer configuration returns to identical values",
+      "status": "passed"
+    },
+    {
+      "name": "a queued background event can bridge a captured UI precondition, never an unguarded stale order",
+      "status": "passed"
+    },
+    {
+      "name": "unrelated AI city updates do not prevent the exact player rename order from committing",
+      "status": "passed"
+    },
+    {
+      "name": "completion of another construction target frees capacity without changing the clicked upgrade",
+      "status": "passed"
+    },
+    {
+      "name": "same-target levels and pending job identities remain exact while current resource and capacity checks still reject",
+      "status": "passed"
+    },
+    {
+      "name": "an explicit building slot and a replacement same-target pending job invalidate an old intent",
+      "status": "passed"
+    },
+    {
+      "name": "cancelling the same active job can cross unrelated completion but never crosses its queued-to-active refund phase",
+      "status": "passed"
+    },
+    {
+      "name": "the trusted foreground fence distinguishes governor receipts and still prevents newer human/ABA overwrites",
+      "status": "passed"
+    },
+    {
+      "name": "never replays a changed or already-applied player intent",
+      "status": "passed"
+    },
+    {
+      "name": "never crosses a newer player command, edited payload or branch fence",
+      "status": "passed"
+    },
+    {
+      "name": "keeps construction, training and research prerequisites tied to the original action",
+      "status": "passed"
+    },
+    {
+      "name": "C1 terminal committed clears pending only for matching command and never reports failure as saved",
+      "status": "passed"
+    },
+    {
+      "name": "C1 terminal duplicate clears pending only for matching command and never reports failure as saved",
+      "status": "passed"
+    },
+    {
+      "name": "C1 terminal rejected clears pending only for matching command and never reports failure as saved",
+      "status": "passed"
+    },
+    {
+      "name": "C1 terminal rolled-back clears pending only for matching command and never reports failure as saved",
+      "status": "passed"
+    },
+    {
+      "name": "C1 received and timeout remain unconfirmed; resend cannot manufacture a committed result",
+      "status": "passed"
+    },
+    {
+      "name": "C8 groups own cities by ETA, excludes scout/reinforce/waiting/engaged and exposes no troop composition",
+      "status": "passed"
+    },
+    {
+      "name": "receives a command during cooperative replay without exposing a draft or interleaving its mutation",
+      "status": "passed"
+    },
+    {
+      "name": "foreground FIFO overtakes only a pending tick and remains behind the in-flight durable save",
+      "status": "passed"
+    },
+    {
+      "name": "import and visibility/load barriers preserve arrival order and old-campaign clicks never cross a switch",
+      "status": "passed"
+    },
+    {
+      "name": "an old unchanged construction catches up actual admission time after its revision was rebased",
+      "status": "passed"
+    },
+    {
+      "name": "actual player-governor catch-up admits an unchanged building without retry",
+      "status": "passed"
+    },
+    {
+      "name": "actual player-governor catch-up rejects its changed field target without retry",
+      "status": "passed"
+    },
+    {
+      "name": "a newer foreground command stays a hard fence even when its ID looks autonomous and its effect is undone",
+      "status": "passed"
+    },
+    {
+      "name": "current resources conflict rejects without any draft spend or durable save",
+      "status": "passed"
+    },
+    {
+      "name": "current queue conflict rejects without any draft spend or durable save",
+      "status": "passed"
+    },
+    {
+      "name": "an actual failed IDB transaction produces only rejection, preserves authority, and deliberate same-ID resend commits once",
+      "status": "passed"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.getAttribute: Error: strict mode violation: getByRole('button', { name: /帝國.*版圖/ }) resolved to 2 elements:
+    1) <button aria-pressed="true">…</button> aka getByRole('button', { name: '帝國 版圖' })
+    2) <button type="button" aria-label="關閉帝國版圖">×</button> aka getByRole('button', { name: '關閉帝國版圖' })
+
+Call log:
+[2m  - waiting for getByRole('button', { name: /帝國.*版圖/ })[22m
+
+    at /workspace/lieguo-zhengtu-origin/scripts/p0c-master-map-perf.mjs:5:306 {
+  log: [ "  - waiting for getByRole('button', { name: /帝國.*版圖/ })" ]
+}
+
+Node.js v24.19.0

@@ -1,0 +1,44 @@
+{
+  "demoCommit": "44728f749044c1a5f1ad4fe47f1eccc391c7d9b2",
+  "data": [
+    {
+      "x": 49,
+      "y": 59
+    },
+    {
+      "x": 74,
+      "y": 60
+    },
+    {
+      "x": 50,
+      "y": 100
+    },
+    {
+      "x": 74,
+      "y": 100
+    },
+    {
+      "x": 210,
+      "y": 170
+    }
+  ],
+  "formalDimensions": [
+    384,
+    384
+  ],
+  "demoDimensions": [
+    256,
+    256
+  ],
+  "notes": "Same five political city coordinates and empire grouping. Each renderer retains its original terrain generator, palette, world size and engine; other independent cities differ. No saves are committed.",
+  "cases": [
+    {
+      "variant": "formal",
+      "status": "PASS"
+    },
+    {
+      "variant": "demo",
+      "status": "PASS"
+    }
+  ]
+}

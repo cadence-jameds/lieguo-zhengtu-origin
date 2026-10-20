@@ -1,0 +1,49 @@
+{
+  "passed": 0,
+  "failed": 6,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=false",
+      "status": "failed",
+      "failure": [
+        "AssertionError: 建造工程已達 3 項上限。: expected 'rejected' to be 'committed' // Object.is equality\n    at accept (/workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:9:166)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:11:25\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+      ]
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=false, AI=true",
+      "status": "failed",
+      "failure": [
+        "AssertionError: 建造工程已達 3 項上限。: expected 'rejected' to be 'committed' // Object.is equality\n    at accept (/workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:9:166)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:11:25\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+      ]
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=false",
+      "status": "failed",
+      "failure": [
+        "AssertionError: 建造工程已達 3 項上限。: expected 'rejected' to be 'committed' // Object.is equality\n    at accept (/workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:9:166)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:11:25\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+      ]
+    },
+    {
+      "name": "QUEUE5 total active+queued, sixth rejection without any mutation, dual=true, AI=true",
+      "status": "failed",
+      "failure": [
+        "AssertionError: 建造工程已達 3 項上限。: expected 'rejected' to be 'committed' // Object.is equality\n    at accept (/workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:9:166)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:11:25\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+      ]
+    },
+    {
+      "name": "QUEUE5 building, field and wall share capacity; cities are independent; completed work frees capacity",
+      "status": "failed",
+      "failure": [
+        "AssertionError: 建築前置未達成：center: expected 'rejected' to be 'committed' // Object.is equality\n    at accept (/workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:9:166)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:19:199\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+      ]
+    },
+    {
+      "name": "QUEUE5 durable CAS, duplicate and Recovery retain five jobs and never repeat payment/completion",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cQueues.test.ts:20:386\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}

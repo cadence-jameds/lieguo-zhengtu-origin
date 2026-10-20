@@ -1,0 +1,31 @@
+{
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "C11 pure geometry has radius8, bounded nearby corridor, edges and no far bridge; cached across clock/receipt updates",
+      "status": "passed"
+    },
+    {
+      "name": "C11 water blocks fill and bridges; independent cities reserve their surroundings and cache notices ownership changes",
+      "status": "passed"
+    },
+    {
+      "name": "C13 public lord ranking uses city count then population, competition ties and stable ID, not armies",
+      "status": "passed"
+    },
+    {
+      "name": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+      "status": "passed"
+    },
+    {
+      "name": "C12 legacy descriptions remain in data but no inputs, empty prompts or displays survive",
+      "status": "passed"
+    },
+    {
+      "name": "QUEUE5 army training summary uses the same capacity as city scenes",
+      "status": "passed"
+    }
+  ]
+}

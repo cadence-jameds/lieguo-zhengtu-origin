@@ -1,0 +1,11 @@
+
+> guozhan-game-mvp@0.30.50 typecheck
+> tsc --noEmit
+
+src/game/formal/worldDraft.ts(18,2): error TS2322: Type 'CommandReceipt[]' is not assignable to type 'never[]'.
+  Type 'CommandReceipt' is not assignable to type 'never'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,3 +1,4 @@
+import {effectiveUnit} from './combatModifiers';
 import type {FormalWorld,FormalCity,FormalOrder,ResearchProject,WildSite,FormalEvent,Construction} from './model';
 import type {FactionId,CityId,ArmyId,EventId} from './ids';
 import {cityId,wildSiteId,sequenceKey} from './ids';
@@ -19,9 +20,14 @@ export type ExtinctionCommand={type:'player.rebirth';cityId:CityId;candidate:num
 export const initialExtinction=():ExtinctionState=>({extinct:[],sites:[],craftsmen:[],cancelledResearch:[],rebirths:0});
 function legal(w:FormalWorld,p:Point){const cell=spatial(w).at(p.x,p.y);return Number.isInteger(p.x)&&Number.isInteger(p.y)&&p.x>=0&&p.y>=0&&p.x<w.dimensions.width&&p.y<w.dimensions.height&&buildable(terrainAt(w,p.x,p.y))&&!cell.city&&!cell.site&&!cell.reservation;}
 function nearest(w:FormalWorld,p:Point){for(let r=0;r<Math.max(w.dimensions.width,w.dimensions.height);r++){const points:Point[]=[];for(let y=Math.max(0,Math.floor(p.y)-r);y<=Math.min(w.dimensions.height-1,Math.floor(p.y)+r);y++)for(let x=Math.max(0,Math.floor(p.x)-r);x<=Math.min(w.dimensions.width-1,Math.floor(p.x)+r);x++)if(Math.max(Math.abs(x-Math.floor(p.x)),Math.abs(y-Math.floor(p.y)))===r&&legal(w,{x,y}))points.push({x,y});if(points.length)return points.sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)||a.y-b.y||a.x-b.x)[0];}throw new Error('No legal exile/rebirth location');}
-export function createExile(w:FormalWorld,owner:FactionId,units:Record<string,number>,path:Point[],near:Point){if(!Object.values(units).some(n=>n>0))return;const state=w.extinction??=initialExtinction(),key=sequenceKey(w.sequences.project++),sample=path.length?path[seedHash(w.seed,w.sequences.project,0,701)%path.length]:near,point=legal(w,sample)?sample:nearest(w,sample);const site:ExileSite={id:wildSiteId('exile-'+key),exile:true,sourceFactionId:owner,civilizationId:w.factions.find(f=>f.id===owner)!.civilizationId,createdAt:w.time,spawnSlot:432+w.sequences.project,generation:0,region:spatial(w).regionAt(point.x,point.y),...point,resource:'bandit',level:1,phase:'active',defenders:{...units},initialDefenders:{...units},loot:{food:0,wood:0,stone:0,gold:0}};state.sites.push(site);invalidateSpatial(w);}
+export const exileUnits=(units:Record<string,number>)=>Object.fromEntries(Object.entries(units).filter(([id,n])=>id!=='scout'&&n>0));
+export const eligibleExile=(units:Record<string,number>)=>Object.entries(units).some(([id,n])=>n>0&&effectiveUnit(id));
+/** Keep legacy site identity/history; retire only invalid active sites and never revoke earned rewards. */
+export function reconcileExileSites(w:FormalWorld){let changed=false;for(const site of w.extinction?.sites??[]){if(site.phase!=='active')continue;if(!eligibleExile(site.defenders??{})){site.phase='cooldown';site.defenders={};site.defeatedAt??=w.time;changed=true;}else if(site.defenders?.scout){site.defenders=exileUnits(site.defenders);changed=true;}}if(changed)invalidateSpatial(w);return w;}
+export function createExile(w:FormalWorld,owner:FactionId,units:Record<string,number>,path:Point[],near:Point){if(!eligibleExile(units))return;units=exileUnits(units);const state=w.extinction??=initialExtinction(),key=sequenceKey(w.sequences.project++),sample=path.length?path[seedHash(w.seed,w.sequences.project,0,701)%path.length]:near,point=legal(w,sample)?sample:nearest(w,sample);const site:ExileSite={id:wildSiteId('exile-'+key),exile:true,sourceFactionId:owner,civilizationId:w.factions.find(f=>f.id===owner)!.civilizationId,createdAt:w.time,spawnSlot:432+w.sequences.project,generation:0,region:spatial(w).regionAt(point.x,point.y),...point,resource:'bandit',level:1,phase:'active',defenders:{...units},initialDefenders:{...units},loot:{food:0,wood:0,stone:0,gold:0}};state.sites.push(site);invalidateSpatial(w);}
 /** Called after every resolution. Already engaged troops finish that battle before conversion. */
 export function resolveExtinctions(w:FormalWorld,s:EventScheduler){
+ reconcileExileSites(w);
  const inBattle=(a:MissionArmy)=>w.combat?.battles.some(b=>b.id===a.battleId&&a.status==='engaged'||b.defenders.some(p=>p.armyId===a.id));
  const pending=w.armies.filter(isMissionArmy).filter(a=>a.extinctionPending&&!inBattle(a));
  for(const a of pending)createExile(w,a.ownerFactionId,a.units,[],a.position);
@@ -37,9 +43,9 @@ export function resolveExtinctions(w:FormalWorld,s:EventScheduler){
  }
 }
 export function defeatExile(w:FormalWorld,site:ExileSite,a:MissionArmy,before:Record<string,number>){
- if(site.phase!=='active')return;
- for(const [id,n] of Object.entries(before)){const recovered=Math.floor(n*.25);if(recovered)a.units[id]=(a.units[id]??0)+recovered;}
- site.phase='cooldown';site.defenders={};site.defeatedAt=w.time;const state=w.extinction!;state.craftsmen.push({id:'craftsman:'+sequenceKey(w.sequences.project++),ownerFactionId:a.ownerFactionId,civilizationId:site.civilizationId,siteId:site.id,cityId:null,carrierArmyId:a.id,eventId:null,destinationCityId:null,arrivalAt:null,path:[],departedAt:w.time,constructionCommandId:null});invalidateSpatial(w);
+ if(site.phase!=='active'||!eligibleExile(before))return false;
+ for(const [id,n] of Object.entries(exileUnits(before))){const recovered=Math.floor(n*.25);if(recovered)a.units[id]=(a.units[id]??0)+recovered;}
+ site.phase='cooldown';site.defenders={};site.defeatedAt=w.time;const state=w.extinction!;state.craftsmen.push({id:'craftsman:'+sequenceKey(w.sequences.project++),ownerFactionId:a.ownerFactionId,civilizationId:site.civilizationId,siteId:site.id,cityId:null,carrierArmyId:a.id,eventId:null,destinationCityId:null,arrivalAt:null,path:[],departedAt:w.time,constructionCommandId:null});invalidateSpatial(w);return true;
 }
 export function deliverCraftsmen(w:FormalWorld,a:MissionArmy,c:FormalCity){for(const craft of w.extinction?.craftsmen??[])if(craft.carrierArmyId===a.id){craft.carrierArmyId=null;craft.cityId=c.id;}}
 export function rebirthCandidates(w:FormalWorld){const regions=Array.from({length:144},(_,r)=>r).sort((a,b)=>{const score=(r:number)=>w.cities.reduce((n,c)=>n+Math.max(0,48-Math.hypot(c.x-(r%12*32+16),c.y-(Math.floor(r/12)*32+16)))*(1+(w.factions.find(f=>f.id===c.ownerFactionId)?.empireId?1:0)),0);return score(a)-score(b)||seedHash(w.seed,a,w.extinction?.rebirths??0,702)-seedHash(w.seed,b,w.extinction?.rebirths??0,702);});const out:Point[]=[];for(const r of regions){for(let n=0;n<1024;n++){const x=r%12*32+n%32,y=Math.floor(r/12)*32+Math.floor(n/32),food=fieldDistribution(w.seed,x,y)[0];if(legal(w,{x,y})&&(food===6||food===7)&&out.every(p=>Math.hypot(x-p.x,y-p.y)>=32)){out.push({x,y});break;}}if(out.length===3)break;}return out;}

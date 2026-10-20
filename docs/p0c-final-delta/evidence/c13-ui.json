@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "width": 1440,
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "status": "PASS"
+    },
+    {
+      "width": 320,
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "artifactIdentityRecordedAfterRun": {
+    "version": "0.30.66",
+    "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "dirty": false
+  },
+  "identityQualification": "Identity added from unchanged production dist after the run; original harness did not capture version.json. No build occurred during these UI cases; future harness captures via browser request."
+}

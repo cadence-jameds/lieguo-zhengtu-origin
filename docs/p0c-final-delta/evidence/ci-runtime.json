@@ -1,0 +1,14 @@
+{
+  "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+  "pushRun": 39300364203,
+  "prRun": 39300451161,
+  "passed": 1458,
+  "failed": 0,
+  "skipped": 1,
+  "conclusion": "success",
+  "method": "Full regression in a disposable copy; original CI workflow; native GitHub result artifact retained",
+  "historicalFailure": {
+    "run": 39300374931,
+    "reason": "PR Release Notes JSON did not yet match the newly pushed note; synchronized body; subsequent PR CI succeeds"
+  }
+}

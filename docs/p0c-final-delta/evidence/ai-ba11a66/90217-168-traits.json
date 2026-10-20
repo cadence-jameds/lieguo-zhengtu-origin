@@ -1,0 +1,262 @@
+{
+  "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+  "sourceTreeHash": "76f64471f93220ecabc0211630d0399000df2c37fc05681d62ee9df9309c6030",
+  "harness": {
+    "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "sourceTreeHash": "76f64471f93220ecabc0211630d0399000df2c37fc05681d62ee9df9309c6030",
+    "compiledTraceHash": "5f1d036a526f08bf432aaee7ebaebc3facc2c88368064647f2dd201a7fc0ff30",
+    "changes": [
+      {
+        "module": "formal/aiAttackStrategies",
+        "name": "pickAttackStrategy",
+        "policyOnly": true
+      },
+      {
+        "module": "formal/aiAttackStrategies",
+        "name": "autonomousDispatchReason",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/aiActions",
+        "name": "militaryDecision",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/autonomy",
+        "name": "submitAutonomous",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/reducer",
+        "name": "advanceOneEvent",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/reducer",
+        "name": "submitOrderDraft",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/battles",
+        "name": "handleCombatEvent",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/battles",
+        "name": "finishReceipt",
+        "policyOnly": false
+      },
+      {
+        "module": "formal/economy",
+        "name": "addStock",
+        "policyOnly": false
+      }
+    ],
+    "authority": "fa038a00d3aa5a500cb055176164a907495b6212",
+    "worldMutations": "none; comparison runs substitute only the pure strategy selector policy"
+  },
+  "seed": 90217,
+  "policy": "traits",
+  "hours": 168,
+  "initial": {
+    "ai": 99,
+    "cities": 100,
+    "populationPerCity": 200,
+    "injectedTroops": 0,
+    "injectedIntel": 0,
+    "injectedResources": 0,
+    "speed": 1
+  },
+  "metrics": {
+    "picks": {
+      "V2B48": 232,
+      "V3Parallel48": 262,
+      "WildPriority60": 242,
+      "A48": 152,
+      "WildParallel48": 239
+    },
+    "picksWithOrders": {
+      "V2B48": 152,
+      "WildParallel48": 143,
+      "V3Parallel48": 161,
+      "WildPriority60": 163,
+      "A48": 88
+    },
+    "submittedByStrategy": {
+      "V2B48": 152,
+      "WildParallel48": 155,
+      "V3Parallel48": 178,
+      "WildPriority60": 163,
+      "A48": 88
+    },
+    "choicesByPersonality": {
+      "risk": {
+        "V2B48": 24,
+        "V3Parallel48": 28,
+        "WildPriority60": 14,
+        "A48": 14,
+        "WildParallel48": 20
+      },
+      "economy": {
+        "WildPriority60": 53,
+        "V3Parallel48": 45,
+        "A48": 34,
+        "V2B48": 69,
+        "WildParallel48": 39
+      },
+      "military": {
+        "V3Parallel48": 102,
+        "A48": 58,
+        "WildParallel48": 94,
+        "WildPriority60": 90,
+        "V2B48": 73
+      },
+      "expansion": {
+        "V2B48": 25,
+        "V3Parallel48": 24,
+        "WildParallel48": 35,
+        "WildPriority60": 28,
+        "A48": 14
+      },
+      "defense": {
+        "WildPriority60": 18,
+        "V3Parallel48": 25,
+        "WildParallel48": 21,
+        "A48": 17,
+        "V2B48": 17
+      },
+      "raiding": {
+        "A48": 15,
+        "V3Parallel48": 38,
+        "WildParallel48": 30,
+        "WildPriority60": 39,
+        "V2B48": 24
+      }
+    },
+    "attempts": {
+      "ordinaryWild": 74,
+      "exile": 0,
+      "cityRaid": 329,
+      "cityConquest": 28,
+      "scout": 952,
+      "reinforce": 0,
+      "joint": 0
+    },
+    "committed": {
+      "ordinaryWild": 74,
+      "exile": 0,
+      "cityRaid": 329,
+      "cityConquest": 28,
+      "scout": 952,
+      "reinforce": 0,
+      "joint": 0
+    },
+    "outcomes": {
+      "ordinaryWildCleared": 73,
+      "exileCleared": 0,
+      "cityRaids": 325,
+      "cityConquered": 25,
+      "scouts": 951
+    },
+    "rejectionReasons": {},
+    "preflightReasons": {},
+    "actualOrdinaryWildDeposits": {
+      "food": 14379,
+      "wood": 9537,
+      "stone": 19985,
+      "gold": 12069
+    },
+    "ordinaryWildCargoAtReturn": {
+      "food": 15599,
+      "wood": 10207,
+      "stone": 19985,
+      "gold": 12069
+    },
+    "actualOtherDeposits": {
+      "food": 97786,
+      "wood": 84822,
+      "stone": 75252,
+      "gold": 66622
+    },
+    "lossesByUnit": {
+      "scout": 2643,
+      "spearman": 248,
+      "militia": 23,
+      "archer": 2,
+      "skirmisher": 2,
+      "light-cavalry": 5,
+      "knight": 0
+    },
+    "ordinaryWildLossesByUnit": {
+      "spearman": 86,
+      "militia": 1,
+      "skirmisher": 0,
+      "archer": 0,
+      "light-cavalry": 0
+    },
+    "catalogReplacementCost": {
+      "food": 170020,
+      "wood": 143640,
+      "stone": 0,
+      "gold": 265480
+    },
+    "ordinaryWildCatalogReplacementCost": {
+      "food": 11730,
+      "wood": 3870,
+      "stone": 0,
+      "gold": 40
+    },
+    "parallelPlanned": 29,
+    "parallelCommitted": 29,
+    "partialParallel": 0,
+    "maxCityArmies": 2,
+    "minParallelGarrisonFraction": 0.3372093023255814,
+    "events": 56513,
+    "eventsByType": {
+      "ai.decide": 19871,
+      "construction.complete": 10202,
+      "economy.settle": 16800,
+      "military.train": 6986,
+      "army.arrive": 1377,
+      "army.return": 847,
+      "age.complete": 80,
+      "wild.respawn": 73,
+      "combat.round": 26,
+      "governance.decide": 251
+    },
+    "returnDeposits": 847,
+    "distances": {
+      "beyond24": 42,
+      "beyond48": 5,
+      "max": 59.43904440685432
+    },
+    "faults": []
+  },
+  "autonomy": {
+    "accepted": 13266,
+    "rejected": 0,
+    "agents": 99,
+    "decisions": 19871
+  },
+  "final": {
+    "liveAI": 81,
+    "cities": 100,
+    "population": 457797,
+    "stationedEffectiveUnits": 2998,
+    "awayEffectiveUnits": 157,
+    "armies": 9,
+    "hash": "0d661f693f7949a3f540218488f8a2a89b5c6fe0fbf275e670c684f1e6b11853"
+  },
+  "performance": {
+    "elapsedMs": 37210.751947,
+    "events": 56513,
+    "peakHeapBytes": 144418688,
+    "peakRssBytes": 301342720,
+    "maxRssKiB": 311600
+  },
+  "limitations": [
+    "replacement cost is catalog equivalent, not actual recruitment spending",
+    "Node memory, not Android memory or mobile FPS",
+    "comparison policies override only the pure selector in disposable compiled files; no troops/resources/activity/timing changes"
+  ]
+}

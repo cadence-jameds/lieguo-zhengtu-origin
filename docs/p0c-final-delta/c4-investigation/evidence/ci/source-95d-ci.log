@@ -1,0 +1,349 @@
+﻿2026-10-20T01:42:27.3553312Z Current runner version: '2.337.0'
+2026-10-20T01:42:27.3567776Z ##[group]Runner Image Provisioner
+2026-10-20T01:42:27.3568254Z Hosted Compute Agent
+2026-10-20T01:42:27.3568662Z Version: 20261012.601
+2026-10-20T01:42:27.3569023Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T01:42:27.3569453Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T01:42:27.3569882Z Worker ID: {0f4225d0-7cfa-4752-bc87-63ee18e734b8}
+2026-10-20T01:42:27.3570297Z Region: southcentralus
+2026-10-20T01:42:27.3570670Z Cloud: Azure
+2026-10-20T01:42:27.3570985Z ##[endgroup]
+2026-10-20T01:42:27.3572107Z ##[group]Operating System
+2026-10-20T01:42:27.3572497Z Ubuntu
+2026-10-20T01:42:27.3572800Z 24.04.5
+2026-10-20T01:42:27.3573128Z LTS
+2026-10-20T01:42:27.3573428Z ##[endgroup]
+2026-10-20T01:42:27.3573729Z ##[group]Runner Image
+2026-10-20T01:42:27.3574137Z Image: ubuntu-24.04
+2026-10-20T01:42:27.3574489Z Version: 20261012.334.1
+2026-10-20T01:42:27.3575192Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T01:42:27.3576013Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-20T01:42:27.3576648Z ##[endgroup]
+2026-10-20T01:42:27.3577257Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T01:42:27.3578530Z Contents: read
+2026-10-20T01:42:27.3578864Z Metadata: read
+2026-10-20T01:42:27.3579265Z ##[endgroup]
+2026-10-20T01:42:27.3580433Z Secret source: Actions
+2026-10-20T01:42:27.3581013Z Cache mode: write
+2026-10-20T01:42:27.3581525Z Prepare workflow directory
+2026-10-20T01:42:27.3837799Z Prepare all required actions
+2026-10-20T01:42:27.3867049Z Getting action download info
+2026-10-20T01:42:27.6440048Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-20T01:42:27.7143686Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-20T01:42:27.8207504Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-20T01:42:28.0120585Z Complete job name: Verify
+2026-10-20T01:42:28.0599212Z ##[group]Run actions/checkout@v4
+2026-10-20T01:42:28.0599584Z with:
+2026-10-20T01:42:28.0599795Z   fetch-depth: 0
+2026-10-20T01:42:28.0600032Z   persist-credentials: false
+2026-10-20T01:42:28.0600329Z   repository: cadence-jameds/lieguo-zhengtu-origin
+2026-10-20T01:42:28.0602424Z   token: ***
+2026-10-20T01:42:28.0602637Z   ssh-strict: true
+2026-10-20T01:42:28.0602855Z   ssh-user: git
+2026-10-20T01:42:28.0603071Z   clean: true
+2026-10-20T01:42:28.0603302Z   sparse-checkout-cone-mode: true
+2026-10-20T01:42:28.0603570Z   fetch-tags: false
+2026-10-20T01:42:28.0603796Z   show-progress: true
+2026-10-20T01:42:28.0604020Z   lfs: false
+2026-10-20T01:42:28.0604227Z   submodules: false
+2026-10-20T01:42:28.0604455Z   set-safe-directory: true
+2026-10-20T01:42:28.0604714Z   allow-unsafe-pr-checkout: false
+2026-10-20T01:42:28.0605045Z ##[endgroup]
+2026-10-20T01:42:28.1233605Z Syncing repository: cadence-jameds/lieguo-zhengtu-origin
+2026-10-20T01:42:28.1235051Z ##[group]Getting Git version info
+2026-10-20T01:42:28.1235769Z Working directory is '/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin'
+2026-10-20T01:42:28.1236694Z [command]/usr/bin/git version
+2026-10-20T01:42:28.1300583Z git version 2.55.0
+2026-10-20T01:42:28.1314053Z ##[endgroup]
+2026-10-20T01:42:28.1325091Z Temporarily overriding HOME='/home/runner/work/_temp/7c6c5f30-59f4-4c4c-9d19-659391ba840a' before making global git config changes
+2026-10-20T01:42:28.1326314Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T01:42:28.1328195Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin
+2026-10-20T01:42:28.1370173Z Deleting the contents of '/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin'
+2026-10-20T01:42:28.1373288Z ##[group]Initializing the repository
+2026-10-20T01:42:28.1375877Z [command]/usr/bin/git init /home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin
+2026-10-20T01:42:28.1475961Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T01:42:28.1476926Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T01:42:28.1477754Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T01:42:28.1478406Z hint: call:
+2026-10-20T01:42:28.1478887Z hint:
+2026-10-20T01:42:28.1479442Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T01:42:28.1480064Z hint:
+2026-10-20T01:42:28.1480701Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T01:42:28.1481688Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T01:42:28.1482466Z hint:
+2026-10-20T01:42:28.1482967Z hint: 	git branch -m <name>
+2026-10-20T01:42:28.1483536Z hint:
+2026-10-20T01:42:28.1487139Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T01:42:28.1488110Z Initialized empty Git repository in /home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/.git/
+2026-10-20T01:42:28.1493789Z [command]/usr/bin/git remote add origin https://github.com/cadence-jameds/lieguo-zhengtu-origin
+2026-10-20T01:42:28.1533018Z ##[endgroup]
+2026-10-20T01:42:28.1533734Z ##[group]Disabling automatic garbage collection
+2026-10-20T01:42:28.1536257Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T01:42:28.1563431Z ##[endgroup]
+2026-10-20T01:42:28.1564080Z ##[group]Setting up auth
+2026-10-20T01:42:28.1569507Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T01:42:28.1597043Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T01:42:28.1882767Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T01:42:28.1909219Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T01:42:28.2072971Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T01:42:28.2098856Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T01:42:28.2261215Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T01:42:28.2291309Z ##[endgroup]
+2026-10-20T01:42:28.2291823Z ##[group]Fetching the repository
+2026-10-20T01:42:28.2297800Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +84999c768d1a51a661e8a46c04340d00fa35bdad:refs/remotes/pull/21/merge
+2026-10-20T01:42:33.8727368Z From https://github.com/cadence-jameds/lieguo-zhengtu-origin
+2026-10-20T01:42:33.8728980Z  * [new branch]      chore/release-metadata-issue16           -> origin/chore/release-metadata-issue16
+2026-10-20T01:42:33.8730645Z  * [new branch]      codex/github-cloud-pages-integration     -> origin/codex/github-cloud-pages-integration
+2026-10-20T01:42:33.8732586Z  * [new branch]      docs/update-readme-v03049                -> origin/docs/update-readme-v03049
+2026-10-20T01:42:33.8734091Z  * [new branch]      docs/v92-player-quests-80-20261013       -> origin/docs/v92-player-quests-80-20261013
+2026-10-20T01:42:33.8736069Z  * [new branch]      docs/v93-integrated-player-quests-20261013 -> origin/docs/v93-integrated-player-quests-20261013
+2026-10-20T01:42:33.8737791Z  * [new branch]      docs/v94-exile-eligibility-20261016      -> origin/docs/v94-exile-eligibility-20261016
+2026-10-20T01:42:33.8739704Z  * [new branch]      docs/v94-same-civ-craftsman-free-castle-20261016 -> origin/docs/v94-same-civ-craftsman-free-castle-20261016
+2026-10-20T01:42:33.8742358Z  * [new branch]      docs/v94-scout-defender-report-rights-20261016 -> origin/docs/v94-scout-defender-report-rights-20261016
+2026-10-20T01:42:33.8744332Z  * [new branch]      experiment/p0-c-9-main-06c4-20261018     -> origin/experiment/p0-c-9-main-06c4-20261018
+2026-10-20T01:42:33.8746093Z  * [new branch]      feat/p0-c-9-five-strategy-ai-20261019    -> origin/feat/p0-c-9-five-strategy-ai-20261019
+2026-10-20T01:42:33.8748145Z  * [new branch]      fix/formal-save-load-cooperative-20261013 -> origin/fix/formal-save-load-cooperative-20261013
+2026-10-20T01:42:33.8750021Z  * [new branch]      fix/issue18-update-readme                -> origin/fix/issue18-update-readme
+2026-10-20T01:42:33.8752004Z  * [new branch]      fix/p0-v2-replay-player-orders-20261014  -> origin/fix/p0-v2-replay-player-orders-20261014
+2026-10-20T01:42:33.8753841Z  * [new branch]      fix/resource-art-level-10                -> origin/fix/resource-art-level-10
+2026-10-20T01:42:33.8755182Z  * [new branch]      main                                     -> origin/main
+2026-10-20T01:42:33.8756326Z  * [new branch]      recovery-b8                              -> origin/recovery-b8
+2026-10-20T01:42:33.8757593Z  * [new branch]      reference/demo-v0.30.2                   -> origin/reference/demo-v0.30.2
+2026-10-20T01:42:33.8758808Z  * [new branch]      release                                  -> origin/release
+2026-10-20T01:42:33.8760025Z  * [new branch]      stage2-r4-integration                    -> origin/stage2-r4-integration
+2026-10-20T01:42:33.8761484Z  * [new branch]      v94-ui-integration                       -> origin/v94-ui-integration
+2026-10-20T01:42:33.8762935Z  * [new branch]      work/r3-browser-verification             -> origin/work/r3-browser-verification
+2026-10-20T01:42:33.8764389Z  * [new ref]         84999c768d1a51a661e8a46c04340d00fa35bdad -> pull/21/merge
+2026-10-20T01:42:33.8767129Z ##[endgroup]
+2026-10-20T01:42:33.8768126Z ##[group]Determining the checkout info
+2026-10-20T01:42:33.8769248Z ##[endgroup]
+2026-10-20T01:42:33.8769900Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T01:42:33.8778215Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T01:42:33.8802139Z ##[group]Checking out the ref
+2026-10-20T01:42:33.8803550Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/21/merge
+2026-10-20T01:42:34.2954754Z Note: switching to 'refs/remotes/pull/21/merge'.
+2026-10-20T01:42:34.2955956Z 
+2026-10-20T01:42:34.2956188Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T01:42:34.2956697Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T01:42:34.2957158Z state without impacting any branches by switching back to a branch.
+2026-10-20T01:42:34.2957417Z 
+2026-10-20T01:42:34.2957614Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T01:42:34.2958057Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T01:42:34.2958288Z 
+2026-10-20T01:42:34.2958471Z   git switch -c <new-branch-name>
+2026-10-20T01:42:34.2958595Z 
+2026-10-20T01:42:34.2958685Z Or undo this operation with:
+2026-10-20T01:42:34.2958787Z 
+2026-10-20T01:42:34.2958858Z   git switch -
+2026-10-20T01:42:34.2958952Z 
+2026-10-20T01:42:34.2959174Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T01:42:34.2959349Z 
+2026-10-20T01:42:34.2959566Z HEAD is now at 84999c7 Merge 95d1c0b0f4247de4c5e9489d4e85a6b35be671d2 into 06c4cb93779f1f679bb77470515fd8aee1c42de9
+2026-10-20T01:42:34.3010535Z ##[endgroup]
+2026-10-20T01:42:34.3049507Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T01:42:34.3070512Z 84999c768d1a51a661e8a46c04340d00fa35bdad
+2026-10-20T01:42:34.3077348Z ##[group]Removing auth
+2026-10-20T01:42:34.3080067Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T01:42:34.3103790Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T01:42:34.3268210Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T01:42:34.3290360Z http.https://github.com/.extraheader
+2026-10-20T01:42:34.3295075Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T01:42:34.3320800Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T01:42:34.3485021Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T01:42:34.3508978Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T01:42:34.3668659Z ##[endgroup]
+2026-10-20T01:42:34.3839584Z ##[group]Run actions/setup-node@v4
+2026-10-20T01:42:34.3839778Z with:
+2026-10-20T01:42:34.3839937Z   node-version: 22
+2026-10-20T01:42:34.3840082Z   cache: npm
+2026-10-20T01:42:34.3840220Z   always-auth: false
+2026-10-20T01:42:34.3840372Z   check-latest: false
+2026-10-20T01:42:34.3841978Z   token: ***
+2026-10-20T01:42:34.3842124Z ##[endgroup]
+2026-10-20T01:42:34.4757941Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+2026-10-20T01:42:34.4760701Z (node:2179) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T01:42:34.4761368Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T01:42:34.4762403Z ##[group]Environment details
+2026-10-20T01:42:34.7711560Z node: v22.23.3
+2026-10-20T01:42:34.7711819Z npm: 10.9.9
+2026-10-20T01:42:34.7711980Z yarn: 1.22.22
+2026-10-20T01:42:34.7712785Z ##[endgroup]
+2026-10-20T01:42:34.7724277Z [command]/opt/hostedtoolcache/node/22.23.3/x64/bin/npm config get cache
+2026-10-20T01:42:34.8453684Z /home/runner/.npm
+2026-10-20T01:42:35.0133907Z Cache hit for: node-cache-Linux-x64-npm-dc238742ace7562e0f6d551e02897e3f14986f0d237530295e6b4d48c3798aa5
+2026-10-20T01:42:35.0193508Z (node:2179) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-20T01:42:36.0277209Z Received 75188298 of 75188298 (100.0%), 84.2 MBs/sec
+2026-10-20T01:42:36.0277759Z Cache Size: ~72 MB (75188298 B)
+2026-10-20T01:42:36.0328911Z [command]/usr/bin/tar -xf /home/runner/work/_temp/7c85958a-dc89-4032-9abe-36ed71c06f89/cache.tzst -P -C /home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin --use-compress-program unzstd
+2026-10-20T01:42:36.1769215Z Cache restored successfully
+2026-10-20T01:42:36.1805112Z Cache restored from key: node-cache-Linux-x64-npm-dc238742ace7562e0f6d551e02897e3f14986f0d237530295e6b4d48c3798aa5
+2026-10-20T01:42:36.1948960Z ##[group]Run npm ci
+2026-10-20T01:42:36.1949153Z [36;1mnpm ci[0m
+2026-10-20T01:42:36.2208345Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:42:36.2208512Z ##[endgroup]
+2026-10-20T01:42:38.3843503Z npm warn deprecated glob@11.1.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-20T01:42:39.8394940Z 
+2026-10-20T01:42:39.8395684Z added 394 packages, and audited 395 packages in 4s
+2026-10-20T01:42:39.8395963Z 
+2026-10-20T01:42:39.8396132Z 110 packages are looking for funding
+2026-10-20T01:42:39.8396397Z   run `npm fund` for details
+2026-10-20T01:42:39.8463160Z 
+2026-10-20T01:42:39.8463691Z 8 vulnerabilities (2 low, 6 high)
+2026-10-20T01:42:39.8463960Z 
+2026-10-20T01:42:39.8464171Z To address issues that do not require attention, run:
+2026-10-20T01:42:39.8464456Z   npm audit fix
+2026-10-20T01:42:39.8464657Z 
+2026-10-20T01:42:39.8464765Z To address all issues, run:
+2026-10-20T01:42:39.8465332Z   npm audit fix --force
+2026-10-20T01:42:39.8465459Z 
+2026-10-20T01:42:39.8465571Z Run `npm audit` for details.
+2026-10-20T01:42:39.9058480Z ##[group]Run npm run release:prepare
+2026-10-20T01:42:39.9058671Z [36;1mnpm run release:prepare[0m
+2026-10-20T01:42:39.9111532Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:42:39.9111674Z ##[endgroup]
+2026-10-20T01:42:39.9732342Z 
+2026-10-20T01:42:39.9732859Z > guozhan-game-mvp@0.30.50 release:prepare
+2026-10-20T01:42:39.9733249Z > node scripts/prepare-release.mjs
+2026-10-20T01:42:39.9733425Z 
+2026-10-20T01:42:40.4399075Z {"version":"0.30.55","date":"2026-10-20","commitSha":"84999c768d1a51a661e8a46c04340d00fa35bdad","dirty":false}
+2026-10-20T01:42:40.4561696Z ##[group]Run npm run typecheck
+2026-10-20T01:42:40.4561900Z [36;1mnpm run typecheck[0m
+2026-10-20T01:42:40.4611926Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:42:40.4612071Z ##[endgroup]
+2026-10-20T01:42:40.5199852Z 
+2026-10-20T01:42:40.5200363Z > guozhan-game-mvp@0.30.50 typecheck
+2026-10-20T01:42:40.5200681Z > tsc --noEmit
+2026-10-20T01:42:40.5200827Z 
+2026-10-20T01:42:50.0796841Z ##[group]Run node scripts/verify-in-isolation.mjs full
+2026-10-20T01:42:50.0797516Z [36;1mnode scripts/verify-in-isolation.mjs full[0m
+2026-10-20T01:42:50.0870850Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:42:50.0871006Z ##[endgroup]
+2026-10-20T01:46:08.5263870Z Isolated full regression workspace: /tmp/lieguo-verification-C42X7I
+2026-10-20T01:46:08.5289246Z {"success":true,"passed":1467,"failed":0,"skipped":1,"report":"/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/artifacts/integration/regression-full.json"}
+2026-10-20T01:46:08.5360000Z ##[group]Run npm run build
+2026-10-20T01:46:08.5360167Z [36;1mnpm run build[0m
+2026-10-20T01:46:08.5410875Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:46:08.5411019Z ##[endgroup]
+2026-10-20T01:46:08.6015886Z 
+2026-10-20T01:46:08.6016387Z > guozhan-game-mvp@0.30.50 prebuild
+2026-10-20T01:46:08.6016751Z > npm run release:prepare
+2026-10-20T01:46:08.6016898Z 
+2026-10-20T01:46:08.6576233Z 
+2026-10-20T01:46:08.6576851Z > guozhan-game-mvp@0.30.50 release:prepare
+2026-10-20T01:46:08.6577265Z > node scripts/prepare-release.mjs
+2026-10-20T01:46:08.6577435Z 
+2026-10-20T01:46:09.1231914Z {"version":"0.30.55","date":"2026-10-20","commitSha":"84999c768d1a51a661e8a46c04340d00fa35bdad","dirty":false}
+2026-10-20T01:46:09.1322701Z 
+2026-10-20T01:46:09.1322970Z > guozhan-game-mvp@0.30.50 build
+2026-10-20T01:46:09.1323267Z > tsc --noEmit && vite build
+2026-10-20T01:46:09.1323412Z 
+2026-10-20T01:46:18.1516475Z [36mvite v8.0.13 [32mbuilding client environment for production...[36m[39m
+2026-10-20T01:46:18.1588876Z [2K
+2026-10-20T01:46:18.4166823Z transforming...✓ 166 modules transformed.
+2026-10-20T01:46:18.7833751Z rendering chunks...
+2026-10-20T01:46:19.0403099Z computing gzip size...
+2026-10-20T01:46:19.0481788Z dist/package.json                                              0.11 kB │ gzip:   0.12 kB
+2026-10-20T01:46:19.0482162Z dist/sw-release-84999c768d1a51a661e8a46c04340d00fa35bdad.js    0.19 kB
+2026-10-20T01:46:19.0482495Z dist/manifest.webmanifest                                      0.33 kB
+2026-10-20T01:46:19.0482817Z dist/index.html                                                0.85 kB │ gzip:   0.53 kB
+2026-10-20T01:46:19.0483144Z dist/release/latest.svg                                        2.90 kB │ gzip:   1.25 kB
+2026-10-20T01:46:19.0483430Z dist/assets/mapRaster.worker-Bm8EOm9D.js                       3.43 kB
+2026-10-20T01:46:19.0483746Z dist/version.json                                             13.68 kB │ gzip:   6.44 kB
+2026-10-20T01:46:19.0484019Z dist/CHANGELOG.md                                             14.29 kB
+2026-10-20T01:46:19.0484533Z dist/release/index.html                                       14.39 kB │ gzip:   7.10 kB
+2026-10-20T01:46:19.0484897Z dist/assets/b5Lab.worker-B03_NCv5.js                         453.80 kB
+2026-10-20T01:46:19.0485170Z dist/assets/runtime.worker-BwtpVnVv.js                       456.78 kB
+2026-10-20T01:46:19.0485606Z dist/assets/index-CO3VCVkj.css                               173.91 kB │ gzip:  35.49 kB
+2026-10-20T01:46:19.0486267Z dist/assets/workbox-window.prod.es5-Cch4wiA5.js                5.71 kB │ gzip:   2.25 kB │ map:    13.08 kB
+2026-10-20T01:46:19.0486692Z dist/assets/index-hsN9Kvrs.js                                729.11 kB │ gzip: 225.05 kB │ map: 2,243.19 kB
+2026-10-20T01:46:19.0486868Z 
+2026-10-20T01:46:19.0486988Z [32m✓ built in 896ms[39m
+2026-10-20T01:46:20.0709124Z 
+2026-10-20T01:46:20.0711046Z [36mPWA v1.3.0[39m
+2026-10-20T01:46:20.0711576Z mode      [35mgenerateSW[39m
+2026-10-20T01:46:20.0711980Z precache  [32m194 entries[39m [2m(55080.49 KiB)[22m
+2026-10-20T01:46:20.0712247Z files generated
+2026-10-20T01:46:20.0712460Z   [2mdist/sw.js.map[22m
+2026-10-20T01:46:20.0712674Z   [2mdist/sw.js[22m
+2026-10-20T01:46:20.0712926Z   [2mdist/workbox-9c191d2f.js.map[22m
+2026-10-20T01:46:20.0713234Z   [2mdist/workbox-9c191d2f.js[22m
+2026-10-20T01:46:20.1622406Z ##[group]Run node scripts/check-pages-build.mjs
+2026-10-20T01:46:20.1622637Z [36;1mnode scripts/check-pages-build.mjs[0m
+2026-10-20T01:46:20.1672364Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:46:20.1672508Z ##[endgroup]
+2026-10-20T01:46:20.1920108Z Pages assets, PWA scope and Service Worker fallback verified: /lieguo-zhengtu-origin/
+2026-10-20T01:46:20.1968758Z ##[group]Run node scripts/check-release-build.mjs
+2026-10-20T01:46:20.1968961Z [36;1mnode scripts/check-release-build.mjs[0m
+2026-10-20T01:46:20.2011717Z shell: /usr/bin/bash -e {0}
+2026-10-20T01:46:20.2011854Z ##[endgroup]
+2026-10-20T01:46:20.2261953Z {"version":"0.30.55","date":"2026-10-20","commitSha":"84999c768d1a51a661e8a46c04340d00fa35bdad","contentSha":"84999c768d1a51a661e8a46c04340d00fa35bdad","dirty":false,"artifactsConsistent":true,"workerIdentityConsistent":true}
+2026-10-20T01:46:20.2345534Z ##[group]Run actions/upload-artifact@v4
+2026-10-20T01:46:20.2345690Z with:
+2026-10-20T01:46:20.2345851Z   name: release-metadata-84999c768d1a51a661e8a46c04340d00fa35bdad
+2026-10-20T01:46:20.2346091Z   path: dist/version.json
+dist/package.json
+dist/CHANGELOG.md
+
+2026-10-20T01:46:20.2346290Z   if-no-files-found: warn
+2026-10-20T01:46:20.2346419Z   compression-level: 6
+2026-10-20T01:46:20.2346544Z   overwrite: false
+2026-10-20T01:46:20.2346663Z   include-hidden-files: false
+2026-10-20T01:46:20.2346793Z ##[endgroup]
+2026-10-20T01:46:20.3345525Z (node:4219) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T01:46:20.3346001Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T01:46:20.3400056Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-20T01:46:20.3401620Z The least common ancestor is /home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/dist. This will be the root directory of the artifact
+2026-10-20T01:46:20.3402316Z With the provided path, there will be 3 files uploaded
+2026-10-20T01:46:20.3402778Z Artifact name is valid!
+2026-10-20T01:46:20.3403032Z Root directory input is valid!
+2026-10-20T01:46:20.6167548Z Beginning upload of artifact content to blob storage
+2026-10-20T01:46:20.6301198Z (node:4219) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-20T01:46:20.7877301Z Uploaded bytes 14543
+2026-10-20T01:46:20.8246038Z Finished uploading artifact content to blob storage!
+2026-10-20T01:46:20.8246850Z SHA256 digest of uploaded artifact zip is b5562098af9abbd0a2bcf330c99581210d4eddcc4a6c105fa536e52e58046f48
+2026-10-20T01:46:20.8248027Z Finalizing artifact upload
+2026-10-20T01:46:21.0962727Z Artifact release-metadata-84999c768d1a51a661e8a46c04340d00fa35bdad.zip successfully finalized. Artifact ID 12234533256
+2026-10-20T01:46:21.0963330Z Artifact release-metadata-84999c768d1a51a661e8a46c04340d00fa35bdad has been successfully uploaded! Final size is 14543 bytes. Artifact ID is 12234533256
+2026-10-20T01:46:21.0966877Z Artifact download URL: https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/39354781320/artifacts/12234533256
+2026-10-20T01:46:21.1091044Z ##[group]Run actions/upload-artifact@v4
+2026-10-20T01:46:21.1091602Z with:
+2026-10-20T01:46:21.1091780Z   name: regression-39354781320
+2026-10-20T01:46:21.1091967Z   path: artifacts/integration/regression-full.json
+2026-10-20T01:46:21.1092137Z   if-no-files-found: ignore
+2026-10-20T01:46:21.1092271Z   compression-level: 6
+2026-10-20T01:46:21.1092389Z   overwrite: false
+2026-10-20T01:46:21.1092506Z   include-hidden-files: false
+2026-10-20T01:46:21.1092640Z ##[endgroup]
+2026-10-20T01:46:21.2056867Z (node:4231) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T01:46:21.2057366Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T01:46:21.2084642Z With the provided path, there will be 1 file uploaded
+2026-10-20T01:46:21.2099943Z Artifact name is valid!
+2026-10-20T01:46:21.2100430Z Root directory input is valid!
+2026-10-20T01:46:21.4713134Z Beginning upload of artifact content to blob storage
+2026-10-20T01:46:21.4878215Z (node:4231) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-20T01:46:21.6694071Z Uploaded bytes 72561
+2026-10-20T01:46:21.7104732Z Finished uploading artifact content to blob storage!
+2026-10-20T01:46:21.7105427Z SHA256 digest of uploaded artifact zip is 063e8ec7a2593cc12f318804c762b3ea2def9b2697478408eca89b664702648d
+2026-10-20T01:46:21.7106901Z Finalizing artifact upload
+2026-10-20T01:46:21.9597535Z Artifact regression-39354781320.zip successfully finalized. Artifact ID 12233994008
+2026-10-20T01:46:21.9598101Z Artifact regression-39354781320 has been successfully uploaded! Final size is 72561 bytes. Artifact ID is 12233994008
+2026-10-20T01:46:21.9601537Z Artifact download URL: https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/39354781320/artifacts/12233994008
+2026-10-20T01:46:21.9722650Z Post job cleanup.
+2026-10-20T01:46:22.0431584Z (node:4243) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T01:46:22.0432048Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T01:46:22.0433210Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-dc238742ace7562e0f6d551e02897e3f14986f0d237530295e6b4d48c3798aa5, not saving cache.
+2026-10-20T01:46:22.0525735Z Post job cleanup.
+2026-10-20T01:46:22.1030229Z [command]/usr/bin/git version
+2026-10-20T01:46:22.1061774Z git version 2.55.0
+2026-10-20T01:46:22.1085897Z Temporarily overriding HOME='/home/runner/work/_temp/7e5addb9-b61e-40cf-8f46-e4e419e4fcb0' before making global git config changes
+2026-10-20T01:46:22.1086628Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T01:46:22.1089343Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin
+2026-10-20T01:46:22.1117217Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T01:46:22.1142231Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T01:46:22.1324717Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T01:46:22.1352874Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T01:46:22.1542062Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T01:46:22.1577264Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T01:46:22.1878265Z Cleaning up orphan processes
+2026-10-20T01:46:22.2084390Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

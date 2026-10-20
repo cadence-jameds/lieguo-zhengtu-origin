@@ -1,0 +1,76 @@
+{
+  "head": "a002ff21398e08a2410eee4077957c549d57b238",
+  "run": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/39270201778",
+  "job": 118120582092,
+  "conclusion": "success",
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm ci",
+      "conclusion": "success"
+    },
+    {
+      "name": "Prepare deterministic release metadata",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run typecheck",
+      "conclusion": "success"
+    },
+    {
+      "name": "Full regression in a disposable copy",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build for project Pages",
+      "conclusion": "success"
+    },
+    {
+      "name": "Check project Pages paths",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify release artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Preserve release metadata",
+      "conclusion": "success"
+    },
+    {
+      "name": "Preserve regression result",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-node@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "regression": [
+    "{\"success\":true,\"passed\":1446,\"failed\":0,\"skipped\":1,\"report\":\"/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/artifacts/integration/regression-full.json\"}"
+  ],
+  "identity": [
+    "{\"version\":\"0.30.64\",\"date\":\"2026-10-19\",\"commitSha\":\"a002ff21398e08a2410eee4077957c549d57b238\",\"dirty\":false}",
+    "{\"version\":\"0.30.64\",\"date\":\"2026-10-19\",\"commitSha\":\"a002ff21398e08a2410eee4077957c549d57b238\",\"dirty\":false}",
+    "{\"version\":\"0.30.64\",\"date\":\"2026-10-19\",\"commitSha\":\"a002ff21398e08a2410eee4077957c549d57b238\",\"contentSha\":\"a002ff21398e08a2410eee4077957c549d57b238\",\"dirty\":false,\"artifactsConsistent\":true,\"workerIdentityConsistent\":true}"
+  ]
+}

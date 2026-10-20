@@ -1,0 +1,97 @@
+{
+  "head": "ba11a66694a9190074c035f87ce0501d7744dd77",
+  "files": [
+    {
+      "path": "src/game/presentation/factionRankings.ts",
+      "role": "production",
+      "beforeBlob": "857fa3ab392dc9054bb02859cf2271a479fd9447",
+      "headBlob": "dcbbd040d7f7363c736c30c8c967aa9bcb89021f",
+      "workingBlob": "dcbbd040d7f7363c736c30c8c967aa9bcb89021f",
+      "sha256": "2ea4df67fda88d3a87ef70031a6616c2b49021eed3f0ba4eec0356635b1b1c3d"
+    },
+    {
+      "path": "src/game/presentation/PoliticsView.tsx",
+      "role": "production",
+      "beforeBlob": "e499d360bb74260d9739036d584ef8df7d052547",
+      "headBlob": "62885e495b49e58014587dbde986b21a44a9826d",
+      "workingBlob": "62885e495b49e58014587dbde986b21a44a9826d",
+      "sha256": "317c7e6b6d8c2fd8bbdcb75aa4760b12a1e8610359b1421cb5bf9c80777248e3"
+    },
+    {
+      "path": "src/game/presentation/organizationRankings.test.tsx",
+      "role": "test",
+      "beforeBlob": null,
+      "headBlob": "50bab66f675fd88e782875adbe0453142d52c68a",
+      "workingBlob": "3caed1c9b084ac5eb8baf1386ee780b13cb0b6a6",
+      "sha256": "691406a31e39c14fcfa42743f26313a3987f6c1195ce482117cc92a052fc577f"
+    },
+    {
+      "path": "src/game/persistence.ts",
+      "role": "production",
+      "beforeBlob": "59237a80087f0aaf7f85235fa06946139e50d9cd",
+      "headBlob": "890361babbc84247862a6b35d74db550376b65f4",
+      "workingBlob": "890361babbc84247862a6b35d74db550376b65f4",
+      "sha256": "abcb18d44ceb98eb5adfaea72ec419b48ecbb40bac993e96c718b9717e584aa6"
+    },
+    {
+      "path": "src/game/formal/saveDraftIsolation.test.ts",
+      "role": "test",
+      "beforeBlob": null,
+      "headBlob": "7b875078e29e76d2ea9d007e309560c90e213f7c",
+      "workingBlob": "7b875078e29e76d2ea9d007e309560c90e213f7c",
+      "sha256": "f107317e4a003ca4f77067588adb240926d19da88f24525ec2c053dd60247020"
+    }
+  ],
+  "validationAmendment": {
+    "path": "src/game/presentation/organizationRankings.test.tsx",
+    "workingBlob": "3caed1c9b084ac5eb8baf1386ee780b13cb0b6a6",
+    "reason": "Strengthen technology getter to real techIds; target6PASS; final CI covers amendment."
+  },
+  "protectedAI": [
+    {
+      "path": "src/game/formal/aiAttackStrategies.ts",
+      "blob": "028d6d7d723e77c4d0cc771b89e5fffd7903c700",
+      "unchanged": true
+    },
+    {
+      "path": "src/game/formal/aiActions.ts",
+      "blob": "df42dba87054829294c673033dd3de7ffbaece33",
+      "unchanged": true
+    },
+    {
+      "path": "src/game/formal/autonomy.ts",
+      "blob": "95315eec2e2cf05eef70d05bd9a17383a9123aaa",
+      "unchanged": true
+    }
+  ],
+  "unchangedFromBefore": [
+    {
+      "path": "src/game/runtime.worker.ts",
+      "blob": "b08129d857bc976b1f726f3c91c9e1224e0ed411"
+    },
+    {
+      "path": "src/game/formal/reducer.ts",
+      "blob": "ad938ff48ca8020c1a3c6ae16c9ac97485131244"
+    },
+    {
+      "path": "src/game/formal/saveCodec.ts",
+      "blob": "522c53e2c6f5bb08fa95aaaf1695266ed85f2bf3"
+    },
+    {
+      "path": "src/game/formal/canonical.ts",
+      "blob": "3b81d2001f7a300e5ad2cfaff0cfa4a20ac071fc"
+    },
+    {
+      "path": "src/game/formal/schema.ts",
+      "blob": "46faa38d1d6d2917be139b4b49c25521b6b33edb"
+    },
+    {
+      "path": "src/game/orderAdmission.ts",
+      "blob": "245cbad5f13a908342aa23e9de6613e14119bcb8"
+    },
+    {
+      "path": "src/game/useGame.ts",
+      "blob": "dcf811f09ef14ec77cd2486a75215a388635f2d2"
+    }
+  ]
+}

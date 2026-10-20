@@ -1,0 +1,82 @@
+{
+  "passed": 19,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "C11 pure geometry has radius8, bounded nearby corridor, edges and no far bridge; cached across clock/receipt updates",
+      "status": "passed"
+    },
+    {
+      "name": "C11 water blocks fill and bridges; independent cities reserve their surroundings and cache notices ownership changes",
+      "status": "passed"
+    },
+    {
+      "name": "C13 public lord ranking uses city count then population, competition ties and stable ID, not armies",
+      "status": "passed"
+    },
+    {
+      "name": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+      "status": "passed"
+    },
+    {
+      "name": "C12 legacy descriptions remain in data but no inputs, empty prompts or displays survive",
+      "status": "passed"
+    },
+    {
+      "name": "six compact cards share one selected Formal detail panel and retain name dice, offline and speed modes",
+      "status": "passed"
+    },
+    {
+      "name": "11 fixed unit lines sum actual ordinary+elite garrisons and show absent modern tiers without inventing units",
+      "status": "passed"
+    },
+    {
+      "name": "Return uses selected owned city, labels default off and persisted on, background does not depend on clock or overlays",
+      "status": "passed"
+    },
+    {
+      "name": "DEMO city atlas crop and anchor/scale are used for all six civs and three visual ages",
+      "status": "passed"
+    },
+    {
+      "name": "DEMO Town/Outskirts anchors, default district, mobile scale classes and construction waiting/active semantics are preserved",
+      "status": "passed"
+    },
+    {
+      "name": "build dialog eligibility follows Formal catalog: era, prerequisites, costs, booster field gate, D2 and queue capacity",
+      "status": "passed"
+    },
+    {
+      "name": "complete mountain silhouettes match Formal blocked terrain; legal starts/sites remain outside mountain/water",
+      "status": "passed"
+    },
+    {
+      "name": "own Legion has five tabs and desktop/mobile navigation",
+      "status": "passed"
+    },
+    {
+      "name": "world retains public foreign legions, empires and lords without military secrets or craftsman management",
+      "status": "passed"
+    },
+    {
+      "name": "multi-city governance uses a single selected-city CAS form and public own-city list",
+      "status": "passed"
+    },
+    {
+      "name": "Army places two distinct special unit cards together",
+      "status": "passed"
+    },
+    {
+      "name": "queue toolbar counts jobs and follows selected city, using the shared five-job scheduler capacity",
+      "status": "passed"
+    },
+    {
+      "name": "four report filters preserve legacy three-count callers",
+      "status": "passed"
+    },
+    {
+      "name": "political confirmation fingerprint survives time but invalidates leadership",
+      "status": "passed"
+    }
+  ]
+}

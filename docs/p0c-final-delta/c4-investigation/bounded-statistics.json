@@ -1,0 +1,593 @@
+{
+  "method": "Bounded ABBA: 5 attempts/pass; two passes per variant/group => 10 valid if no failure. Nearest-rank ceil(n*p)-1. NOT the >=30/group full Gate. Real pointer -> durable ACK -> committed DOM assertion + 2 RAF; DB receipt checked afterward. All slow values retained.",
+  "groups": [
+    {
+      "hours": 96,
+      "mobile": false,
+      "speed": 10,
+      "variant": "after",
+      "valid": 10,
+      "p50": 561.5,
+      "p95": 1142,
+      "max": 1142,
+      "over1000": 1,
+      "over1000Ratio": 0.1,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 96,
+      "mobile": false,
+      "speed": 10,
+      "variant": "before",
+      "valid": 10,
+      "p50": 614.2999999970198,
+      "p95": 1599.5,
+      "max": 1599.5,
+      "over1000": 2,
+      "over1000Ratio": 0.2,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 168,
+      "mobile": false,
+      "speed": 50,
+      "variant": "after",
+      "valid": 10,
+      "p50": 971,
+      "p95": 1544.7999999970198,
+      "max": 1544.7999999970198,
+      "over1000": 5,
+      "over1000Ratio": 0.5,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 168,
+      "mobile": false,
+      "speed": 50,
+      "variant": "before",
+      "valid": 10,
+      "p50": 1094.2999999970198,
+      "p95": 4827.5,
+      "max": 4827.5,
+      "over1000": 7,
+      "over1000Ratio": 0.7,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 168,
+      "mobile": true,
+      "speed": 10,
+      "variant": "after",
+      "valid": 10,
+      "p50": 786.2000000029802,
+      "p95": 1309.6000000089407,
+      "max": 1309.6000000089407,
+      "over1000": 1,
+      "over1000Ratio": 0.1,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 168,
+      "mobile": true,
+      "speed": 10,
+      "variant": "before",
+      "valid": 10,
+      "p50": 1193.9000000059605,
+      "p95": 2349.5,
+      "max": 2349.5,
+      "over1000": 8,
+      "over1000Ratio": 0.8,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 168,
+      "mobile": true,
+      "speed": 50,
+      "variant": "after",
+      "valid": 10,
+      "p50": 796.2000000029802,
+      "p95": 1143.1000000089407,
+      "max": 1143.1000000089407,
+      "over1000": 2,
+      "over1000Ratio": 0.2,
+      "allCommittedReceipts": true
+    },
+    {
+      "hours": 168,
+      "mobile": true,
+      "speed": 50,
+      "variant": "before",
+      "valid": 10,
+      "p50": 885.0999999940395,
+      "p95": 1788.2000000029802,
+      "max": 1788.2000000029802,
+      "over1000": 2,
+      "over1000Ratio": 0.2,
+      "allCommittedReceipts": true
+    }
+  ],
+  "valid": 80,
+  "invalid": [],
+  "identities": [
+    {
+      "run": "168h-mobile-10x-0-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-10x-1-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-10x-2-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-10x-3-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "96h-desktop-10x-0-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "cb5867be2069141786169075a65d4787ef80b7d01b1d75683c44edad141dec59",
+          "bytes": 2845154,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "87ec0a479e4c346526f5b2315f91121e1381bef0d02cecf1af024eb9b826ecb2",
+          "bytes": 2845155,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "6b9f8d1c9a9e042a4a8ce25604ddb6846827d226ebca4a405a9f4fc09a1b95d4",
+          "bytes": 2845155,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "96h-desktop-10x-1-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "cb5867be2069141786169075a65d4787ef80b7d01b1d75683c44edad141dec59",
+          "bytes": 2845154,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "87ec0a479e4c346526f5b2315f91121e1381bef0d02cecf1af024eb9b826ecb2",
+          "bytes": 2845155,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "6b9f8d1c9a9e042a4a8ce25604ddb6846827d226ebca4a405a9f4fc09a1b95d4",
+          "bytes": 2845155,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "96h-desktop-10x-2-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "cb5867be2069141786169075a65d4787ef80b7d01b1d75683c44edad141dec59",
+          "bytes": 2845154,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "87ec0a479e4c346526f5b2315f91121e1381bef0d02cecf1af024eb9b826ecb2",
+          "bytes": 2845155,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "6b9f8d1c9a9e042a4a8ce25604ddb6846827d226ebca4a405a9f4fc09a1b95d4",
+          "bytes": 2845155,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "96h-desktop-10x-3-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "cb5867be2069141786169075a65d4787ef80b7d01b1d75683c44edad141dec59",
+          "bytes": 2845154,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "87ec0a479e4c346526f5b2315f91121e1381bef0d02cecf1af024eb9b826ecb2",
+          "bytes": 2845155,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "6b9f8d1c9a9e042a4a8ce25604ddb6846827d226ebca4a405a9f4fc09a1b95d4",
+          "bytes": 2845155,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-desktop-50x-0-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-desktop-50x-1-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-desktop-50x-2-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-desktop-50x-3-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-50x-0-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-50x-1-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-50x-2-after",
+      "testedRelease": {
+        "commitSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "contentSha": "af43822bdc31c9da93d2c504e45680bf89315eb2",
+        "dirty": false,
+        "version": "0.30.69"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    },
+    {
+      "run": "168h-mobile-50x-3-before",
+      "testedRelease": {
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+        "dirty": false,
+        "version": "0.30.66"
+      },
+      "inputs": [
+        {
+          "speed": 1,
+          "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+          "bytes": 5287838,
+          "agents": 99
+        },
+        {
+          "speed": 10,
+          "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+          "bytes": 5287839,
+          "agents": 99
+        },
+        {
+          "speed": 50,
+          "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+          "bytes": 5287839,
+          "agents": 99
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

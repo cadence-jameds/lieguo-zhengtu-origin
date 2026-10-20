@@ -1,0 +1,1002 @@
+{
+  "testedRelease": {
+    "format": 1,
+    "version": "0.30.66",
+    "date": "2026-10-20",
+    "title": "遊戲建置預覽",
+    "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "contentSha": "ba11a66694a9190074c035f87ce0501d7744dd77",
+    "dirty": false,
+    "history": [
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.66",
+        "date": "2026-10-20",
+        "commitSha": "ba11a66694a9190074c035f87ce0501d7744dd77"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.65",
+        "date": "2026-10-20",
+        "commitSha": "073d36dde6f8349fc52bf46803ad3427f8e4449b"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.64",
+        "date": "2026-10-19",
+        "commitSha": "a002ff21398e08a2410eee4077957c549d57b238"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.63",
+        "date": "2026-10-19",
+        "commitSha": "ae39092bec61ebf3a52e497bc7f32a9a6c6cf519"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.62",
+        "date": "2026-10-19",
+        "commitSha": "c902fde7d20e46d0ef5f90192569a45c11ce95af"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.61",
+        "date": "2026-10-19",
+        "commitSha": "a7f168ccc6baef381094a043f9e5f2213305cf06"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.60",
+        "date": "2026-10-19",
+        "commitSha": "401f2c3174072d1889b98e69f7c4ccdd3bb8a130"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.59",
+        "date": "2026-10-19",
+        "commitSha": "bbe66fc89d3900cc473608e454163aa2d365b7b9"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.58",
+        "date": "2026-10-19",
+        "commitSha": "2b6148f6bce11b5ce5b451b438db171b4334ed04"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.57",
+        "date": "2026-10-19",
+        "commitSha": "f6956f482d4afaebbf0a35af2f0c232c0770146f"
+      },
+      {
+        "title": "遊戲建置預覽",
+        "notes": [
+          "此為待審建置；正式玩家更新摘要須在合併前通過檢查。"
+        ],
+        "version": "0.30.56",
+        "date": "2026-10-19",
+        "commitSha": "e99a413b1a52eb7f5941be7c5978d2ae8305a92b"
+      },
+      {
+        "title": "AI 五策略性格加權動態進攻",
+        "notes": [
+          "AI 每次符合軍事行動條件時，會依性格從五種策略重新選擇進攻方式。",
+          "附近仍有敵城時，部分 AI 策略也會評估普通野外據點，並維持正常行軍、戰鬥與戰利品返城。",
+          "多線出征會逐筆確認實際兵力與守軍預留，避免重複使用同一批部隊。"
+        ],
+        "version": "0.30.55",
+        "date": "2026-10-19",
+        "commitSha": "33b7452a3ac6aedba89e5b80c2261e9c24bc5aa7"
+      },
+      {
+        "title": "更新安全恢復與線上版本資訊同步",
+        "notes": [
+          "更新元件失效時會嘗試安全恢復，無法恢復則提供清楚的繁體中文重試說明。",
+          "保存完成確認前不會啟用新版，更新失敗會明確區分尚未保存、保存未確認與已保存狀態。",
+          "專案首頁會自動展示線上版本、更新重點與部署紀錄，並提供可讀文字的歷史更新頁。"
+        ],
+        "version": "0.30.54",
+        "date": "2026-10-17",
+        "commitSha": "06c4cb93779f1f679bb77470515fd8aee1c42de9"
+      },
+      {
+        "title": "軍團、治理與外交介面整合",
+        "notes": [
+          "新增獨立軍團頁，透過總覽、成員、聯防、聯軍與管理分頁操作自己的軍團。",
+          "天下勢力可瀏覽帝國、所有軍團與領主，並保留他方軍事資料的權限限制。",
+          "多城治理改為城市列表與單城設定表單，套用前核對城市狀態並支援更新後重試。",
+          "新增外交記事分類，支援每頁五十則、閱讀與清理，分頁總數維持正確。",
+          "工匠團集中於軍隊特殊單位介面，可選擇與轉移，同／異文明均可免費興建對應文明城堡 Lv1。",
+          "更新六文明開局文案、所選城市的建造與訓練佇列摘要，並改善手機建築卡片的成本排版。"
+        ],
+        "version": "0.30.53",
+        "date": "2026-10-17",
+        "commitSha": "3d1760864f3b9d9a55108c80225764ef8e3099e1"
+      },
+      {
+        "title": "版本與更新資訊自動同步",
+        "notes": [
+          "首頁與戰役設定共用版本、更新日期及更新重點，可離線查看近期與過往紀錄。",
+          "檢查更新可辨識相同版號的不同建置，仍會先安全保存進度再載入更新。"
+        ],
+        "version": "0.30.52",
+        "date": "2026-10-16",
+        "commitSha": "7e52d06c3ca83b1ba99d6f28346e0735b0d29aa2"
+      },
+      {
+        "title": "工匠與城市失守修正",
+        "pr": 3,
+        "notes": [
+          "工匠移動途中目的城市失守時，會嘗試改往其他合法可達城市；全部不可達時安全結束移動。",
+          "城市被征服時，尚未出發的待命聯軍依核准規則清算，不再從敵方城市非法出發。",
+          "同文明與外文明工匠團可免費興建對應文明城堡 Lv1，正常工期與建築前置不變。",
+          "新建立的水域行軍路線使用陸地兩倍耗時，既有在途任務保留原抵達時間。",
+          "修正城市失守時非戰鬥單位與失效工匠工程的清算。"
+        ],
+        "version": "0.30.51",
+        "date": "2026-10-16",
+        "commitSha": "6405f7e155b5747c93a063799912b66f1362b9c7"
+      },
+      {
+        "version": "0.30.50",
+        "date": "2026-10-14",
+        "title": "玩家指令與離線載入改善",
+        "notes": [
+          "改善長時間離線後的世界載入速度。",
+          "背景世界持續推進時，玩家操作可安全重新驗證，減少反覆刷新。"
+        ],
+        "commitSha": "7c52ab738e1ed8be2416c9e9fb95db32dceb020f"
+      }
+    ],
+    "legacyNotes": [
+      "玩家操作跨 AI 背景更新時，相關城市條件未變便以最新世界安全重新驗證，減少反覆要求刷新；戰鬥與外交仍維持嚴格保護。",
+      "帝國成立與加入邀請分別綁定意圖及原帝國；接受時重驗資格，舊未綁定邀請由發起者重新確認。",
+      "帝國剩一軍團持續存在；零軍團立即解除並共用清理失效邀請、工程及外交，不退款或免費繼承。",
+      "戰報於部隊損失下方顯示建築／城牆最終損失，移除逐回合攻城紀錄，保留總回合與真正終戰原因。",
+      "v91征服改為主戰與最多12回合持續攻城，當級牆傷於同一圍城內累積，戰術倍率仍封頂10倍。",
+      "行軍頁可查看交戰中／攻城中部隊的即時戰況；本城駐軍守城也有戰況入口。",
+      "戰中只更新同場摘要，終戰才產生一份完整戰報，清楚說明城牆未破與征服失敗原因。",
+      "援軍與訓練完成可暫停攻城、重回主戰；投石機每戰役只結算一次破壞批次。",
+      "B5測試台同步支援逐事件攻城、剩餘回合、即時战況及讀檔續戰。",
+      "首頁更新狀態、檢查更新與保存並更新移至更新日誌上方。",
+      "電腦版左上方遊戲名稱下方顯示始源與目前載入版本。",
+      "恢復每分鐘、返回頁面與恢復連線時檢查更新；首頁與遊戲內可保存進度並載入新版，不必關閉網頁。",
+      "B5測試地圖填滿容器，沿用正式地圖工具與比例標籤；原戰役與測試台地形快取互不替換。",
+      "建造條件維持單行，未達項目保留#FF0000鮮紅、改回一般字重；已達仍為綠色一般字重。",
+      "開發者模式新增B5戰鬥測試台，另存測試世界與戰報，原戰役照常運作。",
+      "可選AI城市、空城／普通守軍／混編大軍／城牆／反偵察情境，設定玩家兵力、攻城器與敵城庫存。",
+      "可模擬一次敵軍掠奪或征服，逐事件檢查正式戰鬥、攻城、城市易主與玩家守城。",
+      "獨立測試備份支援存檔重讀與中途續接；50／200倍速度的戰術倍率仍封頂10倍，測試庫存保持有限。",
+      "野外資源據點不再清除背景樹木與地景，沿用DEMO世界地圖只替城市清場的顯示方式。",
+      "建造頁移除重複前置清單，單行條件逐項顯示已達綠色／未達紅色。",
+      "完整山脈輪廓同步為正式不可通行／不可建城地形；舊存檔避讓城市、據點與在途路線，保存固定山脈配置。",
+      "世界地圖山脈參考DEMO v0.30.2完整山形，移除切平山峰的格線裁切；保留大型重疊山體與完整山峰。",
+      "v90城市偵察取消情報類型選單，只需選擇斥候數量。",
+      "成功偵察一次保存同時點的四資源、駐軍、援軍、城牆與合法城防，存活斥候返回來源城市後才交付。",
+      "偵察戰報與地圖情報頁共用完整快照，保留現實觀測時間；失敗仍為零情報。",
+      "舊在途情報模式可正常讀檔；未抵達任務統一取得完整快照，舊部分歷史紀錄不補推。",
+      "偵察戰報改用斥候觀察城市的專屬圖片。",
+      "建築資訊頁將前置、成本與操作移到效果說明上方；前置皆滿足時預設收合。",
+      "建造頁名稱可查看資訊，時代與最高等級移至名稱右側；條件以紅／綠色標示。",
+      "選取光暈置於地圖建築下方；施工進度獨立浮在城市建築上方。",
+      "野外戰報採用據點實際名稱，金礦統一顯示黃金礦脈。",
+      "維持既有野外偵察、生成、戰利品、重生與Formal存檔架構；本輪未開始B6／B7／B8。",
+      "20種城市建築共用資訊頁：效果、前置、成本、工期及施工狀態，城郊資源田仍獨立。",
+      "City正式晉升移至市政廳；城市中心只保留時代晉升。",
+      "v88正式City永久倉庫容量＋10%，先加總全部倉庫；城市中心固定800不加成。",
+      "市政廳整合晉升進度、勢力行政網路、統治初定與永久人口里程碑。",
+      "地洞統一更名為地庫，保護機制沿用正式規則。",
+      "城堡保留來源文明，既有外文明生產及未接入政治操作顯示唯讀／尚未開放。",
+      "學院、鐵匠鋪與軍事建築顯示科技或兵種資格；一般施工取消退款維持50%／100%。",
+      "資源田Lv10即顯示進階美術，施工預覽同步。",
+      "手機導覽沿用DEMO順序：地圖、城市、軍隊、戰報、科技、勢力、治理。",
+      "v87盜賊營地資源池改為普通據點1.5倍；四資源各15%～35%，依種子、槽位與世代固定，守軍仍1.2倍。",
+      "時代晉升移至城市中心資訊頁，頂部時代入口直接開啟城市中心。",
+      "建築資訊保留等級，移除重複名稱；升級與拆除按鈕平均排列。",
+      "學院顯示目前與下一級研究時間縮短百分比，精銳化研究除外。",
+      "城市中心顯示目前與下一級施工時間縮短百分比。",
+      "野外地塊名稱、等級與座標合併為一行。",
+      "駐軍情報年齡與資源觀測日期改用現實時間，切換世界速度不改變既有觀測時間。",
+      "城內自由槽建築可整座拆除，每級15世界分鐘且不退建材；保留人口，住房不足時停止成長。",
+      "軍隊徵兵恢復DEMO兵種清單、可招募狀態與數量操作，移除解散兵種設定。",
+      "開發者模式直接留在目前戰役：資源近乎無限、50／200倍世界時間、20世界小時保護罩；最外層金框優先於藍框。",
+      "戰報沿用DEMO緊湊列表、損失表與未讀閃爍通知，日期與觀測時間統一顯示現實時間。",
+      "世界地圖城市圖示移除圍牆，沿用DEMO都市格式及保護罩。",
+      "行軍與偵察改用DEMO三角部隊、敵我色彩、虛線路線與持續移動；征服戰術速度仍封頂10倍。",
+      "野外地塊資訊移除等級、戰利品、重生與載量說明段落。",
+      "野外資源據點開放斥候偵察，固定取得資源與軍隊，沒有情報類型選單；情報返城後顯示。",
+      "所有地塊資訊窗改用名稱旁的☆／★收藏；移除底部收藏及返回地圖按鈕，保留右上關閉。",
+      "世界地圖恢復 Demo 資訊窗與獨立偵察／掠奪／佔領按鈕；在原地圖編組出征，顯示路線與單程時間。",
+      "偵察情報由已保存戰報讀取，保留各次觀測時間；未偵察城防不顯示敵方即時數值。",
+      "v86 一般施工取消：施工中50%、排隊100%；軍事訓練與拓殖整備沿用既有規則。",
+      "B5：正式行軍、掠奪、多回合征服、原子攻城、斥候快照、援軍駐防與戰報；50倍速度的征服戰術倍率封頂10倍。",
+      "戰鬥與結算身分納入正式存檔、離線排程與Recovery；野外432個槽位可擊破、冷卻並決定性重生。",
+      "城牆Lv0～15接入正式施工、佇列、取消、存檔與Recovery；復用DEMO城防美術，完工等級只以wallLevel保存。",
+      "v85規格驗證台：獨立規格與程式逐項比對、公式拆解、正反例試玩、操作紀錄與報告；揭露尚未完成項目，不自動宣稱Gate通過。",
+      "新增B2／B3／B4開發者模式：獨立測試情境、五倍數與六文明檢查、快速推進、存檔重讀、Recovery及驗證報告。",
+      "全區低倍率採小型城市標記；一般視距保留v0.30.2圖示、野外據點與標示門檻，恢復深色外圍、地圖邊界及首幀完整底圖。",
+      "倒數、進度與資源數字獨立更新；一般保存每10秒合併一次，完成事件優先提交，保留操作中的視窗與輸入。",
+      "背景刷新不再解除操作等待；純時鐘版本差異同步後重試一次，實際事件與其他操作仍需重新確認。1／3／6／10／50倍逐一驗證。",
+      "修正高倍速短工程等待10秒才更新的問題；到期事件優先提交，建設與訓練倒數統一顯示現實時間。",
+      "手機右上角改顯示人口，縮短城市選單；農林石金摘要與名稱開關排在城郊右側。斥候移到駐軍列最左邊。",
+      "文明衛隊的頂部駐軍圖示移到騎士右邊，手機與桌機順序一致。",
+      "頂部駐軍圖示改為扁平彩色設計，以色系區分兵種類別並保留各自形狀。",
+      "新兵種分類美術只套用頂部駐軍列；徵兵恢復原兵種美術，建造按民生／經濟／軍事／科技分頁並修正圖片位置。",
+      "野外據點恢復沃野農莊／山林木寨／採石場／黃金礦脈／盜賊營地；開啟標示顯示糧木石金寇。",
+      "v85：城堡生產可持有的拓殖隊，建城後消耗；保留正式成本、400移民與20護衛。",
+      "六文明白話介紹與城堡兵種說明，擴充文化姓名及城市名稱。",
+      "穀木石金恢復DEMO各自文字色彩；11條駐軍分類採簡圖。",
+      "城市建設與軍隊分開還原手機及桌機排版，林地、金礦、石場、農田名稱一致。",
+      "地圖恢復持續選取光暈、城市與空地資訊窗；XY定位保留倍率，全區符合384世界。"
+    ]
+  },
+  "browser": "154.0.8037.57",
+  "hours": 168,
+  "mobile": true,
+  "cases": [
+    {
+      "speed": 1,
+      "mobile": true,
+      "hours": 168,
+      "status": "FAIL",
+      "samples": [
+        {
+          "id": "command:b4fa3f6a-af86-4396-8ed0-9901c45ac111",
+          "type": "city.rename",
+          "start": 10685.70000000298,
+          "postedAt": 10689,
+          "receivedAt": 10757.39999999106,
+          "ackAt": 11803.20000000298,
+          "status": "committed",
+          "renderAt": 11960.79999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 1117.5,
+          "renderMs": 1275.0999999940395
+        },
+        {
+          "id": "command:bb1820ad-1625-4241-877b-2bc406b06a3c",
+          "type": "field.upgrade",
+          "start": 15320,
+          "postedAt": 15322.20000000298,
+          "receivedAt": 15374.20000000298,
+          "ackAt": 18804.09999999404,
+          "status": "committed",
+          "renderAt": 19809.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 3484.0999999940395,
+          "renderMs": 4489.5
+        },
+        {
+          "id": "command:b96bb549-af21-4d5b-bb99-523fc31c91ad",
+          "type": "military.recruit",
+          "start": 26201.20000000298,
+          "postedAt": 26203.5,
+          "receivedAt": 26382.59999999404,
+          "ackAt": 27618.39999999106,
+          "status": "committed",
+          "renderAt": 28112.59999999404,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1417.199999988079,
+          "renderMs": 1911.3999999910593
+        },
+        {
+          "id": "command:29acab9e-e52c-4ea6-b75e-67d868c00c9f",
+          "type": "research.start",
+          "start": 32202.79999999702,
+          "postedAt": 32207.20000000298,
+          "receivedAt": 32242.79999999702,
+          "ackAt": 33103.89999999106,
+          "status": "committed",
+          "renderAt": 33277.09999999404,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 901.0999999940395,
+          "renderMs": 1074.2999999970198
+        },
+        {
+          "id": "command:b6bca85d-e5e4-471e-9971-2e2a9cac5b8e",
+          "type": "army.dispatch",
+          "start": 37384.29999999702,
+          "postedAt": 37387.79999999702,
+          "receivedAt": 37402.89999999106,
+          "ackAt": 38413.09999999404,
+          "status": "committed",
+          "renderAt": 38593.29999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 1028.7999999970198,
+          "renderMs": 1209
+        },
+        {
+          "id": "command:67739882-29b0-4c58-a5ad-965e0f3fcfdb",
+          "type": "field.upgrade",
+          "start": 65860.09999999404,
+          "postedAt": 65864.39999999106,
+          "receivedAt": 65906.29999999702,
+          "ackAt": 67579.29999999702,
+          "status": "committed",
+          "renderAt": 67759.39999999106,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1719.2000000029802,
+          "renderMs": 1899.2999999970198
+        },
+        {
+          "id": "command:4a723d00-092c-4617-a3d7-1ee7d6d7ba5f",
+          "type": "military.recruit",
+          "start": 71315.5,
+          "postedAt": 71317.70000000298,
+          "receivedAt": 71348.89999999106,
+          "ackAt": 73508.79999999702,
+          "status": "committed",
+          "renderAt": 74095.20000000298,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 2193.2999999970198,
+          "renderMs": 2779.7000000029802
+        },
+        {
+          "id": "command:d19d3b58-bcce-46ad-96b0-c871aea5f007",
+          "type": "research.start",
+          "start": 78084,
+          "postedAt": 78087.39999999106,
+          "receivedAt": 78277.39999999106,
+          "ackAt": 79012,
+          "status": "committed",
+          "renderAt": 79158.09999999404,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 928,
+          "renderMs": 1074.0999999940395
+        },
+        {
+          "id": "command:8be28db4-923d-4539-bb5a-38b1ab0a94a3",
+          "type": "army.dispatch",
+          "start": 82604.79999999702,
+          "postedAt": 82607.5,
+          "receivedAt": 82827.70000000298,
+          "ackAt": 83759.09999999404,
+          "status": "committed",
+          "renderAt": 83891.29999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 1154.2999999970198,
+          "renderMs": 1286.5
+        },
+        {
+          "id": "command:76c5ce23-8aaa-45dd-a4b4-a955cd91b7cb",
+          "type": "city.rename",
+          "start": 86825,
+          "postedAt": 86839.09999999404,
+          "receivedAt": 86850.39999999106,
+          "ackAt": 88113.5,
+          "status": "committed",
+          "renderAt": 88258.20000000298,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 1288.5,
+          "renderMs": 1433.2000000029802
+        },
+        {
+          "id": "command:a66d3c35-abd1-4d42-b81f-24696ec020c0",
+          "type": "field.upgrade",
+          "start": 90981.70000000298,
+          "postedAt": 90984.39999999106,
+          "receivedAt": 90997.70000000298,
+          "ackAt": 91789.20000000298,
+          "status": "committed",
+          "renderAt": 91917.79999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 807.5,
+          "renderMs": 936.0999999940395
+        },
+        {
+          "id": "command:95b523a3-fb4f-45d2-a7fa-7472fbe8de5b",
+          "type": "military.recruit",
+          "start": 95287.70000000298,
+          "postedAt": 95289.70000000298,
+          "receivedAt": 95359.89999999106,
+          "ackAt": 96764.89999999106,
+          "status": "committed",
+          "renderAt": 97242.29999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1477.199999988079,
+          "renderMs": 1954.5999999940395
+        },
+        {
+          "id": "command:e0ada90c-b6db-4378-b27e-535d30fcd099",
+          "type": "research.start",
+          "start": 100882.79999999702,
+          "postedAt": 100886.20000000298,
+          "receivedAt": 100967.79999999702,
+          "ackAt": 102007.09999999404,
+          "status": "committed",
+          "renderAt": 102240.59999999404,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 1124.2999999970198,
+          "renderMs": 1357.7999999970198
+        },
+        {
+          "id": "command:f2fa9ebf-72af-41d1-8217-cc72c20db05d",
+          "type": "army.dispatch",
+          "start": 106396.79999999702,
+          "postedAt": 106400.5,
+          "receivedAt": 106412,
+          "ackAt": 107164,
+          "status": "committed",
+          "renderAt": 107290.29999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 767.2000000029802,
+          "renderMs": 893.5
+        }
+      ],
+      "invalid": [
+        {
+          "sample": 5,
+          "family": "rename",
+          "error": "TimeoutError: page.waitForFunction: Timeout 15000ms exceeded.",
+          "observed": {
+            "receipt": {
+              "id": "command:b6bca85d-e5e4-471e-9971-2e2a9cac5b8e",
+              "type": "army.dispatch",
+              "start": 37384.29999999702,
+              "postedAt": 37387.79999999702,
+              "receivedAt": 37402.89999999106,
+              "ackAt": 38413.09999999404,
+              "status": "committed"
+            },
+            "time": 604801877,
+            "ownArmies": [
+              {
+                "mission": "raid",
+                "status": "outbound",
+                "arrivalAt": 605517355
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speed": 10,
+      "mobile": true,
+      "hours": 168,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:40e7ac81-0ee7-4e33-aa1e-2a7c1a6c009b",
+          "type": "city.rename",
+          "start": 6985.70000000298,
+          "postedAt": 6988.4000000059605,
+          "receivedAt": 7005,
+          "ackAt": 7850,
+          "status": "committed",
+          "renderAt": 8012.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 864.2999999970198,
+          "renderMs": 1026.7999999970198
+        },
+        {
+          "id": "command:18b1e2a9-88e4-4b1d-9a47-739f96f7f0df",
+          "type": "field.upgrade",
+          "start": 17206.29999999702,
+          "postedAt": 17210.29999999702,
+          "receivedAt": 17242.10000000894,
+          "ackAt": 25259.20000000298,
+          "status": "committed",
+          "renderAt": 25819.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 8052.9000000059605,
+          "renderMs": 8613.20000000298
+        },
+        {
+          "id": "command:d24d050e-75ca-4e88-bbbf-e924cc897593",
+          "type": "military.recruit",
+          "start": 44419.90000000596,
+          "postedAt": 44422.79999999702,
+          "receivedAt": 44460.90000000596,
+          "ackAt": 45742.10000000894,
+          "status": "committed",
+          "renderAt": 46212.10000000894,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1322.2000000029802,
+          "renderMs": 1792.2000000029802
+        },
+        {
+          "id": "command:9e5b9676-4303-4001-90a5-c44cf8a8e0f8",
+          "type": "research.start",
+          "start": 50651.40000000596,
+          "postedAt": 50653.40000000596,
+          "receivedAt": 50688.79999999702,
+          "ackAt": 51579,
+          "status": "committed",
+          "renderAt": 51807.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 927.5999999940395,
+          "renderMs": 1156.0999999940395
+        },
+        {
+          "id": "command:f75c18e2-181b-4709-b98e-3da59e708d5e",
+          "type": "army.dispatch",
+          "start": 56432.60000000894,
+          "postedAt": 56435.90000000596,
+          "receivedAt": 56449.70000000298,
+          "ackAt": 57347.79999999702,
+          "status": "committed",
+          "renderAt": 57477.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 915.1999999880791,
+          "renderMs": 1044.8999999910593
+        },
+        {
+          "id": "command:f2378af2-009e-4e10-8525-5004c2583a49",
+          "type": "city.rename",
+          "start": 60995.90000000596,
+          "postedAt": 61000.20000000298,
+          "receivedAt": 61026.40000000596,
+          "ackAt": 61872.90000000596,
+          "status": "committed",
+          "renderAt": 62010.40000000596,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 877,
+          "renderMs": 1014.5
+        },
+        {
+          "id": "command:2f0b2b2e-5402-41df-b49b-6b8f497074c8",
+          "type": "field.upgrade",
+          "start": 64971.20000000298,
+          "postedAt": 64974.10000000894,
+          "receivedAt": 65018,
+          "ackAt": 66121.70000000298,
+          "status": "committed",
+          "renderAt": 66262.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1150.5,
+          "renderMs": 1291.2999999970198
+        },
+        {
+          "id": "command:77f06dff-1adc-41da-89bc-759046a0acd7",
+          "type": "military.recruit",
+          "start": 69970.29999999702,
+          "postedAt": 69972.40000000596,
+          "receivedAt": 70015.29999999702,
+          "ackAt": 71179.60000000894,
+          "status": "committed",
+          "renderAt": 71611.20000000298,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1209.300000011921,
+          "renderMs": 1640.9000000059605
+        },
+        {
+          "id": "command:afbfff29-77a3-4ca5-b0a3-4fff4327d7bc",
+          "type": "research.start",
+          "start": 76216.10000000894,
+          "postedAt": 76218.70000000298,
+          "receivedAt": 76254.40000000596,
+          "ackAt": 77043.79999999702,
+          "status": "committed",
+          "renderAt": 77209.79999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 827.6999999880791,
+          "renderMs": 993.6999999880791
+        },
+        {
+          "id": "command:6f409220-ef79-42f9-b15b-54be7776b523",
+          "type": "army.dispatch",
+          "start": 81797.40000000596,
+          "postedAt": 81799.10000000894,
+          "receivedAt": 81815.90000000596,
+          "ackAt": 82554.70000000298,
+          "status": "committed",
+          "renderAt": 82693.10000000894,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 757.2999999970198,
+          "renderMs": 895.7000000029802
+        },
+        {
+          "id": "command:4b94b2c3-a5b8-4051-a806-c92012c866b1",
+          "type": "city.rename",
+          "start": 85706.70000000298,
+          "postedAt": 85717.29999999702,
+          "receivedAt": 85794.40000000596,
+          "ackAt": 86793.79999999702,
+          "status": "committed",
+          "renderAt": 86926,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 1087.0999999940395,
+          "renderMs": 1219.2999999970198
+        },
+        {
+          "id": "command:81015ba9-c374-462b-a551-baa98f84a40e",
+          "type": "field.upgrade",
+          "start": 89591.70000000298,
+          "postedAt": 89597.29999999702,
+          "receivedAt": 89802.90000000596,
+          "ackAt": 90767.90000000596,
+          "status": "committed",
+          "renderAt": 90892.60000000894,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1176.2000000029802,
+          "renderMs": 1300.9000000059605
+        },
+        {
+          "id": "command:a85a00d6-c315-4d63-8e66-c4eafb7f41d5",
+          "type": "military.recruit",
+          "start": 94121.40000000596,
+          "postedAt": 94125.70000000298,
+          "receivedAt": 94150.90000000596,
+          "ackAt": 95260.60000000894,
+          "status": "committed",
+          "renderAt": 95725.60000000894,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1139.2000000029802,
+          "renderMs": 1604.2000000029802
+        },
+        {
+          "id": "command:4edba8bc-5382-4919-863b-d0a342fac3ff",
+          "type": "research.start",
+          "start": 99348.79999999702,
+          "postedAt": 99351.70000000298,
+          "receivedAt": 99386.10000000894,
+          "ackAt": 100197.40000000596,
+          "status": "committed",
+          "renderAt": 100342.20000000298,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 848.6000000089407,
+          "renderMs": 993.4000000059605
+        },
+        {
+          "id": "command:8040cf8c-1b0c-420d-9c49-7112eb3f29c3",
+          "type": "army.dispatch",
+          "start": 104534.20000000298,
+          "postedAt": 104536.79999999702,
+          "receivedAt": 104551.60000000894,
+          "ackAt": 105429.40000000596,
+          "status": "committed",
+          "renderAt": 105575.29999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 895.2000000029802,
+          "renderMs": 1041.0999999940395
+        }
+      ],
+      "invalid": []
+    },
+    {
+      "speed": 50,
+      "mobile": true,
+      "hours": 168,
+      "status": "PASS",
+      "samples": [
+        {
+          "id": "command:1f2b5f91-2b27-46ce-9d15-3bc40b93ae84",
+          "type": "city.rename",
+          "start": 6192.5,
+          "postedAt": 6195.70000000298,
+          "receivedAt": 6384.100000008941,
+          "ackAt": 7054.600000008941,
+          "status": "committed",
+          "renderAt": 7219.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 862.1000000089407,
+          "renderMs": 1027
+        },
+        {
+          "id": "command:c3b1fb5e-7bd1-4023-a77c-744fb914bed6",
+          "type": "field.upgrade",
+          "start": 11793.79999999702,
+          "postedAt": 11796.40000000596,
+          "receivedAt": 11813.29999999702,
+          "ackAt": 12512.90000000596,
+          "status": "committed",
+          "renderAt": 12701.79999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 719.1000000089407,
+          "renderMs": 908
+        },
+        {
+          "id": "command:21cbb7ce-75ef-4543-9147-ddb3719983a7",
+          "type": "military.recruit",
+          "start": 16444.29999999702,
+          "postedAt": 16454.60000000894,
+          "receivedAt": 16482.60000000894,
+          "ackAt": 17629.90000000596,
+          "status": "committed",
+          "renderAt": 18458.10000000894,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1185.6000000089407,
+          "renderMs": 2013.800000011921
+        },
+        {
+          "id": "command:d33ff179-3e63-480a-99d1-17e0ecd45877",
+          "type": "research.start",
+          "start": 25155.79999999702,
+          "postedAt": 25177.60000000894,
+          "receivedAt": 25473.20000000298,
+          "ackAt": 26752.90000000596,
+          "status": "committed",
+          "renderAt": 26936.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 1597.1000000089407,
+          "renderMs": 1780.7000000029802
+        },
+        {
+          "id": "command:fdc40098-60fd-4c81-af7e-72c5010a3a8d",
+          "type": "army.dispatch",
+          "start": 31794,
+          "postedAt": 31800.40000000596,
+          "receivedAt": 31815.5,
+          "ackAt": 32674.70000000298,
+          "status": "committed",
+          "renderAt": 32869,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 880.7000000029802,
+          "renderMs": 1075
+        },
+        {
+          "id": "command:f97f5fdb-7755-4485-a1d3-addfb84c9364",
+          "type": "city.rename",
+          "start": 37342.90000000596,
+          "postedAt": 37344.40000000596,
+          "receivedAt": 37359.10000000894,
+          "ackAt": 38076.60000000894,
+          "status": "committed",
+          "renderAt": 38316.79999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 733.7000000029802,
+          "renderMs": 973.8999999910593
+        },
+        {
+          "id": "command:cae0fc3b-e316-4cc3-815a-5fadc5f907ae",
+          "type": "field.upgrade",
+          "start": 42127.90000000596,
+          "postedAt": 42134,
+          "receivedAt": 42221.79999999702,
+          "ackAt": 43207,
+          "status": "committed",
+          "renderAt": 43349.90000000596,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1079.0999999940395,
+          "renderMs": 1222
+        },
+        {
+          "id": "command:bbe2b615-67a0-41df-a703-0893f88f6264",
+          "type": "military.recruit",
+          "start": 47341.40000000596,
+          "postedAt": 47344.20000000298,
+          "receivedAt": 47387,
+          "ackAt": 48483.29999999702,
+          "status": "committed",
+          "renderAt": 49059,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1141.8999999910593,
+          "renderMs": 1717.5999999940395
+        },
+        {
+          "id": "command:825ee588-718b-45f4-8cae-dcc1fcbed55d",
+          "type": "research.start",
+          "start": 56254.10000000894,
+          "postedAt": 56256.20000000298,
+          "receivedAt": 56282.5,
+          "ackAt": 56994.60000000894,
+          "status": "committed",
+          "renderAt": 57215.79999999702,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 740.5,
+          "renderMs": 961.6999999880791
+        },
+        {
+          "id": "command:5411efe1-26e9-4eec-8117-615687e987ba",
+          "type": "army.dispatch",
+          "start": 63309.5,
+          "postedAt": 63314.70000000298,
+          "receivedAt": 63426.90000000596,
+          "ackAt": 64441.20000000298,
+          "status": "committed",
+          "renderAt": 64617,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 1131.7000000029802,
+          "renderMs": 1307.5
+        },
+        {
+          "id": "command:fc1542a0-3abd-4a82-8576-cafbe2a1dfe7",
+          "type": "city.rename",
+          "start": 68591.79999999702,
+          "postedAt": 68598.70000000298,
+          "receivedAt": 68832.90000000596,
+          "ackAt": 69816.40000000596,
+          "status": "committed",
+          "renderAt": 69948.60000000894,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "rename",
+          "ackMs": 1224.6000000089407,
+          "renderMs": 1356.800000011921
+        },
+        {
+          "id": "command:14a9f7cc-2b5a-4234-bb07-e9be2c7e3375",
+          "type": "field.upgrade",
+          "start": 73775,
+          "postedAt": 73777.79999999702,
+          "receivedAt": 73812.29999999702,
+          "ackAt": 74964.79999999702,
+          "status": "committed",
+          "renderAt": 75099,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "construction",
+          "ackMs": 1189.7999999970198,
+          "renderMs": 1324
+        },
+        {
+          "id": "command:cb6d6728-7774-43f2-9358-36b2b1acd2bf",
+          "type": "military.recruit",
+          "start": 79110.40000000596,
+          "postedAt": 79112.40000000596,
+          "receivedAt": 79889,
+          "ackAt": 80260.79999999702,
+          "status": "committed",
+          "renderAt": 80895.20000000298,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "training",
+          "ackMs": 1150.3999999910593,
+          "renderMs": 1784.7999999970198
+        },
+        {
+          "id": "command:15985a08-6f2d-4e53-880d-0d0fabe9278b",
+          "type": "research.start",
+          "start": 88490,
+          "postedAt": 88493.10000000894,
+          "receivedAt": 88524,
+          "ackAt": 89325.70000000298,
+          "status": "committed",
+          "renderAt": 89547.90000000596,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "research",
+          "ackMs": 835.7000000029802,
+          "renderMs": 1057.9000000059605
+        },
+        {
+          "id": "command:58b18853-8314-4234-9423-b7433fdc7089",
+          "type": "army.dispatch",
+          "start": 94396.29999999702,
+          "postedAt": 94400.29999999702,
+          "receivedAt": 94432.60000000894,
+          "ackAt": 95683.90000000596,
+          "status": "committed",
+          "renderAt": 95864.5,
+          "durableReceipt": true,
+          "agents": 99,
+          "family": "dispatch",
+          "ackMs": 1287.6000000089407,
+          "renderMs": 1468.2000000029802
+        }
+      ],
+      "invalid": []
+    }
+  ],
+  "errors": [],
+  "method": "Real production controls; final pointerdown to native durable receipt and committed UI. Same checkpoint restored before every sample. Only player producers/stock/population/troops are explicit synthetic prerequisites; no AI decision/event frequency, number, orders or traits are changed.",
+  "inputs": [
+    {
+      "speed": 1,
+      "sha256": "88c55c4665873de3c99205a6047080b096f902c8b063cd1bb3e83755b53c5051",
+      "bytes": 5287838,
+      "agents": 99
+    },
+    {
+      "speed": 10,
+      "sha256": "2d732d9300e712e77c3e0cd6770ccf0499ccc2cef7628067d2782c2958143772",
+      "bytes": 5287839,
+      "agents": 99
+    },
+    {
+      "speed": 50,
+      "sha256": "a17eb7a7332f6040d2079d56a56eb2d1a3e3e5b34ea68b209a36cb3bc7e666e1",
+      "bytes": 5287839,
+      "agents": 99
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-19 Asia/Taipei",
+  "remoteMain": "06c4cb93779f1f679bb77470515fd8aee1c42de9",
+  "remotePR21Head": "d79cc579b2a4478a5233d1fa53388ff044308f58",
+  "demoReference": "44728f749044c1a5f1ad4fe47f1eccc391c7d9b2",
+  "recoveredUnpublishedUIFiles": [],
+  "unpublishedBranchCommits": [],
+  "newUICommit": null,
+  "formalPresentationDeltaFromMain": [],
+  "untrackedBeforeMainTestMatchesPR": true,
+  "sourceChangesThisTask": [],
+  "aiRuntimeSHA256": {
+    "src/game/formal/aiAttackStrategies.ts": "05dd5c5f5ac6eac6f4a96b7e7bf22f59ba836e03b76e7c943c4662ff0a4c4413",
+    "src/game/formal/aiActions.ts": "5f80cc4ebe406bfdb694a3f1b2719eaca72338b599149162198161f3bcc0a835",
+    "src/game/formal/autonomy.ts": "179693e2de92a0a493525c0b9758868de0e1e762b5421c0d68a621a214795045"
+  },
+  "demoScreenshots": 14,
+  "localProtectionDirectory": "/workspace/research/ui-recovery-20261019",
+  "conflicts": [],
+  "pending": {
+    "P0-C-10": "No unpublished implementation found; reference comparison only",
+    "P0-C-11": "No unpublished implementation found; radius5 current Formal rendering remains",
+    "P0-C-12": "No unpublished implementation found; description settings remain",
+    "P0-C-13": "No unpublished implementation found; DEMO ranking not implemented in Formal; military-information authority pending",
+    "cityArmyUI": "Existing PR9 UI is already in main/PR21; no additional unpublished DEMO parity work found"
+  }
+}

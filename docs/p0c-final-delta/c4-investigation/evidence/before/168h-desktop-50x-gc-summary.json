@@ -1,0 +1,561 @@
+{
+  "method": "CDP Chrome monotonic trace clock; derived GC events only, no forced GC; pid/tid are preserved and durations are nested, not summed blindly.",
+  "limitation": "No epoch/monotonic mapping was captured for these initial runs; GC cannot be assigned to a command or treated as its exclusive CPU time. Original derived numeric events retained in research. No raw Chrome trace is published.",
+  "byName": {
+    "V8.GC_HEAP_EXTERNAL_PROLOGUE": {
+      "count": 334,
+      "totalInclusiveMs": 12.538,
+      "maxMs": 1.855
+    },
+    "MinorGC": {
+      "count": 307,
+      "totalInclusiveMs": 3024.17,
+      "maxMs": 42.858
+    },
+    "V8.GC_HEAP_PROLOGUE": {
+      "count": 332,
+      "totalInclusiveMs": 1.339,
+      "maxMs": 0.311
+    },
+    "V8.GCScavenger": {
+      "count": 307,
+      "totalInclusiveMs": 2958.723,
+      "maxMs": 42.145
+    },
+    "V8.GC_TIME_TO_SAFEPOINT": {
+      "count": 329,
+      "totalInclusiveMs": 102.738,
+      "maxMs": 34.522
+    },
+    "V8.GC_SCAVENGER": {
+      "count": 307,
+      "totalInclusiveMs": 2837.358,
+      "maxMs": 40.585
+    },
+    "V8.GC_HEAP_PROLOGUE_SAFEPOINT": {
+      "count": 312,
+      "totalInclusiveMs": 0.424,
+      "maxMs": 0.022
+    },
+    "V8.GC_SCAVENGER_SCAVENGE": {
+      "count": 307,
+      "totalInclusiveMs": 2827.138,
+      "maxMs": 40.565
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY": {
+      "count": 307,
+      "totalInclusiveMs": 68.556,
+      "maxMs": 29.521
+    },
+    "V8.GC_SCAVENGER_BACKGROUND_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": {
+      "count": 24,
+      "totalInclusiveMs": 0.8200000000000001,
+      "maxMs": 0.084
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES": {
+      "count": 307,
+      "totalInclusiveMs": 27.512,
+      "maxMs": 0.783
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+      "count": 307,
+      "totalInclusiveMs": 2522.273,
+      "maxMs": 36.799
+    },
+    "V8.GC_SCAVENGER_BACKGROUND_SCAVENGE_PARALLEL": {
+      "count": 1053,
+      "totalInclusiveMs": 4404.286,
+      "maxMs": 36.704
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_ROOTS": {
+      "count": 307,
+      "totalInclusiveMs": 138.183,
+      "maxMs": 9.006
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+      "count": 439,
+      "totalInclusiveMs": 1779.225,
+      "maxMs": 35.924
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_PROCESS": {
+      "count": 307,
+      "totalInclusiveMs": 14.745000000000001,
+      "maxMs": 1.695
+    },
+    "V8.GC_SCAVENGER_TRACED_HANDLES_RESET_PARALLEL": {
+      "count": 250,
+      "totalInclusiveMs": 2.952,
+      "maxMs": 0.262
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_FINALIZE": {
+      "count": 307,
+      "totalInclusiveMs": 72.115,
+      "maxMs": 26.82
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_RESTORE_AND_QUARANTINE_PINNED": {
+      "count": 307,
+      "totalInclusiveMs": 8.471,
+      "maxMs": 0.342
+    },
+    "V8.GC_SCAVENGER_FREE_REMEMBERED_SET": {
+      "count": 306,
+      "totalInclusiveMs": 5.651,
+      "maxMs": 0.255
+    },
+    "V8.GC_SCAVENGER_RESIZE_NEW_SPACE": {
+      "count": 302,
+      "totalInclusiveMs": 0.68,
+      "maxMs": 0.084
+    },
+    "V8.GC_HEAP_EPILOGUE_SAFEPOINT": {
+      "count": 334,
+      "totalInclusiveMs": 14.985,
+      "maxMs": 5.074
+    },
+    "V8.GC_HEAP_EPILOGUE": {
+      "count": 334,
+      "totalInclusiveMs": 1.781,
+      "maxMs": 0.29
+    },
+    "V8.GC_HEAP_DUMP_STATISTICS": {
+      "count": 305,
+      "totalInclusiveMs": 0.764,
+      "maxMs": 0.332
+    },
+    "V8.GC_HEAP_EXTERNAL_EPILOGUE": {
+      "count": 334,
+      "totalInclusiveMs": 0.964,
+      "maxMs": 0.103
+    },
+    "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": {
+      "count": 245,
+      "totalInclusiveMs": 3.561,
+      "maxMs": 0.171
+    },
+    "V8.GC_SCAVENGER_SWEEP_ARRAY_BUFFERS": {
+      "count": 73,
+      "totalInclusiveMs": 1.123,
+      "maxMs": 0.043
+    },
+    "V8.GC_MINOR_MS_BACKGROUND_SWEEPING": {
+      "count": 73,
+      "totalInclusiveMs": 0.665,
+      "maxMs": 0.062
+    },
+    "V8.GC_BACKGROUND_YOUNG_ARRAY_BUFFER_SWEEP": {
+      "count": 73,
+      "totalInclusiveMs": 0.41500000000000004,
+      "maxMs": 0.035
+    },
+    "V8.GC_SCAVENGER_COMPLETE_SWEEP_ARRAY_BUFFERS": {
+      "count": 65,
+      "totalInclusiveMs": 1.044,
+      "maxMs": 0.124
+    },
+    "V8.GC_BACKGROUND_SAFEPOINT": {
+      "count": 31,
+      "totalInclusiveMs": 333.16,
+      "maxMs": 42.164
+    },
+    "V8.GCDeoptMarkedAllocationSites": {
+      "count": 17,
+      "totalInclusiveMs": 0.906,
+      "maxMs": 0.156
+    },
+    "V8.GCIncrementalMarkingStart": {
+      "count": 27,
+      "totalInclusiveMs": 55.169,
+      "maxMs": 7.159
+    },
+    "V8.GC_HEAP_ENSURE_SWEEPING_COMPLETED": {
+      "count": 49,
+      "totalInclusiveMs": 10.749,
+      "maxMs": 1.749
+    },
+    "V8.GC_MC_INCREMENTAL_START": {
+      "count": 27,
+      "totalInclusiveMs": 49.404,
+      "maxMs": 5.525
+    },
+    "V8.GC_MC_INCREMENTAL_EXTERNAL_PROLOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 0.372,
+      "maxMs": 0.103
+    },
+    "V8.GC_MC_MARK_EMBEDDER_PROLOGUE": {
+      "count": 54,
+      "totalInclusiveMs": 12.476,
+      "maxMs": 3.822
+    },
+    "V8.GC_MC_MARK_ROOTS": {
+      "count": 81,
+      "totalInclusiveMs": 3.507,
+      "maxMs": 0.402
+    },
+    "V8.GC_MC_BACKGROUND_MARKING": {
+      "count": 242,
+      "totalInclusiveMs": 2325.774,
+      "maxMs": 78.14
+    },
+    "V8.GC_MC_INCREMENTAL_EXTERNAL_EPILOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 0.091,
+      "maxMs": 0.006
+    },
+    "V8.GCIncrementalMarking": {
+      "count": 2724,
+      "totalInclusiveMs": 454.158,
+      "maxMs": 26.65
+    },
+    "V8.GC_MC_INCREMENTAL": {
+      "count": 2724,
+      "totalInclusiveMs": 402.606,
+      "maxMs": 26.648
+    },
+    "V8.GC_MC_INCREMENTAL_EMBEDDER_TRACING": {
+      "count": 2495,
+      "totalInclusiveMs": 24.105,
+      "maxMs": 2.611
+    },
+    "V8.GCHandleGCRequest": {
+      "count": 13,
+      "totalInclusiveMs": 458.912,
+      "maxMs": 78.773
+    },
+    "MajorGC": {
+      "count": 27,
+      "totalInclusiveMs": 691.986,
+      "maxMs": 78.749
+    },
+    "V8.GCFinalizeMC": {
+      "count": 23,
+      "totalInclusiveMs": 624.284,
+      "maxMs": 78.43
+    },
+    "V8.GC_MARK_COMPACTOR": {
+      "count": 27,
+      "totalInclusiveMs": 678.704,
+      "maxMs": 78.422
+    },
+    "V8.GC_MC_PROLOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 0.419,
+      "maxMs": 0.042
+    },
+    "V8.GC_MC_MARK": {
+      "count": 27,
+      "totalInclusiveMs": 144.763,
+      "maxMs": 38.578
+    },
+    "V8.GC_MC_MARK_FINISH_INCREMENTAL": {
+      "count": 27,
+      "totalInclusiveMs": 0.137,
+      "maxMs": 0.021
+    },
+    "V8.GC_MC_MARK_CLIENT_HEAPS": {
+      "count": 27,
+      "totalInclusiveMs": 0.077,
+      "maxMs": 0.032
+    },
+    "V8.GC_MC_MARK_RETAIN_MAPS": {
+      "count": 27,
+      "totalInclusiveMs": 0.276,
+      "maxMs": 0.021
+    },
+    "V8.GC_MC_MARK_FULL_CLOSURE_PARALLEL": {
+      "count": 27,
+      "totalInclusiveMs": 136.53900000000002,
+      "maxMs": 38.276
+    },
+    "V8.GCMarkTransitiveClosureFixpoint": {
+      "count": 365,
+      "totalInclusiveMs": 91.88000000000001,
+      "maxMs": 36.404
+    },
+    "V8.GC_MC_MARK_WEAK_CLOSURE_EPHEMERON_MARKING": {
+      "count": 365,
+      "totalInclusiveMs": 91.111,
+      "maxMs": 36.396
+    },
+    "V8.GCReachTransitiveClosureWithEmbedder": {
+      "count": 381,
+      "totalInclusiveMs": 90.379,
+      "maxMs": 36.394
+    },
+    "V8.GC_MC_MARK_EMBEDDER_TRACING": {
+      "count": 361,
+      "totalInclusiveMs": 2.742,
+      "maxMs": 1.281
+    },
+    "V8.GC_CONSERVATIVE_STACK_SCANNING": {
+      "count": 27,
+      "totalInclusiveMs": 0.059000000000000004,
+      "maxMs": 0.004
+    },
+    "V8.GC_MC_MARK_FULL_CLOSURE_SERIAL": {
+      "count": 27,
+      "totalInclusiveMs": 1.334,
+      "maxMs": 0.173
+    },
+    "V8.GC_MC_CLEAR": {
+      "count": 27,
+      "totalInclusiveMs": 28.813,
+      "maxMs": 3.68
+    },
+    "V8.GC_MC_CLEAR_JOIN_JOB": {
+      "count": 27,
+      "totalInclusiveMs": 27.187,
+      "maxMs": 3.652
+    },
+    "V8.GC_MC_CLEAR_WEAK_COLLECTIONS": {
+      "count": 27,
+      "totalInclusiveMs": 0.291,
+      "maxMs": 0.119
+    },
+    "V8.GC_MC_CLEAR_SWEEP_WASM_CODE_POINTER_TABLE": {
+      "count": 27,
+      "totalInclusiveMs": 0.109,
+      "maxMs": 0.026
+    },
+    "V8.GC_MC_CLEAR_MAPS": {
+      "count": 27,
+      "totalInclusiveMs": 1.9969999999999999,
+      "maxMs": 0.591
+    },
+    "V8.GC_MC_CLEAR_WEAK_LISTS": {
+      "count": 27,
+      "totalInclusiveMs": 1.268,
+      "maxMs": 0.446
+    },
+    "V8.GC_MC_CLEAR_JS_WEAK_REFERENCES": {
+      "count": 27,
+      "totalInclusiveMs": 0.082,
+      "maxMs": 0.026
+    },
+    "V8.GC_MC_CLEAR_FLUSHED_JS_FUNCTIONS": {
+      "count": 26,
+      "totalInclusiveMs": 0.075,
+      "maxMs": 0.015
+    },
+    "V8.GC_MC_CLEAR_SWEEP_JS_DISPATCH_TABLE": {
+      "count": 27,
+      "totalInclusiveMs": 1.29,
+      "maxMs": 0.173
+    },
+    "V8.GC_MC_CLEAR_WEAK_GLOBAL_HANDLES": {
+      "count": 27,
+      "totalInclusiveMs": 1.572,
+      "maxMs": 0.799
+    },
+    "V8.GC_MC_CLEAR_FLUSHABLE_BYTECODE": {
+      "count": 27,
+      "totalInclusiveMs": 0.131,
+      "maxMs": 0.066
+    },
+    "V8.GC_MC_CLEAR_SWEEP_TRUSTED_POINTER_TABLE": {
+      "count": 27,
+      "totalInclusiveMs": 1.25,
+      "maxMs": 0.37
+    },
+    "V8.GC_MC_CLEAR_EXTERNAL_STRING_TABLE": {
+      "count": 27,
+      "totalInclusiveMs": 3.399,
+      "maxMs": 0.705
+    },
+    "V8.GC_MC_CLEAR_SWEEP_EXTERNAL_POINTER_TABLE": {
+      "count": 27,
+      "totalInclusiveMs": 4.326,
+      "maxMs": 0.769
+    },
+    "V8.GC_MC_CLEAR_STRING_TABLE": {
+      "count": 216,
+      "totalInclusiveMs": 14.668,
+      "maxMs": 1.138
+    },
+    "V8.GC_MC_CLEAR_WEAK_REFERENCES_NON_TRIVIAL": {
+      "count": 27,
+      "totalInclusiveMs": 0.792,
+      "maxMs": 0.149
+    },
+    "V8.GC_MC_CLEAR_WEAK_REFERENCES_TRUSTED": {
+      "count": 27,
+      "totalInclusiveMs": 0.053,
+      "maxMs": 0.016
+    },
+    "V8.GC_MC_CLEAR_WEAK_REFERENCES_TRIVIAL": {
+      "count": 27,
+      "totalInclusiveMs": 3.913,
+      "maxMs": 0.469
+    },
+    "V8.GC_MC_SWEEP": {
+      "count": 177,
+      "totalInclusiveMs": 57.120000000000005,
+      "maxMs": 29.495
+    },
+    "V8.GC_MC_EVACUATE": {
+      "count": 54,
+      "totalInclusiveMs": 259.758,
+      "maxMs": 35.52
+    },
+    "V8.GC_MC_EVACUATE_PROLOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 1.481,
+      "maxMs": 0.212
+    },
+    "V8.GC_MC_EVACUATE_COPY": {
+      "count": 27,
+      "totalInclusiveMs": 194.238,
+      "maxMs": 33.086
+    },
+    "V8.GC_MC_EVACUATE_COPY_PARALLEL": {
+      "count": 24,
+      "totalInclusiveMs": 118.401,
+      "maxMs": 17.325
+    },
+    "V8.GC_MC_BACKGROUND_EVACUATE_COPY": {
+      "count": 53,
+      "totalInclusiveMs": 338.73900000000003,
+      "maxMs": 32.837
+    },
+    "V8.GC_MC_BACKGROUND_SWEEPING": {
+      "count": 245,
+      "totalInclusiveMs": 1049.224,
+      "maxMs": 56.349
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS": {
+      "count": 27,
+      "totalInclusiveMs": 61.081,
+      "maxMs": 4.39
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS_TO_NEW_ROOTS": {
+      "count": 27,
+      "totalInclusiveMs": 33.581,
+      "maxMs": 2.435
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS_CLIENT_HEAPS": {
+      "count": 27,
+      "totalInclusiveMs": 0.136,
+      "maxMs": 0.03
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS_SLOTS_MAIN": {
+      "count": 27,
+      "totalInclusiveMs": 21.439,
+      "maxMs": 3.207
+    },
+    "V8.GC_MC_BACKGROUND_EVACUATE_UPDATE_POINTERS": {
+      "count": 44,
+      "totalInclusiveMs": 23.248,
+      "maxMs": 1.707
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS_WEAK": {
+      "count": 27,
+      "totalInclusiveMs": 0.41500000000000004,
+      "maxMs": 0.171
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS_POINTER_TABLES": {
+      "count": 27,
+      "totalInclusiveMs": 4.865,
+      "maxMs": 0.748
+    },
+    "V8.GC_MC_EVACUATE_CLEAN_UP": {
+      "count": 27,
+      "totalInclusiveMs": 0.113,
+      "maxMs": 0.021
+    },
+    "V8.GC_MC_EVACUATE_EPILOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 2.44,
+      "maxMs": 0.599
+    },
+    "V8.GC_MC_SWEEP_NEW_LO": {
+      "count": 27,
+      "totalInclusiveMs": 0.112,
+      "maxMs": 0.019
+    },
+    "V8.GC_MC_EVACUATE_REBALANCE": {
+      "count": 27,
+      "totalInclusiveMs": 0.189,
+      "maxMs": 0.119
+    },
+    "V8.GC_MC_FINISH": {
+      "count": 27,
+      "totalInclusiveMs": 158.261,
+      "maxMs": 37.847
+    },
+    "V8.GC_MC_SWEEP_START_JOBS": {
+      "count": 27,
+      "totalInclusiveMs": 8.558,
+      "maxMs": 2.808
+    },
+    "V8.GC_MC_EPILOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 0.107,
+      "maxMs": 0.009
+    },
+    "V8.GC_HEAP_EXTERNAL_WEAK_GLOBAL_HANDLES": {
+      "count": 24,
+      "totalInclusiveMs": 0.488,
+      "maxMs": 0.127
+    },
+    "V8.GC_HEAP_EMBEDDER_TRACING_EPILOGUE": {
+      "count": 27,
+      "totalInclusiveMs": 8.285,
+      "maxMs": 2.578
+    },
+    "V8.GCPhantomHandleProcessingCallback": {
+      "count": 24,
+      "totalInclusiveMs": 18.71,
+      "maxMs": 7.307
+    },
+    "V8.GC_HEAP_EXTERNAL_SECOND_PASS_CALLBACKS": {
+      "count": 24,
+      "totalInclusiveMs": 11.567,
+      "maxMs": 7.297
+    },
+    "V8.GC_MC_COMPLETE_SWEEPING": {
+      "count": 25,
+      "totalInclusiveMs": 1.78,
+      "maxMs": 1.007
+    },
+    "V8.GC_SCAVENGER_BACKGROUND_TRACED_HANDLES_RESET_PARALLEL": {
+      "count": 18,
+      "totalInclusiveMs": 1.4469999999999998,
+      "maxMs": 0.951
+    },
+    "V8.GC_MC_FINISH_SWEEP_ARRAY_BUFFERS": {
+      "count": 19,
+      "totalInclusiveMs": 0.386,
+      "maxMs": 0.044
+    },
+    "V8.GC_BACKGROUND_FULL_ARRAY_BUFFER_SWEEP": {
+      "count": 19,
+      "totalInclusiveMs": 0.243,
+      "maxMs": 0.026
+    },
+    "V8.GC_BACKGROUND_UNPARK": {
+      "count": 29,
+      "totalInclusiveMs": 301.699,
+      "maxMs": 25.559
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS_PARALLEL": {
+      "count": 23,
+      "totalInclusiveMs": 17.636,
+      "maxMs": 3.157
+    },
+    "V8.GC_MC_COMPLETE_SWEEP_ARRAY_BUFFERS": {
+      "count": 17,
+      "totalInclusiveMs": 0.173,
+      "maxMs": 0.021
+    },
+    "V8.GC_MC_MARK_WEAK_CLOSURE_EPHEMERON_LINEAR": {
+      "count": 16,
+      "totalInclusiveMs": 0.133,
+      "maxMs": 0.024
+    },
+    "V8.GCFinalizeMCReduceMemory": {
+      "count": 4,
+      "totalInclusiveMs": 54.904,
+      "maxMs": 24.681
+    }
+  }
+}

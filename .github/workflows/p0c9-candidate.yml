@@ -1,0 +1,81 @@
+name: P0-C-9 Runtime natural-world matrix
+on:
+  push:
+    branches: [feat/p0-c-9-five-strategy-ai-20261019]
+    paths:
+      - src/game/formal/**
+      - scripts/p0c9-prepare.mjs
+      - scripts/p0c9-simulate.mjs
+      - scripts/p0c9-matrix.mjs
+      - .github/workflows/p0c9-candidate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - id: plan
+        shell: bash
+        run: node scripts/p0c4-ai-scope.mjs
+  simulate:
+    name: ${{ matrix.seed }} / ${{ matrix.hours }}h / ${{ matrix.policy }}
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Compile actual Formal Runtime with isolated observation boundaries
+        run: node scripts/p0c9-prepare.mjs artifacts/p0c9/compiled
+      - name: Run natural 99 AI world
+        env:
+          CASE_SEED: ${{ matrix.seed }}
+          CASE_HOURS: ${{ matrix.hours }}
+          CASE_POLICY: ${{ matrix.policy }}
+        run: node scripts/p0c9-simulate.mjs artifacts/p0c9/compiled "$CASE_SEED" "$CASE_HOURS" "$CASE_POLICY" artifacts/p0c9/results
+      - name: Print complete JSON and hourly CSV for connector-readable audit
+        if: always()
+        env:
+          CASE_SEED: ${{ matrix.seed }}
+          CASE_HOURS: ${{ matrix.hours }}
+          CASE_POLICY: ${{ matrix.policy }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const name=`${process.env.CASE_SEED}-${process.env.CASE_HOURS}-${process.env.CASE_POLICY}`;
+          for(const [ext,marker] of [['json','JSON'],['csv','CSV']]){
+            const p=`artifacts/p0c9/results/${name}.${ext}`;
+            if(!fs.existsSync(p)){console.log('P0C9_MISSING_RESULT '+p);continue;}
+            console.log(`P0C9_RESULT_${marker}_BEGIN`);
+            console.log(ext==='json'?JSON.stringify(JSON.parse(fs.readFileSync(p,'utf8'))):fs.readFileSync(p,'utf8'));
+            console.log(`P0C9_RESULT_${marker}_END`);
+          }
+          JS
+      - name: Preserve raw JSON, hourly CSV and provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0c9-${{ matrix.seed }}-${{ matrix.hours }}-${{ matrix.policy }}-${{ github.sha }}
+          path: |
+            artifacts/p0c9/results/
+            artifacts/p0c9/compiled/p0c9-harness.json
+            artifacts/p0c9/compiled/source-metadata.json
+          if-no-files-found: error

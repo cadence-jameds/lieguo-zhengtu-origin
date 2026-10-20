@@ -1,0 +1,77 @@
+{
+  "passed": 0,
+  "failed": 10,
+  "skipped": 0,
+  "cases": [
+    {
+      "name": "C5 rejects non-combat exile {\"scout\":8}",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected [ { …(16) } ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:8:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20"
+      ]
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"ram\":8}",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected [ { …(16) } ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:8:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20"
+      ]
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"catapult\":8}",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected [ { …(16) } ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:8:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20"
+      ]
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"baggage\":8}",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected [ { …(16) } ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:8:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20"
+      ]
+    },
+    {
+      "name": "C5 rejects non-combat exile {\"ram\":3,\"baggage\":3,\"scout\":4}",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected [ { …(16) } ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:8:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20"
+      ]
+    },
+    {
+      "name": "C5 mixed exile excludes scouts and codec sanitizes old invalid sites idempotently without revoking earned craftsmen",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected { militia: 7, scout: 11, ram: 5 } to deeply equal { militia: 7, ram: 5 }\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:9:269\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "C7 defender receives arrival alert but never attacker return intelligence",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected [ { …(9) } ] to deeply equal []\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:11:253\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "C7 defender counter-scout victory includes own survivors on failure/tie 5",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected '偵察失敗｜明州武陵關' to be '反偵察成功' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:12:172\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "C7 defender counter-scout victory includes own survivors on failure/tie 6",
+      "status": "failed",
+      "failure": [
+        "AssertionError: expected '偵察失敗｜明州武陵關' to be '反偵察成功' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:12:172\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "C7 persistence sanitizes legacy misdelivery at import, load, query and full export; legal attacker delivery remains",
+      "status": "failed",
+      "failure": [
+        "ZodError: [\n  {\n    \"code\": \"custom\",\n    \"message\": \"Native faction roles invalid\",\n    \"path\": []\n  }\n]\n    at Object.get error [as error] (file:///workspace/lieguo-zhengtu-origin/node_modules/zod/v3/types.js:39:31)\n    at ZodEffects.parse (file:///workspace/lieguo-zhengtu-origin/node_modules/zod/v3/types.js:114:22)\n    at validateFormalWorld (/workspace/lieguo-zhengtu-origin/src/game/formal/schema.ts:200:84)\n    at encodeSave (/workspace/lieguo-zhengtu-origin/src/game/formal/saveCodec.ts:13:17)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/p0cExileScout.test.ts:13:522\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)"
+      ]
+    }
+  ]
+}
