@@ -12,3 +12,7 @@
 UX-1 與 UX-2 各自從相同 main 建立，正式程式修改無交集。此 PR 不變更存檔模型、生成、種子、政治權屬或拓殖資格。
 
 尚待人工：實體 Android、GPU／低階硬體流暢度；未測玩家私人存檔。C4 延遲 Gate 仍 HOLD。未 Merge／Deploy，未宣告整體 Gate PASS。
+
+## 相同視野開／關成對繪圖量測
+
+同一 Production bundle、合成世界99 AI、固定(100,100)視野與縮放，各裝置以 off/on/on/off 順序、每段8次相同位移拖曳。64個Canvas CPU paint樣本完整保留在evidence/ux2-map-paint-paired.json。桌面各段 p50/p95：關10.8/18.8、開2.3/6.2、開1.4/2.1、關0.4/1.9ms；手機：關0.2/0.4、開0.6/6.4、開0.7/1.2、關0.2/1.5ms。首段有冷快取／同機負載，不能將較快的後段解釋為開啟標示使整個地圖加速。開啟的額外Canvas工作有限，關閉全部visited/misses=0；此量測不含GPU FPS、排程等待或整體互動延遲，也不是C4 AB/BA。
