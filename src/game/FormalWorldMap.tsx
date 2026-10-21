@@ -64,7 +64,7 @@ export default function FormalWorldMap({world,focusCityId,focusPoint,onSelect,on
    if(key!==backgroundKey){backgroundKey=key;bg.setTransform(dpr,0,0,dpr,0,0);drawTerrain(bg,g,cam,w,h,dpr,gesturing,flags.current.grid,terrainCache);sceneryCache.beginFrame();if(detail)sceneryCache.draw(bg,g,cam,w,h,dpr,gesturing);backgroundRedraws++;}
    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
    const specialBounds=mapQueryBounds(cam,w,h,{left:0,top:0,right:w,bottom:h});
-   const specialResult=visibleSpecialFields(g,specialBounds,screen,w,h,flags.current.special,specialCache.current);
+   const specialResult=visibleSpecialFields(g,specialBounds,screen,w,h,{...flags.current.special,enabled:flags.current.special.enabled&&Math.round(cam.z*100)>=100},specialCache.current);
    paintSpecialFields(ctx,specialResult.points,screen,'ground');
    if(flags.current.territory)drawPoliticalOverlay(ctx,politicalInfluence(g),screen,{width:w,height:h,zoom:cam.z});
    c.dataset.specialFields=JSON.stringify({visited:specialResult.visited,misses:specialResult.misses,markers:specialResult.points.length,lodHidden:specialResult.lodHidden,cacheSize:specialCache.current.size});
