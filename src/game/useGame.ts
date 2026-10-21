@@ -54,7 +54,7 @@ export function useGame(){
   }
   if(found!=='empty')throw new UpdateSafetyError('本機仍有未成功載入的戰役資料，請重新讀取或匯出原始備份後再確認。');return 'no-campaign';
  },[sync]);
- useEffect(()=>{let disposed=false;if(world){setCampaignStatus('active');return;}if(status==='loading'||status==='locked'){setCampaignStatus('checking');return;}setCampaignStatus('checking');void inspectCampaignStorage().then(found=>{if(!disposed)setCampaignStatus(found);},()=>{if(!disposed)setCampaignStatus('unreadable');});return()=>{disposed=true;};},[world,status]);
+ useEffect(()=>{let disposed=false;if(world){setCampaignStatus('active');return;}if(status==='loading'||status==='locked'){setCampaignStatus('checking');return;}setCampaignStatus('checking');void inspectCampaignStorage().then(found=>{if(!disposed)setCampaignStatus(found);},()=>{if(!disposed)setCampaignStatus('unreadable');});return()=>{disposed=true;};},[world,status,error]);
  const exportRawBackup=async()=>{try{const text=await exportCampaignArchive(),url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='列國征途-原始歷史備份.realm-save';a.click();URL.revokeObjectURL(url);}catch(e){setNotice(e instanceof Error?e.message:'無法匯出原始備份，原始資料保留。');}};
  const send=useCallback((r:RuntimeRequest)=>{if(worker.current){const requestId=crypto.randomUUID();
   if(r.type==='command'){if(commands.current.busy)return;commands.current.track(r.order.commandId);setError('');setNotice('指令受理中：已送出，等待引擎確認。');setFeedback({kind:'sending',text:'指令已送出，等待引擎受理。'});clearTimeout(commandTimer.current);commandTimer.current=setTimeout(()=>{if(commands.current.matches(r.order.commandId))setFeedback(uncertainFeedback);},30000);}
