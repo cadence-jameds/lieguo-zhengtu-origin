@@ -1,0 +1,2726 @@
+{
+  "stage": "after",
+  "source": "f1b95fd4b1994df42a81f95b438c6110f872352d",
+  "syntheticOnly": true,
+  "seed": 92049,
+  "physicalPhoneVerified": false,
+  "metric": "Canvas renderMs is main-thread paint CPU time, not GPU FPS or end-to-end command latency.",
+  "cases": [
+    {
+      "device": "desktop",
+      "status": "PASS",
+      "menu": "隱藏／顯示\n✥ 拖曳移動\n×\n顯示據點標示\n顯示特殊資源地塊\n九田型 · 9糧／9木／9石／9金\n十五田型 · 15糧／15木／15石／15金\n\n特殊資源地塊請放大後查看。",
+      "medium": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 4109,
+          "misses": 0,
+          "markers": 60,
+          "lodHidden": false,
+          "cacheSize": 7982
+        },
+        "renderMs": 3.9,
+        "width": 1256,
+        "height": 742,
+        "labels": [
+          {
+            "label": "9金",
+            "x": 1228,
+            "y": 41,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 1153,
+            "y": 108.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 1213,
+            "y": 168.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 1018,
+            "y": 131,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15金",
+            "x": 883,
+            "y": 138.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 1198,
+            "y": 296,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15石",
+            "x": 1243,
+            "y": 318.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 1123,
+            "y": 303.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 763,
+            "y": 153.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 733,
+            "y": 168.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 943,
+            "y": 288.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 733,
+            "y": 198.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 1063,
+            "y": 378.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 1078,
+            "y": 401,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 868,
+            "y": 341,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 928,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 418,
+            "y": 131,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15石",
+            "x": 433,
+            "y": 138.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15金",
+            "x": 1228,
+            "y": 536,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 628,
+            "y": 251,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 778,
+            "y": 326,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 868,
+            "y": 401,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 1018,
+            "y": 476,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 778,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15金",
+            "x": 1123,
+            "y": 558.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 1123,
+            "y": 573.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15糧",
+            "x": 208,
+            "y": 131,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 463,
+            "y": 258.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 838,
+            "y": 446,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 628,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 1108,
+            "y": 626,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 178,
+            "y": 191,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 208,
+            "y": 221,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 238,
+            "y": 236,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 403,
+            "y": 318.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 1168,
+            "y": 716,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 313,
+            "y": 303.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 838,
+            "y": 566,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 43,
+            "y": 198.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 343,
+            "y": 348.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 988,
+            "y": 671,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 1063,
+            "y": 723.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 208,
+            "y": 326,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 553,
+            "y": 528.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15金",
+            "x": 253,
+            "y": 393.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15糧",
+            "x": 673,
+            "y": 618.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15糧",
+            "x": 823,
+            "y": 708.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 163,
+            "y": 393.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 403,
+            "y": 513.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 388,
+            "y": 536,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 703,
+            "y": 708.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 508,
+            "y": 656,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 58,
+            "y": 446,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 43,
+            "y": 453.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 178,
+            "y": 521,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 448,
+            "y": 671,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 553,
+            "y": 738.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 403,
+            "y": 723.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 328,
+            "y": 716,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 193,
+            "y": 678.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          }
+        ],
+        "strokes": 3210
+      },
+      "close": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 1.4999999628026608
+        },
+        "special": {
+          "visited": 1005,
+          "misses": 0,
+          "markers": 15,
+          "lodHidden": false,
+          "cacheSize": 7982
+        },
+        "renderMs": 2,
+        "width": 1256,
+        "height": 742,
+        "labels": [
+          {
+            "label": "9石",
+            "x": 837.9999947923725,
+            "y": 26.000008555388035,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 1107.9999880968514,
+            "y": 311.00000148789354,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 1227.9999851210644,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 628,
+            "y": 131.00000595157428,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 927.9999925605322,
+            "y": 281.00000223184037,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 1107.9999880968514,
+            "y": 430.99999851210646,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 927.9999925605322,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 298.00000818341465,
+            "y": 146.0000055796009,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 1047.999989584745,
+            "y": 520.999996280266,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 628,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 178.0000111592018,
+            "y": 266.00000260381375,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 58.000014134988874,
+            "y": 326.00000111592016,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 478.0000037197339,
+            "y": 685.9999921885587,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 178.0000111592018,
+            "y": 655.9999929325056,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 148.00001190314856,
+            "y": 700.9999918165854,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          }
+        ],
+        "strokes": 3690
+      },
+      "allEightLabels": {
+        "15金": {
+          "label": "15金",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "15木": {
+          "label": "15木",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9糧": {
+          "label": "9糧",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9木": {
+          "label": "9木",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9石": {
+          "label": "9石",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "15石": {
+          "label": "15石",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9金": {
+          "label": "9金",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "15糧": {
+          "label": "15糧",
+          "x": 628,
+          "y": 371,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        }
+      },
+      "territory": {
+        "camera": {
+          "x": 300,
+          "y": 3450,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 4109,
+          "misses": 0,
+          "markers": 53,
+          "lodHidden": false,
+          "cacheSize": 8068
+        },
+        "renderMs": 2.7,
+        "width": 1256,
+        "height": 742,
+        "labels": [
+          {
+            "label": "15石",
+            "x": 1183,
+            "y": 33.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 1123,
+            "y": 153.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 793,
+            "y": 3.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 928,
+            "y": 71,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 703,
+            "y": 33.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 733,
+            "y": 48.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 1153,
+            "y": 273.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 1093,
+            "y": 258.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 1183,
+            "y": 303.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 763,
+            "y": 123.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 538,
+            "y": 41,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 853,
+            "y": 198.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 973,
+            "y": 273.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 778,
+            "y": 191,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 748,
+            "y": 191,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 898,
+            "y": 341,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15石",
+            "x": 358,
+            "y": 86,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 508,
+            "y": 161,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 958,
+            "y": 401,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 193,
+            "y": 33.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 763,
+            "y": 363.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15糧",
+            "x": 13,
+            "y": 3.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 298,
+            "y": 191,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 1003,
+            "y": 543.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 163,
+            "y": 138.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15金",
+            "x": 628,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 943,
+            "y": 528.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15石",
+            "x": 988,
+            "y": 551,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 868,
+            "y": 536,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15糧",
+            "x": 163,
+            "y": 198.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 508,
+            "y": 386,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 478,
+            "y": 401,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 688,
+            "y": 521,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 1003,
+            "y": 678.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 13,
+            "y": 198.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 478,
+            "y": 431,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 808,
+            "y": 611,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 823,
+            "y": 633.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 613,
+            "y": 573.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 673,
+            "y": 603.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 163,
+            "y": 363.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15石",
+            "x": 178,
+            "y": 371,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 373,
+            "y": 483.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 523,
+            "y": 558.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 613,
+            "y": 633.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 763,
+            "y": 708.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 523,
+            "y": 603.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 208,
+            "y": 491,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 583,
+            "y": 678.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 373,
+            "y": 603.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 148,
+            "y": 551,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 58,
+            "y": 536,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 88,
+            "y": 581,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          }
+        ],
+        "strokes": 3001
+      },
+      "rounds": [
+        {
+          "enabled": false,
+          "p50": 8.9,
+          "p95": 22.3,
+          "max": 22.3,
+          "samples": [
+            {
+              "renderMs": 1.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 18.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 22.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 13,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8068,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 14.1,
+          "p95": 29.7,
+          "max": 29.7,
+          "samples": [
+            {
+              "renderMs": 9.5,
+              "visited": 4158,
+              "misses": 49,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 16.7,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 29.7,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 16.6,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 14.1,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 16.7,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 19.4,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 17,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.4,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.9,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.9,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.4,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 11.5,
+          "p95": 13.4,
+          "max": 13.4,
+          "samples": [
+            {
+              "renderMs": 12,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.6,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.8,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.5,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.9,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.4,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.2,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 13.1,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.4,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 12.2,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 13.4,
+              "visited": 4158,
+              "misses": 0,
+              "markers": 56,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.6,
+              "visited": 4109,
+              "misses": 0,
+              "markers": 53,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": false,
+          "p50": 9.2,
+          "p95": 17,
+          "max": 17,
+          "samples": [
+            {
+              "renderMs": 9.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 17,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 13.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 8192,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        }
+      ],
+      "overview": {
+        "camera": {
+          "x": 0,
+          "y": 3830,
+          "z": 0.07916666666666666
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 8192
+        },
+        "renderMs": 2.9,
+        "width": 1256,
+        "height": 742,
+        "labels": [],
+        "strokes": 8539
+      }
+    },
+    {
+      "device": "mobile",
+      "status": "PASS",
+      "menu": "隱藏／顯示\n✥ 拖曳移動\n×\n顯示據點標示\n顯示特殊資源地塊\n九田型 · 9糧／9木／9石／9金\n十五田型 · 15糧／15木／15石／15金\n\n特殊資源地塊請放大後查看。",
+      "medium": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 1039,
+          "misses": 0,
+          "markers": 12,
+          "lodHidden": false,
+          "cacheSize": 2052
+        },
+        "renderMs": 1.9,
+        "width": 390,
+        "height": 582,
+        "labels": [
+          {
+            "label": "9石",
+            "x": 330,
+            "y": 73.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 300,
+            "y": 88.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 300,
+            "y": 118.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15石",
+            "x": 0,
+            "y": 58.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 195,
+            "y": 171,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 345,
+            "y": 246,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 345,
+            "y": 291,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 30,
+            "y": 178.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 195,
+            "y": 291,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 120,
+            "y": 448.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15糧",
+            "x": 240,
+            "y": 538.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9木",
+            "x": 75,
+            "y": 576,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          }
+        ],
+        "strokes": 741
+      },
+      "close": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 1.4999999628026608
+        },
+        "special": {
+          "visited": 253,
+          "misses": 0,
+          "markers": 2,
+          "lodHidden": false,
+          "cacheSize": 2052
+        },
+        "renderMs": 1.5,
+        "width": 390,
+        "height": 582,
+        "labels": [
+          {
+            "label": "9石",
+            "x": 195,
+            "y": 51.00000595157428,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 195,
+            "y": 291,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          }
+        ],
+        "strokes": 919
+      },
+      "allEightLabels": {
+        "15金": {
+          "label": "15金",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "15木": {
+          "label": "15木",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9糧": {
+          "label": "9糧",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9木": {
+          "label": "9木",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9石": {
+          "label": "9石",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "15石": {
+          "label": "15石",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "9金": {
+          "label": "9金",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        },
+        "15糧": {
+          "label": "15糧",
+          "x": 195,
+          "y": 291,
+          "font": "bold 14px system-ui",
+          "color": "#fff8e7"
+        }
+      },
+      "territory": {
+        "camera": {
+          "x": 300,
+          "y": 3450,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 1039,
+          "misses": 0,
+          "markers": 17,
+          "lodHidden": false,
+          "cacheSize": 2050
+        },
+        "renderMs": 1.4,
+        "width": 390,
+        "height": 582,
+        "labels": [
+          {
+            "label": "9糧",
+            "x": 330,
+            "y": 43.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 345,
+            "y": 111,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 315,
+            "y": 111,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9糧",
+            "x": 75,
+            "y": 81,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 330,
+            "y": 283.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15金",
+            "x": 195,
+            "y": 291,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 75,
+            "y": 306,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 45,
+            "y": 321,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 255,
+            "y": 441,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 45,
+            "y": 351,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 375,
+            "y": 531,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 390,
+            "y": 553.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "15木",
+            "x": 180,
+            "y": 493.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 240,
+            "y": 523.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9石",
+            "x": 90,
+            "y": 478.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 180,
+            "y": 553.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          },
+          {
+            "label": "9金",
+            "x": 90,
+            "y": 523.5,
+            "font": "bold 14px system-ui",
+            "color": "#fff8e7"
+          }
+        ],
+        "strokes": 896
+      },
+      "rounds": [
+        {
+          "enabled": false,
+          "p50": 7.5,
+          "p95": 19.9,
+          "max": 19.9,
+          "samples": [
+            {
+              "renderMs": 1.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 1.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 15.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 15,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 19.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 13.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2050,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 5.1,
+          "p95": 12.6,
+          "max": 12.6,
+          "samples": [
+            {
+              "renderMs": 12.6,
+              "visited": 1014,
+              "misses": 51,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.4,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.7,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.1,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.9,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.7,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.7,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.8,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.4,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 6.1,
+          "p95": 17.2,
+          "max": 17.2,
+          "samples": [
+            {
+              "renderMs": 17.2,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.3,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.2,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.1,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.4,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.6,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.2,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.5,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.7,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.3,
+              "visited": 1014,
+              "misses": 0,
+              "markers": 15,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.3,
+              "visited": 1039,
+              "misses": 0,
+              "markers": 17,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": false,
+          "p50": 4.3,
+          "p95": 12.7,
+          "max": 12.7,
+          "samples": [
+            {
+              "renderMs": 10.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 12.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 2114,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        }
+      ],
+      "overview": {
+        "camera": {
+          "x": 0,
+          "y": 3830,
+          "z": 0.022786458333333332
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 2114
+        },
+        "renderMs": 3.9,
+        "width": 390,
+        "height": 582,
+        "labels": [],
+        "strokes": 2605
+      }
+    }
+  ],
+  "errors": [],
+  "passed": 2,
+  "failed": 0
+}
