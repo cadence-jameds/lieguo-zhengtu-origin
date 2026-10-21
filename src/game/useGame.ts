@@ -98,7 +98,7 @@ export function useGame(){
      if(r.type==='switched'||r.type==='switchFailed'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'idle',text:''});}
      if(r.type==='switchFailed'){setError(r.text);changeStatus(r.world?'ready':'error');}else{setError('');changeStatus('ready');}
     }
-    if(r.type==='error'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'error',text:r.text});loading=false;clearWatchdog();if(r.requestId)finishSave(r.requestId,new Error(r.text));displayClock.stop();setError(r.text);changeStatus('error');}
+    if(r.type==='error'){const displayText=r.requestId&&saves.current.has(r.requestId)?'正式保存失敗，尚未取得寫入完成確認；本機戰役與回復點保留。':r.text;clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'error',text:displayText});loading=false;clearWatchdog();if(r.requestId)finishSave(r.requestId,new Error(r.text));displayClock.stop();setError(displayText);changeStatus('error');}
     if(r.type==='notice'&&(!commands.current.busy||r.error)){setNotice(r.text);setFeedback(r.error?{kind:'error',text:r.text}:{kind:'idle',text:''});}
     if(r.type==='loaded'&&r.offline&&r.offline.elapsedRealMs>30000)setOffline(r.offline);
     if(r.type==='loaded'&&r.recovered)setNotice('已原子回復最近的有效正式回復點。');
