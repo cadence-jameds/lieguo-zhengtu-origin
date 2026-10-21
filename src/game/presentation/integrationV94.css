@@ -7,3 +7,5 @@
 .quick-settings-backdrop{position:fixed;inset:0;z-index:1150;background:#0006;display:grid;place-items:center;padding:12px}
 .quick-settings-panel{width:min(420px,100%);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain}
 .setting-ticks{display:flex;justify-content:space-between;gap:4px;font-size:12px}.campaign-time-settings label{display:block;margin:16px 0 4px}.campaign-time-settings input[type=range]{display:block;width:100%;min-height:34px}.campaign-time-settings output{font-weight:bold}
+
+.quick-settings-toggle{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer}.formal-shell .quick-settings-toggle input[type=checkbox]{width:20px;height:20px;min-height:20px;flex:0 0 20px;margin:0}
