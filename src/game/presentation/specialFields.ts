@@ -27,17 +27,18 @@ export function visibleSpecialFields(world:FormalWorld,bounds:{minX:number;maxX:
  for(let y=minY;y<=maxY;y++)for(let x=minX;x<=maxX;x++){const p=screen({x,y});if(p.x<0||p.y<0||p.x>width||p.y>height)continue;visited++;if(!specialSettlementTile(world,x,y))continue;const s=cache.get(world.seed,x,y);if(s&&preferences[s.kind])points.push({x,y,...s});}
  return {points,visited,misses:cache.misses-before,lodHidden:false};
 }
-/** Screen-space badges keep readable text at medium zoom; no full-tile fill.
- * The map paints cities, armies and their labels afterwards, preserving priority. */
-export function paintSpecialFields(ctx:CanvasRenderingContext2D,points:readonly (Point&{kind:SpecialKind;label:string})[],screen:(p:Point)=>Point){
+/** Ground tint stays below political borders; text stays above selection glow.
+ * Cities, armies and existing map labels retain their original higher priority. */
+export function paintSpecialFields(ctx:CanvasRenderingContext2D,points:readonly (Point&{kind:SpecialKind;label:string})[],screen:(p:Point)=>Point,layer:'ground'|'labels'){
  ctx.save();ctx.font='700 14px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';
  for(const mark of points){
-  const color=SPECIAL_COLORS[mark.kind];ctx.strokeStyle=color+'b0';ctx.lineWidth=1.5;tilePath(ctx,mark,screen);ctx.stroke();
-  const q=screen(mark),width=Math.ceil(ctx.measureText(mark.label).width)+8;
-  ctx.fillStyle='#0b1714df';ctx.fillRect(q.x-width/2,q.y-10,width,20);
-  ctx.strokeStyle=color+'c0';ctx.lineWidth=1;ctx.strokeRect(q.x-width/2,q.y-10,width,20);
-  ctx.strokeStyle='#08120f';ctx.lineWidth=3;ctx.strokeText(mark.label,q.x,q.y);
-  ctx.fillStyle=color;ctx.fillText(mark.label,q.x,q.y);
+  if(layer==='ground'){
+   const color=SPECIAL_COLORS[mark.kind];tilePath(ctx,mark,screen);
+   ctx.fillStyle=color+'80';ctx.fill();ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.stroke();
+  }else{
+   const q=screen(mark);ctx.strokeStyle='#101910';ctx.lineWidth=3.5;ctx.strokeText(mark.label,q.x,q.y);
+   ctx.fillStyle='#fff8e7';ctx.fillText(mark.label,q.x,q.y);
+  }
  }
  ctx.restore();
 }
