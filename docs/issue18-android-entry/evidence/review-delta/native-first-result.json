@@ -1,0 +1,265 @@
+{
+  "source": "fce7c30 (namespace isolation fixture; see namespace-fixture.json)",
+  "browser": "154.0.8037.57",
+  "physicalAndroidVerified": false,
+  "versions": "Isolated synthetic 0.30.55/0.30.56 protocol labels; actual local candidate Production build 0.30.58 is unchanged.",
+  "deviceCondition": "Player device status cannot be read remotely. Real Worker error/empty, loading and busy conditions are reproduced separately.",
+  "cases": [
+    {
+      "name": "main-current-backup-remains-blocked",
+      "status": "PASS",
+      "mainSchema1RemainsWritable": true,
+      "backupNotMisclassifiedAsHistorical": true,
+      "rowsUnchanged": true
+    },
+    {
+      "name": "time2-old-world-confirm-cancel-export-update",
+      "status": "PASS",
+      "cancelNoActivation": true,
+      "archiveAllRowsEqual": true,
+      "historicalNotClaimedSaved": true,
+      "noWorldSave": true,
+      "historyAfterReloadEqual": true,
+      "trace": [
+        {
+          "type": "readonly-complete",
+          "at": 1792577815579.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577815580.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577815592.4
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577815605.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577815609.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577815658.0999
+        },
+        {
+          "type": "verify-release",
+          "at": 1792577819882
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577819925
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577819926.0999
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577819957.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577819962.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577819963.0999
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577819965
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792577819965.5
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792577820085.5999
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792577820094.7
+        }
+      ]
+    },
+    {
+      "name": "time2-legacy-only-backups",
+      "status": "PASS",
+      "isolatedLegacyTable": "backups",
+      "rowsUnchanged": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792577838873.0999
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577838954.5999
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577838954.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577838958.7998
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577838977.2998
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577838987
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577838990.0999
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792577838992.7998
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792577839120.5
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792577839168.4
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577841077.2998
+        }
+      ]
+    },
+    {
+      "name": "time2-legacy-only-BattleReports",
+      "status": "PASS",
+      "isolatedLegacyTable": "BattleReports",
+      "rowsUnchanged": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792577860254.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577860273.4
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577860273.8
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577860277.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577860285.0999
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577860288.8
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577860292.8
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792577860293.3
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792577860383.3
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792577860385.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577862466.1
+        }
+      ]
+    },
+    {
+      "name": "time2-both-current-corrupt-blocked",
+      "status": "PASS",
+      "bothNamespaces": true,
+      "corruptCurrentNotArchived": true,
+      "rowsUnchanged": true
+    },
+    {
+      "name": "time2-history-confirmation-rechecks-current",
+      "status": "PASS",
+      "staleConfirmationCannotBypassFreshCurrent": true,
+      "noActivation": true
+    },
+    {
+      "name": "time2-current-durable-success",
+      "status": "PASS",
+      "bothNamespaces": true,
+      "activeWorldStillRequiresDurableSave": true,
+      "legacyRowsUnchanged": true,
+      "fault": false,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792577904390.4001
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "fdd4307c-2ae4-482f-93cf-01d8ee264bce",
+          "at": 1792577904396
+        },
+        {
+          "type": "durable-ack",
+          "requestId": "fdd4307c-2ae4-482f-93cf-01d8ee264bce",
+          "at": 1792577904690.7
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792577904691.3
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792577904855
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792577904855.9001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792577907263.9001
+        }
+      ]
+    },
+    {
+      "name": "time2-current-durable-abort",
+      "status": "FAIL",
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/未取得保存完成確認/) to be visible\u001b[22m\n",
+      "trace": [],
+      "body": "目前城市\n長寧安平郡（49, 59）\n狄奧多西狄奧多西新城（226, 317）\n城堡\n人口\n22,001 / 30,400\n穀\n89,995\n-446 / 時\n木\n90,000\n+45 / 時\n石\n90,000\n+36 / 時\n金\n90,000\n+27 / 時\n10\n500\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n這是你的單機戰役\n\n存檔與戰役設定\n介面主題\n經典\n墨綠與金色\n深色\n深灰底與柔和灰白字\n淺色\n米白底與深色字\n此裝置會記住選擇；地圖、建築及敵我標記保持原有美術。\n開發者模式\n\n在目前戰役中測試。開啟後，你的城市資源持續補滿；建造、科技、人口與兵種前置照常運作。\n\n開啟開發者模式\n保存與搬移戰役\n\n快速存檔不含歷史紀事；完整備份包含紀事。本機進度不會自動同步。\n\n立即保存\n重新讀取\n快速存檔\n完整備份\n匯入存檔\n查看回復點\n戰役資料 · v0.30.55\n世界種子\n92049\n世界時間\n0時 00分\n速度\n1X\n文明\n中國\n世界\n384×384\n勢力／據點\n100／432\n返回首頁\n開始另一場戰役\n檢查更新\n\n新版下載尚未完成或更新元件失效；本次尚未執行保存。請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。\n\n保存進度並載入新版\n\n2026-10-21 · 建置 aaaaaaa · 本機待審預覽\n\n本機建置預覽\n本機尚未提交的變更，正式更新資訊以合併後建置為準。\n近期版本與過往紀錄\n‹\n▧\n地圖\n府\n城市\n⚑\n軍隊\n書\n戰報\n冊\n科技\n旗\n軍團\n印\n勢力\n政\n治理\n☰\n更多\n›\n新版可用 · 保存並更新"
+    },
+    {
+      "name": "time2-current-native-read-abort-blocked",
+      "status": "PASS",
+      "actualReadonlyTransactionAbort": true,
+      "noFalseHistorical": true,
+      "legacyRowsUnchanged": true
+    }
+  ],
+  "errors": [],
+  "passed": 8,
+  "failed": 1
+}

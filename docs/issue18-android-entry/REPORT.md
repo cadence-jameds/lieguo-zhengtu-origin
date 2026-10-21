@@ -1,5 +1,7 @@
 # Issue #18 Android 更新入口 Hotfix
 
+> 最新中控 Delta 見 [REVIEW-DELTA.md](REVIEW-DELTA.md)。以下保留首次 Hotfix 的原始驗證與限制；「任何非空資料一律阻擋」已補上核准 time2 唯讀歷史邊界的確認操作。
+
 基準 main：a9cac1822abc29ee0e1772646f73b4bbca598f41。PR #22 已合併，main CI 39546062283及Pages 39546062255均成功，正式為v0.30.56。施工位置 /workspace/lieguo-issue18，分支 fix/issue18-android-update-entry-20261021，獨立 Draft PR #24。PR #23仍為Draft，遠端HEAD d41473fd9a8e138d0efdc2ef593e6ac0196b63d9未修改；本機UX-1工作樹亦未修改。
 
 ## 根因、已知範圍與真機限制
