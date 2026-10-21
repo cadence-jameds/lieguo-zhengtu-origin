@@ -1,9 +1,11 @@
 import Dexie from 'dexie';
 import {FORMAL_DB_NAME} from './formal/versions';
 import {metadataSchema} from './formal/schema';
-export type StoredCampaignStatus='empty'|'stored'|'incompatible';
-// The second name is the historical production namespace. When UX-1 changes
-// FORMAL_DB_NAME, old rows must still prevent a false empty confirmation.
+export type StoredCampaignStatus='empty'|'stored'|'incompatible'|'historical';
+// Only the approved time2 namespace isolates schema1 as a read-only archive.
+// On main schema1 is still writable: its rows must NEVER take this path.
+const historicalName='lieguo-formal-stage2-schema1';
+const hasArchiveBoundary=()=>String(FORMAL_DB_NAME)==='lieguo-formal-stage2-time2';
 const databaseNames=()=>[...new Set([FORMAL_DB_NAME,'lieguo-formal-stage2-schema1'])];
 async function withExisting<T>(name:string,read:(db:Dexie)=>Promise<T>):Promise<T|undefined>{
  if(!await Dexie.exists(name))return;
@@ -11,14 +13,18 @@ async function withExisting<T>(name:string,read:(db:Dexie)=>Promise<T>):Promise<
 }
 /** Read only, including backups/reports/authority. No load, repair or migration. */
 export async function inspectCampaignStorage():Promise<StoredCampaignStatus>{
- let stored=false,incompatible=false;
+ let stored=false,incompatible=false,historical=false;
  for(const name of databaseNames())await withExisting(name,async db=>{
-  for(const table of db.tables)if(await table.count())stored=true;
+  let hasRows=false;for(const table of db.tables)if(await table.count())hasRows=true;
+  if(name===historicalName&&name!==String(FORMAL_DB_NAME)&&hasArchiveBoundary()){
+   historical ||= hasRows;return;
+  }
+  stored ||= hasRows;
   if(db.tables.some(t=>t.name==='saves')){const row=await db.table('saves').get('current'),metadata=row?.kind==='world'?row.data?.metadata:undefined;
    if(metadata&&typeof metadata.contentVersion==='string'&&!metadataSchema.safeParse(metadata).success)incompatible=true;
   }
  });
- return incompatible?'incompatible':stored?'stored':'empty';
+ return incompatible?'incompatible':stored?'stored':historical?'historical':'empty';
 }
 /** A historical archive is deliberately not an importable world envelope. */
 export async function exportCampaignArchive():Promise<string>{

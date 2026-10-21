@@ -73,7 +73,7 @@ export function activateWaiting(worker:ServiceWorker,container:ServiceWorkerCont
   try{worker.postMessage({type:'SKIP_WAITING'});}catch(error){finish(error instanceof Error?error:new Error('新版無法啟用。'));}
  });
 }
-export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
+export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
  const [text,setText]=useState(''),[outcome,setOutcome]=useState(''),[version,setVersion]=useState(''),[ready,setReady]=useState(false),[updating,setUpdating]=useState(false);
  const registration=useRef<ServiceWorkerRegistration|undefined>(undefined),checking=useRef(false),loading=useRef(false),latest=useRef(''),waiting=useRef(false),currentContent=useRef(false);
  const attemptEpoch=useRef(0);
@@ -111,8 +111,8 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
  },[check,embedded]);
  const update=async()=>{
   if(embedded||loading.current)return;attemptEpoch.current++;loading.current=true;setOutcome('');setUpdating(true);setText('正在準備新版…');
-  let phase:'prepare'|'save'|'activate'='prepare',saved=false,noCampaign=false;
-  const confirmSave=async()=>{if(saved||noCampaign)return;phase='save';setText('正在保存進度…');noCampaign=(await save())==='no-campaign';saved=!noCampaign;phase='prepare';};
+  let phase:'prepare'|'save'|'activate'='prepare',saved=false,noCampaign=false,historical=false;
+  const confirmSave=async()=>{if(saved||noCampaign||historical)return;phase='save';setText('正在確認戰役保存與歷史資料保全…');const result=await save();noCampaign=result==='no-campaign';historical=result==='historical';saved=!noCampaign&&!historical;phase='prepare';};
   try{
    let worker:ServiceWorker|undefined,selectedRegistration:ServiceWorkerRegistration|undefined,alreadyControlled=false;
    const target=targetRelease.current;
@@ -126,13 +126,13 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
    await confirmSave();
    // A concurrent installation can replace the verified worker during a durable save.
    if(worker&&!alreadyControlled&&(selectedRegistration?.waiting!==worker||!live(worker)))throw new Error('新版元件已變更，請重試。');
-   phase='activate';setText(saved?'本次保存已確認，正在載入新版…':'目前沒有開啟戰役，正在載入新版…');if(worker&&!alreadyControlled)await activateWaiting(worker,navigator.serviceWorker);
+   phase='activate';setText(saved?'本次保存已確認，正在載入新版…':historical?'歷史資料原樣保留，未執行戰役保存；正在載入新版…':'目前沒有開啟戰役，正在載入新版…');if(worker&&!alreadyControlled)await activateWaiting(worker,navigator.serviceWorker);
    const url=new URL(window.location.href);url.searchParams.set('_appUpdate',latest.current||String(Date.now()));window.location.replace(url.href);
   }catch(error){
    const timeout=error instanceof Error&&error.message.includes('逾時');
    // confirmSave also changes this value inside a callback awaited by refreshRegistration.
    const failedPhase=phase as 'prepare'|'save'|'activate';
-   setOutcome(error instanceof UpdateSafetyError?'更新已暫停：'+error.message:failedPhase==='prepare'?'新版下載尚未完成或更新元件失效；'+(saved?'本次保存已確認。':noCampaign?'目前沒有開啟戰役。':'本次尚未執行保存。')+'請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。':failedPhase==='save'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':(saved?'本次保存已確認；':noCampaign?'目前沒有開啟戰役；':'')+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留。請稍後重試；若仍失敗，請先匯出備份，再一般重新整理。');
+   setOutcome(error instanceof UpdateSafetyError?'更新已暫停：'+error.message:failedPhase==='prepare'?'新版下載尚未完成或更新元件失效；'+(saved?'本次保存已確認。':noCampaign?'目前沒有開啟戰役。':historical?'歷史資料原樣保留，未執行戰役保存。':'本次尚未執行保存。')+'請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。':failedPhase==='save'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':(saved?'本次保存已確認；':noCampaign?'目前沒有開啟戰役；':historical?'歷史資料原樣保留，未執行戰役保存；':'')+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留。請稍後重試；若仍失敗，請先匯出備份，再一般重新整理。');
   }
   finally{loading.current=false;setUpdating(false);}
  };

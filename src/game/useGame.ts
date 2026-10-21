@@ -26,7 +26,7 @@ export function useGame(){
  const [error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false);
  const [transition,setTransition]=useState(''),[synced,setSynced]=useState(0),[reportCount,setReportCount]=useState(0),[reportEpoch,setReportEpoch]=useState(0),[reportStatus,setReportStatus]=useState({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}),[reportData,setReportData]=useState<{page:number;filter:string;count:number}|null>(null);
  const [backups,setBackups]=useState<{id:number;at:number;label:string;time:number}[]>([]),[reports,setReports]=useState<FormalReport[]>([]);
- const worker=useRef<Worker|null>(null),current=useRef<FormalWorld|null>(null);
+ const worker=useRef<Worker|null>(null),current=useRef<FormalWorld|null>(null),writerHeld=useRef(false);
  const intelQueries=useRef(new Map<string,{resolve:(value:CityIntel)=>void;reject:(error:Error)=>void}>());
  const readCityIntel=useCallback((snapshot:FormalWorld,cityId:string,generation?:number)=>new Promise<CityIntel>((resolve,reject)=>{if(!worker.current){resolve({});return;}const queryId=crypto.randomUUID();intelQueries.current.set(queryId,{resolve,reject});worker.current.postMessage({type:'cityIntel',queryId,cityId,...(generation!==undefined?{generation}:{}),campaignId:snapshot.campaignId,reportCursor:snapshot.sequences.report,time:snapshot.time});}),[]);
  const rejectIntel=()=>{for(const q of intelQueries.current.values())q.reject(new Error('情報查詢已中斷。'));intelQueries.current.clear();};
@@ -40,12 +40,18 @@ export function useGame(){
   const timer=setTimeout(()=>{finishSave(requestId,new Error('保存等待逾時，請稍後再試。'));requests.current.finish(requestId);setBusy(requests.current.busy);},30000);
   saves.current.set(requestId,{resolve,reject,timer});requests.current.add(requestId);setBusy(true);worker.current.postMessage({type:'sync',requestId});
  }),[]);
- const prepareUpdate=useCallback(async():Promise<void|'no-campaign'>=>{
+ const prepareUpdate=useCallback(async(options?:{preserveHistory?:boolean}):Promise<void|'no-campaign'|'historical'>=>{
   const guard=()=>{const gate=updateEligibility({status:statusRef.current,hasWorld:!!current.current,busy:requests.current.busy||commands.current.busy,updating:false,campaignStatus:current.current?'active':'empty'});if(gate.disabled)throw new UpdateSafetyError(gate.reason);};
   guard();const campaign=current.current?.campaignId;
   if(campaign){await sync();if(current.current?.campaignId!==campaign||statusRef.current!=='ready')throw new UpdateSafetyError('戰役狀態已變更，請重新確認後再更新。');return;}
   let found:Awaited<ReturnType<typeof inspectCampaignStorage>>;try{found=await inspectCampaignStorage();setCampaignStatus(found);}catch{setCampaignStatus('unreadable');throw new UpdateSafetyError('無法讀取本機資料，已停止更新；原始資料保留，請重新讀取。');}
-  guard();if(current.current||found!=='empty')throw new UpdateSafetyError('本機仍有未成功載入的戰役資料，請重新讀取或匯出原始備份後再確認。');return 'no-campaign';
+  guard();if(current.current)throw new UpdateSafetyError('本機仍有未成功載入的戰役資料，請重新讀取或匯出原始備份後再確認。');
+  if(found==='historical'){
+   if(!writerHeld.current)throw new UpdateSafetyError('尚未取得當前戰役鎖定，無法確認歷史資料保全，已停止更新。');
+   if(!options?.preserveHistory)throw new UpdateSafetyError('請先確認保留唯讀歷史資料，再載入新版。');
+   return 'historical';
+  }
+  if(found!=='empty')throw new UpdateSafetyError('本機仍有未成功載入的戰役資料，請重新讀取或匯出原始備份後再確認。');return 'no-campaign';
  },[sync]);
  useEffect(()=>{let disposed=false;if(world){setCampaignStatus('active');return;}if(status==='loading'||status==='locked'){setCampaignStatus('checking');return;}setCampaignStatus('checking');void inspectCampaignStorage().then(found=>{if(!disposed)setCampaignStatus(found);},()=>{if(!disposed)setCampaignStatus('unreadable');});return()=>{disposed=true;};},[world,status]);
  const exportRawBackup=async()=>{try{const text=await exportCampaignArchive(),url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='列國征途-原始歷史備份.realm-save';a.click();URL.revokeObjectURL(url);}catch(e){setNotice(e instanceof Error?e.message:'無法匯出原始備份，原始資料保留。');}};
@@ -57,6 +63,7 @@ export function useGame(){
   if(!navigator.locks){changeStatus('error');setError('瀏覽器無法鎖定正式存檔，請使用支援 Web Locks 的瀏覽器。');return;}
   void withSaveLock(navigator.locks,abort.signal,async()=>{
    if(disposed)return;
+   writerHeld.current=true;
    const w=new Worker(new URL('./runtime.worker.ts',import.meta.url),{type:'module'});worker.current=w;
    let loading=true,lastEvents=-1,watchdog:ReturnType<typeof setTimeout>|undefined;
    const clearWatchdog=()=>{clearTimeout(watchdog);watchdog=undefined;};
@@ -115,9 +122,9 @@ export function useGame(){
     }
    };
    w.onerror=e=>{loading=false;clearWatchdog();rejectIntel();rejectSaves(new Error(e.message));requests.current.clear();commands.current.clear();displayClock.stop();setError(e.message);changeStatus('error');setBusy(false);};w.postMessage({type:'load',stateMode:'patch'});
-   await new Promise<void>(r=>{release=r;});w.terminate();worker.current=null;
-  },()=>{changeStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{if(!disposed){setError(String(e));changeStatus('error');}});
-  return()=>{clearTimeout(commandTimer.current);disposed=true;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
+   await new Promise<void>(r=>{release=r;});writerHeld.current=false;w.terminate();worker.current=null;
+  },()=>{changeStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{writerHeld.current=false;if(!disposed){setError(String(e));changeStatus('error');}});
+  return()=>{clearTimeout(commandTimer.current);disposed=true;writerHeld.current=false;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
  },[]);
  useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume'});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away'});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
  // Capture the rendered world: a Worker message may update current.current
