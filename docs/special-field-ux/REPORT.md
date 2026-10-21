@@ -37,7 +37,7 @@
 - 最終 Production Build（含 Typecheck）成功；Pages 路徑、PWA scope／fallback、Release Metadata 與 Worker 身分一致性通過。Pages 首次命令漏設必要 CI 環境變數，程式在檢查前拒絕；補正環境重驗通過，原失敗保留。
 - 原生 Chromium／IndexedDB／Worker 桌面與手機兩組 PASS，無 pageerror：八種 9／15 資源逐一置中、檢查文字、點擊實際格子並核對詳情資源數；七田無標示但實際詳情仍為七田；分類互斥、重新載入偏好與最愛 1/5 保留；帝國版圖疊圖及全區 LOD 正常。
 - 新本地偏好總開關預設關閉；原生 CDP 雙指縮放、單指拖曳及不誤開格子對話框 PASS，無 pageerror。Android 實機未驗。
-- 完整隔離 Regression 及 GitHub CI 結果見本 PR Checks 與後續補充記錄；未更改測試 timeout 或忽略失敗。
+- 完整隔離 Regression 及 GitHub CI 結果見本 PR Checks 與後續補充記錄；未更改測試 timeout 或忽略失敗。本地 runner 第一次因 sandbox 的 git 子程序 EPERM 在執行測試前中止，已使用容許子程序的環境執行相同原始 runner。
 
 ## 證據來源與重現
 
