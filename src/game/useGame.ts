@@ -17,6 +17,7 @@ import {governanceBase,type GovernanceBase} from './governanceAdmission';
 export function useGame(){
  const [world,setWorld]=useState<FormalWorld|null>(null),[status,setStatus]=useState<EngineStatus>('loading');
  const statusRef=useRef<EngineStatus>('loading');const changeStatus=(next:EngineStatus)=>{statusRef.current=next;setStatus(next);};
+ const [legacyAvailable,setLegacyAvailable]=useState(false);
  const [campaignStatus,setCampaignStatus]=useState<CampaignStatus>('checking');
  const [offline,setOffline]=useState<OfflineSummary|null>(null);
  const [loadPhase,setLoadPhase]=useState('啟動世界引擎'),[loadProgress,setLoadProgress]=useState<number|null>(null),[loadEvents,setLoadEvents]=useState(0);
@@ -53,7 +54,7 @@ export function useGame(){
   }
   if(found!=='empty')throw new UpdateSafetyError('本機仍有未成功載入的戰役資料，請重新讀取或匯出原始備份後再確認。');return 'no-campaign';
  },[sync]);
- useEffect(()=>{let disposed=false;if(world){setCampaignStatus('active');return;}if(status==='loading'||status==='locked'){setCampaignStatus('checking');return;}setCampaignStatus('checking');void inspectCampaignStorage().then(found=>{if(!disposed)setCampaignStatus(found);},()=>{if(!disposed)setCampaignStatus('unreadable');});return()=>{disposed=true;};},[world,status]);
+ useEffect(()=>{let disposed=false;if(world){setCampaignStatus('active');return;}if(status==='loading'||status==='locked'){setCampaignStatus('checking');return;}setCampaignStatus('checking');void inspectCampaignStorage().then(found=>{if(!disposed)setCampaignStatus(found);},()=>{if(!disposed)setCampaignStatus('unreadable');});return()=>{disposed=true;};},[world,status,error]);
  const exportRawBackup=async()=>{try{const text=await exportCampaignArchive(),url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='列國征途-原始歷史備份.realm-save';a.click();URL.revokeObjectURL(url);}catch(e){setNotice(e instanceof Error?e.message:'無法匯出原始備份，原始資料保留。');}};
  const send=useCallback((r:RuntimeRequest)=>{if(worker.current){const requestId=crypto.randomUUID();
   if(r.type==='command'){if(commands.current.busy)return;commands.current.track(r.order.commandId);setError('');setNotice('指令受理中：已送出，等待引擎確認。');setFeedback({kind:'sending',text:'指令已送出，等待引擎受理。'});clearTimeout(commandTimer.current);commandTimer.current=setTimeout(()=>{if(commands.current.matches(r.order.commandId))setFeedback(uncertainFeedback);},30000);}
@@ -90,7 +91,7 @@ export function useGame(){
      if(loading&&Number.isFinite(msg.events)&&msg.events>lastEvents){lastEvents=msg.events;setLoadEvents(lastEvents);arm();}
      return;
     }
-    const r=e.data;
+    const r=e.data;if(typeof r.legacyAvailable==='boolean')setLegacyAvailable(r.legacyAvailable);
     if(r.type==='cityIntel'){const q=intelQueries.current.get(r.queryId);if(q){intelQueries.current.delete(r.queryId);if(r.error)q.reject(new Error(r.error));else q.resolve(r.data);}return;}
     if(r.type==='requestDone'){finishSave(r.requestId,new Error('保存未完成，請稍後再試。'));requests.current.finish(r.requestId);setBusy(requests.current.busy);return;}
     if(r.type==='state'||r.type==='switched'||r.type==='switchFailed'){
@@ -126,10 +127,10 @@ export function useGame(){
   },()=>{changeStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{writerHeld.current=false;if(!disposed){setError(String(e));changeStatus('error');}});
   return()=>{clearTimeout(commandTimer.current);disposed=true;writerHeld.current=false;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
  },[]);
- useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume'});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away'});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
+ useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume',...(document.hidden?{visibilityAt:performance.timeOrigin+performance.now()}:{})});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away',visibilityAt:performance.timeOrigin+performance.now()});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
  // Capture the rendered world: a Worker message may update current.current
  // before React commits the new target level shown by a construction button.
  const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=world;if(!g||requests.current.busy||commands.current.busy)return;const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};send({type:'command',order,...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});},[send,world]);
  const importFile=async(file:File)=>{if(file.size>100*1024*1024){setError('存檔超過 100 MiB。');return;}send({type:'import',text:await file.text(),transitionId:crypto.randomUUID()});};
- return{campaignStatus,prepareUpdate,exportRawBackup,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
+ return{legacyAvailable,campaignStatus,prepareUpdate,exportRawBackup,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
 }

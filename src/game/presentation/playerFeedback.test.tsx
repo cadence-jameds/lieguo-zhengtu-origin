@@ -20,7 +20,7 @@ const w=createFormalWorld({campaign:'presentation-feedback',seed:90217}),c=w.cit
 it('six compact cards share one selected Formal detail panel and retain name dice, offline and speed modes',()=>{
  const html=renderToStaticMarkup(<Start busy={false} hasSave={false} onClose={noop} onStart={noop}/>);expect((html.match(/class="civ-option/g)??[])).toHaveLength(6);
  for(const id of CIV_ORDER){const d=civilizationDetails(id);expect(d.guard).toEqual(UNIT_CATALOG['guard.'+id]);const detail=renderToStaticMarkup(<CivilizationDetails civ={id}/>);expect(detail).toContain(d.guard.name);expect(detail).toContain(d.military);for(const tech of d.technologies)expect(detail).toContain(tech.name);expect(cultureName(id,0)).not.toBe(cultureName(id,1));}
- for(const value of [0,1,6,24,3,10,50])expect(html).toContain('value="'+value+'"');expect(html).toContain('依目前文明隨機產生領主名稱');
+ for(const value of [0,1,4,8,12,3,6,10,25])expect(html).toContain('value="'+value+'"');expect(html).toContain('依目前文明隨機產生領主名稱');
  expect((html.match(/class="civ-detail"/g)??[])).toHaveLength(1);const cards=[...html.matchAll(/<button[^>]*class="civ-option[^>]*>.*?<\/button>/g)].map(m=>m[0]);expect(cards).toHaveLength(6);for(const card of cards){expect(card).not.toContain('civ-detail');expect(card).not.toContain('專屬科技');}expect(html.indexOf('class="civ-detail"')).toBeGreaterThan(html.lastIndexOf('class="civ-option'));
  const source=readFileSync('src/game/presentation/Start.tsx','utf8');expect(source).toContain('onClick={()=>setCiv(id)}');expect(source).not.toMatch(/setCiv\(id\);?setName/);
 });

@@ -20,7 +20,7 @@ beforeEach(()=>{
 });
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();displayClock.stop();vi.restoreAllMocks();vi.unstubAllGlobals();});
 function make(age:0|1|2|3=0){
- world=createFormalWorld({campaign:'wall-ui-'+(++serial),seed:90217,speed:50});
+ world=createFormalWorld({campaign:'wall-ui-'+(++serial),seed:90217,speed:25});
  const c=world.cities[0];c.buildings.center=2;c.buildings['warehouse.0']=15;c.economy!.slots['warehouse.0']=0;c.stock={food:10000,wood:10000,stone:10000,gold:10000};world.factions[0].age=age;
 }
 function submit(payload:FormalCommand){

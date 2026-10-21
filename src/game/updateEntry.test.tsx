@@ -17,3 +17,12 @@ it('historical action is available but never supersedes active/error/loading/bus
 import {act} from 'react';
 import {createRoot} from 'react-dom/client';
 it('history confirmation offers export and cancellation, and only explicit confirmation requests preservation',async()=>{(globalThis as any).IS_REACT_ACT_ENVIRONMENT=true;const el=document.createElement('div');document.body.append(el);const root=createRoot(el),requests:(boolean|undefined)[]=[],exports:string[]=[];const render=async(disabled=false)=>act(async()=>root.render(<Home {...props} campaignStatus="historical" updateDisabled={disabled} updateLabel="保留歷史資料並載入新版" onExportRaw={()=>exports.push('raw')} onUpdate={confirmed=>requests.push(confirmed)}/>));const click=async(name:string,dialog=false)=>{const scope=dialog?el.querySelector('dialog')!:el;const b=[...scope.querySelectorAll('button')].find(b=>b.textContent===name)!;expect(b).toBeTruthy();await act(async()=>b.click());};try{await render();await click('保留歷史資料並載入新版');expect(requests).toEqual([]);expect(el.querySelector('dialog')?.textContent).toContain('這不是戰役保存完成確認');await click('匯出本機原始備份',true);expect(exports).toEqual(['raw']);expect(requests).toEqual([]);await click('取消',true);expect(el.querySelector('dialog')).toBeNull();await click('保留歷史資料並載入新版');await render(true);expect([...el.querySelectorAll('dialog button')].find(b=>b.textContent==='確認保留並載入新版')?.hasAttribute('disabled')).toBe(true);await render();await click('確認保留並載入新版',true);expect(requests).toEqual([true]);expect(el.querySelector('dialog')).toBeNull();}finally{await act(async()=>root.unmount());el.remove();delete (globalThis as any).IS_REACT_ACT_ENVIRONMENT;}});
+
+import {OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
+it('old-campaign new start is enabled only after the current namespace is confirmed empty and legacy is historical',()=>{
+ for(const campaignStatus of ['historical','checking','stored','incompatible','unreadable','empty'] as const){
+  const html=renderToStaticMarkup(<Home {...props} campaignStatus={campaignStatus} error={OLD_CAMPAIGN_MESSAGE} legacyAvailable onExportLegacy={()=>{}}/>),box=document.createElement('div');box.innerHTML=html;
+  const start=[...box.querySelectorAll('button')].find(b=>b.textContent==='開始新遊戲')!;
+  expect(start.disabled,campaignStatus).toBe(campaignStatus!=='historical');expect(html).toContain('匯出舊存檔備份');expect(html).not.toContain('尚無本機進度，請選擇開始新遊戲。');
+ }
+});

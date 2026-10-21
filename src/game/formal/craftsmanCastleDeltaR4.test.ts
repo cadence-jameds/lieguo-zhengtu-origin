@@ -13,7 +13,7 @@ import {enableAutonomy,economicChoices} from './autonomy';
 
 function prepared(same:boolean,ai=false){const w=craftWorld(),craft=w.extinction!.craftsmen[0];if(same)w.factions[0].civilizationId=craft.civilizationId;if(ai){w.factions[0].role='ai';w.factions[3].role='player';w.playerFactionId=w.factions[3].id;}return w;}
 const payload=(w:FormalWorld)=>({type:'craftsman.castle' as const,cityId:w.cities[0].id,craftsmanId:w.extinction!.craftsmen[0].id});
-it.each([1,10,50] as const)('D5 both civilizations and player/AI use zero-resource Lv1 at %sX, normal deadline and one consumption',async speed=>{
+it.each([1,10,25] as const)('D5 both civilizations and player/AI use zero-resource Lv1 at %sX, normal deadline and one consumption',async speed=>{
  for(const same of [false,true])for(const ai of [false,true]){
   let w=prepared(same,ai);w.speed=speed;w.cities[0].stock=zeroResources();const owner=w.cities[0].ownerFactionId,craft=w.extinction!.craftsmen[0],civ=craft.civilizationId;
   const command=order(w,payload(w),undefined,owner),sent=submitFormalOrder(w,command);expect(sent.ack?.status,sent.ack?.reason).toBe('committed');w=sent.world;

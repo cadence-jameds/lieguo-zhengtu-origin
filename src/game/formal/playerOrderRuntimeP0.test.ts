@@ -10,7 +10,7 @@ import {eventId,commandId} from './ids';
 import {playerOrderBase} from '../orderAdmission';
 import type {FormalWorld,FormalCommand,FormalOrder} from './model';
 
-const storage=vi.hoisted(()=>({loadWithOffline:vi.fn(),save:vi.fn(),reportStatus:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),reportAction:vi.fn(),readCityIntel:vi.fn()}));
+const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),reportStatus:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),reportAction:vi.fn(),readCityIntel:vi.fn()}));
 vi.mock('../persistence',()=>storage);
 let messages:any[],port:{postMessage:(r:unknown)=>void;onmessage:((e:{data:unknown})=>void)|null},initial:FormalWorld,now=0;
 const send=(r:unknown)=>port.onmessage!({data:r});

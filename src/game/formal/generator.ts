@@ -17,11 +17,11 @@ export function initialCity(owner:FormalCity['ownerFactionId'],id:FormalCity['id
  return{id,ownerFactionId:owner,name,x,y,population:starting?200:400,housing:400,stock:{food:600,wood:600,stone:600,gold:600},buildings:{center:1},fields:fieldsFor(counts),wallLevel:0,cityPromotionCompleted:false,integrationWorkHours:starting?0:12,integrationTotalWorkHours:starting?0:12,startingCity:starting};
 }
 /** Native world generation: campaign identity is never mixed into geometry or RNG. */
-export function createFormalWorld(o:{campaign:string;seed:number;speed?:number;name?:string;civilizationId?:string;offlineHours?:0|1|6|24;worldGeneratorVersion?:string;terrainVersion?:number}):FormalWorld {
+export function createFormalWorld(o:{campaign:string;seed:number;speed?:number;name?:string;civilizationId?:string;offlineHours?:0|1|4|8|12;worldGeneratorVersion?:string;terrainVersion?:number}):FormalWorld {
  if(!Number.isInteger(o.seed)||o.seed<0||o.seed>4294967295)throw new Error('Invalid world seed');
  if(o.worldGeneratorVersion&&o.worldGeneratorVersion!==NATIVE_GENERATOR_VERSION||o.terrainVersion!==undefined&&o.terrainVersion!==NATIVE_TERRAIN_VERSION)throw new Error('Unsupported generation inputs');
  if(o.civilizationId&&!CIVILIZATIONS.includes(o.civilizationId as typeof CIVILIZATIONS[number]))throw new Error('Unknown civilization');
- const w:FormalWorld={kind:'formal',fixture:false,metadata:nativeMetadata(),campaignId:campaignId(o.campaign),seed:o.seed,speed:o.speed??1,offlineHours:o.offlineHours??24,time:0,dimensions:{width:384,height:384},playerFactionId:factionId('000'),revision:0,sequences:{event:1,report:1,project:1},factions:[],cities:[],armies:[],events:[],commandReceipts:[],completionReceipts:[],researchProjects:[],largeProjects:[],worldLayer:{regionSize:32,terrain:generateTerrain(o.seed),wildSites:[]}};
+ const w:FormalWorld={kind:'formal',fixture:false,metadata:nativeMetadata(),campaignId:campaignId(o.campaign),seed:o.seed,speed:o.speed??1,offlineHours:o.offlineHours??12,clockMode:'foreground',time:0,dimensions:{width:384,height:384},playerFactionId:factionId('000'),revision:0,sequences:{event:1,report:1,project:1},factions:[],cities:[],armies:[],events:[],commandReceipts:[],completionReceipts:[],researchProjects:[],largeProjects:[],worldLayer:{regionSize:32,terrain:generateTerrain(o.seed),wildSites:[]}};
  installMountains(w);
  const index=spatial(w);
  const legal=Array.from({length:144},(_,region)=>{const points:{x:number;y:number;rank:number}[]=[];for(let dy=0;dy<32;dy++)for(let dx=0;dx<32;dx++){const x=(region%12)*32+dx,y=Math.floor(region/12)*32+dy;if(buildable(terrainAt(w,x,y)))points.push({x,y,rank:seedHash(o.seed,x,y,7)});}return points.sort((a,b)=>a.rank-b.rank||a.y-b.y||a.x-b.x);});

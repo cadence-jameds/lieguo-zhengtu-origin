@@ -33,7 +33,7 @@ async function browserFixture(label:string,fixture:FormalWorld,expected:object){
 }
 
 function conquer(w:FormalWorld,index:number){const s=new EventScheduler(w.events);changeCityOwner(w,w.cities[index],w.factions[4].id,'conquest',s);w.events=s.snapshot();return w;}
-export function movingCraft(mode:'reachable'|'blocked'|'extinct',speed:1|10|50=1){
+export function movingCraft(mode:'reachable'|'blocked'|'extinct',speed:1|10|25=1){
  let w=craftWorld();w.speed=speed;
  // Static synthetic terrain: all original cities/sites remain legal. Mountain rings
  // exist before dispatch, outside its path, and only enclose fallback destinations.
@@ -78,7 +78,7 @@ it.each(['reachable','blocked','extinct'] as const)('R4-C1 arrival handler alone
  expect(w.extinction!.craftsmen.filter(c=>c.id===id)).toHaveLength(mode==='reachable'?1:0);
  const before=structuredClone(w);handleCraftsmanEvent(w,event,s);w.events=s.snapshot();expect(w).toEqual(before);
 });
-it.each([1,10,50] as const)('R4-C1 %sX SaveLoad, full import, Recovery and sliced continuation remain equivalent',async speed=>{
+it.each([1,10,25] as const)('R4-C1 %sX SaveLoad, full import, Recovery and sliced continuation remain equivalent',async speed=>{
  for(const mode of ['reachable','blocked','extinct'] as const){
   const {world:initial,id,arrival}=movingCraft(mode,speed),db=store(),copy=store();
   const w=await db.start((await decodeSave(await encodeSave(initial))).world),backup=(await db.backupList())[0];
@@ -99,7 +99,7 @@ it.each([1,10,50] as const)('R4-C1 %sX SaveLoad, full import, Recovery and slice
  }
 });
 
-export function waitingJoint(secondCity:boolean,speed:1|10|50=1){
+export function waitingJoint(secondCity:boolean,speed:1|10|25=1){
  let w=battlefield();w.speed=speed;w.factions[0].age=2;build(w.cities[0],'embassy',14);
  if(secondCity)changeCityOwner(w,w.cities[3],w.playerFactionId,'receive');
  w.cities[0].military!.units={militia:10,scout:3,baggage:2};
@@ -166,7 +166,7 @@ it('R4-C3 removing one waiting participant preserves the surviving joint member 
  expect(end.politics!.joints.find(j=>j.id===a.jointId)!.armyIds).toEqual([other.id]);
  expect(end.cities[0].ownerFactionId).toBe(w.factions[2].id);expect(end.armies.some(x=>x.id===a.id)).toBe(false);validateFormalWorld(end);
 });
-it.each([1,10,50] as const)('R4-C3 %sX SaveLoad / full import / Recovery / sliced battle clear waiting forces only once',async speed=>{
+it.each([1,10,25] as const)('R4-C3 %sX SaveLoad / full import / Recovery / sliced battle clear waiting forces only once',async speed=>{
  for(const second of [true,false]){
   const {world:initial,waiting:a,captureAt}=waitingJoint(second,speed),db=store(),copy=store();
   const w=await db.start((await decodeSave(await encodeSave(initial))).world),backup=(await db.backupList())[0],end=a.departedAt+1;

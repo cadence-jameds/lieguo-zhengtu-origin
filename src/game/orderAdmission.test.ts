@@ -127,7 +127,7 @@ it('keeps construction, training and research prerequisites tied to the original
  const techBase=playerOrderBase(w,tech)!;
  const researchWorld=structuredClone(w);researchWorld.revision=1;researchWorld.factions[0].techIds=['a'];
  expect(playerOrderWithBase(researchWorld,order(w,'tech',tech),techBase).expectedRevision).toBe(0);
- expect(playerOrderBase(w,{type:'developer.configure',cityId:fixtureIds.home,enabled:true,speed:50})).toBeUndefined();
+ expect(playerOrderBase(w,{type:'developer.configure',cityId:fixtureIds.home,enabled:true,speed:50})).toBeDefined();
 });
 
 it('P0-C3 dispatch ignores unrelated AI revision but fences owned troops, destination generation/ownership, diplomacy and terrain',()=>{
@@ -138,3 +138,10 @@ it('P0-C3 dispatch ignores unrelated AI revision but fences owned troops, destin
  const diplomacy=structuredClone(ai);diplomacy.politics??=initialPolitics();diplomacy.politics.relations.push({a:w.playerFactionId,b:w.cities[1].ownerFactionId,state:'friendly'});expect(playerOrderWithBase(diplomacy,cityIssued,cityBase)).toBe(cityIssued);expect(playerOrderWithBase(ai,issued,base,ai.revision)).toBe(issued);
 });
 import {initialPolitics} from './formal/politics';
+
+it('developer settings only rebase when developer and shield settings remain unchanged',()=>{
+ const w=createFormalFixture(),payload={type:'developer.configure' as const,cityId:fixtureIds.home,enabled:true,speed:100 as const,shield:true},o=order(w,'dev-settings',payload),base=playerOrderBase(w,payload)!;
+ const ai=structuredClone(w);ai.revision++;ai.cities[1].stock.food++;expect(playerOrderWithBase(ai,o,base).expectedRevision).toBe(ai.revision);
+ for(const change of [(n:typeof w)=>{n.developer={enabled:true,speed:50};},(n:typeof w)=>{n.factions[0].protectionUntil=1000;},(n:typeof w)=>{n.cities[0].ownerFactionId=n.factions[1].id;}]){const n=structuredClone(ai);change(n);expect(playerOrderWithBase(n,o,base)).toBe(o);}
+ expect(playerOrderWithBase(ai,o,base,ai.revision)).toBe(o);
+});

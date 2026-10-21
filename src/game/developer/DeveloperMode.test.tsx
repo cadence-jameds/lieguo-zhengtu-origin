@@ -11,10 +11,10 @@ it('developer controls use their own worker, block concurrent requests and close
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);const requests:unknown[]=[];let instance:WorkerMock;
  class WorkerMock{onmessage=(_e:unknown)=>{};onerror=()=>{};constructor(){instance=this;}postMessage(m:unknown){requests.push(m);}terminate(){}}
  vi.stubGlobal('Worker',WorkerMock);container=document.createElement('div');document.body.append(container);root=createRoot(container);const close=vi.fn();
- await act(async()=>root.render(<DeveloperMode mobile onClose={close}/>));expect(requests[0]).toMatchObject({type:'start',config:{scenario:'new',speed:50}});
+ await act(async()=>root.render(<DeveloperMode mobile onClose={close}/>));expect(requests[0]).toMatchObject({type:'start',config:{scenario:'new',speed:25}});
  const find=(text:string)=>[...container.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent===text)!;
  expect(find('返回原戰役').disabled).toBe(true);await act(async()=>find('驗證清單').click());expect(container.textContent).toContain('尚未執行，不預先顯示通過');
- const config={scenario:'new' as const,seed:90217,speed:50,civilizationId:'civ_zhongguo'},world=developerWorld(config);
+ const config={scenario:'new' as const,seed:90217,speed:25,civilizationId:'civ_zhongguo'},world=developerWorld(config);
  await act(async()=>{instance!.onmessage({data:{type:'state',config,world,logs:[],results:[]}});instance!.onmessage({data:{type:'done'}});});
  expect(displayClock.time(world.campaignId,-1)).toBe(world.time);
  expect(container.querySelector<HTMLSelectElement>('select[aria-label="v85 城堡生產、400 移民、實體待命隊、取消結果"]')?.disabled).toBe(true);

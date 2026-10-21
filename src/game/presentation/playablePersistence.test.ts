@@ -15,14 +15,14 @@ const storage=()=>{const s=new FormalPersistence({suffix:'art-playable-'+crypto.
 afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
 const order=(w:FormalWorld,payload:FormalCommand)=>({commandId:commandId(crypto.randomUUID()),campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload});
 it('Playable native new game: durable field/building commands, export, reload and Recovery',async()=>{
- const s=storage();let w=await s.start(createFormalWorld({campaign:'playable-native-'+crypto.randomUUID(),seed:90217,civilizationId:'civ_byzantium',speed:50}));
+ const s=storage();let w=await s.start(createFormalWorld({campaign:'playable-native-'+crypto.randomUUID(),seed:90217,civilizationId:'civ_byzantium',speed:25}));
  for(const payload of [{type:'field.upgrade',cityId:w.cities[0].id,slot:0},{type:'building.upgrade',cityId:w.cities[0].id,key:'center'}] satisfies FormalCommand[]){const t=submitFormalOrder(w,order(w,payload));expect(t.ack?.status).toBe('committed');w=await s.save(t.world,t.reports,w.revision);}
  const t=advanceFormal(w,40*60000);w=await s.save(t.world,t.reports,w.revision);expect(w.cities[0].buildings.center).toBe(2);expect(w.cities[0].fields![0].level).toBe(1);
  const exported=await s.exportStoredSave('full');expect((await decodeSave(JSON.parse(exported))).world).toEqual(w);expect((await s.loadSave()).game).toEqual(w);
  const current=await s.db.saves.get('current');if(current?.kind!=='world')throw new Error('missing save');current.data.checksum='0'.repeat(64);await s.db.saves.put(current);const recovered=await s.loadSave();expect(recovered.recovered).toBe(true);expect(recovered.game?.dimensions).toEqual({width:384,height:384});expect(recovered.game!.cities[0].ownerFactionId).toBe(w.playerFactionId);
 });
 it('Advanced inspection save validates and B4 commands persist through native storage',async()=>{
- const w=createFormalWorld({campaign:'playable-b4-inspection',seed:90217,speed:50,name:'B4 檢查用世界'}),c=w.cities[0];
+ const w=createFormalWorld({campaign:'playable-b4-inspection',seed:90217,speed:25,name:'B4 檢查用世界'}),c=w.cities[0];
  const keys=['residence','warehouse.0','barracks','archery','stable','blacksmith','academy','workshop','castle','townhall','market','embassy','mill','lumbermill','mint'];
  for(const k of keys)build(c,k,['mill','lumbermill','mint'].includes(k)?8:15);build(c,'center',10);c.population=15000;c.stock={food:100000,wood:100000,stone:100000,gold:100000};c.economy!.milestones=[10000,15000];c.military!.units={spearman:25};w.factions[0].age=2;
  const second=w.cities[1];changeCityOwner(w,second,w.playerFactionId,'receive');build(second,'warehouse.0',15);build(second,'residence',15);second.stock={food:50000,wood:50000,stone:50000,gold:50000};second.population=12000;second.integrationWorkHours=12;

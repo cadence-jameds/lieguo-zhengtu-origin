@@ -232,7 +232,7 @@ it('R4 AI vs AI Lv15 siege: marker survives save/load and Recovery, one final, n
   evidence('ai-siege-active.realm-save',await encodeSave({...w,offlineHours:0}));
   let near=w;
   while(near.combat!.battles[0].siegeRound!<11) near=advanceFormal(near,near.combat!.battles[0].nextRoundAt).world;
-  evidence('ai-siege-near-final.realm-save',await encodeSave({...near,speed:50,offlineHours:0}));
+  evidence('ai-siege-near-final.realm-save',await encodeSave({...near,speed:25,offlineHours:0}));
   const db=new FormalPersistence({suffix:'r4-siege-'+crypto.randomUUID()});stores.push(db);
   const persisted=await db.start(w),backup=(await db.backupList())[0].id;
   const final=advanceFormal(persisted,persisted.time+HOUR);

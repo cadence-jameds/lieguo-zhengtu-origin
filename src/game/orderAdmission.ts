@@ -34,6 +34,8 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
     [target.id,target.x,target.y,target.generation,target.phase??'active']);
    return[city.x,city.y,Object.keys(p.units).sort().map(id=>[id,city.military?.units[id]??0]),faction.civilizationId,faction.age,faction.techIds,politicalScope(w,faction.id),destination,w.dimensions,w.worldLayer?.terrain,w.worldLayer?.mountains];
   }
+  case 'campaign.configure':return[w.speed,w.offlineHours??12];
+  case 'developer.configure':return[w.developer??null,faction.protectionUntil??null];
   case 'city.rename':return[city.name];
   case 'field.upgrade':{
    const field=city.fields?.find(f=>f.slot===p.slot),from=targetJobs.at(-1)?.toLevel??field?.level??0;
@@ -60,7 +62,7 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
   case 'city.promote':return[city.cityPromotionCompleted,city.economy?.promotion,city.buildings,city.economy?.milestones];
   case 'logistics.auto.set':return[city.autoLogistics,city.buildings,construction];
   // No automatic admission for other combat, diplomacy, withdrawal,
-  // disbanding, developer tools or cross-city movement.
+  // disbanding or cross-city movement.
   default:return;
  }
 }

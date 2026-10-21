@@ -12,23 +12,23 @@ import {spatial} from './spatial';
 import {decodeSave,encodeSave} from './saveCodec';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 let seq=0;const stores:FormalPersistence[]=[];
-const make=(offlineHours:0|1|6|24=24,speed=1)=>createFormalWorld({campaign:'feedback-'+crypto.randomUUID(),seed:90217,offlineHours,speed});
+const make=(offlineHours:0|1|4|8|12=12,speed=1)=>createFormalWorld({campaign:'feedback-'+crypto.randomUUID(),seed:90217,offlineHours,speed});
 function rich(w:FormalWorld){const c=w.cities[0];c.buildings['warehouse.0']=15;c.economy!.slots['warehouse.0']=0;c.stock={food:90000,wood:90000,stone:90000,gold:90000};return c;}
 function submit(w:FormalWorld,payload:FormalCommand){return submitFormalOrder(w,{commandId:commandId('feedback-'+(++seq)),campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload});}
 function commit(w:FormalWorld,p:FormalCommand){const r=submit(w,p);expect(r.ack?.status,r.ack?.reason).toBe('committed');return r.world;}
 function store(fault?:(point:FailurePoint)=>void){const p=new FormalPersistence({suffix:'feedback-'+crypto.randomUUID(),fault});stores.push(p);return p;}
 afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
-for(const cap of [0,1,6,24] as const)it(`offline ${cap}h caps REAL time then uses Formal speed and scheduler`,()=>{
+for(const cap of [0,1,4,8,12] as const)it(`offline ${cap}h caps REAL time then uses Formal speed and scheduler`,()=>{
  const w=make(cap,3),before=JSON.stringify(w),r=advanceOffline(w,1000,1000+48*HOUR);
  expect(r.summary).toMatchObject({elapsedRealMs:48*HOUR,advancedRealMs:cap*HOUR,advancedWorldMs:cap*3*HOUR,capHours:cap});expect(r.world.time).toBe(cap*3*HOUR);expect(JSON.stringify(w)).toBe(before);
  const normal=advanceFormal(w,cap*3*HOUR).world;expect(r.world).toEqual(normal);expect(r.world.cities).toHaveLength(100);expect(r.world.worldLayer!.wildSites).toHaveLength(432);
 });
-it('clock rollback yields no negative advance; short absence uses the actual elapsed duration; v0.30.9 default is24h',async()=>{
- const w=make();delete w.offlineHours;expect(advanceOffline(w,2000,1000).world.time).toBe(0);expect(advanceOffline(w,1000,2350).world.time).toBe(1350);expect(advanceOffline(w,0,25*HOUR).world.time).toBe(24*HOUR);
+it('clock rollback yields no negative advance; short absence uses the actual elapsed duration; time2 default is12h',async()=>{
+ const w=make();delete w.offlineHours;expect(advanceOffline(w,2000,1000).world.time).toBe(0);expect(advanceOffline(w,1000,2350).world.time).toBe(1350);expect(advanceOffline(w,0,25*HOUR).world.time).toBe(12*HOUR);
  for(const c of w.cities){delete c.integrationTotalWorkHours;}expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
 });
 it('offline scheduler completes construction and training with the same anchored economy as online advance',()=>{
- let w=make(6);const c=rich(w);c.buildings.barracks=1;c.economy!.slots.barracks=1;
+ let w=make(4);const c=rich(w);c.buildings.barracks=1;c.economy!.slots.barracks=1;
  w=commit(w,{type:'field.upgrade',cityId:c.id,slot:0});w=commit(w,{type:'military.recruit',cityId:c.id,unitId:'militia',count:2});
  const r=advanceOffline(w,0,HOUR);expect(r.summary).toMatchObject({buildingsCompleted:1,unitsTrained:2});expect(r.world).toEqual(advanceFormal(w,HOUR).world);expect(citySnapshot(r.world,c.id)!.fields![0].level).toBe(1);
 });
@@ -39,12 +39,12 @@ it('offline load atomically persists the new wall anchor; repeated reload cannot
  const third=await p.loadWithOffline(1000+2*HOUR+500);expect(third.game!.time).toBe(HOUR+500);
 });
 for(const point of ['backup-write','world-write','authority-write'] as const)it(`offline ${point} failure leaves all stores unchanged and retry advances exactly once`,async()=>{
- let failure:FailurePoint|undefined;const p=store(v=>{if(v===failure)throw new Error('injected');});await p.start(make(6));await p.db.saves.update('current',row=>{if(row.kind==='world')row.at=1000;});
+ let failure:FailurePoint|undefined;const p=store(v=>{if(v===failure)throw new Error('injected');});await p.start(make(4));await p.db.saves.update('current',row=>{if(row.kind==='world')row.at=1000;});
  const before={s:await p.db.saves.toArray(),b:await p.db.backups.toArray()};failure=point;await expect(p.loadWithOffline(1000+HOUR)).rejects.toThrow('injected');expect({s:await p.db.saves.toArray(),b:await p.db.backups.toArray()}).toEqual(before);
  failure=undefined;expect((await p.loadWithOffline(1000+HOUR)).game!.time).toBe(HOUR);expect((await p.loadWithOffline(1000+HOUR)).game!.time).toBe(HOUR);
 });
 it('Recovery catches up from the selected valid checkpoint wall anchor and skips metadata-invalid candidates',async()=>{
- const p=store();await p.start(make(6));const id=(await p.backupList())[0].id;await p.db.backups.update(id,{at:1000});
+ const p=store();await p.start(make(4));const id=(await p.backupList())[0].id;await p.db.backups.update(id,{at:1000});
  const row=await p.db.saves.get('current');if(row?.kind!=='world')throw new Error('missing');row.data.checksum='0'.repeat(64);await p.db.saves.put(row);
  const r=await p.loadWithOffline(1000+HOUR);expect(r.recovered).toBe(true);expect(r.summary!.recovered).toBe(true);expect(r.game!.time).toBe(HOUR);expect((await p.loadSave()).game).toEqual(r.game);
 });
@@ -87,7 +87,7 @@ it('cancel of waiting military task promotes the next task and does not refund c
 });
 
 it('offline arrival counts founded cities but does not misreport transferred escorts as newly trained units',()=>{
- let w=make(6);const c=rich(w);w.factions[0].age=2;c.buildings.castle=1;c.economy!.slots.castle=1;c.housing=30400;c.population=3000;c.military!.units.spearman=20;
+ let w=make(4);const c=rich(w);w.factions[0].age=2;c.buildings.castle=1;c.economy!.slots.castle=1;c.housing=30400;c.population=3000;c.military!.units.spearman=20;
  w=commit(w,{type:'settlement.prepare',cityId:c.id});w=advanceFormal(w,4*HOUR).world;
  const points=[];for(let y=c.y-3;y<=c.y+3;y++)for(let x=c.x-3;x<=c.x+3;x++)if(buildable(terrainAt(w,x,y))&&!spatial(w).at(x,y).city&&!spatial(w).at(x,y).site)points.push({x,y});
  w=commit(w,{type:'settlement.dispatch',cityId:c.id,...points[0],name:'新聚落',escort:{spearman:20}});const r=advanceOffline(w,0,HOUR);expect(r.summary.citiesFounded).toBe(1);expect(r.summary.unitsTrained).toBe(0);expect(r.world.cities.at(-1)!.military!.units.spearman).toBe(20);

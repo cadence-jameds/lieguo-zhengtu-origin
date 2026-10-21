@@ -16,7 +16,7 @@ function prepareCity(w:FormalWorld,c:FormalCity,u:Record<string,number>,wall:num
 }
 /** Explicit test fixture creation only. Never imported by normal Formal commands. */
 export function makeLabWorld(value:unknown){
- const cfg=labConfigSchema.parse(value),w=createFormalWorld({campaign:'b5lab-'+crypto.randomUUID(),seed:cfg.seed,civilizationId:cfg.civilizationId,name:'B5 測試玩家',speed:50,offlineHours:0}),target=labTarget(w,cfg.targetCityId);
+ const cfg=labConfigSchema.parse(value),w=createFormalWorld({campaign:'b5lab-'+crypto.randomUUID(),seed:cfg.seed,civilizationId:cfg.civilizationId,name:'B5 測試玩家',speed:25,offlineHours:0}),target=labTarget(w,cfg.targetCityId);
  if(!target||target.ownerFactionId===w.playerFactionId)throw Error('請指定一座 AI 城市。');
  w.campaignId=('campaign:b5lab-'+target.id.slice(5)+'-'+crypto.randomUUID()) as FormalWorld['campaignId'];
  prepareCity(w,w.cities[0],cfg.playerUnits,cfg.playerWallLevel,{food:1000000,wood:1000000,stone:1000000,gold:1000000});prepareCity(w,target,cfg.enemyUnits,cfg.wallLevel,cfg.enemyStock);

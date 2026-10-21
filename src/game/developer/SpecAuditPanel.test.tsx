@@ -10,7 +10,7 @@ import type {DeveloperLog} from './session';
 let root:Root,container:HTMLDivElement;
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();localStorage.clear();vi.unstubAllGlobals();});
 it('player picks a v85 negative prerequisite case and can only record a positive result after a real command and completion',async()=>{
- vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);const config={scenario:'new' as const,seed:90217,speed:50,civilizationId:'civ_zhongguo'};
+ vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);const config={scenario:'new' as const,seed:90217,speed:25,civilizationId:'civ_zhongguo'};
  const {world,info}=createTrialWorld({kind:'building',target:'academy',variant:'ready',level:1,config}),onTrial=vi.fn();container=document.createElement('div');document.body.append(container);root=createRoot(container);
  const render=(w=world,logs:DeveloperLog[]=[])=>root.render(<SpecAuditPanel world={w} config={config} busy={false} trial={info} logs={logs} onTrial={onTrial}/>);
  await act(async()=>render());const find=(text:string)=>[...container.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent===text)!;
