@@ -1,0 +1,594 @@
+{
+  "source": "85c769d60604892ac38c622290aaf296ea089395",
+  "metric": "Canvas paint CPU ms; not end-to-end latency or GPU FPS",
+  "cases": [
+    {
+      "device": "desktop",
+      "order": "off/on/on/off",
+      "rounds": [
+        {
+          "enabled": false,
+          "samples": [
+            {
+              "ms": 14.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 14.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 12.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 18.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 10.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 3.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            }
+          ],
+          "p50": 10.8,
+          "p95": 18.8,
+          "max": 18.8
+        },
+        {
+          "enabled": true,
+          "samples": [
+            {
+              "ms": 1.7,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 3,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 2.2,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 2.3,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.5,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 5.9,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 6.2,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 4.5,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            }
+          ],
+          "p50": 2.3,
+          "p95": 6.2,
+          "max": 6.2
+        },
+        {
+          "enabled": true,
+          "samples": [
+            {
+              "ms": 1.1,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 2.1,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.7,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 2,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.7,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.4,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.1,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 251,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.2,
+              "visited": 1445,
+              "misses": 0,
+              "markers": 254,
+              "lodHidden": false,
+              "cacheSize": 1492
+            }
+          ],
+          "p50": 1.4,
+          "p95": 2.1,
+          "max": 2.1
+        },
+        {
+          "enabled": false,
+          "samples": [
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 1.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 0.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 0.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 0.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            },
+            {
+              "ms": 0.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1492
+            }
+          ],
+          "p50": 0.4,
+          "p95": 1.9,
+          "max": 1.9
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "order": "off/on/on/off",
+      "rounds": [
+        {
+          "enabled": false,
+          "samples": [
+            {
+              "ms": 0.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            },
+            {
+              "ms": 0.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 0
+            }
+          ],
+          "p50": 0.2,
+          "p95": 0.4,
+          "max": 0.4
+        },
+        {
+          "enabled": true,
+          "samples": [
+            {
+              "ms": 2.4,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.6,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.7,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 6.4,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.5,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.6,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.8,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.6,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            }
+          ],
+          "p50": 0.6,
+          "p95": 6.4,
+          "max": 6.4
+        },
+        {
+          "enabled": true,
+          "samples": [
+            {
+              "ms": 0.9,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.7,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.7,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.5,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.7,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.8,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 1.2,
+              "visited": 345,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.7,
+              "visited": 337,
+              "misses": 0,
+              "markers": 59,
+              "lodHidden": false,
+              "cacheSize": 367
+            }
+          ],
+          "p50": 0.7,
+          "p95": 1.2,
+          "max": 1.2
+        },
+        {
+          "enabled": false,
+          "samples": [
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 1.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            },
+            {
+              "ms": 0.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 367
+            }
+          ],
+          "p50": 0.2,
+          "p95": 1.5,
+          "max": 1.5
+        }
+      ]
+    }
+  ]
+}
