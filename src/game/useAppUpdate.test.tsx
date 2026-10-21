@@ -1,3 +1,4 @@
+import {UpdateSafetyError} from './updateEligibility';
 // @vitest-environment happy-dom
 import {act} from 'react';
 import {createRoot,type Root} from 'react-dom/client';
@@ -236,3 +237,6 @@ it('a malformed worker reply fails safely rather than escaping the update error 
 it('an independently downloaded real waiting worker can be verified offline without metadata',async()=>{
  fetcher.mockRejectedValue(new TypeError('offline'));(registration as any).waiting=worker;await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledOnce();expect(activations(worker)).toHaveLength(1);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
 });
+
+it('an explicitly verified empty campaign activates without claiming a durable world save',async()=>{fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockResolvedValue('no-campaign' as never);await mount();let completed!:Promise<void>;await act(async()=>{completed=updates.update();});expect(save).toHaveBeenCalledOnce();expect(activations(worker)).toHaveLength(1);expect(updates.text).toContain('目前沒有開啟戰役');expect(updates.text).not.toContain('保存已確認');await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await completed;});expect(replace).toHaveBeenCalledOnce();});
+it('a late storage safety rejection preserves its recovery message and never activates or reloads',async()=>{fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockRejectedValueOnce(new UpdateSafetyError('本機仍有未成功載入的戰役資料，請重新讀取。'));await mount();await act(async()=>updates.update());expect(updates.text).toContain('更新已暫停：本機仍有');expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();});

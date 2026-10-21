@@ -1,3 +1,4 @@
+import {UpdateSafetyError} from './updateEligibility';
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {registerSW} from 'virtual:pwa-register';
 import {RELEASE} from './release';
@@ -129,7 +130,7 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
    const timeout=error instanceof Error&&error.message.includes('逾時');
    // confirmSave also changes this value inside a callback awaited by refreshRegistration.
    const failedPhase=phase as 'prepare'|'save'|'activate';
-   setText(failedPhase==='prepare'?'新版下載尚未完成或更新元件失效；'+(saved?'本次保存已確認。':noCampaign?'目前沒有開啟戰役。':'本次尚未執行保存。')+'請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。':failedPhase==='save'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':(saved?'本次保存已確認；':noCampaign?'目前沒有開啟戰役；':'')+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留。請稍後重試；若仍失敗，請先匯出備份，再一般重新整理。');
+   setText(error instanceof UpdateSafetyError?'更新已暫停：'+error.message:failedPhase==='prepare'?'新版下載尚未完成或更新元件失效；'+(saved?'本次保存已確認。':noCampaign?'目前沒有開啟戰役。':'本次尚未執行保存。')+'請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。':failedPhase==='save'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':(saved?'本次保存已確認；':noCampaign?'目前沒有開啟戰役；':'')+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留。請稍後重試；若仍失敗，請先匯出備份，再一般重新整理。');
   }
   finally{loading.current=false;setUpdating(false);}
  };
