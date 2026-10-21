@@ -1,0 +1,290 @@
+{
+  "source": "fce7c30e15c0d2899029b09a6e7fcd22f3703fed",
+  "browser": "154.0.8037.57",
+  "physicalAndroidVerified": false,
+  "versions": "Isolated synthetic 0.30.55/0.30.56 protocol labels; local dirty-preview build metadata is recorded in manifest.json. Application sources equal fce7c30; only time2-copy substitutes FORMAL_DB_NAME. Previous worker identity helper remains available to isolate save fault injection.",
+  "deviceCondition": "Player device status cannot be read remotely. Real Worker error/empty, loading and busy conditions are reproduced separately.",
+  "cases": [
+    {
+      "name": "main-current-backup-remains-blocked",
+      "status": "PASS",
+      "mainSchema1RemainsWritable": true,
+      "backupNotMisclassifiedAsHistorical": true,
+      "rowsUnchanged": true
+    },
+    {
+      "name": "time2-old-world-confirm-cancel-export-update",
+      "status": "PASS",
+      "cancelNoActivation": true,
+      "archiveAllRowsEqual": true,
+      "historicalNotClaimedSaved": true,
+      "noWorldSave": true,
+      "historyAfterReloadEqual": true,
+      "trace": [
+        {
+          "type": "readonly-complete",
+          "at": 1792578435532.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578435533.4001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578435535.2002
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578435540.8
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578435541.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578435554.1
+        },
+        {
+          "type": "verify-release",
+          "at": 1792578437369.7002
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578437380.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578437381
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578437385.9001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578437389.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578437389.9001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578437391.2002
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792578437391.7002
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792578437435.1
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792578437436.1
+        }
+      ]
+    },
+    {
+      "name": "time2-legacy-only-backups",
+      "status": "PASS",
+      "isolatedLegacyTable": "backups",
+      "rowsUnchanged": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792578448827.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578448837.2
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578448838.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578448839.9
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578448842.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578448843.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578448844.1
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792578448844.4
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792578448874.6
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792578448875.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578450366.3
+        }
+      ]
+    },
+    {
+      "name": "time2-legacy-only-BattleReports",
+      "status": "PASS",
+      "isolatedLegacyTable": "BattleReports",
+      "rowsUnchanged": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792578456632.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578456641.4001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578456644.1
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578456647.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578456650.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578456651.1
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578456652.1
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792578456652.5
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792578456700
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792578456701.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578458134.9001
+        }
+      ]
+    },
+    {
+      "name": "time2-both-current-corrupt-blocked",
+      "status": "PASS",
+      "bothNamespaces": true,
+      "corruptCurrentNotArchived": true,
+      "rowsUnchanged": true
+    },
+    {
+      "name": "time2-history-confirmation-rechecks-current",
+      "status": "PASS",
+      "staleConfirmationCannotBypassFreshCurrent": true,
+      "noActivation": true
+    },
+    {
+      "name": "time2-current-durable-success",
+      "status": "PASS",
+      "bothNamespaces": true,
+      "activeWorldStillRequiresDurableSave": true,
+      "legacyRowsUnchanged": true,
+      "fault": false,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792578478190.6
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "c2ddda41-b395-4fb0-9145-b129dac78aaa",
+          "at": 1792578478195.4
+        },
+        {
+          "type": "durable-ack",
+          "requestId": "c2ddda41-b395-4fb0-9145-b129dac78aaa",
+          "at": 1792578478373
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792578478373.3
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792578478429.9
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792578478430.8
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578480121.9
+        }
+      ]
+    },
+    {
+      "name": "time2-current-durable-abort",
+      "status": "PASS",
+      "bothNamespaces": true,
+      "activeWorldStillRequiresDurableSave": true,
+      "legacyRowsUnchanged": true,
+      "fault": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792578488350.2
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "e0b5c37d-8ca7-47ea-ac94-b1a13d050748",
+          "at": 1792578488352.5999
+        },
+        {
+          "type": "native-idb-abort",
+          "at": 1792578488413.2
+        },
+        {
+          "type": "engine-error",
+          "text": "The transaction was aborted, so the request cannot be fulfilled.\n AbortError: The transaction was aborted, so the request cannot be fulfilled.",
+          "at": 1792578488419.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792578488742.5
+        }
+      ]
+    },
+    {
+      "name": "time2-current-native-read-abort-blocked",
+      "status": "PASS",
+      "actualReadonlyTransactionAbort": true,
+      "noFalseHistorical": true,
+      "legacyRowsUnchanged": true
+    }
+  ],
+  "errors": [],
+  "passed": 9,
+  "failed": 0
+}

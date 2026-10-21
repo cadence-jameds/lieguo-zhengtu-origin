@@ -1,3 +1,4 @@
+import {UpdateSafetyError} from './updateEligibility';
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {registerSW} from 'virtual:pwa-register';
 import {RELEASE} from './release';
@@ -72,21 +73,23 @@ export function activateWaiting(worker:ServiceWorker,container:ServiceWorkerCont
   try{worker.postMessage({type:'SKIP_WAITING'});}catch(error){finish(error instanceof Error?error:new Error('新版無法啟用。'));}
  });
 }
-export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
- const [text,setText]=useState(''),[version,setVersion]=useState(''),[ready,setReady]=useState(false),[updating,setUpdating]=useState(false);
+export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
+ const [text,setText]=useState(''),[outcome,setOutcome]=useState(''),[version,setVersion]=useState(''),[ready,setReady]=useState(false),[updating,setUpdating]=useState(false);
  const registration=useRef<ServiceWorkerRegistration|undefined>(undefined),checking=useRef(false),loading=useRef(false),latest=useRef(''),waiting=useRef(false),currentContent=useRef(false);
+ const attemptEpoch=useRef(0);
  const targetRelease=useRef<UpdateMetadata|undefined>(undefined);
  const scriptURL=useRef(import.meta.env.BASE_URL+'sw.js');
  const [reloadNotice]=useState(()=>{const target=new URL(window.location.href).searchParams.get('_appUpdate');return target&&(/^\d+\.\d+\.\d+$/.test(target)?releaseUpdate({version:target}):validContent(target)&&target!==RELEASE.contentSha)?'重新載入後仍未取得預期新版；請先確認進度並匯出備份，再檢查更新。 ':'';});
  const refresh=useCallback(async(beforeRegister?:()=>Promise<void>,forceUpdate=false)=>{if(!('serviceWorker' in navigator))return;const r=await refreshRegistration(registration.current,navigator.serviceWorker,scriptURL.current,beforeRegister,forceUpdate);registration.current=r;waiting.current=live(r.waiting);return r;},[]);
  const embedded=!!window.__FORMAL_EMBEDDED_ASSETS;
- const check=useCallback(async()=>{
+ const check=useCallback(async(manual=true)=>{
+  if(manual)setOutcome('');
   if(embedded){setText('目前為離線試玩包 v'+RELEASE.version+'。新版請使用新的試玩檔案。');return;}
-  if(checking.current||loading.current)return;checking.current=true;
+  if(checking.current||loading.current)return;checking.current=true;const epoch=attemptEpoch.current;
   try{
    const url=new URL(import.meta.env.BASE_URL+'version.json',window.location.href);url.searchParams.set('_check',String(Date.now()));
    const r=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error();const data=await r.json();
-   if(loading.current)return; // A check started before the click must not overwrite this attempt's save status.
+   if(loading.current||epoch!==attemptEpoch.current)return; // A check started before the click must not overwrite this attempt's save status.
    if(typeof data.version!=='string'||!/^\d+\.\d+\.\d+$/.test(data.version))throw new Error();
    // Keep a successful same-content check across a later outage, including a SW that finishes installing afterward.
    const verified=data.version===RELEASE.version&&validContent(data.contentSha)&&data.contentSha===RELEASE.contentSha;
@@ -94,22 +97,22 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
    else if(verified){targetRelease.current=undefined;currentContent.current=true;latest.current='';setVersion('');setReady(false);}
    if(!latest.current){setReady(waiting.current&&!currentContent.current);setText(currentContent.current?'目前已載入 v'+RELEASE.version+'，已確認為最新版本。':waiting.current?'網站更新已下載完成，可保存進度並更新。':'目前已載入 v'+RELEASE.version+'；網站未提供可核對的內容識別，僅確認數字版本。');}
    // Metadata remains authoritative when a stale SW reference cannot be refreshed.
-   try{if(registration.current)await refresh(undefined,true);}catch{registration.current=undefined;if(latest.current&&!loading.current)setText('已發現新版，但更新元件尚未就緒；請按更新安全重試。本次尚未執行保存。');}
-  }catch{if(loading.current)return;if(waiting.current&&!currentContent.current){setReady(true);setText('更新已下載完成，可保存進度並更新；目前無法連線核對網站。');}else if(!latest.current){setReady(false);setText('目前無法確認更新；本機戰役仍可繼續。');}}
+   try{if(registration.current)await refresh(undefined,true);}catch{if(loading.current||epoch!==attemptEpoch.current)return;registration.current=undefined;if(latest.current)setText('已發現新版，但更新元件尚未就緒；請按更新安全重試。本次尚未執行保存。');}
+  }catch{if(loading.current||epoch!==attemptEpoch.current)return;if(waiting.current&&!currentContent.current){setReady(true);setText('更新已下載完成，可保存進度並更新；目前無法連線核對網站。');}else if(!latest.current){setReady(false);setText('目前無法確認更新；本機戰役仍可繼續。');}}
   finally{checking.current=false;}
  },[embedded,refresh]);
  useEffect(()=>{
-  if(embedded){void check();return;}
+  if(embedded){void check(false);return;}
   let disposed=false;
-  registerSW({immediate:true,onNeedReload(){/* Activation never reloads before the explicit save below. */},onNeedRefresh(){if(!disposed){waiting.current=true;void check();}},onRegisteredSW(url,r){if(!disposed){scriptURL.current=url;registration.current=r;}},onRegisterError(){if(!disposed&&!loading.current)setText('更新元件尚未就緒；本機戰役可繼續，請稍後檢查更新。');}});
-  void check();const visible=()=>{if(!document.hidden)void check();};const timer=setInterval(visible,60000);
+  registerSW({immediate:true,onNeedReload(){/* Activation never reloads before the explicit save below. */},onNeedRefresh(){if(!disposed){waiting.current=true;void check(false);}},onRegisteredSW(url,r){if(!disposed){scriptURL.current=url;registration.current=r;}},onRegisterError(){if(!disposed&&!loading.current)setText('更新元件尚未就緒；本機戰役可繼續，請稍後檢查更新。');}});
+  void check(false);const visible=()=>{if(!document.hidden)void check(false);};const timer=setInterval(visible,60000);
   document.addEventListener('visibilitychange',visible);window.addEventListener('focus',visible);window.addEventListener('online',visible);
   return()=>{disposed=true;clearInterval(timer);document.removeEventListener('visibilitychange',visible);window.removeEventListener('focus',visible);window.removeEventListener('online',visible);};
  },[check,embedded]);
  const update=async()=>{
-  if(embedded||loading.current)return;loading.current=true;setUpdating(true);setText('正在準備新版…');
-  let phase:'prepare'|'save'|'activate'='prepare',saved=false,noCampaign=false;
-  const confirmSave=async()=>{if(saved||noCampaign)return;phase='save';setText('正在保存進度…');noCampaign=(await save())==='no-campaign';saved=!noCampaign;phase='prepare';};
+  if(embedded||loading.current)return;attemptEpoch.current++;loading.current=true;setOutcome('');setUpdating(true);setText('正在準備新版…');
+  let phase:'prepare'|'save'|'activate'='prepare',saved=false,noCampaign=false,historical=false;
+  const confirmSave=async()=>{if(saved||noCampaign||historical)return;phase='save';setText('正在確認戰役保存與歷史資料保全…');const result=await save();noCampaign=result==='no-campaign';historical=result==='historical';saved=!noCampaign&&!historical;phase='prepare';};
   try{
    let worker:ServiceWorker|undefined,selectedRegistration:ServiceWorkerRegistration|undefined,alreadyControlled=false;
    const target=targetRelease.current;
@@ -123,15 +126,15 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'>){
    await confirmSave();
    // A concurrent installation can replace the verified worker during a durable save.
    if(worker&&!alreadyControlled&&(selectedRegistration?.waiting!==worker||!live(worker)))throw new Error('新版元件已變更，請重試。');
-   phase='activate';setText(saved?'本次保存已確認，正在載入新版…':'目前沒有開啟戰役，正在載入新版…');if(worker&&!alreadyControlled)await activateWaiting(worker,navigator.serviceWorker);
+   phase='activate';setText(saved?'本次保存已確認，正在載入新版…':historical?'歷史資料原樣保留，未執行戰役保存；正在載入新版…':'目前沒有開啟戰役，正在載入新版…');if(worker&&!alreadyControlled)await activateWaiting(worker,navigator.serviceWorker);
    const url=new URL(window.location.href);url.searchParams.set('_appUpdate',latest.current||String(Date.now()));window.location.replace(url.href);
   }catch(error){
    const timeout=error instanceof Error&&error.message.includes('逾時');
    // confirmSave also changes this value inside a callback awaited by refreshRegistration.
    const failedPhase=phase as 'prepare'|'save'|'activate';
-   setText(failedPhase==='prepare'?'新版下載尚未完成或更新元件失效；'+(saved?'本次保存已確認。':noCampaign?'目前沒有開啟戰役。':'本次尚未執行保存。')+'請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。':failedPhase==='save'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':(saved?'本次保存已確認；':noCampaign?'目前沒有開啟戰役；':'')+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留。請稍後重試；若仍失敗，請先匯出備份，再一般重新整理。');
+   setOutcome(error instanceof UpdateSafetyError?'更新已暫停：'+error.message:failedPhase==='prepare'?'新版下載尚未完成或更新元件失效；'+(saved?'本次保存已確認。':noCampaign?'目前沒有開啟戰役。':historical?'歷史資料原樣保留，未執行戰役保存。':'本次尚未執行保存。')+'請稍後按更新重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。':failedPhase==='save'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':(saved?'本次保存已確認；':noCampaign?'目前沒有開啟戰役；':historical?'歷史資料原樣保留，未執行戰役保存；':'')+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留。請稍後重試；若仍失敗，請先匯出備份，再一般重新整理。');
   }
   finally{loading.current=false;setUpdating(false);}
  };
- return{text:reloadNotice+text,available:ready||!!version,updating,check,update};
+ return{text:reloadNotice+(outcome||text),available:ready||!!version,updating,check,update};
 }

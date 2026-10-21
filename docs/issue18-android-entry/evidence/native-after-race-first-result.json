@@ -1,0 +1,303 @@
+{
+  "source": "6c3a34fb839e7323afe5969785431bc5dee07916",
+  "browser": "154.0.8037.57",
+  "physicalAndroidVerified": false,
+  "versions": "Isolated synthetic 0.30.55/0.30.56 protocol labels; actual local candidate Production build 0.30.58 is unchanged.",
+  "deviceCondition": "Player device status cannot be read remotely. Real Worker error/empty, loading and busy conditions are reproduced separately.",
+  "cases": [
+    {
+      "name": "before-error-empty-disabled",
+      "status": "PASS",
+      "emptyStorage": true,
+      "worldPresent": false,
+      "actualGate": {
+        "busy": false,
+        "updating": false,
+        "loading": false,
+        "error": true
+      },
+      "note": "Real Worker sync on an empty world reproduces engine error. This does not establish the Android device trigger."
+    },
+    {
+      "name": "after-error-empty-direct",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).includes('修正手機更新入口與本機資料判斷'))\n",
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792567282369.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567282377
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567282379
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567282381.1
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567282381.4001
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567282414.7002
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567282417.7002
+        }
+      ],
+      "body": "列國征途\n河谷戰役 · 單機持續世界\n\n百國並起，文明由此啟程\n\n列國征途：始源\n\n從一座城邦出發，發展資源、研究科技、整備軍隊並拓殖河谷，在持續運轉的世界中建立屬於你的勢力。\n\n目前載入 v0.30.56\n更新日期 2026-10-21\n正在讀取本機進度\n\n正在確認這個瀏覽器中的戰役存檔。\n\n啟動世界引擎\n\n停止讀取（保留原存檔）\n\n新遊戲預設：戰役速度 1X · 起始 200 名居民\n\n開始新遊戲\n正在讀取進度…\n⚙ 設定\n正在確認本機進度，尚未判定是否有存檔。\n\n停留首頁時世界照常運作；進度保存在此裝置。\n\n本次更新 · v0.30.56\n\n目前已載入 v0.30.56，已確認為最新版本。\n\n正在讀取或推進戰役，完成後才能更新。\n\n檢查更新\n\n2026-10-21 · 建置 bbbbbbb\n\n遊戲建置預覽\n此為待審建置；正式玩家更新摘要須在合併前通過檢查。\n近期版本與過往紀錄"
+    },
+    {
+      "name": "after-active-durable-busy-doubleclick",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).includes('修正手機更新入口與本機資料判斷'))\n",
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792567293795.7
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "3b4e0ab9-b2c6-4034-9fef-dd4e8fc95888",
+          "at": 1792567293799.0999
+        },
+        {
+          "type": "durable-ack",
+          "requestId": "3b4e0ab9-b2c6-4034-9fef-dd4e8fc95888",
+          "at": 1792567293965
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567293965.7998
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567294005.5999
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567294010.7
+        }
+      ],
+      "body": "列國征途\n河谷戰役 · 單機持續世界\n\n百國並起，文明由此啟程\n\n列國征途：始源\n\n從一座城邦出發，發展資源、研究科技、整備軍隊並拓殖河谷，在持續運轉的世界中建立屬於你的勢力。\n\n目前載入 v0.30.56\n更新日期 2026-10-21\n正在讀取本機進度\n\n正在確認這個瀏覽器中的戰役存檔。\n\n啟動世界引擎\n\n停止讀取（保留原存檔）\n\n新遊戲預設：戰役速度 1X · 起始 200 名居民\n\n開始新遊戲\n正在讀取進度…\n⚙ 設定\n正在確認本機進度，尚未判定是否有存檔。\n\n停留首頁時世界照常運作；進度保存在此裝置。\n\n本次更新 · v0.30.56\n\n目前已載入 v0.30.56，已確認為最新版本。\n\n正在讀取或推進戰役，完成後才能更新。\n\n檢查更新\n\n2026-10-21 · 建置 bbbbbbb\n\n遊戲建置預覽\n此為待審建置；正式玩家更新摘要須在合併前通過檢查。\n近期版本與過往紀錄"
+    },
+    {
+      "name": "after-native-save-abort",
+      "status": "PASS",
+      "realIndexedDBAbort": true,
+      "noActivationOrReload": true,
+      "backupCount": 1,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792567303894.9
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "9b0ee687-cfb6-4bc3-9f5f-0df86039cd9d",
+          "at": 1792567303897.2
+        },
+        {
+          "type": "native-idb-abort",
+          "at": 1792567303935.3
+        },
+        {
+          "type": "engine-error",
+          "text": "The transaction was aborted, so the request cannot be fulfilled.\n AbortError: The transaction was aborted, so the request cannot be fulfilled.",
+          "at": 1792567303938.7
+        }
+      ]
+    },
+    {
+      "name": "after-incompatible-archive-preserved",
+      "status": "PASS",
+      "unsupportedCampaignBlocked": true,
+      "allTablesByteEquivalent": true,
+      "rawExportMatches": true,
+      "updateGate": "incompatible"
+    },
+    {
+      "name": "after-loading-blocks",
+      "status": "PASS",
+      "loadingBlocked": true,
+      "becomesActionableAfterRead": true
+    },
+    {
+      "name": "after-invalid-registration-retry",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).includes('修正手機更新入口與本機資料判斷'))\n",
+      "trace": [
+        {
+          "type": "readonly-complete",
+          "at": 1792567316580.5
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567316584.1
+        },
+        {
+          "type": "native-sw-error",
+          "name": "TypeError",
+          "at": 1792567316590.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567316593.1
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567316740
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567316741.1
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567316743.2002
+        },
+        {
+          "type": "verify-release",
+          "at": 1792567320128.6
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567320132.5
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567320222.3
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567320223.7002
+        }
+      ],
+      "body": "列國征途\n河谷戰役 · 單機持續世界\n\n百國並起，文明由此啟程\n\n列國征途：始源\n\n從一座城邦出發，發展資源、研究科技、整備軍隊並拓殖河谷，在持續運轉的世界中建立屬於你的勢力。\n\n目前載入 v0.30.56\n更新日期 2026-10-21\n正在讀取本機進度\n\n正在確認這個瀏覽器中的戰役存檔。\n\n啟動世界引擎\n\n停止讀取（保留原存檔）\n\n新遊戲預設：戰役速度 1X · 起始 200 名居民\n\n開始新遊戲\n正在讀取進度…\n⚙ 設定\n正在確認本機進度，尚未判定是否有存檔。\n\n停留首頁時世界照常運作；進度保存在此裝置。\n\n本次更新 · v0.30.56\n\n目前已載入 v0.30.56，已確認為最新版本。\n\n正在讀取或推進戰役，完成後才能更新。\n\n檢查更新\n\n2026-10-21 · 建置 bbbbbbb\n\n遊戲建置預覽\n此為待審建置；正式玩家更新摘要須在合併前通過檢查。\n近期版本與過往紀錄"
+    },
+    {
+      "name": "after-component-unready-retry",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).includes('修正手機更新入口與本機資料判斷'))\n",
+      "trace": [
+        {
+          "type": "native-sw-error",
+          "name": "TypeError",
+          "at": 1792567327918.6
+        },
+        {
+          "type": "native-sw-error",
+          "name": "TypeError",
+          "at": 1792567327979.6
+        },
+        {
+          "type": "verify-release",
+          "at": 1792567330314
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567330327.2
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567330328.2
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567330331.1
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567330331.6
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567330366.7
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567330367.7
+        }
+      ],
+      "body": "列國征途\n河谷戰役 · 單機持續世界\n\n百國並起，文明由此啟程\n\n列國征途：始源\n\n從一座城邦出發，發展資源、研究科技、整備軍隊並拓殖河谷，在持續運轉的世界中建立屬於你的勢力。\n\n目前載入 v0.30.56\n更新日期 2026-10-21\n正在讀取本機進度\n\n正在確認這個瀏覽器中的戰役存檔。\n\n啟動世界引擎\n\n停止讀取（保留原存檔）\n\n新遊戲預設：戰役速度 1X · 起始 200 名居民\n\n開始新遊戲\n正在讀取進度…\n⚙ 設定\n正在確認本機進度，尚未判定是否有存檔。\n\n停留首頁時世界照常運作；進度保存在此裝置。\n\n本次更新 · v0.30.56\n\n目前已載入 v0.30.56，已確認為最新版本。\n\n正在讀取或推進戰役，完成後才能更新。\n\n檢查更新\n\n2026-10-21 · 建置 bbbbbbb\n\n遊戲建置預覽\n此為待審建置；正式玩家更新摘要須在合併前通過檢查。\n近期版本與過往紀錄"
+    },
+    {
+      "name": "after-desktop-empty",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).includes('修正手機更新入口與本機資料判斷'))\n",
+      "trace": [
+        {
+          "type": "readonly-complete",
+          "at": 1792567333460.1
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567333460.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567333464.3
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567335433
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567335473
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567335818.3
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567335819.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567335826.3
+        },
+        {
+          "type": "verify-release",
+          "at": 1792567337802.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567337811
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567337811.8
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567337813.4
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567337814
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567337849.3
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567337850.6
+        }
+      ],
+      "body": "列國征途\n河谷戰役 · 單機持續世界\n\n百國並起，文明由此啟程\n\n列國征途：始源\n\n從一座城邦出發，發展資源、研究科技、整備軍隊並拓殖河谷，在持續運轉的世界中建立屬於你的勢力。\n\n目前載入 v0.30.56更新日期 2026-10-21\n正在讀取本機進度\n\n正在確認這個瀏覽器中的戰役存檔。\n\n啟動世界引擎\n\n停止讀取（保留原存檔）\n\n新遊戲預設：戰役速度 1X · 起始 200 名居民\n\n開始新遊戲\n正在讀取進度…\n⚙ 設定\n正在確認本機進度，尚未判定是否有存檔。\n\n停留首頁時世界照常運作；進度保存在此裝置。\n\n本次更新 · v0.30.56\n\n目前已載入 v0.30.56，已確認為最新版本。\n\n正在讀取或推進戰役，完成後才能更新。\n\n檢查更新\n\n2026-10-21 · 建置 bbbbbbb\n\n遊戲建置預覽\n此為待審建置；正式玩家更新摘要須在合併前通過檢查。\n近期版本與過往紀錄"
+    }
+  ],
+  "errors": [],
+  "passed": 4,
+  "failed": 5
+}

@@ -85,7 +85,7 @@ it('update save waits for its own durable acknowledgement, not an unrelated sync
  await act(async()=>{port.emit({type:'synced',requestId:request.requestId});port.emit({type:'requestDone',requestId:request.requestId});await promise;});expect(saved).toBe(true);expect(engine.busy).toBe(false);
 });
 it('update save rejects storage failure and rejects a completed request that never acknowledged saving',async()=>{
- let observed!:Promise<string|void>;await act(async()=>{observed=engine.sync().catch(e=>e.message);});const first=port.sent[0];await act(async()=>{port.emit({type:'error',requestId:first.requestId,text:'IDB failure'});port.emit({type:'requestDone',requestId:first.requestId});});expect(await observed).toBe('IDB failure');expect(engine.busy).toBe(false);
+ let observed!:Promise<string|void>;await act(async()=>{observed=engine.sync().catch(e=>e.message);});const first=port.sent[0];await act(async()=>{port.emit({type:'error',requestId:first.requestId,text:'IDB failure'});port.emit({type:'requestDone',requestId:first.requestId});});expect(await observed).toBe('IDB failure');expect(engine.error).toContain('本機戰役與回復點保留');expect(engine.error).not.toContain('IDB failure');expect(engine.busy).toBe(false);
  await act(async()=>{observed=engine.sync().catch(e=>e.message);});await act(async()=>port.emit({type:'requestDone',requestId:port.sent[1].requestId}));expect(await observed).toContain('保存未完成');expect(engine.busy).toBe(false);
 });
 it('fresh lower progress after a completed replay keeps a responsive resume alive for more than thirty seconds',async()=>{

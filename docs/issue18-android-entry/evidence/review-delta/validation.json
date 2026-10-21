@@ -1,0 +1,36 @@
+{
+  "source": "fce7c30e15c0d2899029b09a6e7fcd22f3703fed",
+  "remoteSource": "a44d10c62ec04b4aa90edc935495256fca91c657",
+  "targeted": {
+    "passed": 99,
+    "failed": 0
+  },
+  "before": {
+    "passed": 0,
+    "failed": 3
+  },
+  "native": {
+    "passed": 9,
+    "failed": 0,
+    "pageErrors": 0,
+    "physicalAndroidVerified": false
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "pages": "PASS",
+  "releaseMetadata": "PASS",
+  "localFull": {
+    "passed": 1506,
+    "failed": 8,
+    "skipped": 1,
+    "rawFailureSummary": "full-local-failures.json"
+  },
+  "runtimeRetest": {
+    "success": true,
+    "numPassedTests": 100,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "scope": "Only unchanged runtime/replay files, maxWorkers=1, no timeout override; not a replacement for the failed full local run."
+  },
+  "latestHeadCI": "See PR24 Checks; local full failure is not erased by CI or retest"
+}

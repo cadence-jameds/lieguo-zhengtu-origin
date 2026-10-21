@@ -1,0 +1,65 @@
+{
+  "success": false,
+  "passed": 1506,
+  "failed": 8,
+  "skipped": 1,
+  "scope": "Full unmodified isolated regression, maxWorkers=2, original per-test timeouts. Ran concurrently with native browser; do not treat partial reruns as a clean full local run.",
+  "failures": [
+    {
+      "name": "99 AI and governors match full-validation reference admission with a growing command history",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/replayP0.test.ts",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/replayP0.test.ts:137:1\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:124:62\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:134:62\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:124:62\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "50X governance bridges its own catch-up with low load and never duplicates payment or events",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:134:62\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "50X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:124:62\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "a late event remains unexposed on failed persistence, retries after one second, and never overlaps",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "AssertionError: expected false to be true // Object.is equality\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:20:76\n    at Timeout.checkCallback (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:7145:20)\n    at listOnTimeout (node:internal/timers:635:17)\n    at processTimers (node:internal/timers:571:7)"
+      ]
+    },
+    {
+      "name": "a failed governance save never exposes a new setting or receipt and replay commits only once",
+      "file": "/tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts",
+      "messages": [
+        "AssertionError: expected [] to have a length of 1 but got +0\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /tmp/lieguo-verification-xmJe4h/src/game/formal/runtime.test.ts:149:374\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}
