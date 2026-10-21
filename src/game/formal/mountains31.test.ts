@@ -1,11 +1,12 @@
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
-import {writeFileSync,mkdirSync} from 'node:fs';
 import {createFormalWorld} from './generator';
 import {terrainAt,passable,buildable,generateTerrain} from './terrain';
 import {mountainFootprint,migrateMountains} from './mountains';
 import {route} from './routing';
-import {encodeSave,decodeSave} from './saveCodec';
+import {encodeSave,decodeSave,OLD_CAMPAIGN_MESSAGE} from './saveCodec';
+import {digest} from './canonical';
+import {FORMAL_SAVE_FORMAT} from './versions';
 import {validateFormalWorld} from './schema';
 import {FormalPersistence} from '../persistence';
 import {spatial,invalidateSpatial} from './spatial';
@@ -25,14 +26,19 @@ it('the real settlement command rejects a mountain-covered target without spendi
 it('seed/profile/terrain remain immutable across save/load, world time and site lifecycle data changes',async()=>{
  const w=make(),terrain=w.worldLayer!.terrain,profile=structuredClone(w.worldLayer!.mountains);const loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded.worldLayer!.terrain).toBe(terrain);expect(loaded.worldLayer!.mountains).toEqual(profile);loaded.time=123;loaded.worldLayer!.wildSites[0].generation++;expect(migrateMountains(loaded)).toBe(loaded);expect(loaded.worldLayer!.mountains).toEqual(profile);
 });
-it('legacy migration keeps cities/sites, in-flight army routes/timers/receipts and protected diagonal neighbours intact',async()=>{
- let w=legacy();const c=rich(w);c.military!.units={militia:20};const projected=make().worldLayer!.mountains!.sprites.flatMap(mountainFootprint).find(p=>buildable(terrainAt(w,p.x,p.y))&&!spatial(w).at(p.x,p.y).city&&!spatial(w).at(p.x,p.y).site)!;w.cities[1].x=projected.x;w.cities[1].y=projected.y;invalidateSpatial(w);w=dispatch(w,'raid',{militia:5}).world;const before=structuredClone(w),original=JSON.stringify(w),migrated=(await decodeSave(await encodeSave(w))).world;expect(JSON.stringify(w)).toBe(original);expect(migrated.metadata.terrainVersion).toBe(3);expect(migrated.cities).toEqual(before.cities);expect(migrated.worldLayer!.wildSites).toEqual(before.worldLayer!.wildSites);expect(migrated.armies).toEqual(before.armies);expect(migrated.events).toEqual(before.events);expect(migrated.commandReceipts).toEqual(before.commandReceipts);
- for(const a of migrated.armies)for(const p of a.path!){expect(passable(terrainAt(migrated,p.x,p.y))).toBe(true);for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)if(passable(terrainAt(before,p.x+dx,p.y+dy)))expect(passable(terrainAt(migrated,p.x+dx,p.y+dy))).toBe(true);}
- expect(buildable(terrainAt(migrated,projected.x,projected.y))).toBe(true);validateFormalWorld(migrated);const reloaded=(await decodeSave(await encodeSave(migrated))).world;expect(reloaded).toEqual(migrated);mkdirSync('docs/terrain-v03031',{recursive:true});writeFileSync('docs/terrain-v03031/legacy-migration.json',JSON.stringify({oldVersion:2,newVersion:3,citiesPreserved:true,sitesPreserved:true,armyRoutesAndTimersPreserved:true,oldTerrain:before.worldLayer!.terrain,newTerrain:migrated.worldLayer!.terrain,mountains:migrated.worldLayer!.mountains},null,2));
+async function oldEnvelope(w:FormalWorld){const snapshot=structuredClone(w);snapshot.metadata={...snapshot.metadata,contentVersion:'lieguo-formal-b5.2'} as unknown as FormalWorld['metadata'];return {format:FORMAL_SAVE_FORMAT,metadata:{...snapshot.metadata},snapshot,checksum:await digest(snapshot)};}
+it('old terrain campaigns are rejected without changing cities/sites, in-flight routes/timers, receipts or diagonal neighbours',async()=>{
+ let w=legacy();const c=rich(w);c.military!.units={militia:20};const projected=make().worldLayer!.mountains!.sprites.flatMap(mountainFootprint).find(p=>buildable(terrainAt(w,p.x,p.y))&&!spatial(w).at(p.x,p.y).city&&!spatial(w).at(p.x,p.y).site)!;w.cities[1].x=projected.x;w.cities[1].y=projected.y;invalidateSpatial(w);w=dispatch(w,'raid',{militia:5}).world;
+ const before=structuredClone(w),raw=await oldEnvelope(w),archive=structuredClone(raw);await expect(decodeSave(raw)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);await expect(encodeSave(w)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(w).toEqual(before);expect(raw).toEqual(archive);
+ expect(w.cities).toEqual(before.cities);expect(w.worldLayer!.wildSites).toEqual(before.worldLayer!.wildSites);expect(w.armies).toEqual(before.armies);expect(w.events).toEqual(before.events);expect(w.commandReceipts).toEqual(before.commandReceipts);expect(w.metadata.terrainVersion).toBe(2);expect(w.worldLayer!.mountains).toBeUndefined();
+ for(const a of w.armies)for(const p of a.path!){expect(passable(terrainAt(w,p.x,p.y))).toBe(true);for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)expect(terrainAt(w,p.x+dx,p.y+dy)).toBe(terrainAt(before,p.x+dx,p.y+dy));}expect(buildable(terrainAt(w,projected.x,projected.y))).toBe(true);
 });
-it('corrupt envelopes and forged mountain footprints fail validation before migration',async()=>{
- const old=await encodeSave(legacy());old.checksum='0'.repeat(64);await expect(decodeSave(old)).rejects.toThrow('檢查碼');const w=make(),d=w.worldLayer!.mountains!.sprites[0],p=mountainFootprint(d)[0];w.worldLayer!.terrain=w.worldLayer!.terrain.slice(0,p.y*384+p.x)+'L'+w.worldLayer!.terrain.slice(p.y*384+p.x+1);expect(()=>validateFormalWorld(w)).toThrow();
+it('current checksum corruption and forged mountain footprints still fail; old corrupt campaigns stay blocked before migration',async()=>{
+ const old=await oldEnvelope(legacy());old.checksum='0'.repeat(64);await expect(decodeSave(old)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);const current=await encodeSave(make());current.checksum='0'.repeat(64);await expect(decodeSave(current)).rejects.toThrow('檢查碼');const w=make(),d=w.worldLayer!.mountains!.sprites[0],p=mountainFootprint(d)[0];w.worldLayer!.terrain=w.worldLayer!.terrain.slice(0,p.y*384+p.x)+'L'+w.worldLayer!.terrain.slice(p.y*384+p.x+1);expect(()=>validateFormalWorld(w)).toThrow();
 });
-it('legacy IndexedDB load persists matching geometry atomically and preserves the old save on write fault',async()=>{
- for(const fail of [false,true]){let armed=false;const db=new FormalPersistence({suffix:'mountains31-'+crypto.randomUUID(),fault:p=>{if(armed&&fail&&p==='world-write')throw Error('mountain-write-fault');}});try{const old=await db.start(legacy()),rows=await db.db.saves.toArray();armed=true;if(fail){await expect(db.loadWithOffline(Date.now())).rejects.toThrow('mountain-write-fault');expect(await db.db.saves.toArray()).toEqual(rows);}else{const loaded=await db.loadWithOffline(Date.now());expect(loaded.game!.metadata.terrainVersion).toBe(3);expect(loaded.game!.cities.map(c=>[c.id,c.x,c.y])).toEqual(old.cities.map(c=>[c.id,c.x,c.y]));expect((await db.loadSave()).game!.worldLayer).toEqual(loaded.game!.worldLayer);}}finally{await db.db.delete();}}
+it('old IndexedDB terrain campaigns reject load/import/Recovery without any write or geometry migration',async()=>{
+ let writes=0;const db=new FormalPersistence({suffix:'old-mountains-'+crypto.randomUUID(),fault:p=>{if(p==='world-write'){writes++;throw Error('must not write old campaign');}}});
+ try{const data=await oldEnvelope(legacy());await db.db.saves.put({id:'current',kind:'world',at:1000,data});const id=await db.db.backups.add({at:1000,label:'舊版山脈',campaignId:data.snapshot.campaignId,gameTime:data.snapshot.time,reportCursor:data.snapshot.sequences.report,data});const snapshot=async()=>[await db.db.saves.toArray(),await db.db.backups.toArray(),await db.db.BattleReports.toArray()],before=await snapshot();
+  await expect(db.loadWithOffline(2000)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(await snapshot()).toEqual(before);await expect(db.importSave(JSON.stringify(data))).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(await snapshot()).toEqual(before);await expect(db.restore(id)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(await snapshot()).toEqual(before);expect(writes).toBe(0);
+ }finally{await db.db.delete();}
 });

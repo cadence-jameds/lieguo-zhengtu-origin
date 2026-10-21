@@ -28,3 +28,11 @@
 尚未驗證實體Android、低階GPU、極端長局100X背景切換；不宣稱真機PASS。私人存檔未讀取或上傳。動態戰鬥換速沿用既有tactical cadence（10X上限），其餘事件保留World Time。
 
 UX-2 #22與本PR正式程式修改沒有交集，均從main獨立建分支。原35組AI長測、歷史AB/BA與DEMO證據不重跑、不刪除。C4持續HOLD；本輪功能不表示Gate PASS。未Merge／Deploy／關閉Issue，未開始B9世界奇觀。
+
+## 完整CI發現的舊預期（保留before FAIL）
+
+GitHub CI 39526964454（c010976，job118983822536）：1486通過、4失敗、1skip。3個mountains31案例仍要求舊terrainVersion2自動遷移，已改成Load／Import／Recovery均明確拒絕且saves／backups／BattleReports逐筆不變、world-write=0；仍保留原始城市／據點／在途路徑／時間／Receipt／對角鄰格不變斷言。當前版本的Checksum與偽造山脈拒絕另行保留。
+
+第4項autonomyRuntimeR2c案例用真實performance時間卻假設重複load無時間經過；新正式load會先durable保存前景進度。以固定時鐘分開驗證零時間不再保存／啟用，及非零時間先保存、99AI與事件ID不重複，未放寬timeout。
+
+完全相同的舊測試在隔離副本重現4項FAIL（evidence/ux1-policy-before-fail.json），修正後9項通過0失敗（evidence/ux1-compat-ci-fixes.json）。此提交只調整與核准新局政策矛盾的測試及其確定性時鐘，未改正式程式。全部原始CI數據仍位於該run的regression artifact，沒有抹去舊失敗／Gate。最終完整結果以最新HEAD CI為準。
