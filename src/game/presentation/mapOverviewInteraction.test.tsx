@@ -42,7 +42,7 @@ for(const width of [393,1440])it(`${width}px all-region rendering skips city/wal
  const click=async(text:string)=>{const b=[...container!.querySelectorAll('button')].find(b=>b.textContent===text)!;expect(b).toBeDefined();await act(async()=>b.click());await act(async()=>flush());};
  images.length=0;await click('全區');const canvas=container.querySelector<HTMLCanvasElement>('.map-overlay')!,camera=JSON.parse(canvas.dataset.camera!);
  expect(camera.z).toBeCloseTo(overviewZoom(w,width,600));expect(images).toHaveLength(0);
- await click('顯示標示');expect(glyphs.length).toBeGreaterThan(0);
+ await click('顯示標示');await act(async()=>{(container!.querySelector('.map-float-panel input[type=checkbox]') as HTMLInputElement).click();});await act(async()=>flush());await click('×');expect(glyphs.length).toBeGreaterThan(0);
  const c=w.cities[0],p=project(c),px=(p.x-camera.x)*camera.z+width/2,py=(p.y-camera.y)*camera.z+300;
  const pointer=(type:string)=>new PointerEvent(type,{clientX:px,clientY:py,pointerId:1,pointerType:'touch',bubbles:true});
  await act(async()=>{canvas.dispatchEvent(pointer('pointerdown'));canvas.dispatchEvent(pointer('pointerup'));});

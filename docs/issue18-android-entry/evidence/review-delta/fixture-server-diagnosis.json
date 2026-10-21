@@ -1,0 +1,15 @@
+{
+  "sameSecondSW": {
+    "time2-55": {
+      "mtime": 1792578109.4170537,
+      "sha256": "5e3aee6854b9b2aa6a3e2baed19841cb60a5622cd8cb1bf940ea2bcf0da0675e"
+    },
+    "time2-56": {
+      "mtime": 1792578109.7778718,
+      "sha256": "18c12152b11f4b42aee724494f6667bed1d1f9648bd8083e5c26919bfff97fc4"
+    }
+  },
+  "firstRun404": 2,
+  "observedStale304": 23,
+  "fix": "Test server serves actual current fixture bytes with no-store and no conditional 304; previous identity helper remains served. Browser SW/cache/IDB behavior is unchanged; no timeout increased."
+}

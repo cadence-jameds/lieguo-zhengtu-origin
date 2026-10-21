@@ -1,0 +1,2643 @@
+{
+  "stage": "before",
+  "source": "87b2877215655e3cc4f050624e1463fcdb1ab9fd",
+  "syntheticOnly": true,
+  "seed": 92049,
+  "physicalPhoneVerified": false,
+  "metric": "Canvas renderMs is main-thread paint CPU time, not GPU FPS or end-to-end command latency.",
+  "cases": [
+    {
+      "device": "desktop",
+      "status": "PASS",
+      "menu": "隱藏／顯示\n✥ 拖曳移動\n×\n顯示據點標示\n顯示特殊資源地塊\n七田型 · 7糧\n九田型 · 9糧／9木／9石／9金\n十五田型 · 15糧／15木／15石／15金\n\n只標示可拓殖空地。全區視角請放大後查看；特殊標示不改變拓殖資格。",
+      "medium": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 0
+        },
+        "renderMs": 2.8,
+        "width": 1256,
+        "height": 742,
+        "labels": [],
+        "strokes": 0
+      },
+      "close": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 1.4999999628026608
+        },
+        "special": {
+          "visited": 1005,
+          "misses": 0,
+          "markers": 136,
+          "lodHidden": false,
+          "cacheSize": 1001
+        },
+        "renderMs": 1.5,
+        "width": 1256,
+        "height": 742,
+        "labels": [
+          {
+            "label": "7糧",
+            "x": 1077.9999888407983,
+            "y": 56.00000781144121,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1137.9999873529046,
+            "y": 86.00000706749444,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 927.9999925605322,
+            "y": 41.00000818341465,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 807.9999955363193,
+            "y": 11.00000892736142,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9石",
+            "x": 837.9999947923725,
+            "y": 26.000008555388035,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 897.999993304479,
+            "y": 56.00000781144121,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1047.999989584745,
+            "y": 131.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1077.9999888407983,
+            "y": 146.0000055796009,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1137.9999873529046,
+            "y": 176.0000048356541,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 687.9999985121065,
+            "y": 11.00000892736142,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 807.9999955363193,
+            "y": 71.00000743946782,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 837.9999947923725,
+            "y": 86.00000706749444,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 867.9999940484257,
+            "y": 101.00000669552105,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 927.9999925605322,
+            "y": 131.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1017.9999903286919,
+            "y": 176.0000048356541,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1167.999986608958,
+            "y": 251.00000297578714,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 628,
+            "y": 41.00000818341465,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 687.9999985121065,
+            "y": 71.00000743946782,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 987.9999910726385,
+            "y": 221.0000037197339,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 538.0000022318403,
+            "y": 26.000008555388035,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 598.0000007439468,
+            "y": 56.00000781144121,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 717.9999977681597,
+            "y": 116.00000632354767,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1077.9999888407983,
+            "y": 296.000001859867,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "15木",
+            "x": 1107.9999880968514,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#ffda57"
+          },
+          {
+            "label": "9金",
+            "x": 1227.9999851210644,
+            "y": 371,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 747.9999970242129,
+            "y": 161.00000520762748,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 11.00000892736142,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9石",
+            "x": 628,
+            "y": 131.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 747.9999970242129,
+            "y": 191.0000044636807,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 777.999996280266,
+            "y": 206.00000409170732,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9石",
+            "x": 927.9999925605322,
+            "y": 281.00000223184037,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 957.9999918165854,
+            "y": 296.000001859867,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 598.0000007439468,
+            "y": 146.0000055796009,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 987.9999910726385,
+            "y": 341.00000074394677,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1137.9999873529046,
+            "y": 415.99999888407984,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1197.9999858650112,
+            "y": 445.999998140133,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 508.00000297578714,
+            "y": 131.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 538.0000022318403,
+            "y": 146.0000055796009,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9金",
+            "x": 1107.9999880968514,
+            "y": 430.99999851210646,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 717.9999977681597,
+            "y": 266.00000260381375,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9金",
+            "x": 927.9999925605322,
+            "y": 371,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 238.0000096713082,
+            "y": 56.00000781144121,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 358.00000669552105,
+            "y": 116.00000632354767,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 131.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 687.9999985121065,
+            "y": 281.00000223184037,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 747.9999970242129,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 897.999993304479,
+            "y": 385.9999996280266,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1107.9999880968514,
+            "y": 490.99999702421286,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1167.999986608958,
+            "y": 520.999996280266,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 148.00001190314856,
+            "y": 41.00000818341465,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 208.00001041525496,
+            "y": 71.00000743946782,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 328.0000074394678,
+            "y": 131.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1077.9999888407983,
+            "y": 505.9999966522395,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1137.9999873529046,
+            "y": 535.9999959082927,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1197.9999858650112,
+            "y": 565.9999951643459,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 148.00001190314856,
+            "y": 71.00000743946782,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 238.0000096713082,
+            "y": 116.00000632354767,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9木",
+            "x": 298.00000818341465,
+            "y": 146.0000055796009,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 897.999993304479,
+            "y": 445.999998140133,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9木",
+            "x": 1047.999989584745,
+            "y": 520.999996280266,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1197.9999858650112,
+            "y": 595.9999944203992,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 118.00001264709533,
+            "y": 86.00000706749444,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 538.0000022318403,
+            "y": 296.000001859867,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 568.0000014878935,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 598.0000007439468,
+            "y": 326.00000111592016,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 747.9999970242129,
+            "y": 400.99999925605323,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 897.999993304479,
+            "y": 475.99999739618625,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1017.9999903286919,
+            "y": 535.9999959082927,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1167.999986608958,
+            "y": 610.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 88.0000133910421,
+            "y": 101.00000669552105,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 328.0000074394678,
+            "y": 221.0000037197339,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 478.0000037197339,
+            "y": 296.000001859867,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 508.00000297578714,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9糧",
+            "x": 628,
+            "y": 371,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 208.00001041525496,
+            "y": 191.0000044636807,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1107.9999880968514,
+            "y": 640.999993304479,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 298.00000818341465,
+            "y": 266.00000260381375,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 328.0000074394678,
+            "y": 281.00000223184037,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1047.999989584745,
+            "y": 640.999993304479,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 118.00001264709533,
+            "y": 206.00000409170732,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 328.0000074394678,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 687.9999985121065,
+            "y": 490.99999702421286,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 777.999996280266,
+            "y": 535.9999959082927,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 58.000014134988874,
+            "y": 206.00000409170732,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9糧",
+            "x": 178.0000111592018,
+            "y": 266.00000260381375,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 268.0000089273614,
+            "y": 311.00000148789354,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 448.00000446368074,
+            "y": 400.99999925605323,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 867.9999940484257,
+            "y": 610.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 987.9999910726385,
+            "y": 670.9999925605322,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 1077.9999888407983,
+            "y": 715.999991444612,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 268.0000089273614,
+            "y": 341.00000074394677,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 400.99999925605323,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 58.000014134988874,
+            "y": 266.00000260381375,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 430.99999851210646,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 568.0000014878935,
+            "y": 520.999996280266,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 807.9999955363193,
+            "y": 640.999993304479,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 268.0000089273614,
+            "y": 400.99999925605323,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 657.9999992560532,
+            "y": 595.9999944203992,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9糧",
+            "x": 58.000014134988874,
+            "y": 326.00000111592016,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 118.00001264709533,
+            "y": 356.0000003719734,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 178.0000111592018,
+            "y": 385.9999996280266,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 358.00000669552105,
+            "y": 475.99999739618625,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 490.99999702421286,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 508.00000297578714,
+            "y": 550.9999955363193,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 28.000014878935644,
+            "y": 341.00000074394677,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 448.00000446368074,
+            "y": 550.9999955363193,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 687.9999985121065,
+            "y": 670.9999925605322,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 178.0000111592018,
+            "y": 445.999998140133,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 298.00000818341465,
+            "y": 505.9999966522395,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 328.0000074394678,
+            "y": 520.999996280266,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 418.0000052076275,
+            "y": 565.9999951643459,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 508.00000297578714,
+            "y": 610.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 328.0000074394678,
+            "y": 550.9999955363193,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 448.00000446368074,
+            "y": 610.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 657.9999992560532,
+            "y": 715.999991444612,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 118.00001264709533,
+            "y": 475.99999739618625,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 178.0000111592018,
+            "y": 505.9999966522395,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 298.00000818341465,
+            "y": 565.9999951643459,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 610.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 508.00000297578714,
+            "y": 670.9999925605322,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 268.0000089273614,
+            "y": 580.9999947923725,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9石",
+            "x": 478.0000037197339,
+            "y": 685.9999921885587,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 58.000014134988874,
+            "y": 505.9999966522395,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 238.0000096713082,
+            "y": 595.9999944203992,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 418.0000052076275,
+            "y": 685.9999921885587,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 238.0000096713082,
+            "y": 625.9999936764523,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 298.00000818341465,
+            "y": 655.9999929325056,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 268.0000089273614,
+            "y": 670.9999925605322,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 388.0000059515743,
+            "y": 730.9999910726385,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9金",
+            "x": 178.0000111592018,
+            "y": 655.9999929325056,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 148.00001190314856,
+            "y": 670.9999925605322,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9金",
+            "x": 148.00001190314856,
+            "y": 700.9999918165854,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 178.0000111592018,
+            "y": 715.999991444612,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 28.000014878935644,
+            "y": 670.9999925605322,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 148.00001190314856,
+            "y": 730.9999910726385,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          }
+        ],
+        "strokes": 0
+      },
+      "allEightLabels": {},
+      "territory": {
+        "camera": {
+          "x": 300,
+          "y": 3450,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 1786
+        },
+        "renderMs": 10.4,
+        "width": 1256,
+        "height": 742,
+        "labels": [],
+        "strokes": 0
+      },
+      "rounds": [
+        {
+          "enabled": false,
+          "p50": 9.2,
+          "p95": 15.3,
+          "max": 15.3,
+          "samples": [
+            {
+              "renderMs": 2.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 15.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 11,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 8.5,
+          "p95": 12.1,
+          "max": 12.1,
+          "samples": [
+            {
+              "renderMs": 9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 12.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 8.3,
+          "p95": 19,
+          "max": 19,
+          "samples": [
+            {
+              "renderMs": 7.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 12.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 16.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 19,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 13.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": false,
+          "p50": 7.8,
+          "p95": 29.1,
+          "max": 29.1,
+          "samples": [
+            {
+              "renderMs": 6.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 12.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 29.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 10.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 12.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 1786,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        }
+      ],
+      "overview": {
+        "camera": {
+          "x": 0,
+          "y": 3830,
+          "z": 0.07916666666666666
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 1786
+        },
+        "renderMs": 3.3,
+        "width": 1256,
+        "height": 742,
+        "labels": [],
+        "strokes": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "status": "PASS",
+      "menu": "隱藏／顯示\n✥ 拖曳移動\n×\n顯示據點標示\n顯示特殊資源地塊\n七田型 · 7糧\n九田型 · 9糧／9木／9石／9金\n十五田型 · 15糧／15木／15石／15金\n\n只標示可拓殖空地。全區視角請放大後查看；特殊標示不改變拓殖資格。",
+      "medium": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 0
+        },
+        "renderMs": 0.4,
+        "width": 390,
+        "height": 582,
+        "labels": [],
+        "strokes": 0
+      },
+      "close": {
+        "camera": {
+          "x": -40,
+          "y": 3760,
+          "z": 1.4999999628026608
+        },
+        "special": {
+          "visited": 253,
+          "misses": 0,
+          "markers": 28,
+          "lodHidden": false,
+          "cacheSize": 251
+        },
+        "renderMs": 0.7,
+        "width": 390,
+        "height": 582,
+        "labels": [
+          {
+            "label": "7糧",
+            "x": 284.99999776815963,
+            "y": 36.000006323547666,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 314.99999702421286,
+            "y": 81.00000520762748,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9石",
+            "x": 195,
+            "y": 51.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 314.99999702421286,
+            "y": 111.00000446368071,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 344.9999962802661,
+            "y": 126.00000409170732,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 165.00000074394677,
+            "y": 66.0000055796009,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 75.00000297578714,
+            "y": 51.00000595157428,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 105.00000223184036,
+            "y": 66.0000055796009,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 284.99999776815963,
+            "y": 186.00000260381375,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 254.99999851210643,
+            "y": 201.00000223184037,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 314.99999702421286,
+            "y": 231.00000148789357,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 105.00000223184036,
+            "y": 216.00000185986696,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 135.00000148789357,
+            "y": 231.00000148789357,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 165.00000074394677,
+            "y": 246.00000111592018,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 314.99999702421286,
+            "y": 320.99999925605323,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 45.00000371973391,
+            "y": 216.00000185986696,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 75.00000297578714,
+            "y": 231.00000148789357,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "9糧",
+            "x": 195,
+            "y": 291,
+            "font": "bold 10px system-ui",
+            "color": "#c394ff"
+          },
+          {
+            "label": "7糧",
+            "x": 254.99999851210643,
+            "y": 410.99999702421286,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 344.9999962802661,
+            "y": 455.9999959082927,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 15.00000446368071,
+            "y": 320.99999925605323,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 135.00000148789357,
+            "y": 440.9999962802661,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 374.99999553631926,
+            "y": 560.999993304479,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 224.99999925605323,
+            "y": 515.9999944203992,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 75.00000297578714,
+            "y": 470.99999553631926,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 15.00000446368071,
+            "y": 470.99999553631926,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 75.00000297578714,
+            "y": 530.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          },
+          {
+            "label": "7糧",
+            "x": 15.00000446368071,
+            "y": 530.9999940484257,
+            "font": "bold 10px system-ui",
+            "color": "#62b5ff"
+          }
+        ],
+        "strokes": 0
+      },
+      "allEightLabels": {},
+      "territory": {
+        "camera": {
+          "x": 300,
+          "y": 3450,
+          "z": 0.75
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 502
+        },
+        "renderMs": 1.4,
+        "width": 390,
+        "height": 582,
+        "labels": [],
+        "strokes": 0
+      },
+      "rounds": [
+        {
+          "enabled": false,
+          "p50": 4.5,
+          "p95": 41.6,
+          "max": 41.6,
+          "samples": [
+            {
+              "renderMs": 41.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 18.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 9.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 16.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 3,
+          "p95": 8.3,
+          "max": 8.3,
+          "samples": [
+            {
+              "renderMs": 6.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 7.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 8.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": true,
+          "p50": 3.8,
+          "p95": 6.3,
+          "max": 6.3,
+          "samples": [
+            {
+              "renderMs": 4.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 2.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.7,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 6.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.2,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": true,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "enabled": false,
+          "p50": 3.8,
+          "p95": 5.6,
+          "max": 5.6,
+          "samples": [
+            {
+              "renderMs": 3.8,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 5.4,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.5,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.9,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.1,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3.6,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 4.3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 276.0000000000002,
+                "y": 3436.666666666666,
+                "z": 0.75
+              }
+            },
+            {
+              "renderMs": 3,
+              "visited": 0,
+              "misses": 0,
+              "markers": 0,
+              "lodHidden": false,
+              "cacheSize": 502,
+              "camera": {
+                "x": 300,
+                "y": 3449.9999999999995,
+                "z": 0.75
+              }
+            }
+          ]
+        }
+      ],
+      "overview": {
+        "camera": {
+          "x": 0,
+          "y": 3830,
+          "z": 0.022786458333333332
+        },
+        "special": {
+          "visited": 0,
+          "misses": 0,
+          "markers": 0,
+          "lodHidden": true,
+          "cacheSize": 502
+        },
+        "renderMs": 5.1,
+        "width": 390,
+        "height": 582,
+        "labels": [],
+        "strokes": 0
+      }
+    }
+  ],
+  "errors": [],
+  "passed": 2,
+  "failed": 0
+}

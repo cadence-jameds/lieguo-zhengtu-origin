@@ -1,0 +1,205 @@
+{
+  "source": "6c3a34fb839e7323afe5969785431bc5dee07916",
+  "browser": "154.0.8037.57",
+  "physicalAndroidVerified": false,
+  "versions": "Isolated synthetic 0.30.55/0.30.56 protocol labels; actual local candidate Production build 0.30.58 is unchanged.",
+  "deviceCondition": "Player device status cannot be read remotely. Real Worker error/empty, loading and busy conditions are reproduced separately.",
+  "cases": [
+    {
+      "name": "before-error-empty-disabled",
+      "status": "PASS",
+      "emptyStorage": true,
+      "worldPresent": false,
+      "actualGate": {
+        "busy": false,
+        "updating": false,
+        "loading": false,
+        "error": true
+      },
+      "note": "Real Worker sync on an empty world reproduces engine error. This does not establish the Android device trigger."
+    },
+    {
+      "name": "after-error-empty-direct",
+      "status": "PASS",
+      "directUpdate": true,
+      "noSaveOfMissingWorld": true,
+      "nativeSW": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792567466063.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567466076.7
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567466077.2
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567466078.3
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567466078.6
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567466100.7
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567466102.1
+        }
+      ]
+    },
+    {
+      "name": "after-active-durable-busy-doubleclick",
+      "status": "PASS",
+      "durableBeforeActivation": true,
+      "busyBlocks": true,
+      "duplicateClickOneSync": true,
+      "campaignPreserved": true,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792567478556.3
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "b8e8ab6c-655f-4f8a-adee-6874b22caa87",
+          "at": 1792567478558.9001
+        },
+        {
+          "type": "durable-ack",
+          "requestId": "b8e8ab6c-655f-4f8a-adee-6874b22caa87",
+          "at": 1792567478701.8
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567478705.5
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567478750.5
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567478753.9001
+        }
+      ]
+    },
+    {
+      "name": "after-native-save-abort",
+      "status": "PASS",
+      "realIndexedDBAbort": true,
+      "noActivationOrReload": true,
+      "backupCount": 1,
+      "trace": [
+        {
+          "type": "verify-release",
+          "at": 1792567488831
+        },
+        {
+          "type": "sync-sent",
+          "requestId": "ce39594a-9813-4620-bb9f-008c49f650e5",
+          "at": 1792567488832.9
+        },
+        {
+          "type": "native-idb-abort",
+          "at": 1792567488871.3
+        },
+        {
+          "type": "engine-error",
+          "text": "The transaction was aborted, so the request cannot be fulfilled.\n AbortError: The transaction was aborted, so the request cannot be fulfilled.",
+          "at": 1792567488872.0999
+        }
+      ]
+    },
+    {
+      "name": "after-incompatible-archive-preserved",
+      "status": "PASS",
+      "unsupportedCampaignBlocked": true,
+      "allTablesByteEquivalent": true,
+      "rawExportMatches": true,
+      "updateGate": "incompatible"
+    },
+    {
+      "name": "after-loading-blocks",
+      "status": "PASS",
+      "loadingBlocked": true,
+      "becomesActionableAfterRead": true
+    },
+    {
+      "name": "after-invalid-registration-retry",
+      "status": "PASS",
+      "fixtureOnlyScopedUnregister": true,
+      "appNeverUnregisters": true,
+      "registeredSafely": true,
+      "trace": [
+        {
+          "type": "readonly-complete",
+          "at": 1792567499005.9001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567499006.1
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567499007.8
+        },
+        {
+          "type": "native-sw-error",
+          "name": "TypeError",
+          "at": 1792567499048.4001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567499107.6
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567499108.9001
+        },
+        {
+          "type": "readonly-complete",
+          "at": 1792567499110.8
+        },
+        {
+          "type": "verify-release",
+          "at": 1792567500957.2002
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1792567500959.1
+        },
+        {
+          "type": "controllerchange",
+          "at": 1792567500992.6
+        },
+        {
+          "type": "beforeunload",
+          "at": 1792567500993.4001
+        }
+      ]
+    },
+    {
+      "name": "after-component-unready-retry",
+      "status": "PASS",
+      "failedDownloadNoActivation": true,
+      "retrySuccess": true
+    },
+    {
+      "name": "after-desktop-empty",
+      "status": "PASS",
+      "desktop": true,
+      "nativeSW": true
+    }
+  ],
+  "errors": [],
+  "passed": 9,
+  "failed": 0
+}
