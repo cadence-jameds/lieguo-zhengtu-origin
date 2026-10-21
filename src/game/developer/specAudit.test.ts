@@ -3,7 +3,7 @@ import {V85,auditCatalogs,formulaCatalog,productionTrace} from './specAudit';
 import {createTrialWorld,trialPreview,variantsFor} from './specTrials';
 import {developerWorld} from './scenarios';
 import {writeFileSync,mkdirSync} from 'node:fs';
-const config={scenario:'new' as const,seed:90217,speed:50,civilizationId:'civ_zhongguo'};
+const config={scenario:'new' as const,seed:90217,speed:25,civilizationId:'civ_zhongguo'};
 it('independent v85 reference includes all catalogs and catches a changed expected value',()=>{
  expect(V85.buildings).toHaveLength(20);expect(V85.techs).toHaveLength(82);expect(V85.units).toHaveLength(28);expect(V85.sections).toHaveLength(364);
  const before=V85.buildings[0].baseCost.food;V85.buildings[0].baseCost.food=before+5;
@@ -28,6 +28,6 @@ it('production fixture exposes independent formula and real one-hour accumulated
 it('six civilizations use the independent v85 blacksmith limits and all five speeds preserve the same unit training world duration',()=>{
  const base=developerWorld(config),evidence:unknown[]=[];
  for(const civ of ['civ_zhongguo','civ_byzantium','civ_frankia','civ_britannia','civ_japan','civ_mongolia'])for(const d of V85.techs.filter(t=>t.id.startsWith('blacksmith.'))){const {world,info}=createTrialWorld({kind:'tech',target:d.id,level:1,variant:'ready',config:{...config,civilizationId:civ}},base);const p=trialPreview(world,info);expect(p?.status).toBe('match');evidence.push({civilization:civ,id:d.id,expected:info.expectedAdmission,actual:p?.actual});}
- for(const speed of [1,3,6,10,50])for(const lv of [1,5,10,15]){const {world,info}=createTrialWorld({kind:'unit',target:'swordsman',level:lv,variant:'ready',config:{...config,speed}},base);world.speed=speed;const p=trialPreview(world,info);expect(p?.status).toBe('match');if(p&&'comparisons' in p)expect(p.comparisons?.every(c=>c.matches)).toBe(true);evidence.push({speed,producerLevel:lv,worldMs:info.expectedDurationMs,realSeconds:info.expectedDurationMs!/speed/1000});}
+ for(const speed of [1,3,6,10,25])for(const lv of [1,5,10,15]){const {world,info}=createTrialWorld({kind:'unit',target:'swordsman',level:lv,variant:'ready',config:{...config,speed}},base);world.speed=speed;const p=trialPreview(world,info);expect(p?.status).toBe('match');if(p&&'comparisons' in p)expect(p.comparisons?.every(c=>c.matches)).toBe(true);evidence.push({speed,producerLevel:lv,worldMs:info.expectedDurationMs,realSeconds:info.expectedDurationMs!/speed/1000});}
  writeFileSync('docs/wall-delta-v03022/civilization-speed-comparison.json',JSON.stringify(evidence,null,2));
 });

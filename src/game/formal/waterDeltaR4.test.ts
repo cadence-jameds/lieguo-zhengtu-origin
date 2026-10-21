@@ -22,7 +22,7 @@ it('D2 weighted A* chooses faster land detour rather than shorter water route',(
  expect(r.distance).toBeLessThan(11);expect(r.path.slice(1,-1).every(p=>terrainAt(w,p.x,p.y)==='land')).toBe(true);
  expect(route(w,{x:0,y:1},{x:6,y:1})).toEqual(r);
 });
-it.each([1,10,50] as const)('D2 real military snapshots use weighted segment times at %sX and survive SaveLoad/slicing',async speed=>{
+it.each([1,10,25] as const)('D2 real military snapshots use weighted segment times at %sX and survive SaveLoad/slicing',async speed=>{
  let w=battlefield();w.speed=speed;w.offlineHours=0;
  const home=w.cities[0],cells=w.worldLayer!.terrain.split('');
  // Water around the home forces every new route to pay the approved cost.

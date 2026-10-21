@@ -34,6 +34,7 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
     [target.id,target.x,target.y,target.generation,target.phase??'active']);
    return[city.x,city.y,Object.keys(p.units).sort().map(id=>[id,city.military?.units[id]??0]),faction.civilizationId,faction.age,faction.techIds,politicalScope(w,faction.id),destination,w.dimensions,w.worldLayer?.terrain,w.worldLayer?.mountains];
   }
+  case 'campaign.configure':return[w.speed,w.offlineHours??12];
   case 'city.rename':return[city.name];
   case 'field.upgrade':{
    const field=city.fields?.find(f=>f.slot===p.slot),from=targetJobs.at(-1)?.toLevel??field?.level??0;

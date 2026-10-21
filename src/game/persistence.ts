@@ -9,8 +9,8 @@ import type {CampaignId} from './formal/ids';
 import type {CommandReceipt,FormalReport,FormalWorld} from './formal/model';
 import {receiptSchema} from './formal/schema';
 import {canonicalJSON} from './formal/canonical';
-import {decodeSave,encodeSave,validateReportHistory,type FormalEnvelope} from './formal/saveCodec';
-import {FORMAL_DB_NAME} from './formal/versions';
+import {OLD_CAMPAIGN_MESSAGE,assertCampaignCompatibility,decodeSave,encodeSave,validateReportHistory,type FormalEnvelope} from './formal/saveCodec';
+import {FORMAL_DB_NAME,LEGACY_FORMAL_DB_NAME} from './formal/versions';
 export {decodeSave,encodeSave} from './formal/saveCodec';
 /** Presentation timestamps are captured while the event's real clock anchor is known. */
 function stampBattle(p:BattleReportPayload,real:(at:number)=>number){p.realResolvedAt??=real(p.resolvedAt);if(p.intel)p.intel.observedRealAt??=real(p.intel.observedAt);}
@@ -34,9 +34,9 @@ const reportMatches=(r:FormalReport,filter:ReportFilter)=>filter==='all'||(filte
 const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),receipts:z.array(receiptSchema)}).strict())}).strict();
 export class FormalDatabase extends Dexie {
  saves!:Table<WorldRow|AuthorityRow,string>;backups!:Table<RecoveryRow,number>;BattleReports!:Table<ReportRow,string>;
- constructor(suffix=''){
+ constructor(suffix='',databaseName:string=FORMAL_DB_NAME){
   if(suffix&&!/^[A-Za-z0-9_.-]+$/.test(suffix))throw new Error('Invalid formal database suffix');
-  super(FORMAL_DB_NAME+(suffix?'-'+suffix:''));
+  super(databaseName+(suffix?'-'+suffix:''));
   this.version(1).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]'});
  }
 }
@@ -124,10 +124,11 @@ export class FormalPersistence {
    return w;
   });
  }
- async save(world:FormalWorld,reports:readonly FormalReport[]=[],expectedRevision?:number){return this.commit(world,reports,'save',expectedRevision);}
+ async save(world:FormalWorld,reports:readonly FormalReport[]=[],expectedRevision?:number,savedAt?:number){return this.commit(world,reports,'save',expectedRevision,savedAt);}
  async start(world:FormalWorld){return this.commit(world,[],'start');}
  private async loadAnchored():Promise<{game:FormalWorld|null;recovered:boolean;savedAt?:number}>{
-  const [row,authority]=await this.db.transaction('r',this.db.saves,async()=>[await this.db.saves.get('current'),await this.authority()] as const);if(!row)return{game:null,recovered:false};
+  const [row,authority]=await this.db.transaction('r',this.db.saves,async()=>[await this.db.saves.get('current'),await this.authority()] as const);if(!row){if(await hasLegacyCampaign())throw new Error(OLD_CAMPAIGN_MESSAGE);return{game:null,recovered:false};}
+  if(row.kind==='world')assertCampaignCompatibility(row.data);
   let world:FormalWorld|undefined;
   try{
    if(row.kind!=='world')throw new Error('Invalid world row');
@@ -156,10 +157,10 @@ export class FormalPersistence {
   onProgress?.('offline',0,0);
   const result=await advanceOfflineCooperative(loaded.game,loaded.savedAt??now,now,(fraction,events)=>onProgress?.('offline',fraction,events));
   // Even 0h refreshes the wall anchor atomically. Expose nothing until save resolves.
-  const draft=result.world===loaded.game?{...result.world,revision:result.world.revision+1}:result.world;
-  const real=(at:number)=>Math.max(0,Math.floor((loaded.savedAt??now)+(at-loaded.game!.time)/effectiveSpeed(loaded.game!)));
+  const draft=result.world.revision===loaded.game.revision?{...result.world,revision:result.world.revision+1}:result.world;
+  const real=(at:number)=>Math.max(0,Math.floor((loaded.savedAt??now)+(at-loaded.game!.time)/loaded.game!.speed));
   stampPending(draft,real);
-  const reports=result.reports.map(r=>{const copy={...r,realAt:real(r.at),clockSpeed:effectiveSpeed(loaded.game!)};if(copy.battle)stampBattle(copy.battle,real);return copy;});
+  const reports=result.reports.map(r=>{const copy={...r,realAt:real(r.at),clockSpeed:loaded.game!.speed};if(copy.battle)stampBattle(copy.battle,real);return copy;});
   onProgress?.('save');
   const game=await this.commit(draft,reports,'save',loaded.game.revision,now);
   return{game,recovered:loaded.recovered,summary:{...result.summary,recovered:loaded.recovered}};
@@ -251,3 +252,14 @@ export const clearSavedGames=()=>active().clearSavedGames();
 export const loadWithOffline=(onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void)=>active().loadWithOffline(Date.now(),onProgress);
 
 export const readCityIntel=(world:FormalWorld,cityId:string,generation?:number)=>active().readCityIntel(world,cityId,generation);
+
+/** Dynamic-schema open never requests a version upgrade or writes a legacy row. */
+export async function hasLegacyCampaign(){
+ if(!await Dexie.exists(LEGACY_FORMAL_DB_NAME))return false;
+ const old=new Dexie(LEGACY_FORMAL_DB_NAME);try{await old.open();return await old.transaction('r',old.tables,async()=>{for(const t of old.tables)if(await t.count())return true;return false;});}finally{old.close();}
+}
+export async function exportLegacyCampaign(){
+ if(!await Dexie.exists(LEGACY_FORMAL_DB_NAME))throw new Error('沒有可匯出的舊戰役。');
+ const old=new Dexie(LEGACY_FORMAL_DB_NAME);
+ try{await old.open();const rows=(name:string)=>old.tables.some(t=>t.name===name)?old.table(name).toArray():Promise.resolve([]);const archive=await old.transaction('r',old.tables,async()=>({format:'lieguo-historical-archive-v1',sourceDatabase:LEGACY_FORMAL_DB_NAME,saves:await rows('saves'),backups:await rows('backups'),reports:await rows('BattleReports')}));const text=JSON.stringify(archive);if(new TextEncoder().encode(text).length>100*1024*1024)throw new Error('舊備份超過100 MiB，原資料保留。');return text;}finally{old.close();}
+}

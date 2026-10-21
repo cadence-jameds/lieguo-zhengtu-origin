@@ -1,10 +1,12 @@
+import {digest} from './canonical';
+import {FORMAL_SAVE_FORMAT} from './versions';
 import 'fake-indexeddb/auto';
 import {afterAll,afterEach,describe,it,expect} from 'vitest';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {battlefield,dispatch,arrive,issue} from './combatTestSupport';
 import {build} from './developmentTestSupport';
 import {advanceFormal} from './reducer';
-import {encodeSave,decodeSave} from './saveCodec';
+import {OLD_CAMPAIGN_MESSAGE,decodeSave} from './saveCodec';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 import {advanceOffline} from './offline';
 import {EventScheduler} from './scheduler';
@@ -69,11 +71,11 @@ it('R1 restores a valid intermediate siege after corruption, retaining partial d
 it.each(['report-write','backup-write','world-write','authority-write'] as const)('v91 %s atomic failure cannot duplicate final effects',async point=>{
  let failure:FailurePoint|undefined;const p=store(at=>{if(at===failure)throw Error('fault');});let w=await p.start(begin({militia:1,ram:20}).world);const before=await p.db.saves.toArray(),next=w.combat!.battles[0].nextRoundAt,t=advanceFormal(w,next);failure=point;await expect(p.save(t.world,t.reports,w.revision)).rejects.toThrow('fault');expect(await p.db.saves.toArray()).toEqual(before);expect(await p.db.BattleReports.count()).toBe(0);failure=undefined;w=await p.save(t.world,t.reports,w.revision);expect(await p.db.BattleReports.count()).toBe(1);expect(advanceFormal(w,next).reports).toHaveLength(0);evidence[point]={finals:w.combat!.receipts.filter(r=>r.kind==='final').length,reports:await p.db.BattleReports.count()};
 });
-it('old native ongoing/in-flight armies keep IDs, rounds, pools, deadlines and receipts; old reports remain without invented siege fields',async()=>{
- let w=battlefield();w.cities[0].military!.units={militia:100};w.cities[1].military!.units={militia:100};w=arrive(dispatch(w,'conquest',{militia:100}).world).world;const b=w.combat!.battles[0];for(const key of ['phase','siegeRound','wallDamage','wallDamageLevel','catapultBatchDone','developmentLost','siegeChanges','siegeHistory','history','historyOmitted'])delete (b as unknown as Record<string,unknown>)[key];w.metadata.rulesetVersion='v86-b5.1';const envelope=await encodeSave(w),loaded=(await decodeSave(envelope)).world;expect(loaded.combat!.battles[0]).toMatchObject({...b,phase:'combat',siegeRound:0,catapultBatchDone:false});expect(loaded.combat!.receipts).toEqual(w.combat!.receipts);expect(loaded.armies).toEqual(w.armies);expect(loaded.events).toEqual(w.events);expect(finish(loaded).reports).toHaveLength(1);evidence.legacy=loaded.combat!.battles[0];
+it('old native ongoing battle is blocked without changing IDs, rounds, pools or deadlines',async()=>{
+ let w=battlefield();w.cities[0].military!.units={militia:100};w.cities[1].military!.units={militia:100};w=arrive(dispatch(w,'conquest',{militia:100}).world).world;w.metadata.rulesetVersion='v86-b5.1';const before=structuredClone(w),envelope={format:FORMAL_SAVE_FORMAT,metadata:w.metadata,checksum:await digest(w),snapshot:structuredClone(w)};await expect(decodeSave(envelope)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(w).toEqual(before);evidence.legacy={blocked:true,battleId:w.combat!.battles[0].id};
 });
-it.each([1,3,6,10,50,200])('speed %s follows tactical cap and eleven siege intervals',speed=>{
- let w=battlefield();w.speed=speed===200?50:speed as FormalWorld['speed'];if(speed===200)w.developer={enabled:true,speed:200};w.cities[0].military!.units={militia:1};w.cities[1].wallLevel=15;const first=arrive(dispatch(w,'conquest',{militia:1}).world),b=first.world.combat!.battles[0];expect((b.nextRoundAt-first.world.time)/speed).toBe(300000/Math.min(speed,10));const end=finish(first.world);expect((end.world.time-first.world.time)/speed).toBe(11*300000/Math.min(speed,10));expect(end.reports[0].battle!.siegeRounds).toBe(12);evidence['speed-'+speed]={realInterval:tacticalRoundWorldMs(speed)/speed,realSiegeMs:(end.world.time-first.world.time)/speed};
+it.each([1,3,6,10,25,50,100])('speed %s follows tactical cap and eleven siege intervals',speed=>{
+ let w=battlefield();w.speed=speed>=50?25:speed as FormalWorld['speed'];if(speed>=50)w.developer={enabled:true,speed:speed as 50|100};w.cities[0].military!.units={militia:1};w.cities[1].wallLevel=15;const first=arrive(dispatch(w,'conquest',{militia:1}).world),b=first.world.combat!.battles[0];expect((b.nextRoundAt-first.world.time)/speed).toBe(300000/Math.min(speed,10));const end=finish(first.world);expect((end.world.time-first.world.time)/speed).toBe(11*300000/Math.min(speed,10));expect(end.reports[0].battle!.siegeRounds).toBe(12);evidence['speed-'+speed]={realInterval:tacticalRoundWorldMs(speed)/speed,realSiegeMs:(end.world.time-first.world.time)/speed};
 });
 it('player permissions expose only own precise forces and bounded legal history, never pools/hidden HP or exact enemy count',()=>{
  let w=battlefield();w.cities[0].military!.units={militia:1000};w.cities[1].military!.units={militia:777};w=arrive(dispatch(w,'conquest',{militia:1000}).world).world;const b=w.combat!.battles[0],attack=liveBattleView(w,b.id)!;expect(attack.initial).toEqual({militia:1000});expect(JSON.stringify(attack)).not.toMatch(/hp|Damage|hpPerUnit|777/);w.playerFactionId=w.factions[1].id;expect(liveBattleView(w,b.id)!.defending).toBe(true);w.playerFactionId=w.factions[2].id;expect(liveBattleView(w,b.id)).toBeNull();
@@ -95,13 +97,13 @@ it('completed ram/weapon tech uses actual owner identity; construction preserves
 it('losing all occupying soldiers during siege never lets surviving engines transfer ownership or apply population losses',()=>{
  let w=begin({militia:1,ram:1}).world;const owner=w.cities[1].ownerFactionId,pop=w.cities[1].population;w.armies[0].units={ram:1};const t=advanceFormal(w,w.combat!.battles[0].nextRoundAt);expect(t.reports[0].battle!.conquestReason).toBe('no-occupiers');expect(t.world.cities[1].ownerFactionId).toBe(owner);expect(t.world.cities[1].population).toBeGreaterThanOrEqual(pop);expect(t.world.cities[1].integrationWorkHours).toBe(0);evidence.noOccupiers=t.reports[0].battle;
 });
-it('switching developer 50X to 200X keeps remaining tactical time, EventId and siege budget',()=>{
- let w=battlefield();w.speed=50;w.cities[0].military!.units={militia:1};w.cities[1].wallLevel=15;w=arrive(dispatch(w,'conquest',{militia:1}).world).world;const b=structuredClone(w.combat!.battles[0]);
- w=issue(w,{type:'developer.configure',cityId:w.cities[0].id,enabled:true,speed:200}).world;expect((w.combat!.battles[0].nextRoundAt-w.time)/200).toBe(30000);expect(w.combat!.battles[0]).toMatchObject({id:b.id,roundEventId:b.roundEventId,siegeRound:1,wallDamage:b.wallDamage});validateFormalWorld(w);
+it('switching developer 50X to 100X keeps remaining tactical time, EventId and siege budget',()=>{
+ let w=battlefield();w.speed=25;w.developer={enabled:true,speed:50};w.cities[0].military!.units={militia:1};w.cities[1].wallLevel=15;w=arrive(dispatch(w,'conquest',{militia:1}).world).world;const b=structuredClone(w.combat!.battles[0]);
+ w=issue(w,{type:'developer.configure',cityId:w.cities[0].id,enabled:true,speed:100}).world;expect((w.combat!.battles[0].nextRoundAt-w.time)/100).toBe(30000);expect(w.combat!.battles[0]).toMatchObject({id:b.id,roundEventId:b.roundEventId,siegeRound:1,wallDamage:b.wallDamage});validateFormalWorld(w);
 });
 it('strict v91 save schema rejects partial progress, excess rounds, future summaries and overfull wall damage',()=>{
  const w=begin({militia:1,ram:1}).world;for(const mutate of [(b:NonNullable<FormalWorld['combat']>['battles'][0])=>{delete b.wallDamage;},(b:NonNullable<FormalWorld['combat']>['battles'][0])=>{b.siegeRound=13;},(b:NonNullable<FormalWorld['combat']>['battles'][0])=>{b.wallDamage=999999;},(b:NonNullable<FormalWorld['combat']>['battles'][0])=>{b.history![0].at=w.time+1;}]){const copy=structuredClone(w);mutate(copy.combat!.battles[0]);expect(()=>validateFormalWorld(copy)).toThrow();}
 });
-it('v0.30.38 native outbound conquest preserves its path, army/battle/command identities and deadline when loaded into v91',async()=>{
- let w=battlefield();w.cities[0].military!.units={militia:1,ram:1};w.cities[1].wallLevel=15;w=dispatch(w,'conquest',{militia:1,ram:1}).world;w.metadata.rulesetVersion='v86-b5.1';const army=structuredClone(w.armies[0]),loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded.armies[0]).toEqual(army);expect(loaded.events).toEqual(w.events);expect(loaded.metadata.rulesetVersion).toBe('v91-b5.2');const arrived=arrive(loaded);expect(arrived.world.combat!.battles[0]).toMatchObject({id:army.battleId,phase:'siege',siegeRound:1});expect(arrived.reports).toHaveLength(0);evidence.legacyOutbound={army,battle:arrived.world.combat!.battles[0]};
+it('old outbound conquest is rejected without rewriting its path, army/command identities or deadline',async()=>{
+ let w=battlefield();w.cities[0].military!.units={militia:1,ram:1};w.cities[1].wallLevel=15;w=dispatch(w,'conquest',{militia:1,ram:1}).world;w.metadata.rulesetVersion='v86-b5.1';const before=structuredClone(w),envelope={format:FORMAL_SAVE_FORMAT,metadata:w.metadata,checksum:await digest(w),snapshot:structuredClone(w)};await expect(decodeSave(envelope)).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(w).toEqual(before);evidence.legacyOutbound={blocked:true,armyId:w.armies[0].id};
 });

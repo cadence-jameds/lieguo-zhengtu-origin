@@ -14,6 +14,7 @@ import {applyWorldPatch} from './worldStream';
 import {governanceBase,type GovernanceBase} from './governanceAdmission';
 export function useGame(){
  const [world,setWorld]=useState<FormalWorld|null>(null),[status,setStatus]=useState<'loading'|'ready'|'error'|'locked'>('loading');
+ const [legacyAvailable,setLegacyAvailable]=useState(false);
  const [offline,setOffline]=useState<OfflineSummary|null>(null);
  const [loadPhase,setLoadPhase]=useState('啟動世界引擎'),[loadProgress,setLoadProgress]=useState<number|null>(null),[loadEvents,setLoadEvents]=useState(0);
  const stopCurrentLoad=useRef<(()=>void)|null>(null);
@@ -70,7 +71,7 @@ export function useGame(){
      if(loading&&Number.isFinite(msg.events)&&msg.events>lastEvents){lastEvents=msg.events;setLoadEvents(lastEvents);arm();}
      return;
     }
-    const r=e.data;
+    const r=e.data;if(typeof r.legacyAvailable==='boolean')setLegacyAvailable(r.legacyAvailable);
     if(r.type==='cityIntel'){const q=intelQueries.current.get(r.queryId);if(q){intelQueries.current.delete(r.queryId);if(r.error)q.reject(new Error(r.error));else q.resolve(r.data);}return;}
     if(r.type==='requestDone'){finishSave(r.requestId,new Error('保存未完成，請稍後再試。'));requests.current.finish(r.requestId);setBusy(requests.current.busy);return;}
     if(r.type==='state'||r.type==='switched'||r.type==='switchFailed'){
@@ -106,10 +107,10 @@ export function useGame(){
   },()=>{setStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{if(!disposed){setError(String(e));setStatus('error');}});
   return()=>{clearTimeout(commandTimer.current);disposed=true;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
  },[]);
- useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume'});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away'});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
+ useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume',...(document.hidden?{visibilityAt:performance.timeOrigin+performance.now()}:{})});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away',visibilityAt:performance.timeOrigin+performance.now()});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
  // Capture the rendered world: a Worker message may update current.current
  // before React commits the new target level shown by a construction button.
  const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=world;if(!g||requests.current.busy||commands.current.busy)return;const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};send({type:'command',order,...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});},[send,world]);
  const importFile=async(file:File)=>{if(file.size>100*1024*1024){setError('存檔超過 100 MiB。');return;}send({type:'import',text:await file.text(),transitionId:crypto.randomUUID()});};
- return{feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
+ return{legacyAvailable,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
 }

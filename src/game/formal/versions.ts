@@ -1,12 +1,13 @@
 import { RELEASE } from '../release';
 /** Initial B1 contract versions; final freeze belongs to B11. */
 export const FORMAL_SCHEMA_VERSION = 1 as const;
-export const FORMAL_CONTENT_VERSION = 'lieguo-formal-b1.1' as const;
+export const FORMAL_CONTENT_VERSION = 'lieguo-formal-b1.2-time2' as const;
 export const FORMAL_RULESET_VERSION = 'v84-b1-skeleton.1' as const;
 export const FORMAL_GENERATOR_VERSION = 'minimal-fixture-b1.1' as const;
 export const FORMAL_TERRAIN_VERSION = 1 as const;
 export const FORMAL_SAVE_FORMAT = 'lieguo-formal-save' as const;
-export const FORMAL_DB_NAME = 'lieguo-formal-stage2-schema1' as const;
+export const LEGACY_FORMAL_DB_NAME = 'lieguo-formal-stage2-schema1' as const;
+export const FORMAL_DB_NAME = 'lieguo-formal-stage2-time2' as const;
 export const FORMAL_WRITER_LOCK = `${FORMAL_DB_NAME}-writer`;
 export const formalMetadata = () => ({
   appVersion: RELEASE.version,
@@ -16,7 +17,7 @@ export const formalMetadata = () => ({
   worldGeneratorVersion: FORMAL_GENERATOR_VERSION,
   terrainVersion: FORMAL_TERRAIN_VERSION,
 });
-export const NATIVE_CONTENT_VERSION = 'lieguo-formal-b5.1' as const;
+export const NATIVE_CONTENT_VERSION = 'lieguo-formal-b5.2-time2' as const;
 export const NATIVE_RULESET_VERSION = 'v91-b5.2' as const;
 export const NATIVE_GENERATOR_VERSION = 'formal-world-384-v1' as const;
 export const NATIVE_TERRAIN_VERSION = 3 as const;

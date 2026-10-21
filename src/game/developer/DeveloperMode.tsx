@@ -41,7 +41,7 @@ export const MANUAL_CHECKS=[
 ] as const;
 type Tab='spec'|'checks'|'city'|'map'|'research'|'army'|'logistics'|'data'|'logs';
 const TABS:Record<Tab,string>={spec:'v85 規格驗證台',checks:'驗證清單',city:'城市建設',map:'世界地圖',research:'科技／時代',army:'軍隊／拓殖',logistics:'商隊物流',data:'規格資料',logs:'事件／命令'};
-const initial:DeveloperConfig={scenario:'new',seed:90217,speed:50,civilizationId:'civ_zhongguo'};
+const initial:DeveloperConfig={scenario:'new',seed:90217,speed:25,civilizationId:'civ_zhongguo'};
 type ManualResult={status:'pending'|'pass'|'fail';note:string};
 export default function DeveloperMode({mobile,onClose}:{mobile:boolean;onClose:()=>void}){
  const [config,setConfig]=useState<DeveloperConfig>(initial),[activeConfig,setActiveConfig]=useState<DeveloperConfig>(initial),[world,setWorld]=useState<FormalWorld|null>(null),[busy,setBusy]=useState(true),[error,setError]=useState(''),[notice,setNotice]=useState(''),[results,setResults]=useState<CheckResult[]>([]),[logs,setLogs]=useState<DeveloperLog[]>([]),[tab,setTab]=useState<Tab>('spec'),[cityId,setCityId]=useState<CityId>(),[target,setTarget]=useState<{x:number;y:number}>(),[filter,setFilter]=useState(''),[showConfig,setShowConfig]=useState(false),[manual,setManual]=useState<Record<string,ManualResult>>(()=>{try{return JSON.parse(localStorage.getItem('lieguo-developer-manual-v'+RELEASE.version)??'{}');}catch{return {};}});
@@ -81,7 +81,7 @@ export default function DeveloperMode({mobile,onClose}:{mobile:boolean;onClose:(
   {showConfig&&<form className="developer-config" onSubmit={e=>{e.preventDefault();setCityId(undefined);setTarget(undefined);send({type:'start',config});}}>
    <label>情境<select value={config.scenario} onChange={e=>setConfig(c=>({...c,scenario:e.target.value as Scenario}))}>{Object.entries(SCENARIOS).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>
    <label>文明<select value={config.civilizationId} onChange={e=>setConfig(c=>({...c,civilizationId:e.target.value}))}>{Object.entries(CIV_NAMES).map(([id,name])=><option key={id} value={id}>{name}</option>)}</select></label>
-   <label>倍數<select value={config.speed} onChange={e=>setConfig(c=>({...c,speed:Number(e.target.value)}))}>{[1,3,6,10,50].map(n=><option key={n} value={n}>{n}X</option>)}</select></label>
+   <label>倍數<select value={config.speed} onChange={e=>setConfig(c=>({...c,speed:Number(e.target.value)}))}>{[1,3,6,10,25].map(n=><option key={n} value={n}>{n}X</option>)}</select></label>
    <label>時代<select disabled={config.scenario==='new'} value={config.age??'preset'} onChange={e=>setConfig(c=>({...c,age:e.target.value==='preset'?undefined:Number(e.target.value) as 0|1|2|3}))}><option value="preset">情境預設</option>{['黑暗','封建','城堡','帝王'].map((name,i)=><option key={name} value={i}>{name}</option>)}</select></label><label>種子<input type="number" min={0} max={2147483647} value={config.seed} onChange={e=>setConfig(c=>({...c,seed:Number(e.target.value)}))}/></label>
    <label>起始人口（留空用預設）<input type="number" min={0} max={30400} disabled={config.scenario==='new'} value={config.population??''} onChange={e=>setConfig(c=>({...c,population:e.target.value===''?undefined:Number(e.target.value)}))}/></label>
    <label>城堡 Lv<select value={config.castleLevel??1} onChange={e=>setConfig(c=>({...c,castleLevel:Number(e.target.value)}))}>{Array.from({length:15},(_,i)=><option key={i} value={i+1}>{i+1}</option>)}</select></label>

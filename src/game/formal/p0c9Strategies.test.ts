@@ -21,7 +21,7 @@ import {validateFormalWorld} from './schema';
 
 let serial=0;
 function setup(){
- let w=isolatedAutonomyFixture(createFormalWorld({campaign:'p0c9-controlled-'+(++serial),seed:90217,offlineHours:24}));
+ let w=isolatedAutonomyFixture(createFormalWorld({campaign:'p0c9-controlled-'+(++serial),seed:90217,offlineHours:12}));
  w=advanceFormal(w,2*HOUR).world;
  const a=w.autonomy!.agents.find(a=>publicSituation(w,a,w.cities.find(c=>c.ownerFactionId===a.factionId)!).length)!;
  const c=w.cities.find(c=>c.ownerFactionId===a.factionId)!;
@@ -109,7 +109,7 @@ it('inactive and cooldown gates remain ahead of strategy evaluation',()=>{
  const {w,c,a}=setup();a.active=false;expect(militaryDecision(w,c,a)).toEqual([]);a.active=true;a.lastWarAt=w.time;expect(militaryDecision(w,c,a)).toEqual([]);
 });
 const stores:FormalPersistence[]=[];afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
-for(const speed of [1,10,50])it(`${speed}X real military decisions preserve Save/Load, offline, cooperative and sliced replay`,async()=>{
+for(const speed of [1,10,25])it(`${speed}X real military decisions preserve Save/Load, offline, cooperative and sliced replay`,async()=>{
  const ctx=setup(),{a}=ctx;let w=ctx.w;w.speed=speed;const e=w.events.find(e=>e.id===a.eventId)!;e.at=a.nextAt=w.time+1;a.decisions=Array.from({length:1000},(_,i)=>i+1).find(n=>aiRandom(w.seed,a.factionId,n+100)<.3+.65*a.traits.activity&&aiRandom(w.seed,a.factionId,n+311)<=.15+a.traits.military*.55)!-1;
  const end=w.time+2*HOUR,whole=advanceFormal(w,end).world;expect(whole.commandReceipts.some(r=>r.issuerId===a.factionId&&JSON.parse(r.fingerprint).payload.type==='army.dispatch')).toBe(true);const decoded=(await decodeSave(await encodeSave(w))).world;
  expect(advanceFormal(decoded,end).world).toEqual(whole);

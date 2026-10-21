@@ -6,6 +6,7 @@ import {handleAutonomy,retireAutonomy,type Submit} from './autonomy';
 import {reconcileExileSites,applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
 import {applyPolitics,reconcilePolitics,reconcilePoliticalEvents} from './politics';
 import {applyCooperation} from './cooperation';
+import {configureCampaign} from './campaignTime';
 import {configureDeveloper} from './developerCommand';
 import {canonicalJSON} from './canonical';
 import {eventId,reportId,sequenceKey,type CommandId,type FactionId} from './ids';
@@ -117,11 +118,12 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  const w=cloneOrderDraft(current,order,replay),reports:FormalReport[]=[];
  const p=order.payload;
  const city=spatial(w).cities.get(p.cityId);
- if(p.type!=='player.rebirth'&&(!city||city.ownerFactionId!==order.issuerId))return reject('只能操作自己實際控制的城市。');
- if(city)settleCity(w,city);
+ if(p.type!=='player.rebirth'&&p.type!=='campaign.configure'&&(!city||city.ownerFactionId!==order.issuerId))return reject('只能操作自己實際控制的城市。');
+ if(city&&p.type!=='campaign.configure')settleCity(w,city);
  if(p.type==='player.rebirth'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();w.revision++;w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  if(!city)return reject('城市不存在。');
- if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='city.rename')city.name=p.name;
  else if(p.type==='research.contribute'){
   const project=w.researchProjects.find(x=>x.projectId===p.projectId);

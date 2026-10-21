@@ -12,7 +12,7 @@ import {canonicalJSON} from './canonical';
 import {diplomacyChanges,diplomacySnapshot} from './diplomacyReports';
 import type {FormalCommand,FormalWorld} from './model';
 const stores:FormalPersistence[]=[];afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
-function fixture(){const w=battlefield();w.offlineHours=6;for(const c of w.cities.slice(0,5)){build(c,'embassy',15);w.factions.find(f=>f.id===c.ownerFactionId)!.age=2;}return w;}
+function fixture(){const w=battlefield();w.offlineHours=8;for(const c of w.cities.slice(0,5)){build(c,'embassy',15);w.factions.find(f=>f.id===c.ownerFactionId)!.age=2;}return w;}
 const political=(w:FormalWorld,i:number,action:Extract<FormalCommand,{type:'politics'}>['action'],extra:object={})=>issue(w,{type:'politics',cityId:w.cities[i].id,action,...extra},w.cities[i].ownerFactionId);
 it('real create, invitation, acceptance, edit, succession and dissolution emit player notices once',()=>{
  let w=fixture();const t=political(w,0,'legion-create',{name:'玩家軍團'});expect(t.reports).toHaveLength(1);expect(reportSchema.parse(t.reports[0]).category).toBe('diplomacy');w=t.world;
@@ -45,11 +45,11 @@ it('transaction rollback, four filters, 50-row pagination, quick/full, old saves
  await copy.reportAction(imported,'clear',[row.id],'diplomacy');expect((await copy.reportStatus(imported)).counts.diplomacy).toBe(52);await copy.reportAction(imported,'clear',undefined,'diplomacy');expect((await copy.reportStatus(imported)).counts.all).toBe(0);
  const old=fixture();const oldText=await encodeSave(old);expect((await decodeSave(oldText)).world.politics).toBeUndefined();validateFormalWorld((await decodeSave(oldText)).world);
 });
-it('chunked online and offline political expiry give identical state and reports at 1/10/50X',()=>{
- for(const speed of [1,10,50]){let w=fixture();w.speed=speed;w=political(w,0,'friendly-propose',{target:w.factions[1].id}).world;w=political(w,1,'request-accept',{requestId:w.politics!.requests[0].id}).world;w=political(w,0,'friendly-end',{target:w.factions[1].id}).world;const end=w.time+6*HOUR,one=advanceFormal(w,end),offline=advanceOffline(w,1000,1000+6*HOUR/speed);expect(offline.world.politics).toEqual(one.world.politics);expect(offline.reports).toEqual(one.reports);let chunk=w;const reports=[];for(let i=0;i<6;i++){const t=advanceFormal(chunk,w.time+(i+1)*HOUR);chunk=t.world;reports.push(...t.reports);}expect(reports).toEqual(one.reports);const normalize=(x:FormalWorld)=>{x=structuredClone(x);x.revision=0;for(const r of x.commandReceipts)r.committedRevision=0;return canonicalJSON(x);};expect(normalize(chunk)).toBe(normalize(one.world));}
+it('chunked online and offline political expiry give identical state and reports at 1/10/25X',()=>{
+ for(const speed of [1,10,25]){let w=fixture();w.speed=speed;w=political(w,0,'friendly-propose',{target:w.factions[1].id}).world;w=political(w,1,'request-accept',{requestId:w.politics!.requests[0].id}).world;w=political(w,0,'friendly-end',{target:w.factions[1].id}).world;const end=w.time+6*HOUR,one=advanceFormal(w,end),offline=advanceOffline(w,1000,1000+6*HOUR/speed);expect(offline.world.politics).toEqual(one.world.politics);expect(offline.reports).toEqual(one.reports);let chunk=w;const reports=[];for(let i=0;i<6;i++){const t=advanceFormal(chunk,w.time+(i+1)*HOUR);chunk=t.world;reports.push(...t.reports);}expect(reports).toEqual(one.reports);const normalize=(x:FormalWorld)=>{x=structuredClone(x);x.revision=0;for(const r of x.commandReceipts)r.committedRevision=0;return canonicalJSON(x);};expect(normalize(chunk)).toBe(normalize(one.world));}
 });
 
-it.each([1,10,50])('cooperative replay preserves ordinary diplomacy reports and state at %sX',async speed=>{
+it.each([1,10,25])('cooperative replay preserves ordinary diplomacy reports and state at %sX',async speed=>{
  let w=fixture();w.speed=speed;w=political(w,0,'friendly-propose',{target:w.factions[1].id}).world;w=political(w,1,'request-accept',{requestId:w.politics!.requests[0].id}).world;w=political(w,0,'friendly-end',{target:w.factions[1].id}).world;
  const before=canonicalJSON(w),target=w.time+6*HOUR,ordinary=advanceFormal(w,target),cooperative=await advanceFormalCooperative(w,target,undefined,{yieldIntervalMs:0});expect(cooperative).toEqual(ordinary);expect(canonicalJSON(w)).toBe(before);
 });

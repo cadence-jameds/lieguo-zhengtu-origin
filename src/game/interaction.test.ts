@@ -28,7 +28,7 @@ it('moving armies of all factions invalidate entity imagery while stationary bat
  expect(mapEntityKey({...w,time:w.time+1000})).not.toBe(mapEntityKey(w));w=arrive(w).world;expect(w.armies[0].status).toBe('engaged');expect(mapEntityKey({...w,time:w.time+1000})).toBe(mapEntityKey(w));
  let enemy=battlefield();enemy.cities[1].military!.units={militia:1};enemy=dispatch(enemy,'raid',{militia:1},1,0).world;expect(mapEntityKey({...enemy,time:enemy.time+1000})).not.toBe(mapEntityKey(enemy));
 });
-for(const speed of [1,3,6,10,50])it(`${speed}X independent display clock follows monotonic elapsed time, stops, and reanchors on resume`,()=>{
+for(const speed of [1,3,6,10,25])it(`${speed}X independent display clock follows monotonic elapsed time, stops, and reanchors on resume`,()=>{
  let now=500;const c=new DisplayClock(()=>now);c.adopt({campaignId:'one',time:12345,speed,running:true});now+=1234;c.sample();expect(c.time('one',0)).toBe(12345+1234*speed);expect(c.time('other',17)).toBe(17);c.stop();now+=86400000;c.sample();expect(c.time('one',0)).toBe(12345+1234*speed);
  c.adopt({campaignId:'one',time:20000,speed,running:true});now+=1000;c.sample();expect(c.time('one',0)).toBe(20000+1000*speed);now-=5000;c.sample();expect(c.time('one',20000)).toBe(20000);
 });

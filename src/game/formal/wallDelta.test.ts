@@ -23,7 +23,7 @@ const wall=(w:FormalWorld,lane?:0|1)=>({type:'building.upgrade' as const,cityId:
 function store(fault?:(point:FailurePoint)=>void){const s=new FormalPersistence({suffix:'wall-'+crypto.randomUUID(),fault});stores.push(s);return s;}
 it('Lv0 to15: independent v85 cost/time, all center accelerators and five speeds; completion alone advances the sole wall authority',()=>{
  const rows:unknown[]=[];
- for(const speed of [1,3,6,10,50])for(const center of [2,5,15]){
+ for(const speed of [1,3,6,10,25])for(const center of [2,5,15]){
   let w=make(speed,center);
   for(let lv=1;lv<=15;lv++){
    const before=w.cities[0],slots=structuredClone(before.economy!.slots),expectedCost=Object.fromEntries(keys.map(r=>[r,Math.floor(costs[r]*1.38**(lv-1)/5+.5)*5])) as Resources,expectedMs=Math.round(times[lv-1]*60000*.964**(center-1));

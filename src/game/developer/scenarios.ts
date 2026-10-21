@@ -28,7 +28,7 @@ export function prepareCity(c:FormalCity,config:DeveloperConfig){
 }
 /** Explicit test setup only. No fixture command is added to the production reducer. */
 export function developerWorld(config:DeveloperConfig,campaign='developer-'+crypto.randomUUID()):FormalWorld{
- if(!Object.hasOwn(SCENARIOS,config.scenario)||![1,3,6,10,50].includes(config.speed)||!Number.isInteger(config.seed)||config.seed<0||config.seed>2147483647||!CIVILIZATIONS.includes(config.civilizationId as typeof CIVILIZATIONS[number]))throw new Error('測試情境設定無效。');
+ if(!Object.hasOwn(SCENARIOS,config.scenario)||![1,3,6,10,25].includes(config.speed)||!Number.isInteger(config.seed)||config.seed<0||config.seed>2147483647||!CIVILIZATIONS.includes(config.civilizationId as typeof CIVILIZATIONS[number]))throw new Error('測試情境設定無效。');
  if(config.castleLevel!==undefined&&(!Number.isInteger(config.castleLevel)||config.castleLevel<1||config.castleLevel>15))throw new Error('城堡等級須為 1～15。');
  const w=createFormalWorld({campaign,seed:config.seed,speed:config.speed,civilizationId:config.civilizationId,name:'驗證領主',offlineHours:0});
  if(config.scenario==='new')return w;
