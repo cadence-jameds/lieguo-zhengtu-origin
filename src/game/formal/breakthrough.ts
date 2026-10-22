@@ -3,7 +3,7 @@ import {resourceKeys,zeroResources} from './model';
 import {projectId,reportId,sequenceKey,type EmpireId} from './ids';
 import {caravanStatus,dispatchLogistics,enqueue,projectShipmentRecord,requireRule} from './economy';
 import {empireOf} from './politics';
-import {empireWonder,wonderRemaining} from './wonder';
+import {empireWonder,wonderRemaining,wonderIntegrity} from './wonder';
 import type {EventScheduler} from './scheduler';
 import {HOUR} from './time';
 export const BREAKTHROUGH_COST=Object.freeze({food:15000000,wood:15000000,stone:10000000,gold:20000000});
@@ -88,5 +88,7 @@ export function breakthroughDecision(w:FormalWorld,c:FormalCity,active:boolean){
 
 /** Integration-only condition signal. No battle targeting or repair gameplay is exposed. */
 export function updateWonderIntegrity(w:FormalWorld,id:import('./ids').ProjectId,integrity:'intact'|'damaged'|'ruins',s:EventScheduler){
- const wonder=w.largeProjects.find(p=>p.projectId===id&&p.kind==='world-wonder');requireRule(wonder?.wonder,'世界奇觀不存在。');wonder.wonder.integrity=integrity;reconcileBreakthroughs(w,s);
+ const wonder=w.largeProjects.find(p=>p.projectId===id&&p.kind==='world-wonder');requireRule(wonder?.wonder,'世界奇觀不存在。');
+ requireRule(wonder.wonder.durability&&wonderIntegrity(wonder.wonder.durability.current,wonder.wonder.durability.maximum)===integrity,'奇觀狀態必須符合實際耐久。');
+ wonder.wonder.integrity=integrity;reconcileBreakthroughs(w,s);
 }

@@ -1,3 +1,5 @@
+import {applyWonderDamage} from './wonderCondition';
+import {fundRepair} from './endgameTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,beforeAll,it,expect} from 'vitest';
 import {completedWonder,breakthroughWorld,fundedBreakthrough} from './breakthroughTestSupport';
@@ -5,7 +7,7 @@ import {wonderWorld,wonderAct} from './wonderTestSupport';
 import {order} from './developmentTestSupport';
 import {advanceFormal,advanceFormalCooperative,submitFormalOrder} from './reducer';
 import {settleCity,changeCityOwner,HOUR} from './economy';
-import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughWork,breakthroughDecision,handleBreakthroughEvent,updateWonderIntegrity} from './breakthrough';
+import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughWork,breakthroughDecision,handleBreakthroughEvent} from './breakthrough';
 import {EventScheduler} from './scheduler';
 import {zeroResources,type FormalWorld} from './model';
 import {validateFormalWorld} from './schema';
@@ -14,7 +16,7 @@ import {advanceOfflineCooperative} from './offline';
 import {wonderDecision} from './aiActions';
 import {enableAutonomy} from './autonomy';
 import {make,build,rich} from './developmentTestSupport';
-import {empireId} from './ids';
+import {empireId,eventId,resolutionId} from './ids';
 let funded:FormalWorld;
 beforeAll(()=>{funded=fundedBreakthrough();},240000);
 const end=(w:FormalWorld)=>w.largeProjects[1].breakthrough!.activeSince!+BREAKTHROUGH_DURATION;
@@ -84,10 +86,10 @@ it('B9-2 awards the current membership snapshot only; leaving and rejoining befo
  w=wonderAct(w,{type:'politics',cityId:w.cities[0].id,action:'empire-propose',target:member});w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'request-accept',requestId:w.politics!.requests[0].id},member);w=advanceFormal(w,end(w)).world;expect(w.factions[1].modernQualification).toBe('full');
  w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'empire-leave'},member);expect(w.factions[1].modernQualification).toBe('full');changeCityOwner(w,w.cities[0],member,'conquest');w=wonderAct(w,{type:'politics',cityId:w.cities[1].id,action:'empire-dissolve'});expect(w.factions.every(f=>f.modernQualification==='full')).toBe(true);validateFormalWorld(w);
 });
-it('B9-2 future integrity signals pause damage, roll ruins back to the last 25% checkpoint, and require intact restoration',()=>{
- let w=advanceFormal(funded,end(funded)-17*HOUR).world;let s=new EventScheduler(w.events);updateWonderIntegrity(w,w.largeProjects[0].projectId,'damaged',s);w.events=s.snapshot();const work=breakthroughWork(w,w.largeProjects[1]);w=advanceFormal(w,w.time+HOUR).world;expect(breakthroughWork(w,w.largeProjects[1])).toBe(work);
- s=new EventScheduler(w.events);updateWonderIntegrity(w,w.largeProjects[0].projectId,'ruins',s);w.events=s.snapshot();expect(breakthroughWork(w,w.largeProjects[1])).toBe(24*HOUR);validateFormalWorld(w);
- s=new EventScheduler(w.events);updateWonderIntegrity(w,w.largeProjects[0].projectId,'intact',s);w.events=s.snapshot();expect(w.events.find(e=>e.type==='breakthrough.complete')!.at-w.time).toBe(24*HOUR);validateFormalWorld(w);
+it('B9-2/B9-5 numeric damage pauses work, ruins roll back to the last 25% checkpoint, and paid repair restores use',()=>{
+ let w=advanceFormal(funded,end(funded)-17*HOUR).world;let s=new EventScheduler(w.events);applyWonderDamage(w,w.largeProjects[0].projectId,{type:'fixture.marker',marker:'damage',id:eventId('b92-damage'),at:w.time},resolutionId('b92-damage'),1000,s);w.events=s.snapshot();const work=breakthroughWork(w,w.largeProjects[1]);w=advanceFormal(w,w.time+HOUR).world;expect(breakthroughWork(w,w.largeProjects[1])).toBe(work);
+ s=new EventScheduler(w.events);applyWonderDamage(w,w.largeProjects[0].projectId,{type:'fixture.marker',marker:'ruins',id:eventId('b92-ruins'),at:w.time},resolutionId('b92-ruins'),120000,s);w.events=s.snapshot();expect(breakthroughWork(w,w.largeProjects[1])).toBe(24*HOUR);validateFormalWorld(w);
+ w=wonderAct(w,{type:'wonder.repair.start',cityId:w.cities[0].id,projectId:w.largeProjects[0].projectId});w=fundRepair(w,w.largeProjects.at(-1)!.projectId);const repair=w.largeProjects.at(-1)!;w=advanceFormal(w,repair.repair!.activeSince!+repair.durationMs-repair.repair!.workMs).world;expect(w.events.find(e=>e.type==='breakthrough.complete')!.at-w.time).toBe(24*HOUR);validateFormalWorld(w);
 });
 it('B9-2 all 99 native AI use the same real-stock breakthrough start and contribution rules',()=>{
  const original=completedWonder(),template=original.largeProjects[0];let w=make();enableAutonomy(w);w.politics={legions:[],empires:[],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};w.time=original.time;w.revision=original.revision;
@@ -123,5 +125,5 @@ it('B9-2 atomic persistence, export/import and Recovery preserve cargo, pause, m
 },60000);
 it('B9-2 a conquest at the exact deadline takes priority; recapture can finish the preserved zero remainder once',()=>{
  let w=advanceFormal(funded,end(funded)-1).world;w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'empire-leave'},w.factions[1].id);w.time=end(funded);changeCityOwner(w,w.cities[0],w.factions[1].id,'conquest');expect(breakthroughWork(w,w.largeProjects[1])).toBe(BREAKTHROUGH_DURATION);expect(w.factions[0].modernQualification).toBe('none');w=advanceFormal(w,w.time+HOUR).world;changeCityOwner(w,w.cities[0],w.playerFactionId,'conquest');validateFormalWorld(w);const finished=advanceFormal(w,w.time);expect(finished.world.factions[0].modernQualification).toBe('full');expect(finished.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(1);
- const ruined=advanceFormal(funded,end(funded)-1).world;ruined.time=end(funded);const scheduler=new EventScheduler(ruined.events);updateWonderIntegrity(ruined,ruined.largeProjects[0].projectId,'ruins',scheduler);ruined.events=scheduler.snapshot();expect(breakthroughWork(ruined,ruined.largeProjects[1])).toBe(36*HOUR);expect(ruined.factions.every(f=>f.modernQualification==='none')).toBe(true);validateFormalWorld(ruined);
+ const ruined=advanceFormal(funded,end(funded)-1).world;ruined.time=end(funded);const scheduler=new EventScheduler(ruined.events);applyWonderDamage(ruined,ruined.largeProjects[0].projectId,{type:'fixture.marker',marker:'deadline-ruins',id:eventId('b92-deadline-ruins'),at:ruined.time},resolutionId('b92-deadline-ruins'),120000,scheduler);ruined.events=scheduler.snapshot();expect(breakthroughWork(ruined,ruined.largeProjects[1])).toBe(36*HOUR);expect(ruined.factions.every(f=>f.modernQualification==='none')).toBe(true);validateFormalWorld(ruined);
 });
