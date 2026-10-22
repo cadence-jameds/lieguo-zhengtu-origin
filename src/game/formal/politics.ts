@@ -1,3 +1,4 @@
+import {effectiveUnit} from './combatModifiers';
 import type {FormalWorld,FormalCity,FormalOrder} from './model';
 import type {FactionId,CityId,EmpireId} from './ids';
 import {empireId,sequenceKey} from './ids';
@@ -90,7 +91,7 @@ export function applyPolitics(w:FormalWorld,_c:FormalCity,o:FormalOrder,q:Politi
 export function canAcquireConquest(w:FormalWorld,id:FactionId){return !w.extinction?.extinct.includes(id)&&w.factions.some(f=>f.id===id)&&w.cities.some(c=>c.ownerFactionId===id);}
 export function conquestOwner(w:FormalWorld,initiator:FactionId,armies:import('./combatModel').MissionArmy[]):FactionId|null{
  const scores=new Map<FactionId,number>();
- for(const a of armies){if(a.extinctionPending||!canAcquireConquest(w,a.ownerFactionId))continue;let n=0;for(const [id,count] of Object.entries(a.units))if(!['scout','baggage','ram','catapult'].includes(id))n+=count;scores.set(a.ownerFactionId,(scores.get(a.ownerFactionId)??0)+n);}
+ for(const a of armies){if(a.extinctionPending||!canAcquireConquest(w,a.ownerFactionId))continue;let n=0;for(const [id,count] of Object.entries(a.units))if(effectiveUnit(id))n+=count;scores.set(a.ownerFactionId,(scores.get(a.ownerFactionId)??0)+n);}
  if((scores.get(initiator)??0)>0)return initiator;
  const max=Math.max(0,...scores.values());if(!max)return null;
  return politicalDraw(w,[...scores].filter(([,n])=>n===max).map(([id])=>id));

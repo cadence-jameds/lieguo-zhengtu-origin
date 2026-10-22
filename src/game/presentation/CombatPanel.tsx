@@ -11,7 +11,7 @@ import {armyPosition} from '../formal/armyPosition';
 import {canReinforce} from '../formal/armies';
 import {effectiveUnit,marchSeconds} from '../formal/combatModifiers';
 import {route} from '../formal/routing';
-import {UNIT_CATALOG} from '../formal/unitCatalog';
+import {UNIT_CATALOG,isScoutUnit,scoutUnits} from '../formal/unitCatalog';
 import {spatial} from '../formal/spatial';
 import {Dialog,fmt,realTime} from './UI';
 import {Countdown} from './LiveValues';
@@ -24,7 +24,7 @@ const statusName={waiting:'等待會師出發',outbound:'前往目標',engaged:'
 export function ArmyDispatchDialog({world,city,issue,busy,target,mission,onClose,onBack=onClose}:{world:FormalWorld;city:FormalCity;issue:Props['issue'];busy:boolean;target:ArmyTarget;mission:Mission;onClose:()=>void;onBack?:()=>void}){
  const now=useRealNow();
  const dest=target.kind==='city'?spatial(world).cities.get(target.cityId):spatial(world).sites.get(target.siteId);
- const [units,setUnits]=useState<Record<string,number>>(():Record<string,number>=>mission==='scout'?{scout:Math.min(2,city.military?.units.scout??0)}:{}),[submitted,setSubmitted]=useState(false);
+ const [units,setUnits]=useState<Record<string,number>>(():Record<string,number>=>mission==='scout'?Object.fromEntries(Object.entries(scoutUnits(city.military?.units??{})).map(([id,n])=>[id,Math.min(2,n)])):{}),[submitted,setSubmitted]=useState(false);
  const {intel}=useTargetIntel(world,target.kind==='city'?target.cityId:target.siteId,target.kind==='wild'?target.generation:undefined);
  const faction=world.factions.find(f=>f.id===city.ownerFactionId)!,owner=dest&&'ownerFactionId' in dest?world.factions.find(f=>f.id===dest.ownerFactionId):undefined;
  const path=useMemo(()=>{if(!dest)return null;try{return route(world,city,dest);}catch{return null;}},[world.worldLayer?.terrain,city.x,city.y,dest?.x,dest?.y]);
@@ -32,7 +32,7 @@ export function ArmyDispatchDialog({world,city,issue,busy,target,mission,onClose
  const authorized=!!dest&&(target.kind==='wild'?(mission==='raid'||mission==='scout')&&'generation' in dest&&dest.generation===target.generation:mission==='reinforce'?canReinforce(world,city.ownerFactionId,owner!.id):!canReinforce(world,city.ownerFactionId,owner!.id));
  const invalid=!authorized||!path||dest?.x===city.x&&dest?.y===city.y||!Object.keys(selected).length||Object.entries(units).some(([id,n])=>!Number.isSafeInteger(n)||n<0||n>(city.military?.units[id]??0))||(mission!=='scout'&&mission!=='reinforce'&&!Object.keys(selected).some(effectiveUnit));
  const duration=path&&Object.keys(selected).length?Math.max(1,Math.ceil(path.distance*marchSeconds(selected,faction)*1000)):null;
- const available=mission==='scout'?[['scout',city.military?.units.scout??0] as const]:Object.entries(city.military?.units??{}).filter(([id,n])=>n>0&&(mission==='reinforce'||id!=='scout'));
+ const available=mission==='scout'?Object.entries(scoutUnits(city.military?.units??{})):Object.entries(city.military?.units??{}).filter(([id,n])=>n>0&&(mission==='reinforce'||!isScoutUnit(id)));
  return <Dialog className="formal-mission-dialog" title={missionName[mission]+' · '+(dest?('name' in dest?dest.name:wildSiteName(dest)):'目標已消失')} onClose={onClose}>
  <div className="mission-route"><span>{city.name}<small>出發城市</small></span><b aria-hidden="true">→</b><span>{dest?('name' in dest?dest.name:wildSiteName(dest)):'目標已消失'}<small>{owner?.name??'中立據點'}</small></span><strong>{duration===null?'—':realTime(duration,world)}<small>單程行軍</small></strong></div>
  {intel.army&&mission!=='reinforce'&&<p className="intel-note">上次偵察：守軍 {fmt(Object.values(intel.army.intel.units).reduce((n,c)=>n+c,0))} 名{intel.defenses&&`、城牆 ${intel.defenses.intel.wallLevel} 級（觀測於 ${reportTime(intel.defenses.intel.observedRealAt)}）`}；{intelAge(intel.army.intel.observedRealAt,now)}。駐軍可能已有變化。</p>}

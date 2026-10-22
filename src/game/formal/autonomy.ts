@@ -1,3 +1,5 @@
+import {isModernUnit,isScoutUnit,scoutCount,modernizationTarget} from './unitCatalog';
+import {unitModernizationCost} from './military';
 import {attackGarrisons,autonomousDispatchReason} from './aiAttackStrategies';
 import {supplyDecision,GOVERNOR_DEFAULTS} from './governance';
 import {wonderDecision,politicalDecision,militaryDecision,expansionDecision,updatePublicMemory} from './aiActions';
@@ -43,8 +45,11 @@ export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{con
   const cost=researchQuote(w,c,t).cost;offer({type:'research.start',cityId:c.id,techId:t.id},['modern-common','modern-civilization'].includes(t.scope)?zeroResources():cost,.8+a.traits.economy,'research');}
  const project=w.researchProjects.find(p=>p.ownerFactionId===f.id&&p.phase==='funding');if(project){const resources=zeroResources();for(const r of resourceKeys)resources[r]=Math.min(project.requiredResources[r]-project.contributedResources[r],Math.floor(Math.max(0,c.stock[r]-100)*.2));if(resourceKeys.some(r=>resources[r]))offer({type:'research.contribute',cityId:c.id,projectId:project.projectId,resources},resources,3,'research');}
  if(!c.cityPromotionCompleted&&!c.economy.promotion&&c.population>=10000&&c.housing>=10000&&buildingLevel(c,'townhall')>=5)offer({type:'city.promote',cityId:c.id},{...CITY_PROMOTION.cost},4,'population');
- if(c.military.queue.length<2&&c.population>220&&c.stock.food>250){const stock=c.military.units;for(const u of Object.values(UNIT_CATALOG)){if((f.age??0)<u.age||!buildingLevel(c,u.producer)||u.civilizationId&&u.civilizationId!==(c.castleCivilizationId??f.civilizationId)||u.eliteTech&&(!f.techIds.includes(u.eliteTech)||!c.economy.milestones.includes(u.milestone))||ELITE_VARIANTS[u.id]&&f.techIds.includes(UNIT_CATALOG[ELITE_VARIANTS[u.id]].eliteTech!))continue;
-  const count=Math.min(u.id==='scout'?3:10,Math.floor((c.population-200)/u.population)),cost=unitRecruitCost(w,c,u);if(count<1)continue;for(const r of resourceKeys)cost[r]*=count;offer({type:'military.recruit',cityId:c.id,unitId:u.id,count},cost,(u.id==='scout'?(stock.scout??0)<5?2:-1:.6+a.traits.military)-((stock[u.id]??0)+c.military.queue.filter(q=>q.unitId===u.id).reduce((n,q)=>n+q.remaining,0))*.03,'military');
+ if(f.modernQualification==='full'&&!w.combat?.battles.some(b=>b.cityId===c.id))for(const [id,n] of Object.entries(c.military.units)){
+  const target=modernizationTarget(id);if(!target||n<=0)continue;const count=Math.min(n,10),cost=unitModernizationCost(target);for(const r of resourceKeys)cost[r]*=count;offer({type:'military.modernize',cityId:c.id,unitId:id,count},cost,3+a.traits.military,'military');
+ }
+ if(c.military.queue.length<2&&c.population>220&&c.stock.food>250){const stock=c.military.units;for(const u of Object.values(UNIT_CATALOG)){if((isModernUnit(u.id)?f.modernQualification!=='full':(f.age??0)<u.age)||!isModernUnit(u.id)&&f.modernQualification==='full'&&!!modernizationTarget(u.id)||!buildingLevel(c,u.producer)||u.civilizationId&&u.civilizationId!==(c.castleCivilizationId??f.civilizationId)||u.eliteTech&&(!f.techIds.includes(u.eliteTech)||!c.economy.milestones.includes(u.milestone))||ELITE_VARIANTS[u.id]&&f.techIds.includes(UNIT_CATALOG[ELITE_VARIANTS[u.id]].eliteTech!))continue;
+  const count=Math.min(isScoutUnit(u.id)?3:10,Math.floor((c.population-200)/u.population)),cost=unitRecruitCost(w,c,u);if(count<1)continue;for(const r of resourceKeys)cost[r]*=count;offer({type:'military.recruit',cityId:c.id,unitId:u.id,count},cost,(isScoutUnit(u.id)?scoutCount(stock)<5?2:-1:.6+a.traits.military)-((stock[u.id]??0)+c.military.queue.filter(q=>q.unitId===u.id).reduce((n,q)=>n+q.remaining,0))*.03,'military');
  }}return out;
 }
 export function chooseEconomic(choices:Choice[],a:Agent,seed:number,city:FormalCity){const budget=Object.fromEntries(resourceKeys.map(r=>[r,Math.floor(Math.max(0,city.stock[r]-100)*a.budgetPercent/100)])) as Resources;

@@ -227,6 +227,7 @@ export const orderSchema:z.ZodType<FormalOrder>=z.object({commandId:commandIdSch
  z.object({type:z.literal('logistics.dispatch'),cityId:cityIdSchema,destinationCityId:cityIdSchema,resources:resourcesSchema}).strict(),
  z.object({type:z.literal('research.start'),cityId:cityIdSchema,techId:text}).strict(),
  z.object({type:z.literal('age.start'),cityId:cityIdSchema}).strict(),
+ z.object({type:z.literal('military.modernize'),cityId:cityIdSchema,unitId:text,count:positive,armyId:armyIdSchema.optional()}).strict(),
  z.object({type:z.literal('military.recruit'),cityId:cityIdSchema,unitId:text,count:positive,lane:z.union([z.literal(0),z.literal(1)]).optional()}).strict(),
  z.object({type:z.literal('military.cancel'),cityId:cityIdSchema,trainingCommandId:commandIdSchema}).strict(),
  z.object({type:z.literal('military.disband'),cityId:cityIdSchema,unitId:text,count:positive}).strict(),

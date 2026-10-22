@@ -29,7 +29,7 @@ describe('B4 art integration authority and asset coverage',()=>{
  for(const alias of [...Object.values(BUILDING_ALIAS),...Object.values(FIELD_ALIAS)])for(const age of [0,1,2])for(const civ of Object.values(CIV_ART))exists(constructionArtPath(alias as Building,age,civ,1));
  });
  it('all 28 units and 67 B4 tech presentations resolve without indexing formal catalog position',()=>{
- expect(Object.keys(UNIT_CATALOG)).toHaveLength(28);for(const id of Object.keys(UNIT_CATALOG)){const a=unitArt(id);exists(a.path);if(a.index!==undefined)expect(a.index).toBeGreaterThanOrEqual(0);}
+ expect(Object.keys(UNIT_CATALOG)).toHaveLength(44);for(const id of Object.keys(UNIT_CATALOG)){const a=unitArt(id);exists(a.path);if(a.index!==undefined)expect(a.index).toBeGreaterThanOrEqual(0);}
  const techs=Object.values(TECH_CATALOG).filter(t=>t.scope==='traditional'||t.scope==='research-cooperation');expect(techs).toHaveLength(67);for(const t of techs)exists(techArt(t.id).path);expect(techArt('research.cooperation').path).toContain('cooperation');expect(unitArt('swordsman').badge).toContain('ELITE');
  });
  it('15 slots are unique and map to exact DEMO anchors plus center',()=>{
