@@ -7,13 +7,13 @@ export function makePools(units:Record<string,number>,owner:FactionId|null,sourc
 export const effectiveCount=(pools:readonly CombatPool[])=>pools.reduce((n,p)=>n+(effectiveUnit(p.unitId)?p.count:0),0);
 export function poolUnits(pools:readonly CombatPool[]){const units:Record<string,number>={};for(const p of pools)if(p.count)units[p.unitId]=(units[p.unitId]??0)+p.count;return units;}
 /** Both damage vectors use the same immutable round-start snapshot. Work is O(unit groups²), never O(soldiers²). */
-export function exchange(attacking:readonly CombatPool[],defending:readonly CombatPool[],factions:readonly FormalFaction[],wall=0){
+export function exchange(attacking:readonly CombatPool[],defending:readonly CombatPool[],factions:readonly FormalFaction[],wall=0,awareness:(id:FactionId)=>number=()=>0){
  const lookup=(id:FactionId|null)=>factions.find(f=>f.id===id);
  function damage(from:readonly CombatPool[],to:readonly CombatPool[],defenseWall:number){const output=new Map<string,number>();const alive=to.filter(p=>p.count>0),total=alive.reduce((n,p)=>n+p.count,0);
   for(const a of from.filter(p=>p.count>0)){const f=lookup(a.ownerFactionId),interval=combatStats(a.unitId,f).interval;if(!interval)continue;
-   const weights=alive.map(p=>p.count*(1+(counterMultiplier(a.unitId,p.unitId)-1)*.5)),sum=weights.reduce((n,x)=>n+x,0);if(!sum)continue;
+   const weights=alive.map(p=>p.count*(1+(counterMultiplier(a.unitId,p.unitId,f)-1)*.5)),sum=weights.reduce((n,x)=>n+x,0);if(!sum)continue;
    const splash=baseUnit(a.unitId)==='catapult'?splashWeights(f).slice(0,total).reduce((n,x)=>n+x,0):1;
-   for(let i=0;i<alive.length;i++){const d=alive[i],value=a.count*EXPOSURE/interval*weights[i]/sum*hitDamage(a.unitId,d.unitId,f,lookup(d.ownerFactionId),defenseWall,!a.contacted,splash);output.set(d.key,(output.get(d.key)??0)+value);}
+   for(let i=0;i<alive.length;i++){const d=alive[i],value=a.count*EXPOSURE/interval*weights[i]/sum*hitDamage(a.unitId,d.unitId,f,lookup(d.ownerFactionId),defenseWall,!a.contacted,splash,a.ownerFactionId?awareness(a.ownerFactionId):0);output.set(d.key,(output.get(d.key)??0)+value);}
   }return output;
  }
  const toDefenders=damage(attacking,defending,wall),toAttackers=damage(defending,attacking,0);

@@ -20,7 +20,7 @@ export type AutoLogistics={destinationCityId:CityId;reserve:Resources;maxCaravan
 /** Castle-produced civilian carrier; deliberately separate from combat catalogs and military queues. */
 export type ColonizationUnit={id:string;kind:'colonization';quantity:1;ownerFactionId:FactionId;sourceCityId:CityId;projectId:ProjectId;phase:'ready'|'travelling';population:400;producedAt:number};
 export type FormalCity = {castleCivilizationId?:string;housingShortage?:true;developerResources?:true;id:CityId;ownerFactionId:FactionId;name:string;x:number;y:number;population:number;housing:number;stock:Resources;buildings:Record<string,number>;military?:CityMilitary;autoLogistics?:AutoLogistics[];economy?:CityEconomy;fields?:ResourceField[];wallLevel?:number;cityPromotionCompleted?:boolean;integrationWorkHours?:number;integrationTotalWorkHours?:number;startingCity?:boolean};
-export type FormalFaction = {protectionUntil?:number;id:FactionId;name:string;civilizationId:string;empireId:EmpireId|null;modernQualification:'none'|'full';researchCooperation:boolean;techIds:string[];researchQueue:ResearchProjectId|null;role?:'player'|'ai';age?:0|1|2|3;ageQueue?:AgeProject|null};
+export type FormalFaction = {reverseEngineering?:string[];protectionUntil?:number;id:FactionId;name:string;civilizationId:string;empireId:EmpireId|null;modernQualification:'none'|'full';researchCooperation:boolean;techIds:string[];researchQueue:ResearchProjectId|null;role?:'player'|'ai';age?:0|1|2|3;ageQueue?:AgeProject|null};
 export type FormalArmy = {id:ArmyId;ownerFactionId:FactionId;originCityId:CityId}&Partial<ArmyMissionState>;
 export type QualificationSnapshot = {checkedAt:number;cityId:CityId;ownerFactionId:FactionId;academyLevel:number;buildingLevels:Record<string,number>;prerequisiteTechIds:string[];fullModernQualification:boolean;researchCooperation:boolean};
 export type DurationSnapshot = {baseDurationMs:number;academyMultiplier:number;durationMs:number};
@@ -50,7 +50,7 @@ export type BreakthroughCommand={type:'breakthrough.start';cityId:CityId}|{type:
 export type WonderConstruction={integrity?:'intact'|'damaged'|'ruins';creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
 export type WonderCommand={type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
 export type LargeProject = {
-  projectId:ProjectId;kind:'world-wonder'|'civilization-breakthrough'|'emergency-modernization'|'technology-transfer';wonder?:WonderConstruction;breakthrough?:BreakthroughConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
+  projectId:ProjectId;kind:'world-wonder'|'civilization-breakthrough'|'emergency-modernization'|'technology-transfer';wonder?:WonderConstruction;breakthrough?:BreakthroughConstruction;catchup?:import('./modernCatchup').CatchupConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
   paymentMode:'physical-shipment';initiatingCityId:CityId;requiredResources:Resources;poolResources:Resources;
   shipments:Shipment[];createdAt:number;durationMs:number;
 };
@@ -58,6 +58,7 @@ export type FormalEvent = {id:EventId;at:number} & (
   | {type:'research.complete';projectId:ResearchProjectId}
   | {type:'wonder.complete';projectId:ProjectId}
   | {type:'breakthrough.complete';projectId:ProjectId}
+  | {type:'modern.project.complete';projectId:ProjectId}
   | {type:'economy.settle';cityId:CityId}
   | {type:'construction.complete';cityId:CityId}
   | {type:'city.promote.complete';cityId:CityId}
@@ -81,7 +82,7 @@ export type FormalEvent = {id:EventId;at:number} & (
 export type CompletionReceipt = {eventId:EventId;projectId:ResearchProjectId;at:number};
 export type CommandReceipt = {commandId:CommandId;issuerId:FactionId;fingerprint:string;committedRevision:number;disposition:'applied'|'rolled-back'};
 export type FormalWorld = {
-  kind:'formal';governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|100};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|4|8|12;clockMode?:'foreground'|'offline';
+  kind:'formal';modernAwareness?:import('./modernAwareness').ModernAwareness;governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|100};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|4|8|12;clockMode?:'foreground'|'offline';
   dimensions:{width:number;height:number};playerFactionId:FactionId;revision:number;
   sequences:{event:number;report:number;project:number};
   factions:FormalFaction[];cities:FormalCity[];armies:FormalArmy[];events:FormalEvent[];
@@ -92,7 +93,7 @@ export type FormalReport = {id:ReportId;sequence:number;campaignId:CampaignId;ow
 export type MilitaryCommand={type:'military.modernize';cityId:CityId;unitId:string;count:number;armyId?:ArmyId}|{type:'military.recruit';cityId:CityId;unitId:string;count:number;lane?:0|1}|{type:'military.cancel';cityId:CityId;trainingCommandId:CommandId}|{type:'military.disband';cityId:CityId;unitId:string;count:number};
 export type DevelopmentCommand={type:'research.start';cityId:CityId;techId:string}|{type:'age.start';cityId:CityId}|{type:'settlement.prepare';cityId:CityId}|{type:'settlement.cancel';cityId:CityId}|{type:'settlement.dispatch';cityId:CityId;x:number;y:number;name:string;escort:Record<string,number>}|{type:'logistics.auto.set';cityId:CityId;rules:AutoLogistics[]};
 export type EconomyCommand = {type:'building.demolish';cityId:CityId;key:string}|{type:'field.upgrade';cityId:CityId;slot:number;lane?:0|1}|{type:'building.upgrade';cityId:CityId;key:string;lane?:0|1;slot?:number}|{type:'construction.cancel';cityId:CityId;constructionCommandId:CommandId}|{type:'city.promote';cityId:CityId}|{type:'logistics.dispatch';cityId:CityId;destinationCityId:CityId;resources:Resources};
-export type FormalCommand = BreakthroughCommand|WonderCommand| {type:'campaign.configure';cityId:CityId;speed:1|3|6|10|25;offlineHours:0|1|4|8|12}| import('./governance').GovernanceCommand| import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|100;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
+export type FormalCommand = import('./modernCatchup').CatchupCommand|{type:'modern.reverse';cityId:CityId;unitId:string}|BreakthroughCommand|WonderCommand| {type:'campaign.configure';cityId:CityId;speed:1|3|6|10|25;offlineHours:0|1|4|8|12}| import('./governance').GovernanceCommand| import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|100;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
 export type FormalOrder = {commandId:CommandId;campaignId:CampaignId;issuerId:FactionId;issuedWorldTime:number;expectedRevision:number;payload:FormalCommand};
 export type CommandAck = {commandId:CommandId;status:'committed'|'duplicate'|'rolled-back'|'rejected';revision:number;originalRevision?:number;reason?:string};
 export type FormalTransition = {world:FormalWorld;reports:FormalReport[];ack?:CommandAck};

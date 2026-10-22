@@ -35,7 +35,7 @@ function syncEmpires(w:FormalWorld){const p=w.politics!;for(const e of [...p.emp
 /** Shared zero-member/explicit dissolution cleanup. No refund, transfer or inherited entitlement. */
 function cleanScopes(w:FormalWorld){const p=w.politics!;
  const empires=new Set(p.empires.map(e=>e.id));
- w.largeProjects=w.largeProjects.filter(x=>['world-wonder','civilization-breakthrough'].includes(x.kind)||x.owner.kind!=='empire'||empires.has(x.owner.empireId));
+ w.largeProjects=w.largeProjects.filter(x=>(!!x.catchup||['world-wonder','civilization-breakthrough'].includes(x.kind))||x.owner.kind!=='empire'||empires.has(x.owner.empireId));
  for(const l of p.legions)if(l.empireId&&!empires.has(l.empireId))l.empireId=null;
 const scopes=new Set([...w.factions.map(f=>politicalScope(w,f.id))]);p.relations=p.relations.filter(r=>scopes.has(r.a)&&scopes.has(r.b)&&r.a!==r.b);p.requests=p.requests.filter(r=>w.cities.some(c=>c.ownerFactionId===r.from)&&w.cities.some(c=>c.ownerFactionId===r.to)&&(!r.legionId||p.legions.some(l=>l.id===r.legionId))&&
  (!r.sourceLegionId||p.legions.some(l=>l.id===r.sourceLegionId&&l.leader===r.from))&&
@@ -85,6 +85,7 @@ export function applyPolitics(w:FormalWorld,_c:FormalCity,o:FormalOrder,q:Politi
   if(q.action==='war'||q.action==='peace'){requireRule(old?.state!=='friendly','友好及六小時解除期間禁止敵對。');p.relations=p.relations.filter(r=>r!==old);if(q.action==='war')p.relations.push({a,b,state:'war'});}
  }
  syncEmpires(w);
+ if(['legion-leave','empire-leave','legion-dissolve','empire-dissolve'].includes(q.action))for(const project of w.largeProjects){const b=project.catchup;if(project.kind==='technology-transfer'&&b?.initiatorId===me&&!['completed','cancelled'].includes(b.phase))requireRule(empireOf(w,me)?.id===b.eligibilitySnapshot.scope,'技術移轉進行期間不得主動退出帝國。');}
  for(const project of w.largeProjects){if(project.kind!=='world-wonder'||project.owner.kind!=='empire')continue;const host=w.cities.find(c=>c.id===project.initiatingCityId);if(host&&host.ownerFactionId===project.wonder?.hostOwnerFactionId)requireRule(w.factions.find(f=>f.id===host.ownerFactionId)?.empireId===project.owner.empireId,'奇觀承載城市領主在奇觀存在期間不得退出帝國。');}
 }
 /** Ownership eligibility is separate from battle damage: extinct troops still finish combat. */

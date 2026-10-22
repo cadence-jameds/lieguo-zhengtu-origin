@@ -1,6 +1,6 @@
 import type {Resources,ResearchProject} from './model';
 export type TechDefinition={id:string;name:string;age:number;buildings:Record<string,number>;cost:Resources;baseDurationMs:number;prerequisites:string[];milestone:number;civilizationId:string|null;scope:ResearchProject['technologyScope'];category:string;effect:string;status:'LOCKED'|'CALIBRATE'};
-/** Native data transcribed from v84. B4 implements research mechanics; modern unit/effects/endgame remain B9. */
+/** Native data transcribed from v84. B4 research ledger; B9-4 modern effects follow v94 §12.6.10–11. */
 export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(Object.fromEntries(([
   {
     "id": "blacksmith.melee.1",
@@ -1574,7 +1574,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "research-cooperation",
     "category": "general",
-    "effect": "",
+    "effect": "完成後解鎖本人城市多城投入現代科研，仍使用唯一研究佇列",
     "status": "CALIBRATE"
   },
   {
@@ -1599,7 +1599,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "現代徒步戰鬥兵與徒步衛隊攻擊 +8%",
     "status": "CALIBRATE"
   },
   {
@@ -1624,7 +1624,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "現代徒步戰鬥兵與徒步衛隊 HP +8%",
     "status": "CALIBRATE"
   },
   {
@@ -1649,7 +1649,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "裝甲偵察車、主力戰車、裝甲型衛隊 HP +10%",
     "status": "CALIBRATE"
   },
   {
@@ -1674,7 +1674,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "現代遠程兵、遠程衛隊、自走火炮攻擊間隔 −6%",
     "status": "CALIBRATE"
   },
   {
@@ -1699,7 +1699,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "全現代軍行軍時間 −10%；補給卡車載重提高至6,000",
     "status": "CALIBRATE"
   },
   {
@@ -1724,7 +1724,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "現代軍糧耗 −8%",
     "status": "CALIBRATE"
   },
   {
@@ -1749,7 +1749,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "所有現代兵與現代衛隊訓練時間 −15%",
     "status": "CALIBRATE"
   },
   {
@@ -1774,7 +1774,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "破障車破牆與自走火炮對建築／資源田／奇觀破壞 +20%（奇觀任務待B9-5整合）",
     "status": "CALIBRATE"
   },
   {
@@ -1799,7 +1799,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "B9 integration deferred",
+    "effect": "現代偵察／反偵察 +25%；合法來襲情報增加主要與次要兵種",
     "status": "CALIBRATE"
   },
   {
@@ -1824,7 +1824,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": "civ_zhongguo",
     "scope": "modern-civilization",
     "category": "civilization",
-    "effect": "B9 integration deferred",
+    "effect": "自動步槍兵、機槍支援兵、近衛自動步槍隊攻擊間隔 −8%",
     "status": "CALIBRATE"
   },
   {
@@ -1849,7 +1849,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": "civ_byzantium",
     "scope": "modern-civilization",
     "category": "civilization",
-    "effect": "B9 integration deferred",
+    "effect": "裝甲偵察車、主力戰車、帝國重裝甲衛隊 HP +12%",
     "status": "CALIBRATE"
   },
   {
@@ -1874,7 +1874,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": "civ_frankia",
     "scope": "modern-civilization",
     "category": "civilization",
-    "effect": "B9 integration deferred",
+    "effect": "裝甲偵察車、主力戰車新造成本 −12%；不折扣10%改裝價",
     "status": "CALIBRATE"
   },
   {
@@ -1899,7 +1899,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": "civ_britannia",
     "scope": "modern-civilization",
     "category": "civilization",
-    "effect": "B9 integration deferred",
+    "effect": "皇家狙擊衛隊對指定現代人員目標最終傷害 ×1.20",
     "status": "CALIBRATE"
   },
   {
@@ -1924,7 +1924,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": "civ_japan",
     "scope": "modern-civilization",
     "category": "civilization",
-    "effect": "B9 integration deferred",
+    "effect": "近衛突擊隊對現代文明衛隊 ×1.60；機械化突擊步兵對文明衛隊 ×1.20",
     "status": "CALIBRATE"
   },
   {
@@ -1949,7 +1949,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": "civ_mongolia",
     "scope": "modern-civilization",
     "category": "civilization",
-    "effect": "B9 integration deferred",
+    "effect": "現代車輛與機動火力衛隊等行軍時間 −15%；補給卡車載重 +20%",
     "status": "CALIBRATE"
   }
 ] as TechDefinition[]).map(t=>[t.id,t])));

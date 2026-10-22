@@ -4,7 +4,7 @@ import type {FormalCity,FormalWorld} from './model';
 import {resourceKeys,zeroResources} from './model';
 import type {CombatPool} from './combatResolver';
 import type {SiegeChange} from './combatModel';
-import {baseUnit,combatStats,effectiveUnit,hasTech} from './combatModifiers';
+import {baseUnit,combatStats,effectiveUnit,hasTech,modernSiegeMultiplier} from './combatModifiers';
 import {UNIT_CATALOG} from './unitCatalog';
 import {HOUSING,storageCapacity} from './catalogB3';
 import {requireRule,changeCityOwner,settleCity,settleFaction} from './economy';
@@ -24,8 +24,8 @@ export function reconcileSiegeStorage(w:FormalWorld,c:FormalCity){
 export function resolveSiege(w:FormalWorld,c:FormalCity,pools:readonly CombatPool[],id:BattleId,options:{wallDamage?:number;wallDamageLevel?:number;damageWall?:boolean;catapultBatch?:boolean}={}){
  settleCity(w,c);const defending=w.factions.find(f=>f.id===c.ownerFactionId),changes:SiegeChange[]=[],before=developmentLevels(c);let wallPower=0,buildingPower=0;
  for(const p of pools){if(!p.count)continue;const f=w.factions.find(f=>f.id===p.ownerFactionId),base=baseUnit(p.unitId),tiers=(prefix:string)=>[1,2].filter(n=>hasTech(f,`${prefix}.${n}`)).length;
-  if(base==='ram')wallPower+=p.count*60*(1+.1*tiers('siege.ram'));
-  else if(base==='catapult')buildingPower+=p.count*30*1.5*(1+.1*tiers('siege.projection'));
+  if(base==='ram')wallPower+=p.count*60*(1+.1*tiers('siege.ram'))*modernSiegeMultiplier(p.unitId,f,'wall');
+  else if(base==='catapult')buildingPower+=p.count*30*1.5*(1+.1*tiers('siege.projection'))*modernSiegeMultiplier(p.unitId,f,'development');
   else if(effectiveUnit(p.unitId)){const cls=UNIT_CATALOG[p.unitId].combatClass,coefficient=cls==='infantry'?.03:cls==='ranged'?.005:.01;wallPower+=p.count*combatStats(p.unitId,f).attack*coefficient;}
  }
  const wallBefore=c.wallLevel??0,mult=hasTech(defending,'civilization.imperial-wall')?1.2:1;
