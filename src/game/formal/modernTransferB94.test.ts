@@ -1,10 +1,12 @@
+import {digest} from './canonical';
+import {validateFormalWorld} from './schema';
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
-import {catchupWorld,act,fundCatchup,withModernHistory} from './catchupTestSupport';
+import {catchupWorld,act,fundCatchup,withModernHistory,empire} from './catchupTestSupport';
 import {make,rich,build,order,reject} from './developmentTestSupport';
-import {TRANSFER_COST,TRANSFER_DURATION,transferEligibility,handleCatchupEvent} from './modernCatchup';
+import {TRANSFER_COST,TRANSFER_DURATION,transferEligibility,transferSource,transferStillLegal,createCatchup,reconcileCatchup,catchupDecision,EMERGENCY_DURATION,handleCatchupEvent} from './modernCatchup';
 import {resourceKeys,zeroResources,type FormalWorld} from './model';
-import {advanceFormal,submitFormalOrder} from './reducer';
+import {advanceFormal,submitFormalOrder,orderFingerprint} from './reducer';
 import {encodeSave,decodeSave} from './saveCodec';
 import {EventScheduler} from './scheduler';
 import {advanceOfflineCooperative} from './offline';
@@ -49,3 +51,34 @@ it('B9-4C all 99 AI later joiners use the same personal transfer application and
   w=act(w,{type:'modern.transfer.start',cityId:source.id},id);const p=w.largeProjects.at(-1)!,resources={food:10,wood:20,stone:30,gold:40},cmd=order(w,{type:'modern.project.ship',cityId:source.id,projectId:p.projectId,resources},'ai-transfer-'+id.slice(8),id);w=submitFormalOrder(w,cmd).world;expect(w.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());for(const r of resourceKeys)expect(w.cities.find(c=>c.id===source.id)!.stock[r]).toBe(10000-resources[r]);expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');expect(w.factions.find(f=>f.id===id)!.modernQualification).toBe('none');
  }
 },30000);
+
+// Build a completed emergency-only empire, then actually admit its unqualified late joiner.
+// The completed breakthrough needed to start emergency modernization belongs to another empire.
+let emergencyOnly:FormalWorld|undefined;
+function emergencyOnlyEmpire(){
+ if(!emergencyOnly){
+  let w=empire(catchupWorld());w=act(w,{type:'modern.emergency.start',cityId:w.cities[0].id});w=fundCatchup(w,w.largeProjects.at(-1)!.projectId);
+  const end=w.largeProjects.at(-1)!.catchup!.startedAt!+EMERGENCY_DURATION;
+  w=act(w,{type:'politics',cityId:w.cities[0].id,action:'legion-leave'});w=advanceFormal(w,end).world;
+  expect(w.largeProjects.at(-1)!.catchup!.qualifiedFactionIds).toEqual([w.factions[1].id]);expect(w.factions[0].modernQualification).toBe('none');
+  w=act(w,{type:'politics',cityId:w.cities[2].id,action:'legion-invite',target:w.playerFactionId},w.factions[1].id);
+  w=act(w,{type:'politics',cityId:w.cities[0].id,action:'request-accept',requestId:w.politics!.requests[0].id});emergencyOnly=w;
+ }
+ return structuredClone(emergencyOnly);
+}
+it.each(['player','ai'] as const)('B9-4C %s late joiner cannot obtain transfer from an emergency-only empire, including after Save/Load',async role=>{
+ let w=emergencyOnlyEmpire();w.factions[0].role=role;const empireId=w.factions[0].empireId!;
+ expect(w.largeProjects.some(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===empireId&&p.breakthrough?.phase==='completed')).toBe(false);
+ expect(w.largeProjects.at(-1)!.catchup!.phase).toBe('completed');expect(transferSource(w,w.playerFactionId)).toBeUndefined();expect(transferEligibility(w,w.playerFactionId)).toBe('須加入已完成文明突破的帝國。');expect(catchupDecision(w,w.cities[0])).toBeUndefined();
+ reject(w,{type:'modern.transfer.start',cityId:w.cities[0].id});w=(await decodeSave(await encodeSave(w))).world;reject(w,{type:'modern.transfer.start',cityId:w.cities[0].id});expect(w.factions[0].modernQualification).toBe('none');
+});
+it('B9-4C rejects emergency source snapshots in Save/Load and in ongoing transfer legality',async()=>{
+ const w=emergencyOnlyEmpire(),source=w.largeProjects.at(-1)!,envelope=await encodeSave(w),cmd=order(w,{type:'modern.transfer.start',cityId:w.cities[0].id},'invalid-emergency-source');
+ const p=createCatchup(w,w.cities[0],cmd,'technology-transfer',TRANSFER_COST,TRANSFER_DURATION,{kind:'faction',factionId:w.playerFactionId},{scope:w.factions[0].empireId!,awareness:0,sourceProjectId:source.projectId});
+ w.revision++;w.commandReceipts.push({commandId:cmd.commandId,issuerId:cmd.issuerId,fingerprint:orderFingerprint(cmd),committedRevision:w.revision,disposition:'applied'});
+ expect(transferStillLegal(w,p)).toBe(false);expect(()=>validateFormalWorld(w)).toThrow('Transfer qualification snapshot invalid');
+ reconcileCatchup(w,new EventScheduler(w.events));expect(p.catchup!.phase).toBe('cancelled');expect(w.factions[0].modernQualification).toBe('none');
+ // Even an inactive historical snapshot must reject emergency-only provenance.
+ expect(()=>validateFormalWorld(w)).toThrow('Transfer qualification snapshot invalid');await expect(encodeSave(w)).rejects.toThrow('Transfer qualification snapshot invalid');
+ envelope.snapshot=w;envelope.checksum=await digest(w);await expect(decodeSave(envelope)).rejects.toThrow('Transfer qualification snapshot invalid');
+});

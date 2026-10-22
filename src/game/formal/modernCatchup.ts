@@ -21,16 +21,16 @@ export function emergencyEligibility(w:FormalWorld,id:FormalOrder['issuerId']):s
  if(empire&&empire.leader!==id)return '帝國工程由帝國領袖啟動。';
  if(effectiveAwareness(w,id)<100)return '有效現代軍事認知須達100。';
  if(!w.largeProjects.some(p=>p.breakthrough?.phase==='completed'&&p.owner.kind==='empire'&&p.owner.empireId!==empire?.id))return '須先有其他政治陣營完成文明突破。';
- if(empire&&completedEmpireModernization(w,empire.id))return '本帝國已現代化，後加入者須技術移轉。';
+ if(empire&&completedEmpireModernization(w,empire.id))return '本帝國已完成現代化工程。';
  if(w.largeProjects.some(p=>p.kind==='emergency-modernization'&&p.catchup?.phase!=='cancelled'&&(empire?p.owner.kind==='empire'&&p.owner.empireId===empire.id:p.owner.kind==='faction'&&p.owner.factionId===id)))return '此陣營已有緊急現代化工程。';
  return null;
 }
-export function transferSource(w:FormalWorld,id:FormalOrder['issuerId']){const empire=empireOf(w,id);return empire&&w.largeProjects.find(p=>p.owner.kind==='empire'&&p.owner.empireId===empire.id&&(p.breakthrough?.phase==='completed'||p.kind==='emergency-modernization'&&p.catchup?.phase==='completed'));}
+export function transferSource(w:FormalWorld,id:FormalOrder['issuerId']){const empire=empireOf(w,id);return empire&&w.largeProjects.find(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===empire.id&&p.breakthrough?.phase==='completed');}
 export function transferEligibility(w:FormalWorld,id:FormalOrder['issuerId']):string|null{
  const f=w.factions.find(f=>f.id===id)!,source=transferSource(w,id);
  if(f.modernQualification==='full')return '已取得完整現代軍事資格。';
- if(!source)return '須加入已完成文明突破或緊急現代化的帝國。';
- if((source.breakthrough?.qualifiedFactionIds??source.catchup?.qualifiedFactionIds??[]).includes(id))return '原完成快照成員不得重領資格。';
+ if(!source)return '須加入已完成文明突破的帝國。';
+ if((source.breakthrough?.qualifiedFactionIds??[]).includes(id))return '原完成快照成員不得重領資格。';
  if(w.largeProjects.some(p=>p.kind==='technology-transfer'&&p.owner.kind==='faction'&&p.owner.factionId===id&&p.catchup?.phase!=='cancelled'))return '已有技術移轉工程。';
  return null;
 }
