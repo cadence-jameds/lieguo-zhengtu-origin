@@ -4,13 +4,9 @@ import {projectId,reportId,sequenceKey,type EmpireId} from './ids';
 import {dispatchLogistics,enqueue,projectShipmentRecord,requireRule} from './economy';
 import {empireOf} from './politics';
 import type {EventScheduler} from './scheduler';
-import {HOUR} from './time';
+import {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY} from './wonderRules';
+export {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY,WONDER_FULL_REPAIR_COST,WONDER_FULL_REPAIR_DURATION} from './wonderRules';
 import {applyRepairCommand,settleWonderDurability,wonderAvailable} from './wonderCondition';
-export const WONDER_COST=Object.freeze({food:4000000,wood:7000000,stone:9000000,gold:4000000});
-export const WONDER_DURATION=24*HOUR;
-export const WONDER_MAX_DURABILITY=120000;
-export const WONDER_FULL_REPAIR_COST=Object.freeze({food:1000000,wood:1750000,stone:2250000,gold:1000000});
-export const WONDER_FULL_REPAIR_DURATION=12*HOUR;
 export const wonderIntegrity=(current:number,maximum:number)=>current===0&&maximum>0?'ruins' as const:current<maximum?'damaged' as const:'intact' as const;
 export const empireWonder=(w:FormalWorld,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===id);
 export function wonderRemaining(p:LargeProject){return Object.fromEntries(resourceKeys.map(r=>[r,p.requiredResources[r]-p.shipments.reduce((n,t)=>n+(t.phase==='returned'?0:t.resources[r]),0)])) as typeof p.poolResources;}

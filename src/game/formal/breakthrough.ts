@@ -5,9 +5,8 @@ import {caravanStatus,dispatchLogistics,enqueue,projectShipmentRecord,requireRul
 import {empireOf} from './politics';
 import {empireWonder,wonderRemaining,wonderIntegrity} from './wonder';
 import type {EventScheduler} from './scheduler';
-import {HOUR} from './time';
-export const BREAKTHROUGH_COST=Object.freeze({food:15000000,wood:15000000,stone:10000000,gold:20000000});
-export const BREAKTHROUGH_DURATION=48*HOUR;
+import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION} from './wonderRules';
+export {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION} from './wonderRules';
 export const empireBreakthrough=(w:FormalWorld,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===id);
 export const breakthroughStoredWork=(p:LargeProject)=>p.breakthrough!.workPeriods.reduce((n,s)=>n+s.endedAt-s.startedAt,0)-p.breakthrough!.discardedWorkMs;
 export function breakthroughWork(w:FormalWorld,p:LargeProject){const b=p.breakthrough!;return breakthroughStoredWork(p)+(b.activeSince===null?0:Math.max(0,w.time-b.activeSince));}
