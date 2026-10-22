@@ -1,7 +1,9 @@
+import {empireWonder,wonderRemaining} from './wonder';
+import {caravanStatus} from './economy';
 import {portion,originalCityAttack,pickAttackStrategy,executeAttackStrategy} from './aiAttackStrategies';
 export {portion} from './aiAttackStrategies';
 import type {FormalCity,FormalCommand,FormalWorld} from './model';
-import {resourceKeys} from './model';
+import {resourceKeys,zeroResources} from './model';
 import type {Agent} from './autonomyModel';
 import {aiRandom} from './autonomyModel';
 import {legionOf,empireOf,embassy,politicalLeader,canCoordinate,diplomaticRelation} from './politics';
@@ -42,3 +44,17 @@ export function expansionDecision(w:FormalWorld,c:FormalCity,a:Agent):FormalComm
  else if(!existing&&(w.factions.find(f=>f.id===a.factionId)?.age??0)>=2&&buildingLevel(c,'castle')>=1&&c.population>=2400&&resourceKeys.every(r=>c.stock[r]>=SETTLEMENT_COST[r]+100))return{type:'settlement.prepare',cityId:c.id};
 }
 export function updatePublicMemory(w:FormalWorld,a:Agent,c:FormalCity){for(const n of publicSituation(w,a,c)){const m=memoryFor(w,a.factionId,n.ownerFactionId);if(m){m.threat=Math.min(1,n.population/Math.max(1,c.population)*.08+w.cities.filter(c=>c.ownerFactionId===n.ownerFactionId).length*.025);if(n.relation==='friendly')m.trust=Math.min(1,m.trust+.002);m.at=w.time;}}for(const info of a.intel)if(w.time-info.at>24*HOUR)info.units={};}
+
+/** Only the agent's own empire pool is consulted. Spending and routing still pass the reducer. */
+export function wonderDecision(w:FormalWorld,c:FormalCity,a:Agent):FormalCommand|undefined{
+ if(!a.active)return;const empire=empireOf(w,a.factionId);if(!empire)return;
+ const capacity=caravanStatus(w,c).available*2000;if(capacity<=0)return;
+ const project=empireWonder(w,empire.id);
+ if(!project)return empire.leader===a.factionId?{type:'wonder.start',cityId:c.id,hostCityId:c.id}:undefined;
+ if(project.wonder?.phase!=='funding')return;
+ const host=w.cities.find(c=>c.id===project.initiatingCityId);if(!host||empireOf(w,host.ownerFactionId)?.id!==empire.id)return;
+ const needed=wonderRemaining(project),resources=zeroResources();let left=capacity;
+ for(const r of resourceKeys){const amount=Math.min(left,needed[r],Math.floor(Math.max(0,c.stock[r]-600)*.2));resources[r]=amount;left-=amount;}
+ if(left===capacity)return;
+ return{type:'wonder.ship',cityId:c.id,projectId:project.projectId,resources};
+}

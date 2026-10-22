@@ -3,6 +3,7 @@ import {cloneWorldDraft} from './worldDraft';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
 import {handleAutonomy,retireAutonomy,type Submit} from './autonomy';
+import {applyWonderCommand,handleWonderEvent} from './wonder';
 import {reconcileExileSites,applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
 import {applyPolitics,reconcilePolitics,reconcilePoliticalEvents} from './politics';
 import {applyCooperation} from './cooperation';
@@ -145,6 +146,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
   try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
    if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
+   else if(p.type==='wonder.start'||p.type==='wonder.ship')applyWonderCommand(w,city,order,p,scheduler);
    else if(p.type==='governance.set')applyGovernance(w,city,order,p,scheduler);
    else if(p.type==='politics'){politicalMemory(w,order.issuerId,p);applyPolitics(w,city,order,p,scheduler);}
    else if(p.type==='defense.set'||p.type==='defense.dispatch'||p.type==='joint.create'||p.type==='joint.join')applyCooperation(w,city,order,p,scheduler);
@@ -197,6 +199,7 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   else if(e.type==='age.complete')completeAge(w,e);
   else if(e.type==='military.train'){handleMilitaryEvent(w,e,scheduler);const city=spatial(w).cities.get(e.cityId);if(city)refreshBattleDefense(w,city);}
   else if(e.type==='settlement.ready'||e.type==='settlement.arrive')handleSettlementEvent(w,e,scheduler);
+  else if(handleWonderEvent(w,e,scheduler,reports)){}
   else if(handleEconomyEvent(w,e,scheduler)){
    if(e.type==='economy.settle'){const c=spatial(w).cities.get(e.cityId);if(c)runAutoLogistics(w,c,scheduler);}
    if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}

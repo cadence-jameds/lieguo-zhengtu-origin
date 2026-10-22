@@ -1,6 +1,6 @@
 import {attackGarrisons,autonomousDispatchReason} from './aiAttackStrategies';
 import {supplyDecision,GOVERNOR_DEFAULTS} from './governance';
-import {politicalDecision,militaryDecision,expansionDecision,updatePublicMemory} from './aiActions';
+import {wonderDecision,politicalDecision,militaryDecision,expansionDecision,updatePublicMemory} from './aiActions';
 import type {FormalCity,FormalCommand,FormalEvent,FormalReport,FormalWorld,Resources} from './model';
 import {resourceKeys,zeroResources} from './model';
 import {commandId,eventId,sequenceKey,type FactionId} from './ids';
@@ -85,7 +85,7 @@ export function handleAutonomy(w:FormalWorld,e:FormalEvent,s:EventScheduler,subm
  a.decisions++;a.active=aiRandom(w.seed,a.factionId,a.decisions+100)<.3+.65*a.traits.activity;
  a.nextAt=w.time+Math.round((20+(1-a.traits.activity)*40+(1-a.traits.reaction)*15+aiRandom(w.seed,a.factionId,a.decisions+200)*10)*AI_MINUTE);a.eventId=eventId(sequenceKey(w.sequences.event++));s.push({id:a.eventId,type:'ai.decide',factionId:a.factionId,at:a.nextAt});
  const c=cities[(a.decisions-1)%cities.length];settleCity(w,c);updatePublicMemory(w,a,c);const economic=economicChoices(w,c,a);const currentGovernor=w.governors?.find(g=>g.cityId===c.id&&g.enabled),commissioned=!!currentGovernor,planned=a.active?chooseEconomic(economic,a,w.seed,c):undefined,plannedCost=planned?economic.find(q=>JSON.stringify(q.command)===JSON.stringify(planned))?.cost:undefined,neededBudget=plannedCost?Math.max(GOVERNOR_DEFAULTS.budget,resourceKeys.reduce((n,r)=>n+plannedCost[r],0)):GOVERNOR_DEFAULTS.budget;const commission:FormalCommand|undefined=a.active&&buildingLevel(c,'townhall')>=1&&(!currentGovernor||neededBudget>currentGovernor.budget)?{type:'governance.set',cityId:c.id,enabled:true,policy:currentGovernor?.policy??(a.traits.military>a.traits.economy?'military':'economy'),budget:neededBudget,reserve:currentGovernor?.reserve??GOVERNOR_DEFAULTS.reserve}:undefined;const chosen=a.active&&!commissioned&&!commission?chooseEconomic(economic,a,w.seed,c):undefined;
- const political=politicalDecision(w,c,a),military=militaryDecision(w,c,a),expand=expansionDecision(w,c,a);
- const commands:FormalCommand[]=[...(commission?[commission]:[]),...(chosen?[chosen]:[]),...(political?[political]:[]),...military,...(expand?[expand]:[]),...(supplyDecision(w,c)?[supplyDecision(w,c)!]:[])];
+ const wonder=wonderDecision(w,c,a),political=politicalDecision(w,c,a),military=militaryDecision(w,c,a),expand=expansionDecision(w,c,a);
+ const commands:FormalCommand[]=[...(commission?[commission]:[]),...(chosen?[chosen]:[]),...(political?[political]:[]),...(wonder?[wonder]:[]),...military,...(expand?[expand]:[]),...(supplyDecision(w,c)?[supplyDecision(w,c)!]:[])];
  const before=new Set(w.armies.map(t=>t.id));const reports=submitAutonomous(w,s,e,a.factionId,commands,submit);if(w.armies.some(t=>t.ownerFactionId===a.factionId&&!before.has(t.id)))w.autonomy!.agents.find(t=>t.factionId===a.factionId)!.lastWarAt=w.time;return reports;
 }

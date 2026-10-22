@@ -1,6 +1,6 @@
 import type {EventId} from './ids';
 import type {FormalEvent} from './model';
-export const EVENT_PRIORITY: Readonly<Record<FormalEvent['type'],number>> = Object.freeze({'governance.decide':71,'ai.decide':70,'politics.end-friendly':25,'army.depart':38,'craftsman.arrive':39,'age.complete':9,'military.train':30,'settlement.ready':35,'settlement.arrive':36,'army.arrive':40,'army.return':41,'combat.round':50,'wild.respawn':55,'economy.settle':0,'construction.complete':5,'city.promote.complete':6,'logistics.arrive':20,'logistics.return':21,'research.complete':10,'fixture.marker':90});
+export const EVENT_PRIORITY: Readonly<Record<FormalEvent['type'],number>> = Object.freeze({'governance.decide':71,'ai.decide':70,'politics.end-friendly':25,'army.depart':38,'craftsman.arrive':39,'age.complete':9,'military.train':30,'settlement.ready':35,'settlement.arrive':36,'army.arrive':40,'army.return':41,'combat.round':50,'wild.respawn':55,'economy.settle':0,'construction.complete':5,'city.promote.complete':6,'logistics.arrive':20,'logistics.return':21,'wonder.complete':22,'research.complete':10,'fixture.marker':90});
 /** Code-point ordering is locale independent. EventId is the final deterministic tie-break. */
 export function compareEvents(a:FormalEvent,b:FormalEvent):number {
   return a.at-b.at || EVENT_PRIORITY[a.type]-EVENT_PRIORITY[b.type] || (a.id<b.id?-1:a.id>b.id?1:0);

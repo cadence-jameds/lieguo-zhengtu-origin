@@ -11,7 +11,7 @@ export type WildSite = {id:WildSiteId;spawnSlot:number;generation:number;region:
 export type Construction = {castleCivilizationId?:string;eventId:EventId;commandId:CommandId;lane:0|1;lanePreference?:0|1;target:{kind:'field';slot:number}|{kind:'building';key:string};action?:'demolish';fromLevel:number;toLevel:number;createdAt:number;startsAt:number;durationMs:number;qualificationHousing:number;paidResources?:Resources};
 export type CityPromotion = {eventId:EventId;commandId:CommandId;startedAt:number;durationMs:number;populationSnapshot:number;housingSnapshot:number;townhallSnapshot:number};
 export type CityEconomy = {lastSettledAt:number;productionRemainder:Resources;milestones:number[];slots:Record<string,number>;construction:Construction[];promotion:CityPromotion|null;reservedIncoming:Resources;settlementEventId:EventId};
-export type LogisticsShipment = {shipmentId:ShipmentId;commandId:CommandId;sourceFactionId:FactionId;sourceCityId:CityId;destinationCityId:CityId;resources:Resources;reservedResources?:Resources;returnCargo?:Resources;caravans:number;path:{x:number;y:number}[];distance:number;dispatchedAt:number;arrivalAt:number;returnAt:number;arrivalEventId:EventId;returnEventId:EventId;phase:'outbound'|'returning';authorizationSnapshot:{sourceCityOwnerFactionId:FactionId;contributorEmpireId:EmpireId|null;checkedAt:number}};
+export type LogisticsShipment = {shipmentId:ShipmentId;projectId?:ProjectId;commandId:CommandId;sourceFactionId:FactionId;sourceCityId:CityId;destinationCityId:CityId;resources:Resources;reservedResources?:Resources;returnCargo?:Resources;caravans:number;path:{x:number;y:number}[];distance:number;dispatchedAt:number;arrivalAt:number;returnAt:number;arrivalEventId:EventId;returnEventId:EventId;phase:'outbound'|'returning';authorizationSnapshot:{sourceCityOwnerFactionId:FactionId;contributorEmpireId:EmpireId|null;checkedAt:number}};
 export type TrainingJob={commandId:CommandId;eventId:EventId;ownerFactionId:FactionId;unitId:string;producer:string;producerLevelSnapshot:number;lane:0|1;lanePreference?:0|1;count:number;remaining:number;populationPerUnit:number;unitCost:Resources;durationMs:number;startsAt:number;nextAt:number};
 export type CityMilitary={units:Record<string,number>;queue:TrainingJob[];unpaidFood:number};
 export type AgeProject={eventId:EventId;commandId:CommandId;initiatingCityId:CityId;targetAge:1|2|3;startedAt:number;durationMs:number;populationSnapshot:number;centerSnapshot:number};
@@ -39,17 +39,22 @@ export type ResearchProject = ResearchBase & (
 /** Large projects and direct research are distinct contracts, never an omnibus shared stock. */
 export type LargeProjectOwner = {kind:'faction';factionId:FactionId}|{kind:'empire';empireId:EmpireId};
 export type ContributorScope = {kind:'same-faction';factionId:FactionId}|{kind:'current-empire-members';empireId:EmpireId};
-export type Shipment = {shipmentId:ShipmentId;projectId:ProjectId;sourceFactionId:FactionId;sourceCityId:CityId;destinationCityId:CityId;resources:Resources;dispatchedAt:number;authorizationSnapshot:{sourceCityOwnerFactionId:FactionId;contributorEmpireId:EmpireId|null;checkedAt:number}} & (
+export type Shipment = {commandId?:CommandId;shipmentId:ShipmentId;projectId:ProjectId;sourceFactionId:FactionId;sourceCityId:CityId;destinationCityId:CityId;resources:Resources;dispatchedAt:number;authorizationSnapshot:{sourceCityOwnerFactionId:FactionId;contributorEmpireId:EmpireId|null;checkedAt:number}} & (
   | {phase:'in-transit';arrivedAt?:never;arrivalEventId?:never}
   | {phase:'arrived';arrivedAt:number;arrivalEventId:EventId}
 );
+/** Stable host/owner snapshots and completion identity remain available to later destruction,
+ * breakthrough and conquest work. Those systems do not run in B9-1. */
+export type WonderConstruction={creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
+export type WonderCommand={type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
 export type LargeProject = {
-  projectId:ProjectId;kind:'emergency-modernization'|'technology-transfer';owner:LargeProjectOwner;legalContributors:ContributorScope;
+  projectId:ProjectId;kind:'world-wonder'|'emergency-modernization'|'technology-transfer';wonder?:WonderConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
   paymentMode:'physical-shipment';initiatingCityId:CityId;requiredResources:Resources;poolResources:Resources;
   shipments:Shipment[];createdAt:number;durationMs:number;
 };
 export type FormalEvent = {id:EventId;at:number} & (
   | {type:'research.complete';projectId:ResearchProjectId}
+  | {type:'wonder.complete';projectId:ProjectId}
   | {type:'economy.settle';cityId:CityId}
   | {type:'construction.complete';cityId:CityId}
   | {type:'city.promote.complete';cityId:CityId}
@@ -84,7 +89,7 @@ export type FormalReport = {id:ReportId;sequence:number;campaignId:CampaignId;ow
 export type MilitaryCommand={type:'military.recruit';cityId:CityId;unitId:string;count:number;lane?:0|1}|{type:'military.cancel';cityId:CityId;trainingCommandId:CommandId}|{type:'military.disband';cityId:CityId;unitId:string;count:number};
 export type DevelopmentCommand={type:'research.start';cityId:CityId;techId:string}|{type:'age.start';cityId:CityId}|{type:'settlement.prepare';cityId:CityId}|{type:'settlement.cancel';cityId:CityId}|{type:'settlement.dispatch';cityId:CityId;x:number;y:number;name:string;escort:Record<string,number>}|{type:'logistics.auto.set';cityId:CityId;rules:AutoLogistics[]};
 export type EconomyCommand = {type:'building.demolish';cityId:CityId;key:string}|{type:'field.upgrade';cityId:CityId;slot:number;lane?:0|1}|{type:'building.upgrade';cityId:CityId;key:string;lane?:0|1;slot?:number}|{type:'construction.cancel';cityId:CityId;constructionCommandId:CommandId}|{type:'city.promote';cityId:CityId}|{type:'logistics.dispatch';cityId:CityId;destinationCityId:CityId;resources:Resources};
-export type FormalCommand = {type:'campaign.configure';cityId:CityId;speed:1|3|6|10|25;offlineHours:0|1|4|8|12}| import('./governance').GovernanceCommand| import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|100;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
+export type FormalCommand = WonderCommand| {type:'campaign.configure';cityId:CityId;speed:1|3|6|10|25;offlineHours:0|1|4|8|12}| import('./governance').GovernanceCommand| import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|100;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
 export type FormalOrder = {commandId:CommandId;campaignId:CampaignId;issuerId:FactionId;issuedWorldTime:number;expectedRevision:number;payload:FormalCommand};
 export type CommandAck = {commandId:CommandId;status:'committed'|'duplicate'|'rolled-back'|'rejected';revision:number;originalRevision?:number;reason?:string};
 export type FormalTransition = {world:FormalWorld;reports:FormalReport[];ack?:CommandAck};

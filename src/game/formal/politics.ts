@@ -34,7 +34,7 @@ function syncEmpires(w:FormalWorld){const p=w.politics!;for(const e of [...p.emp
 /** Shared zero-member/explicit dissolution cleanup. No refund, transfer or inherited entitlement. */
 function cleanScopes(w:FormalWorld){const p=w.politics!;
  const empires=new Set(p.empires.map(e=>e.id));
- w.largeProjects=w.largeProjects.filter(x=>x.owner.kind!=='empire'||empires.has(x.owner.empireId));
+ w.largeProjects=w.largeProjects.filter(x=>x.kind==='world-wonder'||x.owner.kind!=='empire'||empires.has(x.owner.empireId));
  for(const l of p.legions)if(l.empireId&&!empires.has(l.empireId))l.empireId=null;
 const scopes=new Set([...w.factions.map(f=>politicalScope(w,f.id))]);p.relations=p.relations.filter(r=>scopes.has(r.a)&&scopes.has(r.b)&&r.a!==r.b);p.requests=p.requests.filter(r=>w.cities.some(c=>c.ownerFactionId===r.from)&&w.cities.some(c=>c.ownerFactionId===r.to)&&(!r.legionId||p.legions.some(l=>l.id===r.legionId))&&
  (!r.sourceLegionId||p.legions.some(l=>l.id===r.sourceLegionId&&l.leader===r.from))&&
@@ -84,6 +84,7 @@ export function applyPolitics(w:FormalWorld,_c:FormalCity,o:FormalOrder,q:Politi
   if(q.action==='war'||q.action==='peace'){requireRule(old?.state!=='friendly','友好及六小時解除期間禁止敵對。');p.relations=p.relations.filter(r=>r!==old);if(q.action==='war')p.relations.push({a,b,state:'war'});}
  }
  syncEmpires(w);
+ for(const project of w.largeProjects){if(project.kind!=='world-wonder'||project.owner.kind!=='empire')continue;const host=w.cities.find(c=>c.id===project.initiatingCityId);if(host&&host.ownerFactionId===project.wonder?.hostOwnerFactionId)requireRule(w.factions.find(f=>f.id===host.ownerFactionId)?.empireId===project.owner.empireId,'奇觀承載城市領主在奇觀存在期間不得退出帝國。');}
 }
 /** Ownership eligibility is separate from battle damage: extinct troops still finish combat. */
 export function canAcquireConquest(w:FormalWorld,id:FactionId){return !w.extinction?.extinct.includes(id)&&w.factions.some(f=>f.id===id)&&w.cities.some(c=>c.ownerFactionId===id);}
