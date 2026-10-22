@@ -1,3 +1,4 @@
+import {selectReverseEngineering} from './modernAwareness';
 import {diplomacySnapshot,diplomacyChanges} from './diplomacyReports';
 import {cloneWorldDraft} from './worldDraft';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
@@ -148,6 +149,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
    if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
    else if(p.type==='breakthrough.start'||p.type==='breakthrough.ship')applyBreakthroughCommand(w,city,order,p,scheduler);
+   else if(p.type==='modern.reverse')selectReverseEngineering(w,order.issuerId,p.unitId);
    else if(p.type==='wonder.start'||p.type==='wonder.ship')applyWonderCommand(w,city,order,p,scheduler);
    else if(p.type==='governance.set')applyGovernance(w,city,order,p,scheduler);
    else if(p.type==='politics'){politicalMemory(w,order.issuerId,p);applyPolitics(w,city,order,p,scheduler);}

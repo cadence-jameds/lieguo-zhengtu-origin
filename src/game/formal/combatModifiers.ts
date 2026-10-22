@@ -42,12 +42,12 @@ export function counterMultiplier(attacker:string,target:string){
 }
 export const wallDefenseMultiplier=(level:number)=>1+level*.03;
 export const damageFormula=(attack:number,counter:number,defense:number,special=1,splash=1)=>Math.max(1,attack*counter-defense)*special*splash;
-export function hitDamage(a:string,d:string,owner:FormalFaction|undefined,defender:FormalFaction|undefined,wall=0,firstContact=false,splash=1){
+export function hitDamage(a:string,d:string,owner:FormalFaction|undefined,defender:FormalFaction|undefined,wall=0,firstContact=false,splash=1,awareness=0){
  const x=combatStats(a,owner),y=combatStats(d,defender),defense=(rangedUnit(a)?y.rangedDefense:y.meleeDefense)*wallDefenseMultiplier(wall);
  let special=baseUnit(a)==='ram'?.25:1;
  if(baseUnit(d)==='ram'&&rangedUnit(a))special*=baseUnit(a)==='catapult'?.6:.2;
  if(firstContact&&baseUnit(a)==='knight'&&hasTech(owner,'civilization.charge'))special*=1.08;
- return damageFormula(x.attack,counterMultiplier(a,d),defense,special,splash)*eraMultiplier(a,d);
+ return damageFormula(x.attack,counterMultiplier(a,d),defense,special,splash)*(awareness>=40&&!isModernUnit(a)&&isModernUnit(d)&&counterMultiplier(a,d)>1?.5:eraMultiplier(a,d));
 }
 export function splashWeights(f?:FormalFaction){return hasTech(f,'civilization.warwolf')?[1,...Array(6).fill(.5),...Array(10).fill(.25)]:[1,...Array(4).fill(.5),...Array(8).fill(.25)];}
 export function marchSeconds(units:Record<string,number>,f:FormalFaction){return Math.max(...Object.entries(units).filter(([,n])=>n>0).map(([id])=>{const u=UNIT_CATALOG[id];let t=u.secondsPerTile;if(effectiveUnit(id)&&hasTech(f,mountedUnit(id)?'military.horsemanship':'military.drill'))t*=.95;if(u.combatClass==='siege'&&hasTech(f,'civilization.swift-siege'))t*=.8;return t;}));}

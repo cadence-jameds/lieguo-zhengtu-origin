@@ -1,3 +1,4 @@
+import {modernUnitAuthorized} from './modernAwareness';
 import type {FormalCity,FormalEvent,FormalOrder,FormalWorld,MilitaryCommand,Resources,TrainingJob} from './model';
 import {resourceKeys} from './model';
 import {buildingLevel} from './catalogB3';
@@ -21,7 +22,7 @@ export function armyUpkeep(w:FormalWorld,c:FormalCity){const f=w.factions.find(f
 export function applyMilitaryCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,p:MilitaryCommand,s:EventScheduler){
  requireRule(c.military&&c.economy,'此操作需要正式軍事城市。');const m=c.military,f=w.factions.find(f=>f.id===o.issuerId)!;
  if(p.type==='military.modernize'){
-  requireRule(f.modernQualification==='full','需要完整現代軍事資格。');const target=modernizationTarget(p.unitId);requireRule(target,'此兵員沒有合法現代化對應。');
+  const target=modernizationTarget(p.unitId);requireRule(target,'此兵員沒有合法現代化對應。');requireRule(modernUnitAuthorized(f,target.id),'需要完整現代資格或此兵種線逆向工程。');
   const army=p.armyId?w.armies.filter(isMissionArmy).find(a=>a.id===p.armyId):undefined;
   requireRule(!p.armyId||army&&army.ownerFactionId===o.issuerId&&army.status==='stationed'&&army.target.kind==='city'&&army.target.cityId===c.id&&army.position.x===c.x&&army.position.y===c.y,'只能改裝本方城市內合法靜止的所屬部隊。');
   requireRule(!w.combat?.battles.some(b=>b.cityId===c.id),'交戰或攻城中的部隊不能改裝。');
@@ -42,7 +43,7 @@ export function applyMilitaryCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,p:
  }
  let u=UNIT_CATALOG[p.unitId];requireRule(u,'兵種不存在。');
  const elite=ELITE_VARIANTS[u.id]&&UNIT_CATALOG[ELITE_VARIANTS[u.id]];if(elite&&f.techIds.includes(elite.eliteTech!)&&c.economy.milestones.includes(elite.milestone))u=elite;
- requireRule(!isModernUnit(u.id)||f.modernQualification==='full','需要完整現代軍事資格。');requireRule((isModernUnit(u.id)||(f.age??0)>=u.age)&&buildingLevel(c,u.producer)>=1,'時代或兵種生產建築不足。');requireRule(!u.civilizationId||u.civilizationId===(c.castleCivilizationId??f.civilizationId),'此城堡無外文明生產資格。');if(u.eliteTech)requireRule(f.techIds.includes(u.eliteTech)&&c.economy.milestones.includes(u.milestone),'該城市尚未取得精銳生產資格。');
+ requireRule(!isModernUnit(u.id)||modernUnitAuthorized(f,u.id),'需要完整現代軍事資格。');requireRule((isModernUnit(u.id)||(f.age??0)>=u.age)&&buildingLevel(c,u.producer)>=1,'時代或兵種生產建築不足。');requireRule(!u.civilizationId||u.civilizationId===(c.castleCivilizationId??f.civilizationId),'此城堡無外文明生產資格。');if(u.eliteTech)requireRule(f.techIds.includes(u.eliteTech)&&c.economy.milestones.includes(u.milestone),'該城市尚未取得精銳生產資格。');
  requireRule(m.queue.length<QUEUE_CAPACITY,'部隊訓練已達 5 項上限。');
  const end=(l:number)=>Math.max(w.time,...m.queue.filter(j=>j.lane===l).map(j=>j.nextAt+(j.remaining-1)*j.durationMs));
  const lane=p.lane??(c.economy.milestones.includes(20000)&&end(1)<end(0)?1:0);requireRule(lane===0||c.economy.milestones.includes(20000),'尚未取得第二軍事佇列。');const population=u.population*p.count;requireRule(Number.isSafeInteger(population)&&c.population>=population,'徵兵人口不足。');requireRule(c.housing>=c.population,'住房不足，請先改善住房。');
