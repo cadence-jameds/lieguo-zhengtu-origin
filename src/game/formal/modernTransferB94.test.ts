@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
-import {catchupWorld,act,fundCatchup} from './catchupTestSupport';
-import {order,reject} from './developmentTestSupport';
+import {catchupWorld,act,fundCatchup,withModernHistory} from './catchupTestSupport';
+import {make,rich,build,order,reject} from './developmentTestSupport';
 import {TRANSFER_COST,TRANSFER_DURATION,transferEligibility,handleCatchupEvent} from './modernCatchup';
 import {resourceKeys,zeroResources,type FormalWorld} from './model';
 import {advanceFormal,submitFormalOrder} from './reducer';
@@ -39,3 +39,13 @@ it('B9-4C six legal offline chunks reach 72h and Recovery preserves cancellation
  const w=funded(),end=w.largeProjects.at(-1)!.catchup!.startedAt!+TRANSFER_DURATION;let offline={...w,offlineHours:12 as const};for(let i=0;i<6;i++)offline=(await advanceOfflineCooperative(offline,0,(Math.min(end-offline.time,12*3600000))/offline.speed)).world as typeof offline;expect(offline.largeProjects.at(-1)!.catchup!.phase).toBe('completed');
  const {FormalPersistence}=await import('../persistence'),db=new FormalPersistence({suffix:'transfer-'+crypto.randomUUID()});try{let saved=await db.start(funded());const cancelled=act(saved,{type:'politics',cityId:saved.cities[2].id,action:'empire-kick',target:saved.playerFactionId},saved.factions[1].id);saved=await db.save(cancelled,[],saved.revision);const backup=(await db.backupList())[0];await db.restore(backup.id);await db.db.saves.put({id:'current',kind:'world',data:{broken:true}} as never);const recovered=await db.loadSave();expect(recovered.recovered).toBe(true);expect(recovered.game!.largeProjects.at(-1)!.catchup!.phase).toBe('cancelled');expect(recovered.game!.largeProjects.at(-1)!.poolResources).toEqual(TRANSFER_COST);expect(advanceFormal(recovered.game!,end).world.factions[0].modernQualification).toBe('none');}finally{await db.db.delete();}
 });
+
+it('B9-4C all 99 AI later joiners use the same personal transfer application and real shipment payment',()=>{
+ const base=withModernHistory(make()),player=base.playerFactionId;base.factions[0].modernQualification='full';base.factions[1].modernQualification='none';base.largeProjects[1].breakthrough!.qualifiedFactionIds=[player];
+ for(const id of base.factions.filter(f=>f.role==='ai').map(f=>f.id)){
+  let w=structuredClone(base);const me=w.factions.find(f=>f.id===id)!,leader=w.factions[0],source=w.cities.find(c=>c.ownerFactionId===id)!,head=w.cities[0],history=w.largeProjects[1].owner;if(history.kind!=='empire')throw Error('missing source');
+  for(const c of [source,head]){rich(w,c,10000);build(c,'embassy',15);build(c,'market',15);}me.age=leader.age=2;me.empireId=leader.empireId=history.empireId;
+  w.politics={legions:[{id:'legion:ai-transfer-source',name:'原軍團',description:'',leader:player,members:[player],empireId:history.empireId},{id:'legion:ai-transfer-new',name:'加入',description:'',leader:id,members:[id],empireId:history.empireId}],empires:[{id:history.empireId,name:'現代帝國',leader:player,legions:['legion:ai-transfer-source','legion:ai-transfer-new'],color:'red'}],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};
+  w=act(w,{type:'modern.transfer.start',cityId:source.id},id);const p=w.largeProjects.at(-1)!,resources={food:10,wood:20,stone:30,gold:40},cmd=order(w,{type:'modern.project.ship',cityId:source.id,projectId:p.projectId,resources},'ai-transfer-'+id.slice(8),id);w=submitFormalOrder(w,cmd).world;expect(w.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());for(const r of resourceKeys)expect(w.cities.find(c=>c.id===source.id)!.stock[r]).toBe(10000-resources[r]);expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');expect(w.factions.find(f=>f.id===id)!.modernQualification).toBe('none');
+ }
+},30000);

@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
 import {battlefield,dispatch,arrive,issue} from './combatTestSupport';
-import {make,rich,researchCity,order,reject} from './developmentTestSupport';
+import {make,rich,build,researchCity,order,reject} from './developmentTestSupport';
 import {effectiveAwareness,awarenessPool,recordModernRound,recordModernConquest,modernUnitAuthorized} from './modernAwareness';
 import {makePools} from './combatResolver';
 import {battleId,eventId,empireId,resolutionId} from './ids';
@@ -58,4 +58,16 @@ it('B9-4A real battle awareness survives atomic save failure, Recovery and offli
   w=await db.save(direct.world,direct.reports,w.revision);const checkpoint=(await db.backupList())[0];const restored=await db.restore(checkpoint.id);expect(restored.modernAwareness).toEqual(w.modernAwareness);
   await db.db.saves.put({id:'current',kind:'world',data:{broken:true}} as never);const recovered=await db.loadSave();expect(recovered.recovered).toBe(true);expect(recovered.game!.modernAwareness).toEqual(w.modernAwareness);expect(advanceFormal(recovered.game!,recovered.game!.time).world.modernAwareness).toEqual(w.modernAwareness);
  }finally{await db.db.delete();}
+});
+it('B9-4A an AI gains cognition only from its own actual battle; uninvolved AI gain nothing',()=>{
+ let w=battlefield();w.cities[1].military!.units={militia:1000};w.cities[0].military!.units={'modern.militia':50};w=arrive(dispatch(w,'raid',{militia:1000},1,0).world).world;expect(effectiveAwareness(w,w.factions[1].id)).toBeGreaterThanOrEqual(4);expect(effectiveAwareness(w,w.factions[2].id)).toBe(0);expect(w.modernAwareness!.pools[w.factions[2].id]).toBeUndefined();
+});
+
+it('B9-4A real diplomatic join/leave and Save/Load freeze and restore personal cognition without transfer',async()=>{
+ let w=make();for(const i of [0,1]){w.factions[i].age=2;build(w.cities[i],'embassy',15);}w.modernAwareness={pools:{[w.playerFactionId]:{value:80,significantEncounter:true,encountered:['modern.knight']}},battles:[]};
+ w=issue(w,{type:'politics',cityId:w.cities[0].id,action:'legion-create',name:'本人軍團'}).world;w=issue(w,{type:'politics',cityId:w.cities[1].id,action:'legion-create',name:'盟軍'},w.factions[1].id).world;w=issue(w,{type:'politics',cityId:w.cities[0].id,action:'empire-propose',target:w.factions[1].id,name:'帝國'}).world;w=issue(w,{type:'politics',cityId:w.cities[1].id,action:'request-accept',requestId:w.politics!.requests[0].id},w.factions[1].id).world;
+ expect(effectiveAwareness(w,w.playerFactionId)).toBe(0);const id=w.factions[0].empireId!;w.modernAwareness!.pools[id]={value:20,significantEncounter:false,encountered:[]};w=(await decodeSave(await encodeSave(w))).world;expect(effectiveAwareness(w,w.playerFactionId)).toBe(20);expect(w.modernAwareness!.pools[w.playerFactionId].value).toBe(80);w=issue(w,{type:'politics',cityId:w.cities[0].id,action:'empire-leave'}).world;expect(effectiveAwareness(w,w.playerFactionId)).toBe(80);expect(w.modernAwareness!.pools[id].value).toBe(20);expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+});
+it.each([12,13])('B9-4A actual battle counts %s modern siege vehicles and excludes accompanying supply population',count=>{
+ let w=battlefield();w.cities[0].military!.units={militia:1000};w.cities[1].military!.units={militia:1,'modern.ram':count,'modern.baggage':100};w=arrive(dispatch(w,'raid',{militia:1000}).world).world;expect(awarenessPool(w,w.playerFactionId).significantEncounter).toBe(count===13);
 });

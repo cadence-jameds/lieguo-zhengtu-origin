@@ -13,7 +13,7 @@ import type {BattleParticipant,BattleReportPayload,BattleState,MissionArmy,Resol
 import {initialCombat,isMissionArmy,type ConquestReason} from './combatModel';
 import {ensureBattleProgress,battleLog,SIEGE_ROUND_LIMIT,CONQUEST_REASON_LABELS} from './battleProgress';
 import {applySupplyLoss,effectiveCount,exchange,makePools,type CombatPool} from './combatResolver';
-import {carryCapacity,effectiveUnit} from './combatModifiers';
+import {carryCapacity,effectiveUnit,scoutPower} from './combatModifiers';
 import {raidable} from './catalogB3';
 import {addStock,enqueue,settleCity,settleFaction} from './economy';
 import {developmentLevels,finalizeSiegeHousing,finishConquest,resolveSiege} from './siege';
@@ -77,7 +77,7 @@ function wildScout(w:FormalWorld,a:MissionArmy,e:FormalEvent,s:EventScheduler){
  returnArmy(w,a,s);return [];
 }
 function scoutBattle(w:FormalWorld,a:MissionArmy,c:FormalCity,e:FormalEvent,s:EventScheduler){
- settleFaction(w,a.ownerFactionId);settleCity(w,c);const groups=defensiveGroups(w,c),count=scoutCount(a.units),defenderCount=groups.reduce((n,g)=>n+scoutCount(g.units),0),attack=count*10,defense=defenderCount*12,success=attack>defense,observedUnits=groups.reduce<Record<string,number>>((out,g)=>{for(const [id,n] of Object.entries(g.units))out[id]=(out[id]??0)+n;return out;},{}),p=basePayload(w,a,c.name,c);p.defenders=groups.map(g=>participant(w,g.units,g.owner,g.source,g.army?.id??null));p.rounds=1;
+ settleFaction(w,a.ownerFactionId);settleCity(w,c);const groups=defensiveGroups(w,c),count=scoutCount(a.units),defenderCount=groups.reduce((n,g)=>n+scoutCount(g.units),0),attack=scoutPower(a.units,w.factions.find(f=>f.id===a.ownerFactionId)),defense=groups.reduce((n,g)=>n+scoutPower(g.units,w.factions.find(f=>f.id===g.owner),true),0),success=attack>defense,observedUnits=groups.reduce<Record<string,number>>((out,g)=>{for(const [id,n] of Object.entries(g.units))out[id]=(out[id]??0)+n;return out;},{}),p=basePayload(w,a,c.name,c);p.defenders=groups.map(g=>participant(w,g.units,g.owner,g.source,g.army?.id??null));p.rounds=1;
  // Snapshot all permitted city intelligence before counter-scout casualties. Never copy interior or queue data.
  const intel={observedAt:w.time,cityId:c.id,units:observedUnits,resources:{...c.stock},garrison:{...c.military!.units},reinforcements:groups.filter(g=>g.army).map(g=>({ownerFactionId:g.owner,originCityId:g.source,units:{...g.units}})),wallLevel:c.wallLevel??0,defenses:Object.fromEntries(Object.entries(c.buildings).filter(([key])=>key.startsWith('bunker.')||key==='castle'))};
  p.wallBefore=p.wallAfter=p.populationBefore=p.populationAfter=0;
