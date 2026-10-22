@@ -24,9 +24,9 @@ it('six compact cards share one selected Formal detail panel and retain name dic
  expect((html.match(/class="civ-detail"/g)??[])).toHaveLength(1);const cards=[...html.matchAll(/<button[^>]*class="civ-option[^>]*>.*?<\/button>/g)].map(m=>m[0]);expect(cards).toHaveLength(6);for(const card of cards){expect(card).not.toContain('civ-detail');expect(card).not.toContain('專屬科技');}expect(html.indexOf('class="civ-detail"')).toBeGreaterThan(html.lastIndexOf('class="civ-option'));
  const source=readFileSync('src/game/presentation/Start.tsx','utf8');expect(source).toContain('onClick={()=>setCiv(id)}');expect(source).not.toMatch(/setCiv\(id\);?setName/);
 });
-it('11 fixed unit lines sum actual ordinary+elite garrisons and show absent modern tiers without inventing units',()=>{
- const own=structuredClone(c);own.military!.units={militia:7,swordsman:4,archer:5,crossbowman:2,'guard.civ_zhongguo':3,'elite.guard.civ_zhongguo':1};const lines=garrisonLines(w,own);
- expect(lines.map(l=>l.id)).toEqual(['scout','militia','spearman','archer','skirmisher','light-cavalry','knight','guard','ram','catapult','baggage']);expect(lines.find(l=>l.id==='militia')).toMatchObject({ordinaryCount:7,eliteCount:4,total:11,modernCount:null});expect(lines.find(l=>l.id==='guard')?.total).toBe(4);expect(lines.find(l=>l.id==='scout')?.eliteCount).toBeNull();expect(lines.every(l=>l.modernCount===null)).toBe(true);
+it('11 fixed unit lines sum actual ordinary+elite+modern garrisons',()=>{
+ const own=structuredClone(c);own.military!.units={militia:7,swordsman:4,archer:5,crossbowman:2,'guard.civ_zhongguo':3,'elite.guard.civ_zhongguo':1,'modern.militia':2,'modern.guard.civ_japan':3};const lines=garrisonLines(w,own);
+ expect(lines.map(l=>l.id)).toEqual(['scout','militia','spearman','archer','skirmisher','light-cavalry','knight','guard','ram','catapult','baggage']);expect(lines.find(l=>l.id==='militia')).toMatchObject({ordinaryCount:7,eliteCount:4,total:13,modernCount:2});expect(lines.find(l=>l.id==='guard')?.total).toBe(7);expect(lines.find(l=>l.id==='scout')?.eliteCount).toBeNull();expect(lines.every(l=>l.modernCount!==null)).toBe(true);
  const html=renderToStaticMarkup(<Garrison world={w} city={own}/>);expect((html.match(/class="garrison-cell"/g)??[])).toHaveLength(11);expect(w.cities[1].military!.units).toEqual({});
 });
 it('Return uses selected owned city, labels default off and persisted on, background does not depend on clock or overlays',()=>{

@@ -1,3 +1,4 @@
+import {isScoutUnit} from './unitCatalog';
 import {z} from 'zod';
 import type {ArmyId,BattleId,CityId,CommandId,EventId,FactionId,ResolutionId,WildSiteId} from './ids';
 import type {FormalWorld} from './model';
@@ -46,7 +47,7 @@ export function validateCombatContracts(w:FormalWorld,fail:(message:string)=>voi
   if(a.status==='engaged'&&!w.combat?.battles.some(b=>b.id===a.battleId&&b.cityId===(a.target.kind==='city'?a.target.cityId:null)))fail('Engaged army battle missing');
   if(a.target.kind==='wild'&&(a.mission!=='raid'&&a.mission!=='scout'||a.mission==='scout'&&a.scoutMode!=='resources-army'))fail('Wild mission specialization mismatch');
   if(a.pendingIntel&&(a.target.kind==='city'?a.pendingIntel.cityId!==a.target.cityId:a.pendingIntel.siteId!==a.target.siteId||a.pendingIntel.generation!==a.target.generation))fail('Scout observation target mismatch');
-  if(a.status==='stationed'&&a.mission!=='reinforce'||a.mission==='scout'&&(Object.keys(a.initialUnits).some(id=>id!=='scout'))||a.pendingIntel&&(!a.pendingReport||a.mission!=='scout'||a.pendingIntel.observedAt>w.time))fail('Army mission specialization mismatch');
+  if(a.status==='stationed'&&a.mission!=='reinforce'||a.mission==='scout'&&(Object.keys(a.initialUnits).some(id=>!isScoutUnit(id)))||a.pendingIntel&&(!a.pendingReport||a.mission!=='scout'||a.pendingIntel.observedAt>w.time))fail('Army mission specialization mismatch');
   const n=Number(a.id.slice(5));if(Number.isSafeInteger(n)&&n>=w.sequences.project)fail('Army parent sequence would be reused');
  }
  for(const site of w.worldLayer?.wildSites??[]){if(!nativeB5)continue;if(!site.phase||!site.defenders||!site.initialDefenders||!site.loot||site.style===undefined||!site.budget)fail('Wild durable composition/loot missing');else if(!validUnits(site.defenders)||!validUnits(site.initialDefenders)||Object.keys(site.initialDefenders).some(id=>!['militia','spearman','archer','skirmisher','light-cavalry','knight'].includes(id)))fail('Wild unit contract invalid');

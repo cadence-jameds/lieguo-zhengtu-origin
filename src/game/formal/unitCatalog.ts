@@ -1,6 +1,7 @@
+import {MODERN_UNIT_DATA} from './modernUnitData';
 import type {Resources} from './model';
-export type UnitDefinition={id:string;name:string;producer:string;age:number;cost:Resources;population:number;upkeepPerHour:number;baseDurationMs:number;carry:number;secondsPerTile:number;combatClass:string;civilizationId:string|null;hp:number;attack:number;meleeDefense:number;rangedDefense:number;attackIntervalSeconds:number;eliteTech:string|null;milestone:number};
-export const UNIT_CATALOG:Readonly<Record<string,UnitDefinition>>=Object.freeze(Object.fromEntries(([
+export type UnitDefinition={era?:'modern';id:string;name:string;producer:string;age:number;cost:Resources;population:number;upkeepPerHour:number;baseDurationMs:number;carry:number;secondsPerTile:number;combatClass:string;civilizationId:string|null;hp:number;attack:number;meleeDefense:number;rangedDefense:number;attackIntervalSeconds:number;eliteTech:string|null;milestone:number};
+const TRADITIONAL_CATALOG:Readonly<Record<string,UnitDefinition>>=Object.freeze(Object.fromEntries(([
   {
     "id": "militia",
     "name": "民兵",
@@ -730,13 +731,25 @@ export const UNIT_CATALOG:Readonly<Record<string,UnitDefinition>>=Object.freeze(
     "milestone": 30000
   }
 ] as UnitDefinition[]).map(u=>[u.id,u])));
+export const UNIT_CATALOG:Readonly<Record<string,UnitDefinition>>=Object.freeze({...TRADITIONAL_CATALOG,...Object.fromEntries(MODERN_UNIT_DATA.map(([source,name,hp,attack,meleeDefense,rangedDefense,attackIntervalSeconds,secondsPerTile,carry,minutes,food,wood,stone,gold])=>{
+ const u:UnitDefinition={...TRADITIONAL_CATALOG[source],id:'modern.'+source,era:'modern',name,hp,attack,meleeDefense,rangedDefense,attackIntervalSeconds,secondsPerTile,carry,baseDurationMs:minutes*60000,cost:{food,wood,stone,gold},eliteTech:null,milestone:0};return [u.id,u];
+}))});
+export const isModernUnit=(id:string)=>UNIT_CATALOG[id]?.era==='modern';
+export const isScoutUnit=(id:string)=>UNIT_CATALOG[id]?.combatClass==='scout';
+export const scoutUnits=(units:Record<string,number>)=>Object.fromEntries(Object.entries(units).filter(([id,n])=>isScoutUnit(id)&&n>0));
+export const scoutCount=(units:Record<string,number>)=>Object.values(scoutUnits(units)).reduce((n,v)=>n+v,0);
+/** Stable unit-ID ordering preserves identities when applying a shared scout casualty budget. */
+export function removeScouts(units:Record<string,number>,count:number){for(const id of Object.keys(scoutUnits(units)).sort()){const removed=Math.min(count,units[id]);units[id]-=removed;count-=removed;if(!units[id])delete units[id];}}
+export const isSupplyUnit=(id:string)=>UNIT_CATALOG[id]?.combatClass==='logistics';
 export const ELITE_VARIANTS:Readonly<Record<string,string>>={"militia": "swordsman", "spearman": "pikeman", "archer": "crossbowman", "skirmisher": "heavy-skirmisher", "light-cavalry": "ranger", "knight": "heavy-knight", "guard.civ_zhongguo": "elite.guard.civ_zhongguo", "guard.civ_byzantium": "elite.guard.civ_byzantium", "guard.civ_frankia": "elite.guard.civ_frankia", "guard.civ_britannia": "elite.guard.civ_britannia", "guard.civ_japan": "elite.guard.civ_japan", "guard.civ_mongolia": "elite.guard.civ_mongolia"};
 export const producerMultiplier=(level:number)=>1-.5*(Math.max(1,level)-1)/14;
 
-/** Fixed Formal unit lines. B4 has no modern units; an absent tier is never fabricated. */
+/** Formal unit lines share the existing production buildings across all tiers. */
 export const UNIT_LINES= ['militia','spearman','archer','skirmisher','scout','light-cavalry','knight','ram','catapult','baggage','guard'] as const;
 export function unitLine(id:typeof UNIT_LINES[number],civilizationId:string){
- const ordinary=id==='guard'?Object.values(UNIT_CATALOG).filter(u=>u.civilizationId&&!u.eliteTech).map(u=>u.id):[id];
+ const ordinary=id==='guard'?Object.values(UNIT_CATALOG).filter(u=>u.civilizationId&&!u.eliteTech&&!isModernUnit(u.id)).map(u=>u.id):[id];
  const elite=ordinary.map(id=>ELITE_VARIANTS[id]).filter(Boolean),iconId=id==='guard'?'guard.'+civilizationId:id;
- return {id,name:id==='guard'?'文明衛隊':UNIT_CATALOG[id].name,iconId,ordinary,elite,modern:[] as string[]};
+ return {id,name:id==='guard'?'文明衛隊':UNIT_CATALOG[id].name,iconId,ordinary,elite,modern:ordinary.map(id=>'modern.'+id)};
 }
+
+export const modernizationTarget=(id:string)=>isModernUnit(id)?undefined:UNIT_CATALOG['modern.'+(Object.keys(ELITE_VARIANTS).find(k=>ELITE_VARIANTS[k]===id)??id)];

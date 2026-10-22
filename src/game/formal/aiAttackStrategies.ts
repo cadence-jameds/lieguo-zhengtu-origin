@@ -1,3 +1,4 @@
+import {isScoutUnit} from './unitCatalog';
 import type {FormalCity,FormalCommand,FormalWorld} from './model';
 import type {CityId,FactionId} from './ids';
 import type {Agent} from './autonomyModel';
@@ -53,7 +54,7 @@ export function originalCityAttack(w:FormalWorld,c:FormalCity,a:Agent):{hasCity:
  if(!targets.length)return {hasCity:false,commands:[]};
  const cityCommand=():FormalCommand[]=>{
  const target=targets[Math.floor(aiRandom(w.seed,a.factionId,a.decisions+312)*Math.min(targets.length,4))],info=target.intel;
- if(!info?.confidence){if((ownUnits.scout??0)>0)return[{type:'army.dispatch',cityId:c.id,mission:'scout',target:{kind:'city',cityId:target.id},units:{scout:Math.max(1,Math.min(15,Math.floor(ownUnits.scout*.8)))}}];return[];}
+ if(!info?.confidence){const scout=Object.keys(ownUnits).find(id=>isScoutUnit(id)&&ownUnits[id]>0);if(scout)return[{type:'army.dispatch',cityId:c.id,mission:'scout',target:{kind:'city',cityId:target.id},units:{[scout]:Math.max(1,Math.min(15,Math.floor(ownUnits[scout]*.8)))}}];return[];}
  const units=portion(c,.2+a.traits.risk*.2),force=Object.values(units).reduce((n,v)=>n+v,0),enemy=Object.entries(info.units??{}).reduce((n,[id,v])=>n+(effectiveUnit(id)?v:0),0);if(force<10||force<enemy*(1.5-.5*a.traits.risk)/info.confidence||c.stock.food<200)return[];
  const modern=w.factions.find(f=>f.id===a.factionId)!.modernQualification==='full';if(!modern&&target.modern&&force<enemy*.75)return[];
  const conquest=aiRandom(w.seed,a.factionId,a.decisions+313)<(.03+.12*a.traits.expansion)*(modern&&!target.modern?1.75:1);if(conquest){for(const id of ['ram','catapult'])if((ownUnits[id]??0)>0)units[id]=Math.max(1,Math.floor(ownUnits[id]*.4));if(canCoordinate(w,a.factionId,a.factionId,14)&&aiRandom(w.seed,a.factionId,a.decisions+314)<.4)return[{type:'joint.create',cityId:c.id,targetCityId:target.id,units,arrivalAt:w.time+2*HOUR}];}

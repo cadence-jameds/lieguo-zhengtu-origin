@@ -1,8 +1,9 @@
 import type {FormalFaction} from './model';
 import {BLACKSMITH_CAPS,BLACKSMITH_LINES} from './techCatalog';
-import {ELITE_VARIANTS,UNIT_CATALOG} from './unitCatalog';
+import {ELITE_VARIANTS,UNIT_CATALOG,isModernUnit,isSupplyUnit} from './unitCatalog';
 export const EXPOSURE=5;
-export const baseUnit=(id:string)=>Object.keys(ELITE_VARIANTS).find(k=>ELITE_VARIANTS[k]===id)??id;
+export const baseUnit=(id:string)=>isModernUnit(id)?id.slice(7):Object.keys(ELITE_VARIANTS).find(k=>ELITE_VARIANTS[k]===id)??id;
+export const eraMultiplier=(attacker:string,target:string)=>isModernUnit(attacker)===isModernUnit(target)?1:isModernUnit(attacker)?3:.35;
 export const effectiveUnit=(id:string)=>!!UNIT_CATALOG[id]&&['infantry','ranged','cavalry','mounted-ranged'].includes(UNIT_CATALOG[id].combatClass);
 export const rangedUnit=(id:string)=>['ranged','mounted-ranged'].includes(UNIT_CATALOG[id].combatClass)||baseUnit(id)==='catapult';
 export const mountedUnit=(id:string)=>['cavalry','mounted-ranged'].includes(UNIT_CATALOG[id].combatClass);
@@ -33,8 +34,9 @@ export function counterMultiplier(attacker:string,target:string){
  if(a==='guard.civ_zhongguo')add(infantry,1.35);
  if(a==='guard.civ_byzantium')add(infantry&&t!=='spearman',1.3);
  if(a==='guard.civ_frankia'){add(t==='spearman',1.5);add(infantry&&t!=='spearman',1.25);}
- if(a==='guard.civ_britannia'){add(t==='spearman',1.6);add(infantry&&t!=='spearman',1.8);}
- if(a==='guard.civ_japan')add(!!u.civilizationId,1.4);
+ if(a==='guard.civ_britannia'&&!isModernUnit(attacker)){add(t==='spearman',1.6);add(infantry&&t!=='spearman',1.8);}
+ if(a==='guard.civ_japan')add(!!u.civilizationId&&(!isModernUnit(attacker)||isModernUnit(target)),1.4);
+ if(attacker==='modern.guard.civ_britannia'){add(t==='militia'||t==='spearman',2);add(t==='archer'||t==='skirmisher',1.8);add(isModernUnit(target)&&!!u.civilizationId&&!mountedUnit(target),1.5);}
  if(a==='guard.civ_mongolia'){add(footRanged,1.35);add(infantry,1.5);}
  return Math.max(...values);
 }
@@ -45,8 +47,8 @@ export function hitDamage(a:string,d:string,owner:FormalFaction|undefined,defend
  let special=baseUnit(a)==='ram'?.25:1;
  if(baseUnit(d)==='ram'&&rangedUnit(a))special*=baseUnit(a)==='catapult'?.6:.2;
  if(firstContact&&baseUnit(a)==='knight'&&hasTech(owner,'civilization.charge'))special*=1.08;
- return damageFormula(x.attack,counterMultiplier(a,d),defense,special,splash);
+ return damageFormula(x.attack,counterMultiplier(a,d),defense,special,splash)*eraMultiplier(a,d);
 }
 export function splashWeights(f?:FormalFaction){return hasTech(f,'civilization.warwolf')?[1,...Array(6).fill(.5),...Array(10).fill(.25)]:[1,...Array(4).fill(.5),...Array(8).fill(.25)];}
 export function marchSeconds(units:Record<string,number>,f:FormalFaction){return Math.max(...Object.entries(units).filter(([,n])=>n>0).map(([id])=>{const u=UNIT_CATALOG[id];let t=u.secondsPerTile;if(effectiveUnit(id)&&hasTech(f,mountedUnit(id)?'military.horsemanship':'military.drill'))t*=.95;if(u.combatClass==='siege'&&hasTech(f,'civilization.swift-siege'))t*=.8;return t;}));}
-export function carryCapacity(units:Record<string,number>,f?:FormalFaction){return Object.entries(units).reduce((n,[id,count])=>n+count*UNIT_CATALOG[id].carry*(id==='baggage'?(hasTech(f,'logistics.baggage')?1.15:1):(effectiveUnit(id)&&hasTech(f,'logistics.transport')?1.05:1)),0);}
+export function carryCapacity(units:Record<string,number>,f?:FormalFaction){return Object.entries(units).reduce((n,[id,count])=>n+count*UNIT_CATALOG[id].carry*(isSupplyUnit(id)?(hasTech(f,'logistics.baggage')?1.15:1):(effectiveUnit(id)&&hasTech(f,'logistics.transport')?1.05:1)),0);}
