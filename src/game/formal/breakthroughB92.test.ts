@@ -5,7 +5,7 @@ import {wonderWorld,wonderAct} from './wonderTestSupport';
 import {order} from './developmentTestSupport';
 import {advanceFormal,advanceFormalCooperative,submitFormalOrder} from './reducer';
 import {settleCity,changeCityOwner,HOUR} from './economy';
-import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughWork,handleBreakthroughEvent,updateWonderIntegrity} from './breakthrough';
+import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughWork,breakthroughDecision,handleBreakthroughEvent,updateWonderIntegrity} from './breakthrough';
 import {EventScheduler} from './scheduler';
 import {zeroResources,type FormalWorld} from './model';
 import {validateFormalWorld} from './schema';
@@ -46,12 +46,35 @@ it('B9-2 60M takes 2000 real market trips and exactly 48 world hours, once, with
  const duplicate=structuredClone(complete.world),reports:import('./model').FormalReport[]=[];handleBreakthroughEvent(duplicate,{type:'breakthrough.complete',projectId:w.largeProjects[1].projectId,id:w.largeProjects[1].breakthrough!.completionEventId!,at:deadline},new EventScheduler(duplicate.events),reports);expect(reports).toEqual([]);expect(duplicate).toEqual(complete.world);
  const bad=structuredClone(before);bad.events.find(e=>e.type==='breakthrough.complete')!.at--;expect(()=>validateFormalWorld(bad)).toThrow();
 });
-it('B9-2 conquest freezes elapsed work immediately, forbids inheritance, and recapture resumes the remainder',async()=>{
+it.each(['funding','building'] as const)('B9-2 a conqueror joining the original empire cannot resume %s, including after save/load',async phase=>{
+ let w=phase==='funding'?breakthroughWorld():advanceFormal(funded,end(funded)-24*HOUR).world;
+ const work=breakthroughWork(w,w.largeProjects[1]),captor=w.factions[1].id;
+ w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'empire-leave'},captor);changeCityOwner(w,w.cities[0],captor,'conquest');
+ expect(w.largeProjects[1].breakthrough!.recaptureRequired).toBe(true);
+ const join=(state:FormalWorld)=>{
+  const proposal=submitFormalOrder(state,order(state,{type:'politics',cityId:state.cities[1].id,action:'empire-propose',target:captor},'b92-recapture-propose'));expect(proposal.ack?.status).toBe('committed');state=proposal.world;
+  const acceptance=submitFormalOrder(state,order(state,{type:'politics',cityId:state.cities[2].id,action:'request-accept',requestId:state.politics!.requests[0].id},'b92-recapture-accept',captor));expect(acceptance.ack?.status).toBe('committed');return acceptance.world;
+ };
+ const loaded=(await decodeSave(await encodeSave(w))).world;w=join(w);expect(join(loaded)).toEqual(w);
+ expect(w.cities[0].ownerFactionId).toBe(captor);expect(w.factions[1].empireId).toBe(w.factions[0].empireId);
+ expect(w.largeProjects[1].breakthrough!.phase).toBe('paused');expect(w.events.some(e=>e.type==='breakthrough.complete')).toBe(false);
+ const missingLoss=structuredClone(w);delete missingLoss.largeProjects[1].breakthrough!.recaptureRequired;expect(()=>validateFormalWorld(missingLoss)).toThrow();
+ for(const c of [w.cities[1],w.cities[2]]){
+  expect(breakthroughDecision(w,c,true)).toBeUndefined();
+  expect(submitFormalOrder(w,order(w,{type:'breakthrough.ship',cityId:c.id,projectId:w.largeProjects[1].projectId,resources:{food:1,wood:0,stone:0,gold:0}},undefined,c.ownerFactionId)).ack?.status).toBe('rejected');
+ }
+ const restored=(await decodeSave(await encodeSave(w))).world;expect(restored).toEqual(w);
+ const later=advanceFormal(w,w.time+72*HOUR);expect(advanceFormal(restored,restored.time+72*HOUR)).toEqual(later);
+ expect(breakthroughWork(later.world,later.world.largeProjects[1])).toBe(work);expect(later.world.events.some(e=>e.type==='breakthrough.complete')).toBe(false);
+ expect(later.world.factions.every(f=>f.modernQualification==='none')).toBe(true);expect(later.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(0);
+});
+it('B9-2 conquest freezes elapsed work immediately, and genuine recapture resumes the saved remainder across save/load',async()=>{
  let w=advanceFormal(funded,end(funded)-24*HOUR).world;const work=breakthroughWork(w,w.largeProjects[1]);w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'empire-leave'},w.factions[1].id);changeCityOwner(w,w.cities[0],w.factions[1].id,'conquest');
  expect(w.largeProjects[1].breakthrough!.phase).toBe('paused');expect(w.events.some(e=>e.type==='breakthrough.complete')).toBe(false);expect(w.largeProjects[1].owner).toEqual(funded.largeProjects[1].owner);
  w=advanceFormal(w,w.time+72*HOUR).world;expect(breakthroughWork(w,w.largeProjects[1])).toBe(work);expect(w.factions.every(f=>f.modernQualification==='none')).toBe(true);w=(await decodeSave(await encodeSave(w))).world;
- changeCityOwner(w,w.cities[0],w.playerFactionId,'conquest');const event=w.events.find(e=>e.type==='breakthrough.complete')!;expect(event.at-w.time).toBe(BREAKTHROUGH_DURATION-work);
- w=advanceFormal(w,event.at).world;expect(w.factions[0].modernQualification).toBe('full');expect(w.factions[1].modernQualification).toBe('none');
+ changeCityOwner(w,w.cities[0],w.playerFactionId,'conquest');expect(w.largeProjects[1].breakthrough!.recaptureRequired).toBeUndefined();const event=w.events.find(e=>e.type==='breakthrough.complete')!;expect(event.at-w.time).toBe(BREAKTHROUGH_DURATION-work);
+ const loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded).toEqual(w);const finished=advanceFormal(w,event.at);expect(advanceFormal(loaded,event.at)).toEqual(finished);
+ w=finished.world;expect(w.factions[0].modernQualification).toBe('full');expect(w.factions[1].modernQualification).toBe('none');expect(finished.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(1);
 });
 it('B9-2 awards the current membership snapshot only; leaving and rejoining before completion is sufficient, later joining grants nothing',()=>{
  let w=structuredClone(funded);const member=w.factions[1].id;

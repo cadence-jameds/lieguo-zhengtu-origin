@@ -13,7 +13,7 @@ export const breakthroughStoredWork=(p:LargeProject)=>p.breakthrough!.workPeriod
 export function breakthroughWork(w:FormalWorld,p:LargeProject){const b=p.breakthrough!;return breakthroughStoredWork(p)+(b.activeSince===null?0:Math.max(0,w.time-b.activeSince));}
 export function breakthroughPauseReason(w:FormalWorld,p:LargeProject):'host-lost'|'wonder-unavailable'|null{
  const city=w.cities.find(c=>c.id===p.initiatingCityId),owner=p.owner.kind==='empire'?p.owner.empireId:null;
- if(!owner||!city||empireOf(w,city.ownerFactionId)?.id!==owner)return 'host-lost';
+ if(p.breakthrough?.recaptureRequired||!owner||!city||empireOf(w,city.ownerFactionId)?.id!==owner)return 'host-lost';
  const wonder=w.largeProjects.find(q=>q.projectId===p.breakthrough?.wonderProjectId);
  return wonder?.wonder?.phase==='completed'&&(!wonder.wonder.integrity||wonder.wonder.integrity==='intact')?null:'wonder-unavailable';
 }
@@ -21,8 +21,14 @@ const full=(p:LargeProject)=>resourceKeys.every(r=>p.poolResources[r]===p.requir
 /** Shared ownership/condition boundary. Combat calls it at the actual city transfer time.
  * Future wonder combat/repair must publish integrity changes through the same boundary;
  * this module implements no attack, damage calculation, repair command or repair cost. */
-export function reconcileBreakthroughs(w:FormalWorld,s:EventScheduler){
+export function reconcileBreakthroughs(w:FormalWorld,s:EventScheduler,transfer?:{city:FormalCity;previousOwner:FormalCity['ownerFactionId'];reason:'conquest'|'receive'}){
  for(const p of w.largeProjects){const b=p.breakthrough;if(p.kind!=='civilization-breakthrough'||!b||b.phase==='completed')continue;
+  // Only an actual conquest back into the original empire clears a recorded loss.
+  // Diplomatic membership changes never constitute recapture.
+  if(transfer?.city.id===p.initiatingCityId&&transfer.previousOwner!==transfer.city.ownerFactionId&&p.owner.kind==='empire'){
+   if(empireOf(w,transfer.city.ownerFactionId)?.id!==p.owner.empireId)b.recaptureRequired=true;
+   else if(transfer.reason==='conquest')delete b.recaptureRequired;
+  }
   const reason=breakthroughPauseReason(w,p);
   if(reason){
    if(b.activeSince!==null){b.workPeriods.push({startedAt:b.activeSince,endedAt:w.time});b.activeSince=null;}

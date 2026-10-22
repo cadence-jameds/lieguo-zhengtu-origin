@@ -45,7 +45,7 @@ export type Shipment = {commandId?:CommandId;shipmentId:ShipmentId;projectId:Pro
 );
 /** Stable host/owner snapshots and completion identity remain available to later destruction,
  * breakthrough and conquest work. Those systems do not run in B9-1. */
-export type BreakthroughConstruction={creationCommandId:CommandId;wonderProjectId:ProjectId;phase:'funding'|'building'|'paused'|'completed';workPeriods:{startedAt:number;endedAt:number}[];discardedWorkMs:number;activeSince:number|null;completionEventId:EventId|null;completedAt:number|null;qualifiedFactionIds:FactionId[]};
+export type BreakthroughConstruction={creationCommandId:CommandId;wonderProjectId:ProjectId;recaptureRequired?:true;phase:'funding'|'building'|'paused'|'completed';workPeriods:{startedAt:number;endedAt:number}[];discardedWorkMs:number;activeSince:number|null;completionEventId:EventId|null;completedAt:number|null;qualifiedFactionIds:FactionId[]};
 export type BreakthroughCommand={type:'breakthrough.start';cityId:CityId}|{type:'breakthrough.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
 export type WonderConstruction={integrity?:'intact'|'damaged'|'ruins';creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
 export type WonderCommand={type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
