@@ -36,7 +36,7 @@ export function counterMultiplier(attacker:string,target:string){
  if(a==='guard.civ_frankia'){add(t==='spearman',1.5);add(infantry&&t!=='spearman',1.25);}
  if(a==='guard.civ_britannia'&&!isModernUnit(attacker)){add(t==='spearman',1.6);add(infantry&&t!=='spearman',1.8);}
  if(a==='guard.civ_japan')add(!!u.civilizationId&&(!isModernUnit(attacker)||isModernUnit(target)),1.4);
- if(attacker==='modern.guard.civ_britannia'){add(t==='militia'||t==='spearman',2);add(t==='archer'||t==='skirmisher',1.8);add(isModernUnit(target)&&!!u.civilizationId&&!mountedUnit(target),1.5);}
+ if(attacker==='modern.guard.civ_britannia'&&isModernUnit(target)){add(t==='militia'||t==='spearman',2);add(t==='archer'||t==='skirmisher',1.8);add(!!u.civilizationId&&!mountedUnit(target),1.5);}
  if(a==='guard.civ_mongolia'){add(footRanged,1.35);add(infantry,1.5);}
  return Math.max(...values);
 }

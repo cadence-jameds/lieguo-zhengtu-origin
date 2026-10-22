@@ -90,7 +90,9 @@ function finishBattle(w:FormalWorld,state:BattleState,c:FormalCity,e:FormalEvent
  if(reason==='conquered'&&!recipient)reason='no-occupiers';
  const p=basePayload(w,first,c.name,c);p.battleId=b.id;p.resolutionId=rid(b.id,'final');p.startedAt=b.startedAt;p.rounds=b.round;p.wallBefore=b.wallBefore;p.ownerBefore=b.ownerBefore;p.populationBefore=b.populationBefore;p.conquestReason=reason;p.siegeRounds=b.siegeRound;p.siegeHistory=structuredClone(b.siegeHistory);p.history=structuredClone(b.history);p.historyOmitted=b.historyOmitted;p.siege=structuredClone(b.siegeChanges);p.outcome=reason==='mutual-destruction'?'mutual-destruction':'held';
  p.attackers=b.participants.filter(p=>p.armyId!==null&&attacking.some(a=>a.id===p.armyId));p.defenders=b.participants.filter(item=>!p.attackers.includes(item));
- for(const a of attacking)applyBaggage(a,attackCount>0);for(const a of stationed(w,c))applyBaggage(a,defenseCount>0);
+ // A stationed army may have legally retrofitted before joining this battle.
+ // Use its battle-entry composition, preserving the original dispatch history.
+ for(const a of attacking)applyBaggage(a,attackCount>0);for(const a of stationed(w,c))applySupplyLoss(a.units,p.defenders.find(d=>d.armyId===a.id)?.before??a.initialUnits,defenseCount>0);
  if(defenseCount===0&&c.military)for(const id of Object.keys(c.military.units).filter(isSupplyUnit))delete c.military.units[id];
  if(reason==='conquered'){
   if(attackCount===0||defenseCount!==0||(c.wallLevel??0)!==0)throw new Error('Conquest hard conditions not met');
