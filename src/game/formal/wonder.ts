@@ -8,7 +8,7 @@ import {HOUR} from './time';
 export const WONDER_COST=Object.freeze({food:4000000,wood:7000000,stone:9000000,gold:4000000});
 export const WONDER_DURATION=24*HOUR;
 export const empireWonder=(w:FormalWorld,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===id);
-export function wonderRemaining(p:LargeProject){return Object.fromEntries(resourceKeys.map(r=>[r,p.requiredResources[r]-p.shipments.reduce((n,t)=>n+t.resources[r],0)])) as typeof p.poolResources;}
+export function wonderRemaining(p:LargeProject){return Object.fromEntries(resourceKeys.map(r=>[r,p.requiredResources[r]-p.shipments.reduce((n,t)=>n+(t.phase==='returned'?0:t.resources[r]),0)])) as typeof p.poolResources;}
 export function wonderProgress(w:FormalWorld,p:LargeProject){const state=p.wonder;if(state?.phase==='completed')return 100;if(state?.phase!=='building'||state.startedAt===null)return 0;return Math.min(100,Math.max(0,(w.time-state.startedAt)/p.durationMs*100));}
 export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:WonderCommand,s:EventScheduler){
  const empire=empireOf(w,o.issuerId);requireRule(empire,'世界奇觀需要合法帝國成員資格。');
@@ -30,7 +30,7 @@ export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:Wo
 /** Arrival, not dispatch, credits the project. Phase + stable event identity make retries inert. */
 export function handleWonderEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler,reports:FormalReport[]):boolean{
  if(e.type==='logistics.arrive'){
-  const t=w.logistics?.find(t=>t.shipmentId===e.shipmentId);if(!t?.projectId)return false;
+  const t=w.logistics?.find(t=>t.shipmentId===e.shipmentId);if(!t?.projectId||!w.largeProjects.some(p=>p.projectId===t.projectId&&p.kind==='world-wonder'))return false;
   if(t.phase!=='outbound'||t.arrivalEventId!==e.id)return true;
   const p=w.largeProjects.find(p=>p.projectId===t.projectId),record=p?.shipments.find(t=>t.shipmentId===e.shipmentId);
   requireRule(p?.kind==='world-wonder'&&p.wonder&&record?.phase==='in-transit','奇觀運輸工程紀錄不一致。');

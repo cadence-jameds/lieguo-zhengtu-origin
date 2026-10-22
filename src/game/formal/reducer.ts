@@ -3,6 +3,7 @@ import {cloneWorldDraft} from './worldDraft';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
 import {handleAutonomy,retireAutonomy,type Submit} from './autonomy';
+import {applyBreakthroughCommand,handleBreakthroughEvent,reconcileBreakthroughs} from './breakthrough';
 import {applyWonderCommand,handleWonderEvent} from './wonder';
 import {reconcileExileSites,applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
 import {applyPolitics,reconcilePolitics,reconcilePoliticalEvents} from './politics';
@@ -146,6 +147,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
   try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
    if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
+   else if(p.type==='breakthrough.start'||p.type==='breakthrough.ship')applyBreakthroughCommand(w,city,order,p,scheduler);
    else if(p.type==='wonder.start'||p.type==='wonder.ship')applyWonderCommand(w,city,order,p,scheduler);
    else if(p.type==='governance.set')applyGovernance(w,city,order,p,scheduler);
    else if(p.type==='politics'){politicalMemory(w,order.issuerId,p);applyPolitics(w,city,order,p,scheduler);}
@@ -157,7 +159,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    else if(p.type==='logistics.auto.set')setAutoLogistics(w,city,p.rules);
    else if(p.type==='army.dispatch'||p.type==='army.recall')applyArmyCommand(w,city,order,p,scheduler);
    else applyEconomyCommand(w,city,order,p,scheduler);
-   promoteCityQueues(w,city,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
+   promoteCityQueues(w,city,scheduler);reconcileBreakthroughs(w,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
  reports.push(...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
@@ -199,13 +201,14 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   else if(e.type==='age.complete')completeAge(w,e);
   else if(e.type==='military.train'){handleMilitaryEvent(w,e,scheduler);const city=spatial(w).cities.get(e.cityId);if(city)refreshBattleDefense(w,city);}
   else if(e.type==='settlement.ready'||e.type==='settlement.arrive')handleSettlementEvent(w,e,scheduler);
+  else if(handleBreakthroughEvent(w,e,scheduler,reports)){}
   else if(handleWonderEvent(w,e,scheduler,reports)){}
   else if(handleEconomyEvent(w,e,scheduler)){
    if(e.type==='economy.settle'){const c=spatial(w).cities.get(e.cityId);if(c)runAutoLogistics(w,c,scheduler);}
    if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
-  resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
+  resolveExtinctions(w,scheduler);reconcileBreakthroughs(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
   if(aiReports===null)reports.push(...diplomacyChanges(w,beforePolitics));
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
 }

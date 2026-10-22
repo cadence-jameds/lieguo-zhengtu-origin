@@ -1,3 +1,4 @@
+import {breakthroughDecision} from './breakthrough';
 import {empireWonder,wonderRemaining} from './wonder';
 import {caravanStatus} from './economy';
 import {portion,originalCityAttack,pickAttackStrategy,executeAttackStrategy} from './aiAttackStrategies';
@@ -51,6 +52,7 @@ export function wonderDecision(w:FormalWorld,c:FormalCity,a:Agent):FormalCommand
  const capacity=caravanStatus(w,c).available*2000;if(capacity<=0)return;
  const project=empireWonder(w,empire.id);
  if(!project)return empire.leader===a.factionId&&w.factions.find(f=>f.id===a.factionId)?.age===3?{type:'wonder.start',cityId:c.id,hostCityId:c.id}:undefined;
+ if(project.wonder?.phase==='completed')return breakthroughDecision(w,c,a.active);
  if(project.wonder?.phase!=='funding')return;
  const host=w.cities.find(c=>c.id===project.initiatingCityId);if(!host||empireOf(w,host.ownerFactionId)?.id!==empire.id)return;
  const needed=wonderRemaining(project),resources=zeroResources();let left=capacity;
