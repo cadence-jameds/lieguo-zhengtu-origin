@@ -38,6 +38,8 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
    const empire=empireOf(w,faction.id),host=w.cities.find(c=>c.id===p.hostCityId);
    return[empire?.id,empire?.leader,host?.ownerFactionId,host?empireOf(w,host.ownerFactionId)?.id:null,w.largeProjects.filter(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===empire?.id)];
   }
+  case 'breakthrough.start':return[empireOf(w,faction.id),w.largeProjects.filter(t=>t.owner.kind==='empire'&&t.owner.empireId===faction.empireId),w.cities.map(c=>[c.id,c.ownerFactionId])];
+  case 'breakthrough.ship':
   case 'wonder.ship':return[empireOf(w,faction.id)?.id,w.largeProjects.find(t=>t.projectId===p.projectId),city.buildings,w.logistics?.filter(t=>t.sourceCityId===city.id),w.cities.find(c=>c.id===w.largeProjects.find(t=>t.projectId===p.projectId)?.initiatingCityId)?.ownerFactionId];
   case 'campaign.configure':return[w.speed,w.offlineHours??12];
   case 'developer.configure':return[w.developer??null,faction.protectionUntil??null];

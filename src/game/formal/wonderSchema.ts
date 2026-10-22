@@ -44,7 +44,7 @@ export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
  for(const t of w.logistics??[]){
   if(!t.projectId){if(t.path.length<2||t.distance<=0||t.sourceCityId===t.destinationCityId)fail('Ordinary logistics route invalid');continue;}
   const p=w.largeProjects.find(p=>p.projectId===t.projectId);
-  if(p?.kind!=='world-wonder'||!p.shipments.some(r=>r.shipmentId===t.shipmentId)||t.reservedResources||t.returnCargo&&resourceKeys.some(r=>t.returnCargo![r]!==0)||!applied(t.commandId,t.sourceFactionId))fail('Project logistics binding invalid');
+  if(!p||!['world-wonder','civilization-breakthrough'].includes(p.kind)||!p.shipments.some(r=>r.shipmentId===t.shipmentId)||t.reservedResources||t.returnCargo&&resourceKeys.some(r=>t.returnCargo![r]!==0)&&!p?.shipments.some(r=>r.shipmentId===t.shipmentId&&r.phase==='returned')||!applied(t.commandId,t.sourceFactionId))fail('Project logistics binding invalid');
   const source=w.cities.find(c=>c.id===t.sourceCityId),dest=w.cities.find(c=>c.id===t.destinationCityId);
   if(!source||!dest||t.path[0].x!==source.x||t.path[0].y!==source.y||t.path.at(-1)!.x!==dest.x||t.path.at(-1)!.y!==dest.y||t.sourceCityId===t.destinationCityId&&(t.distance!==0||t.path.length!==1)||t.sourceCityId!==t.destinationCityId&&(t.distance<=0||t.path.length<2))fail('Wonder transport route invalid');
  }
