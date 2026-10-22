@@ -9,12 +9,12 @@ export type Legion={id:string;name:string;description:string;leader:FactionId;me
 export type Empire={id:EmpireId;name:string;leader:FactionId;legions:string[];color:string};
 export type PoliticalRequest={id:string;kind:'application'|'invitation'|'empire'|'friendly';from:FactionId;to:FactionId;legionId?:string;name?:string;empireIntent?:'found'|'join';originEmpireId?:EmpireId;sourceLegionId?:string};
 export type Diplomacy={a:string;b:string;state:'friendly'|'war';endsAt?:number;eventId?:import('./ids').EventId};
-export type JointArmy={id:string;initiator:FactionId;targetCityId:CityId;arrivalAt:number;armyIds:import('./ids').ArmyId[];scope:string};
+export type JointArmy={mission?:'conquest'|'wonder-destruction';wonderPriority?:true;id:string;initiator:FactionId;targetCityId:CityId;arrivalAt:number;armyIds:import('./ids').ArmyId[];scope:string};
 export type DefenseReserve={cityId:CityId;units:Record<string,number>;keep:number;enabled:boolean};
 export type Politics={legions:Legion[];empires:Empire[];requests:PoliticalRequest[];relations:Diplomacy[];joints:JointArmy[];reserves:DefenseReserve[];randomCounter:number};
 export const initialPolitics=():Politics=>({legions:[],empires:[],requests:[],relations:[],joints:[],reserves:[],randomCounter:0});
 export type PoliticalCommand={type:'politics';cityId:CityId;action:'legion-create'|'legion-apply'|'legion-invite'|'request-accept'|'request-reject'|'legion-leave'|'legion-kick'|'legion-transfer'|'legion-edit'|'legion-dissolve'|'empire-propose'|'empire-leave'|'empire-kick'|'empire-transfer'|'empire-dissolve'|'friendly-propose'|'friendly-end'|'war'|'peace';target?:FactionId;requestId?:string;name?:string;description?:string};
-export type CooperationCommand={type:'defense.set';cityId:CityId;units:Record<string,number>;keep:number;enabled:boolean}|{type:'defense.dispatch';cityId:CityId;targetCityId:CityId}|{type:'joint.create';cityId:CityId;targetCityId:CityId;units:Record<string,number>;arrivalAt:number}|{type:'joint.join';cityId:CityId;jointId:string;units:Record<string,number>};
+export type CooperationCommand={type:'defense.set';cityId:CityId;units:Record<string,number>;keep:number;enabled:boolean}|{type:'defense.dispatch';cityId:CityId;targetCityId:CityId}|{type:'joint.create';mission?:'conquest'|'wonder-destruction';wonderPriority?:true;cityId:CityId;targetCityId:CityId;units:Record<string,number>;arrivalAt:number}|{type:'joint.join';cityId:CityId;jointId:string;units:Record<string,number>};
 export const embassy=(w:FormalWorld,id:FactionId)=>Math.max(0,...w.cities.filter(c=>c.ownerFactionId===id).map(c=>buildingLevel(c,'embassy')));
 export const legionOf=(w:FormalWorld,id:FactionId)=>w.politics?.legions.find(l=>l.members.includes(id));
 export const empireOf=(w:FormalWorld,id:FactionId)=>{const l=legionOf(w,id);return w.politics?.empires.find(e=>e.id===l?.empireId);};

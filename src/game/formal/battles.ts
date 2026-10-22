@@ -1,3 +1,4 @@
+import {applyWonderDamage,reconcileWonders,settleWonderDurability} from './wonderCondition';
 import {effectiveAwareness,recordModernRound,recordModernConquest} from './modernAwareness';
 import {isSupplyUnit,scoutUnits,scoutCount,removeScouts} from './unitCatalog';
 import {rememberBattle,memoryFor} from './aiKnowledge';
@@ -13,10 +14,10 @@ import type {BattleParticipant,BattleReportPayload,BattleState,MissionArmy,Resol
 import {initialCombat,isMissionArmy,type ConquestReason} from './combatModel';
 import {ensureBattleProgress,battleLog,SIEGE_ROUND_LIMIT,CONQUEST_REASON_LABELS} from './battleProgress';
 import {applySupplyLoss,effectiveCount,exchange,makePools,type CombatPool} from './combatResolver';
-import {carryCapacity,effectiveUnit,scoutPower} from './combatModifiers';
+import {carryCapacity,effectiveUnit,scoutPower,baseUnit} from './combatModifiers';
 import {raidable} from './catalogB3';
 import {addStock,enqueue,settleCity,settleFaction} from './economy';
-import {developmentLevels,finalizeSiegeHousing,finishConquest,resolveSiege} from './siege';
+import {developmentLevels,finalizeSiegeHousing,finishConquest,resolveSiege,wonderBombardment,durabilityPrecision} from './siege';
 import {spatial,invalidateSpatial} from './spatial';
 import {canReinforce,hostileAllowed,removeArmy,returnArmy} from './armies';
 import {clearWild,respawnWild} from './wildLifecycle';
@@ -29,10 +30,10 @@ function battleReport(w:FormalWorld,p:BattleReportPayload):FormalReport[]{
  rememberBattle(w,p);
  if(p.mission==='scout'&&p.intel&&!p.attackers.some(a=>a.ownerFactionId===w.playerFactionId))return[];
   if(!playerScope(w,[...p.attackers,...p.defenders].map(x=>x.ownerFactionId)))return[];const sequence=w.sequences.report++;
- const labels:Record<BattleReportPayload['outcome'],string>={'raid-return':'掠奪結束',conquered:'征服成功',held:'征服未成','mutual-destruction':'雙方主戰兵全滅','wild-cleared':'野外據點擊破','wild-held':'野外據點守住','no-target':'目標已改變','scout-success':'偵察情報送達','scout-failed':'偵察失敗'};
+ const labels:Record<BattleReportPayload['outcome'],string>={'wonder-destroyed':'奇觀破壞成功','wonder-held':'奇觀破壞失敗','raid-return':'掠奪結束',conquered:'征服成功',held:'征服未成','mutual-destruction':'雙方主戰兵全滅','wild-cleared':'野外據點擊破','wild-held':'野外據點守住','no-target':'目標已改變','scout-success':'偵察情報送達','scout-failed':'偵察失敗'};
  const visible=structuredClone(p);if(p.mission==='scout')visible.wallBefore=visible.wallAfter=visible.populationBefore=visible.populationAfter=0;if(p.mission==='scout'&&!p.intel&&playerScope(w,p.attackers.map(g=>g.ownerFactionId)))visible.defenders=p.target.kind==='city'?[{ownerFactionId:p.ownerBefore,armyId:null,cityId:p.target.cityId,before:{},after:{}}]:[];return[{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:w.playerFactionId,at:w.time,category:p.mission==='scout'?'scout':'battle',title:`${p.mission==='scout'&&p.outcome==='scout-failed'&&p.defenders.some(d=>d.ownerFactionId===w.playerFactionId)?'反偵察成功':p.conquestReason?CONQUEST_REASON_LABELS[p.conquestReason]:labels[p.outcome]}｜${p.targetName}`,text:`${p.rounds} ${p.mission==='conquest'?'主戰回合':'回合'}；${p.conquestReason?CONQUEST_REASON_LABELS[p.conquestReason]:labels[p.outcome]}。`,battle:visible}];
 }
-function recordStatistics(w:FormalWorld,p:BattleReportPayload){const stats=w.combat!.statistics;stats.resolved++;if(p.mission==='scout')stats.scouts++;else if(p.target.kind==='wild')stats.wild++;else if(p.mission==='raid')stats.raids++;else stats.conquests++;}
+function recordStatistics(w:FormalWorld,p:BattleReportPayload){const stats=w.combat!.statistics;stats.resolved++;if(p.mission==='scout')stats.scouts++;else if(p.target.kind==='wild')stats.wild++;else if(p.mission==='raid')stats.raids++;else if(p.mission==='wonder-destruction')stats.wonderDestructions=(stats.wonderDestructions??0)+1;else stats.conquests++;}
 function finishReceipt(w:FormalWorld,p:BattleReportPayload,eventId:EventId){const before=w.factions.find(f=>f.id===p.ownerBefore),after=w.factions.find(f=>f.id===p.ownerAfter);const ok=commitReceipt(w,{battleId:p.battleId,resolutionId:p.resolutionId,eventId,at:w.time,round:p.rounds,kind:'final',...(p.targetPoint?{targetPoint:{...p.targetPoint}}:{}),mission:p.mission,outcome:p.outcome,ownerBefore:p.ownerBefore,ownerAfter:p.ownerAfter,qualificationBefore:before?.modernQualification,qualificationAfter:after?.modernQualification});if(ok){recordStatistics(w,p);recordModernConquest(w,p);}return ok;}
 function participant(w:FormalWorld,units:Record<string,number>,owner:FactionId|null,city:FormalCity['id']|null,army:MissionArmy['id']|null):BattleParticipant{return{...(owner&&legionOf(w,owner)?{legionName:legionOf(w,owner)!.name}:{}),...(owner&&empireOf(w,owner)?{empireName:empireOf(w,owner)!.name}:{}),ownerFactionId:owner,cityId:city,armyId:army,before:{...units},after:{...units}};}
 function stationed(w:FormalWorld,c:FormalCity){return w.armies.filter(isMissionArmy).filter(a=>a.status==='stationed'&&a.target.kind==='city'&&a.target.cityId===c.id&&canReinforce(w,a.ownerFactionId,c.ownerFactionId));}
@@ -48,7 +49,7 @@ function updateParticipants(w:FormalWorld,c:FormalCity|null,items:BattleParticip
 export function takeLoot(available:Resources,capacity:number){const total=resourceKeys.reduce((n,r)=>n+available[r],0),budget=Math.min(total,Math.max(0,Math.floor(capacity))),out=zeroResources();if(!total)return out;for(const r of resourceKeys)out[r]=Math.floor(available[r]*budget/total);let remainder=budget-resourceKeys.reduce((n,r)=>n+out[r],0);for(const r of resourceKeys){const extra=Math.min(remainder,available[r]-out[r]);out[r]+=extra;remainder-=extra;}return out;}
 function distributeLoot(w:FormalWorld,armies:MissionArmy[],available:Resources,proportional=false){const result=zeroResources(),remaining={...available};for(const a of [...armies].sort((a,b)=>a.id<b.id?-1:1)){const capacity=carryCapacity(a.units,w.factions.find(f=>f.id===a.ownerFactionId)),cargo=proportional?proportionalResources(remaining,Math.min(resourceKeys.reduce((n,r)=>n+remaining[r],0),Math.max(0,Math.floor(capacity)))):takeLoot(remaining,capacity);a.cargo=cargo;for(const r of resourceKeys){remaining[r]-=cargo[r];result[r]+=cargo[r];}}return result;}
 function applyBaggage(a:MissionArmy,won:boolean){applySupplyLoss(a.units,a.initialUnits,won);}
-function basePayload(w:FormalWorld,a:MissionArmy,name:string,c:FormalCity|null):BattleReportPayload{return{battleId:a.battleId,resolutionId:rid(a.battleId,'final'),mission:a.mission==='scout'?'scout':a.mission==='conquest'?'conquest':'raid',target:{...a.target},targetName:name,targetPoint:c?{x:c.x,y:c.y}:{...a.position},...(a.target.kind==='wild'?{targetResource:w.worldLayer?.wildSites.find(site=>a.target.kind==='wild'&&site.id===a.target.siteId)?.resource}:{}),startedAt:w.time,resolvedAt:w.time,rounds:0,outcome:'no-target',attackers:[participant(w,a.initialUnits,a.ownerFactionId,a.originCityId,a.id)],defenders:[],loot:zeroResources(),wallBefore:c?.wallLevel??0,wallAfter:c?.wallLevel??0,siege:[],ownerBefore:c?.ownerFactionId??null,ownerAfter:c?.ownerFactionId??null,populationBefore:c?.population??0,populationAfter:c?.population??0,returnedTrainingPopulation:0};}
+function basePayload(w:FormalWorld,a:MissionArmy,name:string,c:FormalCity|null):BattleReportPayload{return{battleId:a.battleId,resolutionId:rid(a.battleId,'final'),mission:a.mission==='scout'?'scout':a.mission==='conquest'?'conquest':a.mission==='wonder-destruction'?'wonder-destruction':'raid',target:{...a.target},targetName:name,targetPoint:c?{x:c.x,y:c.y}:{...a.position},...(a.target.kind==='wild'?{targetResource:w.worldLayer?.wildSites.find(site=>a.target.kind==='wild'&&site.id===a.target.siteId)?.resource}:{}),startedAt:w.time,resolvedAt:w.time,rounds:0,outcome:'no-target',attackers:[participant(w,a.initialUnits,a.ownerFactionId,a.originCityId,a.id)],defenders:[],loot:zeroResources(),wallBefore:c?.wallLevel??0,wallAfter:c?.wallLevel??0,siege:[],ownerBefore:c?.ownerFactionId??null,ownerAfter:c?.ownerFactionId??null,populationBefore:c?.population??0,populationAfter:c?.population??0,returnedTrainingPopulation:0};}
 function awarenessExchange(w:FormalWorld,id:BattleState['id'],e:FormalEvent,round:number,a:readonly CombatPool[],d:readonly CombatPool[],wall=0){
  const result=exchange(a,d,w.factions,wall,f=>effectiveAwareness(w,f));
  recordModernRound(w,id,e.id,round,a,d,result.attacking,result.defending);return result;
@@ -93,11 +94,11 @@ function finishBattle(w:FormalWorld,state:BattleState,c:FormalCity,e:FormalEvent
  const recipient=reason==='conquered'?conquestOwner(w,b.jointId?w.politics?.joints.find(j=>j.id===b.jointId)?.initiator??b.attackerFactionId:b.attackerFactionId,attacking):null;
  // No legally controlled occupiers remain; preserve damage/final and let B7 convert survivors.
  if(reason==='conquered'&&!recipient)reason='no-occupiers';
- const p=basePayload(w,first,c.name,c);p.battleId=b.id;p.resolutionId=rid(b.id,'final');p.startedAt=b.startedAt;p.rounds=b.round;p.wallBefore=b.wallBefore;p.ownerBefore=b.ownerBefore;p.populationBefore=b.populationBefore;p.conquestReason=reason;p.siegeRounds=b.siegeRound;p.siegeHistory=structuredClone(b.siegeHistory);p.history=structuredClone(b.history);p.historyOmitted=b.historyOmitted;p.siege=structuredClone(b.siegeChanges);p.outcome=reason==='mutual-destruction'?'mutual-destruction':'held';
+ const p=basePayload(w,first,c.name,c);p.battleId=b.id;p.resolutionId=rid(b.id,'final');p.startedAt=b.startedAt;p.rounds=b.round;p.wallBefore=b.wallBefore;p.ownerBefore=b.ownerBefore;p.populationBefore=b.populationBefore;p.conquestReason=reason;p.siegeRounds=b.siegeRound;p.siegeHistory=structuredClone(b.siegeHistory);p.history=structuredClone(b.history);p.historyOmitted=b.historyOmitted;p.siege=structuredClone(b.siegeChanges);p.outcome=b.mission==='wonder-destruction'?(reason==='wonder-destroyed'?'wonder-destroyed':'wonder-held'):reason==='mutual-destruction'?'mutual-destruction':'held';if(b.wonder)p.wonder=structuredClone(b.wonder);
  p.attackers=b.participants.filter(p=>p.armyId!==null&&attacking.some(a=>a.id===p.armyId));p.defenders=b.participants.filter(item=>!p.attackers.includes(item));
  // A stationed army may have legally retrofitted before joining this battle.
  // Use its battle-entry composition, preserving the original dispatch history.
- for(const a of attacking)applyBaggage(a,attackCount>0);for(const a of stationed(w,c))applySupplyLoss(a.units,p.defenders.find(d=>d.armyId===a.id)?.before??a.initialUnits,defenseCount>0);
+ for(const a of attacking){if(b.mission==='wonder-destruction'&&!Object.keys(a.initialUnits).some(effectiveUnit)){if(!Object.keys(a.units).some(id=>baseUnit(id)==='catapult'&&a.units[id]>0))for(const id of Object.keys(a.units).filter(isSupplyUnit))delete a.units[id];}else applyBaggage(a,attackCount>0);}for(const a of stationed(w,c))applySupplyLoss(a.units,p.defenders.find(d=>d.armyId===a.id)?.before??a.initialUnits,defenseCount>0);
  if(defenseCount===0&&c.military)for(const id of Object.keys(c.military.units).filter(isSupplyUnit))delete c.military.units[id];
  if(reason==='conquered'){
   if(attackCount===0||defenseCount!==0||(c.wallLevel??0)!==0)throw new Error('Conquest hard conditions not met');
@@ -105,7 +106,7 @@ function finishBattle(w:FormalWorld,state:BattleState,c:FormalCity,e:FormalEvent
   p.defenders=updateParticipants(w,c,p.defenders);evacuateCitySurvivors(w,c,oldOwner,s);for(const a of w.armies.filter(isMissionArmy).filter(a=>a.status==='stationed'&&a.target.kind==='city'&&a.target.cityId===c.id))if(!canReinforce(w,a.ownerFactionId,c.ownerFactionId))returnArmy(w,a,s);
  }else if(b.catapultBatchDone)finalizeSiegeHousing(c);
  p.attackers=updateParticipants(w,null,p.attackers);if(p.outcome!=='conquered')p.defenders=updateParticipants(w,c,p.defenders);p.populationAfter=c.population;p.wallAfter=c.wallLevel??0;
- finishReceipt(w,p,e.id);w.combat!.battles=w.combat!.battles.filter(x=>x.id!==b.id);for(const a of attacking)returnArmy(w,a,s);invalidateSpatial(w);return battleReport(w,p);
+ finishReceipt(w,p,e.id);w.combat!.battles=w.combat!.battles.filter(x=>x.id!==b.id);for(const a of attacking)returnArmy(w,a,s);reconcileWonders(w,s);invalidateSpatial(w);return battleReport(w,p);
 }
 /** Training/arrival events refresh durable pools and phase, but never run damage out of scheduler order. */
 export function refreshBattleDefense(w:FormalWorld,c:FormalCity){
@@ -122,18 +123,40 @@ export function resolveCombatRound(w:FormalWorld,state:BattleState,e:FormalEvent
  const attackers=w.armies.filter(isMissionArmy).filter(a=>a.status==='engaged'&&a.battleId===b.id);for(const owner of new Set([c.ownerFactionId,...attackers.map(a=>a.ownerFactionId),...stationed(w,c).map(a=>a.ownerFactionId)]))settleFaction(w,owner);
  b.attackers=syncPools(w,b.attackers,attackers.map(a=>({units:a.units,owner:a.ownerFactionId,source:a.originCityId,army:a})),b.participants);refreshBattleDefense(w,c);
  if(protectedFaction(w,c.ownerFactionId))return finishBattle(w,b,c,e,s,'protected-target');
- if(effectiveCount(b.attackers)===0)return finishBattle(w,b,c,e,s,'no-occupiers');
+ if(b.mission==='wonder-destruction'?!b.attackers.some(p=>baseUnit(p.unitId)==='catapult'&&p.count>0):effectiveCount(b.attackers)===0)return finishBattle(w,b,c,e,s,'no-occupiers');
  if(b.phase==='combat'){
   const round=b.round+1,resolution=rid(b.id,`round-${round}`);if(w.combat!.receipts.some(r=>r.resolutionId===resolution))return[];
   if(effectiveCount(b.defenders)>0){const result=awarenessExchange(w,b.id,e,round,b.attackers,b.defenders,c.wallLevel??0);b.attackers=result.attacking;b.defenders=result.defending;writePools(w,null,b.attackers);writePools(w,c,b.defenders);}
   b.round=round;commitReceipt(w,{battleId:b.id,resolutionId:resolution,eventId:e.id,at:w.time,round,kind:'round'});
   if(round%5===0)battleLog(b,{at:w.time,kind:'combat-summary'});
-  if(effectiveCount(b.attackers)===0)return finishBattle(w,b,c,e,s,effectiveCount(b.defenders)===0?'mutual-destruction':'attacker-defeated');
+  if(b.mission==='wonder-destruction'?!b.attackers.some(p=>baseUnit(p.unitId)==='catapult'&&p.count>0):effectiveCount(b.attackers)===0)return finishBattle(w,b,c,e,s,effectiveCount(b.defenders)===0?'mutual-destruction':'attacker-defeated');
   if(effectiveCount(b.defenders)===0){b.phase='siege';battleLog(b,{at:w.time,kind:'siege-start'});}
+ }
+ if(b.phase==='siege'&&(b.mission==='wonder-destruction'||b.wonderPriority)){
+  const wonder=w.largeProjects.find(p=>p.wonder&&p.wonder.phase!=='funding'&&p.initiatingCityId===c.id);
+  if(b.mission==='wonder-destruction'&&!wonder)return finishBattle(w,b,c,e,s,'no-catapult');
+  if(wonder){
+   settleWonderDurability(w,wonder);const d=wonder.wonder!.durability;
+   if(d){b.wonder??={projectId:wonder.projectId,before:d.current,after:d.current,damage:0};
+    const amount=wonderBombardment(w,b.attackers);
+    if(amount>0&&d.current>0){const lost=applyWonderDamage(w,wonder.projectId,e,rid(b.id,`wonder-${b.siegeRound+1}`),amount,s);b.wonder.damage=durabilityPrecision(b.wonder.damage+lost);}
+    b.wonder.after=d.current;
+   }
+  }
+  if(b.mission==='wonder-destruction'){
+   const round=b.siegeRound+1,wallBefore=c.wallLevel??0,result=resolveSiege(w,c,b.attackers,b.id,{wallDamage:b.wallDamage,wallDamageLevel:b.wallDamageLevel,catapultBatch:false});
+   b.catapultBatchDone=true;b.siegeRound=round;b.wallDamage=result.wallDamage;b.wallDamageLevel=result.wallDamageLevel;b.siegeHistory.push({round,at:w.time,wallBefore,wallAfter:c.wallLevel??0});
+   for(const change of result.changes){const prior=b.siegeChanges.find(x=>x.target.kind==='wall');if(prior)prior.after=change.after;else b.siegeChanges.push(change);}
+   commitReceipt(w,{battleId:b.id,resolutionId:rid(b.id,`siege-${round}`),eventId:e.id,at:w.time,round,kind:'siege-round'});
+   if(wonder?.wonder?.integrity==='ruins')return finishBattle(w,b,c,e,s,'wonder-destroyed');
+   if(!b.attackers.some(p=>baseUnit(p.unitId)==='catapult'&&p.count>0))return finishBattle(w,b,c,e,s,'no-catapult');
+   if(round>=SIEGE_ROUND_LIMIT)return finishBattle(w,b,c,e,s,'wonder-timeout');
+   b.nextRoundAt=w.time+300000;b.roundEventId=enqueue(w,s,{type:'combat.round',battleId:b.id,at:b.nextRoundAt});return[];
+  }
  }
  if(b.phase==='siege'){
   // First batch is executed once even on a Lv0 wall. Later arrivals cannot earn another batch.
-  if(!b.catapultBatchDone){const result=resolveSiege(w,c,b.attackers,b.id,{damageWall:false,catapultBatch:true});b.catapultBatchDone=true;b.developmentLost+=result.lost;b.siegeChanges.push(...result.changes);battleLog(b,{at:w.time,kind:'catapult-batch'});}
+  if(!b.catapultBatchDone){const result=resolveSiege(w,c,b.attackers,b.id,{damageWall:false,catapultBatch:!b.wonderPriority});b.catapultBatchDone=true;b.developmentLost+=result.lost;b.siegeChanges.push(...result.changes);battleLog(b,{at:w.time,kind:'catapult-batch'});}
   if((c.wallLevel??0)===0)return finishBattle(w,b,c,e,s,'conquered');
   if(b.siegeRound>=SIEGE_ROUND_LIMIT)return finishBattle(w,b,c,e,s,'siege-timeout');
   const round=b.siegeRound+1,resolution=rid(b.id,`siege-${round}`);if(w.combat!.receipts.some(r=>r.resolutionId===resolution))return[];
@@ -168,8 +191,8 @@ export function handleCombatEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler):
  if(a.mission==='reinforce'){const trust=memoryFor(w,c.ownerFactionId,a.ownerFactionId);if(trust){trust.trust=Math.min(1,trust.trust+.1);trust.at=w.time;}a.status='stationed';refreshBattleDefense(w,c);invalidateSpatial(w);return[];}
  if(a.mission==='scout')return scoutBattle(w,a,c,e,s);
  if(a.mission==='raid')return singleRaid(w,a,c,e,s);
- const existing=w.combat.battles.find(b=>b.cityId===c.id);if(existing){if(existing.attackerFactionId!==a.ownerFactionId&&!(a.jointId&&a.jointId===existing.jointId)){const p=basePayload(w,a,c.name,c);finishReceipt(w,p,e.id);returnArmy(w,a,s);return battleReport(w,p);}a.battleId=existing.id;a.status='engaged';const progress=ensureBattleProgress(existing,c.wallLevel??0);battleLog(progress,{at:w.time,kind:'reinforcement',ownerFactionId:a.ownerFactionId});invalidateSpatial(w);return[];}
+ const existing=w.combat.battles.find(b=>b.cityId===c.id);if(existing){if((existing.mission??'conquest')!==a.mission||!!existing.wonderPriority!==!!a.wonderPriority||existing.attackerFactionId!==a.ownerFactionId&&!(a.jointId&&a.jointId===existing.jointId)){const p=basePayload(w,a,c.name,c);finishReceipt(w,p,e.id);returnArmy(w,a,s);return battleReport(w,p);}a.battleId=existing.id;a.status='engaged';const progress=ensureBattleProgress(existing,c.wallLevel??0);battleLog(progress,{at:w.time,kind:'reinforcement',ownerFactionId:a.ownerFactionId});invalidateSpatial(w);return[];}
  a.status='engaged';
  if(a.jointId){const simultaneous=w.armies.filter(isMissionArmy).filter(x=>x!==a&&x.jointId===a.jointId&&x.status==='outbound'&&x.arrivalAt===w.time&&x.target.kind==='city'&&x.target.cityId===c.id&&hostileAllowed(w,x.ownerFactionId,c.ownerFactionId));const events=new Set(simultaneous.map(x=>x.movementEventId));const retained=s.snapshot().filter(e=>!events.has(e.id));while(s.pop()){};for(const e of retained)s.push(e);for(const x of simultaneous){x.position={...x.path.at(-1)!};x.status='engaged';x.movementEventId=null;x.battleId=a.battleId;}}
- settleCity(w,c);const b:BattleState={id:a.battleId,...(a.jointId?{jointId:a.jointId}:{}),cityId:c.id,attackerFactionId:a.ownerFactionId,startedAt:w.time,round:0,nextRoundAt:w.time,roundEventId:null,attackers:[],defenders:[],participants:[],wallBefore:c.wallLevel??0,populationBefore:c.population,ownerBefore:c.ownerFactionId,developmentBefore:developmentLevels(c)};w.combat.battles.push(b);invalidateSpatial(w);return resolveCombatRound(w,b,e,s);
+ settleCity(w,c);const b:BattleState={id:a.battleId,mission:a.mission==='wonder-destruction'?'wonder-destruction':'conquest',...(a.wonderPriority?{wonderPriority:true}:{}),...(a.jointId?{jointId:a.jointId}:{}),cityId:c.id,attackerFactionId:a.ownerFactionId,startedAt:w.time,round:0,nextRoundAt:w.time,roundEventId:null,attackers:[],defenders:[],participants:[],wallBefore:c.wallLevel??0,populationBefore:c.population,ownerBefore:c.ownerFactionId,developmentBefore:developmentLevels(c)};w.combat.battles.push(b);invalidateSpatial(w);return resolveCombatRound(w,b,e,s);
 }

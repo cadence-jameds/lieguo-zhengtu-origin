@@ -47,16 +47,19 @@ export type Shipment = {commandId?:CommandId;shipmentId:ShipmentId;projectId:Pro
  * breakthrough and conquest work. Those systems do not run in B9-1. */
 export type BreakthroughConstruction={creationCommandId:CommandId;wonderProjectId:ProjectId;recaptureRequired?:true;phase:'funding'|'building'|'paused'|'completed';workPeriods:{startedAt:number;endedAt:number}[];discardedWorkMs:number;activeSince:number|null;completionEventId:EventId|null;completedAt:number|null;qualifiedFactionIds:FactionId[]};
 export type BreakthroughCommand={type:'breakthrough.start';cityId:CityId}|{type:'breakthrough.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
-export type WonderConstruction={integrity?:'intact'|'damaged'|'ruins';creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
-export type WonderCommand={type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
+export type WonderDurabilityEntry={key:string;eventId:EventId;at:number;kind:'damage'|'repair';amount:number;maximum:number;before:number;after:number};
+export type WonderDurability={maximum:number;current:number;ledger:WonderDurabilityEntry[]};
+export type WonderConstruction={clock?:{workMs:number;activeSince:number|null};recaptureRequired?:true;durability?:WonderDurability;integrity?:'intact'|'damaged'|'ruins';creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
+export type WonderCommand=import('./wonderCondition').RepairCommand|{type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
 export type LargeProject = {
-  projectId:ProjectId;kind:'world-wonder'|'civilization-breakthrough'|'emergency-modernization'|'technology-transfer';wonder?:WonderConstruction;breakthrough?:BreakthroughConstruction;catchup?:import('./modernCatchup').CatchupConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
+  projectId:ProjectId;kind:'world-wonder'|'wonder-repair'|'civilization-breakthrough'|'emergency-modernization'|'technology-transfer';repair?:import('./wonderCondition').WonderRepair;wonder?:WonderConstruction;breakthrough?:BreakthroughConstruction;catchup?:import('./modernCatchup').CatchupConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
   paymentMode:'physical-shipment';initiatingCityId:CityId;requiredResources:Resources;poolResources:Resources;
   shipments:Shipment[];createdAt:number;durationMs:number;
 };
 export type FormalEvent = {id:EventId;at:number} & (
   | {type:'research.complete';projectId:ResearchProjectId}
   | {type:'wonder.complete';projectId:ProjectId}
+  | {type:'wonder.repair.complete';projectId:ProjectId}
   | {type:'breakthrough.complete';projectId:ProjectId}
   | {type:'modern.project.complete';projectId:ProjectId}
   | {type:'economy.settle';cityId:CityId}

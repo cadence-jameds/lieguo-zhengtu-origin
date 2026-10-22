@@ -55,3 +55,7 @@ export function finishConquest(w:FormalWorld,c:FormalCity,owner:FormalCity['owne
  changeCityOwner(w,c,owner,'conquest',s);return{populationBefore,populationAfter:c.population,returnedTrainingPopulation,rate};
 }
 export function finalizeSiegeHousing(c:FormalCity){c.housing=400+HOUSING[c.buildings.residence??0];c.population=Math.min(c.population,c.housing);}
+
+/** Fixed six-decimal durability precision; modern target multiplier applies only here. */
+export const durabilityPrecision=(n:number)=>Math.round(n*1000000)/1000000;
+export function wonderBombardment(w:FormalWorld,pools:readonly CombatPool[]){return durabilityPrecision(pools.reduce((sum,p)=>{if(baseUnit(p.unitId)!=='catapult'||p.count<=0)return sum;const f=w.factions.find(f=>f.id===p.ownerFactionId),tiers=[1,2].filter(n=>hasTech(f,`siege.projection.${n}`)).length;return sum+p.count*30*1.5*(1+.1*tiers)*modernSiegeMultiplier(p.unitId,f,'wonder');},0));}

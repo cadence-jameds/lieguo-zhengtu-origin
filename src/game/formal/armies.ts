@@ -1,3 +1,4 @@
+import {baseUnit} from './combatModifiers';
 import {isScoutUnit} from './unitCatalog';
 import {diplomaticRelation} from './politics';
 import {protectedFaction} from './playtest';
@@ -35,9 +36,10 @@ export function applyArmyCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,p:Army
  const target=p.target.kind==='city'?spatial(w).cities.get(p.target.cityId):spatial(w).sites.get(p.target.siteId);requireRule(target,'目標已不存在或正處於冷卻。');requireRule(target.x!==c.x||target.y!==c.y,'不能派遣到出發城市。');
  if(p.target.kind==='wild'){requireRule((p.mission==='raid'||p.mission==='scout')&&'generation' in target&&target.generation===p.target.generation,'野外據點只接受掠奪或偵察，且目標世代必須相符。');}
  else{const dest=target as FormalCity;requireRule(p.mission==='reinforce'||!protectedFaction(w,dest.ownerFactionId),'目標仍在新手保護中。');requireRule(p.mission==='reinforce'?canReinforce(w,o.issuerId,dest.ownerFactionId):hostileAllowed(w,o.issuerId,dest.ownerFactionId),'此目標不符合任務的勢力授權。');}
+ if(p.mission==='wonder-destruction'||p.wonderPriority){requireRule(p.target.kind==='city'&&w.largeProjects.some(q=>q.wonder&&q.wonder.phase!=='funding'&&q.initiatingCityId===(p.target.kind==='city'?p.target.cityId:null)),'奇觀破壞只能指定有實體世界奇觀的城市。');requireRule(Object.keys(units).some(id=>baseUnit(id)==='catapult'),'奇觀轟擊至少需要一台合法投石機。');requireRule(p.mission==='wonder-destruction'||p.mission==='conquest','只有奇觀破壞或征服可選擇奇觀目標。');}
  if(p.mission==='scout')requireRule((p.target.kind==='city'||p.scoutMode==='resources-army')&&Object.keys(units).every(isScoutUnit),'偵察只能派遣斥候；野外據點固定偵察資源與軍隊。');
- else{requireRule(p.scoutMode===undefined,'非偵察任務不可攜帶情報選项。');if(p.mission!=='reinforce')requireRule(Object.keys(units).some(effectiveUnit),'掠奪／征服至少需要一名有效戰鬥兵。');}
- const key=sequenceKey(w.sequences.project++),a:MissionArmy={id:armyId(key),battleId:battleId(key),commandId:o.commandId,ownerFactionId:o.issuerId,originCityId:c.id,units,initialUnits:{...units},mission:p.mission,target:{...p.target},status:'outbound',path:[],segmentTimes:[],marchSecondsPerTile:1,position:{x:c.x,y:c.y},departedAt:w.time,arrivalAt:w.time,movementEventId:null,returnCityId:null,cargo:zeroResources(),...(p.scoutMode?{scoutMode:p.scoutMode}:{})};
+ else{requireRule(p.scoutMode===undefined,'非偵察任務不可攜帶情報選项。');if(p.mission!=='reinforce'&&p.mission!=='wonder-destruction')requireRule(Object.keys(units).some(effectiveUnit),'掠奪／征服至少需要一名有效戰鬥兵。');}
+ const key=sequenceKey(w.sequences.project++),a:MissionArmy={id:armyId(key),battleId:battleId(key),commandId:o.commandId,ownerFactionId:o.issuerId,originCityId:c.id,units,initialUnits:{...units},mission:p.mission,...(p.wonderPriority?{wonderPriority:true}:{}),target:{...p.target},status:'outbound',path:[],segmentTimes:[],marchSecondsPerTile:1,position:{x:c.x,y:c.y},departedAt:w.time,arrivalAt:w.time,movementEventId:null,returnCityId:null,cargo:zeroResources(),...(p.scoutMode?{scoutMode:p.scoutMode}:{})};
  try{scheduleMarch(w,a,c,target,s);}catch{requireRule(false,'目標沒有可通行的行軍路徑。');}
  if(p.target.kind==='city'&&p.mission!=='reinforce'&&!(p.mission==='scout'&&w.extinction?.rebirths&&o.issuerId===w.playerFactionId&&!w.developer?.enabled)){const f=w.factions.find(f=>f.id===o.issuerId)!;if(f.protectionUntil!==undefined)f.protectionUntil=Math.min(f.protectionUntil,w.time);}
  settleCity(w,c);for(const [id,count] of Object.entries(units)){c.military.units[id]-=count;if(!c.military.units[id])delete c.military.units[id];}w.armies.push(a);invalidateSpatial(w);
