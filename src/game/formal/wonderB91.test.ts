@@ -14,6 +14,16 @@ import {encodeSave,decodeSave} from './saveCodec';
 import {advanceOfflineCooperative} from './offline';
 import {reconcileSiegeStorage} from './siege';
 
+it('B9-1 wonder start rejects Castle without side effects and accepts an Imperial leader with a Castle member host',()=>{
+ const w=wonderWorld(false);w.factions[0].age=2;
+ const payload={type:'wonder.start' as const,cityId:w.cities[0].id,hostCityId:w.cities[2].id},before=structuredClone(w);
+ const castle=submitFormalOrder(w,order(w,payload));
+ expect(castle.ack?.status).toBe('rejected');expect(castle.ack?.reason).toContain('完成帝王時代');expect(castle.world).toBe(w);expect(w).toEqual(before);
+ w.factions[0].age=3;expect(w.factions[1].age).toBe(2);
+ const imperial=wonderAct(w,payload);expect(imperial.largeProjects).toHaveLength(1);expect(imperial.largeProjects[0].initiatingCityId).toBe(w.cities[2].id);
+ expect(imperial.cities).toEqual(w.cities);expect(imperial.events).toEqual(w.events);expect(imperial.largeProjects[0].poolResources).toEqual(zeroResources());
+});
+
 it('B9-1 imperial ownership, one wonder, real stock/market rules, arrival pool and idempotent events',()=>{
  let w=wonderWorld();const p=w.largeProjects[0],city=w.cities[1],cargo={food:100,wood:200,stone:300,gold:400};city.stock={food:1000,wood:1000,stone:1000,gold:1000};
  const unchanged=structuredClone(w.cities.map(c=>[c.x,c.y,c.fields,c.economy!.slots]));
@@ -77,7 +87,14 @@ it('B9-1 all 99 native AI use the same imperial command, real four-resource stoc
  validateFormalWorld(w);
  for(let i=0;i<100;i++){
   const c=w.cities[i],f=w.factions[i],a=w.autonomy!.agents.find(a=>a.factionId===f.id);
-  if(i%20===0)w=wonderAct(w,{type:'wonder.start',cityId:c.id,hostCityId:c.id},f.id);
+  if(i%20===0){
+   const payload={type:'wonder.start' as const,cityId:c.id,hostCityId:c.id},before=structuredClone(w),castle=submitFormalOrder(w,order(w,payload,undefined,f.id));
+   expect(castle.ack?.status).toBe('rejected');expect(castle.ack?.reason).toContain('完成帝王時代');expect(castle.world).toBe(w);expect(w).toEqual(before);
+   if(a)expect(wonderDecision(w,c,{...a,active:true})).toBeUndefined();
+   w.factions[i].age=3;
+   if(a)expect(wonderDecision(w,c,{...a,active:true})).toEqual(payload);
+   w=wonderAct(w,payload,f.id);
+  }
   if(a){const choice=wonderDecision(w,w.cities[i],{...a,active:true});expect(choice?.type).toBe('wonder.ship');}
   const p=w.largeProjects.find(p=>p.owner.kind==='empire'&&p.owner.empireId===f.empireId)!,before={...w.cities[i].stock};
   w=wonderAct(w,{type:'wonder.ship',cityId:c.id,projectId:p.projectId,resources:{food:1,wood:2,stone:3,gold:4}},f.id);

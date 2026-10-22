@@ -14,6 +14,7 @@ export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:Wo
  const empire=empireOf(w,o.issuerId);requireRule(empire,'世界奇觀需要合法帝國成員資格。');
  if(q.type==='wonder.start'){
   requireRule(empire.leader===o.issuerId,'由帝國領袖指定世界奇觀承載城市。');
+  requireRule(w.factions.find(f=>f.id===o.issuerId)?.age===3,'啟動世界奇觀需要完成帝王時代。');
   const host=w.cities.find(c=>c.id===q.hostCityId);
   requireRule(host?.economy&&empireOf(w,host.ownerFactionId)?.id===empire.id,'承載城市必須屬於目前帝國成員。');
   requireRule(!empireWonder(w,empire.id),'每個帝國同時只能指定一座世界奇觀。');

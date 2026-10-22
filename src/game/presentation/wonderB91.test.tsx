@@ -12,10 +12,14 @@ import {playerOrderBase,playerOrderWithBase} from '../orderAdmission';
 (globalThis as {IS_REACT_ACT_ENVIRONMENT?:boolean}).IS_REACT_ACT_ENVIRONMENT=true;
 let root:Root|undefined;afterEach(async()=>{await act(async()=>root?.unmount());document.body.innerHTML='';});
 it('B9-1 Legion UI selects a legal member host, dispatches own real cargo, shows transit and arrival without resetting the layout',async()=>{
- let w=wonderWorld();w.largeProjects=[];w.cities[1].stock={food:1000,wood:1000,stone:1000,gold:1000};let update!:(w:FormalWorld)=>void;
+ let w=wonderWorld(false);w.factions[0].age=2;w.cities[1].stock={food:1000,wood:1000,stone:1000,gold:1000};let update!:(w:FormalWorld)=>void;
  function Screen(){const [world,setWorld]=useState(w);update=setWorld;w=world;return <LegionView world={world} city={world.cities[0]} issue={payload=>{const t=submitFormalOrder(world,order(world,payload));expect(t.ack?.status,t.ack?.reason).toBe('committed');setWorld(t.world);}} busy={false} onWorld={()=>{}}/>;}
  const div=document.createElement('div');document.body.append(div);root=createRoot(div);await act(async()=>root!.render(<Screen/>));
  const button=(name:string)=>Array.from(div.querySelectorAll('button')).find(b=>b.textContent===name)!;
+ expect(button('指定城市並啟動奇觀').disabled).toBe(true);expect(div.textContent).toContain('啟動世界奇觀需要完成帝王時代');
+ await act(async()=>button('指定城市並啟動奇觀').click());expect(w.largeProjects).toHaveLength(0);
+ await act(async()=>update({...w,factions:w.factions.map(f=>f.id===w.playerFactionId?{...f,age:3 as const}:f)}));
+ expect(button('指定城市並啟動奇觀').disabled).toBe(false);
  const host=div.querySelector<HTMLSelectElement>('[aria-label="奇觀承載城市"]')!;expect(host.options).toHaveLength(3);
  await act(async()=>{host.value=w.cities[2].id;host.dispatchEvent(new Event('change',{bubbles:true}));});await act(async()=>button('指定城市並啟動奇觀').click());
  expect(w.largeProjects[0].initiatingCityId).toBe(w.cities[2].id);expect(div.textContent).toContain('籌資／運輸中');

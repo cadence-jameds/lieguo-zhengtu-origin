@@ -6,7 +6,7 @@ import {submitFormalOrder,advanceFormal} from './reducer';
 import {resourceKeys,zeroResources,type FormalWorld,type FormalCommand} from './model';
 import {wonderRemaining,WONDER_COST} from './wonder';
 export function wonderAct(w:FormalWorld,payload:FormalCommand,issuer=w.playerFactionId){const result=submitFormalOrder(w,order(w,payload,undefined,issuer));expect(result.ack?.status,result.ack?.reason).toBe('committed');return result.world;}
-export function wonderWorld(){
+export function wonderWorld(start=true){
  let w=createFormalFixture({campaign:'wonder-'+crypto.randomUUID(),speed:3});initializeEconomy(w);
  for(const f of w.factions)f.age=2;
  for(const c of w.cities){build(c,'embassy',15);build(c,'market',15);build(c,'warehouse.0',15);}
@@ -14,7 +14,8 @@ export function wonderWorld(){
  w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'legion-create',name:'乙'},w.factions[1].id);
  w=wonderAct(w,{type:'politics',cityId:w.cities[0].id,action:'empire-propose',target:w.factions[1].id,name:'奇觀帝國'});
  w=wonderAct(w,{type:'politics',cityId:w.cities[2].id,action:'request-accept',requestId:w.politics!.requests[0].id},w.factions[1].id);
- return wonderAct(w,{type:'wonder.start',cityId:w.cities[0].id,hostCityId:w.cities[0].id});
+ w.factions[0].age=3;
+ return start?wonderAct(w,{type:'wonder.start',cityId:w.cities[0].id,hostCityId:w.cities[0].id}):w;
 }
 /** Synthetic resupply between trips; each of the 24M resources still goes through real
  * stock deduction, capacity-limited market dispatch and scheduled arrival. No pool injection. */
