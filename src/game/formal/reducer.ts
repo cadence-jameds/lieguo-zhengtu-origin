@@ -148,7 +148,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  else {
   try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
-   if(p.type==='modern.emergency.start'||p.type==='modern.project.ship')applyCatchupCommand(w,city,order,p,scheduler);
+   if(p.type==='modern.transfer.start'||p.type==='modern.emergency.start'||p.type==='modern.project.ship')applyCatchupCommand(w,city,order,p,scheduler);
    else if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
    else if(p.type==='breakthrough.start'||p.type==='breakthrough.ship')applyBreakthroughCommand(w,city,order,p,scheduler);
    else if(p.type==='modern.reverse')selectReverseEngineering(w,order.issuerId,p.unitId);

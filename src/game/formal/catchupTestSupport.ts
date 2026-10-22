@@ -40,3 +40,7 @@ export function fundCatchup(w:FormalWorld,id:LargeProject['projectId']){
  }
  w.events=s.snapshot();expect(deducted).toEqual(p.requiredResources);expect(p.poolResources).toEqual(p.requiredResources);validateFormalWorld(w);return w;
 }
+
+export function empire(w:FormalWorld,members=w.factions.map(f=>f.id)){
+ const id=empireId('catchup-current');w.politics={legions:[{id:'legion:catchup-current',name:'共同體',description:'',leader:members[0],members:[...members],empireId:id}],empires:[{id,name:'帝國',leader:members[0],legions:['legion:catchup-current'],color:'red'}],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};for(const f of w.factions){f.empireId=members.includes(f.id)?id:null;f.age=2;}w.modernAwareness??={pools:{},battles:[]};w.modernAwareness.pools[id]={value:100,significantEncounter:true,encountered:['modern.knight']};return w;
+}

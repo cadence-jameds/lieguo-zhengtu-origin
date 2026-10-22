@@ -1,19 +1,17 @@
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
-import {catchupWorld,act,fundCatchup,withModernHistory} from './catchupTestSupport';
+import {catchupWorld,act,fundCatchup,withModernHistory,empire} from './catchupTestSupport';
 import {make,order,reject,build,rich} from './developmentTestSupport';
 import {EMERGENCY_COST,EMERGENCY_DURATION,emergencyEligibility,handleCatchupEvent} from './modernCatchup';
 import {resourceKeys,zeroResources,type FormalWorld} from './model';
-import {empireId,factionId,cityId} from './ids';
+import {factionId,cityId} from './ids';
 import {advanceFormal,submitFormalOrder} from './reducer';
 import {encodeSave,decodeSave} from './saveCodec';
 import {EventScheduler} from './scheduler';
 import {validateFormalWorld} from './schema';
 import {advanceOfflineCooperative} from './offline';
 import {economicChoices,enableAutonomy} from './autonomy';
-export function empire(w:FormalWorld,members=w.factions.map(f=>f.id)){
- const id=empireId('catchup-current');w.politics={legions:[{id:'legion:catchup-current',name:'共同體',description:'',leader:members[0],members:[...members],empireId:id}],empires:[{id,name:'帝國',leader:members[0],legions:['legion:catchup-current'],color:'red'}],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};for(const f of w.factions){f.empireId=members.includes(f.id)?id:null;f.age=2;}w.modernAwareness??={pools:{},battles:[]};w.modernAwareness.pools[id]={value:100,significantEncounter:true,encountered:['modern.knight']};return w;
-}
+
 function start(w=catchupWorld()){return act(w,{type:'modern.emergency.start',cityId:w.cities[0].id});}
 let funding:FormalWorld|undefined;
 function funded(){if(!funding){const w=start();funding=fundCatchup(w,w.largeProjects.at(-1)!.projectId);}return structuredClone(funding);}

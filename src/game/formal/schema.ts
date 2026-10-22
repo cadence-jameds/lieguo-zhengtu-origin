@@ -211,6 +211,7 @@ export function validateFormalWorld(value:unknown):FormalWorld {return worldSche
 export const reportSchema:z.ZodType<FormalReport>=z.object({id:id<ReportId>('report'),sequence:positive,campaignId:id<CampaignId>('campaign'),ownerFactionId:factionIdSchema,at:int,realAt:int.optional(),clockSpeed:positive.max(200).optional(),read:z.boolean().optional(),category:z.enum(['system','research','battle','scout','diplomacy']),title:text,text:z.string().max(2000),battle:battleReportSchema.optional()}).strict().superRefine((r,c)=>{if((r.category==='battle'||r.category==='scout')!==!!r.battle||r.battle&&(r.category==='scout')!==(r.battle.mission==='scout'))c.addIssue({code:'custom',message:'Report category/payload mismatch'});});
 export const orderSchema:z.ZodType<FormalOrder>=z.object({commandId:commandIdSchema,campaignId:id<CampaignId>('campaign'),issuerId:factionIdSchema,issuedWorldTime:int,expectedRevision:int,payload:z.discriminatedUnion('type',[
  z.object({type:z.literal('modern.reverse'),cityId:cityIdSchema,unitId:text}).strict(),
+ z.object({type:z.literal('modern.transfer.start'),cityId:cityIdSchema}).strict(),
  z.object({type:z.literal('modern.emergency.start'),cityId:cityIdSchema}).strict(),
  z.object({type:z.literal('modern.project.ship'),cityId:cityIdSchema,projectId:projectIdSchema,resources:resourcesSchema}).strict(),
  governanceOrderShape,

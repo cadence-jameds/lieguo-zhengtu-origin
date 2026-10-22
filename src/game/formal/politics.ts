@@ -85,6 +85,7 @@ export function applyPolitics(w:FormalWorld,_c:FormalCity,o:FormalOrder,q:Politi
   if(q.action==='war'||q.action==='peace'){requireRule(old?.state!=='friendly','友好及六小時解除期間禁止敵對。');p.relations=p.relations.filter(r=>r!==old);if(q.action==='war')p.relations.push({a,b,state:'war'});}
  }
  syncEmpires(w);
+ if(['legion-leave','empire-leave','legion-dissolve','empire-dissolve'].includes(q.action))for(const project of w.largeProjects){const b=project.catchup;if(project.kind==='technology-transfer'&&b?.initiatorId===me&&!['completed','cancelled'].includes(b.phase))requireRule(empireOf(w,me)?.id===b.eligibilitySnapshot.scope,'技術移轉進行期間不得主動退出帝國。');}
  for(const project of w.largeProjects){if(project.kind!=='world-wonder'||project.owner.kind!=='empire')continue;const host=w.cities.find(c=>c.id===project.initiatingCityId);if(host&&host.ownerFactionId===project.wonder?.hostOwnerFactionId)requireRule(w.factions.find(f=>f.id===host.ownerFactionId)?.empireId===project.owner.empireId,'奇觀承載城市領主在奇觀存在期間不得退出帝國。');}
 }
 /** Ownership eligibility is separate from battle damage: extinct troops still finish combat. */
