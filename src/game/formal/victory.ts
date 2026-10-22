@@ -9,12 +9,12 @@ import {HOUR} from './time';
 import type {EventScheduler} from './scheduler';
 export type VictoryKind='conquest'|'hegemony';
 export type VictoryCandidate={scope:string;kind:VictoryKind;startedAt:number;eventId:EventId};
-export type VictoryResult={scope:string;kind:VictoryKind;at:number;eventId:EventId;members:FactionId[]};
+export type VictoryResult={name:string;scope:string;kind:VictoryKind;at:number;eventId:EventId;members:FactionId[]};
 export type VictoryState={candidates:VictoryCandidate[];result:VictoryResult|null};
 export const victoryScope=(w:FormalWorld,id:FactionId)=>empireOf(w,id)?.id??id;
 export const VICTORY_DURATION={conquest:12*HOUR,hegemony:24*HOUR} as const;
-/** Uses the same persisted, public city/population totals as formal organization rankings.
- * Only ownership/counts are published; an AI never receives this routine's private troop data. */
+/** Aggregate lawful ownership and same-world-time population projections.
+ * Only public totals/rank are returned; private military ledgers remain internal. */
 export function campStatistics(w:FormalWorld){
  const populationAt=(c:FormalWorld['cities'][number])=>Math.floor(c.economy?growPopulation(c.population,c.housing,c.buildings.monastery??0,Math.max(0,w.time-c.economy.lastSettledAt)/HOUR):c.population);
  const scopes=new Map<FactionId,string>(),cityCounts=new Map<string,{cities:number;population:number}>(),groups=new Map<string,{scope:string;leader:FactionId;members:FactionId[]}>();
@@ -39,6 +39,6 @@ export function handleVictoryEvent(w:FormalWorld,e:FormalEvent,s:EventScheduler,
  if(e.type!=='victory.complete')return false;if(w.victory?.result)return true;
  reconcileVictory(w,s);const candidate=w.victory?.candidates.find(c=>c.eventId===e.id&&c.scope===e.scope&&c.kind===e.kind);if(!candidate||candidate.startedAt+VICTORY_DURATION[e.kind]!==w.time)return true;
  const camp=victoryConditions(w).find(c=>c.scope===e.scope&&c[e.kind]);if(!camp)return true;
- s.discard(new Set(w.victory!.candidates.map(c=>c.eventId)));w.victory={candidates:[],result:{scope:e.scope,kind:e.kind,at:w.time,eventId:e.id,members:[...camp.members].sort()}};
+ s.discard(new Set(w.victory!.candidates.map(c=>c.eventId)));w.victory={candidates:[],result:{name:camp.empire?.name??w.factions.find(f=>f.id===camp.leader)!.name,scope:e.scope,kind:e.kind,at:w.time,eventId:e.id,members:[...camp.members].sort()}};
  const sequence=w.sequences.report++;reports.push({id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:w.playerFactionId,at:w.time,category:'system',title:e.kind==='conquest'?'正式征服勝利':'正式帝國霸權勝利',text:`${w.factions.find(f=>f.id===camp.leader)!.name} 所屬陣營已連續維持全部條件 ${VICTORY_DURATION[e.kind]/HOUR} 世界小時。`});return true;
 }

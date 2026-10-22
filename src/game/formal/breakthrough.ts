@@ -89,6 +89,6 @@ export function breakthroughDecision(w:FormalWorld,c:FormalCity,active:boolean){
 /** Integration-only condition signal. No battle targeting or repair gameplay is exposed. */
 export function updateWonderIntegrity(w:FormalWorld,id:import('./ids').ProjectId,integrity:'intact'|'damaged'|'ruins',s:EventScheduler){
  const wonder=w.largeProjects.find(p=>p.projectId===id&&p.kind==='world-wonder');requireRule(wonder?.wonder,'世界奇觀不存在。');
- requireRule(!wonder.wonder.durability||wonderIntegrity(wonder.wonder.durability.current,wonder.wonder.durability.maximum)===integrity,'奇觀狀態必須符合實際耐久。');
+ requireRule(wonder.wonder.durability&&wonderIntegrity(wonder.wonder.durability.current,wonder.wonder.durability.maximum)===integrity,'奇觀狀態必須符合實際耐久。');
  wonder.wonder.integrity=integrity;reconcileBreakthroughs(w,s);
 }

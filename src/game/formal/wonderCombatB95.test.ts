@@ -40,3 +40,6 @@ it('B9-5 malformed targeting, absent catapults and hostile permissions use the s
  const w=endgameWorld();w.cities[0].military!.units={militia:10,catapult:1};
  for(const [mission,units,target] of [['wonder-destruction',{militia:10},w.cities[2].id],['wonder-destruction',{catapult:1},w.cities[1].id]] as const){const before=structuredClone(w),t=submitFormalOrder(w,order(w,{type:'army.dispatch',cityId:w.cities[0].id,mission,units,target:{kind:'city',cityId:target}}));expect(t.ack?.status).toBe('rejected');expect(w).toEqual(before);}
 });
+it('B9-5 conquest-priority bombardment also uses five world minutes at approved 25X speed',()=>{
+ let w=endgameWorld();w.speed=25;w.cities[2].wallLevel=15;w=send(w,{militia:1,catapult:1},'conquest');w=advanceFormal(w,w.armies.filter(isMissionArmy)[0].arrivalAt).world;expect(w.combat!.battles[0].nextRoundAt-w.time).toBe(300000);expect(w.largeProjects[0].wonder!.durability!.ledger[0].amount).toBe(45);
+});

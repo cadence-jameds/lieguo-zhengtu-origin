@@ -1,3 +1,5 @@
+import {isMissionArmy} from './combatModel';
+import {chainDecision,invalidateEndgameIntel} from './endgameAI';
 import {invalidateMilitaryPower,inheritMilitaryPower} from './militaryPower';
 import {handleVictoryEvent,reconcileVictory} from './victory';
 import {handleRepairEvent,reconcileWonders} from './wonderCondition';
@@ -7,7 +9,7 @@ import {diplomacySnapshot,diplomacyChanges} from './diplomacyReports';
 import {cloneWorldDraft} from './worldDraft';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
-import {handleAutonomy,retireAutonomy,type Submit} from './autonomy';
+import {submitAutonomous,handleAutonomy,retireAutonomy,type Submit} from './autonomy';
 import {applyBreakthroughCommand,handleBreakthroughEvent} from './breakthrough';
 import {applyWonderCommand,handleWonderEvent} from './wonder';
 import {reconcileExileSites,applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
@@ -164,7 +166,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    else if(p.type==='military.modernize'||p.type==='military.recruit'||p.type==='military.cancel'||p.type==='military.disband')applyMilitaryCommand(w,city,order,p,scheduler);
    else if(p.type==='settlement.prepare'||p.type==='settlement.cancel'||p.type==='settlement.dispatch')applySettlementCommand(w,city,order,p,scheduler);
    else if(p.type==='logistics.auto.set')setAutoLogistics(w,city,p.rules);
-   else if(p.type==='army.dispatch'||p.type==='army.recall')applyArmyCommand(w,city,order,p,scheduler);
+   else if(p.type==='army.dispatch'||p.type==='army.recall'||p.type==='army.advance')applyArmyCommand(w,city,order,p,scheduler);
    else applyEconomyCommand(w,city,order,p,scheduler);
    promoteCityQueues(w,city,scheduler);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
@@ -220,6 +222,8 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
   if(['combat.round','army.arrive','army.return','military.train','research.complete','settlement.arrive'].includes(e.type))invalidateMilitaryPower(w);
+  invalidateEndgameIntel(w);
+  if(combatReports!==null)for(const army of [...w.armies]){if(!isMissionArmy(army)||army.mission!=='conquest'||army.status!=='returning'||army.departedAt!==w.time||!army.chain?.conquests)continue;const agent=w.autonomy?.agents.find(a=>a.factionId===army.ownerFactionId);if(!agent)continue;const command=chainDecision(w,army,agent);if(command)reports.push(...submitAutonomous(w,scheduler,e,agent.factionId,[command],submit));}
   const extinctBefore=w.extinction?.extinct.length??0;resolveExtinctions(w,scheduler);if((w.extinction?.extinct.length??0)!==extinctBefore)invalidateMilitaryPower(w);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcileVictory(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
   if(aiReports===null)reports.push(...diplomacyChanges(w,beforePolitics));
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}

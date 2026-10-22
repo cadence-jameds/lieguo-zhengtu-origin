@@ -4,14 +4,14 @@ import {withModernHistory} from './catchupTestSupport';
 import {initializeEconomy,handleEconomyEvent} from './economy';
 import {initialMilitary} from './military';
 import {initialCombat} from './combatModel';
-import {build,order} from './developmentTestSupport';
-import {eventId} from './ids';
+import {build,order,make} from './developmentTestSupport';
+import {eventId,empireId} from './ids';
 import {EventScheduler} from './scheduler';
 import {applyRepairCommand,handleRepairEvent,reconcileWonders} from './wonderCondition';
 import {wonderRemaining} from './wonder';
 import {resourceKeys,zeroResources,type FormalWorld} from './model';
 import {validateFormalWorld} from './schema';
-import {orderFingerprint,submitFormalOrder} from './reducer';
+import {orderFingerprint,submitFormalOrder,advanceFormal} from './reducer';
 export function endgameWorld(active=false){
  let w=createFormalFixture({campaign:'endgame-'+crypto.randomUUID()});initializeEconomy(w);w=withModernHistory(w);w.armies=[];w.combat=initialCombat();for(const f of w.factions)f.age=3;
  const p=w.largeProjects[1],owner=p.owner.kind==='empire'?p.owner.empireId:null,f=w.factions[1].id;if(!owner)throw Error('Historical empire missing');
@@ -39,4 +39,20 @@ export function fundRepair(w:FormalWorld,id:import('./ids').ProjectId){
   const until=w.logistics!.at(-1)!.returnAt;while(s.peek()&&s.peek()!.at<=until){const e=s.pop()!;w.time=e.at;if(!handleRepairEvent(w,e,s)&&!handleEconomyEvent(w,e,s))throw Error('Unexpected repair fixture event '+e.type);}
  }
  w.events=s.snapshot();expect(paid).toEqual(p.requiredResources);expect(p.poolResources).toEqual(p.requiredResources);validateFormalWorld(w);return w;
+}
+/** Native 100-Faction context with paid historical wonder prerequisites, not a replay of B9-1. */
+let nativeTemplate:FormalWorld|undefined;
+export function nativeEndgameWorld(){
+ if(nativeTemplate)return structuredClone(nativeTemplate);
+ const template=endgameWorld(),wonder=template.largeProjects[0],originalEmpire=template.politics!.empires[0].id;let w=make();w=advanceFormal(w,template.time).world;w.politics={legions:[],empires:[],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};
+ for(let i=0;i<100;i++){const e=empireId('native-endgame-'+Math.floor(i/30)),f=w.factions[i],c=w.cities[i];f.age=3;f.empireId=e;build(c,'market',15);build(c,'embassy',15);build(c,'warehouse.0',15);c.stock={food:5000,wood:5000,stone:5000,gold:5000};
+  if(i%10===0)w.politics.legions.push({id:'legion:native-endgame-'+i,name:'終局軍團',description:'',leader:f.id,members:w.factions.slice(i,i+10).map(f=>f.id),empireId:e});
+  if(i%30===0){w.politics.empires.push({id:e,name:'終局帝國',leader:f.id,legions:Array.from({length:Math.ceil(Math.min(30,100-i)/10)},(_,n)=>'legion:native-endgame-'+(i+n*10)),color:'green'});
+   const mapping=new Map<string,string>([[template.campaignId,w.campaignId],[template.factions[1].id,f.id],[template.cities[2].id,c.id],[originalEmpire,e]]);
+   const remap=(value:unknown):any=>typeof value==='string'?mapping.get(value)??(/^(project|shipment|event|command):/.test(value)?value.replace(':',':native-'+i+'-'):value):Array.isArray(value)?value.map(remap):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).map(([k,v])=>[k,remap(v)])):value;
+   w.largeProjects.push(remap(wonder));const ids=new Set([wonder.wonder!.creationCommandId,...wonder.shipments.map(t=>t.commandId!)]);
+   for(const r of template.commandReceipts.filter(r=>ids.has(r.commandId))){const mapped=remap(r);mapped.fingerprint=JSON.stringify(remap(JSON.parse(r.fingerprint)));mapped.committedRevision=w.revision;w.commandReceipts.push(mapped);}
+  }
+ }
+ nativeTemplate=validateFormalWorld(w);return structuredClone(nativeTemplate);
 }

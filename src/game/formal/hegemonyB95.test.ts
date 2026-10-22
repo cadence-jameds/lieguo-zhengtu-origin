@@ -1,3 +1,4 @@
+import {advanceOfflineCooperative} from './offline';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {make,researchCity,order} from './developmentTestSupport';
@@ -41,7 +42,7 @@ it('B9-5 a real research completion recalculates military rank and starts the 24
 });
 it('B9-5 an exact tie interrupts 24h, fresh unique leadership starts anew, and offline/save replay complete only once',async()=>{
  let w=sync(world());w=advanceFormal(w,12*HOUR).world;w.cities[45].military!.units={militia:100};sync(w);expect(w.victory!.candidates).toEqual([]);w=advanceFormal(w,13*HOUR).world;w.cities[45].military!.units={};sync(w);const deadline=37*HOUR;
- expect(advanceFormal(w,deadline-1).world.victory!.result).toBeNull();const loaded=(await decodeSave(await encodeSave(w))).world,complete=advanceFormal(w,deadline);expect(await advanceFormalCooperative(loaded,deadline)).toEqual(complete);expect(complete.world.victory!.result!.kind).toBe('hegemony');expect(complete.reports.filter(r=>r.title==='正式帝國霸權勝利')).toHaveLength(1);expect(advanceFormal(complete.world,deadline+HOUR).reports.filter(r=>r.title==='正式帝國霸權勝利')).toHaveLength(0);validateFormalWorld(complete.world);
+ expect(advanceFormal(w,deadline-1).world.victory!.result).toBeNull();const loaded=(await decodeSave(await encodeSave(w))).world,complete=advanceFormal(w,deadline);expect(await advanceFormalCooperative(loaded,deadline)).toEqual(complete);const near=advanceFormal(loaded,deadline-1).world,offline=await advanceOfflineCooperative(near,0,1);expect(offline.world.victory).toEqual(complete.world.victory);expect(offline.reports.filter(r=>r.title==='正式帝國霸權勝利')).toHaveLength(1);expect(complete.world.victory!.result!.kind).toBe('hegemony');expect(complete.reports.filter(r=>r.title==='正式帝國霸權勝利')).toHaveLength(1);expect(advanceFormal(complete.world,deadline+HOUR).reports.filter(r=>r.title==='正式帝國霸權勝利')).toHaveLength(0);validateFormalWorld(complete.world);
 });
 const databases:FormalPersistence[]=[];afterEach(async()=>{for(const d of databases.splice(0))await d.db.delete();});
 it('B9-5 Recovery and formal Load retain hegemony time and unique result without caching private military data in saves',async()=>{

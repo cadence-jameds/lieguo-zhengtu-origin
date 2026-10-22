@@ -1,3 +1,4 @@
+import {advanceOfflineCooperative} from './offline';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {make,order} from './developmentTestSupport';
@@ -26,7 +27,7 @@ it('B9-5 an unimperial legion does not aggregate independent conquest ownership'
  const w=world(69),me=w.playerFactionId,other=w.factions[69].id;w.cities[69].ownerFactionId=other;w.politics={legions:[{id:'legion:unimperial',name:'軍團',description:'',leader:me,members:[me,other],empireId:null}],empires:[],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};expect(victoryConditions(w).find(c=>c.scope===me)!.conquest).toBe(false);
 });
 it('B9-5 conquest wins at exactly 12 world hours, persists a single result, and replays/offline partition identically',async()=>{
- let w=sync(world()),end=12*HOUR;w=advanceFormal(w,end-1).world;expect(w.victory!.result).toBeNull();const restored=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,end);expect(await advanceFormalCooperative(restored,end)).toEqual(result);expect(advanceFormal(restored,end)).toEqual(result);expect(result.world.victory!.result!.kind).toBe('conquest');expect(result.reports.filter(r=>r.title==='正式征服勝利')).toHaveLength(1);
+ let w=sync(world()),end=12*HOUR;w=advanceFormal(w,end-1).world;expect(w.victory!.result).toBeNull();const restored=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,end);expect(await advanceFormalCooperative(restored,end)).toEqual(result);expect(advanceFormal(restored,end)).toEqual(result);const offline=await advanceOfflineCooperative(restored,0,1);expect(offline.world.victory).toEqual(result.world.victory);expect(offline.reports.filter(r=>r.title==='正式征服勝利')).toHaveLength(1);expect(result.world.victory!.result!.kind).toBe('conquest');expect(result.reports.filter(r=>r.title==='正式征服勝利')).toHaveLength(1);
  w=result.world;const before=structuredClone(w),e={type:'victory.complete' as const,kind:'conquest' as const,scope:w.playerFactionId,id:w.victory!.result!.eventId,at:w.time},reports:import('./model').FormalReport[]=[];handleVictoryEvent(w,e,new EventScheduler(w.events),reports);expect(w).toEqual(before);expect(reports).toEqual([]);expect(advanceFormal(w,end+HOUR).reports).toEqual([]);
 });
 it('B9-5 loss of any condition clears continuous credit immediately and a fresh crossing requires all 12 hours',()=>{

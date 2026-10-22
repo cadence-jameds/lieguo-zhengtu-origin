@@ -1,3 +1,4 @@
+import {advanceOfflineCooperative} from './offline';
 import {expect,it} from 'vitest';
 import {endgameWorld,act,fundRepair} from './endgameTestSupport';
 import {applyWonderDamage,repairQuote,repairWork,reconcileWonders} from './wonderCondition';
@@ -19,7 +20,7 @@ it('B9-5 nonzero tiny damage cannot round away all payment or duration',()=>{con
 it('B9-5 full ruins repair uses 6M actual shipments, 12h boundary, completion-once, Save/Load and no qualification rollback',async()=>{
  let w=start(hit(endgameWorld(),120000));const id=current(w).projectId;w=fundRepair(w,id);const p=current(w),r=p.repair!,end=r.activeSince!+p.durationMs-r.workMs;
  expect(p.requiredResources).toEqual({food:1000000,wood:1750000,stone:2250000,gold:1000000});expect(p.shipments).toHaveLength(200);expect(w.largeProjects[0].wonder!.durability!.current).toBe(0);
- w=advanceFormal(w,end-1).world;expect(w.largeProjects[0].wonder!.durability!.current).toBe(0);const loaded=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,end);expect(advanceFormal(loaded,end)).toEqual(result);w=result.world;
+ w=advanceFormal(w,end-1).world;expect(w.largeProjects[0].wonder!.durability!.current).toBe(0);const loaded=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,end);expect(advanceFormal(loaded,end)).toEqual(result);const offline=await advanceOfflineCooperative(loaded,0,1);expect(offline.world.largeProjects).toEqual(result.world.largeProjects);expect(offline.reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(1);w=result.world;
  expect(current(w).repair!.phase).toBe('completed');expect(w.largeProjects[0].wonder!.durability!.current).toBe(120000);expect(w.largeProjects[0].wonder!.integrity).toBe('intact');expect(w.factions[1].modernQualification).toBe('full');expect(result.reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(1);expect(advanceFormal(w,end+HOUR).reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(0);validateFormalWorld(w);
 });
 it('B9-5 real repeated bombardment freezes paid remaining work and does not repair subsequent damage for free',async()=>{

@@ -1,3 +1,4 @@
+import {unitMilitaryPower} from './militaryPower';
 import {hasTech} from './combatModifiers';
 import type {FormalWorld,FormalCommand} from './model';
 import type {FactionId,CityId} from './ids';
@@ -20,6 +21,7 @@ function coarse(units:Record<string,number>):Intelligence['coarse']{const v={per
 /** Invoked on real resolver output before player-only report persistence filtering. */
 export function rememberBattle(w:FormalWorld,p:BattleReportPayload){const attack=p.attackers.flatMap(g=>g.ownerFactionId?[g.ownerFactionId]:[]),defend=p.defenders.flatMap(g=>g.ownerFactionId?[g.ownerFactionId]:[]),participants=[...attack,...defend];
  for(const a of w.autonomy?.agents??[]){if(p.mission==='scout'&&p.intel&&!p.attackers.some(g=>g.ownerFactionId===a.factionId))continue;const own=participants.includes(a.factionId),legion=legionOf(w,a.factionId),empire=empireOf(w,a.factionId);const shared=participants.some(id=>!!legion&&legionOf(w,id)?.id===legion.id&&embassy(w,legion.leader)>=12||!!empire&&empireOf(w,id)?.id===empire.id&&embassy(w,empire.leader)>=15);if(!own&&!shared||!signal(w,a,p.resolutionId))continue;
+  const ownGroups=[...p.attackers,...p.defenders].filter(g=>g.ownerFactionId===a.factionId),f=w.factions.find(f=>f.id===a.factionId),power=(units:Record<string,number>)=>Object.entries(units).reduce((n,[id,count])=>n+count*unitMilitaryPower(id,f),0),before=ownGroups.reduce((n,g)=>n+power(g.before),0),after=ownGroups.reduce((n,g)=>n+power(g.after),0);if(p.mission!=='scout'&&before>0&&after/before<.5)a.lastMajorDefeatAt=w.time;
   const friendlyAttack=attack.some(id=>id===a.factionId||politicalScope(w,id)===politicalScope(w,a.factionId));const opponents=friendlyAttack?defend:attack;
   for(const id of opponents){const m=memoryFor(w,a.factionId,id);if(m){m.hatred=clamp(m.hatred+(p.mission==='scout'?.05:.15)*(1+a.traits.revenge));m.threat=clamp(m.threat+.15);m.trust=clamp(m.trust-.12,-1,1);m.at=w.time;}}
   for(const id of participants.filter(id=>!opponents.includes(id))){const m=memoryFor(w,a.factionId,id);if(m){m.trust=clamp(m.trust+.08,-1,1);m.at=w.time;}}
