@@ -1,3 +1,4 @@
+import {catchupDecision} from './modernCatchup';
 import {awarenessPool,modernUnitAuthorized} from './modernAwareness';
 import {isModernUnit,isScoutUnit,scoutCount,modernizationTarget} from './unitCatalog';
 import {unitModernizationCost} from './military';
@@ -42,6 +43,7 @@ export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{con
   }
  }
  const age=AGE_CATALOG[(f.age??0) as number];if(age&&!f.ageQueue&&c.population>=age.population&&buildingLevel(c,'center')>=age.center)offer({type:'age.start',cityId:c.id},{...age.cost},5,'research');
+ const catchup=catchupDecision(w,c);if(catchup)offer(catchup,catchup.type==='modern.project.ship'?catchup.resources:zeroResources(),4,'research');
  const awareness=awarenessPool(w,f.id),reverseLimit=awareness.value>=80?2:awareness.value>=60?1:0;
  if(f.modernQualification!=='full'&&(f.reverseEngineering?.length??0)<reverseLimit){const preferred=['modern.spearman','modern.light-cavalry','modern.knight',...awareness.encountered];const unitId=preferred.find(id=>awareness.encountered.includes(id)&&!f.reverseEngineering?.includes(id));if(unitId)offer({type:'modern.reverse',cityId:c.id,unitId},zeroResources(),4,'military');}
  if(!f.researchQueue)for(const t of Object.values(TECH_CATALOG)){if(f.techIds.includes(t.id)||researchRequirements(w,c,t).some(r=>!r.met)||t.scope!=='traditional'&&f.modernQualification!=='full'||['modern-common','modern-civilization'].includes(t.scope)&&!f.researchCooperation)continue;

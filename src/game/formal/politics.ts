@@ -35,7 +35,7 @@ function syncEmpires(w:FormalWorld){const p=w.politics!;for(const e of [...p.emp
 /** Shared zero-member/explicit dissolution cleanup. No refund, transfer or inherited entitlement. */
 function cleanScopes(w:FormalWorld){const p=w.politics!;
  const empires=new Set(p.empires.map(e=>e.id));
- w.largeProjects=w.largeProjects.filter(x=>['world-wonder','civilization-breakthrough'].includes(x.kind)||x.owner.kind!=='empire'||empires.has(x.owner.empireId));
+ w.largeProjects=w.largeProjects.filter(x=>(!!x.catchup||['world-wonder','civilization-breakthrough'].includes(x.kind))||x.owner.kind!=='empire'||empires.has(x.owner.empireId));
  for(const l of p.legions)if(l.empireId&&!empires.has(l.empireId))l.empireId=null;
 const scopes=new Set([...w.factions.map(f=>politicalScope(w,f.id))]);p.relations=p.relations.filter(r=>scopes.has(r.a)&&scopes.has(r.b)&&r.a!==r.b);p.requests=p.requests.filter(r=>w.cities.some(c=>c.ownerFactionId===r.from)&&w.cities.some(c=>c.ownerFactionId===r.to)&&(!r.legionId||p.legions.some(l=>l.id===r.legionId))&&
  (!r.sourceLegionId||p.legions.some(l=>l.id===r.sourceLegionId&&l.leader===r.from))&&
