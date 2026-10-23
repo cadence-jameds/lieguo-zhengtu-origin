@@ -28,7 +28,8 @@ const rid=(id:BattleState['id'],suffix:string)=>resolutionId(`${id.slice(7)}.${s
 function commitReceipt(w:FormalWorld,r:ResolutionReceipt){const state=w.combat??=initialCombat();if(state.receipts.some(x=>x.resolutionId===r.resolutionId))return false;state.receipts.push(r);return true;}
 function playerScope(w:FormalWorld,owners:readonly (FactionId|null)[]){const player=w.factions.find(f=>f.id===w.playerFactionId)!;return owners.some(id=>id===player.id||id!==null&&!!legionOf(w,player.id)&&legionOf(w,id)?.id===legionOf(w,player.id)?.id||id!==null&&player.empireId!==null&&w.factions.find(f=>f.id===id)?.empireId===player.empireId);}
 function battleReport(w:FormalWorld,p:BattleReportPayload):FormalReport[]{
- rememberBattle(w,p);
+ // An obsolete wonder target returns without combat or scouting; no garrison was observed.
+ if(p.mission!=='wonder-destruction'||p.outcome!=='no-target')rememberBattle(w,p);
  if(p.mission==='scout'&&p.intel&&!p.attackers.some(a=>a.ownerFactionId===w.playerFactionId))return[];
   if(!playerScope(w,[...p.attackers,...p.defenders].map(x=>x.ownerFactionId)))return[];const sequence=w.sequences.report++;
  const labels:Record<BattleReportPayload['outcome'],string>={'wonder-destroyed':'奇觀破壞成功','wonder-held':'奇觀破壞失敗','raid-return':'掠奪結束',conquered:'征服成功',held:'征服未成','mutual-destruction':'雙方主戰兵全滅','wild-cleared':'野外據點擊破','wild-held':'野外據點守住','no-target':'目標已改變','scout-success':'偵察情報送達','scout-failed':'偵察失敗'};

@@ -1,6 +1,7 @@
 import 'fake-indexeddb/auto';
 import {expect,it} from 'vitest';
-import {endgameWorld,act} from './endgameTestSupport';
+import {endgameWorld,nativeEndgameWorld,act} from './endgameTestSupport';
+import {enableAutonomy} from './autonomy';
 import {advanceFormal,submitFormalOrder} from './reducer';
 import {applyWonderDamage} from './wonderCondition';
 import {canDestroyWonder} from './wonder';
@@ -20,6 +21,11 @@ function hit(w:FormalWorld,damage:number){const s=new EventScheduler(w.events);a
 function dispatch(w:FormalWorld,count:number,priority=false){return act(w,{type:'army.dispatch',cityId:w.cities[0].id,mission:priority?'conquest':'wonder-destruction',target:{kind:'city',cityId:w.cities[2].id},units:priority?{catapult:count,militia:100}:{catapult:count},...(priority?{wonderPriority:true}:{})});}
 function outbound(w:FormalWorld){return w.armies.filter(isMissionArmy).find(a=>a.status==='outbound')!;}
 function constructing(){let w=endgameWorld();w.largeProjects=w.largeProjects.filter(p=>p.wonder);const p=w.largeProjects[0],b=p.wonder!,t=p.shipments[0];delete b.durability;delete b.integrity;delete b.clock;p.createdAt=w.time;b.phase='building';b.startedAt=w.time;b.completedAt=null;t.dispatchedAt=w.time;t.authorizationSnapshot.checkedAt=w.time;if(t.phase!=='arrived')throw Error('History missing');t.arrivedAt=w.time;w.events.push({type:'wonder.complete',projectId:p.projectId,id:b.completionEventId!,at:w.time+p.durationMs});return advanceFormal(w,w.time+9.6*HOUR).world;}
+
+it('B9 Final Gate a real AI arrival at pre-destroyed ruins grants no unearned garrison intelligence',()=>{
+ let w=nativeEndgameWorld();enableAutonomy(w);const c=w.cities[31],id=c.ownerFactionId,target=w.cities[0];c.military!.units={catapult:1};target.military!.units={militia:25};w=act(w,{type:'army.dispatch',cityId:c.id,mission:'wonder-destruction',target:{kind:'city',cityId:target.id},units:{catapult:1}},id);const at=outbound(w).arrivalAt;
+ for(const a of w.autonomy!.agents){a.nextAt=at+HOUR;const e=w.events.find(e=>e.id===a.eventId)!;e.at=a.nextAt;}hit(w,120000);const intel=structuredClone(w.autonomy!.agents.find(a=>a.factionId===id)!.intel),result=advanceFormal(w,at);expect(result.world.combat!.receipts.find(r=>r.kind==='final')?.outcome).toBe('no-target');expect(result.world.autonomy!.agents.find(a=>a.factionId===id)!.intel).toEqual(intel);expect(result.world.cities[0].military!.units).toEqual({militia:25});expect(result.world.combat!.statistics.wonderDestructions??0).toBe(0);
+});
 
 it.each(['intact','damaged','construction'] as const)('B9 Final Gate %s positive HP accepts a real destruction order',state=>{
  let w=state==='construction'?constructing():endgameWorld();if(state==='damaged')w=hit(w,60000);w.cities[0].military!.units={catapult:1};expect(canDestroyWonder(w,w.largeProjects[0])).toBe(true);w=dispatch(w,1);const result=advanceFormal(w,outbound(w).arrivalAt);expect(result.world.largeProjects[0].wonder!.durability!.ledger.at(-1)).toMatchObject({kind:'damage',amount:45});expect(result.world.combat!.battles[0].siegeRound).toBe(1);
