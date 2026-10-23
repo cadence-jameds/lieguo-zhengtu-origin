@@ -18,11 +18,11 @@
 
 - Typecheck：通過。
 - 相關 UI／戰報測試：15 通過、0 失敗（手機導覽 12、既有戰報測試 3）。
-- 完整隔離回歸：首次 1,857 通過、1 失敗、1 略過；失敗為原有 `formal/runtime.test.ts` 開發者速度／AI catch-up 案例超過 30 秒時限（36.97 秒）。未修改的同一案例單獨重跑 17.00 秒通過。停止並行瀏覽器／建置後的整套重跑結果於交付前補上。
+- 完整隔離回歸最終輪：**1,858 通過、0 失敗、1 略過（通過）**。初次為 1,857 通過、1 項既有開發者速度／AI catch-up 測試超過 30 秒時限（36.97 秒）、1 略過；同一案例以原時限單獨重跑 17.00 秒通過，之後停止並行瀏覽器／Build 再跑完整套件。未修改 AI、核心程式或測試時限。
 - 正式 Build：通過。另檢查 project Pages 路徑與 release 產物一致性；只建置，不部署。
 - Chromium 正式建置驗收：10 組通過、0 失敗、0 page errors，含八組手機尺寸、桌機及 reduced-motion；另在 390px 情境內實際旋轉至 932px、320px 並返回 390px，驗證目前項目仍完整可見。
 
-[完整測試紀錄](tests.json) · [瀏覽器結果與實測幾何](browser.json) · [實際修改檔案清單](FILES.txt)
+[完整測試紀錄](tests.json) · [初次回歸完整紀錄](https://github.com/cadence-jameds/lieguo-zhengtu-origin/blob/f75c119446b3df26feb00927ab80905ad1fdb77b/docs/validation/mobile-navigation-customization/tests.json) · [瀏覽器結果與實測幾何](browser.json) · [實際修改檔案清單](FILES.txt)
 
 所有手機情境皆透過實際 GameApp、Worker 與 IndexedDB 匯入合成戰役，使用 CDP touch events 滑動；驗證固定更多位置、首尾點擊、箭頭邊界、原有更多內容、移除與重新加入、排序、五項配置、重整及重新讀取戰役。戰報頁進入後未讀仍為 1，展開既有報告後才依原規則標記已讀。
 
@@ -91,6 +91,7 @@ node scripts/check-release-build.mjs
 ## 已知問題與驗收邊界
 
 - 目前手機導航驗收未發現尚未修復的功能問題。瀏覽器模擬通過不代表手機實機驗收通過；iOS Safari、Android Chrome／安裝 PWA、瀏海／安全區、實際觸控與旋轉、系統減少動態效果仍待玩家實測。
+- 全套的 1 項略過為既有私人晚期戰役六小時驗證，環境未提供 `REALM_REGRESSION_SAVE`；沒有新增略過或修改此案例。初次回歸的 AI 速度案例超時紀錄保留，詳細結果見 JSON。
 - 任務待領獎勵、軍團待處理與外交待處理提醒尚未正式接入，只有導覽介面；本次沒有實作或承諾完成對應系統。
 - repository 的歷史驗收狀態保留：B5 E1 為 HOLD，Astra Gate 不是 PASS，實機測試待完成。本次 UI 驗收不改寫這些狀態。
 - 待 GPT-6 中控審查與玩家實機驗收；本次交付 Draft PR 後停止，不自行合併或部署。
