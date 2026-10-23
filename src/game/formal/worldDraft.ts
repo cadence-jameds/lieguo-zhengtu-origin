@@ -1,3 +1,4 @@
+import {inheritMilitaryPower} from './militaryPower';
 import type {CommandReceipt,FormalWorld} from './model';
 
 /** Receipt fields are primitives. Copy the records without re-copying long,
@@ -15,6 +16,6 @@ export function cloneWorldDraft(current:FormalWorld):FormalWorld {
   receipts.push(copy);
  }
  const draft:FormalWorld=structuredClone({...current,commandReceipts:[]});
- draft.commandReceipts=receipts;
+ draft.commandReceipts=receipts;inheritMilitaryPower(current,draft);
  return draft;
 }

@@ -47,16 +47,20 @@ export type Shipment = {commandId?:CommandId;shipmentId:ShipmentId;projectId:Pro
  * breakthrough and conquest work. Those systems do not run in B9-1. */
 export type BreakthroughConstruction={creationCommandId:CommandId;wonderProjectId:ProjectId;recaptureRequired?:true;phase:'funding'|'building'|'paused'|'completed';workPeriods:{startedAt:number;endedAt:number}[];discardedWorkMs:number;activeSince:number|null;completionEventId:EventId|null;completedAt:number|null;qualifiedFactionIds:FactionId[]};
 export type BreakthroughCommand={type:'breakthrough.start';cityId:CityId}|{type:'breakthrough.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
-export type WonderConstruction={integrity?:'intact'|'damaged'|'ruins';creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
-export type WonderCommand={type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
+export type WonderDurabilityEntry={key:string;eventId:EventId;at:number;kind:'damage'|'repair';amount:number;maximum:number;before:number;after:number};
+export type WonderDurability={maximum:number;current:number;ledger:WonderDurabilityEntry[]};
+export type WonderConstruction={ruinsRequireRestoration?:true;clock?:{workMs:number;activeSince:number|null};recaptureRequired?:true;durability?:WonderDurability;integrity?:'intact'|'damaged'|'ruins';creationCommandId:CommandId;hostOwnerFactionId:FactionId;phase:'funding'|'building'|'completed';startedAt:number|null;completionEventId:EventId|null;completedAt:number|null};
+export type WonderCommand=import('./wonderCondition').RepairCommand|{type:'wonder.start';cityId:CityId;hostCityId:CityId}|{type:'wonder.ship';cityId:CityId;projectId:ProjectId;resources:Resources};
 export type LargeProject = {
-  projectId:ProjectId;kind:'world-wonder'|'civilization-breakthrough'|'emergency-modernization'|'technology-transfer';wonder?:WonderConstruction;breakthrough?:BreakthroughConstruction;catchup?:import('./modernCatchup').CatchupConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
+  projectId:ProjectId;kind:'world-wonder'|'wonder-repair'|'civilization-breakthrough'|'emergency-modernization'|'technology-transfer';repair?:import('./wonderCondition').WonderRepair;wonder?:WonderConstruction;breakthrough?:BreakthroughConstruction;catchup?:import('./modernCatchup').CatchupConstruction;owner:LargeProjectOwner;legalContributors:ContributorScope;
   paymentMode:'physical-shipment';initiatingCityId:CityId;requiredResources:Resources;poolResources:Resources;
   shipments:Shipment[];createdAt:number;durationMs:number;
 };
 export type FormalEvent = {id:EventId;at:number} & (
   | {type:'research.complete';projectId:ResearchProjectId}
   | {type:'wonder.complete';projectId:ProjectId}
+  | {type:'wonder.repair.complete';projectId:ProjectId}
+  | {type:'victory.complete';scope:string;kind:import('./victory').VictoryKind}
   | {type:'breakthrough.complete';projectId:ProjectId}
   | {type:'modern.project.complete';projectId:ProjectId}
   | {type:'economy.settle';cityId:CityId}
@@ -82,7 +86,7 @@ export type FormalEvent = {id:EventId;at:number} & (
 export type CompletionReceipt = {eventId:EventId;projectId:ResearchProjectId;at:number};
 export type CommandReceipt = {commandId:CommandId;issuerId:FactionId;fingerprint:string;committedRevision:number;disposition:'applied'|'rolled-back'};
 export type FormalWorld = {
-  kind:'formal';modernAwareness?:import('./modernAwareness').ModernAwareness;governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|100};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|4|8|12;clockMode?:'foreground'|'offline';
+  kind:'formal';victory?:import('./victory').VictoryState;modernAwareness?:import('./modernAwareness').ModernAwareness;governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|100};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|4|8|12;clockMode?:'foreground'|'offline';
   dimensions:{width:number;height:number};playerFactionId:FactionId;revision:number;
   sequences:{event:number;report:number;project:number};
   factions:FormalFaction[];cities:FormalCity[];armies:FormalArmy[];events:FormalEvent[];

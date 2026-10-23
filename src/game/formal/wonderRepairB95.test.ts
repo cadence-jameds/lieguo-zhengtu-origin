@@ -1,0 +1,57 @@
+import {advanceOfflineCooperative} from './offline';
+import {expect,it} from 'vitest';
+import {endgameWorld,act,fundRepair} from './endgameTestSupport';
+import {applyWonderDamage,repairQuote,repairWork,reconcileWonders} from './wonderCondition';
+import {EventScheduler} from './scheduler';
+import {eventId,resolutionId} from './ids';
+import {advanceFormal,submitFormalOrder} from './reducer';
+import {encodeSave,decodeSave} from './saveCodec';
+import {changeCityOwner} from './economy';
+import {order} from './developmentTestSupport';
+import {validateFormalWorld} from './schema';
+import {isMissionArmy} from './combatModel';
+import {HOUR} from './time';
+import type {FormalWorld} from './model';
+function hit(w:FormalWorld,damage:number,key='repair-damage'){const s=new EventScheduler(w.events);applyWonderDamage(w,w.largeProjects[0].projectId,{type:'fixture.marker',id:eventId(key),at:w.time,marker:key},resolutionId(key),damage,s);w.events=s.snapshot();return w;}
+function start(w:FormalWorld){return act(w,{type:'wonder.repair.start',cityId:w.cities[2].id,projectId:w.largeProjects[0].projectId},w.factions[1].id);}
+const current=(w:FormalWorld)=>w.largeProjects.findLast(p=>p.repair)!;
+it.each([[120000,6000000,12],[60000,3000000,6],[48000,2400000,4.8],[45,2250,.0045]])('B9-5 damage %s quotes proportional real repair cost/time',(damage,cost,hours)=>{const q=repairQuote(damage);expect(Object.values(q.resources).reduce((a,b)=>a+b,0)).toBe(cost);expect(q.durationMs).toBe(Math.ceil(hours*HOUR));});
+it('B9-5 nonzero tiny damage cannot round away all payment or duration',()=>{const q=repairQuote(.000001);expect(Object.values(q.resources).reduce((a,b)=>a+b,0)).toBeGreaterThan(0);expect(q.durationMs).toBeGreaterThan(0);});
+it('B9-5 full ruins repair uses 6M actual shipments, 12h boundary, completion-once, Save/Load and no qualification rollback',async()=>{
+ let w=start(hit(endgameWorld(),120000));const id=current(w).projectId;w=fundRepair(w,id);const p=current(w),r=p.repair!,end=r.activeSince!+p.durationMs-r.workMs;
+ expect(p.requiredResources).toEqual({food:1000000,wood:1750000,stone:2250000,gold:1000000});expect(p.shipments).toHaveLength(200);expect(w.largeProjects[0].wonder!.durability!.current).toBe(0);
+ w=advanceFormal(w,end-1).world;expect(w.largeProjects[0].wonder!.durability!.current).toBe(0);const loaded=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,end);expect(advanceFormal(loaded,end)).toEqual(result);const offline=await advanceOfflineCooperative(loaded,0,1);expect(offline.world.largeProjects).toEqual(result.world.largeProjects);expect(offline.reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(1);w=result.world;
+ expect(current(w).repair!.phase).toBe('completed');expect(w.largeProjects[0].wonder!.durability!.current).toBe(120000);expect(w.largeProjects[0].wonder!.integrity).toBe('intact');expect(w.factions[1].modernQualification).toBe('full');expect(result.reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(1);expect(advanceFormal(w,end+HOUR).reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(0);validateFormalWorld(w);
+});
+it('B9-5 real repeated bombardment freezes paid remaining work and does not repair subsequent damage for free',async()=>{
+ let w=start(hit(endgameWorld(),60000));w=fundRepair(w,current(w).projectId);const initialEnd=current(w).repair!.activeSince!+current(w).durationMs;w=advanceFormal(w,w.time+2*HOUR).world;
+ w.cities[0].military!.units={catapult:1};w=act(w,{type:'army.dispatch',cityId:w.cities[0].id,mission:'wonder-destruction',target:{kind:'city',cityId:w.cities[2].id},units:{catapult:1}});w=advanceFormal(w,w.armies.filter(isMissionArmy)[0].arrivalAt).world;
+ expect(current(w).repair!.phase).toBe('paused');const work=repairWork(w,current(w));expect(w.events.some(e=>e.type==='wonder.repair.complete')).toBe(false);
+ w=(await decodeSave(await encodeSave(w))).world;while(w.combat!.battles.length)w=advanceFormal(w,w.combat!.battles[0].nextRoundAt).world;
+ expect(repairWork(w,current(w))).toBe(work);const p=current(w),end=p.repair!.activeSince!+p.durationMs-p.repair!.workMs;expect(end).toBeGreaterThan(initialEnd);const completion=advanceFormal(w,end);w=completion.world;
+ expect(w.largeProjects[0].wonder!.durability!.current).toBe(119460);expect(w.largeProjects[0].wonder!.integrity).toBe('damaged');expect(current(w).repair!.restored).toBe(60000);expect(current(w).requiredResources).toEqual({food:500000,wood:875000,stone:1125000,gold:500000});expect(completion.reports.filter(r=>r.title==='世界奇觀修復完成')).toHaveLength(1);
+ w=start(w);expect(current(w).repair!.missingSnapshot).toBe(540);validateFormalWorld(w);
+});
+it('B9-5 a construction ruin freezes 40% progress, pays 2.4M/4.8h and resumes only saved 14.4h',async()=>{
+ let w=endgameWorld();w.largeProjects=w.largeProjects.filter(p=>p.wonder);const p=w.largeProjects[0],b=p.wonder!,t=p.shipments[0];delete b.durability;delete b.integrity;delete b.clock;p.createdAt=w.time;b.phase='building';b.startedAt=w.time;b.completedAt=null;t.dispatchedAt=w.time;t.authorizationSnapshot.checkedAt=w.time;if(t.phase!=='arrived')throw Error('History missing');t.arrivedAt=w.time;w.events.push({type:'wonder.complete',projectId:p.projectId,id:b.completionEventId!,at:w.time+p.durationMs});
+ w=advanceFormal(w,w.time+9.6*HOUR).world;expect(w.largeProjects[0].wonder!.durability!.maximum).toBe(48000);hit(w,48000);const frozen=w.largeProjects[0].wonder!.clock!.workMs;w=advanceFormal(w,w.time+10*HOUR).world;expect(w.largeProjects[0].wonder!.durability!.maximum).toBe(48000);expect(w.largeProjects[0].wonder!.durability!.current).toBe(0);expect(w.largeProjects[0].wonder!.clock!.workMs).toBe(frozen);
+ w=start(w);expect(current(w).durationMs).toBe(4.8*HOUR);w=fundRepair(w,current(w).projectId);let r=current(w);w=advanceFormal(w,r.repair!.activeSince!+r.durationMs).world;expect(w.largeProjects[0].wonder!.durability!.current).toBe(48000);expect(w.largeProjects[0].wonder!.phase).toBe('building');const event=w.events.find(e=>e.type==='wonder.complete')!;expect(event.at-w.time).toBe(14.4*HOUR);
+ const loaded=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,event.at);expect(advanceFormal(loaded,event.at)).toEqual(result);w=result.world;expect(w.largeProjects[0].wonder!.phase).toBe('completed');expect(w.largeProjects[0].wonder!.durability!.current).toBe(120000);validateFormalWorld(w);
+});
+it('B9-5 partial construction keeps its existing damage gap while new construction HP grows',()=>{
+ let w=endgameWorld();w.largeProjects=w.largeProjects.filter(p=>p.wonder);const p=w.largeProjects[0],b=p.wonder!;delete b.durability;delete b.integrity;b.phase='building';b.completedAt=null;b.startedAt=w.time-6*HOUR;p.createdAt=b.startedAt;p.shipments[0].dispatchedAt=b.startedAt;p.shipments[0].authorizationSnapshot.checkedAt=b.startedAt;if(p.shipments[0].phase==='arrived')p.shipments[0].arrivedAt=b.startedAt;b.clock={workMs:6*HOUR,activeSince:w.time};b.completionEventId=eventId('b95-build');w.events.push({type:'wonder.complete',id:b.completionEventId,projectId:p.projectId,at:w.time+18*HOUR});const s=new EventScheduler(w.events);reconcileWonders(w,s);w.events=s.snapshot();hit(w,1000);w=advanceFormal(w,w.time+6*HOUR).world;expect(w.largeProjects[0].wonder!.durability!.maximum).toBe(60000);expect(w.largeProjects[0].wonder!.durability!.current).toBe(59000);
+});
+it('B9-5 repair cargo returns after loss; diplomatic joining cannot resume; genuine conquest and paid repair restore the original project',async()=>{
+ let w=endgameWorld(true);changeCityOwner(w,w.cities[1],w.factions[1].id,'receive');w=start(hit(w,45));const p=current(w),cargo={...p.requiredResources};w=act(w,{type:'wonder.repair.ship',cityId:w.cities[1].id,projectId:p.projectId,resources:cargo},w.factions[1].id);const shipment=w.logistics![0];changeCityOwner(w,w.cities[2],w.playerFactionId,'conquest');
+ w=advanceFormal(w,shipment.arrivalAt).world;expect(current(w).poolResources).toEqual({food:0,wood:0,stone:0,gold:0});expect(w.logistics![0].returnCargo).toEqual(cargo);expect(w.largeProjects[0].wonder!.recaptureRequired).toBe(true);
+ w=act(w,{type:'politics',cityId:w.cities[1].id,action:'legion-invite',target:w.playerFactionId},w.factions[1].id);w=act(w,{type:'politics',cityId:w.cities[0].id,action:'request-accept',requestId:w.politics!.requests[0].id});w=(await decodeSave(await encodeSave(w))).world;expect(w.largeProjects[0].wonder!.recaptureRequired).toBe(true);expect(current(w).repair!.phase).toBe('paused');
+ const rejected=submitFormalOrder(w,order(w,{type:'wonder.repair.ship',cityId:w.cities[0].id,projectId:current(w).projectId,resources:cargo}));expect(rejected.ack?.status).toBe('rejected');
+ w=act(w,{type:'politics',cityId:w.cities[1].id,action:'legion-kick',target:w.playerFactionId},w.factions[1].id);w.cities[1].military!.units={militia:5000};w=act(w,{type:'army.dispatch',cityId:w.cities[1].id,mission:'conquest',target:{kind:'city',cityId:w.cities[2].id},units:{militia:5000}},w.factions[1].id);w=advanceFormal(w,w.armies.filter(isMissionArmy).find(a=>a.status==='outbound')!.arrivalAt).world;
+ expect(w.cities[2].ownerFactionId).toBe(w.factions[1].id);expect(w.largeProjects[0].wonder!.recaptureRequired).toBeUndefined();w=fundRepair(w,current(w).projectId);const r=current(w);w=advanceFormal(w,r.repair!.activeSince!+r.durationMs-r.repair!.workMs).world;expect(w.largeProjects[0].wonder!.integrity).toBe('intact');expect(w.largeProjects[1].breakthrough!.phase).toBe('building');validateFormalWorld(w);
+});
+it('B9-5 a partial repair interrupted into construction ruins must restore the frozen maximum before construction resumes',async()=>{
+ let w=endgameWorld();w.largeProjects=w.largeProjects.filter(p=>p.wonder);const p=w.largeProjects[0],b=p.wonder!,t=p.shipments[0];delete b.durability;delete b.integrity;delete b.clock;p.createdAt=w.time;b.phase='building';b.startedAt=w.time;b.completedAt=null;t.dispatchedAt=w.time;t.authorizationSnapshot.checkedAt=w.time;if(t.phase!=='arrived')throw Error('History missing');t.arrivedAt=w.time;w.events.push({type:'wonder.complete',projectId:p.projectId,id:b.completionEventId!,at:w.time+p.durationMs});
+ w=advanceFormal(w,w.time+9.6*HOUR).world;w=start(hit(w,18000));w=fundRepair(w,current(w).projectId);hit(w,120000,'interrupted-into-ruins');const frozen=w.largeProjects[0].wonder!.clock!.workMs,maximum=w.largeProjects[0].wonder!.durability!.maximum,repair=current(w);w=advanceFormal(w,repair.repair!.activeSince!+repair.durationMs-repair.repair!.workMs).world;
+ expect(w.largeProjects[0].wonder!.durability!.current).toBe(18000);expect(w.largeProjects[0].wonder!.ruinsRequireRestoration).toBe(true);expect(w.largeProjects[0].wonder!.clock!.activeSince).toBeNull();expect(w.events.some(e=>e.type==='wonder.complete')).toBe(false);w=(await decodeSave(await encodeSave(w))).world;w=advanceFormal(w,w.time+HOUR).world;expect(w.largeProjects[0].wonder!.clock!.workMs).toBe(frozen);expect(w.largeProjects[0].wonder!.durability!.maximum).toBe(maximum);
+ w=start(w);w=fundRepair(w,current(w).projectId);const second=current(w);w=advanceFormal(w,second.repair!.activeSince!+second.durationMs-second.repair!.workMs).world;expect(w.largeProjects[0].wonder!.durability!.current).toBe(maximum);expect(w.largeProjects[0].wonder!.ruinsRequireRestoration).toBeUndefined();expect(w.events.find(e=>e.type==='wonder.complete')!.at-w.time).toBe(w.largeProjects[0].durationMs-frozen);validateFormalWorld(w);
+});

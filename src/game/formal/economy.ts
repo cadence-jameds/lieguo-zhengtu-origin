@@ -1,3 +1,6 @@
+import {invalidateMilitaryPower} from './militaryPower';
+import {reconcileVictory} from './victory';
+import {reconcileWonders} from './wonderCondition';
 import {reconcileBreakthroughs} from './breakthrough';
 import {QUEUE_CAPACITY} from './queueCapacity';
 import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen,clearCapturedNoncombatants} from './extinction';
@@ -69,8 +72,9 @@ export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).
 export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}
 /** B5/B6 interface only: no combat or conquest command is implemented here. */
 export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive',scheduler?:EventScheduler){
- requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
- if(w.largeProjects.some(p=>p.kind==='civilization-breakthrough'&&p.initiatingCityId===c.id)){const s=scheduler??new EventScheduler(w.events);reconcileBreakthroughs(w,s,{city:c,previousOwner:old,reason});if(!scheduler)w.events=s.snapshot();}
+ requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);invalidateMilitaryPower(w);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
+ if(w.largeProjects.some(p=>(p.kind==='civilization-breakthrough'||p.kind==='world-wonder')&&p.initiatingCityId===c.id)){const s=scheduler??new EventScheduler(w.events);reconcileWonders(w,s,{city:c,previousOwner:old,reason});reconcileBreakthroughs(w,s,{city:c,previousOwner:old,reason});if(!scheduler)w.events=s.snapshot();}
+ {const s=scheduler??new EventScheduler(w.events);reconcileVictory(w,s);if(!scheduler)w.events=s.snapshot();}
  if(old!==owner&&(reason==='conquest'||w.extinction?.craftsmen.length||c.economy?.construction.some(j=>j.castleCivilizationId))){const s=scheduler??new EventScheduler(w.events);reconcileCityCraftsmen(w,c,s);if(reason==='conquest')clearCapturedNoncombatants(w,c,s);if(!scheduler)w.events=s.snapshot();}
 }
 export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}

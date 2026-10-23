@@ -1,11 +1,12 @@
-import {isScoutUnit} from './unitCatalog';
+import {publicWonderThreats,modernPressure,ownCombatPower,knownCombatPower,conquestAxes,endgamePriority,endgameDispatchReason,mobilizationRatio} from './endgameAI';
+import {isScoutUnit,isModernUnit} from './unitCatalog';
 import type {FormalCity,FormalCommand,FormalWorld} from './model';
 import type {CityId,FactionId} from './ids';
 import type {Agent} from './autonomyModel';
 import {aiRandom} from './autonomyModel';
-import {publicSituation,HOUR} from './aiKnowledge';
-import {canCoordinate} from './politics';
-import {effectiveUnit} from './combatModifiers';
+import {publicSituation,HOUR,intelFor} from './aiKnowledge';
+import {canCoordinate,empireOf,embassy} from './politics';
+import {effectiveUnit,baseUnit} from './combatModifiers';
 import {spatial} from './spatial';
 import {storageCapacity} from './catalogB3';
 
@@ -49,19 +50,26 @@ export function parallelFits(c:FormalCity,first:Record<string,number>,second:Rec
 }
 /** Common main city choice, unchanged; never consults another strategy's scoring. */
 export function originalCityAttack(w:FormalWorld,c:FormalCity,a:Agent):{hasCity:boolean;commands:FormalCommand[]}{
- const ownUnits=c.military?.units??{};
- const targets=publicSituation(w,a,c).filter(t=>t.relation!=='friendly').sort((x,y)=>(x.relation==='war'?0:1)-(y.relation==='war'?0:1)||Math.hypot(x.x-c.x,x.y-c.y)-Math.hypot(y.x-c.x,y.y-c.y));
- if(!targets.length)return {hasCity:false,commands:[]};
- const cityCommand=():FormalCommand[]=>{
- const target=targets[Math.floor(aiRandom(w.seed,a.factionId,a.decisions+312)*Math.min(targets.length,4))],info=target.intel;
- if(!info?.confidence){const scout=Object.keys(ownUnits).find(id=>isScoutUnit(id)&&ownUnits[id]>0);if(scout)return[{type:'army.dispatch',cityId:c.id,mission:'scout',target:{kind:'city',cityId:target.id},units:{[scout]:Math.max(1,Math.min(15,Math.floor(ownUnits[scout]*.8)))}}];return[];}
- const units=portion(c,.2+a.traits.risk*.2),force=Object.values(units).reduce((n,v)=>n+v,0),enemy=Object.entries(info.units??{}).reduce((n,[id,v])=>n+(effectiveUnit(id)?v:0),0);if(force<10||force<enemy*(1.5-.5*a.traits.risk)/info.confidence||c.stock.food<200)return[];
- const modern=w.factions.find(f=>f.id===a.factionId)!.modernQualification==='full';if(!modern&&target.modern&&force<enemy*.75)return[];
- const conquest=aiRandom(w.seed,a.factionId,a.decisions+313)<(.03+.12*a.traits.expansion)*(modern&&!target.modern?1.75:1);if(conquest){for(const id of ['ram','catapult'])if((ownUnits[id]??0)>0)units[id]=Math.max(1,Math.floor(ownUnits[id]*.4));if(canCoordinate(w,a.factionId,a.factionId,14)&&aiRandom(w.seed,a.factionId,a.decisions+314)<.4)return[{type:'joint.create',cityId:c.id,targetCityId:target.id,units,arrivalAt:w.time+2*HOUR}];}
- return[{type:'army.dispatch',cityId:c.id,mission:conquest?'conquest':'raid',target:{kind:'city',cityId:target.id},units}];
-
- };
- return {hasCity:true,commands:cityCommand()};
+ const ownUnits=c.military?.units??{},targets=publicSituation(w,a,c).filter(t=>t.relation!=='friendly'),threats=publicWonderThreats(w,c,a);
+ for(const t of threats)if(t.relation!=='friendly'&&t.relation!=='own'&&t.threat>=40&&t.stage!=='modernized'&&!targets.some(n=>n.id===t.cityId)){const city=spatial(w).cities.get(t.cityId)!;targets.push({id:city.id,ownerFactionId:city.ownerFactionId,x:city.x,y:city.y,population:city.population,modern:w.factions.find(f=>f.id===city.ownerFactionId)!.modernQualification==='full',relation:t.relation,intel:intelFor(a,city.id,w.time),memory:a.memory.find(m=>m.factionId===city.ownerFactionId)});}
+ targets.sort((x,y)=>(x.relation==='war'?0:1)-(y.relation==='war'?0:1)||Math.hypot(x.x-c.x,x.y-c.y)-Math.hypot(y.x-c.x,y.y-c.y));
+ if(!targets.length)return{hasCity:false,commands:[]};
+ const priority=threats.find(t=>t.threat>=75&&t.stage!=='modernized'&&t.relation!=='friendly'&&t.relation!=='own')??threats.find(t=>t.threat>=40&&t.stage!=='modernized'&&t.relation!=='friendly'&&t.relation!=='own'&&!a.intel.some(i=>i.cityId===t.cityId&&w.time-i.at<=12*HOUR));
+ const target=priority?targets.find(t=>t.id===priority.cityId)??targets[0]:targets[Math.floor(aiRandom(w.seed,a.factionId,a.decisions+312)*Math.min(targets.length,4))],info=target.intel;
+ if(!info?.confidence||info.ownerFactionId!==target.ownerFactionId||!info.units){const scout=Object.keys(ownUnits).find(id=>isScoutUnit(id)&&ownUnits[id]>0);return{hasCity:true,commands:scout?[{type:'army.dispatch',cityId:c.id,mission:'scout',target:{kind:'city',cityId:target.id},units:{[scout]:Math.max(1,Math.min(15,Math.floor(ownUnits[scout]*.8)))}}]:[]};}
+ const threat=threats.find(t=>t.cityId===target.id&&t.threat>=75&&t.stage!=='modernized'),pressure=modernPressure(w,c,a,target),desired=threat?threat.threat>=90?.5:.3:pressure?.55:.2+a.traits.risk*.2,ratio=threat||pressure?mobilizationRatio(w,c,desired,threat&&threat.threat<90?.35:.6):desired,units=portion(c,ratio),force=combatCount(units),enemyCount=combatCount(info.units),own=ownCombatPower(w,a.factionId,units),enemy=knownCombatPower(info.units)/info.confidence;
+ if(force<10||c.stock.food<200||(!pressure&&!threat&&force<enemyCount*(1.5-.5*a.traits.risk)/info.confidence))return{hasCity:true,commands:[]};
+ const factor=threat?threat.threat>=90?1.5:1.25:pressure?target.population>=10000?1.25:1.85:1.5-.5*a.traits.risk;
+ if((pressure||threat)&&own<enemy*factor||w.factions.find(f=>f.id===a.factionId)?.modernQualification!=='full'&&Object.keys(info.units).some(isModernUnit)&&own<enemy*.75)return{hasCity:true,commands:[]};
+ const axes=conquestAxes(w,a.factionId),conquest=pressure&&axes.count<axes.limit&&aiRandom(w.seed,a.factionId,a.decisions+313)<(.03+.12*a.traits.expansion)*1.75||!pressure&&!threat&&aiRandom(w.seed,a.factionId,a.decisions+313)<(.03+.12*a.traits.expansion);
+ let mission:'raid'|'conquest'|'wonder-destruction'=threat?target.population>=10000&&axes.count<axes.limit?'conquest':'wonder-destruction':conquest?'conquest':'raid';
+ if(pressure&&axes.count>=axes.limit)mission='raid';
+ if(threat||mission==='conquest')for(const [id,n] of Object.entries(ownUnits))if(['ram','catapult'].includes(baseUnit(id)))units[id]=Math.max(1,Math.floor(n*(threat&&threat.threat>=90?.7:.4)));
+ if(threat&&!Object.keys(units).some(id=>baseUnit(id)==='catapult'&&units[id]>0))return{hasCity:true,commands:[]};
+ const empire=empireOf(w,a.factionId),joint=!!empire&&embassy(w,empire.leader)>=15||canCoordinate(w,a.factionId,a.factionId,14);
+ if(threat&&joint)return{hasCity:true,commands:[{type:'joint.create',cityId:c.id,targetCityId:target.id,units,arrivalAt:w.time+2*HOUR,mission:mission==='wonder-destruction'?'wonder-destruction':'conquest',...(mission==='conquest'?{wonderPriority:true}:{})}]};
+ if(mission==='conquest'&&!pressure&&joint&&aiRandom(w.seed,a.factionId,a.decisions+314)<.4)return{hasCity:true,commands:[{type:'joint.create',cityId:c.id,targetCityId:target.id,units,arrivalAt:w.time+2*HOUR}]};
+ return{hasCity:true,commands:[{type:'army.dispatch',cityId:c.id,mission,target:{kind:'city',cityId:target.id},units,...(threat&&mission==='conquest'?{wonderPriority:true}:{})}]};
 }
 /** A48 preserves main city priority. Other modes retain the research's original
  * nearest-within-24 fallback before comparing their enlarged candidate set. */
@@ -104,6 +112,7 @@ function chooseV2(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],radius
    .07+.16*a.traits.raiding+.12*a.traits.economy+.20*shortage-.12*a.traits.military-.10*a.traits.expansion-(war?.06:0);
  if(kind==='scout')chance=Math.min(chance,.26);
  chance=clamp(chance,0,.88);
+ chance/=endgamePriority(w,c,a,base[0]);
  if(aiRandom(w.seed,a.factionId,a.decisions+1511)>=chance)return base;
  return [{type:'army.dispatch',cityId:c.id,mission:'raid',target:{kind:'wild',siteId:best.site.id,generation:best.site.generation},units}];
 }
@@ -141,7 +150,7 @@ function chooseV3(w:FormalWorld,c:FormalCity,a:Agent,base:FormalCommand[],adapti
  const ce=clamp(.32+.25*a.traits.economy+.15*best.n);
  const cg=clamp(.3+.35*a.traits.expansion+.2*a.traits.military+(war?.15:0));
  const cp=city.mission==='scout'?.7:clamp(1-enemy/Math.max(1,force+enemy));
- const cs=100*(.30*ce+.25*cg+.25*cp+.15*clamp(1-d/48)+.05*(war?.85:.5));
+ const cs=endgamePriority(w,c,a,city)*100*(.30*ce+.25*cg+.25*cp+.15*clamp(1-d/48)+.05*(war?.85:.5));
  const reserve=parallelFits(c,units,city.units);
  if(total>=(adaptive?90:140)&&ext<=1&&reserve&&cs>=(adaptive?33:37))return cs>=best.score?[city,wild]:[wild,city];
  if(city.mission==='scout')return base;
@@ -190,7 +199,7 @@ function chooseWildPriority(w:FormalWorld,c:FormalCity,a:Agent,base:FormalComman
  const war=nearbyCity?.relation==='war';
  const cityEconomy=clamp(.32+.22*a.traits.raiding+.20*a.traits.economy);
  const cityStrategy=clamp(.22+.30*a.traits.expansion+.25*a.traits.military+(city.mission==='conquest'?.18:0)+(war?.12:0));
- const cityScore=100*(.31*cityEconomy+.28*cityStrategy+.24*winProxy+.12*clamp(1-dist/48)+.05*(war?.9:.3));
+ const cityScore=endgamePriority(w,c,a,city)*100*(.31*cityEconomy+.28*cityStrategy+.24*winProxy+.12*clamp(1-dist/48)+.05*(war?.9:.3));
  // Wild opportunity gets a moderate strategic preference, but does not override
  // a clearly better city opportunity. Parallel allocation consumes both commands.
  const reserve=parallelFits(c,units,city.units);
@@ -225,6 +234,7 @@ export function attackGarrisons(w:FormalWorld,commands:readonly FormalCommand[])
 /** Recheck the live ledger immediately before each submitted detachment.
  * Mission/ownership/intel generation/path checks remain in the ordinary reducer. */
 export function autonomousDispatchReason(w:FormalWorld,issuer:FactionId,p:FormalCommand,floors:Map<CityId,Record<string,number>>):string|undefined{
+ const endgame=endgameDispatchReason(w,issuer,p);if(endgame)return endgame;
  if(p.type!=='army.dispatch')return;
  const c=w.cities.find(c=>c.id===p.cityId&&c.ownerFactionId===issuer);
  if(!c?.military)return 'AI departure city is no longer owned';
@@ -232,7 +242,7 @@ export function autonomousDispatchReason(w:FormalWorld,issuer:FactionId,p:Formal
  for(const [id,n] of Object.entries(p.units)){
   if(!Number.isSafeInteger(n)||n<0||n>(c.military.units[id]??0))return 'AI departure troops no longer available';
  }
- if(p.mission!=='scout'&&p.mission!=='reinforce'&&combatCount(p.units)<1)return 'AI departure has no effective combat troops';
+ if(p.mission!=='scout'&&p.mission!=='reinforce'&&p.mission!=='wonder-destruction'&&combatCount(p.units)<1)return 'AI departure has no effective combat troops';
  const floor=floors.get(c.id);
  if(floor&&Object.entries(floor).some(([id,n])=>(c.military!.units[id]??0)-(p.units[id]??0)<n))return 'AI parallel garrison reserve no longer available';
 }
