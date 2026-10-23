@@ -1,3 +1,7 @@
+import {invalidateMilitaryPower} from './militaryPower';
+import {reconcileVictory} from './victory';
+import {reconcileWonders} from './wonderCondition';
+import {reconcileBreakthroughs} from './breakthrough';
 import {QUEUE_CAPACITY} from './queueCapacity';
 import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen,clearCapturedNoncombatants} from './extinction';
 import {canReinforce} from './armies';
@@ -68,7 +72,9 @@ export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).
 export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}
 /** B5/B6 interface only: no combat or conquest command is implemented here. */
 export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive',scheduler?:EventScheduler){
- requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
+ requireRule(w.factions.some(f=>f.id===owner),'勢力不存在。');const old=c.ownerFactionId;if(buildingLevel(c,'castle')>0&&!c.castleCivilizationId)c.castleCivilizationId=w.factions.find(f=>f.id===old)!.civilizationId;settleFaction(w,old);settleFaction(w,owner);spatial(w).transfer(c,owner);invalidateMilitaryPower(w);if(developerStock(w,c)){c.developerResources=true;refillDeveloperStock(c);}else if(c.developerResources){delete c.developerResources;reconcileSiegeStorage(w,c);}c.integrationWorkHours=reason==='conquest'||reason==='receive'?18:0;c.integrationTotalWorkHours=c.integrationWorkHours;
+ if(w.largeProjects.some(p=>(p.kind==='civilization-breakthrough'||p.kind==='world-wonder')&&p.initiatingCityId===c.id)){const s=scheduler??new EventScheduler(w.events);reconcileWonders(w,s,{city:c,previousOwner:old,reason});reconcileBreakthroughs(w,s,{city:c,previousOwner:old,reason});if(!scheduler)w.events=s.snapshot();}
+ {const s=scheduler??new EventScheduler(w.events);reconcileVictory(w,s);if(!scheduler)w.events=s.snapshot();}
  if(old!==owner&&(reason==='conquest'||w.extinction?.craftsmen.length||c.economy?.construction.some(j=>j.castleCivilizationId))){const s=scheduler??new EventScheduler(w.events);reconcileCityCraftsmen(w,c,s);if(reason==='conquest')clearCapturedNoncombatants(w,c,s);if(!scheduler)w.events=s.snapshot();}
 }
 export function spend(c:FormalCity,resources:Resources){requireRule(resourceKeys.every(r=>Number.isSafeInteger(resources[r])&&resources[r]>=0&&c.stock[r]>=resources[r]),'城市實際庫存不足。');for(const r of resourceKeys)c.stock[r]-=resources[r];}
@@ -122,13 +128,7 @@ export function applyEconomyCommand(w:FormalWorld,c:FormalCity,order:FormalOrder
   spend(c,{...CITY_PROMOTION.cost});const durationMs=CITY_PROMOTION.durationMs,eventId=enqueue(w,s,{type:'city.promote.complete',cityId:c.id,at:w.time+durationMs});e.promotion={eventId,commandId:order.commandId,startedAt:w.time,durationMs,populationSnapshot:c.population,housingSnapshot:c.housing,townhallSnapshot:buildingLevel(c,'townhall')};return;
  }
  if(p.type==='logistics.dispatch'){
-  const dest=spatial(w).cities.get(p.destinationCityId);requireRule(dest&&dest.id!==c.id&&canReinforce(w,order.issuerId,dest.ownerFactionId)&&dest.economy,'目的地必須是自己或合法友方的另一座城市。');settleCity(w,dest);
-  const total=resourceKeys.reduce((n,r)=>n+p.resources[r],0),caravans=Math.ceil(total/CARAVAN_CAPACITY),busy=(w.logistics??[]).filter(t=>t.sourceCityId===c.id).reduce((n,t)=>n+t.caravans,0);
-  requireRule(total>0&&caravans<=buildingLevel(c,'market')-busy,'市場可用商隊不足。');const cap=storageCapacity(dest);requireRule(resourceKeys.every(r=>p.resources[r]+dest.stock[r]+dest.economy!.reservedIncoming[r]<=cap),'目的地容量不足或已預約。');
-  const path=route(w,c,dest),f=w.factions.find(f=>f.id===order.issuerId)!,duration=Math.max(1,Math.ceil(path.distance*60000*(f.techIds.includes('logistics.dispatch')?.9:1))),arrivalAt=w.time+duration,returnAt=arrivalAt+duration;
-  spend(c,p.resources);for(const r of resourceKeys)dest.economy.reservedIncoming[r]+=p.resources[r];
-  const id=shipmentId(sequenceKey(w.sequences.project++)),arrivalEventId=enqueue(w,s,{type:'logistics.arrive',shipmentId:id,at:arrivalAt}),returnEventId=enqueue(w,s,{type:'logistics.return',shipmentId:id,at:returnAt});
-  (w.logistics??=[]).push({shipmentId:id,commandId:order.commandId,sourceFactionId:order.issuerId,sourceCityId:c.id,destinationCityId:dest.id,resources:{...p.resources},caravans,path:path.path,distance:path.distance,dispatchedAt:w.time,arrivalAt,returnAt,arrivalEventId,returnEventId,phase:'outbound',authorizationSnapshot:{sourceCityOwnerFactionId:c.ownerFactionId,contributorEmpireId:f.empireId,checkedAt:w.time}});return;
+  dispatchLogistics(w,c,order,p.destinationCityId,p.resources,s);return;
  }
  requireRule(e.construction.length<QUEUE_CAPACITY,'建造工程已達 5 項上限。');
  let lane=p.lane;requireRule(lane!==1||e.milestones.includes(15000),'尚未取得第二施工佇列。');
@@ -177,5 +177,17 @@ export function handleEconomyEvent(w:FormalWorld,event:FormalEvent,s:EventSchedu
 }
 /** Shared B1 physical-shipment record adapter. Project eligibility, pool arrivals and completion belong to B9. */
 export function projectShipmentRecord(t:LogisticsShipment,projectId:ProjectId):Shipment {
- return{shipmentId:t.shipmentId,projectId,sourceFactionId:t.sourceFactionId,sourceCityId:t.sourceCityId,destinationCityId:t.destinationCityId,resources:{...t.resources},dispatchedAt:t.dispatchedAt,authorizationSnapshot:{...t.authorizationSnapshot},phase:'in-transit'};
+ return{commandId:t.commandId,shipmentId:t.shipmentId,projectId,sourceFactionId:t.sourceFactionId,sourceCityId:t.sourceCityId,destinationCityId:t.destinationCityId,resources:{...t.resources},dispatchedAt:t.dispatchedAt,authorizationSnapshot:{...t.authorizationSnapshot},phase:'in-transit'};
+}
+
+/** Shared market dispatch: the B9 caller authorizes and reserves project demand first. */
+export function dispatchLogistics(w:FormalWorld,c:FormalCity,order:FormalOrder,destinationCityId:CityId,resources:Resources,s:EventScheduler,projectId?:ProjectId){
+ requireRule(c.economy,'此操作需要正式城市經濟。');settleCity(w,c);
+  const dest=spatial(w).cities.get(destinationCityId);requireRule(dest&&(projectId!==undefined||dest.id!==c.id)&&canReinforce(w,order.issuerId,dest.ownerFactionId)&&dest.economy,'目的地必須是自己或合法友方的另一座城市。');settleCity(w,dest);
+  const total=resourceKeys.reduce((n,r)=>n+resources[r],0),caravans=Math.ceil(total/CARAVAN_CAPACITY),busy=(w.logistics??[]).filter(t=>t.sourceCityId===c.id).reduce((n,t)=>n+t.caravans,0);
+  requireRule(total>0&&caravans<=buildingLevel(c,'market')-busy,'市場可用商隊不足。');const cap=storageCapacity(dest);if(!projectId)requireRule(resourceKeys.every(r=>resources[r]+dest.stock[r]+dest.economy!.reservedIncoming[r]<=cap),'目的地容量不足或已預約。');
+  const path=route(w,c,dest),f=w.factions.find(f=>f.id===order.issuerId)!,duration=Math.max(1,Math.ceil(path.distance*60000*(f.techIds.includes('logistics.dispatch')?.9:1))),arrivalAt=w.time+duration,returnAt=arrivalAt+duration;
+  spend(c,resources);if(!projectId)for(const r of resourceKeys)dest.economy.reservedIncoming[r]+=resources[r];
+  const id=shipmentId(sequenceKey(w.sequences.project++)),arrivalEventId=enqueue(w,s,{type:'logistics.arrive',shipmentId:id,at:arrivalAt}),returnEventId=enqueue(w,s,{type:'logistics.return',shipmentId:id,at:returnAt});
+  (w.logistics??=[]).push({shipmentId:id,...(projectId?{projectId}:{}),commandId:order.commandId,sourceFactionId:order.issuerId,sourceCityId:c.id,destinationCityId:dest.id,resources:{...resources},caravans,path:path.path,distance:path.distance,dispatchedAt:w.time,arrivalAt,returnAt,arrivalEventId,returnEventId,phase:'outbound',authorizationSnapshot:{sourceCityOwnerFactionId:c.ownerFactionId,contributorEmpireId:f.empireId,checkedAt:w.time}});return;
 }

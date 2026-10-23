@@ -1,9 +1,10 @@
+import {modernUnitAuthorized} from './modernAwareness';
 /** Read-only Formal projections. No UI-only balance tables or new commands. */
 import type {FormalCity,FormalWorld} from './model';
 import {BUILDING_CATALOG,buildingLevel,FIELD_PRODUCTION,RESOURCE_BOOSTS,resourceBoostMultiplier,resourceBoostRequirement} from './catalogB3';
 import type {BuildingKind} from './catalogB3';
 import {BLACKSMITH_CAPS,BLACKSMITH_LINES,TECH_CATALOG,type TechDefinition} from './techCatalog';
-import {UNIT_CATALOG} from './unitCatalog';
+import {UNIT_CATALOG,isModernUnit} from './unitCatalog';
 import {resourceKeys} from './model';
 import {academyMultiplier} from './research';
 import {WALL_DURABILITY} from './siege';
@@ -25,7 +26,7 @@ export function researchRequirements(w:FormalWorld,c:FormalCity,d:TechDefinition
 }
 export function researchQuote(w:FormalWorld,c:FormalCity,d:TechDefinition){const f=w.factions.find(f=>f.id===c.ownerFactionId)!,cost={...d.cost};if(f.techIds.includes('civilization.kaogong')&&d.category!=='elite'&&d.category!=='civilization')for(const r of resourceKeys)cost[r]=Math.round(cost[r]*.85);const multiplier=d.category==='elite'?1:academyMultiplier(buildingLevel(c,'academy'));return {cost,multiplier,durationMs:Math.round(d.baseDurationMs*multiplier)};}
 export function castleSource(w:FormalWorld,c:FormalCity){const initial=c.economy?.construction.find(j=>j.target.kind==='building'&&j.target.key==='castle'&&j.fromLevel===0&&j.action!=='demolish'),creator=initial&&w.commandReceipts.find(r=>r.commandId===initial.commandId)?.issuerId;return c.castleCivilizationId??initial?.castleCivilizationId??w.factions.find(f=>f.id===(creator??c.ownerFactionId))!.civilizationId;}
-export function producerUnits(w:FormalWorld,c:FormalCity,kind:string){const f=w.factions.find(f=>f.id===c.ownerFactionId)!,source=castleSource(w,c);return Object.values(UNIT_CATALOG).filter(u=>u.producer===kind&&(!u.civilizationId||u.civilizationId===source)).map(u=>({unit:u,qualified:(f.age??0)>=u.age&&buildingLevel(c,kind)>=1&&(!u.eliteTech||f.techIds.includes(u.eliteTech)&&!!c.economy?.milestones.includes(u.milestone)),operable:!u.civilizationId||u.civilizationId===source}));}
+export function producerUnits(w:FormalWorld,c:FormalCity,kind:string){const f=w.factions.find(f=>f.id===c.ownerFactionId)!,source=castleSource(w,c);return Object.values(UNIT_CATALOG).filter(u=>u.producer===kind&&(!u.civilizationId||u.civilizationId===source)).map(u=>({unit:u,qualified:(isModernUnit(u.id)?modernUnitAuthorized(f,u.id):(f.age??0)>=u.age)&&buildingLevel(c,kind)>=1&&(!u.eliteTech||f.techIds.includes(u.eliteTech)&&!!c.economy?.milestones.includes(u.milestone)),operable:!u.civilizationId||u.civilizationId===source}));}
 export function boostedFieldProduction(c:FormalCity,kind:keyof typeof RESOURCE_BOOSTS){const r=RESOURCE_BOOSTS[kind],base=(c.fields??[]).filter(f=>f.resource===r).reduce((n,f)=>n+FIELD_PRODUCTION[f.level],0);return {resource:r,base,boosted:base*resourceBoostMultiplier(buildingLevel(c,kind))};}
 export function wallDurability(w:FormalWorld,c:FormalCity){const f=w.factions.find(f=>f.id===c.ownerFactionId)!;return WALL_DURABILITY[c.wallLevel??0]*(f.techIds.includes('civilization.imperial-wall')?1.2:1);}
 export function nextBuildingUnlocks(w:FormalWorld,c:FormalCity,kind:BuildingKind,current:number,next:number){const f=w.factions.find(f=>f.id===c.ownerFactionId)!;return Object.values(TECH_CATALOG).filter(d=>d.scope==='traditional'&&(!d.civilizationId||d.civilizationId===f.civilizationId)&&(d.buildings[kind]??0)>current&&(d.buildings[kind]??0)<=next);}

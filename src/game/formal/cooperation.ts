@@ -16,9 +16,9 @@ export function applyCooperation(w:FormalWorld,c:FormalCity,o:FormalOrder,p:Coop
  if(p.type==='joint.join')requireRule(j&&canCoordinate(w,o.issuerId,j.initiator,14),'不符合聯軍會師資格。');
  const l=legionOf(w,o.issuerId);if(p.type==='joint.create')requireRule(l&&embassy(w,l.leader)>=14||empireOf(w,o.issuerId)&&embassy(w,empireOf(w,o.issuerId)!.leader)>=15,'聯軍需要軍團使館 Lv14／帝國 Lv15。');
  const targetId=p.type==='joint.create'?p.targetCityId:j!.targetCityId;
- applyArmyCommand(w,c,o,{type:'army.dispatch',cityId:c.id,mission:'conquest',target:{kind:'city',cityId:targetId},units:p.units},s);
+ applyArmyCommand(w,c,o,{type:'army.dispatch',cityId:c.id,mission:p.type==='joint.create'?(p.mission??'conquest'):(j!.mission??'conquest'),...((p.type==='joint.create'?p.wonderPriority:j!.wonderPriority)?{wonderPriority:true}:{}),target:{kind:'city',cityId:targetId},units:p.units},s,j?.id);
  const a=w.armies.filter(isMissionArmy).at(-1)!,travel=a.arrivalAt-w.time;
- const group=j??{id:'joint:'+sequenceKey(w.sequences.project++),initiator:o.issuerId,targetCityId:targetId,arrivalAt:Math.max(p.type==='joint.create'?p.arrivalAt:0,a.arrivalAt),armyIds:[],scope:politicalScope(w,o.issuerId)};
+ const group=j??{...(p.type==='joint.create'&&p.mission?{mission:p.mission}:{}),...(p.type==='joint.create'&&p.wonderPriority?{wonderPriority:true as const}:{}),id:'joint:'+sequenceKey(w.sequences.project++),initiator:o.issuerId,targetCityId:targetId,arrivalAt:Math.max(p.type==='joint.create'?p.arrivalAt:0,a.arrivalAt),armyIds:[],scope:politicalScope(w,o.issuerId)};
  if(!j)political.joints.push(group);group.armyIds.push(a.id);a.jointId=group.id;
  const depart=Math.max(w.time,group.arrivalAt-travel);
  if(depart>w.time){const retained=s.snapshot().filter(e=>e.id!==a.movementEventId);while(s.pop()){};for(const e of retained)s.push(e);a.departedAt=depart;a.arrivalAt=depart+travel;a.status='waiting';a.movementEventId=enqueue(w,s,{type:'army.depart',armyId:a.id,at:depart});}

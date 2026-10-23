@@ -13,6 +13,7 @@ it('all presets/six civilizations use valid native v85 worlds and keep full enti
 },30000);
 it('browser-available diagnostic cases actually execute and none is a hardcoded PASS',async()=>{
  const rows:CheckResult[]=[];const results=await runDeveloperChecks(r=>rows.push(r),{scenario:'new',seed:90217,speed:25,civilizationId:'civ_zhongguo'});
+ expect(JSON.parse(results.find(r=>r.title==='66 傳統科技／28 傳統兵種資料')!.evidence)).toMatchObject({traditionalTech:66,traditionalUnits:28,modernUnits:16});
  expect(rows).toEqual(results);expect(results.length).toBeGreaterThanOrEqual(50);expect(results.filter(r=>r.status==='fail').map(r=>({title:r.title,evidence:r.evidence}))).toEqual([]);
  expect(new Set(results.map(r=>r.stage))).toEqual(new Set(['B2','B3','B4','存檔']));for(const speed of [1,3,6,10,25])expect(results.some(r=>r.title.startsWith(speed+'X '))).toBe(true);
  if(process.env.DEVELOPER_EVIDENCE)writeFileSync(process.env.DEVELOPER_EVIDENCE,JSON.stringify(results,null,2));

@@ -3,7 +3,7 @@ import {buildingKind,buildingLevel} from './formal/catalogB3';
 import {buildingRequirements} from './formal/buildingDetailData';
 import {spatial} from './formal/spatial';
 import {canReinforce} from './formal/armies';
-import {diplomaticRelation,politicalScope} from './formal/politics';
+import {empireOf,diplomaticRelation,politicalScope} from './formal/politics';
 import {protectedFaction} from './formal/playtest';
 
 /** The UI records only the intended action's relevant preconditions.
@@ -34,6 +34,13 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
     [target.id,target.x,target.y,target.generation,target.phase??'active']);
    return[city.x,city.y,Object.keys(p.units).sort().map(id=>[id,city.military?.units[id]??0]),faction.civilizationId,faction.age,faction.techIds,politicalScope(w,faction.id),destination,w.dimensions,w.worldLayer?.terrain,w.worldLayer?.mountains];
   }
+  case 'wonder.start':{
+   const empire=empireOf(w,faction.id),host=w.cities.find(c=>c.id===p.hostCityId);
+   return[empire?.id,empire?.leader,host?.ownerFactionId,host?empireOf(w,host.ownerFactionId)?.id:null,w.largeProjects.filter(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===empire?.id)];
+  }
+  case 'breakthrough.start':return[empireOf(w,faction.id),w.largeProjects.filter(t=>t.owner.kind==='empire'&&t.owner.empireId===faction.empireId),w.cities.map(c=>[c.id,c.ownerFactionId])];
+  case 'breakthrough.ship':
+  case 'wonder.ship':return[empireOf(w,faction.id)?.id,w.largeProjects.find(t=>t.projectId===p.projectId),city.buildings,w.logistics?.filter(t=>t.sourceCityId===city.id),w.cities.find(c=>c.id===w.largeProjects.find(t=>t.projectId===p.projectId)?.initiatingCityId)?.ownerFactionId];
   case 'campaign.configure':return[w.speed,w.offlineHours??12];
   case 'developer.configure':return[w.developer??null,faction.protectionUntil??null];
   case 'city.rename':return[city.name];

@@ -4,7 +4,7 @@ import type {FormalCity,FormalWorld} from './model';
 import {resourceKeys,zeroResources} from './model';
 import type {CombatPool} from './combatResolver';
 import type {SiegeChange} from './combatModel';
-import {baseUnit,combatStats,effectiveUnit,hasTech} from './combatModifiers';
+import {baseUnit,combatStats,effectiveUnit,hasTech,modernSiegeMultiplier} from './combatModifiers';
 import {UNIT_CATALOG} from './unitCatalog';
 import {HOUSING,storageCapacity} from './catalogB3';
 import {requireRule,changeCityOwner,settleCity,settleFaction} from './economy';
@@ -18,14 +18,14 @@ export const conquestLossRate=(lost:number,before:number)=>Math.min(.8,.05+.75*M
 export function reconcileSiegeQueues(c:FormalCity){const next=new Map<string,number>();for(const j of c.economy?.construction??[]){const target=j.target,key=target.kind==='field'?`field:${target.slot}`:`building:${target.key}`;let level=next.get(key);if(level===undefined)level=target.kind==='field'?c.fields!.find(f=>f.slot===target.slot)!.level:target.key==='wall'?(c.wallLevel??0):(c.buildings[target.key]??0);j.fromLevel=level;j.toLevel=j.action==='demolish'?0:level+1;next.set(key,j.toLevel);}}
 /** Reservations are bookings, not cargo. Shrinking warehouses rebooks bounded arrival capacity. */
 export function reconcileSiegeStorage(w:FormalWorld,c:FormalCity){
- const cap=storageCapacity(c),reserved=zeroResources();for(const t of (w.logistics??[]).filter(t=>t.phase==='outbound'&&t.destinationCityId===c.id).sort((a,b)=>a.arrivalAt-b.arrivalAt||(a.shipmentId<b.shipmentId?-1:1))){t.reservedResources??={...t.resources};for(const r of resourceKeys){t.reservedResources[r]=Math.min(t.reservedResources[r],Math.max(0,cap-reserved[r]));reserved[r]+=t.reservedResources[r];}}
+ const cap=storageCapacity(c),reserved=zeroResources();for(const t of (w.logistics??[]).filter(t=>!t.projectId&&t.phase==='outbound'&&t.destinationCityId===c.id).sort((a,b)=>a.arrivalAt-b.arrivalAt||(a.shipmentId<b.shipmentId?-1:1))){t.reservedResources??={...t.resources};for(const r of resourceKeys){t.reservedResources[r]=Math.min(t.reservedResources[r],Math.max(0,cap-reserved[r]));reserved[r]+=t.reservedResources[r];}}
  if(c.economy)c.economy.reservedIncoming=reserved;for(const r of resourceKeys){c.stock[r]=Math.min(c.stock[r],cap-reserved[r]);if(c.economy&&c.stock[r]===cap-reserved[r])c.economy.productionRemainder[r]=0;}
 }
 export function resolveSiege(w:FormalWorld,c:FormalCity,pools:readonly CombatPool[],id:BattleId,options:{wallDamage?:number;wallDamageLevel?:number;damageWall?:boolean;catapultBatch?:boolean}={}){
  settleCity(w,c);const defending=w.factions.find(f=>f.id===c.ownerFactionId),changes:SiegeChange[]=[],before=developmentLevels(c);let wallPower=0,buildingPower=0;
  for(const p of pools){if(!p.count)continue;const f=w.factions.find(f=>f.id===p.ownerFactionId),base=baseUnit(p.unitId),tiers=(prefix:string)=>[1,2].filter(n=>hasTech(f,`${prefix}.${n}`)).length;
-  if(base==='ram')wallPower+=p.count*60*(1+.1*tiers('siege.ram'));
-  else if(base==='catapult')buildingPower+=p.count*30*1.5*(1+.1*tiers('siege.projection'));
+  if(base==='ram')wallPower+=p.count*60*(1+.1*tiers('siege.ram'))*modernSiegeMultiplier(p.unitId,f,'wall');
+  else if(base==='catapult')buildingPower+=p.count*30*1.5*(1+.1*tiers('siege.projection'))*modernSiegeMultiplier(p.unitId,f,'development');
   else if(effectiveUnit(p.unitId)){const cls=UNIT_CATALOG[p.unitId].combatClass,coefficient=cls==='infantry'?.03:cls==='ranged'?.005:.01;wallPower+=p.count*combatStats(p.unitId,f).attack*coefficient;}
  }
  const wallBefore=c.wallLevel??0,mult=hasTech(defending,'civilization.imperial-wall')?1.2:1;
@@ -55,3 +55,7 @@ export function finishConquest(w:FormalWorld,c:FormalCity,owner:FormalCity['owne
  changeCityOwner(w,c,owner,'conquest',s);return{populationBefore,populationAfter:c.population,returnedTrainingPopulation,rate};
 }
 export function finalizeSiegeHousing(c:FormalCity){c.housing=400+HOUSING[c.buildings.residence??0];c.population=Math.min(c.population,c.housing);}
+
+/** Fixed six-decimal durability precision; modern target multiplier applies only here. */
+export const durabilityPrecision=(n:number)=>Math.round(n*1000000)/1000000;
+export function wonderBombardment(w:FormalWorld,pools:readonly CombatPool[]){return durabilityPrecision(pools.reduce((sum,p)=>{if(baseUnit(p.unitId)!=='catapult'||p.count<=0)return sum;const f=w.factions.find(f=>f.id===p.ownerFactionId),tiers=[1,2].filter(n=>hasTech(f,`siege.projection.${n}`)).length;return sum+p.count*30*1.5*(1+.1*tiers)*modernSiegeMultiplier(p.unitId,f,'wonder');},0));}

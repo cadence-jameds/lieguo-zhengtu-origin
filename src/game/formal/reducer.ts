@@ -1,8 +1,17 @@
+import {isMissionArmy} from './combatModel';
+import {chainDecision,invalidateEndgameIntel} from './endgameAI';
+import {invalidateMilitaryPower,inheritMilitaryPower} from './militaryPower';
+import {handleVictoryEvent,reconcileVictory} from './victory';
+import {handleRepairEvent,reconcileWonders} from './wonderCondition';
+import {applyCatchupCommand,handleCatchupEvent,reconcileCatchup} from './modernCatchup';
+import {selectReverseEngineering} from './modernAwareness';
 import {diplomacySnapshot,diplomacyChanges} from './diplomacyReports';
 import {cloneWorldDraft} from './worldDraft';
 import {handleGovernance,applyGovernance,retireGovernors} from './governance';
 import {politicalMemory} from './aiKnowledge';
-import {handleAutonomy,retireAutonomy,type Submit} from './autonomy';
+import {submitAutonomous,handleAutonomy,retireAutonomy,type Submit} from './autonomy';
+import {applyBreakthroughCommand,handleBreakthroughEvent} from './breakthrough';
+import {applyWonderCommand,handleWonderEvent} from './wonder';
 import {reconcileExileSites,applyExtinctionCommand,resolveExtinctions,handleCraftsmanEvent} from './extinction';
 import {applyPolitics,reconcilePolitics,reconcilePoliticalEvents} from './politics';
 import {applyCooperation} from './cooperation';
@@ -67,14 +76,14 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
  if(Object.hasOwn(current,'worldLayer'))w.worldLayer=current.worldLayer;
  if(shareAutonomy)w.autonomy=current.autonomy;
  if(current.combat)w.combat!.receipts=current.combat.receipts.slice();
- return w;
+ inheritMilitaryPower(current,w);return w;
 }
 /** These three handlers, lazy settlement and queue promotion write only this city, sequences and political cleanup. */
 function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
  const w={...current,cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:current.commandReceipts.slice(),completionReceipts:current.completionReceipts.slice()};
  w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
- return w;
+ inheritMilitaryPower(current,w);return w;
 }
 function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdmission):FormalWorld {
  if(!replay)return cloneWorldDraft(current);
@@ -144,19 +153,24 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  else {
   try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);
    if(p.type!=='construction.cancel'&&p.type!=='military.cancel')promoteCityQueues(w,city,scheduler);
-   if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
+   if(p.type==='modern.transfer.start'||p.type==='modern.emergency.start'||p.type==='modern.project.ship')applyCatchupCommand(w,city,order,p,scheduler);
+   else if(p.type==='craftsman.move'||p.type==='craftsman.castle')applyExtinctionCommand(w,city,order,p,scheduler);
+   else if(p.type==='breakthrough.start'||p.type==='breakthrough.ship')applyBreakthroughCommand(w,city,order,p,scheduler);
+   else if(p.type==='modern.reverse')selectReverseEngineering(w,order.issuerId,p.unitId);
+   else if(p.type==='wonder.start'||p.type==='wonder.ship'||p.type==='wonder.repair.start'||p.type==='wonder.repair.ship')applyWonderCommand(w,city,order,p,scheduler);
    else if(p.type==='governance.set')applyGovernance(w,city,order,p,scheduler);
    else if(p.type==='politics'){politicalMemory(w,order.issuerId,p);applyPolitics(w,city,order,p,scheduler);}
    else if(p.type==='defense.set'||p.type==='defense.dispatch'||p.type==='joint.create'||p.type==='joint.join')applyCooperation(w,city,order,p,scheduler);
    else if(p.type==='research.start')startResearch(w,city,order,p.techId,scheduler);
    else if(p.type==='age.start')startAge(w,city,order,scheduler);
-   else if(p.type==='military.recruit'||p.type==='military.cancel'||p.type==='military.disband')applyMilitaryCommand(w,city,order,p,scheduler);
+   else if(p.type==='military.modernize'||p.type==='military.recruit'||p.type==='military.cancel'||p.type==='military.disband')applyMilitaryCommand(w,city,order,p,scheduler);
    else if(p.type==='settlement.prepare'||p.type==='settlement.cancel'||p.type==='settlement.dispatch')applySettlementCommand(w,city,order,p,scheduler);
    else if(p.type==='logistics.auto.set')setAutoLogistics(w,city,p.rules);
-   else if(p.type==='army.dispatch'||p.type==='army.recall')applyArmyCommand(w,city,order,p,scheduler);
+   else if(p.type==='army.dispatch'||p.type==='army.recall'||p.type==='army.advance')applyArmyCommand(w,city,order,p,scheduler);
    else applyEconomyCommand(w,city,order,p,scheduler);
-   promoteCityQueues(w,city,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
+   promoteCityQueues(w,city,scheduler);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
+ {if(p.type==='politics'||p.type==='military.modernize'||p.type==='military.disband'||p.type==='settlement.dispatch'||p.type==='settlement.cancel')invalidateMilitaryPower(w);const s=new EventScheduler(w.events);reconcileVictory(w,s);w.events=s.snapshot();}
  reports.push(...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
  w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
@@ -197,24 +211,32 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   else if(e.type==='age.complete')completeAge(w,e);
   else if(e.type==='military.train'){handleMilitaryEvent(w,e,scheduler);const city=spatial(w).cities.get(e.cityId);if(city)refreshBattleDefense(w,city);}
   else if(e.type==='settlement.ready'||e.type==='settlement.arrive')handleSettlementEvent(w,e,scheduler);
+  else if(handleCatchupEvent(w,e,scheduler)){}
+  else if(handleVictoryEvent(w,e,scheduler,reports)){}
+  else if(handleRepairEvent(w,e,scheduler,reports)){}
+  else if(handleBreakthroughEvent(w,e,scheduler,reports)){}
+  else if(handleWonderEvent(w,e,scheduler,reports)){}
   else if(handleEconomyEvent(w,e,scheduler)){
    if(e.type==='economy.settle'){const c=spatial(w).cities.get(e.cityId);if(c)runAutoLogistics(w,c,scheduler);}
    if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
-  resolveExtinctions(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
+  if(['combat.round','army.arrive','army.return','military.train','research.complete','settlement.arrive'].includes(e.type))invalidateMilitaryPower(w);
+  invalidateEndgameIntel(w);
+  if(combatReports!==null)for(const army of [...w.armies]){if(!isMissionArmy(army)||army.mission!=='conquest'||army.status!=='returning'||army.departedAt!==w.time||!army.chain?.conquests)continue;const agent=w.autonomy?.agents.find(a=>a.factionId===army.ownerFactionId);if(!agent)continue;const command=chainDecision(w,army,agent);if(command)reports.push(...submitAutonomous(w,scheduler,e,agent.factionId,[command],submit));}
+  const extinctBefore=w.extinction?.extinct.length??0;resolveExtinctions(w,scheduler);if((w.extinction?.extinct.length??0)!==extinctBefore)invalidateMilitaryPower(w);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcileVictory(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
   if(aiReports===null)reports.push(...diplomacyChanges(w,beforePolitics));
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
 }
 function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
-  const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=target;w.events=scheduler.snapshot();w.revision=current.revision+1;
+  const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=target;reconcileWonders(w,scheduler);reconcileVictory(w,scheduler);w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  validateFormalWorld(w);return{world:w,reports};
 }
 export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);
+ const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);reconcileVictory(w,scheduler);
  while(scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
@@ -225,7 +247,7 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  const yieldIntervalMs=options.yieldIntervalMs??50;
  if(!Number.isFinite(yieldIntervalMs)||yieldIntervalMs<0)throw new Error('世界推進讓出間隔無效。');
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);
+ const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;

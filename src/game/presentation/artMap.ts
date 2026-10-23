@@ -24,6 +24,7 @@ const unitBases:Record<string,{sheet?:ArtSpec['sheet'];index?:number;path?:strin
 const eliteBases:Record<string,string>={swordsman:'militia',pikeman:'spearman',crossbowman:'archer','heavy-skirmisher':'skirmisher',ranger:'light-cavalry','heavy-knight':'knight'};
 export function unitArt(id:string):ArtSpec {
  const u=UNIT_CATALOG[id];if(!u)throw new Error('Unknown formal unit');
+ if(u.era==='modern'){const art=unitArt(id.slice(7));return {...art,badge:['現代',art.badge].filter(Boolean).join(' · '),origin:'derived'};}
  if(id.includes('guard.'))return {path:'art/catalog-guards.webp',sheet:'guards',index:civilizationIndex(u.civilizationId!),badge:u.eliteTech?'ELITE':undefined,origin:u.eliteTech?'derived':'reused'};
  const base=unitBases[eliteBases[id]??id];if(!base)throw new Error('Unmapped formal unit: '+id);
  return {...base,path:base.path??`art/catalog-${base.sheet}.webp`,badge:u.eliteTech?['ELITE',base.badge].filter(Boolean).join(' · '):base.badge,origin:base.path?(u.eliteTech?'derived':'new'):u.eliteTech||base.badge?'derived':'reused'};
