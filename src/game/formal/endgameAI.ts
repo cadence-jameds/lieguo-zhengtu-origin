@@ -71,6 +71,7 @@ export function modernResearchPriority(w:FormalWorld,c:FormalCity,a:Agent,id:str
 }
 export function publicWonderStage(w:FormalWorld,p:LargeProject){const breakthrough=w.largeProjects.find(q=>q.breakthrough?.wonderProjectId===p.projectId),b=breakthrough?.breakthrough;
  if(b?.phase==='completed')return{threat:100,stage:'modernized',progress:100};
+ if(p.wonder?.integrity==='ruins')return{threat:0,stage:'ruins',progress:0};
  if(p.wonder?.phase==='completed'){const progress=breakthrough?Math.min(75,Math.floor(breakthroughWork(w,breakthrough)/breakthrough.durationMs*4)*25):0;return{threat:[80,86,92,97][progress/25],stage:'breakthrough',progress};}
  const progress=Math.min(80,Math.floor(wonderProgress(w,p)/20)*20);return{threat:[20,30,45,60,75][progress/20],stage:'wonder',progress};
 }
@@ -79,7 +80,7 @@ const threatCache=new WeakMap<FormalWorld,Map<string,ReturnType<typeof computeTh
 function computeThreats(w:FormalWorld,c:FormalCity,a:Agent){
  const ownEmpire=empireOf(w,a.factionId);if(!w.largeProjects.some(p=>p.wonder&&p.owner.kind==='empire'&&p.owner.empireId!==ownEmpire?.id))return [];
  const counts=new Map<string,{cities:number;population:number}>();let population=0;for(const city of w.cities){const scope=empireOf(w,city.ownerFactionId)?.id??city.ownerFactionId,n=counts.get(scope)??{cities:0,population:0};n.cities++;n.population+=city.population;population+=city.population;counts.set(scope,n);}
- const near=w.largeProjects.filter(p=>p.wonder&&p.owner.kind==='empire'&&p.owner.empireId!==ownEmpire?.id).map(p=>({p,city:spatial(w).cities.get(p.initiatingCityId)!,stage:publicWonderStage(w,p)})).filter(t=>t.city).sort((x,y)=>y.stage.threat-x.stage.threat||Math.hypot(x.city.x-c.x,x.city.y-c.y)-Math.hypot(y.city.x-c.x,y.city.y-c.y)).slice(0,4);
+ const near=w.largeProjects.filter(p=>p.wonder&&p.owner.kind==='empire'&&p.owner.empireId!==ownEmpire?.id).map(p=>({p,city:spatial(w).cities.get(p.initiatingCityId)!,stage:publicWonderStage(w,p)})).filter(t=>t.city&&t.stage.stage!=='ruins').sort((x,y)=>y.stage.threat-x.stage.threat||Math.hypot(x.city.x-c.x,x.city.y-c.y)-Math.hypot(y.city.x-c.x,y.city.y-c.y)).slice(0,4);
  return near.map(t=>{const owner=t.p.owner.kind==='empire'?t.p.owner.empireId:'',empire=w.politics?.empires.find(e=>e.id===owner),relation=diplomaticRelation(w,a.factionId,t.city.ownerFactionId),n=counts.get(owner),units=Object.fromEntries(Object.entries(c.military?.units??{}).filter(([id,count])=>count>0&&effectiveUnit(id))),seconds=Object.keys(units).length?marchSeconds(units,w.factions.find(f=>f.id===a.factionId)!):UNIT_CATALOG.militia.secondsPerTile;
   const members=ownEmpire?w.factions.filter(f=>empireOf(w,f.id)?.id===ownEmpire.id).map(f=>f.id):[a.factionId],border=members.flatMap(id=>spatial(w).owned(id)).sort((a,b)=>Math.hypot(a.x-t.city.x,a.y-t.city.y)-Math.hypot(b.x-t.city.x,b.y-t.city.y)).slice(0,8);
   let close=false;for(const from of border){if(Math.hypot(from.x-t.city.x,from.y-t.city.y)*seconds*1000>3*HOUR)continue;try{if(route(w,from,t.city).distance*seconds*1000<=3*HOUR){close=true;break;}}catch{/* unreachable border */}}

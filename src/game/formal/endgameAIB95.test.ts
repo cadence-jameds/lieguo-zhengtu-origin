@@ -21,6 +21,14 @@ import {HOUR} from './time';
 import type {FormalWorld} from './model';
 function agent(w:FormalWorld,owner=w.playerFactionId):Agent{return{factionId:owner,traits:traitsFor(w.seed,owner),decisions:0,nextAt:w.time,eventId:null,active:true,budgetPercent:50,lastWarAt:w.time-2*HOUR,memory:[],intel:[]};}
 function knowledge(w:FormalWorld,a:Agent,units:Record<string,number>,city=w.cities[2]){addIntel(w,a,{cityId:city.id,ownerFactionId:city.ownerFactionId,at:w.time,source:'battle',units,coarse:'armor'});}
+it('B9 Final Gate real destruction removes public ruins from all five offensive strategies without consulting hidden garrisons',()=>{
+ let w=endgameWorld(true);const a=agent(w);w.cities[0].military!.units={militia:1000,catapult:3000,scout:10};knowledge(w,a,{});expect(originalCityAttack(w,w.cities[0],a).commands[0]).toMatchObject({mission:'wonder-destruction'});
+ w=act(w,{type:'army.dispatch',cityId:w.cities[0].id,mission:'wonder-destruction',target:{kind:'city',cityId:w.cities[2].id},units:{catapult:3000}});w=advanceFormal(w,w.armies.filter(isMissionArmy)[0].arrivalAt).world;expect(publicWonderStage(w,w.largeProjects[0])).toEqual({stage:'ruins',threat:0,progress:0});expect(publicWonderThreats(w,w.cities[0],a)).toEqual([]);
+ w.cities[2].military!.units={'modern.knight':99999};w.cities[2].stock.gold=123456;expect(publicWonderThreats(w,w.cities[0],a)).toEqual([]);for(const strategy of ATTACK_STRATEGIES)for(const command of executeAttackStrategy(w,w.cities[0],a,strategy)){expect('mission' in command&&command.mission==='wonder-destruction').toBe(false);expect('wonderPriority' in command&&command.wonderPriority).not.toBe(true);}
+});
+it('B9 Final Gate ruins do not erase completed modernization threat or permanent qualification',()=>{
+ const w=endgameWorld(),a=agent(w),s=new EventScheduler(w.events);applyWonderDamage(w,w.largeProjects[0].projectId,{type:'fixture.marker',marker:'modernized-ruins',id:eventId('modernized-ruins'),at:w.time},resolutionId('modernized-ruins'),120000,s);w.events=s.snapshot();expect(publicWonderStage(w,w.largeProjects[0])).toEqual({stage:'modernized',threat:100,progress:100});expect(publicWonderThreats(w,w.cities[0],a)[0].stage).toBe('modernized');expect(w.factions[1].modernQualification).toBe('full');
+});
 it.each([[0,20],[20,30],[40,45],[60,60],[80,75]])('B9-5 public wonder %s percent has base threat %s without exposing a resource pool',(percent,expected)=>{
  const w=endgameWorld();w.largeProjects=w.largeProjects.filter(p=>p.wonder);const p=w.largeProjects[0];p.wonder!.phase='building';p.wonder!.clock={workMs:p.durationMs*percent/100,activeSince:null};expect(publicWonderStage(w,p)).toEqual({threat:expected,stage:'wonder',progress:percent});
 });

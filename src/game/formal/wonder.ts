@@ -11,6 +11,12 @@ export const wonderIntegrity=(current:number,maximum:number)=>current===0&&maxim
 export const empireWonder=(w:FormalWorld,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===id);
 export function wonderRemaining(p:LargeProject){return Object.fromEntries(resourceKeys.map(r=>[r,p.requiredResources[r]-p.shipments.reduce((n,t)=>n+(t.phase==='returned'?0:t.resources[r]),0)])) as typeof p.poolResources;}
 export function wonderProgress(w:FormalWorld,p:LargeProject){const state=p.wonder;if(state?.clock)return Math.min(100,(state.clock.workMs+(state.clock.activeSince===null?0:w.time-state.clock.activeSince))/p.durationMs*100);if(state?.phase==='completed')return 100;if(state?.phase!=='building'||state.startedAt===null)return 0;return Math.min(100,Math.max(0,(w.time-state.startedAt)/p.durationMs*100));}
+/** Read-only target eligibility, including accrued construction HP and legacy intact saves. */
+export function canDestroyWonder(w:FormalWorld,p:LargeProject|undefined){
+ const b=p?.wonder;if(!p||p.kind!=='world-wonder'||!b||b.phase==='funding'||b.integrity==='ruins')return false;
+ const maximum=WONDER_MAX_DURABILITY*wonderProgress(w,p)/100,d=b.durability;
+ return d?d.current+Math.max(0,maximum-d.maximum)>0:b.integrity!=='damaged'&&maximum>0;
+}
 export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:WonderCommand,s:EventScheduler){
  const empire=empireOf(w,o.issuerId);requireRule(empire,'世界奇觀需要合法帝國成員資格。');
  if(q.type==='wonder.repair.start'||q.type==='wonder.repair.ship')return applyRepairCommand(w,c,o,q,s);

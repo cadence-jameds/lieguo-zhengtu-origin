@@ -1,4 +1,4 @@
-import {wonderProgress} from '../formal/wonder';
+import {canDestroyWonder,wonderProgress} from '../formal/wonder';
 import {breakthroughWork} from '../formal/breakthrough';
 import {ScoutIntelDetails} from './ScoutIntelDetails';
 import {reportTime} from './reportClock';
@@ -29,6 +29,6 @@ export function FormalTargetPanel({world,home,city,site,intel={},intelFailed=fal
  {!own&&!full&&<div className="target-stock"><small>偵察資源情報</small>{intel.resources?<><Cost cost={intel.resources.intel.resources!}/><small>觀測於 {reportTime(intel.resources.intel.observedRealAt)} · 當時庫存，非即時數值</small></>:<p>資源庫存未知</p>}</div>}
  {!own&&!full&&intel.defenses&&<small className="intel-age">城防觀測於 {reportTime(intel.defenses.intel.observedRealAt)} · 非即時數值</small>}
 
- <div className="target-actions">{own?<><button className="primary" onClick={onCity}>{cityEntryLabel??'進入城市'}</button>{city?.id!==home.id&&<button disabled={busy} onClick={()=>onMission('reinforce')}>從 {home.name} 增援</button>}</>:friend?<button className="primary" disabled={busy} onClick={()=>onMission('reinforce')}>派遣援軍</button>:<><button disabled={busy} onClick={()=>onMission('scout')}>派遣斥候</button><button className="primary" disabled={busy} onClick={()=>onMission('raid')}>掠奪物資</button>{city&&<button disabled={busy} onClick={()=>onMission('conquest')}>佔領據點</button>}{wonder&&wonder.wonder!.phase!=='funding'&&<button disabled={busy} onClick={()=>onMission('wonder-destruction')}>奇觀破壞</button>}</>}</div>
+ <div className="target-actions">{own?<><button className="primary" onClick={onCity}>{cityEntryLabel??'進入城市'}</button>{city?.id!==home.id&&<button disabled={busy} onClick={()=>onMission('reinforce')}>從 {home.name} 增援</button>}</>:friend?<button className="primary" disabled={busy} onClick={()=>onMission('reinforce')}>派遣援軍</button>:<><button disabled={busy} onClick={()=>onMission('scout')}>派遣斥候</button><button className="primary" disabled={busy} onClick={()=>onMission('raid')}>掠奪物資</button>{city&&<button disabled={busy} onClick={()=>onMission('conquest')}>佔領據點</button>}{canDestroyWonder(world,wonder)&&<button disabled={busy} onClick={()=>onMission('wonder-destruction')}>奇觀破壞</button>}</>}</div>
  </section>;
 }
