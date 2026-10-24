@@ -171,6 +171,48 @@
       "horizontalOverflow": false
     },
     {
+      "name": "568x320",
+      "status": "PASS",
+      "touchSwipe": true,
+      "button": {
+        "x": 18,
+        "y": 258,
+        "width": 106.390625,
+        "height": 58
+      },
+      "fixedMore": {
+        "x": 520,
+        "y": 258,
+        "width": 48,
+        "height": 58
+      },
+      "lazyEraCounts": [
+        14,
+        20
+      ],
+      "overflowPreview": true,
+      "explicitCity": true,
+      "cancel": true,
+      "claims": [
+        "N01",
+        "C08"
+      ],
+      "reload": true,
+      "shortcutPreference": [
+        "map",
+        "city",
+        "army",
+        "reports",
+        "research",
+        "tasks"
+      ],
+      "ownReminder": true,
+      "hiddenReminder": true,
+      "reportUnreadPreserved": 1,
+      "conquestAuthority": true,
+      "horizontalOverflow": false
+    },
+    {
       "name": "640x360",
       "status": "PASS",
       "touchSwipe": true,
@@ -255,190 +297,60 @@
       "horizontalOverflow": false
     },
     {
+      "name": "932x430",
+      "status": "PASS",
+      "touchSwipe": true,
+      "button": {
+        "x": 18,
+        "y": 368,
+        "width": 179.1875,
+        "height": 58
+      },
+      "fixedMore": {
+        "x": 884,
+        "y": 368,
+        "width": 48,
+        "height": 58
+      },
+      "lazyEraCounts": [
+        14,
+        20
+      ],
+      "overflowPreview": true,
+      "explicitCity": true,
+      "cancel": true,
+      "claims": [
+        "N01",
+        "C08"
+      ],
+      "reload": true,
+      "shortcutPreference": [
+        "map",
+        "city",
+        "army",
+        "reports",
+        "research",
+        "tasks"
+      ],
+      "ownReminder": true,
+      "hiddenReminder": true,
+      "reportUnreadPreserved": 1,
+      "conquestAuthority": true,
+      "horizontalOverflow": false
+    },
+    {
       "name": "desktop",
       "status": "PASS"
     },
     {
       "name": "reduced-motion",
       "status": "PASS"
-    },
-    {
-      "name": "568x320",
-      "status": "PASS",
-      "touchSwipe": true,
-      "button": {
-        "x": 18,
-        "y": 258,
-        "width": 106.390625,
-        "height": 58
-      },
-      "fixedMore": {
-        "x": 520,
-        "y": 258,
-        "width": 48,
-        "height": 58
-      },
-      "lazyEraCounts": [
-        14,
-        20
-      ],
-      "overflowPreview": true,
-      "explicitCity": true,
-      "cancel": true,
-      "claims": [
-        "N01",
-        "C08"
-      ],
-      "reload": true,
-      "shortcutPreference": [
-        "map",
-        "city",
-        "army",
-        "reports",
-        "research",
-        "tasks"
-      ],
-      "ownReminder": true,
-      "hiddenReminder": true,
-      "reportUnreadPreserved": 1,
-      "conquestAuthority": true,
-      "horizontalOverflow": false
-    },
-    {
-      "name": "932x430",
-      "status": "PASS",
-      "touchSwipe": true,
-      "button": {
-        "x": 18,
-        "y": 368,
-        "width": 179.1875,
-        "height": 58
-      },
-      "fixedMore": {
-        "x": 884,
-        "y": 368,
-        "width": 48,
-        "height": 58
-      },
-      "lazyEraCounts": [
-        14,
-        20
-      ],
-      "overflowPreview": true,
-      "explicitCity": true,
-      "cancel": true,
-      "claims": [
-        "N01",
-        "C08"
-      ],
-      "reload": true,
-      "shortcutPreference": [
-        "map",
-        "city",
-        "army",
-        "reports",
-        "research",
-        "tasks"
-      ],
-      "ownReminder": true,
-      "hiddenReminder": true,
-      "reportUnreadPreserved": 1,
-      "conquestAuthority": true,
-      "horizontalOverflow": false
     }
   ],
   "errors": [],
-  "reruns": [
-    {
-      "name": "568x320",
-      "status": "FAIL",
-      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n"
-    },
-    {
-      "name": "932x430",
-      "status": "PASS",
-      "touchSwipe": true,
-      "button": {
-        "x": 18,
-        "y": 368,
-        "width": 179.1875,
-        "height": 58
-      },
-      "fixedMore": {
-        "x": 884,
-        "y": 368,
-        "width": 48,
-        "height": 58
-      },
-      "lazyEraCounts": [
-        14,
-        20
-      ],
-      "overflowPreview": true,
-      "explicitCity": true,
-      "cancel": true,
-      "claims": [
-        "N01",
-        "C08"
-      ],
-      "reload": true,
-      "shortcutPreference": [
-        "map",
-        "city",
-        "army",
-        "reports",
-        "research",
-        "tasks"
-      ],
-      "ownReminder": true,
-      "hiddenReminder": true,
-      "reportUnreadPreserved": 1,
-      "conquestAuthority": true,
-      "horizontalOverflow": false
-    },
-    {
-      "name": "568x320",
-      "status": "PASS",
-      "touchSwipe": true,
-      "button": {
-        "x": 18,
-        "y": 258,
-        "width": 106.390625,
-        "height": 58
-      },
-      "fixedMore": {
-        "x": 520,
-        "y": 258,
-        "width": 48,
-        "height": 58
-      },
-      "lazyEraCounts": [
-        14,
-        20
-      ],
-      "overflowPreview": true,
-      "explicitCity": true,
-      "cancel": true,
-      "claims": [
-        "N01",
-        "C08"
-      ],
-      "reload": true,
-      "shortcutPreference": [
-        "map",
-        "city",
-        "army",
-        "reports",
-        "research",
-        "tasks"
-      ],
-      "ownReminder": true,
-      "hiddenReminder": true,
-      "reportUnreadPreserved": 1,
-      "conquestAuthority": true,
-      "horizontalOverflow": false
-    }
-  ],
   "passed": 10,
-  "failed": 0
+  "failed": 0,
+  "sourceCommit": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+  "fixtureManifestSHA256": "ebaecfad4c319ba1f2f0ff9f3fe62ed4acf4c0f868ddfa5f69714473286cc2f4",
+  "previousRun": "browser-initial.json"
 }

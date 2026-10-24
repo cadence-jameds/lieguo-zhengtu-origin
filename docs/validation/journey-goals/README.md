@@ -13,15 +13,18 @@ Base：`9c62265dce81becb444c10d79450ec8574bbc05a`（GitHub main／PR #34 已合�
 - `formal/victory.ts`、`victorySchema.ts`、`militaryPower.ts`、`endgameAI.ts` 及既有 B9 測試未修改。經濟檔只增加人口事件觀察，未改公式、費率、成本或平衡。未施工 B10／B11。
 - `NavigationReminders.tasks` 只反映已完成未領任務，快捷列與更多各自呈現；領取後即更新。戰報提醒及已讀規則未修改，普通勝利數值變動不新增閃爍。
 
+最終 runtime source：`347a90699684fbafc2ce70f13f8b481632f8f61b`。之後的交付提交只更新測試、截圖與文件，程式來源不變。
+
 ## 分階段測試證據
 
 | 階段 | 結果 | 證據 |
 |---|---|---|
-| 任務系統與存檔／離線／導覽定向 | 134 通過，0 失敗（含原 R4-C1 21 項及新增回復案例） | [phase1-tests.json](phase1-tests.json) |
+| 任務系統與存檔／離線／導覽定向 | 135 通過，0 失敗（含原 R4-C1 21 項及兩項新增回復案例） | [phase1-tests.json](phase1-tests.json) |
 | 勝利頁、B9 權威／奇觀與目標 UI 定向 | 67 通過，0 失敗 | [phase2-tests.json](phase2-tests.json) |
 | 真實 Worker／IndexedDB 瀏覽器 | 10 案例通過，0 失敗，0 page errors | [browser.json](browser.json) |
-| Typecheck／Build | 已通過；最終提交另驗建置身分及 Pages 路徑 | 最終摘要另附 |
-| 隔離完整回歸 | 首輪 1951 通過／3 失敗／1 跳過；修正後重跑中 | [完整紀錄](full-regression.json) |
+| Typecheck／Build | 根目錄及 project Pages 建置／路徑／Worker 身分全部通過 | [建置證據](build-checks.json) |
+| GitHub runtime CI | 1956 通過、0 失敗、1 跳過；完整回歸／Typecheck／Pages Build 全部成功 | [CI 證據](ci-runtime.json) |
+| 隔離完整回歸 | 最終 1956 通過／0 失敗／1 跳過，197 個測試檔案 | [完整紀錄](full-regression.json) |
 
 任務階段指令：
 
@@ -58,7 +61,7 @@ Chromium `154.0.8037.57`，production build，手機觸控模擬，繁中。共 
 
 八組手機尺寸均驗證觸控左右滑動、固定更多 48×58px、一般按鈕原尺寸、左右箭頭、第一／最後快捷操作、原更多內容及 `tasks` 偏好相容、隱藏／重新加入、頁面高亮、領取兩項真實完成任務、重新載入後領取與偏好保留。任務提醒 2→1→0，戰報仍為 1 且保留閃爍；只展開黑暗或城堡分類時分別掛載 14／20 張卡片，沒有水平溢出。
 
-完整尺寸重測曾在 568×320 的導覽滑動斷言失敗；原錯誤與重跑保留於 `browser.json.reruns`。延長腳本等待原生平滑滑動穩定後，568×320／932×430 再次通過；沒有修改產品導覽元件。較早驗收腳本亦曾遇到原生 details toggle 與箭頭隱藏的等待競態，已改成等待實際卡片與箭頭狀態；不得將這些腳本重試描述成全程首次通過。
+完整尺寸重測曾在 568×320 的導覽滑動斷言失敗；原錯誤與重跑保留於 `browser-initial.json.reruns`。延長腳本等待原生平滑滑動穩定後，568×320／932×430 再次通過；沒有修改產品導覽元件。最終程式 `347a906` 重新產生合成存檔並完整重跑全部 10 案例，一次通過、0 page errors，33 張交付截圖亦全數更新。較早驗收腳本亦曾遇到原生 details toggle 與箭頭隱藏的等待競態，已改成等待實際卡片與箭頭狀態；不得將這些腳本重試描述成全程首次通過。
 
 重現方式（Playwright／Chromium 為外部驗收環境工具，不加入產品依賴）：
 
@@ -68,6 +71,8 @@ npm run build
 npm run preview -- --host 127.0.0.1 --port 4180
 node scripts/verify-journey-goals-browser.mjs /absolute/path/to/playwright/index.mjs /tmp/journey-goals-fixtures /tmp/journey-goals-browser
 ```
+
+完整回歸唯一跳過為既有 `batch210.test.tsx` 的玩家後期存檔再推進 6 世界小時測試（需 `REALM_REGRESSION_SAVE`，未提供私人存檔）；原生合成舊存檔、離線及 Recovery 測試均已實際執行。最終程式提交的 [GitHub CI](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40060135386) 同樣為 1956／0／1，並完成 Typecheck、Pages Build 與 release 驗證。
 
 ## 限制、風險與待驗
 
