@@ -146,3 +146,10 @@ it('idle time and sub-threshold population growth leave the durable achievement 
  let w=fixture();rich(w);w.cities[0].population=15000;syncGrowthTasks(w);const db=store();w=await db.start(w);const backup=(await db.backupList())[0],history=structuredClone(w.growthTasks);
  const later=advanceFormal(w,w.time+HOUR).world;expect(later.growthTasks).toEqual(history);const saved=await db.save(later,[],w.revision);const restored=await db.restore(backup.id);expect(restored.growthTasks).toEqual(history);expect(restored.time).toBe(w.time);expect(saved.time).toBeGreaterThan(restored.time);
 });
+
+it('an unclaimed achievement survives time-rewinding Recovery and can be claimed immediately exactly once',async()=>{
+ const db=store();let w=await db.start(fixture());
+ let revision=w.revision;w=issue(w,{type:'field.upgrade',cityId:w.cities[0].id,slot:0}).world;w=await db.save(w,[],revision);const backup=(await db.backupList())[0];const job=w.cities[0].economy!.construction[0];revision=w.revision;w=advanceFormal(w,job.startsAt+job.durationMs).world;w=await db.save(w,[],revision);
+ const completedAt=w.growthTasks!.completed.N01;expect(completedAt).toBeGreaterThan(0);w=await db.restore(backup.id);expect(w.time).toBeLessThan(completedAt);expect(w.growthTasks!.claimed.N01).toBeUndefined();
+ const t=submitFormalOrder(w,claim(w,'N01'));expect(t.ack?.status,t.ack?.reason).toBe('committed');w=await db.save(t.world,t.reports,w.revision);expect(w.growthTasks!.claimed.N01.at).toBeLessThan(completedAt);validateFormalWorld(w);expect((await db.loadSave()).game!.growthTasks!.claimed.N01).toEqual(w.growthTasks!.claimed.N01);expect(submitFormalOrder(w,claim(w,'N01')).ack?.status).toBe('rejected');
+});

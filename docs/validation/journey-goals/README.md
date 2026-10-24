@@ -35,7 +35,7 @@ npm exec vitest run src/game/formal/growthTasks.test.ts src/game/formal/recovery
 npm exec vitest run src/game/presentation/journeyGoals.test.tsx src/game/presentation/victoryB95.test.tsx src/game/formal/victoryB95.test.ts src/game/formal/hegemonyB95.test.ts src/game/formal/wonderDurabilityB95.test.ts src/game/formal/wonderCombatB95.test.ts -- --maxWorkers=2 --testTimeout=30000 --reporter=json --outputFile=artifacts/journey-goals/phase2.json
 ```
 
-首輪完整回歸揭露 R4-C1 在 1X／10X／25X 下的 Recovery 等價差異：原先任務歷史連沒有新成就的人口抽樣與閒置世界時間也一併保留。修正為僅記真實進度／人口門檻及其發生時點，沒有改寫既有測試。原失敗與修正後結果均保留於完整紀錄。
+首輪完整回歸揭露 R4-C1 在 1X／10X／25X 下的 Recovery 等價差異：原先任務歷史連沒有新成就的人口抽樣與閒置世界時間也一併保留。修正為僅記真實進度／人口門檻及其發生時點，沒有改寫既有測試。第二輪在審查發現「已完成未領獎後回復較早世界時間」的額外邊界時中止；完成 ID 可保留，但領取世界時間不必晚於另一歷史分支的完成時間。防重仍以持久化 ID 與正式指令收據驗證。原失敗、中止及最終重跑均保留於完整紀錄。
 
 完整回歸依 AGENTS.md 在可丟棄副本執行；不覆寫既有歷史驗收文件。保留 B5 E1 HOLD、Astra Gate 未 PASS、實機驗收待完成等既有事實，不把本次測試宣告為正式發布驗收。
 

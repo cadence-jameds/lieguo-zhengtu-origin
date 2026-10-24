@@ -12,9 +12,11 @@ export function validateGrowthTasks(w:FormalWorld,fail:(message:string)=>void){
  const s=w.growthTasks;if(!s)return;if(s.startedAt>s.recordedThrough)fail('Growth task start invalid');
  for(const [key,n]of Object.entries(s.facts))if(n>(GROWTH_FACT_LIMITS.get(key)??0))fail('Growth fact exceeds bounded target');
  for(const [id,at]of Object.entries(s.completed)){const t=GROWTH_TASK_BY_ID.get(id);if(!t||at<s.startedAt||at>s.recordedThrough||(s.facts[t.fact]??0)<t.target)fail('Growth completion proof invalid');}
+ // Recovery retains completed IDs across world-time rewind; a later claim may
+ // have an earlier world timestamp. Identity/proof and the durable receipt prevent replay.
  for(const [id,c]of Object.entries(s.claimed)){
   const t=GROWTH_TASK_BY_ID.get(id),receipt=w.commandReceipts.find(r=>r.commandId===c.commandId&&r.issuerId===w.playerFactionId);
-  if(!t||s.completed[id]===undefined||c.at<s.completed[id]||c.at>s.recordedThrough||!receipt){fail('Growth claim receipt invalid');continue;}
+  if(!t||s.completed[id]===undefined||c.at>s.recordedThrough||!receipt){fail('Growth claim receipt invalid');continue;}
   try{const o=JSON.parse(receipt.fingerprint);if(o.issuerId!==w.playerFactionId||o.payload.type!=='tasks.claim'||o.payload.taskId!==id||o.payload.cityId!==c.cityId||!resourceKeys.every(r=>o.payload.expectedResources[r]===c.accepted[r]))fail('Growth claim command mismatch');}catch{fail('Growth claim command malformed');}
   for(const r of resourceKeys){const accepted=Math.min(t.reward[r],Math.max(0,c.capacity-c.reserved[r]-c.stockBefore[r]));if(c.accepted[r]!==accepted||c.lost[r]!==t.reward[r]-accepted)fail('Growth reward ledger invalid');}
  }

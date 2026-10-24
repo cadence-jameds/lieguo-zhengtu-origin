@@ -35,6 +35,11 @@
         }
       ],
       "diagnosis": "Growth task history unnecessarily retained idle world-time updates and every population sample below the next task threshold. Recovery therefore differed from its checkpoint even without any new achievement. Preserve only genuine task progress and exact milestone times; the UI separately projects current population. Original R4-C1 assertions remain unchanged."
+    },
+    {
+      "source": "09e364f0c03c19ea89fa2cebafcf69fd31a2685a",
+      "status": "interrupted",
+      "reason": "Stopped after code review found an additional unclaimed-achievement/Recovery world-time-rewind edge. No completed regression result is claimed for this run; final full regression restarts after its targeted proof."
     }
   ]
 }
