@@ -1,3 +1,4 @@
+import {syncGrowthTasks,captureGrowthEvent,recordGrowthEvent,recordGrowthCommand,claimGrowthReward} from './growthTasks';
 import {isMissionArmy} from './combatModel';
 import {chainDecision,invalidateEndgameIntel} from './endgameAI';
 import {invalidateMilitaryPower,inheritMilitaryPower} from './militaryPower';
@@ -81,7 +82,7 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
 /** These three handlers, lazy settlement and queue promotion write only this city, sequences and political cleanup. */
 function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
- const w={...current,cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:current.commandReceipts.slice(),completionReceipts:current.completionReceipts.slice()};
+ const w={...current,...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:current.commandReceipts.slice(),completionReceipts:current.completionReceipts.slice()};
  w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
@@ -126,6 +127,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(order.issuedWorldTime>current.time)return reject('命令時間超前於世界。');
  const w=cloneOrderDraft(current,order,replay),reports:FormalReport[]=[];
  const p=order.payload;
+ if(order.issuerId===w.playerFactionId)syncGrowthTasks(w);
  const city=spatial(w).cities.get(p.cityId);
  if(p.type!=='player.rebirth'&&p.type!=='campaign.configure'&&(!city||city.ownerFactionId!==order.issuerId))return reject('只能操作自己實際控制的城市。');
  if(city&&p.type!=='campaign.configure')settleCity(w,city);
@@ -133,6 +135,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(!city)return reject('城市不存在。');
  if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ else if(p.type==='tasks.claim'){try{claimGrowthReward(w,city,order,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='city.rename')city.name=p.name;
  else if(p.type==='research.contribute'){
   const project=w.researchProjects.find(x=>x.projectId===p.projectId);
@@ -174,6 +177,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  reports.push(...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
  w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
+ recordGrowthCommand(w,order.issuerId,p);
  // Replay admissions still use every command rule; the whole private draft is validated at its boundary.
  if(!replay)validateFormalWorld(w);
  const ack:CommandAck={commandId:order.commandId,status:'committed',revision:w.revision};
@@ -198,6 +202,7 @@ export function completeResearch(w:FormalWorld,event:Extract<import('./model').F
 function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],submit:Submit){
   const beforePolitics=diplomacySnapshot(w);
   const e=scheduler.pop()!;w.time=e.at;
+  const growthObservation=captureGrowthEvent(w,e);
   const returningSource=e.type==='logistics.return'?w.logistics?.find(t=>t.shipmentId===e.shipmentId)?.sourceCityId:undefined;
   const governanceReports=handleGovernance(w,e,scheduler,submit);
   const aiReports=governanceReports??handleAutonomy(w,e,scheduler,submit);
@@ -221,6 +226,7 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
    if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
+  recordGrowthEvent(w,e,growthObservation,combatReports??[]);
   if(['combat.round','army.arrive','army.return','military.train','research.complete','settlement.arrive'].includes(e.type))invalidateMilitaryPower(w);
   invalidateEndgameIntel(w);
   if(combatReports!==null)for(const army of [...w.armies]){if(!isMissionArmy(army)||army.mission!=='conquest'||army.status!=='returning'||army.departedAt!==w.time||!army.chain?.conquests)continue;const agent=w.autonomy?.agents.find(a=>a.factionId===army.ownerFactionId);if(!agent)continue;const command=chainDecision(w,army,agent);if(command)reports.push(...submitAutonomous(w,scheduler,e,agent.factionId,[command],submit));}
@@ -231,12 +237,12 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
 function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
   const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=target;reconcileWonders(w,scheduler);reconcileVictory(w,scheduler);w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
- validateFormalWorld(w);return{world:w,reports};
+ syncGrowthTasks(w);validateFormalWorld(w);return{world:w,reports};
 }
 export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);reconcileVictory(w,scheduler);
+ const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
  while(scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
@@ -247,7 +253,7 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  const yieldIntervalMs=options.yieldIntervalMs??50;
  if(!Number.isFinite(yieldIntervalMs)||yieldIntervalMs<0)throw new Error('世界推進讓出間隔無效。');
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);reconcileVictory(w,scheduler);
+ const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;
