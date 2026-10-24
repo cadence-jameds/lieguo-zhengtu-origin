@@ -475,3 +475,23 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 
 /* Only the mobile map display menu uses this compact width. */
 .mobile-layout .world-map .map-float-worldtools-panel{width:min(272px,calc(100% - 32px))}
+
+/* Custom mobile shortcuts: keep the original 20% of (viewport - 36px), minimum 66px footprint;
+   reserve a separate 48px touch target for More and space for both arrows. */
+.mobile-layout .mobile-nav.mobile-nav-custom{display:flex;gap:0;padding-inline:0;overflow:visible}
+.mobile-nav-custom .mobile-nav-scroll{position:relative;flex:1;min-width:0}
+.mobile-nav-custom .mobile-nav-track{width:100%;height:58px;padding-inline:18px;scroll-padding-inline:18px;overscroll-behavior-x:contain;scroll-snap-type:x proximity}
+.mobile-layout .mobile-nav-custom .mobile-nav-track>button{flex:0 0 max(66px,calc((100vw - 36px)/5));min-width:66px;min-height:58px;scroll-snap-align:start;touch-action:pan-x}
+.mobile-layout .mobile-nav-custom>.nav-more{flex:0 0 48px;width:48px;min-width:48px;height:58px;min-height:58px;align-self:flex-start;padding:4px 2px;border-left:1px solid var(--line)}
+.mobile-layout .mobile-nav-custom .nav-arrow{min-width:18px;width:18px;padding:0}
+.mobile-more>button{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.mobile-more .nav-unread-count{position:static;flex:none}
+.mobile-more>button.active{color:var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--surface))}
+.mobile-more>button.has-unread{animation:unread-soft-pulse 2.8s ease-in-out infinite}
+.mobile-shortcut-order{padding-left:24px}
+.mobile-shortcut-order li{padding-block:6px}
+.mobile-shortcut-order li>span{display:block;margin-bottom:4px}
+.mobile-shortcut-order li>div{display:flex;gap:6px}
+.mobile-shortcut-order button,.mobile-shortcut-options button,.mobile-shortcut-dialog .dialog-actions button{min-width:44px;min-height:44px}
+.mobile-shortcut-options{display:flex;flex-wrap:wrap;gap:6px}
+@media(prefers-reduced-motion:reduce){.mobile-more>button.has-unread{animation:none}}
