@@ -17,16 +17,16 @@ Base：`9c62265dce81becb444c10d79450ec8574bbc05a`（GitHub main／PR #34 已合�
 
 | 階段 | 結果 | 證據 |
 |---|---|---|
-| 任務系統與存檔／離線／導覽定向 | 112 通過，0 失敗 | [phase1-tests.json](phase1-tests.json) |
+| 任務系統與存檔／離線／導覽定向 | 134 通過，0 失敗（含原 R4-C1 21 項及新增回復案例） | [phase1-tests.json](phase1-tests.json) |
 | 勝利頁、B9 權威／奇觀與目標 UI 定向 | 67 通過，0 失敗 | [phase2-tests.json](phase2-tests.json) |
 | 真實 Worker／IndexedDB 瀏覽器 | 10 案例通過，0 失敗，0 page errors | [browser.json](browser.json) |
 | Typecheck／Build | 已通過；最終提交另驗建置身分及 Pages 路徑 | 最終摘要另附 |
-| 隔離完整回歸 | 執行中，完成後補入結果 | `node scripts/verify-in-isolation.mjs full` |
+| 隔離完整回歸 | 首輪 1951 通過／3 失敗／1 跳過；修正後重跑中 | [完整紀錄](full-regression.json) |
 
 任務階段指令：
 
 ```sh
-npm exec vitest run src/game/formal/growthTasks.test.ts src/game/formal/recoveryR1.test.ts src/game/formal/offlineCooperative.test.ts src/game/MobileNavigation.test.tsx -- --maxWorkers=2 --testTimeout=30000 --reporter=json --outputFile=artifacts/journey-goals/phase1.json
+npm exec vitest run src/game/formal/growthTasks.test.ts src/game/formal/recoveryR1.test.ts src/game/formal/offlineCooperative.test.ts src/game/MobileNavigation.test.tsx src/game/formal/reviewDeltaR4.test.ts -- --maxWorkers=2 --testTimeout=30000 --reporter=json --outputFile=artifacts/journey-goals/phase1.json
 ```
 
 勝利之路階段指令：
@@ -34,6 +34,8 @@ npm exec vitest run src/game/formal/growthTasks.test.ts src/game/formal/recovery
 ```sh
 npm exec vitest run src/game/presentation/journeyGoals.test.tsx src/game/presentation/victoryB95.test.tsx src/game/formal/victoryB95.test.ts src/game/formal/hegemonyB95.test.ts src/game/formal/wonderDurabilityB95.test.ts src/game/formal/wonderCombatB95.test.ts -- --maxWorkers=2 --testTimeout=30000 --reporter=json --outputFile=artifacts/journey-goals/phase2.json
 ```
+
+首輪完整回歸揭露 R4-C1 在 1X／10X／25X 下的 Recovery 等價差異：原先任務歷史連沒有新成就的人口抽樣與閒置世界時間也一併保留。修正為僅記真實進度／人口門檻及其發生時點，沒有改寫既有測試。原失敗與修正後結果均保留於完整紀錄。
 
 完整回歸依 AGENTS.md 在可丟棄副本執行；不覆寫既有歷史驗收文件。保留 B5 E1 HOLD、Astra Gate 未 PASS、實機驗收待完成等既有事實，不把本次測試宣告為正式發布驗收。
 

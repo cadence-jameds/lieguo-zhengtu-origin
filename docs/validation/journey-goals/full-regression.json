@@ -1,0 +1,40 @@
+{
+  "command": "node scripts/verify-in-isolation.mjs full",
+  "attempts": [
+    {
+      "source": "e1eef6b1e5f561e3e3431d795d9c224fdf0746a5",
+      "success": false,
+      "total": 1955,
+      "passed": 1951,
+      "failed": 3,
+      "skipped": 1,
+      "failures": [
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "name": "R4-C1 1X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "failed",
+          "failure": [
+            "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(27) }\n    at /tmp/lieguo-verification-EyQ65p/src/game/formal/reviewDeltaR4.test.ts:93:101\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+          ]
+        },
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "name": "R4-C1 10X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "failed",
+          "failure": [
+            "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(27) }\n    at /tmp/lieguo-verification-EyQ65p/src/game/formal/reviewDeltaR4.test.ts:93:101\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+          ]
+        },
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "name": "R4-C1 25X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "failed",
+          "failure": [
+            "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(27) }\n    at /tmp/lieguo-verification-EyQ65p/src/game/formal/reviewDeltaR4.test.ts:93:101\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+          ]
+        }
+      ],
+      "diagnosis": "Growth task history unnecessarily retained idle world-time updates and every population sample below the next task threshold. Recovery therefore differed from its checkpoint even without any new achievement. Preserve only genuine task progress and exact milestone times; the UI separately projects current population. Original R4-C1 assertions remain unchanged."
+    }
+  ]
+}

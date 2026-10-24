@@ -1,8 +1,8 @@
 {
-  "phase": "phase1",
+  "phase": "phase1-with-R4-C1-regression",
   "success": true,
-  "total": 112,
-  "passed": 112,
+  "total": 134,
+  "passed": 134,
   "failed": 0,
   "skipped": 0,
   "suites": [
@@ -13,73 +13,73 @@
         {
           "name": "defaults to six ordered shortcuts and preserves intentionally empty or shorter choices",
           "status": "passed",
-          "durationMs": 4.225451000000021,
+          "durationMs": 2.9658410000001822,
           "failures": []
         },
         {
           "name": "validates unknown, duplicate, corrupt and excessive preferences",
           "status": "passed",
-          "durationMs": 1.057557000000088,
+          "durationMs": 1.0702750000000378,
           "failures": []
         },
         {
           "name": "persists only device preferences and reports failed storage without losing session choices",
           "status": "passed",
-          "durationMs": 24.200367000000142,
+          "durationMs": 17.754646999999977,
           "failures": []
         },
         {
           "name": "keeps More outside the scrolling track, highlights hidden current pages and routes all visible buttons",
           "status": "passed",
-          "durationMs": 17.477014999999938,
+          "durationMs": 14.323167000000012,
           "failures": []
         },
         {
           "name": "shows independent per-feature reminders, aggregates only hidden features and never assigns reports to tasks",
           "status": "passed",
-          "durationMs": 34.721356000000014,
+          "durationMs": 12.179212000000007,
           "failures": []
         },
         {
           "name": "retains unread number without attention and attention without unread number",
           "status": "passed",
-          "durationMs": 3.0381119999999555,
+          "durationMs": 3.0211729999998624,
           "failures": []
         },
         {
           "name": "preserves overview home, settings, campaign information and all unselected formal functions",
           "status": "passed",
-          "durationMs": 6.789389999999912,
+          "durationMs": 5.247237999999925,
           "failures": []
         },
         {
           "name": "edits staged choices, enforces six, reorders, removes, re-adds and saves fewer than six in order",
           "status": "passed",
-          "durationMs": 31.34247900000014,
+          "durationMs": 45.52060400000005,
           "failures": []
         },
         {
           "name": "cancel discards edits and an empty configuration remains usable through More",
           "status": "passed",
-          "durationMs": 5.827804999999898,
+          "durationMs": 5.3661950000000616,
           "failures": []
         },
         {
           "name": "remeasures on preference changes and honors reduced-motion for arrow scrolling",
           "status": "passed",
-          "durationMs": 9.38664800000015,
+          "durationMs": 8.788351999999804,
           "failures": []
         },
         {
           "name": "desktop keeps every existing feature and report indicator irrespective of mobile preferences",
           "status": "passed",
-          "durationMs": 45.665175999999974,
+          "durationMs": 29.76151200000004,
           "failures": []
         },
         {
           "name": "keeps the active shortcut clear of arrow gutters after orientation changes",
           "status": "passed",
-          "durationMs": 5.111603999999943,
+          "durationMs": 4.8854630000000725,
           "failures": []
         }
       ]
@@ -91,511 +91,517 @@
         {
           "name": "all 80 IDs, names and four-resource rewards match v94 §16 individual rows exactly",
           "status": "passed",
-          "durationMs": 12.28774599999997,
+          "durationMs": 10.225550999999996,
           "failures": []
         },
         {
           "name": "N01 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 28.41144600000007,
+          "durationMs": 25.088085999999976,
           "failures": []
         },
         {
           "name": "N02 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 6.0966430000000855,
+          "durationMs": 3.472401999999988,
           "failures": []
         },
         {
           "name": "N03 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 3.9878689999999324,
+          "durationMs": 6.770764999999983,
           "failures": []
         },
         {
           "name": "N04 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 3.8039660000000595,
+          "durationMs": 4.211987000000022,
           "failures": []
         },
         {
           "name": "F01 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.768862000000013,
+          "durationMs": 2.428395999999907,
           "failures": []
         },
         {
           "name": "F02 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.242772999999943,
+          "durationMs": 2.124135000000024,
           "failures": []
         },
         {
           "name": "F03 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 7.028224000000023,
+          "durationMs": 4.782801999999947,
           "failures": []
         },
         {
           "name": "F04 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.026132000000075,
+          "durationMs": 1.9312190000000555,
           "failures": []
         },
         {
           "name": "F05 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 1.571198000000095,
+          "durationMs": 1.8101599999999962,
           "failures": []
         },
         {
           "name": "F06 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 1.9072250000000395,
+          "durationMs": 2.0789380000001074,
           "failures": []
         },
         {
           "name": "F07 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 1.2184259999999085,
+          "durationMs": 1.140309000000002,
           "failures": []
         },
         {
           "name": "F08 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 1.3779919999999493,
+          "durationMs": 1.894345000000044,
           "failures": []
         },
         {
           "name": "I02 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.8136389999999665,
+          "durationMs": 5.130736999999954,
           "failures": []
         },
         {
           "name": "I03 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.1769350000000713,
+          "durationMs": 2.1131689999999708,
           "failures": []
         },
         {
           "name": "I04 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.809262999999987,
+          "durationMs": 6.376340999999911,
           "failures": []
         },
         {
           "name": "I05 uses a real lawful field completion at its exact level",
           "status": "passed",
-          "durationMs": 2.19733599999995,
+          "durationMs": 2.828897999999981,
           "failures": []
         },
         {
           "name": "N05 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 2.134633000000008,
+          "durationMs": 24.571381000000088,
           "failures": []
         },
         {
           "name": "N06 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 2.115274999999997,
+          "durationMs": 2.209991999999943,
           "failures": []
         },
         {
           "name": "N07 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.6035159999998996,
+          "durationMs": 1.8148570000000745,
           "failures": []
         },
         {
           "name": "N08 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 3.0153080000000045,
+          "durationMs": 1.8129940000000033,
           "failures": []
         },
         {
           "name": "N09 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.6534599999999955,
+          "durationMs": 3.0994289999999864,
           "failures": []
         },
         {
           "name": "N10 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.3071370000000115,
+          "durationMs": 1.8876249999999573,
           "failures": []
         },
         {
           "name": "N12 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.2179949999999735,
+          "durationMs": 1.7332959999999957,
           "failures": []
         },
         {
           "name": "F09 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.8274079999999913,
+          "durationMs": 1.3651609999999437,
           "failures": []
         },
         {
           "name": "F10 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.4242499999999154,
+          "durationMs": 1.1323559999999588,
           "failures": []
         },
         {
           "name": "F11 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.818683999999962,
+          "durationMs": 1.5285430000000133,
           "failures": []
         },
         {
           "name": "F12 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.8152099999999791,
+          "durationMs": 1.0552020000000084,
           "failures": []
         },
         {
           "name": "F13 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.2751090000000431,
+          "durationMs": 1.14368300000001,
           "failures": []
         },
         {
           "name": "F14 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.2387860000000046,
+          "durationMs": 1.5095349999999144,
           "failures": []
         },
         {
           "name": "F15 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.3513020000000324,
+          "durationMs": 1.3044109999999591,
           "failures": []
         },
         {
           "name": "F16 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.1203699999999799,
+          "durationMs": 1.0496540000000323,
           "failures": []
         },
         {
           "name": "F17 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.353556000000026,
+          "durationMs": 1.3140859999999748,
           "failures": []
         },
         {
           "name": "F18 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 18.52718200000004,
+          "durationMs": 1.129132000000027,
           "failures": []
         },
         {
           "name": "F19 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.5109689999999318,
+          "durationMs": 1.3325330000000122,
           "failures": []
         },
         {
           "name": "F20 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 3.3848350000000664,
+          "durationMs": 1.8384220000000369,
           "failures": []
         },
         {
           "name": "F21 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.3301610000000892,
+          "durationMs": 3.621381000000042,
           "failures": []
         },
         {
           "name": "F27 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.2347789999998895,
+          "durationMs": 1.7690589999999702,
           "failures": []
         },
         {
           "name": "C01 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.5241479999999683,
+          "durationMs": 2.4023070000000644,
           "failures": []
         },
         {
           "name": "C02 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.8912219999999706,
+          "durationMs": 3.699777999999924,
           "failures": []
         },
         {
           "name": "C03 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.7760710000000017,
+          "durationMs": 1.7543570000000273,
           "failures": []
         },
         {
           "name": "C17 requires the player's real building completion, never a conquered snapshot",
           "status": "passed",
-          "durationMs": 1.805704999999989,
+          "durationMs": 1.9778479999999945,
           "failures": []
         },
         {
           "name": "old snapshots never fabricate construction, troop or military history; provable age/tech milestones may be recognized",
           "status": "passed",
-          "durationMs": 0.8655630000000656,
+          "durationMs": 0.755198000000064,
           "failures": []
         },
         {
           "name": "player/AI ownership, cancellation and captured high buildings cannot produce completion or bulk lower-level rewards",
           "status": "passed",
-          "durationMs": 4.885418000000072,
+          "durationMs": 4.849039999999832,
           "failures": []
         },
         {
           "name": "manual claims use selected own city, show bounded per-resource capacity including reservations, and lose all overflow once",
           "status": "passed",
-          "durationMs": 6.077504999999974,
+          "durationMs": 7.819238000000041,
           "failures": []
         },
         {
           "name": "rejects unknown/uncompleted tasks, AI claimants, changed ownership and stale reward confirmations",
           "status": "passed",
-          "durationMs": 4.04664600000001,
+          "durationMs": 3.6547109999999066,
           "failures": []
         },
         {
           "name": "full inventory can be claimed with zero accepted resources; delaying keeps completion through arbitrary time",
           "status": "passed",
-          "durationMs": 4.323325999999952,
+          "durationMs": 4.600662000000057,
           "failures": []
         },
         {
           "name": "population milestones are single-city, sticky, do not trust inherited city milestones and agree across offline/segmented replay",
           "status": "passed",
-          "durationMs": 34.876956000000064,
+          "durationMs": 52.27537099999995,
           "failures": []
         },
         {
           "name": "scouting counts only returned enemy-city intel; raids count only surviving returned loot",
           "status": "passed",
-          "durationMs": 435.9872680000001,
+          "durationMs": 390.99479899999983,
           "failures": []
         },
         {
           "name": "claim and durable task authority survive reload, corrupt-checkpoint Recovery and command resending without new IDs bypassing claims",
           "status": "passed",
-          "durationMs": 54.188169000000016,
+          "durationMs": 48.81361500000003,
           "failures": []
         },
         {
           "name": "claim transaction failure leaves inventory, claim ledger and CAS authority untouched; retry then awards once",
           "status": "passed",
-          "durationMs": 14.823143000000073,
+          "durationMs": 15.195719000000054,
           "failures": []
         },
         {
           "name": "validates tamper and prevents ordinary saves dropping irreversible task authority",
           "status": "passed",
-          "durationMs": 27.028937999999926,
+          "durationMs": 7.596647999999959,
           "failures": []
         },
         {
           "name": "N11 records only actual completed militia training",
           "status": "passed",
-          "durationMs": 3.324967000000015,
+          "durationMs": 3.5237070000000585,
           "failures": []
         },
         {
           "name": "C04 records only actual completed guard.civ_zhongguo training",
           "status": "passed",
-          "durationMs": 1.5451689999999871,
+          "durationMs": 1.6295930000001135,
           "failures": []
         },
         {
           "name": "C05 records only actual completed baggage training",
           "status": "passed",
-          "durationMs": 2.500274999999874,
+          "durationMs": 1.2381729999999607,
           "failures": []
         },
         {
           "name": "C06 records only actual completed ram training",
           "status": "passed",
-          "durationMs": 1.6074120000000676,
+          "durationMs": 11.907871000000114,
           "failures": []
         },
         {
           "name": "C07 records only actual completed catapult training",
           "status": "passed",
-          "durationMs": 1.173579000000018,
+          "durationMs": 1.864129999999932,
           "failures": []
         },
         {
           "name": "F22 observes the completed blacksmith.melee.1 project without introducing new research rules",
           "status": "passed",
-          "durationMs": 3.1738419999999223,
+          "durationMs": 3.9001049999999395,
           "failures": []
         },
         {
           "name": "C14 observes the completed logistics.auto project without introducing new research rules",
           "status": "passed",
-          "durationMs": 2.042987000000039,
+          "durationMs": 2.8486880000000383,
           "failures": []
         },
         {
           "name": "I11 observes the completed elite.infantry project without introducing new research rules",
           "status": "passed",
-          "durationMs": 2.93343700000014,
+          "durationMs": 3.481565000000046,
           "failures": []
         },
         {
           "name": "I12 observes the completed elite.ranged project without introducing new research rules",
           "status": "passed",
-          "durationMs": 3.5926539999998113,
+          "durationMs": 4.141973000000007,
           "failures": []
         },
         {
           "name": "I12 observes the completed elite.cavalry project without introducing new research rules",
           "status": "passed",
-          "durationMs": 3.212489999999889,
+          "durationMs": 2.9159279999998944,
           "failures": []
         },
         {
           "name": "I13 observes the completed elite.guard project without introducing new research rules",
           "status": "passed",
-          "durationMs": 2.4227699999999004,
+          "durationMs": 3.9774889999998777,
           "failures": []
         },
         {
           "name": "all three age tasks are awarded only on actual age completion, with no task prerequisite gates",
           "status": "passed",
-          "durationMs": 10.863817000000154,
+          "durationMs": 14.141959000000043,
           "failures": []
         },
         {
           "name": "City promotion and Lv11 field tasks follow actual project completions and never infer lower-level construction history",
           "status": "passed",
-          "durationMs": 4.050620999999865,
+          "durationMs": 5.06579099999999,
           "failures": []
         },
         {
           "name": "real reserved incoming capacity remains protected when a reward is claimed before a shipment arrives",
           "status": "passed",
-          "durationMs": 3.7549229999999625,
+          "durationMs": 4.7637130000000525,
           "failures": []
         },
         {
           "name": "automatic logistics completion uses scheduler provenance; a forged auto command ID cannot claim it",
           "status": "passed",
-          "durationMs": 5.866603000000168,
+          "durationMs": 6.1494350000000395,
           "failures": []
         },
         {
           "name": "importing an older same-campaign save preserves irreversible claims even across a world-time rewind",
           "status": "passed",
-          "durationMs": 16.696467999999868,
+          "durationMs": 20.40078699999981,
           "failures": []
         },
         {
           "name": "N13 recognizes a single own city's real crossing of 500",
           "status": "passed",
-          "durationMs": 1.277372000000014,
+          "durationMs": 1.475885000000062,
           "failures": []
         },
         {
           "name": "F28 recognizes a single own city's real crossing of 2000",
           "status": "passed",
-          "durationMs": 0.7838309999999638,
+          "durationMs": 1.0288429999998243,
           "failures": []
         },
         {
           "name": "C16 recognizes a single own city's real crossing of 10000",
           "status": "passed",
-          "durationMs": 0.913332999999966,
+          "durationMs": 1.0791380000000572,
           "failures": []
         },
         {
           "name": "I06 recognizes a single own city's real crossing of 15000",
           "status": "passed",
-          "durationMs": 0.7741770000000088,
+          "durationMs": 1.0873300000000654,
           "failures": []
         },
         {
           "name": "I07 recognizes a single own city's real crossing of 20000",
           "status": "passed",
-          "durationMs": 0.7448739999999816,
+          "durationMs": 1.1059880000000248,
           "failures": []
         },
         {
           "name": "I08 recognizes a single own city's real crossing of 22000",
           "status": "passed",
-          "durationMs": 0.9005939999999555,
+          "durationMs": 1.0607709999999315,
           "failures": []
         },
         {
           "name": "I09 recognizes a single own city's real crossing of 25000",
           "status": "passed",
-          "durationMs": 0.7797160000000076,
+          "durationMs": 1.1379349999999704,
           "failures": []
         },
         {
           "name": "I10 recognizes a single own city's real crossing of 30000",
           "status": "passed",
-          "durationMs": 0.8529740000001311,
+          "durationMs": 1.1023720000000594,
           "failures": []
         },
         {
           "name": "F25, F26 and I14 follow lawful governance, legion creation and consented empire membership",
           "status": "passed",
-          "durationMs": 258.26501899999994,
+          "durationMs": 253.97557399999982,
           "failures": []
         },
         {
           "name": "C20 counts only real friendly stationed reinforcements, while I15 requires real joint conquest ownership transfer",
           "status": "passed",
-          "durationMs": 342.6850099999999,
+          "durationMs": 372.416882,
           "failures": []
         },
         {
           "name": "C10, C11 and C12 require the real colonization unit, founded city and completed integration",
           "status": "passed",
-          "durationMs": 692.5868020000003,
+          "durationMs": 621.5709919999999,
           "failures": []
         },
         {
           "name": "F24/I16 use real exile defeat and existing recruitment settlement; I17 consumes a lawful foreign craftsman only on castle completion",
           "status": "passed",
-          "durationMs": 204.5565349999997,
+          "durationMs": 207.98662700000023,
           "failures": []
         },
         {
           "name": "loading a pre-feature native save with zero or positive offline replay initializes only trusted state and preserves claims",
           "status": "passed",
-          "durationMs": 44.95951400000013,
+          "durationMs": 28.946183999999903,
           "failures": []
         },
         {
           "name": "two distinct simultaneous claims to different cities cannot both pass durable CAS",
           "status": "passed",
-          "durationMs": 10.68676400000004,
+          "durationMs": 35.89654799999971,
           "failures": []
         },
         {
           "name": "I12 remains one task and one reward after both ranged and cavalry elite qualifications are present",
           "status": "passed",
-          "durationMs": 1.34522300000026,
+          "durationMs": 1.1476090000001022,
           "failures": []
         },
         {
           "name": "counts a lawful construction completed during player ownership after a gift, but never an already-finished captured snapshot",
           "status": "passed",
-          "durationMs": 2.2005209999997533,
+          "durationMs": 3.0754139999999097,
           "failures": []
         },
         {
           "name": "I15 trusts the existing lawful joint protocol without adding a new minimum-army-count rule",
           "status": "passed",
-          "durationMs": 257.9524000000001,
+          "durationMs": 269.3468240000002,
+          "failures": []
+        },
+        {
+          "name": "idle time and sub-threshold population growth leave the durable achievement history unchanged across Recovery",
+          "status": "passed",
+          "durationMs": 30.104851999999937,
           "failures": []
         }
       ]
@@ -607,19 +613,19 @@
         {
           "name": "cooperative replay matches atomic synchronous replay exactly, even across same-time events",
           "status": "passed",
-          "durationMs": 67.26134399999998,
+          "durationMs": 66.40224,
           "failures": []
         },
         {
           "name": "worker offline catch-up preserves summary, reports and final world without modifying the input",
           "status": "passed",
-          "durationMs": 7.729161999999974,
+          "durationMs": 10.06223799999998,
           "failures": []
         },
         {
           "name": "a cooperative replay error never publishes partial mutations to the original save",
           "status": "passed",
-          "durationMs": 3.859819000000016,
+          "durationMs": 5.356650999999999,
           "failures": []
         }
       ]
@@ -631,73 +637,205 @@
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-A exact Gate reproduction: initial A, half-funded B, corrupt current, and B gameTime mismatch",
           "status": "passed",
-          "durationMs": 73.30242999999996,
+          "durationMs": 66.27879800000005,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-A skips a metadata-invalid B, restores A atomically, and preserves revision/dedupe/ID high-water marks",
           "status": "passed",
-          "durationMs": 43.13177699999994,
+          "durationMs": 38.55201699999998,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A history-modified failure propagates, rolls back every store, and retries once",
           "status": "passed",
-          "durationMs": 71.63260500000001,
+          "durationMs": 64.02898699999997,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A report-write failure propagates, rolls back every store, and retries once",
           "status": "passed",
-          "durationMs": 23.140816000000086,
+          "durationMs": 29.167483000000004,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A backup-write failure propagates, rolls back every store, and retries once",
           "status": "passed",
-          "durationMs": 58.97851600000013,
+          "durationMs": 43.74086999999997,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A world-write failure propagates, rolls back every store, and retries once",
           "status": "passed",
-          "durationMs": 32.92479299999991,
+          "durationMs": 18.536834,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-B selected A authority-write failure propagates, rolls back every store, and retries once",
           "status": "passed",
-          "durationMs": 49.53580499999998,
+          "durationMs": 18.098404999999957,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-C campaignId mismatch has the same validity in auto Recovery, backupList, and manual restore",
           "status": "passed",
-          "durationMs": 16.656240000000025,
+          "durationMs": 16.870086000000015,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-C gameTime mismatch has the same validity in auto Recovery, backupList, and manual restore",
           "status": "passed",
-          "durationMs": 19.88434200000006,
+          "durationMs": 18.78526199999999,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-C reportCursor mismatch has the same validity in auto Recovery, backupList, and manual restore",
           "status": "passed",
-          "durationMs": 22.78539999999998,
+          "durationMs": 37.802728,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1-D valid current save does not inspect or restore a bad checkpoint or write any store",
           "status": "passed",
-          "durationMs": 11.018585999999914,
+          "durationMs": 10.863973999999985,
           "failures": []
         },
         {
           "name": "B1-R1 automatic Recovery checkpoint fallback R1 pure checkpoint validation does not change its input or any database table",
           "status": "passed",
-          "durationMs": 27.33481199999983,
+          "durationMs": 9.930622000000085,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/reviewDeltaR4.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "R4-C1 lost craftsman destination: reachable does not abort the world",
+          "status": "passed",
+          "durationMs": 1222.812355,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 lost craftsman destination: blocked does not abort the world",
+          "status": "passed",
+          "durationMs": 1418.0940830000004,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 lost craftsman destination: extinct does not abort the world",
+          "status": "passed",
+          "durationMs": 285.3205039999998,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 arrival handler alone retires/redirects once without refunds, rewards or stale-ID reuse: reachable",
+          "status": "passed",
+          "durationMs": 568.5936109999998,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 arrival handler alone retires/redirects once without refunds, rewards or stale-ID reuse: blocked",
+          "status": "passed",
+          "durationMs": 809.6281150000004,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 arrival handler alone retires/redirects once without refunds, rewards or stale-ID reuse: extinct",
+          "status": "passed",
+          "durationMs": 181.78420600000027,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 1X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "passed",
+          "durationMs": 4988.616839,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 10X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "passed",
+          "durationMs": 5015.625608999999,
+          "failures": []
+        },
+        {
+          "name": "R4-C1 25X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "passed",
+          "durationMs": 4790.017480999999,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 lost source cannot dispatch a waiting mixed joint; other city=true",
+          "status": "passed",
+          "durationMs": 180.06150200000047,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 lost source cannot dispatch a waiting mixed joint; other city=false",
+          "status": "passed",
+          "durationMs": 166.64010100000087,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 capture preserves already departed troops under existing survival/extinction rules; other city=true",
+          "status": "passed",
+          "durationMs": 184.10248100000172,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 capture preserves already departed troops under existing survival/extinction rules; other city=false",
+          "status": "passed",
+          "durationMs": 216.00642500000322,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 departure at capture %+d ms obeys existing priorities; no retroactive death",
+          "status": "passed",
+          "durationMs": 196.68183000000136,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 departure at capture %+d ms obeys existing priorities; no retroactive death",
+          "status": "passed",
+          "durationMs": 186.32623700000113,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 departure at capture %+d ms obeys existing priorities; no retroactive death",
+          "status": "passed",
+          "durationMs": 165.60239499999807,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 departure handler rejects a stale legacy waiting army after ownership loss, without grants or sequence allocation",
+          "status": "passed",
+          "durationMs": 142.95676199999798,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 removing one waiting participant preserves the surviving joint member and cannot transfer the lost source back",
+          "status": "passed",
+          "durationMs": 172.74562999999762,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 1X SaveLoad / full import / Recovery / sliced battle clear waiting forces only once",
+          "status": "passed",
+          "durationMs": 1165.8502630000003,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 10X SaveLoad / full import / Recovery / sliced battle clear waiting forces only once",
+          "status": "passed",
+          "durationMs": 1156.2974939999986,
+          "failures": []
+        },
+        {
+          "name": "R4-C3 25X SaveLoad / full import / Recovery / sliced battle clear waiting forces only once",
+          "status": "passed",
+          "durationMs": 1145.648663,
           "failures": []
         }
       ]

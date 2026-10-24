@@ -16,14 +16,16 @@ export type GrowthClaim={commandId:CommandId;cityId:CityId;at:number;accepted:Re
 export type GrowthTaskState={version:1;startedAt:number;recordedThrough:number;facts:Record<string,number>;completed:Record<string,number>;claimed:Record<string,GrowthClaim>;settledCities:CityId[];autoShipments:string[]};
 export type GrowthClaimCommand={type:'tasks.claim';cityId:CityId;taskId:string;expectedResources:Resources};
 const emptyState=(time:number):GrowthTaskState=>({version:1,startedAt:time,recordedThrough:time,facts:{},completed:{},claimed:{},settledCities:[],autoShipments:[]});
-function fact(w:FormalWorld,key:string,value=1){
+function fact(w:FormalWorld,key:string,value=1,at=w.time){
  const limit=GROWTH_FACT_LIMITS.get(key);if(!limit||value<=0)return;
- const state=w.growthTasks??=emptyState(w.time);state.recordedThrough=Math.max(state.recordedThrough,w.time);state.startedAt=Math.min(state.startedAt,w.time);state.facts[key]=Math.max(state.facts[key]??0,Math.min(limit,Math.floor(value)));
- for(const task of GROWTH_TASKS)if(task.fact===key&&state.facts[key]>=task.target&&state.completed[task.id]===undefined)state.completed[task.id]=w.time;
+ const bounded=Math.min(limit,Math.floor(value)),prior=w.growthTasks;
+ if(prior&&(prior.facts[key]??0)>=bounded&&GROWTH_TASKS.every(t=>t.fact!==key||(prior.facts[key]??0)<t.target||prior.completed[t.id]!==undefined))return;
+ const state=w.growthTasks??=emptyState(at);state.recordedThrough=Math.max(state.recordedThrough,at);state.startedAt=Math.min(state.startedAt,at);state.facts[key]=Math.max(state.facts[key]??0,bounded);
+ for(const task of GROWTH_TASKS)if(task.fact===key&&state.facts[key]>=task.target&&state.completed[task.id]===undefined)state.completed[task.id]=at;
 }
 /** Only enduring authoritative state is reconciled. Buildings/troops never imply past completion events. */
 export function syncGrowthTasks(w:FormalWorld){
- const f=w.factions.find(f=>f.id===w.playerFactionId);if(!f)return;if(w.growthTasks)w.growthTasks.recordedThrough=Math.max(w.growthTasks.recordedThrough,w.time);
+ const f=w.factions.find(f=>f.id===w.playerFactionId);if(!f)return;
  fact(w,'age',f.age??0);
  for(const id of f.techIds){const t=TECH_CATALOG[id];if(t?.scope==='traditional'&&!t.civilizationId)fact(w,'technology:common');fact(w,'technology:'+id);if(id==='elite.ranged'||id==='elite.cavalry')fact(w,'technology:elite.ranged-or-cavalry');}
  if(legionOf(w,f.id))fact(w,'legion');if(empireOf(w,f.id))fact(w,'empire');
@@ -41,11 +43,15 @@ export function syncGrowthTasks(w:FormalWorld){
 export function recordGrowthPopulation(w:FormalWorld,c:FormalCity,before:number,from:number,to:number,after:number){
  if(c.ownerFactionId!==w.playerFactionId||spatial(w).cities.get(c.id)!==c||after<500)return;
  const missing=GROWTH_TASKS.filter(t=>t.fact==='population'&&after+1e-8>=t.target&&w.growthTasks?.completed[t.id]===undefined);
- fact(w,'population',after);
- for(const t of missing){let lo=Math.min(from,to),hi=to;
+ if(!missing.length)return;
+ // Persist crossed milestones and their actual event times, not incidental samples.
+ // Live display uses ownedPopulationProgress; Recovery retains real achievements.
+ const crossings=missing.map(t=>{let lo=Math.min(from,to),hi=to;
   if(before+1e-8<t.target)while(lo<hi){const mid=Math.floor((lo+hi)/2),pop=growPopulation(before,c.housing,buildingLevel(c,'monastery'),(mid-from)/HOUR);if(pop+1e-8>=t.target)hi=mid;else lo=mid+1;}
-  const state=w.growthTasks!;state.completed[t.id]=lo;state.startedAt=Math.min(state.startedAt,lo);
- }
+  return {task:t,at:lo};
+ });
+ fact(w,'population',Math.max(...missing.map(t=>t.target)),Math.max(...crossings.map(c=>c.at)));
+ for(const {task,at}of crossings){const state=w.growthTasks!;state.completed[task.id]=at;state.startedAt=Math.min(state.startedAt,at);}
 }
 /** Rendering reads committed task history only; legacy recognition runs in the backend. */
 export function growthTaskState(w:FormalWorld){return w.growthTasks??emptyState(w.time);}
@@ -63,7 +69,7 @@ export function claimGrowthReward(w:FormalWorld,c:FormalCity,o:FormalOrder,p:Gro
  requireRule(c.ownerFactionId===o.issuerId,'領獎城市已非玩家所有。');const task=GROWTH_TASK_BY_ID.get(p.taskId);requireRule(task,'任務不存在。');syncGrowthTasks(w);
  const state=w.growthTasks;requireRule(state&&state.completed[task.id]!==undefined,'任務尚未完成。');requireRule(!state.claimed[task.id],'此任務已領取。');
  const quote=quoteGrowthReward(w,c,task);requireRule(resourceKeys.every(r=>p.expectedResources[r]===quote.accepted[r]),'城市容量或庫存已改變，請重新核對實收與損失。');
- for(const r of resourceKeys)c.stock[r]+=quote.accepted[r];state.claimed[task.id]={commandId:o.commandId,cityId:c.id,at:w.time,...quote};
+ for(const r of resourceKeys)c.stock[r]+=quote.accepted[r];state.recordedThrough=Math.max(state.recordedThrough,w.time);state.claimed[task.id]={commandId:o.commandId,cityId:c.id,at:w.time,...quote};
 }
 function appliedCityCommand(w:FormalWorld,id:CommandId,cityId:CityId,playerOnly=true){const r=w.commandReceipts.find(r=>r.commandId===id&&(!playerOnly||r.issuerId===w.playerFactionId)&&r.disposition==='applied');if(!r)return false;try{const p=JSON.parse(r.fingerprint);return p.issuerId===r.issuerId&&p.payload.cityId===cityId;}catch{return false;}}
 function constructionFact(w:FormalWorld,prefix:string,level:number){

@@ -141,3 +141,8 @@ it('counts a lawful construction completed during player ownership after a gift,
 it('I15 trusts the existing lawful joint protocol without adding a new minimum-army-count rule',()=>{
  let w=battlefield();w.factions[0].age=2;build(w.cities[0],'embassy',15);w.cities[0].military!.units={militia:100};w.cities[1].military!.units={};w.cities[1].wallLevel=0;w=issue(w,{type:'politics',cityId:w.cities[0].id,action:'legion-create',name:'正式會師'}).world;w=issue(w,{type:'joint.create',cityId:w.cities[0].id,targetCityId:w.cities[1].id,units:{militia:50},arrivalAt:w.time+HOUR}).world;const group=w.politics!.joints[0];w=advanceFormal(w,group.arrivalAt).world;expect(w.growthTasks?.completed.I15).toBeDefined();expect(w.cities[1].ownerFactionId).toBe(w.playerFactionId);
 });
+
+it('idle time and sub-threshold population growth leave the durable achievement history unchanged across Recovery',async()=>{
+ let w=fixture();rich(w);w.cities[0].population=15000;syncGrowthTasks(w);const db=store();w=await db.start(w);const backup=(await db.backupList())[0],history=structuredClone(w.growthTasks);
+ const later=advanceFormal(w,w.time+HOUR).world;expect(later.growthTasks).toEqual(history);const saved=await db.save(later,[],w.revision);const restored=await db.restore(backup.id);expect(restored.growthTasks).toEqual(history);expect(restored.time).toBe(w.time);expect(saved.time).toBeGreaterThan(restored.time);
+});
