@@ -1,0 +1,57 @@
+{
+  "sourceCommit": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+  "note": "Final runtime source. The delivery commit only adds validation evidence. No deployment was performed.",
+  "node": "v24.19.0",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run build",
+      "status": "PASS"
+    },
+    {
+      "command": "node scripts/check-release-build.mjs (root build)",
+      "status": "PASS",
+      "result": {
+        "version": "0.30.67",
+        "date": "2026-10-24",
+        "commitSha": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+        "contentSha": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+        "dirty": false,
+        "artifactsConsistent": true,
+        "workerIdentityConsistent": true
+      }
+    },
+    {
+      "command": "GITHUB_ACTIONS=true GITHUB_REPOSITORY=cadence-jameds/lieguo-zhengtu-origin npm run build",
+      "status": "PASS"
+    },
+    {
+      "command": "GITHUB_ACTIONS=true GITHUB_REPOSITORY=cadence-jameds/lieguo-zhengtu-origin node scripts/check-pages-build.mjs",
+      "status": "PASS",
+      "result": "Pages assets, PWA scope and Service Worker fallback verified: /lieguo-zhengtu-origin/"
+    },
+    {
+      "command": "node scripts/check-release-build.mjs (project Pages build)",
+      "status": "PASS",
+      "result": {
+        "version": "0.30.67",
+        "date": "2026-10-24",
+        "commitSha": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+        "contentSha": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+        "dirty": false,
+        "artifactsConsistent": true,
+        "workerIdentityConsistent": true
+      }
+    }
+  ],
+  "browser": {
+    "sourceCommit": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+    "passed": 10,
+    "failed": 0,
+    "pageErrors": 0,
+    "screenshots": 33
+  }
+}

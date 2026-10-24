@@ -43,6 +43,7 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
   case 'wonder.ship':return[empireOf(w,faction.id)?.id,w.largeProjects.find(t=>t.projectId===p.projectId),city.buildings,w.logistics?.filter(t=>t.sourceCityId===city.id),w.cities.find(c=>c.id===w.largeProjects.find(t=>t.projectId===p.projectId)?.initiatingCityId)?.ownerFactionId];
   case 'campaign.configure':return[w.speed,w.offlineHours??12];
   case 'developer.configure':return[w.developer??null,faction.protectionUntil??null];
+  case 'tasks.claim':return[w.growthTasks?.completed[p.taskId]??null,w.growthTasks?.claimed[p.taskId]??null,city.buildings,city.cityPromotionCompleted,city.economy?.reservedIncoming];
   case 'city.rename':return[city.name];
   case 'field.upgrade':{
    const field=city.fields?.find(f=>f.slot===p.slot),from=targetJobs.at(-1)?.toLevel??field?.level??0;

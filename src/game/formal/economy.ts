@@ -1,3 +1,4 @@
+import {recordGrowthPopulation} from './growthTasks';
 import {invalidateMilitaryPower} from './militaryPower';
 import {reconcileVictory} from './victory';
 import {reconcileWonders} from './wonderCondition';
@@ -61,12 +62,14 @@ export function productionPerHour(w:FormalWorld,c:FormalCity):Resources {
 export function settleCity(w:FormalWorld,c:FormalCity,at=w.time){
  const e=c.economy;if(!e)return;if(c.population<=c.housing)delete c.housingShortage;refillDeveloperStock(c);requireRule(at>=e.lastSettledAt,'經濟時間不可倒退。');const hours=(at-e.lastSettledAt)/HOUR;
  if(!hours)return;
+ const populationBefore=c.population,populationFrom=e.lastSettledAt;
  const rates=productionPerHour(w,c),integration=c.integrationWorkHours??0,mult=administrationMultiplier(w,c.ownerFactionId),penaltyHours=Math.min(hours,integration*mult),effectiveHours=hours-penaltyHours*.6;
  c.integrationWorkHours=Math.max(0,integration-hours/mult);
  const cap=storageCapacity(c),upkeep=armyUpkeep(w,c);
  for(const r of resourceKeys){const max=cap-e.reservedIncoming[r],exact=c.stock[r]+e.productionRemainder[r]+rates[r]*effectiveHours-(r==='food'?upkeep*hours:0),amount=Math.floor(exact+1e-9);if(exact<0){c.stock[r]=0;e.productionRemainder[r]=0;if(r==='food'&&c.military)c.military.unpaidFood+=-exact;}else if(amount>=max){c.stock[r]=Math.max(0,max);e.productionRemainder[r]=0;}else{c.stock[r]=Math.max(0,amount);e.productionRemainder[r]=Math.max(0,exact-amount);}}
  c.population=growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),hours);
  for(const n of MILESTONES)if(c.population+1e-8>=n&&!e.milestones.includes(n))e.milestones.push(n);e.milestones.sort((a,b)=>a-b);e.lastSettledAt=at;
+ recordGrowthPopulation(w,c,populationBefore,populationFrom,at,c.population);
 }
 export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).cities.get(id);if(!original)return undefined;const c=structuredClone(original);settleCity(w,c);return c;}
 export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}

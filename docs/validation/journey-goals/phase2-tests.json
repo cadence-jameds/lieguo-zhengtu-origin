@@ -1,0 +1,448 @@
+{
+  "phase": "phase2",
+  "success": true,
+  "total": 67,
+  "passed": 67,
+  "failed": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "file": "game/formal/hegemonyB95.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "B9-5 hegemony 14 active lords/3 legions eligible=false",
+          "status": "passed",
+          "durationMs": 246.97076199999992,
+          "failures": []
+        },
+        {
+          "name": "B9-5 hegemony 15 active lords/2 legions eligible=false",
+          "status": "passed",
+          "durationMs": 146.448265,
+          "failures": []
+        },
+        {
+          "name": "B9-5 hegemony 15 active lords/3 legions eligible=true",
+          "status": "passed",
+          "durationMs": 101.4979330000001,
+          "failures": []
+        },
+        {
+          "name": "B9-5 military opponent militia=0 tests second/tied/unique positive first",
+          "status": "passed",
+          "durationMs": 129.9585380000001,
+          "failures": []
+        },
+        {
+          "name": "B9-5 military opponent militia=99 tests second/tied/unique positive first",
+          "status": "passed",
+          "durationMs": 99.00364600000012,
+          "failures": []
+        },
+        {
+          "name": "B9-5 military opponent militia=100 tests second/tied/unique positive first",
+          "status": "passed",
+          "durationMs": 113.29965000000016,
+          "failures": []
+        },
+        {
+          "name": "B9-5 military opponent militia=101 tests second/tied/unique positive first",
+          "status": "passed",
+          "durationMs": 124.99212499999999,
+          "failures": []
+        },
+        {
+          "name": "B9-5 city/population 45 percent boundaries both apply",
+          "status": "passed",
+          "durationMs": 227.44791400000008,
+          "failures": []
+        },
+        {
+          "name": "B9-5 active lords never depend on sampled AI activity; loss of last city and extinction exclude members",
+          "status": "passed",
+          "durationMs": 98.02263100000005,
+          "failures": []
+        },
+        {
+          "name": "B9-5 unit military power uses real technology stats, ram K=.25 and excludes scout/supply/era/counter multipliers",
+          "status": "passed",
+          "durationMs": 106.57121599999982,
+          "failures": []
+        },
+        {
+          "name": "B9-5 real dispatch, stationary reinforcement, recall and return conserve power under the original owner exactly once",
+          "status": "passed",
+          "durationMs": 596.2442959999998,
+          "failures": []
+        },
+        {
+          "name": "B9-5 a real research completion recalculates military rank and starts the 24h clock only after gaining unique first",
+          "status": "passed",
+          "durationMs": 231.79705699999977,
+          "failures": []
+        },
+        {
+          "name": "B9-5 an exact tie interrupts 24h, fresh unique leadership starts anew, and offline/save replay complete only once",
+          "status": "passed",
+          "durationMs": 2865.40185,
+          "failures": []
+        },
+        {
+          "name": "B9-5 Recovery and formal Load retain hegemony time and unique result without caching private military data in saves",
+          "status": "passed",
+          "durationMs": 946.14228,
+          "failures": []
+        },
+        {
+          "name": "B9-5 real combat losses invalidate cached military totals; battle/dispatch snapshots never replenish lost power",
+          "status": "passed",
+          "durationMs": 450.93569300000036,
+          "failures": []
+        },
+        {
+          "name": "B9-5 queued training contributes no power, while the real training completion invalidates the derived cache",
+          "status": "passed",
+          "durationMs": 216.1518559999995,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/victoryB95.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "B9-5 conquest city=69 population=70 eligibility=false",
+          "status": "passed",
+          "durationMs": 304.679071,
+          "failures": []
+        },
+        {
+          "name": "B9-5 conquest city=70 population=69 eligibility=false",
+          "status": "passed",
+          "durationMs": 144.367389,
+          "failures": []
+        },
+        {
+          "name": "B9-5 conquest city=70 population=70 eligibility=true",
+          "status": "passed",
+          "durationMs": 172.74285699999996,
+          "failures": []
+        },
+        {
+          "name": "B9-5 conquest city=71 population=70 eligibility=true",
+          "status": "passed",
+          "durationMs": 102.85570600000005,
+          "failures": []
+        },
+        {
+          "name": "B9-5 a hostile empire at 14 percent has an inclusive 15 percent blocking boundary",
+          "status": "passed",
+          "durationMs": 118.26271799999995,
+          "failures": []
+        },
+        {
+          "name": "B9-5 a hostile empire at 15 percent has an inclusive 15 percent blocking boundary",
+          "status": "passed",
+          "durationMs": 110.63720399999988,
+          "failures": []
+        },
+        {
+          "name": "B9-5 a hostile empire at 16 percent has an inclusive 15 percent blocking boundary",
+          "status": "passed",
+          "durationMs": 113.65270299999997,
+          "failures": []
+        },
+        {
+          "name": "B9-5 an unimperial legion does not aggregate independent conquest ownership",
+          "status": "passed",
+          "durationMs": 91.25370700000008,
+          "failures": []
+        },
+        {
+          "name": "B9-5 conquest wins at exactly 12 world hours, persists a single result, and replays/offline partition identically",
+          "status": "passed",
+          "durationMs": 1081.1586920000002,
+          "failures": []
+        },
+        {
+          "name": "B9-5 loss of any condition clears continuous credit immediately and a fresh crossing requires all 12 hours",
+          "status": "passed",
+          "durationMs": 878.5064050000001,
+          "failures": []
+        },
+        {
+          "name": "B9-5 missing or forged qualification clocks are rejected by native Save validation",
+          "status": "passed",
+          "durationMs": 103.59924899999987,
+          "failures": []
+        },
+        {
+          "name": "B9-5 formal Save/Load/Recovery preserve the real remaining victory clock without a second result",
+          "status": "passed",
+          "durationMs": 769.9480609999996,
+          "failures": []
+        },
+        {
+          "name": "B9-5 actual conquest immediately invalidates and genuine reconquest restarts the formal clock",
+          "status": "passed",
+          "durationMs": 814.5692450000006,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/wonderCombatB95.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "B9-5 actual catapult bombardment tiers=0 modern-tech=false",
+          "status": "passed",
+          "durationMs": 36.772221,
+          "failures": []
+        },
+        {
+          "name": "B9-5 actual catapult bombardment tiers=2 modern-tech=false",
+          "status": "passed",
+          "durationMs": 11.814653999999962,
+          "failures": []
+        },
+        {
+          "name": "B9-5 actual catapult bombardment tiers=2 modern-tech=true",
+          "status": "passed",
+          "durationMs": 24.81640900000002,
+          "failures": []
+        },
+        {
+          "name": "B9-5 actual modern.catapult bombardment tiers=2 modern-tech=false",
+          "status": "passed",
+          "durationMs": 9.023536000000036,
+          "failures": []
+        },
+        {
+          "name": "B9-5 actual modern.catapult bombardment tiers=2 modern-tech=true",
+          "status": "passed",
+          "durationMs": 9.59971999999999,
+          "failures": []
+        },
+        {
+          "name": "B9-5 destroys a wonder behind intact Lv15 walls, returns survivors, preserves ownership and deduplicates actual battle/save",
+          "status": "passed",
+          "durationMs": 34.63621499999999,
+          "failures": []
+        },
+        {
+          "name": "B9-5 a 12-round failure persists partial numeric damage, exact five-minute spacing and remaining rounds through save/load",
+          "status": "passed",
+          "durationMs": 66.57724399999995,
+          "failures": []
+        },
+        {
+          "name": "B9-5 actual guarding battle must clear defenders before bombardment; lost catapults fail without damage",
+          "status": "passed",
+          "durationMs": 13.155220999999983,
+          "failures": []
+        },
+        {
+          "name": "B9-5 conquest may damage the wonder but still requires normal occupiers and wall clearance",
+          "status": "passed",
+          "durationMs": 13.274989000000005,
+          "failures": []
+        },
+        {
+          "name": "B9-5 malformed targeting, absent catapults and hostile permissions use the same formal command rejection",
+          "status": "passed",
+          "durationMs": 10.603860000000054,
+          "failures": []
+        },
+        {
+          "name": "B9-5 conquest-priority bombardment also uses five world minutes at approved 25X speed",
+          "status": "passed",
+          "durationMs": 35.60099500000001,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/wonderDurabilityB95.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "B9-5 sealed constants preserve full-wonder 120000 and full-ruins repair 6M/12h",
+          "status": "passed",
+          "durationMs": 2.039572000000021,
+          "failures": []
+        },
+        {
+          "name": "B9-5 a formal wonder completion persists full numeric durability without granting a victory or qualification",
+          "status": "passed",
+          "durationMs": 58.38453300000003,
+          "failures": []
+        },
+        {
+          "name": "B9-5 real numeric damage immediately pauses an incomplete breakthrough and ruins roll back once",
+          "status": "passed",
+          "durationMs": 40.839493999999945,
+          "failures": []
+        },
+        {
+          "name": "B9-5 rejects unsafe damage -1 atomically",
+          "status": "passed",
+          "durationMs": 43.92263300000002,
+          "failures": []
+        },
+        {
+          "name": "B9-5 rejects unsafe damage NaN atomically",
+          "status": "passed",
+          "durationMs": 12.135822000000076,
+          "failures": []
+        },
+        {
+          "name": "B9-5 rejects unsafe damage Infinity atomically",
+          "status": "passed",
+          "durationMs": 13.69507299999998,
+          "failures": []
+        },
+        {
+          "name": "B9-5 rejects unsafe damage 9007199254740992 atomically",
+          "status": "passed",
+          "durationMs": 9.974139000000037,
+          "failures": []
+        },
+        {
+          "name": "B9-5 replays remain inert after time advances; conflicting receipts and enum-only healing are rejected",
+          "status": "passed",
+          "durationMs": 15.679141999999956,
+          "failures": []
+        },
+        {
+          "name": "B9-5 Save rejects inconsistent current durability",
+          "status": "passed",
+          "durationMs": 52.96508200000005,
+          "failures": []
+        },
+        {
+          "name": "B9-5 Save rejects inconsistent integrity durability",
+          "status": "passed",
+          "durationMs": 14.884797000000049,
+          "failures": []
+        },
+        {
+          "name": "B9-5 Save rejects inconsistent duplicate durability",
+          "status": "passed",
+          "durationMs": 15.617039999999974,
+          "failures": []
+        },
+        {
+          "name": "B9-5 Save rejects inconsistent receipt durability",
+          "status": "passed",
+          "durationMs": 9.400694999999928,
+          "failures": []
+        },
+        {
+          "name": "B9-5 Save rejects inconsistent maximum durability",
+          "status": "passed",
+          "durationMs": 8.542933000000062,
+          "failures": []
+        },
+        {
+          "name": "B9-5 already-completed breakthrough and permanent qualifications survive actual destruction",
+          "status": "passed",
+          "durationMs": 47.95227699999998,
+          "failures": []
+        },
+        {
+          "name": "B9-5 formal atomic Save/Load, backup restore and Recovery retain numeric damage and dedup receipts",
+          "status": "passed",
+          "durationMs": 104.2183500000001,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/journeyGoals.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "keeps ten routes, renames tasks consistently and preserves PR34 local shortcut preferences and independent badges",
+          "status": "passed",
+          "durationMs": 58.159348000000136,
+          "failures": []
+        },
+        {
+          "name": "desktop keeps the original report badge and gives goals its own independent reminder",
+          "status": "passed",
+          "durationMs": 25.696926000000076,
+          "failures": []
+        },
+        {
+          "name": "renders only the expanded era tasks initially and exposes both official tabs",
+          "status": "passed",
+          "durationMs": 160.44409999999993,
+          "failures": []
+        },
+        {
+          "name": "claims only after an inline resource/loss preview and explicit own-city choice; updates status immediately without mail/report/popups",
+          "status": "passed",
+          "durationMs": 91.54658900000004,
+          "failures": []
+        },
+        {
+          "name": "can postpone indefinitely and invalidates stale capacity or lost-city confirmations",
+          "status": "passed",
+          "durationMs": 106.71477499999992,
+          "failures": []
+        },
+        {
+          "name": "removes formal victory panels from both legion membership states",
+          "status": "passed",
+          "durationMs": 4.453168999999889,
+          "failures": []
+        },
+        {
+          "name": "victory card data is a read-only projection and its clock never advances from the frontend display clock",
+          "status": "passed",
+          "durationMs": 15.680847000000085,
+          "failures": []
+        },
+        {
+          "name": "victory qualification loss clears progress and restores the original 12h clock; terminal state is formal and grants no task reward",
+          "status": "passed",
+          "durationMs": 13.254179000000022,
+          "failures": []
+        },
+        {
+          "name": "hegemony cards display authoritative 3 legions, 15 active lords, 45% shares and unique military rank, including ties",
+          "status": "passed",
+          "durationMs": 797.794441,
+          "failures": []
+        },
+        {
+          "name": "qualification without an authoritative candidate waits for B9 instead of starting a frontend timer",
+          "status": "passed",
+          "durationMs": 5.848329999999805,
+          "failures": []
+        },
+        {
+          "name": "shows actual single-city population progress while rendering never creates completed IDs",
+          "status": "passed",
+          "durationMs": 51.044132999999874,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/victoryB95.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "B9-5 formal victory UI follows real qualification, interrupted timing and one final result",
+          "status": "passed",
+          "durationMs": 53.433730999999966,
+          "failures": []
+        }
+      ]
+    }
+  ]
+}

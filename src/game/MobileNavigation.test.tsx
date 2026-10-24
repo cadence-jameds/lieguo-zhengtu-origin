@@ -59,7 +59,7 @@ it('preserves overview home, settings, campaign information and all unselected f
 it('edits staged choices, enforces six, reorders, removes, re-adds and saves fewer than six in order',async()=>{
  const save=vi.fn();await mount(<MobileNavigationSettings shortcuts={[...DEFAULT_MOBILE_SHORTCUTS]} onSave={save} onClose={noop}/>);
  expect([...box.querySelectorAll<HTMLButtonElement>('.mobile-shortcut-options button')].every(b=>b.disabled)).toBe(true);
- await click('移除世界地圖');await click('加入任務');await click('將任務向前移');expect(save).not.toHaveBeenCalled();
+ await click('移除世界地圖');await click('加入征途目標');await click('將征途目標向前移');expect(save).not.toHaveBeenCalled();
  await click('移除軍隊編組');await click('儲存快捷列');expect(save).toHaveBeenCalledWith(['city','reports','research','tasks','legion']);
 });
 it('cancel discards edits and an empty configuration remains usable through More',async()=>{

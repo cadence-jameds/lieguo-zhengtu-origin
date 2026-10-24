@@ -1,0 +1,89 @@
+{
+  "runId": 40060135386,
+  "sourceSha": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+  "event": "pull_request",
+  "conclusion": "success",
+  "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40060135386",
+  "jobs": [
+    {
+      "id": 120771797474,
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare deterministic release metadata",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "conclusion": "success"
+        },
+        {
+          "name": "Full regression in a disposable copy",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build for project Pages",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check project Pages paths",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify release artifacts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve release metadata",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve regression result",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "success": true,
+    "passed": 1956,
+    "failed": 0,
+    "skipped": 1
+  },
+  "checkoutSha": "1aab0f6b804a4b7a9f09c863154d33f9a0a1420c",
+  "note": "GitHub pull_request CI validates its temporary merge commit; main was not merged or deployed.",
+  "logExcerpts": [
+    "2026-10-24T04:02:10.1985798Z Isolated full regression workspace: /tmp/lieguo-verification-PO51ad",
+    "2026-10-24T04:02:10.2031516Z {\"success\":true,\"passed\":1956,\"failed\":0,\"skipped\":1,\"report\":\"/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/artifacts/integration/regression-full.json\"}",
+    "2026-10-24T04:02:29.5595748Z Pages assets, PWA scope and Service Worker fallback verified: /lieguo-zhengtu-origin/",
+    "2026-10-24T04:02:29.6045925Z {\"version\":\"0.30.64\",\"date\":\"2026-10-24\",\"commitSha\":\"1aab0f6b804a4b7a9f09c863154d33f9a0a1420c\",\"contentSha\":\"1aab0f6b804a4b7a9f09c863154d33f9a0a1420c\",\"dirty\":false,\"artifactsConsistent\":true,\"workerIdentityConsistent\":true}"
+  ]
+}

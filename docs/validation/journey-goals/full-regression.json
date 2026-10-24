@@ -1,0 +1,2039 @@
+{
+  "command": "node scripts/verify-in-isolation.mjs full",
+  "attempts": [
+    {
+      "source": "e1eef6b1e5f561e3e3431d795d9c224fdf0746a5",
+      "success": false,
+      "total": 1955,
+      "passed": 1951,
+      "failed": 3,
+      "skipped": 1,
+      "failures": [
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "name": "R4-C1 1X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "failed",
+          "failure": [
+            "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(27) }\n    at /tmp/lieguo-verification-EyQ65p/src/game/formal/reviewDeltaR4.test.ts:93:101\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+          ]
+        },
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "name": "R4-C1 10X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "failed",
+          "failure": [
+            "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(27) }\n    at /tmp/lieguo-verification-EyQ65p/src/game/formal/reviewDeltaR4.test.ts:93:101\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+          ]
+        },
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "name": "R4-C1 25X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+          "status": "failed",
+          "failure": [
+            "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(27) }\n    at /tmp/lieguo-verification-EyQ65p/src/game/formal/reviewDeltaR4.test.ts:93:101\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+          ]
+        }
+      ],
+      "diagnosis": "Growth task history unnecessarily retained idle world-time updates and every population sample below the next task threshold. Recovery therefore differed from its checkpoint even without any new achievement. Preserve only genuine task progress and exact milestone times; the UI separately projects current population. Original R4-C1 assertions remain unchanged."
+    },
+    {
+      "source": "09e364f0c03c19ea89fa2cebafcf69fd31a2685a",
+      "status": "interrupted",
+      "reason": "Stopped after code review found an additional unclaimed-achievement/Recovery world-time-rewind edge. No completed regression result is claimed for this run; final full regression restarts after its targeted proof."
+    },
+    {
+      "sourceCommit": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+      "success": true,
+      "total": 1957,
+      "passed": 1956,
+      "failed": 0,
+      "skipped": 1,
+      "testFiles": 197,
+      "startedAt": "2026-10-24T14:51:03.751000+00:00",
+      "suites": [
+        {
+          "file": "content/civilizations.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2.39599609375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "devtools/headless48h.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3.907470703125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "devtools/simulation8h.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 16389.8271484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/MobileNavigation.test.tsx",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 183.44580078125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/acceptance.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1245.842529296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch060.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 855.83154296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch070.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 565.1396484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch080.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 678.1796875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch090.test.tsx",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 601.46923828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch100.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 813.884521484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch110.test.tsx",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1342.606201171875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch120.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1239.0361328125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch200.test.tsx",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 14260.902099609375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch210.test.tsx",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 1,
+          "durationMs": 2775.157958984375,
+          "failures": [],
+          "skippedTests": [
+            "user late-game save remains valid after six more world hours"
+          ]
+        },
+        {
+          "file": "game/batch220.test.tsx",
+          "status": "passed",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2197.875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch230.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3258.5703125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch240.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1087.014404296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch250.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2236.786865234375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch260.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1097.783935546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch263.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 11.7041015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch2720.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 688.650146484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch290.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 298.790771484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/batch295.test.tsx",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1089.721435546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/campaignArchive.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 73.073974609375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/campaignArchivePolicy.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 30.0478515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/campaignStorage.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 91.3525390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/constructionArt.test.tsx",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 692.805419921875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/continuousWorld.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 466.08740234375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/game.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1018.94775390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/governanceAdmission.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1127.42431640625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/home.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 321.344970703125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/interaction.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 532.527099609375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/mapDisplay.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3.263671875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/mountainRules.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 488.9033203125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/offlineEquivalence.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 556.711181640625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/offlineLimit.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 287.2548828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/openingProtection.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 850.598876953125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/orderAdmission.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1387.839111328125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/organizations.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 998.2548828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/painterlyGround.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 377.7080078125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/playerName.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 531.109130859375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/releaseMetadata.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 731.776123046875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/releaseSaveCompatibility.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 667.30126953125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/reportPresentation.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 468.44091796875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/reportRealTime.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 448.857421875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/revision.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1473.635986328125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/revision059.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 13659.0595703125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/runtime.worker.test.ts",
+          "status": "passed",
+          "passed": 17,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4998.771728515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/runtimeLoad.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 173.01611328125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/saveLock.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 9.0498046875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/sceneryPlacement.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 601.080810546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/storage.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3659.0615234375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/technology.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 296.37255859375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/terrainWorker.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4.47509765625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/townScene.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 477.621337890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/update0276.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 310.468505859375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/updateEntry.test.tsx",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 222.54541015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/updatePreparation.test.tsx",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 84.128173828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/useAppUpdate.test.tsx",
+          "status": "passed",
+          "passed": 50,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1184.368896484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/useGameInteraction.test.tsx",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 85.997802734375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/worldEconomy.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 451.021484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/worldStream.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 487.491943359375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/worldUiBehavior.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 294.89453125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "map/isometric.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3.47412109375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "persistence/schema.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5.279052734375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "persistence/transfer.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 11.733154296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "simulation/world.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4.307373046875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/B5BattleLab.test.tsx",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5412.427001953125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/B5Lab.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 11547.83837890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/B5LabV91.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1811.468017578125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/B5LabWorker.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1326.484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/DeveloperMode.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 567.890869140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/SpecAuditPanel.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 589.639892578125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/developer.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 14276.7744140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/developer/specAudit.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 28427.81640625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/DemoMapCache.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 204.918701171875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/armyOverlayB6.test.tsx",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 627.057373046875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/artIntegration.test.tsx",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 614.53369140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/breakthroughB92.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 12898.525634765625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/buildConditions31.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 521.071533203125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/buildingDetail28.test.tsx",
+          "status": "passed",
+          "passed": 52,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 14092.462890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/cityParityEvidence.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1.671630859375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/combatB5.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1435.204833984375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/constructionMenuFix.test.tsx",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 563.539794921875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/craftsmanCastleUI.test.tsx",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4274.79931640625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/demoEntry.test.tsx",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 73.130126953125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/feedbackV85.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 380.38916015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/governanceR2c.test.tsx",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 532.9462890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/incomingNavigation.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 431.596923828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/journeyGoals.test.tsx",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1137.35986328125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/liveBattleV91.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2480.620361328125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/liveInteraction.test.tsx",
+          "status": "passed",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3318.274658203125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/manifestExport.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3.463134765625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/mapOverviewInteraction.test.tsx",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 970.601806640625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/mapRaster.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 595.5322265625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/mapViewRules.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2134.20751953125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/mapVisualEvidence.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1.577392578125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/modernCatchupB94.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1867.565185546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/modernMilitaryB93.test.tsx",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1831.927001953125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/mountainRendering.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1286.350830078125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/organizationRankings.test.tsx",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2696.84033203125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/p0cDemoUi.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1336.84375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/p0cFeedback.test.tsx",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 482.4296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/parity.test.tsx",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 781.12158203125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/playablePersistence.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2295.11279296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/playerFeedback.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 364.06103515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/quickSettings.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 122.83544921875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/scoutV90.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2024.152587890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/specialFields.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 267.93310546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/targetPoliticsR4.test.tsx",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 669.660888671875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/uiIntegrationV94.test.tsx",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1230.5888671875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/update26.test.tsx",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 481.4345703125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/update27.test.tsx",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 705.8994140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/victoryB95.test.tsx",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 58.754638671875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/wallDelta.test.tsx",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4201.63330078125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/wildSiteLabels.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3.47216796875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/wonderB91.test.tsx",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 159.9150390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/wonderEndgameB95.test.tsx",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 264.07666015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/presentation/worldDynamicsR3.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 12502.5078125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/autonomyR2a.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4124.81494140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/autonomyR2b.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4463.294189453125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/autonomyRuntimeR2c.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 992.13037109375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/banditLoot.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3111.121337890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/battleStressV91.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3144.37255859375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/breakthroughB92.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 21827.5673828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/breakthroughRuntimeB92.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 12763.802490234375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/campaignTime.test.ts",
+          "status": "passed",
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 8419.325439453125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/captureDeltaR4.test.ts",
+          "status": "passed",
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4577.671630859375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/cityV88.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2727.03515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/colonizationV85.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2557.993896484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/combatB5.test.ts",
+          "status": "passed",
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 6466.096923828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/combatLongV91.test.ts",
+          "status": "passed",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 14246.77294921875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/combatPersistenceB5.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5999.48095703125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/combatWorkerB5.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1657.25390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/craftsmanCastleDeltaR4.test.ts",
+          "status": "passed",
+          "passed": 17,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 8908.457275390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/cultureNames.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1134.01318359375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/developmentB4.test.ts",
+          "status": "passed",
+          "passed": 60,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 15640.44873046875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/diplomacyV94.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 13389.482666015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/economyB3.test.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5311.0185546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/empireDeltaR1.test.ts",
+          "status": "passed",
+          "passed": 18,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5524.609619140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/endgameAIB95.test.ts",
+          "status": "passed",
+          "passed": 30,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 8683.1943359375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/endgameChainB95.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2529.6552734375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/extinctionB7.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2785.513916015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/extinctionPersistenceB7.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 918.792724609375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/gateDeltaPersistenceR4.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5560.5478515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/gateDeltaR4.test.ts",
+          "status": "passed",
+          "passed": 17,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 7503.76318359375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/governanceR2c.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 9587.6416015625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/growthTasks.test.ts",
+          "status": "passed",
+          "passed": 87,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3073.050537109375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/hegemonyB95.test.ts",
+          "status": "passed",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 6850.50732421875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/integrationR4.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 24089.64404296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/metrics.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 730.71337890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernAwarenessB94.test.ts",
+          "status": "passed",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5770.46484375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernEffectsB94.test.ts",
+          "status": "passed",
+          "passed": 29,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4074.856689453125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernEmergencyB94.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 6975.171875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernMilitaryB93.test.ts",
+          "status": "passed",
+          "passed": 29,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 13416.514404296875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernMilitaryGateB93.test.ts",
+          "status": "passed",
+          "passed": 21,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 9250.391357421875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernResearchB94.test.ts",
+          "status": "passed",
+          "passed": 21,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 15476.99560546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/modernTransferB94.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 9606.798828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/mountains31.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3131.475341796875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/offlineCooperative.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 55.65087890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/p0c9Attack.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 437.494384765625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/p0c9Strategies.test.ts",
+          "status": "passed",
+          "passed": 41,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 10700.912841796875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/p0cExileScout.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2571.744384765625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/p0cQueues.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4022.8125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/persistence.test.ts",
+          "status": "passed",
+          "passed": 36,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 20777.56298828125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/playerFeedback.test.ts",
+          "status": "passed",
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 8243.03369140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/playerOrderRuntimeP0.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4274.1103515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/playtest26.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1883.306640625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/politicsB6.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2818.9580078125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/politicsPersistenceB6.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1040.133544921875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/recoveryR1.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 468.019287109375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/refundV86.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 982.365234375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/replayP0.test.ts",
+          "status": "passed",
+          "passed": 38,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 14566.75244140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/reportPresentation26.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1323.174072265625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/reviewDeltaR4.test.ts",
+          "status": "passed",
+          "passed": 21,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 29763.01025390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/runtime.test.ts",
+          "status": "passed",
+          "passed": 64,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 57716.71044921875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/runtimeB4.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3120.234375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/runtimeGraph.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 551.7744140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/saveDraftIsolation.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 154.496337890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/scheduler.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 238.824462890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/schema.test.ts",
+          "status": "passed",
+          "passed": 18,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 467.13525390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/scoutV90.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3692.4287109375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/siegeV91.test.ts",
+          "status": "passed",
+          "passed": 187,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 34372.59619140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/targetIntel.test.ts",
+          "status": "passed",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 917.01513671875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/victoryB95.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 5180.346435546875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wallDelta.test.ts",
+          "status": "passed",
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 18292.62744140625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/waterDeltaR4.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1685.35400390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wildScout.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1453.741943359375,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderB91.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 23638.615966796875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderCombatB95.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 393.0888671875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderDurabilityB95.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 383.865478515625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderPersistenceB91.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 13572.510498046875,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderRepairB95.test.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 541.527587890625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderRuinsGate.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2616.3017578125,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/wonderRuntimeB91.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 480.705322265625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/worldB2.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 3850.150390625,
+          "failures": [],
+          "skippedTests": []
+        },
+        {
+          "file": "game/formal/worldDraft.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1522.75927734375,
+          "failures": [],
+          "skippedTests": []
+        }
+      ],
+      "skipReason": "Existing batch210 user late-game 6h regression uses it.runIf(REALM_REGRESSION_SAVE). No private player save was supplied. Synthetic native old-save/offline/Recovery tests did run."
+    }
+  ],
+  "finalResult": {
+    "sourceCommit": "347a90699684fbafc2ce70f13f8b481632f8f61b",
+    "success": true,
+    "total": 1957,
+    "passed": 1956,
+    "failed": 0,
+    "skipped": 1,
+    "testFiles": 197
+  }
+}

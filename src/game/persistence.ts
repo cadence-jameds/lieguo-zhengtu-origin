@@ -1,3 +1,7 @@
+import {growthTaskSchema} from './formal/growthTaskSchema';
+import {reconcileGrowthAuthority} from './formal/growthTaskAuthority';
+import type {GrowthTaskState} from './formal/growthTasks';
+import {syncGrowthTasks} from './formal/growthTasks';
 import {sanitizeSharedKnowledge,sanitizeScoutReport,scoutReportAuthorized} from './formal/reportScope';
 import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
@@ -17,7 +21,7 @@ function stampBattle(p:BattleReportPayload,real:(at:number)=>number){p.realResol
 function stampPending(w:FormalWorld,real:(at:number)=>number){for(const a of w.armies)if(isMissionArmy(a)){if(a.pendingIntel)a.pendingIntel.observedRealAt??=real(a.pendingIntel.observedAt);if(a.pendingReport)stampBattle(a.pendingReport,real);}}
 export type FailurePoint='report-write'|'history-modified'|'backup-write'|'world-write'|'authority-write';
 type WorldRow={id:'current';kind:'world';at:number;data:FormalEnvelope};
-type CampaignAuthority={campaignId:CampaignId;receipts:CommandReceipt[]};
+type CampaignAuthority={campaignId:CampaignId;receipts:CommandReceipt[];growthTasks?:GrowthTaskState};
 type AuthorityRow={id:'authority';kind:'authority';revision:number;sequences:FormalWorld['sequences'];campaigns:CampaignAuthority[]};
 /** Both ledgers are strict receiptSchema records; compare every field without serializing history twice. */
 const sameReceipt=(a:CommandReceipt,b:CommandReceipt)=>a.commandId===b.commandId&&a.issuerId===b.issuerId&&a.fingerprint===b.fingerprint&&a.committedRevision===b.committedRevision&&a.disposition===b.disposition;
@@ -31,7 +35,7 @@ export async function validateCheckpointCandidate(checkpoint:RecoveryRow):Promis
 type ReportRow=FormalReport&{key:string};
 export type ReportFilter='all'|'battle'|'diplomacy'|'chronicle';
 const reportMatches=(r:FormalReport,filter:ReportFilter)=>filter==='all'||(filter==='battle'?r.category==='battle'||r.category==='scout':filter==='diplomacy'?r.category==='diplomacy':r.category==='system'||r.category==='research');
-const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),receipts:z.array(receiptSchema)}).strict())}).strict();
+const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),receipts:z.array(receiptSchema),growthTasks:growthTaskSchema.optional()}).strict())}).strict();
 export class FormalDatabase extends Dexie {
  saves!:Table<WorldRow|AuthorityRow,string>;backups!:Table<RecoveryRow,number>;BattleReports!:Table<ReportRow,string>;
  constructor(suffix='',databaseName:string=FORMAL_DB_NAME){
@@ -74,7 +78,7 @@ export class FormalPersistence {
    // Copy those mutable branches now; encodeSave still strictly validates and
    // deep-copies the entire final candidate before checksum or any DB writes.
    // Transitions/AI activation retain the general full draft.
-   let w=sanitizeSharedKnowledge(mode==='save'&&!activateAI?{...input,armies:structuredClone(input.armies),...(input.autonomy?{autonomy:structuredClone(input.autonomy)}:{})}:structuredClone(input));
+   let w=sanitizeSharedKnowledge(mode==='save'&&!activateAI?{...input,...(input.growthTasks?{growthTasks:structuredClone(input.growthTasks)}:{}),armies:structuredClone(input.armies),...(input.autonomy?{autonomy:structuredClone(input.autonomy)}:{})}:structuredClone(input));
    const prior=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.receipts??[];
    if(mode==='save'){
     for(const key of ['event','report','project'] as const)if(w.sequences[key]<authority.sequences[key])throw new Error('Durable ID sequence cannot decrease');
@@ -89,6 +93,8 @@ export class FormalPersistence {
     w.revision=Math.max(current?authority.revision+1:0,w.revision);
     for(const r of w.commandReceipts)w.revision=Math.max(w.revision,r.committedRevision);
    }
+   reconcileGrowthAuthority(w,authority.campaigns.find(c=>c.campaignId===w.campaignId)?.growthTasks,mode!=='save');
+   syncGrowthTasks(w);
    if(activateAI)enableAutonomy(w);
    const real=(at:number)=>Math.max(0,Math.floor(savedAt-(w.time-at)/effectiveSpeed(input)));
    if(mode==='save'||mode==='start')stampPending(w,real);
@@ -119,7 +125,7 @@ export class FormalPersistence {
    await this.db.saves.put({id:'current',kind:'world',at:savedAt,data:envelope});this.fault?.('world-write');
    authority.revision=w.revision;authority.sequences={...w.sequences};
    authority.campaigns=authority.campaigns.filter(c=>c.campaignId!==w.campaignId);
-   authority.campaigns.push({campaignId:w.campaignId,receipts:structuredClone(w.commandReceipts)});
+   authority.campaigns.push({campaignId:w.campaignId,receipts:structuredClone(w.commandReceipts),...(w.growthTasks?{growthTasks:structuredClone(w.growthTasks)}:{})});
    await this.db.saves.put(authority);this.fault?.('authority-write');
    return w;
   });
@@ -135,6 +141,7 @@ export class FormalPersistence {
    world=(await decodeSave(row.data)).world;
    const a=authority,ledger=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.receipts??[];
    if(world.revision!==a.revision||canonicalJSON(world.commandReceipts)!==canonicalJSON(ledger))throw new Error('World and authority diverged');
+   const tasks=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.growthTasks;if(tasks&&canonicalJSON(tasks)!==canonicalJSON(world.growthTasks))throw new Error('Growth task authority diverged');
   }catch{
    // Reject corrupt/DEMO snapshots; only a valid formal checkpoint can be restored.
    const candidates=await this.db.backups.orderBy('id').reverse().toArray();
@@ -154,6 +161,8 @@ export class FormalPersistence {
  async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
   onProgress?.('read');
   const loaded=await this.loadAnchored();if(!loaded.game)return {game:null,recovered:loaded.recovered};
+  // Capture provable legacy state before offline replay can change ownership or population.
+  loaded.game={...loaded.game,...(loaded.game.growthTasks?{growthTasks:structuredClone(loaded.game.growthTasks)}:{})};syncGrowthTasks(loaded.game);
   onProgress?.('offline',0,0);
   const result=await advanceOfflineCooperative(loaded.game,loaded.savedAt??now,now,(fraction,events)=>onProgress?.('offline',fraction,events));
   // Even 0h refreshes the wall anchor atomically. Expose nothing until save resolves.
