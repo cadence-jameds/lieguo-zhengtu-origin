@@ -264,6 +264,62 @@ it('P0 save acknowledgement timeout releases loading and never duplicates an unr
 it('P0 finds a verified new active worker even when waiting and controllerchange were missed',async()=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();(worker as any).state='activated';await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(1000));expect(save).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledOnce();
 });
+
+// PR #36 review: update() can resolve before updatefound. An activated worker
+// at that point is usually the old controller, not the requested release.
+function oldActive(){
+ (worker as any).state='activated';
+ vi.mocked(worker.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')ports[0].reply({...RELEASE});});
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion,contentSha:'e'.repeat(40)})});
+}
+function candidate(state:ServiceWorkerState='installing'){
+ return Object.assign(new EventTarget(),{state,scriptURL:worker.scriptURL,postMessage:workerPost()}) as unknown as ServiceWorker;
+}
+for(const events of [true,false])it(`candidate selection waits past the old active worker for delayed installation (events=${events})`,async()=>{
+ oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();void updates.update();});
+ await act(async()=>vi.advanceTimersByTimeAsync(1000));
+ expect(updates.updating).toBe(true);expect(updates.phase).toBe('downloading');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ const newer=candidate();await act(async()=>{(registration as any).installing=newer;if(events)registration.dispatchEvent(new Event('updatefound'));await vi.advanceTimersByTimeAsync(500);});
+ expect(save).not.toHaveBeenCalled();
+ await act(async()=>{(newer as any).state='installed';(registration as any).installing=null;(registration as any).waiting=newer;if(events)newer.dispatchEvent(new Event('statechange'));await vi.advanceTimersByTimeAsync(500);});
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+ await act(async()=>{(newer as any).state='activated';(registration as any).waiting=null;(registration as any).active=newer;(container as any).controller=newer;if(events)container.dispatchEvent(new Event('controllerchange'));await vi.advanceTimersByTimeAsync(500);await done;});
+ expect(replace).toHaveBeenCalledOnce();expect(updates.updating).toBe(false);expect(save).toHaveBeenCalledOnce();
+});
+it('candidate selection times out safely with only the old active worker, then accepts a normal waiting worker on retry',async()=>{
+ oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(29999);});
+ expect(updates.updating).toBe(true);expect(save).not.toHaveBeenCalled();
+ await act(async()=>{await vi.advanceTimersByTimeAsync(1);await done;});expect(updates.updating).toBe(false);expect(updates.text).toContain('新版下載尚未完成');expect(replace).not.toHaveBeenCalled();
+ const newer=candidate('installed');(registration as any).waiting=newer;await act(async()=>{done=updates.update();});
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);
+ await act(async()=>{(newer as any).state='activated';(registration as any).active=newer;(container as any).controller=newer;container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('candidate selection accepts a directly activated new worker only after matching same-version content proof',async()=>{
+ oldActive();workerRelease={version:RELEASE.version,contentSha:'e'.repeat(40)};fetcher.mockResolvedValue({ok:true,json:async()=>workerRelease});await mount();
+ const newer=candidate('activated');(registration as any).active=newer;(container as any).controller=newer;
+ await act(async()=>updates.update());expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(0);expect(replace).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledWith(expect.stringContaining('_appUpdateContent='+'e'.repeat(40)));
+});
+it('candidate selection follows a new activated worker without events but still waits for actual control',async()=>{
+ oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(500));expect(updates.updating).toBe(true);
+ const newer=candidate('activated');await act(async()=>{(registration as any).active=newer;await vi.advanceTimersByTimeAsync(500);});
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+ await act(async()=>{(container as any).controller=newer;document.dispatchEvent(new Event('visibilitychange'));await vi.advanceTimersByTimeAsync(500);await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('candidate selection rejects a different activated build as evidence and continues waiting for the requested content',async()=>{
+ oldActive();vi.mocked(worker.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')ports[0].reply({version:newVersion,contentSha:'f'.repeat(40)});});await mount();
+ await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(3500));expect(updates.updating).toBe(true);expect(updates.phase).toBe('downloading');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ expect(worker.postMessage).toHaveBeenCalledOnce();
+});
+it('candidate selection does not let a silent old active identity probe block a newly waiting worker',async()=>{
+ oldActive();vi.mocked(worker.postMessage).mockImplementation(()=>{});await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ const newer=candidate('installed');await act(async()=>{(registration as any).waiting=newer;registration.dispatchEvent(new Event('updatefound'));});expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);
+ await act(async()=>{(newer as any).state='activated';(registration as any).active=newer;(container as any).controller=newer;container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('candidate selection ignores late active identity replies after the installation deadline and unmount',async()=>{
+ oldActive();let reply!:(data:unknown)=>void;vi.mocked(worker.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')reply=ports[0].reply;});await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ await act(async()=>{await vi.advanceTimersByTimeAsync(30000);await done;});expect(updates.updating).toBe(false);expect(updates.text).toContain('新版下載尚未完成');
+ await act(async()=>{await root.unmount();reply({version:newVersion,contentSha:'e'.repeat(40)});registration.dispatchEvent(new Event('updatefound'));await vi.advanceTimersByTimeAsync(1000);});expect(save).not.toHaveBeenCalled();expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+});
 it('P0 rechecks actual control when the activated worker emits no controllerchange',async()=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;(container as any).controller=null;await mount();await act(async()=>{void updates.update();});expect(save).toHaveBeenCalledOnce();(container as any).controller=worker;(worker as any).state='activated';await act(async()=>vi.advanceTimersByTimeAsync(1000));expect(replace).toHaveBeenCalledOnce();
 });

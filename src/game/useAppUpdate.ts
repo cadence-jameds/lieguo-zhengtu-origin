@@ -41,18 +41,27 @@ export function releaseUpdate(data:UpdateMetadata,loaded=RELEASE){
  return validContent(data.contentSha)&&validContent(loaded.contentSha)&&data.contentSha!==loaded.contentSha;
 }
 /** Wait for the new cache to finish installing; a normal reload can still use the old cache. */
-export function waitForWaiting(registration:ServiceWorkerRegistration,_recreatedContainer?:ServiceWorkerContainer,_priorController?:ServiceWorker|null,signal?:AbortSignal):Promise<ServiceWorker>{
+export function waitForWaiting(registration:ServiceWorkerRegistration,_recreatedContainer?:ServiceWorkerContainer,_priorController?:ServiceWorker|null,signal?:AbortSignal,target?:UpdateMetadata):Promise<ServiceWorker>{
  let dispose=()=>{};
+ const probes=new AbortController();
  const operation=new Promise<ServiceWorker>((resolve,reject)=>{
-  let watched:ServiceWorker|null=null;
-  const inspect=(event?:Event,poll=false)=>{const pending=registration.installing;
+  let watched:ServiceWorker|null=null,finished=false;
+  const checked=new WeakSet<ServiceWorker>(),verified=new WeakSet<ServiceWorker>();
+  const inspect=(event?:Event,poll=false)=>{if(finished||signal?.aborted)return;const pending=registration.installing;
    if(live(registration.waiting)&&(!live(pending)||registration.waiting===pending)){resolve(registration.waiting!);return;}
    if(pending?.state==='installed'&&(poll||event?.type==='statechange')){resolve(pending);return;}
-   if(!live(pending)&&registration.active?.state==='activated'){resolve(registration.active);return;}
+   const active=registration.active;
+   if(!live(pending)&&active?.state==='activated'){
+    // update() may finish before updatefound: active can still be the OLD worker.
+    // Only its immutable release identity can prove a directly activated update.
+    // Probe each instance once, alongside installation events, within the same deadline.
+    if(verified.has(active)){resolve(active);return;}
+    if(!checked.has(active)){checked.add(active);void verifyWorkerRelease(active,target,probes.signal).then(()=>{if(!finished&&!signal?.aborted){verified.add(active);inspect();}},()=>{});}
+   }
    if(pending!==watched){watched?.removeEventListener('statechange',inspect);watched=pending;watched?.addEventListener('statechange',inspect);}if(watched?.state==='redundant')reject(Error('新版下載失敗'));
   };
   const poll=setInterval(()=>inspect(undefined,true),250);registration.addEventListener('updatefound',inspect);_recreatedContainer?.addEventListener('controllerchange',inspect);document.addEventListener('visibilitychange',inspect);window.addEventListener('pageshow',inspect);
-  dispose=()=>{clearInterval(poll);registration.removeEventListener('updatefound',inspect);_recreatedContainer?.removeEventListener('controllerchange',inspect);watched?.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('pageshow',inspect);};inspect();
+  dispose=()=>{finished=true;probes.abort();clearInterval(poll);registration.removeEventListener('updatefound',inspect);_recreatedContainer?.removeEventListener('controllerchange',inspect);watched?.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('pageshow',inspect);};inspect();
  });
  return updateDeadline(operation,UPDATE_LIMITS.download,'installation',signal).finally(dispose);
 }
@@ -156,7 +165,7 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>,h
    const target=targetRelease.current;
    if('serviceWorker' in navigator){
     const r=await refresh(confirmSave,false,run.signal,show);if(!r)throw Error('新版尚未備妥');selectedRegistration=r;
-    show('downloading');worker=await waitForWaiting(r,navigator.serviceWorker,undefined,run.signal);
+    show('downloading');worker=await waitForWaiting(r,navigator.serviceWorker,undefined,run.signal,target);
     show('verifying');identity=await verifyWorkerRelease(worker,target,run.signal);
    }
    await confirmSave();assertUpdateActive(run.signal);
