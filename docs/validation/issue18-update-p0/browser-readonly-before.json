@@ -1,0 +1,237 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "f7df341280ece138d0fcbe9dd55bff5d05daf365",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "normal-390x844",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '戰役設定', exact: true })\u001b[22m\n\n    at /workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:62:755\n    at async run (/workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:60:536)\n    at async file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:62:121",
+      "events": [
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "save-failure",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(!trace.some(e=>e.type.startsWith('forbidden-')))\n\n    at run (file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:60:597)\n    at async file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:63:169",
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        },
+        {
+          "type": "forbidden-deleteDatabase"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "offline",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "slow-network",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "controller-wrapper",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "actualControllerIdentityVerified": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 3,
+  "failed": 2,
+  "evidenceNote": "Native raw archive exit exposed Dexie.exists missing-namespace delete probe; Recovery button probe initially used an exact label excluding its icon."
+}

@@ -1,0 +1,80 @@
+{
+  "runId": 40147430033,
+  "jobId": 121031666165,
+  "sourceSha": "22dfaf1db162846954e15a18d77ac194ad0020f9",
+  "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40147430033",
+  "conclusion": "success",
+  "summary": {
+    "success": true,
+    "passed": 1976,
+    "failed": 0,
+    "skipped": 1
+  },
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm ci",
+      "conclusion": "success"
+    },
+    {
+      "name": "Prepare deterministic release metadata",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run typecheck",
+      "conclusion": "success"
+    },
+    {
+      "name": "Full regression in a disposable copy",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build for project Pages",
+      "conclusion": "success"
+    },
+    {
+      "name": "Check project Pages paths",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify release artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Preserve release metadata",
+      "conclusion": "success"
+    },
+    {
+      "name": "Preserve regression result",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-node@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "excerpts": [
+    "2026-10-25T00:47:42.2296083Z {\"success\":true,\"passed\":1976,\"failed\":0,\"skipped\":1,\"report\":\"/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/artifacts/integration/regression-full.json\"}",
+    "2026-10-25T00:48:04.5985023Z Pages assets, PWA scope and Service Worker fallback verified: /lieguo-zhengtu-origin/",
+    "2026-10-25T00:48:04.6532431Z {\"version\":\"0.30.67\",\"date\":\"2026-10-25\",\"commitSha\":\"22dfaf1db162846954e15a18d77ac194ad0020f9\",\"contentSha\":\"22dfaf1db162846954e15a18d77ac194ad0020f9\",\"dirty\":false,\"artifactsConsistent\":true,\"workerIdentityConsistent\":true}"
+  ]
+}

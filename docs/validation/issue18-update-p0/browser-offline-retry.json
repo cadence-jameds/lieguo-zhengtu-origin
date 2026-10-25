@@ -1,0 +1,75 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "22dfaf1db162846954e15a18d77ac194ad0020f9",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "docs-only-and-same-version-offline",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "docsOnlyNoOffer": true,
+      "sameVersionNewContent": true,
+      "offlineWaitingUpdate": true,
+      "events": [
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 1,
+  "failed": 0,
+  "evidenceNote": "Unchanged source, targeted offline positive rerun"
+}

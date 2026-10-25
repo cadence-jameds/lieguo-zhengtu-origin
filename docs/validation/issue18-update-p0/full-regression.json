@@ -1,0 +1,43 @@
+{
+  "command": "node scripts/verify-in-isolation.mjs full",
+  "attempts": [
+    {
+      "sourceSha": "22dfaf1db162846954e15a18d77ac194ad0020f9",
+      "success": true,
+      "total": 1977,
+      "passed": 1976,
+      "failed": 0,
+      "skipped": 1,
+      "note": "Passed before the final preservation-only phase wording adjustment. Final code rerun follows."
+    },
+    {
+      "sourceSha": "8bf43e6d0b6654b6266ce6f0d290abb8048fb4b4",
+      "status": "interrupted",
+      "reason": "Superseded by final strict Promise-rejection fix. Latest complete regression is required on final c23694c source via GitHub CI; no skipped/filtered test workaround."
+    },
+    {
+      "sourceSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+      "execution": "GitHub PR CI",
+      "command": "node scripts/verify-in-isolation.mjs full",
+      "success": true,
+      "passed": 1983,
+      "failed": 0,
+      "skipped": 1,
+      "runUrl": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40150070138",
+      "testFiles": 197
+    }
+  ],
+  "finalResult": {
+    "sourceSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+    "execution": "GitHub PR CI",
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "success": true,
+    "passed": 1983,
+    "failed": 0,
+    "skipped": 1,
+    "runUrl": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40150070138",
+    "testFiles": 197,
+    "total": 1984
+  },
+  "skipReason": "Existing batch210 user late-game save continuation requires REALM_REGRESSION_SAVE; no private player save supplied. Native synthetic save, offline and Recovery tests did run."
+}
