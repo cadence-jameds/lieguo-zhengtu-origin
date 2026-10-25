@@ -103,7 +103,7 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
  const attemptEpoch=useRef(0);
  const targetRelease=useRef<UpdateMetadata|undefined>(undefined);
  const scriptURL=useRef(import.meta.env.BASE_URL+'sw.js');
- const [reloadNotice]=useState(()=>{const q=new URL(window.location.href).searchParams,target=q.get('_appUpdate'),content=q.get('_appUpdateContent');if(!target)return '';const mismatch=(/^\d+\.\d+\.\d+$/.test(target)?target!==RELEASE.version:validContent(target)&&target!==RELEASE.contentSha)||(validContent(content)&&content!==RELEASE.contentSha);return mismatch?'重新載入後仍未取得預期新版；請先確認進度並匯出備份，再檢查更新。 ':'已載入預期新版 v'+RELEASE.version+'。 ';});
+ const [reloadNotice]=useState(()=>{const q=new URL(window.location.href).searchParams,target=q.get('_appUpdate'),content=q.get('_appUpdateContent');if(!target)return '';if(!/^\d+\.\d+\.\d+$/.test(target)&&!validContent(target))return '重新載入後尚無可核對的新版識別，請檢查更新。 ';const mismatch=(/^\d+\.\d+\.\d+$/.test(target)?target!==RELEASE.version:target!==RELEASE.contentSha)||(content!==null&&(!validContent(content)||content!==RELEASE.contentSha));return mismatch?'重新載入後仍未取得預期新版；請先確認進度並匯出備份，再檢查更新。 ':'已載入預期新版 v'+RELEASE.version+'。 ';});
  const refresh=useCallback(async(beforeRegister?:()=>Promise<void>,forceUpdate=false,signal?:AbortSignal,onStep?:(phase:UpdatePhase)=>void)=>{if(!('serviceWorker' in navigator))return;const r=await refreshRegistration(registration.current,navigator.serviceWorker,scriptURL.current,beforeRegister,forceUpdate,signal,onStep);assertUpdateActive(signal);registration.current=r;waiting.current=live(r.waiting);return r;},[]);
  const embedded=!!window.__FORMAL_EMBEDDED_ASSETS;
  const check=useCallback(async(manual=true)=>{

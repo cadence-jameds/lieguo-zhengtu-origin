@@ -33,6 +33,8 @@ Base：`01247043bf79f51cb5fd5357c2f1c4eb88f027fc`，已確認 PR #35 合併；�
 
 正式活動戰役的權威仍為 `useGame.sync()` 的 correlated requestId durable acknowledgement；不改 request receipt、revision、CAS、Recovery 或離線補算。`updateEligibility` 的 empty／historical／locked／error 規則保留。PR #17 contentSha／同號異內容／docs-only 判斷、version.json、Worker identity、Pages base、PWA scope 與 fallback 保留。
 
+活動戰役保存失敗時，首頁亦保留唯讀「匯出本機原始備份」出口；文字明示僅包含已寫入資料、不代表本次保存成功。未知或不符的 reload target 不會顯示「已載入預期新版」。
+
 新增導航測試的成功 location.replace mock 會送出 pagehide，以模擬真正離開頁面；另有不送 pagehide 的負向測試驗證 5s 失敗。既有安全斷言未移除或放寬。
 
 目前尚無原 Android 裝置 DevTools／SW 執行階段證據或可用真機，實機原因仍待玩家驗收。原生 Chromium 的受控故障注入用以證明程式缺陷與修復邊界，不冒稱為真機根因。

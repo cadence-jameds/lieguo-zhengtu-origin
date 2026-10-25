@@ -290,3 +290,12 @@ it('P0 never reloads for an activated controller whose content differs from the 
 it('P0 abandoned/unmounted attempt cannot activate or navigate after a late save acknowledgement',async()=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let late!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>late=r));await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>root.unmount());await act(async()=>{late();await done;});expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
 });
+it('P0 bounds a hanging version.json body and permits another metadata check',async()=>{
+ fetcher.mockResolvedValueOnce({ok:true,json:()=>new Promise(()=>{})});await mount();await act(async()=>vi.advanceTimersByTimeAsync(8000));expect(updates.available).toBe(false);fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await act(async()=>updates.check());expect(updates.available).toBe(true);expect(save).not.toHaveBeenCalled();
+});
+it.each(['unknown-target','wrong-content'])('P0 reload identity %s never claims an unverified successful version',async mode=>{
+ const previous=location.href;const query=mode==='unknown-target'?'?_appUpdate=12345':'?_appUpdate='+RELEASE.version+'&_appUpdateContent='+'f'.repeat(40);history.replaceState(null,'',query);try{await mount();expect(updates.text).not.toContain('已載入預期新版');expect(updates.text).toContain(mode==='unknown-target'?'尚無可核對':'仍未取得預期新版');}finally{history.replaceState(null,'',previous);}
+});
+it('P0 a late timed-out save ACK cannot activate, and an explicit retry obtains a fresh ACK',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let late!:()=>void;save.mockImplementationOnce(()=>new Promise<void>(r=>late=r));await mount();await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(35000));expect(updates.phase).toBe('failed');await act(async()=>late());expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledTimes(2);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});

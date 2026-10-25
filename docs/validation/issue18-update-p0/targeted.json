@@ -1,7 +1,7 @@
 {
   "success": true,
-  "total": 107,
-  "passed": 107,
+  "total": 112,
+  "passed": 112,
   "failed": 0,
   "suites": [
     {
@@ -107,6 +107,11 @@
         },
         {
           "name": "old-campaign new start is enabled only after the current namespace is confirmed empty and legacy is historical",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a failed active-campaign save keeps a read-only raw backup exit without claiming the latest save succeeded",
           "status": "passed",
           "failures": []
         }
@@ -499,6 +504,26 @@
         },
         {
           "name": "P0 abandoned/unmounted attempt cannot activate or navigate after a late save acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 bounds a hanging version.json body and permits another metadata check",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 reload identity unknown-target never claims an unverified successful version",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 reload identity wrong-content never claims an unverified successful version",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a late timed-out save ACK cannot activate, and an explicit retry obtains a fresh ACK",
           "status": "passed",
           "failures": []
         }
