@@ -163,7 +163,7 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
    if(worker&&(!live(worker)||!((worker.state==='activated'&&selectedRegistration?.active===worker)||(worker.state==='installed'&&[selectedRegistration?.waiting,selectedRegistration?.installing].includes(worker)))))throw Error('新版元件已變更');
    show('activating');if(worker)await activateWaiting(worker,navigator.serviceWorker,run.signal,identity);
    assertUpdateActive(run.signal);show('reloading');
-   const url=new URL(window.location.href);url.searchParams.set('_appUpdate',latest.current||String(identity?.contentSha??Date.now()));if(validContent(identity?.contentSha))url.searchParams.set('_appUpdateContent',identity.contentSha);
+   const url=new URL(window.location.href);url.searchParams.set('_appUpdate',latest.current||String(identity?.contentSha??Date.now()));const expectedContent=identity?.contentSha??target?.contentSha;if(validContent(expectedContent))url.searchParams.set('_appUpdateContent',expectedContent);else url.searchParams.delete('_appUpdateContent');
    await reloadPage(url.href,run.signal);
   };
   try{await updateDeadline(work(),UPDATE_LIMITS.total,'overall',run.signal);}

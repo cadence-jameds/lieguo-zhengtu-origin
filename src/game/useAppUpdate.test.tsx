@@ -299,3 +299,7 @@ it.each(['unknown-target','wrong-content'])('P0 reload identity %s never claims 
 it('P0 a late timed-out save ACK cannot activate, and an explicit retry obtains a fresh ACK',async()=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let late!:()=>void;save.mockImplementationOnce(()=>new Promise<void>(r=>late=r));await mount();await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(35000));expect(updates.phase).toBe('failed');await act(async()=>late());expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledTimes(2);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
 });
+
+it('P0 a no-SW retry removes an obsolete content query when the new metadata has only a version',async()=>{
+ const previous=location.href;history.replaceState(null,'','?_appUpdate='+RELEASE.version+'&_appUpdateContent='+RELEASE.contentSha);delete (navigator as any).serviceWorker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});try{await mount();await act(async()=>updates.update());expect(replace).toHaveBeenCalledOnce();expect(replace.mock.calls[0][0]).not.toContain('_appUpdateContent');expect(replace.mock.calls[0][0]).toContain('_appUpdate='+newVersion);}finally{history.replaceState(null,'',previous);}
+});

@@ -1,9 +1,101 @@
 {
   "success": true,
-  "total": 112,
-  "passed": 112,
+  "total": 129,
+  "passed": 129,
   "failed": 0,
   "suites": [
+    {
+      "file": "game/campaignArchive.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "isolated legacy saves alone permits preservation instead of a permanent update dead end",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "isolated legacy backups alone permits preservation instead of a permanent update dead end",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "isolated legacy BattleReports alone permits preservation instead of a permanent update dead end",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current saves plus legacy rows remains blocked, even without current world",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current backups plus legacy rows remains blocked, even without current world",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current BattleReports plus legacy rows remains blocked, even without current world",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current unsupported metadata is incompatible even if legacy is archived",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an explicitly empty current database and legacy authority-only data allow preservation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an unreadable namespace never becomes historical or empty",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/campaignStorage.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "absent and truly empty databases are confirmed without creating a campaign or archive",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "saves rows alone prevent a false empty confirmation and are exported unchanged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "backups rows alone prevent a false empty confirmation and are exported unchanged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "BattleReports rows alone prevent a false empty confirmation and are exported unchanged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "unsupported metadata is distinct from no data and no reads migrate, repair or delete any table",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a corrupt current envelope is stored data, and blocked IndexedDB never becomes empty",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "read-only absent inspection and archive never delete or create a database, including without databases()",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
     {
       "file": "game/releaseMetadata.test.ts",
       "status": "passed",
@@ -524,6 +616,11 @@
         },
         {
           "name": "P0 a late timed-out save ACK cannot activate, and an explicit retry obtains a fresh ACK",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a no-SW retry removes an obsolete content query when the new metadata has only a version",
           "status": "passed",
           "failures": []
         }

@@ -2,7 +2,7 @@
 
 Base：`01247043bf79f51cb5fd5357c2f1c4eb88f027fc`，已確認 PR #35 合併；工作分支 `hotfix/android-update-finite-waits`。PR #19 合併提交為 `06c4cb93779f1f679bb77470515fd8aee1c42de9`。
 
-施工前唯讀追蹤 `useAppUpdate.ts`、`useGame.ts`、`updateEligibility.ts`、`GameApp.tsx`、`FormalHome.tsx`、既有更新／保存測試、`vite.config.ts`，並閱讀 Issue #18 與 PR #19 原修復及 R19 Delta 紀錄。本輪不重做 README 動態版本展示，不改玩法、80 任務、B9、AI、戰鬥、平衡、存檔格式或儲存交易。
+施工前唯讀追蹤 `useAppUpdate.ts`、`useGame.ts`、`updateEligibility.ts`、`GameApp.tsx`、`FormalHome.tsx`、既有更新／保存測試、`vite.config.ts`，並閱讀 Issue #18 與 PR #19 原修復及 R19 Delta 紀錄。本輪不重做 README 動態版本展示，不改玩法、80 任務、B9、AI、戰鬥、平衡、存檔格式或正式寫入交易。
 
 ## 已證實的程式缺陷
 
@@ -20,6 +20,7 @@ Base：`01247043bf79f51cb5fd5357c2f1c4eb88f027fc`，已確認 PR #35 合併；�
 | update／getRegistration／register 各一次觀察 | 各 12s | 本次停止；原生 Promise 不能取消，但晚到結果不得續存檔、啟用或導航 |
 | 安裝／waiting／active 重查 | 30s | 事件＋250ms 有限輪詢；失敗解鎖更新 UI |
 | Worker 自有 release identity | 3s | 關閉 MessageChannel；不符／未知不啟用 |
+| 本機資料枚舉／開啟／唯讀交易 | 各 8s | 不建立／刪除資料庫、不升級 schema；晚到開啟結果關閉連線 |
 | 正式保存 ACK／前次尚未 settle 的保存 | 各 35s | 原 useGame sync 30s 保護保留；逾時不聲稱保存成功、不啟用，未結束的保存不得與重試重疊 |
 | 啟用與實際控制器核對 | 15s | 事件＋250ms 輪詢＋前景重查；不同 controller 物件須證明相同 version／contentSha |
 | location.replace 後 pagehide | 5s | 沒有離開頁面則標示重載未完成，保留已確認保存結果，可明確重試 |
@@ -38,3 +39,9 @@ Base：`01247043bf79f51cb5fd5357c2f1c4eb88f027fc`，已確認 PR #35 合併；�
 新增導航測試的成功 location.replace mock 會送出 pagehide，以模擬真正離開頁面；另有不送 pagehide 的負向測試驗證 5s 失敗。既有安全斷言未移除或放寬。
 
 目前尚無原 Android 裝置 DevTools／SW 執行階段證據或可用真機，實機原因仍待玩家驗收。原生 Chromium 的受控故障注入用以證明程式缺陷與修復邊界，不冒稱為真機根因。
+
+## 原生唯讀探測追加修正
+
+原生瀏覽器的保存故障測試新增唯讀備份出口後，刪除呼叫 tripwire 捕捉到既有 Dexie.exists() 為不存在 namespace 做 open／abort／deleteDatabase 的內部探測。這不是既有玩家資料被刪除的證據。為符合本輪零建立／零刪除的唯讀邊界，campaignStorage 改用原生 databases 枚舉與 readonly transaction；不支援 databases 時，open 的 upgrade transaction 直接 abort，不呼叫 deleteDatabase。正式持久化／CAS／Recovery 模組未修改。
+
+新增測試在原 main 產生 1 個真實失敗（before-readonly.json）；修正後包含無 databases API 的分支均通過。兩個既有儲存測試的故障注入，從已不使用的 Dexie.exists 改到實際原生 open／databases 邊界，原本「無法讀取不得判定空／歷史」斷言完全保留。
