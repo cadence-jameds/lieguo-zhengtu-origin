@@ -1,0 +1,44 @@
+{
+  "sourceCheckpoint": "8bf43e6d0b6654b6266ce6f0d290abb8048fb4b4",
+  "note": "Introduced deadline-helper rejection classification defect caught before release; not claimed as an original main/Android cause. All falsy Promise rejections must remain rejections.",
+  "passed": 0,
+  "failed": 5,
+  "notSelected": 70,
+  "cases": [
+    {
+      "name": "P0 a rejected save with undefined never becomes a durable acknowledgement",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected [ [ { type: 'SKIP_WAITING' } ] ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:311:334\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 a rejected save with null never becomes a durable acknowledgement",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected [ [ { type: 'SKIP_WAITING' } ] ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:311:334\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 a rejected save with false never becomes a durable acknowledgement",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected [ [ { type: 'SKIP_WAITING' } ] ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:311:334\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 a rejected save with zero never becomes a durable acknowledgement",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected [ [ { type: 'SKIP_WAITING' } ] ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:311:334\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 a rejected save with empty never becomes a durable acknowledgement",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected [ [ { type: 'SKIP_WAITING' } ] ] to have a length of +0 but got 1\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:311:334\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}

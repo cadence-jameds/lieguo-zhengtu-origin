@@ -7,12 +7,12 @@ export function assertUpdateActive(signal?:AbortSignal){if(signal?.aborted)throw
 export function updateDeadline<T>(operation:PromiseLike<T>,ms:number,step:string,signal?:AbortSignal):Promise<T>{
  return new Promise((resolve,reject)=>{
   const end=Date.now()+ms;let settled=false;
-  const finish=(error?:unknown,value?:T)=>{if(settled)return;settled=true;clearTimeout(timer);signal?.removeEventListener('abort',aborted);document.removeEventListener('visibilitychange',resume);window.removeEventListener('focus',resume);window.removeEventListener('pageshow',resume);error?reject(error):resolve(value as T);};
+  const finish=(error?:unknown,value?:T,failed=error!==undefined)=>{if(settled)return;settled=true;clearTimeout(timer);signal?.removeEventListener('abort',aborted);document.removeEventListener('visibilitychange',resume);window.removeEventListener('focus',resume);window.removeEventListener('pageshow',resume);failed?reject(error):resolve(value as T);};
   const aborted=()=>finish(new DOMException('Update attempt ended','AbortError'));
   const resume=()=>{if(signal?.aborted)aborted();else if(Date.now()>=end)finish(new UpdateTimeoutError(step));};
   const timer=setTimeout(()=>finish(new UpdateTimeoutError(step)),ms);
   signal?.addEventListener('abort',aborted,{once:true});document.addEventListener('visibilitychange',resume);window.addEventListener('focus',resume);window.addEventListener('pageshow',resume);
-  Promise.resolve(operation).then(value=>{resume();if(!settled)finish(undefined,value);},error=>{resume();if(!settled)finish(error);});resume();
+  Promise.resolve(operation).then(value=>{resume();if(!settled)finish(undefined,value);},error=>{resume();if(!settled)finish(error,undefined,true);});resume();
  });
 }
 export const UPDATE_LIMITS={registration:12000,download:30000,identity:3000,save:35000,activation:15000,navigation:5000,metadata:8000,total:150000} as const;

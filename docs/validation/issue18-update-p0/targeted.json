@@ -1,7 +1,7 @@
 {
   "success": true,
-  "total": 131,
-  "passed": 131,
+  "total": 136,
+  "passed": 136,
   "failed": 0,
   "suites": [
     {
@@ -631,6 +631,31 @@
         },
         {
           "name": "P0 historical qualifies preservation without displaying a fictitious world save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with undefined never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with null never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with false never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with zero never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with empty never becomes a durable acknowledgement",
           "status": "passed",
           "failures": []
         }

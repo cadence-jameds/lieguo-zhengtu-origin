@@ -47,3 +47,5 @@ Base：`01247043bf79f51cb5fd5357c2f1c4eb88f027fc`，已確認 PR #35 合併；�
 新增測試在原 main 產生 1 個真實失敗（before-readonly.json）；修正後包含無 databases API 的分支均通過。兩個既有儲存測試的故障注入，從已不使用的 Dexie.exists 改到實際原生 open／databases 邊界，原本「無法讀取不得判定空／歷史」斷言完全保留。
 
 沒有活動戰役及唯讀歷史的確認使用獨立 preserving 階段「正在確認本機資料保全」，不以「正在保存遊戲進度」描述唯讀操作。GameApp 依已載入 world 傳入同一 hook，原 prepareUpdate 資格與正式 ACK 不變。
+
+期限包裝器追加嚴格區分 resolve 與 reject：undefined／null／false／0／空字串的拒絕原因都保持失敗，不能以 truthiness 判成保存 ACK。發布前新增 5 個負向先失敗，再修正；見 deadline-rejection-before.json。此為修復開發中補出的缺陷，不冒稱原 Android 真機根因。
