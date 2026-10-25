@@ -4,32 +4,25 @@ import {modernUnitAuthorized} from '../formal/modernAwareness';
 import {ModernizationPanel} from './ModernizationPanel';
 import {QUEUE_CAPACITY} from '../formal/economy';
 import {CraftsmanPanel} from './CraftsmanPanel';
-import {researchRequirements,researchQuote,castleSource} from '../formal/buildingDetailData';
+import {castleSource} from '../formal/buildingDetailData';
 import {CombatPanel} from './CombatPanel';
 import type {ArmyTarget} from '../formal/combatModel';
 import {recruitmentPreview} from './cityActions';
 import {readyColonizationUnit} from '../formal/settlement';
 import {useState} from 'react';
 import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
-import {resourceKeys,zeroResources} from '../formal/model';
-import {TECH_CATALOG} from '../formal/techCatalog';
+import {resourceKeys} from '../formal/model';
 import {UNIT_CATALOG,ELITE_VARIANTS,UNIT_LINES,type UnitDefinition} from '../formal/unitCatalog';
 import {armyUpkeep,unitRecruitCost,unitTrainingDuration} from '../formal/military';
 import {buildingLevel} from '../formal/catalogB3';
 import FormalDevelopmentPanel from '../FormalDevelopmentPanel';
-import {Art,Badge} from './Art';
-import {techArt,unitArt,AGE_NAMES,LABELS} from './artMap';
-import {Cost,Dialog,fmt,Heading,realTime} from './UI';
+import {Art} from './Art';
+import {unitArt,AGE_NAMES,LABELS} from './artMap';
+import {Cost,Dialog,fmt,realTime} from './UI';
 import {Countdown} from './LiveValues';
 import {useLiveCity} from './liveClock';
 type Props={world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean};
-export function ResearchView({world,city:sourceCity,issue,busy}:Props){
- const [category,setCategory]=useState('all'),[selected,setSelected]=useState<string|null>(null),[contribution,setContribution]=useState(zeroResources),city=useLiveCity(world,sourceCity,selected!==null)!,f=world.factions.find(f=>f.id===city.ownerFactionId)!,project=world.researchProjects.find(p=>p.projectId===f.researchQueue);
- const techs=Object.values(TECH_CATALOG).filter(d=>(!d.civilizationId||d.civilizationId===f.civilizationId));
- const details=(id:string)=>{const d=TECH_CATALOG[id],quote=researchQuote(world,city,d),reasons=researchRequirements(world,city,d).filter(r=>!r.met).map(r=>r.kind==='age'?AGE_NAMES[+r.required]+'時代':r.kind==='building'?LABELS[r.id]+' Lv'+r.required:r.kind==='tech'?TECH_CATALOG[r.id]?.name??r.id:r.kind==='milestone'?'本城曾達人口 '+fmt(+r.required):r.kind==='cap'?'本文明未開放此階':r.kind==='civilization'?'不能研究外文明科技':'完整現代軍事資格');return {d,cost:quote.cost,reasons,duration:quote.durationMs};};
- const detail=selected?details(selected):null;
- return <div className="view-scroll research-view"><Heading title="科技研發" subtitle={city.name+' · 勢力共用研發成果'}/><div className="era-track formal-era-track">{AGE_NAMES.map((n,i)=><div className={(f.age??0)>=i?'reached':''} key={n}><span>{i+1}</span><strong>{n}</strong><small>{(f.age??0)===i?'目前時代':(f.age??0)>i?'已晉升':'尚未晉升'}</small></div>)}</div>{project&&<section className="card current-research"><h2>{TECH_CATALOG[project.techId].name}</h2>{project.phase==='funding'?<><p>多城科研籌資中 · 四資源全額到位後開始倒數</p><Cost cost={project.contributedResources}/><small>目標投入</small><Cost cost={project.requiredResources}/>{resourceKeys.map(r=><label key={r}>{({food:'糧',wood:'木',stone:'石',gold:'金'})[r]}<input aria-label={'科研投入'+r} type="number" min={0} max={Math.min(city.stock[r],project.requiredResources[r]-project.contributedResources[r])} value={contribution[r]} onChange={e=>setContribution({...contribution,[r]:Number(e.target.value)})}/></label>)}<button disabled={busy||!resourceKeys.some(r=>contribution[r]>0)||resourceKeys.some(r=>!Number.isSafeInteger(contribution[r])||contribution[r]<0||contribution[r]>city.stock[r]||contribution[r]>project.requiredResources[r]-project.contributedResources[r])} onClick={()=>issue({type:'research.contribute',projectId:project.projectId,cityId:city.id,resources:contribution})}>投入所選科研資源</button><button disabled={busy} onClick={()=>{const r=zeroResources();for(const k of resourceKeys)r[k]=Math.min(city.stock[k],project.requiredResources[k]-project.contributedResources[k]);issue({type:'research.contribute',projectId:project.projectId,cityId:city.id,resources:r});}}>由此城投入可用資源</button></>:<p>研究中 · 剩餘 {<Countdown at={project.startedAt!+project.durationSnapshot.durationMs} world={world}/>}</p>}</section>}<div className="formal-filter"><label>科技分類<select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">全部科技</option>{[...new Set(techs.map(d=>d.category))].map(k=><option key={k} value={k}>{({blacksmith:'鐵匠',economy:'經濟',military:'軍事',logistics:'物流',civilization:'文明專屬',elite:'精銳',modern:'現代制度',administration:'行政',scout:'情報',engineering:'工程'} as Record<string,string>)[k]??'制度／'+k}</option>)}</select></label><small>已完成 {f.techIds.length} 項 · 同勢力共用一條科研佇列</small></div><div className="research-grid">{techs.filter(d=>category==='all'||d.category===category).map(d=>{const a=details(d.id),done=f.techIds.includes(d.id);return <article className="card research formal-catalog-card" key={d.id}><div className="section-label"><Art spec={techArt(d.id)} label={d.name}/><div><h2>{d.name}</h2><Badge>{done?'已完成':a.reasons.length?'尚未達條件':'可研究'}</Badge></div></div><Cost cost={a.cost} stock={city.stock}/><small>{a.reasons.join(' · ')||'本城符合科研前置'} · {(a.duration/60000).toFixed(1)} 世界分</small><button disabled={done} onClick={()=>setSelected(d.id)}>查看科技</button></article>;})}</div>{detail&&<Dialog title={detail.d.name} onClose={()=>setSelected(null)}><Art spec={techArt(detail.d.id)} label={detail.d.name}/><Cost cost={detail.cost} stock={city.stock}/><p>{detail.reasons.length?'尚需：'+detail.reasons.join('、'):'本城已符合研究前置'}</p><p>{detail.d.effect}</p><p>研究時間 {(detail.duration/60000).toFixed(1)} 世界分；建立工程時固定資格與時間。</p><button className="primary" disabled={busy||!!f.researchQueue||detail.reasons.length>0||f.techIds.includes(detail.d.id)} onClick={()=>{issue({type:'research.start',cityId:city.id,techId:detail.d.id});setSelected(null);}}>啟動研究</button></Dialog>}</div>;
-}
+export {ResearchView} from './ResearchView';
 export function ArmyView({world,city:sourceCity,issue,busy,targetPoint,armyTarget,initialMarch=false,mobile=false,onMap}:Props&{initialMarch?:boolean;armyTarget?:ArmyTarget;targetPoint?:{x:number;y:number};mobile?:boolean;onMap?:(p:{x:number;y:number})=>void}){
  const [unitEra,setUnitEra]=useState<'traditional'|'modern'>('traditional'),[tab,setTab]=useState<'recruit'|'march'>(initialMarch||targetPoint||armyTarget?'march':'recruit'),[unit,setUnit]=useState<string|null>(null),[settlementOpen,setSettlementOpen]=useState(!!targetPoint),[count,setCount]=useState(1),city=useLiveCity(world,sourceCity,!mobile||unit!==null||settlementOpen)!,f=world.factions.find(f=>f.id===city.ownerFactionId)!,queue=city.military?.queue??[],marches=(world.settlements??[]).filter(p=>p.ownerFactionId===world.playerFactionId&&p.phase==='travelling'),ready=readyColonizationUnit(world,city.id);
  const definitions=UNIT_LINES.map(id=>UNIT_CATALOG[(unitEra==='modern'?'modern.':'')+(id==='guard'?'guard.'+castleSource(world,sourceCity):id)]);

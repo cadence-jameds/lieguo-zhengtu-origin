@@ -1,0 +1,226 @@
+{
+  "passed": 39,
+  "failed": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "file": "game/presentation/ResearchView.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "1X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "50X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "speed switch, pause, resume and recovered world anchor use the common display clock",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "keeps active art dark and gold until the formal completion event, with fixed duration across cities",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "checks resources, shows all requirement reasons and prevents duplicate starts before and after ACK",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "mobile supports independent collapses, bottom details and persisted browsing without save mutations",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "funding has no countdown, permits zero-stock project creation and retains real four-resource contributions",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "countdown ticks retain SVG nodes, selection, scroll and do not recalculate qualifications",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/modernCatchupB94.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "B9-4 desktop keeps military layout and allows only the reverse-engineered line",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 mobile keeps military layout and allows only the reverse-engineered line",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 awareness exposes effective value, encountered lines and a single explicit reverse choice",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 emergency start, four-resource shipment, pool and funding status use formal commands",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 ResearchView shows cooperation/modern effects and accepts explicitly selected real city contributions",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 data link adds major and secondary composition to existing owned incoming alert only",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 cognition20 unlocks explicit enemy modern type identification in the existing battle report",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/parity.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority active Home, GameApp and map imports do not reach DEMO gameplay, save or generators",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority home renders familiar entry and Formal campaign summary",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority desktop shell renders nine original navigation entries, HUD and city coordinates",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority mobile shell renders city switch, four resources, scrollable bottom navigation and magnified scene",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority research and military pages expose Formal catalogs and explicit B5 boundary",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority renderer preserves 45-degree, 40×20 tiles and DEMO initial zoom; overview fits 384",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority forest is sparse with distinct DEMO tree widths and uncropped world anchors",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority formal mountain sprites cross tiles without changing legality",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority river and water shader membership comes from Formal terrain; center stays wet",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority surface is deterministic, fully opaque and does not mutate FormalWorld",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority newgame/load/export/import preserve only Formal worker requests; no demo databases",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "v0.30.10 DEMO parity with Formal authority D7 stays 100 factions /100 cities /432 sites, fixed fields, six civ aliases and dark age",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/researchTree.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "Formal catalog technology tree preserves 66 traditional and 16 modern entries and the official ages",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_zhongguo shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_byzantium shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_frankia shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_britannia shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_japan shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_mongolia shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree requires official qualifications, resources and a free shared queue for gold borders",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree preserves multi-city funding even when one city cannot afford the project",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    }
+  ]
+}
