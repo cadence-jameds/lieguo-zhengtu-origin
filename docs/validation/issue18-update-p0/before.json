@@ -1,0 +1,309 @@
+{
+  "sourceBase": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+  "attempt": "before",
+  "success": false,
+  "total": 57,
+  "passed": 50,
+  "failed": 7,
+  "cases": [
+    {
+      "name": "automatically checks on entry, each minute, focus, foreground and online, then removes listeners",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "shows an actionable update without reloading or saving on discovery, even if a worker changes externally",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "waits for a correlated durable save before activating the waiting worker, and control before reloading",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "waits for installation to complete before saving; duplicate clicks cannot submit twice",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "save failure never activates or reloads and allows retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "download timeout never saves or reloads, while activation timeout keeps the page",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "invalid and older versions do not offer an update; offline packages never register or fetch",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "browsers without a service worker still save before a cache-busted navigation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "same numeric version with different playable content is actionable; identical content is not",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "offline checks retain bundled release notes and never activate or reload",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a fully downloaded waiting worker remains usable when the metadata endpoint is offline",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "docs-only deployment changes neither offer an update nor activate a waiting SW, including after going offline",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "docs-only content verified before a worker finishes downloading stays suppressed offline",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a genuine same-version content update remains usable offline and saves before SW activation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "deployment SHA alone or malformed content identity never implies a same-version playable update",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a later real content update clears docs-only suppression, and matching content withdraws an earlier offer",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "matching content identity is sufficient even without a deployment SHA",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "invalid registration before saving gives a Chinese retry message without claiming this attempt was saved",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "recovers a stale registration through the current scope and saves exactly once before activation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a rejected durable save is never described as successfully saved",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "invalid registrations retry at most twice and a later explicit retry can succeed",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a missing registration is recreated only at the exact plugin script and scope without deleting site data",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a redundant cached worker is ignored and a fresh pending install is awaited before saving",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "ordinary network failures are not retried or shown as raw native errors",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "activation exceptions preserve the confirmed save and permit a later retry without duplicate clicks",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an unrelated controller change cannot cause navigation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "foreground and online events during a save cannot duplicate saves or activation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an unopened campaign is never described as having performed a save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "loading the old application after a version-targeted reload reports the mismatch without claiming a save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "re-registration cannot begin until a durable save has been acknowledged",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a failed save prevents even same-scope registration and automatic activation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a background check never recreates an invalid registration or performs a save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a native TypeError on a removed reference can recover through a different live registration",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "re-registering a still-controlled old worker must await the new worker rather than reloading the old controller",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a slow background check cannot overwrite the confirmed save status during activation",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a failed background refresh discards a stale waiting reference before the explicit retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "rejects a docs-only waiting worker when real content metadata exists and background update is failed",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "rejects a docs-only waiting worker when real content metadata exists and background update is pending",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "rejects a docs-only waiting worker when real content metadata exists and background update is completed",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a newer but different waiting content identity cannot stand in for the requested build",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a replaced waiting worker during durable save is not activated and the confirmed save is retained",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an unsupported worker identity times out without save, activation, navigation or an unbounded retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a malformed worker reply fails safely rather than escaping the update error handler",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an independently downloaded real waiting worker can be verified offline without metadata",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "an explicitly verified empty campaign activates without claiming a durable world save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a late storage safety rejection preserves its recovery message and never activates or reloads",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "a metadata check that completes after a failed update cannot erase the save failure",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "automatic refresh preserves failure details until an explicit check or update retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "confirmed historical preservation activates without claiming absent data or a completed world save",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "historical activation timeout preserves the qualified outcome and permits an explicit retry",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "P0 bounds a never-settling registration.update and quarantines its late completion",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected true to be false // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:251:127\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 bounds a never-settling getRegistration without saving or registering",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected true to be false // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:255:330\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 bounds a never-settling register after a durable save without navigating",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected true to be false // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:258:389\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 save acknowledgement timeout releases loading and never duplicates an unresolved save on retry",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected true to be false // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:261:301\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 finds a verified new active worker even when waiting and controllerchange were missed",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected \"vi.fn()\" to be called once, but got 0 times\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:264:236\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 rechecks actual control when the activated worker emits no controllerchange",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected \"replace\" to be called once, but got 0 times\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:267:384\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "P0 checks elapsed wall time on foreground before accepting a late registration result",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected true to be false // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/useAppUpdate.test.tsx:270:546\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}

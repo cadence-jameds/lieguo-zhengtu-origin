@@ -1,0 +1,1401 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "before-unbounded-update",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "expectedBrokenBaseline": true,
+      "stuckAfterVirtualMs": 60000,
+      "noSave": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "normal-320x568",
+      "status": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "normal-360x640",
+      "status": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "normal-390x844",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "normal-430x932",
+      "status": "PASS",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "normal-568x320",
+      "status": "PASS",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "normal-640x360",
+      "status": "PASS",
+      "viewport": {
+        "width": 640,
+        "height": 360
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "normal-844x390",
+      "status": "PASS",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "normal-932x430",
+      "status": "PASS",
+      "viewport": {
+        "width": 932,
+        "height": 430
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "normal-1440x900",
+      "status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "mobile": false,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "nativeRecovery": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "update-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "lookup-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "register-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": true,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "activation-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": true,
+      "safeRetry": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "save-failure",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "nativeIDBAbort": true,
+      "noActivationOrReload": true,
+      "readOnlyRawBackupAvailable": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "identity-failure",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "offline",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "bad-install",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "slow-network",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "foreground",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "controller-wrapper",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "actualControllerIdentityVerified": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "lost-controller-event",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "nativeControlRecoveredWithoutAppControllerchange": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "docs-only-and-same-version-offline",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "docsOnlyNoOffer": true,
+      "sameVersionNewContent": true,
+      "offlineWaitingUpdate": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "preservation-empty",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "noFictitiousSave": true,
+      "nativeDataPreserved": true,
+      "preservationOnly": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "phase",
+          "phase": "preserving"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "preservation-historical",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "noFictitiousSave": true,
+      "nativeDataPreserved": true,
+      "preservationOnly": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "phase",
+          "phase": "preserving"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 25,
+  "failed": 0,
+  "evidenceNote": "Final c23694c source: all 25 cases pass after strict rejection classification. Earlier native offline timeout remains in history, not claimed explained."
+}

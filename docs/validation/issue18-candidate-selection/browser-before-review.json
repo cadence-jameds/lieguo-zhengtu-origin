@@ -1,0 +1,118 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "b437501f521fa1bc7b48b6f954e17221799fb91c",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "candidate-delayed-install",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'failed'\n- 'downloading'\n\n    at file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:69:58\n    at async run (file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:64:536)\n    at async file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:66:37",
+      "sw": {
+        "active": "activated",
+        "controller": "activated",
+        "skippedIsWaiting": false,
+        "skippedIsActive": false
+      },
+      "events": [
+        {
+          "type": "api-update",
+          "at": 1792912770018
+        },
+        {
+          "type": "api-getRegistration",
+          "at": 1792912770045
+        },
+        {
+          "type": "api-getRegistration-completed",
+          "at": 1792912770045
+        },
+        {
+          "type": "api-update",
+          "at": 1792912770096
+        },
+        {
+          "type": "phase",
+          "at": 1792912770097,
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "at": 1792912770101,
+          "phase": "verifying"
+        },
+        {
+          "type": "phase",
+          "at": 1792912770108,
+          "phase": "failed"
+        },
+        {
+          "type": "api-getRegistration",
+          "at": 1792912770628
+        },
+        {
+          "type": "api-getRegistration-completed",
+          "at": 1792912770630
+        }
+      ]
+    },
+    {
+      "name": "candidate-delayed-install-lost-controller-event",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'failed'\n- 'downloading'\n\n    at file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:69:58\n    at async run (file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:64:536)\n    at async file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:66:37",
+      "sw": {
+        "active": "activated",
+        "controller": "activated",
+        "skippedIsWaiting": false,
+        "skippedIsActive": false
+      },
+      "events": [
+        {
+          "type": "api-update",
+          "at": 1792912775617
+        },
+        {
+          "type": "api-getRegistration",
+          "at": 1792912775641
+        },
+        {
+          "type": "api-getRegistration-completed",
+          "at": 1792912775641
+        },
+        {
+          "type": "api-update",
+          "at": 1792912775670
+        },
+        {
+          "type": "phase",
+          "at": 1792912775671,
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "at": 1792912775672,
+          "phase": "verifying"
+        },
+        {
+          "type": "phase",
+          "at": 1792912775683,
+          "phase": "failed"
+        },
+        {
+          "type": "api-getRegistration",
+          "at": 1792912776186
+        },
+        {
+          "type": "api-getRegistration-completed",
+          "at": 1792912776186
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 0,
+  "failed": 2,
+  "loadedHookSHA256": "69e608bd03b753404eb6fd78ab32245f730a13b09cd2e4d597e885a158d52dca",
+  "targetSourceSha": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+  "expectedFailures": "Same candidate assertions against pre-review b437501: old active causes failed instead of downloading within 500ms. Old loaded release label is synthetic; not a historical deployment bundle."
+}

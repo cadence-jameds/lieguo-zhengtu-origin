@@ -1,0 +1,97 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "cc6ddef9e6dc8f5cb7afdcb61e6fce2e5fca6e49",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "before-unbounded-update",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "expectedBrokenBaseline": true,
+      "stuckAfterVirtualMs": 60000,
+      "noSave": true,
+      "events": [
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "normal-390x844",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "duplicateClickSafe": true,
+      "identityCheckedAfterReload": true,
+      "saveAndRecoveryPreserved": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 2,
+  "failed": 0,
+  "evidenceNote": "initial native main reproduction and patched positive flow"
+}

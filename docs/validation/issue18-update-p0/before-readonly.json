@@ -1,0 +1,46 @@
+{
+  "sourceBase": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+  "description": "New read-only absent-namespace test against original main campaignStorage.ts. This proves Dexie.exists invokes deleteDatabase for a missing DB, not deletion of an existing player DB.",
+  "passed": 0,
+  "failed": 1,
+  "notSelected": 6,
+  "cases": [
+    {
+      "name": "absent and truly empty databases are confirmed without creating a campaign or archive",
+      "status": "skipped",
+      "failures": []
+    },
+    {
+      "name": "saves rows alone prevent a false empty confirmation and are exported unchanged",
+      "status": "skipped",
+      "failures": []
+    },
+    {
+      "name": "backups rows alone prevent a false empty confirmation and are exported unchanged",
+      "status": "skipped",
+      "failures": []
+    },
+    {
+      "name": "BattleReports rows alone prevent a false empty confirmation and are exported unchanged",
+      "status": "skipped",
+      "failures": []
+    },
+    {
+      "name": "unsupported metadata is distinct from no data and no reads migrate, repair or delete any table",
+      "status": "skipped",
+      "failures": []
+    },
+    {
+      "name": "a corrupt current envelope is stored data, and blocked IndexedDB never becomes empty",
+      "status": "skipped",
+      "failures": []
+    },
+    {
+      "name": "read-only absent inspection and archive never delete or create a database, including without databases()",
+      "status": "failed",
+      "failures": [
+        "AssertionError: expected \"deleteDatabase\" to not be called at all, but actually been called 4 times\n\nReceived:\n\n  1st deleteDatabase call:\n\n    Array [\n      \"lieguo-formal-stage2-time2\",\n    ]\n\n  2nd deleteDatabase call:\n\n    Array [\n      \"lieguo-formal-stage2-schema1\",\n    ]\n\n  3rd deleteDatabase call:\n\n    Array [\n      \"lieguo-formal-stage2-time2\",\n    ]\n\n  4th deleteDatabase call:\n\n    Array [\n      \"lieguo-formal-stage2-schema1\",\n    ]\n\n\nNumber of calls: 4\n\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2204:51)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /tmp/update-p0-browser/baseline/src/game/campaignStorage.test.ts:17:221\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}

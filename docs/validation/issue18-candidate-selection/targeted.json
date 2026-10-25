@@ -1,0 +1,777 @@
+{
+  "sourceCommit": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+  "command": "npx vitest run src/game/campaignArchive.test.ts src/game/campaignStorage.test.ts src/game/releaseMetadata.test.ts src/game/releaseSaveCompatibility.test.ts src/game/updateEntry.test.tsx src/game/updatePreparation.test.tsx src/game/useAppUpdate.test.tsx src/game/useGameInteraction.test.tsx --reporter=json",
+  "total": 144,
+  "passed": 144,
+  "failed": 0,
+  "suites": [
+    {
+      "file": "game/campaignArchive.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "isolated legacy saves alone permits preservation instead of a permanent update dead end",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "isolated legacy backups alone permits preservation instead of a permanent update dead end",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "isolated legacy BattleReports alone permits preservation instead of a permanent update dead end",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current saves plus legacy rows remains blocked, even without current world",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current backups plus legacy rows remains blocked, even without current world",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current BattleReports plus legacy rows remains blocked, even without current world",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "current unsupported metadata is incompatible even if legacy is archived",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an explicitly empty current database and legacy authority-only data allow preservation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an unreadable namespace never becomes historical or empty",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/campaignStorage.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "absent and truly empty databases are confirmed without creating a campaign or archive",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "saves rows alone prevent a false empty confirmation and are exported unchanged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "backups rows alone prevent a false empty confirmation and are exported unchanged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "BattleReports rows alone prevent a false empty confirmation and are exported unchanged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "unsupported metadata is distinct from no data and no reads migrate, repair or delete any table",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a corrupt current envelope is stored data, and blocked IndexedDB never becomes empty",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "read-only absent inspection and archive never delete or create a database, including without databases()",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/releaseMetadata.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "one playable merge change advances once; docs-only and repeat builds keep version/date/history",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "the next functional PR advances and history is newest first with the correct notes",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "tests, evidence, PR workflows and test-only dependencies do not imply playable content",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "missing notes fail closed for production while unmerged previews use conservative wording",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "controlled PR notes must match the committed record and merged records cannot be rewritten",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "unapproved version carry, plans and internal commit titles are rejected",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "README automatically follows a functional merge; a docs-only merge retains content, version and history but traces its deployment",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "README SVG and accessible text escape content and provide project-relative archive links without execution or a Gate assertion",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/releaseSaveCompatibility.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "an old appVersion remains legal through SaveLoad and Recovery without changing Formal compatibility versions",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/updateEntry.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "an unreadable campaign must never be described as absent",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "loading is not an empty campaign confirmation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "confirmed empty campaign has a direct-update label instead of promising a nonexistent save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "only read-confirmed absence can bypass a save, including a failed empty engine",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "loading, busy, locked and updating retain explicit blocking reasons even if old state was empty",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an active campaign always requires saving and an active engine error stays blocked",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "historical action is available but never supersedes active/error/loading/busy/locked gates",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "history confirmation offers export and cancellation, and only explicit confirmation requests preservation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "old-campaign new start is enabled only after the current namespace is confirmed empty and legacy is historical",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a failed active-campaign save keeps a read-only raw backup exit without claiming the latest save succeeded",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/updatePreparation.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "confirmed absence returns no-campaign without dispatching any save, and rechecks every attempt",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "stored data plus a null world never permits an update",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "incompatible data plus a null world never permits an update",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an empty crashed engine may update only after a successful fresh read; read failures stay blocked",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "loading, lock and pending requests cannot update or inspect their way around the barrier",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a campaign that appears during an empty probe is never silently discarded",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "active updates await only their correlated durable sync and an engine error cannot bypass it",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "failed saves reject update preparation and never turn into a no-campaign success",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "history requires explicit per-attempt confirmation and rechecks both namespaces without sync or fake save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "history confirmation cannot discard a world that appeared during its fresh read",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "history confirmation never bypasses a current campaign durable-save failure",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "history cannot bypass loading, busy or an unavailable writer lock",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a new read error rechecks storage even when the legacy-only engine was already in error",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/useAppUpdate.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "automatically checks on entry, each minute, focus, foreground and online, then removes listeners",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "shows an actionable update without reloading or saving on discovery, even if a worker changes externally",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "waits for a correlated durable save before activating the waiting worker, and control before reloading",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "waits for installation to complete before saving; duplicate clicks cannot submit twice",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "save failure never activates or reloads and allows retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "download timeout never saves or reloads, while activation timeout keeps the page",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "invalid and older versions do not offer an update; offline packages never register or fetch",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "browsers without a service worker still save before a cache-busted navigation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "same numeric version with different playable content is actionable; identical content is not",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "offline checks retain bundled release notes and never activate or reload",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a fully downloaded waiting worker remains usable when the metadata endpoint is offline",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "docs-only deployment changes neither offer an update nor activate a waiting SW, including after going offline",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "docs-only content verified before a worker finishes downloading stays suppressed offline",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a genuine same-version content update remains usable offline and saves before SW activation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "deployment SHA alone or malformed content identity never implies a same-version playable update",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a later real content update clears docs-only suppression, and matching content withdraws an earlier offer",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "matching content identity is sufficient even without a deployment SHA",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "invalid registration before saving gives a Chinese retry message without claiming this attempt was saved",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovers a stale registration through the current scope and saves exactly once before activation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a rejected durable save is never described as successfully saved",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "invalid registrations retry at most twice and a later explicit retry can succeed",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a missing registration is recreated only at the exact plugin script and scope without deleting site data",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a redundant cached worker is ignored and a fresh pending install is awaited before saving",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "ordinary network failures are not retried or shown as raw native errors",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "activation exceptions preserve the confirmed save and permit a later retry without duplicate clicks",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an unrelated controller change cannot cause navigation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "foreground and online events during a save cannot duplicate saves or activation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an unopened campaign is never described as having performed a save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "loading the old application after a version-targeted reload reports the mismatch without claiming a save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "re-registration cannot begin until a durable save has been acknowledged",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a failed save prevents even same-scope registration and automatic activation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a background check never recreates an invalid registration or performs a save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a native TypeError on a removed reference can recover through a different live registration",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "re-registering a still-controlled old worker must await the new worker rather than reloading the old controller",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a slow background check cannot overwrite the confirmed save status during activation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a failed background refresh discards a stale waiting reference before the explicit retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects a docs-only waiting worker when real content metadata exists and background update is failed",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects a docs-only waiting worker when real content metadata exists and background update is pending",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects a docs-only waiting worker when real content metadata exists and background update is completed",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a newer but different waiting content identity cannot stand in for the requested build",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a replaced waiting worker during durable save is not activated and the confirmed save is retained",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an unsupported worker identity times out without save, activation, navigation or an unbounded retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a malformed worker reply fails safely rather than escaping the update error handler",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an independently downloaded real waiting worker can be verified offline without metadata",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "an explicitly verified empty campaign activates without claiming a durable world save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a late storage safety rejection preserves its recovery message and never activates or reloads",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a metadata check that completes after a failed update cannot erase the save failure",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "automatic refresh preserves failure details until an explicit check or update retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "confirmed historical preservation activates without claiming absent data or a completed world save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "historical activation timeout preserves the qualified outcome and permits an explicit retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 bounds a never-settling registration.update and quarantines its late completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 bounds a never-settling getRegistration without saving or registering",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 bounds a never-settling register after a durable save without navigating",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 save acknowledgement timeout releases loading and never duplicates an unresolved save on retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 finds a verified new active worker even when waiting and controllerchange were missed",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection waits past the old active worker for delayed installation (events=true)",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection waits past the old active worker for delayed installation (events=false)",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection times out safely with only the old active worker, then accepts a normal waiting worker on retry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection accepts a directly activated new worker only after matching same-version content proof",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection follows a new activated worker without events but still waits for actual control",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection rejects a different activated build as evidence and continues waiting for the requested content",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection does not let a silent old active identity probe block a newly waiting worker",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "candidate selection ignores late active identity replies after the installation deadline and unmount",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 rechecks actual control when the activated worker emits no controllerchange",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 checks elapsed wall time on foreground before accepting a late registration result",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 navigation has its own deadline and preserves the acknowledged save on failure",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 stage labels describe actual save and activation rather than a generic saving flag",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 retry after registration timeout ignores the old result and performs one fresh durable save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 accepts a different activated controller wrapper only after its own matching content proof",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 never reloads for an activated controller whose content differs from the saved update target",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 abandoned/unmounted attempt cannot activate or navigate after a late save acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 bounds a hanging version.json body and permits another metadata check",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 reload identity unknown-target never claims an unverified successful version",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 reload identity wrong-content never claims an unverified successful version",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a late timed-out save ACK cannot activate, and an explicit retry obtains a fresh ACK",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a no-SW retry removes an obsolete content query when the new metadata has only a version",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 no-campaign qualifies preservation without displaying a fictitious world save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 historical qualifies preservation without displaying a fictitious world save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with undefined never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with null never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with false never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with zero never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 a rejected save with empty never becomes a durable acknowledgement",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/useGameInteraction.test.tsx",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "background state, phase and unrelated request completions never enable a pending command button",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "revision rejection is terminal and later snapshots never resubmit the failed intention",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "old receipts, terminal acknowledgements and background notices cannot overwrite the current click",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "construction stamps the rendered target even if a Worker snapshot changes the ref before React commits",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "actual event/command revision changes reject the pending intention without automatic resubmission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "governance uses the rendered configuration precondition even when a newer snapshot arrives before submission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "committed patches keep static world identity and a mismatched stream requests a full snapshot",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "historical intel query correlates Worker responses without holding the command button; lookup failure leaves the world ready",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "update save waits for its own durable acknowledgement, not an unrelated sync or request completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "update save rejects storage failure and rejects a completed request that never acknowledged saving",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "fresh lower progress after a completed replay keeps a responsive resume alive for more than thirty seconds",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "repeated same-cycle event counts do not conceal a genuinely stalled replay from the watchdog",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    }
+  ]
+}

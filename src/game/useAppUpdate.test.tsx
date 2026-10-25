@@ -10,14 +10,14 @@ const pwa=vi.hoisted(()=>({register:vi.fn()}));
 vi.mock('virtual:pwa-register',()=>({registerSW:pwa.register}));
 let root:Root,el:HTMLDivElement,updates:ReturnType<typeof useAppUpdate>,save:ReturnType<typeof vi.fn<()=>Promise<void>>>,fetcher:ReturnType<typeof vi.fn>,replace:ReturnType<typeof vi.spyOn>;
 let registration:ServiceWorkerRegistration,container:ServiceWorkerContainer,worker:ServiceWorker;
-let workerRelease:Record<string,unknown>;
+let workerRelease:Record<string,unknown>,activeCampaign=true;
 const workerPost=()=>vi.fn((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')ports[0].reply(workerRelease);});
 const activations=(w:ServiceWorker)=>vi.mocked(w.postMessage).mock.calls.filter(([message])=>message.type==='SKIP_WAITING');
 const next=RELEASE.version.split('.').map(Number);next[2]++;const newVersion=next.join('.');
-function Surface(){updates=useAppUpdate(save);return <Home theme="dark" onThemeChange={()=>{}} world={null} busy={false} loading={false} onNew={()=>{}} onStart={()=>{}} onRetry={()=>{}} onExport={()=>{}} onImport={()=>{}} onCheck={()=>void updates.check()} updateText={updates.text} updateAvailable={updates.available} updating={updates.updating} updateDisabled={updates.updating} onUpdate={()=>void updates.update()}/>;}
+function Surface(){updates=useAppUpdate(save,activeCampaign);return <Home theme="dark" onThemeChange={()=>{}} world={null} busy={false} loading={false} onNew={()=>{}} onStart={()=>{}} onRetry={()=>{}} onExport={()=>{}} onImport={()=>{}} onCheck={()=>void updates.check()} updateText={updates.text} updateStageLabel={updates.label} updatePhase={updates.phase} updateAvailable={updates.available} updating={updates.updating} updateDisabled={updates.updating} onUpdate={()=>void updates.update()}/>;}
 async function mount(){await act(async()=>root.render(<Surface/>));}
 beforeEach(()=>{
- workerRelease={version:newVersion,contentSha:'e'.repeat(40)};
+ activeCampaign=true;workerRelease={version:newVersion,contentSha:'e'.repeat(40)};
  vi.stubGlobal('MessageChannel',class {port1={onmessage:null as any,close:vi.fn()};port2={close:vi.fn(),reply:(data:unknown)=>queueMicrotask(()=>this.port1.onmessage?.({data}))};});
  vi.useFakeTimers();vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);save=vi.fn().mockResolvedValue(undefined);fetcher=vi.fn().mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version})});vi.stubGlobal('fetch',fetcher);
  container=Object.assign(new EventTarget(),{getRegistration:vi.fn(),register:vi.fn()}) as unknown as ServiceWorkerContainer;
@@ -26,7 +26,8 @@ beforeEach(()=>{
  (container as any).controller=worker;vi.mocked(container.getRegistration).mockResolvedValue(registration);vi.mocked(container.register).mockRejectedValue(new Error('registration unavailable'));
  Object.defineProperty(navigator,'serviceWorker',{configurable:true,value:container});Object.defineProperty(document,'hidden',{configurable:true,value:false});
  pwa.register.mockImplementation(options=>{options.onRegisteredSW('/sw.js',registration);return vi.fn();});
- replace=vi.spyOn(window.location,'replace').mockImplementation(()=>{});el=document.createElement('div');document.body.append(el);root=createRoot(el);
+ // A successful native replacement exits the page. Individual blocked-navigation tests override this.
+ replace=vi.spyOn(window.location,'replace').mockImplementation(()=>{window.dispatchEvent(new Event('pagehide'));});el=document.createElement('div');document.body.append(el);root=createRoot(el);
 });
 afterEach(async()=>{await act(async()=>root.unmount());el.remove();delete (navigator as any).serviceWorker;delete (document as any).hidden;delete window.__FORMAL_EMBEDDED_ASSETS;vi.useRealTimers();vi.restoreAllMocks();vi.unstubAllGlobals();pwa.register.mockReset();});
 it('automatically checks on entry, each minute, focus, foreground and online, then removes listeners',async()=>{
@@ -244,3 +245,124 @@ it('a metadata check that completes after a failed update cannot erase the save 
 it('automatic refresh preserves failure details until an explicit check or update retry',async()=>{fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockRejectedValueOnce(Error('write abort'));await mount();await act(async()=>updates.update());expect(updates.text).toContain('未取得保存完成確認');await act(async()=>{pwa.register.mock.calls[0][0].onNeedRefresh();});expect(updates.text).toContain('未取得保存完成確認');await act(async()=>updates.check());expect(updates.text).toContain('可用新版');});
 it('confirmed historical preservation activates without claiming absent data or a completed world save',async()=>{fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockResolvedValue('historical' as never);await mount();let completed!:Promise<void>;await act(async()=>{completed=updates.update();});expect(save).toHaveBeenCalledOnce();expect(activations(worker)).toHaveLength(1);expect(updates.text).toContain('歷史資料原樣保留');expect(updates.text).not.toContain('保存已確認');expect(updates.text).not.toContain('目前沒有開啟戰役');await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await completed;});expect(replace).toHaveBeenCalledOnce();});
 it('historical activation timeout preserves the qualified outcome and permits an explicit retry',async()=>{fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockResolvedValue('historical' as never);await mount();let completed!:Promise<void>;await act(async()=>{completed=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(15000);await completed;});expect(replace).not.toHaveBeenCalled();expect(updates.text).toContain('歷史資料原樣保留');expect(updates.text).not.toContain('保存已確認');expect(updates.updating).toBe(false);await act(async()=>{completed=updates.update();});await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await completed;});expect(replace).toHaveBeenCalledOnce();expect(save).toHaveBeenCalledTimes(2);});
+
+// Issue #18 P0: keep these assertions identical in before/after evidence.
+it('P0 bounds a never-settling registration.update and quarantines its late completion',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();let late!:()=>void;vi.mocked(registration.update).mockImplementation(()=>new Promise<ServiceWorkerRegistration>(r=>late=()=>r(registration)));
+ await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(60000));expect(updates.updating).toBe(false);expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ await act(async()=>{(registration as any).waiting=worker;late();});expect(save).not.toHaveBeenCalled();expect(activations(worker)).toHaveLength(0);
+});
+it('P0 bounds a never-settling getRegistration without saving or registering',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();(registration as any).active=null;vi.mocked(container.getRegistration).mockImplementation(()=>new Promise(()=>{}));await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(60000));expect(updates.updating).toBe(false);expect(save).not.toHaveBeenCalled();expect(container.register).not.toHaveBeenCalled();
+});
+it('P0 bounds a never-settling register after a durable save without navigating',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();(registration as any).active=null;vi.mocked(container.getRegistration).mockResolvedValue(undefined);vi.mocked(container.register).mockImplementation(()=>new Promise(()=>{}));await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(60000));expect(updates.updating).toBe(false);expect(save).toHaveBeenCalledOnce();expect(updates.text).toContain('保存');expect(replace).not.toHaveBeenCalled();
+});
+it('P0 save acknowledgement timeout releases loading and never duplicates an unresolved save on retry',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockImplementation(()=>new Promise(()=>{}));await mount();await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(60000));expect(updates.updating).toBe(false);expect(activations(worker)).toHaveLength(0);await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(60000));expect(updates.updating).toBe(false);expect(save).toHaveBeenCalledOnce();expect(replace).not.toHaveBeenCalled();
+});
+it('P0 finds a verified new active worker even when waiting and controllerchange were missed',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();(worker as any).state='activated';await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(1000));expect(save).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledOnce();
+});
+
+// PR #36 review: update() can resolve before updatefound. An activated worker
+// at that point is usually the old controller, not the requested release.
+function oldActive(){
+ (worker as any).state='activated';
+ vi.mocked(worker.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')ports[0].reply({...RELEASE});});
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion,contentSha:'e'.repeat(40)})});
+}
+function candidate(state:ServiceWorkerState='installing'){
+ return Object.assign(new EventTarget(),{state,scriptURL:worker.scriptURL,postMessage:workerPost()}) as unknown as ServiceWorker;
+}
+for(const events of [true,false])it(`candidate selection waits past the old active worker for delayed installation (events=${events})`,async()=>{
+ oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();void updates.update();});
+ await act(async()=>vi.advanceTimersByTimeAsync(1000));
+ expect(updates.updating).toBe(true);expect(updates.phase).toBe('downloading');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ const newer=candidate();await act(async()=>{(registration as any).installing=newer;if(events)registration.dispatchEvent(new Event('updatefound'));await vi.advanceTimersByTimeAsync(500);});
+ expect(save).not.toHaveBeenCalled();
+ await act(async()=>{(newer as any).state='installed';(registration as any).installing=null;(registration as any).waiting=newer;if(events)newer.dispatchEvent(new Event('statechange'));await vi.advanceTimersByTimeAsync(500);});
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+ await act(async()=>{(newer as any).state='activated';(registration as any).waiting=null;(registration as any).active=newer;(container as any).controller=newer;if(events)container.dispatchEvent(new Event('controllerchange'));await vi.advanceTimersByTimeAsync(500);await done;});
+ expect(replace).toHaveBeenCalledOnce();expect(updates.updating).toBe(false);expect(save).toHaveBeenCalledOnce();
+});
+it('candidate selection times out safely with only the old active worker, then accepts a normal waiting worker on retry',async()=>{
+ oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(29999);});
+ expect(updates.updating).toBe(true);expect(save).not.toHaveBeenCalled();
+ await act(async()=>{await vi.advanceTimersByTimeAsync(1);await done;});expect(updates.updating).toBe(false);expect(updates.text).toContain('新版下載尚未完成');expect(replace).not.toHaveBeenCalled();
+ const newer=candidate('installed');(registration as any).waiting=newer;await act(async()=>{done=updates.update();});
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);
+ await act(async()=>{(newer as any).state='activated';(registration as any).active=newer;(container as any).controller=newer;container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('candidate selection accepts a directly activated new worker only after matching same-version content proof',async()=>{
+ oldActive();workerRelease={version:RELEASE.version,contentSha:'e'.repeat(40)};fetcher.mockResolvedValue({ok:true,json:async()=>workerRelease});await mount();
+ const newer=candidate('activated');(registration as any).active=newer;(container as any).controller=newer;
+ await act(async()=>updates.update());expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(0);expect(replace).toHaveBeenCalledOnce();expect(replace).toHaveBeenCalledWith(expect.stringContaining('_appUpdateContent='+'e'.repeat(40)));
+});
+it('candidate selection follows a new activated worker without events but still waits for actual control',async()=>{
+ oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(500));expect(updates.updating).toBe(true);
+ const newer=candidate('activated');await act(async()=>{(registration as any).active=newer;await vi.advanceTimersByTimeAsync(500);});
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+ await act(async()=>{(container as any).controller=newer;document.dispatchEvent(new Event('visibilitychange'));await vi.advanceTimersByTimeAsync(500);await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('candidate selection rejects a different activated build as evidence and continues waiting for the requested content',async()=>{
+ oldActive();vi.mocked(worker.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')ports[0].reply({version:newVersion,contentSha:'f'.repeat(40)});});await mount();
+ await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(3500));expect(updates.updating).toBe(true);expect(updates.phase).toBe('downloading');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+ expect(worker.postMessage).toHaveBeenCalledOnce();
+});
+it('candidate selection does not let a silent old active identity probe block a newly waiting worker',async()=>{
+ oldActive();vi.mocked(worker.postMessage).mockImplementation(()=>{});await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ const newer=candidate('installed');await act(async()=>{(registration as any).waiting=newer;registration.dispatchEvent(new Event('updatefound'));});expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);
+ await act(async()=>{(newer as any).state='activated';(registration as any).active=newer;(container as any).controller=newer;container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+it('candidate selection ignores late active identity replies after the installation deadline and unmount',async()=>{
+ oldActive();let reply!:(data:unknown)=>void;vi.mocked(worker.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')reply=ports[0].reply;});await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});
+ await act(async()=>{await vi.advanceTimersByTimeAsync(30000);await done;});expect(updates.updating).toBe(false);expect(updates.text).toContain('新版下載尚未完成');
+ await act(async()=>{await root.unmount();reply({version:newVersion,contentSha:'e'.repeat(40)});registration.dispatchEvent(new Event('updatefound'));await vi.advanceTimersByTimeAsync(1000);});expect(save).not.toHaveBeenCalled();expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+});
+it('P0 rechecks actual control when the activated worker emits no controllerchange',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;(container as any).controller=null;await mount();await act(async()=>{void updates.update();});expect(save).toHaveBeenCalledOnce();(container as any).controller=worker;(worker as any).state='activated';await act(async()=>vi.advanceTimersByTimeAsync(1000));expect(replace).toHaveBeenCalledOnce();
+});
+it('P0 checks elapsed wall time on foreground before accepting a late registration result',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();vi.mocked(registration.update).mockImplementation(()=>new Promise(()=>{}));await act(async()=>{void updates.update();});await act(async()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));vi.setSystemTime(Date.now()+60000);Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});expect(updates.updating).toBe(false);expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();
+});
+
+it('P0 navigation has its own deadline and preserves the acknowledged save on failure',async()=>{
+ replace.mockImplementation(()=>{});fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>container.dispatchEvent(new Event('controllerchange')));expect(updates.phase).toBe('reloading');await act(async()=>{await vi.advanceTimersByTimeAsync(5000);await done;});expect(updates.updating).toBe(false);expect(updates.phase).toBe('failed');expect(updates.text).toContain('本次保存已確認');expect(updates.text).toContain('重新載入未完成');expect(save).toHaveBeenCalledOnce();
+});
+it('P0 stage labels describe actual save and activation rather than a generic saving flag',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let ack!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>ack=r));await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(updates.phase).toBe('saving');expect(el.querySelector('.home-release button.primary')!.textContent).toBe('正在保存遊戲進度…');await act(async()=>ack());expect(updates.phase).toBe('activating');expect(el.querySelector('.home-release button.primary')!.textContent).toBe('正在啟用新版…');expect(updates.text).toContain('本次保存已確認');await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});
+});
+it('P0 retry after registration timeout ignores the old result and performs one fresh durable save',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await mount();let late!:(r:ServiceWorkerRegistration)=>void;vi.mocked(registration.update).mockImplementationOnce(()=>new Promise(r=>late=r));await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(12000));expect(updates.updating).toBe(false);
+ (registration as any).waiting=worker;let next!:Promise<void>;await act(async()=>{next=updates.update();late(registration);});expect(save).toHaveBeenCalledOnce();expect(activations(worker)).toHaveLength(1);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await next;});expect(replace).toHaveBeenCalledOnce();
+});
+it('P0 accepts a different activated controller wrapper only after its own matching content proof',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;const actual=Object.assign(new EventTarget(),{state:'activated',scriptURL:worker.scriptURL,postMessage:workerPost()});(container as any).controller=actual;await mount();await act(async()=>updates.update());expect(save).toHaveBeenCalledOnce();expect(actual.postMessage).toHaveBeenCalledWith({type:'GET_APP_RELEASE'},expect.any(Array));expect(replace).toHaveBeenCalledOnce();
+});
+it('P0 never reloads for an activated controller whose content differs from the saved update target',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;const actual=Object.assign(new EventTarget(),{state:'activated',scriptURL:worker.scriptURL,postMessage:vi.fn((_message,ports)=>ports[0].reply({...RELEASE}))});(container as any).controller=actual;await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(15000);await done;});expect(updates.phase).toBe('failed');expect(updates.text).toContain('本次保存已確認');expect(replace).not.toHaveBeenCalled();
+});
+it('P0 abandoned/unmounted attempt cannot activate or navigate after a late save acknowledgement',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let late!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>late=r));await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>root.unmount());await act(async()=>{late();await done;});expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+});
+it('P0 bounds a hanging version.json body and permits another metadata check',async()=>{
+ fetcher.mockResolvedValueOnce({ok:true,json:()=>new Promise(()=>{})});await mount();await act(async()=>vi.advanceTimersByTimeAsync(8000));expect(updates.available).toBe(false);fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});await act(async()=>updates.check());expect(updates.available).toBe(true);expect(save).not.toHaveBeenCalled();
+});
+it.each(['unknown-target','wrong-content'])('P0 reload identity %s never claims an unverified successful version',async mode=>{
+ const previous=location.href;const query=mode==='unknown-target'?'?_appUpdate=12345':'?_appUpdate='+RELEASE.version+'&_appUpdateContent='+'f'.repeat(40);history.replaceState(null,'',query);try{await mount();expect(updates.text).not.toContain('已載入預期新版');expect(updates.text).toContain(mode==='unknown-target'?'尚無可核對':'仍未取得預期新版');}finally{history.replaceState(null,'',previous);}
+});
+it('P0 a late timed-out save ACK cannot activate, and an explicit retry obtains a fresh ACK',async()=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let late!:()=>void;save.mockImplementationOnce(()=>new Promise<void>(r=>late=r));await mount();await act(async()=>{void updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(35000));expect(updates.phase).toBe('failed');await act(async()=>late());expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).toHaveBeenCalledTimes(2);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});expect(replace).toHaveBeenCalledOnce();
+});
+
+it('P0 a no-SW retry removes an obsolete content query when the new metadata has only a version',async()=>{
+ const previous=location.href;history.replaceState(null,'','?_appUpdate='+RELEASE.version+'&_appUpdateContent='+RELEASE.contentSha);delete (navigator as any).serviceWorker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});try{await mount();await act(async()=>updates.update());expect(replace).toHaveBeenCalledOnce();expect(replace.mock.calls[0][0]).not.toContain('_appUpdateContent');expect(replace.mock.calls[0][0]).toContain('_appUpdate='+newVersion);}finally{history.replaceState(null,'',previous);}
+});
+
+it.each(['no-campaign','historical'] as const)('P0 %s qualifies preservation without displaying a fictitious world save',async kind=>{
+ activeCampaign=false;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let finish!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>finish=()=>r(kind as never)));await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(updates.phase).toBe('preserving');expect(updates.text).toContain('正在確認本機資料保全');expect(el.querySelector('.home-release button.primary')!.textContent).not.toContain('保存遊戲');await act(async()=>finish());expect(updates.text).not.toContain('保存已確認');expect(activations(worker)).toHaveLength(1);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});
+});
+it.each([{label:'undefined',reason:undefined},{label:'null',reason:null},{label:'false',reason:false},{label:'zero',reason:0},{label:'empty',reason:''}])('P0 a rejected save with $label never becomes a durable acknowledgement',async({reason})=>{
+ fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockRejectedValueOnce(reason);await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(20000);await done;});expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();expect(updates.text).toContain('未取得保存完成確認');expect(updates.text).not.toContain('本次保存已確認');
+});

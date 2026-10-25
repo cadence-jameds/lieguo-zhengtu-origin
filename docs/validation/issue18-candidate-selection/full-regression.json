@@ -1,0 +1,24 @@
+{
+  "sourceCommit": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+  "command": "node scripts/verify-in-isolation.mjs full",
+  "success": true,
+  "total": 1992,
+  "passed": 1991,
+  "failed": 0,
+  "skipped": 1,
+  "testFiles": 197,
+  "embeddedReleaseMetadata": {
+    "version": "0.30.69",
+    "commitSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+    "contentSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+    "dirty": false
+  },
+  "sourceHashMatchesWorkingTree": true,
+  "pendingTests": [
+    {
+      "file": "game/batch210.test.tsx",
+      "name": "user late-game save remains valid after six more world hours",
+      "status": "skipped"
+    }
+  ]
+}

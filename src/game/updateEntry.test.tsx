@@ -26,3 +26,6 @@ it('old-campaign new start is enabled only after the current namespace is confir
   expect(start.disabled,campaignStatus).toBe(campaignStatus!=='historical');expect(html).toContain('匯出舊存檔備份');expect(html).not.toContain('尚無本機進度，請選擇開始新遊戲。');
  }
 });
+
+import {createFormalFixture} from './formal/fixture';
+it('a failed active-campaign save keeps a read-only raw backup exit without claiming the latest save succeeded',()=>{const html=renderToStaticMarkup(<Home {...props} world={createFormalFixture()} campaignStatus="active" error="保存失敗" onExportRaw={()=>{}}/>);expect(html).toContain('匯出本機原始備份');expect(html).toContain('不代表本次保存成功');expect(html).toContain('重新讀取（保留資料）');});

@@ -1,4 +1,3 @@
-import Dexie from 'dexie';
 import {FORMAL_DB_NAME} from './formal/versions';
 import {metadataSchema} from './formal/schema';
 export type StoredCampaignStatus='empty'|'stored'|'incompatible'|'historical';
@@ -7,10 +6,31 @@ export type StoredCampaignStatus='empty'|'stored'|'incompatible'|'historical';
 const historicalName='lieguo-formal-stage2-schema1';
 const hasArchiveBoundary=()=>String(FORMAL_DB_NAME)==='lieguo-formal-stage2-time2';
 const databaseNames=()=>[...new Set([FORMAL_DB_NAME,'lieguo-formal-stage2-schema1'])];
-async function withExisting<T>(name:string,read:(db:Dexie)=>Promise<T>):Promise<T|undefined>{
- if(!await Dexie.exists(name))return;
- const db=new Dexie(name);try{await db.open();return await db.transaction('r',db.tables,()=>read(db));}finally{db.close();}
+function storageDeadline<T>(operation:Promise<T>):Promise<T>{let timer:ReturnType<typeof setTimeout>|undefined;return Promise.race([operation,new Promise<never>((_resolve,reject)=>{timer=setTimeout(()=>reject(Error('讀取本機資料逾時，原始資料保留。')),8000);})]).finally(()=>clearTimeout(timer));}
+type StoredRow={kind?:string;data?:{metadata?:Record<string,unknown>}};
+function idbRequest<T>(request:IDBRequest<T>){return new Promise<T>((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(Error('無法讀取本機資料，原始資料保留。'));});}
+/** Dexie.exists() probes a missing DB via open/abort/deleteDatabase. This path
+ * must remain strictly read only, including browsers without databases(). */
+async function existingDatabase(name:string):Promise<IDBDatabase|undefined>{
+ if(typeof indexedDB.databases==='function'&&!(await storageDeadline(indexedDB.databases())).some(db=>db.name===name))return;
+ return new Promise((resolve,reject)=>{
+  let ended=false,absent=false;const finish=(db?:IDBDatabase,error?:Error)=>{if(ended){db?.close();return;}ended=true;clearTimeout(timer);error?reject(error):resolve(db);};
+  const timer=setTimeout(()=>finish(undefined,Error('讀取本機資料逾時，原始資料保留。')),8000);let request:IDBOpenDBRequest;try{request=indexedDB.open(name);}catch(error){finish(undefined,error instanceof Error?error:Error('無法讀取本機資料，原始資料保留。'));return;}
+  request.onupgradeneeded=()=>{absent=true;request.transaction?.abort();}; // abort leaves an absent namespace absent
+  request.onsuccess=()=>finish(request.result);
+  request.onerror=event=>{event.preventDefault();finish(undefined,absent?undefined:Error('無法讀取本機資料，原始資料保留。'));};
+  request.onblocked=()=>finish(undefined,Error('本機資料正在使用中，請稍後重試；原始資料保留。'));
+ });
 }
+async function withExisting<T>(name:string,read:(db:DatabaseReader)=>Promise<T>):Promise<T|undefined>{
+ const connection=await existingDatabase(name);if(!connection)return;
+ const names=Array.from(connection.objectStoreNames);if(!names.length){connection.close();return;}
+ const transaction=connection.transaction(names,'readonly');
+ const table=(name:string)=>{const store=transaction.objectStore(name);return {name,count:()=>idbRequest(store.count()),toArray:()=>idbRequest<unknown[]>(store.getAll()),get:(key:IDBValidKey)=>idbRequest<StoredRow|undefined>(store.get(key))};};
+ try{return await storageDeadline(read({tables:names.map(table),table}));}
+ finally{connection.close();}
+}
+type DatabaseReader={tables:{name:string;count:()=>Promise<number>;toArray:()=>Promise<unknown[]>}[];table:(name:string)=>{get:(key:IDBValidKey)=>Promise<StoredRow|undefined>}};
 /** Read only, including backups/reports/authority. No load, repair or migration. */
 export async function inspectCampaignStorage():Promise<StoredCampaignStatus>{
  let stored=false,incompatible=false,historical=false;

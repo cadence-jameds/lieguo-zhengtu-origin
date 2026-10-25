@@ -1,0 +1,35 @@
+{
+  "base": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+  "sourceSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+  "syntheticReleaseVariants": true,
+  "variants": [
+    {
+      "name": "before",
+      "version": "0.30.64",
+      "contentSha": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+      "commitSha": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+      "hookSHA256": "98635db9d124789980669ac9d51350c987d1ad90227c180a696e678d3375849e"
+    },
+    {
+      "name": "patched-old",
+      "version": "0.30.64",
+      "contentSha": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+      "commitSha": "01247043bf79f51cb5fd5357c2f1c4eb88f027fc",
+      "hookSHA256": "69e608bd03b753404eb6fd78ab32245f730a13b09cd2e4d597e885a158d52dca"
+    },
+    {
+      "name": "after",
+      "version": "0.30.69",
+      "contentSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+      "commitSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+      "hookSHA256": "69e608bd03b753404eb6fd78ab32245f730a13b09cd2e4d597e885a158d52dca"
+    },
+    {
+      "name": "same-version",
+      "version": "0.30.64",
+      "contentSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+      "commitSha": "c23694c507e51ddfe68c64e503640676bfc6c57b",
+      "hookSHA256": "69e608bd03b753404eb6fd78ab32245f730a13b09cd2e4d597e885a158d52dca"
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "cc6ddef9e6dc8f5cb7afdcb61e6fce2e5fca6e49",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "update-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": true,
+      "events": [
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "lookup-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "register-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": true,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "activation-hang",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": true,
+      "safeRetry": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        },
+        {
+          "type": "phase",
+          "phase": "preparing"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "save-failure",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 25000ms exceeded.\n    at fail (/workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:54:58)\n    at /workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:68:8\n    at async run (/workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:59:536)\n    at async file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:62:154",
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "identity-failure",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "offline",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 25000ms exceeded.\n    at fail (/workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:54:58)\n    at /workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:68:8\n    at async run (/workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:59:536)\n    at async file:///workspace/lieguo-zhengtu-origin/scripts/verify-update-p0-browser.mjs:62:154",
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "bad-install",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "foreground",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    },
+    {
+      "name": "lost-controller-event",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "nativeControlRecoveredWithoutAppControllerchange": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    },
+    {
+      "name": "docs-only-and-same-version-offline",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "docsOnlyNoOffer": true,
+      "sameVersionNewContent": true,
+      "offlineWaitingUpdate": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 9,
+  "failed": 2,
+  "evidenceNote": "Initial save-failure injection ran after the runtime handler; real save succeeded. Offline case already had a usable worker and succeeded. Probe timing/preconditions were corrected, not app assertions removed."
+}
