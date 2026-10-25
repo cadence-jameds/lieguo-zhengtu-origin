@@ -1,0 +1,27 @@
+{
+  "sourceCommit": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+  "typecheck": "PASS",
+  "npmCi": "PASS",
+  "rootBuild": "PASS",
+  "rootReleaseIdentity": {
+    "version": "0.30.70",
+    "date": "2026-10-25",
+    "commitSha": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+    "contentSha": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+    "dirty": false,
+    "artifactsConsistent": true,
+    "workerIdentityConsistent": true
+  },
+  "pagesBuild": "PASS",
+  "pagesCheck": "Pages assets, PWA scope and Service Worker fallback verified: /lieguo-zhengtu-origin/",
+  "pagesReleaseIdentity": {
+    "version": "0.30.70",
+    "date": "2026-10-25",
+    "commitSha": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+    "contentSha": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+    "dirty": false,
+    "artifactsConsistent": true,
+    "workerIdentityConsistent": true
+  },
+  "warning": "Existing >850kB bundle size advisory; build succeeded; no chunk configuration changes."
+}

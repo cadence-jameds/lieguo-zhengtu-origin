@@ -1,0 +1,109 @@
+{
+  "sourceCommit": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+  "checkedOutPullRequestMerge": "39ed37de464c550aa80fdd1225ec147d72ef30bf",
+  "regression": {"total":1992,"passed":1991,"failed":0,"skipped":1},
+  "validationLogExcerpts": ["2026-10-25T01:58:45.8477931Z {\"success\":true,\"passed\":1991,\"failed\":0,\"skipped\":1,\"report\":\"/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/artifacts/integration/regression-full.json\"}","2026-10-25T01:59:08.6053396Z Pages assets, PWA scope and Service Worker fallback verified: /lieguo-zhengtu-origin/","2026-10-25T01:59:08.6494425Z {\"version\":\"0.30.65\",\"date\":\"2026-10-25\",\"commitSha\":\"39ed37de464c550aa80fdd1225ec147d72ef30bf\",\"contentSha\":\"39ed37de464c550aa80fdd1225ec147d72ef30bf\",\"dirty\":false,\"artifactsConsistent\":true,\"workerIdentityConsistent\":true}"],
+  "runUrl": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40152068844",
+  "jobs": [
+    {
+      "id": 121045489324,
+      "name": "Verify",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40152068844,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Prepare deterministic release metadata",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run npm run typecheck",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Full regression in a disposable copy",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build for project Pages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Check project Pages paths",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify release artifacts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Preserve release metadata",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Preserve regression result",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    }
+  ]
+}

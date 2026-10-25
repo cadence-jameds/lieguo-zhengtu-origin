@@ -1,0 +1,223 @@
+{
+  "browser": "154.0.8037.57",
+  "sourceSha": "e1a4b9ee2364fce9acfac57d91fee19427d2092c",
+  "androidPhysical": "Android 實機待玩家驗收",
+  "faults": "controlled native-API return/lifecycle injection; not proof of the original Android root cause",
+  "cases": [
+    {
+      "name": "before-unbounded-update",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "expectedBrokenBaseline": true,
+      "stuckAfterVirtualMs": 60000,
+      "noSave": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "candidate-delayed-install",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "oldActiveIgnored": true,
+      "delayedNativeInstallation": true,
+      "saveAfterNewWorkerProof": true,
+      "lostControllerEvent": false,
+      "identityCheckedAfterReload": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "api-getRegistration-completed"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "delayed-native-update"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-register-completed"
+        },
+        {
+          "type": "api-update"
+        }
+      ]
+    },
+    {
+      "name": "candidate-delayed-install-lost-controller-event",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "oldActiveIgnored": true,
+      "delayedNativeInstallation": true,
+      "saveAfterNewWorkerProof": true,
+      "lostControllerEvent": true,
+      "identityCheckedAfterReload": true,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-getRegistration"
+        },
+        {
+          "type": "api-getRegistration-completed"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "delayed-native-update"
+        },
+        {
+          "type": "phase",
+          "phase": "verifying"
+        },
+        {
+          "type": "save-request"
+        },
+        {
+          "type": "phase",
+          "phase": "saving"
+        },
+        {
+          "type": "durable-ack"
+        },
+        {
+          "type": "skip-waiting"
+        },
+        {
+          "type": "phase",
+          "phase": "activating"
+        },
+        {
+          "type": "controllerchange"
+        },
+        {
+          "type": "beforeunload"
+        },
+        {
+          "type": "phase",
+          "phase": "reloading"
+        },
+        {
+          "type": "pagehide"
+        },
+        {
+          "type": "phase",
+          "phase": "idle"
+        },
+        {
+          "type": "api-register"
+        },
+        {
+          "type": "api-register-completed"
+        }
+      ]
+    },
+    {
+      "name": "bad-install",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "boundedFailure": true,
+      "savedBeforeFailure": false,
+      "safeRetry": false,
+      "events": [
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "api-update"
+        },
+        {
+          "type": "phase",
+          "phase": "downloading"
+        },
+        {
+          "type": "api-update-completed"
+        },
+        {
+          "type": "phase",
+          "phase": "failed"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 4,
+  "failed": 0
+}
