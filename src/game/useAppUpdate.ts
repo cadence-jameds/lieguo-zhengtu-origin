@@ -95,7 +95,7 @@ function reloadPage(url:string,signal:AbortSignal){
  let dispose=()=>{};const navigation=new Promise<void>((resolve,reject)=>{const left=()=>resolve();window.addEventListener('pagehide',left,{once:true});dispose=()=>window.removeEventListener('pagehide',left);try{assertUpdateActive(signal);window.location.replace(url);}catch(error){reject(error);}});
  return updateDeadline(navigation,UPDATE_LIMITS.navigation,'navigation',signal).finally(dispose);
 }
-export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
+export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>,hasActiveCampaign=true){
  const [phase,setPhase]=useState<UpdatePhase>('idle');
  const activeRun=useRef<AbortController|null>(null),background=useRef<AbortController|null>(null),pendingSave=useRef<Promise<void|'no-campaign'|'historical'>|null>(null);
  const [text,setText]=useState(''),[outcome,setOutcome]=useState(''),[version,setVersion]=useState(''),[ready,setReady]=useState(false),[updating,setUpdating]=useState(false);
@@ -141,7 +141,7 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
   const preservation=()=>saved?'遊戲進度已成功保存（本次保存已確認）；':historical?'歷史資料原樣保留，未執行戰役保存；':noCampaign?'目前沒有開啟戰役；':'';
   const show=(next:UpdatePhase)=>{assertUpdateActive(run.signal);if(activeRun.current!==run)throw new DOMException('Stale update','AbortError');failedPhase=next;setPhase(next);setText((next==='saved'?'':preservation())+UPDATE_PHASE_LABELS[next]);};
   const confirmSave=async()=>{
-   if(saved||noCampaign||historical)return;show('saving');
+   if(saved||noCampaign||historical)return;show(hasActiveCampaign?'saving':'preserving');
    // A timed-out native save may still commit. Never overlap it with a second save,
    // and never reuse its late ACK as proof of the current attempt's world state.
    if(pendingSave.current)await updateDeadline(pendingSave.current.catch(()=>{}),UPDATE_LIMITS.save,'previous save',run.signal);
@@ -171,7 +171,7 @@ export function useAppUpdate(save:()=>Promise<void|'no-campaign'|'historical'>){
    if(activeRun.current!==run)return;
    const stage=failedPhase as UpdatePhase,timeout=error instanceof UpdateTimeoutError;
    setPhase('failed');
-   setOutcome(error instanceof UpdateSafetyError?'更新已暫停：'+error.message:stage==='saving'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':stage==='activating'?preservation()+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留，更新未完成；可安全重試。':stage==='reloading'?preservation()+'重新載入未完成，目前頁面保留；請安全重試。':(stage==='preparing'?'新版準備逾時或更新元件失效；':stage==='verifying'?'新版下載尚未完成，內容驗證未通過；':'新版下載尚未完成或更新元件失效；')+(preservation()||'本次尚未執行保存。')+'更新未完成，可安全重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。');
+   setOutcome(error instanceof UpdateSafetyError?'更新已暫停：'+error.message:stage==='preserving'?'資料保全尚未確認，已停止載入新版；未執行戰役保存，請重新讀取或匯出原始備份後重試。':stage==='saving'?'未取得保存完成確認，已停止載入新版；不能確認本次保存成功。請先手動保存或匯出備份後再重試。':stage==='activating'?preservation()+(timeout?'新版啟用等待逾時':'新版啟用失敗')+'，目前頁面保留，更新未完成；可安全重試。':stage==='reloading'?preservation()+'重新載入未完成，目前頁面保留；請安全重試。':(stage==='preparing'?'新版準備逾時或更新元件失效；':stage==='verifying'?'新版下載尚未完成，內容驗證未通過；':'新版下載尚未完成或更新元件失效；')+(preservation()||'本次尚未執行保存。')+'更新未完成，可安全重試；若仍失敗，請先手動保存並匯出備份，再一般重新整理。');
   }
   finally{run.abort();if(activeRun.current===run){activeRun.current=null;loading.current=false;setUpdating(false);}}
  };

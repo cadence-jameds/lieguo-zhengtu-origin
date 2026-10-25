@@ -1,7 +1,7 @@
 {
   "success": true,
-  "total": 129,
-  "passed": 129,
+  "total": 131,
+  "passed": 131,
   "failed": 0,
   "suites": [
     {
@@ -621,6 +621,16 @@
         },
         {
           "name": "P0 a no-SW retry removes an obsolete content query when the new metadata has only a version",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 no-campaign qualifies preservation without displaying a fictitious world save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "P0 historical qualifies preservation without displaying a fictitious world save",
           "status": "passed",
           "failures": []
         }

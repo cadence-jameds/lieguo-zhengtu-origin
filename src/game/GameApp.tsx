@@ -61,7 +61,7 @@ export default function GameApp(){
  const transition=(type:'start'|'import'|'restore',data:Record<string,unknown>)=>{const id=crypto.randomUUID();waiting.current=id;if(type==='start')engine.send({type,seed:data.seed as number,speed:data.speed as number,name:data.name as string,civilizationId:data.civilizationId as string,offlineHours:data.offlineHours as 0|1|4|8|12,transitionId:id});else if(type==='restore')engine.send({type,id:data.id as number,transitionId:id});else engine.send({type,text:data.text as string,transitionId:id});};
  const importFile=async()=>{const file=pendingImport;if(!file)return;if(file.size>100*1024*1024){setToast('存檔超過 100 MiB。');return;}try{const text=await file.text();transition('import',{text});setPendingImport(null);}catch{setToast('無法讀取檔案，原戰役保留。');}};
  const preserveHistory=useRef(false);
- const updates=useAppUpdate(()=>engine.prepareUpdate({preserveHistory:preserveHistory.current}));
+ const updates=useAppUpdate(()=>engine.prepareUpdate({preserveHistory:preserveHistory.current}),!!world);
  const checkUpdate=updates.check,updateText=updates.text;
  const updateGate=updateEligibility({status,hasWorld:!!world,busy,updating:updates.updating,campaignStatus:engine.campaignStatus});
  const updateDisabled=updateGate.disabled;

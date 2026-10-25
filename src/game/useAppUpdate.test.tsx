@@ -10,14 +10,14 @@ const pwa=vi.hoisted(()=>({register:vi.fn()}));
 vi.mock('virtual:pwa-register',()=>({registerSW:pwa.register}));
 let root:Root,el:HTMLDivElement,updates:ReturnType<typeof useAppUpdate>,save:ReturnType<typeof vi.fn<()=>Promise<void>>>,fetcher:ReturnType<typeof vi.fn>,replace:ReturnType<typeof vi.spyOn>;
 let registration:ServiceWorkerRegistration,container:ServiceWorkerContainer,worker:ServiceWorker;
-let workerRelease:Record<string,unknown>;
+let workerRelease:Record<string,unknown>,activeCampaign=true;
 const workerPost=()=>vi.fn((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE')ports[0].reply(workerRelease);});
 const activations=(w:ServiceWorker)=>vi.mocked(w.postMessage).mock.calls.filter(([message])=>message.type==='SKIP_WAITING');
 const next=RELEASE.version.split('.').map(Number);next[2]++;const newVersion=next.join('.');
-function Surface(){updates=useAppUpdate(save);return <Home theme="dark" onThemeChange={()=>{}} world={null} busy={false} loading={false} onNew={()=>{}} onStart={()=>{}} onRetry={()=>{}} onExport={()=>{}} onImport={()=>{}} onCheck={()=>void updates.check()} updateText={updates.text} updateStageLabel={updates.label} updatePhase={updates.phase} updateAvailable={updates.available} updating={updates.updating} updateDisabled={updates.updating} onUpdate={()=>void updates.update()}/>;}
+function Surface(){updates=useAppUpdate(save,activeCampaign);return <Home theme="dark" onThemeChange={()=>{}} world={null} busy={false} loading={false} onNew={()=>{}} onStart={()=>{}} onRetry={()=>{}} onExport={()=>{}} onImport={()=>{}} onCheck={()=>void updates.check()} updateText={updates.text} updateStageLabel={updates.label} updatePhase={updates.phase} updateAvailable={updates.available} updating={updates.updating} updateDisabled={updates.updating} onUpdate={()=>void updates.update()}/>;}
 async function mount(){await act(async()=>root.render(<Surface/>));}
 beforeEach(()=>{
- workerRelease={version:newVersion,contentSha:'e'.repeat(40)};
+ activeCampaign=true;workerRelease={version:newVersion,contentSha:'e'.repeat(40)};
  vi.stubGlobal('MessageChannel',class {port1={onmessage:null as any,close:vi.fn()};port2={close:vi.fn(),reply:(data:unknown)=>queueMicrotask(()=>this.port1.onmessage?.({data}))};});
  vi.useFakeTimers();vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);save=vi.fn().mockResolvedValue(undefined);fetcher=vi.fn().mockResolvedValue({ok:true,json:async()=>({version:RELEASE.version})});vi.stubGlobal('fetch',fetcher);
  container=Object.assign(new EventTarget(),{getRegistration:vi.fn(),register:vi.fn()}) as unknown as ServiceWorkerContainer;
@@ -302,4 +302,8 @@ it('P0 a late timed-out save ACK cannot activate, and an explicit retry obtains 
 
 it('P0 a no-SW retry removes an obsolete content query when the new metadata has only a version',async()=>{
  const previous=location.href;history.replaceState(null,'','?_appUpdate='+RELEASE.version+'&_appUpdateContent='+RELEASE.contentSha);delete (navigator as any).serviceWorker;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});try{await mount();await act(async()=>updates.update());expect(replace).toHaveBeenCalledOnce();expect(replace.mock.calls[0][0]).not.toContain('_appUpdateContent');expect(replace.mock.calls[0][0]).toContain('_appUpdate='+newVersion);}finally{history.replaceState(null,'',previous);}
+});
+
+it.each(['no-campaign','historical'] as const)('P0 %s qualifies preservation without displaying a fictitious world save',async kind=>{
+ activeCampaign=false;fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;let finish!:()=>void;save.mockImplementation(()=>new Promise<void>(r=>finish=()=>r(kind as never)));await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(updates.phase).toBe('preserving');expect(updates.text).toContain('正在確認本機資料保全');expect(el.querySelector('.home-release button.primary')!.textContent).not.toContain('保存遊戲');await act(async()=>finish());expect(updates.text).not.toContain('保存已確認');expect(activations(worker)).toHaveLength(1);await act(async()=>{container.dispatchEvent(new Event('controllerchange'));await done;});
 });

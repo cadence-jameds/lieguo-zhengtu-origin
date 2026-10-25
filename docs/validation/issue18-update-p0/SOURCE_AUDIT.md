@@ -45,3 +45,5 @@ Base：`01247043bf79f51cb5fd5357c2f1c4eb88f027fc`，已確認 PR #35 合併；�
 原生瀏覽器的保存故障測試新增唯讀備份出口後，刪除呼叫 tripwire 捕捉到既有 Dexie.exists() 為不存在 namespace 做 open／abort／deleteDatabase 的內部探測。這不是既有玩家資料被刪除的證據。為符合本輪零建立／零刪除的唯讀邊界，campaignStorage 改用原生 databases 枚舉與 readonly transaction；不支援 databases 時，open 的 upgrade transaction 直接 abort，不呼叫 deleteDatabase。正式持久化／CAS／Recovery 模組未修改。
 
 新增測試在原 main 產生 1 個真實失敗（before-readonly.json）；修正後包含無 databases API 的分支均通過。兩個既有儲存測試的故障注入，從已不使用的 Dexie.exists 改到實際原生 open／databases 邊界，原本「無法讀取不得判定空／歷史」斷言完全保留。
+
+沒有活動戰役及唯讀歷史的確認使用獨立 preserving 階段「正在確認本機資料保全」，不以「正在保存遊戲進度」描述唯讀操作。GameApp 依已載入 world 傳入同一 hook，原 prepareUpdate 資格與正式 ACK 不變。
