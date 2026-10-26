@@ -1,0 +1,133 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "production build, synthetic formal saves, real Worker and IndexedDB; device emulation is not physical-phone acceptance",
+  "cases": [
+    {
+      "name": "1600x1000",
+      "status": "PASS",
+      "traditional": true,
+      "threeStates": true,
+      "formalEdges": true,
+      "multipleCollapses": false,
+      "bottomSheet": false,
+      "sticky": true,
+      "modernQualification": true,
+      "noPageOverflow": true
+    },
+    {
+      "name": "1024x768",
+      "status": "PASS",
+      "traditional": true,
+      "threeStates": true,
+      "formalEdges": true,
+      "multipleCollapses": false,
+      "bottomSheet": false,
+      "sticky": true,
+      "modernQualification": true,
+      "noPageOverflow": true
+    },
+    {
+      "name": "320x568",
+      "status": "PASS",
+      "traditional": true,
+      "threeStates": false,
+      "formalEdges": false,
+      "multipleCollapses": true,
+      "bottomSheet": true,
+      "sticky": true,
+      "modernQualification": true,
+      "noPageOverflow": true
+    },
+    {
+      "name": "360x640",
+      "status": "PASS",
+      "traditional": true,
+      "threeStates": false,
+      "formalEdges": false,
+      "multipleCollapses": true,
+      "bottomSheet": true,
+      "sticky": true,
+      "modernQualification": true,
+      "noPageOverflow": true
+    },
+    {
+      "name": "390x844",
+      "status": "PASS",
+      "traditional": true,
+      "threeStates": false,
+      "formalEdges": false,
+      "multipleCollapses": true,
+      "bottomSheet": true,
+      "sticky": true,
+      "modernQualification": true,
+      "noPageOverflow": true
+    },
+    {
+      "name": "430x932",
+      "status": "PASS",
+      "traditional": true,
+      "threeStates": false,
+      "formalEdges": false,
+      "multipleCollapses": true,
+      "bottomSheet": true,
+      "sticky": true,
+      "modernQualification": true,
+      "noPageOverflow": true
+    },
+    {
+      "name": "desktop-active",
+      "status": "PASS",
+      "realWorker": true,
+      "realIndexedDB": true,
+      "reload": true,
+      "noProgress": true,
+      "fundingWithoutCountdown": false,
+      "contributionAndCitySwitch": false,
+      "activeDarkArt": true
+    },
+    {
+      "name": "desktop-funding",
+      "status": "PASS",
+      "realWorker": true,
+      "realIndexedDB": true,
+      "reload": true,
+      "noProgress": true,
+      "fundingWithoutCountdown": true,
+      "contributionAndCitySwitch": true,
+      "activeDarkArt": false
+    },
+    {
+      "name": "mobile-active",
+      "status": "PASS",
+      "realWorker": true,
+      "realIndexedDB": true,
+      "reload": true,
+      "noProgress": true,
+      "fundingWithoutCountdown": false,
+      "contributionAndCitySwitch": false,
+      "activeDarkArt": true
+    },
+    {
+      "name": "mobile-funding",
+      "status": "PASS",
+      "realWorker": true,
+      "realIndexedDB": true,
+      "reload": true,
+      "noProgress": true,
+      "fundingWithoutCountdown": true,
+      "contributionAndCitySwitch": true,
+      "activeDarkArt": false
+    },
+    {
+      "name": "offline-PWA",
+      "status": "PASS",
+      "scope": "http://127.0.0.1:4174/lieguo-zhengtu-origin/",
+      "realServiceWorker": true,
+      "offlineReload": true,
+      "researchSaveRestored": true
+    }
+  ],
+  "errors": [],
+  "passed": 11,
+  "failed": 0
+}

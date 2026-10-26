@@ -1,0 +1,19 @@
+{
+  "node": "24.19.0",
+  "npmCi": true,
+  "typecheck": true,
+  "rootProductionBuild": true,
+  "projectPagesBuild": true,
+  "pagesBase": "/lieguo-zhengtu-origin/",
+  "relativeManifestScope": true,
+  "serviceWorkerFallback": true,
+  "releaseArtifactsAndWorkerIdentity": true,
+  "localBuildMetadata": {
+    "version": "0.30.66",
+    "date": "2026-10-25",
+    "commitSha": "b8130b7bb4bd6c78f3b6510d733a149013f78d95",
+    "contentSha": "b8130b7bb4bd6c78f3b6510d733a149013f78d95",
+    "dirty": true
+  },
+  "warning": "Existing chunk size warning remains; no chunk configuration changed."
+}

@@ -1,0 +1,3984 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "synthetic three-city fixture; native Worker, IndexedDB, production Pages build",
+  "cases": [
+    {
+      "name": "1600x1000",
+      "status": "PASS",
+      "canEstablishWithoutFullCityStock": true,
+      "threeRealCityDebits": true,
+      "noLogistics": true,
+      "fundingHasNoCountdown": true,
+      "oneCompletionEvent": true,
+      "realCountdown": true,
+      "trace": [
+        {
+          "stage": "created",
+          "time": 1760,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-before",
+          "ui": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ]
+          ],
+          "time": 1760,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-after",
+          "time": 3305,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:01a40cc3-753e-4914-b2fe-8d3bede3e844",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 3305
+              }
+            ],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-before",
+          "ui": [
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ]
+          ],
+          "time": 3305,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:01a40cc3-753e-4914-b2fe-8d3bede3e844",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 3305
+              }
+            ],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-after",
+          "time": 4739,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:01a40cc3-753e-4914-b2fe-8d3bede3e844",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 3305
+              },
+              {
+                "commandId": "command:1d56f835-9a83-4ae9-aa74-12c1b8e822cb",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4739
+              }
+            ],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-before",
+          "ui": [
+            [
+              135000,
+              120000,
+              105000,
+              315000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              45000,
+              40000,
+              35000,
+              105000
+            ]
+          ],
+          "time": 4739,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:01a40cc3-753e-4914-b2fe-8d3bede3e844",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 3305
+              },
+              {
+                "commandId": "command:1d56f835-9a83-4ae9-aa74-12c1b8e822cb",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4739
+              }
+            ],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-after",
+          "time": 6709,
+          "revision": 4,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributions": [
+              {
+                "commandId": "command:01a40cc3-753e-4914-b2fe-8d3bede3e844",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 3305
+              },
+              {
+                "commandId": "command:1d56f835-9a83-4ae9-aa74-12c1b8e822cb",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4739
+              },
+              {
+                "commandId": "command:781d8cdf-68c2-4461-80fa-4ab0b14fd7c5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:002",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 6709
+              }
+            ],
+            "createdAt": 1760,
+            "qualificationSnapshot": {
+              "checkedAt": 1760,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:960b7751-574c-474e-8c05-aca68610c49f",
+            "fundingTransitionCommandId": "command:781d8cdf-68c2-4461-80fa-4ab0b14fd7c5",
+            "completionEventId": "event:0000000000000198",
+            "phase": "researching",
+            "startedAt": 6709
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": [
+            {
+              "id": "event:0000000000000198",
+              "at": 11382709,
+              "type": "research.complete",
+              "projectId": "research:0000000000000001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "320x568",
+      "status": "PASS",
+      "canEstablishWithoutFullCityStock": true,
+      "threeRealCityDebits": true,
+      "noLogistics": true,
+      "fundingHasNoCountdown": true,
+      "oneCompletionEvent": true,
+      "realCountdown": true,
+      "trace": [
+        {
+          "stage": "created",
+          "time": 1066,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-before",
+          "ui": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ]
+          ],
+          "time": 1066,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-after",
+          "time": 2714,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:97603000-1c67-4301-8675-c1be1ec92cd5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2714
+              }
+            ],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-before",
+          "ui": [
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ]
+          ],
+          "time": 2714,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:97603000-1c67-4301-8675-c1be1ec92cd5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2714
+              }
+            ],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-after",
+          "time": 3963,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:97603000-1c67-4301-8675-c1be1ec92cd5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2714
+              },
+              {
+                "commandId": "command:5a82ea84-8422-4d85-95ae-ec6e4114a3e5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3963
+              }
+            ],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-before",
+          "ui": [
+            [
+              135000,
+              120000,
+              105000,
+              315000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              45000,
+              40000,
+              35000,
+              105000
+            ]
+          ],
+          "time": 3963,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:97603000-1c67-4301-8675-c1be1ec92cd5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2714
+              },
+              {
+                "commandId": "command:5a82ea84-8422-4d85-95ae-ec6e4114a3e5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3963
+              }
+            ],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-after",
+          "time": 5013,
+          "revision": 4,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributions": [
+              {
+                "commandId": "command:97603000-1c67-4301-8675-c1be1ec92cd5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2714
+              },
+              {
+                "commandId": "command:5a82ea84-8422-4d85-95ae-ec6e4114a3e5",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3963
+              },
+              {
+                "commandId": "command:ad96916c-4ac2-469f-8251-5852c62978cc",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:002",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 5013
+              }
+            ],
+            "createdAt": 1066,
+            "qualificationSnapshot": {
+              "checkedAt": 1066,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:5a5ca0c1-0c19-489a-9073-bd37c5615251",
+            "fundingTransitionCommandId": "command:ad96916c-4ac2-469f-8251-5852c62978cc",
+            "completionEventId": "event:0000000000000198",
+            "phase": "researching",
+            "startedAt": 5013
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": [
+            {
+              "id": "event:0000000000000198",
+              "at": 11381013,
+              "type": "research.complete",
+              "projectId": "research:0000000000000001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "360x640",
+      "status": "PASS",
+      "canEstablishWithoutFullCityStock": true,
+      "threeRealCityDebits": true,
+      "noLogistics": true,
+      "fundingHasNoCountdown": true,
+      "oneCompletionEvent": true,
+      "realCountdown": true,
+      "trace": [
+        {
+          "stage": "created",
+          "time": 1231,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-before",
+          "ui": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ]
+          ],
+          "time": 1231,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-after",
+          "time": 2831,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:9e1fbadf-653d-44a7-9974-74b77767a476",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2831
+              }
+            ],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-before",
+          "ui": [
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ]
+          ],
+          "time": 2831,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:9e1fbadf-653d-44a7-9974-74b77767a476",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2831
+              }
+            ],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-after",
+          "time": 3978,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:9e1fbadf-653d-44a7-9974-74b77767a476",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2831
+              },
+              {
+                "commandId": "command:ea3fba5e-353b-47c6-b32a-8e5f65cf7328",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3978
+              }
+            ],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-before",
+          "ui": [
+            [
+              135000,
+              120000,
+              105000,
+              315000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              45000,
+              40000,
+              35000,
+              105000
+            ]
+          ],
+          "time": 3978,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:9e1fbadf-653d-44a7-9974-74b77767a476",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2831
+              },
+              {
+                "commandId": "command:ea3fba5e-353b-47c6-b32a-8e5f65cf7328",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3978
+              }
+            ],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-after",
+          "time": 5044,
+          "revision": 4,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributions": [
+              {
+                "commandId": "command:9e1fbadf-653d-44a7-9974-74b77767a476",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2831
+              },
+              {
+                "commandId": "command:ea3fba5e-353b-47c6-b32a-8e5f65cf7328",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3978
+              },
+              {
+                "commandId": "command:890f5c02-244b-4823-8a9f-f8b3aa97a406",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:002",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 5044
+              }
+            ],
+            "createdAt": 1231,
+            "qualificationSnapshot": {
+              "checkedAt": 1231,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:8dee1326-bd10-400d-811d-56bd01af6bec",
+            "fundingTransitionCommandId": "command:890f5c02-244b-4823-8a9f-f8b3aa97a406",
+            "completionEventId": "event:0000000000000198",
+            "phase": "researching",
+            "startedAt": 5044
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": [
+            {
+              "id": "event:0000000000000198",
+              "at": 11381044,
+              "type": "research.complete",
+              "projectId": "research:0000000000000001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "390x844",
+      "status": "PASS",
+      "canEstablishWithoutFullCityStock": true,
+      "threeRealCityDebits": true,
+      "noLogistics": true,
+      "fundingHasNoCountdown": true,
+      "oneCompletionEvent": true,
+      "realCountdown": true,
+      "trace": [
+        {
+          "stage": "created",
+          "time": 1122,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-before",
+          "ui": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ]
+          ],
+          "time": 1122,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-after",
+          "time": 2769,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:cb91a416-f303-4c5a-8107-2c786c0cca00",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2769
+              }
+            ],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-before",
+          "ui": [
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ]
+          ],
+          "time": 2769,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:cb91a416-f303-4c5a-8107-2c786c0cca00",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2769
+              }
+            ],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-after",
+          "time": 4183,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:cb91a416-f303-4c5a-8107-2c786c0cca00",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2769
+              },
+              {
+                "commandId": "command:910fb8eb-14f6-4ea6-aeff-49c7b01276a6",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4183
+              }
+            ],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-before",
+          "ui": [
+            [
+              135000,
+              120000,
+              105000,
+              315000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              45000,
+              40000,
+              35000,
+              105000
+            ]
+          ],
+          "time": 4183,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:cb91a416-f303-4c5a-8107-2c786c0cca00",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2769
+              },
+              {
+                "commandId": "command:910fb8eb-14f6-4ea6-aeff-49c7b01276a6",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4183
+              }
+            ],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-after",
+          "time": 5300,
+          "revision": 4,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributions": [
+              {
+                "commandId": "command:cb91a416-f303-4c5a-8107-2c786c0cca00",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2769
+              },
+              {
+                "commandId": "command:910fb8eb-14f6-4ea6-aeff-49c7b01276a6",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4183
+              },
+              {
+                "commandId": "command:92feff26-befb-41ee-8e21-984bdf6633e0",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:002",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 5300
+              }
+            ],
+            "createdAt": 1122,
+            "qualificationSnapshot": {
+              "checkedAt": 1122,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:03c1c303-2b9a-4f18-8aca-cf4e1554271b",
+            "fundingTransitionCommandId": "command:92feff26-befb-41ee-8e21-984bdf6633e0",
+            "completionEventId": "event:0000000000000198",
+            "phase": "researching",
+            "startedAt": 5300
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": [
+            {
+              "id": "event:0000000000000198",
+              "at": 11381300,
+              "type": "research.complete",
+              "projectId": "research:0000000000000001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "430x932",
+      "status": "PASS",
+      "canEstablishWithoutFullCityStock": true,
+      "threeRealCityDebits": true,
+      "noLogistics": true,
+      "fundingHasNoCountdown": true,
+      "oneCompletionEvent": true,
+      "realCountdown": true,
+      "trace": [
+        {
+          "stage": "created",
+          "time": 1134,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-before",
+          "ui": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ]
+          ],
+          "time": 1134,
+          "revision": 1,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 0,
+              "wood": 0,
+              "stone": 0,
+              "gold": 0
+            },
+            "contributions": [],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-0-after",
+          "time": 2535,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:f151e538-17fc-47b4-a242-79c03e40ea08",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2535
+              }
+            ],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-before",
+          "ui": [
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              90000,
+              80000,
+              70000,
+              210000
+            ]
+          ],
+          "time": 2535,
+          "revision": 2,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 90000,
+              "wood": 80000,
+              "stone": 70000,
+              "gold": 210000
+            },
+            "contributions": [
+              {
+                "commandId": "command:f151e538-17fc-47b4-a242-79c03e40ea08",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2535
+              }
+            ],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-1-after",
+          "time": 3718,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:f151e538-17fc-47b4-a242-79c03e40ea08",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2535
+              },
+              {
+                "commandId": "command:779520ec-1b82-4b16-af25-90f6e480a9f1",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3718
+              }
+            ],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-before",
+          "ui": [
+            [
+              135000,
+              120000,
+              105000,
+              315000
+            ],
+            [
+              180000,
+              160000,
+              140000,
+              420000
+            ],
+            [
+              45000,
+              40000,
+              35000,
+              105000
+            ]
+          ],
+          "time": 3718,
+          "revision": 3,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 135000,
+              "wood": 120000,
+              "stone": 105000,
+              "gold": 315000
+            },
+            "contributions": [
+              {
+                "commandId": "command:f151e538-17fc-47b4-a242-79c03e40ea08",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2535
+              },
+              {
+                "commandId": "command:779520ec-1b82-4b16-af25-90f6e480a9f1",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3718
+              }
+            ],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": null,
+            "completionEventId": null,
+            "phase": "funding"
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": []
+        },
+        {
+          "stage": "city-2-after",
+          "time": 4782,
+          "revision": 4,
+          "stocks": [
+            {
+              "id": "city:000",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:001",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            },
+            {
+              "id": "city:002",
+              "stock": {
+                "food": 0,
+                "wood": 0,
+                "stone": 0,
+                "gold": 0
+              }
+            }
+          ],
+          "project": {
+            "projectId": "research:0000000000000001",
+            "techId": "modern.infantry-weapons",
+            "technologyScope": "modern-common",
+            "ownerFactionId": "faction:000",
+            "initiatingCityId": "city:000",
+            "paymentMode": "same-faction-direct",
+            "requiredResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributedResources": {
+              "food": 180000,
+              "wood": 160000,
+              "stone": 140000,
+              "gold": 420000
+            },
+            "contributions": [
+              {
+                "commandId": "command:f151e538-17fc-47b4-a242-79c03e40ea08",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:000",
+                "resources": {
+                  "food": 90000,
+                  "wood": 80000,
+                  "stone": 70000,
+                  "gold": 210000
+                },
+                "at": 2535
+              },
+              {
+                "commandId": "command:779520ec-1b82-4b16-af25-90f6e480a9f1",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:001",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 3718
+              },
+              {
+                "commandId": "command:7a9cf1bd-d922-4b80-86bf-dbb65477bb3e",
+                "sourceFactionId": "faction:000",
+                "sourceCityId": "city:002",
+                "resources": {
+                  "food": 45000,
+                  "wood": 40000,
+                  "stone": 35000,
+                  "gold": 105000
+                },
+                "at": 4782
+              }
+            ],
+            "createdAt": 1134,
+            "qualificationSnapshot": {
+              "checkedAt": 1134,
+              "cityId": "city:000",
+              "ownerFactionId": "faction:000",
+              "academyLevel": 15,
+              "buildingLevels": {
+                "center": 1,
+                "academy": 15,
+                "barracks": 15,
+                "warehouse.0": 15,
+                "warehouse.1": 15,
+                "warehouse.2": 15
+              },
+              "prerequisiteTechIds": [
+                "research.cooperation"
+              ],
+              "fullModernQualification": true,
+              "researchCooperation": true
+            },
+            "durationSnapshot": {
+              "baseDurationMs": 14400000,
+              "academyMultiplier": 0.79,
+              "durationMs": 11376000
+            },
+            "creationCommandId": "command:bca4c5b3-2ce6-4a69-91c1-be54e97b60d9",
+            "fundingTransitionCommandId": "command:7a9cf1bd-d922-4b80-86bf-dbb65477bb3e",
+            "completionEventId": "event:0000000000000198",
+            "phase": "researching",
+            "startedAt": 4782
+          },
+          "queue": "research:0000000000000001",
+          "researchEvents": [
+            {
+              "id": "event:0000000000000198",
+              "at": 11380782,
+              "type": "research.complete",
+              "projectId": "research:0000000000000001"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": 5,
+  "failed": 0
+}

@@ -1,0 +1,313 @@
+{
+  "passed": 60,
+  "failed": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "file": "game/formal/developmentB4.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "age 1 uses single-city cost, population/center and fixed 4h without Academy or City requirement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age 2 uses single-city cost, population/center and fixed 8h without Academy or City requirement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age 3 uses single-city cost, population/center and fixed 16h without Academy or City requirement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age fails each start boundary and cannot borrow stock from another owned city",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "faction age queue, general research, city promotion, construction and military can exist independently",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age ownership and cost/time snapshots survive loss of initiating city while another city remains",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "all traditional tech, cooperation and modern ledger identities remain unique; no B9 combat resolver is attached",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Academy 1/15 multipliers are1/.79, affect ordinary tech; elite durations stay fixed",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "technology prerequisites, local buildings, age and civilization are enforced on the shared command path",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "China cannot start melee tier3; six civilization blacksmith caps retain exact v84 matrix",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Kaogong discounts ordinary technology resources15% and neither duration nor elite costs",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "cooperation requires full modern qualification and own Academy15; ordinary modern capability is independent",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "cooperation pays60/80/70/90k from one city,4h×Academy; other city stock cannot fund it",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "modern.infantry-weapons cannot start funding before cooperation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "modern.civ_zhongguo.exclusive cannot start funding before cooperation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "D1 creation immediately occupies faction queue, no cost is taken and no countdown/event exists during funding",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "D1 direct contributions conserve real stock without caravans and require all four full before countdown",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "foreign/political empire cities cannot contribute, overfund/insufficient/no-op contributions reject atomically",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "lost initiating city does not move owner/refund/recompute; another own city can continue funding",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "duplicate contribution applies once; altered reused ID and stale revision cannot spend twice",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "native funding Recovery preserves command tombstones and project/event high-water after rollback",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "traditional research started before city loss completes for original owner and freezes Academy duration",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "formal traditional unit catalog and every base training time are exact; baggage is10m and2population",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "producer level15 halves training, center does not speed other producers and scout remains90sec",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recruitment pays exact batch resources and population once; units finish sequentially and consume food only after completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recruitment rejects insufficient population/stock/age/producer/housing without spending resources",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military lanes are serial per lane and permanent20k opens a second parallel queue",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "cancel pending remainder returns100% population and80% resources, completed units remain, queue snapshot is stable",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "city-only disband returns living unit population without resource refund and removes only chosen unit count",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "upkeep equals population cost, civilian population is free; rations and nomadic apply only eligible classes",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "elite auto production requires faction tech AND this city milestone; cost/time/pop remain base",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "civilization guard cannot be bought by another civilization and AI recruitment uses same guards/costs",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "baggage queues in workshop, takes10m atLv1 and preserves exact cargo interface",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement start validates age/castle/pop2000 individually, pays30k and transfers400people upfront",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement prep4h/2h castle curve snapshot persists after population decline; unique ready/prep per source",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement cancellation returns400people and80%costs only while preparing",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "escort requires20 combat units; scout/baggage do not count and siege cannot follow",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement rejects water/river/mountain, occupied city/wildsite and existing reservation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement reservation survives save/load; escort transfers permanently, newcity400 and initialcities200 remain distinct",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "new city remains housing400 with permanent local qualifications empty and applies12h integration",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "travelling settlement cannot cancel/change target; another own city cannot reserve same cell",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement Recovery drops rolled-back reservations and preserves deployment tombstone",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "auto logistics requires research and source market, uses actual stock/reserve/capacity and no free caravans",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "offline event slices agree on research/age/recruitment/settlement economy outcomes and codec",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "strict schema rejects native forged age, queue event, technology, ledger duration and settlement geometry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "zero-count escort selections are normalized before escrow so arrival never creates invalid zero-unit records",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "travelling escorts continue charging source food until the exact new-city arrival instant",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "army food shortage is recorded for B5 starvation interface without civilian upkeep or negative stock",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "full population refunds below cap obey100%; saturated housing uses the universal population clamp",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "economic research affects all owned cities only from completion, never retroactively",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "new caravan dispatch snapshots vehicle10% speed without changing return duration or cargo2000",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "training/settlement prep save, load and native Recovery retain consumed stock/population exactly once",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building barracks uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building archery uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building stable uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building blacksmith uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building academy uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building workshop uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building castle uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "after losing initiating city and qualifications, final funding and completion still use original snapshot and original owner",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    }
+  ]
+}

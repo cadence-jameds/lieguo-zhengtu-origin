@@ -1,0 +1,17 @@
+{
+  "npmCi": true,
+  "typecheck": true,
+  "productionRoot": true,
+  "productionPages": true,
+  "pagesPwaPaths": true,
+  "releaseAndWorkerIdentity": true,
+  "node": "24.19.0",
+  "sourceManifest": "source-manifest.json",
+  "previewMetadata": {
+    "version": "0.30.67",
+    "date": "2026-10-26",
+    "commitSha": "4365b6ea5be60ffd50d4ac9ca73b621a56077b0e",
+    "contentSha": "4365b6ea5be60ffd50d4ac9ca73b621a56077b0e",
+    "dirty": true
+  }
+}
