@@ -1,0 +1,86 @@
+[
+  {
+    "path": "releases/notes/player-auto-logistics.json",
+    "sha256": "fe2440398e3d1500ac65237cfd4b74d8820060c9982e3d8909f6ef554a7d8281"
+  },
+  {
+    "path": "scripts/prepare-player-logistics-fixture.mjs",
+    "sha256": "1060c8a447a4534810e8764301e5fe07328199294500cbcf6559e1d53780f332"
+  },
+  {
+    "path": "scripts/verify-player-logistics-browser.mjs",
+    "sha256": "5f1a80c0f4b5dc0dc55947c6b9f0cc1673b6f537e1b7f2bc9f2992fdd9f69729"
+  },
+  {
+    "path": "src/game/FormalDevelopmentPanel.tsx",
+    "sha256": "2c38794b2b5102c55b14158cef7360dacfdfdeb793dec90edc4af7a720662030"
+  },
+  {
+    "path": "src/game/formal/autoLogistics.ts",
+    "sha256": "a6a63608f4e6752548c237751586ff7e012c0f2ef6c254084e08846e3e89f5ca"
+  },
+  {
+    "path": "src/game/formal/developmentB4.test.ts",
+    "sha256": "e91381d50e5791aaef0434826d8bd9346879f0a33a09e2752c1b65755452100c"
+  },
+  {
+    "path": "src/game/formal/economy.ts",
+    "sha256": "b37b21d52e9f690e1e2e07bbe85d9e4bb318c42fbe8d569631d01ad775fcb166"
+  },
+  {
+    "path": "src/game/formal/logisticsAllocation.ts",
+    "sha256": "14d1727877e466b375f506dc62555f8be179a36dc2d9ca05753e4cf7ac377fc2"
+  },
+  {
+    "path": "src/game/formal/model.ts",
+    "sha256": "5dd7bf0da777957aa2928bab73624e2257e7c0c84ecf868346660e79063f9fc1"
+  },
+  {
+    "path": "src/game/formal/playerLogistics.test.ts",
+    "sha256": "19052d8ded1f34049773a5dfc54f8e770b49193b53bfcca2e18c7789ad056592"
+  },
+  {
+    "path": "src/game/formal/reducer.ts",
+    "sha256": "dd4961b4f10824ba1286fc58e170bfcd894948798563af05216b243eed5290bc"
+  },
+  {
+    "path": "src/game/formal/schema.ts",
+    "sha256": "ff3a83a3eb11d26bc1dcf350c1ee32e4244dfa11d97a434dc1df70aae3d4a17c"
+  },
+  {
+    "path": "src/game/formal/wonder.ts",
+    "sha256": "a357fab59e72dc3e96ff647570aecf87bef88468a79e41a471951c33085e4982"
+  },
+  {
+    "path": "src/game/formal/wonderAutoSupply.test.ts",
+    "sha256": "68e269a7e30972c120571f454aa4a27c8a5e8d7087f5e9f5d6f46bdb42386525"
+  },
+  {
+    "path": "src/game/orderAdmission.ts",
+    "sha256": "df6b9a9b3b38ca4ba2b9470c18aad268880b6cb70c6f327dcafb6fc2c02005a0"
+  },
+  {
+    "path": "src/game/presentation/BuildingDetail.tsx",
+    "sha256": "855f8aa06656af69c0325ff408e2c99a6f75f18246d1b540c03e5603eb4be323"
+  },
+  {
+    "path": "src/game/presentation/LogisticsSettingsPanel.test.tsx",
+    "sha256": "847788a9eaaa5c272cae2d1a6f50545c20a1cb9a4ca4f46a64c8861689be378b"
+  },
+  {
+    "path": "src/game/presentation/LogisticsSettingsPanel.tsx",
+    "sha256": "bc96b921f9b69b1520220cb58d40c236bb22b25f8b73dac19b0caaaebf6367cb"
+  },
+  {
+    "path": "src/game/presentation/WonderPanel.tsx",
+    "sha256": "8cfa8396db4fdc0ca3f88d531dd005c905641bdbfe568c28aed473667a6a1a75"
+  },
+  {
+    "path": "src/game/presentation/playable.css",
+    "sha256": "6540474aac976c300e355b29cf97afd2e8b50f8cb433bd224fb0f0b477bcb063"
+  },
+  {
+    "path": "src/game/presentation/wonderB91.test.tsx",
+    "sha256": "204c44b22059fb87860a8d6839403d046775c04b767efeeb733147e023933a51"
+  }
+]

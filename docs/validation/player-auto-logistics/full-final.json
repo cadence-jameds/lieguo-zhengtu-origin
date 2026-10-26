@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "passed": 2050,
+  "failed": 0,
+  "skipped": 1,
+  "startTime": 1793038653975,
+  "testFiles": 204,
+  "rawResultSha256": "17af2cd365231ad35930a04fe66ffdbeb26c69a56f4f6f0bf3cf173be85d1f65",
+  "failedTests": [],
+  "skippedTests": [],
+  "sourceManifest": "source-manifest.json",
+  "command": "node scripts/verify-in-isolation.mjs full"
+}

@@ -1,0 +1,74 @@
+{
+  "trip": {
+    "purpose": "wonder-auto",
+    "shipmentId": "shipment:0000000000000807",
+    "projectId": "project:0000000000000005",
+    "commandId": "command:auto-0000000000000806",
+    "sourceFactionId": "faction:player",
+    "sourceCityId": "city:support",
+    "destinationCityId": "city:home",
+    "resources": {
+      "food": 750,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    },
+    "caravans": 1,
+    "path": [
+      {
+        "x": 18,
+        "y": 12
+      },
+      {
+        "x": 17,
+        "y": 12
+      },
+      {
+        "x": 16,
+        "y": 12
+      },
+      {
+        "x": 15,
+        "y": 12
+      },
+      {
+        "x": 14,
+        "y": 12
+      },
+      {
+        "x": 13,
+        "y": 12
+      },
+      {
+        "x": 12,
+        "y": 12
+      }
+    ],
+    "distance": 6,
+    "dispatchedAt": 576000000,
+    "arrivalAt": 576360000,
+    "returnAt": 576720000,
+    "arrivalEventId": "event:0000000000002085",
+    "returnEventId": "event:0000000000002086",
+    "phase": "outbound",
+    "authorizationSnapshot": {
+      "sourceCityOwnerFactionId": "faction:player",
+      "contributorEmpireId": "empire:0000000000000004",
+      "checkedAt": 576000000
+    }
+  },
+  "pool": {
+    "food": 4000000,
+    "wood": 7000000,
+    "stone": 9000000,
+    "gold": 4000000
+  },
+  "phase": "building",
+  "completion": {
+    "type": "wonder.complete",
+    "projectId": "project:0000000000000005",
+    "at": 662760000,
+    "id": "event:0000000000002087"
+  },
+  "noNewTrip": true
+}

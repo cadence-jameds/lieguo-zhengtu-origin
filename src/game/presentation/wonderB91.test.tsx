@@ -25,7 +25,7 @@ it('B9-1 Legion UI selects a legal member host, dispatches own real cargo, shows
  expect(w.largeProjects[0].initiatingCityId).toBe(w.cities[2].id);expect(div.textContent).toContain('籌資／運輸中');
  const source=div.querySelector<HTMLSelectElement>('[aria-label="奇觀資源來源城市"]')!;expect(source.options).toHaveLength(2);
  await act(async()=>{source.value=w.cities[1].id;source.dispatchEvent(new Event('change',{bubbles:true}));});
- const inputs=Array.from(div.querySelectorAll<HTMLInputElement>('.wonder-panel input'));
+ const inputs=Array.from(div.querySelectorAll<HTMLInputElement>('.wonder-panel input[aria-label^="奇觀運送"]'));
  for(let i=0;i<inputs.length;i++)await act(async()=>{const input=inputs[i];Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,String((i+1)*100));input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));});
  expect(button('派出商隊投入奇觀').disabled).toBe(false);await act(async()=>button('派出商隊投入奇觀').click());
  expect(w.cities[1].stock).toEqual({food:900,wood:800,stone:700,gold:600});expect(w.largeProjects[0].poolResources.food).toBe(0);expect(div.textContent).toContain('載貨在途');
