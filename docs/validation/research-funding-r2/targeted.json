@@ -1,0 +1,707 @@
+{
+  "passed": 133,
+  "failed": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "file": "game/presentation/ResearchView.test.tsx",
+      "tests": [
+        {
+          "name": "1X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "50X converts one world hour and ticks only display leaves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "speed switch, pause, resume and recovered world anchor use the common display clock",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "keeps active art dark and gold until the formal completion event, with fixed duration across cities",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "checks resources, shows all requirement reasons and prevents duplicate starts before and after ACK",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "mobile supports independent collapses, bottom details and persisted browsing without save mutations",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "funding has no countdown, permits zero-stock project creation and retains real four-resource contributions",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "countdown ticks retain SVG nodes, selection, scroll and do not recalculate qualifications",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/modernCatchupB94.test.tsx",
+      "tests": [
+        {
+          "name": "B9-4 desktop keeps military layout and allows only the reverse-engineered line",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 mobile keeps military layout and allows only the reverse-engineered line",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 awareness exposes effective value, encountered lines and a single explicit reverse choice",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 emergency start, four-resource shipment, pool and funding status use formal commands",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 ResearchView shows cooperation/modern effects and accepts explicitly selected real city contributions",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 data link adds major and secondary composition to existing owned incoming alert only",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4 cognition20 unlocks explicit enemy modern type identification in the existing battle report",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/presentation/researchTree.test.ts",
+      "tests": [
+        {
+          "name": "Formal catalog technology tree preserves 66 traditional and 16 modern entries and the official ages",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_zhongguo shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_byzantium shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_frankia shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_britannia shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_japan shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree civ_mongolia shows only its own exclusives with exact prerequisite edges",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree requires official qualifications, resources and a free shared queue for gold borders",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree preserves multi-city funding even when one city cannot afford the project",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree modern.infantry-weapons gold funding eligibility with single-city funds=false",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree modern.infantry-weapons gold funding eligibility with single-city funds=true",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree modern.civ_zhongguo.exclusive gold funding eligibility with single-city funds=false",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree modern.civ_zhongguo.exclusive gold funding eligibility with single-city funds=true",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree blacksmith.melee.1 still requires single-city payment and never uses funding eligibility",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Formal catalog technology tree research.cooperation still requires single-city payment and never uses funding eligibility",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/developmentB4.test.ts",
+      "tests": [
+        {
+          "name": "age 1 uses single-city cost, population/center and fixed 4h without Academy or City requirement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age 2 uses single-city cost, population/center and fixed 8h without Academy or City requirement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age 3 uses single-city cost, population/center and fixed 16h without Academy or City requirement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age fails each start boundary and cannot borrow stock from another owned city",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "faction age queue, general research, city promotion, construction and military can exist independently",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "age ownership and cost/time snapshots survive loss of initiating city while another city remains",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "all traditional tech, cooperation and modern ledger identities remain unique; no B9 combat resolver is attached",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Academy 1/15 multipliers are1/.79, affect ordinary tech; elite durations stay fixed",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "technology prerequisites, local buildings, age and civilization are enforced on the shared command path",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "China cannot start melee tier3; six civilization blacksmith caps retain exact v84 matrix",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "Kaogong discounts ordinary technology resources15% and neither duration nor elite costs",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "cooperation requires full modern qualification and own Academy15; ordinary modern capability is independent",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "cooperation pays60/80/70/90k from one city,4h×Academy; other city stock cannot fund it",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "modern.infantry-weapons cannot start funding before cooperation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "modern.civ_zhongguo.exclusive cannot start funding before cooperation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "D1 creation immediately occupies faction queue, no cost is taken and no countdown/event exists during funding",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "D1 direct contributions conserve real stock without caravans and require all four full before countdown",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "foreign/political empire cities cannot contribute, overfund/insufficient/no-op contributions reject atomically",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "lost initiating city does not move owner/refund/recompute; another own city can continue funding",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "duplicate contribution applies once; altered reused ID and stale revision cannot spend twice",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "native funding Recovery preserves command tombstones and project/event high-water after rollback",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "traditional research started before city loss completes for original owner and freezes Academy duration",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "formal traditional unit catalog and every base training time are exact; baggage is10m and2population",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "producer level15 halves training, center does not speed other producers and scout remains90sec",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recruitment pays exact batch resources and population once; units finish sequentially and consume food only after completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recruitment rejects insufficient population/stock/age/producer/housing without spending resources",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military lanes are serial per lane and permanent20k opens a second parallel queue",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "cancel pending remainder returns100% population and80% resources, completed units remain, queue snapshot is stable",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "city-only disband returns living unit population without resource refund and removes only chosen unit count",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "upkeep equals population cost, civilian population is free; rations and nomadic apply only eligible classes",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "elite auto production requires faction tech AND this city milestone; cost/time/pop remain base",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "civilization guard cannot be bought by another civilization and AI recruitment uses same guards/costs",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "baggage queues in workshop, takes10m atLv1 and preserves exact cargo interface",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement start validates age/castle/pop2000 individually, pays30k and transfers400people upfront",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement prep4h/2h castle curve snapshot persists after population decline; unique ready/prep per source",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement cancellation returns400people and80%costs only while preparing",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "escort requires20 combat units; scout/baggage do not count and siege cannot follow",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement rejects water/river/mountain, occupied city/wildsite and existing reservation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement reservation survives save/load; escort transfers permanently, newcity400 and initialcities200 remain distinct",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "new city remains housing400 with permanent local qualifications empty and applies12h integration",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "travelling settlement cannot cancel/change target; another own city cannot reserve same cell",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "settlement Recovery drops rolled-back reservations and preserves deployment tombstone",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "auto logistics requires research and source market, uses actual stock/reserve/capacity and no free caravans",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "offline event slices agree on research/age/recruitment/settlement economy outcomes and codec",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "strict schema rejects native forged age, queue event, technology, ledger duration and settlement geometry",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "zero-count escort selections are normalized before escrow so arrival never creates invalid zero-unit records",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "travelling escorts continue charging source food until the exact new-city arrival instant",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "army food shortage is recorded for B5 starvation interface without civilian upkeep or negative stock",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "full population refunds below cap obey100%; saturated housing uses the universal population clamp",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "economic research affects all owned cities only from completion, never retroactively",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "new caravan dispatch snapshots vehicle10% speed without changing return duration or cargo2000",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "training/settlement prep save, load and native Recovery retain consumed stock/population exactly once",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building barracks uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building archery uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building stable uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building blacksmith uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building academy uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building workshop uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "military building castle uses formal age/prerequisite guard and construction completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "after losing initiating city and qualifications, final funding and completion still use original snapshot and original owner",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/modernFundingIntegration.test.ts",
+      "tests": [
+        {
+          "name": "A/B/C fund a real project exactly once, save/recover every phase, complete through the scheduler and retain the actual effect",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects foreign city without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects foreign faction without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects over stock without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects over remaining without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects negative without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects fractional without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects NaN without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects Infinity without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "rejects unsafe integer without stock, project, queue or receipt mutation",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "funding holds the sole faction queue and full funding cannot be applied twice",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/modernResearchB94.test.ts",
+      "tests": [
+        {
+          "name": "B9-4D cooperation is full-only, Academy15, single-city 60/80/70/90k and 4h×.79; no early multi-city funding",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.infantry-weapons: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.personal-protection: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.composite-armor: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.digital-fire-control: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.mechanized-logistics: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.supply-system: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.mobilization: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.siege-engineering: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.data-link: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.civ_zhongguo.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.civ_byzantium.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.civ_frankia.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.civ_britannia.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.civ_japan.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D modern.civ_mongolia.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D all 15 modern technologies stay locked for partial qualification; other faction or empire member cannot contribute",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D loss of initiating city/Academy never cancels snapshot: other owned cities finish funding and research",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D Chinese kaogong discounts general modern research and cooperation, never civ exclusives or project logistics",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D research ledger, effects and queue survive atomic failures, Recovery and equivalent offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "B9-4D 99 AI reserve the same unique funding queue and spend their real city stocks through official contributions",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "file": "game/formal/runtimeB4.test.ts",
+      "tests": [
+        {
+          "name": "native D1 funding is exposed only after durable transaction resolves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "failed native recruitment commit preserves population/resources and a retry is safe",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "native stale overlapping commands serialize and only the first commits",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "native Worker rejects AI impersonation while AI simulation shares pure command rules",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "new campaign uses native generator and D7 for all100 factions before switched acknowledgement",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "restarting native Worker uses durable D1 creation receipt and replay never occupies second queue",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "wall construction and scheduled completion become visible only after each durable Worker commit",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "wall Worker save failure rolls back payment and retry plus restart cannot reserve or pay twice",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    }
+  ]
+}

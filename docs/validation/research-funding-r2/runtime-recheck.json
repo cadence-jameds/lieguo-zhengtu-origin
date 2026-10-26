@@ -1,0 +1,332 @@
+{
+  "passed": 64,
+  "failed": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "file": "game/formal/runtime.test.ts",
+      "tests": [
+        {
+          "name": "active Worker does not acknowledge or switch a draft until persistence resolves",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "failed commit gives rejected ack and prior world; retry and replay only save once successfully",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "requests share one serialized authority and reject an overlapping stale command",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "restore mid-transaction failure never exposes success",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "import mid-transaction failure never exposes success",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "restart loads durable receipts and replay does not submit a second save",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X construction completes at its real deadline, not the old ten-second tick",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X construction completes at its real deadline, not the old ten-second tick",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X construction completes at its real deadline, not the old ten-second tick",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X construction completes at its real deadline, not the old ten-second tick",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X construction completes at its real deadline, not the old ten-second tick",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "polling is coalesced while the durable advance is pending and catches up elapsed real time",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X idle polling does not publish/save per second and checkpoints at ten seconds",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X a new construction starts at actual admission time and saves a single revision",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X training uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X research uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X settlement uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X logistics uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X idle polling does not publish/save per second and checkpoints at ten seconds",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X a new construction starts at actual admission time and saves a single revision",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X training uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X research uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X settlement uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X logistics uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X idle polling does not publish/save per second and checkpoints at ten seconds",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X a new construction starts at actual admission time and saves a single revision",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X training uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X research uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X settlement uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X logistics uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X idle polling does not publish/save per second and checkpoints at ten seconds",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X a new construction starts at actual admission time and saves a single revision",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X training uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X research uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X settlement uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X logistics uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X idle polling does not publish/save per second and checkpoints at ten seconds",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X a new construction starts at actual admission time and saves a single revision",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X training uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X research uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X settlement uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X logistics uses the real deadline and agrees with offline completion",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a due event crossed by an original click commits first and must not auto-retry a changed intention",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a late event remains unexposed on failed persistence, retries after one second, and never overlaps",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a failed governance save never exposes a new setting or receipt and replay commits only once",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "1X command admission uses real IndexedDB authority and restores the same durable state",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "3X command admission uses real IndexedDB authority and restores the same durable state",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "6X command admission uses real IndexedDB authority and restores the same durable state",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "10X command admission uses real IndexedDB authority and restores the same durable state",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "25X command admission uses real IndexedDB authority and restores the same durable state",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "the active presentation stream sends committed patches and can recover a full snapshot",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "a queued visibility boundary freezes dev time before waiting behind an atomic save and duplicate barriers are idempotent",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+          "status": "passed",
+          "failures": []
+        }
+      ]
+    }
+  ]
+}

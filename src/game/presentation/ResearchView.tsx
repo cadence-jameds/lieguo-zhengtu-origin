@@ -94,13 +94,13 @@ export function ResearchView({world,city:sourceCity,issue,busy,mobile=false}:Pro
  const node=(d:TechDefinition)=>{
   const s=researchState(world,city,d,facts[d.id]);
   return <article className={'research-node research-'+s.state+(selected===d.id?' is-selected':'')} data-tech-id={d.id} data-state={s.state}>
-   <button aria-label={d.name+' · '+(s.done?'已完成':s.project?s.project.phase==='funding'?'籌資中':'研究中':s.available?'可以研發':'未研發')} aria-pressed={selected===d.id} onClick={()=>select(d.id)}>
-    <Art spec={techArt(d.id)} label={d.name}/><span className="research-node-copy"><strong>{d.name}</strong><small>{s.done?'✓ 已完成':s.project?s.project.phase==='funding'?'籌資中':'研究中':s.available?'可以研發':'未研發'}</small>{s.project?.phase==='researching'&&<ResearchCountdown world={world} project={s.project}/>}</span>
+   <button aria-label={d.name+' · '+(s.done?'已完成':s.project?s.project.phase==='funding'?'籌資中':'研究中':s.available?s.availableLabel:'未研發')} aria-pressed={selected===d.id} onClick={()=>select(d.id)}>
+    <Art spec={techArt(d.id)} label={d.name}/><span className="research-node-copy"><strong>{d.name}</strong><small>{s.done?'✓ 已完成':s.project?s.project.phase==='funding'?'籌資中':'研究中':s.available?s.availableLabel:'未研發'}</small>{s.project?.phase==='researching'&&<ResearchCountdown world={world} project={s.project}/>}</span>
    </button>
   </article>;
  };
  const detail=selectedTech&&fact&&state&&<>
-  <div className={'research-detail-art research-'+state.state}><Art spec={techArt(selectedTech.id)} label={selectedTech.name}/><span>{state.done?'✓ 已完成':state.project?.phase==='funding'?'籌資中':state.project?'研究中':state.available?'可以研發':'未研發'}</span></div>
+  <div className={'research-detail-art research-'+state.state}><Art spec={techArt(selectedTech.id)} label={selectedTech.name}/><span>{state.done?'✓ 已完成':state.project?.phase==='funding'?'籌資中':state.project?'研究中':state.available?state.availableLabel:'未研發'}</span></div>
   <Effect tech={selectedTech} faction={faction}/>
   <p>所屬時代：{selectedTech.scope==='traditional'?AGE_NAMES[selectedTech.age]:'現代科研'} · 文明：{selectedTech.civilizationId?CIV_NAMES[selectedTech.civilizationId]:'各文明共通'}</p>
   <h3>前置科技</h3>{selectedTech.prerequisites.length?<div className="research-prerequisites">{selectedTech.prerequisites.map(id=><button key={id} onClick={()=>select(id)}>{TECH_CATALOG[id].name}</button>)}</div>:<p>無前置科技</p>}
@@ -124,7 +124,7 @@ export function ResearchView({world,city:sourceCity,issue,busy,mobile=false}:Pro
    {mobile&&browse.scope==='traditional'&&<div className="research-ages" role="group" aria-label="傳統科技時代">{[1,2,3].map(age=><button key={age} aria-pressed={browse.age===age} onClick={()=>setBrowse({...browse,age})}>{AGE_NAMES[age]}</button>)}</div>}
   </div>
   <Heading title="科技研發" subtitle={city.name+' · 勢力共用唯一研究佇列'}/>
-  <div className="research-legend"><span>○ 未研發</span><span className="research-gold">◇ 可以研發／研究中</span><span>✓ 已完成 {faction.techIds.length} 項</span></div>
+  <div className="research-legend"><span>○ 未研發</span><span className="research-gold">◇ {browse.scope==='modern'?'可建立籌資／籌資中／研究中':'可以研發／研究中'}</span><span>✓ 已完成 {faction.techIds.length} 項</span></div>
   {browse.scope==='modern'&&<p className="research-modern-note">科研協同體系 → 現代共通科技／文明專屬科技 · {faction.modernQualification==='full'?'已取得完整現代軍事資格':'尚需完整現代軍事資格'}</p>}
   {project?.phase==='funding'&&<Funding key={project.projectId+city.id} world={world} city={city} project={project} issue={issue} busy={busy}/>}
   <div className="research-content">

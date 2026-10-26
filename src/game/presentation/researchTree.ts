@@ -35,8 +35,9 @@ export function researchState(world:FormalWorld,city:FormalCity,d:TechDefinition
  const done=f.techIds.includes(d.id),funding=d.scope==='modern-common'||d.scope==='modern-civilization';
  const affordable=resourceKeys.every(r=>city.stock[r]>=fact.quote.cost[r]);
  const qualified=!done&&!f.researchQueue&&fact.requirements.every(r=>r.met);
- const available=qualified&&affordable,canStart=qualified&&(funding||affordable);
- return {done,project,available,canStart,affordable,state:done?'done':project?'active':available?'available':'locked'} as const;
+ const available=qualified&&(funding||affordable),canStart=available;
+ const availableLabel=funding?'可建立籌資':'可以研發';
+ return {done,project,available,canStart,availableLabel,affordable,state:done?'done':project?'active':available?'available':'locked'} as const;
 }
 export const TREE_NODE_WIDTH=196,TREE_NODE_HEIGHT=94,TREE_COLUMN=266;
 /** Geometry depends only on the catalog and civilization, never on a display tick. */

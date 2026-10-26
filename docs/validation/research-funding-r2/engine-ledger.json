@@ -1,0 +1,806 @@
+{
+  "source": "synthetic fixture; official commands, scheduler, IndexedDB, codec and Recovery",
+  "cost": {
+    "food": 180000,
+    "wood": 160000,
+    "stone": 140000,
+    "gold": 420000
+  },
+  "parts": [
+    {
+      "food": 90000,
+      "wood": 80000,
+      "stone": 70000,
+      "gold": 210000
+    },
+    {
+      "food": 45000,
+      "wood": 40000,
+      "stone": 35000,
+      "gold": 105000
+    },
+    {
+      "food": 45000,
+      "wood": 40000,
+      "stone": 35000,
+      "gold": 105000
+    }
+  ],
+  "trace": [
+    {
+      "stage": "created",
+      "stocks": [
+        {
+          "food": 90000,
+          "wood": 80000,
+          "stone": 70000,
+          "gold": 210000
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        }
+      ],
+      "projects": [
+        {
+          "projectId": "research:0000000000000001",
+          "techId": "modern.infantry-weapons",
+          "technologyScope": "modern-common",
+          "ownerFactionId": "faction:000",
+          "initiatingCityId": "city:000",
+          "paymentMode": "same-faction-direct",
+          "requiredResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributedResources": {
+            "food": 0,
+            "wood": 0,
+            "stone": 0,
+            "gold": 0
+          },
+          "contributions": [],
+          "createdAt": 0,
+          "qualificationSnapshot": {
+            "checkedAt": 0,
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "academyLevel": 15,
+            "buildingLevels": {
+              "center": 1,
+              "academy": 15,
+              "barracks": 15,
+              "warehouse.0": 15,
+              "warehouse.1": 15,
+              "warehouse.2": 15
+            },
+            "prerequisiteTechIds": [
+              "research.cooperation"
+            ],
+            "fullModernQualification": true,
+            "researchCooperation": true
+          },
+          "durationSnapshot": {
+            "baseDurationMs": 14400000,
+            "academyMultiplier": 0.79,
+            "durationMs": 11376000
+          },
+          "creationCommandId": "command:abc-start",
+          "fundingTransitionCommandId": null,
+          "completionEventId": null,
+          "phase": "funding"
+        }
+      ],
+      "faction": {
+        "id": "faction:000",
+        "name": "玩家",
+        "civilizationId": "civ_zhongguo",
+        "empireId": null,
+        "modernQualification": "full",
+        "researchCooperation": true,
+        "techIds": [
+          "research.cooperation"
+        ],
+        "researchQueue": "research:0000000000000001",
+        "role": "player",
+        "age": 3,
+        "ageQueue": null
+      },
+      "events": [],
+      "receipts": [
+        {
+          "commandId": "command:abc-start",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"techId\":\"modern.infantry-weapons\",\"type\":\"research.start\"}}",
+          "committedRevision": 1,
+          "disposition": "applied"
+        }
+      ],
+      "completionReceipts": []
+    },
+    {
+      "stage": "after-A",
+      "contribution": {
+        "food": 90000,
+        "wood": 80000,
+        "stone": 70000,
+        "gold": 210000
+      },
+      "before": [
+        {
+          "food": 90000,
+          "wood": 80000,
+          "stone": 70000,
+          "gold": 210000
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        }
+      ],
+      "stocks": [
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        }
+      ],
+      "projects": [
+        {
+          "projectId": "research:0000000000000001",
+          "techId": "modern.infantry-weapons",
+          "technologyScope": "modern-common",
+          "ownerFactionId": "faction:000",
+          "initiatingCityId": "city:000",
+          "paymentMode": "same-faction-direct",
+          "requiredResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributedResources": {
+            "food": 90000,
+            "wood": 80000,
+            "stone": 70000,
+            "gold": 210000
+          },
+          "contributions": [
+            {
+              "commandId": "command:abc-city-0",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:000",
+              "resources": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              },
+              "at": 0
+            }
+          ],
+          "createdAt": 0,
+          "qualificationSnapshot": {
+            "checkedAt": 0,
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "academyLevel": 15,
+            "buildingLevels": {
+              "center": 1,
+              "academy": 15,
+              "barracks": 15,
+              "warehouse.0": 15,
+              "warehouse.1": 15,
+              "warehouse.2": 15
+            },
+            "prerequisiteTechIds": [
+              "research.cooperation"
+            ],
+            "fullModernQualification": true,
+            "researchCooperation": true
+          },
+          "durationSnapshot": {
+            "baseDurationMs": 14400000,
+            "academyMultiplier": 0.79,
+            "durationMs": 11376000
+          },
+          "creationCommandId": "command:abc-start",
+          "fundingTransitionCommandId": null,
+          "completionEventId": null,
+          "phase": "funding"
+        }
+      ],
+      "faction": {
+        "id": "faction:000",
+        "name": "玩家",
+        "civilizationId": "civ_zhongguo",
+        "empireId": null,
+        "modernQualification": "full",
+        "researchCooperation": true,
+        "techIds": [
+          "research.cooperation"
+        ],
+        "researchQueue": "research:0000000000000001",
+        "role": "player",
+        "age": 3,
+        "ageQueue": null
+      },
+      "events": [],
+      "receipts": [
+        {
+          "commandId": "command:abc-start",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"techId\":\"modern.infantry-weapons\",\"type\":\"research.start\"}}",
+          "committedRevision": 1,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-0",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":90000,\"gold\":210000,\"stone\":70000,\"wood\":80000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 2,
+          "disposition": "applied"
+        }
+      ],
+      "completionReceipts": []
+    },
+    {
+      "stage": "after-B",
+      "contribution": {
+        "food": 45000,
+        "wood": 40000,
+        "stone": 35000,
+        "gold": 105000
+      },
+      "before": [
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        }
+      ],
+      "stocks": [
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        }
+      ],
+      "projects": [
+        {
+          "projectId": "research:0000000000000001",
+          "techId": "modern.infantry-weapons",
+          "technologyScope": "modern-common",
+          "ownerFactionId": "faction:000",
+          "initiatingCityId": "city:000",
+          "paymentMode": "same-faction-direct",
+          "requiredResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributedResources": {
+            "food": 135000,
+            "wood": 120000,
+            "stone": 105000,
+            "gold": 315000
+          },
+          "contributions": [
+            {
+              "commandId": "command:abc-city-0",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:000",
+              "resources": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              },
+              "at": 0
+            },
+            {
+              "commandId": "command:abc-city-1",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:001",
+              "resources": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              },
+              "at": 0
+            }
+          ],
+          "createdAt": 0,
+          "qualificationSnapshot": {
+            "checkedAt": 0,
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "academyLevel": 15,
+            "buildingLevels": {
+              "center": 1,
+              "academy": 15,
+              "barracks": 15,
+              "warehouse.0": 15,
+              "warehouse.1": 15,
+              "warehouse.2": 15
+            },
+            "prerequisiteTechIds": [
+              "research.cooperation"
+            ],
+            "fullModernQualification": true,
+            "researchCooperation": true
+          },
+          "durationSnapshot": {
+            "baseDurationMs": 14400000,
+            "academyMultiplier": 0.79,
+            "durationMs": 11376000
+          },
+          "creationCommandId": "command:abc-start",
+          "fundingTransitionCommandId": null,
+          "completionEventId": null,
+          "phase": "funding"
+        }
+      ],
+      "faction": {
+        "id": "faction:000",
+        "name": "玩家",
+        "civilizationId": "civ_zhongguo",
+        "empireId": null,
+        "modernQualification": "full",
+        "researchCooperation": true,
+        "techIds": [
+          "research.cooperation"
+        ],
+        "researchQueue": "research:0000000000000001",
+        "role": "player",
+        "age": 3,
+        "ageQueue": null
+      },
+      "events": [],
+      "receipts": [
+        {
+          "commandId": "command:abc-start",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"techId\":\"modern.infantry-weapons\",\"type\":\"research.start\"}}",
+          "committedRevision": 1,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-0",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":90000,\"gold\":210000,\"stone\":70000,\"wood\":80000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 2,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-1",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:001\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":45000,\"gold\":105000,\"stone\":35000,\"wood\":40000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 3,
+          "disposition": "applied"
+        }
+      ],
+      "completionReceipts": []
+    },
+    {
+      "stage": "after-C",
+      "contribution": {
+        "food": 45000,
+        "wood": 40000,
+        "stone": 35000,
+        "gold": 105000
+      },
+      "before": [
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 45000,
+          "wood": 40000,
+          "stone": 35000,
+          "gold": 105000
+        }
+      ],
+      "stocks": [
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        },
+        {
+          "food": 0,
+          "wood": 0,
+          "stone": 0,
+          "gold": 0
+        }
+      ],
+      "projects": [
+        {
+          "projectId": "research:0000000000000001",
+          "techId": "modern.infantry-weapons",
+          "technologyScope": "modern-common",
+          "ownerFactionId": "faction:000",
+          "initiatingCityId": "city:000",
+          "paymentMode": "same-faction-direct",
+          "requiredResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributedResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributions": [
+            {
+              "commandId": "command:abc-city-0",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:000",
+              "resources": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              },
+              "at": 0
+            },
+            {
+              "commandId": "command:abc-city-1",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:001",
+              "resources": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              },
+              "at": 0
+            },
+            {
+              "commandId": "command:abc-city-2",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:002",
+              "resources": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              },
+              "at": 0
+            }
+          ],
+          "createdAt": 0,
+          "qualificationSnapshot": {
+            "checkedAt": 0,
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "academyLevel": 15,
+            "buildingLevels": {
+              "center": 1,
+              "academy": 15,
+              "barracks": 15,
+              "warehouse.0": 15,
+              "warehouse.1": 15,
+              "warehouse.2": 15
+            },
+            "prerequisiteTechIds": [
+              "research.cooperation"
+            ],
+            "fullModernQualification": true,
+            "researchCooperation": true
+          },
+          "durationSnapshot": {
+            "baseDurationMs": 14400000,
+            "academyMultiplier": 0.79,
+            "durationMs": 11376000
+          },
+          "creationCommandId": "command:abc-start",
+          "fundingTransitionCommandId": "command:abc-city-2",
+          "completionEventId": "event:0000000000000101",
+          "phase": "researching",
+          "startedAt": 0
+        }
+      ],
+      "faction": {
+        "id": "faction:000",
+        "name": "玩家",
+        "civilizationId": "civ_zhongguo",
+        "empireId": null,
+        "modernQualification": "full",
+        "researchCooperation": true,
+        "techIds": [
+          "research.cooperation"
+        ],
+        "researchQueue": "research:0000000000000001",
+        "role": "player",
+        "age": 3,
+        "ageQueue": null
+      },
+      "events": [
+        {
+          "id": "event:0000000000000101",
+          "at": 11376000,
+          "type": "research.complete",
+          "projectId": "research:0000000000000001"
+        }
+      ],
+      "receipts": [
+        {
+          "commandId": "command:abc-start",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"techId\":\"modern.infantry-weapons\",\"type\":\"research.start\"}}",
+          "committedRevision": 1,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-0",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":90000,\"gold\":210000,\"stone\":70000,\"wood\":80000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 2,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-1",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:001\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":45000,\"gold\":105000,\"stone\":35000,\"wood\":40000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 3,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-2",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:002\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":45000,\"gold\":105000,\"stone\":35000,\"wood\":40000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 4,
+          "disposition": "applied"
+        }
+      ],
+      "completionReceipts": []
+    },
+    {
+      "stage": "completed",
+      "stocks": [
+        {
+          "food": 170,
+          "wood": 142,
+          "stone": 113,
+          "gold": 85
+        },
+        {
+          "food": 170,
+          "wood": 142,
+          "stone": 113,
+          "gold": 85
+        },
+        {
+          "food": 170,
+          "wood": 142,
+          "stone": 113,
+          "gold": 85
+        }
+      ],
+      "projects": [
+        {
+          "projectId": "research:0000000000000001",
+          "techId": "modern.infantry-weapons",
+          "technologyScope": "modern-common",
+          "ownerFactionId": "faction:000",
+          "initiatingCityId": "city:000",
+          "paymentMode": "same-faction-direct",
+          "requiredResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributedResources": {
+            "food": 180000,
+            "wood": 160000,
+            "stone": 140000,
+            "gold": 420000
+          },
+          "contributions": [
+            {
+              "commandId": "command:abc-city-0",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:000",
+              "resources": {
+                "food": 90000,
+                "wood": 80000,
+                "stone": 70000,
+                "gold": 210000
+              },
+              "at": 0
+            },
+            {
+              "commandId": "command:abc-city-1",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:001",
+              "resources": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              },
+              "at": 0
+            },
+            {
+              "commandId": "command:abc-city-2",
+              "sourceFactionId": "faction:000",
+              "sourceCityId": "city:002",
+              "resources": {
+                "food": 45000,
+                "wood": 40000,
+                "stone": 35000,
+                "gold": 105000
+              },
+              "at": 0
+            }
+          ],
+          "createdAt": 0,
+          "qualificationSnapshot": {
+            "checkedAt": 0,
+            "cityId": "city:000",
+            "ownerFactionId": "faction:000",
+            "academyLevel": 15,
+            "buildingLevels": {
+              "center": 1,
+              "academy": 15,
+              "barracks": 15,
+              "warehouse.0": 15,
+              "warehouse.1": 15,
+              "warehouse.2": 15
+            },
+            "prerequisiteTechIds": [
+              "research.cooperation"
+            ],
+            "fullModernQualification": true,
+            "researchCooperation": true
+          },
+          "durationSnapshot": {
+            "baseDurationMs": 14400000,
+            "academyMultiplier": 0.79,
+            "durationMs": 11376000
+          },
+          "creationCommandId": "command:abc-start",
+          "fundingTransitionCommandId": "command:abc-city-2",
+          "completionEventId": "event:0000000000000101",
+          "phase": "completed",
+          "startedAt": 0,
+          "completedAt": 11376000
+        }
+      ],
+      "faction": {
+        "id": "faction:000",
+        "name": "玩家",
+        "civilizationId": "civ_zhongguo",
+        "empireId": null,
+        "modernQualification": "full",
+        "researchCooperation": true,
+        "techIds": [
+          "research.cooperation",
+          "modern.infantry-weapons"
+        ],
+        "researchQueue": null,
+        "role": "player",
+        "age": 3,
+        "ageQueue": null
+      },
+      "events": [],
+      "receipts": [
+        {
+          "commandId": "command:abc-start",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"techId\":\"modern.infantry-weapons\",\"type\":\"research.start\"}}",
+          "committedRevision": 1,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-0",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":90000,\"gold\":210000,\"stone\":70000,\"wood\":80000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 2,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-1",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:001\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":45000,\"gold\":105000,\"stone\":35000,\"wood\":40000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 3,
+          "disposition": "applied"
+        },
+        {
+          "commandId": "command:abc-city-2",
+          "issuerId": "faction:000",
+          "fingerprint": "{\"campaignId\":\"campaign:modern-funding-abc\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:002\",\"projectId\":\"research:0000000000000001\",\"resources\":{\"food\":45000,\"gold\":105000,\"stone\":35000,\"wood\":40000},\"type\":\"research.contribute\"}}",
+          "committedRevision": 4,
+          "disposition": "applied"
+        }
+      ],
+      "completionReceipts": [
+        {
+          "eventId": "event:0000000000000101",
+          "projectId": "research:0000000000000001",
+          "at": 11376000
+        }
+      ]
+    }
+  ]
+}

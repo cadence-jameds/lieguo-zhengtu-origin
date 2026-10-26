@@ -3,6 +3,7 @@ import {TECH_CATALOG,BLACKSMITH_CAPS} from '../formal/techCatalog';
 import {make,researchCity,commit} from '../formal/developmentTestSupport';
 import {researchFacts,researchLayout,researchState,visibleResearch} from './researchTree';
 import {TREE_NODE_HEIGHT} from './researchTree';
+import {modernFundingFixture} from '../formal/modernFundingTestSupport';
 
 describe('Formal catalog technology tree',()=>{
  it('preserves 66 traditional and 16 modern entries and the official ages',()=>{
@@ -39,6 +40,19 @@ describe('Formal catalog technology tree',()=>{
  });
  it('preserves multi-city funding even when one city cannot afford the project',()=>{
   const w=make(),c=researchCity(w,true),d=TECH_CATALOG['modern.infantry-weapons'];c.stock={food:0,wood:0,stone:0,gold:0};
-  const s=researchState(w,c,d,researchFacts(w,c,[d])[d.id]);expect(s.canStart).toBe(true);expect(s.available).toBe(false);expect(s.state).toBe('locked');
+  const s=researchState(w,c,d,researchFacts(w,c,[d])[d.id]);expect(s.canStart).toBe(true);expect(s.available).toBe(true);expect(s.state).toBe('available');expect(s.availableLabel).toBe('可建立籌資');
+ });
+ for(const id of ['modern.infantry-weapons','modern.civ_zhongguo.exclusive'])for(const funded of [false,true])it(`${id} gold funding eligibility with single-city funds=${funded}`,()=>{
+  const {world:w}=modernFundingFixture('funding-state',id),c=w.cities[0],d=TECH_CATALOG[id],originalStock={...c.stock};if(funded)c.stock={...d.cost};
+  const state=()=>researchState(w,c,d,researchFacts(w,c,[d])[id]);expect(state()).toMatchObject({canStart:true,available:true,state:'available',availableLabel:'可建立籌資'});
+  w.factions[0].modernQualification='none';expect(state()).toMatchObject({canStart:false,state:'locked'});w.factions[0].modernQualification='full';
+  w.factions[0].researchCooperation=false;expect(state().state).toBe('locked');w.factions[0].researchCooperation=true;
+  c.stock=originalStock;const busy=commit(w,{type:'research.start',cityId:c.id,techId:id}),p=busy.researchProjects[0];expect(researchState(busy,busy.cities[0],d,researchFacts(busy,busy.cities[0],[d])[id])).toMatchObject({state:'active',project:{phase:'funding'}});expect(p.startedAt).toBeUndefined();
+ });
+ for(const id of ['blacksmith.melee.1','research.cooperation'])it(id+' still requires single-city payment and never uses funding eligibility',()=>{
+  const w=make(),c=researchCity(w),d=TECH_CATALOG[id];w.factions[0].modernQualification='full';
+  for(const r of ['food','wood','stone','gold'] as const)c.stock[r]=0;
+  expect(researchState(w,c,d,researchFacts(w,c,[d])[id])).toMatchObject({canStart:false,available:false,state:'locked'});
+  c.stock={...d.cost};expect(researchState(w,c,d,researchFacts(w,c,[d])[id])).toMatchObject({canStart:true,available:true,state:'available',availableLabel:'可以研發'});
  });
 });

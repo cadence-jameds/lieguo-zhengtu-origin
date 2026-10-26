@@ -69,7 +69,7 @@ it('mobile supports independent collapses, bottom details and persisted browsing
  await act(async()=>root.render(<div/>));await show(w,true);expect(button('封建').getAttribute('aria-pressed')).toBe('true');expect(host.querySelector<HTMLDetailsElement>('.research-mobile-groups>details')!.open).toBe(false);expect(JSON.stringify(w)).toBe(before);
 });
 it('funding has no countdown, permits zero-stock project creation and retains real four-resource contributions',async()=>{
- let w=make(),c=researchCity(w,true);c.stock={food:0,wood:0,stone:0,gold:0};await show(w);await act(async()=>button('現代科研').click());await act(async()=>node('modern.infantry-weapons').querySelector('button')!.click());expect(node('modern.infantry-weapons').dataset.state).toBe('locked');expect(button('建立科研籌資').disabled).toBe(false);
+ let w=make(),c=researchCity(w,true);c.stock={food:0,wood:0,stone:0,gold:0};await show(w);await act(async()=>button('現代科研').click());await act(async()=>node('modern.infantry-weapons').querySelector('button')!.click());expect(node('modern.infantry-weapons').dataset.state).toBe('available');expect(node('modern.infantry-weapons').textContent).toContain('可建立籌資');expect(button('建立科研籌資').disabled).toBe(false);
  w=commit(w,{type:'research.start',cityId:c.id,techId:'modern.infantry-weapons'});await show(w);expect(host.querySelector('.research-current')!.textContent).toContain('籌資中');expect(host.querySelector('.research-countdown')).toBeNull();expect(host.textContent).toContain('剩餘需求');expect(host.querySelectorAll('input[aria-label^="科研投入"]')).toHaveLength(4);
 });
 it('countdown ticks retain SVG nodes, selection, scroll and do not recalculate qualifications',async()=>{
