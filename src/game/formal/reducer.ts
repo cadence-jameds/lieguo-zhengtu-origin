@@ -29,7 +29,7 @@ import {spatial} from './spatial';
 import {startResearch,startAge,completeAge} from './research';
 import {applyMilitaryCommand,handleMilitaryEvent} from './military';
 import {applySettlementCommand,handleSettlementEvent} from './settlement';
-import {runAutoLogistics,setAutoLogistics} from './autoLogistics';
+import {runAutoLogistics,runWonderAutoSupply,setAutoLogistics} from './autoLogistics';
 import {applyArmyCommand} from './armies';
 import {handleCombatEvent,refreshBattleDefense} from './battles';
 export function orderFingerprint(order:FormalOrder):string {
@@ -168,7 +168,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    else if(p.type==='age.start')startAge(w,city,order,scheduler);
    else if(p.type==='military.modernize'||p.type==='military.recruit'||p.type==='military.cancel'||p.type==='military.disband')applyMilitaryCommand(w,city,order,p,scheduler);
    else if(p.type==='settlement.prepare'||p.type==='settlement.cancel'||p.type==='settlement.dispatch')applySettlementCommand(w,city,order,p,scheduler);
-   else if(p.type==='logistics.auto.set')setAutoLogistics(w,city,p.rules);
+   else if(p.type==='logistics.auto.set'||p.type==='logistics.configure')setAutoLogistics(w,city,p.rules,p.type==='logistics.configure'?p.settings:undefined);
    else if(p.type==='army.dispatch'||p.type==='army.recall'||p.type==='army.advance')applyArmyCommand(w,city,order,p,scheduler);
    else applyEconomyCommand(w,city,order,p,scheduler);
    promoteCityQueues(w,city,scheduler);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
@@ -222,8 +222,8 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   else if(handleBreakthroughEvent(w,e,scheduler,reports)){}
   else if(handleWonderEvent(w,e,scheduler,reports)){}
   else if(handleEconomyEvent(w,e,scheduler)){
-   if(e.type==='economy.settle'){const c=spatial(w).cities.get(e.cityId);if(c)runAutoLogistics(w,c,scheduler);}
-   if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c)runAutoLogistics(w,c,scheduler);}
+   if(e.type==='economy.settle'){const c=spatial(w).cities.get(e.cityId);if(c){runAutoLogistics(w,c,scheduler);runWonderAutoSupply(w,c,scheduler);}}
+   if(e.type==='logistics.return'){const c=returningSource&&spatial(w).cities.get(returningSource);if(c){runAutoLogistics(w,c,scheduler);runWonderAutoSupply(w,c,scheduler);}}
   }
   else if(e.type!=='fixture.marker')throw new Error('Unhandled formal event');
   recordGrowthEvent(w,e,growthObservation,combatReports??[]);

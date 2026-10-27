@@ -68,6 +68,14 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
   case 'research.start':return[faction.techIds,faction.researchQueue,faction.modernQualification,faction.researchCooperation,city.buildings,city.economy?.milestones,w.researchProjects.filter(t=>t.ownerFactionId===faction.id)];
   case 'research.contribute':return[w.researchProjects.find(t=>t.projectId===p.projectId),faction.researchQueue];
   case 'city.promote':return[city.cityPromotionCompleted,city.economy?.promotion,city.buildings,city.economy?.milestones];
+  case 'logistics.configure':{
+   const project=p.settings.wonder?.enabled?w.largeProjects.find(t=>t.projectId===p.settings.wonder!.projectId):undefined;
+   const host=project?w.cities.find(c=>c.id===project.initiatingCityId):undefined;
+   // AI arrivals change demand, but do not change a player's allocation intent.
+   return[city.autoLogistics,city.logisticsSettings,buildingLevel(city,'market'),faction.techIds.includes('logistics.auto'),
+    p.rules.map(r=>[r.destinationCityId,w.cities.find(c=>c.id===r.destinationCityId)?.ownerFactionId]),
+    project?[empireOf(w,faction.id)?.id,project.projectId,project.owner,project.wonder?.phase,host?.id,host?.ownerFactionId,host?empireOf(w,host.ownerFactionId)?.id:null]:null];
+  }
   case 'logistics.auto.set':return[city.autoLogistics,city.buildings,construction];
   // No automatic admission for other combat, diplomacy, withdrawal,
   // disbanding or cross-city movement.

@@ -1,0 +1,104 @@
+{
+  "before": {
+    "food": 10000,
+    "wood": 0,
+    "stone": 0,
+    "gold": 0
+  },
+  "poolBefore": {
+    "food": 0,
+    "wood": 0,
+    "stone": 0,
+    "gold": 0
+  },
+  "dispatch": {
+    "purpose": "wonder-auto",
+    "shipmentId": "shipment:0000000000000007",
+    "projectId": "project:0000000000000005",
+    "commandId": "command:auto-0000000000000006",
+    "sourceFactionId": "faction:player",
+    "sourceCityId": "city:support",
+    "destinationCityId": "city:home",
+    "resources": {
+      "food": 4000,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    },
+    "caravans": 2,
+    "path": [
+      {
+        "x": 18,
+        "y": 12
+      },
+      {
+        "x": 17,
+        "y": 12
+      },
+      {
+        "x": 16,
+        "y": 12
+      },
+      {
+        "x": 15,
+        "y": 12
+      },
+      {
+        "x": 14,
+        "y": 12
+      },
+      {
+        "x": 13,
+        "y": 12
+      },
+      {
+        "x": 12,
+        "y": 12
+      }
+    ],
+    "distance": 6,
+    "dispatchedAt": 0,
+    "arrivalAt": 360000,
+    "returnAt": 720000,
+    "arrivalEventId": "event:0000000000000005",
+    "returnEventId": "event:0000000000000006",
+    "phase": "outbound",
+    "authorizationSnapshot": {
+      "sourceCityOwnerFactionId": "faction:player",
+      "contributorEmpireId": "empire:0000000000000004",
+      "checkedAt": 0
+    }
+  },
+  "afterDispatch": {
+    "food": 6000,
+    "wood": 0,
+    "stone": 0,
+    "gold": 0
+  },
+  "remainingAfterDispatch": {
+    "food": 3996000,
+    "wood": 7000000,
+    "stone": 9000000,
+    "gold": 4000000
+  },
+  "poolAfterArrival": {
+    "food": 4000,
+    "wood": 0,
+    "stone": 0,
+    "gold": 0
+  },
+  "afterReturn": {
+    "food": 6000,
+    "wood": 0,
+    "stone": 0,
+    "gold": 0
+  },
+  "returnReleased": true,
+  "cost": {
+    "food": 4000000,
+    "wood": 7000000,
+    "stone": 9000000,
+    "gold": 4000000
+  },
+  "duration": 86400000
+}

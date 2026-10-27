@@ -17,7 +17,7 @@ export function canDestroyWonder(w:FormalWorld,p:LargeProject|undefined){
  const maximum=WONDER_MAX_DURABILITY*wonderProgress(w,p)/100,d=b.durability;
  return d?d.current+Math.max(0,maximum-d.maximum)>0:b.integrity!=='damaged'&&maximum>0;
 }
-export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:WonderCommand,s:EventScheduler){
+export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:WonderCommand,s:EventScheduler,purpose:import('./logisticsAllocation').LogisticsPurpose='manual'){
  const empire=empireOf(w,o.issuerId);requireRule(empire,'世界奇觀需要合法帝國成員資格。');
  if(q.type==='wonder.repair.start'||q.type==='wonder.repair.ship')return applyRepairCommand(w,c,o,q,s);
  if(q.type==='wonder.start'){
@@ -32,7 +32,7 @@ export function applyWonderCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,q:Wo
  requireRule(p?.projectId===q.projectId&&p.wonder?.phase==='funding','此奇觀工程不可投入。');
  const host=w.cities.find(c=>c.id===p.initiatingCityId);requireRule(host&&empireOf(w,host.ownerFactionId)?.id===empire.id,'奇觀承載城市已不屬於原帝國。');
  const remaining=wonderRemaining(p);requireRule(resourceKeys.every(r=>q.resources[r]<=remaining[r]),'投入量超過工程需求（包含在途資源）。');
- dispatchLogistics(w,c,o,p.initiatingCityId,q.resources,s,p.projectId);
+ dispatchLogistics(w,c,o,p.initiatingCityId,q.resources,s,p.projectId,purpose);
  p.shipments.push(projectShipmentRecord(w.logistics!.at(-1)!,p.projectId));
 }
 /** Arrival, not dispatch, credits the project. Phase + stable event identity make retries inert. */
