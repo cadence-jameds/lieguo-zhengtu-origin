@@ -1,0 +1,52 @@
+{
+  "passed": 0,
+  "failed": 2,
+  "skipped": 6,
+  "success": false,
+  "testCases": [
+    {
+      "name": "conquered city no longer caps AI wonder dispatch at old manual quota 2",
+      "status": "failed",
+      "failureMessages": [
+        "AssertionError: 市場可用商隊不足。: expected 'rejected' to be 'committed' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/logisticsOwnership.test.ts:72:38\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "conquered city no longer caps AI wonder dispatch at old manual quota 0",
+      "status": "failed",
+      "failureMessages": [
+        "AssertionError: 市場可用商隊不足。: expected 'rejected' to be 'committed' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/logisticsOwnership.test.ts:72:38\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "conquest preserves all old in-flight identities, cargo, purposes, bookings and events until normal arrival/return",
+      "status": "skipped",
+      "failureMessages": []
+    },
+    {
+      "name": "post-conquest Save/Load, actual Recovery and offline replay preserve old shipments and cleared settings",
+      "status": "skipped",
+      "failureMessages": []
+    },
+    {
+      "name": "receive clears the prior owner route, reserve and allocations without touching in-flight records",
+      "status": "skipped",
+      "failureMessages": []
+    },
+    {
+      "name": "same-owner calls preserve the current owner settings and in-flight records",
+      "status": "skipped",
+      "failureMessages": []
+    },
+    {
+      "name": "legacy route-only settings cannot follow a city into new ownership",
+      "status": "skipped",
+      "failureMessages": []
+    },
+    {
+      "name": "a recaptured city starts unconfigured and accepts fresh allocations from its current player owner",
+      "status": "skipped",
+      "failureMessages": []
+    }
+  ]
+}

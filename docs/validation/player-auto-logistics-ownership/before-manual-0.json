@@ -1,0 +1,66 @@
+{
+  "before": {
+    "allocation": {
+      "total": 15,
+      "general": 5,
+      "wonder": 10,
+      "manual": 0,
+      "allocated": 15
+    },
+    "settings": {
+      "reserve": {
+        "food": 1234,
+        "wood": 2345,
+        "stone": 3456,
+        "gold": 4567
+      },
+      "manualCaravans": 0,
+      "wonder": {
+        "projectId": "project:0000000000000005",
+        "maxCaravans": 10,
+        "enabled": true
+      }
+    }
+  },
+  "afterOwnership": {
+    "allocation": {
+      "total": 15,
+      "general": 0,
+      "wonder": 10,
+      "manual": 0,
+      "allocated": 10
+    },
+    "settings": {
+      "reserve": {
+        "food": 1234,
+        "wood": 2345,
+        "stone": 3456,
+        "gold": 4567
+      },
+      "manualCaravans": 0,
+      "wonder": {
+        "projectId": "project:0000000000000005",
+        "maxCaravans": 10,
+        "enabled": true
+      }
+    },
+    "manualAvailable": 0
+  },
+  "proposal": {
+    "type": "wonder.ship",
+    "cityId": "city:support",
+    "projectId": "project:0000000000000010",
+    "resources": {
+      "food": 19880,
+      "wood": 0,
+      "stone": 0,
+      "gold": 0
+    }
+  },
+  "ack": {
+    "commandId": "command:b4-24",
+    "status": "rejected",
+    "revision": 12,
+    "reason": "市場可用商隊不足。"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "success": true,
+  "testCases": [
+    {
+      "name": "conquered city no longer caps AI wonder dispatch at old manual quota 2",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "conquered city no longer caps AI wonder dispatch at old manual quota 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "conquest preserves all old in-flight identities, cargo, purposes, bookings and events until normal arrival/return",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "post-conquest Save/Load, actual Recovery and offline replay preserve old shipments and cleared settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "receive clears the prior owner route, reserve and allocations without touching in-flight records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "same-owner calls preserve the current owner settings and in-flight records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "legacy route-only settings cannot follow a city into new ownership",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "name": "a recaptured city starts unconfigured and accepts fresh allocations from its current player owner",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ]
+}
