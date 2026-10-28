@@ -1,15 +1,15 @@
 {
-  "sourceCommit": "4059b4f798d5cdd2e4d5854e52f2c3e56123d325",
+  "reviewBase": "7bc27c509ba7518f74403c91604fa6921d2775c3",
   "files": [
     {
       "path": "docs/art-unification/REPORT.md",
-      "sha256": "a372fda2d799a3e1a41b3d324b260a00f862eefb0e9db0495efc96c5ff3686aa",
-      "bytes": 10721
+      "sha256": "e041d5458abbb057f41a12b98cffd8f01c3bdab57956218ba49fbf8747307dcc",
+      "bytes": 10937
     },
     {
       "path": "docs/art-unification/art-gate.md",
-      "sha256": "3bd32560a73d9bddbf3ab2ba9824874a91e928d34f0828d8c1bd0eb474550323",
-      "bytes": 25178
+      "sha256": "899a8ec48dbce07b97476477139c3bfa1d81d15ce9fcf6f7220e3dc75cec298d",
+      "bytes": 25364
     },
     {
       "path": "docs/art-unification/before-map.json",
@@ -87,6 +87,11 @@
       "bytes": 270768
     },
     {
+      "path": "docs/art-unification/boards/board-manifest.json",
+      "sha256": "1e83a25abce5c3c7bd49a4db3a1f7b481cd755d0743903ceb092c7ff67d360b6",
+      "bytes": 70310
+    },
+    {
       "path": "docs/art-unification/boards/building-states-1.webp",
       "sha256": "426e9b4d1443577b0b2df76096bfe2612f131fef6020ab708265bb71c7b1b465",
       "bytes": 468894
@@ -98,8 +103,13 @@
     },
     {
       "path": "docs/art-unification/boards/civilization-technology-pairs.webp",
-      "sha256": "8ad706218fb480d99a4998728086b749b6d39b6c3ffd02f2426a97fcbcc21348",
-      "bytes": 207518
+      "sha256": "74fe091d1c2369ee338e37052b768747f6a39d4f36409a23550ec0518bf18afd",
+      "bytes": 336732
+    },
+    {
+      "path": "docs/art-unification/boards/modern-civilization-technologies.webp",
+      "sha256": "e245b67d15b628faa691987cdb3e687b8418df98ce33bce6d184548620427f26",
+      "bytes": 175226
     },
     {
       "path": "docs/art-unification/boards/priority-before-after.webp",
@@ -122,14 +132,44 @@
       "bytes": 421954
     },
     {
+      "path": "docs/art-unification/boards/technology-all-1.webp",
+      "sha256": "0114ab63a760dd7ad78ee6ba673d5bf4a2abfab67883bad8e71704aed952cab5",
+      "bytes": 493114
+    },
+    {
+      "path": "docs/art-unification/boards/technology-all-2.webp",
+      "sha256": "93bc34e9b245d2438ee7ae1f5496d510c98a960872f0b5bd4a9e58d85ff0be15",
+      "bytes": 441822
+    },
+    {
+      "path": "docs/art-unification/boards/technology-all-3.webp",
+      "sha256": "e3af4fd2a5d7c8a28491abd4aba30f529315e639b4195072765d2f2be2c3c5c7",
+      "bytes": 429128
+    },
+    {
+      "path": "docs/art-unification/boards/technology-all-4.webp",
+      "sha256": "af1c4b95d084a859f0a844c466e75a27740590e429dbfe616a28cebc71bd4323",
+      "bytes": 345178
+    },
+    {
+      "path": "docs/art-unification/boards/technology-all-5.webp",
+      "sha256": "3f98f7c55093ce2aa19357a8f4ab5517922e1467c5d36c8231ad9caf207681ad",
+      "bytes": 349948
+    },
+    {
+      "path": "docs/art-unification/boards/technology-all-6.webp",
+      "sha256": "4648f0dc0fe6c35631532fba7a3c7529885ea1c458fdd6f13256f5bc9427ccea",
+      "bytes": 308270
+    },
+    {
       "path": "docs/art-unification/boards/technology-tiers-1.webp",
-      "sha256": "23b24747c5533bb3e2228012c74feeb45d4558cc3b837f016a276b8fc11b00e9",
-      "bytes": 394582
+      "sha256": "390cf04269b491cebf0340ad41a741051aa61dfaa3c77e27f10dd2bbfc1f35af",
+      "bytes": 410496
     },
     {
       "path": "docs/art-unification/boards/technology-tiers-2.webp",
-      "sha256": "f0d64f22f583975bbf8cd1e08b8c8998961606394428bb536e70d309e563c32f",
-      "bytes": 269212
+      "sha256": "ca39ddd863ddb6262ebba0758596977447923de27e4d4a002380e26344e4d91e",
+      "bytes": 280816
     },
     {
       "path": "docs/art-unification/boards/unit-lines-1.webp",
@@ -550,6 +590,226 @@
       "path": "docs/art-unification/source-summary.json",
       "sha256": "a4a0d3689554ab3bf0fb9f86954fa618999db824531474fffaf9461dc91421bc",
       "bytes": 286
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-all-technologies.png",
+      "sha256": "fd6597a1446f5cb79b80e64eaac9d20c3d58caccc1cbfa7da3a67f9ba5988455",
+      "bytes": 1487608
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_britannia-modern.png",
+      "sha256": "5eb20d3b504385ba62a1a4a7a3ed99446008fefdd12b42e2175d6ce45a965be0",
+      "bytes": 276194
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_britannia-traditional-I.png",
+      "sha256": "e05dcb47299bcf5d79b1be5df493b9d91571fe8c33069c4626f4b70f677707b0",
+      "bytes": 206440
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_britannia-traditional-II.png",
+      "sha256": "65b50bfe807d5b31dbe3a1e1464b867a7ec10e948a3dcd86388585606fc5d36b",
+      "bytes": 200165
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_byzantium-modern.png",
+      "sha256": "23d8b24cd3518b41b98422c3e7644663294f0d5e87d8a5e07eb807fb295b3291",
+      "bytes": 272599
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_byzantium-traditional-I.png",
+      "sha256": "ea30a158a8fc58060006f783e529e591a1957f1016194db9defc0b605f7bf692",
+      "bytes": 208006
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_byzantium-traditional-II.png",
+      "sha256": "4f38a023b4fa4787f9072f5c86a4dc5883d530f43032e322badc8bc1e63233d9",
+      "bytes": 201222
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_frankia-modern.png",
+      "sha256": "c8d54203e7d38716f9342964a0bdf140cbd0a3bf34294586c5a6cab89371f58e",
+      "bytes": 273566
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_frankia-traditional-I.png",
+      "sha256": "2d3b3874cec8be55ec7771eeed657b77649e6b3f2ae6979104b54dc9d5c82e9f",
+      "bytes": 207084
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_frankia-traditional-II.png",
+      "sha256": "a98b3532ff76e82971274ff976c4303d1e3000487bf73f661416a42a2be23041",
+      "bytes": 202423
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_japan-modern.png",
+      "sha256": "54d96c9b852a8fe3a9d00f954d498b2e1253dee85866adfebc038ea068ecabe9",
+      "bytes": 277411
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_japan-traditional-I.png",
+      "sha256": "3a21b51804ea11723b7204124553fc089e48cfdf56b1bf659e3c053e80f28081",
+      "bytes": 203348
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_japan-traditional-II.png",
+      "sha256": "21248f9affd1c8cf1e482d63b5ca8fde810e4ece7d44dee513534add9e9a1a69",
+      "bytes": 196292
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_mongolia-modern.png",
+      "sha256": "fa733504ba6d3f4a09cd1cc72859691f7fd3d9d67ddf0bf63fc13fddc43bc755",
+      "bytes": 277127
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_mongolia-traditional-I.png",
+      "sha256": "93d2aa8863d4bd39aca680a5bd22561e64375888c55f4ed0b96bf70447e2c8e0",
+      "bytes": 206135
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_mongolia-traditional-II.png",
+      "sha256": "468aabde636bf857d39858e075dd5d747c303e903cb5240b8bd98b10c21a5235",
+      "bytes": 201489
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_zhongguo-modern.png",
+      "sha256": "89137e618dcac11efe49d324fabc47e1325c810f35bd56ac863127f52e6e7c79",
+      "bytes": 271241
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_zhongguo-traditional-I.png",
+      "sha256": "21d2539a16cd1595fb541e2264e4955d11bfde45b863dd2cd0b49c051f68d3c5",
+      "bytes": 204408
+    },
+    {
+      "path": "docs/art-unification/technology-repair/1440-civ_zhongguo-traditional-II.png",
+      "sha256": "5bf20ded148ffc41914de19ef740242e2955fe07dac95865cf758fe2dab1cfee",
+      "bytes": 199477
+    },
+    {
+      "path": "docs/art-unification/technology-repair/320-all-technologies.png",
+      "sha256": "fffd4939a56438062db89f6a972411bde78ea12ffbbbb2f499b6d0cded620ba8",
+      "bytes": 1629055
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-all-technologies.png",
+      "sha256": "481b307bde924e249ebc98c9dc4ff7b345348ba8a384fffce94154ec06a43e9d",
+      "bytes": 1550260
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_britannia-modern.png",
+      "sha256": "f468f8b917c5e42e2187dc27408fb10ea536b23ce320582ae4dea603c67c0a3c",
+      "bytes": 82771
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_britannia-traditional-I.png",
+      "sha256": "ac4f481d4c368a703d5c085a124081e915b18b664a88a784f15d6efb992ef4fe",
+      "bytes": 77839
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_britannia-traditional-II.png",
+      "sha256": "0d3bd5ddc10bf74724d2f3dd9f23e91117c096e350143fbd181b246f97c07392",
+      "bytes": 70964
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_byzantium-modern.png",
+      "sha256": "4b3b947409ca23b7fb0e248cc10880ad7772159c4afac04a75464357d6b5e13e",
+      "bytes": 80088
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_byzantium-traditional-I.png",
+      "sha256": "48942b8559424862dc8471acf03114f2e50e4d3e1308a3365c3ccdddfc91dec0",
+      "bytes": 78885
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_byzantium-traditional-II.png",
+      "sha256": "1dcc47a4ffb9dbdf98059d313b6379c282ad05280a8908fc9a209b1c93b3fd11",
+      "bytes": 70227
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_frankia-modern.png",
+      "sha256": "ad37f027b0a5d12ff4b06819cc71b4418cf6cf00e461b5d7213ae5f8d4e99eb8",
+      "bytes": 80543
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_frankia-traditional-I.png",
+      "sha256": "2b1af7695b81abbaeced61e18ca9350b092a1e6b2fd6d5259500ae0fb4830d78",
+      "bytes": 76985
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_frankia-traditional-II.png",
+      "sha256": "97da1752ef4dae067c0cf2d3b16b3fb1438a03f408bfb976b57afd95e0b58e74",
+      "bytes": 71811
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_japan-modern.png",
+      "sha256": "d0f1921423c3721703111912e5bf245d87dc23c0570f598db9dadfe30aa627aa",
+      "bytes": 82583
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_japan-traditional-I.png",
+      "sha256": "3e0d848d80c7305161a72ffb494363932398c69a81feea3cfc3e50cfdcbee42d",
+      "bytes": 76941
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_japan-traditional-II.png",
+      "sha256": "f7357dcf57c1891904d6f191bd55d0b130f9c48631e0d429fe034381b1b36ecc",
+      "bytes": 67979
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_mongolia-modern.png",
+      "sha256": "769d9dc8f04bfa94aab761029c1eb51c430abee1770d9f39f6591fb00b1ba674",
+      "bytes": 82915
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_mongolia-traditional-I.png",
+      "sha256": "0a62ef309950ea5f8668a45252b5ae4efe6e0acc396ed7418502785cbb624c08",
+      "bytes": 78031
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_mongolia-traditional-II.png",
+      "sha256": "afc08837cda9f0890957c6b78efabe763d7ba034d819dbc490119cbcd651cdec",
+      "bytes": 71635
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_zhongguo-modern.png",
+      "sha256": "edda93f8f463fbd442308adc760a816ed3ac00c081c05e3ede50fe2bcf3d9ee0",
+      "bytes": 78849
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_zhongguo-traditional-I.png",
+      "sha256": "426be0deeebe170390f12d07e7531c244d2be8b55b3a25d7a7ec45bdb1fa2eed",
+      "bytes": 77326
+    },
+    {
+      "path": "docs/art-unification/technology-repair/390-civ_zhongguo-traditional-II.png",
+      "sha256": "43934657d5de44e3878f49b9b84fb69c860153351764b9a8d4c323394e68815c",
+      "bytes": 70496
+    },
+    {
+      "path": "docs/art-unification/technology-repair/REPORT.md",
+      "sha256": "cc628c1c804901eb3088ce609509b9001701ce5ad13a18a6d19c91afead13dc3",
+      "bytes": 4546
+    },
+    {
+      "path": "docs/art-unification/technology-repair/browser.json",
+      "sha256": "3197274dc92c60a7def280002eb1d71a5b91704c5101f1a40154e41126a8bd0f",
+      "bytes": 60321
+    },
+    {
+      "path": "docs/art-unification/technology-repair/live-mapping.json",
+      "sha256": "7dbdd4c1649eab4adc3a0b4837430c2ada35bc6abda927066c1d60c531c0f39c",
+      "bytes": 33037
+    },
+    {
+      "path": "docs/art-unification/technology-repair/visual-review.json",
+      "sha256": "a9dde01db866155fbb5353ba6b9ff9af6242f22bc6318273637c0c0c191d66d9",
+      "bytes": 72673
+    },
+    {
+      "path": "docs/art-unification/technology-repair/visual-review.md",
+      "sha256": "5f864e0ae60cb73212d18a5ce6e83cc2ac244e8f3e3b996c8467d3113bc24e9e",
+      "bytes": 10187
     },
     {
       "path": "docs/art-unification/validation/build.txt",

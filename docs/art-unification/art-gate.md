@@ -1,3 +1,5 @@
+> 本輪科技 82 圖的逐張複核與保守評分改以 [科技修正複核](technology-repair/visual-review.md) 為準；以下原自評保留作歷史，不作玩家放行依據。
+
 # ART-GATE 逐圖紀錄
 
 十項依美術聖經 v1.0；v1.1 加入人體／器械結構硬閘門。分數為 Codex 視覺自評，玩家核准獨立保留，沒有宣稱正式發布 Gate。原始候選、實際圖像參考、完整提示詞、實測尺寸、裁切、SHA256 與退件原因在 [來源資料](../art-source/unification/batches.json) 與 [正式輸出資料](../art-source/unification/assets.json)。

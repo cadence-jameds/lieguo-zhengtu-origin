@@ -1,5 +1,7 @@
 """Lay out existing images for review; never generate or repaint game artwork."""
 import json
+import hashlib
+import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -7,8 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'docs/art-unification/boards'; OUT.mkdir(parents=True, exist_ok=True)
 font_path='/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
 font=ImageFont.truetype(font_path,14); title=ImageFont.truetype(font_path,19)
-current_path=ROOT/'work/art-audit/coverage.json'
-if not current_path.exists(): current_path=ROOT/'docs/art-unification/coverage.json'
+current_path=Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'docs/art-unification/coverage.json'
 current=json.loads(current_path.read_text())
 before=json.loads((ROOT/'docs/art-unification/before-map.json').read_text())
 units={x['id']:x for x in current['units']}; old_units={x['id']:x for x in before['units']}
@@ -29,16 +30,24 @@ def place(board,image,box):
     x,y,w,h=box; image=image.copy();image.thumbnail((w,h),Image.Resampling.LANCZOS)
     board.paste(image,(x+(w-image.width)//2,y+(h-image.height)//2),image)
 
+manifests={}
+
 def board(name,headers,rows,width=200,height=245):
+    assert all(len(row)==len(headers) for row in rows), name+": column overflow/misalignment"
+    manifests[name]={"headers":headers,"rows":[[cell[2] if cell and len(cell)>2 else None for cell in row] for row in rows]}
     image=Image.new('RGB',(width*len(headers),64+height*len(rows)),(25,32,27));draw=ImageDraw.Draw(image)
     for i,header in enumerate(headers): draw.text((i*width+8,15),header,font=title,fill=(227,208,163))
     for row,cells in enumerate(rows):
         for col,cell in enumerate(cells):
             if cell is None: continue
-            label,art=cell;x=col*width;y=64+row*height
-            if art is not None: place(image,art,(x+8,y+28,width-16,height-43))
-            draw.text((x+7,y+3),label,font=font,fill=(237,232,211))
+            label,art=cell[:2];x=col*width;y=64+row*height
+            offset=47 if '\n' in label else 28
+            if art is not None: place(image,art,(x+8,y+offset,width-16,height-offset-15))
+            if '\n' in label:
+                display_name,identifier=label.split('\n',1);draw.text((x+7,y+3),display_name,font=font,fill=(237,232,211));draw.text((x+7,y+25),identifier,font=ImageFont.truetype(font_path,10),fill=(190,190,170))
+            else: draw.text((x+7,y+3),label,font=font,fill=(237,232,211))
     image.save(OUT/(name+'.webp'),'WEBP',quality=94,method=4)
+    manifests[name]['sha256']=hashlib.sha256((OUT/(name+'.webp')).read_bytes()).hexdigest()
 
 rows=[]
 for line in current['eliteLines']:
@@ -46,22 +55,45 @@ for line in current['eliteLines']:
     rows.append([(units[base]['name'],picture(units[base])),(units[elite]['name'],picture(units[elite])),(units[modern]['name'],picture(units[modern])) if modern in units else None])
 for page in range(2):board('unit-lines-'+str(page+1),['正式一般兵種','既有精銳升階','現代世代（非新增等級）'],rows[page*6:(page+1)*6],250,270)
 
+def tech_cell(t, new):
+    spec=(techs if new else old_techs)[t['id']]
+    if new:
+        assert spec['path'].endswith('.webp') and '/unified/technologies/' in spec['path'] and not spec.get('sheet'), t['id']
+    meta={'id':t['id'],'side':'new' if new else 'old','path':spec['path'],'sha256':hashlib.sha256((ROOT/'public'/spec['path']).read_bytes()).hexdigest()}
+    return (t['name']+'\n'+t['id'],picture(spec),meta)
+
+assert len(techs)==82 and set(techs)==set(old_techs)
+for t in techs.values(): tech_cell(t,True)
 rows=[]
 for line in current['techLines']:
     cells=[]
     for source in [old_techs,techs]:
         for tier in range(3):
             if tier<len(line['ids']):
-                item=source[line['ids'][tier]];cells.append((techs[item['id']]['name'],picture(item)))
+                item=source[line['ids'][tier]];cells.append(tech_cell(techs[item['id']],source is techs))
             else:cells.append(('無正式 III 階',None))
     rows.append(cells)
 for page in range(2):board('technology-tiers-'+str(page+1),['舊 I','舊 II','舊 III','新 I','新 II','新 III'],rows[page*6:(page+1)*6],178,220)
 
-rows=[]
-for civ in list(dict.fromkeys(c['civ'] for c in current['cities'])):
-    pair=sorted([t for t in current['technologies'] if t.get('civilizationId')==civ and t['category']=='civilization'],key=lambda t:t['age'])
-    rows.append([(t['name'],picture(source[t['id']])) for source in [old_techs,techs] for t in pair])
-board('civilization-technology-pairs',['舊文明科技 I','舊文明科技 II','新文明科技 I','新文明科技 II'],rows,225,245)
+civs=list(dict.fromkeys(c['civ'] for c in current['cities']))
+rows=[];modern_rows=[]
+for civ in civs:
+    pair=sorted([t for t in techs.values() if t.get('civilizationId')==civ and t['category']=='civilization' and t['scope']!='modern-civilization' and not t['id'].startswith('modern.')],key=lambda t:t['age'])
+    assert len(pair)==2 and [t['age'] for t in pair]==[2,3], civ
+    rows.append([tech_cell(t,new) for new in [False,True] for t in pair])
+    modern=[t for t in techs.values() if t.get('civilizationId')==civ and t['scope']=='modern-civilization' and t['id'].startswith('modern.')]
+    assert len(modern)==1,civ
+    modern_rows.append([tech_cell(modern[0],new) for new in [False,True]])
+board('civilization-technology-pairs',['舊文明科技 I','舊文明科技 II','新文明科技 I','新文明科技 II'],rows,300,290)
+board('modern-civilization-technologies',['舊現代文明專屬','新現代文明專屬'],modern_rows,340,290)
+# Every formal technology, including unnumbered engineering/admin/logistics/modern cards.
+items=list(techs.values())
+for page in range((len(items)+13)//14):
+    sample=items[page*14:(page+1)*14];rows=[]
+    for i in range(0,len(sample),2):
+        row=[tech_cell(t,new) for t in sample[i:i+2] for new in [False,True]]
+        rows.append(row+[None]*(4-len(row)))
+    board('technology-all-'+str(page+1),['舊卡／符號','新正式卡','舊卡／符號','新正式卡'],rows,255,270)
 
 rows=[]
 for item in [b for b in current['buildings'] if b['civ']=='civ_zhongguo' and b['age']==3]:
@@ -104,3 +136,5 @@ for size in [64,128]:
     for i,key in enumerate(selected):place(image,picture(units[key]),(i*(size+12)+6,8,size,size));draw.text((i*(size+12)+6,size+12),str(i+1),font=font,fill='white')
     image.save(OUT/('readability-'+str(size)+'.webp'),'WEBP',quality=95,method=4)
 print('Comparison boards:',len(list(OUT.glob('*.webp'))))
+
+(OUT/'board-manifest.json').write_text(json.dumps(manifests,ensure_ascii=False,indent=2)+'\n')

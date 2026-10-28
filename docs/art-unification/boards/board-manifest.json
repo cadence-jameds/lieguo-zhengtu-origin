@@ -1,0 +1,2151 @@
+{
+  "unit-lines-1": {
+    "headers": [
+      "正式一般兵種",
+      "既有精銳升階",
+      "現代世代（非新增等級）"
+    ],
+    "rows": [
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ]
+    ],
+    "sha256": "d64b84c9b90a66d8ec1a13fb5d2bd90bbb0f401c7fb4af3a589f3490ff00fba3"
+  },
+  "unit-lines-2": {
+    "headers": [
+      "正式一般兵種",
+      "既有精銳升階",
+      "現代世代（非新增等級）"
+    ],
+    "rows": [
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ]
+    ],
+    "sha256": "f4f512b1c7e0f8008a0a97e5e353877a3b1c135671c3c0574ff43d71039d30b3"
+  },
+  "technology-tiers-1": {
+    "headers": [
+      "舊 I",
+      "舊 II",
+      "舊 III",
+      "新 I",
+      "新 II",
+      "新 III"
+    ],
+    "rows": [
+      [
+        {
+          "id": "blacksmith.melee.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.melee.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.melee.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.melee.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.melee.1.webp",
+          "sha256": "9c9a27e3c1be503a2efff8819fbb3830f8f45be72b4af7a08bc77b9d0d61dfe0"
+        },
+        {
+          "id": "blacksmith.melee.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.melee.2.webp",
+          "sha256": "7c90af54a5436bf15e92add60e93d98680e3713a34cebd36a3307dbb91120607"
+        },
+        {
+          "id": "blacksmith.melee.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.melee.3.webp",
+          "sha256": "3b4b30b83f0f738fd66dff005e3fe3efb52f63c8cffc1b4cfd0ad93818072a78"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.ranged.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged.1.webp",
+          "sha256": "189ebed15e0ba3b41cda20d73983e584f2e56a94b9a176b6cbdf31dc9abcd829"
+        },
+        {
+          "id": "blacksmith.ranged.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged.2.webp",
+          "sha256": "164c7b573be356376e309eb7b4ac2944633b5286bb3588260c2e23c57576aa1d"
+        },
+        {
+          "id": "blacksmith.ranged.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged.3.webp",
+          "sha256": "f4d58c1aa47188ec98bcc5136ff407ea58dd280699358a86c8b99b672bd6f403"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.infantry-armor.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.infantry-armor.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.infantry-armor.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.infantry-armor.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.infantry-armor.1.webp",
+          "sha256": "d23f50eb53e089f85386a04647c8f6b8f94cd043abf2bebeae6f6e3e54ce9137"
+        },
+        {
+          "id": "blacksmith.infantry-armor.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.infantry-armor.2.webp",
+          "sha256": "7c744f4e4b465127da303352facaec3986e88403a9a6d17d9a491ebeb43900f8"
+        },
+        {
+          "id": "blacksmith.infantry-armor.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.infantry-armor.3.webp",
+          "sha256": "418d0dfe51619415e05c9a13c2b3cebdc1dd188c3c586b040092f72ccb1fc052"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.ranged-armor.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged-armor.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged-armor.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged-armor.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged-armor.1.webp",
+          "sha256": "9a559e540180d73eedc3ab8333fca43bc4bb25cd2e281af905389726dcdcc187"
+        },
+        {
+          "id": "blacksmith.ranged-armor.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged-armor.2.webp",
+          "sha256": "de08e1b2961e26fd7f531c2a6ccb2ce240c28739f8687377a592dd7e3a60bea6"
+        },
+        {
+          "id": "blacksmith.ranged-armor.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged-armor.3.webp",
+          "sha256": "f97662e20107a0e55d651dea6583eefc67a9d317a3bb3a9d05b1482da12ace5c"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.cavalry-armor.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.cavalry-armor.1.webp",
+          "sha256": "82ddb5ce2a087b7e24a20cea91244f63f928826401159d208804b0a889697cb6"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.cavalry-armor.2.webp",
+          "sha256": "4aaea47bc60d90ac17a443be505708bdba1f8ed484dc1addd1bb74bde41808c8"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.cavalry-armor.3.webp",
+          "sha256": "0344f5bbddeabcb24fe961cb4254b0f42b5e61883bdc3f4cccfb4fb4c033e375"
+        }
+      ],
+      [
+        {
+          "id": "economy.food.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.food.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.food.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.food.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.food.1.webp",
+          "sha256": "427db2969d68e098777a6de41b015a40e16cb5f43dce06b1defa4966b7ffb489"
+        },
+        {
+          "id": "economy.food.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.food.2.webp",
+          "sha256": "6e12761ed7cbed09f63a28a43a188ba6f997488c307a18a0185e209f85457093"
+        },
+        {
+          "id": "economy.food.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.food.3.webp",
+          "sha256": "65b371d71332686d738e57a9dd8794e8827f6d2a0a43b06793a451fbff49dd84"
+        }
+      ]
+    ],
+    "sha256": "390cf04269b491cebf0340ad41a741051aa61dfaa3c77e27f10dd2bbfc1f35af"
+  },
+  "technology-tiers-2": {
+    "headers": [
+      "舊 I",
+      "舊 II",
+      "舊 III",
+      "新 I",
+      "新 II",
+      "新 III"
+    ],
+    "rows": [
+      [
+        {
+          "id": "economy.wood.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.wood.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.wood.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.wood.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.wood.1.webp",
+          "sha256": "49cd6b96c05c3bf7393f6dba357bc838876acf267ab1fbb59eb9e236de6b8d17"
+        },
+        {
+          "id": "economy.wood.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.wood.2.webp",
+          "sha256": "5a206635deb55c4b0915e479aa4a04931aee85b8878c87d82655193ee996b0e5"
+        },
+        {
+          "id": "economy.wood.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.wood.3.webp",
+          "sha256": "fcd206a87d09652609ba386c38a704c206545f8227e1a11d0e3171e8aaca7b7e"
+        }
+      ],
+      [
+        {
+          "id": "economy.stone.1",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "economy.stone.2",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "economy.stone.3",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "economy.stone.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.stone.1.webp",
+          "sha256": "c792c50d9769266fb6990cb0934745193a91cf58fd3050389bafa74cafaf2e95"
+        },
+        {
+          "id": "economy.stone.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.stone.2.webp",
+          "sha256": "e738a993f54af72fd43bc3218e093828e6b4a049e5dba65ee16b85c3c46618e8"
+        },
+        {
+          "id": "economy.stone.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.stone.3.webp",
+          "sha256": "89c37d699e4851a7dbb65b21d3197613be134db3cc073ebd51dd15667b210d52"
+        }
+      ],
+      [
+        {
+          "id": "economy.gold.1",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "economy.gold.2",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "economy.gold.3",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "economy.gold.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.gold.1.webp",
+          "sha256": "fbfc0701e5ed6c59b032b9f138af47c3f277568b07746ee2020e484278086bba"
+        },
+        {
+          "id": "economy.gold.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.gold.2.webp",
+          "sha256": "fa1bd488272ff68f8c8590109d25ad05260eb47af9c1d09d4b204357b2ef4ad2"
+        },
+        {
+          "id": "economy.gold.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.gold.3.webp",
+          "sha256": "49b3d89a649efa949df139733d021865d84701d0eef0dd2d13e3985270770b1f"
+        }
+      ],
+      [
+        {
+          "id": "siege.ram.1",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.ram.2",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        null,
+        {
+          "id": "siege.ram.1",
+          "side": "new",
+          "path": "art/unified/technologies/siege.ram.1.webp",
+          "sha256": "21967aa66bc7846a846098e1eab473ca5f44f29387985cd38b396154e0502416"
+        },
+        {
+          "id": "siege.ram.2",
+          "side": "new",
+          "path": "art/unified/technologies/siege.ram.2.webp",
+          "sha256": "8e117188d30682d0763476d1c8546f379636947c5a5afbe91fe6750667212910"
+        },
+        null
+      ],
+      [
+        {
+          "id": "siege.projection.1",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.projection.2",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        null,
+        {
+          "id": "siege.projection.1",
+          "side": "new",
+          "path": "art/unified/technologies/siege.projection.1.webp",
+          "sha256": "9f2737769865be13e63e29f8dea71b88f88ecad07f332dc571bf291fb5960993"
+        },
+        {
+          "id": "siege.projection.2",
+          "side": "new",
+          "path": "art/unified/technologies/siege.projection.2.webp",
+          "sha256": "06a12e427b54fe531fdf38faff7d20c68448d95c7a4fb22f52d4dab6890d830e"
+        },
+        null
+      ],
+      [
+        {
+          "id": "siege.frame.1",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.frame.2",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        null,
+        {
+          "id": "siege.frame.1",
+          "side": "new",
+          "path": "art/unified/technologies/siege.frame.1.webp",
+          "sha256": "0ddda16358df3cd193d4d0f5a5e50ff8b77bee2a75ec39f89d26a5e8c150094d"
+        },
+        {
+          "id": "siege.frame.2",
+          "side": "new",
+          "path": "art/unified/technologies/siege.frame.2.webp",
+          "sha256": "9811291e444067d9f3b78ffef8521504e76e2e3f42180ef5220ed145c314b88a"
+        },
+        null
+      ]
+    ],
+    "sha256": "ca39ddd863ddb6262ebba0758596977447923de27e4d4a002380e26344e4d91e"
+  },
+  "civilization-technology-pairs": {
+    "headers": [
+      "舊文明科技 I",
+      "舊文明科技 II",
+      "新文明科技 I",
+      "新文明科技 II"
+    ],
+    "rows": [
+      [
+        {
+          "id": "civilization.kaogong",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "civilization.crossbow",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "civilization.kaogong",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.kaogong.webp",
+          "sha256": "7b13c12e1764667aae544af2897a05db7a2e8fe7a8c026b341c672a52f170cd4"
+        },
+        {
+          "id": "civilization.crossbow",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.crossbow.webp",
+          "sha256": "fbec3e62594a577b57c66ad05c6815ce1402714a7c7118788e56fd4f68e379c0"
+        }
+      ],
+      [
+        {
+          "id": "civilization.themes",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "civilization.imperial-wall",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "civilization.themes",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.themes.webp",
+          "sha256": "318e16eabce68e8aba25084f0dedbeee518403c973196cf321d4bb451449e453"
+        },
+        {
+          "id": "civilization.imperial-wall",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.imperial-wall.webp",
+          "sha256": "be4a07c2af6d1cecb0036cb3c00e870e1a73a370828d89be91cf2a2c6f1bc18d"
+        }
+      ],
+      [
+        {
+          "id": "civilization.knighthood",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "civilization.charge",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "civilization.knighthood",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.knighthood.webp",
+          "sha256": "16d1822bed24e7ae3606a8fcd94eec380effd12b084cd298be997c3a18f6bb27"
+        },
+        {
+          "id": "civilization.charge",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.charge.webp",
+          "sha256": "9f63717bf4c0e4c90e93efbdfbc8374311b220bac078c383e2462dad72e9b54a"
+        }
+      ],
+      [
+        {
+          "id": "civilization.archer-levy",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "civilization.warwolf",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "civilization.archer-levy",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.archer-levy.webp",
+          "sha256": "2f1dab008cb97819f14ce472232ab1faf9b00c21f30bcfb860e777e22b64bf58"
+        },
+        {
+          "id": "civilization.warwolf",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.warwolf.webp",
+          "sha256": "70bf45b4e943391be05fd86fa3665d2f0fbfb4e8a9595567e73d311d1d52f0fc"
+        }
+      ],
+      [
+        {
+          "id": "civilization.mobilization",
+          "side": "old",
+          "path": "art/formal/tech-conscription.svg",
+          "sha256": "7c5f0c01fcac84d4988ff82d98435224e7b733355b14f8633ed9b4228344dddf"
+        },
+        {
+          "id": "civilization.sling",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "civilization.mobilization",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.mobilization.webp",
+          "sha256": "37bfe0c90303bad337fb81c3e52dd68347919dd8d2de33a1d6d4dba3ae4ac0a4"
+        },
+        {
+          "id": "civilization.sling",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.sling.webp",
+          "sha256": "745372f3834d81ad1c1246596549feb8ff94d7a0dcac80dc5b1e6c8b8562cb9a"
+        }
+      ],
+      [
+        {
+          "id": "civilization.nomadic",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "civilization.swift-siege",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "civilization.nomadic",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.nomadic.webp",
+          "sha256": "597ad4e8d9a9916618ef2dca7b03b6e62fb94638ddc17c2ba646e8a2d2a0ad10"
+        },
+        {
+          "id": "civilization.swift-siege",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.swift-siege.webp",
+          "sha256": "1682af549f878ee115eb0c2bc6077d28069ee82e1e6c52b5f594b0f9a2677950"
+        }
+      ]
+    ],
+    "sha256": "74fe091d1c2369ee338e37052b768747f6a39d4f36409a23550ec0518bf18afd"
+  },
+  "modern-civilization-technologies": {
+    "headers": [
+      "舊現代文明專屬",
+      "新現代文明專屬"
+    ],
+    "rows": [
+      [
+        {
+          "id": "modern.civ_zhongguo.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_zhongguo.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_zhongguo.exclusive.webp",
+          "sha256": "655f94e048a0ed5e326f21bacea3cbbf7b4af45dec71e93b60ca65e0e1d107e2"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_byzantium.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_byzantium.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_byzantium.exclusive.webp",
+          "sha256": "a4a26d829814bff58d8dfbace6dca3be98457f557f773432e335e37def23eabd"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_frankia.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_frankia.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_frankia.exclusive.webp",
+          "sha256": "d4cd2c4eadfdca3be6d215b81490c4dd17a64eab93ad9ec5500146174fb52e3e"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_britannia.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_britannia.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_britannia.exclusive.webp",
+          "sha256": "c96318c4cf862375b5a5c7eda83093c145cdbcbb70287c644bc06ce954c4833d"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_japan.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_japan.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_japan.exclusive.webp",
+          "sha256": "679bc00661bb73f64a4d2813c15196174062a2130b390c1a2001e2505b8e4745"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_mongolia.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_mongolia.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_mongolia.exclusive.webp",
+          "sha256": "f556c2870640367cb1fb5a8c95f0c23bc98ff942a98fd7750568e9c1c8a0cf7e"
+        }
+      ]
+    ],
+    "sha256": "e245b67d15b628faa691987cdb3e687b8418df98ce33bce6d184548620427f26"
+  },
+  "technology-all-1": {
+    "headers": [
+      "舊卡／符號",
+      "新正式卡",
+      "舊卡／符號",
+      "新正式卡"
+    ],
+    "rows": [
+      [
+        {
+          "id": "blacksmith.melee.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.melee.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.melee.1.webp",
+          "sha256": "9c9a27e3c1be503a2efff8819fbb3830f8f45be72b4af7a08bc77b9d0d61dfe0"
+        },
+        {
+          "id": "blacksmith.ranged.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged.1.webp",
+          "sha256": "189ebed15e0ba3b41cda20d73983e584f2e56a94b9a176b6cbdf31dc9abcd829"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.infantry-armor.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.infantry-armor.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.infantry-armor.1.webp",
+          "sha256": "d23f50eb53e089f85386a04647c8f6b8f94cd043abf2bebeae6f6e3e54ce9137"
+        },
+        {
+          "id": "blacksmith.ranged-armor.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged-armor.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged-armor.1.webp",
+          "sha256": "9a559e540180d73eedc3ab8333fca43bc4bb25cd2e281af905389726dcdcc187"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.cavalry-armor.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.1",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.cavalry-armor.1.webp",
+          "sha256": "82ddb5ce2a087b7e24a20cea91244f63f928826401159d208804b0a889697cb6"
+        },
+        {
+          "id": "blacksmith.melee.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.melee.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.melee.2.webp",
+          "sha256": "7c90af54a5436bf15e92add60e93d98680e3713a34cebd36a3307dbb91120607"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.ranged.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged.2.webp",
+          "sha256": "164c7b573be356376e309eb7b4ac2944633b5286bb3588260c2e23c57576aa1d"
+        },
+        {
+          "id": "blacksmith.infantry-armor.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.infantry-armor.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.infantry-armor.2.webp",
+          "sha256": "7c744f4e4b465127da303352facaec3986e88403a9a6d17d9a491ebeb43900f8"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.ranged-armor.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged-armor.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged-armor.2.webp",
+          "sha256": "de08e1b2961e26fd7f531c2a6ccb2ce240c28739f8687377a592dd7e3a60bea6"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.2",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.cavalry-armor.2.webp",
+          "sha256": "4aaea47bc60d90ac17a443be505708bdba1f8ed484dc1addd1bb74bde41808c8"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.melee.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.melee.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.melee.3.webp",
+          "sha256": "3b4b30b83f0f738fd66dff005e3fe3efb52f63c8cffc1b4cfd0ad93818072a78"
+        },
+        {
+          "id": "blacksmith.ranged.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged.3.webp",
+          "sha256": "f4d58c1aa47188ec98bcc5136ff407ea58dd280699358a86c8b99b672bd6f403"
+        }
+      ],
+      [
+        {
+          "id": "blacksmith.infantry-armor.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.infantry-armor.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.infantry-armor.3.webp",
+          "sha256": "418d0dfe51619415e05c9a13c2b3cebdc1dd188c3c586b040092f72ccb1fc052"
+        },
+        {
+          "id": "blacksmith.ranged-armor.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.ranged-armor.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.ranged-armor.3.webp",
+          "sha256": "f97662e20107a0e55d651dea6583eefc67a9d317a3bb3a9d05b1482da12ace5c"
+        }
+      ]
+    ],
+    "sha256": "0114ab63a760dd7ad78ee6ba673d5bf4a2abfab67883bad8e71704aed952cab5"
+  },
+  "technology-all-2": {
+    "headers": [
+      "舊卡／符號",
+      "新正式卡",
+      "舊卡／符號",
+      "新正式卡"
+    ],
+    "rows": [
+      [
+        {
+          "id": "blacksmith.cavalry-armor.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "blacksmith.cavalry-armor.3",
+          "side": "new",
+          "path": "art/unified/technologies/blacksmith.cavalry-armor.3.webp",
+          "sha256": "0344f5bbddeabcb24fe961cb4254b0f42b5e61883bdc3f4cccfb4fb4c033e375"
+        },
+        {
+          "id": "economy.food.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.food.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.food.1.webp",
+          "sha256": "427db2969d68e098777a6de41b015a40e16cb5f43dce06b1defa4966b7ffb489"
+        }
+      ],
+      [
+        {
+          "id": "economy.wood.1",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.wood.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.wood.1.webp",
+          "sha256": "49cd6b96c05c3bf7393f6dba357bc838876acf267ab1fbb59eb9e236de6b8d17"
+        },
+        {
+          "id": "economy.stone.1",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "economy.stone.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.stone.1.webp",
+          "sha256": "c792c50d9769266fb6990cb0934745193a91cf58fd3050389bafa74cafaf2e95"
+        }
+      ],
+      [
+        {
+          "id": "economy.gold.1",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "economy.gold.1",
+          "side": "new",
+          "path": "art/unified/technologies/economy.gold.1.webp",
+          "sha256": "fbfc0701e5ed6c59b032b9f138af47c3f277568b07746ee2020e484278086bba"
+        },
+        {
+          "id": "economy.food.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.food.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.food.2.webp",
+          "sha256": "6e12761ed7cbed09f63a28a43a188ba6f997488c307a18a0185e209f85457093"
+        }
+      ],
+      [
+        {
+          "id": "economy.wood.2",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.wood.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.wood.2.webp",
+          "sha256": "5a206635deb55c4b0915e479aa4a04931aee85b8878c87d82655193ee996b0e5"
+        },
+        {
+          "id": "economy.stone.2",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "economy.stone.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.stone.2.webp",
+          "sha256": "e738a993f54af72fd43bc3218e093828e6b4a049e5dba65ee16b85c3c46618e8"
+        }
+      ],
+      [
+        {
+          "id": "economy.gold.2",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "economy.gold.2",
+          "side": "new",
+          "path": "art/unified/technologies/economy.gold.2.webp",
+          "sha256": "fa1bd488272ff68f8c8590109d25ad05260eb47af9c1d09d4b204357b2ef4ad2"
+        },
+        {
+          "id": "economy.food.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.food.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.food.3.webp",
+          "sha256": "65b371d71332686d738e57a9dd8794e8827f6d2a0a43b06793a451fbff49dd84"
+        }
+      ],
+      [
+        {
+          "id": "economy.wood.3",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "economy.wood.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.wood.3.webp",
+          "sha256": "fcd206a87d09652609ba386c38a704c206545f8227e1a11d0e3171e8aaca7b7e"
+        },
+        {
+          "id": "economy.stone.3",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "economy.stone.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.stone.3.webp",
+          "sha256": "89c37d699e4851a7dbb65b21d3197613be134db3cc073ebd51dd15667b210d52"
+        }
+      ],
+      [
+        {
+          "id": "economy.gold.3",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "economy.gold.3",
+          "side": "new",
+          "path": "art/unified/technologies/economy.gold.3.webp",
+          "sha256": "49b3d89a649efa949df139733d021865d84701d0eef0dd2d13e3985270770b1f"
+        },
+        {
+          "id": "intel.watch",
+          "side": "old",
+          "path": "art/formal/tech-intel.svg",
+          "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+        },
+        {
+          "id": "intel.watch",
+          "side": "new",
+          "path": "art/unified/technologies/intel.watch.webp",
+          "sha256": "956a8be9422685fbb8963d52bf9ff661c8fdb412450311b2047606c7f80c56bb"
+        }
+      ]
+    ],
+    "sha256": "93bc34e9b245d2438ee7ae1f5496d510c98a960872f0b5bd4a9e58d85ff0be15"
+  },
+  "technology-all-3": {
+    "headers": [
+      "舊卡／符號",
+      "新正式卡",
+      "舊卡／符號",
+      "新正式卡"
+    ],
+    "rows": [
+      [
+        {
+          "id": "intel.patrol",
+          "side": "old",
+          "path": "art/formal/tech-intel.svg",
+          "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+        },
+        {
+          "id": "intel.patrol",
+          "side": "new",
+          "path": "art/unified/technologies/intel.patrol.webp",
+          "sha256": "5a6fa7d5984c1d63ed66a71bcb3be0a800f1cf70d845e0d5d6fcfdbd00d82b7d"
+        },
+        {
+          "id": "intel.analysis",
+          "side": "old",
+          "path": "art/formal/tech-intel.svg",
+          "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+        },
+        {
+          "id": "intel.analysis",
+          "side": "new",
+          "path": "art/unified/technologies/intel.analysis.webp",
+          "sha256": "47be844e7b2d7b407d4573d0a99345ede11b67f313cf412ec1d19f54962d7c6b"
+        }
+      ],
+      [
+        {
+          "id": "intel.network",
+          "side": "old",
+          "path": "art/formal/tech-intel.svg",
+          "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+        },
+        {
+          "id": "intel.network",
+          "side": "new",
+          "path": "art/unified/technologies/intel.network.webp",
+          "sha256": "81a173696c05abeb2cbe26597be4f0c9f5df286db0515ac77b0008023647a3ed"
+        },
+        {
+          "id": "military.drill",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "military.drill",
+          "side": "new",
+          "path": "art/unified/technologies/military.drill.webp",
+          "sha256": "f99c11f6b0d8bb3342e620fcebffdac2559fc57295939a8e5b6e4934015a1b20"
+        }
+      ],
+      [
+        {
+          "id": "military.horsemanship",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "military.horsemanship",
+          "side": "new",
+          "path": "art/unified/technologies/military.horsemanship.webp",
+          "sha256": "6fb1a17576e86fe42304fa10511032bad41140d12355b84f8b3be766f8473365"
+        },
+        {
+          "id": "military.breeding",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "military.breeding",
+          "side": "new",
+          "path": "art/unified/technologies/military.breeding.webp",
+          "sha256": "fb439b8146e601cbb5b5ffdc057f233b13dc937d09b8d3c50d1671e7dd694235"
+        }
+      ],
+      [
+        {
+          "id": "military.conscription",
+          "side": "old",
+          "path": "art/formal/tech-conscription.svg",
+          "sha256": "7c5f0c01fcac84d4988ff82d98435224e7b733355b14f8633ed9b4228344dddf"
+        },
+        {
+          "id": "military.conscription",
+          "side": "new",
+          "path": "art/unified/technologies/military.conscription.webp",
+          "sha256": "dac6441be0b5371563cc4819a0dc5ac0b3a77ebabb9f03e2f059258bd3b9c301"
+        },
+        {
+          "id": "logistics.transport",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "logistics.transport",
+          "side": "new",
+          "path": "art/unified/technologies/logistics.transport.webp",
+          "sha256": "77817c7325ce010c110b5d8ca2189b1fbd70f823e25c58af50fc323aab9e7fa3"
+        }
+      ],
+      [
+        {
+          "id": "logistics.auto",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "logistics.auto",
+          "side": "new",
+          "path": "art/unified/technologies/logistics.auto.webp",
+          "sha256": "d74288ab67267ae000f0a353fbf09e955c403a8709105fac4f4066560fb1fff8"
+        },
+        {
+          "id": "logistics.dispatch",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "logistics.dispatch",
+          "side": "new",
+          "path": "art/unified/technologies/logistics.dispatch.webp",
+          "sha256": "1d1ce554b5ef647ecb6eba6264dc857faac75771e324bee4fe590a9d37d8608f"
+        }
+      ],
+      [
+        {
+          "id": "logistics.baggage",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "logistics.baggage",
+          "side": "new",
+          "path": "art/unified/technologies/logistics.baggage.webp",
+          "sha256": "e77beda8e4c26c3e787a25a07876ff84cbf8c608eb2e7c7ae29c075de6de7636"
+        },
+        {
+          "id": "logistics.rations",
+          "side": "old",
+          "path": "art/catalog-technologies.webp",
+          "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+        },
+        {
+          "id": "logistics.rations",
+          "side": "new",
+          "path": "art/unified/technologies/logistics.rations.webp",
+          "sha256": "0a9ef7f267b81562c8d682b411bdf3a151e6cbed528a388decd7a1b1bf876fc5"
+        }
+      ],
+      [
+        {
+          "id": "engineering.masonry",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "engineering.masonry",
+          "side": "new",
+          "path": "art/unified/technologies/engineering.masonry.webp",
+          "sha256": "a3bdc445b09b1f2d73d431459d036689a1b444efc7bb4995bc08c727da162091"
+        },
+        {
+          "id": "engineering.architecture",
+          "side": "old",
+          "path": "art/formal/tech-engineering.svg",
+          "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+        },
+        {
+          "id": "engineering.architecture",
+          "side": "new",
+          "path": "art/unified/technologies/engineering.architecture.webp",
+          "sha256": "feb02ceaaca449de67da410bcba47065044b0f50eacd0f1e21033ac71e0a2bcb"
+        }
+      ]
+    ],
+    "sha256": "e3af4fd2a5d7c8a28491abd4aba30f529315e639b4195072765d2f2be2c3c5c7"
+  },
+  "technology-all-4": {
+    "headers": [
+      "舊卡／符號",
+      "新正式卡",
+      "舊卡／符號",
+      "新正式卡"
+    ],
+    "rows": [
+      [
+        {
+          "id": "siege.ram.1",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.ram.1",
+          "side": "new",
+          "path": "art/unified/technologies/siege.ram.1.webp",
+          "sha256": "21967aa66bc7846a846098e1eab473ca5f44f29387985cd38b396154e0502416"
+        },
+        {
+          "id": "siege.projection.1",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.projection.1",
+          "side": "new",
+          "path": "art/unified/technologies/siege.projection.1.webp",
+          "sha256": "9f2737769865be13e63e29f8dea71b88f88ecad07f332dc571bf291fb5960993"
+        }
+      ],
+      [
+        {
+          "id": "siege.frame.1",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.frame.1",
+          "side": "new",
+          "path": "art/unified/technologies/siege.frame.1.webp",
+          "sha256": "0ddda16358df3cd193d4d0f5a5e50ff8b77bee2a75ec39f89d26a5e8c150094d"
+        },
+        {
+          "id": "siege.ram.2",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.ram.2",
+          "side": "new",
+          "path": "art/unified/technologies/siege.ram.2.webp",
+          "sha256": "8e117188d30682d0763476d1c8546f379636947c5a5afbe91fe6750667212910"
+        }
+      ],
+      [
+        {
+          "id": "siege.projection.2",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.projection.2",
+          "side": "new",
+          "path": "art/unified/technologies/siege.projection.2.webp",
+          "sha256": "06a12e427b54fe531fdf38faff7d20c68448d95c7a4fb22f52d4dab6890d830e"
+        },
+        {
+          "id": "siege.frame.2",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "siege.frame.2",
+          "side": "new",
+          "path": "art/unified/technologies/siege.frame.2.webp",
+          "sha256": "9811291e444067d9f3b78ffef8521504e76e2e3f42180ef5220ed145c314b88a"
+        }
+      ],
+      [
+        {
+          "id": "administration.coordination",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "administration.coordination",
+          "side": "new",
+          "path": "art/unified/technologies/administration.coordination.webp",
+          "sha256": "02374a04cf943306a46136eaca64a3cc70700b3f4ad40769a57e8674df4e3fd0"
+        },
+        {
+          "id": "administration.register",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "administration.register",
+          "side": "new",
+          "path": "art/unified/technologies/administration.register.webp",
+          "sha256": "23f2079f4977a30d1f808a93a008faaf8fd8e574688bbf87113d9007cb34233e"
+        }
+      ],
+      [
+        {
+          "id": "elite.infantry",
+          "side": "old",
+          "path": "art/formal/tech-elite.svg",
+          "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+        },
+        {
+          "id": "elite.infantry",
+          "side": "new",
+          "path": "art/unified/technologies/elite.infantry.webp",
+          "sha256": "903bcfcafd8685dd908d2120a72d5f1117ba2a131c0c3d102d141c51fa7e5817"
+        },
+        {
+          "id": "elite.ranged",
+          "side": "old",
+          "path": "art/formal/tech-elite.svg",
+          "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+        },
+        {
+          "id": "elite.ranged",
+          "side": "new",
+          "path": "art/unified/technologies/elite.ranged.webp",
+          "sha256": "210511bba9bfddc26622401efafdffac96d439c6a92824eec596e2b48496aa5d"
+        }
+      ],
+      [
+        {
+          "id": "elite.cavalry",
+          "side": "old",
+          "path": "art/formal/tech-elite.svg",
+          "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+        },
+        {
+          "id": "elite.cavalry",
+          "side": "new",
+          "path": "art/unified/technologies/elite.cavalry.webp",
+          "sha256": "7ce7a937e81490e50d1e5d7bb3505ef5d6f56c571b931c44a1064511dd53a523"
+        },
+        {
+          "id": "elite.guard",
+          "side": "old",
+          "path": "art/formal/tech-elite.svg",
+          "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+        },
+        {
+          "id": "elite.guard",
+          "side": "new",
+          "path": "art/unified/technologies/elite.guard.webp",
+          "sha256": "b3d1135dd10f8e4461cb26aa5a087d75f6396d71a252b6379eb754432547752d"
+        }
+      ],
+      [
+        {
+          "id": "civilization.kaogong",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "civilization.kaogong",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.kaogong.webp",
+          "sha256": "7b13c12e1764667aae544af2897a05db7a2e8fe7a8c026b341c672a52f170cd4"
+        },
+        {
+          "id": "civilization.crossbow",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "civilization.crossbow",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.crossbow.webp",
+          "sha256": "fbec3e62594a577b57c66ad05c6815ce1402714a7c7118788e56fd4f68e379c0"
+        }
+      ]
+    ],
+    "sha256": "af1c4b95d084a859f0a844c466e75a27740590e429dbfe616a28cebc71bd4323"
+  },
+  "technology-all-5": {
+    "headers": [
+      "舊卡／符號",
+      "新正式卡",
+      "舊卡／符號",
+      "新正式卡"
+    ],
+    "rows": [
+      [
+        {
+          "id": "civilization.themes",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "civilization.themes",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.themes.webp",
+          "sha256": "318e16eabce68e8aba25084f0dedbeee518403c973196cf321d4bb451449e453"
+        },
+        {
+          "id": "civilization.imperial-wall",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "civilization.imperial-wall",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.imperial-wall.webp",
+          "sha256": "be4a07c2af6d1cecb0036cb3c00e870e1a73a370828d89be91cf2a2c6f1bc18d"
+        }
+      ],
+      [
+        {
+          "id": "civilization.knighthood",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "civilization.knighthood",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.knighthood.webp",
+          "sha256": "16d1822bed24e7ae3606a8fcd94eec380effd12b084cd298be997c3a18f6bb27"
+        },
+        {
+          "id": "civilization.charge",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "civilization.charge",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.charge.webp",
+          "sha256": "9f63717bf4c0e4c90e93efbdfbc8374311b220bac078c383e2462dad72e9b54a"
+        }
+      ],
+      [
+        {
+          "id": "civilization.archer-levy",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "civilization.archer-levy",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.archer-levy.webp",
+          "sha256": "2f1dab008cb97819f14ce472232ab1faf9b00c21f30bcfb860e777e22b64bf58"
+        },
+        {
+          "id": "civilization.warwolf",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "civilization.warwolf",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.warwolf.webp",
+          "sha256": "70bf45b4e943391be05fd86fa3665d2f0fbfb4e8a9595567e73d311d1d52f0fc"
+        }
+      ],
+      [
+        {
+          "id": "civilization.mobilization",
+          "side": "old",
+          "path": "art/formal/tech-conscription.svg",
+          "sha256": "7c5f0c01fcac84d4988ff82d98435224e7b733355b14f8633ed9b4228344dddf"
+        },
+        {
+          "id": "civilization.mobilization",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.mobilization.webp",
+          "sha256": "37bfe0c90303bad337fb81c3e52dd68347919dd8d2de33a1d6d4dba3ae4ac0a4"
+        },
+        {
+          "id": "civilization.sling",
+          "side": "old",
+          "path": "art/formal/tech-drill.svg",
+          "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+        },
+        {
+          "id": "civilization.sling",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.sling.webp",
+          "sha256": "745372f3834d81ad1c1246596549feb8ff94d7a0dcac80dc5b1e6c8b8562cb9a"
+        }
+      ],
+      [
+        {
+          "id": "civilization.nomadic",
+          "side": "old",
+          "path": "art/formal/tech-horse.svg",
+          "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+        },
+        {
+          "id": "civilization.nomadic",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.nomadic.webp",
+          "sha256": "597ad4e8d9a9916618ef2dca7b03b6e62fb94638ddc17c2ba646e8a2d2a0ad10"
+        },
+        {
+          "id": "civilization.swift-siege",
+          "side": "old",
+          "path": "art/formal/tech-siege.svg",
+          "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+        },
+        {
+          "id": "civilization.swift-siege",
+          "side": "new",
+          "path": "art/unified/technologies/civilization.swift-siege.webp",
+          "sha256": "1682af549f878ee115eb0c2bc6077d28069ee82e1e6c52b5f594b0f9a2677950"
+        }
+      ],
+      [
+        {
+          "id": "research.cooperation",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "research.cooperation",
+          "side": "new",
+          "path": "art/unified/technologies/research.cooperation.webp",
+          "sha256": "06b3c404a74beed475a0ecf93a3fe1c0ac19b9066067bc3ab02d43510faba07e"
+        },
+        {
+          "id": "modern.infantry-weapons",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.infantry-weapons",
+          "side": "new",
+          "path": "art/unified/technologies/modern.infantry-weapons.webp",
+          "sha256": "3249d8e18fea90affd432906ec724bcbb03a5556f5540a74f55dcf9cd8339177"
+        }
+      ],
+      [
+        {
+          "id": "modern.personal-protection",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.personal-protection",
+          "side": "new",
+          "path": "art/unified/technologies/modern.personal-protection.webp",
+          "sha256": "e425dd428c9fc5be7e5c08a6469a3939b11d4d3fa602cc677ba8d743082eae6e"
+        },
+        {
+          "id": "modern.composite-armor",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.composite-armor",
+          "side": "new",
+          "path": "art/unified/technologies/modern.composite-armor.webp",
+          "sha256": "0abdcce925cc5a93aa8e5d5e118e3b22e0a2464988ffe9bf2846f8d792605609"
+        }
+      ]
+    ],
+    "sha256": "3f98f7c55093ce2aa19357a8f4ab5517922e1467c5d36c8231ad9caf207681ad"
+  },
+  "technology-all-6": {
+    "headers": [
+      "舊卡／符號",
+      "新正式卡",
+      "舊卡／符號",
+      "新正式卡"
+    ],
+    "rows": [
+      [
+        {
+          "id": "modern.digital-fire-control",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.digital-fire-control",
+          "side": "new",
+          "path": "art/unified/technologies/modern.digital-fire-control.webp",
+          "sha256": "f7301ff637755938c1bdd4a422da0938a733df4afb4c2981b1964442f638fc3e"
+        },
+        {
+          "id": "modern.mechanized-logistics",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.mechanized-logistics",
+          "side": "new",
+          "path": "art/unified/technologies/modern.mechanized-logistics.webp",
+          "sha256": "e72406de9b3d93921f441d7ecfc977954c517d68be64665d82530a378fac603b"
+        }
+      ],
+      [
+        {
+          "id": "modern.supply-system",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.supply-system",
+          "side": "new",
+          "path": "art/unified/technologies/modern.supply-system.webp",
+          "sha256": "18256a0882a9eb2e99269e05d73451532fe589150bbe1c8b96cc2838bbd4f6f7"
+        },
+        {
+          "id": "modern.mobilization",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.mobilization",
+          "side": "new",
+          "path": "art/unified/technologies/modern.mobilization.webp",
+          "sha256": "625aaf4d626faf967e9eee7c69417c30e853df453a59e08255f97360c16052f1"
+        }
+      ],
+      [
+        {
+          "id": "modern.siege-engineering",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.siege-engineering",
+          "side": "new",
+          "path": "art/unified/technologies/modern.siege-engineering.webp",
+          "sha256": "b32568da4103b53dd45d21f07869f1086a38905dc72a6117fa63a0654e2982b9"
+        },
+        {
+          "id": "modern.data-link",
+          "side": "old",
+          "path": "art/formal/tech-cooperation.svg",
+          "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+        },
+        {
+          "id": "modern.data-link",
+          "side": "new",
+          "path": "art/unified/technologies/modern.data-link.webp",
+          "sha256": "4981880a4ad9132a07ec5c45af07af05c4ac8cb3521e8f28b4ce0e87985335c3"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_zhongguo.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_zhongguo.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_zhongguo.exclusive.webp",
+          "sha256": "655f94e048a0ed5e326f21bacea3cbbf7b4af45dec71e93b60ca65e0e1d107e2"
+        },
+        {
+          "id": "modern.civ_byzantium.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_byzantium.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_byzantium.exclusive.webp",
+          "sha256": "a4a26d829814bff58d8dfbace6dca3be98457f557f773432e335e37def23eabd"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_frankia.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_frankia.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_frankia.exclusive.webp",
+          "sha256": "d4cd2c4eadfdca3be6d215b81490c4dd17a64eab93ad9ec5500146174fb52e3e"
+        },
+        {
+          "id": "modern.civ_britannia.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_britannia.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_britannia.exclusive.webp",
+          "sha256": "c96318c4cf862375b5a5c7eda83093c145cdbcbb70287c644bc06ce954c4833d"
+        }
+      ],
+      [
+        {
+          "id": "modern.civ_japan.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_japan.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_japan.exclusive.webp",
+          "sha256": "679bc00661bb73f64a4d2813c15196174062a2130b390c1a2001e2505b8e4745"
+        },
+        {
+          "id": "modern.civ_mongolia.exclusive",
+          "side": "old",
+          "path": "art/formal/tech-administration.svg",
+          "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+        },
+        {
+          "id": "modern.civ_mongolia.exclusive",
+          "side": "new",
+          "path": "art/unified/technologies/modern.civ_mongolia.exclusive.webp",
+          "sha256": "f556c2870640367cb1fb5a8c95f0c23bc98ff942a98fd7750568e9c1c8a0cf7e"
+        }
+      ]
+    ],
+    "sha256": "4648f0dc0fe6c35631532fba7a3c7529885ea1c458fdd6f13256f5bc9427ccea"
+  },
+  "building-states-1": {
+    "headers": [
+      "完工",
+      "施工／升級中",
+      "建築資訊",
+      "建築詳情"
+    ],
+    "rows": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "sha256": "426e9b4d1443577b0b2df76096bfe2612f131fef6020ab708265bb71c7b1b465"
+  },
+  "building-states-2": {
+    "headers": [
+      "完工",
+      "施工／升級中",
+      "建築資訊",
+      "建築詳情"
+    ],
+    "rows": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "sha256": "bdf348577119a1347afc9d56be3258441d1dc561d0fda3dfe7fb3d3675a7cc69"
+  },
+  "six-civilizations-four-ages": {
+    "headers": [
+      "黑暗",
+      "封建",
+      "城堡",
+      "舊帝王（沿用城堡）",
+      "新帝王"
+    ],
+    "rows": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "sha256": "355d798a1b60cff4fd2877ec24a432176efd616d11f92a6860bfd2587cf50188"
+  },
+  "priority-before-after": {
+    "headers": [
+      "已確認母圖",
+      "舊正式圖",
+      "退件候選",
+      "修正候選"
+    ],
+    "rows": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "sha256": "a5ae2d31e1d116adccca8c1d2b15cc3b049f0fb32dad3274b41ea55c49c5d799"
+  }
+}
