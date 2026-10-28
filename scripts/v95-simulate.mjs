@@ -20,6 +20,14 @@ economy=economy.replace('export function settleCity(', 'function __v95_original_
  return __v95_original_settleCity(w,c,at,legacy);
 }\n`;
 reducer=reducer.replace('function advanceOneEvent(', 'function __v95_original_advanceOneEvent(')+`\nfunction advanceOneEvent(...args){const e=args[1].peek();if(globalThis.__v95metrics){const m=globalThis.__v95metrics;m.events++;m.eventsByType[e.type]=(m.eventsByType[e.type]??0)+1;}return __v95_original_advanceOneEvent(...args);}\n`;
+// A reducer draft can settle before later rejecting a command. Discard those
+// observations along with the draft, just as the real ledger does.
+reducer=reducer.replace('function submitOrderDraft(', 'function __v95_original_submitOrderDraft(')+`\nfunction submitOrderDraft(...args){
+ const m=globalThis.__v95metrics,before=m?structuredClone(m):null;
+ const result=__v95_original_submitOrderDraft(...args);
+ if(m&&result.ack?.status!=='committed'){const discarded=Math.max(0,m.settlements-before.settlements);Object.assign(m,before);m.discardedDraftSettlements=(m.discardedDraftSettlements??0)+discarded;}
+ return result;
+}\n`;
 fs.writeFileSync(economyFile,economy);fs.writeFileSync(reducerFile,reducer);
 const {createFormalWorld}=await load('generator'),{enableAutonomy}=await load('autonomy'),{advanceFormal}=await load('reducer'),{storageCapacity}=await load('catalogB3');
 const zero=()=>({food:0,wood:0,stone:0,gold:0});
@@ -36,4 +44,4 @@ for(let hour=1;hour<=720;hour++){
   snapshots.push(row);fs.writeFileSync(path.join(out,hour+'h.json'),JSON.stringify(row,null,2));
  }
 }
-fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({source:JSON.parse(fs.readFileSync(path.join(compiled,'source-metadata.json'))),snapshots,limitations:['single seed, one continuous 99 AI world at 168/360/720h checkpoints','Node CPU/memory; not physical-phone FPS','offering and overflow measured from actual settlement intervals; no extra income applied']},null,2));
+fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({source:JSON.parse(fs.readFileSync(path.join(compiled,'source-metadata.json'))),snapshots,limitations:['single seed, one continuous 99 AI world at 168/360/720h checkpoints','Node CPU/memory; not physical-phone FPS','offering and overflow observe only committed settlement intervals; rejected command draft observations are rolled back; no extra income applied']},null,2));

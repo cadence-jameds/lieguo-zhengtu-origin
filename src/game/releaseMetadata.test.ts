@@ -6,7 +6,7 @@ import {execFileSync} from 'node:child_process';
 import {createMetadata,checkNotes,nextVersion,playableChanges,validateNote} from '../../scripts/release-metadata.mjs';
 import {readmeReleaseAssets} from '../../scripts/readme-release.mjs';
 const dirs:string[]=[];
-const git=(root:string,...args:string[])=>execFileSync('git',['-C',root,...args],{encoding:'utf8',env:{...process.env,GIT_AUTHOR_DATE:'2026-10-16T03:00:00Z',GIT_COMMITTER_DATE:'2026-10-16T03:00:00Z'}}).trim();
+const git=(root:string,...args:string[])=>execFileSync('git',['-C',root,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],env:{...process.env,GIT_AUTHOR_DATE:'2026-10-16T03:00:00Z',GIT_COMMITTER_DATE:'2026-10-16T03:00:00Z'}}).trim();
 function put(root:string,p:string,value:string){mkdirSync(dirname(join(root,p)),{recursive:true});writeFileSync(join(root,p),value);}
 function commit(root:string,files:Record<string,string>){for(const [p,v] of Object.entries(files))put(root,p,v);git(root,'add','--',...Object.keys(files));git(root,'commit','-qm','fixture');return git(root,'rev-parse','HEAD');}
 const note={title:'城市操作改善',notes:['修正城市操作畫面的更新顯示，保留原戰役進度。']};
