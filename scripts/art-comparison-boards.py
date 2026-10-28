@@ -7,14 +7,16 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'docs/art-unification/boards'; OUT.mkdir(parents=True, exist_ok=True)
 font_path='/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
 font=ImageFont.truetype(font_path,14); title=ImageFont.truetype(font_path,19)
-current=json.loads((ROOT/'work/art-audit/coverage.json').read_text())
-before=json.loads((ROOT/'work/baseline-art.json').read_text())
+current_path=ROOT/'work/art-audit/coverage.json'
+if not current_path.exists(): current_path=ROOT/'docs/art-unification/coverage.json'
+current=json.loads(current_path.read_text())
+before=json.loads((ROOT/'docs/art-unification/before-map.json').read_text())
 units={x['id']:x for x in current['units']}; old_units={x['id']:x for x in before['units']}
 techs={x['id']:x for x in current['technologies']}; old_techs={x['id']:x for x in before['technologies']}
 
 def picture(spec):
     file=ROOT/'public'/spec['path']
-    if file.suffix=='.svg': file=ROOT/'work/old-symbols'/(file.stem+'.png')
+    if file.suffix=='.svg': file=ROOT/'docs/art-source/unification/references/old-symbols'/(file.stem+'.png')
     image=Image.open(file).convert('RGBA')
     if spec.get('displayCrop'):
         b=spec['displayCrop'];image=image.crop((b['x'],b['y'],b['x']+b['w'],b['y']+b['h']))
@@ -55,10 +57,9 @@ for line in current['techLines']:
     rows.append(cells)
 for page in range(2):board('technology-tiers-'+str(page+1),['舊 I','舊 II','舊 III','新 I','新 II','新 III'],rows[page*6:(page+1)*6],178,220)
 
-catalog=json.loads((ROOT/'work/formal-catalogs.json').read_text())['technologies']
 rows=[]
 for civ in list(dict.fromkeys(c['civ'] for c in current['cities'])):
-    pair=sorted([t for t in catalog.values() if t['civilizationId']==civ and t['category']=='civilization'],key=lambda t:t['age'])
+    pair=sorted([t for t in current['technologies'] if t.get('civilizationId')==civ and t['category']=='civilization'],key=lambda t:t['age'])
     rows.append([(t['name'],picture(source[t['id']])) for source in [old_techs,techs] for t in pair])
 board('civilization-technology-pairs',['舊文明科技 I','舊文明科技 II','新文明科技 I','新文明科技 II'],rows,225,245)
 

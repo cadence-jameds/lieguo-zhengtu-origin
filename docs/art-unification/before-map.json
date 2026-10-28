@@ -1,0 +1,1039 @@
+{
+  "units": [
+    {
+      "id": "militia",
+      "sheet": "units",
+      "index": 0,
+      "path": "art/catalog-units.webp",
+      "origin": "reused",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "spearman",
+      "sheet": "units",
+      "index": 1,
+      "path": "art/catalog-units.webp",
+      "origin": "reused",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "archer",
+      "sheet": "units",
+      "index": 2,
+      "path": "art/catalog-units.webp",
+      "origin": "reused",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "skirmisher",
+      "path": "art/formal/unit-skirmisher.webp",
+      "origin": "new",
+      "sha256": "f27dba9354ebe0f8953f3d2d96aff68be1460b59c8b9792831409c3c0862a465"
+    },
+    {
+      "id": "scout",
+      "sheet": "units",
+      "index": 5,
+      "path": "art/catalog-units.webp",
+      "origin": "reused",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "light-cavalry",
+      "sheet": "units",
+      "index": 3,
+      "badge": "輕騎",
+      "path": "art/catalog-units.webp",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "knight",
+      "sheet": "units",
+      "index": 3,
+      "badge": "騎士",
+      "path": "art/catalog-units.webp",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "ram",
+      "sheet": "units",
+      "index": 4,
+      "path": "art/catalog-units.webp",
+      "origin": "reused",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "catapult",
+      "path": "art/formal/unit-catapult.webp",
+      "origin": "new",
+      "sha256": "889e7ce3b6ce4e7e0a0f0ce4c9aedfbd30f930780ca6798668c1bd913ae7dfc2"
+    },
+    {
+      "id": "baggage",
+      "sheet": "technologies",
+      "index": 3,
+      "badge": "輜重",
+      "path": "art/catalog-technologies.webp",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "guard.civ_zhongguo",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 0,
+      "origin": "reused",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "guard.civ_byzantium",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 1,
+      "origin": "reused",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "guard.civ_frankia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 2,
+      "origin": "reused",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "guard.civ_britannia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 3,
+      "origin": "reused",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "guard.civ_japan",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 4,
+      "origin": "reused",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "guard.civ_mongolia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 5,
+      "origin": "reused",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "swordsman",
+      "sheet": "units",
+      "index": 0,
+      "path": "art/catalog-units.webp",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "pikeman",
+      "sheet": "units",
+      "index": 1,
+      "path": "art/catalog-units.webp",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "crossbowman",
+      "sheet": "units",
+      "index": 2,
+      "path": "art/catalog-units.webp",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "heavy-skirmisher",
+      "path": "art/formal/unit-skirmisher.webp",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "f27dba9354ebe0f8953f3d2d96aff68be1460b59c8b9792831409c3c0862a465"
+    },
+    {
+      "id": "ranger",
+      "sheet": "units",
+      "index": 3,
+      "badge": "ELITE · 輕騎",
+      "path": "art/catalog-units.webp",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "heavy-knight",
+      "sheet": "units",
+      "index": 3,
+      "badge": "ELITE · 騎士",
+      "path": "art/catalog-units.webp",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "elite.guard.civ_zhongguo",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 0,
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "elite.guard.civ_byzantium",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 1,
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "elite.guard.civ_frankia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 2,
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "elite.guard.civ_britannia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 3,
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "elite.guard.civ_japan",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 4,
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "elite.guard.civ_mongolia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 5,
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "modern.militia",
+      "sheet": "units",
+      "index": 0,
+      "path": "art/catalog-units.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.spearman",
+      "sheet": "units",
+      "index": 1,
+      "path": "art/catalog-units.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.archer",
+      "sheet": "units",
+      "index": 2,
+      "path": "art/catalog-units.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.skirmisher",
+      "path": "art/formal/unit-skirmisher.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "f27dba9354ebe0f8953f3d2d96aff68be1460b59c8b9792831409c3c0862a465"
+    },
+    {
+      "id": "modern.scout",
+      "sheet": "units",
+      "index": 5,
+      "path": "art/catalog-units.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.light-cavalry",
+      "sheet": "units",
+      "index": 3,
+      "badge": "現代 · 輕騎",
+      "path": "art/catalog-units.webp",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.knight",
+      "sheet": "units",
+      "index": 3,
+      "badge": "現代 · 騎士",
+      "path": "art/catalog-units.webp",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.ram",
+      "sheet": "units",
+      "index": 4,
+      "path": "art/catalog-units.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "261e4d9dba26a25bc61d8ceb20395b99f572c617022049bdc84b22b983deb832"
+    },
+    {
+      "id": "modern.catapult",
+      "path": "art/formal/unit-catapult.webp",
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "889e7ce3b6ce4e7e0a0f0ce4c9aedfbd30f930780ca6798668c1bd913ae7dfc2"
+    },
+    {
+      "id": "modern.baggage",
+      "sheet": "technologies",
+      "index": 3,
+      "badge": "現代 · 輜重",
+      "path": "art/catalog-technologies.webp",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "modern.guard.civ_zhongguo",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 0,
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "modern.guard.civ_byzantium",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 1,
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "modern.guard.civ_frankia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 2,
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "modern.guard.civ_britannia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 3,
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "modern.guard.civ_japan",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 4,
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    },
+    {
+      "id": "modern.guard.civ_mongolia",
+      "path": "art/catalog-guards.webp",
+      "sheet": "guards",
+      "index": 5,
+      "badge": "現代",
+      "origin": "derived",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "blacksmith.melee.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.ranged.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.infantry-armor.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.ranged-armor.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.cavalry-armor.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.melee.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.ranged.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.infantry-armor.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.ranged-armor.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.cavalry-armor.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 2,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.melee.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.ranged.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.infantry-armor.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.ranged-armor.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "blacksmith.cavalry-armor.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 5,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.food.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 0,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.wood.1",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 1,
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.stone.1",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+    },
+    {
+      "id": "economy.gold.1",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "economy.food.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 0,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.wood.2",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 1,
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.stone.2",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+    },
+    {
+      "id": "economy.gold.2",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "economy.food.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 4,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.wood.3",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 1,
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "economy.stone.3",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+    },
+    {
+      "id": "economy.gold.3",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "badge": "III",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "intel.watch",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived",
+      "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+    },
+    {
+      "id": "intel.patrol",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived",
+      "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+    },
+    {
+      "id": "intel.analysis",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived",
+      "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+    },
+    {
+      "id": "intel.network",
+      "path": "art/formal/tech-intel.svg",
+      "category": "intel",
+      "origin": "derived",
+      "sha256": "bc82c38eae8d74814a8b6d217950f906c695ec77a4f6e792abde648a0022455e"
+    },
+    {
+      "id": "military.drill",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "origin": "derived",
+      "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+    },
+    {
+      "id": "military.horsemanship",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "origin": "derived",
+      "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+    },
+    {
+      "id": "military.breeding",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "origin": "derived",
+      "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+    },
+    {
+      "id": "military.conscription",
+      "path": "art/formal/tech-conscription.svg",
+      "category": "conscription",
+      "origin": "derived",
+      "sha256": "7c5f0c01fcac84d4988ff82d98435224e7b733355b14f8633ed9b4228344dddf"
+    },
+    {
+      "id": "logistics.transport",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "logistics.auto",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "logistics.dispatch",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "logistics.baggage",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "logistics.rations",
+      "path": "art/catalog-technologies.webp",
+      "sheet": "technologies",
+      "index": 3,
+      "category": "logistics",
+      "origin": "derived",
+      "sha256": "ce1556c17c73483ede7a0ddcc16207938e7ec790bb4b547a23421f5a9d6f67f3"
+    },
+    {
+      "id": "engineering.masonry",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "origin": "derived",
+      "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+    },
+    {
+      "id": "engineering.architecture",
+      "path": "art/formal/tech-engineering.svg",
+      "category": "engineering",
+      "origin": "derived",
+      "sha256": "9b90557f75d1e8acc9d397332a8ab639208f03d9fee731772a717307bda97af4"
+    },
+    {
+      "id": "siege.ram.1",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "siege.projection.1",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "siege.frame.1",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "I",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "siege.ram.2",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "siege.projection.2",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "siege.frame.2",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "badge": "II",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "administration.coordination",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "administration.register",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "elite.infantry",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+    },
+    {
+      "id": "elite.ranged",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+    },
+    {
+      "id": "elite.cavalry",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+    },
+    {
+      "id": "elite.guard",
+      "path": "art/formal/tech-elite.svg",
+      "category": "elite",
+      "badge": "ELITE",
+      "origin": "derived",
+      "sha256": "7b7e27a6788138de9a31372d93eb04d1bb1263c2880d8cd6cd2f725fc2e86003"
+    },
+    {
+      "id": "civilization.kaogong",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_zhongguo",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "civilization.crossbow",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "civ": "civ_zhongguo",
+      "origin": "derived",
+      "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+    },
+    {
+      "id": "civilization.themes",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_byzantium",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "civilization.imperial-wall",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_byzantium",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "civilization.knighthood",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "civ": "civ_frankia",
+      "origin": "derived",
+      "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+    },
+    {
+      "id": "civilization.charge",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "civ": "civ_frankia",
+      "origin": "derived",
+      "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+    },
+    {
+      "id": "civilization.archer-levy",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "civ": "civ_britannia",
+      "origin": "derived",
+      "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+    },
+    {
+      "id": "civilization.warwolf",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "civ": "civ_britannia",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "civilization.mobilization",
+      "path": "art/formal/tech-conscription.svg",
+      "category": "conscription",
+      "civ": "civ_japan",
+      "origin": "derived",
+      "sha256": "7c5f0c01fcac84d4988ff82d98435224e7b733355b14f8633ed9b4228344dddf"
+    },
+    {
+      "id": "civilization.sling",
+      "path": "art/formal/tech-drill.svg",
+      "category": "drill",
+      "civ": "civ_japan",
+      "origin": "derived",
+      "sha256": "524160586608ec52a6e1c83ef4940bab89ca2866fd94d8ffcfff464531705117"
+    },
+    {
+      "id": "civilization.nomadic",
+      "path": "art/formal/tech-horse.svg",
+      "category": "horse",
+      "civ": "civ_mongolia",
+      "origin": "derived",
+      "sha256": "ac31c1fccb83947f3e530d71e351dc9a63eff5320b7c9e6bbe3f07f52d8c47fe"
+    },
+    {
+      "id": "civilization.swift-siege",
+      "path": "art/formal/tech-siege.svg",
+      "category": "siege",
+      "civ": "civ_mongolia",
+      "origin": "derived",
+      "sha256": "039b97357091edfc5621d9aaaca55096bb0701b222fc38dd4424d57077e95734"
+    },
+    {
+      "id": "research.cooperation",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.infantry-weapons",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.personal-protection",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.composite-armor",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.digital-fire-control",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.mechanized-logistics",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.supply-system",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.mobilization",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.siege-engineering",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.data-link",
+      "path": "art/formal/tech-cooperation.svg",
+      "category": "cooperation",
+      "origin": "derived",
+      "sha256": "f5738739c1f61c9bb623f8562f320cf042437a7ae512a37a1d6c4d6add34ccc0"
+    },
+    {
+      "id": "modern.civ_zhongguo.exclusive",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_zhongguo",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "modern.civ_byzantium.exclusive",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_byzantium",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "modern.civ_frankia.exclusive",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_frankia",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "modern.civ_britannia.exclusive",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_britannia",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "modern.civ_japan.exclusive",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_japan",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    },
+    {
+      "id": "modern.civ_mongolia.exclusive",
+      "path": "art/formal/tech-administration.svg",
+      "category": "administration",
+      "civ": "civ_mongolia",
+      "origin": "derived",
+      "sha256": "dd9f3112183420f9aa571379a2f97731c5e0ed7c84aa7f2d1f3486ccdc0a6b5c"
+    }
+  ]
+}

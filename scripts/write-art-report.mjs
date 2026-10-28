@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 const root='docs/art-unification';mkdirSync(root,{recursive:true});
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
 const report=read('work/art-audit/coverage.json'),assets=read('docs/art-source/unification/assets.json'),batches=read('docs/art-source/unification/batches.json');
-const before=read('work/baseline-art.json');
+const before=read(root+'/before-map.json');
 for(const item of [...before.units,...before.technologies])item.sha256=createHash('sha256').update(readFileSync('public/'+item.path)).digest('hex');
 writeFileSync(root+'/before-map.json',JSON.stringify(before,null,2)+'\n');
 copyFileSync('work/art-audit/coverage.json',root+'/coverage.json');

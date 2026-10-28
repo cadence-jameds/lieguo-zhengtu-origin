@@ -1,0 +1,20 @@
+{
+  "scope": "Local headless Chromium only. Eager decodes all images on each review screen; does not measure physical-device startup or offline-install speed.",
+  "browser": "154.0.8037.57",
+  "cases": 70,
+  "loadAndEagerDecodeMs": {
+    "min": 588,
+    "median": 1010.0,
+    "max": 2693
+  },
+  "newRuntimeFiles": 199,
+  "newDerivedImageBytes": 17043180,
+  "composedAtlasBytes": 584050,
+  "largestNewImageBytes": 1946330,
+  "buildPrecache": {
+    "entries": 392,
+    "KiB": 72178.72
+  },
+  "physicalPhone": "待驗",
+  "slowNetwork": "待驗"
+}

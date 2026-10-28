@@ -17,7 +17,7 @@ try{
  const hash=path=>existsSync('public/'+path)?createHash('sha256').update(readFileSync('public/'+path)).digest('hex'):null;
  const inspect=spec=>({...spec,...(spec.sheet==='units'||spec.sheet==='guards'?{displayCrop:a.armyAtlasBounds(spec.sheet,spec.index??0)}:{}),exists:existsSync('public/'+spec.path),sha256:hash(spec.path)});
  const units=Object.values(UNIT_CATALOG).map(u=>({id:u.id,name:u.name,civilization:u.civilizationId,era:u.era??'traditional',...inspect(a.unitArt(u.id))}));
- const technologies=Object.values(TECH_CATALOG).map(t=>({id:t.id,name:t.name,scope:t.scope,...inspect(a.techArt(t.id))}));
+ const technologies=Object.values(TECH_CATALOG).map(t=>({id:t.id,name:t.name,scope:t.scope,category:t.category,age:t.age,civilizationId:t.civilizationId,...inspect(a.techArt(t.id))}));
  const buildings=[];
  for(const [civ,alias] of Object.entries(a.CIV_ART))for(const age of [0,1,2,3])for(const id of Object.keys(BUILDING_CATALOG)){
   const complete=r.buildingImagePath(id,alias,age),construction=r.buildingImagePath(id,alias,age,true);
