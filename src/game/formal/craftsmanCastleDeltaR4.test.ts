@@ -17,7 +17,7 @@ it.each([1,10,25] as const)('D5 both civilizations and player/AI use zero-resour
  for(const same of [false,true])for(const ai of [false,true]){
   let w=prepared(same,ai);w.speed=speed;w.cities[0].stock=zeroResources();const owner=w.cities[0].ownerFactionId,craft=w.extinction!.craftsmen[0],civ=craft.civilizationId;
   const command=order(w,payload(w),undefined,owner),sent=submitFormalOrder(w,command);expect(sent.ack?.status,sent.ack?.reason).toBe('committed');w=sent.world;
-  const job=w.cities[0].economy!.construction[0];expect(w.cities[0].stock).toEqual(zeroResources());expect(job.paidResources).toEqual(zeroResources());expect(job.durationMs).toBe(buildingDuration('castle',1,5));expect(job.castleCivilizationId).toBe(civ);expect(w.extinction!.craftsmen).toHaveLength(1);
+  const job=w.cities[0].economy!.construction[0];expect(w.cities[0].stock).toEqual(zeroResources());expect(job.paidResources).toEqual(zeroResources());expect(job.durationMs).toBe(buildingDuration('castle',1,8));expect(job.castleCivilizationId).toBe(civ);expect(w.extinction!.craftsmen).toHaveLength(1);
   expect(submitFormalOrder(w,command)).toMatchObject({world:w,ack:{status:'duplicate'}});
   w=(await decodeSave(await encodeSave(w))).world;const before=advanceFormal(w,job.startsAt+job.durationMs-1);expect(before.world.cities[0].buildings.castle).toBe(0);
   const done=advanceFormal(before.world,job.startsAt+job.durationMs);w=done.world;expect(w.cities[0].buildings.castle).toBe(1);expect(w.cities[0].castleCivilizationId).toBe(civ);expect(w.extinction!.craftsmen).toHaveLength(0);expect(w.factions.filter(f=>f.role==='ai')).toHaveLength(99);expect(advanceFormal(w,w.time).world).toBe(w);
@@ -37,7 +37,7 @@ it.each([false,true])('D5 active/queued cancellation refunds zero and releases e
  w=issue(w,payload(w)).world;expect(w.cities[0].economy!.construction.filter(j=>j.castleCivilizationId)).toHaveLength(1);
 });
 it.each(['age','building','castle','busy'] as const)('D5 resource waiver does not bypass %s restrictions',why=>{
- let w=prepared(true);if(why==='age')w.factions[0].age=1;if(why==='building')w.cities[0].buildings.academy=1;if(why==='castle')build(w.cities[0],'castle',1);if(why==='busy')w=issue(w,payload(w)).world;
+ let w=prepared(true);if(why==='age')w.factions[0].age=1;if(why==='building')w.cities[0].buildings.center=7;if(why==='castle')build(w.cities[0],'castle',1);if(why==='busy')w=issue(w,payload(w)).world;
  const before=JSON.stringify(w),t=submitFormalOrder(w,order(w,payload(w)));expect(t.ack?.status).toBe('rejected');expect(JSON.stringify(w)).toBe(before);
 });
 it.each([false,true])('D5 capture cancels free castle even when conqueror has matching civilization; same=%s',same=>{

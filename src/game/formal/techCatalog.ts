@@ -372,7 +372,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田 +3%（累計 +3%）",
     "status": "CALIBRATE"
   },
   {
@@ -395,7 +395,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田 +3%（累計 +3%）",
     "status": "CALIBRATE"
   },
   {
@@ -418,7 +418,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田 +3%（累計 +3%）",
     "status": "CALIBRATE"
   },
   {
@@ -441,7 +441,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田 +3%（累計 +3%）",
     "status": "CALIBRATE"
   },
   {
@@ -466,7 +466,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +5%（累計 +8%）",
     "status": "CALIBRATE"
   },
   {
@@ -491,7 +491,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +5%（累計 +8%）",
     "status": "CALIBRATE"
   },
   {
@@ -516,7 +516,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +5%（累計 +8%）",
     "status": "CALIBRATE"
   },
   {
@@ -541,7 +541,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +5%（累計 +8%）",
     "status": "CALIBRATE"
   },
   {
@@ -566,7 +566,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +10%（累計 +18%）",
     "status": "CALIBRATE"
   },
   {
@@ -591,7 +591,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +10%（累計 +18%）",
     "status": "CALIBRATE"
   },
   {
@@ -616,7 +616,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +10%（累計 +18%）",
     "status": "CALIBRATE"
   },
   {
@@ -641,7 +641,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "traditional",
     "category": "general",
-    "effect": "+3% per tier",
+    "effect": "對應資源田再 +10%（累計 +18%）",
     "status": "CALIBRATE"
   },
   {

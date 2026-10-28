@@ -45,7 +45,7 @@ export function applyMilitaryCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,p:
  let u=UNIT_CATALOG[p.unitId];requireRule(u,'兵種不存在。');
  const elite=ELITE_VARIANTS[u.id]&&UNIT_CATALOG[ELITE_VARIANTS[u.id]];if(elite&&f.techIds.includes(elite.eliteTech!)&&c.economy.milestones.includes(elite.milestone))u=elite;
  requireRule(!isModernUnit(u.id)||modernUnitAuthorized(f,u.id),'需要完整現代軍事資格。');requireRule((isModernUnit(u.id)||(f.age??0)>=u.age)&&buildingLevel(c,u.producer)>=1,'時代或兵種生產建築不足。');requireRule(!u.civilizationId||u.civilizationId===(c.castleCivilizationId??f.civilizationId),'此城堡無外文明生產資格。');if(u.eliteTech)requireRule(f.techIds.includes(u.eliteTech)&&c.economy.milestones.includes(u.milestone),'該城市尚未取得精銳生產資格。');
- requireRule(m.queue.length<QUEUE_CAPACITY,'部隊訓練已達 5 項上限。');
+ requireRule(m.queue.length<QUEUE_CAPACITY,`部隊訓練已達 ${QUEUE_CAPACITY} 項上限。`);
  const end=(l:number)=>Math.max(w.time,...m.queue.filter(j=>j.lane===l).map(j=>j.nextAt+(j.remaining-1)*j.durationMs));
  const lane=p.lane??(c.economy.milestones.includes(20000)&&end(1)<end(0)?1:0);requireRule(lane===0||c.economy.milestones.includes(20000),'尚未取得第二軍事佇列。');const population=u.population*p.count;requireRule(Number.isSafeInteger(population)&&c.population>=population,'徵兵人口不足。');requireRule(c.housing>=c.population,'住房不足，請先改善住房。');
  const unitCost=unitRecruitCost(w,c,u),cost={...unitCost};for(const r of resourceKeys)cost[r]*=p.count;spend(c,cost);c.population-=population;

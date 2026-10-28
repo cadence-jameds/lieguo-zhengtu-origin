@@ -9,6 +9,8 @@ export type SpecBuilding={id:string;name:string;line:number;age:number;buildings
 export type SpecTech={id:string;name:string;line:number;age:number;buildings:Record<string,number>;cost:Resources;baseDurationMs:number;milestone:number;civilizationId:string|null;category:string;scope:string;effect:string;prerequisites?:string[]};
 export type SpecUnit={id:string;name:string;line:number;age:number;producer:string;cost:Resources;population:number;upkeepPerHour:number;baseDurationMs:number;carry:number;secondsPerTile:number;civilizationId:string|null;eliteTech:string|null;milestone:number;hp?:number;attack?:number;meleeDefense?:number;rangedDefense?:number;attackIntervalSeconds?:number;baseId?:string};
 export const V85={...reference,buildings:reference.buildings as SpecBuilding[],techs:reference.techs as unknown as SpecTech[],units:reference.units as SpecUnit[]};
+// Independent, approved v95 overrides for current trial setup; raw v85 provenance stays intact.
+export const V95_BUILDING_PREREQUISITES:Record<string,Record<string,number>>={wall:{center:1},castle:{townhall:5,center:8},workshop:{academy:8,center:8}};
 export type Comparison={label:string;expected:unknown;actual:unknown;status:'match'|'different'|'unverified'|'deferred';note?:string};
 export type AuditItem={id:string;kind:'building'|'tech'|'unit'|'age'|'field'|'system';target:string;name:string;line:number;checks:Comparison[];dataMatches:boolean;effectNote:string};
 const equal=(a:unknown,b:unknown):boolean=>typeof a==='number'&&typeof b==='number'?Math.abs(a-b)<1e-7:a&&b&&typeof a==='object'&&typeof b==='object'?Object.keys(a).length===Object.keys(b).length&&Object.entries(a).every(([k,v])=>equal(v,(b as Record<string,unknown>)[k])):a===b;
@@ -54,8 +56,8 @@ export function formulaCatalog():Comparison[]{
 export function productionTrace(w:FormalWorld,c:FormalCity){
  const f=w.factions.find(f=>f.id===c.ownerFactionId)!,actual=productionPerHour(w,c);
  return (['food','wood','stone','gold'] as const).map(resource=>{
-  const fields=c.fields!.filter(p=>p.resource===resource),base=fields.reduce((sum,p)=>sum+V85.fieldProduction[p.level],0),building=({food:'mill',wood:'lumbermill',stone:'masonry',gold:'mint'} as const)[resource],lv=c.buildings[building]??0,tier=[1,2,3].filter(t=>f.techIds.includes('economy.'+resource+'.'+t)).length;
-  const expected=base*(1+lv*.04)*(1+tier*.03);return {...cmp(resource+' 正常田產／世界時',expected,actual[resource]),formula:fields.map(p=>'Lv'+p.level+'='+V85.fieldProduction[p.level]).join(' + ')+' → '+base+' × '+(1+lv*.04)+' × '+(1+tier*.03),integrationMultiplier:c.integrationWorkHours?0.4:1};
+  const fields=c.fields!.filter(p=>p.resource===resource),base=fields.reduce((sum,p)=>sum+V85.fieldProduction[p.level],0),building=({food:'mill',wood:'lumbermill',stone:'masonry',gold:'mint'} as const)[resource],lv=c.buildings[building]??0,techBonus=[.03,.05,.10].reduce((sum,bonus,i)=>sum+(f.techIds.includes('economy.'+resource+'.'+(i+1))?bonus:0),0);
+  const expected=base*(1+lv*.04)*(1+techBonus);return {...cmp(resource+' 正常田產／世界時',expected,actual[resource]),formula:fields.map(p=>'Lv'+p.level+'='+V85.fieldProduction[p.level]).join(' + ')+' → '+base+' × '+(1+lv*.04)+' × '+(1+techBonus),integrationMultiplier:c.integrationWorkHours?0.4:1};
  });
 }
 export function constructionTrace(kind:string,level:number,center:number,speed:number){const d=V85.buildings.find(d=>d.id===kind)!;const available=Object.hasOwn(BUILDING_CATALOG,kind),base=d.levels[level-1].durationMs,expected=kind==='center'?base:Math.round(base*.964**(center-1));return {cost:cmp('成本',specCost(d.baseCost,d.growth,level),available?buildingCost(kind as BuildingKind,level):null),time:cmp('世界工期 ms',expected,available?buildingDuration(kind as BuildingKind,level,center):null),formula:kind==='center'?'中心表已含升級前加速，不再乘一次':base+' × 0.964^('+center+'−1) = '+expected,realSeconds:expected/speed/1000};}

@@ -11,7 +11,7 @@ const mode = process.argv[2] ?? 'full';
 if (!['full', 'r3', 'smoke'].includes(mode)) throw new Error('Expected full, r3 or smoke.');
 if (!existsSync(join(root, 'node_modules/vitest/vitest.mjs'))) throw new Error('Run npm ci first.');
 const temporary = mkdtempSync(join(tmpdir(), 'lieguo-verification-'));
-const tracked = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean);
+const tracked = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).split('\0').filter(Boolean);
 for (const file of tracked) {
   if (file.startsWith('.git') || file.startsWith('.openai/')) continue;
   const target = resolve(temporary, file);
@@ -32,6 +32,7 @@ const result = spawnSync(process.execPath, [join(root, 'node_modules/vitest/vite
   cwd: temporary,
   env: { ...process.env, BUILDING_DETAIL_EVIDENCE: join(temporary, 'generated-ui') },
   encoding: 'utf8',
+  stdio: ['ignore', 'pipe', 'pipe'],
   maxBuffer: 32 * 1024 * 1024
 });
 console.log(`Isolated ${mode} regression workspace: ${temporary}`);

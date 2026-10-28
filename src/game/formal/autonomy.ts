@@ -12,13 +12,13 @@ import {resourceKeys,zeroResources} from './model';
 import {commandId,eventId,sequenceKey,type FactionId} from './ids';
 import {EventScheduler} from './scheduler';
 import {spatial,invalidateSpatial} from './spatial';
-import {buildingCost,buildingLevel,BUILDING_CATALOG,fieldCost,storageCapacity,type BuildingKind} from './catalogB3';
+import {buildingCost,buildingLevel,BUILDING_CATALOG,fieldCost,storageCapacity,type BuildingKind,monasteryGoldPerHour} from './catalogB3';
 import {buildingRequirements,researchRequirements,researchQuote} from './buildingDetailData';
 import {UNIT_CATALOG,ELITE_VARIANTS} from './unitCatalog';
 import {unitRecruitCost} from './military';
 import {TECH_CATALOG} from './techCatalog';
 import {AGE_CATALOG} from './research';
-import {CITY_PROMOTION,settleCity} from './economy';
+import {CITY_PROMOTION,settleCity,QUEUE_CAPACITY} from './economy';
 import {aiRandom,traitsFor,type Agent,type Choice} from './autonomyModel';
 export const AI_MINUTE=60000;
 export function enableAutonomy(w:FormalWorld){if(w.fixture||w.autonomy)return false;w.autonomy={version:1,agents:[],accepted:0,rejected:0};const s=new EventScheduler(w.events);
@@ -31,7 +31,7 @@ const affordable=(c:FormalCity,cost:Resources)=>resourceKeys.every(r=>cost[r]<=c
 /** Quotes use only own-city ledgers and public catalogs; reducer revalidates every admission. */
 export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{const out:Choice[]=[],f=w.factions.find(f=>f.id===a.factionId)!;if(!c.economy||!c.military)return out;
  const offer=(command:FormalCommand,cost:Resources,score:number,category:Choice['category'])=>{if(affordable(c,cost))out.push({command,cost,score,category});};
- if(c.economy.construction.length<3){
+ if(c.economy.construction.length<QUEUE_CAPACITY){
   for(const field of c.fields??[]){if(field.level>=15||field.level>=10&&(!c.cityPromotionCompleted||!c.economy.milestones.includes(10000)||c.housing<10000)||c.economy.construction.some(j=>j.target.kind==='field'&&j.target.slot===field.slot))continue;
    const need=1-c.stock[field.resource]/Math.max(1,storageCapacity(c));offer({type:'field.upgrade',cityId:c.id,slot:field.slot},fieldCost(field.resource,field.level+1),1+a.traits.economy+need-field.level*.09,'economy');
   }
@@ -39,6 +39,7 @@ export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{con
    if(lv>=BUILDING_CATALOG[kind].maxLevel||c.economy.construction.some(j=>j.target.kind==='building'&&j.target.key===key)||buildingRequirements(w,c,kind,lv+1).some(r=>!r.met)||kind!=='center'&&kind!=='wall'&&c.economy.slots[key]===undefined&&Object.keys(c.economy.slots).length>=15)continue;
    const pop=kind==='residence'||kind==='center'||kind==='monastery',mil=['barracks','stable','archery','workshop','castle','wall','embassy','blacksmith'].includes(kind);
    let score=pop? .7+a.traits.expansion:mil?.35+a.traits.military:.65+a.traits.economy;
+   if(kind==='monastery')score+=a.traits.economy*(monasteryGoldPerHour(c.population,lv+1)-monasteryGoldPerHour(c.population,lv))/100;
    if(kind==='residence'&&c.population/c.housing>.8)score+=3;if(kind==='warehouse'&&resourceKeys.some(r=>c.stock[r]>storageCapacity(c)*.7))score+=2;
    if(kind==='center'&&lv<(AGE_CATALOG[(f.age??0) as number]?.center??10))score+=1.1;if(kind==='barracks'&&!lv)score+=.4;
    const craft=kind==='castle'&&lv===0?w.extinction?.craftsmen.find(t=>t.ownerFactionId===a.factionId&&t.cityId===c.id&&!t.carrierArmyId&&!t.eventId&&!t.constructionCommandId):undefined;offer(craft?{type:'craftsman.castle',cityId:c.id,craftsmanId:craft.id}:{type:'building.upgrade',cityId:c.id,key},craft?zeroResources():buildingCost(kind,lv+1),score-lv*.08,pop?'population':mil?'military':'economy');

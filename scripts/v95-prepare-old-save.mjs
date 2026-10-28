@@ -1,0 +1,21 @@
+// Run with a compiler output made from unmodified base main 64fc1b7. Synthetic data only.
+import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+const [compiledArg,outArg='artifacts/v95/fixtures/pre-v95.realm-save']=process.argv.slice(2);
+if(!compiledArg)throw Error('Provide an unmodified main 64fc1b7 compiled directory.');
+const load=name=>import(pathToFileURL(path.resolve(compiledArg,'src/game/formal',name+'.js')).href);
+const {createFormalWorld}=await load('generator'),{submitFormalOrder,advanceFormal}=await load('reducer'),{commandId}=await load('ids'),{encodeSave}=await load('saveCodec');
+let w=createFormalWorld({campaign:'v95-preupdate-64fc1b7',seed:90217});
+const c=w.cities[0];
+c.buildings={center:5,residence:15,'warehouse.0':15,academy:5,townhall:5,monastery:15,mint:8};
+c.economy.slots={residence:0,'warehouse.0':1,academy:2,townhall:3,monastery:4,mint:5};
+c.housing=30400;c.population=20000;c.stock={food:10000,wood:10000,stone:10000,gold:10000};
+w.factions[0].age=2;w.factions[0].techIds=['economy.gold.1','economy.gold.2'];
+w=submitFormalOrder(w,{commandId:commandId('old-castle'),campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:0,expectedRevision:w.revision,payload:{type:'building.upgrade',cityId:c.id,key:'castle'}}).world;
+w=advanceFormal(w,123456).world;
+const e=await encodeSave(w);
+if(w.economyVersion!==undefined)throw Error('Expected a pre-v95 baseline engine.');
+fs.mkdirSync(path.dirname(outArg),{recursive:true});
+fs.writeFileSync(outArg,JSON.stringify(e));
+console.log(JSON.stringify({base:'64fc1b76b1a96f43ef880550c8c7717b37446474',checksum:e.checksum,worldTime:w.time,queue:w.cities[0].economy.construction.length,castlePrerequisites:{center:5,academy:5,townhall:5}}));

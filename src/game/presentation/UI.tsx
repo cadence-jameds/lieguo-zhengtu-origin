@@ -2,7 +2,7 @@ import {effectiveSpeed} from '../formal/playtest';
 import {useEffect,useId,useRef,type ReactNode} from 'react';
 import type {FormalCity,FormalWorld,Resources} from '../formal/model';
 import {resourceKeys} from '../formal/model';
-import {productionPerHour} from '../formal/economy';
+import {productionPerHour,offeringPerHour} from '../formal/economy';
 import {armyUpkeep} from '../formal/military';
 import {assetURL,civilizationIndex,CIV_NAMES,LABELS} from './artMap';
 
@@ -19,5 +19,5 @@ export function Dialog({title,onClose,children,className,headerAction}:{title:st
  return <dialog ref={ref} className={className} aria-labelledby={id} onPointerDown={e=>{backdrop.current=e.target===e.currentTarget&&outside(e);}} onPointerCancel={()=>{backdrop.current=false;}} onClick={e=>{if(backdrop.current&&e.target===e.currentTarget&&outside(e))onClose();backdrop.current=false;}} onCancel={e=>{e.preventDefault();onClose();}}><div className="dialog-title"><h2 id={id}>{title}</h2>{headerAction&&<div className="dialog-header-action">{headerAction}</div>}<button onClick={onClose} aria-label="關閉對話框">×</button></div><div className="dialog-body">{children}</div></dialog>;
 }
 export function Cost({cost,stock}:{cost:Resources;stock?:Resources}){return <div className="cost">{resourceKeys.map(r=><span key={r} className={stock&&cost[r]>stock[r]?'resource-shortage':''}><i className={'res-'+r}>{LABELS[r]}</i> {fmt(cost[r])}{stock&&cost[r]>stock[r]&&<small>缺 {fmt(cost[r]-stock[r])}</small>}</span>)}</div>;}
-export function netProduction(w:FormalWorld,c:FormalCity){const p=productionPerHour(w,c);for(const r of resourceKeys)p[r]*=(c.integrationWorkHours??0)>0?.4:1;p.food-=armyUpkeep(w,c);return p;}
+export function netProduction(w:FormalWorld,c:FormalCity){const p=productionPerHour(w,c);for(const r of resourceKeys)p[r]*=(c.integrationWorkHours??0)>0?.4:1;p.gold+=offeringPerHour(c);p.food-=armyUpkeep(w,c);return p;}
 export function Heading({title,subtitle,children}:{title:string;subtitle?:string;children?:ReactNode}){return <div className="view-heading"><div><p className="eyebrow">{subtitle??'河谷戰役 · 你的旗幟與城邦'}</p><h1>{title}</h1></div>{children}</div>;}

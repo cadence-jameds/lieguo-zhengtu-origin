@@ -48,7 +48,7 @@ it('DEMO Town/Outskirts anchors, default district, mobile scale classes and cons
  const html=renderToStaticMarkup(<CityScenes world={r} city={r.cities[0]} onBuilding={noop} onField={noop}/>);expect(html).toContain('construction-progress waiting');expect(html).toContain('aria-label="等待施工"');expect(html).toContain('aria-label="施工進度"');
 });
 it('build dialog eligibility follows Formal catalog: era, prerequisites, costs, booster field gate, D2 and queue capacity',()=>{
- const city=structuredClone(c);expect(constructionAction(w,city,{key:'barracks'}).reasons).toContain('城市中心 Lv2');expect(constructionAction(w,city,{key:'stable'}).reasons).toContain('封建時代');expect(constructionAction(w,city,{key:'mill'}).reasons).toContain('至少一座對應資源田Lv5');city.fields![0].level=10;expect(constructionAction(w,city,{field:0}).reasons).toContain('曾達人口10,000、City晉升完成且當下住房10,000');
+ const city=structuredClone(c);expect(constructionAction(w,city,{key:'barracks'}).reasons).toContain('城市中心 Lv2');expect(constructionAction(w,city,{key:'stable'}).reasons).toContain('封建時代');expect(constructionAction(w,city,{key:'mill'}).reasons).toContain('任一對應資源田 Lv3');city.fields![0].level=10;expect(constructionAction(w,city,{field:0}).reasons).toContain('曾達人口10,000、City晉升完成且當下住房10,000');
  const first=constructionAction(w,city,{key:'residence'});expect(first.cost).toEqual({food:25,wood:85,stone:75,gold:65});expect(first.reasons).toEqual([]);
 });
 

@@ -28,3 +28,11 @@ export function drawPoliticalOverlay(ctx:CanvasRenderingContext2D,influence:Poli
  ctx.save();ctx.globalAlpha=.36;for(const c of influence.cells){const center=screen(c);if(viewport&&(center.x < -50||center.x > viewport.width+50||center.y < -30||center.y > viewport.height+30))continue;const ps=[{x:c.x-.5,y:c.y-.5},{x:c.x+.5,y:c.y-.5},{x:c.x+.5,y:c.y+.5},{x:c.x-.5,y:c.y+.5}].map(screen);ctx.beginPath();ps.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=c.color;ctx.fill();}
  ctx.globalAlpha=1;ctx.lineWidth=1.5;ctx.strokeStyle='#273a32';ctx.beginPath();for(const [x1,y1,x2,y2] of influence.edges){const a=screen({x:x1,y:y1}),b=screen({x:x2,y:y2});if(viewport&&(a.x < -40||a.x > viewport.width+40||a.y < -40||a.y > viewport.height+40))continue;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);}ctx.stroke();ctx.globalAlpha=1;ctx.font='bold 15px serif';ctx.textAlign='center';for(const l of influence.labels){if(viewport&&viewport.zoom>=.7)continue;const p=screen(l);ctx.strokeStyle='#151c19';ctx.lineWidth=3;ctx.strokeText(l.name,p.x,p.y);ctx.fillStyle=l.color;ctx.fillText(l.name,p.x,p.y);}ctx.restore();
 }
+
+/** Neutral ground wash and cached scenery opacity match the DEMO visual hierarchy.
+ * Cache pixels are never modified; save/restore prevents alpha leaking into overlays. */
+export function drawMapBackground(ctx:CanvasRenderingContext2D,width:number,height:number,territory:boolean,terrain:()=>void,scenery:()=>void){
+ ctx.save();terrain();
+ if(territory){ctx.globalAlpha=.30;ctx.fillStyle='#a9aea2';ctx.fillRect(0,0,width,height);}
+ ctx.globalAlpha=territory?.45:1;scenery();ctx.restore();
+}
