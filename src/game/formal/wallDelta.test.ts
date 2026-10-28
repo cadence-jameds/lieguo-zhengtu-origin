@@ -36,8 +36,9 @@ it('Lv0 to15: independent v85 cost/time, all center accelerators and five speeds
  }
  mkdirSync('docs/wall-delta-v03022',{recursive:true});writeFileSync('docs/wall-delta-v03022/wall-level-speed-matrix.json',JSON.stringify({authority:'v85',comparisons:rows},null,2));expect(rows).toHaveLength(225);
 },60000);
-it('dark-age center2 prerequisite, exact resources, identity and fixed-slot rules are enforced without mutation',()=>{
- for(const variant of ['center','resources','slot','identity','lane'] as const){const w=make(),c=w.cities[0];let p=wall(w);if(variant==='center')c.buildings.center=1;if(variant==='resources')c.stock.stone=159;if(variant==='identity')p={...p,key:'wall.0'};if(variant==='lane')p={...p,lane:1};const before=JSON.stringify(w),t=submit(w,variant==='slot'?{...p,slot:0}:p);expect(t.ack?.status).toBe('rejected');expect(t.world).toBe(w);expect(JSON.stringify(w)).toBe(before);}
+it('dark-age center1 admission, exact resources, identity and fixed-slot rules are enforced without mutation',()=>{
+ const one=make(1,1);expect(submit(one,wall(one)).ack?.status).toBe('committed');
+ for(const variant of ['resources','slot','identity','lane'] as const){const w=make(),c=w.cities[0];let p=wall(w);if(variant==='resources')c.stock.stone=159;if(variant==='identity')p={...p,key:'wall.0'};if(variant==='lane')p={...p,lane:1};const before=JSON.stringify(w),t=submit(w,variant==='slot'?{...p,slot:0}:p);expect(t.ack?.status).toBe('rejected');expect(t.world).toBe(w);expect(JSON.stringify(w)).toBe(before);}
  const w=make(),c=w.cities[0];c.buildings={center:2};c.economy!.slots={};for(let i=0;i<15;i++){c.buildings['warehouse.'+i]=1;c.economy!.slots['warehouse.'+i]=i;}c.stock={food:2000,wood:2000,stone:2000,gold:2000};validateFormalWorld(w);expect(constructionAction(w,c,{key:'wall'}).reasons).toEqual([]);const done=commit(w,wall(w));expect(Object.keys(done.cities[0].economy!.slots)).toHaveLength(15);expect(done.cities[0].economy!.slots).not.toHaveProperty('wall');
 });
 it('same-wall upgrades remain ordered in one lane; shared capacity is5 and inherited cancellation removes dependent queued work',()=>{

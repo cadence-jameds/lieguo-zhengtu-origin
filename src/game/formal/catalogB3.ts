@@ -7,7 +7,7 @@ export const BUILDING_CATALOG = {
     "growth": 1.38,
     "durationMs": [900000,1080000,1320000,1620000,1980000,2400000,3000000,3600000,4500000,5400000,6600000,8100000,9900000,12000000,16200000],
     "age": 0,
-    "prerequisites": {"center":2},
+    "prerequisites": {"center":1},
     "maxLevel": 15
   },
   "center": {
@@ -490,8 +490,8 @@ export const BUILDING_CATALOG = {
     ],
     "age": 2,
     "prerequisites": {
-      "blacksmith": 5,
-      "barracks": 5
+      "academy": 8,
+      "center": 8
     },
     "maxLevel": 15
   },
@@ -523,7 +523,7 @@ export const BUILDING_CATALOG = {
     "age": 2,
     "prerequisites": {
       "townhall": 5,
-      "academy": 5
+      "center": 8
     },
     "maxLevel": 15
   },
@@ -577,8 +577,12 @@ export const CENTER_STORAGE=800;
 export const CITY_WAREHOUSE_MULTIPLIER=1.10;
 export const RESOURCE_BOOSTS={mill:'food',lumbermill:'wood',masonry:'stone',mint:'gold'} as const;
 export const resourceBoostMultiplier=(level:number)=>1+level*.04;
-export const resourceBoostRequirement=(next:number)=>next===1?5:next+4;
+export const RESOURCE_BOOST_REQUIREMENTS=[0,3,4,5,5,8,10,11,12] as const;
+export const resourceBoostRequirement=(next:number)=>RESOURCE_BOOST_REQUIREMENTS[next];
+export const ECONOMY_TECH_BONUSES=[.03,.05,.10] as const;
+export const economyTechMultiplier=(techIds:readonly string[],resource:keyof Resources)=>1+ECONOMY_TECH_BONUSES.reduce<number>((sum,bonus,i)=>sum+(techIds.includes(`economy.${resource}.${i+1}`)?bonus:0),0);
 export const monasteryMultiplier=(level:number)=>1+level*.02;
+export const monasteryGoldPerHour=(population:number,level:number)=>Math.min(Math.max(0,population),30000)*level*(level+10)/4500;
 export function warehouseBaseCapacity(c:FormalCity){return Object.entries(c.buildings).filter(([k])=>k.startsWith('warehouse.')).reduce((n,[,lv])=>n+WAREHOUSE_CAPACITY[lv],0);}
 export function warehouseCapacity(c:FormalCity){return Math.floor(warehouseBaseCapacity(c)*(c.cityPromotionCompleted?CITY_WAREHOUSE_MULTIPLIER:1));}
 export function storageCapacity(c:FormalCity){return c.developerResources?1000000000:CENTER_STORAGE+warehouseCapacity(c);}

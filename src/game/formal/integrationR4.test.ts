@@ -117,6 +117,7 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreig
   expect(craft.ownerFactionId).toBe(winner);
   expect(craft.cityId).toBe(w.cities[1].id);
   expect(craft.civilizationId).toBe(w.factions[0].civilizationId);
+  build(w.cities[1],'center',8);
   const stock=w.cities[1].stock.stone,tech=[...w.factions[1].techIds];
   w=act(w,1,{type:'craftsman.castle',cityId:w.cities[1].id,craftsmanId:craft.id});
   const job=w.cities[1].economy!.construction.find(j=>j.castleCivilizationId===craft.civilizationId)!;

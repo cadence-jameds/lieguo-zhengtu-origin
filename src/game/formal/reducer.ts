@@ -1,3 +1,4 @@
+import {migrateV95Economy} from './economy';
 import {syncGrowthTasks,captureGrowthEvent,recordGrowthEvent,recordGrowthCommand,claimGrowthReward} from './growthTasks';
 import {isMissionArmy} from './combatModel';
 import {chainDecision,invalidateEndgameIntel} from './endgameAI';
@@ -125,7 +126,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  }
  if(order.expectedRevision!==current.revision)return reject('世界版本已更新，請重新確認狀態。');
  if(order.issuedWorldTime>current.time)return reject('命令時間超前於世界。');
- const w=cloneOrderDraft(current,order,replay),reports:FormalReport[]=[];
+ const w=migrateV95Economy(cloneOrderDraft(current,order,replay)),reports:FormalReport[]=[];
  const p=order.payload;
  if(order.issuerId===w.playerFactionId)syncGrowthTasks(w);
  const city=spatial(w).cities.get(p.cityId);
@@ -242,7 +243,7 @@ function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventSc
 export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
  while(scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
@@ -253,7 +254,7 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  const yieldIntervalMs=options.yieldIntervalMs??50;
  if(!Number.isFinite(yieldIntervalMs)||yieldIntervalMs<0)throw new Error('世界推進讓出間隔無效。');
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=reconcileExileSites(cloneWorldDraft(current)),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;

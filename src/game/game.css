@@ -495,3 +495,11 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 .mobile-shortcut-order button,.mobile-shortcut-options button,.mobile-shortcut-dialog .dialog-actions button{min-width:44px;min-height:44px}
 .mobile-shortcut-options{display:flex;flex-wrap:wrap;gap:6px}
 @media(prefers-reduced-motion:reduce){.mobile-more>button.has-unread{animation:none}}
+
+/* v95 city heading shortcuts wrap at 320px without changing mobile navigation. */
+.formal-city-panel .city-heading{flex-wrap:wrap}
+.formal-city-panel .city-heading>div{min-width:0}
+.formal-city-panel .city-title-row h1{overflow-wrap:anywhere}
+.formal-city-panel .city-heading-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;max-width:100%}
+.formal-city-panel .governor-shortcut{max-width:100%;white-space:normal}
+.governance-controls input,.governance-controls select{max-width:100%;min-width:0}

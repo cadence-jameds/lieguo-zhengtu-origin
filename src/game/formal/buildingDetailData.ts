@@ -8,11 +8,16 @@ import {UNIT_CATALOG,isModernUnit} from './unitCatalog';
 import {resourceKeys} from './model';
 import {academyMultiplier} from './research';
 import {WALL_DURABILITY} from './siege';
-export type Requirement={kind:'age'|'building'|'tech'|'milestone'|'civilization'|'modern'|'field'|'cap';id:string;current:number|string;required:number|string;met:boolean};
+export type Requirement={kind:'age'|'building'|'tech'|'milestone'|'civilization'|'modern'|'field'|'cap';id:string;current:number|string;required:number|string;met:boolean;fieldMode?:'single'|'pair'|'average'|'count'};
+export function boostFieldRequirementText(r:Requirement){return r.fieldMode==='count'?'至少兩格不同的對應資源田（單田城市加工最高 Lv1）':r.fieldMode==='single'?'任一對應資源田 Lv'+r.required:r.fieldMode==='pair'?'兩格不同的對應資源田各 Lv'+r.required:'全部同類資源田平均 Lv'+r.required;}
 export function buildingRequirements(w:FormalWorld,c:FormalCity,kind:BuildingKind,next:number):Requirement[]{
  const d=BUILDING_CATALOG[kind],age=w.factions.find(f=>f.id===c.ownerFactionId)?.age??0;
  const out:Requirement[]=[{kind:'age',id:'age',current:age,required:d.age,met:age>=d.age},...Object.entries(d.prerequisites).map(([id,required])=>({kind:'building' as const,id,current:buildingLevel(c,id),required,met:buildingLevel(c,id)>=required}))];
- const r=RESOURCE_BOOSTS[kind as keyof typeof RESOURCE_BOOSTS];if(r){const fields=(c.fields??[]).filter(f=>f.resource===r),value=next===1?Math.max(0,...fields.map(f=>f.level)):fields.reduce((n,f)=>n+f.level,0)/Math.max(1,fields.length),required=resourceBoostRequirement(next);out.push({kind:'field',id:r,current:value,required,met:fields.length>0&&value>=required});}return out;
+ const r=RESOURCE_BOOSTS[kind as keyof typeof RESOURCE_BOOSTS];if(r){
+  const fields=[...new Map((c.fields??[]).filter(f=>f.resource===r).map(f=>[f.slot,f])).values()],levels=fields.map(f=>f.level).sort((a,b)=>b-a),fieldMode=next===1?'single':next<=3?'pair':'average',value=fieldMode==='single'?(levels[0]??0):fieldMode==='pair'?(levels[1]??0):levels.reduce((n,lv)=>n+lv,0)/Math.max(1,levels.length),required=resourceBoostRequirement(next);
+  if(next>1)out.push({kind:'field',id:r,current:fields.length,required:2,met:fields.length>=2,fieldMode:'count'});
+  out.push({kind:'field',id:r,current:value,required,met:fields.length>0&&value>=required,fieldMode});
+ }return out;
 }
 export function researchRequirements(w:FormalWorld,c:FormalCity,d:TechDefinition):Requirement[]{
  const f=w.factions.find(f=>f.id===c.ownerFactionId)!,age=f.age??0;

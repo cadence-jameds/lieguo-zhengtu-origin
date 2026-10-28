@@ -1,0 +1,44 @@
+// @vitest-environment happy-dom
+import {act} from 'react';
+import {createRoot,type Root} from 'react-dom/client';
+import {afterEach,beforeEach,expect,it,vi} from 'vitest';
+import {make,rich,build,ownSecond,order} from '../formal/developmentTestSupport';
+import {submitFormalOrder} from '../formal/reducer';
+import {decodeSave,encodeSave} from '../formal/saveCodec';
+import type {FormalCommand} from '../formal/model';
+import type {GovernanceBase} from '../governanceAdmission';
+import {governanceBase} from '../governanceAdmission';
+import FormalCityPanel from '../FormalCityPanel';
+import {constructionAction} from './cityActions';
+import {QUEUE_CAPACITY} from '../formal/queueCapacity';
+import {GovernorControls} from './GovernanceView';
+import {Requirements} from './BuildingDetail';
+import {buildingRequirements} from '../formal/buildingDetailData';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {netProduction} from './UI';
+let host:HTMLDivElement,root:Root;
+beforeEach(()=>{vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','');};HTMLDialogElement.prototype.close=function(){this.removeAttribute('open');};host=document.createElement('div');document.body.append(host);root=createRoot(host);});
+afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.unstubAllGlobals();});
+const button=(text:string,scope:ParentNode=host)=>[...scope.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent===text)!;
+for(const mobile of [false,true])it(`${mobile?'mobile':'desktop'} governor shortcut reuses Formal CAS, enable/edit/stop, reload, city switching, cancel and busy admission`,async()=>{
+ let w=make();const c=rich(w);build(c,'townhall',1);ownSecond(w);const issue=vi.fn((p:FormalCommand,base?:GovernanceBase)=>{expect(base).toEqual(governanceBase(w,p.cityId));const t=submitFormalOrder(w,order(w,p));expect(t.ack?.status,t.ack?.reason).toBe('committed');w=t.world;render();});let selected=c.id,busy=false;
+ const render=()=>root.render(<FormalCityPanel world={w} cityId={selected} issue={issue} busy={busy} mobile={mobile}/>);
+ await act(async()=>render());const before=JSON.stringify(w);expect(host.querySelector('.city-heading-actions .governor-shortcut')!.textContent).toBe('委任總督');await act(async()=>button('委任總督').click());expect(JSON.stringify(w)).toBe(before);
+ let dialog=host.querySelector('dialog')!;await act(async()=>{const select=dialog.querySelector('select')!;select.value='reserve';select.dispatchEvent(new Event('change',{bubbles:true}));});await act(async()=>button('委任總督',dialog).click());expect(w.governors![0].policy).toBe('reserve');expect(host.querySelector('.governor-shortcut')!.textContent).toBe('總督 · 資源儲備');
+ await act(async()=>button('停止總督',dialog).click());expect(w.governors![0].enabled).toBe(false);await act(async()=>button('委任總督',dialog).click());expect(w.governors![0].enabled).toBe(true);
+ w=(await decodeSave(await encodeSave(w))).world;await act(async()=>render());expect(host.querySelector('.governor-shortcut')!.textContent).toBe('總督 · 資源儲備');
+ selected=w.cities[1].id;await act(async()=>render());expect(host.querySelector('dialog')).toBeNull();await act(async()=>button('委任總督').click());dialog=host.querySelector('dialog')!;expect(dialog.textContent).toContain(w.cities[1].name);expect(dialog.textContent).toContain('需要本城市政廳 Lv1');expect(button('委任總督',dialog).disabled).toBe(true);
+ await act(async()=>button('×',dialog).click());expect(host.querySelector('dialog')).toBeNull();selected=c.id;busy=true;await act(async()=>render());await act(async()=>host.querySelector<HTMLButtonElement>('.governor-shortcut')!.click());expect(button('套用治理設定',host.querySelector('dialog')!).disabled).toBe(true);expect(host.querySelector<HTMLSelectElement>('dialog select')!.disabled).toBe(true);
+});
+it('governor invalid budgets/reserve cannot submit, rejection keeps the form and shows a retry message',async()=>{const w=make(),c=rich(w);build(c,'townhall',1);const issue=vi.fn(async()=>false);await act(async()=>root.render(<GovernorControls world={w} city={c} issue={issue} busy={false}/>));await act(async()=>button('委任總督').click());expect(host.textContent).toContain('治理指令未被接受');expect(issue).toHaveBeenCalledTimes(1);expect(host.querySelector('select')).not.toBeNull();const input=host.querySelector('input')!;await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'-1');input.dispatchEvent(new Event('input',{bubbles:true}));});expect(button('委任總督').disabled).toBe(true);expect(host.textContent).toContain('非負整數');});
+it('non-owned city has no actionable governor shortcut',async()=>{const w=make();await act(async()=>root.render(<FormalCityPanel world={w} cityId={w.cities[1].id} issue={vi.fn()} busy={false}/>));expect(host.querySelector('.governor-shortcut')).toBeNull();});
+it('queue message references authoritative capacity at0/5,3/5,4/5,5/5 across fields, buildings and wall',()=>{let w=make();rich(w);for(let count=0;count<=QUEUE_CAPACITY;count++){const c=w.cities[0];for(const target of [{field:16},{field:17},{key:'wall'},{key:'center'}]){const a=constructionAction(w,c,target);expect(a.reasons.includes(`已排滿 ${QUEUE_CAPACITY} 項工程`)).toBe(count===QUEUE_CAPACITY);expect(a.reasons.join('')).not.toContain('3項');}if(count<QUEUE_CAPACITY){const t=submitFormalOrder(w,order(w,{type:'field.upgrade',cityId:c.id,slot:count}));expect(t.ack?.status).toBe('committed');w=t.world;}}});
+it.each([0,3,4,5])('Issue38 actual goldmine17 Lv3 dialog at %s jobs uses five-job authority',async count=>{
+ let w=make();rich(w);w.cities[0].fields!.find(f=>f.slot===16)!.level=3;
+ for(let i=0;i<count;i++){const t=submitFormalOrder(w,order(w,{type:'field.upgrade',cityId:w.cities[0].id,slot:i}));expect(t.ack?.status).toBe('committed');w=t.world;}
+ const issue=vi.fn(),before=JSON.stringify(w);await act(async()=>root.render(<FormalCityPanel world={w} cityId={w.cities[0].id} issue={issue} busy={false} mobile/>));
+ await act(async()=>host.querySelector<HTMLButtonElement>('[data-testid="field-anchor-16"]')!.click());
+ const dialog=host.querySelector('dialog')!;expect(dialog.querySelector('h2')!.textContent).toBe('金礦 17');expect(dialog.textContent!.includes(`已排滿 ${QUEUE_CAPACITY} 項工程`)).toBe(count===QUEUE_CAPACITY);expect(dialog.textContent).not.toContain('已排滿3項工程');expect(button('升級至 Lv4',dialog).disabled).toBe(count===QUEUE_CAPACITY);expect(issue).not.toHaveBeenCalled();expect(JSON.stringify(w)).toBe(before);
+});
+it('processing requirements render distinct-slot and all-field conditions instead of stale averages',()=>{const w=make(),c=w.cities[0];for(const [next,label] of [[1,'任一對應資源田 Lv3'],[2,'兩格不同的對應資源田各 Lv4'],[3,'兩格不同的對應資源田各 Lv5'],[4,'全部同類資源田平均 Lv5'],[8,'全部同類資源田平均 Lv12']] as const){expect(renderToStaticMarkup(<Requirements items={buildingRequirements(w,c,'mill',next)}/>)).toContain(label);}});
+it('resource HUD includes independently capped and discounted monastery gold',()=>{const w=make(),c=rich(w);build(c,'monastery',15);c.population=30000;expect(netProduction(w,c).gold).toBe(27+2500);c.integrationWorkHours=12;expect(netProduction(w,c).gold).toBe(27*.4+1000);});

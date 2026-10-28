@@ -1,4 +1,4 @@
-import {constructionMultiplier,HOUSING,WAREHOUSE_CAPACITY,BUNKER_PROTECTION,resourceBoostMultiplier,monasteryMultiplier} from '../formal/catalogB3';
+import {constructionMultiplier,HOUSING,WAREHOUSE_CAPACITY,BUNKER_PROTECTION,resourceBoostMultiplier,monasteryMultiplier,monasteryGoldPerHour} from '../formal/catalogB3';
 import {producerMultiplier} from '../formal/unitCatalog';
 import {wallDefenseMultiplier} from '../formal/combatModifiers';
 import {academyMultiplier} from '../formal/research';
@@ -11,11 +11,11 @@ export function buildingEffect(kind:string,now:number,next:number){
  if(kind==='warehouse')return '單棟基礎容量（每類） '+WAREHOUSE_CAPACITY[now]+' → '+WAREHOUSE_CAPACITY[next];
  if(kind==='bunker')return '單棟每類保護 '+BUNKER_PROTECTION[now]+' → '+BUNKER_PROTECTION[next];
  if(['mill','lumbermill','masonry','mint'].includes(kind))return '對應資源增產 '+Math.round((resourceBoostMultiplier(now)-1)*100)+'% → '+Math.round((resourceBoostMultiplier(next)-1)*100)+'%';
- if(kind==='monastery')return '人口成長係數 +'+Math.round((monasteryMultiplier(now)-1)*100)+'% → +'+Math.round((monasteryMultiplier(next)-1)*100)+'%';
+ if(kind==='monastery')return '人口成長係數 +'+Math.round((monasteryMultiplier(now)-1)*100)+'% → +'+Math.round((monasteryMultiplier(next)-1)*100)+'%；30,000 人信仰奉獻 '+Math.floor(monasteryGoldPerHour(30000,now))+' → '+Math.floor(monasteryGoldPerHour(30000,next))+' 金／世界時（統治初定 ×0.40）';
  if(['barracks','archery','stable','workshop','castle'].includes(kind))return '生產時間倍率 '+(100*producerMultiplier(now)).toFixed(1)+'% → '+(100*producerMultiplier(next)).toFixed(1)+'%';
  if(kind==='market')return '商隊總數 '+now+' → '+next;
  if(kind==='townhall')return '有效行政節點 '+(now>0?1:0)+' → 1（每城一座）';
- if(kind==='embassy')return '外交設施 Lv'+now+' → Lv'+next+'（政治功能尚未開放）';
+ if(kind==='embassy')return '外交設施 Lv'+now+' → Lv'+next+'（依正式軍團與帝國資格）';
  if(kind==='blacksmith')return '攻防科技建築資格 Lv'+now+' → Lv'+next+'（依各科技前置）';
  return null;
 }

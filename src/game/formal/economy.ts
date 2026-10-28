@@ -15,7 +15,7 @@ import type {CityId,FactionId,ProjectId} from './ids';
 import {eventId,sequenceKey,shipmentId} from './ids';
 import type {Construction,EconomyCommand,FormalCity,FormalEvent,FormalOrder,FormalWorld,LogisticsShipment,Resources,Shipment} from './model';
 import {resourceKeys,zeroResources} from './model';
-import {BUILDING_CATALOG,buildingCost,buildingDuration,buildingKind,buildingLevel,FIELD_PRODUCTION,fieldCost,fieldDuration,HOUSING,storageCapacity,resourceBoostMultiplier,monasteryMultiplier} from './catalogB3';
+import {BUILDING_CATALOG,buildingCost,buildingDuration,buildingKind,buildingLevel,FIELD_PRODUCTION,fieldCost,fieldDuration,HOUSING,storageCapacity,resourceBoostMultiplier,monasteryMultiplier,economyTechMultiplier,monasteryGoldPerHour} from './catalogB3';
 import {EventScheduler} from './scheduler';
 import {spatial} from './spatial';
 import {route} from './routing';
@@ -36,42 +36,59 @@ export function initializeCityEconomy(w:FormalWorld,c:FormalCity,s:EventSchedule
  const settlementEventId=enqueue(w,s,{type:'economy.settle',cityId:c.id,at:w.time+HOUR});
  c.economy={lastSettledAt:w.time,productionRemainder:zeroResources(),milestones:[],slots:{},construction:[],promotion:null,reservedIncoming:zeroResources(),settlementEventId};
 }
-export function initializeEconomy(w:FormalWorld){const s=new EventScheduler(w.events);w.logistics=[];for(const c of w.cities)initializeCityEconomy(w,c,s);w.events=s.snapshot();}
+export function initializeEconomy(w:FormalWorld){w.economyVersion=95;const s=new EventScheduler(w.events);w.logistics=[];for(const c of w.cities)initializeCityEconomy(w,c,s);w.events=s.snapshot();}
 export const ADMINISTRATION_MAX_NODES=15;
 export function administrationMultiplier(w:FormalWorld,owner:FactionId){const count=spatial(w).owned(owner).filter(c=>buildingLevel(c,'townhall')>=1).length;return Math.max(.3,1-Math.min(count,ADMINISTRATION_MAX_NODES)*(.7/ADMINISTRATION_MAX_NODES));}
 export function cityTitle(population:number){return population>=30000?'世界級都會':population>=20000?'都會':population>=15000?'大城市':population>=10000?'城市':population>=2000?'城鎮':population>=500?'村莊':'聚落';}
-/** Piecewise exact exponential integration, splitting every scale/housing boundary. */
-export function growPopulation(population:number,housing:number,monastery:number,hours:number):number {
- if(population>=housing)return population;
- let p=population,left=hours;
+/** Exact growth and integral of min(P(t), 30000), split at scale, pressure,
+ * housing and offering-cap boundaries. Hours are world hours, never wall time. */
+export function populationGrowth(population:number,housing:number,monastery:number,hours:number){
+ let p=population,left=hours,cappedPersonHours=0;
  while(left>1e-12&&p<housing-1e-9){
   const size=p<10000-1e-9?1:p<15000-1e-9?.75:p<20000-1e-9?.65:p<25000-1e-9?.55:.45;
   const pressure=p<housing*.8-1e-9?1:p<housing*.9-1e-9?.75:p<housing*.95-1e-9?.5:.25;
-  const k=.008*size*pressure*monasteryMultiplier(monastery),next=Math.min(housing,...[10000,15000,20000,25000,housing*.8,housing*.9,housing*.95].filter(v=>v>p+1e-8));
-  const time=Math.log((next+5000)/(p+5000))/k;
-  if(time<=left+1e-12){p=next;left=Math.max(0,left-time);}else{p=(p+5000)*Math.exp(k*left)-5000;left=0;}
+  const k=.008*size*pressure*monasteryMultiplier(monastery),next=Math.min(housing,...[10000,15000,20000,25000,30000,housing*.8,housing*.9,housing*.95].filter(v=>v>p+1e-8));
+  const time=Math.log1p((next-p)/(p+5000))/k,dt=Math.min(left,time),x=k*dt;
+  // expm1(x)-x loses precision for very short settlements; use its series there.
+  const curved=x<1e-5?x*x*(.5+x/6+x*x/24):Math.expm1(x)-x;
+  cappedPersonHours+=p>=30000?30000*dt:p*dt+(p+5000)*curved/k;
+  if(time<=left+1e-12){p=next;left=Math.max(0,left-time);}else{p=p+(p+5000)*Math.expm1(x);left=0;}
  }
- return Math.min(housing,p);
+ cappedPersonHours+=Math.min(Math.max(0,p),30000)*left;
+ return {population:population>=housing?population:Math.min(housing,p),cappedPersonHours};
 }
-export function productionPerHour(w:FormalWorld,c:FormalCity):Resources {
+export function growPopulation(population:number,housing:number,monastery:number,hours:number):number {return populationGrowth(population,housing,monastery,hours).population;}
+export function productionPerHour(w:FormalWorld,c:FormalCity,legacy=false):Resources {
  const out=zeroResources(),boost={food:'mill',wood:'lumbermill',stone:'masonry',gold:'mint'},f=w.factions.find(f=>f.id===c.ownerFactionId)!;
  for(const p of c.fields??[])out[p.resource]+=FIELD_PRODUCTION[p.level];
- for(const r of resourceKeys){const tier=[1,2,3].filter(n=>f.techIds.includes(`economy.${r}.${n}`)).length;out[r]*=resourceBoostMultiplier(buildingLevel(c,boost[r]))*(1+tier*.03);}
+ for(const r of resourceKeys){const tier=[1,2,3].filter(n=>f.techIds.includes(`economy.${r}.${n}`)).length;out[r]*=resourceBoostMultiplier(buildingLevel(c,boost[r]))*(legacy?1+tier*.03:economyTechMultiplier(f.techIds,r));}
  return out;
 }
 /** Anchored lazy settlement; only dirty/command/event cities are touched, never a per-minute world scan. */
-export function settleCity(w:FormalWorld,c:FormalCity,at=w.time){
+export function settleCity(w:FormalWorld,c:FormalCity,at=w.time,legacy=false){
  const e=c.economy;if(!e)return;if(c.population<=c.housing)delete c.housingShortage;refillDeveloperStock(c);requireRule(at>=e.lastSettledAt,'經濟時間不可倒退。');const hours=(at-e.lastSettledAt)/HOUR;
  if(!hours)return;
  const populationBefore=c.population,populationFrom=e.lastSettledAt;
- const rates=productionPerHour(w,c),integration=c.integrationWorkHours??0,mult=administrationMultiplier(w,c.ownerFactionId),penaltyHours=Math.min(hours,integration*mult),effectiveHours=hours-penaltyHours*.6;
+ const rates=productionPerHour(w,c,legacy),integration=c.integrationWorkHours??0,mult=administrationMultiplier(w,c.ownerFactionId),penaltyHours=Math.min(hours,integration*mult),effectiveHours=hours-penaltyHours*.6;
  c.integrationWorkHours=Math.max(0,integration-hours/mult);
+ const monastery=buildingLevel(c,'monastery'),growth=populationGrowth(c.population,c.housing,monastery,hours);
+ const penaltyGrowth=penaltyHours?populationGrowth(c.population,c.housing,monastery,penaltyHours).cappedPersonHours:0;
+ const offering=legacy?0:(growth.cappedPersonHours-.6*penaltyGrowth)*monasteryGoldPerHour(1,monastery);
  const cap=storageCapacity(c),upkeep=armyUpkeep(w,c);
- for(const r of resourceKeys){const max=cap-e.reservedIncoming[r],exact=c.stock[r]+e.productionRemainder[r]+rates[r]*effectiveHours-(r==='food'?upkeep*hours:0),amount=Math.floor(exact+1e-9);if(exact<0){c.stock[r]=0;e.productionRemainder[r]=0;if(r==='food'&&c.military)c.military.unpaidFood+=-exact;}else if(amount>=max){c.stock[r]=Math.max(0,max);e.productionRemainder[r]=0;}else{c.stock[r]=Math.max(0,amount);e.productionRemainder[r]=Math.max(0,exact-amount);}}
- c.population=growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),hours);
+ for(const r of resourceKeys){const max=cap-e.reservedIncoming[r],exact=c.stock[r]+e.productionRemainder[r]+rates[r]*effectiveHours+(r==='gold'?offering:0)-(r==='food'?upkeep*hours:0),amount=Math.floor(exact+1e-9);if(exact<0){c.stock[r]=0;e.productionRemainder[r]=0;if(r==='food'&&c.military)c.military.unpaidFood+=-exact;}else if(amount>=max){c.stock[r]=Math.max(0,max);e.productionRemainder[r]=0;}else{c.stock[r]=Math.max(0,amount);e.productionRemainder[r]=Math.max(0,exact-amount);}}
+ c.population=growth.population;
  for(const n of MILESTONES)if(c.population+1e-8>=n&&!e.milestones.includes(n))e.milestones.push(n);e.milestones.sort((a,b)=>a-b);e.lastSettledAt=at;
- recordGrowthPopulation(w,c,populationBefore,populationFrom,at,c.population);
+ if(!legacy)recordGrowthPopulation(w,c,populationBefore,populationFrom,at,c.population);
 }
+/** Called only after validating the old envelope/checksum. Settle the unposted
+ * pre-update interval with its original +3%/tier and zero offerings, then switch.
+ * Preserve receipts, task authority, completed buildings and admitted work. */
+export function migrateV95Economy(w:FormalWorld){
+ if(w.economyVersion===95||!w.cities.some(c=>c.economy))return w;
+ for(const c of w.cities)settleCity(w,c,w.time,true);
+ w.economyVersion=95;return w;
+}
+export function offeringPerHour(c:FormalCity){return monasteryGoldPerHour(c.population,buildingLevel(c,'monastery'))*((c.integrationWorkHours??0)>0?.4:1);}
 export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).cities.get(id);if(!original)return undefined;const c=structuredClone(original);settleCity(w,c);return c;}
 export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}
 /** B5/B6 interface only: no combat or conquest command is implemented here. */
@@ -136,7 +153,7 @@ export function applyEconomyCommand(w:FormalWorld,c:FormalCity,order:FormalOrder
  if(p.type==='logistics.dispatch'){
   dispatchLogistics(w,c,order,p.destinationCityId,p.resources,s);return;
  }
- requireRule(e.construction.length<QUEUE_CAPACITY,'建造工程已達 5 項上限。');
+ requireRule(e.construction.length<QUEUE_CAPACITY,`建造工程已達 ${QUEUE_CAPACITY} 項上限。`);
  let lane=p.lane;requireRule(lane!==1||e.milestones.includes(15000),'尚未取得第二施工佇列。');
  const previous=e.construction.filter(j=>p.type==='field.upgrade'?j.target.kind==='field'&&j.target.slot===p.slot:j.target.kind==='building'&&j.target.key===p.key);
  requireRule(!previous.some(j=>j.action==='demolish'),'此建築正在拆除，不能排入升級。');

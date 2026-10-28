@@ -1,5 +1,6 @@
+import {resourceBoostRequirement} from '../formal/catalogB3';
 import type {FormalWorld,FormalCommand,FormalCity,Resources} from '../formal/model';
-import {V85,AGE_EXPECTED,specCost,type AuditItem,type SpecBuilding,type SpecTech,type SpecUnit} from './specAudit';
+import {V85,V95_BUILDING_PREREQUISITES,AGE_EXPECTED,specCost,type AuditItem,type SpecBuilding,type SpecTech,type SpecUnit} from './specAudit';
 import {developerWorld,putBuilding,type DeveloperConfig,developerOrder} from './scenarios';
 import {MILESTONES,changeCityOwner} from '../formal/economy';
 import {submitFormalOrder,advanceFormal} from '../formal/reducer';
@@ -17,7 +18,7 @@ export const variantsFor=(kind:AuditItem['kind'],target:string)=>{
  if(kind==='age'){list.push({id:'population',name:'人口差 1'},{id:'building:center',name:'城市中心差 1 級'});return list;}
  if(d?.age)list.push({id:'age',name:'時代差一階'});
  if(kind==='building'){
-  const b=d as SpecBuilding;for(const [key,lv] of Object.entries(b.buildings))if(lv>1||key!=='center')list.push({id:'building:'+key,name:'缺 '+(V85.buildings.find(b=>b.id===key)?.name??key)+' 前置'});
+  const b=d as SpecBuilding;for(const [key,lv] of Object.entries(V95_BUILDING_PREREQUISITES[b.id]??b.buildings))if(lv>1||key!=='center')list.push({id:'building:'+key,name:'缺 '+(V85.buildings.find(b=>b.id===key)?.name??key)+' 前置'});
   if(['mill','lumbermill','masonry','mint'].includes(target))list.push({id:'fields',name:'資源田等級未達門檻'});
  }else if(kind==='tech'){
   const t=d as SpecTech;for(const key of Object.keys(t.buildings))list.push({id:'building:'+key,name:'缺 '+(V85.buildings.find(b=>b.id===key)?.name??key)+' 前置'});
@@ -53,12 +54,12 @@ export function createTrialWorld(req:TrialRequest,template?:FormalWorld):{world:
   else if(req.target==='logistics'){name='商隊實際運輸';line=759;age=1;requirements={market:2};const destination=w.cities.slice(1).sort((a,b)=>Math.hypot(a.x-c.x,a.y-c.y)-Math.hypot(b.x-c.x,b.y-c.y))[0];changeCityOwner(w,destination,w.playerFactionId,'receive');destination.integrationWorkHours=0;putBuilding(destination,'warehouse.0',15);destination.stock={food:0,wood:0,stone:0,gold:0};const distance=route(w,c,destination).distance;cost={food:2001,wood:0,stone:0,gold:0};durationMs=Math.ceil(distance*60000);command={type:'logistics.dispatch',cityId:c.id,destinationCityId:destination.id,resources:cost as Resources};steps=['到商隊物流頁送2001穀，確認需要2队商隊並扣除真實庫存。','目的城在途預約2001容量，抵達前不能把它花掉。','推進抵達，確認目的城收到貨、車輛仍占用；再推進空車返程才釋放。'];result='每隊2000載量，60秒／合法路格；先預約容量，抵達入庫、返程釋放。';}
   else throw new Error('機制測試無效。');
  }else if(req.kind==='building'){
-  const d=V85.buildings.find(d=>d.id===req.target);if(!d||req.level<1||req.level>d.maxLevel)throw new Error('建築測試無效。');name=d.name+' Lv'+req.level;line=d.line;age=d.age;requirements=d.buildings;cost=specCost(d.baseCost,d.growth,req.level);
+  const d=V85.buildings.find(d=>d.id===req.target);if(!d||req.level<1||req.level>d.maxLevel)throw new Error('建築測試無效。');name=d.name+' Lv'+req.level;line=d.line;age=d.age;requirements=V95_BUILDING_PREREQUISITES[d.id]??d.buildings;cost=specCost(d.baseCost,d.growth,req.level);
   for(const [k,lv] of Object.entries(requirements))setBuilding(c,k,lv);
   const key=d.id==='warehouse'?'warehouse.4':d.id==='bunker'?'bunker.0':d.id;
   if(d.id==='residence')c.population=200;
   setBuilding(c,key,req.level-1);
-  const resource=({mill:'food',lumbermill:'wood',masonry:'stone',mint:'gold'} as const)[d.id as 'mill'];if(resource)for(const field of c.fields!.filter(p=>p.resource===resource))field.level=req.variant==='fields'?req.level===1?4:req.level+3:req.level===1?5:req.level+4;
+  const resource=({mill:'food',lumbermill:'wood',masonry:'stone',mint:'gold'} as const)[d.id as 'mill'];if(resource)for(const field of c.fields!.filter(p=>p.resource===resource))field.level=resourceBoostRequirement(req.level)-(req.variant==='fields'?1:0);
   durationMs=d.id==='center'?d.levels[req.level-1].durationMs:Math.round(d.levels[req.level-1].durationMs*.964**(Math.max(1,c.buildings.center)-1));command={type:'building.upgrade',cityId:c.id,key};steps=['在城市建設頁查看目標建築與鎖定原因。','按「執行本項正式操作」或在建設頁實際建造。','按「下一完成事件」，確認等級＋1、正確扣款與工期，重新保存讀回。'];result=d.id==='wall'?'城牆等級＋1，不占自由槽。':'等級＋1，成本／工期與 v85 相符。';
  }else if(req.kind==='tech'){
   const d=V85.techs.find(d=>d.id===req.target);if(!d)throw new Error('科技測試無效。');name=d.name;line=d.line;age=d.age;requirements=d.buildings;cost=d.cost;milestone=d.milestone;
