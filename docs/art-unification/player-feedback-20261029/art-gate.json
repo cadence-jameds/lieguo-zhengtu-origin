@@ -1,0 +1,156 @@
+{
+  "limits": "Visual self-review only; extra limbs/invalid grip are hard FAIL regardless of score. Player and independent gate pending.",
+  "retired": {
+    "elite.guard.civ_frankia": "HARD_FAIL_EXTRA_LIMB_PLAYER_FEEDBACK",
+    "japan-v1": "FAIL_TIER_READABILITY",
+    "china-v1": "FAIL_WEAPON_READABILITY",
+    "china-v2": "BLOCKED_MODERATION_NO_IMAGE"
+  },
+  "reviews": [
+    {
+      "id": "elite.guard.civ_frankia",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    {
+      "id": "elite.guard.civ_zhongguo",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    {
+      "id": "elite.guard.civ_japan",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "total": 18,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "V1 rejected for tier readability. V2 adds broad iron cuirass, two large o-sode, menpo and reinforced kabuto/shikoro. Actual100px distinction clear; fine armor detail remains subtle at native64 (item08=1).",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    {
+      "id": "light-cavalry",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "One straight shaft: blunt left butt and single right/front tip; two hands, reins and forearm-strapped shield coherent. Four horse legs; light mail/leather, no horse plate.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    {
+      "id": "knight",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Muted burgundy/cream/iron, open face, mail and limited plates; mostly bare horse. Distinct image and posture from approved plated heavy knight; heavy file unchanged.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    }
+  ]
+}

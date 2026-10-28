@@ -1,0 +1,320 @@
+[
+  {
+    "id": "feedback-20261029-elite.guard.civ_frankia",
+    "key": "elite.guard.civ_frankia",
+    "candidate": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/frankia-v1.txt",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+        "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      }
+    ],
+    "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+    "subject": "Single double-bitted axe, exactly two hands; blue-gold shield strapped to back.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "8b5e52dc31ed8961718894177daea5cf3afbb1357d77553136c0d416364f4938",
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+    "bytes": 33486,
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "normalization": "Full raw square ->512 ->480 inset on512; same as existing portrait converter; no content crop or color adjustment."
+  },
+  {
+    "id": "feedback-20261029-elite.guard.civ_zhongguo",
+    "key": "elite.guard.civ_zhongguo",
+    "candidate": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/china-v4.txt",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+        "sha256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+        "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318"
+      }
+    ],
+    "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+    "subject": "Reinforced shoulders/cuirass and mature repeating crossbow with visible transverse bow.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "064e7ddf6fb1b702fa38c3dd9dafbdba11f973dee1c2e383a7c3e09784f17d16",
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+    "bytes": 37630,
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "normalization": "Full raw square ->512 ->480 inset on512; same as existing portrait converter; no content crop or color adjustment."
+  },
+  {
+    "id": "feedback-20261029-elite.guard.civ_japan",
+    "key": "elite.guard.civ_japan",
+    "candidate": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/japan-v2.txt",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+        "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+        "sha256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc"
+      }
+    ],
+    "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+    "subject": "Advanced o-yoroi, kabuto, shoulder and limb protection; two-handed katana.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "2271da95a7997d8e205185d38762bfbb033368aa599aab5ba5d258ca66cc6569",
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+    "bytes": 37626,
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "total": 18,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "V1 rejected for tier readability. V2 adds broad iron cuirass, two large o-sode, menpo and reinforced kabuto/shikoro. Actual100px distinction clear; fine armor detail remains subtle at native64 (item08=1).",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "normalization": "Full raw square ->512 ->480 inset on512; same as existing portrait converter; no content crop or color adjustment."
+  },
+  {
+    "id": "feedback-20261029-light-cavalry",
+    "key": "light-cavalry",
+    "candidate": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/light-v1.txt",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+        "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+        "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+      }
+    ],
+    "path": "public/art/unified/units/light-cavalry.webp",
+    "subject": "One intact lance points right with horse travel, lightly armored rider and bare horse.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "0ab959f56f09b15b958be06af24ed6e91a3029ff4ebd87bb51da463cff975bd2",
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+    "bytes": 32092,
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "One straight shaft: blunt left butt and single right/front tip; two hands, reins and forearm-strapped shield coherent. Four horse legs; light mail/leather, no horse plate.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "normalization": "Full raw square ->512 ->480 inset on512; same as existing portrait converter; no content crop or color adjustment."
+  },
+  {
+    "id": "feedback-20261029-knight",
+    "key": "knight",
+    "candidate": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/knight-v1.txt",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+        "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+        "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1"
+      }
+    ],
+    "path": "public/art/unified/units/knight.webp",
+    "subject": "Muted burgundy/ivory/iron, simpler mail and light horse equipment; heavy knight locked.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "cd40fa2dea78397ecdf0dff1a7c486bff739a345721fb0d444675ed0006f4fb0",
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+    "bytes": 30290,
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Muted burgundy/cream/iron, open face, mail and limited plates; mostly bare horse. Distinct image and posture from approved plated heavy knight; heavy file unchanged.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "normalization": "Full raw square ->512 ->480 inset on512; same as existing portrait converter; no content crop or color adjustment."
+  }
+]

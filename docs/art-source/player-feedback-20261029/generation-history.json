@@ -1,0 +1,193 @@
+[
+  {
+    "id": "frankia-v1",
+    "status": "SELECTED",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+    "imageSHA256": "8b5e52dc31ed8961718894177daea5cf3afbb1357d77553136c0d416364f4938",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/frankia-v1.txt",
+    "promptSHA256": "20f09017fc4c5911007ed2e858baceda868f262807b218cbe29fb58baa4bba81",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+        "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "china-v1",
+    "status": "REJECTED_WEAPON_READABILITY",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/china-v1.png",
+    "imageSHA256": "a2c31e41a723d8e8b8afb7bc9d8832ffef5299a0149004c294a9a47efc3d5be9",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/china-v1.txt",
+    "promptSHA256": "ae7b7e1e958e6e67412aa8074adb63d0b2571f2426ab1cf320afbf6e8a06b333",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+        "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "japan-v1",
+    "status": "REJECTED_TIER_READABILITY_64PX",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+    "imageSHA256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/japan-v1.txt",
+    "promptSHA256": "342662d6833a181d5b32f1b4cab937ad3ea37b510dcd972ca4df3c3c95c5467a",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+        "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "light-v1",
+    "status": "SELECTED",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+    "imageSHA256": "0ab959f56f09b15b958be06af24ed6e91a3029ff4ebd87bb51da463cff975bd2",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/light-v1.txt",
+    "promptSHA256": "55fc1bda38d6dd9b1f01cfd601b1845e84764964f1e4418dcc34581b153b413c",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+        "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+        "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "knight-v1",
+    "status": "SELECTED",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+    "imageSHA256": "cd40fa2dea78397ecdf0dff1a7c486bff739a345721fb0d444675ed0006f4fb0",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/knight-v1.txt",
+    "promptSHA256": "7d77e5a59ba63a8a778ca69968a900578f0dbe6bc9b798e21056fa35cad12dcd",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+        "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+        "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "china-v3",
+    "status": "INTERMEDIATE_NOT_SHIPPED",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+    "imageSHA256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/china-v3.txt",
+    "promptSHA256": "7334c53c59b9dc3fab136e3418acad8bac16362b3419e41d1e19c9fea6fb42ff",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/china-v1.png",
+        "sha256": "a2c31e41a723d8e8b8afb7bc9d8832ffef5299a0149004c294a9a47efc3d5be9"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "china-v4",
+    "status": "SELECTED",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+    "imageSHA256": "064e7ddf6fb1b702fa38c3dd9dafbdba11f973dee1c2e383a7c3e09784f17d16",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/china-v4.txt",
+    "promptSHA256": "6fcce7651bad2fe9a9d70b9e5953f22d0edc7fc3ac1cbafbc23af22e114d4eea",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+        "sha256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+        "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "japan-v2",
+    "status": "SELECTED",
+    "role": "ARMY-PORTRAIT",
+    "image": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+    "imageSHA256": "2271da95a7997d8e205185d38762bfbb033368aa599aab5ba5d258ca66cc6569",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/japan-v2.txt",
+    "promptSHA256": "7a838438257e301677e89c90c5e90f17d739c7fff4e8f1cc620772824054c550",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+        "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+        "sha256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc"
+      }
+    ],
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "china-v2",
+    "status": "BLOCKED_NO_IMAGE",
+    "prompt": "docs/art-source/player-feedback-20261029/prompts/china-v2.txt",
+    "requestId": "b0943188-c1b5-4e22-8b27-4f43beb7f283",
+    "reason": "Generator input safety classification violence; no image produced."
+  }
+]

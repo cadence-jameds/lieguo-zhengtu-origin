@@ -23,7 +23,7 @@ registry = {key: {} for key in ['units', 'technologies', 'buildings', 'construct
 assets = []
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 for batch in records:
-    raw = SOURCE / (batch['id'] + '.png')
+    raw = ROOT / batch['source'] if batch.get('source') else SOURCE / (batch['id'] + '.png')
     if not raw.exists():
         shutil.copyfile(batch['sourcePath'], raw)
     with Image.open(raw) as image:
@@ -52,7 +52,7 @@ for batch in records:
             references.append({**ref, 'sha256': sha(path)})
         batch['references'] = references
         for index, cell in enumerate(batch['cells']):
-            if not cell.get('key') or cell.get('rejected'):
+            if not cell.get('key') or cell.get('rejected') or cell.get('supersededBy'):
                 continue
             default_rect = [0, 0, image.width, image.height] if batch.get('single') else [index % 3 * 512, index // 3 * 512, 512, 512]
             if not batch['transparent'] and not batch.get('single'):

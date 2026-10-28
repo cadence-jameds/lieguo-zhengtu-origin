@@ -1,9 +1,18 @@
 """Standard-library CI integrity gate for actual browser/source scale evidence."""
-import hashlib,json
+import hashlib,json,subprocess,sys
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/city-fit'
 m=json.loads((D/'measurements.json').read_text())
-for p,h in m['sourceFiles'].items():assert hashlib.sha256((R/p).read_bytes()).hexdigest()==h,('Stale display evidence',p)
+compat_path=R/'docs/art-unification/player-feedback-20261029/compatibility.json'
+compat=json.loads(compat_path.read_text()) if compat_path.exists() else None
+validated=False
+for p,h in m['sourceFiles'].items():
+ current=hashlib.sha256((R/p).read_bytes()).hexdigest()
+ if current==h:continue
+ assert compat and p in compat['updates'],('Stale display evidence',p)
+ entry=compat['updates'][p];assert entry['baselineSha256']==h and entry['currentSha256']==current
+ if not validated:
+  subprocess.run([sys.executable,str(R/'scripts/check-player-feedback.py')],cwd=R,check=True);validated=True
 assert len(m['rows'])==912 and len(m['anchorCases'])==72 and len(m['mapChecks'])==162
 assert not m['afterImperialBuildingAlphaIntersections']
 assert len(m['labelChecks'])==12 and all(r['castlePixelsOverRangeBadge']==0 for r in m['labelChecks'])

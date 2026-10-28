@@ -1,0 +1,86 @@
+[
+  {
+    "name": "guard-china",
+    "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+    "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7",
+    "source": "public/art/catalog-guards.webp",
+    "cropRect": [
+      2,
+      2,
+      508,
+      501
+    ]
+  },
+  {
+    "name": "guard-frankia",
+    "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+    "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715",
+    "source": "public/art/catalog-guards.webp",
+    "cropRect": [
+      1026,
+      2,
+      508,
+      501
+    ]
+  },
+  {
+    "name": "guard-japan",
+    "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+    "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641",
+    "source": "public/art/catalog-guards.webp",
+    "cropRect": [
+      514,
+      507,
+      508,
+      515
+    ]
+  },
+  {
+    "name": "knight-before",
+    "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+    "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928",
+    "source": "public/art/catalog-units.webp",
+    "cropRect": [
+      2,
+      489,
+      508,
+      533
+    ],
+    "note": "Style anchor from original cavalry atlas, NOT the current formal knight before image."
+  },
+  {
+    "name": "elite.guard.civ_zhongguo",
+    "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+    "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318",
+    "source": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+    "sourceRevision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  },
+  {
+    "name": "elite.guard.civ_frankia",
+    "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+    "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3",
+    "source": "public/art/unified/units/elite.guard.civ_frankia.webp",
+    "sourceRevision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  },
+  {
+    "name": "elite.guard.civ_japan",
+    "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+    "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289",
+    "source": "public/art/unified/units/elite.guard.civ_japan.webp",
+    "sourceRevision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  },
+  {
+    "name": "light-cavalry",
+    "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+    "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108",
+    "source": "public/art/unified/units/light-cavalry.webp",
+    "sourceRevision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  },
+  {
+    "name": "heavy-knight",
+    "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+    "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1",
+    "source": "public/art/unified/units/heavy-knight.webp",
+    "sourceRevision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  }
+]

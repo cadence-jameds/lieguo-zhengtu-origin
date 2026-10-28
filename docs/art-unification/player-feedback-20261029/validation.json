@@ -1,0 +1,42 @@
+{
+  "base": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "targetedTests": {
+    "passed": 26,
+    "failed": 0
+  },
+  "isolatedFull": {
+    "success": true,
+    "passed": 2102,
+    "failed": 0,
+    "skipped": 1
+  },
+  "artFiles": {
+    "status": "PASS",
+    "batches": 50,
+    "assets": 198,
+    "runtimeBytes": 17042430
+  },
+  "comparisonGate": "PASS",
+  "cityBrowser": {
+    "status": "PASS",
+    "cases": 288,
+    "pairs": 144,
+    "changed": 27,
+    "identical": 117
+  },
+  "armyBrowser": {
+    "status": "PASS",
+    "cases": 27
+  },
+  "githubCI": "BLOCKED_NOT_PUSHED",
+  "playerArtApproval": "待驗",
+  "physicalPhone": "待驗",
+  "delivery": {
+    "status": "BLOCKED_REMOTE_UPLOAD",
+    "remoteHead": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+    "reason": "GitHub connector large image blob uploads repeatedly failed to return; execution environments were restarted. Direct GitHub access is blocked by enforced network policy (proxy403). No branch ref updated.",
+    "localArtifacts": "Preserved in this commit; ready for review and later push to the same Draft PR44 branch."
+  }
+}

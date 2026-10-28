@@ -35,6 +35,8 @@ jobs:
         run: python3 scripts/check-art-boards.py
       - name: City display scale evidence
         run: python3 scripts/check-city-visuals.py
+      - name: Player feedback art scope and evidence
+        run: python3 scripts/check-player-feedback.py
       - name: Full regression in a disposable copy
         run: node scripts/verify-in-isolation.mjs full
       - name: Build for project Pages

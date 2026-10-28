@@ -1,0 +1,25 @@
+{
+  "base": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "scope": "Only three legacy walled lower-row civilization cells; imperial/unwalled/other civilizations retain exact screenshot pixels. Prior city-fit evidence remains historical, not rewritten.",
+  "updates": {
+    "src/game/MiniatureCity.tsx": {
+      "baselineSha256": "27b4d0fd9d58265786b9eed88a15df0f0f49d575eba3fef17b8e39f3cdb44d07",
+      "currentSha256": "0f4aec090b581fa5dac08fce5c65289ea08d5879685e8baee622a77b10b9ee99",
+      "baselineFile": "docs/art-unification/player-feedback-20261029/before/MiniatureCity.tsx"
+    },
+    "src/game/game.css": {
+      "baselineSha256": "d153e2a2da34749e8c50dbcde4637a75957b4ebb73d66fe330df6b587d4ee544",
+      "currentSha256": "27f940cd0e2afd89ba6d34c9a6f64d01b917977f25b17461decb29878c16f87c",
+      "baselineFile": "docs/art-unification/player-feedback-20261029/before/game.css"
+    }
+  },
+  "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/cities/result.json",
+  "unchangedPairs": 117,
+  "changedPairs": 27,
+  "renderFiles": {
+    "src/game/presentation/legacyMiniature.ts": "140673411ece0d26139d64580cda1ba58715f11e6ff3ebe5497d8d56d36b1a80",
+    "scripts/art-preview.tsx": "0665b553e6bfca3559fcac9e2e8540a82820436e6f9a176559572c8771b49d56",
+    "scripts/verify-player-feedback-cities.mjs": "2626568921868eb7b2cc7aa5cfa91ea8e422c7a42342e56d39532635e42a0be3",
+    "scripts/verify-player-feedback-units.mjs": "46ca9b460f20e52301cc29fd95bb337aac7a7d538c439f6a3cb4f0d393b9bda9"
+  }
+}
