@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "docs/art-unification/REPORT.md",
-      "sha256": "88b746f319317132c1a841408b7ec1c2e114f54eb4021fee435b509d057d61f8",
-      "bytes": 11093
+      "sha256": "5f7a75fd4f7b25f3b3393310d5a914e21c0f01e96c908d49e00c64c092a499e3",
+      "bytes": 11310
     },
     {
       "path": "docs/art-unification/art-gate.md",
@@ -575,6 +575,761 @@
       "path": "docs/art-unification/browser/result.json",
       "sha256": "5beaa688b48d0b5ab65ddab018710ef166d4f00798ca1be55347bbe19727a596",
       "bytes": 113906
+    },
+    {
+      "path": "docs/art-unification/city-fit/REPORT.md",
+      "sha256": "c6ff4e647d6c52858d68d9d117510091797419397da77a2ecc3fa763b7562a37",
+      "bytes": 13729
+    },
+    {
+      "path": "docs/art-unification/city-fit/board-manifest.json",
+      "sha256": "8be11a0eb37fbab5f6135e8f4c53d0ed2244ce727e8deb660a2120c50ab9e926",
+      "bytes": 199979
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_britannia-3-outskirts-ui.jpg",
+      "sha256": "ffbd34ec1704441ee5015770d1f73b7079c0b79db1a3af76dd28d01ce57ccf47",
+      "bytes": 367361
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_britannia-3-town-ui.jpg",
+      "sha256": "7a47439d1e6da69049fcf568ae34a5d8fc9c78aff5e187f9c7a7d71bc213c26e",
+      "bytes": 321979
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_byzantium-3-outskirts-ui.jpg",
+      "sha256": "19a6867eca01a502fd5025e838e05bc994b83a53283223c21c0df4b2fe6aa4e7",
+      "bytes": 367821
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_byzantium-3-town-ui.jpg",
+      "sha256": "a9c19432de9ad4599fbc20028271405fe5848fac37c7de503a1011e5758a153d",
+      "bytes": 322443
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_frankia-3-outskirts-ui.jpg",
+      "sha256": "cfda494e4d03d7aeb0446232d30e78cb73edcc83f5d0bdcef77dff8a59dfbe49",
+      "bytes": 367724
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_frankia-3-town-ui.jpg",
+      "sha256": "f1c176f656e4571131dd0d31d90819d89e53dd8efdc726f0734c41462df36cfa",
+      "bytes": 322019
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_japan-3-outskirts-ui.jpg",
+      "sha256": "c0b822a3b326390b2dcd17f3c08245f5ba2edd3512af60a3d3005951ba0c00b8",
+      "bytes": 367533
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_japan-3-town-ui.jpg",
+      "sha256": "75f4549ca782da452b17f8d1a0103cce55cc4b50bfd755f9b7d30c72d10f9785",
+      "bytes": 322575
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_mongolia-3-outskirts-ui.jpg",
+      "sha256": "9ab68fdfd58eb92d50bbf44fd9d7661601d528729461aa3a978612317d8528aa",
+      "bytes": 366992
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_mongolia-3-town-ui.jpg",
+      "sha256": "337e4528704e0067b71cfc4e431d3887df3d04e03a28cc4bf8ea18d4c624e1df",
+      "bytes": 321597
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_zhongguo-3-outskirts-ui.jpg",
+      "sha256": "30f5adb53c0e047920c6dfcf239c383bc3caf4cbed0366b55f06ae21a10eb401",
+      "bytes": 367703
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-1440-civ_zhongguo-3-town-ui.jpg",
+      "sha256": "0ea06a1805a36f729a7d00d127b727eac44f98a536a953d28a525e7c51646e8a",
+      "bytes": 321641
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_britannia-3-outskirts-ui.jpg",
+      "sha256": "d79d61148cc0d7b70dcf04119b03edc7e051bc28b4d24efb4e90ebb6e729838e",
+      "bytes": 78961
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_britannia-3-town-ui.jpg",
+      "sha256": "0cd04c45300c48eae5525c3b9ef890ee8fc4be0a41579d268f81423a121d0b95",
+      "bytes": 64907
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_byzantium-3-outskirts-ui.jpg",
+      "sha256": "823147c0c2e1f451b6044cf6e4cf4014093711ca16d00a6fad6daa8a9798327d",
+      "bytes": 79092
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_byzantium-3-town-ui.jpg",
+      "sha256": "3438e19b341bf8142de86a06202a150f22e4dae42f8acd3df1414c0252436025",
+      "bytes": 64977
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_frankia-3-outskirts-ui.jpg",
+      "sha256": "a11c5f46658958463853e7e65f374f4727f94a55f7b2dfcacbe08b9056f533fc",
+      "bytes": 79086
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_frankia-3-town-ui.jpg",
+      "sha256": "c7651c3b5f18c8047e65edba6855ee67d08ab699a7e1468f06e6a2493d642f24",
+      "bytes": 64945
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_japan-3-outskirts-ui.jpg",
+      "sha256": "4a4e975b4dd3cf0c8cc97c19cbc0e5dc6215963136befeec67fc2e61cdb707de",
+      "bytes": 78877
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_japan-3-town-ui.jpg",
+      "sha256": "10d24043760abcf360a0a0f104d018926fa6985fcbeefac6f62b157b008b2056",
+      "bytes": 64748
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_mongolia-3-outskirts-ui.jpg",
+      "sha256": "1a6871861cf23c95fe00481beb15727c78d37ebf4963ee16bbad5740789e0bed",
+      "bytes": 78579
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_mongolia-3-town-ui.jpg",
+      "sha256": "8d9617e1d39ab5009da2208c2cdc95060d0bb1a1fef3ba06bebd0903384a9ea4",
+      "bytes": 64634
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_zhongguo-3-outskirts-ui.jpg",
+      "sha256": "299bcc19ac5d927a26c818f8c36a7486bba26ee0273732a09f9f42b4de70064c",
+      "bytes": 78740
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-320-civ_zhongguo-3-town-ui.jpg",
+      "sha256": "a1b632dc819c64699b814187586dad8b25707f4bd011a572938227b33e066cdd",
+      "bytes": 64459
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_britannia-3-outskirts-ui.jpg",
+      "sha256": "c74bf1627b8d8b0122a72350e08aebda3c61af02cb0ee561f381db881328c4ba",
+      "bytes": 93932
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_britannia-3-town-ui.jpg",
+      "sha256": "0ebcf85152541693c74d798e5eec1de4f553585fe70efe52271e814aa6fa0dec",
+      "bytes": 77013
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_byzantium-3-outskirts-ui.jpg",
+      "sha256": "f080d85b3d95c2a42027c9f510c5472589026e408bdc3fec6bbc98b56673df3c",
+      "bytes": 94001
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_byzantium-3-town-ui.jpg",
+      "sha256": "b14894ba0e45000ad6c76ae35231bc9c10b46d7affce0b4103577bff677bf3e6",
+      "bytes": 77117
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_frankia-3-outskirts-ui.jpg",
+      "sha256": "89428ff7939941abf6f61d6c0d011766ebcd546248051d63d3e10fd8134777ff",
+      "bytes": 94112
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_frankia-3-town-ui.jpg",
+      "sha256": "c4eeccf9bd0f9912a74338a08ed41d0356919eb35d728b702427ccff631cb513",
+      "bytes": 77117
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_japan-3-outskirts-ui.jpg",
+      "sha256": "e5666cdb7114c26fca4260cb51c74456c248e00f68898152ff1edbdd3137b555",
+      "bytes": 93781
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_japan-3-town-ui.jpg",
+      "sha256": "0d45a286f52c2836fa1741fc09074b867f9ffc733dc1710d1f569251f3f49eba",
+      "bytes": 76827
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_mongolia-3-outskirts-ui.jpg",
+      "sha256": "a10ce9968ac9c863fda69df2340f95880ad038efcaa2889a5627d3a9dbf50676",
+      "bytes": 93404
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_mongolia-3-town-ui.jpg",
+      "sha256": "a61d4148f15054f38759eb49f898c5d005d03c06d798ddfd1bec1ecee09711c4",
+      "bytes": 76719
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_zhongguo-3-outskirts-ui.jpg",
+      "sha256": "494deefec882768b0a13808fea80a2e7f92ec05da629e35edbd3103428876c40",
+      "bytes": 93602
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/after-390-civ_zhongguo-3-town-ui.jpg",
+      "sha256": "3b6275d58e1c41e728e4a7aab898e3502af4ae0b19d694a562fb26fdcdbd144f",
+      "bytes": 76462
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_britannia-construction.jpg",
+      "sha256": "abc5ad16c0beb6b22afabaf94c9841c8788131ef219449db6d8afa6166e81beb",
+      "bytes": 337556
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_britannia-labels-map.jpg",
+      "sha256": "cdc10a9b7b09e1676d2a153b96e6f74ab8fae17da0743e82869f1ad98177300b",
+      "bytes": 330668
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_byzantium-construction.jpg",
+      "sha256": "addf2e7475c20c35187c76d028b1c7bd10d38adc5a9ef87d6cab38cce0965f84",
+      "bytes": 337940
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_byzantium-labels-map.jpg",
+      "sha256": "f705a88be020193e35f162b839f0824d075691680530903073521c1517e6e578",
+      "bytes": 331122
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_frankia-construction.jpg",
+      "sha256": "3947ac91f15232cc40010a83a1fd0752be90cd64c271deac8cac2c3e75a863b2",
+      "bytes": 337597
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_frankia-labels-map.jpg",
+      "sha256": "e2f72a635c17275c250337cddffc674620dfa55c3fcf1c7be7022f9b9088c82a",
+      "bytes": 331114
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_japan-construction.jpg",
+      "sha256": "e3a58fab02d81ef8c4cc33b60e70207cf754ea1c70e2c3b0c790450f8c17f2ab",
+      "bytes": 337834
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_japan-labels-map.jpg",
+      "sha256": "0d68359c8c29edd84cdee4c16406ee2b51d9dbade698da5d96705c121a6c4876",
+      "bytes": 330684
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_mongolia-construction.jpg",
+      "sha256": "c9d7e478e40e089157aa629f51cb781e51f7a693dfe446b2b69721b536b0e46f",
+      "bytes": 336804
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_mongolia-labels-map.jpg",
+      "sha256": "ceb098143bc569e81d5af36d47145945f0e7d049d7c05edf1fec5f0ceec72bbd",
+      "bytes": 330957
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_zhongguo-construction.jpg",
+      "sha256": "43a9357a0c31960618ff423c092995a7e10814478d0dcdfa871ca9c37454316b",
+      "bytes": 336326
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-1440-civ_zhongguo-labels-map.jpg",
+      "sha256": "24726a7b5391e7c804dcc52481c508fe72ed0705169e86a814756010b6aa3ff7",
+      "bytes": 330576
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_britannia-construction.jpg",
+      "sha256": "54d6364b86e39e9f6e4d403fabc1f7c25aa349eb01011eb825da78032a1f4bab",
+      "bytes": 72843
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_britannia-labels-map.jpg",
+      "sha256": "5e9168c3fd42ef18b318f8e92203770c4f7448481125ca6cf526da804fddad08",
+      "bytes": 71901
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_byzantium-construction.jpg",
+      "sha256": "242c3c17344de01bcbd016b13f964fc21c2808b901cbdce38ada6f4859441bd0",
+      "bytes": 72945
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_byzantium-labels-map.jpg",
+      "sha256": "f6e11e4a74cbe59d6c2ff08ad6982db69f56654f5894c9291ac86f8a218e69d3",
+      "bytes": 71960
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_frankia-construction.jpg",
+      "sha256": "87b3fa4c6f197c3ab4af210d395af8cda3f4260b7ba81309b046e273483db959",
+      "bytes": 72930
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_frankia-labels-map.jpg",
+      "sha256": "565a1f5b684224c0024e1ba391b9d5e5e12b6df0900f82d0480713a76c94aa51",
+      "bytes": 71873
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_japan-construction.jpg",
+      "sha256": "2c07a499f43c84c8d626601f9808a0c0dddf6394246513d39b4f24b3183ed50f",
+      "bytes": 72663
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_japan-labels-map.jpg",
+      "sha256": "48f0aefe2e8ddfa1ff64b9e274ac9b54e1bd698e4bd24c4ce6255069b1103195",
+      "bytes": 71869
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_mongolia-construction.jpg",
+      "sha256": "acb4ff4e1b40c8d7e97c1574a5eb8b05d7a15a4231577577cd2c68ecd47208bd",
+      "bytes": 72518
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_mongolia-labels-map.jpg",
+      "sha256": "863c4468866b64f5ffe10350c76ea35e2afbc7db38ce260ebedc5546feb77867",
+      "bytes": 71984
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_zhongguo-construction.jpg",
+      "sha256": "e0e4b87ac29b40d63e821c76b2bf54c42b6d19804e2fb318206622e2f9314fe5",
+      "bytes": 72300
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-320-civ_zhongguo-labels-map.jpg",
+      "sha256": "d6f1a57ac14878a76da8c79ece3208e3f12d972f3dc848c0831def6abe58706d",
+      "bytes": 71879
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_britannia-construction.jpg",
+      "sha256": "cda2fd4be0f535d9462f2a5eeedfca3510c3d050ffcbb8a52182091755ae8b59",
+      "bytes": 86483
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_britannia-labels-map.jpg",
+      "sha256": "567d85e7f64d8e83240088568d14443074a787f660c190d9c288d588aa69c0a5",
+      "bytes": 87020
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_byzantium-construction.jpg",
+      "sha256": "95c7cd76c7ac167facb9b4fc67d71d14ed272f9770ad6b6d011dbca62d9ab391",
+      "bytes": 86608
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_byzantium-labels-map.jpg",
+      "sha256": "85b80946c7d39616ce6a574b1a9125d247d427b5e0dabea1a6fd72e56ffce76f",
+      "bytes": 87084
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_frankia-construction.jpg",
+      "sha256": "e088befc466adc47fe77ae8ed9e01d403e12c1465c98dae798ac6448a5c2bc2e",
+      "bytes": 86596
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_frankia-labels-map.jpg",
+      "sha256": "4bb62ed91c35129b383ee1eb8d7968634ef9f7be17d5433bc7b54e68ec6f3d14",
+      "bytes": 87077
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_japan-construction.jpg",
+      "sha256": "a7d889f7df0170b40b9338a03566941de0a2668caf4732440a0a839261f8ed6f",
+      "bytes": 86203
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_japan-labels-map.jpg",
+      "sha256": "e39e11d635dea979c0d7c054f2e7171bcb51894345287863c3e7a2f5209a4431",
+      "bytes": 86988
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_mongolia-construction.jpg",
+      "sha256": "bfad514a4d65b09c655a4703ef6bf3eab4149964a7ef1894ea0deb6729d1c45c",
+      "bytes": 86130
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_mongolia-labels-map.jpg",
+      "sha256": "c7e37e4d29edca34f94c1b7859c757da3aca34fddfff9ba8d5e1718fffa6302b",
+      "bytes": 87073
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_zhongguo-construction.jpg",
+      "sha256": "cf8eecc92be86c9e5ad2133f67bf3d6b6e094c1fbe5de3f89603d3d81dd811d0",
+      "bytes": 85764
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/interaction-390-civ_zhongguo-labels-map.jpg",
+      "sha256": "8065249e6252e93fccee436b9974db2a9949be555940378be95b1861f27fd572",
+      "bytes": 86973
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/result-city.json",
+      "sha256": "38d4b456fc51500605da0067edd1a030cee70a92841416a95e6f91ba0849903f",
+      "bytes": 2213509
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/result-interactions.json",
+      "sha256": "865cec047e2cc4daa114e83d3b1f67039387b25c869d796ab4fa861360d71d49",
+      "bytes": 165570
+    },
+    {
+      "path": "docs/art-unification/city-fit/browser/result-map.json",
+      "sha256": "0ab72fd0a28221671aaa2f08825dcb7a142e3f6c283cc0ad2a0ff377fbfa3934",
+      "bytes": 478053
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-index.json",
+      "sha256": "8de865f5dd544d7bfb8fa6ae731eb77f7fa4140ba712d23cbd6e10cc1192cb9c",
+      "bytes": 259148
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-01.webp",
+      "sha256": "043602ce8e93933963f645695eb9177395b2405c7f055a93b8be7b40196ee644",
+      "bytes": 323088
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-02.webp",
+      "sha256": "791cf5c96603e730dcd2afb0853ff9b376711064fb530fa5fdbc5d1f052a50c2",
+      "bytes": 335026
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-03.webp",
+      "sha256": "7fc3b6f0a49a6931187517fe90e1acda381ab159df7005d1fbde6bbcc4773cb2",
+      "bytes": 347770
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-04.webp",
+      "sha256": "46463450aed352d4c84c55644fd451feeaf02cf6eafef7462ec14f7484786b9b",
+      "bytes": 730914
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-05.webp",
+      "sha256": "3ef063b24cfc9927fa650d84e4bfd1831b58a249aecb15c9ed3caa75ba7d5d4b",
+      "bytes": 786886
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-06.webp",
+      "sha256": "e64370b42b0479647adf03f70f6e22bd007328e7898f77a1f6434aded1e34860",
+      "bytes": 486466
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-07.webp",
+      "sha256": "c8b12f7b6ff3d7a6bd72f490f6f8d09d305f40eef028e718a6792b36a95590c2",
+      "bytes": 896334
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-08.webp",
+      "sha256": "262ddbe5c458fcfd1cf50515a814128f4bbcb108702ff798c82bdbc9c927e7ba",
+      "bytes": 370338
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-09.webp",
+      "sha256": "65768260d31366ccc220e970d7454fe15e0c3c47c714eea1ddc75db83be82844",
+      "bytes": 368414
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-10.webp",
+      "sha256": "53d77de18a0c0eeec12b6e2aab68d1c8d90183ceab8088baccc198ec2c93927c",
+      "bytes": 298598
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-11.webp",
+      "sha256": "20d09d55ae68bbf87abbf8376c7aedc7d6fc0b0ae1d1eba90a5d3cb7c0300187",
+      "bytes": 648480
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-12.webp",
+      "sha256": "8dff55096e0fa41fa876e9966af169606360bb0df675f84e0c898972fd906fc5",
+      "bytes": 1203216
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-13.webp",
+      "sha256": "429755458ee79e1936e41f4e77798f1ce19f3e56caf9535773332d3987508142",
+      "bytes": 724852
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-14.webp",
+      "sha256": "30a752981644943c17b923e62c0be815ea55c601c7c8718707792e89967f74ae",
+      "bytes": 834732
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-15.webp",
+      "sha256": "64501fea29e325fab9566631a81eb4d3dcc51b466c10c5cbf207614acfd9a5c9",
+      "bytes": 859454
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-16.webp",
+      "sha256": "8c559c8ccdcec666829724e48ba8511467c451765198f44ce242d17ead698b24",
+      "bytes": 899960
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-17.webp",
+      "sha256": "8c762f0304e7414b8c68adb96084eef0be11e4e0e2fe3c6327bc0d7c37d3fc48",
+      "bytes": 1900560
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-18.webp",
+      "sha256": "4a6756fc4534e8ba1f29cda0b7b4e1ce294c24ca4d9a8f7a676326f0256cded4",
+      "bytes": 942548
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-19.webp",
+      "sha256": "0328ac7aa838011c03f46582c1e8f270347cbe421b29239312aa784b37cce5d6",
+      "bytes": 529036
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-20.webp",
+      "sha256": "ab9f9eb18bb1889fed1f3a54341a5643224c90aa392c8e3eb89b93ffb04de883",
+      "bytes": 866646
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-21.webp",
+      "sha256": "a6fd7f088e3e9f81cff03ff5980954192552a95b7e3999f707a2c221da49241c",
+      "bytes": 484000
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-22.webp",
+      "sha256": "e2b05f34a93ffd9bc8ac0a86df3f106f7bcafcb9c8f03dd1c6a9d86fa5576b8a",
+      "bytes": 434566
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-23.webp",
+      "sha256": "504e9465fbbe1ff5018e92901d8dff61adedcc00f561eb669689f937156dd51f",
+      "bytes": 342330
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-24.webp",
+      "sha256": "da7ee2ae6cb9beaad4159fbac2bce646b83584c2b184a649dfda1c52bc2b9978",
+      "bytes": 688638
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-25.webp",
+      "sha256": "7ea3cebc9131ef3d62251fb88749cf12f8aff65b07277ba93b2449c255aba6fc",
+      "bytes": 1317680
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-26.webp",
+      "sha256": "396a1b73e7996c7f4543624139435e8a5f9069927689f6646b3e4c86036f4799",
+      "bytes": 849768
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-27.webp",
+      "sha256": "ffb94b8073af1d59b0a66860d394780580cd0f1828bc2248e5f1656ae0ee24b0",
+      "bytes": 698886
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-28.webp",
+      "sha256": "1b36ebd4bb44b11773280516d095aa276654278d639310a3fd0d541c2673b73c",
+      "bytes": 584908
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-29.webp",
+      "sha256": "30832c7b57e8a946b221d92d789ab5d4c6f7d7ef3ddf7c7524c67ed1a56e99f0",
+      "bytes": 692286
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-30.webp",
+      "sha256": "4affc351b9b7af26b17ac7bd89cfbd725d9b03e31a14dfa54798b167e542d1ad",
+      "bytes": 3170568
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-31.webp",
+      "sha256": "432a71fe631c94a84480047f3c6a5168f2e57bcd6738ab509fc4f886bbebaf70",
+      "bytes": 3149178
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-32.webp",
+      "sha256": "5a1ded37f34305d86860306944bb172223198e4ea90e47e2b4a7a5961ed36825",
+      "bytes": 3109392
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-33.webp",
+      "sha256": "280c89597c35485a25bd0f60f8f5e51ede94eb81915da2495296326c42c1637a",
+      "bytes": 4068992
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-34.webp",
+      "sha256": "f264e9527c5cba313732a91ba784497dd398c941eb8a6a98848ef1507d5cec09",
+      "bytes": 1595040
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-35.webp",
+      "sha256": "e901aac8350e3dfa3bce2af895d264623ecaf71aed13c5400e082d7b9fdf3bdd",
+      "bytes": 1367378
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-36.webp",
+      "sha256": "99a7c7738aae7b7241a339d779f6e52b31654e3fe09ca10ec466b2df918d004a",
+      "bytes": 2548444
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-37.webp",
+      "sha256": "2989930a84d89e9963044f4934e00ec7560704b2aaa7bb214f95fc359ca8aea6",
+      "bytes": 4361192
+    },
+    {
+      "path": "docs/art-unification/city-fit/capture-sheets/frames-38.webp",
+      "sha256": "a11c1dbdba78e231fc284f6e925b6e9eb62cd5f998d8eb57470da85fbd7b4ac0",
+      "bytes": 3367474
+    },
+    {
+      "path": "docs/art-unification/city-fit/measurements.json",
+      "sha256": "0ba6e30535e9fba6d8b5dddc71f5e920f8a4b89deb95b06caf13b997f3053c8b",
+      "bytes": 712246
+    },
+    {
+      "path": "docs/art-unification/city-fit/measurements.md",
+      "sha256": "4288f87b7575718af959c9723e412c28545d54c97e8bf5ad052948596c332cfa",
+      "bytes": 24831
+    },
+    {
+      "path": "docs/art-unification/city-fit/outskirts-before-after-1440.webp",
+      "sha256": "39699ac882a3b3a5aa921899a157fc6a808ce15677ed80f53bda922ebaade4af",
+      "bytes": 553198
+    },
+    {
+      "path": "docs/art-unification/city-fit/outskirts-before-after-320.webp",
+      "sha256": "bd4a836fc008bebbdc412c81dcd0f17f274b1600cbe960f47cc65f9c2b75d085",
+      "bytes": 420756
+    },
+    {
+      "path": "docs/art-unification/city-fit/outskirts-before-after-390.webp",
+      "sha256": "bd4a836fc008bebbdc412c81dcd0f17f274b1600cbe960f47cc65f9c2b75d085",
+      "bytes": 420756
+    },
+    {
+      "path": "docs/art-unification/city-fit/six-civilizations-four-ages-in-walls.webp",
+      "sha256": "5eabf6af9bb15b6c3d4f4465b0788a65a6b139c31b5283c730a332b628b266b2",
+      "bytes": 1050496
+    },
+    {
+      "path": "docs/art-unification/city-fit/town-before-after-1440-building-audit.webp",
+      "sha256": "20920e456d553186c127575d5c3ed3ba1ff1f1cbe9941f863a1bb754fe8b701c",
+      "bytes": 1226854
+    },
+    {
+      "path": "docs/art-unification/city-fit/town-before-after-1440-complete.webp",
+      "sha256": "e54d2b465a44491676e9d530770002fe4ccbcb68f0e111d73540efa8315a6c31",
+      "bytes": 1224734
+    },
+    {
+      "path": "docs/art-unification/city-fit/town-before-after-320-building-audit.webp",
+      "sha256": "410b416cf9ff30c475ca5cde4f5c101104d9e7dabd72ec6642d39ca9a5d10367",
+      "bytes": 510158
+    },
+    {
+      "path": "docs/art-unification/city-fit/town-before-after-320-complete.webp",
+      "sha256": "c02312b6912cb1581695514a4b07cf39bef37c16299c16b61c14223a5db96d80",
+      "bytes": 506840
+    },
+    {
+      "path": "docs/art-unification/city-fit/town-before-after-390-building-audit.webp",
+      "sha256": "5f777e27f39767d6d98c50d0451cba76e4f6340cd5d07e0459b4305137d0e527",
+      "bytes": 622384
+    },
+    {
+      "path": "docs/art-unification/city-fit/town-before-after-390-complete.webp",
+      "sha256": "339e8ebfef6345e4f2102e69271036673f6243db079454cb1d9dbbc405180db3",
+      "bytes": 618376
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/bbox-candidate-diagnostic.txt",
+      "sha256": "3486ace03c3df32c75bdf8ec0bf73e6287a08aeeeeb138609d19bda04db31997",
+      "bytes": 1839
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/build.txt",
+      "sha256": "8539fef6860022b2956f9da65a76fa78f78b692ff67d567a87eb7eba2f3fcaef",
+      "bytes": 2563
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/capture-pixels.txt",
+      "sha256": "c03c2170f522e75b2d818d98d2c919310ba727391a68614ed55bfd0886b52f10",
+      "bytes": 2031
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/city-gate.txt",
+      "sha256": "a4dde274ec5b4ec7cff89913a2f1d49fd88f1f1c4fcb07159e1c288db62c2e13",
+      "bytes": 167
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/file-gate.json",
+      "sha256": "49b46172e9c149a10faefa929dbd66366e6b48da3bdca2135ba2a3c0bdc1f08b",
+      "bytes": 43593
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/full-first-run.txt",
+      "sha256": "d97ee81b35818ac8bfcea90743e45b3592316e259318cd330daa1baa046fb362",
+      "bytes": 317
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/full-regression.txt",
+      "sha256": "027ea7c47c6fafa044c733ba656d8428731f9e83af06f6ca82e9b4c9fb1083a2",
+      "bytes": 209
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/geometry.txt",
+      "sha256": "8cf6660a56cd97752565555c2b6a239b23bdc64457a4ffd1ec8f4cfcf896ab4d",
+      "bytes": 152
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/label-candidate-diagnostic.txt",
+      "sha256": "8532879e43a40f1671539641c1289b2e5c88ed8cbfb6d099bfb609a3f1e661af",
+      "bytes": 491
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/label-candidate-rejected.json",
+      "sha256": "039e1120e510c7ca628c29d4e19f2b94f32d76365f5d1604b71f8d51ffd5bd1f",
+      "bytes": 1837
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/old-board-gate.txt",
+      "sha256": "5cdb37a84b9b0e09af4b08f07bd6b12e8f3626f7307a543102f0bf86b12f5ad3",
+      "bytes": 126
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/old-city-gate.txt",
+      "sha256": "734872199bb1564543306382123fc2f9af563b1836b2d4721e5f70a7d6ec0065",
+      "bytes": 112
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/target-tests.txt",
+      "sha256": "e32dec2da73dac5a8dbda8813d5121366484cf4c6da2d7ae169758c32d312295",
+      "bytes": 456
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/typecheck.txt",
+      "sha256": "4ed11650cb49c705057eeb167aee9832cb126e0d1fb0e6185411f3f9f0e39303",
+      "bytes": 53
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-1440-z0.webp",
+      "sha256": "7c2f1883e5a3a30359e8801ef3ae8ea847ff83ee971993a16e2a6a492629519f",
+      "bytes": 777246
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-1440-z1.webp",
+      "sha256": "77b6e78035f374111fc0736cd07c5ac6eb1cbbc72bc9e08f0a21e0309d7676ff",
+      "bytes": 712598
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-1440-z3.webp",
+      "sha256": "bdfe0489274e0b4958cce471660cc0f18032973755c86a4beb06889694d89fc8",
+      "bytes": 527416
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-320-z0.webp",
+      "sha256": "3ece95cd08326e955725c4ec90e7f529ef0cf0a5b44b8096b87f424151245ee8",
+      "bytes": 562242
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-320-z1.webp",
+      "sha256": "5fd55a794cad6d4adb76d96543edc26d9a6178c1f39144d7acfbd4bf7944b515",
+      "bytes": 489692
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-320-z3.webp",
+      "sha256": "42bb89daaaabbd530f467209e40cca45c8f9dcb19c5d7c1951e6b056e819338b",
+      "bytes": 364976
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-390-z0.webp",
+      "sha256": "9bf0cb769645804597a1cb60447ee53e0d66ab1f2de0784b4218a5f71b6fcac2",
+      "bytes": 638642
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-390-z1.webp",
+      "sha256": "33eee8b0b6073a34c3c4a4f46c9567219cbfff01f813eb9ede325c9bcd82f358",
+      "bytes": 593882
+    },
+    {
+      "path": "docs/art-unification/city-fit/world-candidates-390-z3.webp",
+      "sha256": "26df6ca9195c441a59a5277c7abb8ea36560591733ec2c756c240d464ec6fe12",
+      "bytes": 421216
     },
     {
       "path": "docs/art-unification/city-scale/REPORT.md",
@@ -1332,5 +2087,6 @@
       "bytes": 262
     }
   ],
-  "cityScaleReviewBase": "6d26b15ebee9561f880700bcc17dd465516b2586"
+  "cityScaleReviewBase": "6d26b15ebee9561f880700bcc17dd465516b2586",
+  "cityCompositionReviewBase": "846e98ca1abc6eddda009cd6d08ce4600e2fbeaf"
 }

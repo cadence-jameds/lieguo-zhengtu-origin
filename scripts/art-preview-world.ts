@@ -13,7 +13,7 @@ export function createArtPreviewWorld(civ:string,age:0|1|2|3,state:string){
  const city=world.cities[0],faction=world.factions[0];faction.age=age;
  faction.techIds=state==='base'?[]:Object.values(TECH_CATALOG).filter(t=>!t.id.startsWith('modern.')&&(!t.civilizationId||t.civilizationId===civ)).filter(t=>{if(t.category!=='blacksmith')return true;const [,line,tier]=t.id.split('.');return Number(tier)<=BLACKSMITH_CAPS[civ][BLACKSMITH_LINES.indexOf(line as typeof BLACKSMITH_LINES[number])];}).map(t=>t.id);
  city.name=CIV_NAMES[civ]+'美術驗收城';city.castleCivilizationId=civ;city.population=30000;city.housing=400+HOUSING[15];city.cityPromotionCompleted=age>=2;city.wallLevel=5;
- const kinds=['residence','warehouse.0','bunker.0','market','townhall','monastery','mill','lumbermill','masonry','mint','barracks','archery','stable','blacksmith','castle'];
+ const kinds=state==='building-audit'?['academy','workshop','embassy','market','townhall','monastery','mill','lumbermill','masonry','mint','barracks','archery','stable','blacksmith','castle']:['residence','warehouse.0','bunker.0','market','townhall','monastery','mill','lumbermill','masonry','mint','barracks','archery','stable','blacksmith','castle'];
  city.economy!.slots={};city.economy!.milestones=[10000,15000,20000,22000,25000,30000];city.buildings={center:15};
  kinds.forEach((key,index)=>{const kind=key.split('.')[0] as keyof typeof BUILDING_CATALOG;city.buildings[key]=Math.min(key==='residence'||key==='warehouse.0'?15:10,BUILDING_CATALOG[kind].maxLevel);city.economy!.slots[key]=index;});
  const stock=Math.min(100000,storageCapacity(city));city.stock={food:stock,wood:stock,stone:stock,gold:stock};city.fields!.forEach((field,index)=>{field.level=[5,6,10,11,15][index%5];});

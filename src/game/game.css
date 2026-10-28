@@ -503,3 +503,10 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 .formal-city-panel .city-heading-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;max-width:100%}
 .formal-city-panel .governor-shortcut{max-width:100%;white-space:normal}
 .governance-controls input,.governance-controls select{max-width:100%;min-width:0}
+
+/* Imperial calibrations are local to their display role, with fixed buttons/anchors. */
+.outskirts-center .miniature-city.imperial.walled .miniature-city-art{transform:translateY(var(--city-art-y)) scale(var(--city-art-scale));transform-origin:50% 90%}
+.town-building-art{position:absolute;inset:0;display:block;pointer-events:none;transform-origin:50% 94%}
+
+/* Keep the range badge clear of tall foreground castle roofs. Plot and art anchors stay fixed. */
+.town-composition.visual-age-3 .building-range .town-label{left:90%}
