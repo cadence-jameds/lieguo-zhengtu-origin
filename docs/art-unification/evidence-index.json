@@ -578,8 +578,8 @@
     },
     {
       "path": "docs/art-unification/city-fit/REPORT.md",
-      "sha256": "c6ff4e647d6c52858d68d9d117510091797419397da77a2ecc3fa763b7562a37",
-      "bytes": 13729
+      "sha256": "a3ba346fd4808e8dbcf72e998e80577cb994db67f7bb7e8e79743dfadc3cd918",
+      "bytes": 15140
     },
     {
       "path": "docs/art-unification/city-fit/board-manifest.json",
@@ -1158,7 +1158,7 @@
     },
     {
       "path": "docs/art-unification/city-fit/measurements.json",
-      "sha256": "0ba6e30535e9fba6d8b5dddc71f5e920f8a4b89deb95b06caf13b997f3053c8b",
+      "sha256": "6283ef66707173b7e25993be61b677c898480672f05c5ab1ad8557e2ff826825",
       "bytes": 712246
     },
     {
@@ -1222,8 +1222,23 @@
       "bytes": 1839
     },
     {
+      "path": "docs/art-unification/city-fit/validation/boundary-after.json",
+      "sha256": "01824567c0d039075fe8df9e1950b1db0ca02415acc69154dca046c9b384bd54",
+      "bytes": 14802
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/boundary-before.json",
+      "sha256": "385ab4b36d96b93c1b70ca20079649f19b76cb64a1ccee03648f91363178d59d",
+      "bytes": 110970
+    },
+    {
+      "path": "docs/art-unification/city-fit/validation/boundary-gate.txt",
+      "sha256": "caf356131c450dc40134168a9a80338727f90df8c2d91e3bf63fe39054a27b26",
+      "bytes": 175
+    },
+    {
       "path": "docs/art-unification/city-fit/validation/build.txt",
-      "sha256": "8539fef6860022b2956f9da65a76fa78f78b692ff67d567a87eb7eba2f3fcaef",
+      "sha256": "e18ff6f80a845ef7d53cb762ed3591d3aa5b8c0065cb595d36a66b1754990877",
       "bytes": 2563
     },
     {
@@ -1232,9 +1247,14 @@
       "bytes": 2031
     },
     {
+      "path": "docs/art-unification/city-fit/validation/ci-813a974.json",
+      "sha256": "1c6a30a08081713edcc20b9f03af2f268dde2b771f7495c3b22f816c46a35024",
+      "bytes": 387
+    },
+    {
       "path": "docs/art-unification/city-fit/validation/city-gate.txt",
-      "sha256": "a4dde274ec5b4ec7cff89913a2f1d49fd88f1f1c4fcb07159e1c288db62c2e13",
-      "bytes": 167
+      "sha256": "911dd52fc3939426aeb78f4d2b583db687e9f40b5c3e0fe7f30f7276eaf9f79d",
+      "bytes": 190
     },
     {
       "path": "docs/art-unification/city-fit/validation/file-gate.json",
@@ -2088,5 +2108,6 @@
     }
   ],
   "cityScaleReviewBase": "6d26b15ebee9561f880700bcc17dd465516b2586",
-  "cityCompositionReviewBase": "846e98ca1abc6eddda009cd6d08ce4600e2fbeaf"
+  "cityCompositionReviewBase": "846e98ca1abc6eddda009cd6d08ce4600e2fbeaf",
+  "cityHitReviewBase": "813a9744cc5a73fe8915da930c6680ec01e6d9a1"
 }

@@ -22,6 +22,7 @@ for p,s in captures['sheets'].items():assert hashlib.sha256((R/p).read_bytes()).
 for p,c in captures['records'].items():
  assert c['sheet'] in captures['sheets'] and 0<=c['frame']<captures['sheets'][c['sheet']]['frames'];x,y,w,h=c['rect'];sw,sh=captures['sheets'][c['sheet']]['size'];assert x>=0 and y>=0 and x+w<=sw and y+h<=sh and c['size']==[w,h]
  if c['retainedJpeg']:assert hashlib.sha256((R/p).read_bytes()).hexdigest()==c['originalJpegSHA256']
+hits=json.loads((D/'validation/boundary-after.json').read_text());assert len(hits)==18 and all(not r['violations'] and r['pointerEvents']=='none' and r['centerHitsButton'] and r['clickEntersTown'] for r in hits)
 man=json.loads((D/'board-manifest.json').read_text());assert len(man)==19
 for name,b in man.items():
  assert hashlib.sha256((D/(name+'.webp')).read_bytes()).hexdigest()==b['sha256']
@@ -32,4 +33,4 @@ for name,b in man.items():
   for c in row:
    rec=captures['records'][c['source']];assert rec['originalJpegSHA256']==c['sha256'];assert c['archive']==rec
    if (R/c['source']).exists():assert hashlib.sha256((R/c['source']).read_bytes()).hexdigest()==c['sha256']
-print('PASS: 912 building measurements; 72 unchanged town anchor/slot cases; 162 map scale/foot comparisons; 19 six-civilization boards; no stale source or image references.')
+print('PASS: 912 building measurements; 72 unchanged town anchor/slot cases; 162 map scale/foot comparisons; 19 six-civilization boards; 18 hit-boundary cases; no stale source or image references.')

@@ -103,3 +103,13 @@
 648張原始截圖解碼後的RGB像素以38個無損WebP影格集合另存於 [無損來源影格圖集](capture-sheets/)，全數透過每個區塊的RGB SHA256與原截圖逐像素驗證；[來源索引](capture-index.json)保留原JPEG SHA、像素SHA、尺寸、WebP影格序號、矩形與來源名稱。沒有縮放或重繪來源截圖。由封存影格重建後，19張比較板的檔案SHA256全部與封存前相同。原JPEG位元檔保留在工作目錄 `work/city-fit/original-jpeg`，PR另保留72張可直接檢視的最終完整UI JPEG；其餘來源可從無損圖集按索引的frame序號還原像素（Pillow Image.seek(frame)）。`city-visual-report.py`可直接讀取圖集重建比較板，無須原JPEG。來源圖集與比較板均不在public或PWA預快取內。
 
 [648張來源像素校驗記錄](validation/capture-pixels.txt)。來源封存採WebP原生無損影格，同尺寸、相近情境分組以共用重複背景；靜態比較板和72張完整UI例圖仍可直接開啟。這是驗收證據的儲存方式，不是遊戲素材或玩法變更。
+
+## 收尾：帝王裝飾層命中範圍補正
+
+`813a974` 已通過整套GitHub CI（[run 322](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/40720752172)，2,101 PASS／0 FAIL／1 SKIP）。收尾再掃描城郊按鈕外側，確認放大的 art span 仍以預設pointer-events:auto接收部分外側點擊；按鈕矩形雖未變，裝飾子元素卻可能攔截資源田。已只對帝王有牆的裝飾圖像設定pointer-events:none，由原按鈕接收操作。沒有改城市圖片、縮放、牆環或任何錨點，先前截圖／尺寸仍適用。
+
+新增六文明×三寬度18案：排除邊界1 CSS px的次像素取整區，掃描22,524個按鈕外側測點；原行為共9,788次攔截，修正後0次。中心18次實際點擊皆正常進入城內。修正前以同一頁面僅覆寫pointer-events:auto重現813a974行為，修正後使用正式CSS。
+
+- [修正前診斷](validation/boundary-before.json)／[修正後18案](validation/boundary-after.json)／[可執行檢查器](../../../scripts/verify-miniature-hit-boundaries.mjs)。
+- 本輪主瀏覽器案例432 PASS，另18案命中邊界PASS，共450個通過案例；648張截圖與19張圖板的像素不受這個事件屬性影響。
+- 最終命中修正版的CI以原PR最新HEAD Checks為準；CI實際結果另附PR驗收留言。這裡保留第一階段813a974的成功紀錄，不將其冒稱為後續HEAD。
