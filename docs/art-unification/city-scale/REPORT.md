@@ -62,3 +62,7 @@
 - 主建築與地面語義量測有人工作業誤差；實體手機、慢網、玩家 ART-GATE／獨立驗收仍待驗。B5 E1 HOLD／Astra 非 PASS 等歷史事實保留。
 
 重現順序：`python3 scripts/prepare-art-candidates.py` → `python3 scripts/city-art-metrics.py` → `python3 scripts/art-comparison-boards.py` → `python3 scripts/check-city-scale.py`。原始生成圖不重生；Python 只作已授權的圖集技術提取、等比縮放與位置校準。瀏覽器：`node scripts/verify-city-scale-browser.mjs <Playwright module> <current Vite URL> <6d26b15 baseline Vite URL> [output]`。
+
+## 遠端回歸追蹤
+
+首個城市修正 HEAD 0fa5714 的 CI 完整回歸為 2,098 成功／1 失敗／1 略過，失敗為既有 playerFeedback 的地圖裁切呼叫契約（檢查原 `eraBounds(14+i,age)` 呼叫）。實際舊時代裁切值未變，但共用函式重構改掉呼叫字串。後續修正讓前三時代直接保留原呼叫，只有帝王分支使用新中心來源；沒有放寬或刪除既有測試。後續 HEAD 的完整結果見 PR Checks。
