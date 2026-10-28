@@ -18,8 +18,8 @@ describe('B4 art integration authority and asset coverage',()=>{
  expect(CIV_ART.civ_byzantium).toBe('civ_byzantion');expect(CIV_ART.civ_mongolia).toBe('civ_mongol');expect(civilizationIndex('civ_byzantium')).toBe(1);expect(civilizationIndex('civ_mongolia')).toBe(5);
  for(const id of Object.keys(CIV_ART)){exists('art/castle-'+CIV_ART[id]+'.webp');const html=renderToStaticMarkup(<BuildingSprite building="castle" civ={CIV_ART[id]}/>);expect(html).toContain('castle-'+CIV_ART[id]);}
  });
- it('visual Dark/Feudal/Castle/Imperial uses only era0-2 and existing walls/cities',()=>{
- expect([0,1,2,3].map(visualAge)).toEqual([0,1,2,2]);for(const age of [0,1,2,3])for(const civ of Object.keys(CIV_ART)){const era=visualAge(age);exists(eraAtlas(era));exists(`art/cities-age-${era}.webp`);exists(`art/wall-ring-${era}.webp`);const html=renderToStaticMarkup(<MiniatureCity civ={CIV_ART[civ]} era={era} wall={3}/>);expect(html).not.toContain('age-3');expect(html).not.toContain('ring-3');}
+ it('four visual ages resolve six cities and walls without changing world age',()=>{
+ expect([0,1,2,3].map(visualAge)).toEqual([0,1,2,3]);for(const age of [0,1,2,3])for(const civ of Object.keys(CIV_ART)){const era=visualAge(age);exists(eraAtlas(era));const html=renderToStaticMarkup(<MiniatureCity civ={CIV_ART[civ]} era={era} wall={3}/>);if(age===3){exists('art/unified/cities-imperial.webp');exists('art/unified/wall-ring-imperial.webp');expect(html).toContain('cities-imperial');expect(html).toContain('wall-ring-imperial');}else{exists(`art/cities-age-${era}.webp`);exists(`art/wall-ring-${era}.webp`);}}
  });
  it('all 20 formal buildings have valid aliases or independent new assets, including fixed wall and repeated identities',()=>{
  for(const k of Object.keys(BUILDING_CATALOG)){expect(BUILDING_ALIAS[k]||NEW_BUILDINGS.includes(k as typeof NEW_BUILDINGS[number]),k).toBeTruthy();if(!BUILDING_ALIAS[k])exists(`art/formal/building-${k}.webp`);}

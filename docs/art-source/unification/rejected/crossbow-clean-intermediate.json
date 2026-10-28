@@ -1,0 +1,13 @@
+{
+  "source": "docs/art-source/unification/rejected/crossbow-clean-intermediate.png",
+  "sha256": "0674b22ac279fe81e19ec0abeb6ac45097846d34db86ce3862d0efa5a9375096",
+  "status": "BLOCKED_PROVENANCE_NOT_SELECTED",
+  "reason": "未選用的中間候選；工具成功回傳，但完整逐字提示詞未保留。已重新以完整留存提示詞生成 army-crossbow-clean-final，遊戲只採用該批。",
+  "generationTool": "image_gen.imagegen",
+  "references": [
+    "docs/art-source/unification/rejected/crossbow-atlas-fragment-fail.webp",
+    "public/art/catalog-units.webp",
+    "public/art/catalog-guards.webp"
+  ],
+  "instructionSummary": "Preserve crossbowman, remove unrelated upper-left pike fragment, follow both catalog mothers. Summary only, not the exact original prompt."
+}

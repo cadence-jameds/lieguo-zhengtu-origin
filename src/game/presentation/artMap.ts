@@ -1,5 +1,6 @@
 import {TECH_CATALOG} from '../formal/techCatalog';
 import {UNIT_CATALOG} from '../formal/unitCatalog';
+import {unitPortraits,technologyCards,type VisualAge} from './artRegistry';
 import type {FormalCity,FormalWorld,Construction} from '../formal/model';
 /** Visual aliases never change formal IDs or enter a save. */
 export const CIV_ART:Record<string,string>={civ_zhongguo:'civ_zhongguo',civ_byzantium:'civ_byzantion',civ_frankia:'civ_frankia',civ_britannia:'civ_britannia',civ_japan:'civ_japan',civ_mongolia:'civ_mongol'};
@@ -7,9 +8,9 @@ export const CIV_NAMES:Record<string,string>={civ_zhongguo:'中國',civ_byzantiu
 export const CIV_ORDER=Object.keys(CIV_ART);
 export function civilizationArt(id:string){const a=CIV_ART[id];if(!a)throw new Error('Unknown formal civilization: '+id);return a;}
 export function civilizationIndex(id:string){civilizationArt(id);return CIV_ORDER.indexOf(id);}
-export const visualAge=(age:number):0|1|2=>age<=0?0:age===1?1:2;
+export const visualAge=(age:number):VisualAge=>age<=0?0:age===1?1:age===2?2:3;
 /** Permanent City promotion art is independent of faction era/population. */
-export const cityArtAge=(w:FormalWorld,c:FormalCity):0|1|2=>c.cityPromotionCompleted?2:visualAge(w.factions.find(f=>f.id===c.ownerFactionId)?.age??0);
+export const cityArtAge=(w:FormalWorld,c:FormalCity):VisualAge=>Math.max(c.cityPromotionCompleted?2:0,visualAge(w.factions.find(f=>f.id===c.ownerFactionId)?.age??0)) as VisualAge;
 export const AGE_NAMES=['黑暗','封建','城堡','帝王'];
 export const BUILDING_ALIAS:Record<string,string>={wall:'wall',center:'hall',residence:'house',warehouse:'warehouse',bunker:'cellar',market:'market',barracks:'barracks',archery:'range',stable:'stable',academy:'academy',workshop:'workshop',castle:'castle'};
 export const NEW_BUILDINGS=['townhall','monastery','mill','lumbermill','masonry','mint','blacksmith','embassy'] as const;
@@ -20,10 +21,16 @@ export const SITE_INDEX={food:0,wood:1,stone:2,gold:3,bandit:6} as const;
 export const TOWN_ANCHORS:readonly (readonly [number,number])[]=[[50.5,50],[17,29],[33,29],[67,27],[84,29],[15,44],[35,43],[64,43],[78,43],[88,45],[14,65],[35,62],[72,61],[89,64],[25,73],[68,76]];
 export const FIELD_ANCHORS:readonly (readonly [number,number])[]=[[14,27],[34,16],[54,15],[73,20],[88,33],[74,43],[89,57],[74,66],[68,85],[48,86],[30,85],[14,78],[23,43],[10,55],[24,65],[40,74],[57,74],[87,78]];
 export type ArtSpec={path:string;sheet?:'units'|'guards'|'technologies'|'emblems';index?:number;badge?:string;category?:string;civ?:string;origin:'reused'|'new'|'derived'};
+/** Measured original portrait atlas dividers; keep neighboring weapons out of a card. */
+export function armyAtlasBounds(sheet:'units'|'guards',index:number){
+ const divider=sheet==='units'?487:505,y=index<3?2:divider+2;
+ return {x:index%3*512+2,y,w:508,h:index<3?divider-4:1024-y-2};
+}
 const unitBases:Record<string,{sheet?:ArtSpec['sheet'];index?:number;path?:string;badge?:string}>={militia:{sheet:'units',index:0},spearman:{sheet:'units',index:1},archer:{sheet:'units',index:2},skirmisher:{path:'art/formal/unit-skirmisher.webp'},scout:{sheet:'units',index:5},'light-cavalry':{sheet:'units',index:3,badge:'輕騎'},knight:{sheet:'units',index:3,badge:'騎士'},ram:{sheet:'units',index:4},catapult:{path:'art/formal/unit-catapult.webp'},baggage:{sheet:'technologies',index:3,badge:'輜重'}};
 const eliteBases:Record<string,string>={swordsman:'militia',pikeman:'spearman',crossbowman:'archer','heavy-skirmisher':'skirmisher',ranger:'light-cavalry','heavy-knight':'knight'};
 export function unitArt(id:string):ArtSpec {
  const u=UNIT_CATALOG[id];if(!u)throw new Error('Unknown formal unit');
+ if(unitPortraits[id])return {path:unitPortraits[id],badge:u.era==='modern'?'現代':u.eliteTech?'ELITE':undefined,origin:'new'};
  if(u.era==='modern'){const art=unitArt(id.slice(7));return {...art,badge:['現代',art.badge].filter(Boolean).join(' · '),origin:'derived'};}
  if(id.includes('guard.'))return {path:'art/catalog-guards.webp',sheet:'guards',index:civilizationIndex(u.civilizationId!),badge:u.eliteTech?'ELITE':undefined,origin:u.eliteTech?'derived':'reused'};
  const base=unitBases[eliteBases[id]??id];if(!base)throw new Error('Unmapped formal unit: '+id);
@@ -32,6 +39,7 @@ export function unitArt(id:string):ArtSpec {
 export const TECH_CATEGORIES=['intel','drill','horse','conscription','logistics','engineering','siege','administration','elite','cooperation'] as const;
 export function techArt(id:string):ArtSpec {
  const t=TECH_CATALOG[id];if(!t)throw new Error('Unknown formal technology');
+ if(technologyCards[id])return {path:technologyCards[id],badge:/\.([123])$/.test(id)?['I','II','III'][Number(id.slice(-1))-1]:t.category==='elite'?'ELITE':undefined,civ:t.civilizationId??undefined,origin:'new'};
  let index:number|undefined,category:string|undefined;
  if(id.startsWith('blacksmith.'))index=id.endsWith('.3')?5:2;
  else if(id.startsWith('economy.food.'))index=id.endsWith('.3')?4:0;
