@@ -1,3 +1,4 @@
+import {worldCitySprite,eraAtlas,eraBounds} from '../assets';
 import {existsSync,readFileSync} from 'node:fs';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {expect,it} from 'vitest';
@@ -37,4 +38,13 @@ it('field art changes at v95 levels 6 and 11 independently of faction era, inclu
 });
 it('imperial presentation preserves permanent City promotion without mutating the world',()=>{
  const w=createFormalWorld({campaign:'art-pure',seed:90217}),c=w.cities[0];c.cityPromotionCompleted=true;w.factions[0].age=3;const before=JSON.stringify(w);expect(cityArtAge(w,c)).toBe(3);expect(JSON.stringify(w)).toBe(before);w.factions[0].age=0;expect(cityArtAge(w,c)).toBe(2);
+});
+
+it('world city nodes preserve civilization-center scale and never swap to city panoramas at imperial age',()=>{
+ for(let i=0;i<6;i++)for(const age of [0,1,2,3]){
+  const spec=worldCitySprite(i,age);expect(existsSync('public/'+spec.path)).toBe(true);
+  if(age===3){expect(spec.path).toContain('/buildings/center.imperial.');expect(spec.crop).toEqual({x:0,y:0,w:512,h:512});expect(spec.path).not.toContain('cities-imperial');}
+  else expect(spec).toEqual({path:eraAtlas(age),crop:eraBounds(14+i,age)});
+ }
+ expect(()=>worldCitySprite(6,3)).toThrow();
 });

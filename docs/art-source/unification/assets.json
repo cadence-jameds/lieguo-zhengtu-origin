@@ -8724,8 +8724,8 @@
       512,
       512
     ],
-    "sha256": "fb5531423f9981b400cf36761f7f5f86047fb724876a3c3d79f33e9eb1ad9f6b",
-    "bytes": 96184,
+    "sha256": "1b7c788784fb58a3cbc4b1e539a7e0c4192e671ff57552082770f0f03271363c",
+    "bytes": 95446,
     "atlasExtraction": {
       "alphaThreshold": 96,
       "edgeExpansionPx": 3,
@@ -8733,7 +8733,30 @@
         460,
         440
       ],
-      "feetY": 480
+      "feetY": 480,
+      "cityCalibration": {
+        "reference": "public/art/cities-age-2.webp",
+        "referenceIndex": 0,
+        "referenceBounds": [
+          13,
+          112,
+          511,
+          463
+        ],
+        "inputBounds": [
+          29,
+          117,
+          483,
+          478
+        ],
+        "scale": 1.0,
+        "translation": [
+          6.0,
+          -15.0
+        ],
+        "heightCapRatio": 1.06,
+        "method": "one uniform affine transform; same-civilization castle foot and horizontal center; no upscaling"
+      }
     },
     "alphaPolicy": "transparent",
     "approver": null
@@ -8775,8 +8798,8 @@
       512,
       512
     ],
-    "sha256": "892cf5d25b4c520dfe0bc9a34bc107c8b09fe382bc77c5f4a771169bb90d68d3",
-    "bytes": 94196,
+    "sha256": "fa2b9b50fd59f2a09ae7a4b2418267f3034b8b7c7198bbc317850c69d43476cb",
+    "bytes": 97498,
     "atlasExtraction": {
       "alphaThreshold": 96,
       "edgeExpansionPx": 3,
@@ -8784,7 +8807,30 @@
         460,
         440
       ],
-      "feetY": 480
+      "feetY": 480,
+      "cityCalibration": {
+        "reference": "public/art/cities-age-2.webp",
+        "referenceIndex": 1,
+        "referenceBounds": [
+          12,
+          94,
+          501,
+          461
+        ],
+        "inputBounds": [
+          29,
+          87,
+          483,
+          478
+        ],
+        "scale": 0.9949360613810743,
+        "translation": [
+          1.796368286444988,
+          -14.579437340153504
+        ],
+        "heightCapRatio": 1.06,
+        "method": "one uniform affine transform; same-civilization castle foot and horizontal center; no upscaling"
+      }
     },
     "alphaPolicy": "transparent",
     "approver": null
@@ -8826,8 +8872,8 @@
       512,
       512
     ],
-    "sha256": "cde8a46c6df98996062634a78f370c2e53601f8f87e17bb9d03faa1ed04f2acf",
-    "bytes": 97636,
+    "sha256": "6db072d45bd3dae6eab1c77db404f2a6d7a549cb8ba807eccedf1011b294ef42",
+    "bytes": 101958,
     "atlasExtraction": {
       "alphaThreshold": 96,
       "edgeExpansionPx": 3,
@@ -8835,7 +8881,30 @@
         460,
         440
       ],
-      "feetY": 480
+      "feetY": 480,
+      "cityCalibration": {
+        "reference": "public/art/cities-age-2.webp",
+        "referenceIndex": 2,
+        "referenceBounds": [
+          5,
+          85,
+          501,
+          469
+        ],
+        "inputBounds": [
+          29,
+          66,
+          483,
+          477
+        ],
+        "scale": 0.9903649635036497,
+        "translation": [
+          -0.5334306569343141,
+          -3.404087591240909
+        ],
+        "heightCapRatio": 1.06,
+        "method": "one uniform affine transform; same-civilization castle foot and horizontal center; no upscaling"
+      }
     },
     "alphaPolicy": "transparent",
     "approver": null
@@ -8877,8 +8946,8 @@
       512,
       512
     ],
-    "sha256": "469af33872e269f7d33f63cd3b72e1842be979f4bb90b3d5e755d356db06d5bd",
-    "bytes": 94802,
+    "sha256": "649fe61452eab945af1cb82ee2634e7c0ab101aed90c94566935b0bc65b2f06c",
+    "bytes": 93522,
     "atlasExtraction": {
       "alphaThreshold": 96,
       "edgeExpansionPx": 3,
@@ -8886,7 +8955,30 @@
         460,
         440
       ],
-      "feetY": 480
+      "feetY": 480,
+      "cityCalibration": {
+        "reference": "public/art/cities-age-2.webp",
+        "referenceIndex": 3,
+        "referenceBounds": [
+          13,
+          51,
+          512,
+          403
+        ],
+        "inputBounds": [
+          28,
+          113,
+          483,
+          478
+        ],
+        "scale": 1.0,
+        "translation": [
+          7.0,
+          -75.0
+        ],
+        "heightCapRatio": 1.06,
+        "method": "one uniform affine transform; same-civilization castle foot and horizontal center; no upscaling"
+      }
     },
     "alphaPolicy": "transparent",
     "approver": null
@@ -8928,8 +9020,8 @@
       512,
       512
     ],
-    "sha256": "396b3725612ae676eca38fd2942e0825d38e7385b54b9991842be59e5be189d6",
-    "bytes": 98320,
+    "sha256": "8aa4b3008a44f3e475cb125336c6e2611f4a8b0f36710c024eea893567b1a902",
+    "bytes": 98934,
     "atlasExtraction": {
       "alphaThreshold": 96,
       "edgeExpansionPx": 3,
@@ -8937,7 +9029,30 @@
         460,
         440
       ],
-      "feetY": 480
+      "feetY": 480,
+      "cityCalibration": {
+        "reference": "public/art/cities-age-2.webp",
+        "referenceIndex": 4,
+        "referenceBounds": [
+          0,
+          42,
+          512,
+          407
+        ],
+        "inputBounds": [
+          28,
+          96,
+          483,
+          477
+        ],
+        "scale": 1.0,
+        "translation": [
+          0.5,
+          -70.0
+        ],
+        "heightCapRatio": 1.06,
+        "method": "one uniform affine transform; same-civilization castle foot and horizontal center; no upscaling"
+      }
     },
     "alphaPolicy": "transparent",
     "approver": null
@@ -8979,8 +9094,8 @@
       512,
       512
     ],
-    "sha256": "85d45fde2679c8c7ba932431f2f3afaef0408ed58c3b0cfe64df57634e928fea",
-    "bytes": 97896,
+    "sha256": "beec519ea2804816ae4aedd507ba6f8c474c2f3ce0a4182d5c41b6cfa45812c6",
+    "bytes": 91286,
     "atlasExtraction": {
       "alphaThreshold": 96,
       "edgeExpansionPx": 3,
@@ -8988,7 +9103,30 @@
         460,
         440
       ],
-      "feetY": 480
+      "feetY": 480,
+      "cityCalibration": {
+        "reference": "public/art/cities-age-2.webp",
+        "referenceIndex": 5,
+        "referenceBounds": [
+          0,
+          78,
+          498,
+          407
+        ],
+        "inputBounds": [
+          29,
+          101,
+          484,
+          477
+        ],
+        "scale": 0.9275,
+        "translation": [
+          11.096249999999998,
+          -35.41750000000002
+        ],
+        "heightCapRatio": 1.06,
+        "method": "one uniform affine transform; same-civilization castle foot and horizontal center; no upscaling"
+      }
     },
     "alphaPolicy": "transparent",
     "approver": null

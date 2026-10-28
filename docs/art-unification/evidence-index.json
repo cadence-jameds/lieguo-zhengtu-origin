@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "docs/art-unification/REPORT.md",
-      "sha256": "e041d5458abbb057f41a12b98cffd8f01c3bdab57956218ba49fbf8747307dcc",
-      "bytes": 10937
+      "sha256": "88b746f319317132c1a841408b7ec1c2e114f54eb4021fee435b509d057d61f8",
+      "bytes": 11093
     },
     {
       "path": "docs/art-unification/art-gate.md",
@@ -83,12 +83,12 @@
     },
     {
       "path": "docs/art-unification/boards/alpha-7.webp",
-      "sha256": "6bb294a8c1b892d41877c4eb92404f769e932a5e7d6820ed5d6d01620f4f84d4",
-      "bytes": 270768
+      "sha256": "6cf3ef03a571673c5a0c8ebbdb9abcc94078c3e61273270e76f6837e13901fdc",
+      "bytes": 267536
     },
     {
       "path": "docs/art-unification/boards/board-manifest.json",
-      "sha256": "1e83a25abce5c3c7bd49a4db3a1f7b481cd755d0743903ceb092c7ff67d360b6",
+      "sha256": "874d6d71018245218e3d5f3f0c18785684f5a0fd9d67455c0a115fc6fa263951",
       "bytes": 70310
     },
     {
@@ -100,6 +100,11 @@
       "path": "docs/art-unification/boards/building-states-2.webp",
       "sha256": "bdf348577119a1347afc9d56be3258441d1dc561d0fda3dfe7fb3d3675a7cc69",
       "bytes": 460556
+    },
+    {
+      "path": "docs/art-unification/boards/city-board-layout.json",
+      "sha256": "40cf213d42f41dc947b7300c8c8d00afb360b12541cf6d3aa4aae009cd0d95a5",
+      "bytes": 3141
     },
     {
       "path": "docs/art-unification/boards/civilization-technology-pairs.webp",
@@ -128,8 +133,8 @@
     },
     {
       "path": "docs/art-unification/boards/six-civilizations-four-ages.webp",
-      "sha256": "355d798a1b60cff4fd2877ec24a432176efd616d11f92a6860bfd2587cf50188",
-      "bytes": 421954
+      "sha256": "e9712ad5303bb68e4872620adb2f81d0e90d2fd580e007fc41bf711759652a51",
+      "bytes": 413754
     },
     {
       "path": "docs/art-unification/boards/technology-all-1.webp",
@@ -572,6 +577,481 @@
       "bytes": 113906
     },
     {
+      "path": "docs/art-unification/city-scale/REPORT.md",
+      "sha256": "286d82de57669521f913d3b5f163de45abba2d0e5cd5369bd40dcffe6484b74f",
+      "bytes": 8245
+    },
+    {
+      "path": "docs/art-unification/city-scale/before/board.webp",
+      "sha256": "355d798a1b60cff4fd2877ec24a432176efd616d11f92a6860bfd2587cf50188",
+      "bytes": 421954
+    },
+    {
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "sha256": "a6d6ab018cbc5c135f4401d75855e876043535bbb34b28adba45a39136eb27b5",
+      "bytes": 584050
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_japan-2-city.jpg",
+      "sha256": "afd91a2faac8bbeaf0883590cb7d1c0e47d338264af45516b037d28b35db6dab",
+      "bytes": 597803
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_japan-2-map.jpg",
+      "sha256": "2dd0ff319cad5202e02fbb55eeda08d8e5c395f5db5188d3e128e5c6798aa41f",
+      "bytes": 383146
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_japan-3-city.jpg",
+      "sha256": "a851d19b7e0fde70b841d6b048bb19a052f9059353d6fcbe20b3fc20ea6d2da3",
+      "bytes": 603884
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_japan-3-map.jpg",
+      "sha256": "f4f053c18e5ff8dbc75d1474132c5ff5fb185afbf922c5d5f6a16aa6a140dd70",
+      "bytes": 383607
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_mongolia-2-city.jpg",
+      "sha256": "f6bb0f889423d861140114ca4e7a6a221044b65e6480615c1abbc0150ab9ee99",
+      "bytes": 596592
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_mongolia-2-map.jpg",
+      "sha256": "c568229be204411d9793f03e9ecb03a5159fc2a264e200181062b9f94b5f8f03",
+      "bytes": 383468
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_mongolia-3-city.jpg",
+      "sha256": "ced7630a47cde9d1aea06762415100b2876013c4e672f42bcfb8045db59cbd38",
+      "bytes": 602639
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_mongolia-3-map.jpg",
+      "sha256": "4afdfb606ad06774307f024df0f76fd77fa5be247c7c6e750df3467e7aebde25",
+      "bytes": 383759
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_zhongguo-2-city.jpg",
+      "sha256": "b76b0240047963a8dd2235b2b51002760ae69770aa5d4c5e7cebc02c517604e4",
+      "bytes": 596432
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_zhongguo-2-map.jpg",
+      "sha256": "dd033c5b531656b2116c0d3a09c961bf9c3c696551729609aabf03da2e1cea58",
+      "bytes": 383276
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_zhongguo-3-city.jpg",
+      "sha256": "b94ab7cc6f885b7e6f147dc6ed56401a538b40cae36cd5af1b84409b6556f923",
+      "bytes": 601667
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-1440-civ_zhongguo-3-map.jpg",
+      "sha256": "55e46faab27c48da4f47c210d018d06b9b47e87f82a2d80df986e3a43e6486a2",
+      "bytes": 383604
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_japan-2-city.jpg",
+      "sha256": "e8b7483b08b40e5bbeef6f868796b03f73a56a604bf8f23053052d1029587717",
+      "bytes": 125483
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_japan-2-map.jpg",
+      "sha256": "865f7b79e51b69bf84fe733a178a2c99acf3853e8749749c6858f8df8d8726b3",
+      "bytes": 83395
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_japan-3-city.jpg",
+      "sha256": "e6aba2fcd6e57041c8b545a45fe1ed98df21ee1a128c77c1c9ec2da91f96c4d5",
+      "bytes": 128665
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_japan-3-map.jpg",
+      "sha256": "9731a9d42e739b7016c8e5303ca8ddfd3c790d018a8d5e5f033d6b0c5ab9471c",
+      "bytes": 83867
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_mongolia-2-city.jpg",
+      "sha256": "2b2cee1e36b1b8bb909a94c94906e720adb0ead0a27fb139e52e34d09796558e",
+      "bytes": 125454
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_mongolia-2-map.jpg",
+      "sha256": "e7197ea8700a916d621c7c561892bb1970e0ec151441c5d51f1288e7cd2bc104",
+      "bytes": 83443
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_mongolia-3-city.jpg",
+      "sha256": "14cc7e6c65aa74f35985e3bacf727d3542ef95665423906d58a584a542042104",
+      "bytes": 128139
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_mongolia-3-map.jpg",
+      "sha256": "b4941f9f9cc1aa1da4fba1f5039bdd9a850e2b6903e3faa6277994cacad5ed02",
+      "bytes": 83892
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_zhongguo-2-city.jpg",
+      "sha256": "0fa60dc68e55379b487b6b55685cde0dd1b956fe2e47342828f7173a145508e2",
+      "bytes": 124985
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_zhongguo-2-map.jpg",
+      "sha256": "b14a5c66c30fb4b61a4fd8307dc78fce5143c3fd8150598e50856095bd8b8897",
+      "bytes": 83559
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_zhongguo-3-city.jpg",
+      "sha256": "ddb2549c96c7f651406e771e45a6e5a3215077e9634365894b67d9754c366a96",
+      "bytes": 127659
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-320-civ_zhongguo-3-map.jpg",
+      "sha256": "f58c3942d8ea35b0b5d526f31a2297132c4f2b8da5ef7803532663df7df8448f",
+      "bytes": 83772
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_japan-2-city.jpg",
+      "sha256": "2a9f1470122a14ad0ce60438826ae2a9140275d9e22bde9f810b4681e6a49794",
+      "bytes": 150339
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_japan-2-map.jpg",
+      "sha256": "bdf8e386b920c041c999f2312d165bd181c61af80083abef6634f624a46f8420",
+      "bytes": 100091
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_japan-3-city.jpg",
+      "sha256": "13d316d01a8a3243500c26dd9a0a7885dae019e451b844e3738ac33e59c403ac",
+      "bytes": 153503
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_japan-3-map.jpg",
+      "sha256": "a2c30844a7a2b112f7d6ea3dc0972a4df70d09d9696d47951b389688057b3108",
+      "bytes": 100547
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_mongolia-2-city.jpg",
+      "sha256": "ac362b153e9f24aa60e549badb78317e9fd959a2556b4e5d8452e653c51350e7",
+      "bytes": 150325
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_mongolia-2-map.jpg",
+      "sha256": "3854ea696aa3e1582514e9efbd3fc0200e89b6512e02cda591de8e06c92f03a0",
+      "bytes": 100232
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_mongolia-3-city.jpg",
+      "sha256": "f4a439e632a97376c7d21a60cf9c05dda0e5afa03df0ffb3ce56d3d8745ca76e",
+      "bytes": 153009
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_mongolia-3-map.jpg",
+      "sha256": "179e7eb09a5f34170ec2595261cba180b425405b76699a5d644f9f76b015c228",
+      "bytes": 100679
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_zhongguo-2-city.jpg",
+      "sha256": "8e769f47aaf66ef2ff1733ca78fda4355674c0ea33c64229bc06542df052a932",
+      "bytes": 149837
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_zhongguo-2-map.jpg",
+      "sha256": "8d4df0831a0da71147110d2e01e245745152f2060ef4c3bdeb0bdc0ccc0c4f71",
+      "bytes": 100252
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_zhongguo-3-city.jpg",
+      "sha256": "0c2aac2ba1bd6d91bf76aa35a69c6b1639d0e5695273baf5de515163eba2f58c",
+      "bytes": 152527
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/after-390-civ_zhongguo-3-map.jpg",
+      "sha256": "feea0b4473b37958898d27dacf37e77560e64c8656671684d7523e7cf7cb1a05",
+      "bytes": 100542
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-1440-civ_japan-3-city.jpg",
+      "sha256": "9866d5d894e807a5d2a1a03310e2d999e73026857aaf93ad74c01b838715ef3b",
+      "bytes": 601369
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-1440-civ_japan-3-map.jpg",
+      "sha256": "e6d27179e39eec45b21ebc00670cb07b59472c15f4a8bd71241db839f96d6b86",
+      "bytes": 383885
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-1440-civ_mongolia-3-city.jpg",
+      "sha256": "28f842d11df6c0a82f1e324799f3cb932ad47ef3b05d7bf39f757efcdb42e47d",
+      "bytes": 601710
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-1440-civ_mongolia-3-map.jpg",
+      "sha256": "7f70893dd7c17d54ad53dfcbbcc0615596ca4b77aecdf0de16b5611ff4d2c44b",
+      "bytes": 384038
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-1440-civ_zhongguo-3-city.jpg",
+      "sha256": "7281fc6b021cd99505b253dc7143b684584c326d8dc4b14657dfe7a7940b22ac",
+      "bytes": 601650
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-1440-civ_zhongguo-3-map.jpg",
+      "sha256": "96793ba3a30e787a38a6bb8bc09a775f85a8f3521e67538132402e9b932a0435",
+      "bytes": 383893
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-320-civ_japan-3-city.jpg",
+      "sha256": "82af948c64363da321a799c896c8e575f47c37de121e540820734b6250aef42c",
+      "bytes": 127602
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-320-civ_japan-3-map.jpg",
+      "sha256": "1f144d7b268fa96c3cc1354a5a82fe0dc20d0b94771096363e14dc0ade4fcd8a",
+      "bytes": 83964
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-320-civ_mongolia-3-city.jpg",
+      "sha256": "2d951d0a0484f55ef58d03e414dc1f241ca05eed232dacdc153d8c6345f2f9bc",
+      "bytes": 127956
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-320-civ_mongolia-3-map.jpg",
+      "sha256": "59290a2f9933d8e5d66191d47d068ff6b9944e8215a47c60f2b11e1225001494",
+      "bytes": 84082
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-320-civ_zhongguo-3-city.jpg",
+      "sha256": "ce40b9c261e44e27002ad390651dd6ad6ce03eb9714aa705a0840f5593fec85b",
+      "bytes": 127733
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-320-civ_zhongguo-3-map.jpg",
+      "sha256": "943757fe446aec89bbade953fe6cb176c9e6fb1bdd372a37588f1cbce29b14de",
+      "bytes": 84101
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-390-civ_japan-3-city.jpg",
+      "sha256": "08d4b49579800f52795e0dcb529cd55041c46b555280f691d4b02883a7530f2b",
+      "bytes": 152380
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-390-civ_japan-3-map.jpg",
+      "sha256": "a8b1260cf9c9160b667c11164de6181547d3df9aca46286558d56f687de27e2c",
+      "bytes": 100749
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-390-civ_mongolia-3-city.jpg",
+      "sha256": "e0dd6807f0d8e98dcfcf34076efbef0b0837392217d55a9ca5c7aa7283b314c0",
+      "bytes": 152809
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-390-civ_mongolia-3-map.jpg",
+      "sha256": "dfdca5ab30deebcea78f4d9777083ece91e7861af0a68e7ae20e0d279ccfc794",
+      "bytes": 100815
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-390-civ_zhongguo-3-city.jpg",
+      "sha256": "84d5df800921f7a3ad6f3e1fd0b7d5d93ca896dc9c408015cc70174225bf1b36",
+      "bytes": 152519
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/before-390-civ_zhongguo-3-map.jpg",
+      "sha256": "cc1c4411ba6893127eb548e75d973b77d6c0ae422374caf1b86927e2c6bd0a99",
+      "bytes": 100683
+    },
+    {
+      "path": "docs/art-unification/city-scale/browser/result.json",
+      "sha256": "40608f1b72b10f40d99a96164685574c91beb9cf32023c112db45cde0889c8f8",
+      "bytes": 241620
+    },
+    {
+      "path": "docs/art-unification/city-scale/build.txt",
+      "sha256": "9361398b2c4835666a0a5ace15fc4940a8269335c2eff4afc67045d49432d805",
+      "bytes": 2147
+    },
+    {
+      "path": "docs/art-unification/city-scale/calibration-candidates.webp",
+      "sha256": "8ff8b9463d6bcd6ea4b9611e169536928cab23ec34fe36f2f9066e92d11efffd",
+      "bytes": 362960
+    },
+    {
+      "path": "docs/art-unification/city-scale/calibration.json",
+      "sha256": "7259ca9665ad56544c902c5bbf9bc6f23f7f680d4bb6f91bab33336d9f35911f",
+      "bytes": 2726
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-0-0.webp",
+      "sha256": "15ee8d0f6228254959cdce5fd8e712406c59b77350076342f99d53d460c52097",
+      "bytes": 52572
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-0-1.webp",
+      "sha256": "d9c8b247ee5eeba5a0e8aac10d4389a2d5a65d9c4b4e2751420d1763b7cf0944",
+      "bytes": 52700
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-0-2.webp",
+      "sha256": "acdad870d27a5e38a046c97df57394c9fe427ea787cdd7d55a0080a58bd8f3cd",
+      "bytes": 50492
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-0-3.webp",
+      "sha256": "cccbd0bfa398548fc96774c56bac43fa9282c4e27e9577d51a54e6098b395223",
+      "bytes": 49426
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-0-4.webp",
+      "sha256": "d48f1751ab73149df7debffccc370ac6d7d5efe8c542c4cb8801acc6be7614d1",
+      "bytes": 51860
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-0-5.webp",
+      "sha256": "bc7f4935cd5692088969e5b6568af93db1058bbf713fb93d854ae99311066ee4",
+      "bytes": 51362
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-1-0.webp",
+      "sha256": "ac31a849ed526d59549fb3df11f05b703d7c9aba1daf1c8ec69b992a34a6365b",
+      "bytes": 57818
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-1-1.webp",
+      "sha256": "45820b2e80c17458a5e3cdb49fb3b18fbd2659c30de036a09f48f83c0d5df4f2",
+      "bytes": 59392
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-1-2.webp",
+      "sha256": "8135623a36a5ecbc0282073bc31b4a4ae2a2494acf6c9f6410674a3e92134c6a",
+      "bytes": 58522
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-1-3.webp",
+      "sha256": "8435bc11696a6d2c0096ed47a6cb245d625b4514ab33960f435143830be5508e",
+      "bytes": 59284
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-1-4.webp",
+      "sha256": "f6b1706c1a3e7a77e895b5d2e93ffcd90ea1199d842ad490a444541d1dbdb455",
+      "bytes": 62176
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-1-5.webp",
+      "sha256": "3bbdefcaa1f2ff1393a9240ed501abbde98ba4a05df65dae6be7724fc6bfd81f",
+      "bytes": 56274
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-2-0.webp",
+      "sha256": "8caac7ec02369f1d8b80733e0bd9dcb993e3b05126c811b2313c0a4813a6c4e7",
+      "bytes": 64466
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-2-1.webp",
+      "sha256": "f7406faf45d2997a9a1ad07e5c2782e632cbc6e29aea8021f63fae5345b5c3e8",
+      "bytes": 62940
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-2-2.webp",
+      "sha256": "7329ee47337202ee97ba2e972753faa6b9d838d8e024c85e9900825748aad14a",
+      "bytes": 62918
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-2-3.webp",
+      "sha256": "6ab4f65c12855511003532e44c4884215e7c2c61ac50056e87a9e11fbb6de25e",
+      "bytes": 62366
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-2-4.webp",
+      "sha256": "3b4728eb78c051c8f17a9467204516f3027db1e3381d1e6d3790f609352b41eb",
+      "bytes": 63140
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-2-5.webp",
+      "sha256": "1da1ff8b2e384224167927df1db5da3f8badb5991132250711368ff774c8c576",
+      "bytes": 59962
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-3-0.webp",
+      "sha256": "f506c6b3b25dd7b74db0e64cca19d7c66dd7f7d9d81229c304f6d20f9ea1a8e4",
+      "bytes": 66394
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-3-1.webp",
+      "sha256": "b7cdd53faa8d2a4938ab3bbf1c03b510dabc95b9843987bdfc25f4cb54e3a3f6",
+      "bytes": 67604
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-3-2.webp",
+      "sha256": "b9a9be28aaa3881e07a4d6958ea86494c8c415fc84344d1452943e938a865576",
+      "bytes": 66616
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-3-3.webp",
+      "sha256": "fc46b5500dee0e46134b7cbd8ee5bae86dd8ba85afd8f2797f337df9180fa362",
+      "bytes": 66122
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-3-4.webp",
+      "sha256": "7bb065ae350fe45196897fb701a569cf912a683463ca5dbba4d413d5d455c6d4",
+      "bytes": 68188
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-3-5.webp",
+      "sha256": "e01df5612cc075ec50c335b97f968c92ee30f5ccc898a288397b21beecfc6d25",
+      "bytes": 65490
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-4-0.webp",
+      "sha256": "b63b55c3cefec14100950dda14b8cc60b9e375297529dc3af8bbc154d7a26a16",
+      "bytes": 66656
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-4-1.webp",
+      "sha256": "ef1e1a17abaa07053b522924f0f32431b6286c6933b00a2506f71b880da58de6",
+      "bytes": 66672
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-4-2.webp",
+      "sha256": "ac016b16171aed71dd21d669d9706711dd121ec8ff9cff325a3233b7bcde422d",
+      "bytes": 65736
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-4-3.webp",
+      "sha256": "86ea7db7d07118f8f9a36a169edf8c41d0a6fc1e5f2a3bc7a2f81d32d53ea686",
+      "bytes": 65794
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-4-4.webp",
+      "sha256": "4a2830f9c0819b105f5d69829705419fae881ec86500d48cab39e4d0bcf62ebc",
+      "bytes": 67734
+    },
+    {
+      "path": "docs/art-unification/city-scale/measure-4-5.webp",
+      "sha256": "e4729b867f8d6e4b6e1062b4abe3d1481d69a1d50b350378e31bd8cbf3b21303",
+      "bytes": 58672
+    },
+    {
+      "path": "docs/art-unification/city-scale/measurements.json",
+      "sha256": "36482c0bec278c8ed687ea4018767444775f01995da2facc005e4bf1a67353a5",
+      "bytes": 22321
+    },
+    {
+      "path": "docs/art-unification/city-scale/measurements.md",
+      "sha256": "d1dbf07a0531303f90356bf9ddf9a3509ff7f0af5fb5dc4ab97f4191b432e426",
+      "bytes": 3956
+    },
+    {
+      "path": "docs/art-unification/city-scale/tests.txt",
+      "sha256": "d92c4844dcc0a6173825e1369e71393d1d34fda7a6e4d50743f7a159b0ad1210",
+      "bytes": 183
+    },
+    {
+      "path": "docs/art-unification/city-scale/typecheck.txt",
+      "sha256": "4e457ce3c0287a9cee9cfc4a9d96dc73bf44b236b68554eb8c12e54455023962",
+      "bytes": 262
+    },
+    {
       "path": "docs/art-unification/coverage.json",
       "sha256": "6d21f332cdc57743bda65eaee8bc6858c719f27e7ebec41ec7ba30e40bc0cac5",
       "bytes": 285497
@@ -583,8 +1063,8 @@
     },
     {
       "path": "docs/art-unification/file-gate.json",
-      "sha256": "5d07de07b5e555b36e6e7019dbb03a568e9812aaf7fa4e520aafa80693a47204",
-      "bytes": 43592
+      "sha256": "49b46172e9c149a10faefa929dbd66366e6b48da3bdca2135ba2a3c0bdc1f08b",
+      "bytes": 43593
     },
     {
       "path": "docs/art-unification/source-summary.json",
@@ -846,5 +1326,6 @@
       "sha256": "4e457ce3c0287a9cee9cfc4a9d96dc73bf44b236b68554eb8c12e54455023962",
       "bytes": 262
     }
-  ]
+  ],
+  "cityScaleReviewBase": "6d26b15ebee9561f880700bcc17dd465516b2586"
 }

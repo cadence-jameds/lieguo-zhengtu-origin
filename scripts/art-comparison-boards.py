@@ -113,6 +113,24 @@ for index,name in enumerate(names):
     cells.append((name,picture({'path':'art/unified/cities-imperial.webp','sheet':'cities','index':index})))
     rows.append(cells)
 board('six-civilizations-four-ages',['黑暗','封建','城堡','舊帝王（沿用城堡）','新帝王'],rows,225,245)
+# Same 512px source cell and 202/512 scale in all five columns. Never
+# independently fit the visible silhouette: that would hide source-scale errors.
+city_layout={'sourceCell':[512,512],'scale':202/512,'pasteMode':'center full canvas; no silhouette crop','rows':[]}
+city_board=Image.open(OUT/'six-civilizations-four-ages.webp').convert('RGB');guide=ImageDraw.Draw(city_board)
+from numpy import asarray,where
+castle=Image.open(ROOT/'public/art/cities-age-2.webp').convert('RGBA')
+for i,name in enumerate(names):
+    alpha=asarray(castle.crop((i%3*512,i//3*512,i%3*512+512,i//3*512+512)))[:,:,3]
+    foot=int(where(alpha>96)[0].max()+1);rects=[]
+    for col in range(5):
+        x=col*225+11;y=64+i*245+28
+        guide.line((x,y+foot*202/512,x+202,y+foot*202/512),fill=(105,115,89),width=1)
+        rects.append([x,y,202,202])
+    city_layout['rows'].append({'civilization':name,'castleFootY':foot,'destRects':rects})
+city_board.save(OUT/'six-civilizations-four-ages.webp','WEBP',quality=94,method=4)
+manifests['six-civilizations-four-ages']['sha256']=hashlib.sha256((OUT/'six-civilizations-four-ages.webp').read_bytes()).hexdigest()
+(OUT/'city-board-layout.json').write_text(json.dumps(city_layout,ensure_ascii=False,indent=2)+'\n')
+
 
 board('priority-before-after',['已確認母圖','舊正式圖','退件候選','修正候選'],[
  [('民兵／槍兵錨點',picture(old_units['spearman'])),('舊戰矛兵',picture(old_units['skirmisher'])),('同系列民兵',picture(old_units['militia'])),('新戰矛兵',picture(units['skirmisher']))],

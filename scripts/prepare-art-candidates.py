@@ -10,6 +10,7 @@ from pathlib import Path
 from PIL import Image
 import numpy as np
 from scipy import ndimage
+from city_art_normalize import calibrate_city
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'docs/art-source/unification'
@@ -113,6 +114,10 @@ for batch in records:
             if batch['transparent'] and sprite.mode == 'RGBA':
                 alpha = sprite.getchannel('A').point(lambda value: 0 if value <= 2 else value)
                 sprite.putalpha(alpha)
+            if cell.get('group', batch['group']) == 'cities':
+                castle = Image.open(ROOT / 'public/art/cities-age-2.webp').convert('RGBA')
+                sprite, calibration = calibrate_city(sprite.convert('RGBA'), castle, index)
+                extraction = {**(extraction or {}), 'cityCalibration': calibration}
             output = ROOT / cell['path']
             output.parent.mkdir(parents=True, exist_ok=True)
             sprite.save(output, 'WEBP', quality=88, method=4, exact=True, lossless=bool(cell.get('sceneBand')))

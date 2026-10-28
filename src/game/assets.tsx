@@ -1,4 +1,4 @@
-import {assetURL} from './presentation/artMap';
+import {assetURL,CIV_ART} from './presentation/artMap';
 import {buildingImagePath} from './presentation/artRegistry';
 import {useId} from 'react';
 import { cultureId,civilizations } from '../content/civilizations';
@@ -20,6 +20,11 @@ export function eraBounds(index:number,era:number){
  // The feudal Byzantine dome begins above the old 768px row line; the
  // academy and market also shared pixels with the next row's rooftops.
  return {x:col*1536/5,y:row===3?boundary:row*256,w:1536/5,h:row===2?boundary-512:row===3?1024-boundary:256};
+}
+/** World nodes use civilization centers in every era, never the outskirts city panorama. */
+export function worldCitySprite(index:number,era:number){
+ if(index<0||index>=6||!Number.isInteger(index))throw new Error('Unknown civilization sprite index');
+ return era===3?{path:buildingImagePath('center',Object.values(CIV_ART)[index],3)!,crop:{x:0,y:0,w:512,h:512}}:{path:eraAtlas(era),crop:eraBounds(14+index,era)};
 }
 const feudalConstruction=new Set<Building>(['warehouse','barracks','workshop','academy']);
 const castleConstruction=new Set<Building>(['house','warehouse','barracks','range','stable','workshop','academy','market']);
