@@ -79,7 +79,7 @@ ART-GATE 自評：法蘭克19、中國A18／B18／C19、日本A19／B18／C18；
 | 候選頁 | 正式Art元件、原圖集裁切、三視窗共48張128px／64px卡面PASS；無橫向溢出。此頁只供審稿，不是正式映射替換 |
 | 完整回歸 | 法蘭克正式替換後執行一次實際完整回歸：**2,102 PASS、0 FAIL、1 SKIP**，見validation.json。首次隔離副本複製遇/tmp ENOSPC，尚未進入測試；清除先前拋棄式驗證目錄後以原命令再跑，沒有放寬測試／timeout。 |
 | 全資產／舊圖板／城郊顯示gate | 結果見validation.json；保留舊驗收來源，明確驗證法蘭克後繼輸出 |
-| GitHub push／新版CI | 交付前嘗試一次；以validation.json與回報為準。未成功就標BLOCKED，不引用舊CI |
+| GitHub push／新版CI | **BLOCKED**：以實作commit `bbdf779a1bbcdce0d1b97c43dbdd9a552818960b`嘗試推送原分支一次，proxy回覆`CONNECT tunnel failed, response403`。未重試；遠端仍為5314e0c，Draft=true，沒有新版CI，未引用舊CI。完整雲端Git bundle／候選ZIP另行提供下載 |
 
 實際畫面：[候選320px](browser/candidates/320-ABCs.jpg)／[390px](browser/candidates/390-ABCs.jpg)／[桌面](browser/candidates/1440-ABCs.jpg)；法蘭克正式詳情：[320px](browser/army/320-elite.guard.civ_frankia-detail.jpg)／[390px](browser/army/390-elite.guard.civ_frankia-detail.jpg)／[桌面](browser/army/1440-elite.guard.civ_frankia-detail.jpg)。[正式兵種逐案](browser/army/result.json)與[候選尺寸逐案](browser/candidates/result.json)區分記錄，不把候選畫廊當成正式卡片映射測試。
 

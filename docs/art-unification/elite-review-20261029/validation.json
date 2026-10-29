@@ -52,9 +52,18 @@
   "registry": "UNCHANGED_BYTE_FOR_BYTE",
   "artBoardGate": "PASS",
   "cityDisplayGate": "PASS_WITH_UNCHANGED_SOURCE_AND_ASSETS",
-  "githubPush": "NOT_ATTEMPTED_YET",
-  "githubCI": "PENDING_PUSH",
+  "githubPush": {
+    "status": "BLOCKED_NETWORK_POLICY",
+    "attempts": 1,
+    "attemptedHead": "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b",
+    "command": "git push origin HEAD:refs/heads/feat/art-unification-20261028",
+    "error": "CONNECT tunnel failed, response403",
+    "remoteHead": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  },
+  "githubCI": "BLOCKED_NOT_PUSHED_NO_NEW_RUN",
   "playerApproval": "待驗",
   "independentArtGate": "待驗",
-  "physicalPhone": "待驗"
+  "physicalPhone": "待驗",
+  "implementationCommit": "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b",
+  "draft": true
 }
