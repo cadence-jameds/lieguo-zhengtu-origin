@@ -1,0 +1,10 @@
+name: Original art transport (upload pending)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Upload is incomplete. No restoration or publication is enabled yet.'
