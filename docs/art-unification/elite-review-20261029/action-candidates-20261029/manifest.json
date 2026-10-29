@@ -1,0 +1,389 @@
+{
+  "base": "2f7c34f14b1247ae887920ddc679a52024e492c1",
+  "method": "Full input contains within 480px on 512px, isotropic downscale only, soles at y450. No pose-height fit, no stretching a kneeling body upright. Source composition/anatomy differences remain visible.",
+  "soleAnnotationUncertaintyPixels": 4,
+  "runtimeMapping": {
+    "zhongguo": [
+      {
+        "id": "guard.civ_zhongguo",
+        "name": "連弩衛隊",
+        "art": {
+          "path": "art/catalog-guards.webp",
+          "sheet": "guards",
+          "index": 0,
+          "origin": "reused"
+        },
+        "crop": {
+          "x": 2,
+          "y": 2,
+          "w": 508,
+          "h": 501
+        }
+      },
+      {
+        "id": "elite.guard.civ_zhongguo",
+        "name": "精銳連弩衛隊",
+        "art": {
+          "path": "art/unified/units/elite.guard.civ_zhongguo.webp",
+          "badge": "ELITE",
+          "origin": "new"
+        },
+        "crop": null
+      }
+    ],
+    "japan": [
+      {
+        "id": "guard.civ_japan",
+        "name": "武士侍從隊",
+        "art": {
+          "path": "art/catalog-guards.webp",
+          "sheet": "guards",
+          "index": 4,
+          "origin": "reused"
+        },
+        "crop": {
+          "x": 514,
+          "y": 507,
+          "w": 508,
+          "h": 515
+        }
+      },
+      {
+        "id": "elite.guard.civ_japan",
+        "name": "精銳武士侍從隊",
+        "art": {
+          "path": "art/unified/units/elite.guard.civ_japan.webp",
+          "badge": "ELITE",
+          "origin": "new"
+        },
+        "crop": null
+      }
+    ]
+  },
+  "sources": [
+    {
+      "civ": "zhongguo",
+      "column": 0,
+      "path": "public/art/catalog-guards.webp",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef",
+      "cropXYWH": {
+        "x": 2,
+        "y": 2,
+        "w": 508,
+        "h": 501
+      },
+      "dimensions": [
+        508,
+        501
+      ],
+      "transform": {
+        "scale": 0.9448818897637795,
+        "translateXY": [
+          16.0,
+          7.795275590551171
+        ],
+        "soleY": 468,
+        "targetSoleY": 450,
+        "fullSourcePreserved": true
+      },
+      "labels": [
+        "一般連弩兵",
+        "連弩衛隊",
+        "正式／一般"
+      ]
+    },
+    {
+      "civ": "zhongguo",
+      "column": 1,
+      "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "cropXYWH": null,
+      "dimensions": [
+        512,
+        512
+      ],
+      "transform": {
+        "scale": 0.9375,
+        "translateXY": [
+          16.0,
+          11.25
+        ],
+        "soleY": 468,
+        "targetSoleY": 450,
+        "fullSourcePreserved": true
+      },
+      "labels": [
+        "目前正式精銳",
+        "精銳連弩衛隊",
+        "正式圖未替換"
+      ]
+    },
+    {
+      "civ": "zhongguo",
+      "column": 2,
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/china-D-v1.png",
+      "sha256": "2eefa5e7e6ad97430551382ca0883c32c519c344f5cdada42eb5e8cbe6002db8",
+      "cropXYWH": null,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transform": {
+        "scale": 0.3827751196172249,
+        "translateXY": [
+          16.0,
+          30.09569377990431
+        ],
+        "soleY": 1097,
+        "targetSoleY": 450,
+        "fullSourcePreserved": true
+      },
+      "labels": [
+        "精銳連弩衛隊",
+        "候選 D／低姿架弩",
+        "動作概念／弩機待驗"
+      ]
+    },
+    {
+      "civ": "japan",
+      "column": 0,
+      "path": "public/art/catalog-guards.webp",
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef",
+      "cropXYWH": {
+        "x": 514,
+        "y": 507,
+        "w": 508,
+        "h": 515
+      },
+      "dimensions": [
+        508,
+        515
+      ],
+      "transform": {
+        "scale": 0.9320388349514563,
+        "translateXY": [
+          19.26213592233009,
+          11.00970873786406
+        ],
+        "soleY": 471,
+        "targetSoleY": 450,
+        "fullSourcePreserved": true
+      },
+      "labels": [
+        "一般武士",
+        "武士侍從隊",
+        "正式／一般"
+      ]
+    },
+    {
+      "civ": "japan",
+      "column": 1,
+      "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "cropXYWH": null,
+      "dimensions": [
+        512,
+        512
+      ],
+      "transform": {
+        "scale": 0.9375,
+        "translateXY": [
+          16.0,
+          9.375
+        ],
+        "soleY": 470,
+        "targetSoleY": 450,
+        "fullSourcePreserved": true
+      },
+      "labels": [
+        "目前正式精銳",
+        "精銳武士侍從隊",
+        "正式圖未替換"
+      ]
+    },
+    {
+      "civ": "japan",
+      "column": 2,
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/japan-D-v2.png",
+      "sha256": "7cc4112108e26aaf9c068aa14d99bcefc6aaba2aa234d83d70bcdd10cfa14dfd",
+      "cropXYWH": null,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transform": {
+        "scale": 0.3827751196172249,
+        "translateXY": [
+          16.0,
+          0.6220095693780081
+        ],
+        "soleY": 1174,
+        "targetSoleY": 450,
+        "fullSourcePreserved": true
+      },
+      "labels": [
+        "精銳武士侍從隊",
+        "候選 D／過頂舉刀 v2",
+        "雙手分握／待玩家審圖"
+      ]
+    }
+  ],
+  "boards": [
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/zhongguo-compare-512.png",
+      "sha256": "cf993bd082b86d1edc189e1c642145854bc41eb9eb968a88dd8bc86cd406364b",
+      "dimensions": [
+        1600,
+        766
+      ],
+      "nativeArtPixels": 512,
+      "columns": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/zhongguo-compare-128.png",
+      "sha256": "e383ba74b169b51a2b312bde77bacb8532e4653f1df2355c26de43748684cb72",
+      "dimensions": [
+        664,
+        346
+      ],
+      "nativeArtPixels": 128,
+      "columns": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/zhongguo-compare-64.png",
+      "sha256": "28553cf8185184095d2c8927c6eb57941764ca58e911b3daac5a50e8335f773c",
+      "dimensions": [
+        664,
+        282
+      ],
+      "nativeArtPixels": 64,
+      "columns": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/zhongguo-mobile.png",
+      "sha256": "f98b972df4be2ed4dcd68fe63ffec2a667096bbd473dba3d7525a2a16a5babcb",
+      "dimensions": [
+        320,
+        1320
+      ],
+      "previewArtPixels": 288,
+      "columnsAsRows": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/japan-compare-512.png",
+      "sha256": "e2a9c36caca2fd94afb245706c4643591ae49a67fdfd2d43be8f563b5a6f71b0",
+      "dimensions": [
+        1600,
+        766
+      ],
+      "nativeArtPixels": 512,
+      "columns": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/japan-compare-128.png",
+      "sha256": "aa9ad1b210f8db2b523a1b5aec0d61179f50f154ed2f0e05dc7e2ce8d18449da",
+      "dimensions": [
+        664,
+        346
+      ],
+      "nativeArtPixels": 128,
+      "columns": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/japan-compare-64.png",
+      "sha256": "532f6e1131593e13ba63ce4866e1f3f3f2b405907d88119720c373d05230ace6",
+      "dimensions": [
+        664,
+        282
+      ],
+      "nativeArtPixels": 64,
+      "columns": 3
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/japan-mobile.png",
+      "sha256": "811697378d303613225d3c447f06f7dfa5161695428171a243da0d73a1bad985",
+      "dimensions": [
+        320,
+        1320
+      ],
+      "previewArtPixels": 288,
+      "columnsAsRows": 3
+    }
+  ],
+  "generationHistory": [
+    {
+      "id": "china-D-v1",
+      "tool": "image_gen.imagegen",
+      "model": "not exposed",
+      "date": "2026-10-29",
+      "transparentBackground": false,
+      "raw": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/china-D-v1.png",
+      "rawSHA256": "2eefa5e7e6ad97430551382ca0883c32c519c344f5cdada42eb5e8cbe6002db8",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "prompt": "docs/art-unification/elite-review-20261029/action-candidates-20261029/prompts/china-D-v1.txt",
+      "promptSHA256": "1f9bdb4a033c810ae049f539ed7a115ba04ea94f4df98a494da79eb27a3f50e1",
+      "references": [
+        {
+          "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+          "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83"
+        },
+        {
+          "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+          "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+        }
+      ],
+      "status": "POSE_CONCEPT_MECHANISM_REVIEW_PENDING"
+    },
+    {
+      "id": "japan-D-v1",
+      "tool": "image_gen.imagegen",
+      "model": "not exposed",
+      "date": "2026-10-29",
+      "transparentBackground": false,
+      "raw": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/japan-D-v1.png",
+      "rawSHA256": "1bb297da1113e38eba450744c74fc0502b4e98a6f26cb3d668fae5ef0af50d89",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "prompt": "docs/art-unification/elite-review-20261029/action-candidates-20261029/prompts/japan-D-v1.txt",
+      "promptSHA256": "4d222599b9868ec5b56a6e74e9df08118e037c2bdd6202e0e0fa30820bb903a7",
+      "references": [
+        {
+          "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+          "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+        },
+        {
+          "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+          "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+        }
+      ],
+      "status": "SUPERSEDED_SHORT_OVERLAPPING_GRIP"
+    },
+    {
+      "id": "japan-D-v2",
+      "tool": "image_gen.imagegen",
+      "model": "not exposed",
+      "date": "2026-10-29",
+      "transparentBackground": false,
+      "raw": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/japan-D-v2.png",
+      "rawSHA256": "7cc4112108e26aaf9c068aa14d99bcefc6aaba2aa234d83d70bcdd10cfa14dfd",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "prompt": "docs/art-unification/elite-review-20261029/action-candidates-20261029/prompts/japan-D-v2.txt",
+      "promptSHA256": "3e9a159daf50eed9d9a0fba240165a8fb93a6a45724bcf50386f59fc8ae30f21",
+      "references": [
+        {
+          "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/japan-D-v1.png",
+          "sha256": "1bb297da1113e38eba450744c74fc0502b4e98a6f26cb3d668fae5ef0af50d89"
+        }
+      ],
+      "status": "REVIEW_CANDIDATE_PLAYER_PENDING"
+    }
+  ]
+}
