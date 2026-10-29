@@ -1,0 +1,167 @@
+{
+  "baseHEAD": "e8c392c72dc3abca83d0a2d7e781ef078f0ed807",
+  "playerDecision": "Chinese B/high-grade fish-scale armor selected; new low kneeling pose requested. Japanese selection unchanged.",
+  "newImageStatus": "PLAYER_REQUESTED_POSE_RENDERED_REVIEW_PENDING_NOT_RUNTIME",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed",
+  "date": "2026-10-29",
+  "transparentBackground": false,
+  "prompt": "prompt.txt",
+  "promptSHA256": "d013b0a46855a4715d4c3081800c35e365b0d92df57fe2ad619ef11a27a92355",
+  "raw": "raw/china-B-kneeling-v1.png",
+  "rawSHA256": "b7ff3b671ac852511b3a61fd1f118bbfb2ba0b7aac979250c2675d3906993790",
+  "rawDimensions": [
+    1254,
+    1254
+  ],
+  "references": [
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+      "sha256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/china-D-v1.png",
+      "sha256": "2eefa5e7e6ad97430551382ca0883c32c519c344f5cdada42eb5e8cbe6002db8"
+    }
+  ],
+  "comparisonMethod": "Full source downscale to maximum side480 on512; soles y450, no pose-height fit; no per-candidate enlargement or nonuniform stretching. Composition and generated anatomy differences remain visible.",
+  "soleAnnotationUncertaintyPixels": 4,
+  "sources": [
+    {
+      "path": "public/art/catalog-guards.webp",
+      "crop": {
+        "x": 2,
+        "y": 2,
+        "w": 508,
+        "h": 501
+      },
+      "sole": 468,
+      "labels": [
+        "一般連弩兵",
+        "連弩衛隊",
+        "正式／一般"
+      ],
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef",
+      "scale": 0.9448818897637795,
+      "translateXY": [
+        16.0,
+        7.795275590551171
+      ],
+      "targetSoleY": 450,
+      "inputDimensions": [
+        508,
+        501
+      ]
+    },
+    {
+      "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+      "crop": null,
+      "sole": 468,
+      "labels": [
+        "目前正式精銳",
+        "精銳連弩衛隊",
+        "正式圖未替換"
+      ],
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "scale": 0.9375,
+      "translateXY": [
+        16.0,
+        11.25
+      ],
+      "targetSoleY": 450,
+      "inputDimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+      "crop": null,
+      "sole": 460,
+      "labels": [
+        "精銳連弩衛隊",
+        "B／高階魚鱗甲",
+        "原站姿／已選甲型"
+      ],
+      "sha256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4",
+      "scale": 0.9375,
+      "translateXY": [
+        16.0,
+        18.75
+      ],
+      "targetSoleY": 450,
+      "inputDimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/raw/china-B-kneeling-v1.png",
+      "crop": null,
+      "sole": 1095,
+      "labels": [
+        "精銳連弩衛隊",
+        "B／高階魚鱗甲",
+        "低姿跪射 v1／待審"
+      ],
+      "sha256": "b7ff3b671ac852511b3a61fd1f118bbfb2ba0b7aac979250c2675d3906993790",
+      "scale": 0.3827751196172249,
+      "translateXY": [
+        16.0,
+        30.86124401913878
+      ],
+      "targetSoleY": 450,
+      "inputDimensions": [
+        1254,
+        1254
+      ]
+    }
+  ],
+  "boards": [
+    {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/comparison-512.png",
+      "sha256": "93569c78bfc853bd9fae7aa39e8933db5cb26958b0f623340644431b786b4196",
+      "dimensions": [
+        2128,
+        764
+      ],
+      "nativeArtPixels": 512,
+      "columns": 4
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/comparison-128.png",
+      "sha256": "f8918112bff811a3e78fc81e915b346a5b9292004c2ec7d6610c4ec5fa4b98fe",
+      "dimensions": [
+        880,
+        344
+      ],
+      "nativeArtPixels": 128,
+      "columns": 4
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/comparison-64.png",
+      "sha256": "38db2509ecaebb710206d2e4d4ecab55915eb89a2af0556d00ecf350da0bcef3",
+      "dimensions": [
+        880,
+        280
+      ],
+      "nativeArtPixels": 64,
+      "columns": 4
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/comparison-mobile-128.png",
+      "sha256": "819ec36c3dde2b4991fa4aef69dda0abc3db835ff4704b8cfe0a940fa2f27140",
+      "dimensions": [
+        320,
+        804
+      ],
+      "nativeArtPixels": 128,
+      "columnsAsRows": 4
+    }
+  ],
+  "publication": {
+    "pushed": false,
+    "githubCI": "NOT_TRIGGERED",
+    "reason": "Automatic approval review failed: Selected model is at capacity. Network command was not executed."
+  }
+}
