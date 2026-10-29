@@ -1,5 +1,20 @@
 # 六文明精銳複審：中日三方案與法蘭克單手斧
 
+## PR #45：一般／正式精銳／A／B／C 五欄補強（2026-10-29）
+
+本次接續 `d052a1951fd5d3c9b1b4fa807520bfeddb5fccb8`，只增加審圖比較資料。**一般兵直接取目前正式遊戲圖集的正確格位，第二欄補入目前正式精銳**；六個候選沒有重生或替換。所有欄位等高、同腳線、相同畫布，僅縮小與平移來源，未放大候選。
+
+| 文明 | 完整五欄大圖 | 128px | 64px | 手機直排 |
+| --- | --- | --- | --- | --- |
+| 中國 | [一般連弩兵／正式精銳／A／B／C](upgrade-comparison/zhongguo-512.png) | [128px](upgrade-comparison/zhongguo-128.png) | [64px](upgrade-comparison/zhongguo-64.png) | [大圖](upgrade-comparison/zhongguo-512-mobile.png) · [128px](upgrade-comparison/zhongguo-128-mobile.png) · [64px](upgrade-comparison/zhongguo-64-mobile.png) |
+| 日本 | [一般武士／正式精銳／A／B／C](upgrade-comparison/japan-512.png) | [128px](upgrade-comparison/japan-128.png) | [64px](upgrade-comparison/japan-64.png) | [大圖](upgrade-comparison/japan-512-mobile.png) · [128px](upgrade-comparison/japan-128-mobile.png) · [64px](upgrade-comparison/japan-64-mobile.png) |
+
+[本輪完整比較與來源／比例方法](upgrade-comparison/README.md)逐項列出甲冑、頭盔、肩甲、武器、輪廓與小尺寸讀性。**中國 A、日本 B 在 64px 仍與一般兵太相似；中國 B、日本 A／C 也不能視為小尺寸升階已通過。** 中國 C 保留較可見的大分塊差異，但仍待玩家判斷。此為自評風險，不代替玩家選定。
+
+以下保留前輪報告與其推薦的歷史脈絡；本輪不排序、不沿用推薦作最終採用決定。正式美術、Art Registry、候選映射、規格、玩法與 PR #44 都未改，PR #45 保持 Draft。
+
+---
+
 本輪接續雲端本機 `8736bad811a7c372c59881b143e4c75bd659c5af`，沒有從遠端舊版重做。該 commit、先前八張原始候選 PNG、五張已修正 WebP、城郊前後對照、報告及 46MB Git bundle 均確認存在。工作開始時遠端 Draft PR #44 仍為 `5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5`。交付的新 HEAD／推送結果另見 validation.json、交付下載清單及回報。
 
 **正式變更只有法蘭克精銳一張卡。** 中國／日本六張候選只在本目錄，Art Registry 與兩張現行精銳卡維持 8736bad，等待玩家選定。重甲騎兵、輕騎兵、騎士、三文明城郊接地、帝王城郊、世界地圖 110%、共用建築策略、科技、玩法／ID／存檔／v95 都不變。870 個既有 public／src/game／v94／v95 檔案以 SHA 鎖定，比較前後逐檔驗證。
