@@ -9272,103 +9272,6 @@
     "approver": null
   },
   {
-    "key": "elite.guard.civ_frankia",
-    "group": "units",
-    "subject": "Single double-bitted axe, exactly two hands; blue-gold shield strapped to back.",
-    "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
-    "artGate": {
-      "scores": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1,
-        2,
-        2,
-        2
-      ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
-      "playerApproval": "待驗",
-      "reviewedSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
-      "hardGate": {
-        "anatomy": "PASS_SELF_REVIEW",
-        "equipmentAndGrip": "PASS_SELF_REVIEW",
-        "extraLimbs": "NONE_OBSERVED",
-        "criticalDefectOverridesScore": true
-      },
-      "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
-      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
-      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
-    },
-    "role": "ARMY-PORTRAIT",
-    "batch": "feedback-20261029-elite.guard.civ_frankia",
-    "cropRect": [
-      0,
-      0,
-      1254,
-      1254
-    ],
-    "dimensions": [
-      512,
-      512
-    ],
-    "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
-    "bytes": 33486,
-    "atlasExtraction": null,
-    "alphaPolicy": "dark-opaque",
-    "approver": null,
-    "supersedes": {
-      "key": "elite.guard.civ_frankia",
-      "group": "units",
-      "subject": "Elite Frankish throwing-axe guard: steel breastplate over mail, great helmet with face open, paired heavy throwing axes and tall reinforced shield, lunging throwing pose; armor weapons and stance differ from ordinary",
-      "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
-      "artGate": {
-        "scores": [
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          1,
-          2,
-          2,
-          2
-        ],
-        "total": 19,
-        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-        "reviewer": "Codex visual self-review, not an independent release approval",
-        "playerApproval": "待驗",
-        "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-        "browserEvidence": "docs/art-unification/browser/result.json",
-        "comparisonBoards": "docs/art-unification/boards/"
-      },
-      "role": "ARMY-PORTRAIT",
-      "batch": "army-elite-guards",
-      "cropRect": [
-        1026,
-        2,
-        508,
-        493
-      ],
-      "dimensions": [
-        512,
-        512
-      ],
-      "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6",
-      "bytes": 38750,
-      "atlasExtraction": null,
-      "alphaPolicy": "dark-opaque",
-      "approver": null,
-      "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
-      "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_frankia.webp"
-    }
-  },
-  {
     "key": "elite.guard.civ_zhongguo",
     "group": "units",
     "subject": "Reinforced shoulders/cuirass and mature repeating crossbow with visible transverse bow.",
@@ -9753,6 +9656,155 @@
       "approver": null,
       "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
       "preservedOutput": "docs/art-unification/player-feedback-20261029/before/knight.webp"
+    }
+  },
+  {
+    "key": "elite.guard.civ_frankia",
+    "group": "units",
+    "subject": "Anatomical right hand single short-haft double-bitted axe; left hand holds blue/gold fleur-de-lis shield. Exactly two arms/hands.",
+    "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+    "artGate": {
+      "role": "ARMY-PORTRAIT",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "hardGate": "PASS_SELF_REVIEW",
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+      "reviewer": "Codex visual self-review: full raw/512px,128/64px boards,320/390/1440 browser Art gallery and27 actual ArmyView cases; player/independent approval pending",
+      "limits": "No independent/player acceptance. Any extra arm/hand, second axe, shaft through body or invalid grip is a hard FAIL regardless of total.",
+      "notes": "Exactly one compact double-bitted axe on anatomical right hand; anatomical left arm bent to held shield. Left palm/handle are partially occluded by shield; visible wrist/partial glove and shield connection reviewed, concealed fingers not independently countable. No third hand/arm or second axe observed, no shaft through body. Shield blue/gold fleur-de-lis, mail/cape preserved.",
+      "browserEvidence": [
+        "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+        "docs/art-unification/elite-review-20261029/browser/army/result.json"
+      ]
+    },
+    "role": "ARMY-PORTRAIT",
+    "batch": "elite-review-20261029-frankia-single-hand",
+    "cropRect": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+    "bytes": 36062,
+    "atlasExtraction": null,
+    "alphaPolicy": "dark-opaque",
+    "approver": null,
+    "supersedes": {
+      "key": "elite.guard.civ_frankia",
+      "group": "units",
+      "subject": "Single double-bitted axe, exactly two hands; blue-gold shield strapped to back.",
+      "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+      "artGate": {
+        "scores": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        "total": 19,
+        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+        "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+        "playerApproval": "待驗",
+        "reviewedSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+        "hardGate": {
+          "anatomy": "PASS_SELF_REVIEW",
+          "equipmentAndGrip": "PASS_SELF_REVIEW",
+          "extraLimbs": "NONE_OBSERVED",
+          "criticalDefectOverridesScore": true
+        },
+        "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
+        "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+        "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+      },
+      "role": "ARMY-PORTRAIT",
+      "batch": "feedback-20261029-elite.guard.civ_frankia",
+      "cropRect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+      "bytes": 33486,
+      "atlasExtraction": null,
+      "alphaPolicy": "dark-opaque",
+      "approver": null,
+      "supersedes": {
+        "key": "elite.guard.civ_frankia",
+        "group": "units",
+        "subject": "Elite Frankish throwing-axe guard: steel breastplate over mail, great helmet with face open, paired heavy throwing axes and tall reinforced shield, lunging throwing pose; armor weapons and stance differ from ordinary",
+        "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual self-review, not an independent release approval",
+          "playerApproval": "待驗",
+          "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+          "browserEvidence": "docs/art-unification/browser/result.json",
+          "comparisonBoards": "docs/art-unification/boards/"
+        },
+        "role": "ARMY-PORTRAIT",
+        "batch": "army-elite-guards",
+        "cropRect": [
+          1026,
+          2,
+          508,
+          493
+        ],
+        "dimensions": [
+          512,
+          512
+        ],
+        "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6",
+        "bytes": 38750,
+        "atlasExtraction": null,
+        "alphaPolicy": "dark-opaque",
+        "approver": null,
+        "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+        "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_frankia.webp"
+      },
+      "revision": "8736bad811a7c372c59881b143e4c75bd659c5af",
+      "preservedOutput": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp"
     }
   }
 ]

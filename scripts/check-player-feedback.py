@@ -1,10 +1,14 @@
 """Read-only integrity/scope gate; image anatomy is an explicit human review, not file QA."""
-import hashlib,json
+import hashlib,json,subprocess,sys
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/player-feedback-20261029';S=R/'docs/art-source/player-feedback-20261029';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text())
 selected=load(S/'outputs.json');allowed={r['path'] for r in selected};assert len(selected)==5
 for r in selected:
- assert sha(R/r['path'])==r['sha256'] and sha(R/r['candidate'])==r['sourceSha256'];assert r['dimensions']==[512,512] and len(r['references'])>=2
+ successor=R/'docs/art-unification/elite-review-20261029/runtime.json'
+ if r['key']=='elite.guard.civ_frankia' and successor.exists():
+  active=load(successor);assert active['previousSHA256']==r['sha256'] and sha(R/r['path'])==active['sha256'];subprocess.run([sys.executable,str(R/'scripts/check-elite-review.py')],cwd=R,check=True)
+ else:assert sha(R/r['path'])==r['sha256']
+ assert sha(R/r['candidate'])==r['sourceSha256'];assert r['dimensions']==[512,512] and len(r['references'])>=2
  for ref in r['references']:assert sha(R/ref['path'])==ref['sha256']
  gate=r['artGate'];assert gate['total']>=17 and gate['reviewedSHA256']==r['sha256'];assert all(gate['scores'][i]>0 for i in [0,1,8]);assert gate['hardGate']['anatomy']=='PASS_SELF_REVIEW'
 protected=load(D/'protected.json')
@@ -44,7 +48,11 @@ if (D/'capture-index.json').exists():
   for row in m.get('rows',[]):
    for c in row:
     original=R/c['source']
-    if original.exists():assert sha(original)==c['sha256']
+    if original.exists():
+     successor=R/'docs/art-unification/elite-review-20261029/runtime.json'
+     if c['source']=='public/art/unified/units/elite.guard.civ_frankia.webp' and successor.exists():
+      active=load(successor);assert c['sha256']==active['previousSHA256'] and sha(R/'docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp')==c['sha256']
+     else:assert sha(original)==c['sha256']
     else:assert caps['records'][c['source']]['originalSHA256']==c['sha256']
 
 print('PASS: five mapped512px portraits; heavy cavalry, other units, technology, legacy source atlases, imperial settings and world110% unchanged; 288 city cases/117 identical pairs; 27 real ArmyView cases. Anatomy remains visual self-review/player pending.')

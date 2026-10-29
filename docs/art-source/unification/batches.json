@@ -7272,7 +7272,8 @@
           "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
           "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
           "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
-        }
+        },
+        "supersededBy": "elite-review-20261029-frankia-single-hand"
       }
     ]
   },
@@ -7540,6 +7541,70 @@
           "notes": "Muted burgundy/cream/iron, open face, mail and limited plates; mostly bare horse. Distinct image and posture from approved plated heavy knight; heavy file unchanged.",
           "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
           "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+        }
+      }
+    ]
+  },
+  {
+    "id": "elite-review-20261029-frankia-single-hand",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+    "sourcePath": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8",
+    "references": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+        "sha256": "71139b089745d1e8c04bc0d6ad05d86fc25e76f26e2587f9e1633cf55f45d83c"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      }
+    ],
+    "prompt": "Create ONE square historical equipment character portrait, editing the attached current elite image and using the attached ordinary guard as the actual style and civilization anchor. This is ONE image of ONE adult, no board, no labels, no writing or watermark. ARMY-PORTRAIT for Lieguo Origin. Preserve the existing same civilization, realistic adult anatomy, face, near-eye-level 3/4 full-body camera, warm soft upper-left key light, restrained hand-painted historical realism, aged metal/leather/cloth material, near-black charcoal studio background, no landscape, no pedestal. Keep the complete helmet, weapon and both feet inside the square with a small safe margin. Similar occupancy to the anchors, figure about 85% height; no close-up, no oversize head, no CGI/anime/fantasy. Exactly two arms and two anatomically connected hands with natural fingers. Preserve core clothing colors and mature historical equipment character; armor changes must read as real protection, not color changes. Output ONE clean square image, intended for 512x512 WebP conversion. Do not change any other image.\nPRIORITY CORRECTION of the current elite Frankish guard: retain his face, iron helmet, improved small shoulder plates over mail, blue and aged ivory fleur-de-lis tabard, cloak, leather boots, warm light and rendering. Repose ONLY arms and equipment into a plausible one-handed axe and shield equipment-display stance, akin to the ordinary guard. The warrior's anatomical RIGHT hand (on the viewer's LEFT) grips ONE continuous short wooden shaft of ONE compact DOUBLE-BITTED battleaxe, raised diagonally to his right side, away from head. The single axe head has two opposed modest crescent cutting blades joined through ONE central socket, about head-width total, not a two-handed giant axe. Shaft about forearm length plus hand clearance; hand visibly wraps around it; blunt butt ends below that same right wrist. His anatomical LEFT arm (viewer RIGHT) supports a blue kite shield bearing aged gold fleurs-de-lis in a natural defensive position. Show its realistic leather forearm strap and a single left hand gripping its interior handle at the inside edge; shield must be held on the left forearm, NOT carried on the back. Both hands have distinct jobs: RIGHT axe ONLY; LEFT shield ONLY. Two arms total, two hands total, one axe total. No second axe, belt axe, duplicated head, detached hand, floating haft, shaft through chest/helmet or hidden extra gripping hand. Stable feet and natural calm ready stance, no exaggerated hero anatomy. Do not solve anatomy by black paint or covering the old extra arm; redraw correct connected joints. Preserve normal Frankish mail/cloth character, no massive plate suit.\n",
+    "promptPath": "docs/art-unification/elite-review-20261029/prompts/frankia-single-hand-v1.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "elite.guard.civ_frankia",
+        "group": "units",
+        "subject": "Anatomical right hand single short-haft double-bitted axe; left hand holds blue/gold fleur-de-lis shield. Exactly two arms/hands.",
+        "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+        "artGate": {
+          "role": "ARMY-PORTRAIT",
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "hardGate": "PASS_SELF_REVIEW",
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+          "reviewer": "Codex visual self-review: full raw/512px,128/64px boards,320/390/1440 browser Art gallery and27 actual ArmyView cases; player/independent approval pending",
+          "limits": "No independent/player acceptance. Any extra arm/hand, second axe, shaft through body or invalid grip is a hard FAIL regardless of total.",
+          "notes": "Exactly one compact double-bitted axe on anatomical right hand; anatomical left arm bent to held shield. Left palm/handle are partially occluded by shield; visible wrist/partial glove and shield connection reviewed, concealed fingers not independently countable. No third hand/arm or second axe observed, no shaft through body. Shield blue/gold fleur-de-lis, mail/cape preserved.",
+          "browserEvidence": [
+            "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+            "docs/art-unification/elite-review-20261029/browser/army/result.json"
+          ]
         }
       }
     ]

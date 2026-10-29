@@ -8,6 +8,10 @@ from pathlib import Path
 from PIL import Image
 R=Path(__file__).resolve().parents[1];S=R/'docs/art-source/player-feedback-20261029';P=R/'docs/art-source/unification';D=R/'docs/art-unification/player-feedback-20261029';selected=json.loads((S/'selected.json').read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 assets=json.loads((P/'assets.json').read_text());batches=json.loads((P/'batches.json').read_text());registry=json.loads((R/'src/game/presentation/artAssets.json').read_text());keys={r['key'] for r in selected}
+# Historical recipe must not silently reinstall a superseded portrait.
+for r in selected:
+ active=next(a for a in assets if a['group']=='units' and a['key']==r['key'])
+ if active['batch']!=r['id']:raise RuntimeError('Historical batch superseded: '+r['key']+'; reproduce from its original revision, or use the current reviewed producer.')
 old_path=D/'before/asset-records.json'
 if not old_path.exists():old_path.write_text(json.dumps([a for a in assets if a['group']=='units' and a['key'] in keys],ensure_ascii=False,indent=2)+'\n')
 for batch in batches:
