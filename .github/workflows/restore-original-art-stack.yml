@@ -1,10 +1,32 @@
-name: Original art transport (upload pending)
+# Authorized by user: isolated transport branch only; preserve original Git objects and no force push.
+name: Preserve original art commits from verified transport
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/art-feedback-transport-20261029]
 permissions:
-  contents: read
+  contents: write
 jobs:
-  guard:
+  restore-original-history:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - run: echo 'Upload is incomplete. No restoration or publication is enabled yet.'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Use GitHub-native ephemeral authentication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh auth setup-git
+      - name: Verify bundle, original commits and file blobs, then normal push
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .transport/restore.py --manifest .transport/manifest.json --publish
+      - name: Preserve original bundle as a downloadable GitHub artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-original-art-stack
+          path: ${{ runner.temp }}/verified-art-transport-*/original.bundle
+          retention-days: 3
+          if-no-files-found: ignore

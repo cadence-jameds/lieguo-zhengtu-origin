@@ -1,0 +1,3553 @@
+{
+  "repository": "cadence-jameds/lieguo-zhengtu-origin",
+  "baseBranch": "feat/art-unification-20261028",
+  "base": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "targetBranch": "feat/art-player-feedback-20261029",
+  "head": "4c835fdd62d16afa1f1236c75792e7d7764ab4f8",
+  "bundleSHA256": "a4f28f8f7787fa0ac52d41853fe41a8a5d6b2110cf8a802ccd2d46892d5b2d20",
+  "bundleBytes": 67761065,
+  "parts": [
+    {
+      "path": "parts/0001.part",
+      "bytes": 131072,
+      "sha256": "2a34dabe0118dba875d79ab63ccc836d4394ba95afefc7d484612e4b151bc3f7",
+      "gitBlob": "3275641dece851b548c8923cd31a218c17291ef7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0002.part",
+      "bytes": 131072,
+      "sha256": "b30389bce96ada439b6d5987190b625f0c45f755a3d398ffe3ee7fd4afe5e1a3",
+      "gitBlob": "ed8712e9c9a924818887400033a4507425422e56",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0003.part",
+      "bytes": 131072,
+      "sha256": "f2471f91ca8ba1092a5d14aba65b46517311c1574fd32ba5770cffb597cf1a1a",
+      "gitBlob": "45ca080b7ea4f4fdf2fe62f49c0f7ff6412244e7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0004.part",
+      "bytes": 131072,
+      "sha256": "13d28262def18843714cf6fa00eeb65443a5f2ebbde8441061dcaa63afd5e492",
+      "gitBlob": "4594e4e8b5b0bbb38a92dac117e55a8d34029b4b",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0005.part",
+      "bytes": 131072,
+      "sha256": "a189cd278a4f816f095dfeb6fc6d3b31b7b5c9e32c1d645d100f1981069e9778",
+      "gitBlob": "377fe59f35ed2351b48eed53c1df31e0773538af",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0006.part",
+      "bytes": 131072,
+      "sha256": "30a1506ffe125c4758cdba35356d153479664998dd4de042fd9ff0e216354fd0",
+      "gitBlob": "784f2c6a02c976037136a0cf4e817328130d8e83",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0007.part",
+      "bytes": 131072,
+      "sha256": "cf9e9c5f9a5ba69faff04140da914d186579b76aaf465e9fbe3ff273744eb8a8",
+      "gitBlob": "57fef44d461a9e0e3c3710bd65a9c38ec558d4be",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0008.part",
+      "bytes": 131072,
+      "sha256": "4eaa606bb4d4452f4ea711e2149501d58126524345e0778accb98bcc6468446f",
+      "gitBlob": "0b15ead5ef9fccc45375f5ae4698642fd15277cb",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0009.part",
+      "bytes": 131072,
+      "sha256": "7119a532a9fc851a51f4c3e16519645cc54371114b3233e7a741397eb93ea79e",
+      "gitBlob": "50b3a831b67a1d3016fd3f05d64523355450f48f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0010.part",
+      "bytes": 131072,
+      "sha256": "65b453434fcc67be77da0756b99f062686e69a4ea33a72a5d853fc85cb054684",
+      "gitBlob": "2b5e0121e145dc0901aa312838389ae1532f1d57",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0011.part",
+      "bytes": 131072,
+      "sha256": "33c2dcc8db20b46c3afc53350450a28a464606223a0e287a24c6ea1bea1b5048",
+      "gitBlob": "898595a35743c5073d8a976617dfe6d912740214",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0012.part",
+      "bytes": 131072,
+      "sha256": "d13487c904e2b265b07e5d95235c1eb0c75e04d97cfed99a356a117d94c66da7",
+      "gitBlob": "6ece12cc6527491ad8d87f2ccf898737e6b55c95",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0013.part",
+      "bytes": 131072,
+      "sha256": "f2953156722950eed86f7ab79a74023a2d4e12d35320ba6719c8f3db4c32d95d",
+      "gitBlob": "b7531f322ca0495a0f1410f0c3a8a1eba2d65f5e",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0014.part",
+      "bytes": 131072,
+      "sha256": "c628709866b179478951047b104881342b80f364c1c7d6b24f4dec58896e5005",
+      "gitBlob": "c310377e86ac895ce42c15f9a0d2964e8cabfc7f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0015.part",
+      "bytes": 131072,
+      "sha256": "30cdbecd1650ab9007313018b2588a35f2d0408edb255224bb1df6d3f5cc1a0d",
+      "gitBlob": "f7ceb817ec5410d661b0c295684a58c8808123fa",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0016.part",
+      "bytes": 131072,
+      "sha256": "16c85754b307b90468924df84765c0d644212d97f63b4b36cf8c647f86dc4f09",
+      "gitBlob": "d19a72896166a07297effaf0a867a5301f7dc301",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0017.part",
+      "bytes": 131072,
+      "sha256": "794da32eb67a9bc3f26c8f336e0beae726dcc8bea65359e572e2f0a758bfd0c5",
+      "gitBlob": "5d28d2cc56ea004d30de1d71477c95ef67d226bb",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0018.part",
+      "bytes": 131072,
+      "sha256": "ef8e8076463083a92553b01292fce8573a83672f0f12c3f5898d439a6a783706",
+      "gitBlob": "6bd06c3bc7c0c72d78b516b795761946bc90d5f2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/0019.b64",
+      "bytes": 131072,
+      "sha256": "70d3b53fc55326d5631a00b3ac4fb7c1a00f43378ff0463b3cfbb8614263ae07",
+      "gitBlob": "da3028719627a4f6174fd52830493f15825a9420",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0020.b64",
+      "bytes": 131072,
+      "sha256": "f9fc06be2d1a5dc2839f1208e0d5af56c08ea56950fe2fc484d78d8f8a9a8230",
+      "gitBlob": "74d3d36bc221a0d7c5a61af73e000e6c3a9d1b18",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0021.b64",
+      "bytes": 131072,
+      "sha256": "a25e5c8b978ab072fd888ee68b01e4997b0c8801b2fd2bba75340e0408126374",
+      "gitBlob": "10f0d735ec3efd14e7779bc8e5ea3c4319b016b0",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0022.b64",
+      "bytes": 131072,
+      "sha256": "3ca19fae88a9b706e5fc16ccb206e61a361b8ab9ab61264355d26c1e4910b64e",
+      "gitBlob": "54756cce7a52970b4e69b42365c4ae1869a4caa3",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0023.b64",
+      "bytes": 131072,
+      "sha256": "e1e3796003f6c5cf88910078f0c1f781f84ab582a2806909b94761b39056d595",
+      "gitBlob": "c309c6d9cd8d3bb72bd97e030d9cb34f59fd9599",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0024.b64",
+      "bytes": 131072,
+      "sha256": "20bb789f97d5a23c5af3a1810f812acb5e81f13a600abde09525bdfd363adaab",
+      "gitBlob": "45f3de4a7e984f2e3f9a33e903129ba28cc7d93a",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0025.b64",
+      "bytes": 131072,
+      "sha256": "bd33b3e13cc9205a2ddff680ea5b8a2f6d10ba575da224c40bbe09cc79f84012",
+      "gitBlob": "4812c2e14167fc2988320e58d3685012e209506a",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0026.b64",
+      "bytes": 131072,
+      "sha256": "546e0958dbb1c6e660afacdb5cab76a8be91ed78a000df53c5479561ded814a5",
+      "gitBlob": "8e9b1ea6868278b3fbdbcd213ed530b79a9af70c",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0027.b64",
+      "bytes": 131072,
+      "sha256": "4b863ca2a2bb3fbc6bbc9ef5ff474abc23b510eb647556bf7c62cb5d1c13a77b",
+      "gitBlob": "d9dcb64c393dc615f49baa1fb380e38d8ecf143e",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0028.b64",
+      "bytes": 131072,
+      "sha256": "b83814371faad8b893b0c5db17ae2d77d96b22ad38a20e1a1a67c37281df0820",
+      "gitBlob": "8ad8ecbf6dc90b41202f99c8bfc502d76954a6a7",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0029.b64",
+      "bytes": 131072,
+      "sha256": "778cb7606c72f2e18c6e43b5b2bf7d954e10d3c97c3ac1b990269e7bbd9fb77e",
+      "gitBlob": "7607ef1f95bfe49f77519fabacfd98761372a380",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0030.b64",
+      "bytes": 131072,
+      "sha256": "330d04cbd55f1fd001d5a39111f62b8d7fb92d9e2921b2bce4364606692443b4",
+      "gitBlob": "240e6547d50c84dfed32b0a57a5cbcc881002da1",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0031.b64",
+      "bytes": 131072,
+      "sha256": "346ae590548342edf961b27aea6242af58849d79fe5b377c3440d66ea836327c",
+      "gitBlob": "78a95b20cc020e53f0b0983dd86e4a03a2a5d13c",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0032.b64",
+      "bytes": 131072,
+      "sha256": "289798af4977f12e4b2681b21d5c014b4114f3158bbe7d151267e9e3738d780f",
+      "gitBlob": "717bc997cad17826eb526dc1f0bb1ddb88d73aa1",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0033.b64",
+      "bytes": 131072,
+      "sha256": "c92c19c5ddbc9a0012f282153a05153f17ceb3e556f0cf1463671b71262171c7",
+      "gitBlob": "95740cd2512992951e3b548447f3dc51c2486885",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0034.b64",
+      "bytes": 131072,
+      "sha256": "29cb14d29f4d3b9ebe8b84a3f314ffeaf467fdbb493943ceddb65b67fc781cc4",
+      "gitBlob": "38e3e1317d0b4e50114d902caf4b290e06810485",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0035.b64",
+      "bytes": 131072,
+      "sha256": "0568926a3c60994db3626457d87f527f14af3898a32965c9579fb0878ddce989",
+      "gitBlob": "74f5d22ee2d79d05b190a6a070f1b048e4a3f040",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0036.b64",
+      "bytes": 131072,
+      "sha256": "1f59d5be342e11bfb1a1d22d0d46c6e5db16afc1900e95a78d5f72904f7caca1",
+      "gitBlob": "6b2c97b5a59be340e0a635a1c185f1782392b0f5",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0037.b64",
+      "bytes": 131072,
+      "sha256": "6c748b7e470e072838bd541246baff9c4a5029b143c04b5c37c3560dba57575a",
+      "gitBlob": "54653fc3f6fa0b4397fa6d07879278442317b457",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0038.b64",
+      "bytes": 131072,
+      "sha256": "4fe80a478cb0fb1c82871bacdc70f72ff0ab8538752fdffcdf428d02c7d9e188",
+      "gitBlob": "bf4273134f75cca39281d208e8cc24383a21f658",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0039.b64",
+      "bytes": 131072,
+      "sha256": "ffc09a1e88946acfb02e45739a22e155be9a735ae2a275a4d670bdc8a6804409",
+      "gitBlob": "cc18fafbac02f043bb2a9a8ad1f0ce8aed001f8f",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0040.b64",
+      "bytes": 131072,
+      "sha256": "fe8194819cc460df1b08f9f07c07855f5d4a4eed122b43d0498618439528f3f8",
+      "gitBlob": "65356f98f22acf22d2890c8ed6e07447eb5cb244",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0041.b64",
+      "bytes": 131072,
+      "sha256": "cd3c12bd94761da0166a0ea9c7194d8e0426d73cf1b0950390db2021ce39f66e",
+      "gitBlob": "5f016514c3c3bd61c3286298f2f0a2d21423f055",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0042.b64",
+      "bytes": 131072,
+      "sha256": "93181545a794a2f7701a180693662ad01b421ee476fd8df8345aa174adbe3711",
+      "gitBlob": "3a3da464bcd8cbe921393277c5d5d5bb33b32171",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0043.b64",
+      "bytes": 131072,
+      "sha256": "20f7ce8d5c36d2d6e5e737eb4891168b0dfca975f0617ac1948da89a10fddb08",
+      "gitBlob": "e00772c780d84163e10f66a4ebf25e0c0c5ee0df",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0044.b64",
+      "bytes": 131072,
+      "sha256": "9ffb36bf7971c2d2843b903589742cc5ee6c91f2415be71f3565895c37a40a03",
+      "gitBlob": "e2f8a44e417dc16de4af038a1b43cf2969fdfdaa",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0045.b64",
+      "bytes": 131072,
+      "sha256": "8d130aa0f73790671c9e0e34920e220ebef7e842a20e3d403b904f1b196055fb",
+      "gitBlob": "fb71cb54c9b60af86a07ff51fef59a116d8d785d",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0046.b64",
+      "bytes": 131072,
+      "sha256": "7b38161a9c1af65b24458d654d94db1ec2acf7d6369db92bd8176da19fd5ec2b",
+      "gitBlob": "9c52e3971c08d5cd3d26cd6aef413947b11f9764",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0047.b64",
+      "bytes": 131072,
+      "sha256": "2b8d11fe2e1b0a634ad1d7a5476b131b779926ff6ab5fbd68ebb1fe30c27a722",
+      "gitBlob": "8c077c82edaba7d175c4bba17ccf42b919289306",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0048.b64",
+      "bytes": 131072,
+      "sha256": "14d50630dda62223a374f61495d1ebc4a36044fbc3493c9f92c46675cf30eb8a",
+      "gitBlob": "4dd982b5769f7ec85913fc6da16b95d48508d416",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0049.b64",
+      "bytes": 131072,
+      "sha256": "174dc41151dfbecd2ebef88f595e23c5aacc7cb02b0e502e1a6dbd31ab68c485",
+      "gitBlob": "c674fbeceaa18d7b40a9322f1c60069383feabc1",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0050.b64",
+      "bytes": 131072,
+      "sha256": "796886921df10533587317e7a9ec1c7fb4d3e4299391678eb023721733b4d37c",
+      "gitBlob": "7a25f1d07940e4028f25c9281efb333c59ff5fc7",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0051.b64",
+      "bytes": 131072,
+      "sha256": "88280c2eab2a7521566bf4862ea5d55dc229b1d285c978c49a844339c9a470e2",
+      "gitBlob": "9b54723bcb603f3ae0ec7840ed58df635bf646ed",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0052.b64",
+      "bytes": 131072,
+      "sha256": "fea519612e90829f88fad3a2148171764b20ad2e497f6ae6d16ef9505d629bd1",
+      "gitBlob": "46d0942e0cdd7a36eff5c76c4763fa963d9435a2",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0053.b64",
+      "bytes": 131072,
+      "sha256": "2bf8c0e731c89626afb673d7c3e11e5fe5e642fff014b0460f80f5bf20b91a48",
+      "gitBlob": "1cf4491d25a51c5a9893eb3ff90024247decc308",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0054.b64",
+      "bytes": 131072,
+      "sha256": "1ccbd94351ea918031039c3cfa985962d6c5ab942f33aa4cdedd6556fb183f92",
+      "gitBlob": "b94622f17e7dc3bd36412994f43bba802e0b3b88",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0055.b64",
+      "bytes": 131072,
+      "sha256": "f4deabacb814a62a441180eeefc09addb917fc71db6013fca8bd32fdace62357",
+      "gitBlob": "8dce48b71710275933be7f0d4d5dceb61812f472",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0056.b64",
+      "bytes": 131072,
+      "sha256": "fa48948fed8435fdd4b3276cdba602d6eea39d5401dbefea90077c821d035488",
+      "gitBlob": "52771a5ee38ca2b1513dadf96550b3cb93778010",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/0057.b64",
+      "bytes": 131072,
+      "sha256": "cbf8801d93affc94a2e1c864cedcee82b43174d2de2acd4e808387c1a0ae0c38",
+      "gitBlob": "bf857ac74f714e45ad8bead5cdb896671abca859",
+      "encoding": "base64"
+    },
+    {
+      "path": "parts/tail-0001.part",
+      "bytes": 327680,
+      "sha256": "d931e876be8b83d4edc4ab4a08b0c0fb9cfebfe5318a7278da9b9dd52c5952cb",
+      "gitBlob": "c8a1ef75d5ad6fc6886c05a3dcd512f39048b7a9",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0002.part",
+      "bytes": 327680,
+      "sha256": "95742fa548a64724ee87bed166aaba68af3623e5f50259fc4afc62cea2fa8e34",
+      "gitBlob": "d0689742e418bc0efee86ee36ce90da290f281c2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0003.part",
+      "bytes": 327680,
+      "sha256": "39e96e20a75caf8912f01acffecfb4227289bc8868e6661d02fc2bbbda9864c3",
+      "gitBlob": "4dee7145f17365ac441a4da5d8a514a949e1ff00",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0004.part",
+      "bytes": 327680,
+      "sha256": "8997a36fdf98559f28ce68a1ee0562300abcb0635a184edf92560738db29a10b",
+      "gitBlob": "8f3f25b6c3fd7b1d910626d9a6dd8e2aa54012e7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0005.part",
+      "bytes": 327680,
+      "sha256": "16a0b830b543511745bda8cb3eae7f34a95209f492b2895bbf6e85fd0afe4457",
+      "gitBlob": "66c11e05672ae74ce5476dc3f70f4128f29f4347",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0006.part",
+      "bytes": 327680,
+      "sha256": "06f224880f67c7bb6eb737440e4d9eecf1d585ccacda7421b2aa0317c936b8ed",
+      "gitBlob": "4d0fbfb58b2bc444f68f08596835ee6a0d1279e6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0007.part",
+      "bytes": 327680,
+      "sha256": "bcfd0e97373aded08e092d1f22fb9ff873258f38082fc66170c78e2b5c56516c",
+      "gitBlob": "692a1fb93eb6733edeedcf7ff3c75b2e78092df9",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0008.part",
+      "bytes": 327680,
+      "sha256": "13c6f90c37576872d14b6e6f452d374ee94c54e738320ac3bd733b6d7c2b101d",
+      "gitBlob": "a1e0ee894aa97572aacd030ca40adb8c34f22397",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0009.part",
+      "bytes": 327680,
+      "sha256": "d85d3440d1647fddd275bb69b14cca4b92decc60d7a9659c095cbaa396be7597",
+      "gitBlob": "8db4227a95a994d95cb1f07685e6b494c2baabf9",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0010.part",
+      "bytes": 327680,
+      "sha256": "bd5bacf58073dea6c09ae2ac20554da63a709251fe3665ac8015a4ac4b8e651e",
+      "gitBlob": "ca235abdd17404da9eb4eba02f13dcbd1b560774",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0011.part",
+      "bytes": 327680,
+      "sha256": "b5258ec721aeddcf2e6c6691b3221e884fa760aee7eef853ed752bbad43e38e5",
+      "gitBlob": "abc9764e77cc9afeff43abb7cbef081853908902",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0012.part",
+      "bytes": 327680,
+      "sha256": "5889aa6016bec40b291953e6922c3c693d15a216ec34a4ec9116523cc787413b",
+      "gitBlob": "41221be1086ab41bb668ad9181803ab539fcabcd",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0013.part",
+      "bytes": 327680,
+      "sha256": "87551fe218ba73fa9a979012ee2305c60c37d809faac2ec28b41d5e316daa115",
+      "gitBlob": "74bb89cf8feaddec40ab7fa96110672b18d65bbb",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0014.part",
+      "bytes": 327680,
+      "sha256": "166cbc5c616170dcf0c8e6feaaa74e0b0e6e6ff4634c6257900479efb80341b5",
+      "gitBlob": "6cac1e921acebae1a2f68611e848951b0c6b0e6c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0015.part",
+      "bytes": 327680,
+      "sha256": "5f33784cb91ce47ca2da5948dfc4061aa85f5d6a809dc7f3fc0f58a7d548d192",
+      "gitBlob": "c2b8fe43eea702fda8573853a28d99a40bce4bc3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0016.part",
+      "bytes": 327680,
+      "sha256": "13f5f040d3b0fc8be3477493b5f5d6768208622f84b8229d9a8be77ebd492a3b",
+      "gitBlob": "ffbe77fa88e23ddb540a87558aa12ec3d8ac35d7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0017.part",
+      "bytes": 327680,
+      "sha256": "11a551ec603ed9271c01082264711de471c6acdb25badcd91f0d2dbcedddc92b",
+      "gitBlob": "52fdd94bdd6d6acd7762c8c42f3a44d4d27bf72e",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0018.part",
+      "bytes": 327680,
+      "sha256": "73129a5f93c847fa52965215d11535d1ef6861787d0b17f8d20a09f21c69a5e7",
+      "gitBlob": "e8df9214047b9d1b097c85c01ddb5834e915395c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0019.part",
+      "bytes": 327680,
+      "sha256": "c25d94a11fdee120f4ffdb0b2cd186382fe2201528cebc48196d40700652ec60",
+      "gitBlob": "421fdbfc8a626f49d7670c52bd4e7d776e680214",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0020.part",
+      "bytes": 327680,
+      "sha256": "4ea2560115c56fc0e8da761f7d770fa8cd22ae41b66624110459013c70078345",
+      "gitBlob": "03aa5840500b6d4a5b3b90978d67fe6b71496eae",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0021.part",
+      "bytes": 327680,
+      "sha256": "d87246dfb9b65a58259f103f02d33bd1ab6c53c8f35a6996472c21c553837930",
+      "gitBlob": "92ccd3ad1c2720edd6edbad86e3349a44189abb0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0022.part",
+      "bytes": 327680,
+      "sha256": "acecb9802dc959465918056bf72d8b543f928d59d5b09a59c55c609795db1e47",
+      "gitBlob": "23d4d7ca9a9269cda08f7dc4a1f39553341f4752",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0023.part",
+      "bytes": 327680,
+      "sha256": "60cea4497e6f80205c7a6086123b9ff834861c9b89863f6364b7d2d1b8aeba82",
+      "gitBlob": "58f76f4b8e3b79a05841c2f72527923d7dccc397",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0024.part",
+      "bytes": 327680,
+      "sha256": "bd3277aafe563a43894c0747a2e7abd535daf1f427ab146189f526a90347121b",
+      "gitBlob": "71ebd2077ea2d69f59f1a038b4575226a261b58d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0025.part",
+      "bytes": 327680,
+      "sha256": "efb299a529a9936928216b10b827d3e470f0e50e3c09278d580988bc454f4a8c",
+      "gitBlob": "e24ec983db14beb86d8f31077f1e9216c2e1d84b",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0026.part",
+      "bytes": 327680,
+      "sha256": "373fd1da2da5febea2bba09497ade32560cd5d3e6e02791531202426f51bab9a",
+      "gitBlob": "196465d06b66d70230f80e67a1c9f13f942362f0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0027.part",
+      "bytes": 327680,
+      "sha256": "ec9c0a0f2db761d8ed573dd7e9ac22f22a571b2b8eb20411b6fa961b281d39c1",
+      "gitBlob": "f7cd6b350574a45fe35ff0923f1f3239116ec862",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0028.part",
+      "bytes": 327680,
+      "sha256": "6560533f5c9e2d302df9675422a34e89245931ffdbf13bdb31c80557e97753f1",
+      "gitBlob": "05b7ea27f1cbdc34dbd98727ab7076180cdacf07",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0029.part",
+      "bytes": 327680,
+      "sha256": "de1d3c5ae66a6d484f104f5d6fb9f1135a4145d19edb314120cbb555a1f0ef7b",
+      "gitBlob": "9bc8ed1a9db5444c4976e23903a260519ed5b744",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0030.part",
+      "bytes": 327680,
+      "sha256": "af5af5d8ef08a7c665a68f664b91d02edb6884d774c07b3e3f87c93a018a97eb",
+      "gitBlob": "c3166ba56630ac27eb51f815d08a61479e68f8c7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0031.part",
+      "bytes": 327680,
+      "sha256": "403b662790fcd861c84a5d7422f7210ab785a984ac1ce59cd969968a3e1581ed",
+      "gitBlob": "1f00b8c6280ce88b3d97fec9b53677cef62503a5",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0032.part",
+      "bytes": 327680,
+      "sha256": "36e6e0088d01b2955449782d9bfa4012bc1603e882ac6a310b606b92ae6ba08b",
+      "gitBlob": "2c85c7bd95d7f001900fb3a777a9914c0ef00afa",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0033.part",
+      "bytes": 327680,
+      "sha256": "1b626f96f4b1c67231c4e38324eec9338ed709f29ab034ad17681a5147cbc093",
+      "gitBlob": "312cf7a2e0d8b94517c540234376b24e75cdf65b",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0034.part",
+      "bytes": 327680,
+      "sha256": "4b13deaf0273bcb64c4915fea4f5442d5891d9bb340f860480ec37a8ea58ff6a",
+      "gitBlob": "1aaaf892479471b09ab8663e6f793964ac4764d6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0035.part",
+      "bytes": 327680,
+      "sha256": "b6b37499059fae825c93e7e3ae0d39a6a8c1d9e55af368801186863ec373de67",
+      "gitBlob": "21c1d92f9041c629c32463086b78208e1503c94f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0036.part",
+      "bytes": 327680,
+      "sha256": "b7df69414f6ab8c1d058d4e1358e222aab354d562f5c6c00a0359fbc3a7eb050",
+      "gitBlob": "50f4af17a3224fdac6e50367147014a0913a8528",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0037.part",
+      "bytes": 327680,
+      "sha256": "1cd74a3275a4a8f146dbb2dbe121da93b1b9fcb0c57cfe9503c4bdda5080537e",
+      "gitBlob": "2186e4476872a706deddc5a3e3335c59cd4b56f5",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0038.part",
+      "bytes": 327680,
+      "sha256": "f2f68d1e8bec7e059933febb908dbe5d55ae5353b71603f7f09aaf855f9c930d",
+      "gitBlob": "cfa94119a9f4327385ac8ee3e8a1239881ed8d53",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0039.part",
+      "bytes": 327680,
+      "sha256": "494a54d5d3b0accc118dc9d55099f4900940999e2f04c138a520ba61271add26",
+      "gitBlob": "e0b0a4b609a5d7b8e377569eabf7a84887036474",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0040.part",
+      "bytes": 327680,
+      "sha256": "055030325d2f1faaac82b74a55419f6bc76b0d885a556983ba28e7af47aff16d",
+      "gitBlob": "556f41f7773246cc07bb4fb6d81367b12804092d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0041.part",
+      "bytes": 327680,
+      "sha256": "b5bbb80353df8353c1b604a44dbbfdefe58513de87cbc34d54ce8118e1ca372b",
+      "gitBlob": "b34c6d39dbfbdccb1d16a48a2b8be16156ef9cca",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0042.part",
+      "bytes": 327680,
+      "sha256": "9f5fa534e80b8e68b256766b890a357a7a27e8ce11ac6061af8b97d6f30c7df9",
+      "gitBlob": "e967d1d6059ab84a2dbf1164fbe62679075f8644",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0043.part",
+      "bytes": 327680,
+      "sha256": "57edb220898275e6f7b1d2d0da8e974482a7d216b2cdff019a6633959071eb27",
+      "gitBlob": "1eaba406d80f817e66d60e0cf9ec7fd342429116",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0044.part",
+      "bytes": 327680,
+      "sha256": "2512ae2ef7a4e7f39bac91aab6844d93d537616f2745cbce99bac4225835af7f",
+      "gitBlob": "b7439215fc96a340628ba00af16bc7c2aca8a8a6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0045.part",
+      "bytes": 327680,
+      "sha256": "4ee15eb206cf01960cdb3991be0d2d3e4667c25cd3f7ef9abd75ff282887b653",
+      "gitBlob": "5c4fc5e51257eb65e3edfa254eebee12706f2407",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0046.part",
+      "bytes": 327680,
+      "sha256": "06545c4b3c80aa26eeaa48a438e2e60ce29b5731560043beadc034d2beeb2d16",
+      "gitBlob": "3149e0cdabfa4751f4181bd39f468f739b6126cb",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0047.part",
+      "bytes": 327680,
+      "sha256": "62181507f48464a5c40843345d523aa1ffca24a8e304b84a0d9887c061dc969a",
+      "gitBlob": "54ae11e43c399c82252e502b57b9f98a0056dbc7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0048.part",
+      "bytes": 327680,
+      "sha256": "ca52fd5a70ff713636293adb15bda5865bdbfdb42a1937b1b233972c93915194",
+      "gitBlob": "7faa62573bb64f98c3452f98e40811bd68d5d6ce",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0049.part",
+      "bytes": 327680,
+      "sha256": "bd92b4f09ddba30f6b23f4527b0f8ac5825e56f4ea4f513cb1d4a9c7acd68393",
+      "gitBlob": "68b3fa858c14e63a587cfd4f38104c4a8b112c21",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0050.part",
+      "bytes": 327680,
+      "sha256": "f49a9ace948d0479d65057816c1fe4dff349fdeced6ba656ada43098bad35fe2",
+      "gitBlob": "e425a6521c7edd22e241b2f56644574327747fe4",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0051.part",
+      "bytes": 327680,
+      "sha256": "d2ce1830ce3cbb2a2ed4bac78ceebd219fd6346a244352fc10169c9ab1ba671d",
+      "gitBlob": "183aaa81c812c99a44969104cdfc9822db858ab1",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0052.part",
+      "bytes": 327680,
+      "sha256": "20a93ff11e3b25e7dba798a7d0f43d015424a6c840bebbda389c72e26d8d250a",
+      "gitBlob": "f8ad38fa381b536c543624e50e269c3ab7693575",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0053.part",
+      "bytes": 327680,
+      "sha256": "1a49119e22bd24313d4feb175887dee8d93b07df3942a51226f56bc05b012b1e",
+      "gitBlob": "f7f127765c7ebe28f6623851bbcbca1e20bce782",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0054.part",
+      "bytes": 327680,
+      "sha256": "0a9bd27befba1c21a1795a272bf0920a4d5e58af27accb5b9340dea8de88b04e",
+      "gitBlob": "5aaf060e5b033952da70568c5d991693cac9d03f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0055.part",
+      "bytes": 327680,
+      "sha256": "bdce6a40b26153b4c5e72dd7899379e2634d38849a3b26897f72a825e6024764",
+      "gitBlob": "f5053df7c628a5162d3df209fafa423b7e49c5ab",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0056.part",
+      "bytes": 327680,
+      "sha256": "b63fab12afe29d61ef9e2ab861b8daca1833dc5195b1eadf2ac3867181becc91",
+      "gitBlob": "fa6273a91dc365c724ba32a95581f4ad3e39f140",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0057.part",
+      "bytes": 327680,
+      "sha256": "bb821a85799eb54889aec2a494523c0c8dc3152415f8a353809e16b30173a227",
+      "gitBlob": "adeb9ec55bdd72ad930042026dad6f5b5cab7851",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0058.part",
+      "bytes": 327680,
+      "sha256": "54cf8911dd68a8062f1f968f25d7e23930539c27f1b82036edb0763546244226",
+      "gitBlob": "aec4c6658c9da7ff724b69f0a336c3f41ef14395",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0059.part",
+      "bytes": 327680,
+      "sha256": "052cdf99f9e86a87af435907654c5a2a691077a80f734c441afdc43caac0e263",
+      "gitBlob": "49f1a3b49a854476aad0c34467269957198da4f3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0060.part",
+      "bytes": 327680,
+      "sha256": "f1fe9b0b42e31f96c61981da4168a27a74f96d1c70772449a272c50e40b29703",
+      "gitBlob": "c31cbef8ba0a70a76b6d7e7d4f8c3d18b265a0a1",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0061.part",
+      "bytes": 327680,
+      "sha256": "8c67e179096d2ee893395bea5d07aa74945db2165710d925ff7d38d9614388e5",
+      "gitBlob": "ff6ed07a49ee4d6fc8666fb10cdcf78c9df60d7e",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0062.part",
+      "bytes": 327680,
+      "sha256": "1a64d3223d0a3c6189bc914a6a229f675670ac0ea04c1dbe600b351e569d530b",
+      "gitBlob": "2b9ec2956ba773e111ad9cd2a4d259a0f169fbb5",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0063.part",
+      "bytes": 327680,
+      "sha256": "63c8dbc4b72934e4b04323fbb554e8c6e798560c26e63f71d236fc015e3ecbdb",
+      "gitBlob": "c50e9b02c1274a2f41585e502000279889390ac8",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0064.part",
+      "bytes": 327680,
+      "sha256": "8e21b598254c46b31a3aec2c67a39d97dc0f20df1db80fa2ab332d53f6a16a6d",
+      "gitBlob": "a55f7f7ac23e7d1742684ff439eb700a93d8e551",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0065.part",
+      "bytes": 327680,
+      "sha256": "f4272db624ce4537bf85f14f6b9e15cbd96289c3d07110c3dd5bde12c988b718",
+      "gitBlob": "09a68ec64ae02a73cb7cac33827cea43786de091",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0066.part",
+      "bytes": 327680,
+      "sha256": "722fc56d158866b7faf96a60b26151d5441ea3eacbc3c7a2f1b7c05162b7b49e",
+      "gitBlob": "20a300b86a1ccd09ae11e8cea02ba8dcf1fdea0b",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0067.part",
+      "bytes": 327680,
+      "sha256": "d040c3d90c2d2f9b967149b662c3cddc22671a56a3588ffc79edb933fd561c99",
+      "gitBlob": "79d1992d50e23a4c8ae28778c0a8ee1a9e50c85c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0068.part",
+      "bytes": 327680,
+      "sha256": "7a8ffdbe03281687b5d9bf6317a0c5685c7769ac63388c98e32e979afe3f3f62",
+      "gitBlob": "de1c192e9edc9e6de95f47620f82f643d7324359",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0069.part",
+      "bytes": 327680,
+      "sha256": "f603eb147e53d3f0499433641b8044ee9c2f1628f85a39de2d1be0f93dd6837a",
+      "gitBlob": "b442bcba68b3e2980158f1d57a8895d9b1432ccd",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0070.part",
+      "bytes": 327680,
+      "sha256": "fe30aafc5f334cd17ea5eba015d0e080b31cbbfcca14cb66b603b5cde4384861",
+      "gitBlob": "b495c6c826b4904bb4cb3ec054b80522120d5a5f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0071.part",
+      "bytes": 327680,
+      "sha256": "b46b1e5893812175169eec5ffa381283df6e45b5978a66b9b659daffeed5391d",
+      "gitBlob": "03c2b57724a4cb4d81f7baad4d0d37602ba35d65",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0072.part",
+      "bytes": 327680,
+      "sha256": "5de76a8c02b0ada5c446533a42f1541b41d5e94b66e3187969fe9b679a9889bf",
+      "gitBlob": "ecebe289c13827a7697a3f79df18fbc49f2471f3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0073.part",
+      "bytes": 327680,
+      "sha256": "a83743bce251e4501371bd285ee2f7a0738016659e967aeaa0ecb91a8843a8d3",
+      "gitBlob": "a3b9dfe0206398c605ecdea60d744281daa4e9c1",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0074.part",
+      "bytes": 327680,
+      "sha256": "2d4cbd5ccaaeb0d57ac3a8e65e0dcf1c6667ef5c82cd643f3c03dd3b6ba18d0f",
+      "gitBlob": "d9cfe1306b4efb5cfac767200cb1cc0d7a64965b",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0075.part",
+      "bytes": 327680,
+      "sha256": "65dcf291acbc353930eaa40afa5ed3f427bdbb591f63f73e911dbb50b7a706c8",
+      "gitBlob": "f6d14ae37023a8be3223888c8e17935f83a03e29",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0076.part",
+      "bytes": 327680,
+      "sha256": "1fa5b84774d5dfbc45baeaaa93a01f7a9f889f6123e518734de86c78eebe45cc",
+      "gitBlob": "988ed167811d7ced43943821618ca4fcb86f549f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0077.part",
+      "bytes": 327680,
+      "sha256": "d3830ffb2b38ed6f3f7a63a0983c4a9e2cec0f69dd8c1b5c85cecf09a0da2039",
+      "gitBlob": "02c17ab18ebd93b5f4ac21502c38c5488844944a",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0078.part",
+      "bytes": 327680,
+      "sha256": "f15a52e69f625e77f75a04077c1c87330ca0737d5e5bafc2565a17bcaafa6ba2",
+      "gitBlob": "95b6599cd53cd2723c4f8432ebfbfeb4e7feb830",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0079.part",
+      "bytes": 327680,
+      "sha256": "0707d75f0c2b43559cd8dbcb61cca170a4350d0ff817aa5915a52cce6d6d8d35",
+      "gitBlob": "21c3bd1e69ee60251cef0bcdee98dae51eafee97",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0080.part",
+      "bytes": 327680,
+      "sha256": "aef15b44c8b897d9f75cd9c5c7eafdaaab84785d3df74d5250b6132a096757e6",
+      "gitBlob": "2e63c82154af5ca29138e4d2e25a8b57de2ca51c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0081.part",
+      "bytes": 327680,
+      "sha256": "37530656e20fea6f6867b0392ec85e550be52e4cac0c911698e6ec9236eb774a",
+      "gitBlob": "f2bbd916ae119233455fa481b9428336beb12804",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0082.part",
+      "bytes": 327680,
+      "sha256": "db2e7e584f0238ab4fc77fa7133365455218ea0f420c46121a66676ede708ba0",
+      "gitBlob": "a965fa1721ac4bcde3823f06d4740f822d8ac5cd",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0083.part",
+      "bytes": 327680,
+      "sha256": "325f5a400ba1fc48b26e4bbe6253506d6925feaf106304c3a55d9f2bb1bdfe24",
+      "gitBlob": "166db4aab16332d4ddd2b36c1bc3fcf8ac3e6f9d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0084.part",
+      "bytes": 327680,
+      "sha256": "e3d1d128ba0a61f296d40f87ac8816cc42734bfa9af05871d04f0212031d82bf",
+      "gitBlob": "c5fd309ca1cd73d4b2a30f88d18bb37ac94a001a",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0085.part",
+      "bytes": 327680,
+      "sha256": "1d5937fc9394891b804c85979ca86f76a6ef19bbf2f842518e609e9b8c3dcd9b",
+      "gitBlob": "033e58d7bdfaa2cae8b8f7057ba791d0dacf9bfa",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0086.part",
+      "bytes": 327680,
+      "sha256": "c2e18081864013b8c6255da53e3c5fa8280534bcc57e991061ca0408a6513757",
+      "gitBlob": "17807ec5e54e380a978afbd79ad3f7250519a251",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0087.part",
+      "bytes": 327680,
+      "sha256": "548294efa658f0591bc262d9ba868403f13a77f0c5c72f9751dee148d0e44dcd",
+      "gitBlob": "ec91165d7ff4184294145d10cd2213ddec640909",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0088.part",
+      "bytes": 327680,
+      "sha256": "1d1c63f7f41ab29d2bd520859fe13bf274e3561fec979f228722f46cd48601d0",
+      "gitBlob": "409073e6bd5f39001255117f18d5babbfdaa2f67",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0089.part",
+      "bytes": 327680,
+      "sha256": "5c4c198ec5e9a7600733afcd161c128a1e952e5b2c728c7742da7d634a3cdb82",
+      "gitBlob": "f8d1b2638d72503fa88d659abfcecac63754195f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0090.part",
+      "bytes": 327680,
+      "sha256": "149b9cad4ec1b41a401950d3d8d9135975589abc242a9ba5ef4ed1349024f244",
+      "gitBlob": "273b7a0ee915a59636a85c215a3bd549b3edce2d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0091.part",
+      "bytes": 327680,
+      "sha256": "a978361ef33522f70caed7b8e8a0dfb57ea7f7ce8ffa115311ea207e32dc0e78",
+      "gitBlob": "d12cdaa4f136ef7833331ab2adc78a7bd635d5e4",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0092.part",
+      "bytes": 327680,
+      "sha256": "99f1c1591728884fb7f8b746049bb006e0057990b7730d7d12f2315f109801fd",
+      "gitBlob": "715cb48e383041f8543bb49fcd64cb6bb4a4bcb3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0093.part",
+      "bytes": 327680,
+      "sha256": "8312f02c60067290d49f22df157169da19ec463f1ba7f4c9d84265413f8c18d1",
+      "gitBlob": "9812cdca60beb34cfa9b36e5d2ba21ee88ef1b5f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0094.part",
+      "bytes": 327680,
+      "sha256": "e747fcd424f21b09532a0c6c926d53c5b10d84ce0f9233f455e1f8057afb81a6",
+      "gitBlob": "338c77fb518d631c8ebba55cadbdb17817e13fd7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0095.part",
+      "bytes": 327680,
+      "sha256": "2da86d16b759cd427a31562548bfcacc7a083cd0f05da9308853034baf2948f6",
+      "gitBlob": "1d8a02160dbfb2c654b1eb3dc31233051da0dcfc",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0096.part",
+      "bytes": 327680,
+      "sha256": "62aef80d3803da7e40e0f2ab6727050a9e41c98d78a3677de3cc450b1faf826d",
+      "gitBlob": "f00073acb5b4f5d8741cda3621cd5ccbff9bf0ba",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0097.part",
+      "bytes": 327680,
+      "sha256": "2f2ce59ea8832c5fbe2f8feca8c32931147c36f97ab530e05ce649fa6bb5c323",
+      "gitBlob": "6bca1784dd42c02ba2105fdf9ae4d72f9068386d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0098.part",
+      "bytes": 327680,
+      "sha256": "616bd774caa79886bfd76acd6483587b73546d9ad51e33c73b4f0c85886f6a3e",
+      "gitBlob": "3d8a6d326e80a1dce5676d300d05a70f8e0369ad",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0099.part",
+      "bytes": 327680,
+      "sha256": "dc19f1e4dafdbfe77b9c53713d4b39c5fbe5b2a392227492ca5f85356f474324",
+      "gitBlob": "1a18cac75e7a8e03ee3c934ac9f47c4453910eba",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0100.part",
+      "bytes": 327680,
+      "sha256": "ca4583ecb44e31d21e9a399f6fe93b1ce8a565668843d3ee027fdc6760d2546b",
+      "gitBlob": "d8bbd71ada32e5d742f01564ebab02f191244ff0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0101.part",
+      "bytes": 327680,
+      "sha256": "a3e322cbfc7d806b919feecb8cd0a90bd21c5759a2dda4a1feeec16906fed052",
+      "gitBlob": "f1554d363a4eeee7e9988886f5a6b55f9f8b66c6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0102.part",
+      "bytes": 327680,
+      "sha256": "b020b46a14e9736afd4f206a611f89c56a8996bb42ab17ea474f31919fa59a80",
+      "gitBlob": "a9c2119ab1699f7edea70138ce9326a933c72a1c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0103.part",
+      "bytes": 327680,
+      "sha256": "df5c059e88ff09aae339314665132322a1f6baf32f7ea3ca09aaf870f5b3d6b8",
+      "gitBlob": "062cdb3f25b02c9b1d23d102814373dc64fe9e2f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0104.part",
+      "bytes": 327680,
+      "sha256": "422b46c6e97ce4625f57f7f92bcfd520d83fa5fbdf05d1e2bd8a8f6ce99e73d2",
+      "gitBlob": "2f19348b65a4768e0f2d5b2f0ba55751fc092d6f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0105.part",
+      "bytes": 327680,
+      "sha256": "bb73b6baebb3c564dd0d66cf4491563ef3100f1ef20410838637982f36d3702a",
+      "gitBlob": "0d600feb62fc0b663a183bd46b91fa776fcdd11c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0106.part",
+      "bytes": 327680,
+      "sha256": "05d65b7510cf504db4a4c93ebd92b8668373f489f5b3dfb436dacc5eb8898c26",
+      "gitBlob": "8de2a3784b7ec28882cccc5e82f52a18a50ab55a",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0107.part",
+      "bytes": 327680,
+      "sha256": "36cff544aa8ebcce0110210dafd0fd7ca15bb59ff8fc0e13d990d2096335e8ac",
+      "gitBlob": "9d25c90a9b3080a7975f83747f291caf1961a37c",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0108.part",
+      "bytes": 327680,
+      "sha256": "619c7ff8c84d4499e4aa818b5912d21c10b71567469f86cfc125ae032e455756",
+      "gitBlob": "110ed86177facb8675355dfe88f1e20fa0d09c92",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0109.part",
+      "bytes": 327680,
+      "sha256": "275606ac330c0c0d3fea9016cd4ccbeaca94d38a24ebc7ff6666240a68aad7cc",
+      "gitBlob": "f548fd9d03c619f09b09261527d345f8287033ce",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0110.part",
+      "bytes": 327680,
+      "sha256": "9bc78897cea4231ed5e1f55b48b9b951bcccbf7c9ff904394488d9b72018c575",
+      "gitBlob": "045f8782481cdeea2e50a310b8dd5d05856e57ff",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0111.part",
+      "bytes": 327680,
+      "sha256": "d2f6ffd0cff84ba4a5c8d28dbb75c98a2042be32c54a7c3a804ee803fbee23bb",
+      "gitBlob": "f4e5f652d5bd00f944c5be43862c8366502e9d63",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0112.part",
+      "bytes": 327680,
+      "sha256": "703ff6601b21c1f3426a010d9849eaa2d6fff94c315a515dc7139f9644b6a2b9",
+      "gitBlob": "e6e3ced2b602dea37cbfaae2e0d9954689b96a56",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0113.part",
+      "bytes": 327680,
+      "sha256": "fec607beae419153364a41a6b71f15c002a1c1c0877ff2d944b0a5e80ab9b0b7",
+      "gitBlob": "1d62244e79b6090e1b963646a2ee3348f0b4b16e",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0114.part",
+      "bytes": 327680,
+      "sha256": "47782245d76a6fd456f9dfede872b6b7d19390cf31708f58d6470deb6df30e39",
+      "gitBlob": "47c65e5a3b1bfc3889d5afb3f58dad099946cfe6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0115.part",
+      "bytes": 327680,
+      "sha256": "47a62e12a09778f761b2d6505b5f0c30a1288ebcdce9707f806869af53518d2b",
+      "gitBlob": "c51cf62776a7334e188f841c778d78b54a61309a",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0116.part",
+      "bytes": 327680,
+      "sha256": "0b6b4692b6e41b6c6e1ceb800b2547d0db281eb74c6b356c7d3eb6bb928f42d5",
+      "gitBlob": "4b09ab553c204cf09077a8bcae45c95d2711bb48",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0117.part",
+      "bytes": 327680,
+      "sha256": "ab0d99a95cfeb27906e5b60ca3354631af0c51409a91bed0310438b352ce4a4c",
+      "gitBlob": "8223f868f5bc05e0fdf1d2f1182502d02037ba14",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0118.part",
+      "bytes": 327680,
+      "sha256": "e68effddaccdcc6beb7ce78b73435cbcf0f4660106170f0971b882db1ee03ec1",
+      "gitBlob": "a88dfd32780bcc227f731a462ad8891067f5b561",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0119.part",
+      "bytes": 327680,
+      "sha256": "a20f416813a08a9bb46789c1946b8b813edab522b066ad1519c1aca4c3980e48",
+      "gitBlob": "356d39c8f52aa3b1e871a8162588e6a46988b525",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0120.part",
+      "bytes": 327680,
+      "sha256": "23ee2c619569548b8e4fe33a50faa42cc15286ed625209072ac4801d66289a5c",
+      "gitBlob": "45c6947153cf2f541b49947215a952c96132e80f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0121.part",
+      "bytes": 327680,
+      "sha256": "d9d881fe139fee81406495d02f1f1c9d6145afe37e6b36cb681cd19acbed21f0",
+      "gitBlob": "22a463345760620db533f06a97e6ed8d828ee567",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0122.part",
+      "bytes": 327680,
+      "sha256": "6a9ebd88cbf1250d0b780ed3d5821a6fd05431ea456bc14a8050fc86f27e90f4",
+      "gitBlob": "50b622d87121b12b6dfa3a3a7768d631653ffa08",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0123.part",
+      "bytes": 327680,
+      "sha256": "2508c1dc6c23b5646f79f4f49ed23fcbff06380250d1d367d237a21d41b9cfa0",
+      "gitBlob": "1d4126f36dfda23a272827a453e25eb5a4a8855d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0124.part",
+      "bytes": 327680,
+      "sha256": "e3514a6abf25c3bb18af5dc92339641edeef13e19c123e190035938e5220f173",
+      "gitBlob": "a28e35976a131c951999cf0502892de1c6f7425e",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0125.part",
+      "bytes": 327680,
+      "sha256": "2bb63408b95df70636d41ed546a9d084f6543604184b74222c55aac7e60fe949",
+      "gitBlob": "ad61bf95c58170fd832c6f3ed7d248b092bbf051",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0126.part",
+      "bytes": 327680,
+      "sha256": "1d2cbd46f058765d21f6f9570b617f848b7b5fad983bf0581a152cb575c12c6c",
+      "gitBlob": "9d59d192d12ffe55aa4bae18bb610cbaa3b53494",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0127.part",
+      "bytes": 327680,
+      "sha256": "f29da911cfb6d6c236daab6afb41e4a2aad130ce5799b80e0f2881893ca45a48",
+      "gitBlob": "5ce9afeab6ec4aceef3001dabbf8b2b110c63fa2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0128.part",
+      "bytes": 327680,
+      "sha256": "fe1b7f07d7ed9d20afdd042000115c489615bb811d845394556795f2771cad0a",
+      "gitBlob": "aed894b847686b0e1d88043675eda2afd449e602",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0129.part",
+      "bytes": 327680,
+      "sha256": "2b940f60bdae6266686fb56836ef53400e53775443c90f9efee2a5e6c05005c8",
+      "gitBlob": "6e1396a55f273874b4fa67f3223d22aa75ea4071",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0130.part",
+      "bytes": 327680,
+      "sha256": "5b5e42b76a139d8a7e32b55eb7bd69b4811dbb0944c145e6771eb09b81849cb0",
+      "gitBlob": "cfe70a45b008a0ebea2ad00a35876496ca9397f5",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0131.part",
+      "bytes": 327680,
+      "sha256": "5b50e2ed796425a1b0b2359ae100ca8d4bb16d51412d89b014b0bc19a7a8b7ff",
+      "gitBlob": "84d3364cfb3bfe13f7bcb61e032768773999c18d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0132.part",
+      "bytes": 327680,
+      "sha256": "5dabea22ce09928892fa331225970ca3d862db4118668af330124d66b6866400",
+      "gitBlob": "9b245e95e27594090d267375efa58ed45b433d24",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0133.part",
+      "bytes": 327680,
+      "sha256": "51d4755744f1e30c245abe2b8d2748bfdd9b878c8ab48f0d492919462c9eb43a",
+      "gitBlob": "c0bdbc6bf6b3737e32dab747d3cb5e22484c28c3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0134.part",
+      "bytes": 327680,
+      "sha256": "814c9f8eaae6582ae598a9c6c522ac4fa92fa7071fee12c1143c728d773b10e3",
+      "gitBlob": "98be8c3b0aba0fc57a50a38e843efeb343c54baf",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0135.part",
+      "bytes": 327680,
+      "sha256": "dee0f5325b629727402a2ff4607c7c5aa55c0f12cfb13edd85c78d7111e60316",
+      "gitBlob": "f5ce9579644dbcb3e46e65e7ae2268598af015c8",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0136.part",
+      "bytes": 327680,
+      "sha256": "b5293f13a85b70f8b4a1ff06ba3a49c9e2635fc55ec5d64c05b64b368c411890",
+      "gitBlob": "3015a6b3f46a5df7fc0e8db281ecf7ccb333ec32",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0137.part",
+      "bytes": 327680,
+      "sha256": "22c7c8be56a58184473d7ad70784b897634dcc9a009c783ebd6c98594c9d0266",
+      "gitBlob": "057cc6e8057e36dc1123f24e82265f188738f5cc",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0138.part",
+      "bytes": 327680,
+      "sha256": "82adec20828082ca33c7fd5af2f65de702bed5ff00b55aae1d6f683046813b19",
+      "gitBlob": "8e289129cbe0d16b3a49b3c691a47778165f144a",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0139.part",
+      "bytes": 327680,
+      "sha256": "359a44e5d2fd22a46caaf4711c5a7c2ccd67b4a710f37c42db4f938e6d253e7b",
+      "gitBlob": "43f63deee3c4a6d64dba054f4efcc5fad6c1cff6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0140.part",
+      "bytes": 327680,
+      "sha256": "e4ba35602867584f9e962887715632ac60f1391e4e24cefcd438e4d7b86fc8cc",
+      "gitBlob": "4382de61742e69fd2d2a08ae5e51cdf4fed7ca25",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0141.part",
+      "bytes": 327680,
+      "sha256": "9d48ffe5b705f06b00e1e7697fd9ebda0b86cb6d0bf096f62e26d9d083644097",
+      "gitBlob": "1d2bb42006f9c625f602a33db38c6550fb8d75b0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0142.part",
+      "bytes": 327680,
+      "sha256": "a806901c9e98033a87c5ab7d8ccbaebc09fff2484f115fe3f56c5d1cef6d0310",
+      "gitBlob": "5c508a5a56c4485fa541a87f739ddd24e3d3f3d2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0143.part",
+      "bytes": 327680,
+      "sha256": "1527c6cebc3ce677dc3021cff6b8c7c43705cddd01fa0adb630a8903c3d0c2af",
+      "gitBlob": "4d25269c8a9bd3e4237b69f0b8e3faf907639a19",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0144.part",
+      "bytes": 327680,
+      "sha256": "587d6fbd48daa1a70f7e8cb40579ddaf9d4be6ac33e5cb3526ea538323e59bcc",
+      "gitBlob": "57493f1b44d562221bf8bee28ccada7e67d50ae9",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0145.part",
+      "bytes": 327680,
+      "sha256": "f2a331c4a3ecbb064dc7468cdec9bd971f67a3cfc110db0e69ff40b7f757d7ba",
+      "gitBlob": "0bd03daa89e5cac36f8eba1f612809796fbc7fc7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0146.part",
+      "bytes": 327680,
+      "sha256": "99ef23b3793af63c5777b5ae31ba992374748d25eb1897b99ef529dc90085834",
+      "gitBlob": "d6d6d5da28478fe1a484880406c2b3aa2f380fd5",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0147.part",
+      "bytes": 327680,
+      "sha256": "1fdfd0c6ebbec87d1f24a3f00b5cba2bde21b9a1d491df7a377308ffc5044d54",
+      "gitBlob": "05550519735651c69d47aca8211498f38dcc8cf6",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0148.part",
+      "bytes": 327680,
+      "sha256": "73d9c9f7e86524ae9b2920144427a8f7d15f996e860e426fa0fb8267aaf9c170",
+      "gitBlob": "0c4044bf51674b3337c6c1f092befda367edefa2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0149.part",
+      "bytes": 327680,
+      "sha256": "5622dc3510e847a84484821a41bee408fbc0774574fa5205ea9668891ad4752f",
+      "gitBlob": "1ef50c0411b574b0b7b9e89682ba254449306d94",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0150.part",
+      "bytes": 327680,
+      "sha256": "4e0ff23cbf617a043f2c4c9e4a54c0d5c2d0677869b15b36141e386162b80e13",
+      "gitBlob": "e12fb398634694beb02fbcc09bdaef4915d69f70",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0151.part",
+      "bytes": 327680,
+      "sha256": "f9af263fa118453786b27fb89d9172c5ca7d6d3b04496dc026bfe57725398249",
+      "gitBlob": "4230783f7e7c473f5a67299140ba1cddf6ed6d49",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0152.part",
+      "bytes": 327680,
+      "sha256": "7ecce29442516d318ab19a612468c940fd256832cbd1cefbebe20146d452ef75",
+      "gitBlob": "52e15604d7a58d1b09397f333343e19ea2ef56e0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0153.part",
+      "bytes": 327680,
+      "sha256": "175725d5a0374e03d748d1b6804c6d946095cc64732d132743f496cf47675f80",
+      "gitBlob": "9003725295d06c0f75154ce954b57d11b0607f5f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0154.part",
+      "bytes": 327680,
+      "sha256": "388b2949737573ce1b2e055dc5585f9fe7443deac7bdcb63f5f8526619e9461c",
+      "gitBlob": "15b9b8119fe215789a9d046023fa3cf5122adf36",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0155.part",
+      "bytes": 327680,
+      "sha256": "b46504786950edab280100ab6b4bbcb5929712b7ec5212ccfdaae155679aecd7",
+      "gitBlob": "8bcacf11fee552152abd0c10be18da2ccdb3aeb7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0156.part",
+      "bytes": 327680,
+      "sha256": "f0f547076a25172932474e4d56c24453706a75b0532a8fa12973849626c49e6f",
+      "gitBlob": "abcfe11c1f53be7ebe3e97a2535cb1302266d834",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0157.part",
+      "bytes": 327680,
+      "sha256": "dd2f86db632ef5b510b4d440046d8dd42efad09285b169c70b1be0d049aea248",
+      "gitBlob": "02e32c0eacd0b66fd52028c1673f395324a04a19",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0158.part",
+      "bytes": 327680,
+      "sha256": "94a090b55172d4efa8c70c07dabeeed431ba3a05d13e729d984753bccb9d58af",
+      "gitBlob": "dfde3e9b6853cb1ea33c9dadbd75693817af09f2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0159.part",
+      "bytes": 327680,
+      "sha256": "288343500218f666c5134c4542333849e86aef26c45202fcffd116aff0550127",
+      "gitBlob": "936f1b6840299be523571a4e8a12c6effa89a2c2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0160.part",
+      "bytes": 327680,
+      "sha256": "b179a9c0020f6677182077812e216e88564cb45d82e3e6ece2710801e044f0b0",
+      "gitBlob": "9eafea75d9fe585abab2f3fd1953c4d1f8193247",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0161.part",
+      "bytes": 327680,
+      "sha256": "e923b650ff5d4b92a5b58b685c7e9c58459bc349739cc888d21081a17bf6a4e0",
+      "gitBlob": "8d6cb4df9cf75ed3363b222c519d8884aed632f7",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0162.part",
+      "bytes": 327680,
+      "sha256": "6ea3a0a9883d985c94c56509f802233d3a158e4f5c87c8a68085b1f347deec4f",
+      "gitBlob": "d16ffdf37ed3ce019bfa6013e8b1559f14fa9dd0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0163.part",
+      "bytes": 327680,
+      "sha256": "0fdf69ed404f7397f872d96c5476b6f96c6f4c9b39937b2c387e16858e0c9256",
+      "gitBlob": "4f9622a1659be6d6c2a98105dab82e0b94673d49",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0164.part",
+      "bytes": 327680,
+      "sha256": "2a608b8e94644d05fa6d866706ec8601f6e0ed9dcc2043cb5524d5e37d7a3d51",
+      "gitBlob": "8088578d54b2852bbfe1c7e9565f8d46c3a80057",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0165.part",
+      "bytes": 327680,
+      "sha256": "5e5529dad22881005096187d9e365d05b7a0f2ed382974329b773fac11a1f937",
+      "gitBlob": "011ccb998bdad0853467e8b19f2c564a533c39cb",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0166.part",
+      "bytes": 327680,
+      "sha256": "dcd42fb09351a8f7b678a23000b46a6c8bf6444d4fb1f048f4f41f7b4a2832c6",
+      "gitBlob": "2d532a732a7a073e2b2d1db80345defabf014280",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0167.part",
+      "bytes": 327680,
+      "sha256": "d2ad61ce508fc17d158519396577f364e6b99763b251875f75397b4910d6e3d8",
+      "gitBlob": "9d88199a77dba05581d9500c790cf9c60b59d0c4",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0168.part",
+      "bytes": 327680,
+      "sha256": "e12a13ab3282dc19bc184ff837ef62b98c72ec9b5e6a56462f8526eab216ec74",
+      "gitBlob": "6a53b244532013a9a98f7f077222521dcaec1407",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0169.part",
+      "bytes": 327680,
+      "sha256": "724c4f6edc19308280b69c091a38cf3a4815d9e39f2ead167a5f12f292d9771b",
+      "gitBlob": "c70d3148dd27b2d495b6020ca079681d5acc6363",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0170.part",
+      "bytes": 327680,
+      "sha256": "3bdefdf6cbd6816dc560aa1e191c08fcc4af94994d664fdae71a50094403b4e6",
+      "gitBlob": "d691e19b969cf0c9f8543bba6cf60605a2f03456",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0171.part",
+      "bytes": 327680,
+      "sha256": "5374df613fa657addc3f3fbb668a1a60e49a3b1a162df8c091f18b5eb4dea419",
+      "gitBlob": "afee96efb0f027111a3fbadaa1963021466741b3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0172.part",
+      "bytes": 327680,
+      "sha256": "4985913743054f1bd18d063b9a7ec8c26fce92fe7b03b8075029a9cec46b7b84",
+      "gitBlob": "167422f3af03773b51c787103403cc990a7c1d4d",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0173.part",
+      "bytes": 327680,
+      "sha256": "90f02e8ec8a77160cac021d7056922bdc17db286f026d8b876d31767eaf58aa3",
+      "gitBlob": "baf8b45c7665cb4057b11d30289a2ba371a4a9a8",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0174.part",
+      "bytes": 327680,
+      "sha256": "38f21ecef8b8506380d1e1686d468a023e6f3beeebfa803c4212df0eda5a77f4",
+      "gitBlob": "a6d56aa438b5d9fd371fa1865549eda6efc8459e",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0175.part",
+      "bytes": 327680,
+      "sha256": "39291b5cd76c7b7ef031810abcc0d4e2ca770ec332dec2be203c977187ee695a",
+      "gitBlob": "a06c8bdbe45160469a5aa19c35b2833cfa096ba2",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0176.part",
+      "bytes": 327680,
+      "sha256": "20362c56ac5dc1adb0068a4c6a422c13a088888d9c4013c4d93ae81d133f76c1",
+      "gitBlob": "7e00dd6e7464cf9685e7033ef33f0b2125546f92",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0177.part",
+      "bytes": 327680,
+      "sha256": "16a8501e8b2bdd97b7e2333a2df9c40ae6c9451e2c60f13b1a1f9d1150bdc0a6",
+      "gitBlob": "ee20a806565f8af60652c7c8144ee964a348a920",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0178.part",
+      "bytes": 327680,
+      "sha256": "82b8161bcc549f3a261213ed45df190bce5a90bd519a7f139fa4a2911eef2806",
+      "gitBlob": "7321ee5c85233d5bfb5d7dc7c5295abcc5e89e7f",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0179.part",
+      "bytes": 327680,
+      "sha256": "786b5fefc4c4ac90813e0f433c8f9b6a1f356c7f7e02bdeb81efbb033d0c1ee1",
+      "gitBlob": "28002f17355fad298bf137c07cd3662a82acd4e0",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0180.part",
+      "bytes": 327680,
+      "sha256": "394a8a1a09454c58756f3ffd1b9e431fe9b96b59ad138a05b85b94db3e9f45d0",
+      "gitBlob": "85e9c6c79786bd368af4b14e8e596bcc2fdaaba3",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0181.part",
+      "bytes": 327680,
+      "sha256": "6816e5fa2dfc554f7b1af36b1cfc9225c3e91918f4ba4df22be31edaef5f9069",
+      "gitBlob": "cbd730f5ec24518fb931ea1acc9615ea71b1ec56",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0182.part",
+      "bytes": 327680,
+      "sha256": "e8edf5bb79749eab0ffd9ded2e4c7169d81cc1cc1c3ebf7025ffc4dfe1731c9d",
+      "gitBlob": "1b1a20cc37d2c0b2f480f5f1108fb22681a5e526",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0183.part",
+      "bytes": 327680,
+      "sha256": "5466707f60ff4ae92ddaaefdf5758c0ef08b6605e8635ec7f5cb3c940842537a",
+      "gitBlob": "051a6505fb66c8c838d3008b1cd9f686f01abb9a",
+      "encoding": "raw"
+    },
+    {
+      "path": "parts/tail-0184.part",
+      "bytes": 324521,
+      "sha256": "7ce9af84d78457fd4d0e6236542fd69f0138e27c914c00b9d9763bd13c0f05d5",
+      "gitBlob": "e412542e4e339cd37ff5bee8068bf0a1998c4899",
+      "encoding": "raw"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "8736bad811a7c372c59881b143e4c75bd659c5af",
+      "headers": "tree 47d89df6a2756322d3deeb884264794abdc5fdf2\nparent 5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5\nauthor James Chen <8d8d90292@gmail.com> 1793226087 +0000\ncommitter James Chen <8d8d90292@gmail.com> 1793226087 +0000"
+    },
+    {
+      "sha": "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b",
+      "headers": "tree f923a96de8671cf0f67d60633b19fb195305005d\nparent 8736bad811a7c372c59881b143e4c75bd659c5af\nauthor James Chen <8d8d90292@gmail.com> 1793239717 +0000\ncommitter James Chen <8d8d90292@gmail.com> 1793239717 +0000"
+    },
+    {
+      "sha": "c24862d3db8c0657ac1da88d0cf3d27a586cac05",
+      "headers": "tree 4c6126c6d6dbe41ef60a38b95af8c33cabb6ad80\nparent bbdf779a1bbcdce0d1b97c43dbdd9a552818960b\nauthor James Chen <8d8d90292@gmail.com> 1793239749 +0000\ncommitter James Chen <8d8d90292@gmail.com> 1793239749 +0000"
+    },
+    {
+      "sha": "4c835fdd62d16afa1f1236c75792e7d7764ab4f8",
+      "headers": "tree 6aa1587853098dd1c40b0c1acc064919a3c1cacc\nparent c24862d3db8c0657ac1da88d0cf3d27a586cac05\nauthor James Chen <8d8d90292@gmail.com> 1793240626 +0000\ncommitter James Chen <8d8d90292@gmail.com> 1793240626 +0000"
+    }
+  ],
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "blob": "fd91540ced6bbf2a590a3f0eba2e30fa71ccdac4",
+      "sha256": "0dd4944c07f28c42ae3bb18f24595ead65aa6097e708a14fa4e1e2f7e9c32d06"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v1.png",
+      "blob": "a6b3d82ed37cd319e5f916b4ee8ed303a3d58d9f",
+      "sha256": "a2c31e41a723d8e8b8afb7bc9d8832ffef5299a0149004c294a9a47efc3d5be9"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v2-blocked.json",
+      "blob": "f5976fc8308d8e090d23321c9f38c49a41b431a2",
+      "sha256": "1f2947205df89161c4d6eaeaa7ac943cd4ce7b1778248b80e8ce4e9a13fed4cb"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+      "blob": "1cb3fba929603567d45a5cdc24ff9a0d951d577f",
+      "sha256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+      "blob": "daf44c6be89a7aff06637f7f14d832e4572f0ea5",
+      "sha256": "064e7ddf6fb1b702fa38c3dd9dafbdba11f973dee1c2e383a7c3e09784f17d16"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+      "blob": "9d1cf1fe80941c9ff45bba39555ae5cf8ee5bd60",
+      "sha256": "8b5e52dc31ed8961718894177daea5cf3afbb1357d77553136c0d416364f4938"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+      "blob": "7d1521d6090afce58162dbcc489f7b30e84286a7",
+      "sha256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+      "blob": "27e2ef1a13d37b3cfc83d40e2ef0b67fc99feb29",
+      "sha256": "2271da95a7997d8e205185d38762bfbb033368aa599aab5ba5d258ca66cc6569"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+      "blob": "cd20eadcb5085fb05d362f4b1aa738bd6bcf15f4",
+      "sha256": "cd40fa2dea78397ecdf0dff1a7c486bff739a345721fb0d444675ed0006f4fb0"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+      "blob": "5589dee6b19014c6c50d3a7d23f0bdaacb3cad60",
+      "sha256": "0ab959f56f09b15b958be06af24ed6e91a3029ff4ebd87bb51da463cff975bd2"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/generation-history.json",
+      "blob": "befbb1a9fe80df5bfaa8f67734db2f3ef18a0f84",
+      "sha256": "20887510b16e24273f51fd66256c0c08ea54787d0da84996f0bbf63d9ab96326"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/outputs.json",
+      "blob": "eaa3380da19c669ee3d22f48ec74bf679d4f1189",
+      "sha256": "242d1c1251bcc4639df2800d2e825b371952e0d56d89699e154ab145ed60d14b"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v1.txt",
+      "blob": "1ff89c11b23794132bac488e9a440f5552ce8717",
+      "sha256": "ae7b7e1e958e6e67412aa8074adb63d0b2571f2426ab1cf320afbf6e8a06b333"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v2.txt",
+      "blob": "61d80354f6a378c9d194e628fd9d24e05ebed47d",
+      "sha256": "4c7329579340d6225debc5a09e702a74488177c1fca244496789bd5795078b66"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v3.txt",
+      "blob": "d29cbb66b7975595d201443e48c58b5003bb2e10",
+      "sha256": "7334c53c59b9dc3fab136e3418acad8bac16362b3419e41d1e19c9fea6fb42ff"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v4.txt",
+      "blob": "71d9b86b1abd9aa01c5325014996fb0c0ad2268a",
+      "sha256": "6fcce7651bad2fe9a9d70b9e5953f22d0edc7fc3ac1cbafbc23af22e114d4eea"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/frankia-v1.txt",
+      "blob": "ab18904387f8ba8a050ccdbac355e05590973a97",
+      "sha256": "20f09017fc4c5911007ed2e858baceda868f262807b218cbe29fb58baa4bba81"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/japan-v1.txt",
+      "blob": "c5cc69250a3a905782460bc0136171909fb4db9b",
+      "sha256": "342662d6833a181d5b32f1b4cab937ad3ea37b510dcd972ca4df3c3c95c5467a"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/japan-v2.txt",
+      "blob": "fba0fd60d5490accb12daa0d68da39e5640a078e",
+      "sha256": "7a838438257e301677e89c90c5e90f17d739c7fff4e8f1cc620772824054c550"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/knight-v1.txt",
+      "blob": "d9d118291868b865a2a15c75bea09125ee7dd482",
+      "sha256": "7d77e5a59ba63a8a778ca69968a900578f0dbe6bc9b798e21056fa35cad12dcd"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/light-v1.txt",
+      "blob": "bfd210b42918f6c80356ea5f98b26a0deace3da7",
+      "sha256": "55fc1bda38d6dd9b1f01cfd601b1845e84764964f1e4418dcc34581b153b413c"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references.json",
+      "blob": "e0a560d37b4174eb3079e16030e5c9a502445207",
+      "sha256": "1a7d6885ad8852e3b7dccdf4f01e77d7d52a54897217b9f421b31ff5af4514fe"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+      "blob": "2ac580e294cb5ee799c73986cabfa8b3181ebcde",
+      "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+      "blob": "0be22f5be2d4b078d4627bdc516dd083c0705558",
+      "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+      "blob": "1d471cb1c1ddc925dbbf96a32f8b02ed55f1bad6",
+      "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+      "blob": "462ae22549b7e06152d7ed576180322297823b48",
+      "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+      "blob": "2391194e493afb0115ae7385d2df8b2d4f53a36d",
+      "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+      "blob": "915a0193100ce07f25daa327444ea890db624ff5",
+      "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+      "blob": "d3569c299f7e2ebdd7ce688ce5d7911f46b04c3c",
+      "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+      "blob": "eecdd1654971e1acc27cad5253901c32dc492beb",
+      "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/knight-current-before.png",
+      "blob": "3748e14b1178916062d00b7480c9765207853bae",
+      "sha256": "b145f163a60f5c9e680f3e1ac204a5e3a93a24cb5832615a44a6ace81ff90b5c"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+      "blob": "935a16cecf377114dbb76a2727979e9415612f8a",
+      "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108"
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/selected.json",
+      "blob": "7d945688d716aca2e62fba5df15fa895c69601f6",
+      "sha256": "0bbe65f7d4768adce091919d7d9039fa15ac37f6b98b57dd6c26dee97aa04d04"
+    },
+    {
+      "path": "docs/art-source/unification/assets.json",
+      "blob": "5ef79f93b775cf3e104c4559df24c18354557079",
+      "sha256": "8bc68483b0337eb556a3408bffa185fab0225301fe85c67e8437178ca2121ec9"
+    },
+    {
+      "path": "docs/art-source/unification/batches.json",
+      "blob": "39dd255f619b723ab746cd75a8a8c656ded89322",
+      "sha256": "2402eaa43b22773e6b36e571ed4de18fb4ba36a891e25dcc22842282308a8ecb"
+    },
+    {
+      "path": "docs/art-unification/REPORT.md",
+      "blob": "4991e879e86aa4b31dff83143a51296b47c79904",
+      "sha256": "48434f775e640d5f511510123fa93907b3ae4c4e478f2073f712541da5c67cc3"
+    },
+    {
+      "path": "docs/art-unification/art-gate.md",
+      "blob": "0dd92681c56e705bacfc92e8ad93c9d04424ade2",
+      "sha256": "9aa31eea80ff4f85a179b020363e64c06ae10bd999c4a0595dccb10d11b6e1a2"
+    },
+    {
+      "path": "docs/art-unification/coverage.json",
+      "blob": "598bdd815db5ae43d0ac28c3de5be32b1f15da81",
+      "sha256": "9b7432d6e40370c4de2ea58d43a2128c71f7112cb7f23d6ae0da3dd44fc3b5ab"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/REPORT.md",
+      "blob": "5d50b763782b3f98724f9045958beb78c68ce4d5",
+      "sha256": "7c7105138f647a0e0a0530f5d43e05f1090635d221baac28541794680e270598"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/art-gate.json",
+      "blob": "9ad1d55bda4865800bd1643c3f60ae85be24b0f4",
+      "sha256": "899e49bdce7d683905e33ac0c862bb595baffffa0199a512d63c6433a5ed1705"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_britannia.webp",
+      "blob": "c9cc3722f223712c90c3c35a58fd8b415ec2e0b9",
+      "sha256": "aa2852b2348ff35c474cba92344a4a01766d2100d3ead822ea9c8bc228dc6e2c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_byzantium.webp",
+      "blob": "f650035eb76899d3c9f2afb88f7294c606076e5b",
+      "sha256": "2e0c87447f76e94af1cb1c09fc9a08ce32665294b6eb6c668723438038cb7d99"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp",
+      "blob": "4ce3d00eb6de0b1e94f2e8b63728903b9f8fab53",
+      "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_japan.webp",
+      "blob": "aa906baaa18dc736260764ea15b46e3ec75ee4e6",
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_mongolia.webp",
+      "blob": "288b92510451fda78eef77b76e2cbcdf01b23001",
+      "sha256": "ad8a6c1689f4984849c2dd2e50aa16729fc81bc04e178bcea1c10eb850e1a88d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_zhongguo.webp",
+      "blob": "7569119509be11b688da89f23978769cb8081197",
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/frankia-anatomy.webp",
+      "blob": "de8b8039502e71dd733c15aead008a2f68eee356",
+      "sha256": "baab9b075841ef4601e1f01815d89708cbd7271a52df3b41d44ee37fb17ccd4c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/frankia-before-after.webp",
+      "blob": "c21be59496c570f204ef6973cc50809056731eda",
+      "sha256": "1a5ecbf056ee029054a0cd6f78985b96c6218a53b7085b90d71b72335c205bb7"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/japan-native-128.png",
+      "blob": "b537aa8bb0beeda6c7f093b290b34a9e12423d0c",
+      "sha256": "dee53f131bf2470e2235350e5d914286439a969d29905b29574f2b9f7a971b72"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/japan-native-64.png",
+      "blob": "eedca6583f162be70ec55bff8b4b70a5346850b5",
+      "sha256": "a8c2e97a67695654deae7fab6859a9823e9230d7fb797aa2735b57d4ab58da20"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/manifest.json",
+      "blob": "9f7c382f8e7b6a0b2dbcfbd80119c5b3a045ea75",
+      "sha256": "f3330467bbb54987d0c622760bd8cd744fa0f6a5083f45083e4c0c7be75ea910"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-before.webp",
+      "blob": "b3d8cf6fed552476680e4d151ef573c4e267e0a4",
+      "sha256": "1b20571711081fbc6b3d6b1709c4731a881e8930400310cc35793819bb6d36cd"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-128.png",
+      "blob": "80d3c13d32aa9a750f812291e3ab4e5a94f76aff",
+      "sha256": "e208143d85f99f95c8a4f153bbe0f336abe429a4e3c1dc3dd67c272bb1c42864"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-64.png",
+      "blob": "dce48b658919cedc5270733832c86e93bafc7546",
+      "sha256": "5eda99100ed7e4cb41dc867d5ac69b7266cb23e483290bf251ec3ff4ac8931ef"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-128.png",
+      "blob": "beeac0b34572c778050ae4486ccc2a91f8bbd6ca",
+      "sha256": "3b3e38bbce16ae818d1cf3938bed22ec4c49fdc7631d8599c048d508d20b069f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-64.png",
+      "blob": "a8735f27599631bf370479b52cf2b7e1090c5d11",
+      "sha256": "53bcfae0ee5abc7727031af6089b1609338130a3f8fefaad2f7f208c1faaa571"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/中國-ABCs.webp",
+      "blob": "880a564e541495032109331305d1c3a2bfc3f93b",
+      "sha256": "5f353c2f7752a2f0c2141c2446794bf946ca34bc0f071aa354eb81aecaaec3dd"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/日本-ABCs.webp",
+      "blob": "94dd6d88533bee0cd42f20dc7b93ab32e46bd58b",
+      "sha256": "192aa65cb98d780e8b96fda0586fc1393b6b5c40577a0831d0eb19999f35f018"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser-manifest.json",
+      "blob": "06f81bb0f53b1444ac65f7c2fe96a1dd5ee385d9",
+      "sha256": "78d4cf0f76a43ad98abd07c9690be2347440d735543c7560e4f331c7007bad16"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-card.png",
+      "blob": "f0c5d651c3c96b8a2d6cedb1cff03cdce4d112f9",
+      "sha256": "fe3e4fbd077b97c66e46a576d4417e7290076cf447d537985934b0ecfec9aa42"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-detail.jpg",
+      "blob": "984edfcd4cb11c97ed286f552cf657d91db40035",
+      "sha256": "13e3c605688f410dae2a666972492524881997add28e05233398656fb1747056"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-ui.jpg",
+      "blob": "86303aeb2864d43e68313f0681ddf24c8aae411b",
+      "sha256": "6e715bc0bf7a474a0d8d8b03c75392e5a23ffd621fcc405702b2f2096a9b828e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-card.png",
+      "blob": "2033d3d44c985ec32ea17560f37a7020eafc1639",
+      "sha256": "4ff3034c70266c8bee88679342aa5406b5d73a33c5d91ab175be9dde1fdc2fb2"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-detail.jpg",
+      "blob": "53870ec1e0a48d5a6f28f6f0cb427e86b3fc8bf6",
+      "sha256": "4dc0c50dfab1bfdbffd9809564d1c9a7abf551b0274352bfadf18330144b2527"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-ui.jpg",
+      "blob": "c96eae9c96f8907c45a551bd17b08b2c744678b1",
+      "sha256": "5a0cfa9bb43314b8cf0f0bd7908cb32b478fa7424b18ce1b00ae5b1c27fa2fb9"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-card.png",
+      "blob": "db2120302a7ab88915fec9d5c893f0fef06cfe1e",
+      "sha256": "c9ede35d7180736cfbeb900673c81c47d40b28121b556256acd5a1d543d5484b"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-detail.jpg",
+      "blob": "4134df46c9b5fb94949acdd2cc4fa3f028487372",
+      "sha256": "3d5b405fb996eb534b20417c9f17dbad12bf6c08665d21f06374c6e71eced487"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-ui.jpg",
+      "blob": "a12ca63f15ed74c8eccc237c28af17d5d83e8773",
+      "sha256": "a9de8a0f7fc53bb82d9fe31c4dde309571c9dfcd4ace587da9b35908971dbb44"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-card.png",
+      "blob": "05e2962412f88685def25429e6044133f2a8dc7a",
+      "sha256": "baf82a286b87390eff4fb23d7dc59d70d15c819f509f8b2242231b8a0104469a"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-detail.jpg",
+      "blob": "b567b6ee34dc567f501085ce982bea978ed0e170",
+      "sha256": "b01183998447e2f7f1a7f1df8cf5dd25164dfb81a78b639bd8b4246e06263c5f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-ui.jpg",
+      "blob": "d01f001cbdd61f6513338ea57f666e8f3b67344b",
+      "sha256": "3ffba94c871f540dd50276ed28673a32f9f646501c7076d7172558e9007b7e53"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-card.png",
+      "blob": "0c7e2669489fe32c3daa3057ac4b0cb087581f0d",
+      "sha256": "a7ef5980be862f3adaab16943582e96b49a7422fcb41685d210572b4580a7a1e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-detail.jpg",
+      "blob": "dbdf356d99709ca531a7d68739f9ff026034d60b",
+      "sha256": "d5ff2c761b237158665872764a95b17a75d74806225733c8efea6b9e6c119e61"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-ui.jpg",
+      "blob": "ac1f1e87e3b2ec9cc3cb0a243009eb4d46bbb235",
+      "sha256": "d20165601e13b6eaf4658292d3d3b5114107785cc1630c10c3e1cbdae4f8701b"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-card.png",
+      "blob": "09c6ec0db1e551e933dc022214d94219ae5be9c4",
+      "sha256": "b1cc40875017722d3f1167067d98df606fdaee9db8536381846df267c2566472"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-detail.jpg",
+      "blob": "a854a3207900da5b4f77a49ba86060371f21c219",
+      "sha256": "09712a70051c6fdf394fe853557056b8727073c44c00c49e0a2e05db8f56317a"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-ui.jpg",
+      "blob": "3fae745380afe100188490ae6fd4e41fc7417376",
+      "sha256": "3eb5e80fa980549ed065bccbea0aaceec1c2fe8f31bd1d22c0ca0b5cf1180afa"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-card.png",
+      "blob": "7f4d3677d4510ba2eacd615e6c31b179c5337d08",
+      "sha256": "e6fa96666dfad64b05bffd8659d2261dc089788d84a1c95c8b783c902f39b174"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-detail.jpg",
+      "blob": "b407636e6a642caa8c676fe2e29ed853c58ba0de",
+      "sha256": "acbad2b3178244319bcf592a55294cd8b942043a6b0e0ddea3b1c89081574bb5"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-ui.jpg",
+      "blob": "ffe6d33a75f4c4377149f394bbef006cd85f8887",
+      "sha256": "fe92ff30096d0c36e1558e2eba3c312a3c21d1b40a89f4803f75a6697f674b77"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-card.png",
+      "blob": "38ec45fd986ca9f896a88262f1c354a4373b5b6e",
+      "sha256": "9193361a919a6f938491886cbc5bafd56c11917a562622130af6c049fea80872"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-detail.jpg",
+      "blob": "fd744b866b54d332e6be9af05320c2d773d8c8f4",
+      "sha256": "d6e6e21be2ad5b3510e4a1d4bc55e6ffbe4bc8686dbcc443ce2fa402e87f0052"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-ui.jpg",
+      "blob": "0598f8a9d300a8492dcbaaa8410fb9ee74b70f7c",
+      "sha256": "0ed9ae174ce920392f16099cfc0b37cda5988122a7d11d8c45b823acc73be9ee"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-card.png",
+      "blob": "69b7c51eb6f56c24d9763826127a10b99fc9424f",
+      "sha256": "29adfcf247861c96240c3a3d49d69d116330bc6284d34ae802ca6d13bb704916"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-detail.jpg",
+      "blob": "304db581240281f86ed1608da0ca82a93ad4e4c7",
+      "sha256": "1fe83563aac72d20a78b4ddcf538bc3a88eab74b1673b4394631e5813b37482f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-ui.jpg",
+      "blob": "6d63cb151438e03cede9aae5a058b39edde75458",
+      "sha256": "dc7f2b986a5b840c947babbb370b18c86c70edfee9631e1cd084cd9984763a3f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-card.png",
+      "blob": "7c8c50d4686dcde3f3820117d4947e5bb71fa7e4",
+      "sha256": "5bac53930b9afcd029983426ccf24db0605142b36f918190ca7d74b545dd518c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-detail.jpg",
+      "blob": "1674f4d0d298cb52a09a80b27a3a8ca013a08947",
+      "sha256": "067b8492d35afc7ba7e572ea028695350fd9fa83b4ff956cfbc25ebef67f3665"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-ui.jpg",
+      "blob": "ea50c0b15e2cef8cc3a91464f54623d73d244447",
+      "sha256": "becdbdf53745a5c8793ffb839cb8f78e52c768e20f300798f74f4aeb8e498c2d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-card.png",
+      "blob": "583a14c6a8891d73fc332a45ac3e9b7df4b7debd",
+      "sha256": "30b7ce3f797a6a3427eba60db0d1be0db2a9188d10f7f2ba6dd5f561369258bd"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-detail.jpg",
+      "blob": "bf1d37b0fd6eddb2d46f480819a1fcf6bda9d4c6",
+      "sha256": "4b8c22418e5bab859ef62aec3f04048df00d9eaba2e89a683afb4155275589b2"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-ui.jpg",
+      "blob": "d08b1a663a2679cea38ed7ea54201d82d01289e6",
+      "sha256": "e28a781ba60850ea1974fd11ebfc4bf036022b234a573fbaaf1cdb643201ad93"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-card.png",
+      "blob": "16a7fd4b33822b531e9e88b69d38ca8b0f206a78",
+      "sha256": "81c7471f10ea1b79c6bf97eb6e55eced2e0bccee3435f9c22bf19e01067f3500"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-detail.jpg",
+      "blob": "910a7f9e63d734dba3ab3e94f3c58c22f7cb38ce",
+      "sha256": "17c07fdb48354aeac9288d8ae2c6e6f37031cc982b5a3cc6de387fde3c160351"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-ui.jpg",
+      "blob": "e3255e517a0f03a7b0334597ed817230b487050b",
+      "sha256": "15a00e468a211e7027cd16d4e2df2fb1b73bdb3b97aec0c36c4b14c895bcf375"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-card.png",
+      "blob": "b6012579cf1e6ee0bfae3667933bb59787a1cd6c",
+      "sha256": "4ee9a32c6abe0c3dba835977d5d7440d3e9c89d118c0b3f82bed3b1ee47d26c5"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-detail.jpg",
+      "blob": "f580b553964cc31f8feea756ba3549a2a09d447b",
+      "sha256": "a3dd1b061bd7910ebae73fc320fe7b24ae5f62f9278a7bf691a83d7fd5ef3363"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-ui.jpg",
+      "blob": "4633e13dc238cfb6641adf732130a213b0a825e5",
+      "sha256": "685580e93575c3ffbf7a918e81dc56ef6c2bebc764da81d21fd3cb0f1b1050bd"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-card.png",
+      "blob": "8df9ee2cedc1ea44e526a5eddd954e7c2f9463b2",
+      "sha256": "8c4b810719e6823a7d47a66dbfe9eac5ff6502e14986c0be175dbd4b97c29460"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-detail.jpg",
+      "blob": "fb0f33bcf1802c7c6562faaa39679f9e0d793e39",
+      "sha256": "b570a5192908fa172a4ede02b7c2f1cf1adaece46ff96db6187fccf3c3ed165a"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-ui.jpg",
+      "blob": "8ace82504f31d7de092264ddf9a279af3cdd1d83",
+      "sha256": "ac12efc9cfd9fbb78eefe99a8ff3cefdfc91b58ae78245d8c62686590ae82b53"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-card.png",
+      "blob": "9a27633c61fa88204090cf1fedac91d7fccde1b9",
+      "sha256": "b23c2b4e9baea5635b688455eb707d0d212fb15f75dddb8a8c1f5770681e8fa4"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-detail.jpg",
+      "blob": "eb09c03fa6bae88fe0d78e970e20dcef04cee21b",
+      "sha256": "c32fa13a669a20c435866b89cd0f980f8f0ca7c750ffabedc8db3e0b51a45554"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-ui.jpg",
+      "blob": "f2ef561a8fa56ad32db22f522544f9dd44a48c21",
+      "sha256": "d599a340d5c2d69ad4338678906ffb49aaf6d11c7df36c8ec3b7e27fadb1ae3d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-card.png",
+      "blob": "41931135000371da3e2d60805346622ae879ac69",
+      "sha256": "57742b3bdf980198edba5535ac4c517c74df6617fdc973609d1667435acaa3b3"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-detail.jpg",
+      "blob": "0ccb4638a33f88a4799fedc6f1cedfa0cefbb21f",
+      "sha256": "0a45736c1e65b9a733bb7dfb392cac85ebf6f7397853cd9de91e7ede8368b827"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-ui.jpg",
+      "blob": "9a21db6ef1dd204b8275d2d92b332024ded4f049",
+      "sha256": "7290d87e40bd03b6f009ba38d6559e9a99b8a81c157103ddb8c809b3493034ab"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-card.png",
+      "blob": "d7ce40373d3277b7aa6fc0d55141bf71d746a380",
+      "sha256": "7b70891ca54de6ce6e3cdf2c2d983d4893ce79a2898cf20fcddb012913f23f99"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-detail.jpg",
+      "blob": "7cc61b081420a52e5c0975ddf88280a4599f1f71",
+      "sha256": "0b41cc7d00d720bf12f32d2d78df276163756e7770fdd97250d8ded1ed0106bc"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-ui.jpg",
+      "blob": "21e92cab30557bd02773660a288c7a95c71e90ac",
+      "sha256": "1cc35d88057c5dfe0206ca0e74eaa4942c728a13f93e492530546ccb3511cd2d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-card.png",
+      "blob": "5c0021b84d3c72be6ea9abe9acf74b3fcf30da48",
+      "sha256": "3d4fcc93923779d549ba9319500e0912762ce0c9e81a51bb0df4978aacbb81cf"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-detail.jpg",
+      "blob": "9c755755622ab8adac00e3c5f23f3eb4ec24c7c3",
+      "sha256": "aa4e0e1f057af49bc0e606deb5896df1664d5b560c569d0e070521e9c3fe2a2d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-ui.jpg",
+      "blob": "ad3a9aa3ea83b0caac7c13bc93c8c1c34110abd8",
+      "sha256": "027935d9687917b37c9995d5e07e3ea9425b87b38476b0c1673690b14025424c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-card.png",
+      "blob": "972dbafcfc3840a37dd021fa90bc72fa70621bb9",
+      "sha256": "234542a92b532a776f94db685ce58c775dad4f6907f0505e454d6230c8ee1e75"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-detail.jpg",
+      "blob": "91a47149940a06b860c608df5ca5ac14a9082fdb",
+      "sha256": "b568d25fcd9c5b640a22efeca3d22e687afd0716829d42e356567cc542afd3d9"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-ui.jpg",
+      "blob": "8b3c6e2c6be2c2665187fa4d2e84f32bdd623c8e",
+      "sha256": "37c4c3abaee2b2a3e0cac1901a1c48f92a7fd2dd2e8eac74b0f527b17f5036f4"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-card.png",
+      "blob": "3e718ea16c2f55c7d72a062ea2c04663f714d7f9",
+      "sha256": "034aa18cc80e4d4a2bfa01be07dd1b6db086c39a1f0c630e92e21fc89e8bc31a"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-detail.jpg",
+      "blob": "b770a28f1f33261113a6fabd9a93d5f89997684b",
+      "sha256": "27ad4eaab4673360c6838dc2bcfeba540482a2da9cb2086099c6d1d75eae3fa4"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-ui.jpg",
+      "blob": "af9f2df8ce0bc7dd9be2f2918a7202f936e397eb",
+      "sha256": "b77a005b74fee4bfdb11241fb7347d613c6254cc190e2dff9add5a999872b0b3"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-card.png",
+      "blob": "2640371a2170b85567ad05a4c7372001122072a1",
+      "sha256": "083a104fff8349347037e14941a09bf9bd30a54859a21284dac336cb972c89b6"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-detail.jpg",
+      "blob": "e94d83ec220f0a3eeda7f0cb7bdd98a4c2e059ab",
+      "sha256": "7e118be1e65ee0361151ae27d8a6e97c5e61cac86c8ac78fba467b55cbb293b2"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-ui.jpg",
+      "blob": "65c57fba90630e01dcd0ebf42642a3cae305c5f5",
+      "sha256": "0d5dcc218e4f1014224abc7cfb46fd7ba729ff88fecc58ece599c471f616109e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-card.png",
+      "blob": "f49275b80acdccdf0a0cf694b0f66eecffa7f23b",
+      "sha256": "6feca634868f263f3f9ade6a859d26161e6424d3d15af5b2a3b432c4206f971d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-detail.jpg",
+      "blob": "4aea396ff348a5ff8457b402d56b4c1a7cbb151d",
+      "sha256": "164cf894844621e562c8bd19502d1e1fd499a69275353e183b4d27f3016c8246"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-ui.jpg",
+      "blob": "d78644a4273758ad205e61f71b7165a9c6407bac",
+      "sha256": "ce9820b70fb237545cfaf51b5effaed086b87f8f9a7867948798243dab3e2612"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-card.png",
+      "blob": "ce49ea191194dfd943a99cc92f9fb181f6c32f57",
+      "sha256": "5f175679e8c593b54dae64538f953f672f82aca707eac2cd2b6a3aea56b57124"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-detail.jpg",
+      "blob": "90f9b42e705ddaf9292944e85eaaa7720fa4e2d5",
+      "sha256": "81012150d584f0d6142640dc7b7aa38e1db9b9b93535144aefeb4808c385cd24"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-ui.jpg",
+      "blob": "76abb58bdc7cf092500b300a678b8b7682441227",
+      "sha256": "4d9b50db0824f4f446ddaef528983ba72f7f38666534833f3bafe39a0a238f57"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-card.png",
+      "blob": "b00697e06876d92e8399d0f96594e47e0dacc0ad",
+      "sha256": "4cb04f27b2e6d0e51ce0be8a94198528b607c932861b50fe096a3efabd788972"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-detail.jpg",
+      "blob": "ba06d0747701d1caddf4d5d754512e327ca4d45a",
+      "sha256": "d16521b1ddd5a5aa9c352556043f6b156d8dad8272e4d3799e3ee26a08e58e90"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-ui.jpg",
+      "blob": "14010fc38a7d85e21572bd4a27c3e8e3336fe75f",
+      "sha256": "5a51545ddb73af6fa068925f92cc1ae5adafe2059613299e94de050b2c649ead"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-card.png",
+      "blob": "99c0ce330129bf19f7eb36bed30490bba90669b8",
+      "sha256": "003d6a70fabc6ea41cb15c0998896dc0198f610ccf504ca2ca556df2b50a7a90"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-detail.jpg",
+      "blob": "b430c2390c19c5ae734fe21f0650d46fdeda7b80",
+      "sha256": "548a24b981205d495d8855e91fc5801b89a724538a9b0638b61dea73af769db5"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-ui.jpg",
+      "blob": "86b90938efe3e9149affe739e052da3401b73c23",
+      "sha256": "b9e223d98b2807e970f8f6e45f41064dd81e700e084afe23845b17e206ddd016"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-card.png",
+      "blob": "c6e12200b7fb8e71fbd85e42d604d8bbf5857516",
+      "sha256": "012c412f253139d9556cf341ae91af8ce9827e94e5e2ad1776459a8153ded34f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-detail.jpg",
+      "blob": "e27456e2ae357f53b6371da4725ec0b37faf5763",
+      "sha256": "2381719ac973b51d8ab87c45560550cfd650665f6addec1ad7f3de01b48c0ed9"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-ui.jpg",
+      "blob": "d08c7b1f14b19066eb18d6e50cd15d49bce9e15c",
+      "sha256": "d5beb3d4bc1a7b561e30c6125542ecbb625c63cf11a42bc4e879de6ebc63d681"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-card.png",
+      "blob": "5bf0dc5c89c36a9e9b3bedec5a45fdbe545a6bc9",
+      "sha256": "7313d04abd8c2bf04f120d69833d187eb4f67b7fef8f357ab59760746d5ac115"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-detail.jpg",
+      "blob": "9bed1239503de60c28ef635daae6447925ec68fe",
+      "sha256": "53ba948d7aaceabd05c99cfe44d7c466f5f302abcfc4e7e0201566f87898be9c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-ui.jpg",
+      "blob": "c7bde3b6bc1f266794d2ff3ba0643d90bff0aa49",
+      "sha256": "7edb03c06a78deb70389d6c71937692da0ed86f54f0194aabfea141d219ac30f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/result.json",
+      "blob": "3abff69bb2dc2af5d7bd49f134990b667a42b183",
+      "sha256": "e6ae666f4c4dbeed18bf58745238ea3656694d89e61d73453dca93cf33c4bed8"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/1440-ABCs.jpg",
+      "blob": "f8ac9625de7d87295a99f3910dae8c2b4dae6e42",
+      "sha256": "3fb8939c2196fbf7abba94a70b060568a7aeb90e0804979f2bb57bbb5eec7740"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/320-ABCs.jpg",
+      "blob": "9fadcabe4f360961e456790a0eb9ff2a5aa29a14",
+      "sha256": "b9f599350a3ba95c626649cffd1e5c67ec8c7fcf68433083ad2f8c1906337737"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/390-ABCs.jpg",
+      "blob": "15ecb0db2230c387c76c20764740b85963eac8df",
+      "sha256": "0538522f7e317297747503929a8b9d83d7c69751d74b7773fd0bc0f6528422d3"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+      "blob": "bf0221e755eacabc42338cc60e3d86dc2f5d90b3",
+      "sha256": "f080b4514d465a86164459544587598dbca205fb6fcb12cc481a8095489c36e7"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-A-lamellar.webp",
+      "blob": "c7f212db4d17437741a961893f94c6f2e40f9c21",
+      "sha256": "8df30d203ffb9c9ff43ec0cd3e7f25683c34e04fce0244631181e0ff0d6b1ab1"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+      "blob": "3625ec4ef67199162781ba37b7dd792fa89252cb",
+      "sha256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-C-imperial.webp",
+      "blob": "0bb018072e5c9a1f229d496f3916dc35930f22bc",
+      "sha256": "f39189dba71701fc4bd537bec4725a24e2192e0a1ab521d09755716fd43dba3c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/frankia-single-hand-v1.webp",
+      "blob": "e2d3d55abe58b6e7d01916af6de571f7fb4d5dc5",
+      "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-A-oyoroi.webp",
+      "blob": "f05b934ef506c93cde49c7b30731f6fed3742650",
+      "sha256": "632cb215f91f2ca8510d3d4c8d182d19495bc630b3188369ba7497630113572f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-B-domaru.webp",
+      "blob": "5ffa6eb17bdf6dce8f7a3a868cf1643fcd2f9102",
+      "sha256": "ddf5d354384d61a2e62a4348df1c5004efb4832485828a6790a0921aab387603"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-C-gusoku.webp",
+      "blob": "740e72aac9024e9ec6670e849be8405402e22e4a",
+      "sha256": "591cacea3f808ffd0c209e257cc259e30bdfa3cd5e65cb4b224173474213f001"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/generation-history.json",
+      "blob": "56b1daa7c5b5425cff2381cf0aa33ea3b1f231a3",
+      "sha256": "0606a68df2a3a42b4443190d150480c4a95aa983a3d0d5c9fc20053b3826eea1"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/generation.json",
+      "blob": "19e84b1a782ca45a86cc52eff5b7806e3f659932",
+      "sha256": "f3d586d72a7041fe1bbea05be67391086459a689d5e4921ca2eae659b0927f5d"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/outputs.json",
+      "blob": "e301425a0107b4511e1a53651fb0d90261bd5c72",
+      "sha256": "a7c8834f7236fa9cfbc33d2d29b642202d6944b77dd320d68c60045bf1bd273f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-A-lamellar.txt",
+      "blob": "f6dcac870b785a2742f3fc04cc2661d642d61cac",
+      "sha256": "7707b80f6e070285e370cfdaa1db7fea91b8cf5bd2f20f141fe89a568ad74a0f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-B-scale.txt",
+      "blob": "de2c3bb8b2529dbbd4a2c62255a363a4b492649a",
+      "sha256": "2dc4427da104485193d681956e3715dec8baa24355de5c1ca2ba7fb264716e2e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial-v2.txt",
+      "blob": "a1be36abaf4c2d2b88a5826c78980b5002383595",
+      "sha256": "45915e98c73c3c230fd6815fea5750d65437c4e164d16ef6969db6b4dc1845c2"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial.txt",
+      "blob": "28e9ad861a5fe0650f3e9b141ebeca7cd98e1818",
+      "sha256": "28efbcb8a571e25af19ffb08c674d8428de554f31de08ca48ba03b2686a4cf50"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/frankia-single-hand-v1.txt",
+      "blob": "0dfba5a6bb385c19f04c59446e1e9e1bc3387206",
+      "sha256": "9f0e725fb3b28868c1b231a32640a536d4a345e25e54d76d34983b8fcb06569e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-A-oyoroi.txt",
+      "blob": "2250c5b542260d74af1fb6a05766368824ca419d",
+      "sha256": "690c83a9bcc51acf0f35b123958bf1e5d005afc02bbd3879fc6cc4af926b7e80"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-B-domaru.txt",
+      "blob": "9759bc9dc423d0fea2f43f020305cfee895bad62",
+      "sha256": "04e66ba6350ed35581205735b5d4c50c9a8e0566e388904b0c35b0d26046958a"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-C-gusoku.txt",
+      "blob": "440e1c89a3fb27f8a65bd9b9560feb69275118bd",
+      "sha256": "2b18849e57aba6c764d30eac7ddca393827698328bf2a76d54c7b3a50a815b82"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/protected.json",
+      "blob": "41f770a9f3f1065c857657bb3a29e3ceb39461a7",
+      "sha256": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-A-lamellar.png",
+      "blob": "ba5269a7042f6df288303789c1fae82ab847397b",
+      "sha256": "26275efd29e33ebafa6ae6712bb7d8ca57fd495a6be06bd41a6d77182819c878"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+      "blob": "9b62a1ec06a8cd310628daae90591dc60929236b",
+      "sha256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial-v1.png",
+      "blob": "275e5b7492cfa0b26e50d288704ada4e1c377aa4",
+      "sha256": "657378cee0e9b87568e1936f90f47dd22f994f3ad8edb643ee43542910598ee4"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial.png",
+      "blob": "4dda609d0fbc4f4c66d237b960a719e5c314c0a3",
+      "sha256": "858573344818559154086d4ffbd071336ce36bc17c7fe3921b320aa1aa951851"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+      "blob": "f5e0e6e3ad49823577047b0faab85d257fcfe343",
+      "sha256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-A-oyoroi.png",
+      "blob": "6b18038e0a84bf946be207538c65e41cbf9dbc4c",
+      "sha256": "12c9b875eba1752f04ed11eb08f6e610ed8645d9c18f43385bd89c38f373cd60"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-B-domaru.png",
+      "blob": "131db3e491513f6df2b766a01dea3a47c79afb4b",
+      "sha256": "369c490bf72afd19aaa5a7ac9bb976144252a6d80e56e1481e30ef7988ad6753"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-C-gusoku.png",
+      "blob": "2428511895517a09891ca21f0a8524795c400d22",
+      "sha256": "5c896d05050d8e7e6150c532eb02ebef970a91f28a101b44bd7626445ce956bb"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references.json",
+      "blob": "77c9de3e76c2334ebbc206801997a86e5d04a9db",
+      "sha256": "7ba4bd78471fdb5b50804a955836a2dc674b8c31134b8fc7f130ba7017c14e1e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-britannia-8736bad.png",
+      "blob": "41cf41310c2a978fe26ecfac010939913e7ea9bb",
+      "sha256": "df47accb100dc38a05c2470ee872eb182c2bb6ff068d06d6048bcb50515d553c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-byzantium-8736bad.png",
+      "blob": "f24803f924f95b26fb8d49358d7ecdee42120309",
+      "sha256": "5dbdf14be150c8743fd98e4d039b398540641bca44f314babd8bd2f2e229499f"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+      "blob": "891d0af7844fb7ac47330d99d9bfe95cdcc9df71",
+      "sha256": "71139b089745d1e8c04bc0d6ad05d86fc25e76f26e2587f9e1633cf55f45d83c"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+      "blob": "0ad2edeba1ec18fd52db9ef1e20f128b99d0e11e",
+      "sha256": "b402a2ac1d6a2bd1dc692a135978410e41b1f99b8b611ce0db33960c5575cac9"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-mongolia-8736bad.png",
+      "blob": "c96cfc4bfb5f579dfe70f273f748b409562d9501",
+      "sha256": "00f303e51cf0241e57b2dd8cb54c847a504ece823051e931ac2accc1062d1a6e"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+      "blob": "ec737a6ab8379d04225948020b0228429fd9a5a2",
+      "sha256": "785590c2020bebfd6c6e6913a816f8f54ed19c51a5eac151868d7fff0ede8303"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-britannia.png",
+      "blob": "67c28286ae10fb9de52629c083ce4bcd1caff983",
+      "sha256": "bddd048d6595d278b6d584d41f36195fb2a6cce804019ace8a0f1f537a6bb006"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-byzantium.png",
+      "blob": "4e5a1ccca57d02f7dd73a14229e81a35e545ce89",
+      "sha256": "9c459e624f30f802c1585ac56384eb4c23c1a4109f89e2470926209298c94966"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+      "blob": "2391194e493afb0115ae7385d2df8b2d4f53a36d",
+      "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+      "blob": "915a0193100ce07f25daa327444ea890db624ff5",
+      "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-mongolia.png",
+      "blob": "719eb5f8c34afc229f3ed5e7d34043935d13377e",
+      "sha256": "6535016a2902312d1b046e915a1c0c9833bd6bd2d5dc9c12dce986ee925b7df9"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+      "blob": "462ae22549b7e06152d7ed576180322297823b48",
+      "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/runtime.json",
+      "blob": "cea89f7f78e4ed3d9861bd084b8c002ba9038014",
+      "sha256": "ea5602f6f4dbf8831348840e0c653be259daae70f3ce5bf96dbec619193ad6df"
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/validation.json",
+      "blob": "db1b7e1a04bb7c065528f3727758e6ec92ac7dea",
+      "sha256": "ab19de612d7e499194e4f11710383aee53cd6b0029516c7d4b4709341bcd995e"
+    },
+    {
+      "path": "docs/art-unification/evidence-index.json",
+      "blob": "9057143d6b3efc30ad852d62dd79fab6d208959a",
+      "sha256": "33ec6be14d2ba46a67f9425bea78e15cd3d39ab7bf209541fb53f484bd60ee82"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/REPORT.md",
+      "blob": "ede0d3e9010cd1aea77f4eece4c7684f61c3edc9",
+      "sha256": "58305a5fe2c165776033372f79ca0406d389b5b6220c794a169de20fec32db18"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/art-gate.json",
+      "blob": "0e0403d56cf7f943de7747386582cac1eaff60a0",
+      "sha256": "5131c585031895ffefde565a803f3e5a1afe9dda70fc6e88c73717f07a5d9847"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/MiniatureCity.tsx",
+      "blob": "d49e7d2ee1b2776a525fe0af0b3eea24913a87e7",
+      "sha256": "27b4d0fd9d58265786b9eed88a15df0f0f49d575eba3fef17b8e39f3cdb44d07"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/asset-records.json",
+      "blob": "b3e18614d5d259c6a1b52e36119e6182ab8ed8fe",
+      "sha256": "3e90993876e8eb610049c90e6b36cfe905dcc204daf2682febcbfb2013d8eb53"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-0.webp",
+      "blob": "7cecd231ee39e3f06ff8605e43c06a331370e53a",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-1.webp",
+      "blob": "0ba82f6b8706046beb10b0f6d99576346bf737f4",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-2.webp",
+      "blob": "929b4dbbd4a0081c0ea740260a0bb66e4d4ab99b",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_frankia.webp",
+      "blob": "357c139f97889474413fb2c6eeb5e8c35a495aa7",
+      "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_japan.webp",
+      "blob": "8b4b262ed3808e1ac9ef66025ede4513d8458c3c",
+      "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_zhongguo.webp",
+      "blob": "e44f00fbf1d07b3515164fffbdeef6a532d3475a",
+      "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/game.css",
+      "blob": "7251acdde87124f702efc78f0a274a2d884de645",
+      "sha256": "d153e2a2da34749e8c50dbcde4637a75957b4ebb73d66fe330df6b587d4ee544"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/heavy-knight.webp",
+      "blob": "fe7efc18460e78b92eb9a5981ccd9de3a3a5f541",
+      "sha256": "5bf17f041076d421025a0853689a9584c962b5466dae0384664f12ab761ca389"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/knight.webp",
+      "blob": "64321595ac2fe088aaea8e7d7582ad7d0f80d56e",
+      "sha256": "fc010986c483b58ce5fd74a520215d7a44dfdf878be62a50e6beefbb5df29d9d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/light-cavalry.webp",
+      "blob": "989f422cae6106a8bace488cb69f3eef6eebaf11",
+      "sha256": "3348b8b7ca04fe999a93e79473b3a3fd6083a6eab3a12d881a2bcc4b9e728943"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-1440.webp",
+      "blob": "067dba9f1e792c1c325c6b74ed9ba7136380a490",
+      "sha256": "847554624703f847b4f9383429ad150fdae520360b368d03a2f92b2360a1dbed"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-320.webp",
+      "blob": "46286a006a3d7852fc9a10e508dce1ca8ec8cdc5",
+      "sha256": "ba3064f6950254f7d8aaa5a7713aefa6c211c03f35a292223110ef750a6439a0"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-390.webp",
+      "blob": "46286a006a3d7852fc9a10e508dce1ca8ec8cdc5",
+      "sha256": "ba3064f6950254f7d8aaa5a7713aefa6c211c03f35a292223110ef750a6439a0"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-1440.webp",
+      "blob": "ef2a01055d062d0448e46bc058c792eac52b09af",
+      "sha256": "63f4b34242360ea26bf3a9b57b00c73cc95739e7bae19f9d1d7b50341fe547a3"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-320.webp",
+      "blob": "f351a734943c5ae4e389184c875297fe10cee8d7",
+      "sha256": "7f5bd3096d9ea4049a21b8d22617315345b9daa00032a41e802862bf8d9ba249"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-390.webp",
+      "blob": "f351a734943c5ae4e389184c875297fe10cee8d7",
+      "sha256": "7f5bd3096d9ea4049a21b8d22617315345b9daa00032a41e802862bf8d9ba249"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-1440.webp",
+      "blob": "d7aecb1f4a9e64ed1dac473873eac05697376184",
+      "sha256": "fc472c5a1fb9952664e6fcadb0e937babb1aec086eb9dbfa53d7f26d1ef6136d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-320.webp",
+      "blob": "1f567bd75c79e11d78a1a5cc153a1747b5f1a6e5",
+      "sha256": "27b17b361d12fc25d47648a4a717ab193f93f9930a521a462f940e21eb260822"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-390.webp",
+      "blob": "1f567bd75c79e11d78a1a5cc153a1747b5f1a6e5",
+      "sha256": "27b17b361d12fc25d47648a4a717ab193f93f9930a521a462f940e21eb260822"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-1440.webp",
+      "blob": "4574e9c38a8c8a063eaf9569ef584d0af072fefc",
+      "sha256": "9d6b201be549bbabc4f7c9dcb73d7779e51489e7dffd25c0d8b917166614b68e"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-320.webp",
+      "blob": "2d8281091ac28459e5eca0097c7d4afcbf0ba846",
+      "sha256": "a2406fed29fe6eac380d390993f5e5d30447a925ba6ef5a9f60205fb3d82add1"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-390.webp",
+      "blob": "2d8281091ac28459e5eca0097c7d4afcbf0ba846",
+      "sha256": "a2406fed29fe6eac380d390993f5e5d30447a925ba6ef5a9f60205fb3d82add1"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-1440.webp",
+      "blob": "09cc02b059a3a71f8fdf6e5bd79880f288c65dfe",
+      "sha256": "df57d6a37b267bcbd9e5694e18b9e4edfe931c8d2f160f14deee4627155e5ac3"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-320.webp",
+      "blob": "208a8088424e35ad841b24dff6bb788a339cf4cc",
+      "sha256": "dac0f6dedbb788537bbfbac0bd9954becb0aec35a7d89faa5641461b784f2713"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-390.webp",
+      "blob": "208a8088424e35ad841b24dff6bb788a339cf4cc",
+      "sha256": "dac0f6dedbb788537bbfbac0bd9954becb0aec35a7d89faa5641461b784f2713"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/frankia-anatomy.webp",
+      "blob": "362a6881134c0bdace01da436b7cac9a9cbe5d77",
+      "sha256": "dc917aca5f20a28d3ba0287e491882fd3f0e49034632fc4ee6a83504a56f8e58"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/manifest.json",
+      "blob": "d40890daee9d1572dcf11443bd04f9942038387c",
+      "sha256": "a7fafea39970ca2cfcf0e9f8b445af1fc5f7c4d148c811a3bd6a3a46982060a3"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-china.webp",
+      "blob": "286530450849ed0b40160ed065938763857f978b",
+      "sha256": "eb52117b30f088adf968519b13789993847a395a5d4781a9d68b35a24a81d970"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-frankia.webp",
+      "blob": "eda1c91679cad89ac735db500abfd9b471f17e22",
+      "sha256": "c702c4609637cc9f59fe3854495676d8a793579243370a76d6893259fecc9705"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-japan.webp",
+      "blob": "c04aecdf0631742e663c62dd6675dfbd36043f4a",
+      "sha256": "54faa0a7396052ed5966503200761e7102e460140c6b23851fff6186f0cf9798"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-knight.webp",
+      "blob": "d81bf7400c360d43b09b0cda319bce79eb47e35d",
+      "sha256": "a1c124dcb8dfef69f5349a9c3ff20c7c3059ad19cc9ad5136d562d5bf65e8e90"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-light.webp",
+      "blob": "5274297ec13441d98096ba0c3a11dafb4f954e4c",
+      "sha256": "d7436b7bce1cf78383322022897a4b859886af9911845c4bd8f6f80646c44172"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/units-native-64.png",
+      "blob": "6bd3287d92db8fe60deddb4c2c7da2b0f2c3a903",
+      "sha256": "cd78038e45a0fd8390c3ef125821706fe4063b86b23be5fa1256e84673a6dc5c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_britannia-2-wall5-ui.jpg",
+      "blob": "c76bcd16f8401ae76f513ec84bbcf4da488c9d96",
+      "sha256": "49f669c9a8c0959e982f21778954e3c6806100491ba4bc313851d0188c48381a"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_japan-2-wall5-ui.jpg",
+      "blob": "32fac5e67e1594d27751c3c70b793ef6076f2e6c",
+      "sha256": "695d508f5522f7e02f0f315d35dc2847d18cf4409e79b1e1c299e168db6c776c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_mongolia-2-wall5-ui.jpg",
+      "blob": "1798f12047e00e7db68eaddcdb6c88cb50f9fb78",
+      "sha256": "bcdb658beb11a95521a0996fb1c96e59d7efda455a98891f5d73dbdf47b3b9d6"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_britannia-2-wall5-ui.jpg",
+      "blob": "6e2f82106797658ff41e75be9ff79f6f77002591",
+      "sha256": "900e2fcce3669c8c04da527d0242a49ed7e33b334265aa32cd8b42260636937c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_japan-2-wall5-ui.jpg",
+      "blob": "0d81eae6b9268a810b70bb03ce68831fa7d75df5",
+      "sha256": "4dff93592942c8912945ef24d81a5328f35ceb2515fabb621ad6471eabf3b53c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_mongolia-2-wall5-ui.jpg",
+      "blob": "4451c4b868955738ecddab65fc7a4b09e10405e5",
+      "sha256": "0425691f0dad33160211cd27f0c6b7843d9d8e5be1f6aaa8a8ffa6bba17ab0d3"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_britannia-2-wall5-ui.jpg",
+      "blob": "4d3f14b8c3dba1892c2279601284f322bfb82f03",
+      "sha256": "d561ecc2d9d0c736853d7065bd7384ac9a122e8d6a1e6feb8aeb03cbfd942e0d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_japan-2-wall5-ui.jpg",
+      "blob": "1942b5092dd628b0290c83b5082d3c63a9e55c68",
+      "sha256": "80fce84f37e445def299b4d7496dacec9d8cde94e3a3e255b5a49d22b4546241"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_mongolia-2-wall5-ui.jpg",
+      "blob": "6f721aa8c7d4001ed30f766959ce13782827e572",
+      "sha256": "a5e62af66b8ba5533d7ed79c0512c5930b39dd9cfb000084d2cee61658792ac2"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_britannia-2-wall5-ui.jpg",
+      "blob": "0e3c877fef6ba821b4a87cfb58651ddcde55383c",
+      "sha256": "31a700ba701db898b10548534e52c180db19647ccfa93d1e8ca9b71b992fe54b"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_japan-2-wall5-ui.jpg",
+      "blob": "992d47a4f56f88db1fd0e43a86f5581302a081c2",
+      "sha256": "2c54fedb394221d705d2d5d576d41de384781d86cdc93cc60df1e20d287b0641"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_mongolia-2-wall5-ui.jpg",
+      "blob": "4e061246007f1a5f293f21f41fcf877105920a86",
+      "sha256": "c1d7e385c84a55569de69bcc351c315fd5374aa28b015b2c0d21d5fc65e39832"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_britannia-2-wall5-ui.jpg",
+      "blob": "1dc8de9bc7e75b6e5be7425ba5626e252221b274",
+      "sha256": "86986e86190759bd72d46ee2d1e83357b6005165e799304cabaecdac60e6cd39"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_japan-2-wall5-ui.jpg",
+      "blob": "ae6d69414caaf313123e65d90f8feae18af058ad",
+      "sha256": "75028eae1a65e9f6bd4803e584f9e2f72386596c4a7ce5f946af71089a0e8515"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_mongolia-2-wall5-ui.jpg",
+      "blob": "060798149aee5170b0d68e1406a24376c3e5ffb7",
+      "sha256": "5bad11f2b043fa28fa394f70ad566b91d6ba4a4a84fbb2d3455119879a16a902"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_britannia-2-wall5-ui.jpg",
+      "blob": "ddc061e0015b1a24810f6c08a9b01a9003c05c6f",
+      "sha256": "9c1232bc2d65f852f1051aaee7c3fc80d1e0ae30f41a4c36a64aced11fb1e304"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_japan-2-wall5-ui.jpg",
+      "blob": "2df6bdc7d64f52cbc1c9949585a584b085f1d37e",
+      "sha256": "eae5e740e8932af5078ffa4d9937600fa596e1a6cde4f8521a79846b4b15050a"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_mongolia-2-wall5-ui.jpg",
+      "blob": "d0d83415fa5cfed5e90866b0d0cdfa93bb00e4db",
+      "sha256": "a97f5f807796451807dc8cc0f98f67add12b57d5a900e1246c374cf1f47ba39b"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/result.json",
+      "blob": "e38588185b5327d2d5bf7b250c614818a053d224",
+      "sha256": "cc8b11c7759312c9d6a6ec43afc903260ebdfc5cf79e078a142f4f0494687364"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_frankia-detail.jpg",
+      "blob": "6f2ca06803895f6552708e8101a95ff70a172769",
+      "sha256": "44e1103418d3953ef1c8c2e7ccfea7c0dec7f42e9968778e84cf9ca9b598e7f7"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_frankia-ui.jpg",
+      "blob": "51e4732c89b8ae22176f5cfc25719084256702bf",
+      "sha256": "0cb4dcb2814480087e0ddd47110586d128b1b81b765dd07588a4c43f3cb40539"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_japan-detail.jpg",
+      "blob": "53870ec1e0a48d5a6f28f6f0cb427e86b3fc8bf6",
+      "sha256": "4dc0c50dfab1bfdbffd9809564d1c9a7abf551b0274352bfadf18330144b2527"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_japan-ui.jpg",
+      "blob": "c96eae9c96f8907c45a551bd17b08b2c744678b1",
+      "sha256": "5a0cfa9bb43314b8cf0f0bd7908cb32b478fa7424b18ce1b00ae5b1c27fa2fb9"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_zhongguo-detail.jpg",
+      "blob": "4134df46c9b5fb94949acdd2cc4fa3f028487372",
+      "sha256": "3d5b405fb996eb534b20417c9f17dbad12bf6c08665d21f06374c6e71eced487"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_zhongguo-ui.jpg",
+      "blob": "a12ca63f15ed74c8eccc237c28af17d5d83e8773",
+      "sha256": "a9de8a0f7fc53bb82d9fe31c4dde309571c9dfcd4ace587da9b35908971dbb44"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_frankia-detail.jpg",
+      "blob": "b567b6ee34dc567f501085ce982bea978ed0e170",
+      "sha256": "b01183998447e2f7f1a7f1df8cf5dd25164dfb81a78b639bd8b4246e06263c5f"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_frankia-ui.jpg",
+      "blob": "d01f001cbdd61f6513338ea57f666e8f3b67344b",
+      "sha256": "3ffba94c871f540dd50276ed28673a32f9f646501c7076d7172558e9007b7e53"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_japan-detail.jpg",
+      "blob": "dbdf356d99709ca531a7d68739f9ff026034d60b",
+      "sha256": "d5ff2c761b237158665872764a95b17a75d74806225733c8efea6b9e6c119e61"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_japan-ui.jpg",
+      "blob": "ac1f1e87e3b2ec9cc3cb0a243009eb4d46bbb235",
+      "sha256": "d20165601e13b6eaf4658292d3d3b5114107785cc1630c10c3e1cbdae4f8701b"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_zhongguo-detail.jpg",
+      "blob": "a854a3207900da5b4f77a49ba86060371f21c219",
+      "sha256": "09712a70051c6fdf394fe853557056b8727073c44c00c49e0a2e05db8f56317a"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_zhongguo-ui.jpg",
+      "blob": "3fae745380afe100188490ae6fd4e41fc7417376",
+      "sha256": "3eb5e80fa980549ed065bccbea0aaceec1c2fe8f31bd1d22c0ca0b5cf1180afa"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-heavy-knight-detail.jpg",
+      "blob": "b407636e6a642caa8c676fe2e29ed853c58ba0de",
+      "sha256": "acbad2b3178244319bcf592a55294cd8b942043a6b0e0ddea3b1c89081574bb5"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-heavy-knight-ui.jpg",
+      "blob": "ffe6d33a75f4c4377149f394bbef006cd85f8887",
+      "sha256": "fe92ff30096d0c36e1558e2eba3c312a3c21d1b40a89f4803f75a6697f674b77"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-knight-detail.jpg",
+      "blob": "fd744b866b54d332e6be9af05320c2d773d8c8f4",
+      "sha256": "d6e6e21be2ad5b3510e4a1d4bc55e6ffbe4bc8686dbcc443ce2fa402e87f0052"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-knight-ui.jpg",
+      "blob": "0598f8a9d300a8492dcbaaa8410fb9ee74b70f7c",
+      "sha256": "0ed9ae174ce920392f16099cfc0b37cda5988122a7d11d8c45b823acc73be9ee"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-light-cavalry-detail.jpg",
+      "blob": "304db581240281f86ed1608da0ca82a93ad4e4c7",
+      "sha256": "1fe83563aac72d20a78b4ddcf538bc3a88eab74b1673b4394631e5813b37482f"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-light-cavalry-ui.jpg",
+      "blob": "6d63cb151438e03cede9aae5a058b39edde75458",
+      "sha256": "dc7f2b986a5b840c947babbb370b18c86c70edfee9631e1cd084cd9984763a3f"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_frankia-detail.jpg",
+      "blob": "bd1ad1d439dda081800b4e10953b07080bb1f8da",
+      "sha256": "a9c5b61ca2e08e3f3fb11da7dbc5d5276d3644f16cb022064fcf9d3a99a7ebb6"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_frankia-ui.jpg",
+      "blob": "5438a051ed3c9701c59ab05b373cb5cfdf389e72",
+      "sha256": "6c46cde852eb4a1603548fc51132bf711e55b446e40af0fce2da67045a6362b0"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_japan-detail.jpg",
+      "blob": "bf1d37b0fd6eddb2d46f480819a1fcf6bda9d4c6",
+      "sha256": "4b8c22418e5bab859ef62aec3f04048df00d9eaba2e89a683afb4155275589b2"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_japan-ui.jpg",
+      "blob": "d08b1a663a2679cea38ed7ea54201d82d01289e6",
+      "sha256": "e28a781ba60850ea1974fd11ebfc4bf036022b234a573fbaaf1cdb643201ad93"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_zhongguo-detail.jpg",
+      "blob": "910a7f9e63d734dba3ab3e94f3c58c22f7cb38ce",
+      "sha256": "17c07fdb48354aeac9288d8ae2c6e6f37031cc982b5a3cc6de387fde3c160351"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_zhongguo-ui.jpg",
+      "blob": "e3255e517a0f03a7b0334597ed817230b487050b",
+      "sha256": "15a00e468a211e7027cd16d4e2df2fb1b73bdb3b97aec0c36c4b14c895bcf375"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_frankia-detail.jpg",
+      "blob": "f580b553964cc31f8feea756ba3549a2a09d447b",
+      "sha256": "a3dd1b061bd7910ebae73fc320fe7b24ae5f62f9278a7bf691a83d7fd5ef3363"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_frankia-ui.jpg",
+      "blob": "4633e13dc238cfb6641adf732130a213b0a825e5",
+      "sha256": "685580e93575c3ffbf7a918e81dc56ef6c2bebc764da81d21fd3cb0f1b1050bd"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_japan-detail.jpg",
+      "blob": "fb0f33bcf1802c7c6562faaa39679f9e0d793e39",
+      "sha256": "b570a5192908fa172a4ede02b7c2f1cf1adaece46ff96db6187fccf3c3ed165a"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_japan-ui.jpg",
+      "blob": "8ace82504f31d7de092264ddf9a279af3cdd1d83",
+      "sha256": "ac12efc9cfd9fbb78eefe99a8ff3cefdfc91b58ae78245d8c62686590ae82b53"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_zhongguo-detail.jpg",
+      "blob": "eb09c03fa6bae88fe0d78e970e20dcef04cee21b",
+      "sha256": "c32fa13a669a20c435866b89cd0f980f8f0ca7c750ffabedc8db3e0b51a45554"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_zhongguo-ui.jpg",
+      "blob": "f2ef561a8fa56ad32db22f522544f9dd44a48c21",
+      "sha256": "d599a340d5c2d69ad4338678906ffb49aaf6d11c7df36c8ec3b7e27fadb1ae3d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-heavy-knight-detail.jpg",
+      "blob": "0ccb4638a33f88a4799fedc6f1cedfa0cefbb21f",
+      "sha256": "0a45736c1e65b9a733bb7dfb392cac85ebf6f7397853cd9de91e7ede8368b827"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-heavy-knight-ui.jpg",
+      "blob": "9a21db6ef1dd204b8275d2d92b332024ded4f049",
+      "sha256": "7290d87e40bd03b6f009ba38d6559e9a99b8a81c157103ddb8c809b3493034ab"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-knight-detail.jpg",
+      "blob": "7cc61b081420a52e5c0975ddf88280a4599f1f71",
+      "sha256": "0b41cc7d00d720bf12f32d2d78df276163756e7770fdd97250d8ded1ed0106bc"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-knight-ui.jpg",
+      "blob": "21e92cab30557bd02773660a288c7a95c71e90ac",
+      "sha256": "1cc35d88057c5dfe0206ca0e74eaa4942c728a13f93e492530546ccb3511cd2d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-light-cavalry-detail.jpg",
+      "blob": "9c755755622ab8adac00e3c5f23f3eb4ec24c7c3",
+      "sha256": "aa4e0e1f057af49bc0e606deb5896df1664d5b560c569d0e070521e9c3fe2a2d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-light-cavalry-ui.jpg",
+      "blob": "ad3a9aa3ea83b0caac7c13bc93c8c1c34110abd8",
+      "sha256": "027935d9687917b37c9995d5e07e3ea9425b87b38476b0c1673690b14025424c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_frankia-detail.jpg",
+      "blob": "2846de8a8ce991050001679802611639696aa6a8",
+      "sha256": "c717fdeb3540a44215d279a363041b426d35790ad144e315f6d97372eb5de595"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_frankia-ui.jpg",
+      "blob": "6a260b7a7a0c1502bc0e94846209fb962df84d04",
+      "sha256": "ed88ae44a2260484f211a0fcfd506d3e263ffff03fdfc5eea35867e2766d61f2"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_japan-detail.jpg",
+      "blob": "b770a28f1f33261113a6fabd9a93d5f89997684b",
+      "sha256": "27ad4eaab4673360c6838dc2bcfeba540482a2da9cb2086099c6d1d75eae3fa4"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_japan-ui.jpg",
+      "blob": "af9f2df8ce0bc7dd9be2f2918a7202f936e397eb",
+      "sha256": "b77a005b74fee4bfdb11241fb7347d613c6254cc190e2dff9add5a999872b0b3"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_zhongguo-detail.jpg",
+      "blob": "e94d83ec220f0a3eeda7f0cb7bdd98a4c2e059ab",
+      "sha256": "7e118be1e65ee0361151ae27d8a6e97c5e61cac86c8ac78fba467b55cbb293b2"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_zhongguo-ui.jpg",
+      "blob": "65c57fba90630e01dcd0ebf42642a3cae305c5f5",
+      "sha256": "0d5dcc218e4f1014224abc7cfb46fd7ba729ff88fecc58ece599c471f616109e"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_frankia-detail.jpg",
+      "blob": "4aea396ff348a5ff8457b402d56b4c1a7cbb151d",
+      "sha256": "164cf894844621e562c8bd19502d1e1fd499a69275353e183b4d27f3016c8246"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_frankia-ui.jpg",
+      "blob": "d78644a4273758ad205e61f71b7165a9c6407bac",
+      "sha256": "ce9820b70fb237545cfaf51b5effaed086b87f8f9a7867948798243dab3e2612"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_japan-detail.jpg",
+      "blob": "90f9b42e705ddaf9292944e85eaaa7720fa4e2d5",
+      "sha256": "81012150d584f0d6142640dc7b7aa38e1db9b9b93535144aefeb4808c385cd24"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_japan-ui.jpg",
+      "blob": "76abb58bdc7cf092500b300a678b8b7682441227",
+      "sha256": "4d9b50db0824f4f446ddaef528983ba72f7f38666534833f3bafe39a0a238f57"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_zhongguo-detail.jpg",
+      "blob": "ba06d0747701d1caddf4d5d754512e327ca4d45a",
+      "sha256": "d16521b1ddd5a5aa9c352556043f6b156d8dad8272e4d3799e3ee26a08e58e90"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_zhongguo-ui.jpg",
+      "blob": "14010fc38a7d85e21572bd4a27c3e8e3336fe75f",
+      "sha256": "5a51545ddb73af6fa068925f92cc1ae5adafe2059613299e94de050b2c649ead"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-heavy-knight-detail.jpg",
+      "blob": "b430c2390c19c5ae734fe21f0650d46fdeda7b80",
+      "sha256": "548a24b981205d495d8855e91fc5801b89a724538a9b0638b61dea73af769db5"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-heavy-knight-ui.jpg",
+      "blob": "86b90938efe3e9149affe739e052da3401b73c23",
+      "sha256": "b9e223d98b2807e970f8f6e45f41064dd81e700e084afe23845b17e206ddd016"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-knight-detail.jpg",
+      "blob": "e27456e2ae357f53b6371da4725ec0b37faf5763",
+      "sha256": "2381719ac973b51d8ab87c45560550cfd650665f6addec1ad7f3de01b48c0ed9"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-knight-ui.jpg",
+      "blob": "d08c7b1f14b19066eb18d6e50cd15d49bce9e15c",
+      "sha256": "d5beb3d4bc1a7b561e30c6125542ecbb625c63cf11a42bc4e879de6ebc63d681"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-light-cavalry-detail.jpg",
+      "blob": "9bed1239503de60c28ef635daae6447925ec68fe",
+      "sha256": "53ba948d7aaceabd05c99cfe44d7c466f5f302abcfc4e7e0201566f87898be9c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-light-cavalry-ui.jpg",
+      "blob": "c7bde3b6bc1f266794d2ff3ba0643d90bff0aa49",
+      "sha256": "7edb03c06a78deb70389d6c71937692da0ed86f54f0194aabfea141d219ac30f"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "blob": "3abff69bb2dc2af5d7bd49f134990b667a42b183",
+      "sha256": "e6ae666f4c4dbeed18bf58745238ea3656694d89e61d73453dca93cf33c4bed8"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-index.json",
+      "blob": "4b2ca35e8a99e6b530d049f701bdcd2f164aac02",
+      "sha256": "0970fe2358ad95b99f2f9b1f5b6ff3cefb3ce07f651dfe6ac0fbb3953f315fc6"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-01.webp",
+      "blob": "44665787f945445c71d851dfa535758c6beed3a6",
+      "sha256": "1342a3d8d5549700c556820ed3760e3b294cd52bfc6e2a7faea4dc1403186dd4"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-02.webp",
+      "blob": "7749d4c7a31e451e0923eefd6bdec23d23252824",
+      "sha256": "0ba95ecc7958eef8fcfdffa1f0775538d6e12abed5a74264d6d7f82c3a5b48d4"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-03.webp",
+      "blob": "50865932e47e25b1adee7259df9ea09072507264",
+      "sha256": "2c71b304cfa7fc3ff29cac9599f8df1859e1efd8d828bfaa6f29517b84079c8c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-04.webp",
+      "blob": "1fcbe387d37ff0b46468bd55fb9d1a6a68988b83",
+      "sha256": "3faad1ba967311583a7063d000719fc7b33e1741670d8ec4dce45af7b91449eb"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-05.webp",
+      "blob": "7d4c35d7201dda066836def916153d2091105504",
+      "sha256": "d5810bb696e02383966b418fc7e2c46b1efb48443350ba2ab30fa77d567105ec"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-06.webp",
+      "blob": "b55d21186f5dc2f236f75f4cb16970a01ef30ecc",
+      "sha256": "c2914bbec3b87577aec9c338648e868a17ea651f422e7dfe05f3c73ef810e36c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-07.webp",
+      "blob": "6bfbdecc2d0bb664ac21776cfd5d40d2027e43b2",
+      "sha256": "d7b951737dbd649dc783a5e421be829904ac318f8634187203cecfeafda95b75"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-08.webp",
+      "blob": "113c064b1f041d93f3e372e8e4b3b663415d210c",
+      "sha256": "cefe6060cf11e22aa2f144a51656f4d013721eaf548960f244ce073f62264ba9"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-09.webp",
+      "blob": "473707a0633e985f236bc363d7265c337443943c",
+      "sha256": "bf9c1daacdbe35846b02ac85cd763d2a04dc728419ece448a0609e57e78b4c52"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-10.webp",
+      "blob": "d84c8822507f1240cc50b6f53459c8eab78b6567",
+      "sha256": "9ef0baa7c7a640685557bf58b881748fc2f238e2990504a3d0f2a7bd15db04a8"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-11.webp",
+      "blob": "7a87c91e420a9ddd9353681721d7797a5e1854d1",
+      "sha256": "e810e31253a819143052e1a561e847478541af11f1941cab2953d9eb8c773be5"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-12.webp",
+      "blob": "43f55a022b92c4c3f20e95d3a65ff61f26aa47c4",
+      "sha256": "8c4e262a9d8122846ebc342ba7874ec37524f5e29efc627b14fd0220a4778c49"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-13.webp",
+      "blob": "7bb7b4a56718bfddeb0c8b74ffbcb410f90ab317",
+      "sha256": "dea69b198dc7fc27d9187cdefdd451478a513d926df2b09baadf1f5919571f62"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-14.webp",
+      "blob": "a3fc1741eb414c73ad622d0ce7bafc8de3a16a24",
+      "sha256": "c08c25ca8a654b230eb419a923a33dfb5f28f606a2a248d9c600b2de8a02e73f"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-15.webp",
+      "blob": "aaf0fd70a51a5287afb5f21b72510639b4f7cfdb",
+      "sha256": "cdbc6b1cae8633f115c2cc4dd7871d00a3b11eaf1b3f89ad8466fc770602a61b"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-16.webp",
+      "blob": "f2524550d690dbbdd11c2f1ea0b2e0dc2115c31f",
+      "sha256": "0cfb175a52b9c00c7ebe8013f591ec9ae2a17b80ae6149b18f3563d2c4710598"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-17.webp",
+      "blob": "4553ba57092f3d9c409bb0a8d94ee2e3fbe8b235",
+      "sha256": "56875c27c1e1d2aba79fe97c24b64e2b0aa582a1a735f1a402c10ef4f68dc02d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-18.webp",
+      "blob": "f16f2a59aa5487f04cc1cc6dadfbf15506749548",
+      "sha256": "b8f36ad6ecb86a8cb59d896fca301e47d8c8fd88c471ea3e392d432907ae8702"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-19.webp",
+      "blob": "6bc1604e4df2e0b712da1282a7fc94708da6a78c",
+      "sha256": "21658b47ffc0cadba6b1499c3c529b84e25474e86e509be8ccbd35e4838d5f0d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-20.webp",
+      "blob": "740a070944988b96337c9988cb256b16b1e6b19d",
+      "sha256": "4c01693aad34be525144752c5bb6981a26d736fbe8e03090fd51f01c75cc5667"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-21.webp",
+      "blob": "23669e61fdf0aebcd9291ed40e84c938ca406198",
+      "sha256": "6ca66a4a6287b9b03f29009837cb1960959878e22eecf2d883ab38399733e79c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-22.webp",
+      "blob": "b957815e94430855caa99e9805a80de1b7d418dc",
+      "sha256": "e48700fc5330fa93c9203569a451490320712072c5d8bd4362f9bb81ccd36f63"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-23.webp",
+      "blob": "3decf5c71cd4afcca723178a79dda8d6e4e7415f",
+      "sha256": "df6be64f1950235fdc35ebe38c7e7e1e6f768e3f6ee88d0f24342c0ecfe345ea"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-24.webp",
+      "blob": "ee98dc30c051dc1eee78b518b98733adf88721cc",
+      "sha256": "999a3a259f6b0047c2d8b4794321a5f37144c8204fcfad5c4de078e95c84749c"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-25.webp",
+      "blob": "aba0710e23012a20ddcb61cfe27713bbfc16e319",
+      "sha256": "409dc8628d4365aab4679f81d1a8cde459bf26643cc6f2648b7d10e2634364cd"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-26.webp",
+      "blob": "6546560418f28f3215756eda4cbe50ce6cff449c",
+      "sha256": "cc0f5a2f72a7a2dd67095082f41269318b7d72fffac1981fd6b6acd4a42962bc"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-27.webp",
+      "blob": "cdf1de4bc4a8860bbc3056791e99c2a4d02b636b",
+      "sha256": "c864348290c28fef05be276041d5c02817aff40ca729fa20cafab625fb672f73"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-28.webp",
+      "blob": "a1f164aa144d5fa3c7e8e5d7479bc7b323071a00",
+      "sha256": "d8f1f26cce576d503e37c015bfdf9fb9e101fadfdbb61b640e7877354cbcaf0d"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-29.webp",
+      "blob": "345df91bf13e2c8f691aa13b4cd4b88447c06e05",
+      "sha256": "74ab636f5023d40e436cf9a5e5e84bc63511c46618d083400f614bfe5fa09e99"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-30.webp",
+      "blob": "639882338f4d8ecabd13d1136f5d6e3549966a4c",
+      "sha256": "8f7cafbf85bbefa97377240d795b9d573d74d7c15080b4fb2a89eea90a35c930"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-31.webp",
+      "blob": "a8856cf67c7dd541ee228b750e4bcb34323ea310",
+      "sha256": "7620597503d9c999c66fda19ae7b7929b1b59903d12c91fd8652d0c5749cb219"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-32.webp",
+      "blob": "0245876ad5071108ca542d9c7c61f1e4cd06f355",
+      "sha256": "c4f2509fb74390e43ed340bc650daf9f6a83c67f19f653c8fee2cc0b221cc6e0"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/compatibility.json",
+      "blob": "13cb3c71eb3e206c9ced9d49e539156369f854de",
+      "sha256": "81e29775ad2b38cb89659625f03ab4cdda05e2e00c8a4239fb94aaf87bbfe71e"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/legacy-measurements.json",
+      "blob": "80634e9f8eaa9c303c66ff80d35b6125b2a799fe",
+      "sha256": "1ab6f936d0a54bfc165cdbbd165905adaa176613900104238dd25833cdf593f2"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/protected.json",
+      "blob": "1ae0c4fd1fd911d15bbefea5e0e5ab327d6bcb31",
+      "sha256": "4c2e6e6e17c8b99413b2c8672ac3c0bef4f6263b442f796238665eb569f67531"
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/validation.json",
+      "blob": "da6fe914ec6a7f237996ed8da3b833813d0a563c",
+      "sha256": "96c462acabe4fbdbf2fc30cbf3011bad60880a6edc7a322f72f13bab3064975f"
+    },
+    {
+      "path": "docs/art-unification/stacked-delivery-20261029/PR-body.md",
+      "blob": "61de97c51f962c7933b43573cd334e583137d849",
+      "sha256": "bb2c5c225268f4e87df5cabf9d78223b3b841eb5b67634008d55df22cb450db5"
+    },
+    {
+      "path": "docs/art-unification/stacked-delivery-20261029/REPORT.md",
+      "blob": "02c20da2829180cfbe27ad35444c0110ad78bb97",
+      "sha256": "ee53e7f667c46081551d02fa5caad5df469b5869afb182e159d7a632e4928086"
+    },
+    {
+      "path": "docs/art-unification/stacked-delivery-20261029/status.json",
+      "blob": "4d8cfb5939d70ec1fdeda71d3ce9efe5edc07b51",
+      "sha256": "5b048a524433ec84cce8fa4acdd527ac5f56dbe4af121287bd083d82058ee161"
+    },
+    {
+      "path": "docs/art-unification/stacked-delivery-20261029/two-round-files.json",
+      "blob": "ece8ffbeb29e1ebd07ce850205de9b9fd2479b08",
+      "sha256": "4d42c63ad61e4578420eeacd00bc991331ed127054367e0613656f8be1d556e9"
+    },
+    {
+      "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+      "blob": "e2d3d55abe58b6e7d01916af6de571f7fb4d5dc5",
+      "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b"
+    },
+    {
+      "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+      "blob": "aa906baaa18dc736260764ea15b46e3ec75ee4e6",
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+    },
+    {
+      "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+      "blob": "7569119509be11b688da89f23978769cb8081197",
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83"
+    },
+    {
+      "path": "public/art/unified/units/knight.webp",
+      "blob": "2e303b65b06599eab7f141820ef59e04f4ecc735",
+      "sha256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73"
+    },
+    {
+      "path": "public/art/unified/units/light-cavalry.webp",
+      "blob": "bb9d7ed6d702145034a2572654cecba7d7a3b711",
+      "sha256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5"
+    },
+    {
+      "path": "releases/notes/art-player-feedback-20261029.json",
+      "blob": "4a5e0aea3098017c84e2beed69b8b652d436bb0f",
+      "sha256": "9e6f5a277d670e8259a41f7f7b409703c7c65070c97ecda29651582bbf95853c"
+    },
+    {
+      "path": "scripts/apply-player-art-20261029.py",
+      "blob": "98a6470c0b1e313975245176dcdaf975c3ff6bab",
+      "sha256": "0df2832cb47b8d4189a6d82479c03794c2252175a05a3d0a4efd21511af686e0"
+    },
+    {
+      "path": "scripts/art-preview.tsx",
+      "blob": "a06216cea8be4318b70c88a2f178f74879d56dd5",
+      "sha256": "0665b553e6bfca3559fcac9e2e8540a82820436e6f9a176559572c8771b49d56"
+    },
+    {
+      "path": "scripts/check-city-visuals.py",
+      "blob": "a77b778474e4d811adaa88c65a1d9b88d9f87fa9",
+      "sha256": "bcb20902d7b225f28a7c38fd7a9200992635361465a92d2cb2b9fbcfc1eb0987"
+    },
+    {
+      "path": "scripts/check-elite-review.py",
+      "blob": "47a6c406a8dd27c81c2bc0bed34db0b80dd1ebaf",
+      "sha256": "b092ae89aa6f915bd1e5c0958627781b991cf29b66674a0936e484b89dab271b"
+    },
+    {
+      "path": "scripts/check-player-feedback.py",
+      "blob": "c55239c61f0b1b5ccc29cba12e278c749b585360",
+      "sha256": "70e4e967ac172eef214d3dbb44e5723a10461463d20369b2d88016fa563707b6"
+    },
+    {
+      "path": "scripts/elite-review-boards.py",
+      "blob": "dc67b67f542fe342999dbc8e19bbdf3ae6e3cf8b",
+      "sha256": "e1b1ceb47db6597957c029afb15eb6882ec254188866eeaced0275a06fa8081f"
+    },
+    {
+      "path": "scripts/elite-review.html",
+      "blob": "6afe0e89df218fe6809117834960e5a6efe89453",
+      "sha256": "8b95e94e83361209790c1a2ae50e01a1df4c2e04be8a13999afaa35a355cf7ae"
+    },
+    {
+      "path": "scripts/elite-review.tsx",
+      "blob": "7be723c10e295f81bde1f575999ecc2038cdc800",
+      "sha256": "fbcb6bbb217a7d1449cebbdf5b60a48512b81a060d9a78f0017e37d258ee50c0"
+    },
+    {
+      "path": "scripts/export-elite-review.py",
+      "blob": "5cb26b0bd1bbaa22bcdbfec7134fc8082eba0ea1",
+      "sha256": "22f5a2c7ed0631d53619a31a9de5188a740197f09e38f08c9f4e539322c5518c"
+    },
+    {
+      "path": "scripts/measure-legacy-city-ground.py",
+      "blob": "c230f76b96f17764ee7c0eb78a4b5c8c1dd70ec4",
+      "sha256": "6493aadabaa6e462450b569cf02e5d231b30ece7abdfba35d4d58bdfca326d78"
+    },
+    {
+      "path": "scripts/pack-player-feedback-captures.py",
+      "blob": "f3ffbf9b026f7276ef787b91ca9650eb88d0443e",
+      "sha256": "95c3e6d35e05c01ff9d9f5637041c331c781355a13754928a93f6e21849297ff"
+    },
+    {
+      "path": "scripts/player-feedback-boards.py",
+      "blob": "dc9677a95bd46697c1f312756ed87d1d20979217",
+      "sha256": "2b3ba48654bab929dc7c47b7fc4400b6d66b68f689a458168dc432e803bcf89c"
+    },
+    {
+      "path": "scripts/prepare-art-candidates.py",
+      "blob": "041ed91f6310cdf1b0065e25b8e0a9ddf36a73f1",
+      "sha256": "28d134ca5e13bae00603b95bf70a472bcc76ba439c5ccffd714bf667cef9bb46"
+    },
+    {
+      "path": "scripts/prepare-elite-review.py",
+      "blob": "33582de07ba820184361c3a6dc6365456e520693",
+      "sha256": "0cb6db489a81b2c5f4bcfd5b93db9b1a5a5c4362af5494b327debf72b51d68e2"
+    },
+    {
+      "path": "scripts/verify-elite-candidates.mjs",
+      "blob": "6fb83fe81ef31c321e09201e0db79b87ed77c6da",
+      "sha256": "e9e498bda6b656ee620d75bd06798639bd25f21c1e6c815f17a19ba15a8a791f"
+    },
+    {
+      "path": "scripts/verify-player-feedback-cities.mjs",
+      "blob": "5a31bf2fc7c1f77f19e09cedb369757e18bd4ac6",
+      "sha256": "2626568921868eb7b2cc7aa5cfa91ea8e422c7a42342e56d39532635e42a0be3"
+    },
+    {
+      "path": "scripts/verify-player-feedback-units.mjs",
+      "blob": "bc3a8ca0adf972b7f450838f9a5ff11159117e97",
+      "sha256": "46ca9b460f20e52301cc29fd95bb337aac7a7d538c439f6a3cb4f0d393b9bda9"
+    },
+    {
+      "path": "src/game/MiniatureCity.tsx",
+      "blob": "404b4a2f64edadd79787c8ae02d2c17494903f9c",
+      "sha256": "0f4aec090b581fa5dac08fce5c65289ea08d5879685e8baee622a77b10b9ee99"
+    },
+    {
+      "path": "src/game/game.css",
+      "blob": "d53cd3d5b5d3f0a7ff67b84d7e1277d63dacfc50",
+      "sha256": "27f940cd0e2afd89ba6d34c9a6f64d01b917977f25b17461decb29878c16f87c"
+    },
+    {
+      "path": "src/game/presentation/legacyMiniature.test.tsx",
+      "blob": "9fb1bba58de45a35dc2e06da9e1c7feb2902f2da",
+      "sha256": "4645737d7206b3c8cf774640807a0ddc82ac1f87f8f1097531b72d8c498679ed"
+    },
+    {
+      "path": "src/game/presentation/legacyMiniature.ts",
+      "blob": "b7c7060278ed2b218a060ff65d90571e13958c25",
+      "sha256": "140673411ece0d26139d64580cda1ba58715f11e6ff3ebe5497d8d56d36b1a80"
+    }
+  ]
+}
