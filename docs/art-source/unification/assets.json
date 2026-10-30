@@ -9431,9 +9431,10 @@
   {
     "key": "elite.guard.civ_japan",
     "group": "units",
-    "subject": "Advanced o-yoroi, kabuto, shoulder and limb protection; two-handed katana.",
-    "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+    "subject": "Player-approved candidate1: human samurai in oni menpo and broad o-yoroi, two-handed katana overhead and forward step.",
+    "path": "public/art/unified/units/elite.guard.civ_japan.approved-candidate-1.webp",
     "artGate": {
+      "role": "ARMY-PORTRAIT",
       "scores": [
         2,
         2,
@@ -9442,27 +9443,29 @@
         2,
         2,
         1,
-        1,
         2,
-        2
+        2,
+        1
       ],
       "total": 18,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
-      "playerApproval": "待驗",
-      "reviewedSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
       "hardGate": {
         "anatomy": "PASS_SELF_REVIEW",
-        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
         "extraLimbs": "NONE_OBSERVED",
         "criticalDefectOverridesScore": true
       },
-      "notes": "V1 rejected for tier readability. V2 adds broad iron cuirass, two large o-sode, menpo and reinforced kabuto/shikoro. Actual100px distinction clear; fine armor detail remains subtle at native64 (item08=1).",
-      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
-      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+      "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+      "playerApproval": "APPROVED_CANDIDATE_1",
+      "independentReview": "待驗",
+      "reviewedSHA256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+      "reviewer": "Player approved candidate1. Codex validates exact source pixels and actual ArmyView/detail plus native512/128/64 at320/390/1440; independent art review remains pending.",
+      "notes": "Human-worn forged oni menpo; overhead single drawn katana and two hands on one hilt reviewed at full scale. High arc remains at64; mask details do not. Waist auxiliary sheathed short-sword hilt remains visible, not a second drawn blade.",
+      "formalUIEffectLimit": "Now installed as approved Japanese Runtime; source self-review score remains18, no score increase claimed.",
+      "browserEvidence": "docs/art-unification/japan-approved-20261030/browser/army/result.json",
+      "nativeEvidence": "docs/art-unification/japan-approved-20261030/browser/gallery/result.json"
     },
     "role": "ARMY-PORTRAIT",
-    "batch": "feedback-20261029-elite.guard.civ_japan",
+    "batch": "japan-player-approved-candidate-1-runtime-20261030",
     "cropRect": [
       0,
       0,
@@ -9473,15 +9476,22 @@
       512,
       512
     ],
-    "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
-    "bytes": 37626,
+    "sha256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+    "bytes": 237346,
     "atlasExtraction": null,
     "alphaPolicy": "dark-opaque",
-    "approver": null,
+    "approver": "PLAYER",
+    "approvedArtworkCommit": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+    "approvedCandidate": 1,
+    "normalization": "Byte-for-byte copy of the player-approved candidate1 512px lossless WebP. No generation, conversion, crop, resize or color changes to Runtime.",
+    "approvedCandidateSource": {
+      "path": "docs/art-unification/elite-final-20261030/japan/candidates/japan-1-oni-oyoroi-overhead.webp",
+      "sha256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8"
+    },
     "supersedes": {
       "key": "elite.guard.civ_japan",
       "group": "units",
-      "subject": "Elite Japanese samurai: heavy black lacquered tosei-gusoku armor with large shoulder guards, face menpo and tall crest, long nodachi held in two hands above shoulder and aggressive forward stance; different helmet, weapon and posture",
+      "subject": "Advanced o-yoroi, kabuto, shoulder and limb protection; two-handed katana.",
       "path": "public/art/unified/units/elite.guard.civ_japan.webp",
       "artGate": {
         "scores": [
@@ -9492,37 +9502,90 @@
           2,
           2,
           1,
-          2,
+          1,
           2,
           2
         ],
-        "total": 19,
+        "total": 18,
         "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-        "reviewer": "Codex visual self-review, not an independent release approval",
+        "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
         "playerApproval": "待驗",
-        "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-        "browserEvidence": "docs/art-unification/browser/result.json",
-        "comparisonBoards": "docs/art-unification/boards/"
+        "reviewedSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+        "hardGate": {
+          "anatomy": "PASS_SELF_REVIEW",
+          "equipmentAndGrip": "PASS_SELF_REVIEW",
+          "extraLimbs": "NONE_OBSERVED",
+          "criticalDefectOverridesScore": true
+        },
+        "notes": "V1 rejected for tier readability. V2 adds broad iron cuirass, two large o-sode, menpo and reinforced kabuto/shikoro. Actual100px distinction clear; fine armor detail remains subtle at native64 (item08=1).",
+        "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+        "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
       },
       "role": "ARMY-PORTRAIT",
-      "batch": "army-elite-guards",
+      "batch": "feedback-20261029-elite.guard.civ_japan",
       "cropRect": [
-        514,
-        500,
-        508,
-        522
+        0,
+        0,
+        1254,
+        1254
       ],
       "dimensions": [
         512,
         512
       ],
-      "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6",
-      "bytes": 36716,
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "bytes": 37626,
       "atlasExtraction": null,
       "alphaPolicy": "dark-opaque",
       "approver": null,
-      "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
-      "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_japan.webp"
+      "supersedes": {
+        "key": "elite.guard.civ_japan",
+        "group": "units",
+        "subject": "Elite Japanese samurai: heavy black lacquered tosei-gusoku armor with large shoulder guards, face menpo and tall crest, long nodachi held in two hands above shoulder and aggressive forward stance; different helmet, weapon and posture",
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual self-review, not an independent release approval",
+          "playerApproval": "待驗",
+          "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+          "browserEvidence": "docs/art-unification/browser/result.json",
+          "comparisonBoards": "docs/art-unification/boards/"
+        },
+        "role": "ARMY-PORTRAIT",
+        "batch": "army-elite-guards",
+        "cropRect": [
+          514,
+          500,
+          508,
+          522
+        ],
+        "dimensions": [
+          512,
+          512
+        ],
+        "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6",
+        "bytes": 36716,
+        "atlasExtraction": null,
+        "alphaPolicy": "dark-opaque",
+        "approver": null,
+        "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+        "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_japan.webp"
+      },
+      "revision": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+      "preservedOutput": "public/art/unified/units/elite.guard.civ_japan.webp"
     }
   },
   {

@@ -1,7 +1,8 @@
 """Strict successor gate for the single player-approved Chinese portrait.
 
 Historical manifests remain immutable: their original assets stay on disk.
-Only one registry value and one new public file are authorized by this migration.
+This Chinese migration remains exact; a separately pinned Japanese successor
+is now allowed following the player approval recorded in approved_japan_art.
 Uses the standard library so GitHub's art checks need no extra dependencies.
 """
 import copy
@@ -10,6 +11,7 @@ import json
 import struct
 import subprocess
 from pathlib import Path
+from approved_japan_art import validate_approved_japan
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / 'docs/art-unification/elite-final-20261030'
@@ -41,8 +43,10 @@ def validate_approved_china():
     previous = json.loads((REVIEW / 'before/artAssets.json').read_text())
     expected = copy.deepcopy(previous)
     expected['units'][KEY] = RUNTIME.removeprefix('public/')
+    japan = validate_approved_japan()
+    expected['units'][japan['key']] = japan['path'].removeprefix('public/')
     current = json.loads((ROOT / REGISTRY_PATH).read_text())
-    assert current == expected, 'Only the approved Chinese registry value may change; Japan and every other mapping are locked.'
+    assert current == expected, 'Only the two exact player-approved Chinese/Japanese successors may change.'
     data = (ROOT / RUNTIME).read_bytes()
     assert data[:4] == b'RIFF' and data[8:16] == b'WEBPVP8L' and data[20] == 0x2f
     bits = int.from_bytes(data[21:25], 'little')
@@ -57,7 +61,7 @@ def validate_approved_china():
     assert asset['approver'] == 'PLAYER' and asset['dimensions'] == [512, 512]
     base = '34be1b5c2dba64b2d84c4a8bfbc8656ad5d726c6'
     old_assets = json.loads(subprocess.check_output(['git', '-C', str(ROOT), 'show', base + ':docs/art-source/unification/assets.json'], text=True))
-    assert [a for a in assets if a['key'] != KEY] == [a for a in old_assets if a['key'] != KEY], 'Other asset metadata changed'
+    assert [a for a in assets if a['key'] not in [KEY, japan['key']]] == [a for a in old_assets if a['key'] not in [KEY, japan['key']]], 'Other asset metadata changed'
     batches = json.loads((ROOT / 'docs/art-source/unification/batches.json').read_text())
     old_batches = json.loads(subprocess.check_output(['git', '-C', str(ROOT), 'show', base + ':docs/art-source/unification/batches.json'], text=True))
     previous_asset = next(a for a in old_assets if a['group'] == 'units' and a['key'] == KEY)
@@ -67,7 +71,13 @@ def validate_approved_china():
             for cell in batch['cells']:
                 if cell.get('key') == KEY:
                     cell['supersededBy'] = asset['batch']
-    assert [b for b in batches if b['id'] != asset['batch']] == expected_batches, 'Other batch metadata changed'
+    japan_asset = next(a for a in assets if a['key'] == japan['key'])
+    for batch in expected_batches:
+        if batch['id'] == japan_asset['supersedes']['batch']:
+            for cell in batch['cells']:
+                if cell.get('key') == japan['key']:
+                    cell['supersededBy'] = japan_asset['batch']
+    assert [b for b in batches if b['id'] not in [asset['batch'], japan_asset['batch']]] == expected_batches, 'Other batch metadata changed'
     added = [b for b in batches if b['id'] == asset['batch']]
     assert len(added) == 1 and added[0]['sourceSha256'] == RAW_SHA
     assert added[0]['approvedArtworkCommit'] == record['approvedArtworkCommit']

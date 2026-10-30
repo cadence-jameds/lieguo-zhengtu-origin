@@ -2,8 +2,10 @@
 import hashlib,json,subprocess,sys
 from pathlib import Path
 from approved_china_art import validate_approved_china, REGISTRY_PATH, PREVIOUS_REGISTRY_SHA
+from approved_japan_art import validate_approved_japan
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/player-feedback-20261029';S=R/'docs/art-source/player-feedback-20261029';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text())
 approved=validate_approved_china()
+japan=validate_approved_japan()
 selected=load(S/'outputs.json');allowed={r['path'] for r in selected};assert len(selected)==5
 for r in selected:
  successor=R/'docs/art-unification/elite-review-20261029/runtime.json'
@@ -25,7 +27,7 @@ for p,h in protected['publicTree'].items():
 for p,h in protected['unitDirectory'].items():
  if p not in allowed:assert sha(R/p)==h,('Unrequested unit changed',p)
 registry=load(R/'src/game/presentation/artAssets.json')['units']
-for r in selected:assert registry[r['key']]==(approved['path'] if r['key']==approved['key'] else r['path']).removeprefix('public/')
+for r in selected:assert registry[r['key']]==(approved['path'] if r['key']==approved['key'] else japan['path'] if r['key']==japan['key'] else r['path']).removeprefix('public/')
 city=load(D/'browser/cities/result.json');assert city['status']=='PASS' and not city['errors'];assert city['counts']=={'cases':288,'paired':144,'changed':27,'unchanged':117}
 assert len(city['pairs'])==144
 for p in city['pairs']:assert p['slotStable'] and p['wallsStable'] and p['samePixels']!=p['changedExpected']
@@ -59,4 +61,4 @@ if (D/'capture-index.json').exists():
     else:assert caps['records'][c['source']]['originalSHA256']==c['sha256']
 
 subprocess.run([sys.executable,str(R/'scripts/check-elite-final-review.py')],cwd=R,check=True)
-print('PASS: historical five portraits/evidence preserved; approved Chinese successor verified; heavy cavalry, other units, technology, legacy atlases, imperial settings and world110% unchanged. Japanese player choice and independent review remain pending.')
+print('PASS: historical five portraits/evidence preserved; approved Chinese/Japanese successors verified; heavy cavalry, other units, technology, legacy atlases, imperial settings and world110% unchanged. Both player choices approved; independent review remains pending.')
