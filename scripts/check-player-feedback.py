@@ -3,6 +3,7 @@ import hashlib,json,subprocess,sys
 from pathlib import Path
 from approved_china_art import validate_approved_china, REGISTRY_PATH, PREVIOUS_REGISTRY_SHA
 from approved_japan_art import validate_approved_japan
+from city_ui_successor import accepts_ui_successor
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/player-feedback-20261029';S=R/'docs/art-source/player-feedback-20261029';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text())
 approved=validate_approved_china()
 japan=validate_approved_japan()
@@ -20,7 +21,7 @@ for p,h in protected['files'].items():
  if p==REGISTRY_PATH:assert h==PREVIOUS_REGISTRY_SHA
  elif isinstance(h,dict):
   for f,v in h.items():assert sha(R/f)==v
- else:assert sha(R/p)==h,('Protected approved art/display changed',p)
+ else:assert sha(R/p)==h or accepts_ui_successor(p,h),('Protected approved art/display changed',p)
 for p,h in protected['publicTree'].items():
  if p not in allowed:
   data=(R/p).read_bytes();assert hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()==h,('Unrequested public asset changed',p)
@@ -34,7 +35,9 @@ for p in city['pairs']:assert p['slotStable'] and p['wallsStable'] and p['samePi
 units=load(D/'browser/units/result.json');assert units['status']=='PASS' and not units['errors'] and len(units['rows'])==27
 compat=load(D/'compatibility.json')
 for p,h in compat['renderFiles'].items():assert sha(R/p)==h,('Stale source evidence',p)
-for p,r in compat['updates'].items():assert sha(R/p)==r['currentSha256'] and sha(R/r['baselineFile'])==r['baselineSha256']
+for p,r in compat['updates'].items():
+ assert sha(R/r['baselineFile'])==r['baselineSha256']
+ assert sha(R/p)==r['currentSha256'] or accepts_ui_successor(p,r['currentSha256']),('Stale successor source evidence',p)
 
 history=load(S/'generation-history.json')
 for r in history:
@@ -61,4 +64,4 @@ if (D/'capture-index.json').exists():
     else:assert caps['records'][c['source']]['originalSHA256']==c['sha256']
 
 subprocess.run([sys.executable,str(R/'scripts/check-elite-final-review.py')],cwd=R,check=True)
-print('PASS: historical five portraits/evidence preserved; approved Chinese/Japanese successors verified; heavy cavalry, other units, technology, legacy atlases, imperial settings and world110% unchanged. Both player choices approved; independent review remains pending.')
+print('PASS: historical five portraits/evidence preserved; approved Chinese/Japanese successors verified; heavy cavalry, other units, technology, legacy atlases, imperial calibration and world110% unchanged. Display sources remain exact or have the pinned PR #49 UI successor; independent review remains pending.')

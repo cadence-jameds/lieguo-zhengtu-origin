@@ -9,6 +9,7 @@ import subprocess
 from pathlib import Path
 from approved_china_art import validate_approved_china
 from approved_japan_art import validate_approved_japan, BASE, previous
+from city_ui_successor import accepts_ui_successor
 
 R = Path(__file__).resolve().parents[1]
 D = R / 'docs/art-unification/elite-final-20261030'
@@ -60,7 +61,7 @@ for section in ['sources', 'files']:
         if section == 'sources' and path == 'src/game/presentation/artAssets.json':
             assert hashlib.sha256(previous(path)).hexdigest() == expected  # preserved262d9ef review; current mapping validated above
         else:
-            assert sha(R / path) == expected, ('Stale browser evidence', path)
+            assert sha(R / path) == expected or (section == 'sources' and accepts_ui_successor(path, expected)), ('Stale browser evidence', path)
 gallery = load(D / 'browser/gallery/result.json')
 army = load(D / 'browser/army/result.json')
 assert gallery['status'] == army['status'] == 'PASS' and not gallery['errors'] and not army['errors']

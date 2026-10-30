@@ -5,6 +5,7 @@ import struct
 import subprocess
 from pathlib import Path
 from approved_japan_art import validate_approved_japan, BASE
+from city_ui_successor import accepts_ui_successor
 
 R = Path(__file__).resolve().parents[1]
 D = R / 'docs/art-unification/japan-approved-20261030'
@@ -26,7 +27,7 @@ for row in sizes:
 manifest = load(D / 'browser-manifest.json')
 for section in ['sources', 'files']:
     for p, expected in manifest[section].items():
-        assert sha(R / p) == expected, ('Stale current Japanese evidence', p)
+        assert sha(R / p) == expected or (section == 'sources' and accepts_ui_successor(p, expected)), ('Stale current Japanese evidence', p)
 army = load(D / 'browser/army/result.json')
 gallery = load(D / 'browser/gallery/result.json')
 assert army['status'] == gallery['status'] == 'PASS'

@@ -1,6 +1,7 @@
 """Standard-library CI integrity gate for actual browser/source scale evidence."""
 import hashlib,json,subprocess,sys
 from pathlib import Path
+from city_ui_successor import accepts_ui_successor
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/city-fit'
 m=json.loads((D/'measurements.json').read_text())
 compat_path=R/'docs/art-unification/player-feedback-20261029/compatibility.json'
@@ -9,6 +10,10 @@ validated=False
 for p,h in m['sourceFiles'].items():
  current=hashlib.sha256((R/p).read_bytes()).hexdigest()
  if current==h:continue
+ if accepts_ui_successor(p,h):
+  if not validated:
+   subprocess.run([sys.executable,str(R/'scripts/check-player-feedback.py')],cwd=R,check=True);validated=True
+  continue
  assert compat and p in compat['updates'],('Stale display evidence',p)
  entry=compat['updates'][p];assert entry['baselineSha256']==h and entry['currentSha256']==current
  if not validated:
@@ -42,4 +47,4 @@ for name,b in man.items():
   for c in row:
    rec=captures['records'][c['source']];assert rec['originalJpegSHA256']==c['sha256'];assert c['archive']==rec
    if (R/c['source']).exists():assert hashlib.sha256((R/c['source']).read_bytes()).hexdigest()==c['sha256']
-print('PASS: 912 building measurements; 72 unchanged town anchor/slot cases; 162 map scale/foot comparisons; 19 six-civilization boards; 18 hit-boundary cases; no stale source or image references.')
+print('PASS: historical 912 building measurements; 72 town anchor/slot cases; 162 map scale/foot comparisons; 19 six-civilization boards; 18 hit-boundary cases. Sources remain exact or have the pinned PR #49 UI successor; historical measurements are not rewritten.')
