@@ -508,7 +508,26 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 
 /* Level overlays share plot geometry and art transforms, while staying above neighboring roofs. */
 .town-level-overlays{position:absolute;inset:0;z-index:201;pointer-events:none}
-.town-level{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;font:700 13px/1 system-ui,sans-serif;font-variant-numeric:tabular-nums;pointer-events:none}
+/* Share the established parcel palette without changing outskirts rules. */
+.town-composition{container-type:inline-size;--town-label-background:#fff4dfe8;--town-label-color:#4a4129;--town-label-border:#8b795899}
+.town-level,.town-gate>.town-level{position:absolute;left:50%;top:var(--town-label-y,56%);transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:4px;width:max-content;max-width:122px;height:24px;box-sizing:border-box;padding:2px 7px;border-radius:12px;border:1px solid var(--town-label-border);background:var(--town-label-background);color:var(--town-label-color);font:400 12px/1 system-ui,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap;pointer-events:none}
+.town-level b{color:var(--town-label-color);font-weight:700;flex-shrink:0}
+.town-level .town-name{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.quiet-town-labels .town-level{width:24px;max-width:24px;padding:0;border-radius:50%;gap:0}
+.town-gate>.town-level{top:75%}
+/* Compact panorama capsules follow scene width; reserve the entire completed level. */
+.mobile-layout .town-composition:not(.town-close):not(.quiet-town-labels) .town-level{font-size:10px;height:16px;padding:1px 2px;gap:2px;max-width:10cqw;border-radius:8px}
+.town-level-anchor:is(.building-lumbermill,.building-masonry) .town-level{max-width:64px}
+.town-level-anchor.town-center{--town-label-y:50%}
+.town-level-anchor.building-monastery{--town-label-y:51%}
+.town-level-anchor.building-masonry,.town-level-anchor.building-lumbermill{--town-label-y:60%}
+/* Only phone close-up artwork grows. Plot buttons, anchors and panoramas stay fixed. */
+.mobile-layout .town-close :is(.town-lot,.town-level-anchor){--town-close-scale:1.45}
+.mobile-layout .town-close :is(.town-lot,.town-level-anchor):is(.building-warehouse,.building-market,.building-range){--town-close-scale:1.32}
+.mobile-layout .town-close :is(.town-lot,.town-level-anchor):is(.building-academy,.building-barracks,.building-stable,.building-workshop){--town-close-scale:1.18}
+.mobile-layout .town-close :is(.town-lot,.town-level-anchor):is(.town-center,.building-castle){--town-close-scale:1}
+.mobile-layout .town-close .town-building-art{scale:var(--town-close-scale)}
+.mobile-layout .town-close .town-level{transform:translate(-50%,-50%) scale(calc(1 / var(--town-close-scale,1)))}
 
 /* Existing legacy lower-row cities sit inside their wall rather than on its rim. */
 .outskirts-center .miniature-city.walled.grounded-legacy .miniature-city-art{transform:translateY(var(--legacy-ground-y));pointer-events:none}
