@@ -126,7 +126,9 @@ def validate_ui_successor(root=ROOT):
 
 def accepts_ui_successor(path, predecessor_sha, root=ROOT):
     if path not in SOURCES:
-        return False
+        # Separately pinned task revision; this never admits art/calibration edits.
+        from growth_tasks_successor import accepts
+        return accepts(path, predecessor_sha, root)
     record = validate_ui_successor(root)
     return predecessor_sha in record['changes'][path]['acceptedPredecessorSha256']
 
