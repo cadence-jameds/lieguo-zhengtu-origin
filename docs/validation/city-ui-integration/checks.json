@@ -1,0 +1,90 @@
+{
+  "baseCommit": "bfe242939a791350c4d4a2c0b262e4891266684e",
+  "scope": "UI only; five runtime files; no rule, save, simulation, artwork or AGE_NAMES changes",
+  "features": {
+    "singleRowCityActions": "PASS",
+    "duplicateCityEraBadgesRemoved": "PASS",
+    "twoLineDynamicMobileEra": "PASS",
+    "obsoleteImperialMarkerAudit": "PASS",
+    "centeredCompletedBuildingLevels": "PASS"
+  },
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pagesPathAndPWA": "PASS",
+  "releaseBuildConsistency": "PASS",
+  "targeted": {
+    "status": "PASS",
+    "tests": 20,
+    "finalRetestTests": 13
+  },
+  "browser": {
+    "status": "PASS",
+    "cases": 39,
+    "finalViewportCaptures": 4,
+    "sizes": [
+      "320x568",
+      "390x844",
+      "844x390",
+      "1440x900"
+    ],
+    "httpErrors": 0,
+    "pageErrors": 0
+  },
+  "artPaths": {
+    "counts": {
+      "units": 44,
+      "technologies": 82,
+      "buildingTypes": 20,
+      "buildingCivilizationAgeCombinations": 480,
+      "cities": 24,
+      "fieldAgeCombinations": 96
+    },
+    "status": "PATH_PASS",
+    "failures": [],
+    "failureCount": 0
+  },
+  "artIntegrity": {
+    "status": "PASS",
+    "sourceBatches": 53,
+    "assets": 198,
+    "runtimeBytes": 17504806,
+    "largestBytes": 1946330,
+    "failures": []
+  },
+  "mainLegacyArtTargeted": {
+    "passed": 20,
+    "failed": 0,
+    "files": [
+      "src/game/batch220.test.tsx",
+      "src/game/constructionArt.test.tsx"
+    ]
+  },
+  "fullRegression": {
+    "status": "FAIL",
+    "passed": 2104,
+    "failed": 1,
+    "skipped": 1,
+    "failedFile": "src/game/formal/runtime.test.ts",
+    "failedTest": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+    "reason": "30000ms timeout in full run; runtime source/test unchanged from main",
+    "currentIsolatedRetry": {
+      "status": "PASS",
+      "durationMs": 16507.75
+    },
+    "mainBaselineRetry": {
+      "status": "PASS",
+      "durationMs": 15951.37
+    },
+    "skippedTest": {
+      "file": "src/game/batch210.test.tsx",
+      "name": "user late-game save remains valid after six more world hours",
+      "reason": "REALM_REGRESSION_SAVE was not supplied; no private save requested or used"
+    }
+  },
+  "physicalPhone": "SKIP: not available in this cloud environment",
+  "existingAcceptance": {
+    "B5E1": "HOLD",
+    "AstraGate": "not PASS"
+  },
+  "deployment": "Not requested; not performed"
+}
