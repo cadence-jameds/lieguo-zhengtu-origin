@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "7f184d526019d40caf370d2b0fe3ed3ba7e8c66a",
+  "uiCommit": "96fcadb5c47e6533066ede29ce4dd631488e3da8",
+  "changes": {
+    "src/game/game.css": {
+      "before": "0444a47ec824fa0542f427e1a3eb0d442924e7820f9a8889e97057381427a281",
+      "after": "091ce21d8170ccac8ff86a00abc93c83b44651bcae97b6ba6ea0145da2bbe085"
+    },
+    "src/game/presentation/CityScenes.tsx": {
+      "before": "1794153c0d49bf2e07e60aa40a4d5bc693e52a4bae22fe5726ccd20c306bedf6",
+      "after": "7b910d1879aaaaa37b96c7197e11ba71d08ba8f5c8b96aef49830279430acfb0"
+    }
+  },
+  "invariants": {
+    "scripts/art-preview-world.ts": "ff76375bc6950f64d961dbea82740d827629a4cc9461dc374bc58de1d5ce2bd7",
+    "src/game/FormalWorldMap.tsx": "bf3ced0883728d1c2fa86109764b80a3e7899127ce08101e77680e14016f5bf9",
+    "src/game/MiniatureCity.tsx": "0f4aec090b581fa5dac08fce5c65289ea08d5879685e8baee622a77b10b9ee99",
+    "src/game/presentation/Shell.tsx": "88785f63068ebc940d1ebb51f8448253d6f2f34788a6b19e7bf240a66a7efff7",
+    "src/game/presentation/artAssets.json": "ac6d8be190f14588908b69072de26da1b1ecaa16724ffb771c6c4aca6633f724",
+    "src/game/presentation/artMap.ts": "b2f73167f92a1b1d4e57cfe5f651c52183c47fc3edf48feff4459a5ad175d4e7",
+    "src/game/presentation/cityVisuals.ts": "32679c06212a5d9d852fd94a267e7eddfafe47d1048c3105a0b9e57324c32f41",
+    "src/game/presentation/parity.css": "8924ff843d9a42f807bdddc18b953c556a5629acb75712cc1e87ce5522a4eb56"
+  },
+  "historical": {
+    "docs/art-unification/city-fit/measurements.json": "6283ef66707173b7e25993be61b677c898480672f05c5ab1ad8557e2ff826825",
+    "docs/art-unification/elite-final-20261030/browser-manifest.json": "f957ccb0c456bbef35a15642a71aaf1a6c10d63b1b68111f790e35bc51656b0f",
+    "docs/art-unification/elite-review-20261029/browser-manifest.json": "78d4cf0f76a43ad98abd07c9690be2347440d735543c7560e4f331c7007bad16",
+    "docs/art-unification/elite-review-20261029/protected.json": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0",
+    "docs/art-unification/japan-approved-20261030/browser-manifest.json": "e889627804b970087b942d858af1d707d52c6eaccca288d2bd00c6c66eafa852",
+    "docs/art-unification/player-feedback-20261029/compatibility.json": "81e29775ad2b38cb89659625f03ab4cdda05e2e00c8a4239fb94aaf87bbfe71e",
+    "docs/art-unification/player-feedback-20261029/protected.json": "4c2e6e6e17c8b99413b2c8672ac3c0bef4f6263b442f796238665eb569f67531",
+    "docs/validation/city-ui-integration/README.md": "ee63912ce5ccae09709f55822e68e52eacd37e9dbe744a6830e989c55eae5376",
+    "docs/validation/city-ui-integration/after-1440x900-imperial.jpg": "05ac5ad31a7b5a1ac6d59ef186fc902c49419d8521b0aaf460ba5006e951a193",
+    "docs/validation/city-ui-integration/after-320x568-imperial.jpg": "2d91ea6f94460ae436dea2c766b4fa288929589e34f25e6fa5eea40f2000b29d",
+    "docs/validation/city-ui-integration/after-390-age-0.jpg": "736053086374118f7da50131f91d4aa2aeffcbce73e924f974d27d5ca24985cb",
+    "docs/validation/city-ui-integration/after-390-age-1.jpg": "df43de8c101ec67b0f45bf1440f0bc4899dc8a9d5e3a52bc4765097eede3f65d",
+    "docs/validation/city-ui-integration/after-390-age-2.jpg": "2d7ec7eba987dc02b682156ea06e62fa52dd76ec12f76f279f3925666720515c",
+    "docs/validation/city-ui-integration/after-390x844-imperial.jpg": "83b1879ba519499f148f7fef4c1be2b319cfc5add2906a42961c987d08359e48",
+    "docs/validation/city-ui-integration/after-844x390-imperial.jpg": "991bc8883591322c2f656d4e86e7d1f4584f6c41ed2a28d8aee21091b2ffe9df",
+    "docs/validation/city-ui-integration/after-construction.jpg": "2d14c223807862db36b79fe3404ed848fc80838b9a29f0b964c5d99564ffb62e",
+    "docs/validation/city-ui-integration/after-map-age-2.jpg": "cacf70530955e6b931d7eb8be9c8507a0b3b19f2d2f77a1549fa3485e348bea7",
+    "docs/validation/city-ui-integration/after-map-age-3.jpg": "287a0442cea596c581a744f51ad59a656b295fd7dc71011ab68c7c715e88961e",
+    "docs/validation/city-ui-integration/after-queued.jpg": "4ac469ebb0cf18d9417f1dbf040eccddbdc3075732d16f38868d8d4dfba58996",
+    "docs/validation/city-ui-integration/before-1440x900-imperial.jpg": "dece921f89228264fa423751db15acd39168e623ebd974fcb91a309a192410b4",
+    "docs/validation/city-ui-integration/before-320x568-imperial.jpg": "f96aa338016c0dc96d18bd5a4d1090fab06f38da77021d41b46b5724f1c1c460",
+    "docs/validation/city-ui-integration/before-390x844-imperial.jpg": "5ff39e496c275ccafe266508a8867acee746f554bb9ccf4768d9e4666207843e",
+    "docs/validation/city-ui-integration/before-844x390-imperial.jpg": "b38fabb2dc98feade72cbd22cf254cb5436fb44cc1d7dcb8cfc0c5722660fe2a",
+    "docs/validation/city-ui-integration/before-map-age-2.jpg": "cacf70530955e6b931d7eb8be9c8507a0b3b19f2d2f77a1549fa3485e348bea7",
+    "docs/validation/city-ui-integration/before-map-age-3.jpg": "7f7926c636c3fb59326b234f8b2f74003dcdeb51c08bc25a459d667a937b2771",
+    "docs/validation/city-ui-integration/browser-result.json": "c1e73c4da677be1c5a6523d3ab3d4f96b7822e176c0c303e9bcbc2f6c21f95ca",
+    "docs/validation/city-ui-integration/checks.json": "237619f3ffd06a0f69ccfb03fd55a09644bb8d168e883f951a06443f9cdbbd0d",
+    "docs/validation/city-ui-integration/preview.html": "69d6cdb1a5cb5df659458a38431a3858f444e1d723eebddc240ae68aaf714275",
+    "docs/validation/city-ui-integration/preview.tsx": "4b33b7049df13ade3e622df7d7d4753a78648d9c85664de422f807cdf588f8fa",
+    "docs/validation/city-ui-successor/README.md": "7f4366bc41a1920e05f045c033724bfcd09cd706edc594285eb47dbcc35eaceb",
+    "docs/validation/city-ui-successor/compatibility.json": "a34f8e9124834b2d14eccd447694edc3933f946729ef19e9ccb9c450e40a7b1e",
+    "docs/validation/city-ui-successor/local-checks.json": "2a8aba5d5b1db322b38afe03e2bf8aca2de931469fb27cd448220bc87c13a716"
+  },
+  "evidence": {
+    "docs/validation/mobile-town-labels/after-1440-town.jpg": "3a8bed084d552f1a74c6fadd5de494bf0077bb567003186941337958a24fbd03",
+    "docs/validation/mobile-town-labels/after-320-town.jpg": "3f3c385870ec75a7b3230c20d5cc04766ac6ab2bfb929138af22d0c9fc3d9f09",
+    "docs/validation/mobile-town-labels/after-390-names-gate.jpg": "3614d9d44abfcc392c398ddcf6fc5b8e41b0d2d6f4ff025cf74678b357a7d502",
+    "docs/validation/mobile-town-labels/after-390-outskirts.jpg": "9287a5a6ff0ac8b45edde36eaa1cb6de78e4030f464a91e569f4abdb2a1226ee",
+    "docs/validation/mobile-town-labels/after-390-panorama.jpg": "3956c6e972690ba8aa38973f17b2b61cb3396af4ef5a615b3c4530a17d5c1394",
+    "docs/validation/mobile-town-labels/after-390-town.jpg": "a3390ba78e6ec31c84f9c95fd93c1454f9619f03cbfb1b10bf2fc24cffbae7c5",
+    "docs/validation/mobile-town-labels/before-1440-town.jpg": "c96a0072c5a73ec7b06fb5e3dd22635614ac4dcb62105657701ca2a99d4ce2de",
+    "docs/validation/mobile-town-labels/before-320-town.jpg": "c1147fe60905828643ad7c062a1b7956a99a7daff0fe706782413d64d0ff39df",
+    "docs/validation/mobile-town-labels/before-390-town.jpg": "ad03e617902a662b69f5f197892689d2c6fbb7f6ca01f4b6127db12f66c5c8b6",
+    "docs/validation/mobile-town-labels/browser-result.json": "5022f15d1dc6917cce12f870889e5186d26741de98093c04bf08142ebfa975c5",
+    "scripts/verify-mobile-town-labels.mjs": "3c49540ea6ea3f0011bfb0ac3020eb4cf2ab5cfee578ecd5ac516ac83f761a1d",
+    "src/game/presentation/cityUiIntegration.test.tsx": "abc24473012ecd7cead12cd6b14a4754e867ada29a5598c29d45f430a7433332"
+  }
+}

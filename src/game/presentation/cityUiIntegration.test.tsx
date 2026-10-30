@@ -16,9 +16,9 @@ it('keeps completed levels while an upgrade or a new building is in progress, wi
  try{
   await act(async()=>root.render(<CityScenes world={w} city={city} mobile initialDistrict="town" onBuilding={onBuilding} onField={()=>{}} onGovernor={onGovernor}/>));
   expect(host.querySelector('.quiet-town-labels')).not.toBeNull();
-  const badges=[...host.querySelectorAll('.town-level')].map(e=>e.textContent);
+  const badges=[...host.querySelectorAll('.town-level b')].map(e=>e.textContent);
   expect(badges).toEqual(expect.arrayContaining(['1','9','10','15']));expect(badges).not.toContain('0');
-  expect(host.querySelector('.town-level-anchor.building-hall')!.textContent).toBe('1');
+  expect(host.querySelector('.town-level-anchor.building-hall b')!.textContent).toBe('1');
   expect(host.querySelector('.town-level-anchor.building-market')).toBeNull();
   expect(host.querySelectorAll('.constructing')).toHaveLength(2);expect(host.querySelectorAll('.formal-badge')).toHaveLength(0);
   await act(async()=>host.querySelector<HTMLButtonElement>('.building-hall')!.click());expect(onBuilding).toHaveBeenCalledWith('center',-1);
@@ -34,4 +34,17 @@ it('updates all four mobile age labels on the same mounted HUD and preserves the
   await act(async()=>root.render(<Shell world={world} city={city} cities={[city]} mobile view="city" onEra={onEra} onView={()=>{}} onCity={()=>{}} onHome={()=>{}} onResource={()=>{}} onMore={()=>{}} moreOpen={false} busy={false}>{null}</Shell>));
   const era=host.querySelector<HTMLButtonElement>('.mobile-era')!;expect([...era.children].map(e=>e.textContent)).toEqual([label,'時代']);expect(era.getAttribute('aria-label')).toBe(label+'時代');await act(async()=>era.click());
  }expect(onEra).toHaveBeenCalledTimes(4);}finally{await act(async()=>root.unmount());vi.unstubAllGlobals();}
+});
+
+it('uses actual wall levels in both label modes and omits a level-zero gate badge',async()=>{
+ vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);const host=document.createElement('div'),root=createRoot(host),w=make(),onWall=vi.fn();
+ try{for(const level of [0,1,9,10,15]){
+  const city={...w.cities[0],wallLevel:level};
+  await act(async()=>root.render(<CityScenes world={w} city={city} mobile initialDistrict="town" onBuilding={()=>{}} onField={()=>{}} onWall={onWall}/>));
+  expect(host.querySelector('.town-gate .town-level b')?.textContent??null).toBe(level?String(level):null);
+  await act(async()=>host.querySelector<HTMLButtonElement>('.label-toggle')!.click());
+  expect(host.querySelector('.town-gate .town-level b')?.textContent??null).toBe(level?String(level):null);
+  expect(host.querySelectorAll('.town-lot.built .town-label')).toHaveLength(0);
+  await act(async()=>host.querySelector<HTMLButtonElement>('.town-gate')!.click());
+ }expect(onWall).toHaveBeenCalledTimes(5);}finally{await act(async()=>root.unmount());vi.unstubAllGlobals();}
 });

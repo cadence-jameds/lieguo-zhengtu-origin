@@ -18,7 +18,11 @@ class SuccessorTests(unittest.TestCase):
         for path in paths:
             target = self.root / path
             target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(gate.ROOT / path, target)
+            # Test the original immutable PR #49 transition, independently of later successors.
+            if path in gate.SOURCES:
+                target.write_bytes(gate.previous(gate.ROOT, gate.UI, path))
+            else:
+                shutil.copyfile(gate.ROOT / path, target)
         (self.root / '.git').symlink_to(gate.ROOT / '.git', target_is_directory=True)
 
     def record(self):

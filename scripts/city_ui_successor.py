@@ -48,7 +48,10 @@ def previous(root, commit, path):
 
 
 def pinned(root, path, recorded):
-    assert recorded == sha(previous(root, UI, path)) == sha((root / path).read_bytes()), ('Changed UI witness', path)
+    assert recorded == sha(previous(root, UI, path)), ('Changed original UI witness', path)
+    if recorded != sha((root / path).read_bytes()):
+        from mobile_town_successor import accepts
+        assert path in SOURCES and accepts(path, recorded, root), ('Changed UI witness', path)
 
 
 def predecessors(root, path):
