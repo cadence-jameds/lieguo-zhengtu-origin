@@ -38,6 +38,7 @@ jobs:
           python3 scripts/check-city-visuals.py
           python3 scripts/test_city_ui_successor.py
           python3 scripts/test_mobile_town_successor.py
+          python3 scripts/test_growth_tasks_successor.py
       - name: Player feedback art scope and evidence
         run: python3 scripts/check-player-feedback.py
       - name: Full regression in a disposable copy

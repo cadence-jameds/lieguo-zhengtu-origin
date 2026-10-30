@@ -27,6 +27,15 @@ try{
  assert.ok(spot);Object.assign(w.cities[2],spot);invalidateSpatial(w);w.cities[0].military.units={militia:100};w.cities[2].military.units={};w=issue(w,{type:'army.dispatch',cityId:home.id,mission:'raid',target:{kind:'city',cityId:w.cities[2].id},units:{militia:50}}).world;
  let a=w.armies.find(a=>a.status==='outbound'),result=advanceFormal(w,a.arrivalAt),reports=[...result.reports];w=result.world;a=w.armies.find(a=>a.status==='returning');assert.ok(a);result=advanceFormal(w,a.arrivalAt);w=result.world;reports.push(...result.reports);assert.ok(w.growthTasks.completed.N01!==undefined&&w.growthTasks.completed.C08!==undefined);
  await persist('growth-ready',w,reports);
+ if(process.env.JOURNEY_INTEGRATION==='1'){
+  const {build}=await server.ssrLoadModule('/src/game/formal/developmentTestSupport.ts');
+  const {storageCapacity}=await server.ssrLoadModule('/src/game/formal/catalogB3.ts');
+  const v2=structuredClone(w),owned=v2.cities.filter(c=>c.ownerFactionId===v2.playerFactionId);
+  for(const c of owned){build(c,'warehouse.0',15);c.stock={food:0,wood:0,stone:0,gold:0};}
+  for(const r of ['food','wood','stone','gold'])owned[0].stock[r]=storageCapacity(owned[0]);
+  await persist('growth-v2',v2,reports);
+ }
+
  let victory=structuredClone(w);for(let i=0;i<75;i++)victory.cities[i].ownerFactionId=victory.playerFactionId;invalidateSpatial(victory);let s=new EventScheduler(victory.events);reconcileVictory(victory,s);victory.events=s.snapshot();const started=victory.time;result=advanceFormal(victory,started+6*HOUR);victory=result.world;await persist('conquest-half',victory,[...reports,...result.reports]);result=advanceFormal(victory,started+12*HOUR);await persist('conquest-terminal',result.world,[...reports,...result.reports]);
  let heg=createFormalWorld({campaign:'journey-browser-hegemony',seed:90217}),id=empireId('journey-browser'),members=heg.factions.slice(0,15).map(f=>f.id);heg.politics={legions:[],empires:[{id,name:'征途驗收帝國',leader:members[0],legions:[],color:'red'}],requests:[],relations:[],joints:[],reserves:[],randomCounter:0};
  for(let i=0;i<3;i++){const group=members.slice(i*5,i*5+5),key='legion:journey-browser-'+i;heg.politics.legions.push({id:key,name:'驗收軍團 '+(i+1),description:'',leader:group[0],members:group,empireId:id});heg.politics.empires[0].legions.push(key);}

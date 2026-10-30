@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "9ac3ccc06e1bc8915147ee405d385c369ea47027",
+  "uiCommit": "f6c2bdd09d0b53e11a31ac87ad91e4ab7e3b6cef",
+  "changes": {
+    "src/game/formal/growthTaskCatalog.ts": {
+      "before": "92eba1770f267daae8d9640478e4bffbc522219ad52bc7fbc5ea4eb4c3f5a65b",
+      "after": "e974c1bab71fdcd07e46da407111061a4c437ee9c8e1cab67c711f5b1a075033"
+    },
+    "src/game/formal/growthTaskSchema.ts": {
+      "before": "c50d3e1da579b28c45188417e1b2c06414fb382cb9a71f6f52b68feadc36cf14",
+      "after": "be115b99efe98b427d53978cf6ac2268c7bb2aee5edc12f73782f5a2d82e73a1"
+    },
+    "src/game/formal/growthTasks.test.ts": {
+      "before": "81738d83e31287e21309e87278a78147076e46947be96ec99d55d3d16a9f3acd",
+      "after": "ff0666f8ad56c0c3ef33efe702394ac024fc4c3386af39020a6f4a9542c91851"
+    },
+    "src/game/formal/growthTasks.ts": {
+      "before": "b87d9fa90cec64179df68f41b144eaa7737ce0a3236d1668f8e419b1b3e07056",
+      "after": "499abf6e0ef187ed25b6d0dfb0a49172d253937db6d73a0b2ee3d9c80ad47b0e"
+    },
+    "src/game/formal/schema.ts": {
+      "before": "ce348e89af518411b711035d1c1659297b3f11dea92bf846350f53a56b306bc4",
+      "after": "2896751fd4a5a569c3aa2a390d9d591dc9d15213d315fe0fe7958ee82d09397b"
+    },
+    "src/game/presentation/JourneyGoals.tsx": {
+      "before": "6942d03eb82a7c75b0d080b86ae8515a2685522a9616b5ea8960750dbefe6b9d",
+      "after": "467cfb1ddd3fd601bf0153c50390d531f173404814327d82b047b9d25684365b"
+    },
+    "src/game/presentation/journeyGoals.css": {
+      "before": "1628f3eda983cf8a2b058cdff953387406f8d03896741d5be592676b2237b2bf",
+      "after": "2bfab8f23ac1baa6ca2f86e6d6a16c12d098a9009efe0aab37d3034b5e11251a"
+    },
+    "src/game/presentation/journeyGoals.test.tsx": {
+      "before": "b51bebc745dd5ddd38e0dc864e17660f800869e81bd74351c750bf27075ef03c",
+      "after": "39a99546e4e6aa20b5ab00a237d8f29c4bfc6fd4036359d5b2ed0e3c6c10d63b"
+    }
+  },
+  "historical": {
+    "docs/art-unification/elite-review-20261029/protected.json": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0",
+    "docs/b6-v95/河谷戰役_vNext_平衡重構討論_v95.md": "49768df4e0151724d1cd613cf7b065083c9f4683f4435f1cba10a1e84c3b6ab2",
+    "docs/validation/city-ui-successor/compatibility.json": "a34f8e9124834b2d14eccd447694edc3933f946729ef19e9ccb9c450e40a7b1e",
+    "docs/validation/mobile-town-labels/compatibility.json": "9f4e143b17f928d519ea594883f67ddb3f5e19df9f56c347c69668f5500d5949"
+  },
+  "evidence": {
+    "docs/b6-v96/河谷戰役_vNext_平衡重構討論_v96.md": "4ca3ca8cacf259c17ac2ef2da192d00cf88a4d0b5b5116fdb50c882bc6c20c5d",
+    "docs/validation/journey-goals-integration/1440-ready.jpg": "5419475a4d6eba53b4aab59f56873e605e411579f6d65a0e1c7519e9f4046b46",
+    "docs/validation/journey-goals-integration/320-capacity-blocked.jpg": "17b59782eddd06606efe9c4ce2da4e0b42becba24fae9c96d1207cc599175454",
+    "docs/validation/journey-goals-integration/390-claimed-history.jpg": "f1546f6a64c21c33a7aa38d4e1b234918954bd66e36a174fcb52adeaf9a8623a",
+    "docs/validation/journey-goals-integration/390-ready.jpg": "9d10aa03d5f5ef4cd1ec421e99de221651b3a2b12a5bba702d2a04206cb284d5",
+    "docs/validation/journey-goals-integration/browser-result.json": "36643272609eb39d0399dacda90ddf969ddc4009d623e9cd9f206f7e8eb89756",
+    "docs/validation/journey-goals-integration/legacy-v1.json": "2b97930e0cf91ef22d9c8a685968d9532e69bbf27ee3982b655889a7de01df67",
+    "scripts/prepare-growth-legacy-fixtures.mjs": "fa90c02ec8c037ff4b78b5572f0597b34e6adbaa5554b42308fca7e4ca814d03",
+    "scripts/verify-journey-goals-integration.mjs": "167169b56c543e057f14d275981e4836ab2b1b9be4668630ff03de4ff44fcd9f",
+    "src/game/formal/growthTaskIntegration.test.ts": "7ba78a3d4d4450dba9a471ca04433fb16a9ed4e81259b05b930e5f10dabae15f",
+    "src/game/formal/growthTaskRewardsV1.ts": "2f4bd0981e8edb71075fe47549663f1fe3377547fece9cfd3b9aecdbea17e0a8"
+  }
+}

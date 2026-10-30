@@ -1,0 +1,86 @@
+{
+  "baseCommit": "9ac3ccc06e1bc8915147ee405d385c369ea47027",
+  "implementationCommit": "f6c2bdd09d0b53e11a31ac87ad91e4ab7e3b6cef",
+  "rewards": {
+    "ids": 80,
+    "before": 2313000,
+    "after": 842700,
+    "eras": [
+      12650,
+      74000,
+      210550,
+      545500
+    ],
+    "resourceUnit": 5,
+    "tieBreak": [
+      "food",
+      "wood",
+      "stone",
+      "gold"
+    ]
+  },
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pagesPwa": "PASS",
+  "releaseArtifacts": "PASS",
+  "directed": {
+    "status": "PASS",
+    "passed": 110,
+    "files": 3
+  },
+  "browser": {
+    "status": "PASS",
+    "passed": 3,
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "worker": "real",
+    "errors": 0
+  },
+  "gates": {
+    "check-art-boards.py": "PASS",
+    "check-city-visuals.py": "PASS",
+    "check-player-feedback.py": "PASS",
+    "growth_tasks_successor.py": "PASS"
+  },
+  "tamperTests": {
+    "historicalUI": 10,
+    "mobileTown": 3,
+    "growthTasks": 3,
+    "status": "PASS"
+  },
+  "legacyV1": {
+    "source": "unmodified base engine",
+    "sha256": "2b97930e0cf91ef22d9c8a685968d9532e69bbf27ee3982b655889a7de01df67",
+    "cases": [
+      "full",
+      "partial",
+      "zero"
+    ],
+    "byteExactReproduction": "PASS",
+    "decodeReencodeChecksum": "PASS",
+    "mixedVersionRecovery": "PASS"
+  },
+  "fullRegression": {
+    "status": "PASS",
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "passed": 2118,
+    "failed": 0,
+    "skipped": 1,
+    "durationMs": 346323,
+    "timeoutMs": 30000,
+    "reportSha256": "0617081c4fe5663fd9f3c94dc03e565280c21167e348a4719e1aad8e36bcb12d",
+    "skippedTests": [
+      {
+        "file": "game/batch210.test.tsx",
+        "name": "user late-game save remains valid after six more world hours",
+        "status": "skipped"
+      }
+    ]
+  },
+  "historicalFacts": "Original art evidence and SHAs, prior legacy art failures, B5 E1 HOLD and Astra Gate not PASS remain historical records; this PR does not grant release acceptance.",
+  "physicalPhone": "待玩家驗收",
+  "githubCI": "See the Draft PR Checks for the exact pushed HEAD."
+}
