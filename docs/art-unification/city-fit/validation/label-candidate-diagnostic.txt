@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/city-visual-report.py", line 50, in <module>
+    label_checks.append({'case':c['name'],'state':town['state'],'castlePixelsOverRangeBadge':pixels});assert pixels==0,label_checks
+                                                                                                             ^^^^^^^^^
+AssertionError: [{'case': 'after-1440-civ_zhongguo-3', 'state': 'complete', 'castlePixelsOverRangeBadge': 79}]

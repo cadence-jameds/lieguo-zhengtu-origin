@@ -1,0 +1,1120 @@
+{
+  "method": {
+    "alpha": "A>96; bbox uses exclusive right/bottom, pixel-exact at this threshold",
+    "primary": "human roof/base landmarks +/-12px; spires included, flagpoles excluded",
+    "ground": "approximate projected ground envelope behind occluding buildings, +/-16px; NOT actual land or gameplay footprint; width follows visible city hull",
+    "oldImperial": "identical to castle; listed as castle/oldImperial, no invented separate asset"
+  },
+  "rows": [
+    {
+      "civilization": "中國",
+      "index": 0,
+      "stage": "黑暗",
+      "path": "public/art/cities-age-0.webp",
+      "bbox": [
+        16,
+        131,
+        508,
+        450
+      ],
+      "width": 492,
+      "height": 319,
+      "left": 16,
+      "right": 4,
+      "footY": 450,
+      "bboxCenterOffset": [
+        6.0,
+        34.5
+      ],
+      "alphaCentroidOffset": [
+        11.44,
+        52.74
+      ],
+      "occupiedPixels": 108081,
+      "primaryRoofY": 158,
+      "primaryBaseY": 286,
+      "primaryHeight": 128,
+      "groundEnvelopeEstimate": [
+        16,
+        212,
+        508,
+        450
+      ],
+      "groundWidthEstimate": 492,
+      "groundDepthEstimate": 238
+    },
+    {
+      "civilization": "拜占庭",
+      "index": 1,
+      "stage": "黑暗",
+      "path": "public/art/cities-age-0.webp",
+      "bbox": [
+        14,
+        141,
+        497,
+        453
+      ],
+      "width": 483,
+      "height": 312,
+      "left": 14,
+      "right": 15,
+      "footY": 453,
+      "bboxCenterOffset": [
+        -0.5,
+        41.0
+      ],
+      "alphaCentroidOffset": [
+        1.61,
+        57.55
+      ],
+      "occupiedPixels": 109081,
+      "primaryRoofY": 150,
+      "primaryBaseY": 298,
+      "primaryHeight": 148,
+      "groundEnvelopeEstimate": [
+        14,
+        235,
+        497,
+        453
+      ],
+      "groundWidthEstimate": 483,
+      "groundDepthEstimate": 218
+    },
+    {
+      "civilization": "法蘭克",
+      "index": 2,
+      "stage": "黑暗",
+      "path": "public/art/cities-age-0.webp",
+      "bbox": [
+        3,
+        102,
+        495,
+        463
+      ],
+      "width": 492,
+      "height": 361,
+      "left": 3,
+      "right": 17,
+      "footY": 463,
+      "bboxCenterOffset": [
+        -7.0,
+        26.5
+      ],
+      "alphaCentroidOffset": [
+        -6.94,
+        61.79
+      ],
+      "occupiedPixels": 111248,
+      "primaryRoofY": 103,
+      "primaryBaseY": 294,
+      "primaryHeight": 191,
+      "groundEnvelopeEstimate": [
+        3,
+        233,
+        495,
+        463
+      ],
+      "groundWidthEstimate": 492,
+      "groundDepthEstimate": 230
+    },
+    {
+      "civilization": "不列顛",
+      "index": 3,
+      "stage": "黑暗",
+      "path": "public/art/cities-age-0.webp",
+      "bbox": [
+        14,
+        57,
+        509,
+        370
+      ],
+      "width": 495,
+      "height": 313,
+      "left": 14,
+      "right": 3,
+      "footY": 370,
+      "bboxCenterOffset": [
+        5.5,
+        -42.5
+      ],
+      "alphaCentroidOffset": [
+        6.04,
+        -25.19
+      ],
+      "occupiedPixels": 109118,
+      "primaryRoofY": 84,
+      "primaryBaseY": 216,
+      "primaryHeight": 132,
+      "groundEnvelopeEstimate": [
+        14,
+        143,
+        509,
+        370
+      ],
+      "groundWidthEstimate": 495,
+      "groundDepthEstimate": 227
+    },
+    {
+      "civilization": "日本",
+      "index": 4,
+      "stage": "黑暗",
+      "path": "public/art/cities-age-0.webp",
+      "bbox": [
+        15,
+        42,
+        497,
+        368
+      ],
+      "width": 482,
+      "height": 326,
+      "left": 15,
+      "right": 15,
+      "footY": 368,
+      "bboxCenterOffset": [
+        0.0,
+        -51.0
+      ],
+      "alphaCentroidOffset": [
+        8.78,
+        -31.93
+      ],
+      "occupiedPixels": 110725,
+      "primaryRoofY": 72,
+      "primaryBaseY": 202,
+      "primaryHeight": 130,
+      "groundEnvelopeEstimate": [
+        15,
+        121,
+        497,
+        368
+      ],
+      "groundWidthEstimate": 482,
+      "groundDepthEstimate": 247
+    },
+    {
+      "civilization": "蒙古",
+      "index": 5,
+      "stage": "黑暗",
+      "path": "public/art/cities-age-0.webp",
+      "bbox": [
+        6,
+        29,
+        498,
+        373
+      ],
+      "width": 492,
+      "height": 344,
+      "left": 6,
+      "right": 14,
+      "footY": 373,
+      "bboxCenterOffset": [
+        -4.0,
+        -55.0
+      ],
+      "alphaCentroidOffset": [
+        -0.65,
+        -23.11
+      ],
+      "occupiedPixels": 111050,
+      "primaryRoofY": 111,
+      "primaryBaseY": 202,
+      "primaryHeight": 91,
+      "groundEnvelopeEstimate": [
+        6,
+        149,
+        498,
+        373
+      ],
+      "groundWidthEstimate": 492,
+      "groundDepthEstimate": 224
+    },
+    {
+      "civilization": "中國",
+      "index": 0,
+      "stage": "封建",
+      "path": "public/art/cities-age-1.webp",
+      "bbox": [
+        25,
+        111,
+        505,
+        447
+      ],
+      "width": 480,
+      "height": 336,
+      "left": 25,
+      "right": 7,
+      "footY": 447,
+      "bboxCenterOffset": [
+        9.0,
+        23.0
+      ],
+      "alphaCentroidOffset": [
+        11.97,
+        34.2
+      ],
+      "occupiedPixels": 115125,
+      "primaryRoofY": 112,
+      "primaryBaseY": 230,
+      "primaryHeight": 118,
+      "groundEnvelopeEstimate": [
+        25,
+        191,
+        505,
+        447
+      ],
+      "groundWidthEstimate": 480,
+      "groundDepthEstimate": 256
+    },
+    {
+      "civilization": "拜占庭",
+      "index": 1,
+      "stage": "封建",
+      "path": "public/art/cities-age-1.webp",
+      "bbox": [
+        17,
+        105,
+        501,
+        458
+      ],
+      "width": 484,
+      "height": 353,
+      "left": 17,
+      "right": 11,
+      "footY": 458,
+      "bboxCenterOffset": [
+        3.0,
+        25.5
+      ],
+      "alphaCentroidOffset": [
+        5.34,
+        40.95
+      ],
+      "occupiedPixels": 120661,
+      "primaryRoofY": 109,
+      "primaryBaseY": 260,
+      "primaryHeight": 151,
+      "groundEnvelopeEstimate": [
+        17,
+        198,
+        501,
+        458
+      ],
+      "groundWidthEstimate": 484,
+      "groundDepthEstimate": 260
+    },
+    {
+      "civilization": "法蘭克",
+      "index": 2,
+      "stage": "封建",
+      "path": "public/art/cities-age-1.webp",
+      "bbox": [
+        7,
+        69,
+        490,
+        460
+      ],
+      "width": 483,
+      "height": 391,
+      "left": 7,
+      "right": 22,
+      "footY": 460,
+      "bboxCenterOffset": [
+        -7.5,
+        8.5
+      ],
+      "alphaCentroidOffset": [
+        -3.42,
+        43.84
+      ],
+      "occupiedPixels": 120650,
+      "primaryRoofY": 69,
+      "primaryBaseY": 256,
+      "primaryHeight": 187,
+      "groundEnvelopeEstimate": [
+        7,
+        193,
+        490,
+        460
+      ],
+      "groundWidthEstimate": 483,
+      "groundDepthEstimate": 267
+    },
+    {
+      "civilization": "不列顛",
+      "index": 3,
+      "stage": "封建",
+      "path": "public/art/cities-age-1.webp",
+      "bbox": [
+        27,
+        49,
+        503,
+        417
+      ],
+      "width": 476,
+      "height": 368,
+      "left": 27,
+      "right": 9,
+      "footY": 417,
+      "bboxCenterOffset": [
+        9.0,
+        -23.0
+      ],
+      "alphaCentroidOffset": [
+        10.88,
+        -5.25
+      ],
+      "occupiedPixels": 123749,
+      "primaryRoofY": 80,
+      "primaryBaseY": 208,
+      "primaryHeight": 128,
+      "groundEnvelopeEstimate": [
+        27,
+        142,
+        503,
+        417
+      ],
+      "groundWidthEstimate": 476,
+      "groundDepthEstimate": 275
+    },
+    {
+      "civilization": "日本",
+      "index": 4,
+      "stage": "封建",
+      "path": "public/art/cities-age-1.webp",
+      "bbox": [
+        14,
+        74,
+        498,
+        429
+      ],
+      "width": 484,
+      "height": 355,
+      "left": 14,
+      "right": 14,
+      "footY": 429,
+      "bboxCenterOffset": [
+        0.0,
+        -4.5
+      ],
+      "alphaCentroidOffset": [
+        2.54,
+        6.18
+      ],
+      "occupiedPixels": 125172,
+      "primaryRoofY": 76,
+      "primaryBaseY": 187,
+      "primaryHeight": 111,
+      "groundEnvelopeEstimate": [
+        14,
+        156,
+        498,
+        429
+      ],
+      "groundWidthEstimate": 484,
+      "groundDepthEstimate": 273
+    },
+    {
+      "civilization": "蒙古",
+      "index": 5,
+      "stage": "封建",
+      "path": "public/art/cities-age-1.webp",
+      "bbox": [
+        6,
+        76,
+        492,
+        433
+      ],
+      "width": 486,
+      "height": 357,
+      "left": 6,
+      "right": 20,
+      "footY": 433,
+      "bboxCenterOffset": [
+        -7.0,
+        -1.5
+      ],
+      "alphaCentroidOffset": [
+        -7.82,
+        20.24
+      ],
+      "occupiedPixels": 115782,
+      "primaryRoofY": 127,
+      "primaryBaseY": 236,
+      "primaryHeight": 109,
+      "groundEnvelopeEstimate": [
+        6,
+        190,
+        492,
+        433
+      ],
+      "groundWidthEstimate": 486,
+      "groundDepthEstimate": 243
+    },
+    {
+      "civilization": "中國",
+      "index": 0,
+      "stage": "城堡／舊帝王",
+      "path": "public/art/cities-age-2.webp",
+      "bbox": [
+        13,
+        112,
+        511,
+        463
+      ],
+      "width": 498,
+      "height": 351,
+      "left": 13,
+      "right": 1,
+      "footY": 463,
+      "bboxCenterOffset": [
+        6.0,
+        31.5
+      ],
+      "alphaCentroidOffset": [
+        7.78,
+        45.15
+      ],
+      "occupiedPixels": 124572,
+      "primaryRoofY": 112,
+      "primaryBaseY": 230,
+      "primaryHeight": 118,
+      "groundEnvelopeEstimate": [
+        13,
+        200,
+        511,
+        463
+      ],
+      "groundWidthEstimate": 498,
+      "groundDepthEstimate": 263
+    },
+    {
+      "civilization": "拜占庭",
+      "index": 1,
+      "stage": "城堡／舊帝王",
+      "path": "public/art/cities-age-2.webp",
+      "bbox": [
+        12,
+        94,
+        501,
+        461
+      ],
+      "width": 489,
+      "height": 367,
+      "left": 12,
+      "right": 11,
+      "footY": 461,
+      "bboxCenterOffset": [
+        0.5,
+        21.5
+      ],
+      "alphaCentroidOffset": [
+        3.51,
+        45.09
+      ],
+      "occupiedPixels": 122985,
+      "primaryRoofY": 96,
+      "primaryBaseY": 268,
+      "primaryHeight": 172,
+      "groundEnvelopeEstimate": [
+        12,
+        191,
+        501,
+        461
+      ],
+      "groundWidthEstimate": 489,
+      "groundDepthEstimate": 270
+    },
+    {
+      "civilization": "法蘭克",
+      "index": 2,
+      "stage": "城堡／舊帝王",
+      "path": "public/art/cities-age-2.webp",
+      "bbox": [
+        5,
+        85,
+        501,
+        469
+      ],
+      "width": 496,
+      "height": 384,
+      "left": 5,
+      "right": 11,
+      "footY": 469,
+      "bboxCenterOffset": [
+        -3.0,
+        21.0
+      ],
+      "alphaCentroidOffset": [
+        -1.26,
+        51.36
+      ],
+      "occupiedPixels": 123757,
+      "primaryRoofY": 85,
+      "primaryBaseY": 279,
+      "primaryHeight": 194,
+      "groundEnvelopeEstimate": [
+        5,
+        204,
+        501,
+        469
+      ],
+      "groundWidthEstimate": 496,
+      "groundDepthEstimate": 265
+    },
+    {
+      "civilization": "不列顛",
+      "index": 3,
+      "stage": "城堡／舊帝王",
+      "path": "public/art/cities-age-2.webp",
+      "bbox": [
+        13,
+        51,
+        512,
+        403
+      ],
+      "width": 499,
+      "height": 352,
+      "left": 13,
+      "right": 0,
+      "footY": 403,
+      "bboxCenterOffset": [
+        6.5,
+        -29.0
+      ],
+      "alphaCentroidOffset": [
+        7.93,
+        -11.67
+      ],
+      "occupiedPixels": 124032,
+      "primaryRoofY": 58,
+      "primaryBaseY": 239,
+      "primaryHeight": 181,
+      "groundEnvelopeEstimate": [
+        13,
+        142,
+        512,
+        403
+      ],
+      "groundWidthEstimate": 499,
+      "groundDepthEstimate": 261
+    },
+    {
+      "civilization": "日本",
+      "index": 4,
+      "stage": "城堡／舊帝王",
+      "path": "public/art/cities-age-2.webp",
+      "bbox": [
+        0,
+        42,
+        512,
+        407
+      ],
+      "width": 512,
+      "height": 365,
+      "left": 0,
+      "right": 0,
+      "footY": 407,
+      "bboxCenterOffset": [
+        0.0,
+        -31.5
+      ],
+      "alphaCentroidOffset": [
+        3.89,
+        -13.15
+      ],
+      "occupiedPixels": 125291,
+      "primaryRoofY": 48,
+      "primaryBaseY": 229,
+      "primaryHeight": 181,
+      "groundEnvelopeEstimate": [
+        0,
+        132,
+        512,
+        407
+      ],
+      "groundWidthEstimate": 512,
+      "groundDepthEstimate": 275
+    },
+    {
+      "civilization": "蒙古",
+      "index": 5,
+      "stage": "城堡／舊帝王",
+      "path": "public/art/cities-age-2.webp",
+      "bbox": [
+        0,
+        78,
+        498,
+        407
+      ],
+      "width": 498,
+      "height": 329,
+      "left": 0,
+      "right": 14,
+      "footY": 407,
+      "bboxCenterOffset": [
+        -7.0,
+        -13.5
+      ],
+      "alphaCentroidOffset": [
+        -8.22,
+        2.45
+      ],
+      "occupiedPixels": 118754,
+      "primaryRoofY": 134,
+      "primaryBaseY": 254,
+      "primaryHeight": 120,
+      "groundEnvelopeEstimate": [
+        0,
+        180,
+        498,
+        407
+      ],
+      "groundWidthEstimate": 498,
+      "groundDepthEstimate": 227
+    },
+    {
+      "civilization": "中國",
+      "index": 0,
+      "stage": "修正前新帝王",
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "bbox": [
+        29,
+        117,
+        483,
+        478
+      ],
+      "width": 454,
+      "height": 361,
+      "left": 29,
+      "right": 29,
+      "footY": 478,
+      "bboxCenterOffset": [
+        0.0,
+        41.5
+      ],
+      "alphaCentroidOffset": [
+        6.71,
+        54.34
+      ],
+      "occupiedPixels": 119176,
+      "primaryRoofY": 123,
+      "primaryBaseY": 298,
+      "primaryHeight": 175,
+      "groundEnvelopeEstimate": [
+        29,
+        227,
+        483,
+        478
+      ],
+      "groundWidthEstimate": 454,
+      "groundDepthEstimate": 251
+    },
+    {
+      "civilization": "拜占庭",
+      "index": 1,
+      "stage": "修正前新帝王",
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "bbox": [
+        29,
+        87,
+        483,
+        478
+      ],
+      "width": 454,
+      "height": 391,
+      "left": 29,
+      "right": 29,
+      "footY": 478,
+      "bboxCenterOffset": [
+        0.0,
+        26.5
+      ],
+      "alphaCentroidOffset": [
+        1.68,
+        43.84
+      ],
+      "occupiedPixels": 127544,
+      "primaryRoofY": 89,
+      "primaryBaseY": 293,
+      "primaryHeight": 204,
+      "groundEnvelopeEstimate": [
+        29,
+        211,
+        483,
+        478
+      ],
+      "groundWidthEstimate": 454,
+      "groundDepthEstimate": 267
+    },
+    {
+      "civilization": "法蘭克",
+      "index": 2,
+      "stage": "修正前新帝王",
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "bbox": [
+        29,
+        66,
+        483,
+        477
+      ],
+      "width": 454,
+      "height": 411,
+      "left": 29,
+      "right": 29,
+      "footY": 477,
+      "bboxCenterOffset": [
+        0.0,
+        15.5
+      ],
+      "alphaCentroidOffset": [
+        -0.03,
+        48.65
+      ],
+      "occupiedPixels": 125315,
+      "primaryRoofY": 70,
+      "primaryBaseY": 312,
+      "primaryHeight": 242,
+      "groundEnvelopeEstimate": [
+        29,
+        201,
+        483,
+        477
+      ],
+      "groundWidthEstimate": 454,
+      "groundDepthEstimate": 276
+    },
+    {
+      "civilization": "不列顛",
+      "index": 3,
+      "stage": "修正前新帝王",
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "bbox": [
+        28,
+        113,
+        483,
+        478
+      ],
+      "width": 455,
+      "height": 365,
+      "left": 28,
+      "right": 29,
+      "footY": 478,
+      "bboxCenterOffset": [
+        -0.5,
+        39.5
+      ],
+      "alphaCentroidOffset": [
+        -0.82,
+        53.82
+      ],
+      "occupiedPixels": 121594,
+      "primaryRoofY": 118,
+      "primaryBaseY": 304,
+      "primaryHeight": 186,
+      "groundEnvelopeEstimate": [
+        28,
+        227,
+        483,
+        478
+      ],
+      "groundWidthEstimate": 455,
+      "groundDepthEstimate": 251
+    },
+    {
+      "civilization": "日本",
+      "index": 4,
+      "stage": "修正前新帝王",
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "bbox": [
+        28,
+        96,
+        483,
+        477
+      ],
+      "width": 455,
+      "height": 381,
+      "left": 28,
+      "right": 29,
+      "footY": 477,
+      "bboxCenterOffset": [
+        -0.5,
+        30.5
+      ],
+      "alphaCentroidOffset": [
+        -2.27,
+        47.87
+      ],
+      "occupiedPixels": 125972,
+      "primaryRoofY": 97,
+      "primaryBaseY": 307,
+      "primaryHeight": 210,
+      "groundEnvelopeEstimate": [
+        28,
+        227,
+        483,
+        477
+      ],
+      "groundWidthEstimate": 455,
+      "groundDepthEstimate": 250
+    },
+    {
+      "civilization": "蒙古",
+      "index": 5,
+      "stage": "修正前新帝王",
+      "path": "docs/art-unification/city-scale/before/cities-imperial.webp",
+      "bbox": [
+        29,
+        101,
+        484,
+        477
+      ],
+      "width": 455,
+      "height": 376,
+      "left": 29,
+      "right": 28,
+      "footY": 477,
+      "bboxCenterOffset": [
+        0.5,
+        33.0
+      ],
+      "alphaCentroidOffset": [
+        2.47,
+        55.26
+      ],
+      "occupiedPixels": 121642,
+      "primaryRoofY": 132,
+      "primaryBaseY": 309,
+      "primaryHeight": 177,
+      "groundEnvelopeEstimate": [
+        29,
+        230,
+        484,
+        477
+      ],
+      "groundWidthEstimate": 455,
+      "groundDepthEstimate": 247
+    },
+    {
+      "civilization": "中國",
+      "index": 0,
+      "stage": "修正後新帝王",
+      "path": "public/art/unified/cities-imperial.webp",
+      "bbox": [
+        35,
+        102,
+        489,
+        463
+      ],
+      "width": 454,
+      "height": 361,
+      "left": 35,
+      "right": 23,
+      "footY": 463,
+      "bboxCenterOffset": [
+        6.0,
+        26.5
+      ],
+      "alphaCentroidOffset": [
+        12.71,
+        39.34
+      ],
+      "occupiedPixels": 119176,
+      "primaryRoofY": 108,
+      "primaryBaseY": 283,
+      "primaryHeight": 175,
+      "groundEnvelopeEstimate": [
+        35,
+        212,
+        489,
+        463
+      ],
+      "groundWidthEstimate": 454,
+      "groundDepthEstimate": 251
+    },
+    {
+      "civilization": "拜占庭",
+      "index": 1,
+      "stage": "修正後新帝王",
+      "path": "public/art/unified/cities-imperial.webp",
+      "bbox": [
+        30,
+        72,
+        482,
+        461
+      ],
+      "width": 452,
+      "height": 389,
+      "left": 30,
+      "right": 30,
+      "footY": 461,
+      "bboxCenterOffset": [
+        0.0,
+        10.5
+      ],
+      "alphaCentroidOffset": [
+        2.17,
+        27.72
+      ],
+      "occupiedPixels": 126279,
+      "primaryRoofY": 74,
+      "primaryBaseY": 277,
+      "primaryHeight": 203,
+      "groundEnvelopeEstimate": [
+        30,
+        195,
+        482,
+        461
+      ],
+      "groundWidthEstimate": 452,
+      "groundDepthEstimate": 266
+    },
+    {
+      "civilization": "法蘭克",
+      "index": 2,
+      "stage": "修正後新帝王",
+      "path": "public/art/unified/cities-imperial.webp",
+      "bbox": [
+        28,
+        62,
+        478,
+        469
+      ],
+      "width": 450,
+      "height": 407,
+      "left": 28,
+      "right": 34,
+      "footY": 469,
+      "bboxCenterOffset": [
+        -3.0,
+        9.5
+      ],
+      "alphaCentroidOffset": [
+        -3.03,
+        42.36
+      ],
+      "occupiedPixels": 122886,
+      "primaryRoofY": 66,
+      "primaryBaseY": 306,
+      "primaryHeight": 240,
+      "groundEnvelopeEstimate": [
+        28,
+        196,
+        478,
+        469
+      ],
+      "groundWidthEstimate": 450,
+      "groundDepthEstimate": 273
+    },
+    {
+      "civilization": "不列顛",
+      "index": 3,
+      "stage": "修正後新帝王",
+      "path": "public/art/unified/cities-imperial.webp",
+      "bbox": [
+        35,
+        38,
+        490,
+        403
+      ],
+      "width": 455,
+      "height": 365,
+      "left": 35,
+      "right": 22,
+      "footY": 403,
+      "bboxCenterOffset": [
+        6.5,
+        -35.5
+      ],
+      "alphaCentroidOffset": [
+        6.18,
+        -21.18
+      ],
+      "occupiedPixels": 121594,
+      "primaryRoofY": 43,
+      "primaryBaseY": 229,
+      "primaryHeight": 186,
+      "groundEnvelopeEstimate": [
+        35,
+        152,
+        490,
+        403
+      ],
+      "groundWidthEstimate": 455,
+      "groundDepthEstimate": 251
+    },
+    {
+      "civilization": "日本",
+      "index": 4,
+      "stage": "修正後新帝王",
+      "path": "public/art/unified/cities-imperial.webp",
+      "bbox": [
+        29,
+        26,
+        484,
+        407
+      ],
+      "width": 455,
+      "height": 381,
+      "left": 29,
+      "right": 28,
+      "footY": 407,
+      "bboxCenterOffset": [
+        0.5,
+        -39.5
+      ],
+      "alphaCentroidOffset": [
+        -1.79,
+        -22.11
+      ],
+      "occupiedPixels": 125972,
+      "primaryRoofY": 27,
+      "primaryBaseY": 237,
+      "primaryHeight": 210,
+      "groundEnvelopeEstimate": [
+        29,
+        157,
+        484,
+        407
+      ],
+      "groundWidthEstimate": 455,
+      "groundDepthEstimate": 250
+    },
+    {
+      "civilization": "蒙古",
+      "index": 5,
+      "stage": "修正後新帝王",
+      "path": "public/art/unified/cities-imperial.webp",
+      "bbox": [
+        38,
+        58,
+        460,
+        407
+      ],
+      "width": 422,
+      "height": 349,
+      "left": 38,
+      "right": 52,
+      "footY": 407,
+      "bboxCenterOffset": [
+        -7.0,
+        -23.5
+      ],
+      "alphaCentroidOffset": [
+        -5.24,
+        -2.77
+      ],
+      "occupiedPixels": 104626,
+      "primaryRoofY": 87,
+      "primaryBaseY": 251,
+      "primaryHeight": 164,
+      "groundEnvelopeEstimate": [
+        38,
+        178,
+        460,
+        407
+      ],
+      "groundWidthEstimate": 422,
+      "groundDepthEstimate": 229
+    }
+  ]
+}

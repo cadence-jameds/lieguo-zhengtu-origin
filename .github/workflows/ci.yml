@@ -31,6 +31,10 @@ jobs:
       - name: Prepare deterministic release metadata
         run: npm run release:prepare
       - run: npm run typecheck
+      - name: Verify art comparison IDs, columns and sources
+        run: python3 scripts/check-art-boards.py
+      - name: City display scale evidence
+        run: python3 scripts/check-city-visuals.py
       - name: Full regression in a disposable copy
         run: node scripts/verify-in-isolation.mjs full
       - name: Build for project Pages

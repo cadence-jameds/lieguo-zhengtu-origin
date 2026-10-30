@@ -1,0 +1,56 @@
+{
+  "baseline": {
+    "head": "844a904e7527b79fd2cd7e2837e78b412aadf1c0",
+    "full": {
+      "passed": 2092,
+      "failed": 0,
+      "skipped": 1
+    },
+    "historicalAGENTSFacts": "three legacy art failures recorded historically; B5 E1 HOLD; Astra Gate not PASS; physical phone pending"
+  },
+  "intermediateRuns": [
+    {
+      "passed": 2095,
+      "failed": 2,
+      "skipped": 1,
+      "failures": [
+        "new field assertion incorrectly passed a shorthand true prop; corrected its parameter use",
+        "existing catapult path assertion expected the old image; updated to the actual unitArt mapping while retaining HUD symbol checks"
+      ]
+    },
+    {
+      "passed": 2096,
+      "failed": 1,
+      "skipped": 1,
+      "failure": "existing formal/runtime.test.ts developer-speed bridge test exceeded 30000ms while other heavy checks ran; no assertion-level game failure",
+      "testOrRuntimeModified": false
+    }
+  ],
+  "finalFull": {
+    "success": true,
+    "passed": 2098,
+    "failed": 0,
+    "skipped": 1,
+    "total": 2099,
+    "suites": 242,
+    "startTime": 1793171162260,
+    "reportSha256": "01244833a8145c4326055f2239f0265e0393aa38ffbd426616e450e2dca7d4ec",
+    "testedSourceTree": "7a5ae366bdd70f40e48bc69658c6680de6396d0e",
+    "sourceCommit": "4059b4f798d5cdd2e4d5854e52f2c3e56123d325",
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "limits": "Unchanged maxWorkers=2 and testTimeout=30000; isolated copy, never working-tree full suite."
+  },
+  "finalBrowser": {
+    "passed": 70,
+    "failed": 0,
+    "errors": 0,
+    "sizes": [
+      320,
+      390,
+      1440
+    ],
+    "physicalPhone": "待驗"
+  },
+  "toolRejectedGenerations": "docs/art-source/unification/generation-blocked.json",
+  "quarantinedIntermediate": "docs/art-source/unification/rejected/crossbow-clean-intermediate.json"
+}
