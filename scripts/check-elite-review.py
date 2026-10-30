@@ -1,7 +1,9 @@
 """Read-only integrity gate; visual anatomy and historical judgment are not inferred from hashes."""
 import hashlib,json,struct,subprocess
 from pathlib import Path
+from approved_china_art import validate_approved_china, REGISTRY_PATH, PREVIOUS_REGISTRY_SHA
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/elite-review-20261029';load=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+approved=validate_approved_china()
 outputs=load(D/'outputs.json');assert len(outputs)==7
 for x in outputs:
  p=R/x['output'];raw=R/x['raw'];data=p.read_bytes();assert data[:4]==b'RIFF' and data[8:12]==b'WEBP' and data[12:16]==b'VP8 ';assert data[23:26]==b'\x9d\x01\x2a';assert [v&0x3fff for v in struct.unpack('<HH',data[26:30])]==[512,512]
@@ -10,8 +12,10 @@ for x in outputs:
  for ref in x['referenceImages']:assert sha(R/ref['path'])==ref['sha256']
  gate=load(D/'art-gate.json')[x['id']];assert gate['reviewedSHA256']==x['outputSHA256'];assert sum(gate['scores'])==gate['total']>=17 and all(gate['scores'][i]>0 for i in [0,1,8]);assert gate['hardGate']=='PASS_SELF_REVIEW'
 protected=load(D/'protected.json')
-for p,h in protected['files'].items():assert sha(R/p)==h,('Unrequested change',p)
-changed=subprocess.check_output(['git','-C',str(R),'diff','--name-only',protected['base'],'--','public'],text=True).splitlines();assert changed==['public/art/unified/units/elite.guard.civ_frankia.webp'],('Unexpected public change',changed)
+for p,h in protected['files'].items():
+ if p==REGISTRY_PATH:assert h==PREVIOUS_REGISTRY_SHA  # exact one-key successor validated above
+ else:assert sha(R/p)==h,('Unrequested change',p)
+changed=subprocess.check_output(['git','-C',str(R),'diff','--name-only',protected['base'],'--','public'],text=True).splitlines();assert changed==sorted(['public/art/unified/units/elite.guard.civ_frankia.webp',approved['path']]),('Unexpected public change',changed)
 registry=load(R/'src/game/presentation/artAssets.json')['units'];r=load(D/'runtime.json');assert r['key']=='elite.guard.civ_frankia';assert registry[r['key']]==r['path'].removeprefix('public/');assert sha(R/r['path'])==r['sha256'];assert sha(D/'before/elite.guard.civ_frankia.webp')==r['previousSHA256'];assert r['sha256']==next(x['outputSHA256'] for x in outputs if x['civ']=='frankia')
 for x in outputs:
  if x['civ']!='frankia':assert x['output'].removeprefix('public/') not in registry.values()
@@ -26,4 +30,4 @@ bm=load(D/'browser-manifest.json')
 for section in ['sources','files']:
  for p,h in bm[section].items():assert sha(R/p)==h,('Stale browser evidence',p)
 army=load(D/'browser/army/result.json');gallery=load(D/'browser/candidates/result.json');assert army['status']==gallery['status']=='PASS' and not army['errors'] and not gallery['errors'];assert len(army['rows'])==27 and gallery['viewports']==3 and gallery['artCards']==48
-print('PASS:7 documentation portraits512px; only one Frankish runtime output; Chinese/Japanese mappings and870 existing assets/source/spec files locked; prompts/raws/references/boards verified. Anatomy/player approval remain visual review.')
+print('PASS: historical7 candidates and evidence preserved; Frankish output unchanged; only approved3798a7f Chinese successor added with exact registry delta; Japanese and other assets locked. Independent review remains pending.')

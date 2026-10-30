@@ -7342,7 +7342,8 @@
           "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
           "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
           "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
-        }
+        },
+        "supersededBy": "china-player-approved-3798a7f-runtime-20261030"
       }
     ]
   },
@@ -7605,6 +7606,79 @@
             "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
             "docs/art-unification/elite-review-20261029/browser/army/result.json"
           ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "china-player-approved-3798a7f-runtime-20261030",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/raw/china-B-kneeling-v1.png",
+    "sourcePath": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/raw/china-B-kneeling-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "b7ff3b671ac852511b3a61fd1f118bbfb2ba0b7aac979250c2675d3906993790",
+    "references": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+        "sha256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/china-D-v1.png",
+        "sha256": "2eefa5e7e6ad97430551382ca0883c32c519c344f5cdada42eb5e8cbe6002db8"
+      }
+    ],
+    "prompt": "Create one revised Chinese elite repeating-crossbow unit portrait for the user's chosen design. FIRST REFERENCE IS AUTHORITATIVE: candidate B, high-grade FISH-SCALE ARMOR. Preserve its same mature Chinese warrior identity, face, red-plumed Chinese helmet, muted iron/bronze/deep-red palette and coherent round overlapping fish scales across helmet neck guard, broad rounded shoulders, chest/abdomen, armored skirt, forearms and shin protection. Every large armor area must visibly remain ROUND FISH SCALES, not rectangular lamellar tiles and not a red brigandine coat. Preserve the first reference's wooden repeating crossbow design, including top wooden bolt magazine, front transverse curved bow, string and wooden mechanism. SECOND REFERENCE IS ONLY A POSE AND CAPE GUIDE: use its low kneeling silhouette, NOT its different armor.\n\nRequested new pose: the forward leg steps far out toward screen RIGHT, foot firmly planted, front knee bent; the rear knee rests on the ground at screen LEFT with the rear foot naturally behind it. The torso turns three-quarter right and leans slightly into a composed aimed posture. Exactly two arms and two normal hands: the rear hand naturally controls the rear wooden crossbow stock/lever area, the forward hand supports the wooden stock from below. Keep the crossbow horizontal at upper-chest height, pointing screen RIGHT; shoulders, elbows, wrists and hands must connect visibly and plausibly. A short dark-crimson fabric cape sweeps backward toward screen LEFT, giving the whole figure a low broad triangular contour. Make the pose grounded and weight-bearing, with one lowered knee and one forward foot, not a floating crouch. Scaled chest, layered round-scale shoulders and fish-scale skirt must remain exposed and readable despite the pose and cape. No extra arms, hands, legs, duplicate crossbow, disconnected fingers or equipment intersecting the head or body.\n\nOne complete full-body adult on the same plain near-black charcoal studio background, warm soft upper-left light, restrained hand-painted historical game realism matching candidate B. Both feet, red plume, cape, complete bow and bowstring fully in frame, with generous dark clearance on all edges, especially the right bow tip. Square image for a 512px card and 128/64px review. No text, letters, labels, frame, watermark, scenery, other people, effects, glow or motion blur. This is the chosen B armor adapted to a new pose for visual review; it must not revert to the second reference's rectangular armor.\n",
+    "promptPath": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/prompt.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "integrationDate": "2026-10-30",
+    "approvedArtworkCommit": "3798a7f70fd76bfb5143a320a1e3703339a743a0",
+    "reusedApprovedPNG": {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/china-B-kneeling-512.png",
+      "sha256": "80709f92bade96fe285617b56a138ec8604c07d80ad6653b6ac499251b70a30b"
+    },
+    "conversion": "Lossless WebP encoding of the exact approved512px PNG; no resizing, cropping, color changes or regeneration.",
+    "cells": [
+      {
+        "key": "elite.guard.civ_zhongguo",
+        "group": "units",
+        "subject": "Player-approved high-grade fish-scale armor with forward leg and grounded rear knee, repeating crossbow and cape; source3798a7f.",
+        "path": "public/art/unified/units/elite.guard.civ_zhongguo.approved-3798a7f.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2
+          ],
+          "total": 18,
+          "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+          "playerApproval": "APPROVED_3798a7f",
+          "reviewedSHA256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+          "independentReview": "待驗",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "reviewer": "Codex actual ArmyView card/detail render inspection and browser decoded512px RGB equality at320/390/1440, plus native512/128/64 real Art checks. Player approved source3798a7f; independent review remains pending.",
+          "notes": "Exact approved PNG pixels; fish-scale armor and low kneeling pose unchanged. Two connected hands/arms, one repeating-crossbow prop; original B control-ring styling not mechanically reconstructed. At64 pose/cape read, individual scales do not.",
+          "browserEvidence": "docs/art-unification/elite-final-20261030/browser/army/result.json",
+          "nativeEvidence": "docs/art-unification/elite-final-20261030/browser/gallery/result.json"
         }
       }
     ]

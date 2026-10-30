@@ -1,7 +1,9 @@
 """Read-only integrity/scope gate; image anatomy is an explicit human review, not file QA."""
 import hashlib,json,subprocess,sys
 from pathlib import Path
+from approved_china_art import validate_approved_china, REGISTRY_PATH, PREVIOUS_REGISTRY_SHA
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/player-feedback-20261029';S=R/'docs/art-source/player-feedback-20261029';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text())
+approved=validate_approved_china()
 selected=load(S/'outputs.json');allowed={r['path'] for r in selected};assert len(selected)==5
 for r in selected:
  successor=R/'docs/art-unification/elite-review-20261029/runtime.json'
@@ -13,7 +15,8 @@ for r in selected:
  gate=r['artGate'];assert gate['total']>=17 and gate['reviewedSHA256']==r['sha256'];assert all(gate['scores'][i]>0 for i in [0,1,8]);assert gate['hardGate']['anatomy']=='PASS_SELF_REVIEW'
 protected=load(D/'protected.json')
 for p,h in protected['files'].items():
- if isinstance(h,dict):
+ if p==REGISTRY_PATH:assert h==PREVIOUS_REGISTRY_SHA
+ elif isinstance(h,dict):
   for f,v in h.items():assert sha(R/f)==v
  else:assert sha(R/p)==h,('Protected approved art/display changed',p)
 for p,h in protected['publicTree'].items():
@@ -22,7 +25,7 @@ for p,h in protected['publicTree'].items():
 for p,h in protected['unitDirectory'].items():
  if p not in allowed:assert sha(R/p)==h,('Unrequested unit changed',p)
 registry=load(R/'src/game/presentation/artAssets.json')['units']
-for r in selected:assert registry[r['key']]==r['path'].removeprefix('public/')
+for r in selected:assert registry[r['key']]==(approved['path'] if r['key']==approved['key'] else r['path']).removeprefix('public/')
 city=load(D/'browser/cities/result.json');assert city['status']=='PASS' and not city['errors'];assert city['counts']=={'cases':288,'paired':144,'changed':27,'unchanged':117}
 assert len(city['pairs'])==144
 for p in city['pairs']:assert p['slotStable'] and p['wallsStable'] and p['samePixels']!=p['changedExpected']
@@ -55,4 +58,5 @@ if (D/'capture-index.json').exists():
      else:assert sha(original)==c['sha256']
     else:assert caps['records'][c['source']]['originalSHA256']==c['sha256']
 
-print('PASS: five mapped512px portraits; heavy cavalry, other units, technology, legacy source atlases, imperial settings and world110% unchanged; 288 city cases/117 identical pairs; 27 real ArmyView cases. Anatomy remains visual self-review/player pending.')
+subprocess.run([sys.executable,str(R/'scripts/check-elite-final-review.py')],cwd=R,check=True)
+print('PASS: historical five portraits/evidence preserved; approved Chinese successor verified; heavy cavalry, other units, technology, legacy atlases, imperial settings and world110% unchanged. Japanese player choice and independent review remain pending.')

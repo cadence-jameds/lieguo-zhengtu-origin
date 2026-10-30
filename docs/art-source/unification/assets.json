@@ -9274,8 +9274,8 @@
   {
     "key": "elite.guard.civ_zhongguo",
     "group": "units",
-    "subject": "Reinforced shoulders/cuirass and mature repeating crossbow with visible transverse bow.",
-    "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+    "subject": "Player-approved high-grade fish-scale armor with forward leg and grounded rear knee, repeating crossbow and cape; source3798a7f.",
+    "path": "public/art/unified/units/elite.guard.civ_zhongguo.approved-3798a7f.webp",
     "artGate": {
       "scores": [
         2,
@@ -9285,27 +9285,28 @@
         2,
         2,
         1,
-        2,
+        1,
         2,
         2
       ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
-      "playerApproval": "待驗",
-      "reviewedSHA256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "total": 18,
+      "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+      "playerApproval": "APPROVED_3798a7f",
+      "reviewedSHA256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+      "independentReview": "待驗",
       "hardGate": {
         "anatomy": "PASS_SELF_REVIEW",
-        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
         "extraLimbs": "NONE_OBSERVED",
         "criticalDefectOverridesScore": true
       },
-      "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
-      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
-      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+      "reviewer": "Codex actual ArmyView card/detail render inspection and browser decoded512px RGB equality at320/390/1440, plus native512/128/64 real Art checks. Player approved source3798a7f; independent review remains pending.",
+      "notes": "Exact approved PNG pixels; fish-scale armor and low kneeling pose unchanged. Two connected hands/arms, one repeating-crossbow prop; original B control-ring styling not mechanically reconstructed. At64 pose/cape read, individual scales do not.",
+      "browserEvidence": "docs/art-unification/elite-final-20261030/browser/army/result.json",
+      "nativeEvidence": "docs/art-unification/elite-final-20261030/browser/gallery/result.json"
     },
     "role": "ARMY-PORTRAIT",
-    "batch": "feedback-20261029-elite.guard.civ_zhongguo",
+    "batch": "china-player-approved-3798a7f-runtime-20261030",
     "cropRect": [
       0,
       0,
@@ -9316,15 +9317,21 @@
       512,
       512
     ],
-    "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
-    "bytes": 37630,
+    "sha256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+    "bytes": 297710,
     "atlasExtraction": null,
     "alphaPolicy": "dark-opaque",
-    "approver": null,
+    "approver": "PLAYER",
+    "approvedArtworkCommit": "3798a7f70fd76bfb5143a320a1e3703339a743a0",
+    "normalization": "Lossless WebP encoding of the exact approved512px PNG; no resizing, cropping, color changes or regeneration.",
+    "approvedPNG": {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/china-B-kneeling-512.png",
+      "sha256": "80709f92bade96fe285617b56a138ec8604c07d80ad6653b6ac499251b70a30b"
+    },
     "supersedes": {
       "key": "elite.guard.civ_zhongguo",
       "group": "units",
-      "subject": "Elite Chinese repeating-crossbow guard: heavy layered steel lamellar coat with shoulder plates and crested enclosed helmet, large repeating crossbow held raised diagonally, spare bolt case and forward kneeling stance; differs from ordinary Chinese guard in armor, weapon scale and pose",
+      "subject": "Reinforced shoulders/cuirass and mature repeating crossbow with visible transverse bow.",
       "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
       "artGate": {
         "scores": [
@@ -9341,31 +9348,84 @@
         ],
         "total": 19,
         "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-        "reviewer": "Codex visual self-review, not an independent release approval",
+        "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
         "playerApproval": "待驗",
-        "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-        "browserEvidence": "docs/art-unification/browser/result.json",
-        "comparisonBoards": "docs/art-unification/boards/"
+        "reviewedSHA256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+        "hardGate": {
+          "anatomy": "PASS_SELF_REVIEW",
+          "equipmentAndGrip": "PASS_SELF_REVIEW",
+          "extraLimbs": "NONE_OBSERVED",
+          "criticalDefectOverridesScore": true
+        },
+        "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
+        "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+        "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
       },
       "role": "ARMY-PORTRAIT",
-      "batch": "army-elite-guards",
+      "batch": "feedback-20261029-elite.guard.civ_zhongguo",
       "cropRect": [
-        2,
-        2,
-        508,
-        493
+        0,
+        0,
+        1254,
+        1254
       ],
       "dimensions": [
         512,
         512
       ],
-      "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8",
-      "bytes": 36646,
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "bytes": 37630,
       "atlasExtraction": null,
       "alphaPolicy": "dark-opaque",
       "approver": null,
-      "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
-      "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_zhongguo.webp"
+      "supersedes": {
+        "key": "elite.guard.civ_zhongguo",
+        "group": "units",
+        "subject": "Elite Chinese repeating-crossbow guard: heavy layered steel lamellar coat with shoulder plates and crested enclosed helmet, large repeating crossbow held raised diagonally, spare bolt case and forward kneeling stance; differs from ordinary Chinese guard in armor, weapon scale and pose",
+        "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual self-review, not an independent release approval",
+          "playerApproval": "待驗",
+          "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+          "browserEvidence": "docs/art-unification/browser/result.json",
+          "comparisonBoards": "docs/art-unification/boards/"
+        },
+        "role": "ARMY-PORTRAIT",
+        "batch": "army-elite-guards",
+        "cropRect": [
+          2,
+          2,
+          508,
+          493
+        ],
+        "dimensions": [
+          512,
+          512
+        ],
+        "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8",
+        "bytes": 36646,
+        "atlasExtraction": null,
+        "alphaPolicy": "dark-opaque",
+        "approver": null,
+        "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+        "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_zhongguo.webp"
+      },
+      "revision": "34be1b5c2dba64b2d84c4a8bfbc8656ad5d726c6",
+      "preservedOutput": "docs/art-unification/elite-final-20261030/before/elite.guard.civ_zhongguo.webp"
     }
   },
   {

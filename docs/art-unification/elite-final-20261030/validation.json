@@ -1,0 +1,37 @@
+{
+  "baseHEAD": "34be1b5c2dba64b2d84c4a8bfbc8656ad5d726c6",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "artFiles": "PASS",
+  "artBoards": "PASS",
+  "cityVisuals": "PASS",
+  "playerFeedbackAndFinalSuccessor": "PASS",
+  "armyView": {
+    "status": "PASS",
+    "cases": 27,
+    "errors": 0
+  },
+  "nativeArt": {
+    "status": "PASS",
+    "japanese128and64Cards": 30,
+    "chinese512and128and64Cards": 9,
+    "viewports": [
+      320,
+      390,
+      1440
+    ]
+  },
+  "fullRegression": {
+    "status": "PASS",
+    "passed": 2103,
+    "failed": 0,
+    "skipped": 1,
+    "mode": "full in disposable copy, maxWorkers2, unchanged30000ms timeout",
+    "reportSHA256": "401e1aeaabb6ffee3a8e15fb1f1717ff0ceb41359c3a0f34bce33cf12eee0447"
+  },
+  "githubCI": "See actual final pushed HEAD Checks; not claimed by this local record.",
+  "physicalPhone": "待驗",
+  "independentArtReview": "待驗",
+  "pagesBuildPaths": "PASS",
+  "releaseArtifacts": "PASS"
+}
