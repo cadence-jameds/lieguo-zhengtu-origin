@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "pr": 49,
+  "baseCommit": "bfe242939a791350c4d4a2c0b262e4891266684e",
+  "uiCommit": "574cdac0f50b1352289f9fec3764db53b04b6742",
+  "scope": "Exact successor UI evidence for PR #49; not new art approval or regenerated historical measurements.",
+  "originCIFailure": {
+    "run": 41026256832,
+    "job": 123964972149,
+    "head": "574cdac0f50b1352289f9fec3764db53b04b6742",
+    "step": "City display scale evidence",
+    "error": "Stale display evidence: src/game/presentation/CityScenes.tsx"
+  },
+  "changes": {
+    "src/game/FormalWorldMap.tsx": {
+      "baseSha256": "346b5f975d1ece11689b79e41e3196a9913a70cb6842d9344212de37a28953ee",
+      "uiSha256": "bf3ced0883728d1c2fa86109764b80a3e7899127ce08101e77680e14016f5bf9",
+      "acceptedPredecessorSha256": [
+        "346b5f975d1ece11689b79e41e3196a9913a70cb6842d9344212de37a28953ee"
+      ],
+      "allowedChange": "Remove only the legacy Canvas fillText(帝) branch. City sprites, scale, feet, hit regions and other map glyphs retained."
+    },
+    "src/game/game.css": {
+      "baseSha256": "27f940cd0e2afd89ba6d34c9a6f64d01b917977f25b17461decb29878c16f87c",
+      "uiSha256": "0444a47ec824fa0542f427e1a3eb0d442924e7820f9a8889e97057381427a281",
+      "acceptedPredecessorSha256": [
+        "27f940cd0e2afd89ba6d34c9a6f64d01b917977f25b17461decb29878c16f87c",
+        "d153e2a2da34749e8c50dbcde4637a75957b4ebb73d66fe330df6b587d4ee544"
+      ],
+      "allowedChange": "Share existing plot geometry with level overlay anchors; central translucent circular level badge; move Formal heading layout to parity.css. No parcel or artwork edits."
+    },
+    "src/game/presentation/CityScenes.tsx": {
+      "baseSha256": "3a58851f893af1bf343e254b636421351b810099c74fda87e511982bb2ca5837",
+      "uiSha256": "1794153c0d49bf2e07e60aa40a4d5bc693e52a4bae22fe5726ccd20c306bedf6",
+      "acceptedPredecessorSha256": [
+        "3a58851f893af1bf343e254b636421351b810099c74fda87e511982bb2ca5837"
+      ],
+      "allowedChange": "Flexible single-row heading; compact governor label; remove duplicate era badges; completed levels in independent art-aligned overlay. Building anchors, sprites and click handlers retained."
+    },
+    "src/game/presentation/Shell.tsx": {
+      "baseSha256": "0c63de06305b2bc50d78dc2232f9c90b689169af62606b504926b5625db18b83",
+      "uiSha256": "88785f63068ebc940d1ebb51f8448253d6f2f34788a6b19e7bf240a66a7efff7",
+      "acceptedPredecessorSha256": [
+        "0c63de06305b2bc50d78dc2232f9c90b689169af62606b504926b5625db18b83"
+      ],
+      "allowedChange": "Render real faction age in two centered mobile HUD lines with the existing era action. AGE_NAMES unchanged."
+    },
+    "src/game/presentation/parity.css": {
+      "baseSha256": "747b7e56de54c6e408e2b60d03c6ba4b97b45cfcf4cfbfcc19ee0b1659704635",
+      "uiSha256": "8924ff843d9a42f807bdddc18b953c556a5629acb75712cc1e87ce5522a4eb56",
+      "acceptedPredecessorSha256": [
+        "747b7e56de54c6e408e2b60d03c6ba4b97b45cfcf4cfbfcc19ee0b1659704635"
+      ],
+      "allowedChange": "Constrain title/actions and center two-line age in the existing HUD target; hide empty name labels independently of levels."
+    },
+    "src/game/presentation/v95City.test.tsx": {
+      "baseSha256": "9a8c7d20fddbf83619fe6e8ef320364c7cc4c5c7da203203fb9e77ef3513b7b0",
+      "uiSha256": "1767e9454e65cb48c33a647697888ce53fb2ab63b0be67cc1f03c72fd918f800",
+      "acceptedPredecessorSha256": [
+        "9a8c7d20fddbf83619fe6e8ef320364c7cc4c5c7da203203fb9e77ef3513b7b0"
+      ],
+      "allowedChange": "Existing governor test assertions follow the new compact mobile label while retaining full policy aria-label checks. No runtime rules or timeout changes."
+    }
+  },
+  "historicalEvidence": {
+    "docs/art-unification/city-fit/measurements.json": "6283ef66707173b7e25993be61b677c898480672f05c5ab1ad8557e2ff826825",
+    "docs/art-unification/elite-final-20261030/browser-manifest.json": "f957ccb0c456bbef35a15642a71aaf1a6c10d63b1b68111f790e35bc51656b0f",
+    "docs/art-unification/elite-review-20261029/browser-manifest.json": "78d4cf0f76a43ad98abd07c9690be2347440d735543c7560e4f331c7007bad16",
+    "docs/art-unification/elite-review-20261029/protected.json": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0",
+    "docs/art-unification/japan-approved-20261030/browser-manifest.json": "e889627804b970087b942d858af1d707d52c6eaccca288d2bd00c6c66eafa852",
+    "docs/art-unification/player-feedback-20261029/compatibility.json": "81e29775ad2b38cb89659625f03ab4cdda05e2e00c8a4239fb94aaf87bbfe71e",
+    "docs/art-unification/player-feedback-20261029/protected.json": "4c2e6e6e17c8b99413b2c8672ac3c0bef4f6263b442f796238665eb569f67531"
+  },
+  "visualInvariants": {
+    "scripts/art-preview-world.ts": "ff76375bc6950f64d961dbea82740d827629a4cc9461dc374bc58de1d5ce2bd7",
+    "src/game/MiniatureCity.tsx": "0f4aec090b581fa5dac08fce5c65289ea08d5879685e8baee622a77b10b9ee99",
+    "src/game/presentation/artAssets.json": "ac6d8be190f14588908b69072de26da1b1ecaa16724ffb771c6c4aca6633f724",
+    "src/game/presentation/artMap.ts": "b2f73167f92a1b1d4e57cfe5f651c52183c47fc3edf48feff4459a5ad175d4e7",
+    "src/game/presentation/cityVisuals.ts": "32679c06212a5d9d852fd94a267e7eddfafe47d1048c3105a0b9e57324c32f41"
+  },
+  "evidenceFiles": {
+    "docs/validation/city-ui-integration/README.md": "ee63912ce5ccae09709f55822e68e52eacd37e9dbe744a6830e989c55eae5376",
+    "docs/validation/city-ui-integration/after-1440x900-imperial.jpg": "05ac5ad31a7b5a1ac6d59ef186fc902c49419d8521b0aaf460ba5006e951a193",
+    "docs/validation/city-ui-integration/after-320x568-imperial.jpg": "2d91ea6f94460ae436dea2c766b4fa288929589e34f25e6fa5eea40f2000b29d",
+    "docs/validation/city-ui-integration/after-390-age-0.jpg": "736053086374118f7da50131f91d4aa2aeffcbce73e924f974d27d5ca24985cb",
+    "docs/validation/city-ui-integration/after-390-age-1.jpg": "df43de8c101ec67b0f45bf1440f0bc4899dc8a9d5e3a52bc4765097eede3f65d",
+    "docs/validation/city-ui-integration/after-390-age-2.jpg": "2d7ec7eba987dc02b682156ea06e62fa52dd76ec12f76f279f3925666720515c",
+    "docs/validation/city-ui-integration/after-390x844-imperial.jpg": "83b1879ba519499f148f7fef4c1be2b319cfc5add2906a42961c987d08359e48",
+    "docs/validation/city-ui-integration/after-844x390-imperial.jpg": "991bc8883591322c2f656d4e86e7d1f4584f6c41ed2a28d8aee21091b2ffe9df",
+    "docs/validation/city-ui-integration/after-construction.jpg": "2d14c223807862db36b79fe3404ed848fc80838b9a29f0b964c5d99564ffb62e",
+    "docs/validation/city-ui-integration/after-map-age-2.jpg": "cacf70530955e6b931d7eb8be9c8507a0b3b19f2d2f77a1549fa3485e348bea7",
+    "docs/validation/city-ui-integration/after-map-age-3.jpg": "287a0442cea596c581a744f51ad59a656b295fd7dc71011ab68c7c715e88961e",
+    "docs/validation/city-ui-integration/after-queued.jpg": "4ac469ebb0cf18d9417f1dbf040eccddbdc3075732d16f38868d8d4dfba58996",
+    "docs/validation/city-ui-integration/before-1440x900-imperial.jpg": "dece921f89228264fa423751db15acd39168e623ebd974fcb91a309a192410b4",
+    "docs/validation/city-ui-integration/before-320x568-imperial.jpg": "f96aa338016c0dc96d18bd5a4d1090fab06f38da77021d41b46b5724f1c1c460",
+    "docs/validation/city-ui-integration/before-390x844-imperial.jpg": "5ff39e496c275ccafe266508a8867acee746f554bb9ccf4768d9e4666207843e",
+    "docs/validation/city-ui-integration/before-844x390-imperial.jpg": "b38fabb2dc98feade72cbd22cf254cb5436fb44cc1d7dcb8cfc0c5722660fe2a",
+    "docs/validation/city-ui-integration/before-map-age-2.jpg": "cacf70530955e6b931d7eb8be9c8507a0b3b19f2d2f77a1549fa3485e348bea7",
+    "docs/validation/city-ui-integration/before-map-age-3.jpg": "7f7926c636c3fb59326b234f8b2f74003dcdeb51c08bc25a459d667a937b2771",
+    "docs/validation/city-ui-integration/browser-result.json": "c1e73c4da677be1c5a6523d3ab3d4f96b7822e176c0c303e9bcbc2f6c21f95ca",
+    "docs/validation/city-ui-integration/checks.json": "237619f3ffd06a0f69ccfb03fd55a09644bb8d168e883f951a06443f9cdbbd0d",
+    "docs/validation/city-ui-integration/preview.html": "69d6cdb1a5cb5df659458a38431a3858f444e1d723eebddc240ae68aaf714275",
+    "docs/validation/city-ui-integration/preview.tsx": "4b33b7049df13ade3e622df7d7d4753a78648d9c85664de422f807cdf588f8fa"
+  }
+}

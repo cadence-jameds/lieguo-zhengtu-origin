@@ -3,6 +3,7 @@ import hashlib,json,struct,subprocess
 from pathlib import Path
 from approved_china_art import validate_approved_china, REGISTRY_PATH, PREVIOUS_REGISTRY_SHA
 from approved_japan_art import validate_approved_japan
+from city_ui_successor import accepts_ui_successor
 R=Path(__file__).resolve().parents[1];D=R/'docs/art-unification/elite-review-20261029';load=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 approved=validate_approved_china()
 japan=validate_approved_japan()
@@ -16,7 +17,7 @@ for x in outputs:
 protected=load(D/'protected.json')
 for p,h in protected['files'].items():
  if p==REGISTRY_PATH:assert h==PREVIOUS_REGISTRY_SHA  # exact one-key successor validated above
- else:assert sha(R/p)==h,('Unrequested change',p)
+ else:assert sha(R/p)==h or accepts_ui_successor(p,h),('Unrequested change',p)
 changed=subprocess.check_output(['git','-C',str(R),'diff','--name-only',protected['base'],'--','public'],text=True).splitlines();assert changed==sorted(['public/art/unified/units/elite.guard.civ_frankia.webp',approved['path'],japan['path']]),('Unexpected public change',changed)
 registry=load(R/'src/game/presentation/artAssets.json')['units'];r=load(D/'runtime.json');assert r['key']=='elite.guard.civ_frankia';assert registry[r['key']]==r['path'].removeprefix('public/');assert sha(R/r['path'])==r['sha256'];assert sha(D/'before/elite.guard.civ_frankia.webp')==r['previousSHA256'];assert r['sha256']==next(x['outputSHA256'] for x in outputs if x['civ']=='frankia')
 for x in outputs:

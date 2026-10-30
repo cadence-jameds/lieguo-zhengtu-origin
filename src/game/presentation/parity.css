@@ -22,7 +22,14 @@
 .formal-shell .formal-scenes .district-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
 .formal-shell .formal-scenes .field-composition-summary{padding:0;gap:8px 14px;flex:1}
 .formal-shell .formal-scenes .label-toggle{margin-left:auto}
-.formal-shell .formal-scenes .city-heading{margin-bottom:16px}
+.formal-shell .formal-scenes .quiet-town-labels .town-label{display:none}
+.formal-shell .formal-scenes .city-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:6px;margin-bottom:16px}
+.formal-shell .formal-scenes .city-heading>div{min-width:0}
+.formal-shell .formal-scenes .city-title-row{min-width:0;flex-wrap:nowrap;min-height:44px}
+.formal-shell .formal-scenes .city-title-row h1{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;overflow-wrap:normal}
+.formal-shell .formal-scenes .city-title-meta{display:flex;align-items:center;gap:6px}
+.formal-shell .formal-scenes .city-heading-actions{flex-wrap:nowrap;white-space:nowrap;min-height:44px}
+.formal-shell .formal-scenes .governor-shortcut{white-space:nowrap}
 .formal-shell .formal-scenes .city-heading-actions{flex:none}
 .formal-shell .construction-menu .formal-new-building{width:80px;height:90px}
 .formal-shell .build-categories{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -41,16 +48,17 @@
 .plot-register-grid button{display:flex;justify-content:space-between;gap:10px;min-width:0}
 .formal-shell .cost{font-size:14px}
 .formal-shell.mobile-layout .formal-scenes .city-heading{margin-bottom:12px}
-.formal-shell.mobile-layout .formal-scenes .city-title-row{gap:6px;flex-wrap:wrap}
-.formal-shell.mobile-layout .formal-scenes .city-title-row h1{font-size:1.25rem;overflow-wrap:anywhere}
+.formal-shell.mobile-layout .formal-scenes .city-title-row{gap:6px;flex-wrap:nowrap}
+.formal-shell.mobile-layout .formal-scenes .city-title-row h1{font-size:1.25rem;overflow-wrap:normal}
 .formal-shell.mobile-layout .formal-scenes .city-inline-coordinates{font-size:.875rem;white-space:nowrap}
 .formal-shell.mobile-layout .formal-scenes .rename-city{min-width:36px;width:36px;min-height:36px;margin-left:0;padding:0;font-size:20px}
 .formal-shell.mobile-layout .formal-scenes .field-composition-summary{flex:0 0 auto;flex-wrap:nowrap;justify-content:flex-start;font-size:12px;gap:5px}
 .formal-shell.mobile-layout .formal-scenes .district-toolbar{flex-wrap:nowrap;gap:6px}
 .formal-shell.mobile-layout .formal-scenes .label-toggle{flex:none;white-space:nowrap;margin-left:auto;font-size:12px;padding:6px 4px;min-height:44px}
-.formal-shell.mobile-layout .formal-scenes .city-heading-actions{margin-left:auto}
-.formal-shell.mobile-layout .formal-scenes .scene-view-shortcut{font-size:14px;min-height:38px;padding:6px 10px}
-.formal-shell.mobile-layout .formal-scenes .city-heading{flex-wrap:wrap;gap:8px}
+.formal-shell.mobile-layout .formal-scenes .city-heading-actions{margin-left:auto;gap:4px}
+.formal-shell.mobile-layout .formal-scenes .governor-shortcut{max-width:none;white-space:nowrap}
+.formal-shell.mobile-layout .formal-scenes .scene-view-shortcut{min-height:44px}
+.formal-shell.mobile-layout .formal-scenes .city-heading{gap:4px}
 .formal-shell.mobile-layout .catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .formal-shell.mobile-layout .building-detail{gap:12px;align-items:flex-start}
 .formal-shell.mobile-layout .building-detail>.building-sprite,.formal-shell.mobile-layout .building-detail>.resource-field-art,.formal-shell.mobile-layout .building-detail>.formal-new-building{width:92px;height:92px;flex-shrink:0}
@@ -112,3 +120,6 @@
 .formal-shell .building-prerequisite-summary .met{font-weight:400}
 
 .update-alert.formal-mobile-update{bottom:calc(108px + env(safe-area-inset-bottom));font-size:13px;max-width:calc(100vw - 32px)}
+
+/* Two centered lines fit inside the existing 44px HUD target. */
+.formal-shell.mobile-layout .mobile-era{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;min-width:44px;min-height:44px;line-height:1.15;padding-block:2px}
