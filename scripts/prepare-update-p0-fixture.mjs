@@ -11,7 +11,7 @@ try{
  let w=createFormalWorld({campaign:'update-p0-synthetic',seed:90217}),serial=0;
  const issue=p=>{const t=submitFormalOrder(w,{campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('update-p0-'+(++serial)),issuedWorldTime:w.time,expectedRevision:w.revision,payload:p});assert.equal(t.ack.status,'committed',t.ack.reason);w=t.world;};
  issue({type:'field.upgrade',cityId:w.cities[0].id,slot:0});const job=w.cities[0].economy.construction[0];w=advanceFormal(w,job.startsAt+job.durationMs).world;
- issue({type:'tasks.claim',cityId:w.cities[0].id,taskId:'N01',expectedResources:quoteGrowthReward(w,w.cities[0],GROWTH_TASK_BY_ID.get('N01')).accepted});
+ issue({type:'tasks.claim',cityId:w.cities[0].id,taskId:'N01',rewardVersion:2,expectedResources:quoteGrowthReward(w,w.cities[0],GROWTH_TASK_BY_ID.get('N01')).accepted});
  enableAutonomy(w);w.offlineHours=0;w.speed=1;
  for(const a of w.autonomy.agents)if(a.eventId){a.nextAt=w.time+30*86400000;w.events.find(e=>e.id===a.eventId).at=a.nextAt;}w.events=new EventScheduler(w.events).snapshot();
  // Exercise compatibility labels from PR19 as well as the current formal shape.

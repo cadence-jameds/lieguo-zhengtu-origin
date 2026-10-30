@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "source": "Production build with actual Worker, IndexedDB, lawful-event synthetic fixtures; no private saves",
+  "cases": [
+    {
+      "name": "320",
+      "status": "PASS",
+      "columns": 1,
+      "historyHeights": [
+        44,
+        44
+      ],
+      "blocked": {
+        "document": false,
+        "goals": false,
+        "wide": []
+      },
+      "geometry": {
+        "document": false,
+        "goals": false,
+        "wide": []
+      },
+      "claims": [
+        "N01",
+        "C08"
+      ],
+      "realWorker": true,
+      "productionStable": true,
+      "reload": true,
+      "keyboard": true,
+      "badgesIndependent": true,
+      "physicalPhone": "待驗"
+    },
+    {
+      "name": "390",
+      "status": "PASS",
+      "columns": 1,
+      "historyHeights": [
+        44,
+        44
+      ],
+      "blocked": {
+        "document": false,
+        "goals": false,
+        "wide": []
+      },
+      "geometry": {
+        "document": false,
+        "goals": false,
+        "wide": []
+      },
+      "claims": [
+        "N01",
+        "C08"
+      ],
+      "realWorker": true,
+      "productionStable": true,
+      "reload": true,
+      "keyboard": true,
+      "badgesIndependent": true,
+      "physicalPhone": "待驗"
+    },
+    {
+      "name": "1440",
+      "status": "PASS",
+      "columns": 2,
+      "historyHeights": [
+        44,
+        44
+      ],
+      "blocked": {
+        "document": false,
+        "goals": false,
+        "wide": []
+      },
+      "geometry": {
+        "document": false,
+        "goals": false,
+        "wide": []
+      },
+      "claims": [
+        "N01",
+        "C08"
+      ],
+      "realWorker": true,
+      "productionStable": true,
+      "reload": true,
+      "keyboard": true,
+      "badgesIndependent": true,
+      "physicalPhone": "待驗"
+    }
+  ],
+  "errors": []
+}

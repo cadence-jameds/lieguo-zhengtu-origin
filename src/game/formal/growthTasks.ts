@@ -12,9 +12,9 @@ import {empireOf,legionOf} from './politics';
 import {isMissionArmy,type MissionArmy} from './combatModel';
 import {spatial} from './spatial';
 
-export type GrowthClaim={commandId:CommandId;cityId:CityId;at:number;accepted:Resources;lost:Resources;capacity:number;stockBefore:Resources;reserved:Resources};
+export type GrowthClaim={rewardVersion?:2;commandId:CommandId;cityId:CityId;at:number;accepted:Resources;lost:Resources;capacity:number;stockBefore:Resources;reserved:Resources};
 export type GrowthTaskState={version:1;startedAt:number;recordedThrough:number;facts:Record<string,number>;completed:Record<string,number>;claimed:Record<string,GrowthClaim>;settledCities:CityId[];autoShipments:string[]};
-export type GrowthClaimCommand={type:'tasks.claim';cityId:CityId;taskId:string;expectedResources:Resources};
+export type GrowthClaimCommand={type:'tasks.claim';cityId:CityId;taskId:string;rewardVersion?:2;expectedResources:Resources};
 const emptyState=(time:number):GrowthTaskState=>({version:1,startedAt:time,recordedThrough:time,facts:{},completed:{},claimed:{},settledCities:[],autoShipments:[]});
 function fact(w:FormalWorld,key:string,value=1,at=w.time){
  const limit=GROWTH_FACT_LIMITS.get(key);if(!limit||value<=0)return;
@@ -60,16 +60,19 @@ export function growthTaskStatus(state:GrowthTaskState,task:GrowthTask){return s
 export function ownedPopulationProgress(w:FormalWorld){return Math.floor(Math.max(0,...spatial(w).owned(w.playerFactionId).map(c=>c.economy?growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),Math.max(0,w.time-c.economy.lastSettledAt)/HOUR):c.population)));}
 export function claimableGrowthCount(w:FormalWorld){const s=growthTaskState(w);return GROWTH_TASKS.filter(t=>growthTaskStatus(s,t)==='claimable').length;}
 export function quoteGrowthReward(w:FormalWorld,c:FormalCity,task:GrowthTask){
- const current=citySnapshot(w,c.id)??c,capacity=storageCapacity(current),reserved={...(current.economy?.reservedIncoming??zeroResources())},accepted=zeroResources(),lost=zeroResources();
- for(const r of resourceKeys){accepted[r]=Math.min(task.reward[r],Math.max(0,Math.floor(capacity-reserved[r]-current.stock[r])));lost[r]=task.reward[r]-accepted[r];}
- return {capacity,stockBefore:{...current.stock},reserved,accepted,lost};
+ const current=citySnapshot(w,c.id)??c,capacity=storageCapacity(current),reserved={...(current.economy?.reservedIncoming??zeroResources())},available=zeroResources(),shortfall=zeroResources();
+ for(const r of resourceKeys){available[r]=Math.max(0,Math.floor(capacity-reserved[r]-current.stock[r]));shortfall[r]=Math.max(0,task.reward[r]-available[r]);}
+ return {capacity,stockBefore:{...current.stock},reserved,available,shortfall,canClaim:resourceKeys.every(r=>shortfall[r]===0),accepted:{...task.reward},lost:zeroResources()};
 }
 export function claimGrowthReward(w:FormalWorld,c:FormalCity,o:FormalOrder,p:GrowthClaimCommand){
  requireRule(o.issuerId===w.playerFactionId&&w.factions.find(f=>f.id===o.issuerId)?.role!=='ai','只有玩家可以領取成長任務獎勵。');
  requireRule(c.ownerFactionId===o.issuerId,'領獎城市已非玩家所有。');const task=GROWTH_TASK_BY_ID.get(p.taskId);requireRule(task,'任務不存在。');syncGrowthTasks(w);
  const state=w.growthTasks;requireRule(state&&state.completed[task.id]!==undefined,'任務尚未完成。');requireRule(!state.claimed[task.id],'此任務已領取。');
- const quote=quoteGrowthReward(w,c,task);requireRule(resourceKeys.every(r=>p.expectedResources[r]===quote.accepted[r]),'城市容量或庫存已改變，請重新核對實收與損失。');
- for(const r of resourceKeys)c.stock[r]+=quote.accepted[r];state.recordedThrough=Math.max(state.recordedThrough,w.time);state.claimed[task.id]={commandId:o.commandId,cityId:c.id,at:w.time,...quote};
+ requireRule(p.rewardVersion===2,'領獎規則已更新，請依新版獎勵重新提交。');
+ requireRule(resourceKeys.every(r=>p.expectedResources[r]===task.reward[r]),'任務獎勵已更新，請重新確認獎勵。');
+ const quote=quoteGrowthReward(w,c,task);requireRule(quote.canClaim,'倉庫可用容量不足，四種資源必須能完整入庫。');
+ for(const r of resourceKeys)c.stock[r]+=task.reward[r];
+ state.recordedThrough=Math.max(state.recordedThrough,w.time);state.claimed[task.id]={rewardVersion:2,commandId:o.commandId,cityId:c.id,at:w.time,capacity:quote.capacity,stockBefore:quote.stockBefore,reserved:quote.reserved,accepted:quote.accepted,lost:quote.lost};
 }
 function appliedCityCommand(w:FormalWorld,id:CommandId,cityId:CityId,playerOnly=true){const r=w.commandReceipts.find(r=>r.commandId===id&&(!playerOnly||r.issuerId===w.playerFactionId)&&r.disposition==='applied');if(!r)return false;try{const p=JSON.parse(r.fingerprint);return p.issuerId===r.issuerId&&p.payload.cityId===cityId;}catch{return false;}}
 function constructionFact(w:FormalWorld,prefix:string,level:number){
