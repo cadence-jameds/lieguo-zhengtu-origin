@@ -1,0 +1,60 @@
+{
+  "baseCommit": "7f184d526019d40caf370d2b0fe3ed3ba7e8c66a",
+  "uiCommit": "96fcadb5c47e6533066ede29ce4dd631488e3da8",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pagesPwa": "PASS",
+  "releaseArtifacts": "PASS",
+  "browser": {
+    "status": "PASS",
+    "passed": 53,
+    "failed": 0,
+    "errors": 0
+  },
+  "targetedVitest": {
+    "status": "PASS",
+    "files": 3,
+    "passed": 15
+  },
+  "successorTamperTests": {
+    "status": "PASS",
+    "historical": 10,
+    "current": 3
+  },
+  "artFiles": {
+    "status": "PASS",
+    "sourceBatches": 53,
+    "assets": 198,
+    "runtimeBytes": 17504806,
+    "largestBytes": 1946330,
+    "failures": []
+  },
+  "gates": {
+    "check-art-boards.py": "PASS",
+    "check-city-visuals.py": "PASS",
+    "check-player-feedback.py": "PASS",
+    "check-city-scale.py": "PASS",
+    "city_ui_successor.py": "PASS",
+    "mobile_town_successor.py": "PASS"
+  },
+  "fullRegression": {
+    "status": "PASS",
+    "passed": 2106,
+    "failed": 0,
+    "skipped": 1,
+    "durationMs": 450691,
+    "reportSha256": "60594208cbc56d5e0f0eedecf1b85fa4bb8caa10f1fb2345f7ebbdee214dd638",
+    "skippedTests": [
+      {
+        "file": "game/batch210.test.tsx",
+        "name": "user late-game save remains valid after six more world hours",
+        "status": "skipped"
+      }
+    ],
+    "timeoutThresholdMs": 30000,
+    "command": "node scripts/verify-in-isolation.mjs full"
+  },
+  "historicalEvidence": "Unchanged. Prior three legacy art failures, B5 E1 HOLD, Astra Gate not PASS, and PR49 full-regression timeout remain historical records. Current UI validation does not grant release acceptance.",
+  "physicalPhone": "待驗",
+  "githubCI": "See Draft PR Checks for the exact pushed HEAD; local equivalent checks are recorded above."
+}
