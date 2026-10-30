@@ -100,7 +100,8 @@
       "path": "art/unified/units/light-cavalry.webp",
       "origin": "new",
       "exists": true,
-      "sha256": "3348b8b7ca04fe999a93e79473b3a3fd6083a6eab3a12d881a2bcc4b9e728943"
+      "sha256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+      "latestReview": "docs/art-unification/player-feedback-20261029/art-gate.json"
     },
     {
       "id": "knight",
@@ -110,7 +111,8 @@
       "path": "art/unified/units/knight.webp",
       "origin": "new",
       "exists": true,
-      "sha256": "fc010986c483b58ce5fd74a520215d7a44dfdf878be62a50e6beefbb5df29d9d"
+      "sha256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+      "latestReview": "docs/art-unification/player-feedback-20261029/art-gate.json"
     },
     {
       "id": "ram",
@@ -333,7 +335,8 @@
       "badge": "ELITE",
       "origin": "new",
       "exists": true,
-      "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8"
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "latestReview": "docs/art-unification/player-feedback-20261029/art-gate.json"
     },
     {
       "id": "elite.guard.civ_byzantium",
@@ -355,7 +358,8 @@
       "badge": "ELITE",
       "origin": "new",
       "exists": true,
-      "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6"
+      "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+      "latestReview": "docs/art-unification/elite-review-20261029/art-gate.json"
     },
     {
       "id": "elite.guard.civ_britannia",
@@ -377,7 +381,8 @@
       "badge": "ELITE",
       "origin": "new",
       "exists": true,
-      "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6"
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "latestReview": "docs/art-unification/player-feedback-20261029/art-gate.json"
     },
     {
       "id": "elite.guard.civ_mongolia",
@@ -9060,5 +9065,7 @@
   ],
   "failures": [],
   "status": "PATH_PASS",
-  "visualGate": "Separate human review and browser evidence required; PATH_PASS is not ART-GATE PASS."
+  "visualGate": "Separate human review and browser evidence required; PATH_PASS is not ART-GATE PASS.",
+  "playerFeedbackBase": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "eliteReviewBase": "8736bad811a7c372c59881b143e4c75bd659c5af"
 }

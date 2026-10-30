@@ -1,0 +1,287 @@
+[
+  {
+    "id": "frankia-single-hand-v1",
+    "civ": "frankia",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/frankia-single-hand-v1.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png"
+    ],
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+    "rawSHA256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/frankia-single-hand-v1.webp",
+    "outputSHA256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 36062,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+        "sha256": "71139b089745d1e8c04bc0d6ad05d86fc25e76f26e2587f9e1633cf55f45d83c"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      }
+    ],
+    "promptSHA256": "9f0e725fb3b28868c1b231a32640a536d4a345e25e54d76d34983b8fcb06569e"
+  },
+  {
+    "id": "china-A-lamellar",
+    "civ": "zhongguo",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/china-A-lamellar.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png"
+    ],
+    "status": "PLAYER_CHOICE_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/china-A-lamellar.png",
+    "rawSHA256": "26275efd29e33ebafa6ae6712bb7d8ca57fd495a6be06bd41a6d77182819c878",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/china-A-lamellar.webp",
+    "outputSHA256": "8df30d203ffb9c9ff43ec0cd3e7f25683c34e04fce0244631181e0ff0d6b1ab1",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 37104,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+        "sha256": "785590c2020bebfd6c6e6913a816f8f54ed19c51a5eac151868d7fff0ede8303"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      }
+    ],
+    "promptSHA256": "7707b80f6e070285e370cfdaa1db7fea91b8cf5bd2f20f141fe89a568ad74a0f"
+  },
+  {
+    "id": "china-B-scale",
+    "civ": "zhongguo",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/china-B-scale.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png"
+    ],
+    "status": "PLAYER_CHOICE_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+    "rawSHA256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+    "outputSHA256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 37206,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+        "sha256": "785590c2020bebfd6c6e6913a816f8f54ed19c51a5eac151868d7fff0ede8303"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      }
+    ],
+    "promptSHA256": "2dc4427da104485193d681956e3715dec8baa24355de5c1ca2ba7fb264716e2e"
+  },
+  {
+    "id": "china-C-imperial",
+    "civ": "zhongguo",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial-v2.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/raw/china-C-imperial-v1.png",
+      "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png"
+    ],
+    "status": "PLAYER_CHOICE_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/china-C-imperial.png",
+    "rawSHA256": "858573344818559154086d4ffbd071336ce36bc17c7fe3921b320aa1aa951851",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/china-C-imperial.webp",
+    "outputSHA256": "f39189dba71701fc4bd537bec4725a24e2192e0a1ab521d09755716fd43dba3c",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 34268,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial-v1.png",
+        "sha256": "657378cee0e9b87568e1936f90f47dd22f994f3ad8edb643ee43542910598ee4"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+        "sha256": "785590c2020bebfd6c6e6913a816f8f54ed19c51a5eac151868d7fff0ede8303"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      }
+    ],
+    "promptSHA256": "45915e98c73c3c230fd6815fea5750d65437c4e164d16ef6969db6b4dc1845c2"
+  },
+  {
+    "id": "japan-A-oyoroi",
+    "civ": "japan",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/japan-A-oyoroi.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-japan.png"
+    ],
+    "status": "PLAYER_CHOICE_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/japan-A-oyoroi.png",
+    "rawSHA256": "12c9b875eba1752f04ed11eb08f6e610ed8645d9c18f43385bd89c38f373cd60",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/japan-A-oyoroi.webp",
+    "outputSHA256": "632cb215f91f2ca8510d3d4c8d182d19495bc630b3188369ba7497630113572f",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 39296,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+        "sha256": "b402a2ac1d6a2bd1dc692a135978410e41b1f99b8b611ce0db33960c5575cac9"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      }
+    ],
+    "promptSHA256": "690c83a9bcc51acf0f35b123958bf1e5d005afc02bbd3879fc6cc4af926b7e80"
+  },
+  {
+    "id": "japan-B-domaru",
+    "civ": "japan",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/japan-B-domaru.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-japan.png"
+    ],
+    "status": "PLAYER_CHOICE_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/japan-B-domaru.png",
+    "rawSHA256": "369c490bf72afd19aaa5a7ac9bb976144252a6d80e56e1481e30ef7988ad6753",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/japan-B-domaru.webp",
+    "outputSHA256": "ddf5d354384d61a2e62a4348df1c5004efb4832485828a6790a0921aab387603",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 31516,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+        "sha256": "b402a2ac1d6a2bd1dc692a135978410e41b1f99b8b611ce0db33960c5575cac9"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      }
+    ],
+    "promptSHA256": "04e66ba6350ed35581205735b5d4c50c9a8e0566e388904b0c35b0d26046958a"
+  },
+  {
+    "id": "japan-C-gusoku",
+    "civ": "japan",
+    "role": "ARMY-PORTRAIT",
+    "prompt": "docs/art-unification/elite-review-20261029/prompts/japan-C-gusoku.txt",
+    "references": [
+      "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+      "docs/art-unification/elite-review-20261029/references/ordinary-japan.png"
+    ],
+    "status": "PLAYER_CHOICE_PENDING",
+    "raw": "docs/art-unification/elite-review-20261029/raw/japan-C-gusoku.png",
+    "rawSHA256": "5c896d05050d8e7e6150c532eb02ebef970a91f28a101b44bd7626445ce956bb",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "output": "docs/art-unification/elite-review-20261029/candidates/japan-C-gusoku.webp",
+    "outputSHA256": "591cacea3f808ffd0c209e257cc259e30bdfa3cd5e65cb4b224173474213f001",
+    "outputDimensions": [
+      512,
+      512
+    ],
+    "bytes": 34202,
+    "alphaPolicy": "dark-opaque",
+    "normalization": "Complete square1254 ->512 ->480 inset on512; no cropping, repainting or color adjustment.",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "referenceImages": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+        "sha256": "b402a2ac1d6a2bd1dc692a135978410e41b1f99b8b611ce0db33960c5575cac9"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      }
+    ],
+    "promptSHA256": "2b18849e57aba6c764d30eac7ddca393827698328bf2a76d54c7b3a50a815b82"
+  }
+]

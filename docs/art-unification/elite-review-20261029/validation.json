@@ -1,0 +1,69 @@
+{
+  "base": "8736bad811a7c372c59881b143e4c75bd659c5af",
+  "remoteBase": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "runtimeChanges": [
+    "public/art/unified/units/elite.guard.civ_frankia.webp"
+  ],
+  "protectedFiles": 870,
+  "candidateChoice": "PLAYER_CHOICE_PENDING_CHINA_JAPAN",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "targeted": {
+    "files": 4,
+    "passed": 26,
+    "failed": 0
+  },
+  "isolatedFull": {
+    "success": true,
+    "passed": 2102,
+    "failed": 0,
+    "skipped": 1
+  },
+  "initialFullAttempt": {
+    "status": "BLOCKED_ENV_ENOSPC_BEFORE_TESTS",
+    "recovery": "Removed only previous /tmp/lieguo-verification-* disposable copies and retried unchanged command."
+  },
+  "artFiles": {
+    "status": "PASS",
+    "sourceBatches": 51,
+    "assets": 198,
+    "runtimeBytes": 17045006
+  },
+  "armyBrowser": {
+    "status": "PASS",
+    "cases": 27,
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "httpOrPageErrors": 0
+  },
+  "candidateBrowser": {
+    "status": "PASS",
+    "viewports": 3,
+    "artCards": 48,
+    "sizes": [
+      128,
+      64
+    ],
+    "httpOrPageErrors": 0
+  },
+  "registry": "UNCHANGED_BYTE_FOR_BYTE",
+  "artBoardGate": "PASS",
+  "cityDisplayGate": "PASS_WITH_UNCHANGED_SOURCE_AND_ASSETS",
+  "githubPush": {
+    "status": "BLOCKED_NETWORK_POLICY",
+    "attempts": 1,
+    "attemptedHead": "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b",
+    "command": "git push origin HEAD:refs/heads/feat/art-unification-20261028",
+    "error": "CONNECT tunnel failed, response403",
+    "remoteHead": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5"
+  },
+  "githubCI": "BLOCKED_NOT_PUSHED_NO_NEW_RUN",
+  "playerApproval": "待驗",
+  "independentArtGate": "待驗",
+  "physicalPhone": "待驗",
+  "implementationCommit": "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b",
+  "draft": true
+}

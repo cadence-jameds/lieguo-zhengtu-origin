@@ -2,14 +2,174 @@
   "reviewBase": "7bc27c509ba7518f74403c91604fa6921d2775c3",
   "files": [
     {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v1.png",
+      "sha256": "a2c31e41a723d8e8b8afb7bc9d8832ffef5299a0149004c294a9a47efc3d5be9",
+      "bytes": 2136323
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v2-blocked.json",
+      "sha256": "1f2947205df89161c4d6eaeaa7ac943cd4ce7b1778248b80e8ce4e9a13fed4cb",
+      "bytes": 167
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+      "sha256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946",
+      "bytes": 2142421
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+      "sha256": "064e7ddf6fb1b702fa38c3dd9dafbdba11f973dee1c2e383a7c3e09784f17d16",
+      "bytes": 2149690
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+      "sha256": "8b5e52dc31ed8961718894177daea5cf3afbb1357d77553136c0d416364f4938",
+      "bytes": 2106965
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+      "sha256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc",
+      "bytes": 2093783
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+      "sha256": "2271da95a7997d8e205185d38762bfbb033368aa599aab5ba5d258ca66cc6569",
+      "bytes": 2102294
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+      "sha256": "cd40fa2dea78397ecdf0dff1a7c486bff739a345721fb0d444675ed0006f4fb0",
+      "bytes": 2078181
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+      "sha256": "0ab959f56f09b15b958be06af24ed6e91a3029ff4ebd87bb51da463cff975bd2",
+      "bytes": 2006956
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/generation-history.json",
+      "sha256": "20887510b16e24273f51fd66256c0c08ea54787d0da84996f0bbf63d9ab96326",
+      "bytes": 8085
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/outputs.json",
+      "sha256": "242d1c1251bcc4639df2800d2e825b371952e0d56d89699e154ab145ed60d14b",
+      "bytes": 13009
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v1.txt",
+      "sha256": "ae7b7e1e958e6e67412aa8074adb63d0b2571f2426ab1cf320afbf6e8a06b333",
+      "bytes": 2001
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v2.txt",
+      "sha256": "4c7329579340d6225debc5a09e702a74488177c1fca244496789bd5795078b66",
+      "bytes": 1641
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v3.txt",
+      "sha256": "7334c53c59b9dc3fab136e3418acad8bac16362b3419e41d1e19c9fea6fb42ff",
+      "bytes": 1300
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v4.txt",
+      "sha256": "6fcce7651bad2fe9a9d70b9e5953f22d0edc7fc3ac1cbafbc23af22e114d4eea",
+      "bytes": 1430
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/frankia-v1.txt",
+      "sha256": "20f09017fc4c5911007ed2e858baceda868f262807b218cbe29fb58baa4bba81",
+      "bytes": 2062
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/japan-v1.txt",
+      "sha256": "342662d6833a181d5b32f1b4cab937ad3ea37b510dcd972ca4df3c3c95c5467a",
+      "bytes": 1980
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/japan-v2.txt",
+      "sha256": "7a838438257e301677e89c90c5e90f17d739c7fff4e8f1cc620772824054c550",
+      "bytes": 2244
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/knight-v1.txt",
+      "sha256": "7d77e5a59ba63a8a778ca69968a900578f0dbe6bc9b798e21056fa35cad12dcd",
+      "bytes": 2374
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/prompts/light-v1.txt",
+      "sha256": "55fc1bda38d6dd9b1f01cfd601b1845e84764964f1e4418dcc34581b153b413c",
+      "bytes": 2043
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references.json",
+      "sha256": "1a7d6885ad8852e3b7dccdf4f01e77d7d52a54897217b9f421b31ff5af4514fe",
+      "bytes": 3107
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+      "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3",
+      "bytes": 240149
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+      "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289",
+      "bytes": 218074
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+      "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318",
+      "bytes": 219525
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+      "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7",
+      "bytes": 184067
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+      "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715",
+      "bytes": 206798
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+      "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641",
+      "bytes": 199910
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+      "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1",
+      "bytes": 269611
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+      "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928",
+      "bytes": 235759
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/knight-current-before.png",
+      "sha256": "b145f163a60f5c9e680f3e1ac204a5e3a93a24cb5832615a44a6ace81ff90b5c",
+      "bytes": 166364
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+      "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108",
+      "bytes": 217726
+    },
+    {
+      "path": "docs/art-source/player-feedback-20261029/selected.json",
+      "sha256": "0bbe65f7d4768adce091919d7d9039fa15ac37f6b98b57dd6c26dee97aa04d04",
+      "bytes": 4065
+    },
+    {
       "path": "docs/art-unification/REPORT.md",
-      "sha256": "5f7a75fd4f7b25f3b3393310d5a914e21c0f01e96c908d49e00c64c092a499e3",
-      "bytes": 11310
+      "sha256": "48434f775e640d5f511510123fa93907b3ae4c4e478f2073f712541da5c67cc3",
+      "bytes": 11937
     },
     {
       "path": "docs/art-unification/art-gate.md",
-      "sha256": "899a8ec48dbce07b97476477139c3bfa1d81d15ce9fcf6f7220e3dc75cec298d",
-      "bytes": 25364
+      "sha256": "9aa31eea80ff4f85a179b020363e64c06ae10bd999c4a0595dccb10d11b6e1a2",
+      "bytes": 25991
     },
     {
       "path": "docs/art-unification/before-map.json",
@@ -1833,8 +1993,8 @@
     },
     {
       "path": "docs/art-unification/coverage.json",
-      "sha256": "6d21f332cdc57743bda65eaee8bc6858c719f27e7ebec41ec7ba30e40bc0cac5",
-      "bytes": 285497
+      "sha256": "9b7432d6e40370c4de2ea58d43a2128c71f7112cb7f23d6ae0da3dd44fc3b5ab",
+      "bytes": 286052
     },
     {
       "path": "docs/art-unification/coverage.md",
@@ -1842,9 +2002,1494 @@
       "bytes": 29340
     },
     {
+      "path": "docs/art-unification/elite-review-20261029/REPORT.md",
+      "sha256": "7c7105138f647a0e0a0530f5d43e05f1090635d221baac28541794680e270598",
+      "bytes": 13384
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/art-gate.json",
+      "sha256": "899e49bdce7d683905e33ac0c862bb595baffffa0199a512d63c6433a5ed1705",
+      "bytes": 8786
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_britannia.webp",
+      "sha256": "aa2852b2348ff35c474cba92344a4a01766d2100d3ead822ea9c8bc228dc6e2c",
+      "bytes": 29596
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_byzantium.webp",
+      "sha256": "2e0c87447f76e94af1cb1c09fc9a08ce32665294b6eb6c668723438038cb7d99",
+      "bytes": 44962
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp",
+      "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+      "bytes": 33486
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_japan.webp",
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "bytes": 37626
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_mongolia.webp",
+      "sha256": "ad8a6c1689f4984849c2dd2e50aa16729fc81bc04e178bcea1c10eb850e1a88d",
+      "bytes": 49846
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_zhongguo.webp",
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "bytes": 37630
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/frankia-anatomy.webp",
+      "sha256": "baab9b075841ef4601e1f01815d89708cbd7271a52df3b41d44ee37fb17ccd4c",
+      "bytes": 124866
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/frankia-before-after.webp",
+      "sha256": "1a5ecbf056ee029054a0cd6f78985b96c6218a53b7085b90d71b72335c205bb7",
+      "bytes": 85976
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/japan-native-128.png",
+      "sha256": "dee53f131bf2470e2235350e5d914286439a969d29905b29574f2b9f7a971b72",
+      "bytes": 78502
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/japan-native-64.png",
+      "sha256": "a8c2e97a67695654deae7fab6859a9823e9230d7fb797aa2735b57d4ab58da20",
+      "bytes": 26122
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/manifest.json",
+      "sha256": "f3330467bbb54987d0c622760bd8cd744fa0f6a5083f45083e4c0c7be75ea910",
+      "bytes": 5326
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-before.webp",
+      "sha256": "1b20571711081fbc6b3d6b1709c4731a881e8930400310cc35793819bb6d36cd",
+      "bytes": 234188
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-128.png",
+      "sha256": "e208143d85f99f95c8a4f153bbe0f336abe429a4e3c1dc3dd67c272bb1c42864",
+      "bytes": 284949
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-64.png",
+      "sha256": "5eda99100ed7e4cb41dc867d5ac69b7266cb23e483290bf251ec3ff4ac8931ef",
+      "bytes": 103495
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-128.png",
+      "sha256": "3b3e38bbce16ae818d1cf3938bed22ec4c49fdc7631d8599c048d508d20b069f",
+      "bytes": 79317
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-64.png",
+      "sha256": "53bcfae0ee5abc7727031af6089b1609338130a3f8fefaad2f7f208c1faaa571",
+      "bytes": 26204
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/中國-ABCs.webp",
+      "sha256": "5f353c2f7752a2f0c2141c2446794bf946ca34bc0f071aa354eb81aecaaec3dd",
+      "bytes": 87072
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/boards/日本-ABCs.webp",
+      "sha256": "192aa65cb98d780e8b96fda0586fc1393b6b5c40577a0831d0eb19999f35f018",
+      "bytes": 87538
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser-manifest.json",
+      "sha256": "78d4cf0f76a43ad98abd07c9690be2347440d735543c7560e4f331c7007bad16",
+      "bytes": 14434
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-card.png",
+      "sha256": "fe3e4fbd077b97c66e46a576d4417e7290076cf447d537985934b0ecfec9aa42",
+      "bytes": 43513
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-detail.jpg",
+      "sha256": "13e3c605688f410dae2a666972492524881997add28e05233398656fb1747056",
+      "bytes": 64383
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-ui.jpg",
+      "sha256": "6e715bc0bf7a474a0d8d8b03c75392e5a23ffd621fcc405702b2f2096a9b828e",
+      "bytes": 114615
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-card.png",
+      "sha256": "4ff3034c70266c8bee88679342aa5406b5d73a33c5d91ab175be9dde1fdc2fb2",
+      "bytes": 42437
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-detail.jpg",
+      "sha256": "4dc0c50dfab1bfdbffd9809564d1c9a7abf551b0274352bfadf18330144b2527",
+      "bytes": 62843
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-ui.jpg",
+      "sha256": "5a0cfa9bb43314b8cf0f0bd7908cb32b478fa7424b18ce1b00ae5b1c27fa2fb9",
+      "bytes": 112750
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-card.png",
+      "sha256": "c9ede35d7180736cfbeb900673c81c47d40b28121b556256acd5a1d543d5484b",
+      "bytes": 41743
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-detail.jpg",
+      "sha256": "3d5b405fb996eb534b20417c9f17dbad12bf6c08665d21f06374c6e71eced487",
+      "bytes": 62037
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-ui.jpg",
+      "sha256": "a9de8a0f7fc53bb82d9fe31c4dde309571c9dfcd4ace587da9b35908971dbb44",
+      "bytes": 112051
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-card.png",
+      "sha256": "baf82a286b87390eff4fb23d7dc59d70d15c819f509f8b2242231b8a0104469a",
+      "bytes": 43646
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-detail.jpg",
+      "sha256": "b01183998447e2f7f1a7f1df8cf5dd25164dfb81a78b639bd8b4246e06263c5f",
+      "bytes": 59167
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-ui.jpg",
+      "sha256": "3ffba94c871f540dd50276ed28673a32f9f646501c7076d7172558e9007b7e53",
+      "bytes": 112602
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-card.png",
+      "sha256": "a7ef5980be862f3adaab16943582e96b49a7422fcb41685d210572b4580a7a1e",
+      "bytes": 40252
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-detail.jpg",
+      "sha256": "d5ff2c761b237158665872764a95b17a75d74806225733c8efea6b9e6c119e61",
+      "bytes": 58281
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-ui.jpg",
+      "sha256": "d20165601e13b6eaf4658292d3d3b5114107785cc1630c10c3e1cbdae4f8701b",
+      "bytes": 111255
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-card.png",
+      "sha256": "b1cc40875017722d3f1167067d98df606fdaee9db8536381846df267c2566472",
+      "bytes": 40468
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-detail.jpg",
+      "sha256": "09712a70051c6fdf394fe853557056b8727073c44c00c49e0a2e05db8f56317a",
+      "bytes": 57521
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-ui.jpg",
+      "sha256": "3eb5e80fa980549ed065bccbea0aaceec1c2fe8f31bd1d22c0ca0b5cf1180afa",
+      "bytes": 110745
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-card.png",
+      "sha256": "e6fa96666dfad64b05bffd8659d2261dc089788d84a1c95c8b783c902f39b174",
+      "bytes": 41457
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-detail.jpg",
+      "sha256": "acbad2b3178244319bcf592a55294cd8b942043a6b0e0ddea3b1c89081574bb5",
+      "bytes": 63444
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-ui.jpg",
+      "sha256": "fe92ff30096d0c36e1558e2eba3c312a3c21d1b40a89f4803f75a6697f674b77",
+      "bytes": 144404
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-card.png",
+      "sha256": "9193361a919a6f938491886cbc5bafd56c11917a562622130af6c049fea80872",
+      "bytes": 39124
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-detail.jpg",
+      "sha256": "d6e6e21be2ad5b3510e4a1d4bc55e6ffbe4bc8686dbcc443ce2fa402e87f0052",
+      "bytes": 59196
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-ui.jpg",
+      "sha256": "0ed9ae174ce920392f16099cfc0b37cda5988122a7d11d8c45b823acc73be9ee",
+      "bytes": 142738
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-card.png",
+      "sha256": "29adfcf247861c96240c3a3d49d69d116330bc6284d34ae802ca6d13bb704916",
+      "bytes": 39497
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-detail.jpg",
+      "sha256": "1fe83563aac72d20a78b4ddcf538bc3a88eab74b1673b4394631e5813b37482f",
+      "bytes": 60068
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-ui.jpg",
+      "sha256": "dc7f2b986a5b840c947babbb370b18c86c70edfee9631e1cd084cd9984763a3f",
+      "bytes": 143989
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-card.png",
+      "sha256": "5bac53930b9afcd029983426ccf24db0605142b36f918190ca7d74b545dd518c",
+      "bytes": 19922
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-detail.jpg",
+      "sha256": "067b8492d35afc7ba7e572ea028695350fd9fa83b4ff956cfbc25ebef67f3665",
+      "bytes": 33629
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-ui.jpg",
+      "sha256": "becdbdf53745a5c8793ffb839cb8f78e52c768e20f300798f74f4aeb8e498c2d",
+      "bytes": 44806
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-card.png",
+      "sha256": "30b7ce3f797a6a3427eba60db0d1be0db2a9188d10f7f2ba6dd5f561369258bd",
+      "bytes": 19039
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-detail.jpg",
+      "sha256": "4b8c22418e5bab859ef62aec3f04048df00d9eaba2e89a683afb4155275589b2",
+      "bytes": 33999
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-ui.jpg",
+      "sha256": "e28a781ba60850ea1974fd11ebfc4bf036022b234a573fbaaf1cdb643201ad93",
+      "bytes": 45286
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-card.png",
+      "sha256": "81c7471f10ea1b79c6bf97eb6e55eced2e0bccee3435f9c22bf19e01067f3500",
+      "bytes": 18822
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-detail.jpg",
+      "sha256": "17c07fdb48354aeac9288d8ae2c6e6f37031cc982b5a3cc6de387fde3c160351",
+      "bytes": 33059
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-ui.jpg",
+      "sha256": "15a00e468a211e7027cd16d4e2df2fb1b73bdb3b97aec0c36c4b14c895bcf375",
+      "bytes": 45225
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-card.png",
+      "sha256": "4ee9a32c6abe0c3dba835977d5d7440d3e9c89d118c0b3f82bed3b1ee47d26c5",
+      "bytes": 17554
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-detail.jpg",
+      "sha256": "a3dd1b061bd7910ebae73fc320fe7b24ae5f62f9278a7bf691a83d7fd5ef3363",
+      "bytes": 31477
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-ui.jpg",
+      "sha256": "685580e93575c3ffbf7a918e81dc56ef6c2bebc764da81d21fd3cb0f1b1050bd",
+      "bytes": 44828
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-card.png",
+      "sha256": "8c4b810719e6823a7d47a66dbfe9eac5ff6502e14986c0be175dbd4b97c29460",
+      "bytes": 16278
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-detail.jpg",
+      "sha256": "b570a5192908fa172a4ede02b7c2f1cf1adaece46ff96db6187fccf3c3ed165a",
+      "bytes": 30613
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-ui.jpg",
+      "sha256": "ac12efc9cfd9fbb78eefe99a8ff3cefdfc91b58ae78245d8c62686590ae82b53",
+      "bytes": 44279
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-card.png",
+      "sha256": "b23c2b4e9baea5635b688455eb707d0d212fb15f75dddb8a8c1f5770681e8fa4",
+      "bytes": 15638
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-detail.jpg",
+      "sha256": "c32fa13a669a20c435866b89cd0f980f8f0ca7c750ffabedc8db3e0b51a45554",
+      "bytes": 29946
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-ui.jpg",
+      "sha256": "d599a340d5c2d69ad4338678906ffb49aaf6d11c7df36c8ec3b7e27fadb1ae3d",
+      "bytes": 44057
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-card.png",
+      "sha256": "57742b3bdf980198edba5535ac4c517c74df6617fdc973609d1667435acaa3b3",
+      "bytes": 19254
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-detail.jpg",
+      "sha256": "0a45736c1e65b9a733bb7dfb392cac85ebf6f7397853cd9de91e7ede8368b827",
+      "bytes": 32989
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-ui.jpg",
+      "sha256": "7290d87e40bd03b6f009ba38d6559e9a99b8a81c157103ddb8c809b3493034ab",
+      "bytes": 50092
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-card.png",
+      "sha256": "7b70891ca54de6ce6e3cdf2c2d983d4893ce79a2898cf20fcddb012913f23f99",
+      "bytes": 15939
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-detail.jpg",
+      "sha256": "0b41cc7d00d720bf12f32d2d78df276163756e7770fdd97250d8ded1ed0106bc",
+      "bytes": 29609
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-ui.jpg",
+      "sha256": "1cc35d88057c5dfe0206ca0e74eaa4942c728a13f93e492530546ccb3511cd2d",
+      "bytes": 48162
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-card.png",
+      "sha256": "3d4fcc93923779d549ba9319500e0912762ce0c9e81a51bb0df4978aacbb81cf",
+      "bytes": 17156
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-detail.jpg",
+      "sha256": "aa4e0e1f057af49bc0e606deb5896df1664d5b560c569d0e070521e9c3fe2a2d",
+      "bytes": 30055
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-ui.jpg",
+      "sha256": "027935d9687917b37c9995d5e07e3ea9425b87b38476b0c1673690b14025424c",
+      "bytes": 46611
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-card.png",
+      "sha256": "234542a92b532a776f94db685ce58c775dad4f6907f0505e454d6230c8ee1e75",
+      "bytes": 19994
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-detail.jpg",
+      "sha256": "b568d25fcd9c5b640a22efeca3d22e687afd0716829d42e356567cc542afd3d9",
+      "bytes": 38454
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-ui.jpg",
+      "sha256": "37c4c3abaee2b2a3e0cac1901a1c48f92a7fd2dd2e8eac74b0f527b17f5036f4",
+      "bytes": 50267
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-card.png",
+      "sha256": "034aa18cc80e4d4a2bfa01be07dd1b6db086c39a1f0c630e92e21fc89e8bc31a",
+      "bytes": 19228
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-detail.jpg",
+      "sha256": "27ad4eaab4673360c6838dc2bcfeba540482a2da9cb2086099c6d1d75eae3fa4",
+      "bytes": 36781
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-ui.jpg",
+      "sha256": "b77a005b74fee4bfdb11241fb7347d613c6254cc190e2dff9add5a999872b0b3",
+      "bytes": 49494
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-card.png",
+      "sha256": "083a104fff8349347037e14941a09bf9bd30a54859a21284dac336cb972c89b6",
+      "bytes": 19038
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-detail.jpg",
+      "sha256": "7e118be1e65ee0361151ae27d8a6e97c5e61cac86c8ac78fba467b55cbb293b2",
+      "bytes": 35744
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-ui.jpg",
+      "sha256": "0d5dcc218e4f1014224abc7cfb46fd7ba729ff88fecc58ece599c471f616109e",
+      "bytes": 49548
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-card.png",
+      "sha256": "6feca634868f263f3f9ade6a859d26161e6424d3d15af5b2a3b432c4206f971d",
+      "bytes": 17788
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-detail.jpg",
+      "sha256": "164cf894844621e562c8bd19502d1e1fd499a69275353e183b4d27f3016c8246",
+      "bytes": 33239
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-ui.jpg",
+      "sha256": "ce9820b70fb237545cfaf51b5effaed086b87f8f9a7867948798243dab3e2612",
+      "bytes": 49213
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-card.png",
+      "sha256": "5f175679e8c593b54dae64538f953f672f82aca707eac2cd2b6a3aea56b57124",
+      "bytes": 16461
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-detail.jpg",
+      "sha256": "81012150d584f0d6142640dc7b7aa38e1db9b9b93535144aefeb4808c385cd24",
+      "bytes": 32328
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-ui.jpg",
+      "sha256": "4d9b50db0824f4f446ddaef528983ba72f7f38666534833f3bafe39a0a238f57",
+      "bytes": 48480
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-card.png",
+      "sha256": "4cb04f27b2e6d0e51ce0be8a94198528b607c932861b50fe096a3efabd788972",
+      "bytes": 15792
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-detail.jpg",
+      "sha256": "d16521b1ddd5a5aa9c352556043f6b156d8dad8272e4d3799e3ee26a08e58e90",
+      "bytes": 31872
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-ui.jpg",
+      "sha256": "5a51545ddb73af6fa068925f92cc1ae5adafe2059613299e94de050b2c649ead",
+      "bytes": 48372
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-card.png",
+      "sha256": "003d6a70fabc6ea41cb15c0998896dc0198f610ccf504ca2ca556df2b50a7a90",
+      "bytes": 19382
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-detail.jpg",
+      "sha256": "548a24b981205d495d8855e91fc5801b89a724538a9b0638b61dea73af769db5",
+      "bytes": 35281
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-ui.jpg",
+      "sha256": "b9e223d98b2807e970f8f6e45f41064dd81e700e084afe23845b17e206ddd016",
+      "bytes": 54177
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-card.png",
+      "sha256": "012c412f253139d9556cf341ae91af8ce9827e94e5e2ad1776459a8153ded34f",
+      "bytes": 16073
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-detail.jpg",
+      "sha256": "2381719ac973b51d8ab87c45560550cfd650665f6addec1ad7f3de01b48c0ed9",
+      "bytes": 31494
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-ui.jpg",
+      "sha256": "d5beb3d4bc1a7b561e30c6125542ecbb625c63cf11a42bc4e879de6ebc63d681",
+      "bytes": 52225
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-card.png",
+      "sha256": "7313d04abd8c2bf04f120d69833d187eb4f67b7fef8f357ab59760746d5ac115",
+      "bytes": 17292
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-detail.jpg",
+      "sha256": "53ba948d7aaceabd05c99cfe44d7c466f5f302abcfc4e7e0201566f87898be9c",
+      "bytes": 31894
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-ui.jpg",
+      "sha256": "7edb03c06a78deb70389d6c71937692da0ed86f54f0194aabfea141d219ac30f",
+      "bytes": 50697
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/army/result.json",
+      "sha256": "e6ae666f4c4dbeed18bf58745238ea3656694d89e61d73453dca93cf33c4bed8",
+      "bytes": 11861
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/1440-ABCs.jpg",
+      "sha256": "3fb8939c2196fbf7abba94a70b060568a7aeb90e0804979f2bb57bbb5eec7740",
+      "bytes": 92889
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/320-ABCs.jpg",
+      "sha256": "b9f599350a3ba95c626649cffd1e5c67ec8c7fcf68433083ad2f8c1906337737",
+      "bytes": 75647
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/390-ABCs.jpg",
+      "sha256": "0538522f7e317297747503929a8b9d83d7c69751d74b7773fd0bc0f6528422d3",
+      "bytes": 80019
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+      "sha256": "f080b4514d465a86164459544587598dbca205fb6fcb12cc481a8095489c36e7",
+      "bytes": 10784
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-A-lamellar.webp",
+      "sha256": "8df30d203ffb9c9ff43ec0cd3e7f25683c34e04fce0244631181e0ff0d6b1ab1",
+      "bytes": 37104
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+      "sha256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4",
+      "bytes": 37206
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-C-imperial.webp",
+      "sha256": "f39189dba71701fc4bd537bec4725a24e2192e0a1ab521d09755716fd43dba3c",
+      "bytes": 34268
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/frankia-single-hand-v1.webp",
+      "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+      "bytes": 36062
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-A-oyoroi.webp",
+      "sha256": "632cb215f91f2ca8510d3d4c8d182d19495bc630b3188369ba7497630113572f",
+      "bytes": 39296
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-B-domaru.webp",
+      "sha256": "ddf5d354384d61a2e62a4348df1c5004efb4832485828a6790a0921aab387603",
+      "bytes": 31516
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-C-gusoku.webp",
+      "sha256": "591cacea3f808ffd0c209e257cc259e30bdfa3cd5e65cb4b224173474213f001",
+      "bytes": 34202
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/generation-history.json",
+      "sha256": "0606a68df2a3a42b4443190d150480c4a95aa983a3d0d5c9fc20053b3826eea1",
+      "bytes": 9461
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/generation.json",
+      "sha256": "f3d586d72a7041fe1bbea05be67391086459a689d5e4921ca2eae659b0927f5d",
+      "bytes": 2802
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/outputs.json",
+      "sha256": "a7c8834f7236fa9cfbc33d2d29b642202d6944b77dd320d68c60045bf1bd273f",
+      "bytes": 11956
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-A-lamellar.txt",
+      "sha256": "7707b80f6e070285e370cfdaa1db7fea91b8cf5bd2f20f141fe89a568ad74a0f",
+      "bytes": 2603
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-B-scale.txt",
+      "sha256": "2dc4427da104485193d681956e3715dec8baa24355de5c1ca2ba7fb264716e2e",
+      "bytes": 2425
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial-v2.txt",
+      "sha256": "45915e98c73c3c230fd6815fea5750d65437c4e164d16ef6969db6b4dc1845c2",
+      "bytes": 2090
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial.txt",
+      "sha256": "28efbcb8a571e25af19ffb08c674d8428de554f31de08ca48ba03b2686a4cf50",
+      "bytes": 2591
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/frankia-single-hand-v1.txt",
+      "sha256": "9f0e725fb3b28868c1b231a32640a536d4a345e25e54d76d34983b8fcb06569e",
+      "bytes": 2706
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-A-oyoroi.txt",
+      "sha256": "690c83a9bcc51acf0f35b123958bf1e5d005afc02bbd3879fc6cc4af926b7e80",
+      "bytes": 2363
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-B-domaru.txt",
+      "sha256": "04e66ba6350ed35581205735b5d4c50c9a8e0566e388904b0c35b0d26046958a",
+      "bytes": 2405
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-C-gusoku.txt",
+      "sha256": "2b18849e57aba6c764d30eac7ddca393827698328bf2a76d54c7b3a50a815b82",
+      "bytes": 2316
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/protected.json",
+      "sha256": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0",
+      "bytes": 94636
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-A-lamellar.png",
+      "sha256": "26275efd29e33ebafa6ae6712bb7d8ca57fd495a6be06bd41a6d77182819c878",
+      "bytes": 2075091
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+      "sha256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0",
+      "bytes": 2015791
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial-v1.png",
+      "sha256": "657378cee0e9b87568e1936f90f47dd22f994f3ad8edb643ee43542910598ee4",
+      "bytes": 2022932
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial.png",
+      "sha256": "858573344818559154086d4ffbd071336ce36bc17c7fe3921b320aa1aa951851",
+      "bytes": 1990148
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+      "sha256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8",
+      "bytes": 1971814
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-A-oyoroi.png",
+      "sha256": "12c9b875eba1752f04ed11eb08f6e610ed8645d9c18f43385bd89c38f373cd60",
+      "bytes": 2112143
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-B-domaru.png",
+      "sha256": "369c490bf72afd19aaa5a7ac9bb976144252a6d80e56e1481e30ef7988ad6753",
+      "bytes": 1973581
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-C-gusoku.png",
+      "sha256": "5c896d05050d8e7e6150c532eb02ebef970a91f28a101b44bd7626445ce956bb",
+      "bytes": 1982776
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references.json",
+      "sha256": "7ba4bd78471fdb5b50804a955836a2dc674b8c31134b8fc7f130ba7017c14e1e",
+      "bytes": 3298
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-britannia-8736bad.png",
+      "sha256": "df47accb100dc38a05c2470ee872eb182c2bb6ff068d06d6048bcb50515d553c",
+      "bytes": 180387
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-byzantium-8736bad.png",
+      "sha256": "5dbdf14be150c8743fd98e4d039b398540641bca44f314babd8bd2f2e229499f",
+      "bytes": 247795
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+      "sha256": "71139b089745d1e8c04bc0d6ad05d86fc25e76f26e2587f9e1633cf55f45d83c",
+      "bytes": 203274
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+      "sha256": "b402a2ac1d6a2bd1dc692a135978410e41b1f99b8b611ce0db33960c5575cac9",
+      "bytes": 215136
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-mongolia-8736bad.png",
+      "sha256": "00f303e51cf0241e57b2dd8cb54c847a504ece823051e931ac2accc1062d1a6e",
+      "bytes": 287871
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+      "sha256": "785590c2020bebfd6c6e6913a816f8f54ed19c51a5eac151868d7fff0ede8303",
+      "bytes": 215911
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-britannia.png",
+      "sha256": "bddd048d6595d278b6d584d41f36195fb2a6cce804019ace8a0f1f537a6bb006",
+      "bytes": 174548
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-byzantium.png",
+      "sha256": "9c459e624f30f802c1585ac56384eb4c23c1a4109f89e2470926209298c94966",
+      "bytes": 258232
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+      "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715",
+      "bytes": 206798
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+      "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641",
+      "bytes": 199910
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-mongolia.png",
+      "sha256": "6535016a2902312d1b046e915a1c0c9833bd6bd2d5dc9c12dce986ee925b7df9",
+      "bytes": 235357
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+      "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7",
+      "bytes": 184067
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/runtime.json",
+      "sha256": "ea5602f6f4dbf8831348840e0c653be259daae70f3ce5bf96dbec619193ad6df",
+      "bytes": 1862
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/validation.json",
+      "sha256": "ab19de612d7e499194e4f11710383aee53cd6b0029516c7d4b4709341bcd995e",
+      "bytes": 1811
+    },
+    {
       "path": "docs/art-unification/file-gate.json",
       "sha256": "49b46172e9c149a10faefa929dbd66366e6b48da3bdca2135ba2a3c0bdc1f08b",
       "bytes": 43593
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/REPORT.md",
+      "sha256": "58305a5fe2c165776033372f79ca0406d389b5b6220c794a169de20fec32db18",
+      "bytes": 12775
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/art-gate.json",
+      "sha256": "5131c585031895ffefde565a803f3e5a1afe9dda70fc6e88c73717f07a5d9847",
+      "bytes": 5952
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/MiniatureCity.tsx",
+      "sha256": "27b4d0fd9d58265786b9eed88a15df0f0f49d575eba3fef17b8e39f3cdb44d07",
+      "bytes": 1161
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/asset-records.json",
+      "sha256": "3e90993876e8eb610049c90e6b36cfe905dcc204daf2682febcbfb2013d8eb53",
+      "bytes": 6333
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "bytes": 467688
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "bytes": 524364
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "bytes": 549544
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_frankia.webp",
+      "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6",
+      "bytes": 38750
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_japan.webp",
+      "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6",
+      "bytes": 36716
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_zhongguo.webp",
+      "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8",
+      "bytes": 36646
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/game.css",
+      "sha256": "d153e2a2da34749e8c50dbcde4637a75957b4ebb73d66fe330df6b587d4ee544",
+      "bytes": 133876
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/heavy-knight.webp",
+      "sha256": "5bf17f041076d421025a0853689a9584c962b5466dae0384664f12ab761ca389",
+      "bytes": 44258
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/knight.webp",
+      "sha256": "fc010986c483b58ce5fd74a520215d7a44dfdf878be62a50e6beefbb5df29d9d",
+      "bytes": 27358
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/before/light-cavalry.webp",
+      "sha256": "3348b8b7ca04fe999a93e79473b3a3fd6083a6eab3a12d881a2bcc4b9e728943",
+      "bytes": 32014
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-1440.webp",
+      "sha256": "847554624703f847b4f9383429ad150fdae520360b368d03a2f92b2360a1dbed",
+      "bytes": 402764
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-320.webp",
+      "sha256": "ba3064f6950254f7d8aaa5a7713aefa6c211c03f35a292223110ef750a6439a0",
+      "bytes": 319066
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-390.webp",
+      "sha256": "ba3064f6950254f7d8aaa5a7713aefa6c211c03f35a292223110ef750a6439a0",
+      "bytes": 319066
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-1440.webp",
+      "sha256": "63f4b34242360ea26bf3a9b57b00c73cc95739e7bae19f9d1d7b50341fe547a3",
+      "bytes": 410532
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-320.webp",
+      "sha256": "7f5bd3096d9ea4049a21b8d22617315345b9daa00032a41e802862bf8d9ba249",
+      "bytes": 316676
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-390.webp",
+      "sha256": "7f5bd3096d9ea4049a21b8d22617315345b9daa00032a41e802862bf8d9ba249",
+      "bytes": 316676
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-1440.webp",
+      "sha256": "fc472c5a1fb9952664e6fcadb0e937babb1aec086eb9dbfa53d7f26d1ef6136d",
+      "bytes": 400376
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-320.webp",
+      "sha256": "27b17b361d12fc25d47648a4a717ab193f93f9930a521a462f940e21eb260822",
+      "bytes": 314958
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-390.webp",
+      "sha256": "27b17b361d12fc25d47648a4a717ab193f93f9930a521a462f940e21eb260822",
+      "bytes": 314958
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-1440.webp",
+      "sha256": "9d6b201be549bbabc4f7c9dcb73d7779e51489e7dffd25c0d8b917166614b68e",
+      "bytes": 1217420
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-320.webp",
+      "sha256": "a2406fed29fe6eac380d390993f5e5d30447a925ba6ef5a9f60205fb3d82add1",
+      "bytes": 941858
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-390.webp",
+      "sha256": "a2406fed29fe6eac380d390993f5e5d30447a925ba6ef5a9f60205fb3d82add1",
+      "bytes": 941858
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-1440.webp",
+      "sha256": "df57d6a37b267bcbd9e5694e18b9e4edfe931c8d2f160f14deee4627155e5ac3",
+      "bytes": 1122282
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-320.webp",
+      "sha256": "dac0f6dedbb788537bbfbac0bd9954becb0aec35a7d89faa5641461b784f2713",
+      "bytes": 888484
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-390.webp",
+      "sha256": "dac0f6dedbb788537bbfbac0bd9954becb0aec35a7d89faa5641461b784f2713",
+      "bytes": 888484
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/frankia-anatomy.webp",
+      "sha256": "dc917aca5f20a28d3ba0287e491882fd3f0e49034632fc4ee6a83504a56f8e58",
+      "bytes": 85198
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/manifest.json",
+      "sha256": "a7fafea39970ca2cfcf0e9f8b445af1fc5f7c4d148c811a3bd6a3a46982060a3",
+      "bytes": 72779
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-china.webp",
+      "sha256": "eb52117b30f088adf968519b13789993847a395a5d4781a9d68b35a24a81d970",
+      "bytes": 73528
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-frankia.webp",
+      "sha256": "c702c4609637cc9f59fe3854495676d8a793579243370a76d6893259fecc9705",
+      "bytes": 77532
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-japan.webp",
+      "sha256": "54faa0a7396052ed5966503200761e7102e460140c6b23851fff6186f0cf9798",
+      "bytes": 74690
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-knight.webp",
+      "sha256": "a1c124dcb8dfef69f5349a9c3ff20c7c3059ad19cc9ad5136d562d5bf65e8e90",
+      "bytes": 74036
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-light.webp",
+      "sha256": "d7436b7bce1cf78383322022897a4b859886af9911845c4bd8f6f80646c44172",
+      "bytes": 61280
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/boards/units-native-64.png",
+      "sha256": "cd78038e45a0fd8390c3ef125821706fe4063b86b23be5fa1256e84673a6dc5c",
+      "bytes": 121605
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_britannia-2-wall5-ui.jpg",
+      "sha256": "49f669c9a8c0959e982f21778954e3c6806100491ba4bc313851d0188c48381a",
+      "bytes": 406973
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_japan-2-wall5-ui.jpg",
+      "sha256": "695d508f5522f7e02f0f315d35dc2847d18cf4409e79b1e1c299e168db6c776c",
+      "bytes": 407332
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_mongolia-2-wall5-ui.jpg",
+      "sha256": "bcdb658beb11a95521a0996fb1c96e59d7efda455a98891f5d73dbdf47b3b9d6",
+      "bytes": 406095
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_britannia-2-wall5-ui.jpg",
+      "sha256": "900e2fcce3669c8c04da527d0242a49ed7e33b334265aa32cd8b42260636937c",
+      "bytes": 86419
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_japan-2-wall5-ui.jpg",
+      "sha256": "4dff93592942c8912945ef24d81a5328f35ceb2515fabb621ad6471eabf3b53c",
+      "bytes": 86028
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_mongolia-2-wall5-ui.jpg",
+      "sha256": "0425691f0dad33160211cd27f0c6b7843d9d8e5be1f6aaa8a8ffa6bba17ab0d3",
+      "bytes": 85880
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_britannia-2-wall5-ui.jpg",
+      "sha256": "d561ecc2d9d0c736853d7065bd7384ac9a122e8d6a1e6feb8aeb03cbfd942e0d",
+      "bytes": 103194
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_japan-2-wall5-ui.jpg",
+      "sha256": "80fce84f37e445def299b4d7496dacec9d8cde94e3a3e255b5a49d22b4546241",
+      "bytes": 102704
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_mongolia-2-wall5-ui.jpg",
+      "sha256": "a5e62af66b8ba5533d7ed79c0512c5930b39dd9cfb000084d2cee61658792ac2",
+      "bytes": 102598
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_britannia-2-wall5-ui.jpg",
+      "sha256": "31a700ba701db898b10548534e52c180db19647ccfa93d1e8ca9b71b992fe54b",
+      "bytes": 408659
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_japan-2-wall5-ui.jpg",
+      "sha256": "2c54fedb394221d705d2d5d576d41de384781d86cdc93cc60df1e20d287b0641",
+      "bytes": 408568
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_mongolia-2-wall5-ui.jpg",
+      "sha256": "c1d7e385c84a55569de69bcc351c315fd5374aa28b015b2c0d21d5fc65e39832",
+      "bytes": 407236
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_britannia-2-wall5-ui.jpg",
+      "sha256": "86986e86190759bd72d46ee2d1e83357b6005165e799304cabaecdac60e6cd39",
+      "bytes": 87020
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_japan-2-wall5-ui.jpg",
+      "sha256": "75028eae1a65e9f6bd4803e584f9e2f72386596c4a7ce5f946af71089a0e8515",
+      "bytes": 86474
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_mongolia-2-wall5-ui.jpg",
+      "sha256": "5bad11f2b043fa28fa394f70ad566b91d6ba4a4a84fbb2d3455119879a16a902",
+      "bytes": 86268
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_britannia-2-wall5-ui.jpg",
+      "sha256": "9c1232bc2d65f852f1051aaee7c3fc80d1e0ae30f41a4c36a64aced11fb1e304",
+      "bytes": 103724
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_japan-2-wall5-ui.jpg",
+      "sha256": "eae5e740e8932af5078ffa4d9937600fa596e1a6cde4f8521a79846b4b15050a",
+      "bytes": 103280
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_mongolia-2-wall5-ui.jpg",
+      "sha256": "a97f5f807796451807dc8cc0f98f67add12b57d5a900e1246c374cf1f47ba39b",
+      "bytes": 103077
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/result.json",
+      "sha256": "cc8b11c7759312c9d6a6ec43afc903260ebdfc5cf79e078a142f4f0494687364",
+      "bytes": 314023
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_frankia-detail.jpg",
+      "sha256": "44e1103418d3953ef1c8c2e7ccfea7c0dec7f42e9968778e84cf9ca9b598e7f7",
+      "bytes": 64360
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_frankia-ui.jpg",
+      "sha256": "0cb4dcb2814480087e0ddd47110586d128b1b81b765dd07588a4c43f3cb40539",
+      "bytes": 114584
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_japan-detail.jpg",
+      "sha256": "4dc0c50dfab1bfdbffd9809564d1c9a7abf551b0274352bfadf18330144b2527",
+      "bytes": 62843
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_japan-ui.jpg",
+      "sha256": "5a0cfa9bb43314b8cf0f0bd7908cb32b478fa7424b18ce1b00ae5b1c27fa2fb9",
+      "bytes": 112750
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_zhongguo-detail.jpg",
+      "sha256": "3d5b405fb996eb534b20417c9f17dbad12bf6c08665d21f06374c6e71eced487",
+      "bytes": 62037
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_zhongguo-ui.jpg",
+      "sha256": "a9de8a0f7fc53bb82d9fe31c4dde309571c9dfcd4ace587da9b35908971dbb44",
+      "bytes": 112051
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_frankia-detail.jpg",
+      "sha256": "b01183998447e2f7f1a7f1df8cf5dd25164dfb81a78b639bd8b4246e06263c5f",
+      "bytes": 59167
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_frankia-ui.jpg",
+      "sha256": "3ffba94c871f540dd50276ed28673a32f9f646501c7076d7172558e9007b7e53",
+      "bytes": 112602
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_japan-detail.jpg",
+      "sha256": "d5ff2c761b237158665872764a95b17a75d74806225733c8efea6b9e6c119e61",
+      "bytes": 58281
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_japan-ui.jpg",
+      "sha256": "d20165601e13b6eaf4658292d3d3b5114107785cc1630c10c3e1cbdae4f8701b",
+      "bytes": 111255
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_zhongguo-detail.jpg",
+      "sha256": "09712a70051c6fdf394fe853557056b8727073c44c00c49e0a2e05db8f56317a",
+      "bytes": 57521
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_zhongguo-ui.jpg",
+      "sha256": "3eb5e80fa980549ed065bccbea0aaceec1c2fe8f31bd1d22c0ca0b5cf1180afa",
+      "bytes": 110745
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-heavy-knight-detail.jpg",
+      "sha256": "acbad2b3178244319bcf592a55294cd8b942043a6b0e0ddea3b1c89081574bb5",
+      "bytes": 63444
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-heavy-knight-ui.jpg",
+      "sha256": "fe92ff30096d0c36e1558e2eba3c312a3c21d1b40a89f4803f75a6697f674b77",
+      "bytes": 144404
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-knight-detail.jpg",
+      "sha256": "d6e6e21be2ad5b3510e4a1d4bc55e6ffbe4bc8686dbcc443ce2fa402e87f0052",
+      "bytes": 59196
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-knight-ui.jpg",
+      "sha256": "0ed9ae174ce920392f16099cfc0b37cda5988122a7d11d8c45b823acc73be9ee",
+      "bytes": 142738
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-light-cavalry-detail.jpg",
+      "sha256": "1fe83563aac72d20a78b4ddcf538bc3a88eab74b1673b4394631e5813b37482f",
+      "bytes": 60068
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-light-cavalry-ui.jpg",
+      "sha256": "dc7f2b986a5b840c947babbb370b18c86c70edfee9631e1cd084cd9984763a3f",
+      "bytes": 143989
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_frankia-detail.jpg",
+      "sha256": "a9c5b61ca2e08e3f3fb11da7dbc5d5276d3644f16cb022064fcf9d3a99a7ebb6",
+      "bytes": 33658
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_frankia-ui.jpg",
+      "sha256": "6c46cde852eb4a1603548fc51132bf711e55b446e40af0fce2da67045a6362b0",
+      "bytes": 44820
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_japan-detail.jpg",
+      "sha256": "4b8c22418e5bab859ef62aec3f04048df00d9eaba2e89a683afb4155275589b2",
+      "bytes": 33999
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_japan-ui.jpg",
+      "sha256": "e28a781ba60850ea1974fd11ebfc4bf036022b234a573fbaaf1cdb643201ad93",
+      "bytes": 45286
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_zhongguo-detail.jpg",
+      "sha256": "17c07fdb48354aeac9288d8ae2c6e6f37031cc982b5a3cc6de387fde3c160351",
+      "bytes": 33059
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_zhongguo-ui.jpg",
+      "sha256": "15a00e468a211e7027cd16d4e2df2fb1b73bdb3b97aec0c36c4b14c895bcf375",
+      "bytes": 45225
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_frankia-detail.jpg",
+      "sha256": "a3dd1b061bd7910ebae73fc320fe7b24ae5f62f9278a7bf691a83d7fd5ef3363",
+      "bytes": 31477
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_frankia-ui.jpg",
+      "sha256": "685580e93575c3ffbf7a918e81dc56ef6c2bebc764da81d21fd3cb0f1b1050bd",
+      "bytes": 44828
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_japan-detail.jpg",
+      "sha256": "b570a5192908fa172a4ede02b7c2f1cf1adaece46ff96db6187fccf3c3ed165a",
+      "bytes": 30613
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_japan-ui.jpg",
+      "sha256": "ac12efc9cfd9fbb78eefe99a8ff3cefdfc91b58ae78245d8c62686590ae82b53",
+      "bytes": 44279
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_zhongguo-detail.jpg",
+      "sha256": "c32fa13a669a20c435866b89cd0f980f8f0ca7c750ffabedc8db3e0b51a45554",
+      "bytes": 29946
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_zhongguo-ui.jpg",
+      "sha256": "d599a340d5c2d69ad4338678906ffb49aaf6d11c7df36c8ec3b7e27fadb1ae3d",
+      "bytes": 44057
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-heavy-knight-detail.jpg",
+      "sha256": "0a45736c1e65b9a733bb7dfb392cac85ebf6f7397853cd9de91e7ede8368b827",
+      "bytes": 32989
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-heavy-knight-ui.jpg",
+      "sha256": "7290d87e40bd03b6f009ba38d6559e9a99b8a81c157103ddb8c809b3493034ab",
+      "bytes": 50092
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-knight-detail.jpg",
+      "sha256": "0b41cc7d00d720bf12f32d2d78df276163756e7770fdd97250d8ded1ed0106bc",
+      "bytes": 29609
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-knight-ui.jpg",
+      "sha256": "1cc35d88057c5dfe0206ca0e74eaa4942c728a13f93e492530546ccb3511cd2d",
+      "bytes": 48162
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-light-cavalry-detail.jpg",
+      "sha256": "aa4e0e1f057af49bc0e606deb5896df1664d5b560c569d0e070521e9c3fe2a2d",
+      "bytes": 30055
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-light-cavalry-ui.jpg",
+      "sha256": "027935d9687917b37c9995d5e07e3ea9425b87b38476b0c1673690b14025424c",
+      "bytes": 46611
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_frankia-detail.jpg",
+      "sha256": "c717fdeb3540a44215d279a363041b426d35790ad144e315f6d97372eb5de595",
+      "bytes": 38463
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_frankia-ui.jpg",
+      "sha256": "ed88ae44a2260484f211a0fcfd506d3e263ffff03fdfc5eea35867e2766d61f2",
+      "bytes": 50263
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_japan-detail.jpg",
+      "sha256": "27ad4eaab4673360c6838dc2bcfeba540482a2da9cb2086099c6d1d75eae3fa4",
+      "bytes": 36781
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_japan-ui.jpg",
+      "sha256": "b77a005b74fee4bfdb11241fb7347d613c6254cc190e2dff9add5a999872b0b3",
+      "bytes": 49494
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_zhongguo-detail.jpg",
+      "sha256": "7e118be1e65ee0361151ae27d8a6e97c5e61cac86c8ac78fba467b55cbb293b2",
+      "bytes": 35744
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_zhongguo-ui.jpg",
+      "sha256": "0d5dcc218e4f1014224abc7cfb46fd7ba729ff88fecc58ece599c471f616109e",
+      "bytes": 49548
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_frankia-detail.jpg",
+      "sha256": "164cf894844621e562c8bd19502d1e1fd499a69275353e183b4d27f3016c8246",
+      "bytes": 33239
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_frankia-ui.jpg",
+      "sha256": "ce9820b70fb237545cfaf51b5effaed086b87f8f9a7867948798243dab3e2612",
+      "bytes": 49213
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_japan-detail.jpg",
+      "sha256": "81012150d584f0d6142640dc7b7aa38e1db9b9b93535144aefeb4808c385cd24",
+      "bytes": 32328
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_japan-ui.jpg",
+      "sha256": "4d9b50db0824f4f446ddaef528983ba72f7f38666534833f3bafe39a0a238f57",
+      "bytes": 48480
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_zhongguo-detail.jpg",
+      "sha256": "d16521b1ddd5a5aa9c352556043f6b156d8dad8272e4d3799e3ee26a08e58e90",
+      "bytes": 31872
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_zhongguo-ui.jpg",
+      "sha256": "5a51545ddb73af6fa068925f92cc1ae5adafe2059613299e94de050b2c649ead",
+      "bytes": 48372
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-heavy-knight-detail.jpg",
+      "sha256": "548a24b981205d495d8855e91fc5801b89a724538a9b0638b61dea73af769db5",
+      "bytes": 35281
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-heavy-knight-ui.jpg",
+      "sha256": "b9e223d98b2807e970f8f6e45f41064dd81e700e084afe23845b17e206ddd016",
+      "bytes": 54177
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-knight-detail.jpg",
+      "sha256": "2381719ac973b51d8ab87c45560550cfd650665f6addec1ad7f3de01b48c0ed9",
+      "bytes": 31494
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-knight-ui.jpg",
+      "sha256": "d5beb3d4bc1a7b561e30c6125542ecbb625c63cf11a42bc4e879de6ebc63d681",
+      "bytes": 52225
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-light-cavalry-detail.jpg",
+      "sha256": "53ba948d7aaceabd05c99cfe44d7c466f5f302abcfc4e7e0201566f87898be9c",
+      "bytes": 31894
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-light-cavalry-ui.jpg",
+      "sha256": "7edb03c06a78deb70389d6c71937692da0ed86f54f0194aabfea141d219ac30f",
+      "bytes": 50697
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "sha256": "e6ae666f4c4dbeed18bf58745238ea3656694d89e61d73453dca93cf33c4bed8",
+      "bytes": 11861
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-index.json",
+      "sha256": "0970fe2358ad95b99f2f9b1f5b6ff3cefb3ce07f651dfe6ac0fbb3953f315fc6",
+      "bytes": 159306
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-01.webp",
+      "sha256": "1342a3d8d5549700c556820ed3760e3b294cd52bfc6e2a7faea4dc1403186dd4",
+      "bytes": 11604
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-02.webp",
+      "sha256": "0ba95ecc7958eef8fcfdffa1f0775538d6e12abed5a74264d6d7f82c3a5b48d4",
+      "bytes": 80604
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-03.webp",
+      "sha256": "2c71b304cfa7fc3ff29cac9599f8df1859e1efd8d828bfaa6f29517b84079c8c",
+      "bytes": 13476
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-04.webp",
+      "sha256": "3faad1ba967311583a7063d000719fc7b33e1741670d8ec4dce45af7b91449eb",
+      "bytes": 11676
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-05.webp",
+      "sha256": "d5810bb696e02383966b418fc7e2c46b1efb48443350ba2ab30fa77d567105ec",
+      "bytes": 93392
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-06.webp",
+      "sha256": "c2914bbec3b87577aec9c338648e868a17ea651f422e7dfe05f3c73ef810e36c",
+      "bytes": 231654
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-07.webp",
+      "sha256": "d7b951737dbd649dc783a5e421be829904ac318f8634187203cecfeafda95b75",
+      "bytes": 431918
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-08.webp",
+      "sha256": "cefe6060cf11e22aa2f144a51656f4d013721eaf548960f244ce073f62264ba9",
+      "bytes": 246848
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-09.webp",
+      "sha256": "bf9c1daacdbe35846b02ac85cd763d2a04dc728419ece448a0609e57e78b4c52",
+      "bytes": 484284
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-10.webp",
+      "sha256": "9ef0baa7c7a640685557bf58b881748fc2f238e2990504a3d0f2a7bd15db04a8",
+      "bytes": 258506
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-11.webp",
+      "sha256": "e810e31253a819143052e1a561e847478541af11f1941cab2953d9eb8c773be5",
+      "bytes": 496466
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-12.webp",
+      "sha256": "8c4e262a9d8122846ebc342ba7874ec37524f5e29efc627b14fd0220a4778c49",
+      "bytes": 265902
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-13.webp",
+      "sha256": "dea69b198dc7fc27d9187cdefdd451478a513d926df2b09baadf1f5919571f62",
+      "bytes": 361198
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-14.webp",
+      "sha256": "c08c25ca8a654b230eb419a923a33dfb5f28f606a2a248d9c600b2de8a02e73f",
+      "bytes": 581018
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-15.webp",
+      "sha256": "cdbc6b1cae8633f115c2cc4dd7871d00a3b11eaf1b3f89ad8466fc770602a61b",
+      "bytes": 414332
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-16.webp",
+      "sha256": "0cfb175a52b9c00c7ebe8013f591ec9ae2a17b80ae6149b18f3563d2c4710598",
+      "bytes": 443750
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-17.webp",
+      "sha256": "56875c27c1e1d2aba79fe97c24b64e2b0aa582a1a735f1a402c10ef4f68dc02d",
+      "bytes": 608184
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-18.webp",
+      "sha256": "b8f36ad6ecb86a8cb59d896fca301e47d8c8fd88c471ea3e392d432907ae8702",
+      "bytes": 1137576
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-19.webp",
+      "sha256": "21658b47ffc0cadba6b1499c3c529b84e25474e86e509be8ccbd35e4838d5f0d",
+      "bytes": 640450
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-20.webp",
+      "sha256": "4c01693aad34be525144752c5bb6981a26d736fbe8e03090fd51f01c75cc5667",
+      "bytes": 1261732
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-21.webp",
+      "sha256": "6ca66a4a6287b9b03f29009837cb1960959878e22eecf2d883ab38399733e79c",
+      "bytes": 673834
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-22.webp",
+      "sha256": "e48700fc5330fa93c9203569a451490320712072c5d8bd4362f9bb81ccd36f63",
+      "bytes": 1296564
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-23.webp",
+      "sha256": "df6be64f1950235fdc35ebe38c7e7e1e6f768e3f6ee88d0f24342c0ecfe345ea",
+      "bytes": 688618
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-24.webp",
+      "sha256": "999a3a259f6b0047c2d8b4794321a5f37144c8204fcfad5c4de078e95c84749c",
+      "bytes": 936954
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-25.webp",
+      "sha256": "409dc8628d4365aab4679f81d1a8cde459bf26643cc6f2648b7d10e2634364cd",
+      "bytes": 644256
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-26.webp",
+      "sha256": "cc0f5a2f72a7a2dd67095082f41269318b7d72fffac1981fd6b6acd4a42962bc",
+      "bytes": 396508
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-27.webp",
+      "sha256": "c864348290c28fef05be276041d5c02817aff40ca729fa20cafab625fb672f73",
+      "bytes": 400984
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-28.webp",
+      "sha256": "d8f1f26cce576d503e37c015bfdf9fb9e101fadfdbb61b640e7877354cbcaf0d",
+      "bytes": 42390
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-29.webp",
+      "sha256": "74ab636f5023d40e436cf9a5e5e84bc63511c46618d083400f614bfe5fa09e99",
+      "bytes": 145792
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-30.webp",
+      "sha256": "8f7cafbf85bbefa97377240d795b9d573d74d7c15080b4fb2a89eea90a35c930",
+      "bytes": 2139228
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-31.webp",
+      "sha256": "7620597503d9c999c66fda19ae7b7929b1b59903d12c91fd8652d0c5749cb219",
+      "bytes": 681770
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-32.webp",
+      "sha256": "c4f2509fb74390e43ed340bc650daf9f6a83c67f19f653c8fee2cc0b221cc6e0",
+      "bytes": 758792
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/compatibility.json",
+      "sha256": "81e29775ad2b38cb89659625f03ab4cdda05e2e00c8a4239fb94aaf87bbfe71e",
+      "bytes": 1513
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/legacy-measurements.json",
+      "sha256": "1ab6f936d0a54bfc165cdbbd165905adaa176613900104238dd25833cdf593f2",
+      "bytes": 9675
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/protected.json",
+      "sha256": "4c2e6e6e17c8b99413b2c8672ac3c0bef4f6263b442f796238665eb569f67531",
+      "bytes": 54181
+    },
+    {
+      "path": "docs/art-unification/player-feedback-20261029/validation.json",
+      "sha256": "96c462acabe4fbdbf2fc30cbf3011bad60880a6edc7a322f72f13bab3064975f",
+      "bytes": 1135
     },
     {
       "path": "docs/art-unification/source-summary.json",
@@ -2109,5 +3754,7 @@
   ],
   "cityScaleReviewBase": "6d26b15ebee9561f880700bcc17dd465516b2586",
   "cityCompositionReviewBase": "846e98ca1abc6eddda009cd6d08ce4600e2fbeaf",
-  "cityHitReviewBase": "813a9744cc5a73fe8915da930c6680ec01e6d9a1"
+  "cityHitReviewBase": "813a9744cc5a73fe8915da930c6680ec01e6d9a1",
+  "playerFeedbackBase": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "eliteReviewBase": "8736bad811a7c372c59881b143e4c75bd659c5af"
 }

@@ -1,0 +1,28 @@
+{
+  "status": "BLOCKED",
+  "newPR": null,
+  "title": "Art: Player Feedback — Elite Guards & City Fit",
+  "baseBranch": "feat/art-unification-20261028",
+  "baseSHA": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "headBranch": "feat/art-player-feedback-20261029",
+  "sourceHead": "c24862d3db8c0657ac1da88d0cf3d27a586cac05",
+  "containsOriginalCommits": [
+    "8736bad811a7c372c59881b143e4c75bd659c5af",
+    "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b",
+    "c24862d3db8c0657ac1da88d0cf3d27a586cac05"
+  ],
+  "normalPush": {
+    "attempts": 1,
+    "result": "CONNECT tunnel failed,response403"
+  },
+  "apiChecks": {
+    "originalCommitGET": "404",
+    "sourceHeadGET": "404",
+    "newBranchAtSourceHead": "422 Object does not exist",
+    "exactCommitUpload": "BLOCKED_UNEXPOSED_AUTHOR_COMMITTER_TIMESTAMPS_RAW_PACK"
+  },
+  "originalPR44Unchanged": true,
+  "githubCI": "BLOCKED_NO_NEW_PR_OR_RUN",
+  "candidateGitHubLinks": "BLOCKED_NOT_UPLOADED",
+  "chineseJapaneseChoice": "PENDING_NO_MAPPING_REPLACEMENT"
+}

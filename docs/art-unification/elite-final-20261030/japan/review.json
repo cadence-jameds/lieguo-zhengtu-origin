@@ -1,0 +1,328 @@
+{
+  "date": "2026-10-30",
+  "base": "34be1b5c2dba64b2d84c4a8bfbc8656ad5d726c6",
+  "japanRuntime": "UNCHANGED",
+  "playerSelection": "PENDING",
+  "method": "Uniform helmet-dome-to-lowest-sole height360 on512, sole y460; whole-source isotropic downscale and translation only; all source borders preserved; weapon/crest heights and armor widths are not independently fitted.",
+  "manualLandmarkUncertaintySourcePixels": 8,
+  "rows": [
+    {
+      "id": "guard.civ_japan",
+      "labels": [
+        "一般武士",
+        "武士侍從隊",
+        "正式／保留"
+      ],
+      "source": "public/art/catalog-guards.webp",
+      "crop": {
+        "x": 514,
+        "y": 507,
+        "w": 508,
+        "h": 515
+      },
+      "landmarks": [
+        53,
+        471
+      ],
+      "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef",
+      "dimensions": [
+        508,
+        515
+      ],
+      "transform": {
+        "scale": 0.861244019138756,
+        "translateXY": [
+          37.24401913875596,
+          54.354066985645886
+        ],
+        "crownY": 53,
+        "soleY": 471,
+        "normalizedCrownY": 99.99999999999996,
+        "normalizedSoleY": 460.0,
+        "sourceFullyContained": true
+      }
+    },
+    {
+      "id": "elite.guard.civ_japan",
+      "labels": [
+        "現行精銳",
+        "精銳武士侍從隊",
+        "正式／保留"
+      ],
+      "source": "public/art/unified/units/elite.guard.civ_japan.webp",
+      "crop": null,
+      "landmarks": [
+        58,
+        470
+      ],
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "dimensions": [
+        512,
+        512
+      ],
+      "transform": {
+        "scale": 0.8737864077669902,
+        "translateXY": [
+          32.3106796116505,
+          49.32038834951459
+        ],
+        "crownY": 58,
+        "soleY": 470,
+        "normalizedCrownY": 100.00000000000003,
+        "normalizedSoleY": 460.0,
+        "sourceFullyContained": true
+      }
+    },
+    {
+      "id": "japan-1-oni-oyoroi-overhead",
+      "labels": [
+        "精銳武士候選 1",
+        "鬼面大鎧＋過頂舉刀",
+        "20261030／未定案"
+      ],
+      "source": "docs/art-unification/elite-final-20261030/japan/raw/japan-1-oni-oyoroi-overhead.png",
+      "crop": null,
+      "landmarks": [
+        180,
+        1204
+      ],
+      "candidate": "docs/art-unification/elite-final-20261030/japan/candidates/japan-1-oni-oyoroi-overhead.webp",
+      "sha256": "ef04d85d397f6d6218cc740fd85b9df1995a08482c17ee0619df78ad01589a88",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transform": {
+        "scale": 0.3515625,
+        "translateXY": [
+          35.5703125,
+          36.71875
+        ],
+        "crownY": 180,
+        "soleY": 1204,
+        "normalizedCrownY": 100.0,
+        "normalizedSoleY": 460.0,
+        "sourceFullyContained": true
+      }
+    },
+    {
+      "id": "japan-2-horn-crest-coiled",
+      "labels": [
+        "精銳武士候選 2",
+        "鬼角前立＋斜前蓄力斬",
+        "20261030／未定案"
+      ],
+      "source": "docs/art-unification/elite-final-20261030/japan/raw/japan-2-horn-crest-coiled.png",
+      "crop": null,
+      "landmarks": [
+        180,
+        1165
+      ],
+      "candidate": "docs/art-unification/elite-final-20261030/japan/candidates/japan-2-horn-crest-coiled.webp",
+      "sha256": "a10aa218968c21c537db39f68dd03e6f6295321cb6e68e55e157f1d96854c7d0",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transform": {
+        "scale": 0.36548223350253806,
+        "translateXY": [
+          26.842639593908643,
+          34.21319796954316
+        ],
+        "crownY": 180,
+        "soleY": 1165,
+        "normalizedCrownY": 100.00000000000001,
+        "normalizedSoleY": 460.0,
+        "sourceFullyContained": true
+      }
+    },
+    {
+      "id": "japan-3-elite-iai-low",
+      "labels": [
+        "精銳武士候選 3",
+        "高階武士＋半蹲居合",
+        "20261030／未定案"
+      ],
+      "source": "docs/art-unification/elite-final-20261030/japan/raw/japan-3-elite-iai-low.png",
+      "crop": null,
+      "landmarks": [
+        145,
+        1150
+      ],
+      "candidate": "docs/art-unification/elite-final-20261030/japan/candidates/japan-3-elite-iai-low.webp",
+      "sha256": "e9e2cab956909dbb0a9c3f264d47112bd4b5f2840b946bc8274844bc7ada117c",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transform": {
+        "scale": 0.3582089552238806,
+        "translateXY": [
+          31.402985074626883,
+          48.05970149253733
+        ],
+        "crownY": 145,
+        "soleY": 1150,
+        "normalizedCrownY": 100.00000000000001,
+        "normalizedSoleY": 460.0,
+        "sourceFullyContained": true
+      }
+    }
+  ],
+  "boards": [
+    {
+      "path": "docs/art-unification/elite-final-20261030/japan/comparison-512.png",
+      "sha256": "b94cae4c672fef11130014d14a3af3ea1dd5ed2bcfb8b618cedc7c6ffb67333a",
+      "dimensions": [
+        2656,
+        768
+      ],
+      "artPixels": 512,
+      "rectangles": [
+        [
+          16,
+          208,
+          512,
+          512
+        ],
+        [
+          544,
+          208,
+          512,
+          512
+        ],
+        [
+          1072,
+          208,
+          512,
+          512
+        ],
+        [
+          1600,
+          208,
+          512,
+          512
+        ],
+        [
+          2128,
+          208,
+          512,
+          512
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-final-20261030/japan/comparison-512-mobile.png",
+      "sha256": "2dcfdcc0ad0a759d524a5099538dbb7d6a624659efaaea6803a3a6b002fdd315",
+      "dimensions": [
+        320,
+        2190
+      ],
+      "artPixels": 288,
+      "mobile": true
+    },
+    {
+      "path": "docs/art-unification/elite-final-20261030/japan/comparison-128.png",
+      "sha256": "a6b11e9b065e6a8623430e4afffa2f0f9d7e65b87d36441476b04ea8df8ed667",
+      "dimensions": [
+        1196,
+        352
+      ],
+      "artPixels": 128,
+      "rectangles": [
+        [
+          62,
+          176,
+          128,
+          128
+        ],
+        [
+          298,
+          176,
+          128,
+          128
+        ],
+        [
+          534,
+          176,
+          128,
+          128
+        ],
+        [
+          770,
+          176,
+          128,
+          128
+        ],
+        [
+          1006,
+          176,
+          128,
+          128
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-final-20261030/japan/comparison-128-mobile.png",
+      "sha256": "7e606a11095c9efbf226f665d951ed99f0006dc56e4e801335a633ff077a272d",
+      "dimensions": [
+        320,
+        1000
+      ],
+      "artPixels": 128,
+      "mobile": true
+    },
+    {
+      "path": "docs/art-unification/elite-final-20261030/japan/comparison-64.png",
+      "sha256": "d759ac549cc566addc4ddda1343c0d4605793412b8cd0332ae996282cbcdab0f",
+      "dimensions": [
+        1196,
+        288
+      ],
+      "artPixels": 64,
+      "rectangles": [
+        [
+          94,
+          176,
+          64,
+          64
+        ],
+        [
+          330,
+          176,
+          64,
+          64
+        ],
+        [
+          566,
+          176,
+          64,
+          64
+        ],
+        [
+          802,
+          176,
+          64,
+          64
+        ],
+        [
+          1038,
+          176,
+          64,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-final-20261030/japan/comparison-64-mobile.png",
+      "sha256": "3b20cc51c9c77bee809e5d822d2f32de1c2f916e811c3bc952a6aadd0bfecedb",
+      "dimensions": [
+        320,
+        800
+      ],
+      "artPixels": 64,
+      "mobile": true
+    }
+  ]
+}

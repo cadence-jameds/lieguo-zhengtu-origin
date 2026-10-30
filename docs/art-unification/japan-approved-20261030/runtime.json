@@ -1,0 +1,43 @@
+{
+  "key": "elite.guard.civ_japan",
+  "selection": "候選 1：鬼面大鎧＋過頂舉刀",
+  "candidateNumber": 1,
+  "playerApproval": "APPROVED",
+  "approvedArtworkCommit": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+  "path": "public/art/unified/units/elite.guard.civ_japan.approved-candidate-1.webp",
+  "sha256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+  "bytes": 237346,
+  "dimensions": [
+    512,
+    512
+  ],
+  "source": "docs/art-unification/elite-final-20261030/japan/candidates/japan-1-oni-oyoroi-overhead.webp",
+  "sourceSHA256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+  "raw": "docs/art-unification/elite-final-20261030/japan/raw/japan-1-oni-oyoroi-overhead.png",
+  "rawSHA256": "ef04d85d397f6d6218cc740fd85b9df1995a08482c17ee0619df78ad01589a88",
+  "prompt": "docs/art-unification/elite-final-20261030/japan/prompts/japan-1-oni-oyoroi-overhead.txt",
+  "promptSHA256": "2df50ac0010073667f27699842bd91c6967e6b4e563dade9363bc8db8d8fde4f",
+  "decodedRGBSHA256": "c0abd851bb20ffeaf1dc594bcbbc291164cf48e5331a8961365ec905410dd781",
+  "previousPath": "public/art/unified/units/elite.guard.civ_japan.webp",
+  "previousSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+  "previousRegistrySHA256": "e49aa315d2b89d18988a091b4eb0875b3b3ce39d28e417cd67d8b67d178b7a1d",
+  "conversion": "Byte-for-byte copy of the player-approved candidate1 512px lossless WebP. No generation, conversion, crop, resize or color changes to Runtime.",
+  "base": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+  "chinaRuntime": "UNCHANGED",
+  "notSelected": [
+    {
+      "candidateNumber": 2,
+      "source": "docs/art-unification/elite-final-20261030/japan/candidates/japan-2-horn-crest-coiled.webp",
+      "sha256": "0eecca941363bbdf5c9e83e67a7f7dbdc3c021389e28a53de4635682fdce4e9e",
+      "status": "NOT_SELECTED_RETAINED"
+    },
+    {
+      "candidateNumber": 3,
+      "source": "docs/art-unification/elite-final-20261030/japan/candidates/japan-3-elite-iai-low.webp",
+      "sha256": "afaba38d82201c1d1f8cd6dd401d0d5da1f872bf98f7f3a392b2f936a59fd782",
+      "status": "NOT_SELECTED_RETAINED"
+    }
+  ],
+  "independentArtReview": "待驗",
+  "physicalPhone": "待驗"
+}

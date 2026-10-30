@@ -1,0 +1,141 @@
+{
+  "中國-ABCs": {
+    "path": "docs/art-unification/elite-review-20261029/boards/中國-ABCs.webp",
+    "sha256": "5f353c2f7752a2f0c2141c2446794bf946ca34bc0f071aa354eb81aecaaec3dd",
+    "sources": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/china-A-lamellar.webp",
+        "sha256": "8df30d203ffb9c9ff43ec0cd3e7f25683c34e04fce0244631181e0ff0d6b1ab1"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+        "sha256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/china-C-imperial.webp",
+        "sha256": "f39189dba71701fc4bd537bec4725a24e2192e0a1ab521d09755716fd43dba3c"
+      }
+    ],
+    "size": [
+      1344,
+      380
+    ],
+    "method": "Same complete512 canvas, equal isotropic scale, no per-silhouette fitting."
+  },
+  "zhongguo-native-128": {
+    "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-128.png",
+    "sha256": "3b3e38bbce16ae818d1cf3938bed22ec4c49fdc7631d8599c048d508d20b069f",
+    "nativePixels": 128,
+    "noUpscaling": true
+  },
+  "zhongguo-native-64": {
+    "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-64.png",
+    "sha256": "53bcfae0ee5abc7727031af6089b1609338130a3f8fefaad2f7f208c1faaa571",
+    "nativePixels": 64,
+    "noUpscaling": true
+  },
+  "日本-ABCs": {
+    "path": "docs/art-unification/elite-review-20261029/boards/日本-ABCs.webp",
+    "sha256": "192aa65cb98d780e8b96fda0586fc1393b6b5c40577a0831d0eb19999f35f018",
+    "sources": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/japan-A-oyoroi.webp",
+        "sha256": "632cb215f91f2ca8510d3d4c8d182d19495bc630b3188369ba7497630113572f"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/japan-B-domaru.webp",
+        "sha256": "ddf5d354384d61a2e62a4348df1c5004efb4832485828a6790a0921aab387603"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/japan-C-gusoku.webp",
+        "sha256": "591cacea3f808ffd0c209e257cc259e30bdfa3cd5e65cb4b224173474213f001"
+      }
+    ],
+    "size": [
+      1344,
+      380
+    ],
+    "method": "Same complete512 canvas, equal isotropic scale, no per-silhouette fitting."
+  },
+  "japan-native-128": {
+    "path": "docs/art-unification/elite-review-20261029/boards/japan-native-128.png",
+    "sha256": "dee53f131bf2470e2235350e5d914286439a969d29905b29574f2b9f7a971b72",
+    "nativePixels": 128,
+    "noUpscaling": true
+  },
+  "japan-native-64": {
+    "path": "docs/art-unification/elite-review-20261029/boards/japan-native-64.png",
+    "sha256": "a8c2e97a67695654deae7fab6859a9823e9230d7fb797aa2735b57d4ab58da20",
+    "nativePixels": 64,
+    "noUpscaling": true
+  },
+  "frankia-before-after": {
+    "path": "docs/art-unification/elite-review-20261029/boards/frankia-before-after.webp",
+    "sha256": "1a5ecbf056ee029054a0cd6f78985b96c6218a53b7085b90d71b72335c205bb7",
+    "sources": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp",
+        "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/candidates/frankia-single-hand-v1.webp",
+        "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b"
+      }
+    ],
+    "size": [
+      1128,
+      420
+    ],
+    "method": "Same complete512 canvas, equal isotropic scale, no per-silhouette fitting."
+  },
+  "frankia-anatomy": {
+    "path": "docs/art-unification/elite-review-20261029/boards/frankia-anatomy.webp",
+    "sha256": "baab9b075841ef4601e1f01815d89708cbd7271a52df3b41d44ee37fb17ccd4c",
+    "source": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+    "rects": [
+      [
+        110,
+        65,
+        410,
+        430
+      ],
+      [
+        670,
+        335,
+        900,
+        650
+      ],
+      [
+        625,
+        285,
+        1040,
+        840
+      ]
+    ],
+    "method": "Source crops only; no paint, concealment or repair."
+  },
+  "six-civilizations-native-128": {
+    "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-128.png",
+    "sha256": "e208143d85f99f95c8a4f153bbe0f336abe429a4e3c1dc3dd67c272bb1c42864",
+    "nativePixels": 128,
+    "noUpscaling": true
+  },
+  "six-civilizations-native-64": {
+    "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-64.png",
+    "sha256": "5eda99100ed7e4cb41dc867d5ac69b7266cb23e483290bf251ec3ff4ac8931ef",
+    "nativePixels": 64,
+    "noUpscaling": true
+  }
+}

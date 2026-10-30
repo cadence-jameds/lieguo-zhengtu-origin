@@ -1,0 +1,2552 @@
+{
+  "base": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+  "sourceHead": "c24862d3db8c0657ac1da88d0cf3d27a586cac05",
+  "commits": [
+    "8736bad811a7c372c59881b143e4c75bd659c5af 5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5 fix(art): repair five unit portraits and ground legacy walled cities",
+    "bbdf779a1bbcdce0d1b97c43dbdd9a552818960b 8736bad811a7c372c59881b143e4c75bd659c5af fix(art): add Chinese and Japanese armor candidates and one-handed Frankish elite",
+    "c24862d3db8c0657ac1da88d0cf3d27a586cac05 bbdf779a1bbcdce0d1b97c43dbdd9a552818960b docs(art): record blocked push and verified elite review delivery"
+  ],
+  "files": [
+    {
+      "status": "M",
+      "path": ".github/workflows/ci.yml",
+      "gitBlob": "fd91540ced6bbf2a590a3f0eba2e30fa71ccdac4",
+      "sha256": "0dd4944c07f28c42ae3bb18f24595ead65aa6097e708a14fa4e1e2f7e9c32d06",
+      "bytes": 2049
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v1.png",
+      "gitBlob": "a6b3d82ed37cd319e5f916b4ee8ed303a3d58d9f",
+      "sha256": "a2c31e41a723d8e8b8afb7bc9d8832ffef5299a0149004c294a9a47efc3d5be9",
+      "bytes": 2136323
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v2-blocked.json",
+      "gitBlob": "f5976fc8308d8e090d23321c9f38c49a41b431a2",
+      "sha256": "1f2947205df89161c4d6eaeaa7ac943cd4ce7b1778248b80e8ce4e9a13fed4cb",
+      "bytes": 167
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+      "gitBlob": "1cb3fba929603567d45a5cdc24ff9a0d951d577f",
+      "sha256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946",
+      "bytes": 2142421
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+      "gitBlob": "daf44c6be89a7aff06637f7f14d832e4572f0ea5",
+      "sha256": "064e7ddf6fb1b702fa38c3dd9dafbdba11f973dee1c2e383a7c3e09784f17d16",
+      "bytes": 2149690
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+      "gitBlob": "9d1cf1fe80941c9ff45bba39555ae5cf8ee5bd60",
+      "sha256": "8b5e52dc31ed8961718894177daea5cf3afbb1357d77553136c0d416364f4938",
+      "bytes": 2106965
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+      "gitBlob": "7d1521d6090afce58162dbcc489f7b30e84286a7",
+      "sha256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc",
+      "bytes": 2093783
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+      "gitBlob": "27e2ef1a13d37b3cfc83d40e2ef0b67fc99feb29",
+      "sha256": "2271da95a7997d8e205185d38762bfbb033368aa599aab5ba5d258ca66cc6569",
+      "bytes": 2102294
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+      "gitBlob": "cd20eadcb5085fb05d362f4b1aa738bd6bcf15f4",
+      "sha256": "cd40fa2dea78397ecdf0dff1a7c486bff739a345721fb0d444675ed0006f4fb0",
+      "bytes": 2078181
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+      "gitBlob": "5589dee6b19014c6c50d3a7d23f0bdaacb3cad60",
+      "sha256": "0ab959f56f09b15b958be06af24ed6e91a3029ff4ebd87bb51da463cff975bd2",
+      "bytes": 2006956
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/generation-history.json",
+      "gitBlob": "befbb1a9fe80df5bfaa8f67734db2f3ef18a0f84",
+      "sha256": "20887510b16e24273f51fd66256c0c08ea54787d0da84996f0bbf63d9ab96326",
+      "bytes": 8085
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/outputs.json",
+      "gitBlob": "eaa3380da19c669ee3d22f48ec74bf679d4f1189",
+      "sha256": "242d1c1251bcc4639df2800d2e825b371952e0d56d89699e154ab145ed60d14b",
+      "bytes": 13009
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v1.txt",
+      "gitBlob": "1ff89c11b23794132bac488e9a440f5552ce8717",
+      "sha256": "ae7b7e1e958e6e67412aa8074adb63d0b2571f2426ab1cf320afbf6e8a06b333",
+      "bytes": 2001
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v2.txt",
+      "gitBlob": "61d80354f6a378c9d194e628fd9d24e05ebed47d",
+      "sha256": "4c7329579340d6225debc5a09e702a74488177c1fca244496789bd5795078b66",
+      "bytes": 1641
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v3.txt",
+      "gitBlob": "d29cbb66b7975595d201443e48c58b5003bb2e10",
+      "sha256": "7334c53c59b9dc3fab136e3418acad8bac16362b3419e41d1e19c9fea6fb42ff",
+      "bytes": 1300
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/china-v4.txt",
+      "gitBlob": "71d9b86b1abd9aa01c5325014996fb0c0ad2268a",
+      "sha256": "6fcce7651bad2fe9a9d70b9e5953f22d0edc7fc3ac1cbafbc23af22e114d4eea",
+      "bytes": 1430
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/frankia-v1.txt",
+      "gitBlob": "ab18904387f8ba8a050ccdbac355e05590973a97",
+      "sha256": "20f09017fc4c5911007ed2e858baceda868f262807b218cbe29fb58baa4bba81",
+      "bytes": 2062
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/japan-v1.txt",
+      "gitBlob": "c5cc69250a3a905782460bc0136171909fb4db9b",
+      "sha256": "342662d6833a181d5b32f1b4cab937ad3ea37b510dcd972ca4df3c3c95c5467a",
+      "bytes": 1980
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/japan-v2.txt",
+      "gitBlob": "fba0fd60d5490accb12daa0d68da39e5640a078e",
+      "sha256": "7a838438257e301677e89c90c5e90f17d739c7fff4e8f1cc620772824054c550",
+      "bytes": 2244
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/knight-v1.txt",
+      "gitBlob": "d9d118291868b865a2a15c75bea09125ee7dd482",
+      "sha256": "7d77e5a59ba63a8a778ca69968a900578f0dbe6bc9b798e21056fa35cad12dcd",
+      "bytes": 2374
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/prompts/light-v1.txt",
+      "gitBlob": "bfd210b42918f6c80356ea5f98b26a0deace3da7",
+      "sha256": "55fc1bda38d6dd9b1f01cfd601b1845e84764964f1e4418dcc34581b153b413c",
+      "bytes": 2043
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references.json",
+      "gitBlob": "e0a560d37b4174eb3079e16030e5c9a502445207",
+      "sha256": "1a7d6885ad8852e3b7dccdf4f01e77d7d52a54897217b9f421b31ff5af4514fe",
+      "bytes": 3107
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+      "gitBlob": "2ac580e294cb5ee799c73986cabfa8b3181ebcde",
+      "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3",
+      "bytes": 240149
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+      "gitBlob": "0be22f5be2d4b078d4627bdc516dd083c0705558",
+      "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289",
+      "bytes": 218074
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+      "gitBlob": "1d471cb1c1ddc925dbbf96a32f8b02ed55f1bad6",
+      "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318",
+      "bytes": 219525
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+      "gitBlob": "462ae22549b7e06152d7ed576180322297823b48",
+      "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7",
+      "bytes": 184067
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+      "gitBlob": "2391194e493afb0115ae7385d2df8b2d4f53a36d",
+      "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715",
+      "bytes": 206798
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+      "gitBlob": "915a0193100ce07f25daa327444ea890db624ff5",
+      "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641",
+      "bytes": 199910
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+      "gitBlob": "d3569c299f7e2ebdd7ce688ce5d7911f46b04c3c",
+      "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1",
+      "bytes": 269611
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+      "gitBlob": "eecdd1654971e1acc27cad5253901c32dc492beb",
+      "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928",
+      "bytes": 235759
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/knight-current-before.png",
+      "gitBlob": "3748e14b1178916062d00b7480c9765207853bae",
+      "sha256": "b145f163a60f5c9e680f3e1ac204a5e3a93a24cb5832615a44a6ace81ff90b5c",
+      "bytes": 166364
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+      "gitBlob": "935a16cecf377114dbb76a2727979e9415612f8a",
+      "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108",
+      "bytes": 217726
+    },
+    {
+      "status": "A",
+      "path": "docs/art-source/player-feedback-20261029/selected.json",
+      "gitBlob": "7d945688d716aca2e62fba5df15fa895c69601f6",
+      "sha256": "0bbe65f7d4768adce091919d7d9039fa15ac37f6b98b57dd6c26dee97aa04d04",
+      "bytes": 4065
+    },
+    {
+      "status": "M",
+      "path": "docs/art-source/unification/assets.json",
+      "gitBlob": "5ef79f93b775cf3e104c4559df24c18354557079",
+      "sha256": "8bc68483b0337eb556a3408bffa185fab0225301fe85c67e8437178ca2121ec9",
+      "bytes": 267141
+    },
+    {
+      "status": "M",
+      "path": "docs/art-source/unification/batches.json",
+      "gitBlob": "39dd255f619b723ab746cd75a8a8c656ded89322",
+      "sha256": "2402eaa43b22773e6b36e571ed4de18fb4ba36a891e25dcc22842282308a8ecb",
+      "bytes": 346406
+    },
+    {
+      "status": "M",
+      "path": "docs/art-unification/REPORT.md",
+      "gitBlob": "4991e879e86aa4b31dff83143a51296b47c79904",
+      "sha256": "48434f775e640d5f511510123fa93907b3ae4c4e478f2073f712541da5c67cc3",
+      "bytes": 11937
+    },
+    {
+      "status": "M",
+      "path": "docs/art-unification/art-gate.md",
+      "gitBlob": "0dd92681c56e705bacfc92e8ad93c9d04424ade2",
+      "sha256": "9aa31eea80ff4f85a179b020363e64c06ae10bd999c4a0595dccb10d11b6e1a2",
+      "bytes": 25991
+    },
+    {
+      "status": "M",
+      "path": "docs/art-unification/coverage.json",
+      "gitBlob": "598bdd815db5ae43d0ac28c3de5be32b1f15da81",
+      "sha256": "9b7432d6e40370c4de2ea58d43a2128c71f7112cb7f23d6ae0da3dd44fc3b5ab",
+      "bytes": 286052
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/REPORT.md",
+      "gitBlob": "5d50b763782b3f98724f9045958beb78c68ce4d5",
+      "sha256": "7c7105138f647a0e0a0530f5d43e05f1090635d221baac28541794680e270598",
+      "bytes": 13384
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/art-gate.json",
+      "gitBlob": "9ad1d55bda4865800bd1643c3f60ae85be24b0f4",
+      "sha256": "899e49bdce7d683905e33ac0c862bb595baffffa0199a512d63c6433a5ed1705",
+      "bytes": 8786
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_britannia.webp",
+      "gitBlob": "c9cc3722f223712c90c3c35a58fd8b415ec2e0b9",
+      "sha256": "aa2852b2348ff35c474cba92344a4a01766d2100d3ead822ea9c8bc228dc6e2c",
+      "bytes": 29596
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_byzantium.webp",
+      "gitBlob": "f650035eb76899d3c9f2afb88f7294c606076e5b",
+      "sha256": "2e0c87447f76e94af1cb1c09fc9a08ce32665294b6eb6c668723438038cb7d99",
+      "bytes": 44962
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp",
+      "gitBlob": "4ce3d00eb6de0b1e94f2e8b63728903b9f8fab53",
+      "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+      "bytes": 33486
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_japan.webp",
+      "gitBlob": "aa906baaa18dc736260764ea15b46e3ec75ee4e6",
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "bytes": 37626
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_mongolia.webp",
+      "gitBlob": "288b92510451fda78eef77b76e2cbcdf01b23001",
+      "sha256": "ad8a6c1689f4984849c2dd2e50aa16729fc81bc04e178bcea1c10eb850e1a88d",
+      "bytes": 49846
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_zhongguo.webp",
+      "gitBlob": "7569119509be11b688da89f23978769cb8081197",
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "bytes": 37630
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/frankia-anatomy.webp",
+      "gitBlob": "de8b8039502e71dd733c15aead008a2f68eee356",
+      "sha256": "baab9b075841ef4601e1f01815d89708cbd7271a52df3b41d44ee37fb17ccd4c",
+      "bytes": 124866
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/frankia-before-after.webp",
+      "gitBlob": "c21be59496c570f204ef6973cc50809056731eda",
+      "sha256": "1a5ecbf056ee029054a0cd6f78985b96c6218a53b7085b90d71b72335c205bb7",
+      "bytes": 85976
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/japan-native-128.png",
+      "gitBlob": "b537aa8bb0beeda6c7f093b290b34a9e12423d0c",
+      "sha256": "dee53f131bf2470e2235350e5d914286439a969d29905b29574f2b9f7a971b72",
+      "bytes": 78502
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/japan-native-64.png",
+      "gitBlob": "eedca6583f162be70ec55bff8b4b70a5346850b5",
+      "sha256": "a8c2e97a67695654deae7fab6859a9823e9230d7fb797aa2735b57d4ab58da20",
+      "bytes": 26122
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/manifest.json",
+      "gitBlob": "9f7c382f8e7b6a0b2dbcfbd80119c5b3a045ea75",
+      "sha256": "f3330467bbb54987d0c622760bd8cd744fa0f6a5083f45083e4c0c7be75ea910",
+      "bytes": 5326
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-before.webp",
+      "gitBlob": "b3d8cf6fed552476680e4d151ef573c4e267e0a4",
+      "sha256": "1b20571711081fbc6b3d6b1709c4731a881e8930400310cc35793819bb6d36cd",
+      "bytes": 234188
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-128.png",
+      "gitBlob": "80d3c13d32aa9a750f812291e3ab4e5a94f76aff",
+      "sha256": "e208143d85f99f95c8a4f153bbe0f336abe429a4e3c1dc3dd67c272bb1c42864",
+      "bytes": 284949
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/six-civilizations-native-64.png",
+      "gitBlob": "dce48b658919cedc5270733832c86e93bafc7546",
+      "sha256": "5eda99100ed7e4cb41dc867d5ac69b7266cb23e483290bf251ec3ff4ac8931ef",
+      "bytes": 103495
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-128.png",
+      "gitBlob": "beeac0b34572c778050ae4486ccc2a91f8bbd6ca",
+      "sha256": "3b3e38bbce16ae818d1cf3938bed22ec4c49fdc7631d8599c048d508d20b069f",
+      "bytes": 79317
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/zhongguo-native-64.png",
+      "gitBlob": "a8735f27599631bf370479b52cf2b7e1090c5d11",
+      "sha256": "53bcfae0ee5abc7727031af6089b1609338130a3f8fefaad2f7f208c1faaa571",
+      "bytes": 26204
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/中國-ABCs.webp",
+      "gitBlob": "880a564e541495032109331305d1c3a2bfc3f93b",
+      "sha256": "5f353c2f7752a2f0c2141c2446794bf946ca34bc0f071aa354eb81aecaaec3dd",
+      "bytes": 87072
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/boards/日本-ABCs.webp",
+      "gitBlob": "94dd6d88533bee0cd42f20dc7b93ab32e46bd58b",
+      "sha256": "192aa65cb98d780e8b96fda0586fc1393b6b5c40577a0831d0eb19999f35f018",
+      "bytes": 87538
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser-manifest.json",
+      "gitBlob": "06f81bb0f53b1444ac65f7c2fe96a1dd5ee385d9",
+      "sha256": "78d4cf0f76a43ad98abd07c9690be2347440d735543c7560e4f331c7007bad16",
+      "bytes": 14434
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-card.png",
+      "gitBlob": "f0c5d651c3c96b8a2d6cedb1cff03cdce4d112f9",
+      "sha256": "fe3e4fbd077b97c66e46a576d4417e7290076cf447d537985934b0ecfec9aa42",
+      "bytes": 43513
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-detail.jpg",
+      "gitBlob": "984edfcd4cb11c97ed286f552cf657d91db40035",
+      "sha256": "13e3c605688f410dae2a666972492524881997add28e05233398656fb1747056",
+      "bytes": 64383
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_frankia-ui.jpg",
+      "gitBlob": "86303aeb2864d43e68313f0681ddf24c8aae411b",
+      "sha256": "6e715bc0bf7a474a0d8d8b03c75392e5a23ffd621fcc405702b2f2096a9b828e",
+      "bytes": 114615
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-card.png",
+      "gitBlob": "2033d3d44c985ec32ea17560f37a7020eafc1639",
+      "sha256": "4ff3034c70266c8bee88679342aa5406b5d73a33c5d91ab175be9dde1fdc2fb2",
+      "bytes": 42437
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-detail.jpg",
+      "gitBlob": "53870ec1e0a48d5a6f28f6f0cb427e86b3fc8bf6",
+      "sha256": "4dc0c50dfab1bfdbffd9809564d1c9a7abf551b0274352bfadf18330144b2527",
+      "bytes": 62843
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_japan-ui.jpg",
+      "gitBlob": "c96eae9c96f8907c45a551bd17b08b2c744678b1",
+      "sha256": "5a0cfa9bb43314b8cf0f0bd7908cb32b478fa7424b18ce1b00ae5b1c27fa2fb9",
+      "bytes": 112750
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-card.png",
+      "gitBlob": "db2120302a7ab88915fec9d5c893f0fef06cfe1e",
+      "sha256": "c9ede35d7180736cfbeb900673c81c47d40b28121b556256acd5a1d543d5484b",
+      "bytes": 41743
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "4134df46c9b5fb94949acdd2cc4fa3f028487372",
+      "sha256": "3d5b405fb996eb534b20417c9f17dbad12bf6c08665d21f06374c6e71eced487",
+      "bytes": 62037
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-elite.guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "a12ca63f15ed74c8eccc237c28af17d5d83e8773",
+      "sha256": "a9de8a0f7fc53bb82d9fe31c4dde309571c9dfcd4ace587da9b35908971dbb44",
+      "bytes": 112051
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-card.png",
+      "gitBlob": "05e2962412f88685def25429e6044133f2a8dc7a",
+      "sha256": "baf82a286b87390eff4fb23d7dc59d70d15c819f509f8b2242231b8a0104469a",
+      "bytes": 43646
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-detail.jpg",
+      "gitBlob": "b567b6ee34dc567f501085ce982bea978ed0e170",
+      "sha256": "b01183998447e2f7f1a7f1df8cf5dd25164dfb81a78b639bd8b4246e06263c5f",
+      "bytes": 59167
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_frankia-ui.jpg",
+      "gitBlob": "d01f001cbdd61f6513338ea57f666e8f3b67344b",
+      "sha256": "3ffba94c871f540dd50276ed28673a32f9f646501c7076d7172558e9007b7e53",
+      "bytes": 112602
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-card.png",
+      "gitBlob": "0c7e2669489fe32c3daa3057ac4b0cb087581f0d",
+      "sha256": "a7ef5980be862f3adaab16943582e96b49a7422fcb41685d210572b4580a7a1e",
+      "bytes": 40252
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-detail.jpg",
+      "gitBlob": "dbdf356d99709ca531a7d68739f9ff026034d60b",
+      "sha256": "d5ff2c761b237158665872764a95b17a75d74806225733c8efea6b9e6c119e61",
+      "bytes": 58281
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_japan-ui.jpg",
+      "gitBlob": "ac1f1e87e3b2ec9cc3cb0a243009eb4d46bbb235",
+      "sha256": "d20165601e13b6eaf4658292d3d3b5114107785cc1630c10c3e1cbdae4f8701b",
+      "bytes": 111255
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-card.png",
+      "gitBlob": "09c6ec0db1e551e933dc022214d94219ae5be9c4",
+      "sha256": "b1cc40875017722d3f1167067d98df606fdaee9db8536381846df267c2566472",
+      "bytes": 40468
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "a854a3207900da5b4f77a49ba86060371f21c219",
+      "sha256": "09712a70051c6fdf394fe853557056b8727073c44c00c49e0a2e05db8f56317a",
+      "bytes": 57521
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "3fae745380afe100188490ae6fd4e41fc7417376",
+      "sha256": "3eb5e80fa980549ed065bccbea0aaceec1c2fe8f31bd1d22c0ca0b5cf1180afa",
+      "bytes": 110745
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-card.png",
+      "gitBlob": "7f4d3677d4510ba2eacd615e6c31b179c5337d08",
+      "sha256": "e6fa96666dfad64b05bffd8659d2261dc089788d84a1c95c8b783c902f39b174",
+      "bytes": 41457
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-detail.jpg",
+      "gitBlob": "b407636e6a642caa8c676fe2e29ed853c58ba0de",
+      "sha256": "acbad2b3178244319bcf592a55294cd8b942043a6b0e0ddea3b1c89081574bb5",
+      "bytes": 63444
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-heavy-knight-ui.jpg",
+      "gitBlob": "ffe6d33a75f4c4377149f394bbef006cd85f8887",
+      "sha256": "fe92ff30096d0c36e1558e2eba3c312a3c21d1b40a89f4803f75a6697f674b77",
+      "bytes": 144404
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-card.png",
+      "gitBlob": "38ec45fd986ca9f896a88262f1c354a4373b5b6e",
+      "sha256": "9193361a919a6f938491886cbc5bafd56c11917a562622130af6c049fea80872",
+      "bytes": 39124
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-detail.jpg",
+      "gitBlob": "fd744b866b54d332e6be9af05320c2d773d8c8f4",
+      "sha256": "d6e6e21be2ad5b3510e4a1d4bc55e6ffbe4bc8686dbcc443ce2fa402e87f0052",
+      "bytes": 59196
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-knight-ui.jpg",
+      "gitBlob": "0598f8a9d300a8492dcbaaa8410fb9ee74b70f7c",
+      "sha256": "0ed9ae174ce920392f16099cfc0b37cda5988122a7d11d8c45b823acc73be9ee",
+      "bytes": 142738
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-card.png",
+      "gitBlob": "69b7c51eb6f56c24d9763826127a10b99fc9424f",
+      "sha256": "29adfcf247861c96240c3a3d49d69d116330bc6284d34ae802ca6d13bb704916",
+      "bytes": 39497
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-detail.jpg",
+      "gitBlob": "304db581240281f86ed1608da0ca82a93ad4e4c7",
+      "sha256": "1fe83563aac72d20a78b4ddcf538bc3a88eab74b1673b4394631e5813b37482f",
+      "bytes": 60068
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/1440-light-cavalry-ui.jpg",
+      "gitBlob": "6d63cb151438e03cede9aae5a058b39edde75458",
+      "sha256": "dc7f2b986a5b840c947babbb370b18c86c70edfee9631e1cd084cd9984763a3f",
+      "bytes": 143989
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-card.png",
+      "gitBlob": "7c8c50d4686dcde3f3820117d4947e5bb71fa7e4",
+      "sha256": "5bac53930b9afcd029983426ccf24db0605142b36f918190ca7d74b545dd518c",
+      "bytes": 19922
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-detail.jpg",
+      "gitBlob": "1674f4d0d298cb52a09a80b27a3a8ca013a08947",
+      "sha256": "067b8492d35afc7ba7e572ea028695350fd9fa83b4ff956cfbc25ebef67f3665",
+      "bytes": 33629
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_frankia-ui.jpg",
+      "gitBlob": "ea50c0b15e2cef8cc3a91464f54623d73d244447",
+      "sha256": "becdbdf53745a5c8793ffb839cb8f78e52c768e20f300798f74f4aeb8e498c2d",
+      "bytes": 44806
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-card.png",
+      "gitBlob": "583a14c6a8891d73fc332a45ac3e9b7df4b7debd",
+      "sha256": "30b7ce3f797a6a3427eba60db0d1be0db2a9188d10f7f2ba6dd5f561369258bd",
+      "bytes": 19039
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-detail.jpg",
+      "gitBlob": "bf1d37b0fd6eddb2d46f480819a1fcf6bda9d4c6",
+      "sha256": "4b8c22418e5bab859ef62aec3f04048df00d9eaba2e89a683afb4155275589b2",
+      "bytes": 33999
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_japan-ui.jpg",
+      "gitBlob": "d08b1a663a2679cea38ed7ea54201d82d01289e6",
+      "sha256": "e28a781ba60850ea1974fd11ebfc4bf036022b234a573fbaaf1cdb643201ad93",
+      "bytes": 45286
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-card.png",
+      "gitBlob": "16a7fd4b33822b531e9e88b69d38ca8b0f206a78",
+      "sha256": "81c7471f10ea1b79c6bf97eb6e55eced2e0bccee3435f9c22bf19e01067f3500",
+      "bytes": 18822
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "910a7f9e63d734dba3ab3e94f3c58c22f7cb38ce",
+      "sha256": "17c07fdb48354aeac9288d8ae2c6e6f37031cc982b5a3cc6de387fde3c160351",
+      "bytes": 33059
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-elite.guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "e3255e517a0f03a7b0334597ed817230b487050b",
+      "sha256": "15a00e468a211e7027cd16d4e2df2fb1b73bdb3b97aec0c36c4b14c895bcf375",
+      "bytes": 45225
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-card.png",
+      "gitBlob": "b6012579cf1e6ee0bfae3667933bb59787a1cd6c",
+      "sha256": "4ee9a32c6abe0c3dba835977d5d7440d3e9c89d118c0b3f82bed3b1ee47d26c5",
+      "bytes": 17554
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-detail.jpg",
+      "gitBlob": "f580b553964cc31f8feea756ba3549a2a09d447b",
+      "sha256": "a3dd1b061bd7910ebae73fc320fe7b24ae5f62f9278a7bf691a83d7fd5ef3363",
+      "bytes": 31477
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_frankia-ui.jpg",
+      "gitBlob": "4633e13dc238cfb6641adf732130a213b0a825e5",
+      "sha256": "685580e93575c3ffbf7a918e81dc56ef6c2bebc764da81d21fd3cb0f1b1050bd",
+      "bytes": 44828
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-card.png",
+      "gitBlob": "8df9ee2cedc1ea44e526a5eddd954e7c2f9463b2",
+      "sha256": "8c4b810719e6823a7d47a66dbfe9eac5ff6502e14986c0be175dbd4b97c29460",
+      "bytes": 16278
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-detail.jpg",
+      "gitBlob": "fb0f33bcf1802c7c6562faaa39679f9e0d793e39",
+      "sha256": "b570a5192908fa172a4ede02b7c2f1cf1adaece46ff96db6187fccf3c3ed165a",
+      "bytes": 30613
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_japan-ui.jpg",
+      "gitBlob": "8ace82504f31d7de092264ddf9a279af3cdd1d83",
+      "sha256": "ac12efc9cfd9fbb78eefe99a8ff3cefdfc91b58ae78245d8c62686590ae82b53",
+      "bytes": 44279
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-card.png",
+      "gitBlob": "9a27633c61fa88204090cf1fedac91d7fccde1b9",
+      "sha256": "b23c2b4e9baea5635b688455eb707d0d212fb15f75dddb8a8c1f5770681e8fa4",
+      "bytes": 15638
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "eb09c03fa6bae88fe0d78e970e20dcef04cee21b",
+      "sha256": "c32fa13a669a20c435866b89cd0f980f8f0ca7c750ffabedc8db3e0b51a45554",
+      "bytes": 29946
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "f2ef561a8fa56ad32db22f522544f9dd44a48c21",
+      "sha256": "d599a340d5c2d69ad4338678906ffb49aaf6d11c7df36c8ec3b7e27fadb1ae3d",
+      "bytes": 44057
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-card.png",
+      "gitBlob": "41931135000371da3e2d60805346622ae879ac69",
+      "sha256": "57742b3bdf980198edba5535ac4c517c74df6617fdc973609d1667435acaa3b3",
+      "bytes": 19254
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-detail.jpg",
+      "gitBlob": "0ccb4638a33f88a4799fedc6f1cedfa0cefbb21f",
+      "sha256": "0a45736c1e65b9a733bb7dfb392cac85ebf6f7397853cd9de91e7ede8368b827",
+      "bytes": 32989
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-heavy-knight-ui.jpg",
+      "gitBlob": "9a21db6ef1dd204b8275d2d92b332024ded4f049",
+      "sha256": "7290d87e40bd03b6f009ba38d6559e9a99b8a81c157103ddb8c809b3493034ab",
+      "bytes": 50092
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-card.png",
+      "gitBlob": "d7ce40373d3277b7aa6fc0d55141bf71d746a380",
+      "sha256": "7b70891ca54de6ce6e3cdf2c2d983d4893ce79a2898cf20fcddb012913f23f99",
+      "bytes": 15939
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-detail.jpg",
+      "gitBlob": "7cc61b081420a52e5c0975ddf88280a4599f1f71",
+      "sha256": "0b41cc7d00d720bf12f32d2d78df276163756e7770fdd97250d8ded1ed0106bc",
+      "bytes": 29609
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-knight-ui.jpg",
+      "gitBlob": "21e92cab30557bd02773660a288c7a95c71e90ac",
+      "sha256": "1cc35d88057c5dfe0206ca0e74eaa4942c728a13f93e492530546ccb3511cd2d",
+      "bytes": 48162
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-card.png",
+      "gitBlob": "5c0021b84d3c72be6ea9abe9acf74b3fcf30da48",
+      "sha256": "3d4fcc93923779d549ba9319500e0912762ce0c9e81a51bb0df4978aacbb81cf",
+      "bytes": 17156
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-detail.jpg",
+      "gitBlob": "9c755755622ab8adac00e3c5f23f3eb4ec24c7c3",
+      "sha256": "aa4e0e1f057af49bc0e606deb5896df1664d5b560c569d0e070521e9c3fe2a2d",
+      "bytes": 30055
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/320-light-cavalry-ui.jpg",
+      "gitBlob": "ad3a9aa3ea83b0caac7c13bc93c8c1c34110abd8",
+      "sha256": "027935d9687917b37c9995d5e07e3ea9425b87b38476b0c1673690b14025424c",
+      "bytes": 46611
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-card.png",
+      "gitBlob": "972dbafcfc3840a37dd021fa90bc72fa70621bb9",
+      "sha256": "234542a92b532a776f94db685ce58c775dad4f6907f0505e454d6230c8ee1e75",
+      "bytes": 19994
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-detail.jpg",
+      "gitBlob": "91a47149940a06b860c608df5ca5ac14a9082fdb",
+      "sha256": "b568d25fcd9c5b640a22efeca3d22e687afd0716829d42e356567cc542afd3d9",
+      "bytes": 38454
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_frankia-ui.jpg",
+      "gitBlob": "8b3c6e2c6be2c2665187fa4d2e84f32bdd623c8e",
+      "sha256": "37c4c3abaee2b2a3e0cac1901a1c48f92a7fd2dd2e8eac74b0f527b17f5036f4",
+      "bytes": 50267
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-card.png",
+      "gitBlob": "3e718ea16c2f55c7d72a062ea2c04663f714d7f9",
+      "sha256": "034aa18cc80e4d4a2bfa01be07dd1b6db086c39a1f0c630e92e21fc89e8bc31a",
+      "bytes": 19228
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-detail.jpg",
+      "gitBlob": "b770a28f1f33261113a6fabd9a93d5f89997684b",
+      "sha256": "27ad4eaab4673360c6838dc2bcfeba540482a2da9cb2086099c6d1d75eae3fa4",
+      "bytes": 36781
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_japan-ui.jpg",
+      "gitBlob": "af9f2df8ce0bc7dd9be2f2918a7202f936e397eb",
+      "sha256": "b77a005b74fee4bfdb11241fb7347d613c6254cc190e2dff9add5a999872b0b3",
+      "bytes": 49494
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-card.png",
+      "gitBlob": "2640371a2170b85567ad05a4c7372001122072a1",
+      "sha256": "083a104fff8349347037e14941a09bf9bd30a54859a21284dac336cb972c89b6",
+      "bytes": 19038
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "e94d83ec220f0a3eeda7f0cb7bdd98a4c2e059ab",
+      "sha256": "7e118be1e65ee0361151ae27d8a6e97c5e61cac86c8ac78fba467b55cbb293b2",
+      "bytes": 35744
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-elite.guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "65c57fba90630e01dcd0ebf42642a3cae305c5f5",
+      "sha256": "0d5dcc218e4f1014224abc7cfb46fd7ba729ff88fecc58ece599c471f616109e",
+      "bytes": 49548
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-card.png",
+      "gitBlob": "f49275b80acdccdf0a0cf694b0f66eecffa7f23b",
+      "sha256": "6feca634868f263f3f9ade6a859d26161e6424d3d15af5b2a3b432c4206f971d",
+      "bytes": 17788
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-detail.jpg",
+      "gitBlob": "4aea396ff348a5ff8457b402d56b4c1a7cbb151d",
+      "sha256": "164cf894844621e562c8bd19502d1e1fd499a69275353e183b4d27f3016c8246",
+      "bytes": 33239
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_frankia-ui.jpg",
+      "gitBlob": "d78644a4273758ad205e61f71b7165a9c6407bac",
+      "sha256": "ce9820b70fb237545cfaf51b5effaed086b87f8f9a7867948798243dab3e2612",
+      "bytes": 49213
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-card.png",
+      "gitBlob": "ce49ea191194dfd943a99cc92f9fb181f6c32f57",
+      "sha256": "5f175679e8c593b54dae64538f953f672f82aca707eac2cd2b6a3aea56b57124",
+      "bytes": 16461
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-detail.jpg",
+      "gitBlob": "90f9b42e705ddaf9292944e85eaaa7720fa4e2d5",
+      "sha256": "81012150d584f0d6142640dc7b7aa38e1db9b9b93535144aefeb4808c385cd24",
+      "bytes": 32328
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_japan-ui.jpg",
+      "gitBlob": "76abb58bdc7cf092500b300a678b8b7682441227",
+      "sha256": "4d9b50db0824f4f446ddaef528983ba72f7f38666534833f3bafe39a0a238f57",
+      "bytes": 48480
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-card.png",
+      "gitBlob": "b00697e06876d92e8399d0f96594e47e0dacc0ad",
+      "sha256": "4cb04f27b2e6d0e51ce0be8a94198528b607c932861b50fe096a3efabd788972",
+      "bytes": 15792
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "ba06d0747701d1caddf4d5d754512e327ca4d45a",
+      "sha256": "d16521b1ddd5a5aa9c352556043f6b156d8dad8272e4d3799e3ee26a08e58e90",
+      "bytes": 31872
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "14010fc38a7d85e21572bd4a27c3e8e3336fe75f",
+      "sha256": "5a51545ddb73af6fa068925f92cc1ae5adafe2059613299e94de050b2c649ead",
+      "bytes": 48372
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-card.png",
+      "gitBlob": "99c0ce330129bf19f7eb36bed30490bba90669b8",
+      "sha256": "003d6a70fabc6ea41cb15c0998896dc0198f610ccf504ca2ca556df2b50a7a90",
+      "bytes": 19382
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-detail.jpg",
+      "gitBlob": "b430c2390c19c5ae734fe21f0650d46fdeda7b80",
+      "sha256": "548a24b981205d495d8855e91fc5801b89a724538a9b0638b61dea73af769db5",
+      "bytes": 35281
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-heavy-knight-ui.jpg",
+      "gitBlob": "86b90938efe3e9149affe739e052da3401b73c23",
+      "sha256": "b9e223d98b2807e970f8f6e45f41064dd81e700e084afe23845b17e206ddd016",
+      "bytes": 54177
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-card.png",
+      "gitBlob": "c6e12200b7fb8e71fbd85e42d604d8bbf5857516",
+      "sha256": "012c412f253139d9556cf341ae91af8ce9827e94e5e2ad1776459a8153ded34f",
+      "bytes": 16073
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-detail.jpg",
+      "gitBlob": "e27456e2ae357f53b6371da4725ec0b37faf5763",
+      "sha256": "2381719ac973b51d8ab87c45560550cfd650665f6addec1ad7f3de01b48c0ed9",
+      "bytes": 31494
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-knight-ui.jpg",
+      "gitBlob": "d08c7b1f14b19066eb18d6e50cd15d49bce9e15c",
+      "sha256": "d5beb3d4bc1a7b561e30c6125542ecbb625c63cf11a42bc4e879de6ebc63d681",
+      "bytes": 52225
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-card.png",
+      "gitBlob": "5bf0dc5c89c36a9e9b3bedec5a45fdbe545a6bc9",
+      "sha256": "7313d04abd8c2bf04f120d69833d187eb4f67b7fef8f357ab59760746d5ac115",
+      "bytes": 17292
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-detail.jpg",
+      "gitBlob": "9bed1239503de60c28ef635daae6447925ec68fe",
+      "sha256": "53ba948d7aaceabd05c99cfe44d7c466f5f302abcfc4e7e0201566f87898be9c",
+      "bytes": 31894
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/390-light-cavalry-ui.jpg",
+      "gitBlob": "c7bde3b6bc1f266794d2ff3ba0643d90bff0aa49",
+      "sha256": "7edb03c06a78deb70389d6c71937692da0ed86f54f0194aabfea141d219ac30f",
+      "bytes": 50697
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/army/result.json",
+      "gitBlob": "3abff69bb2dc2af5d7bd49f134990b667a42b183",
+      "sha256": "e6ae666f4c4dbeed18bf58745238ea3656694d89e61d73453dca93cf33c4bed8",
+      "bytes": 11861
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/1440-ABCs.jpg",
+      "gitBlob": "f8ac9625de7d87295a99f3910dae8c2b4dae6e42",
+      "sha256": "3fb8939c2196fbf7abba94a70b060568a7aeb90e0804979f2bb57bbb5eec7740",
+      "bytes": 92889
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/320-ABCs.jpg",
+      "gitBlob": "9fadcabe4f360961e456790a0eb9ff2a5aa29a14",
+      "sha256": "b9f599350a3ba95c626649cffd1e5c67ec8c7fcf68433083ad2f8c1906337737",
+      "bytes": 75647
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/390-ABCs.jpg",
+      "gitBlob": "15ecb0db2230c387c76c20764740b85963eac8df",
+      "sha256": "0538522f7e317297747503929a8b9d83d7c69751d74b7773fd0bc0f6528422d3",
+      "bytes": 80019
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+      "gitBlob": "bf0221e755eacabc42338cc60e3d86dc2f5d90b3",
+      "sha256": "f080b4514d465a86164459544587598dbca205fb6fcb12cc481a8095489c36e7",
+      "bytes": 10784
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-A-lamellar.webp",
+      "gitBlob": "c7f212db4d17437741a961893f94c6f2e40f9c21",
+      "sha256": "8df30d203ffb9c9ff43ec0cd3e7f25683c34e04fce0244631181e0ff0d6b1ab1",
+      "bytes": 37104
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+      "gitBlob": "3625ec4ef67199162781ba37b7dd792fa89252cb",
+      "sha256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4",
+      "bytes": 37206
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/china-C-imperial.webp",
+      "gitBlob": "0bb018072e5c9a1f229d496f3916dc35930f22bc",
+      "sha256": "f39189dba71701fc4bd537bec4725a24e2192e0a1ab521d09755716fd43dba3c",
+      "bytes": 34268
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/frankia-single-hand-v1.webp",
+      "gitBlob": "e2d3d55abe58b6e7d01916af6de571f7fb4d5dc5",
+      "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+      "bytes": 36062
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-A-oyoroi.webp",
+      "gitBlob": "f05b934ef506c93cde49c7b30731f6fed3742650",
+      "sha256": "632cb215f91f2ca8510d3d4c8d182d19495bc630b3188369ba7497630113572f",
+      "bytes": 39296
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-B-domaru.webp",
+      "gitBlob": "5ffa6eb17bdf6dce8f7a3a868cf1643fcd2f9102",
+      "sha256": "ddf5d354384d61a2e62a4348df1c5004efb4832485828a6790a0921aab387603",
+      "bytes": 31516
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/candidates/japan-C-gusoku.webp",
+      "gitBlob": "740e72aac9024e9ec6670e849be8405402e22e4a",
+      "sha256": "591cacea3f808ffd0c209e257cc259e30bdfa3cd5e65cb4b224173474213f001",
+      "bytes": 34202
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/generation-history.json",
+      "gitBlob": "56b1daa7c5b5425cff2381cf0aa33ea3b1f231a3",
+      "sha256": "0606a68df2a3a42b4443190d150480c4a95aa983a3d0d5c9fc20053b3826eea1",
+      "bytes": 9461
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/generation.json",
+      "gitBlob": "19e84b1a782ca45a86cc52eff5b7806e3f659932",
+      "sha256": "f3d586d72a7041fe1bbea05be67391086459a689d5e4921ca2eae659b0927f5d",
+      "bytes": 2802
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/outputs.json",
+      "gitBlob": "e301425a0107b4511e1a53651fb0d90261bd5c72",
+      "sha256": "a7c8834f7236fa9cfbc33d2d29b642202d6944b77dd320d68c60045bf1bd273f",
+      "bytes": 11956
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-A-lamellar.txt",
+      "gitBlob": "f6dcac870b785a2742f3fc04cc2661d642d61cac",
+      "sha256": "7707b80f6e070285e370cfdaa1db7fea91b8cf5bd2f20f141fe89a568ad74a0f",
+      "bytes": 2603
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-B-scale.txt",
+      "gitBlob": "de2c3bb8b2529dbbd4a2c62255a363a4b492649a",
+      "sha256": "2dc4427da104485193d681956e3715dec8baa24355de5c1ca2ba7fb264716e2e",
+      "bytes": 2425
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial-v2.txt",
+      "gitBlob": "a1be36abaf4c2d2b88a5826c78980b5002383595",
+      "sha256": "45915e98c73c3c230fd6815fea5750d65437c4e164d16ef6969db6b4dc1845c2",
+      "bytes": 2090
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/china-C-imperial.txt",
+      "gitBlob": "28e9ad861a5fe0650f3e9b141ebeca7cd98e1818",
+      "sha256": "28efbcb8a571e25af19ffb08c674d8428de554f31de08ca48ba03b2686a4cf50",
+      "bytes": 2591
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/frankia-single-hand-v1.txt",
+      "gitBlob": "0dfba5a6bb385c19f04c59446e1e9e1bc3387206",
+      "sha256": "9f0e725fb3b28868c1b231a32640a536d4a345e25e54d76d34983b8fcb06569e",
+      "bytes": 2706
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-A-oyoroi.txt",
+      "gitBlob": "2250c5b542260d74af1fb6a05766368824ca419d",
+      "sha256": "690c83a9bcc51acf0f35b123958bf1e5d005afc02bbd3879fc6cc4af926b7e80",
+      "bytes": 2363
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-B-domaru.txt",
+      "gitBlob": "9759bc9dc423d0fea2f43f020305cfee895bad62",
+      "sha256": "04e66ba6350ed35581205735b5d4c50c9a8e0566e388904b0c35b0d26046958a",
+      "bytes": 2405
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/prompts/japan-C-gusoku.txt",
+      "gitBlob": "440e1c89a3fb27f8a65bd9b9560feb69275118bd",
+      "sha256": "2b18849e57aba6c764d30eac7ddca393827698328bf2a76d54c7b3a50a815b82",
+      "bytes": 2316
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/protected.json",
+      "gitBlob": "41f770a9f3f1065c857657bb3a29e3ceb39461a7",
+      "sha256": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0",
+      "bytes": 94636
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/china-A-lamellar.png",
+      "gitBlob": "ba5269a7042f6df288303789c1fae82ab847397b",
+      "sha256": "26275efd29e33ebafa6ae6712bb7d8ca57fd495a6be06bd41a6d77182819c878",
+      "bytes": 2075091
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+      "gitBlob": "9b62a1ec06a8cd310628daae90591dc60929236b",
+      "sha256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0",
+      "bytes": 2015791
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial-v1.png",
+      "gitBlob": "275e5b7492cfa0b26e50d288704ada4e1c377aa4",
+      "sha256": "657378cee0e9b87568e1936f90f47dd22f994f3ad8edb643ee43542910598ee4",
+      "bytes": 2022932
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/china-C-imperial.png",
+      "gitBlob": "4dda609d0fbc4f4c66d237b960a719e5c314c0a3",
+      "sha256": "858573344818559154086d4ffbd071336ce36bc17c7fe3921b320aa1aa951851",
+      "bytes": 1990148
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+      "gitBlob": "f5e0e6e3ad49823577047b0faab85d257fcfe343",
+      "sha256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8",
+      "bytes": 1971814
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-A-oyoroi.png",
+      "gitBlob": "6b18038e0a84bf946be207538c65e41cbf9dbc4c",
+      "sha256": "12c9b875eba1752f04ed11eb08f6e610ed8645d9c18f43385bd89c38f373cd60",
+      "bytes": 2112143
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-B-domaru.png",
+      "gitBlob": "131db3e491513f6df2b766a01dea3a47c79afb4b",
+      "sha256": "369c490bf72afd19aaa5a7ac9bb976144252a6d80e56e1481e30ef7988ad6753",
+      "bytes": 1973581
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/raw/japan-C-gusoku.png",
+      "gitBlob": "2428511895517a09891ca21f0a8524795c400d22",
+      "sha256": "5c896d05050d8e7e6150c532eb02ebef970a91f28a101b44bd7626445ce956bb",
+      "bytes": 1982776
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references.json",
+      "gitBlob": "77c9de3e76c2334ebbc206801997a86e5d04a9db",
+      "sha256": "7ba4bd78471fdb5b50804a955836a2dc674b8c31134b8fc7f130ba7017c14e1e",
+      "bytes": 3298
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/elite-britannia-8736bad.png",
+      "gitBlob": "41cf41310c2a978fe26ecfac010939913e7ea9bb",
+      "sha256": "df47accb100dc38a05c2470ee872eb182c2bb6ff068d06d6048bcb50515d553c",
+      "bytes": 180387
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/elite-byzantium-8736bad.png",
+      "gitBlob": "f24803f924f95b26fb8d49358d7ecdee42120309",
+      "sha256": "5dbdf14be150c8743fd98e4d039b398540641bca44f314babd8bd2f2e229499f",
+      "bytes": 247795
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+      "gitBlob": "891d0af7844fb7ac47330d99d9bfe95cdcc9df71",
+      "sha256": "71139b089745d1e8c04bc0d6ad05d86fc25e76f26e2587f9e1633cf55f45d83c",
+      "bytes": 203274
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/elite-japan-8736bad.png",
+      "gitBlob": "0ad2edeba1ec18fd52db9ef1e20f128b99d0e11e",
+      "sha256": "b402a2ac1d6a2bd1dc692a135978410e41b1f99b8b611ce0db33960c5575cac9",
+      "bytes": 215136
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/elite-mongolia-8736bad.png",
+      "gitBlob": "c96cfc4bfb5f579dfe70f273f748b409562d9501",
+      "sha256": "00f303e51cf0241e57b2dd8cb54c847a504ece823051e931ac2accc1062d1a6e",
+      "bytes": 287871
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/elite-zhongguo-8736bad.png",
+      "gitBlob": "ec737a6ab8379d04225948020b0228429fd9a5a2",
+      "sha256": "785590c2020bebfd6c6e6913a816f8f54ed19c51a5eac151868d7fff0ede8303",
+      "bytes": 215911
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-britannia.png",
+      "gitBlob": "67c28286ae10fb9de52629c083ce4bcd1caff983",
+      "sha256": "bddd048d6595d278b6d584d41f36195fb2a6cce804019ace8a0f1f537a6bb006",
+      "bytes": 174548
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-byzantium.png",
+      "gitBlob": "4e5a1ccca57d02f7dd73a14229e81a35e545ce89",
+      "sha256": "9c459e624f30f802c1585ac56384eb4c23c1a4109f89e2470926209298c94966",
+      "bytes": 258232
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+      "gitBlob": "2391194e493afb0115ae7385d2df8b2d4f53a36d",
+      "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715",
+      "bytes": 206798
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+      "gitBlob": "915a0193100ce07f25daa327444ea890db624ff5",
+      "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641",
+      "bytes": 199910
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-mongolia.png",
+      "gitBlob": "719eb5f8c34afc229f3ed5e7d34043935d13377e",
+      "sha256": "6535016a2902312d1b046e915a1c0c9833bd6bd2d5dc9c12dce986ee925b7df9",
+      "bytes": 235357
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/references/ordinary-zhongguo.png",
+      "gitBlob": "462ae22549b7e06152d7ed576180322297823b48",
+      "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7",
+      "bytes": 184067
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/runtime.json",
+      "gitBlob": "cea89f7f78e4ed3d9861bd084b8c002ba9038014",
+      "sha256": "ea5602f6f4dbf8831348840e0c653be259daae70f3ce5bf96dbec619193ad6df",
+      "bytes": 1862
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/elite-review-20261029/validation.json",
+      "gitBlob": "db1b7e1a04bb7c065528f3727758e6ec92ac7dea",
+      "sha256": "ab19de612d7e499194e4f11710383aee53cd6b0029516c7d4b4709341bcd995e",
+      "bytes": 1811
+    },
+    {
+      "status": "M",
+      "path": "docs/art-unification/evidence-index.json",
+      "gitBlob": "9057143d6b3efc30ad852d62dd79fab6d208959a",
+      "sha256": "33ec6be14d2ba46a67f9425bea78e15cd3d39ab7bf209541fb53f484bd60ee82",
+      "bytes": 154521
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/REPORT.md",
+      "gitBlob": "ede0d3e9010cd1aea77f4eece4c7684f61c3edc9",
+      "sha256": "58305a5fe2c165776033372f79ca0406d389b5b6220c794a169de20fec32db18",
+      "bytes": 12775
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/art-gate.json",
+      "gitBlob": "0e0403d56cf7f943de7747386582cac1eaff60a0",
+      "sha256": "5131c585031895ffefde565a803f3e5a1afe9dda70fc6e88c73717f07a5d9847",
+      "bytes": 5952
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/MiniatureCity.tsx",
+      "gitBlob": "d49e7d2ee1b2776a525fe0af0b3eea24913a87e7",
+      "sha256": "27b4d0fd9d58265786b9eed88a15df0f0f49d575eba3fef17b8e39f3cdb44d07",
+      "bytes": 1161
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/asset-records.json",
+      "gitBlob": "b3e18614d5d259c6a1b52e36119e6182ab8ed8fe",
+      "sha256": "3e90993876e8eb610049c90e6b36cfe905dcc204daf2682febcbfb2013d8eb53",
+      "bytes": 6333
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-0.webp",
+      "gitBlob": "7cecd231ee39e3f06ff8605e43c06a331370e53a",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "bytes": 467688
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-1.webp",
+      "gitBlob": "0ba82f6b8706046beb10b0f6d99576346bf737f4",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "bytes": 524364
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/cities-age-2.webp",
+      "gitBlob": "929b4dbbd4a0081c0ea740260a0bb66e4d4ab99b",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "bytes": 549544
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_frankia.webp",
+      "gitBlob": "357c139f97889474413fb2c6eeb5e8c35a495aa7",
+      "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6",
+      "bytes": 38750
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_japan.webp",
+      "gitBlob": "8b4b262ed3808e1ac9ef66025ede4513d8458c3c",
+      "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6",
+      "bytes": 36716
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_zhongguo.webp",
+      "gitBlob": "e44f00fbf1d07b3515164fffbdeef6a532d3475a",
+      "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8",
+      "bytes": 36646
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/game.css",
+      "gitBlob": "7251acdde87124f702efc78f0a274a2d884de645",
+      "sha256": "d153e2a2da34749e8c50dbcde4637a75957b4ebb73d66fe330df6b587d4ee544",
+      "bytes": 133876
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/heavy-knight.webp",
+      "gitBlob": "fe7efc18460e78b92eb9a5981ccd9de3a3a5f541",
+      "sha256": "5bf17f041076d421025a0853689a9584c962b5466dae0384664f12ab761ca389",
+      "bytes": 44258
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/knight.webp",
+      "gitBlob": "64321595ac2fe088aaea8e7d7582ad7d0f80d56e",
+      "sha256": "fc010986c483b58ce5fd74a520215d7a44dfdf878be62a50e6beefbb5df29d9d",
+      "bytes": 27358
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/before/light-cavalry.webp",
+      "gitBlob": "989f422cae6106a8bace488cb69f3eef6eebaf11",
+      "sha256": "3348b8b7ca04fe999a93e79473b3a3fd6083a6eab3a12d881a2bcc4b9e728943",
+      "bytes": 32014
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-1440.webp",
+      "gitBlob": "067dba9f1e792c1c325c6b74ed9ba7136380a490",
+      "sha256": "847554624703f847b4f9383429ad150fdae520360b368d03a2f92b2360a1dbed",
+      "bytes": 402764
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-320.webp",
+      "gitBlob": "46286a006a3d7852fc9a10e508dce1ca8ec8cdc5",
+      "sha256": "ba3064f6950254f7d8aaa5a7713aefa6c211c03f35a292223110ef750a6439a0",
+      "bytes": 319066
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_britannia-390.webp",
+      "gitBlob": "46286a006a3d7852fc9a10e508dce1ca8ec8cdc5",
+      "sha256": "ba3064f6950254f7d8aaa5a7713aefa6c211c03f35a292223110ef750a6439a0",
+      "bytes": 319066
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-1440.webp",
+      "gitBlob": "ef2a01055d062d0448e46bc058c792eac52b09af",
+      "sha256": "63f4b34242360ea26bf3a9b57b00c73cc95739e7bae19f9d1d7b50341fe547a3",
+      "bytes": 410532
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-320.webp",
+      "gitBlob": "f351a734943c5ae4e389184c875297fe10cee8d7",
+      "sha256": "7f5bd3096d9ea4049a21b8d22617315345b9daa00032a41e802862bf8d9ba249",
+      "bytes": 316676
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_japan-390.webp",
+      "gitBlob": "f351a734943c5ae4e389184c875297fe10cee8d7",
+      "sha256": "7f5bd3096d9ea4049a21b8d22617315345b9daa00032a41e802862bf8d9ba249",
+      "bytes": 316676
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-1440.webp",
+      "gitBlob": "d7aecb1f4a9e64ed1dac473873eac05697376184",
+      "sha256": "fc472c5a1fb9952664e6fcadb0e937babb1aec086eb9dbfa53d7f26d1ef6136d",
+      "bytes": 400376
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-320.webp",
+      "gitBlob": "1f567bd75c79e11d78a1a5cc153a1747b5f1a6e5",
+      "sha256": "27b17b361d12fc25d47648a4a717ab193f93f9930a521a462f940e21eb260822",
+      "bytes": 314958
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-civ_mongolia-390.webp",
+      "gitBlob": "1f567bd75c79e11d78a1a5cc153a1747b5f1a6e5",
+      "sha256": "27b17b361d12fc25d47648a4a717ab193f93f9930a521a462f940e21eb260822",
+      "bytes": 314958
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-1440.webp",
+      "gitBlob": "4574e9c38a8c8a063eaf9569ef584d0af072fefc",
+      "sha256": "9d6b201be549bbabc4f7c9dcb73d7779e51489e7dffd25c0d8b917166614b68e",
+      "bytes": 1217420
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-320.webp",
+      "gitBlob": "2d8281091ac28459e5eca0097c7d4afcbf0ba846",
+      "sha256": "a2406fed29fe6eac380d390993f5e5d30447a925ba6ef5a9f60205fb3d82add1",
+      "bytes": 941858
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-other-three-390.webp",
+      "gitBlob": "2d8281091ac28459e5eca0097c7d4afcbf0ba846",
+      "sha256": "a2406fed29fe6eac380d390993f5e5d30447a925ba6ef5a9f60205fb3d82add1",
+      "bytes": 941858
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-1440.webp",
+      "gitBlob": "09cc02b059a3a71f8fdf6e5bd79880f288c65dfe",
+      "sha256": "df57d6a37b267bcbd9e5694e18b9e4edfe931c8d2f160f14deee4627155e5ac3",
+      "bytes": 1122282
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-320.webp",
+      "gitBlob": "208a8088424e35ad841b24dff6bb788a339cf4cc",
+      "sha256": "dac0f6dedbb788537bbfbac0bd9954becb0aec35a7d89faa5641461b784f2713",
+      "bytes": 888484
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/city-unwalled-390.webp",
+      "gitBlob": "208a8088424e35ad841b24dff6bb788a339cf4cc",
+      "sha256": "dac0f6dedbb788537bbfbac0bd9954becb0aec35a7d89faa5641461b784f2713",
+      "bytes": 888484
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/frankia-anatomy.webp",
+      "gitBlob": "362a6881134c0bdace01da436b7cac9a9cbe5d77",
+      "sha256": "dc917aca5f20a28d3ba0287e491882fd3f0e49034632fc4ee6a83504a56f8e58",
+      "bytes": 85198
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/manifest.json",
+      "gitBlob": "d40890daee9d1572dcf11443bd04f9942038387c",
+      "sha256": "a7fafea39970ca2cfcf0e9f8b445af1fc5f7c4d148c811a3bd6a3a46982060a3",
+      "bytes": 72779
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-china.webp",
+      "gitBlob": "286530450849ed0b40160ed065938763857f978b",
+      "sha256": "eb52117b30f088adf968519b13789993847a395a5d4781a9d68b35a24a81d970",
+      "bytes": 73528
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-frankia.webp",
+      "gitBlob": "eda1c91679cad89ac735db500abfd9b471f17e22",
+      "sha256": "c702c4609637cc9f59fe3854495676d8a793579243370a76d6893259fecc9705",
+      "bytes": 77532
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-japan.webp",
+      "gitBlob": "c04aecdf0631742e663c62dd6675dfbd36043f4a",
+      "sha256": "54faa0a7396052ed5966503200761e7102e460140c6b23851fff6186f0cf9798",
+      "bytes": 74690
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-knight.webp",
+      "gitBlob": "d81bf7400c360d43b09b0cda319bce79eb47e35d",
+      "sha256": "a1c124dcb8dfef69f5349a9c3ff20c7c3059ad19cc9ad5136d562d5bf65e8e90",
+      "bytes": 74036
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/unit-light.webp",
+      "gitBlob": "5274297ec13441d98096ba0c3a11dafb4f954e4c",
+      "sha256": "d7436b7bce1cf78383322022897a4b859886af9911845c4bd8f6f80646c44172",
+      "bytes": 61280
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/boards/units-native-64.png",
+      "gitBlob": "6bd3287d92db8fe60deddb4c2c7da2b0f2c3a903",
+      "sha256": "cd78038e45a0fd8390c3ef125821706fe4063b86b23be5fa1256e84673a6dc5c",
+      "bytes": 121605
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_britannia-2-wall5-ui.jpg",
+      "gitBlob": "c76bcd16f8401ae76f513ec84bbcf4da488c9d96",
+      "sha256": "49f669c9a8c0959e982f21778954e3c6806100491ba4bc313851d0188c48381a",
+      "bytes": 406973
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_japan-2-wall5-ui.jpg",
+      "gitBlob": "32fac5e67e1594d27751c3c70b793ef6076f2e6c",
+      "sha256": "695d508f5522f7e02f0f315d35dc2847d18cf4409e79b1e1c299e168db6c776c",
+      "bytes": 407332
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-1440-civ_mongolia-2-wall5-ui.jpg",
+      "gitBlob": "1798f12047e00e7db68eaddcdb6c88cb50f9fb78",
+      "sha256": "bcdb658beb11a95521a0996fb1c96e59d7efda455a98891f5d73dbdf47b3b9d6",
+      "bytes": 406095
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_britannia-2-wall5-ui.jpg",
+      "gitBlob": "6e2f82106797658ff41e75be9ff79f6f77002591",
+      "sha256": "900e2fcce3669c8c04da527d0242a49ed7e33b334265aa32cd8b42260636937c",
+      "bytes": 86419
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_japan-2-wall5-ui.jpg",
+      "gitBlob": "0d81eae6b9268a810b70bb03ce68831fa7d75df5",
+      "sha256": "4dff93592942c8912945ef24d81a5328f35ceb2515fabb621ad6471eabf3b53c",
+      "bytes": 86028
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-320-civ_mongolia-2-wall5-ui.jpg",
+      "gitBlob": "4451c4b868955738ecddab65fc7a4b09e10405e5",
+      "sha256": "0425691f0dad33160211cd27f0c6b7843d9d8e5be1f6aaa8a8ffa6bba17ab0d3",
+      "bytes": 85880
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_britannia-2-wall5-ui.jpg",
+      "gitBlob": "4d3f14b8c3dba1892c2279601284f322bfb82f03",
+      "sha256": "d561ecc2d9d0c736853d7065bd7384ac9a122e8d6a1e6feb8aeb03cbfd942e0d",
+      "bytes": 103194
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_japan-2-wall5-ui.jpg",
+      "gitBlob": "1942b5092dd628b0290c83b5082d3c63a9e55c68",
+      "sha256": "80fce84f37e445def299b4d7496dacec9d8cde94e3a3e255b5a49d22b4546241",
+      "bytes": 102704
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/after-390-civ_mongolia-2-wall5-ui.jpg",
+      "gitBlob": "6f721aa8c7d4001ed30f766959ce13782827e572",
+      "sha256": "a5e62af66b8ba5533d7ed79c0512c5930b39dd9cfb000084d2cee61658792ac2",
+      "bytes": 102598
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_britannia-2-wall5-ui.jpg",
+      "gitBlob": "0e3c877fef6ba821b4a87cfb58651ddcde55383c",
+      "sha256": "31a700ba701db898b10548534e52c180db19647ccfa93d1e8ca9b71b992fe54b",
+      "bytes": 408659
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_japan-2-wall5-ui.jpg",
+      "gitBlob": "992d47a4f56f88db1fd0e43a86f5581302a081c2",
+      "sha256": "2c54fedb394221d705d2d5d576d41de384781d86cdc93cc60df1e20d287b0641",
+      "bytes": 408568
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-1440-civ_mongolia-2-wall5-ui.jpg",
+      "gitBlob": "4e061246007f1a5f293f21f41fcf877105920a86",
+      "sha256": "c1d7e385c84a55569de69bcc351c315fd5374aa28b015b2c0d21d5fc65e39832",
+      "bytes": 407236
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_britannia-2-wall5-ui.jpg",
+      "gitBlob": "1dc8de9bc7e75b6e5be7425ba5626e252221b274",
+      "sha256": "86986e86190759bd72d46ee2d1e83357b6005165e799304cabaecdac60e6cd39",
+      "bytes": 87020
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_japan-2-wall5-ui.jpg",
+      "gitBlob": "ae6d69414caaf313123e65d90f8feae18af058ad",
+      "sha256": "75028eae1a65e9f6bd4803e584f9e2f72386596c4a7ce5f946af71089a0e8515",
+      "bytes": 86474
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-320-civ_mongolia-2-wall5-ui.jpg",
+      "gitBlob": "060798149aee5170b0d68e1406a24376c3e5ffb7",
+      "sha256": "5bad11f2b043fa28fa394f70ad566b91d6ba4a4a84fbb2d3455119879a16a902",
+      "bytes": 86268
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_britannia-2-wall5-ui.jpg",
+      "gitBlob": "ddc061e0015b1a24810f6c08a9b01a9003c05c6f",
+      "sha256": "9c1232bc2d65f852f1051aaee7c3fc80d1e0ae30f41a4c36a64aced11fb1e304",
+      "bytes": 103724
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_japan-2-wall5-ui.jpg",
+      "gitBlob": "2df6bdc7d64f52cbc1c9949585a584b085f1d37e",
+      "sha256": "eae5e740e8932af5078ffa4d9937600fa596e1a6cde4f8521a79846b4b15050a",
+      "bytes": 103280
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/before-390-civ_mongolia-2-wall5-ui.jpg",
+      "gitBlob": "d0d83415fa5cfed5e90866b0d0cdfa93bb00e4db",
+      "sha256": "a97f5f807796451807dc8cc0f98f67add12b57d5a900e1246c374cf1f47ba39b",
+      "bytes": 103077
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/cities/result.json",
+      "gitBlob": "e38588185b5327d2d5bf7b250c614818a053d224",
+      "sha256": "cc8b11c7759312c9d6a6ec43afc903260ebdfc5cf79e078a142f4f0494687364",
+      "bytes": 314023
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_frankia-detail.jpg",
+      "gitBlob": "6f2ca06803895f6552708e8101a95ff70a172769",
+      "sha256": "44e1103418d3953ef1c8c2e7ccfea7c0dec7f42e9968778e84cf9ca9b598e7f7",
+      "bytes": 64360
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_frankia-ui.jpg",
+      "gitBlob": "51e4732c89b8ae22176f5cfc25719084256702bf",
+      "sha256": "0cb4dcb2814480087e0ddd47110586d128b1b81b765dd07588a4c43f3cb40539",
+      "bytes": 114584
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_japan-detail.jpg",
+      "gitBlob": "53870ec1e0a48d5a6f28f6f0cb427e86b3fc8bf6",
+      "sha256": "4dc0c50dfab1bfdbffd9809564d1c9a7abf551b0274352bfadf18330144b2527",
+      "bytes": 62843
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_japan-ui.jpg",
+      "gitBlob": "c96eae9c96f8907c45a551bd17b08b2c744678b1",
+      "sha256": "5a0cfa9bb43314b8cf0f0bd7908cb32b478fa7424b18ce1b00ae5b1c27fa2fb9",
+      "bytes": 112750
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "4134df46c9b5fb94949acdd2cc4fa3f028487372",
+      "sha256": "3d5b405fb996eb534b20417c9f17dbad12bf6c08665d21f06374c6e71eced487",
+      "bytes": 62037
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-elite.guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "a12ca63f15ed74c8eccc237c28af17d5d83e8773",
+      "sha256": "a9de8a0f7fc53bb82d9fe31c4dde309571c9dfcd4ace587da9b35908971dbb44",
+      "bytes": 112051
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_frankia-detail.jpg",
+      "gitBlob": "b567b6ee34dc567f501085ce982bea978ed0e170",
+      "sha256": "b01183998447e2f7f1a7f1df8cf5dd25164dfb81a78b639bd8b4246e06263c5f",
+      "bytes": 59167
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_frankia-ui.jpg",
+      "gitBlob": "d01f001cbdd61f6513338ea57f666e8f3b67344b",
+      "sha256": "3ffba94c871f540dd50276ed28673a32f9f646501c7076d7172558e9007b7e53",
+      "bytes": 112602
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_japan-detail.jpg",
+      "gitBlob": "dbdf356d99709ca531a7d68739f9ff026034d60b",
+      "sha256": "d5ff2c761b237158665872764a95b17a75d74806225733c8efea6b9e6c119e61",
+      "bytes": 58281
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_japan-ui.jpg",
+      "gitBlob": "ac1f1e87e3b2ec9cc3cb0a243009eb4d46bbb235",
+      "sha256": "d20165601e13b6eaf4658292d3d3b5114107785cc1630c10c3e1cbdae4f8701b",
+      "bytes": 111255
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "a854a3207900da5b4f77a49ba86060371f21c219",
+      "sha256": "09712a70051c6fdf394fe853557056b8727073c44c00c49e0a2e05db8f56317a",
+      "bytes": 57521
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "3fae745380afe100188490ae6fd4e41fc7417376",
+      "sha256": "3eb5e80fa980549ed065bccbea0aaceec1c2fe8f31bd1d22c0ca0b5cf1180afa",
+      "bytes": 110745
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-heavy-knight-detail.jpg",
+      "gitBlob": "b407636e6a642caa8c676fe2e29ed853c58ba0de",
+      "sha256": "acbad2b3178244319bcf592a55294cd8b942043a6b0e0ddea3b1c89081574bb5",
+      "bytes": 63444
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-heavy-knight-ui.jpg",
+      "gitBlob": "ffe6d33a75f4c4377149f394bbef006cd85f8887",
+      "sha256": "fe92ff30096d0c36e1558e2eba3c312a3c21d1b40a89f4803f75a6697f674b77",
+      "bytes": 144404
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-knight-detail.jpg",
+      "gitBlob": "fd744b866b54d332e6be9af05320c2d773d8c8f4",
+      "sha256": "d6e6e21be2ad5b3510e4a1d4bc55e6ffbe4bc8686dbcc443ce2fa402e87f0052",
+      "bytes": 59196
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-knight-ui.jpg",
+      "gitBlob": "0598f8a9d300a8492dcbaaa8410fb9ee74b70f7c",
+      "sha256": "0ed9ae174ce920392f16099cfc0b37cda5988122a7d11d8c45b823acc73be9ee",
+      "bytes": 142738
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-light-cavalry-detail.jpg",
+      "gitBlob": "304db581240281f86ed1608da0ca82a93ad4e4c7",
+      "sha256": "1fe83563aac72d20a78b4ddcf538bc3a88eab74b1673b4394631e5813b37482f",
+      "bytes": 60068
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/1440-light-cavalry-ui.jpg",
+      "gitBlob": "6d63cb151438e03cede9aae5a058b39edde75458",
+      "sha256": "dc7f2b986a5b840c947babbb370b18c86c70edfee9631e1cd084cd9984763a3f",
+      "bytes": 143989
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_frankia-detail.jpg",
+      "gitBlob": "bd1ad1d439dda081800b4e10953b07080bb1f8da",
+      "sha256": "a9c5b61ca2e08e3f3fb11da7dbc5d5276d3644f16cb022064fcf9d3a99a7ebb6",
+      "bytes": 33658
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_frankia-ui.jpg",
+      "gitBlob": "5438a051ed3c9701c59ab05b373cb5cfdf389e72",
+      "sha256": "6c46cde852eb4a1603548fc51132bf711e55b446e40af0fce2da67045a6362b0",
+      "bytes": 44820
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_japan-detail.jpg",
+      "gitBlob": "bf1d37b0fd6eddb2d46f480819a1fcf6bda9d4c6",
+      "sha256": "4b8c22418e5bab859ef62aec3f04048df00d9eaba2e89a683afb4155275589b2",
+      "bytes": 33999
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_japan-ui.jpg",
+      "gitBlob": "d08b1a663a2679cea38ed7ea54201d82d01289e6",
+      "sha256": "e28a781ba60850ea1974fd11ebfc4bf036022b234a573fbaaf1cdb643201ad93",
+      "bytes": 45286
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "910a7f9e63d734dba3ab3e94f3c58c22f7cb38ce",
+      "sha256": "17c07fdb48354aeac9288d8ae2c6e6f37031cc982b5a3cc6de387fde3c160351",
+      "bytes": 33059
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-elite.guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "e3255e517a0f03a7b0334597ed817230b487050b",
+      "sha256": "15a00e468a211e7027cd16d4e2df2fb1b73bdb3b97aec0c36c4b14c895bcf375",
+      "bytes": 45225
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_frankia-detail.jpg",
+      "gitBlob": "f580b553964cc31f8feea756ba3549a2a09d447b",
+      "sha256": "a3dd1b061bd7910ebae73fc320fe7b24ae5f62f9278a7bf691a83d7fd5ef3363",
+      "bytes": 31477
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_frankia-ui.jpg",
+      "gitBlob": "4633e13dc238cfb6641adf732130a213b0a825e5",
+      "sha256": "685580e93575c3ffbf7a918e81dc56ef6c2bebc764da81d21fd3cb0f1b1050bd",
+      "bytes": 44828
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_japan-detail.jpg",
+      "gitBlob": "fb0f33bcf1802c7c6562faaa39679f9e0d793e39",
+      "sha256": "b570a5192908fa172a4ede02b7c2f1cf1adaece46ff96db6187fccf3c3ed165a",
+      "bytes": 30613
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_japan-ui.jpg",
+      "gitBlob": "8ace82504f31d7de092264ddf9a279af3cdd1d83",
+      "sha256": "ac12efc9cfd9fbb78eefe99a8ff3cefdfc91b58ae78245d8c62686590ae82b53",
+      "bytes": 44279
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "eb09c03fa6bae88fe0d78e970e20dcef04cee21b",
+      "sha256": "c32fa13a669a20c435866b89cd0f980f8f0ca7c750ffabedc8db3e0b51a45554",
+      "bytes": 29946
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "f2ef561a8fa56ad32db22f522544f9dd44a48c21",
+      "sha256": "d599a340d5c2d69ad4338678906ffb49aaf6d11c7df36c8ec3b7e27fadb1ae3d",
+      "bytes": 44057
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-heavy-knight-detail.jpg",
+      "gitBlob": "0ccb4638a33f88a4799fedc6f1cedfa0cefbb21f",
+      "sha256": "0a45736c1e65b9a733bb7dfb392cac85ebf6f7397853cd9de91e7ede8368b827",
+      "bytes": 32989
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-heavy-knight-ui.jpg",
+      "gitBlob": "9a21db6ef1dd204b8275d2d92b332024ded4f049",
+      "sha256": "7290d87e40bd03b6f009ba38d6559e9a99b8a81c157103ddb8c809b3493034ab",
+      "bytes": 50092
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-knight-detail.jpg",
+      "gitBlob": "7cc61b081420a52e5c0975ddf88280a4599f1f71",
+      "sha256": "0b41cc7d00d720bf12f32d2d78df276163756e7770fdd97250d8ded1ed0106bc",
+      "bytes": 29609
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-knight-ui.jpg",
+      "gitBlob": "21e92cab30557bd02773660a288c7a95c71e90ac",
+      "sha256": "1cc35d88057c5dfe0206ca0e74eaa4942c728a13f93e492530546ccb3511cd2d",
+      "bytes": 48162
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-light-cavalry-detail.jpg",
+      "gitBlob": "9c755755622ab8adac00e3c5f23f3eb4ec24c7c3",
+      "sha256": "aa4e0e1f057af49bc0e606deb5896df1664d5b560c569d0e070521e9c3fe2a2d",
+      "bytes": 30055
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/320-light-cavalry-ui.jpg",
+      "gitBlob": "ad3a9aa3ea83b0caac7c13bc93c8c1c34110abd8",
+      "sha256": "027935d9687917b37c9995d5e07e3ea9425b87b38476b0c1673690b14025424c",
+      "bytes": 46611
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_frankia-detail.jpg",
+      "gitBlob": "2846de8a8ce991050001679802611639696aa6a8",
+      "sha256": "c717fdeb3540a44215d279a363041b426d35790ad144e315f6d97372eb5de595",
+      "bytes": 38463
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_frankia-ui.jpg",
+      "gitBlob": "6a260b7a7a0c1502bc0e94846209fb962df84d04",
+      "sha256": "ed88ae44a2260484f211a0fcfd506d3e263ffff03fdfc5eea35867e2766d61f2",
+      "bytes": 50263
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_japan-detail.jpg",
+      "gitBlob": "b770a28f1f33261113a6fabd9a93d5f89997684b",
+      "sha256": "27ad4eaab4673360c6838dc2bcfeba540482a2da9cb2086099c6d1d75eae3fa4",
+      "bytes": 36781
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_japan-ui.jpg",
+      "gitBlob": "af9f2df8ce0bc7dd9be2f2918a7202f936e397eb",
+      "sha256": "b77a005b74fee4bfdb11241fb7347d613c6254cc190e2dff9add5a999872b0b3",
+      "bytes": 49494
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "e94d83ec220f0a3eeda7f0cb7bdd98a4c2e059ab",
+      "sha256": "7e118be1e65ee0361151ae27d8a6e97c5e61cac86c8ac78fba467b55cbb293b2",
+      "bytes": 35744
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-elite.guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "65c57fba90630e01dcd0ebf42642a3cae305c5f5",
+      "sha256": "0d5dcc218e4f1014224abc7cfb46fd7ba729ff88fecc58ece599c471f616109e",
+      "bytes": 49548
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_frankia-detail.jpg",
+      "gitBlob": "4aea396ff348a5ff8457b402d56b4c1a7cbb151d",
+      "sha256": "164cf894844621e562c8bd19502d1e1fd499a69275353e183b4d27f3016c8246",
+      "bytes": 33239
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_frankia-ui.jpg",
+      "gitBlob": "d78644a4273758ad205e61f71b7165a9c6407bac",
+      "sha256": "ce9820b70fb237545cfaf51b5effaed086b87f8f9a7867948798243dab3e2612",
+      "bytes": 49213
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_japan-detail.jpg",
+      "gitBlob": "90f9b42e705ddaf9292944e85eaaa7720fa4e2d5",
+      "sha256": "81012150d584f0d6142640dc7b7aa38e1db9b9b93535144aefeb4808c385cd24",
+      "bytes": 32328
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_japan-ui.jpg",
+      "gitBlob": "76abb58bdc7cf092500b300a678b8b7682441227",
+      "sha256": "4d9b50db0824f4f446ddaef528983ba72f7f38666534833f3bafe39a0a238f57",
+      "bytes": 48480
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_zhongguo-detail.jpg",
+      "gitBlob": "ba06d0747701d1caddf4d5d754512e327ca4d45a",
+      "sha256": "d16521b1ddd5a5aa9c352556043f6b156d8dad8272e4d3799e3ee26a08e58e90",
+      "bytes": 31872
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-guard.civ_zhongguo-ui.jpg",
+      "gitBlob": "14010fc38a7d85e21572bd4a27c3e8e3336fe75f",
+      "sha256": "5a51545ddb73af6fa068925f92cc1ae5adafe2059613299e94de050b2c649ead",
+      "bytes": 48372
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-heavy-knight-detail.jpg",
+      "gitBlob": "b430c2390c19c5ae734fe21f0650d46fdeda7b80",
+      "sha256": "548a24b981205d495d8855e91fc5801b89a724538a9b0638b61dea73af769db5",
+      "bytes": 35281
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-heavy-knight-ui.jpg",
+      "gitBlob": "86b90938efe3e9149affe739e052da3401b73c23",
+      "sha256": "b9e223d98b2807e970f8f6e45f41064dd81e700e084afe23845b17e206ddd016",
+      "bytes": 54177
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-knight-detail.jpg",
+      "gitBlob": "e27456e2ae357f53b6371da4725ec0b37faf5763",
+      "sha256": "2381719ac973b51d8ab87c45560550cfd650665f6addec1ad7f3de01b48c0ed9",
+      "bytes": 31494
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-knight-ui.jpg",
+      "gitBlob": "d08c7b1f14b19066eb18d6e50cd15d49bce9e15c",
+      "sha256": "d5beb3d4bc1a7b561e30c6125542ecbb625c63cf11a42bc4e879de6ebc63d681",
+      "bytes": 52225
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-light-cavalry-detail.jpg",
+      "gitBlob": "9bed1239503de60c28ef635daae6447925ec68fe",
+      "sha256": "53ba948d7aaceabd05c99cfe44d7c466f5f302abcfc4e7e0201566f87898be9c",
+      "bytes": 31894
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/390-light-cavalry-ui.jpg",
+      "gitBlob": "c7bde3b6bc1f266794d2ff3ba0643d90bff0aa49",
+      "sha256": "7edb03c06a78deb70389d6c71937692da0ed86f54f0194aabfea141d219ac30f",
+      "bytes": 50697
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "gitBlob": "3abff69bb2dc2af5d7bd49f134990b667a42b183",
+      "sha256": "e6ae666f4c4dbeed18bf58745238ea3656694d89e61d73453dca93cf33c4bed8",
+      "bytes": 11861
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-index.json",
+      "gitBlob": "4b2ca35e8a99e6b530d049f701bdcd2f164aac02",
+      "sha256": "0970fe2358ad95b99f2f9b1f5b6ff3cefb3ce07f651dfe6ac0fbb3953f315fc6",
+      "bytes": 159306
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-01.webp",
+      "gitBlob": "44665787f945445c71d851dfa535758c6beed3a6",
+      "sha256": "1342a3d8d5549700c556820ed3760e3b294cd52bfc6e2a7faea4dc1403186dd4",
+      "bytes": 11604
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-02.webp",
+      "gitBlob": "7749d4c7a31e451e0923eefd6bdec23d23252824",
+      "sha256": "0ba95ecc7958eef8fcfdffa1f0775538d6e12abed5a74264d6d7f82c3a5b48d4",
+      "bytes": 80604
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-03.webp",
+      "gitBlob": "50865932e47e25b1adee7259df9ea09072507264",
+      "sha256": "2c71b304cfa7fc3ff29cac9599f8df1859e1efd8d828bfaa6f29517b84079c8c",
+      "bytes": 13476
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-04.webp",
+      "gitBlob": "1fcbe387d37ff0b46468bd55fb9d1a6a68988b83",
+      "sha256": "3faad1ba967311583a7063d000719fc7b33e1741670d8ec4dce45af7b91449eb",
+      "bytes": 11676
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-05.webp",
+      "gitBlob": "7d4c35d7201dda066836def916153d2091105504",
+      "sha256": "d5810bb696e02383966b418fc7e2c46b1efb48443350ba2ab30fa77d567105ec",
+      "bytes": 93392
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-06.webp",
+      "gitBlob": "b55d21186f5dc2f236f75f4cb16970a01ef30ecc",
+      "sha256": "c2914bbec3b87577aec9c338648e868a17ea651f422e7dfe05f3c73ef810e36c",
+      "bytes": 231654
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-07.webp",
+      "gitBlob": "6bfbdecc2d0bb664ac21776cfd5d40d2027e43b2",
+      "sha256": "d7b951737dbd649dc783a5e421be829904ac318f8634187203cecfeafda95b75",
+      "bytes": 431918
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-08.webp",
+      "gitBlob": "113c064b1f041d93f3e372e8e4b3b663415d210c",
+      "sha256": "cefe6060cf11e22aa2f144a51656f4d013721eaf548960f244ce073f62264ba9",
+      "bytes": 246848
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-09.webp",
+      "gitBlob": "473707a0633e985f236bc363d7265c337443943c",
+      "sha256": "bf9c1daacdbe35846b02ac85cd763d2a04dc728419ece448a0609e57e78b4c52",
+      "bytes": 484284
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-10.webp",
+      "gitBlob": "d84c8822507f1240cc50b6f53459c8eab78b6567",
+      "sha256": "9ef0baa7c7a640685557bf58b881748fc2f238e2990504a3d0f2a7bd15db04a8",
+      "bytes": 258506
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-11.webp",
+      "gitBlob": "7a87c91e420a9ddd9353681721d7797a5e1854d1",
+      "sha256": "e810e31253a819143052e1a561e847478541af11f1941cab2953d9eb8c773be5",
+      "bytes": 496466
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-12.webp",
+      "gitBlob": "43f55a022b92c4c3f20e95d3a65ff61f26aa47c4",
+      "sha256": "8c4e262a9d8122846ebc342ba7874ec37524f5e29efc627b14fd0220a4778c49",
+      "bytes": 265902
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-13.webp",
+      "gitBlob": "7bb7b4a56718bfddeb0c8b74ffbcb410f90ab317",
+      "sha256": "dea69b198dc7fc27d9187cdefdd451478a513d926df2b09baadf1f5919571f62",
+      "bytes": 361198
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-14.webp",
+      "gitBlob": "a3fc1741eb414c73ad622d0ce7bafc8de3a16a24",
+      "sha256": "c08c25ca8a654b230eb419a923a33dfb5f28f606a2a248d9c600b2de8a02e73f",
+      "bytes": 581018
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-15.webp",
+      "gitBlob": "aaf0fd70a51a5287afb5f21b72510639b4f7cfdb",
+      "sha256": "cdbc6b1cae8633f115c2cc4dd7871d00a3b11eaf1b3f89ad8466fc770602a61b",
+      "bytes": 414332
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-16.webp",
+      "gitBlob": "f2524550d690dbbdd11c2f1ea0b2e0dc2115c31f",
+      "sha256": "0cfb175a52b9c00c7ebe8013f591ec9ae2a17b80ae6149b18f3563d2c4710598",
+      "bytes": 443750
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-17.webp",
+      "gitBlob": "4553ba57092f3d9c409bb0a8d94ee2e3fbe8b235",
+      "sha256": "56875c27c1e1d2aba79fe97c24b64e2b0aa582a1a735f1a402c10ef4f68dc02d",
+      "bytes": 608184
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-18.webp",
+      "gitBlob": "f16f2a59aa5487f04cc1cc6dadfbf15506749548",
+      "sha256": "b8f36ad6ecb86a8cb59d896fca301e47d8c8fd88c471ea3e392d432907ae8702",
+      "bytes": 1137576
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-19.webp",
+      "gitBlob": "6bc1604e4df2e0b712da1282a7fc94708da6a78c",
+      "sha256": "21658b47ffc0cadba6b1499c3c529b84e25474e86e509be8ccbd35e4838d5f0d",
+      "bytes": 640450
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-20.webp",
+      "gitBlob": "740a070944988b96337c9988cb256b16b1e6b19d",
+      "sha256": "4c01693aad34be525144752c5bb6981a26d736fbe8e03090fd51f01c75cc5667",
+      "bytes": 1261732
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-21.webp",
+      "gitBlob": "23669e61fdf0aebcd9291ed40e84c938ca406198",
+      "sha256": "6ca66a4a6287b9b03f29009837cb1960959878e22eecf2d883ab38399733e79c",
+      "bytes": 673834
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-22.webp",
+      "gitBlob": "b957815e94430855caa99e9805a80de1b7d418dc",
+      "sha256": "e48700fc5330fa93c9203569a451490320712072c5d8bd4362f9bb81ccd36f63",
+      "bytes": 1296564
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-23.webp",
+      "gitBlob": "3decf5c71cd4afcca723178a79dda8d6e4e7415f",
+      "sha256": "df6be64f1950235fdc35ebe38c7e7e1e6f768e3f6ee88d0f24342c0ecfe345ea",
+      "bytes": 688618
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-24.webp",
+      "gitBlob": "ee98dc30c051dc1eee78b518b98733adf88721cc",
+      "sha256": "999a3a259f6b0047c2d8b4794321a5f37144c8204fcfad5c4de078e95c84749c",
+      "bytes": 936954
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-25.webp",
+      "gitBlob": "aba0710e23012a20ddcb61cfe27713bbfc16e319",
+      "sha256": "409dc8628d4365aab4679f81d1a8cde459bf26643cc6f2648b7d10e2634364cd",
+      "bytes": 644256
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-26.webp",
+      "gitBlob": "6546560418f28f3215756eda4cbe50ce6cff449c",
+      "sha256": "cc0f5a2f72a7a2dd67095082f41269318b7d72fffac1981fd6b6acd4a42962bc",
+      "bytes": 396508
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-27.webp",
+      "gitBlob": "cdf1de4bc4a8860bbc3056791e99c2a4d02b636b",
+      "sha256": "c864348290c28fef05be276041d5c02817aff40ca729fa20cafab625fb672f73",
+      "bytes": 400984
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-28.webp",
+      "gitBlob": "a1f164aa144d5fa3c7e8e5d7479bc7b323071a00",
+      "sha256": "d8f1f26cce576d503e37c015bfdf9fb9e101fadfdbb61b640e7877354cbcaf0d",
+      "bytes": 42390
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-29.webp",
+      "gitBlob": "345df91bf13e2c8f691aa13b4cd4b88447c06e05",
+      "sha256": "74ab636f5023d40e436cf9a5e5e84bc63511c46618d083400f614bfe5fa09e99",
+      "bytes": 145792
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-30.webp",
+      "gitBlob": "639882338f4d8ecabd13d1136f5d6e3549966a4c",
+      "sha256": "8f7cafbf85bbefa97377240d795b9d573d74d7c15080b4fb2a89eea90a35c930",
+      "bytes": 2139228
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-31.webp",
+      "gitBlob": "a8856cf67c7dd541ee228b750e4bcb34323ea310",
+      "sha256": "7620597503d9c999c66fda19ae7b7929b1b59903d12c91fd8652d0c5749cb219",
+      "bytes": 681770
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/capture-sheets/frames-32.webp",
+      "gitBlob": "0245876ad5071108ca542d9c7c61f1e4cd06f355",
+      "sha256": "c4f2509fb74390e43ed340bc650daf9f6a83c67f19f653c8fee2cc0b221cc6e0",
+      "bytes": 758792
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/compatibility.json",
+      "gitBlob": "13cb3c71eb3e206c9ced9d49e539156369f854de",
+      "sha256": "81e29775ad2b38cb89659625f03ab4cdda05e2e00c8a4239fb94aaf87bbfe71e",
+      "bytes": 1513
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/legacy-measurements.json",
+      "gitBlob": "80634e9f8eaa9c303c66ff80d35b6125b2a799fe",
+      "sha256": "1ab6f936d0a54bfc165cdbbd165905adaa176613900104238dd25833cdf593f2",
+      "bytes": 9675
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/protected.json",
+      "gitBlob": "1ae0c4fd1fd911d15bbefea5e0e5ab327d6bcb31",
+      "sha256": "4c2e6e6e17c8b99413b2c8672ac3c0bef4f6263b442f796238665eb569f67531",
+      "bytes": 54181
+    },
+    {
+      "status": "A",
+      "path": "docs/art-unification/player-feedback-20261029/validation.json",
+      "gitBlob": "da6fe914ec6a7f237996ed8da3b833813d0a563c",
+      "sha256": "96c462acabe4fbdbf2fc30cbf3011bad60880a6edc7a322f72f13bab3064975f",
+      "bytes": 1135
+    },
+    {
+      "status": "M",
+      "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+      "gitBlob": "e2d3d55abe58b6e7d01916af6de571f7fb4d5dc5",
+      "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+      "bytes": 36062
+    },
+    {
+      "status": "M",
+      "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+      "gitBlob": "aa906baaa18dc736260764ea15b46e3ec75ee4e6",
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "bytes": 37626
+    },
+    {
+      "status": "M",
+      "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+      "gitBlob": "7569119509be11b688da89f23978769cb8081197",
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "bytes": 37630
+    },
+    {
+      "status": "M",
+      "path": "public/art/unified/units/knight.webp",
+      "gitBlob": "2e303b65b06599eab7f141820ef59e04f4ecc735",
+      "sha256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+      "bytes": 30290
+    },
+    {
+      "status": "M",
+      "path": "public/art/unified/units/light-cavalry.webp",
+      "gitBlob": "bb9d7ed6d702145034a2572654cecba7d7a3b711",
+      "sha256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+      "bytes": 32092
+    },
+    {
+      "status": "M",
+      "path": "releases/notes/art-unification-20261028.json",
+      "gitBlob": "0bb1824f7cf716f7664b546e2b74979a0c97c361",
+      "sha256": "15d4f68fb494f9c038c41191a2e876fe0ecfa661961bbd1037c7ecf50adcdd7b",
+      "bytes": 1252
+    },
+    {
+      "status": "A",
+      "path": "scripts/apply-player-art-20261029.py",
+      "gitBlob": "98a6470c0b1e313975245176dcdaf975c3ff6bab",
+      "sha256": "0df2832cb47b8d4189a6d82479c03794c2252175a05a3d0a4efd21511af686e0",
+      "bytes": 4500
+    },
+    {
+      "status": "M",
+      "path": "scripts/art-preview.tsx",
+      "gitBlob": "a06216cea8be4318b70c88a2f178f74879d56dd5",
+      "sha256": "0665b553e6bfca3559fcac9e2e8540a82820436e6f9a176559572c8771b49d56",
+      "bytes": 4683
+    },
+    {
+      "status": "M",
+      "path": "scripts/check-city-visuals.py",
+      "gitBlob": "a77b778474e4d811adaa88c65a1d9b88d9f87fa9",
+      "sha256": "bcb20902d7b225f28a7c38fd7a9200992635361465a92d2cb2b9fbcfc1eb0987",
+      "bytes": 3473
+    },
+    {
+      "status": "A",
+      "path": "scripts/check-elite-review.py",
+      "gitBlob": "47a6c406a8dd27c81c2bc0bed34db0b80dd1ebaf",
+      "sha256": "b092ae89aa6f915bd1e5c0958627781b991cf29b66674a0936e484b89dab271b",
+      "bytes": 3349
+    },
+    {
+      "status": "A",
+      "path": "scripts/check-player-feedback.py",
+      "gitBlob": "c55239c61f0b1b5ccc29cba12e278c749b585360",
+      "sha256": "70e4e967ac172eef214d3dbb44e5723a10461463d20369b2d88016fa563707b6",
+      "bytes": 4213
+    },
+    {
+      "status": "A",
+      "path": "scripts/elite-review-boards.py",
+      "gitBlob": "dc67b67f542fe342999dbc8e19bbdf3ae6e3cf8b",
+      "sha256": "e1b1ceb47db6597957c029afb15eb6882ec254188866eeaced0275a06fa8081f",
+      "bytes": 4153
+    },
+    {
+      "status": "A",
+      "path": "scripts/elite-review.html",
+      "gitBlob": "6afe0e89df218fe6809117834960e5a6efe89453",
+      "sha256": "8b95e94e83361209790c1a2ae50e01a1df4c2e04be8a13999afaa35a355cf7ae",
+      "bytes": 311
+    },
+    {
+      "status": "A",
+      "path": "scripts/elite-review.tsx",
+      "gitBlob": "7be723c10e295f81bde1f575999ecc2038cdc800",
+      "sha256": "fbcb6bbb217a7d1449cebbdf5b60a48512b81a060d9a78f0017e37d258ee50c0",
+      "bytes": 1928
+    },
+    {
+      "status": "A",
+      "path": "scripts/export-elite-review.py",
+      "gitBlob": "5cb26b0bd1bbaa22bcdbfec7134fc8082eba0ea1",
+      "sha256": "22f5a2c7ed0631d53619a31a9de5188a740197f09e38f08c9f4e539322c5518c",
+      "bytes": 4222
+    },
+    {
+      "status": "A",
+      "path": "scripts/measure-legacy-city-ground.py",
+      "gitBlob": "c230f76b96f17764ee7c0eb78a4b5c8c1dd70ec4",
+      "sha256": "6493aadabaa6e462450b569cf02e5d231b30ece7abdfba35d4d58bdfca326d78",
+      "bytes": 1251
+    },
+    {
+      "status": "A",
+      "path": "scripts/pack-player-feedback-captures.py",
+      "gitBlob": "f3ffbf9b026f7276ef787b91ca9650eb88d0443e",
+      "sha256": "95c3e6d35e05c01ff9d9f5637041c331c781355a13754928a93f6e21849297ff",
+      "bytes": 2896
+    },
+    {
+      "status": "A",
+      "path": "scripts/player-feedback-boards.py",
+      "gitBlob": "dc9677a95bd46697c1f312756ed87d1d20979217",
+      "sha256": "2b3ba48654bab929dc7c47b7fc4400b6d66b68f689a458168dc432e803bcf89c",
+      "bytes": 6510
+    },
+    {
+      "status": "M",
+      "path": "scripts/prepare-art-candidates.py",
+      "gitBlob": "041ed91f6310cdf1b0065e25b8e0a9ddf36a73f1",
+      "sha256": "28d134ca5e13bae00603b95bf70a472bcc76ba439c5ccffd714bf667cef9bb46",
+      "bytes": 8866
+    },
+    {
+      "status": "A",
+      "path": "scripts/prepare-elite-review.py",
+      "gitBlob": "33582de07ba820184361c3a6dc6365456e520693",
+      "sha256": "0cb6db489a81b2c5f4bcfd5b93db9b1a5a5c4362af5494b327debf72b51d68e2",
+      "bytes": 4642
+    },
+    {
+      "status": "A",
+      "path": "scripts/verify-elite-candidates.mjs",
+      "gitBlob": "6fb83fe81ef31c321e09201e0db79b87ed77c6da",
+      "sha256": "e9e498bda6b656ee620d75bd06798639bd25f21c1e6c815f17a19ba15a8a791f",
+      "bytes": 2285
+    },
+    {
+      "status": "A",
+      "path": "scripts/verify-player-feedback-cities.mjs",
+      "gitBlob": "5a31bf2fc7c1f77f19e09cedb369757e18bd4ac6",
+      "sha256": "2626568921868eb7b2cc7aa5cfa91ea8e422c7a42342e56d39532635e42a0be3",
+      "bytes": 4592
+    },
+    {
+      "status": "A",
+      "path": "scripts/verify-player-feedback-units.mjs",
+      "gitBlob": "bc3a8ca0adf972b7f450838f9a5ff11159117e97",
+      "sha256": "46ca9b460f20e52301cc29fd95bb337aac7a7d538c439f6a3cb4f0d393b9bda9",
+      "bytes": 4423
+    },
+    {
+      "status": "M",
+      "path": "src/game/MiniatureCity.tsx",
+      "gitBlob": "404b4a2f64edadd79787c8ae02d2c17494903f9c",
+      "sha256": "0f4aec090b581fa5dac08fce5c65289ea08d5879685e8baee622a77b10b9ee99",
+      "bytes": 1390
+    },
+    {
+      "status": "M",
+      "path": "src/game/game.css",
+      "gitBlob": "d53cd3d5b5d3f0a7ff67b84d7e1277d63dacfc50",
+      "sha256": "27f940cd0e2afd89ba6d34c9a6f64d01b917977f25b17461decb29878c16f87c",
+      "bytes": 134105
+    },
+    {
+      "status": "A",
+      "path": "src/game/presentation/legacyMiniature.test.tsx",
+      "gitBlob": "9fb1bba58de45a35dc2e06da9e1c7feb2902f2da",
+      "sha256": "4645737d7206b3c8cf774640807a0ddc82ac1f87f8f1097531b72d8c498679ed",
+      "bytes": 844
+    },
+    {
+      "status": "A",
+      "path": "src/game/presentation/legacyMiniature.ts",
+      "gitBlob": "b7c7060278ed2b218a060ff65d90571e13958c25",
+      "sha256": "140673411ece0d26139d64580cda1ba58715f11e6ff3ebe5497d8d56d36b1a80",
+      "bytes": 582
+    }
+  ]
+}

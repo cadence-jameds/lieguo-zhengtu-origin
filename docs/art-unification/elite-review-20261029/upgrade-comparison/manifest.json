@@ -1,0 +1,956 @@
+{
+  "startingHEAD": "d052a1951fd5d3c9b1b4fa807520bfeddb5fccb8",
+  "method": "Complete source, uniform downscale only, helmet-dome-to-sole 360px on 512px; foot y460; no painting/cropping beyond actual runtime atlas bounds.",
+  "landmarkUncertaintySourcePixels": 4,
+  "runtimeMapping": {
+    "zhongguo": [
+      {
+        "id": "guard.civ_zhongguo",
+        "name": "連弩衛隊",
+        "art": {
+          "path": "art/catalog-guards.webp",
+          "sheet": "guards",
+          "index": 0,
+          "origin": "reused"
+        },
+        "crop": {
+          "x": 2,
+          "y": 2,
+          "w": 508,
+          "h": 501
+        }
+      },
+      {
+        "id": "elite.guard.civ_zhongguo",
+        "name": "精銳連弩衛隊",
+        "art": {
+          "path": "art/unified/units/elite.guard.civ_zhongguo.webp",
+          "badge": "ELITE",
+          "origin": "new"
+        },
+        "crop": null
+      }
+    ],
+    "japan": [
+      {
+        "id": "guard.civ_japan",
+        "name": "武士侍從隊",
+        "art": {
+          "path": "art/catalog-guards.webp",
+          "sheet": "guards",
+          "index": 4,
+          "origin": "reused"
+        },
+        "crop": {
+          "x": 514,
+          "y": 507,
+          "w": 508,
+          "h": 515
+        }
+      },
+      {
+        "id": "elite.guard.civ_japan",
+        "name": "精銳武士侍從隊",
+        "art": {
+          "path": "art/unified/units/elite.guard.civ_japan.webp",
+          "badge": "ELITE",
+          "origin": "new"
+        },
+        "crop": null
+      }
+    ]
+  },
+  "selectorSources": {
+    "src/game/presentation/artMap.ts": "b2f73167f92a1b1d4e57cfe5f651c52183c47fc3edf48feff4459a5ad175d4e7",
+    "src/game/presentation/Art.tsx": "6d3dec16b71d78a24d22f8e18ea82bf512efa166cceeb8fd3b35169d6e42e0e2",
+    "src/game/presentation/artRegistry.ts": "96eb63101b5b440bb752797c249e1bd1cad1353a4745ef8e09652a05f5f8ebaa",
+    "src/game/presentation/artAssets.json": "25f9ba608c04e75f709389c9f110ac20ac83a58e64eadae7d93aba40e46208da",
+    "src/game/formal/unitCatalog.ts": "602c766c99d5241f71f9d8eaa0195a920ee05ae9bc35d09ca42157c34039029b"
+  },
+  "civilizations": {
+    "zhongguo": [
+      {
+        "id": "guard.civ_zhongguo",
+        "labels": [
+          "一般連弩兵",
+          "連弩衛隊",
+          "正式／一般"
+        ],
+        "source": "public/art/catalog-guards.webp",
+        "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef",
+        "runtimeCropXYWH": {
+          "x": 2,
+          "y": 2,
+          "w": 508,
+          "h": 501
+        },
+        "inputDimensions": [
+          508,
+          501
+        ],
+        "transform": {
+          "scale": 0.8450704225352113,
+          "translateXY": [
+            41.35211267605635,
+            64.50704225352115
+          ],
+          "crownY": 42,
+          "soleY": 468,
+          "normalizedCrownY": 100.00000000000003,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "b43b5d2bacb6b4563763a69e0e1fcd76cb0e15949a59bfb85f7a41db9a8125c3"
+      },
+      {
+        "id": "elite.guard.civ_zhongguo",
+        "labels": [
+          "目前正式精銳",
+          "精銳連弩衛隊",
+          "8736bad 保留版"
+        ],
+        "source": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+        "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8633093525179856,
+          "translateXY": [
+            34.99280575539569,
+            55.97122302158277
+          ],
+          "crownY": 51,
+          "soleY": 468,
+          "normalizedCrownY": 100.00000000000003,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "63ef7acf04edf84bfb0a22dcc361a38f5729b687a798ec34d5ac59de8ce04547"
+      },
+      {
+        "id": "china-A-lamellar",
+        "labels": [
+          "精銳連弩衛隊",
+          "候選 A／重型札甲",
+          "20261029／待選"
+        ],
+        "source": "docs/art-unification/elite-review-20261029/candidates/china-A-lamellar.webp",
+        "sha256": "8df30d203ffb9c9ff43ec0cd3e7f25683c34e04fce0244631181e0ff0d6b1ab1",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8695652173913043,
+          "translateXY": [
+            33.39130434782609,
+            55.6521739130435
+          ],
+          "crownY": 51,
+          "soleY": 465,
+          "normalizedCrownY": 100.00000000000003,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "b22aaf320a22e83510492a479e08b9a782ca17d3e2be50f64fcc853b1b262dcb"
+      },
+      {
+        "id": "china-B-scale",
+        "labels": [
+          "精銳連弩衛隊",
+          "候選 B／高階魚鱗甲",
+          "20261029／待選"
+        ],
+        "source": "docs/art-unification/elite-review-20261029/candidates/china-B-scale.webp",
+        "sha256": "c6c62b22e3a7ea925bcd109436432c1b46a7d206b3d141ff17688209c30d4ba4",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8845208845208845,
+          "translateXY": [
+            29.562653562653566,
+            53.120393120393146
+          ],
+          "crownY": 53,
+          "soleY": 460,
+          "normalizedCrownY": 100.00000000000003,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "c22d4e1a97d7f741a588f034d520edc3ec7c8c2bea7551ff91d997e0c9470c5f"
+      },
+      {
+        "id": "china-C-imperial",
+        "labels": [
+          "精銳連弩衛隊",
+          "候選 C／禁軍重甲",
+          "20261029／待選"
+        ],
+        "source": "docs/art-unification/elite-review-20261029/candidates/china-C-imperial.webp",
+        "sha256": "f39189dba71701fc4bd537bec4725a24e2192e0a1ab521d09755716fd43dba3c",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8759124087591241,
+          "translateXY": [
+            31.766423357664223,
+            51.82481751824815
+          ],
+          "crownY": 55,
+          "soleY": 466,
+          "normalizedCrownY": 99.99999999999997,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "7fdd77b902ba3f279b6781f946bf3ceb01980624a895f1ea1fc7ccfd9c8c2219"
+      }
+    ],
+    "japan": [
+      {
+        "id": "guard.civ_japan",
+        "labels": [
+          "一般武士",
+          "武士侍從隊",
+          "正式／一般"
+        ],
+        "source": "public/art/catalog-guards.webp",
+        "sha256": "22a6b4442bd65ef24e6376a5e9fa666aba61a79fb27376342bb8c6813a30f6ef",
+        "runtimeCropXYWH": {
+          "x": 514,
+          "y": 507,
+          "w": 508,
+          "h": 515
+        },
+        "inputDimensions": [
+          508,
+          515
+        ],
+        "transform": {
+          "scale": 0.861244019138756,
+          "translateXY": [
+            37.24401913875596,
+            54.354066985645886
+          ],
+          "crownY": 53,
+          "soleY": 471,
+          "normalizedCrownY": 99.99999999999996,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "cad61ee693f0a63b5c570ee3ba7f42eb41828aa22c682b0f01aab74badb4ca96"
+      },
+      {
+        "id": "elite.guard.civ_japan",
+        "labels": [
+          "目前正式精銳",
+          "精銳武士侍從隊",
+          "8736bad 保留版"
+        ],
+        "source": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8737864077669902,
+          "translateXY": [
+            32.3106796116505,
+            49.32038834951459
+          ],
+          "crownY": 58,
+          "soleY": 470,
+          "normalizedCrownY": 100.00000000000003,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "af04f73b44cea1616571fbca92e8a69a285aa05d620b8080a4a11dcb417674bc"
+      },
+      {
+        "id": "japan-A-oyoroi",
+        "labels": [
+          "精銳武士侍從隊",
+          "候選 A／大鎧",
+          "20261029／待選"
+        ],
+        "source": "docs/art-unification/elite-review-20261029/candidates/japan-A-oyoroi.webp",
+        "sha256": "632cb215f91f2ca8510d3d4c8d182d19495bc630b3188369ba7497630113572f",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8866995073891626,
+          "translateXY": [
+            29.004926108374377,
+            45.024630541871886
+          ],
+          "crownY": 62,
+          "soleY": 468,
+          "normalizedCrownY": 99.99999999999997,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "878918ded147c8ab487530e8f771a4a06ac874a7287a7b4c354390df5e5f6900"
+      },
+      {
+        "id": "japan-B-domaru",
+        "labels": [
+          "精銳武士侍從隊",
+          "候選 B／胴丸",
+          "20261029／待選"
+        ],
+        "source": "docs/art-unification/elite-review-20261029/candidates/japan-B-domaru.webp",
+        "sha256": "ddf5d354384d61a2e62a4348df1c5004efb4832485828a6790a0921aab387603",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.9022556390977443,
+          "translateXY": [
+            25.022556390977456,
+            45.864661654135375
+          ],
+          "crownY": 60,
+          "soleY": 459,
+          "normalizedCrownY": 100.00000000000003,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "5a128d592277af93a9795a80a3ec26934a98b7faf2f7e5551ce14577b7642de7"
+      },
+      {
+        "id": "japan-C-gusoku",
+        "labels": [
+          "精銳武士侍從隊",
+          "候選 C／具足",
+          "20261029／待選"
+        ],
+        "source": "docs/art-unification/elite-review-20261029/candidates/japan-C-gusoku.webp",
+        "sha256": "591cacea3f808ffd0c209e257cc259e30bdfa3cd5e65cb4b224173474213f001",
+        "runtimeCropXYWH": null,
+        "inputDimensions": [
+          512,
+          512
+        ],
+        "transform": {
+          "scale": 0.8955223880597015,
+          "translateXY": [
+            26.74626865671641,
+            49.85074626865668
+          ],
+          "crownY": 56,
+          "soleY": 458,
+          "normalizedCrownY": 99.99999999999997,
+          "normalizedSoleY": 460.0,
+          "sourceFullyContained": true
+        },
+        "normalizedPixelSHA256": "30f24866d798b2c4c3822de60c881515d0d3eda1ed242688df3292a6f97294b9"
+      }
+    ]
+  },
+  "boards": [
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/zhongguo-512.png",
+      "sha256": "589aa94b4c63c9e898ad3d5633c1f7265fabad531cce810bc1da53bff43114bb",
+      "canvas": [
+        2656,
+        787
+      ],
+      "artPixels": 512,
+      "mobile": false,
+      "columns": [
+        "guard.civ_zhongguo",
+        "elite.guard.civ_zhongguo",
+        "china-A-lamellar",
+        "china-B-scale",
+        "china-C-imperial"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          221,
+          512,
+          512
+        ],
+        [
+          544,
+          221,
+          512,
+          512
+        ],
+        [
+          1072,
+          221,
+          512,
+          512
+        ],
+        [
+          1600,
+          221,
+          512,
+          512
+        ],
+        [
+          2128,
+          221,
+          512,
+          512
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/zhongguo-512-mobile.png",
+      "sha256": "48da74fe44e7fea950a7c85fb9aebb3e364d930b5e90dd011901659c4f28b287",
+      "canvas": [
+        320,
+        2194
+      ],
+      "artPixels": 288,
+      "mobile": true,
+      "columns": [
+        "guard.civ_zhongguo",
+        "elite.guard.civ_zhongguo",
+        "china-A-lamellar",
+        "china-B-scale",
+        "china-C-imperial"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          202,
+          288,
+          288
+        ],
+        [
+          16,
+          612,
+          288,
+          288
+        ],
+        [
+          16,
+          1022,
+          288,
+          288
+        ],
+        [
+          16,
+          1432,
+          288,
+          288
+        ],
+        [
+          16,
+          1842,
+          288,
+          288
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/zhongguo-128.png",
+      "sha256": "18d2e614e09de146e12f9a22226c5f68df7fd69cf0a0bb8699c6c88783637261",
+      "canvas": [
+        896,
+        357
+      ],
+      "artPixels": 128,
+      "mobile": false,
+      "columns": [
+        "guard.civ_zhongguo",
+        "elite.guard.civ_zhongguo",
+        "china-A-lamellar",
+        "china-B-scale",
+        "china-C-imperial"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          32,
+          175,
+          128,
+          128
+        ],
+        [
+          208,
+          175,
+          128,
+          128
+        ],
+        [
+          384,
+          175,
+          128,
+          128
+        ],
+        [
+          560,
+          175,
+          128,
+          128
+        ],
+        [
+          736,
+          175,
+          128,
+          128
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/zhongguo-128-mobile.png",
+      "sha256": "e9a438e9e6a81da29bf45397e54f4e4caa2bdf650f3c523248a7d54e752fc66a",
+      "canvas": [
+        320,
+        1004
+      ],
+      "artPixels": 128,
+      "mobile": true,
+      "columns": [
+        "guard.civ_zhongguo",
+        "elite.guard.civ_zhongguo",
+        "china-A-lamellar",
+        "china-B-scale",
+        "china-C-imperial"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          126,
+          128,
+          128
+        ],
+        [
+          16,
+          298,
+          128,
+          128
+        ],
+        [
+          16,
+          470,
+          128,
+          128
+        ],
+        [
+          16,
+          642,
+          128,
+          128
+        ],
+        [
+          16,
+          814,
+          128,
+          128
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/zhongguo-64.png",
+      "sha256": "e4441060621557ee71a88e9245ebae13c681c135d9ef741bacd83712ec543750",
+      "canvas": [
+        896,
+        293
+      ],
+      "artPixels": 64,
+      "mobile": false,
+      "columns": [
+        "guard.civ_zhongguo",
+        "elite.guard.civ_zhongguo",
+        "china-A-lamellar",
+        "china-B-scale",
+        "china-C-imperial"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          64,
+          175,
+          64,
+          64
+        ],
+        [
+          240,
+          175,
+          64,
+          64
+        ],
+        [
+          416,
+          175,
+          64,
+          64
+        ],
+        [
+          592,
+          175,
+          64,
+          64
+        ],
+        [
+          768,
+          175,
+          64,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/zhongguo-64-mobile.png",
+      "sha256": "6a0d228e61a533496686cd0b5bb721ef2347b433ce82b247a916ddb9adc3cd7c",
+      "canvas": [
+        320,
+        784
+      ],
+      "artPixels": 64,
+      "mobile": true,
+      "columns": [
+        "guard.civ_zhongguo",
+        "elite.guard.civ_zhongguo",
+        "china-A-lamellar",
+        "china-B-scale",
+        "china-C-imperial"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          126,
+          64,
+          64
+        ],
+        [
+          16,
+          254,
+          64,
+          64
+        ],
+        [
+          16,
+          382,
+          64,
+          64
+        ],
+        [
+          16,
+          510,
+          64,
+          64
+        ],
+        [
+          16,
+          638,
+          64,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/japan-512.png",
+      "sha256": "41adb2bbad12ae1d384c4b1e603fa58725fe841b7eec511963762dba3b7ba4ef",
+      "canvas": [
+        2656,
+        787
+      ],
+      "artPixels": 512,
+      "mobile": false,
+      "columns": [
+        "guard.civ_japan",
+        "elite.guard.civ_japan",
+        "japan-A-oyoroi",
+        "japan-B-domaru",
+        "japan-C-gusoku"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          221,
+          512,
+          512
+        ],
+        [
+          544,
+          221,
+          512,
+          512
+        ],
+        [
+          1072,
+          221,
+          512,
+          512
+        ],
+        [
+          1600,
+          221,
+          512,
+          512
+        ],
+        [
+          2128,
+          221,
+          512,
+          512
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/japan-512-mobile.png",
+      "sha256": "04db72dc26dbe214f149b278701bbb52f657a7e6407c2fb8ba09ec1a79d0572f",
+      "canvas": [
+        320,
+        2194
+      ],
+      "artPixels": 288,
+      "mobile": true,
+      "columns": [
+        "guard.civ_japan",
+        "elite.guard.civ_japan",
+        "japan-A-oyoroi",
+        "japan-B-domaru",
+        "japan-C-gusoku"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          202,
+          288,
+          288
+        ],
+        [
+          16,
+          612,
+          288,
+          288
+        ],
+        [
+          16,
+          1022,
+          288,
+          288
+        ],
+        [
+          16,
+          1432,
+          288,
+          288
+        ],
+        [
+          16,
+          1842,
+          288,
+          288
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/japan-128.png",
+      "sha256": "8b6434e29d6961bb6a9345fd9b8f1a63d89452526555113d0547ec335332a3d4",
+      "canvas": [
+        896,
+        357
+      ],
+      "artPixels": 128,
+      "mobile": false,
+      "columns": [
+        "guard.civ_japan",
+        "elite.guard.civ_japan",
+        "japan-A-oyoroi",
+        "japan-B-domaru",
+        "japan-C-gusoku"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          32,
+          175,
+          128,
+          128
+        ],
+        [
+          208,
+          175,
+          128,
+          128
+        ],
+        [
+          384,
+          175,
+          128,
+          128
+        ],
+        [
+          560,
+          175,
+          128,
+          128
+        ],
+        [
+          736,
+          175,
+          128,
+          128
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/japan-128-mobile.png",
+      "sha256": "27532f60a36d810a2ef8655cdd1e023714173d572568f4b0ba97e9520b5a8cec",
+      "canvas": [
+        320,
+        1004
+      ],
+      "artPixels": 128,
+      "mobile": true,
+      "columns": [
+        "guard.civ_japan",
+        "elite.guard.civ_japan",
+        "japan-A-oyoroi",
+        "japan-B-domaru",
+        "japan-C-gusoku"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          126,
+          128,
+          128
+        ],
+        [
+          16,
+          298,
+          128,
+          128
+        ],
+        [
+          16,
+          470,
+          128,
+          128
+        ],
+        [
+          16,
+          642,
+          128,
+          128
+        ],
+        [
+          16,
+          814,
+          128,
+          128
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/japan-64.png",
+      "sha256": "db5d3086ed22665ff41ba3250000659603f440e90e24c1d45eef1e5925d4370a",
+      "canvas": [
+        896,
+        293
+      ],
+      "artPixels": 64,
+      "mobile": false,
+      "columns": [
+        "guard.civ_japan",
+        "elite.guard.civ_japan",
+        "japan-A-oyoroi",
+        "japan-B-domaru",
+        "japan-C-gusoku"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          64,
+          175,
+          64,
+          64
+        ],
+        [
+          240,
+          175,
+          64,
+          64
+        ],
+        [
+          416,
+          175,
+          64,
+          64
+        ],
+        [
+          592,
+          175,
+          64,
+          64
+        ],
+        [
+          768,
+          175,
+          64,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "docs/art-unification/elite-review-20261029/upgrade-comparison/japan-64-mobile.png",
+      "sha256": "6757a134088fb84e089ad0b25e41d113f7d3618af72da869161e944d74979167",
+      "canvas": [
+        320,
+        784
+      ],
+      "artPixels": 64,
+      "mobile": true,
+      "columns": [
+        "guard.civ_japan",
+        "elite.guard.civ_japan",
+        "japan-A-oyoroi",
+        "japan-B-domaru",
+        "japan-C-gusoku"
+      ],
+      "imageRectanglesXYWH": [
+        [
+          16,
+          126,
+          64,
+          64
+        ],
+        [
+          16,
+          254,
+          64,
+          64
+        ],
+        [
+          16,
+          382,
+          64,
+          64
+        ],
+        [
+          16,
+          510,
+          64,
+          64
+        ],
+        [
+          16,
+          638,
+          64,
+          64
+        ]
+      ]
+    }
+  ]
+}

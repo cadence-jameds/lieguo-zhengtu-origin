@@ -1,0 +1,115 @@
+[
+  {
+    "id": "japan-1-oni-oyoroi-overhead",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "createdDate": "2026-10-30",
+    "role": "ARMY-PORTRAIT",
+    "raw": "docs/art-unification/elite-final-20261030/japan/raw/japan-1-oni-oyoroi-overhead.png",
+    "rawSHA256": "ef04d85d397f6d6218cc740fd85b9df1995a08482c17ee0619df78ad01589a88",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "prompt": "docs/art-unification/elite-final-20261030/japan/prompts/japan-1-oni-oyoroi-overhead.txt",
+    "promptSHA256": "2df50ac0010073667f27699842bd91c6967e6b4e563dade9363bc8db8d8fde4f",
+    "references": [
+      {
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/japan-D-v2.png",
+        "sha256": "7cc4112108e26aaf9c068aa14d99bcefc6aaba2aa234d83d70bcdd10cfa14dfd"
+      }
+    ],
+    "transparentBackground": false,
+    "status": "PLAYER_CHOICE_PENDING"
+  },
+  {
+    "id": "japan-2-horn-crest-coiled-v1",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "createdDate": "2026-10-30",
+    "role": "ARMY-PORTRAIT",
+    "raw": "docs/art-unification/elite-final-20261030/japan/raw/japan-2-horn-crest-coiled-v1.png",
+    "rawSHA256": "2bf473d836ee62994d9d8e7e68c4a3dadc0b1ee5042836657275cb3543eb8295",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "prompt": "docs/art-unification/elite-final-20261030/japan/prompts/japan-2-horn-crest-coiled.txt",
+    "promptSHA256": "49bc80c082b84032ffdc0d46a9eb980433799034baa761d5707bdd88c93d952d",
+    "references": [
+      {
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      }
+    ],
+    "transparentBackground": false,
+    "status": "SUPERSEDED_CREST_TOO_SIMILAR_TO_ORDINARY"
+  },
+  {
+    "id": "japan-2-horn-crest-coiled-v2",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "createdDate": "2026-10-30",
+    "role": "ARMY-PORTRAIT",
+    "raw": "docs/art-unification/elite-final-20261030/japan/raw/japan-2-horn-crest-coiled.png",
+    "rawSHA256": "a10aa218968c21c537db39f68dd03e6f6295321cb6e68e55e157f1d96854c7d0",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "prompt": "docs/art-unification/elite-final-20261030/japan/prompts/japan-2-horn-crest-v2.txt",
+    "promptSHA256": "84cdbe10b98edb31926401326177265e3870611ab56d858645e7f61b4c3b11bb",
+    "references": [
+      {
+        "path": "docs/art-unification/elite-final-20261030/japan/raw/japan-2-horn-crest-coiled-v1.png",
+        "sha256": "2bf473d836ee62994d9d8e7e68c4a3dadc0b1ee5042836657275cb3543eb8295"
+      },
+      {
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+      }
+    ],
+    "transparentBackground": false,
+    "status": "PLAYER_CHOICE_PENDING",
+    "supersedes": "japan-2-horn-crest-coiled-v1"
+  },
+  {
+    "id": "japan-3-elite-iai-low",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "createdDate": "2026-10-30",
+    "role": "ARMY-PORTRAIT",
+    "raw": "docs/art-unification/elite-final-20261030/japan/raw/japan-3-elite-iai-low.png",
+    "rawSHA256": "e9e2cab956909dbb0a9c3f264d47112bd4b5f2840b946bc8274844bc7ada117c",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "prompt": "docs/art-unification/elite-final-20261030/japan/prompts/japan-3-elite-iai-low.txt",
+    "promptSHA256": "03dbeb67459c42d93f5ee31763fcf2e314067d18cf9dcfa0325db4b5b9a226be",
+    "references": [
+      {
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      }
+    ],
+    "transparentBackground": false,
+    "status": "PLAYER_CHOICE_PENDING"
+  }
+]

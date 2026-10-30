@@ -1,0 +1,78 @@
+{
+  "base": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+  "node": "24.19.0",
+  "npmCi": "PASS",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "artBoards": "PASS",
+  "cityVisuals": "PASS",
+  "playerFeedbackScopeAndProvenance": "PASS",
+  "artFileIntegrity": {
+    "status": "PASS",
+    "sourceBatches": 53,
+    "assets": 198,
+    "failures": []
+  },
+  "browser": {
+    "armyCases": 9,
+    "nativeArtCases": 18,
+    "viewports": [
+      320,
+      390,
+      1440
+    ],
+    "status": "PASS",
+    "pageErrors": 0,
+    "httpErrors": 0,
+    "japanDecodedRGBMatchesApprovedSource": true,
+    "chinaUnchanged": true
+  },
+  "fullRegression": {
+    "status": "FAILED_TIMEOUTS_LOCAL",
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "passed": 2091,
+    "failed": 1,
+    "skipped": 12,
+    "failedSuites": 2,
+    "rawReportSHA256": "899b297d5f9f44042c8397c18d575ffd3f720141efbf4f7d372698de599270b4",
+    "failures": [
+      {
+        "file": "src/game/formal/runtime.test.ts",
+        "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "reason": "Test timed out in30000ms"
+      },
+      {
+        "file": "src/game/formal/breakthroughB92.test.ts",
+        "reason": "beforeAll hook timed out in240000ms;11 tests skipped"
+      }
+    ],
+    "gameplaySourceDelta": "NONE",
+    "conditions": "Unchanged full runner2workers,30000ms test timeout and existing240000ms hook. No exclusions or test changes.",
+    "rawReportPreserved": "/workspace/work/japan-approved-full-attempt1.json",
+    "runtimeFileRecheck": {
+      "status": "FAILED_TIMEOUTS_LOCAL",
+      "passed": 61,
+      "failed": 3,
+      "skipped": 0,
+      "testTimeoutMs": 30000,
+      "reportSHA256": "e4f2662eb2b1e7e5a023397bde5784f798a9ecce09b3edffa2a94d5478c8af46",
+      "rawReportPreserved": "/workspace/work/japan-approved-runtime-recheck.json",
+      "failures": [
+        "10X research uses the real deadline and agrees with offline completion",
+        "10X settlement uses the real deadline and agrees with offline completion",
+        "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings"
+      ]
+    },
+    "finalAcceptance": "Latest PR HEAD GitHub CI must complete full regression successfully; local timeout attempt is retained, not counted as PASS."
+  },
+  "githubCI": "Check PR final HEAD Checks; no local claim of remote result.",
+  "limits": [
+    "Player approval is explicit for China and Japan1.",
+    "Independent art review and physical phone remain pending.",
+    "Historical legacy3 art failures, B5E1 HOLD and Astra Gate notPASS preserved."
+  ],
+  "merge": "NOT_PERFORMED",
+  "deployment": "NOT_PERFORMED",
+  "pagesPaths": "PASS",
+  "releaseArtifacts": "PASS"
+}

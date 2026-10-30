@@ -510,3 +510,6 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 
 /* Keep the range badge clear of tall foreground castle roofs. Plot and art anchors stay fixed. */
 .town-composition.visual-age-3 .building-range .town-label{left:90%}
+
+/* Existing legacy lower-row cities sit inside their wall rather than on its rim. */
+.outskirts-center .miniature-city.walled.grounded-legacy .miniature-city-art{transform:translateY(var(--legacy-ground-y));pointer-events:none}

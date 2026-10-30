@@ -261,7 +261,8 @@
           "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
           "browserEvidence": "docs/art-unification/browser/result.json",
           "comparisonBoards": "docs/art-unification/boards/"
-        }
+        },
+        "supersededBy": "feedback-20261029-light-cavalry"
       },
       {
         "key": null,
@@ -446,7 +447,8 @@
           "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
           "browserEvidence": "docs/art-unification/browser/result.json",
           "comparisonBoards": "docs/art-unification/boards/"
-        }
+        },
+        "supersededBy": "feedback-20261029-elite.guard.civ_zhongguo"
       },
       {
         "key": null,
@@ -481,7 +483,8 @@
           "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
           "browserEvidence": "docs/art-unification/browser/result.json",
           "comparisonBoards": "docs/art-unification/boards/"
-        }
+        },
+        "supersededBy": "feedback-20261029-elite.guard.civ_frankia"
       },
       {
         "key": null,
@@ -516,7 +519,8 @@
           "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
           "browserEvidence": "docs/art-unification/browser/result.json",
           "comparisonBoards": "docs/art-unification/boards/"
-        }
+        },
+        "supersededBy": "feedback-20261029-elite.guard.civ_japan"
       },
       {
         "key": "elite.guard.civ_mongolia",
@@ -6891,7 +6895,8 @@
           "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
           "browserEvidence": "docs/art-unification/browser/result.json",
           "comparisonBoards": "docs/art-unification/boards/"
-        }
+        },
+        "supersededBy": "feedback-20261029-knight"
       }
     ],
     "sourceDimensions": [
@@ -7205,5 +7210,557 @@
     ],
     "sourceSha256": "17bc10603481cc97113bc209d85b8be600e0d432feeb5171f806d817f1437004",
     "source": "docs/art-source/unification/army-crossbow-clean-final.png"
+  },
+  {
+    "id": "feedback-20261029-elite.guard.civ_frankia",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+    "sourcePath": "docs/art-source/player-feedback-20261029/candidates/frankia-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "8b5e52dc31ed8961718894177daea5cf3afbb1357d77553136c0d416364f4938",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_frankia.png",
+        "sha256": "b0713b7d99f9b3924b15b452b373f7b6143d02448a7922e5d18e312aca16d8e3"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      }
+    ],
+    "prompt": "Edit the referenced ORIGINAL Frankish unit into ONE final square ARMY-PORTRAIT candidate for a historical strategy game. The two actual attached game cards are the style authority, not their flawed anatomy. Preserve their dark charcoal studio background, soft warm upper-left illumination, slightly weathered realistic hand-painted technique, human proportions, full body / eye-level three-quarter camera, muddy cloth, iron and leather, and blue and antique-gold fleurs-de-lis textile motifs. Match the existing portrait scale with complete boots and weapon within a generous square safety margin. No lettering, frame, UI, landscape, grass tile, magic, photography or glossy 3D.\n\nREPAIR ELITE FRANKISH AXEMAN: one human, exactly TWO arms and TWO hands. Delete both old small axes and rebuild the pose anatomically. Both gloved hands visibly grasp the SAME ONE continuous long wooden haft: lower hand near the hip, upper hand at lower chest; natural elbows, wrists, separated coherent fingers wrapping the haft. One substantial historically grounded DOUBLE-BITTED battleaxe head, two opposed cutting blades fixed to the top of that haft, raised diagonally to the viewer's upper right well away from the face. Single weapon total, no dagger, no spare axe. Powerful grounded stance and elite heavy-weapon presence without fantasy oversizing. Add restrained advanced steel shoulder and breast protection over chainmail, keeping the reference's Frankish blue/gold tabard.\n\nThe blue-and-gold fleur-de-lis shield is STRAPPED TO THE BACK, not held by any hand; its painted outer face can be seen projecting behind the left shoulder at viewer right, with a plausible brown leather shoulder baldric and buckle clearly fixing it. Never add a shield arm, floating hand, auxiliary wrist, disconnected haft, blade through a head, or fingers fused into equipment. Leave clear visual separation between both hands and the shield. Review anatomy before delivering ONE square single-character image, ideally 1024x1024 or 512x512. This is a candidate, not an approved final asset.\n",
+    "promptPath": "docs/art-source/player-feedback-20261029/prompts/frankia-v1.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "elite.guard.civ_frankia",
+        "group": "units",
+        "subject": "Single double-bitted axe, exactly two hands; blue-gold shield strapped to back.",
+        "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
+          "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+          "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+        },
+        "supersededBy": "elite-review-20261029-frankia-single-hand"
+      }
+    ]
+  },
+  {
+    "id": "feedback-20261029-elite.guard.civ_zhongguo",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+    "sourcePath": "docs/art-source/player-feedback-20261029/candidates/china-v4.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "064e7ddf6fb1b702fa38c3dd9dafbdba11f973dee1c2e383a7c3e09784f17d16",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/china-v3.png",
+        "sha256": "ff288cfd0dc43bf065a329ceb72bda3b6d23aadd21f69771333b6c8726492946"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-china.png",
+        "sha256": "c269d312ae0d90f803aa880705c2f4f1d104282710b7783fe19d4195e40067f7"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_zhongguo.png",
+        "sha256": "be43128803fe0668f163111b4de2dbe0f4a89daae60f07d4802755a4a00d1318"
+      }
+    ],
+    "prompt": "Finalize ONE non-combat historical Chinese elite guard catalog portrait. Reference 1 is the latest corrected candidate: preserve its broad reinforced armor, red plume, red layered dress, calm pose and clearly curved-front traditional repeating-crossbow silhouette. References 2 and 3 are the TWO original shipped Chinese guard portraits and are the required style anchors: match their dark charcoal background, restrained warm upper-left light, weathered realistic hand-painted surfaces, full-body eye-level 3/4 composition and earthy dark red / iron / aged brass palette. Do not copy reference 3's ordinary-looking equipment; the new elite must keep visibly broader shoulder protection, a stronger chest cuirass, improved forearm protection and a more refined compact wooden repeating-crossbow top box.\n\nKeep the held historical prop calm and lowered across the torso in three-quarter perspective. It must remain recognizable as one traditional crossbow with a clear curved transverse bow silhouette and a thin string, rather than a long cage-like silhouette. Exactly two natural hands on the single connected prop and exactly two arms. No battle, target, injury or dramatic attack. Preserve all feet, plume, curved bow and tips inside a comfortable safe square crop. No text, border, landscape, fantasy spikes, glowing effects or photographic/3D rendering. One square full-character portrait, consistent with the original game.\n",
+    "promptPath": "docs/art-source/player-feedback-20261029/prompts/china-v4.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "elite.guard.civ_zhongguo",
+        "group": "units",
+        "subject": "Reinforced shoulders/cuirass and mature repeating crossbow with visible transverse bow.",
+        "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
+          "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+          "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+        },
+        "supersededBy": "china-player-approved-3798a7f-runtime-20261030"
+      }
+    ]
+  },
+  {
+    "id": "feedback-20261029-elite.guard.civ_japan",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+    "sourcePath": "docs/art-source/player-feedback-20261029/candidates/japan-v2.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "2271da95a7997d8e205185d38762bfbb033368aa599aab5ba5d258ca66cc6569",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/guard-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/elite.guard.civ_japan.png",
+        "sha256": "97d35c86081fe695f26ef26c733351b56ac93170b75af0cd9edb90d8749c2289"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/candidates/japan-v1.png",
+        "sha256": "fe0e066e617f7196955c44bbb35d472405b01a28628e65eff1e5674203cdd9dc"
+      }
+    ],
+    "prompt": "Create ONE revised elite Japanese samurai costume catalog portrait. Use reference 1 (original ordinary samurai) and reference 2 (original old elite) as the TWO shipped style anchors. Reference 3 is the first new candidate, which is still TOO SIMILAR to ordinary at 64 pixels. Keep the same historical Japanese identity, dark background, warm upper-left light, eye-level three-quarter full-body view and muted hand-painted iron / brown / dark-red-lacing finish. No battle, text, UI, landscape, magical glow or fantasy monster armor.\n\nMake the ELITE equipment physically and unmistakably heavier in its main shapes, WITHOUT relying on a changed pose or brighter color:\n1. A very substantial fitted Japanese iron cuirass, with broad smoothly protected dark-steel chest surfaces and strong overlapping lower guards; its construction should clearly differ from the ordinary guard's narrow small lamellar rows. Realistic Japanese armor forms, not a European sculpted breastplate.\n2. TWO large rigid rectangular O-SODE shoulder guards and more extensive upper-arm protection, widening and squaring the silhouette on BOTH sides. Thick structural edges and multiple real lames, no decorative spikes. The shoulders should be about a third broader than ordinary, still anatomically plausible.\n3. A reinforced multi-plate KABUTO with broad layered SHIKORO neck protection and a restrained dark MENPO lower-face guard, making head/neck protection clearly more advanced than the ordinary open face. Preserve the existing modest gold crest design, do not enlarge it into fantasy horns.\n4. Substantial iron kote forearm armor, larger thigh guards and shin plates. Rich but restrained old dark-red cords and sparse aged-brass details; keep saturation low.\n\nExactly two arms and two hands naturally hold ONE katana in a calm low-to-middle guard, with the hilt in front and clear of the face. A longer, better-made traditional blade and a sheathed short companion blade are appropriate, but no impossible giant sword. Keep all feet, shoulder guards, helmet and blade inside a safe square crop. Large readable armor shapes must remain obvious at64px. This is a historical game unit portrait; match the original painterly art, not glossy photographic/CG rendering.\n",
+    "promptPath": "docs/art-source/player-feedback-20261029/prompts/japan-v2.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "elite.guard.civ_japan",
+        "group": "units",
+        "subject": "Advanced o-yoroi, kabuto, shoulder and limb protection; two-handed katana.",
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2
+          ],
+          "total": 18,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "notes": "V1 rejected for tier readability. V2 adds broad iron cuirass, two large o-sode, menpo and reinforced kabuto/shikoro. Actual100px distinction clear; fine armor detail remains subtle at native64 (item08=1).",
+          "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+          "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+        },
+        "supersededBy": "japan-player-approved-candidate-1-runtime-20261030"
+      }
+    ]
+  },
+  {
+    "id": "feedback-20261029-light-cavalry",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+    "sourcePath": "docs/art-source/player-feedback-20261029/candidates/light-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "0ab959f56f09b15b958be06af24ed6e91a3029ff4ebd87bb51da463cff975bd2",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/light-cavalry.png",
+        "sha256": "cdd3dd4916ff0d2f8f24addec31798478ac2299b1a0f3714a519ba22ad0ad108"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+        "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+      }
+    ],
+    "prompt": "Edit the attached LIGHT CAVALRY portrait, using it plus the old cavalry portrait as the two actual style references. Make ONE square ARMY-PORTRAIT with the same light scout-cavalry identity: lightly armored rider, simple conical helmet, brown/tan rough cloth and light mail/leather, modest round shield, agile brown horse with NO plate barding. Preserve dark charcoal studio backdrop, full horse and rider, realistic hand-painted textures, soft warm upper-left lighting and near-eye-level three-quarter view. Do not turn this into a red heavy knight, polished fantasy armor, photography, cartoon, or isometric grass-base sprite. No words, border or watermark.\n\nCRITICAL LANCE REPAIR: the horse clearly travels toward VIEWER RIGHT. Use exactly ONE intact straight wooden lance. Its metal spearhead must be at the RIGHT / FRONT end, pointing forward beyond the horse's nose in its direction of movement. The simple blunt butt end is to the LEFT behind the rider. Never put a spear tip on both ends. Show the rider's natural right arm and ONE right hand gripping the lance near its balance point, around waist height, shaft passing safely in front of the rider's waist, below the horse's head and far from the rider's face. The shaft is continuous and straight between butt, grip and tip, no bends, no segmented or duplicate poles. Left arm and ONE left hand control two thin leather reins visibly leading to the bridle; the small round shield is secured on the left forearm with straps, not a third hand. Exactly two arms / two hands total. Keep lance, reins, forearms and horse neck separately readable.\n\nHorse gait must be anatomically coherent with four legs, reasonable joints and grounded or naturally trotting hooves, relaxed mobile light-cavalry posture. All hooves, ears, tail and the complete forward spearhead inside a square safe crop; reduce the horse/rider/lance together slightly if needed, with 6% margins rather than cutting a tip. One single-character mounted unit card, matching the existing lighting, scale and muted palette.\n",
+    "promptPath": "docs/art-source/player-feedback-20261029/prompts/light-v1.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "light-cavalry",
+        "group": "units",
+        "subject": "One intact lance points right with horse travel, lightly armored rider and bare horse.",
+        "path": "public/art/unified/units/light-cavalry.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "notes": "One straight shaft: blunt left butt and single right/front tip; two hands, reins and forearm-strapped shield coherent. Four horse legs; light mail/leather, no horse plate.",
+          "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+          "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+        }
+      }
+    ]
+  },
+  {
+    "id": "feedback-20261029-knight",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+    "sourcePath": "docs/art-source/player-feedback-20261029/candidates/knight-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "cd40fa2dea78397ecdf0dff1a7c486bff739a345721fb0d444675ed0006f4fb0",
+    "references": [
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/knight-before.png",
+        "sha256": "131afc7102dd932dc58f832e8962ddbac93feb4ce914793cc5d4351cff3b4928"
+      },
+      {
+        "path": "docs/art-source/player-feedback-20261029/references/heavy-knight.png",
+        "sha256": "72d9f6da00b36e2ed4964faceccfaac77041d254a0700376c687556d03f068a1"
+      }
+    ],
+    "prompt": "Create ONE new ORDINARY KNIGHT portrait for the existing game, with the attached old ordinary knight and approved heavy knight as TWO actual visual style references. The HEAVY KNIGHT IMAGE IS APPROVED AND MUST REMAIN UNCHANGED: do not output a modified heavy knight, recolored duplicate, cropped copy, or renamed version. Create the distinct earlier ordinary unit only, preserving the family style: square full-body horse/rider portrait on dark charcoal studio background, soft warm upper-left light, near-eye-level three-quarter camera, realistic weathered HAND-PAINTED surfaces and controlled detail, all ears, hooves, tail and lance inside generous square crop. No text/frame/UI, grass platform, photography or plastic 3D.\n\nCOLOR RELATIONSHIP: use the heavy knight's RED, WARM IVORY and IRON GRAY family but clearly DULLER and LOWER SATURATION: dusty burgundy/muted brick red, worn cream linen, matte dark iron and brown leather. Replace the old ordinary knight's blue-gold livery. Keep these colors restrained; no vivid scarlet, bright gilding or extra blue cape.\n\nORDINARY EQUIPMENT, clearly less advanced than the heavy reference: mail hauberk over a simple padded garment, a modest plain fitted iron breastplate and limited shoulder/knee protection, open-faced conical or simple bascinet helmet WITHOUT extravagant plume or closed tournament visor. A simple heater shield strapped to the left forearm, sparse cloth heraldry, no elaborate plate suit. The horse has a mostly exposed brown coat, simple saddle, leather bridle and a SHORT muted burgundy/ivory saddlecloth, NO heavy segmented steel neck, chest or leg barding, and no huge ceremonial full caparison. Upright controlled walking/ready stance visibly different from the heavy knight's armored high-step pose.\n\nOne right hand holds ONE straight intact lance lowered forward to viewer right safely below face level; metal spearhead on the front/right end only, blunt butt behind. Left hand holds coherent leather reins beneath the small forearm-strapped shield. Exactly two arms/two hands and a natural four-legged horse, no floating hands or disconnected equipment. Strong knight identity, heavier protection than light cavalry but plainly simpler and lighter horse armor than the approved heavy knight. Keep the figure occupancy and background consistent with the source cards. One original square candidate.\n",
+    "promptPath": "docs/art-source/player-feedback-20261029/prompts/knight-v1.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "knight",
+        "group": "units",
+        "subject": "Muted burgundy/ivory/iron, simpler mail and light horse equipment; heavy knight locked.",
+        "path": "public/art/unified/units/knight.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "notes": "Muted burgundy/cream/iron, open face, mail and limited plates; mostly bare horse. Distinct image and posture from approved plated heavy knight; heavy file unchanged.",
+          "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+          "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+        }
+      }
+    ]
+  },
+  {
+    "id": "elite-review-20261029-frankia-single-hand",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+    "sourcePath": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8",
+    "references": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/elite-frankia-8736bad.png",
+        "sha256": "71139b089745d1e8c04bc0d6ad05d86fc25e76f26e2587f9e1633cf55f45d83c"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-frankia.png",
+        "sha256": "f68782d44647cbe4b2737e23eb4d22fec2e5eda302c7224d0bccadc4c31e5715"
+      }
+    ],
+    "prompt": "Create ONE square historical equipment character portrait, editing the attached current elite image and using the attached ordinary guard as the actual style and civilization anchor. This is ONE image of ONE adult, no board, no labels, no writing or watermark. ARMY-PORTRAIT for Lieguo Origin. Preserve the existing same civilization, realistic adult anatomy, face, near-eye-level 3/4 full-body camera, warm soft upper-left key light, restrained hand-painted historical realism, aged metal/leather/cloth material, near-black charcoal studio background, no landscape, no pedestal. Keep the complete helmet, weapon and both feet inside the square with a small safe margin. Similar occupancy to the anchors, figure about 85% height; no close-up, no oversize head, no CGI/anime/fantasy. Exactly two arms and two anatomically connected hands with natural fingers. Preserve core clothing colors and mature historical equipment character; armor changes must read as real protection, not color changes. Output ONE clean square image, intended for 512x512 WebP conversion. Do not change any other image.\nPRIORITY CORRECTION of the current elite Frankish guard: retain his face, iron helmet, improved small shoulder plates over mail, blue and aged ivory fleur-de-lis tabard, cloak, leather boots, warm light and rendering. Repose ONLY arms and equipment into a plausible one-handed axe and shield equipment-display stance, akin to the ordinary guard. The warrior's anatomical RIGHT hand (on the viewer's LEFT) grips ONE continuous short wooden shaft of ONE compact DOUBLE-BITTED battleaxe, raised diagonally to his right side, away from head. The single axe head has two opposed modest crescent cutting blades joined through ONE central socket, about head-width total, not a two-handed giant axe. Shaft about forearm length plus hand clearance; hand visibly wraps around it; blunt butt ends below that same right wrist. His anatomical LEFT arm (viewer RIGHT) supports a blue kite shield bearing aged gold fleurs-de-lis in a natural defensive position. Show its realistic leather forearm strap and a single left hand gripping its interior handle at the inside edge; shield must be held on the left forearm, NOT carried on the back. Both hands have distinct jobs: RIGHT axe ONLY; LEFT shield ONLY. Two arms total, two hands total, one axe total. No second axe, belt axe, duplicated head, detached hand, floating haft, shaft through chest/helmet or hidden extra gripping hand. Stable feet and natural calm ready stance, no exaggerated hero anatomy. Do not solve anatomy by black paint or covering the old extra arm; redraw correct connected joints. Preserve normal Frankish mail/cloth character, no massive plate suit.\n",
+    "promptPath": "docs/art-unification/elite-review-20261029/prompts/frankia-single-hand-v1.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "cells": [
+      {
+        "key": "elite.guard.civ_frankia",
+        "group": "units",
+        "subject": "Anatomical right hand single short-haft double-bitted axe; left hand holds blue/gold fleur-de-lis shield. Exactly two arms/hands.",
+        "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+        "artGate": {
+          "role": "ARMY-PORTRAIT",
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "hardGate": "PASS_SELF_REVIEW",
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "playerApproval": "待驗",
+          "reviewedSHA256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+          "reviewer": "Codex visual self-review: full raw/512px,128/64px boards,320/390/1440 browser Art gallery and27 actual ArmyView cases; player/independent approval pending",
+          "limits": "No independent/player acceptance. Any extra arm/hand, second axe, shaft through body or invalid grip is a hard FAIL regardless of total.",
+          "notes": "Exactly one compact double-bitted axe on anatomical right hand; anatomical left arm bent to held shield. Left palm/handle are partially occluded by shield; visible wrist/partial glove and shield connection reviewed, concealed fingers not independently countable. No third hand/arm or second axe observed, no shaft through body. Shield blue/gold fleur-de-lis, mail/cape preserved.",
+          "browserEvidence": [
+            "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+            "docs/art-unification/elite-review-20261029/browser/army/result.json"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "china-player-approved-3798a7f-runtime-20261030",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/raw/china-B-kneeling-v1.png",
+    "sourcePath": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/raw/china-B-kneeling-v1.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "b7ff3b671ac852511b3a61fd1f118bbfb2ba0b7aac979250c2675d3906993790",
+    "references": [
+      {
+        "path": "docs/art-unification/elite-review-20261029/raw/china-B-scale.png",
+        "sha256": "13377c72791f85cdcf1c5370336a6081dc871d7033cbed9723fbaea0427c0fa0"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/china-D-v1.png",
+        "sha256": "2eefa5e7e6ad97430551382ca0883c32c519c344f5cdada42eb5e8cbe6002db8"
+      }
+    ],
+    "prompt": "Create one revised Chinese elite repeating-crossbow unit portrait for the user's chosen design. FIRST REFERENCE IS AUTHORITATIVE: candidate B, high-grade FISH-SCALE ARMOR. Preserve its same mature Chinese warrior identity, face, red-plumed Chinese helmet, muted iron/bronze/deep-red palette and coherent round overlapping fish scales across helmet neck guard, broad rounded shoulders, chest/abdomen, armored skirt, forearms and shin protection. Every large armor area must visibly remain ROUND FISH SCALES, not rectangular lamellar tiles and not a red brigandine coat. Preserve the first reference's wooden repeating crossbow design, including top wooden bolt magazine, front transverse curved bow, string and wooden mechanism. SECOND REFERENCE IS ONLY A POSE AND CAPE GUIDE: use its low kneeling silhouette, NOT its different armor.\n\nRequested new pose: the forward leg steps far out toward screen RIGHT, foot firmly planted, front knee bent; the rear knee rests on the ground at screen LEFT with the rear foot naturally behind it. The torso turns three-quarter right and leans slightly into a composed aimed posture. Exactly two arms and two normal hands: the rear hand naturally controls the rear wooden crossbow stock/lever area, the forward hand supports the wooden stock from below. Keep the crossbow horizontal at upper-chest height, pointing screen RIGHT; shoulders, elbows, wrists and hands must connect visibly and plausibly. A short dark-crimson fabric cape sweeps backward toward screen LEFT, giving the whole figure a low broad triangular contour. Make the pose grounded and weight-bearing, with one lowered knee and one forward foot, not a floating crouch. Scaled chest, layered round-scale shoulders and fish-scale skirt must remain exposed and readable despite the pose and cape. No extra arms, hands, legs, duplicate crossbow, disconnected fingers or equipment intersecting the head or body.\n\nOne complete full-body adult on the same plain near-black charcoal studio background, warm soft upper-left light, restrained hand-painted historical game realism matching candidate B. Both feet, red plume, cape, complete bow and bowstring fully in frame, with generous dark clearance on all edges, especially the right bow tip. Square image for a 512px card and 128/64px review. No text, letters, labels, frame, watermark, scenery, other people, effects, glow or motion blur. This is the chosen B armor adapted to a new pose for visual review; it must not revert to the second reference's rectangular armor.\n",
+    "promptPath": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/prompt.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-29",
+    "integrationDate": "2026-10-30",
+    "approvedArtworkCommit": "3798a7f70fd76bfb5143a320a1e3703339a743a0",
+    "reusedApprovedPNG": {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/china-B-kneeling-512.png",
+      "sha256": "80709f92bade96fe285617b56a138ec8604c07d80ad6653b6ac499251b70a30b"
+    },
+    "conversion": "Lossless WebP encoding of the exact approved512px PNG; no resizing, cropping, color changes or regeneration.",
+    "cells": [
+      {
+        "key": "elite.guard.civ_zhongguo",
+        "group": "units",
+        "subject": "Player-approved high-grade fish-scale armor with forward leg and grounded rear knee, repeating crossbow and cape; source3798a7f.",
+        "path": "public/art/unified/units/elite.guard.civ_zhongguo.approved-3798a7f.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2
+          ],
+          "total": 18,
+          "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+          "playerApproval": "APPROVED_3798a7f",
+          "reviewedSHA256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+          "independentReview": "待驗",
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "reviewer": "Codex actual ArmyView card/detail render inspection and browser decoded512px RGB equality at320/390/1440, plus native512/128/64 real Art checks. Player approved source3798a7f; independent review remains pending.",
+          "notes": "Exact approved PNG pixels; fish-scale armor and low kneeling pose unchanged. Two connected hands/arms, one repeating-crossbow prop; original B control-ring styling not mechanically reconstructed. At64 pose/cape read, individual scales do not.",
+          "browserEvidence": "docs/art-unification/elite-final-20261030/browser/army/result.json",
+          "nativeEvidence": "docs/art-unification/elite-final-20261030/browser/gallery/result.json"
+        }
+      }
+    ]
+  },
+  {
+    "id": "japan-player-approved-candidate-1-runtime-20261030",
+    "group": "units",
+    "role": "ARMY-PORTRAIT",
+    "transparent": false,
+    "single": true,
+    "source": "docs/art-unification/elite-final-20261030/japan/raw/japan-1-oni-oyoroi-overhead.png",
+    "sourcePath": "docs/art-unification/elite-final-20261030/japan/raw/japan-1-oni-oyoroi-overhead.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "ef04d85d397f6d6218cc740fd85b9df1995a08482c17ee0619df78ad01589a88",
+    "references": [
+      {
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/references/ordinary-japan.png",
+        "sha256": "c1ea42f083d12b52901984a97300bfe012a2f1de3ddb56cb69a6c9c855bf8641"
+      },
+      {
+        "path": "docs/art-unification/elite-review-20261029/action-candidates-20261029/raw/japan-D-v2.png",
+        "sha256": "7cc4112108e26aaf9c068aa14d99bcefc6aaba2aa234d83d70bcdd10cfa14dfd"
+      }
+    ],
+    "prompt": "Create ONE new Japanese elite samurai review-candidate portrait for the historical strategy game Lieguo Origin. The attached current elite and ordinary samurai are the actual mandatory style references. Retain a HUMAN adult warrior, normal adult anatomy, historically inspired Japanese armor construction, restrained hand-painted realism, warm soft upper-left studio light, weathered iron/lacquer/cloth/leather, blackened iron, muted dark-red lacing and restrained aged-bronze hardware. Dark charcoal empty studio background, no scenery or pedestal. Full figure, entire helmet ornament, blade, hands and both feet visible in a square with safe dark margins. Near-eye-level 3/4 view. Exactly two naturally connected arms, two normal hands, two legs. A SINGLE functional katana with a properly long wrapped hilt, one tsuba and one continuous blade; each hand connected to its own wrist/forearm with plausible joints. No duplicated weapons or floating blades, no blade intersecting face/helmet/body, no oversized sword. Metal mask and metal helmet ornament are HUMAN WORN EQUIPMENT, never a biological monster face or growing horns. No demon creature, supernatural skin, claws, fantasy spikes, magic, glow, motion trails, blood, injury, opponents, text, watermark or frame. Distinguish from the ordinary by both armor structure and a very clear new action silhouette at 64px, not only gold trim or tiny scales. This is a documentation candidate only; do not modify another image. CANDIDATE 1: ONI-INSPIRED MENPO + GREAT O-YOROI + OVERHEAD TWO-HANDED JODAN. The face is visibly a dark forged iron menpo with a stern sculpted oni-inspired expression and practical throat guard, human eyes behind it; no actual fangs growing from the person. A clear tall but credible aged-bronze maedate front ornament fixed to a ribbed kabuto. Boxier heavy o-yoroi direction, broad rectangular layered SODE shoulder boards and a substantial enclosing chest, deep multi-panel kusazuri, enclosed forearms and shins, dark-red lacing. A grounded forward lunging step with BOTH hands raised above the helmet on ONE long wrapped katana hilt, right hand near tsuba and left near pommel with a clear wrapped gap. Both fists and wrists separate and visible. Blade sweeps up and toward screen RIGHT, wholly visible; hands form a strong high arch, unlike the reference's low grip. Keep the entire high sword arc and forward foot in frame. Wide shoulders and the high blade/arm outline must remain readable at small size.\n",
+    "promptPath": "docs/art-unification/elite-final-20261030/japan/prompts/japan-1-oni-oyoroi-overhead.txt",
+    "generationTool": "image_gen.imagegen",
+    "generationModel": "not exposed",
+    "createdDate": "2026-10-30",
+    "integrationDate": "2026-10-30",
+    "approvedArtworkCommit": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+    "reusedApprovedCandidate": {
+      "path": "docs/art-unification/elite-final-20261030/japan/candidates/japan-1-oni-oyoroi-overhead.webp",
+      "sha256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8"
+    },
+    "conversion": "Byte-for-byte copy of the player-approved candidate1 512px lossless WebP. No generation, conversion, crop, resize or color changes to Runtime.",
+    "cells": [
+      {
+        "key": "elite.guard.civ_japan",
+        "group": "units",
+        "subject": "Player-approved candidate1: human samurai in oni menpo and broad o-yoroi, two-handed katana overhead and forward step.",
+        "path": "public/art/unified/units/elite.guard.civ_japan.approved-candidate-1.webp",
+        "artGate": {
+          "role": "ARMY-PORTRAIT",
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            1
+          ],
+          "total": 18,
+          "hardGate": {
+            "anatomy": "PASS_SELF_REVIEW",
+            "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
+            "extraLimbs": "NONE_OBSERVED",
+            "criticalDefectOverridesScore": true
+          },
+          "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+          "playerApproval": "APPROVED_CANDIDATE_1",
+          "independentReview": "待驗",
+          "reviewedSHA256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+          "reviewer": "Player approved candidate1. Codex validates exact source pixels and actual ArmyView/detail plus native512/128/64 at320/390/1440; independent art review remains pending.",
+          "notes": "Human-worn forged oni menpo; overhead single drawn katana and two hands on one hilt reviewed at full scale. High arc remains at64; mask details do not. Waist auxiliary sheathed short-sword hilt remains visible, not a second drawn blade.",
+          "formalUIEffectLimit": "Now installed as approved Japanese Runtime; source self-review score remains18, no score increase claimed.",
+          "browserEvidence": "docs/art-unification/japan-approved-20261030/browser/army/result.json",
+          "nativeEvidence": "docs/art-unification/japan-approved-20261030/browser/gallery/result.json"
+        }
+      }
+    ]
   }
 ]

@@ -1,0 +1,527 @@
+{
+  "method": "512px atlas cells; alpha>96 bbox, exclusive right/bottom. Diagnostic only; final placement reviewed in actual browser wall composition.",
+  "rows": [
+    {
+      "civ": "civ_zhongguo",
+      "age": 0,
+      "path": "public/art/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "cell": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "alphaBounds": [
+        16,
+        131,
+        508,
+        450
+      ],
+      "effectiveSize": [
+        492,
+        319
+      ],
+      "footY": 450,
+      "leftBlank": 16,
+      "rightBlank": 4,
+      "centerOffset": [
+        6.0,
+        34.5
+      ]
+    },
+    {
+      "civ": "civ_byzantium",
+      "age": 0,
+      "path": "public/art/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "cell": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "alphaBounds": [
+        14,
+        141,
+        497,
+        453
+      ],
+      "effectiveSize": [
+        483,
+        312
+      ],
+      "footY": 453,
+      "leftBlank": 14,
+      "rightBlank": 15,
+      "centerOffset": [
+        -0.5,
+        41.0
+      ]
+    },
+    {
+      "civ": "civ_frankia",
+      "age": 0,
+      "path": "public/art/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "cell": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "alphaBounds": [
+        3,
+        102,
+        495,
+        463
+      ],
+      "effectiveSize": [
+        492,
+        361
+      ],
+      "footY": 463,
+      "leftBlank": 3,
+      "rightBlank": 17,
+      "centerOffset": [
+        -7.0,
+        26.5
+      ]
+    },
+    {
+      "civ": "civ_britannia",
+      "age": 0,
+      "path": "public/art/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "cell": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "alphaBounds": [
+        14,
+        57,
+        509,
+        370
+      ],
+      "effectiveSize": [
+        495,
+        313
+      ],
+      "footY": 370,
+      "leftBlank": 14,
+      "rightBlank": 3,
+      "centerOffset": [
+        5.5,
+        -42.5
+      ]
+    },
+    {
+      "civ": "civ_japan",
+      "age": 0,
+      "path": "public/art/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "cell": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "alphaBounds": [
+        15,
+        42,
+        497,
+        368
+      ],
+      "effectiveSize": [
+        482,
+        326
+      ],
+      "footY": 368,
+      "leftBlank": 15,
+      "rightBlank": 15,
+      "centerOffset": [
+        0.0,
+        -51.0
+      ]
+    },
+    {
+      "civ": "civ_mongol",
+      "age": 0,
+      "path": "public/art/cities-age-0.webp",
+      "sha256": "7af3e5bd0ca282ce344e6d717ec1cff3044f57a8465fc5d0ef8ca67cec1ef648",
+      "cell": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "alphaBounds": [
+        6,
+        29,
+        498,
+        373
+      ],
+      "effectiveSize": [
+        492,
+        344
+      ],
+      "footY": 373,
+      "leftBlank": 6,
+      "rightBlank": 14,
+      "centerOffset": [
+        -4.0,
+        -55.0
+      ]
+    },
+    {
+      "civ": "civ_zhongguo",
+      "age": 1,
+      "path": "public/art/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "cell": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "alphaBounds": [
+        25,
+        111,
+        505,
+        447
+      ],
+      "effectiveSize": [
+        480,
+        336
+      ],
+      "footY": 447,
+      "leftBlank": 25,
+      "rightBlank": 7,
+      "centerOffset": [
+        9.0,
+        23.0
+      ]
+    },
+    {
+      "civ": "civ_byzantium",
+      "age": 1,
+      "path": "public/art/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "cell": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "alphaBounds": [
+        17,
+        105,
+        501,
+        458
+      ],
+      "effectiveSize": [
+        484,
+        353
+      ],
+      "footY": 458,
+      "leftBlank": 17,
+      "rightBlank": 11,
+      "centerOffset": [
+        3.0,
+        25.5
+      ]
+    },
+    {
+      "civ": "civ_frankia",
+      "age": 1,
+      "path": "public/art/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "cell": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "alphaBounds": [
+        7,
+        69,
+        490,
+        460
+      ],
+      "effectiveSize": [
+        483,
+        391
+      ],
+      "footY": 460,
+      "leftBlank": 7,
+      "rightBlank": 22,
+      "centerOffset": [
+        -7.5,
+        8.5
+      ]
+    },
+    {
+      "civ": "civ_britannia",
+      "age": 1,
+      "path": "public/art/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "cell": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "alphaBounds": [
+        27,
+        49,
+        503,
+        417
+      ],
+      "effectiveSize": [
+        476,
+        368
+      ],
+      "footY": 417,
+      "leftBlank": 27,
+      "rightBlank": 9,
+      "centerOffset": [
+        9.0,
+        -23.0
+      ]
+    },
+    {
+      "civ": "civ_japan",
+      "age": 1,
+      "path": "public/art/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "cell": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "alphaBounds": [
+        14,
+        74,
+        498,
+        429
+      ],
+      "effectiveSize": [
+        484,
+        355
+      ],
+      "footY": 429,
+      "leftBlank": 14,
+      "rightBlank": 14,
+      "centerOffset": [
+        0.0,
+        -4.5
+      ]
+    },
+    {
+      "civ": "civ_mongol",
+      "age": 1,
+      "path": "public/art/cities-age-1.webp",
+      "sha256": "06b08ea92ab59c99e5ea9d0726c61f139e469fcb3edc88be37ed23dddf9e24e8",
+      "cell": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "alphaBounds": [
+        6,
+        76,
+        492,
+        433
+      ],
+      "effectiveSize": [
+        486,
+        357
+      ],
+      "footY": 433,
+      "leftBlank": 6,
+      "rightBlank": 20,
+      "centerOffset": [
+        -7.0,
+        -1.5
+      ]
+    },
+    {
+      "civ": "civ_zhongguo",
+      "age": 2,
+      "path": "public/art/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "cell": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "alphaBounds": [
+        13,
+        112,
+        511,
+        463
+      ],
+      "effectiveSize": [
+        498,
+        351
+      ],
+      "footY": 463,
+      "leftBlank": 13,
+      "rightBlank": 1,
+      "centerOffset": [
+        6.0,
+        31.5
+      ]
+    },
+    {
+      "civ": "civ_byzantium",
+      "age": 2,
+      "path": "public/art/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "cell": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "alphaBounds": [
+        12,
+        94,
+        501,
+        461
+      ],
+      "effectiveSize": [
+        489,
+        367
+      ],
+      "footY": 461,
+      "leftBlank": 12,
+      "rightBlank": 11,
+      "centerOffset": [
+        0.5,
+        21.5
+      ]
+    },
+    {
+      "civ": "civ_frankia",
+      "age": 2,
+      "path": "public/art/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "cell": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "alphaBounds": [
+        5,
+        85,
+        501,
+        469
+      ],
+      "effectiveSize": [
+        496,
+        384
+      ],
+      "footY": 469,
+      "leftBlank": 5,
+      "rightBlank": 11,
+      "centerOffset": [
+        -3.0,
+        21.0
+      ]
+    },
+    {
+      "civ": "civ_britannia",
+      "age": 2,
+      "path": "public/art/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "cell": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "alphaBounds": [
+        13,
+        51,
+        512,
+        403
+      ],
+      "effectiveSize": [
+        499,
+        352
+      ],
+      "footY": 403,
+      "leftBlank": 13,
+      "rightBlank": 0,
+      "centerOffset": [
+        6.5,
+        -29.0
+      ]
+    },
+    {
+      "civ": "civ_japan",
+      "age": 2,
+      "path": "public/art/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "cell": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "alphaBounds": [
+        0,
+        42,
+        512,
+        407
+      ],
+      "effectiveSize": [
+        512,
+        365
+      ],
+      "footY": 407,
+      "leftBlank": 0,
+      "rightBlank": 0,
+      "centerOffset": [
+        0.0,
+        -31.5
+      ]
+    },
+    {
+      "civ": "civ_mongol",
+      "age": 2,
+      "path": "public/art/cities-age-2.webp",
+      "sha256": "da45066de81845ffeda9cb0ce07aa2fde20bfecd426b65622f694055a021478b",
+      "cell": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "alphaBounds": [
+        0,
+        78,
+        498,
+        407
+      ],
+      "effectiveSize": [
+        498,
+        329
+      ],
+      "footY": 407,
+      "leftBlank": 0,
+      "rightBlank": 14,
+      "centerOffset": [
+        -7.0,
+        -13.5
+      ]
+    }
+  ]
+}

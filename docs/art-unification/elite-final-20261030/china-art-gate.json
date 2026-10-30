@@ -1,0 +1,29 @@
+{
+  "scores": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    2,
+    2
+  ],
+  "total": 18,
+  "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+  "playerApproval": "APPROVED_3798a7f",
+  "reviewedSHA256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+  "independentReview": "待驗",
+  "hardGate": {
+    "anatomy": "PASS_SELF_REVIEW",
+    "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
+    "extraLimbs": "NONE_OBSERVED",
+    "criticalDefectOverridesScore": true
+  },
+  "reviewer": "Codex actual ArmyView card/detail render inspection and browser decoded512px RGB equality at320/390/1440, plus native512/128/64 real Art checks. Player approved source3798a7f; independent review remains pending.",
+  "notes": "Exact approved PNG pixels; fish-scale armor and low kneeling pose unchanged. Two connected hands/arms, one repeating-crossbow prop; original B control-ring styling not mechanically reconstructed. At64 pose/cape read, individual scales do not.",
+  "browserEvidence": "docs/art-unification/elite-final-20261030/browser/army/result.json",
+  "nativeEvidence": "docs/art-unification/elite-final-20261030/browser/gallery/result.json"
+}

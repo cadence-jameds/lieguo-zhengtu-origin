@@ -132,50 +132,6 @@
     "approver": null
   },
   {
-    "key": "light-cavalry",
-    "group": "units",
-    "subject": "Light cavalry: lightly protected medieval rider in leather coat, open helmet and modest round shield, unarmored bay horse, short spear lowered and trotting pose; much lighter than knight",
-    "path": "public/art/unified/units/light-cavalry.webp",
-    "artGate": {
-      "scores": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1,
-        2,
-        2,
-        2
-      ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual self-review, not an independent release approval",
-      "playerApproval": "待驗",
-      "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-      "browserEvidence": "docs/art-unification/browser/result.json",
-      "comparisonBoards": "docs/art-unification/boards/"
-    },
-    "role": "ARMY-PORTRAIT",
-    "batch": "army-cavalry",
-    "cropRect": [
-      2,
-      2,
-      508,
-      507
-    ],
-    "dimensions": [
-      512,
-      512
-    ],
-    "sha256": "3348b8b7ca04fe999a93e79473b3a3fd6083a6eab3a12d881a2bcc4b9e728943",
-    "bytes": 32014,
-    "atlasExtraction": null,
-    "alphaPolicy": "dark-opaque",
-    "approver": null
-  },
-  {
     "key": "ranger",
     "group": "units",
     "subject": "Ranger elite light cavalry: reinforced brigandine and steel helmet, curved saber raised, fast turning chestnut horse and larger saddle equipment; armor, weapon and pose different from light cavalry",
@@ -347,138 +303,6 @@
     ],
     "sha256": "2e185feff87143d8b617a5b8ed1ce8fa947f9ea2277256ee2f0ee42e601c0d82",
     "bytes": 24240,
-    "atlasExtraction": null,
-    "alphaPolicy": "dark-opaque",
-    "approver": null
-  },
-  {
-    "key": "elite.guard.civ_zhongguo",
-    "group": "units",
-    "subject": "Elite Chinese repeating-crossbow guard: heavy layered steel lamellar coat with shoulder plates and crested enclosed helmet, large repeating crossbow held raised diagonally, spare bolt case and forward kneeling stance; differs from ordinary Chinese guard in armor, weapon scale and pose",
-    "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
-    "artGate": {
-      "scores": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1,
-        2,
-        2,
-        2
-      ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual self-review, not an independent release approval",
-      "playerApproval": "待驗",
-      "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-      "browserEvidence": "docs/art-unification/browser/result.json",
-      "comparisonBoards": "docs/art-unification/boards/"
-    },
-    "role": "ARMY-PORTRAIT",
-    "batch": "army-elite-guards",
-    "cropRect": [
-      2,
-      2,
-      508,
-      493
-    ],
-    "dimensions": [
-      512,
-      512
-    ],
-    "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8",
-    "bytes": 36646,
-    "atlasExtraction": null,
-    "alphaPolicy": "dark-opaque",
-    "approver": null
-  },
-  {
-    "key": "elite.guard.civ_frankia",
-    "group": "units",
-    "subject": "Elite Frankish throwing-axe guard: steel breastplate over mail, great helmet with face open, paired heavy throwing axes and tall reinforced shield, lunging throwing pose; armor weapons and stance differ from ordinary",
-    "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
-    "artGate": {
-      "scores": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1,
-        2,
-        2,
-        2
-      ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual self-review, not an independent release approval",
-      "playerApproval": "待驗",
-      "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-      "browserEvidence": "docs/art-unification/browser/result.json",
-      "comparisonBoards": "docs/art-unification/boards/"
-    },
-    "role": "ARMY-PORTRAIT",
-    "batch": "army-elite-guards",
-    "cropRect": [
-      1026,
-      2,
-      508,
-      493
-    ],
-    "dimensions": [
-      512,
-      512
-    ],
-    "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6",
-    "bytes": 38750,
-    "atlasExtraction": null,
-    "alphaPolicy": "dark-opaque",
-    "approver": null
-  },
-  {
-    "key": "elite.guard.civ_japan",
-    "group": "units",
-    "subject": "Elite Japanese samurai: heavy black lacquered tosei-gusoku armor with large shoulder guards, face menpo and tall crest, long nodachi held in two hands above shoulder and aggressive forward stance; different helmet, weapon and posture",
-    "path": "public/art/unified/units/elite.guard.civ_japan.webp",
-    "artGate": {
-      "scores": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1,
-        2,
-        2,
-        2
-      ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual self-review, not an independent release approval",
-      "playerApproval": "待驗",
-      "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-      "browserEvidence": "docs/art-unification/browser/result.json",
-      "comparisonBoards": "docs/art-unification/boards/"
-    },
-    "role": "ARMY-PORTRAIT",
-    "batch": "army-elite-guards",
-    "cropRect": [
-      514,
-      500,
-      508,
-      522
-    ],
-    "dimensions": [
-      512,
-      512
-    ],
-    "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6",
-    "bytes": 36716,
     "atlasExtraction": null,
     "alphaPolicy": "dark-opaque",
     "approver": null
@@ -9275,49 +9099,6 @@
     "approver": null
   },
   {
-    "key": "knight",
-    "group": "units",
-    "path": "public/art/unified/units/knight.webp",
-    "artGate": {
-      "scores": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1,
-        2,
-        2,
-        2
-      ],
-      "total": 19,
-      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
-      "reviewer": "Codex visual self-review, not an independent release approval",
-      "playerApproval": "待驗",
-      "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
-      "browserEvidence": "docs/art-unification/browser/result.json",
-      "comparisonBoards": "docs/art-unification/boards/"
-    },
-    "role": "ARMY-PORTRAIT",
-    "batch": "army-knight-repair",
-    "cropRect": [
-      0,
-      0,
-      1254,
-      1254
-    ],
-    "dimensions": [
-      512,
-      512
-    ],
-    "sha256": "fc010986c483b58ce5fd74a520215d7a44dfdf878be62a50e6beefbb5df29d9d",
-    "bytes": 27358,
-    "atlasExtraction": null,
-    "alphaPolicy": "dark-opaque",
-    "approver": null
-  },
-  {
     "key": "elite.guard.civ_mongolia",
     "group": "units",
     "path": "public/art/unified/units/elite.guard.civ_mongolia.webp",
@@ -9489,5 +9270,664 @@
     "atlasExtraction": null,
     "alphaPolicy": "dark-opaque",
     "approver": null
+  },
+  {
+    "key": "elite.guard.civ_zhongguo",
+    "group": "units",
+    "subject": "Player-approved high-grade fish-scale armor with forward leg and grounded rear knee, repeating crossbow and cape; source3798a7f.",
+    "path": "public/art/unified/units/elite.guard.civ_zhongguo.approved-3798a7f.webp",
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "total": 18,
+      "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+      "playerApproval": "APPROVED_3798a7f",
+      "reviewedSHA256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+      "independentReview": "待驗",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "reviewer": "Codex actual ArmyView card/detail render inspection and browser decoded512px RGB equality at320/390/1440, plus native512/128/64 real Art checks. Player approved source3798a7f; independent review remains pending.",
+      "notes": "Exact approved PNG pixels; fish-scale armor and low kneeling pose unchanged. Two connected hands/arms, one repeating-crossbow prop; original B control-ring styling not mechanically reconstructed. At64 pose/cape read, individual scales do not.",
+      "browserEvidence": "docs/art-unification/elite-final-20261030/browser/army/result.json",
+      "nativeEvidence": "docs/art-unification/elite-final-20261030/browser/gallery/result.json"
+    },
+    "role": "ARMY-PORTRAIT",
+    "batch": "china-player-approved-3798a7f-runtime-20261030",
+    "cropRect": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "e12b39f6ba3ca10f10028611a892b890c46ac1c173b96a8cb5a0ea39abaf50db",
+    "bytes": 297710,
+    "atlasExtraction": null,
+    "alphaPolicy": "dark-opaque",
+    "approver": "PLAYER",
+    "approvedArtworkCommit": "3798a7f70fd76bfb5143a320a1e3703339a743a0",
+    "normalization": "Lossless WebP encoding of the exact approved512px PNG; no resizing, cropping, color changes or regeneration.",
+    "approvedPNG": {
+      "path": "docs/art-unification/elite-review-20261029/china-B-kneeling-20261029/china-B-kneeling-512.png",
+      "sha256": "80709f92bade96fe285617b56a138ec8604c07d80ad6653b6ac499251b70a30b"
+    },
+    "supersedes": {
+      "key": "elite.guard.civ_zhongguo",
+      "group": "units",
+      "subject": "Reinforced shoulders/cuirass and mature repeating crossbow with visible transverse bow.",
+      "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+      "artGate": {
+        "scores": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        "total": 19,
+        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+        "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+        "playerApproval": "待驗",
+        "reviewedSHA256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+        "hardGate": {
+          "anatomy": "PASS_SELF_REVIEW",
+          "equipmentAndGrip": "PASS_SELF_REVIEW",
+          "extraLimbs": "NONE_OBSERVED",
+          "criticalDefectOverridesScore": true
+        },
+        "notes": "Broader plated shoulders and cuirass, stronger neck/forearm protection; clearly curved-front mature repeating crossbow. V1 cage-like prop rejected, V4 selected with two original style anchors.",
+        "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+        "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+      },
+      "role": "ARMY-PORTRAIT",
+      "batch": "feedback-20261029-elite.guard.civ_zhongguo",
+      "cropRect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "def163fc3df9f3337396c32f7714acfbe332e0806ab3a100edd1e239819bfe83",
+      "bytes": 37630,
+      "atlasExtraction": null,
+      "alphaPolicy": "dark-opaque",
+      "approver": null,
+      "supersedes": {
+        "key": "elite.guard.civ_zhongguo",
+        "group": "units",
+        "subject": "Elite Chinese repeating-crossbow guard: heavy layered steel lamellar coat with shoulder plates and crested enclosed helmet, large repeating crossbow held raised diagonally, spare bolt case and forward kneeling stance; differs from ordinary Chinese guard in armor, weapon scale and pose",
+        "path": "public/art/unified/units/elite.guard.civ_zhongguo.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual self-review, not an independent release approval",
+          "playerApproval": "待驗",
+          "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+          "browserEvidence": "docs/art-unification/browser/result.json",
+          "comparisonBoards": "docs/art-unification/boards/"
+        },
+        "role": "ARMY-PORTRAIT",
+        "batch": "army-elite-guards",
+        "cropRect": [
+          2,
+          2,
+          508,
+          493
+        ],
+        "dimensions": [
+          512,
+          512
+        ],
+        "sha256": "9149e028921896cad058a2b51fb0008677c50eedfda70c830b99e43b516876c8",
+        "bytes": 36646,
+        "atlasExtraction": null,
+        "alphaPolicy": "dark-opaque",
+        "approver": null,
+        "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+        "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_zhongguo.webp"
+      },
+      "revision": "34be1b5c2dba64b2d84c4a8bfbc8656ad5d726c6",
+      "preservedOutput": "docs/art-unification/elite-final-20261030/before/elite.guard.civ_zhongguo.webp"
+    }
+  },
+  {
+    "key": "elite.guard.civ_japan",
+    "group": "units",
+    "subject": "Player-approved candidate1: human samurai in oni menpo and broad o-yoroi, two-handed katana overhead and forward step.",
+    "path": "public/art/unified/units/elite.guard.civ_japan.approved-candidate-1.webp",
+    "artGate": {
+      "role": "ARMY-PORTRAIT",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1
+      ],
+      "total": 18,
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW_OF_APPROVED_SOURCE",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "status": "PLAYER_APPROVED_RUNTIME_SELF_REVIEWED",
+      "playerApproval": "APPROVED_CANDIDATE_1",
+      "independentReview": "待驗",
+      "reviewedSHA256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+      "reviewer": "Player approved candidate1. Codex validates exact source pixels and actual ArmyView/detail plus native512/128/64 at320/390/1440; independent art review remains pending.",
+      "notes": "Human-worn forged oni menpo; overhead single drawn katana and two hands on one hilt reviewed at full scale. High arc remains at64; mask details do not. Waist auxiliary sheathed short-sword hilt remains visible, not a second drawn blade.",
+      "formalUIEffectLimit": "Now installed as approved Japanese Runtime; source self-review score remains18, no score increase claimed.",
+      "browserEvidence": "docs/art-unification/japan-approved-20261030/browser/army/result.json",
+      "nativeEvidence": "docs/art-unification/japan-approved-20261030/browser/gallery/result.json"
+    },
+    "role": "ARMY-PORTRAIT",
+    "batch": "japan-player-approved-candidate-1-runtime-20261030",
+    "cropRect": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8",
+    "bytes": 237346,
+    "atlasExtraction": null,
+    "alphaPolicy": "dark-opaque",
+    "approver": "PLAYER",
+    "approvedArtworkCommit": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+    "approvedCandidate": 1,
+    "normalization": "Byte-for-byte copy of the player-approved candidate1 512px lossless WebP. No generation, conversion, crop, resize or color changes to Runtime.",
+    "approvedCandidateSource": {
+      "path": "docs/art-unification/elite-final-20261030/japan/candidates/japan-1-oni-oyoroi-overhead.webp",
+      "sha256": "f9e55c7eb9babdfba36c98c63f7983b5b319d5c17b4cd5e60211eaf6dbebbda8"
+    },
+    "supersedes": {
+      "key": "elite.guard.civ_japan",
+      "group": "units",
+      "subject": "Advanced o-yoroi, kabuto, shoulder and limb protection; two-handed katana.",
+      "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+      "artGate": {
+        "scores": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          2,
+          2
+        ],
+        "total": 18,
+        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+        "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+        "playerApproval": "待驗",
+        "reviewedSHA256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+        "hardGate": {
+          "anatomy": "PASS_SELF_REVIEW",
+          "equipmentAndGrip": "PASS_SELF_REVIEW",
+          "extraLimbs": "NONE_OBSERVED",
+          "criticalDefectOverridesScore": true
+        },
+        "notes": "V1 rejected for tier readability. V2 adds broad iron cuirass, two large o-sode, menpo and reinforced kabuto/shikoro. Actual100px distinction clear; fine armor detail remains subtle at native64 (item08=1).",
+        "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+        "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+      },
+      "role": "ARMY-PORTRAIT",
+      "batch": "feedback-20261029-elite.guard.civ_japan",
+      "cropRect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "587edcaf65fb28af70f06fa065f81b6028d5c344fffa5864b7e7752d0b7ecc7a",
+      "bytes": 37626,
+      "atlasExtraction": null,
+      "alphaPolicy": "dark-opaque",
+      "approver": null,
+      "supersedes": {
+        "key": "elite.guard.civ_japan",
+        "group": "units",
+        "subject": "Elite Japanese samurai: heavy black lacquered tosei-gusoku armor with large shoulder guards, face menpo and tall crest, long nodachi held in two hands above shoulder and aggressive forward stance; different helmet, weapon and posture",
+        "path": "public/art/unified/units/elite.guard.civ_japan.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual self-review, not an independent release approval",
+          "playerApproval": "待驗",
+          "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+          "browserEvidence": "docs/art-unification/browser/result.json",
+          "comparisonBoards": "docs/art-unification/boards/"
+        },
+        "role": "ARMY-PORTRAIT",
+        "batch": "army-elite-guards",
+        "cropRect": [
+          514,
+          500,
+          508,
+          522
+        ],
+        "dimensions": [
+          512,
+          512
+        ],
+        "sha256": "4f5965f6128142970ce93ac28bb399ad42c31a3ef2b06480804294e00600e3c6",
+        "bytes": 36716,
+        "atlasExtraction": null,
+        "alphaPolicy": "dark-opaque",
+        "approver": null,
+        "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+        "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_japan.webp"
+      },
+      "revision": "262d9efaa23670d82abcb2c7e99a0a39446bc9ab",
+      "preservedOutput": "public/art/unified/units/elite.guard.civ_japan.webp"
+    }
+  },
+  {
+    "key": "light-cavalry",
+    "group": "units",
+    "subject": "One intact lance points right with horse travel, lightly armored rider and bare horse.",
+    "path": "public/art/unified/units/light-cavalry.webp",
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "One straight shaft: blunt left butt and single right/front tip; two hands, reins and forearm-strapped shield coherent. Four horse legs; light mail/leather, no horse plate.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "role": "ARMY-PORTRAIT",
+    "batch": "feedback-20261029-light-cavalry",
+    "cropRect": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "e13a3fd4d8296dcee28a01c67d0992201cc3a6016fe3026d18838a4ef089e2d5",
+    "bytes": 32092,
+    "atlasExtraction": null,
+    "alphaPolicy": "dark-opaque",
+    "approver": null,
+    "supersedes": {
+      "key": "light-cavalry",
+      "group": "units",
+      "subject": "Light cavalry: lightly protected medieval rider in leather coat, open helmet and modest round shield, unarmored bay horse, short spear lowered and trotting pose; much lighter than knight",
+      "path": "public/art/unified/units/light-cavalry.webp",
+      "artGate": {
+        "scores": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        "total": 19,
+        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+        "reviewer": "Codex visual self-review, not an independent release approval",
+        "playerApproval": "待驗",
+        "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+        "browserEvidence": "docs/art-unification/browser/result.json",
+        "comparisonBoards": "docs/art-unification/boards/"
+      },
+      "role": "ARMY-PORTRAIT",
+      "batch": "army-cavalry",
+      "cropRect": [
+        2,
+        2,
+        508,
+        507
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "3348b8b7ca04fe999a93e79473b3a3fd6083a6eab3a12d881a2bcc4b9e728943",
+      "bytes": 32014,
+      "atlasExtraction": null,
+      "alphaPolicy": "dark-opaque",
+      "approver": null,
+      "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+      "preservedOutput": "docs/art-unification/player-feedback-20261029/before/light-cavalry.webp"
+    }
+  },
+  {
+    "key": "knight",
+    "group": "units",
+    "subject": "Muted burgundy/ivory/iron, simpler mail and light horse equipment; heavy knight locked.",
+    "path": "public/art/unified/units/knight.webp",
+    "artGate": {
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+      "hardGate": {
+        "anatomy": "PASS_SELF_REVIEW",
+        "equipmentAndGrip": "PASS_SELF_REVIEW",
+        "extraLimbs": "NONE_OBSERVED",
+        "criticalDefectOverridesScore": true
+      },
+      "notes": "Muted burgundy/cream/iron, open face, mail and limited plates; mostly bare horse. Distinct image and posture from approved plated heavy knight; heavy file unchanged.",
+      "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+      "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+    },
+    "role": "ARMY-PORTRAIT",
+    "batch": "feedback-20261029-knight",
+    "cropRect": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "84636c60d5e0fec19e53ad4de05fedc93ee6cf012e3707c041e3535ea9a2bd73",
+    "bytes": 30290,
+    "atlasExtraction": null,
+    "alphaPolicy": "dark-opaque",
+    "approver": null,
+    "supersedes": {
+      "key": "knight",
+      "group": "units",
+      "path": "public/art/unified/units/knight.webp",
+      "artGate": {
+        "scores": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        "total": 19,
+        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+        "reviewer": "Codex visual self-review, not an independent release approval",
+        "playerApproval": "待驗",
+        "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+        "browserEvidence": "docs/art-unification/browser/result.json",
+        "comparisonBoards": "docs/art-unification/boards/"
+      },
+      "role": "ARMY-PORTRAIT",
+      "batch": "army-knight-repair",
+      "cropRect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "fc010986c483b58ce5fd74a520215d7a44dfdf878be62a50e6beefbb5df29d9d",
+      "bytes": 27358,
+      "atlasExtraction": null,
+      "alphaPolicy": "dark-opaque",
+      "approver": null,
+      "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+      "preservedOutput": "docs/art-unification/player-feedback-20261029/before/knight.webp"
+    }
+  },
+  {
+    "key": "elite.guard.civ_frankia",
+    "group": "units",
+    "subject": "Anatomical right hand single short-haft double-bitted axe; left hand holds blue/gold fleur-de-lis shield. Exactly two arms/hands.",
+    "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+    "artGate": {
+      "role": "ARMY-PORTRAIT",
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "total": 19,
+      "hardGate": "PASS_SELF_REVIEW",
+      "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+      "playerApproval": "待驗",
+      "reviewedSHA256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+      "reviewer": "Codex visual self-review: full raw/512px,128/64px boards,320/390/1440 browser Art gallery and27 actual ArmyView cases; player/independent approval pending",
+      "limits": "No independent/player acceptance. Any extra arm/hand, second axe, shaft through body or invalid grip is a hard FAIL regardless of total.",
+      "notes": "Exactly one compact double-bitted axe on anatomical right hand; anatomical left arm bent to held shield. Left palm/handle are partially occluded by shield; visible wrist/partial glove and shield connection reviewed, concealed fingers not independently countable. No third hand/arm or second axe observed, no shaft through body. Shield blue/gold fleur-de-lis, mail/cape preserved.",
+      "browserEvidence": [
+        "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+        "docs/art-unification/elite-review-20261029/browser/army/result.json"
+      ]
+    },
+    "role": "ARMY-PORTRAIT",
+    "batch": "elite-review-20261029-frankia-single-hand",
+    "cropRect": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+    "bytes": 36062,
+    "atlasExtraction": null,
+    "alphaPolicy": "dark-opaque",
+    "approver": null,
+    "supersedes": {
+      "key": "elite.guard.civ_frankia",
+      "group": "units",
+      "subject": "Single double-bitted axe, exactly two hands; blue-gold shield strapped to back.",
+      "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+      "artGate": {
+        "scores": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        "total": 19,
+        "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+        "reviewer": "Codex visual review of full source, native64, actual ArmyView100px and mobile detail74px; not independent/player approval",
+        "playerApproval": "待驗",
+        "reviewedSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+        "hardGate": {
+          "anatomy": "PASS_SELF_REVIEW",
+          "equipmentAndGrip": "PASS_SELF_REVIEW",
+          "extraLimbs": "NONE_OBSERVED",
+          "criticalDefectOverridesScore": true
+        },
+        "notes": "Two visible arms/hands grip one double-bitted axe; shield supported by leather baldric on the back; no third hand. Blue/gold motif retained. Full raw, hand detail, native64 and actual100px card reviewed.",
+        "browserEvidence": "docs/art-unification/player-feedback-20261029/browser/units/result.json",
+        "comparisonBoards": "docs/art-unification/player-feedback-20261029/boards/"
+      },
+      "role": "ARMY-PORTRAIT",
+      "batch": "feedback-20261029-elite.guard.civ_frankia",
+      "cropRect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+      "bytes": 33486,
+      "atlasExtraction": null,
+      "alphaPolicy": "dark-opaque",
+      "approver": null,
+      "supersedes": {
+        "key": "elite.guard.civ_frankia",
+        "group": "units",
+        "subject": "Elite Frankish throwing-axe guard: steel breastplate over mail, great helmet with face open, paired heavy throwing axes and tall reinforced shield, lunging throwing pose; armor weapons and stance differ from ordinary",
+        "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+        "artGate": {
+          "scores": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2
+          ],
+          "total": 19,
+          "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+          "reviewer": "Codex visual self-review, not an independent release approval",
+          "playerApproval": "待驗",
+          "notes": "與母圖有輕微筆觸／細節密度差異；Codex 自評不是玩家核准。",
+          "browserEvidence": "docs/art-unification/browser/result.json",
+          "comparisonBoards": "docs/art-unification/boards/"
+        },
+        "role": "ARMY-PORTRAIT",
+        "batch": "army-elite-guards",
+        "cropRect": [
+          1026,
+          2,
+          508,
+          493
+        ],
+        "dimensions": [
+          512,
+          512
+        ],
+        "sha256": "22c105ca2f62783caee72801b2f60d704d14f3df80a07dfebde2d1e11845d3c6",
+        "bytes": 38750,
+        "atlasExtraction": null,
+        "alphaPolicy": "dark-opaque",
+        "approver": null,
+        "revision": "5314e0c6c0b450d3a74f0bb7365b13a831bdbdf5",
+        "preservedOutput": "docs/art-unification/player-feedback-20261029/before/elite.guard.civ_frankia.webp"
+      },
+      "revision": "8736bad811a7c372c59881b143e4c75bd659c5af",
+      "preservedOutput": "docs/art-unification/elite-review-20261029/before/elite.guard.civ_frankia.webp"
+    }
   }
 ]

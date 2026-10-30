@@ -1,0 +1,37 @@
+{
+  "key": "elite.guard.civ_frankia",
+  "path": "public/art/unified/units/elite.guard.civ_frankia.webp",
+  "base": "8736bad811a7c372c59881b143e4c75bd659c5af",
+  "previousSHA256": "7a0edf058fb8e7699192ce5108c96dc8d1581f42e3eded2e109a56b0eced3930",
+  "sha256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+  "source": "docs/art-unification/elite-review-20261029/raw/frankia-single-hand-v1.png",
+  "sourceSha256": "d18eb42ab6777a37fde2d75d27e49119ad7ae410a646be82f61c8daf9348a8a8",
+  "review": {
+    "role": "ARMY-PORTRAIT",
+    "scores": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2
+    ],
+    "total": 19,
+    "hardGate": "PASS_SELF_REVIEW",
+    "status": "SELF_REVIEW_CANDIDATE_PLAYER_PENDING",
+    "playerApproval": "待驗",
+    "reviewedSHA256": "4ff30bf3abb4cc5bf24fe3798503125a475e34db75f536593c721d96ddc9b39b",
+    "reviewer": "Codex visual self-review: full raw/512px,128/64px boards,320/390/1440 browser Art gallery and27 actual ArmyView cases; player/independent approval pending",
+    "limits": "No independent/player acceptance. Any extra arm/hand, second axe, shaft through body or invalid grip is a hard FAIL regardless of total.",
+    "notes": "Exactly one compact double-bitted axe on anatomical right hand; anatomical left arm bent to held shield. Left palm/handle are partially occluded by shield; visible wrist/partial glove and shield connection reviewed, concealed fingers not independently countable. No third hand/arm or second axe observed, no shaft through body. Shield blue/gold fleur-de-lis, mail/cape preserved.",
+    "browserEvidence": [
+      "docs/art-unification/elite-review-20261029/browser/candidates/result.json",
+      "docs/art-unification/elite-review-20261029/browser/army/result.json"
+    ]
+  },
+  "batch": "elite-review-20261029-frankia-single-hand"
+}
