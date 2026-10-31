@@ -1,0 +1,544 @@
+{
+  "sourceSHA256": "7d3dd13a383365d7dcfa25d7a756f092abc17fff931f0baaf85335f80dcdb31a",
+  "source": "artifacts/p0c10-attempts/regression-full-initial.json",
+  "passed": 2146,
+  "failed": 32,
+  "failures": [
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5BattleLab.test.tsx",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "desktop: AI selection, presets, walls, siege, finite stock and real scout command work through the isolated client",
+        "status": "failed",
+        "title": "desktop: AI selection, presets, walls, siege, finite stock and real scout command work through the isolated client",
+        "duration": 2160.4630399999996,
+        "failureMessages": [
+          "AssertionError: expected [] to have a length of 1 but got +0\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5BattleLab.test.tsx:50:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5BattleLab.test.tsx",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "mobile: AI selection, presets, walls, siege, finite stock and real scout command work through the isolated client",
+        "status": "failed",
+        "title": "mobile: AI selection, presets, walls, siege, finite stock and real scout command work through the isolated client",
+        "duration": 1539.2936799999998,
+        "failureMessages": [
+          "AssertionError: expected [] to have a length of 1 but got +0\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5BattleLab.test.tsx:50:286\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5BattleLab.test.tsx",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "user-triggered incoming and 100X setup are explicit commands; close returns without changing the base",
+        "status": "failed",
+        "title": "user-triggered incoming and 100X setup are explicit commands; close returns without changing the base",
+        "duration": 727.8516520000003,
+        "failureMessages": [
+          "TypeError: Cannot read properties of undefined (reading 'ownerFactionId')\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5BattleLab.test.tsx:56:349\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 manual test fixture and isolation"
+        ],
+        "fullName": "B5 manual test fixture and isolation reset, save, reports and import leave original current/authority/Recovery/BattleReports byte-for-byte unchanged; normal imports cannot accept a lab file",
+        "status": "failed",
+        "title": "reset, save, reports and import leave original current/authority/Recovery/BattleReports byte-for-byte unchanged; normal imports cannot accept a lab file",
+        "duration": 835.3719170000004,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:31:293\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 manual test fixture and isolation"
+        ],
+        "fullName": "B5 manual test fixture and isolation failed reset or battle transaction never publishes a partial fixture, report, receipt or owner; retry resolves once",
+        "status": "failed",
+        "title": "failed reset or battle transaction never publishes a partial fixture, report, receipt or owner; retry resolves once",
+        "duration": 956.3470120000002,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:40:9\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports raid respects actual survivor capacity, preserves wall/owner/buildings, carries loot and returns through a saved Formal mission",
+        "status": "failed",
+        "title": "raid respects actual survivor capacity, preserves wall/owner/buildings, carries loot and returns through a saved Formal mission",
+        "duration": 419.643544999999,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:45:216\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports scout 10 versus five counters uses strict >, immutable arrival snapshot and return-only delivery",
+        "status": "failed",
+        "title": "scout 10 versus five counters uses strict >, immutable arrival snapshot and return-only delivery",
+        "duration": 410.3991350000015,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:49:118\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports scout 6 versus five counters uses strict >, immutable arrival snapshot and return-only delivery",
+        "status": "failed",
+        "title": "scout 6 versus five counters uses strict >, immutable arrival snapshot and return-only delivery",
+        "duration": 618.5246299999999,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:49:118\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports scout 1 versus five counters uses strict >, immutable arrival snapshot and return-only delivery",
+        "status": "failed",
+        "title": "scout 1 versus five counters uses strict >, immutable arrival snapshot and return-only delivery",
+        "duration": 554.7810950000021,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:49:118\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports empty target conquest applies real ram and catapult siege, then changes owner with durable resolution and reports",
+        "status": "failed",
+        "title": "empty target conquest applies real ram and catapult siege, then changes owner with durable resolution and reports",
+        "duration": 344.62475899999845,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:54:121\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports 50X conquest survives mid-battle reload/export/import with 10X tactical cap and no duplicated resolution",
+        "status": "failed",
+        "title": "50X conquest survives mid-battle reload/export/import with 10X tactical cap and no duplicated resolution",
+        "duration": 292.83310600000186,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:57:127\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports 100X conquest survives mid-battle reload/export/import with 10X tactical cap and no duplicated resolution",
+        "status": "failed",
+        "title": "100X conquest survives mid-battle reload/export/import with 10X tactical cap and no duplicated resolution",
+        "duration": 355.18983300000036,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:17:128)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:57:127\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports enemy raid uses enemy issuer and Formal march, yields a player defense report, and is limited to once per reset",
+        "status": "failed",
+        "title": "enemy raid uses enemy issuer and Formal march, yields a player defense report, and is limited to once per reset",
+        "duration": 338.81536699999924,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.incoming (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:45:15)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:60:186\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports enemy conquest uses enemy issuer and Formal march, yields a player defense report, and is limited to once per reset",
+        "status": "failed",
+        "title": "enemy conquest uses enemy issuer and Formal march, yields a player defense report, and is limited to once per reset",
+        "duration": 386.59330200000113,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.incoming (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:45:15)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:60:186\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts",
+      "assertion": {
+        "ancestorTitles": [
+          "B5 lab orders run the existing resolver, scheduler and reports"
+        ],
+        "fullName": "B5 lab orders run the existing resolver, scheduler and reports writes independently inspectable B5 lab evidence",
+        "status": "failed",
+        "title": "writes independently inspectable B5 lab evidence",
+        "duration": 1.7297469999975874,
+        "failureMessages": [
+          "AssertionError: expected 0 to be greater than or equal to 9\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.test.ts:62:230\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5LabV91.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "real lab event stepping, live battle, reload and export/import preserve all 12 siege rounds and final failure",
+        "status": "failed",
+        "title": "real lab event stepping, live battle, reload and export/import preserve all 12 siege rounds and final failure",
+        "duration": 515.859509,
+        "failureMessages": [
+          "Error: 目標仍在新手保護中。\n    at B5LabSession.submit (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:38:40)\n    at B5LabSession.order (/tmp/lieguo-verification-43lFVc/src/game/developer/B5Lab.ts:35:288)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5LabV91.test.ts:9:11\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/B5LabWorker.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "real lab Worker queues requests, uses isolated persistence, recovers after rejected commands and reads only its own report/intel campaign",
+        "status": "failed",
+        "title": "real lab Worker queues requests, uses isolated persistence, recovers after rejected commands and reads only its own report/intel campaign",
+        "duration": 768.165436,
+        "failureMessages": [
+          "AssertionError: expected [] to have a length of 1 but got +0\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2137:20)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/B5LabWorker.test.ts:12:204\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/developer/developer.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "all presets/six civilizations use valid native v85 worlds and keep full entity counts",
+        "status": "failed",
+        "title": "all presets/six civilizations use valid native v85 worlds and keep full entity counts",
+        "duration": 379.518605,
+        "failureMessages": [
+          "AssertionError: expected 'v97-p0c10.1' to be 'v91-b5.2' // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/developer/developer.test.ts:12:224\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/gateDeltaR4.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "B1 player rebirth cannot restore old engaged troop ownership or permit a new conquest",
+        "status": "failed",
+        "title": "B1 player rebirth cannot restore old engaged troop ownership or permit a new conquest",
+        "duration": 431.7867269999997,
+        "failureMessages": [
+          "AssertionError: 僅未結束本局的滅國玩家可復國。: expected 'rejected' to be 'committed' // Object.is equality\n    at issue (/tmp/lieguo-verification-43lFVc/src/game/formal/combatTestSupport.ts:9:176)\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/gateDeltaR4.test.ts:21:281\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/gateDeltaR4.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "M1 foreign castle capture cancels special work and dependencies; owner has second city=false",
+        "status": "failed",
+        "title": "M1 foreign castle capture cancels special work and dependencies; owner has second city=false",
+        "duration": 643.7371919999987,
+        "failureMessages": [
+          "AssertionError: expected +0 to be 1 // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/gateDeltaR4.test.ts:30:1380\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/integrationR4.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth",
+        "status": "failed",
+        "title": "R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth",
+        "duration": 1052.3766540000001,
+        "failureMessages": [
+          "AssertionError: 滅國期間世界已暫停。: expected 'rejected' to be 'committed' // Object.is equality\n    at issue (/tmp/lieguo-verification-43lFVc/src/game/formal/combatTestSupport.ts:9:176)\n    at act (/tmp/lieguo-verification-43lFVc/src/game/formal/integrationR4.test.ts:36:68)\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/integrationR4.test.ts:104:5\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/mountains31.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "old terrain campaigns are rejected without changing cities/sites, in-flight routes/timers, receipts or diagonal neighbours",
+        "status": "failed",
+        "title": "old terrain campaigns are rejected without changing cities/sites, in-flight routes/timers, receipts or diagonal neighbours",
+        "duration": 264.8691639999997,
+        "failureMessages": [
+          "AssertionError: 目標仍在新手保護中。: expected 'rejected' to be 'committed' // Object.is equality\n    at issue (/tmp/lieguo-verification-43lFVc/src/game/formal/combatTestSupport.ts:9:176)\n    at dispatch (/tmp/lieguo-verification-43lFVc/src/game/formal/combatTestSupport.ts:10:200)\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/mountains31.test.ts:31:322\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/offlineCooperative.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "cooperative replay matches atomic synchronous replay exactly, even across same-time events",
+        "status": "failed",
+        "title": "cooperative replay matches atomic synchronous replay exactly, even across same-time events",
+        "duration": 43.86700499999995,
+        "failureMessages": [
+          "AssertionError: expected { at: 1860000, target: 7200000, …(1) } to deeply equal { at: 7200000, target: 7200000, …(1) }\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/offlineCooperative.test.ts:25:27\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/offlineCooperative.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "worker offline catch-up preserves summary, reports and final world without modifying the input",
+        "status": "failed",
+        "title": "worker offline catch-up preserves summary, reports and final world without modifying the input",
+        "duration": 28.44788299999999,
+        "failureMessages": [
+          "AssertionError: expected 0.25833333333333336 to be 1 // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/offlineCooperative.test.ts:36:22\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/playtest26.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "developer controls use the current campaign, 100X foreground and normal offline clock and normal 10X conquest ceiling",
+        "status": "failed",
+        "title": "developer controls use the current campaign, 100X foreground and normal offline clock and normal 10X conquest ceiling",
+        "duration": 287.41087200000004,
+        "failureMessages": [
+          "AssertionError: expected +0 to be 72000000 // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/playtest26.test.ts:13:388\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/replayP0.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "receipt indexes preserve any applied duplicate match and the original duplicate diagnostics",
+        "status": "failed",
+        "title": "receipt indexes preserve any applied duplicate match and the original duplicate diagnostics",
+        "duration": 109.5566689999996,
+        "failureMessages": [
+          "AssertionError: expected [ 'Required', 'Required', …(2) ] to include 'Duplicate typed identity'\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2067:15)\n    at Proxy.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:1934:14)\n    at Proxy.methodWrapper (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1700:25)\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/replayP0.test.ts:245:61\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "status": "failed",
+        "title": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "duration": 187.76174999999785,
+        "failureMessages": [
+          "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts:127:239\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "status": "failed",
+        "title": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "duration": 216.30978699999832,
+        "failureMessages": [
+          "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts:127:239\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "status": "failed",
+        "title": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "duration": 218.1160140000029,
+        "failureMessages": [
+          "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts:127:239\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "status": "failed",
+        "title": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "duration": 24986.616758999997,
+        "failureMessages": [
+          "AssertionError: expected { enabled: true, speed: 100, …(1) } to deeply equal { enabled: true, speed: 100 }\n    at /tmp/lieguo-verification-43lFVc/src/game/formal/runtime.test.ts:183:297\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/presentation/p0cDemoUi.test.tsx",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+        "status": "failed",
+        "title": "C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules",
+        "duration": 195.47215299999993,
+        "failureMessages": [
+          "AssertionError: expected '<link rel=\"preload\" as=\"image\" href=\"…' to contain '世界仍持續運行'\n    at /tmp/lieguo-verification-43lFVc/src/game/presentation/p0cDemoUi.test.tsx:18:418\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    },
+    {
+      "suite": "/tmp/lieguo-verification-43lFVc/src/game/presentation/worldDynamicsR3.test.ts",
+      "assertion": {
+        "ancestorTitles": [],
+        "fullName": "all100 actual Formal ArmyIds render, cached repeated frames never mutate scheduler or private armies",
+        "status": "failed",
+        "title": "all100 actual Formal ArmyIds render, cached repeated frames never mutate scheduler or private armies",
+        "duration": 392.15115700000007,
+        "failureMessages": [
+          "AssertionError: 目標仍在新手保護中。: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/lieguo-verification-43lFVc/src/game/presentation/worldDynamicsR3.test.ts:14:609\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ],
+        "meta": {},
+        "tags": [],
+        "benchmarks": []
+      }
+    }
+  ]
+}

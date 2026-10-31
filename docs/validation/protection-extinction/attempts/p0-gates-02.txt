@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/check-elite-review.py", line 20, in <module>
+    else:assert sha(R/p)==h or accepts_ui_successor(p,h),('Unrequested change',p)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Unrequested change', 'src/game/developer/developer.test.ts')
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/check-player-feedback.py", line 14, in <module>
+    active=load(successor);assert active['previousSHA256']==r['sha256'] and sha(R/r['path'])==active['sha256'];subprocess.run([sys.executable,str(R/'scripts/check-elite-review.py')],cwd=R,check=True)
+                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '/workspace/lieguo-zhengtu-origin/scripts/check-elite-review.py']' returned non-zero exit status 1.
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/check-city-visuals.py", line 15, in <module>
+    subprocess.run([sys.executable,str(R/'scripts/check-player-feedback.py')],cwd=R,check=True);validated=True
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '/workspace/lieguo-zhengtu-origin/scripts/check-player-feedback.py']' returned non-zero exit status 1.

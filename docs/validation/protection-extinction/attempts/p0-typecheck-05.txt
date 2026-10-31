@@ -1,0 +1,12 @@
+
+> guozhan-game-mvp@0.30.50 typecheck
+> tsc --noEmit
+
+src/game/formal/protectionExtinctionP0C10.test.ts(14,27): error TS6133: 'commandId' is declared but its value is never read.
+src/game/formal/protectionExtinctionP0C10.test.ts(15,1): error TS6133: 'validateFormalWorld' is declared but its value is never read.
+src/game/formal/protectionExtinctionP0C10.test.ts(88,329): error TS2339: Property 'decisions' does not exist on type 'Autonomy'.
+src/game/formal/protectionExtinctionP0C10.test.ts(88,381): error TS2339: Property 'decisions' does not exist on type 'Autonomy'.
+src/game/formal/protectionExtinctionP0C10.test.ts(96,12): error TS2345: Argument of type 'FormalTransition' is not assignable to parameter of type 'FormalWorld'.
+  Type 'FormalTransition' is missing the following properties from type 'FormalWorld': kind, metadata, campaignId, fixture, and 15 more.
+src/game/formal/protectionExtinctionP0C10.test.ts(119,55): error TS2339: Property 'startCampaign' does not exist on type 'FormalPersistence'.
+src/game/formal/protectionExtinctionP0C10.test.ts(119,186): error TS2345: Argument of type 'number' is not assignable to parameter of type '(stage: "offline" | "read" | "save", fraction?: number | undefined, events?: number | undefined) => void'.

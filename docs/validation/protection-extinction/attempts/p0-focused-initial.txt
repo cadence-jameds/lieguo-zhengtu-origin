@@ -1,0 +1,81 @@
+
+ RUN  v5.0.0 /workspace/lieguo-zhengtu-origin
+
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > new native world grants all 100 factions exactly 48 world hours, all owned cities, with no new polling events 908ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > newbie protection ends on accepted city scout, survives rejected commands and has one durable notification 298ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > rebirth protection ends on accepted city scout, survives rejected commands and has one durable notification 219ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > wild scout is legal during protection and never ends it 281ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > wild raid is legal during protection and never ends it 199ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > AI city scouts follow the same break rule; a protected player rejects AI attacks atomically 227ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects scout at admission and arrival without damage or intel 139ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects raid at admission and arrival without damage or intel 132ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects conquest at admission and arrival without damage or intel 129ms
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protection acquired during a live siege stops damage and keeps exactly one final receipt 145ms
+   → expected [] to have a length of 1 but got +0
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > war ends protection only after legal diplomacy; developer shield cannot restart or disable faction protection 175ms
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 1X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 347ms
+   → Cannot read properties of undefined (reading 'length')
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 3X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 468ms
+   → Cannot read properties of undefined (reading 'length')
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 6X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 278ms
+   → Cannot read properties of undefined (reading 'length')
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 10X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 280ms
+   → Cannot read properties of undefined (reading 'length')
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 25X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 278ms
+   → Cannot read properties of undefined (reading 'length')
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > offline replay stops at the loss, reports only the actual elapsed world duration, and repeated loads stay frozen 146ms
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > losing a non-final city never pauses; AI extinction stays permanent 207ms
+   → Cannot read properties of undefined (reading 'filter')
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > free coordinates use Formal terrain, city, wild/cooldown and reservations; invalid submissions are atomic 323ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > repeated rebirth retains civilization, age and tech, creates 400 people/zero troops/600 each, resets only protection and cannot undo end 644ms
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > paused checksum, backups, restore, full report history and corruption recovery preserve the barrier 144ms
+   → db.startCampaign is not a function
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protection acquired during a live siege stops damage and keeps exactly one final receipt
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ src/game/formal/protectionExtinctionP0C10.test.ts:67:232
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 1X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 3X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 6X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 10X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 25X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+TypeError: Cannot read properties of undefined (reading 'length')
+ ❯ src/game/formal/protectionExtinctionP0C10.test.ts:88:339
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > losing a non-final city never pauses; AI extinction stays permanent
+TypeError: Cannot read properties of undefined (reading 'filter')
+ ❯ arrive src/game/formal/combatTestSupport.ts:11:63
+
+ ❯ src/game/formal/protectionExtinctionP0C10.test.ts:96:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > paused checksum, backups, restore, full report history and corruption recovery preserve the barrier
+TypeError: db.startCampaign is not a function
+ ❯ src/game/formal/protectionExtinctionP0C10.test.ts:119:55
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 13 passed (21)
+   Start at  08:06:32
+   Duration  7.02s (tests 87%, transform 11%, import 2%)
+

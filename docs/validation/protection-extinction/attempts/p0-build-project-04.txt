@@ -1,0 +1,54 @@
+
+> guozhan-game-mvp@0.30.50 prebuild
+> npm run release:prepare
+
+
+> guozhan-game-mvp@0.30.50 release:prepare
+> node scripts/prepare-release.mjs
+
+{"version":"0.30.79","date":"2026-10-31","commitSha":"03094c813a666e65d2ec3e5af67acaa36d001978","dirty":false}
+
+> guozhan-game-mvp@0.30.50 build
+> tsc --noEmit && vite build
+
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 215 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package.json                                              0.11 kB │ gzip:   0.12 kB
+dist/sw-release-03094c813a666e65d2ec3e5af67acaa36d001978.js    0.19 kB
+dist/manifest.webmanifest                                      0.33 kB
+dist/index.html                                                0.85 kB │ gzip:   0.53 kB
+dist/release/latest.svg                                        1.04 kB │ gzip:   0.60 kB
+dist/assets/mapRaster.worker-Bm8EOm9D.js                       3.43 kB
+dist/CHANGELOG.md                                             24.37 kB
+dist/release/index.html                                       28.55 kB │ gzip:  12.69 kB
+dist/version.json                                             28.83 kB │ gzip:  12.07 kB
+dist/assets/runtime.worker-CS5ssNp_.js                       610.34 kB
+dist/assets/index-9bJe-W6b.css                               197.97 kB │ gzip:  39.96 kB
+dist/assets/workbox-window.prod.es5-Cch4wiA5.js                5.71 kB │ gzip:   2.25 kB │ map:    13.08 kB
+dist/assets/index-CTtX-miy.js                                927.24 kB │ gzip: 281.38 kB │ map: 2,696.77 kB
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vite:css (21%)
+  - vite:worker (19%)
+  - vite:prepare-out-dir (18%)
+  - vite:build-import-analysis (16%)
+  - vite:worker-import-meta-url (12%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 850 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 5.14s
+
+PWA v1.3.0
+mode      generateSW
+precache  394 entries (72743.27 KiB)
+files generated
+  dist/sw.js.map
+  dist/sw.js
+  dist/workbox-9c191d2f.js.map
+  dist/workbox-9c191d2f.js

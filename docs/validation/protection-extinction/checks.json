@@ -1,0 +1,250 @@
+{
+  "date": "2026-10-31",
+  "timezone": "Asia/Taipei",
+  "baseCommit": "9e3233090b634cc38ef280525444a32d0714ae47",
+  "demoReferenceCommit": "44728f749044c1a5f1ad4fe47f1eccc391c7d9b2",
+  "engineSourceCommit": "acc818682f707eb66d72695e2d0e3a30cfb39cc3",
+  "finalSourceCommit": "03094c813a666e65d2ec3e5af67acaa36d001978",
+  "typecheck": "PASS",
+  "projectBuild": "PASS",
+  "pwaScopeAndFallback": "PASS",
+  "releaseArtifacts": "PASS",
+  "focused": {
+    "passed": 35,
+    "failed": 0,
+    "tests": [
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "Worker 1X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "Worker 3X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "Worker 6X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "Worker 10X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "Worker 25X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "failed terminal save is invisible and a retry commits the receipt exactly once",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/extinctionWorkerP0C10.test.ts",
+        "name": "away/resume, re-load and ended campaign preserve a stopped Worker clock and never clear saves",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection new native world grants all 100 factions exactly 48 world hours, all owned cities, with no new polling events",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection newbie protection ends on accepted city scout, survives rejected commands and has one durable notification",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection rebirth protection ends on accepted city scout, survives rejected commands and has one durable notification",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection wild scout is legal during protection and never ends it",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection wild raid is legal during protection and never ends it",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection AI city scouts follow the same break rule; a protected player rejects AI attacks atomically",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection protected city rejects scout at admission and arrival without damage or intel",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection protected city rejects raid at admission and arrival without damage or intel",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection protected city rejects conquest at admission and arrival without damage or intel",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection protection acquired during a live siege stops damage and keeps exactly one final receipt",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 unified faction protection war ends protection only after legal diplomacy; developer shield cannot restart or disable faction protection",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth 1X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth 3X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth 6X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth 10X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth 25X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth two simultaneous city arrivals keep the unprocessed army and receipt boundary across save, rebirth and same-time replay",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth a pending combat round at the freeze time remains checksummed and resumes once after rebirth",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth offline replay stops at the loss, reports only the actual elapsed world duration, and repeated loads stay frozen",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth losing a non-final city never pauses; AI extinction stays permanent",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth a persisted, travelling AI settlement reservation rejects a stale rebirth preview inside the reducer without fallback",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth free coordinates use Formal terrain, city, wild/cooldown and reservations; invalid submissions are atomic",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth repeated rebirth retains civilization, age and tech, creates 400 people/zero troops/600 each, resets only protection and cannot undo end",
+        "status": "passed"
+      },
+      {
+        "suite": "game/formal/protectionExtinctionP0C10.test.ts",
+        "name": "P0-C-10 exact extinction barrier and rebirth paused checksum, backups, restore, full report history and corruption recovery preserve the barrier",
+        "status": "passed"
+      },
+      {
+        "suite": "game/presentation/extinctionP0C10.test.tsx",
+        "name": "all defeat operations preserve the frozen save; ending needs a second click and can be cancelled",
+        "status": "passed"
+      },
+      {
+        "suite": "game/presentation/extinctionP0C10.test.tsx",
+        "name": "candidate and map shortcuts only preview; invalid XY cannot submit, and confirmation uses exact chosen coordinates",
+        "status": "passed"
+      },
+      {
+        "suite": "game/presentation/extinctionP0C10.test.tsx",
+        "name": "ended campaign has no rebirth or end controls and still provides record operations",
+        "status": "passed"
+      },
+      {
+        "suite": "game/presentation/extinctionP0C10.test.tsx",
+        "name": "protection shows both world/real duration and the stored early reason without mutating the world",
+        "status": "passed"
+      }
+    ]
+  },
+  "fullRegression": {
+    "passed": 2184,
+    "failed": 0,
+    "skipped": 1,
+    "rawSHA256": "f49d6e2e99335175c2ff7c1bad769a79e2540e41ae8ab030409af5ebca5c79dc",
+    "rawReport": "artifacts/integration/regression-full.json",
+    "sourceCommit": "acc818682f707eb66d72695e2d0e3a30cfb39cc3",
+    "laterDelta": "Only ExtinctionView mobile layout class; separately checked by final Typecheck/Build/browser. GitHub CI runs complete regression on latest PR HEAD.",
+    "skippedTests": [
+      "user late-game save remains valid after six more world hours"
+    ]
+  },
+  "gates": {
+    "city": {
+      "status": "PASS",
+      "tests": 10,
+      "log": "attempts/p0-gate-city-04.txt"
+    },
+    "mobile": {
+      "status": "PASS",
+      "tests": 3,
+      "log": "attempts/p0-gate-mobile-04.txt"
+    },
+    "growth": {
+      "status": "PASS",
+      "tests": 3,
+      "log": "attempts/p0-gate-growth-04.txt"
+    },
+    "recruit": {
+      "status": "PASS",
+      "tests": 3,
+      "log": "attempts/p0-gate-recruit-04.txt"
+    },
+    "p0c10": {
+      "status": "PASS",
+      "tests": 3,
+      "log": "attempts/p0-gate-p0c10-04.txt"
+    }
+  },
+  "browser": {
+    "status": "PASS",
+    "browser": "154.0.8037.57",
+    "viewports": [
+      "1440x900",
+      "320x568",
+      "390x844"
+    ],
+    "record": "browser/browser-result.json"
+  },
+  "physicalAndroid": "PENDING; no physical-device acceptance",
+  "historicalGates": {
+    "B5E1": "HOLD",
+    "Astra": "not declared PASS"
+  },
+  "deployment": "NOT PERFORMED",
+  "merge": "NOT PERFORMED",
+  "ci": "See latest PR HEAD checks and final delivery; no release acceptance claim."
+}

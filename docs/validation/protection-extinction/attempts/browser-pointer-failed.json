@@ -1,0 +1,31 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "production build; synthetic saves; real Worker and IndexedDB; emulation is not Android physical-device acceptance",
+  "cases": [
+    {
+      "viewport": "1440x900",
+      "status": "PASS",
+      "frozenAt": 190919,
+      "checks": [
+        "defeat actions",
+        "real terminal report",
+        "full export",
+        "home remains frozen",
+        "reload remains frozen",
+        "invalid XY",
+        "candidate preview",
+        "map without city",
+        "map pointer selection",
+        "exact confirmed rebirth",
+        "48h rebirth shield",
+        "cancel/end/no rebirth",
+        "new campaign entrance",
+        "new protection world/real time",
+        "no viewport overflow"
+      ]
+    }
+  ],
+  "errors": [
+    "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('canvas.map-overlay')\u001b[22m\n\u001b[2m    - locator resolved to <canvas width=\"320\" tabindex=\"0\" height=\"463\" class=\"map-overlay\" data-render-ms=\"4.30\" data-background-redraws=\"7\" data-camera=\"{\"x\":0,\"y\":7040,\"z\":0.75}\" aria-label=\"正式384×384等距世界地圖，可拖曳和縮放；方向鍵移動，Enter選取\" data-terrain-cache=\"{\"tiles\":0,\"bytes\":468512,\"pending\":10,\"hits\":0,\"misses\":1}\" data-special-fields=\"{\"visited\":0,\"misses\":0,\"markers\":0,\"lodHidden\":false,\"cacheSize\":0}\" data-scenery-cache=\"{\"tiles\":6,\"bytes\":3219840,\"pending\":0,\"hits\":18,\"misses\":7,\"spriteDraws\":254}\" data-army-overlay=\"{\"routes\"…></canvas>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"map-tools map-tools-v8\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"map-tools map-tools-v8\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    55 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"map-tools map-tools-v8\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+  ]
+}

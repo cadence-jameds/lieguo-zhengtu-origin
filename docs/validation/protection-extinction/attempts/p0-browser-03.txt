@@ -1,0 +1,62 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('canvas.map-overlay')[22m
+[2m    - locator resolved to <canvas width="320" tabindex="0" height="463" class="map-overlay" data-render-ms="4.30" data-background-redraws="7" data-camera="{"x":0,"y":7040,"z":0.75}" aria-label="正式384×384等距世界地圖，可拖曳和縮放；方向鍵移動，Enter選取" data-terrain-cache="{"tiles":0,"bytes":468512,"pending":10,"hits":0,"misses":1}" data-special-fields="{"visited":0,"misses":0,"markers":0,"lodHidden":false,"cacheSize":0}" data-scenery-cache="{"tiles":6,"bytes":3219840,"pending":0,"hits":18,"misses":7,"spriteDraws":254}" data-army-overlay="{"routes"…></canvas>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="map-tools map-tools-v8">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="map-tools map-tools-v8">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    55 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div class="map-tools map-tools-v8">…</div> intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+
+    at /workspace/lieguo-zhengtu-origin/scripts/verify-protection-extinction-browser.mjs:25:358 {
+  log: [
+    "  - waiting for locator('canvas.map-overlay')",
+    '    - locator resolved to <canvas width="320" tabindex="0" height="463" class="map-overlay" data-render-ms="4.30" data-background-redraws="7" data-camera="{"x":0,"y":7040,"z":0.75}" aria-label="正式384×384等距世界地圖，可拖曳和縮放；方向鍵移動，Enter選取" data-terrain-cache="{"tiles":0,"bytes":468512,"pending":10,"hits":0,"misses":1}" data-special-fields="{"visited":0,"misses":0,"markers":0,"lodHidden":false,"cacheSize":0}" data-scenery-cache="{"tiles":6,"bytes":3219840,"pending":0,"hits":18,"misses":7,"spriteDraws":254}" data-army-overlay="{"routes"…></canvas>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div class="map-tools map-tools-v8">…</div> intercepts pointer events',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div class="map-tools map-tools-v8">…</div> intercepts pointer events',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    55 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div class="map-tools map-tools-v8">…</div> intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

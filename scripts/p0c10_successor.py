@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE='9e3233090b634cc38ef280525444a32d0714ae47'
-IMPLEMENTATION='acc818682f707eb66d72695e2d0e3a30cfb39cc3'
+IMPLEMENTATION='03094c813a666e65d2ec3e5af67acaa36d001978'
 RECORD='docs/validation/protection-extinction/compatibility.json'
 # Every existing source/test changed by this feature, with no wildcard/directory grant.
 SOURCES={
