@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "fd29dd11c04fce806e973e747db55a126c206acf",
+  "uiCommit": "73a063098ae3b1419750c28b941e4e1a96463ec2",
+  "changes": {
+    "src/game/presentation/DevelopmentViews.tsx": {
+      "before": "2d4ed35bd97fbb441cb091a144fed4b4ca40baf5004716e41986d4da54b4e0f9",
+      "after": "de9c45d0079163ac34ad17f4ebd5fc9eda1aec82f38ee047b87d50313e3d3e51"
+    },
+    "src/game/presentation/cityActions.ts": {
+      "before": "89cf64d5b4dff693392091e3b92403536c519bf5e36f4099d892374f36066adb",
+      "after": "7f6f76f89c763127b759327cc304fbd0204d43475874155ec314d43fa9c2b1bb"
+    }
+  },
+  "invariants": {
+    "src/game/formal/growthTaskCatalog.ts": "e974c1bab71fdcd07e46da407111061a4c437ee9c8e1cab67c711f5b1a075033",
+    "src/game/formal/growthTaskSchema.ts": "be115b99efe98b427d53978cf6ac2268c7bb2aee5edc12f73782f5a2d82e73a1",
+    "src/game/formal/growthTasks.ts": "499abf6e0ef187ed25b6d0dfb0a49172d253937db6d73a0b2ee3d9c80ad47b0e",
+    "src/game/formal/military.ts": "3ad26e511e393c3674cfe1d3b4bf87ce2abddd995ac081000b534f3a086d0990",
+    "src/game/formal/model.ts": "2434fafbda6d219634cf8bcae2d160d2ebd705cafcb43368355023bada4b8d6a",
+    "src/game/formal/modernAwareness.ts": "1409cf9fa6ad95e883a46f8d92e0086116312f89fe2d62adb2966124f3b7b834",
+    "src/game/formal/reducer.ts": "05425391dd517cd11de8d886f30bf1d9aa85575d836e31a18805bb66afe6a2a6",
+    "src/game/formal/saveCodec.ts": "4701e33f553e7ddc51f6aed3505c4a870cd10d962597be99b5c74dea465d486f",
+    "src/game/formal/schema.ts": "2896751fd4a5a569c3aa2a390d9d591dc9d15213d315fe0fe7958ee82d09397b",
+    "src/game/formal/unitCatalog.ts": "602c766c99d5241f71f9d8eaa0195a920ee05ae9bc35d09ca42157c34039029b",
+    "src/game/formal/versions.ts": "d578da90296527ae303a5d3c784e5ece8f965dd2bd54220829b7bf8888dfb72f",
+    "src/game/formal/worldDraft.ts": "15cec11235a4ab86ac3cb94e8a12915f5cb9ee4d5389abddc7081d93b2496006",
+    "src/game/persistence.ts": "2bac792fcec330fa42ca983e5f88195aaf7b478e88b895dff1212aa3a9ceebdb",
+    "src/game/presentation/Art.tsx": "6d3dec16b71d78a24d22f8e18ea82bf512efa166cceeb8fd3b35169d6e42e0e2",
+    "src/game/presentation/JourneyGoals.tsx": "467cfb1ddd3fd601bf0153c50390d531f173404814327d82b047b9d25684365b",
+    "src/game/presentation/artAssets.json": "ac6d8be190f14588908b69072de26da1b1ecaa16724ffb771c6c4aca6633f724",
+    "src/game/presentation/journeyGoals.css": "2bfab8f23ac1baa6ca2f86e6d6a16c12d098a9009efe0aab37d3034b5e11251a",
+    "src/game/presentation/liveClock.ts": "40a75fe6e1a067b69130f24edfe0d1352fadc066b086233831b151f8f4ed916d",
+    "src/game/runtime.worker.ts": "2bef2969cf5b7daf8351fc1d88794e95eef67698a57711244fe263724f9c6663"
+  },
+  "historical": {
+    "docs/art-unification/elite-review-20261029/protected.json": "c63f823fb93ad9a969f6793a8de248b2f494a141d61dc9d0aa55081ded10b2f0",
+    "docs/validation/city-ui-successor/compatibility.json": "a34f8e9124834b2d14eccd447694edc3933f946729ef19e9ccb9c450e40a7b1e",
+    "docs/validation/journey-goals-integration/compatibility.json": "7687ed33d8a906309fd198c3107dbd4d73776200917cb792ed5d53cf07434131",
+    "docs/validation/mobile-town-labels/compatibility.json": "9f4e143b17f928d519ea594883f67ddb3f5e19df9f56c347c69668f5500d5949"
+  },
+  "evidence": {
+    "docs/validation/recruit-input-p1/full-regression-initial.json": "764e9ffccce3c861647db92f7fc9b9ed4e4d04de736e33b86c4b757d2259a0d7",
+    "docs/validation/recruit-input-p1/metrics.json": "2fa211ef53634f34b489e01864503df42cd4a77f5e77fb971f125427b4ab1505",
+    "scripts/measure-recruit-input.mjs": "36b195e437486f84c6d9599486ec332f209e1e2154399262519c0788a02e3caf",
+    "scripts/serve-recruit-input.mjs": "21a5b105a4b1f13fc6df0cd49a3cf5bde8445467ee7a5f71ae6f7c4e1705a65f",
+    "src/game/presentation/RecruitmentForm.tsx": "d7c691c73ccc473642f8929b55105decbe613da4007d81dd5000efc7e062f78d",
+    "src/game/presentation/recruitmentInput.test.tsx": "ca77f30d128e0938993634aa07ee51477aed9853976d0a76a77106dd8fe02743",
+    "src/game/presentation/recruitmentPreview.test.ts": "27f8d472ae1da6aebfa1801d5aa078397ed919748c270571b48adb8c173edebf"
+  }
+}

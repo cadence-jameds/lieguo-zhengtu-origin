@@ -1,0 +1,16 @@
+{
+  "implementationCommit": "73a0630",
+  "typecheck": "PASS",
+  "build": "PASS (regular and GitHub project Pages context)",
+  "pagesPwa": "PASS (asset paths, relative manifest scope/start_url, service-worker fallback)",
+  "releaseArtifacts": "PASS",
+  "targeted": {"status": "PASS", "files": 6, "tests": 67},
+  "artAndHistoricalGates": "PASS (check-art-boards, check-city-visuals, check-player-feedback)",
+  "successorTamperTests": {"status": "PASS", "tests": 19},
+  "performance": "PASS on final candidate: 1440/320/390px; late-game and starter; desktop batch and selected detail; actual Worker 25x; zero input-time formal calls/clones/schema/long tasks; final p95 <50ms",
+  "playerSaveSha256": "PASS before and after isolated measurements/oracles",
+  "unchangedAuthority": "PASS: formal sources, Worker, persistence, v96 JourneyGoals and public art have no diff from base",
+  "localFullRegression": {"status": "FAIL", "implementation": "f74804200f051c84e470056cbc66802446279d5e", "passed": 2147, "failed": 2, "skipped": 1, "record": "full-regression-initial.json", "resolution": "Desktop direct recruitment restored; both existing failing tests pass in the 67-test targeted run. No second local full run; final HEAD full regression runs independently in PR and Push CI."},
+  "ci": "See final HEAD PR/Push workflow checks; local full FAIL is retained separately.",
+  "limitations": ["Responsive Chromium simulation only; Android physical device/IME and low-end hardware await player acceptance", "Prototype 60.5ms cold desktop tail and three baseline background UNRESPONSIVE cases retained", "Historical B5 E1 HOLD and Astra non-PASS unchanged", "No merge, deployment, evidence branch deletion or real-save upload"]
+}
