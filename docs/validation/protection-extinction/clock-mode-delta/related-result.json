@@ -1,0 +1,48 @@
+{
+  "rawArtifact": "artifacts/p0c10-clock-delta/related.json",
+  "rawSha256": "7fff6efdf851e3f03e39683a0f774d6332dac54bf57d3930e8325d646d8a1abd",
+  "counts": {
+    "numTotalTests": 429,
+    "numPassedTests": 423,
+    "numFailedTests": 6,
+    "numPendingTests": 0
+  },
+  "failures": [
+    {
+      "name": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/p0c10-clock-related-ha0u6fx1/src/game/formal/runtime.test.ts:125:62\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+      "messages": [
+        "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/p0c10-clock-related-ha0u6fx1/src/game/formal/runtime.test.ts:135:62\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/p0c10-clock-related-ha0u6fx1/src/game/formal/runtime.test.ts:125:62\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "25X governance bridges its own catch-up with low load and never duplicates payment or events",
+      "messages": [
+        "AssertionError: expected 'rejected' to be 'committed' // Object.is equality\n    at /tmp/p0c10-clock-related-ha0u6fx1/src/game/formal/runtime.test.ts:135:62\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "messages": [
+        "Error: Test timed out in 20000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/p0c10-clock-related-ha0u6fx1/src/game/formal/runtime.test.ts:125:62\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    },
+    {
+      "name": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+      "messages": [
+        "Error: Test timed out in 30000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2681:43)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2698:16)\n    at Object.<anonymous> (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2471:28)\n    at chain (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1859:14)\n    at /tmp/p0c10-clock-related-ha0u6fx1/src/game/formal/runtime.test.ts:177:1\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/module-evaluator.js:258:4)\n    at VitestModuleRunner.directRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1254:59)\n    at VitestModuleRunner.cachedRequest (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1161:73)\n    at VitestModuleRunner.import (file:///workspace/lieguo-zhengtu-origin/node_modules/vite/dist/node/module-runner.js:1115:10)"
+      ]
+    }
+  ]
+}

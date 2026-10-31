@@ -25,7 +25,9 @@ def validate(root=ROOT):
     protected = json.loads(previous(root, BASE, PROTECTED))['files']
     for path, entry in record['changes'].items():
         assert entry['before'] == protected[path] == sha(previous(root, BASE, path))
-        assert entry['after'] == sha(previous(root, UI, path)) == sha((root / path).read_bytes()), ('Changed task source', path)
+        assert entry['after'] == sha(previous(root, UI, path)), ('Original task source changed', path)
+        from p0c10_successor import accepts as p0c10_accepts
+        assert entry['after'] == sha((root / path).read_bytes()) or p0c10_accepts(path,entry['after'],root), ('Changed task source', path)
     historical = {PROTECTED, 'docs/b6-v95/河谷戰役_vNext_平衡重構討論_v95.md',
                   'docs/validation/city-ui-successor/compatibility.json',
                   'docs/validation/mobile-town-labels/compatibility.json'}

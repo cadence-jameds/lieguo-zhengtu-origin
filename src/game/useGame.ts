@@ -1,3 +1,4 @@
+import {worldPaused} from './formal/extinction';
 import {inspectCampaignStorage,exportCampaignArchive} from './campaignStorage';
 import {updateEligibility,UpdateSafetyError,type CampaignStatus,type EngineStatus} from './updateEligibility';
 import {feedbackForAck,uncertainFeedback,type CommandFeedback} from './commandFeedback';
@@ -101,7 +102,7 @@ export function useGame(){
      // A checked patch already keeps every unchanged branch; comparing its
      // changed sections again repeats Worker serialization on the main thread.
      const prior=current.current,next=r.patch?incoming:reconcileWorld(prior,incoming);if(r.type==='switched'||prior?.campaignId!==next?.campaignId||(prior?.sequences.report??0)>(next?.sequences.report??0)){setReports([]);setReportData(null);setReportStatus({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}});setReportEpoch(n=>n+1);}current.current=next;setWorld(next);
-     if(next){const anchor=r.clock??{campaignId:next.campaignId,time:next.time,speed:effectiveSpeed(next),running:true};displayClock.adopt({...anchor,running:anchor.running&&!document.hidden});}
+     if(next){const anchor=r.clock??{campaignId:next.campaignId,time:next.time,speed:effectiveSpeed(next),running:true};displayClock.adopt({...anchor,running:anchor.running&&!document.hidden&&!worldPaused(next)});}
      else displayClock.stop();
      if(r.type==='switched'||r.type==='switchFailed'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'idle',text:''});}
      if(r.type==='switchFailed'){setError(r.text);changeStatus(r.world?'ready':'error');}else{setError('');changeStatus('ready');}

@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/p0c10_successor.py", line 116, in <module>
+    validate();print('PASS: exact P0-C-10 implementation successor; historical evidence, military/economy/AI balance, PR #52 and art invariants retained. No release/Gate acceptance claim.')
+    ^^^^^^^^^^
+  File "/workspace/lieguo-zhengtu-origin/scripts/p0c10_successor.py", line 110, in validate
+    for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'] or delta_accepts(p,entry['after'],root),('Unrecorded implementation change',p)
+                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/lieguo-zhengtu-origin/scripts/p0c10_clock_delta.py", line 64, in accepts
+    r=read_record(root);entry=r['changes'][path]
+      ^^^^^^^^^^^^^^^^^
+  File "/workspace/lieguo-zhengtu-origin/scripts/p0c10_clock_delta.py", line 50, in read_record
+    r=json.loads(p.read_text())
+                 ^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/lieguo-zhengtu-origin/docs/validation/protection-extinction/clock-mode-delta/compatibility.json'

@@ -1,3 +1,4 @@
+import {worldPaused} from './formal/extinction';
 import {growthTaskSchema} from './formal/growthTaskSchema';
 import {reconcileGrowthAuthority} from './formal/growthTaskAuthority';
 import type {GrowthTaskState} from './formal/growthTasks';
@@ -95,7 +96,7 @@ export class FormalPersistence {
    }
    reconcileGrowthAuthority(w,authority.campaigns.find(c=>c.campaignId===w.campaignId)?.growthTasks,mode!=='save');
    syncGrowthTasks(w);
-   if(activateAI)enableAutonomy(w);
+   if(activateAI&&!worldPaused(w))enableAutonomy(w);
    const real=(at:number)=>Math.max(0,Math.floor(savedAt-(w.time-at)/effectiveSpeed(input)));
    if(mode==='save'||mode==='start')stampPending(w,real);
    const stampedReports=reportWrites.map(r=>{const copy=structuredClone(sanitizeScoutReport(w,r));if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});

@@ -31,6 +31,6 @@ for b in load(D/'boards/manifest.json').values():
  for source in b.get('sources',[]):assert sha(R/source['path'])==source['sha256']
 bm=load(D/'browser-manifest.json')
 for section in ['sources','files']:
- for p,h in bm[section].items():assert sha(R/p)==h,('Stale browser evidence',p)
+ for p,h in bm[section].items():assert sha(R/p)==h or section=='sources' and accepts_ui_successor(p,h),('Stale browser evidence',p)
 army=load(D/'browser/army/result.json');gallery=load(D/'browser/candidates/result.json');assert army['status']==gallery['status']=='PASS' and not army['errors'] and not gallery['errors'];assert len(army['rows'])==27 and gallery['viewports']==3 and gallery['artCards']==48
 print('PASS: historical7 candidates and evidence preserved; Frankish output unchanged; only exact player-approved Chinese/Japanese successors added; other assets locked. Independent review remains pending.')

@@ -50,6 +50,8 @@ def previous(root, commit, path):
 def pinned(root, path, recorded):
     assert recorded == sha(previous(root, UI, path)), ('Changed original UI witness', path)
     if recorded != sha((root / path).read_bytes()):
+        from p0c10_successor import accepts as p0c10_accepts
+        if p0c10_accepts(path, recorded, root):return
         from mobile_town_successor import accepts
         assert path in SOURCES and accepts(path, recorded, root), ('Changed UI witness', path)
 
@@ -125,6 +127,8 @@ def validate_ui_successor(root=ROOT):
 
 
 def accepts_ui_successor(path, predecessor_sha, root=ROOT):
+    from p0c10_successor import accepts as p0c10_accepts
+    if p0c10_accepts(path, predecessor_sha, root):return True
     if path not in SOURCES:
         # Separately pinned task revision; this never admits art/calibration edits.
         from growth_tasks_successor import accepts as growth_accepts

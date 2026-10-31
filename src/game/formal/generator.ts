@@ -1,3 +1,4 @@
+import {PROTECTION_DURATION} from './protection';
 import {installMountains} from './mountains';
 import {campaignId,cityId,factionId,wildSiteId} from './ids';
 import type {FormalCity,FormalWorld,ResourceField} from './model';
@@ -27,7 +28,7 @@ export function createFormalWorld(o:{campaign:string;seed:number;speed?:number;n
  const legal=Array.from({length:144},(_,region)=>{const points:{x:number;y:number;rank:number}[]=[];for(let dy=0;dy<32;dy++)for(let dx=0;dx<32;dx++){const x=(region%12)*32+dx,y=Math.floor(region/12)*32+dy;if(buildable(terrainAt(w,x,y)))points.push({x,y,rank:seedHash(o.seed,x,y,7)});}return points.sort((a,b)=>a.rank-b.rank||a.y-b.y||a.x-b.x);});
  for(let n=0;n<100;n++){
   const id=factionId(String(n).padStart(3,'0')),region=(n*37+o.seed%144)%144,point=legal[region].find(p=>!index.at(p.x,p.y).city)!;
-  w.factions.push({id,name:n===0?(o.name??'玩家'):uniqueCultureName(CIVILIZATIONS[seedHash(o.seed,n,0,3)%6],seedHash(o.seed,n,0,94),'lord',w.factions.map(f=>f.name)),civilizationId:n===0?(o.civilizationId??CIVILIZATIONS[0]):CIVILIZATIONS[seedHash(o.seed,n,0,3)%6],empireId:null,modernQualification:'none',researchCooperation:false,techIds:[],researchQueue:null,role:n===0?'player':'ai',age:0,ageQueue:null});
+  w.factions.push({id,name:n===0?(o.name??'玩家'):uniqueCultureName(CIVILIZATIONS[seedHash(o.seed,n,0,3)%6],seedHash(o.seed,n,0,94),'lord',w.factions.map(f=>f.name)),civilizationId:n===0?(o.civilizationId??CIVILIZATIONS[0]):CIVILIZATIONS[seedHash(o.seed,n,0,3)%6],empireId:null,modernQualification:'none',researchCooperation:false,techIds:[],researchQueue:null,role:n===0?'player':'ai',age:0,ageQueue:null,protectionUntil:PROTECTION_DURATION,protectionKind:'newbie'});
   const c=initialCity(id,cityId(String(n).padStart(3,'0')),point.x,point.y,uniqueCultureName(w.factions[n].civilizationId,seedHash(o.seed,n,0,95),'city',w.cities.map(c=>c.name)));w.cities.push(c);index.addCity(c);
  }
  for(let region=0;region<144;region++)for(let q=0;q<3;q++){

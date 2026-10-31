@@ -1,0 +1,5 @@
+
+> guozhan-game-mvp@0.30.50 typecheck
+> tsc --noEmit
+
+src/game/formal/combatSchema.ts(59,36): error TS2367: This comparison appears to be unintentional because the types '"v84-b1-skeleton.1" | "v97-p0c10.1" | "v84-b4.1" | "v85-b4.2" | "v86-b5.1"' and '"v91-b5.2"' have no overlap.

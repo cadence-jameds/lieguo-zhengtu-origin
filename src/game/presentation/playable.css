@@ -6,3 +6,15 @@
 .live-battle-details li{margin:.4rem 0}
 .logistics-settings{min-width:0;margin:16px 0;padding:12px;border:1px solid var(--line);border-radius:6px}.logistics-settings fieldset{min-width:0;margin:12px 0;padding:10px}.logistics-settings label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}.logistics-settings input[type=number]{width:100%;max-width:180px;min-height:44px}.logistics-settings select{max-width:100%;min-height:44px}.logistics-settings button{min-height:44px;margin:6px 4px 6px 0;white-space:normal}.logistics-resource-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.logistics-resource-inputs label{display:block;min-width:0}.logistics-resource-inputs input{box-sizing:border-box}.logistics-route{padding:8px 0;border-bottom:1px solid var(--line)}.logistics-settings small{display:block;line-height:1.7}
 @media(max-width:430px){.logistics-settings{padding:8px}.logistics-settings fieldset{padding:6px}.logistics-settings label{display:block}.logistics-settings input[type=checkbox]{width:auto}.logistics-settings input[type=number],.logistics-settings select{max-width:100%}}
+
+/* P0-C-10: protection is an isolated read-only ticker; defeat actions fit 320px. */
+.formal-protection-status {display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .8rem;padding:.45rem .8rem;background:var(--ui-4);font-size:.85rem}
+.formal-protection-status small {overflow-wrap:anywhere}
+.formal-defeat .defeat-content {width:min(100%,760px);box-sizing:border-box;min-width:0}
+.formal-defeat .settings-actions,.rebirth-candidates {display:flex;flex-wrap:wrap;gap:.5rem}
+.formal-defeat .settings-actions button,.rebirth-candidates button {white-space:normal;max-width:100%}
+.formal-defeat .xy-input {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+.formal-defeat .xy-input input {width:100%;min-width:0;box-sizing:border-box}
+.rebirth-map-screen {height:100dvh;display:flex;flex-direction:column;min-width:0}
+.rebirth-map-screen>header {display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.5rem}
+.rebirth-map-screen>.world-map {flex:1;min-height:0}

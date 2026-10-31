@@ -1,0 +1,73 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "production build; synthetic saves; real Worker and IndexedDB; emulation is not Android physical-device acceptance",
+  "cases": [
+    {
+      "viewport": "1440x900",
+      "status": "PASS",
+      "frozenAt": 190919,
+      "checks": [
+        "defeat actions",
+        "real terminal report",
+        "full export",
+        "home remains frozen",
+        "reload remains frozen",
+        "invalid XY",
+        "candidate preview",
+        "map without city",
+        "map keyboard selection",
+        "exact confirmed rebirth",
+        "48h rebirth shield",
+        "cancel/end/no rebirth",
+        "new campaign entrance",
+        "new protection world/real time",
+        "no viewport overflow"
+      ]
+    },
+    {
+      "viewport": "320x568",
+      "status": "PASS",
+      "frozenAt": 190919,
+      "checks": [
+        "defeat actions",
+        "real terminal report",
+        "full export",
+        "home remains frozen",
+        "reload remains frozen",
+        "invalid XY",
+        "candidate preview",
+        "map without city",
+        "map keyboard selection",
+        "exact confirmed rebirth",
+        "48h rebirth shield",
+        "cancel/end/no rebirth",
+        "new campaign entrance",
+        "new protection world/real time",
+        "no viewport overflow"
+      ]
+    },
+    {
+      "viewport": "390x844",
+      "status": "PASS",
+      "frozenAt": 190919,
+      "checks": [
+        "defeat actions",
+        "real terminal report",
+        "full export",
+        "home remains frozen",
+        "reload remains frozen",
+        "invalid XY",
+        "candidate preview",
+        "map without city",
+        "map keyboard selection",
+        "exact confirmed rebirth",
+        "48h rebirth shield",
+        "cancel/end/no rebirth",
+        "new campaign entrance",
+        "new protection world/real time",
+        "no viewport overflow"
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,18 @@
+{
+  "rawArtifact": "artifacts/p0c10-clock-delta/after-1.json",
+  "rawSha256": "807c83b0b928fe298aea05d009a7aba727643caaa102839fa8695f70c40a8892",
+  "counts": {
+    "numTotalTests": 13,
+    "numPassedTests": 12,
+    "numFailedTests": 1,
+    "numPendingTests": 0
+  },
+  "failures": [
+    {
+      "name": "T4 the completed offline freeze has a strict durable envelope, while an ordinary offline draft and corrupt freeze remain rejected",
+      "messages": [
+        "Error: expected [Function] to throw error including '草稿' but got '[\\n  {\\n    \"code\": \"custom\",\\n    \"m…'\n    at _Assertion.__VITEST_REJECTS__ (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2453:33)\n    at _Assertion.propertyGetter (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1570:27)\n    at Reflect.get (<anonymous>)\n    at Object.proxyGetter [as get] (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1659:22)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:35:277\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}

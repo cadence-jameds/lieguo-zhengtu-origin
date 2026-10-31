@@ -1,0 +1,40 @@
+{
+  "rawObservations": {
+    "before": {
+      "rawArtifact": "artifacts/p0c10-clock-delta/before-final/boundary-observations.json",
+      "rawSha256": "339064b0e9844a562920c330585fa368fb4cb236579bc175e1c026716011079f",
+      "retainedNormalizedJSON": "boundary-before.json"
+    },
+    "after": {
+      "rawArtifact": "artifacts/p0c10-clock-delta/after-3/boundary-observations.json",
+      "rawSha256": "b2dc961bc721d50c4205232a1ef8658ed67cc62c28abf16a76754328eaf375a0",
+      "retainedNormalizedJSON": "boundary-after.json"
+    }
+  },
+  "checks": {
+    "normal-1": {
+      "formalFreezeEqualsCompletedOffline": true,
+      "originalFinalReceiptUnchanged": true,
+      "rebirthFinalReceiptUnchanged": true,
+      "events": 205
+    },
+    "normal-25": {
+      "formalFreezeEqualsCompletedOffline": true,
+      "originalFinalReceiptUnchanged": true,
+      "rebirthFinalReceiptUnchanged": true,
+      "events": 205
+    },
+    "developer-50": {
+      "formalFreezeEqualsCompletedOffline": true,
+      "originalFinalReceiptUnchanged": true,
+      "rebirthFinalReceiptUnchanged": true,
+      "events": 205
+    },
+    "developer-100": {
+      "formalFreezeEqualsCompletedOffline": true,
+      "originalFinalReceiptUnchanged": true,
+      "rebirthFinalReceiptUnchanged": true,
+      "events": 205
+    }
+  }
+}

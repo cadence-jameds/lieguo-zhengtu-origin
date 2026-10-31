@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/p0c10_successor.py", line 113, in <module>
+    validate();print('PASS: exact P0-C-10 implementation successor; historical evidence, military/economy/AI balance, PR #52 and art invariants retained. No release/Gate acceptance claim.')
+    ^^^^^^^^^^
+  File "/workspace/lieguo-zhengtu-origin/scripts/p0c10_successor.py", line 107, in validate
+    for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'],('Unrecorded implementation change',p)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Unrecorded implementation change', 'src/game/formal/campaignTime.ts')

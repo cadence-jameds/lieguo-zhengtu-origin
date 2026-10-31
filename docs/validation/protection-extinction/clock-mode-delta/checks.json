@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "reviewBase": "889089aeb0139a18144c14990035a23075832b4d",
+  "productionSourceCommit": "615e8a988a27c6778173df49574dbe3e2f338d4d",
+  "finiteSuccessorCommit": "5e95e5bd8c800e7122bf5abfdef6715f389648e3",
+  "scope": "PR53 clock-mode Delta only",
+  "newTests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "originalP0C10Rerun": {
+    "passed": 35,
+    "failed": 0
+  },
+  "focused": {
+    "passed": 52,
+    "failed": 0
+  },
+  "relatedSequential": {
+    "passed": 429,
+    "failed": 0,
+    "skipped": 0
+  },
+  "fullSequential": {
+    "status": "PASS",
+    "passed": 2201,
+    "failed": 0,
+    "skipped": 1,
+    "result": "full-sequential-result.json"
+  },
+  "typecheck": {
+    "status": "PASS",
+    "log": "attempts/typecheck-after.txt"
+  },
+  "build": {
+    "status": "PASS",
+    "log": "attempts/build.txt"
+  },
+  "pwaProjectPaths": {
+    "status": "PASS",
+    "log": "attempts/pages.txt"
+  },
+  "releaseArtifacts": {
+    "status": "PASS",
+    "log": "attempts/release.txt"
+  },
+  "successorAntitamperTests": {
+    "passed": 25,
+    "failed": 0
+  },
+  "browserSizes": {
+    "status": "NOT_RERUN",
+    "historicalEvidence": "../browser/browser-result.json",
+    "reason": "UI bytes unchanged"
+  },
+  "githubSourceCI": {
+    "status": "PASS",
+    "head": "5e95e5bd8c800e7122bf5abfdef6715f389648e3",
+    "runId": 41219166259,
+    "jobId": 124589944429,
+    "conclusion": "success",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41219166259",
+    "rawArtifact": "artifacts/p0c10-clock-delta/github-source-ci.txt",
+    "rawSha256": "2d884186ff034f5ccdeac4abf866e6ab2aedecf467d8b6a7560ce8c20c17b839",
+    "regression": {
+      "passed": 2201,
+      "failed": 0,
+      "skipped": 1
+    },
+    "note": "Engine/tests and finite successor CI. Final documentation HEAD must separately pass CI before handover."
+  },
+  "finalHeadCI": {
+    "checks": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/53/checks",
+    "requirement": "Latest HEAD Verify success must be confirmed after this evidence commit. Final handover message supplies exact SHA and run URL."
+  },
+  "gates": {
+    "B5_E1": "HOLD",
+    "Astra": "NOT_PASS",
+    "AndroidPhysical": "PENDING"
+  },
+  "technicalReleaseCandidate": "LOCAL_AND_ENGINE_GATE_CI_PASS; HANDOVER_REQUIRES_LATEST_DOCUMENTATION_HEAD_CI_SUCCESS",
+  "environment": {
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "cpuQuota": "200000/100000 (2 CPU)",
+    "memoryBytes": 8589934592,
+    "CI_Node": "22 (unchanged workflow)"
+  }
+}

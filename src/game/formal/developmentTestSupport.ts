@@ -8,7 +8,9 @@ import {HOUSING} from './catalogB3';
 import {submitFormalOrder} from './reducer';
 import {changeCityOwner} from './economy';
 let serial=0;
-export const make=()=>createFormalWorld({campaign:'b4-'+crypto.randomUUID(),seed:90217});
+// P0-C-10 successor: these established domain labs predate new-campaign shields.
+// Keep them combat-ready; raw generator protection is tested in protectionExtinctionP0C10.test.ts.
+export const make=()=>{const w=createFormalWorld({campaign:'b4-'+crypto.randomUUID(),seed:90217});for(const f of w.factions)f.protectionUntil=0;return w;};
 export function order(w:FormalWorld,payload:FormalCommand,id='b4-'+(++serial),issuer=w.playerFactionId){return{commandId:commandId(id),campaignId:w.campaignId,issuerId:issuer,issuedWorldTime:w.time,expectedRevision:w.revision,payload};}
 export function build(c:FormalCity,key:string,level:number){c.buildings[key]=level;if(key!=='center'&&c.economy!.slots[key]===undefined)c.economy!.slots[key]=Object.keys(c.economy!.slots).length;if(key==='residence')c.housing=400+HOUSING[level];}
 export function rich(w:FormalWorld,c=w.cities[0],amount=100000){for(let i=0;i<Math.ceil(amount/100000);i++)build(c,`warehouse.${i}`,15);build(c,'residence',15);c.population=15000;c.stock={food:amount,wood:amount,stone:amount,gold:amount};return c;}

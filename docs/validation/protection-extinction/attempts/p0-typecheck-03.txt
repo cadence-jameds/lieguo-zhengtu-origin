@@ -1,0 +1,6 @@
+
+> guozhan-game-mvp@0.30.50 typecheck
+> tsc --noEmit
+
+src/game/formal/extinction.ts(12,51): error TS6133: 'HOUR' is declared but its value is never read.
+src/game/formal/offline.ts(14,89): error TS6133: 'target' is declared but its value is never read.
