@@ -7,10 +7,11 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE='9e3233090b634cc38ef280525444a32d0714ae47'
-IMPLEMENTATION='f7e6c280c60ef73a204fb2161c22c6c73bb2e2f3'
+IMPLEMENTATION='acc818682f707eb66d72695e2d0e3a30cfb39cc3'
 RECORD='docs/validation/protection-extinction/compatibility.json'
 # Every existing source/test changed by this feature, with no wildcard/directory grant.
 SOURCES={
+ 'src/game/developer/b5LabConfig.ts',
  'src/game/FormalWorldMap.tsx','src/game/GameApp.tsx','src/game/developer/B5Lab.ts',
  'src/game/formal/extinctionB7.test.ts',
  'src/game/formal/armies.ts','src/game/formal/battles.ts','src/game/formal/campaignTime.ts',

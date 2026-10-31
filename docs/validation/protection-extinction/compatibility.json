@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "9e3233090b634cc38ef280525444a32d0714ae47",
-  "implementationCommit": "f7e6c280c60ef73a204fb2161c22c6c73bb2e2f3",
+  "implementationCommit": "acc818682f707eb66d72695e2d0e3a30cfb39cc3",
   "changes": {
     "src/game/FormalWorldMap.tsx": {
       "before": "bf3ced0883728d1c2fa86109764b80a3e7899127ce08101e77680e14016f5bf9",
@@ -14,6 +14,10 @@
     "src/game/developer/B5Lab.ts": {
       "before": "a68b1ecc1fe489a89ef1cc7b7984473d81df77a3fcca05e389acd7c7d8815bbc",
       "after": "35ff5407fb5d3f4eccb35f7e6517cc887ebcb9d80b216d90a5c12273f32f5c3f"
+    },
+    "src/game/developer/b5LabConfig.ts": {
+      "before": "58fe0e2e253501d0591abe5aec4a0b0bbbf68e21fed0cdc38172434ca4a433cf",
+      "after": "f0f03154d7c680ef62b89b56425e3be54835cc0c864e48a71f064812d476bb84"
     },
     "src/game/developer/developer.test.ts": {
       "before": "024949547d7bcb04e1280c8ae8ce3f9cbccf8b0f8bea2fbd7c5258d7ff3467d4",
@@ -174,6 +178,9 @@
     ],
     "src/game/developer/B5Lab.ts": [
       "a68b1ecc1fe489a89ef1cc7b7984473d81df77a3fcca05e389acd7c7d8815bbc"
+    ],
+    "src/game/developer/b5LabConfig.ts": [
+      "58fe0e2e253501d0591abe5aec4a0b0bbbf68e21fed0cdc38172434ca4a433cf"
     ],
     "src/game/developer/developer.test.ts": [
       "024949547d7bcb04e1280c8ae8ce3f9cbccf8b0f8bea2fbd7c5258d7ff3467d4"
