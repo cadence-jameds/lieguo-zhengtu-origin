@@ -10,7 +10,8 @@ import {tacticalRoundWorldMs} from './battles';
 import {isMissionArmy} from './combatModel';
 it('developer controls use the current campaign, 100X foreground and normal offline clock and normal 10X conquest ceiling',()=>{
  let w=make();const campaign=w.campaignId,normal=w.speed;w=commit(w,{type:'developer.configure',cityId:w.cities[0].id,enabled:true,speed:100,shield:true});
- expect(w.campaignId).toBe(campaign);expect(w.speed).toBe(normal);expect(effectiveSpeed(w)).toBe(100);expect(tacticalRoundWorldMs(effectiveSpeed(w))/effectiveSpeed(w)).toBe(tacticalRoundWorldMs(50)/50);expect(w.cities[0].stock.food).toBe(1e9);expect(w.cities[1].stock.food).toBeLessThan(1e9);expect(protectedFaction(w,w.playerFactionId)).toBe(true);expect(w.factions[0].protectionUntil).toBe(w.time+SHIELD_DURATION);
+ expect(w.campaignId).toBe(campaign);expect(w.speed).toBe(normal);expect(effectiveSpeed(w)).toBe(100);expect(tacticalRoundWorldMs(effectiveSpeed(w))/effectiveSpeed(w)).toBe(tacticalRoundWorldMs(50)/50);expect(w.cities[0].stock.food).toBe(1e9);expect(w.cities[1].stock.food).toBeLessThan(1e9);expect(protectedFaction(w,w.playerFactionId)).toBe(true);// P0-C-10 successor: developer shield is independent of the expired lab's faction shield.
+ expect(w.developer!.shieldUntil).toBe(w.time+SHIELD_DURATION);expect(w.factions[0].protectionUntil).toBe(0);
  expect(advanceOffline(w,1000,2000).world.time-w.time).toBe(normal*1000);w=commit(w,{type:'developer.configure',cityId:w.cities[0].id,enabled:false,speed:100});expect(effectiveSpeed(w)).toBe(normal);expect(w.cities[0].developerResources).toBeUndefined();expect(w.cities[0].stock.food).toBeLessThanOrEqual(storageCapacity(w.cities[0]));expect(protectedFaction(w,w.playerFactionId)).toBe(true);validateFormalWorld(w);
 });
 it('whole building demolition frees its slot, preserves population, stops growth and can rebuild housing',()=>{

@@ -80,7 +80,7 @@ function chain() {
   return validateFormalWorld(w);
 }
 
-it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth', async () => {
+it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> confirmed player rebirth -> AI foreign castle (P0-C-10 successor)', async () => {
   let w = chain();
   evidence('controlled-before.realm-save', await encodeSave(w));
   const arrival = w.politics!.joints.at(-1)!.arrivalAt;
@@ -101,6 +101,19 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreig
   expect(w.worldLayer!.wildSites).toHaveLength(432);
   const site=w.extinction!.sites[0], winner=w.factions[1].id;
   evidence('controlled-extinct.realm-save',await encodeSave(w));
+  // P0-C-10 successor: the same world chain resumes only after the player's confirmed rebirth.
+  const aiRebirth=submitFormalOrder(w,order(w,{type:'player.rebirth',cityId:w.cities[1].id,candidate:0,name:'非法'},'r4-ai-rebirth',winner));
+  expect(aiRebirth.ack?.status).toBe('rejected');
+  expect(rebirthCandidates(w)).toHaveLength(3);
+  const rebirth=order(w,{type:'player.rebirth',cityId:w.cities[0].id,candidate:0,name:'R4復國'},'r4-rebirth');
+  w=submitFormalOrder(w,rebirth).world;
+  expect(submitFormalOrder(w,rebirth).ack?.status).toBe('duplicate');
+  const home=w.cities.find(c=>c.ownerFactionId===w.playerFactionId)!;
+  expect(home.population).toBe(400);
+  expect(home.stock).toEqual({food:600,wood:600,stone:600,gold:600});
+  expect(home.military!.units).toEqual({});
+  expect(w.factions[0].age).toBe(2);
+  expect(w.factions[0].protectionUntil).toBe(w.time+48*HOUR);
   w=act(w,1,{type:'army.dispatch',cityId:w.cities[1].id,mission:'raid',
     target:{kind:'wild',siteId:site.id,generation:0},units:{militia:1000}});
   const raid=w.armies.filter(isMissionArmy).find(a=>a.target.kind==='wild'&&a.target.siteId===site.id)!;
@@ -130,18 +143,6 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreig
   w=act(w,1,{type:'military.recruit',cityId:w.cities[1].id,unitId:'guard.'+w.factions[0].civilizationId,count:1});
   expect(w.factions[1].techIds).toEqual(tech);
   expect(w.factions.every(f=>f.modernQualification==='none')).toBe(true);
-  const aiRebirth=submitFormalOrder(w,order(w,{type:'player.rebirth',cityId:w.cities[1].id,candidate:0,name:'非法'},'r4-ai-rebirth',winner));
-  expect(aiRebirth.ack?.status).toBe('rejected');
-  expect(rebirthCandidates(w)).toHaveLength(3);
-  const rebirth=order(w,{type:'player.rebirth',cityId:w.cities[0].id,candidate:0,name:'R4復國'},'r4-rebirth');
-  w=submitFormalOrder(w,rebirth).world;
-  expect(submitFormalOrder(w,rebirth).ack?.status).toBe('duplicate');
-  const home=w.cities.find(c=>c.ownerFactionId===w.playerFactionId)!;
-  expect(home.population).toBe(400);
-  expect(home.stock).toEqual({food:600,wood:600,stone:600,gold:600});
-  expect(home.military!.units).toEqual({});
-  expect(w.factions[0].age).toBe(2);
-  expect(w.factions[0].protectionUntil).toBe(w.time+48*HOUR);
   expect(w.extinction!.sites).toHaveLength(1);
   expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
   evidence('controlled-chain.json',{time:w.time,finalReceipts:w.combat!.receipts.filter(r=>r.kind==='final'),

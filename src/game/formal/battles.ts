@@ -100,13 +100,15 @@ function finishBattle(w:FormalWorld,state:BattleState,c:FormalCity,e:FormalEvent
  p.attackers=b.participants.filter(p=>p.armyId!==null&&attacking.some(a=>a.id===p.armyId));p.defenders=b.participants.filter(item=>!p.attackers.includes(item));
  // A stationed army may have legally retrofitted before joining this battle.
  // Use its battle-entry composition, preserving the original dispatch history.
+ if(reason!=='protected-target'){
  for(const a of attacking){if(b.mission==='wonder-destruction'&&!Object.keys(a.initialUnits).some(effectiveUnit)){if(!Object.keys(a.units).some(id=>baseUnit(id)==='catapult'&&a.units[id]>0))for(const id of Object.keys(a.units).filter(isSupplyUnit))delete a.units[id];}else applySupplyLoss(a.units,p.attackers.find(p=>p.armyId===a.id)?.before??a.initialUnits,attackCount>0);}for(const a of stationed(w,c))applySupplyLoss(a.units,p.defenders.find(d=>d.armyId===a.id)?.before??a.initialUnits,defenseCount>0);
  if(defenseCount===0&&c.military)for(const id of Object.keys(c.military.units).filter(isSupplyUnit))delete c.military.units[id];
+ }
  if(reason==='conquered'){
   if(attackCount===0||defenseCount!==0||(c.wallLevel??0)!==0)throw new Error('Conquest hard conditions not met');
   const oldOwner=c.ownerFactionId,pop=finishConquest(w,c,recipient!,b.developmentLost,b.developmentBefore,s);p.outcome='conquered';p.ownerAfter=c.ownerFactionId;for(const a of attacking)if(a.chain&&!a.chain.battles.includes(b.id)){a.chain.battles.push(b.id);a.chain.conquests=a.chain.battles.length;}p.populationBefore=pop.populationBefore;p.populationAfter=pop.populationAfter;p.returnedTrainingPopulation=pop.returnedTrainingPopulation;
   p.defenders=updateParticipants(w,c,p.defenders);evacuateCitySurvivors(w,c,oldOwner,s);for(const a of w.armies.filter(isMissionArmy).filter(a=>a.status==='stationed'&&a.target.kind==='city'&&a.target.cityId===c.id))if(!canReinforce(w,a.ownerFactionId,c.ownerFactionId))returnArmy(w,a,s);
- }else if(b.catapultBatchDone)finalizeSiegeHousing(c);
+ }else if(reason!=='protected-target'&&b.catapultBatchDone)finalizeSiegeHousing(c);
  p.attackers=updateParticipants(w,null,p.attackers);if(p.outcome!=='conquered')p.defenders=updateParticipants(w,c,p.defenders);p.populationAfter=c.population;p.wallAfter=c.wallLevel??0;
  finishReceipt(w,p,e.id);w.combat!.battles=w.combat!.battles.filter(x=>x.id!==b.id);for(const a of attacking)returnArmy(w,a,s);reconcileWonders(w,s);invalidateSpatial(w);return battleReport(w,p);
 }

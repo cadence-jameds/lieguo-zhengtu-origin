@@ -1,3 +1,4 @@
+import {NATIVE_RULESET_VERSION} from '../formal/versions';
 import 'fake-indexeddb/auto';
 import {expect,it} from 'vitest';
 import {developerWorld,developerOrder,SCENARIOS} from './scenarios';
@@ -9,7 +10,7 @@ import {canonicalJSON} from '../formal/canonical';
 import {writeFileSync} from 'node:fs';
 
 it('all presets/six civilizations use valid native v85 worlds and keep full entity counts',()=>{
- for(const scenario of Object.keys(SCENARIOS) as (keyof typeof SCENARIOS)[])for(const civilizationId of CIVILIZATIONS){const w=developerWorld({scenario,civilizationId,seed:90217,speed:25});expect(w.metadata.rulesetVersion).toBe('v91-b5.2');expect(w.factions).toHaveLength(100);expect(w.cities).toHaveLength(100);expect(w.worldLayer?.wildSites).toHaveLength(432);expect(w.cities[0].economy!.slots&&Object.keys(w.cities[0].economy!.slots).length).toBeLessThanOrEqual(15);}
+ for(const scenario of Object.keys(SCENARIOS) as (keyof typeof SCENARIOS)[])for(const civilizationId of CIVILIZATIONS){const w=developerWorld({scenario,civilizationId,seed:90217,speed:25});expect(w.metadata.rulesetVersion).toBe(NATIVE_RULESET_VERSION);expect(w.factions).toHaveLength(100);expect(w.cities).toHaveLength(100);expect(w.worldLayer?.wildSites).toHaveLength(432);expect(w.cities[0].economy!.slots&&Object.keys(w.cities[0].economy!.slots).length).toBeLessThanOrEqual(15);}
 },30000);
 it('browser-available diagnostic cases actually execute and none is a hardcoded PASS',async()=>{
  const rows:CheckResult[]=[];const results=await runDeveloperChecks(r=>rows.push(r),{scenario:'new',seed:90217,speed:25,civilizationId:'civ_zhongguo'});
