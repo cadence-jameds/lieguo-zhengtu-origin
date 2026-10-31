@@ -102,10 +102,10 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> confirmed
   const site=w.extinction!.sites[0], winner=w.factions[1].id;
   evidence('controlled-extinct.realm-save',await encodeSave(w));
   // P0-C-10 successor: the same world chain resumes only after the player's confirmed rebirth.
-  const aiRebirth=submitFormalOrder(w,order(w,{type:'player.rebirth',cityId:w.cities[1].id,candidate:0,name:'非法'},'r4-ai-rebirth',winner));
+  const aiRebirth=submitFormalOrder(w,order(w,{type:'player.rebirth',cityId:w.cities[1].id,...rebirthCandidates(w)[0],name:'非法'},'r4-ai-rebirth',winner));
   expect(aiRebirth.ack?.status).toBe('rejected');
   expect(rebirthCandidates(w)).toHaveLength(3);
-  const rebirth=order(w,{type:'player.rebirth',cityId:w.cities[0].id,candidate:0,name:'R4復國'},'r4-rebirth');
+  const rebirth=order(w,{type:'player.rebirth',cityId:w.cities[0].id,...rebirthCandidates(w)[0],name:'R4復國'},'r4-rebirth');
   w=submitFormalOrder(w,rebirth).world;
   expect(submitFormalOrder(w,rebirth).ack?.status).toBe('duplicate');
   const home=w.cities.find(c=>c.ownerFactionId===w.playerFactionId)!;

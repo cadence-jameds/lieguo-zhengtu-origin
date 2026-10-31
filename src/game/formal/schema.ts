@@ -233,7 +233,7 @@ export const orderSchema:z.ZodType<FormalOrder>=z.object({commandId:commandIdSch
  z.object({type:z.literal('wonder.start'),cityId:cityIdSchema,hostCityId:cityIdSchema}).strict(),
  z.object({type:z.literal('wonder.ship'),cityId:cityIdSchema,projectId:projectIdSchema,resources:resourcesSchema}).strict(),
  ...armyOrderShapes,
- z.object({type:z.literal('player.rebirth'),cityId:cityIdSchema,x:int.max(383).optional(),y:int.max(383).optional(),candidate:int.max(2).optional(),name:text.max(24)}).strict(),
+ z.object({type:z.literal('player.rebirth'),cityId:cityIdSchema,x:int.max(383),y:int.max(383),name:text.max(24)}).strict(),
  z.object({type:z.literal('player.end'),cityId:cityIdSchema}).strict(),
  z.object({type:z.literal('craftsman.move'),cityId:cityIdSchema,craftsmanId:text,destinationCityId:cityIdSchema}).strict(),
  z.object({type:z.literal('craftsman.castle'),cityId:cityIdSchema,craftsmanId:text}).strict(),
