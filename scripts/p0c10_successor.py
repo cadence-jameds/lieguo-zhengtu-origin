@@ -98,15 +98,18 @@ def read_record(root=ROOT):
  return r
 
 def accepts(path,predecessor,root=ROOT):
- if path not in SOURCES:return False
+ from p0c10_clock_delta import accepts as delta_accepts
+ if path not in SOURCES:return delta_accepts(path,predecessor,root)
  r=read_record(root)
- return predecessor in r['grants'][path] and (root/path).exists() and sha((root/path).read_bytes())==r['changes'][path]['after']
+ if predecessor not in r['grants'][path] or not (root/path).exists():return False
+ return sha((root/path).read_bytes())==r['changes'][path]['after'] or delta_accepts(path,r['changes'][path]['after'],root)
 
 def validate(root=ROOT):
  r=read_record(root)
- for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'],('Unrecorded implementation change',p)
+ from p0c10_clock_delta import accepts as delta_accepts
+ for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'] or delta_accepts(p,entry['after'],root),('Unrecorded implementation change',p)
  for section in ['invariants','historical']:
-  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest,('Changed preserved source/history',p)
+  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest or section=='invariants' and delta_accepts(p,digest,root),('Changed preserved source/history',p)
  return r
 
 if __name__=='__main__':

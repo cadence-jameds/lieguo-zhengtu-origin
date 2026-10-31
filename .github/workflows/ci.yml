@@ -42,6 +42,8 @@ jobs:
           python3 scripts/test_recruit_input_successor.py
           python3 scripts/p0c10_successor.py
           python3 scripts/test_p0c10_successor.py
+          python3 scripts/p0c10_clock_delta.py
+          python3 scripts/test_p0c10_clock_delta.py
       - name: Player feedback art scope and evidence
         run: python3 scripts/check-player-feedback.py
       - name: Full regression in a disposable copy
