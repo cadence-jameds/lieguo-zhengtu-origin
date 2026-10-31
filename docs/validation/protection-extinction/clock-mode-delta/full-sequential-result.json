@@ -1,0 +1,16 @@
+{
+  "rawArtifact": "artifacts/p0c10-clock-delta/full-sequential.json",
+  "rawSha256": "a40dfa026f46b9480f3609cbdcd1da2dce3169851742d5451c9a5864ea1c2bec",
+  "success": true,
+  "counts": {
+    "numPassedTests": 2201,
+    "numFailedTests": 0,
+    "numPendingTests": 1,
+    "numTotalTests": 2202,
+    "numFailedTestSuites": 0
+  },
+  "skipped": [
+    "user late-game save remains valid after six more world hours"
+  ],
+  "failures": []
+}

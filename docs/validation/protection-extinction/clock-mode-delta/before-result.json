@@ -1,0 +1,84 @@
+{
+  "rawArtifact": "artifacts/p0c10-clock-delta/before.json",
+  "rawSha256": "ee2d1b5b2411bcb9293dd842e4ce8c8c745279bfa88330a9bfea46b35f7e4260",
+  "counts": {
+    "numTotalTests": 13,
+    "numPassedTests": 1,
+    "numFailedTests": 12,
+    "numPendingTests": 0
+  },
+  "failures": [
+    {
+      "name": "T1/T2 normal-1: offline completion preserves the exact Formal freeze, pending IDs/deadlines/order and final receipt",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:20:32\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "T2/T3 normal-1: synchronous/cooperative offline worlds and summaries agree; only confirmed rebirth restores foreground speed",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:24:124\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "T1/T2 normal-25: offline completion preserves the exact Formal freeze, pending IDs/deadlines/order and final receipt",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:20:32\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "T2/T3 normal-25: synchronous/cooperative offline worlds and summaries agree; only confirmed rebirth restores foreground speed",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:24:124\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "T1/T2 developer-50: offline completion preserves the exact Formal freeze, pending IDs/deadlines/order and final receipt",
+      "messages": [
+        "AssertionError: expected [ Array(205) ] to deeply equal [ Array(205) ]\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:19:33\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "T2/T3 developer-50: synchronous/cooperative offline worlds and summaries agree; only confirmed rebirth restores foreground speed",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:24:124\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "T1/T2 developer-100: offline completion preserves the exact Formal freeze, pending IDs/deadlines/order and final receipt",
+      "messages": [
+        "AssertionError: expected [ Array(205) ] to deeply equal [ Array(205) ]\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:19:33\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+      ]
+    },
+    {
+      "name": "T2/T3 developer-100: synchronous/cooperative offline worlds and summaries agree; only confirmed rebirth restores foreground speed",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:24:124\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "T4 the completed offline freeze has a strict durable envelope, while an ordinary offline draft and corrupt freeze remain rejected",
+      "messages": [
+        "Error: 離線推進尚未完成，不可保存草稿。\n    at encodeSave (/workspace/lieguo-zhengtu-origin/src/game/formal/saveCodec.ts:18:39)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:33:19\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)"
+      ]
+    },
+    {
+      "name": "T4 real IDB reload, full export/import and Recovery preserve frozen offline deadlines across 100 real days before rebirth",
+      "messages": [
+        "AssertionError: expected 'foreground' to be 'offline' // Object.is equality\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:41:121\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "T6 world-write: real IDB freeze/rebirth rollback and retry preserve authority, history and event identity",
+      "messages": [
+        "Error: expected [Function] to throw error including 'fault' but got '離線推進尚未完成，不可保存草稿。'\n    at _Assertion.__VITEST_REJECTS__ (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2453:33)\n    at _Assertion.propertyGetter (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1570:27)\n    at Reflect.get (<anonymous>)\n    at Object.proxyGetter [as get] (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1659:22)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:56:173\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at processImmediate (node:internal/timers:502:9)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    },
+    {
+      "name": "T6 authority-write: real IDB freeze/rebirth rollback and retry preserve authority, history and event identity",
+      "messages": [
+        "Error: expected [Function] to throw error including 'fault' but got '離線推進尚未完成，不可保存草稿。'\n    at _Assertion.__VITEST_REJECTS__ (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/index.OVGXnVRj.js:2453:33)\n    at _Assertion.propertyGetter (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1570:27)\n    at Reflect.get (<anonymous>)\n    at Object.proxyGetter [as get] (file:///workspace/lieguo-zhengtu-origin/node_modules/chai/index.js:1659:22)\n    at /workspace/lieguo-zhengtu-origin/src/game/formal/offlineExtinctionClockDelta.test.ts:56:173\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at processImmediate (node:internal/timers:502:9)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:20"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+EEE
+======================================================================
+ERROR: test_changed_commit_added_source_and_omitted_history_fail (__main__.ClockDeltaTests.test_changed_commit_added_source_and_omitted_history_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/test_p0c10_clock_delta.py", line 11, in setUp
+    r=json.loads((gate.ROOT/gate.RECORD).read_text())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/lieguo-zhengtu-origin/docs/validation/protection-extinction/clock-mode-delta/compatibility.json'
+
+======================================================================
+ERROR: test_only_four_exact_source_changes_and_original_predecessors (__main__.ClockDeltaTests.test_only_four_exact_source_changes_and_original_predecessors)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/test_p0c10_clock_delta.py", line 11, in setUp
+    r=json.loads((gate.ROOT/gate.RECORD).read_text())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/lieguo-zhengtu-origin/docs/validation/protection-extinction/clock-mode-delta/compatibility.json'
+
+======================================================================
+ERROR: test_refreshed_source_schema_worker_history_and_adapter_hashes_fail (__main__.ClockDeltaTests.test_refreshed_source_schema_worker_history_and_adapter_hashes_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/test_p0c10_clock_delta.py", line 11, in setUp
+    r=json.loads((gate.ROOT/gate.RECORD).read_text())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/lieguo-zhengtu-origin/docs/validation/protection-extinction/clock-mode-delta/compatibility.json'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (errors=3)

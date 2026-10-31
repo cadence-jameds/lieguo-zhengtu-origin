@@ -1,0 +1,133 @@
+{
+  "rawArtifact": "artifacts/p0c10-clock-delta/full-concurrent.json",
+  "rawSha256": "4015776acf88db86fcb124e4a0e538771e13ac399db194593a58124e673a4ed2",
+  "counts": {
+    "numPassedTests": 2190,
+    "numFailedTests": 0,
+    "numPendingTests": 12,
+    "numTotalTests": 2202,
+    "numFailedTestSuites": 1
+  },
+  "success": false,
+  "failedSuites": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 requires a completed usable wonder, leader and current members; creation and replay cannot spend or create extra projects",
+          "status": "skipped",
+          "title": "B9-2 requires a completed usable wonder, leader and current members; creation and replay cannot spend or create extra projects",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 stock is debited once, cargo arrives once into its own pool; paused arrivals are returned and can be dispatched after recapture",
+          "status": "skipped",
+          "title": "B9-2 stock is debited once, cargo arrives once into its own pool; paused arrivals are returned and can be dispatched after recapture",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 60M takes 2000 real market trips and exactly 48 world hours, once, with save/offline/cooperative equivalence",
+          "status": "skipped",
+          "title": "B9-2 60M takes 2000 real market trips and exactly 48 world hours, once, with save/offline/cooperative equivalence",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 a conqueror joining the original empire cannot resume funding, including after save/load",
+          "status": "skipped",
+          "title": "B9-2 a conqueror joining the original empire cannot resume funding, including after save/load",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 a conqueror joining the original empire cannot resume building, including after save/load",
+          "status": "skipped",
+          "title": "B9-2 a conqueror joining the original empire cannot resume building, including after save/load",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 conquest freezes elapsed work immediately, and genuine recapture resumes the saved remainder across save/load",
+          "status": "skipped",
+          "title": "B9-2 conquest freezes elapsed work immediately, and genuine recapture resumes the saved remainder across save/load",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 awards the current membership snapshot only; leaving and rejoining before completion is sufficient, later joining grants nothing",
+          "status": "skipped",
+          "title": "B9-2 awards the current membership snapshot only; leaving and rejoining before completion is sufficient, later joining grants nothing",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2/B9-5 numeric damage pauses work, ruins roll back to the last 25% checkpoint, and paid repair restores use",
+          "status": "skipped",
+          "title": "B9-2/B9-5 numeric damage pauses work, ruins roll back to the last 25% checkpoint, and paid repair restores use",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 all 99 native AI use the same real-stock breakthrough start and contribution rules",
+          "status": "skipped",
+          "title": "B9-2 all 99 native AI use the same real-stock breakthrough start and contribution rules",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 atomic persistence, export/import and Recovery preserve cargo, pause, membership snapshot and one completion",
+          "status": "skipped",
+          "title": "B9-2 atomic persistence, export/import and Recovery preserve cargo, pause, membership snapshot and one completion",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "B9-2 a conquest at the exact deadline takes priority; recapture can finish the preserved zero remainder once",
+          "status": "skipped",
+          "title": "B9-2 a conquest at the exact deadline takes priority; recapture can finish the preserved zero remainder once",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793462642343,
+      "endTime": 1793462642343,
+      "status": "failed",
+      "message": "Hook timed out in 240000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".",
+      "name": "/tmp/lieguo-verification-wBczWI/src/game/formal/breakthroughB92.test.ts"
+    }
+  ]
+}

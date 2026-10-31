@@ -1,0 +1,10 @@
+
+> guozhan-game-mvp@0.30.50 typecheck
+> tsc --noEmit
+
+src/game/formal/offlineExtinctionClockDelta.test.ts(27,49): error TS2339: Property 'developer' does not exist on type '{ readonly name: "normal-1"; readonly speed: 1; } | { readonly name: "normal-25"; readonly speed: 25; } | { readonly name: "developer-50"; readonly speed: 1; readonly developer: 50; } | { ...; }'.
+  Property 'developer' does not exist on type '{ readonly name: "normal-1"; readonly speed: 1; }'.
+src/game/formal/offlineExtinctionClockWorkerDelta.test.ts(24,89): error TS2339: Property 'developer' does not exist on type '{ readonly name: "normal-1"; readonly speed: 1; } | { readonly name: "normal-25"; readonly speed: 25; } | { readonly name: "developer-50"; readonly speed: 1; readonly developer: 50; } | { ...; }'.
+  Property 'developer' does not exist on type '{ readonly name: "normal-1"; readonly speed: 1; }'.
+src/game/formal/offlineExtinctionClockWorkerDelta.test.ts(26,253): error TS2339: Property 'developer' does not exist on type '{ readonly name: "normal-1"; readonly speed: 1; } | { readonly name: "normal-25"; readonly speed: 25; } | { readonly name: "developer-50"; readonly speed: 1; readonly developer: 50; } | { ...; }'.
+  Property 'developer' does not exist on type '{ readonly name: "normal-1"; readonly speed: 1; }'.

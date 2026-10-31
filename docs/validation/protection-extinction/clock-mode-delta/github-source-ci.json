@@ -1,0 +1,15 @@
+{
+  "head": "5e95e5bd8c800e7122bf5abfdef6715f389648e3",
+  "runId": 41219166259,
+  "jobId": 124589944429,
+  "conclusion": "success",
+  "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41219166259",
+  "rawArtifact": "artifacts/p0c10-clock-delta/github-source-ci.txt",
+  "rawSha256": "2d884186ff034f5ccdeac4abf866e6ab2aedecf467d8b6a7560ce8c20c17b839",
+  "regression": {
+    "passed": 2201,
+    "failed": 0,
+    "skipped": 1
+  },
+  "note": "Engine/tests and finite successor CI. Final documentation HEAD must separately pass CI before handover."
+}
