@@ -39,7 +39,9 @@ def validate(root=ROOT):
         assert entry['after'] == sha(previous(root, UI, path)) == sha((root / path).read_bytes()), ('Unrecorded UI edit', path)
     assert set(record['invariants']) == INVARIANTS
     for path, digest in record['invariants'].items():
-        assert digest == sha(previous(root, BASE, path)) == sha((root / path).read_bytes()), ('Calibration changed', path)
+        assert digest == sha(previous(root, BASE, path)), ('Original calibration digest changed', path)
+        from p0c10_successor import accepts as p0c10_accepts
+        assert digest == sha((root / path).read_bytes()) or p0c10_accepts(path,digest,root), ('Calibration changed', path)
     # Pin every original PR #49 witness and its frozen historical art manifests.
     historical = set(subprocess.check_output(['git', '-C', str(root), 'ls-tree', '-r', '--name-only', BASE, '--',
         'docs/validation/city-ui-integration', 'docs/validation/city-ui-successor'], text=True).splitlines()) | HISTORICAL

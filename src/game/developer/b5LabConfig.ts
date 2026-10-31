@@ -1,3 +1,4 @@
+import {worldPaused} from '../formal/extinction';
 import {z} from 'zod';
 import {CIVILIZATIONS} from '../formal/generator';
 import type {FormalWorld} from '../formal/model';
@@ -19,5 +20,5 @@ export function labTarget(w:FormalWorld,id?:string){const home=w.cities[0];retur
 
 export function labActiveTarget(w:FormalWorld){const id=w.campaignId.match(/^campaign:b5lab-([0-9]{3})-/)?.[1];return id?w.cities.find(c=>c.id==='city:'+id):labTarget(w);}
 
-export function labNextEvent(w:FormalWorld){return w.events.filter(e=>['army.arrive','army.return','combat.round'].includes(e.type)).sort((a,b)=>a.at-b.at)[0];}
+export function labNextEvent(w:FormalWorld){if(worldPaused(w))return undefined;return w.events.filter(e=>['army.arrive','army.return','combat.round'].includes(e.type)).sort((a,b)=>a.at-b.at)[0];}
 export const labTiming=(w:FormalWorld)=>({speed:effectiveSpeed(w),tacticalSpeed:Math.min(effectiveSpeed(w),10),roundWorldMs:tacticalRoundWorldMs(effectiveSpeed(w)),roundRealMs:tacticalRoundWorldMs(effectiveSpeed(w))/effectiveSpeed(w)});
