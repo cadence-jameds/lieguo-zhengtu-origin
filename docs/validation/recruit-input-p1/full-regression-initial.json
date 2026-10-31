@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "f74804200f051c84e470056cbc66802446279d5e",
+  "status": "FAIL",
+  "passed": 2147,
+  "failed": 2,
+  "skipped": 1,
+  "reportSha256": "dab5288a60b5902516c121c60058342d176adffe84daf8d939c069850bf6912f",
+  "failures": [
+    {
+      "file": "game/presentation/modernCatchupB94.test.tsx",
+      "test": "B9-4 desktop keeps military layout and allows only the reverse-engineered line",
+      "message": "AssertionError: expected \"vi.fn()\" to be called with arguments: [ { type: 'military.recruit', …(3) } ]"
+    },
+    {
+      "file": "game/presentation/modernMilitaryB93.test.tsx",
+      "test": "B9-3 modern training emits the existing recruit command and names the correct modern identity",
+      "message": "AssertionError: expected \"vi.fn()\" to be called with arguments: [ { type: 'military.recruit', …(3) } ]"
+    }
+  ],
+  "resolution": "Restore unchanged B9 desktop direct recruitment/disabled-state contracts with a local raw-string subtree; existing tests unchanged. Targeted rerun PASS; no second local full run. Final PR/Push CI runs the full suite on the corrected HEAD."
+}
