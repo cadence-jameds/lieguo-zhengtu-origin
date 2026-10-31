@@ -5,6 +5,7 @@ import {mkdirSync,writeFileSync} from 'node:fs';
 import {CLOCK_DELTA_CASES,clockBoundaryWorld,frozenReference,eventRows,clockRows,confirmedRebirth} from './offlineExtinctionClockDeltaTestSupport';
 import {advanceOffline,advanceOfflineCooperative} from './offline';
 import {effectiveSpeed} from './playtest';
+import {tacticalRoundWorldMs} from './battles';
 import {setClockMode,retimeCombatClock} from './campaignTime';
 import {encodeSave,decodeSave} from './saveCodec';
 import {digest} from './canonical';
@@ -26,13 +27,15 @@ for(const config of CLOCK_DELTA_CASES){
   setClockMode(frozen,'foreground');retimeCombatClock(frozen,config.speed,100);expect(frozen).toEqual(before);
   const t=confirmedRebirth(frozen),speed=config.developer??config.speed;expect(t.world.clockMode).toBe('foreground');expect(effectiveSpeed(t.world)).toBe(speed);expect(t.world.time).toBe(f.freezeAt);
   expect(t.world.events.filter(e=>e.at===f.freezeAt)).toEqual(frozen.events.filter(e=>e.at===f.freezeAt));expect(frozen).toEqual(before);
+  for(const old of frozen.combat!.battles){const next=t.world.combat!.battles.find(b=>b.id===old.id)!;expect(next.roundEventId).toBe(old.roundEventId);const at=old.nextRoundAt===f.freezeAt?f.freezeAt:f.freezeAt+Math.ceil((old.nextRoundAt-f.freezeAt)*tacticalRoundWorldMs(speed)/tacticalRoundWorldMs(config.speed));expect(next.nextRoundAt).toBe(at);expect(t.world.events.find(e=>e.id===old.roundEventId)!.at).toBe(at);}
+  expect(t.world.events.filter(e=>e.type!=='combat.round'&&frozen.events.some(x=>x.id===e.id))).toEqual(frozen.events.filter(e=>e.type!=='combat.round'));
   evidence[config.name+'-rebirth']={frozen:clockRows(frozen),reborn:clockRows(t.world)};
  });
 }
 it('T4 the completed offline freeze has a strict durable envelope, while an ordinary offline draft and corrupt freeze remain rejected',async()=>{
  const f=clockBoundaryWorld(CLOCK_DELTA_CASES[3]),reference=frozenReference(f.world,f.target),frozen=reference.world;
  const save=await encodeSave(frozen,reference.reports);expect((await decodeSave(save)).world).toEqual(frozen);
- const draft=structuredClone(f.world);setClockMode(draft,'offline');await expect(encodeSave(draft)).rejects.toThrow('草稿');const forged=structuredClone(save);delete forged.snapshot.extinction!.defeat;forged.checksum=await digest(forged.snapshot);await expect(decodeSave(forged)).rejects.toThrow('草稿');
+ const draft=structuredClone(f.world);setClockMode(draft,'offline');await expect(encodeSave(draft)).rejects.toThrow('草稿');const forged=structuredClone(save);delete forged.snapshot.extinction!.defeat;forged.checksum=await digest(forged.snapshot);await expect(decodeSave(forged)).rejects.toThrow('Army movement event mismatch');
  const corrupt=structuredClone(save);corrupt.snapshot.extinction!.defeat!.at++;await expect(decodeSave(corrupt)).rejects.toThrow();const checksum=structuredClone(save);checksum.checksum='0'.repeat(64);await expect(decodeSave(checksum)).rejects.toThrow('檢查碼');
 });
 it('T4 real IDB reload, full export/import and Recovery preserve frozen offline deadlines across 100 real days before rebirth',async()=>{

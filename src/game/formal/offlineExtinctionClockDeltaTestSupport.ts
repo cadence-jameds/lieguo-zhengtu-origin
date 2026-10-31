@@ -14,7 +14,7 @@ import {eventId,sequenceKey} from './ids';
 import {rebirthCandidates} from './extinction';
 import {validateFormalWorld} from './schema';
 import type {FormalWorld} from './model';
-export const CLOCK_DELTA_CASES=[{name:'normal-1',speed:1},{name:'normal-25',speed:25},{name:'developer-50',speed:1,developer:50},{name:'developer-100',speed:25,developer:100}] as const;
+export const CLOCK_DELTA_CASES:readonly ClockDeltaCase[]=[{name:'normal-1',speed:1},{name:'normal-25',speed:25},{name:'developer-50',speed:1,developer:50},{name:'developer-100',speed:25,developer:100}];
 export type ClockDeltaCase={name:string;speed:1|25;developer?:50|100};
 /** Native terrain/entities and real accepted orders: no forged battle receipts or combat deadlines. */
 export function clockBoundaryWorld(config:ClockDeltaCase){

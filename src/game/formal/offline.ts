@@ -12,7 +12,7 @@ function offlinePlan(world:FormalWorld,savedAt:number,now:number):OfflinePlan {
  return {elapsed,capHours,real,target};
 }
 function finishOffline(world:FormalWorld,result:FormalTransition,{elapsed,capHours,real}:OfflinePlan):FormalTransition&{summary:OfflineSummary}{
- if(!worldPaused(world))setClockMode(result.world,'foreground');
+ if(!worldPaused(result.world))setClockMode(result.world,'foreground');
  const own=(w:FormalWorld)=>w.cities.filter(c=>c.ownerFactionId===w.playerFactionId),before=own(world),after=own(result.world);
  const unitsTrained=before.reduce((n,c)=>n+(c.military?.queue.reduce((sum,j)=>sum+j.remaining-(after.find(a=>a.id===c.id)?.military?.queue.find(k=>k.commandId===j.commandId)?.remaining??0),0)??0),0);
  const buildingsCompleted=before.reduce((n,c)=>n+(c.economy?.construction.filter(j=>!after.find(a=>a.id===c.id)?.economy?.construction.some(k=>k.commandId===j.commandId)).length??0),0);

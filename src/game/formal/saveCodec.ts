@@ -1,5 +1,5 @@
 import {migrateV95Economy} from './economy';
-import {reconcileExileSites} from './extinction';
+import {reconcileExileSites,worldPaused} from './extinction';
 import {sanitizeSharedKnowledge,sanitizeScoutReport} from './reportScope';
 import {z} from 'zod';
 import {digest} from './canonical';
@@ -15,7 +15,8 @@ export type FormalEnvelope={format:typeof FORMAL_SAVE_FORMAT;metadata:FormalWorl
 const envelopeShape=z.object({format:z.literal(FORMAL_SAVE_FORMAT),metadata:metadataSchema,checksum:z.string().regex(/^[0-9a-f]{64}$/),snapshot:z.unknown(),reports:z.array(reportSchema).optional(),reportChecksum:z.string().regex(/^[0-9a-f]{64}$/).optional()}).strict();
 export async function encodeSave(world:FormalWorld,reports?:readonly FormalReport[]):Promise<FormalEnvelope>{
  assertCampaignCompatibility({format:FORMAL_SAVE_FORMAT,metadata:world.metadata});
- if(world.clockMode==='offline')throw new Error('離線推進尚未完成，不可保存草稿。');
+ if(world.clockMode==='offline'&&!worldPaused(world))throw new Error('離線推進尚未完成，不可保存草稿。');
+ // A validated extinction barrier is a completed replay, not an in-flight offline draft.
  const snapshot=validateFormalWorld(world),metadata={...snapshot.metadata};
  const e:FormalEnvelope={format:FORMAL_SAVE_FORMAT,metadata,checksum:await digest(snapshot),snapshot};
  if(reports!==undefined){e.reports=reports.map(r=>reportSchema.parse(r));validateReportHistory(snapshot,e.reports);e.reportChecksum=await digest(e.reports);}
@@ -30,7 +31,7 @@ export async function decodeSave(value:unknown):Promise<{world:FormalWorld;repor
  // Reject DEMO before checksums or access to any database; never invoke legacy validators.
  const p=envelopeShape.safeParse(value);if(!p.success)throw new Error('只接受正式版存檔；DEMO 或不相容格式不會被載入。');
  const e=p.data,w=validateFormalWorld(e.snapshot);
- if(w.clockMode==='offline')throw new Error('離線推進草稿不能作為正式存檔載入。');
+ if(w.clockMode==='offline'&&!worldPaused(w))throw new Error('離線推進草稿不能作為正式存檔載入。');
  if(JSON.stringify(e.metadata)!==JSON.stringify(w.metadata)){
   for(const key of Object.keys(w.metadata) as (keyof typeof w.metadata)[])if(e.metadata[key]!==w.metadata[key])throw new Error('存檔版本 metadata 不一致。');
  }
