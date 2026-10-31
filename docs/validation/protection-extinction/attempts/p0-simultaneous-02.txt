@@ -1,0 +1,36 @@
+
+ RUN  v5.0.0 /workspace/lieguo-zhengtu-origin
+
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > new native world grants all 100 factions exactly 48 world hours, all owned cities, with no new polling events
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > newbie protection ends on accepted city scout, survives rejected commands and has one durable notification
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > rebirth protection ends on accepted city scout, survives rejected commands and has one durable notification
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > wild scout is legal during protection and never ends it
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > wild raid is legal during protection and never ends it
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > AI city scouts follow the same break rule; a protected player rejects AI attacks atomically
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects scout at admission and arrival without damage or intel
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects raid at admission and arrival without damage or intel
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects conquest at admission and arrival without damage or intel
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protection acquired during a live siege stops damage and keeps exactly one final receipt
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > war ends protection only after legal diplomacy; developer shield cannot restart or disable faction protection
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 1X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 3X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 6X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 10X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 25X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > two simultaneous city arrivals keep the unprocessed army and receipt boundary across save, rebirth and same-time replay 1351ms
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > offline replay stops at the loss, reports only the actual elapsed world duration, and repeated loads stay frozen
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > losing a non-final city never pauses; AI extinction stays permanent
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > a persisted, travelling AI settlement reservation rejects a stale rebirth preview inside the reducer without fallback
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > free coordinates use Formal terrain, city, wild/cooldown and reservations; invalid submissions are atomic
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > repeated rebirth retains civilization, age and tech, creates 400 people/zero troops/600 each, resets only protection and cannot undo end
+ ↓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > paused checksum, backups, restore, full report history and corruption recovery preserve the barrier
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 22 skipped (23)
+   Start at  08:18:50
+   Duration  4.72s (transform 58%, tests 31%, import 11%)
+
+  Transform  transforming modules took 2.55s · 58% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

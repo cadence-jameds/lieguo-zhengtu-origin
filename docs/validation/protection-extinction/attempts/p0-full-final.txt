@@ -1,0 +1,34 @@
+Isolated full regression workspace: /tmp/lieguo-verification-St72vF
+{"success":false,"passed":2146,"failed":32,"skipped":1,"report":"/workspace/lieguo-zhengtu-origin/artifacts/integration/regression-full.json"}
+FAIL: desktop: AI selection, presets, walls, siege, finite stock and real scout command work through the isolated client
+FAIL: mobile: AI selection, presets, walls, siege, finite stock and real scout command work through the isolated client
+FAIL: user-triggered incoming and 100X setup are explicit commands; close returns without changing the base
+FAIL: B5 manual test fixture and isolation reset, save, reports and import leave original current/authority/Recovery/BattleReports byte-for-byte unchanged; normal imports cannot accept a lab file
+FAIL: B5 manual test fixture and isolation failed reset or battle transaction never publishes a partial fixture, report, receipt or owner; retry resolves once
+FAIL: B5 lab orders run the existing resolver, scheduler and reports raid respects actual survivor capacity, preserves wall/owner/buildings, carries loot and returns through a saved Formal mission
+FAIL: B5 lab orders run the existing resolver, scheduler and reports scout 10 versus five counters uses strict >, immutable arrival snapshot and return-only delivery
+FAIL: B5 lab orders run the existing resolver, scheduler and reports scout 6 versus five counters uses strict >, immutable arrival snapshot and return-only delivery
+FAIL: B5 lab orders run the existing resolver, scheduler and reports scout 1 versus five counters uses strict >, immutable arrival snapshot and return-only delivery
+FAIL: B5 lab orders run the existing resolver, scheduler and reports empty target conquest applies real ram and catapult siege, then changes owner with durable resolution and reports
+FAIL: B5 lab orders run the existing resolver, scheduler and reports 50X conquest survives mid-battle reload/export/import with 10X tactical cap and no duplicated resolution
+FAIL: B5 lab orders run the existing resolver, scheduler and reports 100X conquest survives mid-battle reload/export/import with 10X tactical cap and no duplicated resolution
+FAIL: B5 lab orders run the existing resolver, scheduler and reports enemy raid uses enemy issuer and Formal march, yields a player defense report, and is limited to once per reset
+FAIL: B5 lab orders run the existing resolver, scheduler and reports enemy conquest uses enemy issuer and Formal march, yields a player defense report, and is limited to once per reset
+FAIL: B5 lab orders run the existing resolver, scheduler and reports writes independently inspectable B5 lab evidence
+FAIL: real lab event stepping, live battle, reload and export/import preserve all 12 siege rounds and final failure
+FAIL: real lab Worker queues requests, uses isolated persistence, recovers after rejected commands and reads only its own report/intel campaign
+FAIL: all presets/six civilizations use valid native v85 worlds and keep full entity counts
+FAIL: B1 player rebirth cannot restore old engaged troop ownership or permit a new conquest
+FAIL: M1 foreign castle capture cancels special work and dependencies; owner has second city=false
+FAIL: R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> AI foreign castle -> player rebirth
+FAIL: old terrain campaigns are rejected without changing cities/sites, in-flight routes/timers, receipts or diagonal neighbours
+FAIL: cooperative replay matches atomic synchronous replay exactly, even across same-time events
+FAIL: worker offline catch-up preserves summary, reports and final world without modifying the input
+FAIL: developer controls use the current campaign, 100X foreground and normal offline clock and normal 10X conquest ceiling
+FAIL: receipt indexes preserve any applied duplicate match and the original duplicate diagnostics
+FAIL: 1X governance bridges its own catch-up with 100 armies and never duplicates payment or events
+FAIL: 10X governance bridges its own catch-up with 100 armies and never duplicates payment or events
+FAIL: 25X governance bridges its own catch-up with 100 armies and never duplicates payment or events
+FAIL: developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings
+FAIL: C10 extinction shows defeat art and legal entrances without legacy pause/free-position rules
+FAIL: all100 actual Formal ArmyIds render, cached repeated frames never mutate scheduler or private armies

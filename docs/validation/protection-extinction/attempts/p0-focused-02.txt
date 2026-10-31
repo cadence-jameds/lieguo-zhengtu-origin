@@ -1,0 +1,56 @@
+
+ RUN  v5.0.0 /workspace/lieguo-zhengtu-origin
+
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > new native world grants all 100 factions exactly 48 world hours, all owned cities, with no new polling events 832ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > newbie protection ends on accepted city scout, survives rejected commands and has one durable notification 295ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > rebirth protection ends on accepted city scout, survives rejected commands and has one durable notification 248ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > wild scout is legal during protection and never ends it 205ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > wild raid is legal during protection and never ends it 211ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > AI city scouts follow the same break rule; a protected player rejects AI attacks atomically 217ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects scout at admission and arrival without damage or intel 137ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects raid at admission and arrival without damage or intel 129ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protected city rejects conquest at admission and arrival without damage or intel 130ms
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protection acquired during a live siege stops damage and keeps exactly one final receipt 137ms
+   → expected 15014.18713393535 to be 15005.516198349038 // Object.is equality
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > war ends protection only after legal diplomacy; developer shield cannot restart or disable faction protection 152ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 1X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 371ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 3X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 316ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 6X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 302ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 10X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 283ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > 25X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once 283ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > offline replay stops at the loss, reports only the actual elapsed world duration, and repeated loads stay frozen 144ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > losing a non-final city never pauses; AI extinction stays permanent 249ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > free coordinates use Formal terrain, city, wild/cooldown and reservations; invalid submissions are atomic 334ms
+ ✓ src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > repeated rebirth retains civilization, age and tech, creates 400 people/zero troops/600 each, resets only protection and cannot undo end 666ms
+ × src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > paused checksum, backups, restore, full report history and corruption recovery preserve the barrier 583ms
+   → expected 1 to be greater than or equal to 2
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 unified faction protection > protection acquired during a live siege stops damage and keeps exactly one final receipt
+AssertionError: expected 15014.18713393535 to be 15005.516198349038 // Object.is equality
+
+- Expected
++ Received
+
+- 15005.516198349038
++ 15014.18713393535
+
+ ❯ src/game/formal/protectionExtinctionP0C10.test.ts:68:173
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/game/formal/protectionExtinctionP0C10.test.ts > P0-C-10 exact extinction barrier and rebirth > paused checksum, backups, restore, full report history and corruption recovery preserve the barrier
+AssertionError: expected 1 to be greater than or equal to 2
+ ❯ src/game/formal/protectionExtinctionP0C10.test.ts:120:133
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 19 passed (21)
+   Start at  08:07:45
+   Duration  7.14s (tests 89%, transform 9%, import 2%)
+

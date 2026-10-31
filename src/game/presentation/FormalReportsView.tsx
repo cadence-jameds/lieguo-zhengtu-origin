@@ -6,8 +6,8 @@ import type {RuntimeRequest} from '../runtime.worker';
 import {BattleReportBody} from './BattleReportBody';
 import {reportTime} from './reportClock';
 const tabs:{id:ReportFilter;name:string}[]=[{id:'all',name:'全部'},{id:'battle',name:'戰鬥'},{id:'diplomacy',name:'外交'},{id:'chronicle',name:'建設・記事'}];
-export function FormalReportsView({world,busy,rows,data,epoch,status,send,onMap}:{world:FormalWorld;busy:boolean;rows:FormalReport[];data:{page:number;filter:string;count:number}|null;epoch:number;status:{unread:number;counts:Record<Exclude<ReportFilter,'diplomacy'>,number>&{diplomacy?:number}};send:(r:RuntimeRequest)=>void;onMap:(p:{x:number;y:number})=>void}){
- const [filter,setFilter]=useState<ReportFilter>('all'),[page,setPage]=useState(0),[clearing,setClearing]=useState(false);
+export function FormalReportsView({world,busy,rows,data,epoch,status,send,onMap,initialFilter='all'}:{initialFilter?:ReportFilter;world:FormalWorld;busy:boolean;rows:FormalReport[];data:{page:number;filter:string;count:number}|null;epoch:number;status:{unread:number;counts:Record<Exclude<ReportFilter,'diplomacy'>,number>&{diplomacy?:number}};send:(r:RuntimeRequest)=>void;onMap:(p:{x:number;y:number})=>void}){
+ const [filter,setFilter]=useState<ReportFilter>(initialFilter),[page,setPage]=useState(0),[clearing,setClearing]=useState(false);
  useEffect(()=>{send({type:'reportPage',page,filter});},[world.campaignId,world.sequences.report,filter,page,epoch,send]);
  const ready=data?.filter===filter&&data.page===page,count=ready?data!.count:(status.counts[filter]??0),pages=Math.max(1,Math.ceil(count/50));
  useEffect(()=>{if(page>=pages)setPage(pages-1);},[pages,page]);

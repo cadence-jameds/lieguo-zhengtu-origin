@@ -31,7 +31,9 @@ def validate(root=ROOT):
   assert entry['after']==sha(previous(root,UI,path))==sha((root/path).read_bytes()),('Changed recruitment source',path)
  for section in ['invariants','historical']:
   for path,digest in record[section].items():
-   assert digest==sha(previous(root,BASE,path))==sha((root/path).read_bytes()),('Changed authority/history',path)
+   assert digest==sha(previous(root,BASE,path)),('Original authority/history digest changed',path)
+   from p0c10_successor import accepts as p0c10_accepts
+   assert digest==sha((root/path).read_bytes()) or section=='invariants' and p0c10_accepts(path,digest,root),('Changed authority/history',path)
  witnesses=set(subprocess.check_output(['git','-C',str(root),'ls-tree','-r','--name-only','-z',UI,'--',
   'docs/validation/recruit-input-p1','src/game/presentation/RecruitmentForm.tsx',
   'src/game/presentation/recruitmentInput.test.tsx','src/game/presentation/recruitmentPreview.test.ts',

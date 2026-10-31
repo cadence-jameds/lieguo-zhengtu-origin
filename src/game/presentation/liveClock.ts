@@ -1,3 +1,4 @@
+import {worldPaused} from '../formal/extinction';
 import {effectiveSpeed} from '../formal/playtest';
 import {useMemo,useSyncExternalStore} from 'react';
 import type {FormalCity,FormalWorld} from '../formal/model';
@@ -22,11 +23,11 @@ export class DisplayClock {
 }
 export const displayClock=new DisplayClock();
 const inactiveSubscribe=()=>()=>{};
-export function useDisplayTime(world:FormalWorld,precision=1,enabled=true){return useSyncExternalStore(enabled?displayClock.subscribe:inactiveSubscribe,()=>enabled?Math.max(world.time,Math.floor(displayClock.time(world.campaignId,world.time)/(precision*effectiveSpeed(world)))*precision*effectiveSpeed(world)):world.time,()=>world.time);}
+export function useDisplayTime(world:FormalWorld,precision=1,enabled=true){return useSyncExternalStore(enabled&&!worldPaused(world)?displayClock.subscribe:inactiveSubscribe,()=>enabled&&!worldPaused(world)?Math.max(world.time,Math.floor(displayClock.time(world.campaignId,world.time)/(precision*effectiveSpeed(world)))*precision*effectiveSpeed(world)):world.time,()=>world.time);}
 /** Open forms update affordability once a second without changing authority. */
 export function useLiveCity(world:FormalWorld,city:FormalCity|undefined,enabled=true){
  const time=economyDisplayTime(world,useDisplayTime(world,1000,enabled));
  return useMemo(()=>{if(!city||!enabled)return city;const copy=structuredClone(city);settleCity(world,copy,Math.max(city.economy?.lastSettledAt??world.time,time));return copy;},[world,city,time,enabled]);
 }
 /** Prevent projecting old rates past an uncommitted event boundary. */
-export function economyDisplayTime(world:FormalWorld,time:number){return Math.max(world.time,Math.min(time,...world.events.map(e=>e.at)));}
+export function economyDisplayTime(world:FormalWorld,time:number){return worldPaused(world)?world.time:Math.max(world.time,Math.min(time,...world.events.map(e=>e.at)));}

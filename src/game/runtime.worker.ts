@@ -1,3 +1,4 @@
+import {worldPaused} from './formal/extinction';
 import {enableAutonomy} from './formal/autonomy';
 import {exportLegacyCampaign,hasLegacyCampaign} from './persistence';
 import {effectiveSpeed} from './formal/playtest';
@@ -27,19 +28,19 @@ let anchor=performance.now(),anchorTime=0,lastSavedAt=anchor,retryAt=0,passiveRe
 let foregroundFence:number|undefined;
 let patchMode=false,lastPublished:FormalWorld|null=null;
 const post=(value:unknown)=>self.postMessage(value);
-const clock=()=>({campaignId:world?.campaignId,time:away?(world?.time??0):targetTime(),speed:world?effectiveSpeed(world):1,running:!away});
+const clock=()=>({campaignId:world?.campaignId,time:away?(world?.time??0):targetTime(),speed:world?effectiveSpeed(world):1,running:!away&&!!world&&!worldPaused(world)});
 const state=()=>{const data={type:'state',clock:clock(),passiveRevisionBase};if(patchMode&&world&&lastPublished?.campaignId===world.campaignId)post({...data,patch:worldPatch(lastPublished,world)});else post({...data,world});lastPublished=world;};
 const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;branchRevision=passiveRevisionBase;foregroundRevision=branchRevision;lastPublished=null;};
-const targetTime=(now=performance.now())=>anchorTime+Math.floor(Math.max(0,Math.min(now,foregroundFence??now)-anchor)*(world?effectiveSpeed(world):1));
+const targetTime=(now=performance.now())=>(world&&worldPaused(world))?world.time:anchorTime+Math.floor(Math.max(0,Math.min(now,foregroundFence??now)-anchor)*(world?effectiveSpeed(world):1));
 async function publishReportStatus(){if(!world)return;try{post({type:'reportStatus',data:await reportStatus(world)});}catch{post({type:'notice',text:'暫時無法讀取戰報通知，世界仍持續運行。'});}}
 async function advanceAndSave(target=targetTime(),wallAt?:number){
- if(!world)return;
+ if(!world||worldPaused(world))return;
  if(target<=world.time)return;
  const hasEvents=world.events.some(e=>e.at<=target);
  // Only complete events yield. The draft remains private until this entire
  // target replay and its one durable transaction finish.
  const result=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8}),committed=await save(result.world,result.reports,world.revision,wallAt);
- world=committed;lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
+ world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
  if(r.stateMode==='patch')patchMode=true;
@@ -60,7 +61,7 @@ async function handle(r:RuntimeRequest){
     post({type:'progress',progress:fraction,events});
    }
   });
-  let loaded=result.game;if(loaded&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;away=false;foregroundFence=undefined;reanchor();post({type:'loaded',legacyAvailable:await hasLegacyCampaign(),recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}});return;}
+  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;away=false;foregroundFence=undefined;reanchor();post({type:'loaded',legacyAvailable:await hasLegacyCampaign(),recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}});return;}
  if(r.type==='away'){if(away){state();return;}const boundary=awayBoundaries.get(r)??{target:targetTime(),wallAt:Date.now()};away=true;await advanceAndSave(Math.max(world?.time??0,boundary.target),boundary.wallAt);state();return;}
  if(r.type==='reset'){await clearSavedGames();world=null;reanchor();post({type:'resetDone'});state();return;}
  if(r.type==='start'){
@@ -98,7 +99,7 @@ async function handle(r:RuntimeRequest){
    // One transaction has one revision, including all newly replayed AI receipts.
    if(caughtUp){result.world.revision=world.revision+1;for(let i=world.commandReceipts.length;i<result.world.commandReceipts.length;i++)result.world.commandReceipts[i].committedRevision=Math.min(result.world.commandReceipts[i].committedRevision,result.world.revision);result.ack.revision=result.world.revision;}
    const committed=await save(result.world,[...catchupReports,...result.reports],world.revision);
-   world=committed;foregroundRevision=world.revision;if(r.order.payload.type==='developer.configure'||r.order.payload.type==='campaign.configure')reanchor();lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;post({type:'commandAck',ack:result.ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();
+   world=committed;foregroundRevision=world.revision;if(r.order.payload.type==='developer.configure'||r.order.payload.type==='campaign.configure'||r.order.payload.type==='player.rebirth'||r.order.payload.type==='player.end'||worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;post({type:'commandAck',ack:result.ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();
   }else{if(caughtUp){world=await save(admission,catchupReports,world.revision);lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;if(result.ack)result.ack.revision=world.revision;}const ack=result.ack;if(order.payload.type==='governance.set'&&ack?.reason==='世界版本已更新，請重新確認狀態。')ack.reason='治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。';post({type:'commandAck',ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();}
   return;
  }
@@ -146,7 +147,7 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
  scheduleDrain();
 };
 setInterval(()=>{
- if(!world||tickPending||tickRunning||away)return;
+ if(!world||worldPaused(world)||tickPending||tickRunning||away)return;
  // Ordinary checkpoints every ten seconds; due events still commit at 100ms polls.
  // The absolute anchor preserves elapsed time even when persistence takes longer.
  const now=performance.now(),target=targetTime(now);

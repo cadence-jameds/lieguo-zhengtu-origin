@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/workspace/lieguo-zhengtu-origin/scripts/check-city-visuals.py", line 13, in <module>
+    if accepts_ui_successor(p,h):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/lieguo-zhengtu-origin/scripts/city_ui_successor.py", line 135, in accepts_ui_successor
+    record = validate_ui_successor(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/lieguo-zhengtu-origin/scripts/city_ui_successor.py", line 77, in validate_ui_successor
+    pinned(root, path, entry['uiSha256'])
+  File "/workspace/lieguo-zhengtu-origin/scripts/city_ui_successor.py", line 54, in pinned
+    assert path in SOURCES and accepts(path, recorded, root), ('Changed UI witness', path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Changed UI witness', 'src/game/FormalWorldMap.tsx')

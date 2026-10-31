@@ -17,8 +17,8 @@ export const formalMetadata = () => ({
   worldGeneratorVersion: FORMAL_GENERATOR_VERSION,
   terrainVersion: FORMAL_TERRAIN_VERSION,
 });
-export const NATIVE_CONTENT_VERSION = 'lieguo-formal-b5.2-time2' as const;
-export const NATIVE_RULESET_VERSION = 'v91-b5.2' as const;
+export const NATIVE_CONTENT_VERSION = 'lieguo-formal-p0c10-time3' as const;
+export const NATIVE_RULESET_VERSION = 'v97-p0c10.1' as const;
 export const NATIVE_GENERATOR_VERSION = 'formal-world-384-v1' as const;
 export const NATIVE_TERRAIN_VERSION = 3 as const;
 export const nativeMetadata = () => ({appVersion:RELEASE.version,schemaVersion:3 as const,contentVersion:NATIVE_CONTENT_VERSION,rulesetVersion:NATIVE_RULESET_VERSION,worldGeneratorVersion:NATIVE_GENERATOR_VERSION,terrainVersion:NATIVE_TERRAIN_VERSION});

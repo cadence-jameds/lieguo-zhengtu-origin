@@ -11,7 +11,7 @@ export type OfflineHours=typeof OFFLINE_HOURS[number];
 /** Existing tactical cadence rule, shared by every clock transition. IDs and other events stay unchanged. */
 export function retimeCombatClock(w:FormalWorld,oldSpeed:number,newSpeed:number){
  if(oldSpeed===newSpeed)return;
- for(const b of w.combat?.battles??[]){const event=w.events.find(e=>e.id===b.roundEventId&&e.type==='combat.round');if(!event)continue;b.nextRoundAt=w.time+Math.max(1,Math.ceil((b.nextRoundAt-w.time)*tacticalRoundWorldMs(newSpeed)/tacticalRoundWorldMs(oldSpeed)));event.at=b.nextRoundAt;}
+ for(const b of w.combat?.battles??[]){const event=w.events.find(e=>e.id===b.roundEventId&&e.type==='combat.round');if(!event||event.at===w.time)continue;b.nextRoundAt=w.time+Math.max(1,Math.ceil((b.nextRoundAt-w.time)*tacticalRoundWorldMs(newSpeed)/tacticalRoundWorldMs(oldSpeed)));event.at=b.nextRoundAt;}
  w.events=new EventScheduler(w.events).snapshot();
 }
 export function setClockMode(w:FormalWorld,mode:'foreground'|'offline'){const old=effectiveSpeed(w);w.clockMode=mode;retimeCombatClock(w,old,effectiveSpeed(w));}

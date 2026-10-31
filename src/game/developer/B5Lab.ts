@@ -20,6 +20,8 @@ export function makeLabWorld(value:unknown){
  if(!target||target.ownerFactionId===w.playerFactionId)throw Error('請指定一座 AI 城市。');
  w.campaignId=('campaign:b5lab-'+target.id.slice(5)+'-'+crypto.randomUUID()) as FormalWorld['campaignId'];
  prepareCity(w,w.cities[0],cfg.playerUnits,cfg.playerWallLevel,{food:1000000,wood:1000000,stone:1000000,gold:1000000});prepareCity(w,target,cfg.enemyUnits,cfg.wallLevel,cfg.enemyStock);
+ // P0-C-10: this isolated combat lab is an established battlefield, not a new campaign.
+ for(const f of w.factions)f.protectionUntil=0;
  // Test resources remain finite, so raid/cargo can be observed without refilling.
  w.developer={enabled:true,speed:cfg.speed};return validateFormalWorld(w);
 }
@@ -44,7 +46,7 @@ export class B5LabSession {
   const selected=positive(units.parse(value));checkUnits(draft,enemy,selected);enemy.military!.units=selected;
   return this.submit(draft,{type:'army.dispatch',cityId:enemy.id,mission,target:{kind:'city',cityId:home.id},units:selected},enemy.ownerFactionId,w.revision,'b5lab-incoming-'+crypto.randomUUID());
  }
- async advance(worldMs?:number){const w=this.current(),at=worldMs===undefined?labNextEvent(w)?.at:w.time+worldMs;if(at===undefined)throw Error('目前沒有行軍或戰鬥事件。');if(!Number.isSafeInteger(at)||at<w.time||at-w.time>86400000)throw Error('每次最多推進 24 世界小時。');const t=advanceFormal(w,at),saved=await this.store.save(t.world,t.reports,w.revision);this.world=saved;return saved;}
+ async advance(worldMs?:number){const w=this.current(),at=worldMs===undefined?labNextEvent(w)?.at:w.time+worldMs;if(at===undefined)throw Error('目前沒有行軍或戰鬥事件。');if(!Number.isSafeInteger(at)||at<w.time||at-w.time>86400000)throw Error('每次最多推進 24 世界小時。');const t=advanceFormal(w,at);if(t.world===w)return w;const saved=await this.store.save(t.world,t.reports,w.revision);this.world=saved;return saved;}
  async reload(){const loaded=await this.store.loadSave();if(!loaded.game)throw Error('測試存檔不存在。');assertLab(loaded.game);this.world=loaded.game;return loaded.game;}
  async export(){this.current();return JSON.stringify({kind:'b5-combat-lab',version:1,envelope:JSON.parse(await this.store.exportStoredSave('full'))});}
  async import(text:string){const file=JSON.parse(text);if(file.kind!=='b5-combat-lab'||file.version!==1)throw Error('只接受 B5 測試台完整備份。');const {decodeSave}=await import('../formal/saveCodec');const encoded=JSON.stringify(file.envelope),decoded=await decodeSave(file.envelope);assertLab(decoded.world);const saved=await this.store.importSave(encoded);this.world=saved;return saved;}

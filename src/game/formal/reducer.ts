@@ -1,3 +1,5 @@
+import {endProtection,protectionNotice} from './protection';
+import {worldPaused} from './extinction';
 import {migrateV95Economy} from './economy';
 import {syncGrowthTasks,captureGrowthEvent,recordGrowthEvent,recordGrowthCommand,claimGrowthReward} from './growthTasks';
 import {isMissionArmy} from './combatModel';
@@ -126,13 +128,14 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  }
  if(order.expectedRevision!==current.revision)return reject('世界版本已更新，請重新確認狀態。');
  if(order.issuedWorldTime>current.time)return reject('命令時間超前於世界。');
+ if(worldPaused(current)&&!['player.rebirth','player.end'].includes(order.payload.type))return reject('滅國期間世界已暫停。');
  const w=migrateV95Economy(cloneOrderDraft(current,order,replay)),reports:FormalReport[]=[];
  const p=order.payload;
  if(order.issuerId===w.playerFactionId)syncGrowthTasks(w);
  const city=spatial(w).cities.get(p.cityId);
- if(p.type!=='player.rebirth'&&p.type!=='campaign.configure'&&(!city||city.ownerFactionId!==order.issuerId))return reject('只能操作自己實際控制的城市。');
- if(city&&p.type!=='campaign.configure')settleCity(w,city);
- if(p.type==='player.rebirth'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();w.revision++;w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ if(p.type!=='player.rebirth'&&p.type!=='player.end'&&p.type!=='campaign.configure'&&(!city||city.ownerFactionId!==order.issuerId))return reject('只能操作自己實際控制的城市。');
+ if(city&&!worldPaused(w)&&p.type!=='campaign.configure')settleCity(w,city);
+ if(p.type==='player.rebirth'||p.type==='player.end'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();w.revision++;w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  if(!city)return reject('城市不存在。');
  if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
@@ -175,7 +178,8 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    promoteCityQueues(w,city,scheduler);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
  {if(p.type==='politics'||p.type==='military.modernize'||p.type==='military.disband'||p.type==='settlement.dispatch'||p.type==='settlement.cancel')invalidateMilitaryPower(w);const s=new EventScheduler(w.events);reconcileVictory(w,s);w.events=s.snapshot();}
- reports.push(...diplomacyChanges(w,diplomacySnapshot(current)));
+ if(p.type==='politics'&&p.action==='war')endProtection(w,order.issuerId,'主動宣戰');
+ reports.push(...protectionNotice(current,w,order.issuerId),...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
  w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
  recordGrowthCommand(w,order.issuerId,p);
@@ -230,21 +234,23 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   recordGrowthEvent(w,e,growthObservation,combatReports??[]);
   if(['combat.round','army.arrive','army.return','military.train','research.complete','settlement.arrive'].includes(e.type))invalidateMilitaryPower(w);
   invalidateEndgameIntel(w);
-  if(combatReports!==null)for(const army of [...w.armies]){if(!isMissionArmy(army)||army.mission!=='conquest'||army.status!=='returning'||army.departedAt!==w.time||!army.chain?.conquests)continue;const agent=w.autonomy?.agents.find(a=>a.factionId===army.ownerFactionId);if(!agent)continue;const command=chainDecision(w,army,agent);if(command)reports.push(...submitAutonomous(w,scheduler,e,agent.factionId,[command],submit));}
   const extinctBefore=w.extinction?.extinct.length??0;resolveExtinctions(w,scheduler);if((w.extinction?.extinct.length??0)!==extinctBefore)invalidateMilitaryPower(w);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcileVictory(w,scheduler);retireAutonomy(w,scheduler);retireGovernors(w,scheduler);
+  if(!worldPaused(w)&&combatReports!==null)for(const army of [...w.armies]){if(!isMissionArmy(army)||army.mission!=='conquest'||army.status!=='returning'||army.departedAt!==w.time||!army.chain?.conquests)continue;const agent=w.autonomy?.agents.find(a=>a.factionId===army.ownerFactionId);if(!agent)continue;const command=chainDecision(w,army,agent);if(command)reports.push(...submitAutonomous(w,scheduler,e,agent.factionId,[command],submit));}
   if(aiReports===null)reports.push(...diplomacyChanges(w,beforePolitics));
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
 }
 function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
-  const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=target;reconcileWonders(w,scheduler);reconcileVictory(w,scheduler);w.events=scheduler.snapshot();w.revision=current.revision+1;
+  const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=worldPaused(w)?w.time:target;reconcileWonders(w,scheduler);reconcileVictory(w,scheduler);w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
+ if(w.extinction?.resumedAt!==undefined&&w.extinction.resumedAt<w.time)delete w.extinction.resumedAt;
  syncGrowthTasks(w);validateFormalWorld(w);return{world:w,reports};
 }
 export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
+ if(worldPaused(current))return{world:current,reports:[]};
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
  const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
- while(scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
+ while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
 /** Yield between completed events, never between an event's mutations or during an IDB transaction. */
@@ -253,10 +259,11 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  const yieldIntervalMs=options.yieldIntervalMs??50;
  if(!Number.isFinite(yieldIntervalMs)||yieldIntervalMs<0)throw new Error('世界推進讓出間隔無效。');
+ if(worldPaused(current))return{world:current,reports:[]};
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
  const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
- while(scheduler.peek()&&scheduler.peek()!.at<=target){
+ while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;
   if((options.yieldIntervalMs!==undefined||processed%16===0)&&performance.now()-lastYield>=yieldIntervalMs){
    onProgress?.(w.time,target,processed);
@@ -264,6 +271,6 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
    lastYield=performance.now();
   }
  }
- onProgress?.(target,target,processed);
+ onProgress?.(worldPaused(w)?w.time:target,target,processed);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }

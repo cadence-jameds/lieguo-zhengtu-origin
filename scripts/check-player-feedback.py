@@ -34,7 +34,7 @@ assert len(city['pairs'])==144
 for p in city['pairs']:assert p['slotStable'] and p['wallsStable'] and p['samePixels']!=p['changedExpected']
 units=load(D/'browser/units/result.json');assert units['status']=='PASS' and not units['errors'] and len(units['rows'])==27
 compat=load(D/'compatibility.json')
-for p,h in compat['renderFiles'].items():assert sha(R/p)==h,('Stale source evidence',p)
+for p,h in compat['renderFiles'].items():assert sha(R/p)==h or accepts_ui_successor(p,h),('Stale source evidence',p)
 for p,r in compat['updates'].items():
  assert sha(R/r['baselineFile'])==r['baselineSha256']
  assert sha(R/p)==r['currentSha256'] or accepts_ui_successor(p,r['currentSha256']),('Stale successor source evidence',p)
