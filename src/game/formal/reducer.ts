@@ -271,6 +271,6 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
    lastYield=performance.now();
   }
  }
- onProgress?.(w.time,target,processed);
+ onProgress?.(worldPaused(w)?w.time:target,target,processed);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }

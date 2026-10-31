@@ -239,7 +239,7 @@ it('receipt indexes preserve any applied duplicate match and the original duplic
  const w=submitFormalOrder(createFormalFixture({research:true}),contribute(createFormalFixture({research:true}),'fund')).world;
  const row=w.commandReceipts[0];w.commandReceipts.push({...row,issuerId:fixtureIds.other,disposition:'rolled-back'});
  const messages=issues(w);expect(messages).toContain('Duplicate typed identity');expect(messages).not.toContain('Contribution command receipt missing');
- const native=createFormalWorld({campaign:'p0-duplicate-army',seed:12012});native.cities[0].military!.units={militia:2};
+ const native=createFormalWorld({campaign:'p0-duplicate-army',seed:12012});for(const f of native.factions)f.protectionUntil=0;native.cities[0].military!.units={militia:2};
  const dispatched=submitFormalOrder(native,order(native,{type:'army.dispatch',cityId:native.cities[0].id,mission:'raid',target:{kind:'city',cityId:native.cities[1].id},units:{militia:1}},'dispatch')).world;
  dispatched.commandReceipts.push({...dispatched.commandReceipts[0],issuerId:dispatched.factions[1].id});
  const armyMessages=issues(dispatched);expect(armyMessages).toContain('Duplicate typed identity');expect(armyMessages).not.toContain('Army dispatch receipt missing');

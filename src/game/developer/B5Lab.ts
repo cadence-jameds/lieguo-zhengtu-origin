@@ -20,6 +20,8 @@ export function makeLabWorld(value:unknown){
  if(!target||target.ownerFactionId===w.playerFactionId)throw Error('請指定一座 AI 城市。');
  w.campaignId=('campaign:b5lab-'+target.id.slice(5)+'-'+crypto.randomUUID()) as FormalWorld['campaignId'];
  prepareCity(w,w.cities[0],cfg.playerUnits,cfg.playerWallLevel,{food:1000000,wood:1000000,stone:1000000,gold:1000000});prepareCity(w,target,cfg.enemyUnits,cfg.wallLevel,cfg.enemyStock);
+ // P0-C-10: this isolated combat lab is an established battlefield, not a new campaign.
+ for(const f of w.factions)f.protectionUntil=0;
  // Test resources remain finite, so raid/cargo can be observed without refilling.
  w.developer={enabled:true,speed:cfg.speed};return validateFormalWorld(w);
 }

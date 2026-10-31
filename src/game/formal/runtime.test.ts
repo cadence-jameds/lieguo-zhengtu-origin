@@ -3,7 +3,8 @@ import {beforeEach,expect,it,vi} from 'vitest';
 import {createFormalFixture,fixtureIds} from './fixture';
 import {createFormalWorld as nativeWorld} from './generator';
 import {isolatedAutonomyFixture} from './autonomyTestSupport';
-const createFormalWorld=(...args:Parameters<typeof nativeWorld>)=>isolatedAutonomyFixture(nativeWorld(...args));
+// Established admission/load lab; raw new-world shield rules have separate P0-C-10 coverage.
+const createFormalWorld=(...args:Parameters<typeof nativeWorld>)=>{const w=isolatedAutonomyFixture(nativeWorld(...args));for(const f of w.factions)f.protectionUntil=0;return w;};
 import {order} from './testSupport';
 import type {FormalWorld,FormalCommand} from './model';
 import {researchCity,ownSecond,build} from './developmentTestSupport';
@@ -180,7 +181,7 @@ it('developer speed changes bridge due AI catch-up only with unchanged intent, r
  const payload={type:'developer.configure' as const,cityId:w.cities[0].id,enabled:true,speed:100 as const,shield:true},o=order(w,'dev-intent',payload),base=playerOrderBase(w,payload);expect(base).toBeDefined();
  realNow=Math.ceil(Math.min(...w.events.filter(e=>e.type==='ai.decide').map(e=>e.at))/25)+1;
  storage.save.mockRejectedValueOnce(Error('dev setting write fault'));send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(m=>m.type==='state')!.world).toEqual(w);
- messages=[];send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(m=>m.type==='state')!.world as FormalWorld;expect(committed.developer).toEqual({enabled:true,speed:100});expect(committed.speed).toBe(25);expect(committed.commandReceipts.filter(r=>r.commandId===o.commandId)).toHaveLength(1);
+ messages=[];send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(m=>m.type==='state')!.world as FormalWorld;expect(committed.developer).toEqual({enabled:true,speed:100,shieldUntil:committed.time+20*3600000});expect(committed.speed).toBe(25);expect(committed.commandReceipts.filter(r=>r.commandId===o.commandId)).toHaveLength(1);
  const calls=storage.save.mock.calls.length;messages=[];send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save.mock.calls.length).toBe(calls);
  messages=[];send({type:'command',order:order(w,'stale-dev',{...payload,enabled:false}),playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(m=>m.type==='state')!.world.developer.speed).toBe(100);
 });
