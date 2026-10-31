@@ -6,6 +6,9 @@ import {QUEUE_CAPACITY} from '../formal/economy';
 import {AGE_NAMES,LABELS} from './artMap';
 import {submitFormalOrder} from '../formal/reducer';
 import {commandId} from '../formal/ids';
+import {UNIT_CATALOG,ELITE_VARIANTS} from '../formal/unitCatalog';
+import {unitRecruitCost,unitTrainingDuration} from '../formal/military';
+import {modernUnitAuthorized} from '../formal/modernAwareness';
 export const BUILDING_CATEGORIES=[
  {id:'civil',name:'民生',kinds:['residence','townhall','embassy','monastery']},
  {id:'economy',name:'經濟',kinds:['warehouse','bunker','market','mill','lumbermill','masonry','mint']},
@@ -49,13 +52,31 @@ export function constructionAction(w:FormalWorld,c:FormalCity,target:{key:string
  return {next,cost,duration:buildingDuration(kind,next,center),reasons};
 }
 
-/** Actual recruitment scheduler preview on a draft, including the chosen training lane. */
+/** Read-only UI arithmetic; the Worker remains the sole recruitment authority. */
+export function recruitmentConditions(w:FormalWorld,c:FormalCity,unitId:string,count:number){
+ const f=w.factions.find(f=>f.id===c.ownerFactionId)!,base=UNIT_CATALOG[unitId],elite=ELITE_VARIANTS[unitId]&&UNIT_CATALOG[ELITE_VARIANTS[unitId]];
+ const d=elite&&f.techIds.includes(elite.eliteTech!)&&c.economy?.milestones.includes(elite.milestone)?elite:base;
+ const unitCost=unitRecruitCost(w,c,d),cost={...unitCost},valid=Number.isSafeInteger(count)&&count>=1&&count<=100000,reasons:string[]=[];
+ for(const r of resourceKeys)cost[r]*=valid?count:1;
+ if(d.era==='modern'&&!modernUnitAuthorized(f,d.id))reasons.push('需要完整現代軍事資格或此線逆向工程');
+ if(d.era!=='modern'&&(f.age??0)<d.age)reasons.push(AGE_NAMES[d.age]+'時代');
+ if(buildingLevel(c,d.producer)<1)reasons.push('需要'+LABELS[d.producer]);
+ if(d.civilizationId&&d.civilizationId!==(c.castleCivilizationId??f.civilizationId))reasons.push('此城堡無外文明生產資格');
+ if(d.eliteTech&&(!f.techIds.includes(d.eliteTech)||!c.economy?.milestones.includes(d.milestone)))reasons.push('本城尚未取得精銳生產資格');
+ if((c.military?.queue.length??0)>=QUEUE_CAPACITY)reasons.push('訓練佇列已滿');
+ if(!valid)reasons.push('請輸入1～100000名');
+ if(c.population<d.population*count)reasons.push('居民不足');
+ if(c.population>c.housing)reasons.push('住房不足');
+ if(resourceKeys.some(r=>!Number.isSafeInteger(cost[r])||c.stock[r]<cost[r]))reasons.push('資源不足');
+ return {d,unitCost,cost,reasons,population:d.population*count,durationMs:unitTrainingDuration(w,c,d)};
+}
+/** At most five local jobs; no command simulation, world clone, schema parse or mutation. */
 export function recruitmentPreview(w:FormalWorld,c:FormalCity,unitId:string,count:number){
- return cachedPreview(w,JSON.stringify(['recruitment',c.id,unitId,count]),()=>{
- const id=commandId('presentation-recruit-preview');
- const t=submitFormalOrder(w,{commandId:id,campaignId:w.campaignId,issuerId:c.ownerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'military.recruit',cityId:c.id,unitId,count}});
- return t.ack?.status==='committed'?t.world.cities.find(n=>n.id===c.id)?.military?.queue.find(j=>j.commandId===id):undefined;
- });
+ const info=recruitmentConditions(w,c,unitId,count);if(info.reasons.length)return undefined;
+ const queue=c.military?.queue??[],end=(lane:number)=>Math.max(w.time,...queue.filter(j=>j.lane===lane).map(j=>j.nextAt+(j.remaining-1)*j.durationMs));
+ const lane=c.economy?.milestones.includes(20000)&&end(1)<end(0)?1:0,startsAt=end(lane),durationMs=info.durationMs;
+ if(!Number.isSafeInteger(startsAt+durationMs*count))return undefined;
+ return {remaining:count,lane,startsAt,nextAt:startsAt+durationMs,durationMs};
 }
 
 /** The real craftsman command on a private draft: ordinary castle payment is irrelevant. */
