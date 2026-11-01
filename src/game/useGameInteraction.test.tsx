@@ -155,3 +155,10 @@ it('after Worker interruption and remount a durable command remains queryable by
  await act(async()=>port.onerror?.({message:'Worker terminated'}));await act(async()=>root.unmount());root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>{port.emit(state(w));port.emit({type:'commandList',rows:[{order:original,commandId:original.commandId,state:'pending',sequence:1}]});});
  await act(async()=>engine.queryCommand(engine.commandRows.find(r=>r.commandId===original.commandId)!));expect(port.sent.at(-1)).toMatchObject({type:'commandQuery',campaignId:original.campaignId,commandId:original.commandId});
 });
+it('a terminal Ack cancels its deadline synchronously before React effects flush',async()=>{
+ vi.useFakeTimers();try{
+  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'deadline-race'}));const request=port.sent.at(-1);
+  await act(async()=>{port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status:'committed',revision:1}});vi.advanceTimersByTime(30000);});
+  expect(engine.commandRows.at(-1)!.state).toBe('committed');expect(port.sent.filter(r=>r.type==='commandQuery'&&r.commandId===request.order.commandId)).toHaveLength(0);
+ }finally{vi.useRealTimers();}
+});

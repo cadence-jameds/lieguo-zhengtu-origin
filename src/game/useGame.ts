@@ -33,11 +33,14 @@ export function useGame(){
  const waitKey=(campaign:string,id:string)=>campaign+'/'+id;
  const isWaiting=(state:CommandView['state']|undefined)=>state==='created'||state==='pending'||state==='retryable';
  const waitWarning='等待結果逾時；請查詢結果或重新載入。原操作內容保留，請勿直接重複下單。';
- const updateCommand=(id:string,patch:Partial<CommandView>)=>setCommandRows(rows=>{const campaign=patch.order?.campaignId??current.current?.campaignId,key=waitKey(campaign??'',id),old=rows.find(r=>r.commandId===id&&r.order.campaignId===campaign);
+ const updateCommand=(id:string,patch:Partial<CommandView>)=>{
+  const key=waitKey(patch.order?.campaignId??current.current?.campaignId??'',id);
+  if(patch.state&&!isWaiting(patch.state)&&patch.state!=='blocked'){clearTimeout(waitTimers.current.get(key));waitTimers.current.delete(key);waitExpired.current.delete(key);}
+  setCommandRows(rows=>{const campaign=patch.order?.campaignId??current.current?.campaignId,key=waitKey(campaign??'',id),old=rows.find(r=>r.commandId===id&&r.order.campaignId===campaign);
   // A pending observation cannot undo a timeout or a previously known terminal result.
   if(isWaiting(patch.state)&&old&&!isWaiting(old.state)&&old.state!=='blocked'&&old.state!=='receive-failed')return rows;
   const next=isWaiting(patch.state)&&waitExpired.current.has(key)?{...patch,state:'blocked' as const,text:waitWarning}:patch;
-  return old?rows.map(r=>r===old?{...r,...next}:r):next.order?[...rows,{commandId:id,...next} as CommandView]:rows;});
+  return old?rows.map(r=>r===old?{...r,...next}:r):next.order?[...rows,{commandId:id,...next} as CommandView]:rows;});};
  const preserveDrafts=()=>{try{sessionStorage.setItem('formal-command-drafts-v1',JSON.stringify([...commandRequests.current.values()]));}catch{/* Memory retains the original operation; T1 is still the only durable acceptance. */}};
  const forgetDraft=(id:string)=>{if(commandRequests.current.delete(id))preserveDrafts();};
  const [feedback,setFeedback]=useState<CommandFeedback>({kind:'idle',text:''});
@@ -169,6 +172,7 @@ export function useGame(){
   for(const row of commandRows){const key=waitKey(row.order.campaignId,row.commandId);
    if(isWaiting(row.state)&&!waitExpired.current.has(key)&&!waitTimers.current.has(key)){
     waitTimers.current.set(key,setTimeout(()=>{
+     if(!waitTimers.current.has(key))return;
      waitTimers.current.delete(key);waitExpired.current.add(key);
      updateCommand(row.commandId,{order:row.order,state:'blocked',text:waitWarning});
      worker.current?.postMessage({type:'commandQuery',campaignId:row.order.campaignId,commandId:row.commandId});
