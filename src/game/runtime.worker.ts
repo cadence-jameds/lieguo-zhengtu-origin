@@ -51,7 +51,7 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
 }
 async function handle(r:RuntimeRequest){
  if(r.stateMode==='patch')patchMode=true;
- if(r.type==='commandQuery'){const row=await commandStatus(r.campaignId,r.commandId);post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack});return;}
+ if(r.type==='commandQuery'){const row=await commandStatus(r.campaignId,r.commandId);post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack});lastPublished=null;state();return;}
  if(r.type==='commandList'){post({type:'commandList',rows:await commandPage(r.before)});return;}
  if(r.type==='snapshot'){lastPublished=null;state();return;}
  if(r.type==='exportLegacy'){post({type:'export',text:await exportLegacyCampaign(),mode:'historical'});return;}

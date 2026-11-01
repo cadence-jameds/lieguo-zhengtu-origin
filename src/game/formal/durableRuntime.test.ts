@@ -14,7 +14,7 @@ import {battlefield,dispatch} from './combatTestSupport';
 import {advanceFormal} from './reducer';
 import {isolatedAutonomyFixture} from './autonomyTestSupport';
 import type {FormalOrder,FormalWorld,FormalCommand} from './model';
-let store:FormalPersistence,now=0,fail:FailurePoint|undefined,dropAck=false,tick:()=>void;
+let store:FormalPersistence,now=0,fail:FailurePoint|undefined,dropAck=false,dropState=false,tick:()=>void;
 let messages:any[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:any)=>void};
 const send=(data:unknown)=>port.onmessage!({data});
 const until=async(fn:()=>boolean)=>vi.waitFor(()=>expect(fn()).toBe(true),{timeout:15000});
@@ -28,16 +28,16 @@ async function boot(){
   loadWithOffline:(progress:Parameters<FormalPersistence['loadWithOffline']>[1])=>store.loadWithOffline(Date.now(),progress),
   startCampaign:(w:FormalWorld)=>store.start(w)
  }));
- messages=[];port={onmessage:null,postMessage:v=>{if(dropAck&&v.type==='commandAck')return;messages.push(structuredClone(v));}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',(cb:()=>void)=>{tick=cb;return 1;});await import('../runtime.worker');send({type:'load',requestId:'load'});await until(()=>done('load'));expect(messages.filter(m=>m.type==='error')).toEqual([]);
+ messages=[];port={onmessage:null,postMessage:v=>{if(dropAck&&v.type==='commandAck'||dropState&&v.type==='state')return;messages.push(structuredClone(v));}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',(cb:()=>void)=>{tick=cb;return 1;});await import('../runtime.worker');send({type:'load',requestId:'load'});await until(()=>done('load'));expect(messages.filter(m=>m.type==='error')).toEqual([]);
 }
-beforeEach(()=>{now=0;fail=undefined;dropAck=false;vi.spyOn(performance,'now').mockImplementation(()=>now);store=new FormalPersistence({suffix:'runtime-durable-'+crypto.randomUUID(),fault:point=>{if(point===fail){fail=undefined;throw new DOMException('transient '+point,'AbortError');}}});});
+beforeEach(()=>{now=0;fail=undefined;dropAck=false;dropState=false;vi.spyOn(performance,'now').mockImplementation(()=>now);store=new FormalPersistence({suffix:'runtime-durable-'+crypto.randomUUID(),fault:point=>{if(point===fail){fail=undefined;throw new DOMException('transient '+point,'AbortError');}}});});
 afterEach(async()=>{await store.db.delete();vi.doUnmock('../persistence');vi.restoreAllMocks();vi.unstubAllGlobals();});
 function click(w:FormalWorld,key:string,payload:FormalCommand){const o=order(w,key,payload);send({type:'command',order:o,...captureIntent(w,o),requestId:key});return o;}
 it('real Worker protocol: T1 survives termination before execution, reboot revalidates and commits one effect; Ack loss queries exact T2 result',async()=>{
  const initial=await store.start(createFormalFixture({research:true})),o=contribute(initial,'recovered',50);await store.receiveCommand(o,captureIntent(initial,o));
  await boot();await until(()=>messages.some(m=>m.type==='commandAck'));expect(ack(o).status).toBe('committed');const next=(await store.loadSave()).game!;expect(next.cities[0].stock.food).toBe(550);expect((await store.commandStatus(o.campaignId,o.commandId))!.state).toBe('committed');
- dropAck=true;const second=click(next,'lost-ack',{type:'city.rename',cityId:fixtureIds.home,name:'Ack遺失'});await until(()=>done('lost-ack'));expect(ack(second)).toBeUndefined();const durable=await store.commandStatus(second.campaignId,second.commandId);expect(durable!.state).toBe('committed');dropAck=false;
- send({type:'commandQuery',campaignId:second.campaignId,commandId:second.commandId,requestId:'query'});await until(()=>done('query'));expect(ack(second)).toEqual(durable!.ack);
+ send({type:'snapshot',stateMode:'patch',requestId:'enable-patch'});await until(()=>done('enable-patch'));dropAck=true;dropState=true;const second=click(next,'lost-ack',{type:'city.rename',cityId:fixtureIds.home,name:'Ack遺失'});await until(()=>done('lost-ack'));expect(ack(second)).toBeUndefined();const durable=await store.commandStatus(second.campaignId,second.commandId);expect(durable!.state).toBe('committed');dropAck=false;dropState=false;
+ send({type:'commandQuery',campaignId:second.campaignId,commandId:second.commandId,requestId:'query'});await until(()=>done('query'));expect(ack(second)).toEqual(durable!.ack);expect(latest().cities[0].name).toBe('Ack遺失');
  send({type:'command',order:second,...captureIntent(next,second),requestId:'repeat'});await until(()=>done('repeat'));expect(ack(second)).toEqual(durable!.ack);expect((await store.loadSave()).game!.commandReceipts).toHaveLength(2);
 });
 it.each(['report-write','backup-write','world-write','authority-write','metadata-write','result-write'] as const)('real Worker retries a temporary T2 %s failure finitely and never duplicates resource deduction',async point=>{
