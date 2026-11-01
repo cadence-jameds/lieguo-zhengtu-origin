@@ -1,3 +1,4 @@
+import {commandId} from './ids';
 import 'fake-indexeddb/auto';
 import {beforeEach,expect,it,vi} from 'vitest';
 import {createFormalFixture,fixtureIds} from './fixture';
@@ -15,7 +16,7 @@ import {submitFormalOrder} from './reducer';
 import {governanceBase} from '../governanceAdmission';
 import {applyWorldPatch} from '../worldStream';
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),reportStatus:vi.fn().mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}}),reportAction:vi.fn()}));
-vi.mock('../persistence',()=>storage);
+vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let messages:Record<string,any>[],port:{postMessage:(r:Record<string,any>)=>void;onmessage:((e:{data:unknown})=>void)|null},initial:FormalWorld;
 const send=(data:unknown)=>port.onmessage!({data});
 async function until(test:()=>boolean){await vi.waitFor(()=>expect(test()).toBe(true));}
@@ -30,15 +31,15 @@ beforeEach(async()=>{
 it('active Worker does not acknowledge or switch a draft until persistence resolves',async()=>{
  let finish!:(w:FormalWorld)=>void,submitted!:FormalWorld;storage.save.mockImplementation((w:FormalWorld)=>{submitted=w;return new Promise<FormalWorld>(r=>{finish=r;});});
  const cmd=order(initial,'wait',{type:'city.rename',cityId:fixtureIds.home,name:'已改名'});send({type:'command',order:cmd});await until(()=>storage.save.mock.calls.length===1);
- expect(messages).toEqual([{type:'commandReceived',commandId:cmd.commandId,requestId:undefined}]);finish(submitted);await until(()=>messages.some(r=>r.type==='commandAck'));
+ expect(messages.map(m=>m.type)).toEqual(['commandReceived','commandDurable']);expect(messages[1].row).toMatchObject({state:'pending',order:cmd});finish(submitted);await until(()=>messages.some(r=>r.type==='commandAck'));
  expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');expect(messages.find(r=>r.type==='state')!.world.cities[0].name).toBe('已改名');
 });
 it('failed commit gives rejected ack and prior world; retry and replay only save once successfully',async()=>{
  storage.save.mockRejectedValueOnce(new Error('Transaction failed'));
- const cmd=order(initial,'retry',{type:'city.rename',cityId:fixtureIds.home,name:'新名'});send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));
+ let cmd=order(initial,'retry',{type:'city.rename',cityId:fixtureIds.home,name:'新名'});send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));
  expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(initial);
- messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');
- messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(2);
+ messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(initial);expect(storage.save).toHaveBeenCalledTimes(1);cmd={...cmd,commandId:commandId('confirmed-runtime')};messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');
+ messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');expect(storage.save).toHaveBeenCalledTimes(2);
 });
 it('requests share one serialized authority and reject an overlapping stale command',async()=>{
  const a=order(initial,'a',{type:'city.rename',cityId:fixtureIds.home,name:'甲'}),b=order(initial,'b',{type:'city.rename',cityId:fixtureIds.home,name:'乙'});
@@ -98,7 +99,7 @@ for(const speed of [1,3,6,10,25]){
   send({type:'command',order:original,playerBase:base});await until(()=>messages.some(r=>r.type==='commandAck'));
   expect(messages.filter(r=>r.type==='commandAck').map(r=>r.ack.status)).toEqual(['committed']);
   const next=messages.find(r=>r.type==='state')!.world as FormalWorld;expect(next.commandReceipts).toHaveLength(1);expect(next.cities[0].name).toBe('時鐘不阻擋');
-  messages=[];send({type:'command',order:original,playerBase:base});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(2);
+  const durableAck=messages.find(r=>r.type==='commandAck')!.ack;messages=[];send({type:'command',order:original,playerBase:base});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack).toEqual(durableAck);expect(storage.save).toHaveBeenCalledTimes(2);
  });
  for(const mode of ['training','research','settlement','logistics'] as const)it(`${speed}X ${mode} uses the real deadline and agrees with offline completion`,async()=>{
   const w=createFormalWorld({campaign:mode+'-'+speed,seed:90217,speed}),city=researchCity(w);let payload:FormalCommand,at:(w:FormalWorld)=>number,done:(w:FormalWorld)=>boolean;
@@ -135,7 +136,7 @@ for(const speed of [1,10,25])for(const dense of [false,true])it(`${speed}X gover
  expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');const after=messages.filter(r=>r.type==='state').at(-1)!.world as FormalWorld;
  expect(after.governors!.find(g=>g.cityId===w.cities[0].id)?.policy).toBe('reserve');expect(after.commandReceipts.filter(r=>r.commandId===change.commandId)).toHaveLength(1);expect(after.events.filter(e=>e.type==='governance.decide'&&e.cityId===w.cities[0].id)).toHaveLength(1);expect(()=>validateFormalWorld(after)).not.toThrow();
  const stock=structuredClone(after.cities[0].stock),spent=structuredClone(after.governors![0].spent),events=structuredClone(after.events),calls=storage.save.mock.calls.length;
- messages=[];send({type:'command',order:change});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(calls);expect(messages.find(r=>r.type==='state')!.world.cities[0].stock).toEqual(stock);expect(messages.find(r=>r.type==='state')!.world.governors[0].spent).toEqual(spent);expect(messages.find(r=>r.type==='state')!.world.events).toEqual(events);
+ const durableAck=messages.find(r=>r.type==='commandAck')!.ack;messages=[];send({type:'command',order:change});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack).toEqual(durableAck);expect(storage.save).toHaveBeenCalledTimes(calls);expect(messages.find(r=>r.type==='state')!.world.cities[0].stock).toEqual(stock);expect(messages.find(r=>r.type==='state')!.world.governors[0].spent).toEqual(spent);expect(messages.find(r=>r.type==='state')!.world.events).toEqual(events);
  messages=[];send({type:'command',order:order(started,'stale-setting',{...first.payload,policy:'military'}),governanceBase:governanceBase(started,w.cities[0].id)});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='commandAck')!.ack.reason).toContain('再次套用');expect(messages.find(r=>r.type==='state')!.world.governors[0].policy).toBe('reserve');
 },20000);
 it('a late event remains unexposed on failed persistence, retries after one second, and never overlaps',async()=>{
@@ -146,8 +147,8 @@ it('a late event remains unexposed on failed persistence, retries after one seco
 });
 it('a failed governance save never exposes a new setting or receipt and replay commits only once',async()=>{
  const w=createFormalWorld({campaign:'governance-save-failure',seed:90217,speed:25});build(w.cities[0],'townhall',1);storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
- const o=order(w,'governance-failed',{type:'governance.set',cityId:w.cities[0].id,enabled:true,policy:'reserve',budget:2400,reserve:180});storage.save.mockRejectedValueOnce(new Error('Transaction failed'));send({type:'command',order:o,governanceBase:governanceBase(w,w.cities[0].id)});await until(()=>messages.some(r=>r.type==='commandAck'));
- expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(w);messages=[];send({type:'command',order:o});await until(()=>messages.some(r=>r.type==='commandAck'));const next=messages.find(r=>r.type==='state')!.world as FormalWorld;expect(next.commandReceipts.filter(r=>r.commandId===o.commandId)).toHaveLength(1);expect(next.events.filter(e=>e.type==='governance.decide')).toHaveLength(1);expect(next.cities[0].stock).toEqual(w.cities[0].stock);messages=[];send({type:'command',order:o});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(2);
+ let o=order(w,'governance-failed',{type:'governance.set',cityId:w.cities[0].id,enabled:true,policy:'reserve',budget:2400,reserve:180});storage.save.mockRejectedValueOnce(new Error('Transaction failed'));send({type:'command',order:o,governanceBase:governanceBase(w,w.cities[0].id)});await until(()=>messages.some(r=>r.type==='commandAck'));
+ expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(w);messages=[];send({type:'command',order:o});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(w);o={...o,commandId:commandId('confirmed-governance')};messages=[];send({type:'command',order:o});await until(()=>messages.some(r=>r.type==='commandAck'));const next=messages.find(r=>r.type==='state')!.world as FormalWorld;expect(next.commandReceipts.filter(r=>r.commandId===o.commandId)).toHaveLength(1);expect(next.events.filter(e=>e.type==='governance.decide')).toHaveLength(1);expect(next.cities[0].stock).toEqual(w.cities[0].stock);messages=[];send({type:'command',order:o});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');expect(storage.save).toHaveBeenCalledTimes(2);
 });
 
 for(const speed of [1,3,6,10,25])it(`${speed}X command admission uses real IndexedDB authority and restores the same durable state`,async()=>{
@@ -156,7 +157,7 @@ for(const speed of [1,3,6,10,25])it(`${speed}X command admission uses real Index
   const w=await p.start(createFormalWorld({campaign:'idb-admission-'+speed,seed:90217,speed}));storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});storage.save.mockImplementation((draft,reports,revision)=>p.save(draft,reports,revision));send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
   realNow=1550;send({type:'command',order:order(w,'actual-idb',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(r=>r.type==='state')!.world as FormalWorld;
   expect(committed.revision).toBe(w.revision+1);expect(committed.time).toBe(1550*speed);expect((await p.loadSave()).game).toEqual(committed);expect((await p.backupList())).toHaveLength(2);
-  messages=[];send({type:'command',order:order(w,'actual-idb',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);
+  const durableAck=messages.find(r=>r.type==='commandAck')!.ack;messages=[];send({type:'command',order:order(w,'actual-idb',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack).toEqual(durableAck);expect(storage.save).toHaveBeenCalledTimes(1);
  }finally{await p.db.delete();}
 });
 
@@ -181,7 +182,8 @@ it('developer speed changes bridge due AI catch-up only with unchanged intent, r
  const payload={type:'developer.configure' as const,cityId:w.cities[0].id,enabled:true,speed:100 as const,shield:true},o=order(w,'dev-intent',payload),base=playerOrderBase(w,payload);expect(base).toBeDefined();
  realNow=Math.ceil(Math.min(...w.events.filter(e=>e.type==='ai.decide').map(e=>e.at))/25)+1;
  storage.save.mockRejectedValueOnce(Error('dev setting write fault'));send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(m=>m.type==='state')!.world).toEqual(w);
- messages=[];send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(m=>m.type==='state')!.world as FormalWorld;expect(committed.developer).toEqual({enabled:true,speed:100,shieldUntil:committed.time+20*3600000});expect(committed.speed).toBe(25);expect(committed.commandReceipts.filter(r=>r.commandId===o.commandId)).toHaveLength(1);
- const calls=storage.save.mock.calls.length;messages=[];send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save.mock.calls.length).toBe(calls);
+ const confirmed={...o,commandId:commandId('confirmed-developer')};
+ messages=[];send({type:'command',order:confirmed,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(m=>m.type==='state')!.world as FormalWorld;expect(committed.developer).toEqual({enabled:true,speed:100,shieldUntil:committed.time+20*3600000});expect(committed.speed).toBe(25);expect(committed.commandReceipts.filter(r=>r.commandId===confirmed.commandId)).toHaveLength(1);
+ const calls=storage.save.mock.calls.length;messages=[];send({type:'command',order:confirmed,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');expect(storage.save.mock.calls.length).toBe(calls);
  messages=[];send({type:'command',order:order(w,'stale-dev',{...payload,enabled:false}),playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(m=>m.type==='state')!.world.developer.speed).toBe(100);
 });
