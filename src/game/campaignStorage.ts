@@ -35,7 +35,12 @@ type DatabaseReader={tables:{name:string;count:()=>Promise<number>;toArray:()=>P
 export async function inspectCampaignStorage():Promise<StoredCampaignStatus>{
  let stored=false,incompatible=false,historical=false;
  for(const name of databaseNames())await withExisting(name,async db=>{
-  let hasRows=false;for(const table of db.tables)if(await table.count())hasRows=true;
+  let hasRows=false;for(const table of db.tables){
+   // Writer routing/fencing exists even before the first campaign. It contains
+   // no world or player intent. Inbox and every other row remain protected data.
+   if(name===String(FORMAL_DB_NAME)&&table.name==='RuntimeMeta')continue;
+   if(await table.count())hasRows=true;
+  }
   if(name===historicalName&&name!==String(FORMAL_DB_NAME)&&hasArchiveBoundary()){
    historical ||= hasRows;return;
   }
