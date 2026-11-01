@@ -10,11 +10,9 @@ await fs.mkdir('artifacts/r302-harness',{recursive:true});await fs.mkdir(out,{re
 async function writeIfChanged(file,text){if(await fs.readFile(file,'utf8').catch(()=>null)!==text)await fs.writeFile(file,text);}
 await writeIfChanged('artifacts/r302-harness/index.html','<!doctype html><html><body><div id="root"></div></body></html>');
 await writeIfChanged('artifacts/r302-harness/entry.tsx',`
-import React from '/node_modules/.vite/deps/react.js';
-import ReactDOMClient from '/node_modules/.vite/deps/react-dom_client.js';
-const {createRoot}=ReactDOMClient;
-import ReactDOM from '/node_modules/.vite/deps/react-dom.js';
-const {flushSync}=ReactDOM;
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {flushSync} from 'react-dom';
 import {createFormalWorld} from '/src/game/formal/generator.ts';
 import {validateFormalWorld} from '/src/game/formal/schema.ts';
 import {submitFormalOrder} from '/src/game/formal/reducer.ts';
@@ -43,8 +41,14 @@ const pct=(xs,p)=>[...xs].sort((a,b)=>a-b)[Math.ceil(xs.length*p)-1],stats=xs=>(
 const context=await browser.newContext({viewport:{width:1440,height:900}}),page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.stack??String(e)));page.on('console',m=>{if(m.type()==='error')console.error(m.text());});
 const run=async(name,fn)=>{try{const data=await fn();report.cases.push({name,status:'PASS',...data});}catch(e){report.cases.push({name,status:'FAIL',error:String(e)});throw e;}finally{await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify(report,null,2));}};
 try{
- await page.route('**/artifacts/r302-harness/index.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><body><div id="root"></div></body></html>'}));await page.goto(base+'/artifacts/r302-harness/index.html');
- await page.evaluate(async()=>{globalThis.__APP_RELEASE_METADATA__=await(await fetch('/version.json')).json();const refresh=(await import('/@react-refresh')).default;refresh.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;await import('/@vite/client');await new Promise(r=>setTimeout(r,500));await import('/artifacts/r302-harness/entry.tsx');});
+ await page.route('**/artifacts/r302-harness/index.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><body><div id="root"></div></body></html>'}));
+ for(let setup=0;setup<3;setup++){
+  try{
+   await page.goto(base+'/artifacts/r302-harness/index.html');
+ await page.evaluate(async()=>{globalThis.__APP_RELEASE_METADATA__=await(await fetch('/version.json')).json();const refresh=(await import('/@react-refresh')).default;refresh.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;await import('/@vite/client');await new Promise(r=>setTimeout(r,500));await Promise.all([import('/src/game/persistence.ts'),import('/src/game/durableCommands.ts')]);await import('/artifacts/r302-harness/entry.tsx');});
+   break;
+  }catch(e){if(!String(e).includes('Execution context was destroyed')||setup===2)throw e;report.setupReloads=(report.setupReloads??0)+1;}
+ }
  await run('native single/batch Worker preview and compact context at 0/10k/30k/60k history',async()=>{
   for(const history of [0,10000,30000,60000]){
    const data=await page.evaluate(async history=>{
@@ -57,7 +61,7 @@ try{
      if(one.response.results[0].status!=='ready')throw Error('single unavailable');
      const many=await window.lab.request(c,w,[{field:0},{field:1},{field:2},{key:'wall'},{key:'warehouse.0'},{key:'bunker.0'}]);
      const hit=await window.lab.request(c,w);c.dispose();
-     const renderAt=performance.now();window.lab.detail(w);const button=[...document.querySelectorAll('button')].find(b=>b.textContent.includes('升級至'));if(!button||button.disabled)throw Error('UI blocked '+JSON.stringify({button:button?.outerHTML,body:document.body.textContent.slice(-2500)}));button.click();const interactiveMs=performance.now()-renderAt;window.lab.close();
+     const renderAt=performance.now();window.lab.detail(w);const button=[...document.querySelectorAll('button')].find(b=>b.textContent.includes('升級至'));if(!button||button.disabled)throw Error('UI blocked '+JSON.stringify({button:button?.outerHTML,body:document.body.innerHTML.slice(-2500),connected:window.lab.root._internalRoot.containerInfo.isConnected,container:window.lab.root._internalRoot.containerInfo.innerHTML.slice(0,500),history,i}));button.click();const interactiveMs=performance.now()-renderAt;window.lab.close();
      if(i>=0){old.push(oldMs);single.push(one.total);batch.push(many.total);prepared.push(one.prepared);transfer.push(one.postMs);cache.push(hit.total);interactive.push(interactiveMs);contextBytes=one.bytes;counts={single:one.response.results.length,batch:many.response.results.length};
       // New-path interval excludes old reducer and panel setup.
       await new Promise(r=>setTimeout(r,0));const entries=longTasks.filter(t=>t.at>=at&&t.at<end);if(entries.length)throw Error('new preview main-thread long task '+JSON.stringify(entries));
@@ -65,7 +69,7 @@ try{
     }
     observer.disconnect();return {old,single,batch,prepared,transfer,cache,interactive,contextBytes,counts};
    },history);
-   report.performance.push({history,contextBytes:data.contextBytes,oldFullReducerMs:stats(data.old),singleColdWorkerMs:stats(data.single),batchColdMs:stats(data.batch),contextMainMs:stats(data.prepared),postMessageAndKeyMainMs:stats(data.transfer),cacheHitMs:stats(data.cache),detailInteractiveMainMs:stats(data.interactive),previewLongTasksOver50ms:0,sample:'30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch'});
+   console.log('Completed native history',history);report.performance.push({history,contextBytes:data.contextBytes,oldFullReducerMs:stats(data.old),singleColdWorkerMs:stats(data.single),batchColdMs:stats(data.batch),contextMainMs:stats(data.prepared),postMessageAndKeyMainMs:stats(data.transfer),cacheHitMs:stats(data.cache),detailInteractiveMainMs:stats(data.interactive),previewLongTasksOver50ms:0,sample:'30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch'});
   }
   return {histories:report.performance.map(p=>p.history)};
  });
@@ -90,9 +94,9 @@ try{
   });await page.waitForFunction(()=>window.runtimeMessages.some(m=>m.type==='booted'));await page.evaluate(()=>window.runtime.postMessage({type:'load',requestId:'load'}));await page.waitForFunction(()=>window.runtimeMessages.some(m=>m.type==='requestDone'&&m.requestId==='load'));
   await page.evaluate(()=>{
    const w=window.runtimeMessages.filter(m=>m.type==='state').at(-1).world;window.runtimeWorld=w;const order={commandId:'command:r302-independent',campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'field.upgrade',cityId:w.cities[0].id,slot:0}};window.formalOrder=order;
-   window.previewPending=window.lab.controller();window.previewPromise=window.lab.request(window.previewPending,w).catch(()=>null);window.runtime.postMessage({type:'command',order,...window.captureIntent(w,order),requestId:'formal'});
+   window.previewPending=window.lab.controller();window.previewSettled=false;window.previewPromise=window.lab.request(window.previewPending,w).then(r=>{window.previewSettled=true;return r;}).catch(()=>null);window.runtime.postMessage({type:'command',order,...window.captureIntent(w,order),requestId:'formal'});
   });await page.waitForFunction(()=>window.runtimeMessages.some(m=>m.type==='commandDurable'));
-  await page.evaluate(()=>window.previewPending.dispose());await page.waitForFunction(()=>window.runtimeMessages.some(m=>m.type==='commandAck'&&m.ack.commandId==='command:r302-independent'));
+  assert.equal(await page.evaluate(()=>window.previewSettled),false);await page.evaluate(()=>window.previewPending.dispose());await page.waitForFunction(()=>window.runtimeMessages.some(m=>m.type==='commandAck'&&m.ack.commandId==='command:r302-independent'));
   const result=await page.evaluate(async()=>{const {FormalPersistence}=await import('/src/game/persistence.ts'),s=new FormalPersistence(),row=await s.commandStatus(window.formalOrder.campaignId,window.formalOrder.commandId),w=(await s.loadSave()).game;s.db.close();window.runtime.terminate();return {state:row.state,effects:w.commandReceipts.filter(r=>r.commandId===window.formalOrder.commandId).length,jobs:w.cities[0].economy.construction.length};});assert.deepEqual(result,{state:'committed',effects:1,jobs:1});return result;
  });
  assert.deepEqual(report.errors,[]);
