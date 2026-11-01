@@ -4,8 +4,8 @@ import {resourceKeys,zeroResources} from '../formal/model';
 import {BUILDING_CATALOG,buildingKind,buildingLevel,buildingCost,buildingDuration,fieldCost,fieldDuration} from '../formal/catalogB3';
 import {QUEUE_CAPACITY} from '../formal/economy';
 import {AGE_NAMES,LABELS} from './artMap';
-import {submitFormalOrder} from '../formal/reducer';
-import {commandId} from '../formal/ids';
+import {constructionPreviewContext} from '../constructionPreviewContext';
+import {calculateConstructionPreview} from '../constructionPreviewCompute';
 import {UNIT_CATALOG,ELITE_VARIANTS} from '../formal/unitCatalog';
 import {unitRecruitCost,unitTrainingDuration} from '../formal/military';
 import {modernUnitAuthorized} from '../formal/modernAwareness';
@@ -21,16 +21,10 @@ export function newBuildingKey(c:FormalCity,kind:string){
  if(kind!=='warehouse'&&kind!=='bunker')return kind;
  return kind+'.'+Array.from({length:16},(_,i)=>i).find(i=>!Object.hasOwn(c.buildings,kind+'.'+i));
 }
-const previewCache=new WeakMap<FormalWorld,Map<string,unknown>>();
-function cachedPreview<T>(w:FormalWorld,key:string,calculate:()=>T):T{let cache=previewCache.get(w);if(!cache){cache=new Map();previewCache.set(w,cache);}if(cache.has(key))return cache.get(key) as T;const result=calculate();cache.set(key,result);return result;}
-/** Preview the actual Formal scheduler on a pure draft, without committing or writing a save. */
+/** Lightweight shared-rule adapter for non-render consumers; UI uses the Preview Worker hook. */
 export function constructionPreview(w:FormalWorld,c:FormalCity,target:{key:string}|{field:number},slot?:number){
- return cachedPreview(w,JSON.stringify(['construction',c.id,target,slot]),()=>{
- const id=commandId('presentation-preview');
- const payload='field' in target?{type:'field.upgrade' as const,cityId:c.id,slot:target.field}:{type:'building.upgrade' as const,cityId:c.id,key:target.key,...(slot===undefined?{}:{slot})};
- const t=submitFormalOrder(w,{commandId:id,campaignId:w.campaignId,issuerId:c.ownerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload});
- return t.ack?.status==='committed'?t.world.cities.find(n=>n.id===c.id)?.economy?.construction.find(j=>j.commandId===id):undefined;
- });
+ const result=calculateConstructionPreview(constructionPreviewContext(w,c.id),{...target,...(slot===undefined?{}:{slot})});
+ return result.status==='ready'?result.quote:undefined;
 }
 /** Display-only eligibility. The Formal command always validates the same inputs again. */
 export function constructionAction(w:FormalWorld,c:FormalCity,target:{key:string}|{field:number}){
@@ -79,12 +73,8 @@ export function recruitmentPreview(w:FormalWorld,c:FormalCity,unitId:string,coun
  return {remaining:count,lane,startsAt,nextAt:startsAt+durationMs,durationMs};
 }
 
-/** The real craftsman command on a private draft: ordinary castle payment is irrelevant. */
+/** Shared-rule adapter for domain tooling; never used during React render. */
 export function craftsmanCastleAction(w:FormalWorld,c:FormalCity,craftsmanId:string){
- return cachedPreview(w,JSON.stringify(['craftsman.castle',c.id,craftsmanId]),()=>{
-  const id=commandId('presentation-craftsman-preview');
-  const result=submitFormalOrder(w,{commandId:id,campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'craftsman.castle',cityId:c.id,craftsmanId}});
-  const job=result.ack?.status==='committed'?result.world.cities.find(city=>city.id===c.id)?.economy?.construction.find(job=>job.commandId===id):undefined;
-  return {allowed:!!job,cost:job?.paidResources??zeroResources(),duration:job?.durationMs??buildingDuration('castle',1,buildingLevel(c,'center')),reason:job?'符合工匠建堡資格':result.ack?.reason??'工匠建堡資格已變更，請重新確認。'};
- });
+ const result=calculateConstructionPreview(constructionPreviewContext(w,c.id),{craftsmanId});
+ return result.status==='ready'?{allowed:true,cost:result.quote.paidResources,duration:result.quote.durationMs,reason:'符合工匠建堡資格'}:{allowed:false,cost:zeroResources(),duration:buildingDuration('castle',1,buildingLevel(c,'center')),reason:result.reason};
 }
