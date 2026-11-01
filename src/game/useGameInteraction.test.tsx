@@ -19,17 +19,17 @@ class FakeWorker {
  emit(data:unknown){this.onmessage?.({data});}
 }
 const state=(world:FormalWorld,base=0)=>({type:'state',world,passiveRevisionBase:base,clock:{campaignId:world.campaignId,time:world.time,speed:world.speed,running:true}});
-function Surface(){engine=useGame();return <button disabled={engine.busy} onClick={()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'改名'})}>確認</button>;}
+function Surface(){engine=useGame();return <button disabled={engine.inputBusy} onClick={()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'改名'})}>確認</button>;}
 beforeEach(async()=>{
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',FakeWorker);Object.defineProperty(navigator,'locks',{configurable:true,value:{}});w=createFormalFixture();container=document.createElement('div');document.body.append(container);root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>port.emit(state(w)));port.sent=[];
 });
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();delete (navigator as any).locks;vi.unstubAllGlobals();});
-it('background state, phase and unrelated request completions never enable a pending command button',async()=>{
- await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const request=port.sent[0];expect(engine.busy).toBe(true);expect(container.querySelector('button')!.disabled).toBe(true);
- await act(async()=>{port.emit({type:'phase',text:'背景'});port.emit(state({...w,time:1000,revision:1}));port.emit({type:'requestDone',requestId:'unrelated'});});expect(engine.busy).toBe(true);
- await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'乙'}));expect(port.sent).toHaveLength(1);
- await act(async()=>port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status:'committed',revision:2}}));expect(engine.busy).toBe(true);
- await act(async()=>port.emit({type:'requestDone',requestId:request.requestId}));expect(engine.busy).toBe(false);
+it('background state and unrelated completions preserve pending tracking while command input remains available',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0];expect(engine.busy).toBe(true);expect(container.querySelector('button')!.disabled).toBe(false);
+ await act(async()=>{port.emit(state({...w,time:1000,revision:1}));port.emit({type:'requestDone',requestId:'unrelated'});});expect(engine.busy).toBe(true);
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.support,name:'乙'}));const second=port.sent[1];expect(port.sent).toHaveLength(2);expect(first.order.commandId).not.toBe(second.order.commandId);expect(engine.commandRows).toHaveLength(2);
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'committed',revision:2}});port.emit({type:'requestDone',requestId:first.requestId});});expect(engine.busy).toBe(true);
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:second.order.commandId,status:'committed',revision:3}});port.emit({type:'requestDone',requestId:second.requestId});});expect(engine.busy).toBe(false);expect(engine.commandRows.every(r=>r.state==='committed')).toBe(true);
 });
 it('revision rejection is terminal and later snapshots never resubmit the failed intention',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0],next={...w,time:10000,revision:1};
@@ -37,13 +37,14 @@ it('revision rejection is terminal and later snapshots never resubmit the failed
  expect(port.sent).toHaveLength(1);expect(engine.busy).toBe(false);expect(engine.notice).toContain('重新確認');
  await act(async()=>port.emit(state({...next,time:20000,revision:2})));expect(port.sent).toHaveLength(1);expect(engine.notice).toContain('重新確認');
 });
-it('a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once',async()=>{
+it('rapid distinct clicks each get Created and T1 Durable feedback without claiming committed success',async()=>{
  await act(async()=>{engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'});engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'乙'});});
- expect(port.sent).toHaveLength(1);expect(engine.notice).toContain('受理中');expect(engine.busy).toBe(true);
- const request=port.sent[0];await act(async()=>port.emit({type:'commandReceived',commandId:request.order.commandId,requestId:request.requestId}));
- expect(engine.notice).toContain('已受理');expect(engine.notice).not.toContain('已提交');expect(engine.busy).toBe(true);
- await act(async()=>{port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status:'rejected',revision:0,reason:'城市實際庫存不足。'}});port.emit(state(w));port.emit({type:'requestDone',requestId:request.requestId});});
- expect(engine.notice).toBe('城市實際庫存不足。');expect(engine.busy).toBe(false);expect(port.sent).toHaveLength(1);
+ expect(port.sent).toHaveLength(2);expect(engine.commandRows.map(r=>r.state)).toEqual(['created','created']);expect(engine.notice).toContain('尚未持久保存');
+ const [first,second]=port.sent;
+ await act(async()=>port.emit({type:'commandReceived',commandId:second.order.commandId,requestId:second.requestId}));expect(engine.notice).toContain('尚未持久保存');
+ await act(async()=>port.emit({type:'commandDurable',row:{order:second.order,commandId:second.order.commandId,state:'pending',sequence:2}}));expect(engine.notice).toContain('已持久接收');expect(engine.notice).not.toContain('已提交');
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'committed',revision:1}});port.emit({type:'requestDone',requestId:first.requestId});port.emit({type:'commandAck',ack:{commandId:second.order.commandId,status:'rejected',revision:1,reason:'城市實際庫存不足。'}});port.emit({type:'requestDone',requestId:second.requestId});});
+ expect(engine.notice).toBe('城市實際庫存不足。');expect(engine.busy).toBe(false);expect(port.sent).toHaveLength(2);expect(engine.commandRows.map(r=>r.state)).toEqual(['committed','rejected']);
 });
 it('old receipts, terminal acknowledgements and background notices cannot overwrite the current click',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0];
@@ -111,4 +112,15 @@ it('repeated same-cycle event counts do not conceal a genuinely stalled replay f
   await act(async()=>vi.advanceTimersByTimeAsync(9999));expect(port.terminated).toBe(false);expect(engine.status).toBe('loading');
   await act(async()=>vi.advanceTimersByTimeAsync(1));expect(port.terminated).toBe(true);expect(engine.status).toBe('error');expect(engine.error).toContain('超過 30 秒沒有回應');expect(engine.world).toEqual(w);
  }finally{vi.clearAllTimers();vi.useRealTimers();}
+});
+it('T1 failure retains the exact recoverable operation and retry uses the original identity; Durable removes the draft',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'保留原始內容'}));const first=port.sent[0];
+ await act(async()=>port.emit({type:'commandReceiveFailed',commandId:first.order.commandId,text:'命令未持久接收：QuotaExceededError'}));expect(engine.commandRows.find(r=>r.commandId===first.order.commandId)!.state).toBe('receive-failed');
+ const drafts=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')!);expect(drafts.find((r:any)=>r.order.commandId===first.order.commandId).order).toEqual(first.order);
+ await act(async()=>engine.retryReceive(engine.commandRows.find(r=>r.commandId===first.order.commandId)!));expect(port.sent.at(-1).order).toEqual(first.order);
+ await act(async()=>port.emit({type:'commandDurable',row:{commandId:first.order.commandId,order:first.order,state:'pending',sequence:1}}));expect(JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')!).some((r:any)=>r.order.commandId===first.order.commandId)).toBe(false);expect(engine.commandRows.find(r=>r.commandId===first.order.commandId)!.state).toBe('pending');
+});
+it('branch transition blocks new intake with explicit feedback and no command is silently accepted',async()=>{
+ await act(async()=>engine.send({type:'import',text:'synthetic',transitionId:'branch'}));expect(engine.inputBusy).toBe(true);
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'不能跨分支'}));expect(port.sent.filter(r=>r.type==='command')).toHaveLength(0);expect(engine.feedback.text).toContain('操作未受理');
 });

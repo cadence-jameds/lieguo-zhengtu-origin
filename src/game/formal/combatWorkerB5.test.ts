@@ -5,7 +5,7 @@ import {battlefield} from './combatTestSupport';
 import {order} from './developmentTestSupport';
 import {applyWorldPatch} from '../worldStream';
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),readCityIntel:vi.fn(),reportStatus:vi.fn(),reportAction:vi.fn()}));
-vi.mock('../persistence',()=>storage);
+vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let world:FormalWorld,messages:Record<string,any>[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:Record<string,any>)=>void},now=0;
 const send=(data:unknown)=>port.onmessage!({data}),until=async(fn:()=>boolean)=>vi.waitFor(()=>expect(fn()).toBe(true));
 beforeEach(async()=>{vi.resetModules();vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());world=isolatedAutonomyFixture(battlefield());world.speed=25;world.cities[0].military!.units={militia:100,ram:10};world.cities[1].wallLevel=1;storage.reportStatus.mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}});storage.loadWithOffline.mockResolvedValue({game:world,recovered:false});storage.save.mockImplementation(async(w:FormalWorld)=>w);messages=[];port={onmessage:null,postMessage:v=>messages.push(structuredClone(v))};vi.stubGlobal('self',port);await import('../runtime.worker');send({type:'load',stateMode:'patch'});await until(()=>messages.some(m=>m.type==='state'));messages=[];});
