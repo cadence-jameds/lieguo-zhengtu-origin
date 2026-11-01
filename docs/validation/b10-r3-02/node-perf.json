@@ -1,0 +1,84 @@
+{
+  "environment": "Node v24.19.0; same-process synthetic 100-faction world; 30 measured samples after 3 warmups",
+  "baseline": "R3-01 preview path: full submitFormalOrder on a private draft; original R1-C numbers use a different version/environment and are not ratio-comparable",
+  "cases": [
+    {
+      "history": 0,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 14.076344999999947,
+        "p95": 20.026526000000104
+      },
+      "contextPreparationMs": {
+        "n": 30,
+        "p50": 0.06993000000011307,
+        "p95": 0.1257660000001124
+      },
+      "sharedRulesComputeMs": {
+        "n": 30,
+        "p50": 0.05689699999993536,
+        "p95": 0.09424399999988964
+      },
+      "contextBytes": 1315
+    },
+    {
+      "history": 10000,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 30.05420499999991,
+        "p95": 38.456550000000334
+      },
+      "contextPreparationMs": {
+        "n": 30,
+        "p50": 0.07075200000008408,
+        "p95": 0.10477099999980055
+      },
+      "sharedRulesComputeMs": {
+        "n": 30,
+        "p50": 0.05502500000011423,
+        "p95": 0.14825599999994665
+      },
+      "contextBytes": 1315
+    },
+    {
+      "history": 30000,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 70.06025300000056,
+        "p95": 118.81999700000051
+      },
+      "contextPreparationMs": {
+        "n": 30,
+        "p50": 0.0794820000000982,
+        "p95": 0.19849100000010367
+      },
+      "sharedRulesComputeMs": {
+        "n": 30,
+        "p50": 0.06370199999946635,
+        "p95": 0.11336500000015803
+      },
+      "contextBytes": 1315
+    },
+    {
+      "history": 60000,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 131.5798450000002,
+        "p95": 201.76270099999965
+      },
+      "contextPreparationMs": {
+        "n": 30,
+        "p50": 0.10515200000008917,
+        "p95": 0.23143000000163738
+      },
+      "sharedRulesComputeMs": {
+        "n": 30,
+        "p50": 0.07662700000037148,
+        "p95": 0.1687899999997171
+      },
+      "contextBytes": 1315
+    }
+  ],
+  "sourceProvenance": "Pre-ed4635 worktree bytes later pinned at ed4635bd25edb64c52ff4ea19383501d515e3dda; context/compute/shared construction rules unchanged through the delivery source anchor.",
+  "limits": "Node microbenchmark only; no real-device or browser timing claim. The old full-Reducer path is reproduced with the current shared Formal rules, not an old checkout."
+}

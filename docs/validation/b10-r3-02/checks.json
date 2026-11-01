@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "base": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+  "productionSourceCommit": "f83548701703f4d42c60fb436a8751b813bf6656",
+  "sourceAnchor": "12322f13419ea4913d7c83196f9278c4ab4be9ae",
+  "directed": [
+    {
+      "group": "equivalence/protocol/UI/reliability/extinction",
+      "passed": 130,
+      "note": "Before the last three additional UI cases; all final cases included by the full Gate."
+    },
+    {
+      "group": "final UI/controller",
+      "passed": 16
+    },
+    {
+      "group": "quiet existing Runtime file",
+      "passed": 64
+    }
+  ],
+  "typecheck": "PASS (Node 24.19.0)",
+  "build": "PASS; compiled worker tested by native Chromium",
+  "nativeChromium": {
+    "distinctCasesPassed": 7,
+    "splitRunEvidence": "browser-results.json; initial harness failures retained",
+    "physicalAndroid": "pending",
+    "fullProductionUI": "pending"
+  },
+  "successors": {
+    "R3_01": "PASS plus 4 tamper tests",
+    "R3_02": "PASS plus 5 tamper/region tests",
+    "boundaryAudit": "PASS; 73 modules, no reducer/authority/storage",
+    "recruitment": "Exact adapter; 3 original tamper tests and preserved function/import region"
+  },
+  "preservedContracts": "preserved-contracts.json; nine exact Base files",
+  "fullRegression": {
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "existingTimeoutMs": 30000,
+    "currentResultSource": "Final delivery and current PR Verify / regression-full.json artifact",
+    "localNode24Attempts": "Two full attempts had the same existing Runtime timeout; attempts.json preserves both.",
+    "localNode22": {
+      "version": "22.23.4",
+      "passed": 2295,
+      "failed": 0,
+      "skipped": 1,
+      "artifactSha256": "149f45c990b5058be9b1171cd8e977f501a445772b0f7289f8fdb19c9f8c2989",
+      "scope": "Production d308998 before final insufficient-stock cache optimization; final cache has 16 targeted PASS, a native PASS and Build PASS; exact delivery HEAD covered by PR Verify."
+    }
+  },
+  "CI": {
+    "workflow": "CI / Verify",
+    "resultSource": "Current PR Checks; not predeclared PASS in a commit that precedes CI execution."
+  },
+  "acceptance": "Draft only. No merge/deployment/master-spec bump/R3-03. Historical B5 E1 HOLD and Astra/physical-device limits remain."
+}

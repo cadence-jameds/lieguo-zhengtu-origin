@@ -76,19 +76,22 @@ def read_record(root=ROOT):
  r=json.loads(file.read_text());assert r==expected_record(),'Changed B10 scope, immutable commit, predecessor, invariant, history or adapter record'
  return r
 def accepts(path,predecessor,root=ROOT):
- if path not in CHANGES:return False
+ from b10_r3_02_successor import accepts as next_accepts
+ if path not in CHANGES:return next_accepts(path,predecessor,root)
  r=read_record(root)
- return predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==r['changes'][path]['after']
+ return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or next_accepts(path,r['changes'][path]['after'],root))
 def accepts_adapter(path,before,root=ROOT):
+ from b10_r3_02_successor import accepts_adapter as next_adapter
  if path not in ADAPTERS or before!=previous(BASE,path):return False
  read_record(root)
- return (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or next_adapter(path,adapters()[path],root))
 def validate(root=ROOT):
+ from b10_r3_02_successor import accepts as next_accepts, accepts_adapter as next_adapter
  r=read_record(root)
- for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'],('Unrecorded B10 source change',p)
+ for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'] or next_accepts(p,entry['after'],root),('Unrecorded B10 source change',p)
  for section in ['invariants','historical']:
-  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest,('Changed preserved rule/source/history',p)
- for p,data in adapters().items():assert (root/p).read_bytes()==data,('Changed exact Gate adapter',p)
+  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest or section=='invariants' and next_accepts(p,digest,root),('Changed preserved rule/source/history',p)
+ for p,data in adapters().items():assert (root/p).read_bytes()==data or next_adapter(p,data,root),('Changed exact Gate adapter',p)
  return r
 if __name__=='__main__':
  validate();print('PASS: exact B10-R3-01 implementation; all other source, Reducer, Scheduler, v95/v96/v97 and PR53 evidence preserved. No release acceptance claim.')
