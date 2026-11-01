@@ -138,7 +138,8 @@ export function useGame(){
     if(r.type==='commandReceived'&&commands.current.matches(r.commandId)){setNotice('指令已受理，尚未持久保存。');setFeedback({kind:'sending',text:'指令已受理，尚未持久保存。'});}
     if(r.type==='commandDurable'||r.type==='commandStatus'){
      if(r.row){const row=r.row as InboxCommand;forgetDraft(row.commandId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
-      if(commands.current.matches(row.commandId)&&!row.ack){setNotice('指令已持久接收，等待正式提交。');setFeedback({kind:'pending',text:'指令已持久接收，等待正式提交。'});}}
+      if(row.ack&&commands.current.acknowledge(row.ack)){const feedback=feedbackForAck(row.ack);setNotice(feedback.text);setFeedback(feedback);}
+      else if(commands.current.matches(row.commandId)&&!row.ack){setNotice('指令已持久接收，等待正式提交。');setFeedback({kind:'pending',text:'指令已持久接收，等待正式提交。'});}}
     }
     if(r.type==='commandList'){for(const row of r.rows as InboxCommand[]){forgetDraft(row.commandId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??row.lastError});}}
     if(r.type==='commandReceiveFailed'||r.type==='commandBlocked'){

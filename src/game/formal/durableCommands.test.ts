@@ -64,7 +64,7 @@ it('writer epoch fencing prevents a stale Worker from intake, result writes, res
 });
 it('temporary failures retry at most three times; quota and unknown/permanent faults never auto retry; deadline stays bounded',async()=>{
  const s=store(),w=await begin(s),o=contribute(w,'retry'),row=await receive(s,w,o);
- expect(retryableStorageError(new DOMException('temporary','AbortError'))).toBe(true);expect(retryableStorageError(new DOMException('quota','QuotaExceededError'))).toBe(false);expect(retryableStorageError(Error('unknown'))).toBe(false);
+ expect(retryableStorageError(new DOMException('temporary','AbortError'))).toBe(true);expect(retryableStorageError(new DOMException('quota','QuotaExceededError'))).toBe(false);expect(retryableStorageError(Error('unknown'))).toBe(false);expect(retryableStorageError(new DOMException('uncategorized','UnknownError'))).toBe(false);
  for(let i=1;i<=MAX_COMMAND_ATTEMPTS;i++){const next=await s.noteCommandFailure(row,'temporary',true,row.createdAt+i);expect(next.attempts).toBe(i);expect(terminalCommand(next)).toBe(i===MAX_COMMAND_ATTEMPTS);expect(next.deadline).toBe(row.createdAt+COMMAND_TTL);}
  const other=await receive(s,w,contribute(w,'expired'));const expired=await s.noteCommandFailure(other,'deadline',true,other.deadline);expect(expired.state).toBe('needs-confirmation');
 });

@@ -124,3 +124,10 @@ it('branch transition blocks new intake with explicit feedback and no command is
  await act(async()=>engine.send({type:'import',text:'synthetic',transitionId:'branch'}));expect(engine.inputBusy).toBe(true);
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'不能跨分支'}));expect(port.sent.filter(r=>r.type==='command')).toHaveLength(0);expect(engine.feedback.text).toContain('操作未受理');
 });
+it('a terminal T1 result is shown immediately and an older delayed Ack cannot overwrite the newer outcome',async()=>{
+ await act(async()=>{engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'較早'});engine.issue({type:'city.rename',cityId:fixtureIds.support,name:'最新'});});const [first,second]=port.sent;
+ const terminal={commandId:second.order.commandId,status:'rejected',revision:1,reason:'最新操作需要重新確認。'};
+ await act(async()=>port.emit({type:'commandDurable',row:{order:second.order,commandId:second.order.commandId,state:'needs-confirmation',sequence:2,ack:terminal}}));expect(engine.feedback.kind).toBe('error');expect(engine.notice).toBe(terminal.reason);
+ await act(async()=>{port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'committed',revision:1}});port.emit({type:'requestDone',requestId:first.requestId});});expect(engine.notice).toBe(terminal.reason);expect(engine.commandRows.find(r=>r.commandId===first.order.commandId)!.state).toBe('committed');
+ await act(async()=>port.emit({type:'requestDone',requestId:second.requestId}));expect(engine.busy).toBe(false);
+});

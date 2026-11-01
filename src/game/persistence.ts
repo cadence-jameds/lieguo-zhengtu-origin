@@ -83,7 +83,7 @@ export class FormalPersistence {
    if(old){if(old.issuerId!==order.issuerId||old.fingerprint!==fingerprint)throw new Error('CommandId 已用於不同命令。');return old;}
    if(meta.campaignId!==order.campaignId||meta.playerFactionId!==order.issuerId)throw new Error('命令不屬於目前玩家戰役。');
    const row:InboxCommand={...structuredClone(intent),campaignId:order.campaignId,commandId:order.commandId,issuerId:order.issuerId,order:structuredClone(order),fingerprint,originalRevision:order.expectedRevision,branch:branch??meta.branch,writerEpoch:meta.writerEpoch,state:'pending',createdAt:now,deadline:now+COMMAND_TTL,attempts:0,nextAttemptAt:0};
-   if(row.branch!==meta.branch||order.expectedRevision<(meta.foregroundRevision??0)){row.state='needs-confirmation';row.ack=confirmationAck(row,meta.revision??0,'戰役分支或玩家操作已變更，請重新確認原始操作。');}
+   if(row.branch!==meta.branch||order.expectedRevision<(meta.foregroundRevision??0)){row.state='needs-confirmation';row.ack=confirmationAck(row,meta.revision??0,order.payload.type==='governance.set'?undefined:'戰役分支或玩家操作已變更，請重新確認原始操作。');}
    row.sequence=await this.db.Inbox.add(row);this.fault?.('inbox-write');return row;
   });
  }

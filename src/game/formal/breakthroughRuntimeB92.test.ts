@@ -1,3 +1,4 @@
+import {commandId} from './ids';
 import {beforeEach,expect,it,vi} from 'vitest';
 import {breakthroughWorld} from './breakthroughTestSupport';
 import {order} from './developmentTestSupport';
@@ -21,7 +22,7 @@ it('B9-2 Worker exposes cargo and stock only after the atomic save resolves, the
  send({type:'command',order:command});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);
 });
 it('B9-2 failed Worker save preserves the live pool, city stock and transport; retry spends once',async()=>{
- const command=order(initial,{type:'breakthrough.ship',cityId:initial.cities[1].id,projectId:initial.largeProjects[1].projectId,resources:{food:100,wood:200,stone:300,gold:400}});
+ let command=order(initial,{type:'breakthrough.ship',cityId:initial.cities[1].id,projectId:initial.largeProjects[1].projectId,resources:{food:100,wood:200,stone:300,gold:400}});
  storage.save.mockRejectedValueOnce(new Error('wonder transaction fault'));send({type:'command',order:command});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(initial);
- messages=[];send({type:'command',order:command});await until(()=>messages.some(r=>r.type==='commandAck'));const saved=messages.find(r=>r.type==='state')!.world as FormalWorld;expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');expect(saved.logistics).toHaveLength(1);expect(saved.cities[1].stock).toEqual({food:0,wood:0,stone:0,gold:0});expect(saved.largeProjects[1].poolResources).toEqual({food:0,wood:0,stone:0,gold:0});
+ messages=[];send({type:'command',order:command});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(r=>r.type==='state')!.world).toEqual(initial);expect(storage.save).toHaveBeenCalledTimes(1);command={...command,commandId:commandId('confirmed-breakthrough')};messages=[];send({type:'command',order:command});await until(()=>messages.some(r=>r.type==='commandAck'));const saved=messages.find(r=>r.type==='state')!.world as FormalWorld;expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');expect(saved.logistics).toHaveLength(1);expect(saved.cities[1].stock).toEqual({food:0,wood:0,stone:0,gold:0});expect(saved.largeProjects[1].poolResources).toEqual({food:0,wood:0,stone:0,gold:0});
 });
