@@ -6,7 +6,7 @@ from functools import lru_cache
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 BASE='443f170b277f71ee26a34ee3b5017687a98e01ab'
-IMPLEMENTATION='23c4da8ae1eb6a8ae1b123cc596d6df3a25f9bd8'
+IMPLEMENTATION='2cb1fe908dbfae4f81be13593e93798494773351'
 RECORD='docs/validation/b10-r3-01/compatibility.json'
 CHANGES={
  'releases/notes/b10-r3-01-durable-player-commands.json','scripts/verify-durable-commands-browser.mjs',
@@ -26,7 +26,7 @@ ADAPTERS={'.github/workflows/ci.yml','scripts/p0c10_successor.py','scripts/p0c10
 # explicit support paths (including prior delivery evidence) are separated; no directory/prefix is exempted.
 GATE_SUPPORT=ADAPTERS|{RECORD,'scripts/b10_r3_01_successor.py','scripts/test_b10_r3_01_successor.py',
  'docs/validation/b10-r3-01/REPORT.md','docs/validation/b10-r3-01/attempts.json',
- 'docs/validation/b10-r3-01/browser-results.json','docs/validation/b10-r3-01/checks.json'}
+ 'docs/validation/b10-r3-01/browser-results.json','docs/validation/b10-r3-01/checks.json','docs/validation/b10-r3-01/UI_REVIEW_FIX.md'}
 def sha(data):return hashlib.sha256(data).hexdigest()
 @lru_cache(maxsize=None)
 def previous(commit,path):return subprocess.check_output(['git','-C',str(ROOT),'show',commit+':'+path],stderr=subprocess.DEVNULL)
