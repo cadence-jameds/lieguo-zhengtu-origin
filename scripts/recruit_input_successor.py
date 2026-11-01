@@ -22,13 +22,15 @@ HISTORICAL = {PROTECTED,'docs/validation/city-ui-successor/compatibility.json',
  'docs/validation/mobile-town-labels/compatibility.json','docs/validation/journey-goals-integration/compatibility.json'}
 
 def validate(root=ROOT):
+ from b10_r3_02_successor import accepts as preview_accepts
  record=json.loads((root/RECORD).read_text())
  assert record['schemaVersion']==1 and record['baseCommit']==BASE and record['uiCommit']==UI
  assert set(record['changes'])==SOURCES and set(record['invariants'])==INVARIANTS and set(record['historical'])==HISTORICAL
  protected=json.loads(previous(root,BASE,PROTECTED))['files']
  for path,entry in record['changes'].items():
   assert entry['before']==protected[path]==sha(previous(root,BASE,path))
-  assert entry['after']==sha(previous(root,UI,path))==sha((root/path).read_bytes()),('Changed recruitment source',path)
+  assert entry['after']==sha(previous(root,UI,path)),('Changed original recruitment source digest',path)
+  assert entry['after']==sha((root/path).read_bytes()) or path=='src/game/presentation/cityActions.ts' and preview_accepts(path,entry['after'],root),('Changed recruitment source',path)
  for section in ['invariants','historical']:
   for path,digest in record[section].items():
    assert digest==sha(previous(root,BASE,path)),('Original authority/history digest changed',path)
@@ -44,6 +46,7 @@ def validate(root=ROOT):
  # Non-recruitment action previews and military/settlement presentation remain byte-identical.
  path='src/game/presentation/cityActions.ts'
  before=previous(root,BASE,path).decode();after=(root/path).read_text()
+ if preview_accepts(path,record['changes'][path]['after'],root):after=previous(root,UI,path).decode()
  old_start=before.index('/** Actual recruitment scheduler preview');old_end=before.index('/** The real craftsman')
  new_start=after.index('/** Read-only UI arithmetic');new_end=after.index('/** The real craftsman')
  prefix=after[:new_start]

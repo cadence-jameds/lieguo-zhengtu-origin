@@ -39,7 +39,7 @@ Context **不含** FormalWorld、commandReceipts、events、BattleReports、Inbo
 
 `protocolVersion=1`、Context version=1；每批帶 campaign、branch、revision、cityId、targets（含 slot／lane）、requestId、generation。單一 lazy Dedicated Worker；每次一批，最多八個 channel 排隊，每 channel 只保留最新一批，每批最多 32 個目標。Hook 80ms 合併更新，連續更新最長 250ms 就送出當時最新內容。新世界／目標／分支 render 立即隱藏舊結果；effect cleanup 與 controller cancellation 阻止關閉或切換後的回覆。
 
-Cache 上限 64 個小批次，以正式資格／時間／排程依賴與 branch、target 為鍵。健康空佇列的 startsAt 可精確平移，cache hit 仍重新檢查 stock 足夠覆蓋原付款；扣資源、取消、換 slot、資格與排程變動會失效。資源不足的 invalid 結果不會被誤用成新的可建造結果。這些檢查都在 effect/controller，不在 render，沒有掃描完整歷史。
+Cache 上限 64 個小批次，以正式資格／時間／排程依賴與 branch、target 為鍵。健康空佇列的 startsAt 可精確平移，cache hit 仍重新檢查 stock 足夠覆蓋原付款；扣資源、取消、換 slot、資格與排程變動會失效。資源不足的 invalid 結果只有庫存逐值相同時跨 Tick 重用；庫存改變就重新查詢，不會被誤用成新的可建造結果。這些檢查都在 effect/controller，不在 render，沒有掃描完整歷史。
 
 Worker 失敗後同一目標的異常不因後續 revision 消失，也不自動反覆重啟，直到手動重查或切換目標／分支。逾時 5 秒或 Worker error/messageerror 終止 Preview Worker，顯示「暫時無法預估」及重新查詢；不無限重試。重查可建立新的唯一 Worker。預覽 loading/stale/unavailable 不作為一般建造提交的 disabled 條件；工匠未知預估亦可提交，由正式權威驗證。
 
@@ -71,7 +71,7 @@ T1/T2/T3、DB v2 Inbox、RuntimeMeta、有限重試、獨立命令計時及舊 A
 
 ### 原生 Chromium 結果
 
-六個不同情境已通過，分兩輪保留證據：完整量測輪的前五項 PASS；其第六項暴露 harness 只改 wall clock 的錯誤而 FAIL，修正為 wall＋monotonic clock 後，以原斷言定向重驗 PASS。遊戲 production source 在這兩輪間完全未變。`browser-results.json` 同時保留原始 FAIL 與最後採用的每項結果，不把未執行的項目列為重驗 PASS。
+七個不同情境已通過，分三輪保留證據：完整量測輪的前五項 PASS；其第六項暴露 harness 只改 wall clock 的錯誤而 FAIL，修正為 wall＋monotonic clock 後，以原斷言定向重驗 PASS。前兩輪間遊戲 production source 完全未變。之後只增加庫存未變的不足報價快取分支，另以第三輪原生測試確認 30 個 Tick 只計算一次、補充資源後重新計算並回 ready。`browser-results.json` 同時保留原始 FAIL 與最後採用的每項結果，不把未執行的項目列為重驗 PASS。
 
 99 AI 原生情境以 144,000ms 合成雙時鐘推進觸發一世界小時、25X 補算。在 Durable 通知當下記錄：預覽仍 Pending、catch-up 尚未完成；隨即終止 Preview Worker，最終正式結果 committed、效果及玩家施工各一筆，99 個 agent 均已有實際決策。這個時鐘注入只用於功能驗證，不是實機效能標準。
 
@@ -90,9 +90,9 @@ T1/T2/T3、DB v2 Inbox、RuntimeMeta、有限重試、獨立命令計時及舊 A
 
 ### 回歸與 Gate 狀態來源
 
-定向曾有 130 項 PASS；後續增加切城／戰役、失敗後持續更新與 rejection 顯示測試，最終 UI＋controller 15 項 PASS。既有 Runtime 檔獨立重驗 64 項 PASS。Typecheck、Build、兩層精確 successor 與防竄改測試、靜態 capability 檢查 PASS。
+定向曾有 130 項 PASS；後續增加切城／戰役、失敗後持續更新與 rejection 顯示測試，最終 UI＋controller 16 項 PASS。既有 Runtime 檔獨立重驗 64 項 PASS。Typecheck、Build、兩層精確 successor、招募原碼／匯入區段保護與防竄改測試、靜態 capability 檢查 PASS。
 
-Node 24.19 的兩輪完整隔離各有同一個既有 Runtime developer admission 測試逾時：2291/1/1、2294/1/1（PASS/FAIL/SKIP），不能宣稱全綠。該測試會推進約 30 天；相同 Node 24 環境的單項診斷 n=1，R3-01 約 17.774s、新來源約 18.034s，僅用於定位，非效能等價驗收。已清理完成的 disposable copies 並以 CI 的 Node 22.23.4 執行相同 `verify-in-isolation.mjs full`；不改期限或斷言。最終隔離完整結果與 GitHub CI 以本回合交付、當前 PR Verify／其 regression-full.json artifact 為準，不能把舊結果當新 HEAD 綠燈。詳見 checks.json、attempts.json。
+Node 24.19 的兩輪完整隔離各有同一個既有 Runtime developer admission 測試逾時：2291/1/1、2294/1/1（PASS/FAIL/SKIP），不能宣稱全綠。該測試會推進約 30 天；相同 Node 24 環境的單項診斷 n=1，R3-01 約 17.774s、新來源約 18.034s，僅用於定位，非效能等價驗收。已清理完成的 disposable copies 並以 CI 的 Node 22.23.4 執行相同 `verify-in-isolation.mjs full`：2295 PASS／0 FAIL／1 既有可選 skip；不改期限或斷言。此輪在最後的不足庫存快取優化前完成，該分支另有 16 項定向、原生測試與 Build，最終 HEAD 全回歸由 PR Verify 再覆蓋。最終隔離完整結果與 GitHub CI 以本回合交付、當前 PR Verify／其 regression-full.json artifact 為準，不能把舊結果當新 HEAD 綠燈。詳見 checks.json、attempts.json。
 
 ## 限制與後續契約
 
@@ -101,3 +101,5 @@ Node 24.19 的兩輪完整隔離各有同一個既有 Runtime developer admissio
 - Context effect 的既有單城經濟投影會讀正式 cross-city administration／upkeep；它不複製世界或收據。超大軍隊數量的該段成本需後續實機觀察，不能把 Node 結果當最壞情境保證。
 - 嚴格 revision 失效期間顯示過期／重算，仍能正式提交。連續權威更新可能降低預估可見時間，沒有沿用過期報價冒充最新。
 - 增加唯讀 Preview protocol／Context v1，後續正式建造規則新增依賴時必須同步更新共用函式與 context 版本；不涉及 R3-03 命令帳本或 R3-04 WorldStream 協定。
+
+招募 successor adapter 只允許精確 cityActions 後繼，舊 non-recruitment 原始檢查仍在原歷史來源執行；新 Gate 另外固定當前招募函式區段及三項匯入逐位元不變。舊 recruitment manifest、DevelopmentViews、military 與所有舊 metrics 不改。Gate bootstrap 只有 11 個明列支援路徑，不採目錄或來源前綴豁免。

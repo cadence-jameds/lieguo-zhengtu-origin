@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "productionSourceCommit": "d30899811e984a784ea432867b3f59e4d8691e91",
-  "harnessSourceCommit": "ca596389752ece16c4cb26aac00e93de194ead27",
-  "provenance": "Six distinct scenarios passed in two runs. The last scenario was retested after correcting clock injection and sampling T1 at notification time. All production source bytes stayed unchanged. Full-run failure is retained below; no browser test was assumed to pass.",
+  "harnessSourceCommit": "12322f13419ea4913d7c83196f9278c4ab4be9ae",
+  "provenance": "Six distinct scenarios passed in two runs. The last scenario was retested after correcting clock injection and sampling T1 at notification time. All production source bytes stayed unchanged. Full-run failure is retained below; no browser test was assumed to pass. Final delivery additionally caches unchanged insufficient-stock results; that branch has its own current-source native run (30 hits, one initial computation, refill causes a second computation) and unit tests. Performance tables retain the earlier explicitly named measurement source.",
   "browser": "154.0.8037.57",
   "environment": "native headless Chromium, desktop Linux container; Vite source; not Android or production deployment",
   "cases": [
@@ -53,6 +53,21 @@
       "syntheticWallAndMonotonicAdvanceMs": 144000,
       "durableBeforeCatchup": true,
       "previewPendingAtT1": true
+    },
+    {
+      "name": "native insufficient-stock quotes survive unchanged ticks and revalidate new resources",
+      "status": "PASS",
+      "stable": {
+        "calculations": 1,
+        "discarded": 0,
+        "cacheHits": 30
+      },
+      "final": {
+        "calculations": 2,
+        "discarded": 0,
+        "cacheHits": 30
+      },
+      "refilled": "ready"
     }
   ],
   "performance": [
@@ -415,6 +430,30 @@
       ],
       "performance": [],
       "errors": []
+    },
+    "nativeStockCache": {
+      "browser": "154.0.8037.57",
+      "environment": "native headless Chromium, desktop Linux container; Vite source; not Android or production deployment",
+      "selection": "insufficient-stock",
+      "cases": [
+        {
+          "name": "native insufficient-stock quotes survive unchanged ticks and revalidate new resources",
+          "status": "PASS",
+          "stable": {
+            "calculations": 1,
+            "discarded": 0,
+            "cacheHits": 30
+          },
+          "final": {
+            "calculations": 2,
+            "discarded": 0,
+            "cacheHits": 30
+          },
+          "refilled": "ready"
+        }
+      ],
+      "performance": [],
+      "errors": []
     }
   },
   "limits": [
@@ -422,5 +461,6 @@
     "Native performance run had no concurrent full regression. Initial exploratory concurrent measurements are not substituted for these results.",
     "Quiet final run observed zero >50ms tasks in the measured preview and panel-opening intervals; earlier concurrent-load runs observed whole-panel long tasks. This is not a general no-jank guarantee.",
     "Clock jump in the functional AI case is synthetic, not a device latency benchmark."
-  ]
+  ],
+  "deliveryProductionSourceCommit": "f83548701703f4d42c60fb436a8751b813bf6656"
 }

@@ -1,7 +1,24 @@
 {
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/b10-r3-02/REPORT.md",
+    "docs/validation/b10-r3-02/attempts.json",
+    "docs/validation/b10-r3-02/browser-results.json",
+    "docs/validation/b10-r3-02/checks.json",
+    "docs/validation/b10-r3-02/compatibility.json",
+    "docs/validation/b10-r3-02/node-perf.json",
+    "docs/validation/b10-r3-02/preserved-contracts.json",
+    "scripts/b10_r3_01_successor.py",
+    "scripts/b10_r3_02_successor.py",
+    "scripts/test_b10_r3_02_successor.py"
+  ],
+  "preservedRecruitment": {
+    "sectionSha256": "692aa69e268aa7427629bddbd9a9e64e7cd332dc214d8abb5187fded0370a12e",
+    "importsSha256": "2e48480fa36ff07a31cce76c72857b1abcd6684cb4900a3cb9e0995bb4a0cd1f"
+  },
   "schemaVersion": 1,
   "baseCommit": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
-  "implementationCommit": "ca596389752ece16c4cb26aac00e93de194ead27",
+  "implementationCommit": "12322f13419ea4913d7c83196f9278c4ab4be9ae",
   "changes": {
     "releases/notes/b10-r3-02-async-construction-preview.json": {
       "before": null,
@@ -13,7 +30,7 @@
     },
     "scripts/verify-async-construction-preview-browser.mjs": {
       "before": null,
-      "after": "d7593bb616f12dbf10c0d6a09c74a687403a5176a388914502caca914a4fd5a0"
+      "after": "c84ac65b10fae8f6e171eb2cbef1ce59b84f91a726dcfaee7a6662b2730607c0"
     },
     "scripts/verify-preview-boundaries.mjs": {
       "before": null,
@@ -41,11 +58,11 @@
     },
     "src/game/constructionPreviewController.test.ts": {
       "before": null,
-      "after": "296e502a1d72f3273b54ca4e71a84d84c7c5457cbedf5a4a42c67ec507878ae2"
+      "after": "74bd03790e7d964550e2ffc0df9895d7fd6a1268b3c4164cbe06ee7fdd1ce0d5"
     },
     "src/game/constructionPreviewController.ts": {
       "before": null,
-      "after": "5829164b04d482d8efc52dd6b9ab3c8c0dfb7bc1f09466901ccd793ca7874e72"
+      "after": "eb3c1a18138e8ce2feaaa2b87b2fa0754c22731a8ccf3bdaa77ad010a0770323"
     },
     "src/game/constructionPreviewProtocol.ts": {
       "before": null,
@@ -817,12 +834,17 @@
     "docs/validation/protection-extinction/clock-mode-delta/related-result.json": "c6ee8a8bb6dddea4ec7974c3419023c6797ce2ae0d56dcc252762f53a1096634",
     "docs/validation/protection-extinction/clock-mode-delta/related-sequential-result.json": "0ec652ba1b78f27c274d5df7c99426c7036fbb5cf3267f0b1afadb92bea30e65",
     "docs/validation/protection-extinction/compatibility.json": "3a37f35068d19fb5c07a5cc082c31762af107b37564da476fcec0c03cd47ae18",
-    "docs/validation/protection-extinction/full-initial-failures.json": "8193d3b8e9db048779056d79b2dcaa31335ca109607357df33def6c19d11c7a6"
+    "docs/validation/protection-extinction/full-initial-failures.json": "8193d3b8e9db048779056d79b2dcaa31335ca109607357df33def6c19d11c7a6",
+    "docs/validation/recruit-input-p1/compatibility.json": "4ff22fb5a1d779f8bb2112c9f33ca27a2bee557524b52dd7b362952e2a05892c"
   },
   "adapters": {
     "scripts/b10_r3_01_successor.py": {
       "before": "f11433f144792d49c845690fab9da866ed0451ef8dcffbb2286a51bbeff03753",
       "after": "9ed44f6440a30fe51964753ceed09fa8c4dcb2117f8adb6b69b5d1bc16c7c323"
+    },
+    "scripts/recruit_input_successor.py": {
+      "before": "6aa5436fb43a6f324ea28bc909ced662f4d918f4e08a0791c2ae1160fd6dd72f",
+      "after": "218c4c4d1767552bbacc7e87a523a64503febba6e2952670d80a34312ba0bffc"
     },
     ".github/workflows/ci.yml": {
       "before": "922a796634779358f08ef38d0e5b55ab424a788e270fd6dac03b9b57623b5001",

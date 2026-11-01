@@ -17,7 +17,7 @@ class PreviewSuccessorTests(unittest.TestCase):
    self.assertFalse(gate.accepts(p,r['invariants'][p],self.root))
  def test_refreshed_manifest_cannot_approve_source_rule_history_or_adapter_tampering(self):
   manifest=self.root/gate.RECORD;original=manifest.read_bytes();r=json.loads(original)
-  for section,p in [('changes','src/game/formal/economy.ts'),('changes','src/game/constructionPreviewController.ts'),('invariants','src/game/persistence.ts'),('invariants','src/game/formal/reducer.ts'),('historical','docs/validation/b10-r3-01/compatibility.json'),('adapters','scripts/b10_r3_01_successor.py')]:
+  for section,p in [('changes','src/game/formal/economy.ts'),('changes','src/game/constructionPreviewController.ts'),('invariants','src/game/persistence.ts'),('invariants','src/game/formal/reducer.ts'),('historical','docs/validation/b10-r3-01/compatibility.json'),('adapters','scripts/b10_r3_01_successor.py'),('adapters','scripts/recruit_input_successor.py')]:
    with self.subTest(path=p):
     file=self.root/p;before=file.read_bytes();file.write_bytes(before+b'\n');modified=json.loads(original)
     if section in ['changes','adapters']:modified[section][p]['after']=gate.sha(file.read_bytes())
@@ -39,4 +39,9 @@ class PreviewSuccessorTests(unittest.TestCase):
   for p,data in gate.adapters().items():
    self.assertTrue(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));self.assertFalse(gate.accepts_adapter(p,b'forged',self.root))
    file=self.root/p;file.write_bytes(data+b'\n');self.assertFalse(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));file.write_bytes(data)
+ def test_recruitment_calculation_and_imports_cannot_drift_under_a_new_anchor(self):
+  path='src/game/presentation/cityActions.ts';before=gate.previous(gate.BASE,path);after=gate.previous(gate.IMPLEMENTATION,path)
+  self.assertEqual(gate.preserved_recruitment(before,after),gate.read_record()['preservedRecruitment'])
+  for changed in [after.replace(b'unitRecruitCost(w,c,d)',b'unitRecruitCost(w,c,d)+1'),after.replace(b"from '../formal/military'",b"from '../formal/other-module'")]:
+   with self.assertRaises(AssertionError):gate.preserved_recruitment(before,changed)
 if __name__=='__main__':unittest.main()
