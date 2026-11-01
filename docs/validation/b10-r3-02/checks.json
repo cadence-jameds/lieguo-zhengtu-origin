@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "base": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+  "productionSourceCommit": "d30899811e984a784ea432867b3f59e4d8691e91",
+  "sourceAnchor": "ca596389752ece16c4cb26aac00e93de194ead27",
+  "directed": [
+    {
+      "group": "equivalence/protocol/UI/reliability/extinction",
+      "passed": 130,
+      "note": "Before the last three additional UI cases; all final cases included by the full Gate."
+    },
+    {
+      "group": "final UI/controller",
+      "passed": 15
+    },
+    {
+      "group": "quiet existing Runtime file",
+      "passed": 64
+    }
+  ],
+  "typecheck": "PASS (Node 24.19.0)",
+  "build": "PASS; compiled worker tested by native Chromium",
+  "nativeChromium": {
+    "distinctCasesPassed": 6,
+    "splitRunEvidence": "browser-results.json; initial harness failures retained",
+    "physicalAndroid": "pending",
+    "fullProductionUI": "pending"
+  },
+  "successors": {
+    "R3_01": "PASS plus 4 tamper tests",
+    "R3_02": "PASS plus 4 tamper tests",
+    "boundaryAudit": "PASS; 73 modules, no reducer/authority/storage"
+  },
+  "preservedContracts": "preserved-contracts.json; nine exact Base files",
+  "fullRegression": {
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "existingTimeoutMs": 30000,
+    "currentResultSource": "Final delivery and current PR Verify / regression-full.json artifact",
+    "localNode24Attempts": "Two full attempts had the same existing Runtime timeout; attempts.json preserves both.",
+    "localNode22": "Executed with v22.23.4 and unchanged Gate arguments; final result reported separately after this evidence commit."
+  },
+  "CI": {
+    "workflow": "CI / Verify",
+    "resultSource": "Current PR Checks; not predeclared PASS in a commit that precedes CI execution."
+  },
+  "acceptance": "Draft only. No merge/deployment/master-spec bump/R3-03. Historical B5 E1 HOLD and Astra/physical-device limits remain."
+}
