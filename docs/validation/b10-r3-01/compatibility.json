@@ -1,9 +1,13 @@
 {
   "schemaVersion": 1,
   "baseCommit": "443f170b277f71ee26a34ee3b5017687a98e01ab",
-  "implementationCommit": "db6835a3927c28941855553d58782afc0199b170",
+  "implementationCommit": "23c4da8ae1eb6a8ae1b123cc596d6df3a25f9bd8",
   "implementationScope": [
     ".github/workflows/ci.yml",
+    "docs/validation/b10-r3-01/REPORT.md",
+    "docs/validation/b10-r3-01/attempts.json",
+    "docs/validation/b10-r3-01/browser-results.json",
+    "docs/validation/b10-r3-01/checks.json",
     "docs/validation/b10-r3-01/compatibility.json",
     "releases/notes/b10-r3-01-durable-player-commands.json",
     "scripts/b10_r3_01_successor.py",
@@ -130,11 +134,11 @@
     },
     "src/game/useGame.ts": {
       "before": "bbad871e4464d89e0750bb95ea4a5c031ccd4a8231a3bb59f9773c857de7298e",
-      "after": "015c6220d744e4f121058fb5235ce0f2bd1322dec0286adb459d88672c30e005"
+      "after": "0417a1cd497cecc368dcb9f9e890ace657d458992ac6083e9f6be78d43a75bf4"
     },
     "src/game/useGameInteraction.test.tsx": {
       "before": "95817685b48b81480a7efe3886b02429f55eeb1819e6fbbc67b8a6833239cc1f",
-      "after": "01ca2de4f71d97a8a24a37d24fc243d3b70d82910bc44389d9b77826219eaec3"
+      "after": "f99435a63e1340e3f044d8b522aaed2038672e6cd512821851e7ff8feee2004f"
     }
   },
   "grants": {
