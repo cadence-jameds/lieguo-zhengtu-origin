@@ -44,3 +44,9 @@ it('healthy time ticks reuse exact empty-queue rules; depletion and queue change
  const b=request(2);b.context.time=1000;b.context.city.stock.food+=5;c.request(1,b,done,vi.fn());expect(c.metrics.calculations).toBe(1);expect(done.mock.calls.at(-1)![0].results[0].quote.startsAt).toBe(1000);expect(done.mock.calls.at(-1)![0].results[0].quote.createdAt).toBe(1000);
  const d=request(3);d.context.city.stock.food=0;c.request(1,d,done,vi.fn());expect(c.metrics.calculations).toBe(2);port.reply();expect(done.mock.calls.at(-1)![0].results[0].status).toBe('invalid');c.dispose();
 });
+
+it('unchanged insufficient stocks do not recompute on every tick, but new stocks revalidate',()=>{
+ const port=new Port(),c=new ConstructionPreviewController(()=>port as unknown as Worker),done=vi.fn();const poor=request(1);poor.context.city.stock={food:0,wood:0,stone:0,gold:0};c.request(1,poor,done,vi.fn());port.reply();expect(done.mock.calls.at(-1)![0].results[0].status).toBe('invalid');
+ for(let i=2;i<32;i++)c.request(1,{...poor,requestId:i,generation:i,revision:i,context:{...poor.context,time:i}},done,vi.fn());expect(c.metrics.calculations).toBe(1);expect(c.metrics.cacheHits).toBe(30);
+ const funded=request(32);c.request(1,funded,done,vi.fn());expect(c.metrics.calculations).toBe(2);port.reply();expect(done.mock.calls.at(-1)![0].results[0].status).toBe('ready');c.dispose();
+});
