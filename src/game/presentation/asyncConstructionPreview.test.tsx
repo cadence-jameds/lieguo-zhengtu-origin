@@ -15,8 +15,8 @@ class Port{
  constructor(){Port.ports.push(this);}postMessage(r:PreviewRequest){this.messages.push(r);}terminate(){}reply(r=this.messages.at(-1)!){this.onmessage?.({data:calculatePreviewRequest(r)} as MessageEvent);}
 }
 const w=createFormalWorld({campaign:'preview-ui',seed:90217});
-function View({world=w,field=0,branch='1'}:{world?:FormalWorld;field?:number;branch?:string}){return <PreviewBranchContext.Provider value={branch}><Panel world={world} field={field}/></PreviewBranchContext.Provider>;}
-function Panel({world,field}:{world:FormalWorld;field:number}){const preview=useConstructionPreviews(world,world.cities[0].id,[{field}]);return <><PreviewStatus preview={preview}/><span data-result>{preview.results[0]?.status==='ready'?JSON.stringify(preview.results[0].quote.target):''}</span></>;}
+function View({world=w,field=0,branch='1',cityIndex=0}:{world?:FormalWorld;field?:number;branch?:string;cityIndex?:number}){return <PreviewBranchContext.Provider value={branch}><Panel world={world} field={field} cityIndex={cityIndex}/></PreviewBranchContext.Provider>;}
+function Panel({world,field,cityIndex}:{world:FormalWorld;field:number;cityIndex:number}){const preview=useConstructionPreviews(world,world.cities[cityIndex].id,[{field}]);return <><PreviewStatus preview={preview}/><span data-result>{preview.results[0]?.status==='ready'?JSON.stringify(preview.results[0].quote.target):''}</span></>;}
 beforeEach(()=>{vi.useFakeTimers();vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',Port);Port.ports=[];el=document.createElement('div');document.body.append(el);root=createRoot(el);});
 afterEach(async()=>{await act(async()=>root.unmount());constructionPreviews.dispose();el.remove();vi.useRealTimers();vi.unstubAllGlobals();});
 const advance=async(ms=80)=>act(async()=>vi.advanceTimersByTime(ms));
@@ -43,4 +43,18 @@ it('formal submit remains available during pending preview and after preview wor
 
 it('unsupported context gives an explicit unavailable state and query entry, never a fabricated quote',async()=>{
  const legacy={...w,economyVersion:undefined};await act(async()=>root.render(<View world={legacy}/>));await advance();expect(el.textContent).toContain('暫時無法預估');expect(el.textContent).toContain('重新查詢預覽');expect(Port.ports).toHaveLength(0);
+});
+
+it('city and campaign changes at the same revision reject late results from the previous screen',async()=>{
+ const other={...w,cities:w.cities.map((c,i)=>i===1?{...c,ownerFactionId:w.playerFactionId}:c)};
+ await act(async()=>root.render(<View/>));await advance();const port=Port.ports[0],old=port.messages[0];
+ await act(async()=>root.render(<View world={other} cityIndex={1}/>));await advance();await act(async()=>port.reply(old));expect(el.querySelector('[data-result]')!.textContent).toBe('');expect(port.messages.at(-1)!.cityId).toBe(w.cities[1].id);
+ await act(async()=>port.reply());expect(el.textContent).toContain('預覽已更新');
+ const restored={...other,campaignId:'campaign:recovered-preview' as FormalWorld['campaignId']};await act(async()=>root.render(<View world={restored} cityIndex={1}/>));expect(el.querySelector('[data-result]')!.textContent).toBe('');await advance();await act(async()=>port.reply());expect(el.textContent).toContain('預覽已更新');expect(port.messages.at(-1)!.campaignId).toBe(restored.campaignId);
+});
+
+it('worker failure stays actionable across world ticks and never creates an automatic retry storm',async()=>{
+ await act(async()=>root.render(<View/>));await advance();await act(async()=>Port.ports[0].onerror?.());expect(el.textContent).toContain('暫時無法預估');
+ for(let i=1;i<=30;i++){await act(async()=>root.render(<View world={{...w,revision:w.revision+i}}/>));await advance(100);expect(el.textContent).toContain('重新查詢預覽');}
+ expect(Port.ports).toHaveLength(1);await act(async()=>el.querySelector('button')!.click());await advance();expect(Port.ports).toHaveLength(2);await act(async()=>Port.ports[1].reply());expect(el.textContent).toContain('預覽已更新');
 });

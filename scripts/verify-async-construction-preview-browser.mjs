@@ -69,7 +69,7 @@ try{
     }
     observer.disconnect();return {old,single,batch,prepared,transfer,cache,interactive,contextBytes,counts};
    },history);
-   console.log('Completed native history',history);report.performance.push({history,contextBytes:data.contextBytes,oldFullReducerMs:stats(data.old),singleColdWorkerMs:stats(data.single),batchColdMs:stats(data.batch),contextMainMs:stats(data.prepared),postMessageAndKeyMainMs:stats(data.transfer),cacheHitMs:stats(data.cache),detailInteractiveMainMs:stats(data.interactive),previewLongTasksOver50ms:0,sample:'30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch'});
+   console.log('Completed native history',history);report.performance.push({history,contextBytes:data.contextBytes,oldFullReducerMs:stats(data.old),singleColdWorkerMs:stats(data.single),batchColdQuoteWarmWorkerMs:stats(data.batch),contextMainMs:stats(data.prepared),postMessageAndKeyMainMs:stats(data.transfer),cacheHitMs:stats(data.cache),detailInteractiveMainMs:stats(data.interactive),previewLongTasksOver50ms:0,sample:'30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch'});
   }
   return {histories:report.performance.map(p=>p.history)};
  });
@@ -81,11 +81,29 @@ try{
   await page.evaluate(()=>{window.lab.detail(window.uiWorld);document.querySelector('button.primary').click();});assert.ok(await page.evaluate(()=>window.lab.issued.some(p=>p.type==='building.upgrade'&&p.key==='wall')));await page.getByText('預覽已更新；正式提交時仍會重新驗證。',{exact:true}).waitFor();
   await page.screenshot({path:path.join(out,'preview-ui.png')});return {candidates,immediateFormalSubmission:true};
  });
- await run('revision/branch/city switching discards late preview; worker termination recovers without formal side effects',async()=>{
+ await run('revision/branch/target switching discards late preview; worker termination recovers without formal side effects',async()=>{
   const data=await page.evaluate(async()=>{
    const w=window.lab.world(),c=window.lab.controller();const pending=window.lab.request(c,w);c.dispose();let failed=false;try{await pending;}catch{failed=true;}if(!failed)throw Error('pending survived disposal');const result=await window.lab.request(c,{...w,revision:2});c.dispose();
    window.lab.detail(w,'wall','old');window.lab.detail({...w,revision:2},'warehouse.0','new');return {restarted:result.response.revision===2};
   });assert.equal(data.restarted,true);await page.getByText('預覽已更新；正式提交時仍會重新驗證。',{exact:true}).waitFor();assert.equal(await page.locator('.shared-building-detail').getAttribute('data-building-kind'),'warehouse');return data;
+ });
+ await run('native list opening latency, operation long tasks and bounded preview metrics',async()=>{
+  const measurements=await page.evaluate(async()=>{
+   const histories=[];
+   for(const history of [0,10000,30000,60000]){
+    const w=window.lab.world(history),times=[],tasks=[];let begin=0;
+    const observer=new PerformanceObserver(list=>{for(const e of list.getEntries())if(e.startTime>=begin)tasks.push(e.duration);});observer.observe({type:'longtask',buffered:false});
+    for(let i=-3;i<30;i++){
+     await new Promise(r=>requestAnimationFrame(r));begin=performance.now();window.lab.panel(w);document.querySelector('#tab-town').click();await new Promise(r=>requestAnimationFrame(r));
+     document.querySelector('.town-lot.vacant').click();await new Promise(r=>requestAnimationFrame(r));
+     const buttons=[...document.querySelectorAll('.build-choice button.primary')];if(!buttons.some(b=>!b.disabled))throw Error('list not interactive');if(i>=0)times.push(performance.now()-begin);window.lab.close();
+    }
+    await new Promise(r=>setTimeout(r,0));observer.disconnect();histories.push({history,times,longTasksOver50ms:tasks.filter(t=>t>50)});
+   }
+   const w=window.lab.world(),c=window.lab.controller();await window.lab.request(c,w);await window.lab.request(c,w);window.lab.request(c,w,[{field:3}]).catch(()=>null);await window.lab.request(c,w,[{field:4}]);const metrics={...c.metrics};c.dispose();return {histories,metrics};
+  });
+  assert.equal(measurements.metrics.calculations,3);assert.equal(measurements.metrics.cacheHits,1);assert.equal(measurements.metrics.discarded,1);
+  report.panelOpening=measurements.histories.map(x=>({history:x.history,interactiveMs:stats(x.times),longTasksOver50ms:x.longTasksOver50ms}));report.controllerMetrics=measurements.metrics;return {metrics:measurements.metrics};
  });
  await run('native durable Inbox and Runtime stay independent when preview worker dies during a formal command',async()=>{
   await page.evaluate(async()=>{

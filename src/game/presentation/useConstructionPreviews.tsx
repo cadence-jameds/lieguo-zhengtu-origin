@@ -9,11 +9,12 @@ let channels=0,requests=0;
 /** No quote, clone, settlement or canonical world serialization during render. */
 export function useConstructionPreviews(world:FormalWorld,cityId:CityId|undefined,targets:PreviewTarget[]){
  const branch=useContext(PreviewBranchContext),[channel]=useState(()=>++channels),generation=useRef(0),coalesceAt=useRef(0),[attempt,retry]=useState(0);
- const targetKey=JSON.stringify(targets),identity=JSON.stringify([world.campaignId,branch,world.revision,cityId,targetKey,attempt]);
+ const targetKey=JSON.stringify(targets),scope=JSON.stringify([world.campaignId,branch,cityId,targetKey,attempt]),identity=JSON.stringify([scope,world.revision]);
+ const failure=useRef<{scope:string;error:string}|undefined>(undefined);
  const [state,setState]=useState<{identity:string;response?:PreviewResponse;error?:string}>();
  useEffect(()=>{
   const gen=++generation.current;let live=true;
-  if(!cityId||!targets.length)return;
+  if(!cityId||!targets.length||failure.current?.scope===scope)return;
   // Coalesce revision bursts and all candidates of the current panel.
   coalesceAt.current ||= Date.now();
   const delay=Math.max(0,Math.min(80,250-(Date.now()-coalesceAt.current)));
@@ -21,16 +22,16 @@ export function useConstructionPreviews(world:FormalWorld,cityId:CityId|undefine
    coalesceAt.current=0;
    try{
     const request={protocolVersion:PREVIEW_PROTOCOL,campaignId:world.campaignId,branch,revision:world.revision,cityId,requestId:++requests,generation:gen,context:constructionPreviewContext(world,cityId),targets};
-    constructionPreviews.request(channel,request,response=>{if(live&&generation.current===gen)setState({identity,response});},error=>{if(live&&generation.current===gen)setState({identity,error:error.message});});
-   }catch(e){if(live)setState({identity,error:e instanceof Error?e.message:'無法提供最新預估。'});}
+    constructionPreviews.request(channel,request,response=>{if(live&&generation.current===gen){const unavailable=response.results.find(r=>r.status==='unavailable');if(unavailable&&unavailable.status!=='ready')failure.current={scope,error:unavailable.reason};setState({identity,response});}},error=>{if(live&&generation.current===gen){failure.current={scope,error:error.message};setState({identity,error:error.message});}});
+   }catch(e){if(live){const error=e instanceof Error?e.message:'無法提供最新預估。';failure.current={scope,error};setState({identity,error});}}
   },delay);
   return()=>{live=false;clearTimeout(timer);constructionPreviews.cancel(channel);};
  // targetKey describes the bounded list; authoritative revision/branch identify the snapshot.
  // eslint-disable-next-line react-hooks/exhaustive-deps
- },[world,cityId,targetKey,branch,channel,attempt,identity]);
+ },[world,cityId,targetKey,branch,channel,attempt,identity,scope]);
  const current=state?.identity===identity?state:undefined;
  const unavailable=current?.response?.results.find(r=>r.status==='unavailable');
- const error=current?.error??(unavailable&&unavailable.status!=='ready'?unavailable.reason:undefined);
+ const error=(failure.current?.scope===scope?failure.current.error:undefined)??current?.error??(unavailable&&unavailable.status!=='ready'?unavailable.reason:undefined);
  const status=!cityId||!targets.length?'idle':error?'unavailable':current?.response?'ready':state?'stale':'loading';
  return {status,results:current?.response?.results??[],error,retry:()=>retry(n=>n+1)};
 }
