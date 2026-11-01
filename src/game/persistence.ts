@@ -70,7 +70,7 @@ export class FormalPersistence {
  private assertWriter(meta:RuntimeMeta){if(meta.writerEpoch!==(this.writerEpoch??0))throw new WriterConflict();}
  /** Called only by the Worker created under the page's exclusive Web Lock. */
  async acquireWriter():Promise<WriterContext>{
-  const meta=await this.db.transaction('rw',this.db.RuntimeMeta,this.db.saves,async()=>{const m=await this.meta();if(m.campaignId===undefined){const current=await this.db.saves.get('current');if(current?.kind==='world'){m.campaignId=current.data.snapshot.campaignId;m.playerFactionId=current.data.snapshot.playerFactionId;m.revision=current.data.snapshot.revision;}}m.writerEpoch++;await this.db.RuntimeMeta.put(m);this.fault?.('writer-write');return m;});
+  const meta=await this.db.transaction('rw',this.db.RuntimeMeta,this.db.saves,async()=>{const m=await this.meta();if(m.campaignId===undefined){const current=await this.db.saves.get('current');const snapshot=current?.kind==='world'?current.data?.snapshot:undefined;if(snapshot&&typeof snapshot.campaignId==='string'&&typeof snapshot.playerFactionId==='string'&&Number.isSafeInteger(snapshot.revision)&&snapshot.revision>=0){m.campaignId=snapshot.campaignId;m.playerFactionId=snapshot.playerFactionId;m.revision=snapshot.revision;}}m.writerEpoch++;await this.db.RuntimeMeta.put(m);this.fault?.('writer-write');return m;});
   this.writerEpoch=meta.writerEpoch;return meta;
  }
  async writerContext():Promise<WriterContext>{const m=await this.meta();this.assertWriter(m);return m;}
@@ -120,10 +120,11 @@ export class FormalPersistence {
  private async switchInbox(meta:RuntimeMeta,world?:FormalWorld){
   meta.branch++;meta.foregroundRevision=world?.revision??0;if(!world){delete meta.campaignId;delete meta.playerFactionId;meta.revision=0;}await this.db.RuntimeMeta.put(meta);
   // Branch changes are infrequent; no full Inbox scan on ordinary checkpoints.
+  const receipts=new Map(world?.commandReceipts.map(r=>[r.commandId,r] as const)??[]);
   await this.db.Inbox.toCollection().modify(row=>{
    if(!terminalCommand(row)){row.state='needs-confirmation';row.ack=confirmationAck(row,world?.revision??0,'戰役分支已切換，舊命令未執行，請重新確認。');}
    if(world&&row.campaignId===world.campaignId&&row.state==='committed'){
-    const r=world.commandReceipts.find(r=>r.commandId===row.commandId);
+    const r=receipts.get(row.commandId);
     if(r?.disposition==='rolled-back'){row.state='rolled-back';row.ack={commandId:row.commandId,status:'rolled-back',revision:world.revision,originalRevision:r.committedRevision,reason:'此命令已由回復點撤銷。'};}
    }
   });this.fault?.('branch-write');

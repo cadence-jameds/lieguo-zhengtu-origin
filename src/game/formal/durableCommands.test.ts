@@ -88,3 +88,8 @@ it.each(['restore','import','start','reset'] as const)('%s branch/write failure 
  fail=true;const action=()=>mode==='restore'?s.restore(checkpoint):mode==='import'?s.importSave(text):mode==='start'?s.start(createFormalFixture({campaign:'new-branch'})):s.clearSavedGames();await expect(action()).rejects.toThrow('branch transaction fault');expect(await contents(s)).toEqual(before);
  fail=false;await action();expect((await s.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');
 });
+it('writer acquisition during a corrupt v1 migration does not preempt the established Recovery fallback',async()=>{
+ const suffix='migration-recovery-'+(++serial),old=new Dexie(FORMAL_DB_NAME+'-'+suffix);old.version(1).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]'});await old.open();const w=createFormalFixture(),data=await encodeSave(w);
+ await old.table('saves').put({id:'current',kind:'world',at:100,data:{...data,snapshot:undefined}});await old.table('saves').put({id:'authority',kind:'authority',revision:0,sequences:w.sequences,campaigns:[{campaignId:w.campaignId,receipts:[]}]});await old.table('backups').add({at:100,label:'valid-v1-recovery',campaignId:w.campaignId,gameTime:0,reportCursor:1,data});old.close();
+ const s=store(undefined,suffix);await expect(s.acquireWriter()).resolves.toMatchObject({writerEpoch:1});const result=await s.loadSave();expect(result.recovered).toBe(true);expect(result.game!.cities).toEqual(w.cities);expect(result.game!.revision).toBe(1);expect((await s.writerContext()).branch).toBe(1);
+});

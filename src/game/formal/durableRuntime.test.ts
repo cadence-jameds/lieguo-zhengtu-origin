@@ -51,9 +51,14 @@ it('quota at T2 does not auto retry, publishes no success, and retains a durable
 it('99 AI at 25X accepts T1 while an AI replay is still private and serializes fast building/training/research/logistics/governance/dispatch inputs',async()=>{
  const native=createFormalWorld({campaign:'99-ai-durable',seed:90217,speed:25}),city=rich(native);native.factions[0].age=1;for(const faction of native.factions)faction.protectionUntil=0;for(const key of ['townhall','barracks','academy','market','blacksmith'])build(city,key,1);city.military!.units={militia:30,scout:2};enableAutonomy(native);for(const agent of native.autonomy!.agents)agent.nextAt=200000;for(const e of native.events)if(e.type==='ai.decide')e.at=200000;native.events=new EventScheduler(native.events).snapshot();await store.start(native);await boot();const w=latest();
  expect(w.factions).toHaveLength(100);now=10000;let finish!:(w:FormalWorld)=>void,draft!:FormalWorld;const save=store.save.bind(store);vi.spyOn(store,'save').mockImplementationOnce(async(...args)=>{draft=args[0];await new Promise<FormalWorld>(r=>finish=r);return save(...args);});
- tick();await until(()=>!!draft);
+ let duringReplay=0,delta=0;const publish=port.postMessage;
+ port.postMessage=value=>{if(value.type==='commandDurable'&&!draft)duringReplay++;publish(value);};
+ // Force cooperative event boundaries without treating Node time as a device
+ // latency benchmark. Real IDB intake must complete before the AI draft ends.
+ vi.mocked(performance.now).mockImplementation(()=>now+(delta+=10));tick();
  const payloads:FormalCommand[]=[{type:'building.upgrade',cityId:city.id,key:'center'},{type:'military.recruit',cityId:city.id,unitId:'militia',count:1},{type:'research.start',cityId:city.id,techId:'blacksmith.melee.1'},{type:'logistics.auto.set',cityId:city.id,rules:[]},{type:'governance.set',cityId:city.id,enabled:false,policy:'reserve',budget:0,reserve:0},{type:'army.dispatch',cityId:city.id,mission:'scout',target:{kind:'city',cityId:w.cities[1].id},units:{scout:1}}];
  const orders=payloads.map((p,i)=>click(w,'fast-'+i,p));await until(()=>messages.filter(m=>m.type==='commandDurable').length===6);expect(messages.filter(m=>m.type==='commandAck')).toHaveLength(0);expect(await store.db.Inbox.count()).toBe(6);
+ await until(()=>!!draft);expect(duringReplay).toBeGreaterThan(0);
  expect(draft.autonomy!.agents.every(a=>a.decisions>=1)).toBe(true);finish(draft);await until(()=>done('fast-5'));const rows=await store.commandPage();expect(rows).toHaveLength(6);expect(rows.every(r=>r.ack&&r.state!=='pending'&&r.state!=='retryable')).toBe(true);expect(rows.slice().reverse().map(r=>r.commandId)).toEqual(orders.map(o=>o.commandId));
  expect(rows.every(r=>r.state==='committed'||r.state==='needs-confirmation'),JSON.stringify(rows.map(r=>[r.order.payload.type,r.state,r.ack?.reason]))).toBe(true);
  expect(messages.filter(m=>m.type==='commandAck').map(m=>m.ack.commandId)).toEqual(orders.map(o=>o.commandId));
