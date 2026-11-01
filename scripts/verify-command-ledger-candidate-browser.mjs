@@ -25,6 +25,7 @@ try{
    check((await readCandidate(db,campaign)).lookup(campaign,receipt.commandId)?.fingerprint===receipt.fingerprint,'close/reopen retains identity');
    check((await publishCandidate(db,a,base.manifest.checksum)).duplicate,'lost notification resend is idempotent');
    const stale=await prepareLedger(base,[{...receipt,commandId:'command:stale'}],{worldRevision:1});let rejected=false;try{await publishCandidate(db,stale,base.manifest.checksum);}catch{rejected=true;}check(rejected,'stale root CAS rejects');
+   const fork=await prepareLedger(stale,[{...receipt,commandId:'command:fork',committedRevision:2}],{worldRevision:2,writerEpoch:1});rejected=false;try{await publishCandidate(db,fork,a.manifest.checksum);}catch{rejected=true;}check(rejected,'verified divergent prefix rejects despite matching version and caller CAS');
    const b=await prepareLedger(a,[{...receipt,disposition:'rolled-back'}],{worldRevision:2,branch:1,writerEpoch:1,recovery:true});await publishCandidate(db,b,a.manifest.checksum);
    check((await readCandidate(db,campaign)).lookup(campaign,receipt.commandId)?.disposition==='rolled-back','current projection follows Recovery candidate');
    check((await readHistoricalCandidate(db,campaign,1)).lookup(campaign,receipt.commandId)?.disposition==='applied','historic root retains original projection');
