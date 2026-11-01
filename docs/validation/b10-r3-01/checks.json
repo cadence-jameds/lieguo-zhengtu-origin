@@ -1,0 +1,141 @@
+{
+  "base": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+  "sourceCommit": "db6835a3927c28941855553d58782afc0199b170",
+  "branch": "feat/b10-r3-01-durable-player-commands",
+  "node": "24.19.0",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pagesScope": "/lieguo-zhengtu-origin/",
+  "pagesCheck": "PASS",
+  "releaseArtifacts": {
+    "version": "0.30.80",
+    "date": "2026-11-01",
+    "commitSha": "db6835a3927c28941855553d58782afc0199b170",
+    "contentSha": "db6835a3927c28941855553d58782afc0199b170",
+    "dirty": false,
+    "artifactsConsistent": true,
+    "workerIdentityConsistent": true
+  },
+  "gates": [
+    {
+      "check": "check-art-boards.py",
+      "exitCode": 0,
+      "seconds": 0.29
+    },
+    {
+      "check": "check-city-visuals.py",
+      "exitCode": 0,
+      "seconds": 28.71
+    },
+    {
+      "check": "test_city_ui_successor.py",
+      "exitCode": 0,
+      "seconds": 7.04
+    },
+    {
+      "check": "test_mobile_town_successor.py",
+      "exitCode": 0,
+      "seconds": 4.16
+    },
+    {
+      "check": "test_growth_tasks_successor.py",
+      "exitCode": 0,
+      "seconds": 2.24
+    },
+    {
+      "check": "test_recruit_input_successor.py",
+      "exitCode": 0,
+      "seconds": 5.7
+    },
+    {
+      "check": "p0c10_successor.py",
+      "exitCode": 0,
+      "seconds": 3.19
+    },
+    {
+      "check": "test_p0c10_successor.py",
+      "exitCode": 0,
+      "seconds": 5.4
+    },
+    {
+      "check": "p0c10_clock_delta.py",
+      "exitCode": 0,
+      "seconds": 2.29
+    },
+    {
+      "check": "test_p0c10_clock_delta.py",
+      "exitCode": 0,
+      "seconds": 3.17
+    },
+    {
+      "check": "b10_r3_01_successor.py",
+      "exitCode": 0,
+      "seconds": 1.94
+    },
+    {
+      "check": "test_b10_r3_01_successor.py",
+      "exitCode": 0,
+      "seconds": 2.22
+    },
+    {
+      "check": "check-player-feedback.py",
+      "exitCode": 0,
+      "seconds": 10.45
+    }
+  ],
+  "directed": {
+    "passed": 137,
+    "failed": 0,
+    "scope": "durable persistence/runtime, six legal fast operations, old Worker labs, recovery and UI; intermediate source; final source additionally checked below"
+  },
+  "lateAckUiAndAtomicity": {
+    "passed": 53,
+    "failed": 0
+  },
+  "lostAckAndStateRecovery": {
+    "passed": 12,
+    "failed": 0
+  },
+  "chromium": {
+    "version": "154.0.8037.57",
+    "passed": 19,
+    "failed": 0,
+    "source": "Vite source; native IndexedDB / actual Worker / Web Locks / UI",
+    "physicalAndroid": "PENDING"
+  },
+  "isolatedFull": {
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "localVerifiedSourceCommit": "b1db6a056cf1aa7085e43338b78221d8f8f7a51a",
+    "passed": 2243,
+    "failed": 0,
+    "skipped": 1,
+    "latestSourceCommit": "db6835a3927c28941855553d58782afc0199b170",
+    "latestHeadResult": "See the Draft PR latest HEAD CI Full regression in a disposable copy and regression-full.json artifact; final local result is also provided in delivery."
+  },
+  "ci": "Use the Draft PR latest HEAD Verify workflow; local checks do not claim CI success.",
+  "releaseAcceptance": {
+    "B5E1": "HOLD",
+    "Astra": "NOT PASS",
+    "physicalPhone": "PENDING"
+  },
+  "storageReaderCompatibility": {
+    "nodePassed": 22,
+    "nodeFailed": 0,
+    "nativeChromiumPassed": 4,
+    "nativeChromiumFailed": 0
+  },
+  "intakeDuringAiReplay": {
+    "passed": 1,
+    "failed": 0,
+    "scope": "functional event-boundary injection with real FormalPersistence; not a latency benchmark"
+  },
+  "v1WriterRecovery": {
+    "passed": 1,
+    "failed": 0,
+    "scope": "writer acquisition cannot preempt Recovery on missing v1 snapshot"
+  },
+  "finalAtomicityRuntime": {
+    "passed": 39,
+    "failed": 0
+  }
+}

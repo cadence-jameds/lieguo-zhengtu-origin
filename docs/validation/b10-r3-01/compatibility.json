@@ -1,7 +1,40 @@
 {
   "schemaVersion": 1,
   "baseCommit": "443f170b277f71ee26a34ee3b5017687a98e01ab",
-  "implementationCommit": "b1db6a056cf1aa7085e43338b78221d8f8f7a51a",
+  "implementationCommit": "db6835a3927c28941855553d58782afc0199b170",
+  "implementationScope": [
+    ".github/workflows/ci.yml",
+    "docs/validation/b10-r3-01/compatibility.json",
+    "releases/notes/b10-r3-01-durable-player-commands.json",
+    "scripts/b10_r3_01_successor.py",
+    "scripts/p0c10_clock_delta.py",
+    "scripts/p0c10_successor.py",
+    "scripts/test_b10_r3_01_successor.py",
+    "scripts/verify-durable-commands-browser.mjs",
+    "src/game/GameApp.tsx",
+    "src/game/campaignStorage.test.ts",
+    "src/game/campaignStorage.ts",
+    "src/game/durableCommands.ts",
+    "src/game/formal/autonomyRuntimeR2c.test.ts",
+    "src/game/formal/breakthroughRuntimeB92.test.ts",
+    "src/game/formal/combatWorkerB5.test.ts",
+    "src/game/formal/durableCommands.test.ts",
+    "src/game/formal/durableRuntime.test.ts",
+    "src/game/formal/durableWorkerTestSupport.ts",
+    "src/game/formal/extinctionWorkerP0C10.test.ts",
+    "src/game/formal/offlineExtinctionClockWorkerDelta.test.ts",
+    "src/game/formal/playerOrderRuntimeP0.test.ts",
+    "src/game/formal/runtime.test.ts",
+    "src/game/formal/runtimeB4.test.ts",
+    "src/game/formal/wonderRuntimeB91.test.ts",
+    "src/game/interaction.ts",
+    "src/game/persistence.ts",
+    "src/game/presentation/CommandInbox.tsx",
+    "src/game/presentation/integrationV94.css",
+    "src/game/runtime.worker.ts",
+    "src/game/useGame.ts",
+    "src/game/useGameInteraction.test.tsx"
+  ],
   "changes": {
     "releases/notes/b10-r3-01-durable-player-commands.json": {
       "before": null,
@@ -14,6 +47,14 @@
     "src/game/GameApp.tsx": {
       "before": "03ee76a3642ffcfea19606c819ba02238f6f7f2b78017fac20ea256bee3ae281",
       "after": "dac5240f3c03b5add7ef97101ed3e95109dffc18e4109eacf37711611ecea3d4"
+    },
+    "src/game/campaignStorage.test.ts": {
+      "before": "620d2929bee58418a798cf34d1ea43f36803080c0926cb9eb1c10dc9a16a24a1",
+      "after": "bd03bd3608a42ac2e05f692e1e910be41da67d56845597ccc1c89f301e2149fe"
+    },
+    "src/game/campaignStorage.ts": {
+      "before": "8cc0c1f15fd10df0fffe03d9988634d1559d5fb03bf4c6be57f5211f749e5bc6",
+      "after": "592b4d1acf0874e26938fdba6528ed06a21de51a01966767b950b6be9516db9b"
     },
     "src/game/durableCommands.ts": {
       "before": null,
@@ -33,11 +74,11 @@
     },
     "src/game/formal/durableCommands.test.ts": {
       "before": null,
-      "after": "47437661ec816409ab1d3a50594543af78518792cbd1ee11bc08c740553350d1"
+      "after": "ec2ed2d122d97e02ff7821961f0fe01502d792d23066a7baa89a385db7818986"
     },
     "src/game/formal/durableRuntime.test.ts": {
       "before": null,
-      "after": "fffd76cefccdf17c5c13f8e6213614b5f74c7133813d7d4beb712d31de424741"
+      "after": "c0af1ac7934ddb5e1ba3bf30363227d54913215249cb264a2b21a782721ff714"
     },
     "src/game/formal/durableWorkerTestSupport.ts": {
       "before": null,
@@ -73,7 +114,7 @@
     },
     "src/game/persistence.ts": {
       "before": "6e28aae568a7885d4a6d9a29cfd5c8642d13765260ff3cd92cbb9da0c0a23f38",
-      "after": "87a9ce5cd4636b9f826025ff5c82557155b3b663423403699aaa2a662d63b5dd"
+      "after": "2c757a730edfdc83dada140d4c5be59a4ab8f5e4a30ef828fae80600bf6d62d3"
     },
     "src/game/presentation/CommandInbox.tsx": {
       "before": null,
@@ -99,6 +140,12 @@
   "grants": {
     "src/game/GameApp.tsx": [
       "03ee76a3642ffcfea19606c819ba02238f6f7f2b78017fac20ea256bee3ae281"
+    ],
+    "src/game/campaignStorage.test.ts": [
+      "620d2929bee58418a798cf34d1ea43f36803080c0926cb9eb1c10dc9a16a24a1"
+    ],
+    "src/game/campaignStorage.ts": [
+      "8cc0c1f15fd10df0fffe03d9988634d1559d5fb03bf4c6be57f5211f749e5bc6"
     ],
     "src/game/formal/autonomyRuntimeR2c.test.ts": [
       "1efdb83ad7700494b1505e59df5a9896b5d54f789a01008fde2f81aaf2118a8a"
@@ -208,8 +255,6 @@
     "src/game/batch295.test.tsx": "cabccb11c345f1793302319cf306e8cc9537eb288ec411d769b53f32699ac741",
     "src/game/campaignArchive.test.ts": "237496024632a7fd70110e9297d6a4babd0105ba61a9e17a6f83c9f62cd44464",
     "src/game/campaignArchivePolicy.test.ts": "fc016b71ca285bd6758090b72c6a151241255cafd6f6bcfbab6afe92d7cd458c",
-    "src/game/campaignStorage.test.ts": "620d2929bee58418a798cf34d1ea43f36803080c0926cb9eb1c10dc9a16a24a1",
-    "src/game/campaignStorage.ts": "8cc0c1f15fd10df0fffe03d9988634d1559d5fb03bf4c6be57f5211f749e5bc6",
     "src/game/city.ts": "5dfab73153d9463fbe901000c562a3801e3b8ba068a841cd2c9902c7062c694c",
     "src/game/cityNames.ts": "cd9d7277acc056842e43b93b6237ed502c61cab5c42167f5c804f2dc1a0863ec",
     "src/game/commandFeedback.ts": "66cd03cac05ea0a2de5969cb8e8b9dc9065c47a5b428783faa9c24f5b255e016",

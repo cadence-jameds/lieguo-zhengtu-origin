@@ -1,0 +1,197 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "local Vite source; native IndexedDB, real dedicated Worker; synthetic data only",
+  "cases": [
+    {
+      "state": "committed",
+      "name": "native T1 durable, Worker killed before T2 writes, new writer recovers original command once",
+      "effects": 1,
+      "status": "PASS",
+      "ms": 4810
+    },
+    {
+      "exactResult": true,
+      "name": "native T2 success with lost Ack; result query and repeat preserve exact result",
+      "status": "PASS",
+      "ms": 3181
+    },
+    {
+      "row": null,
+      "effects": 0,
+      "name": "native injected inbox-write",
+      "messages": 1,
+      "status": "PASS",
+      "ms": 3531
+    },
+    {
+      "row": {
+        "state": "committed",
+        "attempts": 1
+      },
+      "effects": 1,
+      "name": "native injected backup-write",
+      "messages": 0,
+      "status": "PASS",
+      "ms": 3080
+    },
+    {
+      "row": {
+        "state": "committed",
+        "attempts": 1
+      },
+      "effects": 1,
+      "name": "native injected world-write",
+      "messages": 0,
+      "status": "PASS",
+      "ms": 2914
+    },
+    {
+      "row": {
+        "state": "committed",
+        "attempts": 1
+      },
+      "effects": 1,
+      "name": "native injected authority-write",
+      "messages": 0,
+      "status": "PASS",
+      "ms": 2983
+    },
+    {
+      "row": {
+        "state": "committed",
+        "attempts": 1
+      },
+      "effects": 1,
+      "name": "native injected metadata-write",
+      "messages": 0,
+      "status": "PASS",
+      "ms": 2697
+    },
+    {
+      "row": {
+        "state": "committed",
+        "attempts": 1
+      },
+      "effects": 1,
+      "name": "native injected result-write",
+      "messages": 0,
+      "status": "PASS",
+      "ms": 2571
+    },
+    {
+      "fenced": true,
+      "cas": true,
+      "name": "native writer epoch fences old writer; CAS rejects stale revision; exclusive Web Lock blocks second tab",
+      "status": "PASS",
+      "ms": 2589
+    },
+    {
+      "state": "committed",
+      "attempts": 1,
+      "food": 500,
+      "reports": 1,
+      "effects": 1,
+      "name": "native report-write failure rolls back the funded resources and report; bounded retry commits once",
+      "status": "PASS",
+      "ms": 2759
+    },
+    {
+      "state": "not-received",
+      "attempts": 0,
+      "effects": 0,
+      "name": "native QuotaExceededError at inbox-write never retries automatically",
+      "status": "PASS",
+      "ms": 2543
+    },
+    {
+      "state": "needs-confirmation",
+      "attempts": 1,
+      "effects": 0,
+      "name": "native QuotaExceededError at world-write never retries automatically",
+      "status": "PASS",
+      "ms": 2776
+    },
+    {
+      "history": 30000,
+      "worldReadsDuringT1": 0,
+      "timingsMs": [
+        5.6000000005587935,
+        4.2000000001862645,
+        2.7999999998137355,
+        2.7999999998137355,
+        3.800000000745058,
+        3,
+        4.800000000745058,
+        39.5,
+        2.900000000372529,
+        3
+      ],
+      "name": "native synthetic 30000 receipts preserve all history; T1 never reads the world row",
+      "status": "PASS",
+      "ms": 4913
+    },
+    {
+      "history": 60000,
+      "worldReadsDuringT1": 0,
+      "timingsMs": [
+        6.6000000005587935,
+        2.099999999627471,
+        1.900000000372529,
+        1.900000000372529,
+        2.8999999994412065,
+        1.7000000001862645,
+        2.5,
+        5.400000000372529,
+        2.2999999998137355,
+        2.2999999998137355
+      ],
+      "name": "native synthetic 60000 receipts preserve all history; T1 never reads the world row",
+      "status": "PASS",
+      "ms": 6288
+    },
+    {
+      "visibleCommands": 2,
+      "name": "actual UI rapid operations each show Created/Durable/terminal states; native page reload keeps Inbox",
+      "status": "PASS",
+      "ms": 11285
+    },
+    {
+      "status": "PASS",
+      "unchanged": true,
+      "name": "metadata-only",
+      "campaignStorageStatus": "empty"
+    },
+    {
+      "sameWorld": true,
+      "sameRows": true,
+      "sameRecovery": true,
+      "inbox": 0,
+      "version": 2,
+      "name": "v1-migration",
+      "status": "PASS"
+    },
+    {
+      "recovered": true,
+      "revision": 1,
+      "sameCities": true,
+      "authorityMatches": true,
+      "originalRecovery": true,
+      "name": "v1-migration-corrupt",
+      "status": "PASS"
+    },
+    {
+      "state": "needs-confirmation",
+      "status": "PASS",
+      "same": true,
+      "name": "reset-inbox",
+      "campaignStorageStatus": "stored"
+    }
+  ],
+  "errors": [],
+  "receiptTimingMs": [
+    7.7000000001862645
+  ],
+  "android": "physical device pending; emulation is not device acceptance",
+  "verifiedSourceCommit": "db6835a3927c28941855553d58782afc0199b170",
+  "storageCompatibilitySource": "native IndexedDB; local Vite modules; synthetic fixtures"
+}

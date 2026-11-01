@@ -6,10 +6,11 @@ from functools import lru_cache
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 BASE='443f170b277f71ee26a34ee3b5017687a98e01ab'
-IMPLEMENTATION='b1db6a056cf1aa7085e43338b78221d8f8f7a51a'
+IMPLEMENTATION='db6835a3927c28941855553d58782afc0199b170'
 RECORD='docs/validation/b10-r3-01/compatibility.json'
 CHANGES={
  'releases/notes/b10-r3-01-durable-player-commands.json','scripts/verify-durable-commands-browser.mjs',
+ 'src/game/campaignStorage.ts','src/game/campaignStorage.test.ts',
  'src/game/GameApp.tsx','src/game/durableCommands.ts','src/game/interaction.ts','src/game/persistence.ts',
  'src/game/presentation/CommandInbox.tsx','src/game/presentation/integrationV94.css','src/game/runtime.worker.ts',
  'src/game/useGame.ts','src/game/useGameInteraction.test.tsx',
@@ -21,6 +22,9 @@ CHANGES={
  'src/game/formal/runtimeB4.test.ts','src/game/formal/wonderRuntimeB91.test.ts',
 }
 ADAPTERS={'.github/workflows/ci.yml','scripts/p0c10_successor.py','scripts/p0c10_clock_delta.py'}
+# The source anchor also contains the earlier Gate bootstrap commit. Only these
+# six explicit support paths are separated; no directory/prefix is exempted.
+GATE_SUPPORT=ADAPTERS|{RECORD,'scripts/b10_r3_01_successor.py','scripts/test_b10_r3_01_successor.py'}
 def sha(data):return hashlib.sha256(data).hexdigest()
 @lru_cache(maxsize=None)
 def previous(commit,path):return subprocess.check_output(['git','-C',str(ROOT),'show',commit+':'+path],stderr=subprocess.DEVNULL)
@@ -29,7 +33,7 @@ def paths(*args):return set(subprocess.check_output(['git','-C',str(ROOT),'ls-tr
 @lru_cache(maxsize=None)
 def changes():
  actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
- assert actual==CHANGES,('Unexpected implementation scope',actual^CHANGES)
+ assert actual==CHANGES|GATE_SUPPORT,('Unexpected implementation scope',actual^(CHANGES|GATE_SUPPORT))
  result={}
  for p in sorted(CHANGES):
   try:before=sha(previous(BASE,p))
@@ -59,7 +63,7 @@ def adapters():
 def expected_record():
  c=changes();historical=paths('docs/b6-v95','docs/b6-v96','docs/b6-v97','docs/validation/protection-extinction')
  invariants=paths('src')-CHANGES
- return{'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'changes':c,
+ return{'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'implementationScope':sorted(CHANGES|GATE_SUPPORT),'changes':c,
   'grants':{p:[v['before']] for p,v in c.items() if v['before'] is not None},
   'invariants':{p:sha(previous(BASE,p)) for p in sorted(invariants)},
   'historical':{p:sha(previous(BASE,p)) for p in sorted(historical)},

@@ -1,0 +1,805 @@
+{
+  "note": "Raw generated reports remain in ignored local artifacts. Historical failures are preserved here as summaries and content hashes; not rewritten as PASS.",
+  "attempts": [
+    {
+      "name": "focused-initial",
+      "kind": "vitest",
+      "passed": 47,
+      "failed": 7,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/focused-initial.json",
+      "sha256": "7c8436a86d2bccaca93d6919f233f3227d1cb6f6eba524923be7308d942dbd14",
+      "failures": [
+        {
+          "file": "useGameInteraction.test.tsx",
+          "test": "background state, phase and unrelated request completions never enable a pending command button",
+          "error": "AssertionError: expected [ { type: 'command', …(4) }, …(1) ] to have a length of 1 but got 2"
+        },
+        {
+          "file": "useGameInteraction.test.tsx",
+          "test": "a click immediately shows accepting, never labels receipt as durable success, and rapid double clicks dispatch once",
+          "error": "AssertionError: expected [ { type: 'command', …(4) }, …(1) ] to have a length of 1 but got 2"
+        },
+        {
+          "file": "durableCommands.test.ts",
+          "test": "same CampaignId+CommandId with different issuer or fingerprint rejects before changing any durable row",
+          "error": "Error: expected [Function] to throw error including 'CommandId' but got '[\\n  {\\n    \"code\": \"unrecognized_key…'"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "import and visibility/load barriers preserve arrival order and old-campaign clicks never cross a switch",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "a newer foreground command stays a hard fence even when its ID looks autonomous and its effect is undone",
+          "error": "AssertionError: expected 'committed' to be 'rejected' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "an actual failed IDB transaction produces only rejection, preserves authority, and deliberate same-ID resend commits once",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "C3 a stale dispatch crosses unrelated catch-up exactly once and waits for durable save before ACK",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "focused-02",
+      "kind": "vitest",
+      "passed": 38,
+      "failed": 16,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/focused-02.json",
+      "sha256": "0e620e699d52c0cb702770344b2dff8a604a8b3f545e96f94790f364cfaa4404",
+      "failures": [
+        {
+          "file": "extinctionWorkerP0C10.test.ts",
+          "test": "Worker 3X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+          "error": "TypeError: Cannot read properties of undefined (reading 'world')"
+        },
+        {
+          "file": "extinctionWorkerP0C10.test.ts",
+          "test": "Worker 6X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+          "error": "TypeError: Cannot read properties of undefined (reading 'world')"
+        },
+        {
+          "file": "extinctionWorkerP0C10.test.ts",
+          "test": "Worker 10X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+          "error": "TypeError: Cannot read properties of undefined (reading 'world')"
+        },
+        {
+          "file": "extinctionWorkerP0C10.test.ts",
+          "test": "Worker 25X freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time",
+          "error": "TypeError: Cannot read properties of undefined (reading 'world')"
+        },
+        {
+          "file": "extinctionWorkerP0C10.test.ts",
+          "test": "away/resume, re-load and ended campaign preserve a stopped Worker clock and never clear saves",
+          "error": "TypeError: Cannot read properties of undefined (reading 'world')"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "foreground FIFO overtakes only a pending tick and remains behind the in-flight durable save",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "import and visibility/load barriers preserve arrival order and old-campaign clicks never cross a switch",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "an old unchanged construction catches up actual admission time after its revision was rebased",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "actual player-governor catch-up admits an unchanged building without retry",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "actual player-governor catch-up rejects its changed field target without retry",
+          "error": "TypeError: Cannot read properties of undefined (reading 'commandReceipts')"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "a newer foreground command stays a hard fence even when its ID looks autonomous and its effect is undone",
+          "error": "TypeError: Cannot read properties of undefined (reading 'campaignId')"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "current resources conflict rejects without any draft spend or durable save",
+          "error": "AssertionError: expected '世界狀態已變更，請重新確認原始操作。' to contain '庫存不足'"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "an actual failed IDB transaction preserves authority; terminal same-ID resend cannot execute and a confirmed new ID commits once",
+          "error": "AssertionError: expected undefined to deeply equal { kind: 'formal', …(27) }"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "C4 due events and a player command share one atomic save with one authoritative revision",
+          "error": "AssertionError: expected \"vi.fn()\" to be called 1 times, but got 0 times"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "C4 combined replay fault exposes neither event draft nor command success",
+          "error": "AssertionError: expected undefined to deeply equal { kind: 'formal', …(19) }"
+        },
+        {
+          "file": "playerOrderRuntimeP0.test.ts",
+          "test": "C3 a stale dispatch crosses unrelated catch-up exactly once and waits for durable save before ACK",
+          "error": "AssertionError: expected false to be true // Object.is equality"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "focused-03",
+      "kind": "vitest",
+      "passed": 54,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/focused-03.json",
+      "sha256": "92f0120dc5de7d1a0eca913f8a862f489178e7f15a63a7b83926cdc7dd7dfdf0",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "runtime-initial",
+      "kind": "vitest",
+      "passed": 0,
+      "failed": 9,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/runtime-initial.json",
+      "sha256": "79aaa8ccf77797a1c1f2de4a92587fcd9f270316b6eb57b6afd73af6154bc017",
+      "failures": [
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "real Worker protocol: T1 survives termination before execution, reboot revalidates and commits one effect; Ack loss queries exact T2 result",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "real Worker retries a temporary T2 report-write failure finitely and never duplicates resource deduction",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "real Worker retries a temporary T2 backup-write failure finitely and never duplicates resource deduction",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "real Worker retries a temporary T2 world-write failure finitely and never duplicates resource deduction",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "real Worker retries a temporary T2 authority-write failure finitely and never duplicates resource deduction",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "real Worker retries a temporary T2 result-write failure finitely and never duplicates resource deduction",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "quota at T2 does not auto retry, publishes no success, and retains a durable confirmation result",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "99 AI at 25X accepts T1 while an AI replay is still private and serializes fast building/training/research/logistics/governance/dispatch inputs",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        },
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "expired pending becomes terminal confirmation on reboot and a stale row never revives an ended campaign",
+          "error": "AssertionError: expected true to be false // Object.is equality"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "runtime-02",
+      "kind": "vitest",
+      "passed": 8,
+      "failed": 1,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/runtime-02.json",
+      "sha256": "6c9ac8f1d5d26378e8ea8f71b975088ba43fad228cc6dc16c408a54d60d6d7cb",
+      "failures": [
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "99 AI at 25X accepts T1 while an AI replay is still private and serializes fast building/training/research/logistics/governance/dispatch inputs",
+          "error": "AssertionError: expected false to be true // Object.is equality"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "runtime-03",
+      "kind": "vitest",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/runtime-03.json",
+      "sha256": "480a6b20213cbbd328214a8dc707ba8603a077dc5e887efeac005ef35e4c6404",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "focused-04",
+      "kind": "vitest",
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/focused-04.json",
+      "sha256": "e5de0bfe6fbbab9c9f88e3308d684e0528ad3b2ba2cd66bb01c0c49f21f8a1b2",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "focused-05",
+      "kind": "vitest",
+      "passed": 45,
+      "failed": 1,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/focused-05.json",
+      "sha256": "20ecfb9141e7a8e146e22d06b2918b028900ac7383a8bc85aa79d75f40326e56",
+      "failures": [
+        {
+          "file": "useGameInteraction.test.tsx",
+          "test": "T1 failure retains the exact recoverable operation and retry uses the original identity; Durable removes the draft",
+          "error": "AssertionError: expected [ { type: 'command', …(2) } ] to deeply equal []"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "focused-final",
+      "kind": "vitest",
+      "passed": 73,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/focused-final.json",
+      "sha256": "3304ae8c4a0322d17a2aad7c82b18a3c84130e5abc4723741ed84ee84ea4ab86",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "freeze-final",
+      "kind": "vitest",
+      "passed": 19,
+      "failed": 4,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/freeze-final.json",
+      "sha256": "d08f23257ba1f20c788e08a13e0aa64389e9260835d9bc119c3229b96cf1787b",
+      "failures": [
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker normal-1: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker normal-25: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker developer-50: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker developer-100: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "recovery-final",
+      "kind": "vitest",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/recovery-final.json",
+      "sha256": "95037c02e8c42c5138cb12a1f01e37a7b159594acb27410c2c18d21668f3c984",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "domain-delta",
+      "kind": "vitest",
+      "passed": 72,
+      "failed": 7,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/domain-delta.json",
+      "sha256": "60596153591f7c74026d50ab642d90986f3df500f6670675ef25cd3611c3202f",
+      "failures": [
+        {
+          "file": "runtime.test.ts",
+          "test": "1X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "25X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+          "error": "Error: Test timed out in 5000ms."
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "six-legal",
+      "kind": "vitest",
+      "passed": 11,
+      "failed": 1,
+      "skipped": 0,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/six-legal.json",
+      "sha256": "945598d8a0fdd5f531d6f44ea87c9e23c239dbcbae1e71af33d72a62417ae697",
+      "failures": [
+        {
+          "file": "durableRuntime.test.ts",
+          "test": "99 AI at 25X accepts T1 while an AI replay is still private and serializes fast building/training/research/logistics/governance/dispatch inputs",
+          "error": "AssertionError: expected false to be true // Object.is equality"
+        }
+      ],
+      "suiteErrors": []
+    },
+    {
+      "name": "directed-final",
+      "kind": "vitest",
+      "passed": 137,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/directed-final.json",
+      "sha256": "9dbfa2d7e37871329c8238b9b678697ee6e41b95b36f1282379af90e81af541e",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "ui-delivery",
+      "kind": "vitest",
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/ui-delivery.json",
+      "sha256": "0cf4db381bfb57024bd2343fd0c94155a78a9c820f90d97413c48e5f08a3286b",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "t3-state-final",
+      "kind": "vitest",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/t3-state-final.json",
+      "sha256": "a4d7ee975d664749e5ea8c77b3aaaf15be4e277bef428f62d5b0a4128eb23d11",
+      "failures": [],
+      "suiteErrors": []
+    },
+    {
+      "name": "full-initial",
+      "kind": "vitest",
+      "passed": 2188,
+      "failed": 32,
+      "skipped": 12,
+      "success": false,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/full-initial.json",
+      "sha256": "23fb7d24a59c42f5415e65d3a028daaf7bc39a9b9bc346835a6b233bb06855ac",
+      "failures": [
+        {
+          "file": "breakthroughRuntimeB92.test.ts",
+          "test": "B9-2 failed Worker save preserves the live pool, city stock and transport; retry spends once",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "combatWorkerB5.test.ts",
+          "test": "B5 dispatch and conquest remain unpublished until persistence resolves, then patches carry armies, receipts, owner and reports",
+          "error": "AssertionError: expected [ …(2) ] to deeply equal [ { type: 'commandReceived', …(2) } ]"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker normal-1: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker normal-25: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker developer-50: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "offlineExtinctionClockWorkerDelta.test.ts",
+          "test": "T2/T4/T5/T6 Worker developer-100: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "active Worker does not acknowledge or switch a draft until persistence resolves",
+          "error": "AssertionError: expected [ …(2) ] to deeply equal [ { type: 'commandReceived', …(2) } ]"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "failed commit gives rejected ack and prior world; retry and replay only save once successfully",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "1X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "3X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "6X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "10X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "25X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "1X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "25X governance bridges its own catch-up with low load and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "a failed governance save never exposes a new setting or receipt and replay commits only once",
+          "error": "AssertionError: expected [] to have a length of 1 but got +0"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "1X command admission uses real IndexedDB authority and restores the same durable state",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "3X command admission uses real IndexedDB authority and restores the same durable state",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "6X command admission uses real IndexedDB authority and restores the same durable state",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "10X command admission uses real IndexedDB authority and restores the same durable state",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "25X command admission uses real IndexedDB authority and restores the same durable state",
+          "error": "AssertionError: expected 'committed' to be 'duplicate' // Object.is equality"
+        },
+        {
+          "file": "runtime.test.ts",
+          "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "runtimeB4.test.ts",
+          "test": "native D1 funding is exposed only after durable transaction resolves",
+          "error": "AssertionError: expected [ …(2) ] to deeply equal [ { type: 'commandReceived', …(2) } ]"
+        },
+        {
+          "file": "runtimeB4.test.ts",
+          "test": "failed native recruitment commit preserves population/resources and a retry is safe",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "runtimeB4.test.ts",
+          "test": "native stale overlapping commands serialize and only the first commits",
+          "error": "AssertionError: expected [ 'committed', 'committed' ] to deeply equal [ 'committed', 'rejected' ]"
+        },
+        {
+          "file": "runtimeB4.test.ts",
+          "test": "wall construction and scheduled completion become visible only after each durable Worker commit",
+          "error": "AssertionError: expected [ …(2) ] to deeply equal [ { type: 'commandReceived', …(2) } ]"
+        },
+        {
+          "file": "runtimeB4.test.ts",
+          "test": "wall Worker save failure rolls back payment and retry plus restart cannot reserve or pay twice",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        },
+        {
+          "file": "wonderRuntimeB91.test.ts",
+          "test": "B9-1 failed Worker save preserves the live pool, city stock and transport; retry spends once",
+          "error": "AssertionError: expected 'rejected' to be 'committed' // Object.is equality"
+        }
+      ],
+      "suiteErrors": [
+        {
+          "file": "breakthroughB92.test.ts",
+          "message": "Hook timed out in 240000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\"."
+        }
+      ]
+    },
+    {
+      "name": "b10-browser",
+      "kind": "native-chromium",
+      "passed": 0,
+      "failed": 1,
+      "rawLocalArtifact": "artifacts/b10-browser/result.json",
+      "sha256": "bcdc4a0ac694d4f9f83795aae526abb2e136ec916d2e4333201272ab816e20a1",
+      "failures": [
+        {
+          "name": "native T1 durable, Worker killed before T2 writes, new writer recovers original command once",
+          "status": "FAIL",
+          "error": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation."
+        }
+      ]
+    },
+    {
+      "name": "b10-browser-02",
+      "kind": "native-chromium",
+      "passed": 0,
+      "failed": 1,
+      "rawLocalArtifact": "artifacts/b10-browser-02/result.json",
+      "sha256": "fe9b5bbc7659f19daca1afc611caaedfb6073b2001ed36915c7928c2e1c0d536",
+      "failures": [
+        {
+          "name": "native T1 durable, Worker killed before T2 writes, new writer recovers original command once",
+          "status": "FAIL",
+          "error": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation"
+        }
+      ]
+    },
+    {
+      "name": "b10-browser-03",
+      "kind": "native-chromium",
+      "passed": 0,
+      "failed": 1,
+      "rawLocalArtifact": "artifacts/b10-browser-03/result.json",
+      "sha256": "58bc77ae6baa6d1e7a40244702ffeb7711083060bccd0ba31d1a683228dfd084",
+      "failures": [
+        {
+          "name": "native T1 durable, Worker killed before T2 writes, new writer recovers original command once",
+          "status": "FAIL",
+          "error": "Error: page.evaluate: ReferenceError: __APP_RELEASE_METADATA__ is not defined\n    at http://127.0.0.1:5173/src/game/release.ts:1:24"
+        }
+      ]
+    },
+    {
+      "name": "b10-browser-04",
+      "kind": "native-chromium",
+      "passed": 8,
+      "failed": 1,
+      "rawLocalArtifact": "artifacts/b10-browser-04/result.json",
+      "sha256": "585eee9cace7703a5060e77cb36f2e31338052e1c66673047ba3a2ebf4ed89bd",
+      "failures": [
+        {
+          "name": "actual UI rapid operations each show Created/Durable/terminal states; native page reload keeps Inbox",
+          "status": "FAIL",
+          "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '城市', exact: true }).first()\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "name": "b10-browser-05",
+      "kind": "native-chromium",
+      "passed": 7,
+      "failed": 1,
+      "rawLocalArtifact": "artifacts/b10-browser-05/result.json",
+      "sha256": "2513676061e36d5e98b59399df98aba13ce56481ffbce19c5c9274e4b78482ed",
+      "failures": [
+        {
+          "name": "native writer epoch fences old writer; CAS rejects stale revision; exclusive Web Lock blocks second tab",
+          "status": "FAIL",
+          "error": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation"
+        }
+      ]
+    },
+    {
+      "name": "b10-browser-06",
+      "kind": "native-chromium",
+      "passed": 14,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-browser-06/result.json",
+      "sha256": "a84c34162b32ec295a068e3c83ce289dbc1248920237234712de73fd453747a0",
+      "failures": []
+    },
+    {
+      "name": "b10-browser-final",
+      "kind": "native-chromium",
+      "passed": 15,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-browser-final/result.json",
+      "sha256": "ade2cbfb21676a04e6560da457045a6555e915bdc1cbf4ada298f88da422ec29",
+      "failures": []
+    },
+    {
+      "name": "b10-browser-delivery",
+      "kind": "native-chromium",
+      "passed": 15,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-browser-delivery/result.json",
+      "sha256": "d70076708de1e6fd763763c3918b0dde693b7b9317edc9393a9d7b477a331f4d",
+      "failures": []
+    },
+    {
+      "name": "b10-browser-pinned",
+      "kind": "native-chromium",
+      "passed": 15,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-browser-pinned/result.json",
+      "sha256": "2265852f21c92b3283759e6e3d36ecaaedd04ca801b7cc4318c915d4226f5e49",
+      "failures": []
+    },
+    {
+      "name": "full-before-reader",
+      "kind": "vitest",
+      "passed": 2243,
+      "failed": 0,
+      "skipped": 1,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/full-before-reader.json",
+      "sha256": "87eabc443351c9919aa5d9261a3d73e095a063b712f36ca0ce60480c9d5a0db0"
+    },
+    {
+      "name": "storage-reader",
+      "kind": "vitest",
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/storage-reader.json",
+      "sha256": "135ea0ae565a03a925deddc7fdac6020b5ff9db712a04969a55181e8dd9d0a79"
+    },
+    {
+      "name": "t3-state-final",
+      "kind": "vitest",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/t3-state-final.json",
+      "sha256": "a4d7ee975d664749e5ea8c77b3aaaf15be4e277bef428f62d5b0a4128eb23d11"
+    },
+    {
+      "name": "intake-during-ai",
+      "kind": "selected-functional-test",
+      "passed": 1,
+      "failed": 0,
+      "skippedBySelection": 11,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/intake-during-ai.json",
+      "sha256": "2edc3e55dc731ee9481e40daa171c24af2104e8fc0550812ce48ac4da95c291a"
+    },
+    {
+      "name": "final-atomic-runtime",
+      "kind": "vitest",
+      "passed": 39,
+      "failed": 0,
+      "skippedBySelection": 0,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/final-atomic-runtime.json",
+      "sha256": "3c8551d6308868f39d801419dcd706c28069a1e1cc1dac2185070acf4da222db"
+    },
+    {
+      "name": "v1-recovery-claim",
+      "kind": "selected-functional-test",
+      "passed": 1,
+      "failed": 0,
+      "skippedBySelection": 27,
+      "rawLocalArtifact": "artifacts/b10-r3-01/attempts/v1-recovery-claim.json",
+      "sha256": "a72b8db5846beef272333c856419eff5fa54b9e1cb09b5768a174bf3a7bddf7e"
+    },
+    {
+      "name": "artifacts/b10-browser-source-final/result.json",
+      "kind": "native-chromium",
+      "passed": 15,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-browser-source-final/result.json",
+      "sha256": "786db5fe92da0d827911fd6ef86680f36ac0228daa95de18cb4ee248862d0504"
+    },
+    {
+      "name": "artifacts/b10-browser-final-source/result.json",
+      "kind": "native-chromium",
+      "passed": 15,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-browser-final-source/result.json",
+      "sha256": "2fb3d5f368adc98bc8e47eba7110a025663c24394b2b4462592a2a75a1c5548b"
+    },
+    {
+      "name": "artifacts/b10-storage-compat-browser.json",
+      "kind": "native-chromium",
+      "passed": 4,
+      "failed": 0,
+      "rawLocalArtifact": "artifacts/b10-storage-compat-browser.json",
+      "sha256": "3fefd350752a52d1b1b50647d625debcb67292d1d9cdd50ed096753a609fc57d"
+    }
+  ]
+}
