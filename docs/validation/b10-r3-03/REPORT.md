@@ -62,7 +62,11 @@ Recovery 候選追加 disposition 事件，不改原區段；歷史 Manifest 讀
 | 22 99 AI／25X、23 滅國／復國／結束 | durableRuntime、offlineExtinctionClockWorkerDelta 及完整回歸；正式原碼不變 |
 | 24 Inbox／等待 UI、25 Preview 隔離 | R3-01／02 定向與完整回歸；本批未接入任何 UI／Worker |
 
-初輪定向共 7 檔、108 tests PASS（候選 19 項）；前綴補修後候選 20 項另重驗通過，完整最終定向結果見交付回覆。原 7 檔命令（Node24，maxWorkers=2，testTimeout=30000）：commandLedgerR303、durableCommands、durableRuntime、constructionPreviewR302、asyncConstructionPreview、constructionPreviewController、offlineExtinctionClockWorkerDelta。最終 Typecheck／Build、Node22 隔離完整回歸、精確 successor／防竄改及 CI 結果以交付回覆與 CI artifact 為準，不預先列未結束執行為 PASS。既有測試與逾時門檻完全不變。
+初輪定向共 7 檔、108 tests PASS（候選 19 項）；前綴補修後候選 20 項重驗通過。最終相同七檔以 Node22.23.4、maxWorkers=1、testTimeout=30000 執行，**109 PASS／0 FAIL**，72.28 秒：commandLedgerR303、durableCommands、durableRuntime、constructionPreviewR302、asyncConstructionPreview、constructionPreviewController、offlineExtinctionClockWorkerDelta。
+
+Typecheck、Build、31 項 successor 防竄改、額外 clock delta 3 tests、CI 原有 validators／Preview capability audit、本機 Pages/release 檢查通過。首輪本機 Node22 完整隔離（前綴修補前、候選19）則為 **2300 PASS／4 FAIL／12 SKIP**，不是 PASS：[失敗、版本、資源與並行背景](local-full-attempt1.json)。失敗是 specAudit 60秒、兩個 Runtime 20／30秒逾時及一個 Runtime 等待條件斷言；不能只稱為原先 Node24 已知問題。此輪與其他驗證有重疊，資源競爭只是待驗假說，未證實根因。完整失敗 report 保留在忽略的 artifacts。
+
+另對最終程式啟動不並行重度工作的 Node22 隔離完整重驗，CI 也執行完整隔離 Gate；其最終結果以 PR Checks、regression artifact 及交付回覆為準，不預先列尚未結束的執行為 PASS。所有既有測試、斷言與逾時門檻完全不變。
 
 ## 效能：只有候選微基準，正式遊戲尚無改善
 
