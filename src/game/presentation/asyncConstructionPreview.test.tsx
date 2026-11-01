@@ -58,3 +58,8 @@ it('worker failure stays actionable across world ticks and never creates an auto
  for(let i=1;i<=30;i++){await act(async()=>root.render(<View world={{...w,revision:w.revision+i}}/>));await advance(100);expect(el.textContent).toContain('重新查詢預覽');}
  expect(Port.ports).toHaveLength(1);await act(async()=>el.querySelector('button')!.click());await advance();expect(Port.ports).toHaveLength(2);await act(async()=>Port.ports[1].reply());expect(el.textContent).toContain('預覽已更新');
 });
+
+it('the shared-rule invalid reason is visible even before the player submits a command',async()=>{
+ const poor={...w,cities:w.cities.map((c,i)=>i===0?{...c,stock:{food:0,wood:0,stone:0,gold:0}}:c)};
+ await act(async()=>root.render(<View world={poor}/>));await advance();await act(async()=>Port.ports[0].reply());expect(el.textContent).toContain('城市實際庫存不足');expect(el.textContent).toContain('預覽已更新');expect(el.querySelector('[data-result]')!.textContent).toBe('');
+});

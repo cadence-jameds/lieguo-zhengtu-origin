@@ -37,5 +37,6 @@ export function useConstructionPreviews(world:FormalWorld,cityId:CityId|undefine
 }
 export function PreviewStatus({preview}:{preview:ReturnType<typeof useConstructionPreviews>}){
  if(preview.status==='idle')return null;
- return <p role="status" className="construction-preview-status">{preview.status==='ready'?'預覽已更新；正式提交時仍會重新驗證。':preview.status==='loading'?'預覽計算中…':preview.status==='stale'?'預覽已過期，重新計算中…':`暫時無法預估。${preview.error??''}`}{preview.status==='unavailable'&&<button onClick={preview.retry}>重新查詢預覽</button>}</p>;
+ const invalid=preview.results.length===1&&preview.results[0].status==='invalid'?preview.results[0].reason:undefined;
+ return <p role="status" className="construction-preview-status">{preview.status==='ready'?(invalid?'預覽已更新：'+invalid+' 正式提交時仍會重新驗證。':'預覽已更新；正式提交時仍會重新驗證。'):preview.status==='loading'?'預覽計算中…':preview.status==='stale'?'預覽已過期，重新計算中…':`暫時無法預估。${preview.error??''}`}{preview.status==='unavailable'&&<button onClick={preview.retry}>重新查詢預覽</button>}</p>;
 }
