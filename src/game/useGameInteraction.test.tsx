@@ -131,3 +131,27 @@ it('a terminal T1 result is shown immediately and an older delayed Ack cannot ov
  await act(async()=>{port.emit({type:'commandAck',ack:{commandId:first.order.commandId,status:'committed',revision:1}});port.emit({type:'requestDone',requestId:first.requestId});});expect(engine.notice).toBe(terminal.reason);expect(engine.commandRows.find(r=>r.commandId===first.order.commandId)!.state).toBe('committed');
  await act(async()=>port.emit({type:'requestDone',requestId:second.requestId}));expect(engine.busy).toBe(false);
 });
+it('each command keeps its own deadline while B/C rows continue updating; pending queries retain recovery until terminal authority',async()=>{
+ vi.useFakeTimers();
+ try{
+  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'A'}));const a=port.sent.at(-1);
+  const pending=(request:any)=>({type:'commandStatus',row:{order:request.order,commandId:request.order.commandId,state:'pending',sequence:1}});
+  for(const name of ['B','C']){await act(async()=>vi.advanceTimersByTime(10000));await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.support,name}));await act(async()=>port.emit(pending(port.sent.at(-1))));}
+  await act(async()=>vi.advanceTimersByTime(10000));
+  expect(engine.commandRows.find(r=>r.commandId===a.order.commandId)!.state).toBe('blocked');expect(port.sent.filter(r=>r.type==='commandQuery'&&r.commandId===a.order.commandId)).toHaveLength(1);
+  await act(async()=>port.emit(pending(a)));expect(engine.commandRows.find(r=>r.commandId===a.order.commandId)!.state).toBe('blocked');expect(engine.commandRows.find(r=>r.commandId===a.order.commandId)!.text).toContain('重新載入');
+  await act(async()=>port.emit({type:'commandAck',ack:{commandId:a.order.commandId,status:'committed',revision:1}}));expect(engine.commandRows.find(r=>r.commandId===a.order.commandId)!.state).toBe('committed');expect(engine.feedback.text).not.toBe('命令已提交。');
+ }finally{vi.useRealTimers();}
+});
+it.each(['committed','rejected'] as const)('timed out pending stays visibly blocked until authoritative %s arrives',async status=>{
+ vi.useFakeTimers();try{
+  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'timeout'}));const request=port.sent.at(-1),row={order:request.order,commandId:request.order.commandId,state:'pending',sequence:1};
+  await act(async()=>vi.advanceTimersByTime(30000));await act(async()=>port.emit({type:'commandStatus',row}));expect(engine.commandRows.at(-1)!.state).toBe('blocked');expect(engine.feedback.kind).toBe('uncertain');
+  await act(async()=>port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status,revision:1,reason:status==='rejected'?'規則拒絕':undefined}}));expect(engine.commandRows.at(-1)!.state).toBe(status);expect(engine.commandRows.at(-1)!.text).not.toContain('等待結果逾時');expect(engine.feedback.kind).toBe(status==='committed'?'success':'error');
+ }finally{vi.useRealTimers();}
+});
+it('after Worker interruption and remount a durable command remains queryable by its original identity',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'restart'}));const original=port.sent.at(-1).order;
+ await act(async()=>port.onerror?.({message:'Worker terminated'}));await act(async()=>root.unmount());root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>{port.emit(state(w));port.emit({type:'commandList',rows:[{order:original,commandId:original.commandId,state:'pending',sequence:1}]});});
+ await act(async()=>engine.queryCommand(engine.commandRows.find(r=>r.commandId===original.commandId)!));expect(port.sent.at(-1)).toMatchObject({type:'commandQuery',campaignId:original.campaignId,commandId:original.commandId});
+});
