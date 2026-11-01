@@ -121,6 +121,12 @@ try{
   assert.equal(measurements.metrics.calculations,3);assert.equal(measurements.metrics.cacheHits,1);assert.equal(measurements.metrics.discarded,1);
   report.panelOpening=measurements.histories.map(x=>({history:x.history,interactiveMs:stats(x.times),longTasksOver50ms:x.longTasksOver50ms}));report.controllerMetrics=measurements.metrics;return {metrics:measurements.metrics};
  });
+ await run('native insufficient-stock quotes survive unchanged ticks and revalidate new resources',async()=>{
+  const result=await page.evaluate(async()=>{
+   const w=window.lab.world(),c=window.lab.controller();w.cities[0].stock={food:0,wood:0,stone:0,gold:0};const first=await window.lab.request(c,w);if(first.response.results[0].status!=='invalid')throw Error('poor city fabricated success');
+   for(let i=1;i<=30;i++)await window.lab.request(c,{...w,time:i,revision:w.revision+i});const stable={...c.metrics};w.cities[0].stock={food:600,wood:600,stone:600,gold:600};const funded=await window.lab.request(c,{...w,time:31,revision:32});const final={...c.metrics};c.dispose();return {stable,final,refilled:funded.response.results[0].status};
+  });assert.deepEqual(result,{stable:{calculations:1,discarded:0,cacheHits:30},final:{calculations:2,discarded:0,cacheHits:30},refilled:'ready'});return result;
+ });
  await run('native 99-AI/25X catch-up accepts T1 while preview is pending; preview death preserves one formal effect',async()=>{
   await page.evaluate(async()=>{
    window.lab.close();const {FormalPersistence}=await import('/src/game/persistence.ts'),{captureIntent}=await import('/src/game/durableCommands.ts');const s=new FormalPersistence();await s.acquireWriter();const w=window.lab.world();const {enableAutonomy}=await import('/src/game/formal/autonomy.ts'),{EventScheduler}=await import('/src/game/formal/scheduler.ts');enableAutonomy(w);for(const a of w.autonomy.agents)a.nextAt=200000;for(const e of w.events)if(e.type==='ai.decide')e.at=200000;w.events=new EventScheduler(w.events).snapshot();window.runtimeWorld=await s.start(w);s.db.close();window.runtimeMessages=[];
