@@ -1,0 +1,70 @@
+{
+  "base": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+  "productionActivation": false,
+  "files": {
+    "src/game/runtime.worker.ts": {
+      "sha256": "d354bb0dc5498826d39961a23d468b84013bff2200e1d92710cc9e07c4bc7cdc",
+      "identicalToBase": true
+    },
+    "src/game/persistence.ts": {
+      "sha256": "2c757a730edfdc83dada140d4c5be59a4ab8f5e4a30ef828fae80600bf6d62d3",
+      "identicalToBase": true
+    },
+    "src/game/durableCommands.ts": {
+      "sha256": "c7ccf1fd7e4fd64614e6db5004829253725ae59e3cdf3d47c1913190626958e1",
+      "identicalToBase": true
+    },
+    "src/game/useGame.ts": {
+      "sha256": "3f5e9e734c1389c8c4c0c06bd066bb79321ef1e3ea20dd89aa52245800cdf379",
+      "identicalToBase": true
+    },
+    "src/game/interaction.ts": {
+      "sha256": "83334d33c6b59657dc62ee72e56aa92d2f31b80e257a65e1cbfddd63da20132c",
+      "identicalToBase": true
+    },
+    "src/game/formal/model.ts": {
+      "sha256": "bc6dfdbafb5f671e4ea790db7b1b48bd357a218f08582a22dd7a38d4bec139b8",
+      "identicalToBase": true
+    },
+    "src/game/formal/schema.ts": {
+      "sha256": "74b4fdd79ed54b4405377fbab2065e9cca3f506c6204561830b3c5c4c14c2fcf",
+      "identicalToBase": true
+    },
+    "src/game/formal/reducer.ts": {
+      "sha256": "c17ff2102589613d345dabf8e45a5caea83d5f459c7b57e2263a18b620206408",
+      "identicalToBase": true
+    },
+    "src/game/formal/scheduler.ts": {
+      "sha256": "ea176cd36d492049d1bde7475cfa0880394aa3826cec2e0fe97597c078282d59",
+      "identicalToBase": true
+    },
+    "src/game/formal/saveCodec.ts": {
+      "sha256": "1ae71486e621b53d9318d21e8525c665c78374c513ba1f34bc2e840adcc2b43a",
+      "identicalToBase": true
+    },
+    "src/game/worldStream.ts": {
+      "sha256": "f7623af9d7eb5cfc433eb4caa44b0fd2cbd9f78af78a7158711b02971e7bad63",
+      "identicalToBase": true
+    },
+    "src/game/constructionPreview.worker.ts": {
+      "sha256": "c8dcb83e548f0670e7dfc780c332970dfa711d02bfd6b5b4912f63035114a790",
+      "identicalToBase": true
+    },
+    "src/game/constructionPreviewProtocol.ts": {
+      "sha256": "790f649d72be0eea6a85ea4322c7f92b39b66ee3ff8cbb826216ec71e3571f67",
+      "identicalToBase": true
+    },
+    "src/game/constructionPreviewController.ts": {
+      "sha256": "eb3c1a18138e8ce2feaaa2b87b2fa0754c22731a8ccf3bdaa77ad010a0770323",
+      "identicalToBase": true
+    },
+    "src/game/constructionPreviewContext.ts": {
+      "sha256": "21acae0fea79c4702cad52cf0fe37b69efd1a0e73bf590d8c2caf57ac0d2906a",
+      "identicalToBase": true
+    },
+    "src/game/constructionPreviewCompute.ts": {
+      "sha256": "a44b5813202027c4ad5a00644bdd925cb3a05afb9915b51de2d17246f90e4361",
+      "identicalToBase": true
+    }
+  }
+}
