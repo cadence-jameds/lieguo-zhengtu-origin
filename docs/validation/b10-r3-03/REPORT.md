@@ -66,7 +66,9 @@ Recovery 候選追加 disposition 事件，不改原區段；歷史 Manifest 讀
 
 Typecheck、Build、31 項 successor 防竄改、額外 clock delta 3 tests、CI 原有 validators／Preview capability audit、本機 Pages/release 檢查通過。首輪本機 Node22 完整隔離（前綴修補前、候選19）則為 **2300 PASS／4 FAIL／12 SKIP**，不是 PASS：[失敗、版本、資源與並行背景](local-full-attempt1.json)。失敗是 specAudit 60秒、兩個 Runtime 20／30秒逾時及一個 Runtime 等待條件斷言；不能只稱為原先 Node24 已知問題。此輪與其他驗證有重疊，資源競爭只是待驗假說，未證實根因。完整失敗 report 保留在忽略的 artifacts。
 
-另對最終程式啟動不並行重度工作的 Node22 隔離完整重驗，CI 也執行完整隔離 Gate；其最終結果以 PR Checks、regression artifact 及交付回覆為準，不預先列尚未結束的執行為 PASS。所有既有測試、斷言與逾時門檻完全不變。
+停止其他重度工作後，以 Node22 對最終程式做第二輪隔離完整回歸：**2315 PASS／1 FAIL／1 SKIP**，仍不是 PASS。唯一失敗是既有 Runtime developer admission 30 秒逾時；[第二輪完整摘要與診斷比較](local-full-attempt2.json) 保留實際失敗。接著在 detached PR55 基準與目前程式各做一次相同單項、maxWorkers=1 診斷，分別 17.681 秒／18.148 秒通過原 30 秒門檻；每邊 n=1，與完整 maxWorkers=2 的負載不同，不能據此宣稱效能等價、已定位原因或取代完整 Gate。沒有第三輪本機完整重試，也不改斷言／期限。
+
+相同最終程式的 GitHub Node22 [CI 41329450006](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41329450006)（HEAD `ca1d6095dd5fa9cafc5be7578eab8ac30b314235`，PR merge context）完整隔離 **2316 PASS／0 FAIL／1 既有可選 SKIP**，Typecheck、Build、所有精確 Gate、Pages/release 檢查均通過。之後提交只有本段與失敗摘要文件；交付當前 HEAD 的 CI 最終結果以 PR Checks、regression artifact 及交付回覆為準。CI 成功不能掩蓋本機失敗，也不能表示新正式帳本已完成。所有既有測試、斷言與逾時門檻完全不變。
 
 ## 效能：只有候選微基準，正式遊戲尚無改善
 

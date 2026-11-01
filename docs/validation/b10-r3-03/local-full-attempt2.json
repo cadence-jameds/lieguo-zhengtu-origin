@@ -1,0 +1,57 @@
+{
+  "status": "FAIL; never counted as PASS",
+  "scope": "final program source, 20 candidate tests; isolated full Node22.23.4, maxWorkers=2, unchanged timeouts; no concurrent heavy validation",
+  "summary": {
+    "success": false,
+    "numPassedTests": 2315,
+    "numFailedTests": 1,
+    "numPendingTests": 1
+  },
+  "failures": [
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+      "error": "Error: Test timed out in 30000ms."
+    }
+  ],
+  "ciCounterpart": {
+    "testedHead": "ca1d6095dd5fa9cafc5be7578eab8ac30b314235",
+    "run": 41329450006,
+    "status": "success",
+    "passed": 2316,
+    "failed": 0,
+    "skipped": 1
+  },
+  "rootCause": "Unresolved; do not attribute solely to the previous Node24 issue or claim performance equivalence",
+  "diagnosticComparison": {
+    "node": "v22.23.4",
+    "cpuMax": "200000 100000",
+    "memoryMax": "8589934592",
+    "sequentialNoOtherHeavyValidation": true,
+    "cases": [
+      {
+        "label": "PR55 baseline",
+        "head": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+        "n": 1,
+        "maxWorkers": 1,
+        "testTimeoutUnchangedMs": 30000,
+        "status": "passed",
+        "durationMs": 17681.268447,
+        "onlySelectedTest": true,
+        "otherTestsNotRun": 63
+      },
+      {
+        "label": "candidate program",
+        "head": "ca1d6095dd5fa9cafc5be7578eab8ac30b314235",
+        "n": 1,
+        "maxWorkers": 1,
+        "testTimeoutUnchangedMs": 30000,
+        "status": "passed",
+        "durationMs": 18148.258902999998,
+        "onlySelectedTest": true,
+        "otherTestsNotRun": 63
+      }
+    ],
+    "interpretation": "Diagnostic only; n=1 and single worker do not establish performance equivalence, explain full maxWorkers=2 timeout or replace a full PASS"
+  }
+}
