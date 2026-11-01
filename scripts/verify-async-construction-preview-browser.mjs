@@ -25,7 +25,7 @@ const root=createRoot(document.getElementById('root')),controllers=[];
 let seq=0;const issued=[];
 window.lab={issued,constructionPreviews,root,context:constructionPreviewContext,
  world(history=0){const w=createFormalWorld({campaign:'r302-browser-'+history,seed:90217,speed:25});w.revision=1;w.commandReceipts=Array.from({length:history},(_,i)=>({commandId:'command:synth-'+i,issuerId:w.playerFactionId,fingerprint:'synth-'+i,committedRevision:1,disposition:'rolled-back'}));validateFormalWorld(w);return w;},
- controller(){const c=new ConstructionPreviewController();controllers.push(c);return c;},
+ controller(url){const c=url?new ConstructionPreviewController(()=>new Worker(url,{type:'module'})):new ConstructionPreviewController();controllers.push(c);return c;},
  request(c,w,targets=[{field:0}],channel=1){const at=performance.now(),context=constructionPreviewContext(w,w.cities[0].id),prepared=performance.now()-at,r={protocolVersion:1,campaignId:w.campaignId,branch:'1',revision:w.revision,cityId:w.cities[0].id,requestId:++seq,generation:seq,context,targets};const bytes=new TextEncoder().encode(JSON.stringify(r)).length;let postMs=0;const promise=new Promise((resolve,reject)=>{const sendAt=performance.now();c.request(channel,r,response=>resolve({response,prepared,bytes,postMs,total:performance.now()-at}),reject);postMs=performance.now()-sendAt;});return promise;},
  old(w){const at=performance.now();const result=submitFormalOrder(w,{commandId:'command:old-preview',campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'field.upgrade',cityId:w.cities[0].id,slot:0}});if(result.ack.status!=='committed')throw Error('illegal old fixture');return performance.now()-at;},
  detail(w,key='wall',branch='1'){flushSync(()=>root.render(<PreviewBranchContext.Provider value={branch}><BuildingDetail world={w} city={w.cities[0]} buildingKey={key} issue={p=>issued.push(p)} busy={false}/></PreviewBranchContext.Provider>));},
@@ -72,6 +72,22 @@ try{
    console.log('Completed native history',history);report.performance.push({history,contextBytes:data.contextBytes,oldFullReducerMs:stats(data.old),singleColdWorkerMs:stats(data.single),batchColdQuoteWarmWorkerMs:stats(data.batch),contextMainMs:stats(data.prepared),postMessageAndKeyMainMs:stats(data.transfer),cacheHitMs:stats(data.cache),detailInteractiveMainMs:stats(data.interactive),previewLongTasksOver50ms:0,sample:'30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch'});
   }
   return {histories:report.performance.map(p=>p.history)};
+ });
+ await run('compiled production Preview Worker uses the same compact protocol and shared rules',async()=>{
+  const asset=(await fs.readdir('dist/assets')).find(x=>/^constructionPreview\.worker-.*\.js$/.test(x));assert.ok(asset,'Build the current preview worker first');
+  report.compiledWorker={asset,bytes:(await fs.stat(path.join('dist/assets',asset))).size,measurements:[]};
+  for(const history of [0,10000,30000,60000]){
+   const data=await page.evaluate(async({history,url})=>{
+    const w=window.lab.world(history),single=[],batch=[],main=[];let bytes=0;
+    for(let i=-3;i<30;i++){
+     const c=window.lab.controller(url),r=await window.lab.request(c,w);if(r.response.results[0].status!=='ready')throw Error('compiled worker unavailable');
+     const quote=r.response.results[0].quote;if(quote.durationMs!==50000||quote.paidResources.food!==20)throw Error('compiled rule mismatch');
+     const b=await window.lab.request(c,w,[{field:0},{field:1},{field:2},{key:'wall'},{key:'warehouse.0'},{key:'bunker.0'}]);c.dispose();
+     if(i>=0){single.push(r.total);batch.push(b.total);main.push(r.prepared+r.postMs);bytes=r.bytes;}
+    }return {single,batch,main,bytes};
+   },{history,url:'/dist/assets/'+asset});
+   report.compiledWorker.measurements.push({history,contextBytes:data.bytes,singleColdWorkerMs:stats(data.single),batchColdQuoteWarmWorkerMs:stats(data.batch),mainPreparationAndPostMs:stats(data.main)});
+  }return {asset,bytes:report.compiledWorker.bytes};
  });
  await run('actual construction list batches candidates, field/wall/detail asynchronous; formal submit before preview',async()=>{
   await page.evaluate(()=>{window.uiWorld=window.lab.world(30000);window.lab.panel(window.uiWorld);});await page.getByRole('tab',{name:'城內',exact:true}).click();await page.locator('.town-lot.vacant').first().click();
