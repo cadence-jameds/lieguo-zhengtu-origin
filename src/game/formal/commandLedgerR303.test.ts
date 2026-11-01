@@ -67,3 +67,11 @@ it('historic persisted roots use their own projection, never the current identit
 it('does not truncate an indivisible oversized fingerprint or normalize legacy evidence',async()=>{
  const r={...receipt(0),fingerprint:'x'.repeat(300000)},a=await prepareLedger(await emptyLedger(campaign),[r],{worldRevision:1});expect(a.manifest.segmentCount).toBe(1);expect((await verifyLedger(a.archive())).lookup(campaign,r.commandId)?.fingerprint).toBe(r.fingerprint);await expect(prepareLedger(a,[{...receipt(1),fingerprint:''}],{worldRevision:1})).rejects.toThrow('identity');
 });
+it('rejects a verified competing history even when its version and caller CAS match',async()=>{
+ const db=candidateDatabase('synthetic-ledger-r303-'+crypto.randomUUID());try{
+  const zero=await emptyLedger(campaign),published=await prepareLedger(zero,[receipt(0)],{worldRevision:1});await publishCandidate(db,published,zero.manifest.checksum);
+  const other=await prepareLedger(zero,[receipt(1)],{worldRevision:1}),fork=await prepareLedger(other,[receipt(2)],{worldRevision:2});
+  await expect(publishCandidate(db,fork,published.manifest.checksum)).rejects.toThrow('immutable prefix');
+  expect((await readCandidate(db,campaign)).manifest.checksum).toBe(published.manifest.checksum);expect(await db.table('identity').count()).toBe(1);
+ }finally{await db.delete();}
+});

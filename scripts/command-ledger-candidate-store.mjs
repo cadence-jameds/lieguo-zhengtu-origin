@@ -17,7 +17,8 @@ export async function publishCandidate(db,candidate,expectedRoot,{fault=()=>{}}=
   const locked=await rows(tx,m.campaignId);
   if(canonical(locked)!==canonical(priorData))throw Error('Ledger source changed during prepare');
   if(prior.manifest.checksum===m.checksum)return {duplicate:true,manifest:m};
-  if(prior.manifest.checksum!==expectedRoot||m.ledgerVersion!==prior.manifest.ledgerVersion+1||m.writerEpoch<prior.manifest.writerEpoch)throw Error('Ledger CAS/writer conflict');
+  if(prior.manifest.checksum!==expectedRoot||m.ledgerVersion!==prior.manifest.ledgerVersion+1||m.writerEpoch<prior.manifest.writerEpoch||m.branch<prior.manifest.branch||m.worldRevision<prior.manifest.worldRevision)throw Error('Ledger CAS/writer conflict');
+  if(target.segments.length<prior.segments.length||prior.segments.some((s,i)=>s.checksum!==target.segments[i].checksum))throw Error('Ledger immutable prefix conflict');
   const delta=target.segments.slice(prior.manifest.segmentCount);
   for(const segment of delta){await tx.table('segments').add(segment);fault('segment-write');}
   for(const receipt of delta.flatMap(s=>s.events.map(e=>e.receipt))){await tx.table('identity').put({campaignId:m.campaignId,commandId:receipt.commandId,receipt});fault('index-write');}
