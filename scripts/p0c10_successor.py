@@ -99,17 +99,19 @@ def read_record(root=ROOT):
 
 def accepts(path,predecessor,root=ROOT):
  from p0c10_clock_delta import accepts as delta_accepts
- if path not in SOURCES:return delta_accepts(path,predecessor,root)
+ from b10_r3_01_successor import accepts as b10_accepts
+ if path not in SOURCES:return delta_accepts(path,predecessor,root) or b10_accepts(path,predecessor,root)
  r=read_record(root)
  if predecessor not in r['grants'][path] or not (root/path).exists():return False
- return sha((root/path).read_bytes())==r['changes'][path]['after'] or delta_accepts(path,r['changes'][path]['after'],root)
+ return sha((root/path).read_bytes())==r['changes'][path]['after'] or delta_accepts(path,r['changes'][path]['after'],root) or b10_accepts(path,r['changes'][path]['after'],root)
 
 def validate(root=ROOT):
  r=read_record(root)
  from p0c10_clock_delta import accepts as delta_accepts
- for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'] or delta_accepts(p,entry['after'],root),('Unrecorded implementation change',p)
+ from b10_r3_01_successor import accepts as b10_accepts
+ for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'] or delta_accepts(p,entry['after'],root) or b10_accepts(p,entry['after'],root),('Unrecorded implementation change',p)
  for section in ['invariants','historical']:
-  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest or section=='invariants' and delta_accepts(p,digest,root),('Changed preserved source/history',p)
+  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest or section=='invariants' and (delta_accepts(p,digest,root) or b10_accepts(p,digest,root)),('Changed preserved source/history',p)
  return r
 
 if __name__=='__main__':
