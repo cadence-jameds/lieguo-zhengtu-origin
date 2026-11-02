@@ -14,4 +14,12 @@ assert.ok(!/commandReceipts:/.test(read('src/game/worldProjection.ts')));
 // The only intentional economy runtime addition is a formal-only guard; the
 // authoritative branch is byte-identical after removing that guard.
 assert.equal(js(read('src/game/formal/economy.ts').replace("!legacy&&w.kind==='formal'","!legacy")),js(old('src/game/formal/economy.ts')));
-console.log(JSON.stringify({pass:true,preservedAuthorityFiles:preserved.length,typeOnlyFormalModules:typeOnly,formalEconomyEquivalent:true,displayHistoryMaterialization:0}));
+assert.equal(js(read('src/game/formal/buildingDetailData.ts').replace(/if\(w.kind==='presentation'\)\{[^}]*\}/,'')),js(old('src/game/formal/buildingDetailData.ts')));
+function declaration(source,name){const file=ts.createSourceFile('schema.ts',source,ts.ScriptTarget.Latest,true);let found;function visit(n){if(ts.isVariableDeclaration(n)&&n.name.getText(file)===name)found=n.initializer;ts.forEachChild(n,visit);}visit(file);assert.ok(found,name);return found;}
+// Splitting value validation from save refinements must not change either the
+// original object schema or its authoritative refinement function.
+const priorSchema=declaration(old('src/game/formal/schema.ts'),'worldSchema'),nextSchema=declaration(read('src/game/formal/schema.ts'),'worldSchema');
+assert.equal(priorSchema.expression.expression.getText(),declaration(read('src/game/formal/schema.ts'),'worldValueSchema').getText());
+assert.equal(priorSchema.arguments[0].getText(),nextSchema.arguments[0].getText());
+assert.equal(declaration(old('src/game/formal/growthTaskSchema.ts'),'growthTaskSchema').getText(),declaration(read('src/game/formal/growthTaskSchema.ts'),'growthTaskValueSchema').getText());
+console.log(JSON.stringify({pass:true,preservedAuthorityFiles:preserved.length,typeOnlyFormalModules:typeOnly,formalEconomyEquivalent:true,formalCastleSourceEquivalent:true,saveObjectAndRefinementIdentical:true,displayHistoryMaterialization:0}));
