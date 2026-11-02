@@ -1,0 +1,72 @@
+{
+  "sourceAnchor": "489f906c59b21d22dc14c40f0dedf9b9f93a5512",
+  "ciHead": "6a686299d92ba3b75aef65918e748d3fa7957255",
+  "node": "22.23.4",
+  "npmCi": "PASS",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pagesBuild": "PASS",
+  "releaseArtifacts": "PASS",
+  "successorAndTamperGates": {
+    "status": "PASS",
+    "tests": 38,
+    "previewTransitiveModules": 74,
+    "authorityImports": 0,
+    "storageCapabilities": 0,
+    "renderReducerPreviewCalls": 0
+  },
+  "formalLedgerDirected": {
+    "status": "PASS",
+    "tests": 57,
+    "historySizes": [
+      0,
+      1000,
+      10000,
+      30000,
+      60000
+    ]
+  },
+  "nativeChromium": {
+    "status": "PASS",
+    "cases": 7,
+    "sourceAnchor": "489f906c59b21d22dc14c40f0dedf9b9f93a5512",
+    "browser": "154.0.8037.57",
+    "evidence": "native-final.json"
+  },
+  "githubCi": {
+    "status": "PASS",
+    "head": "6a686299d92ba3b75aef65918e748d3fa7957255",
+    "run": 41423316710,
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41423316710",
+    "full": {
+      "passed": 2357,
+      "failed": 0,
+      "skipped": 1
+    },
+    "allSteps": "success"
+  },
+  "localFull": {
+    "resultRecord": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/56#issuecomment-6574478933",
+    "attempt": 4,
+    "originalTimeoutsRetained": true,
+    "maxWorkers": 2,
+    "cpuQuota": 2,
+    "heapLimitBytes": 2197815296,
+    "noOtherHeavyLocalChecks": true
+  },
+  "priorFailures": [
+    "full-attempt1.json",
+    "full-attempt2.json",
+    "full-attempt3.json"
+  ],
+  "limitations": [
+    "Android and real device quota unverified",
+    "QuotaExceededError injected; no actual disk exhaustion in native IDB",
+    "Immutable corrupted segments preserved and rejected; no automatic same-DB repair",
+    "Load/export/import/Recovery and T3 projection retain full-history costs",
+    "Native performance is versioned intermediate source; not a final-HEAD calibration",
+    "B5 E1 HOLD, Astra not PASS, physical phones pending remain unchanged"
+  ],
+  "finalValidationRecord": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/56#issuecomment-6574478933",
+  "finalHeadCI": "See finalValidationRecord and PR Checks; code unchanged from sourceAnchor"
+}

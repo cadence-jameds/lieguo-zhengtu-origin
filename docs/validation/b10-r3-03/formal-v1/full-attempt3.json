@@ -1,0 +1,10 @@
+{
+  "sourceAnchor": "489f906c59b21d22dc14c40f0dedf9b9f93a5512",
+  "status": "ABORTED_ENVIRONMENT",
+  "notAPass": true,
+  "observed": "/tmp 4.9G 100% full; sandbox mount ENOSPC; cgroup memory max events 4180, oom_kill 0",
+  "cause": "completed isolation copies retained in /tmp during sustained validation",
+  "action": "preserved active copy until termination; removed only completed generated copies; 3.7G free; rerun identical full gate with original workers/heap/deadlines",
+  "durationBeforeTerminationSeconds": 570,
+  "staleReportWarning": "Terminated runner printed the previous 08:55 report; timestamps prove it was not this run. Ignored and removed stale report before rerun."
+}

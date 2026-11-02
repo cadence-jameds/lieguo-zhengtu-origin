@@ -90,7 +90,9 @@ Quick／Full 都帶完整命令身份與原始結果（包含 rejected）、去�
 
 測試比較器先驗證完整 Schema、Ledger anchor、逐筆原始結果及順序，再比對全部遊戲狀態／收據；4 項反例證明不會遮蔽 root、epoch、內嵌或遺漏歷史。最初僅投影比較的編輯曾被自動審核拒絕，已以這些更強驗證取代並獲准。
 
-最終 Typecheck／Build、Gate、隔離完整回歸與 CI 結果將列於 `checks.json`；未完成執行不得宣稱 PASS。Runtime 30 秒與舊 150k 120 秒期限保持原樣。
+Typecheck／Build、38 項 successor 防竄改測試、Pages／Release artifacts 與 Preview 74 模組邊界檢查均 PASS。GitHub CI `6a68629` 完整隔離結果為 **2357 PASS／0 FAIL／1 SKIP**（既有私人存檔選用測項）。[checks.json](checks.json) 記錄已完成的同源驗證；[固定驗證留言](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/56#issuecomment-6574478933) 收錄本機清理後完整回歸、原期限耗時與交付 HEAD 最終 CI。Runtime 30 秒、150k 120 秒、B9 hook 240 秒均保持原樣，不以過期報表宣稱 PASS。
+
+本機第三輪因先前隔離副本累積，使 `/tmp` 4.9GB 用滿、sandbox mount 回報 ENOSPC，cgroup 曾觸及 memory max（無 OOM kill），已中止並明確記錄於 `full-attempt3.json`。只清除已結束的自動副本，釋放 3.7GB；移除會被 runner 誤讀的過期結果，再以相同 source、workers、heap、期限執行第四輪。最終結果連結同一固定留言，不更動已封存的失敗摘要。
 
 施工過程保留：最初大型 fake-IDB 10k／30k／60k 各 120 秒逾時；原因為不變派生索引的二次寫入，改複合主鍵範圍與略過不變列。下一輪 22 PASS／60k OOM，透過單次持有驗證資料、有限強快取＋活 proof 弱引用及顯式 VerifiedLedger 傳遞解決，沒有增加 heap。之後 128 項定向為 127 PASS／1 FAIL（重試次數覆蓋），修正後 9 項補驗通過；150k 當輪 116.175 秒通過。Worker 第一輪 58 PASS／14 FAIL，源於測試 resetModules 建立兩套 proof 與舊 mock 回傳 Ack；改為共享同一已驗證 reader、mock 回傳世界，保留完整遊戲／收據欄位對照，26 項重跑通過。沒有提高期限、刪安全測試或改遊戲規則。
 
@@ -100,4 +102,4 @@ Quick／Full 都帶完整命令身份與原始結果（包含 rejected）、去�
 
 權威命令歷史已真正脫離高頻世界；完整歷史仍持久保存，精確身份與順序讀取不以最近 N 筆代替。普通保存寫世界及本批帳本增量；仍可能有完整順序讀取及 T3 全量投影。載入、Quick／Full、Import、Recovery 仍處理全歷史。
 
-新戰役可靠性以定向、原生與最終 Gate 為準；Draft／BLOCKED 最終判斷見 `checks.json` 與 PR 正文。不合併、不部署、不啟動 R3-04。Android、真實裝置配額、正式部署待驗。沒有同 DB 損毀區段的自動修復；應保存原資料，使用良好完整備份與新空間。
+新戰役執行、T2、儲存、Quick／Full 與 Recovery 已由正式定向、原生 7 組流程及 CI 2357 項回歸證明。原先「只有候選、未接入正式 T2」的核心阻塞已解除；仍為 Draft 技術審核。交付 HEAD、本機完整結果及最終 CI 以 [固定驗證留言](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/56#issuecomment-6574478933) 與 PR Checks 為準；有失敗會明列，不能算成 PASS。不合併、不部署、不啟動 R3-04。Android、真實裝置配額、正式部署待驗。沒有同 DB 損毀區段的自動修復；應保存原資料，使用良好完整備份與新空間。
