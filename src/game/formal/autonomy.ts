@@ -1,3 +1,4 @@
+import {commandHistory,findReceipt,originalResult,recordOriginalRejection} from './commandLedger';
 import {reverseLine,militaryBudgetScore,modernResearchPriority,publicWonderThreats,invalidateEndgameIntel} from './endgameAI';
 import {inheritMilitaryPower} from './militaryPower';
 import {catchupDecision} from './modernCatchup';
@@ -69,12 +70,13 @@ export type Submit=(w:FormalWorld,order:unknown)=>import('./model').FormalTransi
  * Rebuild if a prefix is replaced, so Recovery/test inputs cannot reuse a stale index. */
 const autonomousReceipts=new WeakMap<FormalWorld,{indexed:number;last:unknown;ids:Set<string>}>();
 function hasAutonomousReceipt(w:FormalWorld,id:string){
+ if(w.ledger)return !!findReceipt(w,id)||!!originalResult(w,id);
  let cache=autonomousReceipts.get(w);
- if(!cache||w.commandReceipts.length<cache.indexed||cache.indexed&&w.commandReceipts[cache.indexed-1]!==cache.last){
+ if(!cache||commandHistory(w).length<cache.indexed||cache.indexed&&commandHistory(w)[cache.indexed-1]!==cache.last){
   cache={indexed:0,last:undefined,ids:new Set()};autonomousReceipts.set(w,cache);
  }
- for(;cache.indexed<w.commandReceipts.length;cache.indexed++)cache.ids.add(w.commandReceipts[cache.indexed].commandId);
- cache.last=w.commandReceipts[cache.indexed-1];return cache.ids.has(id);
+ for(;cache.indexed<commandHistory(w).length;cache.indexed++)cache.ids.add(commandHistory(w)[cache.indexed].commandId);
+ cache.last=commandHistory(w)[cache.indexed-1];return cache.ids.has(id);
 }
 export function submitAutonomous(w:FormalWorld,s:EventScheduler,e:FormalEvent,factionId:FactionId,commands:FormalCommand[],submit:Submit){
  const reports:FormalReport[]=[],floors=attackGarrisons(w,commands);
@@ -89,7 +91,7 @@ export function submitAutonomous(w:FormalWorld,s:EventScheduler,e:FormalEvent,fa
   if(t.ack?.status==='committed'){
    Object.assign(w,t.world);inheritMilitaryPower(t.world,w);invalidateEndgameIntel(w);invalidateSpatial(w);s.replace(w.events);if(w.autonomy)w.autonomy.accepted++;
    reports.push(...t.reports.filter(r=>r.ownerFactionId===w.playerFactionId));
-  }else if(t.ack?.status!=='duplicate'&&w.autonomy)w.autonomy.rejected++;
+  }else{if(t.ack)recordOriginalRejection(w,{commandId:id,campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]},t.ack);if(t.ack?.status!=='duplicate'&&w.autonomy)w.autonomy.rejected++;}
  }
  return reports;
 }

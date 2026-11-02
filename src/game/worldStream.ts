@@ -1,8 +1,10 @@
+import {projectWorld} from './formal/commandLedger';
 import type {FormalWorld} from './formal/model';
 export type WorldPatch={campaignId:FormalWorld['campaignId'];baseRevision:number;changes:Partial<FormalWorld>};
 /** Only committed, changed sections cross the Worker boundary. Static terrain
  * and unchanged sections retain their identity in the presentation process. */
 export function worldPatch(prior:FormalWorld,next:FormalWorld):WorldPatch{
+ if(prior.ledger||next.ledger){prior=projectWorld(prior);next=projectWorld(next);}
  const changes:Partial<FormalWorld>={};
  const copy=<K extends keyof FormalWorld>(key:K)=>{
   if(prior[key]===next[key])return;

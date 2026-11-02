@@ -1,3 +1,4 @@
+import {commandHistory} from './commandLedger';
 import {NATIVE_RULESET_VERSION} from './versions';
 import {isScoutUnit} from './unitCatalog';
 import {z} from 'zod';
@@ -33,7 +34,7 @@ export const combatSchema=z.object({battles:z.array(battle),receipts:z.array(z.o
 export const wildCombatShape={phase:z.enum(['active','cooldown']).optional(),defenders:units.optional(),initialDefenders:units.optional(),loot:resources.optional(),style:int.max(4).optional(),budget:positive.optional(),respawnAt:int.optional(),respawnEventId:event.optional()};
 export const armyOrderShapes=[z.object({type:z.literal('army.advance'),cityId:city,armyId:armyIdSchema,targetCityId:city}).strict(),z.object({type:z.literal('army.dispatch'),cityId:city,wonderPriority:z.literal(true).optional(),mission:z.enum(['raid','conquest','wonder-destruction','scout','reinforce']),target:armyTargetSchema,units:z.record(int),scoutMode:z.enum(['resources-army','defenses-army']).optional()}).strict(),z.object({type:z.literal('army.recall'),cityId:city,armyId:armyIdSchema}).strict()] as const;
 /** Cross-domain checks accompany the existing global validator; no IO repair or defaulting. */
-export function validateCombatContracts(w:FormalWorld,fail:(message:string)=>void,hasAppliedReceipt:(id:CommandId,issuer?:FactionId)=>boolean=(id,issuer)=>w.commandReceipts.some(r=>r.commandId===id&&r.disposition==='applied'&&(issuer===undefined||r.issuerId===issuer))){
+export function validateCombatContracts(w:FormalWorld,fail:(message:string)=>void,hasAppliedReceipt:(id:CommandId,issuer?:FactionId)=>boolean=(id,issuer)=>commandHistory(w).some(r=>r.commandId===id&&r.disposition==='applied'&&(issuer===undefined||r.issuerId===issuer))){
  const nativeB5=!w.fixture&&w.metadata.schemaVersion===3;
  const pendingEventIds=new Set(w.events.map(e=>e.id));
  if(nativeB5&&!w.combat)fail('B5 combat state missing');

@@ -8,7 +8,7 @@ function visit(file){
  assert.ok(!/indexedDB|new\s+Dexie|\.transaction\(/.test(source),`Storage capability in preview graph: ${file}`);
  for(const match of source.matchAll(/from\s+['"]([^'"]+)['"]/g)){
   if(!match[1].startsWith('.'))continue;
-  const stem=path.resolve(path.dirname(file),match[1]);const next=['.ts','.tsx'].map(ext=>stem+ext).find(f=>fs.existsSync(f));if(next)visit(next);
+  const stem=path.resolve(path.dirname(file),match[1]);const next=['.ts','.tsx','.mjs'].map(ext=>stem+ext).find(f=>fs.existsSync(f));if(next)visit(next);
  }
 }
 visit(path.resolve('src/game/constructionPreview.worker.ts'));

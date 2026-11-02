@@ -1,9 +1,10 @@
+import {receiptIndex} from './commandLedger';
 import type {FormalWorld} from './model';
 import {resourceKeys} from './model';
 import {canonicalJSON} from './canonical';
 import {EMERGENCY_COST,EMERGENCY_DURATION,TRANSFER_COST,TRANSFER_DURATION,transferStillLegal} from './modernCatchup';
 export function validateCatchup(w:FormalWorld,fail:(message:string)=>void){
- const commands=new Map(w.commandReceipts.map(r=>[r.commandId,r])),seen=new Set<string>(),events=new Set<string>(),owners=new Set<string>();
+ const commands=receiptIndex(w),seen=new Set<string>(),events=new Set<string>(),owners=new Set<string>();
  for(const p of w.largeProjects){const b=p.catchup;if(!b)continue;
   if(!['emergency-modernization','technology-transfer'].includes(p.kind)||p.kind==='technology-transfer'&&p.owner.kind!=='faction'||p.durationMs!==(p.kind==='technology-transfer'?TRANSFER_DURATION:EMERGENCY_DURATION)||resourceKeys.some(r=>p.requiredResources[r]!==(p.kind==='technology-transfer'?TRANSFER_COST:EMERGENCY_COST)[r]))fail('Catchup cost/duration/kind invalid');
   const source=w.largeProjects.find(q=>q.projectId===b.eligibilitySnapshot.sourceProjectId);

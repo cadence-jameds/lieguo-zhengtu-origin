@@ -1,3 +1,4 @@
+import {commandHistory,copyHistory,pendingHistory,findReceipt,originalResult,normalizeOutcomeRevisions} from './commandLedger';
 import {endProtection,protectionNotice} from './protection';
 import {worldPaused} from './extinction';
 import {migrateV95Economy} from './economy';
@@ -60,11 +61,11 @@ function replayClonePolicy(current:FormalWorld):Pick<ReplayAdmission,'shareAuton
    }
   }
  };
- collect([current.worldLayer,current.commandReceipts,current.completionReceipts,current.combat?.receipts],readonly);
+ collect([current.worldLayer,pendingHistory(current),current.completionReceipts,current.combat?.receipts],readonly);
  collect([current.autonomy],autonomy);
  // Register containers separately so each city has its own owner; combat receipt rows keep their readonly domain.
  collect([current.cities,current.combat],mutable,false);
- const body={...current,cities:undefined,worldLayer:undefined,commandReceipts:undefined,completionReceipts:undefined,autonomy:undefined,combat:current.combat?{...current.combat,receipts:undefined}:current.combat};
+ const body={...current,ledger:undefined,cities:undefined,worldLayer:undefined,commandReceipts:undefined,completionReceipts:undefined,autonomy:undefined,combat:current.combat?{...current.combat,receipts:undefined}:current.combat};
  collect(Object.values(body),mutable);
  collect(current.cities,mutable);
  return{fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
@@ -76,7 +77,7 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
  if(shareAutonomy)body.autonomy=undefined;
  if(current.combat)body.combat={...current.combat,receipts:[]};
  const w=structuredClone(body) as FormalWorld;
- w.commandReceipts=current.commandReceipts.slice();w.completionReceipts=current.completionReceipts.slice();
+ copyHistory(current,w);w.completionReceipts=current.completionReceipts.slice();
  if(Object.hasOwn(current,'worldLayer'))w.worldLayer=current.worldLayer;
  if(shareAutonomy)w.autonomy=current.autonomy;
  if(current.combat)w.combat!.receipts=current.combat.receipts.slice();
@@ -85,13 +86,13 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
 /** These three handlers, lazy settlement and queue promotion write only this city, sequences and political cleanup. */
 function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
- const w={...current,...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:current.commandReceipts.slice(),completionReceipts:current.completionReceipts.slice()};
- w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
+ const w={...current,...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
+ copyHistory(current,w);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
 function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdmission):FormalWorld {
  if(!replay)return cloneWorldDraft(current);
- if(replay.fullCommandClone)return structuredClone(current);
+ if(replay.fullCommandClone)return cloneWorldDraft(current);
  const type=order.payload.type;
  if(replay.shareCityDraft&&(type==='field.upgrade'||type==='building.upgrade'||type==='military.recruit')){
   const index=current.cities.findIndex(city=>city.id===order.payload.cityId);
@@ -100,9 +101,10 @@ function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdm
  return cloneReplayCommandDraft(current,replay.shareAutonomy&&type!=='politics');
 }
 function replayReceipt(current:FormalWorld,admission:ReplayAdmission,id:CommandId){
+ if(current.ledger)return findReceipt(current,id);
  // Every replay writer appends history. Object.assign may replace the array with a copied prefix.
- for(;admission.indexedReceipts<current.commandReceipts.length;admission.indexedReceipts++){
-  const receipt=current.commandReceipts[admission.indexedReceipts];
+ for(;admission.indexedReceipts<commandHistory(current).length;admission.indexedReceipts++){
+  const receipt=commandHistory(current)[admission.indexedReceipts];
   if(!admission.receipts.has(receipt.commandId))admission.receipts.set(receipt.commandId,receipt);
  }
  return admission.receipts.get(id);
@@ -121,7 +123,8 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  const order=parsed.data;
  const reject=(reason:string):FormalTransition=>({world:current,reports:[],ack:{commandId:order.commandId,status:'rejected',revision:current.revision,reason}});
  if(order.campaignId!==current.campaignId||!current.factions.some(f=>f.id===order.issuerId))return reject('命令不屬於目前戰役。');
- const fingerprint=orderFingerprint(order),receipt=replay?replayReceipt(current,replay,order.commandId):current.commandReceipts.find(r=>r.commandId===order.commandId);
+ const original=originalResult(current,order.commandId);if(original){if(original.issuerId!==order.issuerId||original.fingerprint!==orderFingerprint(order))return reject('CommandId 已用於不同命令。');if(original.state!=='committed')return {world:current,reports:[],ack:structuredClone(original.ack)};}
+ const fingerprint=orderFingerprint(order),receipt=replay?replayReceipt(current,replay,order.commandId):findReceipt(current,order.commandId);
  if(receipt){
   if(receipt.issuerId!==order.issuerId||receipt.fingerprint!==fingerprint)return reject('CommandId 已用於不同命令。');
   return{world:current,reports:[],ack:{commandId:order.commandId,status:receipt.disposition==='applied'?'duplicate':'rolled-back',revision:current.revision,originalRevision:receipt.committedRevision,reason:receipt.disposition==='rolled-back'?'此命令已由回復點撤銷；如需重新操作，請建立新的命令。':undefined}};
@@ -137,7 +140,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(city&&!worldPaused(w)&&p.type!=='campaign.configure')settleCity(w,city);
  if(p.type==='player.rebirth'||p.type==='player.end'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();
  // Restore the clock only on the accepted rebirth draft, after its active scheduler is captured.
- if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;commandHistory(w).push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  if(!city)return reject('城市不存在。');
  if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
@@ -183,7 +186,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(p.type==='politics'&&p.action==='war')endProtection(w,order.issuerId,'主動宣戰');
  reports.push(...protectionNotice(current,w,order.issuerId),...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
- w.commandReceipts.push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
+ commandHistory(w).push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
  recordGrowthCommand(w,order.issuerId,p);
  // Replay admissions still use every command rule; the whole private draft is validated at its boundary.
  if(!replay)validateFormalWorld(w);
@@ -243,7 +246,8 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
 }
 function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
   const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=worldPaused(w)?w.time:target;reconcileWonders(w,scheduler);reconcileVictory(w,scheduler);w.events=scheduler.snapshot();w.revision=current.revision+1;
- for(const r of w.commandReceipts)if(r.committedRevision>w.revision)r.committedRevision=w.revision;
+ for(const r of pendingHistory(w))if(r.committedRevision>w.revision)r.committedRevision=w.revision;
+ normalizeOutcomeRevisions(w);
  if(w.extinction?.resumedAt!==undefined&&w.extinction.resumedAt<w.time)delete w.extinction.resumedAt;
  syncGrowthTasks(w);validateFormalWorld(w);return{world:w,reports};
 }

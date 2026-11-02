@@ -1,3 +1,5 @@
+import {resolveLedger,commandHistory} from './commandLedger';
+import {cloneWorldDraft} from './worldDraft';
 import 'fake-indexeddb/auto';
 import Dexie from 'dexie';
 import {afterEach,describe,expect,it} from 'vitest';
@@ -5,14 +7,15 @@ import {FormalPersistence,type FailurePoint} from '../persistence';
 import {createFormalFixture,fixtureIds} from './fixture';
 import {advanceFormal,submitFormalOrder} from './reducer';
 import {contribute,order} from './testSupport';
-import {decodeSave,encodeSave} from './saveCodec';
+import {decodeSave as rawDecodeSave,encodeSave,OLD_CAMPAIGN_MESSAGE} from './saveCodec';
 import {FORMAL_DB_NAME} from './versions';
 import {canonicalJSON,digest} from './canonical';
 import type {CommandReceipt,FormalReport,FormalWorld} from './model';
+async function decodeSave(e:Parameters<typeof rawDecodeSave>[0]){const v=e as import('./saveCodec').FormalEnvelope;return rawDecodeSave(e,!v.ledger&&!v.bundle&&v.snapshot?.ledger?resolveLedger(v.snapshot.ledger).archive():undefined);}
 const stores:FormalPersistence[]=[];let serial=0;
 function store(fault?:(point:FailurePoint)=>void){const s=new FormalPersistence({suffix:'test-'+(++serial),fault});stores.push(s);return s;}
 afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
-async function contents(s:FormalPersistence){return{saves:await s.db.saves.toArray(),backups:await s.db.backups.toArray(),reports:await s.db.BattleReports.toArray()};}
+async function contents(s:FormalPersistence){return{saves:await s.db.saves.toArray(),backups:await s.db.backups.toArray(),reports:await s.db.BattleReports.toArray(),extra:await Promise.all(s.db.tables.filter(t=>!['saves','backups','BattleReports'].includes(t.name)).map(async t=>[t.name,await t.toArray()]))};}
 async function funded(s:FormalPersistence){let w=await s.start(createFormalFixture({research:true}));const tr=submitFormalOrder(w,contribute(w,'fund'));w=await s.save(tr.world,tr.reports,w.revision);return w;}
 async function complete(s:FormalPersistence,w:FormalWorld){const t=advanceFormal(w,47400);return s.save(t.world,t.reports,w.revision);}
 function historyFixture(count=2048):FormalWorld{
@@ -88,7 +91,7 @@ describe('DEMO isolation with actual separate IndexedDB databases',()=>{
   await expect(decodeSave(demo)).rejects.toThrow('DEMO');await expect(s.importSave(JSON.stringify(demo))).rejects.toThrow('DEMO');expect(await contents(s)).toEqual(before);
   await s.db.backups.clear();const id=await s.db.backups.add({at:1,label:'DEMO',campaignId:fixtureIds.player as unknown as FormalWorld['campaignId'],gameTime:0,reportCursor:1,data:demo as unknown as Awaited<ReturnType<typeof encodeSave>>});
   expect(await s.backupList()).toEqual([]);await expect(s.restore(id)).rejects.toThrow('DEMO');
-  await s.db.saves.put({id:'current',kind:'world',at:0,data:demo as unknown as Awaited<ReturnType<typeof encodeSave>>});await expect(s.loadSave()).rejects.toThrow('均無法讀取');
+  await s.db.saves.put({id:'current',kind:'world',at:0,data:demo as unknown as Awaited<ReturnType<typeof encodeSave>>});await expect(s.loadSave()).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);
  });
  it('new formal save rejects repairable state rather than running old normalize/repair/upgrade',async()=>{
   const s=store(),w=createFormalFixture();w.cities[0].x=-1;const before=JSON.stringify(w);await expect(s.start(w)).rejects.toThrow();expect(JSON.stringify(w)).toBe(before);expect(await s.db.saves.count()).toBe(0);
@@ -112,19 +115,15 @@ it('simultaneous saves from two connections have exactly one durable CAS winner'
 });
 for(const change of ['missing','fingerprint','issuerId','committedRevision','disposition','duplicate'] as const)it(`large durable history rejects ${change} without changing stores or caller input`,async()=>{
  const s=store(),w=await s.start(historyFixture()),draft=structuredClone(w);draft.revision++;
- const receipt=draft.commandReceipts[1024];
- if(change==='missing')draft.commandReceipts.splice(1024,1);
- else if(change==='fingerprint')receipt.fingerprint+='-changed';
- else if(change==='issuerId')receipt.issuerId=fixtureIds.other;
- else if(change==='committedRevision')receipt.committedRevision++;
- else if(change==='disposition')receipt.disposition='rolled-back';
- else draft.commandReceipts.push({...receipt});
+ const receipt=structuredClone(commandHistory(w)[1024]);
+ if(change==='missing'){delete draft.ledger;draft.commandReceipts=[];}
+ else{if(change==='fingerprint')receipt.fingerprint+='-changed';else if(change==='issuerId')receipt.issuerId=fixtureIds.other;else if(change==='committedRevision')receipt.committedRevision++;else if(change==='disposition')receipt.disposition='rolled-back';draft.ledger!.pending.push(receipt);}
  const before=await contents(s),input=canonicalJSON(draft);
- await expect(s.save(draft,[],w.revision)).rejects.toThrow(change==='duplicate'?'Duplicate typed identity':'Durable dedupe history');
+ await expect(s.save(draft,[],w.revision)).rejects.toThrow(change==='missing'?'Durable dedupe history':'Duplicate typed identity');
  expect(await contents(s)).toEqual(before);expect(canonicalJSON(draft)).toBe(input);expect((await s.loadSave()).game).toEqual(w);
 });
-it('large history may reorder and grow while applied and rolled-back receipts remain durable',async()=>{
- const s=store(),w=await s.start(historyFixture()),draft=structuredClone(w);draft.commandReceipts.reverse();
+it('immutable history rejects in-place reordering and grows while all applied and rolled-back evidence stays durable',async()=>{
+ const s=store(),w=await s.start(historyFixture()),draft=cloneWorldDraft(w);expect(()=>draft.commandReceipts.reverse()).toThrow('不可原地改寫');
  const cmd=order(draft,'after-history',{type:'city.rename',cityId:fixtureIds.home,name:'成長'}),transition=submitFormalOrder(draft,cmd);
  const committed=await s.save(transition.world,[],w.revision),loaded=(await s.loadSave()).game!;
  expect(loaded).toEqual(committed);expect(loaded.commandReceipts).toHaveLength(2049);

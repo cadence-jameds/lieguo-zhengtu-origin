@@ -1,11 +1,13 @@
 import {inheritMilitaryPower} from './militaryPower';
 import type {CommandReceipt,FormalWorld} from './model';
+import {hotWorld,copyHistory} from './commandLedger';
 
 /** Receipt fields are primitives. Copy the records without re-copying long,
  * immutable fingerprint strings through the structured-clone transport.
  * Everything else keeps the general deep clone; malformed history also keeps
  * that path and is still rejected by the unchanged final world validator. */
 export function cloneWorldDraft(current:FormalWorld):FormalWorld {
+ if(current.ledger){const w=copyHistory(current,structuredClone(hotWorld(current)));inheritMilitaryPower(current,w);return w;}
  const receipts:CommandReceipt[]=[];
  for(const receipt of current.commandReceipts){
   if(Object.getPrototypeOf(receipt)!==Object.prototype&&Object.getPrototypeOf(receipt)!==null)return structuredClone(current);

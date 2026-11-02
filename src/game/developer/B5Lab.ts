@@ -1,3 +1,4 @@
+import {commandHistory} from '../formal/commandLedger';
 import {FormalPersistence} from '../persistence';
 import {createFormalWorld} from '../formal/generator';
 import {validateFormalWorld} from '../formal/schema';
@@ -40,7 +41,7 @@ export class B5LabSession {
   if(t.ack?.status!=='committed')throw Error(t.ack?.reason??'正式軍令拒絕');const saved=await this.store.save(t.world,t.reports,expectedRevision);this.world=saved;return{world:saved,ack:t.ack};
  }
  async incoming(targetId:string,mission:'raid'|'conquest',value:Record<string,number>){
-  if(mission!=='raid'&&mission!=='conquest')throw Error('來襲任務只接受掠奪或征服。');const w=this.current();if(w.commandReceipts.some(r=>r.commandId.startsWith('command:b5lab-incoming-')))throw Error('此情境已模擬一次來襲；請重置後再測。');
+  if(mission!=='raid'&&mission!=='conquest')throw Error('來襲任務只接受掠奪或征服。');const w=this.current();if(commandHistory(w).some(r=>r.commandId.startsWith('command:b5lab-incoming-')))throw Error('此情境已模擬一次來襲；請重置後再測。');
   if(w.armies.length||w.combat?.battles.length)throw Error('請先完成在途任務或重置情境。');
   const draft=structuredClone(w),enemy=labTarget(draft,targetId),home=draft.cities[0];if(!enemy||enemy.ownerFactionId===draft.playerFactionId||home.ownerFactionId!==draft.playerFactionId)throw Error('請選擇仍由敵方控制的測試城市。');
   const selected=positive(units.parse(value));checkUnits(draft,enemy,selected);enemy.military!.units=selected;
