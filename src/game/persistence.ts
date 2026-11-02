@@ -118,7 +118,7 @@ export class FormalPersistence {
  async commandPage(before=Number.MAX_SAFE_INTEGER){return this.db.Inbox.where('sequence').below(before).reverse().limit(100).toArray();}
  private async checkCommand(row:InboxCommand,meta:RuntimeMeta){
   this.assertWriter(meta);const stored=await this.db.Inbox.get(row.sequence!);
-  if(!stored||stored.fingerprint!==row.fingerprint||stored.issuerId!==row.issuerId)throw new Error('找不到一致的持久命令。');
+  if(!stored||stored.campaignId!==row.campaignId||stored.commandId!==row.commandId||stored.fingerprint!==row.fingerprint||stored.issuerId!==row.issuerId)throw new Error('找不到一致的持久命令。');
   if(stored.branch!==meta.branch)throw new WriterConflict();
   return stored;
  }

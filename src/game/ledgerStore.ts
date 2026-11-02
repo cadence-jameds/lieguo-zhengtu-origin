@@ -5,7 +5,7 @@ export type LedgerBundle={format:1;heads:{campaignId:string;root:string}[];manif
 export function archiveFromBundle(b:LedgerBundle,campaignId:string,root:string):LedgerArchive{
  if(b.format!==1||new Set(b.manifests.map(m=>m.campaignId+'/'+m.root)).size!==b.manifests.length||new Set(b.segments.map((s:any)=>s.checksum)).size!==b.segments.length||new Set(b.results.map(s=>s.checksum)).size!==b.results.length||new Set(b.heads.map(h=>h.campaignId)).size!==b.heads.length)throw Error('帳本封裝身份不完整。');
  const m=b.manifests.find(m=>m.campaignId===campaignId&&m.root===root);if(!m||m.root!==m.manifest.checksum)throw Error('封裝缺少帳本版本。');
- function chain<T extends {checksum:string}>(rows:T[],last:string,count:number,key:keyof T){const map=new Map(rows.map(s=>[s.checksum,s])),out:T[]=[];for(let i=0;i<count;i++){const s=map.get(last);if(!s)throw Error('封裝區段遺失。');out.push(s);last=String(s[key]);}if(last!=='0'.repeat(64))throw Error('封裝區段鏈錯誤。');return out.reverse();}
+ function chain<T extends {checksum:string}>(rows:T[],last:string,count:number,key:keyof T){if(!Number.isSafeInteger(count)||count<0||count>rows.length)throw Error('封裝區段數無效。');const map=new Map(rows.map(s=>[s.checksum,s])),out:T[]=[],seen=new Set<string>();for(let i=0;i<count;i++){if(seen.has(last))throw Error('封裝區段鏈循環。');seen.add(last);const s=map.get(last);if(!s)throw Error('封裝區段遺失。');out.push(s);last=String(s[key]);}if(last!=='0'.repeat(64))throw Error('封裝區段鏈錯誤。');return out.reverse();}
  return {manifest:m.manifest,history:{manifest:m.historyManifest,segments:chain<any>(b.segments,m.historyManifest.lastSegmentHash,m.historyManifest.segmentCount,'previousHash')},results:chain(b.results,m.manifest.resultRoot,m.manifest.resultSegments,'previous')};
 }
 import {canonicalJSON} from './formal/canonical';
@@ -15,7 +15,7 @@ export const ledgerTables=(db:Dexie)=>Object.keys(ledgerStores).map(k=>db.table(
 export async function readLedgerArchive(db:Dexie,campaignId:string,root:string):Promise<LedgerArchive>{
  return db.transaction('r',ledgerTables(db),async()=>{
   const row=await db.table('LedgerManifests').get([campaignId,root]);if(!row||row.root!==row.manifest.checksum)throw Error('帳本 Manifest 遺失。');
-  async function chain(table:string,last:string,count:number,previous:string){const result=[];let key=last;for(let i=0;i<count;i++){const s=await db.table(table).get(key);if(!s||s.campaignId!==campaignId)throw Error('帳本區段遺失。');result.push(s);key=s[previous];}if(key!=='0'.repeat(64))throw Error('帳本鏈不完整。');return result.reverse();}
+  async function chain(table:string,last:string,count:number,previous:string){if(!Number.isSafeInteger(count)||count<0)throw Error('帳本區段數無效。');const result=[],seen=new Set<string>();let key=last;for(let i=0;i<count;i++){if(seen.has(key))throw Error('帳本區段鏈循環。');seen.add(key);const s=await db.table(table).get(key);if(!s||s.campaignId!==campaignId)throw Error('帳本區段遺失。');result.push(s);key=s[previous];}if(key!=='0'.repeat(64))throw Error('帳本鏈不完整。');return result.reverse();}
   const segments=await chain('LedgerSegments',row.historyManifest.lastSegmentHash,row.historyManifest.segmentCount,'previousHash'),results=await chain('LedgerResults',row.manifest.resultRoot,row.manifest.resultSegments,'previous');
   return {manifest:row.manifest,history:{manifest:row.historyManifest,segments},results} as LedgerArchive;
  });
