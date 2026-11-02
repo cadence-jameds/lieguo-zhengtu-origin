@@ -1,0 +1,20 @@
+{
+  "head": "c0ad3a32a4e9f7f26072a3a32dc9f4ff1c3a27b2",
+  "local": {
+    "pass": 2376,
+    "timeout": 2,
+    "skip": 1,
+    "unchangedDeadlines": {
+      "150k": 120000,
+      "runtimeCatchup": 30000
+    }
+  },
+  "ci": {
+    "runId": 41543902564,
+    "jobId": 125614985572,
+    "pass": 2378,
+    "fail": 0,
+    "skip": 1
+  },
+  "note": "Pre-final-frame evidence only; final HEAD results are recorded in PR57 validation comment."
+}

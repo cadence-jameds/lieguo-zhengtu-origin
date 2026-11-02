@@ -7,7 +7,9 @@
     "docs/validation/b10-r3-04/full-attempt1-summary.json",
     "docs/validation/b10-r3-04/native-flow.json",
     "docs/validation/b10-r3-04/native-perf.json",
+    "docs/validation/b10-r3-04/native-recovery-perf.json",
     "docs/validation/b10-r3-04/node-perf.json",
+    "docs/validation/b10-r3-04/pre-scope-final.json",
     "scripts/b10_r3_03_successor.py",
     "scripts/b10_r3_04_successor.py",
     "scripts/mobile_town_successor.py",
@@ -17,11 +19,11 @@
   ],
   "schemaVersion": 1,
   "baseCommit": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
-  "implementationCommit": "813a82bc8c05a2bdb8099fc073e803b104300bc8",
+  "implementationCommit": "68c4f88ada6ac47290600fd99c9fa0e1ec1ac86c",
   "changes": {
     "docs/validation/b10-r3-04/CONTRACT.md": {
       "before": null,
-      "after": "dc8596efdb255d7e50db0e5c88235c31f899f0b37b5f633d40bd019ea5c4b3cf"
+      "after": "03786a0e459cb45576416bad60bc9ef6fac06f3bcdc326054148decf62b0437f"
     },
     "releases/notes/b10-r3-04-ui-projection.json": {
       "before": null,
@@ -49,7 +51,7 @@
     },
     "scripts/verify-ui-projection-browser.mjs": {
       "before": null,
-      "after": "15a09875282661b721b5307aff3156db69677ed82ef9cbc6134f063bec1f3896"
+      "after": "554ffbcfcf2c2beb0336da272ad884d3237f32482e7b783750f6aab8d8bcac28"
     },
     "scripts/verify-ui-projection-performance-browser.mjs": {
       "before": null,
@@ -521,11 +523,11 @@
     },
     "src/game/projectionReactR304.test.tsx": {
       "before": null,
-      "after": "a7c89b78271377a14d2906f4da78bc18e72fee1a56d9fa5b98ed96b13a383217"
+      "after": "51c66ed680bc520f195756bdfb9bee7beaa7e4ac9f90af3ab56643683adf18e2"
     },
     "src/game/projectionRecovery.ts": {
       "before": null,
-      "after": "385b9f0a7b0965aa95a7fc7e040c6eef91ec9cd2675f718f9c5f88242f5aa530"
+      "after": "34266d6eff91a63042225b81714c6263fae608163381f99b86f9936f7985ec1a"
     },
     "src/game/projectionScopeR304.test.tsx": {
       "before": null,
@@ -541,11 +543,11 @@
     },
     "src/game/useGame.ts": {
       "before": "3f5e9e734c1389c8c4c0c06bd066bb79321ef1e3ea20dd89aa52245800cdf379",
-      "after": "31adef92ee40c8aee4e46fede1d9e535b55add435887ee99e30c1fc6a6d84f36"
+      "after": "3fbd89ffcb5f7334b2a283c9d3289afb33087a10b24ca5014ce5a424ce04c347"
     },
     "src/game/useGameInteraction.test.tsx": {
       "before": "773ea354666d024158bf34fe89cdf657e2e8a1f6c59e3a5971512c2347dd7553",
-      "after": "cc4aa3b275e47a8fcae9b2738df253aeeacf1f741daf14c12e4d076e28f424a1"
+      "after": "295342c1626a98238b07329538906ff95c8b5b2a57980d3c7da5fe64665a88ed"
     },
     "src/game/usePresentation.ts": {
       "before": null,
@@ -1390,12 +1392,12 @@
     "src/worker/world.worker.ts": "874707c32d619e3305d1fe6cd8fa0adea1a3d54fca0dc3e8fd9011a5a0d2452d"
   },
   "historical": {
-    "docs/b6-v95/V95_99AI\u8207\u76f8\u5bb9\u6027\u9a57\u8b49\u6578\u64da.json": "8bd4e08395b5dc430527405b9d425632bc61ded1302a22f157886478f70ea46a",
-    "docs/b6-v95/V95_Codex_\u5b8c\u6574\u65bd\u5de5\u8207\u56de\u6b78\u958b\u5de5\u63d0\u793a\u8a5e_2026-10-28.md": "698d1e3bdebdd1dcbb8e13909ac25c16f1c8c123622284b6dfeb792089489ba7",
-    "docs/b6-v95/V95_\u65bd\u5de5\u8207\u56de\u6b78\u5831\u544a.md": "adfd81bc95c9c74917d863106d4cf3b8fc8facb93593a58cf32560e9cac13a4d",
-    "docs/b6-v95/\u6cb3\u8c37\u6230\u5f79_vNext_\u5e73\u8861\u91cd\u69cb\u8a0e\u8ad6_v95.md": "49768df4e0151724d1cd613cf7b065083c9f4683f4435f1cba10a1e84c3b6ab2",
-    "docs/b6-v96/\u6cb3\u8c37\u6230\u5f79_vNext_\u5e73\u8861\u91cd\u69cb\u8a0e\u8ad6_v96.md": "4ca3ca8cacf259c17ac2ef2da192d00cf88a4d0b5b5116fdb50c882bc6c20c5d",
-    "docs/b6-v97/\u6cb3\u8c37\u6230\u5f79_vNext_\u5e73\u8861\u91cd\u69cb\u8a0e\u8ad6_v97.md": "a6dac80d1bd79cd70489d6720239dbc9484eca2327980f2edec3cde1e8497ad8",
+    "docs/b6-v95/V95_99AI與相容性驗證數據.json": "8bd4e08395b5dc430527405b9d425632bc61ded1302a22f157886478f70ea46a",
+    "docs/b6-v95/V95_Codex_完整施工與回歸開工提示詞_2026-10-28.md": "698d1e3bdebdd1dcbb8e13909ac25c16f1c8c123622284b6dfeb792089489ba7",
+    "docs/b6-v95/V95_施工與回歸報告.md": "adfd81bc95c9c74917d863106d4cf3b8fc8facb93593a58cf32560e9cac13a4d",
+    "docs/b6-v95/河谷戰役_vNext_平衡重構討論_v95.md": "49768df4e0151724d1cd613cf7b065083c9f4683f4435f1cba10a1e84c3b6ab2",
+    "docs/b6-v96/河谷戰役_vNext_平衡重構討論_v96.md": "4ca3ca8cacf259c17ac2ef2da192d00cf88a4d0b5b5116fdb50c882bc6c20c5d",
+    "docs/b6-v97/河谷戰役_vNext_平衡重構討論_v97.md": "a6dac80d1bd79cd70489d6720239dbc9484eca2327980f2edec3cde1e8497ad8",
     "docs/validation/b10-r3-01/REPORT.md": "e56f52901833bf048a3a4d4e69bf23f0344392ccddb7d69e73712bb8fc78760a",
     "docs/validation/b10-r3-01/UI_REVIEW_FIX.md": "a49a69a5d4f81f7d48652fe95268d0a6240b04babfea222bc5340d3457e1fe28",
     "docs/validation/b10-r3-01/attempts.json": "1f4b24ef5cb9584917357df5e34025628626f742455b544e86582066e719d25d",
@@ -2359,15 +2361,15 @@
     "docs/validation/v94-ui/attempts/targeted-default-timeout.json": "6947313429d71d19b09f041e5bc38ccd14d85d3e469b395c20c355c274e429f1",
     "docs/validation/v94-ui/attempts/targeted-initial.json": "2e950b8e713adbf3da450086b30cfe2004f9f5334abaaeb0100aed352f9b2912",
     "docs/validation/v94-ui/before-desktop-city.png": "76bf96bdcaeab6aa61c47b7b4fcf058f5b033def372059dcfa1396f5af1cf1b5",
-    "docs/validation/v94-ui/before-desktop-\u52e2\u529b.png": "e51907bcf3f4e8f2c577f0c980518c4dadf607142fd9637eaec950d213470fa2",
-    "docs/validation/v94-ui/before-desktop-\u6230\u5831.png": "106c7c279e199b32aea3838c555c0fc9eed2d97f5cf5583e91765d070b83220f",
-    "docs/validation/v94-ui/before-desktop-\u6cbb\u7406.png": "8c26f18d5d9b2c750d601d148cb38cb51529c56f250e9b8f18224f91c374b390",
-    "docs/validation/v94-ui/before-desktop-\u8ecd\u968a.png": "2475274e9796477ad9694ddfe492f02d32003bb83eb6cef66508f8f3db4a81e5",
+    "docs/validation/v94-ui/before-desktop-勢力.png": "e51907bcf3f4e8f2c577f0c980518c4dadf607142fd9637eaec950d213470fa2",
+    "docs/validation/v94-ui/before-desktop-戰報.png": "106c7c279e199b32aea3838c555c0fc9eed2d97f5cf5583e91765d070b83220f",
+    "docs/validation/v94-ui/before-desktop-治理.png": "8c26f18d5d9b2c750d601d148cb38cb51529c56f250e9b8f18224f91c374b390",
+    "docs/validation/v94-ui/before-desktop-軍隊.png": "2475274e9796477ad9694ddfe492f02d32003bb83eb6cef66508f8f3db4a81e5",
     "docs/validation/v94-ui/before-mobile-city.png": "e6a6508d719b93f9aae93e849159fa769565134f7069a6cfb5e7d9ffd0048d4e",
-    "docs/validation/v94-ui/before-mobile-\u52e2\u529b.png": "94b8ff00cca048e5254eec08d6f7d3829072bd27b6dbd41c9bfbcedfd848b54d",
-    "docs/validation/v94-ui/before-mobile-\u6230\u5831.png": "f4cd3351a44a3e5b657fa7f6be917e78effacfc91bff675b489db9022771f27a",
-    "docs/validation/v94-ui/before-mobile-\u6cbb\u7406.png": "77c289c43f49972e9086c4b88d7d0e67a34aa6fbb3e15cd79d2e911147ae350f",
-    "docs/validation/v94-ui/before-mobile-\u8ecd\u968a.png": "d37952e81dc04d0831a522219b769ffac783b01bfec21bcd80e7cca2f4f52413",
+    "docs/validation/v94-ui/before-mobile-勢力.png": "94b8ff00cca048e5254eec08d6f7d3829072bd27b6dbd41c9bfbcedfd848b54d",
+    "docs/validation/v94-ui/before-mobile-戰報.png": "f4cd3351a44a3e5b657fa7f6be917e78effacfc91bff675b489db9022771f27a",
+    "docs/validation/v94-ui/before-mobile-治理.png": "77c289c43f49972e9086c4b88d7d0e67a34aa6fbb3e15cd79d2e911147ae350f",
+    "docs/validation/v94-ui/before-mobile-軍隊.png": "d37952e81dc04d0831a522219b769ffac783b01bfec21bcd80e7cca2f4f52413",
     "docs/validation/v94-ui/browser-extra.json": "207ca74b7590dfb33c35158b0ad658080facdd5ddddf222ebc99669243f64c69",
     "docs/validation/v94-ui/browser-progress.json": "11d3d171dc850568cb9a47ac166bfe4fb92576b0f7a4ecf67de29eb666797713",
     "docs/validation/v94-ui/browser.json": "f22e1f99c20a89416c6345bf7c51066beacc6bbcf9ecfe892300c15d0fd46040",
@@ -2387,20 +2389,20 @@
     "docs/validation/v94-ui/desktop-governance-10.png": "155935145103ddcc4430c12d24a21846421a3ee5e99ab50c7422c3d59065c7c8",
     "docs/validation/v94-ui/desktop-governance-50.png": "12970342f5b4cce1565bfbfd24f3a2f39314be081582c09047a4e60c3c780c46",
     "docs/validation/v94-ui/desktop-joint-committed.png": "109398a4e1fb83b0e620a4669282dabcb8872b36919a8faee6949e80023d9bc8",
-    "docs/validation/v94-ui/desktop-legion-\u6210\u54e1.png": "03676b7d97e5f90bf8e3ad3acb7663bb4363b3ffe5f2ac9d69bce615d355bc05",
-    "docs/validation/v94-ui/desktop-legion-\u7ba1\u7406.png": "dea13c261b060ef1f0f3ba905ca5ce374c832e4008fd2af1d75a9825be24fac5",
-    "docs/validation/v94-ui/desktop-legion-\u7e3d\u89bd.png": "ff4982d95a5dff90968ec0f9dc97acef584558e8166d3f97ff5a8e09e3c64ad6",
-    "docs/validation/v94-ui/desktop-legion-\u806f\u8ecd.png": "6450a63368520664e2f29a745a5e1ed5ca22014d4d8d99a30c7d4a2b35ea3007",
-    "docs/validation/v94-ui/desktop-legion-\u806f\u9632.png": "2847400b51754a0bdb7310dd8cfabe2fc4d33ab9a45a7e6ed96541da15ee5c5b",
+    "docs/validation/v94-ui/desktop-legion-成員.png": "03676b7d97e5f90bf8e3ad3acb7663bb4363b3ffe5f2ac9d69bce615d355bc05",
+    "docs/validation/v94-ui/desktop-legion-管理.png": "dea13c261b060ef1f0f3ba905ca5ce374c832e4008fd2af1d75a9825be24fac5",
+    "docs/validation/v94-ui/desktop-legion-總覽.png": "ff4982d95a5dff90968ec0f9dc97acef584558e8166d3f97ff5a8e09e3c64ad6",
+    "docs/validation/v94-ui/desktop-legion-聯軍.png": "6450a63368520664e2f29a745a5e1ed5ca22014d4d8d99a30c7d4a2b35ea3007",
+    "docs/validation/v94-ui/desktop-legion-聯防.png": "2847400b51754a0bdb7310dd8cfabe2fc4d33ab9a45a7e6ed96541da15ee5c5b",
     "docs/validation/v94-ui/desktop-ordinary-member.png": "6e03f674bcb74b0990503d345eafdfb07cfcf10acbf5918bbad789408ae0d68c",
     "docs/validation/v94-ui/desktop-queues-3.png": "d60f27da59a9643cfd3299f932912686fcb44b7887cb17dba3026e65efe5fc8c",
     "docs/validation/v94-ui/desktop-special-unit-cards.png": "50702fb341c2806e13d4e4e282b37d9b97036b2877f68bbe0d2973404f0408f1",
     "docs/validation/v94-ui/desktop-stale-retry.png": "712f01917d1c33872bcf283ffab5f83afb20be5affe9c7956e48d36766fc770e",
     "docs/validation/v94-ui/desktop-start-updated.png": "9aa42f870064c5385e459b100563211c04546b959d4986f2d965c28c07ffae6c",
     "docs/validation/v94-ui/desktop-transferred.png": "fb7d21da7228a86db34b8833cf02cd23925b44d183f5a4b67149edeb04b4e6e3",
-    "docs/validation/v94-ui/desktop-world-\u5e1d\u570b.png": "5d193cabb1731ebd09bbf7c9ba38ac193905cb06ca70c28feba02fd98fa7cc0f",
-    "docs/validation/v94-ui/desktop-world-\u8ecd\u5718.png": "b31105975418465c28653357310ab7ee98e5724a59c42c3d549d73abcfc72c30",
-    "docs/validation/v94-ui/desktop-world-\u9818\u4e3b.png": "09fe64ef1aca777f847d956442acc316024140d0b57df95c62510e7517056d47",
+    "docs/validation/v94-ui/desktop-world-帝國.png": "5d193cabb1731ebd09bbf7c9ba38ac193905cb06ca70c28feba02fd98fa7cc0f",
+    "docs/validation/v94-ui/desktop-world-軍團.png": "b31105975418465c28653357310ab7ee98e5724a59c42c3d549d73abcfc72c30",
+    "docs/validation/v94-ui/desktop-world-領主.png": "09fe64ef1aca777f847d956442acc316024140d0b57df95c62510e7517056d47",
     "docs/validation/v94-ui/fair-12012.json": "1754f218465bdad83927b8bb6c6cd2d44d5944a98d19ec1b77e4a87fc73d5efc",
     "docs/validation/v94-ui/fair-90217.json": "3b4da77dde0b39663c62853ceb3a145392ed4b91595a40e6bc03c2c3e94cd39b",
     "docs/validation/v94-ui/fair-92049.json": "041c1ebf287f2f0fce294ea85aae28625265674d4cee28bc8aa685f4b39423b3",
@@ -2418,20 +2420,20 @@
     "docs/validation/v94-ui/mobile-governance-10.png": "3d7af0cce339f907f6be40dba9a24652139dd2bba66517f974dea6538bd7e09d",
     "docs/validation/v94-ui/mobile-governance-50.png": "be67202acde0e9f728f3b9dbb0638ca706cf645b888d5ace6ea551bdd6215290",
     "docs/validation/v94-ui/mobile-joint-committed.png": "0a440e1bef7cc13429ed37efa8d5bdc7001af1377b2ec18c75697797719be337",
-    "docs/validation/v94-ui/mobile-legion-\u6210\u54e1.png": "6916e7b28a4494a15dba17685718835e914f04f10a16e54ca89972164e0e6a6e",
-    "docs/validation/v94-ui/mobile-legion-\u7ba1\u7406.png": "e06e2a4ec6d2041f3661503b00d85770886cabc8da4b4e71cc4f817acf4279cf",
-    "docs/validation/v94-ui/mobile-legion-\u7e3d\u89bd.png": "f7084e9aa49886806e811dc1af102503176d7bda9b0d9b0a7a474a69db51d3b0",
-    "docs/validation/v94-ui/mobile-legion-\u806f\u8ecd.png": "cbc645b6fc85d97af5081fb913177de17306776b026b01e76e3307ce4ff9b300",
-    "docs/validation/v94-ui/mobile-legion-\u806f\u9632.png": "ccb88ee21e19a8572cfee5382f436bdbf5d0e6692e0eb8cb5dd3c6239ae39c2d",
+    "docs/validation/v94-ui/mobile-legion-成員.png": "6916e7b28a4494a15dba17685718835e914f04f10a16e54ca89972164e0e6a6e",
+    "docs/validation/v94-ui/mobile-legion-管理.png": "e06e2a4ec6d2041f3661503b00d85770886cabc8da4b4e71cc4f817acf4279cf",
+    "docs/validation/v94-ui/mobile-legion-總覽.png": "f7084e9aa49886806e811dc1af102503176d7bda9b0d9b0a7a474a69db51d3b0",
+    "docs/validation/v94-ui/mobile-legion-聯軍.png": "cbc645b6fc85d97af5081fb913177de17306776b026b01e76e3307ce4ff9b300",
+    "docs/validation/v94-ui/mobile-legion-聯防.png": "ccb88ee21e19a8572cfee5382f436bdbf5d0e6692e0eb8cb5dd3c6239ae39c2d",
     "docs/validation/v94-ui/mobile-ordinary-member.png": "2f5518ef99dd5ada5d8e9de6d59d824bca416332d4777b01ee1c79a086fd58f0",
     "docs/validation/v94-ui/mobile-queues-3.png": "a776ff769ba56507d91dff738f4a25d3ae300736aa627fd75172a4fc3da95703",
     "docs/validation/v94-ui/mobile-special-unit-cards.png": "3a9bbb1cedac7d17eaaa08ed0b3e0d4703a4c0fce16c7a3145a0e98ef8cca223",
     "docs/validation/v94-ui/mobile-stale-retry.png": "7ebfe79f58bbbabc364aa9b7d7f404c9e536ecfae53bca446399f748ac78459c",
     "docs/validation/v94-ui/mobile-start-updated.png": "671bc9c0671274dcec6f53a23b04f55a1534c92e9e2f3f6203e58d6b724a438e",
     "docs/validation/v94-ui/mobile-transferred.png": "05cf3930402b66ef1c23186da9cf5efcc0d797e94b8226305d8aa38b577b7386",
-    "docs/validation/v94-ui/mobile-world-\u5e1d\u570b.png": "e8c80a2d6abea866f1a2f39b49ba20ba65abc59a5592fcda959ff71c819ea763",
-    "docs/validation/v94-ui/mobile-world-\u8ecd\u5718.png": "9c78f585c21dbbabd2366e4598bda6e80ef7c876b2d532a8817d96e4db8bef3a",
-    "docs/validation/v94-ui/mobile-world-\u9818\u4e3b.png": "f24b93b04fc4efb365bb0f521909d30689e41d2ddd8a440ac9fd35615fbc8015",
+    "docs/validation/v94-ui/mobile-world-帝國.png": "e8c80a2d6abea866f1a2f39b49ba20ba65abc59a5592fcda959ff71c819ea763",
+    "docs/validation/v94-ui/mobile-world-軍團.png": "9c78f585c21dbbabd2366e4598bda6e80ef7c876b2d532a8817d96e4db8bef3a",
+    "docs/validation/v94-ui/mobile-world-領主.png": "f24b93b04fc4efb365bb0f521909d30689e41d2ddd8a440ac9fd35615fbc8015",
     "docs/validation/v94-ui/pages-build.txt": "f52ff78e1b228bfd7730536839fb24817cc9c141fe4edfa6feeb1410d595e502",
     "docs/validation/v94-ui/pages-paths.txt": "03ceeb59584038762b73bbb3912c459f86746d95f0a0fadeb416dc997ff3b961",
     "docs/validation/v94-ui/production-build.txt": "0489d91b619fb3819ef8eef56b8c5793887fc9bfef4631fe7d212d0581412ff2",

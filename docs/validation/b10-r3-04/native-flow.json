@@ -12,7 +12,7 @@
             "campaignId": "campaign:b1-fixture",
             "branch": 1,
             "writerEpoch": 1,
-            "sessionId": "463ae434-0b28-4035-9a5b-5939b96e2192",
+            "sessionId": "94b8675b-4265-4d63-8e54-10fb6a696bca",
             "projectionSequence": 2,
             "revision": 2
           },
@@ -21,11 +21,12 @@
         },
         "before": {
           "ids": [
-            "command:05b2d06c-a0ee-46a9-add5-a339ceafe8b8",
-            "command:35f669bc-149b-489b-a9bb-5cfcd753c27e",
-            "command:0571d772-db69-4ee7-8f28-51d2c04492f8",
-            "command:87d95079-83cd-48bb-82f7-b71e263570a0",
-            "command:d206c77d-df1b-465b-a4b7-33832b175235"
+            "command:5f4341b0-c330-4c65-bc29-119100be921e",
+            "command:b240af7c-17a5-440c-b7bc-6a040599f54b",
+            "command:96356443-599c-4118-bef8-92c8d2cf0871",
+            "command:ccd90ade-1acd-43d5-84ac-4c1f2dbf52c8",
+            "command:4f07430e-1b7a-4f0d-b199-872c0ffe0f7c",
+            "command:0e3cbad1-14bc-4836-89e7-d95b43e9688e"
           ],
           "name": "連續0",
           "interactiveLongTasks": [],
@@ -35,28 +36,34 @@
         "restored": {
           "rows": [
             {
-              "id": "command:d206c77d-df1b-465b-a4b7-33832b175235",
+              "id": "command:0e3cbad1-14bc-4836-89e7-d95b43e9688e",
               "state": "needs-confirmation"
             },
             {
-              "id": "command:87d95079-83cd-48bb-82f7-b71e263570a0",
+              "id": "command:4f07430e-1b7a-4f0d-b199-872c0ffe0f7c",
               "state": "needs-confirmation"
             },
             {
-              "id": "command:0571d772-db69-4ee7-8f28-51d2c04492f8",
+              "id": "command:ccd90ade-1acd-43d5-84ac-4c1f2dbf52c8",
               "state": "committed"
             },
             {
-              "id": "command:35f669bc-149b-489b-a9bb-5cfcd753c27e",
+              "id": "command:96356443-599c-4118-bef8-92c8d2cf0871",
               "state": "committed"
             },
             {
-              "id": "command:05b2d06c-a0ee-46a9-add5-a339ceafe8b8",
+              "id": "command:b240af7c-17a5-440c-b7bc-6a040599f54b",
+              "state": "committed"
+            },
+            {
+              "id": "command:5f4341b0-c330-4c65-bc29-119100be921e",
               "state": "committed"
             }
           ],
           "name": "連續0"
-        }
+        },
+        "lastFrameRecoveryMs": 296.80000001192093,
+        "subsequentTickOrQuerySent": false
       }
     },
     {
@@ -84,7 +91,7 @@
       "status": "PASS",
       "data": {
         "ack": {
-          "commandId": "command:0fc723c5-8b88-4b23-bc8d-983ff0882bb7",
+          "commandId": "command:d7024c2d-14f9-4579-a606-1564e40eee5a",
           "status": "committed",
           "revision": 3
         },
@@ -112,11 +119,11 @@
         "historyOnWire": false,
         "coldLongTasks": [
           {
-            "start": 6504.9000000059605,
-            "duration": 62
+            "start": 7531.4000000059605,
+            "duration": 186
           }
         ],
-        "loadToCityInteractiveMs": 6703
+        "loadToCityInteractiveMs": 7911
       }
     },
     {
@@ -131,6 +138,6 @@
     }
   ],
   "performance": [],
-  "sourceAnchor": "813a82bc8c05a2bdb8099fc073e803b104300bc8",
-  "sourceNote": "Synthetic data only. Actual module bytes match this source anchor; development metadata was generated before this commit, not deployment or Android acceptance."
+  "sourceAnchor": "68c4f88ada6ac47290600fd99c9fa0e1ec1ac86c",
+  "sourceNote": "Native source matches final frame repair; dev release metadata predates commit. Automatic Snapshot recovery is read-only; 296.8ms is one observation, not a device SLA."
 }

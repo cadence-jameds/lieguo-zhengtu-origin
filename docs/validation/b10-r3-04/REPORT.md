@@ -2,7 +2,7 @@
 
 本檔記錄交付建立時已取得的證據；**最終安靜環境完整回歸與 GitHub CI 以 PR 最終驗證留言／Checks 為準**。不把未結束的工作或單項通過當完整 Gate PASS。未合併、未部署，未開始 R3-05。
 
-Base PR #56 `1737d14a8f210fb2d33eb5dadbde18c3bb375586`／`feat/b10-r3-03-command-ledger`；本分支 `feat/b10-r3-04-ui-projection`。上游 #54／55／56 原 HEAD 與 Draft 保留。正式 source anchor 見 compatibility.json；最後展示補修為 `813a82bc8c05a2bdb8099fc073e803b104300bc8`：沒有UI transition token的背景Recovery亦在paint前清除頂層草稿並按scope重建所有表單；useGame／Inbox／Runtime仍在父層保留。原傳輸微基準來自3af8ac9，相關Projection／Stream／Admission函式未再改；不把新舊GameApp整體時間混作同版本。
+Base PR #56 `1737d14a8f210fb2d33eb5dadbde18c3bb375586`／`feat/b10-r3-03-command-ledger`；本分支 `feat/b10-r3-04-ui-projection`。上游 #54／55／56 原 HEAD 與 Draft 保留。正式 source anchor 見 compatibility.json；Scope補修為 `813a82bc8c05a2bdb8099fc073e803b104300bc8`：沒有UI transition token的背景Recovery亦在paint前清除頂層草稿並按scope重建所有表單；useGame／Inbox／Runtime仍在父層保留。最後世界訊息遺失補修為 `68c4f88ada6ac47290600fd99c9fa0e1ec1ac86c`：權威Ack可觀察版本高於畫面時，首筆250ms期限不因後續Ack延後；過舊Snapshot不能解除異常，沿用三次有限唯讀恢復，不重送命令。原傳輸微基準來自3af8ac9，相關Projection／Stream／Admission函式未再改；不把新舊GameApp整體時間混作同版本。
 
 ## 正式資料流與邊界
 
@@ -67,7 +67,7 @@ v1 Snapshot由454,109增到19,163,002 bytes，命令Patch由147,130增到18,856,
 
 每組reader初始讀count，33次命令再讀33筆；66次普通更新與10次resync不重掃歷史。冷來源重建仍O(歷史)：60k Native Worker冷Snapshot p50/p95為85.4/103.0ms，不宣稱冷成本常數化。
 
-混合v1/v2壓力窗口記錄到50～173ms Long Tasks，涵蓋setup／cold／壓力階段，尚未逐筆證明歸因，**不能宣稱所有普通操作皆無Long Task，或50ms目標全面達成**。真GameApp短程建造互動樣本為0；最終60k冷載入觀察到1筆62ms長任務，不能宣稱冷載入沒有長任務。60k原生冷載入到可操作城市本次6.703秒（單次，當次值見native-flow，非p95）。
+混合v1/v2壓力窗口記錄到50～173ms Long Tasks，涵蓋setup／cold／壓力階段，尚未逐筆證明歸因，**不能宣稱所有普通操作皆無Long Task，或50ms目標全面達成**。真GameApp短程建造互動樣本為0；60k冷載入曾觀察到62ms，最新重跑為1筆186ms長任務，不能宣稱冷載入沒有長任務。60k原生冷載入到可操作城市最新7.911秒（單次，當次值見native-flow，非p95）。
 
 React受控單城庫存100次更新：舊整段城市替換changed/other=101/101 renders，v2=101/1。Native paired bench兩個consumer各68次：time與全局城名（唯一建城名）皆真依賴，沒有包裝成只一城重繪。單城庫存隔離由前述100次對照證明。
 
@@ -75,9 +75,9 @@ React受控單城庫存100次更新：舊整段城市替換changed/other=101/101
 
 ## Gate與重現
 
-- 定向涵蓋Projection／Admission／React／Runtime／Ledger／Preview／freeze，最終總數見PR驗證留言。早期核心47 PASS、擴展174 PASS、完整定向337 PASS；Scope補修後UI／命令／Preview定向46 PASS（含3項新Scope反例）。
+- 定向涵蓋Projection／Admission／React／Runtime／Ledger／Preview／freeze，最終總數見PR驗證留言。早期核心47 PASS、擴展174 PASS、完整定向337 PASS；Scope與最後世界訊息補修後UI／命令／Preview定向48 PASS（含3項新Scope及2項最後訊息反例）。
 - successor／防竄改43項測試與全部正向Gate通過；Preview graph75模組、0 authority/storage、0 render完整Reducer。版本固定來源與反例測試不更新舊證據來自我放行。
-- 補修前b4ddf57：CI2375 PASS／0 FAIL／1 SKIP，Typecheck、Build、project Pages paths、Release artifacts／Worker identity全通過；同HEAD安靜本機2373 PASS／2 TIMEOUT／1 SKIP（1089.9秒），[明確紀錄](pre-scope-final.json)。Scope修正後最終完整回歸與CI仍以PR Checks／最終留言為準，不能把舊HEAD綠燈冒稱最終HEAD。
+- 補修前b4ddf57：CI2375 PASS／0 FAIL／1 SKIP，Typecheck、Build、project Pages paths、Release artifacts／Worker identity全通過；同HEAD安靜本機2373 PASS／2 TIMEOUT／1 SKIP（1089.9秒），[明確紀錄](pre-scope-final.json)。Scope修正c0ad3a3亦已取得CI2378 PASS／0 FAIL／1 SKIP、本機2376 PASS／2 TIMEOUT／1 SKIP，見[補修前紀錄](pre-final-frame.json)。最後訊息修正後最終完整回歸與CI仍以PR Checks／最終留言為準，不能把舊HEAD綠燈冒稱最終HEAD。
 - [第一輪完整隔離真實摘要](full-attempt1-summary.json)：2371 PASS／2 TIMEOUT／1 SKIP；同環境PR56為2355 PASS／相同2 TIMEOUT／1 SKIP。150k120秒與Runtime30秒期限保留；本輪第一輪曾與定向、Gate、Build共用CPU，不當安靜效能對照。
 
 重現：Node22、npm ci、Typecheck／Build；全套只能 `node scripts/verify-in-isolation.mjs full`。微基準 `node scripts/benchmark-ui-projection.mjs`。先release:prepare，以唯一的 `node scripts/serve-ui-projection-validation.mjs` 啟動5184（停用HMR），再跑兩個 `verify-ui-projection[-performance]-browser.mjs`。需可用Chromium／Playwright，可設定PLAYWRIGHT_MODULE／B10_BROWSER_URL。Chrome產物在ignored artifacts，不需要玩家資料。
@@ -110,3 +110,5 @@ Android實機、長期真配額／記憶體、混合壓力長任務歸因、正�
 60k Recovery仍約9.6/11.9秒，分支投影約55ms、Main套用約14ms。完整帳本讀取／校驗／合併是R3-05待處理成本；本批沒有把這些工作移到Main或假裝已最佳化。此補測與前次RAM paired bench分列，不用絕對時間差換算改善比例。
 
 補修native曾因世界運行期間回復點輪替而取得「找不到正式回復點」的明確拒絕；原資料與草稿保留。成功Recovery的測試先用正式away屏障固定觀察點再選擇回復點，保留60k與99AI／25X，不放寬規則或期限。
+
+最後世界訊息故障注入：正式命令Ack到達、投影frame被丟棄，沒有後續Tick／手動sync／commandQuery，原生UI約296.8ms自動重取Snapshot並顯示已提交結果。此為單次故障證據，不是效能SLA；六組原生流程均重跑PASS。
