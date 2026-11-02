@@ -2,7 +2,7 @@
 
 本檔記錄交付建立時已取得的證據；**最終安靜環境完整回歸與 GitHub CI 以 PR 最終驗證留言／Checks 為準**。不把未結束的工作或單項通過當完整 Gate PASS。未合併、未部署，未開始 R3-05。
 
-Base PR #56 `1737d14a8f210fb2d33eb5dadbde18c3bb375586`／`feat/b10-r3-03-command-ledger`；本分支 `feat/b10-r3-04-ui-projection`。上游 #54／55／56 原 HEAD 與 Draft 保留。正式 source anchor 見 compatibility.json；最後玩家程式變更 `3af8ac9d9b9efa2b51fc10d63e6d093bb01b4791`，之後為測試／驗證工具。
+Base PR #56 `1737d14a8f210fb2d33eb5dadbde18c3bb375586`／`feat/b10-r3-03-command-ledger`；本分支 `feat/b10-r3-04-ui-projection`。上游 #54／55／56 原 HEAD 與 Draft 保留。正式 source anchor 見 compatibility.json；最後展示補修為 `813a82bc8c05a2bdb8099fc073e803b104300bc8`：沒有UI transition token的背景Recovery亦在paint前清除頂層草稿並按scope重建所有表單；useGame／Inbox／Runtime仍在父層保留。原傳輸微基準來自3af8ac9，相關Projection／Stream／Admission函式未再改；不把新舊GameApp整體時間混作同版本。
 
 ## 正式資料流與邊界
 
@@ -27,7 +27,7 @@ Store 保留未變城市／軍隊參照；城市詳情隔離訂閱，本地輸�
 | 任務／領獎／政治／現代工程 | UI矩陣中的持久狀態與純讀公式；原完整來源證明／規則測試保留 |
 | 60k歷史不展開 | 0/1k/10k/30k/60k spy：普通投影 commandHistory／JSON.stringify 零呼叫；暖提交只讀新增身份 |
 | 遺失／重複／亂序／同Revision | WorldStream／React recovery／useGame；展示sequence與權威命令結果分開 |
-| campaign／branch／Recovery／匯入／重置／handoff | branch Snapshot重建、舊session/epoch拒絕、表單／快取清空；Runtime／Ledger回歸 |
+| campaign／branch／Recovery／匯入／重置／handoff | branch Snapshot重建、舊session/epoch拒絕、表單／快取清空；Runtime／Ledger回歸；Scope補修3項React反例與native無transitionId背景Recovery |
 | Worker中斷、lost Ack／T3、等待逾時 | Durable Runtime／useGame原斷言；獨立計時、Pending保留入口、終局才解除；native失包實際觀察snapshot request |
 | 點擊原意／舊Ack | React commit race、治理舊表單、跨campaign同ID Ack；T1保存exact context，偽writer/session拒絕 |
 | Preview過期／中斷／卸載重開 | 原R3-02 controller／React／規則對照；獨立Worker無儲存或提交能力 |
@@ -35,7 +35,7 @@ Store 保留未變城市／軍隊參照；城市詳情隔離訂閱，本地輸�
 | T2／CAS／Quick／Full／Recovery | R3-03 Ledger與故障注入測試未放寬；native匯入回復後舊ID不能重執行 |
 | 真正UI／重載／60k DB | 實際GameApp空地清單→Preview→正式建造→重載查committed；原生DB60000身份載入可操作城市 |
 
-軍隊測試初稿嘗試行軍中召回，被正式規則拒絕；改用合法援軍先駐防再召回，未改規則。Native harness 的 preamble／optimizer reload／測試writer初始化失敗不算PASS；修正後完整五組重跑。沒有刪測試、放寬斷言、減資料量或提高既有期限。
+軍隊測試初稿嘗試行軍中召回，被正式規則拒絕；改用合法援軍先駐防再召回，未改規則。Native harness 的 preamble／optimizer reload／測試writer初始化失敗不算PASS；修正後完整六組重跑。沒有刪測試、放寬斷言、減資料量或提高既有期限。
 
 ## 環境、樣本與原始摘要
 
@@ -67,7 +67,7 @@ v1 Snapshot由454,109增到19,163,002 bytes，命令Patch由147,130增到18,856,
 
 每組reader初始讀count，33次命令再讀33筆；66次普通更新與10次resync不重掃歷史。冷來源重建仍O(歷史)：60k Native Worker冷Snapshot p50/p95為85.4/103.0ms，不宣稱冷成本常數化。
 
-混合v1/v2壓力窗口記錄到50～173ms Long Tasks，涵蓋setup／cold／壓力階段，尚未逐筆證明歸因，**不能宣稱所有普通操作皆無Long Task，或50ms目標全面達成**。真GameApp短程建造與60k載入的互動觀察為0，只是有限樣本；60k原生冷載入到可操作城市約7秒（單次，當次值見native-flow，非p95）。
+混合v1/v2壓力窗口記錄到50～173ms Long Tasks，涵蓋setup／cold／壓力階段，尚未逐筆證明歸因，**不能宣稱所有普通操作皆無Long Task，或50ms目標全面達成**。真GameApp短程建造互動樣本為0；最終60k冷載入觀察到1筆62ms長任務，不能宣稱冷載入沒有長任務。60k原生冷載入到可操作城市本次6.703秒（單次，當次值見native-flow，非p95）。
 
 React受控單城庫存100次更新：舊整段城市替換changed/other=101/101 renders，v2=101/1。Native paired bench兩個consumer各68次：time與全局城名（唯一建城名）皆真依賴，沒有包裝成只一城重繪。單城庫存隔離由前述100次對照證明。
 
@@ -75,9 +75,9 @@ React受控單城庫存100次更新：舊整段城市替換changed/other=101/101
 
 ## Gate與重現
 
-- 定向涵蓋Projection／Admission／React／Runtime／Ledger／Preview／freeze，最終總數見PR驗證留言。早期核心47 PASS、擴展174 PASS、最後React5 PASS、正式軍隊1 PASS。
+- 定向涵蓋Projection／Admission／React／Runtime／Ledger／Preview／freeze，最終總數見PR驗證留言。早期核心47 PASS、擴展174 PASS、完整定向337 PASS；Scope補修後UI／命令／Preview定向46 PASS（含3項新Scope反例）。
 - successor／防竄改43項測試與全部正向Gate通過；Preview graph75模組、0 authority/storage、0 render完整Reducer。版本固定來源與反例測試不更新舊證據來自我放行。
-- Typecheck、Build、project Pages paths、Release artifacts／Worker identity通過。最後安靜完整回歸及GitHub CI結果以PR Checks／最終留言為準。
+- 補修前b4ddf57：CI2375 PASS／0 FAIL／1 SKIP，Typecheck、Build、project Pages paths、Release artifacts／Worker identity全通過；同HEAD安靜本機2373 PASS／2 TIMEOUT／1 SKIP（1089.9秒），[明確紀錄](pre-scope-final.json)。Scope修正後最終完整回歸與CI仍以PR Checks／最終留言為準，不能把舊HEAD綠燈冒稱最終HEAD。
 - [第一輪完整隔離真實摘要](full-attempt1-summary.json)：2371 PASS／2 TIMEOUT／1 SKIP；同環境PR56為2355 PASS／相同2 TIMEOUT／1 SKIP。150k120秒與Runtime30秒期限保留；本輪第一輪曾與定向、Gate、Build共用CPU，不當安靜效能對照。
 
 重現：Node22、npm ci、Typecheck／Build；全套只能 `node scripts/verify-in-isolation.mjs full`。微基準 `node scripts/benchmark-ui-projection.mjs`。先release:prepare，以唯一的 `node scripts/serve-ui-projection-validation.mjs` 啟動5184（停用HMR），再跑兩個 `verify-ui-projection[-performance]-browser.mjs`。需可用Chromium／Playwright，可設定PLAYWRIGHT_MODULE／B10_BROWSER_URL。Chrome產物在ignored artifacts，不需要玩家資料。
@@ -92,3 +92,21 @@ React受控單城庫存100次更新：舊整段城市替換changed/other=101/101
 6. R3-05仍有完整載入驗證、匯出匯入、Recovery、持久編碼／寫入、部分權威順序查詢與冷Projection來源重建成本；本批未提前做分段編碼或AI排程重寫。
 
 Android實機、長期真配額／記憶體、混合壓力長任務歸因、正式部署仍待驗。B5 E1 HOLD／Astra未PASS／實體手機待驗事實保留；此Draft不是正式發布驗收。
+
+## 補測：原生 Recovery／分支 Snapshot
+
+[可重現工具](../../../scripts/benchmark-projection-recovery-browser.mjs)／[完整數據](native-recovery-perf.json)。同一正式source、真原生DB、單一隔離測試writer、真Dedicated benchmark Worker，非Preview／第二套生產權威。每個初始歷史量5次正式改名T2→Recovery→branch Snapshot，驗證原命令仍rolled-back、不能再執行；每輪保留新增5筆身份。Main真Store驗證並等下一frame。180秒是整組量測保護，不改既有Runtime30秒／150k120秒測試期限。
+
+各欄為p50/p95 ms；v1 reference只量同一已回復世界的歷史materialization，不冒稱舊完整Recovery或舊Main總成本。
+
+| 初始歷史 | 正式DB Recovery | 分支投影建構 | v1歷史展開 | Snapshot傳輸／排程 | Main套用 | 到下一frame |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 104.1/124.7 | 0.7/2.0 | 0.0/0.2 | 4.0/4.9 | 16.7/33.3 | 18.3/33.8 |
+| 1,000 | 234.8/290.2 | 1.4/2.7 | 0.6/0.8 | 3.8/3.9 | 9.3/10.8 | 10.9/11.7 |
+| 10,000 | 1455.2/1715.5 | 8.7/11.4 | 6.9/7.3 | 4.0/4.4 | 7.0/9.6 | 8.3/11.5 |
+| 30,000 | 4501.2/4991.9 | 26.4/27.3 | 24.6/27.7 | 4.7/7.6 | 11.6/21.4 | 12.2/22.0 |
+| 60,000 | 9578.1/11934.2 | 54.9/55.8 | 50.2/53.1 | 5.9/6.8 | 13.5/14.1 | 15.1/17.4 |
+
+60k Recovery仍約9.6/11.9秒，分支投影約55ms、Main套用約14ms。完整帳本讀取／校驗／合併是R3-05待處理成本；本批沒有把這些工作移到Main或假裝已最佳化。此補測與前次RAM paired bench分列，不用絕對時間差換算改善比例。
+
+補修native曾因世界運行期間回復點輪替而取得「找不到正式回復點」的明確拒絕；原資料與草稿保留。成功Recovery的測試先用正式away屏障固定觀察點再選擇回復點，保留60k與99AI／25X，不放寬規則或期限。

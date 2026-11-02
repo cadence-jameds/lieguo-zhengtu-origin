@@ -40,3 +40,5 @@
 Store 永遠保存最新完整展示現況；局部 Selector 僅保留一份前次讀取上下文。正式 issue 從根 useGame 的 React 已提交版本擷取，不從局部 Selector 的舊上下文取版本。開啟 Preview 另訂閱最新根展示版本。不同 campaign/branch/writer 的表單與快取重建。
 
 React 仍會因時鐘、共享規則、健康狀態與真正改變的父層需求重繪；本批不宣稱所有元件都只因單一實體更新。可證明的是未變城市／軍隊參照穩定、單城詳情訂閱隔離、輸入本地化、無 render 全歷史或完整 Reducer。
+
+Scope補修：GameApp在layout階段依campaign/branch/writer清除尚未提交的城市、出兵座標、改名、匯入／回復選擇等草稿；活動展示Fragment與復國表單按scope重建，涵蓋沒有transitionId的背景恢復。useGame與已持久命令在父層保留，普通revision更新不清空正在編輯的表單。

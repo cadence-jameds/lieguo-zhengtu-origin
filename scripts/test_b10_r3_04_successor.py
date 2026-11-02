@@ -32,11 +32,12 @@ class ProjectionSuccessorTests(unittest.TestCase):
     f.write_bytes(before);manifest.write_bytes(original)
  def test_commit_grants_and_history_cannot_be_rewritten(self):
   f=self.root/gate.RECORD;original=f.read_bytes()
-  for case in ['commit','grant','history']:
+  for case in ['commit','grant','history','support']:
    record=json.loads(original)
    if case=='commit':record['implementationCommit']=gate.BASE
    elif case=='grant':record['grants']['src/game/formal/scheduler.ts']=['0'*64]
-   else:record['historical'].pop(next(iter(record['historical'])))
+   elif case=='history':record['historical'].pop(next(iter(record['historical'])))
+   else:record['implementationSupport'].append('src/game/formal/reducer.ts')
    f.write_text(json.dumps(record))
    with self.assertRaises(AssertionError):gate.validate(self.root)
    f.write_bytes(original)

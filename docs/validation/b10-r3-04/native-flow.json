@@ -12,7 +12,7 @@
             "campaignId": "campaign:b1-fixture",
             "branch": 1,
             "writerEpoch": 1,
-            "sessionId": "9a5d0c65-5517-48e8-a745-c23425c50b47",
+            "sessionId": "463ae434-0b28-4035-9a5b-5939b96e2192",
             "projectionSequence": 2,
             "revision": 2
           },
@@ -21,11 +21,11 @@
         },
         "before": {
           "ids": [
-            "command:45fb8b60-f778-45c5-a44f-4182a40fd820",
-            "command:fc0e3ad4-7dd6-42fa-8017-1a7dade8e70f",
-            "command:776c7e2f-c4d2-4e34-bc89-1fbaea2a539f",
-            "command:d95ab5e2-3bf3-42a7-8f71-aafb0d174f34",
-            "command:ceb3c88a-ab87-4d9c-8957-bb613d58e049"
+            "command:05b2d06c-a0ee-46a9-add5-a339ceafe8b8",
+            "command:35f669bc-149b-489b-a9bb-5cfcd753c27e",
+            "command:0571d772-db69-4ee7-8f28-51d2c04492f8",
+            "command:87d95079-83cd-48bb-82f7-b71e263570a0",
+            "command:d206c77d-df1b-465b-a4b7-33832b175235"
           ],
           "name": "連續0",
           "interactiveLongTasks": [],
@@ -35,23 +35,23 @@
         "restored": {
           "rows": [
             {
-              "id": "command:ceb3c88a-ab87-4d9c-8957-bb613d58e049",
+              "id": "command:d206c77d-df1b-465b-a4b7-33832b175235",
               "state": "needs-confirmation"
             },
             {
-              "id": "command:d95ab5e2-3bf3-42a7-8f71-aafb0d174f34",
+              "id": "command:87d95079-83cd-48bb-82f7-b71e263570a0",
               "state": "needs-confirmation"
             },
             {
-              "id": "command:776c7e2f-c4d2-4e34-bc89-1fbaea2a539f",
+              "id": "command:0571d772-db69-4ee7-8f28-51d2c04492f8",
               "state": "committed"
             },
             {
-              "id": "command:fc0e3ad4-7dd6-42fa-8017-1a7dade8e70f",
+              "id": "command:35f669bc-149b-489b-a9bb-5cfcd753c27e",
               "state": "committed"
             },
             {
-              "id": "command:45fb8b60-f778-45c5-a44f-4182a40fd820",
+              "id": "command:05b2d06c-a0ee-46a9-add5-a339ceafe8b8",
               "state": "committed"
             }
           ],
@@ -84,16 +84,11 @@
       "status": "PASS",
       "data": {
         "ack": {
-          "commandId": "command:953d5c77-dfef-40f4-8eb2-0cd3272b0977",
+          "commandId": "command:0fc723c5-8b88-4b23-bc8d-983ff0882bb7",
           "status": "committed",
           "revision": 3
         },
-        "interactiveLongTasks": [
-          {
-            "start": 4318.0999999940395,
-            "duration": 189
-          }
-        ],
+        "interactiveLongTasks": [],
         "projectionHasHistory": false,
         "workers": [
           "/src/game/runtime.worker.ts",
@@ -117,26 +112,25 @@
         "historyOnWire": false,
         "coldLongTasks": [
           {
-            "start": 8743.30000000447,
-            "duration": 52
-          },
-          {
-            "start": 8807.80000000447,
-            "duration": 94
-          },
-          {
-            "start": 9120.60000000149,
-            "duration": 96
-          },
-          {
-            "start": 9285.40000000596,
-            "duration": 66
+            "start": 6504.9000000059605,
+            "duration": 62
           }
         ],
-        "loadToCityInteractiveMs": 9431
+        "loadToCityInteractiveMs": 6703
+      }
+    },
+    {
+      "name": "background Recovery without a UI transition token clears old top-level drafts before another click",
+      "status": "PASS",
+      "data": {
+        "sourceBranch": 2,
+        "newBranch": 3,
+        "oldRenameDraftClosed": true,
+        "transitionIdSupplied": false
       }
     }
   ],
   "performance": [],
-  "sourceNote": "Runtime/UI module bytes match final R3-04 source anchor; no deployed/Android claim. Benchmarks use same current worlds for v1 reference and v2."
+  "sourceAnchor": "813a82bc8c05a2bdb8099fc073e803b104300bc8",
+  "sourceNote": "Synthetic data only. Actual module bytes match this source anchor; development metadata was generated before this commit, not deployment or Android acceptance."
 }

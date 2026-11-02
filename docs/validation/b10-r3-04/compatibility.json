@@ -1,7 +1,23 @@
 {
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/b10-r3-04/REPORT.md",
+    "docs/validation/b10-r3-04/UI-DEPENDENCIES.md",
+    "docs/validation/b10-r3-04/compatibility.json",
+    "docs/validation/b10-r3-04/full-attempt1-summary.json",
+    "docs/validation/b10-r3-04/native-flow.json",
+    "docs/validation/b10-r3-04/native-perf.json",
+    "docs/validation/b10-r3-04/node-perf.json",
+    "scripts/b10_r3_03_successor.py",
+    "scripts/b10_r3_04_successor.py",
+    "scripts/mobile_town_successor.py",
+    "scripts/recruit_input_successor.py",
+    "scripts/test_b10_r3_03_successor.py",
+    "scripts/test_b10_r3_04_successor.py"
+  ],
   "schemaVersion": 1,
   "baseCommit": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
-  "implementationCommit": "fd89acb9b34846c3be9077b5d6b3f2b639778e03",
+  "implementationCommit": "813a82bc8c05a2bdb8099fc073e803b104300bc8",
   "changes": {
     "docs/validation/b10-r3-04/CONTRACT.md": {
       "before": null,
@@ -10,6 +26,10 @@
     "releases/notes/b10-r3-04-ui-projection.json": {
       "before": null,
       "after": "e5886985992cdc381f3bc6d44cd6893a248c1e2816ec942b8e42e2646f708b89"
+    },
+    "scripts/benchmark-projection-recovery-browser.mjs": {
+      "before": null,
+      "after": "174951dcf099c9a42ad3970214c50f9ac641b043440c6e83cd9e1d60c83fe792"
     },
     "scripts/benchmark-ui-projection.mjs": {
       "before": null,
@@ -29,7 +49,7 @@
     },
     "scripts/verify-ui-projection-browser.mjs": {
       "before": null,
-      "after": "f84925e567739aab68b96c3f3cf8b5c580af6972c6f4450fab7c1a47e992885f"
+      "after": "15a09875282661b721b5307aff3156db69677ed82ef9cbc6134f063bec1f3896"
     },
     "scripts/verify-ui-projection-performance-browser.mjs": {
       "before": null,
@@ -57,7 +77,7 @@
     },
     "src/game/GameApp.tsx": {
       "before": "82578b300b1a133ba79079934afd26144142f3f3bdf58bac4765bcc20323d9de",
-      "after": "0a4660c3d71dcf1be7ff226a8472e6380127faf4d66d864a9fab0bc984a05ca8"
+      "after": "30e3726d7baf1041ff73c39c63f76254d06c68d9bdd3d0798d86871fb01c26af"
     },
     "src/game/ProjectionSyncNotice.tsx": {
       "before": null,
@@ -507,6 +527,10 @@
       "before": null,
       "after": "385b9f0a7b0965aa95a7fc7e040c6eef91ec9cd2675f718f9c5f88242f5aa530"
     },
+    "src/game/projectionScopeR304.test.tsx": {
+      "before": null,
+      "after": "a9f1fb60fc0f84f84c629c2af649f0a33e77096396f2fb24f5d8ba62ea2108fb"
+    },
     "src/game/runtime.worker.ts": {
       "before": "9af40171e40bfdad14239932f36a208ca4888432276fd2e7b827d0016c9fab78",
       "after": "64d1b929b573c24aa26dd17102020f7e4c1b5cf45fb8dd8dd172cb6d85727d2a"
@@ -525,7 +549,7 @@
     },
     "src/game/usePresentation.ts": {
       "before": null,
-      "after": "ba809da8317c40453c0b51703ce731bff7a2beb1fa0e79417cfd55294be9171c"
+      "after": "3ef77e96365e5e9f034641b39ed5124fa5db3445ef0091c4995f94b7b9bdae30"
     },
     "src/game/worldProjection.ts": {
       "before": null,
