@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {digest} from './canonical';
 import {FORMAL_SAVE_FORMAT} from './versions';
 import {route} from './routing';
@@ -9,7 +10,8 @@ import {colonizationUnits,readyColonizationUnit} from './settlement';
 import {buildable,terrainAt} from './terrain';
 import {spatial} from './spatial';
 import {armyUpkeep} from './military';
-import {OLD_CAMPAIGN_MESSAGE,encodeSave,decodeSave} from './saveCodec';
+import {OLD_CAMPAIGN_MESSAGE,decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {validateFormalWorld} from './schema';
 import {FormalPersistence} from '../persistence';
 const setup=()=>{const w=make(),c=rich(w);w.factions[0].age=2;build(c,'castle',1);c.population=2000;c.military!.units={spearman:40};return w;};
@@ -20,7 +22,7 @@ it('castle produces one separate civilian unit; launch consumes availability; fo
  w=commit(w,{type:'settlement.prepare',cityId:id});expect(w.cities[0].population).toBe(1600);expect(colonizationUnits(w,id)).toHaveLength(0);expect(w.cities[0].military!.queue).toHaveLength(0);expect(w.cities[0].economy!.construction).toHaveLength(0);
  const project=w.settlements![0];w=advanceFormal(w,project.startedAt+project.prepDurationMs).world;expect(readyColonizationUnit(w,id)).toMatchObject({quantity:1,kind:'colonization',population:400});expect(armyUpkeep(w,w.cities[0])).toBe(upkeep);
  w=(await decodeSave(await encodeSave(w))).world;const cmd=order(w,{type:'settlement.dispatch',cityId:id,...target(w),name:'新城',escort:{spearman:20}});w=submitFormalOrder(w,cmd).world;expect(readyColonizationUnit(w,id)).toBeUndefined();expect(colonizationUnits(w,id)[0].phase).toBe('travelling');expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');
- w=(await decodeSave(await encodeSave(w))).world;w=advanceFormal(w,w.settlements![0].arrivalAt!).world;expect(colonizationUnits(w,id)).toHaveLength(0);expect(w.cities[100].population).toBe(400);expect(w.cities[100].military!.units).toEqual({spearman:20});expect(w.cities[0].military!.units).toEqual({spearman:20});expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ w=(await decodeSave(await encodeSave(w))).world;w=advanceFormal(w,w.settlements![0].arrivalAt!).world;expect(colonizationUnits(w,id)).toHaveLength(0);expect(w.cities[100].population).toBe(400);expect(w.cities[100].military!.units).toEqual({spearman:20});expect(w.cities[0].military!.units).toEqual({spearman:20});expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 });
 it('cancel before completion refunds all 400 people and 80 percent resources, with no unit',()=>{let w=setup();const id=w.cities[0].id;w=commit(w,{type:'settlement.prepare',cityId:id});w=commit(w,{type:'settlement.cancel',cityId:id});expect(w.cities[0].population).toBe(2000);expect(w.cities[0].stock).toEqual({food:98800,wood:98400,stone:97600,gold:99200});expect(w.colonizationUnits).toEqual([]);});
 it('ready flag without entity and duplicate/mismatched entity are rejected by strict v85 contract',()=>{let w=setup();w=commit(w,{type:'settlement.prepare',cityId:w.cities[0].id});w=advanceFormal(w,14400000).world;const absent=structuredClone(w);absent.colonizationUnits=[];expect(()=>validateFormalWorld(absent)).toThrow();w.colonizationUnits!.push({...w.colonizationUnits![0]});expect(()=>validateFormalWorld(w)).toThrow();});

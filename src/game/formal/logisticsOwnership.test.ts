@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {expect,it} from 'vitest';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -16,7 +17,8 @@ import {logisticsAllocation,logisticsAvailable} from './logisticsAllocation';
 import {zeroResources,resourceKeys,type FormalWorld,type FormalCommand} from './model';
 import {submitFormalOrder,advanceFormal} from './reducer';
 import {validateFormalWorld} from './schema';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOfflineCooperative} from './offline';
 import {FormalPersistence} from '../persistence';
 
@@ -91,9 +93,9 @@ it('conquest preserves all old in-flight identities, cargo, purposes, bookings a
 
 const relevant=(w:FormalWorld)=>({cities:w.cities,projects:w.largeProjects,logistics:w.logistics,events:w.events,receipts:w.commandReceipts.map(({committedRevision:_,...r})=>r)});
 async function checkpoint(w:FormalWorld){
- const decoded=(await decodeSave(await encodeSave(w))).world;expect(decoded).toEqual(w);
+ const decoded=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(decoded)).toEqual(projectWorld(w));
  const db=new FormalPersistence({suffix:'ownership-'+crypto.randomUUID()});
- try{const stored=await db.start(w);expect((await db.loadSave()).game).toEqual(stored);await db.db.saves.put({id:'current',kind:'world',data:{broken:true}} as never);const loaded=await db.loadSave();expect(loaded.recovered).toBe(true);expect(loaded.game!.revision).toBe(stored.revision+1);expect({...loaded.game,revision:stored.revision}).toEqual(stored);return decoded;}finally{await db.db.delete();}
+ try{const stored=await db.start(w);expect((await db.loadSave()).game).toEqual(stored);await db.db.saves.put({id:'current',kind:'world',data:{broken:true}} as never);const loaded=await db.loadSave();expect(loaded.recovered).toBe(true);expect(loaded.game!.revision).toBe(stored.revision+1);expect({...projectWorld(loaded.game!),revision:stored.revision}).toEqual(projectWorld(stored));return decoded;}finally{await db.db.delete();}
 }
 it('post-conquest Save/Load, actual Recovery and offline replay preserve old shipments and cleared settings',async()=>{
  let w=conquer(oldTrips());const arrive=Math.max(...w.logistics!.map(t=>t.arrivalAt)),returned=Math.max(...w.logistics!.map(t=>t.returnAt));w=await checkpoint(w);

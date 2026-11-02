@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {invalidateSpatial} from './spatial';
 import {expect,it} from 'vitest';
 import {endgameWorld,nativeEndgameWorld,act} from './endgameTestSupport';
@@ -12,7 +13,8 @@ import {isMissionArmy} from './combatModel';
 import {EventScheduler} from './scheduler';
 import {applyWonderDamage} from './wonderCondition';
 import {eventId,resolutionId} from './ids';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {unitRecruitCost} from './military';
 import {UNIT_CATALOG} from './unitCatalog';
 import {invalidateMilitaryPower} from './militaryPower';
@@ -90,7 +92,7 @@ it('B9-5 native 99 AI and player repair with identical real stock, caravans, arr
  let w=nativeEndgameWorld();enableAutonomy(w);for(const a of w.autonomy!.agents){a.active=true;a.nextAt=w.time+100*HOUR;w.events.find(e=>e.id===a.eventId)!.at=a.nextAt;}
  let s=new EventScheduler(w.events);for(const p of w.largeProjects.filter(p=>p.wonder))applyWonderDamage(w,p.projectId,{type:'fixture.marker',marker:p.projectId,id:eventId('damage-'+p.projectId.slice(8)),at:w.time},resolutionId('damage-'+p.projectId.slice(8)),4500,s);w.events=s.snapshot();
  for(let i=0;i<100;i++){const c=w.cities[i],a=w.autonomy!.agents.find(a=>a.factionId===c.ownerFactionId)??agent(w),before={...c.stock};let command=wonderDecision(w,c,a);if(command?.type==='wonder.repair.start'){w=act(w,command,c.ownerFactionId);command=repairDecision(w,w.cities[i],a);}expect(command?.type).toBe('wonder.repair.ship');if(!command||command.type!=='wonder.repair.ship')throw Error('Repair contribution missing');w=act(w,command,c.ownerFactionId);for(const k of ['food','wood','stone','gold'] as const)expect(before[k]-w.cities[i].stock[k]).toBe(command.resources[k]);}
- expect(w.logistics!.filter(t=>t.sourceFactionId!==w.playerFactionId)).toHaveLength(99);const expected=new Map(w.largeProjects.filter(p=>p.repair).map(p=>[p.projectId,p.shipments.reduce((n,t)=>n+t.resources.food,0)]));w=advanceFormal(w,Math.max(...w.logistics!.map(t=>t.arrivalAt))).world;for(const p of w.largeProjects.filter(p=>p.repair))expect(p.poolResources.food).toBe(expected.get(p.projectId));expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ expect(w.logistics!.filter(t=>t.sourceFactionId!==w.playerFactionId)).toHaveLength(99);const expected=new Map(w.largeProjects.filter(p=>p.repair).map(p=>[p.projectId,p.shipments.reduce((n,t)=>n+t.resources.food,0)]));w=advanceFormal(w,Math.max(...w.logistics!.map(t=>t.arrivalAt))).world;for(const p of w.largeProjects.filter(p=>p.repair))expect(p.poolResources.food).toBe(expected.get(p.projectId));expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 },30000);
 it('B9-5 imperial endgame diplomacy observes the actual six-hour friendly termination before hostile missions',()=>{
  let w=nativeEndgameWorld(),owner=w.factions[30].id;for(let i=25;i<30;i++){w.cities[i].ownerFactionId=owner;w.factions[i].empireId=null;for(const l of w.politics!.legions)l.members=l.members.filter(id=>id!==w.factions[i].id);}invalidateSpatial(w);w.cities[30].military!.units={militia:1};invalidateMilitaryPower(w);w=act(w,{type:'politics',cityId:w.cities[0].id,action:'friendly-propose',target:owner});w=act(w,{type:'politics',cityId:w.cities[30].id,action:'request-accept',requestId:w.politics!.requests[0].id},owner);

@@ -1,10 +1,11 @@
+import {commandHistory,receiptIndex} from './commandLedger';
 import {canonicalJSON} from './canonical';
 import type {FormalWorld} from './model';
 import {resourceKeys} from './model';
 import {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY,wonderIntegrity,wonderProgress} from './wonder';
 /** Strict wire invariants are reused by Save, Load, Recovery and Runtime validation. */
 export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
- const empires=new Set<string>(),shipments=new Set<string>(),commands=new Set<string>(),events=new Set<string>(),receipts=new Map(w.commandReceipts.map(r=>[r.commandId as string,r])),logistics=new Map(w.logistics?.map(t=>[t.shipmentId,t]));
+ const empires=new Set<string>(),shipments=new Set<string>(),commands=new Set<string>(),events=new Set<string>(),receipts=receiptIndex(w),logistics=new Map(w.logistics?.map(t=>[t.shipmentId,t]));
  const applied=(id:string,issuer:string)=>receipts.get(id)?.issuerId===issuer&&receipts.get(id)?.disposition==='applied';
  for(const p of w.largeProjects){
   if(p.kind!=='world-wonder')continue;
@@ -24,7 +25,7 @@ export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
   }
   // An original empire may later disappear through conquest/extinction. Preserve its historical
   // project identity; never attach it to a conqueror or grant qualifications here.
-  if(empires.has(owner)||p.durationMs!==WONDER_DURATION||p.createdAt>w.time||!w.factions.some(f=>f.id===state.hostOwnerFactionId)||!w.commandReceipts.some(r=>{if(r.commandId!==state.creationCommandId||r.disposition!=='applied')return false;try{const command=JSON.parse(r.fingerprint);return command.campaignId===w.campaignId&&command.issuerId===r.issuerId&&command.payload.type==='wonder.start'&&command.payload.hostCityId===host.id;}catch{return false;}}))fail('Wonder identity/creation invalid');
+  if(empires.has(owner)||p.durationMs!==WONDER_DURATION||p.createdAt>w.time||!w.factions.some(f=>f.id===state.hostOwnerFactionId)||!commandHistory(w).some(r=>{if(r.commandId!==state.creationCommandId||r.disposition!=='applied')return false;try{const command=JSON.parse(r.fingerprint);return command.campaignId===w.campaignId&&command.issuerId===r.issuerId&&command.payload.type==='wonder.start'&&command.payload.hostCityId===host.id;}catch{return false;}}))fail('Wonder identity/creation invalid');
   empires.add(owner);if(commands.has(state.creationCommandId))fail('Duplicate wonder creation command');commands.add(state.creationCommandId);
   const suffix=Number(p.projectId.slice(8));if(Number.isSafeInteger(suffix)&&suffix>=w.sequences.project)fail('Wonder project sequence would reuse ID');
   if(resourceKeys.some(r=>p.requiredResources[r]!==WONDER_COST[r]))fail('Wonder cost invalid');

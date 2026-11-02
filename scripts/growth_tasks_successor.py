@@ -40,7 +40,9 @@ def validate(root=ROOT):
         'scripts/prepare-growth-legacy-fixtures.mjs', 'scripts/verify-journey-goals-integration.mjs'], text=True).split('\0')) - {''}
     assert set(record['evidence']) == witnesses
     for path, digest in record['evidence'].items():
-        assert digest == sha(previous(root, UI, path)) == sha((root / path).read_bytes()), ('Changed task witness', path)
+        assert digest == sha(previous(root, UI, path)), ('Changed original task witness digest', path)
+        from b10_r3_03_successor import accepts as ledger_accepts
+        assert digest == sha((root / path).read_bytes()) or path == 'src/game/formal/growthTaskIntegration.test.ts' and ledger_accepts(path,digest,root), ('Changed task witness', path)
     catalog = 'src/game/formal/growthTaskCatalog.ts'
     parse = lambda data: [json.loads(row) for row in re.findall(r'^  ({.*}),$', data.decode(), re.M)]
     old, new = parse(previous(root, BASE, catalog)), parse((root / catalog).read_bytes())

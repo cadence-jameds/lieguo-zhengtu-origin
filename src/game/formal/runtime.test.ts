@@ -1,3 +1,5 @@
+import * as ledger from './commandLedger';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {commandId} from './ids';
 import 'fake-indexeddb/auto';
 import {beforeEach,expect,it,vi} from 'vitest';
@@ -23,7 +25,7 @@ async function until(test:()=>boolean){await vi.waitFor(()=>expect(test()).toBe(
 let realNow=0;
 beforeEach(async()=>{
  vi.restoreAllMocks();realNow=0;vi.spyOn(performance,'now').mockImplementation(()=>realNow);
- vi.resetModules();vi.clearAllMocks();messages=[];initial=createFormalFixture();
+ vi.resetModules();vi.doMock('./commandLedger',()=>ledger);vi.clearAllMocks();messages=[];initial=createFormalFixture();
  storage.loadWithOffline.mockResolvedValue({game:initial,recovered:false});storage.save.mockImplementation(async(w:FormalWorld)=>w);storage.startCampaign.mockImplementation(async(w:FormalWorld)=>w);storage.restore.mockResolvedValue(initial);storage.importSave.mockResolvedValue(initial);
  port={postMessage:r=>messages.push(structuredClone(r)),onmessage:null};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',vi.fn());
  await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
@@ -156,7 +158,7 @@ for(const speed of [1,3,6,10,25])it(`${speed}X command admission uses real Index
  try{
   const w=await p.start(createFormalWorld({campaign:'idb-admission-'+speed,seed:90217,speed}));storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});storage.save.mockImplementation((draft,reports,revision)=>p.save(draft,reports,revision));send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
   realNow=1550;send({type:'command',order:order(w,'actual-idb',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(r=>r.type==='state')!.world as FormalWorld;
-  expect(committed.revision).toBe(w.revision+1);expect(committed.time).toBe(1550*speed);expect((await p.loadSave()).game).toEqual(committed);expect((await p.backupList())).toHaveLength(2);
+  expect(committed.revision).toBe(w.revision+1);expect(committed.time).toBe(1550*speed);expect(projectWorld((await p.loadSave()).game!)).toEqual(committed);expect((await p.backupList())).toHaveLength(2);
   const durableAck=messages.find(r=>r.type==='commandAck')!.ack;messages=[];send({type:'command',order:order(w,'actual-idb',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));expect(messages.find(r=>r.type==='commandAck')!.ack).toEqual(durableAck);expect(storage.save).toHaveBeenCalledTimes(1);
  }finally{await p.db.delete();}
 });
@@ -176,12 +178,14 @@ it('a queued visibility boundary freezes dev time before waiting behind an atomi
 });
 
 it('developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings',async()=>{
- const w=createFormalWorld({campaign:'dev-admission',seed:90217,speed:25});
- const {enableAutonomy}=await import('./autonomy');enableAutonomy(w);
+ const raw=createFormalWorld({campaign:'dev-admission',seed:90217,speed:25});
+ const {enableAutonomy}=await import('./autonomy');enableAutonomy(raw);
+ // Runtime loads a verified new-format snapshot in production; keep the lab on that path.
+ const {encodeScenario}=await import('./ledgerTestSupport'),{decodeSave}=await import('./saveCodec');const w=(await decodeSave(await encodeScenario(raw))).world;
  storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});messages=[];send({type:'load'});await until(()=>messages.some(m=>m.type==='state'));messages=[];
  const payload={type:'developer.configure' as const,cityId:w.cities[0].id,enabled:true,speed:100 as const,shield:true},o=order(w,'dev-intent',payload),base=playerOrderBase(w,payload);expect(base).toBeDefined();
  realNow=Math.ceil(Math.min(...w.events.filter(e=>e.type==='ai.decide').map(e=>e.at))/25)+1;
- storage.save.mockRejectedValueOnce(Error('dev setting write fault'));send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(m=>m.type==='state')!.world).toEqual(w);
+ storage.save.mockRejectedValueOnce(Error('dev setting write fault'));send({type:'command',order:o,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(messages.find(m=>m.type==='state')!.world).toEqual(projectWorld(w));
  const confirmed={...o,commandId:commandId('confirmed-developer')};
  messages=[];send({type:'command',order:confirmed,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');const committed=messages.find(m=>m.type==='state')!.world as FormalWorld;expect(committed.developer).toEqual({enabled:true,speed:100,shieldUntil:committed.time+20*3600000});expect(committed.speed).toBe(25);expect(committed.commandReceipts.filter(r=>r.commandId===confirmed.commandId)).toHaveLength(1);
  const calls=storage.save.mock.calls.length;messages=[];send({type:'command',order:confirmed,playerBase:base});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('committed');expect(storage.save.mock.calls.length).toBe(calls);

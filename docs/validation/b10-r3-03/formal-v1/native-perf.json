@@ -1,0 +1,428 @@
+{
+  "environment": "Native Chromium desktop Linux container; synthetic worlds; not Android or a deployed release",
+  "browser": "154.0.8037.57",
+  "at": "2026-11-02T03:04:20.983Z",
+  "cases": [
+    {
+      "name": "formal T2 native atomic abort at every write boundary",
+      "status": "PASS",
+      "data": {
+        "boundaries": [
+          "report-write",
+          "backup-write",
+          "world-write",
+          "authority-write",
+          "metadata-write",
+          "result-write",
+          "ledger-segment-write",
+          "ledger-result-write",
+          "ledger-index-write",
+          "ledger-manifest-write",
+          "ledger-head-write"
+        ],
+        "injection": "QuotaExceededError, not actual disk exhaustion",
+        "unchanged": "all tables after failed transaction"
+      }
+    },
+    {
+      "name": "no-effect results survive reopen, quick/full and Recovery; stale writer/CAS rejected",
+      "status": "PASS",
+      "data": {
+        "reopen": true,
+        "quick": true,
+        "full": true,
+        "recovery": true,
+        "oldWriterRejected": true
+      }
+    },
+    {
+      "name": "actual Runtime Worker restart recovers durable T1 while independent Preview Worker fails",
+      "status": "PASS",
+      "data": {
+        "durableBeforeBoot": true,
+        "restart": true,
+        "previewTerminationIndependent": true,
+        "queryable": true
+      }
+    }
+  ],
+  "performance": [
+    {
+      "count": 0,
+      "quickBytes": 1382127,
+      "hotWorldBytes": 454470,
+      "logicalStoredLedgerBytes": 14257,
+      "heap": {
+        "usedJSHeapSize": 170300454,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 78.29999999888241,
+          "p95": 78.29999999888241
+        },
+        "identityLookup": {
+          "n": 150,
+          "p50": 0,
+          "p95": 0
+        },
+        "materializedReducer": {
+          "n": 5,
+          "p50": 11.5,
+          "p95": 13.099999999627471
+        },
+        "boundReducer": {
+          "n": 5,
+          "p50": 10.700000001117587,
+          "p95": 18.5
+        },
+        "T1": {
+          "n": 5,
+          "p50": 8.799999998882413,
+          "p95": 10
+        },
+        "T2": {
+          "n": 5,
+          "p50": 47.20000000111759,
+          "p95": 52.70000000111759
+        },
+        "load": {
+          "n": 5,
+          "p50": 32.59999999962747,
+          "p95": 62.59999999962747
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 90.79999999888241,
+          "p95": 92.09999999962747
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 173,
+          "p95": 227
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 84,
+          "p95": 87.40000000037253
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 165.5,
+          "p95": 171.7999999988824
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 89.40000000037253,
+          "p95": 89.5
+        }
+      }
+    },
+    {
+      "count": 1000,
+      "quickBytes": 2120950,
+      "hotWorldBytes": 454476,
+      "logicalStoredLedgerBytes": 1837686,
+      "heap": {
+        "usedJSHeapSize": 47962351,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 232.39999999850988,
+          "p95": 232.39999999850988
+        },
+        "identityLookup": {
+          "n": 150,
+          "p50": 0,
+          "p95": 0
+        },
+        "materializedReducer": {
+          "n": 5,
+          "p50": 14.400000000372529,
+          "p95": 16.799999998882413
+        },
+        "boundReducer": {
+          "n": 5,
+          "p50": 11,
+          "p95": 12.800000000745058
+        },
+        "T1": {
+          "n": 5,
+          "p50": 5.900000000372529,
+          "p95": 6.400000000372529
+        },
+        "T2": {
+          "n": 5,
+          "p50": 55.59999999962747,
+          "p95": 56.59999999962747
+        },
+        "load": {
+          "n": 5,
+          "p50": 122.29999999888241,
+          "p95": 141.09999999962747
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 183.90000000037253,
+          "p95": 191
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 391.7000000011176,
+          "p95": 414.69999999925494
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 166.7999999988824,
+          "p95": 198.90000000037253
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 339.5,
+          "p95": 384.59999999962747
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 252.5,
+          "p95": 255.19999999925494
+        }
+      }
+    },
+    {
+      "count": 10000,
+      "quickBytes": 8808066,
+      "hotWorldBytes": 454478,
+      "logicalStoredLedgerBytes": 18356782,
+      "heap": {
+        "usedJSHeapSize": 248104512,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1679.699999999255,
+          "p95": 1679.699999999255
+        },
+        "identityLookup": {
+          "n": 150,
+          "p50": 0,
+          "p95": 0
+        },
+        "materializedReducer": {
+          "n": 5,
+          "p50": 36.30000000074506,
+          "p95": 43.70000000111759
+        },
+        "boundReducer": {
+          "n": 5,
+          "p50": 12.299999998882413,
+          "p95": 19.799999998882413
+        },
+        "T1": {
+          "n": 5,
+          "p50": 11.200000001117587,
+          "p95": 19.5
+        },
+        "T2": {
+          "n": 5,
+          "p50": 57.09999999962747,
+          "p95": 69
+        },
+        "load": {
+          "n": 5,
+          "p50": 889.5999999996275,
+          "p95": 1172
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 1071.5999999996275,
+          "p95": 1568
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 2801.2000000011176,
+          "p95": 3227.0999999996275
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 1017.5999999996275,
+          "p95": 1193.2000000011176
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 2486.0999999996275,
+          "p95": 3030.199999999255
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 1676.7999999988824,
+          "p95": 2571.60000000149
+        }
+      }
+    },
+    {
+      "count": 30000,
+      "quickBytes": 23703044,
+      "hotWorldBytes": 454478,
+      "logicalStoredLedgerBytes": 55151756,
+      "heap": {
+        "usedJSHeapSize": 1282152851,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 4181.300000000745,
+          "p95": 4181.300000000745
+        },
+        "identityLookup": {
+          "n": 150,
+          "p50": 0,
+          "p95": 0
+        },
+        "materializedReducer": {
+          "n": 5,
+          "p50": 66.5,
+          "p95": 83.69999999925494
+        },
+        "boundReducer": {
+          "n": 5,
+          "p50": 12.299999998882413,
+          "p95": 14.200000001117587
+        },
+        "T1": {
+          "n": 5,
+          "p50": 10.800000000745058,
+          "p95": 15.599999999627471
+        },
+        "T2": {
+          "n": 5,
+          "p50": 52.90000000037253,
+          "p95": 96.70000000111759
+        },
+        "load": {
+          "n": 5,
+          "p50": 2728.4000000003725,
+          "p95": 3446.699999999255
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 2966.2999999988824,
+          "p95": 4331
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 7922.700000001118,
+          "p95": 9228.300000000745
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 2930.7999999988824,
+          "p95": 3312.5
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 6724.5999999996275,
+          "p95": 8493.900000000373
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 4886.4000000003725,
+          "p95": 6038.5999999996275
+        }
+      }
+    },
+    {
+      "count": 60000,
+      "quickBytes": 46045550,
+      "hotWorldBytes": 454478,
+      "logicalStoredLedgerBytes": 110344262,
+      "heap": {
+        "usedJSHeapSize": 2482790901,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 10237.799999998882,
+          "p95": 10237.799999998882
+        },
+        "identityLookup": {
+          "n": 150,
+          "p50": 0,
+          "p95": 0
+        },
+        "materializedReducer": {
+          "n": 5,
+          "p50": 109.19999999925494,
+          "p95": 245.09999999962747
+        },
+        "boundReducer": {
+          "n": 5,
+          "p50": 15.599999999627471,
+          "p95": 49.70000000111759
+        },
+        "T1": {
+          "n": 5,
+          "p50": 9.400000000372529,
+          "p95": 27.90000000037253
+        },
+        "T2": {
+          "n": 5,
+          "p50": 60.5,
+          "p95": 169.09999999962747
+        },
+        "load": {
+          "n": 5,
+          "p50": 5929.5,
+          "p95": 11357.5
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 6336.199999999255,
+          "p95": 11931.800000000745
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 18671.099999999627,
+          "p95": 24915.299999998882
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 6099.5999999996275,
+          "p95": 8081.9000000003725
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 14105.599999999627,
+          "p95": 17676.699999999255
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 9997.199999999255,
+          "p95": 12794.200000001118
+        }
+      }
+    }
+  ],
+  "implementationCommit": "a741ed4",
+  "timingCaveat": "Five slow samples per history; p95 is the maximum. Container measurements, occasional successor-Gate activity; no device calibration. Later identity/cycle guards are measured separately by directed checks."
+}

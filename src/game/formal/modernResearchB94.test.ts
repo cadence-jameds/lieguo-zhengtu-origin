@@ -1,3 +1,4 @@
+import {gameTransition} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
 import {make,researchCity,rich,build,order,reject} from './developmentTestSupport';
@@ -7,7 +8,8 @@ import {resourceKeys,zeroResources,type FormalWorld} from './model';
 import {advanceFormal,submitFormalOrder,completeResearch} from './reducer';
 import {changeCityOwner} from './economy';
 import {researchQuote} from './buildingDetailData';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOfflineCooperative} from './offline';
 import {enableAutonomy,economicChoices} from './autonomy';
 const H=3600000;
@@ -42,7 +44,7 @@ for(const [id,building,hours,food,wood,stone,gold] of rows)it(`B9-4D ${id}: exac
  fundingCities(w);const before=w.cities.map(c=>({...c.stock}));w=issue(w,{type:'research.start',cityId:c.id,techId:id}).world;let p=w.researchProjects.at(-1)!;expect(w.cities.map(c=>c.stock)).toEqual(before);expect(p.phase).toBe('funding');expect(p.contributedResources).toEqual(zeroResources());expect(w.factions[0].researchQueue).toBe(p.projectId);expect(w.events.some(e=>e.type==='research.complete')).toBe(false);reject(w,{type:'research.start',cityId:c.id,techId:'research.cooperation'});
  const resources={food:1,wood:2,stone:3,gold:4},cmd=order(w,{type:'research.contribute',cityId:c.id,projectId:p.projectId,resources},'real-contribution');w=submitFormalOrder(w,cmd).world;expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');for(const r of resourceKeys)expect(w.cities[0].stock[r]).toBe(before[0][r]-resources[r]);
  w=fund(w);p=w.researchProjects.at(-1)!;expect(p.contributions.length).toBeGreaterThan(1);expect(p.contributedResources).toEqual({food,wood,stone,gold});for(const r of resourceKeys)expect(before.reduce((n,c)=>n+c[r],0)-w.cities.reduce((n,c)=>n+c.stock[r],0)).toBe(d.cost[r]);expect(w.logistics??[]).toHaveLength(0);
- const end=p.startedAt!+Math.round(hours*H*.79);expect(advanceFormal(w,end-1).world.factions[0].techIds).not.toContain(id);const loaded=(await decodeSave(await encodeSave(w))).world,t=advanceFormal(w,end);expect(advanceFormal(loaded,end)).toEqual(t);w=t.world;expect(w.factions[0].techIds.filter(t=>t===id)).toHaveLength(1);expect(w.factions[0].researchQueue).toBeNull();expect(completeResearch(w,{type:'research.complete',id:p.completionEventId!,projectId:p.projectId,at:end})).toEqual([]);
+ const end=p.startedAt!+Math.round(hours*H*.79);expect(advanceFormal(w,end-1).world.factions[0].techIds).not.toContain(id);const loaded=(await decodeSave(await encodeSave(w))).world,t=advanceFormal(w,end);expect(gameTransition(advanceFormal(loaded,end))).toEqual(gameTransition(t));w=t.world;expect(w.factions[0].techIds.filter(t=>t===id)).toHaveLength(1);expect(w.factions[0].researchQueue).toBeNull();expect(completeResearch(w,{type:'research.complete',id:p.completionEventId!,projectId:p.projectId,at:end})).toEqual([]);
 });
 it('B9-4D all 15 modern technologies stay locked for partial qualification; other faction or empire member cannot contribute',()=>{
  let w=ready(),c=w.cities[0];w.factions[0].modernQualification='none';w.factions[0].reverseEngineering=['modern.militia','modern.knight'];for(const [id] of rows)reject(w,{type:'research.start',cityId:c.id,techId:id});w.factions[0].modernQualification='full';w=issue(w,{type:'research.start',cityId:c.id,techId:rows[0][0]}).world;const p=w.researchProjects[0],cmd=order(w,{type:'research.contribute',cityId:w.cities[1].id,projectId:p.projectId,resources:{food:1,wood:0,stone:0,gold:0}},'foreign-research',w.factions[1].id);expect(submitFormalOrder(w,cmd).ack?.status).toBe('rejected');

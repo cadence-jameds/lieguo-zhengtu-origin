@@ -8,7 +8,8 @@ import {cityId} from './ids';
 import {logisticsAvailable,logisticsReserve} from './logisticsAllocation';
 import {zeroResources,type FormalWorld} from './model';
 import {EventScheduler} from './scheduler';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {runAutoLogistics} from './autoLogistics';
 const cargo=(food:number)=>({food,wood:0,stone:0,gold:0});
 function setup(){const w=wonderWorld(false),c=w.cities[0],d=w.cities[1];w.factions[0].techIds.push('logistics.auto');c.stock=cargo(20000);d.stock=zeroResources();c.fields=[];d.fields=[];return w;}

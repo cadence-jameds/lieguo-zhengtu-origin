@@ -1,3 +1,4 @@
+import {commandHistory} from './commandLedger';
 import type {FormalCity,FormalCommand,FormalEvent,FormalOrder,FormalWorld,Resources} from './model';
 import {resourceKeys,zeroResources} from './model';
 import type {CityId,FactionId,EventId} from './ids';
@@ -24,6 +25,6 @@ export function handleGovernance(w:FormalWorld,e:FormalEvent,s:EventScheduler,su
  const agent=w.autonomy?.agents.find(a=>a.factionId===g!.ownerFactionId)??({factionId:g.ownerFactionId,traits:traitsFor(w.seed,g.ownerFactionId),decisions:g.decisions,nextAt:0,eventId:null,active:true,budgetPercent:100,lastWarAt:0,memory:[],intel:[]} satisfies Agent);
  const preference=g.policy,spent=resourceKeys.reduce((n,r)=>n+g!.spent[r],0),choices=preference==='reserve'?[]:economicChoices(w,c,agent).filter(q=>resourceKeys.reduce((n,r)=>n+q.cost[r],0)+spent<=g!.budget&&resourceKeys.every(r=>q.cost[r]<=Math.max(0,c.stock[r]-g!.reserve))).sort((a,b)=>{const score=(q:typeof a)=>q.score+(preference===q.category?3:0);return score(b)-score(a)||(JSON.stringify(a.command)<JSON.stringify(b.command)?-1:1);});
  const choice=choices[0];if(!choice){g.blocked=preference==='reserve'?'資源儲備方針：保留庫存':'等待前置、資源或本世界小時預算';return[];}
- const before=w.commandReceipts.length;const reports=submitAutonomous(w,s,e,g.ownerFactionId,[choice.command],submit);g=w.governors!.find(t=>t.cityId===c.id)!;if(w.commandReceipts.length>before){for(const r of resourceKeys)g.spent[r]+=choice.cost[r];g.blocked='已下達正式'+choice.category+'命令';}else g.blocked='正式命令未接受；沒有扣款';return reports;
+ const before=commandHistory(w).length;const reports=submitAutonomous(w,s,e,g.ownerFactionId,[choice.command],submit);g=w.governors!.find(t=>t.cityId===c.id)!;if(commandHistory(w).length>before){for(const r of resourceKeys)g.spent[r]+=choice.cost[r];g.blocked='已下達正式'+choice.category+'命令';}else g.blocked='正式命令未接受；沒有扣款';return reports;
 }
 export function supplyDecision(w:FormalWorld,c:FormalCity):FormalCommand|undefined{if(buildingLevel(c,'market')<1||c.stock.food<1200||(w.logistics??[]).some(t=>t.sourceCityId===c.id))return;const target=spatial(w).owned(c.ownerFactionId).find(n=>n.id!==c.id&&n.stock.food<200&&storageCapacity(n)-n.stock.food-(n.economy?.reservedIncoming.food??0)>=100);if(!target)return;const food=Math.floor(Math.min(1000,c.stock.food-600,storageCapacity(target)-target.stock.food-(target.economy?.reservedIncoming.food??0)));return{type:'logistics.dispatch',cityId:c.id,destinationCityId:target.id,resources:{...zeroResources(),food}};}

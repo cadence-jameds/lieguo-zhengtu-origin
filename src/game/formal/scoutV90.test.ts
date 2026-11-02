@@ -1,10 +1,12 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {describe,it,expect} from 'vitest';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {battlefield,dispatch,arrive,issue} from './combatTestSupport';
 import {build,order} from './developmentTestSupport';
 import {advanceFormal,submitFormalOrder} from './reducer';
-import {decodeSave,encodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {empireId} from './ids';
 import {invalidateSpatial} from './spatial';
 import {citySnapshot} from './economy';
@@ -19,7 +21,7 @@ describe('v90 city single scouting snapshot',()=>{
    let w=setup();w.factions[1].empireId=w.factions[2].empireId=empireId('scout-allies');w.cities[2].military!.units={knight:2};w=arrive(dispatch(w,'reinforce',{knight:2},2,1).world).world;
    w=await store.start(w);let t=issue(w,{type:'army.dispatch',cityId:w.cities[0].id,mission:'scout',target:{kind:'city',cityId:w.cities[1].id},units:{scout:10}});w=await store.save(t.world,t.reports,w.revision);
    const scout=w.armies.find(a=>a.mission==='scout')!,at=scout.arrivalAt!,stock=citySnapshot({...w,time:at},w.cities[1].id)!.stock;
-   expect(scout.scoutMode).toBeUndefined();expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+   expect(scout.scoutMode).toBeUndefined();expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
    t=arrive(w);expect(t.reports).toEqual([]);w=await store.save(t.world,t.reports,w.revision);const returning=w.armies.find(a=>a.mission==='scout')!,intel=structuredClone(returning.pendingIntel!);
    expect(intel).toMatchObject({observedAt:at,resources:stock,garrison:{scout:4,militia:30,archer:3},units:{scout:4,militia:30,archer:3,knight:2},reinforcements:[{ownerFactionId:w.factions[2].id,originCityId:w.cities[2].id,units:{knight:2}}],wallLevel:7,defenses:{castle:2,'bunker.0':3}});
    expect(Object.keys(intel).sort()).toEqual(['observedAt','observedRealAt','cityId','units','resources','garrison','reinforcements','wallLevel','defenses'].sort());expect(intel.observedRealAt).toBeGreaterThan(0);expect(returning.units!.scout).toBe(8);

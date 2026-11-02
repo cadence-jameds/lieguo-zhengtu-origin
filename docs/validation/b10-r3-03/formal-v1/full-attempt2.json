@@ -1,0 +1,54 @@
+{
+  "sourceAnchor": "cf7bd1c",
+  "node": "22.23.4",
+  "cpuQuota": "2 CPUs",
+  "heapLimitBytes": 2197815296,
+  "mode": "full isolated, maxWorkers=2; all original deadlines retained",
+  "passed": 2338,
+  "failed": 6,
+  "skipped": 12,
+  "failures": [
+    {
+      "file": "campaignArchive.test.ts",
+      "test": "isolated legacy saves alone permits preservation instead of a permanent update dead end",
+      "reason": "AssertionError: expected 'incompatible' to be 'historical' // Object.is equality",
+      "durationMs": 25.75030499999997
+    },
+    {
+      "file": "campaignArchive.test.ts",
+      "test": "isolated legacy backups alone permits preservation instead of a permanent update dead end",
+      "reason": "AssertionError: expected 'stored' to be 'historical' // Object.is equality",
+      "durationMs": 3.1641720000000078
+    },
+    {
+      "file": "campaignArchive.test.ts",
+      "test": "isolated legacy BattleReports alone permits preservation instead of a permanent update dead end",
+      "reason": "AssertionError: expected 'stored' to be 'historical' // Object.is equality",
+      "durationMs": 2.303633999999988
+    },
+    {
+      "file": "campaignArchive.test.ts",
+      "test": "an explicitly empty current database and legacy authority-only data allow preservation",
+      "reason": "AssertionError: expected 'stored' to be 'historical' // Object.is equality",
+      "durationMs": 3.569014999999979
+    },
+    {
+      "file": "persistence.test.ts",
+      "test": "150000 valid receipts survive start, import and Recovery without an argument-count limit",
+      "reason": "Error: Test timed out in 120000ms.",
+      "durationMs": 120027.224179
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+      "reason": "Error: Test timed out in 30000ms.",
+      "durationMs": 37097.208558
+    }
+  ],
+  "suiteErrors": [
+    {
+      "file": "breakthroughB92.test.ts",
+      "reason": "Hook timed out in 240000ms."
+    }
+  ]
+}

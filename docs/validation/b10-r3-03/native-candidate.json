@@ -1,0 +1,26 @@
+{
+  "chromium": "154.0.8037.57",
+  "timestamp": "2026-11-01T16:47:25.127Z",
+  "scope": "Inactive synthetic candidate only; not Formal T2, Runtime Worker, migration or real quota exhaustion",
+  "nativeIndexedDB": true,
+  "checks": [
+    "injected segment-write rejects",
+    "native abort leaves all tables empty: segment-write",
+    "injected index-write rejects",
+    "native abort leaves all tables empty: index-write",
+    "injected manifest-write rejects",
+    "native abort leaves all tables empty: manifest-write",
+    "injected marker-write rejects",
+    "native abort leaves all tables empty: marker-write",
+    "injected head-write rejects",
+    "native abort leaves all tables empty: head-write",
+    "close/reopen retains identity",
+    "lost notification resend is idempotent",
+    "stale root CAS rejects",
+    "verified divergent prefix rejects despite matching version and caller CAS",
+    "current projection follows Recovery candidate",
+    "historic root retains original projection",
+    "missing segment rejects",
+    "production namespace is blocked"
+  ]
+}

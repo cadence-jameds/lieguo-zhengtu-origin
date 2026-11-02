@@ -1,3 +1,5 @@
+import {OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
+import {commandHistory,projectWorld,findReceipt,normalizeOutcomeRevisions} from './formal/commandLedger';
 import {acquireWriter,writerContext,receiveCommand,commandStatus,pendingCommands,commandPage,finishCommand,noteCommandFailure} from './persistence';
 import {captureIntent,revalidateInbox,terminalCommand,confirmationAck,retryableStorageError,type InboxCommand,type WriterContext,type CommandIntent} from './durableCommands';
 import {worldPaused} from './formal/extinction';
@@ -34,7 +36,7 @@ const awayBoundaries=new WeakMap<RuntimeRequest,{target:number;wallAt:number}>()
 let anchor=performance.now(),anchorTime=0,lastSavedAt=anchor,retryAt=0,passiveRevisionBase=0;
 let foregroundFence:number|undefined;
 let patchMode=false,lastPublished:FormalWorld|null=null;
-const post=(value:unknown)=>{try{self.postMessage(value);}catch{/* T3 notification loss is recovered by durable query/reload. */}};
+const post=(value:unknown)=>{try{const v=value as {world?:FormalWorld};if(v?.world?.ledger)value={...v,world:projectWorld(v.world)};self.postMessage(value);}catch{/* T3 notification loss is recovered by durable query/reload. */}};
 const clock=()=>({campaignId:world?.campaignId,time:away?(world?.time??0):targetTime(),speed:world?effectiveSpeed(world):1,running:!away&&!!world&&!worldPaused(world)});
 const state=()=>{const data={type:'state',clock:clock(),passiveRevisionBase,branch:writer?.branch};if(patchMode&&world&&lastPublished?.campaignId===world.campaignId)post({...data,patch:worldPatch(lastPublished,world)});else post({...data,world});lastPublished=world;};
 const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;lastPublished=null;};
@@ -110,15 +112,15 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
   row=await commandStatus(row.campaignId,row.commandId)??row;
   if(terminalCommand(row)){post({type:'commandStatus',row});if(row.ack)post({type:'commandAck',ack:row.ack});state();return;}
    if(!world)throw new Error('請先建立正式世界。');
-   if(row.branch!==writer?.branch)throw new Error('戰役分支已切換，請重新確認原始操作。');
-   if(world.commandReceipts.some(c=>c.commandId===row.commandId)){
-    const ack=submitFormalOrder(world,row.order).ack!;await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});state();return;
+   if(row.branch!==writer?.branch||row.lastError==='戰役分支或玩家操作已變更，請重新確認原始操作。'){const ack=confirmationAck(row,world.revision);world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});state();return;}
+   if(findReceipt(world,row.commandId)){
+    const ack=submitFormalOrder(world,row.order).ack!;world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});state();return;
    }
    let order=revalidateInbox(world,row);
    if(Date.now()>=row.deadline)order=undefined;
    if(!order){
     const ack=confirmationAck(row,world.revision,Date.now()>=row.deadline?'命令等待逾時，請重新確認原始操作。':undefined);
-    await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});return;
+    world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});return;
    }
    let admission=world,caughtUp=false;const catchupReports:FormalReport[]=[];
    const target=targetTime();
@@ -132,8 +134,8 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
      order=revalidateInbox(admission,check)!;
      if(!order){
       const ack=confirmationAck(row,world.revision+1);admission.revision=world.revision+1;
-      for(let i=world.commandReceipts.length;i<admission.commandReceipts.length;i++)admission.commandReceipts[i].committedRevision=admission.revision;
-      world=await save(admission,catchupReports,world.revision,undefined,{row,ack});passiveRevisionBase=world.revision;
+      for(let i=commandHistory(world).length;i<commandHistory(admission).length;i++)commandHistory(admission)[i].committedRevision=admission.revision;
+      normalizeOutcomeRevisions(admission);world=await save(admission,catchupReports,world.revision,undefined,{row,ack});passiveRevisionBase=world.revision;
       post({type:'commandAck',ack});state();return;
      }
     }else if(target>world.time){admission=advanceFormal(world,target).world;admission.revision=world.revision;}
@@ -141,12 +143,12 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
    const result=submitFormalOrder(admission,order),ack=result.ack!;
    if(ack.status==='committed'||caughtUp){
     result.world.revision=world.revision+1;
-    for(let i=world.commandReceipts.length;i<result.world.commandReceipts.length;i++)result.world.commandReceipts[i].committedRevision=Math.min(result.world.commandReceipts[i].committedRevision,result.world.revision);
-    ack.revision=result.world.revision;
+    for(let i=commandHistory(world).length;i<commandHistory(result.world).length;i++)commandHistory(result.world)[i].committedRevision=Math.min(commandHistory(result.world)[i].committedRevision,result.world.revision);
+    normalizeOutcomeRevisions(result.world);ack.revision=result.world.revision;
     world=await save(result.world,[...catchupReports,...result.reports],world.revision,undefined,{row,ack});
     if(['developer.configure','campaign.configure','player.rebirth','player.end'].includes(order.payload.type)||worldPaused(world))reanchor();
     lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;
-   }else await finishCommand(row,ack,world.revision);
+   }else world=await finishCommand(row,ack,world.revision);
    // T3 cannot undo a committed T2, including a failed postMessage/notification.
    try{post({type:'commandAck',ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();}catch{/* Durable query/reload returns the exact result. */}
    return;
@@ -155,11 +157,12 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
    const saved=await commandStatus(row.campaignId,row.commandId).catch(()=>undefined);
    if(saved&&terminalCommand(saved)){if(saved.ack)post({type:'commandAck',ack:saved.ack});return;}
    const text=error instanceof Error?error.message:'正式提交失敗。';
-   let failed:InboxCommand;
+   let failed:InboxCommand&{committedWorld?:FormalWorld};
    try{failed=await noteCommandFailure(row,text,retryableStorageError(error));}
    catch{
     post({type:'commandBlocked',commandId:row.commandId,text:'無法保存命令結果；原持久命令保留。請檢查儲存空間後重新載入並查詢。'});state();return;
    }
+   if(failed.committedWorld)world=failed.committedWorld;
    post({type:'commandStatus',row:failed});
    if(terminalCommand(failed)){if(failed.ack)post({type:'commandAck',ack:failed.ack});state();return;}
    // At most three attempts, bounded by a durable wall-clock deadline. The
@@ -175,7 +178,7 @@ async function runRequest(r:RuntimeRequest){
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
   else if(r.type==='reportPage'||r.type==='reportStatus'||r.type==='reportAction')post({type:'notice',text:'戰報操作暫時失敗，請重試。'});
   else if(r.type==='cityIntel')post({type:'cityIntel',queryId:r.queryId,error:text});
-  else post({type:'error',text,requestId:r.requestId,...(text==='本次更新調整戰役時間與離線推進規則，舊版戰役無法繼續使用，請建立新戰役。'?{legacyAvailable:true}:{})});
+  else post({type:'error',text,requestId:r.requestId,...(text===OLD_CAMPAIGN_MESSAGE?{legacyAvailable:true}:{})});
   // Failed transitions carry the prior world; failed load remains a visible error.
   if(r.type==='command')state();
  }finally{if(r.requestId)post({type:'requestDone',requestId:r.requestId});}

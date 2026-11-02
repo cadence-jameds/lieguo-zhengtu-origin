@@ -1,3 +1,7 @@
+import {commandHistory,pendingHistory,worldLedger,findReceipt,bindLedger,cachedLedger,emptyVerifiedLedger,prepareVerifiedLedger,verifyLedgerArchive,type VerifiedLedger,type OriginalResult,normalizeOutcomeRevisions} from './formal/commandLedger';
+import {cloneWorldDraft} from './formal/worldDraft';
+import {ledgerStores,ledgerTables,ledgerIdentityRange,readLedger,readLedgerArchive,writeLedger,publishLedgerHead,resultFromReceipt,archiveFromBundle,type LedgerBundle} from './ledgerStore';
+import {validateFormalWorld} from './formal/schema';
 import {commandFingerprint,confirmationAck,terminalCommand,resultState,WriterConflict,RevisionConflict,COMMAND_TTL,MAX_COMMAND_ATTEMPTS,type InboxCommand,type CommandIntent,type WriterContext} from './durableCommands';
 import {worldPaused} from './formal/extinction';
 import {growthTaskSchema} from './formal/growthTaskSchema';
@@ -13,46 +17,49 @@ import {z} from 'zod';
 import {isMissionArmy,type CityIntel,type BattleReportPayload} from './formal/combatModel';
 import type {CampaignId} from './formal/ids';
 import type {CommandAck,FormalOrder,CommandReceipt,FormalReport,FormalWorld} from './formal/model';
-import {orderSchema,receiptSchema} from './formal/schema';
+import {orderSchema} from './formal/schema';
 import {canonicalJSON} from './formal/canonical';
-import {OLD_CAMPAIGN_MESSAGE,assertCampaignCompatibility,decodeSave,encodeSave,validateReportHistory,type FormalEnvelope} from './formal/saveCodec';
-import {FORMAL_DB_NAME,LEGACY_FORMAL_DB_NAME} from './formal/versions';
+import {OLD_CAMPAIGN_MESSAGE,assertCampaignCompatibility,decodeSave,encodeSave,validateReportHistory,sealTransport,type FormalEnvelope} from './formal/saveCodec';
+import {FORMAL_DB_NAME,LEGACY_FORMAL_DB_NAME,RETIRED_FORMAL_DB_NAME} from './formal/versions';
 export {decodeSave,encodeSave} from './formal/saveCodec';
 /** Presentation timestamps are captured while the event's real clock anchor is known. */
 function stampBattle(p:BattleReportPayload,real:(at:number)=>number){p.realResolvedAt??=real(p.resolvedAt);if(p.intel)p.intel.observedRealAt??=real(p.intel.observedAt);}
 function stampPending(w:FormalWorld,real:(at:number)=>number){for(const a of w.armies)if(isMissionArmy(a)){if(a.pendingIntel)a.pendingIntel.observedRealAt??=real(a.pendingIntel.observedAt);if(a.pendingReport)stampBattle(a.pendingReport,real);}}
-export type FailurePoint='report-write'|'history-modified'|'backup-write'|'world-write'|'authority-write'|'inbox-write'|'result-write'|'writer-write'|'metadata-write'|'branch-write';
+export type FailurePoint='report-write'|'history-modified'|'backup-write'|'world-write'|'authority-write'|'inbox-write'|'result-write'|'writer-write'|'metadata-write'|'branch-write'|'ledger-segment-write'|'ledger-result-write'|'ledger-index-write'|'ledger-manifest-write'|'ledger-head-write';
 type RuntimeMeta={id:'runtime';writerEpoch:number;branch:number;foregroundRevision?:number;campaignId?:CampaignId;playerFactionId?:FormalWorld['playerFactionId'];revision?:number};
+function mergeGrowth(current:GrowthTaskState|undefined,prior:GrowthTaskState|undefined){if(!current)return prior&&structuredClone(prior);if(!prior)return structuredClone(current);const next=structuredClone(current);next.startedAt=Math.min(next.startedAt,prior.startedAt);next.recordedThrough=Math.max(next.recordedThrough,prior.recordedThrough);for(const [k,n]of Object.entries(prior.facts))next.facts[k]=Math.max(next.facts[k]??0,n);Object.assign(next.completed,prior.completed);Object.assign(next.claimed,structuredClone(prior.claimed));next.settledCities=[...new Set([...next.settledCities,...prior.settledCities])];next.autoShipments=[...new Set([...next.autoShipments,...prior.autoShipments])];return next;}
+function originalCommand(row:InboxCommand,ack:CommandAck):OriginalResult{if(row.originalResult)return row.originalResult;const state=resultState(ack);return {commandId:row.commandId,issuerId:row.issuerId,fingerprint:row.fingerprint,state:state==='committed'?'committed':state==='needs-confirmation'?'needs-confirmation':'rejected',ack:{...structuredClone(ack),...(state==='needs-confirmation'?{requiresConfirmation:true as const}:{})},order:structuredClone(row.order)};}
 type CommandCommit={row:InboxCommand;ack:CommandAck};
 type WorldRow={id:'current';kind:'world';at:number;data:FormalEnvelope};
-type CampaignAuthority={campaignId:CampaignId;receipts:CommandReceipt[];growthTasks?:GrowthTaskState};
-type AuthorityRow={id:'authority';kind:'authority';revision:number;sequences:FormalWorld['sequences'];campaigns:CampaignAuthority[]};
+type CampaignAuthority={campaignId:CampaignId;ledgerRoot:string;growthTasks?:GrowthTaskState};
+type AuthorityRow={id:'authority';kind:'authority';activeCampaignId?:CampaignId;worldChecksum?:string;revision:number;sequences:FormalWorld['sequences'];campaigns:CampaignAuthority[]};
 /** Both ledgers are strict receiptSchema records; compare every field without serializing history twice. */
 const sameReceipt=(a:CommandReceipt,b:CommandReceipt)=>a.commandId===b.commandId&&a.issuerId===b.issuerId&&a.fingerprint===b.fingerprint&&a.committedRevision===b.committedRevision&&a.disposition===b.disposition;
 export type RecoveryRow={id?:number;at:number;label:string;campaignId:CampaignId;gameTime:number;reportCursor:number;data:FormalEnvelope};
 /** Pure candidate validation: no database access, history changes, or authority writes. */
-export async function validateCheckpointCandidate(checkpoint:RecoveryRow):Promise<FormalWorld>{
- const {world}=await decodeSave(checkpoint.data);
+export async function validateCheckpointCandidate(checkpoint:RecoveryRow,archive?:import('./formal/commandLedger').LedgerArchive|VerifiedLedger):Promise<FormalWorld>{
+ const {world}=await decodeSave(checkpoint.data,archive);
  if(checkpoint.gameTime!==world.time||checkpoint.reportCursor!==world.sequences.report||checkpoint.campaignId!==world.campaignId)throw new Error('回復點游標不一致。');
  return world;
 }
 type ReportRow=FormalReport&{key:string};
 export type ReportFilter='all'|'battle'|'diplomacy'|'chronicle';
 const reportMatches=(r:FormalReport,filter:ReportFilter)=>filter==='all'||(filter==='battle'?r.category==='battle'||r.category==='scout':filter==='diplomacy'?r.category==='diplomacy':r.category==='system'||r.category==='research');
-const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),receipts:z.array(receiptSchema),growthTasks:growthTaskSchema.optional()}).strict())}).strict();
+const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),activeCampaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)).optional(),worldChecksum:z.string().regex(/^[0-9a-f]{64}$/).optional(),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),ledgerRoot:z.string().regex(/^[0-9a-f]{64}$/),growthTasks:growthTaskSchema.optional()}).strict())}).strict();
 export class FormalDatabase extends Dexie {
  Inbox!:Table<InboxCommand,number>;RuntimeMeta!:Table<RuntimeMeta,string>;
  saves!:Table<WorldRow|AuthorityRow,string>;backups!:Table<RecoveryRow,number>;BattleReports!:Table<ReportRow,string>;
  constructor(suffix='',databaseName:string=FORMAL_DB_NAME){
   if(suffix&&!/^[A-Za-z0-9_.-]+$/.test(suffix))throw new Error('Invalid formal database suffix');
   super(databaseName+(suffix?'-'+suffix:''));
-  this.version(1).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]'});
-  // Additive v1→v2: existing worlds, authority, reports and Recovery are untouched.
-  this.version(2).stores({Inbox:'++sequence,&[campaignId+commandId],[branch+state],state',RuntimeMeta:'id'});
+  this.version(3).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]',Inbox:'++sequence,&[campaignId+commandId],[branch+state],state,campaignId',RuntimeMeta:'id',StorageMeta:'id',...ledgerStores});
+  this.on('populate',tx=>tx.table('StorageMeta').add({id:'format',format:'formal-command-ledger-v1'}));
+  this.on('ready',async()=>{if((await this.table('StorageMeta').get('format'))?.format!=='formal-command-ledger-v1')throw Error(OLD_CAMPAIGN_MESSAGE);});
+
  }
 }
 function reconcileReceipts(target:FormalWorld,prior:readonly CommandReceipt[]):CommandReceipt[]{
- const entries=new Map(target.commandReceipts.map(r=>[r.commandId,structuredClone(r)]));
+ const entries=new Map(commandHistory(target).map(r=>[r.commandId,structuredClone(r)]));
  for(const old of prior){const chosen=entries.get(old.commandId);
   if(chosen&&(chosen.issuerId!==old.issuerId||chosen.fingerprint!==old.fingerprint))throw new Error('CommandId conflict in imported authority.');
   if(!chosen)entries.set(old.commandId,{...old,disposition:'rolled-back'});
@@ -63,109 +70,183 @@ const reportKey=(r:FormalReport)=>r.campaignId+'/'+r.id;
 /** All world/report/history/Recovery/authority changes share exactly one IDB transaction. */
 export class FormalPersistence {
  readonly db:FormalDatabase;
- constructor(options:{suffix?:string;fault?:(point:FailurePoint)=>void}={}){this.db=new FormalDatabase(options.suffix);this.fault=options.fault;}
+ private suffix:string;
+ constructor(options:{suffix?:string;fault?:(point:FailurePoint)=>void}={}){this.db=new FormalDatabase(options.suffix);this.suffix=options.suffix??'';this.fault=options.fault;}
  private fault?: (point:FailurePoint)=>void;
  private writerEpoch:number|undefined;
+ private damagedRoots=new Set<string>();
  private async meta(){return await this.db.RuntimeMeta.get('runtime')??{id:'runtime' as const,writerEpoch:0,branch:0};}
  private assertWriter(meta:RuntimeMeta){if(meta.writerEpoch!==(this.writerEpoch??0))throw new WriterConflict();}
  /** Called only by the Worker created under the page's exclusive Web Lock. */
  async acquireWriter():Promise<WriterContext>{
-  const meta=await this.db.transaction('rw',this.db.RuntimeMeta,this.db.saves,async()=>{const m=await this.meta();if(m.campaignId===undefined){const current=await this.db.saves.get('current');const snapshot=current?.kind==='world'?current.data?.snapshot:undefined;if(snapshot&&typeof snapshot.campaignId==='string'&&typeof snapshot.playerFactionId==='string'&&Number.isSafeInteger(snapshot.revision)&&snapshot.revision>=0){m.campaignId=snapshot.campaignId;m.playerFactionId=snapshot.playerFactionId;m.revision=snapshot.revision;}}m.writerEpoch++;await this.db.RuntimeMeta.put(m);this.fault?.('writer-write');return m;});
+  const meta=await this.db.transaction('rw',this.db.RuntimeMeta,this.db.saves,async()=>{const m=await this.meta();if(m.campaignId===undefined){const current=await this.db.saves.get('current');const snapshot=current?.kind==='world'?current.data?.snapshot:undefined;if(snapshot&&typeof snapshot.campaignId==='string'&&typeof snapshot.playerFactionId==='string'&&Number.isSafeInteger(snapshot.revision)&&snapshot.revision>=0){m.campaignId=snapshot.campaignId;m.playerFactionId=snapshot.playerFactionId;m.revision=snapshot.revision;}}m.writerEpoch++;if(!Number.isSafeInteger(m.writerEpoch))throw Error('寫入版本超出安全範圍。');await this.db.RuntimeMeta.put(m);this.fault?.('writer-write');return m;});
   this.writerEpoch=meta.writerEpoch;return meta;
  }
  async writerContext():Promise<WriterContext>{const m=await this.meta();this.assertWriter(m);return m;}
  async receiveCommand(order:FormalOrder,intent:CommandIntent={},branch?:number,now=Date.now()):Promise<InboxCommand>{
   // Strict parsing occurs before T1; never store mutable caller-owned payloads.
   order=orderSchema.parse(order);
-  return this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,async()=>{
+  return this.db.transaction('rw',[this.db.RuntimeMeta,this.db.Inbox,this.db.saves,this.db.table('LedgerIdentity'),this.db.table('LedgerManifests'),this.db.table('LedgerHeads')],async()=>{
    const meta=await this.meta();this.assertWriter(meta);
    const fingerprint=commandFingerprint(order),old=await this.db.Inbox.where('[campaignId+commandId]').equals([order.campaignId,order.commandId]).first();
    if(old){if(old.issuerId!==order.issuerId||old.fingerprint!==fingerprint)throw new Error('CommandId 已用於不同命令。');return old;}
+   const active=await this.authority(),current=await this.db.saves.get('current'),root=active.campaigns.find(c=>c.campaignId===order.campaignId)?.ledgerRoot;
+   if(active.activeCampaignId!==order.campaignId||current?.kind!=='world'||current.data.snapshot.ledger?.anchor.root!==root||current.data.checksum!==active.worldChecksum)throw Error('請先載入一致的戰役快照。');
+   const proof=root&&cachedLedger(root),header=root&&await this.db.table('LedgerManifests').get([order.campaignId,root]),head=await this.db.table('LedgerHeads').get(order.campaignId);if(!proof||!header||head?.root!==root||canonicalJSON(header.manifest)!==canonicalJSON(proof.manifest)||this.damagedRoots.has(root!))throw Error('請重新載入並驗證完整命令帳本。');
+   const identity=await this.db.table('LedgerIdentity').get([order.campaignId,order.commandId]),original=proof.result(order.commandId);if(!!identity!==!!original||identity&&(canonicalJSON(identity.original)!==canonicalJSON(original)||canonicalJSON(identity.receipt)!==canonicalJSON(proof.receipt(order.commandId))))throw Error('命令身份索引不一致，請重新載入恢復。');if(identity&&(identity.issuerId!==order.issuerId||identity.fingerprint!==fingerprint))throw Error('CommandId 已用於不同命令。');
    if(meta.campaignId!==order.campaignId||meta.playerFactionId!==order.issuerId)throw new Error('命令不屬於目前玩家戰役。');
-   const row:InboxCommand={...structuredClone(intent),campaignId:order.campaignId,commandId:order.commandId,issuerId:order.issuerId,order:structuredClone(order),fingerprint,originalRevision:order.expectedRevision,branch:branch??meta.branch,writerEpoch:meta.writerEpoch,state:'pending',createdAt:now,deadline:now+COMMAND_TTL,attempts:0,nextAttemptAt:0};
-   if(row.branch!==meta.branch||order.expectedRevision<(meta.foregroundRevision??0)){row.state='needs-confirmation';row.ack=confirmationAck(row,meta.revision??0,order.payload.type==='governance.set'?undefined:'戰役分支或玩家操作已變更，請重新確認原始操作。');}
+   const row:InboxCommand={...structuredClone(intent),campaignId:order.campaignId,commandId:order.commandId,issuerId:order.issuerId,order:structuredClone(order),fingerprint,originalRevision:order.expectedRevision,originalBranch:branch??meta.branch,branch:meta.branch,writerEpoch:meta.writerEpoch,state:'pending',createdAt:now,deadline:now+COMMAND_TTL,attempts:0,nextAttemptAt:0};
+   if(identity){row.originalResult=identity.original;row.state=identity.receipt?.disposition==='rolled-back'?'rolled-back':identity.original.state;row.ack=row.state==='rolled-back'?{commandId:order.commandId,status:'rolled-back',revision:meta.revision??0,originalRevision:identity.original.ack.revision}:structuredClone(identity.original.ack);}else if(row.originalBranch!==meta.branch||order.expectedRevision<(meta.foregroundRevision??0)){row.lastError='戰役分支或玩家操作已變更，請重新確認原始操作。';}
    row.sequence=await this.db.Inbox.add(row);this.fault?.('inbox-write');return row;
   });
  }
- async commandStatus(campaignId:FormalOrder['campaignId'],commandId:FormalOrder['commandId']){return this.db.Inbox.where('[campaignId+commandId]').equals([campaignId,commandId]).first();}
+ async commandStatus(campaignId:FormalOrder['campaignId'],commandId:FormalOrder['commandId']):Promise<InboxCommand|undefined>{
+  const row=await this.db.Inbox.where('[campaignId+commandId]').equals([campaignId,commandId]).first();if(!row)return;
+  const head=await this.db.table('LedgerHeads').get(campaignId);if(!head){if(terminalCommand(row))throw Error('終局命令缺少帳本證據。');return row;}
+  const proof=await this.ledger(campaignId,head.root),original=proof.result(commandId);if(!original){if(terminalCommand(row))throw Error('終局命令缺少原始結果。');return row;}
+  let state:InboxCommand['state'],ack:CommandAck,conflict:InboxCommand['conflict'];
+  if(original.issuerId!==row.issuerId||original.fingerprint!==row.fingerprint){state='rejected';ack=row.conflict?.issuerId===original.issuerId&&row.conflict.fingerprint===original.fingerprint&&row.conflict.ack.status==='rejected'?structuredClone(row.conflict.ack):{commandId,status:'rejected',revision:proof.manifest.worldRevision,reason:'CommandId 已用於不同命令。'};conflict={issuerId:original.issuerId,fingerprint:original.fingerprint,ack};}
+  else if(original.state==='committed'){const receipt=proof.receipt(commandId);if(!receipt)throw Error('提交結果缺少收據。');state=receipt.disposition==='applied'?'committed':'rolled-back';ack=receipt.disposition==='applied'?structuredClone(original.ack):{commandId,status:'rolled-back',revision:proof.manifest.branchRevision,originalRevision:original.ack.revision,reason:'此命令已由回復點撤銷。'};}
+  else{state=original.state;ack=structuredClone(original.ack);}
+  const result={...row,state,ack,originalResult:conflict?undefined:original,conflict};
+  // T3 may repair only this display/query cache. The immutable outcome and head
+  // are already committed; cache quota/notification failure cannot undo them.
+  if(canonicalJSON([row.state,row.ack,row.originalResult,row.conflict])!==canonicalJSON([state,ack,result.originalResult,conflict]))try{await this.db.transaction('rw',[this.db.Inbox,this.db.RuntimeMeta,this.db.table('LedgerHeads')],async()=>{this.assertWriter(await this.meta());if((await this.db.table('LedgerHeads').get(campaignId))?.root!==head.root)return;const latest=await this.db.Inbox.get(row.sequence!);if(latest&&latest.issuerId===row.issuerId&&latest.fingerprint===row.fingerprint)await this.db.Inbox.put({...latest,state,ack,originalResult:result.originalResult,conflict});});}catch{/* Authoritative result remains queryable. */}
+  return result;
+ }
  async pendingCommands(){return this.db.Inbox.where('state').anyOf('pending','retryable').sortBy('sequence');}
  async commandPage(before=Number.MAX_SAFE_INTEGER){return this.db.Inbox.where('sequence').below(before).reverse().limit(100).toArray();}
  private async checkCommand(row:InboxCommand,meta:RuntimeMeta){
   this.assertWriter(meta);const stored=await this.db.Inbox.get(row.sequence!);
-  if(!stored||stored.fingerprint!==row.fingerprint||stored.issuerId!==row.issuerId)throw new Error('找不到一致的持久命令。');
+  if(!stored||stored.campaignId!==row.campaignId||stored.commandId!==row.commandId||stored.fingerprint!==row.fingerprint||stored.issuerId!==row.issuerId)throw new Error('找不到一致的持久命令。');
   if(stored.branch!==meta.branch)throw new WriterConflict();
   return stored;
  }
- private async writeResult(command:CommandCommit,meta:RuntimeMeta){
+ private async writeResult(command:CommandCommit,meta:RuntimeMeta,prior?:OriginalResult){
   const stored=await this.checkCommand(command.row,meta);
   if(terminalCommand(stored))throw new Error('命令已具有正式結果，請查詢原結果。');
-  if(command.ack.commandId!==stored.commandId||command.ack.revision!==(meta.revision??0))throw new Error('正式結果身分或 revision 不一致。');
-  await this.db.Inbox.put({...stored,state:resultState(command.ack),ack:structuredClone(command.ack),lastError:undefined});this.fault?.('result-write');
+  if(command.ack.commandId!==stored.commandId||command.ack.revision!==(meta.revision??0)&&(!prior||canonicalJSON(prior.ack)!==canonicalJSON(command.ack)))throw new Error('正式結果身分或 revision 不一致。');
+  const identity=await this.db.table('LedgerIdentity').get([stored.campaignId,stored.commandId]);
+  if(identity&&(identity.issuerId!==stored.issuerId||identity.fingerprint!==stored.fingerprint)){if(command.ack.status!=='rejected')throw Error('衝突意圖不可宣告成功。');const ack={commandId:stored.commandId,status:'rejected' as const,revision:meta.revision??0,reason:'CommandId 已用於不同命令。'};await this.db.Inbox.put({...stored,state:'rejected',ack,originalResult:undefined,conflict:{issuerId:identity.issuerId,fingerprint:identity.fingerprint,ack}});this.fault?.('result-write');return;}
+  await this.db.Inbox.put({...stored,attempts:Math.max(stored.attempts,command.row.attempts),state:resultState(command.ack),ack:structuredClone(command.ack),originalResult:identity?.original??stored.originalResult??originalCommand(stored,command.ack),lastError:undefined});this.fault?.('result-write');
  }
- async finishCommand(row:InboxCommand,ack:CommandAck,expectedRevision:number){
-  return this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,this.db.saves,async()=>{
-   const meta=await this.meta();this.assertWriter(meta);const authority=await this.authority();if(authority.revision!==expectedRevision)throw new RevisionConflict();
-   await this.writeResult({row,ack},meta);return ack;
+ private async ledger(campaignId:CampaignId,root:string){
+  const row=await this.db.table('LedgerManifests').get([campaignId,root]);if(!row||row.manifest.checksum!==root)throw Error('權威帳本版本遺失。');
+  const cached=cachedLedger(root);if(cached&&!this.damagedRoots.has(root)){if(canonicalJSON(cached.manifest)!==canonicalJSON(row.manifest)||canonicalJSON(cached.history.manifest)!==canonicalJSON(row.historyManifest))throw Error('權威帳本版本損毀。');return cached;}
+  const raw=await readLedgerArchive(this.db,campaignId,root);return Dexie.waitFor(verifyLedgerArchive(raw));
+ }
+ private async checkpoint(b:RecoveryRow){const a=b.data.snapshot.ledger?.anchor;if(!a)throw Error(OLD_CAMPAIGN_MESSAGE);return validateCheckpointCandidate(b,await readLedger(this.db,a.campaignId,a.root));}
+ async finishCommand(row:InboxCommand,ack:CommandAck,expectedRevision:number):Promise<FormalWorld>{
+  row=structuredClone(row);ack=structuredClone(ack);
+  return this.db.transaction('rw',[this.db.RuntimeMeta,this.db.Inbox,this.db.saves,...ledgerTables(this.db)],async()=>{
+   const meta=await this.meta(),stored=await this.checkCommand(row,meta);row={...stored,attempts:Math.max(stored.attempts,row.attempts)};const authority=await this.authority();if(authority.revision!==expectedRevision)throw new RevisionConflict();
+   const current=await this.db.saves.get('current');if(current?.kind!=='world'||current.data.snapshot.campaignId!==row.campaignId)throw new RevisionConflict();
+   const root=authority.campaigns.find(c=>c.campaignId===row.campaignId)?.ledgerRoot;if(!root||current.data.snapshot.ledger?.anchor.root!==root)throw Error('世界與權威帳本不一致。');
+   const base=await this.ledger(row.campaignId,root),w=validateFormalWorld(current.data.snapshot);
+   if(w.ledger!.anchor.worldRevision!==w.revision||w.ledger!.pending.length)throw Error('未提交帳本草稿。');
+   const original=base.result(row.commandId)??originalCommand(row,ack);
+   const ledger=await Dexie.waitFor(prepareVerifiedLedger(base,[],[original],w.revision,meta.branch,meta.writerEpoch));bindLedger(w,ledger);
+   const envelope=await Dexie.waitFor(encodeSave(w,undefined,false));
+   await writeLedger(this.db,ledger,base,[row.commandId],this.fault);await publishLedgerHead(this.db,ledger,this.fault);
+   await this.db.saves.put({...current,data:envelope});this.fault?.('world-write');
+   authority.campaigns.find(c=>c.campaignId===row.campaignId)!.ledgerRoot=ledger.manifest.checksum;authority.worldChecksum=envelope.checksum;
+   await this.db.saves.put(authority);this.fault?.('authority-write');
+   await this.writeResult({row,ack},meta,base.result(row.commandId));return envelope.snapshot;
   });
  }
- async noteCommandFailure(row:InboxCommand,error:string,retryable:boolean,now=Date.now()){
-  return this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,this.db.saves,async()=>{
-   const meta=await this.meta(),stored=await this.checkCommand(row,meta);if(terminalCommand(stored))return stored;
+ async noteCommandFailure(row:InboxCommand,error:string,retryable:boolean,now=Date.now()):Promise<InboxCommand&{committedWorld?:FormalWorld}>{
+  const result=await this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,this.db.saves,async()=>{
+   const meta=await this.meta(),stored=await this.checkCommand(row,meta);if(terminalCommand(stored))return {stored};
    stored.attempts++;stored.lastError=error;
-   if(retryable&&stored.attempts<MAX_COMMAND_ATTEMPTS&&now<stored.deadline){stored.state='retryable';stored.nextAttemptAt=now+250*2**(stored.attempts-1);}
-   else{stored.state='needs-confirmation';stored.ack=confirmationAck(stored,(await this.authority()).revision,'命令尚未提交：'+error+'；請重新載入並確認原始操作。');}
-   await this.db.Inbox.put(stored);return stored;
+   if(retryable&&stored.attempts<MAX_COMMAND_ATTEMPTS&&now<stored.deadline){stored.state='retryable';stored.nextAttemptAt=now+250*2**(stored.attempts-1);await this.db.Inbox.put(stored);return {stored};}
+   const revision=(await this.authority()).revision,ack=confirmationAck(stored,revision,'命令尚未提交：'+error+'；請重新載入並確認原始操作。');return {stored,ack,revision};
   });
+  if(!result.ack)return result.stored;
+  const world=await this.finishCommand(result.stored,result.ack,result.revision!),stored=(await this.commandStatus(row.campaignId,row.commandId))!;
+  Object.defineProperty(stored,'committedWorld',{value:world,enumerable:false});return stored;
  }
- private async switchInbox(meta:RuntimeMeta,world?:FormalWorld){
+ private async switchInbox(meta:RuntimeMeta,world?:FormalWorld,projection?:CommandReceipt[]){
   meta.branch++;meta.foregroundRevision=world?.revision??0;if(!world){delete meta.campaignId;delete meta.playerFactionId;meta.revision=0;}await this.db.RuntimeMeta.put(meta);
   // Branch changes are infrequent; no full Inbox scan on ordinary checkpoints.
-  const receipts=new Map(world?.commandReceipts.map(r=>[r.commandId,r] as const)??[]);
+  const receipts=new Map((projection??(world?Array.from(commandHistory(world)):[])).map(r=>[r.commandId,r] as const));
   await this.db.Inbox.toCollection().modify(row=>{
-   if(!terminalCommand(row)){row.state='needs-confirmation';row.ack=confirmationAck(row,world?.revision??0,'戰役分支已切換，舊命令未執行，請重新確認。');}
-   if(world&&row.campaignId===world.campaignId&&row.state==='committed'){
+   if(!terminalCommand(row)){row.state='needs-confirmation';row.ack=confirmationAck(row,world?.revision??0,'戰役分支已切換，舊命令未執行，請重新確認。');row.originalResult??=originalCommand(row,row.ack);}
+   if(world&&row.campaignId===world.campaignId&&(row.originalResult?.state==='committed'||row.state==='committed'||row.state==='rolled-back')){
     const r=receipts.get(row.commandId);
-    if(r?.disposition==='rolled-back'){row.state='rolled-back';row.ack={commandId:row.commandId,status:'rolled-back',revision:world.revision,originalRevision:r.committedRevision,reason:'此命令已由回復點撤銷。'};}
+    if(r?.disposition==='rolled-back'){row.state='rolled-back';row.ack={commandId:row.commandId,status:'rolled-back',revision:world.revision,originalRevision:r.committedRevision,reason:'此命令已由回復點撤銷。'};}else if(r?.disposition==='applied'){row.state='committed';row.ack=structuredClone(row.originalResult?.ack??{commandId:row.commandId,status:'committed',revision:r.committedRevision});}
    }
   });this.fault?.('branch-write');
  }
 
+ private async projectInbox(ledger:VerifiedLedger,revision:number){
+  await this.db.Inbox.where('campaignId').equals(ledger.manifest.campaignId).modify(row=>{
+   const original=ledger.result(row.commandId);if(!original||!terminalCommand(row))return;
+   if(original.issuerId!==row.issuerId||original.fingerprint!==row.fingerprint){const ack=row.conflict?.ack??{commandId:row.commandId,status:'rejected' as const,revision,reason:'CommandId 已用於不同命令。'};row.state='rejected';row.ack=ack;row.originalResult=undefined;row.conflict={issuerId:original.issuerId,fingerprint:original.fingerprint,ack};return;}
+   row.conflict=undefined;row.originalResult=original;if(original.state==='committed'){const r=ledger.receipt(row.commandId)!;row.state=r.disposition==='applied'?'committed':'rolled-back';row.ack=r.disposition==='applied'?structuredClone(original.ack):{commandId:row.commandId,status:'rolled-back',revision,originalRevision:original.ack.revision,reason:'此命令已由回復點撤銷。'};}else{row.state=original.state;row.ack=structuredClone(original.ack);}
+  });
+ }
+ private async advanceOtherLedgers(meta:RuntimeMeta,authority:AuthorityRow,revision:number,activeCampaign?:CampaignId,portable?:{snapshots:VerifiedLedger[];heads:{campaignId:string;root:string}[];growthAuthority:{campaignId:string;growthTasks?:GrowthTaskState}[]}){
+  const heads=await this.db.table('LedgerHeads').toArray(),campaigns=new Set([...heads.map(h=>h.campaignId as string),...authority.campaigns.map(c=>c.campaignId as string),...(portable?.heads.map(h=>h.campaignId)??[])]);
+  for(const campaign of [...campaigns].sort()){
+   if(campaign===activeCampaign)continue;
+   const held=authority.campaigns.find(c=>c.campaignId===campaign),root=held?.ledgerRoot??heads.find(h=>h.campaignId===campaign)?.root;
+   const old=root?await this.ledger(campaign as CampaignId,root):await Dexie.waitFor(emptyVerifiedLedger(campaign)),incomingRoot=portable?.heads.find(h=>h.campaignId===campaign)?.root,incoming=incomingRoot?portable!.snapshots.find(s=>s.manifest.checksum===incomingRoot):undefined;
+   const receipts:CommandReceipt[]=[],outcomes=new Map<string,OriginalResult>();
+   if(incoming){for(let i=0;i<incoming.count;i++){const r=incoming.at(i)!,prior=old.receipt(r.commandId);if(prior&&!sameReceipt({...r,disposition:prior.disposition},prior))throw Error('跨戰役命令身份衝突。');if(!prior)receipts.push(r);}for(const seg of incoming.results)for(const r of seg.records){const prior=old.result(r.commandId);if(prior&&canonicalJSON(prior)!==canonicalJSON(r))throw Error('跨戰役原始結果衝突。');if(!prior)outcomes.set(r.commandId,r);}}
+   for(const row of await this.db.Inbox.where('campaignId').equals(campaign).toArray())if(terminalCommand(row)&&!old.result(row.commandId)&&!outcomes.has(row.commandId)){if(!row.ack)throw Error('終局 Inbox 缺少結果。');outcomes.set(row.commandId,row.originalResult??originalCommand(row,row.ack));}
+   const next=await Dexie.waitFor(prepareVerifiedLedger(old,receipts,[...outcomes.values()],revision,meta.branch,meta.writerEpoch));
+   await writeLedger(this.db,next,root?old:undefined,[...receipts.map(r=>r.commandId),...outcomes.keys()],this.fault);await publishLedgerHead(this.db,next,this.fault);
+   const importedGrowth=portable?.growthAuthority.find(g=>g.campaignId===campaign)?.growthTasks;
+   authority.campaigns=authority.campaigns.filter(c=>c.campaignId!==campaign);authority.campaigns.push({campaignId:campaign as CampaignId,ledgerRoot:next.manifest.checksum,growthTasks:mergeGrowth(importedGrowth,held?.growthTasks)});
+   await this.projectInbox(next,revision);
+  }
+ }
  private async authority():Promise<AuthorityRow>{
   const row=await this.db.saves.get('authority');
   if(!row)return{id:'authority',kind:'authority',revision:0,sequences:{event:1,report:1,project:1},campaigns:[]};
   const a=authoritySchema.parse(row);
   if(new Set(a.campaigns.map(x=>x.campaignId)).size!==a.campaigns.length)throw new Error('Duplicate campaign authority');
-  for(const c of a.campaigns)if(new Set(c.receipts.map(r=>r.commandId)).size!==c.receipts.length||c.receipts.some(r=>r.committedRevision>a.revision))throw new Error('Invalid durable command authority');
   return a;
  }
- private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false,command?:CommandCommit):Promise<FormalWorld>{
+ private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false,command?:CommandCommit,portable?:{snapshots:VerifiedLedger[];heads:{campaignId:string;root:string}[];inbox:InboxCommand[];recovery:{at:number;label:string;data:FormalEnvelope}[];growthAuthority:{campaignId:string;growthTasks?:GrowthTaskState}[]}):Promise<FormalWorld>{
   // Final encodeSave validates the entire stamped candidate before any writes.
   // Avoid validating the same 2.8MB world twice in this transaction.
-  validateReportHistory(input,reportWrites);
+  input=validateFormalWorld(input);validateReportHistory(input,reportWrites);if(command)command=structuredClone(command);
   // No memory mutation; caller may switch its displayed world only after this resolves.
-  return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,this.db.Inbox,this.db.RuntimeMeta,async()=>{
-   const meta=await this.meta();this.assertWriter(meta);
+  const committed=await this.db.transaction('rw',[this.db.saves,this.db.backups,this.db.BattleReports,this.db.Inbox,this.db.RuntimeMeta,...ledgerTables(this.db)],async()=>{
+   const meta=await this.meta();this.assertWriter(meta);if(command)command.row=await this.checkCommand(command.row,meta);
    const authority=await this.authority(),current=await this.db.saves.get('current');
    if(expectedRevision!==undefined&&authority.revision!==expectedRevision)throw new RevisionConflict();
+   if(mode==='save'&&current?.kind==='world'){const held=authority.campaigns.find(c=>c.campaignId===current.data.snapshot.campaignId),head=await this.db.table('LedgerHeads').get(current.data.snapshot.campaignId);if(current.data.snapshot.revision!==authority.revision||current.data.checksum!==authority.worldChecksum||held?.ledgerRoot!==current.data.snapshot.ledger?.anchor.root||head?.root!==held?.ledgerRoot)throw Error('世界與 Authority 版本不一致。');}
    // Ordinary saves only stamp pending army reports and sanitize shared AI intel.
    // Copy those mutable branches now; encodeSave still strictly validates and
    // deep-copies the entire final candidate before checksum or any DB writes.
    // Transitions/AI activation retain the general full draft.
-   let w=sanitizeSharedKnowledge(mode==='save'&&!activateAI?{...input,...(input.growthTasks?{growthTasks:structuredClone(input.growthTasks)}:{}),armies:structuredClone(input.armies),...(input.autonomy?{autonomy:structuredClone(input.autonomy)}:{})}:structuredClone(input));
-   const prior=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.receipts??[];
+   let w=sanitizeSharedKnowledge(cloneWorldDraft(input));
+   const priorRoot=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.ledgerRoot??(await this.db.table('LedgerHeads').get(w.campaignId))?.root;let base=priorRoot?await this.ledger(w.campaignId,priorRoot):portable?.snapshots.find(s=>s.manifest.checksum===input.ledger?.anchor.root)??await Dexie.waitFor(emptyVerifiedLedger(w.campaignId));
+   if(mode==='save'&&input.ledger&&input.ledger.anchor.root!==base.manifest.checksum)throw new RevisionConflict();
+   if(portable){
+    for(const snap of portable.snapshots)await writeLedger(this.db,snap,undefined,[],this.fault);
+    for(const imported of portable.inbox){const old=await this.db.Inbox.where('[campaignId+commandId]').equals([imported.campaignId,imported.commandId]).first();if(old&&(old.issuerId!==imported.issuerId||old.fingerprint!==imported.fingerprint))throw Error('匯入 Inbox 身份衝突。');if(!old){const copy={...imported};delete copy.sequence;await this.db.Inbox.add(copy);}}
+    meta.branch=Math.max(meta.branch,...portable.snapshots.map(s=>s.manifest.branch));
+    if(portable.snapshots.some(s=>s.manifest.writerEpoch>meta.writerEpoch))meta.writerEpoch=Math.max(...portable.snapshots.map(s=>s.manifest.writerEpoch))+1;
+    if(!Number.isSafeInteger(meta.writerEpoch)||!Number.isSafeInteger(meta.branch+1))throw Error('匯入版本超出安全範圍。');
+
+   }
+   let rows:CommandReceipt[];
    if(mode==='save'){
     for(const key of ['event','report','project'] as const)if(w.sequences[key]<authority.sequences[key])throw new Error('Durable ID sequence cannot decrease');
     if(current&&current.kind==='world'&&current.data.snapshot.campaignId!==w.campaignId)throw new Error('Campaign switch requires explicit transition');
     const required=current?authority.revision+1:0;
     if(w.revision!==required)throw new Error('Committed revision must advance exactly once');
-    const receipts=new Map(w.commandReceipts.map(r=>[r.commandId,r]));
-    for(const r of prior){const receipt=receipts.get(r.commandId);if(!receipt||!sameReceipt(receipt,r))throw new Error('Durable dedupe history cannot be dropped');}
+    if(input.ledger)rows=pendingHistory(w);else{const receipts=new Map(w.commandReceipts.map(r=>[r.commandId,r]));for(let i=0;i<base.count;i++){const r=base.at(i)!,receipt=receipts.get(r.commandId);if(!receipt||!sameReceipt(receipt,r))throw new Error('Durable dedupe history cannot be dropped');}rows=w.commandReceipts.filter(r=>!base.receipt(r.commandId));}
    }else{
-    w.commandReceipts=reconcileReceipts(w,prior);
+    rows=reconcileReceipts(w,Array.from({length:base.count},(_,i)=>base.at(i)!));
     for(const key of ['event','report','project'] as const)w.sequences[key]=Math.max(w.sequences[key],authority.sequences[key]);
-    w.revision=Math.max(current?authority.revision+1:0,w.revision);
-    for(const r of w.commandReceipts)w.revision=Math.max(w.revision,r.committedRevision);
+    w.revision=Math.max(authority.campaigns.length?authority.revision+1:0,w.revision,...(portable?.snapshots.map(s=>s.manifest.worldRevision)??[]));
+    for(const r of rows)w.revision=Math.max(w.revision,r.committedRevision);
    }
+   if(portable)reconcileGrowthAuthority(w,portable.growthAuthority.find(g=>g.campaignId===w.campaignId)?.growthTasks,true);
    reconcileGrowthAuthority(w,authority.campaigns.find(c=>c.campaignId===w.campaignId)?.growthTasks,mode!=='save');
    syncGrowthTasks(w);
    if(activateAI&&!worldPaused(w))enableAutonomy(w);
@@ -174,7 +255,15 @@ export class FormalPersistence {
    const stampedReports=reportWrites.map(r=>{const copy=structuredClone(sanitizeScoutReport(w,r));if(mode!=='import'){copy.realAt??=real(copy.at);copy.clockSpeed??=effectiveSpeed(input);copy.read??=false;if(copy.battle)stampBattle(copy.battle,real);}return copy;});
    validateReportHistory(w,stampedReports);
    // encodeSave fully validates the final world; crypto needs keep-alive under the revision lock.
-   const envelope=await Dexie.waitFor(encodeSave(w));
+   if(mode!=='save'){await this.switchInbox(meta,w,rows);await this.advanceOtherLedgers(meta,authority,w.revision,w.campaignId,portable);}
+   normalizeOutcomeRevisions(w);const outcomes=new Map<string,OriginalResult>((w.ledger?.outcomes??[]).map(r=>[r.commandId,r]));
+   for(const r of rows){const old=base.result(r.commandId);if(!old)outcomes.set(r.commandId,resultFromReceipt(r));}
+   if(mode!=='save')for(const r of await this.db.Inbox.where('campaignId').equals(w.campaignId).toArray())if(terminalCommand(r)&&!base.result(r.commandId)){if(!r.ack)throw Error('終局 Inbox 缺少結果。');outcomes.set(r.commandId,r.originalResult??originalCommand(r,r.ack));}
+   const imported=portable?.snapshots.find(s=>s.manifest.checksum===input.ledger?.anchor.root)??(mode!=='save'&&input.ledger?worldLedger(input):undefined);if(imported)for(const segment of imported.results)for(const r of segment.records){const old=base.result(r.commandId);if(old&&canonicalJSON(old)!==canonicalJSON(r))throw Error('匯入原始結果衝突。');if(!old)outcomes.set(r.commandId,r);}
+   if(command&&!base.result(command.row.commandId)){const receipt=rows.find(r=>r.commandId===command.row.commandId);if(!receipt||receipt.issuerId===command.row.issuerId&&receipt.fingerprint===command.row.fingerprint)outcomes.set(command.row.commandId,originalCommand(command.row,command.ack));}
+   const ledger=await Dexie.waitFor(prepareVerifiedLedger(base,rows,[...outcomes.values()],w.revision,meta.branch,meta.writerEpoch));
+   bindLedger(w,ledger);const envelope=await Dexie.waitFor(encodeSave(w,undefined,false));
+   await writeLedger(this.db,ledger,priorRoot?base:undefined,[...rows.map(r=>r.commandId),...outcomes.keys(),...(!priorRoot?base.results.flatMap(s=>s.records.map(r=>r.commandId)):[])],this.fault,mode==='restore');await publishLedgerHead(this.db,ledger,this.fault);
    // All post-crypto history, metadata, authority and returned state use the
    // isolated validated snapshot, even if the caller mutates input while awaiting.
    w=envelope.snapshot;
@@ -191,46 +280,51 @@ export class FormalPersistence {
    if(mode==='restore'||mode==='import')await this.sanitizeStoredReports(w);
    if(reportWrites.length)await this.db.BattleReports.bulkPut(stampedReports.map(r=>({...r,key:reportKey(r)})));
    this.fault?.('report-write');
+   if(portable)for(const point of portable.recovery.filter(p=>p.data.snapshot.revision<input.revision).slice(0,1)){await this.db.backups.add({at:point.at,label:point.label,campaignId:point.data.snapshot.campaignId,gameTime:point.data.snapshot.time,reportCursor:point.data.snapshot.sequences.report,data:{...point.data,ledger:undefined,bundle:undefined,transportChecksum:undefined}});}
    // Two valid checkpoints; ordering uses IDB monotonic IDs, not wall-clock ordering.
    await this.db.backups.add({at:savedAt,label:mode==='restore'?'手動回復':mode==='import'?'正式匯入':mode==='start'?'B1 fixture開始':'正式回復點',campaignId:w.campaignId,gameTime:w.time,reportCursor:w.sequences.report,data:envelope});
    const backupIds=await this.db.backups.orderBy('id').primaryKeys();if(backupIds.length>2)await this.db.backups.bulkDelete(backupIds.slice(0,-2));
    this.fault?.('backup-write');
    await this.db.saves.put({id:'current',kind:'world',at:savedAt,data:envelope});this.fault?.('world-write');
-   authority.revision=w.revision;authority.sequences={...w.sequences};
+   authority.revision=w.revision;authority.activeCampaignId=w.campaignId;authority.worldChecksum=envelope.checksum;authority.sequences={...w.sequences};
    authority.campaigns=authority.campaigns.filter(c=>c.campaignId!==w.campaignId);
-   authority.campaigns.push({campaignId:w.campaignId,receipts:structuredClone(w.commandReceipts),...(w.growthTasks?{growthTasks:structuredClone(w.growthTasks)}:{})});
+   authority.campaigns.push({campaignId:w.campaignId,ledgerRoot:ledger.manifest.checksum,...(w.growthTasks?{growthTasks:structuredClone(w.growthTasks)}:{})});
    await this.db.saves.put(authority);this.fault?.('authority-write');
    if(command){
     if(command.ack.status==='committed'||command.ack.status==='duplicate'){
-     const receipt=w.commandReceipts.find(r=>r.commandId===command.row.commandId);
+     const receipt=findReceipt(w,command.row.commandId);
      if(!receipt||receipt.issuerId!==command.row.issuerId||receipt.fingerprint!==command.row.fingerprint||receipt.disposition!=='applied')throw new Error('正式結果與世界命令收據不一致。');
      meta.foregroundRevision=w.revision;
     }
    }
    meta.campaignId=w.campaignId;meta.playerFactionId=w.playerFactionId;meta.revision=w.revision;await this.db.RuntimeMeta.put(meta);this.fault?.('metadata-write');
-   if(command)await this.writeResult(command,meta);
-   if(mode!=='save')await this.switchInbox(meta,w);
-   return w;
-  });
+   if(command)await this.writeResult(command,meta,base.result(command.row.commandId));
+   if(mode!=='save')await this.projectInbox(ledger,w.revision);else for(const id of new Set([...rows.map(r=>r.commandId),...outcomes.keys()])){if(id===command?.row.commandId)continue;const row=await this.db.Inbox.where('[campaignId+commandId]').equals([w.campaignId,id]).first(),original=ledger.result(id);if(row&&!terminalCommand(row)&&original){const same=original.issuerId===row.issuerId&&original.fingerprint===row.fingerprint,ack=same?structuredClone(original.ack):{commandId:row.commandId,status:'rejected' as const,revision:w.revision,reason:'CommandId 已用於不同命令。'};await this.writeResult({row,ack},meta,original);}}
+
+   return {world:w,epoch:meta.writerEpoch};
+  });this.writerEpoch=committed.epoch;return committed.world;
  }
  async save(world:FormalWorld,reports:readonly FormalReport[]=[],expectedRevision?:number,savedAt?:number,command?:CommandCommit){return this.commit(world,reports,'save',expectedRevision,savedAt,false,command);}
  async start(world:FormalWorld){return this.commit(world,[],'start');}
  private async loadAnchored():Promise<{game:FormalWorld|null;recovered:boolean;savedAt?:number}>{
-  const [row,authority]=await this.db.transaction('r',this.db.saves,async()=>[await this.db.saves.get('current'),await this.authority()] as const);if(!row){if(await hasLegacyCampaign())throw new Error(OLD_CAMPAIGN_MESSAGE);return{game:null,recovered:false};}
+  const [row,authority]=await this.db.transaction('r',this.db.saves,async()=>[await this.db.saves.get('current'),await this.authority()] as const);if(!row){if(await hasLegacyCampaign(this.suffix))throw new Error(OLD_CAMPAIGN_MESSAGE);return{game:null,recovered:false};}
   if(row.kind==='world')assertCampaignCompatibility(row.data);
+  const active=authority.campaigns.find(c=>c.campaignId===authority.activeCampaignId);if(!active)throw Error('權威戰役版本遺失，原資料保留。');
+  let proof:VerifiedLedger;try{proof=await readLedger(this.db,active.campaignId,active.ledgerRoot);}catch{this.damagedRoots.add(active.ledgerRoot);throw Error('命令帳本損毀，無法證明完整歷史；原資料保留，請使用完整備份。');}
   let world:FormalWorld|undefined;
   try{
    if(row.kind!=='world')throw new Error('Invalid world row');
-   world=(await decodeSave(row.data)).world;
-   const a=authority,ledger=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.receipts??[];
-   if(world.revision!==a.revision||canonicalJSON(world.commandReceipts)!==canonicalJSON(ledger))throw new Error('World and authority diverged');
+   world=(await decodeSave(row.data,proof)).world;
+   const a=authority,root=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.ledgerRoot,head=await this.db.table('LedgerHeads').get(world.campaignId);
+   const entries=await ledgerIdentityRange(this.db,world.campaignId).toArray();if(entries.length!==proof.results.reduce((n,s)=>n+s.records.length,0)||entries.some(e=>{const original=proof.result(e.commandId),receipt=proof.receipt(e.commandId);return !original||e.issuerId!==original.issuerId||e.fingerprint!==original.fingerprint||canonicalJSON(e.original)!==canonicalJSON(original)||canonicalJSON(e.receipt)!==canonicalJSON(receipt);}))throw Error('命令索引與已驗證帳本不符。');
+   if(world.campaignId!==authority.activeCampaignId||world.revision!==a.revision||row.data.checksum!==a.worldChecksum||world.ledger?.anchor.root!==root||head?.root!==root)throw new Error('World and authority diverged');
    const tasks=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.growthTasks;if(tasks&&canonicalJSON(tasks)!==canonicalJSON(world.growthTasks))throw new Error('Growth task authority diverged');
   }catch{
    // Reject corrupt/DEMO snapshots; only a valid formal checkpoint can be restored.
    const candidates=await this.db.backups.orderBy('id').reverse().toArray();
    for(const b of candidates){
     let candidate:FormalWorld;
-    try{candidate=await validateCheckpointCandidate(b);}catch{continue;}
+    try{candidate=await this.checkpoint(b);}catch{continue;}
     // Candidate selected. Storage/CAS/transaction errors must propagate, never try an older point.
     return{game:await this.restoreValidatedCheckpoint(candidate,b.at),recovered:true,savedAt:b.at};
    }
@@ -260,7 +354,7 @@ export class FormalPersistence {
  async backupList(){
   const result:{id:number;at:number;label:string;time:number;reportCursor:number}[]=[];
   for(const b of await this.db.backups.orderBy('id').reverse().toArray()){
-   try{await validateCheckpointCandidate(b);
+   try{await this.checkpoint(b);
     result.push({id:b.id!,at:b.at,label:b.label,time:b.gameTime,reportCursor:b.reportCursor});}catch{/* Invalid or DEMO rows are never offered as formal Recovery. */}
   }
   return result;
@@ -268,24 +362,38 @@ export class FormalPersistence {
  async restore(id:number,activateAI=false){
   if(!Number.isSafeInteger(id)||id<1)throw new Error('回復點 ID 無效。');
   const b=await this.db.backups.get(id);if(!b)throw new Error('找不到正式回復點。');
-  return this.restoreValidatedCheckpoint(await validateCheckpointCandidate(b),Date.now(),activateAI);
+  return this.restoreValidatedCheckpoint(await this.checkpoint(b),Date.now(),activateAI);
  }
  private async restoreValidatedCheckpoint(world:FormalWorld,savedAt=Date.now(),activateAI=false){
   const a=await this.authority();return this.commit(world,[],'restore',a.revision,savedAt,activateAI);
  }
  async importSave(text:string,activateAI=false){
   if(new TextEncoder().encode(text).length>100*1024*1024)throw new Error('存檔超過 100 MiB。');
-  const {world,reports}=await decodeSave(JSON.parse(text)),a=await this.authority();
-  return this.commit(world,reports??[],'import',a.revision,Date.now(),activateAI);
+  const {world,reports,envelope:e,proof:currentProof}=await decodeSave(JSON.parse(text)),snapshots:VerifiedLedger[]=[currentProof];
+  if(e.bundle){for(const m of e.bundle.manifests)if(!snapshots.some(s=>s.manifest.checksum===m.root&&s.manifest.campaignId===m.campaignId))snapshots.push(await verifyLedgerArchive(archiveFromBundle(e.bundle,m.campaignId,m.root)));for(const h of e.bundle.heads)if(!snapshots.some(s=>s.manifest.campaignId===h.campaignId&&s.manifest.checksum===h.root))throw Error('封裝權威 head 不完整。');}
+  const inbox=e.inbox??[];
+  for(const r of inbox){const o=orderSchema.parse(r.order);if(r.campaignId!==o.campaignId||r.commandId!==o.commandId||r.issuerId!==o.issuerId||r.fingerprint!==commandFingerprint(o)||!['pending','retryable','committed','rejected','needs-confirmation','rolled-back'].includes(r.state)||![r.createdAt,r.deadline,r.attempts,r.nextAttemptAt,r.originalRevision,r.branch,r.writerEpoch].every(n=>Number.isSafeInteger(n)&&n>=0))throw Error('匯入 Inbox 無效。');const h=e.bundle?.heads.find(h=>h.campaignId===r.campaignId),proof=h?snapshots.find(s=>s.manifest.checksum===h.root):snapshots.find(s=>s.manifest.campaignId===r.campaignId);if(!proof)throw Error('Inbox 缺少對應戰役帳本。');if(terminalCommand(r)){const original=proof.result(r.commandId);if(!original)throw Error('終局 Inbox 缺少原始結果。');if(r.issuerId!==original.issuerId||r.fingerprint!==original.fingerprint){if(r.state!=='rejected'||r.ack?.status!=='rejected'||r.conflict?.issuerId!==original.issuerId||r.conflict.fingerprint!==original.fingerprint||canonicalJSON(r.ack)!==canonicalJSON(r.conflict.ack))throw Error('衝突拒絕缺少權威證據。');continue;}if(r.originalResult&&canonicalJSON(r.originalResult)!==canonicalJSON(original))throw Error('終局 Inbox 缺少原始結果。');if(!r.ack||r.ack.commandId!==r.commandId||!Number.isSafeInteger(r.ack.revision)||r.ack.revision<0||r.ack.revision>world.revision)throw Error('Inbox 查詢結果無效。');if(original.state==='committed'){const receipt=proof.receipt(r.commandId);if(!receipt||r.state!==(receipt.disposition==='applied'?'committed':'rolled-back')||receipt.disposition==='applied'&&!['committed','duplicate'].includes(r.ack.status)||receipt.disposition==='rolled-back'&&r.ack.status!=='rolled-back')throw Error('Inbox 分支狀態不符。');}else if(r.state!==original.state||canonicalJSON(r.ack)!==canonicalJSON(original.ack))throw Error('Inbox 原始結果不符。');r.originalResult=original;}}
+  if(new Set(inbox.map(r=>r.campaignId+'/'+r.commandId)).size!==inbox.length)throw Error('重複 Inbox 身份。');
+  const recovery=e.recovery??[];for(const point of recovery){const ref=point.data.snapshot.ledger?.anchor,proof=ref&&snapshots.find(s=>s.manifest.checksum===ref.root);if(!proof)throw Error('回復點缺少帳本。');await decodeSave(point.data,proof);}
+  const growthAuthority=e.growthAuthority??[];if(new Set(growthAuthority.map(g=>g.campaignId)).size!==growthAuthority.length)throw Error('重複成長任務權威。');for(const g of growthAuthority){if(!snapshots.some(s=>s.manifest.campaignId===g.campaignId))throw Error('成長任務缺少戰役帳本。');if(g.growthTasks)growthTaskSchema.parse(g.growthTasks);}
+  const a=await this.authority();return this.commit(world,reports??[],'import',a.revision,Date.now(),activateAI,undefined,{snapshots,heads:e.bundle?.heads??[{campaignId:world.campaignId,root:world.ledger!.anchor.root}],inbox,recovery,growthAuthority});
  }
  async exportStoredSave(mode:'quick'|'full'='quick'){
-  const {world,reports}=await this.db.transaction('r',this.db.saves,this.db.BattleReports,async()=>{
-   const row=await this.db.saves.get('current');if(!row||row.kind!=='world')throw new Error('沒有正式存檔可匯出。');
-   const {world}=await Dexie.waitFor(decodeSave(row.data));
-   const reports=mode==='full'?(await this.db.BattleReports.where('campaignId').equals(world.campaignId).toArray()).filter(r=>r.sequence<world.sequences.report&&r.at<=world.time).map(({key:_key,...r})=>sanitizeScoutReport(world,r)):undefined;
-   return{world,reports};
+  // One read snapshot captures Inbox + world + all advertised Recovery roots.
+  // Hashing/portable encoding occurs after the read transaction, over immutable data.
+  const captured=await this.db.transaction('r',[this.db.saves,this.db.backups,this.db.Inbox,this.db.BattleReports,...ledgerTables(this.db)],async()=>{
+   const current=await this.db.saves.get('current');if(current?.kind!=='world')throw Error('沒有正式存檔可匯出。');const authority=await this.authority();
+   const checkpoints=await this.db.backups.orderBy('id').reverse().limit(2).toArray(),heads=await this.db.table('LedgerHeads').toArray(),roots=[...heads,...checkpoints.map(p=>({campaignId:p.campaignId,root:p.data.snapshot.ledger!.anchor.root}))],archives:import('./formal/commandLedger').LedgerArchive[]=[];
+   for(const r of roots)if(!archives.some(a=>a.manifest.campaignId===r.campaignId&&a.manifest.checksum===r.root))archives.push(await readLedgerArchive(this.db,r.campaignId,r.root));
+   return {current,authority,checkpoints,heads,archives,inbox:await this.db.Inbox.toArray(),reports:mode==='full'?await this.db.BattleReports.where('campaignId').equals(current.data.snapshot.campaignId).toArray():undefined};
   });
-  return JSON.stringify(await encodeSave(world,reports));
+  const proofs=[];for(const a of captured.archives)proofs.push(await verifyLedgerArchive(a));
+  const root=captured.current.data.snapshot.ledger!.anchor.root,proof=proofs.find(s=>s.manifest.checksum===root);if(!proof)throw Error('匯出權威帳本遺失。');
+  const {world}=await decodeSave(captured.current.data,proof),reports=captured.reports?.filter(r=>r.sequence<world.sequences.report&&r.at<=world.time).map(({key:_key,...r})=>sanitizeScoutReport(world,r));
+  const e=await encodeSave(world,reports,false);
+  const segments=new Map(),results=new Map();for(const a of captured.archives){for(const s of a.history.segments)segments.set(s.checksum,s);for(const r of a.results)results.set(r.checksum,r);}
+  const bundle:LedgerBundle={format:1,heads:captured.heads.map(h=>({campaignId:h.campaignId,root:h.root})),manifests:captured.archives.map(a=>({campaignId:a.manifest.campaignId,root:a.manifest.checksum,manifest:a.manifest,historyManifest:a.history.manifest})),segments:[...segments.values()],results:[...results.values()]};
+  e.bundle=bundle;e.inbox=captured.inbox;e.recovery=captured.checkpoints.map(p=>({at:p.at,label:p.label,data:p.data}));e.growthAuthority=captured.authority.campaigns.map(c=>({campaignId:c.campaignId,growthTasks:c.growthTasks}));await sealTransport(e);const text=JSON.stringify(e);if(new TextEncoder().encode(text).length>100*1024*1024)throw Error('存檔超過 100 MiB，未產生不可重新匯入的檔案。');return text;
  }
  private reportQuery(world:FormalWorld){return this.db.BattleReports.where('[campaignId+ownerFactionId+sequence]').between([world.campaignId,world.playerFactionId,1],[world.campaignId,world.playerFactionId,world.sequences.report],true,false).filter(r=>r.at<=world.time&&scoutReportAuthorized(r));}
  async reportStatus(world:FormalWorld){
@@ -326,7 +434,8 @@ export class FormalPersistence {
   return result;
  }
  /** Explicit formal reset only. Does not enumerate, access, or delete any DEMO DB. */
- async clearSavedGames(){await this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,this.db.RuntimeMeta,this.db.Inbox,async()=>{const meta=await this.meta();this.assertWriter(meta);await this.switchInbox(meta);await this.db.saves.clear();await this.db.backups.clear();await this.db.BattleReports.clear();});}
+ async clearSavedGames(){await this.db.transaction('rw',[this.db.saves,this.db.backups,this.db.BattleReports,this.db.RuntimeMeta,this.db.Inbox,...ledgerTables(this.db)],async()=>{const meta=await this.meta();this.assertWriter(meta);const authority=await this.authority();await this.switchInbox(meta);const revision=authority.revision+1;if(!Number.isSafeInteger(revision))throw Error('版本超出安全範圍。');await this.advanceOtherLedgers(meta,authority,revision);authority.revision=revision;delete authority.worldChecksum;delete authority.activeCampaignId;await this.db.saves.put(authority);this.fault?.('authority-write');await this.db.saves.delete('current');this.fault?.('world-write');await this.db.backups.clear();await this.db.BattleReports.clear();});}
+
 }
 let store:FormalPersistence|undefined;
 const active=()=>store??=new FormalPersistence();
@@ -347,14 +456,13 @@ export const loadWithOffline=(onProgress?:(stage:'read'|'offline'|'save',fractio
 export const readCityIntel=(world:FormalWorld,cityId:string,generation?:number)=>active().readCityIntel(world,cityId,generation);
 
 /** Dynamic-schema open never requests a version upgrade or writes a legacy row. */
-export async function hasLegacyCampaign(){
- if(!await Dexie.exists(LEGACY_FORMAL_DB_NAME))return false;
- const old=new Dexie(LEGACY_FORMAL_DB_NAME);try{await old.open();return await old.transaction('r',old.tables,async()=>{for(const t of old.tables)if(await t.count())return true;return false;});}finally{old.close();}
+export async function hasLegacyCampaign(suffix=''){
+ for(const name of [RETIRED_FORMAL_DB_NAME,LEGACY_FORMAL_DB_NAME].map(n=>n+(suffix?'-'+suffix:''))){if(!await Dexie.exists(name))continue;const old=new Dexie(name);try{await old.open();if(await old.transaction('r',old.tables,async()=>{for(const t of old.tables)if(await t.count())return true;return false;}))return true;}finally{old.close();}}return false;
 }
 export async function exportLegacyCampaign(){
- if(!await Dexie.exists(LEGACY_FORMAL_DB_NAME))throw new Error('沒有可匯出的舊戰役。');
- const old=new Dexie(LEGACY_FORMAL_DB_NAME);
- try{await old.open();const rows=(name:string)=>old.tables.some(t=>t.name===name)?old.table(name).toArray():Promise.resolve([]);const archive=await old.transaction('r',old.tables,async()=>({format:'lieguo-historical-archive-v1',sourceDatabase:LEGACY_FORMAL_DB_NAME,saves:await rows('saves'),backups:await rows('backups'),reports:await rows('BattleReports')}));const text=JSON.stringify(archive);if(new TextEncoder().encode(text).length>100*1024*1024)throw new Error('舊備份超過100 MiB，原資料保留。');return text;}finally{old.close();}
+ const name=await Dexie.exists(RETIRED_FORMAL_DB_NAME)?RETIRED_FORMAL_DB_NAME:LEGACY_FORMAL_DB_NAME;if(!await Dexie.exists(name))throw new Error('沒有可匯出的舊戰役。');
+ const old=new Dexie(name);
+ try{await old.open();const rows=(name:string)=>old.tables.some(t=>t.name===name)?old.table(name).toArray():Promise.resolve([]);const archive=await old.transaction('r',old.tables,async()=>({format:'lieguo-historical-archive-v1',sourceDatabase:name,saves:await rows('saves'),backups:await rows('backups'),reports:await rows('BattleReports')}));const text=JSON.stringify(archive);if(new TextEncoder().encode(text).length>100*1024*1024)throw new Error('舊備份超過100 MiB，原資料保留。');return text;}finally{old.close();}
 }
 
 export const acquireWriter=()=>active().acquireWriter();

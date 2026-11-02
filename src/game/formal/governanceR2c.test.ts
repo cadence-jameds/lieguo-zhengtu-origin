@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {make,rich,build,order} from './developmentTestSupport';
@@ -5,7 +6,8 @@ import {applyGovernance,retireGovernors,GOVERNOR_DEFAULTS} from './governance';
 import {enableAutonomy} from './autonomy';
 import {submitFormalOrder,advanceFormal} from './reducer';
 import {zeroResources,type FormalWorld} from './model';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOffline} from './offline';
 import {EventScheduler} from './scheduler';
 import {FormalPersistence} from '../persistence';
@@ -14,7 +16,7 @@ import {changeCityOwner} from './economy';
 import {validateFormalWorld} from './schema';
 const stores:FormalPersistence[]=[];afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
 function configured(budget=2400,policy:'balanced'|'economy'|'population'|'military'|'reserve'='balanced'){let w=make();rich(w,w.cities[0],10000);build(w.cities[0],'townhall',1);const t=submitFormalOrder(w,order(w,{type:'governance.set',cityId:w.cities[0].id,enabled:true,policy,budget,reserve:180}));expect(t.ack?.status).toBe('committed');w=t.world;return w;}
-function clean(w:FormalWorld){const c=structuredClone(w);c.revision=0;for(const r of c.commandReceipts)r.committedRevision=0;return canonicalJSON(c);}
+function clean(w:FormalWorld){const c=structuredClone(projectWorld(w));c.revision=0;for(const r of c.commandReceipts)r.committedRevision=0;return canonicalJSON(c);}
 it('governor uses same source defaults and cannot start without own townhall',()=>{expect(GOVERNOR_DEFAULTS).toEqual({budget:2400,reserve:180});const w=make(),cmd={type:'governance.set' as const,cityId:w.cities[0].id,enabled:true,policy:'balanced' as const,budget:2400,reserve:180};const before=canonicalJSON(w);expect(submitFormalOrder(w,order(w,cmd)).ack?.status).toBe('rejected');expect(canonicalJSON(w)).toBe(before);expect(submitFormalOrder(w,order(w,{...cmd,cityId:w.cities[1].id})).ack?.status).toBe('rejected');});
 it('zero budget / reserve policy never silently spends; selected city only',()=>{for(const [budget,policy] of [[0,'balanced'],[2400,'reserve']] as const){const w=configured(budget,policy),t=advanceFormal(w,w.time),stock=w.cities[0].stock;expect(t.world.governors![0].spent).toEqual(zeroResources());expect(t.world.cities[0].stock).toEqual(stock);expect(t.world.cities[1]).toEqual(w.cities[1]);}});
 it('hourly total budget is real spent resources, never a stock percentage and cannot reset by resending settings',()=>{let w=configured(500);const stock={...w.cities[0].stock};w=advanceFormal(w,w.time).world;const spent=w.governors![0].spent;expect(Object.values(spent).reduce((n,v)=>n+v,0)).toBeGreaterThan(0);expect(Object.values(spent).reduce((n,v)=>n+v,0)).toBeLessThanOrEqual(500);for(const k of ['food','wood','stone','gold'] as const)expect(stock[k]-w.cities[0].stock[k]).toBe(spent[k]);const prior={...spent};const t=submitFormalOrder(w,order(w,{type:'governance.set',cityId:w.cities[0].id,enabled:true,policy:'economy',budget:500,reserve:180}));expect(t.ack?.status).toBe('committed');expect(t.world.governors![0].spent).toEqual(prior);const after=advanceFormal(t.world,t.world.time).world;expect(Object.values(after.governors![0].spent).reduce((n,v)=>n+v,0)).toBeLessThanOrEqual(500);});

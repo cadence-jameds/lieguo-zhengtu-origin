@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterAll,it,expect,vi} from 'vitest';
 import * as autonomy from './autonomy';
@@ -7,7 +8,8 @@ import {advanceOffline,advanceOfflineCooperative} from './offline';
 import {effectiveSpeed} from './playtest';
 import {tacticalRoundWorldMs} from './battles';
 import {setClockMode,retimeCombatClock} from './campaignTime';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {digest} from './canonical';
 import {advanceFormal} from './reducer';
 import {FormalPersistence,type FailurePoint} from '../persistence';
@@ -34,7 +36,7 @@ for(const config of CLOCK_DELTA_CASES){
 }
 it('T4 the completed offline freeze has a strict durable envelope, while an ordinary offline draft and corrupt freeze remain rejected',async()=>{
  const f=clockBoundaryWorld(CLOCK_DELTA_CASES[3]),reference=frozenReference(f.world,f.target),frozen=reference.world;
- const save=await encodeSave(frozen,reference.reports);expect((await decodeSave(save)).world).toEqual(frozen);
+ const save=await encodeSave(frozen,reference.reports);expect(projectWorld((await decodeSave(save)).world)).toEqual(projectWorld(frozen));
  const draft=structuredClone(f.world);setClockMode(draft,'offline');await expect(encodeSave(draft)).rejects.toThrow('草稿');const forged=structuredClone(save);delete forged.snapshot.extinction!.defeat;forged.checksum=await digest(forged.snapshot);await expect(decodeSave(forged)).rejects.toThrow('Army movement event mismatch');
  const corrupt=structuredClone(save);corrupt.snapshot.extinction!.defeat!.at++;await expect(decodeSave(corrupt)).rejects.toThrow();const checksum=structuredClone(save);checksum.checksum='0'.repeat(64);await expect(decodeSave(checksum)).rejects.toThrow('檢查碼');
 });

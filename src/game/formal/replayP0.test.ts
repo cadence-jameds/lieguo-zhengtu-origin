@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {afterEach,expect,it,vi} from 'vitest';
 import * as autonomy from './autonomy';
 import * as governance from './governance';
@@ -13,7 +14,8 @@ import {commandId,eventId} from './ids';
 import {armyId,battleId} from './ids';
 import {canonicalJSON} from './canonical';
 import {advanceFormal,advanceFormalCooperative,orderFingerprint,submitFormalOrder} from './reducer';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {EventScheduler} from './scheduler';
 import {initialPolitics,reconcilePoliticalEvents} from './politics';
 import {initialCombat} from './combatModel';
@@ -33,7 +35,7 @@ function referenceAdvance(w:FormalWorld,target:number):FormalTransition {
  try{return advanceFormal(w,target);}finally{aiSpy.mockRestore();governorSpy.mockRestore();}
 }
 function normalized(w:FormalWorld){
- const copy=structuredClone(w);copy.revision=0;for(const r of copy.commandReceipts)r.committedRevision=0;return canonicalJSON(copy);
+ const copy=structuredClone(projectWorld(w));copy.revision=0;for(const r of copy.commandReceipts)r.committedRevision=0;return canonicalJSON(copy);
 }
 function issues(w:FormalWorld){
  try{schema.validateFormalWorld(w);throw new Error('Expected invalid world');}

@@ -1,3 +1,6 @@
+import {projectWorld,originalResult} from './commandLedger';
+import {RETIRED_FORMAL_DB_NAME} from './versions';
+import {OLD_CAMPAIGN_MESSAGE} from './saveCodec';
 import 'fake-indexeddb/auto';
 import Dexie from 'dexie';
 import {afterEach,expect,it} from 'vitest';
@@ -8,7 +11,7 @@ import {contribute,order} from './testSupport';
 import {submitFormalOrder,advanceFormal} from './reducer';
 import {commandId} from './ids';
 import type {CommandReceipt,FormalOrder,FormalWorld} from './model';
-import {encodeSave} from './saveCodec';
+
 import {FORMAL_DB_NAME} from './versions';
 const stores:FormalPersistence[]=[];let serial=0;
 function store(fault?:(point:FailurePoint)=>void,suffix='durable-'+(++serial)){const s=new FormalPersistence({suffix,fault});stores.push(s);return s;}
@@ -49,7 +52,7 @@ it('FIFO intake uses persistent monotonic sequence and preserves different click
 });
 it('changed intent becomes durable Needs Confirmation; no blind revision overwrite or automatic target replacement',async()=>{
  const s=store(),w=await begin(s),o=order(w,'queued',{type:'city.rename',cityId:fixtureIds.home,name:'原意圖'}),row=await receive(s,w,o),next=await commit(s,w,order(w,'prior',{type:'city.rename',cityId:fixtureIds.home,name:'已變更'}));
- expect(revalidateInbox(next,row)).toBeUndefined();const ack={commandId:o.commandId,status:'rejected' as const,revision:next.revision,reason:'世界狀態已變更，請重新確認原始操作。'};await s.finishCommand(row,ack,next.revision);expect((await s.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');expect(row.order).toEqual(o);expect((await s.loadSave()).game).toEqual(next);
+ expect(revalidateInbox(next,row)).toBeUndefined();const ack={commandId:o.commandId,status:'rejected' as const,revision:next.revision,reason:'世界狀態已變更，請重新確認原始操作。'};const final=await s.finishCommand(row,ack,next.revision);expect((await s.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');expect(row.order).toEqual(o);expect((await s.loadSave()).game).toEqual(final);expect(projectWorld(final)).toEqual(projectWorld(next));expect(final.ledger!.anchor.root).not.toBe(next.ledger!.anchor.root);expect(originalResult(final,o.commandId)?.state).toBe('needs-confirmation');
 });
 it.each(['restore','import','start','reset'] as const)('%s cancels old pending in the same transaction; restored committed commands become rolled-back',async mode=>{
  const s=store(),w=await begin(s),checkpoint=(await s.backupList())[0].id,text=await s.exportStoredSave(),o=contribute(w,'done'),next=await commit(s,w,o),pending=order(next,'pending',{type:'city.rename',cityId:fixtureIds.home,name:'不可跨分支'});await receive(s,next,pending);
@@ -68,11 +71,11 @@ it('temporary failures retry at most three times; quota and unknown/permanent fa
  for(let i=1;i<=MAX_COMMAND_ATTEMPTS;i++){const next=await s.noteCommandFailure(row,'temporary',true,row.createdAt+i);expect(next.attempts).toBe(i);expect(terminalCommand(next)).toBe(i===MAX_COMMAND_ATTEMPTS);expect(next.deadline).toBe(row.createdAt+COMMAND_TTL);}
  const other=await receive(s,w,contribute(w,'expired'));const expired=await s.noteCommandFailure(other,'deadline',true,other.deadline);expect(expired.state).toBe('needs-confirmation');
 });
-it('v1 IndexedDB migration adds empty Inbox/RuntimeMeta without changing the old world, Recovery, authority or history',async()=>{
- const suffix='migration-'+(++serial),name=FORMAL_DB_NAME+'-'+suffix,old=new Dexie(name);old.version(1).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]'});await old.open();
- const w=createFormalFixture(),data=await encodeSave(w);await old.table('saves').put({id:'current',kind:'world',at:100,data});await old.table('saves').put({id:'authority',kind:'authority',revision:0,sequences:w.sequences,campaigns:[{campaignId:w.campaignId,receipts:[]}]});await old.table('backups').add({at:100,label:'v1',campaignId:w.campaignId,gameTime:0,reportCursor:1,data});const before=await old.table('saves').toArray();old.close();
- const s=store(undefined,suffix);expect((await s.loadSave()).game).toEqual(w);expect(await s.db.saves.toArray()).toEqual(before);expect(await s.db.Inbox.count()).toBe(0);expect(await s.db.backups.count()).toBe(1);expect(new FormalDatabase().verno).toBe(2);
+it('retired v2 data is explicitly incompatible, remains unchanged, and a fresh v3 campaign can start separately',async()=>{
+ const suffix='retired-'+(++serial),old=new Dexie(RETIRED_FORMAL_DB_NAME+'-'+suffix);old.version(2).stores({saves:'id',backups:'++id',Inbox:'++sequence'});await old.open();const w=createFormalFixture(),data={format:'lieguo-formal-save',snapshot:w,checksum:'0'.repeat(64)};await old.table('saves').put({id:'current',data});await old.table('backups').add({data});const before=await old.table('saves').toArray();
+ try{const s=store(undefined,suffix);await expect(s.loadSave()).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(new FormalDatabase().verno).toBe(3);expect(await s.db.Inbox.count()).toBe(0);expect(await s.db.backups.count()).toBe(0);const fresh=await s.start(createFormalFixture({campaign:'new-ledger'}));expect(fresh.ledger).toBeDefined();expect(await old.table('saves').toArray()).toEqual(before);expect(await old.table('backups').count()).toBe(1);}finally{await old.delete();}
 });
+
 for(const count of [30000,60000])it(`synthetic ${count} receipts retain all history through durable intake, atomic commit and duplicate lookup`,async()=>{
  const s=store(),w=createFormalFixture();w.revision=1;w.commandReceipts=Array.from({length:count},(_,i):CommandReceipt=>({commandId:commandId('history-'+i),issuerId:w.playerFactionId,fingerprint:'synthetic-'+i,committedRevision:1,disposition:'rolled-back'}));await s.acquireWriter();const initial=await s.start(w),o=order(initial,'new',{type:'city.rename',cityId:fixtureIds.home,name:'完整歷史'}),next=await commit(s,initial,o);expect(next.commandReceipts).toHaveLength(count+1);expect((await receive(s,next,o)).state).toBe('committed');expect((await s.loadSave()).game!.commandReceipts).toHaveLength(count+1);
 },30000);
@@ -88,8 +91,7 @@ it.each(['restore','import','start','reset'] as const)('%s branch/write failure 
  fail=true;const action=()=>mode==='restore'?s.restore(checkpoint):mode==='import'?s.importSave(text):mode==='start'?s.start(createFormalFixture({campaign:'new-branch'})):s.clearSavedGames();await expect(action()).rejects.toThrow('branch transaction fault');expect(await contents(s)).toEqual(before);
  fail=false;await action();expect((await s.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');
 });
-it('writer acquisition during a corrupt v1 migration does not preempt the established Recovery fallback',async()=>{
- const suffix='migration-recovery-'+(++serial),old=new Dexie(FORMAL_DB_NAME+'-'+suffix);old.version(1).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]'});await old.open();const w=createFormalFixture(),data=await encodeSave(w);
- await old.table('saves').put({id:'current',kind:'world',at:100,data:{...data,snapshot:undefined}});await old.table('saves').put({id:'authority',kind:'authority',revision:0,sequences:w.sequences,campaigns:[{campaignId:w.campaignId,receipts:[]}]});await old.table('backups').add({at:100,label:'valid-v1-recovery',campaignId:w.campaignId,gameTime:0,reportCursor:1,data});old.close();
- const s=store(undefined,suffix);await expect(s.acquireWriter()).resolves.toMatchObject({writerEpoch:1});const result=await s.loadSave();expect(result.recovered).toBe(true);expect(result.game!.cities).toEqual(w.cities);expect(result.game!.revision).toBe(1);expect((await s.writerContext()).branch).toBe(1);
+it('corrupt retired data is never guessed, migrated or offered as a new Recovery point',async()=>{
+ const suffix='retired-corrupt-'+(++serial),old=new Dexie(RETIRED_FORMAL_DB_NAME+'-'+suffix);old.version(2).stores({saves:'id',backups:'++id'});await old.open();await old.table('saves').put({id:'current',data:{format:'lieguo-formal-save',snapshot:undefined}});await old.table('backups').add({label:'old',data:{format:'lieguo-formal-save'}});const before=await old.table('saves').toArray();
+ try{const s=store(undefined,suffix);await expect(s.acquireWriter()).resolves.toMatchObject({writerEpoch:1});await expect(s.loadSave()).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(await s.backupList()).toEqual([]);expect(await old.table('saves').toArray()).toEqual(before);expect(await old.table('backups').count()).toBe(1);expect((await s.start(createFormalFixture({campaign:'fresh-after-old'}))).ledger).toBeDefined();}finally{await old.delete();}
 });

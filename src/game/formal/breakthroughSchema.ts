@@ -1,10 +1,11 @@
+import {receiptIndex} from './commandLedger';
 import type {FormalWorld} from './model';
 import {resourceKeys} from './model';
 import {canonicalJSON} from './canonical';
 import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughStoredWork,breakthroughPauseReason} from './breakthrough';
 export function validateBreakthroughs(w:FormalWorld,fail:(message:string)=>void){
  if(!w.largeProjects.some(p=>p.kind==='civilization-breakthrough'))return;
- const empires=new Set<string>(),shipmentIds=new Set<string>(),receiptIds=new Set<string>(),commands=new Set<string>(),payments=new Map(w.commandReceipts.map(r=>[r.commandId,r]));
+ const empires=new Set<string>(),shipmentIds=new Set<string>(),receiptIds=new Set<string>(),commands=new Set<string>(),payments=receiptIndex(w);
  for(const p of w.largeProjects)for(const t of p.shipments){if(shipmentIds.has(t.shipmentId))fail('Duplicate engineering shipment');shipmentIds.add(t.shipmentId);if(t.phase!=='in-transit'){if(receiptIds.has(t.arrivalEventId))fail('Duplicate engineering arrival');receiptIds.add(t.arrivalEventId);}}
  for(const p of w.largeProjects){if(p.kind!=='civilization-breakthrough')continue;const b=p.breakthrough,empire=p.owner.kind==='empire'?p.owner.empireId:null;
   if(!b||!empire){fail('Breakthrough state/owner missing');continue;}

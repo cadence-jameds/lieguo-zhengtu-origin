@@ -1,9 +1,11 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {it,expect} from 'vitest';
 import {route} from './routing';
 import {passable,buildable,terrainAt} from './terrain';
 import {battlefield,dispatch} from './combatTestSupport';
 import {isMissionArmy} from './combatModel';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {validateFormalWorld} from './schema';
 import {advanceFormal} from './reducer';
 import type {FormalWorld} from './model';
@@ -36,7 +38,7 @@ it.each([1,10,25] as const)('D2 real military snapshots use weighted segment tim
  let ms=0;for(let i=1;i<a.path.length;i++){const p=a.path[i],prev=a.path[i-1];ms+=Math.hypot(p.x-prev.x,p.y-prev.y)*(terrainAt(w,p.x,p.y)==='water'?2:1)*a.marchSecondsPerTile*1000;expect(a.segmentTimes[i]).toBe(Math.ceil(ms));}
  expect(a.path.some(p=>terrainAt(w,p.x,p.y)==='water')).toBe(true);
  expect(a.arrivalAt).toBe(w.time+Math.ceil(ms));
- const loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded).toEqual(w);validateFormalWorld(loaded);
+ const loaded=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(loaded)).toEqual(projectWorld(w));validateFormalWorld(loaded);
  const forged=structuredClone(w),bad=forged.armies.filter(isMissionArmy)[0];delete bad.marchTerrainVersion;
  expect(()=>validateFormalWorld(forged)).toThrow();
  const before=advanceFormal(loaded,a.arrivalAt-1),direct=advanceFormal(w,a.arrivalAt),sliced=advanceFormal(before.world,a.arrivalAt);
@@ -45,5 +47,5 @@ it.each([1,10,25] as const)('D2 real military snapshots use weighted segment tim
 it('D2 unversioned existing land march retains exact original path, deadlines and IDs',async()=>{
  let w=battlefield();w.cities[0].military!.units={militia:20};w=dispatch(w,'raid',{militia:10}).world;
  const a=w.armies.filter(isMissionArmy)[0];delete (a as typeof a&{marchTerrainVersion?:number}).marchTerrainVersion;
- const old=structuredClone(w);expect((await decodeSave(await encodeSave(w))).world).toEqual(old);
+ const old=structuredClone(w);expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(old));
 });

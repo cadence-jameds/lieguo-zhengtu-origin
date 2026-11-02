@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -6,7 +7,8 @@ import {order} from './testSupport';
 import {submitFormalOrder,advanceFormal} from './reducer';
 import {buildingCost,buildingDuration,buildingLevel,storageCapacity} from './catalogB3';
 import {validateFormalWorld} from './schema';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 import type {FormalWorld,FormalCommand,Resources} from './model';
 import {cityPresentation} from '../presentation/artMap';
@@ -61,7 +63,7 @@ it('clock/scheduler snapshots remain fixed after center change; duplicate/stale/
 });
 it('save/load and native Recovery keep active+queued wall work, final authority and durable dedupe',async()=>{
  const s=store();let w=await s.start(make());for(let i=0;i<2;i++){const t=submit(w,wall(w));w=await s.save(t.world,t.reports,w.revision);}const job=w.cities[0].economy!.construction[0],checkpoint=(await s.backupList())[0].id;
- const decoded=(await decodeSave(await encodeSave(w))).world;expect(decoded).toEqual(w);const loaded=(await s.loadSave()).game!;expect(loaded).toEqual(w);let finish=advanceFormal(loaded,loaded.cities[0].economy!.construction[1].startsAt+loaded.cities[0].economy!.construction[1].durationMs);finish.world=await s.save(finish.world,finish.reports,w.revision);expect(finish.world.cities[0].wallLevel).toBe(2);expect((await s.loadSave()).game!.cities[0].wallLevel).toBe(2);
+ const decoded=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(decoded)).toEqual(projectWorld(w));const loaded=(await s.loadSave()).game!;expect(projectWorld(loaded)).toEqual(projectWorld(w));let finish=advanceFormal(loaded,loaded.cities[0].economy!.construction[1].startsAt+loaded.cities[0].economy!.construction[1].durationMs);finish.world=await s.save(finish.world,finish.reports,w.revision);expect(finish.world.cities[0].wallLevel).toBe(2);expect((await s.loadSave()).game!.cities[0].wallLevel).toBe(2);
  const restored=await s.restore(checkpoint);expect(restored.cities[0].wallLevel).toBe(0);expect(restored.cities[0].economy!.construction).toHaveLength(2);const end=advanceFormal(restored,restored.cities[0].economy!.construction[1].startsAt+restored.cities[0].economy!.construction[1].durationMs).world;expect(end.cities[0].wallLevel).toBe(2);expect(end.events.some(e=>e.id===job.eventId)).toBe(false);
 });
 it('R1 automatic Recovery skips metadata-invalid wall completion checkpoint then completes recovered wall exactly once',async()=>{

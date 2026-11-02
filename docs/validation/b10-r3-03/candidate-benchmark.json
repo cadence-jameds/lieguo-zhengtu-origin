@@ -1,0 +1,156 @@
+{
+  "node": "v24.19.0",
+  "status": "BLOCKED: candidate not activated",
+  "environment": "Linux container; Node microbenchmark; no browser/Android latency claim",
+  "samples": 30,
+  "warmups": 3,
+  "formalT2": "NOT INTEGRATED",
+  "migration": "NOT IMPLEMENTED; legacy production data never touched",
+  "cases": [
+    {
+      "count": 0,
+      "legalFormalSchema": true,
+      "constructionMs": 1.1459720000000289,
+      "linearIdentityLookupMs": {
+        "n": 30,
+        "p50": 0.000578000000132306,
+        "p95": 0.001590000000078362
+      },
+      "candidateIndexLookupMs": {
+        "n": 30,
+        "p50": 0.00044000000002597517,
+        "p95": 0.003265999999939595
+      },
+      "candidatePrepareAppendMs": {
+        "n": 30,
+        "p50": 0.12179999999989377,
+        "p95": 0.2500119999999697
+      },
+      "fullCandidateArchiveVerifyMs": {
+        "n": 30,
+        "p50": 0.05575100000010025,
+        "p95": 0.12408800000002884
+      },
+      "candidateArchiveBytes": 380,
+      "legacyWorldBytes": 454100,
+      "segments": 0,
+      "heapUsed": 116927664
+    },
+    {
+      "count": 1000,
+      "legalFormalSchema": true,
+      "constructionMs": 43.88722800000005,
+      "linearIdentityLookupMs": {
+        "n": 30,
+        "p50": 0.016103999999813823,
+        "p95": 0.04062199999998484
+      },
+      "candidateIndexLookupMs": {
+        "n": 30,
+        "p50": 0.0030270000002019515,
+        "p95": 0.003436000000419881
+      },
+      "candidatePrepareAppendMs": {
+        "n": 30,
+        "p50": 0.25792100000035134,
+        "p95": 0.6053500000002714
+      },
+      "fullCandidateArchiveVerifyMs": {
+        "n": 30,
+        "p50": 14.486437999999907,
+        "p95": 19.512392999999975
+      },
+      "candidateArchiveBytes": 320550,
+      "legacyWorldBytes": 741882,
+      "segments": 8,
+      "heapUsed": 75138432
+    },
+    {
+      "count": 10000,
+      "legalFormalSchema": true,
+      "constructionMs": 154.80236400000013,
+      "linearIdentityLookupMs": {
+        "n": 30,
+        "p50": 0.3622659999991811,
+        "p95": 0.6338449999993827
+      },
+      "candidateIndexLookupMs": {
+        "n": 30,
+        "p50": 0.007512000000133412,
+        "p95": 0.009161999999378168
+      },
+      "candidatePrepareAppendMs": {
+        "n": 30,
+        "p50": 0.3635869999998249,
+        "p95": 3.444783999999345
+      },
+      "fullCandidateArchiveVerifyMs": {
+        "n": 30,
+        "p50": 144.60535900000013,
+        "p95": 187.66673399999945
+      },
+      "candidateArchiveBytes": 3231931,
+      "legacyWorldBytes": 3361883,
+      "segments": 79,
+      "heapUsed": 120064144
+    },
+    {
+      "count": 30000,
+      "legalFormalSchema": true,
+      "constructionMs": 460.0206339999986,
+      "linearIdentityLookupMs": {
+        "n": 30,
+        "p50": 0.7212339999969117,
+        "p95": 1.1646319999999832
+      },
+      "candidateIndexLookupMs": {
+        "n": 30,
+        "p50": 0.015873000000283355,
+        "p95": 0.01777100000072096
+      },
+      "candidatePrepareAppendMs": {
+        "n": 30,
+        "p50": 0.40796899999986636,
+        "p95": 0.5901129999983823
+      },
+      "fullCandidateArchiveVerifyMs": {
+        "n": 30,
+        "p50": 490.86585000000014,
+        "p95": 576.3212889999995
+      },
+      "candidateArchiveBytes": 9739180,
+      "legacyWorldBytes": 9221883,
+      "segments": 235,
+      "heapUsed": 239398200
+    },
+    {
+      "count": 60000,
+      "legalFormalSchema": true,
+      "constructionMs": 898.1882560000013,
+      "linearIdentityLookupMs": {
+        "n": 30,
+        "p50": 1.1899809999958961,
+        "p95": 1.6880749999982072
+      },
+      "candidateIndexLookupMs": {
+        "n": 30,
+        "p50": 0.01972300000488758,
+        "p95": 0.02223000000230968
+      },
+      "candidatePrepareAppendMs": {
+        "n": 30,
+        "p50": 0.5149669999991602,
+        "p95": 13.410641000002215
+      },
+      "fullCandidateArchiveVerifyMs": {
+        "n": 30,
+        "p50": 970.0257679999995,
+        "p95": 1073.9245459999984
+      },
+      "candidateArchiveBytes": 19500082,
+      "legacyWorldBytes": 18011883,
+      "segments": 469,
+      "heapUsed": 487343152
+    }
+  ]
+}

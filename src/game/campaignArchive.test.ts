@@ -1,9 +1,9 @@
 import 'fake-indexeddb/auto';
 import Dexie from 'dexie';
 import {afterEach,expect,it,vi} from 'vitest';
-vi.mock('./formal/versions',async original=>({...await original<typeof import('./formal/versions')>(),FORMAL_DB_NAME:'lieguo-formal-stage2-time2'}));
+vi.mock('./formal/versions',async original=>({...await original<typeof import('./formal/versions')>(),FORMAL_DB_NAME:'lieguo-formal-ledger-v1'}));
 import {inspectCampaignStorage,exportCampaignArchive} from './campaignStorage';
-const current='lieguo-formal-stage2-time2',legacy='lieguo-formal-stage2-schema1',stores:Dexie[]=[];
+const current='lieguo-formal-ledger-v1',legacy='lieguo-formal-stage2-schema1',stores:Dexie[]=[];
 async function make(name:string){const db=new Dexie(name);db.version(1).stores({saves:'id',backups:'++id',BattleReports:'key'});await db.open();stores.push(db);return db;}
 afterEach(async()=>{vi.restoreAllMocks();for(const db of stores.splice(0))await db.delete();});
 for(const table of ['saves','backups','BattleReports'])it(`isolated legacy ${table} alone permits preservation instead of a permanent update dead end`,async()=>{const old=await make(legacy);const row=table==='saves'?{id:'current',kind:'world',data:{metadata:{contentVersion:'old'},checksum:'historical'}}:table==='backups'?{id:1,data:{historical:true}}:{key:'old-report',body:'synthetic'};await old.table(table).put(row);expect(await inspectCampaignStorage()).toBe('historical');expect(await Dexie.exists(current)).toBe(false);const archive=JSON.parse(await exportCampaignArchive());expect(archive.databases[legacy][table]).toEqual([row]);expect(await old.table(table).toArray()).toEqual([row]);});

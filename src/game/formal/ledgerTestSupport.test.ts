@@ -1,0 +1,10 @@
+import {expect,it} from 'vitest';
+import {scenarioWorld,gameTransition} from './ledgerTestSupport';
+import {createFormalFixture} from './fixture';
+import {encodeSave,decodeSave} from './saveCodec';
+import {submitFormalOrder} from './reducer';
+import {order} from './testSupport';
+const snapshot=async()=>{const w=createFormalFixture(),t=submitFormalOrder(w,order(w,'proof-test',{type:'city.rename',cityId:w.cities[0].id,name:'完整對照'}));return (await decodeSave(await encodeSave(t.world))).world;};
+it('scenario comparisons retain every gameplay field and every ordered receipt after verifying the ledger',async()=>{const w=await snapshot(),plain=scenarioWorld(w);expect(plain.commandReceipts).toEqual(Array.from(w.commandReceipts));expect(plain.cities).toEqual(w.cities);expect(gameTransition({world:w,reports:[]})).toEqual({world:plain,reports:[]});});
+it.each(['root','writerEpoch'] as const)('scenario comparison cannot hide a tampered %s binding',async key=>{const w=await snapshot();if(key==='root')w.ledger!.anchor.root='f'.repeat(64);else w.ledger!.anchor.writerEpoch++;expect(()=>scenarioWorld(w)).toThrow();});
+it('scenario comparison cannot hide embedded or dropped authoritative history',async()=>{const w=structuredClone(await snapshot());w.commandReceipts=[];expect(()=>scenarioWorld(w)).toThrow('不能內嵌');});

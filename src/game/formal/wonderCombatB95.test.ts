@@ -1,10 +1,13 @@
+import {gameTransition} from './ledgerTestSupport';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {expect,it} from 'vitest';
 import {endgameWorld,act} from './endgameTestSupport';
 import {advanceFormal} from './reducer';
 import {isMissionArmy} from './combatModel';
 import {makePools} from './combatResolver';
 import {wonderBombardment} from './siege';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {handleCombatEvent} from './battles';
 import {EventScheduler} from './scheduler';
 import {order} from './developmentTestSupport';
@@ -18,15 +21,15 @@ for(const [unit,tiers,modern,expected] of [['catapult',0,false,45],['catapult',2
  const w=endgameWorld(),f=w.factions[0];if(tiers)f.techIds.push('siege.projection.1','siege.projection.2');if(modern)f.techIds.push('modern.siege-engineering');expect(wonderBombardment(w,makePools({[unit]:1},f.id,w.cities[0].id,null,f))).toBe(expected);
 });
 it('B9-5 destroys a wonder behind intact Lv15 walls, returns survivors, preserves ownership and deduplicates actual battle/save',async()=>{
- let w=endgameWorld(true);w.cities[2].wallLevel=15;const owner=w.cities[2].ownerFactionId;w=send(w,{catapult:3000});const transit=(await decodeSave(await encodeSave(w))).world,result=resolve(w);expect(resolve(transit)).toEqual(result);w=result.world;
+ let w=endgameWorld(true);w.cities[2].wallLevel=15;const owner=w.cities[2].ownerFactionId;w=send(w,{catapult:3000});const transit=(await decodeSave(await encodeSave(w))).world,result=resolve(w);expect(gameTransition(resolve(transit))).toEqual(gameTransition(result));w=result.world;
  const p=result.reports.find(r=>r.battle)!.battle!;expect(p.mission).toBe('wonder-destruction');expect(p.outcome).toBe('wonder-destroyed');expect(p.siegeRounds).toBe(1);expect(p.wonder?.damage).toBe(120000);expect(p.wonder?.after).toBe(0);expect(w.cities[2].wallLevel).toBe(15);expect(w.cities[2].ownerFactionId).toBe(owner);expect(w.armies.filter(isMissionArmy)[0].status).toBe('returning');expect(w.largeProjects[1].breakthrough!.phase).toBe('paused');
- const receipt=w.combat!.receipts.find(r=>r.kind==='final')!,before=structuredClone(w);expect(handleCombatEvent(w,{type:'combat.round',battleId:p.battleId,id:receipt.eventId,at:receipt.at},new EventScheduler(w.events))).toEqual([]);expect(w).toEqual(before);expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ const receipt=w.combat!.receipts.find(r=>r.kind==='final')!,before=structuredClone(w);expect(handleCombatEvent(w,{type:'combat.round',battleId:p.battleId,id:receipt.eventId,at:receipt.at},new EventScheduler(w.events))).toEqual([]);expect(w).toEqual(before);expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
  const army=w.armies.filter(isMissionArmy)[0];w=advanceFormal(w,army.arrivalAt).world;expect(w.cities[0].military!.units.catapult).toBe(3000);expect(w.cities[2].ownerFactionId).toBe(owner);
 });
 it('B9-5 a 12-round failure persists partial numeric damage, exact five-minute spacing and remaining rounds through save/load',async()=>{
  let w=send(endgameWorld(),{catapult:1});w=advanceFormal(w,w.armies.filter(isMissionArmy)[0].arrivalAt).world;
  expect(w.combat!.battles[0].siegeRound).toBe(1);expect(w.combat!.battles[0].nextRoundAt-w.time).toBe(300000);
- w=(await decodeSave(await encodeSave(w))).world;const loaded=structuredClone(w),result=resolve(w);expect(resolve(loaded)).toEqual(result);w=result.world;const p=result.reports.find(r=>r.battle)!.battle!;
+ w=(await decodeSave(await encodeSave(w))).world;const loaded=structuredClone(w),result=resolve(w);expect(gameTransition(resolve(loaded))).toEqual(gameTransition(result));w=result.world;const p=result.reports.find(r=>r.battle)!.battle!;
  expect(p.siegeRounds).toBe(12);expect(p.conquestReason).toBe('wonder-timeout');expect(p.outcome).toBe('wonder-held');expect(p.wonder!.damage).toBe(540);expect(w.largeProjects[0].wonder!.durability!.current).toBe(119460);expect(w.largeProjects[0].wonder!.durability!.ledger).toHaveLength(12);expect(w.cities[2].ownerFactionId).toBe(w.factions[1].id);
 });
 it('B9-5 actual guarding battle must clear defenders before bombardment; lost catapults fail without damage',()=>{

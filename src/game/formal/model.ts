@@ -1,3 +1,4 @@
+import type {LedgerState} from './commandLedger';
 import type { ArmyId, CampaignId, CityId, CommandId, EmpireId, EventId, FactionId, ProjectId, ReportId, ResearchProjectId, ShipmentId, WildSiteId } from './ids';
 import type { VersionMetadata } from './versions';
 import type {ArmyCommand,ArmyMissionState,BattleReportPayload,CombatState} from './combatModel';
@@ -90,7 +91,7 @@ export type FormalWorld = {
   dimensions:{width:number;height:number};playerFactionId:FactionId;revision:number;
   sequences:{event:number;report:number;project:number};
   factions:FormalFaction[];cities:FormalCity[];armies:FormalArmy[];events:FormalEvent[];
-  commandReceipts:CommandReceipt[];completionReceipts:CompletionReceipt[];
+  ledger?:LedgerState;commandReceipts:CommandReceipt[];completionReceipts:CompletionReceipt[];
   researchProjects:ResearchProject[];largeProjects:LargeProject[];logistics?:LogisticsShipment[];settlements?:Settlement[];colonizationUnits?:ColonizationUnit[];combat?:CombatState;
 };
 export type FormalReport = {id:ReportId;sequence:number;campaignId:CampaignId;ownerFactionId:FactionId;at:number;realAt?:number;clockSpeed?:number;read?:boolean;category:'system'|'research'|'battle'|'scout'|'diplomacy';title:string;text:string;battle?:BattleReportPayload};
@@ -99,5 +100,5 @@ export type DevelopmentCommand={type:'logistics.configure';cityId:CityId;rules:A
 export type EconomyCommand = {type:'building.demolish';cityId:CityId;key:string}|{type:'field.upgrade';cityId:CityId;slot:number;lane?:0|1}|{type:'building.upgrade';cityId:CityId;key:string;lane?:0|1;slot?:number}|{type:'construction.cancel';cityId:CityId;constructionCommandId:CommandId}|{type:'city.promote';cityId:CityId}|{type:'logistics.dispatch';cityId:CityId;destinationCityId:CityId;resources:Resources};
 export type FormalCommand = import('./growthTasks').GrowthClaimCommand|import('./modernCatchup').CatchupCommand|{type:'modern.reverse';cityId:CityId;unitId:string}|BreakthroughCommand|WonderCommand| {type:'campaign.configure';cityId:CityId;speed:1|3|6|10|25;offlineHours:0|1|4|8|12}| import('./governance').GovernanceCommand| import('./extinction').ExtinctionCommand| {type:'developer.configure';cityId:CityId;enabled:boolean;speed:50|100;shield?:boolean}|import('./politics').PoliticalCommand|import('./politics').CooperationCommand|ArmyCommand|DevelopmentCommand|MilitaryCommand|EconomyCommand| {type:'city.rename';cityId:CityId;name:string}|{type:'research.contribute';projectId:ResearchProjectId;cityId:CityId;resources:Resources};
 export type FormalOrder = {commandId:CommandId;campaignId:CampaignId;issuerId:FactionId;issuedWorldTime:number;expectedRevision:number;payload:FormalCommand};
-export type CommandAck = {commandId:CommandId;status:'committed'|'duplicate'|'rolled-back'|'rejected';revision:number;originalRevision?:number;reason?:string};
+export type CommandAck = {commandId:CommandId;status:'committed'|'duplicate'|'rolled-back'|'rejected';revision:number;originalRevision?:number;requiresConfirmation?:true;reason?:string};
 export type FormalTransition = {world:FormalWorld;reports:FormalReport[];ack?:CommandAck};

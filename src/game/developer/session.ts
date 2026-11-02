@@ -1,3 +1,4 @@
+import {commandHistory} from '../formal/commandLedger';
 import {FormalPersistence} from '../persistence';
 import {advanceFormal,submitFormalOrder} from '../formal/reducer';
 import type {FormalCommand,FormalWorld} from '../formal/model';
@@ -5,7 +6,7 @@ import {developerWorld,developerOrder,type DeveloperConfig} from './scenarios';
 import {citySnapshot} from '../formal/economy';
 import {createTrialWorld,type TrialRequest,type TrialInfo} from './specTrials';
 export type DeveloperLog={sequence:number;action:string;at:number;revision:number;result:string;before:unknown;after:unknown;command?:FormalCommand};
-export const inspectWorld=(w:FormalWorld)=>({campaign:w.campaignId,revision:w.revision,time:w.time,speed:w.speed,ruleset:w.metadata.rulesetVersion,cities:w.cities.length,player:w.playerFactionId,playerFaction:w.factions.find(f=>f.id===w.playerFactionId),owned:w.cities.filter(c=>c.ownerFactionId===w.playerFactionId).map(c=>{const n=citySnapshot(w,c.id)!;return {id:n.id,population:n.population,housing:n.housing,stock:n.stock,buildings:n.buildings,fields:n.fields,wallLevel:n.wallLevel,cityPromotionCompleted:n.cityPromotionCompleted,milestones:n.economy?.milestones,construction:n.economy?.construction,promotion:n.economy?.promotion,military:n.military,reservedIncoming:n.economy?.reservedIncoming};}),events:w.events.filter(e=>e.type!=='economy.settle'),research:w.researchProjects,settlements:w.settlements,colonizationUnits:w.colonizationUnits,logistics:w.logistics,receipts:w.commandReceipts});
+export const inspectWorld=(w:FormalWorld)=>({campaign:w.campaignId,revision:w.revision,time:w.time,speed:w.speed,ruleset:w.metadata.rulesetVersion,cities:w.cities.length,player:w.playerFactionId,playerFaction:w.factions.find(f=>f.id===w.playerFactionId),owned:w.cities.filter(c=>c.ownerFactionId===w.playerFactionId).map(c=>{const n=citySnapshot(w,c.id)!;return {id:n.id,population:n.population,housing:n.housing,stock:n.stock,buildings:n.buildings,fields:n.fields,wallLevel:n.wallLevel,cityPromotionCompleted:n.cityPromotionCompleted,milestones:n.economy?.milestones,construction:n.economy?.construction,promotion:n.economy?.promotion,military:n.military,reservedIncoming:n.economy?.reservedIncoming};}),events:w.events.filter(e=>e.type!=='economy.settle'),research:w.researchProjects,settlements:w.settlements,colonizationUnits:w.colonizationUnits,logistics:w.logistics,receipts:commandHistory(w)});
 /** Uses the real persistence/reducer APIs, always a mandatory developer suffix.
  * The normal worker/store is never addressed by this session. */
 export class DeveloperSession{

@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach, expect, it} from 'vitest';
 import {mkdirSync, writeFileSync} from 'node:fs';
@@ -11,7 +12,8 @@ import {advanceFormal, submitFormalOrder} from './reducer';
 import {advanceOffline} from './offline';
 import {HOUR} from './economy';
 import {validateFormalWorld} from './schema';
-import {encodeSave, decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {canonicalJSON} from './canonical';
 import {isMissionArmy} from './combatModel';
 import {empireOf} from './politics';
@@ -24,7 +26,7 @@ import type {FormalCommand, FormalWorld} from './model';
 const stores: FormalPersistence[] = [];
 afterEach(async () => { for (const s of stores.splice(0)) await s.db.delete(); });
 function gameplay(w: FormalWorld) {
-  const c = structuredClone(w); c.revision = 0;
+  const c = structuredClone(projectWorld(w)); c.revision = 0;
   for (const r of c.commandReceipts) r.committedRevision = 0;
   return canonicalJSON(c);
 }
@@ -144,7 +146,7 @@ it('R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> confirmed
   expect(w.factions[1].techIds).toEqual(tech);
   expect(w.factions.every(f=>f.modernQualification==='none')).toBe(true);
   expect(w.extinction!.sites).toHaveLength(1);
-  expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+  expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
   evidence('controlled-chain.json',{time:w.time,finalReceipts:w.combat!.receipts.filter(r=>r.kind==='final'),
     exiles:w.extinction!.sites,foreignCastle:w.cities[1].castleCivilizationId,rebirth:home,
     winnerIntel:reward,qualifications:w.factions.map(f=>f.modernQualification)});
