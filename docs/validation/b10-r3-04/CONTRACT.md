@@ -20,6 +20,8 @@ Header：protocolVersion 2、campaignId、branch、writerEpoch、sessionId、bas
 
 Store 驗證整包版本、形狀、身份與必要參照後才發布；失敗不變更現有畫面。不連續、舊分支、舊引擎、不支援協定、重複亂序均拒絕。只要求展示 Snapshot，最多三次自動恢復，一次一個請求，三秒期限；仍有手動重新同步入口。不得重送／取消正式玩家命令。有效 Patch 重設自動恢復預算；Snapshot 本身不能支撐無限失配風暴。
 
+終局 Ack／Status 的既有權威 Revision 亦作為同 campaign 畫面下限。若最後一份世界訊息遺失，250ms後仍未收到對應畫面即啟動上述有界追補，不等待下一Tick（含滅國／終局凍結）。多筆Ack只合併最高下限，不延後首次期限；低於下限的Snapshot不能清除異常。正常隨後到達的世界訊息取消追補；不同campaign與舊Ack不改畫面。此處不變更任何正式命令Revision，只重取唯讀畫面。
+
 ## React 與保留成本
 
 useSyncExternalStore 統一展示來源；同城畫面 Selector 只依該城、所屬勢力、總督與真實全局規則輸入失效。世界時間影響資源展示時正常更新。招募輸入維持元件本地狀態。地圖／主畫面 memo；不同 branch/writer 的城市表單、地圖、情報與 Preview 重新建立。Preview 使用最新全局展示版本，只讀專用 Worker，不受局部畫面快取阻擋。

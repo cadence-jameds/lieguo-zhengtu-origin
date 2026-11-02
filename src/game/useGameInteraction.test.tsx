@@ -26,6 +26,14 @@ beforeEach(async()=>{
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',FakeWorker);Object.defineProperty(navigator,'locks',{configurable:true,value:{}});w=createFormalFixture();container=document.createElement('div');document.body.append(container);root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>port.emit(state(w)));port.sent=[];
 });
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();delete (navigator as any).locks;vi.unstubAllGlobals();});
+it('terminal Ack with the final world frame lost recovers without another tick or command; stale snapshots do not fake display convergence',async()=>{
+ vi.useFakeTimers();try{
+  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'最後畫面'}));const sent=port.sent[0],initial=engine.world;
+  await act(async()=>port.emit({type:'commandAck',campaignId:w.campaignId,ack:{commandId:sent.order.commandId,status:'committed',revision:1}}));expect(engine.commandRows[0].state).toBe('committed');await act(async()=>vi.advanceTimersByTime(249));expect(port.sent.filter(r=>r.type==='snapshot')).toHaveLength(0);await act(async()=>vi.advanceTimersByTime(1));expect(port.sent.filter(r=>r.type==='snapshot')).toHaveLength(1);expect(engine.presentationStore.getHealth().state).toBe('recovering');expect(engine.world).toBe(initial);
+  await act(async()=>port.emit(state(w)));expect(engine.world).toBe(initial);expect(engine.presentationStore.getHealth().state).toBe('recovering');
+  const latest={...w,revision:1,cities:w.cities.map((c,i)=>i?c:{...c,name:'最後畫面'})};await act(async()=>port.emit(state(latest)));expect(engine.world!.cities[0].name).toBe('最後畫面');expect(engine.presentationStore.getHealth().state).toBe('ready');await act(async()=>vi.advanceTimersByTime(10000));expect(port.sent.filter(r=>r.type==='command')).toHaveLength(1);expect(port.sent.filter(r=>r.type==='commandQuery')).toHaveLength(0);expect(port.sent.filter(r=>r.type==='snapshot')).toHaveLength(1);
+ }finally{vi.useRealTimers();}
+});
 it('an old campaign Ack with the same command ID cannot replace the new campaign operation feedback',async()=>{
  const uuid=vi.spyOn(crypto,'randomUUID').mockReturnValue('11111111-1111-4111-8111-111111111111');
  try{

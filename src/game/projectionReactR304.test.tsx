@@ -11,6 +11,12 @@ import {usePresentationSelector} from './usePresentation';
 import type {FormalWorld} from './formal/model';
 import type {PresentationWorld} from './presentationModel';
 afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();});
+it('authority revision deadlines coalesce without being postponed; stale snapshots cannot clear the missing-final-frame warning',()=>{
+ vi.useFakeTimers();const store=new PresentationStore(),stream=fixtureStream(),request=vi.fn(),recovery=new ProjectionRecovery(store,request),w=createFormalFixture(),writer={branch:1,writerEpoch:1};recovery.receive(stream.publish(w,writer));const initial=store.getWorld();
+ recovery.observeAuthorityRevision(w.campaignId,1);vi.advanceTimersByTime(200);recovery.observeAuthorityRevision(w.campaignId,2);vi.advanceTimersByTime(49);expect(request).not.toHaveBeenCalled();vi.advanceTimersByTime(1);expect(request).toHaveBeenCalledTimes(1);expect(store.getHealth().state).toBe('recovering');
+ expect(recovery.receive(stream.publish({...w,revision:1},writer,true)).accepted).toBe(false);expect(store.getWorld()).toBe(initial);expect(store.getHealth().state).toBe('recovering');expect(request).toHaveBeenCalledTimes(1);
+ expect(recovery.receive(stream.publish({...w,revision:2},writer,true)).accepted).toBe(true);expect(store.getHealth().state).toBe('ready');recovery.observeAuthorityRevision(w.campaignId,1);recovery.observeAuthorityRevision('other-campaign',100);vi.advanceTimersByTime(10000);expect(request).toHaveBeenCalledTimes(1);recovery.dispose();
+});
 it('100 city updates: v1 whole-city-section control renders both consumers; v2 renders only the changed city',async()=>{
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);
  class SectionControl extends PresentationStore {control:PresentationWorld|null=null;override getWorld=()=>this.control;}

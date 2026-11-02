@@ -155,7 +155,7 @@ export function useGame(){
     if(r.type==='synced'){finishSave(r.requestId);setSynced(n=>n+1);if(!commands.current.busy)setNotice('進度已保存。');}
     if(r.type==='commandReceived'&&(!r.campaignId||r.campaignId===latestCommandCampaign.current)&&commands.current.matches(r.commandId)){setNotice('指令已受理，尚未持久保存。');setFeedback({kind:'sending',text:'指令已受理，尚未持久保存。'});}
     if(r.type==='commandDurable'||r.type==='commandStatus'){
-     if(r.row){const row=r.row as InboxCommand;forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
+     if(r.row){const row=r.row as InboxCommand;if(row.ack)recovery.observeAuthorityRevision(row.campaignId,row.ack.revision);forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
       if(row.ack&&row.order.campaignId===latestCommandCampaign.current&&commands.current.acknowledge(row.ack)){const feedback=feedbackForAck(row.ack);setNotice(feedback.text);setFeedback(feedback);}
       else if(row.order.campaignId===latestCommandCampaign.current&&commands.current.matches(row.commandId)&&!row.ack&&!waitExpired.current.has(waitKey(row.order.campaignId,row.commandId))){setNotice('指令已持久接收，等待正式提交。');setFeedback({kind:'pending',text:'指令已持久接收，等待正式提交。'});}}
     }
@@ -163,7 +163,7 @@ export function useGame(){
     if(r.type==='commandReceiveFailed'||r.type==='commandBlocked'){
      const latest=(!r.campaignId||r.campaignId===latestCommandCampaign.current)&&commands.current.matches(r.commandId);if(latest)commands.current.finish(r.commandId);updateCommand(r.commandId,{...(r.row?{order:r.row.order}:{}),state:r.row?.state??(r.type==='commandBlocked'?'blocked':'receive-failed'),text:r.text},r.campaignId);if(latest){setFeedback({kind:'error',text:r.text});setNotice(r.text);}
     }
-    if(r.type==='commandAck'){const a=r.ack as CommandAck,campaign=r.campaignId??current.current?.campaignId;forgetDraft(a.commandId,campaign);updateCommand(a.commandId,{state:resultState(a),text:feedbackForAck(a).text},campaign);if((!campaign||campaign===latestCommandCampaign.current)&&commands.current.acknowledge(a)){clearTimeout(commandTimer.current);const feedback=feedbackForAck(a);setNotice(feedback.text);setFeedback(feedback);}}
+    if(r.type==='commandAck'){const a=r.ack as CommandAck,campaign=r.campaignId??current.current?.campaignId;if(campaign)recovery.observeAuthorityRevision(campaign,a.revision);forgetDraft(a.commandId,campaign);updateCommand(a.commandId,{state:resultState(a),text:feedbackForAck(a).text},campaign);if((!campaign||campaign===latestCommandCampaign.current)&&commands.current.acknowledge(a)){clearTimeout(commandTimer.current);const feedback=feedbackForAck(a);setNotice(feedback.text);setFeedback(feedback);}}
     if(r.type==='export'){
      const url=URL.createObjectURL(new Blob([r.text],{type:'application/json'})),a=document.createElement('a');
      a.href=url;a.download='列國征途-formal-'+r.mode+'.realm-save';a.click();URL.revokeObjectURL(url);
