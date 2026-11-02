@@ -1,0 +1,82 @@
+{
+  "environment": "Native Chromium desktop Linux container; synthetic worlds; not Android or a deployed release",
+  "browser": "154.0.8037.57",
+  "at": "2026-11-02T03:22:35.170Z",
+  "cases": [
+    {
+      "name": "formal T2 native atomic abort at every write boundary",
+      "status": "PASS",
+      "data": {
+        "boundaries": [
+          "report-write",
+          "backup-write",
+          "world-write",
+          "authority-write",
+          "metadata-write",
+          "result-write",
+          "ledger-segment-write",
+          "ledger-result-write",
+          "ledger-index-write",
+          "ledger-manifest-write",
+          "ledger-head-write"
+        ],
+        "injection": "QuotaExceededError, not actual disk exhaustion",
+        "unchanged": "all tables after failed transaction"
+      }
+    },
+    {
+      "name": "no-effect results survive reopen, quick/full and Recovery; stale writer/CAS rejected",
+      "status": "PASS",
+      "data": {
+        "reopen": true,
+        "quick": true,
+        "full": true,
+        "recovery": true,
+        "oldWriterRejected": true
+      }
+    },
+    {
+      "name": "actual Runtime Worker restart recovers durable T1 while independent Preview Worker fails",
+      "status": "PASS",
+      "data": {
+        "durableBeforeBoot": true,
+        "restart": true,
+        "previewTerminationIndependent": true,
+        "queryable": true
+      }
+    },
+    {
+      "name": "native no-effect T2 failures keep all authoritative rows and Pending",
+      "status": "PASS",
+      "data": {
+        "boundaries": [
+          "world-write",
+          "authority-write",
+          "result-write",
+          "ledger-result-write",
+          "ledger-index-write",
+          "ledger-manifest-write",
+          "ledger-head-write"
+        ]
+      }
+    },
+    {
+      "name": "two actual pages: Web Lock exclusion, restart handoff and persistent writer fencing",
+      "status": "PASS"
+    },
+    {
+      "name": "native 99 AI at 25X: T1 completes during private catch-up and stalled Preview death cannot cancel the formal order",
+      "status": "PASS",
+      "data": {
+        "durableDuringCatchup": true,
+        "effects": 1,
+        "decisions": 99,
+        "speed": 25,
+        "preview": "fault-injected stall before handler installation; terminated at durable intake",
+        "syntheticClockAdvanceMs": 12000
+      }
+    }
+  ],
+  "performance": [],
+  "implementationCommit": "3697185c2ab7a088feeb1c5066539d3f44c9e511"
+}

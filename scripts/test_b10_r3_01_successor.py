@@ -17,7 +17,10 @@ class DurableSuccessorTests(unittest.TestCase):
    for old in r['grants'].get(p,[]):self.assertTrue(gate.accepts(p,old,self.root))
    self.assertFalse(gate.accepts(p,'0'*64,self.root))
   for p in ['src/game/formal/reducer.ts','src/game/formal/scheduler.ts','src/game/formal/schema.ts','src/game/formal/autonomy.ts']:
-   self.assertFalse(gate.accepts(p,r['invariants'][p],self.root))
+   # Exact reviewed R3-03 successors are permitted; forged predecessors still fail.
+   import b10_r3_03_successor as successor
+   self.assertEqual(gate.accepts(p,r['invariants'][p],self.root),successor.accepts(p,r['invariants'][p],self.root))
+   self.assertFalse(gate.accepts(p,'0'*64,self.root))
  def test_current_bytes_and_refreshed_manifest_cannot_authorize_tampering(self):
   manifest=self.root/gate.RECORD;original=manifest.read_bytes();r=json.loads(original)
   for section,p in [('changes','src/game/runtime.worker.ts'),('invariants','src/game/formal/reducer.ts'),('invariants','src/game/formal/scheduler.ts'),('historical',next(iter(r['historical']))),('adapters','scripts/p0c10_successor.py')]:
