@@ -1,4 +1,4 @@
-import {commandHistory,pendingHistory,findReceipt,bindLedger,cachedLedger,emptyVerifiedLedger,prepareVerifiedLedger,verifyLedgerArchive,type VerifiedLedger,type OriginalResult,normalizeOutcomeRevisions} from './formal/commandLedger';
+import {commandHistory,pendingHistory,worldLedger,findReceipt,bindLedger,cachedLedger,emptyVerifiedLedger,prepareVerifiedLedger,verifyLedgerArchive,type VerifiedLedger,type OriginalResult,normalizeOutcomeRevisions} from './formal/commandLedger';
 import {cloneWorldDraft} from './formal/worldDraft';
 import {ledgerStores,ledgerTables,ledgerIdentityRange,readLedger,readLedgerArchive,writeLedger,publishLedgerHead,resultFromReceipt,archiveFromBundle,type LedgerBundle} from './ledgerStore';
 import {validateFormalWorld} from './formal/schema';
@@ -259,7 +259,7 @@ export class FormalPersistence {
    normalizeOutcomeRevisions(w);const outcomes=new Map<string,OriginalResult>((w.ledger?.outcomes??[]).map(r=>[r.commandId,r]));
    for(const r of rows){const old=base.result(r.commandId);if(!old)outcomes.set(r.commandId,resultFromReceipt(r));}
    if(mode!=='save')for(const r of await this.db.Inbox.where('campaignId').equals(w.campaignId).toArray())if(terminalCommand(r)&&!base.result(r.commandId)){if(!r.ack)throw Error('終局 Inbox 缺少結果。');outcomes.set(r.commandId,r.originalResult??originalCommand(r,r.ack));}
-   if(portable){const imported=portable.snapshots.find(s=>s.manifest.checksum===input.ledger?.anchor.root);if(imported)for(const segment of imported.results)for(const r of segment.records){const old=base.result(r.commandId);if(old&&canonicalJSON(old)!==canonicalJSON(r))throw Error('匯入原始結果衝突。');if(!old)outcomes.set(r.commandId,r);}}
+   const imported=portable?.snapshots.find(s=>s.manifest.checksum===input.ledger?.anchor.root)??(mode!=='save'&&input.ledger?worldLedger(input):undefined);if(imported)for(const segment of imported.results)for(const r of segment.records){const old=base.result(r.commandId);if(old&&canonicalJSON(old)!==canonicalJSON(r))throw Error('匯入原始結果衝突。');if(!old)outcomes.set(r.commandId,r);}
    if(command&&!base.result(command.row.commandId)){const receipt=rows.find(r=>r.commandId===command.row.commandId);if(!receipt||receipt.issuerId===command.row.issuerId&&receipt.fingerprint===command.row.fingerprint)outcomes.set(command.row.commandId,originalCommand(command.row,command.ack));}
    const ledger=await Dexie.waitFor(prepareVerifiedLedger(base,rows,[...outcomes.values()],w.revision,meta.branch,meta.writerEpoch));
    bindLedger(w,ledger);const envelope=await Dexie.waitFor(encodeSave(w,undefined,false));

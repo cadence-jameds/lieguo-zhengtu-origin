@@ -4,7 +4,7 @@ import {applyWonderDamage} from './wonderCondition';
 import {fundRepair} from './endgameTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,beforeAll,it,expect} from 'vitest';
-import {completedWonder,breakthroughWorld,fundedBreakthrough} from './breakthroughTestSupport';
+import {completedWonder,breakthroughWorld,fundedBreakthroughSnapshot} from './breakthroughTestSupport';
 import {wonderWorld,wonderAct} from './wonderTestSupport';
 import {order} from './developmentTestSupport';
 import {advanceFormal,advanceFormalCooperative,submitFormalOrder} from './reducer';
@@ -21,7 +21,7 @@ import {enableAutonomy} from './autonomy';
 import {make,build,rich} from './developmentTestSupport';
 import {empireId,eventId,resolutionId} from './ids';
 let funded:FormalWorld;
-beforeAll(()=>{funded=fundedBreakthrough();},240000);
+beforeAll(async()=>{funded=await fundedBreakthroughSnapshot();},240000);
 const end=(w:FormalWorld)=>w.largeProjects[1].breakthrough!.activeSince!+BREAKTHROUGH_DURATION;
 it('B9-2 requires a completed usable wonder, leader and current members; creation and replay cannot spend or create extra projects',()=>{
  const notDone=wonderWorld(),bad=submitFormalOrder(notDone,order(notDone,{type:'breakthrough.start',cityId:notDone.cities[0].id}));expect(bad.ack?.status).toBe('rejected');expect(bad.world).toBe(notDone);

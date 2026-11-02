@@ -72,12 +72,12 @@ function replayClonePolicy(current:FormalWorld):Pick<ReplayAdmission,'shareAuton
 }
 /** Only the isolated replay uses this draft. Commands never mutate worldLayer or existing receipt rows. */
 function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):FormalWorld {
- const body={...current,commandReceipts:[],completionReceipts:[]};
+ const body={...current,commandReceipts:[],completionReceipts:[]};delete body.ledger;
  if(Object.hasOwn(current,'worldLayer'))body.worldLayer=undefined;
  if(shareAutonomy)body.autonomy=undefined;
  if(current.combat)body.combat={...current.combat,receipts:[]};
  const w=structuredClone(body) as FormalWorld;
- copyHistory(current,w);w.completionReceipts=current.completionReceipts.slice();
+ copyHistory(current,w,true);w.completionReceipts=current.completionReceipts.slice();
  if(Object.hasOwn(current,'worldLayer'))w.worldLayer=current.worldLayer;
  if(shareAutonomy)w.autonomy=current.autonomy;
  if(current.combat)w.combat!.receipts=current.combat.receipts.slice();
@@ -87,7 +87,7 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
 function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
  const w={...current,...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
- copyHistory(current,w);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
+ copyHistory(current,w,true);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
 function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdmission):FormalWorld {
