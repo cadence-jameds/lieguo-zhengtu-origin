@@ -1,3 +1,4 @@
+import * as projectionMaps from '../admissionMap';
 import * as ledger from './commandLedger';
 import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
@@ -12,6 +13,9 @@ import {eventId,commandId} from './ids';
 import {playerOrderBase} from '../orderAdmission';
 import type {FormalWorld,FormalCommand,FormalOrder} from './model';
 
+// Observe committed domain state separately from the real v2 UI wire/store.
+let projectionBridge:import('./projectionTestSupport').ProjectionTestBridge;
+vi.mock('../worldStream',async(importOriginal)=>{const real=await importOriginal<typeof import('../worldStream')>(),{ProjectionTestBridge}=await import('./projectionTestSupport');return {...real,WorldStream:class extends real.WorldStream{constructor(){const bridge=new ProjectionTestBridge(false);projectionBridge=bridge;super(crypto.randomUUID(),bridge.reader);}}};});
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),reportStatus:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),reportAction:vi.fn(),readCityIntel:vi.fn()}));
 vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let messages:any[],port:{postMessage:(r:unknown)=>void;onmessage:((e:{data:unknown})=>void)|null},initial:FormalWorld,now=0;
@@ -23,8 +27,8 @@ const latest=()=>messages.filter(r=>r.type==='state').at(-1)?.world as FormalWor
 async function load(world:FormalWorld){storage.loadWithOffline.mockResolvedValue({game:world,recovered:false});send({type:'load',requestId:'load'});await until(()=>done('load'));messages=[];}
 function click(world:FormalWorld,id:string,payload:FormalCommand){const issued=order(world,id,payload);send({type:'command',requestId:id,order:issued,playerBase:playerOrderBase(world,payload)});return issued;}
 beforeEach(async()=>{
- vi.resetModules();vi.doMock('./commandLedger',()=>ledger);vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());
- initial=createFormalFixture();messages=[];port={postMessage:r=>messages.push(structuredClone(r)),onmessage:null};vi.stubGlobal('self',port);
+ vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);vi.doMock('./commandLedger',()=>ledger);vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());
+ initial=createFormalFixture();messages=[];port={postMessage:r=>messages.push(structuredClone(projectionBridge.receive(r))),onmessage:null};vi.stubGlobal('self',port);
  storage.save.mockImplementation(async(w:FormalWorld)=>w);storage.reportStatus.mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}});
  await import('../runtime.worker');await load(initial);
 });

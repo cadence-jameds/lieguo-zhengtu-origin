@@ -1,5 +1,6 @@
+import type {WorldRead} from '../presentationModel';
 import type {ArmyId,CityId,FactionId,WildSiteId,ProjectId} from './ids';
-import type {FormalArmy,FormalCity,FormalWorld,WildSite} from './model';
+import type {FormalArmy,FormalCity,WildSite} from './model';
 import {armyPosition} from './armyPosition';
 export type Bounds={minX:number;minY:number;maxX:number;maxY:number};
 /** Derived, ephemeral maps. No cache, renderer, or index data enters a formal save. */
@@ -30,6 +31,6 @@ export class SpatialIndex {
  }
  nearby(x:number,y:number,radius:number){const q=this.query({minX:x-radius,minY:y-radius,maxX:x+radius,maxY:y+radius});return{cities:q.cities.filter(c=>Math.hypot(c.x-x,c.y-y)<=radius),sites:q.sites.filter(s=>Math.hypot(s.x-x,s.y-y)<=radius)};}
 }
-const indexes=new WeakMap<FormalWorld,{time:number;index:SpatialIndex}>();
-export function invalidateSpatial(w:FormalWorld){indexes.delete(w);}
-export function spatial(w:FormalWorld):SpatialIndex {let cached=indexes.get(w);if(!cached){const i=new SpatialIndex(w.dimensions.width,w.dimensions.height,w.worldLayer?.regionSize??32);for(const c of w.cities)i.addCity(c);for(const s of w.worldLayer?.wildSites??[])if(s.phase!=='cooldown')i.addSite(s);for(const s of w.extinction?.sites??[])if(s.phase==='active')i.addSite(s);for(const p of w.settlements??[])if(p.phase==='travelling'&&p.target)i.reserve(p.target.x,p.target.y,p.projectId);for(const a of w.armies)i.addArmy(a,w.time);cached={time:w.time,index:i};indexes.set(w,cached);}else if(cached.time!==w.time){cached.index.armies.clear();cached.index.armyCells.clear();cached.index.armyRegions.clear();for(const a of w.armies)cached.index.addArmy(a,w.time);cached.time=w.time;}return cached.index;}
+const indexes=new WeakMap<WorldRead,{time:number;index:SpatialIndex}>();
+export function invalidateSpatial(w:WorldRead){indexes.delete(w);}
+export function spatial(w:WorldRead):SpatialIndex {let cached=indexes.get(w);if(!cached){const i=new SpatialIndex(w.dimensions.width,w.dimensions.height,w.worldLayer?.regionSize??32);for(const c of w.cities)i.addCity(c);for(const s of w.worldLayer?.wildSites??[])if(s.phase!=='cooldown')i.addSite(s);for(const s of w.extinction?.sites??[])if(s.phase==='active')i.addSite(s);for(const p of w.settlements??[])if(p.phase==='travelling'&&p.target)i.reserve(p.target.x,p.target.y,p.projectId);for(const a of w.armies)i.addArmy(a,w.time);cached={time:w.time,index:i};indexes.set(w,cached);}else if(cached.time!==w.time){cached.index.armies.clear();cached.index.armyCells.clear();cached.index.armyRegions.clear();for(const a of w.armies)cached.index.addArmy(a,w.time);cached.time=w.time;}return cached.index;}

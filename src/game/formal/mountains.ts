@@ -1,3 +1,4 @@
+import type {TerrainRead} from '../presentationModel';
 /** DEMO atlas footprint adapted to Formal durable terrain. Never calls legacy geography. */
 import atlas from '../sceneryAtlas.json';
 import silhouettes from './mountainSilhouettes.json';
@@ -47,4 +48,4 @@ export function migrateMountains(w:FormalWorld):FormalWorld{
  const next=structuredClone(w);installMountains(next);next.metadata={...w.metadata,terrainVersion:3};return next;
 }
 const indexes=new WeakMap<MountainSprite[],Map<string,MountainSprite>>();
-export function mountainAt(w:FormalWorld,x:number,y:number){const sprites=w.worldLayer?.mountains?.sprites;if(!sprites)return undefined;let index=indexes.get(sprites);if(!index){index=new Map(sprites.map(d=>[d.x+','+d.y,d]));indexes.set(sprites,index);}return index.get(x+','+y);}
+export function mountainAt(w:TerrainRead,x:number,y:number){const sprites=w.worldLayer?.mountains?.sprites;if(!sprites)return undefined;let index=indexes.get(sprites);if(!index){index=new Map(sprites.map(d=>[d.x+','+d.y,d]));indexes.set(sprites,index);}return index.get(x+','+y);}

@@ -1,3 +1,5 @@
+import {memo} from 'react';
+import type {WorldRead} from './presentationModel';
 import type {GovernanceBase} from './governanceAdmission';
 import {GovernorControls} from './presentation/GovernanceView';
 import {QUEUE_CAPACITY} from './formal/economy';
@@ -6,7 +8,7 @@ import {BuildingDetail,BuildingPrerequisiteSummary,buildingPrerequisiteLabel} fr
 import {useConstructionPreviews,PreviewStatus} from './presentation/useConstructionPreviews';
 import type {PreviewTarget} from './constructionPreviewProtocol';
 import {useCallback,useEffect,useMemo,useState} from 'react';
-import type {FormalCommand,FormalWorld} from './formal/model';
+import type {FormalCommand} from './formal/model';
 import type {CityId} from './formal/ids';
 import {administrationMultiplier,citySnapshot,cityTitle,constructionConcurrency,growPopulation,offeringPerHour,HOUR,MILESTONES} from './formal/economy';
 import {BUILDING_CATALOG,buildingLevel,storageCapacity,protection,FIELD_PRODUCTION} from './formal/catalogB3';
@@ -21,7 +23,7 @@ import {AGE_NAMES,LABELS,FIELD_NAMES,FIELD_ALIAS,cityPresentation} from './prese
 import {BUILDING_CATEGORIES,BUILDING_DESCRIPTIONS,constructionAction,newBuildingKey,availableBuildings} from './presentation/cityActions';
 
 type Selection={key:string;slot?:number}|{field:number}|{emptySlot:number}|{wall:true};
-export default function FormalCityPanel({world,cityId,issue,busy,mobile=false,onRename,centerRequest=0,onCenterOpened,onNavigate}:{world:FormalWorld;cityId:CityId;issue:(p:FormalCommand,base?:GovernanceBase)=>void|Promise<boolean>;busy:boolean;mobile?:boolean;onRename?:()=>void;centerRequest?:number;onCenterOpened?:()=>void;onNavigate?:(view:'army'|'research')=>void}){
+function FormalCityPanel({world,cityId,issue,busy,mobile=false,onRename,centerRequest=0,onCenterOpened,onNavigate}:{world:WorldRead;cityId:CityId;issue:(p:FormalCommand,base?:GovernanceBase)=>void|Promise<boolean>;busy:boolean;mobile?:boolean;onRename?:()=>void;centerRequest?:number;onCenterOpened?:()=>void;onNavigate?:(view:'army'|'research')=>void}){
  const [governorCity,setGovernorCity]=useState<CityId|null>(null);
  useEffect(()=>{setGovernorCity(null);setSelection(null);},[cityId,world.campaignId]);
  const [district,setDistrict]=useState<'town'|'outskirts'>('outskirts');
@@ -51,3 +53,5 @@ export default function FormalCityPanel({world,cityId,issue,busy,mobile=false,on
  </Dialog>}
  </section>;
 }
+
+export default memo(FormalCityPanel);

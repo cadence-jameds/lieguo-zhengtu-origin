@@ -4,7 +4,8 @@ import {createRoot,type Root} from 'react-dom/client';
 import {beforeEach,afterEach,expect,it,vi} from 'vitest';
 import {useGame} from './useGame';
 import {createFormalFixture,fixtureIds} from './formal/fixture';
-import {worldPatch} from './worldStream';
+import {fixtureStream} from './formal/projectionFixtureSupport';
+import {fixtureProjection} from './formal/projectionTestSupport';
 import type {FormalWorld} from './formal/model';
 import {governanceBase} from './governanceAdmission';
 import {playerOrderBase} from './orderAdmission';
@@ -12,18 +13,29 @@ vi.mock('./saveLock',()=>({withSaveLock:async(_locks:unknown,_signal:unknown,run
 let root:Root,container:HTMLDivElement,engine:ReturnType<typeof useGame>,port:FakeWorker,w:FormalWorld;
 class FakeWorker {
  onmessage:((event:{data:unknown})=>void)|null=null;onerror:((event:{message:string})=>void)|null=null;sent:any[]=[];
- terminated=false;
+ readonly stream=fixtureStream();terminated=false;
  constructor(){port=this;}
  postMessage(data:unknown){this.sent.push(structuredClone(data));}
  terminate(){this.terminated=true;}
  emit(data:unknown){this.onmessage?.({data});}
 }
-const state=(world:FormalWorld,base=0)=>({type:'state',world,passiveRevisionBase:base,clock:{campaignId:world.campaignId,time:world.time,speed:world.speed,running:true}});
+const state=(world:FormalWorld,base=0)=>({type:'state',projection:port.stream.publish(world,{branch:0,writerEpoch:0},true),passiveRevisionBase:base,clock:{campaignId:world.campaignId,time:world.time,speed:world.speed,running:true}});
+function expectDisplayed(source:FormalWorld){expect(engine.world).toEqual(fixtureProjection(source,engine.world!.projection));expect(engine.world).not.toHaveProperty('commandReceipts');expect(engine.world).not.toHaveProperty('ledger');}
 function Surface(){engine=useGame();return <button disabled={engine.inputBusy} onClick={()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'改名'})}>確認</button>;}
 beforeEach(async()=>{
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',FakeWorker);Object.defineProperty(navigator,'locks',{configurable:true,value:{}});w=createFormalFixture();container=document.createElement('div');document.body.append(container);root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>port.emit(state(w)));port.sent=[];
 });
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();delete (navigator as any).locks;vi.unstubAllGlobals();});
+it('an old campaign Ack with the same command ID cannot replace the new campaign operation feedback',async()=>{
+ const uuid=vi.spyOn(crypto,'randomUUID').mockReturnValue('11111111-1111-4111-8111-111111111111');
+ try{
+  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'舊戰役'}));const old=port.sent[0];
+  const next={...w,campaignId:'campaign:replacement' as FormalWorld['campaignId']};await act(async()=>port.emit(state(next)));
+  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'新戰役'}));const latest=port.sent.at(-1);expect(latest.order.commandId).toBe(old.order.commandId);
+  await act(async()=>port.emit({type:'commandAck',campaignId:w.campaignId,ack:{commandId:old.order.commandId,status:'committed',revision:1}}));expect(engine.notice).toContain('受理中');expect(engine.commandRows.find(r=>r.order.campaignId===next.campaignId)!.state).toBe('created');
+  await act(async()=>port.emit({type:'commandAck',campaignId:next.campaignId,ack:{commandId:latest.order.commandId,status:'rejected',requiresConfirmation:true,revision:0,reason:'原始意圖已失效'}}));expect(engine.notice).toBe('原始意圖已失效');expect(engine.commandRows.find(r=>r.order.campaignId===next.campaignId)!.state).toBe('needs-confirmation');
+ }finally{uuid.mockRestore();}
+});
 it('background state and unrelated completions preserve pending tracking while command input remains available',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'甲'}));const first=port.sent[0];expect(engine.busy).toBe(true);expect(container.querySelector('button')!.disabled).toBe(false);
  await act(async()=>{port.emit(state({...w,time:1000,revision:1}));port.emit({type:'requestDone',requestId:'unrelated'});});expect(engine.busy).toBe(true);
@@ -70,15 +82,15 @@ it('governance uses the rendered configuration precondition even when a newer sn
  await act(async()=>{port.emit({type:'commandAck',ack:{commandId:r.order.commandId,status:'rejected',revision:1,reason:'治理狀態已更新，已刷新城市資料；請確認方針、預算及保留量後再次套用。'}});port.emit(state({...w,revision:1,time:1000},1));port.emit({type:'requestDone',requestId:r.requestId});});expect(port.sent).toHaveLength(1);expect(engine.busy).toBe(false);expect(engine.notice).toContain('再次套用');
 });
 
-it('committed patches keep static world identity and a mismatched stream requests a full snapshot',async()=>{
- const prior=engine.world!,next={...w,time:10000,revision:1};await act(async()=>port.emit({type:'state',patch:worldPatch(w,next),passiveRevisionBase:0,clock:{campaignId:w.campaignId,time:10000,speed:1,running:true}}));expect(engine.world).toEqual(next);expect(engine.world!.cities).toBe(prior.cities);expect(port.sent).toHaveLength(0);
- await act(async()=>port.emit({type:'state',patch:worldPatch(w,{...w,time:20000,revision:2})}));expect(engine.world).toEqual(next);expect(port.sent).toEqual([{type:'snapshot'}]);expect(engine.busy).toBe(false);
+it('v2 entity patches keep static identity and a mismatched stream requests one new projection snapshot',async()=>{
+ const prior=engine.world!,next={...w,time:10000,revision:1},patch=port.stream.publish(next,{branch:0,writerEpoch:0});await act(async()=>port.emit({type:'state',projection:patch,passiveRevisionBase:0,clock:{campaignId:w.campaignId,time:10000,speed:1,running:true}}));expectDisplayed(next);expect(engine.world!.cities).toBe(prior.cities);expect(port.sent).toHaveLength(0);
+ const bad=structuredClone(port.stream.publish({...next,time:20000,revision:2},{branch:0,writerEpoch:0}));bad.baseSequence=0;await act(async()=>port.emit({type:'state',projection:bad}));expectDisplayed(next);expect(port.sent).toEqual([{type:'snapshot'}]);expect(engine.busy).toBe(false);
 });
 it('historical intel query correlates Worker responses without holding the command button; lookup failure leaves the world ready',async()=>{
  const promise=engine.readCityIntel(w,fixtureIds.home),query=port.sent[0];expect(query.type).toBe('cityIntel');expect(query.reportCursor).toBe(w.sequences.report);expect(engine.busy).toBe(false);
  await act(async()=>port.emit({type:'cityIntel',queryId:query.queryId,data:{}}));await expect(promise).resolves.toEqual({});
  const failed=engine.readCityIntel(w,'wild:test',4);expect(port.sent[1].generation).toBe(4);const observed=failed.catch(e=>e.message);
- await act(async()=>port.emit({type:'cityIntel',queryId:port.sent[1].queryId,error:'查詢失敗'}));expect(await observed).toBe('查詢失敗');expect(engine.status).toBe('ready');expect(engine.world).toEqual(w);expect(engine.error).toBe('');
+ await act(async()=>port.emit({type:'cityIntel',queryId:port.sent[1].queryId,error:'查詢失敗'}));expect(await observed).toBe('查詢失敗');expect(engine.status).toBe('ready');expectDisplayed(w);expect(engine.error).toBe('');
 });
 it('update save waits for its own durable acknowledgement, not an unrelated sync or request completion',async()=>{
  let saved=false,promise!:Promise<void>;await act(async()=>{promise=engine.sync().then(()=>{saved=true;});});const request=port.sent[0];expect(request.type).toBe('sync');expect(engine.busy).toBe(true);
@@ -110,7 +122,7 @@ it('repeated same-cycle event counts do not conceal a genuinely stalled replay f
   await act(async()=>{port.emit({type:'phase',text:'讀取與驗證本機存檔'});port.emit({type:'phase',text:'推進離線期間的世界'});port.emit({type:'progress',progress:.1,events:16});});
   await act(async()=>{await vi.advanceTimersByTimeAsync(20000);port.emit({type:'progress',progress:.5,events:16});});
   await act(async()=>vi.advanceTimersByTimeAsync(9999));expect(port.terminated).toBe(false);expect(engine.status).toBe('loading');
-  await act(async()=>vi.advanceTimersByTimeAsync(1));expect(port.terminated).toBe(true);expect(engine.status).toBe('error');expect(engine.error).toContain('超過 30 秒沒有回應');expect(engine.world).toEqual(w);
+  await act(async()=>vi.advanceTimersByTimeAsync(1));expect(port.terminated).toBe(true);expect(engine.status).toBe('error');expect(engine.error).toContain('超過 30 秒沒有回應');expectDisplayed(w);
  }finally{vi.clearAllTimers();vi.useRealTimers();}
 });
 it('T1 failure retains the exact recoverable operation and retry uses the original identity; Durable removes the draft',async()=>{

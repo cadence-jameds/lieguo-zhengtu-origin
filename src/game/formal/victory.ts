@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {militaryRanking} from './militaryPower';
 import type {FormalEvent,FormalReport,FormalWorld} from './model';
 import type {EventId,FactionId} from './ids';
@@ -11,11 +12,11 @@ export type VictoryKind='conquest'|'hegemony';
 export type VictoryCandidate={scope:string;kind:VictoryKind;startedAt:number;eventId:EventId};
 export type VictoryResult={name:string;scope:string;kind:VictoryKind;at:number;eventId:EventId;members:FactionId[]};
 export type VictoryState={candidates:VictoryCandidate[];result:VictoryResult|null};
-export const victoryScope=(w:FormalWorld,id:FactionId)=>empireOf(w,id)?.id??id;
+export const victoryScope=(w:WorldRead,id:FactionId)=>empireOf(w,id)?.id??id;
 export const VICTORY_DURATION={conquest:12*HOUR,hegemony:24*HOUR} as const;
 /** Aggregate lawful ownership and same-world-time population projections.
  * Only public totals/rank are returned; private military ledgers remain internal. */
-export function campStatistics(w:FormalWorld){
+export function campStatistics(w:WorldRead){
  const populationAt=(c:FormalWorld['cities'][number])=>Math.floor(c.economy?growPopulation(c.population,c.housing,c.buildings.monastery??0,Math.max(0,w.time-c.economy.lastSettledAt)/HOUR):c.population);
  const scopes=new Map<FactionId,string>(),cityCounts=new Map<string,{cities:number;population:number}>(),groups=new Map<string,{scope:string;leader:FactionId;members:FactionId[]}>();
  for(const f of w.factions){const scope=victoryScope(w,f.id),e=empireOf(w,f.id);scopes.set(f.id,scope);if(!groups.has(scope))groups.set(scope,{scope,leader:e?.leader??f.id,members:[]});groups.get(scope)!.members.push(f.id);}
@@ -23,7 +24,7 @@ export function campStatistics(w:FormalWorld){
  const military=militaryRanking(w),alive=new Set(w.cities.map(c=>c.ownerFactionId)),extinct=new Set(w.extinction?.extinct??[]);
  return [...groups.values()].map(g=>{const n=cityCounts.get(g.scope)??{cities:0,population:0},e=empireOf(w,g.leader);return{...g,...n,cityShare:n.cities/Math.max(1,cities),populationShare:n.population/Math.max(1,population),empire:e,activeLords:g.members.filter(id=>alive.has(id)&&!extinct.has(id)).length,legions:e?.legions.filter(id=>w.politics!.legions.find(l=>l.id===id)?.members.some(id=>alive.has(id)&&!extinct.has(id))).length??0,militaryRank:e?military.ranks.get(e.id):undefined,uniqueMilitaryFirst:military.uniqueFirst===g.scope};});
 }
-export function victoryConditions(w:FormalWorld){const camps=campStatistics(w);return camps.filter(c=>c.cities>0).map(c=>{
+export function victoryConditions(w:WorldRead){const camps=campStatistics(w);return camps.filter(c=>c.cities>0).map(c=>{
  const hostileEmpire=camps.some(e=>e.empire&&e.scope!==c.scope&&e.cityShare>=.15&&hostileAllowed(w,c.leader,e.leader));
  const conquest=c.cityShare>=.7&&c.populationShare>=.7&&!hostileEmpire;
  const hegemony=!!c.empire&&c.legions===3&&(c.activeLords??0)>=15&&c.cityShare>=.45&&c.populationShare>=.45&&c.militaryRank===1&&c.uniqueMilitaryFirst;

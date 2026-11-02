@@ -1,3 +1,5 @@
+import {memo} from 'react';
+import type {WorldRead} from './presentationModel';
 import {worldPaused,rebirthLocationReason} from './formal/extinction';
 import {worldCityVisual} from './presentation/cityVisuals';
 import {SpecialFieldCache,visibleSpecialFields,paintSpecialFields,readSpecialPreferences,SPECIAL_FIELDS_KEY,SPECIAL_COLORS,DEFAULT_SPECIAL_FIELDS} from './presentation/specialFields';
@@ -11,7 +13,7 @@ import {mapGlyphSize} from './mapProjection';
 import {detailedMap,visibleWildSite,mapNodeSize,mapMarkerSize,mapHit,mapPickBounds,mapQueryBounds} from './presentation/mapViewRules';
 import {WILD_SITE_GLYPHS,wildSiteName,paintMapGlyphs,type MapGlyph} from './presentation/wildSiteLabels';
 import {useEffect,useRef,useState} from 'react';
-import type {FormalWorld,FormalCommand} from './formal/model';
+import type {FormalCommand} from './formal/model';
 import type {CityId} from './formal/ids';
 import {spatial} from './formal/spatial';
 import {terrainAt,buildable,passable,fieldDistribution} from './formal/terrain';
@@ -30,8 +32,8 @@ import {selectedReturnCity,mapBackgroundKey,mapLabels,mapEntityKey} from './pres
 import {MapFloatPanel} from './MapFloatPanel';
 import {MapToolbar} from './presentation/MapToolbar';
 const terrainNames={land:'平地',forest:'森林',river:'河流',water:'水域',mountain:'山脈'};
-/** Renderer reads FormalWorld. Appearance, camera and UI preferences have no simulation authority. */
-export default function FormalWorldMap({world,focusCityId,focusPoint,onSelect,onSettle,onMission,onRebirthPoint,issue,busy=false,mobile=false,combatOnly=false}:{mobile?:boolean;world:FormalWorld;focusCityId?:CityId;focusPoint?:Point;onSelect?:(id:CityId)=>void;onSettle?:(p:Point)=>void;onMission?:(target:ArmyTarget)=>void;onRebirthPoint?:(p:Point)=>void;issue?:(p:FormalCommand)=>void;busy?:boolean;combatOnly?:boolean}){
+/** Renderer reads WorldRead. Appearance, camera and UI preferences have no simulation authority. */
+function FormalWorldMap({world,focusCityId,focusPoint,onSelect,onSettle,onMission,onRebirthPoint,issue,busy=false,mobile=false,combatOnly=false}:{mobile?:boolean;world:WorldRead;focusCityId?:CityId;focusPoint?:Point;onSelect?:(id:CityId)=>void;onSettle?:(p:Point)=>void;onMission?:(target:ArmyTarget)=>void;onRebirthPoint?:(p:Point)=>void;issue?:(p:FormalCommand)=>void;busy?:boolean;combatOnly?:boolean}){
  const [dispatchMission,setDispatchMission]=useState<ArmyMissionState['mission']>(),[dispatchTarget,setDispatchTarget]=useState<ArmyTarget>();
  const [special,setSpecial]=useState(()=>{try{return readSpecialPreferences(localStorage);}catch{return {...DEFAULT_SPECIAL_FIELDS};}});
  const specialCache=useRef(new SpecialFieldCache());
@@ -125,3 +127,5 @@ export default function FormalWorldMap({world,focusCityId,focusPoint,onSelect,on
  {panel==='favorites'&&<MapFloatPanel title={`★ 我的最愛 ${favorites.length}/5`} storageKey="favorites" onClose={()=>setPanel(null)}>{favorites.length?<div className="map-favorite-list"><div className="map-favorite-labels"><span>穀</span><span>木</span><span>石</span><span>金</span></div>{favorites.map(p=><div className="map-favorite-row" key={p.x+','+p.y}><button className="map-favorite-go" onClick={()=>{locate(p);setPanel(null);}}>{fieldDistribution(world.seed,p.x,p.y).map((n,i)=><span key={i}>{n}</span>)}<span className="map-favorite-coordinate">({p.x}, {p.y})</span></button><button className="map-favorite-remove" onClick={()=>setFavorites(favorites.filter(q=>q!==p))}>刪除</button></div>)}</div>:<p>尚未收藏地塊</p>}<small>最愛與地圖視角記在此裝置。</small></MapFloatPanel>}
 </div>;
 }
+
+export default memo(FormalWorldMap);

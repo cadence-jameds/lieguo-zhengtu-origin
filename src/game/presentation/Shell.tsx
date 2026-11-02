@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {IncomingArmyAlert} from './IncomingArmyAlert';
 import {effectiveSpeed,protectedFaction} from '../formal/playtest';
 import {ProtectionStatus} from './ProtectionStatus';
@@ -7,7 +8,7 @@ import {MobileNavigation} from '../MobileNavigation';
 import {DEFAULT_MOBILE_SHORTCUTS} from '../mobileNavigationPreferences';
 import type {NavigationReminders} from '../NavigationReminder';
 import {RELEASE} from '../release';
-import type {FormalCity,FormalWorld} from '../formal/model';
+import type {FormalCity} from '../formal/model';
 import {resourceKeys} from '../formal/model';
 import {TECH_CATALOG} from '../formal/techCatalog';
 import {UNIT_CATALOG} from '../formal/unitCatalog';
@@ -19,7 +20,7 @@ export type View='map'|'city'|'army'|'research'|'diplomacy'|'legion'|'reports'|'
 export const NAV:{id:View;icon:string;name:string}[]=[{id:'map',icon:'▧',name:'世界地圖'},{id:'city',icon:'府',name:'城市建設'},{id:'army',icon:'⚑',name:'軍隊編組'},{id:'research',icon:'冊',name:'科技研發'},{id:'legion',icon:'旗',name:'軍團'},{id:'diplomacy',icon:'印',name:'天下勢力'},{id:'reports',icon:'書',name:'戰報紀事'},{id:'empire',icon:'政',name:'治理方針'},{id:'tasks',icon:'引',name:'征途目標'},{id:'settings',icon:'⚙',name:'戰役設定'}];
 export const MOBILE_NAV=(['map','city','army','reports','research','legion','diplomacy','empire'] as const).map(id=>NAV.find(n=>n.id===id)!);
 const MOBILE_NAMES={map:'地圖',city:'城市',army:'軍隊',research:'科技',diplomacy:'勢力',legion:'軍團',reports:'戰報',empire:'治理',tasks:'目標',settings:'設定'};
-export function Shell({world,city,cities,mobile,view,onView,onCity,onHome,onResource,onMore,moreOpen,busy,children,unread=0,alerts=0,onEra,mobileShortcuts=DEFAULT_MOBILE_SHORTCUTS,navigationReminders}:{world:FormalWorld;city:FormalCity;cities:FormalCity[];mobile:boolean;view:View;onView:(v:View,entry?:'march')=>void;onCity:(id:FormalCity['id'])=>void;onHome:()=>void;onResource:(r:typeof resourceKeys[number])=>void;onMore:()=>void;moreOpen:boolean;busy:boolean;children:ReactNode;unread?:number;alerts?:number;onEra?:()=>void;mobileShortcuts?:View[];navigationReminders?:NavigationReminders<View>}){
+export function Shell({world,city,cities,mobile,view,onView,onCity,onHome,onResource,onMore,moreOpen,busy,children,unread=0,alerts=0,onEra,mobileShortcuts=DEFAULT_MOBILE_SHORTCUTS,navigationReminders}:{world:WorldRead;city:FormalCity;cities:FormalCity[];mobile:boolean;view:View;onView:(v:View,entry?:'march')=>void;onCity:(id:FormalCity['id'])=>void;onHome:()=>void;onResource:(r:typeof resourceKeys[number])=>void;onMore:()=>void;moreOpen:boolean;busy:boolean;children:ReactNode;unread?:number;alerts?:number;onEra?:()=>void;mobileShortcuts?:View[];navigationReminders?:NavigationReminders<View>}){
  const shield=protectedFaction(world,world.playerFactionId);
  const f=world.factions.find(f=>f.id===world.playerFactionId)!,p=netProduction(world,city),units=city.military?.units??{},project=view==='research'?undefined:world.researchProjects.find(p=>p.projectId===f.researchQueue);
  const picker=<select aria-label="切換目前城市" title={`${city.name}（${city.x}, ${city.y}）`} style={mobile?{width:Math.min(24,Math.max(14,city.name.length*2+12))+'ch'}:undefined} value={city.id} onChange={e=>onCity(cities.find(c=>c.id===e.target.value)!.id)}>{cities.map(c=><option key={c.id} value={c.id}>{c.name}（{c.x}, {c.y}）</option>)}</select>;

@@ -1,4 +1,4 @@
-import type {FormalWorld} from '../formal/model';
+import type {WorldRead} from '../presentationModel';
 import {victoryConditions,victoryScope,VICTORY_DURATION} from '../formal/victory';
 import {HOUR} from '../formal/time';
 function Metric({label,value,target,met,detail}:{label:string;value:number;target:number;met:boolean;detail?:string}){
@@ -6,7 +6,7 @@ function Metric({label,value,target,met,detail}:{label:string;value:number;targe
 }
 function hours(ms:number,elapsed=false){const minutes=(elapsed?Math.floor:Math.ceil)(Math.max(0,ms)/60000);return `${Math.floor(minutes/60)} 時 ${minutes%60} 分`;}
 /** B9 owns qualification, timer reset and terminal results. This component only projects that state. */
-export function VictoryPanel({world:w}:{world:FormalWorld}){
+export function VictoryPanel({world:w}:{world:WorldRead}){
  const scope=victoryScope(w,w.playerFactionId),c=victoryConditions(w).find(c=>c.scope===scope),result=w.victory?.result,city=(c?.cityShare??0)*100,pop=(c?.populationShare??0)*100;
  const timer=(kind:'conquest'|'hegemony')=>{if(result)return null;const candidate=w.victory?.candidates.find(t=>t.scope===scope&&t.kind===kind),duration=VICTORY_DURATION[kind],elapsed=candidate?Math.max(0,w.time-candidate.startedAt):0;return <div className="victory-timer" role="status">{candidate?<><strong>全部條件持續達標</strong><progress aria-label={(kind==='conquest'?'征服':'帝國霸權')+'連續達標進度'} value={Math.min(duration,elapsed)} max={duration}/><p>已連續維持 {hours(elapsed,true)} · 剩餘 {hours(duration-elapsed)}</p>{elapsed>=duration&&<small>等待正式終局結算</small>}</>:c?.[kind]?<><strong>全部條件已達標</strong><p>等待正式計時確認。</p></>:<><strong>條件尚未同時達標</strong><p>達標後開始連續 {duration/HOUR} 世界小時計時；任一條件失效即重新計時。</p></>}</div>;};
  return <section className="victory-road" aria-label="勝利之路">{result&&<section className="card victory-result" role="status"><h2>正式{result.kind==='conquest'?'征服':'帝國霸權'}勝利</h2><strong>{result.name}</strong><p>{result.members.includes(w.playerFactionId)?'你的陣營已取得正式勝利。':'戰役已由其他陣營取得正式勝利。'}世界時間 {(result.at/HOUR).toFixed(2)}h</p></section>}

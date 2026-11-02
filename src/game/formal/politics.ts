@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {effectiveUnit} from './combatModifiers';
 import type {FormalWorld,FormalCity,FormalOrder} from './model';
 import type {FactionId,CityId,EmpireId} from './ids';
@@ -15,16 +16,16 @@ export type Politics={legions:Legion[];empires:Empire[];requests:PoliticalReques
 export const initialPolitics=():Politics=>({legions:[],empires:[],requests:[],relations:[],joints:[],reserves:[],randomCounter:0});
 export type PoliticalCommand={type:'politics';cityId:CityId;action:'legion-create'|'legion-apply'|'legion-invite'|'request-accept'|'request-reject'|'legion-leave'|'legion-kick'|'legion-transfer'|'legion-edit'|'legion-dissolve'|'empire-propose'|'empire-leave'|'empire-kick'|'empire-transfer'|'empire-dissolve'|'friendly-propose'|'friendly-end'|'war'|'peace';target?:FactionId;requestId?:string;name?:string;description?:string};
 export type CooperationCommand={type:'defense.set';cityId:CityId;units:Record<string,number>;keep:number;enabled:boolean}|{type:'defense.dispatch';cityId:CityId;targetCityId:CityId}|{type:'joint.create';mission?:'conquest'|'wonder-destruction';wonderPriority?:true;cityId:CityId;targetCityId:CityId;units:Record<string,number>;arrivalAt:number}|{type:'joint.join';cityId:CityId;jointId:string;units:Record<string,number>};
-export const embassy=(w:FormalWorld,id:FactionId)=>Math.max(0,...w.cities.filter(c=>c.ownerFactionId===id).map(c=>buildingLevel(c,'embassy')));
-export const legionOf=(w:FormalWorld,id:FactionId)=>w.politics?.legions.find(l=>l.members.includes(id));
-export const empireOf=(w:FormalWorld,id:FactionId)=>{const l=legionOf(w,id);return w.politics?.empires.find(e=>e.id===l?.empireId);};
-export const politicalScope=(w:FormalWorld,id:FactionId)=>empireOf(w,id)?.id??legionOf(w,id)?.id??id;
-export function diplomaticRelation(w:FormalWorld,a:FactionId,b:FactionId):'own'|'friendly'|'war'|'neutral'{
+export const embassy=(w:WorldRead,id:FactionId)=>Math.max(0,...w.cities.filter(c=>c.ownerFactionId===id).map(c=>buildingLevel(c,'embassy')));
+export const legionOf=(w:WorldRead,id:FactionId)=>w.politics?.legions.find(l=>l.members.includes(id));
+export const empireOf=(w:WorldRead,id:FactionId)=>{const l=legionOf(w,id);return w.politics?.empires.find(e=>e.id===l?.empireId);};
+export const politicalScope=(w:WorldRead,id:FactionId)=>empireOf(w,id)?.id??legionOf(w,id)?.id??id;
+export function diplomaticRelation(w:WorldRead,a:FactionId,b:FactionId):'own'|'friendly'|'war'|'neutral'{
  if(a===b)return'own';const sa=politicalScope(w,a),sb=politicalScope(w,b);if(sa===sb)return'friendly';
  const r=w.politics?.relations.find(r=>r.a===sa&&r.b===sb||r.a===sb&&r.b===sa);return r?.state??'neutral';
 }
-export function politicalLeader(w:FormalWorld,id:FactionId){return empireOf(w,id)?.leader??legionOf(w,id)?.leader??id;}
-export function canCoordinate(w:FormalWorld,a:FactionId,b:FactionId,level:13|14){
+export function politicalLeader(w:WorldRead,id:FactionId){return empireOf(w,id)?.leader??legionOf(w,id)?.leader??id;}
+export function canCoordinate(w:WorldRead,a:FactionId,b:FactionId,level:13|14){
  const l=legionOf(w,a),m=legionOf(w,b);if(!l||!m)return false;
  return l===m?embassy(w,l.leader)>=level:!!l.empireId&&l.empireId===m.empireId&&embassy(w,empireOf(w,a)!.leader)>=15;
 }
@@ -89,7 +90,7 @@ export function applyPolitics(w:FormalWorld,_c:FormalCity,o:FormalOrder,q:Politi
  for(const project of w.largeProjects){if(project.kind!=='world-wonder'||project.owner.kind!=='empire')continue;const host=w.cities.find(c=>c.id===project.initiatingCityId);if(host&&host.ownerFactionId===project.wonder?.hostOwnerFactionId)requireRule(w.factions.find(f=>f.id===host.ownerFactionId)?.empireId===project.owner.empireId,'奇觀承載城市領主在奇觀存在期間不得退出帝國。');}
 }
 /** Ownership eligibility is separate from battle damage: extinct troops still finish combat. */
-export function canAcquireConquest(w:FormalWorld,id:FactionId){return !w.extinction?.extinct.includes(id)&&w.factions.some(f=>f.id===id)&&w.cities.some(c=>c.ownerFactionId===id);}
+export function canAcquireConquest(w:WorldRead,id:FactionId){return !w.extinction?.extinct.includes(id)&&w.factions.some(f=>f.id===id)&&w.cities.some(c=>c.ownerFactionId===id);}
 export function conquestOwner(w:FormalWorld,initiator:FactionId,armies:import('./combatModel').MissionArmy[]):FactionId|null{
  const scores=new Map<FactionId,number>();
  for(const a of armies){if(a.extinctionPending||!canAcquireConquest(w,a.ownerFactionId))continue;let n=0;for(const [id,count] of Object.entries(a.units))if(effectiveUnit(id))n+=count;scores.set(a.ownerFactionId,(scores.get(a.ownerFactionId)??0)+n);}

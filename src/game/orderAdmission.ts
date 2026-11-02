@@ -1,3 +1,5 @@
+import {admissionMapDigest} from './admissionMap';
+import type {WorldRead} from './presentationModel';
 import {commandHistory} from './formal/commandLedger';
 import type {FormalCommand,FormalOrder,FormalWorld} from './formal/model';
 import {buildingKind,buildingLevel} from './formal/catalogB3';
@@ -13,7 +15,7 @@ import {protectedFaction} from './formal/playtest';
  * costs, ownership, queues and requirements at admission time. */
 export type PlayerOrderBase={revision:number;fingerprint:string};
 
-function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
+function intentState(w:WorldRead,p:FormalCommand,mapDigest?:string):unknown[]|undefined {
  const city=w.cities.find(c=>c.id===p.cityId);
  if(!city||city.ownerFactionId!==w.playerFactionId)return;
  const faction=w.factions.find(f=>f.id===w.playerFactionId);
@@ -33,7 +35,7 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
    const destination=target&&('ownerFactionId' in target?
     [target.id,target.x,target.y,target.ownerFactionId,politicalScope(w,target.ownerFactionId),diplomaticRelation(w,faction.id,target.ownerFactionId),canReinforce(w,faction.id,target.ownerFactionId),protectedFaction(w,target.ownerFactionId)]:
     [target.id,target.x,target.y,target.generation,target.phase??'active']);
-   return[city.x,city.y,Object.keys(p.units).sort().map(id=>[id,city.military?.units[id]??0]),faction.civilizationId,faction.age,faction.techIds,politicalScope(w,faction.id),destination,w.dimensions,w.worldLayer?.terrain,w.worldLayer?.mountains];
+   return[city.x,city.y,Object.keys(p.units).sort().map(id=>[id,city.military?.units[id]??0]),faction.civilizationId,faction.age,faction.techIds,politicalScope(w,faction.id),destination,w.dimensions,...(mapDigest?[{version:2,staticMapDigest:mapDigest}]:[w.worldLayer?.terrain,w.worldLayer?.mountains])];
   }
   case 'wonder.start':{
    const empire=empireOf(w,faction.id),host=w.cities.find(c=>c.id===p.hostCityId);
@@ -85,10 +87,12 @@ function intentState(w:FormalWorld,p:FormalCommand):unknown[]|undefined {
 }
 
 /** Immutable semantic intent stamp, not an authorization to skip validation. */
-export function playerOrderBase(w:FormalWorld,p:FormalCommand):PlayerOrderBase|undefined {
- const state=intentState(w,p);
+export function playerOrderBase(w:WorldRead,p:FormalCommand,encoding?:1|2):PlayerOrderBase|undefined {
+ const compact=p.type==='army.dispatch'&&(encoding===2||encoding!==1&&w.kind==='presentation'),mapDigest=compact?(w.kind==='presentation'?w.derived.staticMapDigest:admissionMapDigest(w)):undefined;
+ if(compact&&!mapDigest)return;
+ const state=intentState(w,p,mapDigest);
  if(!state)return;
- return {revision:w.revision,fingerprint:JSON.stringify([w.campaignId,w.playerFactionId,p,state])};
+ return {revision:w.revision,fingerprint:(compact?'intent-v2:':'')+JSON.stringify([w.campaignId,w.playerFactionId,p,state])};
 }
 
 /** A bounded, one-shot rebase of an uncommitted user action.
@@ -107,7 +111,7 @@ export function playerOrderWithBase(w:FormalWorld,order:FormalOrder,base?:Player
     order.issuedWorldTime>w.time||
     commandHistory(w).some(r=>r.commandId===order.commandId||
       foregroundRevision===undefined&&r.issuerId===order.issuerId&&r.committedRevision>order.expectedRevision))return order;
- const current=playerOrderBase(w,order.payload);
+ const current=playerOrderBase(w,order.payload,base.fingerprint.startsWith('intent-v2:')?2:1);
  if(!current||current.fingerprint!==base.fingerprint)return order;
  return {...order,expectedRevision:w.revision,issuedWorldTime:w.time};
 }

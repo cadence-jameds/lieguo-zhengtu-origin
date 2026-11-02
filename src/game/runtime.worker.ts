@@ -1,5 +1,6 @@
+import {prepareAdmissionMap} from './admissionMap';
 import {OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
-import {commandHistory,projectWorld,findReceipt,normalizeOutcomeRevisions} from './formal/commandLedger';
+import {commandHistory,findReceipt,normalizeOutcomeRevisions} from './formal/commandLedger';
 import {acquireWriter,writerContext,receiveCommand,commandStatus,pendingCommands,commandPage,finishCommand,noteCommandFailure} from './persistence';
 import {captureIntent,revalidateInbox,terminalCommand,confirmationAck,retryableStorageError,type InboxCommand,type WriterContext,type CommandIntent} from './durableCommands';
 import {worldPaused} from './formal/extinction';
@@ -12,12 +13,13 @@ import {advanceFormal,submitFormalOrder} from './engine';
 import {advanceFormalCooperative} from './formal/reducer';
 import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
 import type {FormalOrder,FormalWorld,FormalReport} from './formal/model';
-import {worldPatch} from './worldStream';
+import {WorldStream} from './worldStream';
+import type {ProjectionIdentity} from './presentationModel';
 import {type GovernanceBase} from './governanceAdmission';
 import {type PlayerOrderBase} from './orderAdmission';
 export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'resume'|'reset'|'exportLegacy'}
  | {type:'start';seed:number;speed:number;name:string;civilizationId?:string;offlineHours?:0|1|4|8|12;transitionId?:string}
- | {type:'command';order:FormalOrder;governanceBase?:GovernanceBase;playerBase?:PlayerOrderBase;extinctionBase?:string;branch?:number}
+ | {type:'command';order:FormalOrder;governanceBase?:GovernanceBase;playerBase?:PlayerOrderBase;extinctionBase?:string;branch?:number;projection?:ProjectionIdentity}
  | {type:'commandQuery';campaignId:FormalOrder['campaignId'];commandId:FormalOrder['commandId']}
  | {type:'commandList';before?:number}
  | {type:'import';text:string;transitionId?:string}
@@ -26,7 +28,7 @@ export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'res
  | {type:'cityIntel';cityId:string;generation?:number;queryId:string;campaignId:string;reportCursor:number;time:number}
  | {type:'reportStatus'}
  | {type:'reportAction';action:'read'|'clear';ids?:string[];filter?:ReportFilter}
- | {type:'reportPage';page:number;filter?:ReportFilter}) & {requestId?:string;stateMode?:'patch';visibilityAt?:number};
+ | {type:'reportPage';page:number;filter?:ReportFilter}) & {requestId?:string;stateMode?:'patch'|'projection-v2';visibilityAt?:number};
 let writer:WriterContext|undefined;
 const intake=new WeakMap<RuntimeRequest,Promise<InboxCommand>>();
 let intakeQueue:Promise<unknown>=Promise.resolve();
@@ -35,11 +37,13 @@ const requests:RuntimeRequest[]=[];
 const awayBoundaries=new WeakMap<RuntimeRequest,{target:number;wallAt:number}>();
 let anchor=performance.now(),anchorTime=0,lastSavedAt=anchor,retryAt=0,passiveRevisionBase=0;
 let foregroundFence:number|undefined;
-let patchMode=false,lastPublished:FormalWorld|null=null;
-const post=(value:unknown)=>{try{const v=value as {world?:FormalWorld};if(v?.world?.ledger)value={...v,world:projectWorld(v.world)};self.postMessage(value);}catch{/* T3 notification loss is recovered by durable query/reload. */}};
+const stream=new WorldStream(),runtimeSession=stream.sessionId;let notificationSequence=0;
+const notify=(value:Record<string,unknown>)=>{try{self.postMessage({...value,runtimeSession,notificationSequence:++notificationSequence,writerEpoch:writer?.writerEpoch,branch:writer?.branch});}catch{/* T3 loss never changes T2. */}};
 const clock=()=>({campaignId:world?.campaignId,time:away?(world?.time??0):targetTime(),speed:world?effectiveSpeed(world):1,running:!away&&!!world&&!worldPaused(world)});
-const state=()=>{const data={type:'state',clock:clock(),passiveRevisionBase,branch:writer?.branch};if(patchMode&&world&&lastPublished?.campaignId===world.campaignId)post({...data,patch:worldPatch(lastPublished,world)});else post({...data,world});lastPublished=world;};
-const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;lastPublished=null;};
+const publish=(source:FormalWorld|null,data:Record<string,unknown>,snapshot=false)=>{try{const projection=stream.publish(source,writer??{branch:0,writerEpoch:0},snapshot);notify({...data,projection,clock:clock(),passiveRevisionBase});}catch{notify({type:'projectionUnavailable',text:'畫面投影暫時無法更新；正式結果已保留，請重新同步畫面。'});}};
+const post=(value:unknown)=>{const data=value as Record<string,unknown>;if(Object.hasOwn(data,'world')){const {world:source,...rest}=data;publish(source as FormalWorld|null,rest,true);}else notify(data);};
+const state=(snapshot=false)=>publish(world,{type:'state'},snapshot);
+const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;stream.reset();};
 const targetTime=(now=performance.now())=>(world&&worldPaused(world))?world.time:anchorTime+Math.floor(Math.max(0,Math.min(now,foregroundFence??now)-anchor)*(world?effectiveSpeed(world):1));
 async function publishReportStatus(){if(!world)return;try{post({type:'reportStatus',data:await reportStatus(world)});}catch{post({type:'notice',text:'暫時無法讀取戰報通知，世界仍持續運行。'});}}
 async function advanceAndSave(target=targetTime(),wallAt?:number){
@@ -52,10 +56,9 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
  world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
- if(r.stateMode==='patch')patchMode=true;
- if(r.type==='commandQuery'){const row=await commandStatus(r.campaignId,r.commandId);post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack});lastPublished=null;state();return;}
+ if(r.type==='commandQuery'){const row=await commandStatus(r.campaignId,r.commandId);post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
  if(r.type==='commandList'){post({type:'commandList',rows:await commandPage(r.before)});return;}
- if(r.type==='snapshot'){lastPublished=null;state();return;}
+ if(r.type==='snapshot'){state(true);return;}
  if(r.type==='exportLegacy'){post({type:'export',text:await exportLegacyCampaign(),mode:'historical'});return;}
  if(r.type==='resume'&&world&&!away){state();return;}
  if(r.type==='load'||r.type==='resume'){
@@ -73,7 +76,7 @@ async function handle(r:RuntimeRequest){
     post({type:'progress',progress:fraction,events});
    }
   });
-  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;writer=await writerContext();away=false;foregroundFence=undefined;reanchor();
+  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;if(world)await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();
   // Resume durable intake in its persisted order. Branch switches have already
   // terminalized old Pending atomically; a new writer rechecks original intent.
   const recovered=await pendingCommands();
@@ -86,12 +89,12 @@ async function handle(r:RuntimeRequest){
  if(r.type==='start'){
   const name=r.name.trim();if(!name||name.length>24||/[\x00-\x1f\x7f]/.test(name))throw new Error('請輸入 1～24 字的名字。');
   const fixture=createFormalWorld({campaign:crypto.randomUUID(),seed:r.seed,speed:r.speed,name,civilizationId:r.civilizationId,offlineHours:r.offlineHours});
-  enableAutonomy(fixture);const committed=await startCampaign(fixture);world=committed;writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  enableAutonomy(fixture);const committed=await startCampaign(fixture);world=committed;await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
   const committed=r.type==='restore'?await restore(r.id,true):await importSave(r.text,true);
-  world=committed;writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  world=committed;await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='cityIntel'){if(!world||r.campaignId!==world.campaignId){post({type:'cityIntel',queryId:r.queryId,error:'戰役已變更，請重新開啟情報窗。'});return;}if(r.generation!==undefined&&(!Number.isSafeInteger(r.generation)||r.generation<0))throw new Error('無效的據點世代。');if(!Number.isSafeInteger(r.reportCursor)||r.reportCursor<1||!Number.isSafeInteger(r.time)||r.time<0)throw new Error('無效的情報游標。');const snapshot={...world,time:Math.min(world.time,r.time),sequences:{...world.sequences,report:Math.min(world.sequences.report,r.reportCursor)}};post({type:'cityIntel',queryId:r.queryId,data:await readCityIntel(snapshot,r.cityId,r.generation)});return;}
  if(!world)throw new Error('請先建立正式世界。');
@@ -110,17 +113,17 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
   try{
   // A repeated ID always queries durable authority before considering execution.
   row=await commandStatus(row.campaignId,row.commandId)??row;
-  if(terminalCommand(row)){post({type:'commandStatus',row});if(row.ack)post({type:'commandAck',ack:row.ack});state();return;}
+  if(terminalCommand(row)){post({type:'commandStatus',row});if(row.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state();return;}
    if(!world)throw new Error('請先建立正式世界。');
-   if(row.branch!==writer?.branch||row.lastError==='戰役分支或玩家操作已變更，請重新確認原始操作。'){const ack=confirmationAck(row,world.revision);world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});state();return;}
+   if(row.branch!==writer?.branch||row.lastError==='戰役分支或玩家操作已變更，請重新確認原始操作。'){const ack=confirmationAck(row,world.revision);world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack,campaignId:row.campaignId});state();return;}
    if(findReceipt(world,row.commandId)){
-    const ack=submitFormalOrder(world,row.order).ack!;world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});state();return;
+    const ack=submitFormalOrder(world,row.order).ack!;world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack,campaignId:row.campaignId});state();return;
    }
    let order=revalidateInbox(world,row);
    if(Date.now()>=row.deadline)order=undefined;
    if(!order){
     const ack=confirmationAck(row,world.revision,Date.now()>=row.deadline?'命令等待逾時，請重新確認原始操作。':undefined);
-    world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack});return;
+    world=await finishCommand(row,ack,world.revision);post({type:'commandAck',ack,campaignId:row.campaignId});return;
    }
    let admission=world,caughtUp=false;const catchupReports:FormalReport[]=[];
    const target=targetTime();
@@ -136,7 +139,7 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
       const ack=confirmationAck(row,world.revision+1);admission.revision=world.revision+1;
       for(let i=commandHistory(world).length;i<commandHistory(admission).length;i++)commandHistory(admission)[i].committedRevision=admission.revision;
       normalizeOutcomeRevisions(admission);world=await save(admission,catchupReports,world.revision,undefined,{row,ack});passiveRevisionBase=world.revision;
-      post({type:'commandAck',ack});state();return;
+      post({type:'commandAck',ack,campaignId:row.campaignId});state();return;
      }
     }else if(target>world.time){admission=advanceFormal(world,target).world;admission.revision=world.revision;}
    }
@@ -150,21 +153,21 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
     lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;
    }else world=await finishCommand(row,ack,world.revision);
    // T3 cannot undo a committed T2, including a failed postMessage/notification.
-   try{post({type:'commandAck',ack});state();if(result.reports.length||catchupReports.length)await publishReportStatus();}catch{/* Durable query/reload returns the exact result. */}
+   try{post({type:'commandAck',ack,campaignId:row.campaignId});state();if(result.reports.length||catchupReports.length)await publishReportStatus();}catch{/* Durable query/reload returns the exact result. */}
    return;
   }catch(error){
    // A lost Ack or an error after transaction completion must never be retried.
    const saved=await commandStatus(row.campaignId,row.commandId).catch(()=>undefined);
-   if(saved&&terminalCommand(saved)){if(saved.ack)post({type:'commandAck',ack:saved.ack});return;}
+   if(saved&&terminalCommand(saved)){if(saved.ack)post({type:'commandAck',ack:saved.ack,campaignId:row.campaignId});return;}
    const text=error instanceof Error?error.message:'正式提交失敗。';
    let failed:InboxCommand&{committedWorld?:FormalWorld};
    try{failed=await noteCommandFailure(row,text,retryableStorageError(error));}
    catch{
-    post({type:'commandBlocked',commandId:row.commandId,text:'無法保存命令結果；原持久命令保留。請檢查儲存空間後重新載入並查詢。'});state();return;
+    post({type:'commandBlocked',campaignId:row.campaignId,commandId:row.commandId,text:'無法保存命令結果；原持久命令保留。請檢查儲存空間後重新載入並查詢。'});state();return;
    }
    if(failed.committedWorld)world=failed.committedWorld;
    post({type:'commandStatus',row:failed});
-   if(terminalCommand(failed)){if(failed.ack)post({type:'commandAck',ack:failed.ack});state();return;}
+   if(terminalCommand(failed)){if(failed.ack)post({type:'commandAck',ack:failed.ack,campaignId:row.campaignId});state();return;}
    // At most three attempts, bounded by a durable wall-clock deadline. The
    // foreground drain keeps order; small T1 writes can still complete meanwhile.
    await new Promise<void>(resolve=>setTimeout(resolve,Math.max(0,failed.nextAttemptAt-Date.now())));row=failed;
@@ -174,7 +177,7 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
 async function runRequest(r:RuntimeRequest){
  try{await handle(r);}catch(error:unknown){
   const text=error instanceof Error?error.message:'正式提交失敗。';
-  if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',commandId:r.order?.commandId,row:existing,text:(existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
+  if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
   else if(r.type==='reportPage'||r.type==='reportStatus'||r.type==='reportAction')post({type:'notice',text:'戰報操作暫時失敗，請重試。'});
   else if(r.type==='cityIntel')post({type:'cityIntel',queryId:r.queryId,error:text});
@@ -205,11 +208,10 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
  if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Math.max(0,Date.now()-(absolute-(performance.timeOrigin+foregroundFence)))});}
  requests.push(r);
  if(r.type==='command'){
-  post({type:'commandReceived',commandId:r.order?.commandId,requestId:r.requestId});
-  const branch=r.branch??writer?.branch;
+  post({type:'commandReceived',campaignId:r.order?.campaignId,commandId:r.order?.commandId,requestId:r.requestId});
+  const branch=r.projection?.branch??r.branch??writer?.branch;
   const intent:CommandIntent={playerBase:r.playerBase,governanceBase:r.governanceBase,extinctionBase:r.extinctionBase};
-  if(world&&r.order.expectedRevision===world.revision)Object.assign(intent,captureIntent(world,r.order),r.governanceBase?{governanceBase:r.governanceBase}:{});
-  const received=intakeQueue.then(()=>receiveCommand(r.order,intent,branch));intake.set(r,received);
+  const received=intakeQueue.then(()=>{const p=r.projection;if(p&&(p.protocolVersion!==2||p.sessionId!==stream.sessionId||p.projectionSequence>stream.projectionSequence||p.campaignId!==r.order.campaignId||p.writerEpoch!==writer?.writerEpoch||p.branch!==r.branch||p.revision<r.order.expectedRevision||r.order.payload.type!=='governance.set'&&p.revision!==r.order.expectedRevision||!Number.isSafeInteger(p.projectionSequence)||p.projectionSequence<1))throw Error('畫面版本或寫入權已變更，請重新同步後確認原操作。');return receiveCommand(r.order,intent,branch);});intake.set(r,received);
   intakeQueue=received.then(row=>{post({type:'commandDurable',row});},()=>{});
  }
  scheduleDrain();

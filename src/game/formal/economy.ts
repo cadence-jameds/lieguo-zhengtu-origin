@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {quoteConstruction,promoteConstructionJobs} from './constructionRules';
 import {logisticsAvailable,type LogisticsPurpose} from './logisticsAllocation';
 import {recordGrowthPopulation} from './growthTasks';
@@ -25,7 +26,7 @@ export {HOUR} from './time';
 export const CITY_PROMOTION={population:10000,housing:10000,townhall:5,cost:{food:12000,wood:18000,stone:18000,gold:12000},durationMs:6*HOUR,fieldMinLevel:11,fieldMaxLevel:15} as const;
 export const CARAVAN_CAPACITY=2000;
 export function promotionConditions(c:FormalCity){return [c.population>=CITY_PROMOTION.population,c.housing>=CITY_PROMOTION.housing,buildingLevel(c,'townhall')>=CITY_PROMOTION.townhall];}
-export function caravanStatus(w:FormalWorld,c:FormalCity){const total=buildingLevel(c,'market'),inTransit=(w.logistics??[]).filter(t=>t.sourceCityId===c.id).reduce((n,t)=>n+t.caravans,0);return {total,inTransit,available:Math.max(0,total-inTransit)};}
+export function caravanStatus(w:WorldRead,c:FormalCity){const total=buildingLevel(c,'market'),inTransit=(w.logistics??[]).filter(t=>t.sourceCityId===c.id).reduce((n,t)=>n+t.caravans,0);return {total,inTransit,available:Math.max(0,total-inTransit)};}
 export const MILESTONES=[10000,15000,20000,22000,25000,30000] as const;
 import {requireRule} from './ruleViolation';
 export {RuleViolation,requireRule} from './ruleViolation';
@@ -38,7 +39,7 @@ export function initializeCityEconomy(w:FormalWorld,c:FormalCity,s:EventSchedule
 }
 export function initializeEconomy(w:FormalWorld){w.economyVersion=95;const s=new EventScheduler(w.events);w.logistics=[];for(const c of w.cities)initializeCityEconomy(w,c,s);w.events=s.snapshot();}
 export const ADMINISTRATION_MAX_NODES=15;
-export function administrationMultiplier(w:FormalWorld,owner:FactionId){const count=spatial(w).owned(owner).filter(c=>buildingLevel(c,'townhall')>=1).length;return Math.max(.3,1-Math.min(count,ADMINISTRATION_MAX_NODES)*(.7/ADMINISTRATION_MAX_NODES));}
+export function administrationMultiplier(w:WorldRead,owner:FactionId){const count=spatial(w).owned(owner).filter(c=>buildingLevel(c,'townhall')>=1).length;return Math.max(.3,1-Math.min(count,ADMINISTRATION_MAX_NODES)*(.7/ADMINISTRATION_MAX_NODES));}
 export function cityTitle(population:number){return population>=30000?'世界級都會':population>=20000?'都會':population>=15000?'大城市':population>=10000?'城市':population>=2000?'城鎮':population>=500?'村莊':'聚落';}
 /** Exact growth and integral of min(P(t), 30000), split at scale, pressure,
  * housing and offering-cap boundaries. Hours are world hours, never wall time. */
@@ -58,14 +59,14 @@ export function populationGrowth(population:number,housing:number,monastery:numb
  return {population:population>=housing?population:Math.min(housing,p),cappedPersonHours};
 }
 export function growPopulation(population:number,housing:number,monastery:number,hours:number):number {return populationGrowth(population,housing,monastery,hours).population;}
-export function productionPerHour(w:FormalWorld,c:FormalCity,legacy=false):Resources {
+export function productionPerHour(w:WorldRead,c:FormalCity,legacy=false):Resources {
  const out=zeroResources(),boost={food:'mill',wood:'lumbermill',stone:'masonry',gold:'mint'},f=w.factions.find(f=>f.id===c.ownerFactionId)!;
  for(const p of c.fields??[])out[p.resource]+=FIELD_PRODUCTION[p.level];
  for(const r of resourceKeys){const tier=[1,2,3].filter(n=>f.techIds.includes(`economy.${r}.${n}`)).length;out[r]*=resourceBoostMultiplier(buildingLevel(c,boost[r]))*(legacy?1+tier*.03:economyTechMultiplier(f.techIds,r));}
  return out;
 }
 /** Anchored lazy settlement; only dirty/command/event cities are touched, never a per-minute world scan. */
-export function settleCity(w:FormalWorld,c:FormalCity,at=w.time,legacy=false){
+export function settleCity(w:WorldRead,c:FormalCity,at=w.time,legacy=false){
  const e=c.economy;if(!e)return;if(c.population<=c.housing)delete c.housingShortage;refillDeveloperStock(c);requireRule(at>=e.lastSettledAt,'經濟時間不可倒退。');const hours=(at-e.lastSettledAt)/HOUR;
  if(!hours)return;
  const populationBefore=c.population,populationFrom=e.lastSettledAt;
@@ -78,7 +79,7 @@ export function settleCity(w:FormalWorld,c:FormalCity,at=w.time,legacy=false){
  for(const r of resourceKeys){const max=cap-e.reservedIncoming[r],exact=c.stock[r]+e.productionRemainder[r]+rates[r]*effectiveHours+(r==='gold'?offering:0)-(r==='food'?upkeep*hours:0),amount=Math.floor(exact+1e-9);if(exact<0){c.stock[r]=0;e.productionRemainder[r]=0;if(r==='food'&&c.military)c.military.unpaidFood+=-exact;}else if(amount>=max){c.stock[r]=Math.max(0,max);e.productionRemainder[r]=0;}else{c.stock[r]=Math.max(0,amount);e.productionRemainder[r]=Math.max(0,exact-amount);}}
  c.population=growth.population;
  for(const n of MILESTONES)if(c.population+1e-8>=n&&!e.milestones.includes(n))e.milestones.push(n);e.milestones.sort((a,b)=>a-b);e.lastSettledAt=at;
- if(!legacy)recordGrowthPopulation(w,c,populationBefore,populationFrom,at,c.population);
+ if(!legacy&&w.kind==='formal')recordGrowthPopulation(w,c,populationBefore,populationFrom,at,c.population);
 }
 /** Called only after validating the old envelope/checksum. Settle the unposted
  * pre-update interval with its original +3%/tier and zero offerings, then switch.
@@ -89,7 +90,7 @@ export function migrateV95Economy(w:FormalWorld){
  w.economyVersion=95;return w;
 }
 export function offeringPerHour(c:FormalCity){return monasteryGoldPerHour(c.population,buildingLevel(c,'monastery'))*((c.integrationWorkHours??0)>0?.4:1);}
-export function citySnapshot(w:FormalWorld,id:CityId){const original=spatial(w).cities.get(id);if(!original)return undefined;const c=structuredClone(original);settleCity(w,c);return c;}
+export function citySnapshot(w:WorldRead,id:CityId){const original=spatial(w).cities.get(id);if(!original)return undefined;const c=structuredClone(original);settleCity(w,c);return c;}
 export function settleFaction(w:FormalWorld,owner:FactionId,at=w.time){for(const c of spatial(w).owned(owner))settleCity(w,c,at);}
 /** B5/B6 interface only: no combat or conquest command is implemented here. */
 export function changeCityOwner(w:FormalWorld,c:FormalCity,owner:FactionId,reason:'conquest'|'receive',scheduler?:EventScheduler){

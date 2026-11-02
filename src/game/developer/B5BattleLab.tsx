@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {CombatPanel} from '../presentation/CombatPanel';
 import {SIEGE_ROUND_LIMIT} from '../formal/battleProgress';
 import {useCallback,useEffect,useRef,useState} from 'react';
@@ -45,7 +46,7 @@ export function B5BattleLab({base,mobile,onClose}:{base:FormalWorld;mobile:boole
   return()=>{disposed=true;release();for(const q of queries.current.values())q.reject(Error('測試台已關閉。'));queries.current.clear();};
  },[send]);
  const reportSend=useCallback((r:RuntimeRequest)=>{if(r.type==='reportPage'||r.type==='reportAction')send(r);},[send]);
- const readIntel=useCallback((snapshot:FormalWorld,cityId:string,generation?:number)=>new Promise<CityIntel>((resolve,reject)=>{if(!worker.current){reject(Error('測試台已關閉。'));return;}const queryId=crypto.randomUUID();queries.current.set(queryId,{resolve,reject});send({type:'cityIntel',queryId,cityId,generation,campaignId:snapshot.campaignId,reportCursor:snapshot.sequences.report,time:snapshot.time});}),[send]);
+ const readIntel=useCallback((snapshot:WorldRead,cityId:string,generation?:number)=>new Promise<CityIntel>((resolve,reject)=>{if(!worker.current){reject(Error('測試台已關閉。'));return;}const queryId=crypto.randomUUID();queries.current.set(queryId,{resolve,reject});send({type:'cityIntel',queryId,cityId,generation,campaignId:snapshot.campaignId,reportCursor:snapshot.sequences.report,time:snapshot.time});}),[send]);
  const issue=useCallback((payload:FormalCommand)=>send({type:'order',payload}),[send]);
  const playerCiv=world?.factions.find(f=>f.id===world.playerFactionId)?.civilizationId??civ;
  const home=world?.cities[0],target=world?labActiveTarget(world):undefined,configuredTarget=world?labTarget(world,config.targetCityId):undefined,configEnemyCiv=world?.factions.find(f=>f.id==='faction:'+configuredTarget?.id.slice(5))?.civilizationId??civ,enemyCiv=world?.factions.find(f=>f.id===target?.ownerFactionId)?.civilizationId??civ,timing=world?labTiming(world):undefined,next=world?labNextEvent(world):undefined;

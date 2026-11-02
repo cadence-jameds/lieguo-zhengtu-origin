@@ -1,4 +1,5 @@
-import type {FormalCity,FormalWorld} from '../formal/model';
+import type {WorldRead} from '../presentationModel';
+import type {FormalCity} from '../formal/model';
 import {resourceKeys} from '../formal/model';
 import {researchRequirements,researchQuote} from '../formal/buildingDetailData';
 import {TECH_CATALOG,type TechDefinition} from '../formal/techCatalog';
@@ -25,11 +26,11 @@ export function researchOrder(techs:readonly TechDefinition[]):TechDefinition[]{
  };
  techs.forEach(visit);return out;
 }
-export function researchFacts(world:FormalWorld,city:FormalCity,techs:readonly TechDefinition[]){
+export function researchFacts(world:WorldRead,city:FormalCity,techs:readonly TechDefinition[]){
  return Object.fromEntries(techs.map(d=>[d.id,{requirements:researchRequirements(world,city,d),quote:researchQuote(world,city,d)}]));
 }
 export type ResearchFact=ReturnType<typeof researchFacts>[string];
-export function researchState(world:FormalWorld,city:FormalCity,d:TechDefinition,fact:ResearchFact){
+export function researchState(world:WorldRead,city:FormalCity,d:TechDefinition,fact:ResearchFact){
  const f=world.factions.find(f=>f.id===city.ownerFactionId)!;
  const project=world.researchProjects.find(p=>p.projectId===f.researchQueue&&p.techId===d.id);
  const done=f.techIds.includes(d.id),funding=d.scope==='modern-common'||d.scope==='modern-civilization';

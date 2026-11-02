@@ -1,3 +1,4 @@
+import {fixtureProjection} from './formal/projectionTestSupport';
 import {expect,it} from 'vitest';
 import {PendingRequests,PendingCommand,reconcileWorld} from './interaction';
 import {createFormalFixture,fixtureIds} from './formal/fixture';
@@ -19,9 +20,9 @@ it('rejections finish the active intention and delayed acknowledgements cannot r
  expect(pending.acknowledge({...ack,status:'committed'})).toBe(false);expect(pending.matches(newer.commandId)).toBe(true);pending.clear();expect(pending.busy).toBe(false);
 });
 it('unchanged world branches and map drawing keys survive passive snapshots, while changed entities invalidate',()=>{
- const w=createFormalFixture(),next=structuredClone(w);next.time=1000;next.revision++;const merged=reconcileWorld(w,next)!;
- expect(merged).not.toBe(w);expect(merged.cities).toBe(w.cities);expect(merged.factions).toBe(w.factions);expect(merged.events).toBe(w.events);expect(mapEntityKey(merged)).toBe(mapEntityKey(w));
- const changed=structuredClone(next);changed.revision++;changed.cities[0].wallLevel=1;expect(reconcileWorld(merged,changed)!.cities).not.toBe(w.cities);expect(mapEntityKey(changed)).not.toBe(mapEntityKey(w));expect(reconcileWorld(merged,structuredClone(merged))).toBe(merged);
+ const source=createFormalFixture(),w=fixtureProjection(source,{protocolVersion:2,campaignId:source.campaignId,branch:1,writerEpoch:1,sessionId:'identity',projectionSequence:1,revision:source.revision}),next=structuredClone(w);next.time=1000;next.revision++;next.projection={...next.projection,revision:next.revision,projectionSequence:2};const merged=reconcileWorld(w,next)!;
+ expect(merged).not.toBe(w);expect(merged.cities).toBe(w.cities);expect(merged.factions).toBe(w.factions);expect(merged.nextEventAt).toBe(w.nextEventAt);expect(merged).not.toHaveProperty('events');expect(merged).not.toHaveProperty('commandReceipts');expect(mapEntityKey(merged)).toBe(mapEntityKey(w));
+ const changed=structuredClone(next);changed.revision++;changed.projection={...changed.projection,revision:changed.revision,projectionSequence:3};changed.cities[0].wallLevel=1;expect(reconcileWorld(merged,changed)!.cities).not.toBe(w.cities);expect(mapEntityKey(changed)).not.toBe(mapEntityKey(w));expect(reconcileWorld(merged,structuredClone(merged))).toBe(merged);
 });
 it('moving armies of all factions invalidate entity imagery while stationary battles preserve its cache',()=>{
  let w=battlefield();w.cities[0].military!.units={militia:100};w.cities[1].military!.units={militia:100};w=dispatch(w,'conquest',{militia:100}).world;

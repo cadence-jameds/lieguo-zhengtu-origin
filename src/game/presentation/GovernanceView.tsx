@@ -1,11 +1,12 @@
+import type {WorldRead} from '../presentationModel';
 import {useEffect,useState} from 'react';
 import {governanceBase,type GovernanceBase} from '../governanceAdmission';
-import type {FormalCommand,FormalCity,FormalWorld} from '../formal/model';
+import type {FormalCommand,FormalCity} from '../formal/model';
 import {GOVERNOR_DEFAULTS,GOVERNANCE_POLICIES,type GovernancePolicy} from '../formal/governance';
 import {buildingLevel} from '../formal/catalogB3';
 import {spatial} from '../formal/spatial';
 export const GOVERNANCE_POLICY_LABELS={balanced:'均衡',economy:'經濟',population:'人口',military:'軍事',reserve:'資源儲備'};
-type Props={world:FormalWorld;issue:(p:FormalCommand,base?:GovernanceBase)=>void|Promise<boolean>;busy:boolean};
+type Props={world:WorldRead;issue:(p:FormalCommand,base?:GovernanceBase)=>void|Promise<boolean>;busy:boolean};
 export function GovernorControls({world,city,issue,busy}:Props&{city:FormalCity}){
  const gov=world.governors?.find(g=>g.cityId===city.id&&g.ownerFactionId===city.ownerFactionId);
  const [policy,setPolicy]=useState<GovernancePolicy>(gov?.policy??'balanced'),[budget,setBudget]=useState(gov?.budget??GOVERNOR_DEFAULTS.budget),[reserve,setReserve]=useState(gov?.reserve??GOVERNOR_DEFAULTS.reserve),[pending,setPending]=useState(false),[error,setError]=useState('');

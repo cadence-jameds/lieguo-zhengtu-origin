@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import type {BattleId,EventId,FactionId} from './ids';
 import type {FormalWorld,FormalFaction} from './model';
 import type {CombatPool} from './combatResolver';
@@ -9,9 +10,9 @@ import {requireRule} from './economy';
 export type AwarenessPool={value:number;significantEncounter:boolean;encountered:string[]};
 export type AwarenessBattle={battleId:BattleId;pool:string;events:string[];killedPopulation:number;battleAward:number;conquestAward:boolean};
 export type ModernAwareness={pools:Record<string,AwarenessPool>;battles:AwarenessBattle[]};
-export const awarenessScope=(w:FormalWorld,id:FactionId)=>empireOf(w,id)?.id??id;
-export const awarenessPool=(w:FormalWorld,id:FactionId):Readonly<AwarenessPool>=>w.modernAwareness?.pools[awarenessScope(w,id)]??{value:0,significantEncounter:false,encountered:[]};
-export const effectiveAwareness=(w:FormalWorld,id:FactionId)=>awarenessPool(w,id).value;
+export const awarenessScope=(w:WorldRead,id:FactionId)=>empireOf(w,id)?.id??id;
+export const awarenessPool=(w:WorldRead,id:FactionId):Readonly<AwarenessPool>=>w.modernAwareness?.pools[awarenessScope(w,id)]??{value:0,significantEncounter:false,encountered:[]};
+export const effectiveAwareness=(w:WorldRead,id:FactionId)=>awarenessPool(w,id).value;
 export const modernUnitAuthorized=(f:FormalFaction,id:string)=>f.modernQualification==='full'||!!f.reverseEngineering?.includes(id);
 export const modernCombatUnit=(id:string)=>isModernUnit(id)&&UNIT_CATALOG[id].hp>0;
 const population=(p:CombatPool)=>modernCombatUnit(p.unitId)?p.count*UNIT_CATALOG[p.unitId].population:0;

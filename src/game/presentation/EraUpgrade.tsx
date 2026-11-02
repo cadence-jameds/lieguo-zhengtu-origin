@@ -1,11 +1,12 @@
-import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
+import type {WorldRead} from '../presentationModel';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import {resourceKeys} from '../formal/model';
 import {AGE_CATALOG} from '../formal/research';
 import {buildingLevel} from '../formal/catalogB3';
 import {AGE_NAMES} from './artMap';
 import {Cost,fmt,realTime} from './UI';
 import {Countdown,LiveProgress} from './LiveValues';
-export function EraUpgrade({world,city,issue,busy}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean}){
+export function EraUpgrade({world,city,issue,busy}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean}){
  const f=world.factions.find(f=>f.id===city.ownerFactionId)!,age=AGE_CATALOG.find(a=>a.targetAge===(f.age??0)+1);
  if(f.ageQueue)return <section className="card city-era-upgrade"><h3>時代晉升中</h3><LiveProgress world={world} start={f.ageQueue.startedAt} duration={f.ageQueue.durationMs} label="時代晉升進度"/><p>{AGE_NAMES[f.ageQueue.targetAge]} · 剩餘 <Countdown at={f.ageQueue.startedAt+f.ageQueue.durationMs} world={world}/></p></section>;
  if(!age)return <p className="city-era-upgrade">已達帝王時代。</p>;

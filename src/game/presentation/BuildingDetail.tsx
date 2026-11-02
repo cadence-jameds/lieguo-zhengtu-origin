@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {useConstructionPreviews,PreviewStatus} from './useConstructionPreviews';
 import {logisticsAvailable} from '../formal/logisticsAllocation';
 import {GovernorControls} from './GovernanceView';
@@ -6,7 +7,7 @@ import {unitTrainingDuration} from '../formal/military';
 import {AGE_CATALOG} from '../formal/research';
 import {useDisplayTime} from './liveClock';
 import {Fragment,useState} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import {resourceKeys} from '../formal/model';
 import {BUILDING_CATALOG,buildingKind,buildingLevel,CENTER_STORAGE,storageCapacity,warehouseBaseCapacity,warehouseCapacity,protection,RESOURCE_BOOSTS} from '../formal/catalogB3';
 import {ADMINISTRATION_MAX_NODES,QUEUE_CAPACITY,CITY_PROMOTION,promotionConditions,administrationMultiplier,CARAVAN_CAPACITY,caravanStatus,constructionConcurrency,militaryConcurrency,growPopulation,HOUR,MILESTONES,productionPerHour,offeringPerHour} from '../formal/economy';
@@ -23,7 +24,7 @@ import {buildingEffect} from './buildingEffects';
 import {EraUpgrade} from './EraUpgrade';
 import FormalDevelopmentPanel from '../FormalDevelopmentPanel';
 
-type Props={world:FormalWorld;city:FormalCity;buildingKey:string;slot?:number;issue:(command:FormalCommand)=>void;busy:boolean;onDone?:()=>void;onNavigate?:(view:'army'|'research')=>void};
+type Props={world:WorldRead;city:FormalCity;buildingKey:string;slot?:number;issue:(command:FormalCommand)=>void;busy:boolean;onDone?:()=>void;onNavigate?:(view:'army'|'research')=>void};
 const status=(met:boolean)=>met?'✓':'未達';
 function requirementLabel(r:Requirement){if(r.kind==='age')return AGE_NAMES[+r.required]+'時代';if(r.kind==='building')return LABELS[r.id]+' Lv'+r.current+' / Lv'+r.required;if(r.kind==='tech')return TECH_CATALOG[r.id]?.name??r.id;if(r.kind==='milestone')return '本城曾達人口 '+fmt(+r.required);if(r.kind==='civilization')return CIV_NAMES[String(r.required)]+'文明科技';if(r.kind==='field')return boostFieldRequirementText(r)+'（目前 '+Number(r.current).toFixed(1)+(r.fieldMode==='count'?' 格':' 級')+'）';if(r.kind==='cap')return '本文明科技上限 '+r.current+' / 所需'+r.required;return '完整現代軍事資格（尚未開放）';}
 export function Requirements({items}:{items:Requirement[]}){return <ul className="building-requirements">{items.map((r,i)=><li key={i} className={r.met?'met':'unmet'}><b>{status(r.met)}</b> {requirementLabel(r)}</li>)}</ul>;}

@@ -8,7 +8,7 @@ export function durableWorkerStorage(storage:Record<string,any>){
  const switchBranch=()=>{branch++;for(const row of rows.values())if(!terminalCommand(row)){row.state='needs-confirmation';row.ack=confirmationAck(row,0,'戰役分支已切換，請重新確認。');}};
  const result=(row:InboxCommand,ack:CommandAck)=>{const stored=rows.get(key(row.campaignId,row.commandId))!;stored.ack=ack;stored.state=resultState(ack);};
  return{...storage,
-  loadWithOffline:async(...args:any[])=>{const result=await storage.loadWithOffline(...args);current=result.game;return result;},
+  loadWithOffline:async(...args:any[])=>{const result=await storage.loadWithOffline(...args);current=result.game;if(current?.ledger)branch=current.ledger.anchor.branch;return result;},
   acquireWriter:async()=>{rows.clear();branch=0;sequence=0;foregroundRevision=0;return{writerEpoch:++epoch,branch};},writerContext:async()=>({writerEpoch:epoch,branch}),
   receiveCommand:async(order:FormalOrder,intent:object={},originalBranch=branch)=>{const k=key(order.campaignId,order.commandId),old=rows.get(k);if(old){if(old.fingerprint!==commandFingerprint(order))throw Error('CommandId 已用於不同命令。');return old;}
    const row:InboxCommand={...intent,sequence:++sequence,campaignId:order.campaignId,commandId:order.commandId,issuerId:order.issuerId,order,fingerprint:commandFingerprint(order),originalRevision:order.expectedRevision,branch:originalBranch,writerEpoch:epoch,state:'pending',createdAt:Date.now(),deadline:Date.now()+COMMAND_TTL,attempts:0,nextAttemptAt:0};if(order.expectedRevision<foregroundRevision){row.state='needs-confirmation';row.ack=confirmationAck(row,foregroundRevision);}rows.set(k,row);return row;},

@@ -1,5 +1,6 @@
+import type {WorldRead} from '../presentationModel';
 import {useState} from 'react';
-import type {FormalCommand,FormalWorld,LargeProject} from '../formal/model';
+import type {FormalCommand,LargeProject} from '../formal/model';
 import {resourceKeys,zeroResources} from '../formal/model';
 import {empireOf} from '../formal/politics';
 import {caravanStatus,citySnapshot} from '../formal/economy';
@@ -8,7 +9,7 @@ import {wonderRemaining} from '../formal/wonder';
 import {Cost} from './UI';
 import {Countdown,LiveProgress} from './LiveValues';
 import {LABELS} from './artMap';
-export function BreakthroughPanel({world:w,wonder,issue,busy}:{world:FormalWorld;wonder:LargeProject;issue:(p:FormalCommand)=>void;busy:boolean}){
+export function BreakthroughPanel({world:w,wonder,issue,busy}:{world:WorldRead;wonder:LargeProject;issue:(p:FormalCommand)=>void;busy:boolean}){
  const [sourceId,setSource]=useState(''),[cargo,setCargo]=useState(zeroResources),empire=empireOf(w,w.playerFactionId),owned=w.cities.filter(c=>c.ownerFactionId===w.playerFactionId),source=owned.find(c=>c.id===sourceId)??owned[0];
  if(!empire||!source)return null;
  const p=empireBreakthrough(w,empire.id),b=p?.breakthrough,host=w.cities.find(c=>c.id===wonder.initiatingCityId),available=!!host&&empireOf(w,host.ownerFactionId)?.id===empire.id&&(!wonder.wonder?.integrity||wonder.wonder.integrity==='intact');

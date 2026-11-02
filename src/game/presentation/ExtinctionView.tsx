@@ -1,12 +1,13 @@
+import type {WorldRead} from '../presentationModel';
 import {useMemo,useState} from 'react';
-import type {FormalWorld,FormalCommand} from '../formal/model';
+import type {FormalCommand} from '../formal/model';
 import {cityId} from '../formal/ids';
 import {rebirthCandidates,rebirthLocationReason} from '../formal/extinction';
 import {fieldDistribution,terrainAt} from '../formal/terrain';
 import FormalWorldMap from '../FormalWorldMap';
 import {clock,Dialog} from './UI';
 const terrainNames={land:'平地',forest:'森林',river:'河流',water:'水域',mountain:'山地'};
-export function RebirthView({world:w,issue,busy,onHome,onReports,onLoad,onExport,onNew,mobile=false}:{world:FormalWorld;issue:(p:FormalCommand)=>void;busy:boolean;onHome:()=>void;onReports?:()=>void;onLoad?:()=>void;onExport?:()=>void;onNew?:()=>void;mobile?:boolean}){
+export function RebirthView({world:w,issue,busy,onHome,onReports,onLoad,onExport,onNew,mobile=false}:{world:WorldRead;issue:(p:FormalCommand)=>void;busy:boolean;onHome:()=>void;onReports?:()=>void;onLoad?:()=>void;onExport?:()=>void;onNew?:()=>void;mobile?:boolean}){
  const [rebuild,setRebuild]=useState(false),[map,setMap]=useState(false),[confirm,setConfirm]=useState<'end'|'rebirth'>(),[x,setX]=useState(''),[y,setY]=useState('');
  const candidates=useMemo(()=>rebirthCandidates(w),[w]),point={x:Number(x),y:Number(y)},reason=!x.trim()||!y.trim()?'請選擇土地或輸入 X、Y 座標':rebirthLocationReason(w,point),terrain=terrainAt(w,point.x,point.y),ended=w.extinction?.defeat?.ended;
  const choose=(p:{x:number;y:number})=>{setX(String(p.x));setY(String(p.y));setConfirm(undefined);};

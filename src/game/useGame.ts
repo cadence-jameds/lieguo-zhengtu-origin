@@ -1,25 +1,30 @@
+import {PresentationStore} from './presentationStore';
+import {ProjectionRecovery} from './projectionRecovery';
+import {usePresentationSelector,selectPresentationWorld} from './usePresentation';
+import type {WorldRead,PresentationWorld} from './presentationModel';
 import {orderSchema} from './formal/schema';
-import {captureIntent,type InboxCommand} from './durableCommands';
+import {captureIntent,resultState,type InboxCommand} from './durableCommands';
 import {worldPaused} from './formal/extinction';
 import {inspectCampaignStorage,exportCampaignArchive} from './campaignStorage';
 import {updateEligibility,UpdateSafetyError,type CampaignStatus,type EngineStatus} from './updateEligibility';
 import {feedbackForAck,uncertainFeedback,type CommandFeedback} from './commandFeedback';
-import {useCallback,useEffect,useRef,useState} from 'react';
+import {useCallback,useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {effectiveSpeed} from './formal/playtest';
 import {withSaveLock} from './saveLock';
 import {commandId} from './formal/ids';
-import type {CommandAck,FormalCommand,FormalOrder,FormalReport,FormalWorld} from './formal/model';
+import type {CommandAck,FormalCommand,FormalOrder,FormalReport} from './formal/model';
 import type {OfflineSummary} from './formal/offline';
 import type {RuntimeRequest} from './runtime.worker';
-import {PendingRequests,PendingCommand,reconcileWorld} from './interaction';
+import {PendingRequests,PendingCommand} from './interaction';
 import {playerOrderBase} from './orderAdmission';
 import {displayClock} from './presentation/liveClock';
 import type {CityIntel} from './formal/combatModel';
-import {applyWorldPatch} from './worldStream';
 import {governanceBase,type GovernanceBase} from './governanceAdmission';
 export type CommandView={commandId:string;order:FormalOrder;state:InboxCommand['state']|'created'|'receive-failed'|'blocked';text?:string;sequence?:number};
 export function useGame(){
- const [world,setWorld]=useState<FormalWorld|null>(null),[status,setStatus]=useState<EngineStatus>('loading');
+ const storeRef=useRef<PresentationStore|null>(null);if(!storeRef.current)storeRef.current=new PresentationStore();const presentationStore=storeRef.current;
+ const recoveryRef=useRef<ProjectionRecovery|null>(null);
+ const world=usePresentationSelector(presentationStore,selectPresentationWorld),renderedWorld=useRef(world);useLayoutEffect(()=>{renderedWorld.current=world;},[world]);const [status,setStatus]=useState<EngineStatus>('loading');
  const statusRef=useRef<EngineStatus>('loading');const changeStatus=(next:EngineStatus)=>{statusRef.current=next;setStatus(next);};
  const [legacyAvailable,setLegacyAvailable]=useState(false);
  const [campaignStatus,setCampaignStatus]=useState<CampaignStatus>('checking');
@@ -28,29 +33,30 @@ export function useGame(){
  const stopCurrentLoad=useRef<(()=>void)|null>(null);
  const [commandRows,setCommandRows]=useState<CommandView[]>([]);
  const commandRequests=useRef(new Map<string,Extract<RuntimeRequest,{type:'command'}>>()),branch=useRef<number|undefined>(undefined);
+ const latestCommandCampaign=useRef<string|undefined>(undefined);
  const blocking=useRef(new Set<string>());const [inputBusy,setInputBusy]=useState(false);
  const waitTimers=useRef(new Map<string,ReturnType<typeof setTimeout>>()),waitExpired=useRef(new Set<string>());
  const waitKey=(campaign:string,id:string)=>campaign+'/'+id;
  const isWaiting=(state:CommandView['state']|undefined)=>state==='created'||state==='pending'||state==='retryable';
  const waitWarning='等待結果逾時；請查詢結果或重新載入。原操作內容保留，請勿直接重複下單。';
- const updateCommand=(id:string,patch:Partial<CommandView>)=>{
-  const key=waitKey(patch.order?.campaignId??current.current?.campaignId??'',id);
+ const updateCommand=(id:string,patch:Partial<CommandView>,sourceCampaign?:string)=>{
+  const key=waitKey(sourceCampaign??patch.order?.campaignId??current.current?.campaignId??'',id);
   if(patch.state&&!isWaiting(patch.state)&&patch.state!=='blocked'){clearTimeout(waitTimers.current.get(key));waitTimers.current.delete(key);waitExpired.current.delete(key);}
-  setCommandRows(rows=>{const campaign=patch.order?.campaignId??current.current?.campaignId,key=waitKey(campaign??'',id),old=rows.find(r=>r.commandId===id&&r.order.campaignId===campaign);
+  setCommandRows(rows=>{const campaign=sourceCampaign??patch.order?.campaignId??current.current?.campaignId,key=waitKey(campaign??'',id),old=rows.find(r=>r.commandId===id&&r.order.campaignId===campaign);
   // A pending observation cannot undo a timeout or a previously known terminal result.
   if(isWaiting(patch.state)&&old&&!isWaiting(old.state)&&old.state!=='blocked'&&old.state!=='receive-failed')return rows;
   const next=isWaiting(patch.state)&&waitExpired.current.has(key)?{...patch,state:'blocked' as const,text:waitWarning}:patch;
   return old?rows.map(r=>r===old?{...r,...next}:r):next.order?[...rows,{commandId:id,...next} as CommandView]:rows;});};
  const preserveDrafts=()=>{try{sessionStorage.setItem('formal-command-drafts-v1',JSON.stringify([...commandRequests.current.values()]));}catch{/* Memory retains the original operation; T1 is still the only durable acceptance. */}};
- const forgetDraft=(id:string)=>{if(commandRequests.current.delete(id))preserveDrafts();};
+ const forgetDraft=(id:string,campaign=current.current?.campaignId)=>{if(campaign&&commandRequests.current.delete(waitKey(campaign,id)))preserveDrafts();};
  const [feedback,setFeedback]=useState<CommandFeedback>({kind:'idle',text:''});
  const commandTimer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
  const [error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false);
  const [transition,setTransition]=useState(''),[synced,setSynced]=useState(0),[reportCount,setReportCount]=useState(0),[reportEpoch,setReportEpoch]=useState(0),[reportStatus,setReportStatus]=useState({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}),[reportData,setReportData]=useState<{page:number;filter:string;count:number}|null>(null);
  const [backups,setBackups]=useState<{id:number;at:number;label:string;time:number}[]>([]),[reports,setReports]=useState<FormalReport[]>([]);
- const worker=useRef<Worker|null>(null),current=useRef<FormalWorld|null>(null),writerHeld=useRef(false);
+ const worker=useRef<Worker|null>(null),current=useRef<PresentationWorld|null>(null),writerHeld=useRef(false);
  const intelQueries=useRef(new Map<string,{resolve:(value:CityIntel)=>void;reject:(error:Error)=>void}>());
- const readCityIntel=useCallback((snapshot:FormalWorld,cityId:string,generation?:number)=>new Promise<CityIntel>((resolve,reject)=>{if(!worker.current){resolve({});return;}const queryId=crypto.randomUUID();intelQueries.current.set(queryId,{resolve,reject});worker.current.postMessage({type:'cityIntel',queryId,cityId,...(generation!==undefined?{generation}:{}),campaignId:snapshot.campaignId,reportCursor:snapshot.sequences.report,time:snapshot.time});}),[]);
+ const readCityIntel=useCallback((snapshot:WorldRead,cityId:string,generation?:number)=>new Promise<CityIntel>((resolve,reject)=>{if(!worker.current){resolve({});return;}const queryId=crypto.randomUUID();intelQueries.current.set(queryId,{resolve,reject});worker.current.postMessage({type:'cityIntel',queryId,cityId,...(generation!==undefined?{generation}:{}),campaignId:snapshot.campaignId,reportCursor:snapshot.sequences.report,time:snapshot.time});}),[]);
  const rejectIntel=()=>{for(const q of intelQueries.current.values())q.reject(new Error('情報查詢已中斷。'));intelQueries.current.clear();};
  const requests=useRef(new PendingRequests()),commands=useRef(new PendingCommand());
  const saves=useRef(new Map<string,{resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>}>());
@@ -81,7 +87,7 @@ export function useGame(){
   if(!worker.current){setFeedback({kind:'error',text:'引擎未就緒，操作尚未受理；請重新載入後確認。'});return;}
   const requestId=crypto.randomUUID();
   if(r.type==='command'){
-   commands.current.track(r.order.commandId);commandRequests.current.set(r.order.commandId,r);preserveDrafts();
+   latestCommandCampaign.current=r.order.campaignId;commands.current.track(r.order.commandId);commandRequests.current.set(waitKey(r.order.campaignId,r.order.commandId),r);preserveDrafts();
    updateCommand(r.order.commandId,{order:r.order,state:'created',text:'已建立，尚未持久保存。'});
    setError('');setNotice('指令受理中：已建立，尚未持久保存。');setFeedback({kind:'sending',text:'指令已建立，尚未持久保存。'});
   }
@@ -89,18 +95,19 @@ export function useGame(){
   requests.current.add(requestId);setBusy(true);worker.current.postMessage({...r,requestId});
  },[]);
  useEffect(()=>{
-  try{const drafts:unknown=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')??'[]');if(Array.isArray(drafts))for(const raw of drafts){const parsed=orderSchema.safeParse(raw?.order);if(!parsed.success)continue;const r={...raw,type:'command',order:parsed.data} as Extract<RuntimeRequest,{type:'command'}>;commandRequests.current.set(r.order.commandId,r);updateCommand(r.order.commandId,{order:r.order,state:'receive-failed',text:'上次操作尚未確認持久接收。請先查詢結果，再決定是否重送原命令。'});}}catch{/* Invalid/unavailable session storage does not authorize execution. */}
+  try{const drafts:unknown=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')??'[]');if(Array.isArray(drafts))for(const raw of drafts){const parsed=orderSchema.safeParse(raw?.order);if(!parsed.success)continue;const r={...raw,type:'command',order:parsed.data} as Extract<RuntimeRequest,{type:'command'}>;commandRequests.current.set(waitKey(r.order.campaignId,r.order.commandId),r);updateCommand(r.order.commandId,{order:r.order,state:'receive-failed',text:'上次操作尚未確認持久接收。請先查詢結果，再決定是否重送原命令。'});}}catch{/* Invalid/unavailable session storage does not authorize execution. */}
   let disposed=false,release:(()=>void)|undefined;const abort=new AbortController();
   if(!navigator.locks){changeStatus('error');setError('瀏覽器無法鎖定正式存檔，請使用支援 Web Locks 的瀏覽器。');return;}
   void withSaveLock(navigator.locks,abort.signal,async()=>{
    if(disposed)return;
    writerHeld.current=true;
    const w=new Worker(new URL('./runtime.worker.ts',import.meta.url),{type:'module'});worker.current=w;
+   const recovery=new ProjectionRecovery(presentationStore,()=>w.postMessage({type:'snapshot'}));recoveryRef.current=recovery;let lastNotification=0;
    let loading=true,lastEvents=-1,watchdog:ReturnType<typeof setTimeout>|undefined;
    const clearWatchdog=()=>{clearTimeout(watchdog);watchdog=undefined;};
    const stop=(message:string)=>{
     if(worker.current!==w)return;
-    clearWatchdog();w.terminate();worker.current=null;loading=false;rejectIntel();rejectSaves(new Error(message));requests.current.clear();commands.current.clear();displayClock.stop();setBusy(false);blocking.current.clear();setInputBusy(false);setError(message);changeStatus('error');
+    clearWatchdog();recovery.dispose();w.terminate();worker.current=null;loading=false;rejectIntel();rejectSaves(new Error(message));requests.current.clear();commands.current.clear();displayClock.stop();setBusy(false);blocking.current.clear();setInputBusy(false);setError(message);changeStatus('error');
    };
    const arm=()=>{clearWatchdog();watchdog=setTimeout(()=>stop('載入階段「'+loadStage+'」超過 30 秒沒有回應。已停止本次載入，原有存檔與回復點保留，請重新整理後重試。'),30000);};
    let loadStage='啟動世界引擎';
@@ -109,6 +116,7 @@ export function useGame(){
    w.onmessage=e=>{
     if(disposed||worker.current!==w)return;
     const msg=e.data;
+    if(Number.isSafeInteger(msg.notificationSequence)){if(msg.notificationSequence<=lastNotification&&!['requestDone','synced'].includes(msg.type))return;lastNotification=Math.max(lastNotification,msg.notificationSequence);}
     if(msg.type==='phase'){
      loading=true;loadStage=msg.text;setLoadPhase(loadStage);
      // Every load/resume has its own monotonically increasing event count.
@@ -125,18 +133,17 @@ export function useGame(){
     if(r.type==='cityIntel'){const q=intelQueries.current.get(r.queryId);if(q){intelQueries.current.delete(r.queryId);if(r.error)q.reject(new Error(r.error));else q.resolve(r.data);}return;}
     if(r.type==='requestDone'){finishSave(r.requestId,new Error('保存未完成，請稍後再試。'));requests.current.finish(r.requestId);blocking.current.delete(r.requestId);setInputBusy(blocking.current.size>0);setBusy(requests.current.busy);return;}
     if(r.type==='state'||r.type==='switched'||r.type==='switchFailed'){
+     if(!r.projection||!recovery.receive(r.projection).accepted)return;
      loading=false;clearWatchdog();
-     const incoming=r.patch?applyWorldPatch(current.current,r.patch):r.world;
-     if(r.patch&&incoming===undefined){worker.current?.postMessage({type:'snapshot'});return;}
-     // A checked patch already keeps every unchanged branch; comparing its
-     // changed sections again repeats Worker serialization on the main thread.
-     if(typeof r.branch==='number')branch.current=r.branch;
-     const prior=current.current,next=r.patch?incoming:reconcileWorld(prior,incoming);if(r.type==='switched'||prior?.campaignId!==next?.campaignId||(prior?.sequences.report??0)>(next?.sequences.report??0)){setReports([]);setReportData(null);setReportStatus({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}});setReportEpoch(n=>n+1);}current.current=next;setWorld(next);
+     const next=presentationStore.getWorld(),prior=current.current;
+     if(next)branch.current=next.projection.branch;
+     if(r.type==='switched'||prior?.campaignId!==next?.campaignId||prior?.projection.branch!==next?.projection.branch||(prior?.sequences.report??0)>(next?.sequences.report??0)){setReports([]);setReportData(null);setReportStatus({unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}});setReportEpoch(n=>n+1);}current.current=next;
      if(next){const anchor=r.clock??{campaignId:next.campaignId,time:next.time,speed:effectiveSpeed(next),running:true};displayClock.adopt({...anchor,running:anchor.running&&!document.hidden&&!worldPaused(next)});}
      else displayClock.stop();
      if(r.type==='switched'||r.type==='switchFailed'){clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'idle',text:''});}
-     if(r.type==='switchFailed'){setError(r.text);changeStatus(r.world?'ready':'error');}else{setError('');changeStatus('ready');}
+     if(r.type==='switchFailed'){setError(r.text);changeStatus(next?'ready':'error');}else{setError('');changeStatus('ready');}
     }
+    if(r.type==='projectionUnavailable'){recovery.recover();return;}
     if(r.type==='error'){const displayText=r.requestId&&saves.current.has(r.requestId)?'正式保存失敗，尚未取得寫入完成確認；本機戰役與回復點保留。':r.text;clearTimeout(commandTimer.current);commands.current.clear();setFeedback({kind:'error',text:displayText});loading=false;clearWatchdog();if(r.requestId)finishSave(r.requestId,new Error(r.text));displayClock.stop();setError(displayText);changeStatus('error');}
     if(r.type==='notice'&&(!commands.current.busy||r.error)){setNotice(r.text);setFeedback(r.error?{kind:'error',text:r.text}:{kind:'idle',text:''});}
     if(r.type==='loaded'&&r.offline&&r.offline.elapsedRealMs>30000)setOffline(r.offline);
@@ -146,24 +153,24 @@ export function useGame(){
     if(r.type==='reportPage'){setReports(r.data.rows);setReportCount(r.data.count);setReportData(r.data);if(r.data.counts)setReportStatus(r.data);}
     if(r.type==='switched')setTransition(r.transitionId??'');
     if(r.type==='synced'){finishSave(r.requestId);setSynced(n=>n+1);if(!commands.current.busy)setNotice('進度已保存。');}
-    if(r.type==='commandReceived'&&commands.current.matches(r.commandId)){setNotice('指令已受理，尚未持久保存。');setFeedback({kind:'sending',text:'指令已受理，尚未持久保存。'});}
+    if(r.type==='commandReceived'&&(!r.campaignId||r.campaignId===latestCommandCampaign.current)&&commands.current.matches(r.commandId)){setNotice('指令已受理，尚未持久保存。');setFeedback({kind:'sending',text:'指令已受理，尚未持久保存。'});}
     if(r.type==='commandDurable'||r.type==='commandStatus'){
-     if(r.row){const row=r.row as InboxCommand;forgetDraft(row.commandId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
-      if(row.ack&&commands.current.acknowledge(row.ack)){const feedback=feedbackForAck(row.ack);setNotice(feedback.text);setFeedback(feedback);}
-      else if(commands.current.matches(row.commandId)&&!row.ack&&!waitExpired.current.has(waitKey(row.order.campaignId,row.commandId))){setNotice('指令已持久接收，等待正式提交。');setFeedback({kind:'pending',text:'指令已持久接收，等待正式提交。'});}}
+     if(r.row){const row=r.row as InboxCommand;forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
+      if(row.ack&&row.order.campaignId===latestCommandCampaign.current&&commands.current.acknowledge(row.ack)){const feedback=feedbackForAck(row.ack);setNotice(feedback.text);setFeedback(feedback);}
+      else if(row.order.campaignId===latestCommandCampaign.current&&commands.current.matches(row.commandId)&&!row.ack&&!waitExpired.current.has(waitKey(row.order.campaignId,row.commandId))){setNotice('指令已持久接收，等待正式提交。');setFeedback({kind:'pending',text:'指令已持久接收，等待正式提交。'});}}
     }
-    if(r.type==='commandList'){for(const row of r.rows as InboxCommand[]){forgetDraft(row.commandId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??row.lastError});}}
+    if(r.type==='commandList'){for(const row of r.rows as InboxCommand[]){forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??row.lastError});}}
     if(r.type==='commandReceiveFailed'||r.type==='commandBlocked'){
-     commands.current.finish(r.commandId);updateCommand(r.commandId,{...(r.row?{order:r.row.order}:{}),state:r.row?.state??(r.type==='commandBlocked'?'blocked':'receive-failed'),text:r.text});setFeedback({kind:'error',text:r.text});setNotice(r.text);
+     const latest=(!r.campaignId||r.campaignId===latestCommandCampaign.current)&&commands.current.matches(r.commandId);if(latest)commands.current.finish(r.commandId);updateCommand(r.commandId,{...(r.row?{order:r.row.order}:{}),state:r.row?.state??(r.type==='commandBlocked'?'blocked':'receive-failed'),text:r.text},r.campaignId);if(latest){setFeedback({kind:'error',text:r.text});setNotice(r.text);}
     }
-    if(r.type==='commandAck'){const a=r.ack as CommandAck;forgetDraft(a.commandId);updateCommand(a.commandId,{state:a.status==='committed'||a.status==='duplicate'?'committed':a.status==='rolled-back'?'rolled-back':a.reason?.includes('重新確認')?'needs-confirmation':'rejected',text:feedbackForAck(a).text});if(commands.current.acknowledge(a)){clearTimeout(commandTimer.current);const feedback=feedbackForAck(a);setNotice(feedback.text);setFeedback(feedback);}}
+    if(r.type==='commandAck'){const a=r.ack as CommandAck,campaign=r.campaignId??current.current?.campaignId;forgetDraft(a.commandId,campaign);updateCommand(a.commandId,{state:resultState(a),text:feedbackForAck(a).text},campaign);if((!campaign||campaign===latestCommandCampaign.current)&&commands.current.acknowledge(a)){clearTimeout(commandTimer.current);const feedback=feedbackForAck(a);setNotice(feedback.text);setFeedback(feedback);}}
     if(r.type==='export'){
      const url=URL.createObjectURL(new Blob([r.text],{type:'application/json'})),a=document.createElement('a');
      a.href=url;a.download='列國征途-formal-'+r.mode+'.realm-save';a.click();URL.revokeObjectURL(url);
     }
    };
-   w.onerror=e=>{loading=false;clearWatchdog();rejectIntel();rejectSaves(new Error(e.message));requests.current.clear();commands.current.clear();displayClock.stop();setError(e.message);changeStatus('error');setBusy(false);};w.postMessage({type:'load',stateMode:'patch'});
-   await new Promise<void>(r=>{release=r;});writerHeld.current=false;w.terminate();worker.current=null;
+   w.onerror=e=>{loading=false;clearWatchdog();recovery.dispose();rejectIntel();rejectSaves(new Error(e.message));requests.current.clear();commands.current.clear();displayClock.stop();setError(e.message);changeStatus('error');setBusy(false);};w.postMessage({type:'load',stateMode:'projection-v2'});
+   await new Promise<void>(r=>{release=r;});writerHeld.current=false;recovery.dispose();w.terminate();worker.current=null;
   },()=>{changeStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{writerHeld.current=false;if(!disposed){setError(String(e));changeStatus('error');}});
   return()=>{clearTimeout(commandTimer.current);disposed=true;writerHeld.current=false;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
  },[]);
@@ -176,7 +183,7 @@ export function useGame(){
      waitTimers.current.delete(key);waitExpired.current.add(key);
      updateCommand(row.commandId,{order:row.order,state:'blocked',text:waitWarning});
      worker.current?.postMessage({type:'commandQuery',campaignId:row.order.campaignId,commandId:row.commandId});
-     if(commands.current.matches(row.commandId)){setFeedback(uncertainFeedback);setNotice(waitWarning);}
+     if(row.order.campaignId===latestCommandCampaign.current&&commands.current.matches(row.commandId)){setFeedback(uncertainFeedback);setNotice(waitWarning);}
     },30000));
    }else if(!isWaiting(row.state)&&row.state!=='blocked'){
     clearTimeout(waitTimers.current.get(key));waitTimers.current.delete(key);waitExpired.current.delete(key);
@@ -186,7 +193,7 @@ export function useGame(){
  useEffect(()=>()=>{for(const timer of waitTimers.current.values())clearTimeout(timer);waitTimers.current.clear();waitExpired.current.clear();},[]);
  // Capture the rendered world: a Worker message may update current.current
  // before React commits the new target level shown by a construction button.
- const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=world;if(!g||!worker.current||statusRef.current!=='ready'||blocking.current.size){setFeedback({kind:'error',text:'戰役尚未就緒或正在切換，操作未受理；請稍後確認。'});return;}const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};send({type:'command',order,branch:branch.current,...captureIntent(g,order),...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});},[send,world]);
+ const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=renderedWorld.current;if(!g||!worker.current||statusRef.current!=='ready'||blocking.current.size){setFeedback({kind:'error',text:'戰役尚未就緒或正在切換，操作未受理；請稍後確認。'});return;}const order:FormalOrder={commandId:commandId(crypto.randomUUID()),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};send({type:'command',order,branch:g.projection.branch,projection:g.projection,...captureIntent(g,order),...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});},[send]);
  const importFile=async(file:File)=>{if(file.size>100*1024*1024){setError('存檔超過 100 MiB。');return;}send({type:'import',text:await file.text(),transitionId:crypto.randomUUID()});};
- return{previewBranch:branch.current,commandRows,inputBusy:inputBusy||status!=='ready',queryCommand:(row:CommandView)=>send({type:'commandQuery',campaignId:row.order.campaignId,commandId:row.order.commandId}),retryReceive:(row:CommandView)=>{const request=commandRequests.current.get(row.commandId);if(request)send(request);else setFeedback({kind:'error',text:'請依原始操作內容重新確認。'});},legacyAvailable,campaignStatus,prepareUpdate,exportRawBackup,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
+ return{presentationStore,recoverProjection:()=>recoveryRef.current?.retry(),previewBranch:world?`${world.projection.campaignId}:${world.projection.branch}:${world.projection.writerEpoch}`:undefined,commandRows,inputBusy:inputBusy||status!=='ready',queryCommand:(row:CommandView)=>send({type:'commandQuery',campaignId:row.order.campaignId,commandId:row.order.commandId}),retryReceive:(row:CommandView)=>{const request=commandRequests.current.get(waitKey(row.order.campaignId,row.commandId));if(request)send(request);else setFeedback({kind:'error',text:'請依原始操作內容重新確認。'});},legacyAvailable,campaignStatus,prepareUpdate,exportRawBackup,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
 }

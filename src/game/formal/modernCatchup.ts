@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import type {FormalCity,FormalEvent,FormalOrder,FormalWorld,LargeProject,FormalCommand} from './model';
 import {resourceKeys,zeroResources} from './model';
 import {projectId,sequenceKey,type EmpireId} from './ids';
@@ -14,8 +15,8 @@ export const TRANSFER_COST=Object.freeze(Object.fromEntries(resourceKeys.map(r=>
 export const TRANSFER_DURATION=WONDER_DURATION+BREAKTHROUGH_DURATION;
 export type CatchupConstruction={creationCommandId:FormalOrder['commandId'];initiatorId:FormalOrder['issuerId'];eligibilitySnapshot:{scope:string;awareness:number;sourceProjectId:LargeProject['projectId']};phase:'funding'|'building'|'completed'|'cancelled';startedAt:number|null;completionEventId:FormalEvent['id']|null;completedAt:number|null;qualifiedFactionIds:FormalOrder['issuerId'][]};
 export type CatchupCommand={type:'modern.transfer.start';cityId:FormalCity['id']}|{type:'modern.emergency.start';cityId:FormalCity['id']}|{type:'modern.project.ship';cityId:FormalCity['id'];projectId:LargeProject['projectId'];resources:LargeProject['poolResources']};
-export function completedEmpireModernization(w:FormalWorld,id:EmpireId){return w.largeProjects.some(p=>p.owner.kind==='empire'&&p.owner.empireId===id&&(p.breakthrough?.phase==='completed'||p.kind==='emergency-modernization'&&p.catchup?.phase==='completed'));}
-export function emergencyEligibility(w:FormalWorld,id:FormalOrder['issuerId']):string|null{
+export function completedEmpireModernization(w:WorldRead,id:EmpireId){return w.largeProjects.some(p=>p.owner.kind==='empire'&&p.owner.empireId===id&&(p.breakthrough?.phase==='completed'||p.kind==='emergency-modernization'&&p.catchup?.phase==='completed'));}
+export function emergencyEligibility(w:WorldRead,id:FormalOrder['issuerId']):string|null{
  const f=w.factions.find(f=>f.id===id)!,empire=empireOf(w,id);
  if(f.modernQualification==='full')return '已取得完整現代軍事資格。';
  if(empire&&empire.leader!==id)return '帝國工程由帝國領袖啟動。';
@@ -25,8 +26,8 @@ export function emergencyEligibility(w:FormalWorld,id:FormalOrder['issuerId']):s
  if(w.largeProjects.some(p=>p.kind==='emergency-modernization'&&p.catchup?.phase!=='cancelled'&&(empire?p.owner.kind==='empire'&&p.owner.empireId===empire.id:p.owner.kind==='faction'&&p.owner.factionId===id)))return '此陣營已有緊急現代化工程。';
  return null;
 }
-export function transferSource(w:FormalWorld,id:FormalOrder['issuerId']){const empire=empireOf(w,id);return empire&&w.largeProjects.find(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===empire.id&&p.breakthrough?.phase==='completed');}
-export function transferEligibility(w:FormalWorld,id:FormalOrder['issuerId']):string|null{
+export function transferSource(w:WorldRead,id:FormalOrder['issuerId']){const empire=empireOf(w,id);return empire&&w.largeProjects.find(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===empire.id&&p.breakthrough?.phase==='completed');}
+export function transferEligibility(w:WorldRead,id:FormalOrder['issuerId']):string|null{
  const f=w.factions.find(f=>f.id===id)!,source=transferSource(w,id);
  if(f.modernQualification==='full')return '已取得完整現代軍事資格。';
  if(!source)return '須加入已完成文明突破的帝國。';
@@ -35,7 +36,7 @@ export function transferEligibility(w:FormalWorld,id:FormalOrder['issuerId']):st
  return null;
 }
 export function transferStillLegal(w:FormalWorld,p:LargeProject){return !!p.catchup&&empireOf(w,p.catchup.initiatorId)?.id===p.catchup.eligibilitySnapshot.scope&&!!transferSource(w,p.catchup.initiatorId)&&w.factions.find(f=>f.id===p.catchup!.initiatorId)?.modernQualification!=='full';}
-export function catchupContributor(w:FormalWorld,p:LargeProject,id:FormalOrder['issuerId']){return p.owner.kind==='faction'?p.owner.factionId===id:empireOf(w,id)?.id===p.owner.empireId;}
+export function catchupContributor(w:WorldRead,p:LargeProject,id:FormalOrder['issuerId']){return p.owner.kind==='faction'?p.owner.factionId===id:empireOf(w,id)?.id===p.owner.empireId;}
 export function createCatchup(w:FormalWorld,c:FormalCity,o:FormalOrder,kind:LargeProject['kind'],cost:LargeProject['requiredResources'],durationMs:number,owner:LargeProject['owner'],eligibilitySnapshot:CatchupConstruction['eligibilitySnapshot']){
  const p:LargeProject={projectId:projectId(sequenceKey(w.sequences.project++)),kind,owner,legalContributors:owner.kind==='empire'?{kind:'current-empire-members',empireId:owner.empireId}:{kind:'same-faction',factionId:owner.factionId},paymentMode:'physical-shipment',initiatingCityId:c.id,requiredResources:{...cost},poolResources:zeroResources(),shipments:[],createdAt:w.time,durationMs,catchup:{creationCommandId:o.commandId,initiatorId:o.issuerId,eligibilitySnapshot,phase:'funding',startedAt:null,completionEventId:null,completedAt:null,qualifiedFactionIds:[]}};
  w.largeProjects.push(p);return p;

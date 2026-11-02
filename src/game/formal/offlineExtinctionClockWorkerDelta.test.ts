@@ -1,3 +1,5 @@
+import * as projectionMaps from '../admissionMap';
+import * as projectionLedger from './commandLedger';
 import {commandId} from './ids';
 import 'fake-indexeddb/auto';
 import {beforeEach,afterEach,it,expect,vi} from 'vitest';
@@ -5,15 +7,18 @@ import {CLOCK_DELTA_CASES,clockBoundaryWorld,eventRows,rebirthOrder} from './off
 import {effectiveSpeed} from './playtest';
 import type {FormalWorld,FormalReport} from './model';
 import type {FormalPersistence,FailurePoint} from '../persistence';
+// Observe committed domain state separately from the real v2 UI wire/store.
+let projectionBridge:import('./projectionTestSupport').ProjectionTestBridge;
+vi.mock('../worldStream',async(importOriginal)=>{const real=await importOriginal<typeof import('../worldStream')>(),{ProjectionTestBridge}=await import('./projectionTestSupport');return {...real,WorldStream:class extends real.WorldStream{constructor(){const bridge=new ProjectionTestBridge(true);projectionBridge=bridge;super(crypto.randomUUID(),bridge.reader);}}};});
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),readCityIntel:vi.fn(),reportStatus:vi.fn(),reportAction:vi.fn()}));
 vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let db:FormalPersistence,messages:Record<string,any>[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:Record<string,any>)=>void},now=0,wall=1000,failure:FailurePoint|undefined;
 const send=(data:unknown)=>port.onmessage!({data}),until=async(fn:()=>boolean)=>vi.waitFor(()=>expect(fn()).toBe(true)),state=()=>messages.filter(m=>m.type==='state').at(-1)!;
 beforeEach(async()=>{
- vi.resetModules();vi.clearAllMocks();now=0;wall=1000;failure=undefined;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.spyOn(Date,'now').mockImplementation(()=>wall);vi.stubGlobal('setInterval',vi.fn());
+ vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);vi.doMock('./commandLedger',()=>projectionLedger);vi.clearAllMocks();now=0;wall=1000;failure=undefined;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.spyOn(Date,'now').mockImplementation(()=>wall);vi.stubGlobal('setInterval',vi.fn());
  const actual=await vi.importActual<typeof import('../persistence')>('../persistence');db=new actual.FormalPersistence({suffix:'clock-worker-delta-'+crypto.randomUUID(),fault:p=>{if(p===failure)throw Error('Worker clock storage fault');}});
  storage.reportStatus.mockImplementation((w:FormalWorld)=>db.reportStatus(w));storage.loadWithOffline.mockImplementation((progress:any)=>db.loadWithOffline(wall,progress));storage.save.mockImplementation((w:FormalWorld,reports:FormalReport[],revision:number,savedAt?:number)=>db.save(w,reports,revision,savedAt));
- messages=[];port={onmessage:null,postMessage:v=>messages.push(structuredClone(v))};vi.stubGlobal('self',port);await import('../runtime.worker');
+ messages=[];port={onmessage:null,postMessage:v=>messages.push(structuredClone(projectionBridge.receive(v)))};vi.stubGlobal('self',port);await import('../runtime.worker');
 });
 afterEach(async()=>{await db.db.delete();vi.restoreAllMocks();vi.unstubAllGlobals();});
 for(const config of CLOCK_DELTA_CASES)it(`T2/T4/T5/T6 Worker ${config.name}: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary`,async()=>{

@@ -1,11 +1,11 @@
-import type {FormalWorld} from './formal/model';
+import type {WorldRead} from './presentationModel';
 import type {CityId} from './formal/ids';
 import {citySnapshot} from './formal/economy';
 import {worldPaused} from './formal/extinction';
 import type {PreviewContext} from './constructionPreviewProtocol';
 /** Outside render only. Local lazy settlement uses Formal cross-city administration/upkeep;
  * only its resulting city values cross the worker boundary. No receipts/events/world clone. */
-export function constructionPreviewContext(w:FormalWorld,id:CityId):PreviewContext{
+export function constructionPreviewContext(w:WorldRead,id:CityId):PreviewContext{
  if(w.economyVersion!==95)throw new Error('舊版經濟尚待正式遷移，無法提供最新預估。');
  const original=w.cities.find(c=>c.id===id);if(!original?.economy)throw new Error('城市資料不完整，無法提供最新預估。');
  const settled=citySnapshot(w,id)!;

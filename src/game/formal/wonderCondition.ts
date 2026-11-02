@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {durabilityPrecision} from './siege';
 import type {FormalCity,FormalEvent,FormalOrder,FormalReport,FormalWorld,LargeProject,Resources} from './model';
 import {resourceKeys,zeroResources} from './model';
@@ -9,7 +10,7 @@ import {reconcileBreakthroughs} from './breakthrough';
 import type {EventScheduler} from './scheduler';
 export type RepairCommand={type:'wonder.repair.start';cityId:FormalCity['id'];projectId:ProjectId}|{type:'wonder.repair.ship';cityId:FormalCity['id'];projectId:ProjectId;resources:Resources};
 export type WonderRepair={creationCommandId:FormalOrder['commandId'];wonderProjectId:ProjectId;missingSnapshot:number;phase:'funding'|'building'|'paused'|'completed';workMs:number;activeSince:number|null;completionEventId:FormalEvent['id']|null;completedAt:number|null;restored:number|null;combatInterrupted?:true};
-export function wonderAvailable(w:FormalWorld,p:LargeProject){return !p.wonder?.recaptureRequired&&p.owner.kind==='empire'&&empireOf(w,w.cities.find(c=>c.id===p.initiatingCityId)!.ownerFactionId)?.id===p.owner.empireId;}
+export function wonderAvailable(w:WorldRead,p:LargeProject){return !p.wonder?.recaptureRequired&&p.owner.kind==='empire'&&empireOf(w,w.cities.find(c=>c.id===p.initiatingCityId)!.ownerFactionId)?.id===p.owner.empireId;}
 export function settleWonderDurability(w:FormalWorld,p:LargeProject){
  const b=p.wonder;if(!b||b.phase==='funding')return;
  const max=durabilityPrecision(WONDER_MAX_DURABILITY*wonderProgress(w,p)/100),d=b.durability;
@@ -19,7 +20,7 @@ export function settleWonderDurability(w:FormalWorld,p:LargeProject){
  if(b.durability)b.integrity=wonderIntegrity(b.durability.current,b.durability.maximum);
 }
 const funded=(p:LargeProject)=>resourceKeys.every(r=>p.poolResources[r]===p.requiredResources[r]);
-export function repairWork(w:FormalWorld,p:LargeProject){const r=p.repair!;return r.workMs+(r.activeSince===null?0:w.time-r.activeSince);}
+export function repairWork(w:WorldRead,p:LargeProject){const r=p.repair!;return r.workMs+(r.activeSince===null?0:w.time-r.activeSince);}
 export function repairQuote(missing:number){
  requireRule(Number.isFinite(missing)&&missing>0&&missing<=WONDER_MAX_DURABILITY,'奇觀缺損耐久不合法。');
  const resources=Object.fromEntries(resourceKeys.map(k=>[k,Math.round(WONDER_FULL_REPAIR_COST[k]*missing/WONDER_MAX_DURABILITY)])) as Resources;
