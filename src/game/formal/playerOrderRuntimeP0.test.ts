@@ -1,3 +1,5 @@
+import * as ledger from './commandLedger';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,beforeEach,expect,it,vi} from 'vitest';
 import {createFormalFixture,fixtureIds} from './fixture';
@@ -21,12 +23,12 @@ const latest=()=>messages.filter(r=>r.type==='state').at(-1)?.world as FormalWor
 async function load(world:FormalWorld){storage.loadWithOffline.mockResolvedValue({game:world,recovered:false});send({type:'load',requestId:'load'});await until(()=>done('load'));messages=[];}
 function click(world:FormalWorld,id:string,payload:FormalCommand){const issued=order(world,id,payload);send({type:'command',requestId:id,order:issued,playerBase:playerOrderBase(world,payload)});return issued;}
 beforeEach(async()=>{
- vi.resetModules();vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());
+ vi.resetModules();vi.doMock('./commandLedger',()=>ledger);vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());
  initial=createFormalFixture();messages=[];port={postMessage:r=>messages.push(structuredClone(r)),onmessage:null};vi.stubGlobal('self',port);
  storage.save.mockImplementation(async(w:FormalWorld)=>w);storage.reportStatus.mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}});
  await import('../runtime.worker');await load(initial);
 });
-afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
+afterEach(()=>{vi.doUnmock('./commandLedger');vi.restoreAllMocks();vi.unstubAllGlobals();});
 
 it('receives a command during cooperative replay without exposing a draft or interleaving its mutation',async()=>{
  const w=createFormalFixture();w.events=Array.from({length:32},(_,i)=>({id:eventId('yield-'+i),type:'fixture.marker' as const,at:i+1,marker:'atomic'}));await load(w);
@@ -113,10 +115,10 @@ it('an actual failed IDB transaction preserves authority; terminal same-ID resen
   const w=await p.start(isolatedAutonomyFixture(createFormalWorld({campaign:'durable-p0',seed:90217})));await load(w);storage.save.mockImplementation((draft,reports,revision)=>p.save(draft,reports,revision));
   const before={saves:await p.db.saves.toArray(),backups:await p.db.backups.toArray()},payload={type:'field.upgrade' as const,cityId:w.cities[0].id,slot:0};
   fail=true;const issued=click(w,'durable-build',payload);expect(messages[0].type).toBe('commandReceived');await until(()=>done('durable-build'));
-  expect(ack('durable-build').status).toBe('rejected');expect(latest()).toEqual(w);expect({saves:await p.db.saves.toArray(),backups:await p.db.backups.toArray()}).toEqual(before);
+  expect(ack('durable-build').status).toBe('rejected');expect(latest()).toEqual(projectWorld(w));expect({saves:await p.db.saves.toArray(),backups:await p.db.backups.toArray()}).toEqual(before);
   fail=false;messages=[];send({type:'command',requestId:'resend',order:issued,playerBase:playerOrderBase(w,payload)});await until(()=>done('resend'));
-  expect(ack('durable-build').status).toBe('rejected');expect(latest()).toEqual(w);
-  click(w,'confirmed-durable-build',payload);await until(()=>done('confirmed-durable-build'));expect(ack('confirmed-durable-build').status).toBe('committed');const committed=latest();expect(committed.cities[0].economy!.construction).toHaveLength(1);expect((await p.loadSave()).game).toEqual(committed);
+  expect(ack('durable-build').status).toBe('rejected');expect(latest()).toEqual(projectWorld(w));
+  click(w,'confirmed-durable-build',payload);await until(()=>done('confirmed-durable-build'));expect(ack('confirmed-durable-build').status).toBe('committed');const committed=latest();expect(committed.cities[0].economy!.construction).toHaveLength(1);expect(projectWorld((await p.loadSave()).game!)).toEqual(committed);
   messages=[];send({type:'command',requestId:'duplicate',order:order(w,'confirmed-durable-build',payload),playerBase:playerOrderBase(w,payload)});await until(()=>done('duplicate'));
   expect(ack('confirmed-durable-build').status).toBe('committed');expect(latest()).toEqual(committed);expect(storage.save).toHaveBeenCalledTimes(2);
  }finally{await p.db.delete();}
@@ -128,7 +130,7 @@ it('C4 due events and a player command share one atomic save with one authoritat
 });
 it('C4 combined replay fault exposes neither event draft nor command success',async()=>{
  const w=createFormalFixture();w.events=[{id:eventId('combined-fault'),type:'fixture.marker',at:1000,marker:'preserved'}];await load(w);storage.save.mockRejectedValueOnce(new Error('combined atomic failure'));now=10000;click(w,'combined-fault-click',{type:'city.rename',cityId:fixtureIds.home,name:'不可提前顯示'});await until(()=>done('combined-fault-click'));
- expect(ack('combined-fault-click').status).toBe('rejected');expect(latest()).toEqual(w);expect(latest().events).toHaveLength(1);expect(messages.some(m=>m.type==='commandAck'&&m.ack.status==='committed')).toBe(false);
+ expect(ack('combined-fault-click').status).toBe('rejected');expect(latest()).toEqual(projectWorld(w));expect(latest().events).toHaveLength(1);expect(messages.some(m=>m.type==='commandAck'&&m.ack.status==='committed')).toBe(false);
 });
 
 it('C3 a stale dispatch crosses unrelated catch-up exactly once and waits for durable save before ACK',async()=>{

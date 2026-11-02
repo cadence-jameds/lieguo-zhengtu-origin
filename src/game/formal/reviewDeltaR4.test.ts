@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,it,expect} from 'vitest';
 import {craftWorld} from './gateDeltaTestSupport';
@@ -13,7 +14,8 @@ import {validateFormalWorld} from './schema';
 import type {FormalWorld} from './model';
 import {handleCraftsmanEvent} from './extinction';
 import {handleCombatEvent} from './battles';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence} from '../persistence';
 import {enableAutonomy} from './autonomy';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -21,7 +23,7 @@ import {join} from 'node:path';
 const stores:FormalPersistence[]=[];
 afterEach(async()=>{for(const db of stores.splice(0))await db.db.delete();});
 const store=()=>{const db=new FormalPersistence({suffix:'r4-review-'+crypto.randomUUID()});stores.push(db);return db;};
-const normalize=(w:FormalWorld)=>{const v=structuredClone(w);v.revision=0;for(const r of v.commandReceipts)r.committedRevision=0;return v;};
+const normalize=(w:FormalWorld)=>{const v=structuredClone(projectWorld(w));v.revision=0;for(const r of v.commandReceipts)r.committedRevision=0;return v;};
 async function browserFixture(label:string,fixture:FormalWorld,expected:object){
  if(!process.env.R4_REVIEW_FIXTURES)return;
  enableAutonomy(fixture);fixture.offlineHours=0;
@@ -90,7 +92,7 @@ it.each([1,10,25] as const)('R4-C1 %sX SaveLoad, full import, Recovery and slice
   const restored=await db.restore(backup.id);
   // Recovery deliberately keeps durable ID high-water marks; it must not rewind
   // sequences to make its newly allocated event IDs equal the abandoned future.
-  expect({...restored,revision:w.revision,sequences:w.sequences,commandReceipts:w.commandReceipts}).toEqual(w);
+  expect({...projectWorld(restored),revision:w.revision,sequences:w.sequences,commandReceipts:w.commandReceipts}).toEqual(projectWorld(w));
   expect(restored.revision).toBeGreaterThan(saved.revision);expect(restored.sequences).toEqual(saved.sequences);
   const expected=advanceFormal({...structuredClone(w),revision:restored.revision,sequences:{...saved.sequences},commandReceipts:restored.commandReceipts},end);
   const replayed=advanceFormal(restored,end),again=await db.save(replayed.world,replayed.reports,restored.revision);

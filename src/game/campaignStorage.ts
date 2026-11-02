@@ -39,7 +39,7 @@ export async function inspectCampaignStorage():Promise<StoredCampaignStatus>{
    if(name===String(FORMAL_DB_NAME)&&['RuntimeMeta','StorageMeta'].includes(table.name))continue;
    if(await table.count())hasRows=true;
   }
-  if(historicalNames.has(name)&&name!==String(FORMAL_DB_NAME)){
+  if(historicalNames.has(name)&&name!==String(FORMAL_DB_NAME)&&String(FORMAL_DB_NAME)==='lieguo-formal-ledger-v1'){
    historical ||= hasRows;return;
   }
   stored ||= hasRows;

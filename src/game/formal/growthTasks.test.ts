@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
@@ -11,7 +12,8 @@ import {BUILDING_CATALOG,storageCapacity} from './catalogB3';
 import {advanceFormal,advanceFormalCooperative,submitFormalOrder} from './reducer';
 import {order,rich,build} from './developmentTestSupport';
 import {validateFormalWorld} from './schema';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 import {HOUR} from './time';
 import {TECH_CATALOG} from './techCatalog';
@@ -77,7 +79,7 @@ it('claim and durable task authority survive reload, corrupt-checkpoint Recovery
  const imported=await s.importSave(JSON.stringify(await encodeSave(ready())));expect(imported.growthTasks).toBeDefined();
 });
 it('claim transaction failure leaves inventory, claim ledger and CAS authority untouched; retry then awards once',async()=>{
- let fail=false;const s=store(point=>{if(fail&&point==='authority-write')throw Error('injected task save fault');});const w=await s.start(ready()),o=claim(w,'N01'),t=submitFormalOrder(w,o);fail=true;await expect(s.save(t.world,t.reports,w.revision)).rejects.toThrow('injected');expect((await s.loadSave()).game).toEqual(w);fail=false;const next=await s.save(t.world,t.reports,w.revision);expect(next.growthTasks!.claimed.N01).toBeDefined();expect(submitFormalOrder(next,o).ack?.status).toBe('duplicate');expect((await decodeSave(await encodeSave(next))).world).toEqual(next);
+ let fail=false;const s=store(point=>{if(fail&&point==='authority-write')throw Error('injected task save fault');});const w=await s.start(ready()),o=claim(w,'N01'),t=submitFormalOrder(w,o);fail=true;await expect(s.save(t.world,t.reports,w.revision)).rejects.toThrow('injected');expect((await s.loadSave()).game).toEqual(w);fail=false;const next=await s.save(t.world,t.reports,w.revision);expect(next.growthTasks!.claimed.N01).toBeDefined();expect(submitFormalOrder(next,o).ack?.status).toBe('duplicate');expect(projectWorld((await decodeSave(await encodeSave(next))).world)).toEqual(projectWorld(next));
 });
 it('validates tamper and prevents ordinary saves dropping irreversible task authority',async()=>{
  const s=store(),w=await s.start(ready()),t=submitFormalOrder(w,claim(w,'N01')),saved=await s.save(t.world,[],w.revision);const bad=structuredClone(saved);bad.growthTasks!.claimed.N01.accepted.food++;expect(()=>validateFormalWorld(bad)).toThrow();const dropped=structuredClone(saved);dropped.revision++;delete dropped.growthTasks;await expect(s.save(dropped,[],saved.revision)).rejects.toThrow('Durable growth task');

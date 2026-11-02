@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {createFormalFixture} from './fixture';
@@ -10,7 +11,8 @@ import {eventId,resolutionId} from './ids';
 import {EventScheduler} from './scheduler';
 import {validateFormalWorld} from './schema';
 import {advanceFormal,advanceFormalCooperative} from './reducer';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence} from '../persistence';
 import type {FormalWorld} from './model';
 import {HOUR} from './time';
@@ -71,7 +73,7 @@ it.each(['current','integrity','duplicate','receipt','maximum'] as const)('B9-5 
  expect(()=>validateFormalWorld(w)).toThrow();await expect(encodeSave(w)).rejects.toThrow();
 });
 it('B9-5 already-completed breakthrough and permanent qualifications survive actual destruction',async()=>{
- const w=world(false),b=structuredClone(w.largeProjects[1]),f=structuredClone(w.factions);hit(w,120000);expect(w.largeProjects[1]).toEqual(b);expect(w.factions).toEqual(f);expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ const w=world(false),b=structuredClone(w.largeProjects[1]),f=structuredClone(w.factions);hit(w,120000);expect(w.largeProjects[1]).toEqual(b);expect(w.factions).toEqual(f);expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 });
 const databases:FormalPersistence[]=[];afterEach(async()=>{for(const d of databases.splice(0))await d.db.delete();});
 it('B9-5 formal atomic Save/Load, backup restore and Recovery retain numeric damage and dedup receipts',async()=>{

@@ -20,7 +20,7 @@ export async function encodeSave(world:FormalWorld,reports?:readonly FormalRepor
  assertCampaignCompatibility({format:FORMAL_SAVE_FORMAT,metadata:world.metadata});
  if(world.clockMode==='offline'&&!worldPaused(world))throw new Error('離線推進尚未完成，不可保存草稿。');
  // A validated extinction barrier is a completed replay, not an in-flight offline draft.
- let snapshot=validateFormalWorld(world);if(!snapshot.ledger){const rows=Array.from(commandHistory(snapshot)),base=await emptyVerifiedLedger(snapshot.campaignId);snapshot=bindLedger(snapshot,await prepareVerifiedLedger(base,rows,rows.map(resultFromReceipt),snapshot.revision,0,0));}if(snapshot.ledger!.pending.length||snapshot.ledger!.outcomes?.length)throw Error('不可匯出尚未提交的帳本草稿。');const metadata={...snapshot.metadata};
+ let snapshot=validateFormalWorld(world);if(!snapshot.ledger){const rows=Array.from(commandHistory(snapshot)),base=await emptyVerifiedLedger(snapshot.campaignId);snapshot=bindLedger(snapshot,await prepareVerifiedLedger(base,rows,rows.map(resultFromReceipt),snapshot.revision,0,0));}if(snapshot.ledger!.anchor.worldRevision!==snapshot.revision||snapshot.ledger!.pending.length||snapshot.ledger!.outcomes?.length)throw Error('不可匯出尚未提交的帳本草稿。');const metadata={...snapshot.metadata};
  const e:FormalEnvelope={format:FORMAL_SAVE_FORMAT,metadata,checksum:await digest(snapshot),snapshot};
  if(reports!==undefined){e.reports=reports.map(r=>reportSchema.parse(r));validateReportHistory(snapshot,e.reports);e.reportChecksum=await digest(e.reports);}
  if(portable){e.ledger=resolveLedger(snapshot.ledger!).archive();await sealTransport(e);}

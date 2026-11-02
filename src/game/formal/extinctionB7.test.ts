@@ -8,7 +8,8 @@ import {EventScheduler} from './scheduler';
 import {changeCityOwner,HOUR} from './economy';
 import {validateFormalWorld} from './schema';
 import {isMissionArmy} from './combatModel';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {spatial} from './spatial';
 function extinguish(w:ReturnType<typeof battlefield>,i:number){changeCityOwner(w,w.cities[i],w.cities[i===0?1:0].ownerFactionId,'conquest');const s=new EventScheduler(w.events);resolveExtinctions(w,s);w.events=s.snapshot();return validateFormalWorld(w);}
 it('last city conquest immediately extinguishes AI, turns separate outgoing armies into non-slot exiles',()=>{let w=battlefield();w.cities[1].military!.units={militia:20,scout:8};w=dispatch(w,'raid',{militia:10},1,2).world;w=dispatch(w,'scout',{scout:8},1,2).world;const old=w.cities[1].ownerFactionId;w=extinguish(w,1);expect(w.extinction!.extinct).toContain(old);expect(w.extinction!.sites).toHaveLength(1); /* v94 §6.6: pure scouts dissolve. */expect(w.worldLayer!.wildSites).toHaveLength(432);expect(w.armies.some(a=>a.ownerFactionId===old)).toBe(false);expect(submitFormalOrder(w,order(w,{type:'player.rebirth',cityId:w.cities[1].id,...rebirthCandidates(w)[0],name:'非法'},undefined,old)).ack?.status).toBe('rejected');});

@@ -1,3 +1,4 @@
+import {gameTransition} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
 import {catchupWorld,act,fundCatchup,withModernHistory,empire} from './catchupTestSupport';
@@ -6,7 +7,8 @@ import {EMERGENCY_COST,EMERGENCY_DURATION,emergencyEligibility,handleCatchupEven
 import {resourceKeys,zeroResources,type FormalWorld} from './model';
 import {factionId,cityId} from './ids';
 import {advanceFormal,submitFormalOrder} from './reducer';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {EventScheduler} from './scheduler';
 import {validateFormalWorld} from './schema';
 import {advanceOfflineCooperative} from './offline';
@@ -23,12 +25,12 @@ it('B9-4B requires another camp completed breakthrough and exactly 100 effective
 it('B9-4B real four-resource stock deduction, in-transit reservation, scheduled arrival and replay identity',async()=>{
  let w=start();const p=w.largeProjects.at(-1)!,c=w.cities[0],cargo={food:100,wood:200,stone:300,gold:400},before={...c.stock},cmd=order(w,{type:'modern.project.ship',cityId:c.id,projectId:p.projectId,resources:cargo},'four-resource');w=submitFormalOrder(w,cmd).world;
  expect(w.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());for(const r of resourceKeys)expect(w.cities[0].stock[r]).toBe(before[r]-cargo[r]);expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');
- const t=w.logistics!.at(-1)!,arrival=w.events.find(e=>e.id===t.arrivalEventId)!,loaded=(await decodeSave(await encodeSave(w))).world,arrived=advanceFormal(w,t.arrivalAt);expect(advanceFormal(loaded,t.arrivalAt)).toEqual(arrived);w=arrived.world;expect(w.largeProjects.at(-1)!.poolResources).toEqual(cargo);const snapshot=structuredClone(w);expect(handleCatchupEvent(w,arrival,new EventScheduler(w.events))).toBe(true);expect(w).toEqual(snapshot);
+ const t=w.logistics!.at(-1)!,arrival=w.events.find(e=>e.id===t.arrivalEventId)!,loaded=(await decodeSave(await encodeSave(w))).world,arrived=advanceFormal(w,t.arrivalAt);expect(gameTransition(advanceFormal(loaded,t.arrivalAt))).toEqual(gameTransition(arrived));w=arrived.world;expect(w.largeProjects.at(-1)!.poolResources).toEqual(cargo);const snapshot=structuredClone(w);expect(handleCatchupEvent(w,arrival,new EventScheduler(w.events))).toBe(true);expect(w).toEqual(snapshot);
  reject(w,{type:'modern.emergency.start',cityId:c.id});reject(w,{type:'modern.project.ship',cityId:c.id,projectId:p.projectId,resources:{food:EMERGENCY_COST.food,wood:0,stone:0,gold:0}});
 });
 it('B9-4B 36M arrives through 1200 capacity-limited paid shipments before exact 24h, no premature or duplicate qualification',async()=>{
  let w=funded(),p=w.largeProjects.at(-1)!;expect(p.requiredResources).toEqual(EMERGENCY_COST);expect(p.shipments).toHaveLength(1200);expect(p.durationMs).toBe(24*3600000);const end=p.catchup!.startedAt!+EMERGENCY_DURATION;
- expect(advanceFormal(w,end-1).world.factions[0].modernQualification).toBe('none');const loaded=(await decodeSave(await encodeSave(w))).world,direct=advanceFormal(w,end);expect(advanceFormal(loaded,end)).toEqual(direct);const offline=await advanceOfflineCooperative({...w,offlineHours:12},0,(end-w.time)/w.speed);expect(offline.world.largeProjects.at(-1)!.catchup!.phase).toBe('building');
+ expect(advanceFormal(w,end-1).world.factions[0].modernQualification).toBe('none');const loaded=(await decodeSave(await encodeSave(w))).world,direct=advanceFormal(w,end);expect(gameTransition(advanceFormal(loaded,end))).toEqual(gameTransition(direct));const offline=await advanceOfflineCooperative({...w,offlineHours:12},0,(end-w.time)/w.speed);expect(offline.world.largeProjects.at(-1)!.catchup!.phase).toBe('building');
  w=direct.world;p=w.largeProjects.at(-1)!;expect(p.catchup!.qualifiedFactionIds).toEqual([w.playerFactionId]);expect(w.factions[0].modernQualification).toBe('full');const event={id:p.catchup!.completionEventId!,type:'modern.project.complete' as const,projectId:p.projectId,at:end},before=structuredClone(w);handleCatchupEvent(w,event,new EventScheduler(w.events));expect(w).toEqual(before);expect(w.events.some(e=>/victory/.test(e.type))).toBe(false);validateFormalWorld(w);
 });
 it('B9-4B personal project remains personal after empire join and grants only its initiator',()=>{

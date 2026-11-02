@@ -1,3 +1,5 @@
+import {gameTransition} from './ledgerTestSupport';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
 import {make,rich,build,researchCity,order,reject} from './developmentTestSupport';
@@ -10,7 +12,8 @@ import {hitDamage,counterMultiplier,eraMultiplier,marchSeconds,carryCapacity} fr
 import {makePools,baggageLoss,effectiveCount} from './combatResolver';
 import {resolveSiege} from './siege';
 import {changeCityOwner,settleCity} from './economy';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOfflineCooperative} from './offline';
 import {validateFormalWorld} from './schema';
 import {economicChoices,enableAutonomy} from './autonomy';
@@ -109,9 +112,9 @@ it('B9-3 mixed marches, supply casualties and siege roles retain the original sy
 });
 it('B9-3 actual mixed-generation raid reports conserve all unit types and supply losses through returning save/load',async()=>{
  let w=battlefield();w.cities[0].military!.units={militia:30,'modern.militia':30,baggage:4,'modern.baggage':4,ram:2,'modern.ram':2,catapult:2,'modern.catapult':2};w.cities[1].military!.units={militia:40,'modern.spearman':10};w.cities[1].wallLevel=7;
- const initial={...w.cities[0].military!.units};w=dispatch(w,'raid',initial).world;const loaded=(await decodeSave(await encodeSave(w))).world,t=arrive(w);expect(arrive(loaded)).toEqual(t);w=t.world;const p=t.reports[0].battle!;expect(p.mission).toBe('raid');expect(p.wallAfter).toBe(7);expect(p.ownerAfter).toBe(p.ownerBefore);
+ const initial={...w.cities[0].military!.units};w=dispatch(w,'raid',initial).world;const loaded=(await decodeSave(await encodeSave(w))).world,t=arrive(w);expect(gameTransition(arrive(loaded))).toEqual(gameTransition(t));w=t.world;const p=t.reports[0].battle!;expect(p.mission).toBe('raid');expect(p.wallAfter).toBe(7);expect(p.ownerAfter).toBe(p.ownerBefore);
  for(const [id,n] of Object.entries(initial))expect(p.attackers[0].after[id]??0).toBeLessThanOrEqual(n);for(const id of ['baggage','modern.baggage'])expect(initial[id]-(p.attackers[0].after[id]??0)).toBe(baggageLoss(p.attackers[0].after,initial,true,id));
- const restored=(await decodeSave(await encodeSave(w))).world,returned=advanceFormal(w,w.armies[0].arrivalAt!);expect(advanceFormal(restored,restored.armies[0].arrivalAt!)).toEqual(returned);expect(returned.world.cities[0].military!.units).toEqual(p.attackers[0].after);
+ const restored=(await decodeSave(await encodeSave(w))).world,returned=advanceFormal(w,w.armies[0].arrivalAt!);expect(gameTransition(advanceFormal(restored,restored.armies[0].arrivalAt!))).toEqual(gameTransition(returned));expect(returned.world.cities[0].military!.units).toEqual(p.attackers[0].after);
 });
 it('B9-3 mixed traditional/modern siege emits a normal conquest report and preserves qualification ownership',()=>{
  let w=battlefield();w.cities[0].military!.units={militia:10,'modern.militia':10,ram:100,'modern.ram':100,catapult:10,'modern.catapult':10};w.cities[1].wallLevel=3;w.factions[1].modernQualification='full';
@@ -119,7 +122,7 @@ it('B9-3 mixed traditional/modern siege emits a normal conquest report and prese
 });
 it('B9-3 mixed scout generations retain scout-only admission, counter-scout losses, immutable intelligence and delivery',async()=>{
  let w=battlefield();w.cities[0].military!.units={scout:6,'modern.scout':6};w.cities[1].military!.units={scout:2,'modern.scout':2,militia:5};
- w=dispatch(w,'scout',{scout:6,'modern.scout':6}).world;const loaded=(await decodeSave(await encodeSave(w))).world,t=arrive(w);expect(arrive(loaded)).toEqual(t);w=t.world;expect(w.cities[1].military!.units).toEqual({militia:5});expect(Object.values(w.armies[0].units!).reduce((a,b)=>a+b,0)).toBe(10);expect(w.armies[0].pendingIntel!.units).toEqual({scout:2,'modern.scout':2,militia:5});
+ w=dispatch(w,'scout',{scout:6,'modern.scout':6}).world;const loaded=(await decodeSave(await encodeSave(w))).world,t=arrive(w);expect(gameTransition(arrive(loaded))).toEqual(gameTransition(t));w=t.world;expect(w.cities[1].military!.units).toEqual({militia:5});expect(Object.values(w.armies[0].units!).reduce((a,b)=>a+b,0)).toBe(10);expect(w.armies[0].pendingIntel!.units).toEqual({scout:2,'modern.scout':2,militia:5});
  const result=advanceFormal(w,w.armies[0].arrivalAt!);expect(result.reports[0].battle!.intel!.units).toEqual({scout:2,'modern.scout':2,militia:5});expect(result.world.armies).toHaveLength(0);
  const bad=battlefield();bad.cities[0].military!.units={'modern.scout':2,'modern.militia':1};reject(bad,{type:'army.dispatch',cityId:bad.cities[0].id,mission:'scout',target:{kind:'city',cityId:bad.cities[1].id},units:{'modern.scout':2,'modern.militia':1}});
 });
@@ -137,7 +140,7 @@ it('B9-3 retrofit and modern training persist atomically through save/load, Reco
  const {FormalPersistence}=await import('../persistence');let fail=false;const db=new FormalPersistence({suffix:'b93-'+crypto.randomUUID(),fault:p=>{if(fail&&p==='world-write')throw Error('modern military save fault');}});
  try{let w=ready();w.cities[0].military!.units={militia:5};w=await db.start(w);const c=w.cities[0],cmd=order(w,{type:'military.modernize',cityId:c.id,unitId:'militia',count:3}),changed=submitFormalOrder(w,cmd);fail=true;await expect(db.save(changed.world,changed.reports,w.revision)).rejects.toThrow('modern military save fault');expect((await db.loadSave()).game).toEqual(w);fail=false;w=await db.save(changed.world,changed.reports,w.revision);expect((await db.loadSave()).game).toEqual(w);const checkpoint=(await db.backupList())[0];
   const loaded=(await decodeSave(await encodeSave(w))).world;expect(submitFormalOrder(loaded,cmd).ack?.status).toBe('duplicate');const recruited=issue(w,{type:'military.recruit',cityId:c.id,unitId:'modern.militia',count:2});w=await db.save(recruited.world,recruited.reports,w.revision);const deadline=w.cities[0].military!.queue[0].nextAt+w.cities[0].military!.queue[0].durationMs;
-  const direct=advanceFormal(w,deadline);expect(await advanceFormalCooperative(w,deadline)).toEqual(direct);const offline=await advanceOfflineCooperative(w,0,(deadline-w.time)/w.speed);expect(offline.world.cities).toEqual(direct.world.cities);expect(offline.world.events).toEqual(direct.world.events);expect(offline.world.commandReceipts).toEqual(direct.world.commandReceipts);expect((await decodeSave(await encodeSave(direct.world))).world).toEqual(direct.world);
+  const direct=advanceFormal(w,deadline);expect(await advanceFormalCooperative(w,deadline)).toEqual(direct);const offline=await advanceOfflineCooperative(w,0,(deadline-w.time)/w.speed);expect(offline.world.cities).toEqual(direct.world.cities);expect(offline.world.events).toEqual(direct.world.events);expect(offline.world.commandReceipts).toEqual(direct.world.commandReceipts);expect(projectWorld((await decodeSave(await encodeSave(direct.world))).world)).toEqual(projectWorld(direct.world));
   const restored=await db.restore(checkpoint.id);expect(restored.cities[0].military!.units).toEqual({militia:2,'modern.militia':3});expect(submitFormalOrder(restored,cmd).ack?.status).toBe('duplicate');
   await db.db.saves.put({id:'current',kind:'world',data:{broken:true}} as never);const recovery=await db.loadSave();expect(recovery.recovered).toBe(true);expect(recovery.game!.cities[0].military!.units).toEqual({militia:2,'modern.militia':3});expect(submitFormalOrder(recovery.game!,cmd).ack?.status).toBe('duplicate');
  }finally{await db.db.delete();}

@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {describe,it,expect} from 'vitest';
 import {createFormalWorld} from './generator';
@@ -12,7 +13,8 @@ import {spatial,invalidateSpatial} from './spatial';
 import {terrainAt} from './terrain';
 import {HOUR,changeCityOwner} from './economy';
 import {eventId,projectId} from './ids';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOffline,advanceOfflineCooperative} from './offline';
 import {FormalPersistence} from '../persistence';
 import {enableAutonomy} from './autonomy';
@@ -83,7 +85,7 @@ describe('P0-C-10 exact extinction barrier and rebirth',()=>{
   const t=advanceFormal(w,arrival+HOUR),co=await advanceFormalCooperative(w,arrival+HOUR,undefined,{yieldIntervalMs:0});expect(co).toEqual(t);w=t.world;
   expect(w.time).toBe(arrival);expect(w.extinction!.defeat).toMatchObject({at:arrival,ended:false});expect(w.combat!.receipts.filter(r=>r.kind==='final'&&r.outcome==='conquered')).toHaveLength(1);expect(t.reports.some(r=>r.battle?.outcome==='conquered')).toBe(true);
   expect(w.events.some(e=>e.id===same)).toBe(true);expect(w.events.some(e=>e.id===later)).toBe(true);expect(w.events.some(e=>e.id===agent.eventId)).toBe(true);expect(advanceFormal(w,arrival+20*HOUR)).toEqual({world:w,reports:[]});
-  const loaded=(await decodeSave(await encodeSave(w,t.reports))).world;expect(loaded).toEqual(w);const offline=await advanceOfflineCooperative(loaded,0,100*HOUR);expect(offline.summary.advancedWorldMs).toBe(0);expect(offline.summary.advancedRealMs).toBe(0);expect(offline.world.events).toEqual(w.events);
+  const loaded=(await decodeSave(await encodeSave(w,t.reports))).world;expect(projectWorld(loaded)).toEqual(projectWorld(w));const offline=await advanceOfflineCooperative(loaded,0,100*HOUR);expect(offline.summary.advancedWorldMs).toBe(0);expect(offline.summary.advancedRealMs).toBe(0);expect(offline.world.events).toEqual(w.events);
   const resumed=rebirth(w);expect(resumed.time).toBe(arrival);expect(worldPaused(resumed)).toBe(false);const done=advanceFormal(resumed,arrival+1);expect(done.world.events.some(e=>e.id===same||e.id===later)).toBe(false);expect(done.world.combat!.receipts.filter(r=>r.kind==='final')).toHaveLength(1);expect(done.world.autonomy!.agents.find(a=>a.factionId===agent.factionId)!.decisions).toBeGreaterThan(resumed.autonomy!.agents.find(a=>a.factionId===agent.factionId)!.decisions);expect(advanceFormal(done.world,done.world.time).reports).toEqual([]);
  });
  it('two simultaneous city arrivals keep the unprocessed army and receipt boundary across save, rebirth and same-time replay',async()=>{

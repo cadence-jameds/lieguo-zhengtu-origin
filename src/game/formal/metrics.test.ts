@@ -2,7 +2,8 @@ import {it,expect} from 'vitest';
 import {writeFileSync} from 'node:fs';
 import {createFormalWorld} from './generator';
 import {SpatialIndex} from './spatial';
-import {encodeSave} from './saveCodec';
+
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceFormal} from './reducer';
 import {rich,build,ownSecond,commit} from './developmentTestSupport';
 it('records reproducible core workload measurements without enforcing device-specific timing limits',async()=>{

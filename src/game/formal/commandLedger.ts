@@ -16,7 +16,7 @@ function validateOriginal(r:OriginalResult,history:LedgerCandidate,revision:numb
  if(r.state==='committed'){if(!receipt||r.ack.status!=='committed'||r.ack.revision!==receipt.committedRevision)throw Error('正式結果與世界命令收據不一致。');}
  else if(!['rejected','needs-confirmation'].includes(r.state)||r.ack.status!=='rejected'||receipt)throw Error('拒絕結果與世界效果衝突。');
  if(receipt&&(receipt.issuerId!==r.issuerId||receipt.fingerprint!==r.fingerprint))throw Error('結果身份衝突。');
- if(r.order&&(r.order.commandId!==r.commandId||r.order.issuerId!==r.issuerId||r.order.campaignId!==history.manifest.campaignId||canonicalJSON({campaignId:r.order.campaignId,issuerId:r.order.issuerId,payload:r.order.payload})!==r.fingerprint))throw Error('原始操作與結果身份不符。');
+ if(r.order&&(Object.keys(r.order).sort().join(',')!=='campaignId,commandId,expectedRevision,issuedWorldTime,issuerId,payload'||![r.order.expectedRevision,r.order.issuedWorldTime].every(n=>Number.isSafeInteger(n)&&n>=0)||!r.order.payload||typeof r.order.payload!=='object'||Array.isArray(r.order.payload)||r.order.commandId!==r.commandId||r.order.issuerId!==r.issuerId||r.order.campaignId!==history.manifest.campaignId||canonicalJSON({campaignId:r.order.campaignId,issuerId:r.order.issuerId,payload:r.order.payload})!==r.fingerprint))throw Error('原始操作與結果身份不符。');
 }
 type Node<T>={key:string;value:T;left?:Node<T>;right?:Node<T>;height:number};
 const height=<T>(n?:Node<T>)=>n?.height??0;
@@ -79,7 +79,7 @@ export function findReceipt(w:FormalWorld,id:string):CommandReceipt|undefined{re
 export function originalResult(w:FormalWorld,id:string){return w.ledger?worldLedger(w).result(id):undefined;}
 export function recordOriginalRejection(w:FormalWorld,order:FormalOrder,ack:CommandAck){if(!w.ledger||ack.status!=='rejected'||originalResult(w,order.commandId)||findReceipt(w,order.commandId)||w.ledger.outcomes?.some(r=>r.commandId===order.commandId))return;const r:OriginalResult={commandId:order.commandId,issuerId:order.issuerId,fingerprint:canonicalJSON({campaignId:order.campaignId,issuerId:order.issuerId,payload:order.payload}),state:ack.requiresConfirmation||ack.reason?.includes('重新確認')?'needs-confirmation':'rejected',ack:{...structuredClone(ack),...(ack.requiresConfirmation||ack.reason?.includes('重新確認')?{requiresConfirmation:true as const}:{})},order:structuredClone(order)};(w.ledger.outcomes??=[]).push(r);}
 export function normalizeOutcomeRevisions(w:FormalWorld){for(const r of w.ledger?.outcomes??[])r.ack.revision=w.revision;}
-export function receiptIndex(w:FormalWorld){return {get:(id:string)=>findReceipt(w,id),has:(id:string)=>!!findReceipt(w,id)};}
+export function receiptIndex(w:FormalWorld){if(!w.ledger)return new Map<string,CommandReceipt>(w.commandReceipts.map(r=>[r.commandId,r]));return {get:(id:string)=>findReceipt(w,id),has:(id:string)=>!!findReceipt(w,id)};}
 export function hotWorld(w:FormalWorld){const out={...w};if(w.ledger)delete (out as Partial<FormalWorld>).commandReceipts;return out;}
 export function projectWorld(w:FormalWorld){if(!w.ledger)return w;const out={...w,commandReceipts:Array.from(commandHistory(w))};delete out.ledger;return out;}
 

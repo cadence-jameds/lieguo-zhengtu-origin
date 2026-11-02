@@ -3,7 +3,8 @@ import {it,expect} from 'vitest';
 import {make,rich,build,order,ownSecond} from './developmentTestSupport';
 import {submitFormalOrder,advanceFormal} from './reducer';
 import {constructionConcurrency,militaryConcurrency} from './economy';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence} from '../persistence';
 import type {FormalWorld,FormalCommand} from './model';
 function accept(w:FormalWorld,p:FormalCommand,issuer=w.playerFactionId){const t=submitFormalOrder(w,order(w,p,undefined,issuer));expect(t.ack?.status,t.ack?.reason).toBe('committed');return t.world;}

@@ -1,8 +1,10 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {describe,expect,it} from 'vitest';
 import {createFormalFixture,fixtureIds} from './fixture';
 import {armyId,cityId,commandId,empireId,eventId,factionId,projectId,researchProjectId,shipmentId} from './ids';
 import {canonicalJSON} from './canonical';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {validateFormalWorld,largeProjectSchema} from './schema';
 import {advanceFormal,completeResearch,submitFormalOrder} from './reducer';
 import {contribute,order} from './testSupport';
@@ -21,7 +23,7 @@ it('strict validator rejects raw IDs, unknown fields, negative resources, and pe
 });
 for(const phase of ['funding','researching','completed'] as const)it(`${phase} project roundtrip preserves snapshots and exact phase`,async()=>{
  let w=createFormalFixture({research:true});if(phase!=='funding')w=submitFormalOrder(w,contribute(w,'fund')).world;if(phase==='completed')w=advanceFormal(w,47400).world;
- const input=canonicalJSON(w),decoded=await decodeSave(await encodeSave(w));expect(canonicalJSON(decoded.world)).toBe(input);expect(decoded.world.researchProjects[0].phase).toBe(phase);
+ const input=canonicalJSON(w),decoded=await decodeSave(await encodeSave(w));expect(canonicalJSON(projectWorld(decoded.world))).toBe(input);expect(decoded.world.researchProjects[0].phase).toBe(phase);
  if(phase==='funding')expect(decoded.world.researchProjects[0]).not.toHaveProperty('startedAt');
 });
 it('funding cannot have fake start or completed timestamps, and funded ledgers cannot remain funding',()=>{

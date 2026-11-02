@@ -45,3 +45,11 @@ Start／Import／Restore／Reset 在同一交易切換 Branch，終局化所有�
 ## 邊界
 
 原 Reducer 遊戲費用、資格、AI 決策、Scheduler 排序及滅國／復國規則不變。UI 仍可取得完整相容投影，沒有提前做 R3-04 協定改造。完整載入、匯出／匯入、Recovery 仍驗證全歷史，部分順序查詢仍需迭代；編碼、保存與空間成本不得冒稱已完成 R3-05。Node／fake-indexeddb、原生 Chromium、Android 必須分開回報。
+
+## 純場景測試與後續契約
+
+既有純遊戲場景仍可用陣列式完整歷史；這個未持久化的 seed 路徑沿用一次性 Map 來源索引，避免來源驗證退化成逐筆線性搜尋。正式已綁定世界使用精確 AVL reader。這不是舊存檔匯入或 Migration。
+
+`ledgerTestSupport` 只供遊戲規則測試：將私有合成草稿封存為一致版本後測試新版 codec，以完整遊戲投影／有序收據比較結果。它不會進入 Runtime 或 Preview Worker，也不代替正式 T1／T2；正式交易／身份／可攜資料測試直接使用正式 Persistence／Codec。損毀遊戲資料測試可單獨建立帳本綁定，確保 decoder 在版本完整後仍拒絕原本的玩法錯誤。正式 encoder 會拒絕未提交的 clock-only 草稿，不產生無法載入的假成功檔案。
+
+R3-04～06 必須承接本批新增契約：世界上的版本 anchor、經驗證 reader、不可變原始結果與分支 disposition、Quick／Full 完整身份、以及唯一的 T2 writer。R3-04 現有介面仍取得完整相容投影，本批沒有改動 WorldStream 協定；後續投影與編碼優化不可省略 rejected 身份或用最新 head 冒充舊 Recovery root。
