@@ -9,7 +9,17 @@ import {createFormalFixture} from './formal/fixture';
 import {cityScreenSelector} from './presentationSelectors';
 import {usePresentationSelector} from './usePresentation';
 import type {FormalWorld} from './formal/model';
+import type {PresentationWorld} from './presentationModel';
 afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();});
+it('100 city updates: v1 whole-city-section control renders both consumers; v2 renders only the changed city',async()=>{
+ vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);
+ class SectionControl extends PresentationStore {control:PresentationWorld|null=null;override getWorld=()=>this.control;}
+ const stream=fixtureStream(),oldStream=fixtureStream(),store=new PresentationStore(),control=new SectionControl(),writer={branch:1,writerEpoch:1};let w=createFormalFixture();store.receive(stream.publish(w,writer));control.control=store.getWorld();control.receive(oldStream.publish(w,writer));const counts:Record<string,number>={};
+ function City({source,id,label}:{source:PresentationStore;id:string;label:string}){const select=useMemo(()=>cityScreenSelector(id),[id]),view=usePresentationSelector(source,select);counts[label]=(counts[label]??0)+1;return <span>{view?.cities.find(c=>c.id===id)?.stock.food}</span>;}
+ const node=document.createElement('div'),root=createRoot(node),first=w.cities[0].id,other=w.cities[1].id;await act(async()=>root.render(<><City source={store} id={first} label="newChanged"/><City source={store} id={other} label="newOther"/><City source={control} id={first} label="oldChanged"/><City source={control} id={other} label="oldOther"/></>));
+ for(let i=0;i<100;i++){w={...w,revision:w.revision+1,cities:w.cities.map((c,n)=>n?c:{...c,stock:{...c.stock,food:c.stock.food+1}})};await act(async()=>{expect(store.receive(structuredClone(stream.publish(w,writer))).accepted).toBe(true);const current=store.getWorld()!;control.control={...current,cities:structuredClone(current.cities)};expect(control.receive(oldStream.publish(w,writer,true)).accepted).toBe(true);});}
+ expect(counts).toEqual({newChanged:101,newOther:1,oldChanged:101,oldOther:101});expect(control.getWorld()!.cities).toEqual(store.getWorld()!.cities);await act(async()=>root.unmount());
+});
 it('city/entity selectors skip unrelated cities; local recruitment input never constructs or changes the store world',async()=>{
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);
  const stream=fixtureStream(),store=new PresentationStore();let world=createFormalFixture();const writer={branch:1,writerEpoch:1};store.receive(stream.publish(world,writer));
