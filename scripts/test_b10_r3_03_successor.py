@@ -17,7 +17,7 @@ class LedgerSuccessorTests(unittest.TestCase):
    self.assertFalse(gate.accepts(p,r['invariants'][p],self.root))
  def test_refreshed_manifest_cannot_approve_tampering(self):
   manifest=self.root/gate.RECORD;original=manifest.read_bytes();r=json.loads(original)
-  for section,p in [('changes','src/game/persistence.ts'),('changes','src/game/formal/commandLedger.ts'),('changes','src/game/formal/reducer.ts'),('invariants','src/game/formal/scheduler.ts'),('invariants','src/game/formal/constructionRules.ts'),('historical','docs/validation/b10-r3-03/REPORT.md'),('historical','docs/validation/b10-r3-02/compatibility.json'),('adapters','scripts/b10_r3_02_successor.py'),('adapters','.github/workflows/ci.yml')]:
+  for section,p in [('changes','src/game/persistence.ts'),('changes','src/game/formal/commandLedger.ts'),('changes','src/game/formal/reducer.ts'),('changes','src/game/formal/growthTaskIntegration.test.ts'),('invariants','src/game/formal/scheduler.ts'),('invariants','src/game/formal/constructionRules.ts'),('historical','docs/validation/b10-r3-03/REPORT.md'),('historical','docs/validation/b10-r3-02/compatibility.json'),('adapters','scripts/b10_r3_02_successor.py'),('adapters','.github/workflows/ci.yml')]:
    with self.subTest(path=p):
     file=self.root/p;before=file.read_bytes();file.write_bytes(before+b'\n');m=json.loads(original)
     if section in ['changes','adapters']:m[section][p]['after']=gate.sha(file.read_bytes())

@@ -60,9 +60,10 @@ def read_record(root=ROOT):
  return r
 
 def accepts(path,predecessor,root=ROOT):
+ from b10_r3_03_successor import accepts as next_accepts
  if path not in SOURCES:return False
  r=read_record(root);entry=r['changes'][path]
- return predecessor==entry['before'] and (root/path).exists() and sha((root/path).read_bytes())==entry['after']
+ return predecessor==entry['before'] and (root/path).exists() and (sha((root/path).read_bytes())==entry['after'] or next_accepts(path,entry['after'],root))
 
 def validate(root=ROOT):
  from b10_r3_01_successor import accepts as b10_accepts, accepts_adapter as b10_adapter

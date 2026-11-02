@@ -77,7 +77,8 @@ def accepts(path,predecessor,root=ROOT):
  return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or next_accepts(path,r['changes'][path]['after'],root))
 def accepts_adapter(path,before,root=ROOT):
  from b10_r3_03_successor import accepts_adapter as next_adapter
- if path not in ADAPTERS or before!=previous(BASE,path):return False
+ if path not in ADAPTERS:return next_adapter(path,before,root)
+ if before!=previous(BASE,path):return False
  read_record(root)
  return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or next_adapter(path,adapters()[path],root))
 def validate(root=ROOT):

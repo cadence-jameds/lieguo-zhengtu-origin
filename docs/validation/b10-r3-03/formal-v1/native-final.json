@@ -1,7 +1,7 @@
 {
   "environment": "Native Chromium desktop Linux container; synthetic worlds; not Android or a deployed release",
   "browser": "154.0.8037.57",
-  "at": "2026-11-02T03:22:35.170Z",
+  "at": "2026-11-02T09:42:33.004Z",
   "cases": [
     {
       "name": "formal T2 native atomic abort at every write boundary",
@@ -65,6 +65,17 @@
       "status": "PASS"
     },
     {
+      "name": "actual read-only Preview Worker matches the bound formal Reducer and leaves every DB table unchanged",
+      "status": "PASS",
+      "data": {
+        "sameCost": true,
+        "sameSchedule": true,
+        "storageUnchangedByPreview": true,
+        "formalEffectOnce": true,
+        "contextBytes": 1522
+      }
+    },
+    {
       "name": "native 99 AI at 25X: T1 completes during private catch-up and stalled Preview death cannot cancel the formal order",
       "status": "PASS",
       "data": {
@@ -78,5 +89,6 @@
     }
   ],
   "performance": [],
-  "implementationCommit": "3697185c2ab7a088feeb1c5066539d3f44c9e511"
+  "implementationCommit": "489f906c59b21d22dc14c40f0dedf9b9f93a5512",
+  "releaseMetadataCommit": "489f906c59b21d22dc14c40f0dedf9b9f93a5512"
 }

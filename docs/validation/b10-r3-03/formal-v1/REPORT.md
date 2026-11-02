@@ -48,11 +48,11 @@ Quick／Full 都帶完整命令身份與原始結果（包含 rejected）、去�
 | R3-01／02、PR53 | 定向 Worker 26 PASS，含六類快速操作、99 AI／25X、有限重試、滅國／復國／終局；另有 Preview 規則／協定／React 定向通過項目 |
 | 原生 99 AI／25X | T1 於私有 catch-up 完成前持久化；獨立 Preview Worker 故障注入停滯後於 T1 終止，正式 field upgrade 保留一次效果，99 個 AI 都完成決策 |
 
-[原生最終結果](native-final.json) 為 Chromium 154、實際 IndexedDB／Dedicated Workers，6 組正式流程；QuotaExceededError 為注入，沒有宣稱真實磁碟耗盡。舊 R3-02 原生 React harness 的本次重跑因 setup navigation 30 秒逾時未完成，不算通過；本批以無 React setup 的原生正式流程證明 Worker／IDB，React 互動由定向與完整回歸檢驗。
+[原生最終結果](native-final.json) 為 Chromium 154、實際 IndexedDB／Dedicated Workers，7 組正式流程（正式 source `489f906`）；QuotaExceededError 為注入，沒有宣稱真實磁碟耗盡。舊 R3-02 原生 React harness 的本次重跑因 setup navigation 30 秒逾時未完成，不算通過；本批以無 React setup 的原生正式流程證明 Worker／IDB，React 互動由定向與完整回歸檢驗。
 
 ## 效能（毫秒，p50／p95）
 
-[原生數據](native-perf.json)：同一桌面 Linux 容器 Chromium，100 勢力、25X，每種歷史 5 個慢操作樣本，p95 即最大值；start 僅 n=1。偶有 successor Gate 背景活動，不能當硬體校準。原生計時取 `a741ed4` 正式實作；後續只補身份矛盾／循環拒絕及 harness，不能冒稱是最終 HEAD 的逐項重測。不是 R1-C 同環境基準，不換算精確改善比例，也不是 Android 結果。
+[原生數據](native-perf.json)：同一桌面 Linux 容器 Chromium，100 勢力、25X，每種歷史 5 個慢操作樣本，p95 即最大值；start 僅 n=1。偶有 successor Gate 背景活動，不能當硬體校準。原生計時取 `a741ed4` 正式實作；後續另補身份矛盾／循環拒絕、Recovery 派生索引差異修復、private draft 單次複製與初次索引批次建樹；不能冒稱是最終 HEAD 的逐項重測。不是 R1-C 同環境基準，不換算精確改善比例，也不是 Android 結果。
 
 | 歷史 | 同版陣列參考 Reducer | 帳本 Reducer | T1 | 正式 T2 | 載入 | Quick 匯出／匯入 | Full 匯出／匯入 | Recovery |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -83,6 +83,12 @@ Quick／Full 都帶完整命令身份與原始結果（包含 rejected）、去�
 邏輯儲存大小不含原生 DB 頁面／索引配置；heap snapshot 包含比較用陣列、匯入、驗證暫存及 harness，沒有經強制 GC，不是熱世界 retained size，也不能推斷 Android 足夠。60k 約 46 MB Quick、110 MB 邏輯帳本／派生索引、2.48 GB 該量測程序 heap，完整路徑的記憶體與編碼成本仍需 R3-05。每次普通命令不再 clone／JSON 全部 30k／60k 收據，但順序掃描、T3 UI 全投影、載入、匯出匯入、Recovery 仍有全歷史成本。Manifest／區段引用陣列亦有隨區段數成長的成本，不宣稱 O(1) 全 Runtime。
 
 ## 驗證狀態與保留失敗
+
+正式 source anchor 為 `489f906c59b21d22dc14c40f0dedf9b9f93a5512`。該版 57 項帳本／正式 T2 定向全部通過，含 0／1k／10k／30k／60k 真實 Persistence 流程；Typecheck、Build、Pages／Release build 一致性通過。原生 7 組流程以同一 source 重跑通過。初次精確索引改為 transient exact Map 驗證後單次建平衡樹；普通追加仍為 persistent AVL。`index-equivalence.json` 對照前版 `cf7bd1c` 的 0／1k／60k archive、root、每筆查詢完全相同，沒有改變封裝或順序。
+
+完整隔離前兩輪原始失敗摘要保存在 `full-attempt1.json` 與 `full-attempt2.json`。第二輪 2338 PASS／6 FAIL／12 SKIP：4 個測試仍把已停用 time2 命名空間當成 active DB，已改為真實新版 namespace；其餘為 150k 原 120 秒與 Runtime 原 30 秒逾時，B9 原 240 秒 fixture hook 亦逾時而跳過 11 項。沒有提高任何期限。B9 改用定期封存已驗證新版 RAM 帳本的 fixture，同樣執行 2000 次實際物流、扣款、返程與所有原斷言，對應正式資料路徑並避免陣列長期累積。
+
+測試比較器先驗證完整 Schema、Ledger anchor、逐筆原始結果及順序，再比對全部遊戲狀態／收據；4 項反例證明不會遮蔽 root、epoch、內嵌或遺漏歷史。最初僅投影比較的編輯曾被自動審核拒絕，已以這些更強驗證取代並獲准。
 
 最終 Typecheck／Build、Gate、隔離完整回歸與 CI 結果將列於 `checks.json`；未完成執行不得宣稱 PASS。Runtime 30 秒與舊 150k 120 秒期限保持原樣。
 

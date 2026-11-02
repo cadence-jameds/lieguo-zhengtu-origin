@@ -1,0 +1,701 @@
+{
+  "sourceAnchor": "3697185",
+  "node": "22.23.4",
+  "mode": "full isolated, maxWorkers=2, testTimeout=30000, original budgets unchanged",
+  "passed": 2201,
+  "failed": 137,
+  "skipped": 12,
+  "failures": [
+    {
+      "file": "campaignArchivePolicy.test.ts",
+      "test": "a different but unapproved namespace is not sufficient evidence of a read-only archive boundary",
+      "reason": "AssertionError: expected 'historical' to be 'stored' // Object.is equality"
+    },
+    {
+      "file": "developer.test.ts",
+      "test": "browser-available diagnostic cases actually execute and none is a hardcoded PASS",
+      "reason": "AssertionError: expected [ { …(2) }, { …(2) } ] to deeply equal []"
+    },
+    {
+      "file": "autonomyR2a.test.ts",
+      "test": "Save/Load and direct/offline/time slices produce identical gameplay",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "banditLoot.test.ts",
+      "test": "v87 bandit loot delta save/load preserves active generation stock; a limited raid uses actual ratios, clears once and cannot pay twice",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "campaignTime.test.ts",
+      "test": "new campaign defaults and all 25 legal normal speed/offline combinations validate, roundtrip and dedupe",
+      "reason": "AssertionError: expected { kind: 'formal', …(21) } to deeply equal { kind: 'formal', …(20) }"
+    },
+    {
+      "file": "campaignTime.test.ts",
+      "test": "old envelopes are blocked before migration and old database rows/backups/reports stay byte-identical through export and new start",
+      "reason": "Error: promise resolved \"{ game: null, recovered: false }\" instead of rejecting"
+    },
+    {
+      "file": "captureDeltaR4.test.ts",
+      "test": "D1 idle craftsman is destroyed at conquest, second own city=true",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "captureDeltaR4.test.ts",
+      "test": "D1 idle craftsman is destroyed at conquest, second own city=false",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "captureDeltaR4.test.ts",
+      "test": "D1 stationed scouts and baggage die; legal outbound scouts and craftsman survive mother-city loss",
+      "reason": "AssertionError: expected { kind: 'formal', …(29) } to deeply equal { kind: 'formal', …(28) }"
+    },
+    {
+      "file": "colonizationV85.test.ts",
+      "test": "castle produces one separate civilian unit; launch consumes availability; founding consumes entity and transfers guards",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 army, raid, scout and conquest scheduler 1X tactical cap and durable path position",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 army, raid, scout and conquest scheduler 3X tactical cap and durable path position",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 army, raid, scout and conquest scheduler 6X tactical cap and durable path position",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 army, raid, scout and conquest scheduler 10X tactical cap and durable path position",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 army, raid, scout and conquest scheduler 25X tactical cap and durable path position",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 army, raid, scout and conquest scheduler recalled reinforcement leaves durable HP pools before returning and keeps its departed report snapshot",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "combatB5.test.ts",
+      "test": "B5 siege and wild lifecycle invariants fixed 432 slots deactivate their index, keep durable cooldown and respawn deterministically off city/reservation cells",
+      "reason": "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(26) }"
+    },
+    {
+      "file": "craftsmanCastleDeltaR4.test.ts",
+      "test": "D5 pre-policy paid craftsman snapshot keeps its payment and existing cancellation refund",
+      "reason": "AssertionError: expected { kind: 'formal', …(29) } to deeply equal { kind: 'formal', …(28) }"
+    },
+    {
+      "file": "empireDeltaR1.test.ts",
+      "test": "2→1 preserves identity, diplomacy, project and qualifications; can invite again",
+      "reason": "AssertionError: expected { kind: 'formal', …(29) } to deeply equal { kind: 'formal', …(28) }"
+    },
+    {
+      "file": "endgameAIB95.test.ts",
+      "test": "B9-5 native 99 AI and player repair with identical real stock, caravans, arrival pools and save receipts",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "endgameChainB95.test.ts",
+      "test": "B9-5 formal continuous conquest preserves the army, original dispatch snapshot and three-city limit across Save/Load",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "endgameChainB95.test.ts",
+      "test": "B9-5 native AI actually submits bounded follow-up military orders, with Save/Load/offline-equivalent continuation",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "gateDeltaR4.test.ts",
+      "test": "B1 extinct engaged AI finishes siege without ownership revival; player target=false",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "gateDeltaR4.test.ts",
+      "test": "B1 extinct engaged AI finishes siege without ownership revival; player target=true",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "gateDeltaR4.test.ts",
+      "test": "M1 idle craftsman is destroyed at captured city despite a second own city",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "governanceR2c.test.ts",
+      "test": "governor and99AI are identical under Save/Load, chunked and offline advance; each speed uses world time",
+      "reason": "TypeError: c.commandReceipts is not iterable"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "loads, re-exports and deduplicates genuine v1 full overflow receipts without rewriting them",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "loads, re-exports and deduplicates genuine v1 partial overflow receipts without rewriting them",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "loads, re-exports and deduplicates genuine v1 zero overflow receipts without rewriting them",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "rechecks each resource and reservations atomically, without consuming eligibility or mutating stock",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "uses a stable full reward vector through ongoing production and rejects obsolete commands without receipts",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "serial claims cannot collectively exceed capacity, and stale parallel commands cannot double award",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "mixed v1/v2 history survives durable save, old-save import and Recovery without issuing either reward twice",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "growthTaskIntegration.test.ts",
+      "test": "rejects malformed reward versions, forged version bindings and v2 partial-loss ledgers",
+      "reason": "Error: 只接受新版正式命令帳本；舊版測試存檔（含 DEMO）不相容，請重新建立戰役。原資料保留，不會自動轉換或覆寫。"
+    },
+    {
+      "file": "hegemonyB95.test.ts",
+      "test": "B9-5 an exact tie interrupts 24h, fresh unique leadership starts anew, and offline/save replay complete only once",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "integrationR4.test.ts",
+      "test": "R4 B6 -> joint Lv15 conquest -> zero empire -> B7 exile/floor25 -> confirmed player rebirth -> AI foreign castle (P0-C-10 successor)",
+      "reason": "AssertionError: expected { kind: 'formal', …(32) } to deeply equal { kind: 'formal', …(31) }"
+    },
+    {
+      "file": "integrationR4.test.ts",
+      "test": "R4 fair 100 factions/99 autonomous AI seed 12012: 8h, SaveLoad and sliced equivalence",
+      "reason": "TypeError: c.commandReceipts is not iterable"
+    },
+    {
+      "file": "integrationR4.test.ts",
+      "test": "R4 fair 100 factions/99 autonomous AI seed 92049: 8h, SaveLoad and sliced equivalence",
+      "reason": "TypeError: c.commandReceipts is not iterable"
+    },
+    {
+      "file": "integrationR4.test.ts",
+      "test": "R4 fair 100 factions/99 autonomous AI seed 90217: 8h, SaveLoad and sliced equivalence",
+      "reason": "TypeError: c.commandReceipts is not iterable"
+    },
+    {
+      "file": "logisticsOwnership.test.ts",
+      "test": "post-conquest Save/Load, actual Recovery and offline replay preserve old shipments and cleared settings",
+      "reason": "AssertionError: expected { kind: 'formal', …(26) } to deeply equal { kind: 'formal', …(25) }"
+    },
+    {
+      "file": "modernAwarenessB94.test.ts",
+      "test": "B9-4A real raids persist awareness, events and losses; replay cannot award again; scouts and simple movement award nothing",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernAwarenessB94.test.ts",
+      "test": "B9-4A real diplomatic join/leave and Save/Load freeze and restore personal cognition without transfer",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "modernEmergencyB94.test.ts",
+      "test": "B9-4B real four-resource stock deduction, in-transit reservation, scheduled arrival and replay identity",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernEmergencyB94.test.ts",
+      "test": "B9-4B 36M arrives through 1200 capacity-limited paid shipments before exact 24h, no premature or duplicate qualification",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernFundingIntegration.test.ts",
+      "test": "A/B/C fund a real project exactly once, save/recover every phase, complete through the scheduler and retain the actual effect",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "modernMilitaryB93.test.ts",
+      "test": "B9-3 actual mixed-generation raid reports conserve all unit types and supply losses through returning save/load",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryB93.test.ts",
+      "test": "B9-3 mixed scout generations retain scout-only admission, counter-scout losses, immutable intelligence and delivery",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryB93.test.ts",
+      "test": "B9-3 retrofit and modern training persist atomically through save/load, Recovery and equivalent offline advancement",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate traditional: actual stationed defense held, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate traditional: actual stationed defense mutual, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate traditional: actual stationed defense captured, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate full retrofit: actual stationed defense held, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate full retrofit: actual stationed defense mutual, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate full retrofit: actual stationed defense captured, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate partial retrofit: actual stationed defense held, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate partial retrofit: actual stationed defense mutual, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate partial retrofit: actual stationed defense captured, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate mixed preexisting trucks: actual stationed defense held, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate mixed preexisting trucks: actual stationed defense mutual, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernMilitaryGateB93.test.ts",
+      "test": "B9-3 Gate mixed preexisting trucks: actual stationed defense captured, report, return and save/load conserve supply vehicles",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.infantry-weapons: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.personal-protection: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.composite-armor: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.digital-fire-control: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.mechanized-logistics: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.supply-system: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.mobilization: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.siege-engineering: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.data-link: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.civ_zhongguo.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.civ_byzantium.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.civ_frankia.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.civ_britannia.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.civ_japan.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernResearchB94.test.ts",
+      "test": "B9-4D modern.civ_mongolia.exclusive: exact prerequisites/cost/time, real multi-city ledger, unique queue and completion",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernTransferB94.test.ts",
+      "test": "B9-4C exact 25.2M formula and 72h; only applicant pays, stock and arrived ledger survive Save/Load",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernTransferB94.test.ts",
+      "test": "B9-4C forced empire-kick cancels immediately, forfeits pool and removes completion; inbound cargo returns once",
+      "reason": "AssertionError: expected { kind: 'formal', …(26) } to deeply equal { kind: 'formal', …(25) }"
+    },
+    {
+      "file": "modernTransferB94.test.ts",
+      "test": "B9-4C forced empire-dissolve cancels immediately, forfeits pool and removes completion; inbound cargo returns once",
+      "reason": "AssertionError: expected { kind: 'formal', …(26) } to deeply equal { kind: 'formal', …(25) }"
+    },
+    {
+      "file": "modernTransferB94.test.ts",
+      "test": "B9-4C 840 paid shipments start exact 72h, qualification belongs only to applicant and survives later departure",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "modernTransferB94.test.ts",
+      "test": "B9-4C rejects emergency source snapshots in Save/Load and in ongoing transfer legality",
+      "reason": "Error: expected [Function] to throw error including 'Transfer qualification snapshot inval…' but got '帳本證明與快照版本不符。'"
+    },
+    {
+      "file": "offlineExtinctionClockDelta.test.ts",
+      "test": "T4 the completed offline freeze has a strict durable envelope, while an ordinary offline draft and corrupt freeze remain rejected",
+      "reason": "AssertionError: expected { kind: 'formal', …(31) } to deeply equal { kind: 'formal', …(30) }"
+    },
+    {
+      "file": "p0c9Strategies.test.ts",
+      "test": "1X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "p0c9Strategies.test.ts",
+      "test": "10X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "p0c9Strategies.test.ts",
+      "test": "25X real military decisions preserve Save/Load, offline, cooperative and sliced replay",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "persistence.test.ts",
+      "test": "150000 valid receipts survive start, import and Recovery without an argument-count limit",
+      "reason": "Error: Test timed out in 120000ms."
+    },
+    {
+      "file": "playerFeedback.test.ts",
+      "test": "clock rollback yields no negative advance; short absence uses the actual elapsed duration; time2 default is12h",
+      "reason": "AssertionError: expected { kind: 'formal', …(26) } to deeply equal { kind: 'formal', …(25) }"
+    },
+    {
+      "file": "playerFeedback.test.ts",
+      "test": "military capacity stays5,20k promotes waiting work to2 active, and cancellation preserves completed units and refund semantics",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "playerOrderRuntimeP0.test.ts",
+      "test": "an actual failed IDB transaction preserves authority; terminal same-ID resend cannot execute and a confirmed new ID commits once",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "politicsB6.test.ts",
+      "test": "joint troops reserve immediately, delayed departures, same resolver and one marker throughout siege",
+      "reason": "AssertionError: expected { kind: 'formal', …(29) } to deeply equal { kind: 'formal', …(28) }"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth 1X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth 3X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth 6X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth 10X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth 25X completes the terminal receipt then freezes before same-time AI, marker and later events; resumes them once",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth two simultaneous city arrivals keep the unprocessed army and receipt boundary across save, rebirth and same-time replay",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "protectionExtinctionP0C10.test.ts",
+      "test": "P0-C-10 exact extinction barrier and rebirth a pending combat round at the freeze time remains checksummed and resumes once after rebirth",
+      "reason": "Error: 不可匯出尚未提交的帳本草稿。"
+    },
+    {
+      "file": "replayP0.test.ts",
+      "test": "direct, sliced, cooperative and save/load replay preserve the same state and reports",
+      "reason": "TypeError: copy.commandReceipts is not iterable"
+    },
+    {
+      "file": "reviewDeltaR4.test.ts",
+      "test": "R4-C1 1X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "reviewDeltaR4.test.ts",
+      "test": "R4-C1 10X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "reviewDeltaR4.test.ts",
+      "test": "R4-C1 25X SaveLoad, full import, Recovery and sliced continuation remain equivalent",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "reviewDeltaR4.test.ts",
+      "test": "R4-C3 1X SaveLoad / full import / Recovery / sliced battle clear waiting forces only once",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "reviewDeltaR4.test.ts",
+      "test": "R4-C3 10X SaveLoad / full import / Recovery / sliced battle clear waiting forces only once",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "reviewDeltaR4.test.ts",
+      "test": "R4-C3 25X SaveLoad / full import / Recovery / sliced battle clear waiting forces only once",
+      "reason": "TypeError: v.commandReceipts is not iterable"
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "1X command admission uses real IndexedDB authority and restores the same durable state",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "3X command admission uses real IndexedDB authority and restores the same durable state",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "6X command admission uses real IndexedDB authority and restores the same durable state",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "10X command admission uses real IndexedDB authority and restores the same durable state",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "25X command admission uses real IndexedDB authority and restores the same durable state",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "runtime.test.ts",
+      "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+      "reason": "Error: Test timed out in 30000ms."
+    },
+    {
+      "file": "saveDraftIsolation.test.ts",
+      "test": "C4 a caller mutation during checksum cannot change the durable snapshot, authority or returned state",
+      "reason": "AssertionError: expected { kind: 'formal', …(20) } to deeply equal { kind: 'formal', …(19) }"
+    },
+    {
+      "file": "saveDraftIsolation.test.ts",
+      "test": "C4 the optimized durable-history guard rejects a modified commandId and rolls back every store",
+      "reason": "TypeError: Cannot assign to read only property 'commandId' of object '#<Object>'"
+    },
+    {
+      "file": "saveDraftIsolation.test.ts",
+      "test": "C4 the optimized durable-history guard rejects a modified issuerId and rolls back every store",
+      "reason": "TypeError: Cannot assign to read only property 'issuerId' of object '#<Object>'"
+    },
+    {
+      "file": "saveDraftIsolation.test.ts",
+      "test": "C4 the optimized durable-history guard rejects a modified fingerprint and rolls back every store",
+      "reason": "TypeError: Cannot assign to read only property 'fingerprint' of object '#<Object>'"
+    },
+    {
+      "file": "saveDraftIsolation.test.ts",
+      "test": "C4 the optimized durable-history guard rejects a modified committedRevision and rolls back every store",
+      "reason": "TypeError: Cannot assign to read only property 'committedRevision' of object '#<Object>'"
+    },
+    {
+      "file": "saveDraftIsolation.test.ts",
+      "test": "C4 the optimized durable-history guard rejects a modified disposition and rolls back every store",
+      "reason": "TypeError: Cannot assign to read only property 'disposition' of object '#<Object>'"
+    },
+    {
+      "file": "schema.test.ts",
+      "test": "funding project roundtrip preserves snapshots and exact phase",
+      "reason": "AssertionError: expected '{\"armies\":[{\"id\":\"army:fixture\",\"orig…' to be '{\"armies\":[{\"id\":\"army:fixture\",\"orig…' // Object.is equality"
+    },
+    {
+      "file": "schema.test.ts",
+      "test": "researching project roundtrip preserves snapshots and exact phase",
+      "reason": "AssertionError: expected '{\"armies\":[{\"id\":\"army:fixture\",\"orig…' to be '{\"armies\":[{\"id\":\"army:fixture\",\"orig…' // Object.is equality"
+    },
+    {
+      "file": "schema.test.ts",
+      "test": "completed project roundtrip preserves snapshots and exact phase",
+      "reason": "AssertionError: expected '{\"armies\":[{\"id\":\"army:fixture\",\"orig…' to be '{\"armies\":[{\"id\":\"army:fixture\",\"orig…' // Object.is equality"
+    },
+    {
+      "file": "scoutV90.test.ts",
+      "test": "v90 city single scouting snapshot old outbound resources-army survives load and resolves to complete v90 intel",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "scoutV90.test.ts",
+      "test": "v90 city single scouting snapshot old outbound defenses-army survives load and resolves to complete v90 intel",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "v95Economy.test.ts",
+      "test": "pre-v95 checksum is verified before migration; old completed buildings and admitted jobs survive",
+      "reason": "AssertionError: expected undefined to be 95 // Object.is equality"
+    },
+    {
+      "file": "victoryB95.test.ts",
+      "test": "B9-5 conquest wins at exactly 12 world hours, persists a single result, and replays/offline partition identically",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "waterDeltaR4.test.ts",
+      "test": "D2 real military snapshots use weighted segment times at 1X and survive SaveLoad/slicing",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "waterDeltaR4.test.ts",
+      "test": "D2 real military snapshots use weighted segment times at 10X and survive SaveLoad/slicing",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "waterDeltaR4.test.ts",
+      "test": "D2 real military snapshots use weighted segment times at 25X and survive SaveLoad/slicing",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "waterDeltaR4.test.ts",
+      "test": "D2 unversioned existing land march retains exact original path, deadlines and IDs",
+      "reason": "AssertionError: expected { kind: 'formal', …(28) } to deeply equal { kind: 'formal', …(27) }"
+    },
+    {
+      "file": "wonderAutoSupply.test.ts",
+      "test": "opted-in player shipments reserve real demand, pay real source stock, arrive later and release vehicles only after return",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "wonderAutoSupply.test.ts",
+      "test": "a final 750 gap may travel below 2000, counts only at arrival, starts locked 24h construction once and stops new supply",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "wonderB91.test.ts",
+      "test": "B9-1 full 24M travels in 800 market trips, then exactly 24 world hours; save/offline/cooperative replay has one completion and no victory",
+      "reason": "AssertionError: expected { kind: 'formal', …(25) } to deeply equal { kind: 'formal', …(24) }"
+    },
+    {
+      "file": "wonderB91.test.ts",
+      "test": "B9-1 all 99 native AI use the same imperial command, real four-resource stock and capacity as the player",
+      "reason": "AssertionError: expected { kind: 'formal', …(30) } to deeply equal { kind: 'formal', …(29) }"
+    },
+    {
+      "file": "wonderCombatB95.test.ts",
+      "test": "B9-5 destroys a wonder behind intact Lv15 walls, returns survivors, preserves ownership and deduplicates actual battle/save",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "wonderDurabilityB95.test.ts",
+      "test": "B9-5 real numeric damage immediately pauses an incomplete breakthrough and ruins roll back once",
+      "reason": "Error: 存檔與帳本版本綁定不符。"
+    },
+    {
+      "file": "wonderDurabilityB95.test.ts",
+      "test": "B9-5 already-completed breakthrough and permanent qualifications survive actual destruction",
+      "reason": "AssertionError: expected { kind: 'formal', …(22) } to deeply equal { kind: 'formal', …(21) }"
+    },
+    {
+      "file": "wonderRepairB95.test.ts",
+      "test": "B9-5 full ruins repair uses 6M actual shipments, 12h boundary, completion-once, Save/Load and no qualification rollback",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "wonderRepairB95.test.ts",
+      "test": "B9-5 a construction ruin freezes 40% progress, pays 2.4M/4.8h and resumes only saved 14.4h",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "wonderRuinsGate.test.ts",
+      "test": "B9 Final Gate two dispatched armies yield one real destruction and a harmless changed-target return",
+      "reason": "AssertionError: expected { …(2) } to deeply equal { …(2) }"
+    },
+    {
+      "file": "worldB2.test.ts",
+      "test": "native save/load retains all geometry and rebuilds ephemeral indexes without renderer data",
+      "reason": "AssertionError: expected { kind: 'formal', …(27) } to deeply equal { kind: 'formal', …(26) }"
+    }
+  ],
+  "suiteErrors": [
+    {
+      "file": "breakthroughB92.test.ts",
+      "reason": "Hook timed out in 240000ms."
+    }
+  ]
+}
