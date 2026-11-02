@@ -1,3 +1,4 @@
+import type {WorldRead} from './presentationModel';
 import {OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
 import type {CampaignStatus} from './updateEligibility';
 import {ReleaseLog} from './ReleaseLog';
@@ -7,9 +8,8 @@ import {ThemeSettings,type Theme} from './ThemeSettings';
 import {RELEASE} from './release';
 import {BrandMark} from './BrandMark';
 import {clock,Dialog} from './presentation/UI';
-import type {FormalWorld} from './formal/model';
 import {CIV_NAMES,assetURL} from './presentation/artMap';
-type Props={campaignStatus?:CampaignStatus;onExportRaw?:()=>void;onExportLegacy?:()=>void;legacyAvailable?:boolean;updateLabel?:string;updateReason?:string;updateCode?:string;theme:Theme;onThemeChange:(t:Theme)=>void;world:FormalWorld|null;loading:boolean;loadPhase?:string;loadProgress?:number|null;loadEvents?:number;onCancelLoad?:()=>void;busy:boolean;error?:string;onNew:()=>void;onStart:()=>void;onRetry:()=>void;onExport:(m:'quick'|'full')=>void;onImport:()=>void;onCheck?:()=>void;updateText?:string;updateAvailable?:boolean;updateStageLabel?:string;updatePhase?:string;updating?:boolean;updateDisabled?:boolean;onUpdate?:(preserveHistory?:boolean)=>void};
+type Props={campaignStatus?:CampaignStatus;onExportRaw?:()=>void;onExportLegacy?:()=>void;legacyAvailable?:boolean;updateLabel?:string;updateReason?:string;updateCode?:string;theme:Theme;onThemeChange:(t:Theme)=>void;world:WorldRead|null;loading:boolean;loadPhase?:string;loadProgress?:number|null;loadEvents?:number;onCancelLoad?:()=>void;busy:boolean;error?:string;onNew:()=>void;onStart:()=>void;onRetry:()=>void;onExport:(m:'quick'|'full')=>void;onImport:()=>void;onCheck?:()=>void;updateText?:string;updateAvailable?:boolean;updateStageLabel?:string;updatePhase?:string;updating?:boolean;updateDisabled?:boolean;onUpdate?:(preserveHistory?:boolean)=>void};
 /** DEMO Home layout, backed exclusively by the currently loaded Formal save summary. */
 export function Home({campaignStatus, onExportRaw,onExportLegacy,legacyAvailable,updateLabel,updateReason,updateCode,theme,onThemeChange,world,loading,loadPhase,loadProgress,loadEvents,onCancelLoad,busy,error,onNew,onStart,onRetry,onExport,onImport,onCheck,updateText,updateAvailable,updateStageLabel,updatePhase,updating,updateDisabled,onUpdate}:Props){
  const [settings,setSettings]=useState(false),[confirmHistory,setConfirmHistory]=useState(false),f=world?.factions.find(f=>f.id===world.playerFactionId);

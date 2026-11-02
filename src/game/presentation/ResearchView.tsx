@@ -1,5 +1,6 @@
+import type {WorldRead} from '../presentationModel';
 import {memo,useEffect,useMemo,useRef,useState} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld,ResearchProject} from '../formal/model';
+import type {FormalCity,FormalCommand,ResearchProject} from '../formal/model';
 import {resourceKeys,zeroResources} from '../formal/model';
 import {TECH_CATALOG,type TechDefinition} from '../formal/techCatalog';
 import type {Requirement} from '../formal/buildingDetailData';
@@ -13,7 +14,7 @@ import {useDisplayTime,useLiveCity} from './liveClock';
 import {researchFacts,researchGroup,researchLayout,researchState,visibleResearch,RESEARCH_GROUPS,TREE_NODE_HEIGHT,TREE_NODE_WIDTH,type ResearchScope} from './researchTree';
 import './research.css';
 
-type Props={world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mobile?:boolean};
+type Props={world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mobile?:boolean};
 type Browse={scope:ResearchScope;age:number;closed:string[]};
 const PREFERENCE='lieguo.research-browse.v1';
 const scrollPositions=new Map<string,{top:number;left:number}>();
@@ -22,11 +23,11 @@ function readBrowse(age:number):Browse{
  return {scope:'traditional',age:Math.max(1,Math.min(3,age)),closed:[]};
 }
 /** Same display clock as the HUD; only this small leaf subscribes to countdown ticks. */
-export function researchRealTime(ms:number,world:FormalWorld){
+export function researchRealTime(ms:number,world:WorldRead){
  const seconds=Math.max(0,Math.ceil(ms/effectiveSpeed(world)/1000));
  return `${Math.floor(seconds/3600)} 時 ${Math.floor(seconds%3600/60)} 分 ${seconds%60} 秒`;
 }
-export function ResearchCountdown({world,project}:{world:FormalWorld;project:ResearchProject}){
+export function ResearchCountdown({world,project}:{world:WorldRead;project:ResearchProject}){
  const time=useDisplayTime(world,1000);
  if(project.phase!=='researching')return null;
  const end=project.startedAt!+project.durationSnapshot.durationMs;
@@ -44,7 +45,7 @@ function requirementText(r:Requirement){
   default:return r.id+' '+r.required;
  }
 }
-function Effect({tech,faction}:{tech:TechDefinition;faction:FormalWorld['factions'][number]}){
+function Effect({tech,faction}:{tech:TechDefinition;faction:WorldRead['factions'][number]}){
  if(tech.effect)return <p>{tech.effect}</p>;
  if(tech.category==='elite')return <p>解鎖 {Object.values(UNIT_CATALOG).filter(u=>u.eliteTech===tech.id&&(!u.civilizationId||u.civilizationId===faction.civilizationId)).map(u=>u.name).join('、')}；招募仍須符合本城人口及生產建築資格。</p>;
  // The catalog has no prose for blacksmith upgrades. Preview the real combat
@@ -69,7 +70,7 @@ function Funding({city,project,issue,busy}:Props&{project:ResearchProject}){
  const canContribute=!busy&&resourceKeys.some(r=>contribution[r]>0)&&resourceKeys.every(r=>Number.isSafeInteger(contribution[r])&&contribution[r]>=0&&contribution[r]<=city.stock[r]&&contribution[r]<=remaining[r]);
  return <section className="research-funding card"><h2>多城科研籌資中</h2><p>{city.name} · 四資源全額到位後開始研究</p><small>投入總額</small><Cost cost={project.contributedResources}/><small>目標投入</small><Cost cost={project.requiredResources}/><small>剩餘需求</small><Cost cost={remaining}/><div className="research-funding-fields">{resourceKeys.map(r=><label key={r}>{LABELS[r]}<input aria-label={'科研投入'+r} type="number" min={0} max={Math.min(city.stock[r],remaining[r])} value={contribution[r]} onChange={e=>setContribution({...contribution,[r]:Number(e.target.value)})}/></label>)}</div><div className="research-actions"><button disabled={!canContribute} onClick={()=>issue({type:'research.contribute',projectId:project.projectId,cityId:city.id,resources:contribution})}>投入所選科研資源</button><button disabled={busy||!resourceKeys.some(r=>Math.min(city.stock[r],remaining[r])>0)} onClick={()=>{const resources=zeroResources();for(const r of resourceKeys)resources[r]=Math.min(city.stock[r],remaining[r]);issue({type:'research.contribute',projectId:project.projectId,cityId:city.id,resources});}}>由此城投入可用資源</button></div></section>;
 }
-export function ResearchView({world,city:sourceCity,issue,busy,mobile=false}:Props){
+function ResearchViewScreen({world,city:sourceCity,issue,busy,mobile=false}:Props){
  const faction=world.factions.find(f=>f.id===sourceCity.ownerFactionId)!;
  const [browse,setBrowse]=useState(()=>readBrowse(faction.age??0)),[selected,setSelected]=useState<string|null>(null),[starting,setStarting]=useState(false);
  const startLock=useRef(false);
@@ -84,7 +85,7 @@ export function ResearchView({world,city:sourceCity,issue,busy,mobile=false}:Pro
  const state=selectedTech&&fact?researchState(world,city,selectedTech,fact):undefined;
  const scrollKey=world.campaignId+':'+browse.scope+':'+(mobile?browse.age:'desktop');
  useEffect(()=>{if(!busy){startLock.current=false;setStarting(false);}},[world,busy]);
- useEffect(()=>{try{localStorage.setItem(PREFERENCE,JSON.stringify(browse));}catch{/* Optional UI preferences never enter FormalWorld. */}},[browse]);
+ useEffect(()=>{try{localStorage.setItem(PREFERENCE,JSON.stringify(browse));}catch{/* Optional UI preferences never enter WorldRead. */}},[browse]);
  useEffect(()=>{
   const outer=scroll.current!,tree=treeScroll.current,saved=scrollPositions.get(scrollKey);
   outer.scrollTop=saved?.top??0;if(tree)tree.scrollLeft=saved?.left??Math.max(0,Math.min(2,(faction.age??1)-1))*266;
@@ -138,3 +139,5 @@ export function ResearchView({world,city:sourceCity,issue,busy,mobile=false}:Pro
   {mobile&&selectedTech&&<Dialog className="research-detail research-sheet" title={selectedTech.name} onClose={()=>setSelected(null)}>{detail}</Dialog>}
  </div>;
 }
+
+export const ResearchView=memo(ResearchViewScreen);

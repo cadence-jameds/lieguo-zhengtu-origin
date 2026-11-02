@@ -1,15 +1,20 @@
+import * as projectionMaps from '../admissionMap';
+import * as projectionLedger from './commandLedger';
 import {beforeEach,afterEach,it,expect,vi} from 'vitest';
 import type {FormalWorld} from './model';
 import {battlefield,dispatch} from './combatTestSupport';
 import {order} from './developmentTestSupport';
 import {isolatedAutonomyFixture} from './autonomyTestSupport';
 import {rebirthCandidates} from './extinction';
+// Observe committed domain state separately from the real v2 UI wire/store.
+let projectionBridge:import('./projectionTestSupport').ProjectionTestBridge;
+vi.mock('../worldStream',async(importOriginal)=>{const real=await importOriginal<typeof import('../worldStream')>(),{ProjectionTestBridge}=await import('./projectionTestSupport');return {...real,WorldStream:class extends real.WorldStream{constructor(){const bridge=new ProjectionTestBridge(false);projectionBridge=bridge;super(crypto.randomUUID(),bridge.reader);}}};});
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),readCityIntel:vi.fn(),reportStatus:vi.fn(),reportAction:vi.fn()}));
 vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let world:FormalWorld,messages:Record<string,any>[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:Record<string,any>)=>void},now=0;
 const send=(data:unknown)=>port.onmessage!({data}),until=async(fn:()=>boolean)=>vi.waitFor(()=>expect(fn()).toBe(true));
 const state=()=>messages.filter(m=>m.type==='state').at(-1)!;
-beforeEach(async()=>{vi.resetModules();vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());world=isolatedAutonomyFixture(battlefield());world.cities[0].military!.units={};world.cities[1].military!.units={militia:1000};world=dispatch(world,'conquest',{militia:1000},1,0).world;storage.reportStatus.mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}});storage.loadWithOffline.mockResolvedValue({game:world,recovered:false});storage.save.mockImplementation(async(w:FormalWorld)=>w);storage.exportStoredSave.mockResolvedValue('synthetic-export');messages=[];port={onmessage:null,postMessage:v=>messages.push(structuredClone(v))};vi.stubGlobal('self',port);await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(m=>m.type==='state'));messages=[];});
+beforeEach(async()=>{vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);vi.doMock('./commandLedger',()=>projectionLedger);vi.clearAllMocks();now=0;vi.spyOn(performance,'now').mockImplementation(()=>now);vi.stubGlobal('setInterval',vi.fn());world=isolatedAutonomyFixture(battlefield());world.cities[0].military!.units={};world.cities[1].military!.units={militia:1000};world=dispatch(world,'conquest',{militia:1000},1,0).world;storage.reportStatus.mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}});storage.loadWithOffline.mockResolvedValue({game:world,recovered:false});storage.save.mockImplementation(async(w:FormalWorld)=>w);storage.exportStoredSave.mockResolvedValue('synthetic-export');messages=[];port={onmessage:null,postMessage:v=>messages.push(structuredClone(projectionBridge.receive(v)))};vi.stubGlobal('self',port);await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(m=>m.type==='state'));messages=[];});
 afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
 it.each([1,3,6,10,25])('Worker %sX freezes only after the terminal durable commit, accepts rebirth in order and excludes defeated wall time',async speed=>{
  // Configure the campaign before advancing; the same Worker clock handles every supported speed.

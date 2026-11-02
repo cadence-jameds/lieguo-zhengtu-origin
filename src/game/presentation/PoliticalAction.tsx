@@ -1,10 +1,11 @@
+import type {WorldRead} from '../presentationModel';
 import {useState} from 'react';
-import type {FormalWorld,FormalCommand} from '../formal/model';
+import type {FormalCommand} from '../formal/model';
 import {legionOf,empireOf,politicalLeader} from '../formal/politics';
 import {Dialog} from './UI';
-export function politicalContext(w:FormalWorld){const l=legionOf(w,w.playerFactionId),e=empireOf(w,w.playerFactionId);return JSON.stringify([w.campaignId,w.playerFactionId,l?.id,l?.leader,l?.members,e?.id,e?.leader,e?.legions,politicalLeader(w,w.playerFactionId)]);}
+export function politicalContext(w:WorldRead){const l=legionOf(w,w.playerFactionId),e=empireOf(w,w.playerFactionId);return JSON.stringify([w.campaignId,w.playerFactionId,l?.id,l?.leader,l?.members,e?.id,e?.leader,e?.legions,politicalLeader(w,w.playerFactionId)]);}
 /** Organizational changes invalidate an open confirmation, ordinary clock ticks do not. */
-export function usePoliticalAction(world:FormalWorld,issue:(p:FormalCommand)=>void,busy:boolean){
+export function usePoliticalAction(world:WorldRead,issue:(p:FormalCommand)=>void,busy:boolean){
  const [pending,setPending]=useState<{title:string;command:FormalCommand;base:string}|null>(null);
  const confirm=(title:string,command:FormalCommand)=>setPending({title,command,base:politicalContext(world)});
  const changed=pending&&pending.base!==politicalContext(world);

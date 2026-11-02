@@ -11,7 +11,9 @@ IMPLEMENTATION_SUPPORT={'docs/validation/b10-r3-03/formal-v1/compatibility.json'
 ADAPTERS={'scripts/growth_tasks_successor.py','scripts/p0c10_clock_delta.py','scripts/b10_r3_02_successor.py','.github/workflows/ci.yml','scripts/test_b10_r3_01_successor.py','scripts/test_b10_r3_02_successor.py'}
 def sha(b):return hashlib.sha256(b).hexdigest()
 @lru_cache(maxsize=None)
-def previous(commit,path):return subprocess.check_output(['git','-C',str(ROOT),'show',commit+':'+path],stderr=subprocess.DEVNULL)
+def previous(commit,path):
+ from b10_r3_04_successor import previous as exact_blob
+ return exact_blob(commit,path)
 @lru_cache(maxsize=None)
 def paths(*args):return set(subprocess.check_output(['git','-C',str(ROOT),'ls-tree','-r','--name-only','-z',BASE,'--',*args],text=True).split('\0'))-{''}
 @lru_cache(maxsize=None)
@@ -76,19 +78,23 @@ def read_record(root=ROOT):
  r=json.loads(file.read_text());assert r==expected_record(),'Changed R3-03 immutable commit, grant, source, rule, history or adapter manifest'
  return r
 def accepts(path,predecessor,root=ROOT):
- if path not in CHANGES:return False
+ from b10_r3_04_successor import accepts as next_accepts
+ if path not in CHANGES:return next_accepts(path,predecessor,root)
  r=read_record(root)
- return predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==r['changes'][path]['after']
+ return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or next_accepts(path,r['changes'][path]['after'],root))
 def accepts_adapter(path,before,root=ROOT):
- if path not in ADAPTERS or before!=previous(BASE,path):return False
+ from b10_r3_04_successor import accepts_adapter as next_adapter
+ if path not in ADAPTERS:return next_adapter(path,before,root)
+ if before!=previous(BASE,path):return False
  read_record(root)
- return (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or next_adapter(path,adapters()[path],root))
 def validate(root=ROOT):
+ from b10_r3_04_successor import accepts as next_accepts, accepts_adapter as next_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unrecorded R3-03 source change',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or next_accepts(p,v['after'],root),('Unrecorded R3-03 source change',p)
  for section in ['invariants','historical']:
-  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest,('Changed preserved source/rule/history',p)
- for p,data in adapters().items():assert (root/p).read_bytes()==data,('Changed exact R3-03 adapter',p)
+  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest or section=='invariants' and next_accepts(p,digest,root),('Changed preserved source/rule/history',p)
+ for p,data in adapters().items():assert (root/p).read_bytes()==data or next_adapter(p,data,root),('Changed exact R3-03 adapter',p)
  return r
 if __name__=='__main__':
  validate();print('PASS: exact R3-03 formal ledger successor; preserved game rules, scheduler, historical specifications and evidence. No release acceptance claim.')

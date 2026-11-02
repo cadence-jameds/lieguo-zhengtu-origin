@@ -1,9 +1,10 @@
+import type {WorldRead} from '../presentationModel';
 import {canDestroyWonder,wonderProgress} from '../formal/wonder';
 import {breakthroughWork} from '../formal/breakthrough';
 import {ScoutIntelDetails} from './ScoutIntelDetails';
 import {reportTime} from './reportClock';
 import {intelAge,useRealNow} from './intelTime';
-import type {FormalCity,FormalWorld,WildSite} from '../formal/model';
+import type {FormalCity,WildSite} from '../formal/model';
 import type {ArmyMissionState} from '../formal/combatModel';
 import type {CityIntel} from '../formal/combatModel';
 import {canReinforce} from '../formal/armies';
@@ -13,7 +14,7 @@ import {relationColor} from './mapRelations';
 import {wildSiteName} from './wildSiteLabels';
 import {CIV_NAMES} from './artMap';
 import {Cost,fmt} from './UI';
-export function FormalTargetPanel({world,home,city,site,intel={},intelFailed=false,onMission,onCity,busy=false,cityEntryLabel}:{world:FormalWorld;home:FormalCity;city?:FormalCity;site?:WildSite;intel?:CityIntel;intelFailed?:boolean;onMission:(mission:ArmyMissionState['mission'])=>void;onCity:()=>void;busy?:boolean;cityEntryLabel?:string}){
+export function FormalTargetPanel({world,home,city,site,intel={},intelFailed=false,onMission,onCity,busy=false,cityEntryLabel}:{world:WorldRead;home:FormalCity;city?:FormalCity;site?:WildSite;intel?:CityIntel;intelFailed?:boolean;onMission:(mission:ArmyMissionState['mission'])=>void;onCity:()=>void;busy?:boolean;cityEntryLabel?:string}){
  const now=useRealNow(),full=intel.army?.intel.cityId!==undefined&&intel.army.intel.garrison!==undefined?intel.army.intel:undefined;
  const owner=city?world.factions.find(f=>f.id===city.ownerFactionId):undefined,own=owner?.id===world.playerFactionId,friend=!!city&&canReinforce(world,home.ownerFactionId,city.ownerFactionId),at=city??site!;
  const army=own?Object.values(city!.military?.units??{}).reduce((n,c)=>n+c,0):intel.army?Object.values(intel.army.intel.units).reduce((n,c)=>n+c,0):undefined;

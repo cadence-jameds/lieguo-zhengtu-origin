@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {findReceipt} from './commandLedger';
 import {requireCraftsmanCastle} from './constructionRules';
 import {PROTECTION_DURATION} from './protection';
@@ -22,15 +23,15 @@ export type Craftsman={id:string;ownerFactionId:FactionId;civilizationId:string;
 export type ExtinctionState={extinct:FactionId[];sites:ExileSite[];craftsmen:Craftsman[];cancelledResearch:ResearchProject[];rebirths:number;resumedAt?:number;defeat?:{at:number;ended:boolean;battleId?:import('./ids').BattleId}};
 export type ExtinctionCommand={type:'player.rebirth';cityId:CityId;name:string;x:number;y:number}|{type:'player.end';cityId:CityId}|{type:'craftsman.move';cityId:CityId;craftsmanId:string;destinationCityId:CityId}|{type:'craftsman.castle';cityId:CityId;craftsmanId:string};
 export const initialExtinction=():ExtinctionState=>({extinct:[],sites:[],craftsmen:[],cancelledResearch:[],rebirths:0});
-export const worldPaused=(w:FormalWorld)=>!!w.extinction?.defeat;
-export function rebirthLocationReason(w:FormalWorld,p:Point){
+export const worldPaused=(w:WorldRead)=>!!w.extinction?.defeat;
+export function rebirthLocationReason(w:WorldRead,p:Point){
  if(!Number.isInteger(p.x)||!Number.isInteger(p.y)||p.x<0||p.y<0||p.x>=w.dimensions.width||p.y>=w.dimensions.height)return '座標須為 0～383 的整數';
  const terrain=terrainAt(w,p.x,p.y);if(!buildable(terrain))return terrain==='mountain'?'山地不可建城':'水域不可建城';
  const cell=spatial(w).at(p.x,p.y);if(cell.city)return '此處已有城市';
  if(cell.site||w.worldLayer?.wildSites.some(s=>s.x===p.x&&s.y===p.y))return '此處已有野外據點';
  if(cell.reservation)return '此處已有正式建城預約';return '';
 }
-function legal(w:FormalWorld,p:Point){return !rebirthLocationReason(w,p);}
+function legal(w:WorldRead,p:Point){return !rebirthLocationReason(w,p);}
 function nearest(w:FormalWorld,p:Point){for(let r=0;r<Math.max(w.dimensions.width,w.dimensions.height);r++){const points:Point[]=[];for(let y=Math.max(0,Math.floor(p.y)-r);y<=Math.min(w.dimensions.height-1,Math.floor(p.y)+r);y++)for(let x=Math.max(0,Math.floor(p.x)-r);x<=Math.min(w.dimensions.width-1,Math.floor(p.x)+r);x++)if(Math.max(Math.abs(x-Math.floor(p.x)),Math.abs(y-Math.floor(p.y)))===r&&legal(w,{x,y}))points.push({x,y});if(points.length)return points.sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)||a.y-b.y||a.x-b.x)[0];}throw new Error('No legal exile/rebirth location');}
 export const exileUnits=(units:Record<string,number>)=>Object.fromEntries(Object.entries(units).filter(([id,n])=>!isScoutUnit(id)&&n>0));
 export const eligibleExile=(units:Record<string,number>)=>Object.entries(units).some(([id,n])=>n>0&&effectiveUnit(id));
@@ -60,7 +61,7 @@ export function defeatExile(w:FormalWorld,site:ExileSite,a:MissionArmy,before:Re
  site.phase='cooldown';site.defenders={};site.defeatedAt=w.time;const state=w.extinction!;state.craftsmen.push({id:'craftsman:'+sequenceKey(w.sequences.project++),ownerFactionId:a.ownerFactionId,civilizationId:site.civilizationId,siteId:site.id,cityId:null,carrierArmyId:a.id,eventId:null,destinationCityId:null,arrivalAt:null,path:[],departedAt:w.time,constructionCommandId:null});invalidateSpatial(w);return true;
 }
 export function deliverCraftsmen(w:FormalWorld,a:MissionArmy,c:FormalCity){for(const craft of w.extinction?.craftsmen??[])if(craft.carrierArmyId===a.id){craft.carrierArmyId=null;craft.cityId=c.id;}}
-export function rebirthCandidates(w:FormalWorld){const regions=Array.from({length:144},(_,r)=>r).sort((a,b)=>{const score=(r:number)=>w.cities.reduce((n,c)=>n+Math.max(0,48-Math.hypot(c.x-(r%12*32+16),c.y-(Math.floor(r/12)*32+16)))*(1+(w.factions.find(f=>f.id===c.ownerFactionId)?.empireId?1:0)),0);return score(a)-score(b)||seedHash(w.seed,a,w.extinction?.rebirths??0,702)-seedHash(w.seed,b,w.extinction?.rebirths??0,702);});const out:Point[]=[];for(const r of regions){for(let n=0;n<1024;n++){const x=r%12*32+n%32,y=Math.floor(r/12)*32+Math.floor(n/32),food=fieldDistribution(w.seed,x,y)[0];if(legal(w,{x,y})&&(food===6||food===7)&&out.every(p=>Math.hypot(x-p.x,y-p.y)>=32)){out.push({x,y});break;}}if(out.length===3)break;}return out;}
+export function rebirthCandidates(w:WorldRead){const regions=Array.from({length:144},(_,r)=>r).sort((a,b)=>{const score=(r:number)=>w.cities.reduce((n,c)=>n+Math.max(0,48-Math.hypot(c.x-(r%12*32+16),c.y-(Math.floor(r/12)*32+16)))*(1+(w.factions.find(f=>f.id===c.ownerFactionId)?.empireId?1:0)),0);return score(a)-score(b)||seedHash(w.seed,a,w.extinction?.rebirths??0,702)-seedHash(w.seed,b,w.extinction?.rebirths??0,702);});const out:Point[]=[];for(const r of regions){for(let n=0;n<1024;n++){const x=r%12*32+n%32,y=Math.floor(r/12)*32+Math.floor(n/32),food=fieldDistribution(w.seed,x,y)[0];if(legal(w,{x,y})&&(food===6||food===7)&&out.every(p=>Math.hypot(x-p.x,y-p.y)>=32)){out.push({x,y});break;}}if(out.length===3)break;}return out;}
 export function applyExtinctionCommand(w:FormalWorld,c:FormalCity|undefined,o:FormalOrder,p:ExtinctionCommand,s:EventScheduler){
  if(p.type==='player.end'){requireRule(o.issuerId===w.playerFactionId&&w.extinction?.defeat&&!w.extinction.defeat.ended,'僅滅國玩家可結束本局。');w.extinction.defeat.ended=true;return;}
  if(p.type==='player.rebirth'){requireRule(o.issuerId===w.playerFactionId&&!w.cities.some(c=>c.ownerFactionId===o.issuerId)&&w.extinction?.extinct.includes(o.issuerId)&&w.extinction.defeat&&!w.extinction.defeat.ended,'僅未結束本局的滅國玩家可復國。');const point={x:p.x,y:p.y};requireRule(!rebirthLocationReason(w,point),rebirthLocationReason(w,point)+'，請重新選擇。');const f=w.factions.find(f=>f.id===o.issuerId)!;const newCity=initialCity(f.id,cityId('rebirth-'+sequenceKey(w.sequences.project++)),point.x,point.y,p.name,false,fieldDistribution(w.seed,point.x,point.y));newCity.integrationWorkHours=newCity.integrationTotalWorkHours=0;initializeCityEconomy(w,newCity,s);newCity.military=initialMilitary();newCity.autoLogistics=[];w.cities.push(newCity);w.extinction!.rebirths++;w.extinction!.extinct=w.extinction!.extinct.filter(id=>id!==f.id);f.protectionUntil=w.time+PROTECTION_DURATION;f.protectionKind='rebirth';delete f.protectionEnded;delete w.extinction!.defeat;w.extinction!.resumedAt=w.time;invalidateSpatial(w);return;}

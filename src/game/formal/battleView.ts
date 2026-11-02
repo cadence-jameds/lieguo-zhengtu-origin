@@ -1,9 +1,9 @@
+import type {WorldRead} from '../presentationModel';
 import type {BattleId} from './ids';
-import type {FormalWorld} from './model';
 import {isMissionArmy} from './combatModel';
 import {SIEGE_ROUND_LIMIT} from './battleProgress';
 /** A minimal presentation projection. Enemy pools, HP and wall damage never leave this boundary. */
-export function liveBattleView(w:FormalWorld,id:BattleId){
+export function liveBattleView(w:WorldRead,id:BattleId){
  const b=w.combat?.battles.find(x=>x.id===id);if(!b)return null;
  const own=b.participants.filter(p=>p.ownerFactionId===w.playerFactionId);
  if(!own.length&&b.ownerBefore!==w.playerFactionId&&b.attackerFactionId!==w.playerFactionId)return null;

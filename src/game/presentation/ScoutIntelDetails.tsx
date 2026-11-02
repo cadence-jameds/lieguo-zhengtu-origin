@@ -1,12 +1,12 @@
+import type {WorldRead} from '../presentationModel';
 import type {ScoutIntel} from '../formal/combatModel';
-import type {FormalWorld} from '../formal/model';
 import {UNIT_CATALOG} from '../formal/unitCatalog';
 import {Cost,fmt} from './UI';
 import {LABELS} from './artMap';
 import {reportTime} from './reportClock';
 const counts=(units:Record<string,number>)=>Object.entries(units).map(([id,n])=>`${UNIT_CATALOG[id]?.name??id} ×${fmt(n)}`).join('、')||'無';
 /** Render only saved observations, never fetch live target state. */
-export function ScoutIntelDetails({intel,world,observedRealAt=intel.observedRealAt}:{intel:ScoutIntel;world:FormalWorld;observedRealAt?:number}){
+export function ScoutIntelDetails({intel,world,observedRealAt=intel.observedRealAt}:{intel:ScoutIntel;world:WorldRead;observedRealAt?:number}){
  const complete=intel.cityId!==undefined&&intel.garrison!==undefined&&intel.reinforcements!==undefined&&intel.resources!==undefined&&intel.wallLevel!==undefined&&intel.defenses!==undefined;
  return <section className="scout-observation"><h3>偵察快照</h3><p>觀測時間：{reportTime(observedRealAt)} · 當時庫存，非即時數值</p>
  {intel.cityId!==undefined&&!complete&&<small>舊版部分情報紀錄；未記錄的項目不補推。</small>}

@@ -9,7 +9,8 @@ import {GROWTH_REWARDS_V1} from './growthTaskRewardsV1';
 const int=z.number().int().nonnegative().safe(),taskId=z.string().refine(id=>GROWTH_TASK_BY_ID.has(id)),city=z.string().regex(/^city:[A-Za-z0-9_.-]{1,100}$/) as unknown as z.ZodType<CityId>,command=z.string().regex(/^command:[A-Za-z0-9_.-]{1,100}$/) as unknown as z.ZodType<CommandId>;
 const resources=z.object({food:int,wood:int,stone:int,gold:int}).strict();
 export const growthTaskIdSchema=taskId;
-export const growthTaskSchema:z.ZodType<GrowthTaskState>=z.object({version:z.literal(1),startedAt:int,recordedThrough:int,facts:z.record(z.string().refine(k=>GROWTH_FACT_LIMITS.has(k)),int),completed:z.record(taskId,int),claimed:z.record(taskId,z.object({rewardVersion:z.literal(2).optional(),commandId:command,cityId:city,at:int,accepted:resources,lost:resources,capacity:int,stockBefore:resources,reserved:resources}).strict()),settledCities:z.array(city),autoShipments:z.array(z.string().regex(/^shipment:[A-Za-z0-9_.-]{1,100}$/))}).strict();
+export const growthTaskValueSchema=z.object({version:z.literal(1),startedAt:int,recordedThrough:int,facts:z.record(z.string().refine(k=>GROWTH_FACT_LIMITS.has(k)),int),completed:z.record(taskId,int),claimed:z.record(taskId,z.object({rewardVersion:z.literal(2).optional(),commandId:command,cityId:city,at:int,accepted:resources,lost:resources,capacity:int,stockBefore:resources,reserved:resources}).strict()),settledCities:z.array(city),autoShipments:z.array(z.string().regex(/^shipment:[A-Za-z0-9_.-]{1,100}$/))}).strict();
+export const growthTaskSchema:z.ZodType<GrowthTaskState>=growthTaskValueSchema;
 export function validateGrowthTasks(w:FormalWorld,fail:(message:string)=>void){
  const s=w.growthTasks;if(!s)return;if(s.startedAt>s.recordedThrough)fail('Growth task start invalid');
  for(const [key,n]of Object.entries(s.facts))if(n>(GROWTH_FACT_LIMITS.get(key)??0))fail('Growth fact exceeds bounded target');

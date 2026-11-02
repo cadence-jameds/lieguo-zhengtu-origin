@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import type {FormalCity,FormalEvent,FormalOrder,FormalReport,FormalWorld,LargeProject,WonderCommand} from './model';
 import {resourceKeys,zeroResources} from './model';
 import {projectId,reportId,sequenceKey,type EmpireId} from './ids';
@@ -8,11 +9,11 @@ import {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY} from './wonderRules';
 export {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY,WONDER_FULL_REPAIR_COST,WONDER_FULL_REPAIR_DURATION} from './wonderRules';
 import {applyRepairCommand,settleWonderDurability,wonderAvailable} from './wonderCondition';
 export const wonderIntegrity=(current:number,maximum:number)=>current===0&&maximum>0?'ruins' as const:current<maximum?'damaged' as const:'intact' as const;
-export const empireWonder=(w:FormalWorld,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===id);
+export const empireWonder=(w:WorldRead,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='world-wonder'&&p.owner.kind==='empire'&&p.owner.empireId===id);
 export function wonderRemaining(p:LargeProject){return Object.fromEntries(resourceKeys.map(r=>[r,p.requiredResources[r]-p.shipments.reduce((n,t)=>n+(t.phase==='returned'?0:t.resources[r]),0)])) as typeof p.poolResources;}
-export function wonderProgress(w:FormalWorld,p:LargeProject){const state=p.wonder;if(state?.clock)return Math.min(100,(state.clock.workMs+(state.clock.activeSince===null?0:w.time-state.clock.activeSince))/p.durationMs*100);if(state?.phase==='completed')return 100;if(state?.phase!=='building'||state.startedAt===null)return 0;return Math.min(100,Math.max(0,(w.time-state.startedAt)/p.durationMs*100));}
+export function wonderProgress(w:WorldRead,p:LargeProject){const state=p.wonder;if(state?.clock)return Math.min(100,(state.clock.workMs+(state.clock.activeSince===null?0:w.time-state.clock.activeSince))/p.durationMs*100);if(state?.phase==='completed')return 100;if(state?.phase!=='building'||state.startedAt===null)return 0;return Math.min(100,Math.max(0,(w.time-state.startedAt)/p.durationMs*100));}
 /** Read-only target eligibility, including accrued construction HP and legacy intact saves. */
-export function canDestroyWonder(w:FormalWorld,p:LargeProject|undefined){
+export function canDestroyWonder(w:WorldRead,p:LargeProject|undefined){
  const b=p?.wonder;if(!p||p.kind!=='world-wonder'||!b||b.phase==='funding'||b.integrity==='ruins')return false;
  const maximum=WONDER_MAX_DURABILITY*wonderProgress(w,p)/100,d=b.durability;
  return d?d.current+Math.max(0,maximum-d.maximum)>0:b.integrity!=='damaged'&&maximum>0;

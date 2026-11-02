@@ -1,0 +1,35 @@
+{
+  "head": "b4ddf57225b62d1a62b98c7e1e7ddd233bd4e982",
+  "localQuiet": {
+    "node": "22.23.4",
+    "workers": 2,
+    "cpuQuota": 2,
+    "memoryBytes": 8589934592,
+    "heapLimitBytes": 2197815296,
+    "pass": 2373,
+    "timeout": 2,
+    "skip": 1,
+    "elapsedSeconds": 1089.9,
+    "failures": [
+      {
+        "name": "150000 valid receipts survive start, import and Recovery without an argument-count limit",
+        "durationMs": 120779.477253,
+        "error": "Error: Test timed out in 120000ms."
+      },
+      {
+        "name": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "durationMs": 31726.914754000012,
+        "error": "Error: Test timed out in 30000ms."
+      }
+    ]
+  },
+  "CI": {
+    "run": 41483712127,
+    "job": 125408408343,
+    "pass": 2375,
+    "fail": 0,
+    "skip": 1,
+    "conclusion": "success"
+  },
+  "note": "Before final UI scope repair. Same original 120s/30s timeouts as PR56; no changed deadlines, heap, datasets, rules or assertions. Not the final repaired HEAD result."
+}

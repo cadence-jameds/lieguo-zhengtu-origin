@@ -1,8 +1,9 @@
+import {presentationScopeKey} from '../presentationModel';
+import type {WorldRead,TerrainRead} from '../presentationModel';
 /** Adapted from v0.30.2 TerrainCache + worldScenery + mapSession.
  * Request/pump/LRU, world-space scenery tiles, gesture tiers and static background
  * semantics are retained. Only terrain/decorations/node dependencies are Formal.
  */
-import type {FormalWorld} from '../formal/model';
 import {project,inverse,tilePath,type Point} from './mapGeometry';
 import {paintSurface,paintTerrainOverview,shoreSegments,wetSurface,noise,decorations,type Texture,type Decoration} from './mapPaint';
 import {terrainAt} from '../formal/terrain';
@@ -13,7 +14,7 @@ import {overviewGeometry,MAP_TERRAIN_MARGIN} from './mapViewRules';
 export type Camera={x:number;y:number;z:number};
 const CHUNK=16,WIDTH=704,HEIGHT=384,ORIGIN=352;
 export const terrainRasterScale=(zoom:number,dpr=1)=>Math.min(2,Math.max(.125,2**Math.floor(Math.log2(zoom*dpr))));
-export function terrainChunks(c:Camera,w:number,h:number,world:FormalWorld){
+export function terrainChunks(c:Camera,w:number,h:number,world:WorldRead){
  const corners=[[0,0],[w,0],[0,h],[w,h]].map(([x,y])=>inverse(c.x+(x-w/2)/c.z,c.y+(y-h/2)/c.z)),out:Point[]=[];
  for(let y=Math.max(0,Math.floor((Math.min(...corners.map(p=>p.y))-16)/CHUNK)*CHUNK);y<=Math.min(world.dimensions.height-1,Math.max(...corners.map(p=>p.y))+16);y+=CHUNK)
  for(let x=Math.max(0,Math.floor((Math.min(...corners.map(p=>p.x))-16)/CHUNK)*CHUNK);x<=Math.min(world.dimensions.width-1,Math.max(...corners.map(p=>p.x))+16);x+=CHUNK){const q=project({x,y}),sx=(q.x-c.x)*c.z+w/2,sy=(q.y-c.y)*c.z+h/2;if(sx+352*c.z>=0&&sx-352*c.z<=w&&sy+320*c.z>=0&&sy-64*c.z<=h)out.push({x,y});}
@@ -25,7 +26,9 @@ type Chunk={image:HTMLCanvasElement;scale:number};
 type Job={x:number;y:number;scale:number;key:string};
 export class TerrainCache {
  cache=new Map<string,Chunk>();pending=new Map<string,Job>();revision=0;bytes=0;hits=0;misses=0;worker?:Worker;active?:Job;generation=1;texture?:Texture;bank?:HTMLImageElement;overview?:HTMLCanvasElement;overviewReady=false;onChange=()=>{};
- constructor(readonly world:FormalWorld){
+ readonly world:TerrainRead;
+ constructor(world:TerrainRead){
+  this.world={seed:world.seed,dimensions:world.dimensions,worldLayer:world.worldLayer?{regionSize:world.worldLayer.regionSize,terrain:world.worldLayer.terrain,mountains:world.worldLayer.mountains}:undefined};
   try{this.worker=new Worker(new URL('./mapRaster.worker.ts',import.meta.url),{type:'module'});this.worker.onmessage=({data})=>{const job=this.active;this.active=undefined;if(data.error){this.worker?.terminate();this.worker=undefined;if(job)this.pending.set(job.key,job);}else if(data.generation===this.generation&&job){if(job.key==='overview'){const c=this.pixels(data.pixels);this.setOverview(c);}else this.store(job.key,this.make(job,data.pixels));this.revision++;}this.onChange();};this.worker.onerror=()=>{if(this.active)this.pending.set(this.active.key,this.active);this.active=undefined;this.worker?.terminate();this.worker=undefined;this.onChange();};this.init();}catch{this.worker=undefined;}
  }
  init(){this.worker?.postMessage({type:'init',world:{seed:this.world.seed,dimensions:this.world.dimensions,worldLayer:this.world.worldLayer},texture:this.texture,generation:this.generation});}
@@ -60,7 +63,7 @@ export class SceneryCache {
  cache=new Map<string,Tile>();pending=new Map<string,()=>void>();bytes=0;revision=0;hits=0;misses=0;spriteDraws=0;assetSignature='';
  assetsReady(images:HTMLImageElement[]){const signature=images.map(im=>im.naturalWidth+','+im.naturalHeight).join('|');if(signature===this.assetSignature)return;this.assetSignature=signature;this.cache.clear();this.bytes=0;this.pending.clear();this.revision++;}
  beginFrame(){this.pending.clear();}
- draw(ctx:CanvasRenderingContext2D,w:FormalWorld,c:Camera,width:number,height:number,dpr:number,gesture:boolean){
+ draw(ctx:CanvasRenderingContext2D,w:WorldRead,c:Camera,width:number,height:number,dpr:number,gesture:boolean){
   const scale=sceneryRasterScale(c.z,dpr,gesture),size=tileSize(scale),nodes=w.cities,prefix=nodes.map(n=>n.x+','+n.y).join('|'),left=c.x-width/2/c.z,right=c.x+width/2/c.z,top=c.y-height/2/c.z,bottom=c.y+height/2/c.z;
   for(let y=Math.floor(top/size.height);y<=Math.floor(bottom/size.height);y++)for(let x=Math.floor(left/size.width);x<=Math.floor(right/size.width);x++){
    const wx=x*size.width,wy=y*size.height;if(wx>20*w.dimensions.width+512||wx+size.width< -20*w.dimensions.height-512||wy>10*(w.dimensions.width+w.dimensions.height)+512||wy+size.height< -512)continue;
@@ -70,7 +73,7 @@ export class SceneryCache {
    if(tile){ctx.save();ctx.beginPath();ctx.rect((wx-c.x)*c.z+width/2-.15,(wy-c.y)*c.z+height/2-.15,size.width*c.z+.3,size.height*c.z+.3);ctx.clip();const pad=2/tile.scale;ctx.drawImage(tile.image,(tile.wx-pad-c.x)*c.z+width/2,(tile.wy-pad-c.y)*c.z+height/2,(tile.width+pad*2)*c.z,(tile.height+pad*2)*c.z);ctx.restore();}
   }
  }
- render(ctx:CanvasRenderingContext2D,w:FormalWorld,c:Camera,width:number,height:number,nodes:Point[]){
+ render(ctx:CanvasRenderingContext2D,w:WorldRead,c:Camera,width:number,height:number,nodes:Point[]){
   const screen=(p:Point)=>{const q=project(p);return{x:(q.x-c.x)*c.z+width/2,y:(q.y-c.y)*c.z+height/2};},corners=[[0,0],[width,0],[0,height],[width,height]].map(([x,y])=>inverse(c.x+(x-width/2)/c.z,c.y+(y-height/2)/c.z)),minX=Math.max(0,Math.floor((Math.min(...corners.map(p=>p.x))-18)/2)*2),maxX=Math.min(w.dimensions.width-1,Math.max(...corners.map(p=>p.x))+18),minY=Math.max(0,Math.floor((Math.min(...corners.map(p=>p.y))-18)/2)*2),maxY=Math.min(w.dimensions.height-1,Math.max(...corners.map(p=>p.y))+18),items:Decoration[]=[];
   for(let x=minX;x<=maxX;x+=2)for(let y=minY;y<=maxY;y+=2)items.push(...decorations(w,x,y).filter(d=>d.kind!=='mountain'));
   // Mountain stride is independent of the tree/detail 2-cell sampling grid.
@@ -84,22 +87,22 @@ export class SceneryCache {
  pump(maxMs=4){const start=performance.now();let count=0;for(const [key,render] of this.pending){if(count>=2||(count&&performance.now()-start>=maxMs))break;this.pending.delete(key);render();count++;}return count;}
 }
 const sessions=new Map<string,{terrain:TerrainCache;scenery:SceneryCache}>();
-export function mapSession(w:FormalWorld){
- let session=sessions.get(w.campaignId);
+export function mapSession(w:WorldRead){
+ const scope=presentationScopeKey(w);let session=sessions.get(scope);
  if(session&&(session.terrain.world.seed!==w.seed||session.terrain.world.worldLayer?.terrain!==w.worldLayer?.terrain)){
-  session.terrain.dispose();sessions.delete(w.campaignId);session=undefined;
+  session.terrain.dispose();sessions.delete(scope);session=undefined;
  }
  if(!session){
-  session={terrain:new TerrainCache(w),scenery:new SceneryCache()};sessions.set(w.campaignId,session);
+  session={terrain:new TerrainCache(w),scenery:new SceneryCache()};sessions.set(scope,session);
   // The modal lab and normal map can remain mounted together. Keep one cache per context.
   const lab=w.campaignId.startsWith('campaign:b5lab-');
-  for(const key of sessions.keys())if(key!==w.campaignId&&key.startsWith('campaign:b5lab-')===lab){
+  for(const key of sessions.keys())if(key!==scope&&key.startsWith('campaign:b5lab-')===lab){
    sessions.get(key)!.terrain.dispose();sessions.delete(key);
   }
  }
  return session;
 }
-export function drawTerrain(ctx:CanvasRenderingContext2D,w:FormalWorld,c:Camera,width:number,height:number,dpr:number,gesture:boolean,grid:boolean,cache:TerrainCache){
+export function drawTerrain(ctx:CanvasRenderingContext2D,w:WorldRead,c:Camera,width:number,height:number,dpr:number,gesture:boolean,grid:boolean,cache:TerrainCache){
  cache.beginFrame();const screen=(p:Point)=>{const q=project(p);return{x:(q.x-c.x)*c.z+width/2,y:(q.y-c.y)*c.z+height/2};};ctx.fillStyle='#29392d';ctx.fillRect(0,0,width,height);ctx.imageSmoothingEnabled=true;ctx.save();ctx.beginPath();const margin=MAP_TERRAIN_MARGIN;[{x:-.5-margin,y:-.5-margin},{x:w.dimensions.width-.5+margin,y:-.5-margin},{x:w.dimensions.width-.5+margin,y:w.dimensions.height-.5+margin},{x:-.5-margin,y:w.dimensions.height-.5+margin}].forEach((p,i)=>{const a=screen(p);if(i)ctx.lineTo(a.x,a.y);else ctx.moveTo(a.x,a.y);});ctx.closePath();ctx.clip();
  const overview=cache.requestOverview(),a=overviewGeometry(w),p=screen({x:0,y:0});ctx.drawImage(overview,p.x+a.origin.x*c.z,p.y+a.origin.y*c.z,a.width*c.z,a.height*c.z);
  const chunks=terrainChunks(c,width,height,w);if(c.z>=.18)for(const p of chunks){const tile=cache.request(p.x,p.y,c.z,dpr,gesture);if(!tile)continue;const center=screen(p);ctx.save();ctx.beginPath();const pad=1.25/(20*tile.scale);[{x:p.x-.5-pad,y:p.y-.5-pad},{x:p.x+15.5+pad,y:p.y-.5-pad},{x:p.x+15.5+pad,y:p.y+15.5+pad},{x:p.x-.5-pad,y:p.y+15.5+pad}].forEach((p,i)=>{const q=screen(p);if(i)ctx.lineTo(q.x,q.y);else ctx.moveTo(q.x,q.y);});ctx.closePath();ctx.clip();ctx.drawImage(tile.image,center.x-ORIGIN*c.z,center.y-64*c.z,WIDTH*c.z,HEIGHT*c.z);ctx.restore();}ctx.restore();

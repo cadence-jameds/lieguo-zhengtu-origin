@@ -1,3 +1,4 @@
+import * as projectionMaps from '../admissionMap';
 import * as ledger from './commandLedger';
 import 'fake-indexeddb/auto';
 import {afterEach,beforeEach,expect,it,vi} from 'vitest';
@@ -15,6 +16,9 @@ import {battlefield,dispatch} from './combatTestSupport';
 import {advanceFormal} from './reducer';
 import {isolatedAutonomyFixture} from './autonomyTestSupport';
 import type {FormalOrder,FormalWorld,FormalCommand} from './model';
+// Observe committed domain state separately from the real v2 UI wire/store.
+let projectionBridge:import('./projectionTestSupport').ProjectionTestBridge;
+vi.mock('../worldStream',async(importOriginal)=>{const real=await importOriginal<typeof import('../worldStream')>(),{ProjectionTestBridge}=await import('./projectionTestSupport');return {...real,WorldStream:class extends real.WorldStream{constructor(){const bridge=new ProjectionTestBridge(true);projectionBridge=bridge;super(crypto.randomUUID(),bridge.reader);}}};});
 let store:FormalPersistence,now=0,fail:FailurePoint|undefined,dropAck=false,dropState=false,tick:()=>void;
 let messages:any[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:any)=>void};
 const send=(data:unknown)=>port.onmessage!({data});
@@ -23,17 +27,22 @@ const done=(id:string)=>messages.some(m=>m.type==='requestDone'&&m.requestId===i
 const latest=()=>messages.filter(m=>m.type==='state').at(-1)?.world as FormalWorld;
 const ack=(o:FormalOrder)=>messages.filter(m=>m.type==='commandAck'&&m.ack.commandId===o.commandId).at(-1)?.ack;
 async function boot(){
- vi.resetModules();vi.doMock('./commandLedger',()=>ledger);vi.doMock('../persistence',()=>({
+ vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);vi.doMock('./commandLedger',()=>ledger);vi.doMock('../persistence',()=>({
   hasLegacyCampaign:async()=>false,exportLegacyCampaign:async()=>'',
   ...Object.fromEntries(['acquireWriter','writerContext','receiveCommand','commandStatus','pendingCommands','commandPage','finishCommand','noteCommandFailure','loadWithOffline','save','restore','importSave','backupList','clearSavedGames','exportStoredSave','readReportPage','readCityIntel','reportStatus','reportAction'].map(name=>[name,(...args:any[])=>(store[name as keyof FormalPersistence] as Function).apply(store,args)])),
   loadWithOffline:(progress:Parameters<FormalPersistence['loadWithOffline']>[1])=>store.loadWithOffline(Date.now(),progress),
   startCampaign:(w:FormalWorld)=>store.start(w)
  }));
- messages=[];port={onmessage:null,postMessage:v=>{if(dropAck&&v.type==='commandAck'||dropState&&v.type==='state')return;messages.push(structuredClone(v));}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',(cb:()=>void)=>{tick=cb;return 1;});await import('../runtime.worker');send({type:'load',requestId:'load'});await until(()=>done('load'));expect(messages.filter(m=>m.type==='error')).toEqual([]);
+ messages=[];port={onmessage:null,postMessage:v=>{if(dropAck&&v.type==='commandAck'||dropState&&v.type==='state')return;messages.push(structuredClone(projectionBridge.receive(v)));}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',(cb:()=>void)=>{tick=cb;return 1;});await import('../runtime.worker');send({type:'load',requestId:'load'});await until(()=>done('load'));expect(messages.filter(m=>m.type==='error')).toEqual([]);
 }
 beforeEach(()=>{now=0;fail=undefined;dropAck=false;dropState=false;vi.spyOn(performance,'now').mockImplementation(()=>now);store=new FormalPersistence({suffix:'runtime-durable-'+crypto.randomUUID(),fault:point=>{if(point===fail){fail=undefined;throw new DOMException('transient '+point,'AbortError');}}});});
 afterEach(async()=>{await store.db.delete();vi.doUnmock('../persistence');vi.doUnmock('./commandLedger');vi.restoreAllMocks();vi.unstubAllGlobals();});
 function click(w:FormalWorld,key:string,payload:FormalCommand){const o=order(w,key,payload);send({type:'command',order:o,...captureIntent(w,o),requestId:key});return o;}
+it('v2 T1 persists exactly the clicked semantic context; forged writer/session stamps never reach the Inbox',async()=>{
+ await store.start(createFormalFixture());await boot();const view=projectionBridge.store.getWorld()!,o=order(latest(),'projection-original',{type:'city.rename',cityId:fixtureIds.home,name:'原始點擊'}),intent=captureIntent(view,o);
+ send({type:'command',order:o,...intent,branch:view.projection.branch,projection:view.projection,requestId:'projection-original'});await until(()=>done('projection-original'));const saved=await store.commandStatus(o.campaignId,o.commandId);expect(saved!.playerBase).toEqual(intent.playerBase);expect(saved!.originalRevision).toBe(o.expectedRevision);expect(saved!.order).toEqual(o);expect(saved!.state).toBe('committed');
+ const invalid=order(latest(),'forged-context',{type:'city.rename',cityId:fixtureIds.home,name:'不可偽造'});send({type:'command',order:invalid,...captureIntent(view,invalid),branch:view.projection.branch,projection:{...view.projection,writerEpoch:view.projection.writerEpoch+1},requestId:'forged-context'});await until(()=>done('forged-context'));expect(await store.commandStatus(invalid.campaignId,invalid.commandId)).toBeUndefined();expect(messages.some(m=>m.type==='commandReceiveFailed'&&m.commandId===invalid.commandId)).toBe(true);
+});
 it('real Worker protocol: T1 survives termination before execution, reboot revalidates and commits one effect; Ack loss queries exact T2 result',async()=>{
  const initial=await store.start(createFormalFixture({research:true})),o=contribute(initial,'recovered',50);await store.receiveCommand(o,captureIntent(initial,o));
  await boot();await until(()=>messages.some(m=>m.type==='commandAck'));expect(ack(o).status).toBe('committed');const next=(await store.loadSave()).game!;expect(next.cities[0].stock.food).toBe(550);expect((await store.commandStatus(o.campaignId,o.commandId))!.state).toBe('committed');

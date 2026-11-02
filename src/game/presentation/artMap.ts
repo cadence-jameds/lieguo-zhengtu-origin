@@ -1,7 +1,8 @@
+import type {WorldRead} from '../presentationModel';
 import {TECH_CATALOG} from '../formal/techCatalog';
 import {UNIT_CATALOG} from '../formal/unitCatalog';
 import {unitPortraits,technologyCards,type VisualAge} from './artRegistry';
-import type {FormalCity,FormalWorld,Construction} from '../formal/model';
+import type {FormalCity,Construction} from '../formal/model';
 /** Visual aliases never change formal IDs or enter a save. */
 export const CIV_ART:Record<string,string>={civ_zhongguo:'civ_zhongguo',civ_byzantium:'civ_byzantion',civ_frankia:'civ_frankia',civ_britannia:'civ_britannia',civ_japan:'civ_japan',civ_mongolia:'civ_mongol'};
 export const CIV_NAMES:Record<string,string>={civ_zhongguo:'中國',civ_byzantium:'拜占庭',civ_frankia:'法蘭克',civ_britannia:'不列顛',civ_japan:'日本',civ_mongolia:'蒙古'};
@@ -10,7 +11,7 @@ export function civilizationArt(id:string){const a=CIV_ART[id];if(!a)throw new E
 export function civilizationIndex(id:string){civilizationArt(id);return CIV_ORDER.indexOf(id);}
 export const visualAge=(age:number):VisualAge=>age<=0?0:age===1?1:age===2?2:3;
 /** Permanent City promotion art is independent of faction era/population. */
-export const cityArtAge=(w:FormalWorld,c:FormalCity):VisualAge=>Math.max(c.cityPromotionCompleted?2:0,visualAge(w.factions.find(f=>f.id===c.ownerFactionId)?.age??0)) as VisualAge;
+export const cityArtAge=(w:WorldRead,c:FormalCity):VisualAge=>Math.max(c.cityPromotionCompleted?2:0,visualAge(w.factions.find(f=>f.id===c.ownerFactionId)?.age??0)) as VisualAge;
 export const AGE_NAMES=['黑暗','封建','城堡','帝王'];
 export const BUILDING_ALIAS:Record<string,string>={wall:'wall',center:'hall',residence:'house',warehouse:'warehouse',bunker:'cellar',market:'market',barracks:'barracks',archery:'range',stable:'stable',academy:'academy',workshop:'workshop',castle:'castle'};
 export const NEW_BUILDINGS=['townhall','monastery','mill','lumbermill','masonry','mint','blacksmith','embassy'] as const;
@@ -61,7 +62,7 @@ export function techArt(id:string):ArtSpec {
  const level=/\.([123])$/.exec(id)?.[1];
  return{path:index===undefined?`art/formal/tech-${category}.svg`:'art/catalog-technologies.webp',sheet:index===undefined?undefined:'technologies',index,category,badge:level?['I','II','III'][+level-1]:t.category==='elite'?'ELITE':undefined,civ:t.civilizationId??undefined,origin:'derived'};
 }
-export function cityPresentation(w:FormalWorld,c:FormalCity){
+export function cityPresentation(w:WorldRead,c:FormalCity){
  const faction=w.factions.find(f=>f.id===c.ownerFactionId)!;const age=faction.age??0;
  const jobs=c.economy?.construction??[];
  const lots=TOWN_ANCHORS.map((anchor,i)=>{const key=i===0?'center':Object.keys(c.economy?.slots??{}).find(k=>c.economy!.slots[k]===i-1);return{anchor,slot:i-1,key,kind:key?.split('.')[0],level:key?c.buildings[key]??0:0,job:key?jobs.find(j=>j.target.kind==='building'&&j.target.key===key):undefined};});

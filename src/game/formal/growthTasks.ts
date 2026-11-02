@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {findReceipt} from './commandLedger';
 import type {CityId,CommandId} from './ids';
 import type {Construction,FormalCity,FormalCommand,FormalEvent,FormalOrder,FormalReport,FormalWorld,LogisticsShipment,Resources,Settlement} from './model';
@@ -55,12 +56,12 @@ export function recordGrowthPopulation(w:FormalWorld,c:FormalCity,before:number,
  for(const {task,at}of crossings){const state=w.growthTasks!;state.completed[task.id]=at;state.startedAt=Math.min(state.startedAt,at);}
 }
 /** Rendering reads committed task history only; legacy recognition runs in the backend. */
-export function growthTaskState(w:FormalWorld){return w.growthTasks??emptyState(w.time);}
-export function growthTaskStatus(state:GrowthTaskState,task:GrowthTask){return state.claimed[task.id]?'claimed':state.completed[task.id]!==undefined?'claimable':'incomplete';}
+export function growthTaskState(w:WorldRead){return w.growthTasks??emptyState(w.time);}
+export function growthTaskStatus(state:Pick<GrowthTaskState,'claimed'|'completed'>,task:GrowthTask){return state.claimed[task.id]?'claimed':state.completed[task.id]!==undefined?'claimable':'incomplete';}
 /** Display progress only; completion still requires the backend's persisted completed ID. */
-export function ownedPopulationProgress(w:FormalWorld){return Math.floor(Math.max(0,...spatial(w).owned(w.playerFactionId).map(c=>c.economy?growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),Math.max(0,w.time-c.economy.lastSettledAt)/HOUR):c.population)));}
-export function claimableGrowthCount(w:FormalWorld){const s=growthTaskState(w);return GROWTH_TASKS.filter(t=>growthTaskStatus(s,t)==='claimable').length;}
-export function quoteGrowthReward(w:FormalWorld,c:FormalCity,task:GrowthTask){
+export function ownedPopulationProgress(w:WorldRead){return Math.floor(Math.max(0,...spatial(w).owned(w.playerFactionId).map(c=>c.economy?growPopulation(c.population,c.housing,buildingLevel(c,'monastery'),Math.max(0,w.time-c.economy.lastSettledAt)/HOUR):c.population)));}
+export function claimableGrowthCount(w:WorldRead){const s=growthTaskState(w);return GROWTH_TASKS.filter(t=>growthTaskStatus(s,t)==='claimable').length;}
+export function quoteGrowthReward(w:WorldRead,c:FormalCity,task:GrowthTask){
  const current=citySnapshot(w,c.id)??c,capacity=storageCapacity(current),reserved={...(current.economy?.reservedIncoming??zeroResources())},available=zeroResources(),shortfall=zeroResources();
  for(const r of resourceKeys){available[r]=Math.max(0,Math.floor(capacity-reserved[r]-current.stock[r]));shortfall[r]=Math.max(0,task.reward[r]-available[r]);}
  return {capacity,stockBefore:{...current.stock},reserved,available,shortfall,canClaim:resourceKeys.every(r=>shortfall[r]===0),accepted:{...task.reward},lost:zeroResources()};

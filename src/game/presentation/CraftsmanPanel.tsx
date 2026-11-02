@@ -1,5 +1,6 @@
+import type {WorldRead} from '../presentationModel';
 import {useState} from 'react';
-import type {FormalWorld,FormalCity,FormalCommand} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import type {CityId} from '../formal/ids';
 import {citySnapshot} from '../formal/economy';
 import {useConstructionPreviews,PreviewStatus} from './useConstructionPreviews';
@@ -8,7 +9,7 @@ import {Art} from './Art';
 import {Cost,Dialog,realTime} from './UI';
 import {Countdown} from './LiveValues';
 export const CRAFTSMAN_ART={path:'art/formal/unit-craftsman.svg',origin:'new' as const};
-export function CraftsmanPanel({world:w,issue,busy}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean}){
+export function CraftsmanPanel({world:w,issue,busy}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean}){
  const [open,setOpen]=useState(false),[selected,setSelected]=useState(''),[destination,setDestination]=useState(''),crafts=(w.extinction?.craftsmen??[]).filter(x=>x.ownerFactionId===w.playerFactionId),x=crafts.find(x=>x.id===selected)??crafts[0],source=x?.cityId?citySnapshot(w,x.cityId):undefined;
  const idle=!!x?.cityId&&!x.eventId&&!x.carrierArmyId&&!x.constructionCommandId,preview=useConstructionPreviews(w,source?.id,open&&idle&&source?[{craftsmanId:x.id}]:[]),result=preview.results[0],quote=result?.status==='ready'?{allowed:true,cost:result.quote.paidResources,duration:result.quote.durationMs,reason:'符合工匠建堡資格'}:null;
  const state=(craft:typeof x)=>!craft?'尚無工匠團':craft.constructionCommandId?'城堡施工中':craft.eventId?'轉移中':craft.carrierArmyId?'隨收編軍隊運載／返程':'自有城市待命';

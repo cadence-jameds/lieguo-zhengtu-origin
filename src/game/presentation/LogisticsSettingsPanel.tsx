@@ -1,11 +1,12 @@
+import type {WorldRead} from '../presentationModel';
 import {useState} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import {resourceKeys} from '../formal/model';
 import {defaultLogisticsSettings,logisticsAllocation} from '../formal/logisticsAllocation';
 import type {ProjectId} from '../formal/ids';
 import {LABELS} from './artMap';
 /** One city owns one reserve and fixed, non-lending vehicle allocations. */
-export function LogisticsSettingsPanel({world:w,city:c,issue,busy,wonderProjectId}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;wonderProjectId?:ProjectId}){
+export function LogisticsSettingsPanel({world:w,city:c,issue,busy,wonderProjectId}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;wonderProjectId?:ProjectId}){
  const [settings,setSettings]=useState(()=>{const value=defaultLogisticsSettings(c);if(wonderProjectId&&value.wonder?.projectId!==wonderProjectId)value.wonder={projectId:wonderProjectId,maxCaravans:0,enabled:false};return value;}),[rules,setRules]=useState(()=>structuredClone(c.autoLogistics??[]));
  const owned=w.cities.filter(d=>d.ownerFactionId===c.ownerFactionId&&d.id!==c.id),a=logisticsAllocation({...c,autoLogistics:rules,logisticsSettings:settings});
  const valid=a.allocated<=a.total&&[settings.manualCaravans,...resourceKeys.map(r=>settings.reserve[r]),...rules.map(r=>r.maxCaravans),settings.wonder?.maxCaravans??0].every(n=>Number.isSafeInteger(n)&&n>=0)&&(!settings.wonder?.enabled||settings.wonder.maxCaravans>0)&&rules.every(r=>r.maxCaravans>0)&&new Set(rules.map(r=>r.destinationCityId)).size===rules.length;

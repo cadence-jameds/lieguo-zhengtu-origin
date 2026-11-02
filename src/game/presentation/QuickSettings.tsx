@@ -1,6 +1,7 @@
+import type {WorldRead} from '../presentationModel';
 import {useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
-import type {FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCommand} from '../formal/model';
 import type {CityId} from '../formal/ids';
 import {CampaignSettings} from './CampaignSettings';
 export const QUICK_SETTINGS_KEY='lieguo-quick-settings-v1';
@@ -35,7 +36,7 @@ function useFloatingSurface(){
  return surface;
 }
 function GearIcon(){return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" fillRule="evenodd" d="m9.5 2-.6 2.6-1.4.8-2.6-.7-2.5 4.3 1.9 1.9v1.6l-1.9 1.9 2.5 4.3 2.6-.7 1.4.8.6 2.6h5l.6-2.6 1.4-.8 2.6.7 2.5-4.3-1.9-1.9v-1.6l1.9-1.9-2.5-4.3-2.6.7-1.4-.8L14.5 2h-5ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>;}
-export function QuickSettings({world,cityId,issue,busy,preference,onPreference}:{world:FormalWorld;cityId:CityId;issue:(p:FormalCommand)=>void;busy:boolean;preference:QuickPreference;onPreference:(p:QuickPreference)=>void}){
+export function QuickSettings({world,cityId,issue,busy,preference,onPreference}:{world:WorldRead;cityId:CityId;issue:(p:FormalCommand)=>void;busy:boolean;preference:QuickPreference;onPreference:(p:QuickPreference)=>void}){
  const [open,setOpen]=useState(false),[dragging,setDragging]=useState(false),surface=useFloatingSurface();
  const drag=useRef<{id:number;x:number;y:number;px:number;py:number;moved:boolean;next:QuickPreference}|undefined>(undefined),suppressClick=useRef(false);
  useEffect(()=>{if(!preference.visible)setOpen(false);},[preference.visible]);

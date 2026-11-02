@@ -1,4 +1,4 @@
-import type {FormalWorld} from '../formal/model';
+import type {WorldRead} from '../presentationModel';
 import {buildable,fieldDistribution,terrainAt} from '../formal/terrain';
 import {spatial} from '../formal/spatial';
 import {tilePath,type Point} from './mapGeometry';
@@ -18,8 +18,8 @@ export class SpecialFieldCache{
  get(seed:number,x:number,y:number){if(seed!==this.seed){this.seed=seed;this.values.clear();}const key=y*384+x;if(this.values.has(key)){const v=this.values.get(key);this.values.delete(key);this.values.set(key,v);return v;}this.misses++;const v=specialClassification(fieldDistribution(seed,x,y));this.values.set(key,v);if(this.values.size>8192)this.values.delete(this.values.keys().next().value!);return v;}
  get size(){return this.values.size;}
 }
-export function specialSettlementTile(world:FormalWorld,x:number,y:number){if(!buildable(terrainAt(world,x,y)))return false;const at=spatial(world).at(x,y);return !at.city&&!at.site&&!at.reservation;}
-export function visibleSpecialFields(world:FormalWorld,bounds:{minX:number;maxX:number;minY:number;maxY:number},screen:(p:Point)=>Point,width:number,height:number,preferences:SpecialPreferences,cache:SpecialFieldCache){
+export function specialSettlementTile(world:WorldRead,x:number,y:number){if(!buildable(terrainAt(world,x,y)))return false;const at=spatial(world).at(x,y);return !at.city&&!at.site&&!at.reservation;}
+export function visibleSpecialFields(world:WorldRead,bounds:{minX:number;maxX:number;minY:number;maxY:number},screen:(p:Point)=>Point,width:number,height:number,preferences:SpecialPreferences,cache:SpecialFieldCache){
  const points:(Point&{kind:SpecialKind;label:string})[]=[],minX=Math.max(0,Math.floor(bounds.minX)),maxX=Math.min(world.dimensions.width-1,Math.ceil(bounds.maxX)),minY=Math.max(0,Math.floor(bounds.minY)),maxY=Math.min(world.dimensions.height-1,Math.ceil(bounds.maxY));
  // Explicit LOD budget: overview does no classification and never scans 147456 tiles.
  const area=Math.max(0,maxX-minX+1)*Math.max(0,maxY-minY+1);if(!preferences.enabled||area>SPECIAL_FIELD_AREA_LIMIT)return {points,visited:0,misses:0,lodHidden:preferences.enabled&&area>SPECIAL_FIELD_AREA_LIMIT};

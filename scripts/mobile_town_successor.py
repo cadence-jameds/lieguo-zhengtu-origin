@@ -36,7 +36,9 @@ def validate(root=ROOT):
     assert set(record['changes']) == SOURCES
     for path, entry in record['changes'].items():
         assert entry['before'] == sha(previous(root, BASE, path))
-        assert entry['after'] == sha(previous(root, UI, path)) == sha((root / path).read_bytes()), ('Unrecorded UI edit', path)
+        assert entry['after'] == sha(previous(root, UI, path)), ('Original UI source changed', path)
+        from b10_r3_04_successor import accepts as projection_accepts
+        assert entry['after'] == sha((root / path).read_bytes()) or projection_accepts(path,entry['after'],root), ('Unrecorded UI edit', path)
     assert set(record['invariants']) == INVARIANTS
     for path, digest in record['invariants'].items():
         assert digest == sha(previous(root, BASE, path)), ('Original calibration digest changed', path)

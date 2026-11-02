@@ -1,3 +1,4 @@
+import * as projectionMaps from '../admissionMap';
 import * as ledger from './commandLedger';
 import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {commandId} from './ids';
@@ -16,7 +17,9 @@ import {validateFormalWorld} from './schema';
 import {playerOrderBase} from '../orderAdmission';
 import {submitFormalOrder} from './reducer';
 import {governanceBase} from '../governanceAdmission';
-import {applyWorldPatch} from '../worldStream';
+// Observe committed domain state separately from the real v2 UI wire/store.
+let projectionBridge:import('./projectionTestSupport').ProjectionTestBridge;
+vi.mock('../worldStream',async(importOriginal)=>{const real=await importOriginal<typeof import('../worldStream')>(),{ProjectionTestBridge}=await import('./projectionTestSupport');return {...real,WorldStream:class extends real.WorldStream{constructor(){const bridge=new ProjectionTestBridge(false);projectionBridge=bridge;super(crypto.randomUUID(),bridge.reader);}}};});
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),reportStatus:vi.fn().mockResolvedValue({unread:0,alerts:0,counts:{all:0,battle:0,chronicle:0}}),reportAction:vi.fn()}));
 vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let messages:Record<string,any>[],port:{postMessage:(r:Record<string,any>)=>void;onmessage:((e:{data:unknown})=>void)|null},initial:FormalWorld;
@@ -25,9 +28,9 @@ async function until(test:()=>boolean){await vi.waitFor(()=>expect(test()).toBe(
 let realNow=0;
 beforeEach(async()=>{
  vi.restoreAllMocks();realNow=0;vi.spyOn(performance,'now').mockImplementation(()=>realNow);
- vi.resetModules();vi.doMock('./commandLedger',()=>ledger);vi.clearAllMocks();messages=[];initial=createFormalFixture();
+ vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);vi.doMock('./commandLedger',()=>ledger);vi.clearAllMocks();messages=[];initial=createFormalFixture();
  storage.loadWithOffline.mockResolvedValue({game:initial,recovered:false});storage.save.mockImplementation(async(w:FormalWorld)=>w);storage.startCampaign.mockImplementation(async(w:FormalWorld)=>w);storage.restore.mockResolvedValue(initial);storage.importSave.mockResolvedValue(initial);
- port={postMessage:r=>messages.push(structuredClone(r)),onmessage:null};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',vi.fn());
+ port={postMessage:r=>messages.push(structuredClone(projectionBridge.receive(r))),onmessage:null};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',vi.fn());
  await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];
 });
 it('active Worker does not acknowledge or switch a draft until persistence resolves',async()=>{
@@ -56,7 +59,7 @@ for(const type of ['restore','import'] as const)it(`${type} mid-transaction fail
 it('restart loads durable receipts and replay does not submit a second save',async()=>{
  const cmd=order(initial,'persist',{type:'city.rename',cityId:fixtureIds.home,name:'甲'});send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));
  const committed=messages.find(r=>r.type==='state')!.world;storage.loadWithOffline.mockResolvedValue({game:committed,recovered:false});messages=[];
- vi.resetModules();await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));
+ vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);await import('../runtime.worker');send({type:'load'});await until(()=>messages.some(r=>r.type==='state'));messages=[];send({type:'command',order:cmd});await until(()=>messages.some(r=>r.type==='commandAck'));
  expect(messages.find(r=>r.type==='commandAck')!.ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);
 });
 
@@ -163,11 +166,11 @@ for(const speed of [1,3,6,10,25])it(`${speed}X command admission uses real Index
  }finally{await p.db.delete();}
 });
 
-it('the active presentation stream sends committed patches and can recover a full snapshot',async()=>{
- const w=createFormalWorld({campaign:'patch-worker',seed:90217,speed:25});storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});send({type:'load',stateMode:'patch'});await until(()=>messages.some(r=>r.type==='state'));expect(messages.find(r=>r.type==='state')!.world).toEqual(w);messages=[];
- send({type:'command',order:order(w,'patch-build',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));const state=messages.find(r=>r.type==='state')!;expect(state.world).toBeUndefined();expect(state.patch.changes.worldLayer).toBeUndefined();const started=applyWorldPatch(w,state.patch)!;expect(started.cities[0].economy!.construction).toHaveLength(1);messages=[];
- const job=started.cities[0].economy!.construction[0];realNow=Math.ceil(job.durationMs/25);(vi.mocked(setInterval).mock.calls[0][0] as ()=>void)();await until(()=>messages.some(r=>r.type==='state'));const completion=messages.find(r=>r.type==='state')!,finished=applyWorldPatch(started,completion.patch)!;expect(finished.cities[0].fields![0].level).toBe(1);messages=[];
- send({type:'snapshot'});await until(()=>messages.some(r=>r.type==='state'));expect(messages.find(r=>r.type==='state')!.world).toEqual(finished);expect(messages.find(r=>r.type==='state')!.patch).toBeUndefined();
+it('the active v2 stream sends committed entity deltas and rebuilds a complete history-free snapshot',async()=>{
+ const w=createFormalWorld({campaign:'patch-worker',seed:90217,speed:25});storage.loadWithOffline.mockResolvedValue({game:w,recovered:false});send({type:'load',stateMode:'projection-v2'});await until(()=>messages.some(r=>r.type==='state'));expect(messages.find(r=>r.type==='state')!.world).toEqual(w);messages=[];
+ send({type:'command',order:order(w,'patch-build',{type:'field.upgrade',cityId:w.cities[0].id,slot:0})});await until(()=>messages.some(r=>r.type==='commandAck'));const wire=projectionBridge.wires.filter(r=>r.type==='state').at(-1);expect(wire.world).toBeUndefined();expect(wire.projection.kind).toBe('patch');expect(wire.projection.sections.staticMap).toBeUndefined();expect(wire.projection.entities.cities).toHaveLength(1);const started=projectionBridge.store.getWorld()!;expect(started.cities[0].economy!.construction).toHaveLength(1);messages=[];
+ const job=started.cities[0].economy!.construction[0];realNow=Math.ceil(job.durationMs/25);(vi.mocked(setInterval).mock.calls[0][0] as ()=>void)();await until(()=>messages.some(r=>r.type==='state'));const finished=projectionBridge.store.getWorld()!;expect(finished.cities[0].fields![0].level).toBe(1);messages=[];
+ send({type:'snapshot'});await until(()=>messages.some(r=>r.type==='state'));const snapshot=projectionBridge.wires.filter(r=>r.type==='state').at(-1);expect(snapshot.projection.kind).toBe('snapshot');expect(snapshot.projection.world.commandReceipts).toBeUndefined();expect(snapshot.projection.world.ledger).toBeUndefined();const {projection:_before,...before}=finished,{projection:_after,...after}=projectionBridge.store.getWorld()!;expect(after).toEqual(before);
 });
 
 it('a queued visibility boundary freezes dev time before waiting behind an atomic save and duplicate barriers are idempotent',async()=>{

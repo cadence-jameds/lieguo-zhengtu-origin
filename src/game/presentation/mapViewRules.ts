@@ -1,4 +1,4 @@
-import type {FormalWorld} from '../formal/model';
+import type {TerrainRead} from '../presentationModel';
 import {inverse,type Point} from './mapGeometry';
 
 // v0.30.2 detail rules, with a separate LOD for a fitted 384×384 overview.
@@ -29,7 +29,7 @@ export function mapPickBounds(camera:Point&{z:number},width:number,height:number
  return mapQueryBounds(camera,width,height,{left:pointer.x-e.x,top:pointer.y-e.below,right:pointer.x+e.x,bottom:pointer.y+e.above});
 }
 export const MAP_TERRAIN_MARGIN=50;
-export function overviewGeometry(w:Pick<FormalWorld,'dimensions'>){
+export function overviewGeometry(w:Pick<TerrainRead,'dimensions'>){
  const width=20*(w.dimensions.width+w.dimensions.height+4*MAP_TERRAIN_MARGIN);
  return {origin:{x:-20*(w.dimensions.height+2*MAP_TERRAIN_MARGIN),y:-10-20*MAP_TERRAIN_MARGIN},width,height:width/2,scale:.075};
 }

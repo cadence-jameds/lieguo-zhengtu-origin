@@ -1,9 +1,11 @@
+import {memo} from 'react';
+import type {WorldRead} from './presentationModel';
 import {LogisticsSettingsPanel} from './presentation/LogisticsSettingsPanel';
 import {colonizationUnits,readyColonizationUnit} from './formal/settlement';
 import {uniqueCultureName} from './formal/cultureNames';
 import {buildingLevel} from './formal/catalogB3';
 import {useState} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld,Resources} from './formal/model';
+import type {FormalCity,FormalCommand,Resources} from './formal/model';
 import {resourceKeys} from './formal/model';
 import {UNIT_CATALOG} from './formal/unitCatalog';
 import {spatial} from './formal/spatial';
@@ -11,7 +13,7 @@ import {Icon} from './presentation/Art';
 import {Countdown} from './presentation/LiveValues';
 import {useLiveCity} from './presentation/liveClock';
 const labels={food:'穀',wood:'木',stone:'石',gold:'金'};
-export default function FormalDevelopmentPanel({world,city:sourceCity,issue,busy,mode='settlement',targetPoint}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mode?:'settlement'|'logistics';targetPoint?:{x:number;y:number}}){
+function FormalDevelopmentPanel({world,city:sourceCity,issue,busy,mode='settlement',targetPoint}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mode?:'settlement'|'logistics';targetPoint?:{x:number;y:number}}){
  const city=useLiveCity(world,sourceCity)!;
  const [x,setX]=useState(targetPoint?.x??city.x+1),[y,setY]=useState(targetPoint?.y??city.y),[name,setName]=useState(()=>uniqueCultureName(world.factions.find(f=>f.id===city.ownerFactionId)!.civilizationId,world.seed+world.sequences.project,'city',world.cities.map(c=>c.name))),[escort,setEscort]=useState<Record<string,number>>({spearman:20}),[destination,setDestination]=useState(''),[cargo,setCargo]=useState<Resources>({food:100,wood:0,stone:0,gold:0});
  const f=world.factions.find(f=>f.id===city.ownerFactionId)!,owned=spatial(world).owned(f.id).filter(c=>c.id!==city.id),target=owned.find(c=>c.id===destination)??owned[0],settlement=world.settlements?.find(p=>p.sourceCityId===city.id&&p.phase!=='travelling');
@@ -26,3 +28,5 @@ export default function FormalDevelopmentPanel({world,city:sourceCity,issue,busy
  {world.logistics?.filter(t=>t.sourceCityId===city.id).map(t=><p key={t.shipmentId}>{t.caravans} 支商隊・{t.phase==='outbound'?'運貨中':'空車返回'}・剩餘 <Countdown at={t.phase==='outbound'?t.arrivalAt:t.returnAt} world={world}/></p>)}
 </>} </section>;
 }
+
+export default memo(FormalDevelopmentPanel);

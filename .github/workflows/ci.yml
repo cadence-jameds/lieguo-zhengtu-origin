@@ -50,6 +50,9 @@ jobs:
           python3 scripts/test_b10_r3_02_successor.py
           python3 scripts/b10_r3_03_successor.py
           python3 scripts/test_b10_r3_03_successor.py
+          python3 scripts/b10_r3_04_successor.py
+          python3 scripts/test_b10_r3_04_successor.py
+          node scripts/verify-projection-boundaries.mjs
           node scripts/verify-preview-boundaries.mjs
       - name: Player feedback art scope and evidence
         run: python3 scripts/check-player-feedback.py

@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {endProtection} from './protection';
 import {armyUpkeep} from './military';
 import {canDestroyWonder} from './wonder';
@@ -17,8 +18,8 @@ import {enqueue,requireRule,settleCity,settleFaction,HOUR} from './economy';
 import type {EventScheduler} from './scheduler';
 import {spatial,invalidateSpatial} from './spatial';
 import {route,segmentTravelDistance} from './routing';
-export function canReinforce(w:FormalWorld,a:FormalCity['ownerFactionId'],b:FormalCity['ownerFactionId']){return diplomaticRelation(w,a,b)==='own'||diplomaticRelation(w,a,b)==='friendly'||!w.politics&&!!w.factions.find(f=>f.id===a)?.empireId&&w.factions.find(f=>f.id===a)?.empireId===w.factions.find(f=>f.id===b)?.empireId;}
-export function hostileAllowed(w:FormalWorld,a:FormalCity['ownerFactionId'],b:FormalCity['ownerFactionId']){return a!==b&&!canReinforce(w,a,b);}
+export function canReinforce(w:WorldRead,a:FormalCity['ownerFactionId'],b:FormalCity['ownerFactionId']){return diplomaticRelation(w,a,b)==='own'||diplomaticRelation(w,a,b)==='friendly'||!w.politics&&!!w.factions.find(f=>f.id===a)?.empireId&&w.factions.find(f=>f.id===a)?.empireId===w.factions.find(f=>f.id===b)?.empireId;}
+export function hostileAllowed(w:WorldRead,a:FormalCity['ownerFactionId'],b:FormalCity['ownerFactionId']){return a!==b&&!canReinforce(w,a,b);}
 function scheduleMarch(w:FormalWorld,a:MissionArmy,from:Point,to:Point,s:EventScheduler,returning=false){
  const r=route(w,from,to),f=w.factions.find(f=>f.id===a.ownerFactionId)!;const seconds=marchSeconds(a.units,f),times=[0];for(let i=1;i<r.path.length;i++)times.push(times[i-1]+segmentTravelDistance(w,r.path[i-1],r.path[i])*seconds*1000);
  a.marchTerrainVersion=2;a.marchSecondsPerTile=seconds;a.path=r.path;a.segmentTimes=times.map(Math.ceil);a.position={x:from.x,y:from.y};a.departedAt=w.time;a.arrivalAt=w.time+Math.max(1,Math.ceil(times.at(-1)!));a.status=returning?'returning':'outbound';a.movementEventId=enqueue(w,s,{type:returning?'army.return':'army.arrive',armyId:a.id,at:a.arrivalAt});invalidateSpatial(w);

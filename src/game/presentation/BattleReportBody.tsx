@@ -1,9 +1,10 @@
+import type {WorldRead} from '../presentationModel';
 import {effectiveAwareness,modernUnitAuthorized} from '../formal/modernAwareness';
 import {isModernUnit} from '../formal/unitCatalog';
 import {CONQUEST_REASON_LABELS,SIEGE_ROUND_LIMIT} from '../formal/battleProgress';
 import {ScoutIntelDetails} from './ScoutIntelDetails';
 import type {BattleReportPayload,BattleParticipant,SiegeChange} from '../formal/combatModel';
-import type {FormalWorld,FormalReport} from '../formal/model';
+import type {FormalReport} from '../formal/model';
 import {UNIT_CATALOG} from '../formal/unitCatalog';
 import {resourceKeys} from '../formal/model';
 import {fmt,Cost} from './UI';
@@ -21,7 +22,7 @@ function finalDamage(p:BattleReportPayload){
  return [...wall,...changes.values()].filter(s=>s.before>s.after);
 }
 const total=(items:BattleParticipant[],key:'before'|'after')=>items.reduce<Record<string,number>>((out,p)=>{for(const [id,n] of Object.entries(p[key]))out[id]=(out[id]??0)+n;return out;},{});
-export function BattleReportBody({battle:p,world,report}:{battle:BattleReportPayload;world:FormalWorld;report?:FormalReport}){
+export function BattleReportBody({battle:p,world,report}:{battle:BattleReportPayload;world:WorldRead;report?:FormalReport}){
  const player=world.factions.find(f=>f.id===world.playerFactionId)!,identified=effectiveAwareness(world,player.id)>=20;
  const unitName=(id:string)=>isModernUnit(id)&&!identified&&!modernUnitAuthorized(player,id)?'未辨識現代部隊':UNIT_CATALOG[id]?.name??id;
  const counts=(u:Record<string,number>)=>Object.entries(u).map(([id,n])=>`${unitName(id)} ×${fmt(n)}`).join('、')||'無';

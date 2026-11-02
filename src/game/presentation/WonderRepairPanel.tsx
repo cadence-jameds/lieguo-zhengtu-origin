@@ -1,5 +1,6 @@
+import type {WorldRead} from '../presentationModel';
 import {useState} from 'react';
-import type {FormalCommand,FormalWorld,LargeProject} from '../formal/model';
+import type {FormalCommand,LargeProject} from '../formal/model';
 import {resourceKeys,zeroResources} from '../formal/model';
 import {repairQuote,repairWork,wonderAvailable} from '../formal/wonderCondition';
 import {wonderRemaining} from '../formal/wonder';
@@ -7,7 +8,7 @@ import {caravanStatus,citySnapshot} from '../formal/economy';
 import {Cost,fmt} from './UI';
 import {Countdown} from './LiveValues';
 import {LABELS} from './artMap';
-export function WonderRepairPanel({world:w,wonder,issue,busy}:{world:FormalWorld;wonder:LargeProject;issue:(p:FormalCommand)=>void;busy:boolean}){
+export function WonderRepairPanel({world:w,wonder,issue,busy}:{world:WorldRead;wonder:LargeProject;issue:(p:FormalCommand)=>void;busy:boolean}){
  const [sourceId,setSourceId]=useState(''),[cargo,setCargo]=useState(zeroResources),owned=w.cities.filter(c=>c.ownerFactionId===w.playerFactionId),source=owned.find(c=>c.id===sourceId)??owned[0],d=wonder.wonder?.durability;
  if(!source||!d)return null;
  const repair=w.largeProjects.find(p=>p.repair?.wonderProjectId===wonder.projectId&&p.repair.phase!=='completed'),r=repair?.repair,missing=d.maximum-d.current,quote=missing>0?repairQuote(missing):undefined,available=wonderAvailable(w,wonder),stock=citySnapshot(w,source.id)!.stock,caravans=caravanStatus(w,source),remaining=repair?wonderRemaining(repair):zeroResources(),total=resourceKeys.reduce((n,k)=>n+cargo[k],0),valid=available&&total>0&&total<=caravans.available*2000&&resourceKeys.every(k=>Number.isSafeInteger(cargo[k])&&cargo[k]>=0&&cargo[k]<=Math.min(remaining[k],stock[k]));

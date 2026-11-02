@@ -1,6 +1,7 @@
+import type {WorldRead} from '../presentationModel';
 import type {FormalReport,FormalWorld} from './model';
 /** Intel delivery is personal; political membership is not an intelligence-sharing grant. */
-export function sanitizeScoutReport(_w:FormalWorld,r:FormalReport):FormalReport{
+export function sanitizeScoutReport(_w:WorldRead,r:FormalReport):FormalReport{
  const p=r.battle;if(!p||p.mission!=='scout')return r;
  const attacker=p.attackers.some(a=>a.ownerFactionId===r.ownerFactionId),defender=p.defenders.some(a=>a.ownerFactionId===r.ownerFactionId);
  if(p.intel&&!attacker){const {battle:_battle,...record}=r;return {...record,category:'system',title:'遭到偵察',text:'敵方斥候曾觀測本方城市。舊版誤寄的攻方專屬情報已移除。'};}

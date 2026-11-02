@@ -1,8 +1,9 @@
+import type {WorldRead} from '../presentationModel';
 import {useEffect,useState} from 'react';
-import type {FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCommand} from '../formal/model';
 import type {CityId} from '../formal/ids';
 import {CAMPAIGN_SPEEDS,OFFLINE_HOURS,type CampaignSpeed,type OfflineHours} from '../formal/campaignTime';
-export function CampaignSettings({world,cityId,issue,busy,onClose}:{world:FormalWorld;cityId:CityId;issue:(p:FormalCommand)=>void;busy:boolean;onClose?:()=>void}){
+export function CampaignSettings({world,cityId,issue,busy,onClose}:{world:WorldRead;cityId:CityId;issue:(p:FormalCommand)=>void;busy:boolean;onClose?:()=>void}){
  const [speed,setSpeed]=useState(world.speed as CampaignSpeed),[hours,setHours]=useState<OfflineHours>(world.offlineHours??12),[submitted,setSubmitted]=useState(false);
  useEffect(()=>{if(submitted&&!busy){setSubmitted(false);}},[busy,submitted]);
  useEffect(()=>{setSpeed(world.speed as CampaignSpeed);setHours(world.offlineHours??12);},[world.speed,world.offlineHours]);
