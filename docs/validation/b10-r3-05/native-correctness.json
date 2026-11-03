@@ -1,0 +1,471 @@
+{
+  "source": "386944191ad03ea475c901ebb1f1e840de1fa076",
+  "harnessFix": "8e82ab34a8ea7a888c4e63c191a540624cdf77ac",
+  "profiling": false,
+  "nativeFaults": {
+    "environment": "Native Chromium154/Linux, real IndexedDB and Dedicated Worker; injected QuotaExceededError and actual terminate(), synthetic data only; not Android",
+    "cases": [
+      {
+        "name": "native T1 quota failure has no durable row and does not claim success",
+        "status": "PASS",
+        "data": {
+          "pending": "pending",
+          "worldUnchanged": true
+        }
+      },
+      {
+        "name": "native optimized T2 aborts every authoritative boundary and retry has one effect",
+        "status": "PASS",
+        "data": {
+          "boundaries": [
+            "ledger-segment-write",
+            "ledger-result-write",
+            "ledger-index-write",
+            "ledger-manifest-write",
+            "ledger-head-write",
+            "report-write",
+            "backup-write",
+            "world-write",
+            "authority-write",
+            "metadata-write",
+            "result-write"
+          ]
+        }
+      },
+      {
+        "name": "native persisted Manifest and Segment corruption cannot be hidden by a warm proof",
+        "status": "PASS",
+        "data": [
+          "LedgerManifests",
+          "LedgerSegments",
+          "LedgerResults"
+        ]
+      },
+      {
+        "name": "native keyset boundary, missing/corrupt/extra derived index and world checksum use verified Recovery",
+        "status": "PASS",
+        "data": {
+          "derivedRepair": true,
+          "checksumRecovery": true,
+          "count": 1100
+        }
+      },
+      {
+        "name": "actual Worker terminate during export leaves original authority intact",
+        "status": "PASS",
+        "data": {
+          "action": "export",
+          "allTablesUnchanged": true,
+          "commandState": "committed"
+        }
+      },
+      {
+        "name": "actual Worker terminate during import leaves original authority intact",
+        "status": "PASS",
+        "data": {
+          "action": "import",
+          "allTablesUnchanged": true,
+          "commandState": "committed"
+        }
+      },
+      {
+        "name": "actual Worker terminate during restore leaves original authority intact",
+        "status": "PASS",
+        "data": {
+          "action": "restore",
+          "allTablesUnchanged": true,
+          "commandState": "committed"
+        }
+      },
+      {
+        "name": "native writer handoff rejects the stale writer at unchanged revision",
+        "status": "PASS",
+        "data": {
+          "staleRejected": true
+        }
+      },
+      {
+        "name": "two native pages preserve the actual formal writer Web Lock and release",
+        "status": "PASS",
+        "data": {
+          "unavailable": true,
+          "available": true
+        }
+      }
+    ]
+  },
+  "nativeUI": {
+    "environment": "Native Chromium desktop Linux container, CPU quota 2; actual IndexedDB/Workers/React; synthetic data only; not Android",
+    "browser": "154.0.8037.57",
+    "cases": [
+      {
+        "name": "actual React UI / Worker v2, rapid commands, lost Ack, lost projection and restart",
+        "status": "PASS",
+        "data": {
+          "first": {
+            "projection": {
+              "protocolVersion": 2,
+              "campaignId": "campaign:b1-fixture",
+              "branch": 1,
+              "writerEpoch": 1,
+              "sessionId": "507b84e3-8506-4934-9a81-9e1a420152e2",
+              "projectionSequence": 2,
+              "revision": 2
+            },
+            "rows": 1,
+            "hasHistory": false
+          },
+          "before": {
+            "ids": [
+              "command:61dfce57-1add-4a5f-b210-45bdd3d0ec65",
+              "command:ea52267f-b8a0-4831-ae28-5c123723838e",
+              "command:77d264d8-0fa6-4bb6-95a4-d97fc4649aff",
+              "command:6583ff16-20d2-4648-8e47-a72f3b1bf885",
+              "command:a7c4a294-ade6-4d6a-99b1-a780fd7d321d",
+              "command:ee143203-4029-4d3c-835d-d3a905499ccb"
+            ],
+            "name": "連續0",
+            "interactiveLongTasks": [],
+            "snapshotRequestedAfterLoss": true,
+            "wireHistory": false
+          },
+          "restored": {
+            "rows": [
+              {
+                "id": "command:ee143203-4029-4d3c-835d-d3a905499ccb",
+                "state": "needs-confirmation"
+              },
+              {
+                "id": "command:a7c4a294-ade6-4d6a-99b1-a780fd7d321d",
+                "state": "needs-confirmation"
+              },
+              {
+                "id": "command:6583ff16-20d2-4648-8e47-a72f3b1bf885",
+                "state": "committed"
+              },
+              {
+                "id": "command:77d264d8-0fa6-4bb6-95a4-d97fc4649aff",
+                "state": "committed"
+              },
+              {
+                "id": "command:ea52267f-b8a0-4831-ae28-5c123723838e",
+                "state": "committed"
+              },
+              {
+                "id": "command:61dfce57-1add-4a5f-b210-45bdd3d0ec65",
+                "state": "committed"
+              }
+            ],
+            "name": "連續0"
+          },
+          "lastFrameRecoveryMs": 374.70000000298023,
+          "subsequentTickOrQuerySent": false
+        }
+      },
+      {
+        "name": "native quick/full import, Recovery and resync project the committed world without replaying identities",
+        "status": "PASS",
+        "data": {
+          "quick": true,
+          "full": true,
+          "recovery": true,
+          "oldIdentity": "rolled-back"
+        }
+      },
+      {
+        "name": "99 AI / 25X: durable intake stays independent; Preview death cannot cancel the formal command",
+        "status": "PASS",
+        "data": {
+          "durableDuring": true,
+          "decisions": 99,
+          "effects": 1,
+          "speed": 25
+        }
+      },
+      {
+        "name": "actual GameApp city/building UI and independent Preview Worker submit through the durable Inbox",
+        "status": "PASS",
+        "data": {
+          "ack": {
+            "commandId": "command:203ef5ea-3044-4ad8-8c81-edbb8e0cbb90",
+            "status": "committed",
+            "revision": 3
+          },
+          "interactiveLongTasks": [
+            {
+              "start": 5016.79999999702,
+              "duration": 57
+            },
+            {
+              "start": 5875.5999999940395,
+              "duration": 239
+            },
+            {
+              "start": 7178.5999999940395,
+              "duration": 109
+            },
+            {
+              "start": 7329.29999999702,
+              "duration": 62
+            }
+          ],
+          "projectionHasHistory": false,
+          "workers": [
+            "/src/game/runtime.worker.ts",
+            "/src/game/constructionPreview.worker.ts"
+          ],
+          "durableAfterReload": "committed"
+        }
+      },
+      {
+        "name": "60k native persisted history loads into the actual GameApp without transporting the ledger",
+        "status": "PASS",
+        "data": {
+          "seeded": {
+            "campaignId": "campaign:projection-benchmark-60000",
+            "receipts": 60000,
+            "stored": 60000
+          },
+          "snapshotBytes": [
+            467795
+          ],
+          "historyOnWire": false,
+          "coldLongTasks": [
+            {
+              "start": 1419.7999999970198,
+              "duration": 78
+            },
+            {
+              "start": 1503.2999999970198,
+              "duration": 65
+            },
+            {
+              "start": 1620.7000000029802,
+              "duration": 60
+            },
+            {
+              "start": 8555.29999999702,
+              "duration": 110
+            },
+            {
+              "start": 9518,
+              "duration": 58
+            },
+            {
+              "start": 13286.5,
+              "duration": 97
+            },
+            {
+              "start": 14889,
+              "duration": 90
+            },
+            {
+              "start": 15897.70000000298,
+              "duration": 78
+            },
+            {
+              "start": 17700.90000000596,
+              "duration": 80
+            },
+            {
+              "start": 17785.70000000298,
+              "duration": 95
+            },
+            {
+              "start": 17906.40000000596,
+              "duration": 78
+            },
+            {
+              "start": 18884.20000000298,
+              "duration": 92
+            },
+            {
+              "start": 19054.90000000596,
+              "duration": 321
+            },
+            {
+              "start": 19389.29999999702,
+              "duration": 79
+            },
+            {
+              "start": 19519.29999999702,
+              "duration": 236
+            }
+          ],
+          "loadToCityInteractiveMs": 19981
+        }
+      },
+      {
+        "name": "background Recovery without a UI transition token clears old top-level drafts before another click",
+        "status": "PASS",
+        "data": {
+          "sourceBranch": 2,
+          "newBranch": 3,
+          "oldRenameDraftClosed": true,
+          "transitionIdSupplied": false
+        }
+      }
+    ],
+    "performance": []
+  },
+  "crossSourceCompatibility": {
+    "oldSource": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+    "newSource": "3869441",
+    "cases": [
+      {
+        "direction": "forward",
+        "status": "PASS",
+        "receipts": 1001,
+        "originalStates": [
+          "committed",
+          "rejected",
+          "needs-confirmation"
+        ],
+        "format": "lieguo-formal-ledger-save-v1",
+        "dbSchema": 3
+      },
+      {
+        "direction": "backward",
+        "status": "PASS",
+        "receipts": 1001,
+        "originalStates": [
+          "committed",
+          "rejected",
+          "needs-confirmation"
+        ],
+        "format": "lieguo-formal-ledger-save-v1",
+        "dbSchema": 3
+      }
+    ]
+  },
+  "additionalSingleSampleMainCPU": [
+    {
+      "durationMs": 7517.126,
+      "topLeafSampleMs": [
+        [
+          "(idle) @ ",
+          6265.945000000016
+        ],
+        [
+          "(program) @ ",
+          528.2529999999999
+        ],
+        [
+          "exports.jsxDEV @ react_jsx-dev-runtime.js?v=05a5923e",
+          155.02800000000008
+        ],
+        [
+          " @ CityScenes.tsx",
+          55.94900000000001
+        ],
+        [
+          "(garbage collector) @ ",
+          40.00999999999999
+        ],
+        [
+          "ReactElement @ react_jsx-dev-runtime.js?v=05a5923e",
+          38
+        ],
+        [
+          "createTask @ ",
+          22.209
+        ],
+        [
+          "_parse @ zod.js?v=05a5923e",
+          20.381999999999998
+        ],
+        [
+          " @ reportClock.ts",
+          18.750999999999998
+        ],
+        [
+          "react_stack_bottom_frame @ react-dom_client.js?v=05a5923e",
+          16.928
+        ],
+        [
+          " @ ",
+          14.747
+        ],
+        [
+          "query @ ",
+          13.264000000000001
+        ],
+        [
+          "updateStyle @ client",
+          9.969999999999999
+        ],
+        [
+          "receive @ presentationStore.ts",
+          9.704
+        ],
+        [
+          "commitUpdate @ react-dom_client.js?v=05a5923e",
+          9.422
+        ],
+        [
+          " @ ReleaseLog.tsx",
+          9.09
+        ],
+        [
+          "now @ ",
+          9.014
+        ],
+        [
+          "validatePropertiesInDevelopment @ react-dom_client.js?v=05a5923e",
+          8.453000000000001
+        ],
+        [
+          "runWithFiberInDEV @ react-dom_client.js?v=05a5923e",
+          8.08
+        ],
+        [
+          "updateProperties @ react-dom_client.js?v=05a5923e",
+          8.08
+        ],
+        [
+          "recursivelyTraverseMutationEffects @ react-dom_client.js?v=05a5923e",
+          7.802
+        ],
+        [
+          "getComponentNameFromType @ react_jsx-dev-runtime.js?v=05a5923e",
+          6.835000000000001
+        ],
+        [
+          "reconcileChildrenArray @ react-dom_client.js?v=05a5923e",
+          6.517999999999999
+        ],
+        [
+          "beginWork @ react-dom_client.js?v=05a5923e",
+          5.979
+        ],
+        [
+          "references @ presentationStore.ts",
+          5.32
+        ],
+        [
+          " @ saveLock.ts",
+          5.115
+        ],
+        [
+          "registerDirectEvent @ react-dom_client.js?v=05a5923e",
+          5.109
+        ],
+        [
+          "GameApp @ GameApp.tsx",
+          4.585
+        ],
+        [
+          "logComponentRender @ react-dom_client.js?v=05a5923e",
+          4.493
+        ],
+        [
+          "coerceRef @ react-dom_client.js?v=05a5923e",
+          4.378
+        ]
+      ],
+      "largeSampleGaps": [],
+      "caveat": "Sampled Main CPU/idle wall intervals, not exact Native Worker GC. Profiler adds overhead; diagnostic only."
+    }
+  ],
+  "caveat": "Single Main diagnostic does not replace 5-sample cold distribution or explain the original 795ms outlier. Vite development mode, not production/Android SLA."
+}

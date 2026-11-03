@@ -12,7 +12,7 @@
   ],
   "schemaVersion": 1,
   "baseCommit": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
-  "implementationCommit": "eae7af8c97661ef288d9af3f973bfcece0bbec7d",
+  "implementationCommit": "8e82ab34a8ea7a888c4e63c191a540624cdf77ac",
   "changes": {
     "docs/validation/b10-r3-05/CONTRACT.md": {
       "before": null,
@@ -46,6 +46,10 @@
       "before": null,
       "after": "9c5e29337a0c595c5c56d61d0d9e4093fdd4dcf14ce4c2f695ca2c7525f13498"
     },
+    "scripts/profile-persistence-main-browser.mjs": {
+      "before": null,
+      "after": "735fc2348c29ae146ec4575ab53ac2dae6e6cc236e8913c6793459279251176f"
+    },
     "scripts/profile-persistence.mjs": {
       "before": null,
       "after": "61652d3f5332416a521ad8eefee99e822c8aa232348e17971b08f3d78d135fed"
@@ -56,7 +60,7 @@
     },
     "scripts/verify-persistence-browser.mjs": {
       "before": null,
-      "after": "6144feec9ab21be232ba1c911064d71d387cc481b3f5e770a798886f16288ddb"
+      "after": "40f547eb5d70387fe31064ddd2b8c2c592155c2e06725710cae1de0471be40b4"
     },
     "scripts/verify-persistence-compat-browser.mjs": {
       "before": null,
@@ -78,13 +82,17 @@
       "before": null,
       "after": "195ecb9d11eaa845ec68fb20d3422a4639ac8fa7aae06fe77ef59fef572de3d1"
     },
+    "src/game/formal/ledgerImportOrderR305.test.ts": {
+      "before": null,
+      "after": "27b279c1c78c0d41df3a5586fcfed38a33edac94c2111a62312de5b8343d4e9e"
+    },
     "src/game/formal/persistenceOptimizationR305.test.ts": {
       "before": null,
       "after": "3a85166b726940f9cce639c83733d274b7b60cf8dd1e22bd2b1fbcd2a1bc7bc7"
     },
     "src/game/ledgerStore.ts": {
       "before": "edf44ea723d993dad64919ea7dddcf37d4d9087a498424bc37e41e62c3a9252b",
-      "after": "78f80a7dad0342f1007df99c3e3bb37690be698be76c8d7bd4cd15f87e8eb23c"
+      "after": "90b66332c3f48f8b5e040057ad64f1f9c1719d94b9da4174c74f4b4c27b85b22"
     },
     "src/game/persistence.ts": {
       "before": "ecfae472b57df39d54894971f642e4bf70beae57b0b13127903b95c1e8999ed9",
