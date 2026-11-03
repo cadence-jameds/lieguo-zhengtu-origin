@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
-  "implementationCommit": "571fa6f3653daedfc0f491f884009ac51aa56e33",
+  "implementationCommit": "0b4f385de7e66912f5d20d7eb72c5421ab47ae2c",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-r3-06/compatibility.json",
@@ -23,9 +23,25 @@
       "before": null,
       "after": "90083171972b1b9267c3d21a7340d18b71b9fd3403a8366f7771b0965f78aad7"
     },
+    "docs/validation/b10-r3-06/REPORT.md": {
+      "before": null,
+      "after": "36ae2dd62f3dd50d24d7779dc98d69322224da2e9e7a53448e0a390a308cc3e0"
+    },
     "docs/validation/b10-r3-06/native-faults.json": {
       "before": null,
-      "after": "a36e65b1210f4099c4921f791ef9bad0aa0e250c4742aeec0804f9e85001e4d5"
+      "after": "8a89eb5e1d7263d7c307c6704a06c802a689396686e36c352579b2fe55da6343"
+    },
+    "docs/validation/b10-r3-06/native-persistence-regression.json": {
+      "before": null,
+      "after": "2c43b079cc76753fabc6d0c9eacaf99056017703bf74b23db6378fff0aea1865"
+    },
+    "docs/validation/b10-r3-06/native-summary.json": {
+      "before": null,
+      "after": "85aca5235a8e5a8ed43a0baceaf54d9c5588eb60554e12221f84c406f67d9458"
+    },
+    "docs/validation/b10-r3-06/native-ui-regression.json": {
+      "before": null,
+      "after": "b779cff54c940341bd735b545fbbe4889ae1954ad76cfb759e4b010d9b8b2b57"
     },
     "docs/validation/b10-r3-06/parity.json": {
       "before": null,
@@ -38,6 +54,14 @@
     "docs/validation/b10-r3-06/profile-before.json": {
       "before": null,
       "after": "83113d72d6eab7e812c04da4acfd3dc39e33b4b04e08cc99dcd431d8482699e1"
+    },
+    "docs/validation/b10-r3-06/profile-summary.json": {
+      "before": null,
+      "after": "17434c6c10a336f555b787f29ecbe332a786ba15603b7fcb2aca549ba4290313"
+    },
+    "docs/validation/b10-r3-06/worker-memory.json": {
+      "before": null,
+      "after": "538da6880d53d398c34ca18f75be9a1eeed2deab1f617723892574bfd64aeb10"
     },
     "releases/config.json": {
       "before": "d5619df4948f48cfe849c07aae8ec33a2f73a163c45d0e6908583aa0aabb0f27",
