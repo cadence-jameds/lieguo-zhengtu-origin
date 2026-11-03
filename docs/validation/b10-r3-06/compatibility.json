@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
-  "implementationCommit": "803b174db5d2be0adef24b94b22782856ae365b9",
+  "implementationCommit": "0fb8b084e6c3fa0cc5e6cdd912c11a92d4ddcf05",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-r3-06/compatibility.json",
@@ -26,6 +26,10 @@
     "docs/validation/b10-r3-06/native-faults.json": {
       "before": null,
       "after": "a36e65b1210f4099c4921f791ef9bad0aa0e250c4742aeec0804f9e85001e4d5"
+    },
+    "docs/validation/b10-r3-06/parity.json": {
+      "before": null,
+      "after": "2247a2754df41e38cc20bd7b827d8964fe62dea097e91529df7fe1f1c10fb461"
     },
     "docs/validation/b10-r3-06/profile-30-day-before.json": {
       "before": null,
@@ -105,7 +109,7 @@
     },
     "scripts/summarize-runtime-benchmark.mjs": {
       "before": null,
-      "after": "f90c8956527f2c677b11894176001bdc6514a0a19dad70da07d7e6358c277e5e"
+      "after": "1ea283aff3c6901a0358ed6a344de1d1f48306c2482114f996bd654b2e794b86"
     },
     "scripts/verify-runtime-browser.mjs": {
       "before": null,
