@@ -1,0 +1,296 @@
+{
+  "browser": "154.0.8037.57",
+  "selection": "all five cases",
+  "method": "Localhost, actual PR58 and final PR59 production builds, native SW/cache/IndexedDB/Runtime/Preview. Native IDB abort injection is isolated to a disposable test context. Desktop headless, not Android.",
+  "cases": [
+    {
+      "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+      "status": "PASS",
+      "data": {
+        "row": {
+          "playerBase": {
+            "revision": 4,
+            "fingerprint": "[\"campaign:projection-benchmark-0\",\"faction:000\",{\"type\":\"city.rename\",\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\"},[\"明州武陵關\"]]"
+          },
+          "campaignId": "campaign:projection-benchmark-0",
+          "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+          "issuerId": "faction:000",
+          "order": {
+            "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+            "campaignId": "campaign:projection-benchmark-0",
+            "issuerId": "faction:000",
+            "issuedWorldTime": 10875,
+            "expectedRevision": 4,
+            "payload": {
+              "type": "city.rename",
+              "cityId": "city:000",
+              "name": "正式更新保留原始結果"
+            }
+          },
+          "fingerprint": "{\"campaignId\":\"campaign:projection-benchmark-0\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\",\"type\":\"city.rename\"}}",
+          "originalRevision": 4,
+          "originalBranch": 1,
+          "branch": 1,
+          "writerEpoch": 2,
+          "state": "committed",
+          "createdAt": 1793722664901,
+          "deadline": 1793722784901,
+          "attempts": 0,
+          "nextAttemptAt": 0,
+          "sequence": 1,
+          "ack": {
+            "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+            "status": "committed",
+            "revision": 5
+          },
+          "originalResult": {
+            "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+            "issuerId": "faction:000",
+            "fingerprint": "{\"campaignId\":\"campaign:projection-benchmark-0\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\",\"type\":\"city.rename\"}}",
+            "state": "committed",
+            "ack": {
+              "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+              "status": "committed",
+              "revision": 5
+            },
+            "order": {
+              "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+              "campaignId": "campaign:projection-benchmark-0",
+              "issuerId": "faction:000",
+              "issuedWorldTime": 10875,
+              "expectedRevision": 4,
+              "payload": {
+                "type": "city.rename",
+                "cityId": "city:000",
+                "name": "正式更新保留原始結果"
+              }
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "release-probe",
+            "at": 1793722665727
+          },
+          {
+            "type": "save-request",
+            "at": 1793722665733
+          },
+          {
+            "type": "durable-save-ack",
+            "at": 1793722665837
+          },
+          {
+            "type": "skip-waiting",
+            "at": 1793722665837
+          },
+          {
+            "type": "release-probe",
+            "at": 1793722665838
+          },
+          {
+            "type": "controllerchange",
+            "at": 1793722665853
+          },
+          {
+            "type": "navigation",
+            "at": 1793722665854
+          },
+          {
+            "type": "command-ack",
+            "ack": {
+              "commandId": "command:417e26a7-6857-4a5b-830f-e587ea7d2026",
+              "status": "committed",
+              "revision": 5
+            },
+            "at": 1793722667960
+          }
+        ],
+        "offlineOriginalAck": true
+      }
+    },
+    {
+      "name": "offline-sw refuses activation and later retries safely",
+      "status": "FAIL",
+      "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+      "step": "retry update and verify target",
+      "phase": "failed",
+      "trace": [
+        {
+          "type": "release-probe",
+          "at": 1793722674781
+        },
+        {
+          "type": "save-request",
+          "at": 1793722674783
+        },
+        {
+          "type": "durable-save-ack",
+          "at": 1793722674904
+        },
+        {
+          "type": "skip-waiting",
+          "at": 1793722674904
+        },
+        {
+          "type": "release-probe",
+          "at": 1793722674911
+        }
+      ],
+      "body": "列國征途\n河谷戰役 · 單機持續世界\n\n百國並起，文明由此啟程\n\n列國征途：始源\n\n從一座城邦出發，發展資源、研究科技、整備軍隊並拓殖河谷，在持續運轉的世界中建立屬於你的勢力。\n\n目前載入 v0.30.99更新日期 2026-11-03\n接續你的戰役\n文明\n中國\n戰役時間\n0時 13分\n戰役速度\n25X\n領主\n玩家\n\n獨立領主世界 · 100 位領主 · 384×384\n\n新遊戲預設：戰役速度 1X · 起始 200 名居民\n\n開始新遊戲\n載入進度\n⚙ 設定\n載入進度會接續目前戰役；新遊戲會先進入文明與名字設定。\n\n停留首頁時世界照常運作；進度保存在此裝置。\n\n本次更新 · v0.30.99\n\n遊戲進度已成功保存（本次保存已確認）；新版啟用等待逾時，目前頁面保留，更新未完成；可安全重試。\n\n更新前會等待正式保存完成。\n\n檢查更新\n保存進度並載入新版\n\n2026-11-03 · 建置 c370ff8\n\n遊戲建置預覽\n此為待審建置；正式玩家更新摘要須在合併前通過檢查。\n近期版本與過往紀錄\n命令收件匣"
+    },
+    {
+      "name": "bad-install refuses activation and later retries safely",
+      "status": "PASS",
+      "data": {
+        "failedTrace": [
+          {
+            "type": "release-probe",
+            "at": 1793722710462
+          }
+        ],
+        "retry": {
+          "row": {
+            "playerBase": {
+              "revision": 4,
+              "fingerprint": "[\"campaign:projection-benchmark-0\",\"faction:000\",{\"type\":\"city.rename\",\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\"},[\"明州武陵關\"]]"
+            },
+            "campaignId": "campaign:projection-benchmark-0",
+            "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+            "issuerId": "faction:000",
+            "order": {
+              "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+              "campaignId": "campaign:projection-benchmark-0",
+              "issuerId": "faction:000",
+              "issuedWorldTime": 13150,
+              "expectedRevision": 4,
+              "payload": {
+                "type": "city.rename",
+                "cityId": "city:000",
+                "name": "正式更新保留原始結果"
+              }
+            },
+            "fingerprint": "{\"campaignId\":\"campaign:projection-benchmark-0\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\",\"type\":\"city.rename\"}}",
+            "originalRevision": 4,
+            "originalBranch": 1,
+            "branch": 1,
+            "writerEpoch": 2,
+            "state": "committed",
+            "createdAt": 1793722709827,
+            "deadline": 1793722829827,
+            "attempts": 0,
+            "nextAttemptAt": 0,
+            "sequence": 1,
+            "ack": {
+              "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+              "status": "committed",
+              "revision": 5
+            },
+            "originalResult": {
+              "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+              "issuerId": "faction:000",
+              "fingerprint": "{\"campaignId\":\"campaign:projection-benchmark-0\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\",\"type\":\"city.rename\"}}",
+              "state": "committed",
+              "ack": {
+                "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+                "status": "committed",
+                "revision": 5
+              },
+              "order": {
+                "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+                "campaignId": "campaign:projection-benchmark-0",
+                "issuerId": "faction:000",
+                "issuedWorldTime": 13150,
+                "expectedRevision": 4,
+                "payload": {
+                  "type": "city.rename",
+                  "cityId": "city:000",
+                  "name": "正式更新保留原始結果"
+                }
+              }
+            }
+          },
+          "events": [
+            {
+              "type": "release-probe",
+              "at": 1793722741005
+            },
+            {
+              "type": "save-request",
+              "at": 1793722741008
+            },
+            {
+              "type": "durable-save-ack",
+              "at": 1793722741085
+            },
+            {
+              "type": "skip-waiting",
+              "at": 1793722741086
+            },
+            {
+              "type": "release-probe",
+              "at": 1793722741086
+            },
+            {
+              "type": "controllerchange",
+              "at": 1793722741103
+            },
+            {
+              "type": "navigation",
+              "at": 1793722741104
+            },
+            {
+              "type": "command-ack",
+              "ack": {
+                "commandId": "command:4ed609e3-c329-4fb2-badb-088c3b0140e0",
+                "status": "committed",
+                "revision": 5
+              },
+              "at": 1793722743263
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "aborted durable save never activates or claims save success",
+      "status": "PASS",
+      "data": {
+        "events": [
+          {
+            "type": "release-probe",
+            "at": 1793722748484
+          },
+          {
+            "type": "save-request",
+            "at": 1793722748487
+          }
+        ],
+        "originalAckPreserved": true
+      }
+    },
+    {
+      "name": "page closes after native Durable notification; reopen resolves the same ID once",
+      "status": "PASS",
+      "data": {
+        "order": {
+          "commandId": "command:ff44d22b-26a7-4ab8-a50e-280b412ff5b5",
+          "campaignId": "campaign:projection-benchmark-0",
+          "issuerId": "faction:000",
+          "issuedWorldTime": 75562,
+          "expectedRevision": 5,
+          "payload": {
+            "type": "city.rename",
+            "cityId": "city:000",
+            "name": "關頁後同一原意"
+          }
+        },
+        "state": "committed",
+        "effects": {
+          "command:ff44d22b-26a7-4ab8-a50e-280b412ff5b5": 1
+        },
+        "scope": "Desktop page close, not Android process kill; T2 may have completed before page closure"
+      }
+    }
+  ]
+}

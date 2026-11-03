@@ -1,0 +1,232 @@
+{
+  "scope": "All failures preserved; no original tests, timeouts, worker counts, source rules or acceptance history changed.",
+  "attempts": [
+    {
+      "stage": "bootstrap",
+      "result": "FAIL then resolved",
+      "cause": "Default network sandbox could not reach the configured proxy; network-enabled command fetched the exact six heads. npm default cache was unwritable; npm ci --cache /tmp/b10-npm-cache succeeded. No credentials printed."
+    },
+    {
+      "stage": "merge simulation launcher",
+      "result": "FAIL then resolved",
+      "cause": "Node child_process commit-tree reported EPERM after returning an object; Python subprocess recreated/verifed unreachable commit objects. No refs changed."
+    },
+    {
+      "stage": "project build check initial invocation",
+      "result": "FAIL then resolved",
+      "cause": "Project-path checker invoked on root build without required GITHUB_ACTIONS/GITHUB_REPOSITORY. Actual project production build and final path/release checks PASS."
+    },
+    {
+      "stage": "historical native ledger",
+      "result": "FAIL then resolved",
+      "cause": "One obsolete state.world read after six passing cases. Exact SHA-bound v2 PresentationStore adapter retains all assertions/counts/deadlines. Final seven native cases plus all original performance sizes PASS."
+    },
+    {
+      "stage": "ledger adapter first invocation",
+      "result": "FAIL then resolved",
+      "cause": "Validation adapter initially pointed at the wrong output directory. Corrected to artifacts/b10-r3-03/formal; baseline harness unchanged."
+    },
+    {
+      "stage": "persistence native output",
+      "result": "FAIL then resolved",
+      "cause": "Missing artifacts output directory. Created isolated directory; final nine cases PASS."
+    },
+    {
+      "stage": "150k validation driver",
+      "result": "FAIL then resolved",
+      "cause": "Driver closed Dexie and called load without reopen. Added explicit open; same five samples and assertions. Data safety PASS, oversized backup remains CAPACITY_LIMIT."
+    },
+    {
+      "stage": "production SW harness",
+      "result": "Initial failures retained",
+      "cause": "Ambiguous home button and reentry into settings rather than city; corrected selectors/navigation. Installation-watch phase synchronization and explicit retry follow native product lifecycle. Every step remains 30000ms; product download/activation budgets unchanged."
+    },
+    {
+      "stage": "production SW final full five cases",
+      "result": "4 PASS / 1 FAIL",
+      "cause": "503-download then retry: durable-save Ack and SKIP_WAITING observed; no controllerchange/navigation; native activation timeout shown safely. Not overwritten by single-case or prior successful samples. P1 remains."
+    }
+  ],
+  "earlierProductionRuns": [
+    {
+      "artifact": "artifacts/b10-final/production-sw-attempt1.json",
+      "sha256": "e0f077d6816f1524fe6c4a32d4306ad47985cf6ebcac807ca8620ba8365ad521",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "FAIL",
+          "error": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '返回首頁', exact: true }) resolved to 2 elements:\n    1) <button class=\"brand\" aria-label=\"返回首頁\">…</button> aka getByLabel('返回首頁')\n    2) <button>返回首頁</button> aka getByText('返回首頁')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '返回首頁', exact: true })\u001b[22m\n",
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '返回首頁', exact: true }) resolved to 2 elements:\n    1) <button class=\"brand\" aria-label=\"返回首頁\">…</button> aka getByLabel('返回首頁')\n    2) <button>返回首頁</button> aka getByText('返回首頁')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '返回首頁', exact: true })\u001b[22m\n",
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '返回首頁', exact: true }) resolved to 2 elements:\n    1) <button class=\"brand\" aria-label=\"返回首頁\">…</button> aka getByLabel('返回首頁')\n    2) <button>返回首頁</button> aka getByText('返回首頁')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '返回首頁', exact: true })\u001b[22m\n",
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "FAIL",
+          "error": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '返回首頁', exact: true }) resolved to 2 elements:\n    1) <button class=\"brand\" aria-label=\"返回首頁\">…</button> aka getByLabel('返回首頁')\n    2) <button>返回首頁</button> aka getByText('返回首頁')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '返回首頁', exact: true })\u001b[22m\n",
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "FAIL",
+          "error": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '返回首頁', exact: true }) resolved to 2 elements:\n    1) <button class=\"brand\" aria-label=\"返回首頁\">…</button> aka getByLabel('返回首頁')\n    2) <button>返回首頁</button> aka getByText('返回首頁')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '返回首頁', exact: true })\u001b[22m\n",
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "artifacts/b10-final/production-sw-attempt2.json",
+      "sha256": "5975e14155979782b8802593420b067d9728dd14e93c0a417838b2439957f2b4",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "FAIL",
+          "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.formal-city-panel') to be visible\u001b[22m\n",
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "artifacts/b10-final/production-sw-attempt3.json",
+      "sha256": "e03b3a893ace64a1885d4c40b73370387ef650c499617c8359f4bfbe0d15d5da",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "artifacts/b10-final/production-sw-attempt4.json",
+      "sha256": "bde780d2927360249a554827592410c2b457dccab1e8e72611716ea9ff4c0a40",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "artifacts/b10-final/production-sw-attempt5.json",
+      "sha256": "fecf30d7f67ae850aa0ceb39523713916dcab542f207a53cc3b1754db72c58f8",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    }
+  ]
+}

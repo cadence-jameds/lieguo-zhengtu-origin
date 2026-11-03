@@ -1,0 +1,226 @@
+[
+  {
+    "pr": 54,
+    "observedUTC": "2026-11-03T14:54:03.238Z",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/54",
+    "head": "feat/b10-r3-01-durable-player-commands",
+    "head_sha": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+    "base": "main",
+    "base_sha": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "merged": false,
+    "merge_commit_sha": "e9f7b818b71d920168c67987e723f04787013d69",
+    "commits": 12,
+    "workflowRuns": {
+      "workflow_runs": [
+        {
+          "id": 41282458194,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 377,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41282458194/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41282458194/logs",
+          "workflow_id": 382396115
+        },
+        {
+          "id": 41282432769,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "run_number": 376,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41282432769/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41282432769/logs",
+          "workflow_id": 382396115
+        }
+      ]
+    }
+  },
+  {
+    "pr": 55,
+    "observedUTC": "2026-11-03T14:54:03.239Z",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/55",
+    "head": "feat/b10-r3-02-async-construction-preview",
+    "head_sha": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+    "base": "feat/b10-r3-01-durable-player-commands",
+    "base_sha": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "merged": false,
+    "merge_commit_sha": "df6aa8957764d4be0d8ab4455017b2094b1961bd",
+    "commits": 11,
+    "workflowRuns": {
+      "workflow_runs": [
+        {
+          "id": 41296235796,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 382,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41296235796/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41296235796/logs",
+          "workflow_id": 382396115
+        },
+        {
+          "id": 41296190050,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "run_number": 381,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41296190050/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41296190050/logs",
+          "workflow_id": 382396115
+        }
+      ]
+    }
+  },
+  {
+    "pr": 56,
+    "observedUTC": "2026-11-03T14:54:03.239Z",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/56",
+    "head": "feat/b10-r3-03-command-ledger",
+    "head_sha": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+    "base": "feat/b10-r3-02-async-construction-preview",
+    "base_sha": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "merged": false,
+    "merge_commit_sha": "c037a4e77bb8e1d821ca9dfdaf6fe96788d8f614",
+    "commits": 17,
+    "workflowRuns": {
+      "workflow_runs": [
+        {
+          "id": 41426784041,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 399,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41426784041/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41426784041/logs",
+          "workflow_id": 382396115
+        }
+      ]
+    }
+  },
+  {
+    "pr": 57,
+    "observedUTC": "2026-11-03T14:54:03.239Z",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/57",
+    "head": "feat/b10-r3-04-ui-projection",
+    "head_sha": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+    "base": "feat/b10-r3-03-command-ledger",
+    "base_sha": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "merged": false,
+    "merge_commit_sha": "1480eeba1bd01018a19d6b257ab5dac466d9dc35",
+    "commits": 12,
+    "workflowRuns": {
+      "workflow_runs": [
+        {
+          "id": 41548741684,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 407,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41548741684/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41548741684/logs",
+          "workflow_id": 382396115
+        },
+        {
+          "id": 41548722708,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "run_number": 406,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41548722708/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41548722708/logs",
+          "workflow_id": 382396115
+        }
+      ]
+    }
+  },
+  {
+    "pr": 58,
+    "observedUTC": "2026-11-03T14:54:03.239Z",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/58",
+    "head": "feat/b10-r3-05-persistence-optimization",
+    "head_sha": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+    "base": "feat/b10-r3-04-ui-projection",
+    "base_sha": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "merged": false,
+    "merge_commit_sha": "c8935bffc258f6391d87f5867d653993a1390e23",
+    "commits": 11,
+    "workflowRuns": {
+      "workflow_runs": [
+        {
+          "id": 41579721205,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 414,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41579721205/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41579721205/logs",
+          "workflow_id": 382396115
+        },
+        {
+          "id": 41579623568,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "run_number": 413,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41579623568/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41579623568/logs",
+          "workflow_id": 382396115
+        }
+      ]
+    }
+  },
+  {
+    "pr": 59,
+    "observedUTC": "2026-11-03T14:54:03.239Z",
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/59",
+    "head": "feat/b10-r3-06-ai-scheduling",
+    "head_sha": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+    "base": "feat/b10-r3-05-persistence-optimization",
+    "base_sha": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "merged": false,
+    "merge_commit_sha": "df1a008437dc05de8e4be75d2bb160b838b8a3f7",
+    "commits": 16,
+    "workflowRuns": {
+      "workflow_runs": [
+        {
+          "id": 41629201376,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 419,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41629201376/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41629201376/logs",
+          "workflow_id": 382396115
+        },
+        {
+          "id": 41629030997,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "run_number": 418,
+          "jobs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41629030997/jobs",
+          "logs_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41629030997/logs",
+          "workflow_id": 382396115
+        }
+      ]
+    }
+  }
+]
