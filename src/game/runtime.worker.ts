@@ -36,6 +36,8 @@ let intakeQueue:Promise<unknown>=Promise.resolve();
 const workBudget=new RuntimeWorkBudget();
 let queryQueue:Promise<unknown>=Promise.resolve();
 const queryIntake=new WeakMap<RuntimeRequest,Promise<unknown>>();
+const controls=new Set<RuntimeRequest['type']>(['load','resume','away','start','restore','import','reset']);
+let controlPending=0;
 let world:FormalWorld|null=null,draining=false,tickPending=false,tickRunning=false,away=false;
 const requests:RuntimeRequest[]=[];
 const awayBoundaries=new WeakMap<RuntimeRequest,{target:number;wallAt:number}>();
@@ -60,8 +62,8 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
  world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
- if(r.type==='commandQuery'){let row=await commandStatus(r.campaignId,r.commandId);if(!row){await queryIntake.get(r);row=await commandStatus(r.campaignId,r.commandId);}post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
- if(r.type==='commandList'){post({type:'commandList',rows:await commandPage(r.before)});return;}
+ if(r.type==='commandQuery'){const row=await stableRead(async()=>{let found=await commandStatus(r.campaignId,r.commandId);if(!found){await queryIntake.get(r);found=await commandStatus(r.campaignId,r.commandId);}return found;});post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
+ if(r.type==='commandList'){post({type:'commandList',rows:await stableRead(()=>commandPage(r.before))});return;}
  if(r.type==='snapshot'){state(true);return;}
  if(r.type==='exportLegacy'){post({type:'export',text:await exportLegacyCampaign(),mode:'historical'});return;}
  if(r.type==='resume'&&world&&!away){state();return;}
@@ -81,7 +83,7 @@ async function handle(r:RuntimeRequest){
     post({type:'progress',progress:fraction,events});
    }
   });
-  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;if(world)await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();
+  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
   // Resume durable intake in its persisted order. Branch switches have already
   // terminalized old Pending atomically; a new writer rechecks original intent.
   const recovered=await pendingCommands();
@@ -94,12 +96,12 @@ async function handle(r:RuntimeRequest){
  if(r.type==='start'){
   const name=r.name.trim();if(!name||name.length>24||/[\x00-\x1f\x7f]/.test(name))throw new Error('請輸入 1～24 字的名字。');
   const fixture=createFormalWorld({campaign:crypto.randomUUID(),seed:r.seed,speed:r.speed,name,civilizationId:r.civilizationId,offlineHours:r.offlineHours});
-  enableAutonomy(fixture);const committed=await startCampaign(fixture);world=committed;await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  enableAutonomy(fixture);const committed=await startCampaign(fixture);await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
   const committed=r.type==='restore'?await restore(r.id,true):await importSave(r.text,true);
-  world=committed;await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='cityIntel'){if(!world||r.campaignId!==world.campaignId){post({type:'cityIntel',queryId:r.queryId,error:'戰役已變更，請重新開啟情報窗。'});return;}if(r.generation!==undefined&&(!Number.isSafeInteger(r.generation)||r.generation<0))throw new Error('無效的據點世代。');if(!Number.isSafeInteger(r.reportCursor)||r.reportCursor<1||!Number.isSafeInteger(r.time)||r.time<0)throw new Error('無效的情報游標。');const snapshot={...world,time:Math.min(world.time,r.time),sequences:{...world.sequences,report:Math.min(world.sequences.report,r.reportCursor)}};post({type:'cityIntel',queryId:r.queryId,data:await readCityIntel(snapshot,r.cityId,r.generation)});return;}
  if(!world)throw new Error('請先建立正式世界。');
@@ -110,6 +112,13 @@ async function handle(r:RuntimeRequest){
  if(r.type==='reportPage'){post({type:'reportPage',data:await readReportPage(world,r.page,r.filter)});return;}
  if(r.type==='export'){await advanceAndSave();post({type:'export',text:await exportStoredSave(r.mode??'quick'),mode:r.mode??'quick'});return;}
  await advanceAndSave();if(r.type==='sync')post({type:'synced',requestId:r.requestId});
+}
+class QueryViewChanged extends Error{}
+/** A cache reference detects a concurrent publication; it is never an integrity
+ * proof. Each read still uses Persistence's verified authoritative result. */
+async function stableRead<T>(read:()=>Promise<T>):Promise<T>{
+ for(let attempt=0;attempt<3;attempt++){const source=world,context=writer,result=await read();if(world===source&&writer===context)return result;}
+ throw new QueryViewChanged('命令查詢期間權威版本持續更新，請稍後重新查詢。');
 }
 /** T1 is awaited here, but runs independently of the world/AI drain. */
 async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
@@ -182,7 +191,8 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
 async function runRequest(r:RuntimeRequest){
  try{await handle(r);}catch(error:unknown){
   const text=error instanceof Error?error.message:'正式提交失敗。';
-  if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
+  if(error instanceof QueryViewChanged)post({type:'notice',error:true,text});
+  else if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
   else if(r.type==='reportPage'||r.type==='reportStatus'||r.type==='reportAction')post({type:'notice',text:'戰報操作暫時失敗，請重試。'});
   else if(r.type==='cityIntel')post({type:'cityIntel',queryId:r.queryId,error:text});
@@ -198,7 +208,7 @@ async function drain(){
  try{
   while(requests.length||tickPending){
    const request=requests.shift();
-   if(request){await runRequest(request);continue;}
+   if(request){if(controls.has(request.type)){try{await queryQueue;await runRequest(request);}finally{controlPending--;}}else await runRequest(request);continue;}
    tickPending=false;tickRunning=true;
    try{if(!away)await advanceAndSave();}
    catch(error:unknown){retryAt=performance.now()+1000;post({type:'notice',error:true,text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}
@@ -213,9 +223,10 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
  // the private replay draft. A known durable ID never waits for unrelated
  // intake. An unknown ID waits for preceding T1 before reporting absence.
  // Mutating barriers retain the original foreground FIFO.
- if(r.type==='commandQuery'||r.type==='commandList'){
+ if((r.type==='commandQuery'||r.type==='commandList')&&!controlPending){
   queryIntake.set(r,intakeQueue);queryQueue=queryQueue.then(()=>runRequest(r)).catch(()=>{});return;
  }
+ if(controls.has(r.type))controlPending++;
  // Capture the visibility boundary before it can wait behind an atomic save.
  if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Math.max(0,Date.now()-(absolute-(performance.timeOrigin+foregroundFence)))});}
  requests.push(r);
