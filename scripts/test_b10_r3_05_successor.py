@@ -25,11 +25,12 @@ class PersistenceSuccessorTests(unittest.TestCase):
     f.write_bytes(before);manifest.write_bytes(original)
  def test_every_changed_byte_requires_pinned_commit(self):
   manifest=self.root/gate.RECORD;original=manifest.read_bytes()
-  for case in ['commit','grant','history']:
+  for case in ['commit','grant','history','support']:
    r=json.loads(original)
    if case=='commit':r['implementationCommit']=gate.BASE
    elif case=='grant':r['grants']['src/game/formal/scheduler.ts']=['0'*64]
-   else:r['historical'].pop(next(iter(r['historical'])))
+   elif case=='history':r['historical'].pop(next(iter(r['historical'])))
+   else:r['implementationSupport'].append('src/game/formal/reducer.ts')
    manifest.write_text(json.dumps(r))
    with self.assertRaises(AssertionError):gate.validate(self.root)
    manifest.write_bytes(original)

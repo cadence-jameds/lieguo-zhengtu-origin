@@ -51,3 +51,5 @@ PR57同環境基準：本機2378 PASS／2 TIMEOUT／1 SKIP（150k原120秒、Run
 完整歷史冷驗證、匯出／匯入仍O(歷史)，必要byte核對與Root驗證不能刪除；warm證明重用仍比較實際完整資料。Quick/Full依舊100MiB上限，資料長期成長可能超限並明確拒絕匯出；未實作壓縮或新串流格式。永久immutable損毀不自動修復。
 
 R3-06仍負責AI catch-up／victory計算與排程競爭；本批不改AI決策、Scheduler、速度或事件順序。Android實機、長期真quota與純Worker retained heap仍待驗。B5 E1 HOLD／Astra未PASS／實體手機未驗保留；Draft不代表發布驗收。
+
+原生量測另攔下高密度區段bulk clone回退：0974106的60k Recovery p95約7.60秒，對9.63秒基準僅約21%改善，未達30%目標。依實際readLedgerArchive耗時由約0.4升到1.7秒，改為只對稀疏鏈合併讀取，高密度鏈保留逐鏈讀取。25項新增定向與Typecheck通過；原097數據保留，不能冒稱最後來源結果。

@@ -1,11 +1,22 @@
 {
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/b10-r3-05/REPORT.md",
+    "docs/validation/b10-r3-05/compatibility.json",
+    "scripts/b10_r3_03_successor.py",
+    "scripts/b10_r3_04_successor.py",
+    "scripts/b10_r3_05_successor.py",
+    "scripts/benchmark-persistence-contention-browser.mjs",
+    "scripts/test_b10_r3_05_successor.py",
+    "scripts/verify-projection-boundaries.mjs"
+  ],
   "schemaVersion": 1,
   "baseCommit": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
-  "implementationCommit": "097410658611af08596df40d54fd35b21904d069",
+  "implementationCommit": "eae7af8c97661ef288d9af3f973bfcece0bbec7d",
   "changes": {
     "docs/validation/b10-r3-05/CONTRACT.md": {
       "before": null,
-      "after": "07d1ed7984036c2b4cc15fae35ad9c1b3a4a5f510b8e92b4cfb663c796a6e5bc"
+      "after": "842875a5c1e72d19317350d94020de14b82a8a98ff899a42b99ac28488da4120"
     },
     "docs/validation/b10-r3-05/PROFILE.md": {
       "before": null,
@@ -69,11 +80,11 @@
     },
     "src/game/formal/persistenceOptimizationR305.test.ts": {
       "before": null,
-      "after": "0e28b6972004fa4c054c12c75fd3ef44d5fa8ecf49352c78d84c74dfbd7326e0"
+      "after": "3a85166b726940f9cce639c83733d274b7b60cf8dd1e22bd2b1fbcd2a1bc7bc7"
     },
     "src/game/ledgerStore.ts": {
       "before": "edf44ea723d993dad64919ea7dddcf37d4d9087a498424bc37e41e62c3a9252b",
-      "after": "4a3b8dacca8c23d9ebba7f6ff489982cad955a83b4b9c5f391f5011750942926"
+      "after": "78f80a7dad0342f1007df99c3e3bb37690be698be76c8d7bd4cd15f87e8eb23c"
     },
     "src/game/persistence.ts": {
       "before": "ecfae472b57df39d54894971f642e4bf70beae57b0b13127903b95c1e8999ed9",

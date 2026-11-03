@@ -5,9 +5,10 @@ from pathlib import Path
 import b10_r3_04_successor as prior
 ROOT=Path(__file__).resolve().parents[1]
 BASE='dfa574a4de24fe9069df2a90d3edae6a64f191da'
-IMPLEMENTATION='097410658611af08596df40d54fd35b21904d069'
+IMPLEMENTATION='eae7af8c97661ef288d9af3f973bfcece0bbec7d'
 RECORD='docs/validation/b10-r3-05/compatibility.json'
-CHANGES={'scripts/measure-process-resources.py', 'src/game/formal/jsonDataEqual.ts', 'scripts/benchmark-persistence-cold-browser.mjs', 'scripts/benchmark-persistence-browser.mjs', 'docs/validation/b10-r3-05/CONTRACT.md', 'scripts/serve-persistence-validation.mjs', 'src/game/persistence.ts', 'scripts/benchmark-persistence-import-browser.mjs', 'src/game/formal/canonicalBytes.ts', 'src/game/formal/canonical.ts', 'scripts/profile-persistence.mjs', 'releases/notes/b10-r3-05-persistence-optimization.json', 'src/game/ledgerStore.ts', 'src/game/runtime.worker.ts', 'scripts/persistence-profile-plugin.mjs', 'scripts/verify-persistence-browser.mjs', 'src/game/formal/commandLedger.ts', 'docs/validation/b10-r3-05/PROFILE.md', 'src/game/formal/persistenceOptimizationR305.test.ts', 'scripts/verify-persistence-compat-browser.mjs'}
+IMPLEMENTATION_SUPPORT={'scripts/test_b10_r3_05_successor.py', 'scripts/verify-projection-boundaries.mjs', 'scripts/benchmark-persistence-contention-browser.mjs', 'docs/validation/b10-r3-05/REPORT.md', 'scripts/b10_r3_04_successor.py', 'scripts/b10_r3_05_successor.py', 'scripts/b10_r3_03_successor.py', 'docs/validation/b10-r3-05/compatibility.json', '.github/workflows/ci.yml'}
+CHANGES={'scripts/benchmark-persistence-browser.mjs', 'docs/validation/b10-r3-05/PROFILE.md', 'scripts/benchmark-persistence-cold-browser.mjs', 'src/game/persistence.ts', 'src/game/ledgerStore.ts', 'scripts/persistence-profile-plugin.mjs', 'scripts/benchmark-persistence-import-browser.mjs', 'docs/validation/b10-r3-05/CONTRACT.md', 'releases/notes/b10-r3-05-persistence-optimization.json', 'scripts/measure-process-resources.py', 'src/game/formal/canonical.ts', 'scripts/profile-persistence.mjs', 'src/game/formal/commandLedger.ts', 'src/game/formal/persistenceOptimizationR305.test.ts', 'scripts/verify-persistence-browser.mjs', 'src/game/runtime.worker.ts', 'src/game/formal/canonicalBytes.ts', 'scripts/verify-persistence-compat-browser.mjs', 'src/game/formal/jsonDataEqual.ts', 'scripts/serve-persistence-validation.mjs'}
 ADAPTERS={'scripts/b10_r3_04_successor.py','scripts/b10_r3_03_successor.py','scripts/verify-projection-boundaries.mjs','.github/workflows/ci.yml'}
 previous=prior.previous
 sha=prior.sha
@@ -38,6 +39,7 @@ def adapters():
  return result
 @lru_cache(maxsize=None)
 def expected_record():
+ actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines());assert actual==CHANGES|IMPLEMENTATION_SUPPORT,'Changed finite implementation scope'
  changes={}
  for p in sorted(CHANGES):
   try:before=sha(previous(BASE,p))
@@ -56,7 +58,7 @@ def expected_record():
    if p in CHANGES:
     for d in ds:
      if d not in grants.setdefault(p,[]):grants[p].append(d)
- return {'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'changes':changes,'grants':grants,'invariants':{p:sha(previous(BASE,p)) for p in sorted(paths('src')-CHANGES)},'historical':{p:sha(previous(BASE,p)) for p in sorted(paths('docs/b6-v95','docs/b6-v96','docs/b6-v97','docs/validation','releases/notes'))},'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
+ return {'implementationSupport':sorted(IMPLEMENTATION_SUPPORT),'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'changes':changes,'grants':grants,'invariants':{p:sha(previous(BASE,p)) for p in sorted(paths('src')-CHANGES)},'historical':{p:sha(previous(BASE,p)) for p in sorted(paths('docs/b6-v95','docs/b6-v96','docs/b6-v97','docs/validation','releases/notes'))},'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
 def read_record(root=ROOT):
  path=root/RECORD
  if not path.exists():path=ROOT/RECORD
