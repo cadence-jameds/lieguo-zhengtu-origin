@@ -11,6 +11,7 @@ import {effectiveSpeed} from './formal/playtest';
 import {createFormalWorld} from './world';
 import {advanceFormal,submitFormalOrder} from './engine';
 import {advanceFormalCooperative} from './formal/reducer';
+import {RuntimeWorkBudget} from './runtimeWorkBudget';
 import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
 import type {FormalOrder,FormalWorld,FormalReport} from './formal/model';
 import {WorldStream} from './worldStream';
@@ -32,6 +33,8 @@ export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'res
 let writer:WriterContext|undefined;
 const intake=new WeakMap<RuntimeRequest,Promise<InboxCommand>>();
 let intakeQueue:Promise<unknown>=Promise.resolve();
+const workBudget=new RuntimeWorkBudget();
+let queryQueue:Promise<unknown>=Promise.resolve();
 let world:FormalWorld|null=null,draining=false,tickPending=false,tickRunning=false,away=false;
 const requests:RuntimeRequest[]=[];
 const awayBoundaries=new WeakMap<RuntimeRequest,{target:number;wallAt:number}>();
@@ -52,7 +55,7 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
  const hasEvents=world.events.some(e=>e.at<=target);
  // Only complete events yield. The draft remains private until this entire
  // target replay and its one durable transaction finish.
- const result=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8}),committed=await save(result.world,result.reports,world.revision,wallAt);
+ const result=await advanceFormalCooperative(world,target,undefined,workBudget.advance),committed=await save(result.world,result.reports,world.revision,wallAt);
  world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
@@ -130,7 +133,7 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
    const target=targetTime();
    if(!worldPaused(world)){
     if(world.events.some(e=>e.at<=target)){
-     const before=admission,replay=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8});
+     const before=admission,replay=await advanceFormalCooperative(world,target,undefined,workBudget.advance);
      admission=replay.world;catchupReports.push(...replay.reports);caughtUp=true;
      // Revalidate the execution intent again after AI catch-up, preserving the
      // original row. No targets, quantities or original revisions are rewritten.
@@ -205,6 +208,12 @@ async function drain(){
 function scheduleDrain(){if(draining)return;draining=true;void drain();}
 self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
  const r=event.data;
+ // Queries read persisted authority and the last committed UI source, never
+ // the private replay draft. Respect preceding intake, but do not wait behind
+ // world catch-up/T2. Mutating barriers retain the original foreground FIFO.
+ if(r.type==='commandQuery'||r.type==='commandList'){
+  const precedingIntake=intakeQueue;queryQueue=queryQueue.then(async()=>{await precedingIntake;await runRequest(r);}).catch(()=>{});return;
+ }
  // Capture the visibility boundary before it can wait behind an atomic save.
  if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Math.max(0,Date.now()-(absolute-(performance.timeOrigin+foregroundFence)))});}
  requests.push(r);
@@ -213,6 +222,7 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
   const branch=r.projection?.branch??r.branch??writer?.branch;
   const intent:CommandIntent={playerBase:r.playerBase,governanceBase:r.governanceBase,extinctionBase:r.extinctionBase};
   const received=intakeQueue.then(()=>{const p=r.projection;if(p&&(p.protocolVersion!==2||p.sessionId!==stream.sessionId||p.projectionSequence>stream.projectionSequence||p.campaignId!==r.order.campaignId||p.writerEpoch!==writer?.writerEpoch||p.branch!==r.branch||p.revision<r.order.expectedRevision||r.order.payload.type!=='governance.set'&&p.revision!==r.order.expectedRevision||!Number.isSafeInteger(p.projectionSequence)||p.projectionSequence<1))throw Error('畫面版本或寫入權已變更，請重新同步後確認原操作。');return receiveCommand(r.order,intent,branch);});intake.set(r,received);
+  workBudget.trackIntake(received);
   intakeQueue=received.then(row=>{post({type:'commandDurable',row});},()=>{});
  }
  scheduleDrain();

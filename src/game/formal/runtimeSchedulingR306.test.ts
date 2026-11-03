@@ -1,0 +1,45 @@
+import * as maps from '../admissionMap';
+import * as ledger from './commandLedger';
+import 'fake-indexeddb/auto';
+import {afterEach,beforeEach,expect,it,vi} from 'vitest';
+import {FormalPersistence} from '../persistence';
+import {PresentationStore} from '../presentationStore';
+import {captureIntent} from '../durableCommands';
+import {RuntimeWorkBudget} from '../runtimeWorkBudget';
+import {advanceFormal,advanceFormalCooperative} from './reducer';
+import {createFormalFixture} from './fixture';
+import {eventId} from './ids';
+import {order} from './testSupport';
+import type {FormalWorld} from './model';
+let p:FormalPersistence,messages:any[],view:PresentationStore,send:(data:any)=>void;
+const until=(f:()=>boolean)=>vi.waitFor(()=>expect(f()).toBe(true));
+const done=(id:string)=>messages.some(m=>m.type==='requestDone'&&m.requestId===id);
+async function boot(){
+ vi.resetModules();vi.doMock('../admissionMap',()=>maps);vi.doMock('./commandLedger',()=>ledger);
+ vi.doMock('../persistence',()=>({hasLegacyCampaign:async()=>false,exportLegacyCampaign:async()=>'',...Object.fromEntries(['acquireWriter','writerContext','receiveCommand','commandStatus','pendingCommands','commandPage','finishCommand','noteCommandFailure','save','restore','importSave','backupList','clearSavedGames','exportStoredSave','readReportPage','readCityIntel','reportStatus','reportAction'].map(k=>[k,(...a:any[])=>(p[k as keyof FormalPersistence] as Function).apply(p,a)])),loadWithOffline:()=>p.loadSave(),startCampaign:(w:FormalWorld)=>p.start(w)}));
+ messages=[];view=new PresentationStore();const port={onmessage:null as any,postMessage:(m:any)=>{messages.push(structuredClone(m));if(m.projection)expect(view.receive(structuredClone(m.projection)).accepted).toBe(true);}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',vi.fn());await import('../runtime.worker');send=data=>port.onmessage({data});send({type:'load',requestId:'load'});await until(()=>done('load'));
+}
+beforeEach(()=>{p=new FormalPersistence({suffix:'r306-priority-'+crypto.randomUUID()});});
+afterEach(async()=>{await p.db.delete();vi.doUnmock('../persistence');vi.doUnmock('./commandLedger');vi.restoreAllMocks();vi.unstubAllGlobals();});
+it('intake pressure shortens only a completed-event CPU slice and clears after failure',async()=>{
+ const b=new RuntimeWorkBudget();let fail!:(e:Error)=>void;const work=new Promise((_,reject)=>fail=reject);b.trackIntake(work);expect(b.advance.shouldYield!(1.99)).toBe(false);expect(b.advance.shouldYield!(2)).toBe(true);fail(Error('T1 abort'));await Promise.resolve();expect(b.advance.shouldYield!(100)).toBe(false);
+});
+it('sustained pending intake cannot starve events or expose a partial world',async()=>{
+ const w=createFormalFixture(),b=new RuntimeWorkBudget();w.events=Array.from({length:80},(_,i)=>({id:eventId('r306-'+i),type:'fixture.marker',at:i+1,marker:'complete'}));b.trackIntake(new Promise(()=>{}));const before=structuredClone(w),expected=advanceFormal(w,80);let boundaries=0;
+ const actual=await advanceFormalCooperative(w,80,undefined,{...b.advance,yieldBeforeStart:false,shouldYield:()=>true,yieldControl:async()=>{boundaries++;expect(w).toEqual(before);}});expect(boundaries).toBe(80);expect(actual).toEqual(expected);expect(w).toEqual(before);
+});
+it('an initial service opportunity precedes draft preparation without changing the fixed logical target',async()=>{
+ const w=createFormalFixture(),before=structuredClone(w);let serviced=0;const target=1;const t=await advanceFormalCooperative(w,target,undefined,{yieldBeforeStart:true,yieldControl:async()=>{serviced++;expect(w).toEqual(before);}});expect(serviced).toBe(1);expect(t).toEqual(advanceFormal(w,target));expect(w).toEqual(before);
+});
+it('query returns Durable Pending while T2 is private, then committed, and reboot retains exact result',async()=>{
+ const w=await p.start(createFormalFixture());await boot();const old=view.getWorld()!,real=p.save.bind(p);let release!:()=>void,draft:FormalWorld|undefined;const barrier=new Promise<void>(r=>release=r);
+ vi.spyOn(p,'save').mockImplementationOnce(async(...args)=>{draft=args[0];await barrier;return real(...args);});const o=order(w,'query-private',{type:'city.rename',cityId:w.cities[0].id,name:'只有提交後可見'});send({type:'command',order:o,...captureIntent(old,o),requestId:'execute'});await until(()=>!!draft);
+ send({type:'commandQuery',campaignId:o.campaignId,commandId:o.commandId,requestId:'during'});await until(()=>done('during'));expect(done('execute')).toBe(false);expect(messages.find(m=>m.type==='commandStatus')!.row.state).toBe('pending');expect(view.getWorld()!.cities[0].name).toBe(old.cities[0].name);
+ release();await until(()=>done('execute'));const ack=messages.find(m=>m.type==='commandAck')!.ack;expect(ack.status).toBe('committed');expect(view.getWorld()!.cities[0].name).toBe('只有提交後可見');await boot();send({type:'commandQuery',campaignId:o.campaignId,commandId:o.commandId,requestId:'reboot'});await until(()=>done('reboot'));expect(messages.find(m=>m.type==='commandStatus')!.row.ack).toEqual(ack);
+});
+it.each([20,50])('%s T1 rows and queries can complete behind a private T2, preserving FIFO and original payloads',async n=>{
+ const w=await p.start(createFormalFixture());await boot();const real=p.save.bind(p);let release!:()=>void,draft=false;const barrier=new Promise<void>(r=>release=r);vi.spyOn(p,'save').mockImplementationOnce(async(...a)=>{draft=true;await barrier;return real(...a);});
+ const rows=Array.from({length:n},(_,i)=>order(w,'fifo-'+i,{type:'city.rename',cityId:w.cities[0].id,name:'原意'+i}));for(let i=0;i<n;i++)send({type:'command',order:rows[i],...captureIntent(w,rows[i]),requestId:'exec-'+i});await until(()=>draft&&messages.filter(m=>m.type==='commandDurable').length===n);
+ send({type:'commandList',requestId:'list'});await until(()=>done('list'));expect(done('exec-0')).toBe(false);expect(messages.find(m=>m.type==='commandList'&&m.rows.length===n).rows.map((r:any)=>r.commandId)).toEqual(rows.map(r=>r.commandId).reverse());
+ release();await until(()=>done('exec-'+(n-1)));expect(messages.filter(m=>m.type==='commandAck').map(m=>m.ack.commandId)).toEqual(rows.map(r=>r.commandId));for(const o of rows){const row=await p.commandStatus(o.campaignId,o.commandId);expect(row!.order).toEqual(o);expect(['committed','needs-confirmation']).toContain(row!.state);}expect(ledger.worldLedger((await p.loadSave()).game!).count).toBe(1);
+});
