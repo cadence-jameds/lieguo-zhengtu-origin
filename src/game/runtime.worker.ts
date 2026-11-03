@@ -71,6 +71,7 @@ async function handle(r:RuntimeRequest){
     lastStage=stage;
     post({type:'phase',text:stage==='read'?'讀取與驗證本機存檔':stage==='offline'?'推進離線期間的世界':'原子保存接續進度'});
    }
+   if(stage==='read'&&fraction!==undefined)post({type:'phase',text:`讀取與驗證本機存檔（${Math.round(fraction*100)}%）`});
    if(stage==='offline'&&fraction!==undefined&&events!==undefined&&events!==lastEvents){
     lastEvents=events;
     post({type:'progress',progress:fraction,events});
