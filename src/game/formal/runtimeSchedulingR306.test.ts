@@ -29,7 +29,7 @@ it('sustained pending intake cannot starve events or expose a partial world',asy
  const actual=await advanceFormalCooperative(w,80,undefined,{...b.advance,yieldBeforeStart:false,shouldYield:()=>true,yieldControl:async()=>{boundaries++;expect(w).toEqual(before);}});expect(boundaries).toBe(80);expect(actual).toEqual(expected);expect(w).toEqual(before);
 });
 it('an initial service opportunity precedes draft preparation without changing the fixed logical target',async()=>{
- const w=createFormalFixture(),before=structuredClone(w);let serviced=0;const target=1;const t=await advanceFormalCooperative(w,target,undefined,{yieldBeforeStart:true,yieldControl:async()=>{serviced++;expect(w).toEqual(before);}});expect(serviced).toBe(1);expect(t).toEqual(advanceFormal(w,target));expect(w).toEqual(before);
+ const w=createFormalFixture(),before=structuredClone(w);let serviced=0;const target=1;const t=await advanceFormalCooperative(w,target,undefined,{yieldBeforeStart:true,yieldControl:async boundary=>{expect(boundary).toBe('start');serviced++;expect(w).toEqual(before);}});expect(serviced).toBe(1);expect(t).toEqual(advanceFormal(w,target));expect(w).toEqual(before);
 });
 it('query returns Durable Pending while T2 is private, then committed, and reboot retains exact result',async()=>{
  const w=await p.start(createFormalFixture());await boot();const old=view.getWorld()!,real=p.save.bind(p);let release!:()=>void,draft:FormalWorld|undefined;const barrier=new Promise<void>(r=>release=r);
