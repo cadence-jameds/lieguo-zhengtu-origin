@@ -1,5 +1,6 @@
 import 'fake-indexeddb/auto';
-import {afterEach,expect,it} from 'vitest';
+import {afterEach,expect,it,vi} from 'vitest';
+import * as candidate from '../../../scripts/command-ledger-candidate.mjs';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 import {LedgerReadSession,ledgerTables,readLedgerArchive,scanLedgerIdentity,writeLedger,resultFromReceipt} from '../ledgerStore';
 import {commandId} from './ids';
@@ -12,7 +13,7 @@ import {submitFormalOrder} from './reducer';
 import {originalResult,verifyLedgerArchive,worldLedger,prepareVerifiedLedger} from './commandLedger';
 const stores:FormalPersistence[]=[];
 function store(fault?:(point:FailurePoint)=>void){const p=new FormalPersistence({suffix:'r305-test-'+crypto.randomUUID(),fault});stores.push(p);return p;}
-afterEach(async()=>{await Promise.all(stores.splice(0).map(p=>p.db.delete()));});
+afterEach(async()=>{vi.restoreAllMocks();await Promise.all(stores.splice(0).map(p=>p.db.delete()));});
 const rows=async(p:FormalPersistence)=>Object.fromEntries(await Promise.all(p.db.tables.map(async t=>[t.name,await t.toArray()])));
 it('bounded canonical byte encoding preserves every checksum including Unicode, holes and chunk boundaries',async()=>{
  const corpus:unknown[]=[undefined,null,'中😀',new Array(3),[undefined,null,NaN],{b:1,a:undefined,c:[undefined,1]},...Array.from({length:40},(_,i)=>({records:Array.from({length:i*3},(_,j)=>({fingerprint:'中😀\\"'+j,optional:j%2?undefined:j,receipt:{commandId:'command:'+j,disposition:'rolled-back'}}))})),{large:'中😀'.repeat(40000),nested:[{a:'x'.repeat(65535)},null]}];
@@ -82,4 +83,14 @@ it('a minority batch of 500 exact identities does not scan an unrelated long his
  const w=await p.start(await projectionSyntheticWorld(3000)),base=worldLedger(w),receipts=Array.from({length:500},(_,i)=>({commandId:commandId('r305-minority-'+i),issuerId:w.playerFactionId,fingerprint:canonicalJSON({campaignId:w.campaignId,issuerId:w.playerFactionId,payload:{type:'city.rename',cityId:w.cities[0].id,name:'合成'+i}}),committedRevision:w.revision+1,disposition:'applied' as const})),prepared=await prepareVerifiedLedger(base,receipts,receipts.map(resultFromReceipt),w.revision+1,base.manifest.branch,base.manifest.writerEpoch),before=await rows(p);gets.length=0;queries=0;
  await expect(p.db.transaction('rw',ledgerTables(p.db),async()=>{await writeLedger(p.db,prepared,base,receipts.map(r=>r.commandId));expect(queries).toBe(0);expect(gets).toEqual([256,244]);throw Error('discard unpublished test candidate');})).rejects.toThrow('discard unpublished');
  expect(await rows(p)).toEqual(before);
+});
+it('real one-command segments bulk-read the exact chain without thousands of serial IDB gets',async()=>{
+ const p=store();let gets=0,queries=0;p.db.use({stack:'dbcore',name:'r305-sparse-reads',create(down){return {...down,table(name){const t=down.table(name);if(!['LedgerSegments','LedgerResults'].includes(name))return t;return {...t,get(req){gets++;return t.get(req);},query(req){queries++;return t.query(req);}};}};}});
+ let w=await p.start(await projectionSyntheticWorld(0));for(let i=0;i<32;i++){const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-real-segment-'+i),issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'連續'+i}},row=await p.receiveCommand(order),t=submitFormalOrder(w,order);w=await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});}
+ gets=0;queries=0;const archive=await readLedgerArchive(p.db,w.campaignId,w.ledger!.anchor.root);expect(archive.history.segments).toHaveLength(32);expect(archive.results).toHaveLength(32);expect(gets).toBe(0);expect(queries).toBe(2);expect((await verifyLedgerArchive(archive)).count).toBe(32);
+});
+it('a distinct formal root reuses identical history evidence while independently validating outcomes',async()=>{
+ const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-history-proof-reuse'),issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'不執行'}},row=await p.receiveCommand(order),saved=await p.finishCommand(row,{commandId:order.commandId,status:'rejected',revision:w.revision,reason:'原始拒絕'},w.revision),proof=worldLedger(saved),archive=proof.archive();archive.manifest.version++;const {checksum:_old,...body}=archive.manifest;archive.manifest.checksum=await digest(body);
+ const spy=vi.spyOn(candidate,'verifyLedger'),verified=await verifyLedgerArchive(archive);expect(verified.history).toBe(proof.history);expect(spy).not.toHaveBeenCalled();expect(verified.result(order.commandId)).toEqual(proof.result(order.commandId));expect(verified.manifest.checksum).not.toBe(proof.manifest.checksum);
+ const corrupt=verified.archive();corrupt.results[0].records[0].ack.reason='corrupt';await expect(verifyLedgerArchive(corrupt)).rejects.toThrow();
 });

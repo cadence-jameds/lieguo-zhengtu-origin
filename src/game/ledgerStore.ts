@@ -15,14 +15,25 @@ export const ledgerTables=(db:Dexie)=>Object.keys(ledgerStores).map(k=>db.table(
 /** One consistent read transaction only. Raw rows are not verification proofs;
  * shared ancestors avoid another native clone, but still require validation. */
 export class LedgerReadSession {
- private readonly scope=Dexie.currentTransaction?.idbtrans;private readonly rows=new Map<string,Promise<any>>();
+ private readonly scope=Dexie.currentTransaction?.idbtrans;private readonly rows=new Map<string,Promise<any>>();private readonly prefetched=new Set<string>();
  constructor(private readonly db:Dexie){if(!this.scope)throw Error('區段讀取必須綁定一致交易。');}
- read(db:Dexie,table:string,key:string){if(db!==this.db||Dexie.currentTransaction?.idbtrans!==this.scope)throw Error('區段讀取不可跨交易重用。');const id=table+'/'+key;let value=this.rows.get(id);if(!value){value=db.table(table).get(key);this.rows.set(id,value!);}return value!;}
+ private check(db:Dexie){if(db!==this.db||Dexie.currentTransaction?.idbtrans!==this.scope)throw Error('區段讀取不可跨交易重用。');}
+ async prefetch(db:Dexie,table:string,campaignId:string,required:number){
+  this.check(db);const key=table+'/'+campaignId;if(!Number.isSafeInteger(required)||required<32||this.prefetched.has(key))return;
+  // Real gameplay often creates one segment per command. Avoid tens of
+  // thousands of serial hash-link reads, without scanning unrelated campaigns
+  // or a much larger future branch when restoring a small checkpoint.
+  const query=db.table(table).where('campaignId').equals(campaignId),count=await query.count();
+  if(count<required||count>required*1.25+8)return;
+  for(const row of await query.toArray()){const id=table+'/'+row.checksum;if(!this.rows.has(id))this.rows.set(id,Promise.resolve(row));}this.prefetched.add(key);
+ }
+ read(db:Dexie,table:string,key:string){this.check(db);const id=table+'/'+key;let value=this.rows.get(id);if(!value){value=db.table(table).get(key);this.rows.set(id,value!);}return value!;}
 }
 export async function readLedgerArchive(db:Dexie,campaignId:string,root:string,session?:LedgerReadSession):Promise<LedgerArchive>{
  return db.transaction('r',ledgerTables(db),async()=>{
   session??=new LedgerReadSession(db);
   const row=await db.table('LedgerManifests').get([campaignId,root]);if(!row||row.root!==row.manifest.checksum)throw Error('帳本 Manifest 遺失。');
+  await Promise.all([session.prefetch(db,'LedgerSegments',campaignId,row.historyManifest.segmentCount),session.prefetch(db,'LedgerResults',campaignId,row.manifest.resultSegments)]);
   async function chain(table:string,last:string,count:number,previous:string){if(!Number.isSafeInteger(count)||count<0)throw Error('帳本區段數無效。');const result=[],seen=new Set<string>();let key=last;for(let i=0;i<count;i++){if(seen.has(key))throw Error('帳本區段鏈循環。');seen.add(key);const s=await session!.read(db,table,key);if(!s||s.campaignId!==campaignId)throw Error('帳本區段遺失。');result.push(s);key=s[previous];}if(key!=='0'.repeat(64))throw Error('帳本鏈不完整。');return result.reverse();}
   const [segments,results]=await Promise.all([chain('LedgerSegments',row.historyManifest.lastSegmentHash,row.historyManifest.segmentCount,'previousHash'),chain('LedgerResults',row.manifest.resultRoot,row.manifest.resultSegments,'previous')]);
   return {manifest:row.manifest,history:{manifest:row.historyManifest,segments},results} as LedgerArchive;
@@ -44,8 +55,7 @@ export async function writeLedger(db:Dexie,s:VerifiedLedger,base:VerifiedLedger|
  }
  const ids=new Set(repairIndex?s.results.flatMap(v=>v.records.map(r=>r.commandId)):changed),writes:any[]=[],extra:any[]=[];
  const check=(id:string,old:any)=>{const receipt=s.receipt(id),original=s.result(id);if(!original)throw Error('命令缺少原始結果。');const sameOriginal=old&&old.issuerId===original.issuerId&&old.fingerprint===original.fingerprint&&jsonDataEqual(old.original,original);if(old&&!sameOriginal&&!repairIndex)throw Error('持久身份衝突。');if(!sameOriginal||!jsonDataEqual(old.receipt,receipt))writes.push({campaignId:s.manifest.campaignId,commandId:id,issuerId:original.issuerId,fingerprint:original.fingerprint,original,receipt});};
- const total=s.results.reduce((n,segment)=>n+segment.records.length,0);
- if(repairIndex||ids.size>256&&ids.size*2>=total){await scanLedgerIdentity(db,s.manifest.campaignId,rows=>{for(const old of rows){const id=old.commandId;if(ids.delete(id))check(id,old);else if(repairIndex&&!s.result(id))extra.push([s.manifest.campaignId,id]);}});for(const id of ids)check(id,undefined);}
+ if(repairIndex||ids.size>256&&ids.size*2>=s.results.reduce((n,segment)=>n+segment.records.length,0)){await scanLedgerIdentity(db,s.manifest.campaignId,rows=>{for(const old of rows){const id=old.commandId;if(ids.delete(id))check(id,old);else if(repairIndex&&!s.result(id))extra.push([s.manifest.campaignId,id]);}});for(const id of ids)check(id,undefined);}
  else{const keys=[...ids];for(let i=0;i<keys.length;i+=256){const batch=keys.slice(i,i+256),existing=await db.table('LedgerIdentity').bulkGet(batch.map(id=>[s.manifest.campaignId,id]));batch.forEach((id,j)=>check(id,existing[j]));}}
  if(extra.length)await db.table('LedgerIdentity').bulkDelete(extra);if(repairIndex)fault?.('ledger-index-write');
  for(let i=0;i<writes.length;i+=256){await db.table('LedgerIdentity').bulkPut(writes.slice(i,i+256));fault?.('ledger-index-write');}
