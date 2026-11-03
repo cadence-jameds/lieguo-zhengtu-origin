@@ -48,6 +48,9 @@ export function waitForWaiting(registration:ServiceWorkerRegistration,_recreated
   let watched:ServiceWorker|null=null,finished=false;
   const checked=new WeakSet<ServiceWorker>(),verified=new WeakSet<ServiceWorker>();
   const inspect=(event?:Event,poll=false)=>{if(finished||signal?.aborted)return;const pending=registration.installing;
+   // Native registrations can clear installing before the old worker's final
+   // statechange is delivered. Observe that worker before removing its listener.
+   if(watched?.state==='redundant'&&!live(pending)&&!live(registration.waiting)){reject(Error('新版下載失敗'));return;}
    if(live(registration.waiting)&&(!live(pending)||registration.waiting===pending)){resolve(registration.waiting!);return;}
    if(pending?.state==='installed'&&(poll||event?.type==='statechange')){resolve(pending);return;}
    const active=registration.active;

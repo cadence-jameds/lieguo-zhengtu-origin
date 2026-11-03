@@ -378,3 +378,8 @@ it('an already activated target with an old controller receives an explicit recl
  const done=activateWaiting(target,container,undefined,workerRelease);expect(activations(target)).toHaveLength(1);
  (container as any).controller=target;container.dispatchEvent(new Event('controllerchange'));await done;
 });
+it('an install rejection is observed when installing is cleared before its redundant statechange',async()=>{
+ oldActive();const pending=candidate('installing');(registration as any).installing=pending;await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});expect(save).not.toHaveBeenCalled();
+ await act(async()=>{(registration as any).installing=null;(pending as any).state='redundant';pending.dispatchEvent(new Event('statechange'));await done;});
+ expect(updates.phase).toBe('failed');expect(updates.text).toContain('本次尚未執行保存');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();expect(activations(pending)).toHaveLength(0);
+});
