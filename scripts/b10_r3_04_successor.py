@@ -83,19 +83,22 @@ def read_record(root=ROOT):
  r=json.loads(f.read_text());assert r==expected_record(),'Changed immutable R3-04 source, predecessor, historical record or adapter manifest'
  return r
 def accepts(path,predecessor,root=ROOT):
+ from b10_r3_05_successor import accepts as next_accepts
  if path not in CHANGES:return False
  r=read_record(root)
- return predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==r['changes'][path]['after']
+ return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or next_accepts(path,r['changes'][path]['after'],root))
 def accepts_adapter(path,before,root=ROOT):
+ from b10_r3_05_successor import accepts_adapter as next_adapter
  if path not in ADAPTERS or before!=previous(BASE,path):return False
  read_record(root)
- return (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or next_adapter(path,adapters()[path],root))
 def validate(root=ROOT):
+ from b10_r3_05_successor import accepts as next_accepts, accepts_adapter as next_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unrecorded R3-04 source change',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or next_accepts(p,v['after'],root),('Unrecorded R3-04 source change',p)
  for section in ['invariants','historical']:
-  for p,d in r[section].items():assert sha((root/p).read_bytes())==d,('Changed preserved source/history',p)
- for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed exact R3-04 adapter',p)
+  for p,d in r[section].items():assert sha((root/p).read_bytes())==d or section=='invariants' and next_accepts(p,d,root),('Changed preserved source/history',p)
+ for p,b in adapters().items():assert (root/p).read_bytes()==b or next_adapter(p,b,root),('Changed exact R3-04 adapter',p)
  return r
 if __name__=='__main__':
  validate();print('PASS: exact R3-04 UI projection successor; no gameplay, T2, saved-format, deadline or history waiver. No release acceptance claim.')
