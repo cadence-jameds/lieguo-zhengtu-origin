@@ -94,3 +94,7 @@ it('a distinct formal root reuses identical history evidence while independently
  const spy=vi.spyOn(candidate,'verifyLedger'),verified=await verifyLedgerArchive(archive);expect(verified.history).toBe(proof.history);expect(spy).not.toHaveBeenCalled();expect(verified.result(order.commandId)).toEqual(proof.result(order.commandId));expect(verified.manifest.checksum).not.toBe(proof.manifest.checksum);
  const corrupt=verified.archive();corrupt.results[0].records[0].ack.reason='corrupt';await expect(verifyLedgerArchive(corrupt)).rejects.toThrow();
 });
+it('dense segments retain linked reads instead of a large native bulk clone',async()=>{
+ const p=store();let gets=0,queries=0;p.db.use({stack:'dbcore',name:'r305-dense-reads',create(down){return {...down,table(name){const t=down.table(name);if(!['LedgerSegments','LedgerResults'].includes(name))return t;return {...t,get(req){gets++;return t.get(req);},query(req){queries++;return t.query(req);}};}};}});
+ const w=await p.start(await projectionSyntheticWorld(10000));gets=0;queries=0;const archive=await readLedgerArchive(p.db,w.campaignId,w.ledger!.anchor.root);expect(queries).toBe(0);expect(gets).toBe(archive.history.segments.length+archive.results.length);expect((await verifyLedgerArchive(archive)).count).toBe(10000);
+});

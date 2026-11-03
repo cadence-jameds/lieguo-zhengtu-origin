@@ -8,7 +8,7 @@
 
 交易內LedgerReadSession綁定實際IDBTransaction和DB實例；只重用本次一致讀取已取得的raw row，不是證明。下一交易不得重用，即使root相同。讀到的所有資料仍須驗證。read session只在該操作存在，沒有跨版本無界內容快取。
 
-對實際一命令一區段的鏈，若至少32段且同campaign儲存區段數在所需數量至1.25倍加8以內，合併讀取該campaign，再按Manifest精確鏈組裝與驗證。不能讀取其他campaign；小舊回復點相對大量未來歷史時保留逐鏈讀取，不全量載入未來分支。未被鏈引用的額外區段不當作證據。這不新增index或修改Dexie schema，避免密集合成區段掩蓋真實稀疏鏈的逐筆I/O成本。
+對實際一命令一區段的稀疏鏈，若至少32段、每段平均最多4筆的必要下界且同campaign儲存區段數在所需數量至1.25倍加8以內，合併讀取該campaign，再按Manifest精確鏈組裝與驗證。只有拒絕結果且無歷史數量下界時，至少512段才使用合併讀取。不能讀取其他campaign；高密度區段與小舊回復點相對大量未來歷史時保留逐鏈讀取，避免原生大量clone回退或載入未來分支。未被鏈引用的額外區段不當作證據。這不新增index或修改Dexie schema。
 
 Verified Ledger仍只有原驗證／準備程序能建立。以不可變、帶checksum／正式Root的完整已驗證版本作對照，只有本次實際讀出的**每個欄位、陣列項目與欄位集合**完全相同才能重用證明。不只比較Revision、checksum標籤、物件引用或最新Head。未知undefined欄位也不能被canonical equality忽略。沒有該版本證明時完整執行既有Schema／digest／索引建構；任一差異走完整驗證並按原規則拒絕損毀。冷Worker沒有記憶體證明，無法跳過驗證。
 

@@ -18,8 +18,8 @@ export class LedgerReadSession {
  private readonly scope=Dexie.currentTransaction?.idbtrans;private readonly rows=new Map<string,Promise<any>>();private readonly prefetched=new Set<string>();
  constructor(private readonly db:Dexie){if(!this.scope)throw Error('區段讀取必須綁定一致交易。');}
  private check(db:Dexie){if(db!==this.db||Dexie.currentTransaction?.idbtrans!==this.scope)throw Error('區段讀取不可跨交易重用。');}
- async prefetch(db:Dexie,table:string,campaignId:string,required:number){
-  this.check(db);const key=table+'/'+campaignId;if(!Number.isSafeInteger(required)||required<32||this.prefetched.has(key))return;
+ async prefetch(db:Dexie,table:string,campaignId:string,required:number,minimumRecords:number){
+  this.check(db);const key=table+'/'+campaignId;if(!Number.isSafeInteger(required)||!Number.isSafeInteger(minimumRecords)||minimumRecords<0||required<32||required*4<minimumRecords||minimumRecords===0&&required<512||this.prefetched.has(key))return;
   // Real gameplay often creates one segment per command. Avoid tens of
   // thousands of serial hash-link reads, without scanning unrelated campaigns
   // or a much larger future branch when restoring a small checkpoint.
@@ -33,7 +33,7 @@ export async function readLedgerArchive(db:Dexie,campaignId:string,root:string,s
  return db.transaction('r',ledgerTables(db),async()=>{
   session??=new LedgerReadSession(db);
   const row=await db.table('LedgerManifests').get([campaignId,root]);if(!row||row.root!==row.manifest.checksum)throw Error('帳本 Manifest 遺失。');
-  await Promise.all([session.prefetch(db,'LedgerSegments',campaignId,row.historyManifest.segmentCount),session.prefetch(db,'LedgerResults',campaignId,row.manifest.resultSegments)]);
+  await Promise.all([session.prefetch(db,'LedgerSegments',campaignId,row.historyManifest.segmentCount,row.historyManifest.recordCount),session.prefetch(db,'LedgerResults',campaignId,row.manifest.resultSegments,row.historyManifest.recordCount)]);
   async function chain(table:string,last:string,count:number,previous:string){if(!Number.isSafeInteger(count)||count<0)throw Error('帳本區段數無效。');const result=[],seen=new Set<string>();let key=last;for(let i=0;i<count;i++){if(seen.has(key))throw Error('帳本區段鏈循環。');seen.add(key);const s=await session!.read(db,table,key);if(!s||s.campaignId!==campaignId)throw Error('帳本區段遺失。');result.push(s);key=s[previous];}if(key!=='0'.repeat(64))throw Error('帳本鏈不完整。');return result.reverse();}
   const [segments,results]=await Promise.all([chain('LedgerSegments',row.historyManifest.lastSegmentHash,row.historyManifest.segmentCount,'previousHash'),chain('LedgerResults',row.manifest.resultRoot,row.manifest.resultSegments,'previous')]);
   return {manifest:row.manifest,history:{manifest:row.historyManifest,segments},results} as LedgerArchive;
