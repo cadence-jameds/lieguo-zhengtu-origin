@@ -1,0 +1,210 @@
+{
+  "method": "Separate uninstrumented native Worker CDP heap snapshots, nine points/24 world hours. Forced GC only final retained-heap diagnostic, excluded from latency/Gate. Not continuous peak/native GC counts. Reference bootstrap initially failed during Vite Dexie optimization; identical script retry passed.",
+  "runtimeSource": "803b174db5d2be0adef24b94b22782856ae365b9",
+  "versions": {
+    "before": {
+      "label": "before",
+      "browser": "154.0.8037.57",
+      "method": "Native dedicated Runtime isolate via CDP Runtime.getHeapUsage; eight 3-world-hour foreground steps, 99 AI/25X; final forced GC is a separate retained-heap diagnostic, excluded from all latency datasets. Raw clock wrapper is validation only. Sampling points are not a continuous peak or GC count.",
+      "samples": [
+        {
+          "step": 0,
+          "heap": {
+            "usedSize": 13492380,
+            "totalSize": 25243648,
+            "embedderHeapUsedSize": 1243632,
+            "backingStorageSize": 6201787
+          }
+        },
+        {
+          "step": 1,
+          "heap": {
+            "usedSize": 50337344,
+            "totalSize": 87871488,
+            "embedderHeapUsedSize": 5714072,
+            "backingStorageSize": 5356578
+          }
+        },
+        {
+          "step": 2,
+          "heap": {
+            "usedSize": 36883592,
+            "totalSize": 96407552,
+            "embedderHeapUsedSize": 10372912,
+            "backingStorageSize": 5291245
+          }
+        },
+        {
+          "step": 3,
+          "heap": {
+            "usedSize": 54828532,
+            "totalSize": 98734080,
+            "embedderHeapUsedSize": 11512824,
+            "backingStorageSize": 5267265
+          }
+        },
+        {
+          "step": 4,
+          "heap": {
+            "usedSize": 61217016,
+            "totalSize": 101101568,
+            "embedderHeapUsedSize": 11108352,
+            "backingStorageSize": 5272041
+          }
+        },
+        {
+          "step": 5,
+          "heap": {
+            "usedSize": 42393132,
+            "totalSize": 100417536,
+            "embedderHeapUsedSize": 10508152,
+            "backingStorageSize": 5273549
+          }
+        },
+        {
+          "step": 6,
+          "heap": {
+            "usedSize": 59287908,
+            "totalSize": 106160128,
+            "embedderHeapUsedSize": 10738480,
+            "backingStorageSize": 5332515
+          }
+        },
+        {
+          "step": 7,
+          "heap": {
+            "usedSize": 45862316,
+            "totalSize": 103333888,
+            "embedderHeapUsedSize": 10602416,
+            "backingStorageSize": 5285099
+          }
+        },
+        {
+          "step": 8,
+          "heap": {
+            "usedSize": 59094420,
+            "totalSize": 106082304,
+            "embedderHeapUsedSize": 8707664,
+            "backingStorageSize": 5280552
+          }
+        }
+      ],
+      "retainedAfterForcedGC": {
+        "usedSize": 11755528,
+        "totalSize": 13668352,
+        "embedderHeapUsedSize": 797568,
+        "backingStorageSize": 3896261
+      },
+      "world": {
+        "time": 86650515,
+        "agents": 99,
+        "decisions": 2987,
+        "events": 202,
+        "history": 1743
+      },
+      "status": "PASS"
+    },
+    "after": {
+      "label": "after",
+      "browser": "154.0.8037.57",
+      "method": "Native dedicated Runtime isolate via CDP Runtime.getHeapUsage; eight 3-world-hour foreground steps, 99 AI/25X; final forced GC is a separate retained-heap diagnostic, excluded from all latency datasets. Raw clock wrapper is validation only. Sampling points are not a continuous peak or GC count.",
+      "samples": [
+        {
+          "step": 0,
+          "heap": {
+            "usedSize": 14115420,
+            "totalSize": 25243648,
+            "embedderHeapUsedSize": 1249200,
+            "backingStorageSize": 6217189
+          }
+        },
+        {
+          "step": 1,
+          "heap": {
+            "usedSize": 33437200,
+            "totalSize": 85241856,
+            "embedderHeapUsedSize": 6249488,
+            "backingStorageSize": 5371982
+          }
+        },
+        {
+          "step": 2,
+          "heap": {
+            "usedSize": 65847956,
+            "totalSize": 106926080,
+            "embedderHeapUsedSize": 11028568,
+            "backingStorageSize": 5308033
+          }
+        },
+        {
+          "step": 3,
+          "heap": {
+            "usedSize": 37189644,
+            "totalSize": 109961216,
+            "embedderHeapUsedSize": 1156928,
+            "backingStorageSize": 5282669
+          }
+        },
+        {
+          "step": 4,
+          "heap": {
+            "usedSize": 30408296,
+            "totalSize": 100577280,
+            "embedderHeapUsedSize": 1367752,
+            "backingStorageSize": 5287445
+          }
+        },
+        {
+          "step": 5,
+          "heap": {
+            "usedSize": 20661892,
+            "totalSize": 99360768,
+            "embedderHeapUsedSize": 2135872,
+            "backingStorageSize": 5288953
+          }
+        },
+        {
+          "step": 6,
+          "heap": {
+            "usedSize": 49275988,
+            "totalSize": 101101568,
+            "embedderHeapUsedSize": 4686168,
+            "backingStorageSize": 5345776
+          }
+        },
+        {
+          "step": 7,
+          "heap": {
+            "usedSize": 24859856,
+            "totalSize": 99098624,
+            "embedderHeapUsedSize": 4745600,
+            "backingStorageSize": 5302028
+          }
+        },
+        {
+          "step": 8,
+          "heap": {
+            "usedSize": 52975280,
+            "totalSize": 100507648,
+            "embedderHeapUsedSize": 5119584,
+            "backingStorageSize": 5297288
+          }
+        }
+      ],
+      "retainedAfterForcedGC": {
+        "usedSize": 11696928,
+        "totalSize": 13144064,
+        "embedderHeapUsedSize": 803072,
+        "backingStorageSize": 3911667
+      },
+      "world": {
+        "time": 86624119,
+        "agents": 99,
+        "decisions": 2987,
+        "events": 202,
+        "history": 1743
+      },
+      "status": "PASS"
+    }
+  }
+}

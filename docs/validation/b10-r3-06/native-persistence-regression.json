@@ -1,0 +1,93 @@
+{
+  "environment": "Native Chromium154/Linux, real IndexedDB and Dedicated Worker; injected QuotaExceededError and actual terminate(), synthetic data only; not Android",
+  "cases": [
+    {
+      "name": "native T1 quota failure has no durable row and does not claim success",
+      "status": "PASS",
+      "data": {
+        "pending": "pending",
+        "worldUnchanged": true
+      }
+    },
+    {
+      "name": "native optimized T2 aborts every authoritative boundary and retry has one effect",
+      "status": "PASS",
+      "data": {
+        "boundaries": [
+          "ledger-segment-write",
+          "ledger-result-write",
+          "ledger-index-write",
+          "ledger-manifest-write",
+          "ledger-head-write",
+          "report-write",
+          "backup-write",
+          "world-write",
+          "authority-write",
+          "metadata-write",
+          "result-write"
+        ]
+      }
+    },
+    {
+      "name": "native persisted Manifest and Segment corruption cannot be hidden by a warm proof",
+      "status": "PASS",
+      "data": [
+        "LedgerManifests",
+        "LedgerSegments",
+        "LedgerResults"
+      ]
+    },
+    {
+      "name": "native keyset boundary, missing/corrupt/extra derived index and world checksum use verified Recovery",
+      "status": "PASS",
+      "data": {
+        "derivedRepair": true,
+        "checksumRecovery": true,
+        "count": 1100
+      }
+    },
+    {
+      "name": "actual Worker terminate during export leaves original authority intact",
+      "status": "PASS",
+      "data": {
+        "action": "export",
+        "allTablesUnchanged": true,
+        "commandState": "committed"
+      }
+    },
+    {
+      "name": "actual Worker terminate during import leaves original authority intact",
+      "status": "PASS",
+      "data": {
+        "action": "import",
+        "allTablesUnchanged": true,
+        "commandState": "committed"
+      }
+    },
+    {
+      "name": "actual Worker terminate during restore leaves original authority intact",
+      "status": "PASS",
+      "data": {
+        "action": "restore",
+        "allTablesUnchanged": true,
+        "commandState": "committed"
+      }
+    },
+    {
+      "name": "native writer handoff rejects the stale writer at unchanged revision",
+      "status": "PASS",
+      "data": {
+        "staleRejected": true
+      }
+    },
+    {
+      "name": "two native pages preserve the actual formal writer Web Lock and release",
+      "status": "PASS",
+      "data": {
+        "unavailable": true,
+        "available": true
+      }
+    }
+  ],
+  "runtimeSource": "803b174db5d2be0adef24b94b22782856ae365b9"
+}

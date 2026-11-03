@@ -1,0 +1,152 @@
+{
+  "environment": "Native Chromium desktop Linux container, CPU quota 2; actual IndexedDB/Workers/React; synthetic data only; not Android",
+  "browser": "154.0.8037.57",
+  "cases": [
+    {
+      "name": "actual React UI / Worker v2, rapid commands, lost Ack, lost projection and restart",
+      "status": "PASS",
+      "data": {
+        "first": {
+          "projection": {
+            "protocolVersion": 2,
+            "campaignId": "campaign:b1-fixture",
+            "branch": 1,
+            "writerEpoch": 1,
+            "sessionId": "44f4603a-cb19-4f8e-aab6-355a95ed5308",
+            "projectionSequence": 2,
+            "revision": 2
+          },
+          "rows": 1,
+          "hasHistory": false
+        },
+        "before": {
+          "ids": [
+            "command:8caf3abb-ecf2-4b6a-b9ec-deba5e2b75a7",
+            "command:fd481642-20df-4a97-bf33-6df47b20ac8d",
+            "command:0e2de437-fbfa-4286-8bed-d35cc54211f3",
+            "command:9df2461e-21d1-456e-b452-ad8006432e82",
+            "command:f0015256-0b22-407a-8e6a-e2438ac1088a",
+            "command:027cb08e-8d8e-46a1-9ce3-c6e205319dc6"
+          ],
+          "name": "連續0",
+          "interactiveLongTasksSummaryMs": {
+            "n": 0,
+            "p50": null,
+            "p95": null,
+            "max": null
+          },
+          "snapshotRequestedAfterLoss": true,
+          "wireHistory": false
+        },
+        "restored": {
+          "rows": [
+            {
+              "id": "command:027cb08e-8d8e-46a1-9ce3-c6e205319dc6",
+              "state": "needs-confirmation"
+            },
+            {
+              "id": "command:f0015256-0b22-407a-8e6a-e2438ac1088a",
+              "state": "needs-confirmation"
+            },
+            {
+              "id": "command:9df2461e-21d1-456e-b452-ad8006432e82",
+              "state": "committed"
+            },
+            {
+              "id": "command:0e2de437-fbfa-4286-8bed-d35cc54211f3",
+              "state": "committed"
+            },
+            {
+              "id": "command:fd481642-20df-4a97-bf33-6df47b20ac8d",
+              "state": "committed"
+            },
+            {
+              "id": "command:8caf3abb-ecf2-4b6a-b9ec-deba5e2b75a7",
+              "state": "committed"
+            }
+          ],
+          "name": "連續0"
+        },
+        "lastFrameRecoveryMs": 288.70000000298023,
+        "subsequentTickOrQuerySent": false
+      }
+    },
+    {
+      "name": "native quick/full import, Recovery and resync project the committed world without replaying identities",
+      "status": "PASS",
+      "data": {
+        "quick": true,
+        "full": true,
+        "recovery": true,
+        "oldIdentity": "rolled-back"
+      }
+    },
+    {
+      "name": "99 AI / 25X: durable intake stays independent; Preview death cannot cancel the formal command",
+      "status": "PASS",
+      "data": {
+        "durableDuring": true,
+        "decisions": 99,
+        "effects": 1,
+        "speed": 25
+      }
+    },
+    {
+      "name": "actual GameApp city/building UI and independent Preview Worker submit through the durable Inbox",
+      "status": "PASS",
+      "data": {
+        "ack": {
+          "commandId": "command:cfaa2f53-8360-4f71-a9ac-739d0b6a004a",
+          "status": "committed",
+          "revision": 3
+        },
+        "interactiveLongTasksSummaryMs": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "projectionHasHistory": false,
+        "workers": [
+          "/src/game/runtime.worker.ts",
+          "/src/game/constructionPreview.worker.ts"
+        ],
+        "durableAfterReload": "committed"
+      }
+    },
+    {
+      "name": "60k native persisted history loads into the actual GameApp without transporting the ledger",
+      "status": "PASS",
+      "data": {
+        "seeded": {
+          "campaignId": "campaign:projection-benchmark-60000",
+          "receipts": 60000,
+          "stored": 60000
+        },
+        "snapshotBytes": [
+          467794
+        ],
+        "historyOnWire": false,
+        "coldLongTasksSummaryMs": {
+          "n": 1,
+          "p50": 73,
+          "p95": 73,
+          "max": 73
+        },
+        "loadToCityInteractiveMs": 7245
+      }
+    },
+    {
+      "name": "background Recovery without a UI transition token clears old top-level drafts before another click",
+      "status": "PASS",
+      "data": {
+        "sourceBranch": 2,
+        "newBranch": 3,
+        "oldRenameDraftClosed": true,
+        "transitionIdSupplied": false
+      }
+    }
+  ],
+  "performance": [],
+  "runtimeSource": "803b174db5d2be0adef24b94b22782856ae365b9"
+}

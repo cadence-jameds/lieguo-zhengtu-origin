@@ -9,6 +9,7 @@
         "privateAuthorityUnchanged": true,
         "state": "committed",
         "effects": 1,
+        "sameOriginalAckOnResend": true,
         "aiWithDecision": 99
       }
     },
@@ -33,7 +34,7 @@
       "name": "99 AI / 25X continues through 24 world hours, FIFO commands, away/resume and Recovery",
       "status": "PASS",
       "data": {
-        "timeBeforeRecovery": 86731032,
+        "timeBeforeRecovery": 86746997,
         "all99Decided": true,
         "commands": 4,
         "branch": 5,
@@ -41,6 +42,6 @@
       }
     }
   ],
-  "runtimeSourceCommit": "8a8737cb296963bd50519a0e813ad24317a13fbe",
-  "validationHarnessCommit": "6b32d3d"
+  "runtimeSourceCommit": "803b174db5d2be0adef24b94b22782856ae365b9",
+  "validationHarnessCommit": "571fa6f"
 }
