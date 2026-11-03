@@ -1,6 +1,7 @@
 import type {CommandAck,CommandReceipt,FormalWorld,FormalOrder} from './model';
 import {emptyLedger,prepareLedger,verifyLedger,type LedgerCandidate} from '../../../scripts/command-ledger-candidate.mjs';
 import {digest,canonicalJSON} from './canonical';
+import {exactDataEqual} from './jsonDataEqual';
 
 export type OriginalResult={commandId:string;issuerId:string;fingerprint:string;ack:CommandAck;state:'committed'|'rejected'|'needs-confirmation';order?:FormalOrder};
 export type ResultSegment={campaignId:string;sequence:number;previous:string;records:OriginalResult[];checksum:string};
@@ -96,6 +97,11 @@ export async function prepareVerifiedLedger(base:VerifiedLedger,receipts:readonl
 }
 export async function verifyLedgerArchive(value:LedgerArchive):Promise<VerifiedLedger>{
  if(!value||Object.keys(value).sort().join(',')!=='history,manifest,results'||!value.manifest||!Array.isArray(value.results))throw Error('帳本封裝損毀。');
+ // Never trust only a root/revision or caller object identity. Every actual IDB
+ // field/array entry must equal an immutable, checksum-verified version. A cold
+ // process, changed byte, unknown field or different branch uses full validation.
+ const known=cachedLedger(value.manifest.checksum);
+ if(known&&exactDataEqual(value,{manifest:known.manifest,history:{manifest:known.history.manifest,segments:known.history.segments},results:known.results}))return remember(known);
  const m=value.manifest,{checksum,...body}=m;if(m.format!==1||Object.keys(m).sort().join(',')!=='branch,branchRevision,campaignId,checksum,format,historyRoot,orderPrefix,resultRoot,resultSegments,version,worldRevision,writerEpoch'||await digest(body)!==checksum)throw Error('帳本 Manifest 損毀。');
  for(const n of [m.version,m.worldRevision,m.branch,m.writerEpoch,m.resultSegments,m.orderPrefix,m.branchRevision])if(!Number.isSafeInteger(n)||n<0)throw Error('帳本版本無效。');
  const history=await verifyLedger(value.history);if(history.manifest.campaignId!==m.campaignId||history.manifest.checksum!==m.historyRoot||history.manifest.worldRevision>m.worldRevision||value.results.length!==m.resultSegments)throw Error('帳本參照不完整。');

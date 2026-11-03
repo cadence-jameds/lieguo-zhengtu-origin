@@ -23,7 +23,7 @@ Node同業務路徑：Recovery10034.9、coldLoad4269.9、Quick/Full import16584.
 1. 大批精確身份查詢改用既有campaign範圍與有界批次，保留所有issuer／fingerprint／original／disposition比對與損毀修復。
 2. 一個一致讀取交易內重用相同checksum區段，避免多個checkpoint／head重複IDB clone；冷啟動仍驗證實際讀到的全部內容。
 3. 對嚴格JSON資料使用可證明與既有canonical比較等價的直接比較，避免生成多份長字串。checksum算法與格式不變。
-4. 移除已經隔離並驗證的世界重複clone；最後世界驗證／checksum及T2同一原子交易仍保留。
+4. 曾評估移除世界clone；原回歸證明來源revision須獨立以正確選取Recovery點，因此保留原副本。最後世界驗證／checksum及T2同一原子交易保留。
 5. 匯出匯入先重用既有區段與Root，不新造帳本或格式。100MiB上限保留，失敗不改舊權威。
 
 每項先故障／損毀測試再比較。任何交易外準備都不是權威，正式提交仍檢查writer／revision／root；本批不為取得速度拆分正式T2、不動AI／Scheduler／Projection協定。
