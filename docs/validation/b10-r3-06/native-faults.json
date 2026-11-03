@@ -1,0 +1,46 @@
+{
+  "environment": "Chromium 154.0.8037.57/Linux/2 CPU quota/native IndexedDB/actual Runtime Dedicated Worker. Synthetic clock for deterministic foreground backlog; not OS sleep or Android. Fault barrier requires B10_OBSERVE=1 validation server.",
+  "cases": [
+    {
+      "name": "durable Pending is queryable during a private AI replay; actual terminate/restart executes it once",
+      "status": "PASS",
+      "data": {
+        "durableBeforeStop": true,
+        "privateAuthorityUnchanged": true,
+        "state": "committed",
+        "effects": 1,
+        "aiWithDecision": 99
+      }
+    },
+    {
+      "name": "known Pending query completes before an ongoing replay publishes its world",
+      "status": "PASS",
+      "data": {
+        "queryState": "pending",
+        "queryBeforeReplayPublication": true
+      }
+    },
+    {
+      "name": "writer handoff during a private replay fences old T2 and preserves the durable identity",
+      "status": "PASS",
+      "data": {
+        "writerEpoch": 8,
+        "staleAuthorityUnchanged": true,
+        "recoveredEffects": 1
+      }
+    },
+    {
+      "name": "99 AI / 25X continues through 24 world hours, FIFO commands, away/resume and Recovery",
+      "status": "PASS",
+      "data": {
+        "timeBeforeRecovery": 86731032,
+        "all99Decided": true,
+        "commands": 4,
+        "branch": 5,
+        "oldIDsRemainTerminal": true
+      }
+    }
+  ],
+  "runtimeSourceCommit": "8a8737cb296963bd50519a0e813ad24317a13fbe",
+  "validationHarnessCommit": "6b32d3d"
+}
