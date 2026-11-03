@@ -11,12 +11,13 @@ class RuntimeSuccessorTests(unittest.TestCase):
   for p,v in r['changes'].items():
    if v['before']:self.assertTrue(gate.accepts(p,v['before'],self.root))
    self.assertFalse(gate.accepts(p,'0'*64,self.root))
-  for p in ['src/game/formal/model.ts','src/game/formal/schema.ts','src/game/formal/scheduler.ts','src/game/formal/autonomy.ts','src/game/formal/aiActions.ts','src/game/formal/endgameAI.ts','src/game/formal/economy.ts','src/game/persistence.ts','src/game/ledgerStore.ts','src/game/formal/saveCodec.ts','src/game/useGame.ts','src/game/worldStream.ts']:
+  for p in ['src/game/formal/model.ts','src/game/formal/schema.ts','src/game/formal/scheduler.ts','src/game/formal/autonomy.ts','src/game/formal/aiActions.ts','src/game/formal/endgameAI.ts','src/game/formal/economy.ts','src/game/ledgerStore.ts','src/game/formal/saveCodec.ts','src/game/useGame.ts','src/game/worldStream.ts']:
    self.assertNotIn(p,gate.CHANGES)
-  for n in ['reducer','victory']:self.assertEqual((self.root/f'scripts/fixtures/r306/{n}-r305.txt').read_bytes(),gate.previous(gate.BASE,f'src/game/formal/{n}.ts'))
+  for n in ['reducer','victory','offline']:self.assertEqual((self.root/f'scripts/fixtures/r306/{n}-r305.txt').read_bytes(),gate.previous(gate.BASE,f'src/game/formal/{n}.ts'))
+  for p,b in gate.offline_budget_passthrough().items():self.assertEqual((self.root/p).read_bytes(),b)
  def test_refreshed_local_hash_never_approves_rule_ledger_ui_or_reference_tampering(self):
   file=self.root/gate.RECORD;original=file.read_bytes()
-  for section,p in [('changes','src/game/formal/reducer.ts'),('changes','src/game/formal/victory.ts'),('changes','src/game/runtime.worker.ts'),('changes','src/game/runtimeWorkBudget.ts'),('changes','scripts/fixtures/r306/reducer-r305.txt'),('invariants','src/game/formal/scheduler.ts'),('invariants','src/game/persistence.ts'),('invariants','src/game/formal/commandLedger.ts'),('invariants','src/game/useGame.ts'),('historical','docs/validation/b10-r3-05/REPORT.md'),('adapters','.github/workflows/ci.yml')]:
+  for section,p in [('changes','src/game/formal/reducer.ts'),('changes','src/game/formal/victory.ts'),('changes','src/game/runtime.worker.ts'),('changes','src/game/runtimeWorkBudget.ts'),('changes','scripts/fixtures/r306/reducer-r305.txt'),('changes','src/game/persistence.ts'),('changes','src/game/formal/offline.ts'),('invariants','src/game/formal/scheduler.ts'),('invariants','src/game/formal/commandLedger.ts'),('invariants','src/game/useGame.ts'),('historical','docs/validation/b10-r3-05/REPORT.md'),('adapters','.github/workflows/ci.yml')]:
    with self.subTest(path=p):
     f=self.root/p;before=f.read_bytes();f.write_bytes(before+b'\n');r=json.loads(original)
     if section in ['changes','adapters']:r[section][p]['after']=gate.sha(f.read_bytes())

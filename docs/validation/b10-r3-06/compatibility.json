@@ -1,8 +1,15 @@
 {
   "schemaVersion": 1,
   "baseCommit": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
-  "implementationCommit": "84290d1e58d16708fab2f0c36f1380e7e674906a",
-  "implementationSupport": [],
+  "implementationCommit": "803b174db5d2be0adef24b94b22782856ae365b9",
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/b10-r3-06/compatibility.json",
+    "scripts/b10_r3_05_successor.py",
+    "scripts/b10_r3_06_successor.py",
+    "scripts/test_b10_r3_06_successor.py",
+    "scripts/verify-projection-boundaries.mjs"
+  ],
   "changes": {
     "docs/RELEASE_METADATA.md": {
       "before": "63979f4bbf9fed663ff5497ba48ffa93f5b36384dae69a87787c7fa5be3b483c",
@@ -10,11 +17,15 @@
     },
     "docs/validation/b10-r3-06/CONTRACT.md": {
       "before": null,
-      "after": "71e069bc23a842f2a51fdac7a811eb2ec894a933cefda5490d11d044bb15e2ff"
+      "after": "703e5ccd2aa71f71d7435452b8cd80c4125c0bd23626754ca33f04bfeccc1a82"
     },
     "docs/validation/b10-r3-06/PROFILE.md": {
       "before": null,
       "after": "90083171972b1b9267c3d21a7340d18b71b9fd3403a8366f7771b0965f78aad7"
+    },
+    "docs/validation/b10-r3-06/native-faults.json": {
+      "before": null,
+      "after": "a36e65b1210f4099c4921f791ef9bad0aa0e250c4742aeec0804f9e85001e4d5"
     },
     "docs/validation/b10-r3-06/profile-30-day-before.json": {
       "before": null,
@@ -34,7 +45,11 @@
     },
     "scripts/benchmark-runtime-browser.mjs": {
       "before": null,
-      "after": "3a4f77b96300fc23da718f04d6056962860f5ece7522722d53eea7953d15b38b"
+      "after": "26b2de239eaaac50cd1ee4b7d0945a9f8e08f4944c914bfc11309bbbf1a84440"
+    },
+    "scripts/fixtures/r306/offline-r305.txt": {
+      "before": null,
+      "after": "ffc72ec9c708995ce4cdf72990db852bd7657fec209bd7cc9d42c13c5f822a06"
     },
     "scripts/fixtures/r306/reducer-r305.txt": {
       "before": null,
@@ -55,6 +70,10 @@
     "scripts/fixtures/r306/victory-r305.txt": {
       "before": null,
       "after": "6b369d5993df4768b8ad1e4783cb9775777cd6e09701c36ddc6124ccccc1273a"
+    },
+    "scripts/profile-runtime-worker-memory.mjs": {
+      "before": null,
+      "after": "e677563ef927b9e8c40e336fae8d1095f726af90aac8c53586fb671c5975f01b"
     },
     "scripts/profile-runtime.mjs": {
       "before": null,
@@ -80,9 +99,13 @@
       "before": null,
       "after": "6ce19d5c66adf65db5497e213dff091c4fe73ed69e49a9814a805cfca94ffd16"
     },
+    "scripts/soak-runtime-browser.mjs": {
+      "before": null,
+      "after": "2c57f3ffeab0ff8f6a96dfaf3babec78863e93e00659646c07600147f467593f"
+    },
     "scripts/summarize-runtime-benchmark.mjs": {
       "before": null,
-      "after": "5f39af40d1b4c4e2f63087aa0ca805189e0ab76910941010e15a4602dfbff886"
+      "after": "f90c8956527f2c677b11894176001bdc6514a0a19dad70da07d7e6358c277e5e"
     },
     "scripts/verify-runtime-browser.mjs": {
       "before": null,
@@ -90,7 +113,11 @@
     },
     "scripts/verify-runtime-parity.mjs": {
       "before": null,
-      "after": "a9c6a1b316b32275e644f0c87d9e251a71eea1e570115a3654e420025105971b"
+      "after": "fe0b1ec6dd4ac104d7fea644c399f4734e7f95f833486ce47b42bdd6a1a82810"
+    },
+    "src/game/formal/offline.ts": {
+      "before": "ffc72ec9c708995ce4cdf72990db852bd7657fec209bd7cc9d42c13c5f822a06",
+      "after": "b4265164ff97859869d0fa3ae3b7751a8ce5c4d205384484b153ba53e3409544"
     },
     "src/game/formal/reducer.ts": {
       "before": "012ee4dcf1c0d42a6dac117b6ae4b743855fc76a59e50e17cda6e3ccf4d81052",
@@ -98,11 +125,15 @@
     },
     "src/game/formal/runtimeSchedulingR306.test.ts": {
       "before": null,
-      "after": "35db5d2fbdb9a9fce1de808a1a8a6abd5a62bdc926d063af5db02b54c73cf376"
+      "after": "26dede6f44319a709588e8a0c3fbe5eb9824f04dd62b156d718ce623f4ab22bb"
     },
     "src/game/formal/victory.ts": {
       "before": "6b369d5993df4768b8ad1e4783cb9775777cd6e09701c36ddc6124ccccc1273a",
       "after": "3147c7eb05ad8903850eaedbe4b50e9d9c4f7e16df4c12a876c4be6102c8a58d"
+    },
+    "src/game/persistence.ts": {
+      "before": "9c8feb54e9a5133c224f64b648c8fafbf0e2c79a8d245a41ddd7729ec1739978",
+      "after": "174194f58cd18b9f559067604274e3a5ba193e8f9da5e760acdcccdc3b0f74f0"
     },
     "src/game/releaseRolloverR306.test.ts": {
       "before": null,
@@ -110,7 +141,7 @@
     },
     "src/game/runtime.worker.ts": {
       "before": "45c4d79ba72d4b1ef473d58ade7a0fd9ecdd4eee73f677b6905dbac912b907d4",
-      "after": "c3051c861da5cf95dd7ab2637fb5478a6da9033ad86c563263cb7583a591a884"
+      "after": "2acbf02483ab246fd41f3f5c2ce71a7a37a6e7407fa0eb4d7b846358eac5bad8"
     },
     "src/game/runtimeWorkBudget.ts": {
       "before": null,
@@ -130,6 +161,11 @@
     "scripts/release-metadata.mjs": [
       "df4a625c5fbae7a6c91034ccc45c12a463e3f78b442b1f878bf90b125444fde0"
     ],
+    "src/game/formal/offline.ts": [
+      "ffc72ec9c708995ce4cdf72990db852bd7657fec209bd7cc9d42c13c5f822a06",
+      "68e0c430c000d5c66f1dd3cfb1afeca2a48152327ff312acbfdf8b8ffbb091ce",
+      "46c5bcbec71082ac2755d71373706dad169a03b40ab1a1db7d42114dfe474d0c"
+    ],
     "src/game/formal/reducer.ts": [
       "012ee4dcf1c0d42a6dac117b6ae4b743855fc76a59e50e17cda6e3ccf4d81052",
       "c17ff2102589613d345dabf8e45a5caea83d5f459c7b57e2263a18b620206408",
@@ -139,6 +175,13 @@
     "src/game/formal/victory.ts": [
       "6b369d5993df4768b8ad1e4783cb9775777cd6e09701c36ddc6124ccccc1273a",
       "a01c07bbc83d9ae7760ba0ded199cec19b50aabc8db35bb378269f4c5e375e1e"
+    ],
+    "src/game/persistence.ts": [
+      "9c8feb54e9a5133c224f64b648c8fafbf0e2c79a8d245a41ddd7729ec1739978",
+      "6e28aae568a7885d4a6d9a29cfd5c8642d13765260ff3cd92cbb9da0c0a23f38",
+      "2c757a730edfdc83dada140d4c5be59a4ab8f5e4a30ef828fae80600bf6d62d3",
+      "ecfae472b57df39d54894971f642e4bf70beae57b0b13127903b95c1e8999ed9",
+      "2bac792fcec330fa42ca983e5f88195aaf7b478e88b895dff1212aa3a9ceebdb"
     ],
     "src/game/runtime.worker.ts": [
       "45c4d79ba72d4b1ef473d58ade7a0fd9ecdd4eee73f677b6905dbac912b907d4",
@@ -151,7 +194,8 @@
   },
   "references": {
     "scripts/fixtures/r306/reducer-r305.txt": "012ee4dcf1c0d42a6dac117b6ae4b743855fc76a59e50e17cda6e3ccf4d81052",
-    "scripts/fixtures/r306/victory-r305.txt": "6b369d5993df4768b8ad1e4783cb9775777cd6e09701c36ddc6124ccccc1273a"
+    "scripts/fixtures/r306/victory-r305.txt": "6b369d5993df4768b8ad1e4783cb9775777cd6e09701c36ddc6124ccccc1273a",
+    "scripts/fixtures/r306/offline-r305.txt": "ffc72ec9c708995ce4cdf72990db852bd7657fec209bd7cc9d42c13c5f822a06"
   },
   "invariants": {
     "src/App.tsx": "93ef722c86d097039bf1163f5868a68f8eac876528c7e872ac4197e304942358",
@@ -380,7 +424,6 @@
     "src/game/formal/mountainSilhouettes.json": "2610c3b22dc9d5e2725e8ac4a09c003f763a97dc0529e28006958fc8d459e169",
     "src/game/formal/mountains.ts": "210fc554c3a25f57e6caa25e69e2fde959eacae9ff6b13e9f16892aea06406dc",
     "src/game/formal/mountains31.test.ts": "d9b1508389d3ff160287c54381f850086c2f91081a51efc24dada2417445b685",
-    "src/game/formal/offline.ts": "ffc72ec9c708995ce4cdf72990db852bd7657fec209bd7cc9d42c13c5f822a06",
     "src/game/formal/offlineCooperative.test.ts": "36f928b71d17b65c9a65b817f93660de410c186974e8d40ec184b1663ef99bb8",
     "src/game/formal/offlineExtinctionClockDelta.test.ts": "a32bce34d443e67a028d9aa8d7fe6ec72b98d035e4038acb6b82baa7f59ff117",
     "src/game/formal/offlineExtinctionClockDeltaTestSupport.ts": "8a709200b46dc4a145f83469ffb93206fff31024cc1bd44d823fcee52c1f68ff",
@@ -501,7 +544,6 @@
     "src/game/organizations.ts": "f10cb48117fe00b855cdc9c1c72e8b190419ab87e8c81bbbaeceb051672edf41",
     "src/game/painterlyGround.test.ts": "fb88149caee89f005f264e93de6d26b50f3f0ef463c322a0432b5b11d4ce78d2",
     "src/game/painterlyGround.ts": "99768f140b1db50480f65b605d69ad43c437191a4bb4bd915cbd492afd71c4e6",
-    "src/game/persistence.ts": "9c8feb54e9a5133c224f64b648c8fafbf0e2c79a8d245a41ddd7729ec1739978",
     "src/game/playerName.test.ts": "5d237f7e2ec4252abe5046daea7d41c1aec28a95161b7789541d6c54492b99f3",
     "src/game/presentation/Art.tsx": "6d3dec16b71d78a24d22f8e18ea82bf512efa166cceeb8fd3b35169d6e42e0e2",
     "src/game/presentation/AwarenessPanel.tsx": "812d118677bc628c0f4a9415161f0a6487be09ae548d7098e22595084914d72f",
