@@ -5,7 +5,8 @@ import ts from 'typescript';
 const base='1737d14a8f210fb2d33eb5dadbde18c3bb375586',read=p=>fs.readFileSync(p,'utf8'),old=p=>execFileSync('git',['show',base+':'+p],{encoding:'utf8',stdio:['ignore','pipe','pipe']});
 const preserved=['src/game/formal/model.ts','src/game/formal/reducer.ts','src/game/formal/scheduler.ts','src/game/formal/commandLedger.ts','src/game/formal/saveCodec.ts','src/game/ledgerStore.ts','src/game/persistence.ts','src/game/formal/constructionRules.ts'];
 const successor=JSON.parse(execFileSync('python3',['scripts/b10_r3_05_successor.py','--boundary-record'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
-const admitted=p=>Object.hasOwn(successor.changes,p);
+const runtimeSuccessor=JSON.parse(execFileSync('python3',['scripts/b10_r3_06_successor.py','--boundary-record'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
+const admitted=p=>Object.hasOwn(successor.changes,p)||Object.hasOwn(runtimeSuccessor.changes,p);
 for(const p of preserved)if(!admitted(p))assert.equal(read(p),old(p),`Changed authority/rule contract: ${p}`);
 const changed=execFileSync('git',['diff','--name-only',base,'HEAD','--','src/game/formal'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim().split('\n').filter(p=>p.endsWith('.ts')&&!p.endsWith('.test.ts')&&!/Support\.ts$/.test(p)),intentional=new Set(['src/game/formal/economy.ts','src/game/formal/buildingDetailData.ts','src/game/formal/schema.ts','src/game/formal/growthTaskSchema.ts']);
 const js=s=>ts.transpileModule(s,{compilerOptions:{target:ts.ScriptTarget.ESNext,module:ts.ModuleKind.ESNext,removeComments:true}}).outputText;
@@ -24,4 +25,4 @@ const priorSchema=declaration(old('src/game/formal/schema.ts'),'worldSchema'),ne
 assert.equal(priorSchema.expression.expression.getText(),declaration(read('src/game/formal/schema.ts'),'worldValueSchema').getText());
 assert.equal(priorSchema.arguments[0].getText(),nextSchema.arguments[0].getText());
 assert.equal(declaration(old('src/game/formal/growthTaskSchema.ts'),'growthTaskSchema').getText(),declaration(read('src/game/formal/growthTaskSchema.ts'),'growthTaskValueSchema').getText());
-console.log(JSON.stringify({pass:true,preservedAuthorityFiles:preserved.filter(p=>!admitted(p)).length,verifiedPersistenceSuccessorFiles:preserved.filter(admitted).length,typeOnlyFormalModules:typeOnly,formalEconomyEquivalent:true,formalCastleSourceEquivalent:true,saveObjectAndRefinementIdentical:true,displayHistoryMaterialization:0}));
+console.log(JSON.stringify({pass:true,preservedAuthorityFiles:preserved.filter(p=>!admitted(p)).length,verifiedSuccessorFiles:preserved.filter(admitted).length,typeOnlyFormalModules:typeOnly,formalEconomyEquivalent:true,formalCastleSourceEquivalent:true,saveObjectAndRefinementIdentical:true,displayHistoryMaterialization:0}));

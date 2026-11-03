@@ -260,20 +260,26 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
 /** Yield between completed events, never between an event's mutations or during an IDB transaction. */
-export type CooperativeAdvanceOptions={yieldIntervalMs?:number};
+export type CooperativeAdvanceOptions={yieldIntervalMs?:number;yieldBeforeStart?:boolean;shouldYield?:(elapsedMs:number)=>boolean;yieldControl?:(boundary:'start'|'event')=>Promise<void>};
 export async function advanceFormalCooperative(current:FormalWorld,target:number,onProgress?:(time:number,target:number,processed:number)=>void,options:CooperativeAdvanceOptions={}):Promise<FormalTransition> {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  const yieldIntervalMs=options.yieldIntervalMs??50;
  if(!Number.isFinite(yieldIntervalMs)||yieldIntervalMs<0)throw new Error('世界推進讓出間隔無效。');
  if(worldPaused(current))return{world:current,reports:[]};
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
+ // A queued input can start T1 before an expensive private-draft clone. This
+ // checkpoint has no event/world mutations; the fixed logical target is kept.
+ if(options.yieldBeforeStart)await(options.yieldControl?.('start')??new Promise<void>(resolve=>setTimeout(resolve,0)));
  const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;
-  if((options.yieldIntervalMs!==undefined||processed%16===0)&&performance.now()-lastYield>=yieldIntervalMs){
+  const elapsed=performance.now()-lastYield;
+  if((options.yieldIntervalMs!==undefined||options.shouldYield||processed%16===0)&&(elapsed>=yieldIntervalMs||options.shouldYield?.(elapsed))){
    onProgress?.(w.time,target,processed);
-   await new Promise<void>(resolve=>setTimeout(resolve,0));
+   // Hooks receive no draft. Only complete events can yield; no partial
+   // scheduler, RNG, report or world state is published by this boundary.
+   await (options.yieldControl?.('event')??new Promise<void>(resolve=>setTimeout(resolve,0)));
    lastYield=performance.now();
   }
  }

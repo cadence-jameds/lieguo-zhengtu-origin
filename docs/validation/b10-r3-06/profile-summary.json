@@ -1,0 +1,2529 @@
+{
+  "method": "Node22.23.4/CPU2/8GiB actual paths; one wall sample per scenario, no wall p95. Inclusive phase quantiles only first up to20000 observations. Before legacy is a separate process; after legacy follows two scenarios. GC callbacks may include setup collections delivered at later yields, not exact replay GC. Memory is sampled process RSS/heap, not peak/Worker heap. CPU samples cover whole tool incl Vite/encoding/instrumentation; not a device SLA or precise cross-run ratio.",
+  "runtimeSource": "803b174db5d2be0adef24b94b22782856ae365b9",
+  "rows": [
+    {
+      "version": "before",
+      "scenario": "first-decision",
+      "ms": 58.521756000000096,
+      "events": 1,
+      "eventsPerSecond": 17.087662236245922,
+      "decisions": 1,
+      "yields": 2,
+      "memoryAtStart": {
+        "rss": 622751744,
+        "heapTotal": 199757824,
+        "heapUsed": 165458576,
+        "external": 5845845,
+        "arrayBuffers": 669364
+      },
+      "memoryAtEnd": {
+        "rss": 623915008,
+        "heapTotal": 200962048,
+        "heapUsed": 176999104,
+        "external": 4820013,
+        "arrayBuffers": 669364
+      },
+      "gcCallbacks": {
+        "n": 1,
+        "totalObservedMs": 1.9033410102128983,
+        "maxObservedMs": 1.9033410102128983,
+        "kindCounts": {
+          "1": 1
+        }
+      },
+      "phases": {
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "totalMs": 4.01291399999991,
+          "maxMs": 4.01291399999991,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.01291399999991,
+            "p95": 4.01291399999991,
+            "max": 4.01291399999991
+          }
+        },
+        "scheduler.ts:replace": {
+          "calls": 6,
+          "totalMs": 1.701997000002848,
+          "maxMs": 0.5069550000007439,
+          "sampleStats": {
+            "n": 6,
+            "p50": 0.2378550000003088,
+            "p95": 0.5069550000007439,
+            "max": 0.5069550000007439
+          }
+        },
+        "reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "totalMs": 7.905689999999595,
+          "maxMs": 7.905689999999595,
+          "sampleStats": {
+            "n": 1,
+            "p50": 7.905689999999595,
+            "p95": 7.905689999999595,
+            "max": 7.905689999999595
+          }
+        },
+        "economy.ts:populationGrowth": {
+          "calls": 803,
+          "totalMs": 1.6332660000089163,
+          "maxMs": 0.25551199999972596,
+          "sampleStats": {
+            "n": 803,
+            "p50": 0.0010119999997186824,
+            "p95": 0.0019139999994877144,
+            "max": 0.25551199999972596
+          }
+        },
+        "growthTasks.ts:syncGrowthTasks": {
+          "calls": 2,
+          "totalMs": 1.240389000000505,
+          "maxMs": 1.2087879999999132,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.03160100000059174,
+            "p95": 1.2087879999999132,
+            "max": 1.2087879999999132
+          }
+        },
+        "militaryPower.ts:militaryRanking": {
+          "calls": 4,
+          "totalMs": 0.49769800000194664,
+          "maxMs": 0.4862380000004123,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.004114000000299711,
+            "p95": 0.4862380000004123,
+            "max": 0.4862380000004123
+          }
+        },
+        "victory.ts:campStatistics": {
+          "calls": 4,
+          "totalMs": 5.080136000001403,
+          "maxMs": 2.125952000000325,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.823699000000488,
+            "p95": 2.125952000000325,
+            "max": 2.125952000000325
+          }
+        },
+        "victory.ts:victoryConditions": {
+          "calls": 4,
+          "totalMs": 6.144591000000219,
+          "maxMs": 2.7990170000002763,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.923993999999766,
+            "p95": 2.7990170000002763,
+            "max": 2.7990170000002763
+          }
+        },
+        "victory.ts:reconcileVictory": {
+          "calls": 4,
+          "totalMs": 6.591159999999036,
+          "maxMs": 3.1011939999998503,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.9552249999997002,
+            "p95": 3.1011939999998503,
+            "max": 3.1011939999998503
+          }
+        },
+        "scheduler.ts:pop": {
+          "calls": 1,
+          "totalMs": 0.012343999999757216,
+          "maxMs": 0.012343999999757216,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.012343999999757216,
+            "p95": 0.012343999999757216,
+            "max": 0.012343999999757216
+          }
+        },
+        "growthTasks.ts:captureGrowthEvent": {
+          "calls": 1,
+          "totalMs": 0.01213000000007014,
+          "maxMs": 0.01213000000007014,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.01213000000007014,
+            "p95": 0.01213000000007014,
+            "max": 0.01213000000007014
+          }
+        },
+        "scheduler.ts:push": {
+          "calls": 2,
+          "totalMs": 0.02924799999982497,
+          "maxMs": 0.015478000000257452,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.013769999999567517,
+            "p95": 0.015478000000257452,
+            "max": 0.015478000000257452
+          }
+        },
+        "economy.ts:administrationMultiplier": {
+          "calls": 1,
+          "totalMs": 0.017546999999467516,
+          "maxMs": 0.017546999999467516,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.017546999999467516,
+            "p95": 0.017546999999467516,
+            "max": 0.017546999999467516
+          }
+        },
+        "economy.ts:settleCity": {
+          "calls": 3,
+          "totalMs": 0.5981620000002295,
+          "maxMs": 0.5859499999996842,
+          "sampleStats": {
+            "n": 3,
+            "p50": 0.00794800000039686,
+            "p95": 0.5859499999996842,
+            "max": 0.5859499999996842
+          }
+        },
+        "aiActions.ts:updatePublicMemory": {
+          "calls": 1,
+          "totalMs": 0.49040899999999965,
+          "maxMs": 0.49040899999999965,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.49040899999999965,
+            "p95": 0.49040899999999965,
+            "max": 0.49040899999999965
+          }
+        },
+        "modernCatchup.ts:catchupDecision": {
+          "calls": 1,
+          "totalMs": 0.19341299999996409,
+          "maxMs": 0.19341299999996409,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.19341299999996409,
+            "p95": 0.19341299999996409,
+            "max": 0.19341299999996409
+          }
+        },
+        "autonomy.ts:economicChoices": {
+          "calls": 1,
+          "totalMs": 3.0092070000000604,
+          "maxMs": 3.0092070000000604,
+          "sampleStats": {
+            "n": 1,
+            "p50": 3.0092070000000604,
+            "p95": 3.0092070000000604,
+            "max": 3.0092070000000604
+          }
+        },
+        "autonomy.ts:chooseEconomic": {
+          "calls": 2,
+          "totalMs": 0.2870909999992364,
+          "maxMs": 0.25539799999933166,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.031692999999904714,
+            "p95": 0.25539799999933166,
+            "max": 0.25539799999933166
+          }
+        },
+        "aiActions.ts:wonderDecision": {
+          "calls": 1,
+          "totalMs": 0.004252000000633416,
+          "maxMs": 0.004252000000633416,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.004252000000633416,
+            "p95": 0.004252000000633416,
+            "max": 0.004252000000633416
+          }
+        },
+        "aiActions.ts:politicalDecision": {
+          "calls": 1,
+          "totalMs": 0.01684800000020914,
+          "maxMs": 0.01684800000020914,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.01684800000020914,
+            "p95": 0.01684800000020914,
+            "max": 0.01684800000020914
+          }
+        },
+        "aiActions.ts:militaryDecision": {
+          "calls": 1,
+          "totalMs": 0.08749899999929767,
+          "maxMs": 0.08749899999929767,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.08749899999929767,
+            "p95": 0.08749899999929767,
+            "max": 0.08749899999929767
+          }
+        },
+        "aiActions.ts:expansionDecision": {
+          "calls": 1,
+          "totalMs": 0.005686000000423519,
+          "maxMs": 0.005686000000423519,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.005686000000423519,
+            "p95": 0.005686000000423519,
+            "max": 0.005686000000423519
+          }
+        },
+        "scheduler.ts:snapshot": {
+          "calls": 4,
+          "totalMs": 1.234322999998767,
+          "maxMs": 0.6140969999996742,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.22866999999951076,
+            "p95": 0.6140969999996742,
+            "max": 0.6140969999996742
+          }
+        },
+        "reducer.ts:cloneReplayCityDraft": {
+          "calls": 1,
+          "totalMs": 0.10857300000043324,
+          "maxMs": 0.10857300000043324,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.10857300000043324,
+            "p95": 0.10857300000043324,
+            "max": 0.10857300000043324
+          }
+        },
+        "economy.ts:promoteCityQueues": {
+          "calls": 2,
+          "totalMs": 0.13465800000085437,
+          "maxMs": 0.1295640000007552,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.005094000000099186,
+            "p95": 0.1295640000007552,
+            "max": 0.1295640000007552
+          }
+        },
+        "modernCatchup.ts:reconcileCatchup": {
+          "calls": 2,
+          "totalMs": 0.006108999999923981,
+          "maxMs": 0.004050999999890337,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.002058000000033644,
+            "p95": 0.004050999999890337,
+            "max": 0.004050999999890337
+          }
+        },
+        "reducer.ts:submitOrderDraft": {
+          "calls": 1,
+          "totalMs": 5.620429999999942,
+          "maxMs": 5.620429999999942,
+          "sampleStats": {
+            "n": 1,
+            "p50": 5.620429999999942,
+            "p95": 5.620429999999942,
+            "max": 5.620429999999942
+          }
+        },
+        "autonomy.ts:submitAutonomous": {
+          "calls": 1,
+          "totalMs": 7.567777000000206,
+          "maxMs": 7.567777000000206,
+          "sampleStats": {
+            "n": 1,
+            "p50": 7.567777000000206,
+            "p95": 7.567777000000206,
+            "max": 7.567777000000206
+          }
+        },
+        "autonomy.ts:handleAutonomy": {
+          "calls": 1,
+          "totalMs": 14.013801999999487,
+          "maxMs": 14.013801999999487,
+          "sampleStats": {
+            "n": 1,
+            "p50": 14.013801999999487,
+            "p95": 14.013801999999487,
+            "max": 14.013801999999487
+          }
+        },
+        "growthTasks.ts:recordGrowthEvent": {
+          "calls": 1,
+          "totalMs": 0.01094199999988632,
+          "maxMs": 0.01094199999988632,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.01094199999988632,
+            "p95": 0.01094199999988632,
+            "max": 0.01094199999988632
+          }
+        },
+        "reducer.ts:advanceOneEvent:ai.decide": {
+          "calls": 1,
+          "totalMs": 19.991683999999623,
+          "maxMs": 19.991683999999623,
+          "sampleStats": {
+            "n": 1,
+            "p50": 19.991683999999623,
+            "p95": 19.991683999999623,
+            "max": 19.991683999999623
+          }
+        },
+        "politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "totalMs": 0.0023460000002160086,
+          "maxMs": 0.0023460000002160086,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.0023460000002160086,
+            "p95": 0.0023460000002160086,
+            "max": 0.0023460000002160086
+          }
+        },
+        "schema.ts:validateFormalWorld": {
+          "calls": 1,
+          "totalMs": 18.206879999999728,
+          "maxMs": 18.206879999999728,
+          "sampleStats": {
+            "n": 1,
+            "p50": 18.206879999999728,
+            "p95": 18.206879999999728,
+            "max": 18.206879999999728
+          }
+        },
+        "reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "totalMs": 19.287303999999494,
+          "maxMs": 19.287303999999494,
+          "sampleStats": {
+            "n": 1,
+            "p50": 19.287303999999494,
+            "p95": 19.287303999999494,
+            "max": 19.287303999999494
+          }
+        },
+        "reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "totalMs": 58.318836000000374,
+          "maxMs": 58.318836000000374,
+          "sampleStats": {
+            "n": 1,
+            "p50": 58.318836000000374,
+            "p95": 58.318836000000374,
+            "max": 58.318836000000374
+          }
+        }
+      }
+    },
+    {
+      "version": "before",
+      "scenario": "simultaneous-99",
+      "ms": 506.8435220000001,
+      "events": 99,
+      "eventsPerSecond": 195.3265568224032,
+      "decisions": 99,
+      "yields": 37,
+      "memoryAtStart": {
+        "rss": 638623744,
+        "heapTotal": 215535616,
+        "heapUsed": 187217200,
+        "external": 5845741,
+        "arrayBuffers": 669364
+      },
+      "memoryAtEnd": {
+        "rss": 654995456,
+        "heapTotal": 231792640,
+        "heapUsed": 206877744,
+        "external": 4820013,
+        "arrayBuffers": 669364
+      },
+      "gcCallbacks": {
+        "n": 15,
+        "totalObservedMs": 66.40409699082375,
+        "maxObservedMs": 8.870536997914314,
+        "kindCounts": {
+          "1": 15
+        }
+      },
+      "phases": {
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "totalMs": 4.055217000000084,
+          "maxMs": 4.055217000000084,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.055217000000084,
+            "p95": 4.055217000000084,
+            "max": 4.055217000000084
+          }
+        },
+        "scheduler.ts:replace": {
+          "calls": 274,
+          "totalMs": 86.484789000001,
+          "maxMs": 5.626205000000482,
+          "sampleStats": {
+            "n": 274,
+            "p50": 0.20088200000009238,
+            "p95": 0.8736079999998765,
+            "max": 5.626205000000482
+          }
+        },
+        "reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "totalMs": 7.51705899999979,
+          "maxMs": 7.51705899999979,
+          "sampleStats": {
+            "n": 1,
+            "p50": 7.51705899999979,
+            "p95": 7.51705899999979,
+            "max": 7.51705899999979
+          }
+        },
+        "economy.ts:populationGrowth": {
+          "calls": 33901,
+          "totalMs": 13.723426999959884,
+          "maxMs": 4.1578410000001895,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.00021300000025803456,
+            "p95": 0.001307999999880849,
+            "max": 4.1578410000001895
+          }
+        },
+        "growthTasks.ts:syncGrowthTasks": {
+          "calls": 2,
+          "totalMs": 0.7032460000000356,
+          "maxMs": 0.6791539999994711,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.02409200000056444,
+            "p95": 0.6791539999994711,
+            "max": 0.6791539999994711
+          }
+        },
+        "militaryPower.ts:militaryRanking": {
+          "calls": 169,
+          "totalMs": 0.516723999993701,
+          "maxMs": 0.2684719999997469,
+          "sampleStats": {
+            "n": 169,
+            "p50": 0.0011230000000068685,
+            "p95": 0.0023039999996399274,
+            "max": 0.2684719999997469
+          }
+        },
+        "victory.ts:campStatistics": {
+          "calls": 169,
+          "totalMs": 58.18741399999453,
+          "maxMs": 4.308438999999453,
+          "sampleStats": {
+            "n": 169,
+            "p50": 0.18833900000026915,
+            "p95": 0.9267350000000079,
+            "max": 4.308438999999453
+          }
+        },
+        "victory.ts:victoryConditions": {
+          "calls": 169,
+          "totalMs": 72.39046299999791,
+          "maxMs": 4.410007999999834,
+          "sampleStats": {
+            "n": 169,
+            "p50": 0.25345800000013696,
+            "p95": 1.1513910000003307,
+            "max": 4.410007999999834
+          }
+        },
+        "victory.ts:reconcileVictory": {
+          "calls": 169,
+          "totalMs": 77.90899999999692,
+          "maxMs": 4.438584999999875,
+          "sampleStats": {
+            "n": 169,
+            "p50": 0.2792440000002898,
+            "p95": 1.1901560000005702,
+            "max": 4.438584999999875
+          }
+        },
+        "scheduler.ts:pop": {
+          "calls": 99,
+          "totalMs": 0.9519790000003923,
+          "maxMs": 0.2020299999994677,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.006217000000106054,
+            "p95": 0.008684999999786669,
+            "max": 0.2020299999994677
+          }
+        },
+        "growthTasks.ts:captureGrowthEvent": {
+          "calls": 99,
+          "totalMs": 0.38871000000017375,
+          "maxMs": 0.1500130000003992,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0019040000006498303,
+            "p95": 0.008941000000049826,
+            "max": 0.1500130000003992
+          }
+        },
+        "scheduler.ts:push": {
+          "calls": 167,
+          "totalMs": 1.9501709999949526,
+          "maxMs": 0.31182799999987765,
+          "sampleStats": {
+            "n": 167,
+            "p50": 0.007219999999506399,
+            "p95": 0.016964999999800057,
+            "max": 0.31182799999987765
+          }
+        },
+        "economy.ts:administrationMultiplier": {
+          "calls": 99,
+          "totalMs": 0.26251000000593194,
+          "maxMs": 0.00840299999981653,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0021980000001349254,
+            "p95": 0.0063899999995555845,
+            "max": 0.00840299999981653
+          }
+        },
+        "economy.ts:settleCity": {
+          "calls": 235,
+          "totalMs": 6.7880449999966,
+          "maxMs": 0.3759430000000066,
+          "sampleStats": {
+            "n": 235,
+            "p50": 0.006773000000066531,
+            "p95": 0.11208999999962543,
+            "max": 0.3759430000000066
+          }
+        },
+        "aiActions.ts:updatePublicMemory": {
+          "calls": 99,
+          "totalMs": 5.069262999993043,
+          "maxMs": 0.23615400000016962,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.03888999999981024,
+            "p95": 0.14145499999995081,
+            "max": 0.23615400000016962
+          }
+        },
+        "modernCatchup.ts:catchupDecision": {
+          "calls": 99,
+          "totalMs": 0.9103150000009919,
+          "maxMs": 0.054452999999739404,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.006965999999920314,
+            "p95": 0.019565000000511645,
+            "max": 0.054452999999739404
+          }
+        },
+        "autonomy.ts:economicChoices": {
+          "calls": 99,
+          "totalMs": 42.40271399999892,
+          "maxMs": 2.1279300000005605,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.3447069999992891,
+            "p95": 0.8112270000001445,
+            "max": 2.1279300000005605
+          }
+        },
+        "autonomy.ts:chooseEconomic": {
+          "calls": 136,
+          "totalMs": 11.703865999997106,
+          "maxMs": 5.786095000000387,
+          "sampleStats": {
+            "n": 136,
+            "p50": 0.03413199999977223,
+            "p95": 0.09619999999995343,
+            "max": 5.786095000000387
+          }
+        },
+        "aiActions.ts:wonderDecision": {
+          "calls": 99,
+          "totalMs": 0.25452400000358466,
+          "maxMs": 0.005724999999983993,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.002314999999725842,
+            "p95": 0.005388999999922817,
+            "max": 0.005724999999983993
+          }
+        },
+        "aiActions.ts:politicalDecision": {
+          "calls": 99,
+          "totalMs": 0.6575549999961368,
+          "maxMs": 0.3314940000000206,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0038930000000618747,
+            "p95": 0.0068019999998796266,
+            "max": 0.3314940000000206
+          }
+        },
+        "aiActions.ts:militaryDecision": {
+          "calls": 99,
+          "totalMs": 1.0629609999987224,
+          "maxMs": 0.21728799999982584,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.005816999999296968,
+            "p95": 0.014368000000104075,
+            "max": 0.21728799999982584
+          }
+        },
+        "aiActions.ts:expansionDecision": {
+          "calls": 99,
+          "totalMs": 0.6604510000006485,
+          "maxMs": 0.3681799999994837,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0016249999998763087,
+            "p95": 0.007993000000169559,
+            "max": 0.3681799999994837
+          }
+        },
+        "scheduler.ts:snapshot": {
+          "calls": 205,
+          "totalMs": 79.83000700000503,
+          "maxMs": 4.707878000000164,
+          "sampleStats": {
+            "n": 205,
+            "p50": 0.2980330000000322,
+            "p95": 0.8724860000002082,
+            "max": 4.707878000000164
+          }
+        },
+        "reducer.ts:cloneReplayCityDraft": {
+          "calls": 68,
+          "totalMs": 13.406489999999394,
+          "maxMs": 5.155783000000156,
+          "sampleStats": {
+            "n": 68,
+            "p50": 0.12075199999981123,
+            "p95": 0.2413539999997738,
+            "max": 5.155783000000156
+          }
+        },
+        "economy.ts:promoteCityQueues": {
+          "calls": 136,
+          "totalMs": 0.6407719999979236,
+          "maxMs": 0.18816100000003644,
+          "sampleStats": {
+            "n": 136,
+            "p50": 0.0036620000000766595,
+            "p95": 0.006352999999762687,
+            "max": 0.18816100000003644
+          }
+        },
+        "modernCatchup.ts:reconcileCatchup": {
+          "calls": 167,
+          "totalMs": 0.1363610000062181,
+          "maxMs": 0.005959000000075321,
+          "sampleStats": {
+            "n": 167,
+            "p50": 0.0007020000002739835,
+            "p95": 0.0012200000001030276,
+            "max": 0.005959000000075321
+          }
+        },
+        "reducer.ts:submitOrderDraft": {
+          "calls": 68,
+          "totalMs": 209.85353000000214,
+          "maxMs": 8.79797900000085,
+          "sampleStats": {
+            "n": 68,
+            "p50": 2.617862000000059,
+            "p95": 6.551991000000271,
+            "max": 8.79797900000085
+          }
+        },
+        "autonomy.ts:submitAutonomous": {
+          "calls": 99,
+          "totalMs": 253.56574099999762,
+          "maxMs": 9.420603000000483,
+          "sampleStats": {
+            "n": 99,
+            "p50": 2.3503970000001573,
+            "p95": 6.50129299999935,
+            "max": 9.420603000000483
+          }
+        },
+        "autonomy.ts:handleAutonomy": {
+          "calls": 99,
+          "totalMs": 328.027178000003,
+          "maxMs": 10.132101000000148,
+          "sampleStats": {
+            "n": 99,
+            "p50": 2.8625899999997273,
+            "p95": 7.555411999999706,
+            "max": 10.132101000000148
+          }
+        },
+        "growthTasks.ts:recordGrowthEvent": {
+          "calls": 99,
+          "totalMs": 0.47128400000747206,
+          "maxMs": 0.22776299999986804,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.002014999999119027,
+            "p95": 0.0038279999998849235,
+            "max": 0.22776299999986804
+          }
+        },
+        "reducer.ts:advanceOneEvent:ai.decide": {
+          "calls": 99,
+          "totalMs": 410.8612900000062,
+          "maxMs": 12.336438000000271,
+          "sampleStats": {
+            "n": 99,
+            "p50": 3.6149130000003424,
+            "p95": 8.96398600000066,
+            "max": 12.336438000000271
+          }
+        },
+        "politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "totalMs": 0.002215999999862106,
+          "maxMs": 0.002215999999862106,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.002215999999862106,
+            "p95": 0.002215999999862106,
+            "max": 0.002215999999862106
+          }
+        },
+        "schema.ts:validateFormalWorld": {
+          "calls": 1,
+          "totalMs": 19.63412199999948,
+          "maxMs": 19.63412199999948,
+          "sampleStats": {
+            "n": 1,
+            "p50": 19.63412199999948,
+            "p95": 19.63412199999948,
+            "max": 19.63412199999948
+          }
+        },
+        "reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "totalMs": 20.059555000000728,
+          "maxMs": 20.059555000000728,
+          "sampleStats": {
+            "n": 1,
+            "p50": 20.059555000000728,
+            "p95": 20.059555000000728,
+            "max": 20.059555000000728
+          }
+        },
+        "reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "totalMs": 506.82257200000004,
+          "maxMs": 506.82257200000004,
+          "sampleStats": {
+            "n": 1,
+            "p50": 506.82257200000004,
+            "p95": 506.82257200000004,
+            "max": 506.82257200000004
+          }
+        }
+      }
+    },
+    {
+      "version": "before",
+      "scenario": "legacy-30-day",
+      "ms": 13932.690528,
+      "events": 72001,
+      "eventsPerSecond": 5167.774297096626,
+      "decisions": 1,
+      "yields": 1510,
+      "memoryAtStart": {
+        "rss": 444043264,
+        "heapTotal": 194252800,
+        "heapUsed": 163275152,
+        "external": 5832211,
+        "arrayBuffers": 663410
+      },
+      "memoryAtEnd": {
+        "rss": 478601216,
+        "heapTotal": 232259584,
+        "heapUsed": 200599112,
+        "external": 4806547,
+        "arrayBuffers": 663410
+      },
+      "gcCallbacks": {
+        "n": 1238,
+        "totalObservedMs": 723.6260611563921,
+        "maxObservedMs": 10.52836799621582,
+        "kindCounts": {
+          "1": 1238
+        }
+      },
+      "phases": {
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "totalMs": 8.200859000000037,
+          "maxMs": 8.200859000000037,
+          "sampleStats": {
+            "n": 1,
+            "p50": 8.200859000000037,
+            "p95": 8.200859000000037,
+            "max": 8.200859000000037
+          }
+        },
+        "scheduler.ts:replace": {
+          "calls": 6,
+          "totalMs": 1.38298199999781,
+          "maxMs": 0.5028829999973823,
+          "sampleStats": {
+            "n": 6,
+            "p50": 0.19777299999987008,
+            "p95": 0.5028829999973823,
+            "max": 0.5028829999973823
+          }
+        },
+        "reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "totalMs": 6.907798000000184,
+          "maxMs": 6.907798000000184,
+          "sampleStats": {
+            "n": 1,
+            "p50": 6.907798000000184,
+            "p95": 6.907798000000184,
+            "max": 6.907798000000184
+          }
+        },
+        "economy.ts:populationGrowth": {
+          "calls": 14472803,
+          "totalMs": 1282.331798000641,
+          "maxMs": 5.723949000000175,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.00019699999984368333,
+            "p95": 0.0009380000001328881,
+            "max": 0.10199899999997797
+          }
+        },
+        "growthTasks.ts:syncGrowthTasks": {
+          "calls": 2,
+          "totalMs": 0.9842310000008183,
+          "maxMs": 0.937836999999945,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.04639400000087335,
+            "p95": 0.937836999999945,
+            "max": 0.937836999999945
+          }
+        },
+        "militaryPower.ts:militaryRanking": {
+          "calls": 72004,
+          "totalMs": 23.75545700020166,
+          "maxMs": 1.2357480000000578,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.000183999999990192,
+            "p95": 0.0009959999997590785,
+            "max": 1.2357480000000578
+          }
+        },
+        "victory.ts:campStatistics": {
+          "calls": 72004,
+          "totalMs": 6427.050379999939,
+          "maxMs": 8.022649000000456,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.07153899999957503,
+            "p95": 0.17468000000008033,
+            "max": 5.916659999999865
+          }
+        },
+        "victory.ts:victoryConditions": {
+          "calls": 72004,
+          "totalMs": 8468.29449200004,
+          "maxMs": 8.048706999999922,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.09551299999975527,
+            "p95": 0.2210930000001099,
+            "max": 5.940791999999874
+          }
+        },
+        "victory.ts:reconcileVictory": {
+          "calls": 72004,
+          "totalMs": 8798.890076000163,
+          "maxMs": 8.070104999998875,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.09879900000032649,
+            "p95": 0.23001300000032643,
+            "max": 6.014933999999812
+          }
+        },
+        "scheduler.ts:pop": {
+          "calls": 72001,
+          "totalMs": 95.82815999976538,
+          "maxMs": 0.7308860000002824,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.001059000000168453,
+            "p95": 0.002817999999933818,
+            "max": 0.7308860000002824
+          }
+        },
+        "growthTasks.ts:captureGrowthEvent": {
+          "calls": 72001,
+          "totalMs": 39.39242100012143,
+          "maxMs": 0.9620770000001357,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0003209999995306134,
+            "p95": 0.0014689999998154235,
+            "max": 0.20486300000038682
+          }
+        },
+        "autonomy.ts:handleAutonomy": {
+          "calls": 72001,
+          "totalMs": 33.501794000226255,
+          "maxMs": 19.652486999999383,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0001229999998031417,
+            "p95": 0.0005469999996421393,
+            "max": 0.3833969999996043
+          }
+        },
+        "economy.ts:administrationMultiplier": {
+          "calls": 72001,
+          "totalMs": 43.13397200010331,
+          "maxMs": 0.6594089999998687,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.00045899999986431794,
+            "p95": 0.00159200000052806,
+            "max": 0.25033699999994496
+          }
+        },
+        "economy.ts:settleCity": {
+          "calls": 72003,
+          "totalMs": 588.1800470000421,
+          "maxMs": 2.571226000000024,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.005605999999716005,
+            "p95": 0.026427000000239786,
+            "max": 2.571226000000024
+          }
+        },
+        "scheduler.ts:push": {
+          "calls": 72002,
+          "totalMs": 148.236878000032,
+          "maxMs": 5.018633000000591,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0012740000001940643,
+            "p95": 0.0046300000003611785,
+            "max": 5.018633000000591
+          }
+        },
+        "growthTasks.ts:recordGrowthEvent": {
+          "calls": 72001,
+          "totalMs": 17.333390999891435,
+          "maxMs": 0.6659409999992931,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0001229999998031417,
+            "p95": 0.0007229999996525294,
+            "max": 0.31825800000024174
+          }
+        },
+        "modernCatchup.ts:reconcileCatchup": {
+          "calls": 72002,
+          "totalMs": 8.617480000265914,
+          "maxMs": 0.20736499999975422,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 7.699999969190685e-05,
+            "p95": 0.00029100000028847717,
+            "max": 0.20736499999975422
+          }
+        },
+        "economy.ts:promoteCityQueues": {
+          "calls": 72002,
+          "totalMs": 29.876755000156663,
+          "maxMs": 0.4526719999994384,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0002660000000105356,
+            "p95": 0.0011979999999311985,
+            "max": 0.4001429999998436
+          }
+        },
+        "reducer.ts:advanceOneEvent:economy.settle": {
+          "calls": 72000,
+          "totalMs": 12205.553656000158,
+          "maxMs": 17.39757499999905,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.14163400000006732,
+            "p95": 0.343166999999994,
+            "max": 9.825162000000091
+          }
+        },
+        "aiActions.ts:updatePublicMemory": {
+          "calls": 1,
+          "totalMs": 0.7487380000020494,
+          "maxMs": 0.7487380000020494,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.7487380000020494,
+            "p95": 0.7487380000020494,
+            "max": 0.7487380000020494
+          }
+        },
+        "modernCatchup.ts:catchupDecision": {
+          "calls": 1,
+          "totalMs": 0.24038699999800883,
+          "maxMs": 0.24038699999800883,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.24038699999800883,
+            "p95": 0.24038699999800883,
+            "max": 0.24038699999800883
+          }
+        },
+        "autonomy.ts:economicChoices": {
+          "calls": 1,
+          "totalMs": 4.167191000000457,
+          "maxMs": 4.167191000000457,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.167191000000457,
+            "p95": 4.167191000000457,
+            "max": 4.167191000000457
+          }
+        },
+        "autonomy.ts:chooseEconomic": {
+          "calls": 2,
+          "totalMs": 0.6457340000015392,
+          "maxMs": 0.5963919999994687,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.04934200000207056,
+            "p95": 0.5963919999994687,
+            "max": 0.5963919999994687
+          }
+        },
+        "aiActions.ts:wonderDecision": {
+          "calls": 1,
+          "totalMs": 0.004178000002866611,
+          "maxMs": 0.004178000002866611,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.004178000002866611,
+            "p95": 0.004178000002866611,
+            "max": 0.004178000002866611
+          }
+        },
+        "aiActions.ts:politicalDecision": {
+          "calls": 1,
+          "totalMs": 0.020204000000376254,
+          "maxMs": 0.020204000000376254,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.020204000000376254,
+            "p95": 0.020204000000376254,
+            "max": 0.020204000000376254
+          }
+        },
+        "aiActions.ts:militaryDecision": {
+          "calls": 1,
+          "totalMs": 0.2780179999972461,
+          "maxMs": 0.2780179999972461,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.2780179999972461,
+            "p95": 0.2780179999972461,
+            "max": 0.2780179999972461
+          }
+        },
+        "aiActions.ts:expansionDecision": {
+          "calls": 1,
+          "totalMs": 0.005739999996876577,
+          "maxMs": 0.005739999996876577,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.005739999996876577,
+            "p95": 0.005739999996876577,
+            "max": 0.005739999996876577
+          }
+        },
+        "scheduler.ts:snapshot": {
+          "calls": 4,
+          "totalMs": 0.9216639999976906,
+          "maxMs": 0.4187969999984489,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.12997600000016973,
+            "p95": 0.4187969999984489,
+            "max": 0.4187969999984489
+          }
+        },
+        "reducer.ts:cloneReplayCityDraft": {
+          "calls": 1,
+          "totalMs": 0.15489899999738554,
+          "maxMs": 0.15489899999738554,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.15489899999738554,
+            "p95": 0.15489899999738554,
+            "max": 0.15489899999738554
+          }
+        },
+        "reducer.ts:submitOrderDraft": {
+          "calls": 1,
+          "totalMs": 5.144432000000961,
+          "maxMs": 5.144432000000961,
+          "sampleStats": {
+            "n": 1,
+            "p50": 5.144432000000961,
+            "p95": 5.144432000000961,
+            "max": 5.144432000000961
+          }
+        },
+        "autonomy.ts:submitAutonomous": {
+          "calls": 1,
+          "totalMs": 10.158221000001504,
+          "maxMs": 10.158221000001504,
+          "sampleStats": {
+            "n": 1,
+            "p50": 10.158221000001504,
+            "p95": 10.158221000001504,
+            "max": 10.158221000001504
+          }
+        },
+        "reducer.ts:advanceOneEvent:ai.decide": {
+          "calls": 1,
+          "totalMs": 21.289569999997184,
+          "maxMs": 21.289569999997184,
+          "sampleStats": {
+            "n": 1,
+            "p50": 21.289569999997184,
+            "p95": 21.289569999997184,
+            "max": 21.289569999997184
+          }
+        },
+        "politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "totalMs": 0.002727999999478925,
+          "maxMs": 0.002727999999478925,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.002727999999478925,
+            "p95": 0.002727999999478925,
+            "max": 0.002727999999478925
+          }
+        },
+        "schema.ts:validateFormalWorld": {
+          "calls": 1,
+          "totalMs": 26.491986999997607,
+          "maxMs": 26.491986999997607,
+          "sampleStats": {
+            "n": 1,
+            "p50": 26.491986999997607,
+            "p95": 26.491986999997607,
+            "max": 26.491986999997607
+          }
+        },
+        "reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "totalMs": 27.252822999998898,
+          "maxMs": 27.252822999998898,
+          "sampleStats": {
+            "n": 1,
+            "p50": 27.252822999998898,
+            "p95": 27.252822999998898,
+            "max": 27.252822999998898
+          }
+        },
+        "reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "totalMs": 13932.396831999999,
+          "maxMs": 13932.396831999999,
+          "sampleStats": {
+            "n": 1,
+            "p50": 13932.396831999999,
+            "p95": 13932.396831999999,
+            "max": 13932.396831999999
+          }
+        }
+      }
+    },
+    {
+      "version": "after",
+      "scenario": "first-decision",
+      "ms": 46.619264999999814,
+      "events": 1,
+      "eventsPerSecond": 21.450359631367075,
+      "decisions": 1,
+      "yields": 2,
+      "memoryAtStart": {
+        "rss": 653828096,
+        "heapTotal": 201076736,
+        "heapUsed": 171402952,
+        "external": 5839988,
+        "arrayBuffers": 663509
+      },
+      "memoryAtEnd": {
+        "rss": 655904768,
+        "heapTotal": 203067392,
+        "heapUsed": 168402872,
+        "external": 4814094,
+        "arrayBuffers": 663509
+      },
+      "gcCallbacks": {
+        "n": 2,
+        "totalObservedMs": 2.1923829913139343,
+        "maxObservedMs": 1.1265249997377396,
+        "kindCounts": {
+          "1": 2
+        }
+      },
+      "phases": {
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "totalMs": 4.5363509999997405,
+          "maxMs": 4.5363509999997405,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.5363509999997405,
+            "p95": 4.5363509999997405,
+            "max": 4.5363509999997405
+          }
+        },
+        "scheduler.ts:replace": {
+          "calls": 6,
+          "totalMs": 1.5931250000003274,
+          "maxMs": 0.5682590000001255,
+          "sampleStats": {
+            "n": 6,
+            "p50": 0.27455100000042876,
+            "p95": 0.5682590000001255,
+            "max": 0.5682590000001255
+          }
+        },
+        "reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "totalMs": 4.706843999999819,
+          "maxMs": 4.706843999999819,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.706843999999819,
+            "p95": 4.706843999999819,
+            "max": 4.706843999999819
+          }
+        },
+        "economy.ts:populationGrowth": {
+          "calls": 3,
+          "totalMs": 0.11511299999983748,
+          "maxMs": 0.08452799999986382,
+          "sampleStats": {
+            "n": 3,
+            "p50": 0.016400999999859778,
+            "p95": 0.08452799999986382,
+            "max": 0.08452799999986382
+          }
+        },
+        "growthTasks.ts:syncGrowthTasks": {
+          "calls": 2,
+          "totalMs": 0.8411519999999655,
+          "maxMs": 0.798671000000013,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.04248099999995247,
+            "p95": 0.798671000000013,
+            "max": 0.798671000000013
+          }
+        },
+        "victory.ts:reconcileVictory": {
+          "calls": 4,
+          "totalMs": 0.3115669999997408,
+          "maxMs": 0.15674600000011196,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.04568799999969997,
+            "p95": 0.15674600000011196,
+            "max": 0.15674600000011196
+          }
+        },
+        "scheduler.ts:pop": {
+          "calls": 1,
+          "totalMs": 0.010014999999839347,
+          "maxMs": 0.010014999999839347,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.010014999999839347,
+            "p95": 0.010014999999839347,
+            "max": 0.010014999999839347
+          }
+        },
+        "growthTasks.ts:captureGrowthEvent": {
+          "calls": 1,
+          "totalMs": 0.010753000000022439,
+          "maxMs": 0.010753000000022439,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.010753000000022439,
+            "p95": 0.010753000000022439,
+            "max": 0.010753000000022439
+          }
+        },
+        "scheduler.ts:push": {
+          "calls": 2,
+          "totalMs": 0.05375300000014249,
+          "maxMs": 0.042171999999936816,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.011581000000205677,
+            "p95": 0.042171999999936816,
+            "max": 0.042171999999936816
+          }
+        },
+        "economy.ts:administrationMultiplier": {
+          "calls": 1,
+          "totalMs": 0.01676900000029491,
+          "maxMs": 0.01676900000029491,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.01676900000029491,
+            "p95": 0.01676900000029491,
+            "max": 0.01676900000029491
+          }
+        },
+        "economy.ts:settleCity": {
+          "calls": 3,
+          "totalMs": 0.7839949999997771,
+          "maxMs": 0.7710979999997107,
+          "sampleStats": {
+            "n": 3,
+            "p50": 0.007855999999719643,
+            "p95": 0.7710979999997107,
+            "max": 0.7710979999997107
+          }
+        },
+        "aiActions.ts:updatePublicMemory": {
+          "calls": 1,
+          "totalMs": 0.44860400000015943,
+          "maxMs": 0.44860400000015943,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.44860400000015943,
+            "p95": 0.44860400000015943,
+            "max": 0.44860400000015943
+          }
+        },
+        "modernCatchup.ts:catchupDecision": {
+          "calls": 1,
+          "totalMs": 0.14686799999981304,
+          "maxMs": 0.14686799999981304,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.14686799999981304,
+            "p95": 0.14686799999981304,
+            "max": 0.14686799999981304
+          }
+        },
+        "autonomy.ts:economicChoices": {
+          "calls": 1,
+          "totalMs": 2.7717529999999897,
+          "maxMs": 2.7717529999999897,
+          "sampleStats": {
+            "n": 1,
+            "p50": 2.7717529999999897,
+            "p95": 2.7717529999999897,
+            "max": 2.7717529999999897
+          }
+        },
+        "autonomy.ts:chooseEconomic": {
+          "calls": 2,
+          "totalMs": 0.3468049999996765,
+          "maxMs": 0.31501099999968574,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.031793999999990774,
+            "p95": 0.31501099999968574,
+            "max": 0.31501099999968574
+          }
+        },
+        "aiActions.ts:wonderDecision": {
+          "calls": 1,
+          "totalMs": 0.0036949999998796557,
+          "maxMs": 0.0036949999998796557,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.0036949999998796557,
+            "p95": 0.0036949999998796557,
+            "max": 0.0036949999998796557
+          }
+        },
+        "aiActions.ts:politicalDecision": {
+          "calls": 1,
+          "totalMs": 0.020613000000139436,
+          "maxMs": 0.020613000000139436,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.020613000000139436,
+            "p95": 0.020613000000139436,
+            "max": 0.020613000000139436
+          }
+        },
+        "aiActions.ts:militaryDecision": {
+          "calls": 1,
+          "totalMs": 0.08366300000034244,
+          "maxMs": 0.08366300000034244,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.08366300000034244,
+            "p95": 0.08366300000034244,
+            "max": 0.08366300000034244
+          }
+        },
+        "aiActions.ts:expansionDecision": {
+          "calls": 1,
+          "totalMs": 0.005607000000054541,
+          "maxMs": 0.005607000000054541,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.005607000000054541,
+            "p95": 0.005607000000054541,
+            "max": 0.005607000000054541
+          }
+        },
+        "scheduler.ts:snapshot": {
+          "calls": 4,
+          "totalMs": 0.9747149999998328,
+          "maxMs": 0.40456799999992654,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.21960100000023886,
+            "p95": 0.40456799999992654,
+            "max": 0.40456799999992654
+          }
+        },
+        "reducer.ts:cloneReplayCityDraft": {
+          "calls": 1,
+          "totalMs": 0.14102199999979348,
+          "maxMs": 0.14102199999979348,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.14102199999979348,
+            "p95": 0.14102199999979348,
+            "max": 0.14102199999979348
+          }
+        },
+        "economy.ts:promoteCityQueues": {
+          "calls": 2,
+          "totalMs": 0.10068500000033964,
+          "maxMs": 0.09579400000029636,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.004891000000043277,
+            "p95": 0.09579400000029636,
+            "max": 0.09579400000029636
+          }
+        },
+        "modernCatchup.ts:reconcileCatchup": {
+          "calls": 2,
+          "totalMs": 0.00407199999972363,
+          "maxMs": 0.0020919999997204286,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.0019800000000032014,
+            "p95": 0.0020919999997204286,
+            "max": 0.0020919999997204286
+          }
+        },
+        "reducer.ts:submitOrderDraft": {
+          "calls": 1,
+          "totalMs": 4.395022000000154,
+          "maxMs": 4.395022000000154,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.395022000000154,
+            "p95": 4.395022000000154,
+            "max": 4.395022000000154
+          }
+        },
+        "autonomy.ts:submitAutonomous": {
+          "calls": 1,
+          "totalMs": 6.034239999999954,
+          "maxMs": 6.034239999999954,
+          "sampleStats": {
+            "n": 1,
+            "p50": 6.034239999999954,
+            "p95": 6.034239999999954,
+            "max": 6.034239999999954
+          }
+        },
+        "autonomy.ts:handleAutonomy": {
+          "calls": 1,
+          "totalMs": 12.53680200000008,
+          "maxMs": 12.53680200000008,
+          "sampleStats": {
+            "n": 1,
+            "p50": 12.53680200000008,
+            "p95": 12.53680200000008,
+            "max": 12.53680200000008
+          }
+        },
+        "growthTasks.ts:recordGrowthEvent": {
+          "calls": 1,
+          "totalMs": 0.005468999999720836,
+          "maxMs": 0.005468999999720836,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.005468999999720836,
+            "p95": 0.005468999999720836,
+            "max": 0.005468999999720836
+          }
+        },
+        "reducer.ts:advanceOneEvent:ai.decide": {
+          "calls": 1,
+          "totalMs": 14.90753500000028,
+          "maxMs": 14.90753500000028,
+          "sampleStats": {
+            "n": 1,
+            "p50": 14.90753500000028,
+            "p95": 14.90753500000028,
+            "max": 14.90753500000028
+          }
+        },
+        "politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "totalMs": 0.0023900000001049193,
+          "maxMs": 0.0023900000001049193,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.0023900000001049193,
+            "p95": 0.0023900000001049193,
+            "max": 0.0023900000001049193
+          }
+        },
+        "schema.ts:validateFormalWorld": {
+          "calls": 1,
+          "totalMs": 17.244062000000213,
+          "maxMs": 17.244062000000213,
+          "sampleStats": {
+            "n": 1,
+            "p50": 17.244062000000213,
+            "p95": 17.244062000000213,
+            "max": 17.244062000000213
+          }
+        },
+        "reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "totalMs": 17.663203000000067,
+          "maxMs": 17.663203000000067,
+          "sampleStats": {
+            "n": 1,
+            "p50": 17.663203000000067,
+            "p95": 17.663203000000067,
+            "max": 17.663203000000067
+          }
+        },
+        "reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "totalMs": 46.32615200000009,
+          "maxMs": 46.32615200000009,
+          "sampleStats": {
+            "n": 1,
+            "p50": 46.32615200000009,
+            "p95": 46.32615200000009,
+            "max": 46.32615200000009
+          }
+        }
+      }
+    },
+    {
+      "version": "after",
+      "scenario": "simultaneous-99",
+      "ms": 273.1011020000001,
+      "events": 99,
+      "eventsPerSecond": 362.5031143228414,
+      "decisions": 99,
+      "yields": 25,
+      "memoryAtStart": {
+        "rss": 669728768,
+        "heapTotal": 216592384,
+        "heapUsed": 189418456,
+        "external": 5839852,
+        "arrayBuffers": 663509
+      },
+      "memoryAtEnd": {
+        "rss": 685256704,
+        "heapTotal": 231968768,
+        "heapUsed": 200320528,
+        "external": 4814126,
+        "arrayBuffers": 663509
+      },
+      "gcCallbacks": {
+        "n": 13,
+        "totalObservedMs": 21.886655017733574,
+        "maxObservedMs": 2.8416559994220734,
+        "kindCounts": {
+          "1": 13
+        }
+      },
+      "phases": {
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "totalMs": 3.923714999999902,
+          "maxMs": 3.923714999999902,
+          "sampleStats": {
+            "n": 1,
+            "p50": 3.923714999999902,
+            "p95": 3.923714999999902,
+            "max": 3.923714999999902
+          }
+        },
+        "scheduler.ts:replace": {
+          "calls": 274,
+          "totalMs": 54.82787500000131,
+          "maxMs": 0.7082470000000285,
+          "sampleStats": {
+            "n": 274,
+            "p50": 0.16516200000023673,
+            "p95": 0.5039000000001579,
+            "max": 0.7082470000000285
+          }
+        },
+        "reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "totalMs": 4.267671999999948,
+          "maxMs": 4.267671999999948,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.267671999999948,
+            "p95": 4.267671999999948,
+            "max": 4.267671999999948
+          }
+        },
+        "economy.ts:populationGrowth": {
+          "calls": 101,
+          "totalMs": 0.608255999999983,
+          "maxMs": 0.06877399999984846,
+          "sampleStats": {
+            "n": 101,
+            "p50": 0.004778999999871303,
+            "p95": 0.008245999999871856,
+            "max": 0.06877399999984846
+          }
+        },
+        "growthTasks.ts:syncGrowthTasks": {
+          "calls": 2,
+          "totalMs": 0.2509589999999662,
+          "maxMs": 0.22150199999987308,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.029457000000093103,
+            "p95": 0.22150199999987308,
+            "max": 0.22150199999987308
+          }
+        },
+        "victory.ts:reconcileVictory": {
+          "calls": 169,
+          "totalMs": 5.313117000000602,
+          "maxMs": 0.17747200000030716,
+          "sampleStats": {
+            "n": 169,
+            "p50": 0.027884999999969295,
+            "p95": 0.06440599999996266,
+            "max": 0.17747200000030716
+          }
+        },
+        "scheduler.ts:pop": {
+          "calls": 99,
+          "totalMs": 0.5601999999989857,
+          "maxMs": 0.11480400000027657,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.004272000000128173,
+            "p95": 0.0065959999997176055,
+            "max": 0.11480400000027657
+          }
+        },
+        "growthTasks.ts:captureGrowthEvent": {
+          "calls": 99,
+          "totalMs": 0.25771699999950215,
+          "maxMs": 0.09543500000017957,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0012199999996482802,
+            "p95": 0.005936000000019703,
+            "max": 0.09543500000017957
+          }
+        },
+        "scheduler.ts:push": {
+          "calls": 167,
+          "totalMs": 0.9092759999994087,
+          "maxMs": 0.05535099999997328,
+          "sampleStats": {
+            "n": 167,
+            "p50": 0.004985000000033324,
+            "p95": 0.007088000000294414,
+            "max": 0.05535099999997328
+          }
+        },
+        "economy.ts:administrationMultiplier": {
+          "calls": 99,
+          "totalMs": 0.2572369999957118,
+          "maxMs": 0.04326999999966574,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0019079999997302366,
+            "p95": 0.004967999999735184,
+            "max": 0.04326999999966574
+          }
+        },
+        "economy.ts:settleCity": {
+          "calls": 235,
+          "totalMs": 5.070290000001023,
+          "maxMs": 0.20646399999986897,
+          "sampleStats": {
+            "n": 235,
+            "p50": 0.004891000000043277,
+            "p95": 0.07060700000010911,
+            "max": 0.20646399999986897
+          }
+        },
+        "aiActions.ts:updatePublicMemory": {
+          "calls": 99,
+          "totalMs": 4.062938000000486,
+          "maxMs": 0.24081500000011147,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.03416799999968134,
+            "p95": 0.10758399999986068,
+            "max": 0.24081500000011147
+          }
+        },
+        "modernCatchup.ts:catchupDecision": {
+          "calls": 99,
+          "totalMs": 0.7800660000002608,
+          "maxMs": 0.10172599999987142,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.006234000000404194,
+            "p95": 0.016309999999975844,
+            "max": 0.10172599999987142
+          }
+        },
+        "autonomy.ts:economicChoices": {
+          "calls": 99,
+          "totalMs": 33.579931000000215,
+          "maxMs": 3.326770000000124,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.2955579999998008,
+            "p95": 0.47664099999974496,
+            "max": 3.326770000000124
+          }
+        },
+        "autonomy.ts:chooseEconomic": {
+          "calls": 136,
+          "totalMs": 4.204626000000189,
+          "maxMs": 0.1619580000001406,
+          "sampleStats": {
+            "n": 136,
+            "p50": 0.026480999999876076,
+            "p95": 0.06418100000018967,
+            "max": 0.1619580000001406
+          }
+        },
+        "aiActions.ts:wonderDecision": {
+          "calls": 99,
+          "totalMs": 0.1704209999993509,
+          "maxMs": 0.003072999999858439,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0016950000003816967,
+            "p95": 0.002795999999761989,
+            "max": 0.003072999999858439
+          }
+        },
+        "aiActions.ts:politicalDecision": {
+          "calls": 99,
+          "totalMs": 0.5431509999993978,
+          "maxMs": 0.19372799999973722,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0031159999998635612,
+            "p95": 0.005975999999918713,
+            "max": 0.19372799999973722
+          }
+        },
+        "aiActions.ts:militaryDecision": {
+          "calls": 99,
+          "totalMs": 0.6107880000004116,
+          "maxMs": 0.1502770000001874,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.0045110000000931905,
+            "p95": 0.008143000000018219,
+            "max": 0.1502770000001874
+          }
+        },
+        "aiActions.ts:expansionDecision": {
+          "calls": 99,
+          "totalMs": 0.30657400000427515,
+          "maxMs": 0.07521399999995992,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.001441000000340864,
+            "p95": 0.005466000000069471,
+            "max": 0.07521399999995992
+          }
+        },
+        "scheduler.ts:snapshot": {
+          "calls": 205,
+          "totalMs": 51.5741800000028,
+          "maxMs": 1.6666519999998854,
+          "sampleStats": {
+            "n": 205,
+            "p50": 0.17981200000031095,
+            "p95": 0.470299999999952,
+            "max": 1.6666519999998854
+          }
+        },
+        "reducer.ts:cloneReplayCityDraft": {
+          "calls": 68,
+          "totalMs": 6.813360000000557,
+          "maxMs": 0.36856399999987843,
+          "sampleStats": {
+            "n": 68,
+            "p50": 0.08455300000014176,
+            "p95": 0.20155800000020463,
+            "max": 0.36856399999987843
+          }
+        },
+        "economy.ts:promoteCityQueues": {
+          "calls": 136,
+          "totalMs": 0.5432039999986955,
+          "maxMs": 0.1869409999999334,
+          "sampleStats": {
+            "n": 136,
+            "p50": 0.0030109999997876002,
+            "p95": 0.00505299999986164,
+            "max": 0.1869409999999334
+          }
+        },
+        "modernCatchup.ts:reconcileCatchup": {
+          "calls": 167,
+          "totalMs": 0.14169399999991583,
+          "maxMs": 0.031683999999586376,
+          "sampleStats": {
+            "n": 167,
+            "p50": 0.0005790000000160944,
+            "p95": 0.0010050000000774162,
+            "max": 0.031683999999586376
+          }
+        },
+        "reducer.ts:submitOrderDraft": {
+          "calls": 68,
+          "totalMs": 114.10583100000031,
+          "maxMs": 2.1519250000001193,
+          "sampleStats": {
+            "n": 68,
+            "p50": 1.6350820000002386,
+            "p95": 2.0127949999996417,
+            "max": 2.1519250000001193
+          }
+        },
+        "autonomy.ts:submitAutonomous": {
+          "calls": 99,
+          "totalMs": 143.43179499999906,
+          "maxMs": 3.4938099999999395,
+          "sampleStats": {
+            "n": 99,
+            "p50": 1.9538280000001578,
+            "p95": 2.439912999999706,
+            "max": 3.4938099999999395
+          }
+        },
+        "autonomy.ts:handleAutonomy": {
+          "calls": 99,
+          "totalMs": 196.30544600000076,
+          "maxMs": 6.497894999999971,
+          "sampleStats": {
+            "n": 99,
+            "p50": 2.428309000000354,
+            "p95": 3.064368000000286,
+            "max": 6.497894999999971
+          }
+        },
+        "growthTasks.ts:recordGrowthEvent": {
+          "calls": 99,
+          "totalMs": 0.43090600000186896,
+          "maxMs": 0.24876700000004348,
+          "sampleStats": {
+            "n": 99,
+            "p50": 0.001780999999937194,
+            "p95": 0.003050000000257569,
+            "max": 0.24876700000004348
+          }
+        },
+        "reducer.ts:advanceOneEvent:ai.decide": {
+          "calls": 99,
+          "totalMs": 218.29454800000076,
+          "maxMs": 6.972656999999799,
+          "sampleStats": {
+            "n": 99,
+            "p50": 2.6586449999999786,
+            "p95": 3.3155839999999444,
+            "max": 6.972656999999799
+          }
+        },
+        "politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "totalMs": 0.0021219999998720596,
+          "maxMs": 0.0021219999998720596,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.0021219999998720596,
+            "p95": 0.0021219999998720596,
+            "max": 0.0021219999998720596
+          }
+        },
+        "schema.ts:validateFormalWorld": {
+          "calls": 1,
+          "totalMs": 13.2606880000003,
+          "maxMs": 13.2606880000003,
+          "sampleStats": {
+            "n": 1,
+            "p50": 13.2606880000003,
+            "p95": 13.2606880000003,
+            "max": 13.2606880000003
+          }
+        },
+        "reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "totalMs": 13.538868999999977,
+          "maxMs": 13.538868999999977,
+          "sampleStats": {
+            "n": 1,
+            "p50": 13.538868999999977,
+            "p95": 13.538868999999977,
+            "max": 13.538868999999977
+          }
+        },
+        "reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "totalMs": 273.08528400000023,
+          "maxMs": 273.08528400000023,
+          "sampleStats": {
+            "n": 1,
+            "p50": 273.08528400000023,
+            "p95": 273.08528400000023,
+            "max": 273.08528400000023
+          }
+        }
+      }
+    },
+    {
+      "version": "after",
+      "scenario": "legacy-30-day",
+      "ms": 4406.78915,
+      "events": 72001,
+      "eventsPerSecond": 16338.653280019082,
+      "decisions": 1,
+      "yields": 479,
+      "memoryAtStart": {
+        "rss": 682913792,
+        "heapTotal": 204075008,
+        "heapUsed": 106290568,
+        "external": 5277741,
+        "arrayBuffers": 1127092
+      },
+      "memoryAtEnd": {
+        "rss": 688132096,
+        "heapTotal": 210399232,
+        "heapUsed": 125159576,
+        "external": 4764906,
+        "arrayBuffers": 614257
+      },
+      "gcCallbacks": {
+        "n": 347,
+        "totalObservedMs": 175.93179400265217,
+        "maxObservedMs": 2.8246050029993057,
+        "kindCounts": {
+          "1": 347
+        }
+      },
+      "phases": {
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "totalMs": 4.226799000000028,
+          "maxMs": 4.226799000000028,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.226799000000028,
+            "p95": 4.226799000000028,
+            "max": 4.226799000000028
+          }
+        },
+        "scheduler.ts:replace": {
+          "calls": 6,
+          "totalMs": 1.1611579999998867,
+          "maxMs": 0.4779319999997824,
+          "sampleStats": {
+            "n": 6,
+            "p50": 0.18430200000148034,
+            "p95": 0.4779319999997824,
+            "max": 0.4779319999997824
+          }
+        },
+        "reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "totalMs": 6.034094999999979,
+          "maxMs": 6.034094999999979,
+          "sampleStats": {
+            "n": 1,
+            "p50": 6.034094999999979,
+            "p95": 6.034094999999979,
+            "max": 6.034094999999979
+          }
+        },
+        "economy.ts:populationGrowth": {
+          "calls": 72003,
+          "totalMs": 9.962346999973306,
+          "maxMs": 0.10848600000099395,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 9.299999965151073e-05,
+            "p95": 0.0003369999994902173,
+            "max": 0.07180300000072748
+          }
+        },
+        "growthTasks.ts:syncGrowthTasks": {
+          "calls": 2,
+          "totalMs": 0.30184600000029604,
+          "maxMs": 0.26886000000013155,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.032986000000164495,
+            "p95": 0.26886000000013155,
+            "max": 0.26886000000013155
+          }
+        },
+        "victory.ts:reconcileVictory": {
+          "calls": 72004,
+          "totalMs": 1069.614802999933,
+          "maxMs": 2.030305999999655,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.012416999999913969,
+            "p95": 0.016203999999561347,
+            "max": 0.6658250000000407
+          }
+        },
+        "scheduler.ts:pop": {
+          "calls": 72001,
+          "totalMs": 91.78872300007424,
+          "maxMs": 0.24338499999976193,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0010630000006131013,
+            "p95": 0.002199000000473461,
+            "max": 0.1817929999997432
+          }
+        },
+        "growthTasks.ts:captureGrowthEvent": {
+          "calls": 72001,
+          "totalMs": 28.952134999961345,
+          "maxMs": 1.304377000000386,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.000262999999904423,
+            "p95": 0.0006260000000111177,
+            "max": 1.304377000000386
+          }
+        },
+        "autonomy.ts:handleAutonomy": {
+          "calls": 72001,
+          "totalMs": 14.779463999857398,
+          "maxMs": 4.32939400000032,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.00010699999984353781,
+            "p95": 0.000240999999732594,
+            "max": 0.10346899999967718
+          }
+        },
+        "economy.ts:administrationMultiplier": {
+          "calls": 72001,
+          "totalMs": 29.27708700016683,
+          "maxMs": 0.8491000000003623,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0003260000003137975,
+            "p95": 0.0006659999999101274,
+            "max": 0.1551660000004631
+          }
+        },
+        "economy.ts:settleCity": {
+          "calls": 72003,
+          "totalMs": 439.76019199995426,
+          "maxMs": 2.5611079999998765,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.005045000000791333,
+            "p95": 0.01169800000025134,
+            "max": 0.6653120000000854
+          }
+        },
+        "scheduler.ts:push": {
+          "calls": 72002,
+          "totalMs": 112.23227999987557,
+          "maxMs": 0.5101859999995213,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0012129999995522667,
+            "p95": 0.002322999999705644,
+            "max": 0.5101859999995213
+          }
+        },
+        "growthTasks.ts:recordGrowthEvent": {
+          "calls": 72001,
+          "totalMs": 12.75132100015162,
+          "maxMs": 0.2236350000002858,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.000105000000075961,
+            "p95": 0.000503999999637017,
+            "max": 0.2236350000002858
+          }
+        },
+        "modernCatchup.ts:reconcileCatchup": {
+          "calls": 72002,
+          "totalMs": 6.261048999939703,
+          "maxMs": 0.11207999999987805,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 6.800000028306386e-05,
+            "p95": 0.00020599999970727367,
+            "max": 0.08749499999976251
+          }
+        },
+        "economy.ts:promoteCityQueues": {
+          "calls": 72002,
+          "totalMs": 18.431898000132605,
+          "maxMs": 0.09831900000062888,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.0001940000001923181,
+            "p95": 0.0006290000001172302,
+            "max": 0.07438199999978679
+          }
+        },
+        "reducer.ts:advanceOneEvent:economy.settle": {
+          "calls": 72000,
+          "totalMs": 3807.191769999915,
+          "maxMs": 3.210360999999466,
+          "sampleStats": {
+            "n": 20000,
+            "p50": 0.04380600000058621,
+            "p95": 0.0967160000000149,
+            "max": 2.9980279999999766
+          }
+        },
+        "aiActions.ts:updatePublicMemory": {
+          "calls": 1,
+          "totalMs": 0.2647109999998065,
+          "maxMs": 0.2647109999998065,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.2647109999998065,
+            "p95": 0.2647109999998065,
+            "max": 0.2647109999998065
+          }
+        },
+        "modernCatchup.ts:catchupDecision": {
+          "calls": 1,
+          "totalMs": 0.016850999998496263,
+          "maxMs": 0.016850999998496263,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.016850999998496263,
+            "p95": 0.016850999998496263,
+            "max": 0.016850999998496263
+          }
+        },
+        "autonomy.ts:economicChoices": {
+          "calls": 1,
+          "totalMs": 0.9830480000000534,
+          "maxMs": 0.9830480000000534,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.9830480000000534,
+            "p95": 0.9830480000000534,
+            "max": 0.9830480000000534
+          }
+        },
+        "autonomy.ts:chooseEconomic": {
+          "calls": 2,
+          "totalMs": 0.09492800000043644,
+          "maxMs": 0.06058399999892572,
+          "sampleStats": {
+            "n": 2,
+            "p50": 0.03434400000151072,
+            "p95": 0.06058399999892572,
+            "max": 0.06058399999892572
+          }
+        },
+        "aiActions.ts:wonderDecision": {
+          "calls": 1,
+          "totalMs": 0.003882000000885455,
+          "maxMs": 0.003882000000885455,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.003882000000885455,
+            "p95": 0.003882000000885455,
+            "max": 0.003882000000885455
+          }
+        },
+        "aiActions.ts:politicalDecision": {
+          "calls": 1,
+          "totalMs": 0.008683999998538638,
+          "maxMs": 0.008683999998538638,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.008683999998538638,
+            "p95": 0.008683999998538638,
+            "max": 0.008683999998538638
+          }
+        },
+        "aiActions.ts:militaryDecision": {
+          "calls": 1,
+          "totalMs": 0.20072699999946053,
+          "maxMs": 0.20072699999946053,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.20072699999946053,
+            "p95": 0.20072699999946053,
+            "max": 0.20072699999946053
+          }
+        },
+        "aiActions.ts:expansionDecision": {
+          "calls": 1,
+          "totalMs": 0.004874000000199885,
+          "maxMs": 0.004874000000199885,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.004874000000199885,
+            "p95": 0.004874000000199885,
+            "max": 0.004874000000199885
+          }
+        },
+        "scheduler.ts:snapshot": {
+          "calls": 4,
+          "totalMs": 1.0732909999987896,
+          "maxMs": 0.4152830000002723,
+          "sampleStats": {
+            "n": 4,
+            "p50": 0.2255829999994603,
+            "p95": 0.4152830000002723,
+            "max": 0.4152830000002723
+          }
+        },
+        "reducer.ts:cloneReplayCityDraft": {
+          "calls": 1,
+          "totalMs": 0.1320899999991525,
+          "maxMs": 0.1320899999991525,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.1320899999991525,
+            "p95": 0.1320899999991525,
+            "max": 0.1320899999991525
+          }
+        },
+        "reducer.ts:submitOrderDraft": {
+          "calls": 1,
+          "totalMs": 2.0416199999999662,
+          "maxMs": 2.0416199999999662,
+          "sampleStats": {
+            "n": 1,
+            "p50": 2.0416199999999662,
+            "p95": 2.0416199999999662,
+            "max": 2.0416199999999662
+          }
+        },
+        "autonomy.ts:submitAutonomous": {
+          "calls": 1,
+          "totalMs": 2.646103999999468,
+          "maxMs": 2.646103999999468,
+          "sampleStats": {
+            "n": 1,
+            "p50": 2.646103999999468,
+            "p95": 2.646103999999468,
+            "max": 2.646103999999468
+          }
+        },
+        "reducer.ts:advanceOneEvent:ai.decide": {
+          "calls": 1,
+          "totalMs": 4.5823120000004565,
+          "maxMs": 4.5823120000004565,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4.5823120000004565,
+            "p95": 4.5823120000004565,
+            "max": 4.5823120000004565
+          }
+        },
+        "politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "totalMs": 0.0029850000009901123,
+          "maxMs": 0.0029850000009901123,
+          "sampleStats": {
+            "n": 1,
+            "p50": 0.0029850000009901123,
+            "p95": 0.0029850000009901123,
+            "max": 0.0029850000009901123
+          }
+        },
+        "schema.ts:validateFormalWorld": {
+          "calls": 1,
+          "totalMs": 10.904515000000174,
+          "maxMs": 10.904515000000174,
+          "sampleStats": {
+            "n": 1,
+            "p50": 10.904515000000174,
+            "p95": 10.904515000000174,
+            "max": 10.904515000000174
+          }
+        },
+        "reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "totalMs": 11.383875999999873,
+          "maxMs": 11.383875999999873,
+          "sampleStats": {
+            "n": 1,
+            "p50": 11.383875999999873,
+            "p95": 11.383875999999873,
+            "max": 11.383875999999873
+          }
+        },
+        "reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "totalMs": 4406.753461000001,
+          "maxMs": 4406.753461000001,
+          "sampleStats": {
+            "n": 1,
+            "p50": 4406.753461000001,
+            "p95": 4406.753461000001,
+            "max": 4406.753461000001
+          }
+        }
+      }
+    }
+  ],
+  "wholeToolCpuSamplesMs": [
+    {
+      "function": "(idle)",
+      "module": "",
+      "sampledMs": 1861.4
+    },
+    {
+      "function": "hasVictoryCityShare",
+      "module": "/src/game/formal/victory.ts",
+      "sampledMs": 700.4
+    },
+    {
+      "function": "(garbage collector)",
+      "module": "",
+      "sampledMs": 523.4
+    },
+    {
+      "function": "structuredClone",
+      "module": "js_transferable",
+      "sampledMs": 300.6
+    },
+    {
+      "function": "",
+      "module": "/src/game/formal/reducer.ts",
+      "sampledMs": 276.8
+    },
+    {
+      "function": "owned",
+      "module": "/src/game/formal/spatial.ts",
+      "sampledMs": 271.1
+    },
+    {
+      "function": "resolveExtinctions",
+      "module": "/src/game/formal/extinction.ts",
+      "sampledMs": 247.0
+    },
+    {
+      "function": "",
+      "module": "/src/game/formal/generator.ts",
+      "sampledMs": 198.4
+    },
+    {
+      "function": "(program)",
+      "module": "",
+      "sampledMs": 187.5
+    },
+    {
+      "function": "detectModuleFormat",
+      "module": "get_format",
+      "sampledMs": 157.9
+    },
+    {
+      "function": "retireAutonomy",
+      "module": "",
+      "sampledMs": 155.0
+    },
+    {
+      "function": "",
+      "module": "/src/game/formal/economy.ts",
+      "sampledMs": 151.1
+    },
+    {
+      "function": "ownedCount",
+      "module": "",
+      "sampledMs": 151.1
+    },
+    {
+      "function": "productionPerHour",
+      "module": "/src/game/formal/economy.ts",
+      "sampledMs": 141.6
+    },
+    {
+      "function": "",
+      "module": "",
+      "sampledMs": 140.4
+    },
+    {
+      "function": "parseSource",
+      "module": "lexer",
+      "sampledMs": 125.4
+    },
+    {
+      "function": "",
+      "module": "/src/game/formal/victory.ts",
+      "sampledMs": 124.2
+    },
+    {
+      "function": "lstat",
+      "module": "",
+      "sampledMs": 117.8
+    }
+  ]
+}

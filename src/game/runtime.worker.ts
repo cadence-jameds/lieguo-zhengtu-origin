@@ -11,6 +11,7 @@ import {effectiveSpeed} from './formal/playtest';
 import {createFormalWorld} from './world';
 import {advanceFormal,submitFormalOrder} from './engine';
 import {advanceFormalCooperative} from './formal/reducer';
+import {RuntimeWorkBudget} from './runtimeWorkBudget';
 import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
 import type {FormalOrder,FormalWorld,FormalReport} from './formal/model';
 import {WorldStream} from './worldStream';
@@ -32,6 +33,11 @@ export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'res
 let writer:WriterContext|undefined;
 const intake=new WeakMap<RuntimeRequest,Promise<InboxCommand>>();
 let intakeQueue:Promise<unknown>=Promise.resolve();
+const workBudget=new RuntimeWorkBudget();
+let queryQueue:Promise<unknown>=Promise.resolve();
+const queryIntake=new WeakMap<RuntimeRequest,Promise<unknown>>();
+const controls=new Set<RuntimeRequest['type']>(['load','resume','away','start','restore','import','reset']);
+let controlPending=0;
 let world:FormalWorld|null=null,draining=false,tickPending=false,tickRunning=false,away=false;
 const requests:RuntimeRequest[]=[];
 const awayBoundaries=new WeakMap<RuntimeRequest,{target:number;wallAt:number}>();
@@ -52,12 +58,12 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
  const hasEvents=world.events.some(e=>e.at<=target);
  // Only complete events yield. The draft remains private until this entire
  // target replay and its one durable transaction finish.
- const result=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8}),committed=await save(result.world,result.reports,world.revision,wallAt);
+ const result=await advanceFormalCooperative(world,target,undefined,workBudget.advance),committed=await save(result.world,result.reports,world.revision,wallAt);
  world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
- if(r.type==='commandQuery'){const row=await commandStatus(r.campaignId,r.commandId);post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
- if(r.type==='commandList'){post({type:'commandList',rows:await commandPage(r.before)});return;}
+ if(r.type==='commandQuery'){const row=await stableRead(async()=>{let found=await commandStatus(r.campaignId,r.commandId);if(!found){await queryIntake.get(r);found=await commandStatus(r.campaignId,r.commandId);}return found;});post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
+ if(r.type==='commandList'){post({type:'commandList',rows:await stableRead(()=>commandPage(r.before))});return;}
  if(r.type==='snapshot'){state(true);return;}
  if(r.type==='exportLegacy'){post({type:'export',text:await exportLegacyCampaign(),mode:'historical'});return;}
  if(r.type==='resume'&&world&&!away){state();return;}
@@ -76,8 +82,8 @@ async function handle(r:RuntimeRequest){
     lastEvents=events;
     post({type:'progress',progress:fraction,events});
    }
-  });
-  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}world=loaded;if(world)await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();
+  },workBudget.advance);
+  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
   // Resume durable intake in its persisted order. Branch switches have already
   // terminalized old Pending atomically; a new writer rechecks original intent.
   const recovered=await pendingCommands();
@@ -90,12 +96,12 @@ async function handle(r:RuntimeRequest){
  if(r.type==='start'){
   const name=r.name.trim();if(!name||name.length>24||/[\x00-\x1f\x7f]/.test(name))throw new Error('請輸入 1～24 字的名字。');
   const fixture=createFormalWorld({campaign:crypto.randomUUID(),seed:r.seed,speed:r.speed,name,civilizationId:r.civilizationId,offlineHours:r.offlineHours});
-  enableAutonomy(fixture);const committed=await startCampaign(fixture);world=committed;await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  enableAutonomy(fixture);const committed=await startCampaign(fixture);await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
   const committed=r.type==='restore'?await restore(r.id,true):await importSave(r.text,true);
-  world=committed;await prepareAdmissionMap(world);writer=await writerContext();away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='cityIntel'){if(!world||r.campaignId!==world.campaignId){post({type:'cityIntel',queryId:r.queryId,error:'戰役已變更，請重新開啟情報窗。'});return;}if(r.generation!==undefined&&(!Number.isSafeInteger(r.generation)||r.generation<0))throw new Error('無效的據點世代。');if(!Number.isSafeInteger(r.reportCursor)||r.reportCursor<1||!Number.isSafeInteger(r.time)||r.time<0)throw new Error('無效的情報游標。');const snapshot={...world,time:Math.min(world.time,r.time),sequences:{...world.sequences,report:Math.min(world.sequences.report,r.reportCursor)}};post({type:'cityIntel',queryId:r.queryId,data:await readCityIntel(snapshot,r.cityId,r.generation)});return;}
  if(!world)throw new Error('請先建立正式世界。');
@@ -106,6 +112,13 @@ async function handle(r:RuntimeRequest){
  if(r.type==='reportPage'){post({type:'reportPage',data:await readReportPage(world,r.page,r.filter)});return;}
  if(r.type==='export'){await advanceAndSave();post({type:'export',text:await exportStoredSave(r.mode??'quick'),mode:r.mode??'quick'});return;}
  await advanceAndSave();if(r.type==='sync')post({type:'synced',requestId:r.requestId});
+}
+class QueryViewChanged extends Error{}
+/** A cache reference detects a concurrent publication; it is never an integrity
+ * proof. Each read still uses Persistence's verified authoritative result. */
+async function stableRead<T>(read:()=>Promise<T>):Promise<T>{
+ for(let attempt=0;attempt<3;attempt++){const source=world,context=writer,result=await read();if(world===source&&writer===context)return result;}
+ throw new QueryViewChanged('命令查詢期間權威版本持續更新，請稍後重新查詢。');
 }
 /** T1 is awaited here, but runs independently of the world/AI drain. */
 async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
@@ -130,7 +143,7 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
    const target=targetTime();
    if(!worldPaused(world)){
     if(world.events.some(e=>e.at<=target)){
-     const before=admission,replay=await advanceFormalCooperative(world,target,undefined,{yieldIntervalMs:8});
+     const before=admission,replay=await advanceFormalCooperative(world,target,undefined,workBudget.advance);
      admission=replay.world;catchupReports.push(...replay.reports);caughtUp=true;
      // Revalidate the execution intent again after AI catch-up, preserving the
      // original row. No targets, quantities or original revisions are rewritten.
@@ -178,7 +191,8 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
 async function runRequest(r:RuntimeRequest){
  try{await handle(r);}catch(error:unknown){
   const text=error instanceof Error?error.message:'正式提交失敗。';
-  if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
+  if(error instanceof QueryViewChanged)post({type:'notice',error:true,text});
+  else if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
   else if(r.type==='reportPage'||r.type==='reportStatus'||r.type==='reportAction')post({type:'notice',text:'戰報操作暫時失敗，請重試。'});
   else if(r.type==='cityIntel')post({type:'cityIntel',queryId:r.queryId,error:text});
@@ -194,7 +208,7 @@ async function drain(){
  try{
   while(requests.length||tickPending){
    const request=requests.shift();
-   if(request){await runRequest(request);continue;}
+   if(request){if(controls.has(request.type)){try{await queryQueue;await runRequest(request);}finally{controlPending--;}}else await runRequest(request);continue;}
    tickPending=false;tickRunning=true;
    try{if(!away)await advanceAndSave();}
    catch(error:unknown){retryAt=performance.now()+1000;post({type:'notice',error:true,text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}
@@ -205,6 +219,14 @@ async function drain(){
 function scheduleDrain(){if(draining)return;draining=true;void drain();}
 self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
  const r=event.data;
+ // Queries read persisted authority and the last committed UI source, never
+ // the private replay draft. A known durable ID never waits for unrelated
+ // intake. An unknown ID waits for preceding T1 before reporting absence.
+ // Mutating barriers retain the original foreground FIFO.
+ if((r.type==='commandQuery'||r.type==='commandList')&&!controlPending){
+  queryIntake.set(r,intakeQueue);queryQueue=queryQueue.then(()=>runRequest(r)).catch(()=>{});return;
+ }
+ if(controls.has(r.type))controlPending++;
  // Capture the visibility boundary before it can wait behind an atomic save.
  if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Math.max(0,Date.now()-(absolute-(performance.timeOrigin+foregroundFence)))});}
  requests.push(r);
@@ -213,6 +235,7 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
   const branch=r.projection?.branch??r.branch??writer?.branch;
   const intent:CommandIntent={playerBase:r.playerBase,governanceBase:r.governanceBase,extinctionBase:r.extinctionBase};
   const received=intakeQueue.then(()=>{const p=r.projection;if(p&&(p.protocolVersion!==2||p.sessionId!==stream.sessionId||p.projectionSequence>stream.projectionSequence||p.campaignId!==r.order.campaignId||p.writerEpoch!==writer?.writerEpoch||p.branch!==r.branch||p.revision<r.order.expectedRevision||r.order.payload.type!=='governance.set'&&p.revision!==r.order.expectedRevision||!Number.isSafeInteger(p.projectionSequence)||p.projectionSequence<1))throw Error('畫面版本或寫入權已變更，請重新同步後確認原操作。');return receiveCommand(r.order,intent,branch);});intake.set(r,received);
+  workBudget.trackIntake(received);
   intakeQueue=received.then(row=>{post({type:'commandDurable',row});},()=>{});
  }
  scheduleDrain();
