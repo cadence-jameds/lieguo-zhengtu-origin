@@ -35,6 +35,7 @@ const intake=new WeakMap<RuntimeRequest,Promise<InboxCommand>>();
 let intakeQueue:Promise<unknown>=Promise.resolve();
 const workBudget=new RuntimeWorkBudget();
 let queryQueue:Promise<unknown>=Promise.resolve();
+const queryIntake=new WeakMap<RuntimeRequest,Promise<unknown>>();
 let world:FormalWorld|null=null,draining=false,tickPending=false,tickRunning=false,away=false;
 const requests:RuntimeRequest[]=[];
 const awayBoundaries=new WeakMap<RuntimeRequest,{target:number;wallAt:number}>();
@@ -59,7 +60,7 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
  world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
- if(r.type==='commandQuery'){const row=await commandStatus(r.campaignId,r.commandId);post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
+ if(r.type==='commandQuery'){let row=await commandStatus(r.campaignId,r.commandId);if(!row){await queryIntake.get(r);row=await commandStatus(r.campaignId,r.commandId);}post({type:'commandStatus',row,commandId:r.commandId});if(row?.ack)post({type:'commandAck',ack:row.ack,campaignId:row.campaignId});state(true);return;}
  if(r.type==='commandList'){post({type:'commandList',rows:await commandPage(r.before)});return;}
  if(r.type==='snapshot'){state(true);return;}
  if(r.type==='exportLegacy'){post({type:'export',text:await exportLegacyCampaign(),mode:'historical'});return;}
@@ -209,10 +210,11 @@ function scheduleDrain(){if(draining)return;draining=true;void drain();}
 self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
  const r=event.data;
  // Queries read persisted authority and the last committed UI source, never
- // the private replay draft. Respect preceding intake, but do not wait behind
- // world catch-up/T2. Mutating barriers retain the original foreground FIFO.
+ // the private replay draft. A known durable ID never waits for unrelated
+ // intake. An unknown ID waits for preceding T1 before reporting absence.
+ // Mutating barriers retain the original foreground FIFO.
  if(r.type==='commandQuery'||r.type==='commandList'){
-  const precedingIntake=intakeQueue;queryQueue=queryQueue.then(async()=>{await precedingIntake;await runRequest(r);}).catch(()=>{});return;
+  queryIntake.set(r,intakeQueue);queryQueue=queryQueue.then(()=>runRequest(r)).catch(()=>{});return;
  }
  // Capture the visibility boundary before it can wait behind an atomic save.
  if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Math.max(0,Date.now()-(absolute-(performance.timeOrigin+foregroundFence)))});}
