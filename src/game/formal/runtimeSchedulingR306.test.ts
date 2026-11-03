@@ -8,6 +8,8 @@ import {captureIntent} from '../durableCommands';
 import {RuntimeWorkBudget} from '../runtimeWorkBudget';
 import {advanceFormal,advanceFormalCooperative} from './reducer';
 import {createFormalFixture} from './fixture';
+import {advanceOffline} from './offline';
+import {scenarioWorld} from './ledgerTestSupport';
 import {eventId} from './ids';
 import {order} from './testSupport';
 import type {FormalWorld} from './model';
@@ -56,4 +58,10 @@ it('a query during committed Recovery preparation cannot publish the new world u
 it('a Pending read delayed across T2 publication is refreshed before it can overwrite the committed Ack',async()=>{
  const w=await p.start(createFormalFixture());await boot();const save=p.save.bind(p);let entered=false,commit!:()=>void,answer!:()=>void;const barrier=new Promise<void>(r=>commit=r),delay=new Promise<void>(r=>answer=r);vi.spyOn(p,'save').mockImplementationOnce(async(...a)=>{entered=true;await barrier;return save(...a);});const o=order(w,'late-query',{type:'city.rename',cityId:w.cities[0].id,name:'終局不可倒退'});send({type:'command',order:o,...captureIntent(w,o),requestId:'execute-late'});await until(()=>entered);
  const query=p.commandStatus.bind(p);let captured=false;vi.spyOn(p,'commandStatus').mockImplementationOnce(async(...a)=>{const row=await query(...a);expect(row!.state).toBe('pending');captured=true;await delay;return row;});send({type:'commandQuery',campaignId:o.campaignId,commandId:o.commandId,requestId:'late-query'});await until(()=>captured);commit();await until(()=>done('execute-late'));const committedAt=messages.findIndex(m=>m.type==='commandAck'&&m.ack.commandId===o.commandId);answer();await until(()=>done('late-query'));expect(messages.slice(committedAt+1).filter(m=>m.type==='commandStatus').map(m=>m.row.state)).toEqual(['committed']);
+});
+
+it('offline intake at safe boundaries stays durable while the entire replay remains private until one T2',async()=>{
+ const raw=createFormalFixture();raw.events=Array.from({length:80},(_,i)=>({id:eventId('offline-priority-'+i),type:'fixture.marker',at:i+1,marker:'complete'}));const w=await p.start(raw),stored=await p.db.saves.get('current');if(stored?.kind!=='world')throw Error('missing initial authority');const now=stored.at+1000,expected=advanceOffline(w,stored.at,now),o=order(w,'offline-priority',{type:'city.rename',cityId:w.cities[0].id,name:'離線補算原意'});let boundaries=0,sequence:number|undefined;
+ const result=await p.loadWithOffline(now,undefined,{yieldIntervalMs:0,yieldBeforeStart:true,yieldControl:async boundary=>{if(boundary==='start'){const row=await p.receiveCommand(o,captureIntent(w,o));sequence=row.sequence;}else{boundaries++;expect((await p.commandStatus(o.campaignId,o.commandId))!.state).toBe('pending');expect((await p.loadSave()).game!.revision).toBe(w.revision);}}});
+ expect(boundaries).toBe(80);expect(result.game!.revision).toBe(w.revision+1);expect(scenarioWorld(result.game!)).toEqual(scenarioWorld(expected.world));expect((await p.receiveCommand(o)).sequence).toBe(sequence);expect((await p.commandStatus(o.campaignId,o.commandId))!.state).toBe('pending');
 });

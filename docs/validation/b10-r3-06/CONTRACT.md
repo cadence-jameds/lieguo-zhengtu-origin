@@ -1,6 +1,6 @@
 # R3-06 Runtime 排程契約
 
-基準：PR58 `c370ff8a492de8711e764a82c8f1d43efef1a00e`。正式 DB3／Save1／100MiB、Ledger／Persistence／Admission／Projection／Preview 來源未改。不是另一個權威或新的遊戲時間模型。
+基準：PR58 `c370ff8a492de8711e764a82c8f1d43efef1a00e`。正式 DB3／Save1／100MiB、Ledger／Admission／Projection／Preview來源未改；Persistence只有選填離線工作預算的型別／參數轉交，原驗證、時間與所有交易內容逐byte保留。不是另一個權威或新的遊戲時間模型。
 
 ## 四種順序
 
@@ -12,6 +12,8 @@
 ## 有界工作預算
 
 `RuntimeWorkBudget` 只計數未完成的 T1 Promise（成功／失敗均解除）。一般 slice 要求8ms；有 T1 壓力時2ms後請求讓出，timer pause要求2ms。開始新的私有草稿前要求4ms開口，讓已到達 IPC 有機會交給 T1。timer、單一事件與OS排程均可能超過要求，沒有8ms硬保證。
+
+前景與離線補算共用同一預算；Persistence只轉交options給既有Offline Cooperative Advance，未改讀寫交易。離線未傳options的既有呼叫保持原預設。
 
 只在完整事件後 yield；不拆戰鬥、AI 或原子事件。每輪仍前進完整事件，不等待所有 T1 完成，持續玩家接收也不會永久停止事件。每個玩家命令仍補算必要世界時間；普通tick不能越過前面的請求。私有 replay固定同一 target，不因yield重新延長補算範圍。未新增可續跑第二草稿或生產 Worker。
 
@@ -37,7 +39,7 @@ T3或Ack丟失仍查原結果；同ID不同issuer/fingerprint仍拒絕；終局�
 
 ## 對照與保護
 
-Reference為兩份PR58正式原始碼，SHA256固定且successor逐byte核對；Reference與Optimized使用獨立Vite module graph。其餘AI、Scheduler、Persistence、Schema、Admission及UI來源由精確successor保護。
+Reference為三份PR58正式原始碼，SHA256固定且successor逐byte核對；Reference與Optimized使用獨立Vite module graph。其餘AI、Scheduler、Persistence、Schema、Admission及UI來源由精確successor保護。
 
 逐事件完整trace、每筆AI／玩家命令與Ack、RNG cursor、sequences、最終world／reports／Ack canonical SHA256全部一致才PASS；60k另比對完整有序歷史hash。JS耗時與yield次數不是確定性欄位。測試端插樁不進入產品建置。
 

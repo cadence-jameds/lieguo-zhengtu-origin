@@ -82,7 +82,7 @@ async function handle(r:RuntimeRequest){
     lastEvents=events;
     post({type:'progress',progress:fraction,events});
    }
-  });
+  },workBudget.advance);
   let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
   // Resume durable intake in its persisted order. Branch switches have already
   // terminalized old Pending atomically; a new writer rechecks original intent.

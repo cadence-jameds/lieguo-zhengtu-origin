@@ -13,6 +13,7 @@ import {sanitizeSharedKnowledge,sanitizeScoutReport,scoutReportAuthorized} from 
 import {enableAutonomy} from './formal/autonomy';
 import {effectiveSpeed} from './formal/playtest';
 import {advanceOfflineCooperative,type OfflineSummary} from './formal/offline';
+import type {CooperativeAdvanceOptions} from './formal/reducer';
 import Dexie,{type Table} from 'dexie';
 import {z} from 'zod';
 import {isMissionArmy,type CityIntel,type BattleReportPayload} from './formal/combatModel';
@@ -340,13 +341,13 @@ export class FormalPersistence {
  }
  private async sanitizeStoredReports(world:FormalWorld){await this.db.transaction('rw',this.db.BattleReports,async()=>{const rows=await this.db.BattleReports.where('campaignId').equals(world.campaignId).toArray();const repaired=rows.map(r=>sanitizeScoutReport(world,r) as ReportRow).filter((r,i)=>r!==rows[i]);if(repaired.length)await this.db.BattleReports.bulkPut(repaired);});}
  async loadSave(){const {game,recovered}=await this.loadAnchored();return {game,recovered};}
- async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
+ async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void,options:CooperativeAdvanceOptions={}):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
   onProgress?.('read');
   const loaded=await this.loadAnchored(fraction=>onProgress?.('read',fraction,0));if(!loaded.game)return {game:null,recovered:loaded.recovered};
   // Capture provable legacy state before offline replay can change ownership or population.
   loaded.game={...loaded.game,...(loaded.game.growthTasks?{growthTasks:structuredClone(loaded.game.growthTasks)}:{})};syncGrowthTasks(loaded.game);
   onProgress?.('offline',0,0);
-  const result=await advanceOfflineCooperative(loaded.game,loaded.savedAt??now,now,(fraction,events)=>onProgress?.('offline',fraction,events));
+  const result=await advanceOfflineCooperative(loaded.game,loaded.savedAt??now,now,(fraction,events)=>onProgress?.('offline',fraction,events),options);
   // Even 0h refreshes the wall anchor atomically. Expose nothing until save resolves.
   const draft=result.world.revision===loaded.game.revision?{...result.world,revision:result.world.revision+1}:result.world;
   const real=(at:number)=>Math.max(0,Math.floor((loaded.savedAt??now)+(at-loaded.game!.time)/loaded.game!.speed));
@@ -456,7 +457,7 @@ export const reportStatus=(world:FormalWorld)=>active().reportStatus(world);
 export const reportAction=(world:FormalWorld,action:'read'|'clear',ids?:string[],filter?:ReportFilter)=>active().reportAction(world,action,ids,filter);
 export const clearSavedGames=()=>active().clearSavedGames();
 
-export const loadWithOffline=(onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void)=>active().loadWithOffline(Date.now(),onProgress);
+export const loadWithOffline=(onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void,options:CooperativeAdvanceOptions={})=>active().loadWithOffline(Date.now(),onProgress,options);
 
 export const readCityIntel=(world:FormalWorld,cityId:string,generation?:number)=>active().readCityIntel(world,cityId,generation);
 

@@ -1,7 +1,7 @@
 import {worldPaused} from './extinction';
 import {setClockMode} from './campaignTime';
 import type {FormalWorld,FormalTransition} from './model';
-import {advanceFormal,advanceFormalCooperative} from './reducer';
+import {advanceFormal,advanceFormalCooperative,type CooperativeAdvanceOptions} from './reducer';
 import {citySnapshot,HOUR} from './economy';
 export const OFFLINE_MODES=[0,1,4,8,12] as const;
 export type OfflineSummary={elapsedRealMs:number;advancedRealMs:number;advancedWorldMs:number;capHours:number;buildingsCompleted:number;unitsTrained:number;technologiesCompleted:number;citiesFounded:number;populationChange:number;recovered:boolean};
@@ -25,9 +25,9 @@ export function advanceOffline(world:FormalWorld,savedAt:number,now:number):Form
  return finishOffline(world,advanceFormal(world,plan.target),plan);
 }
 /** Worker-side replay yields between whole events, without committing partial world state. */
-export async function advanceOfflineCooperative(world:FormalWorld,savedAt:number,now:number,onProgress?:(fraction:number,events:number)=>void):Promise<FormalTransition&{summary:OfflineSummary}>{
+export async function advanceOfflineCooperative(world:FormalWorld,savedAt:number,now:number,onProgress?:(fraction:number,events:number)=>void,options:CooperativeAdvanceOptions={}):Promise<FormalTransition&{summary:OfflineSummary}>{
  const plan=offlinePlan(world,savedAt,now),start=world.time;
  world=structuredClone(world);if(plan.real>0)setClockMode(world,'offline');
- const result=await advanceFormalCooperative(world,plan.target,(at,target,events)=>onProgress?.(target===start?1:Math.max(0,Math.min(1,(at-start)/(target-start))),events));
+ const result=await advanceFormalCooperative(world,plan.target,(at,target,events)=>onProgress?.(target===start?1:Math.max(0,Math.min(1,(at-start)/(target-start))),events),options);
  return finishOffline(world,result,plan);
 }
