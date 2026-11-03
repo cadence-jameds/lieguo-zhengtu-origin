@@ -101,3 +101,7 @@ R3-06仍負責AI catch-up／victory計算與排程競爭；本批不改AI決策�
 9. R3-06範圍仍為AI catch-up/victory與CPU排程競爭；主執行緒開發模式render長任務及Android實機另列限制，不冒稱本批全部解決。
 
 原生未插樁R3-04完整六組正式流程全數PASS，含真GameApp 60k載入、建造預覽/Inbox、丟失Ack/最後畫面、Worker重啟及無transitionId背景Recovery。舊source dfa574a的Full→本批匯入/再Full→舊source匯入均PASS，1001收據及committed/rejected/needs-confirmation原始結果保留且舊ID仍duplicate。[原生正確性與相容摘要](native-correctness.json)。真GameApp量測為Vite開發模式，Production Build/Pages/Release另驗，不外推正式裝置SLA。
+
+真Runtime 99AI/25X、20筆同時提交（初始0歷史）[競爭摘要](native-contention.json)：T1通知延遲p50/p95 598.8/1151.0ms，13筆在catch-up完成前Durable，99 agent皆實際決策。第一筆committed、其餘19筆因相同舊畫面前提轉needs-confirmation，原始Payload不變且全部可查詢；沒有盲目改revision。這是整批FIFO累積等待，不宣稱桌面100ms/Android250ms目標達成。第一輪同時跑Typecheck的數字不當安靜效能基準；本組停止重型本機工作後重跑。沒有手機實機。
+
+最終正式來源與唯讀故障工具均已通過：Typecheck、Build、Pages路徑、Release Metadata/Worker identity，以及全部47項successor負向測試與正向Gate。Preview依賴77模組，authority/storage/render完整Reducer均0；Projection 5權威檔完整不變、3精確Persistence successor、23個Formal型別模組JS相同，Save schema/refinement等價。本機metadata為待審0.30.99；未合併或部署，不是正式發布驗收。最終HEAD完整回歸與CI仍以固定留言記錄，不把尚在執行的結果列PASS。
