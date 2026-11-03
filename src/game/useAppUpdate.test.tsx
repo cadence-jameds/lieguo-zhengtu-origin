@@ -302,7 +302,7 @@ it('candidate selection accepts a directly activated new worker only after match
 it('candidate selection follows a new activated worker without events but still waits for actual control',async()=>{
  oldActive();await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>vi.advanceTimersByTimeAsync(500));expect(updates.updating).toBe(true);
  const newer=candidate('activated');await act(async()=>{(registration as any).active=newer;await vi.advanceTimersByTimeAsync(500);});
- expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();
+ expect(save).toHaveBeenCalledOnce();expect(activations(newer)).toHaveLength(1);expect(replace).not.toHaveBeenCalled();
  await act(async()=>{(container as any).controller=newer;document.dispatchEvent(new Event('visibilitychange'));await vi.advanceTimersByTimeAsync(500);await done;});expect(replace).toHaveBeenCalledOnce();
 });
 it('candidate selection rejects a different activated build as evidence and continues waiting for the requested content',async()=>{
@@ -365,4 +365,16 @@ it.each(['no-campaign','historical'] as const)('P0 %s qualifies preservation wit
 });
 it.each([{label:'undefined',reason:undefined},{label:'null',reason:null},{label:'false',reason:false},{label:'zero',reason:0},{label:'empty',reason:''}])('P0 a rejected save with $label never becomes a durable acknowledgement',async({reason})=>{
  fetcher.mockResolvedValue({ok:true,json:async()=>({version:newVersion})});(registration as any).waiting=worker;save.mockRejectedValueOnce(reason);await mount();let done!:Promise<void>;await act(async()=>{done=updates.update();});await act(async()=>{await vi.advanceTimersByTimeAsync(20000);await done;});expect(activations(worker)).toHaveLength(0);expect(replace).not.toHaveBeenCalled();expect(updates.text).toContain('未取得保存完成確認');expect(updates.text).not.toContain('本次保存已確認');
+});
+it('a lost controller identity reply gets a bounded retry within the original activation budget',async()=>{
+ const {activateWaiting}=await import('./useAppUpdate');const target=candidate('installed'),current=candidate('activated');(container as any).controller=current;
+ let probes=0;vi.mocked(current.postMessage).mockImplementation((message:any,ports?:any)=>{if(message.type==='GET_APP_RELEASE'&&++probes>1)ports[0].reply(workerRelease);});
+ let finished=false;const done=activateWaiting(target,container,undefined,workerRelease).then(()=>finished=true);
+ await act(async()=>vi.advanceTimersByTimeAsync(2999));expect(finished).toBe(false);expect(probes).toBe(1);
+ await act(async()=>{await vi.advanceTimersByTimeAsync(251);await done;});expect(finished).toBe(true);expect(probes).toBe(2);expect(activations(target)).toHaveLength(1);
+});
+it('an already activated target with an old controller receives an explicit reclaim request after save',async()=>{
+ const {activateWaiting}=await import('./useAppUpdate');const target=candidate('activated');(container as any).controller=candidate('activated');
+ const done=activateWaiting(target,container,undefined,workerRelease);expect(activations(target)).toHaveLength(1);
+ (container as any).controller=target;container.dispatchEvent(new Event('controllerchange'));await done;
 });

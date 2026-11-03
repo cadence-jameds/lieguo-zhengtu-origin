@@ -87,16 +87,16 @@ export function activateWaiting(worker:ServiceWorker,container:ServiceWorkerCont
  if(container.controller===worker&&worker.state==='activated')return Promise.resolve();
  let dispose=()=>{};
  const operation=new Promise<void>((resolve,reject)=>{
-  let validating:ServiceWorker|null=null;
-  const inspect=(event?:Event)=>{const current=container.controller;
+  let finished=false;const probes=new AbortController(),validating=new WeakSet<ServiceWorker>(),attempts=new WeakMap<ServiceWorker,number>();
+  const inspect=(event?:Event)=>{if(finished||signal?.aborted)return;const current=container.controller;
    if(current===worker&&(worker.state==='activated'||event?.type==='controllerchange')){resolve();return;}
    // Object identity alone is insufficient when a new registration/controller wrapper appears.
    // Verify the actual current controller's immutable content identity before navigation.
-   if(identity&&current&&current!==worker&&current.state==='activated'&&current!==validating){validating=current;void verifyWorkerRelease(current,identity,signal).then(()=>{if(container.controller===current){assertUpdateActive(signal);resolve();}},()=>{}).catch(()=>{});}
+   if(identity&&current&&current!==worker&&current.state==='activated'&&!validating.has(current)&&(attempts.get(current)??0)<3){validating.add(current);attempts.set(current,(attempts.get(current)??0)+1);void verifyWorkerRelease(current,identity,probes.signal).then(()=>{if(!finished&&container.controller===current){assertUpdateActive(signal);resolve();}},()=>{}).catch(()=>{}).finally(()=>validating.delete(current));}
   };
   const poll=setInterval(inspect,250);container.addEventListener('controllerchange',inspect);worker.addEventListener('statechange',inspect);document.addEventListener('visibilitychange',inspect);window.addEventListener('focus',inspect);window.addEventListener('pageshow',inspect);
-  dispose=()=>{clearInterval(poll);container.removeEventListener('controllerchange',inspect);worker.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('focus',inspect);window.removeEventListener('pageshow',inspect);};
-  try{if(worker.state!=='activated')worker.postMessage({type:'SKIP_WAITING'});inspect();}catch(error){reject(error);}
+  dispose=()=>{finished=true;probes.abort();clearInterval(poll);container.removeEventListener('controllerchange',inspect);worker.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('focus',inspect);window.removeEventListener('pageshow',inspect);};
+  try{worker.postMessage({type:'SKIP_WAITING'});inspect();}catch(error){reject(error);}
  });
  return updateDeadline(operation,UPDATE_LIMITS.activation,'activation',signal).finally(dispose);
 }
