@@ -1,0 +1,1823 @@
+{
+  "environment": "Chromium 154.0.8037.57/Linux/2 CPU quota/8GiB; actual React useGame, Runtime and native IDB; identical observation plugin; synthetic clock for backlog, not OS sleep or Android. Fresh context per batch; no concurrent heavy jobs.",
+  "single": {
+    "battle": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 50.69970703125,
+          "p95": 58.099853515625,
+          "max": 60.89990234375
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 48.10009765625,
+          "p95": 55.300048828125,
+          "max": 58.800048828125
+        },
+        "t2": {
+          "n": 20,
+          "p50": 69.2001953125,
+          "p95": 100.89990234375,
+          "max": 121.199951171875
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 605.7998046875,
+          "p95": 720.5,
+          "max": 720.800048828125
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 50.69970703125,
+        "p95": 58.099853515625,
+        "max": 60.89990234375
+      },
+      "mainLongTasks": {
+        "n": 1,
+        "maxMs": 55
+      }
+    },
+    "heavy": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 49.800048828125,
+          "p95": 60.5,
+          "max": 62.699951171875
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 47.39990234375,
+          "p95": 58.10009765625,
+          "max": 60.400146484375
+        },
+        "t2": {
+          "n": 20,
+          "p50": 65.89990234375,
+          "p95": 82.7998046875,
+          "max": 88.10009765625
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 617.199951171875,
+          "p95": 665.699951171875,
+          "max": 712.10009765625
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 49.800048828125,
+        "p95": 60.5,
+        "max": 62.699951171875
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    },
+    "idle": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 12.399658203125,
+          "p95": 15.89990234375,
+          "max": 18.300048828125
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 10.300048828125,
+          "p95": 14.10009765625,
+          "max": 16
+        },
+        "t2": {
+          "n": 20,
+          "p50": 68.2001953125,
+          "p95": 89.10009765625,
+          "max": 90.2998046875
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 124.099853515625,
+          "p95": 139.699951171875,
+          "max": 170.39990234375
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 12.399658203125,
+        "p95": 15.89990234375,
+        "max": 18.300048828125
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    },
+    "lag": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 47.699951171875,
+          "p95": 67.199951171875,
+          "max": 85.800048828125
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 46.10009765625,
+          "p95": 64.800048828125,
+          "max": 82.699951171875
+        },
+        "t2": {
+          "n": 20,
+          "p50": 81.300048828125,
+          "p95": 138.300048828125,
+          "max": 147.300048828125
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 4635.5,
+          "p95": 5340.800048828125,
+          "max": 6476.099853515625
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 47.699951171875,
+        "p95": 67.199951171875,
+        "max": 85.800048828125
+      },
+      "mainLongTasks": {
+        "n": 1,
+        "maxMs": 50
+      }
+    },
+    "normal": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 44.2998046875,
+          "p95": 58.099853515625,
+          "max": 61.800048828125
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 42.300048828125,
+          "p95": 53.699951171875,
+          "max": 59.60009765625
+        },
+        "t2": {
+          "n": 20,
+          "p50": 79.5,
+          "p95": 104.400146484375,
+          "max": 109.89990234375
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 285.400146484375,
+          "p95": 348,
+          "max": 370.5
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 44.2998046875,
+        "p95": 58.099853515625,
+        "max": 61.800048828125
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    },
+    "offline": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 15.300048828125,
+          "p95": 22.2001953125,
+          "max": 22.699951171875
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 12.89990234375,
+          "p95": 15.5,
+          "max": 18.39990234375
+        },
+        "t2": {
+          "n": 20,
+          "p50": 68.300048828125,
+          "p95": 88.5,
+          "max": 120.39990234375
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 4660.7998046875,
+          "p95": 5458.60009765625,
+          "max": 5535.199951171875
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 15.300048828125,
+        "p95": 22.2001953125,
+        "max": 22.699951171875
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    },
+    "queues": {
+      "batches": 20,
+      "commands": 20,
+      "states": {
+        "committed": 20
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 20,
+          "p50": 30.7001953125,
+          "p95": 45.199951171875,
+          "max": 45.399658203125
+        },
+        "t1Work": {
+          "n": 20,
+          "p50": 28.89990234375,
+          "p95": 41.800048828125,
+          "max": 43
+        },
+        "t2": {
+          "n": 20,
+          "p50": 95.89990234375,
+          "p95": 109.7998046875,
+          "max": 116
+        },
+        "clickToVisible": {
+          "n": 20,
+          "p50": 2282.89990234375,
+          "p95": 2652.300048828125,
+          "max": 2704.800048828125
+        }
+      },
+      "lastCommandDurable": {
+        "n": 20,
+        "p50": 30.7001953125,
+        "p95": 45.199951171875,
+        "max": 45.399658203125
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    }
+  },
+  "batch": {
+    "heavy": {
+      "batches": 5,
+      "commands": 250,
+      "states": {
+        "committed": 5,
+        "needs-confirmation": 245
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 250,
+          "p50": 390.800048828125,
+          "p95": 908.7001953125,
+          "max": 1141.099853515625
+        },
+        "t1Work": {
+          "n": 250,
+          "p50": 12.199951171875,
+          "p95": 63.89990234375,
+          "max": 129.39990234375
+        },
+        "t2": {
+          "n": 250,
+          "p50": 46.89990234375,
+          "p95": 79,
+          "max": 113.300048828125
+        },
+        "clickToVisible": {
+          "n": 250,
+          "p50": 2240.2001953125,
+          "p95": 3385,
+          "max": 3881.400146484375
+        }
+      },
+      "lastCommandDurable": {
+        "n": 5,
+        "p50": 928.300048828125,
+        "p95": 1141.099853515625,
+        "max": 1141.099853515625
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    },
+    "offline": {
+      "batches": 5,
+      "commands": 250,
+      "states": {
+        "committed": 5,
+        "needs-confirmation": 245
+      },
+      "ms": {
+        "clickToDurable": {
+          "n": 250,
+          "p50": 414.2998046875,
+          "p95": 707.2998046875,
+          "max": 819.10009765625
+        },
+        "t1Work": {
+          "n": 250,
+          "p50": 11.400146484375,
+          "p95": 37.10009765625,
+          "max": 70.39990234375
+        },
+        "t2": {
+          "n": 250,
+          "p50": 41.39990234375,
+          "p95": 60.5,
+          "max": 97.2001953125
+        },
+        "clickToVisible": {
+          "n": 250,
+          "p50": 5924.199951171875,
+          "p95": 6899.10009765625,
+          "max": 7094.39990234375
+        }
+      },
+      "lastCommandDurable": {
+        "n": 5,
+        "p50": 705.7998046875,
+        "p95": 819.10009765625,
+        "max": 819.10009765625
+      },
+      "mainLongTasks": {
+        "n": 0,
+        "maxMs": 0
+      }
+    }
+  },
+  "battleRounds": {
+    "method": "Original battle fixture, 3 world hours at 25X; every sample contains actual combat.round events. Synthetic clock, real elapsed latency, original 30000ms wait and assertions retained. Earlier battle samples cover arrival only and are not presented as large-battle measurements.",
+    "batches": 20,
+    "actualCombatRounds": 20,
+    "ms": {
+      "clickToDurable": {
+        "n": 20,
+        "p50": 52,
+        "p95": 70.599853515625,
+        "max": 85.2998046875
+      },
+      "t1Work": {
+        "n": 20,
+        "p50": 49.199951171875,
+        "p95": 67.099853515625,
+        "max": 82.10009765625
+      },
+      "t2": {
+        "n": 20,
+        "p50": 77.800048828125,
+        "p95": 109.10009765625,
+        "max": 110.89990234375
+      },
+      "clickToVisible": {
+        "n": 20,
+        "p50": 1649.400146484375,
+        "p95": 1920.60009765625,
+        "max": 1968
+      }
+    }
+  },
+  "nativeDedicatedWorkerPersistence": {
+    "environment": "Native Chromium154 Linux / CPU2 / real dedicated Worker / native IndexedDB; independent browser per history size; not Android; reopenLoad reopens DB with warm module caches; inclusive profile times overlap",
+    "browser": "154.0.8037.57",
+    "samples": 5,
+    "warm": 20,
+    "cases": [
+      {
+        "type": "done",
+        "count": 60000,
+        "sizes": [
+          {
+            "quick": 44592197,
+            "full": 44592294
+          },
+          {
+            "quick": 44595775,
+            "full": 44595872
+          },
+          {
+            "quick": 44599352,
+            "full": 44599449
+          },
+          {
+            "quick": 44602938,
+            "full": 44603035
+          },
+          {
+            "quick": 44606517,
+            "full": 44606614
+          }
+        ],
+        "agents": 99,
+        "speed": 25,
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 7098.200000000186,
+            "p95": 7098.200000000186
+          },
+          "T1": {
+            "n": 20,
+            "p50": 11.100000000558794,
+            "p95": 18
+          },
+          "T2": {
+            "n": 20,
+            "p50": 51.40000000037253,
+            "p95": 55.80000000074506
+          },
+          "query": {
+            "n": 20,
+            "p50": 1.7000000001862645,
+            "p95": 4.7000000001862645
+          },
+          "rejectedT2": {
+            "n": 20,
+            "p50": 40.90000000037253,
+            "p95": 53.200000000186265
+          },
+          "confirmationT2": {
+            "n": 20,
+            "p50": 40.89999999944121,
+            "p95": 47.200000000186265
+          },
+          "reopenLoad": {
+            "n": 5,
+            "p50": 2563.2999999998137,
+            "p95": 2572.5
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 3319.100000000559,
+            "p95": 3587.2000000001863
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 1657.4000000003725,
+            "p95": 1898.2000000001863
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 1660.6000000005588,
+            "p95": 1920.7000000001863
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 4627,
+            "p95": 5894.5999999996275
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 4492.0999999996275,
+            "p95": 4828
+          }
+        }
+      }
+    ]
+  },
+  "nativeMainHarnessPersistence": {
+    "environment": "Native browser Main harness, not product UI or pure authority Worker. Warm proofs/modules, five heavy samples per size; retained UI heap cannot be inferred.",
+    "cases": [
+      {
+        "count": 0,
+        "quickBytes": 1382121,
+        "hotWorldBytes": 454469,
+        "logicalStoredLedgerBytes": 14257,
+        "heap": {
+          "usedJSHeapSize": 81866079,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+        "factions": 100,
+        "speed": 25,
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 50.200000000186265,
+            "p95": 50.200000000186265
+          },
+          "identityLookup": {
+            "n": 150,
+            "p50": 0,
+            "p95": 0
+          },
+          "materializedReducer": {
+            "n": 5,
+            "p50": 11,
+            "p95": 13.100000000093132
+          },
+          "boundReducer": {
+            "n": 5,
+            "p50": 12.600000000093132,
+            "p95": 16.399999999906868
+          },
+          "T1": {
+            "n": 5,
+            "p50": 8.799999999813735,
+            "p95": 11
+          },
+          "T2": {
+            "n": 5,
+            "p50": 51.10000000009313,
+            "p95": 53.200000000186265
+          },
+          "load": {
+            "n": 5,
+            "p50": 30.5,
+            "p95": 31.399999999906868
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 75.29999999981374,
+            "p95": 97.60000000009313
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 169.20000000018626,
+            "p95": 181.79999999981374
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 79.8000000002794,
+            "p95": 84.89999999990687
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 159.70000000018626,
+            "p95": 199.8000000002794
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 85.29999999981374,
+            "p95": 89.20000000018626
+          }
+        }
+      },
+      {
+        "count": 1000,
+        "quickBytes": 2120944,
+        "hotWorldBytes": 454475,
+        "logicalStoredLedgerBytes": 1837686,
+        "heap": {
+          "usedJSHeapSize": 44196532,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+        "factions": 100,
+        "speed": 25,
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 150.39999999990687,
+            "p95": 150.39999999990687
+          },
+          "identityLookup": {
+            "n": 150,
+            "p50": 0,
+            "p95": 0
+          },
+          "materializedReducer": {
+            "n": 5,
+            "p50": 13,
+            "p95": 26
+          },
+          "boundReducer": {
+            "n": 5,
+            "p50": 11.299999999813735,
+            "p95": 12.600000000093132
+          },
+          "T1": {
+            "n": 5,
+            "p50": 11.300000000279397,
+            "p95": 25
+          },
+          "T2": {
+            "n": 5,
+            "p50": 57.60000000009313,
+            "p95": 61.09999999962747
+          },
+          "load": {
+            "n": 5,
+            "p50": 78.89999999990687,
+            "p95": 87.29999999981374
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 109.29999999981374,
+            "p95": 128.8000000002794
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 268.39999999990687,
+            "p95": 345.89999999990687
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 114.09999999962747,
+            "p95": 127.79999999981374
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 271.10000000009313,
+            "p95": 289.20000000018626
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 154.20000000018626,
+            "p95": 178.20000000018626
+          }
+        }
+      },
+      {
+        "count": 10000,
+        "quickBytes": 8808060,
+        "hotWorldBytes": 454477,
+        "logicalStoredLedgerBytes": 18356782,
+        "heap": {
+          "usedJSHeapSize": 286466644,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+        "factions": 100,
+        "speed": 25,
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 1011.4000000003725,
+            "p95": 1011.4000000003725
+          },
+          "identityLookup": {
+            "n": 150,
+            "p50": 0,
+            "p95": 0
+          },
+          "materializedReducer": {
+            "n": 5,
+            "p50": 30.59999999962747,
+            "p95": 30.899999999906868
+          },
+          "boundReducer": {
+            "n": 5,
+            "p50": 11.399999999906868,
+            "p95": 12
+          },
+          "T1": {
+            "n": 5,
+            "p50": 8.600000000093132,
+            "p95": 41.3000000002794
+          },
+          "T2": {
+            "n": 5,
+            "p50": 56.5,
+            "p95": 103.8000000002794
+          },
+          "load": {
+            "n": 5,
+            "p50": 411.5,
+            "p95": 458.90000000037253
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 316.1999999997206,
+            "p95": 371.60000000009313
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 912.4000000003725,
+            "p95": 1280
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 305.89999999990687,
+            "p95": 346
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 898.3999999999069,
+            "p95": 1021.6000000000931
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 559.8999999999069,
+            "p95": 625.6000000000931
+          }
+        }
+      },
+      {
+        "count": 30000,
+        "quickBytes": 23703038,
+        "hotWorldBytes": 454477,
+        "logicalStoredLedgerBytes": 55151756,
+        "heap": {
+          "usedJSHeapSize": 624008803,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+        "factions": 100,
+        "speed": 25,
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 2794.7999999998137,
+            "p95": 2794.7999999998137
+          },
+          "identityLookup": {
+            "n": 150,
+            "p50": 0,
+            "p95": 0
+          },
+          "materializedReducer": {
+            "n": 5,
+            "p50": 59.6999999997206,
+            "p95": 79.90000000037253
+          },
+          "boundReducer": {
+            "n": 5,
+            "p50": 13.399999999906868,
+            "p95": 15.700000000186265
+          },
+          "T1": {
+            "n": 5,
+            "p50": 7.2000000001862645,
+            "p95": 131.5
+          },
+          "T2": {
+            "n": 5,
+            "p50": 54.09999999962747,
+            "p95": 73.60000000009313
+          },
+          "load": {
+            "n": 5,
+            "p50": 1352,
+            "p95": 1500
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 959,
+            "p95": 1140
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 2399.2999999998137,
+            "p95": 3743.5
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 826.5,
+            "p95": 986.7999999998137
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 2422.5,
+            "p95": 2681.5
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 1569,
+            "p95": 1786.1999999997206
+          }
+        }
+      },
+      {
+        "count": 60000,
+        "quickBytes": 46045544,
+        "hotWorldBytes": 454477,
+        "logicalStoredLedgerBytes": 110344262,
+        "heap": {
+          "usedJSHeapSize": 639733434,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "heapCaveat": "Chromium process estimate; includes harness/import verification, not retained world alone",
+        "factions": 100,
+        "speed": 25,
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 5215.4000000003725,
+            "p95": 5215.4000000003725
+          },
+          "identityLookup": {
+            "n": 150,
+            "p50": 0,
+            "p95": 0
+          },
+          "materializedReducer": {
+            "n": 5,
+            "p50": 116.10000000009313,
+            "p95": 127.10000000009313
+          },
+          "boundReducer": {
+            "n": 5,
+            "p50": 11.899999999906868,
+            "p95": 15
+          },
+          "T1": {
+            "n": 5,
+            "p50": 8.399999999906868,
+            "p95": 9.899999999906868
+          },
+          "T2": {
+            "n": 5,
+            "p50": 57.8000000002794,
+            "p95": 67.29999999981374
+          },
+          "load": {
+            "n": 5,
+            "p50": 2620.600000000093,
+            "p95": 3123.0999999996275
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 1744.8999999999069,
+            "p95": 1968.4000000003725
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 4727.100000000093,
+            "p95": 6847.699999999721
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 1502.8000000002794,
+            "p95": 1892.1000000000931
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 4343.200000000186,
+            "p95": 5260.399999999907
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 3208.7999999998137,
+            "p95": 3714.600000000093
+          }
+        }
+      }
+    ]
+  },
+  "native150k": {
+    "browser": "154.0.8037.57",
+    "method": "150000 legal projectionSyntheticWorld identities, actual Persistence/native IDB/Worker; warm modules/proof cache. Desktop Linux/2CPU/8GiB. Export rejection preserves every identity; no cap bypass.",
+    "samples": 5,
+    "data": {
+      "done": true,
+      "rows": [
+        {
+          "name": "start",
+          "ms": 18579.899999999907,
+          "status": "PASS"
+        },
+        {
+          "name": "reopenLoad",
+          "ms": 6332.199999999721,
+          "status": "PASS"
+        },
+        {
+          "name": "T1",
+          "ms": 7.2999999998137355,
+          "status": "PASS"
+        },
+        {
+          "name": "T2",
+          "ms": 61.799999999813735,
+          "status": "PASS"
+        },
+        {
+          "name": "Recovery",
+          "ms": 7301.100000000093,
+          "status": "PASS"
+        },
+        {
+          "name": "quickExport",
+          "ms": 3609.5,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "fullExport",
+          "ms": 3994.899999999907,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "reopenLoad",
+          "ms": 7538.799999999814,
+          "status": "PASS"
+        },
+        {
+          "name": "T1",
+          "ms": 9.199999999720603,
+          "status": "PASS"
+        },
+        {
+          "name": "T2",
+          "ms": 82.60000000009313,
+          "status": "PASS"
+        },
+        {
+          "name": "Recovery",
+          "ms": 10297.899999999907,
+          "status": "PASS"
+        },
+        {
+          "name": "quickExport",
+          "ms": 6938.5999999996275,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "fullExport",
+          "ms": 5971,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "reopenLoad",
+          "ms": 5802.5,
+          "status": "PASS"
+        },
+        {
+          "name": "T1",
+          "ms": 14,
+          "status": "PASS"
+        },
+        {
+          "name": "T2",
+          "ms": 84.60000000009313,
+          "status": "PASS"
+        },
+        {
+          "name": "Recovery",
+          "ms": 10215.600000000093,
+          "status": "PASS"
+        },
+        {
+          "name": "quickExport",
+          "ms": 3922,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "fullExport",
+          "ms": 4039.399999999907,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "reopenLoad",
+          "ms": 5706.299999999814,
+          "status": "PASS"
+        },
+        {
+          "name": "T1",
+          "ms": 6.399999999906868,
+          "status": "PASS"
+        },
+        {
+          "name": "T2",
+          "ms": 50.799999999813735,
+          "status": "PASS"
+        },
+        {
+          "name": "Recovery",
+          "ms": 7455.700000000186,
+          "status": "PASS"
+        },
+        {
+          "name": "quickExport",
+          "ms": 3972.6999999997206,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "fullExport",
+          "ms": 3866.6999999997206,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "reopenLoad",
+          "ms": 5481.200000000186,
+          "status": "PASS"
+        },
+        {
+          "name": "T1",
+          "ms": 7.699999999720603,
+          "status": "PASS"
+        },
+        {
+          "name": "T2",
+          "ms": 49,
+          "status": "PASS"
+        },
+        {
+          "name": "Recovery",
+          "ms": 8192.399999999907,
+          "status": "PASS"
+        },
+        {
+          "name": "quickExport",
+          "ms": 4169,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        },
+        {
+          "name": "fullExport",
+          "ms": 4241.399999999907,
+          "status": "REJECTED",
+          "error": "Error: 存檔超過 100 MiB，未產生不可重新匯入的檔案。"
+        }
+      ],
+      "history": 150005,
+      "identities": 150005,
+      "storage": {
+        "quota": 10852560896,
+        "usage": 115142656,
+        "usageDetails": {
+          "indexedDB": 115142656
+        }
+      }
+    },
+    "ms": {
+      "start": {
+        "n": 1,
+        "p50": 18579.899999999907,
+        "p95": 18579.899999999907
+      },
+      "reopenLoad": {
+        "n": 5,
+        "p50": 5802.5,
+        "p95": 7538.799999999814
+      },
+      "T1": {
+        "n": 5,
+        "p50": 7.699999999720603,
+        "p95": 14
+      },
+      "T2": {
+        "n": 5,
+        "p50": 61.799999999813735,
+        "p95": 84.60000000009313
+      },
+      "Recovery": {
+        "n": 5,
+        "p50": 8192.399999999907,
+        "p95": 10297.899999999907
+      },
+      "quickExport": {
+        "n": 5,
+        "p50": 3972.6999999997206,
+        "p95": 6938.5999999996275
+      },
+      "fullExport": {
+        "n": 5,
+        "p50": 4039.399999999907,
+        "p95": 5971
+      }
+    },
+    "status": "PASS",
+    "dataSafety": "PASS",
+    "backupCapability": "CAPACITY_LIMIT: five quick and five full exports rejected by existing 100MiB limit; native import is NOT TESTED for this oversized fixture"
+  },
+  "projection": {
+    "environment": "Chromium Linux container, real Dedicated benchmark Worker/structuredClone/React selectors; RAM verified 100-faction synthetic worlds; not native T2 timing or Android",
+    "cases": [
+      {
+        "count": 0,
+        "bytes": {
+          "v1Snapshot": 454108,
+          "snapshot": 467324,
+          "v1Tick": 102,
+          "tick": 305,
+          "v1Command": 147130,
+          "command": 1796
+        },
+        "ms": {
+          "snapshotBuild": {
+            "n": 10,
+            "p50": 0.8000000002793968,
+            "p95": 7.400000000372529
+          },
+          "snapshotParseApply": {
+            "n": 10,
+            "p50": 13.699999999720603,
+            "p95": 62.6999999997206
+          },
+          "v1SnapshotMaterialize": {
+            "n": 10,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "v1TickBuild": {
+            "n": 30,
+            "p50": 2.7000000001862645,
+            "p95": 35.200000000186265
+          },
+          "tickBuild": {
+            "n": 30,
+            "p50": 3.1000000000931323,
+            "p95": 35.39999999990687
+          },
+          "tickEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickParse": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickApply": {
+            "n": 30,
+            "p50": 0.2999999998137355,
+            "p95": 0.6999999997206032
+          },
+          "v1CommandBuild": {
+            "n": 30,
+            "p50": 2.8999999999068677,
+            "p95": 11.100000000093132
+          },
+          "commandBuild": {
+            "n": 30,
+            "p50": 4.100000000093132,
+            "p95": 45.200000000186265
+          },
+          "commandEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "commandParseApply": {
+            "n": 30,
+            "p50": 0.5,
+            "p95": 24.300000000279397
+          },
+          "resyncBuild": {
+            "n": 10,
+            "p50": 0.40000000037252903,
+            "p95": 0.7999999998137355
+          },
+          "resyncApply": {
+            "n": 10,
+            "p50": 16.199999999720603,
+            "p95": 49.5
+          }
+        },
+        "mainMs": {
+          "snapshot": {
+            "receiveDelay": {
+              "n": 11,
+              "p50": 5.7998046875,
+              "p95": 37.10009765625
+            },
+            "apply": {
+              "n": 11,
+              "p50": 11.699999999720603,
+              "p95": 31.800000000279397
+            },
+            "settle": {
+              "n": 11,
+              "p50": 16.899999999906868,
+              "p95": 34.700000000186265
+            }
+          },
+          "patch": {
+            "receiveDelay": {
+              "n": 66,
+              "p50": 0.5,
+              "p95": 30.900146484375
+            },
+            "apply": {
+              "n": 66,
+              "p50": 0.7000000001862645,
+              "p95": 3.2999999998137355
+            },
+            "settle": {
+              "n": 66,
+              "p50": 2.6000000000931323,
+              "p95": 37.700000000186265
+            }
+          }
+        },
+        "renders": {
+          "city:000": 68,
+          "city:001": 68
+        },
+        "heap": {
+          "used": 57664835,
+          "limit": 4395630592
+        },
+        "reactProfiler": {
+          "n": 68,
+          "p50": 0.20000000018626451,
+          "p95": 0.39999999990686774
+        },
+        "mainLongTasks": {
+          "n": 2,
+          "p50": 66,
+          "p95": 125,
+          "max": 125
+        }
+      },
+      {
+        "count": 1000,
+        "bytes": {
+          "v1Snapshot": 763000,
+          "snapshot": 467633,
+          "v1Tick": 105,
+          "tick": 308,
+          "v1Command": 456122,
+          "command": 1799
+        },
+        "ms": {
+          "snapshotBuild": {
+            "n": 10,
+            "p50": 1.1000000000931323,
+            "p95": 2.7999999998137355
+          },
+          "snapshotParseApply": {
+            "n": 10,
+            "p50": 12.5,
+            "p95": 45.8000000002794
+          },
+          "v1SnapshotMaterialize": {
+            "n": 10,
+            "p50": 0.20000000018626451,
+            "p95": 0.3000000002793968
+          },
+          "v1TickBuild": {
+            "n": 30,
+            "p50": 7.5,
+            "p95": 36.89999999990687
+          },
+          "tickBuild": {
+            "n": 30,
+            "p50": 2.7000000001862645,
+            "p95": 29.800000000279397
+          },
+          "tickEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickParse": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickApply": {
+            "n": 30,
+            "p50": 0.20000000018626451,
+            "p95": 0.39999999990686774
+          },
+          "v1CommandBuild": {
+            "n": 30,
+            "p50": 2.7999999998137355,
+            "p95": 6.600000000093132
+          },
+          "commandBuild": {
+            "n": 30,
+            "p50": 2.6000000000931323,
+            "p95": 5
+          },
+          "commandEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.19999999972060323
+          },
+          "commandParseApply": {
+            "n": 30,
+            "p50": 0.39999999990686774,
+            "p95": 0.8999999999068677
+          },
+          "resyncBuild": {
+            "n": 10,
+            "p50": 0.599999999627471,
+            "p95": 0.8999999999068677
+          },
+          "resyncApply": {
+            "n": 10,
+            "p50": 20.299999999813735,
+            "p95": 33.1999999997206
+          }
+        },
+        "mainMs": {
+          "snapshot": {
+            "receiveDelay": {
+              "n": 11,
+              "p50": 5.60009765625,
+              "p95": 37.10009765625
+            },
+            "apply": {
+              "n": 11,
+              "p50": 8.5,
+              "p95": 39.59999999962747
+            },
+            "settle": {
+              "n": 11,
+              "p50": 14.100000000093132,
+              "p95": 40.799999999813735
+            }
+          },
+          "patch": {
+            "receiveDelay": {
+              "n": 66,
+              "p50": 0.400146484375,
+              "p95": 31.60009765625
+            },
+            "apply": {
+              "n": 66,
+              "p50": 0.5,
+              "p95": 2
+            },
+            "settle": {
+              "n": 66,
+              "p50": 1.6999999997206032,
+              "p95": 15
+            }
+          }
+        },
+        "renders": {
+          "city:000": 68,
+          "city:001": 68
+        },
+        "heap": {
+          "used": 84378754,
+          "limit": 4395630592
+        },
+        "reactProfiler": {
+          "n": 68,
+          "p50": 0.19999999972060323,
+          "p95": 0.5
+        },
+        "mainLongTasks": {
+          "n": 0,
+          "p50": null,
+          "p95": null
+        }
+      },
+      {
+        "count": 10000,
+        "bytes": {
+          "v1Snapshot": 3563001,
+          "snapshot": 467736,
+          "v1Tick": 106,
+          "tick": 309,
+          "v1Command": 3256156,
+          "command": 1800
+        },
+        "ms": {
+          "snapshotBuild": {
+            "n": 10,
+            "p50": 4.800000000279397,
+            "p95": 23.5
+          },
+          "snapshotParseApply": {
+            "n": 10,
+            "p50": 12.399999999906868,
+            "p95": 79.5
+          },
+          "v1SnapshotMaterialize": {
+            "n": 10,
+            "p50": 4,
+            "p95": 35.1999999997206
+          },
+          "v1TickBuild": {
+            "n": 30,
+            "p50": 82.5,
+            "p95": 106.90000000037253
+          },
+          "tickBuild": {
+            "n": 30,
+            "p50": 3,
+            "p95": 14.100000000093132
+          },
+          "tickEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickParse": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickApply": {
+            "n": 30,
+            "p50": 0.2999999998137355,
+            "p95": 0.7999999998137355
+          },
+          "v1CommandBuild": {
+            "n": 30,
+            "p50": 11.600000000093132,
+            "p95": 48.60000000009313
+          },
+          "commandBuild": {
+            "n": 30,
+            "p50": 3,
+            "p95": 4.7999999998137355
+          },
+          "commandEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.20000000018626451
+          },
+          "commandParseApply": {
+            "n": 30,
+            "p50": 0.599999999627471,
+            "p95": 1.400000000372529
+          },
+          "resyncBuild": {
+            "n": 10,
+            "p50": 0.5,
+            "p95": 3.6000000000931323
+          },
+          "resyncApply": {
+            "n": 10,
+            "p50": 19.100000000093132,
+            "p95": 52
+          }
+        },
+        "mainMs": {
+          "snapshot": {
+            "receiveDelay": {
+              "n": 11,
+              "p50": 5.500244140625,
+              "p95": 7.2001953125
+            },
+            "apply": {
+              "n": 11,
+              "p50": 11.200000000186265,
+              "p95": 35
+            },
+            "settle": {
+              "n": 11,
+              "p50": 12.600000000093132,
+              "p95": 36.200000000186265
+            }
+          },
+          "patch": {
+            "receiveDelay": {
+              "n": 66,
+              "p50": 0.400146484375,
+              "p95": 5.10009765625
+            },
+            "apply": {
+              "n": 66,
+              "p50": 0.5,
+              "p95": 2
+            },
+            "settle": {
+              "n": 66,
+              "p50": 1.5,
+              "p95": 4.399999999906868
+            }
+          }
+        },
+        "renders": {
+          "city:000": 68,
+          "city:001": 68
+        },
+        "heap": {
+          "used": 114940858,
+          "limit": 4395630592
+        },
+        "reactProfiler": {
+          "n": 68,
+          "p50": 0.20000000018626451,
+          "p95": 0.6000000000931323
+        },
+        "mainLongTasks": {
+          "n": 1,
+          "p50": 60,
+          "p95": 60,
+          "max": 60
+        }
+      },
+      {
+        "count": 30000,
+        "bytes": {
+          "v1Snapshot": 9803001,
+          "snapshot": 467736,
+          "v1Tick": 106,
+          "tick": 309,
+          "v1Command": 9496156,
+          "command": 1800
+        },
+        "ms": {
+          "snapshotBuild": {
+            "n": 10,
+            "p50": 17.5,
+            "p95": 69.8000000002794
+          },
+          "snapshotParseApply": {
+            "n": 10,
+            "p50": 27.799999999813735,
+            "p95": 81
+          },
+          "v1SnapshotMaterialize": {
+            "n": 10,
+            "p50": 16.600000000093132,
+            "p95": 47.10000000009313
+          },
+          "v1TickBuild": {
+            "n": 30,
+            "p50": 204.79999999981374,
+            "p95": 306.39999999990687
+          },
+          "tickBuild": {
+            "n": 30,
+            "p50": 2.7999999998137355,
+            "p95": 11.699999999720603
+          },
+          "tickEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickParse": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0
+          },
+          "tickApply": {
+            "n": 30,
+            "p50": 0.20000000018626451,
+            "p95": 0.39999999990686774
+          },
+          "v1CommandBuild": {
+            "n": 30,
+            "p50": 48.6999999997206,
+            "p95": 104.89999999990687
+          },
+          "commandBuild": {
+            "n": 30,
+            "p50": 2.900000000372529,
+            "p95": 8.300000000279397
+          },
+          "commandEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.20000000018626451
+          },
+          "commandParseApply": {
+            "n": 30,
+            "p50": 0.5,
+            "p95": 1.7000000001862645
+          },
+          "resyncBuild": {
+            "n": 10,
+            "p50": 0.5,
+            "p95": 1
+          },
+          "resyncApply": {
+            "n": 10,
+            "p50": 18.100000000093132,
+            "p95": 60.3000000002794
+          }
+        },
+        "mainMs": {
+          "snapshot": {
+            "receiveDelay": {
+              "n": 11,
+              "p50": 6.10009765625,
+              "p95": 11.7998046875
+            },
+            "apply": {
+              "n": 11,
+              "p50": 9.200000000186265,
+              "p95": 41.40000000037253
+            },
+            "settle": {
+              "n": 11,
+              "p50": 18.600000000093132,
+              "p95": 42.3000000002794
+            }
+          },
+          "patch": {
+            "receiveDelay": {
+              "n": 66,
+              "p50": 0.39990234375,
+              "p95": 1.699951171875
+            },
+            "apply": {
+              "n": 66,
+              "p50": 0.5,
+              "p95": 1.400000000372529
+            },
+            "settle": {
+              "n": 66,
+              "p50": 1.2999999998137355,
+              "p95": 15.200000000186265
+            }
+          }
+        },
+        "renders": {
+          "city:000": 68,
+          "city:001": 68
+        },
+        "heap": {
+          "used": 164334666,
+          "limit": 4395630592
+        },
+        "reactProfiler": {
+          "n": 68,
+          "p50": 0.20000000018626451,
+          "p95": 0.7999999998137355
+        },
+        "mainLongTasks": {
+          "n": 5,
+          "p50": 52,
+          "p95": 57,
+          "max": 57
+        }
+      },
+      {
+        "count": 60000,
+        "bytes": {
+          "v1Snapshot": 19163001,
+          "snapshot": 467736,
+          "v1Tick": 106,
+          "tick": 309,
+          "v1Command": 18856156,
+          "command": 1800
+        },
+        "ms": {
+          "snapshotBuild": {
+            "n": 10,
+            "p50": 32.1999999997206,
+            "p95": 64
+          },
+          "snapshotParseApply": {
+            "n": 10,
+            "p50": 15.799999999813735,
+            "p95": 60.89999999990687
+          },
+          "v1SnapshotMaterialize": {
+            "n": 10,
+            "p50": 52.10000000009313,
+            "p95": 81
+          },
+          "v1TickBuild": {
+            "n": 30,
+            "p50": 452.10000000009313,
+            "p95": 657.2999999998137
+          },
+          "tickBuild": {
+            "n": 30,
+            "p50": 2.8000000002793968,
+            "p95": 10.199999999720603
+          },
+          "tickEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickParse": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "tickApply": {
+            "n": 30,
+            "p50": 0.2999999998137355,
+            "p95": 1
+          },
+          "v1CommandBuild": {
+            "n": 30,
+            "p50": 99.3000000002794,
+            "p95": 154.10000000009313
+          },
+          "commandBuild": {
+            "n": 30,
+            "p50": 2.7999999998137355,
+            "p95": 7.600000000093132
+          },
+          "commandEncode": {
+            "n": 30,
+            "p50": 0,
+            "p95": 0.10000000009313226
+          },
+          "commandParseApply": {
+            "n": 30,
+            "p50": 0.40000000037252903,
+            "p95": 1.5
+          },
+          "resyncBuild": {
+            "n": 10,
+            "p50": 0.5,
+            "p95": 1.3999999999068677
+          },
+          "resyncApply": {
+            "n": 10,
+            "p50": 24.899999999906868,
+            "p95": 58.10000000009313
+          }
+        },
+        "mainMs": {
+          "snapshot": {
+            "receiveDelay": {
+              "n": 11,
+              "p50": 5.2001953125,
+              "p95": 32.5
+            },
+            "apply": {
+              "n": 11,
+              "p50": 7.899999999906868,
+              "p95": 38.90000000037253
+            },
+            "settle": {
+              "n": 11,
+              "p50": 9.100000000093132,
+              "p95": 39.8000000002794
+            }
+          },
+          "patch": {
+            "receiveDelay": {
+              "n": 66,
+              "p50": 0.30029296875,
+              "p95": 33.000244140625
+            },
+            "apply": {
+              "n": 66,
+              "p50": 0.40000000037252903,
+              "p95": 0.900000000372529
+            },
+            "settle": {
+              "n": 66,
+              "p50": 1.2999999998137355,
+              "p95": 5.600000000093132
+            }
+          }
+        },
+        "renders": {
+          "city:000": 68,
+          "city:001": 68
+        },
+        "heap": {
+          "used": 280521362,
+          "limit": 4395630592
+        },
+        "reactProfiler": {
+          "n": 68,
+          "p50": 0.19999999972060323,
+          "p95": 0.7999999998137355
+        },
+        "mainLongTasks": {
+          "n": 4,
+          "p50": 53,
+          "p95": 64,
+          "max": 64
+        }
+      }
+    ]
+  }
+}

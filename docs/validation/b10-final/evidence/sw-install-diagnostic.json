@@ -1,0 +1,120 @@
+{
+  "browser": "154.0.8037.57",
+  "selection": "bad-install",
+  "method": "Localhost, actual PR58 and final PR59 production builds, native SW/cache/IndexedDB/Runtime/Preview. Native IDB abort injection is isolated to a disposable test context. Desktop headless, not Android.",
+  "cases": [
+    {
+      "name": "bad-install refuses activation and later retries safely",
+      "status": "PASS",
+      "data": {
+        "failedTrace": [
+          {
+            "type": "release-probe",
+            "at": 1793722507103
+          }
+        ],
+        "retry": {
+          "row": {
+            "playerBase": {
+              "revision": 4,
+              "fingerprint": "[\"campaign:projection-benchmark-0\",\"faction:000\",{\"type\":\"city.rename\",\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\"},[\"明州武陵關\"]]"
+            },
+            "campaignId": "campaign:projection-benchmark-0",
+            "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+            "issuerId": "faction:000",
+            "order": {
+              "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+              "campaignId": "campaign:projection-benchmark-0",
+              "issuerId": "faction:000",
+              "issuedWorldTime": 11350,
+              "expectedRevision": 4,
+              "payload": {
+                "type": "city.rename",
+                "cityId": "city:000",
+                "name": "正式更新保留原始結果"
+              }
+            },
+            "fingerprint": "{\"campaignId\":\"campaign:projection-benchmark-0\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\",\"type\":\"city.rename\"}}",
+            "originalRevision": 4,
+            "originalBranch": 1,
+            "branch": 1,
+            "writerEpoch": 2,
+            "state": "committed",
+            "createdAt": 1793722506673,
+            "deadline": 1793722626673,
+            "attempts": 0,
+            "nextAttemptAt": 0,
+            "sequence": 1,
+            "ack": {
+              "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+              "status": "committed",
+              "revision": 5
+            },
+            "originalResult": {
+              "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+              "issuerId": "faction:000",
+              "fingerprint": "{\"campaignId\":\"campaign:projection-benchmark-0\",\"issuerId\":\"faction:000\",\"payload\":{\"cityId\":\"city:000\",\"name\":\"正式更新保留原始結果\",\"type\":\"city.rename\"}}",
+              "state": "committed",
+              "ack": {
+                "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+                "status": "committed",
+                "revision": 5
+              },
+              "order": {
+                "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+                "campaignId": "campaign:projection-benchmark-0",
+                "issuerId": "faction:000",
+                "issuedWorldTime": 11350,
+                "expectedRevision": 4,
+                "payload": {
+                  "type": "city.rename",
+                  "cityId": "city:000",
+                  "name": "正式更新保留原始結果"
+                }
+              }
+            }
+          },
+          "events": [
+            {
+              "type": "release-probe",
+              "at": 1793722537532
+            },
+            {
+              "type": "save-request",
+              "at": 1793722537533
+            },
+            {
+              "type": "durable-save-ack",
+              "at": 1793722537612
+            },
+            {
+              "type": "skip-waiting",
+              "at": 1793722537613
+            },
+            {
+              "type": "release-probe",
+              "at": 1793722537613
+            },
+            {
+              "type": "controllerchange",
+              "at": 1793722537630
+            },
+            {
+              "type": "navigation",
+              "at": 1793722537632
+            },
+            {
+              "type": "command-ack",
+              "ack": {
+                "commandId": "command:30aabb49-9795-4432-8d3f-bf8146ee1684",
+                "status": "committed",
+                "revision": 5
+              },
+              "at": 1793722539796
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

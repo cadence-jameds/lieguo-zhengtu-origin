@@ -1,0 +1,1284 @@
+{
+  "development": {
+    "environment": "Native Chromium154/Linux/CPU2, real GameApp and fresh Runtime Worker; same fixture seeded before every sample. Includes actual offline replay and final T2; not Android. Profile times inclusive. cgroup memory includes browser/server/OS cache, not pure JS retained heap.",
+    "samples": 5,
+    "cases": [
+      {
+        "count": 60000,
+        "ms": {
+          "navigationToCity": {
+            "n": 5,
+            "p50": 5937.106273999998,
+            "p95": 6340.335918000001
+          },
+          "clickToCity": {
+            "n": 5,
+            "p50": 73.08568300000115,
+            "p95": 78.1860050000032
+          }
+        },
+        "mainLongTasks": {
+          "n": 16,
+          "p50": 79,
+          "p95": 127,
+          "max": 127
+        },
+        "mainIDBTables": [],
+        "heartbeatMaxMs": 0,
+        "rows": [
+          {
+            "navigationToCityMs": 6108.920451,
+            "clickToCityMs": 74.73515599999882,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 377.1999999997206
+              },
+              "canonical.ts:digest": {
+                "calls": 476,
+                "ms": 297.8000000012107
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 471,
+                "ms": 335.6000000042841
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 906.5
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 1491.5
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 1869.1000000000931
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 137.00000000093132
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 84.10000000009313
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 3824.7000000001863
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 1.2000000001862645
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.7000000001862645
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 59.10000000009313
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 2.9999999995343387
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 0.900000000372529
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 149.20000000018626
+              }
+            },
+            "snapshotBytes": 467794,
+            "mainHeap": {
+              "used": 30195068,
+              "total": 44965536
+            }
+          },
+          {
+            "navigationToCityMs": 6340.335918000001,
+            "clickToCityMs": 73.08568300000115,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 432.40000000037253
+              },
+              "canonical.ts:digest": {
+                "calls": 476,
+                "ms": 338.29999999608845
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 471,
+                "ms": 321.60000000474975
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 960
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 1619.7999999998137
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 2052.7999999998137
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 162.5
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 93.89999999990687
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 4292.399999999907
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.6999999997206032
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.599999999627471
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 51.59999999962747
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 5
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 2.8000000002793968
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 164.29999999981374
+              }
+            },
+            "snapshotBytes": 467794,
+            "mainHeap": {
+              "used": 31354883,
+              "total": 44703415
+            }
+          },
+          {
+            "navigationToCityMs": 5937.106273999998,
+            "clickToCityMs": 78.1860050000032,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 374.10000000009313
+              },
+              "canonical.ts:digest": {
+                "calls": 476,
+                "ms": 298.5000000023283
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 471,
+                "ms": 286.1999999927357
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 839.8999999999069
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 1444
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 1818.7000000001863
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 127.70000000111759
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 81.40000000037253
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 3663
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.599999999627471
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 2.2999999998137355
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 46.6999999997206
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 9.400000000372529
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 0.6999999997206032
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 244.70000000065193
+              }
+            },
+            "snapshotBytes": 467794,
+            "mainHeap": {
+              "used": 30846336,
+              "total": 44179112
+            }
+          },
+          {
+            "navigationToCityMs": 5777.269485999997,
+            "clickToCityMs": 63.102254000004905,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 281.20000000018626
+              },
+              "canonical.ts:digest": {
+                "calls": 476,
+                "ms": 287.2000000020489
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 471,
+                "ms": 278.2000000011176
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 845.8999999999069
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 1423.7000000001863
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 1705.7000000001863
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 138.59999999962747
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 84.39999999990687
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 3681.5
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.7000000001862645
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.3999999999068677
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 42.10000000009313
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 14.899999999906868
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 1
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 236.39999999990687
+              }
+            },
+            "snapshotBytes": 467794,
+            "mainHeap": {
+              "used": 30716732,
+              "total": 44584616
+            }
+          },
+          {
+            "navigationToCityMs": 5826.806840999998,
+            "clickToCityMs": 61.0038579999964,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 401.39999999990687
+              },
+              "canonical.ts:digest": {
+                "calls": 476,
+                "ms": 338.5000000023283
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 471,
+                "ms": 318.4000000045635
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 899
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 1587.5999999996275
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 1989.3999999999069
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 149.10000000009313
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 94
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 4043.5
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.40000000037252903
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.1000000000931323
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 43.60000000009313
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 3.3999999999068677
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 1.099999999627471
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 144.60000000009313
+              }
+            },
+            "snapshotBytes": 467794,
+            "mainHeap": {
+              "used": 30990570,
+              "total": 44494494
+            }
+          }
+        ],
+        "progressMessagesPerSample": [
+          17,
+          17,
+          17,
+          17,
+          17
+        ]
+      },
+      {
+        "count": 150000,
+        "ms": {
+          "navigationToCity": {
+            "n": 5,
+            "p50": 11919.005867,
+            "p95": 13771.59361000001
+          },
+          "clickToCity": {
+            "n": 5,
+            "p50": 72.75695000000997,
+            "p95": 129.51055000000633
+          }
+        },
+        "mainLongTasks": {
+          "n": 16,
+          "p50": 78,
+          "p95": 129,
+          "max": 129
+        },
+        "mainIDBTables": [],
+        "heartbeatMaxMs": 0,
+        "rows": [
+          {
+            "navigationToCityMs": 11314.65230300001,
+            "clickToCityMs": 58.425631999998586,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 1080.7999999998137
+              },
+              "canonical.ts:digest": {
+                "calls": 1179,
+                "ms": 707.4000000064261
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 1174,
+                "ms": 750.7000000001863
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 2167
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 3789.0999999996275
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 4870.399999999907
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 133.79999999934807
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 85.5
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 9136.899999999907
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.6000000000931323
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.4999999995343387
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 41.00000000046566
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 2.400000000372529
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 1
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 130.1999999997206
+              }
+            },
+            "snapshotBytes": 467897,
+            "mainHeap": {
+              "used": 33657852,
+              "total": 45899528
+            }
+          },
+          {
+            "navigationToCityMs": 11919.005867,
+            "clickToCityMs": 89.78962999998475,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 924.2999999998137
+              },
+              "canonical.ts:digest": {
+                "calls": 1179,
+                "ms": 710.5999999977648
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 1174,
+                "ms": 659.0999999959022
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 2096.7000000001863
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 3677
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 4601.799999999814
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 156.29999999981374
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 97.09999999962747
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 9930.399999999907
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 1.2000000001862645
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 2.2999999998137355
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 70.09999999962747
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 3.1999999997206032
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 0.8999999999068677
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 177.79999999981374
+              }
+            },
+            "snapshotBytes": 467897,
+            "mainHeap": {
+              "used": 28605363,
+              "total": 45489943
+            }
+          },
+          {
+            "navigationToCityMs": 13499.527016000007,
+            "clickToCityMs": 129.51055000000633,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 1073.5999999996275
+              },
+              "canonical.ts:digest": {
+                "calls": 1179,
+                "ms": 782.7999999956228
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 1174,
+                "ms": 759.8999999933876
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 2420.5
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 4130.899999999907
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 5205.199999999721
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 138.8000000002794
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 95
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 10857.799999999814
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.6000000005587935
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.6000000000931323
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 59.39999999990687
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 3.2000000001862645
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 1.2999999998137355
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 164.1999999997206
+              }
+            },
+            "snapshotBytes": 467897,
+            "mainHeap": {
+              "used": 33716568,
+              "total": 45899540
+            }
+          },
+          {
+            "navigationToCityMs": 13771.59361000001,
+            "clickToCityMs": 72.75695000000997,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 979.8999999999069
+              },
+              "canonical.ts:digest": {
+                "calls": 1179,
+                "ms": 810.9000000013039
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 1174,
+                "ms": 759.5000000009313
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 2472.2000000001863
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 4331.299999999814
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 5311.699999999721
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 140.90000000037253
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 101.20000000018626
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 11697.399999999907
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.7999999998137355
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.6999999997206032
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 55.8000000002794
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 2.900000000372529
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 0.9999999995343387
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 150.60000000009313
+              }
+            },
+            "snapshotBytes": 467897,
+            "mainHeap": {
+              "used": 32723959,
+              "total": 44703495
+            }
+          },
+          {
+            "navigationToCityMs": 11346.310888000007,
+            "clickToCityMs": 63.86422099999618,
+            "profile": {
+              "ledgerStore.ts:readLedgerArchive": {
+                "calls": 1,
+                "ms": 894.5
+              },
+              "canonical.ts:digest": {
+                "calls": 1179,
+                "ms": 729.5000000074506
+              },
+              "command-ledger-candidate.mjs:hash": {
+                "calls": 1174,
+                "ms": 652.7000000053085
+              },
+              "command-ledger-candidate.mjs:verifyLedger": {
+                "calls": 1,
+                "ms": 2127.5
+              },
+              "commandLedger.ts:verifyLedgerArchive": {
+                "calls": 1,
+                "ms": 3808.3000000002794
+              },
+              "ledgerStore.ts:readLedger": {
+                "calls": 1,
+                "ms": 4703.4000000003725
+              },
+              "schema.ts:validateFormalWorld": {
+                "calls": 7,
+                "ms": 140.20000000018626
+              },
+              "saveCodec.ts:decodeSave": {
+                "calls": 1,
+                "ms": 86.60000000009313
+              },
+              "persistence.ts:loadAnchored": {
+                "calls": 1,
+                "ms": 9690.69999999972
+              },
+              "command-ledger-candidate.mjs:prepareLedger": {
+                "calls": 2,
+                "ms": 0.6000000000931323
+              },
+              "commandLedger.ts:prepareVerifiedLedger": {
+                "calls": 2,
+                "ms": 1.400000000372529
+              },
+              "saveCodec.ts:encodeSave": {
+                "calls": 2,
+                "ms": 52.8000000002794
+              },
+              "ledgerStore.ts:writeLedger": {
+                "calls": 2,
+                "ms": 2.7000000001862645
+              },
+              "ledgerStore.ts:publishLedgerHead": {
+                "calls": 2,
+                "ms": 0.8999999999068677
+              },
+              "persistence.ts:commit": {
+                "calls": 2,
+                "ms": 145.5
+              }
+            },
+            "snapshotBytes": 467897,
+            "mainHeap": {
+              "used": 32859475,
+              "total": 45489927
+            }
+          }
+        ],
+        "progressMessagesPerSample": [
+          17,
+          17,
+          17,
+          17,
+          17
+        ]
+      }
+    ]
+  },
+  "production": {
+    "environment": "Fresh headless Chromium per sample; actual production GameApp, bundled Runtime, native IndexedDB, synthetic legal history. No Vite dev server, source substitution or forced GC. Desktop Linux/2 CPU/8GiB, not Android.",
+    "samples": 5,
+    "cases": [
+      {
+        "count": 0,
+        "ms": {
+          "navigation": {
+            "n": 5,
+            "p50": 1094.5718009999996,
+            "p95": 1243.0612920000003
+          },
+          "click": {
+            "n": 5,
+            "p50": 217.96133800000007,
+            "p95": 240.97011999999995
+          }
+        },
+        "mainLongTasks": {
+          "n": 15,
+          "p50": 78,
+          "p95": 130,
+          "max": 130
+        },
+        "mainIDBTables": [],
+        "heartbeatMaxMs": 183.09999999962747,
+        "rows": [
+          {
+            "sample": 0,
+            "navigationToCityMs": 1064.9149269999998,
+            "clickToCityMs": 194.53999199999998,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 139.39999999990687,
+            "mainHeap": 9535144,
+            "snapshotBytes": 467381
+          },
+          {
+            "sample": 1,
+            "navigationToCityMs": 1094.5718009999996,
+            "clickToCityMs": 211.9180350000006,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 183.09999999962747,
+            "mainHeap": 9545688,
+            "snapshotBytes": 467381
+          },
+          {
+            "sample": 2,
+            "navigationToCityMs": 1243.0612920000003,
+            "clickToCityMs": 217.96133800000007,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 183,
+            "mainHeap": 9593303,
+            "snapshotBytes": 467381
+          },
+          {
+            "sample": 3,
+            "navigationToCityMs": 1211.0870919999998,
+            "clickToCityMs": 230.4301030000006,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 161.10000000009313,
+            "mainHeap": 9572646,
+            "snapshotBytes": 467381
+          },
+          {
+            "sample": 4,
+            "navigationToCityMs": 1048.027016,
+            "clickToCityMs": 240.97011999999995,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 144.39999999990687,
+            "mainHeap": 9528559,
+            "snapshotBytes": 467381
+          }
+        ],
+        "progressMessagesPerSample": [
+          9,
+          9,
+          9,
+          9,
+          9
+        ]
+      },
+      {
+        "count": 60000,
+        "ms": {
+          "navigation": {
+            "n": 5,
+            "p50": 5864.835357999997,
+            "p95": 6346.410027999998
+          },
+          "click": {
+            "n": 5,
+            "p50": 130.1995870000028,
+            "p95": 147.857809000001
+          }
+        },
+        "mainLongTasks": {
+          "n": 10,
+          "p50": 65,
+          "p95": 78,
+          "max": 78
+        },
+        "mainIDBTables": [],
+        "heartbeatMaxMs": 145.39999999990687,
+        "rows": [
+          {
+            "sample": 0,
+            "navigationToCityMs": 5829.101403000001,
+            "clickToCityMs": 109.45140600000013,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 95.10000000009313,
+            "mainHeap": 11643199,
+            "snapshotBytes": 467794
+          },
+          {
+            "sample": 1,
+            "navigationToCityMs": 6336.6978919999965,
+            "clickToCityMs": 147.857809000001,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 145.39999999990687,
+            "mainHeap": 11431566,
+            "snapshotBytes": 467794
+          },
+          {
+            "sample": 2,
+            "navigationToCityMs": 5805.247325000004,
+            "clickToCityMs": 130.1995870000028,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 96.5,
+            "mainHeap": 11869933,
+            "snapshotBytes": 467794
+          },
+          {
+            "sample": 3,
+            "navigationToCityMs": 6346.410027999998,
+            "clickToCityMs": 133.47591400000965,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 107.89999999990687,
+            "mainHeap": 11619452,
+            "snapshotBytes": 467794
+          },
+          {
+            "sample": 4,
+            "navigationToCityMs": 5864.835357999997,
+            "clickToCityMs": 121.5360570000048,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 118.5,
+            "mainHeap": 11703781,
+            "snapshotBytes": 467794
+          }
+        ],
+        "progressMessagesPerSample": [
+          18,
+          18,
+          18,
+          18,
+          18
+        ]
+      },
+      {
+        "count": 150000,
+        "ms": {
+          "navigation": {
+            "n": 5,
+            "p50": 12477.492563999986,
+            "p95": 13037.947750000021
+          },
+          "click": {
+            "n": 5,
+            "p50": 143.71223299999838,
+            "p95": 175.1095680000144
+          }
+        },
+        "mainLongTasks": {
+          "n": 10,
+          "p50": 81,
+          "p95": 109,
+          "max": 109
+        },
+        "mainIDBTables": [],
+        "heartbeatMaxMs": 164.70000000018626,
+        "rows": [
+          {
+            "sample": 0,
+            "navigationToCityMs": 11482.443601000006,
+            "clickToCityMs": 132.3464559999993,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 136.70000000018626,
+            "mainHeap": 10506535,
+            "snapshotBytes": 467897
+          },
+          {
+            "sample": 1,
+            "navigationToCityMs": 13037.947750000021,
+            "clickToCityMs": 145.4437850000104,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 146.20000000018626,
+            "mainHeap": 7857437,
+            "snapshotBytes": 467897
+          },
+          {
+            "sample": 2,
+            "navigationToCityMs": 12582.406202000013,
+            "clickToCityMs": 143.71223299999838,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 164.70000000018626,
+            "mainHeap": 9358679,
+            "snapshotBytes": 467897
+          },
+          {
+            "sample": 3,
+            "navigationToCityMs": 11920.537337999995,
+            "clickToCityMs": 121.50579799999832,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 139.10000000009313,
+            "mainHeap": 10352936,
+            "snapshotBytes": 467897
+          },
+          {
+            "sample": 4,
+            "navigationToCityMs": 12477.492563999986,
+            "clickToCityMs": 175.1095680000144,
+            "workers": [
+              "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js"
+            ],
+            "heartbeatMaxMs": 127.5,
+            "mainHeap": 10349444,
+            "snapshotBytes": 467897
+          }
+        ],
+        "progressMessagesPerSample": [
+          18,
+          18,
+          18,
+          18,
+          18
+        ]
+      }
+    ]
+  },
+  "productionCPUSeparateN1": {
+    "durationMs": 6388.752,
+    "topLeafSampleMs": [
+      [
+        "(idle) @ ",
+        5838.524000000024
+      ],
+      [
+        "(program) @ ",
+        272.3450000000001
+      ],
+      [
+        " @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        76.54699999999998
+      ],
+      [
+        "(garbage collector) @ ",
+        14.638
+      ],
+      [
+        " @ ",
+        13.758999999999999
+      ],
+      [
+        "Yt @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        10.275
+      ],
+      [
+        "_parse @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        8.579
+      ],
+      [
+        "getTextAlternativeInternal @ ",
+        5.61
+      ],
+      [
+        "getCSSContent @ ",
+        5.435
+      ],
+      [
+        "ll @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        5.252999999999999
+      ],
+      [
+        "query @ ",
+        5.1530000000000005
+      ],
+      [
+        "vo @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        4.920999999999999
+      ],
+      [
+        "Zt @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        4.661
+      ],
+      [
+        "Ac @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        4.614000000000001
+      ],
+      [
+        "computeAriaRole @ ",
+        4.358
+      ],
+      [
+        "Dr @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        3.569
+      ],
+      [
+        "Mu @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        3.482
+      ],
+      [
+        "parentElementOrShadowHost @ ",
+        3.397
+      ],
+      [
+        "computeAccessibleNameComposite @ ",
+        3.317
+      ],
+      [
+        "D @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        3.2359999999999998
+      ],
+      [
+        "Mc @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        2.998
+      ],
+      [
+        "Hl @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        2.8280000000000003
+      ],
+      [
+        "up @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        2.57
+      ],
+      [
+        "getImplicitAriaRole @ ",
+        2.456
+      ],
+      [
+        "xm @ http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/index-Byy0LNdn.js",
+        2.425
+      ]
+    ],
+    "caveat": "Separate sampled CPU diagnosis, adds instrumentation overhead; not the cold percentile dataset."
+  },
+  "developmentCPUSeparateN1": [
+    {
+      "durationMs": 5830.176,
+      "topLeafSampleMs": [
+        [
+          "(idle) @ ",
+          4900.802000000007
+        ],
+        [
+          "(program) @ ",
+          351.54100000000005
+        ],
+        [
+          "exports.jsxDEV @ react_jsx-dev-runtime.js?v=9401141d",
+          132.863
+        ],
+        [
+          " @ CityScenes.tsx",
+          46.876
+        ],
+        [
+          "(garbage collector) @ ",
+          33.634
+        ],
+        [
+          "runWithFiberInDEV @ react-dom_client.js?v=9401141d",
+          18.733
+        ],
+        [
+          "_parse @ zod.js?v=9401141d",
+          17.12
+        ],
+        [
+          " @ ",
+          15.980999999999998
+        ],
+        [
+          "query @ ",
+          15.861999999999998
+        ],
+        [
+          " @ reportClock.ts",
+          13.041
+        ],
+        [
+          "updateProperties @ react-dom_client.js?v=9401141d",
+          12.465999999999998
+        ],
+        [
+          "ReactElement @ react_jsx-dev-runtime.js?v=9401141d",
+          10.026
+        ],
+        [
+          "getTaskName @ react_jsx-dev-runtime.js?v=9401141d",
+          8.972999999999999
+        ],
+        [
+          "getTextAlternativeInternal @ ",
+          8.502
+        ],
+        [
+          "completeWork @ react-dom_client.js?v=9401141d",
+          7.545
+        ],
+        [
+          " @ react-dom_client.js?v=9401141d",
+          7.088
+        ],
+        [
+          "createWorkInProgress @ react-dom_client.js?v=9401141d",
+          6.5040000000000004
+        ],
+        [
+          "updateStyle @ client",
+          6.496
+        ],
+        [
+          "parentElementOrShadowHost @ ",
+          5.879
+        ],
+        [
+          "reconcileChildrenArray @ react-dom_client.js?v=9401141d",
+          5.7490000000000006
+        ],
+        [
+          "commitPassiveMountOnFiber @ react-dom_client.js?v=9401141d",
+          5.64
+        ],
+        [
+          "_parseSync @ zod.js?v=9401141d",
+          5.597
+        ],
+        [
+          "match @ ",
+          5.327
+        ],
+        [
+          "react_stack_bottom_frame @ react-dom_client.js?v=9401141d",
+          5.183
+        ],
+        [
+          "jsxDEVImpl @ react_jsx-dev-runtime.js?v=9401141d",
+          4.749
+        ],
+        [
+          "logComponentRender @ react-dom_client.js?v=9401141d",
+          4.572
+        ],
+        [
+          "recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=9401141d",
+          4.553
+        ],
+        [
+          "ReleaseLog @ ReleaseLog.tsx",
+          4.132
+        ],
+        [
+          "queryRole @ ",
+          3.823
+        ],
+        [
+          "defineKeyPropWarningGetter @ react_jsx-dev-runtime.js?v=9401141d",
+          3.8040000000000003
+        ]
+      ],
+      "largeSampleGaps": [],
+      "caveat": "Sampled Main CPU/idle wall intervals, not exact Native Worker GC. Profiler adds overhead; diagnostic only."
+    }
+  ]
+}

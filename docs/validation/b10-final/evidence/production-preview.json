@@ -1,0 +1,36 @@
+{
+  "browser": "154.0.8037.57",
+  "source": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+  "method": "Production bundles, actual GameApp, native Preview/Runtime workers and SW, synthetic fixture. Desktop Chromium, not Android.",
+  "status": "PASS",
+  "result": {
+    "ack": {
+      "commandId": "command:1c7ee950-ed59-464d-9c8a-618c1cb918d3",
+      "status": "committed",
+      "revision": 5
+    },
+    "order": {
+      "commandId": "command:1c7ee950-ed59-464d-9c8a-618c1cb918d3",
+      "campaignId": "campaign:projection-benchmark-0",
+      "issuerId": "faction:000",
+      "issuedWorldTime": 10475,
+      "expectedRevision": 4,
+      "payload": {
+        "type": "building.upgrade",
+        "cityId": "city:000",
+        "key": "residence",
+        "slot": 0
+      }
+    },
+    "workers": [
+      "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/runtime.worker-BXaWEMGM.js",
+      "http://127.0.0.1:4219/lieguo-zhengtu-origin/assets/constructionPreview.worker-CJR1WD5P.js"
+    ],
+    "protocols": [
+      2
+    ],
+    "historyOnWire": false,
+    "offlinePreview": true,
+    "offlineOriginalAckPreserved": true
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "browser": "154.0.8037.57",
+  "source": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+  "method": "Ten real elapsed minutes, actual React useGame/sole Runtime/native IDB, 100 factions/99 AI/25X, offset stays zero. Synthetic initial world; DOM clicks, not physical input. Headless tab visibility is recorded rather than assumed to emulate Android.",
+  "elapsedMs": 600268,
+  "start": {
+    "time": 32950,
+    "at": 3528.5
+  },
+  "final": {
+    "time": 15031492,
+    "agents": 99,
+    "minDecisions": 4,
+    "totalDecisions": 552,
+    "events": 206,
+    "playerCommands": 6,
+    "allOnce": true
+  },
+  "orders": [
+    {
+      "id": "command:9691723d-ebe3-4ac0-ae7b-4c74ab6f2654",
+      "state": "committed",
+      "clickToDurable": 23.900146484375,
+      "t1": 20.199951171875,
+      "t2": 87.900146484375,
+      "clickToAck": 171.10009765625,
+      "ackToVisible": 0.89990234375
+    },
+    {
+      "id": "command:b383cbe5-ae4d-4d80-9305-d6376cb66b79",
+      "state": "committed",
+      "clickToDurable": 10.800048828125,
+      "t1": 9.60009765625,
+      "t2": 71.900146484375,
+      "clickToAck": 118.099853515625,
+      "ackToVisible": 0.900146484375
+    },
+    {
+      "id": "command:550b21b6-4c29-43da-93a8-bb1620fc30e2",
+      "state": "committed",
+      "clickToDurable": 11.300048828125,
+      "t1": 10.5,
+      "t2": 58.400146484375,
+      "clickToAck": 115.2001953125,
+      "ackToVisible": 0.599853515625
+    },
+    {
+      "id": "command:0ac20cac-2420-4c0a-83c1-70cec7ed7779",
+      "state": "committed",
+      "clickToDurable": 8.900146484375,
+      "t1": 8.300048828125,
+      "t2": 63.300048828125,
+      "clickToAck": 101.300048828125,
+      "ackToVisible": 0.60009765625
+    },
+    {
+      "id": "command:35550451-9055-4ae4-bdc8-61c57a47dbf5",
+      "state": "committed",
+      "clickToDurable": 10.599853515625,
+      "t1": 9.699951171875,
+      "t2": 57.10009765625,
+      "clickToAck": 105.5,
+      "ackToVisible": 0.599853515625
+    },
+    {
+      "id": "command:bf0c2fe3-0e61-42fe-93b9-51f7094c5910",
+      "state": "committed",
+      "clickToDurable": 13.699951171875,
+      "t1": 12.300048828125,
+      "t2": 73.599853515625,
+      "clickToAck": 116.800048828125,
+      "ackToVisible": 0.699951171875
+    }
+  ],
+  "ms": {
+    "clickToDurable": {
+      "n": 6,
+      "p50": 10.800048828125,
+      "p95": 23.900146484375,
+      "max": 23.900146484375
+    },
+    "t1": {
+      "n": 6,
+      "p50": 9.699951171875,
+      "p95": 20.199951171875,
+      "max": 20.199951171875
+    },
+    "t2": {
+      "n": 6,
+      "p50": 63.300048828125,
+      "p95": 87.900146484375,
+      "max": 87.900146484375
+    },
+    "clickToAck": {
+      "n": 6,
+      "p50": 115.2001953125,
+      "p95": 171.10009765625,
+      "max": 171.10009765625
+    },
+    "ackToVisible": {
+      "n": 6,
+      "p50": 0.60009765625,
+      "p95": 0.900146484375,
+      "max": 0.900146484375
+    }
+  },
+  "heapPoints": [
+    {
+      "elapsedMs": 100047,
+      "mainBytes": 16599275,
+      "worker": {
+        "usedSize": 26821684,
+        "totalSize": 95047680,
+        "embedderHeapUsedSize": 764416,
+        "backingStorageSize": 10544764
+      }
+    },
+    {
+      "elapsedMs": 200077,
+      "mainBytes": 17659069,
+      "worker": {
+        "usedSize": 35316500,
+        "totalSize": 93736960,
+        "embedderHeapUsedSize": 614024,
+        "backingStorageSize": 7230389
+      }
+    },
+    {
+      "elapsedMs": 300170,
+      "mainBytes": 19444857,
+      "worker": {
+        "usedSize": 21154196,
+        "totalSize": 106106880,
+        "embedderHeapUsedSize": 858088,
+        "backingStorageSize": 4999440
+      }
+    },
+    {
+      "elapsedMs": 400155,
+      "mainBytes": 20695033,
+      "worker": {
+        "usedSize": 38705140,
+        "totalSize": 99704832,
+        "embedderHeapUsedSize": 651032,
+        "backingStorageSize": 8372908
+      }
+    },
+    {
+      "elapsedMs": 500275,
+      "mainBytes": 18070333,
+      "worker": {
+        "usedSize": 48428636,
+        "totalSize": 91250688,
+        "embedderHeapUsedSize": 707840,
+        "backingStorageSize": 9504959
+      }
+    },
+    {
+      "elapsedMs": 600233,
+      "mainBytes": 20030197,
+      "worker": {
+        "usedSize": 19932048,
+        "totalSize": 97873920,
+        "embedderHeapUsedSize": 783848,
+        "backingStorageSize": 7257727
+      }
+    }
+  ],
+  "mainLongTasks": [],
+  "tabVisibilityPoints": [
+    {
+      "kind": "tab-cycle",
+      "visibility": "visible"
+    },
+    {
+      "kind": "tab-cycle",
+      "visibility": "visible"
+    },
+    {
+      "kind": "tab-cycle",
+      "visibility": "visible"
+    }
+  ],
+  "cgroupCPU": {
+    "scope": "Entire cgroup, includes browser/server/harness; no parallel heavy tests",
+    "usageSeconds": 86.256796,
+    "fractionOfTwoCPUQuota": 0.07184857097163266
+  },
+  "processedEventCalls": 1330,
+  "naturalAutomaticTickT2": {
+    "environment": "Same actual ten-minute 99AI/25X soak; excludes player command T2 and pre-first-click startup",
+    "n": 723,
+    "p50": 62.2998046875,
+    "p95": 92.0,
+    "max": 228.7001953125
+  }
+}
