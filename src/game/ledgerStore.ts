@@ -1,4 +1,4 @@
-import Dexie from 'dexie';
+import type Dexie from 'dexie';
 import {verifyLedgerArchive} from './formal/commandLedger';
 import type {LedgerArchive,VerifiedLedger,OriginalResult} from './formal/commandLedger';
 export type LedgerBundle={format:1;heads:{campaignId:string;root:string}[];manifests:{campaignId:string;root:string;manifest:LedgerArchive['manifest'];historyManifest:LedgerArchive['history']['manifest']}[];segments:LedgerArchive['history']['segments'];results:LedgerArchive['results']};
@@ -12,12 +12,15 @@ import {jsonDataEqual} from './formal/jsonDataEqual';
 export const ledgerStores={LedgerSegments:'checksum,campaignId',LedgerResults:'checksum,campaignId',LedgerManifests:'[campaignId+root],campaignId',LedgerIdentity:'[campaignId+commandId]',LedgerHeads:'campaignId'};
 export const ledgerIdentityRange=(db:Dexie,campaignId:string)=>db.table('LedgerIdentity').where('[campaignId+commandId]').between([campaignId,''],[campaignId,'\uffff'],true,true);
 export const ledgerTables=(db:Dexie)=>Object.keys(ledgerStores).map(k=>db.table(k));
+// Do not eagerly initialize Dexie through pure codec/schema imports. The DB's
+// actual constructor inherits the same public currentTransaction getter.
+const transactionScope=(db:Dexie)=>(db.constructor as typeof Dexie).currentTransaction?.idbtrans;
 /** One consistent read transaction only. Raw rows are not verification proofs;
  * shared ancestors avoid another native clone, but still require validation. */
 export class LedgerReadSession {
- private readonly scope=Dexie.currentTransaction?.idbtrans;private readonly rows=new Map<string,Promise<any>>();private readonly prefetched=new Set<string>();
- constructor(private readonly db:Dexie){if(!this.scope)throw Error('區段讀取必須綁定一致交易。');}
- private check(db:Dexie){if(db!==this.db||Dexie.currentTransaction?.idbtrans!==this.scope)throw Error('區段讀取不可跨交易重用。');}
+ private readonly scope:IDBTransaction;private readonly rows=new Map<string,Promise<any>>();private readonly prefetched=new Set<string>();
+ constructor(private readonly db:Dexie){const scope=transactionScope(db);if(!scope)throw Error('區段讀取必須綁定一致交易。');this.scope=scope;}
+ private check(db:Dexie){if(db!==this.db||transactionScope(db)!==this.scope)throw Error('區段讀取不可跨交易重用。');}
  async prefetch(db:Dexie,table:string,campaignId:string,required:number,minimumRecords:number){
   this.check(db);const key=table+'/'+campaignId;if(!Number.isSafeInteger(required)||!Number.isSafeInteger(minimumRecords)||minimumRecords<0||required<32||required*4<minimumRecords||minimumRecords===0&&required<512||this.prefetched.has(key))return;
   // Real gameplay often creates one segment per command. Avoid tens of
