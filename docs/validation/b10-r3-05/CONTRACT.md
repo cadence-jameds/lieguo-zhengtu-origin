@@ -12,7 +12,7 @@ Verified Ledger仍只有原驗證／準備程序能建立。以不可變、帶ch
 
 ## T1／T2／T3
 
-T1原本的精確身份點查、Durable Inbox、原始Payload／Fingerprint、FIFO、writer epoch、branch、CAS及逾時恢復不變，不等待歷史分頁掃描。小批Identity仍精確bulkGet；大型追加／Recovery使用keyset pages比對期望完整身份，保留未知／缺失／損毀索引修復行為，不清空歷史。
+T1原本的精確身份點查、Durable Inbox、原始Payload／Fingerprint、FIFO、writer epoch、branch、CAS及逾時恢復不變，不等待歷史分頁掃描。少數Identity即使超過256筆仍分批精確bulkGet，不掃描無關長歷史；全面修復或需要至少半數結果時使用keyset pages比對期望完整身份，保留未知／缺失／損毀索引修復行為，不清空歷史。
 
 T2仍是原本單一rw交易，表集合不變。世界、Authority、Inbox、Identity、Segment、結果、Manifest／Head、Recovery、戰報與metadata全數成功或全數abort。預先持有的Verified proof不是提交；交易內原writer／revision／root檢查保留。不可變區段bulk讀寫只合併請求，仍逐一比對實際既有內容並保留故障注入點；任一故障回滾整個交易。沒有交易外部分發布、權威暫存或第二套帳本。
 

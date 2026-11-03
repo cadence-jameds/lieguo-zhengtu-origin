@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {FormalPersistence,type FailurePoint} from '../persistence';
-import {LedgerReadSession,ledgerTables,readLedgerArchive,scanLedgerIdentity} from '../ledgerStore';
+import {LedgerReadSession,ledgerTables,readLedgerArchive,scanLedgerIdentity,writeLedger,resultFromReceipt} from '../ledgerStore';
 import {commandId} from './ids';
 import {canonicalJSON} from './canonical';
 import {digest} from './canonical';
@@ -9,7 +9,7 @@ import {canonicalBytes} from './canonicalBytes';
 import {jsonDataEqual,exactDataEqual} from './jsonDataEqual';
 import {projectionSyntheticWorld} from './projectionBenchmarkSupport';
 import {submitFormalOrder} from './reducer';
-import {originalResult,verifyLedgerArchive,worldLedger} from './commandLedger';
+import {originalResult,verifyLedgerArchive,worldLedger,prepareVerifiedLedger} from './commandLedger';
 const stores:FormalPersistence[]=[];
 function store(fault?:(point:FailurePoint)=>void){const p=new FormalPersistence({suffix:'r305-test-'+crypto.randomUUID(),fault});stores.push(p);return p;}
 afterEach(async()=>{await Promise.all(stores.splice(0).map(p=>p.db.delete()));});
@@ -76,4 +76,10 @@ it('same-revision root CAS rejects a stale prepared world after a no-effect resu
  const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-stale-preparation'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'舊準備不可提交'}},row=await p.receiveCommand(order),t=submitFormalOrder(w,order),other={...order,commandId:commandId('r305-other-result')},otherRow=await p.receiveCommand(other),next=await p.finishCommand(otherRow,{commandId:other.commandId,status:'rejected',revision:w.revision,reason:'沒有世界效果'},w.revision);
  expect(next.revision).toBe(w.revision);expect(next.ledger!.anchor.root).not.toBe(w.ledger!.anchor.root);const before=await rows(p);
  await expect(p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!})).rejects.toThrow('revision');expect(await rows(p)).toEqual(before);expect((await p.commandStatus(w.campaignId,order.commandId))!.state).toBe('pending');
+});
+it('a minority batch of 500 exact identities does not scan an unrelated long history',async()=>{
+ const p=store(),gets:number[]=[];let queries=0;p.db.use({stack:'dbcore',name:'r305-count-identity-reads',create(down){return {...down,table(name){const t=down.table(name);if(name!=='LedgerIdentity')return t;return {...t,getMany(req){gets.push(req.keys.length);return t.getMany(req);},query(req){queries++;return t.query(req);}};}};}});
+ const w=await p.start(await projectionSyntheticWorld(3000)),base=worldLedger(w),receipts=Array.from({length:500},(_,i)=>({commandId:commandId('r305-minority-'+i),issuerId:w.playerFactionId,fingerprint:canonicalJSON({campaignId:w.campaignId,issuerId:w.playerFactionId,payload:{type:'city.rename',cityId:w.cities[0].id,name:'合成'+i}}),committedRevision:w.revision+1,disposition:'applied' as const})),prepared=await prepareVerifiedLedger(base,receipts,receipts.map(resultFromReceipt),w.revision+1,base.manifest.branch,base.manifest.writerEpoch),before=await rows(p);gets.length=0;queries=0;
+ await expect(p.db.transaction('rw',ledgerTables(p.db),async()=>{await writeLedger(p.db,prepared,base,receipts.map(r=>r.commandId));expect(queries).toBe(0);expect(gets).toEqual([256,244]);throw Error('discard unpublished test candidate');})).rejects.toThrow('discard unpublished');
+ expect(await rows(p)).toEqual(before);
 });
