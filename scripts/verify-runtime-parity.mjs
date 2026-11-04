@@ -5,15 +5,16 @@ import ts from 'typescript';
 import {readFileSync,mkdirSync,writeFileSync,mkdtempSync,symlinkSync,rmSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
+import {tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 export function runtimeTracePlugin(){return{name:'read-only-event-command-trace',enforce:'pre',transform(source,id){if(!id.endsWith('/src/game/formal/reducer.ts'))return;const f=ts.createSourceFile(id,source,ts.ScriptTarget.Latest,true),edits=[];function visit(n){if(ts.isFunctionDeclaration(n)&&n.body){const name=n.name?.getText(f),a=n.body.getStart(f)+1,b=n.body.end-1;if(name==='advanceOneEvent')edits.push([a,'const __observedEvent=structuredClone(scheduler.peek());try{'],[b,'}finally{globalThis.__runtimeEventEvidence?.(__observedEvent,w);}']);if(name==='submitOrderDraft')edits.push([a,'const __observedResult=(()=>{'],[b,'})();globalThis.__runtimeOrderEvidence?.(value,__observedResult.ack);return __observedResult;']);}ts.forEachChild(n,visit);}visit(f);let code=source;for(const[at,s]of edits.sort((a,b)=>b[0]-a[0]))code=code.slice(0,at)+s+code.slice(at);return{code,map:null};}};}
 // The new persistence model changes common formal dependencies. Load the whole
 // immutable PR60 graph, rather than substituting three files into newer rules.
 const referenceSha='aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607';
-const referenceRoot=mkdtempSync('/workspace/b10-release-reference-');
+const referenceRoot=mkdtempSync(path.join(tmpdir(),'b10-release-reference-'));
 const tar=path.join(referenceRoot,'reference.tar');
-execFileSync('git',['archive','--output='+tar,referenceSha,'src','scripts','public','releases','package.json','tsconfig.json'],{stdio:['ignore','pipe','pipe']});
+execFileSync('git',['archive','--output='+tar,referenceSha,'src','scripts','releases','package.json','tsconfig.json'],{stdio:['ignore','pipe','pipe']});
 execFileSync('tar',['-xf',tar,'-C',referenceRoot],{stdio:['ignore','pipe','pipe']});rmSync(tar);symlinkSync(path.resolve('node_modules'),path.join(referenceRoot,'node_modules'),'dir');
 const before=await createServer({root:referenceRoot,configFile:false,define:{__APP_RELEASE_METADATA__:JSON.stringify(createMetadata(process.cwd(),{head:referenceSha,working:false}))},plugins:[runtimeTracePlugin()],server:{middlewareMode:true,hmr:false}}),after=await createServer({plugins:[runtimeTracePlugin()],server:{middlewareMode:true,hmr:false}}),rows=[];
 // Only the explicitly changed transport layout is excluded. All gameplay state,

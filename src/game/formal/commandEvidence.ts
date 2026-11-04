@@ -1,6 +1,7 @@
 import type {CommandId,FactionId} from './ids';
 import type {CommandReceipt,FormalCommand,FormalWorld} from './model';
 import {canonicalJSON} from './canonical';
+import {exactDataEqual} from './jsonDataEqual';
 import {findReceipt,receiptIndex} from './commandLedger';
 /** Domain provenance is NOT an outcome archive. Only evidence referenced by the
  * current domain graph is retained. No original Ack, order envelope or fingerprint
@@ -80,7 +81,17 @@ export function normalizeCommandEvidence(w:FormalWorld,receipts:readonly Command
  for(const [city,write]of writes){const previous=facts.governance[city];if(!previous||previous[1]>=w.revision||previous[1]<write[1]){facts.governance[city]=write;facts.minimumGovernance[city]=minimums.get(city)!;}}
 }
 
-export function evidenceReceipt(campaignId:string,fact:CommandEvidence):CommandReceipt{return {commandId:fact.commandId,issuerId:fact.issuerId,committedRevision:fact.committedRevision,disposition:'applied',fingerprint:canonicalJSON({campaignId,issuerId:fact.issuerId,payload:fact.payload})};}
+// Derivation cache only: every lookup compares the entire actual domain fact.
+// It proves no authority, outcome or history. Owned frozen inputs prevent caller
+// mutation from turning a cached canonical representation into false evidence.
+const receiptCache=new Map<string,{fact:CommandEvidence;receipt:CommandReceipt}>();
+function freezeEvidence<T>(v:T):T{if(v&&typeof v==='object'){Object.values(v).forEach(freezeEvidence);Object.freeze(v);}return v;}
+export function evidenceReceipt(campaignId:string,fact:CommandEvidence):CommandReceipt{
+ const key=campaignId+'/'+fact.commandId,known=receiptCache.get(key);
+ if(known&&exactDataEqual(known.fact,fact))return known.receipt;
+ const owned=freezeEvidence(structuredClone(fact)),receipt=Object.freeze({commandId:owned.commandId,issuerId:owned.issuerId,committedRevision:owned.committedRevision,disposition:'applied' as const,fingerprint:canonicalJSON({campaignId,issuerId:owned.issuerId,payload:owned.payload})});
+ receiptCache.delete(key);receiptCache.set(key,{fact:owned,receipt});while(receiptCache.size>4096)receiptCache.delete(receiptCache.keys().next().value!);return receipt;
+}
 /** Ordinary T2 may retire unused evidence, never silently erase a live source or
  * an ABA stamp. Branch replacement has its own explicit reconciliation boundary. */
 export function assertCommandFactsTransition(previous:FormalWorld,next:FormalWorld,receipts:readonly CommandReceipt[]){
