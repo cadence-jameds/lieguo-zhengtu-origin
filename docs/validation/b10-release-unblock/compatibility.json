@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "fcf0052d6170e4a98e3632666ecbbd92b3327842",
+  "implementationCommit": "3a3ae8dc2e3b60167f1b3e9dfa3e16020f573bd0",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -78,7 +78,7 @@
     },
     "src/game/formal/boundedPersistence.test.ts": {
       "before": null,
-      "after": "0dd744d050d5bc4ac88557f05162f47a559fb21ec314c2319b4fefccfc3d5acb"
+      "after": "06ac3dc356baecb2baa780987bfaf575920e494fbbcd13519fefa59d41852a22"
     },
     "src/game/formal/breakthroughRuntimeB92.test.ts": {
       "before": "56bb4e3b340949ef99b067c516ca5d39b5cd935c7cf2ad1cfa69d00761172116",
@@ -270,7 +270,7 @@
     },
     "src/game/persistence.ts": {
       "before": "174194f58cd18b9f559067604274e3a5ba193e8f9da5e760acdcccdc3b0f74f0",
-      "after": "20226cafcf1c4cdb3adbc73c9d89bc558a634564378a6395acf41cf566e8e9cd"
+      "after": "cc15c9adaeeebadfeab61ca02fadeba6bb1bd72c450c9d77e943356922c40e8d"
     },
     "src/game/presentation/CommandInbox.tsx": {
       "before": "2a132aeac917dd1e27d073b091cbbb9153057d3f9c3dea6eabdf885add6df93b",
