@@ -1,3 +1,4 @@
+import {scenarioWorld} from './ledgerTestSupport';
 import {runtimeFixtureIdentity,receiveDurableFixture} from './durableIdentityTestSupport';
 import * as projectionMaps from '../admissionMap';
 import * as ledger from './commandLedger';
@@ -57,7 +58,7 @@ it.each(['report-write','backup-write','world-write','authority-write','metadata
 });
 it('quota at T2 does not auto retry, publishes no success, and retains a durable confirmation result',async()=>{
  await store.start(createFormalFixture());await boot();const w=latest();const original=store.save.bind(store);let calls=0;vi.spyOn(store,'save').mockImplementation(async(...args)=>{calls++;if(calls===1)throw new DOMException('full','QuotaExceededError');return original(...args);});
- const o=click(w,'quota',{type:'city.rename',cityId:fixtureIds.home,name:'不能假成功'});await until(()=>done('quota'));expect(calls).toBe(1);expect(ack(o).status).toBe('rejected');expect((await store.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');expect(ledger.projectWorld((await store.loadSave()).game!)).toEqual(w);
+ const o=click(w,'quota',{type:'city.rename',cityId:fixtureIds.home,name:'不能假成功'});await until(()=>done('quota'));expect(calls).toBe(1);expect(ack(o).status).toBe('rejected');expect((await store.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');expect(scenarioWorld((await store.loadSave()).game!)).toEqual(w);
 });
 it('99 AI at 25X accepts T1 while an AI replay is still private and serializes fast building/training/research/logistics/governance/dispatch inputs',async()=>{
  const native=createFormalWorld({campaign:'99-ai-durable',seed:90217,speed:25}),city=rich(native);native.factions[0].age=1;for(const faction of native.factions)faction.protectionUntil=0;for(const key of ['townhall','barracks','academy','market','blacksmith'])build(city,key,1);city.military!.units={militia:30,scout:2};enableAutonomy(native);for(const agent of native.autonomy!.agents)agent.nextAt=200000;for(const e of native.events)if(e.type==='ai.decide')e.at=200000;native.events=new EventScheduler(native.events).snapshot();await store.start(native);await boot();const w=latest();
@@ -93,6 +94,6 @@ it('expired durable pending is persisted as Needs Confirmation on reboot without
 it('paused same-time remainder is never caught up by rejected rebirth; legal rebirth preserves it until the resumed clock advances',async()=>{
  const active=isolatedAutonomyFixture(battlefield());active.cities[0].military!.units={};active.cities[1].military!.units={militia:1000};const army=dispatch(active,'conquest',{militia:1000},1,0).world,arrival=army.armies[0].arrivalAt!;
  army.events=new EventScheduler([...army.events,{id:eventId('same-time-paused'),type:'fixture.marker',at:arrival,marker:'must-remain'}]).snapshot();const defeat=advanceFormal(army,arrival+1000).world;expect(defeat.events.some(e=>e.id===eventId('same-time-paused'))).toBe(true);await store.start(defeat);await boot();const w=latest(),before=structuredClone(w),save=vi.spyOn(store,'save');
- const invalid=click(w,'invalid-rebirth',{type:'player.rebirth',cityId:w.cities[0].id,x:w.cities[1].x,y:w.cities[1].y,name:'被佔領位置'});await until(()=>done('invalid-rebirth'));expect(ack(invalid).status).toBe('rejected');expect(save).not.toHaveBeenCalled();expect(ledger.projectWorld((await store.loadSave()).game!)).toEqual(before);expect(latest()).toEqual(before);
+ const invalid=click(w,'invalid-rebirth',{type:'player.rebirth',cityId:w.cities[0].id,x:w.cities[1].x,y:w.cities[1].y,name:'被佔領位置'});await until(()=>done('invalid-rebirth'));expect(ack(invalid).status).toBe('rejected');expect(save).not.toHaveBeenCalled();expect(scenarioWorld((await store.loadSave()).game!)).toEqual(before);expect(latest()).toEqual(before);
  const p=rebirthCandidates(w)[0],valid=click(w,'valid-rebirth',{type:'player.rebirth',cityId:w.cities[0].id,...p,name:'合法復國'});await until(()=>done('valid-rebirth'));expect(ack(valid).status).toBe('committed');expect(latest().events.some(e=>e.id===eventId('same-time-paused'))).toBe(true);expect(latest().time).toBe(w.time);
 });

@@ -136,11 +136,12 @@ const worldSchema=worldValueSchema.superRefine((raw,c)=>{
   for(const group of [f.governance,f.minimumGovernance])for(const [city,stamp]of Object.entries(group)){const fact=f.evidence[stamp[0]];if(!w.cities.some(c=>c.id===city)||!fact||fact.payload.type!=='governance.set'||fact.payload.cityId!==city||fact.committedRevision!==stamp[1]||stamp[1]>w.revision)fail('Governance ABA evidence invalid');}
  }
  // Retain any matching applied issuer, including malformed duplicate IDs, just as the old .some checks did.
- const appliedReceipts=new Map<CommandId,Set<FactionId>>();
- for(const r of (w.ledger?pendingHistory(w as FormalWorld):commandHistory(w as FormalWorld)))if(r.disposition==='applied'){
+ const appliedReceipts=new Map<CommandId,Set<FactionId>>(),knownReceipts=w.ledger?undefined:new Set<CommandId>();
+ for(const r of (w.ledger?pendingHistory(w as FormalWorld):commandHistory(w as FormalWorld))){
+  knownReceipts?.add(r.commandId);if(r.disposition!=='applied')continue;
   let issuers=appliedReceipts.get(r.commandId);if(!issuers){issuers=new Set();appliedReceipts.set(r.commandId,issuers);}issuers.add(r.issuerId);
  }
- const hasAppliedReceipt=(id:CommandId,issuer?:FactionId)=>{if(!w.ledger){const issuers=appliedReceipts.get(id);if(issuers&&(issuer===undefined||issuers.has(issuer)))return true;const fact=w.commandFacts?.evidence[id];return !!fact&&(issuer===undefined||fact.issuerId===issuer);}const r=domainReceipt(w as FormalWorld,id);return r?.disposition==='applied'&&(issuer===undefined||r.issuerId===issuer);};
+ const hasAppliedReceipt=(id:CommandId,issuer?:FactionId)=>{if(!w.ledger){const issuers=appliedReceipts.get(id);if(issuers&&(issuer===undefined||issuers.has(issuer)))return true;if(knownReceipts!.has(id))return false;const fact=w.commandFacts?.evidence[id];return !!fact&&(issuer===undefined||fact.issuerId===issuer);}const r=domainReceipt(w as FormalWorld,id);return r?.disposition==='applied'&&(issuer===undefined||r.issuerId===issuer);};
  validateCombatContracts(w,fail,hasAppliedReceipt);
  validatePolitics(w,fail);validateVictory(w,fail);validateWonders(w,fail);validateRepairs(w,fail);validateBreakthroughs(w,fail);validateAwareness(w,fail);validateCatchup(w,fail);
  validateAutonomy(w,fail);validateGovernance(w,fail);validateGrowthTasks(w,fail);
