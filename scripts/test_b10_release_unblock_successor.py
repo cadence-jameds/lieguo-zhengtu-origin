@@ -28,9 +28,10 @@ class BoundedSaveSuccessorTests(unittest.TestCase):
     file.write_bytes(original);f.write_bytes(before)
  def test_no_extra_scope_or_predecessor_grants(self):
   f=self.root/gate.RECORD;original=f.read_bytes()
-  for key in ['implementationCommit','grants','historical','changes']:
+  for key in ['implementationCommit','implementationSupport','grants','historical','changes']:
    r=json.loads(original)
    if key=='implementationCommit':r[key]=gate.BASE
+   elif key=='implementationSupport':r[key].append('src/game/formal/scheduler.ts')
    elif key=='grants':r[key]['src/game/formal/scheduler.ts']=['0'*64]
    else:r[key].pop(next(iter(r[key])))
    f.write_text(json.dumps(r))

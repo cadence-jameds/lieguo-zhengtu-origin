@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "f4a0104a9080638801127385b46d4f3305808795",
+  "implementationCommit": "d47a95d2b0e4876d86f9e1962b409ae88f82cf0f",
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/b10-release-unblock/compatibility.json",
+    "scripts/b10_r3_06_successor.py",
+    "scripts/b10_release_unblock_successor.py",
+    "scripts/test_b10_r3_06_successor.py",
+    "scripts/test_b10_release_unblock_successor.py",
+    "scripts/verify-projection-boundaries.mjs"
+  ],
   "changes": {
     ".github/workflows/deploy-pages.yml": {
       "before": "9151a015b0078782570bed390a3dd73c095e11685801db22c45aee8cbea4057f",
@@ -10,6 +19,10 @@
     "releases/notes/b10-release-unblock.json": {
       "before": null,
       "after": "a1825d6ca296ce7d734e287c65d68a43951abafbd17396a73153cd2ea646cb58"
+    },
+    "scripts/check-release-build.mjs": {
+      "before": "721923fc37fbcee92f5a77b6f62209e7af9459ef71ff4b365256015dee88a366",
+      "after": "7b6bcee0a35bfc1977e21f353cdb34afbafa927aebe1424a9a8b07d394633866"
     },
     "scripts/test-deployment-isolation.mjs": {
       "before": null,
@@ -307,6 +320,9 @@
   "grants": {
     ".github/workflows/deploy-pages.yml": [
       "9151a015b0078782570bed390a3dd73c095e11685801db22c45aee8cbea4057f"
+    ],
+    "scripts/check-release-build.mjs": [
+      "721923fc37fbcee92f5a77b6f62209e7af9459ef71ff4b365256015dee88a366"
     ],
     "scripts/verify-runtime-parity.mjs": [
       "fe0b1ec6dd4ac104d7fea644c399f4734e7f95f833486ce47b42bdd6a1a82810"
@@ -1040,7 +1056,6 @@
     "scripts/check-pages-build.mjs": "c0d40463ae98b2c092d3d78f3c7a5e8b247b79585b3b274cdd78e34aa102b935",
     "scripts/check-player-feedback.py": "78d58072d9afd06d218ba1ca657e1f82c0925285dbd685d719e3c13b63c48398",
     "scripts/check-release-approval.mjs": "ff7f57d229dd47b3d020ccf01f50c99e624a3581af43e17af22988653dfa4be6",
-    "scripts/check-release-build.mjs": "721923fc37fbcee92f5a77b6f62209e7af9459ef71ff4b365256015dee88a366",
     "scripts/check-terrain-worker.cjs": "c86384f80eabb13f4bbe5b341d6d0ebda734070e9fff163e1e20e542b1187f69",
     "scripts/city-art-metrics.py": "442d1276006305c685b682c4c55f631e304a3906ee539a4e3a54fd0fcc510f8c",
     "scripts/city-visual-report.py": "9d793b406b753e82287728fd623bcaca156dbb3b85854c801c21b3d02acfceaf",

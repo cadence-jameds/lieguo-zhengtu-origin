@@ -4,7 +4,7 @@ from pathlib import Path
 from functools import lru_cache
 ROOT=Path(__file__).resolve().parents[1]
 BASE='aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607'
-IMPLEMENTATION='f4a0104a9080638801127385b46d4f3305808795'
+IMPLEMENTATION='d47a95d2b0e4876d86f9e1962b409ae88f82cf0f'
 RECORD='docs/validation/b10-release-unblock/compatibility.json'
 def sha(data):return hashlib.sha256(data).hexdigest()
 @lru_cache(maxsize=None)
@@ -25,7 +25,10 @@ def adapters():
  return result
 @lru_cache(maxsize=None)
 def expected_record():
- changed=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
+ actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
+ support={RECORD,'scripts/b10_release_unblock_successor.py','scripts/test_b10_release_unblock_successor.py',*ADAPTER_EDITS}
+ assert support<=actual,('Changed finite successor support',support-actual)
+ changed=actual-support
  changes={}
  for p in sorted(changed):
   try:before=sha(previous(BASE,p))
@@ -48,7 +51,7 @@ def expected_record():
      if d not in grants.setdefault(name,[]):grants[name].append(d)
  invariants={p:sha(previous(BASE,p)) for p in sorted(paths('src','scripts','public','releases','package.json','package-lock.json','vite.config.ts','AGENTS.md')-changed-set(ADAPTER_EDITS))}
  historical={p:sha(previous(BASE,p)) for p in sorted(paths('docs/b6-v95','docs/b6-v96','docs/b6-v97','docs/validation','releases/notes'))}
- return {'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'changes':changes,'grants':grants,'invariants':invariants,'historical':historical,'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
+ return {'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'implementationSupport':sorted(support),'changes':changes,'grants':grants,'invariants':invariants,'historical':historical,'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
 def read_record(root=ROOT):
  f=root/RECORD
  if not f.exists():f=ROOT/RECORD
