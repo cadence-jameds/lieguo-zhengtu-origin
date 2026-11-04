@@ -1,5 +1,6 @@
 // Independent complete module graphs: immutable PR60 against the current source.
 import {createServer} from 'vite';
+import {createMetadata} from './release-metadata.mjs';
 import ts from 'typescript';
 import {readFileSync,mkdirSync,writeFileSync,mkdtempSync,symlinkSync,rmSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
@@ -14,7 +15,7 @@ const referenceRoot=mkdtempSync('/workspace/b10-release-reference-');
 const tar=path.join(referenceRoot,'reference.tar');
 execFileSync('git',['archive','--output='+tar,referenceSha,'src','scripts','public','releases','package.json','tsconfig.json'],{stdio:['ignore','pipe','pipe']});
 execFileSync('tar',['-xf',tar,'-C',referenceRoot],{stdio:['ignore','pipe','pipe']});rmSync(tar);symlinkSync(path.resolve('node_modules'),path.join(referenceRoot,'node_modules'),'dir');
-const before=await createServer({root:referenceRoot,configFile:false,plugins:[runtimeTracePlugin()],server:{middlewareMode:true,hmr:false}}),after=await createServer({plugins:[runtimeTracePlugin()],server:{middlewareMode:true,hmr:false}}),rows=[];
+const before=await createServer({root:referenceRoot,configFile:false,define:{__APP_RELEASE_METADATA__:JSON.stringify(createMetadata(process.cwd(),{head:referenceSha,working:false}))},plugins:[runtimeTracePlugin()],server:{middlewareMode:true,hmr:false}}),after=await createServer({plugins:[runtimeTracePlugin()],server:{middlewareMode:true,hmr:false}}),rows=[];
 // Only the explicitly changed transport layout is excluded. All gameplay state,
 // metadata rules/content, event ordering, seeds, reports and Acks remain exact.
 function gameplay(w){const v=structuredClone(w);delete v.ledger;delete v.commandReceipts;delete v.commandFacts;if(v.metadata?.schemaVersion>=3)v.metadata.schemaVersion='transport-schema';return v;}

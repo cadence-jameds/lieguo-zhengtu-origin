@@ -1,6 +1,6 @@
 import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
-import {afterEach,expect,it} from 'vitest';
+import {afterEach,expect,it,vi} from 'vitest';
 import {createFormalWorld} from './generator';
 import {commandId} from './ids';
 import type {FormalCommand,FormalWorld} from './model';
@@ -35,18 +35,18 @@ it('offline scheduler completes construction and training with the same anchored
  const r=advanceOffline(w,0,HOUR);expect(r.summary).toMatchObject({buildingsCompleted:1,unitsTrained:2});expect(r.world).toEqual(advanceFormal(w,HOUR).world);expect(citySnapshot(r.world,c.id)!.fields![0].level).toBe(1);
 });
 it('offline load atomically persists the new wall anchor; repeated reload cannot award the same time twice',async()=>{
- const p=store(),w=await p.start(make(1));await p.db.saves.update('current',row=>{if(row.kind==='world')row.at=1000;});
+ vi.spyOn(Date,'now').mockReturnValue(1000);const p=store(),w=await p.start(make(1));
  const first=await p.loadWithOffline(1000+2*HOUR);expect(first.game!.time).toBe(HOUR);expect((await p.db.saves.get('current'))?.kind).toBe('world');expect((await p.db.saves.get('current') as {at:number}).at).toBe(1000+2*HOUR);
  const second=await p.loadWithOffline(1000+2*HOUR);expect(second.game!.time).toBe(first.game!.time);expect(second.summary!.advancedWorldMs).toBe(0);expect(second.game!.revision).toBeGreaterThan(w.revision);
  const third=await p.loadWithOffline(1000+2*HOUR+500);expect(third.game!.time).toBe(HOUR+500);
 });
 for(const point of ['backup-write','world-write','authority-write'] as const)it(`offline ${point} failure leaves all stores unchanged and retry advances exactly once`,async()=>{
- let failure:FailurePoint|undefined;const p=store(v=>{if(v===failure)throw new Error('injected');});await p.start(make(4));await p.db.saves.update('current',row=>{if(row.kind==='world')row.at=1000;});
+ let failure:FailurePoint|undefined;const p=store(v=>{if(v===failure)throw new Error('injected');});vi.spyOn(Date,'now').mockReturnValue(1000);await p.start(make(4));
  const before={s:await p.db.saves.toArray(),b:await p.db.backups.toArray()};failure=point;await expect(p.loadWithOffline(1000+HOUR)).rejects.toThrow('injected');expect({s:await p.db.saves.toArray(),b:await p.db.backups.toArray()}).toEqual(before);
  failure=undefined;expect((await p.loadWithOffline(1000+HOUR)).game!.time).toBe(HOUR);expect((await p.loadWithOffline(1000+HOUR)).game!.time).toBe(HOUR);
 });
 it('Recovery catches up from the selected valid checkpoint wall anchor and skips metadata-invalid candidates',async()=>{
- const p=store();await p.start(make(4));const id=(await p.backupList())[0].id;await p.db.backups.update(id,{at:1000});
+ vi.spyOn(Date,'now').mockReturnValue(1000);const p=store();await p.start(make(4));
  const row=await p.db.saves.get('current');if(row?.kind!=='world')throw new Error('missing');row.data.checksum='0'.repeat(64);await p.db.saves.put(row);
  const r=await p.loadWithOffline(1000+HOUR);expect(r.recovered).toBe(true);expect(r.summary!.recovered).toBe(true);expect(r.game!.time).toBe(HOUR);expect((await p.loadSave()).game).toEqual(r.game);
 });
@@ -94,3 +94,5 @@ it('offline arrival counts founded cities but does not misreport transferred esc
  const points=[];for(let y=c.y-3;y<=c.y+3;y++)for(let x=c.x-3;x<=c.x+3;x++)if(buildable(terrainAt(w,x,y))&&!spatial(w).at(x,y).city&&!spatial(w).at(x,y).site)points.push({x,y});
  w=commit(w,{type:'settlement.dispatch',cityId:c.id,...points[0],name:'新聚落',escort:{spearman:20}});const r=advanceOffline(w,0,HOUR);expect(r.summary.citiesFounded).toBe(1);expect(r.summary.unitsTrained).toBe(0);expect(r.world.cities.at(-1)!.military!.units.spearman).toBe(20);
 });
+
+afterEach(()=>vi.restoreAllMocks());

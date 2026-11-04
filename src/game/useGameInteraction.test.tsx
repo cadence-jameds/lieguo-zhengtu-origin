@@ -194,6 +194,6 @@ it('an unused current identity can safely resend its exact original envelope aft
 it('never confirms an old campaign draft against another campaign with matching city IDs',async()=>{
  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'原戰役目標'}));const original=port.sent.at(-1).order;
  await act(async()=>port.emit({type:'commandUnavailable',availability:'retired',campaignId:original.campaignId,commandId:original.commandId}));const row=engine.commandRows.at(-1)!;
- const other=structuredClone(w);other.campaignId='campaign:other';await act(async()=>port.emit(state(other)));const sent=port.sent.length;
+ const other=structuredClone(w);other.campaignId='campaign:other' as typeof other.campaignId;await act(async()=>port.emit(state(other)));const sent=port.sent.length;
  await act(async()=>engine.confirmCommand(row));expect(port.sent).toHaveLength(sent);expect(engine.feedback.text).toContain('另一戰役');expect(sessionStorage.getItem('formal-command-drafts-v1')).toContain(original.commandId);
 });

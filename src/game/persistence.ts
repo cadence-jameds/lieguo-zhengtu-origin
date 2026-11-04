@@ -308,7 +308,6 @@ export class FormalPersistence {
    }
    if(mode==='save'&&current?.kind==='world')assertCommandFactsTransition(current.data.snapshot,w,rows);
    if(portable)reconcileGrowthAuthority(w,portable.growthAuthority.find(g=>g.campaignId===w.campaignId)?.growthTasks,true);
-   if(mode!=='save'&&current?.kind==='world'&&current.data.snapshot.campaignId===w.campaignId){const prior=current.data.snapshot.commandFacts;if(current.data.snapshot.developer?.labIncoming&&w.developer)w.developer.labIncoming=true;ensureCommandFacts(w);for(const claim of Object.values(current.data.snapshot.growthTasks?.claimed??{})){const fact=prior?.evidence[claim.commandId];if(fact)w.commandFacts!.evidence[claim.commandId]=structuredClone(fact);}}
    reconcileGrowthAuthority(w,authority.campaigns.find(c=>c.campaignId===w.campaignId)?.growthTasks,mode!=='save');
    const heldDomain=authority.campaigns.find(c=>c.campaignId===w.campaignId);if(heldDomain?.playerFactionId&&heldDomain.playerFactionId!==w.playerFactionId)throw Error('同一戰役的玩家身份不一致。');const incomingDomain=portable?.growthAuthority.find(c=>c.campaignId===w.campaignId);ensureCommandFacts(w);for(const domain of [incomingDomain,heldDomain]){for(const claim of Object.values(w.growthTasks?.claimed??{})){const fact=domain?.claimEvidence?.[claim.commandId];if(fact)w.commandFacts!.evidence[claim.commandId]=structuredClone(fact);}if(domain?.labIncoming&&w.developer)w.developer.labIncoming=true;}
    syncGrowthTasks(w);
@@ -319,7 +318,7 @@ export class FormalPersistence {
    validateReportHistory(w,stampedReports);
    // encodeSave fully validates the final world; crypto needs keep-alive under the revision lock.
    if(mode!=='save'){await this.switchInbox(meta,w,rows);await this.advanceOtherLedgers(meta,authority,w.revision,w.campaignId,portable);}
-   ensureCommandFacts(w);pruneCommandEvidence(w);normalizeOutcomeRevisions(w);const outcomes=new Map<string,OriginalResult>((w.ledger?.outcomes??[]).map(r=>[r.commandId,r]));
+   ensureCommandFacts(w);pruneCommandEvidence(w,true);normalizeOutcomeRevisions(w);const outcomes=new Map<string,OriginalResult>((w.ledger?.outcomes??[]).map(r=>[r.commandId,r]));
    for(const r of rows){const old=base.result(r.commandId);if(!old)outcomes.set(r.commandId,resultFromReceipt(r));}
    if(mode!=='save')for(const r of await this.db.Inbox.where('campaignId').equals(w.campaignId).toArray())if(terminalCommand(r)&&!base.result(r.commandId)&&!retired.has(r.commandId)){if(!r.ack)throw Error('終局 Inbox 缺少結果。');outcomes.set(r.commandId,r.originalResult??originalCommand(r,r.ack));}
    const imported=portable?.snapshots.find(s=>s.manifest.checksum===input.ledger?.anchor.root)??(mode!=='save'&&input.ledger?worldLedger(input):undefined);if(imported)for(const segment of imported.results)for(const r of segment.records){const old=base.result(r.commandId);if(old&&canonicalJSON(old)!==canonicalJSON(r))throw Error('匯入原始結果衝突。');if(!old&&!priorRoot)outcomes.set(r.commandId,r);}

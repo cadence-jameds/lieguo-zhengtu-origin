@@ -1,3 +1,4 @@
+import {appendReceipt} from './commandLedger';
 import {expect} from 'vitest';
 import {createFormalFixture} from './fixture';
 import {initializeEconomy,handleEconomyEvent} from './economy';
@@ -18,7 +19,7 @@ export function withModernHistory(w:FormalWorld){
  w=advanceFormal(w,Math.max(end,w.time)).world;w.factions.find(x=>x.id===f)!.modernQualification='full';
  const history=(kind:'world-wonder'|'civilization-breakthrough',cost:typeof WONDER_COST|typeof BREAKTHROUGH_COST,createdAt:number,durationMs:number):LargeProject=>{
   const id=projectId('history-'+kind),creation=commandId('history-'+kind+'-start'),payment=commandId('history-'+kind+'-ship'),type=kind==='world-wonder'?'wonder':'breakthrough';
-  for(const [cid,payload] of [[creation,kind==='world-wonder'?{type:'wonder.start',cityId:host.id,hostCityId:host.id}:{type:'breakthrough.start',cityId:host.id}],[payment,{type:type+'.ship',cityId:host.id,projectId:id,resources:cost}]] as const)w.commandReceipts.push({commandId:cid,issuerId:f,fingerprint:canonicalJSON({campaignId:w.campaignId,issuerId:f,payload}),committedRevision:w.revision,disposition:'applied'});
+  for(const [cid,payload] of [[creation,kind==='world-wonder'?{type:'wonder.start',cityId:host.id,hostCityId:host.id}:{type:'breakthrough.start',cityId:host.id}],[payment,{type:type+'.ship',cityId:host.id,projectId:id,resources:cost}]] as const)appendReceipt(w,{commandId:cid,issuerId:f,fingerprint:canonicalJSON({campaignId:w.campaignId,issuerId:f,payload}),committedRevision:w.revision,disposition:'applied'});
   return{projectId:id,kind,owner:{kind:'empire',empireId:empire},legalContributors:{kind:'current-empire-members',empireId:empire},paymentMode:'physical-shipment',initiatingCityId:host.id,requiredResources:{...cost},poolResources:{...cost},shipments:[{shipmentId:shipmentId('history-'+kind),projectId:id,commandId:payment,sourceFactionId:f,sourceCityId:host.id,destinationCityId:host.id,resources:{...cost},dispatchedAt:createdAt,authorizationSnapshot:{sourceCityOwnerFactionId:f,contributorEmpireId:empire,checkedAt:createdAt},phase:'arrived',arrivedAt:createdAt,arrivalEventId:eventId('history-'+kind+'-arrival')}],createdAt,durationMs,...(kind==='world-wonder'?{wonder:{creationCommandId:creation,hostOwnerFactionId:w.playerFactionId,phase:'completed' as const,startedAt:createdAt,completionEventId:eventId('history-wonder-complete'),completedAt:createdAt+durationMs}}:{breakthrough:{creationCommandId:creation,wonderProjectId:projectId('history-world-wonder'),phase:'completed' as const,workPeriods:[{startedAt:createdAt,endedAt:createdAt+durationMs}],discardedWorkMs:0,activeSince:null,completionEventId:eventId('history-breakthrough-complete'),completedAt:createdAt+durationMs,qualifiedFactionIds:[f]}})};
  };
  w.largeProjects.push(history('world-wonder',WONDER_COST,0,WONDER_DURATION),history('civilization-breakthrough',BREAKTHROUGH_COST,WONDER_DURATION,BREAKTHROUGH_DURATION));return validateFormalWorld(w);
@@ -34,7 +35,7 @@ export function fundCatchup(w:FormalWorld,id:LargeProject['projectId']){
   const needed=wonderRemaining(p),cargo=zeroResources();let capacity=30000;
   for(const r of resourceKeys){cargo[r]=Math.min(capacity,needed[r]);capacity-=cargo[r];}
   expect(capacity).toBeLessThan(30000);c.stock={...cargo};const o=order(w,{type:'modern.project.ship',cityId:c.id,projectId:id,resources:cargo},'fund-'+w.sequences.project,c.ownerFactionId),before={...c.stock};
-  applyCatchupCommand(w,c,o,o.payload as Extract<typeof o.payload,{type:'modern.project.ship'}>,s);w.revision++;w.commandReceipts.push({commandId:o.commandId,issuerId:o.issuerId,fingerprint:orderFingerprint(o),committedRevision:w.revision,disposition:'applied'});
+  applyCatchupCommand(w,c,o,o.payload as Extract<typeof o.payload,{type:'modern.project.ship'}>,s);w.revision++;appendReceipt(w,{commandId:o.commandId,issuerId:o.issuerId,fingerprint:orderFingerprint(o),committedRevision:w.revision,disposition:'applied'});
   for(const r of resourceKeys){expect(before[r]-c.stock[r]).toBe(cargo[r]);deducted[r]+=cargo[r];expect(p.poolResources[r]).toBe(deducted[r]-cargo[r]);}
   const until=w.logistics!.at(-1)!.returnAt;while(s.peek()&&s.peek()!.at<=until){const e=s.pop()!;w.time=e.at;if(!handleCatchupEvent(w,e,s)&&!handleEconomyEvent(w,e,s))throw Error('Unexpected fixture event: '+e.type);}
  }

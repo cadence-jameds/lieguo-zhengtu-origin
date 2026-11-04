@@ -16,7 +16,7 @@ import {dispatch} from './combatTestSupport';
 import {advanceFormal,submitFormalOrder} from './reducer';
 import type {FormalWorld} from './model';
 const make=(seed=90217)=>createFormalWorld({campaign:'mountains31-'+seed,seed});
-function legacy(){const w=make();if(w.metadata.schemaVersion!==3)throw Error('native expected');w.metadata={...w.metadata,terrainVersion:2};w.worldLayer!.terrain=generateTerrain(w.seed);delete w.worldLayer!.mountains;return w;}
+function legacy(){const w=make();if(w.metadata.schemaVersion!==4)throw Error('native bounded schema expected');w.metadata={...w.metadata,schemaVersion:3,terrainVersion:2};w.worldLayer!.terrain=generateTerrain(w.seed);delete w.worldLayer!.mountains;return w;}
 function addedPoint(w:FormalWorld){const base=generateTerrain(w.seed);return w.worldLayer!.mountains!.sprites.flatMap(mountainFootprint).find(p=>['L','F'].includes(base[p.y*384+p.x])&&!spatial(w).at(p.x,p.y).city&&!spatial(w).at(p.x,p.y).site)!;}
 it('every rendered mountain footprint is forbidden to route and settle, including formerly legal projected cells',()=>{
  for(const seed of [0,1,90217,4294967295]){const w=make(seed),profile=w.worldLayer!.mountains!;expect(w.metadata.terrainVersion).toBe(3);expect(profile.sprites.length).toBeGreaterThan(30);for(const d of profile.sprites)for(const p of mountainFootprint(d)){expect(terrainAt(w,p.x,p.y)).toBe('mountain');expect(passable(terrainAt(w,p.x,p.y))).toBe(false);expect(buildable(terrainAt(w,p.x,p.y))).toBe(false);}const p=addedPoint(w);expect(p).toBeDefined();expect(()=>route(w,w.cities[0],p)).toThrow('No traversable route');for(const n of [...w.cities,...w.worldLayer!.wildSites])expect(buildable(terrainAt(w,n.x,n.y))).toBe(true);}

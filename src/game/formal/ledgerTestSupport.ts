@@ -25,7 +25,11 @@ export function scenarioWorld(world:FormalWorld):FormalWorld{
    if(original.state!=='committed')expect(proof.receipt(original.commandId)).toBeUndefined();
   }
  }
- const gameplay=projectWorld(checked);delete gameplay.commandFacts;return gameplay;
+ const gameplay=projectWorld(checked);delete gameplay.commandFacts;
+ // Only the new bounded transport window is compared across raw engineering
+ // fixtures and committed snapshots. All domain fields and source validation
+ // above remain exact; the retirement/fence contract has its own T1/T2 tests.
+ const rows=gameplay.commandReceipts,internal=(id:string)=>/^command:(?:ai-|auto-)/.test(id),keep=new Set([...rows.filter(r=>!internal(r.commandId)).slice(-1024),...rows.filter(r=>internal(r.commandId)).slice(-1024)].map(r=>r.commandId));gameplay.commandReceipts=rows.filter(r=>keep.has(r.commandId));return gameplay;
 }
 export function gameTransition<T extends {world:FormalWorld}>(value:T):T{return {...value,world:scenarioWorld(value.world)};}
 

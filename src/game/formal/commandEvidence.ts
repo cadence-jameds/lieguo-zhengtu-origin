@@ -1,7 +1,7 @@
 import type {CommandId,FactionId} from './ids';
 import type {CommandReceipt,FormalCommand,FormalWorld} from './model';
 import {canonicalJSON} from './canonical';
-import {findReceipt} from './commandLedger';
+import {findReceipt,receiptIndex} from './commandLedger';
 /** Domain provenance is NOT an outcome archive. Only evidence referenced by the
  * current domain graph is retained. No original Ack, order envelope or fingerprint
  * is stored here. Governance stamps and evacuation origins are bounded by cities
@@ -45,13 +45,23 @@ export function domainReceipt(w:FormalWorld,id:string):CommandReceipt|undefined{
  const fact=w.commandFacts?.evidence[id];if(!fact)return;
  return evidenceReceipt(w.campaignId,fact);
 }
-export function domainReceiptIndex(w:FormalWorld){return {get:(id:string)=>domainReceipt(w,id),has:(id:string)=>!!domainReceipt(w,id)};}
+export function domainReceiptIndex(w:FormalWorld){
+ // One exact index per validation pass, matching the original receiptIndex.
+ // Repeated linear .find calls turn large project validation into quadratic work.
+ const recent=receiptIndex(w),get=(id:string)=>w.commandFacts?.replayReservations?.[id]?.receipt??recent.get(id)??(w.commandFacts?.evidence[id]?evidenceReceipt(w.campaignId,w.commandFacts.evidence[id]):undefined);
+ return {get,has:(id:string)=>!!get(id)};
+}
 export function commandEffectCount(w:FormalWorld){return ensureCommandFacts(w).effects;}
-export function pruneCommandEvidence(w:FormalWorld){
+export function pruneCommandEvidence(w:FormalWorld,persist=false){
  const facts=ensureCommandFacts(w);if(facts.replayReservations){const events=new Set(w.events.map(e=>e.id.slice(6)));for(const id of Object.keys(facts.replayReservations)){const event=/^command:ai-(.+)-[0-9]+$/.exec(id)?.[1];if(!event||!events.has(event))delete facts.replayReservations[id];}if(!Object.keys(facts.replayReservations).length)delete facts.replayReservations;}
- const needed=new Set<string>([...Object.values(facts.governance).map(stamp=>stamp[0]),...Object.values(facts.minimumGovernance).map(stamp=>stamp[0]),...Object.values(facts.origins),...Object.values(facts.minimumOrigins),...(facts.fallback?[facts.fallback]:[]),...(facts.minimumFallback?[facts.minimumFallback]:[])]);
+ const stableSources=[...Object.values(facts.governance).map(stamp=>stamp[0]),...Object.values(facts.minimumGovernance).map(stamp=>stamp[0]),...Object.values(facts.origins),...Object.values(facts.minimumOrigins),...(facts.fallback?[facts.fallback]:[]),...(facts.minimumFallback?[facts.minimumFallback]:[])];
+ const needed=new Set<string>(stableSources);
  const visit=(v:unknown)=>{if(typeof v==='string'){if(v.startsWith('command:'))needed.add(v);}else if(Array.isArray(v)){for(const x of v)visit(x);}else if(v&&typeof v==='object')for(const [k,x]of Object.entries(v))if(!['ledger','commandReceipts','commandFacts'].includes(k))visit(x);};visit(w);
- const retained:Record<string,CommandEvidence>={};for(const id of needed)if(facts.evidence[id])retained[id]=facts.evidence[id];facts.evidence=retained;
+ // Raw engineering worlds still hold every receipt. Avoid mirroring thousands
+ // of live domain proofs twice during pure reducer replay. Persistence captures
+ // all referenced proofs BEFORE the bounded transport window replaces history.
+ const selected=persist||w.ledger?needed:new Set(stableSources),raw=persist&&!w.ledger?new Map<string,CommandReceipt>(w.commandReceipts.map(r=>[r.commandId,r])):undefined;
+ const retained:Record<string,CommandEvidence>={};for(const id of selected){const fact=facts.evidence[id]??((persist||w.ledger)?(()=>{const r=raw?.get(id)??findReceipt(w,id);return r&&evidence(r);})():undefined);if(fact)retained[id]=fact;}facts.evidence=retained;
  const cities=new Set(w.cities.map(c=>c.id));for(const city of Object.keys(facts.governance))if(!cities.has(city as typeof w.cities[number]['id'])){delete facts.governance[city];delete facts.minimumGovernance[city];}
 }
 export function evidencePayloadMatches(w:FormalWorld,id:string,issuerId:FactionId,payload:FormalCommand){
