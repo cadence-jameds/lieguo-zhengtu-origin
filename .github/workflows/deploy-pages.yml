@@ -45,6 +45,9 @@ jobs:
           B10_APPROVED_SHA: ${{ inputs.release_sha }}
           B10_RELEASE_CONFIRMATION: ${{ inputs.confirmation }}
         run: |
+          test "$GITHUB_REF" = 'refs/heads/main'
+          test "$GITHUB_REPOSITORY" = 'cadence-jameds/lieguo-zhengtu-origin'
+          test "$GITHUB_ACTOR" = 'cadence-jameds'
           test "$B10_APPROVED_SHA" = "$GITHUB_SHA"
           test "$B10_RELEASE_CONFIRMATION" = 'PUBLISH_B10'
 
