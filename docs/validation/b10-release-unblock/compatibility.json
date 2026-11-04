@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "ee62650063d4cb1db59c2d2ae11537a55575b0d5",
+  "implementationCommit": "fc4e3137f93e253ca6d050769159f8de13312224",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -178,7 +178,7 @@
     },
     "src/game/formal/breakthroughSchema.ts": {
       "before": "eab9abc88ff69d6b72b9597487fe6d462998f25aa94d784f9fdb00d88e6bfdf2",
-      "after": "4d3471aba7a0d6eec814bf1b15e39e6ec2bc3bdce2253225157881b05fb6bf6a"
+      "after": "b7cad07cbda47aecb97e50d44306ebfbb6ee14e536423a0b9829943e8dfc8fda"
     },
     "src/game/formal/buildingDetailData.ts": {
       "before": "53e4c64b0728650329604980afa04b2ddddc9317d637962d7daab106518ff866",
@@ -202,7 +202,7 @@
     },
     "src/game/formal/commandEvidence.ts": {
       "before": null,
-      "after": "ab0615392fd07823d477acf813733bdd39f67ab00f4d85574527b4b6264e1edf"
+      "after": "394526bf4beb7cc33aec92f9592dbd9d52f58fd914024e67fdfa3bc213d453d0"
     },
     "src/game/formal/commandLedger.ts": {
       "before": "462286be18725bb2b1547d039e9a16482623ab7d20260c7a92ca028623e10d13",
@@ -314,7 +314,7 @@
     },
     "src/game/formal/reducer.ts": {
       "before": "4576183cd74863a3447cbe0827d4f5ab5c68903cfb2d4abacadc30599dc9dbaa",
-      "after": "60877b79a051f76273d3804593402c4cf86767037f1b51d0bc0b5a175f11b859"
+      "after": "7ad438179ad54dea94f190f39281c2a0e2304feeb355cc30e45ac5b9bcee630f"
     },
     "src/game/formal/runtimeSchedulingR306.test.ts": {
       "before": "26dede6f44319a709588e8a0c3fbe5eb9824f04dd62b156d718ce623f4ab22bb",
@@ -334,7 +334,7 @@
     },
     "src/game/formal/shipmentEncoding.test.ts": {
       "before": null,
-      "after": "569b2c6378bdd11d1ce3fbb73b8036ec40048c77d21aa5704150998dc562ade1"
+      "after": "9d8e69864eaa54c4ca840230b0e69a78663df3b720846c9850b236cc6865424d"
     },
     "src/game/formal/versions.ts": {
       "before": "3d97d68cae03874cff7a1c27bd1d28bdf4ffc391db882d9b8bf95ab2a1acd688",
@@ -350,7 +350,7 @@
     },
     "src/game/formal/wonderSchema.ts": {
       "before": "4fc3d6af7537faf4d253eef1152b2be0fc1a0350626dea20fba72dc64884c1b4",
-      "after": "724886f7f4ca54457ab7ef980576ad78339b6622ae4f675bd4a38042e06b2b29"
+      "after": "c9dfe249e85c40fe94ea839b89cd7161ff26bdd402c2081f13f758c16cf6fe16"
     },
     "src/game/governanceAdmission.ts": {
       "before": "b6dbe6e5d15f959e211fc29732a79fe9798a8bcd7f8d58b22f32489dc3f9fcfb",
