@@ -1,3 +1,4 @@
+import {retainCommandViews} from './commandViewRetention';
 import {playerCommandId} from './replayFence';
 import {PresentationStore} from './presentationStore';
 import {ProjectionRecovery} from './projectionRecovery';
@@ -46,7 +47,7 @@ export function useGame(){
   // A pending observation cannot undo a timeout or a previously known terminal result.
   if(isWaiting(patch.state)&&old&&!isWaiting(old.state)&&old.state!=='blocked'&&old.state!=='receive-failed')return rows;
   const next=isWaiting(patch.state)&&waitExpired.current.has(key)?{...patch,state:'blocked' as const,text:waitWarning}:patch;
-  return old?rows.map(r=>r===old?{...r,...next}:r):next.order?[...rows,{commandId:id,...next} as CommandView]:rows;});};
+  return retainCommandViews(old?rows.map(r=>r===old?{...r,...next}:r):next.order?[...rows,{commandId:id,...next} as CommandView]:rows);});};
  const preserveDrafts=()=>{try{sessionStorage.setItem('formal-command-drafts-v1',JSON.stringify([...commandRequests.current.values()]));}catch{/* Memory retains the original operation; T1 is still the only durable acceptance. */}};
  const forgetDraft=(id:string,campaign=current.current?.campaignId)=>{if(campaign&&commandRequests.current.delete(waitKey(campaign,id)))preserveDrafts();};
  const [feedback,setFeedback]=useState<CommandFeedback>({kind:'idle',text:''});
