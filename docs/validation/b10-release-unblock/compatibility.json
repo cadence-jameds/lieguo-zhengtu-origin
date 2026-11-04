@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "3a3ae8dc2e3b60167f1b3e9dfa3e16020f573bd0",
+  "implementationCommit": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -110,7 +110,7 @@
     },
     "src/game/formal/commandEvidence.ts": {
       "before": null,
-      "after": "fe6819baa1e4be8f1b207a68fcac5dadd906d2c97ba55110ee7c22edcc67756a"
+      "after": "b39f89bdfa56958821760a0eb7d4037aa62e3d5ea22d695ab276aec0417ea2aa"
     },
     "src/game/formal/commandLedger.ts": {
       "before": "462286be18725bb2b1547d039e9a16482623ab7d20260c7a92ca028623e10d13",
