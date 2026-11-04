@@ -245,7 +245,13 @@ export class FormalPersistence {
   const keptHeads=heads.filter(h=>campaigns.has(h.campaignId)),proofs=new Map<string,VerifiedLedger>();for(const head of keptHeads)proofs.set(head.campaignId,await this.ledger(head.campaignId,head.root));
   const retired:number[]=[];for(const row of await this.db.Inbox.toArray())if(terminalCommand(row)&&!proofs.get(row.campaignId)?.result(row.commandId))retired.push(row.sequence!);
   if(retired.length)await this.db.Inbox.bulkDelete(retired);
-  for(const row of await this.db.table('LedgerIdentity').toArray())if(!proofs.get(row.campaignId)?.result(row.commandId))await this.db.table('LedgerIdentity').delete([row.campaignId,row.commandId]);
+  // Retention needs only the compound identity, not another native clone of
+  // every original payload/Ack. Verification and conflict checks still read
+  // actual rows at their existing boundaries, inside this same T2 transaction.
+  for(const key of await this.db.table('LedgerIdentity').toCollection().primaryKeys()){
+   const [campaignId,commandId]=key as [string,string];
+   if(!proofs.get(campaignId)?.result(commandId))await this.db.table('LedgerIdentity').delete(key);
+  }
   const references=[...keptHeads,...authority.recovery.map(b=>({campaignId:b.campaignId,root:b.root}))],roots=new Set(references.map(r=>r.campaignId+'/'+r.root)),segments=new Set<string>(),results=new Set<string>();
   for(const ref of references){const archive=await readLedgerArchive(this.db,ref.campaignId,ref.root);for(const s of archive.history.segments)segments.add(s.checksum);for(const s of archive.results)results.add(s.checksum);}
   for(const row of await this.db.table('LedgerManifests').toArray())if(!roots.has(row.campaignId+'/'+row.root))await this.db.table('LedgerManifests').delete([row.campaignId,row.root]);

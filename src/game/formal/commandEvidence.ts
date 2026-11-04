@@ -1,8 +1,21 @@
 import type {CommandId,FactionId} from './ids';
 import type {CommandReceipt,FormalCommand,FormalWorld} from './model';
+import type {Resources} from './model';
 import {canonicalJSON} from './canonical';
 import {exactDataEqual} from './jsonDataEqual';
 import {findReceipt,receiptIndex} from './commandLedger';
+/** Repeated project validation compares the same paid cargo thousands of times.
+ * This is only a bounded encoding cache: every key contains all actual inputs,
+ * and every caller still checks the actual receipt and world invariants. */
+const shipmentEncodings=new Map<string,string>();
+export function shipmentPaymentFingerprint(campaignId:string,issuerId:string,type:'wonder.ship'|'breakthrough.ship',cityId:string,projectId:string,resources:Resources):string {
+ const encode=()=>canonicalJSON({campaignId,issuerId,payload:{type,cityId,projectId,resources}});
+ // Keep the general encoder's exact behavior for malformed/direct validator inputs.
+ if(!resources||Object.keys(resources).length!==4||!['food','wood','stone','gold'].every(k=>Object.hasOwn(Object.getOwnPropertyDescriptor(resources,k)??{},'value')&&typeof resources[k as keyof Resources]==='number'&&Number.isFinite(resources[k as keyof Resources])))return encode();
+ const key=JSON.stringify([campaignId,issuerId,type,cityId,projectId,resources.food,resources.wood,resources.stone,resources.gold]);
+ const cached=shipmentEncodings.get(key);if(cached!==undefined)return cached;
+ const encoded=encode();shipmentEncodings.set(key,encoded);if(shipmentEncodings.size>128)shipmentEncodings.delete(shipmentEncodings.keys().next().value!);return encoded;
+}
 /** Domain provenance is NOT an outcome archive. Only evidence referenced by the
  * current domain graph is retained. No original Ack, order envelope or fingerprint
  * is stored here. Governance stamps and evacuation origins are bounded by cities

@@ -1,5 +1,4 @@
-import {domainReceipt,domainReceiptIndex} from './commandEvidence';
-import {canonicalJSON} from './canonical';
+import {domainReceipt,domainReceiptIndex,shipmentPaymentFingerprint} from './commandEvidence';
 import type {FormalWorld} from './model';
 import {resourceKeys} from './model';
 import {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY,wonderIntegrity,wonderProgress} from './wonder';
@@ -48,7 +47,7 @@ export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
    if(!w.cities.some(c=>c.id===record.sourceCityId)||!w.factions.some(f=>f.id===record.sourceFactionId)||resourceKeys.every(r=>record.resources[r]===0)||record.dispatchedAt>w.time)fail('Wonder shipment source/cargo invalid');
    if(!record.commandId||commands.has(record.commandId))fail('Duplicate wonder payment command');else commands.add(record.commandId);
    const receipt=record.commandId?receipts.get(record.commandId):undefined;
-   if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==record.sourceFactionId||receipt.fingerprint!==canonicalJSON({campaignId:w.campaignId,issuerId:record.sourceFactionId,payload:{type:'wonder.ship',cityId:record.sourceCityId,projectId:p.projectId,resources:record.resources}}))fail('Wonder shipment payment receipt missing');
+   if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==record.sourceFactionId||receipt.fingerprint!==shipmentPaymentFingerprint(w.campaignId,record.sourceFactionId,'wonder.ship',record.sourceCityId,p.projectId,record.resources))fail('Wonder shipment payment receipt missing');
    const serial=Number(record.shipmentId.slice(9));if(Number.isSafeInteger(serial)&&serial>=w.sequences.project)fail('Wonder shipment sequence would reuse ID');
    if(record.phase==='in-transit'&&(!t||t.phase!=='outbound')||record.phase!=='in-transit'&&(record.arrivedAt>w.time||t&&t.phase!=='returning'))fail('Wonder shipment phase invalid');
    if(record.phase!=='in-transit'){if(w.events.some(e=>e.id===record.arrivalEventId)||events.has(record.arrivalEventId))fail('Duplicate wonder arrival receipt');events.add(record.arrivalEventId);}
