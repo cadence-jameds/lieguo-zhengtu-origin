@@ -56,6 +56,9 @@ jobs:
           python3 scripts/test_b10_r3_05_successor.py
           python3 scripts/b10_r3_06_successor.py
           python3 scripts/test_b10_r3_06_successor.py
+          node scripts/test-deployment-isolation.mjs
+          python3 scripts/b10_release_unblock_successor.py
+          python3 scripts/test_b10_release_unblock_successor.py
           node scripts/verify-runtime-parity.mjs
           node scripts/verify-projection-boundaries.mjs
           node scripts/verify-preview-boundaries.mjs
