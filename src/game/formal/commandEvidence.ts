@@ -9,13 +9,25 @@ import {findReceipt,receiptIndex} from './commandLedger';
  * and every caller still checks the actual receipt and world invariants. */
 const shipmentEncodings=new Map<string,string>();
 const paymentResourceKeys=['food','wood','stone','gold'] as const;
+type PaymentArgs=readonly [string,string,'wonder.ship'|'breakthrough.ship',string,string,number,number,number,number];
+let lastPayment:{args:PaymentArgs;encoded:string}|undefined;
+/** Schema's parsed resource fields are passed explicitly, so the hot validator
+ * need not allocate property descriptors for every historical payment. This
+ * only encodes the same four fields; Schema still rejects unknown/bad fields. */
+export function shipmentPaymentFieldsFingerprint(campaignId:string,issuerId:string,type:'wonder.ship'|'breakthrough.ship',cityId:string,projectId:string,food:number,wood:number,stone:number,gold:number):string {
+ const a=lastPayment?.args;
+ if(a&&a[0]===campaignId&&a[1]===issuerId&&a[2]===type&&a[3]===cityId&&a[4]===projectId&&a[5]===food&&a[6]===wood&&a[7]===stone&&a[8]===gold)return lastPayment!.encoded;
+ const encode=()=>canonicalJSON({campaignId,issuerId,payload:{type,cityId,projectId,resources:{food,wood,stone,gold}}});
+ if(![campaignId,issuerId,type,cityId,projectId].every(v=>typeof v==='string')||![food,wood,stone,gold].every(v=>typeof v==='number'&&Number.isFinite(v)))return encode();
+ const args:PaymentArgs=[campaignId,issuerId,type,cityId,projectId,food,wood,stone,gold],key=JSON.stringify(args),known=shipmentEncodings.get(key),encoded=known??encode();
+ if(known===undefined){shipmentEncodings.set(key,encoded);if(shipmentEncodings.size>128)shipmentEncodings.delete(shipmentEncodings.keys().next().value!);}
+ lastPayment={args,encoded};return encoded;
+}
 export function shipmentPaymentFingerprint(campaignId:string,issuerId:string,type:'wonder.ship'|'breakthrough.ship',cityId:string,projectId:string,resources:Resources):string {
  const encode=()=>canonicalJSON({campaignId,issuerId,payload:{type,cityId,projectId,resources}});
- // Keep the general encoder's exact behavior for malformed/direct validator inputs.
+ // Direct/unparsed callers retain the complete original encoder behavior.
  if(!resources||Array.isArray(resources)||Object.keys(resources).length!==4||!paymentResourceKeys.every(k=>{const d=Object.getOwnPropertyDescriptor(resources,k);return d?.enumerable&&Object.hasOwn(d,'value')&&typeof d.value==='number'&&Number.isFinite(d.value);}))return encode();
- const key=JSON.stringify([campaignId,issuerId,type,cityId,projectId,resources.food,resources.wood,resources.stone,resources.gold]);
- const cached=shipmentEncodings.get(key);if(cached!==undefined)return cached;
- const encoded=encode();shipmentEncodings.set(key,encoded);if(shipmentEncodings.size>128)shipmentEncodings.delete(shipmentEncodings.keys().next().value!);return encoded;
+ return shipmentPaymentFieldsFingerprint(campaignId,issuerId,type,cityId,projectId,resources.food,resources.wood,resources.stone,resources.gold);
 }
 /** Domain provenance is NOT an outcome archive. Only evidence referenced by the
  * current domain graph is retained. No original Ack, order envelope or fingerprint

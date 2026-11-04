@@ -44,7 +44,7 @@ function report(w:FormalWorld,title:string,text:string,owner:FactionId=w.playerF
  const sequence=w.sequences.report++;return{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:owner,at:w.time,category:'research',title,text};
 }
 type ReplayAdmission={receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;fullCommandClone:boolean};
-/** Scan once after the outer clone. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
+/** Scan once before the first replay command draft. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
 function replayClonePolicy(current:FormalWorld):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'fullCommandClone'> {
  const readonly=1,autonomy=2,mutable=4,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
  let fullCommandClone=false,shareAutonomy=!!current.autonomy,shareCityDraft=true,nextOwner=0;
@@ -110,9 +110,12 @@ function replayReceipt(current:FormalWorld,admission:ReplayAdmission,id:CommandI
  }
  return admission.receipts.get(id);
 }
-function replaySubmit(current:FormalWorld):Submit {
- const admission:ReplayAdmission={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current)};
- return(current,value)=>submitOrderDraft(current,value,admission);
+function replaySubmit():Submit {
+ // Logistics/clock-only replay needs no command draft policy. Inspect the
+ // actual current graph once, immediately before its first command draft;
+ // receipt indexing still starts at zero and follows the same replay order.
+ let admission:ReplayAdmission|undefined;
+ return(current,value)=>{admission??={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current)};return submitOrderDraft(current,value,admission);};
 }
 /** Pure transition; only persistence may expose the draft as committed world. */
 export function submitFormalOrder(current:FormalWorld,value:unknown):FormalTransition {
@@ -256,7 +259,7 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  if(worldPaused(current))return{world:current,reports:[]};
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit();syncGrowthTasks(w);reconcileVictory(w,scheduler);
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
@@ -271,7 +274,7 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  // A queued input can start T1 before an expensive private-draft clone. This
  // checkpoint has no event/world mutations; the fixed logical target is kept.
  if(options.yieldBeforeStart)await(options.yieldControl?.('start')??new Promise<void>(resolve=>setTimeout(resolve,0)));
- const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit();syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;
