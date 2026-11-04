@@ -1,7 +1,6 @@
 /** The build emits this small classic-SW import before Workbox's listeners.
- * clients.claim() must extend activate (or an already-active retry) lifetime.
- * skipWaiting requests a registration transition; do not hold its waiting
- * worker's message event open until that same transition has finished.
+ * Explicitly extend both message and activate event lifetimes: an unobserved
+ * clients.claim()/skipWaiting() promise is not protected by an ExtendableEvent.
  * No automatic skipWaiting: only the page's post-save update request triggers it.
  */
 export function serviceWorkerReleaseSource(identity:{version:string;contentSha:string}){
@@ -14,13 +13,12 @@ self.addEventListener('message',event=>{
  if(event.data?.type==='GET_APP_RELEASE'){event.ports[0]?.postMessage(APP_RELEASE);return;}
  if(event.data?.type!=='SKIP_WAITING')return;
  event.stopImmediatePropagation();mark('skipWaiting:received');
- mark('skipWaiting:start');
- self.skipWaiting().then(()=>mark('skipWaiting:resolved'),error=>mark('skipWaiting:rejected',{name:error?.name}));
- // The registration owns the requested transition. Holding this message on
- // its completion can stall native activation after a failed installation.
- // Only an already-active target reclaims here; a waiting target claims from
- // its activate event, whose lifetime is explicitly protected below.
- if(!self.registration.waiting&&self.registration.active?.state==='activated')event.waitUntil(claim());
+ event.waitUntil((async()=>{
+  mark('skipWaiting:start');await self.skipWaiting();mark('skipWaiting:resolved');
+  // A retried update can find the target already active while this page still
+  // has its old controller. Re-claim is safe and does not touch persisted data.
+  if(self.registration.active?.state==='activated')await claim();
+ })());
 });
 self.addEventListener('activate',event=>{mark('activate');event.waitUntil(claim());});`;
 }
