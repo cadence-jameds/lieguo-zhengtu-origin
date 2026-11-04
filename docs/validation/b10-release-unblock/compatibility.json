@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "d47a95d2b0e4876d86f9e1962b409ae88f82cf0f",
+  "implementationCommit": "fcf0052d6170e4a98e3632666ecbbd92b3327842",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -35,6 +35,10 @@
     "src/game/GameApp.tsx": {
       "before": "30e3726d7baf1041ff73c39c63f76254d06c68d9bdd3d0798d86871fb01c26af",
       "after": "2589c7d6f1d9ef7f8983d78484ac3cdcf103f3e88e5a1e7ca6ca7062fb5898eb"
+    },
+    "src/game/campaignArchive.test.ts": {
+      "before": "4e0286caa27e8aaf1ade3ba9bda5133b46185c8ee9d9bac026dd4077a6170ec8",
+      "after": "841cb1154162e8d88f43a0512ffc71e1647d9801d87ceba2f351155cf562d432"
     },
     "src/game/campaignStorage.test.ts": {
       "before": "bd03bd3608a42ac2e05f692e1e910be41da67d56845597ccc1c89f301e2149fe",
@@ -75,6 +79,10 @@
     "src/game/formal/boundedPersistence.test.ts": {
       "before": null,
       "after": "0dd744d050d5bc4ac88557f05162f47a559fb21ec314c2319b4fefccfc3d5acb"
+    },
+    "src/game/formal/breakthroughRuntimeB92.test.ts": {
+      "before": "56bb4e3b340949ef99b067c516ca5d39b5cd935c7cf2ad1cfa69d00761172116",
+      "after": "74ab73421a4f6042c8a240b16e29f8746bdd9671c7b7b0459bb7a438479c1ca0"
     },
     "src/game/formal/breakthroughSchema.ts": {
       "before": "eab9abc88ff69d6b72b9597487fe6d462998f25aa94d784f9fdb00d88e6bfdf2",
@@ -122,7 +130,7 @@
     },
     "src/game/formal/durableRuntime.test.ts": {
       "before": "3ce591e0f90ae8bfb9e2581bb8ca314e16ec2e75b840b02b1f31f04e16cff5e1",
-      "after": "86d81bcfe1ba79f7dfbe130a19e8ee4cb680298cbe3183f5baa7275b05936842"
+      "after": "abb065cc79005e17aa162c21018df540b4d98c8fac6aff10d7a4f611fbbae05c"
     },
     "src/game/formal/durableWorkerTestSupport.ts": {
       "before": "a6b46b125b6cfdab348b592c30856da07b7fd323567a2386a8059d1fbcd1abaf",
@@ -139,6 +147,10 @@
     "src/game/formal/extinctionB7.test.ts": {
       "before": "45552c7e8bd153bd24eabe32bab32e46818e39ae59f82d14972f2f6bc90d43da",
       "after": "f24d81f9ee8c5e4c591cb6150a59ba1347680c34651cabaf7fb0c94f72f5fc0e"
+    },
+    "src/game/formal/extinctionWorkerP0C10.test.ts": {
+      "before": "df882f73ccb8e475ca3edd3369bee60a4e12597def0a87a8e46ba64e1bc54099",
+      "after": "501c02a88e4568b44edd466eb0af534ee8fee50d6364f9420a23dbdb069b564f"
     },
     "src/game/formal/governance.ts": {
       "before": "7af6d4231d3376a6c3245cca84bd4d8f10a31dd323064d4286b6f9ff83118691",
@@ -188,6 +200,10 @@
       "before": "f6d22b5b6250d470496871840990ffe8994bd839757cf1c1a3c0d65836b3a2fd",
       "after": "175e67f7abec5a672c7a910941159176513ef7df33d6941b1f22a3c4194238dd"
     },
+    "src/game/formal/playerOrderRuntimeP0.test.ts": {
+      "before": "b1efa05c34a517c01dff32528c7bb7123b7b4e14cd0f872d5c529e0f8a442365",
+      "after": "b931fa208b0f6c179757b56d656d04a368e909f9344f0d31930545912f9aff00"
+    },
     "src/game/formal/projectionBenchmarkSupport.ts": {
       "before": "9b0f0a1737e4a9d8d2388ca6b6cc8cf06f99d11852567f72ebf6c1369a37cb80",
       "after": "023c6a7748dd2392dade30ed5b2f8bb180e273d45877bd3981184ed442e09b89"
@@ -222,7 +238,7 @@
     },
     "src/game/formal/schema.ts": {
       "before": "bdcc668d955bb81b9f5b1b8eeff6bc548c96a74ed8ac402bfe0d81003b519f95",
-      "after": "81b43e1296779d5bbef77b93275199a18fe4af8072d2dd1b94a7d2330285faf6"
+      "after": "022deb7dbb4fbb579283bdc6ab2d8752ef4ded3286291bce45ba39ff42b80735"
     },
     "src/game/formal/versions.ts": {
       "before": "3d97d68cae03874cff7a1c27bd1d28bdf4ffc391db882d9b8bf95ab2a1acd688",
@@ -231,6 +247,10 @@
     "src/game/formal/wonderConditionSchema.ts": {
       "before": "a0c6a7fff37f0959ece1621745b3848615f7b83094f05276cbe0227a0be938c5",
       "after": "82597edf538e602832437b57dda8da23b0e58d05b1c67dd8d278bf1518140718"
+    },
+    "src/game/formal/wonderRuntimeB91.test.ts": {
+      "before": "011c4682c9c74b4e497f365b89034f6df3bde5affcb7f2b43f7b9cc7c3d76086",
+      "after": "b93adbfc4f2acde984d83e5ec9cc454a3f3c23e48301faa4db298b1a81468b4b"
     },
     "src/game/formal/wonderSchema.ts": {
       "before": "4fc3d6af7537faf4d253eef1152b2be0fc1a0350626dea20fba72dc64884c1b4",
@@ -334,6 +354,10 @@
       "82578b300b1a133ba79079934afd26144142f3f3bdf58bac4765bcc20323d9de",
       "3651a2e58a088da77442fd48f0676f8b765d7fa0f5646877e542d82c05e766ba"
     ],
+    "src/game/campaignArchive.test.ts": [
+      "4e0286caa27e8aaf1ade3ba9bda5133b46185c8ee9d9bac026dd4077a6170ec8",
+      "237496024632a7fd70110e9297d6a4babd0105ba61a9e17a6f83c9f62cd44464"
+    ],
     "src/game/campaignStorage.test.ts": [
       "bd03bd3608a42ac2e05f692e1e910be41da67d56845597ccc1c89f301e2149fe",
       "620d2929bee58418a798cf34d1ea43f36803080c0926cb9eb1c10dc9a16a24a1"
@@ -364,6 +388,11 @@
       "7b2ae045f9fdcace1ffb9a2013f0b9f669c8eb0bd80c4f4db64c875979911957",
       "7518cc6ffcfd8cc499e230d873879e664aca52a04d715a6283f16a8b03edc383",
       "6a21b208c09631d319a7c4339c97215819602b1509473db8a5b67570be46dfeb"
+    ],
+    "src/game/formal/breakthroughRuntimeB92.test.ts": [
+      "56bb4e3b340949ef99b067c516ca5d39b5cd935c7cf2ad1cfa69d00761172116",
+      "27321d9306394c37a46bf80c83539722a4365089751ae9b7b3172de76ac27400",
+      "ede03cfdde72ba7319e97987694c010b30b26a69ecedb0f4879bae4389f718f4"
     ],
     "src/game/formal/breakthroughSchema.ts": [
       "eab9abc88ff69d6b72b9597487fe6d462998f25aa94d784f9fdb00d88e6bfdf2",
@@ -424,6 +453,11 @@
       "4262323096b8c29a9fb1c62ad38a1b9bef8a66dbdf3de41645b2920e69cdd836",
       "fc44414b08715450c2760a1d77eb4cbad55a8d71ca17439f45072fbcb38d2410"
     ],
+    "src/game/formal/extinctionWorkerP0C10.test.ts": [
+      "df882f73ccb8e475ca3edd3369bee60a4e12597def0a87a8e46ba64e1bc54099",
+      "8a22018e6d6216a555d7a443a26d86651ad7aa717f644e4889935bc9230ac374",
+      "565c5ef9b4e39550f8fb9c47f9f7bfce297e442ee4fe6302a5ef062cb1f53a52"
+    ],
     "src/game/formal/governance.ts": [
       "7af6d4231d3376a6c3245cca84bd4d8f10a31dd323064d4286b6f9ff83118691",
       "11ee0a8dbbae233f5eff2595a74674fcecbac1655527d2c226c5a45d56364974"
@@ -475,6 +509,12 @@
       "f6d22b5b6250d470496871840990ffe8994bd839757cf1c1a3c0d65836b3a2fd",
       "0f436dc45a7f4666df22b454b86be88ad67e179a0ccf643f77a18c3a538b1607"
     ],
+    "src/game/formal/playerOrderRuntimeP0.test.ts": [
+      "b1efa05c34a517c01dff32528c7bb7123b7b4e14cd0f872d5c529e0f8a442365",
+      "a0bb062bba5439877b4781073b4536ea5e60b741279ecefc1698e511cf3444fd",
+      "23ad6cdc3f569395285145a763a31c0077e1d6a66b0d5be0819aff9acbae2986",
+      "a0fcbaf04a3f325352ea3bb3a2f7714e95638b3ebc4bb5aefbffe06f5bc1f040"
+    ],
     "src/game/formal/projectionBenchmarkSupport.ts": [
       "9b0f0a1737e4a9d8d2388ca6b6cc8cf06f99d11852567f72ebf6c1369a37cb80"
     ],
@@ -519,6 +559,11 @@
     "src/game/formal/wonderConditionSchema.ts": [
       "a0c6a7fff37f0959ece1621745b3848615f7b83094f05276cbe0227a0be938c5",
       "bf3e2914e31f09465f8fe4ce4692620877ce91e841b06ac8face71dd4e926cf4"
+    ],
+    "src/game/formal/wonderRuntimeB91.test.ts": [
+      "011c4682c9c74b4e497f365b89034f6df3bde5affcb7f2b43f7b9cc7c3d76086",
+      "80cb8712ff66a963193c1ffede6c8c0b98b4edefa14709bbb56c05a81c987bcb",
+      "72183414248fcce2d30ef720fde6f9c7138ac1fa8de0ed7e0cc99b36cee4cc72"
     ],
     "src/game/formal/wonderSchema.ts": [
       "4fc3d6af7537faf4d253eef1152b2be0fc1a0350626dea20fba72dc64884c1b4",
@@ -1279,7 +1324,6 @@
     "src/game/batch2720.test.ts": "645c00a413c68a2c4e4df3ce173c9ef579c6330f3ade7f29fbd66128d1ac707f",
     "src/game/batch290.test.ts": "8d40a3b057db82f7dff13080590b88238c3a6c46709f99c5ef884f34f5be3149",
     "src/game/batch295.test.tsx": "cabccb11c345f1793302319cf306e8cc9537eb288ec411d769b53f32699ac741",
-    "src/game/campaignArchive.test.ts": "4e0286caa27e8aaf1ade3ba9bda5133b46185c8ee9d9bac026dd4077a6170ec8",
     "src/game/campaignArchivePolicy.test.ts": "fc016b71ca285bd6758090b72c6a151241255cafd6f6bcfbab6afe92d7cd458c",
     "src/game/city.ts": "5dfab73153d9463fbe901000c562a3801e3b8ba068a841cd2c9902c7062c694c",
     "src/game/cityNames.ts": "cd9d7277acc056842e43b93b6237ed502c61cab5c42167f5c804f2dc1a0863ec",
@@ -1336,7 +1380,6 @@
     "src/game/formal/battleView.ts": "8eef444de73bda6df723e2f3abbd04836ff208bac1f3f65848ea636ba0f3a873",
     "src/game/formal/breakthrough.ts": "66f1ca7e3520af6f5e5502a5e3dc796bb6a14d0669e370697547e80e20add068",
     "src/game/formal/breakthroughB92.test.ts": "d85bffcc8523c02f0bba86b2add8cda0170015fa929ce8cbc73fa03390c6dc09",
-    "src/game/formal/breakthroughRuntimeB92.test.ts": "56bb4e3b340949ef99b067c516ca5d39b5cd935c7cf2ad1cfa69d00761172116",
     "src/game/formal/breakthroughTestSupport.ts": "b92f028aeb849964a118b615eae1eaa16895dd5aa4ebf497f0967466aa524868",
     "src/game/formal/campaignTime.ts": "80d808645e0dcb482c3abb6801c8fe17e037cb74a1c51ac523929356efb9eee2",
     "src/game/formal/canonical.ts": "12a30d424a234076b5a6e46daebcd6a5f9bba3b5c4998384aa134fb4d0a26089",
@@ -1372,7 +1415,6 @@
     "src/game/formal/endgameAIB95.test.ts": "2486007389e82e79902d1dfcfead833986bbf9158647d8e100a3d7feb08bff52",
     "src/game/formal/endgameChainB95.test.ts": "fd252ddd2c9578d39f9e57408ebf90913870ca0244890f3828e8aba32c19bb0d",
     "src/game/formal/extinctionPersistenceB7.test.ts": "ef8f2ec4d8fb66384edc92e8a15eb0ae646f4431a8cd321f92776141797f0eca",
-    "src/game/formal/extinctionWorkerP0C10.test.ts": "df882f73ccb8e475ca3edd3369bee60a4e12597def0a87a8e46ba64e1bc54099",
     "src/game/formal/fixture.ts": "dec7f590f3d79dc8088e81770b04a3279f30d4e9b3cc91b851110cc09a52c1ce",
     "src/game/formal/gateDeltaPersistenceR4.test.ts": "c38825bdee7d6f4aae38031b211fa011263b3f12a7f0e3a84178898c293103ba",
     "src/game/formal/gateDeltaR4.test.ts": "8d3a398e16c2d698ef27614979bf798d43b3fe38f9ad31b0e768b72a2c028fd7",
@@ -1423,7 +1465,6 @@
     "src/game/formal/p0c9Strategies.test.ts": "ece545add8ea2c2b7cdbc64b2fcd52fa33aeacb44319c81d98d8f29442dc401f",
     "src/game/formal/p0cExileScout.test.ts": "c2a627c6cf8ebaa577144df8868ac7b4109aefd33d5043d7150d701bc5bf1762",
     "src/game/formal/playerLogistics.test.ts": "e98ab8a1dd79521895c1ecdadd23fc581d01fa7c5c3d6eec6f77e5c345bd521a",
-    "src/game/formal/playerOrderRuntimeP0.test.ts": "b1efa05c34a517c01dff32528c7bb7123b7b4e14cd0f872d5c529e0f8a442365",
     "src/game/formal/playtest.ts": "948c9eaa34b6431fceaefed061d0bb5ad642381d94acbf55f8cda3ad5c820751",
     "src/game/formal/playtest26.test.ts": "c58e6ccf842926e8f2055f3316025f732bacea312f8293e7fc0fc3e31c59f09f",
     "src/game/formal/politics.ts": "66244281d6c7114e4e86bdd1c9a3546bb4a975bc50d374771a6537b177ba5aa5",
@@ -1478,7 +1519,6 @@
     "src/game/formal/wonderRepairB95.test.ts": "bb83f45f5889d9d91669d852f5bede7323c83d612766ed6f88908d678191c9d8",
     "src/game/formal/wonderRuinsGate.test.ts": "cbc4861eae3eba1764d3cb6fc0967aa6fa3f5006bffbceebb28862a7e3502176",
     "src/game/formal/wonderRules.ts": "0f9ef93d5a8a3220823529c0c90b5001df3590322f2fc760160068779210483f",
-    "src/game/formal/wonderRuntimeB91.test.ts": "011c4682c9c74b4e497f365b89034f6df3bde5affcb7f2b43f7b9cc7c3d76086",
     "src/game/formal/wonderTestSupport.ts": "f3ce9ef321d3530527b348122ef91f918cd00e8b777008517114cbb13ae3f5b0",
     "src/game/formal/worldB2.test.ts": "4e9c47695dc7fa1568945272d8cfde647df1eef13104ae124390e8882b9a3071",
     "src/game/formal/worldDraft.test.ts": "d0630b48760553bdd0950214f46dc3e0e7ae4570f0677422f10fcfd4ec188f61",
