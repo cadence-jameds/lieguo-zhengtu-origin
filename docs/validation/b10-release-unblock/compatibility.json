@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "0caafdd160dd0a92a4272b8470a87be9e2cbe478",
+  "implementationCommit": "ee62650063d4cb1db59c2d2ae11537a55575b0d5",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -202,7 +202,7 @@
     },
     "src/game/formal/commandEvidence.ts": {
       "before": null,
-      "after": "081d87422738f4034e1562686cdbf0370ccfcb6af79e0c597acd894bd7f7ffa6"
+      "after": "ab0615392fd07823d477acf813733bdd39f67ab00f4d85574527b4b6264e1edf"
     },
     "src/game/formal/commandLedger.ts": {
       "before": "462286be18725bb2b1547d039e9a16482623ab7d20260c7a92ca028623e10d13",
@@ -334,7 +334,7 @@
     },
     "src/game/formal/shipmentEncoding.test.ts": {
       "before": null,
-      "after": "61ebd6582e54285cea7c0c78209e8e7e215949c92c33e5e61a7123f912693e01"
+      "after": "569b2c6378bdd11d1ce3fbb73b8036ec40048c77d21aa5704150998dc562ade1"
     },
     "src/game/formal/versions.ts": {
       "before": "3d97d68cae03874cff7a1c27bd1d28bdf4ffc391db882d9b8bf95ab2a1acd688",
