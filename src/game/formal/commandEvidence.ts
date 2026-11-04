@@ -8,10 +8,11 @@ import {findReceipt,receiptIndex} from './commandLedger';
  * This is only a bounded encoding cache: every key contains all actual inputs,
  * and every caller still checks the actual receipt and world invariants. */
 const shipmentEncodings=new Map<string,string>();
+const paymentResourceKeys=['food','wood','stone','gold'] as const;
 export function shipmentPaymentFingerprint(campaignId:string,issuerId:string,type:'wonder.ship'|'breakthrough.ship',cityId:string,projectId:string,resources:Resources):string {
  const encode=()=>canonicalJSON({campaignId,issuerId,payload:{type,cityId,projectId,resources}});
  // Keep the general encoder's exact behavior for malformed/direct validator inputs.
- if(!resources||Object.keys(resources).length!==4||!['food','wood','stone','gold'].every(k=>Object.hasOwn(Object.getOwnPropertyDescriptor(resources,k)??{},'value')&&typeof resources[k as keyof Resources]==='number'&&Number.isFinite(resources[k as keyof Resources])))return encode();
+ if(!resources||Array.isArray(resources)||Object.keys(resources).length!==4||!paymentResourceKeys.every(k=>{const d=Object.getOwnPropertyDescriptor(resources,k);return d?.enumerable&&Object.hasOwn(d,'value')&&typeof d.value==='number'&&Number.isFinite(d.value);}))return encode();
  const key=JSON.stringify([campaignId,issuerId,type,cityId,projectId,resources.food,resources.wood,resources.stone,resources.gold]);
  const cached=shipmentEncodings.get(key);if(cached!==undefined)return cached;
  const encoded=encode();shipmentEncodings.set(key,encoded);if(shipmentEncodings.size>128)shipmentEncodings.delete(shipmentEncodings.keys().next().value!);return encoded;

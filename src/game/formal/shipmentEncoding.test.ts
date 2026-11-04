@@ -15,4 +15,6 @@ it('does not reuse an encoding after caller mutation or normalize malformed carg
  const check=(resources:Resources)=>expect(shipmentPaymentFingerprint('campaign:a','faction:a','wonder.ship','city:a','project:a',resources)).toBe(encode('campaign:a','faction:a','wonder.ship','city:a','project:a',resources));
  check(cargo);cargo.food++;check(cargo);cargo.gold=-0;check(cargo);
  for(const value of [{...cargo,extra:1},{...cargo,food:undefined},{...cargo,wood:NaN},{food:1,wood:2,stone:3},Object.assign(Object.create(null),cargo)])check(value as Resources);
+ check(Object.assign([],cargo) as unknown as Resources);
+ const hidden={...cargo,extra:1};Object.defineProperty(hidden,'food',{enumerable:false});check(hidden);
 });
