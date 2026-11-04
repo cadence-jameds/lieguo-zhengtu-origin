@@ -1,3 +1,4 @@
+import {runtimeFixtureIdentity,receiveDurableFixture} from './durableIdentityTestSupport';
 import * as maps from '../admissionMap';
 import * as ledger from './commandLedger';
 import 'fake-indexeddb/auto';
@@ -18,8 +19,8 @@ const until=(f:()=>boolean)=>vi.waitFor(()=>expect(f()).toBe(true));
 const done=(id:string)=>messages.some(m=>m.type==='requestDone'&&m.requestId===id);
 async function boot(){
  vi.resetModules();vi.doMock('../admissionMap',()=>maps);vi.doMock('./commandLedger',()=>ledger);
- vi.doMock('../persistence',()=>({hasLegacyCampaign:async()=>false,exportLegacyCampaign:async()=>'',...Object.fromEntries(['acquireWriter','writerContext','receiveCommand','commandStatus','pendingCommands','commandPage','finishCommand','noteCommandFailure','save','restore','importSave','backupList','clearSavedGames','exportStoredSave','readReportPage','readCityIntel','reportStatus','reportAction'].map(k=>[k,(...a:any[])=>(p[k as keyof FormalPersistence] as Function).apply(p,a)])),loadWithOffline:()=>p.loadSave(),startCampaign:(w:FormalWorld)=>p.start(w)}));
- messages=[];view=new PresentationStore();const port={onmessage:null as any,postMessage:(m:any)=>{messages.push(structuredClone(m));if(m.projection)expect(view.receive(structuredClone(m.projection)).accepted).toBe(true);}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',vi.fn());await import('../runtime.worker');send=data=>port.onmessage({data});send({type:'load',requestId:'load'});await until(()=>done('load'));
+ vi.doMock('../persistence',()=>({hasLegacyCampaign:async()=>false,exportLegacyCampaign:async()=>'',...Object.fromEntries(['acquireWriter','writerContext','receiveCommand','commandStatus','queryCommandStatus','pendingCommands','commandPage','finishCommand','noteCommandFailure','save','restore','importSave','backupList','clearSavedGames','exportStoredSave','readReportPage','readCityIntel','reportStatus','reportAction'].map(k=>[k,(...a:any[])=>(p[k as keyof FormalPersistence] as Function).apply(p,a)])),loadWithOffline:()=>p.loadSave(),startCampaign:(w:FormalWorld)=>p.start(w)}));
+ messages=[];view=new PresentationStore();const port={onmessage:null as any,postMessage:(m:any)=>{messages.push(structuredClone(m));if(m.projection)expect(view.receive(structuredClone(m.projection)).accepted).toBe(true);}};vi.stubGlobal('self',port);vi.stubGlobal('setInterval',vi.fn());await import('../runtime.worker');send=data=>port.onmessage({data:runtimeFixtureIdentity(data,messages)});send({type:'load',requestId:'load'});await until(()=>done('load'));
 }
 beforeEach(()=>{p=new FormalPersistence({suffix:'r306-priority-'+crypto.randomUUID()});});
 afterEach(async()=>{await p.db.delete();vi.doUnmock('../persistence');vi.doUnmock('./commandLedger');vi.restoreAllMocks();vi.unstubAllGlobals();});
@@ -62,6 +63,6 @@ it('a Pending read delayed across T2 publication is refreshed before it can over
 
 it('offline intake at safe boundaries stays durable while the entire replay remains private until one T2',async()=>{
  const raw=createFormalFixture();raw.events=Array.from({length:80},(_,i)=>({id:eventId('offline-priority-'+i),type:'fixture.marker',at:i+1,marker:'complete'}));const w=await p.start(raw),stored=await p.db.saves.get('current');if(stored?.kind!=='world')throw Error('missing initial authority');const now=stored.at+1000,expected=advanceOffline(w,stored.at,now),o=order(w,'offline-priority',{type:'city.rename',cityId:w.cities[0].id,name:'離線補算原意'});let boundaries=0,sequence:number|undefined;
- const result=await p.loadWithOffline(now,undefined,{yieldIntervalMs:0,yieldBeforeStart:true,yieldControl:async boundary=>{if(boundary==='start'){const row=await p.receiveCommand(o,captureIntent(w,o));sequence=row.sequence;}else{boundaries++;expect((await p.commandStatus(o.campaignId,o.commandId))!.state).toBe('pending');expect((await p.loadSave()).game!.revision).toBe(w.revision);}}});
- expect(boundaries).toBe(80);expect(result.game!.revision).toBe(w.revision+1);expect(scenarioWorld(result.game!)).toEqual(scenarioWorld(expected.world));expect((await p.receiveCommand(o)).sequence).toBe(sequence);expect((await p.commandStatus(o.campaignId,o.commandId))!.state).toBe('pending');
+ const result=await p.loadWithOffline(now,undefined,{yieldIntervalMs:0,yieldBeforeStart:true,yieldControl:async boundary=>{if(boundary==='start'){const row=await receiveDurableFixture(p,o,captureIntent(w,o));sequence=row.sequence;}else{boundaries++;expect((await p.commandStatus(o.campaignId,o.commandId))!.state).toBe('pending');expect((await p.loadSave()).game!.revision).toBe(w.revision);}}});
+ expect(boundaries).toBe(80);expect(result.game!.revision).toBe(w.revision+1);expect(scenarioWorld(result.game!)).toEqual(scenarioWorld(expected.world));expect((await receiveDurableFixture(p,o)).sequence).toBe(sequence);expect((await p.commandStatus(o.campaignId,o.commandId))!.state).toBe('pending');
 });

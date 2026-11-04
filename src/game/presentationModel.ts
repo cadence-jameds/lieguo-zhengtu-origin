@@ -3,7 +3,7 @@ import type {FormalWorld} from './formal/model';
 /** Presentation is a read model, never a reducer/persistence input. No authority
  * history, scheduler events, AI state, completion log or writable ledger crosses. */
 export type ProjectionIdentity={protocolVersion:2;campaignId:string;branch:number;writerEpoch:number;sessionId:string;projectionSequence:number;revision:number};
-export type PresentationWorld=Omit<FormalWorld,'kind'|'ledger'|'commandReceipts'|'completionReceipts'|'events'|'autonomy'|'fixture'|'combat'|'politics'|'growthTasks'>&{
+export type PresentationWorld=Omit<FormalWorld,'kind'|'commandFacts'|'ledger'|'commandReceipts'|'completionReceipts'|'events'|'autonomy'|'fixture'|'combat'|'politics'|'growthTasks'>&{
  kind:'presentation';presentationVersion:2;projection:ProjectionIdentity;
  nextEventAt:number|null;
  combat?:Omit<NonNullable<FormalWorld['combat']>,'receipts'>;

@@ -18,3 +18,8 @@ it('unmount cancellation suppresses timeout and late worker creation',async()=>{
  const locks={request:(_n:unknown,_o:unknown,callback:()=>Promise<void>)=>{cb=callback;return new Promise(()=>{});}} as unknown as LockManager;
  void withSaveLock(locks,controller.signal,acquired,timeout);controller.abort();await vi.advanceTimersByTimeAsync(8000);await cb();expect(acquired).not.toHaveBeenCalled();expect(timeout).not.toHaveBeenCalled();
 });
+it('uses the same origin-wide writer lock as the previous database namespace',async()=>{
+ const request=vi.fn(async(_name:unknown,_opts:unknown,cb:()=>Promise<void>)=>cb());
+ await withSaveLock({request} as unknown as LockManager,new AbortController().signal,async()=>{},vi.fn());
+ expect(request.mock.calls[0][0]).toBe('lieguo-formal-ledger-v1-writer');
+});

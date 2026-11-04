@@ -1,3 +1,4 @@
+import {receiveDurableFixture} from './formal/durableIdentityTestSupport';
 import 'fake-indexeddb/auto';
 import Dexie from 'dexie';
 import {afterEach,expect,it,vi} from 'vitest';
@@ -25,6 +26,6 @@ it('an acquired writer without a campaign remains empty; metadata is preserved r
  expect(await inspectCampaignStorage()).toBe('empty');expect(await store.db.RuntimeMeta.toArray()).toEqual(before);expect(await store.db.saves.count()).toBe(0);
 });
 it('reset retains terminal Inbox records as protected data, exports them unchanged and never treats player intent as metadata',async()=>{
- const store=new FormalPersistence();stores.push(store.db);await store.acquireWriter();const w=await store.start(createFormalFixture()),o=order(w,'preserved-inbox',{type:'city.rename',cityId:w.cities[0].id,name:'保全原始操作'});await store.receiveCommand(o);await store.clearSavedGames();const before=await store.db.Inbox.toArray();expect(before[0].state).toBe('needs-confirmation');
+ const store=new FormalPersistence();stores.push(store.db);await store.acquireWriter();const w=await store.start(createFormalFixture()),o=order(w,'preserved-inbox',{type:'city.rename',cityId:w.cities[0].id,name:'保全原始操作'});await receiveDurableFixture(store,o);await store.clearSavedGames();const before=await store.db.Inbox.toArray();expect(before[0].state).toBe('needs-confirmation');
  expect(await inspectCampaignStorage()).toBe('stored');const archive=JSON.parse(await exportCampaignArchive());expect(archive.databases[FORMAL_DB_NAME].Inbox).toEqual(before);expect(await store.db.Inbox.toArray()).toEqual(before);
 });

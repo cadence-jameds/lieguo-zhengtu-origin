@@ -1,3 +1,4 @@
+import {receiveDurableFixture} from './durableIdentityTestSupport';
 import 'fake-indexeddb/auto';
 import {expect,it} from 'vitest';
 import {commandId,factionId} from './ids';
@@ -44,7 +45,7 @@ it('synthetic restart, lost notification and competing writer CAS keep exact ind
 it('formal ledger restores applied projection without rewriting the original committed outcome',async()=>{
  const p=new FormalPersistence({suffix:'ledger-blocker-'+crypto.randomUUID()});try{
  const w=await p.start(createFormalFixture()),point=(await p.backupList())[0];const o={commandId:commandId('snapshot-restore'),campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'匯出時已套用'}};
- const row=await p.receiveCommand(o,captureIntent(w,o)),t=submitFormalOrder(w,o);await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});const exported=await p.exportStoredSave('full');await p.restore(point.id);
+ const row=await receiveDurableFixture(p,o,captureIntent(w,o)),t=submitFormalOrder(w,o);await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});const exported=await p.exportStoredSave('full');await p.restore(point.id);
  expect((await p.commandStatus(o.campaignId,o.commandId))?.state).toBe('rolled-back');const imported=await p.importSave(exported);
  expect(imported.commandReceipts.find(r=>r.commandId===o.commandId)?.disposition).toBe('applied');expect((await p.commandStatus(o.campaignId,o.commandId))?.state).toBe('committed');
  // This documents the existing dual-state case. It is NOT a proposed new ledger policy.
@@ -53,9 +54,9 @@ it('formal ledger restores applied projection without rewriting the original com
 it('new portable format carries rejected identities and prevents later execution',async()=>{
  const a=new FormalPersistence({suffix:'ledger-export-a-'+crypto.randomUUID()}),b=new FormalPersistence({suffix:'ledger-export-b-'+crypto.randomUUID()});try{
  const raw=createFormalWorld({campaign:'ledger-export-'+crypto.randomUUID(),seed:90217});raw.cities[0].stock={food:0,wood:0,stone:0,gold:0};const w=await a.start(raw),o={commandId:commandId('original-rejection'),campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'field.upgrade' as const,cityId:w.cities[0].id,slot:0}};
- const row=await a.receiveCommand(o,captureIntent(w,o)),rejected=submitFormalOrder(w,o);expect(rejected.ack?.status).toBe('rejected');await a.finishCommand(row,rejected.ack!,w.revision);const imported=await b.importSave(await a.exportStoredSave('quick'));
+ const row=await receiveDurableFixture(a,o,captureIntent(w,o)),rejected=submitFormalOrder(w,o);expect(rejected.ack?.status).toBe('rejected');await a.finishCommand(row,rejected.ack!,w.revision);const imported=await b.importSave(await a.exportStoredSave('quick'));
  expect((await a.commandStatus(o.campaignId,o.commandId))?.state).toBe('rejected');expect((await b.commandStatus(o.campaignId,o.commandId))?.state).toBe('rejected');expect(imported.commandReceipts).toHaveLength(0);
- const later=advanceFormal(imported,3*3600000);await b.save(later.world,later.reports,imported.revision);const repeat={...o,expectedRevision:later.world.revision,issuedWorldTime:later.world.time};const accepted=await b.receiveCommand(repeat,captureIntent(later.world,repeat));expect(accepted.state).toBe('rejected');expect(submitFormalOrder(later.world,repeat).ack?.status).toBe('rejected');
+ const later=advanceFormal(imported,3*3600000);await b.save(later.world,later.reports,imported.revision);const repeat={...o,expectedRevision:later.world.revision,issuedWorldTime:later.world.time};const accepted=await receiveDurableFixture(b,repeat,captureIntent(later.world,repeat));expect(accepted.state).toBe('rejected');expect(submitFormalOrder(later.world,repeat).ack?.status).toBe('rejected');
  }finally{await a.db.delete();await b.db.delete();}
 });
 

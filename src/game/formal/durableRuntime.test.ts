@@ -1,3 +1,4 @@
+import {runtimeFixtureIdentity,receiveDurableFixture} from './durableIdentityTestSupport';
 import * as projectionMaps from '../admissionMap';
 import * as ledger from './commandLedger';
 import 'fake-indexeddb/auto';
@@ -21,7 +22,7 @@ let projectionBridge:import('./projectionTestSupport').ProjectionTestBridge;
 vi.mock('../worldStream',async(importOriginal)=>{const real=await importOriginal<typeof import('../worldStream')>(),{ProjectionTestBridge}=await import('./projectionTestSupport');return {...real,WorldStream:class extends real.WorldStream{constructor(){const bridge=new ProjectionTestBridge(true);projectionBridge=bridge;super(crypto.randomUUID(),bridge.reader);}}};});
 let store:FormalPersistence,now=0,fail:FailurePoint|undefined,dropAck=false,dropState=false,tick:()=>void;
 let messages:any[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:any)=>void};
-const send=(data:unknown)=>port.onmessage!({data});
+const send=(data:unknown)=>port.onmessage!({data:runtimeFixtureIdentity(data,messages)});
 const until=async(fn:()=>boolean)=>vi.waitFor(()=>expect(fn()).toBe(true),{timeout:15000});
 const done=(id:string)=>messages.some(m=>m.type==='requestDone'&&m.requestId===id);
 const latest=()=>messages.filter(m=>m.type==='state').at(-1)?.world as FormalWorld;
@@ -29,7 +30,7 @@ const ack=(o:FormalOrder)=>messages.filter(m=>m.type==='commandAck'&&m.ack.comma
 async function boot(){
  vi.resetModules();vi.doMock('../admissionMap',()=>projectionMaps);vi.doMock('./commandLedger',()=>ledger);vi.doMock('../persistence',()=>({
   hasLegacyCampaign:async()=>false,exportLegacyCampaign:async()=>'',
-  ...Object.fromEntries(['acquireWriter','writerContext','receiveCommand','commandStatus','pendingCommands','commandPage','finishCommand','noteCommandFailure','loadWithOffline','save','restore','importSave','backupList','clearSavedGames','exportStoredSave','readReportPage','readCityIntel','reportStatus','reportAction'].map(name=>[name,(...args:any[])=>(store[name as keyof FormalPersistence] as Function).apply(store,args)])),
+  ...Object.fromEntries(['acquireWriter','writerContext','receiveCommand','commandStatus','queryCommandStatus','pendingCommands','commandPage','finishCommand','noteCommandFailure','loadWithOffline','save','restore','importSave','backupList','clearSavedGames','exportStoredSave','readReportPage','readCityIntel','reportStatus','reportAction'].map(name=>[name,(...args:any[])=>(store[name as keyof FormalPersistence] as Function).apply(store,args)])),
   loadWithOffline:(progress:Parameters<FormalPersistence['loadWithOffline']>[1])=>store.loadWithOffline(Date.now(),progress),
   startCampaign:(w:FormalWorld)=>store.start(w)
  }));
@@ -44,7 +45,7 @@ it('v2 T1 persists exactly the clicked semantic context; forged writer/session s
  const invalid=order(latest(),'forged-context',{type:'city.rename',cityId:fixtureIds.home,name:'不可偽造'});send({type:'command',order:invalid,...captureIntent(view,invalid),branch:view.projection.branch,projection:{...view.projection,writerEpoch:view.projection.writerEpoch+1},requestId:'forged-context'});await until(()=>done('forged-context'));expect(await store.commandStatus(invalid.campaignId,invalid.commandId)).toBeUndefined();expect(messages.some(m=>m.type==='commandReceiveFailed'&&m.commandId===invalid.commandId)).toBe(true);
 });
 it('real Worker protocol: T1 survives termination before execution, reboot revalidates and commits one effect; Ack loss queries exact T2 result',async()=>{
- const initial=await store.start(createFormalFixture({research:true})),o=contribute(initial,'recovered',50);await store.receiveCommand(o,captureIntent(initial,o));
+ const initial=await store.start(createFormalFixture({research:true})),o=contribute(initial,'recovered',50);await receiveDurableFixture(store,o,captureIntent(initial,o));
  await boot();await until(()=>messages.some(m=>m.type==='commandAck'));expect(ack(o).status).toBe('committed');const next=(await store.loadSave()).game!;expect(next.cities[0].stock.food).toBe(550);expect((await store.commandStatus(o.campaignId,o.commandId))!.state).toBe('committed');
  send({type:'snapshot',stateMode:'patch',requestId:'enable-patch'});await until(()=>done('enable-patch'));dropAck=true;dropState=true;const second=click(next,'lost-ack',{type:'city.rename',cityId:fixtureIds.home,name:'Ack遺失'});await until(()=>done('lost-ack'));expect(ack(second)).toBeUndefined();const durable=await store.commandStatus(second.campaignId,second.commandId);expect(durable!.state).toBe('committed');dropAck=false;dropState=false;
  send({type:'commandQuery',campaignId:second.campaignId,commandId:second.commandId,requestId:'query'});await until(()=>done('query'));expect(ack(second)).toEqual(durable!.ack);expect(latest().cities[0].name).toBe('Ack遺失');
@@ -80,13 +81,13 @@ it('99 AI at 25X accepts T1 while an AI replay is still private and serializes f
  const loaded=(await store.loadSave()).game!;expect(new Set(loaded.commandReceipts.map(r=>r.commandId)).size).toBe(loaded.commandReceipts.length);
 },30000);
 it('expired pending becomes terminal confirmation on reboot and a stale row never revives an ended campaign',async()=>{
- const active=isolatedAutonomyFixture(battlefield());active.cities[0].military!.units={};active.cities[1].military!.units={militia:1000};const army=dispatch(active,'conquest',{militia:1000},1,0).world;const defeat=advanceFormal(army,army.armies[0].arrivalAt!+1000).world;await store.start(defeat);await boot();const w=latest(),p=rebirthCandidates(w)[0],rebirth=order(w,'old-rebirth',{type:'player.rebirth',cityId:w.cities[0].id,...p,name:'不可自動復國'});const row=await store.receiveCommand(rebirth,captureIntent(w,rebirth));await store.db.Inbox.update(row.sequence!,{deadline:Date.now()-1});
+ const active=isolatedAutonomyFixture(battlefield());active.cities[0].military!.units={};active.cities[1].military!.units={militia:1000};const army=dispatch(active,'conquest',{militia:1000},1,0).world;const defeat=advanceFormal(army,army.armies[0].arrivalAt!+1000).world;await store.start(defeat);await boot();const w=latest(),p=rebirthCandidates(w)[0],rebirth=order(w,'old-rebirth',{type:'player.rebirth',cityId:w.cities[0].id,...p,name:'不可自動復國'});const row=await receiveDurableFixture(store,rebirth,captureIntent(w,rebirth));await store.db.Inbox.update(row.sequence!,{deadline:Date.now()-1});
  // End first; the old rebirth then runs from its unchanged stored envelope.
  const end=click(w,'end',{type:'player.end',cityId:w.cities[0].id});await until(()=>done('end'));expect(ack(end).status).toBe('committed');
  send({type:'command',order:rebirth,...captureIntent(w,rebirth),requestId:'old-rebirth'});await until(()=>done('old-rebirth'));expect(ack(rebirth).status).toBe('rejected');const ended=(await store.loadSave()).game!;expect(ended.extinction!.defeat!.ended).toBe(true);expect(ended.events).toEqual(w.events);expect(ended.time).toBe(w.time);
 });
 it('expired durable pending is persisted as Needs Confirmation on reboot without executing the original action',async()=>{
- const w=await store.start(createFormalFixture()),o=order(w,'expired-before-reboot',{type:'city.rename',cityId:fixtureIds.home,name:'不得逾時自動執行'}),row=await store.receiveCommand(o,captureIntent(w,o));await store.db.Inbox.update(row.sequence!,{deadline:Date.now()-1});await boot();await until(()=>messages.some(m=>m.type==='commandAck'));
+ const w=await store.start(createFormalFixture()),o=order(w,'expired-before-reboot',{type:'city.rename',cityId:fixtureIds.home,name:'不得逾時自動執行'}),row=await receiveDurableFixture(store,o,captureIntent(w,o));await store.db.Inbox.update(row.sequence!,{deadline:Date.now()-1});await boot();await until(()=>messages.some(m=>m.type==='commandAck'));
  expect(ack(o).status).toBe('rejected');expect((await store.commandStatus(o.campaignId,o.commandId))!.state).toBe('needs-confirmation');expect((await store.loadSave()).game!.cities[0].name).toBe(w.cities[0].name);expect((await store.loadSave()).game!.commandReceipts).toHaveLength(0);
 });
 it('paused same-time remainder is never caught up by rejected rebirth; legal rebirth preserves it until the resumed clock advances',async()=>{

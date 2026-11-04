@@ -7,6 +7,7 @@ export type GovernanceBase={revision:number;fingerprint:string};
 /** Compare only intent-relevant state; receipts prevent an ABA setting write. */
 export function governanceBase(world:WorldRead,cityId:string):GovernanceBase{
  if(world.kind==='presentation'){const fingerprint=world.derived.governance[cityId];if(fingerprint===undefined)throw Error('治理前提尚未同步，請重新整理畫面。');return {revision:world.revision,fingerprint};}
+ if(world.commandFacts)return governanceIntentBase(world,cityId,world.commandFacts.governance[cityId]??null);
  let lastWrite:unknown=null,lastRevision=-1;
  for(const r of commandHistory(world)){if(r.disposition!=='applied'||r.committedRevision<=lastRevision)continue;try{const p=JSON.parse(r.fingerprint).payload;if(p?.type==='governance.set'&&p.cityId===cityId){lastWrite=[r.commandId,r.committedRevision];lastRevision=r.committedRevision;}}catch{lastWrite=[r.commandId,r.committedRevision,r.fingerprint];lastRevision=r.committedRevision;}}
  return governanceIntentBase(world,cityId,lastWrite);
@@ -34,6 +35,7 @@ export function governanceAfterCatchup(before:FormalWorld,after:FormalWorld,orde
  if(!a||!b||a.ownerFactionId!==order.issuerId||b.ownerFactionId!==order.issuerId||!a.economy||!b.economy||buildingLevel(a,'townhall')!==buildingLevel(b,'townhall'))return order;
  const config=(w:FormalWorld)=>{const g=w.governors?.find(g=>g.cityId===cityId);return g?[g.ownerFactionId,g.enabled,g.policy,g.budget,g.reserve]:null;};
  if(JSON.stringify(config(before))!==JSON.stringify(config(after)))return order;
+ if(before.commandFacts&&after.commandFacts){if(JSON.stringify(before.commandFacts.governance[cityId]??null)!==JSON.stringify(after.commandFacts.governance[cityId]??null))return order;return {...order,expectedRevision:after.revision,issuedWorldTime:after.time};}
  const prior=new Set(commandHistory(before).map(r=>r.commandId));
  for(const receipt of commandHistory(after)){
   if(receipt.commandId===order.commandId)return order;

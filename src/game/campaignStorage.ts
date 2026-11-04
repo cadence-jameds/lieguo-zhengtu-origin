@@ -2,7 +2,7 @@ import {FORMAL_DB_NAME,RETIRED_FORMAL_DB_NAME} from './formal/versions';
 import {metadataSchema} from './formal/schema';
 export type StoredCampaignStatus='empty'|'stored'|'incompatible'|'historical';
 // Retired namespaces are read-only archives; the new format never migrates them.
-const historicalNames=new Set([RETIRED_FORMAL_DB_NAME,'lieguo-formal-stage2-schema1']);
+const historicalNames=new Set(['lieguo-formal-ledger-v1',RETIRED_FORMAL_DB_NAME,'lieguo-formal-stage2-schema1']);
 const databaseNames=()=>[...new Set([FORMAL_DB_NAME,...historicalNames])];
 function storageDeadline<T>(operation:Promise<T>):Promise<T>{let timer:ReturnType<typeof setTimeout>|undefined;return Promise.race([operation,new Promise<never>((_resolve,reject)=>{timer=setTimeout(()=>reject(Error('讀取本機資料逾時，原始資料保留。')),8000);})]).finally(()=>clearTimeout(timer));}
 type StoredRow={kind?:string;data?:{metadata?:Record<string,unknown>}};
@@ -39,7 +39,7 @@ export async function inspectCampaignStorage():Promise<StoredCampaignStatus>{
    if(name===String(FORMAL_DB_NAME)&&['RuntimeMeta','StorageMeta'].includes(table.name))continue;
    if(await table.count())hasRows=true;
   }
-  if(historicalNames.has(name)&&name!==String(FORMAL_DB_NAME)&&String(FORMAL_DB_NAME)==='lieguo-formal-ledger-v1'){
+  if(historicalNames.has(name)&&name!==String(FORMAL_DB_NAME)){
    historical ||= hasRows;return;
   }
   stored ||= hasRows;
