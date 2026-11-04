@@ -123,11 +123,11 @@ it('export refuses a valid older snapshot substituted beneath a newer Authority 
  await expect(p.exportStoredSave('quick')).rejects.toThrow('匯出世界與權威版本不一致');expect(await allRows(p)).toEqual(before);
 });
 it('T2 retention reads identity keys without cloning payloads and preserves Pending and authoritative results',async()=>{
- const p=store(),queries:boolean[]=[];p.db.use({stack:'dbcore',name:'observe-retention-query',create(down){return {...down,table(name){const table=down.table(name);if(name!=='LedgerIdentity')return table;return {...table,query(req){queries.push(req.values);return table.query(req);}};}};}});
+ const p=store(),queries:(boolean|undefined)[]=[];p.db.use({stack:'dbcore',name:'observe-retention-query',create(down){return {...down,table(name){const table=down.table(name);if(name!=='LedgerIdentity')return table;return {...table,query(req){queries.push(req.values);return table.query(req);}};}};}});
  await p.acquireWriter();const w=await p.start(createFormalFixture()),o=await order(p,w,1),row=await p.receiveCommand(o),later=await order(p,w,2);await p.receiveCommand(later);
  await p.db.table('LedgerIdentity').put({campaignId:'campaign:unretained',commandId:'command:unretained',original:{payload:'not needed for retention'}});
  queries.length=0;const t=submitFormalOrder(w,o);await p.save(t.world,[],w.revision,undefined,{row,ack:t.ack!});
- expect(queries.length).toBeGreaterThan(0);expect(queries.every(values=>!values)).toBe(true);
+ expect(queries.length).toBeGreaterThan(0);expect(queries.every(values=>values===false)).toBe(true);
  expect(await p.db.table('LedgerIdentity').get(['campaign:unretained','command:unretained'])).toBeUndefined();
  expect((await p.receiveCommand(o)).ack).toEqual(t.ack);expect((await p.commandStatus(later.campaignId,later.commandId))?.state).toBe('pending');
 });
