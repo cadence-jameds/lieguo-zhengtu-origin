@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79",
+  "implementationCommit": "8f15e0972dae62fee246b1ccf68a12ab42c64af0",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -15,6 +15,98 @@
     ".github/workflows/deploy-pages.yml": {
       "before": "9151a015b0078782570bed390a3dd73c095e11685801db22c45aee8cbea4057f",
       "after": "73ce646ce395af55bbbea36c72effc57fdfc5009e77350d1206cfdaaaac9b4b6"
+    },
+    "docs/validation/b10-release-unblock/ANDROID-ISOLATED.md": {
+      "before": null,
+      "after": "2a142023282c11f3f1093a4f7e9425efce56f5dc9749c48affa4d03df8c12735"
+    },
+    "docs/validation/b10-release-unblock/BLOCKERS.md": {
+      "before": null,
+      "after": "93fa6b4931c83ae7369b27489a732cba68392fed316007c537360ab5b1ffdd0d"
+    },
+    "docs/validation/b10-release-unblock/CONTRACT.md": {
+      "before": null,
+      "after": "bcaedd8d9ac84ca7783ad0d63953de7e0793dd947f8793aee49639e97ffa1f44"
+    },
+    "docs/validation/b10-release-unblock/FAULT-MATRIX.md": {
+      "before": null,
+      "after": "f95cf785c89a936abb67f2e68f2d0c73de5e5b93c5f67bd8714c15377fb5f455"
+    },
+    "docs/validation/b10-release-unblock/MERGE-AND-DEPLOY.md": {
+      "before": null,
+      "after": "2b484edb778beb388ab0b160e9868547af955f4fa61b7d9c44a58461fc0f8909"
+    },
+    "docs/validation/b10-release-unblock/PERFORMANCE.md": {
+      "before": null,
+      "after": "efd98ac246c570ae30e6306f81f86a21bf3107ac9b5991eaad6815f92731c6f1"
+    },
+    "docs/validation/b10-release-unblock/README.md": {
+      "before": null,
+      "after": "a4b5c11190d3daa28ba42e2508cbbbdad7f4c080f6c7d9a1196f5e994be71630"
+    },
+    "docs/validation/b10-release-unblock/REFERENCE-MATRIX.md": {
+      "before": null,
+      "after": "5c099d9068da6fc65458cea5e7af1dd6607a57a7c3fa7ec09133aafdda91679e"
+    },
+    "docs/validation/b10-release-unblock/REPRODUCTION.md": {
+      "before": null,
+      "after": "64cf98d34ce86d83be7bb3f8624b558a33d90a8b44742e81364bbeda8921520d"
+    },
+    "docs/validation/b10-release-unblock/SERVICE-WORKER.md": {
+      "before": null,
+      "after": "c0dd422eae160b04f1358ec507e87bbeae4068e5807d5ea04f7efb53d0232e63"
+    },
+    "docs/validation/b10-release-unblock/SOURCE.md": {
+      "before": null,
+      "after": "3f46259003c752bedc5ec363c54c97a9d226a7c7c57de554234f81e4fc166317"
+    },
+    "docs/validation/b10-release-unblock/bundle-validation-worker.mjs": {
+      "before": null,
+      "after": "6532d7e01761d10ae2e59e133bd8331a2cd180c7d40a390793d5bac2f27b7dce"
+    },
+    "docs/validation/b10-release-unblock/legacy-upgrade.mjs": {
+      "before": null,
+      "after": "3bfaaad122bd5dddcd3d3d8600d74124c117877455b7bf156e28d742e0ab2586"
+    },
+    "docs/validation/b10-release-unblock/measurements.json": {
+      "before": null,
+      "after": "4c4f8d0b77f27d0b65c353f404a6fd091cb8c106bf2a7a4be08eaf4bf1d6c741"
+    },
+    "docs/validation/b10-release-unblock/merge-simulation.json": {
+      "before": null,
+      "after": "99b283126570bdfac4b0afd3d0db4e8401fad5187d379795785e092d69c04e52"
+    },
+    "docs/validation/b10-release-unblock/native-diagnostics.mjs": {
+      "before": null,
+      "after": "07dd7e36fe7cadd8d502d99a5c2c9d5882c150fd621deb9302f08ee67c0f3dbf"
+    },
+    "docs/validation/b10-release-unblock/persistence-native.mjs": {
+      "before": null,
+      "after": "c4563faad597c14d69a84be5ee26eaf96cc42b9afae1b91bc22855a46c287b66"
+    },
+    "docs/validation/b10-release-unblock/persistence-native.worker.ts": {
+      "before": null,
+      "after": "6a5efa42c4c32d6a1fb092876d6295435eb7958e78a976772693aadc6b92af16"
+    },
+    "docs/validation/b10-release-unblock/prepare-production-refs.mjs": {
+      "before": null,
+      "after": "4347c43c1af204c9d1316130e64edfa04061927dd6043c16bee68c1a36e70e91"
+    },
+    "docs/validation/b10-release-unblock/production-cold.mjs": {
+      "before": null,
+      "after": "ff53e377c10601c992a17378e8bfa9795edec430fca37b364169db4635f1b7cf"
+    },
+    "docs/validation/b10-release-unblock/production-soak.mjs": {
+      "before": null,
+      "after": "7119c94e1efb4b86e935c1f9082840391dd56421ea042b3e78cbddce622a77e2"
+    },
+    "docs/validation/b10-release-unblock/production-sw-successor.mjs": {
+      "before": null,
+      "after": "da5ded947abda1e1cab31e4f898146721f2e1579e476af14eda70697b785a723"
+    },
+    "docs/validation/b10-release-unblock/production-sw-trace.mjs": {
+      "before": null,
+      "after": "6f92445d1269fb36dd504ee3ddcb4b8c6a3d8a7efd8820a1f914b84a88024883"
     },
     "releases/notes/b10-release-unblock.json": {
       "before": null,
@@ -78,7 +170,7 @@
     },
     "src/game/formal/boundedPersistence.test.ts": {
       "before": null,
-      "after": "06ac3dc356baecb2baa780987bfaf575920e494fbbcd13519fefa59d41852a22"
+      "after": "0882db2eb3371d73c03447ae551dc955099f1dd665dfeacf6379cccd27c5067c"
     },
     "src/game/formal/breakthroughRuntimeB92.test.ts": {
       "before": "56bb4e3b340949ef99b067c516ca5d39b5cd935c7cf2ad1cfa69d00761172116",
@@ -86,7 +178,7 @@
     },
     "src/game/formal/breakthroughSchema.ts": {
       "before": "eab9abc88ff69d6b72b9597487fe6d462998f25aa94d784f9fdb00d88e6bfdf2",
-      "after": "202a88b61e6000d0a175c88f9bb2fec4016f221ccae93893d43ef8c699886139"
+      "after": "4d3471aba7a0d6eec814bf1b15e39e6ec2bc3bdce2253225157881b05fb6bf6a"
     },
     "src/game/formal/buildingDetailData.ts": {
       "before": "53e4c64b0728650329604980afa04b2ddddc9317d637962d7daab106518ff866",
@@ -110,7 +202,7 @@
     },
     "src/game/formal/commandEvidence.ts": {
       "before": null,
-      "after": "b39f89bdfa56958821760a0eb7d4037aa62e3d5ea22d695ab276aec0417ea2aa"
+      "after": "081d87422738f4034e1562686cdbf0370ccfcb6af79e0c597acd894bd7f7ffa6"
     },
     "src/game/formal/commandLedger.ts": {
       "before": "462286be18725bb2b1547d039e9a16482623ab7d20260c7a92ca028623e10d13",
@@ -240,6 +332,10 @@
       "before": "bdcc668d955bb81b9f5b1b8eeff6bc548c96a74ed8ac402bfe0d81003b519f95",
       "after": "022deb7dbb4fbb579283bdc6ab2d8752ef4ded3286291bce45ba39ff42b80735"
     },
+    "src/game/formal/shipmentEncoding.test.ts": {
+      "before": null,
+      "after": "61ebd6582e54285cea7c0c78209e8e7e215949c92c33e5e61a7123f912693e01"
+    },
     "src/game/formal/versions.ts": {
       "before": "3d97d68cae03874cff7a1c27bd1d28bdf4ffc391db882d9b8bf95ab2a1acd688",
       "after": "bc838fdfaf3717cc591227fc58a1a6c9ce14e8750e55ecee5d722019ef1677cc"
@@ -254,7 +350,7 @@
     },
     "src/game/formal/wonderSchema.ts": {
       "before": "4fc3d6af7537faf4d253eef1152b2be0fc1a0350626dea20fba72dc64884c1b4",
-      "after": "5bab577c86e5cb2f7763ca1168fd675156200e1c715baaa775dfcf36b42724cf"
+      "after": "724886f7f4ca54457ab7ef980576ad78339b6622ae4f675bd4a38042e06b2b29"
     },
     "src/game/governanceAdmission.ts": {
       "before": "b6dbe6e5d15f959e211fc29732a79fe9798a8bcd7f8d58b22f32489dc3f9fcfb",
@@ -270,7 +366,7 @@
     },
     "src/game/persistence.ts": {
       "before": "174194f58cd18b9f559067604274e3a5ba193e8f9da5e760acdcccdc3b0f74f0",
-      "after": "cc15c9adaeeebadfeab61ca02fadeba6bb1bd72c450c9d77e943356922c40e8d"
+      "after": "3f1a93cd69b194dc371498ed75e29cd1c5cd8ab20407fdc4e951f598b9e4a7d9"
     },
     "src/game/presentation/CommandInbox.tsx": {
       "before": "2a132aeac917dd1e27d073b091cbbb9153057d3f9c3dea6eabdf885add6df93b",
