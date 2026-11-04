@@ -130,6 +130,12 @@ const worldSchema=worldValueSchema.superRefine((raw,c)=>{
  if(w.ledger){try{const s=resolveLedger(w.ledger);if(s.manifest.campaignId!==w.campaignId||s.manifest.worldRevision>w.revision)throw Error('帳本與世界版本不符');bindLedger(w as FormalWorld,s,w.ledger.pending,w.ledger.outcomes??[]);}catch(e){c.addIssue({code:'custom',message:String(e)});return;}}else if(!w.commandReceipts){c.addIssue({code:'custom',message:'Missing command history'});return;}
  const fail=(message:string)=>c.addIssue({code:z.ZodIssueCode.custom,message});
  if(w.commandFacts){const facts=w.commandFacts;if(facts.foregroundRevision>w.revision)fail('Foreground evidence beyond world revision');for(const [id,fact]of Object.entries(facts.evidence))if(id!==fact.commandId||fact.committedRevision>w.revision||!w.factions.some(f=>f.id===fact.issuerId))fail('Domain provenance identity invalid');for(const [id,reservation]of Object.entries(facts.replayReservations??{})){const suffix=/^command:ai-(.+)-[0-9]+$/.exec(id)?.[1],event=w.events.find(e=>e.id.slice(6)===suffix);if(!event||!reservation.receipt&&!reservation.result||reservation.receipt&&(reservation.receipt.commandId!==id||reservation.receipt.disposition!=='rolled-back')||reservation.result&&(reservation.result.commandId!==id||reservation.result.state==='committed'))fail('Recovery replay reservation invalid');}}
+ if(w.commandFacts){const f=w.commandFacts;
+  for(const group of [f.origins,f.minimumOrigins])for(const [issuer,id]of Object.entries(group))if(f.evidence[id]?.issuerId!==issuer)fail('Evacuation source evidence invalid');
+  for(const id of [f.fallback,f.minimumFallback])if(id&&!f.evidence[id])fail('Fallback source evidence missing');
+  for(const group of [f.governance,f.minimumGovernance])for(const [city,stamp]of Object.entries(group)){const fact=f.evidence[stamp[0]];if(!w.cities.some(c=>c.id===city)||!fact||fact.payload.type!=='governance.set'||fact.payload.cityId!==city||fact.committedRevision!==stamp[1]||stamp[1]>w.revision)fail('Governance ABA evidence invalid');}
+  if(Object.keys(f.evidence).length>f.effects)fail('Domain effect count inconsistent');
+ }
  // Retain any matching applied issuer, including malformed duplicate IDs, just as the old .some checks did.
  const appliedReceipts=new Map<CommandId,Set<FactionId>>();
  for(const r of (w.ledger?pendingHistory(w as FormalWorld):commandHistory(w as FormalWorld)))if(r.disposition==='applied'){
