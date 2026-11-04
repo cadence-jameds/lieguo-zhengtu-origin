@@ -103,3 +103,11 @@ it('an imported snapshot with an expired receipt does not invent a rolled-back r
  imported.ledger!.pending.push(...receipts);imported.revision++;await source.save(imported,[],imported.revision-1);const beforeName=w.cities[0].name;
  const restored=await p.importSave(await source.exportStoredSave('quick'));expect(restored.cities[0].name).toBe(beforeName);expect(worldLedger(restored).result(o.commandId)).toBeUndefined();expect(await p.queryCommandStatus(o.campaignId,o.commandId)).toEqual({availability:'retired'});await expect(p.receiveCommand(o)).rejects.toThrow(RetiredCommand);
 });
+it('Quick and Full export refuse missing signed Recovery references instead of silently dropping them',async()=>{
+ const p=store();await p.acquireWriter();await p.start(createFormalFixture());const point=(await p.backupList())[0];await p.db.backups.delete(point.id);const before=await allRows(p);
+ for(const mode of ['quick','full'] as const)await expect(p.exportStoredSave(mode)).rejects.toThrow('權威回復點遺失');expect(await allRows(p)).toEqual(before);
+});
+it('export refuses a valid older snapshot substituted beneath a newer Authority binding',async()=>{
+ const p=store();await p.acquireWriter();const w=await p.start(createFormalFixture()),old=await p.db.saves.get('current'),o=await order(p,w,1),row=await p.receiveCommand(o),t=submitFormalOrder(w,o);await p.save(t.world,[],w.revision,undefined,{row,ack:t.ack!});await p.db.saves.put(old!);const before=await allRows(p);
+ await expect(p.exportStoredSave('quick')).rejects.toThrow('匯出世界與權威版本不一致');expect(await allRows(p)).toEqual(before);
+});
