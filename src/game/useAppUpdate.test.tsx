@@ -383,3 +383,7 @@ it('an install rejection is observed when installing is cleared before its redun
  await act(async()=>{(registration as any).installing=null;(pending as any).state='redundant';pending.dispatchEvent(new Event('statechange'));await done;});
  expect(updates.phase).toBe('failed');expect(updates.text).toContain('本次尚未執行保存');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();expect(activations(pending)).toHaveLength(0);
 });
+it('captures an installer that becomes redundant before registration.update resolves',async()=>{
+ oldActive();await mount();const rejected=candidate('installing');vi.mocked(registration.update).mockImplementationOnce(async()=>{(registration as any).installing=rejected;registration.dispatchEvent(new Event('updatefound'));(registration as any).installing=null;(rejected as any).state='redundant';rejected.dispatchEvent(new Event('statechange'));return registration;});
+ await act(async()=>updates.update());expect(updates.phase).toBe('failed');expect(save).not.toHaveBeenCalled();expect(replace).not.toHaveBeenCalled();expect(activations(rejected)).toHaveLength(0);
+});
