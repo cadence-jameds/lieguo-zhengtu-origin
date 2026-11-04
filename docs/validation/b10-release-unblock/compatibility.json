@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "fc4e3137f93e253ca6d050769159f8de13312224",
+  "implementationCommit": "b039e8e206ff57bc5aebf493221fd1aa9ad29528",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -398,11 +398,11 @@
     },
     "src/game/serviceWorkerRelease.test.ts": {
       "before": null,
-      "after": "f1dee983cd0333b2bbab5718a4c83fc3a18ff7c41224449d7dd993eb48e7a3d5"
+      "after": "8a079416b2a46d06c28b9408ed68e345f5fcf931cb6dbbf7d746a6879d781e55"
     },
     "src/game/serviceWorkerRelease.ts": {
       "before": null,
-      "after": "c77c35f911185afcfb9c044ba84880f1032c825ce177fc7882b8fd8fd93f1039"
+      "after": "8c2055c2d6289c9fdea4848b6986b076e7921bd8e9fb71b6d8c194c7f9761da4"
     },
     "src/game/useAppUpdate.test.tsx": {
       "before": "87a6b7abf95a81d4726d578fec6fcc1f03240242c3040b6a57253c1f3dbec519",
