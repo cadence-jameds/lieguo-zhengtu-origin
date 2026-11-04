@@ -46,7 +46,7 @@ export function domainReceipt(w:FormalWorld,id:string):CommandReceipt|undefined{
  return evidenceReceipt(w.campaignId,fact);
 }
 export function domainReceiptIndex(w:FormalWorld){return {get:(id:string)=>domainReceipt(w,id),has:(id:string)=>!!domainReceipt(w,id)};}
-export function commandEffectCount(w:FormalWorld){return w.commandFacts?.effects??w.commandReceipts.length;}
+export function commandEffectCount(w:FormalWorld){return ensureCommandFacts(w).effects;}
 export function pruneCommandEvidence(w:FormalWorld){
  const facts=ensureCommandFacts(w);if(facts.replayReservations){const events=new Set(w.events.map(e=>e.id.slice(6)));for(const id of Object.keys(facts.replayReservations)){const event=/^command:ai-(.+)-[0-9]+$/.exec(id)?.[1];if(!event||!events.has(event))delete facts.replayReservations[id];}if(!Object.keys(facts.replayReservations).length)delete facts.replayReservations;}
  const needed=new Set<string>([...Object.values(facts.governance).map(stamp=>stamp[0]),...Object.values(facts.minimumGovernance).map(stamp=>stamp[0]),...Object.values(facts.origins),...Object.values(facts.minimumOrigins),...(facts.fallback?[facts.fallback]:[]),...(facts.minimumFallback?[facts.minimumFallback]:[])]);

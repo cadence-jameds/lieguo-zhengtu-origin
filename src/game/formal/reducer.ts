@@ -87,7 +87,7 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
 /** These three handlers, lazy settlement and queue promotion write only this city, sequences and political cleanup. */
 function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
- const w={...current,...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
+ const w={...current,...(current.commandFacts?{commandFacts:structuredClone(current.commandFacts)}:{}),...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
  copyHistory(current,w,true);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
