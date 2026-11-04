@@ -57,10 +57,14 @@ export function pruneCommandEvidence(w:FormalWorld,persist=false){
  const facts=ensureCommandFacts(w);if(facts.replayReservations){const events=new Set(w.events.map(e=>e.id.slice(6)));for(const id of Object.keys(facts.replayReservations)){const event=/^command:ai-(.+)-[0-9]+$/.exec(id)?.[1];if(!event||!events.has(event))delete facts.replayReservations[id];}if(!Object.keys(facts.replayReservations).length)delete facts.replayReservations;}
  const stableSources=[...Object.values(facts.governance).map(stamp=>stamp[0]),...Object.values(facts.minimumGovernance).map(stamp=>stamp[0]),...Object.values(facts.origins),...Object.values(facts.minimumOrigins),...(facts.fallback?[facts.fallback]:[]),...(facts.minimumFallback?[facts.minimumFallback]:[])];
  const needed=new Set<string>(stableSources);
- const visit=(v:unknown)=>{if(typeof v==='string'){if(v.startsWith('command:'))needed.add(v);}else if(Array.isArray(v)){for(const x of v)visit(x);}else if(v&&typeof v==='object')for(const [k,x]of Object.entries(v))if(!['ledger','commandReceipts','commandFacts'].includes(k))visit(x);};visit(w);
+ const visit=(v:unknown)=>{if(typeof v==='string'){if(v.startsWith('command:'))needed.add(v);}else if(Array.isArray(v)){for(const x of v)visit(x);}else if(v&&typeof v==='object')for(const [k,x]of Object.entries(v))if(!['ledger','commandReceipts','commandFacts'].includes(k))visit(x);};
  // Raw engineering worlds still hold every receipt. Avoid mirroring thousands
  // of live domain proofs twice during pure reducer replay. Persistence captures
  // all referenced proofs BEFORE the bounded transport window replaces history.
+ // Raw pure replay selects only stableSources below; collecting every world
+ // reference there is unused work. Persistence and bounded worlds still collect
+ // the complete live source graph before any evidence/history can be retired.
+ if(persist||w.ledger)visit(w);
  const selected=persist||w.ledger?needed:new Set(stableSources),raw=persist&&!w.ledger?new Map<string,CommandReceipt>(w.commandReceipts.map(r=>[r.commandId,r])):undefined;
  const retained:Record<string,CommandEvidence>={};for(const id of selected){const fact=facts.evidence[id]??((persist||w.ledger)?(()=>{const r=raw?.get(id)??findReceipt(w,id);return r&&evidence(r);})():undefined);if(fact)retained[id]=fact;}facts.evidence=retained;
  const cities=new Set(w.cities.map(c=>c.id));for(const city of Object.keys(facts.governance))if(!cities.has(city as typeof w.cities[number]['id'])){delete facts.governance[city];delete facts.minimumGovernance[city];}
