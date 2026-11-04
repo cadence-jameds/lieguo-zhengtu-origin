@@ -67,7 +67,13 @@ export class FormalDatabase extends Dexie {
  }
 }
 function reconcileReceipts(target:FormalWorld,prior:readonly CommandReceipt[],retireMissing=false,retired=new Set<string>()):CommandReceipt[]{
- const priorIds=new Set(prior.map(r=>r.commandId)),entries=new Map(commandHistory(target).filter(r=>!retireMissing||priorIds.has(r.commandId)).map(r=>[r.commandId,r]));
+ const priorIds=new Set(prior.map(r=>r.commandId)),source=commandHistory(target);
+ // A verified portable snapshot can still carry an outcome already retired in
+ // this receiver's newer window. Its imported terminal Inbox must retire with
+ // that deliberately excluded receipt, rather than resurrecting an Original
+ // Result with no matching receipt. The snapshot's world effects are unchanged.
+ if(retireMissing)for(const r of source)if(!priorIds.has(r.commandId))retired.add(r.commandId);
+ const entries=new Map(source.filter(r=>!retireMissing||priorIds.has(r.commandId)).map(r=>[r.commandId,r]));
  for(const old of prior){const chosen=entries.get(old.commandId);
   if(chosen&&(chosen.issuerId!==old.issuerId||chosen.fingerprint!==old.fingerprint))throw new Error('CommandId conflict in imported authority.');
   if(!chosen){

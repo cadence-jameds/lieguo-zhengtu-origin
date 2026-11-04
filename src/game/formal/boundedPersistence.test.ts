@@ -61,6 +61,17 @@ it('same identity with another payload or issuer is rejected before the intake w
  await expect(p.receiveCommand({...o,payload:{...o.payload,type:'city.rename',cityId:w.cities[0].id,name:'不同意圖'}})).rejects.toThrow('CommandId');
  await expect(p.receiveCommand({...o,issuerId:w.factions[1].id})).rejects.toThrow('CommandId');expect(await allRows(p)).toEqual(before);
 });
+it('import retires a verified older terminal Inbox with its expired receipt after Recovery adds a confirmation result',async()=>{
+ const p=store();await p.acquireWriter();let w=await p.start(createFormalFixture());const first=await order(p,w,1),row=await p.receiveCommand(first),t=submitFormalOrder(w,first);w=await p.save(t.world,[],w.revision,undefined,{row,ack:t.ack!});
+ // The original real T1/T2 outcome is the oldest entry in a full foreground
+ // window. The additional legal rolled-back rows carry no world effects.
+ const extra=Array.from({length:1023},(_,i)=>({commandId:('command:window-'+i) as FormalOrder['commandId'],issuerId:w.playerFactionId,fingerprint:canonicalJSON({campaignId:w.campaignId,issuerId:w.playerFactionId,payload:{type:'city.rename',cityId:w.cities[0].id,name:w.cities[0].name}}),committedRevision:w.revision,disposition:'rolled-back' as const}));
+ w.ledger!.pending.push(...extra);w.revision++;w=await p.save(w,[],w.revision-1);expect(worldLedger(w).count).toBe(1024);expect((await p.receiveCommand(first)).ack).toEqual(t.ack);
+ const pending=await order(p,w,2000);await p.receiveCommand(pending);const portable=await p.exportStoredSave('quick'),point=(await p.backupList())[0];await p.restore(point.id);
+ expect((await p.queryCommandStatus(first.campaignId,first.commandId)).availability).toBe('retired');expect((await p.commandStatus(pending.campaignId,pending.commandId))?.state).toBe('needs-confirmation');
+ const imported=await p.importSave(portable);expect(imported.cities[0].name).toBe(w.cities[0].name);expect((await p.queryCommandStatus(first.campaignId,first.commandId)).availability).toBe('retired');await expect(p.receiveCommand(first)).rejects.toThrow(RetiredCommand);
+ expect((await p.commandStatus(pending.campaignId,pending.commandId))?.state).toBe('needs-confirmation');expect(worldLedger(imported).result(first.commandId)).toBeUndefined();
+});
 it('checksum corruption in the replay watermark fails closed and preserves raw rows',async()=>{
  const p=store();await p.acquireWriter();const w=await p.start(createFormalFixture()),o=await order(p,w,1);await p.receiveCommand(o);
  const epoch=(await p.writerContext()).commandEpoch!;const meta=(await p.db.RuntimeMeta.get('runtime'))!;meta.fence!.acceptedThrough=0;await p.db.RuntimeMeta.put(meta);const before=await allRows(p);
