@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "8f15e0972dae62fee246b1ccf68a12ab42c64af0",
+  "implementationCommit": "0caafdd160dd0a92a4272b8470a87be9e2cbe478",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -170,7 +170,7 @@
     },
     "src/game/formal/boundedPersistence.test.ts": {
       "before": null,
-      "after": "0882db2eb3371d73c03447ae551dc955099f1dd665dfeacf6379cccd27c5067c"
+      "after": "a1dfe820a6527f36590ca67f786e79f8ba1852c87dc2e68814c06acfb72c2909"
     },
     "src/game/formal/breakthroughRuntimeB92.test.ts": {
       "before": "56bb4e3b340949ef99b067c516ca5d39b5cd935c7cf2ad1cfa69d00761172116",
