@@ -1,3 +1,4 @@
+import {receiveDurableFixture} from './formal/durableIdentityTestSupport';
 import {prepareAdmissionMap} from './admissionMap';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it,vi} from 'vitest';
@@ -40,7 +41,7 @@ it('missing base, bad campaign/revision/epoch/protocol/entity versions reject at
  expect(new PresentationStore().receive(patch).accepted).toBe(false);const store=new PresentationStore();apply(store,snapshot);const view=apply(store,patch);expect(store.receive(patch).accepted).toBe(false);expect(store.getWorld()).toBe(view);
 });
 it('same-revision committed rejection advances sequence while preserving the identical UI world reference',async()=>{
- const {p,w,writer}=await setup(),stream=new WorldStream(),store=new PresentationStore(),initial=apply(store,stream.publish(w,writer)),o=order(w,'rejected',{type:'city.rename',cityId:w.cities[0].id,name:'Rejected'}),row=await p.receiveCommand(o),next=await p.finishCommand(row,{commandId:o.commandId,status:'rejected',revision:w.revision,reason:'拒絕'},w.revision);expect(next.revision).toBe(w.revision);expect(next.ledger!.anchor.root).not.toBe(w.ledger!.anchor.root);const patch=stream.publish(next,writer);expect(patch.kind).toBe('patch');if(patch.kind!=='patch')throw Error();expect(patch.projectionSequence).toBe(2);expect(patch.sections).toEqual({});expect(patch.entities).toEqual({});apply(store,patch);expect(store.getWorld()).toBe(initial);expect((await p.commandStatus(w.campaignId,o.commandId))!.state).toBe('rejected');
+ const {p,w,writer}=await setup(),stream=new WorldStream(),store=new PresentationStore(),initial=apply(store,stream.publish(w,writer)),o=order(w,'rejected',{type:'city.rename',cityId:w.cities[0].id,name:'Rejected'}),row=await receiveDurableFixture(p,o),next=await p.finishCommand(row,{commandId:o.commandId,status:'rejected',revision:w.revision,reason:'拒絕'},w.revision);expect(next.revision).toBe(w.revision);expect(next.ledger!.anchor.root).not.toBe(w.ledger!.anchor.root);const patch=stream.publish(next,writer);expect(patch.kind).toBe('patch');if(patch.kind!=='patch')throw Error();expect(patch.projectionSequence).toBe(2);expect(patch.sections).toEqual({});expect(patch.entities).toEqual({});apply(store,patch);expect(store.getWorld()).toBe(initial);expect((await p.commandStatus(w.campaignId,o.commandId))!.state).toBe('rejected');
 });
 it('120 entity updates/removals/additions keep unrelated references and never accumulate snapshots',()=>{
  let w=createFormalWorld({campaign:'many-patches',seed:90217});const stream=fixtureStream(),store=new PresentationStore(),initial=apply(store,stream.publish(w,{branch:1,writerEpoch:1}));

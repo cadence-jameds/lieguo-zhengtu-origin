@@ -1,3 +1,5 @@
+import {canonicalJSON} from './canonical';
+import {receiveDurableFixture} from './durableIdentityTestSupport';
 import {projectWorld,originalResult} from './commandLedger';
 import {RETIRED_FORMAL_DB_NAME} from './versions';
 import {OLD_CAMPAIGN_MESSAGE} from './saveCodec';
@@ -18,7 +20,7 @@ function store(fault?:(point:FailurePoint)=>void,suffix='durable-'+(++serial)){c
 afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
 async function begin(s:FormalPersistence){await s.acquireWriter();return s.start(createFormalFixture({research:true}));}
 const contents=async(s:FormalPersistence)=>({saves:await s.db.saves.toArray(),backups:await s.db.backups.toArray(),reports:await s.db.BattleReports.toArray(),inbox:await s.db.Inbox.toArray(),meta:await s.db.RuntimeMeta.toArray()});
-async function receive(s:FormalPersistence,w:FormalWorld,o:FormalOrder){return s.receiveCommand(o,captureIntent(w,o),(await s.writerContext()).branch);}
+async function receive(s:FormalPersistence,w:FormalWorld,o:FormalOrder){return receiveDurableFixture(s,o,captureIntent(w,o),(await s.writerContext()).branch);}
 async function commit(s:FormalPersistence,w:FormalWorld,o:FormalOrder){const row=await receive(s,w,o),t=submitFormalOrder(w,o);expect(t.ack!.status).toBe('committed');return s.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});}
 it('T1 interruption before intake creates nothing; failure after inbox-write rolls back and preserves the original payload',async()=>{
  let fail=false;const s=store(p=>{if(fail&&p==='inbox-write')throw new DOMException('quota','QuotaExceededError');}),w=await begin(s),o=contribute(w,'t1'),before=await contents(s);
@@ -62,7 +64,7 @@ it.each(['restore','import','start','reset'] as const)('%s cancels old pending i
 });
 it('writer epoch fencing prevents a stale Worker from intake, result writes, reset and world commits; revision CAS remains enforced',async()=>{
  const a=store(),w=await begin(a),o=contribute(w,'writer'),row=await receive(a,w,o),t=submitFormalOrder(w,o),b=store(undefined,a.db.name.slice(FORMAL_DB_NAME.length+1));await b.acquireWriter();const before=await contents(b);
- await expect(a.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!})).rejects.toThrow('寫入權');await expect(a.receiveCommand(o)).rejects.toThrow('寫入權');await expect(a.finishCommand(row,t.ack!,w.revision)).rejects.toThrow('寫入權');await expect(a.clearSavedGames()).rejects.toThrow('寫入權');expect(await contents(b)).toEqual(before);
+ await expect(a.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!})).rejects.toThrow('寫入權');await expect(receiveDurableFixture(a,o)).rejects.toThrow('寫入權');await expect(a.finishCommand(row,t.ack!,w.revision)).rejects.toThrow('寫入權');await expect(a.clearSavedGames()).rejects.toThrow('寫入權');expect(await contents(b)).toEqual(before);
  await b.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});await expect(b.save(t.world,t.reports,w.revision)).rejects.toThrow('revision');
 });
 it('temporary failures retry at most three times; quota and unknown/permanent faults never auto retry; deadline stays bounded',async()=>{
@@ -71,13 +73,13 @@ it('temporary failures retry at most three times; quota and unknown/permanent fa
  for(let i=1;i<=MAX_COMMAND_ATTEMPTS;i++){const next=await s.noteCommandFailure(row,'temporary',true,row.createdAt+i);expect(next.attempts).toBe(i);expect(terminalCommand(next)).toBe(i===MAX_COMMAND_ATTEMPTS);expect(next.deadline).toBe(row.createdAt+COMMAND_TTL);}
  const other=await receive(s,w,contribute(w,'expired'));const expired=await s.noteCommandFailure(other,'deadline',true,other.deadline);expect(expired.state).toBe('needs-confirmation');
 });
-it('retired v2 data is explicitly incompatible, remains unchanged, and a fresh v3 campaign can start separately',async()=>{
+it('retired v2 data is explicitly incompatible, remains unchanged, and a fresh bounded-format campaign can start separately',async()=>{
  const suffix='retired-'+(++serial),old=new Dexie(RETIRED_FORMAL_DB_NAME+'-'+suffix);old.version(2).stores({saves:'id',backups:'++id',Inbox:'++sequence'});await old.open();const w=createFormalFixture(),data={format:'lieguo-formal-save',snapshot:w,checksum:'0'.repeat(64)};await old.table('saves').put({id:'current',data});await old.table('backups').add({data});const before=await old.table('saves').toArray();
- try{const s=store(undefined,suffix);await expect(s.loadSave()).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(new FormalDatabase().verno).toBe(3);expect(await s.db.Inbox.count()).toBe(0);expect(await s.db.backups.count()).toBe(0);const fresh=await s.start(createFormalFixture({campaign:'new-ledger'}));expect(fresh.ledger).toBeDefined();expect(await old.table('saves').toArray()).toEqual(before);expect(await old.table('backups').count()).toBe(1);}finally{await old.delete();}
+ try{const s=store(undefined,suffix);await expect(s.loadSave()).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(new FormalDatabase().verno).toBe(1);expect(await s.db.Inbox.count()).toBe(0);expect(await s.db.backups.count()).toBe(0);const fresh=await s.start(createFormalFixture({campaign:'new-ledger'}));expect(fresh.ledger).toBeDefined();expect(await old.table('saves').toArray()).toEqual(before);expect(await old.table('backups').count()).toBe(1);}finally{await old.delete();}
 });
 
-for(const count of [30000,60000])it(`synthetic ${count} receipts retain all history through durable intake, atomic commit and duplicate lookup`,async()=>{
- const s=store(),w=createFormalFixture();w.revision=1;w.commandReceipts=Array.from({length:count},(_,i):CommandReceipt=>({commandId:commandId('history-'+i),issuerId:w.playerFactionId,fingerprint:'synthetic-'+i,committedRevision:1,disposition:'rolled-back'}));await s.acquireWriter();const initial=await s.start(w),o=order(initial,'new',{type:'city.rename',cityId:fixtureIds.home,name:'完整歷史'}),next=await commit(s,initial,o);expect(next.commandReceipts).toHaveLength(count+1);expect((await receive(s,next,o)).state).toBe('committed');expect((await s.loadSave()).game!.commandReceipts).toHaveLength(count+1);
+for(const count of [30000,60000])it(`synthetic ${count} cumulative receipts compact safely through durable intake, atomic commit and exact recent lookup`,async()=>{
+ const s=store(),w=createFormalFixture();w.revision=1;w.commandReceipts=Array.from({length:count},(_,i):CommandReceipt=>({commandId:commandId('history-'+i),issuerId:w.playerFactionId,fingerprint:canonicalJSON({campaignId:w.campaignId,issuerId:w.playerFactionId,payload:{type:'city.rename',cityId:fixtureIds.home,name:'歷史'+i}}),committedRevision:1,disposition:'rolled-back'}));await s.acquireWriter();const initial=await s.start(w),o=order(initial,'new',{type:'city.rename',cityId:fixtureIds.home,name:'完整歷史'}),next=await commit(s,initial,o);expect(next.commandReceipts).toHaveLength(1024);expect((await receive(s,next,o)).state).toBe('committed');expect((await s.loadSave()).game!.commandReceipts).toHaveLength(1024);const state=await contents(s);await expect(s.receiveCommand({...o,commandId:commandId('history-0')})).rejects.toThrow('不會再次執行');expect(await contents(s)).toEqual(state);const retained=next.commandReceipts.filter(r=>r.commandId.startsWith('command:history-')).at(-1)!;const recent={...o,commandId:retained.commandId,payload:JSON.parse(retained.fingerprint).payload};expect((await s.receiveCommand(recent)).state).toBe('rolled-back');expect((await s.loadSave()).game!.cities[0].name).toBe('完整歷史');
 },30000);
 it('clock-only advancement revalidates original intent but keeps its stored revision and payload unchanged',async()=>{
  const s=store(),w=await begin(s),o=order(w,'clock',{type:'city.rename',cityId:fixtureIds.home,name:'原意圖'}),row=await receive(s,w,o),t=advanceFormal(w,1000),next=await s.save(t.world,t.reports,w.revision),execution=revalidateInbox(next,row)!;expect(execution.expectedRevision).toBe(next.revision);expect(row.order).toEqual(o);expect(execution.payload).toEqual(o.payload);

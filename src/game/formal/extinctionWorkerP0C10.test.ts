@@ -1,3 +1,4 @@
+import {scenarioWorld} from './ledgerTestSupport';
 import * as projectionMaps from '../admissionMap';
 import * as projectionLedger from './commandLedger';
 import {beforeEach,afterEach,it,expect,vi} from 'vitest';
@@ -24,18 +25,18 @@ it.each([1,3,6,10,25])('Worker %sX freezes only after the terminal durable commi
  expect(messages.some(m=>m.type==='state')).toBe(false);expect(draft.time).toBe(arrival);expect(draft.combat!.receipts.filter(r=>r.kind==='final')).toHaveLength(1);expect(storage.save.mock.calls.at(-1)![1].some((r:any)=>r.battle?.outcome==='conquered')).toBe(true);
  commit(draft);await until(()=>messages.some(m=>m.type==='synced'));world=state().world;expect(state().clock).toMatchObject({time:arrival,running:false});messages=[];
  now+=100*3600000;const saves=storage.save.mock.calls.length;send({type:'sync',requestId:'frozen'});send({type:'export'});await until(()=>messages.some(m=>m.type==='export'));expect(storage.save.mock.calls.length).toBe(saves);
- send({type:'snapshot'});await until(()=>messages.some(m=>m.type==='state'));expect(state().world).toEqual(world);expect(state().clock.time).toBe(arrival);messages=[];
+ send({type:'snapshot'});await until(()=>messages.some(m=>m.type==='state'));expect(state().world).toEqual(scenarioWorld(world));expect(state().clock.time).toBe(arrival);messages=[];
  const p=rebirthCandidates(world)[0];send({type:'command',order:order(world,{type:'player.rebirth',cityId:world.cities[0].id,...p,name:'Worker復國'})});await until(()=>messages.some(m=>m.type==='commandAck'));world=state().world;expect(state().clock).toMatchObject({time:arrival,running:true});expect(world.extinction!.defeat).toBeUndefined();messages=[];
  now+=1000;send({type:'sync',requestId:'after-rebirth'});await until(()=>messages.some(m=>m.type==='synced'));expect(state().world.time).toBe(arrival+1000*speed);expect(state().world.combat.receipts.filter((r:any)=>r.kind==='final')).toHaveLength(1);
 });
 it('failed terminal save is invisible and a retry commits the receipt exactly once',async()=>{
  now=world.armies[0].arrivalAt!+1000;storage.save.mockRejectedValueOnce(Error('terminal storage fault'));send({type:'sync'});await until(()=>messages.some(m=>m.type==='error'));expect(messages.some(m=>m.type==='state')).toBe(false);messages=[];
- send({type:'snapshot'});await until(()=>messages.some(m=>m.type==='state'));expect(state().world).toEqual(world);messages=[];
+ send({type:'snapshot'});await until(()=>messages.some(m=>m.type==='state'));expect(state().world).toEqual(scenarioWorld(world));messages=[];
  send({type:'sync'});await until(()=>messages.some(m=>m.type==='synced'));expect(state().world.extinction.defeat.at).toBe(world.armies[0].arrivalAt);expect(state().world.combat.receipts.filter((r:any)=>r.kind==='final')).toHaveLength(1);
 });
 it('away/resume, re-load and ended campaign preserve a stopped Worker clock and never clear saves',async()=>{
  now=world.armies[0].arrivalAt!+1000;send({type:'sync'});await until(()=>messages.some(m=>m.type==='synced'));world=state().world;messages=[];const events=structuredClone(world.events);storage.loadWithOffline.mockResolvedValue({game:world,recovered:false});now+=100*3600000;
  send({type:'away'});send({type:'resume'});send({type:'load'});await until(()=>messages.filter(m=>m.type==='loaded').length===2);expect(state().clock).toMatchObject({time:world.time,running:false});expect(state().world.events).toEqual(events);messages=[];
  send({type:'command',order:order(world,{type:'player.end',cityId:world.cities[0].id})});await until(()=>messages.some(m=>m.type==='commandAck'));world=state().world;expect(world.extinction!.defeat!.ended).toBe(true);expect(state().clock.running).toBe(false);messages=[];
- send({type:'command',order:order(world,{type:'player.rebirth',cityId:world.cities[0].id,...rebirthCandidates(world)[0],name:'拒絕'})});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(storage.clearSavedGames).not.toHaveBeenCalled();expect(state().world).toEqual(world);
+ send({type:'command',order:order(world,{type:'player.rebirth',cityId:world.cities[0].id,...rebirthCandidates(world)[0],name:'拒絕'})});await until(()=>messages.some(m=>m.type==='commandAck'));expect(messages.find(m=>m.type==='commandAck')!.ack.status).toBe('rejected');expect(storage.clearSavedGames).not.toHaveBeenCalled();expect(state().world).toEqual(scenarioWorld(world));
 });

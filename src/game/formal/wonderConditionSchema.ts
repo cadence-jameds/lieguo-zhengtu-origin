@@ -1,4 +1,4 @@
-import {findReceipt} from './commandLedger';
+import {domainReceipt} from './commandEvidence';
 import {z} from 'zod';
 import type {CommandId,EventId,ProjectId} from './ids';
 import type {FormalWorld} from './model';
@@ -11,7 +11,7 @@ export const repairSchema:z.ZodType<WonderRepair>=z.object({creationCommandId:id
 export function validateRepairs(w:FormalWorld,fail:(message:string)=>void){
  const active=new Set<string>();
  for(const p of w.largeProjects){const r=p.repair;if(!r)continue;
-  const wonder=w.largeProjects.find(q=>q.projectId===r.wonderProjectId&&q.wonder),quote=repairQuote(r.missingSnapshot),creation=findReceipt(w,r.creationCommandId),full=resourceKeys.every(k=>p.poolResources[k]===p.requiredResources[k]);
+  const wonder=w.largeProjects.find(q=>q.projectId===r.wonderProjectId&&q.wonder),quote=repairQuote(r.missingSnapshot),creation=domainReceipt(w,r.creationCommandId),full=resourceKeys.every(k=>p.poolResources[k]===p.requiredResources[k]);
   if(p.owner.kind!=='empire'||wonder?.owner.kind!=='empire'||p.owner.empireId!==wonder.owner.empireId||p.initiatingCityId!==wonder.initiatingCityId||p.createdAt>w.time||p.durationMs!==quote.durationMs||resourceKeys.some(k=>p.requiredResources[k]!==quote.resources[k]))fail('Wonder repair prerequisite/quote invalid');
   if(!creation||creation.disposition!=='applied')fail('Wonder repair creation receipt missing');else try{const o=JSON.parse(creation.fingerprint);if(o.campaignId!==w.campaignId||o.issuerId!==creation.issuerId||o.payload.type!=='wonder.repair.start'||o.payload.projectId!==r.wonderProjectId)fail('Wonder repair creation binding invalid');}catch{fail('Wonder repair creation invalid');}
   if(r.phase!=='completed'){if(active.has(r.wonderProjectId))fail('Duplicate active wonder repair');active.add(r.wonderProjectId);}
@@ -24,7 +24,7 @@ export function validateRepairs(w:FormalWorld,fail:(message:string)=>void){
   if(r.phase==='funding'&&(full||r.workMs!==0)||r.phase!=='completed'&&(r.completedAt!==null||r.restored!==null))fail('Wonder repair funding/completion invalid');
   if(r.phase==='completed'&&(!full||r.workMs!==p.durationMs||r.completedAt===null||r.completedAt>w.time||r.completedAt<fundedAt+p.durationMs||r.restored===null||r.restored>r.missingSnapshot||!wonder?.wonder?.durability?.ledger.some(x=>x.kind==='repair'&&x.eventId===r.completionEventId&&x.at===r.completedAt&&x.amount===r.missingSnapshot&&x.after-x.before===r.restored)))fail('Wonder repair completion receipt invalid');
   for(const k of resourceKeys)if(p.shipments.reduce((n,t)=>n+(t.phase==='returned'?0:t.resources[k]),0)>p.requiredResources[k])fail('Wonder repair demand overbooked');
-  for(const t of p.shipments){const receipt=t.commandId&&findReceipt(w,t.commandId),live=w.logistics?.find(q=>q.shipmentId===t.shipmentId);
+  for(const t of p.shipments){const receipt=t.commandId&&domainReceipt(w,t.commandId),live=w.logistics?.find(q=>q.shipmentId===t.shipmentId);
    if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==t.sourceFactionId||receipt.fingerprint!==canonicalJSON({campaignId:w.campaignId,issuerId:t.sourceFactionId,payload:{type:'wonder.repair.ship',cityId:t.sourceCityId,projectId:p.projectId,resources:t.resources}})||t.dispatchedAt>w.time||resourceKeys.every(k=>t.resources[k]===0))fail('Wonder repair payment invalid');
    if(t.phase==='in-transit'&&(!live||live.phase!=='outbound')||t.phase!=='in-transit'&&(t.arrivedAt>w.time||w.events.some(e=>e.id===t.arrivalEventId)||live&&live.phase!=='returning'))fail('Wonder repair shipment phase invalid');
    if(live&&(live.projectId!==p.projectId||live.commandId!==t.commandId||live.sourceFactionId!==t.sourceFactionId||live.sourceCityId!==t.sourceCityId||live.destinationCityId!==t.destinationCityId||live.dispatchedAt!==t.dispatchedAt||JSON.stringify(live.authorizationSnapshot)!==JSON.stringify(t.authorizationSnapshot)||resourceKeys.some(k=>live.resources[k]!==t.resources[k])||t.phase!=='in-transit'&&(live.arrivalAt!==t.arrivedAt||live.arrivalEventId!==t.arrivalEventId||resourceKeys.some(k=>(live.returnCargo?.[k]??0)!==(t.phase==='returned'?t.resources[k]:0)))))fail('Wonder repair logistics mismatch');

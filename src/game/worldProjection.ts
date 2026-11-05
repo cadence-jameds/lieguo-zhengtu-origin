@@ -23,12 +23,18 @@ export class WorldProjection {
  build(w:FormalWorld,id:ProjectionIdentity):PresentationWorld{
   const next=worldLedger(w),m=next.manifest,a=w.ledger!.anchor;
   if(w.ledger!.pending.length||w.ledger!.outcomes?.length||a.worldRevision!==w.revision||id.revision!==w.revision||id.campaignId!==w.campaignId||id.branch!==a.branch||id.writerEpoch<a.writerEpoch)throw Error('只能投影已提交且版本一致的世界。');
-  const previous=this.proof,append=previous&&previous.manifest.campaignId===m.campaignId&&previous.manifest.branch===m.branch&&previous.count<=next.count&&previous.manifest.orderPrefix===m.orderPrefix&&(!previous.history.segments.length||next.history.segments[previous.history.segments.length-1]?.checksum===previous.history.segments.at(-1)!.checksum);
-  if(!append){this.writes.clear();this.malformed=undefined;this.governanceCache.clear();this.metrics.rebuilds++;}
-  for(let i=append?previous.count:0;i<next.count;i++)this.observe(next.at(i)!,i);
+  const previous=this.proof;
+  if(w.commandFacts){
+   if(this.proof?.manifest.campaignId!==m.campaignId||this.proof.manifest.branch!==m.branch){this.writes.clear();this.malformed=undefined;this.governanceCache.clear();this.metrics.rebuilds++;}
+   for(const [cityId,evidence]of Object.entries(w.commandFacts.governance))this.writes.set(cityId,{revision:evidence[1],ordinal:0,evidence});
+  }else{
+   const append=previous&&previous.manifest.campaignId===m.campaignId&&previous.manifest.branch===m.branch&&previous.count<=next.count&&previous.manifest.orderPrefix===m.orderPrefix&&(!previous.history.segments.length||next.history.segments[previous.history.segments.length-1]?.checksum===previous.history.segments.at(-1)!.checksum);
+   if(!append){this.writes.clear();this.malformed=undefined;this.governanceCache.clear();this.metrics.rebuilds++;}
+   for(let i=append?previous.count:0;i<next.count;i++)this.observe(next.at(i)!,i);
+  }
   this.proof=next;this.metrics.builds++;
   const castleSources:Record<string,string>={},governance:Record<string,string>={};
-  const currentCities=new Set<string>(w.cities.map(c=>c.id));for(const key of this.governanceCache.keys())if(!currentCities.has(key))this.governanceCache.delete(key);
+  const currentCities=new Set<string>(w.cities.map(c=>c.id));for(const key of this.governanceCache.keys())if(!currentCities.has(key))this.governanceCache.delete(key);for(const key of this.writes.keys())if(!currentCities.has(key))this.writes.delete(key);
   for(const city of w.cities){
    castleSources[city.id]=castleSource(w,city);
    const evidence=newer(this.writes.get(city.id),this.malformed)?.evidence??null,g=w.governors?.find(g=>g.cityId===city.id),dependencies=[w.campaignId,w.playerFactionId,city.ownerFactionId,buildingLevel(city,'townhall'),!!city.economy,g?.ownerFactionId,g?.enabled,g?.policy,g?.budget,g?.reserve,evidence],prior=this.governanceCache.get(city.id);

@@ -1,3 +1,4 @@
+import {appendReceipt} from './commandLedger';
 import {expect} from 'vitest';
 import {createFormalFixture} from './fixture';
 import {withModernHistory} from './catchupTestSupport';
@@ -34,7 +35,7 @@ export function fundRepair(w:FormalWorld,id:import('./ids').ProjectId){
   const needed=wonderRemaining(p),cargo=zeroResources();let capacity=30000;
   for(const k of resourceKeys){cargo[k]=Math.min(capacity,needed[k]);capacity-=cargo[k];}
   c.stock={...cargo};const o=order(w,{type:'wonder.repair.ship',cityId:c.id,projectId:id,resources:cargo},undefined,c.ownerFactionId),before={...c.stock};
-  applyRepairCommand(w,c,o,o.payload as Extract<typeof o.payload,{type:'wonder.repair.ship'}>,s);w.revision++;w.commandReceipts.push({commandId:o.commandId,issuerId:o.issuerId,fingerprint:orderFingerprint(o),committedRevision:w.revision,disposition:'applied'});
+  applyRepairCommand(w,c,o,o.payload as Extract<typeof o.payload,{type:'wonder.repair.ship'}>,s);w.revision++;appendReceipt(w,{commandId:o.commandId,issuerId:o.issuerId,fingerprint:orderFingerprint(o),committedRevision:w.revision,disposition:'applied'});
   for(const k of resourceKeys){expect(before[k]-c.stock[k]).toBe(cargo[k]);expect(p.poolResources[k]).toBe(paid[k]);paid[k]+=cargo[k];}
   const until=w.logistics!.at(-1)!.returnAt;while(s.peek()&&s.peek()!.at<=until){const e=s.pop()!;w.time=e.at;if(!handleRepairEvent(w,e,s)&&!handleEconomyEvent(w,e,s))throw Error('Unexpected repair fixture event '+e.type);reconcileWonders(w,s);}
  }
@@ -51,7 +52,7 @@ export function nativeEndgameWorld(){
    const mapping=new Map<string,string>([[template.campaignId,w.campaignId],[template.factions[1].id,f.id],[template.cities[2].id,c.id],[originalEmpire,e]]);
    const remap=(value:unknown):any=>typeof value==='string'?mapping.get(value)??(/^(project|shipment|event|command):/.test(value)?value.replace(':',':native-'+i+'-'):value):Array.isArray(value)?value.map(remap):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).map(([k,v])=>[k,remap(v)])):value;
    w.largeProjects.push(remap(wonder));const ids=new Set([wonder.wonder!.creationCommandId,...wonder.shipments.map(t=>t.commandId!)]);
-   for(const r of template.commandReceipts.filter(r=>ids.has(r.commandId))){const mapped=remap(r);mapped.fingerprint=JSON.stringify(remap(JSON.parse(r.fingerprint)));mapped.committedRevision=w.revision;w.commandReceipts.push(mapped);}
+   for(const r of template.commandReceipts.filter(r=>ids.has(r.commandId))){const mapped=remap(r);mapped.fingerprint=JSON.stringify(remap(JSON.parse(r.fingerprint)));mapped.committedRevision=w.revision;appendReceipt(w,mapped);}
   }
  }
  nativeTemplate=validateFormalWorld(w);return structuredClone(nativeTemplate);

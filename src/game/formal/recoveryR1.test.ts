@@ -94,7 +94,7 @@ describe('B1-R1 automatic Recovery checkpoint fallback',()=>{
   const bad=await s.db.backups.get(bId);expect((await decodeSave(bad!.data)).world).toEqual(b);
   await expect(validateCheckpointCandidate(bad!)).rejects.toThrow('游標不一致');
   expect((await s.backupList()).map(p=>p.id)).toEqual([aId]);
-  await expect(s.restore(bId)).rejects.toThrow('游標不一致');expect(await contents(s)).toEqual(before);
+  await expect(s.restore(bId)).rejects.toThrow(field==='campaignId'?'權威引用不一致':'游標不一致');expect(await contents(s)).toEqual(before);
   const recovered=await s.loadSave();expect(recovered.recovered).toBe(true);
   expect(recovered.game!.cities).toEqual(a.cities);expect(recovered.game!.researchProjects).toEqual(a.researchProjects);
  });

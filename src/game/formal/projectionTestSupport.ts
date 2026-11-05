@@ -11,7 +11,7 @@ import type {FormalWorld} from './model';
 import type {ProjectionIdentity,PresentationWorld} from '../presentationModel';
 import {castleSource} from './buildingDetailData';
 import {governanceBase} from '../governanceAdmission';
-import {projectWorld} from './commandLedger';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 export class ProjectionTestBridge {
  readonly store=new PresentationStore();readonly wires:any[]=[];source:FormalWorld|null=null;private expected:PresentationWorld|null=null;private notification=0;
  readonly verified=new WorldProjection();

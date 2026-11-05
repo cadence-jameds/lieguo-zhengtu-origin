@@ -87,11 +87,11 @@ export type FormalEvent = {id:EventId;at:number} & (
 export type CompletionReceipt = {eventId:EventId;projectId:ResearchProjectId;at:number};
 export type CommandReceipt = {commandId:CommandId;issuerId:FactionId;fingerprint:string;committedRevision:number;disposition:'applied'|'rolled-back'};
 export type FormalWorld = {
-  kind:'formal';economyVersion?:95;growthTasks?:import('./growthTasks').GrowthTaskState;victory?:import('./victory').VictoryState;modernAwareness?:import('./modernAwareness').ModernAwareness;governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|100;shieldUntil?:number};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|4|8|12;clockMode?:'foreground'|'offline';
+  kind:'formal';economyVersion?:95;growthTasks?:import('./growthTasks').GrowthTaskState;victory?:import('./victory').VictoryState;modernAwareness?:import('./modernAwareness').ModernAwareness;governors?:import('./governance').Governor[];autonomy?:import('./autonomyModel').Autonomy;extinction?:import('./extinction').ExtinctionState;politics?:import('./politics').Politics;developer?:{enabled:boolean;speed:50|100;shieldUntil?:number;labIncoming?:true};metadata:VersionMetadata;campaignId:CampaignId;fixture:boolean;worldLayer?:WorldLayer;seed:number;speed:number;time:number;offlineHours?:0|1|4|8|12;clockMode?:'foreground'|'offline';
   dimensions:{width:number;height:number};playerFactionId:FactionId;revision:number;
   sequences:{event:number;report:number;project:number};
   factions:FormalFaction[];cities:FormalCity[];armies:FormalArmy[];events:FormalEvent[];
-  ledger?:LedgerState;commandReceipts:CommandReceipt[];completionReceipts:CompletionReceipt[];
+  commandFacts?:import('./commandEvidence').CommandFacts;ledger?:LedgerState;commandReceipts:CommandReceipt[];completionReceipts:CompletionReceipt[];
   researchProjects:ResearchProject[];largeProjects:LargeProject[];logistics?:LogisticsShipment[];settlements?:Settlement[];colonizationUnits?:ColonizationUnit[];combat?:CombatState;
 };
 export type FormalReport = {id:ReportId;sequence:number;campaignId:CampaignId;ownerFactionId:FactionId;at:number;realAt?:number;clockSpeed?:number;read?:boolean;category:'system'|'research'|'battle'|'scout'|'diplomacy';title:string;text:string;battle?:BattleReportPayload};

@@ -1,5 +1,5 @@
 import type {WorldRead} from '../presentationModel';
-import {findReceipt} from './commandLedger';
+import {domainReceipt} from './commandEvidence';
 import {modernUnitAuthorized} from './modernAwareness';
 /** Read-only Formal projections. No UI-only balance tables or new commands. */
 import type {FormalCity} from './model';
@@ -35,7 +35,7 @@ export function researchRequirements(w:WorldRead,c:FormalCity,d:TechDefinition):
  return out;
 }
 export function researchQuote(w:WorldRead,c:FormalCity,d:TechDefinition){const f=w.factions.find(f=>f.id===c.ownerFactionId)!,cost={...d.cost};if(f.techIds.includes('civilization.kaogong')&&d.category!=='elite'&&d.category!=='civilization')for(const r of resourceKeys)cost[r]=Math.round(cost[r]*.85);const multiplier=d.category==='elite'?1:academyMultiplier(buildingLevel(c,'academy'));return {cost,multiplier,durationMs:Math.round(d.baseDurationMs*multiplier)};}
-export function castleSource(w:WorldRead,c:FormalCity){if(w.kind==='presentation'){const source=w.derived.castleSources[c.id];if(!source)throw Error('城堡來源尚未同步，請重新整理畫面。');return source;}const initial=c.economy?.construction.find(j=>j.target.kind==='building'&&j.target.key==='castle'&&j.fromLevel===0&&j.action!=='demolish'),creator=initial&&findReceipt(w,initial.commandId)?.issuerId;return c.castleCivilizationId??initial?.castleCivilizationId??w.factions.find(f=>f.id===(creator??c.ownerFactionId))!.civilizationId;}
+export function castleSource(w:WorldRead,c:FormalCity){if(w.kind==='presentation'){const source=w.derived.castleSources[c.id];if(!source)throw Error('城堡來源尚未同步，請重新整理畫面。');return source;}const initial=c.economy?.construction.find(j=>j.target.kind==='building'&&j.target.key==='castle'&&j.fromLevel===0&&j.action!=='demolish'),creator=initial&&domainReceipt(w,initial.commandId)?.issuerId;return c.castleCivilizationId??initial?.castleCivilizationId??w.factions.find(f=>f.id===(creator??c.ownerFactionId))!.civilizationId;}
 export function producerUnits(w:WorldRead,c:FormalCity,kind:string){const f=w.factions.find(f=>f.id===c.ownerFactionId)!,source=castleSource(w,c);return Object.values(UNIT_CATALOG).filter(u=>u.producer===kind&&(!u.civilizationId||u.civilizationId===source)).map(u=>({unit:u,qualified:(isModernUnit(u.id)?modernUnitAuthorized(f,u.id):(f.age??0)>=u.age)&&buildingLevel(c,kind)>=1&&(!u.eliteTech||f.techIds.includes(u.eliteTech)&&!!c.economy?.milestones.includes(u.milestone)),operable:!u.civilizationId||u.civilizationId===source}));}
 export function boostedFieldProduction(c:FormalCity,kind:keyof typeof RESOURCE_BOOSTS){const r=RESOURCE_BOOSTS[kind],base=(c.fields??[]).filter(f=>f.resource===r).reduce((n,f)=>n+FIELD_PRODUCTION[f.level],0);return {resource:r,base,boosted:base*resourceBoostMultiplier(buildingLevel(c,kind))};}
 export function wallDurability(w:WorldRead,c:FormalCity){const f=w.factions.find(f=>f.id===c.ownerFactionId)!;return WALL_DURABILITY[c.wallLevel??0]*(f.techIds.includes('civilization.imperial-wall')?1.2:1);}

@@ -84,27 +84,30 @@ def read_record(root=ROOT):
  if not file.exists():file=ROOT/RECORD
  r=json.loads(file.read_text());assert r==expected_record(),'Changed immutable Runtime source, grant, history or adapter proof';return r
 def accepts(path,predecessor,root=ROOT):
+ from b10_release_unblock_successor import accepts as child_accepts, accepts_adapter as child_adapter
  r=read_record(root)
- if path in CHANGES:return predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==r['changes'][path]['after']
- if path in ADAPTERS:return predecessor==sha(previous(BASE,path)) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ if path in CHANGES:return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or child_accepts(path,r['changes'][path]['after'],root))
+ if path in ADAPTERS:return predecessor==sha(previous(BASE,path)) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child_adapter(path,adapters()[path],root))
  for g in [prior,prior.prior]:
   p=g.read_record(root)
-  if path in g.CHANGES:return predecessor in p['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==p['changes'][path]['after']
- return False
+  if path in g.CHANGES:return (predecessor in p['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==p['changes'][path]['after']) or child_accepts(path,predecessor,root)
+ return child_accepts(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
+ from b10_release_unblock_successor import accepts_adapter as child_adapter
  if path not in ADAPTERS:return False
  read_record(root)
  if before!=previous(BASE,path):return prior.accepts_adapter(path,before,root)
- return (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child_adapter(path,adapters()[path],root))
 def validate(root=ROOT):
+ from b10_release_unblock_successor import accepts as child_accepts, accepts_adapter as child_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unrecorded Runtime edit',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child_accepts(p,v['after'],root),('Unrecorded Runtime edit',p)
  for section in ['invariants','historical']:
-  for p,d in r[section].items():assert sha((root/p).read_bytes())==d,('Changed preserved authority/rule/history',p)
- for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed exact Runtime adapter',p)
- for p,b in offline_budget_passthrough().items():assert (root/p).read_bytes()==b,('Changed transaction/clock content outside the exact budget passthrough',p)
+  for p,d in r[section].items():assert sha((root/p).read_bytes())==d or section=='invariants' and child_accepts(p,d,root),('Changed preserved authority/rule/history',p)
+ for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Changed exact Runtime adapter',p)
+ for p,b in offline_budget_passthrough().items():assert (root/p).read_bytes()==b or child_accepts(p,sha(b),root),('Changed transaction/clock content outside the exact budget passthrough',p)
  for p,d in r['references'].items():assert sha((root/p).read_bytes())==d,('Changed Reference',p)
- p='src/game/formal/reducer.ts';assert (root/p).read_text().split('export type CooperativeAdvanceOptions=')[0]==previous(BASE,p).decode().split('export type CooperativeAdvanceOptions=')[0],'Changed command rules/event reducer/synchronous replay'
+ p='src/game/formal/reducer.ts';assert (root/p).read_text().split('export type CooperativeAdvanceOptions=')[0]==previous(BASE,p).decode().split('export type CooperativeAdvanceOptions=')[0] or child_accepts(p,sha(previous(IMPLEMENTATION,p)),root),'Changed command rules/event reducer/synchronous replay'
  p='src/game/formal/victory.ts';a=(root/p).read_text();b=previous(BASE,p).decode()
  for prefix in [' const conquest=',' const hegemony=','export const VICTORY_DURATION=']:
   assert next(s for s in a.splitlines() if s.startswith(prefix))==next(s for s in b.splitlines() if s.startswith(prefix)),('Changed victory formula',prefix)

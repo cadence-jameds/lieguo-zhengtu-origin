@@ -1,3 +1,4 @@
+import {serviceWorkerReleaseSource} from './src/game/serviceWorkerRelease';
 import {readFileSync} from "node:fs";
 import { fileURLToPath, URL } from "node:url";
 import {loadMetadata} from "./scripts/release-metadata.mjs";
@@ -15,7 +16,7 @@ const githubPagesBase =
 const release=loadMetadata();
 // A unique import URL binds the reply to this worker's build across docs-only deployments.
 const workerReleaseFile=`sw-release-${release.commitSha}.js`;
-const workerReleaseSource=`self.addEventListener('message',event=>{if(event.data?.type==='GET_APP_RELEASE')event.ports[0]?.postMessage(${JSON.stringify({version:release.version,contentSha:release.contentSha})});});`;
+const workerReleaseSource=serviceWorkerReleaseSource({version:release.version,contentSha:release.contentSha});
 export default defineConfig({
   define: {__APP_RELEASE_METADATA__:JSON.stringify(release)},
   base: githubPagesBase,
@@ -60,9 +61,9 @@ export default defineConfig({
         ]
       },
       workbox: {
-        // Prompt updates still require SKIP_WAITING after durable save. A recreated
-        // registration has no predecessor and must claim the saved old client.
-        clientsClaim: true,
+        // The release import owns extendable activation/message lifetimes.
+        // Workbox's fire-and-forget clientsClaim must not race that handler.
+        clientsClaim: false,
         importScripts: [workerReleaseFile],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         globPatterns: ["**/*.{js,css,html,svg,woff2,webp,png}"],

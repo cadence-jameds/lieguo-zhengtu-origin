@@ -1,7 +1,7 @@
-import {findReceipt} from './commandLedger';
+import {domainReceipt} from './commandEvidence';
 import {z} from 'zod';
 import type {CityId,CommandId} from './ids';
-import type {FormalWorld} from './model';
+import type {CommandReceipt,FormalWorld} from './model';
 import type {GrowthTaskState} from './growthTasks';
 import {GROWTH_TASK_BY_ID,GROWTH_FACT_LIMITS} from './growthTaskCatalog';
 import {resourceKeys} from './model';
@@ -11,16 +11,18 @@ const resources=z.object({food:int,wood:int,stone:int,gold:int}).strict();
 export const growthTaskIdSchema=taskId;
 export const growthTaskValueSchema=z.object({version:z.literal(1),startedAt:int,recordedThrough:int,facts:z.record(z.string().refine(k=>GROWTH_FACT_LIMITS.has(k)),int),completed:z.record(taskId,int),claimed:z.record(taskId,z.object({rewardVersion:z.literal(2).optional(),commandId:command,cityId:city,at:int,accepted:resources,lost:resources,capacity:int,stockBefore:resources,reserved:resources}).strict()),settledCities:z.array(city),autoShipments:z.array(z.string().regex(/^shipment:[A-Za-z0-9_.-]{1,100}$/))}).strict();
 export const growthTaskSchema:z.ZodType<GrowthTaskState>=growthTaskValueSchema;
-export function validateGrowthTasks(w:FormalWorld,fail:(message:string)=>void){
- const s=w.growthTasks;if(!s)return;if(s.startedAt>s.recordedThrough)fail('Growth task start invalid');
+export function validateGrowthTasks(w:FormalWorld,fail:(message:string)=>void){return validateGrowthProofs(w.growthTasks,w.playerFactionId,id=>domainReceipt(w,id),fail);}
+/** Identical domain assertions for live worlds and bounded campaign authority. */
+export function validateGrowthProofs(s:GrowthTaskState|undefined,playerFactionId:string,read:(id:CommandId)=>CommandReceipt|undefined,fail:(message:string)=>void){
+ if(!s)return;if(s.startedAt>s.recordedThrough)fail('Growth task start invalid');
  for(const [key,n]of Object.entries(s.facts))if(n>(GROWTH_FACT_LIMITS.get(key)??0))fail('Growth fact exceeds bounded target');
  for(const [id,at]of Object.entries(s.completed)){const t=GROWTH_TASK_BY_ID.get(id);if(!t||at<s.startedAt||at>s.recordedThrough||(s.facts[t.fact]??0)<t.target)fail('Growth completion proof invalid');}
  // Recovery retains completed IDs across world-time rewind; a later claim may
  // have an earlier world timestamp. Identity/proof and the durable receipt prevent replay.
  for(const [id,c]of Object.entries(s.claimed)){
-  const t=GROWTH_TASK_BY_ID.get(id),receipt=[findReceipt(w,c.commandId)].find(r=>r?.issuerId===w.playerFactionId);
+  const t=GROWTH_TASK_BY_ID.get(id),receipt=[read(c.commandId)].find(r=>r?.issuerId===playerFactionId);
   if(!t||s.completed[id]===undefined||c.at>s.recordedThrough||!receipt){fail('Growth claim receipt invalid');continue;}
-  try{const o=JSON.parse(receipt.fingerprint);if(o.issuerId!==w.playerFactionId||o.payload.type!=='tasks.claim'||o.payload.taskId!==id||o.payload.cityId!==c.cityId||o.payload.rewardVersion!==c.rewardVersion||!resourceKeys.every(r=>o.payload.expectedResources[r]===c.accepted[r]))fail('Growth claim command mismatch');}catch{fail('Growth claim command malformed');}
+  try{const o=JSON.parse(receipt.fingerprint);if(o.issuerId!==playerFactionId||o.payload.type!=='tasks.claim'||o.payload.taskId!==id||o.payload.cityId!==c.cityId||o.payload.rewardVersion!==c.rewardVersion||!resourceKeys.every(r=>o.payload.expectedResources[r]===c.accepted[r]))fail('Growth claim command mismatch');}catch{fail('Growth claim command malformed');}
   // Missing version is exactly the original schedule/rules; never default old proofs to v2.
   const reward=c.rewardVersion===2?t.reward:GROWTH_REWARDS_V1[id];
   for(const r of resourceKeys){

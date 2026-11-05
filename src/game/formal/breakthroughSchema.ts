@@ -1,11 +1,10 @@
-import {receiptIndex} from './commandLedger';
+import {domainReceiptIndex,shipmentPaymentFieldsFingerprint} from './commandEvidence';
 import type {FormalWorld} from './model';
 import {resourceKeys} from './model';
-import {canonicalJSON} from './canonical';
 import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughStoredWork,breakthroughPauseReason} from './breakthrough';
 export function validateBreakthroughs(w:FormalWorld,fail:(message:string)=>void){
  if(!w.largeProjects.some(p=>p.kind==='civilization-breakthrough'))return;
- const empires=new Set<string>(),shipmentIds=new Set<string>(),receiptIds=new Set<string>(),commands=new Set<string>(),payments=receiptIndex(w);
+ const empires=new Set<string>(),shipmentIds=new Set<string>(),receiptIds=new Set<string>(),commands=new Set<string>(),payments=domainReceiptIndex(w);
  for(const p of w.largeProjects)for(const t of p.shipments){if(shipmentIds.has(t.shipmentId))fail('Duplicate engineering shipment');shipmentIds.add(t.shipmentId);if(t.phase!=='in-transit'){if(receiptIds.has(t.arrivalEventId))fail('Duplicate engineering arrival');receiptIds.add(t.arrivalEventId);}}
  for(const p of w.largeProjects){if(p.kind!=='civilization-breakthrough')continue;const b=p.breakthrough,empire=p.owner.kind==='empire'?p.owner.empireId:null;
   if(!b||!empire){fail('Breakthrough state/owner missing');continue;}
@@ -31,7 +30,7 @@ export function validateBreakthroughs(w:FormalWorld,fail:(message:string)=>void)
   for(const record of p.shipments){
    const receipt=record.commandId&&payments.get(record.commandId),t=w.logistics?.find(t=>t.shipmentId===record.shipmentId);
    if(!record.commandId||commands.has(record.commandId))fail('Duplicate breakthrough payment');else commands.add(record.commandId);
-   if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==record.sourceFactionId||receipt.fingerprint!==canonicalJSON({campaignId:w.campaignId,issuerId:record.sourceFactionId,payload:{type:'breakthrough.ship',cityId:record.sourceCityId,projectId:p.projectId,resources:record.resources}})||!w.cities.some(c=>c.id===record.sourceCityId)||record.dispatchedAt>w.time||resourceKeys.every(r=>record.resources[r]===0))fail('Breakthrough shipment payment/source invalid');
+   if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==record.sourceFactionId||receipt.fingerprint!==shipmentPaymentFieldsFingerprint(w.campaignId,record.sourceFactionId,'breakthrough.ship',record.sourceCityId,p.projectId,record.resources.food,record.resources.wood,record.resources.stone,record.resources.gold)||!w.cities.some(c=>c.id===record.sourceCityId)||record.dispatchedAt>w.time||resourceKeys.every(r=>record.resources[r]===0))fail('Breakthrough shipment payment/source invalid');
    if(record.phase==='in-transit'&&(!t||t.phase!=='outbound')||record.phase!=='in-transit'&&(record.arrivedAt>w.time||w.events.some(e=>e.id===record.arrivalEventId)||t&&t.phase!=='returning'))fail('Breakthrough shipment phase invalid');
    if(t&&(t.projectId!==p.projectId||t.commandId!==record.commandId||t.sourceFactionId!==record.sourceFactionId||t.sourceCityId!==record.sourceCityId||t.destinationCityId!==record.destinationCityId||t.dispatchedAt!==record.dispatchedAt||JSON.stringify(t.authorizationSnapshot)!==JSON.stringify(record.authorizationSnapshot)||resourceKeys.some(r=>t.resources[r]!==record.resources[r])||record.phase!=='in-transit'&&(record.arrivedAt!==t.arrivalAt||record.arrivalEventId!==t.arrivalEventId||resourceKeys.some(r=>(t.returnCargo?.[r]??0)!==(record.phase==='returned'?record.resources[r]:0)))))fail('Breakthrough logistics ledger mismatch');
   }
