@@ -1,0 +1,92 @@
+{
+  "initialFull": {
+    "passed": 2291,
+    "failed": 1,
+    "skipped": 1,
+    "artifactSha256": "ae735d8b5061caff4f26afcfb4b03770e6bc3b591d49f08337aa6c9567abd0f8",
+    "failures": [
+      {
+        "file": "runtime.test.ts",
+        "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "reason": "30000ms timeout; simultaneous Chromium cold-worker benchmark; no assertion/timeout changes"
+      }
+    ]
+  },
+  "quietRuntimeRetest": {
+    "passed": 64,
+    "failed": 0,
+    "command": "npx vitest run src/game/formal/runtime.test.ts --maxWorkers=1 --testTimeout=30000"
+  },
+  "exploratoryFailures": [
+    {
+      "kind": "new fixture errors",
+      "details": "Out-of-schema field 100 and unknown unit spear replaced by a valid missing-field scenario and militia. Existing assertions and game rules unchanged."
+    },
+    {
+      "kind": "browser harness setup",
+      "details": "Corrected React module interop, refresh preamble, localhost WebSocket setup and bounded Vite initial-reload handling; preloaded Dexie before scenarios. Mid-scenario reloads and hot-edit interruptions were failures, not passes."
+    },
+    {
+      "kind": "directed default 5000ms timeout",
+      "details": "Retested with the existing isolated-Gate 30000ms CLI configuration; no protected test edited."
+    }
+  ],
+  "finalFull": "See checks.json; initial failure preserved rather than overwritten.",
+  "secondNode24Full": {
+    "passed": 2294,
+    "failed": 1,
+    "skipped": 1,
+    "artifactSha256": "0b456b6d078f23186e2d6d9af9d0a98197cfc26969668a9f2ac6ba043f495a11",
+    "reason": "Same existing Runtime developer admission test exceeded 30000ms without Chromium. Not claimed PASS."
+  },
+  "baselineDiagnostic": {
+    "n": 1,
+    "node": "24.19.0",
+    "baseCommit": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+    "baseSelectedTestMs": 17774,
+    "newSelectedTestMs": 18034,
+    "isolatedNewSelectedTestMs": 18313,
+    "interpretation": "Diagnostic only; one sample does not establish performance equivalence. Existing fixture advances about 30 days. No Runtime/test/timeout changed."
+  },
+  "nativeAIHarnessCorrection": {
+    "failedAttemptPreservedIn": "browser-results.json runs.performanceAndUI.cases",
+    "reason": "Initial fault injection advanced Date.now only, but foreground Runtime uses performance.now. Final harness advances both, posts clock/sync/command together, and samples ordering in the Durable callback. Strict assertions unchanged.",
+    "retest": "PASS: 99 AI, 25X, durable before catch-up completion, preview pending at T1, one committed effect"
+  },
+  "earlierConcurrentBrowser": {
+    "artifactSha256": "1f6a414cef94dd77faaab2842d547c9b62e0847155f67ed48b9809928c31751f",
+    "panels": [
+      {
+        "history": 0,
+        "longTasksOver50ms": 17
+      },
+      {
+        "history": 10000,
+        "longTasksOver50ms": 9
+      },
+      {
+        "history": 30000,
+        "longTasksOver50ms": 0
+      },
+      {
+        "history": 60000,
+        "longTasksOver50ms": 0
+      }
+    ],
+    "note": "Exploratory concurrent-load data; quiet final measurements are in browser-results.json."
+  },
+  "localNode22Full": {
+    "version": "22.23.4",
+    "passed": 2295,
+    "failed": 0,
+    "skipped": 1,
+    "artifactSha256": "149f45c990b5058be9b1171cd8e977f501a445772b0f7289f8fdb19c9f8c2989",
+    "scope": "Production d308998 before final insufficient-stock cache optimization; final cache has 16 targeted PASS, a native PASS and Build PASS; exact delivery HEAD covered by PR Verify."
+  },
+  "initialCI": {
+    "run": 41294396933,
+    "head": "fa8fc6a26d96b7c1a719e7d67daaa01b12e572cd",
+    "result": "FAIL in old recruitment successor before full regression; no test assertion failure",
+    "repair": "Finite adapter for cityActions; old manifests and all original assertions retained; recruitment function region and imports separately byte-pinned."
+  }
+}

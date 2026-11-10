@@ -1,13 +1,13 @@
+import {quoteConstruction,promoteConstructionJobs} from './constructionRules';
 import {logisticsAvailable,type LogisticsPurpose} from './logisticsAllocation';
 import {recordGrowthPopulation} from './growthTasks';
 import {invalidateMilitaryPower} from './militaryPower';
 import {reconcileVictory} from './victory';
 import {reconcileWonders} from './wonderCondition';
 import {reconcileBreakthroughs} from './breakthrough';
-import {QUEUE_CAPACITY} from './queueCapacity';
 import {finishCraftsmanCastle,craftsmanForConstruction,reconcileCityCraftsmen,clearCapturedNoncombatants} from './extinction';
 import {canReinforce} from './armies';
-import {buildingRequirements,castleSource} from './buildingDetailData';
+import {castleSource} from './buildingDetailData';
 import {startDemolition,completeDemolition} from './demolition';
 import {developerStock,refillDeveloperStock} from './playtest';
 import {reconcileSiegeStorage} from './siege';
@@ -15,7 +15,7 @@ import type {CityId,FactionId,ProjectId} from './ids';
 import {eventId,sequenceKey,shipmentId} from './ids';
 import type {Construction,EconomyCommand,FormalCity,FormalEvent,FormalOrder,FormalWorld,LogisticsShipment,Resources,Shipment} from './model';
 import {resourceKeys,zeroResources} from './model';
-import {BUILDING_CATALOG,buildingCost,buildingDuration,buildingKind,buildingLevel,FIELD_PRODUCTION,fieldCost,fieldDuration,HOUSING,storageCapacity,resourceBoostMultiplier,monasteryMultiplier,economyTechMultiplier,monasteryGoldPerHour} from './catalogB3';
+import {buildingCost,buildingKind,buildingLevel,FIELD_PRODUCTION,fieldCost,HOUSING,storageCapacity,resourceBoostMultiplier,monasteryMultiplier,economyTechMultiplier,monasteryGoldPerHour} from './catalogB3';
 import {EventScheduler} from './scheduler';
 import {spatial} from './spatial';
 import {route} from './routing';
@@ -27,8 +27,8 @@ export const CARAVAN_CAPACITY=2000;
 export function promotionConditions(c:FormalCity){return [c.population>=CITY_PROMOTION.population,c.housing>=CITY_PROMOTION.housing,buildingLevel(c,'townhall')>=CITY_PROMOTION.townhall];}
 export function caravanStatus(w:FormalWorld,c:FormalCity){const total=buildingLevel(c,'market'),inTransit=(w.logistics??[]).filter(t=>t.sourceCityId===c.id).reduce((n,t)=>n+t.caravans,0);return {total,inTransit,available:Math.max(0,total-inTransit)};}
 export const MILESTONES=[10000,15000,20000,22000,25000,30000] as const;
-export class RuleViolation extends Error {}
-export function requireRule(ok:unknown,message:string):asserts ok {if(!ok)throw new RuleViolation(message);}
+import {requireRule} from './ruleViolation';
+export {RuleViolation,requireRule} from './ruleViolation';
 export type EventSpec = {[K in FormalEvent['type']]:Omit<Extract<FormalEvent,{type:K}>,'id'>}[FormalEvent['type']];
 export function enqueue(w:FormalWorld,s:EventScheduler,e:EventSpec){const id=eventId(sequenceKey(w.sequences.event++));s.push({...e,id} as FormalEvent);return id;}
 export function initializeCityEconomy(w:FormalWorld,c:FormalCity,s:EventScheduler){
@@ -107,17 +107,8 @@ export const constructionConcurrency=(c:FormalCity)=>c.economy?.milestones.inclu
 export const militaryConcurrency=(c:FormalCity)=>c.economy?.milestones.includes(20000)?2:1;
 /** Fill newly unlocked execution capacity. Existing active work and all payment/time snapshots stay fixed. */
 export function promoteCityQueues(w:FormalWorld,c:FormalCity,s:EventScheduler){
- const replacements:FormalEvent[]=[],removed=new Set<string>(),build=c.economy?.construction??[];
- if(constructionConcurrency(c)===2){
-  const ends=[0,1].map(l=>Math.max(w.time,...build.filter(j=>j.lane===l&&j.startsAt<=w.time).map(j=>j.startsAt+j.durationMs)));
-  for(let i=0;i<build.length;i++){
-   const j=build[i];if(j.startsAt<=w.time)continue;
-   const previous=build.slice(0,i).filter(q=>q.target.kind===j.target.kind&&(q.target.kind==='field'?j.target.kind==='field'&&q.target.slot===j.target.slot:j.target.kind==='building'&&q.target.key===j.target.key)).at(-1);
-   const lane=previous?.lane??j.lanePreference??(ends[1]<ends[0]?1:0),startsAt=Math.max(w.time,ends[lane],previous?previous.startsAt+previous.durationMs:0);
-   if(j.startsAt!==startsAt||j.lane!==lane){j.startsAt=startsAt;j.lane=lane;removed.add(j.eventId);replacements.push({id:j.eventId,type:'construction.complete',cityId:c.id,at:startsAt+j.durationMs});}
-   ends[lane]=startsAt+j.durationMs;
-  }
- }
+ const replacements:FormalEvent[]=[],removed=new Set<string>();
+ for(const j of promoteConstructionJobs(w.time,c)){removed.add(j.eventId);replacements.push({id:j.eventId,type:'construction.complete',cityId:c.id,at:j.startsAt+j.durationMs});}
  const train=c.military?.queue??[];
  if(c.economy?.milestones.includes(20000)){
   const ends=[0,1].map(l=>Math.max(w.time,...train.filter(j=>j.lane===l&&j.startsAt<=w.time).map(j=>j.nextAt+(j.remaining-1)*j.durationMs)));
@@ -153,29 +144,11 @@ export function applyEconomyCommand(w:FormalWorld,c:FormalCity,order:FormalOrder
  if(p.type==='logistics.dispatch'){
   dispatchLogistics(w,c,order,p.destinationCityId,p.resources,s);return;
  }
- requireRule(e.construction.length<QUEUE_CAPACITY,`建造工程已達 ${QUEUE_CAPACITY} 項上限。`);
- let lane=p.lane;requireRule(lane!==1||e.milestones.includes(15000),'尚未取得第二施工佇列。');
- const previous=e.construction.filter(j=>p.type==='field.upgrade'?j.target.kind==='field'&&j.target.slot===p.slot:j.target.kind==='building'&&j.target.key===p.key);
- requireRule(!previous.some(j=>j.action==='demolish'),'此建築正在拆除，不能排入升級。');
- if(previous.length)lane=previous.at(-1)!.lane;
- if(lane===undefined){const end=(l:number)=>Math.max(w.time,...e.construction.filter(j=>j.lane===l).map(j=>j.startsAt+j.durationMs));lane=constructionConcurrency(c)===2&&end(1)<end(0)?1:0;}
- let target:Construction['target'],fromLevel:number,durationMs:number,paidResources:Resources;
- if(p.type==='field.upgrade'){
-  const field=c.fields?.find(f=>f.slot===p.slot);requireRule(field,'資源田不存在。');fromLevel=previous.at(-1)?.toLevel??field.level;requireRule(fromLevel<15,'資源田已滿級。');
-  if(fromLevel>=10)requireRule(e.milestones.includes(10000)&&c.cityPromotionCompleted&&c.housing>=10000,'高階資源田需要永久人口／City 資格與當下住房。');
-  paidResources=fieldCost(field.resource,fromLevel+1);spend(c,paidResources);durationMs=fieldDuration(field.resource,fromLevel+1,buildingLevel(c,'center'));target={kind:'field',slot:p.slot};
- }else{
-  const kind=buildingKind(p.key);requireRule(kind,'建築種類或 identity 無效。');const d=BUILDING_CATALOG[kind];fromLevel=previous.at(-1)?.toLevel??(kind==='wall'?buildingLevel(c,'wall'):c.buildings[p.key]??0);requireRule(fromLevel<d.maxLevel,'建築已滿級。');
-  if(kind==='wall')requireRule(p.slot===undefined,'城牆為固定設施，不使用一般建築槽。');
-  for(const requirement of buildingRequirements(w,c,kind,fromLevel+1))requireRule(requirement.met,'建築前置未達成：'+requirement.id);
-  if(kind!=='center'&&kind!=='wall'&&e.slots[p.key]===undefined){const slot=p.slot??Array.from({length:15},(_,i)=>i).find(i=>!Object.values(e.slots).includes(i));requireRule(slot!==undefined&&!Object.values(e.slots).includes(slot),'自由建築槽已滿或該位置已使用。');e.slots[p.key]=slot;c.buildings[p.key]=0;}
-  const craftOrder=order.payload.type==='craftsman.castle'?order.payload:undefined;
-  if(craftOrder)requireRule(kind==='castle'&&fromLevel===0&&w.extinction?.craftsmen.some(t=>t.id===craftOrder.craftsmanId&&t.ownerFactionId===order.issuerId&&t.cityId===c.id&&!t.carrierArmyId&&!t.eventId&&!t.constructionCommandId),'工匠城堡授權已失效。');
-  // The original validated command, never a public building payload flag, authorizes Lv1 only.
-  paidResources=craftOrder?zeroResources():buildingCost(kind,fromLevel+1);spend(c,paidResources);durationMs=buildingDuration(kind,fromLevel+1,buildingLevel(c,'center'));target={kind:'building',key:p.key};
- }
- const laneJobs=e.construction.filter(j=>j.lane===lane),startsAt=Math.max(w.time,...laneJobs.map(j=>j.startsAt+j.durationMs),...previous.map(j=>j.startsAt+j.durationMs));
- const id=enqueue(w,s,{type:'construction.complete',cityId:c.id,at:startsAt+durationMs});e.construction.push({eventId:id,commandId:order.commandId,lane,lanePreference:p.lane,target,fromLevel,toLevel:fromLevel+1,createdAt:w.time,startsAt,durationMs,qualificationHousing:c.housing,paidResources});
+ const craft=order.payload.type==='craftsman.castle'?{authorized:!!w.extinction?.craftsmen.some(t=>t.id===(order.payload as Extract<FormalOrder['payload'],{type:'craftsman.castle'}>).craftsmanId&&t.ownerFactionId===order.issuerId&&t.cityId===c.id&&!t.carrierArmyId&&!t.eventId&&!t.constructionCommandId)}:undefined;
+ const {allocatedSlot,...job}=quoteConstruction(w.time,c,w.factions.find(f=>f.id===c.ownerFactionId)?.age??0,p,craft);
+ if(allocatedSlot!==undefined&&p.type==='building.upgrade'){e.slots[p.key]=allocatedSlot;c.buildings[p.key]=0;}
+ spend(c,job.paidResources);
+ const id=enqueue(w,s,{type:'construction.complete',cityId:c.id,at:job.startsAt+job.durationMs});e.construction.push({eventId:id,commandId:order.commandId,...job});
 }
 export function handleEconomyEvent(w:FormalWorld,event:FormalEvent,s:EventScheduler):boolean {
  if(event.type==='economy.settle'){

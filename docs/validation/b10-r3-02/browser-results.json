@@ -1,0 +1,466 @@
+{
+  "schemaVersion": 1,
+  "productionSourceCommit": "d30899811e984a784ea432867b3f59e4d8691e91",
+  "harnessSourceCommit": "12322f13419ea4913d7c83196f9278c4ab4be9ae",
+  "provenance": "Six distinct scenarios passed in two runs. The last scenario was retested after correcting clock injection and sampling T1 at notification time. All production source bytes stayed unchanged. Full-run failure is retained below; no browser test was assumed to pass. Final delivery additionally caches unchanged insufficient-stock results; that branch has its own current-source native run (30 hits, one initial computation, refill causes a second computation) and unit tests. Performance tables retain the earlier explicitly named measurement source.",
+  "browser": "154.0.8037.57",
+  "environment": "native headless Chromium, desktop Linux container; Vite source; not Android or production deployment",
+  "cases": [
+    {
+      "name": "native single/batch Worker preview and compact context at 0/10k/30k/60k history",
+      "status": "PASS",
+      "histories": [
+        0,
+        10000,
+        30000,
+        60000
+      ]
+    },
+    {
+      "name": "compiled production Preview Worker uses the same compact protocol and shared rules",
+      "status": "PASS",
+      "asset": "constructionPreview.worker-DRmfBD5N.js",
+      "bytes": 272681
+    },
+    {
+      "name": "actual construction list batches candidates, field/wall/detail asynchronous; formal submit before preview",
+      "status": "PASS",
+      "candidates": 4,
+      "immediateFormalSubmission": true
+    },
+    {
+      "name": "revision/branch/target switching discards late preview; worker termination recovers without formal side effects",
+      "status": "PASS",
+      "restarted": true
+    },
+    {
+      "name": "native list opening latency, operation long tasks and bounded preview metrics",
+      "status": "PASS",
+      "metrics": {
+        "calculations": 3,
+        "discarded": 1,
+        "cacheHits": 1
+      }
+    },
+    {
+      "name": "native 99-AI/25X catch-up accepts T1 while preview is pending; preview death preserves one formal effect",
+      "status": "PASS",
+      "state": "committed",
+      "effects": 1,
+      "jobs": 1,
+      "aiDecisions": 99,
+      "speed": 25,
+      "syntheticWallAndMonotonicAdvanceMs": 144000,
+      "durableBeforeCatchup": true,
+      "previewPendingAtT1": true
+    },
+    {
+      "name": "native insufficient-stock quotes survive unchanged ticks and revalidate new resources",
+      "status": "PASS",
+      "stable": {
+        "calculations": 1,
+        "discarded": 0,
+        "cacheHits": 30
+      },
+      "final": {
+        "calculations": 2,
+        "discarded": 0,
+        "cacheHits": 30
+      },
+      "refilled": "ready"
+    }
+  ],
+  "performance": [
+    {
+      "history": 0,
+      "contextBytes": 1487,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 13.5,
+        "p95": 34
+      },
+      "singleColdWorkerMs": {
+        "n": 30,
+        "p50": 211.69999999925494,
+        "p95": 264.5
+      },
+      "batchColdQuoteWarmWorkerMs": {
+        "n": 30,
+        "p50": 1.1000000014901161,
+        "p95": 2
+      },
+      "contextMainMs": {
+        "n": 30,
+        "p50": 0,
+        "p95": 0.10000000149011612
+      },
+      "postMessageAndKeyMainMs": {
+        "n": 30,
+        "p50": 0.19999999925494194,
+        "p95": 1.300000000745058
+      },
+      "cacheHitMs": {
+        "n": 30,
+        "p50": 0.10000000149011612,
+        "p95": 0.30000000074505806
+      },
+      "detailInteractiveMainMs": {
+        "n": 30,
+        "p50": 5,
+        "p95": 7.5
+      },
+      "previewLongTasksOver50ms": 0,
+      "sample": "30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch"
+    },
+    {
+      "history": 10000,
+      "contextBytes": 1493,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 27,
+        "p95": 35.19999999925494
+      },
+      "singleColdWorkerMs": {
+        "n": 30,
+        "p50": 193.5,
+        "p95": 212.39999999850988
+      },
+      "batchColdQuoteWarmWorkerMs": {
+        "n": 30,
+        "p50": 1.0999999977648258,
+        "p95": 1.5
+      },
+      "contextMainMs": {
+        "n": 30,
+        "p50": 0.10000000149011612,
+        "p95": 0.19999999925494194
+      },
+      "postMessageAndKeyMainMs": {
+        "n": 30,
+        "p50": 0.19999999925494194,
+        "p95": 1.199999999254942
+      },
+      "cacheHitMs": {
+        "n": 30,
+        "p50": 0.09999999776482582,
+        "p95": 0.19999999925494194
+      },
+      "detailInteractiveMainMs": {
+        "n": 30,
+        "p50": 4.899999998509884,
+        "p95": 6
+      },
+      "previewLongTasksOver50ms": 0,
+      "sample": "30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch"
+    },
+    {
+      "history": 30000,
+      "contextBytes": 1493,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 54.80000000074506,
+        "p95": 61.69999999925494
+      },
+      "singleColdWorkerMs": {
+        "n": 30,
+        "p50": 194.69999999925494,
+        "p95": 217.10000000149012
+      },
+      "batchColdQuoteWarmWorkerMs": {
+        "n": 30,
+        "p50": 1,
+        "p95": 1.6000000014901161
+      },
+      "contextMainMs": {
+        "n": 30,
+        "p50": 0.09999999776482582,
+        "p95": 0.19999999925494194
+      },
+      "postMessageAndKeyMainMs": {
+        "n": 30,
+        "p50": 0.19999999925494194,
+        "p95": 1.5
+      },
+      "cacheHitMs": {
+        "n": 30,
+        "p50": 0.10000000149011612,
+        "p95": 0.30000000074505806
+      },
+      "detailInteractiveMainMs": {
+        "n": 30,
+        "p50": 4.699999999254942,
+        "p95": 7
+      },
+      "previewLongTasksOver50ms": 0,
+      "sample": "30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch"
+    },
+    {
+      "history": 60000,
+      "contextBytes": 1493,
+      "oldFullReducerMs": {
+        "n": 30,
+        "p50": 102.80000000074506,
+        "p95": 111
+      },
+      "singleColdWorkerMs": {
+        "n": 30,
+        "p50": 197.80000000074506,
+        "p95": 231.30000000074506
+      },
+      "batchColdQuoteWarmWorkerMs": {
+        "n": 30,
+        "p50": 1.1000000014901161,
+        "p95": 4.300000000745058
+      },
+      "contextMainMs": {
+        "n": 30,
+        "p50": 0.09999999776482582,
+        "p95": 0.19999999925494194
+      },
+      "postMessageAndKeyMainMs": {
+        "n": 30,
+        "p50": 0.19999999925494194,
+        "p95": 1.5
+      },
+      "cacheHitMs": {
+        "n": 30,
+        "p50": 0.10000000149011612,
+        "p95": 0.19999999925494194
+      },
+      "detailInteractiveMainMs": {
+        "n": 30,
+        "p50": 5.100000001490116,
+        "p95": 6.599999997764826
+      },
+      "previewLongTasksOver50ms": 0,
+      "sample": "30 measured, 3 warmups; a fresh actual worker per cold sample; 6 independent targets per batch"
+    }
+  ],
+  "panelOpening": [
+    {
+      "history": 0,
+      "interactiveMs": {
+        "n": 30,
+        "p50": 42.19999999925494,
+        "p95": 53.20000000298023
+      },
+      "longTasksOver50ms": []
+    },
+    {
+      "history": 10000,
+      "interactiveMs": {
+        "n": 30,
+        "p50": 37.80000000074506,
+        "p95": 49.69999999925494
+      },
+      "longTasksOver50ms": []
+    },
+    {
+      "history": 30000,
+      "interactiveMs": {
+        "n": 30,
+        "p50": 36.19999999925494,
+        "p95": 42.100000001490116
+      },
+      "longTasksOver50ms": []
+    },
+    {
+      "history": 60000,
+      "interactiveMs": {
+        "n": 30,
+        "p50": 37.400000002235174,
+        "p95": 41.399999998509884
+      },
+      "longTasksOver50ms": []
+    }
+  ],
+  "controllerMetrics": {
+    "calculations": 3,
+    "discarded": 1,
+    "cacheHits": 1
+  },
+  "compiledWorker": {
+    "asset": "constructionPreview.worker-DRmfBD5N.js",
+    "bytes": 272681,
+    "measurements": [
+      {
+        "history": 0,
+        "contextBytes": 1489,
+        "singleColdWorkerMs": {
+          "n": 30,
+          "p50": 57.69999999925494,
+          "p95": 105.30000000074506
+        },
+        "batchColdQuoteWarmWorkerMs": {
+          "n": 30,
+          "p50": 1,
+          "p95": 1.5
+        },
+        "mainPreparationAndPostMs": {
+          "n": 30,
+          "p50": 0.30000000074505806,
+          "p95": 0.6000000014901161
+        }
+      },
+      {
+        "history": 10000,
+        "contextBytes": 1493,
+        "singleColdWorkerMs": {
+          "n": 30,
+          "p50": 54.5,
+          "p95": 112.30000000074506
+        },
+        "batchColdQuoteWarmWorkerMs": {
+          "n": 30,
+          "p50": 1,
+          "p95": 1.300000000745058
+        },
+        "mainPreparationAndPostMs": {
+          "n": 30,
+          "p50": 0.30000000074505806,
+          "p95": 1.5
+        }
+      },
+      {
+        "history": 30000,
+        "contextBytes": 1493,
+        "singleColdWorkerMs": {
+          "n": 30,
+          "p50": 55.100000001490116,
+          "p95": 75.60000000149012
+        },
+        "batchColdQuoteWarmWorkerMs": {
+          "n": 30,
+          "p50": 1,
+          "p95": 1.5
+        },
+        "mainPreparationAndPostMs": {
+          "n": 30,
+          "p50": 0.29999999701976776,
+          "p95": 1
+        }
+      },
+      {
+        "history": 60000,
+        "contextBytes": 1493,
+        "singleColdWorkerMs": {
+          "n": 30,
+          "p50": 54.900000002235174,
+          "p95": 103.80000000074506
+        },
+        "batchColdQuoteWarmWorkerMs": {
+          "n": 30,
+          "p50": 1,
+          "p95": 1.300000000745058
+        },
+        "mainPreparationAndPostMs": {
+          "n": 30,
+          "p50": 0.20000000298023224,
+          "p95": 0.7999999970197678
+        }
+      }
+    ],
+    "assetSha256": "db66f3c058ff0e56dab50a08caa7096b23178fe408567f9c102db634b995105d"
+  },
+  "runs": {
+    "performanceAndUI": {
+      "selection": "all",
+      "cases": [
+        {
+          "name": "native single/batch Worker preview and compact context at 0/10k/30k/60k history",
+          "status": "PASS",
+          "histories": [
+            0,
+            10000,
+            30000,
+            60000
+          ]
+        },
+        {
+          "name": "compiled production Preview Worker uses the same compact protocol and shared rules",
+          "status": "PASS",
+          "asset": "constructionPreview.worker-DRmfBD5N.js",
+          "bytes": 272681
+        },
+        {
+          "name": "actual construction list batches candidates, field/wall/detail asynchronous; formal submit before preview",
+          "status": "PASS",
+          "candidates": 4,
+          "immediateFormalSubmission": true
+        },
+        {
+          "name": "revision/branch/target switching discards late preview; worker termination recovers without formal side effects",
+          "status": "PASS",
+          "restarted": true
+        },
+        {
+          "name": "native list opening latency, operation long tasks and bounded preview metrics",
+          "status": "PASS",
+          "metrics": {
+            "calculations": 3,
+            "discarded": 1,
+            "cacheHits": 1
+          }
+        },
+        {
+          "name": "native 99-AI/25X catch-up accepts T1 while preview is pending; preview death preserves one formal effect",
+          "status": "FAIL",
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n"
+        }
+      ],
+      "errors": []
+    },
+    "nativeClockRetest": {
+      "browser": "154.0.8037.57",
+      "environment": "native headless Chromium, desktop Linux container; Vite source; not Android or production deployment",
+      "selection": "99-AI",
+      "cases": [
+        {
+          "name": "native 99-AI/25X catch-up accepts T1 while preview is pending; preview death preserves one formal effect",
+          "status": "PASS",
+          "state": "committed",
+          "effects": 1,
+          "jobs": 1,
+          "aiDecisions": 99,
+          "speed": 25,
+          "syntheticWallAndMonotonicAdvanceMs": 144000,
+          "durableBeforeCatchup": true,
+          "previewPendingAtT1": true
+        }
+      ],
+      "performance": [],
+      "errors": []
+    },
+    "nativeStockCache": {
+      "browser": "154.0.8037.57",
+      "environment": "native headless Chromium, desktop Linux container; Vite source; not Android or production deployment",
+      "selection": "insufficient-stock",
+      "cases": [
+        {
+          "name": "native insufficient-stock quotes survive unchanged ticks and revalidate new resources",
+          "status": "PASS",
+          "stable": {
+            "calculations": 1,
+            "discarded": 0,
+            "cacheHits": 30
+          },
+          "final": {
+            "calculations": 2,
+            "discarded": 0,
+            "cacheHits": 30
+          },
+          "refilled": "ready"
+        }
+      ],
+      "performance": [],
+      "errors": []
+    }
+  },
+  "limits": [
+    "Headless Linux container and Vite UI; compiled Preview Worker was loaded from the local Build output. Not full production UI/PWA or Android acceptance.",
+    "Native performance run had no concurrent full regression. Initial exploratory concurrent measurements are not substituted for these results.",
+    "Quiet final run observed zero >50ms tasks in the measured preview and panel-opening intervals; earlier concurrent-load runs observed whole-panel long tasks. This is not a general no-jank guarantee.",
+    "Clock jump in the functional AI case is synthetic, not a device latency benchmark."
+  ],
+  "deliveryProductionSourceCommit": "f83548701703f4d42c60fb436a8751b813bf6656"
+}
