@@ -208,7 +208,7 @@ async function runRequest(r:RuntimeRequest){
     startWithoutWorld=false;
     if(text===OLD_CAMPAIGN_MESSAGE)try{token=await incompatibleStartToken();startWithoutWorld=!token;}catch(e){display=e instanceof Error?e.message:'無法安全確認舊戰役，原資料保留。';}
    }
-   post({type:'error',text:display,requestId:r.requestId,...(text===OLD_CAMPAIGN_MESSAGE?{legacyAvailable:true}:{}),incompatibleStartToken:token});
+   post({type:'error',text:display,requestId:r.requestId,...(text===OLD_CAMPAIGN_MESSAGE?{legacyAvailable:await hasLegacyCampaign().catch(()=>false)}:{}),incompatibleStartToken:token});
   }
   // Failed transitions carry the prior world; failed load remains a visible error.
   if(r.type==='command')state();

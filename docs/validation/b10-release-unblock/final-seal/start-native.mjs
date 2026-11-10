@@ -25,6 +25,7 @@ try{
    assert.equal(observed.current.data.snapshot.campaignId,seeded.campaign);assert.equal(observed.sourceHash,seeded.sourceHash);results.push({scenario,mobile,status:'PASS',newGameBlocked:true,sourcePreserved:true});await context.close();continue;
   }
   await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(b=>b.textContent==='開始新遊戲'&&!b.disabled));
+  await page.getByRole('button',{name:'開啟設定',exact:true}).click();const settings=page.getByRole('dialog',{name:'首頁設定',exact:true});await settings.waitFor();assert.equal(await settings.getByRole('button',{name:'匯出舊存檔備份',exact:true}).count(),scenario==='legacy'?1:0);await settings.getByRole('button',{name:'關閉對話框',exact:true}).click();
   const before=await diagnostic(page,'read');await primary.click();await page.getByLabel('領主名稱',{exact:true}).fill(mobile?'手機新領主':'新局領主');await page.getByLabel('世界種子碼',{exact:true}).fill('884422');await page.getByLabel('新局速度',{exact:true}).selectOption('25');await page.getByLabel('離線世界推進',{exact:true}).selectOption('0');
   await page.getByRole('button',{name:'升起旗幟 · 開始戰役',exact:true}).click();await page.getByRole('dialog',{name:'確認建立新戰役',exact:true}).waitFor();await page.getByRole('button',{name:'取消',exact:true}).click();
   const cancelled=await diagnostic(page,'read');assert.equal(cancelled.hash,before.hash);assert.equal(await legacyHash(page),old);
