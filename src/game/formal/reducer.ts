@@ -27,7 +27,8 @@ import {canonicalJSON} from './canonical';
 import {eventId,reportId,sequenceKey,type CommandId,type FactionId} from './ids';
 import type {CommandAck,CommandReceipt,FormalOrder,FormalReport,FormalTransition,FormalWorld,ResearchProject} from './model';
 import {resourceKeys} from './model';
-import {orderSchema,validateFormalDraft} from './schema';
+import {orderSchema,validateFormalWorld} from './schema';
+import {withDraftShipmentSyntax} from './shipmentSyntax';
 import {EventScheduler} from './scheduler';
 import {applyEconomyCommand,handleEconomyEvent,settleCity,settleFaction,promoteCityQueues,RuleViolation} from './economy';
 import {spatial} from './spatial';
@@ -117,6 +118,8 @@ function replaySubmit():Submit {
  let admission:ReplayAdmission|undefined;
  return(current,value)=>{admission??={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current)};return submitOrderDraft(current,value,admission);};
 }
+/** Keep the original public validation boundary observable exactly once. */
+function validateFormalDraft(w:FormalWorld){return withDraftShipmentSyntax(w,()=>validateFormalWorld(w));}
 /** Pure transition; only persistence may expose the draft as committed world. */
 export function submitFormalOrder(current:FormalWorld,value:unknown):FormalTransition {
  return submitOrderDraft(current,value);

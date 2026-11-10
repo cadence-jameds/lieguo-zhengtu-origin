@@ -1,4 +1,4 @@
-import {shipmentSyntax,withDraftShipmentSyntax,withShipmentValidation} from './shipmentSyntax';
+import {shipmentSyntax,withShipmentValidation} from './shipmentSyntax';
 import {domainReceipt} from './commandEvidence';
 import {commandHistory,bindLedger,resolveLedger,isHistoryView,pendingHistory,useLedgerProof,type VerifiedLedger} from './commandLedger';
 import {growthTaskValueSchema,growthTaskSchema,growthTaskIdSchema,validateGrowthTasks} from './growthTaskSchema';
@@ -283,5 +283,3 @@ export const orderSchema:z.ZodType<FormalOrder>=z.object({commandId:commandIdSch
  z.object({type:z.literal('research.contribute'),projectId:researchIdSchema,cityId:cityIdSchema,resources:resourcesSchema}).strict(),
 ])}).strict();
 
-/** Internal: only native-cloned, privately mutated Reducer drafts. */
-export function validateFormalDraft(w:FormalWorld):FormalWorld{return withDraftShipmentSyntax(w,()=>validateFormalWorld(w));}

@@ -3,17 +3,18 @@ import {wonderWorld} from './wonderTestSupport';
 import {order} from './developmentTestSupport';
 import {advanceFormal,submitFormalOrder} from './reducer';
 import * as validation from './schema';
+import * as syntax from './shipmentSyntax';
 import type {FormalWorld} from './model';
 import {canonicalJSON} from './canonical';
 function send(){const w=wonderWorld();w.cities[1].stock={food:1,wood:0,stone:0,gold:0};return{w,command:order(w,{type:'wonder.ship',cityId:w.cities[1].id,projectId:w.largeProjects[0].projectId,resources:{food:1,wood:0,stone:0,gold:0}})};}
 it('retains exact command/arrival/return worlds, reports and Acks versus the complete uncached validator',()=>{
  const {w,command}=send(),before=canonicalJSON(w),actual=submitFormalOrder(w,command),target=actual.world.logistics![0].returnAt,clock=advanceFormal(actual.world,target);
- const spy=vi.spyOn(validation,'validateFormalDraft').mockImplementation(validation.validateFormalWorld);
+ const spy=vi.spyOn(syntax,'withDraftShipmentSyntax').mockImplementation((_w,validate)=>validate());
  try{const expected=submitFormalOrder(w,command);expect(actual).toEqual(expected);expect(clock).toEqual(advanceFormal(expected.world,target));expect(canonicalJSON(w)).toBe(before);}finally{spy.mockRestore();}
 });
 it('still revalidates pool totals, duplicate identities, payment evidence, world time and ownership after syntax hits',()=>{
  const {w,command}=send(),sent=submitFormalOrder(w,command),funded=advanceFormal(sent.world,sent.world.logistics![0].returnAt).world;
- const normalized=(state:FormalWorld,draft:boolean)=>{try{return{world:(draft?validation.validateFormalDraft:validation.validateFormalWorld)(structuredClone(state))};}catch(e){return{issues:(e as {issues?:unknown}).issues??String(e)};}};
+ const normalized=(state:FormalWorld,draft:boolean)=>{try{const input=structuredClone(state);return{world:draft?syntax.withDraftShipmentSyntax(input,()=>validation.validateFormalWorld(input)):validation.validateFormalWorld(input)};}catch(e){return{issues:(e as {issues?:unknown}).issues??String(e)};}};
  const cases=[funded];
  const pool=structuredClone(funded);pool.largeProjects[0].poolResources.food++;cases.push(pool);
  const duplicate=structuredClone(funded);duplicate.largeProjects[0].shipments.push(structuredClone(duplicate.largeProjects[0].shipments[0]));cases.push(duplicate);
