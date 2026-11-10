@@ -8,9 +8,9 @@ const raw=(p:FormalPersistence)=>Promise.all(p.db.tables.map(async t=>[t.name,aw
 self.onmessage=async e=>{
  const {action}=e.data;
  try{
-  if(action==='read'){const p=new FormalPersistence();try{self.postMessage({result:{hash:await digest(await raw(p)),current:await p.db.saves.get('current')}});}finally{p.db.close();}return;}
+  if(action==='read'){const p=new FormalPersistence();try{self.postMessage({result:{hash:await digest(await raw(p)),current:await p.db.saves.get('current'),sourceHash:await digest(await p.db.saves.get('current')??null)}});}finally{p.db.close();}return;}
   const result=await navigator.locks.request(FORMAL_WRITER_LOCK,{ifAvailable:true},async lock=>{
-   if(!lock)throw Error('writer lock unavailable');const p=new FormalPersistence();
+   if(!lock)throw Error('writer lock unavailable');let fail=false;const p=new FormalPersistence({fault:point=>{if(fail&&point==='world-write')throw new DOMException('injected native quota','QuotaExceededError');}});
    try{
     if(action==='read')return{hash:await digest(await raw(p)),current:(await p.db.saves.get('current'))};
     const world=createFormalWorld({campaign:crypto.randomUUID(),seed:90217,speed:1,name:'合成舊領主',civilizationId:'civ_zhongguo',offlineHours:0});
@@ -22,13 +22,18 @@ self.onmessage=async e=>{
     }
     await p.acquireWriter();const w=await p.start(world);
     const row=await p.db.saves.get('current');if(row?.kind!=='world')throw Error('seed did not commit');
-    if(action==='incompatible'||action==='corrupt'){
+    if(action==='incompatible'||action==='corrupt'||action==='atomic-failure'){
      Object.assign(row.data.snapshot.metadata,{contentVersion:'older-synthetic-content'});row.data.metadata={...row.data.snapshot.metadata};row.data.checksum=await digest(row.data.snapshot);
      const authority=await p.db.saves.get('authority') as any;authority.worldChecksum=row.data.checksum;const {checksum:_,...body}=authority;authority.checksum=await digest(body);
      if(action==='corrupt')row.data.snapshot.cities[0].stock.food++;
      await p.db.transaction('rw',p.db.saves,()=>p.db.saves.bulkPut([row,authority]));
     }
-    return{campaign:w.campaignId,hash:await digest(await raw(p))};
+    if(action==='atomic-failure'){
+     const token=await p.incompatibleStartToken(),before=await digest(await raw(p));fail=true;let rejected=false;
+     try{await p.start(createFormalWorld({campaign:crypto.randomUUID(),seed:884422,speed:25,name:'故障新局',offlineHours:0}),token);}catch{rejected=true;}
+     const after=await digest(await raw(p));if(!rejected||before!==after)throw Error('native start did not roll back');return{rejected,unchanged:before===after};
+    }
+    return{campaign:w.campaignId,hash:await digest(await raw(p)),sourceHash:await digest(await p.db.saves.get('current'))};
    }finally{p.db.close();}
   });
   self.postMessage({result});

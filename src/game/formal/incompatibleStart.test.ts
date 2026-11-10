@@ -11,11 +11,11 @@ const stores:FormalPersistence[]=[];
 const make=()=>{let fail:FailurePoint|undefined;const p=new FormalPersistence({suffix:'new-game-'+crypto.randomUUID(),fault:q=>{if(q===fail)throw new DOMException('injected','QuotaExceededError');}});stores.push(p);return{p,setFault:(q?:FailurePoint)=>{fail=q;}};};
 const rows=(p:FormalPersistence)=>Promise.all(p.db.tables.map(async t=>[t.name,await t.toArray()]));
 const fresh=()=>{const w=createFormalFixture({campaign:'new-'+crypto.randomUUID()});return submitFormalOrder(w,order(w,'new-rename',{type:'city.rename',cityId:w.cities[0].id,name:'新戰役'})).world;};
-async function unsupported(p:FormalPersistence){
+async function unsupported(p:FormalPersistence,version='older-test-content'){
  const r=await p.db.saves.get('current');if(r?.kind!=='world')throw Error('fixture');
  // A real, self-consistent older envelope in the current namespace. No fake
  // load success: the ordinary loader must reject this exact stored version.
- Object.assign(r.data.snapshot.metadata,{contentVersion:'older-test-content'});
+ Object.assign(r.data.snapshot.metadata,{contentVersion:version});
  r.data.metadata={...r.data.snapshot.metadata};r.data.checksum=await digest(r.data.snapshot);
  const a=await p.db.saves.get('authority') as any;a.worldChecksum=r.data.checksum;const {checksum:_,...body}=a;a.checksum=await digest(body);
  await p.db.saves.bulkPut([r,a]);
@@ -32,6 +32,10 @@ it('explicit incompatible activity can start without backup and reload the new f
 it('reading a consent token then cancelling is read-only; an unconfirmed start cannot replace old activity',async()=>{
  const {p}=await prepared(),before=await rows(p);await p.incompatibleStartToken();expect(await rows(p)).toEqual(before);
  await expect(p.start(fresh())).rejects.toThrow(OLD_CAMPAIGN_MESSAGE);expect(await rows(p)).toEqual(before);
+});
+it('a source change after confirmation refuses the stale token without writes',async()=>{
+ const {p}=await prepared(),token=await p.incompatibleStartToken();await unsupported(p,'another-old-version');const before=await rows(p);
+ await expect(p.start(fresh(),token)).rejects.toThrow();expect(await rows(p)).toEqual(before);expect(await p.incompatibleStartToken()).not.toBe(token);
 });
 it('a new writer fences an old consent token and the old writer',async()=>{
  const {p}=await prepared(),token=await p.incompatibleStartToken(),other=new FormalPersistence({suffix:p.db.name.slice('lieguo-formal-bounded-v1-'.length)});stores.push(other);await other.acquireWriter();const before=await rows(p);
