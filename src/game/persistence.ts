@@ -319,7 +319,8 @@ export class FormalPersistence {
       await this.db.backups.where('campaignId').equals(old).delete();
       await this.db.BattleReports.where('campaignId').equals(old).delete();
       authority.recovery=authority.recovery.filter(r=>r.campaignId!==old);
-      authority.campaigns=authority.campaigns.filter(c=>c.campaignId!==old);
+      // Preserve campaign authority and the global revision waterline, exactly
+      // as a normal new-game transition does; only incompatible Recovery retires.
      }else{if(current.kind!=='world')throw Error('無法確認活動戰役，原資料保留。');assertCampaignCompatibility(current.data);await this.assertStartSource(current,authority);}
     }else if(replacementToken||authority.activeCampaignId)throw Error('活動戰役版本已變更，請重新讀取後確認。');
    }

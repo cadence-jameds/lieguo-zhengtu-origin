@@ -59,3 +59,8 @@ it.each(['branch-write','report-write','backup-write','world-write','authority-w
 it('a compatible campaign keeps the existing new-game and Recovery behavior',async()=>{
  const {p}=make();await p.acquireWriter();const old=await p.start(createFormalFixture()),next=await p.start(fresh());expect(next.campaignId).not.toBe(old.campaignId);expect(await p.backupList()).toHaveLength(2);expect((await p.loadSave()).game?.campaignId).toBe(next.campaignId);
 });
+
+it('a late incompatible campaign retains the normal globally monotonic transition revision',async()=>{
+ const {p}=make();await p.acquireWriter();const initial=createFormalFixture();initial.revision=100;const old=await p.start(initial);await unsupported(p);const token=await p.incompatibleStartToken();
+ const next=await p.start(createFormalFixture({campaign:'late-new'}),token);expect(next.revision).toBe(old.revision+1);expect((await p.loadSave()).game?.revision).toBe(next.revision);
+});
