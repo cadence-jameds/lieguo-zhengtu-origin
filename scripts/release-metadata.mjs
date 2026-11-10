@@ -13,9 +13,16 @@ export function playableChanges(paths,before=()=>'',after=()=> ''){
   return playablePath(p);
  });
 }
-export function nextVersion(base,count,ceiling=99){
+export function nextVersion(base,count,ceiling=99,rolloverRule){
  if(!/^\d+\.\d+\.\d+$/.test(base)||!Number.isSafeInteger(count)||count<0)throw Error('Invalid release version/count');
- const [a,b,c]=base.split('.').map(Number);if(c+count>ceiling)throw Error('Version rollover requires the owner-approved numbering rule; refusing an invented carry.');return `${a}.${b}.${c+count}`;
+ const [a,b,c]=base.split('.').map(Number),patch=c+count;
+ if(![a,b,c,patch].every(Number.isSafeInteger))throw Error('Invalid release version/count');
+ if(rolloverRule!==undefined&&rolloverRule!=='patch-99-to-minor')throw Error('Unknown owner-approved release rollover rule');
+ if(rolloverRule==='patch-99-to-minor'){
+  if(ceiling!==99||!Number.isSafeInteger(b+Math.floor(patch/100)))throw Error('Invalid release rollover configuration');
+  return `${a}.${b+Math.floor(patch/100)}.${patch%100}`;
+ }
+ if(patch>ceiling)throw Error('Version rollover requires the owner-approved numbering rule; refusing an invented carry.');return `${a}.${b}.${patch}`;
 }
 export function validateNote(value){
  if(!value||Object.keys(value).some(k=>!['title','notes','pr'].includes(k))||typeof value.title!=='string'||value.title.length>60||!/[\u3400-\u9fff]/.test(value.title)||!Array.isArray(value.notes)||!value.notes.length||value.notes.length>10)throw Error('Release Notes require a short Chinese title and 1–10 player-visible notes.');
@@ -44,10 +51,10 @@ export function createMetadata(root,options={}){
   if(!playableChanges(paths,p=>at(root,parent,p),p=>at(root,commit,p)))continue;
   let note=config.bootstrap[commit];
   if(!note){try{note=checkNotes(root,parent,commit).notes[0];}catch(error){if(options.strict)throw error;note={title:'遊戲建置預覽',notes:['此為待審建置；正式玩家更新摘要須在合併前通過檢查。']};}}
-  note=validateNote(note);history.push({...note,version:nextVersion(config.baselineVersion,history.length,config.patchCeiling),date:run(root,'show','-s','--format=%cI',commit).slice(0,10),commitSha:commit});
+  note=validateNote(note);history.push({...note,version:nextVersion(config.baselineVersion,history.length,config.patchCeiling,config.rolloverRule),date:run(root,'show','-s','--format=%cI',commit).slice(0,10),commitSha:commit});
  }
  let dirty=false;
- if(!options.head&&options.working!==false){const paths=[...run(root,'-c','core.quotepath=false','diff','--name-only',head).split('\n'),...run(root,'-c','core.quotepath=false','ls-files','--others','--exclude-standard').split('\n')].filter(Boolean);dirty=playableChanges(paths,p=>at(root,head,p),p=>{try{return read(root,p);}catch{return '';}});if(dirty){const pending=paths.filter(p=>/^releases\/notes\/[a-z0-9-]+\.json$/.test(p)&&!at(root,head,p));const note=pending.length===1?validateNote(JSON.parse(read(root,pending[0]))):{title:'本機建置預覽',notes:['本機尚未提交的變更，正式更新資訊以合併後建置為準。']};history.push({...note,version:nextVersion(config.baselineVersion,history.length,config.patchCeiling),date:run(root,'show','-s','--format=%cI',head).slice(0,10),commitSha:head});}}
+ if(!options.head&&options.working!==false){const paths=[...run(root,'-c','core.quotepath=false','diff','--name-only',head).split('\n'),...run(root,'-c','core.quotepath=false','ls-files','--others','--exclude-standard').split('\n')].filter(Boolean);dirty=playableChanges(paths,p=>at(root,head,p),p=>{try{return read(root,p);}catch{return '';}});if(dirty){const pending=paths.filter(p=>/^releases\/notes\/[a-z0-9-]+\.json$/.test(p)&&!at(root,head,p));const note=pending.length===1?validateNote(JSON.parse(read(root,pending[0]))):{title:'本機建置預覽',notes:['本機尚未提交的變更，正式更新資訊以合併後建置為準。']};history.push({...note,version:nextVersion(config.baselineVersion,history.length,config.patchCeiling,config.rolloverRule),date:run(root,'show','-s','--format=%cI',head).slice(0,10),commitSha:head});}}
  const current=history.at(-1);return {format:1,version:current.version,date:current.date,title:current.title,commitSha:head,contentSha:current.commitSha,dirty,history:history.reverse(),legacyNotes:JSON.parse(read(root,'releases/legacy-notes.json'))};
 }
 export function prepare(root=process.cwd(),options={}){const metadata=createMetadata(root,options),file=resolve(root,'.release/metadata.json');mkdirSync(dirname(file),{recursive:true});writeFileSync(file,JSON.stringify(metadata,null,2)+'\n');return metadata;}

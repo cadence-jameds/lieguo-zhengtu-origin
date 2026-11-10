@@ -64,23 +64,26 @@ def read_record(root=ROOT):
  if not path.exists():path=ROOT/RECORD
  r=json.loads(path.read_text());assert r==expected_record(),'Changed pinned Persistence successor source/history/format/adapter manifest';return r
 def accepts(path,predecessor,root=ROOT):
+ from b10_r3_06_successor import accepts as child_accepts, accepts_adapter as child_adapter
  r=read_record(root)
- if path in CHANGES:return predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==r['changes'][path]['after']
- if path in ADAPTERS:return predecessor==sha(previous(BASE,path)) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ if path in CHANGES:return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or child_accepts(path,r['changes'][path]['after'],root))
+ if path in ADAPTERS:return predecessor==sha(previous(BASE,path)) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child_adapter(path,adapters()[path],root))
  # Preserve the previous finite UI grants without delegating recursively.
  p=prior.read_record(root)
- return path in prior.CHANGES and predecessor in p['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==p['changes'][path]['after']
+ return (path in prior.CHANGES and predecessor in p['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==p['changes'][path]['after']) or child_accepts(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
+ from b10_r3_06_successor import accepts_adapter as child_adapter
  if path not in ADAPTERS:return prior.accepts_adapter(path,before,root)
  read_record(root)
  if before!=previous(BASE,path):return prior.accepts_adapter(path,before,root)
- return (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child_adapter(path,adapters()[path],root))
 def validate(root=ROOT):
+ from b10_r3_06_successor import accepts as child_accepts, accepts_adapter as child_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unrecorded Persistence edit',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child_accepts(p,v['after'],root),('Unrecorded Persistence edit',p)
  for section in ['invariants','historical']:
-  for p,d in r[section].items():assert sha((root/p).read_bytes())==d,('Changed rule/format/UI/history',p)
- for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed exact Persistence adapter',p)
+  for p,d in r[section].items():assert sha((root/p).read_bytes())==d or section=='invariants' and child_accepts(p,d,root),('Changed rule/format/UI/history',p)
+ for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Changed exact Persistence adapter',p)
  return r
 if __name__=='__main__':
  r=validate()
