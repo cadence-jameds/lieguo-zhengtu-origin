@@ -1,3 +1,4 @@
+import {findReceipt} from './commandLedger';
 import {z} from 'zod';
 import type {CityId,CommandId} from './ids';
 import type {FormalWorld} from './model';
@@ -16,7 +17,7 @@ export function validateGrowthTasks(w:FormalWorld,fail:(message:string)=>void){
  // Recovery retains completed IDs across world-time rewind; a later claim may
  // have an earlier world timestamp. Identity/proof and the durable receipt prevent replay.
  for(const [id,c]of Object.entries(s.claimed)){
-  const t=GROWTH_TASK_BY_ID.get(id),receipt=w.commandReceipts.find(r=>r.commandId===c.commandId&&r.issuerId===w.playerFactionId);
+  const t=GROWTH_TASK_BY_ID.get(id),receipt=[findReceipt(w,c.commandId)].find(r=>r?.issuerId===w.playerFactionId);
   if(!t||s.completed[id]===undefined||c.at>s.recordedThrough||!receipt){fail('Growth claim receipt invalid');continue;}
   try{const o=JSON.parse(receipt.fingerprint);if(o.issuerId!==w.playerFactionId||o.payload.type!=='tasks.claim'||o.payload.taskId!==id||o.payload.cityId!==c.cityId||o.payload.rewardVersion!==c.rewardVersion||!resourceKeys.every(r=>o.payload.expectedResources[r]===c.accepted[r]))fail('Growth claim command mismatch');}catch{fail('Growth claim command malformed');}
   // Missing version is exactly the original schedule/rules; never default old proofs to v2.

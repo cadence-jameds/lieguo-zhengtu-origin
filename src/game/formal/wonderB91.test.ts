@@ -1,3 +1,5 @@
+import {gameTransition} from './ledgerTestSupport';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {it,expect} from 'vitest';
 import {wonderWorld,wonderAct,fundWonder} from './wonderTestSupport';
 import {order,build,make,rich} from './developmentTestSupport';
@@ -10,7 +12,8 @@ import {WONDER_COST,WONDER_DURATION,wonderProgress} from './wonder';
 import {enableAutonomy} from './autonomy';
 import {EventScheduler} from './scheduler';
 import {handleWonderEvent} from './wonder';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOfflineCooperative} from './offline';
 import {reconcileSiegeStorage} from './siege';
 
@@ -68,14 +71,14 @@ it('B9-1 full 24M travels in 800 market trips, then exactly 24 world hours; save
  let w=fundWonder(wonderWorld());const p=w.largeProjects[0],state=p.wonder!,end=state.startedAt!+WONDER_DURATION;
  expect(p.shipments).toHaveLength(800);expect(p.poolResources).toEqual(WONDER_COST);expect(w.events.filter(e=>e.type==='wonder.complete')).toHaveLength(1);
  w=advanceFormal(w,end-1).world;expect(w.largeProjects[0].wonder!.phase).toBe('building');expect(wonderProgress(w,w.largeProjects[0])).toBeLessThan(100);
- const loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded).toEqual(w);
- const online=advanceFormal(w,end),cooperative=await advanceFormalCooperative(loaded,end);expect(cooperative).toEqual(online);
+ const loaded=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(loaded)).toEqual(projectWorld(w));
+ const online=advanceFormal(w,end),cooperative=await advanceFormalCooperative(loaded,end);expect(gameTransition(cooperative)).toEqual(gameTransition(online));
  const offline=await advanceOfflineCooperative(loaded,1000,1001);expect(offline.world.largeProjects).toEqual(online.world.largeProjects);expect(offline.reports.filter(r=>r.title==='世界奇觀完成')).toHaveLength(1);
  const finished=online.world;expect(finished.largeProjects[0].wonder!.phase).toBe('completed');expect(finished.factions.every(f=>f.modernQualification==='none')).toBe(true);expect(online.reports.filter(r=>r.title==='世界奇觀完成')).toHaveLength(1);
  expect(advanceFormal(finished,end+WONDER_DURATION).reports.filter(r=>r.title==='世界奇觀完成')).toHaveLength(0);
  const noClock=structuredClone(w);noClock.events=noClock.events.filter(e=>e.type!=='wonder.complete');expect(()=>validateFormalWorld(noClock)).toThrow();
  const tooEarly=structuredClone(w);tooEarly.events.find(e=>e.type==='wonder.complete')!.at--;expect(()=>validateFormalWorld(tooEarly)).toThrow();
- expect((await decodeSave(await encodeSave(finished))).world).toEqual(finished);
+ expect(projectWorld((await decodeSave(await encodeSave(finished))).world)).toEqual(projectWorld(finished));
 },60000);
 
 it('B9-1 all 99 native AI use the same imperial command, real four-resource stock and capacity as the player',async()=>{
@@ -104,5 +107,5 @@ it('B9-1 all 99 native AI use the same imperial command, real four-resource stoc
  const allArrive=Math.max(...w.logistics!.map(t=>t.arrivalAt));
  // Retain the 99 seeded agents but defer their unrelated economy/military decisions for this transport check.
  for(const a of w.autonomy!.agents){a.nextAt=allArrive+60000;w.events.find(e=>e.id===a.eventId)!.at=a.nextAt;}
- w=advanceFormal(w,allArrive).world;for(const p of w.largeProjects)expect(p.poolResources).toEqual({food:20,wood:40,stone:60,gold:80});validateFormalWorld(w);expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ w=advanceFormal(w,allArrive).world;for(const p of w.largeProjects)expect(p.poolResources).toEqual({food:20,wood:40,stone:60,gold:80});validateFormalWorld(w);expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 },60000);

@@ -9,7 +9,8 @@ import {previewPayload,type PreviewTarget} from '../constructionPreviewProtocol'
 import {canonicalJSON} from './canonical';
 import {validateFormalWorld} from './schema';
 import {citySnapshot,HOUR} from './economy';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 function compare(w:FormalWorld,t:PreviewTarget,city=w.cities[0]){
  const before=canonicalJSON(w),p='craftsmanId' in t?{type:'craftsman.castle' as const,cityId:city.id,craftsmanId:t.craftsmanId}:previewPayload(city.id,t);
  const preview=calculateConstructionPreview(constructionPreviewContext(w,city.id),t),o=order(w,p),actual=submitFormalOrder(w,o);

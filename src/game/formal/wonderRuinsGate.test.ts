@@ -1,3 +1,4 @@
+import {gameTransition} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {expect,it} from 'vitest';
 import {endgameWorld,nativeEndgameWorld,act} from './endgameTestSupport';
@@ -10,7 +11,8 @@ import {eventId,resolutionId} from './ids';
 import {order} from './developmentTestSupport';
 import {isMissionArmy} from './combatModel';
 import {handleCombatEvent} from './battles';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOfflineCooperative} from './offline';
 import {FormalPersistence} from '../persistence';
 import {validateFormalWorld} from './schema';
@@ -38,7 +40,7 @@ it('B9 Final Gate construction ruins remain invalid while time passes; ordinary 
  w.cities[0].military!.units={militia:100,catapult:1};w.cities[2].wallLevel=0;w=dispatch(w,1,true);const t=advanceFormal(w,outbound(w).arrivalAt);expect(t.reports.find(r=>r.battle)?.battle).toMatchObject({outcome:'conquered'});expect(t.world.cities[2].ownerFactionId).toBe(w.playerFactionId);expect(t.world.largeProjects[0].wonder!.durability!.current).toBe(0);expect(t.world.combat!.statistics.wonderDestructions??0).toBe(0);
 });
 it('B9 Final Gate two dispatched armies yield one real destruction and a harmless changed-target return',async()=>{
- let w=endgameWorld(true);w.cities[0].military!.units={catapult:3001};w=dispatch(w,3000);w=dispatch(w,1);const at=outbound(w).arrivalAt,loaded=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,at);expect(advanceFormal(loaded,at)).toEqual(result);
+ let w=endgameWorld(true);w.cities[0].military!.units={catapult:3001};w=dispatch(w,3000);w=dispatch(w,1);const at=outbound(w).arrivalAt,loaded=(await decodeSave(await encodeSave(w))).world,result=advanceFormal(w,at);expect(gameTransition(advanceFormal(loaded,at))).toEqual(gameTransition(result));
  const reports=result.reports.filter(r=>r.battle).map(r=>r.battle!);expect(reports.map(p=>p.outcome)).toEqual(['wonder-destroyed','no-target']);expect(reports[0].wonder).toMatchObject({damage:120000,after:0});expect(reports[1].wonder?.damage??0).toBe(0);expect(reports[1].rounds).toBe(0);expect(result.world.combat!.statistics.wonderDestructions).toBe(1);expect(result.world.largeProjects[0].wonder!.durability!.ledger).toHaveLength(1);expect(result.world.armies.filter(isMissionArmy).every(a=>a.status==='returning')).toBe(true);
  const before=structuredClone(result.world),s=new EventScheduler(before.events);for(const r of before.combat!.receipts.filter(r=>r.kind==='final'))expect(handleCombatEvent(before,{type:'combat.round',battleId:r.battleId,id:r.eventId,at:r.at},s)).toEqual([]);expect(before).toEqual(result.world);validateFormalWorld(before);
 });

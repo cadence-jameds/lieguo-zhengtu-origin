@@ -1,16 +1,18 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {createFormalWorld} from './generator';
 import {enableAutonomy,economicChoices,chooseEconomic} from './autonomy';
 import {advanceFormal} from './reducer';
 import {validateFormalWorld} from './schema';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOffline} from './offline';
 import {FormalPersistence} from '../persistence';
 import {canonicalJSON} from './canonical';
 const stores:FormalPersistence[]=[];afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
 const make=()=>{const w=createFormalWorld({campaign:'r2a',seed:12012});enableAutonomy(w);return w;};
-function gameplay(w:ReturnType<typeof make>){const v=structuredClone(w);v.revision=0;for(const r of v.commandReceipts)r.committedRevision=0;return canonicalJSON(v);}
+function gameplay(w:ReturnType<typeof make>){const v=structuredClone(projectWorld(w));v.revision=0;for(const r of v.commandReceipts)r.committedRevision=0;return canonicalJSON(v);}
 it('99 seeded continuous profiles, staggered events and no grants; legacy R1 remains valid',()=>{const w=createFormalWorld({campaign:'r2a',seed:12012}),before=canonicalJSON({cities:w.cities,factions:w.factions});expect(validateFormalWorld(w)).toEqual(w);expect(enableAutonomy(w)).toBe(true);expect(w.autonomy!.agents).toHaveLength(99);expect(new Set(w.autonomy!.agents.map(a=>a.nextAt)).size).toBeGreaterThan(90);expect(new Set(w.autonomy!.agents.map(a=>a.traits.military)).size).toBe(99);expect(canonicalJSON({cities:w.cities,factions:w.factions})).toBe(before);const serialized=canonicalJSON(w);expect(enableAutonomy(w)).toBe(false);expect(canonicalJSON(w)).toBe(serialized);validateFormalWorld(w);});
 it('enemy hidden stock, troops, technology and wall HP cannot change economic decisions',()=>{const w=make(),a=w.autonomy!.agents[0],c=w.cities.find(c=>c.ownerFactionId===a.factionId)!;const result=chooseEconomic(economicChoices(w,c,a),a,w.seed,c);const enemy=w.cities.find(c=>c.ownerFactionId!==a.factionId)!;enemy.stock.food=999999999;enemy.military!.units={knight:123456};w.factions.find(f=>f.id===enemy.ownerFactionId)!.techIds.push('hidden-test');expect(chooseEconomic(economicChoices(w,c,a),a,w.seed,c)).toEqual(result);});
 it('real commands spend stock and create queues; one atomic revision, replay no duplicated actions',()=>{const w=make(),t=advanceFormal(w,3600000);expect(t.world.autonomy!.accepted).toBeGreaterThan(0);expect(t.world.revision).toBe(w.revision+1);expect(t.world.commandReceipts.filter(r=>r.commandId.includes('ai-')).length).toBe(t.world.autonomy!.accepted);expect(t.world.cities.some(c=>c.ownerFactionId!==w.playerFactionId&&c.economy!.construction.length)).toBe(true);expect(advanceFormal(t.world,t.world.time).world).toBe(t.world);validateFormalWorld(t.world);});

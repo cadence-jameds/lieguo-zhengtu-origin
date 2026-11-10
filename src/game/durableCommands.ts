@@ -7,7 +7,7 @@ export type InboxState='pending'|'retryable'|'committed'|'rolled-back'|'rejected
 export type CommandIntent={playerBase?:PlayerOrderBase;governanceBase?:GovernanceBase;extinctionBase?:string};
 export type WriterContext={writerEpoch:number;branch:number};
 export type InboxCommand=CommandIntent&{
- sequence?:number;campaignId:FormalOrder['campaignId'];commandId:FormalOrder['commandId'];issuerId:FormalOrder['issuerId'];
+ conflict?:{issuerId:string;fingerprint:string;ack:CommandAck};originalBranch?:number;originalResult?:import('./formal/commandLedger').OriginalResult;sequence?:number;campaignId:FormalOrder['campaignId'];commandId:FormalOrder['commandId'];issuerId:FormalOrder['issuerId'];
  order:FormalOrder;fingerprint:string;originalRevision:number;branch:number;writerEpoch:number;
  state:InboxState;createdAt:number;deadline:number;attempts:number;nextAttemptAt:number;ack?:CommandAck;lastError?:string;
 };
@@ -38,9 +38,9 @@ export function revalidateInbox(w:FormalWorld,row:InboxCommand):FormalOrder|unde
 export function resultState(ack:CommandAck):InboxState{
  if(ack.status==='committed'||ack.status==='duplicate')return'committed';
  if(ack.status==='rolled-back')return'rolled-back';
- return ack.reason?.includes('重新確認')?'needs-confirmation':'rejected';
+ return ack.requiresConfirmation||ack.reason?.includes('重新確認')?'needs-confirmation':'rejected';
 }
-export const confirmationAck=(row:InboxCommand,revision:number,reason=row.order.payload.type==='governance.set'?'治理狀態已更新，已刷新城市資料；請重新確認方針、預算及保留量後再次套用。':'世界狀態已變更，請重新確認原始操作。'):CommandAck=>({commandId:row.commandId,status:'rejected',revision,reason});
+export const confirmationAck=(row:InboxCommand,revision:number,reason=row.order.payload.type==='governance.set'?'治理狀態已更新，已刷新城市資料；請重新確認方針、預算及保留量後再次套用。':'世界狀態已變更，請重新確認原始操作。'):CommandAck=>({commandId:row.commandId,status:'rejected',requiresConfirmation:true,revision,reason});
 export class WriterConflict extends Error {constructor(){super('寫入權已變更，請重新載入；原命令與存檔保留。');}}
 export class RevisionConflict extends Error {constructor(){super('存檔 revision 衝突，命令未提交。');}}
 export function retryableStorageError(error:unknown){

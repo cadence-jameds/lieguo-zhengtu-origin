@@ -1,0 +1,39 @@
+{
+  "status": "FAIL; never counted as PASS",
+  "scope": "earlier candidate source 7138a53, 19 tests; full isolated Node22 run before immutable-prefix fix",
+  "node": "v22.23.4",
+  "platform": "Linux 6.18.57 x86_64",
+  "cpuMax": "200000 100000",
+  "memoryMax": "8589934592",
+  "summary": {
+    "success": false,
+    "numPassedTests": 2300,
+    "numFailedTests": 4,
+    "numPendingTests": 12
+  },
+  "failures": [
+    {
+      "file": "game/developer/specAudit.test.ts",
+      "test": "every supported item has a native-world positive fixture and every declared counterexample executes against the real reducer",
+      "error": "Error: Test timed out in 60000ms."
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+      "error": "Error: Test timed out in 20000ms."
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+      "error": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "file": "game/formal/runtime.test.ts",
+      "test": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+      "error": "Error: Test timed out in 30000ms."
+    }
+  ],
+  "concurrentWork": "Typecheck/build, Python validators, native synthetic checks and final directed tests overlapped parts of the run; resource contention is a hypothesis, not proven root cause",
+  "unchanged": "No production Runtime or developer audit code changed from PR55; see preserved-contracts.json",
+  "next": "quiet final-source isolated full rerun; no timeout or assertion change"
+}

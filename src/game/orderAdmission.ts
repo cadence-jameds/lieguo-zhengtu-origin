@@ -1,3 +1,4 @@
+import {commandHistory} from './formal/commandLedger';
 import type {FormalCommand,FormalOrder,FormalWorld} from './formal/model';
 import {buildingKind,buildingLevel} from './formal/catalogB3';
 import {buildingRequirements} from './formal/buildingDetailData';
@@ -104,7 +105,7 @@ export function playerOrderWithBase(w:FormalWorld,order:FormalOrder,base?:Player
     order.campaignId!==w.campaignId||order.issuerId!==w.playerFactionId||
     !Number.isSafeInteger(order.issuedWorldTime)||order.issuedWorldTime<0||
     order.issuedWorldTime>w.time||
-    w.commandReceipts.some(r=>r.commandId===order.commandId||
+    commandHistory(w).some(r=>r.commandId===order.commandId||
       foregroundRevision===undefined&&r.issuerId===order.issuerId&&r.committedRevision>order.expectedRevision))return order;
  const current=playerOrderBase(w,order.payload);
  if(!current||current.fingerprint!==base.fingerprint)return order;

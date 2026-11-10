@@ -1,10 +1,12 @@
+import {gameTransition} from './ledgerTestSupport';
 import {it,expect} from 'vitest';
 import {battlefield,dispatch,arrive,issue} from './combatTestSupport';
 import {changeCityOwner,settleCity,HOUR} from './economy';
 import {resourceKeys,type FormalWorld,type FormalReport} from './model';
 import {isMissionArmy} from './combatModel';
 import {advanceFormal} from './reducer';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {validateFormalWorld} from './schema';
 import {counterMultiplier,hitDamage} from './combatModifiers';
 import {handleCombatEvent} from './battles';
@@ -26,8 +28,8 @@ for(const [label,converted,existingModern] of [['traditional',0,0],['full retrof
  for(const [r,price] of [['food',20],['wood',80],['stone',50],['gold',130]] as const)expect(w.cities[2].stock[r]).toBe(stock[r]-converted*price);
  const battleBefore={militia:100,...(10-converted?{baggage:10-converted}:{}),...(existingModern+converted?{'modern.baggage':existingModern+converted}:{})};expect(current.units).toEqual(battleBefore);
  const enemy={militia:fate==='captured'?250:fate==='mutual'?100:80};w.cities[1].military!.units={...enemy};w=dispatch(w,'conquest',enemy,1,2).world;
- const inTransit=(await decodeSave(await encodeSave(w))).world,arrival=w.armies.filter(isMissionArmy).find(a=>a.status==='outbound')!.arrivalAt,entered=advanceFormal(w,arrival);expect(advanceFormal(inTransit,arrival)).toEqual(entered);w=entered.world;expect(w.combat!.battles).toHaveLength(1);expect(w.combat!.battles[0].participants.find(p=>p.armyId===identity.id)!.before).toEqual(battleBefore);
- const loaded=(await decodeSave(await encodeSave(w))).world,result=finishDefense(w);expect(finishDefense(loaded)).toEqual(result);w=result.world;expect(result.reports).toHaveLength(1);
+ const inTransit=(await decodeSave(await encodeSave(w))).world,arrival=w.armies.filter(isMissionArmy).find(a=>a.status==='outbound')!.arrivalAt,entered=advanceFormal(w,arrival);expect(gameTransition(advanceFormal(inTransit,arrival))).toEqual(gameTransition(entered));w=entered.world;expect(w.combat!.battles).toHaveLength(1);expect(w.combat!.battles[0].participants.find(p=>p.armyId===identity.id)!.before).toEqual(battleBefore);
+ const loaded=(await decodeSave(await encodeSave(w))).world,result=finishDefense(w);expect(gameTransition(finishDefense(loaded))).toEqual(gameTransition(result));w=result.world;expect(result.reports).toHaveLength(1);
  const battle=result.reports[0].battle!,defender=battle.defenders.find(d=>d.armyId===identity.id)!;expect(defender.before).toEqual(battleBefore);expect(battle.outcome).toBe(fate==='captured'?'conquered':fate==='mutual'?'mutual-destruction':'held');
  const alive=defender.after.militia??0;if(lost)expect(alive).toBe(0);else{expect(alive).toBeGreaterThan(0);expect(alive).toBeLessThan(100);}
  let survivors=0;for(const [id,n] of [['baggage',10-converted],['modern.baggage',existingModern+converted]] as const){
@@ -35,11 +37,11 @@ for(const [label,converted,existingModern] of [['traditional',0,0],['full retrof
  }
  expect(survivors).toBeLessThan(10+existingModern);expect(w.cities[0].military!.units).toEqual({});
  const final=w.combat!.receipts.find(r=>r.kind==='final'&&r.battleId===battle.battleId)!,snapshot=structuredClone(w);expect(handleCombatEvent(w,{type:'combat.round',battleId:battle.battleId,id:final.eventId,at:final.at},new EventScheduler(w.events))).toEqual([]);expect(w).toEqual(snapshot);
- if(lost){const empty=w.armies.filter(isMissionArmy).find(a=>a.id===identity.id);if(empty){expect(empty.units).toEqual({});expect(empty.initialUnits).toEqual(history);w=(await decodeSave(await encodeSave(w))).world;w=issue(w,{type:'army.recall',cityId:host,armyId:identity.id}).world;}expect(w.armies.some(a=>a.id===identity.id)).toBe(false);const restored=(await decodeSave(await encodeSave(w))).world,next=w.time+HOUR;expect(advanceFormal(restored,next)).toEqual(advanceFormal(w,next));w=advanceFormal(w,next).world;expect(w.cities[0].military!.units).toEqual({});}
+ if(lost){const empty=w.armies.filter(isMissionArmy).find(a=>a.id===identity.id);if(empty){expect(empty.units).toEqual({});expect(empty.initialUnits).toEqual(history);w=(await decodeSave(await encodeSave(w))).world;w=issue(w,{type:'army.recall',cityId:host,armyId:identity.id}).world;}expect(w.armies.some(a=>a.id===identity.id)).toBe(false);const restored=(await decodeSave(await encodeSave(w))).world,next=w.time+HOUR;expect(gameTransition(advanceFormal(restored,next))).toEqual(gameTransition(advanceFormal(w,next)));w=advanceFormal(w,next).world;expect(w.cities[0].military!.units).toEqual({});}
  else{
   const remaining=w.armies.filter(isMissionArmy).find(a=>a.id===identity.id)!;expect(remaining).toMatchObject(identity);expect(remaining.initialUnits).toEqual(history);expect(remaining.units).toEqual(defender.after);
   w=issue(w,{type:'army.recall',cityId:host,armyId:identity.id}).world;const returning=w.armies.filter(isMissionArmy).find(a=>a.id===identity.id)!;expect(returning.initialUnits).toEqual(history);expect(returning.returnCityId).toBe(home);
-  const restored=(await decodeSave(await encodeSave(w))).world,returned=advanceFormal(w,returning.arrivalAt);expect(advanceFormal(restored,returning.arrivalAt)).toEqual(returned);w=returned.world;expect(w.armies.some(a=>a.id===identity.id)).toBe(false);expect(w.cities[0].military!.units).toEqual(defender.after);
+  const restored=(await decodeSave(await encodeSave(w))).world,returned=advanceFormal(w,returning.arrivalAt);expect(gameTransition(advanceFormal(restored,returning.arrivalAt))).toEqual(gameTransition(returned));w=returned.world;expect(w.armies.some(a=>a.id===identity.id)).toBe(false);expect(w.cities[0].military!.units).toEqual(defender.after);
  }
  expect(resourceKeys.every(r=>Number.isSafeInteger(w.cities[2].stock[r]))).toBe(true);validateFormalWorld(w);
 });

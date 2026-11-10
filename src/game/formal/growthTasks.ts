@@ -1,3 +1,4 @@
+import {findReceipt} from './commandLedger';
 import type {CityId,CommandId} from './ids';
 import type {Construction,FormalCity,FormalCommand,FormalEvent,FormalOrder,FormalReport,FormalWorld,LogisticsShipment,Resources,Settlement} from './model';
 import {resourceKeys,zeroResources} from './model';
@@ -74,7 +75,7 @@ export function claimGrowthReward(w:FormalWorld,c:FormalCity,o:FormalOrder,p:Gro
  for(const r of resourceKeys)c.stock[r]+=task.reward[r];
  state.recordedThrough=Math.max(state.recordedThrough,w.time);state.claimed[task.id]={rewardVersion:2,commandId:o.commandId,cityId:c.id,at:w.time,capacity:quote.capacity,stockBefore:quote.stockBefore,reserved:quote.reserved,accepted:quote.accepted,lost:quote.lost};
 }
-function appliedCityCommand(w:FormalWorld,id:CommandId,cityId:CityId,playerOnly=true){const r=w.commandReceipts.find(r=>r.commandId===id&&(!playerOnly||r.issuerId===w.playerFactionId)&&r.disposition==='applied');if(!r)return false;try{const p=JSON.parse(r.fingerprint);return p.issuerId===r.issuerId&&p.payload.cityId===cityId;}catch{return false;}}
+function appliedCityCommand(w:FormalWorld,id:CommandId,cityId:CityId,playerOnly=true){const r=[findReceipt(w,id)].find(r=>r&&(!playerOnly||r.issuerId===w.playerFactionId)&&r.disposition==='applied');if(!r)return false;try{const p=JSON.parse(r.fingerprint);return p.issuerId===r.issuerId&&p.payload.cityId===cityId;}catch{return false;}}
 function constructionFact(w:FormalWorld,prefix:string,level:number){
  for(const t of GROWTH_TASKS)if(t.fact.startsWith(prefix+':')&&level<=t.target)fact(w,t.fact,level);
 }

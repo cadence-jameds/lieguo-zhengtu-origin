@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {it,expect} from 'vitest';
 import {craftWorld,captureCraftCity} from './gateDeltaTestSupport';
 import {issue,dispatch} from './combatTestSupport';
@@ -7,7 +8,8 @@ import {advanceFormal} from './reducer';
 import {isMissionArmy} from './combatModel';
 import {build} from './developmentTestSupport';
 import {validateFormalWorld} from './schema';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import type {FormalWorld} from './model';
 import {spatial} from './spatial';
 import {buildable,terrainAt} from './terrain';
@@ -31,7 +33,7 @@ it.each([true,false])('D1 idle craftsman is destroyed at conquest, second own ci
  expect(w.events.some(e=>e.type==='craftsman.arrive')).toBe(false);
  expect(w.combat!.receipts.filter(r=>r.kind==='final'&&r.outcome==='conquered')).toHaveLength(1);
  expect(advanceFormal(w,w.time)).toMatchObject({world:w,reports:[]});
- expect((await decodeSave(await encodeSave(w,t.reports))).world).toEqual(w);
+ expect(projectWorld((await decodeSave(await encodeSave(w,t.reports))).world)).toEqual(projectWorld(w));
 });
 it('D1 capture never searches for an automatic craftsman evacuation route',()=>{
  const w=craftWorld(),c=w.cities[1],terrain=w.worldLayer!.terrain.split('');
@@ -58,7 +60,7 @@ it('D1 stationed scouts and baggage die; legal outbound scouts and craftsman sur
  expect(w.cities[0].military!.units).toEqual({});
  expect(w.armies.find(x=>x.id===a.id)).toEqual(before.armies.find(x=>x.id===a.id));
  expect(w.extinction!.craftsmen).toEqual(before.extinction!.craftsmen);
- expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 });
 it('D1 successful combat reports zero surviving city scouts and no noncombat evacuation',()=>{
  let w=craftWorld();w.cities[0].military!.units={scout:5,baggage:3};const t=captureCraftCity(w);w=t.world;

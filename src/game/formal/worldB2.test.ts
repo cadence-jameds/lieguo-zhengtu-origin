@@ -1,9 +1,11 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {describe,expect,it} from 'vitest';
 import {createFormalWorld} from './generator';
 import {buildable,passable,terrainAt,fieldDistribution} from './terrain';
 import {SpatialIndex,spatial} from './spatial';
-import {decodeSave,encodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {validateFormalWorld} from './schema';
 import {FormalPersistence} from '../persistence';
 import {submitFormalOrder} from './reducer';
@@ -38,7 +40,7 @@ it('strict save validator rejects illegal terrain, overlap, broken field identit
  const w=make();for(const change of [(n:typeof w)=>{n.dimensions.width=256;},(n:typeof w)=>{n.worldLayer!.terrain='L';},(n:typeof w)=>{n.cities[1].x=n.cities[0].x;n.cities[1].y=n.cities[0].y;},(n:typeof w)=>{n.cities[0].fields![1].slot=0;},(n:typeof w)=>{n.worldLayer!.wildSites.pop();}]){const n=structuredClone(w);change(n);const before=JSON.stringify(n);expect(()=>validateFormalWorld(n)).toThrow();expect(JSON.stringify(n)).toBe(before);}
 });
 it('native save/load retains all geometry and rebuilds ephemeral indexes without renderer data',async()=>{
- const w=make(),e=await encodeSave(w),loaded=(await decodeSave(e)).world;expect(loaded).toEqual(w);expect(spatial(loaded).cities.size).toBe(100);expect(spatial(loaded).sites.size).toBe(432);expect(e.snapshot).not.toHaveProperty('spatialIndex');expect(e.snapshot).not.toHaveProperty('renderer');
+ const w=make(),e=await encodeSave(w),loaded=(await decodeSave(e)).world;expect(projectWorld(loaded)).toEqual(projectWorld(w));expect(spatial(loaded).cities.size).toBe(100);expect(spatial(loaded).sites.size).toBe(432);expect(e.snapshot).not.toHaveProperty('spatialIndex');expect(e.snapshot).not.toHaveProperty('renderer');
 });
 it('native IndexedDB Recovery skips valid-envelope mismatched row and restores old world geometry',async()=>{
  const p=new FormalPersistence({suffix:'b2-'+crypto.randomUUID()});try{let w=await p.start(make());const a=w;const result=submitFormalOrder(w,{commandId:commandId('b2-rename'),campaignId:w.campaignId,issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename',cityId:w.cities[0].id,name:'新名'}});w=await p.save(result.world,result.reports,w.revision);const rows=await p.db.backups.toArray();await p.db.backups.update(rows.at(-1)!.id!,{reportCursor:999});const current=await p.db.saves.get('current');if(current?.kind!=='world')throw new Error('missing');await p.db.saves.put({...current,data:{...current.data,checksum:'0'.repeat(64)}});const recovered=await p.loadSave();expect(recovered.recovered).toBe(true);expect(geometry(recovered.game!)).toEqual(geometry(a));expect(recovered.game!.cities[0].name).toBe(a.cities[0].name);expect(recovered.game!.revision).toBeGreaterThan(w.revision);}finally{await p.db.delete();}

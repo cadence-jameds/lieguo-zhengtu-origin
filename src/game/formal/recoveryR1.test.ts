@@ -1,17 +1,20 @@
+import {resolveLedger,projectWorld,commandHistory} from './commandLedger';
 import 'fake-indexeddb/auto';
 import {afterEach,describe,expect,it,vi} from 'vitest';
-import {FormalPersistence,validateCheckpointCandidate,type FailurePoint} from '../persistence';
+import {FormalPersistence,validateCheckpointCandidate as rawValidateCheckpointCandidate,type FailurePoint} from '../persistence';
 import {createFormalFixture} from './fixture';
 import {campaignId} from './ids';
 import {submitFormalOrder} from './reducer';
 import {contribute} from './testSupport';
-import {decodeSave} from './saveCodec';
+import {decodeSave as rawDecodeSave} from './saveCodec';
 import {canonicalJSON} from './canonical';
 
+async function decodeSave(e:Parameters<typeof rawDecodeSave>[0]){const v=e as import('./saveCodec').FormalEnvelope;return rawDecodeSave(e,!v.ledger&&!v.bundle&&v.snapshot?.ledger?resolveLedger(v.snapshot.ledger).archive():undefined);}
+async function validateCheckpointCandidate(p:Parameters<typeof rawValidateCheckpointCandidate>[0]){return rawValidateCheckpointCandidate(p,resolveLedger(p.data.snapshot.ledger!).archive());}
 const stores:FormalPersistence[]=[];let serial=0;
 function store(fault?:(point:FailurePoint)=>void){const s=new FormalPersistence({suffix:'r1-'+(++serial),fault});stores.push(s);return s;}
 afterEach(async()=>{for(const s of stores.splice(0))await s.db.delete();});
-async function contents(s:FormalPersistence){return{saves:await s.db.saves.toArray(),backups:await s.db.backups.toArray(),reports:await s.db.BattleReports.toArray()};}
+async function contents(s:FormalPersistence){return{saves:await s.db.saves.toArray(),backups:await s.db.backups.toArray(),reports:await s.db.BattleReports.toArray(),extra:await Promise.all(s.db.tables.filter(t=>!['saves','backups','BattleReports'].includes(t.name)).map(async t=>[t.name,await t.toArray()]))};}
 /** A: partial funding; B: countdown started at the same world timestamp, with a new event/report. */
 async function checkpoints(s:FormalPersistence){
  let world=await s.start(createFormalFixture({research:true}));
@@ -46,7 +49,7 @@ describe('B1-R1 automatic Recovery checkpoint fallback',()=>{
   expect((await s.backupList()).map(p=>p.id)).toEqual([aId]);
   const result=await s.loadSave(),restored=result.game!;
   expect(result.recovered).toBe(true);
-  expect({...restored,revision:a.revision,sequences:a.sequences,commandReceipts:a.commandReceipts}).toEqual(a);
+  expect({...projectWorld(restored),revision:a.revision,sequences:a.sequences,commandReceipts:Array.from(commandHistory(a))}).toEqual(projectWorld(a));expect(restored.ledger!.anchor.root).not.toBe(a.ledger!.anchor.root);
   expect(restored.revision).toBe(b.revision+1);expect(restored.sequences).toEqual(b.sequences);
   expect(submitFormalOrder(restored,first).ack?.status).toBe('duplicate');
   expect(submitFormalOrder(restored,second).ack?.status).toBe('rolled-back');
@@ -55,7 +58,7 @@ describe('B1-R1 automatic Recovery checkpoint fallback',()=>{
   if(current?.kind!=='world'||authority?.kind!=='authority')throw new Error('Missing committed authority');
   expect((await decodeSave(current.data)).world).toEqual(restored);
   expect(authority.revision).toBe(restored.revision);expect(authority.sequences).toEqual(restored.sequences);
-  expect(authority.campaigns.find(c=>c.campaignId===restored.campaignId)?.receipts).toEqual(restored.commandReceipts);
+  expect(authority.campaigns.find(c=>c.campaignId===restored.campaignId)?.ledgerRoot).toBe(restored.ledger!.anchor.root);
   expect(rows.reports).toEqual([]);expect(rows.backups).toHaveLength(2);
   expect(rows.backups.some(p=>p.id===aId)).toBe(true);expect(rows.backups.some(p=>p.id===bId)).toBe(false);
   for(const point of rows.backups)await expect(validateCheckpointCandidate(point)).resolves.toBeDefined();

@@ -14,7 +14,10 @@ class PreviewSuccessorTests(unittest.TestCase):
    for before in r['grants'].get(p,[]):self.assertTrue(gate.accepts(p,before,self.root))
    self.assertFalse(gate.accepts(p,'0'*64,self.root))
   for p in ['src/game/runtime.worker.ts','src/game/persistence.ts','src/game/formal/reducer.ts','src/game/formal/scheduler.ts']:
-   self.assertFalse(gate.accepts(p,r['invariants'][p],self.root))
+   # Exact reviewed R3-03 successors are permitted; forged predecessors still fail.
+   import b10_r3_03_successor as successor
+   self.assertEqual(gate.accepts(p,r['invariants'][p],self.root),successor.accepts(p,r['invariants'][p],self.root))
+   self.assertFalse(gate.accepts(p,'0'*64,self.root))
  def test_refreshed_manifest_cannot_approve_source_rule_history_or_adapter_tampering(self):
   manifest=self.root/gate.RECORD;original=manifest.read_bytes();r=json.loads(original)
   for section,p in [('changes','src/game/formal/economy.ts'),('changes','src/game/constructionPreviewController.ts'),('invariants','src/game/persistence.ts'),('invariants','src/game/formal/reducer.ts'),('historical','docs/validation/b10-r3-01/compatibility.json'),('adapters','scripts/b10_r3_01_successor.py'),('adapters','scripts/recruit_input_successor.py')]:

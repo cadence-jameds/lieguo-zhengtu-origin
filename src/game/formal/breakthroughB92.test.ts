@@ -1,8 +1,10 @@
+import {gameTransition} from './ledgerTestSupport';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {applyWonderDamage} from './wonderCondition';
 import {fundRepair} from './endgameTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,beforeAll,it,expect} from 'vitest';
-import {completedWonder,breakthroughWorld,fundedBreakthrough} from './breakthroughTestSupport';
+import {completedWonder,breakthroughWorld,fundedBreakthroughSnapshot} from './breakthroughTestSupport';
 import {wonderWorld,wonderAct} from './wonderTestSupport';
 import {order} from './developmentTestSupport';
 import {advanceFormal,advanceFormalCooperative,submitFormalOrder} from './reducer';
@@ -11,14 +13,15 @@ import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION,breakthroughWork,breakthroughDec
 import {EventScheduler} from './scheduler';
 import {zeroResources,type FormalWorld} from './model';
 import {validateFormalWorld} from './schema';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOfflineCooperative} from './offline';
 import {wonderDecision} from './aiActions';
 import {enableAutonomy} from './autonomy';
 import {make,build,rich} from './developmentTestSupport';
 import {empireId,eventId,resolutionId} from './ids';
 let funded:FormalWorld;
-beforeAll(()=>{funded=fundedBreakthrough();},240000);
+beforeAll(async()=>{funded=await fundedBreakthroughSnapshot();},240000);
 const end=(w:FormalWorld)=>w.largeProjects[1].breakthrough!.activeSince!+BREAKTHROUGH_DURATION;
 it('B9-2 requires a completed usable wonder, leader and current members; creation and replay cannot spend or create extra projects',()=>{
  const notDone=wonderWorld(),bad=submitFormalOrder(notDone,order(notDone,{type:'breakthrough.start',cityId:notDone.cities[0].id}));expect(bad.ack?.status).toBe('rejected');expect(bad.world).toBe(notDone);
@@ -44,7 +47,7 @@ it('B9-2 60M takes 2000 real market trips and exactly 48 world hours, once, with
  const complete=advanceFormal(loaded,deadline),cooperative=await advanceFormalCooperative(loaded,deadline);expect(cooperative).toEqual(complete);
  const offline=await advanceOfflineCooperative(loaded,0,1);expect(offline.world.largeProjects).toEqual(complete.world.largeProjects);expect(offline.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(1);
  expect(complete.world.largeProjects[1].breakthrough!.qualifiedFactionIds).toEqual(complete.world.factions.map(f=>f.id).sort());expect(complete.world.factions.every(f=>f.modernQualification==='full')).toBe(true);expect(complete.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(1);
- expect(advanceFormal(complete.world,deadline+HOUR).reports.filter(r=>r.title==='文明突破完成')).toHaveLength(0);expect((await decodeSave(await encodeSave(complete.world))).world).toEqual(complete.world);
+ expect(advanceFormal(complete.world,deadline+HOUR).reports.filter(r=>r.title==='文明突破完成')).toHaveLength(0);expect(projectWorld((await decodeSave(await encodeSave(complete.world))).world)).toEqual(projectWorld(complete.world));
  const duplicate=structuredClone(complete.world),reports:import('./model').FormalReport[]=[];handleBreakthroughEvent(duplicate,{type:'breakthrough.complete',projectId:w.largeProjects[1].projectId,id:w.largeProjects[1].breakthrough!.completionEventId!,at:deadline},new EventScheduler(duplicate.events),reports);expect(reports).toEqual([]);expect(duplicate).toEqual(complete.world);
  const bad=structuredClone(before);bad.events.find(e=>e.type==='breakthrough.complete')!.at--;expect(()=>validateFormalWorld(bad)).toThrow();
 });
@@ -57,7 +60,7 @@ it.each(['funding','building'] as const)('B9-2 a conqueror joining the original 
   const proposal=submitFormalOrder(state,order(state,{type:'politics',cityId:state.cities[1].id,action:'empire-propose',target:captor},'b92-recapture-propose'));expect(proposal.ack?.status).toBe('committed');state=proposal.world;
   const acceptance=submitFormalOrder(state,order(state,{type:'politics',cityId:state.cities[2].id,action:'request-accept',requestId:state.politics!.requests[0].id},'b92-recapture-accept',captor));expect(acceptance.ack?.status).toBe('committed');return acceptance.world;
  };
- const loaded=(await decodeSave(await encodeSave(w))).world;w=join(w);expect(join(loaded)).toEqual(w);
+ const loaded=(await decodeSave(await encodeSave(w))).world;w=join(w);expect(projectWorld(join(loaded))).toEqual(projectWorld(w));
  expect(w.cities[0].ownerFactionId).toBe(captor);expect(w.factions[1].empireId).toBe(w.factions[0].empireId);
  expect(w.largeProjects[1].breakthrough!.phase).toBe('paused');expect(w.events.some(e=>e.type==='breakthrough.complete')).toBe(false);
  const missingLoss=structuredClone(w);delete missingLoss.largeProjects[1].breakthrough!.recaptureRequired;expect(()=>validateFormalWorld(missingLoss)).toThrow();
@@ -65,8 +68,16 @@ it.each(['funding','building'] as const)('B9-2 a conqueror joining the original 
   expect(breakthroughDecision(w,c,true)).toBeUndefined();
   expect(submitFormalOrder(w,order(w,{type:'breakthrough.ship',cityId:c.id,projectId:w.largeProjects[1].projectId,resources:{food:1,wood:0,stone:0,gold:0}},undefined,c.ownerFactionId)).ack?.status).toBe('rejected');
  }
- const restored=(await decodeSave(await encodeSave(w))).world;expect(restored).toEqual(w);
- const later=advanceFormal(w,w.time+72*HOUR);expect(advanceFormal(restored,restored.time+72*HOUR)).toEqual(later);
+ const restored=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(restored)).toEqual(projectWorld(w));
+ const later=advanceFormal(w,w.time+72*HOUR),resumed=advanceFormal(restored,restored.time+72*HOUR);
+ // Verify the new ledger and every rule/source invariant before comparing all
+ // original gameplay, ordered receipts, reports and Ack fields. The codec adds
+ // a version proof to the resumed fixture; its integrity is never projected away.
+ expect(()=>validateFormalWorld(resumed.world)).not.toThrow();
+ expect(resumed.world.ledger!.anchor.root).toBe(restored.ledger!.anchor.root);
+ expect(resumed.world.ledger!.anchor.branch).toBe(restored.ledger!.anchor.branch);
+ expect(resumed.world.ledger!.anchor.writerEpoch).toBe(restored.ledger!.anchor.writerEpoch);
+ expect(gameTransition(resumed)).toEqual(gameTransition(later));
  expect(breakthroughWork(later.world,later.world.largeProjects[1])).toBe(work);expect(later.world.events.some(e=>e.type==='breakthrough.complete')).toBe(false);
  expect(later.world.factions.every(f=>f.modernQualification==='none')).toBe(true);expect(later.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(0);
 });
@@ -75,7 +86,7 @@ it('B9-2 conquest freezes elapsed work immediately, and genuine recapture resume
  expect(w.largeProjects[1].breakthrough!.phase).toBe('paused');expect(w.events.some(e=>e.type==='breakthrough.complete')).toBe(false);expect(w.largeProjects[1].owner).toEqual(funded.largeProjects[1].owner);
  w=advanceFormal(w,w.time+72*HOUR).world;expect(breakthroughWork(w,w.largeProjects[1])).toBe(work);expect(w.factions.every(f=>f.modernQualification==='none')).toBe(true);w=(await decodeSave(await encodeSave(w))).world;
  changeCityOwner(w,w.cities[0],w.playerFactionId,'conquest');expect(w.largeProjects[1].breakthrough!.recaptureRequired).toBeUndefined();const event=w.events.find(e=>e.type==='breakthrough.complete')!;expect(event.at-w.time).toBe(BREAKTHROUGH_DURATION-work);
- const loaded=(await decodeSave(await encodeSave(w))).world;expect(loaded).toEqual(w);const finished=advanceFormal(w,event.at);expect(advanceFormal(loaded,event.at)).toEqual(finished);
+ const loaded=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(loaded)).toEqual(projectWorld(w));const finished=advanceFormal(w,event.at);expect(gameTransition(advanceFormal(loaded,event.at))).toEqual(gameTransition(finished));
  w=finished.world;expect(w.factions[0].modernQualification).toBe('full');expect(w.factions[1].modernQualification).toBe('none');expect(finished.reports.filter(r=>r.title==='文明突破完成')).toHaveLength(1);
 });
 it('B9-2 awards the current membership snapshot only; leaving and rejoining before completion is sufficient, later joining grants nothing',()=>{

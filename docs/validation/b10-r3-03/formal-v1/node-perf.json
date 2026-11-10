@@ -1,0 +1,188 @@
+{
+  "environment": "Node v22.23.4 Linux; Vite SSR; fake-indexeddb only for fixture setup; no native/device timing claim",
+  "samples": 30,
+  "warmups": 3,
+  "cases": [
+    {
+      "count": 0,
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "identityLookup": {
+          "n": 30,
+          "p50": 0.00029561999999714315,
+          "p95": 0.0008902799999941635
+        },
+        "purePrepareAppend": {
+          "n": 30,
+          "p50": 2.8312699999996767,
+          "p95": 31.5061369999994
+        },
+        "boundReducer": {
+          "n": 30,
+          "p50": 21.478425999999672,
+          "p95": 52.14346000000023
+        },
+        "materializedReducer": {
+          "n": 30,
+          "p50": 25.026452000000063,
+          "p95": 47.41956599999958
+        }
+      },
+      "hotWorldBytes": 454394,
+      "heap": {
+        "rss": 601497600,
+        "heapTotal": 170123264,
+        "heapUsed": 110993952,
+        "external": 4255825,
+        "arrayBuffers": 103072
+      },
+      "heapCaveat": "process snapshot includes baseline materialized world, harness and temporary preparations; not isolated retained world"
+    },
+    {
+      "count": 1000,
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "identityLookup": {
+          "n": 30,
+          "p50": 0.0005813500000112982,
+          "p95": 0.0020253799999954934
+        },
+        "purePrepareAppend": {
+          "n": 30,
+          "p50": 0.6313730000001669,
+          "p95": 30.39029600000049
+        },
+        "boundReducer": {
+          "n": 30,
+          "p50": 22.10301999999865,
+          "p95": 81.14225299999998
+        },
+        "materializedReducer": {
+          "n": 30,
+          "p50": 26.243258999999853,
+          "p95": 62.031254999999874
+        }
+      },
+      "hotWorldBytes": 454400,
+      "heap": {
+        "rss": 676483072,
+        "heapTotal": 256008192,
+        "heapUsed": 226348264,
+        "external": 4257228,
+        "arrayBuffers": 103411
+      },
+      "heapCaveat": "process snapshot includes baseline materialized world, harness and temporary preparations; not isolated retained world"
+    },
+    {
+      "count": 10000,
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "identityLookup": {
+          "n": 30,
+          "p50": 0.0006963699999869277,
+          "p95": 0.0012391800000114018
+        },
+        "purePrepareAppend": {
+          "n": 30,
+          "p50": 0.6905210000004445,
+          "p95": 2.495150000000649
+        },
+        "boundReducer": {
+          "n": 30,
+          "p50": 21.23155399999996,
+          "p95": 37.8971619999993
+        },
+        "materializedReducer": {
+          "n": 30,
+          "p50": 51.234183000000485,
+          "p95": 69.21582899999885
+        }
+      },
+      "hotWorldBytes": 454402,
+      "heap": {
+        "rss": 745353216,
+        "heapTotal": 332570624,
+        "heapUsed": 292896544,
+        "external": 4256937,
+        "arrayBuffers": 103120
+      },
+      "heapCaveat": "process snapshot includes baseline materialized world, harness and temporary preparations; not isolated retained world"
+    },
+    {
+      "count": 30000,
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "identityLookup": {
+          "n": 30,
+          "p50": 0.000556109999997716,
+          "p95": 0.0009188200000062352
+        },
+        "purePrepareAppend": {
+          "n": 30,
+          "p50": 1.0856160000003001,
+          "p95": 34.46562200000335
+        },
+        "boundReducer": {
+          "n": 30,
+          "p50": 26.19498400000157,
+          "p95": 64.69938700000057
+        },
+        "materializedReducer": {
+          "n": 30,
+          "p50": 165.8910020000003,
+          "p95": 250.79772899999807
+        }
+      },
+      "hotWorldBytes": 454402,
+      "heap": {
+        "rss": 1125683200,
+        "heapTotal": 707284992,
+        "heapUsed": 672234800,
+        "external": 4257280,
+        "arrayBuffers": 103431
+      },
+      "heapCaveat": "process snapshot includes baseline materialized world, harness and temporary preparations; not isolated retained world"
+    },
+    {
+      "count": 60000,
+      "factions": 100,
+      "speed": 25,
+      "ms": {
+        "identityLookup": {
+          "n": 30,
+          "p50": 0.000489129999987199,
+          "p95": 0.0007881500000075903
+        },
+        "purePrepareAppend": {
+          "n": 30,
+          "p50": 0.7506009999997332,
+          "p95": 5.611999999993714
+        },
+        "boundReducer": {
+          "n": 30,
+          "p50": 14.03989900000306,
+          "p95": 22.230989999996382
+        },
+        "materializedReducer": {
+          "n": 30,
+          "p50": 129.21774300000106,
+          "p95": 265.6119839999956
+        }
+      },
+      "hotWorldBytes": 454402,
+      "heap": {
+        "rss": 1465544704,
+        "heapTotal": 704454656,
+        "heapUsed": 656720896,
+        "external": 4249673,
+        "arrayBuffers": 103431
+      },
+      "heapCaveat": "process snapshot includes baseline materialized world, harness and temporary preparations; not isolated retained world"
+    }
+  ],
+  "implementationCommit": "e7a2c33"
+}

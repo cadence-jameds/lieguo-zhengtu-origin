@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {createHash} from 'node:crypto';
@@ -5,7 +6,8 @@ import {readFileSync} from 'node:fs';
 import {GROWTH_TASKS,GROWTH_TASK_BY_ID} from './growthTaskCatalog';
 import {GROWTH_REWARDS_V1} from './growthTaskRewardsV1';
 import {quoteGrowthReward} from './growthTasks';
-import {decodeSave,encodeSave,type FormalEnvelope} from './saveCodec';
+import {decodeSave,type FormalEnvelope} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {submitFormalOrder,advanceFormal} from './reducer';
 import {validateFormalWorld} from './schema';
 import {order} from './developmentTestSupport';
@@ -22,7 +24,7 @@ const bytes=readFileSync('docs/validation/journey-goals-integration/legacy-v1.js
 const legacy=JSON.parse(bytes.toString()) as {sourceCommit:string;cases:{name:string;command:FormalOrder;save:FormalEnvelope}[]};
 const stores:FormalPersistence[]=[];afterEach(async()=>{for(const db of stores.splice(0))await db.db.delete();});
 const store=()=>{const db=new FormalPersistence({suffix:'growth-v2-'+crypto.randomUUID()});stores.push(db);return db;};
-async function unclaimed(){const w=structuredClone((await decodeSave(legacy.cases[0].save)).world);const c=w.cities[0];
+async function unclaimed(){const w=validateFormalWorld(structuredClone(legacy.cases[0].save.snapshot));const c=w.cities[0];
  // Two lawful field completions give fresh unclaimed IDs N02/N03; v1 N01 remains intact.
  c.stock={food:800,wood:800,stone:800,gold:800};let next=w;
  for(const slot of [6,11]){next=submitFormalOrder(next,order(next,{type:'field.upgrade',cityId:c.id,slot})).world;const job=next.cities[0].economy!.construction.at(-1)!;next=advanceFormal(next,job.startsAt+job.durationMs).world;}
@@ -51,11 +53,11 @@ it('matches the new master spec and preserves every chapter outside the authoriz
  const cut=(s:string)=>s.slice(s.indexOf('\n# 1.'),s.indexOf('\n# 16.'));expect(cut(next)).toBe(cut(old));
  const tail=(s:string)=>s.slice(s.indexOf('\n# 17.')).replace(/^4\. \*\*任務系統凍結：\*\*.*$/m,'<authorized task exception>');expect(tail(next)).toBe(tail(old));
 });
-for(const witness of legacy.cases)it(`loads, re-exports and deduplicates genuine v1 ${witness.name} overflow receipts without rewriting them`,async()=>{
- const w=(await decodeSave(witness.save)).world;expect(w).toEqual(witness.save.snapshot);expect(w.growthTasks!.claimed.N01.rewardVersion).toBeUndefined();expect((await encodeSave(w)).checksum).toBe(witness.save.checksum);
- expect(submitFormalOrder(w,witness.command).ack?.status).toBe('duplicate');const before=structuredClone(w);expect(submitFormalOrder(w,claim(w,'N01')).ack?.status).toBe('rejected');expect(w).toEqual(before);
- const bad=structuredClone(w);bad.growthTasks!.claimed.N01.rewardVersion=2;expect(()=>validateFormalWorld(bad)).toThrow();
- const corrupt=structuredClone(w);corrupt.growthTasks!.claimed.N01.accepted.wood++;expect(()=>validateFormalWorld(corrupt)).toThrow();
+for(const witness of legacy.cases)it(`rejects old save format and retains ${witness.name} reward facts in a fresh new-format scenario`,async()=>{
+ await expect(decodeSave(witness.save)).rejects.toThrow('不相容');const scenario=await encodeSave(validateFormalWorld(structuredClone(witness.save.snapshot))),w=(await decodeSave(scenario)).world;expect(projectWorld(w)).toEqual(witness.save.snapshot);expect(w.growthTasks!.claimed.N01.rewardVersion).toBeUndefined();expect((await encodeSave(w)).checksum).toBe(scenario.checksum);
+ expect(submitFormalOrder(w,witness.command).ack?.status).toBe('duplicate');const before=structuredClone(projectWorld(w));expect(submitFormalOrder(w,claim(w,'N01')).ack?.status).toBe('rejected');expect(projectWorld(w)).toEqual(before);
+ const bad=structuredClone(projectWorld(w));bad.growthTasks!.claimed.N01.rewardVersion=2;expect(()=>validateFormalWorld(bad)).toThrow();
+ const corrupt=structuredClone(projectWorld(w));corrupt.growthTasks!.claimed.N01.accepted.wood++;expect(()=>validateFormalWorld(corrupt)).toThrow();
 });
 it('rechecks each resource and reservations atomically, without consuming eligibility or mutating stock',async()=>{
  for(const r of resourceKeys){const w=await unclaimed(),c=w.cities[0],cap=storageCapacity(c),reward=GROWTH_TASK_BY_ID.get('N02')!.reward;
@@ -73,14 +75,14 @@ it('serial claims cannot collectively exceed capacity, and stale parallel comman
  let w=await unclaimed(),c=w.cities[0],cap=storageCapacity(c);c.stock.wood=cap-GROWTH_TASK_BY_ID.get('N02')!.reward.wood;const first=claim(w),parallel=claim(w,'N03'),a=submitFormalOrder(w,first);expect(a.ack?.status).toBe('committed');w=a.world;
  expect(submitFormalOrder(w,first).ack?.status).toBe('duplicate');expect(submitFormalOrder(w,parallel).ack?.status).toBe('rejected');expect(submitFormalOrder(w,claim(w,'N03')).ack?.status).toBe('rejected');expect(w.growthTasks!.claimed.N03).toBeUndefined();expect(w.cities[0].stock.wood).toBe(cap);
 });
-it('mixed v1/v2 history survives durable save, old-save import and Recovery without issuing either reward twice',async()=>{
+it('mixed reward facts in a new-format scenario survive durable save, import and Recovery without issuing either reward twice',async()=>{
  const db=store();let w=await db.start(await unclaimed());const backup=(await db.backupList())[0].id,old=structuredClone(w.growthTasks!.claimed.N01),o=claim(w),t=submitFormalOrder(w,o);expect(t.ack?.status).toBe('committed');w=await db.save(t.world,[],w.revision);expect((await db.loadSave()).game!.growthTasks!.claimed.N01).toEqual(old);
  const restored=await db.restore(backup);expect(restored.growthTasks!.claimed.N01).toEqual(old);expect(restored.growthTasks!.claimed.N02.rewardVersion).toBe(2);expect(submitFormalOrder(restored,o).ack?.status).toBe('rolled-back');expect(submitFormalOrder(restored,claim(restored)).ack?.status).toBe('rejected');
- const imported=await db.importSave(JSON.stringify(legacy.cases[0].save));expect(imported.growthTasks!.claimed.N01).toEqual(old);expect(imported.growthTasks!.claimed.N02.rewardVersion).toBe(2);expect(()=>validateFormalWorld(imported)).not.toThrow();
+ const beforeImport=await Promise.all(db.db.tables.map(t=>t.toArray()));await expect(db.importSave(JSON.stringify(legacy.cases[0].save))).rejects.toThrow('不相容');expect(await Promise.all(db.db.tables.map(t=>t.toArray()))).toEqual(beforeImport);const imported=await db.importSave(JSON.stringify(await encodeSave(validateFormalWorld(structuredClone(legacy.cases[0].save.snapshot)))));expect(imported.growthTasks!.claimed.N01).toEqual(old);expect(imported.growthTasks!.claimed.N02.rewardVersion).toBe(2);expect(()=>validateFormalWorld(imported)).not.toThrow();
 });
 
 it('rejects malformed reward versions, forged version bindings and v2 partial-loss ledgers',async()=>{
- const legacyWorld=(await decodeSave(legacy.cases[1].save)).world,unknown=structuredClone(legacyWorld);(unknown.growthTasks!.claimed.N01 as unknown as {rewardVersion:number}).rewardVersion=3;expect(()=>validateFormalWorld(unknown)).toThrow();
+ const legacyWorld=validateFormalWorld(structuredClone(legacy.cases[1].save.snapshot)),unknown=structuredClone(legacyWorld);(unknown.growthTasks!.claimed.N01 as unknown as {rewardVersion:number}).rewardVersion=3;expect(()=>validateFormalWorld(unknown)).toThrow();
  const bound=structuredClone(legacyWorld),receipt=bound.commandReceipts.find(r=>r.commandId===bound.growthTasks!.claimed.N01.commandId)!;const payload=JSON.parse(receipt.fingerprint);payload.payload.rewardVersion=2;receipt.fingerprint=JSON.stringify(payload);expect(()=>validateFormalWorld(bound)).toThrow();
  const w=await unclaimed(),next=submitFormalOrder(w,claim(w)).world,partial=structuredClone(next);partial.growthTasks!.claimed.N02.lost.food=1;expect(()=>validateFormalWorld(partial)).toThrow();
 });

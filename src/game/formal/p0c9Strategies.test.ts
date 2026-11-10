@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {createFormalWorld} from './generator';
@@ -13,7 +14,8 @@ import {route} from './routing';
 import {EventScheduler} from './scheduler';
 import {eventId} from './ids';
 import {canonicalJSON} from './canonical';
-import {decodeSave,encodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {advanceOffline} from './offline';
 import {FormalPersistence} from '../persistence';
 import type {FormalCommand,FormalEvent,FormalWorld} from './model';
@@ -34,7 +36,7 @@ function siteAt(ctx:ReturnType<typeof setup>,distance:number){
  // Decision-only fixture: isolate one visible site; never save/submit this reduced world.
  c.x=100;c.y=100;site.x=100+distance;site.y=100;w.worldLayer!.wildSites=[site];invalidateSpatial(w);return site;
 }
-const normalization=(w:FormalWorld)=>{const copy=structuredClone(w);copy.revision=0;for(const r of copy.commandReceipts)r.committedRevision=0;return canonicalJSON(copy);};
+const normalization=(w:FormalWorld)=>{const copy=structuredClone(projectWorld(w));copy.revision=0;for(const r of copy.commandReceipts)r.committedRevision=0;return canonicalJSON(copy);};
 function legalTargets(ctx:ReturnType<typeof setup>){
  const {w,c}=ctx;const reachable=(p:{x:number;y:number})=>{try{route(w,c,p);return true;}catch{return false;}};
  const city=w.cities.filter(t=>t.ownerFactionId!==c.ownerFactionId).sort((x,y)=>Math.hypot(x.x-c.x,x.y-c.y)-Math.hypot(y.x-c.x,y.y-c.y)).find(reachable)!;
@@ -112,7 +114,7 @@ const stores:FormalPersistence[]=[];afterEach(async()=>{for(const s of stores.sp
 for(const speed of [1,10,25])it(`${speed}X real military decisions preserve Save/Load, offline, cooperative and sliced replay`,async()=>{
  const ctx=setup(),{a}=ctx;let w=ctx.w;w.speed=speed;const e=w.events.find(e=>e.id===a.eventId)!;e.at=a.nextAt=w.time+1;a.decisions=Array.from({length:1000},(_,i)=>i+1).find(n=>aiRandom(w.seed,a.factionId,n+100)<.3+.65*a.traits.activity&&aiRandom(w.seed,a.factionId,n+311)<=.15+a.traits.military*.55)!-1;
  const end=w.time+2*HOUR,whole=advanceFormal(w,end).world;expect(whole.commandReceipts.some(r=>r.issuerId===a.factionId&&JSON.parse(r.fingerprint).payload.type==='army.dispatch')).toBe(true);const decoded=(await decodeSave(await encodeSave(w))).world;
- expect(advanceFormal(decoded,end).world).toEqual(whole);
+ expect(projectWorld(advanceFormal(decoded,end).world)).toEqual(projectWorld(whole));
  expect((await advanceFormalCooperative(w,end,undefined,{yieldIntervalMs:1})).world).toEqual(whole);
  const sliced=advanceFormal(advanceFormal(w,w.time+HOUR).world,end).world;expect(normalization(sliced)).toBe(normalization(whole));
  expect(advanceOffline(w,1000,1000+2*HOUR/speed).world).toEqual(whole);
@@ -128,5 +130,5 @@ it('Recovery rolls back both real departures atomically and CAS rejects a compet
  await expect(s.save({...baseline,revision:baseline.revision+1},[],baseline.revision)).rejects.toThrow('revision');
  const restored=await s.restore(checkpoint);expect(restored.armies).toEqual(baseline.armies);expect(restored.revision).toBeGreaterThan(committed.revision);
  expect(restored.commandReceipts.filter(r=>r.issuerId===a.factionId).every(r=>r.disposition==='rolled-back')).toBe(true);
- validateFormalWorld(restored);expect((await decodeSave(await encodeSave(restored))).world).toEqual(restored);
+ validateFormalWorld(restored);expect(projectWorld((await decodeSave(await encodeSave(restored))).world)).toEqual(projectWorld(restored));
 });

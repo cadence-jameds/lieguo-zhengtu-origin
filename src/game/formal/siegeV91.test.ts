@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {digest} from './canonical';
 import {FORMAL_SAVE_FORMAT} from './versions';
 import 'fake-indexeddb/auto';
@@ -60,7 +61,7 @@ it('training at the exact siege deadline is resolved before combat.round; no ext
 });
 it('save/load, export/import, manual Recovery and offline catch-up preserve one Siege BattleId and final report',async()=>{
  const p=store();let w=await p.start(begin({militia:1,ram:20}).world);const id=w.combat!.battles[0].id,round=w.combat!.battles[0].siegeRound,damage=w.combat!.battles[0].wallDamage,checkpoint=(await p.backupList())[0];
- const loaded=(await p.loadSave()).game!;expect(loaded).toEqual(w);const full=await p.exportStoredSave('full'),q=store();const imported=await q.importSave(full);expect(imported.combat!.battles[0]).toMatchObject({id,siegeRound:round,wallDamage:damage});
+ const loaded=(await p.loadSave()).game!;expect(projectWorld(loaded)).toEqual(projectWorld(w));const full=await p.exportStoredSave('full'),q=store();const imported=await q.importSave(full);expect(imported.combat!.battles[0]).toMatchObject({id,siegeRound:round,wallDamage:damage});
  const end=finish(w);w=await p.save(end.world,end.reports,w.revision);expect((await p.readReportPage(w)).count).toBe(1);let restored=await p.restore(checkpoint.id);expect(restored.combat!.battles[0].id).toBe(id);const again=finish(restored);restored=await p.save(again.world,again.reports,restored.revision);expect((await p.readReportPage(restored)).count).toBe(1);expect(restored.combat!.receipts.filter(r=>r.kind==='final'&&r.battleId===id)).toHaveLength(1);
  const realMs=(end.world.time-loaded.time)/loaded.speed,offline=advanceOffline(loaded,0,realMs);expect({...offline.world,revision:0}).toEqual({...end.world,revision:0});expect(offline.reports).toEqual(end.reports);evidence.persistence={id,round,damage,final:end.reports[0].battle};
 });

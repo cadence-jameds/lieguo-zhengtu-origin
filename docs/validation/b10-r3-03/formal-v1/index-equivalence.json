@@ -1,0 +1,25 @@
+{
+  "beforeCommit": "cf7bd1c75a64c9f3782f0647cef813bcef28c123",
+  "afterCommit": "489f906c59b21d22dc14c40f0dedf9b9f93a5512",
+  "kind": "Node exact structural comparison; no latency claim",
+  "cases": [
+    {
+      "count": 0,
+      "archiveBytesIdentical": true,
+      "allExactLookups": true,
+      "root": "b6ae5e8b807568d24b24207b904a8b85e428794f024c21fd03cb6671e75f4936"
+    },
+    {
+      "count": 1000,
+      "archiveBytesIdentical": true,
+      "allExactLookups": true,
+      "root": "2d8aa6be27d9936d0fefd29591b0f693e6cca49369a99393ba52ede5a0df493b"
+    },
+    {
+      "count": 60000,
+      "archiveBytesIdentical": true,
+      "allExactLookups": true,
+      "root": "f5b328568e505c739a6b8207e7c3091e7dde0454b8600ec9973771c7ac492cd4"
+    }
+  ]
+}

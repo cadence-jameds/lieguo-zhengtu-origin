@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {it,expect} from 'vitest';
 import {craftWorld,captureCraftCity} from './gateDeltaTestSupport';
@@ -7,7 +8,8 @@ import {advanceFormal,submitFormalOrder} from './reducer';
 import {buildingCost,buildingDuration} from './catalogB3';
 import {zeroResources,resourceKeys} from './model';
 import type {FormalWorld} from './model';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence} from '../persistence';
 import {enableAutonomy,economicChoices} from './autonomy';
 
@@ -62,5 +64,5 @@ it.each([false,true])('D5 atomic save, full import and pre-command Recovery pres
 });
 it('D5 pre-policy paid craftsman snapshot keeps its payment and existing cancellation refund',async()=>{
  let w=prepared(false);w=issue(w,payload(w)).world;const job=w.cities[0].economy!.construction[0],cost=buildingCost('castle',1);job.paidResources=cost;for(const r of resourceKeys)w.cities[0].stock[r]-=cost[r];
- const old=structuredClone(w);w=(await decodeSave(await encodeSave(w))).world;expect(w).toEqual(old);const stock={...w.cities[0].stock};w=issue(w,{type:'construction.cancel',cityId:w.cities[0].id,constructionCommandId:job.commandId}).world;for(const r of resourceKeys)expect(w.cities[0].stock[r]).toBe(stock[r]+Math.floor(cost[r]*.5));
+ const old=structuredClone(w);w=(await decodeSave(await encodeSave(w))).world;expect(projectWorld(w)).toEqual(projectWorld(old));const stock={...w.cities[0].stock};w=issue(w,{type:'construction.cancel',cityId:w.cities[0].id,constructionCommandId:job.commandId}).world;for(const r of resourceKeys)expect(w.cities[0].stock[r]).toBe(stock[r]+Math.floor(cost[r]*.5));
 });

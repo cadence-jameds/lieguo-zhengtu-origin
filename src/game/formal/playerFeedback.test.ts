@@ -1,3 +1,4 @@
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it} from 'vitest';
 import {createFormalWorld} from './generator';
@@ -9,7 +10,8 @@ import {buildingCost,fieldCost,HOUSING} from './catalogB3';
 import {citySnapshot,HOUR} from './economy';
 import {terrainAt,buildable} from './terrain';
 import {spatial} from './spatial';
-import {decodeSave,encodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 let seq=0;const stores:FormalPersistence[]=[];
 const make=(offlineHours:0|1|4|8|12=12,speed=1)=>createFormalWorld({campaign:'feedback-'+crypto.randomUUID(),seed:90217,offlineHours,speed});
@@ -25,7 +27,7 @@ for(const cap of [0,1,4,8,12] as const)it(`offline ${cap}h caps REAL time then u
 });
 it('clock rollback yields no negative advance; short absence uses the actual elapsed duration; time2 default is12h',async()=>{
  const w=make();delete w.offlineHours;expect(advanceOffline(w,2000,1000).world.time).toBe(0);expect(advanceOffline(w,1000,2350).world.time).toBe(1350);expect(advanceOffline(w,0,25*HOUR).world.time).toBe(12*HOUR);
- for(const c of w.cities){delete c.integrationTotalWorkHours;}expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ for(const c of w.cities){delete c.integrationTotalWorkHours;}expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 });
 it('offline scheduler completes construction and training with the same anchored economy as online advance',()=>{
  let w=make(4);const c=rich(w);c.buildings.barracks=1;c.economy!.slots.barracks=1;
@@ -70,7 +72,7 @@ it('cancelling a new building cancels dependent upgrades, returns its chosen slo
  const checkpoint=(await p.backupList())[0].id,job=w.cities[0].economy!.construction[0],paid=w.cities[0].stock.food;
  await persisted({type:'construction.cancel',cityId:c.id,constructionCommandId:job.commandId});c=w.cities[0];
  expect(c.buildings.residence).toBeUndefined();expect(c.economy!.slots.residence).toBeUndefined();expect(c.economy!.construction).toEqual([]);expect(c.stock.food).toBe(paid+Math.floor(buildingCost('residence',1).food*.5)+buildingCost('residence',2).food);
- expect((await p.loadSave()).game).toEqual(w);expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ expect((await p.loadSave()).game).toEqual(w);expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
  const restored=await p.restore(checkpoint);expect(restored.cities[0].economy!.construction).toHaveLength(2);expect(restored.cities[0].economy!.slots.residence).toBe(8);
 });
 it('military capacity stays5,20k promotes waiting work to2 active, and cancellation preserves completed units and refund semantics',async()=>{
@@ -79,7 +81,7 @@ it('military capacity stays5,20k promotes waiting work to2 active, and cancellat
  const before=JSON.stringify(w);expect(submit(w,{type:'military.recruit',cityId:c.id,unitId:'militia',count:1}).ack?.status).toBe('rejected');expect(JSON.stringify(w)).toBe(before);
  w.cities[0].population=19999;w=advanceFormal(w,HOUR).world;expect(w.cities[0].economy!.milestones).toContain(20000);expect(w.cities[0].military!.queue.filter(j=>j.startsAt<=w.time)).toHaveLength(2);
  const active=w.cities[0].military!.queue[0],trained=w.cities[0].military!.units.militia,paid=w.cities[0].stock.food;w=commit(w,{type:'military.cancel',cityId:c.id,trainingCommandId:active.commandId});expect(w.cities[0].military!.units.militia).toBe(trained);expect(w.cities[0].stock.food).toBe(paid+Math.floor(active.unitCost.food*active.remaining*.8));expect(w.events.some(e=>e.id===active.eventId)).toBe(false);expect(w.cities[0].military!.queue.filter(j=>j.startsAt<=w.time)).toHaveLength(2);
- expect((await decodeSave(await encodeSave(w))).world).toEqual(w);
+ expect(projectWorld((await decodeSave(await encodeSave(w))).world)).toEqual(projectWorld(w));
 });
 it('cancel of waiting military task promotes the next task and does not refund completed units twice',()=>{
  let w=make();const c=rich(w);c.buildings.barracks=1;c.economy!.slots.barracks=1;for(let i=0;i<3;i++)w=commit(w,{type:'military.recruit',cityId:c.id,unitId:'militia',count:1});const [first,second]=w.cities[0].military!.queue;

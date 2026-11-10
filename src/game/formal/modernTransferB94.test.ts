@@ -1,3 +1,8 @@
+import {scenarioBinding} from './ledgerTestSupport';
+import {worldLedger} from './commandLedger';
+import {sealTransport} from './saveCodec';
+import {gameTransition} from './ledgerTestSupport';
+import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import {digest} from './canonical';
 import {validateFormalWorld} from './schema';
 import 'fake-indexeddb/auto';
@@ -7,7 +12,8 @@ import {make,rich,build,order,reject} from './developmentTestSupport';
 import {TRANSFER_COST,TRANSFER_DURATION,transferEligibility,transferSource,transferStillLegal,createCatchup,reconcileCatchup,catchupDecision,EMERGENCY_DURATION,handleCatchupEvent} from './modernCatchup';
 import {resourceKeys,zeroResources,type FormalWorld} from './model';
 import {advanceFormal,submitFormalOrder,orderFingerprint} from './reducer';
-import {encodeSave,decodeSave} from './saveCodec';
+import {decodeSave} from './saveCodec';
+import {encodeScenario as encodeSave} from './ledgerTestSupport';
 import {EventScheduler} from './scheduler';
 import {advanceOfflineCooperative} from './offline';
 export function modernEmpire(w=catchupWorld()){
@@ -23,7 +29,7 @@ it('B9-4C only non-qualified later joiners of completed modern empire can apply;
 it('B9-4C exact 25.2M formula and 72h; only applicant pays, stock and arrived ledger survive Save/Load',async()=>{
  let w=start(),p=w.largeProjects.at(-1)!;expect(TRANSFER_COST).toEqual({food:5700000,wood:6600000,stone:5700000,gold:7200000});expect(p.durationMs).toBe(72*3600000);
  const cargo={food:100,wood:200,stone:300,gold:400};const foreign=submitFormalOrder(w,order(w,{type:'modern.project.ship',cityId:w.cities[2].id,projectId:p.projectId,resources:cargo},'empire-cannot-pay',w.factions[1].id));expect(foreign.ack?.status).toBe('rejected');expect(foreign.world).toBe(w);
- const before={...w.cities[0].stock},cmd=order(w,{type:'modern.project.ship',cityId:w.cities[0].id,projectId:p.projectId,resources:cargo},'transfer-paid');w=submitFormalOrder(w,cmd).world;for(const r of resourceKeys)expect(w.cities[0].stock[r]).toBe(before[r]-cargo[r]);expect(w.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());const t=w.logistics!.at(-1)!,loaded=(await decodeSave(await encodeSave(w))).world;expect(advanceFormal(loaded,t.arrivalAt)).toEqual(advanceFormal(w,t.arrivalAt));w=advanceFormal(w,t.arrivalAt).world;expect(w.largeProjects.at(-1)!.poolResources).toEqual(cargo);expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');
+ const before={...w.cities[0].stock},cmd=order(w,{type:'modern.project.ship',cityId:w.cities[0].id,projectId:p.projectId,resources:cargo},'transfer-paid');w=submitFormalOrder(w,cmd).world;for(const r of resourceKeys)expect(w.cities[0].stock[r]).toBe(before[r]-cargo[r]);expect(w.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());const t=w.logistics!.at(-1)!,loaded=(await decodeSave(await encodeSave(w))).world;expect(gameTransition(advanceFormal(loaded,t.arrivalAt))).toEqual(gameTransition(advanceFormal(w,t.arrivalAt)));w=advanceFormal(w,t.arrivalAt).world;expect(w.largeProjects.at(-1)!.poolResources).toEqual(cargo);expect(submitFormalOrder(w,cmd).ack?.status).toBe('duplicate');
 });
 it.each(['legion-leave','empire-leave','legion-dissolve'] as const)('B9-4C voluntary %s rejects atomically during funding and construction',action=>{
  for(const w of [start(),funded()])reject(w,{type:'politics',cityId:w.cities[0].id,action});
@@ -31,11 +37,11 @@ it.each(['legion-leave','empire-leave','legion-dissolve'] as const)('B9-4C volun
 it.each(['empire-kick','empire-dissolve'] as const)('B9-4C forced %s cancels immediately, forfeits pool and removes completion; inbound cargo returns once',async action=>{
  let w=funded(),p=w.largeProjects.at(-1)!,end=p.catchup!.startedAt!+p.durationMs,invested={...p.poolResources},stocks=w.cities.map(c=>({...c.stock}));
  w=act(w,{type:'politics',cityId:w.cities[2].id,action,...(action==='empire-kick'?{target:w.playerFactionId}:{})},w.factions[1].id);p=w.largeProjects.at(-1)!;expect(p.catchup!.phase).toBe('cancelled');expect(p.poolResources).toEqual(invested);expect(w.events.some(e=>e.type==='modern.project.complete')).toBe(false);expect(w.cities.map(c=>c.stock)).toEqual(stocks);w=(await decodeSave(await encodeSave(w))).world;expect(advanceFormal(w,end).world.factions[0].modernQualification).toBe('none');
- let inbound=start();const id=inbound.largeProjects.at(-1)!.projectId,resources={food:100,wood:0,stone:0,gold:0};inbound=act(inbound,{type:'modern.project.ship',cityId:inbound.cities[0].id,projectId:id,resources});const shipment=inbound.logistics!.at(-1)!;inbound=act(inbound,{type:'politics',cityId:inbound.cities[2].id,action,...(action==='empire-kick'?{target:inbound.playerFactionId}:{})},inbound.factions[1].id);const before=inbound.cities[0].stock.food;inbound=advanceFormal(inbound,shipment.returnAt).world;expect(inbound.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());expect(inbound.largeProjects.at(-1)!.shipments[0].phase).toBe('returned');expect(inbound.cities[0].stock.food).toBeGreaterThanOrEqual(before+100);expect((await decodeSave(await encodeSave(inbound))).world).toEqual(inbound);
+ let inbound=start();const id=inbound.largeProjects.at(-1)!.projectId,resources={food:100,wood:0,stone:0,gold:0};inbound=act(inbound,{type:'modern.project.ship',cityId:inbound.cities[0].id,projectId:id,resources});const shipment=inbound.logistics!.at(-1)!;inbound=act(inbound,{type:'politics',cityId:inbound.cities[2].id,action,...(action==='empire-kick'?{target:inbound.playerFactionId}:{})},inbound.factions[1].id);const before=inbound.cities[0].stock.food;inbound=advanceFormal(inbound,shipment.returnAt).world;expect(inbound.largeProjects.at(-1)!.poolResources).toEqual(zeroResources());expect(inbound.largeProjects.at(-1)!.shipments[0].phase).toBe('returned');expect(inbound.cities[0].stock.food).toBeGreaterThanOrEqual(before+100);expect(projectWorld((await decodeSave(await encodeSave(inbound))).world)).toEqual(projectWorld(inbound));
 });
 it('B9-4C 840 paid shipments start exact 72h, qualification belongs only to applicant and survives later departure',async()=>{
  let w=funded(),p=w.largeProjects.at(-1)!,end=p.catchup!.startedAt!+TRANSFER_DURATION;expect(p.shipments).toHaveLength(840);expect(p.poolResources).toEqual(TRANSFER_COST);expect(advanceFormal(w,end-1).world.factions[0].modernQualification).toBe('none');
- const loaded=(await decodeSave(await encodeSave(w))).world,direct=advanceFormal(w,end);expect(advanceFormal(loaded,end)).toEqual(direct);w=direct.world;p=w.largeProjects.at(-1)!;expect(p.catchup!.qualifiedFactionIds).toEqual([w.playerFactionId]);expect(w.factions[0].modernQualification).toBe('full');const before=structuredClone(w);handleCatchupEvent(w,{id:p.catchup!.completionEventId!,type:'modern.project.complete',projectId:p.projectId,at:end},new EventScheduler(w.events));expect(w).toEqual(before);w=act(w,{type:'politics',cityId:w.cities[0].id,action:'empire-leave'});expect(w.factions[0].modernQualification).toBe('full');
+ const loaded=(await decodeSave(await encodeSave(w))).world,direct=advanceFormal(w,end);expect(gameTransition(advanceFormal(loaded,end))).toEqual(gameTransition(direct));w=direct.world;p=w.largeProjects.at(-1)!;expect(p.catchup!.qualifiedFactionIds).toEqual([w.playerFactionId]);expect(w.factions[0].modernQualification).toBe('full');const before=structuredClone(w);handleCatchupEvent(w,{id:p.catchup!.completionEventId!,type:'modern.project.complete',projectId:p.projectId,at:end},new EventScheduler(w.events));expect(w).toEqual(before);w=act(w,{type:'politics',cityId:w.cities[0].id,action:'empire-leave'});expect(w.factions[0].modernQualification).toBe('full');
 });
 it('B9-4C six legal offline chunks reach 72h and Recovery preserves cancellation and no refund',async()=>{
  const w=funded(),end=w.largeProjects.at(-1)!.catchup!.startedAt!+TRANSFER_DURATION;let offline={...w,offlineHours:12 as const};for(let i=0;i<6;i++)offline=(await advanceOfflineCooperative(offline,0,(Math.min(end-offline.time,12*3600000))/offline.speed)).world as typeof offline;expect(offline.largeProjects.at(-1)!.catchup!.phase).toBe('completed');
@@ -80,5 +86,5 @@ it('B9-4C rejects emergency source snapshots in Save/Load and in ongoing transfe
  reconcileCatchup(w,new EventScheduler(w.events));expect(p.catchup!.phase).toBe('cancelled');expect(w.factions[0].modernQualification).toBe('none');
  // Even an inactive historical snapshot must reject emergency-only provenance.
  expect(()=>validateFormalWorld(w)).toThrow('Transfer qualification snapshot invalid');await expect(encodeSave(w)).rejects.toThrow('Transfer qualification snapshot invalid');
- envelope.snapshot=w;envelope.checksum=await digest(w);await expect(decodeSave(envelope)).rejects.toThrow('Transfer qualification snapshot invalid');
+ envelope.snapshot=await scenarioBinding(w);envelope.ledger=worldLedger(envelope.snapshot).archive();envelope.checksum=await digest(envelope.snapshot);await sealTransport(envelope);await expect(decodeSave(envelope)).rejects.toThrow('Transfer qualification snapshot invalid');
 });

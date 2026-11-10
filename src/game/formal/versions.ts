@@ -5,9 +5,10 @@ export const FORMAL_CONTENT_VERSION = 'lieguo-formal-b1.2-time2' as const;
 export const FORMAL_RULESET_VERSION = 'v84-b1-skeleton.1' as const;
 export const FORMAL_GENERATOR_VERSION = 'minimal-fixture-b1.1' as const;
 export const FORMAL_TERRAIN_VERSION = 1 as const;
-export const FORMAL_SAVE_FORMAT = 'lieguo-formal-save' as const;
+export const FORMAL_SAVE_FORMAT = 'lieguo-formal-ledger-save-v1' as const;
 export const LEGACY_FORMAL_DB_NAME = 'lieguo-formal-stage2-schema1' as const;
-export const FORMAL_DB_NAME = 'lieguo-formal-stage2-time2' as const;
+export const RETIRED_FORMAL_DB_NAME = 'lieguo-formal-stage2-time2' as const;
+export const FORMAL_DB_NAME = 'lieguo-formal-ledger-v1' as const;
 export const FORMAL_WRITER_LOCK = `${FORMAL_DB_NAME}-writer`;
 export const formalMetadata = () => ({
   appVersion: RELEASE.version,

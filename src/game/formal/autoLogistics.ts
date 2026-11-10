@@ -1,3 +1,4 @@
+import {commandHistory} from './commandLedger';
 import {empireOf} from './politics';
 import {applyWonderCommand,empireWonder,wonderRemaining} from './wonder';
 import {commandId,sequenceKey} from './ids';
@@ -20,7 +21,7 @@ export function setAutoLogistics(w:FormalWorld,c:FormalCity,rules:AutoLogistics[
  c.autoLogistics=structuredClone(rules);if(settings)c.logisticsSettings=structuredClone(settings);
 }
 export function automaticOrder(w:FormalWorld,c:FormalCity,payload:FormalOrder['payload']):FormalOrder{return{commandId:commandId('auto-'+sequenceKey(w.sequences.project++)),campaignId:w.campaignId,issuerId:c.ownerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload};}
-export function recordAutomatic(w:FormalWorld,o:FormalOrder){w.commandReceipts.push({commandId:o.commandId,issuerId:o.issuerId,fingerprint:canonicalJSON({campaignId:o.campaignId,issuerId:o.issuerId,payload:o.payload}),committedRevision:w.revision+1,disposition:'applied'});}
+export function recordAutomatic(w:FormalWorld,o:FormalOrder){commandHistory(w).push({commandId:o.commandId,issuerId:o.issuerId,fingerprint:canonicalJSON({campaignId:o.campaignId,issuerId:o.issuerId,payload:o.payload}),committedRevision:w.revision+1,disposition:'applied'});}
 /** Pack whole caravans; scarce production waits rather than spending a reserved vehicle. */
 export function fullCargo(available:Resources,capacity:number){const out=zeroResources();let left=Math.min(capacity,Math.floor(resourceKeys.reduce((n,r)=>n+available[r],0)/2000)*2000);for(const r of resourceKeys){out[r]=Math.min(available[r],left);left-=out[r];}return out;}
 /** Runs only at existing settlement/return events, with no added polling events. */
