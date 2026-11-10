@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import type {FormalCity,FormalOrder,FormalWorld,Construction} from './model';
 import type {EventScheduler} from './scheduler';
 import {buildingKind,buildingLevel,HOUSING} from './catalogB3';
@@ -5,7 +6,7 @@ import {enqueue,requireRule,settleFaction,QUEUE_CAPACITY} from './economy';
 import {reconcileSiegeStorage} from './siege';
 import {TECH_CATALOG} from './techCatalog';
 
-export function demolitionReasons(w:FormalWorld,c:FormalCity,key:string){
+export function demolitionReasons(w:WorldRead,c:FormalCity,key:string){
  const kind=buildingKind(key),reasons:string[]=[];
  if(!kind||key==='center'||key==='wall'||c.economy?.slots[key]===undefined||(c.buildings[key]??0)<1)reasons.push('這裡沒有可拆除的城內建築');
  if((c.economy?.construction.length??0)>=QUEUE_CAPACITY||c.economy?.construction.some(j=>j.target.kind==='building'&&j.target.key===key))reasons.push('請先等候建造工程完成');

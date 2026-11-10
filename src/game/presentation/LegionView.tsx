@@ -1,6 +1,7 @@
+import type {WorldRead} from '../presentationModel';
 import {WonderPanel} from './WonderPanel';
 import {useEffect,useState} from 'react';
-import type {FormalCity,FormalCommand,FormalReport,FormalWorld} from '../formal/model';
+import type {FormalCity,FormalCommand,FormalReport} from '../formal/model';
 import type {FactionId,CityId} from '../formal/ids';
 import {canCoordinate,diplomaticRelation,embassy,empireOf,legionOf,politicalLeader,type PoliticalCommand} from '../formal/politics';
 import {incomingAlerts} from '../formal/aiKnowledge';
@@ -11,7 +12,7 @@ import {Countdown} from './LiveValues';
 import {CIV_NAMES} from './artMap';
 import {usePoliticalAction} from './PoliticalAction';
 import type {RuntimeRequest} from '../runtime.worker';
-type Props={world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;onWorld:()=>void;reports?:FormalReport[];reportFilter?:string;send?:(r:RuntimeRequest)=>void};
+type Props={world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;onWorld:()=>void;reports?:FormalReport[];reportFilter?:string;send?:(r:RuntimeRequest)=>void};
 export function LegionView({world:w,city:c,issue,busy,onWorld,reports=[],reportFilter,send}:Props){
  const [tab,setTab]=useState('總覽'),[name,setName]=useState('新軍團'),[search,setSearch]=useState(''),[sort,setSort]=useState('name'),[target,setTarget]=useState('');
  const me=w.playerFactionId,l=legionOf(w,me),e=empireOf(w,me),leader=l?.leader===me,capacity=l?Math.min(10,embassy(w,l.leader)):0,full=!!l&&l.members.length>=capacity;
@@ -34,11 +35,11 @@ export function LegionView({world:w,city:c,issue,busy,onWorld,reports=[],reportF
  {tab==='管理'&&<>{leader?<><section className="card"><h2>軍團資料與招募</h2><label>軍團名稱<input value={name} maxLength={100} onChange={e=>setName(e.target.value)}/></label><button disabled={busy||!name.trim()} onClick={()=>act('legion-edit',{name,description:l.description})}>更新名稱</button><label>邀請獨立領主<select aria-label="邀請獨立領主" value={target} onChange={e=>setTarget(e.target.value)}><option value="">選擇領主</option>{outsiders.map(f=><option key={f.id} value={f.id}>{f.name}</option>)}</select></label><button disabled={busy||full||!outsiders.some(f=>f.id===target)} onClick={()=>act('legion-invite',{target:targetFaction})}>邀請加入軍團</button></section>{inbox}<section className="card"><h2>帝國管理</h2><p>{e?e.name+' · '+e.legions.length+'/3 軍團':'成立帝國需要城堡時代、使館 Lv11及另一軍團同意。'}</p><label>帝國對象軍團<select aria-label="帝國對象軍團" value={target} onChange={e=>setTarget(e.target.value)}><option value="">選擇軍團</option>{(e?.leader===me?(w.politics?.legions??[]).filter(g=>g.id!==l.id):empireTargets).map(g=><option key={g.id} value={g.leader}>{g.name}</option>)}</select></label><button disabled={busy||!empireTargets.some(g=>g.leader===target)||(e?e.leader!==me||e.legions.length>=3:(faction(me)?.age??0)<2||embassy(w,me)<11)} onClick={()=>act('empire-propose',{target:targetFaction,name:e?.name??name})}>{e?'邀請加入帝國':'提議成立帝國'}</button>{e&&<button disabled={busy} onClick={()=>confirm('軍團退出帝國',{type:'politics',cityId:c.id,action:'empire-leave'})}>軍團退出帝國</button>}{e?.leader===me&&<><button disabled={busy||!w.politics?.legions.some(g=>g.leader===target&&g.id!==l.id&&g.empireId===e.id)} onClick={()=>confirm('移除帝國軍團',{type:'politics',cityId:c.id,action:'empire-kick',target:targetFaction})}>移除帝國軍團</button><button disabled={busy||!w.politics?.legions.some(g=>g.leader===target&&g.id!==l.id&&g.empireId===e.id)} onClick={()=>confirm('轉讓帝國領袖',{type:'politics',cityId:c.id,action:'empire-transfer',target:targetFaction})}>轉讓帝國領袖</button><button disabled={busy} onClick={()=>confirm('解散帝國',{type:'politics',cityId:c.id,action:'empire-dissolve'})}>解散帝國</button></>}</section><section className="card"><h2>團長權限</h2><label>繼任成員<select aria-label="繼任成員" value={target} onChange={e=>setTarget(e.target.value)}><option value="">選擇成員</option>{successors.map(id=><option key={id} value={id}>{faction(id)?.name}</option>)}</select></label><button disabled={busy||!successors.includes(targetFaction)} onClick={()=>confirm('轉讓軍團長',{type:'politics',cityId:c.id,action:'legion-transfer',target:targetFaction})}>轉讓軍團長</button><button disabled={busy} onClick={()=>confirm('解散軍團',{type:'politics',cityId:c.id,action:'legion-dissolve'})}>解散軍團</button></section></>:<section className="card"><h2>成員權限</h2><p>招募、踢除、資料編輯與轉讓由團長管理。聯防／聯軍仍需正式資格與自己的兵力承諾。</p></section>}<button disabled={busy} onClick={()=>confirm('退出軍團',{type:'politics',cityId:c.id,action:'legion-leave'})}>退出軍團</button></>}
  </section>{dialog}</div>;
 }
-function CooperationPanel({world:w,city,issue,busy,mode}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mode:'defense'|'joint'}){
+function CooperationPanel({world:w,city,issue,busy,mode}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mode:'defense'|'joint'}){
  const owned=w.cities.filter(c=>c.ownerFactionId===w.playerFactionId),[source,setSource]=useState<CityId>(city.id),c=owned.find(c=>c.id===source)??owned[0];
  return <><label>兵力來源城市<select aria-label="兵力來源城市" value={c.id} onChange={e=>setSource(e.target.value as CityId)}>{owned.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label><CooperationSource key={c.id+mode} world={w} city={c} issue={issue} busy={busy} mode={mode}/></>;
 }
-function CooperationSource({world:w,city:c,issue,busy,mode}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mode:'defense'|'joint'}){
+function CooperationSource({world:w,city:c,issue,busy,mode}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;mode:'defense'|'joint'}){
  const reserve=w.politics?.reserves.find(r=>r.cityId===c.id),[units,setUnits]=useState<Record<string,number>>(reserve?.units??{}),[keep,setKeep]=useState(reserve?.keep??10),[target,setTarget]=useState(''),me=w.playerFactionId,eligible=canCoordinate(w,me,me,mode==='defense'?13:14);
  const valid=Number.isSafeInteger(keep)&&keep>=0&&Object.entries(units).every(([id,n])=>Number.isSafeInteger(n)&&n>=0&&n<=(c.military?.units[id]??0)),chosen=Object.fromEntries(Object.entries(units).filter(([,n])=>n>0));
  const targets=w.cities.filter(x=>x.id!==c.id&&(mode==='defense'?canCoordinate(w,me,x.ownerFactionId,13):diplomaticRelation(w,me,x.ownerFactionId)!=='friendly'&&x.ownerFactionId!==me));

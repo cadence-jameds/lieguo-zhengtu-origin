@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import type {BreakthroughCommand,FormalCity,FormalEvent,FormalOrder,FormalReport,FormalWorld,LargeProject} from './model';
 import {resourceKeys,zeroResources} from './model';
 import {projectId,reportId,sequenceKey,type EmpireId} from './ids';
@@ -7,10 +8,10 @@ import {empireWonder,wonderRemaining,wonderIntegrity} from './wonder';
 import type {EventScheduler} from './scheduler';
 import {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION} from './wonderRules';
 export {BREAKTHROUGH_COST,BREAKTHROUGH_DURATION} from './wonderRules';
-export const empireBreakthrough=(w:FormalWorld,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===id);
+export const empireBreakthrough=(w:WorldRead,id:EmpireId)=>w.largeProjects.find(p=>p.kind==='civilization-breakthrough'&&p.owner.kind==='empire'&&p.owner.empireId===id);
 export const breakthroughStoredWork=(p:LargeProject)=>p.breakthrough!.workPeriods.reduce((n,s)=>n+s.endedAt-s.startedAt,0)-p.breakthrough!.discardedWorkMs;
-export function breakthroughWork(w:FormalWorld,p:LargeProject){const b=p.breakthrough!;return breakthroughStoredWork(p)+(b.activeSince===null?0:Math.max(0,w.time-b.activeSince));}
-export function breakthroughPauseReason(w:FormalWorld,p:LargeProject):'host-lost'|'wonder-unavailable'|null{
+export function breakthroughWork(w:WorldRead,p:LargeProject){const b=p.breakthrough!;return breakthroughStoredWork(p)+(b.activeSince===null?0:Math.max(0,w.time-b.activeSince));}
+export function breakthroughPauseReason(w:WorldRead,p:LargeProject):'host-lost'|'wonder-unavailable'|null{
  const city=w.cities.find(c=>c.id===p.initiatingCityId),owner=p.owner.kind==='empire'?p.owner.empireId:null;
  if(p.breakthrough?.recaptureRequired||!owner||!city||empireOf(w,city.ownerFactionId)?.id!==owner)return 'host-lost';
  const wonder=w.largeProjects.find(q=>q.projectId===p.breakthrough?.wonderProjectId);

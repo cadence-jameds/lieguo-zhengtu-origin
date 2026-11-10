@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {incomingAlerts} from '../formal/aiKnowledge';
 import {LiveBattleDetails} from './LiveBattleDetails';
 import type {BattleId} from '../formal/ids';
@@ -5,7 +6,7 @@ import {liveBattleView} from '../formal/battleView';
 import {reportTime} from './reportClock';
 import {intelAge,useRealNow} from './intelTime';
 import {useMemo,useState} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import type {ArmyMissionState,ArmyTarget} from '../formal/combatModel';
 import {isMissionArmy} from '../formal/combatModel';
 import {armyPosition} from '../formal/armyPosition';
@@ -19,10 +20,10 @@ import {Countdown} from './LiveValues';
 import {wildSiteName} from './wildSiteLabels';
 import {useTargetIntel} from './targetIntel';
 type Mission=ArmyMissionState['mission'];
-type Props={world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;target?:ArmyTarget;onMap?:(p:{x:number;y:number})=>void};
+type Props={world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;target?:ArmyTarget;onMap?:(p:{x:number;y:number})=>void};
 export const missionName={'wonder-destruction':'奇觀破壞',raid:'掠奪',conquest:'佔領',scout:'偵察',reinforce:'增援'};
 const statusName={waiting:'等待會師出發',outbound:'前往目標',engaged:'交戰中',stationed:'駐防中',returning:'返回城市',stranded:'等待歸隊'};
-export function ArmyDispatchDialog({world,city,issue,busy,target,mission,onClose,onBack=onClose}:{world:FormalWorld;city:FormalCity;issue:Props['issue'];busy:boolean;target:ArmyTarget;mission:Mission;onClose:()=>void;onBack?:()=>void}){
+export function ArmyDispatchDialog({world,city,issue,busy,target,mission,onClose,onBack=onClose}:{world:WorldRead;city:FormalCity;issue:Props['issue'];busy:boolean;target:ArmyTarget;mission:Mission;onClose:()=>void;onBack?:()=>void}){
  const now=useRealNow();
  const dest=target.kind==='city'?spatial(world).cities.get(target.cityId):spatial(world).sites.get(target.siteId);
  const [units,setUnits]=useState<Record<string,number>>(():Record<string,number>=>mission==='scout'?Object.fromEntries(Object.entries(scoutUnits(city.military?.units??{})).map(([id,n])=>[id,Math.min(2,n)])):{}),[submitted,setSubmitted]=useState(false),[wonderPriority,setWonderPriority]=useState(false);

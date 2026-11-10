@@ -1,5 +1,6 @@
-import {createContext,useContext,useEffect,useRef,useState} from 'react';
-import type {FormalWorld} from '../formal/model';
+import {PresentationStoreContext} from '../usePresentation';
+import type {WorldRead} from '../presentationModel';
+import {createContext,useContext,useEffect,useRef,useState,useCallback,useSyncExternalStore} from 'react';
 import type {CityId} from '../formal/ids';
 import {constructionPreviewContext} from '../constructionPreviewContext';
 import {constructionPreviews} from '../constructionPreviewController';
@@ -7,7 +8,8 @@ import {PREVIEW_PROTOCOL,type PreviewTarget,type PreviewResponse} from '../const
 export const PreviewBranchContext=createContext('standalone');
 let channels=0,requests=0;
 /** No quote, clone, settlement or canonical world serialization during render. */
-export function useConstructionPreviews(world:FormalWorld,cityId:CityId|undefined,targets:PreviewTarget[]){
+export function useConstructionPreviews(renderedWorld:WorldRead,cityId:CityId|undefined,targets:PreviewTarget[]){
+ const store=useContext(PresentationStoreContext),active=!!cityId&&targets.length>0,get=useCallback(()=>active?store?.getWorld()??renderedWorld:renderedWorld,[active,store,renderedWorld]),world=useSyncExternalStore(store?.subscribe??(()=>()=>{}),get,get);
  const branch=useContext(PreviewBranchContext),[channel]=useState(()=>++channels),generation=useRef(0),coalesceAt=useRef(0),[attempt,retry]=useState(0);
  const targetKey=JSON.stringify(targets),scope=JSON.stringify([world.campaignId,branch,cityId,targetKey,attempt]),identity=JSON.stringify([scope,world.revision]);
  const failure=useRef<{scope:string;error:string}|undefined>(undefined);

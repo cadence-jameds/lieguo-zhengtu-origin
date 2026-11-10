@@ -1,9 +1,10 @@
+import type {WorldRead} from '../presentationModel';
 import {LogisticsSettingsPanel} from './LogisticsSettingsPanel';
 import {logisticsAvailable} from '../formal/logisticsAllocation';
 import {WonderRepairPanel} from './WonderRepairPanel';
 import {BreakthroughPanel} from './BreakthroughPanel';
 import {useState} from 'react';
-import type {FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCommand} from '../formal/model';
 import {resourceKeys,zeroResources} from '../formal/model';
 import {empireOf} from '../formal/politics';
 import {caravanStatus,citySnapshot} from '../formal/economy';
@@ -11,7 +12,7 @@ import {empireWonder,wonderRemaining,WONDER_COST,wonderProgress} from '../formal
 import {Cost} from './UI';
 import {Countdown,LiveProgress} from './LiveValues';
 import {LABELS} from './artMap';
-export function WonderPanel({world:w,issue,busy}:{world:FormalWorld;issue:(p:FormalCommand)=>void;busy:boolean}){
+export function WonderPanel({world:w,issue,busy}:{world:WorldRead;issue:(p:FormalCommand)=>void;busy:boolean}){
  const [hostId,setHostId]=useState(''),[sourceId,setSourceId]=useState(''),[cargo,setCargo]=useState(zeroResources);
  const empire=empireOf(w,w.playerFactionId),owned=w.cities.filter(c=>c.ownerFactionId===w.playerFactionId),source=owned.find(c=>c.id===sourceId)??owned[0];
  if(!empire||!source)return null;

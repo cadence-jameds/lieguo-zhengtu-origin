@@ -1,4 +1,4 @@
-import type {CommandAck,FormalWorld} from './formal/model';
+import type {CommandAck} from './formal/model';
 
 /** Background messages cannot release a foreground request's busy state. */
 export class PendingRequests {
@@ -19,12 +19,5 @@ export class PendingCommand {
  clear(){this.ids.clear();this.latest=null;}
  get busy(){return this.ids.size>0;}
 }
-/** Reuse unchanged graph branches so presentation caches survive checkpoints. */
-export function reconcileWorld(prior:FormalWorld|null,next:FormalWorld|null):FormalWorld|null{
- if(!prior||!next||prior.campaignId!==next.campaignId)return next;
- if(prior.revision===next.revision&&prior.time===next.time)return prior;
- const result={...next};
- const reuse=<K extends keyof FormalWorld>(key:K)=>{const a=prior[key],b=next[key];if(a===b||JSON.stringify(a)===JSON.stringify(b))result[key]=a;};
- for(const key of Object.keys(next) as (keyof FormalWorld)[])reuse(key);
- return result;
-}
+/** Display snapshots only; authority worlds never enter the React reconciler. */
+export {reconcilePresentation as reconcileWorld} from './presentationSharing';

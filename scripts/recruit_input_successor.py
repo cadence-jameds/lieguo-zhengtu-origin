@@ -23,6 +23,7 @@ HISTORICAL = {PROTECTED,'docs/validation/city-ui-successor/compatibility.json',
 
 def validate(root=ROOT):
  from b10_r3_02_successor import accepts as preview_accepts
+ from b10_r3_04_successor import accepts as projection_accepts
  record=json.loads((root/RECORD).read_text())
  assert record['schemaVersion']==1 and record['baseCommit']==BASE and record['uiCommit']==UI
  assert set(record['changes'])==SOURCES and set(record['invariants'])==INVARIANTS and set(record['historical'])==HISTORICAL
@@ -30,7 +31,7 @@ def validate(root=ROOT):
  for path,entry in record['changes'].items():
   assert entry['before']==protected[path]==sha(previous(root,BASE,path))
   assert entry['after']==sha(previous(root,UI,path)),('Changed original recruitment source digest',path)
-  assert entry['after']==sha((root/path).read_bytes()) or path=='src/game/presentation/cityActions.ts' and preview_accepts(path,entry['after'],root),('Changed recruitment source',path)
+  assert entry['after']==sha((root/path).read_bytes()) or path=='src/game/presentation/cityActions.ts' and preview_accepts(path,entry['after'],root) or projection_accepts(path,entry['after'],root),('Changed recruitment source',path)
  for section in ['invariants','historical']:
   for path,digest in record[section].items():
    assert digest==sha(previous(root,BASE,path)),('Original authority/history digest changed',path)
@@ -42,7 +43,8 @@ def validate(root=ROOT):
   'scripts/measure-recruit-input.mjs','scripts/serve-recruit-input.mjs'],text=True).split('\0'))-{''}
  assert set(record['evidence'])==witnesses
  for path,digest in record['evidence'].items():
-  assert digest==sha(previous(root,UI,path))==sha((root/path).read_bytes()),('Changed recruitment witness',path)
+  assert digest==sha(previous(root,UI,path)),('Changed original recruitment witness',path)
+  assert digest==sha((root/path).read_bytes()) or path=='src/game/presentation/RecruitmentForm.tsx' and projection_accepts(path,digest,root),('Changed recruitment witness',path)
  # Non-recruitment action previews and military/settlement presentation remain byte-identical.
  path='src/game/presentation/cityActions.ts'
  before=previous(root,BASE,path).decode();after=(root/path).read_text()

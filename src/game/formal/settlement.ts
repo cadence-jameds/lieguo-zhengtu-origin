@@ -1,3 +1,4 @@
+import type {WorldRead} from '../presentationModel';
 import {cityId,projectId,sequenceKey} from './ids';
 import type {DevelopmentCommand,FormalCity,FormalEvent,FormalOrder,FormalWorld} from './model';
 import {resourceKeys} from './model';
@@ -11,8 +12,8 @@ import {initialMilitary} from './military';
 import {producerMultiplier,UNIT_CATALOG} from './unitCatalog';
 import {route} from './routing';
 export const SETTLEMENT_COST={food:6000,wood:8000,stone:12000,gold:4000};
-export const colonizationUnits=(w:FormalWorld,cityId:FormalCity['id'])=>(w.colonizationUnits??[]).filter(u=>u.sourceCityId===cityId);
-export const readyColonizationUnit=(w:FormalWorld,cityId:FormalCity['id'])=>colonizationUnits(w,cityId).find(u=>u.phase==='ready');
+export const colonizationUnits=(w:WorldRead,cityId:FormalCity['id'])=>(w.colonizationUnits??[]).filter(u=>u.sourceCityId===cityId);
+export const readyColonizationUnit=(w:WorldRead,cityId:FormalCity['id'])=>colonizationUnits(w,cityId).find(u=>u.phase==='ready');
 /** Called only after an old native envelope has passed checksum and strict validation. */
 export function migrateColonizationUnits(w:FormalWorld){
  if(w.fixture||w.metadata.rulesetVersion!=='v84-b4.1')return w;

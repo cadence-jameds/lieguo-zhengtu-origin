@@ -1,4 +1,5 @@
-import type {FormalWorld,TerrainClass} from '../formal/model';
+import type {TerrainRead} from '../presentationModel';
+import type {TerrainClass} from '../formal/model';
 import {terrainAt,seedHash} from '../formal/terrain';
 import {project,inverse,type Point} from './mapGeometry';
 import atlas from '../sceneryAtlas.json';
@@ -7,13 +8,13 @@ import {overviewGeometry} from './mapViewRules';
 export type Texture={width:number;height:number;data:Uint8ClampedArray};
 const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
 export function noise(x:number,y:number,seed:number){const a=Math.floor(x),b=Math.floor(y),fx=x-a,fy=y-b,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy),n=(x:number,y:number)=>(seedHash(seed,x,y,129)%65536)/65535;return (n(a,b)*(1-u)+n(a+1,b)*u)*(1-v)+(n(a,b+1)*(1-u)+n(a+1,b+1)*u)*v;}
-export const terrainSample=(w:FormalWorld,x:number,y:number):TerrainClass=>terrainAt(w,clamp(Math.round(x),0,w.dimensions.width-1),clamp(Math.round(y),0,w.dimensions.height-1))!;
+export const terrainSample=(w:TerrainRead,x:number,y:number):TerrainClass=>terrainAt(w,clamp(Math.round(x),0,w.dimensions.width-1),clamp(Math.round(y),0,w.dimensions.height-1))!;
 const wet=(t:TerrainClass)=>t==='water'||t==='river';
-export function wetSurface(w:FormalWorld,x:number,y:number){const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy;return (+wet(terrainSample(w,ix,iy))*(1-fx)+ +wet(terrainSample(w,ix+1,iy))*fx)*(1-fy)+(+wet(terrainSample(w,ix,iy+1))*(1-fx)+ +wet(terrainSample(w,ix+1,iy+1))*fx)*fy;}
-const color=(w:FormalWorld,x:number,y:number)=>{const t=terrainSample(w,x,y),biome=noise(x*.065,y*.065,w.seed^763),base=biome<.42?[181,190,132]:biome>.65?[160,161,139]:[179,166,117];return base.map((v,k)=>t==='forest'?v*.88+[106,136,91][k]*.12:t==='mountain'?v*.78+[142,146,118][k]*.22:v);};
+export function wetSurface(w:TerrainRead,x:number,y:number){const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy;return (+wet(terrainSample(w,ix,iy))*(1-fx)+ +wet(terrainSample(w,ix+1,iy))*fx)*(1-fy)+(+wet(terrainSample(w,ix,iy+1))*(1-fx)+ +wet(terrainSample(w,ix+1,iy+1))*fx)*fy;}
+const color=(w:TerrainRead,x:number,y:number)=>{const t=terrainSample(w,x,y),biome=noise(x*.065,y*.065,w.seed^763),base=biome<.42?[181,190,132]:biome>.65?[160,161,139]:[179,166,117];return base.map((v,k)=>t==='forest'?v*.88+[106,136,91][k]*.12:t==='mountain'?v*.78+[142,146,118][k]*.22:v);};
 /** DEMO-style inexpensive overview is available on the first frame. The worker
  * refines it later; this raster reads only Formal terrain, never legacy ecology. */
-export function paintTerrainOverview(w:FormalWorld){
+export function paintTerrainOverview(w:TerrainRead){
  const geometry=overviewGeometry(w),scale=.025,width=Math.round(geometry.width*scale),height=Math.round(geometry.height*scale),data=new Uint8ClampedArray(width*height*4),covers=new Map<string,number[]>();
  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
   const p=inverse(geometry.origin.x+(x+.5)/scale,geometry.origin.y+(y+.5)/scale),ix=Math.round(p.x),iy=Math.round(p.y),t=terrainSample(w,ix,iy),key=Math.floor(ix/4)+','+Math.floor(iy/4);
@@ -26,7 +27,7 @@ export function paintTerrainOverview(w:FormalWorld){
 }
 /** Adaptation of DEMO painterlyGround: same continuous palette, texture grain,
  * wet interpolation and shoreline shader. Membership comes only from Formal terrain. */
-export function paintSurface(w:FormalWorld,origin:Point,width:number,height:number,scale:number,texture?:Texture){
+export function paintSurface(w:TerrainRead,origin:Point,width:number,height:number,scale:number,texture?:Texture){
  const rw=Math.max(1,Math.round(width*scale)),rh=Math.max(1,Math.round(height*scale)),data=new Uint8ClampedArray(rw*rh*4),cache=new Map<string,number[]>();
  const sample=(x:number,y:number)=>{const key=x+','+y;let c=cache.get(key);if(!c){c=color(w,x,y);cache.set(key,c);}return c;};
  const mirror=(v:number,s:number)=>{const n=((Math.floor(v)%(s*2))+s*2)%(s*2);return n<s?n:s*2-n-1;};
@@ -38,7 +39,7 @@ export function paintSurface(w:FormalWorld,origin:Point,width:number,height:numb
  }
  return {width:rw,height:rh,data};
 }
-export function shoreSegments(w:FormalWorld,x:number,y:number){
+export function shoreSegments(w:TerrainRead,x:number,y:number){
  const a=+wet(terrainSample(w,x,y)),b=+wet(terrainSample(w,x+1,y)),c=+wet(terrainSample(w,x,y+1)),d=+wet(terrainSample(w,x+1,y+1));if(a===b&&a===c&&a===d)return [];
  const field=(fx:number,fy:number)=>((a*(1-fx)+b*fx)*(1-fy)+(c*(1-fx)+d*fx)*fy)+(noise((x+fx)*2,(y+fy)*2,w.seed^9918)-.5)*.22,result:[Point,Point][]=[];
  for(let j=0;j<4;j++)for(let i=0;i<4;i++){const ps=[{x:i/4,y:j/4},{x:(i+1)/4,y:j/4},{x:(i+1)/4,y:(j+1)/4},{x:i/4,y:(j+1)/4}],vs=ps.map(p=>field(p.x,p.y)),cross:Point[]=[];for(let k=0;k<4;k++){const n=(k+1)%4;if((vs[k]>.5)===(vs[n]>.5))continue;const t=(.5-vs[k])/(vs[n]-vs[k]);cross.push({x:x+ps[k].x+(ps[n].x-ps[k].x)*t,y:y+ps[k].y+(ps[n].y-ps[k].y)*t});}for(let k=0;k+1<cross.length;k+=2)result.push([cross[k],cross[k+1]]);}return result;
@@ -47,7 +48,7 @@ export type Decoration=Point&{kind:'tree'|'mountain'|'detail';variant:number;wid
 /** Same atlas sizes/variety as DEMO. A sampled forest cell holds at most one tree;
  * Formal mountain anchors drive sparse, large overlapping ridge sprites.
  * The complete footprint is Formal blocked terrain, not a visual-only overlay. */
-export function decorations(w:FormalWorld,x:number,y:number):Decoration[]{
+export function decorations(w:TerrainRead,x:number,y:number):Decoration[]{
  const t=terrainAt(w,x,y);if(!t||wet(t))return [];const n=seedHash(w.seed,x,y,107),out:Decoration[]=[];
  const add=(kind:Exclude<Decoration['kind'],'mountain'>,variant:number,width:number,px=x,py=y)=>{const b=(kind==='tree'?atlas.trees:atlas.ground)[variant];let item={x:px,y:py,kind,variant,width,height:width*b.h/b.w*(kind==='detail'?.62:1),flip:!!(n%2)};
   for(let k=0;k<4;k++){const p=project(item),samples=[inverse(p.x-width/2,p.y),inverse(p.x+width/2,p.y),{x:item.x,y:item.y}];if(samples.every(p=>!wet(terrainSample(w,p.x,p.y)))){out.push(item);return;}width*=.78;item={...item,width,height:item.height*.78};}
@@ -60,6 +61,6 @@ export function decorations(w:FormalWorld,x:number,y:number):Decoration[]{
  return out;
 }
 export const INITIAL_ZOOM=.75,MAX_ZOOM=2,MIN_ZOOM=.12;
-export const overviewZoom=(w:FormalWorld,width:number,height:number)=>Math.max(.005,Math.min((width-40)/(20*(w.dimensions.width+w.dimensions.height)),(height-40)/(10*(w.dimensions.width+w.dimensions.height))));
+export const overviewZoom=(w:TerrainRead,width:number,height:number)=>Math.max(.005,Math.min((width-40)/(20*(w.dimensions.width+w.dimensions.height)),(height-40)/(10*(w.dimensions.width+w.dimensions.height))));
 /** The same durable footprint is used by terrain, routing, settlement and art. */
-export function mountainVisualCells(_w:FormalWorld,d:Decoration){return mountainFootprint(d);}
+export function mountainVisualCells(_w:TerrainRead,d:Decoration){return mountainFootprint(d);}

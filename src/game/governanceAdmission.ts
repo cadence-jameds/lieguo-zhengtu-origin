@@ -1,13 +1,19 @@
+import type {WorldRead} from './presentationModel';
 import {commandHistory} from './formal/commandLedger';
 import type {FormalOrder,FormalWorld} from './formal/model';
 import {buildingLevel} from './formal/catalogB3';
 
 export type GovernanceBase={revision:number;fingerprint:string};
 /** Compare only intent-relevant state; receipts prevent an ABA setting write. */
-export function governanceBase(world:FormalWorld,cityId:string):GovernanceBase{
- const city=world.cities.find(c=>c.id===cityId),g=world.governors?.find(g=>g.cityId===cityId);
+export function governanceBase(world:WorldRead,cityId:string):GovernanceBase{
+ if(world.kind==='presentation'){const fingerprint=world.derived.governance[cityId];if(fingerprint===undefined)throw Error('治理前提尚未同步，請重新整理畫面。');return {revision:world.revision,fingerprint};}
  let lastWrite:unknown=null,lastRevision=-1;
  for(const r of commandHistory(world)){if(r.disposition!=='applied'||r.committedRevision<=lastRevision)continue;try{const p=JSON.parse(r.fingerprint).payload;if(p?.type==='governance.set'&&p.cityId===cityId){lastWrite=[r.commandId,r.committedRevision];lastRevision=r.committedRevision;}}catch{lastWrite=[r.commandId,r.committedRevision,r.fingerprint];lastRevision=r.committedRevision;}}
+ return governanceIntentBase(world,cityId,lastWrite);
+}
+/** Shared exact encoding; only Runtime supplies the verified last-write evidence. */
+export function governanceIntentBase(world:WorldRead,cityId:string,lastWrite:unknown):GovernanceBase{
+ const city=world.cities.find(c=>c.id===cityId),g=world.governors?.find(g=>g.cityId===cityId);
  return {revision:world.revision,fingerprint:JSON.stringify([world.campaignId,world.playerFactionId,city?.ownerFactionId,city?buildingLevel(city,'townhall'):null,!!city?.economy,g?[g.ownerFactionId,g.enabled,g.policy,g.budget,g.reserve]:null,lastWrite])};
 }
 /** A UI snapshot carries a compare-and-set precondition for governance only.

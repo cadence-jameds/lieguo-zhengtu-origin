@@ -1,3 +1,5 @@
+import {memo} from 'react';
+import type {WorldRead} from '../presentationModel';
 import {CatchupPanel} from './CatchupPanel';
 import {AwarenessPanel} from './AwarenessPanel';
 import {modernUnitAuthorized} from '../formal/modernAwareness';
@@ -11,7 +13,7 @@ import {recruitmentConditions} from './cityActions';
 import {RecruitAmount,RecruitmentForm,parseRecruitCount,type RecruitAmountHandle} from './RecruitmentForm';
 import {readyColonizationUnit} from '../formal/settlement';
 import {useRef,useState,type Ref,type ReactNode} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import {UNIT_CATALOG,ELITE_VARIANTS,UNIT_LINES,type UnitDefinition} from '../formal/unitCatalog';
 import {armyUpkeep} from '../formal/military';
 import {buildingLevel} from '../formal/catalogB3';
@@ -21,12 +23,12 @@ import {unitArt} from './artMap';
 import {Cost,Dialog,fmt,realTime} from './UI';
 import {Countdown} from './LiveValues';
 import {useLiveCity} from './liveClock';
-type Props={world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean};
+type Props={world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean};
 export {ResearchView} from './ResearchView';
 function DesktopRecruitment({world,city,issue,busy,definitions,batch,header,onSelect,qty,role}:Props&{definitions:UnitDefinition[];batch:Ref<RecruitAmountHandle>;header:ReactNode;onSelect:(id:string)=>void;qty:(u:UnitDefinition)=>number;role:(u:UnitDefinition)=>string}){
  return <RecruitAmount ref={batch} label="每批招募人數">{(raw,validate,input)=>{const count=parseRecruitCount(raw);return <>{input}{header}<div className="desktop-recruits">{definitions.map(base=>{const a=recruitmentConditions(world,city,base.id,count??1);return <article className="card" key={base.id}><div className="recruit-heading"><Art spec={unitArt(a.d.id)} label={a.d.name}/><div><h2>{a.d.name}</h2><small>本城駐軍 {fmt(qty(base))}</small></div></div><p>{role(a.d)}</p><div className="unit-stats">攻 {a.d.attack} · 近防 {a.d.meleeDefense} · 遠防 {a.d.rangedDefense} · 速 {a.d.secondsPerTile}秒／格</div>{count!==undefined&&<><Cost cost={a.cost} stock={city.stock}/><p>訓練 {realTime(a.durationMs*count,world)} · 人口 {a.population}</p></>}<button onClick={()=>onSelect(base.id)}>兵種詳情</button><button className="primary" disabled={busy||(count!==undefined&&a.reasons.length>0)} onClick={()=>{const n=validate();if(n!==undefined)issue({type:'military.recruit',cityId:city.id,unitId:base.id,count:n});}}>{count===undefined?'招募':a.reasons[0]??'招募 '+count+' 名'}</button></article>;})}</div></>;}}</RecruitAmount>;
 }
-export function ArmyView({world,city:sourceCity,issue,busy,targetPoint,armyTarget,initialMarch=false,mobile=false,onMap}:Props&{initialMarch?:boolean;armyTarget?:ArmyTarget;targetPoint?:{x:number;y:number};mobile?:boolean;onMap?:(p:{x:number;y:number})=>void}){
+function ArmyViewScreen({world,city:sourceCity,issue,busy,targetPoint,armyTarget,initialMarch=false,mobile=false,onMap}:Props&{initialMarch?:boolean;armyTarget?:ArmyTarget;targetPoint?:{x:number;y:number};mobile?:boolean;onMap?:(p:{x:number;y:number})=>void}){
  const [unitEra,setUnitEra]=useState<'traditional'|'modern'>('traditional'),[tab,setTab]=useState<'recruit'|'march'>(initialMarch||targetPoint||armyTarget?'march':'recruit'),[unit,setUnit]=useState<string|null>(null),[settlementOpen,setSettlementOpen]=useState(!!targetPoint),batch=useRef<RecruitAmountHandle>(null),modalDraft=useRef<string|null>(null),city=useLiveCity(world,sourceCity,!mobile||unit!==null||settlementOpen)!,f=world.factions.find(f=>f.id===city.ownerFactionId)!,queue=city.military?.queue??[],marches=(world.settlements??[]).filter(p=>p.ownerFactionId===world.playerFactionId&&p.phase==='travelling'),ready=readyColonizationUnit(world,city.id);
  const definitions=UNIT_LINES.map(id=>UNIT_CATALOG[(unitEra==='modern'?'modern.':'')+(id==='guard'?'guard.'+castleSource(world,sourceCity):id)]);
  const eligible=(u:UnitDefinition)=>{const elite=ELITE_VARIANTS[u.id]&&UNIT_CATALOG[ELITE_VARIANTS[u.id]];return elite&&f.techIds.includes(elite.eliteTech!)&&city.economy?.milestones.includes(elite.milestone)?elite:u;};
@@ -43,3 +45,5 @@ export function ArmyView({world,city:sourceCity,issue,busy,targetPoint,armyTarge
  {settlementOpen&&<Dialog className="special-unit-dialog" title="拓殖隊 · 城堡生產與建城" onClose={()=>setSettlementOpen(false)}><FormalDevelopmentPanel targetPoint={targetPoint} world={world} city={city} issue={issue} busy={busy}/></Dialog>}
  {selected&&<Dialog title={eligible(selected).name} onClose={closeRecruit}><RecruitmentForm description={role(eligible(selected))} key={selected.id} world={world} city={city} unitId={selected.id} issue={issue} busy={busy} initial={mobile?'1':batch.current?.raw??'1'} onRawChange={mobile?undefined:raw=>{modalDraft.current=raw;}} onRecruited={closeRecruit}/></Dialog>}</div>;
 }
+
+export const ArmyView=memo(ArmyViewScreen);

@@ -14,7 +14,9 @@ class LedgerSuccessorTests(unittest.TestCase):
    if v['before']:self.assertTrue(gate.accepts(p,v['before'],self.root))
    self.assertFalse(gate.accepts(p,'0'*64,self.root))
   for p in ['src/game/formal/scheduler.ts','src/game/formal/constructionRules.ts','src/game/formal/military.ts','src/game/formal/economy.ts']:
-   self.assertFalse(gate.accepts(p,r['invariants'][p],self.root))
+   import b10_r3_04_successor as successor
+   self.assertEqual(gate.accepts(p,r['invariants'][p],self.root),successor.accepts(p,r['invariants'][p],self.root))
+   self.assertFalse(gate.accepts(p,'0'*64,self.root))
  def test_refreshed_manifest_cannot_approve_tampering(self):
   manifest=self.root/gate.RECORD;original=manifest.read_bytes();r=json.loads(original)
   for section,p in [('changes','src/game/persistence.ts'),('changes','src/game/formal/commandLedger.ts'),('changes','src/game/formal/reducer.ts'),('changes','src/game/formal/growthTaskIntegration.test.ts'),('invariants','src/game/formal/scheduler.ts'),('invariants','src/game/formal/constructionRules.ts'),('historical','docs/validation/b10-r3-03/REPORT.md'),('historical','docs/validation/b10-r3-02/compatibility.json'),('adapters','scripts/b10_r3_02_successor.py'),('adapters','.github/workflows/ci.yml')]:

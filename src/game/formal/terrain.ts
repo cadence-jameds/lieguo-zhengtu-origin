@@ -1,4 +1,5 @@
-import type {FormalWorld,TerrainClass} from './model';
+import type {TerrainRead} from '../presentationModel';
+import type {TerrainClass} from './model';
 /** Stateless uint32 mixer. Geometry depends only on world generation inputs. */
 export function seedHash(seed:number,x:number,y:number,salt=0):number {
  let n=(seed^Math.imul(x+1,0x9e3779b1)^Math.imul(y+1,0x85ebca6b)^Math.imul(salt+1,0xc2b2ae35))>>>0;
@@ -17,7 +18,7 @@ export function generateTerrain(seed:number):string {
  }
  return cells.join('');
 }
-export function terrainAt(w:FormalWorld,x:number,y:number):TerrainClass|undefined {
+export function terrainAt(w:TerrainRead,x:number,y:number):TerrainClass|undefined {
  if(!Number.isInteger(x)||!Number.isInteger(y)||x<0||y<0||x>=w.dimensions.width||y>=w.dimensions.height)return undefined;
  return w.worldLayer?classes[w.worldLayer.terrain[y*w.dimensions.width+x]]:'land';
 }

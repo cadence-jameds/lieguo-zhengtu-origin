@@ -1,12 +1,14 @@
+import {memo} from 'react';
+import type {WorldRead} from '../presentationModel';
 import {lordRankings,legionRankings,empireRankings} from './factionRankings';
 import {useState} from 'react';
-import type {FormalWorld,FormalCity,FormalCommand} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import type {FactionId} from '../formal/ids';
 import {legionOf,empireOf,embassy,diplomaticRelation,politicalLeader,type PoliticalCommand} from '../formal/politics';
 import {Heading,FormalEmblem,Dialog} from './UI';
 import {CIV_NAMES} from './artMap';
 import {usePoliticalAction} from './PoliticalAction';
-export function PoliticsView({world:w,city:c,issue,busy,onLegion}:{world:FormalWorld;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;onLegion?:()=>void}){
+function PoliticsViewScreen({world:w,city:c,issue,busy,onLegion}:{world:WorldRead;city:FormalCity;issue:(p:FormalCommand)=>void;busy:boolean;onLegion?:()=>void}){
  const [tab,setTab]=useState('帝國'),[search,setSearch]=useState(''),[selected,setSelected]=useState<string|null>(null),me=w.playerFactionId,l=legionOf(w,me),e=empireOf(w,me),{confirm,dialog}=usePoliticalAction(w,issue,busy);
  const faction=(id:string)=>w.factions.find(f=>f.id===id),act=(action:PoliticalCommand['action'],target:FactionId)=>issue({type:'politics',cityId:c.id,action,target});
  const relation=(id:FactionId)=><span className={'v94-relation '+diplomaticRelation(w,me,id)}>{({own:'自己',friendly:'友好',war:'戰爭',neutral:'中立'})[diplomaticRelation(w,me,id)]}</span>;
@@ -20,3 +22,5 @@ export function PoliticsView({world:w,city:c,issue,busy,onLegion}:{world:FormalW
  </div><section className="card"><h2>本方外交提議</h2>{(w.politics?.requests??[]).filter(r=>r.to===me&&r.kind==='friendly').map(r=><div className="v94-request" key={r.id}><span>{faction(r.from)?.name}：友好提議</span><button disabled={busy||politicalLeader(w,me)!==me} onClick={()=>confirm('接受友好提議',{type:'politics',cityId:c.id,action:'request-accept',requestId:r.id})}>接受</button><button disabled={busy} onClick={()=>issue({type:'politics',cityId:c.id,action:'request-reject',requestId:r.id})}>拒絕</button></div>)}<p>入團／帝國邀請與聯防／聯軍管理請至自己的軍團頁。</p></section>
  {selected&&(picked||lord||empire)&&<Dialog title={picked?.name??lord?.name??empire!.name} onClose={()=>setSelected(null)}>{picked?<>{picked.members.map(publicMember)}{actions(picked.leader)}</>:lord?<>{publicMember(lord.id)}{actions(lord.id)}</>:<>{empire!.legions.map(id=>{const g=w.politics!.legions.find(g=>g.id===id)!;return <section className="card" key={id}><h3>{g.name}</h3>{g.members.map(publicMember)}</section>;})}{actions(empire!.leader)}</>}</Dialog>}{dialog}</div>;
 }
+
+export const PoliticsView=memo(PoliticsViewScreen);

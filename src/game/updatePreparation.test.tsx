@@ -1,9 +1,10 @@
 // @vitest-environment happy-dom
 import {act} from 'react';import {createRoot,type Root} from 'react-dom/client';import {afterEach,beforeEach,expect,it,vi} from 'vitest';
+import {fixtureStream} from './formal/projectionFixtureSupport';
 import {useGame} from './useGame';import {createFormalFixture} from './formal/fixture';
 const disk=vi.hoisted(()=>({inspectCampaignStorage:vi.fn(),exportCampaignArchive:vi.fn()}));vi.mock('./campaignStorage',()=>disk);vi.mock('./saveLock',()=>({withSaveLock:async(_l:unknown,_s:unknown,run:()=>Promise<void>)=>run()}));
 let engine:ReturnType<typeof useGame>,worker:FakeWorker,root:Root,el:HTMLDivElement;
-class FakeWorker{onmessage:((e:{data:any})=>void)|null=null;sent:any[]=[];constructor(){worker=this;}postMessage(x:any){this.sent.push(x);}terminate(){}emit(x:any){this.onmessage?.({data:x});}}
+class FakeWorker{readonly stream=fixtureStream();onmessage:((e:{data:any})=>void)|null=null;sent:any[]=[];constructor(){worker=this;}postMessage(x:any){this.sent.push(x);}terminate(){}emit(x:any){if(Object.hasOwn(x,'world')){const {world,...rest}=x;x={...rest,projection:this.stream.publish(world,{branch:0,writerEpoch:0},true)};}this.onmessage?.({data:x});}}
 function Surface(){engine=useGame();return <span>{engine.campaignStatus}</span>;}
 const empty=()=>worker.emit({type:'state',world:null});
 beforeEach(async()=>{vi.clearAllMocks();disk.inspectCampaignStorage.mockResolvedValue('empty');vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',FakeWorker);Object.defineProperty(navigator,'locks',{configurable:true,value:{}});el=document.createElement('div');document.body.append(el);root=createRoot(el);await act(async()=>root.render(<Surface/>));worker.sent=[];});

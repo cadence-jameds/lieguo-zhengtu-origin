@@ -1,9 +1,10 @@
+import type {WorldRead} from '../presentationModel';
 import type {FormalFaction,FormalWorld} from './model';
 import type {FactionId} from './ids';
 import {UNIT_CATALOG,isScoutUnit,isSupplyUnit} from './unitCatalog';
 import {baseUnit,combatStats} from './combatModifiers';
 import {politicalScope} from './politics';
-const cache=new WeakMap<FormalWorld,{factions:Map<FactionId,bigint>;scopes:Map<string,bigint>;ranks:Map<string,number>;uniqueFirst:string|null}>();
+const cache=new WeakMap<WorldRead,{factions:Map<FactionId,bigint>;scopes:Map<string,bigint>;ranks:Map<string,number>;uniqueFirst:string|null}>();
 export function invalidateMilitaryPower(w:FormalWorld){cache.delete(w);}
 /** Immutable derived records may be shared across drafts until a military/political event invalidates them. */
 export function inheritMilitaryPower(from:FormalWorld,to:FormalWorld){const found=cache.get(from);if(found)cache.set(to,found);else cache.delete(to);}
@@ -11,7 +12,7 @@ export function unitMilitaryPower(id:string,f?:FormalFaction){
  if(!UNIT_CATALOG[id]||isScoutUnit(id)||isSupplyUnit(id))return 0;const s=combatStats(id,f);if(s.hp<=0||s.attack<=0||s.interval<=0)return 0;
  return Math.round(100*s.hp*(s.attack/s.interval*(baseUnit(id)==='ram'?.25:1)+(s.meleeDefense+s.rangedDefense)/20));
 }
-export function militaryRanking(w:FormalWorld){
+export function militaryRanking(w:WorldRead){
  let found=cache.get(w);if(found)return found;
  const factions=new Map<FactionId,bigint>(),owners=new Map(w.factions.map(f=>[f.id,f])),extinct=new Set(w.extinction?.extinct??[]);
  const add=(owner:FactionId,units:Record<string,number>)=>{if(extinct.has(owner))return;const f=owners.get(owner);let n=factions.get(owner)??0n;for(const [id,count] of Object.entries(units))if(count>0)n+=BigInt(count)*BigInt(unitMilitaryPower(id,f));factions.set(owner,n);};
@@ -23,4 +24,4 @@ export function militaryRanking(w:FormalWorld){
  found={factions,scopes,ranks,uniqueFirst};cache.set(w,found);return found;
 }
 /** Public rank only. AI callers must never receive private owner totals or unit data. */
-export function publicMilitaryRank(w:FormalWorld,scope:string){return militaryRanking(w).ranks.get(scope);}
+export function publicMilitaryRank(w:WorldRead,scope:string){return militaryRanking(w).ranks.get(scope);}

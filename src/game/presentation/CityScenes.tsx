@@ -1,7 +1,8 @@
+import type {WorldRead} from '../presentationModel';
 import {townBuildingScale} from './cityVisuals';
 import {GOVERNANCE_POLICY_LABELS} from './GovernanceView';
 import {memo,useEffect,useRef,useState} from 'react';
-import type {FormalCity,FormalWorld,Construction} from '../formal/model';
+import type {FormalCity,Construction} from '../formal/model';
 import {MiniatureCity} from '../MiniatureCity';
 import {constructionWallSceneArt,finishedWallSceneArt,openWallSceneArt} from '../assets';
 import {assetURL,cityArtAge,civilizationArt,cityPresentation,FIELD_ALIAS,FIELD_NAMES,LABELS,BUILDING_ALIAS} from './artMap';
@@ -14,11 +15,11 @@ import {QUEUE_CAPACITY,cityTitle} from '../formal/economy';
 const MOBILE_FIELD_LABELS={food:'農',wood:'林',stone:'石',gold:'金'};
 
 /** DEMO TownScene / OutskirtsScene composition; only data and actions are Formal adapters. */
-export function ConstructionProgress({job,world}:{job:Construction;world:FormalWorld}){
+export function ConstructionProgress({job,world}:{job:Construction;world:WorldRead}){
  const time=useDisplayTime(world),waiting=time<job.startsAt;
  return <span className={'construction-progress'+(waiting?' waiting':'')} title={(waiting?'等待施工；完成尚需 ':'剩餘 ')+remaining(job.startsAt+job.durationMs,{...world,time})}>{waiting?<small aria-label="等待施工" role="img">⏳</small>:<LiveProgress world={world} start={job.startsAt} duration={job.durationMs} className="construction-track" label="施工進度"/>}</span>;
 }
-export const CityScenes=memo(function CityScenes({world,city,onBuilding,onField,onWall,mobile=false,initialDistrict='outskirts',onRename,onDistrictChange,onGovernor}:{world:FormalWorld;city:FormalCity;onBuilding:(key?:string,slot?:number)=>void;onField:(slot:number)=>void;onWall?:()=>void;mobile?:boolean;initialDistrict?:'town'|'outskirts';onRename?:()=>void;onGovernor?:()=>void;onDistrictChange?:(d:'town'|'outskirts')=>void}){
+export const CityScenes=memo(function CityScenes({world,city,onBuilding,onField,onWall,mobile=false,initialDistrict='outskirts',onRename,onDistrictChange,onGovernor}:{world:WorldRead;city:FormalCity;onBuilding:(key?:string,slot?:number)=>void;onField:(slot:number)=>void;onWall?:()=>void;mobile?:boolean;initialDistrict?:'town'|'outskirts';onRename?:()=>void;onGovernor?:()=>void;onDistrictChange?:(d:'town'|'outskirts')=>void}){
  const [district,setDistrict]=useState<'town'|'outskirts'>(initialDistrict),[close,setClose]=useState(mobile),[innerLabels,setInnerLabels]=useState(!mobile),[outerLabels,setOuterLabels]=useState(false),viewport=useRef<HTMLDivElement>(null),p=cityPresentation(world,city),labels=district==='town'?innerLabels:outerLabels;
  const governor=world.governors?.find(g=>g.cityId===city.id&&g.ownerFactionId===city.ownerFactionId),governorLabel=governor?.enabled?'總督 · '+GOVERNANCE_POLICY_LABELS[governor.policy]:'委任總督';
  useEffect(()=>{onDistrictChange?.(district);},[district,onDistrictChange]);

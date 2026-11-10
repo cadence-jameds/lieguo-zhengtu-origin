@@ -1,3 +1,4 @@
+import type {WorldRead} from './presentationModel';
 import type {CommandAck,FormalOrder,FormalWorld} from './formal/model';
 import {canonicalJSON} from './formal/canonical';
 import {playerOrderBase,type PlayerOrderBase} from './orderAdmission';
@@ -14,8 +15,8 @@ export type InboxCommand=CommandIntent&{
 export const COMMAND_TTL=120_000,MAX_COMMAND_ATTEMPTS=3;
 export const commandFingerprint=(order:FormalOrder)=>canonicalJSON({campaignId:order.campaignId,issuerId:order.issuerId,payload:order.payload});
 export const terminalCommand=(row:InboxCommand)=>row.state!=='pending'&&row.state!=='retryable';
-export function extinctionBase(w:FormalWorld){return canonicalJSON([w.campaignId,w.playerFactionId,w.extinction,w.cities.filter(c=>c.ownerFactionId===w.playerFactionId).map(c=>c.id)]);}
-export function captureIntent(w:FormalWorld,order:FormalOrder):CommandIntent{
+export function extinctionBase(w:WorldRead){return canonicalJSON([w.campaignId,w.playerFactionId,w.extinction,w.cities.filter(c=>c.ownerFactionId===w.playerFactionId).map(c=>c.id)]);}
+export function captureIntent(w:WorldRead,order:FormalOrder):CommandIntent{
  if(order.payload.type==='governance.set')return{governanceBase:governanceBase(w,order.payload.cityId)};
  if(order.payload.type==='player.rebirth'||order.payload.type==='player.end')return{extinctionBase:extinctionBase(w)};
  return{playerBase:playerOrderBase(w,order.payload)};
@@ -31,7 +32,7 @@ export function revalidateInbox(w:FormalWorld,row:InboxCommand):FormalOrder|unde
  const p=order.payload;
  const unchanged=p.type==='governance.set'?row.governanceBase?.revision===order.expectedRevision&&row.governanceBase.fingerprint===governanceBase(w,p.cityId).fingerprint:
   p.type==='player.rebirth'||p.type==='player.end'?row.extinctionBase!==undefined&&row.extinctionBase===extinctionBase(w):
-  row.playerBase?.revision===order.expectedRevision&&row.playerBase.fingerprint===playerOrderBase(w,p)?.fingerprint;
+  row.playerBase?.revision===order.expectedRevision&&row.playerBase.fingerprint===playerOrderBase(w,p,row.playerBase?.fingerprint.startsWith('intent-v2:')?2:1)?.fingerprint;
  if(!unchanged)return;
  return{...order,expectedRevision:w.revision,issuedWorldTime:w.time};
 }

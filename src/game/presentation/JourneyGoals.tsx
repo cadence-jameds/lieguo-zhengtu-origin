@@ -1,5 +1,7 @@
+import {memo} from 'react';
+import type {WorldRead} from '../presentationModel';
 import {useLayoutEffect,useRef,useState} from 'react';
-import type {FormalCity,FormalCommand,FormalWorld} from '../formal/model';
+import type {FormalCity,FormalCommand} from '../formal/model';
 import {resourceKeys} from '../formal/model';
 import {GROWTH_TASKS,type GrowthTask} from '../formal/growthTaskCatalog';
 import {growthTaskState,growthTaskStatus,quoteGrowthReward,ownedPopulationProgress,type GrowthClaim} from '../formal/growthTasks';
@@ -17,11 +19,11 @@ function prerequisites(t:GrowthTask){
  const resource=kind?RESOURCE_BOOSTS[kind as keyof typeof RESOURCE_BOOSTS]:undefined;if(resource)requirements.push(`對應${LABELS[resource]}資源田 Lv5`);
  return `${requirements.join('、')}。${t.prerequisites}`;
 }
-function ClaimedTask({task,claim,world}:{task:GrowthTask;claim:GrowthClaim;world:FormalWorld}){
+function ClaimedTask({task,claim,world}:{task:GrowthTask;claim:GrowthClaim;world:WorldRead}){
  const [expanded,setExpanded]=useState(false);
  return <details className="journey-claimed-row" data-task-id={task.id} open={expanded} onToggle={e=>setExpanded(e.currentTarget.open)}><summary aria-expanded={expanded} aria-controls={'history-'+task.id}><b>{task.id}</b><span>{task.title}</span><small>已領取</small></summary><div id={'history-'+task.id} className="journey-history-detail" hidden={!expanded}>{expanded&&<><p>領獎城市：{world.cities.find(c=>c.id===claim.cityId)?.name??claim.cityId} · 世界時間 {fmt(Math.floor(claim.at/3600000))} 時 {Math.floor(claim.at%3600000/60000)} 分</p><table><caption>歷史領獎明細</caption><thead><tr><th>資源</th><th>當時獎勵</th><th>實際入庫</th><th>歷史損失</th></tr></thead><tbody>{resourceKeys.map(r=><tr key={r}><th>{LABELS[r]}</th><td>{fmt(claim.accepted[r]+claim.lost[r])}</td><td>{fmt(claim.accepted[r])}</td><td>{fmt(claim.lost[r])}</td></tr>)}</tbody></table></>}</div></details>;
 }
-export function JourneyGoals({world,city,busy,issue}:{world:FormalWorld;city:FormalCity;busy:boolean;issue:(p:FormalCommand)=>unknown}){
+function JourneyGoalsScreen({world,city,busy,issue}:{world:WorldRead;city:FormalCity;busy:boolean;issue:(p:FormalCommand)=>unknown}){
  const [tab,setTab]=useState<'growth'|'victory'>('growth'),[open,setOpen]=useState<string[]>([eras[world.factions.find(f=>f.id===world.playerFactionId)?.age??0][0]]),[cityId,setCityId]=useState(city.id),[showClaimed,setShowClaimed]=useState(false);
  const root=useRef<HTMLDivElement>(null),pending=useRef<{taskId:string;nextId?:string}|null>(null);
  const owned=world.cities.filter(c=>c.ownerFactionId===world.playerFactionId),selected=owned.find(c=>c.id===cityId),state=growthTaskState(world),populationProgress=ownedPopulationProgress(world);
@@ -44,3 +46,5 @@ export function JourneyGoals({world,city,busy,issue}:{world:FormalWorld;city:For
  </div>}
  </div>;
 }
+
+export const JourneyGoals=memo(JourneyGoalsScreen);

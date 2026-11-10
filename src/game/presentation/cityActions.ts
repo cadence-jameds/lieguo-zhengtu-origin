@@ -1,5 +1,6 @@
+import type {WorldRead} from '../presentationModel';
 import {buildingRequirements,boostFieldRequirementText} from '../formal/buildingDetailData';
-import type {FormalCity,FormalWorld} from '../formal/model';
+import type {FormalCity} from '../formal/model';
 import {resourceKeys,zeroResources} from '../formal/model';
 import {BUILDING_CATALOG,buildingKind,buildingLevel,buildingCost,buildingDuration,fieldCost,fieldDuration} from '../formal/catalogB3';
 import {QUEUE_CAPACITY} from '../formal/economy';
@@ -22,12 +23,12 @@ export function newBuildingKey(c:FormalCity,kind:string){
  return kind+'.'+Array.from({length:16},(_,i)=>i).find(i=>!Object.hasOwn(c.buildings,kind+'.'+i));
 }
 /** Lightweight shared-rule adapter for non-render consumers; UI uses the Preview Worker hook. */
-export function constructionPreview(w:FormalWorld,c:FormalCity,target:{key:string}|{field:number},slot?:number){
+export function constructionPreview(w:WorldRead,c:FormalCity,target:{key:string}|{field:number},slot?:number){
  const result=calculateConstructionPreview(constructionPreviewContext(w,c.id),{...target,...(slot===undefined?{}:{slot})});
  return result.status==='ready'?result.quote:undefined;
 }
 /** Display-only eligibility. The Formal command always validates the same inputs again. */
-export function constructionAction(w:FormalWorld,c:FormalCity,target:{key:string}|{field:number}){
+export function constructionAction(w:WorldRead,c:FormalCity,target:{key:string}|{field:number}){
  const reasons:string[]=[],e=c.economy!,center=buildingLevel(c,'center');
  if(e.construction.length>=QUEUE_CAPACITY)reasons.push(`已排滿 ${QUEUE_CAPACITY} 項工程`);
  if('field' in target){
@@ -47,7 +48,7 @@ export function constructionAction(w:FormalWorld,c:FormalCity,target:{key:string
 }
 
 /** Read-only UI arithmetic; the Worker remains the sole recruitment authority. */
-export function recruitmentConditions(w:FormalWorld,c:FormalCity,unitId:string,count:number){
+export function recruitmentConditions(w:WorldRead,c:FormalCity,unitId:string,count:number){
  const f=w.factions.find(f=>f.id===c.ownerFactionId)!,base=UNIT_CATALOG[unitId],elite=ELITE_VARIANTS[unitId]&&UNIT_CATALOG[ELITE_VARIANTS[unitId]];
  const d=elite&&f.techIds.includes(elite.eliteTech!)&&c.economy?.milestones.includes(elite.milestone)?elite:base;
  const unitCost=unitRecruitCost(w,c,d),cost={...unitCost},valid=Number.isSafeInteger(count)&&count>=1&&count<=100000,reasons:string[]=[];
@@ -65,7 +66,7 @@ export function recruitmentConditions(w:FormalWorld,c:FormalCity,unitId:string,c
  return {d,unitCost,cost,reasons,population:d.population*count,durationMs:unitTrainingDuration(w,c,d)};
 }
 /** At most five local jobs; no command simulation, world clone, schema parse or mutation. */
-export function recruitmentPreview(w:FormalWorld,c:FormalCity,unitId:string,count:number){
+export function recruitmentPreview(w:WorldRead,c:FormalCity,unitId:string,count:number){
  const info=recruitmentConditions(w,c,unitId,count);if(info.reasons.length)return undefined;
  const queue=c.military?.queue??[],end=(lane:number)=>Math.max(w.time,...queue.filter(j=>j.lane===lane).map(j=>j.nextAt+(j.remaining-1)*j.durationMs));
  const lane=c.economy?.milestones.includes(20000)&&end(1)<end(0)?1:0,startsAt=end(lane),durationMs=info.durationMs;
@@ -74,7 +75,7 @@ export function recruitmentPreview(w:FormalWorld,c:FormalCity,unitId:string,coun
 }
 
 /** Shared-rule adapter for domain tooling; never used during React render. */
-export function craftsmanCastleAction(w:FormalWorld,c:FormalCity,craftsmanId:string){
+export function craftsmanCastleAction(w:WorldRead,c:FormalCity,craftsmanId:string){
  const result=calculateConstructionPreview(constructionPreviewContext(w,c.id),{craftsmanId});
  return result.status==='ready'?{allowed:true,cost:result.quote.paidResources,duration:result.quote.durationMs,reason:'符合工匠建堡資格'}:{allowed:false,cost:zeroResources(),duration:buildingDuration('castle',1,buildingLevel(c,'center')),reason:result.reason};
 }
