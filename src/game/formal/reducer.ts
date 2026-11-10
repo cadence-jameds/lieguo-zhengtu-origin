@@ -27,7 +27,7 @@ import {canonicalJSON} from './canonical';
 import {eventId,reportId,sequenceKey,type CommandId,type FactionId} from './ids';
 import type {CommandAck,CommandReceipt,FormalOrder,FormalReport,FormalTransition,FormalWorld,ResearchProject} from './model';
 import {resourceKeys} from './model';
-import {orderSchema,validateFormalWorld} from './schema';
+import {orderSchema,validateFormalDraft} from './schema';
 import {EventScheduler} from './scheduler';
 import {applyEconomyCommand,handleEconomyEvent,settleCity,settleFaction,promoteCityQueues,RuleViolation} from './economy';
 import {spatial} from './spatial';
@@ -144,7 +144,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(city&&!worldPaused(w)&&p.type!=='campaign.configure')settleCity(w,city);
  if(p.type==='player.rebirth'||p.type==='player.end'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();
  // Restore the clock only on the accepted rebirth draft, after its active scheduler is captured.
- if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalDraft(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  if(!city)return reject('城市不存在。');
  if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
@@ -193,7 +193,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
  recordGrowthCommand(w,order.issuerId,p);
  // Replay admissions still use every command rule; the whole private draft is validated at its boundary.
- if(!replay)validateFormalWorld(w);
+ if(!replay)validateFormalDraft(w);
  const ack:CommandAck={commandId:order.commandId,status:'committed',revision:w.revision};
  return{world:w,reports,ack};
 }
@@ -253,7 +253,7 @@ function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventSc
  for(const r of pendingHistory(w))if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  normalizeOutcomeRevisions(w);
  if(w.extinction?.resumedAt!==undefined&&w.extinction.resumedAt<w.time)delete w.extinction.resumedAt;
- syncGrowthTasks(w);if(w.commandFacts)pruneCommandEvidence(w);validateFormalWorld(w);return{world:w,reports};
+ syncGrowthTasks(w);if(w.commandFacts)pruneCommandEvidence(w);validateFormalDraft(w);return{world:w,reports};
 }
 export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
