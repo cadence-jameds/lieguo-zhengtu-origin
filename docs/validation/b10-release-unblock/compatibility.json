@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "441a93ac383969dd02d3cf78c39afdd5172e8006",
+  "implementationCommit": "8375d5d5f281162bd2f973e0bca0a0a89171be55",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -394,7 +394,7 @@
     },
     "src/game/formal/reducer.ts": {
       "before": "4576183cd74863a3447cbe0827d4f5ab5c68903cfb2d4abacadc30599dc9dbaa",
-      "after": "dbc1813e1e00cc5a60701f2f33155826c8e9982479162d888342d8187c7ef634"
+      "after": "f98c24cb70237723a41d1b223de4171f1cde98f6e1277ec3841e723f4fe03f65"
     },
     "src/game/formal/runtimeSchedulingR306.test.ts": {
       "before": "26dede6f44319a709588e8a0c3fbe5eb9824f04dd62b156d718ce623f4ab22bb",
@@ -410,7 +410,7 @@
     },
     "src/game/formal/schema.ts": {
       "before": "bdcc668d955bb81b9f5b1b8eeff6bc548c96a74ed8ac402bfe0d81003b519f95",
-      "after": "03dd6bc92dcee26af0ebedc05337e51b1e4a14a3091fbea3b5f6d91bc6c1eaf4"
+      "after": "a0ea12a9050c2c5f42e9a952e1ce027e7e5905081efab888ae5ed02ed74d78d7"
     },
     "src/game/formal/shipmentEncoding.test.ts": {
       "before": null,
@@ -426,7 +426,7 @@
     },
     "src/game/formal/shipmentSyntaxWorld.test.ts": {
       "before": null,
-      "after": "d8a9fb4c9a935575a58d4dbd3408a0c997fa853cffad3eb475e8ac562bcfbb6e"
+      "after": "7bcdb3d5dd68d6a8824c5237a4f5746325efb5ad8cff602199baac94a75de6c3"
     },
     "src/game/formal/versions.ts": {
       "before": "3d97d68cae03874cff7a1c27bd1d28bdf4ffc391db882d9b8bf95ab2a1acd688",
