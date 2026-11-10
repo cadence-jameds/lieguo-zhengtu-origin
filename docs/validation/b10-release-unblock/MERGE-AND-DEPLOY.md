@@ -2,7 +2,7 @@
 
 2026-11-10使用者明確取消main部署隔離：不安裝718a71e／dc14401，不建立workflow-only PR。PR61的deploy-pages.yml還原為main443f170b相同內容。main push經既有完整回歸、Typecheck、Build、Pages／Release驗證成功後自動部署GitHub Pages。
 
-技術驗收與detached模擬結果見 [最終驗收](final-seal/RESULTS.md)。取得**下一次明確授權**後才可依 #54→55→56→57→58→59→60→61 順序用merge commit整合；不用rebase。每次核對實際main、HEAD、Base、CI及Release Notes，等該main的CI／Pages完成後再做下一步；合併已接受會自動部署。不得把本批策略授權當成按下Merge的授權。
+技術驗收與detached模擬結果見 [最終驗收](final-seal/RESULTS.md)。取得**下一次明確授權**後才可依 #54→55→56→57→58→59→60→61 順序用merge commit整合；不用rebase。上一PR合入main後，先將下一PR的Base改成最新main，核對增量diff／CI後才合入main；保留功能分支直到子PR改Base完成。每次核對實際main、HEAD、Base、CI及Release Notes，等該main的CI／Pages完成後再做下一步；合併已接受會自動部署。不得把本批策略授權當成按下Merge的授權。
 
 Android安排合併後實機驗證；目前仍NOT TESTED。PR目前維持Draft，沒有遠端main修改、Ready或部署。下方舊護欄方案只留歷史來源，已被本段決議取代。
 

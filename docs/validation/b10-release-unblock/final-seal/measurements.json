@@ -1,9 +1,9 @@
 {
   "date": "2026-11-10",
-  "formalContent": "13905bbb96151d591a872a13c98f62dd19bbb530",
-  "verifiedSource": "13905bbb96151d591a872a13c98f62dd19bbb530",
+  "formalContent": "eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17",
+  "verifiedSource": "eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17",
   "proofHead": "See current compatibility.json / final PR HEAD",
-  "nativeBuild": "13905bbb96151d591a872a13c98f62dd19bbb530",
+  "nativeBuild": "eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17",
   "nativeAndroid": false,
   "artifacts": {
     "directed.json": {
@@ -41,17 +41,33 @@
     "full-b8ffe75.json": {
       "sha256": "a63d67ea77dbca96de1f4e8fb49ae56522c1adda312a58ba450f6cda2bee2261",
       "bytes": 884509
+    },
+    "full-1520108-pass.json": {
+      "sha256": "d37591d43eae39da326f20b804a112b35bbead8a08016bf8786e5fd344e40987",
+      "bytes": 884763
+    },
+    "backup-flag-before.json": {
+      "sha256": "653a5154aa2d3f94a697f59e7b46689ebe3b03600363658b0391d9c6a3d14bd9",
+      "bytes": 1545
+    },
+    "backup-flag-after-directed.json": {
+      "sha256": "984282beb01830b5a7e26009985bc6371c3c9ef6281d8fa6035788caa20d26b9",
+      "bytes": 42959
+    },
+    "native-start-backup.json": {
+      "sha256": "d02bcdd9f384afb670f8c2c9f6dc37d1045f52257f1da3e5ec78ebb419a85a15",
+      "bytes": 1147
     }
   },
   "directed": {
-    "lastBundlePassed": 125,
+    "lastBundlePassed": 127,
     "failed": 0,
     "incompatibleCases": 22,
-    "lateBefore": {
-      "passed": 21,
+    "realWorkerBackupCases": 2,
+    "backupBefore": {
+      "passed": 1,
       "failed": 1,
-      "observedRevision": 0,
-      "expectedRevision": 101
+      "cause": "legacyAvailable fixed true without a historical database"
     }
   },
   "native": {
@@ -358,5 +374,37 @@
       }
     ]
   },
-  "finalGates": "Reverified after sealing the new proof; actual final HEAD results in PR61."
+  "finalGates": "Reverified after sealing the new proof; actual final HEAD results in PR61.",
+  "preBackupFlag": {
+    "formalContent": "13905bbb96151d591a872a13c98f62dd19bbb530",
+    "nativeBuild": "13905bbb96151d591a872a13c98f62dd19bbb530",
+    "directed": {
+      "lastBundlePassed": 125,
+      "failed": 0,
+      "incompatibleCases": 22,
+      "lateBefore": {
+        "passed": 21,
+        "failed": 1,
+        "observedRevision": 0,
+        "expectedRevision": 101
+      }
+    },
+    "exactHeadFull": {
+      "head": "152010867be4e13d790d020108d92b7e50b9dfbb",
+      "passed": 2514,
+      "failed": 0,
+      "skipped": 1,
+      "ci": 42837883510
+    },
+    "diskFailure": {
+      "head": "152010867be4e13d790d020108d92b7e50b9dfbb",
+      "exitCode": 1,
+      "passed": 2317,
+      "failed": 8,
+      "skipped": 1,
+      "failedSuites": 34,
+      "cause": "/tmp 4.9GiB filesystem full: ENOSPC writes and missing Vite SSR/client transformed modules; OOM events zero. Original report retained. No test/timeout/heap/worker change.",
+      "reportSha256": "478ab0c4a93c77cb5b9a621822faceaafe8d84778568cda865048135b9c8ad1d"
+    }
+  }
 }

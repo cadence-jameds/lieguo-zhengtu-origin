@@ -12,14 +12,14 @@
 - 相容存檔的原新遊戲與Recovery行為保留。此路徑不猜測修復未知DB格式、checksum／Authority損毀或未完成命令；保留資料及錯誤入口。
 - 既有未合併Release Notes新增一則繁中玩家說明，PR受控JSON同步；沒有修改已合併摘要、package基準或v95／96／97主規格。
 
-初次新局程式為 `bfdc252021b3cceffbd53ce8edcf208281fd9252`；`69cba6381fc28514d1248926de8395f324a9e756`／`38295df3d32c0ca1dcd21496304f1e67b82abac4` 補測試與前輪證明。最後正式程式為 `13905bbb96151d591a872a13c98f62dd19bbb530`：保留舊Campaign Authority，維持正常新局切換的全域Revision單調性；只撤除不相容Recovery／戰報引用。最後有限證明來源以本目錄compatibility.json為準。新證明在本目錄compatibility.json，舊 `../compatibility.json` 原文保留；既有successor、反竄改、原負載與期限沒有放寬。
+初次新局程式為 `bfdc252021b3cceffbd53ce8edcf208281fd9252`；`69cba6381fc28514d1248926de8395f324a9e756`／`38295df3d32c0ca1dcd21496304f1e67b82abac4` 補測試與前輪證明。晚期Revision補修為 `13905bbb96151d591a872a13c98f62dd19bbb530`：保留舊Campaign Authority，維持正常新局切換的全域Revision單調性；只撤除不相容Recovery／戰報引用。最後正式程式為 `eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17`，另將錯誤回覆的legacyAvailable從固定true改成既有唯讀歷史資料庫查詢結果，避免只有新版不相容活動戰役時誤顯示舊資料庫備份。最後有限證明來源以本目錄compatibility.json為準。新證明在本目錄compatibility.json，舊 `../compatibility.json` 原文保留；既有successor、反竄改、原負載與期限沒有放寬。
 
 ## 新局與直接驗證
 
 | 項目 | 實測結果 |
 |---|---|
 | 不相容新局、取消、過期憑證、舊Writer、checksum／Authority／索引損毀、未完成命令 | 22項定向PASS |
-| 新局UI／原命令等待／Runtime回歸 | 最後125 PASS／0 FAIL；含過期來源確認及晚期Revision100→101 |
+| 新局UI／原命令等待／Runtime回歸 | 最後127 PASS／0 FAIL；含過期來源確認、晚期Revision100→101及實際歷史備份可用性 |
 | 新局T2故障 | 12個實際寫入點注入QuotaExceededError，全資料列回滾；相同確認可在故障移除後安全重試 |
 | 原生Chromium154.0.8037.57 production GameApp／Worker／IDB | 5組全部PASS，見measurements.json |
 | 原生只有歷史DB | 不備份直接設定新局；取消所有新DB資料列不變；舊DB逐字不變；成功後新舊共存並可重載 |
@@ -30,13 +30,15 @@
 | 必要successor／反竄改／部署策略／Projection／Preview Gate | 17個命令全部PASS，原四項bounded反竄改測試保留 |
 | Typecheck／Build／Pages／Release Metadata | 執行記錄與最終HEAD以PR本批首段為準；不得用指令清單冒充PASS |
 
-最後production UI測試使用13905bb建置，正式內容13905bb／預覽版0.31.27；五組全部PASS。前輪281110b／bfdc252原始五組證據也保留。原生測試不是Android真機。記錄只含合法合成100勢力世界、結果及Hash，不提交存檔、原始trace、dist或node_modules。
+最後production UI測試使用eab6606建置，正式內容eab6606／預覽版0.31.28；五組全部PASS，設定頁歷史備份入口亦按實際DB存在與否檢查。前輪281110b／bfdc252原始五組證據也保留。原生測試不是Android真機。記錄只含合法合成100勢力世界、結果及Hash，不提交存檔、原始trace、dist或node_modules。
 
 ## 完整Gate與晚期Revision補修
 
 最後文件HEAD固定後執行 **`node scripts/verify-in-isolation.mjs full`**。Node22.23.4、quota `200000 100000`、8GiB、預設heap2197815296、NODE_OPTIONS未設、原2Workers／B9 240秒Hook／150k 120秒／Runtime 30秒與全部原斷言不變。沒有並行瀏覽器／benchmark，也不強制GC。實際結果、B9／150k／Runtime／replayP0明細及報告Hash將寫入同HEAD的PR首段驗收紀錄，與GitHub CI分列，該結果不由本頁的定向案例取代。
 
 本批前輪b8ffe753的原始full已取得 **2513 PASS／0 FAIL／1 SKIP**；B9 11項、replayP0 38項全PASS，150k為6386.9ms、Runtime developer catch-up為8095.6ms。收尾新增晚期戰役確認，實際發現Revision100新局降成0（應為101），21 PASS／1 FAIL。根因是過早移除舊Campaign Authority；13905bb只保留該Authority，原版本算法／玩法／事件規則不改，最後125定向PASS。此真實新邊界FAIL與前輪成功都保留；13905bb之後的最後HEAD必須重新執行原始full，不能拿前輪PASS替代。
+
+1520108第一次full因/tmp 4.9GiB滿載，2317 PASS／8項斷言FAIL／34 failed suites／1 SKIP，錯誤明確ENOSPC及Vite暫存模組缺失；OOM為0。原報告SHA256 `478ab0c4a93c77cb5b9a621822faceaafe8d84778568cda865048135b9c8ad1d`保留。只清除本批detached／隔離副本後，同HEAD原指令重跑 **2514 PASS／0 FAIL／1 SKIP**，同HEAD CI42837883510亦SUCCESS，CPU/RAM/Workers/heap/測試及磁碟quota不變。其後備份可用性兩案例確認固定true為錯，原1 PASS／1 FAIL保留；eab6606修正後127定向及原生五組全PASS，最後HEAD仍需重新full／CI。
 
 舊完整FAIL仍保留：81ea為2487 PASS／1 FAIL／1 SKIP，唯一公開validator mock入口失敗；修正8375後68定向及CI有效，但當時本機未重跑。本批不改寫該歷史FAIL。定向初次誤用Vitest預設5秒、測試query把dialog隱含角色當顯式role、Recovery顯示API欄位假設錯誤等診斷工具問題均已修正；原正式測試／期限未改，初始產物仍保留於/tmp/b10-final。
 
@@ -57,7 +59,7 @@
 
 **使用者取消部署護欄，接受日後合併main自動部署Pages。** deploy-pages.yml與main443f170b逐byte一致，SHA256 `9151a015b0078782570bed390a3dd73c095e11685801db22c45aee8cbea4057f`。正常CI／Typecheck／完整回歸／Build／Pages與Release檢查保留；ci.yml未移除任何步驟。原manual-only策略測試改為驗證此次明確核准的自動部署政策，不刪安全測試取綠燈。
 
-取得**下一次明確授權**才依 #54→55→56→57→58→59→60→61 做merge commit；每步核對新main、實際CI／Pages與版本後再繼續。不rebase、不force-push。分支預覽0.31.27不等同main整合0.30.82，版號由first-parent與已核准進位規則產生，不手動改版。
+取得**下一次明確授權**才依 #54→55→56→57→58→59→60→61 做merge commit；每合併上一PR後，將下一PR的Base改為最新main，重新核對增量diff／CI後才用merge commit合入main；保留功能分支直到子PR改Base完成。每步核對新main、實際CI／Pages與版本後再繼續。不rebase、不force-push。分支預覽0.31.28不等同main整合0.30.82，版號由first-parent與已核准進位規則產生，不手動改版。
 
 ## 沿用證據與風險
 
