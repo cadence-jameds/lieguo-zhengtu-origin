@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "69cba6381fc28514d1248926de8395f324a9e756",
+  "implementationCommit": "aba1ea61144f504bdd49cbf0151ba6b9fa3513a5",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/final-seal/compatibility.json",
@@ -183,6 +183,14 @@
     "docs/validation/b10-release-unblock/final-blockers/t2-native-profile.mjs": {
       "before": null,
       "after": "6125ec396e0b53fb911f4c57a70797eef81d273b5e8c909f60e83b2358042fae"
+    },
+    "docs/validation/b10-release-unblock/final-seal/RESULTS.md": {
+      "before": null,
+      "after": "c3f231b4515f0c1bf55e9e0f8c7d00474f857d6e55f9d643cbd002e858bf51c7"
+    },
+    "docs/validation/b10-release-unblock/final-seal/measurements.json": {
+      "before": null,
+      "after": "01a967b07ab2cc99a2318ff2950d02313e47ca2cebe4d15287d5b896aba300ec"
     },
     "docs/validation/b10-release-unblock/final-seal/start-native.mjs": {
       "before": null,
@@ -390,7 +398,7 @@
     },
     "src/game/formal/incompatibleStart.test.ts": {
       "before": null,
-      "after": "fc2f971f6d7d519fcf39b8b0c8b20435c2f5c79fc0af3989eeff0cc20cf36c73"
+      "after": "613e2e4d1d625818873b25c75788798122f429d980241daef8c9ee529d7ba10d"
     },
     "src/game/formal/ledgerFormalR303.test.ts": {
       "before": "9d0697301aef9b9e694f9e593766ee4bae02cff498f424a3ec096f1e8d54ced1",
@@ -518,7 +526,7 @@
     },
     "src/game/persistence.ts": {
       "before": "174194f58cd18b9f559067604274e3a5ba193e8f9da5e760acdcccdc3b0f74f0",
-      "after": "c119e44e5e752123fbdb3446fca8b78fd1e236529931d64402c86572999738a2"
+      "after": "d41a9c57ec6aaeabbf0444dc8d8d9039781244987bd0d5bc81feb82973afb884"
     },
     "src/game/presentation/CommandInbox.tsx": {
       "before": "2a132aeac917dd1e27d073b091cbbb9153057d3f9c3dea6eabdf885add6df93b",
