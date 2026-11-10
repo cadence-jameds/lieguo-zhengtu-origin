@@ -1,3 +1,10 @@
+# Service Worker 最終狀態
+
+後續原生production Chromium六輪完整五情境為 **30 PASS／0 FAIL**，原15秒Activation／30秒Navigation不變；詳見 [final-blockers](final-blockers/README.md)。本次沒有修改SW、Workbox、更新保存／版本核對或啟用路徑，因此沿用有效證據，不重做原生六輪。下方早期失敗保留為歷史，最新封版狀態見 [最終驗收](final-seal/RESULTS.md)。
+
+<details>
+<summary>本輪以前的歷史原文（失敗與來源保留，現行狀態以前文／最終驗收為準）</summary>
+
 # Production SW：P0 BLOCKED、證據及五情境契約
 
 歷史 PR #60 的結果仍是 **4 PASS／1 FAIL**：HTTP 503 後重試，durable-save-ack、SKIP_WAITING 已發出，但 15 秒內沒有 controllerchange。原文件及原測試不改寫。本批第一次原基準重跑未能重現這個 activation failure，不能宣稱已確定該次失敗的唯一根因。
@@ -29,3 +36,5 @@
 `B10_SW_DIAGNOSTIC_RESEND=1` 僅在原案例已記為 FAIL 後執行上述一次診斷重送，不改 FAIL、不延長產品 deadline；重現腳本可用 `B10_SW_ONLY=bad-install` 或 `B10_SW_ONLY='native update'`。這不是產品重試修復。仍須定位瀏覽器 registration／active-worker 端未完成 transition 的原因，或證明可維持全部保存／身份／舊頁保護的修復；目前沒有足夠證據安全採用破壞性替代。
 
 已執行的舊頁程式不會因新 SW 下載而被倒改。舊版安裝失敗競態仍可能先走既有有限 timeout，保留舊頁及重試入口；不能聲稱新 worker 能修改先前已執行的 JavaScript。舊 DB→新格式更新另外測試，不能拿新格式可存取代 SW 成功證據。
+
+</details>

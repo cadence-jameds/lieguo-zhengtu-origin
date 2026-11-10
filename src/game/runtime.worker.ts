@@ -13,14 +13,14 @@ import {createFormalWorld} from './world';
 import {advanceFormal,submitFormalOrder} from './engine';
 import {advanceFormalCooperative} from './formal/reducer';
 import {RuntimeWorkBudget} from './runtimeWorkBudget';
-import {backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
+import {incompatibleStartToken,backupList,clearSavedGames,exportStoredSave,importSave,loadWithOffline,readReportPage,reportStatus,reportAction,type ReportFilter,readCityIntel,restore,save,startCampaign} from './persistence';
 import type {FormalOrder,FormalWorld,FormalReport} from './formal/model';
 import {WorldStream} from './worldStream';
 import type {ProjectionIdentity} from './presentationModel';
 import {type GovernanceBase} from './governanceAdmission';
 import {type PlayerOrderBase} from './orderAdmission';
 export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'resume'|'reset'|'exportLegacy'}
- | {type:'start';seed:number;speed:number;name:string;civilizationId?:string;offlineHours?:0|1|4|8|12;transitionId?:string}
+ | {type:'start';replaceIncompatible?:string;seed:number;speed:number;name:string;civilizationId?:string;offlineHours?:0|1|4|8|12;transitionId?:string}
  | {type:'command';order:FormalOrder;governanceBase?:GovernanceBase;playerBase?:PlayerOrderBase;extinctionBase?:string;branch?:number;projection?:ProjectionIdentity}
  | {type:'commandQuery';campaignId:FormalOrder['campaignId'];commandId:FormalOrder['commandId']}
  | {type:'commandList';before?:number}
@@ -32,6 +32,7 @@ export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'res
  | {type:'reportAction';action:'read'|'clear';ids?:string[];filter?:ReportFilter}
  | {type:'reportPage';page:number;filter?:ReportFilter}) & {requestId?:string;stateMode?:'patch'|'projection-v2';visibilityAt?:number};
 let writer:WriterContext|undefined;
+let startWithoutWorld=false;
 const intake=new WeakMap<RuntimeRequest,Promise<InboxCommand>>();
 let intakeQueue:Promise<unknown>=Promise.resolve();
 const workBudget=new RuntimeWorkBudget();
@@ -84,7 +85,7 @@ async function handle(r:RuntimeRequest){
     post({type:'progress',progress:fraction,events});
    }
   },workBudget.advance);
-  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
+  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;startWithoutWorld=!loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
   // Resume durable intake in its persisted order. Branch switches have already
   // terminalized old Pending atomically; a new writer rechecks original intent.
   const recovered=await pendingCommands(),recoveredRequests:RuntimeRequest[]=[];
@@ -96,11 +97,12 @@ async function handle(r:RuntimeRequest){
   requests.unshift(...recoveredRequests);
   const recent=await commandPage(),visible=[...recent,...recovered.filter(row=>!recent.some(r=>r.sequence===row.sequence))];post({type:'commandList',rows:visible});post({type:'loaded',legacyAvailable:await hasLegacyCampaign(),recovered:result.recovered,offline:result.summary});state();world?await publishReportStatus():post({type:'reportStatus',data:{unread:0,alerts:0,counts:{all:0,battle:0,diplomacy:0,chronicle:0}}});return;}
  if(r.type==='away'){if(away){state();return;}const boundary=awayBoundaries.get(r)??{target:targetTime(),wallAt:Date.now()};away=true;await advanceAndSave(Math.max(world?.time??0,boundary.target),boundary.wallAt);state();return;}
- if(r.type==='reset'){await clearSavedGames();writer=await writerContext();world=null;reanchor();post({type:'resetDone'});state();return;}
+ if(r.type==='reset'){await clearSavedGames();writer=await writerContext();world=null;startWithoutWorld=true;reanchor();post({type:'resetDone'});state();return;}
  if(r.type==='start'){
+  if(!world&&!startWithoutWorld&&!r.replaceIncompatible)throw Error('戰役尚未安全讀取，請先重新讀取或確認版本不相容；原資料保留。');
   const name=r.name.trim();if(!name||name.length>24||/[\x00-\x1f\x7f]/.test(name))throw new Error('請輸入 1～24 字的名字。');
   const fixture=createFormalWorld({campaign:crypto.randomUUID(),seed:r.seed,speed:r.speed,name,civilizationId:r.civilizationId,offlineHours:r.offlineHours});
-  enableAutonomy(fixture);const committed=await startCampaign(fixture);await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  enableAutonomy(fixture);const committed=await startCampaign(fixture,r.replaceIncompatible);await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
@@ -200,7 +202,14 @@ async function runRequest(r:RuntimeRequest){
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
   else if(r.type==='reportPage'||r.type==='reportStatus'||r.type==='reportAction')post({type:'notice',text:'戰報操作暫時失敗，請重試。'});
   else if(r.type==='cityIntel')post({type:'cityIntel',queryId:r.queryId,error:text});
-  else post({type:'error',text,requestId:r.requestId,...(text===OLD_CAMPAIGN_MESSAGE?{legacyAvailable:true}:{})});
+  else{
+   let token:string|undefined,display=text;
+   if(r.type==='load'||r.type==='resume'){
+    startWithoutWorld=false;
+    if(text===OLD_CAMPAIGN_MESSAGE)try{token=await incompatibleStartToken();startWithoutWorld=!token;}catch(e){display=e instanceof Error?e.message:'無法安全確認舊戰役，原資料保留。';}
+   }
+   post({type:'error',text:display,requestId:r.requestId,...(text===OLD_CAMPAIGN_MESSAGE?{legacyAvailable:true}:{}),incompatibleStartToken:token});
+  }
   // Failed transitions carry the prior world; failed load remains a visible error.
   if(r.type==='command')state();
  }finally{if(r.requestId)post({type:'requestDone',requestId:r.requestId});}

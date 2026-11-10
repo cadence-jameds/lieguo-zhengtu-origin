@@ -1,11 +1,12 @@
 import {FORMAL_DB_NAME,RETIRED_FORMAL_DB_NAME} from './formal/versions';
-import {metadataSchema} from './formal/schema';
+import {assertCampaignCompatibility,OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
+import {FORMAL_SAVE_FORMAT} from './formal/versions';
 export type StoredCampaignStatus='empty'|'stored'|'incompatible'|'historical';
 // Retired namespaces are read-only archives; the new format never migrates them.
 const historicalNames=new Set(['lieguo-formal-ledger-v1',RETIRED_FORMAL_DB_NAME,'lieguo-formal-stage2-schema1']);
 const databaseNames=()=>[...new Set([FORMAL_DB_NAME,...historicalNames])];
 function storageDeadline<T>(operation:Promise<T>):Promise<T>{let timer:ReturnType<typeof setTimeout>|undefined;return Promise.race([operation,new Promise<never>((_resolve,reject)=>{timer=setTimeout(()=>reject(Error('讀取本機資料逾時，原始資料保留。')),8000);})]).finally(()=>clearTimeout(timer));}
-type StoredRow={kind?:string;data?:{metadata?:Record<string,unknown>}};
+type StoredRow={kind?:string;data?:{format?:unknown;metadata?:Record<string,unknown>}};
 function idbRequest<T>(request:IDBRequest<T>){return new Promise<T>((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(Error('無法讀取本機資料，原始資料保留。'));});}
 /** Dexie.exists() probes a missing DB via open/abort/deleteDatabase. This path
  * must remain strictly read only, including browsers without databases(). */
@@ -44,7 +45,7 @@ export async function inspectCampaignStorage():Promise<StoredCampaignStatus>{
   }
   stored ||= hasRows;
   if(db.tables.some(t=>t.name==='saves')){const row=await db.table('saves').get('current'),metadata=row?.kind==='world'?row.data?.metadata:undefined;
-   if(metadata&&typeof metadata.contentVersion==='string'&&!metadataSchema.safeParse(metadata).success)incompatible=true;
+   if(metadata)try{assertCampaignCompatibility({format:row?.data?.format??FORMAL_SAVE_FORMAT,metadata});}catch(e){if(e instanceof Error&&e.message===OLD_CAMPAIGN_MESSAGE)incompatible=true;else throw e;}
   }
  });
  return incompatible?'incompatible':stored?'stored':historical?'historical':'empty';

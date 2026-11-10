@@ -1,3 +1,17 @@
+# B10 最終合併封版驗收入口
+
+目前有效結論、精確HEAD、原始完整Gate與新CI見 [最終驗收](final-seal/RESULTS.md)。本輪只修舊格式新局及完成合併前驗證，不新增架構或效能優化。
+
+- SW：後續原生六輪完整五情境 **30 PASS／0 FAIL**，舊啟用停滯已取得受測Chromium修復證據。原15／30秒期限及舊失敗均保留。
+- 存檔瘦身：Quick 10k／60k／150k均3,034,499 bytes，Full約3,034,596 bytes；100MiB上限不變。
+- B9記憶體：三組A/B加工具控制88次PASS，未見持續線性累積，4096上限與清理有效；此項正式結案，不追改單次RSS。
+- 使用者2026-11-10取消main部署隔離護欄。Pages保持原main自動部署，無需workflow-only PR或718a71e／dc14401；護欄未安裝不再構成MERGE HOLD。
+- Android NOT TESTED安排合併後，不阻擋單人測試階段技術合併，不能宣稱真機PASS。B5 E1 HOLD／Astra非PASS仍屬發布事項。
+- 本批不合併、不轉Ready、不部署；#54～61仍Draft。後續需另取得使用者明確合併授權。
+
+<details>
+<summary>本輪以前的歷史原文（失敗與來源保留，現行狀態以前文／最終驗收為準）</summary>
+
 # B10 Release Unblock：P0 BLOCKED
 
 正式有界持久化、新存檔及防重播已完成接線，並通過原生 IndexedDB 故障／恢復測試。**整批尚不可授權合併 main**：Production SW 在完整與獨立重複測試中仍有啟用停滯，保存成功後 candidate 保持 installed，未在原 15 秒內接管。不能選用較早單輪 5/5 或 CI 綠燈宣稱修好。
@@ -110,3 +124,5 @@ main **仍未安裝**護欄，不能直接開始合併。先由使用者另行�
 9. **正式授權合併：不可。** P0 BLOCKED／MERGE HOLD；不是 READY FOR TECHNICAL MERGE。Production Release HOLD，Android 另為 NOT TESTED。
 
 原始私人存檔、trace、ZIP、dist、node_modules、大型 runner artifact 未提交；僅合成方法、摘要與可重現工具。沒有開始 B11、R3-07 或其他玩法施工。
+
+</details>

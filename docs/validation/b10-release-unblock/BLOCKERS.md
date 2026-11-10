@@ -1,3 +1,12 @@
+# B10 最後阻擋與審核狀態
+
+**舊SW P0已由後續30/30原生證據解除；部署護欄要求已由使用者取消。** 本頁下方保留的是歷史失敗，不是目前狀態。
+
+當前P0／P1、新局完整流程、同程式原始完整Gate、新HEAD CI與 READY FOR TECHNICAL MERGE 結論，以 [最終驗收](final-seal/RESULTS.md) 為準。未取得真實Gate結果前不得宣稱PASS。Android合併後驗證，不作單人技術合併禁令；B5 E1 HOLD／Astra非PASS及發布風險保留。
+
+<details>
+<summary>本輪以前的歷史原文（失敗與來源保留，現行狀態以前文／最終驗收為準）</summary>
+
 # 合併阻塞：SW 啟用停滯
 
 **P0 BLOCKED／MERGE HOLD／PRODUCTION RELEASE HOLD。** 不能因容量縮小、原子故障通過、Node／GitHub CI 綠燈而解除本項。
@@ -18,3 +27,5 @@
 使用 `REPRODUCTION.md` 的 immutable pair 與 `production-sw-successor.mjs` 重現，重複正常／Install Reject；`B10_SW_DIAGNOSTIC_RESEND=1` 可收集失敗後一次重送的負面證據。原 `production-sw.mjs`、歷史 503 失敗、原 15／30 秒期限保留。不 unregister、不清除 Site Data、不自動導航關閉舊頁、不提高 timeout。
 
 尚缺可證明安全的 registration／active-worker transition 修復，以及其後**穩定完整五組**原生重跑。沒有這項證據，就不能宣稱 READY FOR TECHNICAL MERGE。main 的兩個 workflow 護欄也還只是可審查提交，尚未安裝；詳見 `MERGE-AND-DEPLOY.md`。Android 仍 NOT TESTED，與此桌面 P0 分開判定。
+
+</details>

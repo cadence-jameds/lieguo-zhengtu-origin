@@ -1,3 +1,5 @@
+> **最終封版狀態更新（2026-11-10）：** [最新驗收與合併策略](../final-seal/RESULTS.md)。SW已有30/30後續證據，B9記憶體結案；使用者取消部署護欄要求，Android安排合併後且不阻擋單人技術合併。以下歷史量測與失敗保留，不作當前MERGE HOLD判定。
+
 # B9 Shipment 快取記憶體診斷
 
 基準為 Draft PR61 `dbcf7d59c55c322c272d4900cdf8a81e36ae8793`，前版對照為 `7264472e7cfc30ec72d64e24198d3d8d5d23adeb`。本批只檢查記憶體風險；正式物流、Schema、快取、安全驗證、T2、存檔、SW、Scheduler、RNG 與 AI 都沒有修改。

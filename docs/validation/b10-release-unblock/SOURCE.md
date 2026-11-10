@@ -1,3 +1,12 @@
+# B10 封版來源入口
+
+最終程式、報告HEAD、原始完整Gate、CI及8個Stack的SHA／Base／祖先／Release Metadata，統一列於 [最終驗收](final-seal/RESULTS.md)。本次是在e50baaeb00b5af15d35d37ed5056be2a2bf50d68上補齊新局UX／資料生命週期並恢復main原自動部署。
+
+以下先前版本與失敗來源維持歷史原文，不能冒充最後HEAD。本批不修改正式規則、SW、物流快取、AI、Scheduler或有界存檔格式。
+
+<details>
+<summary>本輪以前的歷史原文（失敗與來源保留，現行狀態以前文／最終驗收為準）</summary>
+
 # 來源、版本與執行狀態
 
 PR #61，Base `validation/b10-final-integration`／`aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607`，Branch `fix/b10-release-unblock`。本文件記錄程式與驗證來源；後續純文件提交的 HEAD 由 PR 顯示，不冒充所有實機數字都在文件 HEAD 重新校準。
@@ -38,3 +47,5 @@ GitHub 再確認 #54～#60 均 open Draft、未合併、Base 堆疊未改。main
 本機最後另依 CI 原清單執行 27 條 successor／反竄改／部署／世界對照／boundary 命令，加 art board 與 player feedback 保護，整批 exit 0。31/31 世界等價、3/3 部署隔離、Preview 79 模組／0 authority imports／0 storage capabilities／0 render reducer preview calls，Projection 的歷史 materialization=0。這些 PASS 不覆蓋本機完整回歸 FAIL。
 
 本機兩輪均 Node 22.23.4、2 CPU quota、8 GiB cgroup、2 workers、NODE_OPTIONS=null、預設 heap limit 2,197,815,296 bytes，未並行重型測試或瀏覽器量測。完整環境摘要在 measurements.json；memory.events 為累計值，不將既往 OOM 次數誤歸因於某一輪。CI hosted runner 與本機分開，未猜測其 CPU／heap。
+
+</details>

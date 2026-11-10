@@ -1,3 +1,5 @@
+> 使用者2026-11-10決定：Android實機驗證在合併後進行，不阻擋目前單人測試階段的技術合併；下列流程仍待實機執行，NOT TESTED不變。
+
 # Android 隔離實機流程 — NOT TESTED
 
 本批沒有 Android 實機。桌面 Chromium 結果不能替代手機驗收。B5 E1 HOLD、Astra 非 PASS、既有實機待驗狀態保持。

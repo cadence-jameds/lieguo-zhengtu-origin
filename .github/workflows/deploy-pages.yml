@@ -1,18 +1,9 @@
-name: Validate main and manually deploy approved GitHub Pages
+name: Auto deploy tested main to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      release_sha:
-        description: 'Exact reviewed main commit SHA to publish'
-        required: true
-        type: string
-      confirmation:
-        description: 'Type PUBLISH_B10 only after explicit production release approval'
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -39,20 +30,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Validate explicit release request
-        if: github.event_name == 'workflow_dispatch'
-        env:
-          B10_APPROVED_SHA: ${{ inputs.release_sha }}
-          B10_RELEASE_CONFIRMATION: ${{ inputs.confirmation }}
-        run: |
-          test "$GITHUB_REF" = 'refs/heads/main'
-          test "$GITHUB_REPOSITORY" = 'cadence-jameds/lieguo-zhengtu-origin'
-          test "$GITHUB_ACTOR" = 'cadence-jameds'
-          test "$B10_APPROVED_SHA" = "$GITHUB_SHA"
-          test "$B10_RELEASE_CONFIRMATION" = 'PUBLISH_B10'
-
-      # Main pushes validate and upload artifacts. Publication requires a separate
-      # owner-initiated workflow_dispatch for this exact reviewed main SHA.
+      # This is a public development preview. Formal release acceptance stays separate.
       # Failed typecheck/regression/build prevents artifact upload and deployment.
       - name: Install dependencies
         run: npm ci
@@ -74,7 +52,7 @@ jobs:
           path: dist
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && github.actor == 'cadence-jameds' && github.ref == 'refs/heads/main' && github.repository == 'cadence-jameds/lieguo-zhengtu-origin' && inputs.release_sha == github.sha && inputs.confirmation == 'PUBLISH_B10'
+    if: github.ref == 'refs/heads/main' && github.repository == 'cadence-jameds/lieguo-zhengtu-origin'
     permissions:
       pages: write
       id-token: write

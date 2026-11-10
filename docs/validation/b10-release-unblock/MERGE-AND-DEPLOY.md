@@ -1,3 +1,14 @@
+# B10 合併順序與自動部署（使用者最新決議）
+
+2026-11-10使用者明確取消main部署隔離：不安裝718a71e／dc14401，不建立workflow-only PR。PR61的deploy-pages.yml還原為main443f170b相同內容。main push經既有完整回歸、Typecheck、Build、Pages／Release驗證成功後自動部署GitHub Pages。
+
+技術驗收與detached模擬結果見 [最終驗收](final-seal/RESULTS.md)。取得**下一次明確授權**後才可依 #54→55→56→57→58→59→60→61 順序用merge commit整合；不用rebase。每次核對實際main、HEAD、Base、CI及Release Notes，等該main的CI／Pages完成後再做下一步；合併已接受會自動部署。不得把本批策略授權當成按下Merge的授權。
+
+Android安排合併後實機驗證；目前仍NOT TESTED。PR目前維持Draft，沒有遠端main修改、Ready或部署。下方舊護欄方案只留歷史來源，已被本段決議取代。
+
+<details>
+<summary>本輪以前的歷史原文（失敗與來源保留，現行狀態以前文／最終驗收為準）</summary>
+
 # 安全整合與發布隔離
 
 本分支只提交可審查 workflow，不修改 main、不執行 Actions dispatch、不部署、不將任何 Draft 改 Ready。現有 main 仍是原自動 Pages 部署 workflow，故**不能在此護欄先落地前合併任何 B10 功能 PR**。
@@ -21,3 +32,5 @@
 `node scripts/test-deployment-isolation.mjs` 解析實際 workflow，涵蓋 GHA case folding 與 shell exact guard；不是另一份 workflow 替身。沒有宣稱 GitHub Environment 的人工 approval 已設定；若另加 environment protection，必須由有權限者在 GitHub 配置及實際核對。
 
 技術合併與正式發布分開判定。Android、B5 E1 HOLD、Astra 非 PASS 不因桌面 CI 改變；正式發布仍 HOLD。不得為驗證而發布正式 Pages。
+
+</details>

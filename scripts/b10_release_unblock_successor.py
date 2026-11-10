@@ -5,7 +5,7 @@ from functools import lru_cache
 ROOT=Path(__file__).resolve().parents[1]
 BASE='aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607'
 IMPLEMENTATION='8375d5d5f281162bd2f973e0bca0a0a89171be55'
-RECORD='docs/validation/b10-release-unblock/compatibility.json'
+RECORD='docs/validation/b10-release-unblock/final-seal/compatibility.json'
 def sha(data):return hashlib.sha256(data).hexdigest()
 @lru_cache(maxsize=None)
 def previous(ref,p):return subprocess.check_output(['git','-C',str(ROOT),'show',ref+':'+p],stderr=subprocess.DEVNULL)
