@@ -1,0 +1,3412 @@
+{
+  "date": "2026-11-10",
+  "manifest": {
+    "variants": [
+      [
+        "A",
+        "7264472e7cfc30ec72d64e24198d3d8d5d23adeb"
+      ],
+      [
+        "B",
+        "dbcf7d59c55c322c272d4900cdf8a81e36ae8793"
+      ]
+    ],
+    "node": "v22.23.4",
+    "originalWorkloadEqual": true,
+    "diagnosticSource": "Working-tree observer only; immutable production refs above"
+  },
+  "workloadHashes": {
+    "src/game/formal/breakthroughB92.test.ts": {
+      "A": {
+        "bytes": 21600,
+        "sha256": "d85bffcc8523c02f0bba86b2add8cda0170015fa929ce8cbc73fa03390c6dc09"
+      },
+      "B": {
+        "bytes": 21600,
+        "sha256": "d85bffcc8523c02f0bba86b2add8cda0170015fa929ce8cbc73fa03390c6dc09"
+      }
+    },
+    "src/game/formal/breakthroughTestSupport.ts": {
+      "A": {
+        "bytes": 2490,
+        "sha256": "b92f028aeb849964a118b615eae1eaa16895dd5aa4ebf497f0967466aa524868"
+      },
+      "B": {
+        "bytes": 2490,
+        "sha256": "b92f028aeb849964a118b615eae1eaa16895dd5aa4ebf497f0967466aa524868"
+      }
+    }
+  },
+  "method": {
+    "normalOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2",
+      "A3",
+      "B3"
+    ],
+    "normalSamplesPerVariant": 3,
+    "cpuProfilerControlSamplesPerVariant": 1,
+    "originalBeforeAllMs": 240000,
+    "maxWorkers": 2,
+    "units": "bytes and milliseconds; report prose uses decimal MB",
+    "gc": "--expose-gc in independent diagnostic only. Three collections after original tests plus 20s idle; none during original workload.",
+    "peaks": "OS maxRSS at suite_end is the original workload high-water. Other peaks are samples at clone/schema/trip boundaries, not guaranteed instantaneous heap maxima.",
+    "contextStress": "60 read-only re-parses of the real funded 800+2000 records with distinct diagnostic campaign contexts. Not additional commands or a formal Gate.",
+    "caveats": [
+      "Single test file permits at most 2 workers but has one active file worker; this does not reproduce concurrent full-suite contention.",
+      "All workers share cgroup quota 2 CPU / 8GiB. Runs are sequential, no concurrent browser/benchmark.",
+      "A1 config predates adding the inactive legacy CPU-plugin import in the parent. Active normal worker instrumentation is unchanged; do not treat small timing differences as precise speedup.",
+      "Natural idle GC timing varies. Post-GC heap is diagnostic live-heap evidence, not a production forced-GC technique.",
+      "CPU controls include Inspector and legacy profiling wrappers; n=1 is a tool-overhead probe, not a statistical comparison.",
+      "No Android/native-browser memory result is claimed."
+    ]
+  },
+  "groups": {
+    "A": {
+      "n": 3,
+      "stages": {
+        "hook_end": {
+          "rss": {
+            "n": 3,
+            "min": 349859840,
+            "median": 350539776,
+            "max": 352542720
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 108947360,
+            "median": 118573960,
+            "max": 124394120
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 218738688,
+            "median": 225734656,
+            "max": 231731200
+          },
+          "external": {
+            "n": 3,
+            "min": 2572421,
+            "median": 2572421,
+            "max": 3561013
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 319955,
+            "median": 319955,
+            "max": 1308259
+          }
+        },
+        "suite_end": {
+          "rss": {
+            "n": 3,
+            "min": 398233600,
+            "median": 405757952,
+            "max": 413671424
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 192153224,
+            "median": 260295632,
+            "max": 266118408
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 233074688,
+            "median": 285401088,
+            "max": 294551552
+          },
+          "external": {
+            "n": 3,
+            "min": 8767906,
+            "median": 15252598,
+            "max": 19575678
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 6509760,
+            "median": 12994292,
+            "max": 17317340
+          }
+        },
+        "idle_20s": {
+          "rss": {
+            "n": 3,
+            "min": 173719552,
+            "median": 405889024,
+            "max": 413671424
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 41189608,
+            "median": 245990784,
+            "max": 266445024
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 167702528,
+            "median": 286187520,
+            "max": 294551552
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 15252655,
+            "max": 19576203
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 12994382,
+            "max": 17317430
+          }
+        },
+        "post_suite_gc": {
+          "rss": {
+            "n": 3,
+            "min": 177389568,
+            "median": 381452288,
+            "max": 390189056
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 40934976,
+            "median": 40953440,
+            "max": 41107384
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 47116288,
+            "median": 48046080,
+            "max": 48832512
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "context_churn_10_gc": {
+          "rss": {
+            "n": 3,
+            "min": 193077248,
+            "median": 381452288,
+            "max": 390189056
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 40923656,
+            "median": 40947968,
+            "max": 41091664
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 79884288,
+            "median": 80814080,
+            "max": 80814080
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "context_churn_30_gc": {
+          "rss": {
+            "n": 3,
+            "min": 203694080,
+            "median": 381452288,
+            "max": 390320128
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 40945256,
+            "median": 40969584,
+            "max": 41118960
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 79884288,
+            "median": 80814080,
+            "max": 80814080
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "context_churn_60_gc": {
+          "rss": {
+            "n": 3,
+            "min": 203694080,
+            "median": 381452288,
+            "max": 390320128
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 40963872,
+            "median": 40991440,
+            "max": 41141368
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 79884288,
+            "median": 80814080,
+            "max": 80814080
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "cache_context_cleared_gc": {
+          "rss": {
+            "n": 3,
+            "min": 203694080,
+            "median": 381452288,
+            "max": 390320128
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 40964944,
+            "median": 40992512,
+            "max": 41142440
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 79884288,
+            "median": 80814080,
+            "max": 80814080
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "final_idle": {
+          "rss": {
+            "n": 3,
+            "min": 203694080,
+            "median": 381452288,
+            "max": 390320128
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 40968848,
+            "median": 40996416,
+            "max": 41146104
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 79884288,
+            "median": 80814080,
+            "max": 80814080
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        }
+      },
+      "workloadOsMaxRssBytes": {
+        "n": 3,
+        "min": 421777408,
+        "median": 423763968,
+        "max": 433205248
+      },
+      "observedWorkloadPeak": {
+        "rss": {
+          "n": 3,
+          "min": 421646336,
+          "median": 422895616,
+          "max": 427044864
+        },
+        "heapUsed": {
+          "n": 3,
+          "min": 260295632,
+          "median": 264489776,
+          "max": 266118408
+        },
+        "heapTotal": {
+          "n": 3,
+          "min": 285401088,
+          "median": 291434496,
+          "max": 294551552
+        },
+        "external": {
+          "n": 3,
+          "min": 17068189,
+          "median": 19912172,
+          "max": 24513512
+        },
+        "arrayBuffers": {
+          "n": 3,
+          "min": 14810159,
+          "median": 17658631,
+          "max": 22260243
+        }
+      },
+      "hookMs": {
+        "n": 3,
+        "min": 150500.87152000002,
+        "median": 154261.80659700002,
+        "max": 160579.098471
+      },
+      "originalSuiteGcMs": {
+        "n": 3,
+        "min": 20359.909828741103,
+        "median": 20767.64475795999,
+        "max": 22509.3565139696
+      },
+      "originalSuiteGcCount": {
+        "n": 3,
+        "min": 12654,
+        "median": 12685,
+        "max": 12766
+      },
+      "postGcHeapGrowth10To60Bytes": {
+        "n": 3,
+        "min": 40216,
+        "median": 43472,
+        "max": 49704
+      },
+      "heapReleasedByContextClearBytes": {
+        "n": 3,
+        "min": -1072,
+        "median": -1072,
+        "max": -1072
+      }
+    },
+    "B": {
+      "n": 3,
+      "stages": {
+        "hook_end": {
+          "rss": {
+            "n": 3,
+            "min": 351088640,
+            "median": 354885632,
+            "max": 357920768
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 54696264,
+            "median": 63683040,
+            "max": 64547448
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 205324288,
+            "median": 225419264,
+            "max": 230080512
+          },
+          "external": {
+            "n": 3,
+            "min": 2337809,
+            "median": 2925297,
+            "max": 3333669
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 85375,
+            "median": 672735,
+            "max": 1080979
+          }
+        },
+        "suite_end": {
+          "rss": {
+            "n": 3,
+            "min": 421597184,
+            "median": 423272448,
+            "max": 448204800
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 239983464,
+            "median": 241731440,
+            "max": 270230704
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 279023616,
+            "median": 280834048,
+            "max": 300208128
+          },
+          "external": {
+            "n": 3,
+            "min": 15252521,
+            "median": 15252566,
+            "max": 19575633
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 12994247,
+            "median": 12994292,
+            "max": 17317295
+          }
+        },
+        "idle_20s": {
+          "rss": {
+            "n": 3,
+            "min": 156442624,
+            "median": 423272448,
+            "max": 448204800
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 45177920,
+            "median": 250732848,
+            "max": 266077080
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 50671616,
+            "median": 279023616,
+            "max": 300470272
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 15252611,
+            "max": 19575735
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 12994337,
+            "max": 17317430
+          }
+        },
+        "post_suite_gc": {
+          "rss": {
+            "n": 3,
+            "min": 157622272,
+            "median": 408518656,
+            "max": 411308032
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 44011000,
+            "median": 44082184,
+            "max": 44215688
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 47525888,
+            "median": 53030912,
+            "max": 54079488
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "context_churn_10_gc": {
+          "rss": {
+            "n": 3,
+            "min": 189050880,
+            "median": 408518656,
+            "max": 411308032
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 43142168,
+            "median": 43190240,
+            "max": 43322064
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 80293888,
+            "median": 84226048,
+            "max": 84750336
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "context_churn_30_gc": {
+          "rss": {
+            "n": 3,
+            "min": 201633792,
+            "median": 408518656,
+            "max": 411308032
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 43172016,
+            "median": 43213744,
+            "max": 43350432
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 81080320,
+            "median": 84750336,
+            "max": 85274624
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "context_churn_60_gc": {
+          "rss": {
+            "n": 3,
+            "min": 204124160,
+            "median": 408518656,
+            "max": 411308032
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 43122968,
+            "median": 43195248,
+            "max": 43240096
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 80818176,
+            "median": 84750336,
+            "max": 84750336
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "cache_context_cleared_gc": {
+          "rss": {
+            "n": 3,
+            "min": 204124160,
+            "median": 408518656,
+            "max": 411308032
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 41238952,
+            "median": 41311200,
+            "max": 41355712
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 78458880,
+            "median": 82391040,
+            "max": 82915328
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        },
+        "final_idle": {
+          "rss": {
+            "n": 3,
+            "min": 204124160,
+            "median": 408518656,
+            "max": 411308032
+          },
+          "heapUsed": {
+            "n": 3,
+            "min": 41242856,
+            "median": 41315272,
+            "max": 41359784
+          },
+          "heapTotal": {
+            "n": 3,
+            "min": 78458880,
+            "median": 82391040,
+            "max": 82915328
+          },
+          "external": {
+            "n": 3,
+            "min": 2282813,
+            "median": 2282813,
+            "max": 2282813
+          },
+          "arrayBuffers": {
+            "n": 3,
+            "min": 25263,
+            "median": 25263,
+            "max": 25263
+          }
+        }
+      },
+      "workloadOsMaxRssBytes": {
+        "n": 3,
+        "min": 454148096,
+        "median": 459911168,
+        "max": 466022400
+      },
+      "observedWorkloadPeak": {
+        "rss": {
+          "n": 3,
+          "min": 449077248,
+          "median": 453365760,
+          "max": 464023552
+        },
+        "heapUsed": {
+          "n": 3,
+          "min": 279834008,
+          "median": 286017808,
+          "max": 288087680
+        },
+        "heapTotal": {
+          "n": 3,
+          "min": 311898112,
+          "median": 315617280,
+          "max": 322035712
+        },
+        "external": {
+          "n": 3,
+          "min": 15531733,
+          "median": 15702552,
+          "max": 19578431
+        },
+        "arrayBuffers": {
+          "n": 3,
+          "min": 13278514,
+          "median": 13449269,
+          "max": 17320497
+        }
+      },
+      "hookMs": {
+        "n": 3,
+        "min": 135262.32093500003,
+        "median": 138380.46341499998,
+        "max": 144450.788124
+      },
+      "originalSuiteGcMs": {
+        "n": 3,
+        "min": 17882.441445004195,
+        "median": 17937.17641178891,
+        "max": 19414.29169499688
+      },
+      "originalSuiteGcCount": {
+        "n": 3,
+        "min": 8464,
+        "median": 8851,
+        "max": 8854
+      },
+      "postGcHeapGrowth10To60Bytes": {
+        "n": 3,
+        "min": -199096,
+        "median": 49856,
+        "max": 53080
+      },
+      "heapReleasedByContextClearBytes": {
+        "n": 3,
+        "min": 1884016,
+        "median": 1884048,
+        "max": 1884384
+      }
+    }
+  },
+  "runs": [
+    {
+      "name": "A1",
+      "variant": "A",
+      "cpuProfile": false,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 427044864,
+        "heapUsed": 264489776,
+        "heapTotal": 291434496,
+        "external": 17068189,
+        "arrayBuffers": 14810159
+      },
+      "workloadOsMaxRssBytes": 433205248,
+      "hookMs": 154261.80659700002,
+      "originalSuiteMs": 180118.30412800002,
+      "originalSuiteGc": {
+        "count": 12685,
+        "ms": 20767.64475795999,
+        "kinds": {
+          "1": 12499,
+          "4": 93,
+          "8": 93
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 156305.710415,
+          "rss": 349859840,
+          "heapTotal": 231731200,
+          "heapUsed": 108947360,
+          "external": 3561013,
+          "arrayBuffers": 1308259,
+          "maxRssBytes": 363843584,
+          "gc": {
+            "count": 11205,
+            "ms": 17858.15643798001,
+            "kinds": {
+              "1": 11041,
+              "4": 82,
+              "8": 82
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 182162.207946,
+          "rss": 398233600,
+          "heapTotal": 233074688,
+          "heapUsed": 192153224,
+          "external": 8767906,
+          "arrayBuffers": 6509760,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12685,
+            "ms": 20767.64475795999,
+            "kinds": {
+              "1": 12499,
+              "4": 93,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 202167.834603,
+          "rss": 173719552,
+          "heapTotal": 167702528,
+          "heapUsed": 41189608,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12715,
+            "ms": 20836.129286967218,
+            "kinds": {
+              "1": 12527,
+              "4": 94,
+              "8": 94
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 202618.137508,
+          "rss": 177389568,
+          "heapTotal": 47116288,
+          "heapUsed": 40953440,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12718,
+            "ms": 20883.632386969402,
+            "kinds": {
+              "1": 12527,
+              "4": 97,
+              "8": 94
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 203216.25406500002,
+          "rss": 193077248,
+          "heapTotal": 79884288,
+          "heapUsed": 40947968,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12785,
+            "ms": 20938.928197965026,
+            "kinds": {
+              "1": 12589,
+              "4": 101,
+              "8": 95
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 203920.909615,
+          "rss": 203694080,
+          "heapTotal": 79884288,
+          "heapUsed": 40969584,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12817,
+            "ms": 20990.412636965513,
+            "kinds": {
+              "1": 12618,
+              "4": 104,
+              "8": 95
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 204740.908739,
+          "rss": 203694080,
+          "heapTotal": 79884288,
+          "heapUsed": 40991440,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12863,
+            "ms": 21049.259886959568,
+            "kinds": {
+              "1": 12661,
+              "4": 107,
+              "8": 95
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 205177.017559,
+          "rss": 203694080,
+          "heapTotal": 79884288,
+          "heapUsed": 40992512,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12866,
+            "ms": 21082.94026495889,
+            "kinds": {
+              "1": 12661,
+              "4": 110,
+              "8": 95
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 210182.38196600002,
+          "rss": 203694080,
+          "heapTotal": 79884288,
+          "heapUsed": 40996416,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 433205248,
+          "gc": {
+            "count": 12866,
+            "ms": 21082.94026495889,
+            "kinds": {
+              "1": 12661,
+              "4": 110,
+              "8": 95
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": 43472,
+      "heapReleasedByContextClearBytes": -1072,
+      "finalIdleHeapGrowthBytes": 3904,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 10794,
+          "sha256": "f09eb479f6ec46dfdd385bbdd063bf2b1fd8a2d5fde6288924e4d9c361ea9020"
+        },
+        "report.json": {
+          "bytes": 18385,
+          "sha256": "334fa7a3a1bb9a9f4446816587635b44b72d6dfdfc3c076f399ad408ee4395e3"
+        },
+        "tests.json": {
+          "bytes": 4772,
+          "sha256": "58ce8c3bf9d87ae15603e5fc04c23bfde6865faa0a4568a8897c52df55a5301b"
+        }
+      }
+    },
+    {
+      "name": "B1",
+      "variant": "B",
+      "cpuProfile": false,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 464023552,
+        "heapUsed": 288087680,
+        "heapTotal": 322035712,
+        "external": 19578431,
+        "arrayBuffers": 17320497
+      },
+      "workloadOsMaxRssBytes": 466022400,
+      "hookMs": 144450.788124,
+      "originalSuiteMs": 168948.805214,
+      "originalSuiteGc": {
+        "count": 8854,
+        "ms": 19414.29169499688,
+        "kinds": {
+          "1": 8676,
+          "4": 89,
+          "8": 89
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 146060.73469500002,
+          "rss": 357920768,
+          "heapTotal": 225419264,
+          "heapUsed": 54696264,
+          "external": 2337809,
+          "arrayBuffers": 85375,
+          "maxRssBytes": 374947840,
+          "gc": {
+            "count": 7589,
+            "ms": 16661.80618598126,
+            "kinds": {
+              "1": 7429,
+              "4": 80,
+              "8": 80
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 170558.751785,
+          "rss": 448204800,
+          "heapTotal": 300208128,
+          "heapUsed": 270230704,
+          "external": 19575633,
+          "arrayBuffers": 17317295,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 8854,
+            "ms": 19414.29169499688,
+            "kinds": {
+              "1": 8676,
+              "4": 89,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 190582.50402800002,
+          "rss": 448204800,
+          "heapTotal": 300470272,
+          "heapUsed": 266077080,
+          "external": 19575735,
+          "arrayBuffers": 17317430,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 8878,
+            "ms": 19463.756220994517,
+            "kinds": {
+              "1": 8700,
+              "4": 89,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 191040.11724800002,
+          "rss": 411308032,
+          "heapTotal": 54079488,
+          "heapUsed": 44082184,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 8881,
+            "ms": 19518.14600699395,
+            "kinds": {
+              "1": 8700,
+              "4": 92,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 191721.65541900002,
+          "rss": 411308032,
+          "heapTotal": 84226048,
+          "heapUsed": 43190240,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 8925,
+            "ms": 19597.516451993957,
+            "kinds": {
+              "1": 8739,
+              "4": 96,
+              "8": 90
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 192557.71128000002,
+          "rss": 411308032,
+          "heapTotal": 84750336,
+          "heapUsed": 43213744,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 8964,
+            "ms": 19701.76995399408,
+            "kinds": {
+              "1": 8773,
+              "4": 100,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 193602.886524,
+          "rss": 411308032,
+          "heapTotal": 84750336,
+          "heapUsed": 43240096,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 9019,
+            "ms": 19832.23920600675,
+            "kinds": {
+              "1": 8823,
+              "4": 104,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 194048.131272,
+          "rss": 411308032,
+          "heapTotal": 82391040,
+          "heapUsed": 41355712,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 9022,
+            "ms": 19874.065682008862,
+            "kinds": {
+              "1": 8823,
+              "4": 107,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 199048.945574,
+          "rss": 411308032,
+          "heapTotal": 82391040,
+          "heapUsed": 41359784,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 466022400,
+          "gc": {
+            "count": 9022,
+            "ms": 19874.065682008862,
+            "kinds": {
+              "1": 8823,
+              "4": 107,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": 49856,
+      "heapReleasedByContextClearBytes": 1884384,
+      "finalIdleHeapGrowthBytes": 4072,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 10959,
+          "sha256": "652f7090ab762bc6f945d6e98fc77cc440c8aaab87c0481ed729ad35919d3742"
+        },
+        "report.json": {
+          "bytes": 18659,
+          "sha256": "f6d40eaaa48ce73b674024b089eb474c4858d557c39772e8105031bb31198adf"
+        },
+        "tests.json": {
+          "bytes": 4770,
+          "sha256": "e955d7ae2f15a5f453f13f45496a82563b838c12ab5759be57c0928396f8a983"
+        }
+      }
+    },
+    {
+      "name": "B2",
+      "variant": "B",
+      "cpuProfile": false,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 453365760,
+        "heapUsed": 286017808,
+        "heapTotal": 311898112,
+        "external": 15702552,
+        "arrayBuffers": 13449269
+      },
+      "workloadOsMaxRssBytes": 459911168,
+      "hookMs": 138380.46341499998,
+      "originalSuiteMs": 161740.77687899998,
+      "originalSuiteGc": {
+        "count": 8851,
+        "ms": 17882.441445004195,
+        "kinds": {
+          "1": 8673,
+          "4": 89,
+          "8": 89
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 139698.22838299998,
+          "rss": 354885632,
+          "heapTotal": 230080512,
+          "heapUsed": 63683040,
+          "external": 2925297,
+          "arrayBuffers": 672735,
+          "maxRssBytes": 372170752,
+          "gc": {
+            "count": 7586,
+            "ms": 15312.180124979466,
+            "kinds": {
+              "1": 7426,
+              "4": 80,
+              "8": 80
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 163058.541847,
+          "rss": 423272448,
+          "heapTotal": 279023616,
+          "heapUsed": 239983464,
+          "external": 15252566,
+          "arrayBuffers": 12994292,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 8851,
+            "ms": 17882.441445004195,
+            "kinds": {
+              "1": 8673,
+              "4": 89,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 183076.94915099998,
+          "rss": 423272448,
+          "heapTotal": 279023616,
+          "heapUsed": 250732848,
+          "external": 15252611,
+          "arrayBuffers": 12994337,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 8874,
+            "ms": 17930.782317988575,
+            "kinds": {
+              "1": 8696,
+              "4": 89,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 183544.731967,
+          "rss": 408518656,
+          "heapTotal": 53030912,
+          "heapUsed": 44011000,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 8878,
+            "ms": 17995.56003998965,
+            "kinds": {
+              "1": 8697,
+              "4": 92,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 184236.42569099998,
+          "rss": 408518656,
+          "heapTotal": 84750336,
+          "heapUsed": 43142168,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 8922,
+            "ms": 18088.607556000352,
+            "kinds": {
+              "1": 8736,
+              "4": 96,
+              "8": 90
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 185144.545724,
+          "rss": 408518656,
+          "heapTotal": 85274624,
+          "heapUsed": 43172016,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 8960,
+            "ms": 18199.179159998894,
+            "kinds": {
+              "1": 8769,
+              "4": 100,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 186230.15281899998,
+          "rss": 408518656,
+          "heapTotal": 84750336,
+          "heapUsed": 43195248,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 9014,
+            "ms": 18348.863114010543,
+            "kinds": {
+              "1": 8818,
+              "4": 104,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 186670.543468,
+          "rss": 408518656,
+          "heapTotal": 82915328,
+          "heapUsed": 41311200,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 9017,
+            "ms": 18385.63687101379,
+            "kinds": {
+              "1": 8818,
+              "4": 107,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 191671.17395,
+          "rss": 408518656,
+          "heapTotal": 82915328,
+          "heapUsed": 41315272,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 459911168,
+          "gc": {
+            "count": 9017,
+            "ms": 18385.63687101379,
+            "kinds": {
+              "1": 8818,
+              "4": 107,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": 53080,
+      "heapReleasedByContextClearBytes": 1884048,
+      "finalIdleHeapGrowthBytes": 4072,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 10926,
+          "sha256": "26625fc81f1c759c9a87f8fcf95126131c0294971e644800ec4b9ea0744d92ac"
+        },
+        "report.json": {
+          "bytes": 18615,
+          "sha256": "8b5e5dcd9ec98ea1034c902d734c452bffbcb128359171f90c5c00e28a5080ac"
+        },
+        "tests.json": {
+          "bytes": 4770,
+          "sha256": "f1b85a522bae1168e15a83596cfc9f42cd25f092b575a48aef670c96518f78f8"
+        }
+      }
+    },
+    {
+      "name": "A2",
+      "variant": "A",
+      "cpuProfile": false,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 422895616,
+        "heapUsed": 266118408,
+        "heapTotal": 294551552,
+        "external": 24513512,
+        "arrayBuffers": 22260243
+      },
+      "workloadOsMaxRssBytes": 423763968,
+      "hookMs": 160579.098471,
+      "originalSuiteMs": 186495.815313,
+      "originalSuiteGc": {
+        "count": 12766,
+        "ms": 22509.3565139696,
+        "kinds": {
+          "1": 12582,
+          "4": 92,
+          "8": 92
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 161814.322854,
+          "rss": 350539776,
+          "heapTotal": 225734656,
+          "heapUsed": 124394120,
+          "external": 2572421,
+          "arrayBuffers": 319955,
+          "maxRssBytes": 361582592,
+          "gc": {
+            "count": 11213,
+            "ms": 19446.647932976484,
+            "kinds": {
+              "1": 11049,
+              "4": 82,
+              "8": 82
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 187731.039696,
+          "rss": 405757952,
+          "heapTotal": 294551552,
+          "heapUsed": 266118408,
+          "external": 19575678,
+          "arrayBuffers": 17317340,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12766,
+            "ms": 22509.3565139696,
+            "kinds": {
+              "1": 12582,
+              "4": 92,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 207742.052491,
+          "rss": 405889024,
+          "heapTotal": 294551552,
+          "heapUsed": 266445024,
+          "external": 19576203,
+          "arrayBuffers": 17317430,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12793,
+            "ms": 22564.40587896481,
+            "kinds": {
+              "1": 12609,
+              "4": 92,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 208195.397468,
+          "rss": 390189056,
+          "heapTotal": 48046080,
+          "heapUsed": 40934976,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12796,
+            "ms": 22615.33710796386,
+            "kinds": {
+              "1": 12609,
+              "4": 95,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 208784.300659,
+          "rss": 390189056,
+          "heapTotal": 80814080,
+          "heapUsed": 40923656,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12864,
+            "ms": 22671.72138996795,
+            "kinds": {
+              "1": 12672,
+              "4": 99,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 209474.687533,
+          "rss": 390320128,
+          "heapTotal": 80814080,
+          "heapUsed": 40945256,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12896,
+            "ms": 22722.657292969525,
+            "kinds": {
+              "1": 12701,
+              "4": 102,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 210287.166208,
+          "rss": 390320128,
+          "heapTotal": 80814080,
+          "heapUsed": 40963872,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12942,
+            "ms": 22781.529985975474,
+            "kinds": {
+              "1": 12744,
+              "4": 105,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 210723.219529,
+          "rss": 390320128,
+          "heapTotal": 80814080,
+          "heapUsed": 40964944,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12945,
+            "ms": 22815.331852979958,
+            "kinds": {
+              "1": 12744,
+              "4": 108,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 215728.572203,
+          "rss": 390320128,
+          "heapTotal": 80814080,
+          "heapUsed": 40968848,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 423763968,
+          "gc": {
+            "count": 12945,
+            "ms": 22815.331852979958,
+            "kinds": {
+              "1": 12744,
+              "4": 108,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": 40216,
+      "heapReleasedByContextClearBytes": -1072,
+      "finalIdleHeapGrowthBytes": 3904,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 10799,
+          "sha256": "ad8f4b19e2168bf214692b9528b693b81e139c7e07677218da7998b738906d79"
+        },
+        "report.json": {
+          "bytes": 18390,
+          "sha256": "3cfef3854ecd111be77b47ad3b2f60d388e3f21bcdada725d68111d20af44ae1"
+        },
+        "tests.json": {
+          "bytes": 4757,
+          "sha256": "676c863e07af28d50d40032a48abdb019920f1bdf84f2986c70f690822b61960"
+        }
+      }
+    },
+    {
+      "name": "A3",
+      "variant": "A",
+      "cpuProfile": false,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 421646336,
+        "heapUsed": 260295632,
+        "heapTotal": 285401088,
+        "external": 19912172,
+        "arrayBuffers": 17658631
+      },
+      "workloadOsMaxRssBytes": 421777408,
+      "hookMs": 150500.87152000002,
+      "originalSuiteMs": 175149.305983,
+      "originalSuiteGc": {
+        "count": 12654,
+        "ms": 20359.909828741103,
+        "kinds": {
+          "1": 12470,
+          "4": 92,
+          "8": 92
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 152263.411751,
+          "rss": 352542720,
+          "heapTotal": 218738688,
+          "heapUsed": 118573960,
+          "external": 2572421,
+          "arrayBuffers": 319955,
+          "maxRssBytes": 363499520,
+          "gc": {
+            "count": 11173,
+            "ms": 17468.7129397057,
+            "kinds": {
+              "1": 11009,
+              "4": 82,
+              "8": 82
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 176911.846214,
+          "rss": 413671424,
+          "heapTotal": 285401088,
+          "heapUsed": 260295632,
+          "external": 15252598,
+          "arrayBuffers": 12994292,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12654,
+            "ms": 20359.909828741103,
+            "kinds": {
+              "1": 12470,
+              "4": 92,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 196922.864684,
+          "rss": 413671424,
+          "heapTotal": 286187520,
+          "heapUsed": 245990784,
+          "external": 15252655,
+          "arrayBuffers": 12994382,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12682,
+            "ms": 20404.41975274682,
+            "kinds": {
+              "1": 12498,
+              "4": 92,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 197369.794759,
+          "rss": 381452288,
+          "heapTotal": 48832512,
+          "heapUsed": 41107384,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12685,
+            "ms": 20448.693260744214,
+            "kinds": {
+              "1": 12498,
+              "4": 95,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 197994.726196,
+          "rss": 381452288,
+          "heapTotal": 80814080,
+          "heapUsed": 41091664,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12752,
+            "ms": 20520.208496753126,
+            "kinds": {
+              "1": 12560,
+              "4": 99,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 198709.61173,
+          "rss": 381452288,
+          "heapTotal": 80814080,
+          "heapUsed": 41118960,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12784,
+            "ms": 20570.06783875823,
+            "kinds": {
+              "1": 12589,
+              "4": 102,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 199547.29523,
+          "rss": 381452288,
+          "heapTotal": 80814080,
+          "heapUsed": 41141368,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12830,
+            "ms": 20634.595972765237,
+            "kinds": {
+              "1": 12632,
+              "4": 105,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 199990.127791,
+          "rss": 381452288,
+          "heapTotal": 80814080,
+          "heapUsed": 41142440,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12833,
+            "ms": 20675.0311617665,
+            "kinds": {
+              "1": 12632,
+              "4": 108,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 204995.82901,
+          "rss": 381452288,
+          "heapTotal": 80814080,
+          "heapUsed": 41146104,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 421777408,
+          "gc": {
+            "count": 12833,
+            "ms": 20675.0311617665,
+            "kinds": {
+              "1": 12632,
+              "4": 108,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": 49704,
+      "heapReleasedByContextClearBytes": -1072,
+      "finalIdleHeapGrowthBytes": 3664,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 10797,
+          "sha256": "77e51113e102bb31e86437884bf82c4c9e345ac70eac2afdbdf45b5a05075a52"
+        },
+        "report.json": {
+          "bytes": 18381,
+          "sha256": "0331a84d6dc551400f33ac34595cee41bcaf5dca6c69256a18845ed2525daa2f"
+        },
+        "tests.json": {
+          "bytes": 4773,
+          "sha256": "15af9925399e233d62be96afaa2491e68f3a6e840b9cafb0a8477a87520c741e"
+        }
+      }
+    },
+    {
+      "name": "B3",
+      "variant": "B",
+      "cpuProfile": false,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 449077248,
+        "heapUsed": 279834008,
+        "heapTotal": 315617280,
+        "external": 15531733,
+        "arrayBuffers": 13278514
+      },
+      "workloadOsMaxRssBytes": 454148096,
+      "hookMs": 135262.32093500003,
+      "originalSuiteMs": 160169.75017400002,
+      "originalSuiteGc": {
+        "count": 8464,
+        "ms": 17937.17641178891,
+        "kinds": {
+          "1": 8288,
+          "4": 88,
+          "8": 88
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 136625.67380800002,
+          "rss": 351088640,
+          "heapTotal": 205324288,
+          "heapUsed": 64547448,
+          "external": 3333669,
+          "arrayBuffers": 1080979,
+          "maxRssBytes": 367702016,
+          "gc": {
+            "count": 7219,
+            "ms": 15078.601836908609,
+            "kinds": {
+              "1": 7061,
+              "4": 79,
+              "8": 79
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 161533.103047,
+          "rss": 421597184,
+          "heapTotal": 280834048,
+          "heapUsed": 241731440,
+          "external": 15252521,
+          "arrayBuffers": 12994247,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8464,
+            "ms": 17937.17641178891,
+            "kinds": {
+              "1": 8288,
+              "4": 88,
+              "8": 88
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 181552.345693,
+          "rss": 156442624,
+          "heapTotal": 50671616,
+          "heapUsed": 45177920,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8492,
+            "ms": 18039.196134790778,
+            "kinds": {
+              "1": 8312,
+              "4": 90,
+              "8": 90
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 181996.252964,
+          "rss": 157622272,
+          "heapTotal": 47525888,
+          "heapUsed": 44215688,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8496,
+            "ms": 18077.15448078513,
+            "kinds": {
+              "1": 8313,
+              "4": 93,
+              "8": 90
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 182712.26501700003,
+          "rss": 189050880,
+          "heapTotal": 80293888,
+          "heapUsed": 43322064,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8540,
+            "ms": 18173.1211617738,
+            "kinds": {
+              "1": 8352,
+              "4": 97,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 183549.678156,
+          "rss": 201633792,
+          "heapTotal": 81080320,
+          "heapUsed": 43350432,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8578,
+            "ms": 18271.415173795074,
+            "kinds": {
+              "1": 8385,
+              "4": 101,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 184589.658999,
+          "rss": 204124160,
+          "heapTotal": 80818176,
+          "heapUsed": 43122968,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8635,
+            "ms": 18418.412199795246,
+            "kinds": {
+              "1": 8435,
+              "4": 106,
+              "8": 94
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 185030.67911300002,
+          "rss": 204124160,
+          "heapTotal": 78458880,
+          "heapUsed": 41238952,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8638,
+            "ms": 18456.22809579596,
+            "kinds": {
+              "1": 8435,
+              "4": 109,
+              "8": 94
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 190031.711301,
+          "rss": 204124160,
+          "heapTotal": 78458880,
+          "heapUsed": 41242856,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 454148096,
+          "gc": {
+            "count": 8638,
+            "ms": 18456.22809579596,
+            "kinds": {
+              "1": 8435,
+              "4": 109,
+              "8": 94
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": -199096,
+      "heapReleasedByContextClearBytes": 1884016,
+      "finalIdleHeapGrowthBytes": 3904,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 10945,
+          "sha256": "6eeffa2e9e30561c14befc17f44b36caccfc836dc72481c382ebf4332f35e74c"
+        },
+        "report.json": {
+          "bytes": 18612,
+          "sha256": "42e1d917e67d4b4c6eaf919fe9c1dd95e8f972f6a6a28a5414252112e6c94f7b"
+        },
+        "tests.json": {
+          "bytes": 4770,
+          "sha256": "551b8af00f387375c289d5b965a5bbf8a12b441af397c2ce98b7ce38b5863465"
+        }
+      }
+    },
+    {
+      "name": "A4cpu",
+      "variant": "A",
+      "cpuProfile": true,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 449118208,
+        "heapUsed": 293925920,
+        "heapTotal": 322646016,
+        "external": 19578431,
+        "arrayBuffers": 17320497
+      },
+      "workloadOsMaxRssBytes": 449118208,
+      "hookMs": 161509.891321,
+      "originalSuiteMs": 186366.36356300002,
+      "originalSuiteGc": {
+        "count": 11899,
+        "ms": 22287.137152079493,
+        "kinds": {
+          "1": 11717,
+          "4": 91,
+          "8": 91
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 163550.177853,
+          "rss": 354971648,
+          "heapTotal": 212180992,
+          "heapUsed": 65923432,
+          "external": 4129363,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 374804480,
+          "gc": {
+            "count": 10445,
+            "ms": 19455.509398069233,
+            "kinds": {
+              "1": 10281,
+              "4": 82,
+              "8": 82
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "profiler_stopped_object_live",
+          "ms": 163587.793413,
+          "rss": 359120896,
+          "heapTotal": 216616960,
+          "heapUsed": 71539992,
+          "external": 4129363,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 374804480,
+          "gc": {
+            "count": 10445,
+            "ms": 19455.509398069233,
+            "kinds": {
+              "1": 10281,
+              "4": 82,
+              "8": 82
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "profiler_disconnected_artifact_dropped",
+          "ms": 163597.212038,
+          "rss": 367116288,
+          "heapTotal": 218767360,
+          "heapUsed": 73714896,
+          "external": 4129363,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 374804480,
+          "gc": {
+            "count": 10446,
+            "ms": 19457.433516070247,
+            "kinds": {
+              "1": 10282,
+              "4": 82,
+              "8": 82
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 188406.65009500002,
+          "rss": 449118208,
+          "heapTotal": 322646016,
+          "heapUsed": 293925920,
+          "external": 19575678,
+          "arrayBuffers": 17317340,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 11899,
+            "ms": 22287.137152079493,
+            "kinds": {
+              "1": 11717,
+              "4": 91,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 208417.500325,
+          "rss": 433852416,
+          "heapTotal": 231034880,
+          "heapUsed": 42778880,
+          "external": 19575723,
+          "arrayBuffers": 25308,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 11928,
+            "ms": 22351.85725807771,
+            "kinds": {
+              "1": 11744,
+              "4": 92,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 208869.797377,
+          "rss": 433852416,
+          "heapTotal": 51990528,
+          "heapUsed": 42185968,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 11931,
+            "ms": 22402.40528307855,
+            "kinds": {
+              "1": 11744,
+              "4": 95,
+              "8": 92
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 209475.787003,
+          "rss": 433852416,
+          "heapTotal": 82923520,
+          "heapUsed": 42183832,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 12000,
+            "ms": 22473.170757059008,
+            "kinds": {
+              "1": 11808,
+              "4": 99,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 210149.62776200002,
+          "rss": 433852416,
+          "heapTotal": 82923520,
+          "heapUsed": 42201016,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 12032,
+            "ms": 22517.942995067686,
+            "kinds": {
+              "1": 11837,
+              "4": 102,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 210981.603891,
+          "rss": 433852416,
+          "heapTotal": 82923520,
+          "heapUsed": 42223480,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 12078,
+            "ms": 22577.550299070776,
+            "kinds": {
+              "1": 11880,
+              "4": 105,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 211418.79345700002,
+          "rss": 433852416,
+          "heapTotal": 82923520,
+          "heapUsed": 42224552,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 12081,
+            "ms": 22612.244015075266,
+            "kinds": {
+              "1": 11880,
+              "4": 108,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 216424.433529,
+          "rss": 433852416,
+          "heapTotal": 82923520,
+          "heapUsed": 42228216,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 449118208,
+          "gc": {
+            "count": 12081,
+            "ms": 22612.244015075266,
+            "kinds": {
+              "1": 11880,
+              "4": 108,
+              "8": 93
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 0,
+            "readersAlive": 0,
+            "schemas": 0,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": 39648,
+      "heapReleasedByContextClearBytes": -1072,
+      "finalIdleHeapGrowthBytes": 3664,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 12017,
+          "sha256": "5a27fcdf3f4ad25709a3165859444f7fbb4475cd2101c755fbab2f78bf63cdc3"
+        },
+        "profile.cpuprofile": {
+          "bytes": 2143864,
+          "sha256": "e089d3224381a52fa2143bbd9b14fa01e4dad86e0fca82cc8bf58dddf9b71771"
+        },
+        "report.json": {
+          "bytes": 19614,
+          "sha256": "6166e91e031a1aa9f3362fbd43f1b952eb716d30459ef8116c6f893e9ee78f0b"
+        },
+        "tests.json": {
+          "bytes": 4772,
+          "sha256": "69ce89c666ca56bb4c7d4417123cc806ecbd3eac890f6a58435299660a995c66"
+        }
+      }
+    },
+    {
+      "name": "B4cpu",
+      "variant": "B",
+      "cpuProfile": true,
+      "tests": {
+        "passed": 11,
+        "failed": 0,
+        "success": true
+      },
+      "trips": 2000,
+      "environment": {
+        "node": "v22.23.4",
+        "execArgv": [
+          "--experimental-import-meta-resolve",
+          "--require",
+          "/workspace/lieguo-zhengtu-origin/node_modules/vitest/suppress-warnings.cjs",
+          "--conditions",
+          "node",
+          "--conditions",
+          "development",
+          "--expose-gc"
+        ],
+        "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+        "cpuQuota": "200000 100000",
+        "memoryLimit": "8589934592",
+        "heapLimit": 2197815296
+      },
+      "boundaries": {
+        "validateFormalWorld": 5883,
+        "cloneWorldDraft": 5834
+      },
+      "observedWorkloadPeak": {
+        "rss": 476176384,
+        "heapUsed": 293212440,
+        "heapTotal": 327557120,
+        "external": 23894374,
+        "arrayBuffers": 21641073
+      },
+      "workloadOsMaxRssBytes": 476438528,
+      "hookMs": 142896.090455,
+      "originalSuiteMs": 168344.51522,
+      "originalSuiteGc": {
+        "count": 8466,
+        "ms": 19351.07179492712,
+        "kinds": {
+          "1": 8294,
+          "4": 86,
+          "8": 86
+        }
+      },
+      "points": [
+        {
+          "label": "hook_end",
+          "ms": 144582.017578,
+          "rss": 378347520,
+          "heapTotal": 245170176,
+          "heapUsed": 193322816,
+          "external": 2690045,
+          "arrayBuffers": 437547,
+          "maxRssBytes": 384696320,
+          "gc": {
+            "count": 7217,
+            "ms": 16476.48911396414,
+            "kinds": {
+              "1": 7063,
+              "4": 77,
+              "8": 77
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "profiler_stopped_object_live",
+          "ms": 144621.217434,
+          "rss": 385679360,
+          "heapTotal": 249126912,
+          "heapUsed": 200240184,
+          "external": 2690045,
+          "arrayBuffers": 437547,
+          "maxRssBytes": 389541888,
+          "gc": {
+            "count": 7217,
+            "ms": 16476.48911396414,
+            "kinds": {
+              "1": 7063,
+              "4": 77,
+              "8": 77
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "profiler_disconnected_artifact_dropped",
+          "ms": 144635.493108,
+          "rss": 374345728,
+          "heapTotal": 244998144,
+          "heapUsed": 187791232,
+          "external": 2690045,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 389541888,
+          "gc": {
+            "count": 7218,
+            "ms": 16479.534425962716,
+            "kinds": {
+              "1": 7064,
+              "4": 77,
+              "8": 77
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "suite_end",
+          "ms": 170030.442343,
+          "rss": 442429440,
+          "heapTotal": 311439360,
+          "heapUsed": 280065192,
+          "external": 19575678,
+          "arrayBuffers": 17317340,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8466,
+            "ms": 19351.07179492712,
+            "kinds": {
+              "1": 8294,
+              "4": 86,
+              "8": 86
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "idle_20s",
+          "ms": 190046.840029,
+          "rss": 141864960,
+          "heapTotal": 48852992,
+          "heapUsed": 45220560,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8494,
+            "ms": 19448.144437920302,
+            "kinds": {
+              "1": 8318,
+              "4": 88,
+              "8": 88
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "post_suite_gc",
+          "ms": 190508.90794,
+          "rss": 142782464,
+          "heapTotal": 48852992,
+          "heapUsed": 45167160,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8499,
+            "ms": 19506.819303922355,
+            "kinds": {
+              "1": 8320,
+              "4": 91,
+              "8": 88
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_10_gc",
+          "ms": 191265.568512,
+          "rss": 186691584,
+          "heapTotal": 80572416,
+          "heapUsed": 44293952,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8544,
+            "ms": 19615.444687914103,
+            "kinds": {
+              "1": 8360,
+              "4": 95,
+              "8": 89
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_30_gc",
+          "ms": 192140.774985,
+          "rss": 214740992,
+          "heapTotal": 80572416,
+          "heapUsed": 44308520,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8583,
+            "ms": 19741.706609923393,
+            "kinds": {
+              "1": 8394,
+              "4": 99,
+              "8": 90
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "context_churn_60_gc",
+          "ms": 193151.375861,
+          "rss": 215920640,
+          "heapTotal": 80834560,
+          "heapUsed": 44213200,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8638,
+            "ms": 19864.4675559178,
+            "kinds": {
+              "1": 8444,
+              "4": 103,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 2800,
+            "frozenSnapshots": 2800,
+            "stringUnits": 460910
+          }
+        },
+        {
+          "label": "cache_context_cleared_gc",
+          "ms": 193603.667059,
+          "rss": 215920640,
+          "heapTotal": 78475264,
+          "heapUsed": 42329120,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8641,
+            "ms": 19910.823802918196,
+            "kinds": {
+              "1": 8444,
+              "4": 106,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        },
+        {
+          "label": "final_idle",
+          "ms": 198604.285917,
+          "rss": 215920640,
+          "heapTotal": 78475264,
+          "heapUsed": 42333432,
+          "external": 2282813,
+          "arrayBuffers": 25263,
+          "maxRssBytes": 476438528,
+          "gc": {
+            "count": 8641,
+            "ms": 19910.823802918196,
+            "kinds": {
+              "1": 8444,
+              "4": 106,
+              "8": 91
+            }
+          },
+          "cache": {
+            "registeredWeakRefs": 1,
+            "readersAlive": 1,
+            "schemas": 1,
+            "entries": 0,
+            "frozenSnapshots": 0,
+            "stringUnits": 0
+          }
+        }
+      ],
+      "postGcHeapGrowth10To60Bytes": -80752,
+      "heapReleasedByContextClearBytes": 1884080,
+      "finalIdleHeapGrowthBytes": 4312,
+      "artifacts": {
+        "hook.json": {
+          "bytes": 12201,
+          "sha256": "abe6cd6a51a3561a669af3510529d9800e2c23248dcc144d0f3687fb7540237a"
+        },
+        "profile.cpuprofile": {
+          "bytes": 1943254,
+          "sha256": "c464cb551b657544fc26463f94ac2ef59496c7e7899dbde2a39150a634b6c688"
+        },
+        "report.json": {
+          "bytes": 19853,
+          "sha256": "f2f5397056084bdfa2e0a6c148f31ccfcb28f91e79641ac9a1b9157116e96e8f"
+        },
+        "tests.json": {
+          "bytes": 4771,
+          "sha256": "510587a63af9399f678b45a0f95e07f6c8201c566f174e5c86379ca56bdee2d2"
+        }
+      }
+    }
+  ]
+}
