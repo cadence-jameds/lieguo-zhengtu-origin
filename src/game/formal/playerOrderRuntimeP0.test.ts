@@ -11,7 +11,7 @@ import {playerOrderBase} from '../orderAdmission';
 import type {FormalWorld,FormalCommand,FormalOrder} from './model';
 
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),reportStatus:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),reportAction:vi.fn(),readCityIntel:vi.fn()}));
-vi.mock('../persistence',()=>storage);
+vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let messages:any[],port:{postMessage:(r:unknown)=>void;onmessage:((e:{data:unknown})=>void)|null},initial:FormalWorld,now=0;
 const send=(r:unknown)=>port.onmessage!({data:r});
 const until=async(test:()=>boolean)=>{await vi.waitFor(()=>expect(test()).toBe(true));};
@@ -65,9 +65,10 @@ it('import and visibility/load barriers preserve arrival order and old-campaign 
  const freshPayload={type:'city.rename' as const,cityId:fixtureIds.home,name:'切換後'},fresh:FormalOrder=order(switched,'fresh',freshPayload);
  send({type:'command',requestId:'fresh',order:fresh,playerBase:playerOrderBase(switched,freshPayload)});
  expect(ack('old-campaign')).toBeUndefined();finish(switched);await until(()=>done('fresh'));
- expect(ack('old-campaign').status).toBe('rejected');expect(ack('fresh').status).toBe('committed');
+ expect(ack('old-campaign').status).toBe('rejected');expect(ack('fresh').status).toBe('rejected');
  expect(messages.filter(r=>r.type==='requestDone').map(r=>r.requestId)).toEqual(['switch','old-campaign','away','resume','fresh']);
- expect(latest().campaignId).toBe(switched.campaignId);expect(latest().cities[0].name).toBe('切換後');
+ expect(latest().campaignId).toBe(switched.campaignId);expect(latest().cities[0].name).toBe(switched.cities[0].name);
+ click(latest(),'confirmed-fresh',freshPayload);await until(()=>done('confirmed-fresh'));expect(ack('confirmed-fresh').status).toBe('committed');expect(latest().cities[0].name).toBe('切換後');
 });
 
 it('an old unchanged construction catches up actual admission time after its revision was rebased',async()=>{
@@ -105,7 +106,7 @@ for(const kind of ['resources','queue'] as const)it(`current ${kind} conflict re
  expect(JSON.stringify(latest())).toBe(before);expect(storage.save).not.toHaveBeenCalled();
 });
 
-it('an actual failed IDB transaction produces only rejection, preserves authority, and deliberate same-ID resend commits once',async()=>{
+it('an actual failed IDB transaction preserves authority; terminal same-ID resend cannot execute and a confirmed new ID commits once',async()=>{
  const {FormalPersistence}=await vi.importActual<typeof import('../persistence')>('../persistence');let fail=false;
  const p=new FormalPersistence({suffix:'p0-worker-'+crypto.randomUUID(),fault:point=>{if(fail&&point==='authority-write')throw new Error('injected durable failure');}});
  try{
@@ -114,9 +115,10 @@ it('an actual failed IDB transaction produces only rejection, preserves authorit
   fail=true;const issued=click(w,'durable-build',payload);expect(messages[0].type).toBe('commandReceived');await until(()=>done('durable-build'));
   expect(ack('durable-build').status).toBe('rejected');expect(latest()).toEqual(w);expect({saves:await p.db.saves.toArray(),backups:await p.db.backups.toArray()}).toEqual(before);
   fail=false;messages=[];send({type:'command',requestId:'resend',order:issued,playerBase:playerOrderBase(w,payload)});await until(()=>done('resend'));
-  expect(ack('durable-build').status).toBe('committed');const committed=latest();expect(committed.cities[0].economy!.construction).toHaveLength(1);expect((await p.loadSave()).game).toEqual(committed);
-  messages=[];send({type:'command',requestId:'duplicate',order:issued,playerBase:playerOrderBase(w,payload)});await until(()=>done('duplicate'));
-  expect(ack('durable-build').status).toBe('duplicate');expect(latest()).toEqual(committed);expect(storage.save).toHaveBeenCalledTimes(2);
+  expect(ack('durable-build').status).toBe('rejected');expect(latest()).toEqual(w);
+  click(w,'confirmed-durable-build',payload);await until(()=>done('confirmed-durable-build'));expect(ack('confirmed-durable-build').status).toBe('committed');const committed=latest();expect(committed.cities[0].economy!.construction).toHaveLength(1);expect((await p.loadSave()).game).toEqual(committed);
+  messages=[];send({type:'command',requestId:'duplicate',order:order(w,'confirmed-durable-build',payload),playerBase:playerOrderBase(w,payload)});await until(()=>done('duplicate'));
+  expect(ack('confirmed-durable-build').status).toBe('committed');expect(latest()).toEqual(committed);expect(storage.save).toHaveBeenCalledTimes(2);
  }finally{await p.db.delete();}
 });
 
@@ -135,5 +137,5 @@ it('C3 a stale dispatch crosses unrelated catch-up exactly once and waits for du
  now=10000;const issued=click(w,'dispatch-after-clock',{type:'army.dispatch',cityId:fixtureIds.home,mission:'raid',target:{kind:'city',cityId:fixtureIds.foreign},units:{militia:10}});await until(()=>storage.save.mock.calls.length===1);
  expect(ack('dispatch-after-clock')).toBeUndefined();expect(messages.some(m=>m.type==='state')).toBe(false);expect(draft.cities[0].military!.units.militia).toBe(10);expect(draft.armies.filter(a=>'commandId' in a&&a.commandId===issued.commandId)).toHaveLength(1);
  finish(draft);await until(()=>done('dispatch-after-clock'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(latest().revision).toBe(w.revision+1);
- send({type:'command',requestId:'dispatch-repeat',order:issued,playerBase:playerOrderBase(w,issued.payload)});await until(()=>done('dispatch-repeat'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(messages.filter(m=>m.type==='commandAck').at(-1).ack.status).toBe('duplicate');expect(storage.save).toHaveBeenCalledTimes(1);expect(latest().cities[0].military!.units.militia).toBe(10);
+ send({type:'command',requestId:'dispatch-repeat',order:issued,playerBase:playerOrderBase(w,issued.payload)});await until(()=>done('dispatch-repeat'));expect(ack('dispatch-after-clock').status).toBe('committed');expect(messages.filter(m=>m.type==='commandAck').at(-1).ack.status).toBe('committed');expect(storage.save).toHaveBeenCalledTimes(1);expect(latest().cities[0].military!.units.militia).toBe(10);
 });

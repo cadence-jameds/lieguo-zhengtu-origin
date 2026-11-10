@@ -17,3 +17,14 @@ it('read-only absent inspection and archive never delete or create a database, i
  const names=await indexedDB.databases(),remove=vi.spyOn(indexedDB,'deleteDatabase');expect(await inspectCampaignStorage()).toBe('empty');await expect(exportCampaignArchive()).rejects.toThrow('沒有可匯出');expect(remove).not.toHaveBeenCalled();expect(await indexedDB.databases()).toEqual(names);
  const list=indexedDB.databases;(indexedDB as unknown as {databases:unknown}).databases=undefined;try{expect(await inspectCampaignStorage()).toBe('empty');expect(remove).not.toHaveBeenCalled();}finally{indexedDB.databases=list;}expect(await indexedDB.databases()).toEqual(names);
 });
+
+import {FormalPersistence} from './persistence';
+import {order} from './formal/testSupport';
+it('an acquired writer without a campaign remains empty; metadata is preserved read-only',async()=>{
+ const store=new FormalPersistence();stores.push(store.db);await store.acquireWriter();const before=await store.db.RuntimeMeta.toArray();expect(before).toHaveLength(1);
+ expect(await inspectCampaignStorage()).toBe('empty');expect(await store.db.RuntimeMeta.toArray()).toEqual(before);expect(await store.db.saves.count()).toBe(0);
+});
+it('reset retains terminal Inbox records as protected data, exports them unchanged and never treats player intent as metadata',async()=>{
+ const store=new FormalPersistence();stores.push(store.db);await store.acquireWriter();const w=await store.start(createFormalFixture()),o=order(w,'preserved-inbox',{type:'city.rename',cityId:w.cities[0].id,name:'保全原始操作'});await store.receiveCommand(o);await store.clearSavedGames();const before=await store.db.Inbox.toArray();expect(before[0].state).toBe('needs-confirmation');
+ expect(await inspectCampaignStorage()).toBe('stored');const archive=JSON.parse(await exportCampaignArchive());expect(archive.databases[FORMAL_DB_NAME].Inbox).toEqual(before);expect(await store.db.Inbox.toArray()).toEqual(before);
+});

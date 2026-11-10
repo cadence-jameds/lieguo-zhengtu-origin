@@ -1,3 +1,4 @@
+import {commandFingerprint,confirmationAck,terminalCommand,resultState,WriterConflict,RevisionConflict,COMMAND_TTL,MAX_COMMAND_ATTEMPTS,type InboxCommand,type CommandIntent,type WriterContext} from './durableCommands';
 import {worldPaused} from './formal/extinction';
 import {growthTaskSchema} from './formal/growthTaskSchema';
 import {reconcileGrowthAuthority} from './formal/growthTaskAuthority';
@@ -11,8 +12,8 @@ import Dexie,{type Table} from 'dexie';
 import {z} from 'zod';
 import {isMissionArmy,type CityIntel,type BattleReportPayload} from './formal/combatModel';
 import type {CampaignId} from './formal/ids';
-import type {CommandReceipt,FormalReport,FormalWorld} from './formal/model';
-import {receiptSchema} from './formal/schema';
+import type {CommandAck,FormalOrder,CommandReceipt,FormalReport,FormalWorld} from './formal/model';
+import {orderSchema,receiptSchema} from './formal/schema';
 import {canonicalJSON} from './formal/canonical';
 import {OLD_CAMPAIGN_MESSAGE,assertCampaignCompatibility,decodeSave,encodeSave,validateReportHistory,type FormalEnvelope} from './formal/saveCodec';
 import {FORMAL_DB_NAME,LEGACY_FORMAL_DB_NAME} from './formal/versions';
@@ -20,7 +21,9 @@ export {decodeSave,encodeSave} from './formal/saveCodec';
 /** Presentation timestamps are captured while the event's real clock anchor is known. */
 function stampBattle(p:BattleReportPayload,real:(at:number)=>number){p.realResolvedAt??=real(p.resolvedAt);if(p.intel)p.intel.observedRealAt??=real(p.intel.observedAt);}
 function stampPending(w:FormalWorld,real:(at:number)=>number){for(const a of w.armies)if(isMissionArmy(a)){if(a.pendingIntel)a.pendingIntel.observedRealAt??=real(a.pendingIntel.observedAt);if(a.pendingReport)stampBattle(a.pendingReport,real);}}
-export type FailurePoint='report-write'|'history-modified'|'backup-write'|'world-write'|'authority-write';
+export type FailurePoint='report-write'|'history-modified'|'backup-write'|'world-write'|'authority-write'|'inbox-write'|'result-write'|'writer-write'|'metadata-write'|'branch-write';
+type RuntimeMeta={id:'runtime';writerEpoch:number;branch:number;foregroundRevision?:number;campaignId?:CampaignId;playerFactionId?:FormalWorld['playerFactionId'];revision?:number};
+type CommandCommit={row:InboxCommand;ack:CommandAck};
 type WorldRow={id:'current';kind:'world';at:number;data:FormalEnvelope};
 type CampaignAuthority={campaignId:CampaignId;receipts:CommandReceipt[];growthTasks?:GrowthTaskState};
 type AuthorityRow={id:'authority';kind:'authority';revision:number;sequences:FormalWorld['sequences'];campaigns:CampaignAuthority[]};
@@ -38,11 +41,14 @@ export type ReportFilter='all'|'battle'|'diplomacy'|'chronicle';
 const reportMatches=(r:FormalReport,filter:ReportFilter)=>filter==='all'||(filter==='battle'?r.category==='battle'||r.category==='scout':filter==='diplomacy'?r.category==='diplomacy':r.category==='system'||r.category==='research');
 const authoritySchema=z.object({id:z.literal('authority'),kind:z.literal('authority'),revision:z.number().int().nonnegative().safe(),sequences:z.object({event:z.number().int().positive().safe(),report:z.number().int().positive().safe(),project:z.number().int().positive().safe()}).strict(),campaigns:z.array(z.object({campaignId:z.custom<CampaignId>(v=>typeof v==='string'&&/^campaign:[A-Za-z0-9_.-]{1,100}$/.test(v)),receipts:z.array(receiptSchema),growthTasks:growthTaskSchema.optional()}).strict())}).strict();
 export class FormalDatabase extends Dexie {
+ Inbox!:Table<InboxCommand,number>;RuntimeMeta!:Table<RuntimeMeta,string>;
  saves!:Table<WorldRow|AuthorityRow,string>;backups!:Table<RecoveryRow,number>;BattleReports!:Table<ReportRow,string>;
  constructor(suffix='',databaseName:string=FORMAL_DB_NAME){
   if(suffix&&!/^[A-Za-z0-9_.-]+$/.test(suffix))throw new Error('Invalid formal database suffix');
   super(databaseName+(suffix?'-'+suffix:''));
   this.version(1).stores({saves:'id',backups:'++id,at,campaignId',BattleReports:'key,campaignId,[campaignId+sequence],[campaignId+ownerFactionId+sequence]'});
+  // Additive v1→v2: existing worlds, authority, reports and Recovery are untouched.
+  this.version(2).stores({Inbox:'++sequence,&[campaignId+commandId],[branch+state],state',RuntimeMeta:'id'});
  }
 }
 function reconcileReceipts(target:FormalWorld,prior:readonly CommandReceipt[]):CommandReceipt[]{
@@ -59,6 +65,71 @@ export class FormalPersistence {
  readonly db:FormalDatabase;
  constructor(options:{suffix?:string;fault?:(point:FailurePoint)=>void}={}){this.db=new FormalDatabase(options.suffix);this.fault=options.fault;}
  private fault?: (point:FailurePoint)=>void;
+ private writerEpoch:number|undefined;
+ private async meta(){return await this.db.RuntimeMeta.get('runtime')??{id:'runtime' as const,writerEpoch:0,branch:0};}
+ private assertWriter(meta:RuntimeMeta){if(meta.writerEpoch!==(this.writerEpoch??0))throw new WriterConflict();}
+ /** Called only by the Worker created under the page's exclusive Web Lock. */
+ async acquireWriter():Promise<WriterContext>{
+  const meta=await this.db.transaction('rw',this.db.RuntimeMeta,this.db.saves,async()=>{const m=await this.meta();if(m.campaignId===undefined){const current=await this.db.saves.get('current');const snapshot=current?.kind==='world'?current.data?.snapshot:undefined;if(snapshot&&typeof snapshot.campaignId==='string'&&typeof snapshot.playerFactionId==='string'&&Number.isSafeInteger(snapshot.revision)&&snapshot.revision>=0){m.campaignId=snapshot.campaignId;m.playerFactionId=snapshot.playerFactionId;m.revision=snapshot.revision;}}m.writerEpoch++;await this.db.RuntimeMeta.put(m);this.fault?.('writer-write');return m;});
+  this.writerEpoch=meta.writerEpoch;return meta;
+ }
+ async writerContext():Promise<WriterContext>{const m=await this.meta();this.assertWriter(m);return m;}
+ async receiveCommand(order:FormalOrder,intent:CommandIntent={},branch?:number,now=Date.now()):Promise<InboxCommand>{
+  // Strict parsing occurs before T1; never store mutable caller-owned payloads.
+  order=orderSchema.parse(order);
+  return this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,async()=>{
+   const meta=await this.meta();this.assertWriter(meta);
+   const fingerprint=commandFingerprint(order),old=await this.db.Inbox.where('[campaignId+commandId]').equals([order.campaignId,order.commandId]).first();
+   if(old){if(old.issuerId!==order.issuerId||old.fingerprint!==fingerprint)throw new Error('CommandId 已用於不同命令。');return old;}
+   if(meta.campaignId!==order.campaignId||meta.playerFactionId!==order.issuerId)throw new Error('命令不屬於目前玩家戰役。');
+   const row:InboxCommand={...structuredClone(intent),campaignId:order.campaignId,commandId:order.commandId,issuerId:order.issuerId,order:structuredClone(order),fingerprint,originalRevision:order.expectedRevision,branch:branch??meta.branch,writerEpoch:meta.writerEpoch,state:'pending',createdAt:now,deadline:now+COMMAND_TTL,attempts:0,nextAttemptAt:0};
+   if(row.branch!==meta.branch||order.expectedRevision<(meta.foregroundRevision??0)){row.state='needs-confirmation';row.ack=confirmationAck(row,meta.revision??0,order.payload.type==='governance.set'?undefined:'戰役分支或玩家操作已變更，請重新確認原始操作。');}
+   row.sequence=await this.db.Inbox.add(row);this.fault?.('inbox-write');return row;
+  });
+ }
+ async commandStatus(campaignId:FormalOrder['campaignId'],commandId:FormalOrder['commandId']){return this.db.Inbox.where('[campaignId+commandId]').equals([campaignId,commandId]).first();}
+ async pendingCommands(){return this.db.Inbox.where('state').anyOf('pending','retryable').sortBy('sequence');}
+ async commandPage(before=Number.MAX_SAFE_INTEGER){return this.db.Inbox.where('sequence').below(before).reverse().limit(100).toArray();}
+ private async checkCommand(row:InboxCommand,meta:RuntimeMeta){
+  this.assertWriter(meta);const stored=await this.db.Inbox.get(row.sequence!);
+  if(!stored||stored.fingerprint!==row.fingerprint||stored.issuerId!==row.issuerId)throw new Error('找不到一致的持久命令。');
+  if(stored.branch!==meta.branch)throw new WriterConflict();
+  return stored;
+ }
+ private async writeResult(command:CommandCommit,meta:RuntimeMeta){
+  const stored=await this.checkCommand(command.row,meta);
+  if(terminalCommand(stored))throw new Error('命令已具有正式結果，請查詢原結果。');
+  if(command.ack.commandId!==stored.commandId||command.ack.revision!==(meta.revision??0))throw new Error('正式結果身分或 revision 不一致。');
+  await this.db.Inbox.put({...stored,state:resultState(command.ack),ack:structuredClone(command.ack),lastError:undefined});this.fault?.('result-write');
+ }
+ async finishCommand(row:InboxCommand,ack:CommandAck,expectedRevision:number){
+  return this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,this.db.saves,async()=>{
+   const meta=await this.meta();this.assertWriter(meta);const authority=await this.authority();if(authority.revision!==expectedRevision)throw new RevisionConflict();
+   await this.writeResult({row,ack},meta);return ack;
+  });
+ }
+ async noteCommandFailure(row:InboxCommand,error:string,retryable:boolean,now=Date.now()){
+  return this.db.transaction('rw',this.db.RuntimeMeta,this.db.Inbox,this.db.saves,async()=>{
+   const meta=await this.meta(),stored=await this.checkCommand(row,meta);if(terminalCommand(stored))return stored;
+   stored.attempts++;stored.lastError=error;
+   if(retryable&&stored.attempts<MAX_COMMAND_ATTEMPTS&&now<stored.deadline){stored.state='retryable';stored.nextAttemptAt=now+250*2**(stored.attempts-1);}
+   else{stored.state='needs-confirmation';stored.ack=confirmationAck(stored,(await this.authority()).revision,'命令尚未提交：'+error+'；請重新載入並確認原始操作。');}
+   await this.db.Inbox.put(stored);return stored;
+  });
+ }
+ private async switchInbox(meta:RuntimeMeta,world?:FormalWorld){
+  meta.branch++;meta.foregroundRevision=world?.revision??0;if(!world){delete meta.campaignId;delete meta.playerFactionId;meta.revision=0;}await this.db.RuntimeMeta.put(meta);
+  // Branch changes are infrequent; no full Inbox scan on ordinary checkpoints.
+  const receipts=new Map(world?.commandReceipts.map(r=>[r.commandId,r] as const)??[]);
+  await this.db.Inbox.toCollection().modify(row=>{
+   if(!terminalCommand(row)){row.state='needs-confirmation';row.ack=confirmationAck(row,world?.revision??0,'戰役分支已切換，舊命令未執行，請重新確認。');}
+   if(world&&row.campaignId===world.campaignId&&row.state==='committed'){
+    const r=receipts.get(row.commandId);
+    if(r?.disposition==='rolled-back'){row.state='rolled-back';row.ack={commandId:row.commandId,status:'rolled-back',revision:world.revision,originalRevision:r.committedRevision,reason:'此命令已由回復點撤銷。'};}
+   }
+  });this.fault?.('branch-write');
+ }
+
  private async authority():Promise<AuthorityRow>{
   const row=await this.db.saves.get('authority');
   if(!row)return{id:'authority',kind:'authority',revision:0,sequences:{event:1,report:1,project:1},campaigns:[]};
@@ -67,14 +138,15 @@ export class FormalPersistence {
   for(const c of a.campaigns)if(new Set(c.receipts.map(r=>r.commandId)).size!==c.receipts.length||c.receipts.some(r=>r.committedRevision>a.revision))throw new Error('Invalid durable command authority');
   return a;
  }
- private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false):Promise<FormalWorld>{
+ private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false,command?:CommandCommit):Promise<FormalWorld>{
   // Final encodeSave validates the entire stamped candidate before any writes.
   // Avoid validating the same 2.8MB world twice in this transaction.
   validateReportHistory(input,reportWrites);
   // No memory mutation; caller may switch its displayed world only after this resolves.
-  return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,async()=>{
+  return this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,this.db.Inbox,this.db.RuntimeMeta,async()=>{
+   const meta=await this.meta();this.assertWriter(meta);
    const authority=await this.authority(),current=await this.db.saves.get('current');
-   if(expectedRevision!==undefined&&authority.revision!==expectedRevision)throw new Error('存檔 revision 衝突，命令未提交。');
+   if(expectedRevision!==undefined&&authority.revision!==expectedRevision)throw new RevisionConflict();
    // Ordinary saves only stamp pending army reports and sanitize shared AI intel.
    // Copy those mutable branches now; encodeSave still strictly validates and
    // deep-copies the entire final candidate before checksum or any DB writes.
@@ -128,10 +200,20 @@ export class FormalPersistence {
    authority.campaigns=authority.campaigns.filter(c=>c.campaignId!==w.campaignId);
    authority.campaigns.push({campaignId:w.campaignId,receipts:structuredClone(w.commandReceipts),...(w.growthTasks?{growthTasks:structuredClone(w.growthTasks)}:{})});
    await this.db.saves.put(authority);this.fault?.('authority-write');
+   if(command){
+    if(command.ack.status==='committed'||command.ack.status==='duplicate'){
+     const receipt=w.commandReceipts.find(r=>r.commandId===command.row.commandId);
+     if(!receipt||receipt.issuerId!==command.row.issuerId||receipt.fingerprint!==command.row.fingerprint||receipt.disposition!=='applied')throw new Error('正式結果與世界命令收據不一致。');
+     meta.foregroundRevision=w.revision;
+    }
+   }
+   meta.campaignId=w.campaignId;meta.playerFactionId=w.playerFactionId;meta.revision=w.revision;await this.db.RuntimeMeta.put(meta);this.fault?.('metadata-write');
+   if(command)await this.writeResult(command,meta);
+   if(mode!=='save')await this.switchInbox(meta,w);
    return w;
   });
  }
- async save(world:FormalWorld,reports:readonly FormalReport[]=[],expectedRevision?:number,savedAt?:number){return this.commit(world,reports,'save',expectedRevision,savedAt);}
+ async save(world:FormalWorld,reports:readonly FormalReport[]=[],expectedRevision?:number,savedAt?:number,command?:CommandCommit){return this.commit(world,reports,'save',expectedRevision,savedAt,false,command);}
  async start(world:FormalWorld){return this.commit(world,[],'start');}
  private async loadAnchored():Promise<{game:FormalWorld|null;recovered:boolean;savedAt?:number}>{
   const [row,authority]=await this.db.transaction('r',this.db.saves,async()=>[await this.db.saves.get('current'),await this.authority()] as const);if(!row){if(await hasLegacyCampaign())throw new Error(OLD_CAMPAIGN_MESSAGE);return{game:null,recovered:false};}
@@ -221,7 +303,8 @@ export class FormalPersistence {
  }
  async reportAction(world:FormalWorld,action:'read'|'clear',ids?:string[],filter:ReportFilter='all'){
   if(!['read','clear'].includes(action)||!['all','battle','diplomacy','chronicle'].includes(filter))throw new Error('無效的戰報操作。');
-  return this.db.transaction('rw',this.db.BattleReports,async()=>{
+  return this.db.transaction('rw',this.db.BattleReports,this.db.RuntimeMeta,async()=>{
+   this.assertWriter(await this.meta());
    const query=this.reportQuery(world).filter(r=>reportMatches(r,filter)&&(!ids||ids.includes(r.id)));
    if(action==='clear')await query.delete();else await query.modify({read:true});
    return this.reportStatus(world);
@@ -243,7 +326,7 @@ export class FormalPersistence {
   return result;
  }
  /** Explicit formal reset only. Does not enumerate, access, or delete any DEMO DB. */
- async clearSavedGames(){await this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,async()=>{await this.db.saves.clear();await this.db.backups.clear();await this.db.BattleReports.clear();});}
+ async clearSavedGames(){await this.db.transaction('rw',this.db.saves,this.db.backups,this.db.BattleReports,this.db.RuntimeMeta,this.db.Inbox,async()=>{const meta=await this.meta();this.assertWriter(meta);await this.switchInbox(meta);await this.db.saves.clear();await this.db.backups.clear();await this.db.BattleReports.clear();});}
 }
 let store:FormalPersistence|undefined;
 const active=()=>store??=new FormalPersistence();
@@ -273,3 +356,12 @@ export async function exportLegacyCampaign(){
  const old=new Dexie(LEGACY_FORMAL_DB_NAME);
  try{await old.open();const rows=(name:string)=>old.tables.some(t=>t.name===name)?old.table(name).toArray():Promise.resolve([]);const archive=await old.transaction('r',old.tables,async()=>({format:'lieguo-historical-archive-v1',sourceDatabase:LEGACY_FORMAL_DB_NAME,saves:await rows('saves'),backups:await rows('backups'),reports:await rows('BattleReports')}));const text=JSON.stringify(archive);if(new TextEncoder().encode(text).length>100*1024*1024)throw new Error('舊備份超過100 MiB，原資料保留。');return text;}finally{old.close();}
 }
+
+export const acquireWriter=()=>active().acquireWriter();
+export const writerContext=()=>active().writerContext();
+export const receiveCommand=(...args:Parameters<FormalPersistence['receiveCommand']>)=>active().receiveCommand(...args);
+export const commandStatus=(...args:Parameters<FormalPersistence['commandStatus']>)=>active().commandStatus(...args);
+export const pendingCommands=()=>active().pendingCommands();
+export const commandPage=(before?:number)=>active().commandPage(before);
+export const finishCommand=(...args:Parameters<FormalPersistence['finishCommand']>)=>active().finishCommand(...args);
+export const noteCommandFailure=(...args:Parameters<FormalPersistence['noteCommandFailure']>)=>active().noteCommandFailure(...args);

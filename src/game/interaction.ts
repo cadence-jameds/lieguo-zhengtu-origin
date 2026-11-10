@@ -11,12 +11,13 @@ export class PendingRequests {
 /** A rejection is terminal. Only the current click may update its notice;
  * delayed receipts and acknowledgements cannot replace a newer result. */
 export class PendingCommand {
- private id:string|null=null;
- track(id:string){this.id=id;}
- matches(id:string){return this.id===id;}
- acknowledge(ack:CommandAck){if(!this.matches(ack.commandId))return false;this.id=null;return true;}
- clear(){this.id=null;}
- get busy(){return this.id!==null;}
+ private ids=new Set<string>();private latest:string|null=null;
+ track(id:string){this.ids.add(id);this.latest=id;}
+ matches(id:string){return this.latest===id&&this.ids.has(id);}
+ acknowledge(ack:CommandAck){const latest=this.matches(ack.commandId);this.ids.delete(ack.commandId);return latest;}
+ finish(id:string){this.ids.delete(id);}
+ clear(){this.ids.clear();this.latest=null;}
+ get busy(){return this.ids.size>0;}
 }
 /** Reuse unchanged graph branches so presentation caches survive checkpoints. */
 export function reconcileWorld(prior:FormalWorld|null,next:FormalWorld|null):FormalWorld|null{

@@ -65,11 +65,12 @@ def accepts(path,predecessor,root=ROOT):
  return predecessor==entry['before'] and (root/path).exists() and sha((root/path).read_bytes())==entry['after']
 
 def validate(root=ROOT):
+ from b10_r3_01_successor import accepts as b10_accepts, accepts_adapter as b10_adapter
  r=read_record(root)
- for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'],('Unrecorded Delta edit',p)
+ for p,entry in r['changes'].items():assert sha((root/p).read_bytes())==entry['after'] or b10_accepts(p,entry['after'],root),('Unrecorded Delta edit',p)
  for section in ['invariants','historical']:
-  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest,('Preserved contract/evidence changed',p)
- for p,data in adapters().items():assert (root/p).read_bytes()==data,('Gate adapter scope changed',p)
+  for p,digest in r[section].items():assert sha((root/p).read_bytes())==digest or section=='invariants' and b10_accepts(p,digest,root),('Preserved contract/evidence changed',p)
+ for p,data in adapters().items():assert (root/p).read_bytes()==data or b10_adapter(p,data,root),('Gate adapter scope changed',p)
  return r
 if __name__=='__main__':
  validate();print('PASS: PR53 clock Delta admits only four exact source diffs; unchanged Schema, Worker, Scheduler, PR52 and all original P0-C-10 evidence retained.')

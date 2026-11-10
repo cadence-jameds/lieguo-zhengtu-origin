@@ -5,7 +5,7 @@ import {order} from './developmentTestSupport';
 import {isolatedAutonomyFixture} from './autonomyTestSupport';
 import {rebirthCandidates} from './extinction';
 const storage=vi.hoisted(()=>({hasLegacyCampaign:vi.fn().mockResolvedValue(false),exportLegacyCampaign:vi.fn(),loadWithOffline:vi.fn(),save:vi.fn(),startCampaign:vi.fn(),restore:vi.fn(),importSave:vi.fn(),backupList:vi.fn(),clearSavedGames:vi.fn(),exportStoredSave:vi.fn(),readReportPage:vi.fn(),readCityIntel:vi.fn(),reportStatus:vi.fn(),reportAction:vi.fn()}));
-vi.mock('../persistence',()=>storage);
+vi.mock('../persistence',async()=>{const {durableWorkerStorage}=await import('./durableWorkerTestSupport');return durableWorkerStorage(storage);});
 let world:FormalWorld,messages:Record<string,any>[],port:{onmessage:((e:{data:unknown})=>void)|null;postMessage:(v:Record<string,any>)=>void},now=0;
 const send=(data:unknown)=>port.onmessage!({data}),until=async(fn:()=>boolean)=>vi.waitFor(()=>expect(fn()).toBe(true));
 const state=()=>messages.filter(m=>m.type==='state').at(-1)!;
