@@ -1,0 +1,1005 @@
+{
+  "baselineHead": "7264472e7cfc30ec72d64e24198d3d8d5d23adeb",
+  "classification": "performance / local Gate timeout, not a confirmed B9 gameplay P0",
+  "profiles": {
+    "before": {
+      "wallMs": 148428.820217,
+      "cpu": {
+        "user": 168226548,
+        "system": 5835961
+      },
+      "gcCount": 10398,
+      "gcMs": 16484.420971022453,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 93051.01014799978,
+          "maxMs": 61.93551199999638
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 42131.75008599947,
+          "maxMs": 45.77348500001244
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 3.351245999748926,
+          "maxMs": 0.10703099999955157
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 69842.07969199994,
+          "maxMs": 79.14723800000502
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 34.09450300000003,
+          "maxMs": 34.09450300000003
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 5412.304032000309,
+          "maxMs": 10.940576000000874
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 75440.41800500004,
+          "maxMs": 83.50643600001058
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 9313.341629999999,
+          "maxMs": 9313.341629999999
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 9367.039454,
+          "maxMs": 9367.039454
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 9378.612710000001,
+          "maxMs": 9378.612710000001
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 868.4686080000265,
+          "maxMs": 37.848405999990064
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 86.3976730000013,
+          "maxMs": 86.3976730000013
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 86.52436400000079,
+          "maxMs": 86.52436400000079
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 2.9206729999987147,
+          "maxMs": 2.9206729999987147
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 59.76491799999894,
+          "maxMs": 59.76491799999894
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 136465.21786199967,
+          "maxMs": 137.64339300000574
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1225.9207739999983,
+          "maxMs": 56.664956000007805
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 147271.697541,
+          "maxMs": 147271.697541
+        }
+      },
+      "memoryAtEnd": {
+        "rss": 365719552,
+        "heapTotal": 229474304,
+        "heapUsed": 61445464,
+        "external": 2564147,
+        "arrayBuffers": 319955
+      },
+      "trips": 2000,
+      "node": "v22.23.4",
+      "quota": "200000 100000",
+      "memoryLimit": "8589934592",
+      "heapLimit": 2197815296
+    },
+    "after": {
+      "wallMs": 185479.802665,
+      "cpu": {
+        "user": 204519869,
+        "system": 6816612
+      },
+      "gcCount": 8978,
+      "gcMs": 15496.389744987711,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 129820.58096499984,
+          "maxMs": 78.24452400000882
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 42361.93989299999,
+          "maxMs": 29.961986000009347
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 3.4245399995681964,
+          "maxMs": 0.1637470000000576
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 87931.604849,
+          "maxMs": 94.04906000001938
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 31.39491800000019,
+          "maxMs": 31.39491800000019
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 5426.158747999633,
+          "maxMs": 13.498932999995304
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 94559.12735200062,
+          "maxMs": 92.06280899999547
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 12346.382926999999,
+          "maxMs": 12346.382926999999
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 12411.237423,
+          "maxMs": 12411.237423
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 12427.949380999999,
+          "maxMs": 12427.949380999999
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 834.4106999999458,
+          "maxMs": 37.5441009999995
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 119.0219219999999,
+          "maxMs": 119.0219219999999
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 119.23607400000037,
+          "maxMs": 119.23607400000037
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 3.421030999999857,
+          "maxMs": 3.421030999999857
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 60.488352000000305,
+          "maxMs": 60.488352000000305
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 170610.2415839999,
+          "maxMs": 174.6237759999931
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1169.5554509999874,
+          "maxMs": 57.23454099998344
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 184441.252513,
+          "maxMs": 184441.252513
+        }
+      },
+      "memoryAtEnd": {
+        "rss": 374353920,
+        "heapTotal": 231673856,
+        "heapUsed": 70754168,
+        "external": 2564147,
+        "arrayBuffers": 319955
+      },
+      "trips": 2000,
+      "node": "v22.23.4",
+      "quota": "200000 100000",
+      "memoryLimit": "8589934592",
+      "heapLimit": 2197815296
+    },
+    "final": {
+      "wallMs": 150120.49736,
+      "cpu": {
+        "user": 170070920,
+        "system": 6336404
+      },
+      "gcCount": 8979,
+      "gcMs": 15863.389960957691,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 93535.24446399976,
+          "maxMs": 66.22943199999281
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 42982.68052099986,
+          "maxMs": 27.697291000004043
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 3.7093539998527376,
+          "maxMs": 0.15813899999920977
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 70515.05493300015,
+          "maxMs": 82.20500899999752
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 35.38357599999995,
+          "maxMs": 35.38357599999995
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 5493.7123910001665,
+          "maxMs": 13.224646000002394
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 76477.02800500026,
+          "maxMs": 89.34622999999556
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 9630.46912,
+          "maxMs": 9630.46912
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 9685.647613000001,
+          "maxMs": 9685.647613000001
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 9695.241403,
+          "maxMs": 9695.241403
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 826.9431390000336,
+          "maxMs": 38.50246999999945
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 93.40233100000114,
+          "maxMs": 93.40233100000114
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 93.52338299999974,
+          "maxMs": 93.52338299999974
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 3.6690460000008898,
+          "maxMs": 3.6690460000008898
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 63.1022780000003,
+          "maxMs": 63.1022780000003
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 137846.9157199995,
+          "maxMs": 150.8569360000256
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1169.1498120000451,
+          "maxMs": 50.6221649999934
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 148927.933349,
+          "maxMs": 148927.933349
+        }
+      },
+      "memoryAtEnd": {
+        "rss": 373563392,
+        "heapTotal": 242184192,
+        "heapUsed": 146312120,
+        "external": 2564147,
+        "arrayBuffers": 319955
+      },
+      "trips": 2000,
+      "node": "v22.23.4",
+      "quota": "200000 100000",
+      "memoryLimit": "8589934592",
+      "heapLimit": 2197815296
+    },
+    "numeric": {
+      "wallMs": 161595.15169199998,
+      "cpu": {
+        "user": 182292910,
+        "system": 6425091
+      },
+      "gcCount": 11286,
+      "gcMs": 18716.55064104125,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 103578.72640200016,
+          "maxMs": 89.7047780000139
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 43758.10910099998,
+          "maxMs": 42.621813000005204
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 3.720297000271785,
+          "maxMs": 0.08219499999904656
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 76105.00416500027,
+          "maxMs": 92.15982599998824
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 36.23420799999985,
+          "maxMs": 36.23420799999985
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 5822.237675999922,
+          "maxMs": 12.781354000006104
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 82261.0521029999,
+          "maxMs": 112.89971699999296
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 10180.58063,
+          "maxMs": 10180.58063
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 10239.192187,
+          "maxMs": 10239.192187
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 10250.097834,
+          "maxMs": 10250.097834
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 922.7540539999409,
+          "maxMs": 41.990657999995165
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 104.83842700000059,
+          "maxMs": 104.83842700000059
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 104.9610730000004,
+          "maxMs": 104.9610730000004
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 2.894345999999132,
+          "maxMs": 2.894345999999132
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 55.286199999998644,
+          "maxMs": 55.286199999998644
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 148709.517006,
+          "maxMs": 162.77543300000252
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1293.2168869999532,
+          "maxMs": 64.81680899998173
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 160479.63965,
+          "maxMs": 160479.63965
+        }
+      },
+      "memoryAtEnd": {
+        "rss": 365613056,
+        "heapTotal": 236060672,
+        "heapUsed": 124780880,
+        "external": 3209094,
+        "arrayBuffers": 25263
+      },
+      "trips": 2000,
+      "node": "v22.23.4",
+      "quota": "200000 100000",
+      "memoryLimit": "8589934592",
+      "heapLimit": 2197815296
+    },
+    "syntax": {
+      "wallMs": 155264.86496600002,
+      "cpu": {
+        "user": 178807144,
+        "system": 6072474
+      },
+      "gcCount": 7730,
+      "gcMs": 19844.565815007314,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 88796.66651300022,
+          "maxMs": 69.3618650000135
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 46579.85210700038,
+          "maxMs": 38.03285199998936
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 6.832086000215213,
+          "maxMs": 2.875256000000263
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 71963.20486200022,
+          "maxMs": 85.42489700000442
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 39.006327000000056,
+          "maxMs": 39.006327000000056
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 6420.6307959998885,
+          "maxMs": 19.876771000010194
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 79933.50742000017,
+          "maxMs": 93.37068900000304
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 8512.919052,
+          "maxMs": 8512.919052
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 8570.475426,
+          "maxMs": 8570.475426
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 8582.248039999999,
+          "maxMs": 8582.248039999999
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 928.2639549999676,
+          "maxMs": 53.18003499999759
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 87.24331499999971,
+          "maxMs": 87.24331499999971
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 87.41860999999881,
+          "maxMs": 87.41860999999881
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 2.7561359999999695,
+          "maxMs": 2.7561359999999695
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 56.5194620000002,
+          "maxMs": 56.5194620000002
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 143962.4041609998,
+          "maxMs": 150.0306719999935
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1288.943109000018,
+          "maxMs": 66.59020299999975
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 154030.27832500002,
+          "maxMs": 154030.27832500002
+        }
+      },
+      "memoryAtEnd": {
+        "rss": 433500160,
+        "heapTotal": 289943552,
+        "heapUsed": 132849624,
+        "external": 3780073,
+        "arrayBuffers": 25263
+      },
+      "trips": 2000,
+      "node": "v22.23.4",
+      "quota": "200000 100000",
+      "memoryLimit": "8589934592",
+      "heapLimit": 2197815296
+    },
+    "scoped": {
+      "wallMs": 137146.771064,
+      "cpu": {
+        "user": 158204736,
+        "system": 5633861
+      },
+      "gcCount": 7567,
+      "gcMs": 15877.122481069528,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 78830.69293799995,
+          "maxMs": 55.8771459999989
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 43954.339899,
+          "maxMs": 28.380655999993905
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 3.448966999816548,
+          "maxMs": 0.06303599999955622
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 63523.97585299966,
+          "maxMs": 80.36968100001104
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 32.75471500000003,
+          "maxMs": 32.75471500000003
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 5859.7879559999365,
+          "maxMs": 12.793808999995235
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 70417.89050000008,
+          "maxMs": 78.53454299998702
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 7675.308738,
+          "maxMs": 7675.308738
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 7724.762855999999,
+          "maxMs": 7724.762855999999
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 7735.267445,
+          "maxMs": 7735.267445
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 812.1819899999937,
+          "maxMs": 42.99179500000173
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 80.54567099999986,
+          "maxMs": 80.54567099999986
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 80.66340900000068,
+          "maxMs": 80.66340900000068
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 4.266890000000785,
+          "maxMs": 4.266890000000785
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 66.54464100000041,
+          "maxMs": 66.54464100000041
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 126816.728446,
+          "maxMs": 142.5493800000113
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1185.2901320000237,
+          "maxMs": 60.11111600000004
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 135935.517985,
+          "maxMs": 135935.517985
+        }
+      },
+      "memoryAtEnd": {
+        "rss": 886689792,
+        "heapTotal": 245833728,
+        "heapUsed": 93095240,
+        "external": 3780073,
+        "arrayBuffers": 25263
+      },
+      "trips": 2000,
+      "node": "v22.23.4",
+      "quota": "200000 100000",
+      "memoryLimit": "8589934592",
+      "heapLimit": 2197815296
+    }
+  },
+  "unchangedWorkload": [
+    {
+      "path": "src/game/formal/breakthroughB92.test.ts",
+      "sha256": "d85bffcc8523c02f0bba86b2add8cda0170015fa929ce8cbc73fa03390c6dc09"
+    },
+    {
+      "path": "src/game/formal/breakthroughTestSupport.ts",
+      "sha256": "b92f028aeb849964a118b615eae1eaa16895dd5aa4ebf497f0967466aa524868"
+    },
+    {
+      "path": "scripts/verify-in-isolation.mjs",
+      "sha256": "93fb62296bc4c9d2732bd4753377e4a19602792f9f47eb3a3407b49bd4ce5a01"
+    },
+    {
+      "path": "src/game/formal/replayP0.test.ts",
+      "sha256": "326e66dd12d19a7b2e74020678f9008601eb170c92f6c483976e8b2e39845d85"
+    }
+  ],
+  "status": "GATE HOLD: sole local full 2487 PASS / 1 FAIL / 1 SKIP; B9 hook and 11 B9 tests pass; public validation observer regression fixed with 68 directed PASS; no second local full",
+  "profileSource": "441a93ac383969dd02d3cf78c39afdd5172e8006",
+  "finalSource": "8375d5d5f281162bd2f973e0bca0a0a89171be55",
+  "finalPinnedHead": "b88a996cf849538f0bd6bcde951b1488e559869a",
+  "fullEnvironment": {
+    "head": "81ea5b5f685b58f946ce121f017e48ea9e210df8",
+    "startedAt": "2026-11-10T06:36:45.604Z",
+    "fullAttemptsThisBatch": 1,
+    "node": "v22.23.4",
+    "heapLimit": 2197815296,
+    "NODE_OPTIONS": null,
+    "workers": 2,
+    "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+    "cpuQuota": "200000 100000",
+    "memoryLimit": "8589934592",
+    "cpuStat": "usage_usec 1659707690\nuser_usec 1583338536\nsystem_usec 76369154\nnice_usec 0\nnr_periods 21182\nnr_throttled 478\nthrottled_usec 17528680\nnr_bursts 0\nburst_usec 0\n",
+    "memoryEvents": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "memoryCurrent": "808497152",
+    "loadavg": [
+      0.37,
+      0.53,
+      0.49
+    ]
+  },
+  "full": {
+    "success": false,
+    "numPassedTests": 2487,
+    "numFailedTests": 1,
+    "numPendingTests": 1,
+    "failures": [
+      {
+        "file": "/tmp/lieguo-verification-Rn20sC/src/game/formal/replayP0.test.ts",
+        "test": "private AI admissions validate once at the complete replay boundary",
+        "messages": [
+          "AssertionError: expected \"validateFormalWorld\" to be called 1 times, but got 0 times\n    at /tmp/lieguo-verification-Rn20sC/src/game/formal/replayP0.test.ts:166:103\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:1628:35\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:2783:26\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3319:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3314:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3299:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3257:10)\n    at file:///workspace/lieguo-zhengtu-origin/node_modules/vitest/dist/chunks/run.CQOUYP-x.js:3876:64"
+        ]
+      }
+    ],
+    "B9": [
+      {
+        "file": "/tmp/lieguo-verification-Rn20sC/src/game/formal/breakthroughB92.test.ts",
+        "status": "passed",
+        "passed": 11,
+        "note": "JSON assertion timing excludes beforeAll; do not treat it as initialization time."
+      }
+    ],
+    "selectedDurations": [
+      {
+        "name": "150000 cumulative valid receipts compact, roundtrip and recover with exact recent outcomes and retired replay protection",
+        "ms": 5353.780615,
+        "status": "passed"
+      },
+      {
+        "name": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "ms": 7825.321932000006,
+        "status": "passed"
+      }
+    ]
+  },
+  "targetedFinal": {
+    "numPassedTests": 68,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "success": true
+  },
+  "method": {
+    "profileSamplesEach": 1,
+    "node": "22.23.4",
+    "poolLimit": 2,
+    "profileActiveFiles": 1,
+    "quota": "200000 100000",
+    "memoryLimitBytes": 8589934592,
+    "heapBytes": 2197815296,
+    "NODE_OPTIONS": null,
+    "note": "Same fresh-environment before/after; previous 213/174s and previous local full failures are historical, not identical-host measurements. No claim of Chromium/Android or final-source reprofile."
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/b9-shipment/adapter-tests.ts",
+      "bytes": 3089,
+      "sha256": "c916376501221033246a3d4483515aa17ba5723324742782a49e14fa5d7a58c2"
+    },
+    {
+      "path": "artifacts/b9-shipment/after/profile.cpuprofile",
+      "bytes": 2356909,
+      "sha256": "6a0653b547adf2dff1e74a32b457dba23f495de010b8225ee42066de790e8387"
+    },
+    {
+      "path": "artifacts/b9-shipment/after/progress.json",
+      "bytes": 734393,
+      "sha256": "7c6c1205348ea7bc284b00d5a2cb95f40def8e1a0181a8f3d48e3947e82774d6"
+    },
+    {
+      "path": "artifacts/b9-shipment/after/summary.json",
+      "bytes": 817278,
+      "sha256": "60d71e13fc05c29c6d68d6dde1dfd4c97e02450d61340e3e705474dfdd1eafb7"
+    },
+    {
+      "path": "artifacts/b9-shipment/after-tests.json",
+      "bytes": 4788,
+      "sha256": "ef8293a5359d18c1d62b4e683b392ef12e1d7d284820746131ccea9e8d237a7d"
+    },
+    {
+      "path": "artifacts/b9-shipment/before/profile.cpuprofile",
+      "bytes": 2007953,
+      "sha256": "0387a1aaa91c8970455bd49d187cc4bd155d8780942b4b7b2e818084bbc5e1a4"
+    },
+    {
+      "path": "artifacts/b9-shipment/before/progress.json",
+      "bytes": 847898,
+      "sha256": "37ddbc83d8eba9c6120f571fc51e6af6e2beebec7186c171d78ec610007b2f7b"
+    },
+    {
+      "path": "artifacts/b9-shipment/before/summary.json",
+      "bytes": 943479,
+      "sha256": "a3631a4cc9d1ba606e759107f83f08449a60621cac9e43c698bc08bbcf9b67e0"
+    },
+    {
+      "path": "artifacts/b9-shipment/before-tests.json",
+      "bytes": 4786,
+      "sha256": "5ce25e30413b3929ec68fac945ed7e8f2e8613ddddc116a4208dec8c13d14ae9"
+    },
+    {
+      "path": "artifacts/b9-shipment/boundary-directed.json",
+      "bytes": 22850,
+      "sha256": "522afbd840a6cd0b1bbb9819584a950330c993cb2ad0f177f7f4079d41944c05"
+    },
+    {
+      "path": "artifacts/b9-shipment/directed-final.json",
+      "bytes": 8690,
+      "sha256": "1c2edc84858ee839ddfc05fa612381ffec2800ca1550747936f45e6c6d23dc70"
+    },
+    {
+      "path": "artifacts/b9-shipment/directed.json",
+      "bytes": 8689,
+      "sha256": "8ee94b0da585f49fd0074f116e80ba4b0c8694d1ab37b14b212ad36524d60ccd"
+    },
+    {
+      "path": "artifacts/b9-shipment/final/profile.cpuprofile",
+      "bytes": 2044606,
+      "sha256": "b2d01172c899dd32ec1c7ae22fe13f0c79de0195353231d5299696bfcd84621e"
+    },
+    {
+      "path": "artifacts/b9-shipment/final/progress.json",
+      "bytes": 732654,
+      "sha256": "e466ff7fce18f0c083b35d62a01c62a202d836e1a2aec761664564758870392a"
+    },
+    {
+      "path": "artifacts/b9-shipment/final/summary.json",
+      "bytes": 815885,
+      "sha256": "ad2030de2561c163680b4db36698d56ab2929b301e7dea66332df1f034310c4e"
+    },
+    {
+      "path": "artifacts/b9-shipment/final-tests.json",
+      "bytes": 4787,
+      "sha256": "5d8a06d9e181d5d1058214ab61c8fd1835d0a5ad71041c2009c234e27e63207b"
+    },
+    {
+      "path": "artifacts/b9-shipment/first-adapter.ts",
+      "bytes": 2251,
+      "sha256": "89ae8343175fdd24361889bb250be7ffa8f9002d7af9129ffe2936db590da5b2"
+    },
+    {
+      "path": "artifacts/b9-shipment/full-environment.json",
+      "bytes": 676,
+      "sha256": "535d42c84005cf23807f59fa25bbe72acb3bd112262a2dbaf6eb8987119c66cb"
+    },
+    {
+      "path": "artifacts/b9-shipment/full-once.json",
+      "bytes": 877074,
+      "sha256": "088e694b6bcd8ecaf37367c0f7db83e5761651850b807f827e29627bf9e9ec21"
+    },
+    {
+      "path": "artifacts/b9-shipment/marked-syntax-adapter.ts",
+      "bytes": 5967,
+      "sha256": "e1732004f12cb2e4e7969dee8e42cf434cfdd970a321074b68ac5f7b4b637024"
+    },
+    {
+      "path": "artifacts/b9-shipment/micro/config.mts",
+      "bytes": 155,
+      "sha256": "19f7447f02a2f6577f132ff61ccebf52b33b4ddaf88c6d4e417beade16956c85"
+    },
+    {
+      "path": "artifacts/b9-shipment/micro/micro.test.ts",
+      "bytes": 1729,
+      "sha256": "b3b33656d0fa5dcd578d71ed73a744ab59166e570d6926dde178ac685f02ad98"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric/profile.cpuprofile",
+      "bytes": 2150448,
+      "sha256": "b65a1bf48b804588f8f077bf0590cc27e49b672340a0a95b392573b934b5465c"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric/progress.json",
+      "bytes": 920131,
+      "sha256": "b387239856f6e863c6cb196de9be8521bb0d38046ef3ebd85d76cb0c38dca99f"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric/summary.json",
+      "bytes": 1023928,
+      "sha256": "14efd6bbf9cdef1604b280a78b45f8ba81749658bbf856f2b068512eb333ef34"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric-adapter.ts",
+      "bytes": 1465,
+      "sha256": "44c4732243c3b33a9dbcb2713a5cfd111277b945e27d22410194623aca8a184c"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric-directed-fixed.json",
+      "bytes": 8956,
+      "sha256": "c516e26dd0a55b9ae0ef84d63759b158e6beb68a4521dcda505a692e1d5c2097"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric-directed.json",
+      "bytes": 9311,
+      "sha256": "7cb1fc29e6dd40a4888fc02792733eb4888d67f66440b68eaf17db3a5350528f"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric-tests.json",
+      "bytes": 4789,
+      "sha256": "af1a4d76245306ec942fc1f51338ca3d81979e5dbd7c6d8cd5fb7f214c145190"
+    },
+    {
+      "path": "artifacts/b9-shipment/numeric-tests.ts",
+      "bytes": 2325,
+      "sha256": "2513855f144cda14f16434a8f482b1c0a2facac9b8be634d22c28a262aefcef3"
+    },
+    {
+      "path": "artifacts/b9-shipment/profile-comparison.json",
+      "bytes": 21399,
+      "sha256": "801118d7cff2eab450b8986367ab630d62245fb1915f0fd39d39b5f5a56a5dfa"
+    },
+    {
+      "path": "artifacts/b9-shipment/scoped/profile.cpuprofile",
+      "bytes": 1895216,
+      "sha256": "b9b66ade6a8ab8a390ee710475c80ea33b19edee9f608b0b6f5a7fcf49f840dd"
+    },
+    {
+      "path": "artifacts/b9-shipment/scoped/progress.json",
+      "bytes": 617580,
+      "sha256": "f3d20196b03ee9309fbf36350d95cb14ec2049207c1bdb7174ca0059169aae9b"
+    },
+    {
+      "path": "artifacts/b9-shipment/scoped/summary.json",
+      "bytes": 688017,
+      "sha256": "4daa27a6cd76f55e86abfdac123c51699f81f3e8d19bebe2d7aa98c78f9713f0"
+    },
+    {
+      "path": "artifacts/b9-shipment/scoped-directed-final.json",
+      "bytes": 10887,
+      "sha256": "8b6e2756b3eff2b38191cdc5776e2415373236c7598d44b5b22e79c4f4b1d429"
+    },
+    {
+      "path": "artifacts/b9-shipment/scoped-directed.json",
+      "bytes": 10545,
+      "sha256": "c727df9da9e183874bb0734ff585ccc9b18a8ea793df29c3c0c906a0b44e1d97"
+    },
+    {
+      "path": "artifacts/b9-shipment/scoped-tests.json",
+      "bytes": 4780,
+      "sha256": "a1f8c649b07fdb7cdb3373b616ca0c4071e43978d07a74060ac33ddd6e8e6f57"
+    },
+    {
+      "path": "artifacts/b9-shipment/second-adapter.ts",
+      "bytes": 2667,
+      "sha256": "e6372157bfc1fc27101682b533bdc22a581aba63a15179b5b88501613934cf5b"
+    },
+    {
+      "path": "artifacts/b9-shipment/structural-directed-fixed.json",
+      "bytes": 9330,
+      "sha256": "7fc279697a4136a6dfa230cb6f3c8adaa9072b9e3efc5b1dad3f0afadca4d1b0"
+    },
+    {
+      "path": "artifacts/b9-shipment/structural-directed.json",
+      "bytes": 10337,
+      "sha256": "56ca98f830f362938d1ec99d6f6bfa11d1c4721650ffdde35609d6f81f799a0a"
+    },
+    {
+      "path": "artifacts/b9-shipment/syntax/profile.cpuprofile",
+      "bytes": 2055749,
+      "sha256": "cb91001458c8a09975deacd7ba9b9158cd367e6f62e1c033ae7000bbebbfcdf8"
+    },
+    {
+      "path": "artifacts/b9-shipment/syntax/progress.json",
+      "bytes": 630799,
+      "sha256": "cdef296d646211655e908e0ac1415f019eee23d555e2c6faf9d940cec5561659"
+    },
+    {
+      "path": "artifacts/b9-shipment/syntax/summary.json",
+      "bytes": 702730,
+      "sha256": "61216f13f0049b99dcc7e4d61a9c9fb31384fbe672034f0b95c682207359164d"
+    },
+    {
+      "path": "artifacts/b9-shipment/syntax-directed-final.json",
+      "bytes": 10552,
+      "sha256": "b05f61853863b972bd76f8f70df9299bc390e05e1f1b4c5ebe49fda8cd51f567"
+    },
+    {
+      "path": "artifacts/b9-shipment/syntax-tests.json",
+      "bytes": 4780,
+      "sha256": "3912a9b7ace1bff01164426df5b1631d5f51924dd784935ce920b992e4c781cd"
+    }
+  ]
+}
