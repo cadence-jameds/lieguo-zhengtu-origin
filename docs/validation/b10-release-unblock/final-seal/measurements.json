@@ -1,9 +1,9 @@
 {
   "date": "2026-11-10",
-  "formalContent": "bfdc252021b3cceffbd53ce8edcf208281fd9252",
-  "verifiedSource": "69cba6381fc28514d1248926de8395f324a9e756",
-  "proofHead": "38295df3d32c0ca1dcd21496304f1e67b82abac4",
-  "nativeBuild": "281110b",
+  "formalContent": "13905bbb96151d591a872a13c98f62dd19bbb530",
+  "verifiedSource": "13905bbb96151d591a872a13c98f62dd19bbb530",
+  "proofHead": "See current compatibility.json / final PR HEAD",
+  "nativeBuild": "13905bbb96151d591a872a13c98f62dd19bbb530",
   "nativeAndroid": false,
   "artifacts": {
     "directed.json": {
@@ -25,12 +25,34 @@
     "merge-source.json": {
       "sha256": "ac70ff13c786839efebc9edc7f3a3710f3c5063207affbe707ddc6c45281684d",
       "bytes": 3430
+    },
+    "late-before.json": {
+      "sha256": "ecbccc786232b79fb578b847f9ad9e500fe3f031c14459772cc6042607e73384",
+      "bytes": 8000
+    },
+    "late-after-directed.json": {
+      "sha256": "89962fc07922be88a28b05e18ae2d163f29f4e1d88a8c73dbd0f3152479d3195",
+      "bytes": 42153
+    },
+    "native-start-late.json": {
+      "sha256": "d02bcdd9f384afb670f8c2c9f6dc37d1045f52257f1da3e5ec78ebb419a85a15",
+      "bytes": 1147
+    },
+    "full-b8ffe75.json": {
+      "sha256": "a63d67ea77dbca96de1f4e8fb49ae56522c1adda312a58ba450f6cda2bee2261",
+      "bytes": 884509
     }
   },
   "directed": {
-    "firstBundle": 123,
-    "lastIncompatible": 21,
-    "uniqueCases": 124
+    "lastBundlePassed": 125,
+    "failed": 0,
+    "incompatibleCases": 22,
+    "lateBefore": {
+      "passed": 21,
+      "failed": 1,
+      "observedRevision": 0,
+      "expectedRevision": 101
+    }
   },
   "native": {
     "browser": "154.0.8037.57",
@@ -85,127 +107,6 @@
       }
     ]
   },
-  "requiredGates": [
-    {
-      "command": [
-        "python3",
-        "scripts/b10_r3_01_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_r3_01_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/b10_r3_02_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_r3_02_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/b10_r3_03_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_r3_03_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/b10_r3_04_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_r3_04_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/b10_r3_05_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_r3_05_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/b10_r3_06_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_r3_06_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/b10_release_unblock_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "python3",
-        "scripts/test_b10_release_unblock_successor.py"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
-        "scripts/test-deployment-isolation.mjs"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
-        "scripts/verify-projection-boundaries.mjs"
-      ],
-      "exitCode": 0
-    },
-    {
-      "command": [
-        "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
-        "scripts/verify-preview-boundaries.mjs"
-      ],
-      "exitCode": 0
-    }
-  ],
   "sourceMergeSimulation": {
     "main": "443f170b277f71ee26a34ee3b5017687a98e01ab",
     "head": "38295df3d32c0ca1dcd21496304f1e67b82abac4",
@@ -323,5 +224,139 @@
     "nodeOptions": null,
     "heapLimit": 2197815296
   },
-  "finalFullAndCi": "Run after final documentation HEAD. Exact outcomes and report SHA256 are recorded in the same HEAD PR61 delivery; no anticipatory PASS."
+  "finalFullAndCi": "Run after final documentation HEAD. Exact outcomes and report SHA256 are recorded in the same HEAD PR61 delivery; no anticipatory PASS.",
+  "preLateRevision": {
+    "formalContent": "bfdc252021b3cceffbd53ce8edcf208281fd9252",
+    "proofHead": "38295df3d32c0ca1dcd21496304f1e67b82abac4",
+    "nativeBuild": "281110b",
+    "originalFull": {
+      "head": "b8ffe753e434fcedc150279a0b869e93f49e645c",
+      "passed": 2513,
+      "failed": 0,
+      "skipped": 1,
+      "reportSha256": "a63d67ea77dbca96de1f4e8fb49ae56522c1adda312a58ba450f6cda2bee2261"
+    },
+    "gates": [
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_01_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_01_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_02_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_02_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_03_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_03_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_04_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_04_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_05_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_05_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_06_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_06_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_release_unblock_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_release_unblock_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
+          "scripts/test-deployment-isolation.mjs"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
+          "scripts/verify-projection-boundaries.mjs"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
+          "scripts/verify-preview-boundaries.mjs"
+        ],
+        "exitCode": 0
+      }
+    ]
+  },
+  "finalGates": "Reverified after sealing the new proof; actual final HEAD results in PR61."
 }
