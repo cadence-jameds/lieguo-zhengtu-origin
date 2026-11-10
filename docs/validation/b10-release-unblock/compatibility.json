@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "b039e8e206ff57bc5aebf493221fd1aa9ad29528",
+  "implementationCommit": "441a93ac383969dd02d3cf78c39afdd5172e8006",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/compatibility.json",
@@ -64,6 +64,86 @@
       "before": null,
       "after": "6532d7e01761d10ae2e59e133bd8331a2cd180c7d40a390793d5bac2f27b7dce"
     },
+    "docs/validation/b10-release-unblock/final-blockers/README.md": {
+      "before": null,
+      "after": "8be4d18f8fd8fa850ef140abe86ca5fc86df6a7694f1eefb122b3d24d5a92f4a"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/b9-profile-plugin.mjs": {
+      "before": null,
+      "after": "3b815f664267aaee28d4ea5b51db79739a849f7150b9627883d4f595f4335502"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/b9-profile.config.ts": {
+      "before": null,
+      "after": "2470fdd78a25ce3ee75e591ba4d2ba5246fcbb8510993e13a7b634e7c392222e"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/b9-profile.setup.mjs": {
+      "before": null,
+      "after": "eed550cd57ec5face40a521ae99f20275123724bfc17ef2ad0cd0ee5541d6ded"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/bundle-paired.mjs": {
+      "before": null,
+      "after": "82301fa3e0be04cdd9a4d3d8f33d692b32d20363f2b4b0b8caa8bbc3229c1900"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/bundle-profile.mjs": {
+      "before": null,
+      "after": "332c23528ac1da0ae89b92a616c660f3e23bced8a2bce3487d513772bc6e924d"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/clone-benchmark.config.ts": {
+      "before": null,
+      "after": "ed1e62b09d4990e3575872f10c04143b4cce6c805cea3da475114350be544015"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/clone-benchmark.test.ts": {
+      "before": null,
+      "after": "3491f40d6692d270e567a7c987628790273bb14632676565ba1612e33a836f3f"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/diagnostic-server.mjs": {
+      "before": null,
+      "after": "dc0dc128fd44b515fd963095f0df345ea85d4dc5010f7ba0200e29ead0e04e58"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/measurements.json": {
+      "before": null,
+      "after": "b2a29e2f78991d5e335db0f448341fe72d599d62ee15ab0081e9662ca818d755"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/paired-t2.mjs": {
+      "before": null,
+      "after": "9f3626bf564e7d77c2f701eaa9316b02e5702ebc32a6dcd79348ff20dd6c2a67"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/paired-t2.worker.ts": {
+      "before": null,
+      "after": "32d51292095f656ccc98cd1ca2d344faf065d78c93c43d74c9d8d911e063c875"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/persistence-profile-plugin.mjs": {
+      "before": null,
+      "after": "4f9dc14d232ea08e2de5bf355d0e4d432b9826f7621b19365207996d046509e8"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/persistence-profile.worker.ts": {
+      "before": null,
+      "after": "c64aea6a53e0fd0c7f38eb7b688b5a6aef2b64adac2bf60e2fb70bab61c1ac78"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/plain-clone-candidate.ts": {
+      "before": null,
+      "after": "f75986700934d29f906093ab45b76cec69563887492824ae468a24e12973dd4b"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/prepare-diagnostic.mjs": {
+      "before": null,
+      "after": "db1bfe7cdc05ede11b0b2e1d250bc3eb2993f943d9257082b22e1fb673826d75"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/snapshot-current.mjs": {
+      "before": null,
+      "after": "19452c1dbbd65b82ee073e56f17ec83d9659cc3ca75009dc3966f8ea13b54c3e"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/sw-lifetime-prefix.js": {
+      "before": null,
+      "after": "39b5014521d78ca10eb51b94f267755646277a3420b623e6a28cdb24133f38fe"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/sw-native.mjs": {
+      "before": null,
+      "after": "6ce0cfc506843a4a984f22489a07b98727e5ac1b87f6587195404355a54bf666"
+    },
+    "docs/validation/b10-release-unblock/final-blockers/t2-native-profile.mjs": {
+      "before": null,
+      "after": "6125ec396e0b53fb911f4c57a70797eef81d273b5e8c909f60e83b2358042fae"
+    },
     "docs/validation/b10-release-unblock/legacy-upgrade.mjs": {
       "before": null,
       "after": "3bfaaad122bd5dddcd3d3d8600d74124c117877455b7bf156e28d742e0ab2586"
@@ -110,7 +190,7 @@
     },
     "releases/notes/b10-release-unblock.json": {
       "before": null,
-      "after": "a1825d6ca296ce7d734e287c65d68a43951abafbd17396a73153cd2ea646cb58"
+      "after": "638d3abed0b7c43ce64be781f1bc4f05c6325d9e008d8c16470792467181319b"
     },
     "scripts/check-release-build.mjs": {
       "before": "721923fc37fbcee92f5a77b6f62209e7af9459ef71ff4b365256015dee88a366",
@@ -314,7 +394,7 @@
     },
     "src/game/formal/reducer.ts": {
       "before": "4576183cd74863a3447cbe0827d4f5ab5c68903cfb2d4abacadc30599dc9dbaa",
-      "after": "7ad438179ad54dea94f190f39281c2a0e2304feeb355cc30e45ac5b9bcee630f"
+      "after": "dbc1813e1e00cc5a60701f2f33155826c8e9982479162d888342d8187c7ef634"
     },
     "src/game/formal/runtimeSchedulingR306.test.ts": {
       "before": "26dede6f44319a709588e8a0c3fbe5eb9824f04dd62b156d718ce623f4ab22bb",
@@ -330,11 +410,23 @@
     },
     "src/game/formal/schema.ts": {
       "before": "bdcc668d955bb81b9f5b1b8eeff6bc548c96a74ed8ac402bfe0d81003b519f95",
-      "after": "022deb7dbb4fbb579283bdc6ab2d8752ef4ded3286291bce45ba39ff42b80735"
+      "after": "03dd6bc92dcee26af0ebedc05337e51b1e4a14a3091fbea3b5f6d91bc6c1eaf4"
     },
     "src/game/formal/shipmentEncoding.test.ts": {
       "before": null,
       "after": "9d8e69864eaa54c4ca840230b0e69a78663df3b720846c9850b236cc6865424d"
+    },
+    "src/game/formal/shipmentSyntax.test.ts": {
+      "before": null,
+      "after": "61737f3f9ed3cba095d4204c38ab31a259bea06afa8d0702908974eec79fe448"
+    },
+    "src/game/formal/shipmentSyntax.ts": {
+      "before": null,
+      "after": "886cab4c066e5a9ccdaf33da86a146a54f47b8bdaca1ef45432c384baef49568"
+    },
+    "src/game/formal/shipmentSyntaxWorld.test.ts": {
+      "before": null,
+      "after": "d8a9fb4c9a935575a58d4dbd3408a0c997fa853cffad3eb475e8ac562bcfbb6e"
     },
     "src/game/formal/versions.ts": {
       "before": "3d97d68cae03874cff7a1c27bd1d28bdf4ffc391db882d9b8bf95ab2a1acd688",
