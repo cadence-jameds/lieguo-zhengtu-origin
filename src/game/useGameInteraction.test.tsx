@@ -19,7 +19,7 @@ class FakeWorker {
  terminate(){this.terminated=true;}
  emit(data:unknown){this.onmessage?.({data});}
 }
-const state=(world:FormalWorld,base=0)=>({type:'state',projection:port.stream.publish(world,{branch:0,writerEpoch:0},true),passiveRevisionBase:base,clock:{campaignId:world.campaignId,time:world.time,speed:world.speed,running:true}});
+const state=(world:FormalWorld,base=0)=>({type:'state',commandEpoch:'1234567890abcdef1234567890abcdef.1.0',projection:port.stream.publish(world,{branch:0,writerEpoch:0},true),passiveRevisionBase:base,clock:{campaignId:world.campaignId,time:world.time,speed:world.speed,running:true}});
 function expectDisplayed(source:FormalWorld){expect(engine.world).toEqual(fixtureProjection(source,engine.world!.projection));expect(engine.world).not.toHaveProperty('commandReceipts');expect(engine.world).not.toHaveProperty('ledger');}
 function Surface(){engine=useGame();return <button disabled={engine.inputBusy} onClick={()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'改名'})}>確認</button>;}
 beforeEach(async()=>{
@@ -39,7 +39,7 @@ it('an old campaign Ack with the same command ID cannot replace the new campaign
  try{
   await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'舊戰役'}));const old=port.sent[0];
   const next={...w,campaignId:'campaign:replacement' as FormalWorld['campaignId']};await act(async()=>port.emit(state(next)));
-  await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'新戰役'}));const latest=port.sent.at(-1);expect(latest.order.commandId).toBe(old.order.commandId);
+  await act(async()=>engine.send({type:'command',order:{...old.order,campaignId:next.campaignId,payload:{type:'city.rename',cityId:fixtureIds.home,name:'新戰役'}}}));const latest=port.sent.at(-1);expect(latest.order.commandId).toBe(old.order.commandId);
   await act(async()=>port.emit({type:'commandAck',campaignId:w.campaignId,ack:{commandId:old.order.commandId,status:'committed',revision:1}}));expect(engine.notice).toContain('受理中');expect(engine.commandRows.find(r=>r.order.campaignId===next.campaignId)!.state).toBe('created');
   await act(async()=>port.emit({type:'commandAck',campaignId:next.campaignId,ack:{commandId:latest.order.commandId,status:'rejected',requiresConfirmation:true,revision:0,reason:'原始意圖已失效'}}));expect(engine.notice).toBe('原始意圖已失效');expect(engine.commandRows.find(r=>r.order.campaignId===next.campaignId)!.state).toBe('needs-confirmation');
  }finally{uuid.mockRestore();}
@@ -181,4 +181,19 @@ it('a terminal Ack cancels its deadline synchronously before React effects flush
   await act(async()=>{port.emit({type:'commandAck',ack:{commandId:request.order.commandId,status:'committed',revision:1}});vi.advanceTimersByTime(30000);});
   expect(engine.commandRows.at(-1)!.state).toBe('committed');expect(port.sent.filter(r=>r.type==='commandQuery'&&r.commandId===request.order.commandId)).toHaveLength(0);
  }finally{vi.useRealTimers();}
+});
+it('retired query preserves the original recoverable draft until explicit confirmation creates a fresh identity',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'保存原始意圖'}));const request=port.sent.at(-1),original=structuredClone(request.order);
+ await act(async()=>port.emit({type:'commandUnavailable',availability:'retired',campaignId:original.campaignId,commandId:original.commandId}));expect(engine.commandRows.at(-1)!.state).toBe('retired');expect(JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')!).some((r:any)=>r.order.commandId===original.commandId&&r.retired)).toBe(true);
+ const sent=port.sent.length;await act(async()=>engine.retryReceive(engine.commandRows.at(-1)!));expect(port.sent).toHaveLength(sent);
+ await act(async()=>engine.confirmCommand(engine.commandRows.at(-1)!));const confirmed=port.sent.at(-1);expect(confirmed.type).toBe('command');expect(confirmed.order.commandId).not.toBe(original.commandId);expect(confirmed.order.payload).toEqual(original.payload);expect(engine.commandRows[0].order).toEqual(original);const drafts=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')!);expect(drafts.some((r:any)=>r.order.commandId===original.commandId)).toBe(false);expect(drafts.some((r:any)=>r.order.commandId===confirmed.order.commandId)).toBe(true);
+});
+it('an unused current identity can safely resend its exact original envelope after a missing-row query',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'尚未持久接收'}));const request=port.sent.at(-1);await act(async()=>port.emit({type:'commandUnavailable',availability:'unreceived',campaignId:request.order.campaignId,commandId:request.order.commandId}));expect(engine.commandRows.at(-1)!.state).toBe('receive-failed');await act(async()=>engine.retryReceive(engine.commandRows.at(-1)!));expect(port.sent.at(-1).order).toEqual(request.order);
+});
+it('never confirms an old campaign draft against another campaign with matching city IDs',async()=>{
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'原戰役目標'}));const original=port.sent.at(-1).order;
+ await act(async()=>port.emit({type:'commandUnavailable',availability:'retired',campaignId:original.campaignId,commandId:original.commandId}));const row=engine.commandRows.at(-1)!;
+ const other=structuredClone(w);other.campaignId='campaign:other' as typeof other.campaignId;await act(async()=>port.emit(state(other)));const sent=port.sent.length;
+ await act(async()=>engine.confirmCommand(row));expect(port.sent).toHaveLength(sent);expect(engine.feedback.text).toContain('另一戰役');expect(sessionStorage.getItem('formal-command-drafts-v1')).toContain(original.commandId);
 });

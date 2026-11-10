@@ -115,19 +115,19 @@ it('simultaneous saves from two connections have exactly one durable CAS winner'
 });
 for(const change of ['missing','fingerprint','issuerId','committedRevision','disposition','duplicate'] as const)it(`large durable history rejects ${change} without changing stores or caller input`,async()=>{
  const s=store(),w=await s.start(historyFixture()),draft=structuredClone(w);draft.revision++;
- const receipt=structuredClone(commandHistory(w)[1024]);
+ const receipt=structuredClone(commandHistory(w)[Math.floor(commandHistory(w).length/2)]);
  if(change==='missing'){delete draft.ledger;draft.commandReceipts=[];}
  else{if(change==='fingerprint')receipt.fingerprint+='-changed';else if(change==='issuerId')receipt.issuerId=fixtureIds.other;else if(change==='committedRevision')receipt.committedRevision++;else if(change==='disposition')receipt.disposition='rolled-back';draft.ledger!.pending.push(receipt);}
  const before=await contents(s),input=canonicalJSON(draft);
  await expect(s.save(draft,[],w.revision)).rejects.toThrow(change==='missing'?'Durable dedupe history':'Duplicate typed identity');
  expect(await contents(s)).toEqual(before);expect(canonicalJSON(draft)).toBe(input);expect((await s.loadSave()).game).toEqual(w);
 });
-it('immutable history rejects in-place reordering and grows while all applied and rolled-back evidence stays durable',async()=>{
+it('bounded recent outcomes reject in-place reordering and retain the exact newest applied and rolled-back evidence',async()=>{
  const s=store(),w=await s.start(historyFixture()),draft=cloneWorldDraft(w);expect(()=>draft.commandReceipts.reverse()).toThrow('不可原地改寫');
  const cmd=order(draft,'after-history',{type:'city.rename',cityId:fixtureIds.home,name:'成長'}),transition=submitFormalOrder(draft,cmd);
  const committed=await s.save(transition.world,[],w.revision),loaded=(await s.loadSave()).game!;
- expect(loaded).toEqual(committed);expect(loaded.commandReceipts).toHaveLength(2049);
- expect(new Map(loaded.commandReceipts.map(r=>[r.commandId,r]))).toEqual(new Map([...w.commandReceipts,transition.world.commandReceipts.at(-1)!].map(r=>[r.commandId,r])));
+ expect(loaded).toEqual(committed);expect(loaded.commandReceipts).toHaveLength(1024);
+ expect(new Map(loaded.commandReceipts.map(r=>[r.commandId,r]))).toEqual(new Map([...w.commandReceipts,transition.world.commandReceipts.at(-1)!].slice(-1024).map(r=>[r.commandId,r])));
  expect(submitFormalOrder(loaded,cmd).ack?.status).toBe('duplicate');
 });
 it('checkpoint pruning retains the newest primary keys despite wall-clock reversal',async()=>{
@@ -141,11 +141,11 @@ it('checkpoint pruning retains the newest primary keys despite wall-clock revers
 // Functional argument-limit coverage: three complete durable transitions over
 // 150000 rows need a separate budget on the two-core full-suite runner. This is
 // not a latency assertion; the real-save performance targets are measured separately.
-it('150000 valid receipts survive start, import and Recovery without an argument-count limit',async()=>{
+it('150000 cumulative valid receipts compact, roundtrip and recover with exact recent outcomes and retired replay protection',async()=>{
  const s=store(),input=historyFixture(150000),history=await digest(input.commandReceipts);
- let w=await s.start(input);expect(w.commandReceipts).toHaveLength(150000);expect(w.revision).toBe(4);
- w=await s.importSave(await s.exportStoredSave('quick'));expect(w.commandReceipts).toHaveLength(150000);expect(w.revision).toBe(5);
+ let w=await s.start(input);const retained=await digest(input.commandReceipts.slice(-1024));expect(w.commandReceipts).toHaveLength(1024);expect(await digest(w.commandReceipts)).toBe(retained);expect(w.revision).toBe(4);
+ const quick=await s.exportStoredSave('quick');expect(new TextEncoder().encode(quick).length).toBeLessThan(2*1024*1024);w=await s.importSave(quick);expect(w.commandReceipts).toHaveLength(1024);expect(w.revision).toBe(5);
  const checkpoint=(await s.db.backups.orderBy('id').last())!.id!,restored=await s.restore(checkpoint);
- expect(restored.commandReceipts).toHaveLength(150000);expect(restored.revision).toBe(6);expect(await digest(restored.commandReceipts)).toBe(history);
- expect(input.revision).toBe(4);expect(input.commandReceipts).toHaveLength(150000);
+ expect(restored.commandReceipts).toHaveLength(1024);expect(restored.revision).toBe(6);expect(await digest(restored.commandReceipts)).toBe(retained);expect(await s.db.table('LedgerIdentity').count()).toBe(1024);const before=await contents(s);await expect(s.receiveCommand({...order(restored,'retired',{type:'city.rename',cityId:fixtureIds.home,name:'不可重播'}),commandId:input.commandReceipts[0].commandId})).rejects.toThrow('不會再次執行');expect(await contents(s)).toEqual(before);expect(restored.cities).toEqual(input.cities);expect(restored.events).toEqual(input.events);expect(restored.seed).toBe(input.seed);
+ expect(input.revision).toBe(4);expect(input.commandReceipts).toHaveLength(150000);expect(await digest(input.commandReceipts)).toBe(history);
 },120000);

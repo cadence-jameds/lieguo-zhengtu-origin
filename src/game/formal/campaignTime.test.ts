@@ -1,6 +1,6 @@
 import {scenarioWorld as projectWorld} from './ledgerTestSupport';
 import 'fake-indexeddb/auto';
-import {afterEach,expect,it} from 'vitest';
+import {afterEach,expect,it,vi} from 'vitest';
 import {createFormalWorld} from './generator';
 import {createFormalFixture} from './fixture';
 import {validateFormalWorld} from './schema';
@@ -57,6 +57,8 @@ it('switching normal speeds preserves construction/training/research/marches/AI 
  for(const speed of CAMPAIGN_SPEEDS){const before=w.combat!.battles[0].nextRoundAt-w.time,old=effectiveSpeed(w);w=configure(w,speed,4).world;expect(w.events.filter(e=>e.type!=='combat.round')).toEqual(stable);expect(w.combat!.battles[0]).toMatchObject({id:battleId,roundEventId,nextRoundAt:w.time+Math.ceil(before*tacticalRoundWorldMs(speed)/tacticalRoundWorldMs(old))});}
 });
 it('a larger offline cap never retroactively awards previously capped absence',async()=>{
- const p=new FormalPersistence({suffix:'future-cap-'+crypto.randomUUID()});stores.push(p);let w=configure(make(),1,1).world;await p.start(w);await p.db.saves.update('current',r=>{if(r.kind==='world')r.at=1000;});const now=1000+2*3600000;w=(await p.loadWithOffline(now)).game!;expect(w.time).toBe(3600000);const change=configure(w,1,12).world;
- await p.save(change,[],w.revision);await p.db.saves.update('current',r=>{if(r.kind==='world')r.at=now;});const again=await p.loadWithOffline(now);expect(again.summary!.advancedWorldMs).toBe(0);expect(again.game!.time).toBe(3600000);
+ vi.spyOn(Date,'now').mockReturnValue(1000);const p=new FormalPersistence({suffix:'future-cap-'+crypto.randomUUID()});stores.push(p);let w=configure(make(),1,1).world;await p.start(w);const now=1000+2*3600000;w=(await p.loadWithOffline(now)).game!;expect(w.time).toBe(3600000);const change=configure(w,1,12).world;
+ vi.spyOn(Date,'now').mockReturnValue(now);await p.save(change,[],w.revision);const again=await p.loadWithOffline(now);expect(again.summary!.advancedWorldMs).toBe(0);expect(again.game!.time).toBe(3600000);
 });
+
+afterEach(()=>vi.restoreAllMocks());

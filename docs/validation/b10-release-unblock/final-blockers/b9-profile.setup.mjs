@@ -1,0 +1,15 @@
+import {afterAll} from 'vitest';
+import {Session} from 'node:inspector';
+import {PerformanceObserver,monitorEventLoopDelay,performance} from 'node:perf_hooks';
+import fs from 'node:fs';
+import path from 'node:path';
+import v8 from 'node:v8';
+const dir=process.env.B10_B9_PROFILE_OUT??'artifacts/b10-final-blockers/b9-profile';fs.mkdirSync(dir,{recursive:true});const session=new Session();session.connect();const send=(name,params={})=>new Promise((resolve,reject)=>session.post(name,params,(error,result)=>error?reject(error):resolve(result)));
+await send('Profiler.enable');await send('Profiler.setSamplingInterval',{interval:1000});await send('Profiler.start');
+const start=performance.now(),cpu=process.cpuUsage(),phases={},gc=[],progress=[],delay=monitorEventLoopDelay({resolution:20});delay.enable();let active=true,trips=0,finishing;
+const observer=new PerformanceObserver(list=>{for(const e of list.getEntries())gc.push({start:e.startTime,ms:e.duration,kind:e.detail.kind});});observer.observe({entryTypes:['gc']});
+globalThis.__b9Enter=label=>active?{label,start:performance.now()}:undefined;
+globalThis.__b9Exit=t=>{if(!t||!active)return;const p=phases[t.label]??={calls:0,inclusiveMs:0,maxMs:0};const ms=performance.now()-t.start;p.calls++;p.inclusiveMs+=ms;p.maxMs=Math.max(p.maxMs,ms);};
+globalThis.__b9Progress=w=>{if(!active||++trips%128)return;const row={trips,wallMs:performance.now()-start,cpu:process.cpuUsage(cpu),memory:process.memoryUsage(),facts:Object.keys(w.commandFacts?.evidence??{}).length,shipments:w.largeProjects[1].shipments.length,receipts:w.commandReceipts.length};progress.push(row);fs.writeFileSync(path.join(dir,'progress.json'),JSON.stringify({progress,phases,gc},null,2));console.log('B9 PROFILE',trips,Math.round(row.wallMs));};
+globalThis.__b9Finish=reason=>finishing??=(async()=>{active=false;const {profile}=await send('Profiler.stop');await new Promise(resolve=>setImmediate(resolve));observer.disconnect();delay.disable();const report={reason,node:process.version,heapLimit:v8.getHeapStatistics().heap_size_limit,workersMaximum:2,cpuQuota:fs.readFileSync('/sys/fs/cgroup/cpu.max','utf8').trim(),memoryLimit:fs.readFileSync('/sys/fs/cgroup/memory.max','utf8').trim(),wallMs:performance.now()-start,cpu:process.cpuUsage(cpu),trips,phases,gc,progress,eventLoopDelay:{meanMs:delay.mean/1e6,maxMs:delay.max/1e6,p99Ms:delay.percentile(99)/1e6},memory:process.memoryUsage(),note:'Instrumented Node/fake-IDB diagnostic, inclusive phases overlap. Original 2000 trips and 240000ms hook unchanged. Not a full Gate PASS.'};fs.writeFileSync(path.join(dir,'profile.cpuprofile'),JSON.stringify(profile));fs.writeFileSync(path.join(dir,'summary.json'),JSON.stringify(report,null,2));session.disconnect();console.log('B9 PROFILE END',reason,trips,Math.round(report.wallMs));})();
+afterAll(()=>globalThis.__b9Finish('suite-ended-before-hook-return'));

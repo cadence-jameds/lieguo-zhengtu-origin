@@ -1,4 +1,5 @@
-import {commandHistory,copyHistory,pendingHistory,findReceipt,originalResult,normalizeOutcomeRevisions} from './commandLedger';
+import {pruneCommandEvidence} from './commandEvidence';
+import {appendReceipt,commandHistory,copyHistory,pendingHistory,findReceipt,originalResult,normalizeOutcomeRevisions} from './commandLedger';
 import {endProtection,protectionNotice} from './protection';
 import {worldPaused} from './extinction';
 import {migrateV95Economy} from './economy';
@@ -27,6 +28,7 @@ import {eventId,reportId,sequenceKey,type CommandId,type FactionId} from './ids'
 import type {CommandAck,CommandReceipt,FormalOrder,FormalReport,FormalTransition,FormalWorld,ResearchProject} from './model';
 import {resourceKeys} from './model';
 import {orderSchema,validateFormalWorld} from './schema';
+import {withDraftShipmentSyntax} from './shipmentSyntax';
 import {EventScheduler} from './scheduler';
 import {applyEconomyCommand,handleEconomyEvent,settleCity,settleFaction,promoteCityQueues,RuleViolation} from './economy';
 import {spatial} from './spatial';
@@ -43,7 +45,7 @@ function report(w:FormalWorld,title:string,text:string,owner:FactionId=w.playerF
  const sequence=w.sequences.report++;return{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:owner,at:w.time,category:'research',title,text};
 }
 type ReplayAdmission={receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;fullCommandClone:boolean};
-/** Scan once after the outer clone. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
+/** Scan once before the first replay command draft. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
 function replayClonePolicy(current:FormalWorld):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'fullCommandClone'> {
  const readonly=1,autonomy=2,mutable=4,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
  let fullCommandClone=false,shareAutonomy=!!current.autonomy,shareCityDraft=true,nextOwner=0;
@@ -86,7 +88,7 @@ function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):Form
 /** These three handlers, lazy settlement and queue promotion write only this city, sequences and political cleanup. */
 function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
- const w={...current,...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
+ const w={...current,...(current.commandFacts?{commandFacts:structuredClone(current.commandFacts)}:{}),...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
  copyHistory(current,w,true);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
@@ -109,10 +111,15 @@ function replayReceipt(current:FormalWorld,admission:ReplayAdmission,id:CommandI
  }
  return admission.receipts.get(id);
 }
-function replaySubmit(current:FormalWorld):Submit {
- const admission:ReplayAdmission={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current)};
- return(current,value)=>submitOrderDraft(current,value,admission);
+function replaySubmit():Submit {
+ // Logistics/clock-only replay needs no command draft policy. Inspect the
+ // actual current graph once, immediately before its first command draft;
+ // receipt indexing still starts at zero and follows the same replay order.
+ let admission:ReplayAdmission|undefined;
+ return(current,value)=>{admission??={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current)};return submitOrderDraft(current,value,admission);};
 }
+/** Keep the original public validation boundary observable exactly once. */
+function validateFormalDraft(w:FormalWorld){return withDraftShipmentSyntax(w,()=>validateFormalWorld(w));}
 /** Pure transition; only persistence may expose the draft as committed world. */
 export function submitFormalOrder(current:FormalWorld,value:unknown):FormalTransition {
  return submitOrderDraft(current,value);
@@ -140,7 +147,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(city&&!worldPaused(w)&&p.type!=='campaign.configure')settleCity(w,city);
  if(p.type==='player.rebirth'||p.type==='player.end'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();
  // Restore the clock only on the accepted rebirth draft, after its active scheduler is captured.
- if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;commandHistory(w).push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalWorld(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalDraft(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  if(!city)return reject('城市不存在。');
  if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
@@ -186,10 +193,10 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(p.type==='politics'&&p.action==='war')endProtection(w,order.issuerId,'主動宣戰');
  reports.push(...protectionNotice(current,w,order.issuerId),...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
- commandHistory(w).push({commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
+ appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
  recordGrowthCommand(w,order.issuerId,p);
  // Replay admissions still use every command rule; the whole private draft is validated at its boundary.
- if(!replay)validateFormalWorld(w);
+ if(!replay)validateFormalDraft(w);
  const ack:CommandAck={commandId:order.commandId,status:'committed',revision:w.revision};
  return{world:w,reports,ack};
 }
@@ -249,13 +256,13 @@ function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventSc
  for(const r of pendingHistory(w))if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  normalizeOutcomeRevisions(w);
  if(w.extinction?.resumedAt!==undefined&&w.extinction.resumedAt<w.time)delete w.extinction.resumedAt;
- syncGrowthTasks(w);validateFormalWorld(w);return{world:w,reports};
+ syncGrowthTasks(w);if(w.commandFacts)pruneCommandEvidence(w);validateFormalDraft(w);return{world:w,reports};
 }
 export function advanceFormal(current:FormalWorld,target:number):FormalTransition {
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  if(worldPaused(current))return{world:current,reports:[]};
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit();syncGrowthTasks(w);reconcileVictory(w,scheduler);
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
@@ -270,7 +277,7 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  // A queued input can start T1 before an expensive private-draft clone. This
  // checkpoint has no event/world mutations; the fixed logical target is kept.
  if(options.yieldBeforeStart)await(options.yieldControl?.('start')??new Promise<void>(resolve=>setTimeout(resolve,0)));
- const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(w);syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit();syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;

@@ -1,11 +1,10 @@
-import {commandHistory,receiptIndex} from './commandLedger';
-import {canonicalJSON} from './canonical';
+import {domainReceipt,domainReceiptIndex,shipmentPaymentFieldsFingerprint} from './commandEvidence';
 import type {FormalWorld} from './model';
 import {resourceKeys} from './model';
 import {WONDER_COST,WONDER_DURATION,WONDER_MAX_DURABILITY,wonderIntegrity,wonderProgress} from './wonder';
 /** Strict wire invariants are reused by Save, Load, Recovery and Runtime validation. */
 export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
- const empires=new Set<string>(),shipments=new Set<string>(),commands=new Set<string>(),events=new Set<string>(),receipts=receiptIndex(w),logistics=new Map(w.logistics?.map(t=>[t.shipmentId,t]));
+ const empires=new Set<string>(),shipments=new Set<string>(),commands=new Set<string>(),events=new Set<string>(),receipts=domainReceiptIndex(w),logistics=new Map(w.logistics?.map(t=>[t.shipmentId,t]));
  const applied=(id:string,issuer:string)=>receipts.get(id)?.issuerId===issuer&&receipts.get(id)?.disposition==='applied';
  for(const p of w.largeProjects){
   if(p.kind!=='world-wonder')continue;
@@ -25,7 +24,7 @@ export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
   }
   // An original empire may later disappear through conquest/extinction. Preserve its historical
   // project identity; never attach it to a conqueror or grant qualifications here.
-  if(empires.has(owner)||p.durationMs!==WONDER_DURATION||p.createdAt>w.time||!w.factions.some(f=>f.id===state.hostOwnerFactionId)||!commandHistory(w).some(r=>{if(r.commandId!==state.creationCommandId||r.disposition!=='applied')return false;try{const command=JSON.parse(r.fingerprint);return command.campaignId===w.campaignId&&command.issuerId===r.issuerId&&command.payload.type==='wonder.start'&&command.payload.hostCityId===host.id;}catch{return false;}}))fail('Wonder identity/creation invalid');
+  if(empires.has(owner)||p.durationMs!==WONDER_DURATION||p.createdAt>w.time||!w.factions.some(f=>f.id===state.hostOwnerFactionId)||!((r)=>{if(!r||r.disposition!=='applied')return false;try{const command=JSON.parse(r.fingerprint);return command.campaignId===w.campaignId&&command.issuerId===r.issuerId&&command.payload.type==='wonder.start'&&command.payload.hostCityId===host.id;}catch{return false;}})(domainReceipt(w,state.creationCommandId)))fail('Wonder identity/creation invalid');
   empires.add(owner);if(commands.has(state.creationCommandId))fail('Duplicate wonder creation command');commands.add(state.creationCommandId);
   const suffix=Number(p.projectId.slice(8));if(Number.isSafeInteger(suffix)&&suffix>=w.sequences.project)fail('Wonder project sequence would reuse ID');
   if(resourceKeys.some(r=>p.requiredResources[r]!==WONDER_COST[r]))fail('Wonder cost invalid');
@@ -48,7 +47,7 @@ export function validateWonders(w:FormalWorld,fail:(message:string)=>void){
    if(!w.cities.some(c=>c.id===record.sourceCityId)||!w.factions.some(f=>f.id===record.sourceFactionId)||resourceKeys.every(r=>record.resources[r]===0)||record.dispatchedAt>w.time)fail('Wonder shipment source/cargo invalid');
    if(!record.commandId||commands.has(record.commandId))fail('Duplicate wonder payment command');else commands.add(record.commandId);
    const receipt=record.commandId?receipts.get(record.commandId):undefined;
-   if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==record.sourceFactionId||receipt.fingerprint!==canonicalJSON({campaignId:w.campaignId,issuerId:record.sourceFactionId,payload:{type:'wonder.ship',cityId:record.sourceCityId,projectId:p.projectId,resources:record.resources}}))fail('Wonder shipment payment receipt missing');
+   if(!receipt||receipt.disposition!=='applied'||receipt.issuerId!==record.sourceFactionId||receipt.fingerprint!==shipmentPaymentFieldsFingerprint(w.campaignId,record.sourceFactionId,'wonder.ship',record.sourceCityId,p.projectId,record.resources.food,record.resources.wood,record.resources.stone,record.resources.gold))fail('Wonder shipment payment receipt missing');
    const serial=Number(record.shipmentId.slice(9));if(Number.isSafeInteger(serial)&&serial>=w.sequences.project)fail('Wonder shipment sequence would reuse ID');
    if(record.phase==='in-transit'&&(!t||t.phase!=='outbound')||record.phase!=='in-transit'&&(record.arrivedAt>w.time||t&&t.phase!=='returning'))fail('Wonder shipment phase invalid');
    if(record.phase!=='in-transit'){if(w.events.some(e=>e.id===record.arrivalEventId)||events.has(record.arrivalEventId))fail('Duplicate wonder arrival receipt');events.add(record.arrivalEventId);}

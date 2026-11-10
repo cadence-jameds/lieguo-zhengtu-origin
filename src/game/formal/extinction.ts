@@ -1,5 +1,5 @@
 import type {WorldRead} from '../presentationModel';
-import {findReceipt} from './commandLedger';
+import {domainReceipt} from './commandEvidence';
 import {requireCraftsmanCastle} from './constructionRules';
 import {PROTECTION_DURATION} from './protection';
 import {isScoutUnit,scoutCount} from './unitCatalog';
@@ -92,7 +92,7 @@ export function craftsmanForConstruction(w:FormalWorld,c:FormalCity,job:Construc
  const crafts=(w.extinction?.craftsmen??[]).filter(x=>x.constructionCommandId===job.commandId);
  if(crafts.length!==1)return undefined;
  const craft=crafts[0];if(craft.cityId!==c.id||craft.ownerFactionId!==c.ownerFactionId||craft.civilizationId!==job.castleCivilizationId||craft.eventId||craft.carrierArmyId||w.extinction?.extinct.includes(craft.ownerFactionId))return undefined;
- const receipt=[findReceipt(w,job.commandId)].find(r=>r?.issuerId===craft.ownerFactionId&&r.disposition==='applied');
+ const receipt=[domainReceipt(w,job.commandId)].find(r=>r?.issuerId===craft.ownerFactionId&&r.disposition==='applied');
  try{const p=receipt&&JSON.parse(receipt.fingerprint).payload;if(p?.type!=='craftsman.castle'||p.cityId!==c.id||p.craftsmanId!==craft.id)return undefined;}catch{return undefined;}
  return craft;
 }

@@ -105,6 +105,7 @@ export function playerOrderWithBase(w:FormalWorld,order:FormalOrder,base?:Player
  if(!base||!Number.isSafeInteger(order.expectedRevision)||order.expectedRevision<0||
     base.revision!==order.expectedRevision||!Number.isSafeInteger(branchRevision)||branchRevision<0||
     foregroundRevision!==undefined&&(!Number.isSafeInteger(foregroundRevision)||foregroundRevision<0||foregroundRevision>w.revision||order.expectedRevision<foregroundRevision)||
+    foregroundRevision===undefined&&w.commandFacts!==undefined&&order.expectedRevision<w.commandFacts.foregroundRevision||
     order.expectedRevision<branchRevision||order.expectedRevision>=w.revision||
     order.campaignId!==w.campaignId||order.issuerId!==w.playerFactionId||
     !Number.isSafeInteger(order.issuedWorldTime)||order.issuedWorldTime<0||

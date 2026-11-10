@@ -1,0 +1,2380 @@
+{
+  "status": "P0 BLOCKED: intermittent native SW activation remains unresolved",
+  "environment": {
+    "node": "22.23.4",
+    "browser": "154.0.8037.57",
+    "cpuQuota": "200000 100000 (2 CPU)",
+    "memoryLimitBytes": 8589934592,
+    "latencyConcurrentHeavyWork": false,
+    "android": "NOT TESTED"
+  },
+  "sources": {
+    "baseline": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
+    "persistenceTestedHead": "72e0e45f56d60f46a7e5da28448b6d1897ba161b",
+    "persistenceContent": "3a3ae8dc2e3b60167f1b3e9dfa3e16020f573bd0",
+    "gameAppHead": "243f68a9307ca1335beb1b023dab22d7d1fbdca4",
+    "gameAppVersion": "0.31.18",
+    "sourceBytesEqual": true
+  },
+  "method": "Native Chromium, separately bundled actual Persistence/Reducer; legal synthetic cumulative rolled-back rename fixtures; 100 factions/99 scheduled AI/25X. No claim of 150k actual T2 throughput. 5 fresh-Worker cold loads + 5 same-Worker reopen loads, 20 warm T1/T2/query/rejectedT2, 5 Recovery and each quick/full roundtrip per count. No Android.",
+  "before": [
+    {
+      "variant": "before",
+      "count": 0,
+      "status": "PASS",
+      "wallMs": 10580.797172,
+      "fixtureBytes": 512612,
+      "retained": 20,
+      "saves": {
+        "quick": {
+          "bytes": 1664105,
+          "checksum": "aecba8765296835948a7a98b7e679f995a7c53ee837f53877f9b08891a44cccd"
+        },
+        "full": {
+          "bytes": 1664202,
+          "checksum": "4dd6563cb2ea18b86976f20878ed56611e154a9798a210c0dce4612bf58f51e8"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 92.5,
+          "p95": 92.5
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 49.5,
+          "p95": 74.09999999403954
+        },
+        "T1": {
+          "n": 20,
+          "p50": 5.699999988079071,
+          "p95": 11.299999982118607
+        },
+        "T2": {
+          "n": 20,
+          "p50": 55.29999998211861,
+          "p95": 84.90000000596046
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.199999988079071,
+          "p95": 2
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 48.599999994039536,
+          "p95": 65.7000000178814
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 132.90000000596046,
+          "p95": 275
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 112.90000000596046,
+          "p95": 139.80000001192093
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 235.80000001192093,
+          "p95": 279.30000001192093
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 114.7999999821186,
+          "p95": 171.40000000596046
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 260.09999999403954,
+          "p95": 284.59999999403954
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 134.40000000596046,
+          "p95": 148.59999999403954
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 513669
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1026745
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68853
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 157
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 53
+        },
+        "LedgerSegments": {
+          "rows": 25,
+          "jsonBytes": 16198
+        },
+        "LedgerResults": {
+          "rows": 40,
+          "jsonBytes": 37033
+        },
+        "LedgerManifests": {
+          "rows": 56,
+          "jsonBytes": 51106
+        },
+        "LedgerIdentity": {
+          "rows": 40,
+          "jsonBytes": 48009
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118
+        }
+      },
+      "storage": {
+        "quota": 10738069504,
+        "usage": 651264,
+        "usageDetails": {
+          "indexedDB": 651264
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "before",
+      "count": 1000,
+      "status": "PASS",
+      "wallMs": 17148.362064,
+      "fixtureBytes": 809611,
+      "retained": 1020,
+      "saves": {
+        "quick": {
+          "bytes": 2337358,
+          "checksum": "bb9459db3cb5e861dd9c08594a5a9344ba635034f5973994511f4e26c3c0745a"
+        },
+        "full": {
+          "bytes": 2337455,
+          "checksum": "71a75e28bd108d4158abb9467aa2997a16fe5b47a7364b5b94882abfc553d940"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 225.5,
+          "p95": 225.5
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 115.69999998807907,
+          "p95": 130
+        },
+        "T1": {
+          "n": 20,
+          "p50": 6.199999988079071,
+          "p95": 10
+        },
+        "T2": {
+          "n": 20,
+          "p50": 64.19999998807907,
+          "p95": 76
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.100000023841858,
+          "p95": 2.600000023841858
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 42.80000001192093,
+          "p95": 71.19999998807907
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 316.60000002384186,
+          "p95": 427.59999999403954
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 175.5,
+          "p95": 643.6000000238419
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 452.40000000596046,
+          "p95": 540
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 183.7999999821186,
+          "p95": 267.90000000596046
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 489.7999999821186,
+          "p95": 1040.9000000059605
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 233.5,
+          "p95": 312.40000000596046
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 513669
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1026745
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68853
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 157
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 53
+        },
+        "LedgerSegments": {
+          "rows": 33,
+          "jsonBytes": 345639
+        },
+        "LedgerResults": {
+          "rows": 48,
+          "jsonBytes": 380833
+        },
+        "LedgerManifests": {
+          "rows": 56,
+          "jsonBytes": 51545
+        },
+        "LedgerIdentity": {
+          "rows": 1040,
+          "jsonBytes": 996009
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118
+        }
+      },
+      "storage": {
+        "quota": 10738794496,
+        "usage": 1376256,
+        "usageDetails": {
+          "indexedDB": 1376256
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "before",
+      "count": 10000,
+      "status": "PASS",
+      "wallMs": 42741.081577000004,
+      "fixtureBytes": 3482611,
+      "retained": 10020,
+      "saves": {
+        "quick": {
+          "bytes": 8395621,
+          "checksum": "9b85a3768040423d014b43a395239bb4fa7c8a3d22822a4f17576b58b8552068"
+        },
+        "full": {
+          "bytes": 8395718,
+          "checksum": "2758ac3bde2d252244f51ccae96c37d74a2986801ad2d0246fd92d51ffe51e59"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 2077.0999999940395,
+          "p95": 2077.0999999940395
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 690.4000000059605,
+          "p95": 883
+        },
+        "T1": {
+          "n": 20,
+          "p50": 8.900000005960464,
+          "p95": 26.899999976158142
+        },
+        "T2": {
+          "n": 20,
+          "p50": 114.69999998807907,
+          "p95": 471.10000002384186
+        },
+        "query": {
+          "n": 20,
+          "p50": 2.2000000178813934,
+          "p95": 7.0999999940395355
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 86.5,
+          "p95": 313.7000000178814
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 743,
+          "p95": 974.5
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 371.59999999403954,
+          "p95": 517.4000000059605
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 1078.2000000178814,
+          "p95": 1166.699999988079
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 413.30000001192093,
+          "p95": 535.6999999880791
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 1105.5999999940395,
+          "p95": 1137.9000000059605
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 885.0999999940395,
+          "p95": 924.3000000119209
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 513669
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1026745
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68853
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 157
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 53
+        },
+        "LedgerSegments": {
+          "rows": 104,
+          "jsonBytes": 3309897
+        },
+        "LedgerResults": {
+          "rows": 119,
+          "jsonBytes": 3474828
+        },
+        "LedgerManifests": {
+          "rows": 56,
+          "jsonBytes": 51768
+        },
+        "LedgerIdentity": {
+          "rows": 10040,
+          "jsonBytes": 9528009
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118
+        }
+      },
+      "storage": {
+        "quota": 10745344000,
+        "usage": 7925760,
+        "usageDetails": {
+          "indexedDB": 7925760
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "before",
+      "count": 60000,
+      "status": "PASS",
+      "wallMs": 189965.86414199998,
+      "fixtureBytes": 18332611,
+      "retained": 60020,
+      "saves": {
+        "quick": {
+          "bytes": 42051151,
+          "checksum": "1dca67c65cce2e8686bce8dd957d375dd99f8d5a1369f8a75734e654cae8589b"
+        },
+        "full": {
+          "bytes": 42051248,
+          "checksum": "4de36e95837b52d57594b987c8131266123a15f48a418c4b3791ac3430fb99f0"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 5918.199999988079,
+          "p95": 5918.199999988079
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 3260.399999976158,
+          "p95": 3400.7999999821186
+        },
+        "T1": {
+          "n": 20,
+          "p50": 6.799999982118607,
+          "p95": 9.900000005960464
+        },
+        "T2": {
+          "n": 20,
+          "p50": 56.19999998807907,
+          "p95": 71.40000000596046
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.5,
+          "p95": 1.7000000178813934
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 43,
+          "p95": 50.29999998211861
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 4440.899999976158,
+          "p95": 6403.5
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 2169.4000000059605,
+          "p95": 3959.7000000178814
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 5881.699999988079,
+          "p95": 8359.90000000596
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 2507.4000000059605,
+          "p95": 5371.799999982119
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 5297.9000000059605,
+          "p95": 8208.90000000596
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 4796.800000011921,
+          "p95": 6988.5
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 513669
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1026745
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68853
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 157
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 53
+        },
+        "LedgerSegments": {
+          "rows": 494,
+          "jsonBytes": 19777287
+        },
+        "LedgerResults": {
+          "rows": 509,
+          "jsonBytes": 20662968
+        },
+        "LedgerManifests": {
+          "rows": 56,
+          "jsonBytes": 51830
+        },
+        "LedgerIdentity": {
+          "rows": 60040,
+          "jsonBytes": 56928009
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118
+        }
+      },
+      "storage": {
+        "quota": 10781728768,
+        "usage": 44310528,
+        "usageDetails": {
+          "indexedDB": 44310528
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "before",
+      "count": 150000,
+      "status": "FAIL",
+      "error": "Error: page.evaluate: Target crashed "
+    }
+  ],
+  "after": [
+    {
+      "variant": "after",
+      "count": 0,
+      "status": "PASS",
+      "wallMs": 10307.238250999999,
+      "fixtureBytes": 512613,
+      "worldBytes": 513542,
+      "retained": 20,
+      "saves": {
+        "quick": {
+          "bytes": 1654578,
+          "checksum": "a025a7778cc206e0937a3d30ed3a9cc2d565d5ef23776ff2bf9f930dc6a5311d"
+        },
+        "full": {
+          "bytes": 1654675,
+          "checksum": "2ed0d39873f5a890960e530115cc2bf2d3316f89f6b4361e41be731db34c63dc"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 127.90000000596046,
+          "p95": 127.90000000596046
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 44.89999997615814,
+          "p95": 56.099999994039536
+        },
+        "T1": {
+          "n": 20,
+          "p50": 6.9000000059604645,
+          "p95": 15
+        },
+        "T2": {
+          "n": 20,
+          "p50": 72.89999997615814,
+          "p95": 84.60000002384186
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.100000023841858,
+          "p95": 1.7999999821186066
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 55.80000001192093,
+          "p95": 68.19999998807907
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 141.80000001192093,
+          "p95": 156.69999998807907
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 99.09999999403954,
+          "p95": 126.09999999403954
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 241.7000000178814,
+          "p95": 257.40000000596046
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 100.7000000178814,
+          "p95": 117.09999999403954
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 253.09999999403954,
+          "p95": 282.5
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 122.59999999403954,
+          "p95": 130.7000000178814
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 514888,
+          "maxReadRows": 2
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1028001,
+          "maxReadRows": 2
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2,
+          "maxReadRows": 0
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68163,
+          "maxReadRows": 40
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 406,
+          "maxReadRows": 1
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 52,
+          "maxReadRows": 1
+        },
+        "LedgerSegments": {
+          "rows": 2,
+          "jsonBytes": 14569,
+          "maxReadRows": 2
+        },
+        "LedgerResults": {
+          "rows": 1,
+          "jsonBytes": 27921,
+          "maxReadRows": 1
+        },
+        "LedgerManifests": {
+          "rows": 2,
+          "jsonBytes": 1825,
+          "maxReadRows": 2
+        },
+        "LedgerIdentity": {
+          "rows": 40,
+          "jsonBytes": 47491,
+          "maxReadRows": 40
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118,
+          "maxReadRows": 1
+        }
+      },
+      "storage": {
+        "quota": 10737885184,
+        "usage": 466944,
+        "usageDetails": {
+          "indexedDB": 466944
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "after",
+      "count": 1000,
+      "status": "PASS",
+      "wallMs": 18650.042679,
+      "fixtureBytes": 809612,
+      "worldBytes": 513542,
+      "retained": 1020,
+      "saves": {
+        "quick": {
+          "bytes": 2361559,
+          "checksum": "7f6dd4defaea45ff2cdd995c19e3162b017f215ea35d6424084d6b550e3e9312"
+        },
+        "full": {
+          "bytes": 2361656,
+          "checksum": "686986a8db9103f6e2e383e1ad27e2b4d6aa4e41332e9c9a94dda34b7e928bcb"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 265,
+          "p95": 265
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 107.09999999403954,
+          "p95": 119.30000001192093
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7.5,
+          "p95": 10
+        },
+        "T2": {
+          "n": 20,
+          "p50": 166.90000000596046,
+          "p95": 176.40000000596046
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.2000000178813934,
+          "p95": 1.800000011920929
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 140.69999998807907,
+          "p95": 156.39999997615814
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 358.40000000596046,
+          "p95": 409.89999997615814
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 134.80000001192093,
+          "p95": 160.5
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 466.5,
+          "p95": 502.7999999821186
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 133.40000000596046,
+          "p95": 186.7999999821186
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 439.5,
+          "p95": 489.89999997615814
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 180.59999999403954,
+          "p95": 204.09999999403954
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 514888,
+          "maxReadRows": 2
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1028001,
+          "maxReadRows": 2
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2,
+          "maxReadRows": 0
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68163,
+          "maxReadRows": 40
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 406,
+          "maxReadRows": 1
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 52,
+          "maxReadRows": 1
+        },
+        "LedgerSegments": {
+          "rows": 9,
+          "jsonBytes": 377750,
+          "maxReadRows": 9
+        },
+        "LedgerResults": {
+          "rows": 9,
+          "jsonBytes": 371713,
+          "maxReadRows": 9
+        },
+        "LedgerManifests": {
+          "rows": 2,
+          "jsonBytes": 1833,
+          "maxReadRows": 2
+        },
+        "LedgerIdentity": {
+          "rows": 1040,
+          "jsonBytes": 995491,
+          "maxReadRows": 512
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118,
+          "maxReadRows": 1
+        }
+      },
+      "storage": {
+        "quota": 10738630656,
+        "usage": 1212416,
+        "usageDetails": {
+          "indexedDB": 1212416
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "after",
+      "count": 10000,
+      "status": "PASS",
+      "wallMs": 25809.111715999996,
+      "fixtureBytes": 3482612,
+      "worldBytes": 513542,
+      "retained": 2028,
+      "saves": {
+        "quick": {
+          "bytes": 3034499,
+          "checksum": "a45bbe3b91fd1b069252fd65b8624ced40dce6b2398ff2908a87320e6c638ccc"
+        },
+        "full": {
+          "bytes": 3034596,
+          "checksum": "5f667887112ccc267593e128bf1fed66d2f142ebb9938e3dde47be9539555e2c"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 535.0999999940395,
+          "p95": 535.0999999940395
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 145.59999999403954,
+          "p95": 169.5
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7.800000011920929,
+          "p95": 9.399999976158142
+        },
+        "T2": {
+          "n": 20,
+          "p50": 247.40000000596046,
+          "p95": 277.40000000596046
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.4000000059604645,
+          "p95": 2.0999999940395355
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 226.90000000596046,
+          "p95": 266.90000000596046
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 522.5999999940395,
+          "p95": 556.0999999940395
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 168.19999998807907,
+          "p95": 208
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 632.5999999940395,
+          "p95": 651.6999999880791
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 162.39999997615814,
+          "p95": 172.30000001192093
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 612.4000000059605,
+          "p95": 635.3000000119209
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 237.09999999403954,
+          "p95": 267.5
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 514888,
+          "maxReadRows": 2
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1028001,
+          "maxReadRows": 2
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2,
+          "maxReadRows": 0
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68163,
+          "maxReadRows": 40
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 406,
+          "maxReadRows": 1
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 52,
+          "maxReadRows": 1
+        },
+        "LedgerSegments": {
+          "rows": 17,
+          "jsonBytes": 704455,
+          "maxReadRows": 17
+        },
+        "LedgerResults": {
+          "rows": 16,
+          "jsonBytes": 717944,
+          "maxReadRows": 16
+        },
+        "LedgerManifests": {
+          "rows": 2,
+          "jsonBytes": 1837,
+          "maxReadRows": 2
+        },
+        "LedgerIdentity": {
+          "rows": 2048,
+          "jsonBytes": 1950915,
+          "maxReadRows": 512
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118,
+          "maxReadRows": 1
+        }
+      },
+      "storage": {
+        "quota": 10739343360,
+        "usage": 1925120,
+        "usageDetails": {
+          "indexedDB": 1925120
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "after",
+      "count": 60000,
+      "status": "PASS",
+      "wallMs": 27307.324568000004,
+      "fixtureBytes": 18332612,
+      "worldBytes": 513542,
+      "retained": 2028,
+      "saves": {
+        "quick": {
+          "bytes": 3034499,
+          "checksum": "4530d718e627ed8c994f92f7a8a68994b4ac57c3d94302b683587f3435ac53cc"
+        },
+        "full": {
+          "bytes": 3034596,
+          "checksum": "bde74c7b785ca61ccd091d0fb213d42239810cc40a2e1ee53bc7874c666230c6"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1087.2000000178814,
+          "p95": 1087.2000000178814
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 139.2999999821186,
+          "p95": 166.2000000178814
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7,
+          "p95": 36.30000001192093
+        },
+        "T2": {
+          "n": 20,
+          "p50": 237.30000001192093,
+          "p95": 304
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.2000000178813934,
+          "p95": 1.800000011920929
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 208.90000000596046,
+          "p95": 283.59999999403954
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 585.2000000178814,
+          "p95": 636.9000000059605
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 235,
+          "p95": 303.90000000596046
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 636.4000000059605,
+          "p95": 735.4000000059605
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 173,
+          "p95": 213.90000000596046
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 590.6999999880791,
+          "p95": 672.2000000178814
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 242.7000000178814,
+          "p95": 279.90000000596046
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 514888,
+          "maxReadRows": 2
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1028001,
+          "maxReadRows": 2
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2,
+          "maxReadRows": 0
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68163,
+          "maxReadRows": 40
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 406,
+          "maxReadRows": 1
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 52,
+          "maxReadRows": 1
+        },
+        "LedgerSegments": {
+          "rows": 17,
+          "jsonBytes": 704455,
+          "maxReadRows": 17
+        },
+        "LedgerResults": {
+          "rows": 16,
+          "jsonBytes": 717944,
+          "maxReadRows": 16
+        },
+        "LedgerManifests": {
+          "rows": 2,
+          "jsonBytes": 1837,
+          "maxReadRows": 2
+        },
+        "LedgerIdentity": {
+          "rows": 2048,
+          "jsonBytes": 1950915,
+          "maxReadRows": 512
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118,
+          "maxReadRows": 1
+        }
+      },
+      "storage": {
+        "quota": 10739343360,
+        "usage": 1925120,
+        "usageDetails": {
+          "indexedDB": 1925120
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    },
+    {
+      "variant": "after",
+      "count": 150000,
+      "status": "PASS",
+      "wallMs": 29372.51036,
+      "fixtureBytes": 45062612,
+      "worldBytes": 513542,
+      "retained": 2028,
+      "saves": {
+        "quick": {
+          "bytes": 3034499,
+          "checksum": "b1d8bda552dac5ab7da9f20350a19838975f8b20936b6554d7286b6efa423d41"
+        },
+        "full": {
+          "bytes": 3034596,
+          "checksum": "dc63ea4343c7919b421459fa30bdb5681b569a2a702f1ba01859992bc2d8cc42"
+        }
+      },
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1766.8999999761581,
+          "p95": 1766.8999999761581
+        },
+        "reopenLoad": {
+          "n": 5,
+          "p50": 173,
+          "p95": 314.69999998807907
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7.699999988079071,
+          "p95": 9.900000005960464
+        },
+        "T2": {
+          "n": 20,
+          "p50": 236.80000001192093,
+          "p95": 322.59999999403954
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.300000011920929,
+          "p95": 1.9000000059604645
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 224.19999998807907,
+          "p95": 325.10000002384186
+        },
+        "Recovery": {
+          "n": 5,
+          "p50": 518.0999999940395,
+          "p95": 640.7999999821186
+        },
+        "quickExport": {
+          "n": 5,
+          "p50": 171.19999998807907,
+          "p95": 198.2000000178814
+        },
+        "quickImport": {
+          "n": 5,
+          "p50": 694.7000000178814,
+          "p95": 765.3999999761581
+        },
+        "fullExport": {
+          "n": 5,
+          "p50": 169.59999999403954,
+          "p95": 200.30000001192093
+        },
+        "fullImport": {
+          "n": 5,
+          "p50": 591.4000000059605,
+          "p95": 690.5
+        },
+        "coldLoad": {
+          "n": 5,
+          "p50": 256.90000000596046,
+          "p95": 316.39999997615814
+        }
+      },
+      "physical": {
+        "saves": {
+          "rows": 2,
+          "jsonBytes": 514888,
+          "maxReadRows": 2
+        },
+        "backups": {
+          "rows": 2,
+          "jsonBytes": 1028001,
+          "maxReadRows": 2
+        },
+        "BattleReports": {
+          "rows": 0,
+          "jsonBytes": 2,
+          "maxReadRows": 0
+        },
+        "Inbox": {
+          "rows": 40,
+          "jsonBytes": 68163,
+          "maxReadRows": 40
+        },
+        "RuntimeMeta": {
+          "rows": 1,
+          "jsonBytes": 406,
+          "maxReadRows": 1
+        },
+        "StorageMeta": {
+          "rows": 1,
+          "jsonBytes": 52,
+          "maxReadRows": 1
+        },
+        "LedgerSegments": {
+          "rows": 17,
+          "jsonBytes": 704455,
+          "maxReadRows": 17
+        },
+        "LedgerResults": {
+          "rows": 16,
+          "jsonBytes": 717944,
+          "maxReadRows": 16
+        },
+        "LedgerManifests": {
+          "rows": 2,
+          "jsonBytes": 1837,
+          "maxReadRows": 2
+        },
+        "LedgerIdentity": {
+          "rows": 2048,
+          "jsonBytes": 1950915,
+          "maxReadRows": 512
+        },
+        "LedgerHeads": {
+          "rows": 1,
+          "jsonBytes": 118,
+          "maxReadRows": 1
+        }
+      },
+      "storage": {
+        "quota": 10739347456,
+        "usage": 1929216,
+        "usageDetails": {
+          "indexedDB": 1929216
+        }
+      },
+      "gameplayBefore": "5a036224afc9c8933bb6a492ad625c47c2537a840f0c1c7dd13c138281a837a0"
+    }
+  ],
+  "nativeReliability": {
+    "status": "PASS",
+    "faults": [
+      {
+        "point": "fence-write",
+        "status": "PASS"
+      },
+      {
+        "point": "inbox-write",
+        "status": "PASS"
+      },
+      {
+        "point": "report-write",
+        "status": "PASS"
+      },
+      {
+        "point": "backup-write",
+        "status": "PASS"
+      },
+      {
+        "point": "world-write",
+        "status": "PASS"
+      },
+      {
+        "point": "authority-write",
+        "status": "PASS"
+      },
+      {
+        "point": "metadata-write",
+        "status": "PASS"
+      },
+      {
+        "point": "result-write",
+        "status": "PASS"
+      },
+      {
+        "point": "ledger-segment-write",
+        "status": "PASS"
+      },
+      {
+        "point": "ledger-result-write",
+        "status": "PASS"
+      },
+      {
+        "point": "ledger-index-write",
+        "status": "PASS"
+      },
+      {
+        "point": "ledger-manifest-write",
+        "status": "PASS"
+      },
+      {
+        "point": "ledger-head-write",
+        "status": "PASS"
+      },
+      {
+        "point": "retention-write",
+        "status": "PASS"
+      }
+    ],
+    "rapid": {
+      "done": true,
+      "accepted": 50,
+      "ordered": true,
+      "oldWriterFenced": true,
+      "oldEpoch": 1,
+      "newEpoch": 2
+    },
+    "eviction": {
+      "done": true,
+      "actualT2Commits": 1025,
+      "retained": 1024,
+      "expiredOriginalAckNotPromised": true,
+      "retiredReplayRefused": true,
+      "restart": true,
+      "recovery": true,
+      "import": true,
+      "pendingPreservedUntilBranchTransition": true,
+      "branchTransitionExplicitNeedsConfirmation": true
+    },
+    "workerTerminatedAfterT1": true,
+    "restartedPendingCommittedOnce": true,
+    "lostAckExactQuery": true
+  },
+  "cold": {
+    "before": {
+      "method": "Actual production GameApp, fresh Chromium per sample, real native Runtime/IDB, same legal 100-faction/99-AI/25X capacity fixture. Seed is outside the measured interval. Interactive means the real rename dialog opens and its input accepts text; no formal command is submitted. Desktop only. Long Tasks include startup and rendering, never claimed Android.",
+      "variant": "before",
+      "ms": {
+        "60000": {
+          "navigation": {
+            "n": 5,
+            "p50": 7902.805733999994,
+            "p95": 8311.877410999998
+          },
+          "click": {
+            "n": 5,
+            "p50": 563.4514679999993,
+            "p95": 667.2741229999956
+          }
+        }
+      },
+      "allPass": true,
+      "maxLongTaskMs": 106,
+      "mainIDBOps": [
+        0
+      ],
+      "historyOnWire": false,
+      "samples": 5
+    },
+    "after": {
+      "method": "Actual production GameApp, fresh Chromium per sample, real native Runtime/IDB, same legal 100-faction/99-AI/25X capacity fixture. Seed is outside the measured interval. Interactive means the real rename dialog opens and its input accepts text; no formal command is submitted. Desktop only. Long Tasks include startup and rendering, never claimed Android.",
+      "variant": "after",
+      "ms": {
+        "0": {
+          "navigation": {
+            "n": 5,
+            "p50": 1958.2605099999982,
+            "p95": 2078.6913870000003
+          },
+          "click": {
+            "n": 5,
+            "p50": 822.5712029999995,
+            "p95": 978.5550710000002
+          }
+        },
+        "1000": {
+          "navigation": {
+            "n": 5,
+            "p50": 2365.783238,
+            "p95": 2403.8166080000046
+          },
+          "click": {
+            "n": 5,
+            "p50": 763.4790130000001,
+            "p95": 791.4953990000031
+          }
+        },
+        "10000": {
+          "navigation": {
+            "n": 5,
+            "p50": 2392.5376409999953,
+            "p95": 2451.1703179999968
+          },
+          "click": {
+            "n": 5,
+            "p50": 781.2859299999982,
+            "p95": 838.805594999998
+          }
+        },
+        "60000": {
+          "navigation": {
+            "n": 5,
+            "p50": 2439.7915369999973,
+            "p95": 2451.0868099999934
+          },
+          "click": {
+            "n": 5,
+            "p50": 831.4753770000025,
+            "p95": 845.830071999997
+          }
+        },
+        "150000": {
+          "navigation": {
+            "n": 5,
+            "p50": 2508.431826,
+            "p95": 2566.722318999993
+          },
+          "click": {
+            "n": 5,
+            "p50": 800.5322339999984,
+            "p95": 838.7498199999973
+          }
+        }
+      },
+      "allPass": true,
+      "maxLongTaskMs": 149,
+      "mainIDBOps": [
+        0
+      ],
+      "historyOnWire": false,
+      "samples": 25
+    }
+  },
+  "seededOutcomeCounts": [
+    {
+      "count": 0,
+      "recentOutcomes": 0
+    },
+    {
+      "count": 1000,
+      "recentOutcomes": 1000
+    },
+    {
+      "count": 10000,
+      "recentOutcomes": 2048
+    },
+    {
+      "count": 60000,
+      "recentOutcomes": 2048
+    },
+    {
+      "count": 150000,
+      "recentOutcomes": 2048
+    }
+  ],
+  "diagnostics": {
+    "before": {
+      "status": "PASS",
+      "error": null,
+      "method": "Separate instrumented actual Persistence worker: 2 warm commands, 1 reopen/Recovery/Quick/Full attempt. This is NOT a replacement PASS or n=20 percentile dataset for the failed 150k baseline. No forced GC. Heap/RSS are sampled maxima, not guaranteed instantaneous peaks. GC complete events may overlap; no exclusive total-pause claim.",
+      "sampledPeak": {
+        "workerHeapSamples": 352,
+        "workerUsedBytes": 1361473904,
+        "workerBackingStorageBytes": 737588455,
+        "browserTreeSumKiB": 3638244,
+        "largestRendererKiB": 2958392
+      },
+      "gc": {
+        "MinorGC": {
+          "events": 120,
+          "phaseMs": 900.611
+        },
+        "V8.GCScavenger": {
+          "events": 120,
+          "phaseMs": 883.025
+        },
+        "V8.GCIncrementalMarking": {
+          "events": 517,
+          "phaseMs": 12.827999999999994
+        },
+        "MajorGC": {
+          "events": 3,
+          "phaseMs": 106.39699999999999
+        }
+      },
+      "worldBytes": 512911,
+      "physicalJSONBytes": 244733605,
+      "storage": {
+        "quota": 10846973952,
+        "usage": 109555712,
+        "usageDetails": {
+          "indexedDB": 109555712
+        }
+      },
+      "saves": {
+        "quick": {
+          "bytes": 102522696,
+          "checksum": "65203b06e6b6804c8fd9a50ec74b86f510575a859edfc261321fd949be479732"
+        },
+        "full": {
+          "bytes": 102522793,
+          "checksum": "5db51833a4227abd95ba444f304721a2198a37c935d28b45deb42b73bbcbe2e8"
+        }
+      },
+      "latencyPercentileSubstitute": false
+    },
+    "after": {
+      "status": "PASS",
+      "error": null,
+      "method": "Separate instrumented actual Persistence worker: 2 warm commands, 1 reopen/Recovery/Quick/Full attempt. This is NOT a replacement PASS or n=20 percentile dataset for the failed 150k baseline. No forced GC. Heap/RSS are sampled maxima, not guaranteed instantaneous peaks. GC complete events may overlap; no exclusive total-pause claim.",
+      "sampledPeak": {
+        "workerHeapSamples": 28,
+        "workerUsedBytes": 223774568,
+        "workerBackingStorageBytes": 59853344,
+        "browserTreeSumKiB": 1043280,
+        "largestRendererKiB": 530200
+      },
+      "gc": {},
+      "worldBytes": 513535,
+      "physicalJSONBytes": 5566778,
+      "storage": {
+        "quota": 10739347456,
+        "usage": 1929216,
+        "usageDetails": {
+          "indexedDB": 1929216
+        }
+      },
+      "saves": {
+        "quick": {
+          "bytes": 3622985,
+          "checksum": "5be53b82026ecc39a1d723f9ca3fe1da3ded3e8842e2c4e154117ce4f0225b41"
+        },
+        "full": {
+          "bytes": 3623082,
+          "checksum": "01c0225df85c12dd79aaa4722cc2ec0de04d3fe56e3ffd8db77b41e0a45602c9"
+        }
+      },
+      "latencyPercentileSubstitute": false
+    }
+  },
+  "legacyUpgrade": {
+    "browser": "154.0.8037.57",
+    "method": "Same origin/context retains a genuine PR60 ledger-v1 database and old native SW; updates to the new incompatible bounded format without unregister/delete/site reset. SW success is separate from new campaign success.",
+    "oldBefore": {
+      "checksum": "9e722d6ef9faabbbbfaa9c87869b737a3f705cfa5e887fa5db54ca6aa7ccc387",
+      "jsonBytes": 1485296,
+      "counts": {
+        "BattleReports": 0,
+        "Inbox": 0,
+        "LedgerHeads": 1,
+        "LedgerIdentity": 0,
+        "LedgerManifests": 3,
+        "LedgerResults": 0,
+        "LedgerSegments": 0,
+        "RuntimeMeta": 1,
+        "StorageMeta": 1,
+        "backups": 2,
+        "saves": 2
+      }
+    },
+    "clientsDuringUpdate": 2,
+    "swUpdated": true,
+    "legacyClearlyRejected": true,
+    "secondClientController": {
+      "version": "0.31.16",
+      "contentSha": "3a3ae8dc2e3b60167f1b3e9dfa3e16020f573bd0"
+    },
+    "oldAfterUpdate": {
+      "checksum": "ccd44fa85eb867817a2f9dc2e35026957f8792b01f973e620c1c22586fb9efee",
+      "jsonBytes": 1688746,
+      "counts": {
+        "BattleReports": 0,
+        "Inbox": 0,
+        "LedgerHeads": 1,
+        "LedgerIdentity": 23,
+        "LedgerManifests": 43,
+        "LedgerResults": 23,
+        "LedgerSegments": 23,
+        "RuntimeMeta": 1,
+        "StorageMeta": 1,
+        "backups": 2,
+        "saves": 2
+      }
+    },
+    "oldAfterOpeningNewForm": {
+      "checksum": "ccd44fa85eb867817a2f9dc2e35026957f8792b01f973e620c1c22586fb9efee",
+      "jsonBytes": 1688746,
+      "counts": {
+        "BattleReports": 0,
+        "Inbox": 0,
+        "LedgerHeads": 1,
+        "LedgerIdentity": 23,
+        "LedgerManifests": 43,
+        "LedgerResults": 23,
+        "LedgerSegments": 23,
+        "RuntimeMeta": 1,
+        "StorageMeta": 1,
+        "backups": 2,
+        "saves": 2
+      }
+    },
+    "newCampaignCreated": true,
+    "oldAfterNewCampaign": {
+      "checksum": "ccd44fa85eb867817a2f9dc2e35026957f8792b01f973e620c1c22586fb9efee",
+      "jsonBytes": 1688746,
+      "counts": {
+        "BattleReports": 0,
+        "Inbox": 0,
+        "LedgerHeads": 1,
+        "LedgerIdentity": 23,
+        "LedgerManifests": 43,
+        "LedgerResults": 23,
+        "LedgerSegments": 23,
+        "RuntimeMeta": 1,
+        "StorageMeta": 1,
+        "backups": 2,
+        "saves": 2
+      }
+    },
+    "newCampaignReloaded": true,
+    "multiClientWriterLocked": true,
+    "status": "PASS"
+  },
+  "equivalentSeededGameplayDigests": true,
+  "rawArtifactDigests": {
+    "first-full-regression.json": "6e3b533e72e40142edc212aa66863ba38316113f2fd172d360513ce8d3880c22",
+    "ci-first-full-regression.json": "6c46545a63daebe2c7acda727e7eec5137cf7a564bd43fa37d1d900a6723504b",
+    "native-baseline-persistence.json": "5b575295ef9273fb74097b17cea787079b8a44f09f28e4dbdaf859ad70e9ff1b",
+    "native-baseline-150k-streamed.json": "0c86beaf79106a6abb924d393d9629d9dcf6a3ee09a1cc9536a8b929174ea262",
+    "native-final-before-eviction-fix.json": "70a9b13fa77b0b8edc7ba98a2df6867037116c697da8a2f4054a10e267e83124",
+    "native-eviction-stage.json": "5dee197f21a8cb1cf0bff4972e16ac4c412150bc06f11e91bafa6435ebc79c90",
+    "native-corrected-persistence.json": "40e865fb6d2a9585cf6a0dbb52ca277b4668873dc8e8d7267d8ae3dfb19d4218",
+    "diagnostic-before-150000-first-crash.json": "7215e78ff3ce60e402edaba67fde63d947f9674259f04779b49c24605e96af60",
+    "diagnostic-before-150000.json": "e21d7390966a4140daa38fe1f7e366754cc6bff8af8fa64bae5e73d4e6c82c81",
+    "diagnostic-after-150000.json": "d4c7acb8ad7f1d15df0d0545ffa1370275ab2ee84a0d67f821633d73fe693acc",
+    "sw-bounded-original-five.json": "6afdd02da040e3066edd3806b9e3deee247b9f1d172058ee1d5d1cf02e111948",
+    "sw-bounded-successor-five.json": "4cb105d92181e68f17b1b31c5e2a45b8850c6de5d9e182494dc0f9e4fce33e25",
+    "sw-corrected-successor-five.json": "bf65bf238c793c4b1522acfb9e95eb0c78905afe0bdc7b978a95e4aa00234aca",
+    "sw-transition-five.json": "9af3bccb34226142eb83152691081a15a60a96c835f9ab13df5950743fa3faee",
+    "legacy-upgrade.json": "3dae3261c65d1b4255005c7b191fa9c054c3da800d2704aaccc710dada2a3745",
+    "production-cold.json": "ccf1d3fddfb4f4c377d7fad4bae43342251b163b3f938900e84235a5a86a77d6",
+    "production-cold-baseline-60k.json": "84a4ad086d52110c5d15b5596a7b2e08abd6c38a533db40f971d806ef02c49b5",
+    "production-soak.json": "560121a158b9c877e43f35df2f1acb19695ddfe25e9921a475f7716f57e98520",
+    "production-soak-first-inspector-stall.json": "8e8ec2e2e1824905ed89eab7a2199813d1c59fac0829d843119f78f9029f86bd",
+    "local-243-full.json": "e40e195beff0844871543ad9daf846995ea0203f024c7ab96fd1a9baef9d60e8",
+    "ci243-full-regression.json": "748388964540c8170463e23e6df767b35c6c205561b3ec76dca05e204ccd2cd9",
+    "raw-prune-directed.json": "a36059e03791f7b52e8cbf4c967d2c9d4b0b1506242c14c3993d09b67b4e0b70",
+    "local-final-full.json": "83a0813bf86d1431ad2050374a84bf05ad38fa9bd83ecc86a196e581c2ce60f0",
+    "parity.json": "3a118f3b16cc012bee9531a099a3002c58c8f65da5ec199d1a4cec4c851d85ec",
+    "sw-normal-resend-diagnosis-1.json": "44178960177ab8ed376302083c2a5f218b0ee62d988703154de74fa76fb66f1c",
+    "sw-normal-resend-diagnosis-2.json": "1dd13f34ee65ae9b90c9a74f62d0419cf9b71583ffb115c43c3fd7a1d27e46f5",
+    "sw-normal-resend-diagnosis-3.json": "0c4a82dc617105d039c43578c4aa7ffdca92b93041d0adb81e6f81ae405865cd",
+    "sw-normal-resend-diagnosis-4.json": "3eee5e447884f4cb79abccc7bcd3b14b3d16a4ed12b0cdd6c7b9dbf030012c98",
+    "sw-normal-resend-diagnosis-5.json": "9e1140db6c1ae4251379ec06a8500f97e60f469a3c0395a8a6dd0f9f833717e7",
+    "sw-normal-resend-diagnosis-6.json": "d11fc66401ca5622a5314dcac67d53227c296f169208f3bcab465516f9f950eb",
+    "sw-resend-diagnosis-1.json": "fb4c221d43f58c051e972d5104b1a2dc4773c8851ef158adb9f8e0c29a9f94cc",
+    "sw-resend-diagnosis-2.json": "0f588522a22def054405dd8aa57c9714518f179375dbd8ae909eff4961efb249",
+    "sw-resend-diagnosis-3.json": "d2666b23dafbf5bbb21d945882faa5327ebc9616bf5e55f35d2f6cca5b800d6d",
+    "sw-resend-diagnosis-4.json": "523cacd7fa9d6f8eb2c6b7b2b3260ee201e73beab48d9ab7fdd044ce5247cfc1",
+    "sw-resend-diagnosis-5.json": "142308505a8691b7f2367db5cc40c59331d27d725680faf0a7f8b69cc83874d8",
+    "sw-resend-diagnosis-6.json": "5aaca2a8bb9ef265fb8fdd1574bb3099a6a5dd44bfd9c59d0376bcfbec5d7a16",
+    "ci1f-full-regression.json": "0f2a285bc5e80c62f2de6bcdcd19522adbf9753b728337cd7996eb388522cc16",
+    "final-environment.json": "043eb8461d561e1a7ef72533acb1a94e5838fc49fcf49ebdb6846adcceefeb69",
+    "sw-delivery-five.json": "1b8152b357bbc6e8142ab588fec5031f8904165cda0c15fafcd4475ed1fee48c",
+    "merge-simulation-243.json": "b7709f0665b6750280df6385bce86a4a5236743f58bdd43f8da6125c3240cd75",
+    "b10-release-all-gates-final.log": "d9a963586ef2a54dcd9f511024cfb9204f0aceb7426f3f0e5303dbecd896c451",
+    "b10-release-build-final19.log": "52f13b22e527468341691e7d9ac3f7869f48d6856d35418e3a7f97dd9ea49a9e",
+    "b10-release-pages-final19.log": "03ceeb59584038762b73bbb3912c459f86746d95f0a0fadeb416dc997ff3b961",
+    "b10-release-release-final19.log": "571d35086e2d0d161b58bf289b579dc73d0c53e2be2f524d35b35a7bec39a402"
+  },
+  "swRuns": [
+    {
+      "artifact": "sw-bounded-original-five.json",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+          "step": "wait native installation identity probe"
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "sw-bounded-successor-five.json",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "sw-corrected-successor-five.json",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+          "step": "retry update and verify target"
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "sw-transition-five.json",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    },
+    {
+      "artifact": "sw-delivery-five.json",
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+          "step": "retry update and verify target"
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+          "step": "retry update and verify target"
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "step": null
+        }
+      ]
+    }
+  ],
+  "soak": {
+    "status": "PASS",
+    "error": null,
+    "method": "Actual production GameApp, six DOM rename commands, native Runtime/IDB/Preview, 100 factions/99 AI/25X, 600000ms real elapsed time. No clock offset, forced GC, scheduler substitution or phone claim.",
+    "startedAt": "2026-11-04T08:20:17.627Z",
+    "elapsedMs": 600486,
+    "points": [
+      {
+        "kind": "tab-cycle",
+        "visibility": "visible",
+        "otherWriterLocked": true
+      },
+      {
+        "elapsedMs": 100009,
+        "commands": [
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "state": "committed",
+            "durableMs": 41.400000005960464,
+            "terminalMs": 338.2000000178814
+          }
+        ],
+        "historyOnWire": false,
+        "projection": {
+          "sequence": 33,
+          "revision": 35
+        },
+        "projections": 33,
+        "mainHeap": 9846179,
+        "longTaskCount": 3,
+        "longTaskMaxMs": 139
+      },
+      {
+        "elapsedMs": 200025,
+        "commands": [
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "state": "committed",
+            "durableMs": 41.400000005960464,
+            "terminalMs": 338.2000000178814
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+            "state": "committed",
+            "durableMs": 115.7999999821186,
+            "terminalMs": 373.09999999403954
+          }
+        ],
+        "historyOnWire": false,
+        "projection": {
+          "sequence": 191,
+          "revision": 193
+        },
+        "projections": 191,
+        "mainHeap": 9413693,
+        "longTaskCount": 5,
+        "longTaskMaxMs": 156
+      },
+      {
+        "kind": "tab-cycle",
+        "visibility": "visible",
+        "otherWriterLocked": true
+      },
+      {
+        "elapsedMs": 300006,
+        "commands": [
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "state": "committed",
+            "durableMs": 41.400000005960464,
+            "terminalMs": 338.2000000178814
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+            "state": "committed",
+            "durableMs": 115.7999999821186,
+            "terminalMs": 373.09999999403954
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.3",
+            "state": "committed",
+            "durableMs": 33.5,
+            "terminalMs": 156.19999998807907
+          }
+        ],
+        "historyOnWire": false,
+        "projection": {
+          "sequence": 312,
+          "revision": 314
+        },
+        "projections": 312,
+        "mainHeap": 11801028,
+        "longTaskCount": 5,
+        "longTaskMaxMs": 156
+      },
+      {
+        "elapsedMs": 400020,
+        "commands": [
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "state": "committed",
+            "durableMs": 41.400000005960464,
+            "terminalMs": 338.2000000178814
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+            "state": "committed",
+            "durableMs": 115.7999999821186,
+            "terminalMs": 373.09999999403954
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.3",
+            "state": "committed",
+            "durableMs": 33.5,
+            "terminalMs": 156.19999998807907
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.4",
+            "state": "committed",
+            "durableMs": 232.90000000596046,
+            "terminalMs": 516
+          }
+        ],
+        "historyOnWire": false,
+        "projection": {
+          "sequence": 441,
+          "revision": 443
+        },
+        "projections": 441,
+        "mainHeap": 10282686,
+        "longTaskCount": 6,
+        "longTaskMaxMs": 156
+      },
+      {
+        "kind": "tab-cycle",
+        "visibility": "visible",
+        "otherWriterLocked": true
+      },
+      {
+        "elapsedMs": 500009,
+        "commands": [
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "state": "committed",
+            "durableMs": 41.400000005960464,
+            "terminalMs": 338.2000000178814
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+            "state": "committed",
+            "durableMs": 115.7999999821186,
+            "terminalMs": 373.09999999403954
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.3",
+            "state": "committed",
+            "durableMs": 33.5,
+            "terminalMs": 156.19999998807907
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.4",
+            "state": "committed",
+            "durableMs": 232.90000000596046,
+            "terminalMs": 516
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.5",
+            "state": "committed",
+            "durableMs": 43.70000001788139,
+            "terminalMs": 712.3000000119209
+          }
+        ],
+        "historyOnWire": false,
+        "projection": {
+          "sequence": 575,
+          "revision": 577
+        },
+        "projections": 575,
+        "mainHeap": 11207690,
+        "longTaskCount": 8,
+        "longTaskMaxMs": 156
+      },
+      {
+        "elapsedMs": 600002,
+        "commands": [
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "state": "committed",
+            "durableMs": 41.400000005960464,
+            "terminalMs": 338.2000000178814
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+            "state": "committed",
+            "durableMs": 115.7999999821186,
+            "terminalMs": 373.09999999403954
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.3",
+            "state": "committed",
+            "durableMs": 33.5,
+            "terminalMs": 156.19999998807907
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.4",
+            "state": "committed",
+            "durableMs": 232.90000000596046,
+            "terminalMs": 516
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.5",
+            "state": "committed",
+            "durableMs": 43.70000001788139,
+            "terminalMs": 712.3000000119209
+          },
+          {
+            "id": "command:p.269e4a8172f64e0da181827078daccd4.2.1.6",
+            "state": "committed",
+            "durableMs": 19.600000023841858,
+            "terminalMs": 157.60000002384186
+          }
+        ],
+        "historyOnWire": false,
+        "projection": {
+          "sequence": 695,
+          "revision": 697
+        },
+        "projections": 695,
+        "mainHeap": 11362000,
+        "longTaskCount": 8,
+        "longTaskMaxMs": 156
+      }
+    ],
+    "final": {
+      "done": true,
+      "time": 15028612,
+      "agents": 99,
+      "minDecisions": 4,
+      "totalDecisions": 552,
+      "retained": 391,
+      "statuses": [
+        {
+          "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+          "state": "committed",
+          "ack": {
+            "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.1",
+            "status": "committed",
+            "revision": 4
+          },
+          "originalRevision": 3
+        },
+        {
+          "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+          "state": "committed",
+          "ack": {
+            "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.2",
+            "status": "committed",
+            "revision": 38
+          },
+          "originalRevision": 36
+        },
+        {
+          "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.3",
+          "state": "committed",
+          "ack": {
+            "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.3",
+            "status": "committed",
+            "revision": 195
+          },
+          "originalRevision": 194
+        },
+        {
+          "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.4",
+          "state": "committed",
+          "ack": {
+            "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.4",
+            "status": "committed",
+            "revision": 317
+          },
+          "originalRevision": 315
+        },
+        {
+          "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.5",
+          "state": "committed",
+          "ack": {
+            "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.5",
+            "status": "committed",
+            "revision": 446
+          },
+          "originalRevision": 444
+        },
+        {
+          "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.6",
+          "state": "committed",
+          "ack": {
+            "commandId": "command:p.269e4a8172f64e0da181827078daccd4.2.1.6",
+            "status": "committed",
+            "revision": 579
+          },
+          "originalRevision": 578
+        }
+      ],
+      "effects": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "build": {
+      "name": "after",
+      "head": "243f68a9307ca1335beb1b023dab22d7d1fbdca4",
+      "version": "0.31.18",
+      "contentSha": "243f68a9307ca1335beb1b023dab22d7d1fbdca4"
+    },
+    "inspection": {
+      "sameOriginalPage": true,
+      "runtimeAwayBarrier": true,
+      "existingExclusiveWriterLockHeld": true,
+      "noInspectorNavigation": true,
+      "noNewWriterAcquired": true
+    }
+  },
+  "localFull": {
+    "success": false,
+    "numPassedTests": 2462,
+    "numFailedTests": 0,
+    "numPendingTests": 12,
+    "startTime": 1793783260584,
+    "numFailedTestSuites": 1,
+    "suiteErrors": [
+      {
+        "file": "breakthroughB92.test.ts",
+        "message": "Hook timed out in 240000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\"."
+      }
+    ]
+  },
+  "finalProgramSource": {
+    "head": "1f44074d1d55186dd5210b159401c1dbc580bfd2",
+    "content": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79",
+    "version": "0.31.19",
+    "deltaFromMeasuredBoundedSource": "Only skips unused graph traversal in raw pure replay; persistence=true and bounded-world graph collection unchanged."
+  },
+  "ciProgramSource": {
+    "runId": 41803649348,
+    "head": "1f44074d1d55186dd5210b159401c1dbc580bfd2",
+    "checkoutMergeSha": "298a6f08f642a2c18921f4ce24afa42ad63082c2",
+    "success": true,
+    "numPassedTests": 2473,
+    "numFailedTests": 0,
+    "numPendingTests": 1,
+    "artifactId": 13310216169
+  },
+  "localEnvironment": {
+    "node": "v22.23.4",
+    "heapLimitBytes": 2197815296,
+    "nodeOptions": null,
+    "cpuQuota": "200000 100000",
+    "memoryLimit": "8589934592",
+    "memoryEvents": "low 0\nhigh 0\nmax 36902\noom 4\noom_kill 4\noom_group_kill 0\n",
+    "loadavg": [
+      0.75,
+      0.53,
+      0.87
+    ],
+    "workers": 2,
+    "defaultTestTimeoutMs": 30000,
+    "longHistoryCount": 150000,
+    "longHistoryTimeoutMs": 120000,
+    "concurrentBrowserBenchmarks": false
+  },
+  "localBaselineEnvironment": {
+    "node": "v22.23.4",
+    "heapLimitBytes": 2197815296,
+    "nodeOptions": null,
+    "cpuQuota": "200000 100000",
+    "memoryLimit": "8589934592",
+    "memoryEvents": "low 0\nhigh 0\nmax 33004\noom 4\noom_kill 4\noom_group_kill 0\n",
+    "loadavg": [
+      0.34,
+      0.38,
+      0.52
+    ],
+    "workers": 2,
+    "defaultTestTimeoutMs": 30000,
+    "longHistoryCount": 150000,
+    "longHistoryTimeoutMs": 120000,
+    "concurrentBrowserBenchmarks": false
+  },
+  "verification": {
+    "sourceHead": "1f44074d1d55186dd5210b159401c1dbc580bfd2",
+    "typecheck": "PASS",
+    "build": "PASS",
+    "pagesPaths": "PASS",
+    "releaseIdentity": "PASS",
+    "localCIGateCommands": 27,
+    "localCIGateExitCode": 0,
+    "worldParity": {
+      "pass": 31,
+      "total": 31
+    },
+    "deploymentIsolation": {
+      "pass": 3,
+      "total": 3
+    },
+    "previewBoundary": {
+      "pass": true,
+      "transitiveModules": 79,
+      "authorityImports": 0,
+      "storageCapabilities": 0,
+      "renderReducerPreviewCalls": 0
+    },
+    "projectionBoundary": {
+      "pass": true,
+      "displayHistoryMaterialization": 0
+    },
+    "android": "NOT TESTED"
+  },
+  "mergeSimulation": {
+    "simulatedRelease": {
+      "version": "0.30.82",
+      "commitSha": "7a0a787ce28a8a10fd0fd5c3afbffd45f0f92597",
+      "contentSha": "7a0a787ce28a8a10fd0fd5c3afbffd45f0f92597",
+      "strict": true
+    },
+    "status": "PASS",
+    "method": "Detached local worktree only; no main/ref updates, pushes, Actions dispatch or deployment. Merge commits preserve stack ancestry. Install BOTH isolated deployment commits BEFORE PR54.",
+    "initialMain": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+    "safetyCommits": [
+      "718a71e",
+      "dc14401"
+    ],
+    "simulatedSafetyCommit": "fe1f2410f915c4c245a59c69d8da06989bedf8a7",
+    "stages": [
+      {
+        "pr": 54,
+        "source": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+        "simulationHead": "02472b86f8ab4c73e2b90559c91041e680c638ea",
+        "pushDeploy": false
+      },
+      {
+        "pr": 55,
+        "source": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+        "simulationHead": "2ef4fb2acc7e1413dbcb308ff8ce86618d387e3b",
+        "pushDeploy": false
+      },
+      {
+        "pr": 56,
+        "source": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+        "simulationHead": "aa5900a17d43e94bb14e82ae5094a6ea63b495f8",
+        "pushDeploy": false
+      },
+      {
+        "pr": 57,
+        "source": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+        "simulationHead": "216f84ce6f5a65229f3647bb2167faa2d87d545a",
+        "pushDeploy": false
+      },
+      {
+        "pr": 58,
+        "source": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+        "simulationHead": "8f44bacd202d75e44a0f95b67d248f73aef60d6f",
+        "pushDeploy": false
+      },
+      {
+        "pr": 59,
+        "source": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+        "simulationHead": "cf8f1b9b316104a4a68be5639524a59ccf451d6b",
+        "pushDeploy": false
+      },
+      {
+        "pr": 60,
+        "source": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
+        "simulationHead": "c28be0d3e0ec6bd5b4b25ba3f8ddfbf70352e9ca",
+        "pushDeploy": false
+      },
+      {
+        "pr": "release-unblock",
+        "source": "1f44074d1d55186dd5210b159401c1dbc580bfd2",
+        "simulationHead": "7a0a787ce28a8a10fd0fd5c3afbffd45f0f92597",
+        "pushDeploy": false
+      }
+    ]
+  }
+}

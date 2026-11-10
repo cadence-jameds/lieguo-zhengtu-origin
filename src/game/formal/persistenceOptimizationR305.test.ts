@@ -1,6 +1,7 @@
+import {receiveDurableFixture} from './durableIdentityTestSupport';
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it,vi} from 'vitest';
-import * as candidate from '../../../scripts/command-ledger-candidate.mjs';
+import * as candidate from './recentReceiptIndex';
 import {FormalPersistence,type FailurePoint} from '../persistence';
 import {LedgerReadSession,ledgerTables,readLedgerArchive,scanLedgerIdentity,writeLedger,resultFromReceipt} from '../ledgerStore';
 import {commandId} from './ids';
@@ -27,8 +28,8 @@ it('keyset scans visit all identities once across 512 boundaries, including the 
  const p=store(),w=await p.start(await projectionSyntheticWorld(1100)),seen:string[]=[],batches:number[]=[];
  const one=await p.db.table('LedgerIdentity').toCollection().first();await p.db.table('LedgerIdentity').put({...one,commandId:''});
  await p.db.transaction('r',p.db.table('LedgerIdentity'),()=>scanLedgerIdentity(p.db,w.campaignId,rs=>{batches.push(rs.length);seen.push(...rs.map(r=>r.commandId));}));
- expect(seen).toHaveLength(1101);expect(new Set(seen).size).toBe(1101);expect(seen[0]).toBe('');expect(Math.max(...batches)).toBe(512);
- const restored=await p.loadSave();expect(restored.recovered).toBe(true);expect(worldLedger(restored.game!).count).toBe(1100);expect(await p.db.table('LedgerIdentity').get([w.campaignId,''])).toBeUndefined();
+ expect(seen).toHaveLength(1025);expect(new Set(seen).size).toBe(1025);expect(seen[0]).toBe('');expect(Math.max(...batches)).toBe(512);
+ const restored=await p.loadSave();expect(restored.recovered).toBe(true);expect(worldLedger(restored.game!).count).toBe(1024);expect(await p.db.table('LedgerIdentity').get([w.campaignId,''])).toBeUndefined();
 });
 it('shared archive reads reuse identical rows only inside their original native transaction',async()=>{
  const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),root=w.ledger!.anchor.root;let session:LedgerReadSession;
@@ -48,25 +49,25 @@ it('a warm proof cannot hide persisted immutable corruption on the next cold rea
 });
 it.each(['ledger-segment-write','ledger-result-write','ledger-index-write','ledger-manifest-write','ledger-head-write','world-write','authority-write','backup-write','metadata-write','result-write'] as FailurePoint[])('optimized T2 remains atomic at %s and one durable retry has one effect',async point=>{
  let armed=false;const p=store(at=>{if(armed&&at===point)throw new DOMException('injected '+point,'QuotaExceededError');}),w=await p.start(await projectionSyntheticWorld(1000));
- const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-atomic'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'唯一效果'}},row=await p.receiveCommand(order),t=submitFormalOrder(w,order),before=await rows(p);expect(t.ack!.status).toBe('committed');
+ const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-atomic'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'唯一效果'}},row=await receiveDurableFixture(p,order),t=submitFormalOrder(w,order),before=await rows(p);expect(t.ack!.status).toBe('committed');
  armed=true;await expect(p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!})).rejects.toThrow('injected');expect(await rows(p)).toEqual(before);armed=false;
  const saved=await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});expect(worldLedger(saved).count).toBe(1001);expect((await p.commandStatus(order.campaignId,order.commandId))!.state).toBe('committed');expect(submitFormalOrder(saved,order).ack!.status).toBe('duplicate');
 });
 it('Recovery repairs missing/corrupt/extra index rows in the same rollback boundary and preserves Original Result',async()=>{
- let fail=false;const p=store(at=>{if(fail&&at==='ledger-index-write')throw Error('repair fault');}),w=await p.start(await projectionSyntheticWorld(1100)),point=(await p.backupList())[0],order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-recovery'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'回復前'}},row=await p.receiveCommand(order),t=submitFormalOrder(w,order),saved=await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!}),original=originalResult(saved,order.commandId);
+ let fail=false;const p=store(at=>{if(fail&&at==='ledger-index-write')throw Error('repair fault');}),w=await p.start(await projectionSyntheticWorld(1100)),point=(await p.backupList())[0],order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-recovery'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'回復前'}},row=await receiveDurableFixture(p,order),t=submitFormalOrder(w,order),saved=await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!}),original=originalResult(saved,order.commandId);
  const table=p.db.table('LedgerIdentity'),all=await table.toArray();await table.delete([w.campaignId,all[0].commandId]);await table.put({...all[1],fingerprint:'corrupt'});await table.put({...all[2],commandId:'command:extra'});const before=await rows(p);
  fail=true;await expect(p.restore(point.id)).rejects.toThrow('repair fault');expect(await rows(p)).toEqual(before);fail=false;
- const recovered=await p.restore(point.id);expect(originalResult(recovered,order.commandId)).toEqual(original);expect((await p.commandStatus(w.campaignId,order.commandId))!.state).toBe('rolled-back');expect(submitFormalOrder(recovered,order).ack!.status).toBe('rolled-back');expect(await table.count()).toBe(1101);expect((await p.loadSave()).recovered).toBe(false);
+ const recovered=await p.restore(point.id);expect(originalResult(recovered,order.commandId)).toEqual(original);expect((await p.commandStatus(w.campaignId,order.commandId))!.state).toBe('rolled-back');expect(submitFormalOrder(recovered,order).ack!.status).toBe('rolled-back');expect(await table.count()).toBe(1024);expect((await p.loadSave()).recovered).toBe(false);
 });
 it('same-revision rejected and confirmation roots survive Quick/Full exports and imports without gaining effects',async()=>{
  const p=store(),q=store();let w=await p.start(await projectionSyntheticWorld(1000));const ids=[];
- for(const confirmation of [false,true]){const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-no-effect-'+confirmation),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'不執行'}},row=await p.receiveCommand(order),root=w.ledger!.anchor.root,revision=w.revision;w=await p.finishCommand(row,{commandId:order.commandId,status:'rejected',revision,...(confirmation?{requiresConfirmation:true as const}:{}),reason:'原始拒絕'},revision);expect(w.revision).toBe(revision);expect(w.ledger!.anchor.root).not.toBe(root);ids.push(order);}
+ for(const confirmation of [false,true]){const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-no-effect-'+confirmation),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'不執行'}},row=await receiveDurableFixture(p,order),root=w.ledger!.anchor.root,revision=w.revision;w=await p.finishCommand(row,{commandId:order.commandId,status:'rejected',revision,...(confirmation?{requiresConfirmation:true as const}:{}),reason:'原始拒絕'},revision);expect(w.revision).toBe(revision);expect(w.ledger!.anchor.root).not.toBe(root);ids.push(order);}
  for(const mode of ['quick','full'] as const){const text=await p.exportStoredSave(mode),loaded=await q.importSave(text);for(const order of ids){expect(originalResult(loaded,order.commandId)).toEqual(originalResult(w,order.commandId));expect(submitFormalOrder(loaded,order).ack!.status).toBe('rejected');}expect(worldLedger(loaded).count).toBe(1000);expect((await q.loadSave()).game!.cities[0].name).toBe(w.cities[0].name);}
 });
 it('load progress is bounded, monotonic and reaches completion only after verified data is readable',async()=>{
  const p=store();await p.start(await projectionSyntheticWorld(1100));const progress:number[]=[];
  const loaded=await p.loadWithOffline(Date.now(),(stage,fraction)=>{if(stage==='read'&&fraction!==undefined)progress.push(fraction);});
- expect(progress[0]).toBe(0);expect(progress.at(-1)).toBe(1);expect(progress.length).toBeLessThanOrEqual(21);expect(progress).toEqual(progress.toSorted((a,b)=>a-b));expect(worldLedger(loaded.game!).count).toBe(1100);
+ expect(progress[0]).toBe(0);expect(progress.at(-1)).toBe(1);expect(progress.length).toBeLessThanOrEqual(21);expect(progress).toEqual(progress.toSorted((a,b)=>a-b));expect(worldLedger(loaded.game!).count).toBe(1024);
 });
 it('a lost read progress notification cannot trigger Recovery or change a branch',async()=>{
  const p=store(),w=await p.start(await projectionSyntheticWorld(1000));
@@ -74,7 +75,7 @@ it('a lost read progress notification cannot trigger Recovery or change a branch
  expect(loaded.recovered).toBe(false);expect(loaded.game!.ledger!.anchor.branch).toBe(w.ledger!.anchor.branch);expect(worldLedger(loaded.game!).count).toBe(1000);
 });
 it('same-revision root CAS rejects a stale prepared world after a no-effect result',async()=>{
- const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-stale-preparation'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'舊準備不可提交'}},row=await p.receiveCommand(order),t=submitFormalOrder(w,order),other={...order,commandId:commandId('r305-other-result')},otherRow=await p.receiveCommand(other),next=await p.finishCommand(otherRow,{commandId:other.commandId,status:'rejected',revision:w.revision,reason:'沒有世界效果'},w.revision);
+ const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-stale-preparation'),expectedRevision:w.revision,issuedWorldTime:w.time,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'舊準備不可提交'}},row=await receiveDurableFixture(p,order),t=submitFormalOrder(w,order),other={...order,commandId:commandId('r305-other-result')},otherRow=await receiveDurableFixture(p,other),next=await p.finishCommand(otherRow,{commandId:other.commandId,status:'rejected',revision:w.revision,reason:'沒有世界效果'},w.revision);
  expect(next.revision).toBe(w.revision);expect(next.ledger!.anchor.root).not.toBe(w.ledger!.anchor.root);const before=await rows(p);
  await expect(p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!})).rejects.toThrow('revision');expect(await rows(p)).toEqual(before);expect((await p.commandStatus(w.campaignId,order.commandId))!.state).toBe('pending');
 });
@@ -84,17 +85,17 @@ it('a minority batch of 500 exact identities does not scan an unrelated long his
  await expect(p.db.transaction('rw',ledgerTables(p.db),async()=>{await writeLedger(p.db,prepared,base,receipts.map(r=>r.commandId));expect(queries).toBe(0);expect(gets).toEqual([256,244]);throw Error('discard unpublished test candidate');})).rejects.toThrow('discard unpublished');
  expect(await rows(p)).toEqual(before);
 });
-it('real one-command segments bulk-read the exact chain without thousands of serial IDB gets',async()=>{
+it('32 real commands compact into one exact recent segment without a growing chain of serial IDB gets',async()=>{
  const p=store();let gets=0,queries=0;p.db.use({stack:'dbcore',name:'r305-sparse-reads',create(down){return {...down,table(name){const t=down.table(name);if(!['LedgerSegments','LedgerResults'].includes(name))return t;return {...t,get(req){gets++;return t.get(req);},query(req){queries++;return t.query(req);}};}};}});
- let w=await p.start(await projectionSyntheticWorld(0));for(let i=0;i<32;i++){const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-real-segment-'+i),issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'連續'+i}},row=await p.receiveCommand(order),t=submitFormalOrder(w,order);w=await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});}
- gets=0;queries=0;const archive=await readLedgerArchive(p.db,w.campaignId,w.ledger!.anchor.root);expect(archive.history.segments).toHaveLength(32);expect(archive.results).toHaveLength(32);expect(gets).toBe(0);expect(queries).toBe(2);expect((await verifyLedgerArchive(archive)).count).toBe(32);
+ let w=await p.start(await projectionSyntheticWorld(0));for(let i=0;i<32;i++){const order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-real-segment-'+i),issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'連續'+i}},row=await receiveDurableFixture(p,order),t=submitFormalOrder(w,order);w=await p.save(t.world,t.reports,w.revision,undefined,{row,ack:t.ack!});}
+ gets=0;queries=0;const archive=await readLedgerArchive(p.db,w.campaignId,w.ledger!.anchor.root);expect(archive.history.segments).toHaveLength(1);expect(archive.results).toHaveLength(1);expect(gets).toBe(2);expect(queries).toBe(0);expect(await p.db.table('LedgerSegments').count()).toBeLessThanOrEqual(3);expect(await p.db.table('LedgerResults').count()).toBeLessThanOrEqual(3);expect((await verifyLedgerArchive(archive)).count).toBe(32);
 });
 it('a distinct formal root reuses identical history evidence while independently validating outcomes',async()=>{
- const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-history-proof-reuse'),issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'不執行'}},row=await p.receiveCommand(order),saved=await p.finishCommand(row,{commandId:order.commandId,status:'rejected',revision:w.revision,reason:'原始拒絕'},w.revision),proof=worldLedger(saved),archive=proof.archive();archive.manifest.version++;const {checksum:_old,...body}=archive.manifest;archive.manifest.checksum=await digest(body);
+ const p=store(),w=await p.start(await projectionSyntheticWorld(1000)),order={campaignId:w.campaignId,issuerId:w.playerFactionId,commandId:commandId('r305-history-proof-reuse'),issuedWorldTime:w.time,expectedRevision:w.revision,payload:{type:'city.rename' as const,cityId:w.cities[0].id,name:'不執行'}},row=await receiveDurableFixture(p,order),saved=await p.finishCommand(row,{commandId:order.commandId,status:'rejected',revision:w.revision,reason:'原始拒絕'},w.revision),proof=worldLedger(saved),archive=proof.archive();archive.manifest.version++;const {checksum:_old,...body}=archive.manifest;archive.manifest.checksum=await digest(body);
  const spy=vi.spyOn(candidate,'verifyLedger'),verified=await verifyLedgerArchive(archive);expect(verified.history).toBe(proof.history);expect(spy).not.toHaveBeenCalled();expect(verified.result(order.commandId)).toEqual(proof.result(order.commandId));expect(verified.manifest.checksum).not.toBe(proof.manifest.checksum);
  const corrupt=verified.archive();corrupt.results[0].records[0].ack.reason='corrupt';await expect(verifyLedgerArchive(corrupt)).rejects.toThrow();
 });
 it('dense segments retain linked reads instead of a large native bulk clone',async()=>{
  const p=store();let gets=0,queries=0;p.db.use({stack:'dbcore',name:'r305-dense-reads',create(down){return {...down,table(name){const t=down.table(name);if(!['LedgerSegments','LedgerResults'].includes(name))return t;return {...t,get(req){gets++;return t.get(req);},query(req){queries++;return t.query(req);}};}};}});
- const w=await p.start(await projectionSyntheticWorld(10000));gets=0;queries=0;const archive=await readLedgerArchive(p.db,w.campaignId,w.ledger!.anchor.root);expect(queries).toBe(0);expect(gets).toBe(archive.history.segments.length+archive.results.length);expect((await verifyLedgerArchive(archive)).count).toBe(10000);
+ const w=await p.start(await projectionSyntheticWorld(10000));gets=0;queries=0;const archive=await readLedgerArchive(p.db,w.campaignId,w.ledger!.anchor.root);expect(queries).toBe(0);expect(gets).toBe(archive.history.segments.length+archive.results.length);expect((await verifyLedgerArchive(archive)).count).toBe(1024);
 });

@@ -6,7 +6,7 @@ import {governanceBase,type GovernanceBase} from './governanceAdmission';
 
 export type InboxState='pending'|'retryable'|'committed'|'rolled-back'|'rejected'|'needs-confirmation';
 export type CommandIntent={playerBase?:PlayerOrderBase;governanceBase?:GovernanceBase;extinctionBase?:string};
-export type WriterContext={writerEpoch:number;branch:number};
+export type WriterContext={writerEpoch:number;branch:number;commandEpoch?:string};
 export type InboxCommand=CommandIntent&{
  conflict?:{issuerId:string;fingerprint:string;ack:CommandAck};originalBranch?:number;originalResult?:import('./formal/commandLedger').OriginalResult;sequence?:number;campaignId:FormalOrder['campaignId'];commandId:FormalOrder['commandId'];issuerId:FormalOrder['issuerId'];
  order:FormalOrder;fingerprint:string;originalRevision:number;branch:number;writerEpoch:number;

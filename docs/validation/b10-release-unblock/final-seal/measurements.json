@@ -1,0 +1,410 @@
+{
+  "date": "2026-11-10",
+  "formalContent": "eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17",
+  "verifiedSource": "eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17",
+  "proofHead": "See current compatibility.json / final PR HEAD",
+  "nativeBuild": "eab660697b6df0d9ce262f9cd2b8c08f1bb2cf17",
+  "nativeAndroid": false,
+  "artifacts": {
+    "directed.json": {
+      "sha256": "5719c0bde83fc944f800916ad4806773f8e770983e37364d0d31cc57e21d5062",
+      "bytes": 41537
+    },
+    "incompatible-final.json": {
+      "sha256": "5229352100277c9599a35ecd0a7ec80eb97490edf64f16d47e7fbfd68737e038",
+      "bytes": 7415
+    },
+    "native-start-final.json": {
+      "sha256": "d02bcdd9f384afb670f8c2c9f6dc37d1045f52257f1da3e5ec78ebb419a85a15",
+      "bytes": 1147
+    },
+    "gates.json": {
+      "sha256": "a867386d0b97766d2c81cc0591a7547b65fc72ab648e2498fbf05fcc6e5730d3",
+      "bytes": 2080
+    },
+    "merge-source.json": {
+      "sha256": "ac70ff13c786839efebc9edc7f3a3710f3c5063207affbe707ddc6c45281684d",
+      "bytes": 3430
+    },
+    "late-before.json": {
+      "sha256": "ecbccc786232b79fb578b847f9ad9e500fe3f031c14459772cc6042607e73384",
+      "bytes": 8000
+    },
+    "late-after-directed.json": {
+      "sha256": "89962fc07922be88a28b05e18ae2d163f29f4e1d88a8c73dbd0f3152479d3195",
+      "bytes": 42153
+    },
+    "native-start-late.json": {
+      "sha256": "d02bcdd9f384afb670f8c2c9f6dc37d1045f52257f1da3e5ec78ebb419a85a15",
+      "bytes": 1147
+    },
+    "full-b8ffe75.json": {
+      "sha256": "a63d67ea77dbca96de1f4e8fb49ae56522c1adda312a58ba450f6cda2bee2261",
+      "bytes": 884509
+    },
+    "full-1520108-pass.json": {
+      "sha256": "d37591d43eae39da326f20b804a112b35bbead8a08016bf8786e5fd344e40987",
+      "bytes": 884763
+    },
+    "backup-flag-before.json": {
+      "sha256": "653a5154aa2d3f94a697f59e7b46689ebe3b03600363658b0391d9c6a3d14bd9",
+      "bytes": 1545
+    },
+    "backup-flag-after-directed.json": {
+      "sha256": "984282beb01830b5a7e26009985bc6371c3c9ef6281d8fa6035788caa20d26b9",
+      "bytes": 42959
+    },
+    "native-start-backup.json": {
+      "sha256": "d02bcdd9f384afb670f8c2c9f6dc37d1045f52257f1da3e5ec78ebb419a85a15",
+      "bytes": 1147
+    }
+  },
+  "directed": {
+    "lastBundlePassed": 127,
+    "failed": 0,
+    "incompatibleCases": 22,
+    "realWorkerBackupCases": 2,
+    "backupBefore": {
+      "passed": 1,
+      "failed": 1,
+      "cause": "legacyAvailable fixed true without a historical database"
+    }
+  },
+  "native": {
+    "browser": "154.0.8037.57",
+    "native": true,
+    "android": false,
+    "results": [
+      {
+        "scenario": "legacy",
+        "mobile": false,
+        "status": "PASS",
+        "withoutBackup": true,
+        "cancelPreserved": true,
+        "newCampaign": true,
+        "reloaded": true,
+        "legacyPreserved": true,
+        "writerLock": true
+      },
+      {
+        "scenario": "incompatible",
+        "mobile": false,
+        "status": "PASS",
+        "withoutBackup": true,
+        "cancelPreserved": true,
+        "newCampaign": true,
+        "reloaded": true,
+        "legacyPreserved": true,
+        "writerLock": true
+      },
+      {
+        "scenario": "incompatible",
+        "mobile": true,
+        "status": "PASS",
+        "withoutBackup": true,
+        "cancelPreserved": true,
+        "newCampaign": true,
+        "reloaded": true,
+        "legacyPreserved": true,
+        "writerLock": true
+      },
+      {
+        "scenario": "corrupt",
+        "mobile": false,
+        "status": "PASS",
+        "newGameBlocked": true,
+        "sourcePreserved": true
+      },
+      {
+        "scenario": "atomic-failure",
+        "status": "PASS",
+        "quotaRejected": true,
+        "allRowsUnchanged": true
+      }
+    ]
+  },
+  "sourceMergeSimulation": {
+    "main": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+    "head": "38295df3d32c0ca1dcd21496304f1e67b82abac4",
+    "automaticDeployIdentical": true,
+    "strictRelease": true,
+    "results": [
+      {
+        "number": 54,
+        "inputHead": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+        "base": "main",
+        "originalCi": 41282458194,
+        "merge": "bac2430a49ee30f81f5df23da17af01e89fe111f",
+        "version": "0.30.76",
+        "contentSha": "bac2430a49ee30f81f5df23da17af01e89fe111f",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 55,
+        "inputHead": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+        "base": "feat/b10-r3-01-durable-player-commands",
+        "originalCi": 41296235796,
+        "merge": "bc9c3598408f25bedb3df5455490eae78828cbcc",
+        "version": "0.30.77",
+        "contentSha": "bc9c3598408f25bedb3df5455490eae78828cbcc",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 56,
+        "inputHead": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+        "base": "feat/b10-r3-02-async-construction-preview",
+        "originalCi": 41426784041,
+        "merge": "79cc920fb8e745e1161ba9b3816d33abd2004da7",
+        "version": "0.30.78",
+        "contentSha": "79cc920fb8e745e1161ba9b3816d33abd2004da7",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 57,
+        "inputHead": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+        "base": "feat/b10-r3-03-command-ledger",
+        "originalCi": 41548741684,
+        "merge": "7771c92d80c9599789df5475762d0b1807290a10",
+        "version": "0.30.79",
+        "contentSha": "7771c92d80c9599789df5475762d0b1807290a10",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 58,
+        "inputHead": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+        "base": "feat/b10-r3-04-ui-projection",
+        "originalCi": 41579721205,
+        "merge": "b2f08d51bc9ff8c9f619bc97abc8658b754332e7",
+        "version": "0.30.80",
+        "contentSha": "b2f08d51bc9ff8c9f619bc97abc8658b754332e7",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 59,
+        "inputHead": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+        "base": "feat/b10-r3-05-persistence-optimization",
+        "originalCi": 41629201376,
+        "merge": "e693bd64f748ded0594e00705a27830032b814d0",
+        "version": "0.30.81",
+        "contentSha": "e693bd64f748ded0594e00705a27830032b814d0",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 60,
+        "inputHead": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
+        "base": "feat/b10-r3-06-ai-scheduling",
+        "originalCi": 41675862692,
+        "merge": "b892e000fca67d083139a5ed7272ca67c19177dd",
+        "version": "0.30.81",
+        "contentSha": "e693bd64f748ded0594e00705a27830032b814d0",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      },
+      {
+        "number": 61,
+        "inputHead": "38295df3d32c0ca1dcd21496304f1e67b82abac4",
+        "base": "validation/b10-final-integration",
+        "originalCi": 42793751800,
+        "merge": "7d81a6629c3573bbd238e37d72be5f545ab61596",
+        "version": "0.30.82",
+        "contentSha": "7d81a6629c3573bbd238e37d72be5f545ab61596",
+        "conflicts": false,
+        "releaseNotes": true,
+        "ancestor": true
+      }
+    ]
+  },
+  "workflow": {
+    "sha256": "9151a015b0078782570bed390a3dd73c095e11685801db22c45aee8cbea4057f",
+    "automaticMain": true,
+    "unchangedFromMain": true
+  },
+  "environment": {
+    "node": "22.23.4",
+    "cpuQuota": "200000 100000",
+    "memoryLimit": "8589934592",
+    "maxWorkers": 2,
+    "nodeOptions": null,
+    "heapLimit": 2197815296
+  },
+  "finalFullAndCi": "Run after final documentation HEAD. Exact outcomes and report SHA256 are recorded in the same HEAD PR61 delivery; no anticipatory PASS.",
+  "preLateRevision": {
+    "formalContent": "bfdc252021b3cceffbd53ce8edcf208281fd9252",
+    "proofHead": "38295df3d32c0ca1dcd21496304f1e67b82abac4",
+    "nativeBuild": "281110b",
+    "originalFull": {
+      "head": "b8ffe753e434fcedc150279a0b869e93f49e645c",
+      "passed": 2513,
+      "failed": 0,
+      "skipped": 1,
+      "reportSha256": "a63d67ea77dbca96de1f4e8fb49ae56522c1adda312a58ba450f6cda2bee2261"
+    },
+    "gates": [
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_01_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_01_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_02_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_02_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_03_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_03_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_04_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_04_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_05_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_05_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_r3_06_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_r3_06_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/b10_release_unblock_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/test_b10_release_unblock_successor.py"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
+          "scripts/test-deployment-isolation.mjs"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
+          "scripts/verify-projection-boundaries.mjs"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "/tmp/b9-node-cache/_npx/361c55be1121897e/node_modules/node/bin/node",
+          "scripts/verify-preview-boundaries.mjs"
+        ],
+        "exitCode": 0
+      }
+    ]
+  },
+  "finalGates": "Reverified after sealing the new proof; actual final HEAD results in PR61.",
+  "preBackupFlag": {
+    "formalContent": "13905bbb96151d591a872a13c98f62dd19bbb530",
+    "nativeBuild": "13905bbb96151d591a872a13c98f62dd19bbb530",
+    "directed": {
+      "lastBundlePassed": 125,
+      "failed": 0,
+      "incompatibleCases": 22,
+      "lateBefore": {
+        "passed": 21,
+        "failed": 1,
+        "observedRevision": 0,
+        "expectedRevision": 101
+      }
+    },
+    "exactHeadFull": {
+      "head": "152010867be4e13d790d020108d92b7e50b9dfbb",
+      "passed": 2514,
+      "failed": 0,
+      "skipped": 1,
+      "ci": 42837883510
+    },
+    "diskFailure": {
+      "head": "152010867be4e13d790d020108d92b7e50b9dfbb",
+      "exitCode": 1,
+      "passed": 2317,
+      "failed": 8,
+      "skipped": 1,
+      "failedSuites": 34,
+      "cause": "/tmp 4.9GiB filesystem full: ENOSPC writes and missing Vite SSR/client transformed modules; OOM events zero. Original report retained. No test/timeout/heap/worker change.",
+      "reportSha256": "478ab0c4a93c77cb5b9a621822faceaafe8d84778568cda865048135b9c8ad1d"
+    }
+  }
+}

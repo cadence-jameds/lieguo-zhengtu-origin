@@ -8,13 +8,23 @@ type UpdateMetadata={version?:unknown;commitSha?:unknown;contentSha?:unknown};
 const validContent=(value:unknown):value is string=>typeof value==='string'&&/^[a-f0-9]{40}$/.test(value);
 const live=(worker:ServiceWorker|null)=>!!worker&&worker.state!=='redundant';
 const usable=(r:ServiceWorkerRegistration)=>[r.active,r.waiting,r.installing].some(w=>live(w));
+/** Capture a native installer before update() resolves. An install can fail and
+ * clear registration.installing before waitForWaiting attaches its own listener.
+ * One bounded observer per registration; never owns activation or saved data. */
+const installations=new WeakMap<ServiceWorkerRegistration,{candidate:ServiceWorker|null;dispose:()=>void}>();
+function observeInstallation(registration:ServiceWorkerRegistration){
+ installations.get(registration)?.dispose();let watched:ServiceWorker|null=null;
+ const state={candidate:null as ServiceWorker|null,dispose:()=>{clearTimeout(timer);registration.removeEventListener('updatefound',inspect);watched?.removeEventListener('statechange',inspect);}};
+ const inspect=()=>{const next=registration.installing;if(next&&next!==watched){watched?.removeEventListener('statechange',inspect);watched=next;state.candidate=next;next.addEventListener('statechange',inspect);}};
+ const timer=setTimeout(state.dispose,UPDATE_LIMITS.download);registration.addEventListener('updatefound',inspect);inspect();installations.set(registration,state);return state;
+}
 /** At most two update attempts, one scope lookup and one same-scope registration. Never remove site data. */
 export async function refreshRegistration(cached:ServiceWorkerRegistration|undefined,container:ServiceWorkerContainer,scriptURL:string,beforeRegister?:()=>Promise<void>,forceUpdate=false,signal?:AbortSignal,onStep?:(phase:UpdatePhase)=>void){
  const scope=new URL(import.meta.env.BASE_URL,window.location.href);
  const script=new URL(scriptURL,window.location.href);
  if(script.origin!==scope.origin||script.pathname!==scope.pathname+'sw.js')throw Error('Invalid update script');
  const own=(r:ServiceWorkerRegistration)=>r.scope===scope.href&&[r.active,r.waiting,r.installing].every(w=>!live(w)||w!.scriptURL===script.href);
- const refresh=async(r:ServiceWorkerRegistration)=>{assertUpdateActive(signal);if(forceUpdate||(!live(r.waiting)&&!live(r.installing))){onStep?.('downloading');await updateDeadline(r.update(),UPDATE_LIMITS.registration,'registration.update',signal);}return r;};
+ const refresh=async(r:ServiceWorkerRegistration)=>{assertUpdateActive(signal);if(forceUpdate||(!live(r.waiting)&&!live(r.installing))){onStep?.('downloading');observeInstallation(r);await updateDeadline(r.update(),UPDATE_LIMITS.registration,'registration.update',signal);}return r;};
  let rejected:unknown;
  if(cached&&own(cached)&&usable(cached))try{return await refresh(cached);}catch(error){if(error instanceof UpdateTimeoutError||signal?.aborted)throw error;rejected=error;}
  assertUpdateActive(signal);onStep?.('preparing');let r=await updateDeadline(container.getRegistration(scope.href),UPDATE_LIMITS.registration,'getRegistration',signal);
@@ -48,6 +58,9 @@ export function waitForWaiting(registration:ServiceWorkerRegistration,_recreated
   let watched:ServiceWorker|null=null,finished=false;
   const checked=new WeakSet<ServiceWorker>(),verified=new WeakSet<ServiceWorker>();
   const inspect=(event?:Event,poll=false)=>{if(finished||signal?.aborted)return;const pending=registration.installing;
+   // Native registrations can clear installing before the old worker's final
+   // statechange is delivered. Observe that worker before removing its listener.
+   if((watched?.state==='redundant'||installations.get(registration)?.candidate?.state==='redundant')&&!live(pending)&&!live(registration.waiting)){reject(Error('新版下載失敗'));return;}
    if(live(registration.waiting)&&(!live(pending)||registration.waiting===pending)){resolve(registration.waiting!);return;}
    if(pending?.state==='installed'&&(poll||event?.type==='statechange')){resolve(pending);return;}
    const active=registration.active;
@@ -61,7 +74,7 @@ export function waitForWaiting(registration:ServiceWorkerRegistration,_recreated
    if(pending!==watched){watched?.removeEventListener('statechange',inspect);watched=pending;watched?.addEventListener('statechange',inspect);}if(watched?.state==='redundant')reject(Error('新版下載失敗'));
   };
   const poll=setInterval(()=>inspect(undefined,true),250);registration.addEventListener('updatefound',inspect);_recreatedContainer?.addEventListener('controllerchange',inspect);document.addEventListener('visibilitychange',inspect);window.addEventListener('pageshow',inspect);
-  dispose=()=>{finished=true;probes.abort();clearInterval(poll);registration.removeEventListener('updatefound',inspect);_recreatedContainer?.removeEventListener('controllerchange',inspect);watched?.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('pageshow',inspect);};inspect();
+  dispose=()=>{finished=true;probes.abort();installations.get(registration)?.dispose();installations.delete(registration);clearInterval(poll);registration.removeEventListener('updatefound',inspect);_recreatedContainer?.removeEventListener('controllerchange',inspect);watched?.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('pageshow',inspect);};inspect();
  });
  return updateDeadline(operation,UPDATE_LIMITS.download,'installation',signal).finally(dispose);
 }
@@ -87,16 +100,16 @@ export function activateWaiting(worker:ServiceWorker,container:ServiceWorkerCont
  if(container.controller===worker&&worker.state==='activated')return Promise.resolve();
  let dispose=()=>{};
  const operation=new Promise<void>((resolve,reject)=>{
-  let validating:ServiceWorker|null=null;
-  const inspect=(event?:Event)=>{const current=container.controller;
+  let finished=false;const probes=new AbortController(),validating=new WeakSet<ServiceWorker>(),attempts=new WeakMap<ServiceWorker,number>();
+  const inspect=(event?:Event)=>{if(finished||signal?.aborted)return;const current=container.controller;
    if(current===worker&&(worker.state==='activated'||event?.type==='controllerchange')){resolve();return;}
    // Object identity alone is insufficient when a new registration/controller wrapper appears.
    // Verify the actual current controller's immutable content identity before navigation.
-   if(identity&&current&&current!==worker&&current.state==='activated'&&current!==validating){validating=current;void verifyWorkerRelease(current,identity,signal).then(()=>{if(container.controller===current){assertUpdateActive(signal);resolve();}},()=>{}).catch(()=>{});}
+   if(identity&&current&&current!==worker&&current.state==='activated'&&!validating.has(current)&&(attempts.get(current)??0)<3){validating.add(current);attempts.set(current,(attempts.get(current)??0)+1);void verifyWorkerRelease(current,identity,probes.signal).then(()=>{if(!finished&&container.controller===current){assertUpdateActive(signal);resolve();}},()=>{}).catch(()=>{}).finally(()=>validating.delete(current));}
   };
   const poll=setInterval(inspect,250);container.addEventListener('controllerchange',inspect);worker.addEventListener('statechange',inspect);document.addEventListener('visibilitychange',inspect);window.addEventListener('focus',inspect);window.addEventListener('pageshow',inspect);
-  dispose=()=>{clearInterval(poll);container.removeEventListener('controllerchange',inspect);worker.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('focus',inspect);window.removeEventListener('pageshow',inspect);};
-  try{if(worker.state!=='activated')worker.postMessage({type:'SKIP_WAITING'});inspect();}catch(error){reject(error);}
+  dispose=()=>{finished=true;probes.abort();clearInterval(poll);container.removeEventListener('controllerchange',inspect);worker.removeEventListener('statechange',inspect);document.removeEventListener('visibilitychange',inspect);window.removeEventListener('focus',inspect);window.removeEventListener('pageshow',inspect);};
+  try{worker.postMessage({type:'SKIP_WAITING'});inspect();}catch(error){reject(error);}
  });
  return updateDeadline(operation,UPDATE_LIMITS.activation,'activation',signal).finally(dispose);
 }

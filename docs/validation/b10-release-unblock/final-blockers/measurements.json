@@ -1,0 +1,3846 @@
+{
+  "status": "P0 BLOCKED: final original local full has 2468 PASS / 0 assertion FAIL / 12 SKIP plus B9 240000ms suite hook timeout; native SW concrete fix six complete rounds, 30 PASS / 0 FAIL",
+  "baselineHead": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+  "sourceHead": "8f15e0972dae62fee246b1ccf68a12ab42c64af0",
+  "verifiedGateHead": "03eb7254deaad17bb200df1cfbcf211970508697",
+  "environment": {
+    "node": "22.23.4",
+    "chromium": "154.0.8037.57",
+    "cpuQuota": "200000 100000",
+    "memoryLimitBytes": 8589934592,
+    "maxWorkers": 2,
+    "heapLimitBytes": 2197815296,
+    "NODE_OPTIONS": null,
+    "Android": "NOT TESTED"
+  },
+  "b9": {
+    "b9-profile": {
+      "wallMs": 212680.967278,
+      "cpu": {
+        "user": 235142554,
+        "system": 12087512
+      },
+      "trips": 2000,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 137285.96617799983,
+          "maxMs": 155.3739949999981
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 50413.35349200052,
+          "maxMs": 74.7155109999876
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 4.777685999931691,
+          "maxMs": 0.33376500000304077
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 95221.42228600036,
+          "maxMs": 177.68473999999696
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 50.966183,
+          "maxMs": 50.966183
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 6025.010555999718,
+          "maxMs": 44.96612699999241
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 113212.96332400017,
+          "maxMs": 155.1573990000179
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 15918.771857,
+          "maxMs": 15918.771857
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 15996.004331000002,
+          "maxMs": 15996.004331000002
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 16012.485009000002,
+          "maxMs": 16012.485009000002
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 1186.7078119999678,
+          "maxMs": 102.00421900002402
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 132.29008800000156,
+          "maxMs": 132.29008800000156
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 132.46521500000017,
+          "maxMs": 132.46521500000017
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 3.3754489999992074,
+          "maxMs": 3.3754489999992074
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 73.05290400000013,
+          "maxMs": 73.05290400000013
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 193039.3862250003,
+          "maxMs": 276.88489899999695
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1644.373094000006,
+          "maxMs": 136.38359700000728
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 211032.594674,
+          "maxMs": 211032.594674
+        }
+      },
+      "memory": {
+        "rss": 365060096,
+        "heapTotal": 232554496,
+        "heapUsed": 79822792,
+        "external": 2564147,
+        "arrayBuffers": 319955
+      },
+      "eventLoopDelay": {
+        "meanMs": 1574.7885131851851,
+        "maxMs": 16080.961535,
+        "p99Ms": 9781.116927
+      },
+      "gc": {
+        "count": 14623,
+        "inclusiveMs": 22678.621187210083
+      }
+    },
+    "b9-profile-encoding": {
+      "wallMs": 189862.743793,
+      "cpu": {
+        "user": 214116233,
+        "system": 11218759
+      },
+      "trips": 2000,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 113618.9987250007,
+          "maxMs": 500.40707999999904
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 51318.766436000136,
+          "maxMs": 37.92261700000381
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 4.105303999776652,
+          "maxMs": 0.07837100000142527
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 84191.58003099976,
+          "maxMs": 523.4579300000005
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 44.01909899999987,
+          "maxMs": 44.01909899999987
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 6295.21234600022,
+          "maxMs": 56.067857000000004
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 101883.84746099965,
+          "maxMs": 236.5042850000009
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 12377.020409,
+          "maxMs": 12377.020409
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 12446.966572000001,
+          "maxMs": 12446.966572000001
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 12460.33478,
+          "maxMs": 12460.33478
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 1075.4711849999712,
+          "maxMs": 53.81839200000104
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 114.2065930000008,
+          "maxMs": 114.2065930000008
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 114.434303,
+          "maxMs": 114.434303
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 3.380401999998867,
+          "maxMs": 3.380401999998867
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 69.62068499999987,
+          "maxMs": 69.62068499999987
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 174217.26541499965,
+          "maxMs": 717.8901349999978
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1464.0471179999731,
+          "maxMs": 64.39271200000076
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 188412.819826,
+          "maxMs": 188412.819826
+        }
+      },
+      "memory": {
+        "rss": 373891072,
+        "heapTotal": 240795648,
+        "heapUsed": 81253744,
+        "external": 4121089,
+        "arrayBuffers": 25263
+      },
+      "eventLoopDelay": {
+        "meanMs": 1482.429888,
+        "maxMs": 12515.803135,
+        "p99Ms": 8241.807359
+      },
+      "gc": {
+        "count": 11827,
+        "inclusiveMs": 20878.317319065332
+      }
+    },
+    "scalars-lazy": {
+      "wallMs": 174258.23803699997,
+      "cpu": {
+        "user": 197459363,
+        "system": 9446529
+      },
+      "trips": 2000,
+      "phases": {
+        "schema.ts:validateFormalWorld": {
+          "calls": 5611,
+          "inclusiveMs": 104558.80598300014,
+          "maxMs": 110.53430099997786
+        },
+        "worldDraft.ts:cloneWorldDraft": {
+          "calls": 5640,
+          "inclusiveMs": 53938.86717599977,
+          "maxMs": 45.467657000001054
+        },
+        "commandEvidence.ts:ensureCommandFacts": {
+          "calls": 2804,
+          "inclusiveMs": 5.887766999890346,
+          "maxMs": 1.868539999999939
+        },
+        "reducer.ts:submitFormalOrder": {
+          "calls": 2807,
+          "inclusiveMs": 80945.69627299985,
+          "maxMs": 95.52999599999748
+        },
+        "wonderTestSupport.ts:wonderWorld": {
+          "calls": 1,
+          "inclusiveMs": 46.165112000000136,
+          "maxMs": 46.165112000000136
+        },
+        "commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 2802,
+          "inclusiveMs": 6235.213645000313,
+          "maxMs": 32.41505999999936
+        },
+        "reducer.ts:advanceFormal": {
+          "calls": 2801,
+          "inclusiveMs": 89343.73567099994,
+          "maxMs": 137.7677220000187
+        },
+        "wonderTestSupport.ts:fundWonder": {
+          "calls": 1,
+          "inclusiveMs": 12475.240415,
+          "maxMs": 12475.240415
+        },
+        "breakthroughTestSupport.ts:completedWonder": {
+          "calls": 1,
+          "inclusiveMs": 12545.904602999999,
+          "maxMs": 12545.904602999999
+        },
+        "breakthroughTestSupport.ts:breakthroughWorld": {
+          "calls": 1,
+          "inclusiveMs": 12562.328609,
+          "maxMs": 12562.328609
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "calls": 33,
+          "inclusiveMs": 1105.6039660000279,
+          "maxMs": 53.53622599999653
+        },
+        "saveCodec.ts:encodeSave": {
+          "calls": 1,
+          "inclusiveMs": 109.93417000000045,
+          "maxMs": 109.93417000000045
+        },
+        "ledgerTestSupport.ts:encodeScenario": {
+          "calls": 1,
+          "inclusiveMs": 110.23710299999948,
+          "maxMs": 110.23710299999948
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 6.566617000000406,
+          "maxMs": 6.566617000000406
+        },
+        "saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 75.87089800000103,
+          "maxMs": 75.87089800000103
+        },
+        "breakthroughTestSupport.ts:fundTrip": {
+          "calls": 2000,
+          "inclusiveMs": 158339.79542000053,
+          "maxMs": 210.90223400000832
+        },
+        "ledgerTestSupport.ts:scenarioBinding": {
+          "calls": 32,
+          "inclusiveMs": 1570.3064909999557,
+          "maxMs": 82.09767399998964
+        },
+        "breakthroughTestSupport.ts:fundedBreakthroughSnapshot": {
+          "calls": 1,
+          "inclusiveMs": 172748.307416,
+          "maxMs": 172748.307416
+        }
+      },
+      "memory": {
+        "rss": 369369088,
+        "heapTotal": 254246912,
+        "heapUsed": 139649056,
+        "external": 3950604,
+        "arrayBuffers": 25263
+      },
+      "gc": {
+        "count": 10426,
+        "ms": 19121.99215170741
+      }
+    },
+    "cpuGcDiagnosticSummary": [
+      {
+        "fixture": "2000 original breakthrough trips plus original 800-trip wonder initialization",
+        "name": "b9-profile",
+        "wallMs": 212680.967278,
+        "cpuMs": 247230.066,
+        "gcCount": 14623,
+        "gcInclusiveMs": 22678.621187210083,
+        "eventLoopDelay": {
+          "meanMs": 1574.7885131851851,
+          "maxMs": 16080.961535,
+          "p99Ms": 9781.116927
+        },
+        "memoryAtEnd": {
+          "rss": 365060096,
+          "heapTotal": 232554496,
+          "heapUsed": 79822792,
+          "external": 2564147,
+          "arrayBuffers": 319955
+        },
+        "notFullGate": true
+      },
+      {
+        "fixture": "2000 original breakthrough trips plus original 800-trip wonder initialization",
+        "name": "b9-profile-encoding",
+        "wallMs": 189862.743793,
+        "cpuMs": 225334.992,
+        "gcCount": 11827,
+        "gcInclusiveMs": 20878.317319065332,
+        "eventLoopDelay": {
+          "meanMs": 1482.429888,
+          "maxMs": 12515.803135,
+          "p99Ms": 8241.807359
+        },
+        "memoryAtEnd": {
+          "rss": 373891072,
+          "heapTotal": 240795648,
+          "heapUsed": 81253744,
+          "external": 4121089,
+          "arrayBuffers": 25263
+        },
+        "notFullGate": true
+      },
+      {
+        "fixture": "2000 original breakthrough trips plus original 800-trip wonder initialization",
+        "name": "b9-profile-scalars-lazy",
+        "wallMs": 174258.23803699997,
+        "cpuMs": 206905.892,
+        "gcCount": 10426,
+        "gcInclusiveMs": 19121.99215170741,
+        "eventLoopDelay": {
+          "meanMs": 1290.1390260148148,
+          "maxMs": 12624.855039,
+          "p99Ms": 8027.897855
+        },
+        "memoryAtEnd": {
+          "rss": 369369088,
+          "heapTotal": 254246912,
+          "heapUsed": 139649056,
+          "external": 3950604,
+          "arrayBuffers": 25263
+        },
+        "notFullGate": true
+      }
+    ]
+  },
+  "t2": [
+    {
+      "file": "t2-native-profile-baseline-round2.json",
+      "status": "PASS",
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1043.9000000059605,
+          "p95": 1043.9000000059605
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7.699999988079071,
+          "p95": 9.900000005960464
+        },
+        "T2": {
+          "n": 20,
+          "p50": 241.10000002384186,
+          "p95": 275.59999999403954
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.300000011920929,
+          "p95": 2
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 215.2000000178814,
+          "p95": 245.09999999403954
+        }
+      },
+      "phasesMeanMs": {
+        "T2": {
+          "IDB.get:Inbox": 0.5099999994039536,
+          "IDB.get:LedgerHeads": 1.3700000002980233,
+          "IDB.get:LedgerIdentity": 0.20999999791383744,
+          "IDB.get:LedgerManifests": 3.2200000032782556,
+          "IDB.get:LedgerResults": 33.86499999314547,
+          "IDB.get:LedgerSegments": 32.78500000685453,
+          "IDB.get:RuntimeMeta": 2.890000008046627,
+          "IDB.get:saves": 3.770000010728836,
+          "IDB.getMany:LedgerIdentity": 1.1100000008940696,
+          "IDB.getMany:LedgerResults": 3.124999998509884,
+          "IDB.getMany:LedgerSegments": 4.034999996423721,
+          "IDB.mutate:Inbox": 0.5350000038743019,
+          "IDB.mutate:LedgerHeads": 0.41000000238418577,
+          "IDB.mutate:LedgerIdentity": 1.1049999952316285,
+          "IDB.mutate:LedgerManifests": 1.1049999997019768,
+          "IDB.mutate:LedgerResults": 9.845000006258488,
+          "IDB.mutate:LedgerSegments": 8.994999995827675,
+          "IDB.mutate:RuntimeMeta": 0.5599999979138375,
+          "IDB.mutate:backups": 7.029999998211861,
+          "IDB.mutate:saves": 6.479999995231628,
+          "IDB.query:Inbox": 1.2250000014901161,
+          "IDB.query:LedgerHeads": 0.27999999970197675,
+          "IDB.query:LedgerIdentity": 79.28000000268221,
+          "IDB.query:LedgerManifests": 0.5050000011920929,
+          "IDB.query:LedgerResults": 0.3200000002980232,
+          "IDB.query:LedgerSegments": 0.3849999964237213,
+          "canonical.ts:digest": 29.364999975264073,
+          "clone.explicit": 0.12499999403953552,
+          "commandLedger.ts:prepareVerifiedLedger": 22.73000000268221,
+          "crypto.sha256": 3.1099999964237215,
+          "ledgerStore.ts:publishLedgerHead": 0.4350000023841858,
+          "ledgerStore.ts:readLedgerArchive": 37.72000000923872,
+          "ledgerStore.ts:writeLedger": 23.13000000268221,
+          "persistence.ts:commit": 244.28499999642372,
+          "persistence.ts:pruneRetainedStorage": 132.80499999970198,
+          "recentReceiptIndex.ts:build": 10.750000002980233,
+          "recentReceiptIndex.ts:prepareLedger": 10.549999997019768,
+          "saveCodec.ts:encodeSave": 22.205000004172327,
+          "schema.ts:validateFormalWorld": 17.590000000596046
+        },
+        "rejectedT2": {
+          "IDB.get:Inbox": 0.49499999582767484,
+          "IDB.get:LedgerIdentity": 0.21499999463558198,
+          "IDB.get:LedgerManifests": 3.305000001192093,
+          "IDB.get:LedgerResults": 34.28500000834465,
+          "IDB.get:LedgerSegments": 33.189999987185004,
+          "IDB.get:RuntimeMeta": 0.37499999552965163,
+          "IDB.get:saves": 3.5700000017881393,
+          "IDB.getMany:LedgerIdentity": 0.2,
+          "IDB.getMany:LedgerResults": 3.1650000005960464,
+          "IDB.getMany:LedgerSegments": 5.1,
+          "IDB.mutate:Inbox": 0.5149999991059303,
+          "IDB.mutate:LedgerHeads": 0.3499999985098839,
+          "IDB.mutate:LedgerIdentity": 1.455000001192093,
+          "IDB.mutate:LedgerManifests": 0.3649999976158142,
+          "IDB.mutate:LedgerResults": 3.720000001788139,
+          "IDB.mutate:LedgerSegments": 5.615000002086163,
+          "IDB.mutate:RuntimeMeta": 0.34500000178813933,
+          "IDB.mutate:saves": 7.389999996125698,
+          "IDB.query:Inbox": 1.4749999985098838,
+          "IDB.query:LedgerHeads": 0.475,
+          "IDB.query:LedgerIdentity": 79.73499999940395,
+          "IDB.query:LedgerManifests": 0.5400000020861626,
+          "IDB.query:LedgerResults": 0.32499999850988387,
+          "IDB.query:LedgerSegments": 0.380000002682209,
+          "canonical.ts:digest": 32.43000001162291,
+          "clone.explicit": 0.10500000417232513,
+          "commandLedger.ts:prepareVerifiedLedger": 25.734999994933606,
+          "crypto.sha256": 2.7300000086426737,
+          "ledgerStore.ts:publishLedgerHead": 0.3699999988079071,
+          "ledgerStore.ts:readLedgerArchive": 37.369999998807906,
+          "ledgerStore.ts:writeLedger": 21.18000000268221,
+          "persistence.ts:finishCommand": 221.87000000178813,
+          "persistence.ts:pruneRetainedStorage": 124.92500000447035,
+          "recentReceiptIndex.ts:build": 12.584999996423722,
+          "recentReceiptIndex.ts:prepareLedger": 12.380000001192093,
+          "saveCodec.ts:encodeSave": 21.74499999731779,
+          "schema.ts:validateFormalWorld": 18.359999994933606
+        }
+      }
+    },
+    {
+      "file": "t2-native-profile-baseline.json",
+      "status": "PASS",
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1070.800000011921,
+          "p95": 1070.800000011921
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7.4000000059604645,
+          "p95": 10.800000011920929
+        },
+        "T2": {
+          "n": 20,
+          "p50": 236.30000001192093,
+          "p95": 292.2999999821186
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.4000000059604645,
+          "p95": 1.800000011920929
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 212.59999999403954,
+          "p95": 251.90000000596046
+        }
+      },
+      "phasesMeanMs": {
+        "T2": {
+          "IDB.get:Inbox": 0.47500000447034835,
+          "IDB.get:LedgerHeads": 1.1249999970197677,
+          "IDB.get:LedgerIdentity": 0.21999999582767488,
+          "IDB.get:LedgerManifests": 2.155000002682209,
+          "IDB.get:LedgerResults": 33.83999999761581,
+          "IDB.get:LedgerSegments": 32.709999999403955,
+          "IDB.get:RuntimeMeta": 2.5450000002980233,
+          "IDB.get:saves": 3.630000002682209,
+          "IDB.getMany:LedgerIdentity": 0.2900000035762787,
+          "IDB.getMany:LedgerResults": 3.119999998807907,
+          "IDB.getMany:LedgerSegments": 4.940000003576278,
+          "IDB.mutate:Inbox": 0.4200000032782555,
+          "IDB.mutate:LedgerHeads": 0.42500000149011613,
+          "IDB.mutate:LedgerIdentity": 0.9450000047683715,
+          "IDB.mutate:LedgerManifests": 1.0349999994039536,
+          "IDB.mutate:LedgerResults": 7.754999993741512,
+          "IDB.mutate:LedgerSegments": 9.790000009536744,
+          "IDB.mutate:RuntimeMeta": 0.5750000044703484,
+          "IDB.mutate:backups": 7.684999997913837,
+          "IDB.mutate:saves": 6.915000002086162,
+          "IDB.query:Inbox": 1.2349999979138375,
+          "IDB.query:LedgerHeads": 0.2650000035762787,
+          "IDB.query:LedgerIdentity": 84.1100000038743,
+          "IDB.query:LedgerManifests": 0.5099999994039536,
+          "IDB.query:LedgerResults": 0.39500000029802323,
+          "IDB.query:LedgerSegments": 0.3849999994039536,
+          "canonical.ts:digest": 29.60000000447035,
+          "clone.explicit": 0.0899999976158142,
+          "commandLedger.ts:prepareVerifiedLedger": 21.884999996423723,
+          "crypto.sha256": 3.4200000017881393,
+          "ledgerStore.ts:publishLedgerHead": 0.44500000327825545,
+          "ledgerStore.ts:readLedgerArchive": 36.69000000357628,
+          "ledgerStore.ts:writeLedger": 21.154999999701978,
+          "persistence.ts:commit": 247.0350000038743,
+          "persistence.ts:pruneRetainedStorage": 136.7650000035763,
+          "recentReceiptIndex.ts:build": 10.0,
+          "recentReceiptIndex.ts:prepareLedger": 9.81000000089407,
+          "saveCodec.ts:encodeSave": 22.675000001490115,
+          "schema.ts:validateFormalWorld": 17.71000000089407
+        },
+        "rejectedT2": {
+          "IDB.get:Inbox": 0.4949999988079071,
+          "IDB.get:LedgerIdentity": 0.18500000089406968,
+          "IDB.get:LedgerManifests": 3.095000000298023,
+          "IDB.get:LedgerResults": 31.39499999731779,
+          "IDB.get:LedgerSegments": 30.53499998897314,
+          "IDB.get:RuntimeMeta": 0.29500000476837157,
+          "IDB.get:saves": 3.689999996125698,
+          "IDB.getMany:LedgerIdentity": 0.28500000238418577,
+          "IDB.getMany:LedgerResults": 2.1699999958276748,
+          "IDB.getMany:LedgerSegments": 4.8599999994039536,
+          "IDB.mutate:Inbox": 0.44500000327825545,
+          "IDB.mutate:LedgerHeads": 0.27499999552965165,
+          "IDB.mutate:LedgerIdentity": 1.4950000017881393,
+          "IDB.mutate:LedgerManifests": 0.3049999997019768,
+          "IDB.mutate:LedgerResults": 3.6099999994039536,
+          "IDB.mutate:LedgerSegments": 3.3400000065565107,
+          "IDB.mutate:RuntimeMeta": 0.269999997317791,
+          "IDB.mutate:saves": 7.099999997019768,
+          "IDB.query:Inbox": 1.249999998509884,
+          "IDB.query:LedgerHeads": 0.2749999985098839,
+          "IDB.query:LedgerIdentity": 82.22000000476837,
+          "IDB.query:LedgerManifests": 0.42999999821186063,
+          "IDB.query:LedgerResults": 0.2999999985098839,
+          "IDB.query:LedgerSegments": 0.43500000387430193,
+          "canonical.ts:digest": 33.125000016391276,
+          "clone.explicit": 0.0949999988079071,
+          "commandLedger.ts:prepareVerifiedLedger": 27.019999998807908,
+          "crypto.sha256": 2.9000000178813936,
+          "ledgerStore.ts:publishLedgerHead": 0.2999999955296516,
+          "ledgerStore.ts:readLedgerArchive": 34.430000002682206,
+          "ledgerStore.ts:writeLedger": 17.325,
+          "persistence.ts:finishCommand": 216.9199999988079,
+          "persistence.ts:pruneRetainedStorage": 123.65499999821186,
+          "recentReceiptIndex.ts:build": 12.735000003874301,
+          "recentReceiptIndex.ts:prepareLedger": 12.500000002980233,
+          "saveCodec.ts:encodeSave": 20.76000000089407,
+          "schema.ts:validateFormalWorld": 17.454999993741513
+        }
+      }
+    },
+    {
+      "file": "t2-native-profile-candidate-round2.json",
+      "status": "PASS",
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1340.0999999940395,
+          "p95": 1340.0999999940395
+        },
+        "T1": {
+          "n": 20,
+          "p50": 7.0999999940395355,
+          "p95": 9.5
+        },
+        "T2": {
+          "n": 20,
+          "p50": 149.5,
+          "p95": 199.80000001192093
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.2000000178813934,
+          "p95": 2.899999976158142
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 127.19999998807907,
+          "p95": 172.69999998807907
+        }
+      },
+      "phasesMeanMs": {
+        "T2": {
+          "IDB.get:Inbox": 0.6350000008940697,
+          "IDB.get:LedgerHeads": 0.625,
+          "IDB.get:LedgerIdentity": 0.2250000059604645,
+          "IDB.get:LedgerManifests": 2.0699999958276747,
+          "IDB.get:LedgerResults": 26.450000008940698,
+          "IDB.get:LedgerSegments": 25.470000007748602,
+          "IDB.get:RuntimeMeta": 2.2599999994039535,
+          "IDB.get:saves": 3.4099999979138373,
+          "IDB.getMany:LedgerIdentity": 0.6449999988079071,
+          "IDB.getMany:LedgerResults": 4.460000002384186,
+          "IDB.getMany:LedgerSegments": 3.1349999979138374,
+          "IDB.mutate:Inbox": 0.44499999433755877,
+          "IDB.mutate:LedgerHeads": 0.3599999964237213,
+          "IDB.mutate:LedgerIdentity": 0.8549999937415123,
+          "IDB.mutate:LedgerManifests": 0.8250000014901161,
+          "IDB.mutate:LedgerResults": 9.870000004768372,
+          "IDB.mutate:LedgerSegments": 6.6,
+          "IDB.mutate:RuntimeMeta": 0.5900000005960464,
+          "IDB.mutate:backups": 6.845000003278256,
+          "IDB.mutate:saves": 6.425000001490116,
+          "IDB.query:Inbox": 1.1800000011920928,
+          "IDB.query:LedgerHeads": 0.23000000268220902,
+          "IDB.query:LedgerIdentity": 8.014999996125699,
+          "IDB.query:LedgerManifests": 0.42999999821186063,
+          "IDB.query:LedgerResults": 0.32000000327825545,
+          "IDB.query:LedgerSegments": 0.32500000298023224,
+          "canonical.ts:digest": 32.88999999761582,
+          "clone.explicit": 0.13500000387430192,
+          "commandLedger.ts:prepareVerifiedLedger": 24.725000001490116,
+          "crypto.sha256": 2.9249999970197678,
+          "ledgerStore.ts:publishLedgerHead": 0.39999999701976774,
+          "ledgerStore.ts:readLedgerArchive": 28.870000000298024,
+          "ledgerStore.ts:writeLedger": 21.96500000357628,
+          "persistence.ts:commit": 157.4300000011921,
+          "persistence.ts:pruneRetainedStorage": 49.21499999761581,
+          "recentReceiptIndex.ts:build": 11.384999997913837,
+          "recentReceiptIndex.ts:prepareLedger": 11.184999996423722,
+          "saveCodec.ts:encodeSave": 22.955000004172327,
+          "schema.ts:validateFormalWorld": 16.904999999701978
+        },
+        "rejectedT2": {
+          "IDB.get:Inbox": 0.41500000208616256,
+          "IDB.get:LedgerIdentity": 0.16999999880790712,
+          "IDB.get:LedgerManifests": 1.5650000050663948,
+          "IDB.get:LedgerResults": 31.009999996423723,
+          "IDB.get:LedgerSegments": 29.975000007450582,
+          "IDB.get:RuntimeMeta": 0.22499999552965164,
+          "IDB.get:saves": 3.6099999979138375,
+          "IDB.getMany:LedgerIdentity": 0.1799999952316284,
+          "IDB.getMany:LedgerResults": 2.1450000002980234,
+          "IDB.getMany:LedgerSegments": 3.3799999967217444,
+          "IDB.mutate:Inbox": 0.3999999985098839,
+          "IDB.mutate:LedgerHeads": 0.24000000953674316,
+          "IDB.mutate:LedgerIdentity": 1.1,
+          "IDB.mutate:LedgerManifests": 0.2999999910593033,
+          "IDB.mutate:LedgerResults": 3.7700000002980234,
+          "IDB.mutate:LedgerSegments": 4.185000005364418,
+          "IDB.mutate:RuntimeMeta": 0.32499999850988387,
+          "IDB.mutate:saves": 7.239999982714653,
+          "IDB.query:Inbox": 1.1700000017881393,
+          "IDB.query:LedgerHeads": 0.3499999985098839,
+          "IDB.query:LedgerIdentity": 7.824999997019768,
+          "IDB.query:LedgerManifests": 0.40499999821186067,
+          "IDB.query:LedgerResults": 0.26000000089406966,
+          "IDB.query:LedgerSegments": 0.2949999988079071,
+          "canonical.ts:digest": 33.04000001102686,
+          "clone.explicit": 0.10000000149011612,
+          "commandLedger.ts:prepareVerifiedLedger": 27.454999995231628,
+          "crypto.sha256": 2.820000025629997,
+          "ledgerStore.ts:publishLedgerHead": 0.2800000086426735,
+          "ledgerStore.ts:readLedgerArchive": 33.50499999821186,
+          "ledgerStore.ts:writeLedger": 16.799999994039535,
+          "persistence.ts:finishCommand": 137.7550000011921,
+          "persistence.ts:pruneRetainedStorage": 46.645000000298026,
+          "recentReceiptIndex.ts:build": 13.34499999433756,
+          "recentReceiptIndex.ts:prepareLedger": 13.114999997615815,
+          "saveCodec.ts:encodeSave": 20.055000007152557,
+          "schema.ts:validateFormalWorld": 17.94500000476837
+        }
+      }
+    },
+    {
+      "file": "t2-native-profile-candidate.json",
+      "status": "PASS",
+      "ms": {
+        "start": {
+          "n": 1,
+          "p50": 1958.699999988079,
+          "p95": 1958.699999988079
+        },
+        "T1": {
+          "n": 20,
+          "p50": 12.5,
+          "p95": 26.400000005960464
+        },
+        "T2": {
+          "n": 20,
+          "p50": 353.80000001192093,
+          "p95": 517
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.800000011920929,
+          "p95": 6
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 281.89999997615814,
+          "p95": 372.69999998807907
+        }
+      },
+      "phasesMeanMs": {
+        "T2": {
+          "IDB.get:Inbox": 1.1950000032782555,
+          "IDB.get:LedgerHeads": 1.3200000032782555,
+          "IDB.get:LedgerIdentity": 0.4100000008940697,
+          "IDB.get:LedgerManifests": 4.865000000596046,
+          "IDB.get:LedgerResults": 73.85999999642372,
+          "IDB.get:LedgerSegments": 70.88999998569489,
+          "IDB.get:RuntimeMeta": 7.279999999701976,
+          "IDB.get:saves": 6.675,
+          "IDB.getMany:LedgerIdentity": 4.03500000089407,
+          "IDB.getMany:LedgerResults": 11.184999996423722,
+          "IDB.getMany:LedgerSegments": 11.170000000298023,
+          "IDB.mutate:Inbox": 1.3150000005960465,
+          "IDB.mutate:LedgerHeads": 0.7600000038743019,
+          "IDB.mutate:LedgerIdentity": 3.0849999979138376,
+          "IDB.mutate:LedgerManifests": 2.8299999997019767,
+          "IDB.mutate:LedgerResults": 22.430000007152557,
+          "IDB.mutate:LedgerSegments": 20.14999999701977,
+          "IDB.mutate:RuntimeMeta": 0.7950000002980232,
+          "IDB.mutate:backups": 13.035000002384185,
+          "IDB.mutate:saves": 9.96499999165535,
+          "IDB.query:Inbox": 1.6149999976158143,
+          "IDB.query:LedgerHeads": 0.8400000035762787,
+          "IDB.query:LedgerIdentity": 16.259999996423723,
+          "IDB.query:LedgerManifests": 2.95,
+          "IDB.query:LedgerResults": 0.5,
+          "IDB.query:LedgerSegments": 0.7099999994039535,
+          "canonical.ts:digest": 69.84000001251698,
+          "clone.explicit": 0.2099999964237213,
+          "commandLedger.ts:prepareVerifiedLedger": 49.44500000178814,
+          "crypto.sha256": 4.635000002384186,
+          "ledgerStore.ts:publishLedgerHead": 0.8050000041723251,
+          "ledgerStore.ts:readLedgerArchive": 80.50999999940396,
+          "ledgerStore.ts:writeLedger": 65.03499999940395,
+          "persistence.ts:commit": 369.3200000017881,
+          "persistence.ts:pruneRetainedStorage": 124.87999999970198,
+          "recentReceiptIndex.ts:build": 23.490000000596048,
+          "recentReceiptIndex.ts:prepareLedger": 23.004999999701976,
+          "saveCodec.ts:encodeSave": 49.175000002980234,
+          "schema.ts:validateFormalWorld": 34.89000000208616
+        },
+        "rejectedT2": {
+          "IDB.get:Inbox": 0.5649999991059304,
+          "IDB.get:LedgerIdentity": 0.4050000011920929,
+          "IDB.get:LedgerManifests": 5.405000007152557,
+          "IDB.get:LedgerResults": 70.66500001400709,
+          "IDB.get:LedgerSegments": 67.80500001460314,
+          "IDB.get:RuntimeMeta": 0.5099999994039536,
+          "IDB.get:saves": 6.900000001490116,
+          "IDB.getMany:LedgerIdentity": 0.26000000089406966,
+          "IDB.getMany:LedgerResults": 8.565000000596047,
+          "IDB.getMany:LedgerSegments": 7.254999993741512,
+          "IDB.mutate:Inbox": 0.6,
+          "IDB.mutate:LedgerHeads": 0.37999999672174456,
+          "IDB.mutate:LedgerIdentity": 1.6199999943375587,
+          "IDB.mutate:LedgerManifests": 0.43999999910593035,
+          "IDB.mutate:LedgerResults": 9.839999997615815,
+          "IDB.mutate:LedgerSegments": 7.100000002980233,
+          "IDB.mutate:RuntimeMeta": 0.8399999976158142,
+          "IDB.mutate:saves": 16.1399999961257,
+          "IDB.query:Inbox": 3.5049999982118605,
+          "IDB.query:LedgerHeads": 0.3600000008940697,
+          "IDB.query:LedgerIdentity": 13.395000003278255,
+          "IDB.query:LedgerManifests": 1.3949999988079071,
+          "IDB.query:LedgerResults": 0.6100000038743019,
+          "IDB.query:LedgerSegments": 0.6750000014901161,
+          "canonical.ts:digest": 70.91500000804663,
+          "clone.explicit": 0.11500000208616257,
+          "commandLedger.ts:prepareVerifiedLedger": 60.36500000208616,
+          "crypto.sha256": 4.000000005960464,
+          "ledgerStore.ts:publishLedgerHead": 0.40999999791383746,
+          "ledgerStore.ts:readLedgerArchive": 76.42499999701977,
+          "ledgerStore.ts:writeLedger": 38.055000002682206,
+          "persistence.ts:finishCommand": 304.8199999958277,
+          "persistence.ts:pruneRetainedStorage": 104.57000000178815,
+          "recentReceiptIndex.ts:build": 30.484999999403954,
+          "recentReceiptIndex.ts:prepareLedger": 30.205000004172327,
+          "saveCodec.ts:encodeSave": 39.65499999672174,
+          "schema.ts:validateFormalWorld": 35.4399999961257
+        }
+      }
+    }
+  ],
+  "sw": [
+    {
+      "file": "sw-baseline-native-round2.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    },
+    {
+      "file": "sw-baseline-native-round3.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    },
+    {
+      "file": "sw-baseline-native-round4.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    },
+    {
+      "file": "sw-baseline-native-round5.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    },
+    {
+      "file": "sw-baseline-native.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    },
+    {
+      "file": "sw-lifetime-round1.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+          "phase": "failed",
+          "step": "retry update and verify target",
+          "nativeLifecycle": {
+            "registrations": [
+              {
+                "scope": "http://127.0.0.1:4232/lieguo-zhengtu-origin/",
+                "workers": [
+                  {
+                    "role": "active",
+                    "scriptURL": "http://127.0.0.1:4232/lieguo-zhengtu-origin/sw.js",
+                    "state": "activated",
+                    "release": {
+                      "version": "0.31.8",
+                      "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+                    },
+                    "lifecycle": {
+                      "release": {
+                        "version": "0.31.8",
+                        "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+                      },
+                      "scope": "http://127.0.0.1:4232/lieguo-zhengtu-origin/",
+                      "clients": 1,
+                      "events": []
+                    },
+                    "diagnostic": {
+                      "pending": [],
+                      "eventCounts": {
+                        "message": 5,
+                        "resolved": 1
+                      },
+                      "lastMessages": [
+                        {
+                          "type": "message",
+                          "at": 1793801403335,
+                          "message": "GET_APP_RELEASE"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801403548,
+                          "message": "GET_APP_RELEASE"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801403798,
+                          "message": "GET_APP_RELEASE"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801432649,
+                          "message": "GET_APP_RELEASE"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801432649,
+                          "message": "GET_SW_LIFECYCLE"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "role": "waiting",
+                    "scriptURL": "http://127.0.0.1:4232/lieguo-zhengtu-origin/sw.js",
+                    "state": "installed",
+                    "release": {
+                      "version": "0.31.19",
+                      "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+                    },
+                    "lifecycle": {
+                      "release": {
+                        "version": "0.31.19",
+                        "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+                      },
+                      "scope": "http://127.0.0.1:4232/lieguo-zhengtu-origin/",
+                      "clients": 1,
+                      "events": [
+                        {
+                          "type": "install",
+                          "at": 1793801402660
+                        },
+                        {
+                          "type": "skipWaiting:received",
+                          "at": 1793801403298
+                        },
+                        {
+                          "type": "skipWaiting:start",
+                          "at": 1793801403298
+                        }
+                      ]
+                    },
+                    "diagnostic": {
+                      "pending": [
+                        {
+                          "id": 396,
+                          "at": 1793801403298,
+                          "kind": "skipWaiting"
+                        },
+                        {
+                          "id": 397,
+                          "at": 1793801403298,
+                          "kind": "waitUntil",
+                          "event": "message",
+                          "message": "SKIP_WAITING"
+                        }
+                      ],
+                      "eventCounts": {
+                        "message": 4,
+                        "resolved": 252
+                      },
+                      "lastMessages": [
+                        {
+                          "type": "message",
+                          "at": 1793801403153,
+                          "message": "GET_APP_RELEASE"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801403297,
+                          "message": "SKIP_WAITING"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801432652,
+                          "message": "GET_APP_RELEASE"
+                        },
+                        {
+                          "type": "message",
+                          "at": 1793801432652,
+                          "message": "GET_SW_LIFECYCLE"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "controller": {
+              "scriptURL": "http://127.0.0.1:4232/lieguo-zhengtu-origin/sw.js",
+              "state": "activated"
+            },
+            "caches": [
+              "workbox-precache-v2-http://127.0.0.1:4232/lieguo-zhengtu-origin/"
+            ],
+            "clients": [
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    },
+    {
+      "file": "sw-lifetime-stop-round2.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+            "version": "0.31.19",
+            "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "step": null,
+          "nativeLifecycle": null
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "artifacts/b10-final-blockers/all-gates.json",
+      "bytes": 3554,
+      "sha256": "1d582753a357c40a38bbb9291131f6110a1ca5d2b11499843de1c16594ae4d5e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/art-gates.json",
+      "bytes": 232,
+      "sha256": "b0fa0027116a0dc9c6b14e76f81cf26200464f9af0b291db13fa027244ce637c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-encoding-profile-result.json",
+      "bytes": 4787,
+      "sha256": "8384c410c71f9b554b2ababd5a10b33ba217a5b37834c74e7a522be62afd0107"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile/profile.cpuprofile",
+      "bytes": 2654391,
+      "sha256": "9ecbd36e2fdff557c803e4ae6916e682ee4bed4b7a1f39b4a2399fc7e526ea82"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile/progress.json",
+      "bytes": 1192778,
+      "sha256": "9e09b5f4a0f488fb0fd8d32b1013a880c394291322611377a2ac7f5703c297d1"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile/summary.json",
+      "bytes": 1326935,
+      "sha256": "0b9e33ce0df451e927dda61ca6f781c14a8cbb83f288e08af862d314bda6326c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-encoding/profile.cpuprofile",
+      "bytes": 2411110,
+      "sha256": "f5ef61386818f5cd613375ee2aa7a28958e089a6ce2cd0a0a34ae76ebf24c883"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-encoding/progress.json",
+      "bytes": 964982,
+      "sha256": "5549d6a5006ada15dbe9c1860edaf402fa7c56f74818ed02a1a39893ead3d8d0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-encoding/summary.json",
+      "bytes": 1073945,
+      "sha256": "61cdd07e9a6e23f67b3b36654be2968c9dfd58518b9a5468857589e2d8964a96"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-result.json",
+      "bytes": 4784,
+      "sha256": "c9b3b39aac0aa1d21ebe378fea180a7953e0f33b55f0ca99226147ad4e957059"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-scalars-lazy/profile.cpuprofile",
+      "bytes": 2272036,
+      "sha256": "4dc4e193d8ac68deefed87e6691085ff586b435f29171a5787c7d8eecf7e8d82"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-scalars-lazy/progress.json",
+      "bytes": 851442,
+      "sha256": "1a8241fdd89a9c02fa1fd272a015a856ff14132140681d0f593fa24995874916"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-scalars-lazy/summary.json",
+      "bytes": 946874,
+      "sha256": "eb653c09b7f7deb1ad0342f0722d9cccfeabb4d4a57e2d1f297f337ee6e51818"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-profile-setup-nospace.json",
+      "bytes": 749,
+      "sha256": "549ee54b77ec702e07ed5e3b22a2c0b1471fc6458063f4c134efe14facf2a391"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/b9-scalars-lazy-profile-result.json",
+      "bytes": 4784,
+      "sha256": "a444b7ecdb28795b5b22c8397a1f2a15eec1d232a78f04ebe8dc7ca90b935fd4"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793800495897.trace.json.gz",
+      "bytes": 116810538,
+      "sha256": "b843e861aed150ee450ea6839747fafa1c4b84aba0aec006ef3e58807d6d05e7"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793801181363.trace.json",
+      "bytes": 1684509,
+      "sha256": "539f7855998b49c8ba8a941ebf11bb9b8ce32760870d1291245856eed13332b6"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793801239720.trace.json",
+      "bytes": 1656004,
+      "sha256": "8c94d2b65696fe3ce8fd69b765eef47399a27efddf94b51db6d8130556eb59c9"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793801282635.trace.json",
+      "bytes": 1650070,
+      "sha256": "e533f9bb0507bfa0ed6b5a05e603d39ae7c479068ee3510ada30cc3272dda51b"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793801323860.trace.json",
+      "bytes": 1635371,
+      "sha256": "d28898892440880331139a06c6b6b977fec087d18dc6d7a5ae8432b55239cdd1"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793801457360.trace.json",
+      "bytes": 1746691,
+      "sha256": "da8029f9612a00fd82d68f208832be8d945610ac75a5365797673c70a8b96919"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793802160268.trace.json",
+      "bytes": 1640606,
+      "sha256": "7ece31a4755eb594ba0b453db6d57286ec0d2726e819a3bf75c03cc01ce0a0c8"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793803179563.trace.json",
+      "bytes": 1896105,
+      "sha256": "734938d6c34dcc996beaab6e2179a0efdd5ec12392e1c39d3c1de37b71126a83"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793803245248.trace.json",
+      "bytes": 1875865,
+      "sha256": "dc57950ed2ddd1a210df82891b416972bb720f464dcc62ed0a40f75d4ace2d85"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793803344427.trace.json",
+      "bytes": 1753666,
+      "sha256": "dbca31e4a3ffda3a47ed805d6b93bc69d76cc4bfcbe4de62e5940b7d9484868c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793834159209.trace.json",
+      "bytes": 1712577,
+      "sha256": "772b400ede44196c484e225e95905cafddb60c62cacf321878015346eddc24c2"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793834205066.trace.json",
+      "bytes": 1731790,
+      "sha256": "d1f73627aea7b34b8b1dc41ad700a4f3c0ea2c76f54bb35282935193eea46630"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793834277569.trace.json",
+      "bytes": 1613052,
+      "sha256": "b3286e3619671f723c091a690cd0ea346be24367e554f2ee212b20feb34a5519"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793834996631.trace.json",
+      "bytes": 1751249,
+      "sha256": "1bde6205a93ca8e57452eda653cdb1429dc0e36e1eb774965d82f4596978082c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793835047089.trace.json",
+      "bytes": 1707529,
+      "sha256": "47b2b1256c84d0ccd6d93031c4cf4da09e73609ac3c6849a2a05fb6cf134a31f"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793835092137.trace.json",
+      "bytes": 1729031,
+      "sha256": "31cf5d64ff52c136a36a054320b6d6bbededf8ae7338c4511d7d2601be31160a"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793835136704.trace.json",
+      "bytes": 1667162,
+      "sha256": "f0b3acd234a39ab27c902488b5018d751e5b8e111d917a464ae73b4c687a32c0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793835182294.trace.json",
+      "bytes": 1678843,
+      "sha256": "ffb618d4544eefb4bd7c85bb10fff8d4df558e427647f7669a1130f6262ebd23"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/browser-1793835229507.trace.json",
+      "bytes": 1686409,
+      "sha256": "aed728837ff4e7473572fc8fb2d578d683f7a61425f47b03206fea0bb48ebf59"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793800405203.log",
+      "bytes": 4309,
+      "sha256": "1746ef58130174eed7d091c24c0b0b30540a0ac1d37c11cf1a72513c5900af2e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793801137990.log",
+      "bytes": 4739,
+      "sha256": "624ce7c77bf508395363f7ade3795404b4d4acb6d5ce6bc1b94022ec930fea13"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793801196431.log",
+      "bytes": 4491,
+      "sha256": "3d388e8958456ae07083975fba4a011a249534775a7f59af28aa08de90f98b47"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793801240618.log",
+      "bytes": 4309,
+      "sha256": "f5869ed9260f45f3404acd3990f5fb0cca1cd5bb09afb7c62a295551e5c071f0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793801283450.log",
+      "bytes": 4309,
+      "sha256": "c206ed08b605919dfc51eff7d80586332ef8b06e37c0af7a8590a26562a962db"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793801386945.log",
+      "bytes": 4309,
+      "sha256": "db768b724a1d9d28442bb6ae8e74058436042f35abaee04d136a4cf848043b60"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793802117218.log",
+      "bytes": 4309,
+      "sha256": "30ddb8d1f71a7a44cb0f7e6ec41898816749f4cba708082ab8c63bb190cac7b0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793803109619.log",
+      "bytes": 4309,
+      "sha256": "30335757378c97a037d15bd1d1542f4da95876386397e29da91af7553276f89f"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793803180705.log",
+      "bytes": 4491,
+      "sha256": "d3a175e83305880979e0c12d7f16cdf685f0f4055631e28124f73ef21ef12afe"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793803246527.log",
+      "bytes": 4309,
+      "sha256": "c5aae06bc928991908505553697f412f0d6dae2ff9c25e5f5a54d120a8c9d66f"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793834112982.log",
+      "bytes": 4491,
+      "sha256": "1e93a74c7e9d074fa8d9f56cea28cff60961d86d00138107a0b2c660455706f1"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793834160106.log",
+      "bytes": 4491,
+      "sha256": "f0c38af74e85829fa5c250b1a25da9db8f12dd0931ed1a2d14d2d8f5ea120582"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793834206136.log",
+      "bytes": 4491,
+      "sha256": "0d78488c2b805d7f5b3affb50fe2b54208627356586e728bf8d8a3b8308ce365"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793834948982.log",
+      "bytes": 4309,
+      "sha256": "412e3d22910559c42949d283f61e535fddd4a460498914702edbd6f8daf0dc68"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793834997568.log",
+      "bytes": 4491,
+      "sha256": "563fe782260326677957cbaebe0885224229c426527bb43546ed8c33bd565543"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793835047922.log",
+      "bytes": 4309,
+      "sha256": "9752331dc4d988160b1e5cc7156397f1dcfcddf9da155fad5ea8f7c1f82720e7"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793835092957.log",
+      "bytes": 4309,
+      "sha256": "54256cd1856657983df58b088b19998446a11c35b4fc8ad8aab51f8b7583c538"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793835137719.log",
+      "bytes": 4491,
+      "sha256": "197ec87371f5453497b9f6029233544144b0419d651242e87c1cc760a9ae03ca"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/chromium-1793835183327.log",
+      "bytes": 4491,
+      "sha256": "f69e393c1746b0f9b44e89f89931242afc032050e8bb69ecdae79da330fcdf4e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/ci750-summary.json",
+      "bytes": 2110,
+      "sha256": "8802405733d1c82003c05ac865c4c7471ff6cdf76b577863e2c82f6f18814166"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/clone-candidate-test.json",
+      "bytes": 1374,
+      "sha256": "76a13263e58e4cc49a0bb3e58117fee32d3184840493d0bfb04d42261e30f101"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/clone-candidate.json",
+      "bytes": 3265,
+      "sha256": "b77d0822010b5bf35ede5ea4e1d5ead817ef309ac7226722054aa636a264f279"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/clone-config-incomplete.json",
+      "bytes": 289,
+      "sha256": "56da349dc8350fc95e90abf99148dad2e4966c2e542323c31f8d867a6a962918"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/directed-complete.json",
+      "bytes": 19514,
+      "sha256": "e0c72ce20adda000956daed9f9a9a2091249df8506defb54b392f7c3a2b64571"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/encoding-directed.json",
+      "bytes": 9179,
+      "sha256": "e0d1d550a039e849dd92ce586da3a9d7bd09287d84d49010796d29117e3a8c34"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/full-9d-incomplete.json",
+      "bytes": 471,
+      "sha256": "421eadfc983ffd172dc8de081e9b555384ea465c5d3c275863f25ecda22adfa0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/full-ce-environment.json",
+      "bytes": 605,
+      "sha256": "422728504e5fa7526ed40b1bb0a799202342a0a8a33941f1ab593e127bee67a1"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/full-f463-incomplete.json",
+      "bytes": 437,
+      "sha256": "1ea03ccc458f6dbf2107c69e55c3071b4e9e9f4be80d9c0d8547b6c97c7e8494"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/full-final-environment.json",
+      "bytes": 608,
+      "sha256": "d3db11f26b433dcc55f74c222dc192387af900777ec3f8670aee8e6809b23f2a"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-0.log",
+      "bytes": 1191,
+      "sha256": "ce004da31a03726de36e9025e6b6192177d06a712382b1fea141fdd5656c1343"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-1.log",
+      "bytes": 110,
+      "sha256": "9f2c02b43bbf9e5068cbcac44d87abd331036458a13115b5eb6a9f7ac3b4f6f2"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-10.log",
+      "bytes": 103,
+      "sha256": "f1d65b0713fdae2a1d812f06716f038577a0e9785d82a9f5cca7d25a8ac8c55e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-11.log",
+      "bytes": 128,
+      "sha256": "c5e62d00377a15d4b2632e8dc830578d3af7b07e7be7f80ff5c0d8b4e76b8cea"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-12.log",
+      "bytes": 104,
+      "sha256": "8af79d8e79e6a8865c5c0171564d0b7f2d41a06c41edcdf521b2db6fdf88bf09"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-13.log",
+      "bytes": 145,
+      "sha256": "a5baa51b7d26b35a2cdaa8be02bf8f6f802bb3bf086e7ebb5d862d374d953044"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-14.log",
+      "bytes": 103,
+      "sha256": "6c67102eaef3f8bc1183aa5a1b030a5a4e9869e3cee5456a685aed29e9392d9c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-15.log",
+      "bytes": 131,
+      "sha256": "e91d4d11474d2fa3d85f1a5e0a6291288ee2a12cb2c75e356ae5e09b534d14bd"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-16.log",
+      "bytes": 104,
+      "sha256": "071c992a618773715d2329859b1e4d2376aaed5b353899c3e8d53996e7668f81"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-17.log",
+      "bytes": 139,
+      "sha256": "60bbeec068b9ac045ee5b77ed69e7a0c62c9e694cdde4200288d8613fa6630e9"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-18.log",
+      "bytes": 103,
+      "sha256": "ab2fd3a75562f1e4fe5d9b091a9a20765599bebc248d41381f49d7e8cc2f5c40"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-19.log",
+      "bytes": 181,
+      "sha256": "93aaa905ece2845a7c7b15d6a30a25a54709ba961db320a73e72fbf8f6e6abfc"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-2.log",
+      "bytes": 101,
+      "sha256": "16a22ae2233b8786364436a2239be23c32095c1e6eddde71679d8f41faa35e8b"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-20.log",
+      "bytes": 103,
+      "sha256": "fadb2537e28e9ce78fea41778ac90a2d06ca1068601df0a5f8c2664e051d71c6"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-21.log",
+      "bytes": 791,
+      "sha256": "769f0e1ecb58cab622e8c3337103de3688826fec97862a297bc3843910d62cc0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-22.log",
+      "bytes": 128,
+      "sha256": "0c865e012a0c4fa9b58abaf20029de3068e6c29f9b6c6de7998efd421e29efe0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-23.log",
+      "bytes": 103,
+      "sha256": "d9bfd2dfbcd0912db79b0303b9ede625bd08e02382876fb916f331293e2776e2"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-24.log",
+      "bytes": 1436,
+      "sha256": "3a150c5912f7474cefb88ea0116479c39782329901685cbaac140a3d4dc42874"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-25.log",
+      "bytes": 302,
+      "sha256": "593898866c458c5134a4deb4ae00c9e3c3329a9f1061c3b1b6f7bcbe457e2465"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-26.log",
+      "bytes": 124,
+      "sha256": "a81f5c8f6de8163657a14dd4ae4c19167928a9b1293f4c9eaf8ce6a4846ec7e0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-3.log",
+      "bytes": 102,
+      "sha256": "eb3cf460dfcf01da87b3eeefea950ddd76295d06e9837ee895269971386f43f0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-4.log",
+      "bytes": 102,
+      "sha256": "c043f6de667ad3d2bcc549cc7758424dbc8c36ea58e129ea9f2a98b2ae46fbb8"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-5.log",
+      "bytes": 166,
+      "sha256": "da6d652f3ffc44e289a487616306a9bbb420624f2487741c9f364e3ea4aad874"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-6.log",
+      "bytes": 102,
+      "sha256": "b96b6323be76e718f4d48be87f14c6ebb76aea732fe1798265517098f168ded4"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-7.log",
+      "bytes": 146,
+      "sha256": "4f6a07c60339109deb90d1b52fc9d0f18c2e412f974154ce557d5a59fea2c5df"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-8.log",
+      "bytes": 102,
+      "sha256": "9bde5fb35941b2a15bc72dfe4194cb31e95ddf9cf792612c8085d71a0be27c2b"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/gate-9.log",
+      "bytes": 146,
+      "sha256": "602e33a30e4896121283806c9cd1ab7ab0d9468dc8ada303e40ec420ab883a86"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/lazy-policy-directed-final.json",
+      "bytes": 9664,
+      "sha256": "38ac56e8ba7e2a5d6a40bfec1aef3feca482ba65c065a65e67dd48d346741e2b"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/lazy-policy-directed.json",
+      "bytes": 9314,
+      "sha256": "60454e15a11a0aef9e9771f84f798dff8064653013451a06aaa34476005756d5"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/local-full-03e.json",
+      "bytes": 871139,
+      "sha256": "ccd007bc3ada86b20d9d655d5b90fab293331b59084f8fd289fd80fddb1d0a28"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/local-full-ce.json",
+      "bytes": 871645,
+      "sha256": "ef541bb654873493bfed31f78631deba88e464ba4c57c03e7165380dbc5000f7"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/local-full-handshake-environment.json",
+      "bytes": 1155,
+      "sha256": "8e147a210cb98b7eda61411b2bcdf900616c8bb99ee55e6a6ef29d9c0ebefa8e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/local-full-handshake-summary.json",
+      "bytes": 901,
+      "sha256": "ddac8b2178869cf25acd99bace77bf2a6b1172f50766eff9203ddbb229f500bf"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/local-full-handshake.json",
+      "bytes": 872369,
+      "sha256": "3a1c5a90c71e5d5a86d60cb4b1e8008c416bf5abdea4e11d28a965014444d6b8"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/native-final-persistence.json",
+      "bytes": 35300,
+      "sha256": "75d3dc685767f05057f025d6bfac32e32ef6bf8172799721830469d5bd95c658"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/native-handshake-reliability.json",
+      "bytes": 2789,
+      "sha256": "de1e7da11f164c2197c72e54dfd83ced9e4e419639b5e9bfe4749a02cc44b4b7"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/native-trace-summary.json",
+      "bytes": 19889,
+      "sha256": "371acc387a3df637b09f851cb203e59641e32a98ea3c553c34a85bc73f10a0c6"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/paired-t2-native.json",
+      "bytes": 25297,
+      "sha256": "bc38a82701cc083d193347d013525ff0951421fa97c9ac56a51720e78f00de0c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/parity-final.json",
+      "bytes": 60181,
+      "sha256": "8f13ed01d47585dd190a3e8454aa6c6e83f3eceaed9744c7c5aaff78f8e2d80a"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/parity-lazy-final.json",
+      "bytes": 60191,
+      "sha256": "6e190a19fc20effe8f52af7f9df293338b75bfb54ccd0945fe3cc8dc3c1559ee"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/retention-directed-final.json",
+      "bytes": 13624,
+      "sha256": "bd7282a09d81d3f91b87361e1a7405286d3a2952f338e345a201616931821b18"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/retention-directed.json",
+      "bytes": 13627,
+      "sha256": "a9c90d2192f46ffd8e0c244b6877ec0d0c5ab43f2c90a62ae62c37f9d6216f67"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-baseline-native-round2.json",
+      "bytes": 64078,
+      "sha256": "2c09c7d10fd4a7eeb52cc7457e5674d8f7d1c399483ae0fbe2253b7dfe31c28e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-baseline-native-round3.json",
+      "bytes": 62711,
+      "sha256": "db8f91501142b8e3de4e6b46379001c9ad429fa15f192b3eff4a95f23bf7eaea"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-baseline-native-round4.json",
+      "bytes": 64589,
+      "sha256": "0e2d25491ffa565ae4f797ced76f5cbaa52866c1c5e9b5600c31d46a8f08569e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-baseline-native-round5.json",
+      "bytes": 61957,
+      "sha256": "a15b274c80a0ae5fa40e6cdd8e27e60b6011f2683e0fd205aa30315f556c4d19"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-baseline-native.json",
+      "bytes": 60609,
+      "sha256": "d0753c63e344d9051d67075137d639fd17c3d12336cfeb460eb9b81a0cad306c"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-ce-native-round1.json",
+      "bytes": 66708,
+      "sha256": "eae7ed09be2b0f06cfdf95151e9593f8adee3cadbd0ce81668c606591d4acae0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-ce-native-round2.json",
+      "bytes": 64029,
+      "sha256": "2c2b1ab90e587d8c172a36bbe941ff9b81e46e627fb75e3eecf32a696709d78f"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-ce-native-round3.json",
+      "bytes": 63839,
+      "sha256": "b2ba03a8e9b4861f18330fcc95450aabd928a73fad485bd29cb31dd8505e9342"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-final-native-round1.json",
+      "bytes": 63606,
+      "sha256": "b427a2097c7615828c4c5706152e641164f1516588600f1d1a36162a7b1da176"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-final-native-round2.json",
+      "bytes": 71408,
+      "sha256": "1a600ef892c0a56430da2147f1fcf81f45babfdc320cb8086d8bc57d9cb86746"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-final-native-round3.json",
+      "bytes": 65573,
+      "sha256": "1056658328de8a06a8eb41384c210779deaa70148e0d943fb2f66de9b65115e6"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-directed-final.json",
+      "bytes": 31376,
+      "sha256": "f7493dd362222c3650e75e47acf89cb90dbafa8f786e876797ebd9661b427e6e"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-directed.json",
+      "bytes": 31385,
+      "sha256": "821e503db8422adaf657029194539db57b6b67cfbc884b11a7e331675f3e0ec0"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-native-round1.json",
+      "bytes": 62803,
+      "sha256": "03470e2eecacfcc044aa43120476a79dff605c7920bf42400aa41733960ccbec"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-native-round2.json",
+      "bytes": 62361,
+      "sha256": "fa1315d1395087e7a6ee6d170f84cd8f4dac13033113ba0aba16407b26e89c51"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-native-round3.json",
+      "bytes": 64135,
+      "sha256": "119ec72f5177386c05949ba18832d38b7008587f5de57a387c53b9f422699cc7"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-native-round4.json",
+      "bytes": 61975,
+      "sha256": "9867334a0f9ee7c5f3f45ed227c02544cadeabbde64363a55e5aaa8b0d6cbd78"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-native-round5.json",
+      "bytes": 60461,
+      "sha256": "927106c46d6432342f6937168c15e56de0c8042df12a07ab64f2ea7e28d39e12"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-handshake-native-round6.json",
+      "bytes": 64651,
+      "sha256": "7059b24c854a4d5cbd933f3312165803313407b1baf04a68d125d5c3122cc3d5"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-lifetime-round1.json",
+      "bytes": 1021985,
+      "sha256": "71d0fe76f7af93555cb884d54ea145481bea6b2b1816328677a3ceda910931ab"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/sw-lifetime-stop-round2.json",
+      "bytes": 1023441,
+      "sha256": "eb56966f2d7cccef00b1fd1210547b93509471b6d14b986eb0bb924745cc76f3"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/t2-native-profile-baseline-round2.json",
+      "bytes": 239614,
+      "sha256": "899b479716981ee63bc78cbac7eb0b42833988fc2ecb647a950a6b8198e5e13a"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/t2-native-profile-baseline.json",
+      "bytes": 240336,
+      "sha256": "34bae75f183686e0ee2a3fd7237a771fb8c99b37505fc2af931ac0f5d30335d7"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/t2-native-profile-candidate-round2.json",
+      "bytes": 239841,
+      "sha256": "2cd865ebf1b327547af0e7ba0b185e08bfffc84267accf6d2f76fa6740de81fb"
+    },
+    {
+      "file": "artifacts/b10-final-blockers/t2-native-profile-candidate.json",
+      "bytes": 239062,
+      "sha256": "5f970cc17a16780c8b11df50504bcfba3d32f609273665b98634f3c75faeaa54"
+    }
+  ],
+  "typedSourceHead": "ee62650063d4cb1db59c2d2ae11537a55575b0d5",
+  "initialNewCI": {
+    "sha": "f463d59fd8f62c481f5961424fb7ed489efa0a9f",
+    "run": 41846882602,
+    "status": "FAIL",
+    "cause": "TS2345 in added test: boolean|undefined not assignable to boolean; fixed with optional type and stricter false assertion"
+  },
+  "compiledNativeSW": [
+    {
+      "file": "sw-final-native-round1.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+            "version": "0.31.21",
+            "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        }
+      ]
+    },
+    {
+      "file": "sw-final-native-round2.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+            "version": "0.31.21",
+            "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        }
+      ]
+    },
+    {
+      "file": "sw-final-native-round3.json",
+      "builds": {
+        "purpose": "SW diagnostics; immutable same-format bounded before/after builds",
+        "variants": [
+          {
+            "name": "before",
+            "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+            "version": "0.31.8",
+            "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+          },
+          {
+            "name": "after",
+            "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+            "version": "0.31.21",
+            "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+          }
+        ]
+      },
+      "cases": [
+        {
+          "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+          "status": "FAIL",
+          "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+          "phase": "failed",
+          "workers": [
+            {
+              "role": "active",
+              "state": "activated",
+              "release": {
+                "version": "0.31.8",
+                "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+              },
+              "lifecycle": {
+                "release": {
+                  "version": "0.31.8",
+                  "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+                },
+                "scope": "http://127.0.0.1:4233/lieguo-zhengtu-origin/",
+                "clients": 1,
+                "events": []
+              }
+            },
+            {
+              "role": "waiting",
+              "state": "installed",
+              "release": {
+                "version": "0.31.21",
+                "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+              },
+              "lifecycle": {
+                "release": {
+                  "version": "0.31.21",
+                  "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+                },
+                "scope": "http://127.0.0.1:4233/lieguo-zhengtu-origin/",
+                "clients": 1,
+                "events": [
+                  {
+                    "type": "install",
+                    "at": 1793803254680
+                  },
+                  {
+                    "type": "skipWaiting:received",
+                    "at": 1793803255742
+                  },
+                  {
+                    "type": "skipWaiting:start",
+                    "at": 1793803255742
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "offline-sw refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "bad-install refuses activation and later retries safely",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "aborted durable save never activates or claims save success",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        },
+        {
+          "name": "page closes after native Durable notification; reopen resolves the same ID once",
+          "status": "PASS",
+          "error": null,
+          "phase": null,
+          "workers": null
+        }
+      ]
+    }
+  ],
+  "localDirected": {
+    "success": true,
+    "numPassedTests": 54,
+    "numFailedTests": 0
+  },
+  "localCICommands": {
+    "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+    "rows": [
+      {
+        "command": "python3 scripts/check-city-visuals.py",
+        "exit": 0,
+        "seconds": 84.70091239898466
+      },
+      {
+        "command": "python3 scripts/test_city_ui_successor.py",
+        "exit": 0,
+        "seconds": 16.496119085000828
+      },
+      {
+        "command": "python3 scripts/test_mobile_town_successor.py",
+        "exit": 0,
+        "seconds": 5.2114341580017935
+      },
+      {
+        "command": "python3 scripts/test_growth_tasks_successor.py",
+        "exit": 0,
+        "seconds": 17.92321727698436
+      },
+      {
+        "command": "python3 scripts/test_recruit_input_successor.py",
+        "exit": 0,
+        "seconds": 26.165080735023366
+      },
+      {
+        "command": "python3 scripts/p0c10_successor.py",
+        "exit": 0,
+        "seconds": 18.876014025998302
+      },
+      {
+        "command": "python3 scripts/test_p0c10_successor.py",
+        "exit": 0,
+        "seconds": 21.034706536011072
+      },
+      {
+        "command": "python3 scripts/p0c10_clock_delta.py",
+        "exit": 0,
+        "seconds": 17.304647559009027
+      },
+      {
+        "command": "python3 scripts/test_p0c10_clock_delta.py",
+        "exit": 0,
+        "seconds": 18.141563501005294
+      },
+      {
+        "command": "python3 scripts/b10_r3_01_successor.py",
+        "exit": 0,
+        "seconds": 17.631618838000577
+      },
+      {
+        "command": "python3 scripts/test_b10_r3_01_successor.py",
+        "exit": 0,
+        "seconds": 17.869807257986395
+      },
+      {
+        "command": "python3 scripts/b10_r3_02_successor.py",
+        "exit": 0,
+        "seconds": 16.240441482019378
+      },
+      {
+        "command": "python3 scripts/test_b10_r3_02_successor.py",
+        "exit": 0,
+        "seconds": 17.431728926982032
+      },
+      {
+        "command": "python3 scripts/b10_r3_03_successor.py",
+        "exit": 0,
+        "seconds": 20.4553785600001
+      },
+      {
+        "command": "python3 scripts/test_b10_r3_03_successor.py",
+        "exit": 0,
+        "seconds": 27.70487754000351
+      },
+      {
+        "command": "python3 scripts/b10_r3_04_successor.py",
+        "exit": 0,
+        "seconds": 23.825668967008824
+      },
+      {
+        "command": "python3 scripts/test_b10_r3_04_successor.py",
+        "exit": 0,
+        "seconds": 23.74542381099309
+      },
+      {
+        "command": "python3 scripts/b10_r3_05_successor.py",
+        "exit": 0,
+        "seconds": 18.939736116008135
+      },
+      {
+        "command": "python3 scripts/test_b10_r3_05_successor.py",
+        "exit": 0,
+        "seconds": 21.919011118996423
+      },
+      {
+        "command": "python3 scripts/b10_r3_06_successor.py",
+        "exit": 0,
+        "seconds": 18.19517421000637
+      },
+      {
+        "command": "python3 scripts/test_b10_r3_06_successor.py",
+        "exit": 0,
+        "seconds": 14.369031150010414
+      },
+      {
+        "command": "node scripts/test-deployment-isolation.mjs",
+        "exit": 0,
+        "seconds": 0.12662739999359474
+      },
+      {
+        "command": "python3 scripts/b10_release_unblock_successor.py",
+        "exit": 0,
+        "seconds": 9.887533168017399
+      },
+      {
+        "command": "python3 scripts/test_b10_release_unblock_successor.py",
+        "exit": 0,
+        "seconds": 13.499330939986976
+      },
+      {
+        "command": "node scripts/verify-runtime-parity.mjs",
+        "exit": 0,
+        "seconds": 128.23220915498678
+      },
+      {
+        "command": "node scripts/verify-projection-boundaries.mjs",
+        "exit": 0,
+        "seconds": 35.08370682000532
+      },
+      {
+        "command": "node scripts/verify-preview-boundaries.mjs",
+        "exit": 0,
+        "seconds": 0.055950642010429874
+      }
+    ],
+    "success": true
+  },
+  "artGates": [
+    {
+      "command": "python3 scripts/check-art-boards.py",
+      "exit": 0,
+      "seconds": 0.058292472996981815
+    },
+    {
+      "command": "python3 scripts/check-player-feedback.py",
+      "exit": 0,
+      "seconds": 68.58230543098762
+    }
+  ],
+  "parity": {
+    "rows": 31,
+    "status": "PASS",
+    "reference": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607"
+  },
+  "nativeFinalPersistence": {
+    "manifest": {
+      "purpose": "Uninstrumented actual native Persistence matched ad712d9 versus 03eb725 final source, 60k; same environment sequential",
+      "variants": [
+        {
+          "name": "before",
+          "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+          "version": "0.31.19",
+          "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+        },
+        {
+          "name": "after",
+          "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+          "version": "0.31.21",
+          "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+        }
+      ]
+    },
+    "cases": [
+      {
+        "variant": "before",
+        "count": 60000,
+        "status": "PASS",
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 1029.7999999821186,
+            "p95": 1029.7999999821186
+          },
+          "reopenLoad": {
+            "n": 5,
+            "p50": 150,
+            "p95": 150.40000000596046
+          },
+          "T1": {
+            "n": 20,
+            "p50": 6.9000000059604645,
+            "p95": 10.800000011920929
+          },
+          "T2": {
+            "n": 20,
+            "p50": 223.30000001192093,
+            "p95": 268
+          },
+          "query": {
+            "n": 20,
+            "p50": 1.399999976158142,
+            "p95": 1.9000000059604645
+          },
+          "rejectedT2": {
+            "n": 20,
+            "p50": 214.5,
+            "p95": 270.09999999403954
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 513.9000000059605,
+            "p95": 596.1999999880791
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 139.40000000596046,
+            "p95": 179.5
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 564.7999999821186,
+            "p95": 679.9000000059605
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 161,
+            "p95": 183.69999998807907
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 603.8000000119209,
+            "p95": 610.7000000178814
+          },
+          "coldLoad": {
+            "n": 5,
+            "p50": 233,
+            "p95": 308.30000001192093
+          }
+        },
+        "saves": {
+          "quick": {
+            "bytes": 3034499,
+            "checksum": "0efa71b4a6fe71f52f6eed9f0d7e5adfc6c397ffcda0577fa55da1953e57872d"
+          },
+          "full": {
+            "bytes": 3034596,
+            "checksum": "e77c5a683f0cd835dc6eb9c327db39c20ecf00a467d7011d5afe442ac1d6600c"
+          }
+        },
+        "worldBytes": 513542,
+        "retained": 2028
+      },
+      {
+        "variant": "after",
+        "count": 60000,
+        "status": "PASS",
+        "ms": {
+          "start": {
+            "n": 1,
+            "p50": 936.5999999940395,
+            "p95": 936.5999999940395
+          },
+          "reopenLoad": {
+            "n": 5,
+            "p50": 144,
+            "p95": 153.40000000596046
+          },
+          "T1": {
+            "n": 20,
+            "p50": 7.299999982118607,
+            "p95": 11.799999982118607
+          },
+          "T2": {
+            "n": 20,
+            "p50": 163.60000002384186,
+            "p95": 526.9000000059605
+          },
+          "query": {
+            "n": 20,
+            "p50": 1.4000000059604645,
+            "p95": 5.4000000059604645
+          },
+          "rejectedT2": {
+            "n": 20,
+            "p50": 129.69999998807907,
+            "p95": 770.6999999880791
+          },
+          "Recovery": {
+            "n": 5,
+            "p50": 458.69999998807907,
+            "p95": 960.1000000238419
+          },
+          "quickExport": {
+            "n": 5,
+            "p50": 175.5,
+            "p95": 268.5
+          },
+          "quickImport": {
+            "n": 5,
+            "p50": 828.9000000059605,
+            "p95": 1632.1000000238419
+          },
+          "fullExport": {
+            "n": 5,
+            "p50": 158.59999999403954,
+            "p95": 304.5
+          },
+          "fullImport": {
+            "n": 5,
+            "p50": 573.0999999940395,
+            "p95": 1138.2999999821186
+          },
+          "coldLoad": {
+            "n": 5,
+            "p50": 276.40000000596046,
+            "p95": 279.5
+          }
+        },
+        "saves": {
+          "quick": {
+            "bytes": 3034499,
+            "checksum": "099bbb931d7cb9cf05633b50a772b9cf84f00fc55f2ac23ffaaf099db8318cf5"
+          },
+          "full": {
+            "bytes": 3034596,
+            "checksum": "6561e0c52c1fb418fed0d239fddbad2ef155f1cc900dbdfdcf6e300cfc40a84b"
+          }
+        },
+        "worldBytes": 513542,
+        "retained": 2028
+      }
+    ],
+    "reliability": {
+      "status": "PASS",
+      "faults": [
+        {
+          "point": "fence-write",
+          "status": "PASS"
+        },
+        {
+          "point": "inbox-write",
+          "status": "PASS"
+        },
+        {
+          "point": "report-write",
+          "status": "PASS"
+        },
+        {
+          "point": "backup-write",
+          "status": "PASS"
+        },
+        {
+          "point": "world-write",
+          "status": "PASS"
+        },
+        {
+          "point": "authority-write",
+          "status": "PASS"
+        },
+        {
+          "point": "metadata-write",
+          "status": "PASS"
+        },
+        {
+          "point": "result-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-segment-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-result-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-index-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-manifest-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-head-write",
+          "status": "PASS"
+        },
+        {
+          "point": "retention-write",
+          "status": "PASS"
+        }
+      ],
+      "rapid": {
+        "done": true,
+        "accepted": 50,
+        "ordered": true,
+        "oldWriterFenced": true,
+        "oldEpoch": 1,
+        "newEpoch": 2
+      },
+      "eviction": {
+        "done": true,
+        "actualT2Commits": 1025,
+        "retained": 1024,
+        "expiredOriginalAckNotPromised": true,
+        "retiredReplayRefused": true,
+        "restart": true,
+        "recovery": true,
+        "import": true,
+        "pendingPreservedUntilBranchTransition": true,
+        "branchTransitionExplicitNeedsConfirmation": true
+      },
+      "workerTerminatedAfterT1": true,
+      "restartedPendingCommittedOnce": true,
+      "lostAckExactQuery": true
+    }
+  },
+  "sourceCI": {
+    "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+    "run": 41848506221,
+    "job": 126638878453,
+    "status": "PASS",
+    "passed": 2476,
+    "failed": 0,
+    "skipped": 1,
+    "url": "https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/41848506221"
+  },
+  "pairedT2": {
+    "status": "PASS",
+    "method": "Actual uninstrumented native IDB / two independent production-domain Workers and synthetic 60k DBs,100 factions/99 scheduled AI/25X. 20 sequential pairs; alternate A-B and B-A, no concurrent writes or measured cleanup. World gameplay and exact original Acks checked. Not GameApp latency or Android.",
+    "manifest": {
+      "purpose": "Uninstrumented actual native Persistence matched ad712d9 versus 03eb725 final source, 60k; same environment sequential",
+      "variants": [
+        {
+          "name": "before",
+          "head": "ad712d952b097c33f694d82bd51131ce7b2b6e61",
+          "version": "0.31.19",
+          "contentSha": "bf63a6c6f651cb29eee7dd05c2f79d268a694f79"
+        },
+        {
+          "name": "after",
+          "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+          "version": "0.31.21",
+          "contentSha": "ee62650063d4cb1db59c2d2ae11537a55575b0d5"
+        }
+      ]
+    },
+    "ms": {
+      "before": {
+        "T1": {
+          "n": 20,
+          "p50": 8.5,
+          "p95": 9.900000005960464
+        },
+        "T2": {
+          "n": 20,
+          "p50": 259.2000000178814,
+          "p95": 330.5
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.5999999940395355,
+          "p95": 3.2999999821186066
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 241.30000001192093,
+          "p95": 278.7000000178814
+        }
+      },
+      "after": {
+        "T1": {
+          "n": 20,
+          "p50": 8.300000011920929,
+          "p95": 14.799999982118607
+        },
+        "T2": {
+          "n": 20,
+          "p50": 192,
+          "p95": 236.80000001192093
+        },
+        "query": {
+          "n": 20,
+          "p50": 1.699999988079071,
+          "p95": 2.5
+        },
+        "rejectedT2": {
+          "n": 20,
+          "p50": 154,
+          "p95": 181.69999998807907
+        }
+      }
+    },
+    "T2PairsFaster": 20,
+    "pairs": [
+      {
+        "index": 0,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 309.80000001192093,
+        "T2After": 283.69999998807907,
+        "equalGameplay": true
+      },
+      {
+        "index": 1,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 584.1999999880791,
+        "T2After": 166.7999999821186,
+        "equalGameplay": true
+      },
+      {
+        "index": 2,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 330.5,
+        "T2After": 154.2999999821186,
+        "equalGameplay": true
+      },
+      {
+        "index": 3,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 256.30000001192093,
+        "T2After": 165.90000000596046,
+        "equalGameplay": true
+      },
+      {
+        "index": 4,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 284.40000000596046,
+        "T2After": 160.40000000596046,
+        "equalGameplay": true
+      },
+      {
+        "index": 5,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 249.69999998807907,
+        "T2After": 236.80000001192093,
+        "equalGameplay": true
+      },
+      {
+        "index": 6,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 302.30000001192093,
+        "T2After": 218.5,
+        "equalGameplay": true
+      },
+      {
+        "index": 7,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 282.5,
+        "T2After": 186.5,
+        "equalGameplay": true
+      },
+      {
+        "index": 8,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 265.30000001192093,
+        "T2After": 196.80000001192093,
+        "equalGameplay": true
+      },
+      {
+        "index": 9,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 240.5,
+        "T2After": 194.7999999821186,
+        "equalGameplay": true
+      },
+      {
+        "index": 10,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 259.2000000178814,
+        "T2After": 157,
+        "equalGameplay": true
+      },
+      {
+        "index": 11,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 256,
+        "T2After": 166.10000002384186,
+        "equalGameplay": true
+      },
+      {
+        "index": 12,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 291.89999997615814,
+        "T2After": 196.80000001192093,
+        "equalGameplay": true
+      },
+      {
+        "index": 13,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 235.60000002384186,
+        "T2After": 192,
+        "equalGameplay": true
+      },
+      {
+        "index": 14,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 249.09999999403954,
+        "T2After": 205.19999998807907,
+        "equalGameplay": true
+      },
+      {
+        "index": 15,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 234.30000001192093,
+        "T2After": 232.40000000596046,
+        "equalGameplay": true
+      },
+      {
+        "index": 16,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 236,
+        "T2After": 180.40000000596046,
+        "equalGameplay": true
+      },
+      {
+        "index": 17,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 260.59999999403954,
+        "T2After": 173.69999998807907,
+        "equalGameplay": true
+      },
+      {
+        "index": 18,
+        "order": [
+          "before",
+          "after"
+        ],
+        "T2Before": 259.7999999821186,
+        "T2After": 192.2999999821186,
+        "equalGameplay": true
+      },
+      {
+        "index": 19,
+        "order": [
+          "after",
+          "before"
+        ],
+        "T2Before": 253,
+        "T2After": 192.60000002384186,
+        "equalGameplay": true
+      }
+    ]
+  },
+  "localFull03e": {
+    "head": "03eb7254deaad17bb200df1cfbcf211970508697",
+    "success": false,
+    "passed": 2465,
+    "failedTests": 0,
+    "skipped": 12,
+    "suiteFailures": [
+      {
+        "name": "/tmp/lieguo-verification-PUmIDc/src/game/formal/breakthroughB92.test.ts",
+        "status": "failed",
+        "message": "Hook timed out in 240000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\"."
+      }
+    ]
+  },
+  "secondSource": {
+    "source": "fc4e3137f93e253ca6d050769159f8de13312224",
+    "gateHead": "ce30854e8d7ba68b38b678c3b1a5d3f75215ce2a",
+    "version": "0.31.22",
+    "directed": 27,
+    "parity": 31,
+    "finiteTamperTests": 4,
+    "localFull": {
+      "success": false,
+      "passed": 2466,
+      "failedTests": 0,
+      "skipped": 12,
+      "suiteFailures": [
+        {
+          "name": "/tmp/lieguo-verification-l2BAUg/src/game/formal/breakthroughB92.test.ts",
+          "status": "failed",
+          "message": "Hook timed out in 240000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\"."
+        }
+      ]
+    },
+    "ci": {
+      "run": 41929705518,
+      "job": 126923190267,
+      "status": "PASS",
+      "passed": 2477,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "rejectedCloneCandidate": {
+    "shipments": 800,
+    "facts": 2,
+    "native": {
+      "n": 20,
+      "p50": 2.44397200000094,
+      "p95": 3.539259999999558
+    },
+    "candidate": {
+      "n": 20,
+      "p50": 1.529393999999229,
+      "p95": 5.083431000000928
+    },
+    "note": "Actual 800 paid wonder trips for clone shape comparison; original B9 2000-trip and 240s test untouched. Not proof of replacing structuredClone on arbitrary input graphs."
+  },
+  "unchangedWorkload": [
+    {
+      "path": "scripts/verify-in-isolation.mjs",
+      "unchanged": true,
+      "sha256": "93fb62296bc4c9d2732bd4753377e4a19602792f9f47eb3a3407b49bd4ce5a01"
+    },
+    {
+      "path": "src/game/formal/breakthroughTestSupport.ts",
+      "unchanged": true,
+      "sha256": "b92f028aeb849964a118b615eae1eaa16895dd5aa4ebf497f0967466aa524868"
+    },
+    {
+      "path": "src/game/formal/breakthroughB92.test.ts",
+      "unchanged": true,
+      "sha256": "d85bffcc8523c02f0bba86b2add8cda0170015fa929ce8cbc73fa03390c6dc09"
+    }
+  ],
+  "handshakeSource": {
+    "source": "b039e8e206ff57bc5aebf493221fd1aa9ad29528",
+    "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+    "version": "0.31.23",
+    "directedPassed": 94,
+    "nativeRounds": [
+      {
+        "file": "sw-handshake-native-round1.json",
+        "builds": {
+          "purpose": "Snapshot of exact already verified clean production build plus independently bundled actual source validation Workers",
+          "variants": [
+            {
+              "name": "before",
+              "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+              "version": "0.31.8",
+              "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+            },
+            {
+              "name": "after",
+              "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+              "version": "0.31.23",
+              "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528"
+            }
+          ]
+        },
+        "cases": [
+          {
+            "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+            "status": "PASS"
+          },
+          {
+            "name": "offline-sw refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "bad-install refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "aborted durable save never activates or claims save success",
+            "status": "PASS"
+          },
+          {
+            "name": "page closes after native Durable notification; reopen resolves the same ID once",
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "file": "sw-handshake-native-round2.json",
+        "builds": {
+          "purpose": "Snapshot of exact already verified clean production build plus independently bundled actual source validation Workers",
+          "variants": [
+            {
+              "name": "before",
+              "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+              "version": "0.31.8",
+              "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+            },
+            {
+              "name": "after",
+              "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+              "version": "0.31.23",
+              "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528"
+            }
+          ]
+        },
+        "cases": [
+          {
+            "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+            "status": "PASS"
+          },
+          {
+            "name": "offline-sw refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "bad-install refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "aborted durable save never activates or claims save success",
+            "status": "PASS"
+          },
+          {
+            "name": "page closes after native Durable notification; reopen resolves the same ID once",
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "file": "sw-handshake-native-round3.json",
+        "builds": {
+          "purpose": "Snapshot of exact already verified clean production build plus independently bundled actual source validation Workers",
+          "variants": [
+            {
+              "name": "before",
+              "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+              "version": "0.31.8",
+              "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+            },
+            {
+              "name": "after",
+              "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+              "version": "0.31.23",
+              "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528"
+            }
+          ]
+        },
+        "cases": [
+          {
+            "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+            "status": "PASS"
+          },
+          {
+            "name": "offline-sw refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "bad-install refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "aborted durable save never activates or claims save success",
+            "status": "PASS"
+          },
+          {
+            "name": "page closes after native Durable notification; reopen resolves the same ID once",
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "file": "sw-handshake-native-round4.json",
+        "builds": {
+          "purpose": "Snapshot of exact already verified clean production build plus independently bundled actual source validation Workers",
+          "variants": [
+            {
+              "name": "before",
+              "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+              "version": "0.31.8",
+              "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+            },
+            {
+              "name": "after",
+              "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+              "version": "0.31.23",
+              "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528"
+            }
+          ]
+        },
+        "cases": [
+          {
+            "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+            "status": "PASS"
+          },
+          {
+            "name": "offline-sw refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "bad-install refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "aborted durable save never activates or claims save success",
+            "status": "PASS"
+          },
+          {
+            "name": "page closes after native Durable notification; reopen resolves the same ID once",
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "file": "sw-handshake-native-round5.json",
+        "builds": {
+          "purpose": "Snapshot of exact already verified clean production build plus independently bundled actual source validation Workers",
+          "variants": [
+            {
+              "name": "before",
+              "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+              "version": "0.31.8",
+              "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+            },
+            {
+              "name": "after",
+              "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+              "version": "0.31.23",
+              "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528"
+            }
+          ]
+        },
+        "cases": [
+          {
+            "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+            "status": "PASS"
+          },
+          {
+            "name": "offline-sw refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "bad-install refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "aborted durable save never activates or claims save success",
+            "status": "PASS"
+          },
+          {
+            "name": "page closes after native Durable notification; reopen resolves the same ID once",
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "file": "sw-handshake-native-round6.json",
+        "builds": {
+          "purpose": "Snapshot of exact already verified clean production build plus independently bundled actual source validation Workers",
+          "variants": [
+            {
+              "name": "before",
+              "head": "29ade31ceed78c48ea525fdc5097e53ccfa468a0",
+              "version": "0.31.8",
+              "contentSha": "29ade31ceed78c48ea525fdc5097e53ccfa468a0"
+            },
+            {
+              "name": "after",
+              "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+              "version": "0.31.23",
+              "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528"
+            }
+          ]
+        },
+        "cases": [
+          {
+            "name": "native update retains campaign and exact original Ack, then cold offline reopen",
+            "status": "PASS"
+          },
+          {
+            "name": "offline-sw refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "bad-install refuses activation and later retries safely",
+            "status": "PASS"
+          },
+          {
+            "name": "aborted durable save never activates or claims save success",
+            "status": "PASS"
+          },
+          {
+            "name": "page closes after native Durable notification; reopen resolves the same ID once",
+            "status": "PASS"
+          }
+        ]
+      }
+    ],
+    "nativePassed": 30,
+    "nativeFailed": 0,
+    "localFull": {
+      "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+      "success": false,
+      "passed": 2468,
+      "failedTests": 0,
+      "skipped": 12,
+      "suiteFailures": [
+        {
+          "name": "/tmp/lieguo-verification-96FCXj/src/game/formal/breakthroughB92.test.ts",
+          "status": "failed",
+          "message": "Hook timed out in 240000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\"."
+        }
+      ],
+      "selected": [
+        {
+          "name": "150000 cumulative valid receipts compact, roundtrip and recover with exact recent outcomes and retired replay protection",
+          "durationMs": 7038.954447,
+          "status": "passed"
+        },
+        {
+          "name": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+          "durationMs": 8589.717783,
+          "status": "passed"
+        }
+      ]
+    },
+    "ci": {
+      "run": 41933873760,
+      "job": 126937319317,
+      "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+      "success": true,
+      "regression": "2026-11-04T23:42:53.3810823Z {\"success\":true,\"passed\":2479,\"failed\":0,\"skipped\":1,\"report\":\"/home/runner/work/lieguo-zhengtu-origin/lieguo-zhengtu-origin/artifacts/integration/regression-full.json\"}",
+      "artifacts": [
+        {
+          "id": 13374471027,
+          "name": "regression-41933873760",
+          "size_in_bytes": 120945,
+          "url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/artifacts/13374471027",
+          "archive_download_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/artifacts/13374471027/zip",
+          "expired": false,
+          "created_at": "2026-11-04T23:43:16Z",
+          "expires_at": "2027-02-02T23:27:37Z",
+          "updated_at": "2026-11-04T23:43:16Z",
+          "digest": "sha256:6295810d08c21c1546d08ed68b6fee54b43fd00a4b678288c2098b601d0a8499",
+          "workflow_run": {
+            "id": 41933873760,
+            "repository_id": 1415851547,
+            "head_repository_id": 1415851547,
+            "head_branch": "fix/b10-release-unblock",
+            "head_sha": "750ea852fe8173c0e951072047b0ee83858d023f"
+          }
+        },
+        {
+          "id": 13373712609,
+          "name": "release-metadata-26b20ac4d63cef9e869f3a9703f2adf68cd3650e",
+          "size_in_bytes": 27925,
+          "url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/artifacts/13373712609",
+          "archive_download_url": "https://api.github.com/repos/cadence-jameds/lieguo-zhengtu-origin/actions/artifacts/13373712609/zip",
+          "expired": false,
+          "created_at": "2026-11-04T23:43:15Z",
+          "expires_at": "2027-02-02T23:27:37Z",
+          "updated_at": "2026-11-04T23:43:15Z",
+          "digest": "sha256:d184e6cb67aef881c0c36a6d984422ec2522a5dd6c5203342c0f6c7969916c88",
+          "workflow_run": {
+            "id": 41933873760,
+            "repository_id": 1415851547,
+            "head_repository_id": 1415851547,
+            "head_branch": "fix/b10-release-unblock",
+            "head_sha": "750ea852fe8173c0e951072047b0ee83858d023f"
+          }
+        }
+      ]
+    },
+    "nativeReliability": {
+      "status": "PASS",
+      "faults": [
+        {
+          "point": "fence-write",
+          "status": "PASS"
+        },
+        {
+          "point": "inbox-write",
+          "status": "PASS"
+        },
+        {
+          "point": "report-write",
+          "status": "PASS"
+        },
+        {
+          "point": "backup-write",
+          "status": "PASS"
+        },
+        {
+          "point": "world-write",
+          "status": "PASS"
+        },
+        {
+          "point": "authority-write",
+          "status": "PASS"
+        },
+        {
+          "point": "metadata-write",
+          "status": "PASS"
+        },
+        {
+          "point": "result-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-segment-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-result-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-index-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-manifest-write",
+          "status": "PASS"
+        },
+        {
+          "point": "ledger-head-write",
+          "status": "PASS"
+        },
+        {
+          "point": "retention-write",
+          "status": "PASS"
+        }
+      ],
+      "rapid": {
+        "done": true,
+        "accepted": 50,
+        "ordered": true,
+        "oldWriterFenced": true,
+        "oldEpoch": 1,
+        "newEpoch": 2
+      },
+      "eviction": {
+        "done": true,
+        "actualT2Commits": 1025,
+        "retained": 1024,
+        "expiredOriginalAckNotPromised": true,
+        "retiredReplayRefused": true,
+        "restart": true,
+        "recovery": true,
+        "import": true,
+        "pendingPreservedUntilBranchTransition": true,
+        "branchTransitionExplicitNeedsConfirmation": true
+      },
+      "workerTerminatedAfterT1": true,
+      "restartedPendingCommittedOnce": true,
+      "lostAckExactQuery": true
+    },
+    "nativeReliabilityHarnessNode": "v24.19.0 (browser 154; Node22 used for local full/build/profile)",
+    "localFullEnvironment": {
+      "head": "750ea852fe8173c0e951072047b0ee83858d023f",
+      "node": "v22.23.4",
+      "heap": 2197815296,
+      "nodeOptions": null,
+      "cpu": "200000 100000",
+      "memory": "8589934592",
+      "startedAt": "2026-11-04T23:49:21.447Z",
+      "workers": 2,
+      "observedDuringRun": {
+        "at": "2026-11-04T23:52:57.676596+00:00",
+        "cpuStat": "usage_usec 70319005858\nuser_usec 61322968354\nsystem_usec 8996037504\nnice_usec 0\nnr_periods 815069\nnr_throttled 219226\nthrottled_usec 9692516524\nnr_bursts 0\nburst_usec 0\n",
+        "memoryCurrent": "7758303232",
+        "memoryEvents": "low 0\nhigh 0\nmax 60289\noom 4\noom_kill 4\noom_group_kill 0\n",
+        "loadavg": "2.30 1.25 0.94 6/4856 922019",
+        "note": "Observed during full run; cgroup counters are cumulative for session, not attributable to this run without a start delta."
+      },
+      "finishedAt": "2026-11-05T00:04:51.710376+00:00",
+      "memoryEventsAtEnd": "low 0\nhigh 0\nmax 61907\noom 4\noom_kill 4\noom_group_kill 0\n",
+      "cpuStatAtEnd": "usage_usec 71721419628\nuser_usec 62648192990\nsystem_usec 9073226638\nnice_usec 0\nnr_periods 822121\nnr_throttled 226126\nthrottled_usec 9992394387\nnr_bursts 0\nburst_usec 0\n"
+    }
+  },
+  "controllerRestartRace": [
+    {
+      "file": "sw-final-native-round3.json",
+      "case": "native update retains campaign and exact original Ack, then cold offline reopen",
+      "steps": [
+        {
+          "offsetMs": 0,
+          "type": "skip-waiting",
+          "versions": []
+        },
+        {
+          "offsetMs": 1,
+          "type": "release-probe",
+          "versions": []
+        },
+        {
+          "offsetMs": 15,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "stopping"
+            }
+          ]
+        },
+        {
+          "offsetMs": 54,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "stopped"
+            }
+          ]
+        },
+        {
+          "offsetMs": 55,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 55,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 59,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 68,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "running"
+            }
+          ]
+        },
+        {
+          "offsetMs": 250,
+          "type": "release-probe",
+          "versions": []
+        },
+        {
+          "offsetMs": 500,
+          "type": "release-probe",
+          "versions": []
+        }
+      ]
+    },
+    {
+      "file": "sw-ce-native-round3.json",
+      "case": "native update retains campaign and exact original Ack, then cold offline reopen",
+      "steps": [
+        {
+          "offsetMs": 0,
+          "type": "skip-waiting",
+          "versions": []
+        },
+        {
+          "offsetMs": 0,
+          "type": "release-probe",
+          "versions": []
+        },
+        {
+          "offsetMs": 14,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "stopping"
+            }
+          ]
+        },
+        {
+          "offsetMs": 31,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "stopped"
+            }
+          ]
+        },
+        {
+          "offsetMs": 32,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 32,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 33,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 41,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "running"
+            }
+          ]
+        },
+        {
+          "offsetMs": 250,
+          "type": "release-probe",
+          "versions": []
+        },
+        {
+          "offsetMs": 500,
+          "type": "release-probe",
+          "versions": []
+        }
+      ]
+    },
+    {
+      "file": "sw-lifetime-round1.json",
+      "case": "offline-sw refuses activation and later retries safely",
+      "steps": [
+        {
+          "offsetMs": 0,
+          "type": "skip-waiting",
+          "versions": []
+        },
+        {
+          "offsetMs": 1,
+          "type": "release-probe",
+          "versions": []
+        },
+        {
+          "offsetMs": 21,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "stopping"
+            }
+          ]
+        },
+        {
+          "offsetMs": 32,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "stopped"
+            }
+          ]
+        },
+        {
+          "offsetMs": 32,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 32,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 33,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "starting"
+            }
+          ]
+        },
+        {
+          "offsetMs": 40,
+          "type": "native-version-state",
+          "versions": [
+            {
+              "versionId": "0",
+              "status": "activated",
+              "runningStatus": "running"
+            }
+          ]
+        },
+        {
+          "offsetMs": 250,
+          "type": "release-probe",
+          "versions": []
+        },
+        {
+          "offsetMs": 500,
+          "type": "release-probe",
+          "versions": []
+        }
+      ]
+    }
+  ],
+  "finalProgram": {
+    "verifiedHead": "750ea852fe8173c0e951072047b0ee83858d023f",
+    "contentSha": "b039e8e206ff57bc5aebf493221fd1aa9ad29528",
+    "version": "0.31.23",
+    "provenanceNote": "Earlier sourceHead, verifiedGateHead, sourceCI and source-specific sections retain historical optimization stages; this is the final program tested, followed only by documentation/diagnostic-helper commits."
+  }
+}
