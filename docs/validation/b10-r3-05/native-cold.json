@@ -1,0 +1,3976 @@
+{
+  "beforeSha": "dfa574a",
+  "afterSource": "eae7af8",
+  "environment": "Native Chromium154/Linux/CPU2, real GameApp and fresh Runtime Worker; same fixture seeded before every sample. Includes actual offline replay and final T2; not Android. Profile times inclusive. cgroup memory includes browser/server/OS cache, not pure JS retained heap.",
+  "caveats": [
+    "Fresh browser and authority Worker per sample, actual GameApp to city interaction, includes offline replay/final T2.",
+    "Main heap is not Worker heap; cgroup includes OS cache and server.",
+    "Long Tasks remain; no Android claim."
+  ],
+  "before": [
+    {
+      "count": 0,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 2686.1475919999993,
+          "p95": 3908.128234
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 492.0046050000001,
+          "p95": 1432.4256560000003
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 3908.128234,
+          "clickToCityMs": 1432.4256560000003,
+          "cgroupSampledPeak": 2689556480,
+          "mainHeap": {
+            "used": 29408770,
+            "total": 39219414
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 1049,
+              "ms": 100
+            },
+            {
+              "start": 2056.2999999970198,
+              "ms": 64
+            },
+            {
+              "start": 2271.2999999970198,
+              "ms": 161
+            },
+            {
+              "start": 3156.0999999940395,
+              "ms": 170
+            },
+            {
+              "start": 3363.5999999940395,
+              "ms": 55
+            },
+            {
+              "start": 3570.199999988079,
+              "ms": 57
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 2811.9016470000006,
+          "clickToCityMs": 482.12323800000013,
+          "cgroupSampledPeak": 2633293824,
+          "mainHeap": {
+            "used": 29160482,
+            "total": 38633686
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 833,
+              "ms": 103
+            },
+            {
+              "start": 1141.5,
+              "ms": 109
+            },
+            {
+              "start": 2083,
+              "ms": 72
+            },
+            {
+              "start": 2224.3999999910593,
+              "ms": 87
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 2686.1475919999993,
+          "clickToCityMs": 492.0046050000001,
+          "cgroupSampledPeak": 2686857216,
+          "mainHeap": {
+            "used": 29124587,
+            "total": 38109399
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 825.2999999970198,
+              "ms": 96
+            },
+            {
+              "start": 1917.7999999970198,
+              "ms": 54
+            },
+            {
+              "start": 2062.5,
+              "ms": 93
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 2441.211271,
+          "clickToCityMs": 464.0937449999983,
+          "cgroupSampledPeak": 2700312576,
+          "mainHeap": {
+            "used": 29138324,
+            "total": 38719696
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 705.8000000119209,
+              "ms": 92
+            },
+            {
+              "start": 1698.2000000029802,
+              "ms": 56
+            },
+            {
+              "start": 1850.2000000029802,
+              "ms": 88
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 2446.626365,
+          "clickToCityMs": 499.2862189999978,
+          "cgroupSampledPeak": 2725343232,
+          "mainHeap": {
+            "used": 27476803,
+            "total": 43438279
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 697.6000000089407,
+              "ms": 90
+            },
+            {
+              "start": 1624.4000000059605,
+              "ms": 62
+            },
+            {
+              "start": 1823.7000000029802,
+              "ms": 97
+            }
+          ],
+          "readPercentMessages": []
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 43.599999979138374,
+            "p95": 52.6000000089407
+          },
+          "calls": [
+            7,
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 0.30000001192092896,
+            "p95": 0.5
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.6000000089406967,
+            "p95": 0.699999988079071
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.5,
+            "p95": 1.199999988079071
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.2999999970197678,
+            "p95": 1.2999999970197678
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 1.5,
+            "p95": 2.2999999970197678
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 1.3999999910593033,
+            "p95": 2.8999999910593033
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 4.5999999940395355,
+            "p95": 6.4000000059604645
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 2.5,
+            "p95": 4
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2.800000011920929,
+            "p95": 2.9000000059604645
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 168.00000001490116,
+            "p95": 192.8999999910593
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 119.70000000298023,
+            "p95": 145
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 95.1000000089407,
+            "p95": 110.90000000596046
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 69.79999999701977,
+            "p95": 76.59999999403954
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 222.40000002086163,
+            "p95": 247.59999997913837
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 1000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 2564.554729000003,
+          "p95": 3669.8952380000046
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 489.9895830000023,
+          "p95": 864.7818929999994
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 2564.554729000003,
+          "clickToCityMs": 489.9895830000023,
+          "cgroupSampledPeak": 2676015104,
+          "mainHeap": {
+            "used": 29136472,
+            "total": 38896140
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 727.0999999940395,
+              "ms": 95
+            },
+            {
+              "start": 1811.199999988079,
+              "ms": 71
+            },
+            {
+              "start": 1956.5999999940395,
+              "ms": 97
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 2520.179635999997,
+          "clickToCityMs": 393.8149970000013,
+          "cgroupSampledPeak": 2692718592,
+          "mainHeap": {
+            "used": 29011467,
+            "total": 37847563
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 729.5,
+              "ms": 89
+            },
+            {
+              "start": 1873.4000000059605,
+              "ms": 70
+            },
+            {
+              "start": 2016.2999999970198,
+              "ms": 89
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 2089.5888339999947,
+          "clickToCityMs": 140.00685499999963,
+          "cgroupSampledPeak": 2661715968,
+          "mainHeap": {
+            "used": 26780830,
+            "total": 38109694
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 629.9000000059605,
+              "ms": 89
+            },
+            {
+              "start": 1693.6000000089407,
+              "ms": 66
+            },
+            {
+              "start": 1830.7000000029802,
+              "ms": 92
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 3453.028167999997,
+          "clickToCityMs": 864.7818929999994,
+          "cgroupSampledPeak": 2762264576,
+          "mainHeap": {
+            "used": 30156410,
+            "total": 39682594
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 661.2000000029802,
+              "ms": 105
+            },
+            {
+              "start": 2055.7000000029802,
+              "ms": 78
+            },
+            {
+              "start": 2392.2000000029802,
+              "ms": 156
+            },
+            {
+              "start": 2711.1000000089407,
+              "ms": 106
+            },
+            {
+              "start": 2817.4000000059605,
+              "ms": 62
+            },
+            {
+              "start": 2986.1000000089407,
+              "ms": 94
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 3669.8952380000046,
+          "clickToCityMs": 551.0018419999979,
+          "cgroupSampledPeak": 2728419328,
+          "mainHeap": {
+            "used": 31669334,
+            "total": 41517618
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 491,
+              "ms": 162
+            },
+            {
+              "start": 1495.9000000059605,
+              "ms": 124
+            },
+            {
+              "start": 1626.6000000089407,
+              "ms": 69
+            },
+            {
+              "start": 2883.7000000029802,
+              "ms": 66
+            },
+            {
+              "start": 2992,
+              "ms": 91
+            }
+          ],
+          "readPercentMessages": []
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 48.599999994039536,
+            "p95": 116.49999997019768
+          },
+          "calls": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 7.399999991059303,
+            "p95": 12.499999970197678
+          },
+          "calls": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1,
+            "p95": 1.3999999910593033
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 19.400000005960464,
+            "p95": 31.099999994039536
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2.1000000089406967,
+            "p95": 2.4000000059604645
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 35.400000005960464,
+            "p95": 52.80000001192093
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 2.199999988079071,
+            "p95": 3.7999999970197678
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 56,
+            "p95": 73
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 19.700000002980232,
+            "p95": 24.099999994039536
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 6.000000014901161,
+            "p95": 9.300000011920929
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 160.30000001192093,
+            "p95": 302.20000000298023
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 240.5,
+            "p95": 324.3999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 85.79999999701977,
+            "p95": 149.8999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 57.900000005960464,
+            "p95": 125.29999999701977
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 194.29999999701977,
+            "p95": 387.59999999403954
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 10000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 3372.925583999997,
+          "p95": 3753.3061579999994
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 386.191823000001,
+          "p95": 464.67636899999343
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 3103.8461949999983,
+          "clickToCityMs": 332.72142899999744,
+          "cgroupSampledPeak": 2774773760,
+          "mainHeap": {
+            "used": 29385725,
+            "total": 43090577
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 628.5999999940395,
+              "ms": 97
+            },
+            {
+              "start": 2518.0999999940395,
+              "ms": 60
+            },
+            {
+              "start": 2641,
+              "ms": 101
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 3753.3061579999994,
+          "clickToCityMs": 436.85648400000355,
+          "cgroupSampledPeak": 2827669504,
+          "mainHeap": {
+            "used": 29494485,
+            "total": 43401881
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 703.4000000059605,
+              "ms": 100
+            },
+            {
+              "start": 2695.4000000059605,
+              "ms": 73
+            },
+            {
+              "start": 3181.7000000029802,
+              "ms": 108
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 3555.136612999995,
+          "clickToCityMs": 203.32706199999666,
+          "cgroupSampledPeak": 2780803072,
+          "mainHeap": {
+            "used": 27241221,
+            "total": 43770521
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 774.7999999970198,
+              "ms": 95
+            },
+            {
+              "start": 875.9000000059605,
+              "ms": 51
+            },
+            {
+              "start": 2760.7999999970198,
+              "ms": 66
+            },
+            {
+              "start": 3224.7000000029802,
+              "ms": 112
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 3372.925583999997,
+          "clickToCityMs": 464.67636899999343,
+          "cgroupSampledPeak": 2865393664,
+          "mainHeap": {
+            "used": 29501244,
+            "total": 43602576
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 763.2000000029802,
+              "ms": 92
+            },
+            {
+              "start": 2676.7000000029802,
+              "ms": 62
+            },
+            {
+              "start": 2795.7999999970198,
+              "ms": 88
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 3176.2811470000015,
+          "clickToCityMs": 386.191823000001,
+          "cgroupSampledPeak": 2848804864,
+          "mainHeap": {
+            "used": 29384525,
+            "total": 43283089
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 669.9000000059605,
+              "ms": 91
+            },
+            {
+              "start": 2553.5,
+              "ms": 68
+            },
+            {
+              "start": 2673,
+              "ms": 99
+            }
+          ],
+          "readPercentMessages": []
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 117.39999997615814,
+            "p95": 133.49999998509884
+          },
+          "calls": [
+            86,
+            86,
+            86,
+            86,
+            86
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 63.6000000089407,
+            "p95": 75.2999999076128
+          },
+          "calls": [
+            81,
+            81,
+            81,
+            81,
+            81
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.699999988079071,
+            "p95": 1.2000000029802322
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 175.29999999701977,
+            "p95": 196.29999999701977
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.9000000059604645,
+            "p95": 2.6000000089406967
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 321.70000000298023,
+            "p95": 333.59999999403954
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 2.5999999940395355,
+            "p95": 8.400000005960464
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 417.6000000089407,
+            "p95": 439.40000000596046
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 95.5,
+            "p95": 115.5
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 3.699999988079071,
+            "p95": 8.599999994039536
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 168.80000001192093,
+            "p95": 198.19999998807907
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 1057.5999999940395,
+            "p95": 1094.2000000029802
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 107.40000000596046,
+            "p95": 111.70000000298023
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 58.79999999701977,
+            "p95": 79.90000000596046
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 193.00000002980232,
+            "p95": 238.49999997019768
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 30000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 5342.050747000001,
+          "p95": 5494.682893000005
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 453.64121799998975,
+          "p95": 492.4041309999884
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 5313.569195999997,
+          "clickToCityMs": 453.64121799998975,
+          "cgroupSampledPeak": 2942033920,
+          "mainHeap": {
+            "used": 31415161,
+            "total": 44061337
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 720.3000000119209,
+              "ms": 107
+            },
+            {
+              "start": 835.1000000089407,
+              "ms": 58
+            },
+            {
+              "start": 4256.4000000059605,
+              "ms": 57
+            },
+            {
+              "start": 4717.20000000298,
+              "ms": 94
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 4982.957414999997,
+          "clickToCityMs": 122.09534800000256,
+          "cgroupSampledPeak": 2908041216,
+          "mainHeap": {
+            "used": 27829088,
+            "total": 43938436
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 798.3999999910593,
+              "ms": 90
+            },
+            {
+              "start": 4256.899999991059,
+              "ms": 63
+            },
+            {
+              "start": 4744.5999999940395,
+              "ms": 97
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 5491.545941999997,
+          "clickToCityMs": 482.8779019999929,
+          "cgroupSampledPeak": 2963697664,
+          "mainHeap": {
+            "used": 32362921,
+            "total": 43958929
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 174.40000000596046,
+              "ms": 51
+            },
+            {
+              "start": 884.4000000059605,
+              "ms": 93
+            },
+            {
+              "start": 4685.9000000059605,
+              "ms": 71
+            },
+            {
+              "start": 4887.100000008941,
+              "ms": 94
+            },
+            {
+              "start": 5244.5,
+              "ms": 60
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 5494.682893000005,
+          "clickToCityMs": 492.4041309999884,
+          "cgroupSampledPeak": 2969894912,
+          "mainHeap": {
+            "used": 27950450,
+            "total": 42951298
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 817.8999999910593,
+              "ms": 95
+            },
+            {
+              "start": 4716.0999999940395,
+              "ms": 71
+            },
+            {
+              "start": 4875.699999988079,
+              "ms": 103
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 5342.050747000001,
+          "clickToCityMs": 300.7198970000027,
+          "cgroupSampledPeak": 2918027264,
+          "mainHeap": {
+            "used": 27857241,
+            "total": 44745369
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 897.0999999940395,
+              "ms": 93
+            },
+            {
+              "start": 4588.0999999940395,
+              "ms": 69
+            },
+            {
+              "start": 4911.0999999940395,
+              "ms": 105
+            }
+          ],
+          "readPercentMessages": []
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 232.40000009536743,
+            "p95": 251.40000000596046
+          },
+          "calls": [
+            242,
+            242,
+            242,
+            242,
+            242
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 165.30000001192093,
+            "p95": 193.70000006258488
+          },
+          "calls": [
+            237,
+            237,
+            237,
+            237,
+            237
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1,
+            "p95": 1.2999999970197678
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 464.20000000298023,
+            "p95": 531.7000000029802
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2,
+            "p95": 2.4000000208616257
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 819.2999999970198,
+            "p95": 893.7000000029802
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 1.7999999970197678,
+            "p95": 3.5
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1112.4000000059605,
+            "p95": 1271.0999999940395
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 292.70000000298023,
+            "p95": 379.59999999403954
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 4.100000008940697,
+            "p95": 5.300000011920929
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 166.29999999701977,
+            "p95": 192.6000000089407
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 2751.699999988079,
+            "p95": 2977.0999999940395
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 102.3999999910593,
+            "p95": 106.20000000298023
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 64.59999999403954,
+            "p95": 76.29999999701977
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 202.3000000268221,
+            "p95": 219.30000001192093
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 60000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 8324.222180000004,
+          "p95": 9117.835865
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 354.81695500000205,
+          "p95": 607.4840479999984
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 9117.835865,
+          "clickToCityMs": 454.93248499999754,
+          "cgroupSampledPeak": 3203338240,
+          "mainHeap": {
+            "used": 27969165,
+            "total": 43352721
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 1655.4000000059605,
+              "ms": 99
+            },
+            {
+              "start": 8408.20000000298,
+              "ms": 70
+            },
+            {
+              "start": 8529.70000000298,
+              "ms": 103
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 8324.222180000004,
+          "clickToCityMs": 225.4934859999994,
+          "cgroupSampledPeak": 3159781376,
+          "mainHeap": {
+            "used": 31035338,
+            "total": 40350362
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 911.4000000059605,
+              "ms": 107
+            },
+            {
+              "start": 7739.29999999702,
+              "ms": 68
+            },
+            {
+              "start": 7987,
+              "ms": 90
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 8409.002810000005,
+          "clickToCityMs": 607.4840479999984,
+          "cgroupSampledPeak": 3237888000,
+          "mainHeap": {
+            "used": 27965593,
+            "total": 44368537
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 292.1000000089407,
+              "ms": 55
+            },
+            {
+              "start": 1090.800000011921,
+              "ms": 101
+            },
+            {
+              "start": 7259.9000000059605,
+              "ms": 77
+            },
+            {
+              "start": 7657.9000000059605,
+              "ms": 106
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 7844.176812000005,
+          "clickToCityMs": 354.81695500000205,
+          "cgroupSampledPeak": 3226234880,
+          "mainHeap": {
+            "used": 32656798,
+            "total": 43278994
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 840.7999999970198,
+              "ms": 96
+            },
+            {
+              "start": 943.7000000029802,
+              "ms": 50
+            },
+            {
+              "start": 6912.29999999702,
+              "ms": 65
+            },
+            {
+              "start": 7370.20000000298,
+              "ms": 93
+            }
+          ],
+          "readPercentMessages": []
+        },
+        {
+          "navigationToCityMs": 7794.557325999995,
+          "clickToCityMs": 183.90607300000556,
+          "cgroupSampledPeak": 3271028736,
+          "mainHeap": {
+            "used": 32290084,
+            "total": 43389588
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 886.6000000089407,
+              "ms": 125
+            },
+            {
+              "start": 7145.29999999702,
+              "ms": 68
+            },
+            {
+              "start": 7494.9000000059605,
+              "ms": 97
+            }
+          ],
+          "readPercentMessages": []
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 339.60000006854534,
+            "p95": 384.70000000298023
+          },
+          "calls": [
+            476,
+            476,
+            476,
+            476,
+            476
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 330.6999999433756,
+            "p95": 365.1999998241663
+          },
+          "calls": [
+            471,
+            471,
+            471,
+            471,
+            471
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.7000000178813934,
+            "p95": 0.9000000208616257
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 990.3999999910593,
+            "p95": 1006.6999999880791
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.7000000029802322,
+            "p95": 3.1000000089406967
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 1639.7000000029802,
+            "p95": 1716.3999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 1.800000011920929,
+            "p95": 4.4000000059604645
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2179.7000000029802,
+            "p95": 2369.2999999970198
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 546.9000000059605,
+            "p95": 652.3999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 4.399999991059303,
+            "p95": 9.700000002980232
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 186.09999999403954,
+            "p95": 259.50000001490116
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 5296.70000000298,
+            "p95": 5620
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 103,
+            "p95": 115.8999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 63.900000005960464,
+            "p95": 77.09999999403954
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 204.09999997913837,
+            "p95": 261.80000001192093
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    }
+  ],
+  "after": [
+    {
+      "count": 0,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 2270.8048850000005,
+          "p95": 2971.400051
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 264.4261999999999,
+          "p95": 308.8436460000012
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 2971.400051,
+          "clickToCityMs": 264.4261999999999,
+          "cgroupSampledPeak": 3137662976,
+          "mainHeap": {
+            "used": 30701289,
+            "total": 44843177
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 1402.5,
+              "ms": 97
+            },
+            {
+              "start": 2431.6000000089407,
+              "ms": 53
+            },
+            {
+              "start": 2597,
+              "ms": 90
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2270.8048850000005,
+          "clickToCityMs": 238.75185500000043,
+          "cgroupSampledPeak": 3119415296,
+          "mainHeap": {
+            "used": 30684454,
+            "total": 44056746
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 748.2999999970198,
+              "ms": 93
+            },
+            {
+              "start": 1729.2000000029802,
+              "ms": 69
+            },
+            {
+              "start": 1917.2999999970198,
+              "ms": 97
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2362.8016099999986,
+          "clickToCityMs": 271.8013059999994,
+          "cgroupSampledPeak": 3111407616,
+          "mainHeap": {
+            "used": 30672456,
+            "total": 45412500
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 754.7999999970198,
+              "ms": 95
+            },
+            {
+              "start": 1842.9000000059605,
+              "ms": 66
+            },
+            {
+              "start": 1974.5,
+              "ms": 96
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2245.996546000002,
+          "clickToCityMs": 308.8436460000012,
+          "cgroupSampledPeak": 3119898624,
+          "mainHeap": {
+            "used": 30696890,
+            "total": 44318890
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 674.5,
+              "ms": 92
+            },
+            {
+              "start": 1656.7000000029802,
+              "ms": 59
+            },
+            {
+              "start": 1817.7999999970198,
+              "ms": 99
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2227.959904000003,
+          "clickToCityMs": 109.56997200000114,
+          "cgroupSampledPeak": 3114164224,
+          "mainHeap": {
+            "used": 28483833,
+            "total": 44056725
+          },
+          "snapshotBytes": 467382,
+          "longTasks": [
+            {
+              "start": 734,
+              "ms": 103
+            },
+            {
+              "start": 1840.800000011921,
+              "ms": 72
+            },
+            {
+              "start": 1994.800000011921,
+              "ms": 102
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 46.19999997317791,
+            "p95": 54.60000002384186
+          },
+          "calls": [
+            7,
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 0.29999999701976776,
+            "p95": 0.3999999910593033
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.699999988079071,
+            "p95": 1.3999999910593033
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.5999999940395355,
+            "p95": 1.7000000029802322
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.5,
+            "p95": 2.2000000029802322
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 2.5999999940395355,
+            "p95": 3
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 1.2000000029802322,
+            "p95": 2.1000000089406967
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 6,
+            "p95": 8.400000005960464
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 3.7000000029802322,
+            "p95": 5.100000008940697
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2.2999999970197678,
+            "p95": 2.6000000089406967
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 152.6000000089407,
+            "p95": 213.09999999403954
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 135.79999999701977,
+            "p95": 146.5
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 105.90000000596046,
+            "p95": 124.5
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 62.49999998509884,
+            "p95": 75.79999999701977
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 203.39999997615814,
+            "p95": 227.3999999910593
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 1000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 2574.872017999998,
+          "p95": 2745.353514999999
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 496.7774649999992,
+          "p95": 540.7110839999987
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 2745.353514999999,
+          "clickToCityMs": 500.2721279999969,
+          "cgroupSampledPeak": 3175071744,
+          "mainHeap": {
+            "used": 32786776,
+            "total": 44319200
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 886.5,
+              "ms": 100
+            },
+            {
+              "start": 2017.2000000029802,
+              "ms": 65
+            },
+            {
+              "start": 2142.7999999970198,
+              "ms": 85
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2697.757684999997,
+          "clickToCityMs": 540.7110839999987,
+          "cgroupSampledPeak": 3207327744,
+          "mainHeap": {
+            "used": 32812812,
+            "total": 44319200
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 685.7000000029802,
+              "ms": 93
+            },
+            {
+              "start": 1899.5,
+              "ms": 66
+            },
+            {
+              "start": 2023.5,
+              "ms": 96
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2574.872017999998,
+          "clickToCityMs": 496.7774649999992,
+          "cgroupSampledPeak": 3210633216,
+          "mainHeap": {
+            "used": 32868140,
+            "total": 43794912
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 754.9000000059605,
+              "ms": 91
+            },
+            {
+              "start": 1823,
+              "ms": 70
+            },
+            {
+              "start": 1964.2000000029802,
+              "ms": 93
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2513.4247449999966,
+          "clickToCityMs": 446.60398699999496,
+          "cgroupSampledPeak": 3175698432,
+          "mainHeap": {
+            "used": 32776159,
+            "total": 44634591
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 743,
+              "ms": 95
+            },
+            {
+              "start": 1824.4000000059605,
+              "ms": 67
+            },
+            {
+              "start": 1947.2999999970198,
+              "ms": 101
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 2525.893103000002,
+          "clickToCityMs": 467.4516469999944,
+          "cgroupSampledPeak": 3187912704,
+          "mainHeap": {
+            "used": 32832567,
+            "total": 44581343
+          },
+          "snapshotBytes": 467691,
+          "longTasks": [
+            {
+              "start": 729.3999999910593,
+              "ms": 93
+            },
+            {
+              "start": 1794.3999999910593,
+              "ms": 70
+            },
+            {
+              "start": 1935.2000000029802,
+              "ms": 92
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 51.5,
+            "p95": 58.69999998807907
+          },
+          "calls": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 7.899999991059303,
+            "p95": 8.799999982118607
+          },
+          "calls": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.6000000089406967,
+            "p95": 0.7000000178813934
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 21.099999994039536,
+            "p95": 29.200000002980232
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.3999999910593033,
+            "p95": 1.7000000029802322
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 40,
+            "p95": 44.29999999701977
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 0.9000000059604645,
+            "p95": 1.4000000059604645
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 62.19999998807907,
+            "p95": 67.20000000298023
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 22.599999994039536,
+            "p95": 28.200000002980232
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2.6000000089406967,
+            "p95": 3
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 167.00000001490116,
+            "p95": 171.29999999701977
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 227.1000000089407,
+            "p95": 241.09999999403954
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 90.1000000089407,
+            "p95": 108.40000000596046
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 66.09999999403954,
+            "p95": 76
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 205.49999998509884,
+            "p95": 219.89999997615814
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 10000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 3799.8246139999974,
+          "p95": 8725.051615999997
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 423.3858340000006,
+          "p95": 548.3428770000028
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 3972.108183999997,
+          "clickToCityMs": 536.3359710000004,
+          "cgroupSampledPeak": 3295150080,
+          "mainHeap": {
+            "used": 29821296,
+            "total": 46826092
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 737.2999999970198,
+              "ms": 105
+            },
+            {
+              "start": 2734.0999999940395,
+              "ms": 79
+            },
+            {
+              "start": 3260.7999999970198,
+              "ms": 111
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 3198.192117999999,
+          "clickToCityMs": 370.2057549999954,
+          "cgroupSampledPeak": 3294466048,
+          "mainHeap": {
+            "used": 29676109,
+            "total": 46563941
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 737.7000000029802,
+              "ms": 98
+            },
+            {
+              "start": 2542.7000000029802,
+              "ms": 71
+            },
+            {
+              "start": 2696.5,
+              "ms": 103
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 3255.184860000001,
+          "clickToCityMs": 345.28907900000195,
+          "cgroupSampledPeak": 3249029120,
+          "mainHeap": {
+            "used": 29677056,
+            "total": 46826084
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 770.6000000089407,
+              "ms": 101
+            },
+            {
+              "start": 2660.2000000029802,
+              "ms": 78
+            },
+            {
+              "start": 2790.7999999970198,
+              "ms": 99
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 3799.8246139999974,
+          "clickToCityMs": 423.3858340000006,
+          "cgroupSampledPeak": 3255508992,
+          "mainHeap": {
+            "used": 31290454,
+            "total": 46678638
+          },
+          "snapshotBytes": 467794,
+          "longTasks": [
+            {
+              "start": 746.7000000029802,
+              "ms": 92
+            },
+            {
+              "start": 2727.2000000029802,
+              "ms": 65
+            },
+            {
+              "start": 3243.7000000029802,
+              "ms": 107
+            },
+            {
+              "start": 3541.4000000059605,
+              "ms": 73
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 8725.051615999997,
+          "clickToCityMs": 548.3428770000028,
+          "cgroupSampledPeak": 3333357568,
+          "mainHeap": {
+            "used": 31681805,
+            "total": 45892197
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 1498.199999988079,
+              "ms": 368
+            },
+            {
+              "start": 1913.8999999910593,
+              "ms": 97
+            },
+            {
+              "start": 2631.0999999940395,
+              "ms": 112
+            },
+            {
+              "start": 2750.8999999910593,
+              "ms": 69
+            },
+            {
+              "start": 6412.29999999702,
+              "ms": 69
+            },
+            {
+              "start": 7748.699999988079,
+              "ms": 80
+            },
+            {
+              "start": 7891.5999999940395,
+              "ms": 233
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 114.20000006258488,
+            "p95": 700.7999999821186
+          },
+          "calls": [
+            86,
+            86,
+            86,
+            86,
+            86
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 66.09999997913837,
+            "p95": 306.3999999910593
+          },
+          "calls": [
+            81,
+            81,
+            81,
+            81,
+            81
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.7999999970197678,
+            "p95": 1.199999988079071
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 179.90000000596046,
+            "p95": 892.8999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.6000000089406967,
+            "p95": 1.7999999970197678
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 323.29999999701977,
+            "p95": 1730.8999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 1.0999999940395355,
+            "p95": 1.5000000149011612
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 439.29999999701977,
+            "p95": 2016.2000000029802
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 111.09999999403954,
+            "p95": 284.29999999701977
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 3.199999988079071,
+            "p95": 4.200000002980232
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 171,
+            "p95": 221.20000000298023
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 1060.3999999910593,
+            "p95": 3059.5
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 111.80000001192093,
+            "p95": 280.80000001192093
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 48.900000005960464,
+            "p95": 58.80000001192093
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 222.29999999701977,
+            "p95": 441.00000001490116
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 30000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 5927.104678000003,
+          "p95": 10659.375014999998
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 452.7681610000145,
+          "p95": 1224.1562130000093
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 5927.104678000003,
+          "clickToCityMs": 620.5168750000012,
+          "cgroupSampledPeak": 3459923968,
+          "mainHeap": {
+            "used": 31717305,
+            "total": 46559845
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 1161.7000000029802,
+              "ms": 98
+            },
+            {
+              "start": 5003.9000000059605,
+              "ms": 75
+            },
+            {
+              "start": 5181.20000000298,
+              "ms": 104
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 10659.375014999998,
+          "clickToCityMs": 1224.1562130000093,
+          "cgroupSampledPeak": 3458580480,
+          "mainHeap": {
+            "used": 31686408,
+            "total": 45695596
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 1094.5,
+              "ms": 199
+            },
+            {
+              "start": 1435.7999999970198,
+              "ms": 151
+            },
+            {
+              "start": 1598,
+              "ms": 93
+            },
+            {
+              "start": 1708.7000000029802,
+              "ms": 159
+            },
+            {
+              "start": 2132,
+              "ms": 162
+            },
+            {
+              "start": 2336.5,
+              "ms": 51
+            },
+            {
+              "start": 2751.5999999940395,
+              "ms": 134
+            },
+            {
+              "start": 2923.2999999970198,
+              "ms": 412
+            },
+            {
+              "start": 3349.0999999940395,
+              "ms": 69
+            },
+            {
+              "start": 8369.79999999702,
+              "ms": 155
+            },
+            {
+              "start": 8728.09999999404,
+              "ms": 635
+            },
+            {
+              "start": 9988.09999999404,
+              "ms": 58
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 6294.300578999973,
+          "clickToCityMs": 435.9007430000056,
+          "cgroupSampledPeak": 3460558848,
+          "mainHeap": {
+            "used": 31700694,
+            "total": 46219886
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 1657,
+              "ms": 94
+            },
+            {
+              "start": 5195.29999999702,
+              "ms": 62
+            },
+            {
+              "start": 5718.70000000298,
+              "ms": 97
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 5641.6536049999995,
+          "clickToCityMs": 160.24532899999758,
+          "cgroupSampledPeak": 3395088384,
+          "mainHeap": {
+            "used": 31218159,
+            "total": 45957711
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 953.8999999910593,
+              "ms": 110
+            },
+            {
+              "start": 1069.199999988079,
+              "ms": 63
+            },
+            {
+              "start": 1262.5999999940395,
+              "ms": 67
+            },
+            {
+              "start": 5051.699999988079,
+              "ms": 62
+            },
+            {
+              "start": 5366.5999999940395,
+              "ms": 86
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 4842.288616000005,
+          "clickToCityMs": 452.7681610000145,
+          "cgroupSampledPeak": 3408211968,
+          "mainHeap": {
+            "used": 31670873,
+            "total": 46416469
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 791.4000000059605,
+              "ms": 93
+            },
+            {
+              "start": 4022.2000000029802,
+              "ms": 65
+            },
+            {
+              "start": 4284.100000008941,
+              "ms": 88
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 253.5999998897314,
+            "p95": 346.5999999642372
+          },
+          "calls": [
+            242,
+            242,
+            242,
+            242,
+            242
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 175.70000012218952,
+            "p95": 268.90000000596046
+          },
+          "calls": [
+            237,
+            237,
+            237,
+            237,
+            237
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.7999999970197678,
+            "p95": 1.2999999970197678
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 507.79999999701977,
+            "p95": 714.7000000029802
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.5,
+            "p95": 2.2999999970197678
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 932.9000000059605,
+            "p95": 1279.5
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 0.9000000059604645,
+            "p95": 15.200000002980232
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1170.2999999970198,
+            "p95": 1476.8999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 198,
+            "p95": 292.69999998807907
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 2.5999999940395355,
+            "p95": 8.5
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 151.40000000596046,
+            "p95": 902.7999999970198
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 2889,
+            "p95": 3293.8999999910593
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 104.90000000596046,
+            "p95": 153.40000000596046
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 48.00000001490116,
+            "p95": 156.29999999701977
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 218.70000000298023,
+            "p95": 428.70000003278255
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "count": 60000,
+      "ms": {
+        "navigationToCity": {
+          "n": 5,
+          "p50": 7475.210387999978,
+          "p95": 11525.199270000012
+        },
+        "clickToCity": {
+          "n": 5,
+          "p50": 358.46890900001745,
+          "p95": 534.858475999994
+        }
+      },
+      "rows": [
+        {
+          "navigationToCityMs": 7475.210387999978,
+          "clickToCityMs": 455.84252999999444,
+          "cgroupSampledPeak": 3704537088,
+          "mainHeap": {
+            "used": 31717425,
+            "total": 46522989
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 704.7999999970198,
+              "ms": 102
+            },
+            {
+              "start": 6544.5999999940395,
+              "ms": 67
+            },
+            {
+              "start": 6874.29999999702,
+              "ms": 103
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 7429.498269000003,
+          "clickToCityMs": 534.858475999994,
+          "cgroupSampledPeak": 3663863808,
+          "mainHeap": {
+            "used": 31811626,
+            "total": 46416494
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 788.0999999940395,
+              "ms": 87
+            },
+            {
+              "start": 6345.29999999702,
+              "ms": 69
+            },
+            {
+              "start": 6758.29999999702,
+              "ms": 100
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 6767.92028000002,
+          "clickToCityMs": 184.5547619999852,
+          "cgroupSampledPeak": 3767881728,
+          "mainHeap": {
+            "used": 29491253,
+            "total": 46154325
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 773.4000000059605,
+              "ms": 118
+            },
+            {
+              "start": 6298.100000008941,
+              "ms": 90
+            },
+            {
+              "start": 6443.100000008941,
+              "ms": 110
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 11525.199270000012,
+          "clickToCityMs": 358.46890900001745,
+          "cgroupSampledPeak": 3794235392,
+          "mainHeap": {
+            "used": 33313618,
+            "total": 46154342
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 881.6999999880791,
+              "ms": 163
+            },
+            {
+              "start": 1046.199999988079,
+              "ms": 64
+            },
+            {
+              "start": 1221.0999999940395,
+              "ms": 189
+            },
+            {
+              "start": 1522.199999988079,
+              "ms": 96
+            },
+            {
+              "start": 1977.8999999910593,
+              "ms": 161
+            },
+            {
+              "start": 2153.199999988079,
+              "ms": 165
+            },
+            {
+              "start": 2738.2999999970198,
+              "ms": 795
+            },
+            {
+              "start": 4281.5,
+              "ms": 51
+            },
+            {
+              "start": 10857.5,
+              "ms": 76
+            },
+            {
+              "start": 11032.29999999702,
+              "ms": 110
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        },
+        {
+          "navigationToCityMs": 7534.927037999994,
+          "clickToCityMs": 352.44053500000155,
+          "cgroupSampledPeak": 3679625216,
+          "mainHeap": {
+            "used": 31621342,
+            "total": 46154342
+          },
+          "snapshotBytes": 467795,
+          "longTasks": [
+            {
+              "start": 918.6999999880791,
+              "ms": 106
+            },
+            {
+              "start": 6920.899999991059,
+              "ms": 76
+            },
+            {
+              "start": 7060.29999999702,
+              "ms": 98
+            }
+          ],
+          "readPercentMessages": [
+            "讀取與驗證本機存檔（0%）",
+            "讀取與驗證本機存檔（5%）",
+            "讀取與驗證本機存檔（50%）",
+            "讀取與驗證本機存檔（55%）",
+            "讀取與驗證本機存檔（60%）",
+            "讀取與驗證本機存檔（65%）",
+            "讀取與驗證本機存檔（70%）",
+            "讀取與驗證本機存檔（75%）",
+            "讀取與驗證本機存檔（80%）",
+            "讀取與驗證本機存檔（85%）",
+            "讀取與驗證本機存檔（90%）",
+            "讀取與驗證本機存檔（95%）",
+            "讀取與驗證本機存檔（100%）"
+          ]
+        }
+      ],
+      "phasesInclusive": {
+        "canonical.ts:digest": {
+          "ms": {
+            "n": 5,
+            "p50": 332.0000000745058,
+            "p95": 440.6999998539686
+          },
+          "calls": [
+            476,
+            476,
+            476,
+            476,
+            476
+          ]
+        },
+        "command-ledger-candidate.mjs:hash": {
+          "ms": {
+            "n": 5,
+            "p50": 368.7000001221895,
+            "p95": 571.9000001251698
+          },
+          "calls": [
+            471,
+            471,
+            471,
+            471,
+            471
+          ]
+        },
+        "command-ledger-candidate.mjs:prepareLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 0.699999988079071,
+            "p95": 6.800000011920929
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "command-ledger-candidate.mjs:verifyLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 977.5,
+            "p95": 1618.2999999970198
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "commandLedger.ts:prepareVerifiedLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1.5,
+            "p95": 7.800000011920929
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "commandLedger.ts:verifyLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 1597.0999999940395,
+            "p95": 2425.0999999940395
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:publishLedgerHead": {
+          "ms": {
+            "n": 5,
+            "p50": 1.2000000029802322,
+            "p95": 9.200000002980232
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "ledgerStore.ts:readLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 1987.4000000059605,
+            "p95": 3432.7999999970198
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "ms": {
+            "n": 5,
+            "p50": 393.29999999701977,
+            "p95": 1007
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "ledgerStore.ts:writeLedger": {
+          "ms": {
+            "n": 5,
+            "p50": 13.799999997019768,
+            "p95": 20.799999997019768
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:commit": {
+          "ms": {
+            "n": 5,
+            "p50": 193.50000001490116,
+            "p95": 343.2999999821186
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "persistence.ts:loadAnchored": {
+          "ms": {
+            "n": 5,
+            "p50": 4717,
+            "p95": 6322.20000000298
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:decodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 94.3999999910593,
+            "p95": 110.70000000298023
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "saveCodec.ts:encodeSave": {
+          "ms": {
+            "n": 5,
+            "p50": 70.50000001490116,
+            "p95": 92.50000001490116
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "schema.ts:validateFormalWorld": {
+          "ms": {
+            "n": 5,
+            "p50": 210.90000000596046,
+            "p95": 276.19999995827675
+          },
+          "calls": [
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        }
+      }
+    }
+  ]
+}

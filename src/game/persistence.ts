@@ -1,6 +1,7 @@
 import {commandHistory,pendingHistory,worldLedger,findReceipt,bindLedger,cachedLedger,emptyVerifiedLedger,prepareVerifiedLedger,verifyLedgerArchive,type VerifiedLedger,type OriginalResult,normalizeOutcomeRevisions} from './formal/commandLedger';
 import {cloneWorldDraft} from './formal/worldDraft';
-import {ledgerStores,ledgerTables,ledgerIdentityRange,readLedger,readLedgerArchive,writeLedger,publishLedgerHead,resultFromReceipt,archiveFromBundle,type LedgerBundle} from './ledgerStore';
+import {ledgerStores,ledgerTables,scanLedgerIdentity,readLedger,readLedgerArchive,writeLedger,publishLedgerHead,resultFromReceipt,archiveFromBundle,LedgerReadSession,type LedgerBundle} from './ledgerStore';
+import {jsonDataEqual} from './formal/jsonDataEqual';
 import {validateFormalWorld} from './formal/schema';
 import {commandFingerprint,confirmationAck,terminalCommand,resultState,WriterConflict,RevisionConflict,COMMAND_TTL,MAX_COMMAND_ATTEMPTS,type InboxCommand,type CommandIntent,type WriterContext} from './durableCommands';
 import {worldPaused} from './formal/extinction';
@@ -59,7 +60,7 @@ export class FormalDatabase extends Dexie {
  }
 }
 function reconcileReceipts(target:FormalWorld,prior:readonly CommandReceipt[]):CommandReceipt[]{
- const entries=new Map(commandHistory(target).map(r=>[r.commandId,structuredClone(r)]));
+ const entries=new Map(commandHistory(target).map(r=>[r.commandId,r]));
  for(const old of prior){const chosen=entries.get(old.commandId);
   if(chosen&&(chosen.issuerId!==old.issuerId||chosen.fingerprint!==old.fingerprint))throw new Error('CommandId conflict in imported authority.');
   if(!chosen)entries.set(old.commandId,{...old,disposition:'rolled-back'});
@@ -222,6 +223,8 @@ export class FormalPersistence {
    // Copy those mutable branches now; encodeSave still strictly validates and
    // deep-copies the entire final candidate before checksum or any DB writes.
    // Transitions/AI activation retain the general full draft.
+   // Keep the original source revision/root separate from the stamped candidate:
+   // import Recovery filtering depends on that unchanged source version.
    let w=sanitizeSharedKnowledge(cloneWorldDraft(input));
    const priorRoot=authority.campaigns.find(c=>c.campaignId===w.campaignId)?.ledgerRoot??(await this.db.table('LedgerHeads').get(w.campaignId))?.root;let base=priorRoot?await this.ledger(w.campaignId,priorRoot):portable?.snapshots.find(s=>s.manifest.checksum===input.ledger?.anchor.root)??await Dexie.waitFor(emptyVerifiedLedger(w.campaignId));
    if(mode==='save'&&input.ledger&&input.ledger.anchor.root!==base.manifest.checksum)throw new RevisionConflict();
@@ -306,17 +309,18 @@ export class FormalPersistence {
  }
  async save(world:FormalWorld,reports:readonly FormalReport[]=[],expectedRevision?:number,savedAt?:number,command?:CommandCommit){return this.commit(world,reports,'save',expectedRevision,savedAt,false,command);}
  async start(world:FormalWorld){return this.commit(world,[],'start');}
- private async loadAnchored():Promise<{game:FormalWorld|null;recovered:boolean;savedAt?:number}>{
+ private async loadAnchored(onProgress?:(fraction:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;savedAt?:number}>{
+  let last=-1;const progress=(n:number)=>{const step=Math.floor(n*20);if(step>last){last=step;try{onProgress?.(step/20);}catch{/* A display observer cannot corrupt or restore authority. */}}};progress(0);
   const [row,authority]=await this.db.transaction('r',this.db.saves,async()=>[await this.db.saves.get('current'),await this.authority()] as const);if(!row){if(await hasLegacyCampaign(this.suffix))throw new Error(OLD_CAMPAIGN_MESSAGE);return{game:null,recovered:false};}
   if(row.kind==='world')assertCampaignCompatibility(row.data);
   const active=authority.campaigns.find(c=>c.campaignId===authority.activeCampaignId);if(!active)throw Error('權威戰役版本遺失，原資料保留。');
-  let proof:VerifiedLedger;try{proof=await readLedger(this.db,active.campaignId,active.ledgerRoot);}catch{this.damagedRoots.add(active.ledgerRoot);throw Error('命令帳本損毀，無法證明完整歷史；原資料保留，請使用完整備份。');}
+  progress(.05);let proof:VerifiedLedger;try{proof=await readLedger(this.db,active.campaignId,active.ledgerRoot);}catch{this.damagedRoots.add(active.ledgerRoot);throw Error('命令帳本損毀，無法證明完整歷史；原資料保留，請使用完整備份。');}progress(.5);
   let world:FormalWorld|undefined;
   try{
    if(row.kind!=='world')throw new Error('Invalid world row');
    world=(await decodeSave(row.data,proof)).world;
    const a=authority,root=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.ledgerRoot,head=await this.db.table('LedgerHeads').get(world.campaignId);
-   const entries=await ledgerIdentityRange(this.db,world.campaignId).toArray();if(entries.length!==proof.results.reduce((n,s)=>n+s.records.length,0)||entries.some(e=>{const original=proof.result(e.commandId),receipt=proof.receipt(e.commandId);return !original||e.issuerId!==original.issuerId||e.fingerprint!==original.fingerprint||canonicalJSON(e.original)!==canonicalJSON(original)||canonicalJSON(e.receipt)!==canonicalJSON(receipt);}))throw Error('命令索引與已驗證帳本不符。');
+   const identityCount=proof.results.reduce((n,s)=>n+s.records.length,0);let entries=0;await this.db.transaction('r',this.db.table('LedgerIdentity'),()=>scanLedgerIdentity(this.db,world!.campaignId,rows=>{for(const e of rows){entries++;const original=proof.result(e.commandId),receipt=proof.receipt(e.commandId);if(!original||e.issuerId!==original.issuerId||e.fingerprint!==original.fingerprint||!jsonDataEqual(e.original,original)||!jsonDataEqual(e.receipt,receipt))throw Error('命令索引與已驗證帳本不符。');}progress(.55+.4*Math.min(1,entries/Math.max(1,identityCount)));}));if(entries!==identityCount)throw Error('命令索引與已驗證帳本不符。');
    if(world.campaignId!==authority.activeCampaignId||world.revision!==a.revision||row.data.checksum!==a.worldChecksum||world.ledger?.anchor.root!==root||head?.root!==root)throw new Error('World and authority diverged');
    const tasks=a.campaigns.find(c=>c.campaignId===world!.campaignId)?.growthTasks;if(tasks&&canonicalJSON(tasks)!==canonicalJSON(world.growthTasks))throw new Error('Growth task authority diverged');
   }catch{
@@ -326,18 +330,19 @@ export class FormalPersistence {
     let candidate:FormalWorld;
     try{candidate=await this.checkpoint(b);}catch{continue;}
     // Candidate selected. Storage/CAS/transaction errors must propagate, never try an older point.
-    return{game:await this.restoreValidatedCheckpoint(candidate,b.at),recovered:true,savedAt:b.at};
+    const game=await this.restoreValidatedCheckpoint(candidate,b.at);progress(1);return{game,recovered:true,savedAt:b.at};
    }
    throw new Error('正式存檔與回復點均無法讀取，資料保留。');
   }
   await this.sanitizeStoredReports(world!);
+  progress(1);
   return{game:world!,recovered:false,savedAt:row.at};
  }
  private async sanitizeStoredReports(world:FormalWorld){await this.db.transaction('rw',this.db.BattleReports,async()=>{const rows=await this.db.BattleReports.where('campaignId').equals(world.campaignId).toArray();const repaired=rows.map(r=>sanitizeScoutReport(world,r) as ReportRow).filter((r,i)=>r!==rows[i]);if(repaired.length)await this.db.BattleReports.bulkPut(repaired);});}
  async loadSave(){const {game,recovered}=await this.loadAnchored();return {game,recovered};}
  async loadWithOffline(now=Date.now(),onProgress?:(stage:'read'|'offline'|'save',fraction?:number,events?:number)=>void):Promise<{game:FormalWorld|null;recovered:boolean;summary?:OfflineSummary}>{
   onProgress?.('read');
-  const loaded=await this.loadAnchored();if(!loaded.game)return {game:null,recovered:loaded.recovered};
+  const loaded=await this.loadAnchored(fraction=>onProgress?.('read',fraction,0));if(!loaded.game)return {game:null,recovered:loaded.recovered};
   // Capture provable legacy state before offline replay can change ownership or population.
   loaded.game={...loaded.game,...(loaded.game.growthTasks?{growthTasks:structuredClone(loaded.game.growthTasks)}:{})};syncGrowthTasks(loaded.game);
   onProgress?.('offline',0,0);
@@ -384,7 +389,7 @@ export class FormalPersistence {
   const captured=await this.db.transaction('r',[this.db.saves,this.db.backups,this.db.Inbox,this.db.BattleReports,...ledgerTables(this.db)],async()=>{
    const current=await this.db.saves.get('current');if(current?.kind!=='world')throw Error('沒有正式存檔可匯出。');const authority=await this.authority();
    const checkpoints=await this.db.backups.orderBy('id').reverse().limit(2).toArray(),heads=await this.db.table('LedgerHeads').toArray(),roots=[...heads,...checkpoints.map(p=>({campaignId:p.campaignId,root:p.data.snapshot.ledger!.anchor.root}))],archives:import('./formal/commandLedger').LedgerArchive[]=[];
-   for(const r of roots)if(!archives.some(a=>a.manifest.campaignId===r.campaignId&&a.manifest.checksum===r.root))archives.push(await readLedgerArchive(this.db,r.campaignId,r.root));
+   const readSession=new LedgerReadSession(this.db);for(const r of roots)if(!archives.some(a=>a.manifest.campaignId===r.campaignId&&a.manifest.checksum===r.root))archives.push(await readLedgerArchive(this.db,r.campaignId,r.root,readSession));
    return {current,authority,checkpoints,heads,archives,inbox:await this.db.Inbox.toArray(),reports:mode==='full'?await this.db.BattleReports.where('campaignId').equals(current.data.snapshot.campaignId).toArray():undefined};
   });
   const proofs=[];for(const a of captured.archives)proofs.push(await verifyLedgerArchive(a));

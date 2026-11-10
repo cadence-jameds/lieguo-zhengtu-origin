@@ -12,7 +12,7 @@ ADAPTERS={'scripts/growth_tasks_successor.py','scripts/p0c10_clock_delta.py','sc
 def sha(b):return hashlib.sha256(b).hexdigest()
 @lru_cache(maxsize=None)
 def previous(commit,path):
- from b10_r3_04_successor import previous as exact_blob
+ from b10_r3_05_successor import previous as exact_blob
  return exact_blob(commit,path)
 @lru_cache(maxsize=None)
 def paths(*args):return set(subprocess.check_output(['git','-C',str(ROOT),'ls-tree','-r','--name-only','-z',BASE,'--',*args],text=True).split('\0'))-{''}
@@ -78,18 +78,18 @@ def read_record(root=ROOT):
  r=json.loads(file.read_text());assert r==expected_record(),'Changed R3-03 immutable commit, grant, source, rule, history or adapter manifest'
  return r
 def accepts(path,predecessor,root=ROOT):
- from b10_r3_04_successor import accepts as next_accepts
+ from b10_r3_05_successor import accepts as next_accepts
  if path not in CHANGES:return next_accepts(path,predecessor,root)
  r=read_record(root)
  return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or next_accepts(path,r['changes'][path]['after'],root))
 def accepts_adapter(path,before,root=ROOT):
- from b10_r3_04_successor import accepts_adapter as next_adapter
+ from b10_r3_05_successor import accepts_adapter as next_adapter
  if path not in ADAPTERS:return next_adapter(path,before,root)
  if before!=previous(BASE,path):return False
  read_record(root)
  return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or next_adapter(path,adapters()[path],root))
 def validate(root=ROOT):
- from b10_r3_04_successor import accepts as next_accepts, accepts_adapter as next_adapter
+ from b10_r3_05_successor import accepts as next_accepts, accepts_adapter as next_adapter
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or next_accepts(p,v['after'],root),('Unrecorded R3-03 source change',p)
  for section in ['invariants','historical']:
