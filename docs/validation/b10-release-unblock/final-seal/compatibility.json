@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607",
-  "implementationCommit": "aba1ea61144f504bdd49cbf0151ba6b9fa3513a5",
+  "implementationCommit": "7555e4d7ad8a53ae33150ea95fe21dc53054a2e1",
   "implementationSupport": [
     ".github/workflows/ci.yml",
     "docs/validation/b10-release-unblock/final-seal/compatibility.json",
@@ -30,7 +30,7 @@
     },
     "docs/validation/b10-release-unblock/MERGE-AND-DEPLOY.md": {
       "before": null,
-      "after": "d2173016c43992b8e7eee9ecc802d1f9b6c3331420e839dca7d6cbe7e9242e83"
+      "after": "c99170501c97d246fc1c0cc220971266d729ffa5bb4d6d6b6475e2cd2702b273"
     },
     "docs/validation/b10-release-unblock/PERFORMANCE.md": {
       "before": null,
@@ -186,15 +186,15 @@
     },
     "docs/validation/b10-release-unblock/final-seal/RESULTS.md": {
       "before": null,
-      "after": "c3f231b4515f0c1bf55e9e0f8c7d00474f857d6e55f9d643cbd002e858bf51c7"
+      "after": "75b7d5ef0d86dd850ffe0955eceefbafc37fa8cd92a1a57275829fbd19fa748d"
     },
     "docs/validation/b10-release-unblock/final-seal/measurements.json": {
       "before": null,
-      "after": "01a967b07ab2cc99a2318ff2950d02313e47ca2cebe4d15287d5b896aba300ec"
+      "after": "1f884131e6327fe11f49026138f631f62cb45684fb5ad82f05d445f4e73da1ec"
     },
     "docs/validation/b10-release-unblock/final-seal/start-native.mjs": {
       "before": null,
-      "after": "a6276a528e180f404af1b4f8abdc77cc9ae1a372e9972c3f6afe0f345c466831"
+      "after": "7989895c8a3a983ac5c627aa1c3f2d4f40bfb84fd30add93c112dd1b94e59364"
     },
     "docs/validation/b10-release-unblock/final-seal/start-native.worker.ts": {
       "before": null,
@@ -400,6 +400,10 @@
       "before": null,
       "after": "613e2e4d1d625818873b25c75788798122f429d980241daef8c9ee529d7ba10d"
     },
+    "src/game/formal/incompatibleStartWorker.test.ts": {
+      "before": null,
+      "after": "c09272f54bf8a2a852147f75faac23f3eb1fa28aa6b5119cde1f7b20903679e9"
+    },
     "src/game/formal/ledgerFormalR303.test.ts": {
       "before": "9d0697301aef9b9e694f9e593766ee4bae02cff498f424a3ec096f1e8d54ced1",
       "after": "8c1098483747d6f43ec1321cc1ee1c49ec74123cb928ea0e398928bf7a70726d"
@@ -554,7 +558,7 @@
     },
     "src/game/runtime.worker.ts": {
       "before": "2acbf02483ab246fd41f3f5c2ce71a7a37a6e7407fa0eb4d7b846358eac5bad8",
-      "after": "5aa2fc9c4c6e69af95251450248091a4680686cc61b995d4c1ab7bb5f02aa893"
+      "after": "f455d1c988d36d517b5746d18372f82a0bfad49d2e7ab1160991b2060d13fad9"
     },
     "src/game/saveLock.test.ts": {
       "before": "6ffa097a298696236c7919117d9eeb5116ea860d11e1962738395763f30c451d",
