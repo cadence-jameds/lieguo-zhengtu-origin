@@ -1,0 +1,121 @@
+{
+  "method": "Local unreachable commit objects only; no ref update or remote merge",
+  "branchVersion": "0.31.4",
+  "rows": [
+    {
+      "pr": 54,
+      "parent": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+      "head": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+      "tree": "e8a3236e0b39eb464b47f25d60dbedbedb63b2d8",
+      "simulatedCommit": "95fcea185768cebefdedfbcc9076114c90020e3f",
+      "version": "0.30.76",
+      "title": "玩家命令收件與恢復",
+      "note": {
+        "title": "玩家命令收件與恢復",
+        "notes": [
+          "操作會先顯示建立中，持久接收後再排隊；正式保存完成才顯示提交成功。",
+          "連續操作各自保留狀態與原始內容，可在命令收件匣查詢結果。",
+          "重新載入可恢復已接收命令；世界前提改變、等待逾時或儲存失敗時會明確提示重新確認。",
+          "相同命令重送會查回原結果，避免重複扣款、建造或出兵；切換戰役時保留舊操作的處理紀錄。"
+        ]
+      },
+      "strict": true,
+      "repeatDeterministic": true
+    },
+    {
+      "pr": 55,
+      "parent": "95fcea185768cebefdedfbcc9076114c90020e3f",
+      "head": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+      "tree": "0aa881e31a4c1dbaed9a573a3c33f650da0587e8",
+      "simulatedCommit": "90d76de62fc2a575ea4a39ea09d08deefe5d893d",
+      "version": "0.30.77",
+      "title": "非同步建造預覽",
+      "note": {
+        "title": "非同步建造預覽",
+        "notes": [
+          "建造清單、建築與資源田升級、城牆及工匠建堡改由獨立背景程序計算預估，開啟面板時可立即查看資訊與操作。",
+          "預覽會顯示計算、更新、過期與暫時無法預估狀態；切換城市或戰役時捨棄舊結果，中斷後可重新查詢。",
+          "預覽與正式命令各自處理；預估尚未完成時仍可提交操作，正式結果由命令收件匣與權威規則重新驗證。"
+        ]
+      },
+      "strict": true,
+      "repeatDeterministic": true
+    },
+    {
+      "pr": 56,
+      "parent": "90d76de62fc2a575ea4a39ea09d08deefe5d893d",
+      "head": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+      "tree": "cc90c8656dd1f33d264d5e9298622cdc72e37bca",
+      "simulatedCommit": "cf85b98609f71747e033da32ab71603fadafea32",
+      "version": "0.30.78",
+      "title": "正式命令帳本與新版存檔",
+      "note": {
+        "title": "正式命令帳本與新版存檔",
+        "notes": [
+          "正式命令完整歷史改由獨立帳本保存，重送或回復戰役後仍能辨識原始結果，避免重複執行。",
+          "快速存檔與完整備份都保留命令身份、拒絕結果與回復所需資料。",
+          "啟用全新存檔格式；舊版開發測試存檔會明確提示不相容，原始資料保留，請重新建立戰役。"
+        ]
+      },
+      "strict": true,
+      "repeatDeterministic": true
+    },
+    {
+      "pr": 57,
+      "parent": "cf85b98609f71747e033da32ab71603fadafea32",
+      "head": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+      "tree": "31df68b16b0c99c185d245afe9e1b9d9f0d6b9c3",
+      "simulatedCommit": "0d9470428c2fd41a9a827dcf5a8a46123d6a4101",
+      "version": "0.30.79",
+      "title": "畫面差量同步與操作前提保護",
+      "note": {
+        "title": "畫面差量同步與操作前提保護",
+        "notes": [
+          "城市與軍隊畫面改用差量同步，累積命令歷史不再隨一般畫面更新傳送。",
+          "畫面同步中斷會顯示恢復狀態，並提供重新同步入口。",
+          "玩家操作保留點擊當下的版本與原始目標；畫面更新或預覽中斷不會取消已持久接收的正式命令。"
+        ]
+      },
+      "strict": true,
+      "repeatDeterministic": true
+    },
+    {
+      "pr": 58,
+      "parent": "0d9470428c2fd41a9a827dcf5a8a46123d6a4101",
+      "head": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+      "tree": "411e3da5ab6840cfdb194b39cd1ea816997319d7",
+      "simulatedCommit": "344c3bfd5ae046108c3bf7c735c5324346099eb5",
+      "version": "0.30.80",
+      "title": "長期戰役存檔與回復效率改善",
+      "note": {
+        "title": "長期戰役存檔與回復效率改善",
+        "notes": [
+          "長期戰役以分批方式核對命令身份，減少讀檔與回復時的大量暫存資料。",
+          "存檔備份重用同一次讀取中的歷史區段，並保留完整命令結果與回復驗證。",
+          "讀取存檔時顯示驗證進度；命令持久接收、去重與原子保存機制持續保護玩家操作。"
+        ]
+      },
+      "strict": true,
+      "repeatDeterministic": true
+    },
+    {
+      "pr": 59,
+      "parent": "344c3bfd5ae046108c3bf7c735c5324346099eb5",
+      "head": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+      "tree": "b32bcfd88e4ce052fe05986fd6079f216b2017c1",
+      "simulatedCommit": "f41a4bbab1cf6ebc5e658f042805237b002b9737",
+      "version": "0.30.81",
+      "title": "世界補算與玩家命令等待改善",
+      "note": {
+        "title": "世界補算與玩家命令等待改善",
+        "notes": [
+          "長時間世界補算減少重複的勝利資格計算，保留全部勢力與正式事件順序。",
+          "補算期間優先提供玩家命令的持久接收機會，已接收命令可獨立查詢等待及正式結果。",
+          "玩家操作仍保存原始目標與前提；需要重新確認時清楚回報，不會重複執行或提前顯示成功。"
+        ]
+      },
+      "strict": true,
+      "repeatDeterministic": true
+    }
+  ]
+}

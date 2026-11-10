@@ -1,0 +1,367 @@
+{
+  "runtime": {
+    "environment": "Chromium 154.0.8037.57/Linux/2 CPU quota/native IndexedDB/actual Runtime Dedicated Worker. Synthetic clock for deterministic foreground backlog; not OS sleep or Android. Fault barrier requires B10_OBSERVE=1 validation server.",
+    "cases": [
+      {
+        "name": "durable Pending is queryable during a private AI replay; actual terminate/restart executes it once",
+        "status": "PASS",
+        "data": {
+          "durableBeforeStop": true,
+          "privateAuthorityUnchanged": true,
+          "state": "committed",
+          "effects": 1,
+          "sameOriginalAckOnResend": true,
+          "aiWithDecision": 99
+        }
+      },
+      {
+        "name": "known Pending query completes before an ongoing replay publishes its world",
+        "status": "PASS",
+        "data": {
+          "queryState": "pending",
+          "queryBeforeReplayPublication": true
+        }
+      },
+      {
+        "name": "writer handoff during a private replay fences old T2 and preserves the durable identity",
+        "status": "PASS",
+        "data": {
+          "writerEpoch": 8,
+          "staleAuthorityUnchanged": true,
+          "recoveredEffects": 1
+        }
+      },
+      {
+        "name": "99 AI / 25X continues through 24 world hours, FIFO commands, away/resume and Recovery",
+        "status": "PASS",
+        "data": {
+          "timeBeforeRecovery": 86734739,
+          "all99Decided": true,
+          "commands": 4,
+          "branch": 5,
+          "oldIDsRemainTerminal": true
+        }
+      }
+    ]
+  },
+  "gameApp": {
+    "environment": "Native Chromium desktop Linux container, CPU quota 2; actual IndexedDB/Workers/React; synthetic data only; not Android",
+    "cases": [
+      {
+        "name": "actual React UI / Worker v2, rapid commands, lost Ack, lost projection and restart",
+        "status": "PASS",
+        "data": {
+          "first": {
+            "projection": {
+              "protocolVersion": 2,
+              "campaignId": "campaign:b1-fixture",
+              "branch": 1,
+              "writerEpoch": 1,
+              "sessionId": "fb499ff8-47f4-482b-b44e-7f7456676b65",
+              "projectionSequence": 2,
+              "revision": 2
+            },
+            "rows": 1,
+            "hasHistory": false
+          },
+          "before": {
+            "ids": [
+              "command:0525d409-4156-4917-86cf-737ebc158c6e",
+              "command:4355f9af-a489-4fab-a112-5c1b4fa6525d",
+              "command:09e3ea9f-4f2d-4c08-819a-a8b6a88410db",
+              "command:350d304f-c31a-482e-815a-1e5332fb8ca4",
+              "command:6264c06f-ca0a-4471-a4f2-df14de573898",
+              "command:971810ce-e8e4-411b-a078-4ad21438beea"
+            ],
+            "name": "連續0",
+            "interactiveLongTasks": [],
+            "snapshotRequestedAfterLoss": true,
+            "wireHistory": false
+          },
+          "restored": {
+            "rows": [
+              {
+                "id": "command:971810ce-e8e4-411b-a078-4ad21438beea",
+                "state": "needs-confirmation"
+              },
+              {
+                "id": "command:6264c06f-ca0a-4471-a4f2-df14de573898",
+                "state": "needs-confirmation"
+              },
+              {
+                "id": "command:350d304f-c31a-482e-815a-1e5332fb8ca4",
+                "state": "committed"
+              },
+              {
+                "id": "command:09e3ea9f-4f2d-4c08-819a-a8b6a88410db",
+                "state": "committed"
+              },
+              {
+                "id": "command:4355f9af-a489-4fab-a112-5c1b4fa6525d",
+                "state": "committed"
+              },
+              {
+                "id": "command:0525d409-4156-4917-86cf-737ebc158c6e",
+                "state": "committed"
+              }
+            ],
+            "name": "連續0"
+          },
+          "lastFrameRecoveryMs": 311.10000000009313,
+          "subsequentTickOrQuerySent": false
+        }
+      },
+      {
+        "name": "native quick/full import, Recovery and resync project the committed world without replaying identities",
+        "status": "PASS",
+        "data": {
+          "quick": true,
+          "full": true,
+          "recovery": true,
+          "oldIdentity": "rolled-back"
+        }
+      },
+      {
+        "name": "99 AI / 25X: durable intake stays independent; Preview death cannot cancel the formal command",
+        "status": "PASS",
+        "data": {
+          "durableDuring": true,
+          "decisions": 99,
+          "effects": 1,
+          "speed": 25
+        }
+      },
+      {
+        "name": "actual GameApp city/building UI and independent Preview Worker submit through the durable Inbox",
+        "status": "PASS",
+        "data": {
+          "ack": {
+            "commandId": "command:4476b8a6-f775-4502-85f0-15312f4bfbe3",
+            "status": "committed",
+            "revision": 3
+          },
+          "interactiveLongTasks": [],
+          "projectionHasHistory": false,
+          "workers": [
+            "/src/game/runtime.worker.ts",
+            "/src/game/constructionPreview.worker.ts"
+          ],
+          "durableAfterReload": "committed"
+        }
+      },
+      {
+        "name": "60k native persisted history loads into the actual GameApp without transporting the ledger",
+        "status": "PASS",
+        "data": {
+          "seeded": {
+            "campaignId": "campaign:projection-benchmark-60000",
+            "receipts": 60000,
+            "stored": 60000
+          },
+          "snapshotBytes": [
+            467794
+          ],
+          "historyOnWire": false,
+          "coldLongTasks": [
+            {
+              "start": 6724.799999999814,
+              "duration": 52
+            }
+          ],
+          "loadToCityInteractiveMs": 7217
+        }
+      },
+      {
+        "name": "background Recovery without a UI transition token clears old top-level drafts before another click",
+        "status": "PASS",
+        "data": {
+          "sourceBranch": 2,
+          "newBranch": 3,
+          "oldRenameDraftClosed": true,
+          "transitionIdSupplied": false
+        }
+      }
+    ]
+  },
+  "persistence": {
+    "environment": "Native Chromium154/Linux, real IndexedDB and Dedicated Worker; injected QuotaExceededError and actual terminate(), synthetic data only; not Android",
+    "cases": [
+      {
+        "name": "native T1 quota failure has no durable row and does not claim success",
+        "status": "PASS",
+        "data": {
+          "pending": "pending",
+          "worldUnchanged": true
+        }
+      },
+      {
+        "name": "native optimized T2 aborts every authoritative boundary and retry has one effect",
+        "status": "PASS",
+        "data": {
+          "boundaries": [
+            "ledger-segment-write",
+            "ledger-result-write",
+            "ledger-index-write",
+            "ledger-manifest-write",
+            "ledger-head-write",
+            "report-write",
+            "backup-write",
+            "world-write",
+            "authority-write",
+            "metadata-write",
+            "result-write"
+          ]
+        }
+      },
+      {
+        "name": "native persisted Manifest and Segment corruption cannot be hidden by a warm proof",
+        "status": "PASS",
+        "data": [
+          "LedgerManifests",
+          "LedgerSegments",
+          "LedgerResults"
+        ]
+      },
+      {
+        "name": "native keyset boundary, missing/corrupt/extra derived index and world checksum use verified Recovery",
+        "status": "PASS",
+        "data": {
+          "derivedRepair": true,
+          "checksumRecovery": true,
+          "count": 1100
+        }
+      },
+      {
+        "name": "actual Worker terminate during export leaves original authority intact",
+        "status": "PASS",
+        "data": {
+          "action": "export",
+          "allTablesUnchanged": true,
+          "commandState": "committed"
+        }
+      },
+      {
+        "name": "actual Worker terminate during import leaves original authority intact",
+        "status": "PASS",
+        "data": {
+          "action": "import",
+          "allTablesUnchanged": true,
+          "commandState": "committed"
+        }
+      },
+      {
+        "name": "actual Worker terminate during restore leaves original authority intact",
+        "status": "PASS",
+        "data": {
+          "action": "restore",
+          "allTablesUnchanged": true,
+          "commandState": "committed"
+        }
+      },
+      {
+        "name": "native writer handoff rejects the stale writer at unchanged revision",
+        "status": "PASS",
+        "data": {
+          "staleRejected": true
+        }
+      },
+      {
+        "name": "two native pages preserve the actual formal writer Web Lock and release",
+        "status": "PASS",
+        "data": {
+          "unavailable": true,
+          "available": true
+        }
+      }
+    ]
+  },
+  "ledger": {
+    "environment": "Native Chromium desktop Linux container; synthetic worlds; not Android or a deployed release",
+    "cases": [
+      {
+        "name": "formal T2 native atomic abort at every write boundary",
+        "status": "PASS",
+        "data": {
+          "boundaries": [
+            "report-write",
+            "backup-write",
+            "world-write",
+            "authority-write",
+            "metadata-write",
+            "result-write",
+            "ledger-segment-write",
+            "ledger-result-write",
+            "ledger-index-write",
+            "ledger-manifest-write",
+            "ledger-head-write"
+          ],
+          "injection": "QuotaExceededError, not actual disk exhaustion",
+          "unchanged": "all tables after failed transaction"
+        }
+      },
+      {
+        "name": "no-effect results survive reopen, quick/full and Recovery; stale writer/CAS rejected",
+        "status": "PASS",
+        "data": {
+          "reopen": true,
+          "quick": true,
+          "full": true,
+          "recovery": true,
+          "oldWriterRejected": true
+        }
+      },
+      {
+        "name": "actual Runtime Worker restart recovers durable T1 while independent Preview Worker fails",
+        "status": "PASS",
+        "data": {
+          "durableBeforeBoot": true,
+          "restart": true,
+          "previewTerminationIndependent": true,
+          "queryable": true
+        }
+      },
+      {
+        "name": "native no-effect T2 failures keep all authoritative rows and Pending",
+        "status": "PASS",
+        "data": {
+          "boundaries": [
+            "world-write",
+            "authority-write",
+            "result-write",
+            "ledger-result-write",
+            "ledger-index-write",
+            "ledger-manifest-write",
+            "ledger-head-write"
+          ]
+        }
+      },
+      {
+        "name": "two actual pages: Web Lock exclusion, restart handoff and persistent writer fencing",
+        "status": "PASS"
+      },
+      {
+        "name": "actual read-only Preview Worker matches the bound formal Reducer and leaves every DB table unchanged",
+        "status": "PASS",
+        "data": {
+          "sameCost": true,
+          "sameSchedule": true,
+          "storageUnchangedByPreview": true,
+          "formalEffectOnce": true,
+          "contextBytes": 1522
+        }
+      },
+      {
+        "name": "native 99 AI at 25X: T1 completes during private catch-up and stalled Preview death cannot cancel the formal order",
+        "status": "PASS",
+        "data": {
+          "durableDuringCatchup": true,
+          "effects": 1,
+          "decisions": 99,
+          "speed": 25,
+          "preview": "fault-injected stall before handler installation; terminated at durable intake",
+          "syntheticClockAdvanceMs": 12000
+        }
+      }
+    ]
+  }
+}

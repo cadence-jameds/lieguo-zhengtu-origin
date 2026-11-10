@@ -1,0 +1,862 @@
+{
+  "source": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "chromium": "154.0.8037.57",
+    "kernel": "Linux 6.18.57 x86_64",
+    "CPUQuota": 2,
+    "cgroupMemoryGiB": 8,
+    "devices": "No physical Android",
+    "network": "Localhost only for production; no deployment"
+  },
+  "full": {
+    "success": true,
+    "numPassedTests": 2419,
+    "numFailedTests": 0,
+    "numPendingTests": 1,
+    "numTotalTests": 2420,
+    "startTime": 1793717879490,
+    "suites": 237,
+    "originalGates": [
+      {
+        "file": "game/formal/persistence.test.ts",
+        "name": "150000 valid receipts survive start, import and Recovery without an argument-count limit",
+        "status": "passed",
+        "ms": 36632.406919
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "active Worker does not acknowledge or switch a draft until persistence resolves",
+        "status": "passed",
+        "ms": 276.736327
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "failed commit gives rejected ack and prior world; retry and replay only save once successfully",
+        "status": "passed",
+        "ms": 280.858341
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "requests share one serialized authority and reject an overlapping stale command",
+        "status": "passed",
+        "ms": 120.43904200000009
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "restore mid-transaction failure never exposes success",
+        "status": "passed",
+        "ms": 117.4864520000001
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "import mid-transaction failure never exposes success",
+        "status": "passed",
+        "ms": 119.460689
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "restart loads durable receipts and replay does not submit a second save",
+        "status": "passed",
+        "ms": 247.053629
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X construction completes at its real deadline, not the old ten-second tick",
+        "status": "passed",
+        "ms": 601.3105970000001
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X construction completes at its real deadline, not the old ten-second tick",
+        "status": "passed",
+        "ms": 452.6318080000001
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X construction completes at its real deadline, not the old ten-second tick",
+        "status": "passed",
+        "ms": 377.8972429999999
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X construction completes at its real deadline, not the old ten-second tick",
+        "status": "passed",
+        "ms": 356.54721900000004
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X construction completes at its real deadline, not the old ten-second tick",
+        "status": "passed",
+        "ms": 358.72441500000014
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "polling is coalesced while the durable advance is pending and catches up elapsed real time",
+        "status": "passed",
+        "ms": 230.29874000000018
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X idle polling does not publish/save per second and checkpoints at ten seconds",
+        "status": "passed",
+        "ms": 170.78725599999962
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X a new construction starts at actual admission time and saves a single revision",
+        "status": "passed",
+        "ms": 357.3199169999998
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+        "status": "passed",
+        "ms": 273.06708100000014
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X training uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 446.7719360000001
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X research uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 480.72694800000045
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X settlement uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 477.32726600000024
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X logistics uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 442.58461799999986
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X idle polling does not publish/save per second and checkpoints at ten seconds",
+        "status": "passed",
+        "ms": 167.27415800000017
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X a new construction starts at actual admission time and saves a single revision",
+        "status": "passed",
+        "ms": 385.31811299999936
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+        "status": "passed",
+        "ms": 271.23476200000005
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X training uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 520.2653610000007
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X research uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 454.34925700000076
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X settlement uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 501.89596399999937
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X logistics uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 571.61535
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X idle polling does not publish/save per second and checkpoints at ten seconds",
+        "status": "passed",
+        "ms": 166.357657999999
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X a new construction starts at actual admission time and saves a single revision",
+        "status": "passed",
+        "ms": 386.99051899999904
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+        "status": "passed",
+        "ms": 281.27832599999965
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X training uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 446.6564120000003
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X research uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 425.7433460000011
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X settlement uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 562.4918070000003
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X logistics uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 504.432014
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X idle polling does not publish/save per second and checkpoints at ten seconds",
+        "status": "passed",
+        "ms": 172.52387799999997
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X a new construction starts at actual admission time and saves a single revision",
+        "status": "passed",
+        "ms": 360.1584619999994
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+        "status": "passed",
+        "ms": 272.44663299999957
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X training uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 529.3691879999988
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X research uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 463.15488000000005
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X settlement uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 560.7480390000001
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X logistics uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 490.00391299999865
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X idle polling does not publish/save per second and checkpoints at ten seconds",
+        "status": "passed",
+        "ms": 174.05327299999954
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X a new construction starts at actual admission time and saves a single revision",
+        "status": "passed",
+        "ms": 338.883233999999
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X a clock checkpoint revalidates the exact click once without a rejected acknowledgement or resubmission",
+        "status": "passed",
+        "ms": 268.43516199999976
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X training uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 527.7633070000011
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X research uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 496.42794700000013
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X settlement uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 642.2348190000012
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X logistics uses the real deadline and agrees with offline completion",
+        "status": "passed",
+        "ms": 523.6354619999984
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "a due event crossed by an original click commits first and must not auto-retry a changed intention",
+        "status": "passed",
+        "ms": 332.35771600000226
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X governance bridges its own catch-up with low load and never duplicates payment or events",
+        "status": "passed",
+        "ms": 460.70644999999786
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "status": "passed",
+        "ms": 8010.503746999999
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X governance bridges its own catch-up with low load and never duplicates payment or events",
+        "status": "passed",
+        "ms": 496.8043809999981
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "status": "passed",
+        "ms": 7273.645337000002
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X governance bridges its own catch-up with low load and never duplicates payment or events",
+        "status": "passed",
+        "ms": 503.37186400000064
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X governance bridges its own catch-up with 100 armies and never duplicates payment or events",
+        "status": "passed",
+        "ms": 7537.136129000006
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "a late event remains unexposed on failed persistence, retries after one second, and never overlaps",
+        "status": "passed",
+        "ms": 521.2628179999956
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "a failed governance save never exposes a new setting or receipt and replay commits only once",
+        "status": "passed",
+        "ms": 509.4150679999948
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "1X command admission uses real IndexedDB authority and restores the same durable state",
+        "status": "passed",
+        "ms": 917.4987970000002
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "3X command admission uses real IndexedDB authority and restores the same durable state",
+        "status": "passed",
+        "ms": 856.1712330000009
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "6X command admission uses real IndexedDB authority and restores the same durable state",
+        "status": "passed",
+        "ms": 1024.2538910000003
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "10X command admission uses real IndexedDB authority and restores the same durable state",
+        "status": "passed",
+        "ms": 933.6188619999957
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "25X command admission uses real IndexedDB authority and restores the same durable state",
+        "status": "passed",
+        "ms": 704.8237579999986
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "the active v2 stream sends committed entity deltas and rebuilds a complete history-free snapshot",
+        "status": "passed",
+        "ms": 394.4533519999968
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "a queued visibility boundary freezes dev time before waiting behind an atomic save and duplicate barriers are idempotent",
+        "status": "passed",
+        "ms": 278.4588240000012
+      },
+      {
+        "file": "game/formal/runtime.test.ts",
+        "name": "developer speed changes bridge due AI catch-up only with unchanged intent, retain durable rollback and reject concurrent settings",
+        "status": "passed",
+        "ms": 9989.336166000001
+      }
+    ],
+    "directedFiles": [
+      {
+        "file": "game/constructionPreviewController.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "game/projectionAdmissionR304.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "game/projectionArmyR304.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "game/projectionReactR304.test.tsx",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "game/projectionScopeR304.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "game/releaseRolloverR306.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/commandLedgerR303.test.ts",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/constructionPreviewR302.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/durableCommands.test.ts",
+        "passed": 28,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/durableRuntime.test.ts",
+        "passed": 13,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/ledgerFormalR303.test.ts",
+        "passed": 37,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/ledgerImportOrderR305.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/persistenceOptimizationR305.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "game/formal/runtimeSchedulingR306.test.ts",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "game/presentation/asyncConstructionPreview.test.tsx",
+        "passed": 8,
+        "failed": 0
+      }
+    ]
+  },
+  "directed": {
+    "success": true,
+    "numPassedTests": 254,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numTotalTests": 254
+  },
+  "negativeGates": [
+    {
+      "gate": "test_p0c10_clock_delta",
+      "tests": 3,
+      "pass": true
+    },
+    {
+      "gate": "test_mobile_town_successor",
+      "tests": 3,
+      "pass": true
+    },
+    {
+      "gate": "test_b10_r3_05_successor",
+      "tests": 4,
+      "pass": true
+    },
+    {
+      "gate": "test_growth_tasks_successor",
+      "tests": 3,
+      "pass": true
+    },
+    {
+      "gate": "test_p0c10_successor",
+      "tests": 3,
+      "pass": true
+    },
+    {
+      "gate": "test_b10_r3_02_successor",
+      "tests": 5,
+      "pass": true
+    },
+    {
+      "gate": "test_b10_r3_04_successor",
+      "tests": 5,
+      "pass": true
+    },
+    {
+      "gate": "test_b10_r3_06_successor",
+      "tests": 4,
+      "pass": true
+    },
+    {
+      "gate": "test_b10_r3_01_successor",
+      "tests": 4,
+      "pass": true
+    },
+    {
+      "gate": "test_recruit_input_successor",
+      "tests": 3,
+      "pass": true
+    },
+    {
+      "gate": "test_city_ui_successor",
+      "tests": 10,
+      "pass": true
+    },
+    {
+      "gate": "test_b10_r3_03_successor",
+      "tests": 4,
+      "pass": true
+    }
+  ],
+  "gateAttempts": [
+    {
+      "command": [
+        "python3",
+        "scripts/check-art-boards.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 0.04038405418395996
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check-city-visuals.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 22.703423500061035
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_city_ui_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 5.2114098072052
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_mobile_town_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 3.313931465148926
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_growth_tasks_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 4.002561807632446
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_recruit_input_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 9.137628316879272
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/p0c10_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 6.304829120635986
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_p0c10_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 8.489591836929321
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/p0c10_clock_delta.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 5.538692235946655
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_p0c10_clock_delta.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 6.533279180526733
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/b10_r3_01_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 5.6997294425964355
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_b10_r3_01_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 7.09061074256897
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/b10_r3_02_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 4.658654451370239
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_b10_r3_02_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 4.996303558349609
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/b10_r3_03_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 3.479180097579956
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_b10_r3_03_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 4.153854846954346
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/b10_r3_04_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 2.8399486541748047
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_b10_r3_04_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 3.6076724529266357
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/b10_r3_05_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 1.5973920822143555
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_b10_r3_05_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 2.0522758960723877
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/b10_r3_06_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 1.0076656341552734
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_b10_r3_06_successor.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 2.3936898708343506
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-projection-boundaries.mjs"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 3.520158529281616
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-preview-boundaries.mjs"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 0.04587435722351074
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check-player-feedback.py"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 18.29987120628357
+    },
+    {
+      "command": [
+        "node",
+        "scripts/check-pages-build.mjs"
+      ],
+      "exit": 1,
+      "elapsedSeconds": 0.03388404846191406
+    },
+    {
+      "command": [
+        "node",
+        "scripts/check-release-build.mjs"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 0.056610822677612305
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-runtime-parity.mjs"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 99.86177206039429
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-in-isolation.mjs",
+        "full"
+      ],
+      "exit": 0,
+      "elapsedSeconds": 758.5795478820801
+    }
+  ],
+  "ancestry": {
+    "main": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+    "final": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+    "rows": [
+      {
+        "pr": 54,
+        "head": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+        "base": "443f170b277f71ee26a34ee3b5017687a98e01ab",
+        "ancestor": true,
+        "newCommits": 12,
+        "mergeTree": "e8a3236e0b39eb464b47f25d60dbedbedb63b2d8"
+      },
+      {
+        "pr": 55,
+        "head": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+        "base": "edca2f29805f0cdc4b0f89cd3cd00a8f9a819e39",
+        "ancestor": true,
+        "newCommits": 11,
+        "mergeTree": "0aa881e31a4c1dbaed9a573a3c33f650da0587e8"
+      },
+      {
+        "pr": 56,
+        "head": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+        "base": "4e56b69d1af107ee454213d0276f06a2ca10976f",
+        "ancestor": true,
+        "newCommits": 17,
+        "mergeTree": "cc90c8656dd1f33d264d5e9298622cdc72e37bca"
+      },
+      {
+        "pr": 57,
+        "head": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+        "base": "1737d14a8f210fb2d33eb5dadbde18c3bb375586",
+        "ancestor": true,
+        "newCommits": 12,
+        "mergeTree": "31df68b16b0c99c185d245afe9e1b9d9f0d6b9c3"
+      },
+      {
+        "pr": 58,
+        "head": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+        "base": "dfa574a4de24fe9069df2a90d3edae6a64f191da",
+        "ancestor": true,
+        "newCommits": 11,
+        "mergeTree": "411e3da5ab6840cfdb194b39cd1ea816997319d7"
+      },
+      {
+        "pr": 59,
+        "head": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+        "base": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+        "ancestor": true,
+        "newCommits": 16,
+        "mergeTree": "b32bcfd88e4ce052fe05986fd6079f216b2017c1"
+      }
+    ]
+  },
+  "duplicatePatches": {
+    "commitCount": 79,
+    "duplicatePatches": []
+  },
+  "finalChecks": {
+    "productionSourceUnchangedFrom59": true,
+    "projectProductionBuild": true,
+    "projectPaths": true,
+    "releaseArtifactsAndWorkerIdentity": true,
+    "documentationOnly": true,
+    "productionSW": "4 PASS / 1 FAIL; activation timeout after injected download outage",
+    "productionPreviewRuntimeStreamOffline": "PASS"
+  }
+}

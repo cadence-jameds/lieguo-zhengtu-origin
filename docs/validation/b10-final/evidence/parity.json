@@ -1,0 +1,1038 @@
+{
+  "source": "8d40f63c5efbd08ee252f533719d5f58fc95b3dd",
+  "reference": "c370ff8a492de8711e764a82c8f1d43efef1a00e",
+  "environment": "Node v24.19.0 / independent Vite SSR module graphs; exact event/command/RNG cursor/full-world/reports/Acks SHA256; not native latency",
+  "rows": [
+    {
+      "scenario": {
+        "name": "ai0-1x-90217",
+        "ai": 0,
+        "speed": 1,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "51145a778d983f11171e43408ffa5144dd9eaa1dcee7046298607883936c819c",
+        "commandHash": "4e576ceecbde144394a17f49ec66ca90cdd9040fab209cbb289604cc642d70b6",
+        "worldHash": "83d8557a8758ca0e768bed8aeba2cac77544d370dba62c3d9c06b50c9475b634",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 10800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 300
+      },
+      "referenceMs": 207.6370079999997,
+      "optimizedMs": 125.13283300000012
+    },
+    {
+      "scenario": {
+        "name": "ai0-3x-90217",
+        "ai": 0,
+        "speed": 3,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "51145a778d983f11171e43408ffa5144dd9eaa1dcee7046298607883936c819c",
+        "commandHash": "02c101f3cbecfc320afea60397ced1163a5284fbbf4a8f7ce2fd1664d75fc3a5",
+        "worldHash": "d1bfd03080c4abb2e5e437780fffa333617f35e4931eb51668ba72f95bf1dccb",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 10800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 300
+      },
+      "referenceMs": 135.03450599999996,
+      "optimizedMs": 103.62462700000015
+    },
+    {
+      "scenario": {
+        "name": "ai0-6x-90217",
+        "ai": 0,
+        "speed": 6,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "51145a778d983f11171e43408ffa5144dd9eaa1dcee7046298607883936c819c",
+        "commandHash": "d56c4d4c650b7d4572a72b7cad9f4734489f9f4bcac808e88660d667906dd5e8",
+        "worldHash": "4561fd073ba659ec20407c63f9fbf837389e8efe800259a109289e4efd705cb2",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 10800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 300
+      },
+      "referenceMs": 124.21533499999987,
+      "optimizedMs": 98.82974000000013
+    },
+    {
+      "scenario": {
+        "name": "ai0-10x-90217",
+        "ai": 0,
+        "speed": 10,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "51145a778d983f11171e43408ffa5144dd9eaa1dcee7046298607883936c819c",
+        "commandHash": "4bcffe165df5c1f5a2cd2f716b80e1d8a011a96339afadd007e5b93609d81e36",
+        "worldHash": "d4c287f6c74f4e6c523d89ad5be0593f1b865cf789281f675e54353b825d0bc1",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 10800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 300
+      },
+      "referenceMs": 146.1950479999996,
+      "optimizedMs": 135.65806199999952
+    },
+    {
+      "scenario": {
+        "name": "ai0-25x-90217",
+        "ai": 0,
+        "speed": 25,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "51145a778d983f11171e43408ffa5144dd9eaa1dcee7046298607883936c819c",
+        "commandHash": "6e1f22919ae1d69d28ed59a817640d61fdef16e0475a2b32cc3a534e97ea9287",
+        "worldHash": "9f34e85b2e81b279355f572d57b1f51ff4d0c3077ccac5b494a30a4fa1fe9e6f",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 10800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 300
+      },
+      "referenceMs": 172.38190399999985,
+      "optimizedMs": 138.70026600000074
+    },
+    {
+      "scenario": {
+        "name": "ai99-1x-90217",
+        "ai": 99,
+        "speed": 1,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 943,
+        "aiCommandTypes": {
+          "field.upgrade": 193,
+          "building.upgrade": 75
+        },
+        "commandCount": 271,
+        "eventHash": "dba338e0927262e1fd55526edbab7410dd946c3763e87de30419142399380660",
+        "commandHash": "cb5093c49f7f4cedb8234f7323598fd1522d654f9d3146b0a21258e0a3b7a38f",
+        "worldHash": "483632a8411b8349b45a36c999fef685b3358b1a5ee13b67367af15bf9480cf5",
+        "historyHash": null,
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 206
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "construction.complete": 261,
+        "economy.settle": 300
+      },
+      "referenceMs": 1085.6237019999999,
+      "optimizedMs": 925.0217490000005
+    },
+    {
+      "scenario": {
+        "name": "ai99-1x-41419",
+        "ai": 99,
+        "speed": 1,
+        "seed": 41419,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 953,
+        "aiCommandTypes": {
+          "field.upgrade": 202,
+          "building.upgrade": 67
+        },
+        "commandCount": 272,
+        "eventHash": "453a9ee0142e29014e5ca6067847addab24672a8b5be0f59562a90beead07dc1",
+        "commandHash": "cd82461363027a932818947c9bd220eb5a91f4ac994b9c030b16fb45ab1f4e49",
+        "worldHash": "ee6cc6425e4a5ae2e62da7b4704d28f8fbcaaa57ae5dd7cea0a84b688d15157e",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 390,
+        "construction.complete": 263,
+        "economy.settle": 300
+      },
+      "referenceMs": 963.5609320000003,
+      "optimizedMs": 880.7956749999994
+    },
+    {
+      "scenario": {
+        "name": "ai99-3x-90217",
+        "ai": 99,
+        "speed": 3,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 943,
+        "aiCommandTypes": {
+          "field.upgrade": 193,
+          "building.upgrade": 75
+        },
+        "commandCount": 271,
+        "eventHash": "dba338e0927262e1fd55526edbab7410dd946c3763e87de30419142399380660",
+        "commandHash": "605382f948bfbcbe862174a2ac7e259f6e2e6b9c7d4a6e5786832dd43d788a1a",
+        "worldHash": "6d917d4e33bdc3180690939d465858f89736860471d361b4ee5e1ded2275fb8f",
+        "historyHash": null,
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 206
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "construction.complete": 261,
+        "economy.settle": 300
+      },
+      "referenceMs": 869.7771009999997,
+      "optimizedMs": 757.6049299999995
+    },
+    {
+      "scenario": {
+        "name": "ai99-3x-41419",
+        "ai": 99,
+        "speed": 3,
+        "seed": 41419,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 953,
+        "aiCommandTypes": {
+          "field.upgrade": 202,
+          "building.upgrade": 67
+        },
+        "commandCount": 272,
+        "eventHash": "453a9ee0142e29014e5ca6067847addab24672a8b5be0f59562a90beead07dc1",
+        "commandHash": "02836cabd8a76c937d4be073ad82d5339e8544783ce906dcf6047fa58b1c649b",
+        "worldHash": "d29237023fb27189015d8ab7041bc4e41f6ed5402eff534b5db131a34593c710",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 390,
+        "construction.complete": 263,
+        "economy.settle": 300
+      },
+      "referenceMs": 823.2983700000004,
+      "optimizedMs": 873.595863999999
+    },
+    {
+      "scenario": {
+        "name": "ai99-6x-90217",
+        "ai": 99,
+        "speed": 6,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 943,
+        "aiCommandTypes": {
+          "field.upgrade": 193,
+          "building.upgrade": 75
+        },
+        "commandCount": 271,
+        "eventHash": "dba338e0927262e1fd55526edbab7410dd946c3763e87de30419142399380660",
+        "commandHash": "a551af3140022b1f26dc9926c9e65bbc56459d3267bd05482c5993d8becf0176",
+        "worldHash": "3ec29df9d1e7892b1854d753ce8cabc282a7c71515917b93316456643c3c2237",
+        "historyHash": null,
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 206
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "construction.complete": 261,
+        "economy.settle": 300
+      },
+      "referenceMs": 883.4015589999999,
+      "optimizedMs": 812.5230609999999
+    },
+    {
+      "scenario": {
+        "name": "ai99-6x-41419",
+        "ai": 99,
+        "speed": 6,
+        "seed": 41419,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 953,
+        "aiCommandTypes": {
+          "field.upgrade": 202,
+          "building.upgrade": 67
+        },
+        "commandCount": 272,
+        "eventHash": "453a9ee0142e29014e5ca6067847addab24672a8b5be0f59562a90beead07dc1",
+        "commandHash": "a8b1170009e87e558edc54f7d92bb39e2a8acdc7b9c568ccf0b6934422a53056",
+        "worldHash": "be8bbf7a214cd467dd1ecdc5ad3c43154ffb3546dbebd3aa67f2a9c413fbf76a",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 390,
+        "construction.complete": 263,
+        "economy.settle": 300
+      },
+      "referenceMs": 841.3287069999988,
+      "optimizedMs": 795.518817000002
+    },
+    {
+      "scenario": {
+        "name": "ai99-10x-90217",
+        "ai": 99,
+        "speed": 10,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 943,
+        "aiCommandTypes": {
+          "field.upgrade": 193,
+          "building.upgrade": 75
+        },
+        "commandCount": 271,
+        "eventHash": "dba338e0927262e1fd55526edbab7410dd946c3763e87de30419142399380660",
+        "commandHash": "15a7f2ea288f195c06cbc191b104a5049bbdc09f8bb43d9a66adf2dbbfd20f29",
+        "worldHash": "3c8af638f1a46ab98480913fbdba34ef0bd2e95a31bd356557ca6981a661ce7d",
+        "historyHash": null,
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 206
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "construction.complete": 261,
+        "economy.settle": 300
+      },
+      "referenceMs": 830.9612859999979,
+      "optimizedMs": 904.430053
+    },
+    {
+      "scenario": {
+        "name": "ai99-10x-41419",
+        "ai": 99,
+        "speed": 10,
+        "seed": 41419,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 953,
+        "aiCommandTypes": {
+          "field.upgrade": 202,
+          "building.upgrade": 67
+        },
+        "commandCount": 272,
+        "eventHash": "453a9ee0142e29014e5ca6067847addab24672a8b5be0f59562a90beead07dc1",
+        "commandHash": "847560ed4974a4c4e7bdc6fb20179d33462d5606e74338815b3e4f0d390d0950",
+        "worldHash": "e872324dd0e90ee4b2f4dad4eefa1397b6105515d68870af02b9166766502b1b",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 390,
+        "construction.complete": 263,
+        "economy.settle": 300
+      },
+      "referenceMs": 765.5071390000012,
+      "optimizedMs": 714.4342130000005
+    },
+    {
+      "scenario": {
+        "name": "ai99-25x-90217",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 943,
+        "aiCommandTypes": {
+          "field.upgrade": 193,
+          "building.upgrade": 75
+        },
+        "commandCount": 271,
+        "eventHash": "dba338e0927262e1fd55526edbab7410dd946c3763e87de30419142399380660",
+        "commandHash": "8aad49fdb746fbb7983de5a2ea28cb5c4716d15f9b4c886ee79833abd15b401b",
+        "worldHash": "a7c9fb3f5552cf663ee3d750c527ebdba6b50d01ee6071fd89d8a0c7bd684e3e",
+        "historyHash": null,
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 206
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "construction.complete": 261,
+        "economy.settle": 300
+      },
+      "referenceMs": 818.4332769999965,
+      "optimizedMs": 855.3437959999974
+    },
+    {
+      "scenario": {
+        "name": "ai99-25x-41419",
+        "ai": 99,
+        "speed": 25,
+        "seed": 41419,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 953,
+        "aiCommandTypes": {
+          "field.upgrade": 202,
+          "building.upgrade": 67
+        },
+        "commandCount": 272,
+        "eventHash": "453a9ee0142e29014e5ca6067847addab24672a8b5be0f59562a90beead07dc1",
+        "commandHash": "e7e7ada241d9dbd08831fd784f7d7382fd28cb4b314842f3baa10a9c25ff97ef",
+        "worldHash": "c988b89c4fbce0801c9f6b38260eb8adde835b143e9c3cdf3d248cc15d7a6ca1",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 390,
+        "construction.complete": 263,
+        "economy.settle": 300
+      },
+      "referenceMs": 906.9866359999978,
+      "optimizedMs": 808.6807919999992
+    },
+    {
+      "scenario": {
+        "name": "simultaneous-99",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "dense": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 976,
+        "aiCommandTypes": {
+          "building.upgrade": 78,
+          "field.upgrade": 204
+        },
+        "commandCount": 285,
+        "eventHash": "09dc5a146d20ab55ca2cefe34f9880c21be4d766fe0d58aa62a0b826581cd79f",
+        "commandHash": "df2b05d2081e1441daad7dfa4caf74e460b5c1781e2aba8dad76cef19376286e",
+        "worldHash": "50fcc33eb9125207cf1c0f8a961b2bc2e05c989dbc2bbaa24da0a73a19464027",
+        "historyHash": null,
+        "decisions": 403,
+        "time": 10800000,
+        "queue": 208
+      },
+      "eventTypes": {
+        "ai.decide": 403,
+        "construction.complete": 273,
+        "economy.settle": 300
+      },
+      "referenceMs": 921.6171450000002,
+      "optimizedMs": 942.5200949999999
+    },
+    {
+      "scenario": {
+        "name": "legacy-30-day",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "legacy": true,
+        "hours": 720.04
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 72004,
+        "aiCommandTypes": {
+          "building.upgrade": 3
+        },
+        "commandCount": 6,
+        "eventHash": "0603811d20d481a161d41520f195cd7359c3b924027e6a039b0b5879751f7fc0",
+        "commandHash": "334da93a13fd0f25c7fca64e50fd79dad7e9f0d25668112ab4148b5b88ebbc77",
+        "worldHash": "e453aa1623d9480d463a746d2cb6b2cbbaf8fedcf143726db3c5d09578831b86",
+        "historyHash": null,
+        "decisions": 4,
+        "time": 2592144000,
+        "queue": 202
+      },
+      "eventTypes": {
+        "economy.settle": 72000,
+        "ai.decide": 4
+      },
+      "referenceMs": 9789.824016000002,
+      "optimizedMs": 4313.192794999995
+    },
+    {
+      "scenario": {
+        "name": "modern-99-governance",
+        "ai": 99,
+        "speed": 25,
+        "seed": 41419,
+        "modern": true,
+        "governance": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 1302,
+        "aiCommandTypes": {
+          "field.upgrade": 217,
+          "governance.set": 107,
+          "military.modernize": 153,
+          "settlement.prepare": 43,
+          "army.dispatch": 21,
+          "settlement.dispatch": 5
+        },
+        "commandCount": 553,
+        "eventHash": "e0c8c7e904fee2a32662ee9cac19c4f3c6a6f48af88b685f87ed25948a41e142",
+        "commandHash": "10401166e203cd8746c6f3a8be7bd72d100b2a3c2c0076778d6eae79d9b6e8ba",
+        "worldHash": "053e132e63e5e1c84de5ecca2421424c340fac34764f706d35c57e74107d7ec5",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 387
+      },
+      "eventTypes": {
+        "governance.decide": 374,
+        "construction.complete": 169,
+        "ai.decide": 390,
+        "military.train": 1,
+        "research.complete": 1,
+        "economy.settle": 300,
+        "army.arrive": 18,
+        "army.return": 14,
+        "wild.respawn": 12,
+        "settlement.ready": 18,
+        "settlement.arrive": 5
+      },
+      "referenceMs": 3971.437275000004,
+      "optimizedMs": 4361.112444000006
+    },
+    {
+      "scenario": {
+        "name": "ownership-44",
+        "ai": 0,
+        "speed": 25,
+        "seed": 90217,
+        "share": 44,
+        "hours": 13
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 1300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "b325c5942440fec893f7805c3a6432542540b39c1ff00558cc04a7da0017cc74",
+        "commandHash": "2568798f2162b25550c5e943bc613dff88623345cc593cb22bf241d08ba5d09a",
+        "worldHash": "332a2ea446e159dc300692254b615ac74b21dee8617efb32b9453f897e38cda2",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 46800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 1300
+      },
+      "referenceMs": 544.9327869999979,
+      "optimizedMs": 278.92224399999395
+    },
+    {
+      "scenario": {
+        "name": "ownership-45",
+        "ai": 0,
+        "speed": 25,
+        "seed": 90217,
+        "share": 45,
+        "hours": 13
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 1300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "b325c5942440fec893f7805c3a6432542540b39c1ff00558cc04a7da0017cc74",
+        "commandHash": "d391d1adf041dded571111ad0fc5245f38a3b0cb75c41071c5b98d8889a56d24",
+        "worldHash": "786ce7a13143347798a04a16a0970c3756da1c3fe814ffbd5394394e5b4e114b",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 46800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 1300
+      },
+      "referenceMs": 340.7958109999963,
+      "optimizedMs": 361.3647740000015
+    },
+    {
+      "scenario": {
+        "name": "ownership-69",
+        "ai": 0,
+        "speed": 25,
+        "seed": 90217,
+        "share": 69,
+        "hours": 13
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 1300,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "b325c5942440fec893f7805c3a6432542540b39c1ff00558cc04a7da0017cc74",
+        "commandHash": "a7cdd7036aa765018eabf508c7db28c45d05ace37117200344354df3363b64bb",
+        "worldHash": "e30ddf1d01735d478e06d9d102e641336cbd041a781e2768fb28b1c6102dd27d",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 46800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 1300
+      },
+      "referenceMs": 323.3433909999949,
+      "optimizedMs": 301.43306100000336
+    },
+    {
+      "scenario": {
+        "name": "ownership-70",
+        "ai": 0,
+        "speed": 25,
+        "seed": 90217,
+        "share": 70,
+        "hours": 13
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 1301,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "99d2145e55f8de7ac079c93d9794cefbb87daf783ae700b26787f5ca4ea67077",
+        "commandHash": "71cb54bcc33f77c600e37e5a136815a482cb00961178ec5f4083711e1d4bd238",
+        "worldHash": "270bcc50b9ad694da9f1af59f4fc5e065e6a8819e101332aecb7489bd24edd66",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 46800000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 1300,
+        "victory.complete": 1
+      },
+      "referenceMs": 353.70934500000294,
+      "optimizedMs": 320.16254599999957
+    },
+    {
+      "scenario": {
+        "name": "large-battle-and-ai",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "battle": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 936,
+        "aiCommandTypes": {
+          "field.upgrade": 188,
+          "building.upgrade": 75
+        },
+        "commandCount": 266,
+        "eventHash": "c8daed2749466714575fbb63643799e86993b3e51bccf556dfb052d55588d4a0",
+        "commandHash": "cdc6d7436a68c597e2177d000e99a92aa26e77daf2ec2c784e2ba0f08a8f8ea2",
+        "worldHash": "2228b131da70895082c6f61fdfb264c4ae2ccbb02f97a12c1557ce050a0403c1",
+        "historyHash": null,
+        "decisions": 377,
+        "time": 10800000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 377,
+        "army.arrive": 1,
+        "construction.complete": 256,
+        "combat.round": 1,
+        "army.return": 1,
+        "economy.settle": 300
+      },
+      "referenceMs": 980.3669079999963,
+      "optimizedMs": 930.930017000006
+    },
+    {
+      "scenario": {
+        "name": "endgame-99-rival-wonders",
+        "ai": 99,
+        "speed": 25,
+        "seed": 41419,
+        "endgame": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 1036,
+        "aiCommandTypes": {
+          "research.start": 72,
+          "wonder.ship": 33,
+          "military.modernize": 87,
+          "settlement.prepare": 43,
+          "military.recruit": 56,
+          "politics": 80,
+          "building.upgrade": 18,
+          "research.contribute": 37,
+          "army.dispatch": 35,
+          "settlement.dispatch": 5
+        },
+        "commandCount": 472,
+        "eventHash": "8ef7123366845b8196be164868ed72e7432ceb254930260fd7f0fab18acdfe07",
+        "commandHash": "58e222310157d54e2225fcc263874f79d972b49b3b5b65bd0ad6c298d8a2ac79",
+        "worldHash": "d9e42768b3ce6a09d16e6bb4028a080d8e3a423c1e2aed6e95ddd0eaaab0f388",
+        "historyHash": null,
+        "decisions": 390,
+        "time": 10800000,
+        "queue": 296
+      },
+      "eventTypes": {
+        "ai.decide": 390,
+        "military.train": 217,
+        "logistics.arrive": 11,
+        "logistics.return": 8,
+        "construction.complete": 14,
+        "economy.settle": 300,
+        "army.arrive": 32,
+        "army.return": 28,
+        "wild.respawn": 13,
+        "settlement.ready": 18,
+        "settlement.arrive": 5
+      },
+      "referenceMs": 7616.464422999998,
+      "optimizedMs": 8337.629854000006
+    },
+    {
+      "scenario": {
+        "name": "long-99-25x",
+        "ai": 99,
+        "speed": 25,
+        "seed": 41419,
+        "hours": 24
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 7129,
+        "aiCommandTypes": {
+          "field.upgrade": 1253,
+          "building.upgrade": 472,
+          "military.recruit": 4
+        },
+        "commandCount": 1733,
+        "eventHash": "7167ff4e26b50baab55713a49ce3ff775805cae8dffed73def42eb5d9663936b",
+        "commandHash": "e3cbe9456990ab17c4635e68f5968ebd4b7141946dd77050120ffdeeef14b622",
+        "worldHash": "82665b2b7030c2ff84a15775382dbfe268a1f8aef3b65ce4854073b9cc3fa869",
+        "historyHash": null,
+        "decisions": 2998,
+        "time": 86400000,
+        "queue": 205
+      },
+      "eventTypes": {
+        "ai.decide": 2998,
+        "construction.complete": 1719,
+        "economy.settle": 2400,
+        "military.train": 12
+      },
+      "referenceMs": 7485.731872000004,
+      "optimizedMs": 5855.251796000011
+    },
+    {
+      "scenario": {
+        "name": "ledger60k-99-25x",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "history": 60000,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 943,
+        "aiCommandTypes": {
+          "field.upgrade": 193,
+          "building.upgrade": 75
+        },
+        "commandCount": 271,
+        "eventHash": "5be7ce0558cf98c293b2f4c95e4b72830b6e332434d3ff593147785db1460dc6",
+        "commandHash": "838dd15edafef1764a37839a2bc53215505f5232bb011bc54d702d1cf0ebb02c",
+        "worldHash": "96ca830b74df96848a671f9162a154f82eddcc17822fcdc86293eac8ef14216b",
+        "historyHash": "e1d0849a7df416363a68efb2adc5f18d5083ee0d53baa0b9b71a3ca0b2451eef",
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 206
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "construction.complete": 261,
+        "economy.settle": 300
+      },
+      "referenceMs": 1167.026313999988,
+      "optimizedMs": 886.8635990000039
+    },
+    {
+      "scenario": {
+        "name": "hegemony-completion",
+        "ai": 0,
+        "speed": 25,
+        "seed": 90217,
+        "hegemony": true,
+        "hours": 25
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 2501,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "6f17b31e277a4a3c6dc710b7d3ac3b23e953650ad920f0a6fd1822c500070bad",
+        "commandHash": "f66b683f82a21bf0e6fed2e70183233906000b1b12351c741f57999186e4309e",
+        "worldHash": "9a097a3fe6cf72122ef49832029b24ebcbe5a92e0fb2a6a0931dcabcfd3c6d21",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 90000000,
+        "queue": 100
+      },
+      "eventTypes": {
+        "economy.settle": 2500,
+        "victory.complete": 1
+      },
+      "referenceMs": 759.6783439999999,
+      "optimizedMs": 1008.6138260000007
+    },
+    {
+      "scenario": {
+        "name": "wonder-shipment",
+        "ai": 0,
+        "speed": 3,
+        "seed": 90217,
+        "wonder": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 11,
+        "aiCommandTypes": {},
+        "commandCount": 3,
+        "eventHash": "559b1f92069f304c0c587d4ee4db0aae1c7569962873dd287abe492d7ac481ad",
+        "commandHash": "1929c4d404a3a8d7dd140869521df976c7a07fb00907d3ee2b1398f5a8fac654",
+        "worldHash": "b883abb949b9c87f1befa12063c7a9dc51604d6fbdf29bb27e3ee59e2000a17a",
+        "historyHash": null,
+        "decisions": 0,
+        "time": 10800000,
+        "queue": 4
+      },
+      "eventTypes": {
+        "logistics.arrive": 1,
+        "logistics.return": 1,
+        "economy.settle": 9
+      },
+      "referenceMs": 5.129012000004877,
+      "optimizedMs": 12.621785999988788
+    },
+    {
+      "scenario": {
+        "name": "actual-offline",
+        "ai": 99,
+        "speed": 25,
+        "seed": 41419,
+        "offline": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 117,
+        "aiCommandTypes": {
+          "field.upgrade": 33,
+          "building.upgrade": 18
+        },
+        "commandCount": 54,
+        "eventHash": "97d84259ff7add392a3ddb79aa060871b992054f3772153df9f185fae99fba19",
+        "commandHash": "6111691e8e3f08813e8eec10e445a82d2622264a33477bc70f79f3b8dc002e7a",
+        "worldHash": "150d14aaf1d200027d083b36ef22ab01bf43a5557800ec5a2553a4e0582f9c5d",
+        "historyHash": null,
+        "decisions": 81,
+        "time": 1500000,
+        "queue": 214
+      },
+      "eventTypes": {
+        "ai.decide": 81,
+        "construction.complete": 36
+      },
+      "referenceMs": 346.6678200000024,
+      "optimizedMs": 375.7767840000015
+    },
+    {
+      "scenario": {
+        "name": "extinction-rebirth",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "defeat": true,
+        "end": false,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 956,
+        "aiCommandTypes": {
+          "field.upgrade": 190,
+          "building.upgrade": 76,
+          "military.recruit": 2,
+          "army.dispatch": 1
+        },
+        "commandCount": 273,
+        "eventHash": "cd778e117db83cd1f9d6f04c7adde02b30b4fe182eec681b776e46a3bb2911c4",
+        "commandHash": "7ea185f2decb5b0682d4aacdd4b7a1477b548badbbed3bad7383c6be235fb0e4",
+        "worldHash": "6cfa0ea66ece216530f1227d7d046ee431718eb592fc41611f95b44ad089e563",
+        "historyHash": null,
+        "decisions": 382,
+        "time": 10800000,
+        "queue": 207
+      },
+      "eventTypes": {
+        "ai.decide": 382,
+        "army.arrive": 2,
+        "fixture.marker": 1,
+        "construction.complete": 259,
+        "combat.round": 2,
+        "military.train": 6,
+        "army.return": 2,
+        "economy.settle": 302
+      },
+      "referenceMs": 1348.650300999987,
+      "optimizedMs": 1049.4796690000076
+    },
+    {
+      "scenario": {
+        "name": "extinction-ended",
+        "ai": 99,
+        "speed": 25,
+        "seed": 90217,
+        "defeat": true,
+        "end": true,
+        "hours": 3
+      },
+      "status": "PASS",
+      "referenceOptimizedEqual": true,
+      "common": {
+        "eventCount": 138,
+        "aiCommandTypes": {
+          "field.upgrade": 32,
+          "building.upgrade": 32,
+          "military.recruit": 1
+        },
+        "commandCount": 69,
+        "eventHash": "31c2e41b188f0308063836752fc91e2e5dd050ea3b089b3d2daa88e46daf7ec7",
+        "commandHash": "7014be42fd53d45df94de8ab38e509e0d1c5515b193eafadcb2c2d50a354fa6d",
+        "worldHash": "ab097a72c69405d27fd8c324dba6686b8017ebe0b406c59ada212bafbaafab7b",
+        "historyHash": null,
+        "decisions": 90,
+        "time": 1627280,
+        "queue": 223
+      },
+      "eventTypes": {
+        "ai.decide": 90,
+        "army.arrive": 1,
+        "fixture.marker": 1,
+        "construction.complete": 42,
+        "combat.round": 2,
+        "military.train": 2
+      },
+      "referenceMs": 255.73360599999432,
+      "optimizedMs": 253.72121299999708
+    }
+  ]
+}
