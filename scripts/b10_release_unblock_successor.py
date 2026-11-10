@@ -4,7 +4,7 @@ from pathlib import Path
 from functools import lru_cache
 ROOT=Path(__file__).resolve().parents[1]
 BASE='aaaee9d3b9e16f2bad6ee8a96d1ef2902d0c4607'
-IMPLEMENTATION='bfdc252021b3cceffbd53ce8edcf208281fd9252'
+IMPLEMENTATION='69cba6381fc28514d1248926de8395f324a9e756'
 RECORD='docs/validation/b10-release-unblock/final-seal/compatibility.json'
 def sha(data):return hashlib.sha256(data).hexdigest()
 @lru_cache(maxsize=None)
