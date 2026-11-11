@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "233130edd7608c455dc1ebe429aaad99db10b452",
+  "implementationCommit": "92793100a6e755db56e526431f86ea0aa9d39053",
+  "changes": {
+    "releases/notes/android-startup-storage-recovery.json": {
+      "before": null,
+      "after": "bd08290245ae7510c0b92a5df3a70f1046aaac4d84a7c529bb1c54acffc53be2"
+    },
+    "scripts/fixtures/android-recovery.worker.ts": {
+      "before": null,
+      "after": "94547554d19179b2462f529e1eadf6cf046bfc72928631beb8f4bc2f0b877def"
+    },
+    "scripts/verify-startup-storage-browser.mjs": {
+      "before": null,
+      "after": "74fcb3f9a454c43d7bf548e8b240f99a25629e5f98971d66fc59ac11bcae6842"
+    },
+    "src/game/FormalHome.tsx": {
+      "before": "5adb4cce348b70f6609cdbea6db5805443de487185c07330006ecb1d1e1b1f99",
+      "after": "be085aedb1f38c9bbec7c10a6018c7b7d150d33304eb751b333dad5d21b453ca"
+    },
+    "src/game/GameApp.tsx": {
+      "before": "f9e29e8ef1ce1f7d062e9701474ede6c53dea92f1f634eca34d3a5e8438a6fb5",
+      "after": "869e0087d0eed59301b5ca028f0b8abe974e84197ff1ec0d2d3649d6fc24ae95"
+    },
+    "src/game/LocalCampaignManager.test.tsx": {
+      "before": null,
+      "after": "a8e83007899642e9ff1b2015243df2f25ec5631511c3dc866ca2c46aa3746ff4"
+    },
+    "src/game/LocalCampaignManager.tsx": {
+      "before": null,
+      "after": "acc58ff0eaddddccefbb6c588a7461aa7327da42e9c0a09ca71000899724782c"
+    },
+    "src/game/campaignStorage.ts": {
+      "before": "15790ba6ea059fd9039870e1e7ac679b3e48f2f3f121375d6cd528566b89c823",
+      "after": "a1fea56c4d321a3c9ed4d3944767f490dee2fa24387fc94b9a64235feeb52ae4"
+    },
+    "src/game/formal/incompatibleStartWorker.test.ts": {
+      "before": "c09272f54bf8a2a852147f75faac23f3eb1fa28aa6b5119cde1f7b20903679e9",
+      "after": "07843011387cdbfe3b58e25ee9fec60c991c653af90f4742c9093f34cfd423f4"
+    },
+    "src/game/presentation/integrationV94.css": {
+      "before": "0ed0ec44225a0d332da46b328087467061b2ca4ebd18849d3db987e0c92824b8",
+      "after": "dd0d92dde927018ef8e07a09323ea982e2ad39ff6f5653b91c5097ed6b6e9d10"
+    },
+    "src/game/presentationStore.ts": {
+      "before": "e5b40e3cfa7878e8002fa64331fe979bc126153257de6287d625586859080d1f",
+      "after": "fef99557a05bb15fc1c0c9c091eedef030d8765030e3aab34e1ff0f2a2f7c430"
+    },
+    "src/game/runtime.worker.ts": {
+      "before": "f455d1c988d36d517b5746d18372f82a0bfad49d2e7ab1160991b2060d13fad9",
+      "after": "b32e87ab8c18a28515f2ed5fc77da519087173cdd9c4b132b19dc1e647adbb41"
+    },
+    "src/game/storageRecovery.test.ts": {
+      "before": null,
+      "after": "4a732b7a688db12604502f2ea1425ae7d2d992626e568dc9ac9e2d40dc7dad9c"
+    },
+    "src/game/storageRecovery.ts": {
+      "before": null,
+      "after": "ecf25728ef595861f9c672d224f497aee93ddb40928a2bb1b565e6c84d9fa8bb"
+    },
+    "src/game/useGame.ts": {
+      "before": "09da931bfa6110f87316613d8267070bd9332205f834f09ddeb6a24fbb225f42",
+      "after": "9baca9f8bd8ad77abe4f3b77b04a7e8f024b0be7585fa21a5a753e02f0bf5715"
+    },
+    "src/game/useGameInteraction.test.tsx": {
+      "before": "1c6bb04044b474aaf2016037e29f3d17b424591f3031789211f770111b9bfa43",
+      "after": "c794d079a8bcbab486bfa268a9be5c9960675726d962f4dab5527f63fb1b5a8e"
+    }
+  },
+  "grants": {
+    "releases/notes/android-startup-storage-recovery.json": [],
+    "scripts/fixtures/android-recovery.worker.ts": [],
+    "scripts/verify-startup-storage-browser.mjs": [],
+    "src/game/FormalHome.tsx": [
+      "5adb4cce348b70f6609cdbea6db5805443de487185c07330006ecb1d1e1b1f99",
+      "ee56ed8222b21feae02974b746f927746f229e27a2ec8a4f0d181125836b9001",
+      "92f572545da1ab04cbb7656e71b557409e19d476c90b46ee82f1b74b637eb6fa"
+    ],
+    "src/game/GameApp.tsx": [
+      "f9e29e8ef1ce1f7d062e9701474ede6c53dea92f1f634eca34d3a5e8438a6fb5",
+      "03ee76a3642ffcfea19606c819ba02238f6f7f2b78017fac20ea256bee3ae281",
+      "dac5240f3c03b5add7ef97101ed3e95109dffc18e4109eacf37711611ecea3d4",
+      "82578b300b1a133ba79079934afd26144142f3f3bdf58bac4765bcc20323d9de",
+      "30e3726d7baf1041ff73c39c63f76254d06c68d9bdd3d0798d86871fb01c26af",
+      "3651a2e58a088da77442fd48f0676f8b765d7fa0f5646877e542d82c05e766ba",
+      "2589c7d6f1d9ef7f8983d78484ac3cdcf103f3e88e5a1e7ca6ca7062fb5898eb"
+    ],
+    "src/game/LocalCampaignManager.test.tsx": [],
+    "src/game/LocalCampaignManager.tsx": [],
+    "src/game/campaignStorage.ts": [
+      "15790ba6ea059fd9039870e1e7ac679b3e48f2f3f121375d6cd528566b89c823",
+      "8cc0c1f15fd10df0fffe03d9988634d1559d5fb03bf4c6be57f5211f749e5bc6",
+      "592b4d1acf0874e26938fdba6528ed06a21de51a01966767b950b6be9516db9b",
+      "f377d868bc130af7af1ff939ef6c4b8c1976c8abff63bc6e4aa0416dbcfe89f9",
+      "c23eb143f510d449ea680948086edbf9489ecae5f60d27440f47aedf9009e9e1"
+    ],
+    "src/game/formal/incompatibleStartWorker.test.ts": [
+      "c09272f54bf8a2a852147f75faac23f3eb1fa28aa6b5119cde1f7b20903679e9"
+    ],
+    "src/game/presentation/integrationV94.css": [
+      "0ed0ec44225a0d332da46b328087467061b2ca4ebd18849d3db987e0c92824b8",
+      "ef64fe666d3966864e9b2d9bfb146e29ecfaee3b8297dd28eefd3335e068f535"
+    ],
+    "src/game/presentationStore.ts": [
+      "e5b40e3cfa7878e8002fa64331fe979bc126153257de6287d625586859080d1f"
+    ],
+    "src/game/runtime.worker.ts": [
+      "f455d1c988d36d517b5746d18372f82a0bfad49d2e7ab1160991b2060d13fad9",
+      "dfe99fe18fb5834ee50004f1e3078730c1f45efc8c2d26613378157d46fa81f9",
+      "d354bb0dc5498826d39961a23d468b84013bff2200e1d92710cc9e07c4bc7cdc",
+      "9af40171e40bfdad14239932f36a208ca4888432276fd2e7b827d0016c9fab78",
+      "2bef2969cf5b7daf8351fc1d88794e95eef67698a57711244fe263724f9c6663",
+      "64d1b929b573c24aa26dd17102020f7e4c1b5cf45fb8dd8dd172cb6d85727d2a",
+      "45c4d79ba72d4b1ef473d58ade7a0fd9ecdd4eee73f677b6905dbac912b907d4",
+      "2acbf02483ab246fd41f3f5c2ce71a7a37a6e7407fa0eb4d7b846358eac5bad8",
+      "d47e3b98d5c51e657d0c8a3d311fd84cfaafc55f93c0a2ce00d64aca841e1b64"
+    ],
+    "src/game/storageRecovery.test.ts": [],
+    "src/game/storageRecovery.ts": [],
+    "src/game/useGame.ts": [
+      "09da931bfa6110f87316613d8267070bd9332205f834f09ddeb6a24fbb225f42",
+      "bbad871e4464d89e0750bb95ea4a5c031ccd4a8231a3bb59f9773c857de7298e",
+      "dcdbab461c52bc161302b7b8b6c6a8ac7641c8b854fa19abb6526443e8b69cb5",
+      "3f5e9e734c1389c8c4c0c06bd066bb79321ef1e3ea20dd89aa52245800cdf379",
+      "3fbd89ffcb5f7334b2a283c9d3289afb33087a10b24ca5014ce5a424ce04c347",
+      "b99a29d8bf9366708ed088b1060bea9b921adcca5af2d0d865237e66a4cd622e",
+      "d762b6583694ce1adcd599691ee5f88dd92ab37b5b77dc6d7730dc97366c6c77"
+    ],
+    "src/game/useGameInteraction.test.tsx": [
+      "1c6bb04044b474aaf2016037e29f3d17b424591f3031789211f770111b9bfa43",
+      "95817685b48b81480a7efe3886b02429f55eeb1819e6fbbc67b8a6833239cc1f",
+      "773ea354666d024158bf34fe89cdf657e2e8a1f6c59e3a5971512c2347dd7553",
+      "295342c1626a98238b07329538906ff95c8b5b2a57980d3c7da5fe64665a88ed"
+    ]
+  },
+  "invariants": {
+    "src/game/persistence.ts": "d41a9c57ec6aaeabbf0444dc8d8d9039781244987bd0d5bc81feb82973afb884",
+    "src/game/saveLock.ts": "bfa2865e14749b9cc2eb1aadf9e24f99064726aceff541b20a312236527ddbce",
+    "src/game/durableCommands.ts": "d90cf333794a9aaa29a739d0b61a739691bae1a5710da57d21de5451024fa441",
+    "src/game/replayFence.ts": "27e45802ac07e1ff9c5b73e64525ffad8a0fa2b2768ae6f5189cf43201dc7ace",
+    "src/game/ledgerStore.ts": "b16ed924cc27ccfc82a034a9ab62beda0277ec2c01ebd638f7d66b7bfb513666",
+    "src/game/interaction.ts": "d2e467c1f5919961e324d3e27f0d5f839170fb1a3e48b7266a23c62f215c0ab6",
+    "src/game/worldStream.ts": "61c270081d6db4b8010caa6ec8c6c9251891afb6a7b2ee1470817af5b74f77e1",
+    "src/game/orderAdmission.ts": "ef48737e8dce72125c37ada44a24ab1c2d705f77faa99ef7edfb325b1b2ee1b1",
+    "src/game/governanceAdmission.ts": "03b87c9f7545e5daf0a8cc4baca89a06b3c776f19c72d3435cdeabb9c0419118",
+    "src/game/serviceWorkerRelease.ts": "8c2055c2d6289c9fdea4848b6986b076e7921bd8e9fb71b6d8c194c7f9761da4",
+    "src/game/useAppUpdate.ts": "d6a88ab8ab1b84d284960c1ead1288960caeff4c965f7fe29cd647bed30ca7fe",
+    "src/game/formal/versions.ts": "bc838fdfaf3717cc591227fc58a1a6c9ce14e8750e55ecee5d722019ef1677cc",
+    "src/game/formal/model.ts": "41fe8a69c597df886215f60144dfadcfb822abf8c0b632ff5ca00502472f699b",
+    "src/game/formal/schema.ts": "a0ea12a9050c2c5f42e9a952e1ce027e7e5905081efab888ae5ed02ed74d78d7",
+    "src/game/formal/reducer.ts": "f98c24cb70237723a41d1b223de4171f1cde98f6e1277ec3841e723f4fe03f65",
+    "src/game/formal/scheduler.ts": "ea176cd36d492049d1bde7475cfa0880394aa3826cec2e0fe97597c078282d59",
+    "src/game/formal/autonomy.ts": "3701a3c96780b69eb77fbcc634218f9e2c4b5d853f5e0dfc88bca28ea6d1acbb",
+    "src/game/formal/offline.ts": "b4265164ff97859869d0fa3ae3b7751a8ce5c4d205384484b153ba53e3409544",
+    "src/game/formal/saveCodec.ts": "3c1c3a0068b03db44bd1a167b100e54b50fc36d94a645f6e7a2554a32c4ab5c6",
+    "src/game/formal/commandLedger.ts": "63046f80cb4d67c0234a24aaf263fe8a5b9c6a61d658dd2046d7cc0569f3c881",
+    "src/game/formal/constructionRules.ts": "5ea6fb9a9350c3888dbaa8f8e3d7cd01f1990674a5bf7b3b2089603bfd6246f6",
+    "src/game/constructionPreviewController.ts": "eb3c1a18138e8ce2feaaa2b87b2fa0754c22731a8ccf3bdaa77ad010a0770323",
+    "scripts/verify-in-isolation.mjs": "93fb62296bc4c9d2732bd4753377e4a19602792f9f47eb3a3407b49bd4ce5a01"
+  },
+  "historical": {
+    "docs/validation/b10-release-unblock/final-seal/compatibility.json": "9424affea969bfbe5db48e888aa36ca6d1b66be2fa50f5bad7668a1a31b37aab",
+    "docs/b6-v95/河谷戰役_vNext_平衡重構討論_v95.md": "49768df4e0151724d1cd613cf7b065083c9f4683f4435f1cba10a1e84c3b6ab2",
+    "docs/b6-v96/河谷戰役_vNext_平衡重構討論_v96.md": "4ca3ca8cacf259c17ac2ef2da192d00cf88a4d0b5b5116fdb50c882bc6c20c5d",
+    "docs/b6-v97/河谷戰役_vNext_平衡重構討論_v97.md": "a6dac80d1bd79cd70489d6720239dbc9484eca2327980f2edec3cde1e8497ad8"
+  },
+  "adapters": {
+    "scripts/b10_release_unblock_successor.py": {
+      "before": "7b78d2b75762c27363adb3fa181232f40468a44970f7a2c5da291db6e8a63428",
+      "after": "28a09b58fb5cee626ffc6d94ccc411fbeededff0b2372f1ebc14e77ea83d0326"
+    },
+    ".github/workflows/ci.yml": {
+      "before": "6a705aa63731d7f97c1ea63c4de79222d06d5749e45824503cddcf68b2936c80",
+      "after": "2513f5c33e3494534bbd1e6a6a0afa6456fcc7767b7198d5f217fc2ba2cab813"
+    }
+  }
+}
