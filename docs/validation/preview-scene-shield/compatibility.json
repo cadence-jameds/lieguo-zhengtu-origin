@@ -1,7 +1,14 @@
 {
   "schemaVersion": 1,
   "baseCommit": "96935268381f4e6366489b46e7a168b89fd78fcc",
-  "implementationCommit": "46a03bb556bf75bdd1404519bfac0e40a907a920",
+  "implementationCommit": "79378719148d5e76fc8d23fd2755360289056dcb",
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/preview-scene-shield/compatibility.json",
+    "scripts/home_art_ui_successor.py",
+    "scripts/preview_scene_successor.py",
+    "scripts/test_preview_scene_successor.py"
+  ],
   "changes": {
     "releases/notes/preview-scene-shield.json": {
       "before": null,
@@ -17,7 +24,7 @@
     },
     "scripts/verify-preview-scene-browser.mjs": {
       "before": null,
-      "after": "5a5e103638a5a6d15cda64b18abb39775a63ce90f1bfdb0a2771085a513d1540"
+      "after": "2bb26156137c2ea1718e694afd85518db128bc8986bf7fd28d0b0cb319906a91"
     },
     "src/game/FormalCityPanel.tsx": {
       "before": "f143c5fc74f61f8cdf75cdca682dae83364cdf54ce4730d43f07263b4ec169a9",
@@ -53,7 +60,7 @@
     },
     "src/game/presentation/ProtectionStatus.tsx": {
       "before": "1c1aa81625016c6b483b3a179c8d398414c4428a3ab6b855e6ed575c9ac68266",
-      "after": "8f8f3b24e41d9d2ab8e622431d542f84b455105172e558c4fc1ea9726dd16313"
+      "after": "1852f325eaf4e47c3d6bf1121ea9d5f1da6e6a3ba43ffc901ea9d2e836dfd860"
     },
     "src/game/presentation/Shell.tsx": {
       "before": "58fccc071be7dc8f97407a122b7d8002dd069a7079a53eab12a12ae5e3cdfa9c",
@@ -1147,6 +1154,10 @@
     ".github/workflows/ci.yml": {
       "before": "9ebf9765c60a293e962c9d0791d4517af491865dfd5bfb78dc8009c474b96990",
       "after": "d571d0ed4a026dd3401bde36495807bf81c28734bd40063dc303ddb061739548"
+    },
+    "scripts/android_startup_successor.py": {
+      "before": "5e4e2c5482c625d8d38885daf6e245264e2b89c0201a7c3e9c23d6734932d9d4",
+      "after": "3864d51d51d94229ed973f689adcef7806deab5c23e051fe48e899bc1ff7f789"
     }
   }
 }

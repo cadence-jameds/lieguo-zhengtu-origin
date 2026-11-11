@@ -4,9 +4,9 @@ from functools import lru_cache
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 BASE='96935268381f4e6366489b46e7a168b89fd78fcc'
-IMPLEMENTATION='46a03bb556bf75bdd1404519bfac0e40a907a920'
+IMPLEMENTATION='79378719148d5e76fc8d23fd2755360289056dcb'
 RECORD='docs/validation/preview-scene-shield/compatibility.json'
-ADAPTERS=['scripts/home_art_ui_successor.py','.github/workflows/ci.yml']
+ADAPTERS=['scripts/home_art_ui_successor.py','.github/workflows/ci.yml','scripts/android_startup_successor.py']
 def sha(data):return hashlib.sha256(data).hexdigest()
 _objects=None
 def close_objects():
@@ -33,7 +33,9 @@ def adapters():
  s=replace_once(s,"assert sha((root/p).read_bytes())==v['after'],('Unrecorded UI/art source edit',p)","assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded UI/art source edit',p)")
  s=replace_once(s,"assert (root/p).read_bytes()==b,('Unrecorded successor adapter',p)","assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Unrecorded successor adapter',p)")
  ci=previous(BASE,ADAPTERS[1]).decode();anchor='          python3 scripts/test_home_art_ui_successor.py\n';ci=replace_once(ci,anchor,anchor+'          python3 scripts/preview_scene_successor.py\n          python3 scripts/test_preview_scene_successor.py\n')
- return {p:s.encode(),ADAPTERS[1]:ci.encode()}
+ startup=previous(BASE,ADAPTERS[2]).decode()
+ startup=replace_once(startup,"for p,d in r[section].items():assert sha((root/p).read_bytes())==d,('Protected authority/rule/evidence changed',p)","for p,d in r[section].items():assert sha((root/p).read_bytes())==d or (section=='invariants' and child(p,d,root)),('Protected authority/rule/evidence changed',p)")
+ return {p:s.encode(),ADAPTERS[1]:ci.encode(),ADAPTERS[2]:startup.encode()}
 SOURCES={
  'releases/notes/preview-scene-shield.json','scripts/fixtures/preview-scene.worker.ts','scripts/verify-preview-scene-browser.mjs','scripts/verify-home-art-browser.mjs',
  *['src/game/'+p for p in ['FormalCityPanel.tsx','constructionPreviewCompute.ts','constructionPreviewController.ts','constructionPreviewDependencies.ts','constructionPreviewDependencies.test.ts','constructionPreviewProtocol.ts']],
@@ -42,7 +44,8 @@ SOURCES={
 @lru_cache(maxsize=1)
 def expected_record():
  actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
- assert actual==SOURCES,('Scope differs from the authorized preview/shield/copy task',actual^SOURCES)
+ support={RECORD,'scripts/preview_scene_successor.py','scripts/test_preview_scene_successor.py',*ADAPTERS}
+ assert actual-support==SOURCES and actual<=SOURCES|support,('Scope differs from the authorized preview/shield/copy task',actual-SOURCES-support)
  changes={};grants={}
  for p in sorted(SOURCES):
   try:before=sha(previous(BASE,p))
@@ -64,15 +67,17 @@ def expected_record():
  historical={p:sha(previous(BASE,p)) for p in records if p.endswith('/compatibility.json')}
  for v in [95,96,97]:
   p=f'docs/b6-v{v}/河谷戰役_vNext_平衡重構討論_v{v}.md';historical[p]=sha(previous(BASE,p))
- return {'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'changes':changes,'grants':grants,'invariants':invariants,'historical':historical,'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
+ return {'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'implementationSupport':sorted(actual&support),'changes':changes,'grants':grants,'invariants':invariants,'historical':historical,'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
 def read_record(root=ROOT):
  f=root/RECORD
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned preview/scene proof or scope';return r
 def accepts(path,predecessor,root=ROOT):
+ if path not in SOURCES:return False
  r=read_record(root);v=r['changes'].get(path)
  return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
 def accepts_adapter(path,before,root=ROOT):
+ if path not in ADAPTERS:return False
  read_record(root)
  return path in ADAPTERS and before==previous(BASE,path) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):

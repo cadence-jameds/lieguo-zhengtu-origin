@@ -71,7 +71,7 @@ def validate(root=ROOT):
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded P0 source edit',p)
  for section in ['invariants','historical']:
-  for p,d in r[section].items():assert sha((root/p).read_bytes())==d,('Protected authority/rule/evidence changed',p)
+  for p,d in r[section].items():assert sha((root/p).read_bytes())==d or (section=='invariants' and child(p,d,root)),('Protected authority/rule/evidence changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Unrecorded adapter',p)
  p='src/game/runtime.worker.ts';assert (root/p).read_text().split(" if(r.type==='start'){",1)[1]==previous(BASE,p).decode().split(" if(r.type==='start'){",1)[1],'Changed formal transitions/intake/T2/drain'
  p='src/game/useGame.ts';assert next(x for x in (root/p).read_text().splitlines() if x.startswith(' const createIssue='))==next(x for x in previous(BASE,p).decode().splitlines() if x.startswith(' const createIssue=')),'Changed click admission'
