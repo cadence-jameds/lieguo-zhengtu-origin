@@ -15,7 +15,7 @@ class PreviewSceneSuccessorTests(unittest.TestCase):
    self.assertFalse(gate.accepts(p,gate.sha(gate.previous(gate.BASE,p)),self.root))
  def test_local_record_cannot_bless_source_scope_or_rule_tampering(self):
   original=(self.root/gate.RECORD).read_bytes()
-  for section,p in [('changes','src/game/presentation/useConstructionPreviews.tsx'),('changes','src/game/constructionPreviewCompute.ts'),('invariants','vite.config.ts'),('invariants','src/game/useGame.ts'),('invariants','src/game/persistence.ts'),('invariants','src/game/formal/protection.ts'),('invariants','src/game/formal/constructionRules.ts'),('invariants','src/game/LocalCampaignManager.tsx'),('historical','docs/validation/home-art-ui/compatibility.json')]:
+  for section,p in [('changes','src/game/presentation/useConstructionPreviews.tsx'),('changes','src/game/constructionPreviewCompute.ts'),('changes','src/game/constructionPreviewController.ts'),('changes','src/game/constructionPreviewProtocol.ts'),('invariants','vite.config.ts'),('invariants','src/game/useGame.ts'),('invariants','src/game/persistence.ts'),('invariants','src/game/replayFence.ts'),('invariants','src/game/durableCommands.ts'),('invariants','src/game/formal/protection.ts'),('invariants','src/game/formal/constructionRules.ts'),('invariants','src/game/LocalCampaignManager.tsx'),('historical','docs/validation/home-art-ui/compatibility.json')]:
    with self.subTest(path=p):
     f=self.root/p;before=f.read_bytes();f.write_bytes(before+b'\n');r=json.loads(original)
     if section=='changes':r[section][p]['after']=gate.sha(f.read_bytes())
