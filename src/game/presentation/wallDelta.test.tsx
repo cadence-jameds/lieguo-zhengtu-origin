@@ -2,14 +2,15 @@
 import {act} from 'react';
 import {createRoot,type Root} from 'react-dom/client';
 import {afterEach,beforeEach,expect,it,vi} from 'vitest';
-import {existsSync} from 'node:fs';
+import {existsSync,readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import FormalCityPanel from '../FormalCityPanel';
 import {createFormalWorld} from '../formal/generator';
 import {advanceFormal,submitFormalOrder} from '../formal/reducer';
 import {order} from '../formal/testSupport';
 import type {FormalCommand,FormalWorld} from '../formal/model';
 import {constructionWallSceneArt,finishedWallSceneArt} from '../assets';
-import {visualAge,assetURL} from './artMap';
+import {visualAge} from './artMap';
 import {displayClock} from './liveClock';
 
 let container:HTMLDivElement,root:Root,world:FormalWorld,mobile:boolean,serial=0;
@@ -33,6 +34,8 @@ function render(){
 const button=(text:string,scope:ParentNode=container)=>[...scope.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent===text)!;
 const gate=()=>container.querySelector<HTMLButtonElement>('.town-gate')!;
 const scene=()=>container.querySelector<HTMLImageElement>('.town-background')!;
+// Independently verify both the chosen wall scene and its actual content identity.
+const expectedAsset=(path:string)=>import.meta.env.BASE_URL+path+'?art='+createHash('sha256').update(readFileSync('public/'+path)).digest('hex').slice(0,20);
 async function showTown(){await act(async()=>render());await act(async()=>button('城內').click());}
 
 for(const layout of [false,true])for(const age of [0,1,3] as const)it(`${layout?'mobile':'desktop'} age${age}: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion`,async()=>{
@@ -43,24 +46,24 @@ for(const layout of [false,true])for(const age of [0,1,3] as const)it(`${layout?
  expect(button('升級至 Lv1',dialog).disabled).toBe(false);
  await act(async()=>button('升級至 Lv1',dialog).click());const first=world.cities[0].economy!.construction[0];
  expect(first.target).toEqual({kind:'building',key:'wall'});expect(world.cities[0].wallLevel).toBe(0);expect(world.cities[0].economy!.slots).toEqual(initialSlots);
- const constructionPath=constructionWallSceneArt(era);expect(existsSync('public/'+constructionPath)).toBe(true);expect(scene().getAttribute('src')).toBe(assetURL(constructionPath));
+ const constructionPath=constructionWallSceneArt(era);expect(existsSync('public/'+constructionPath)).toBe(true);expect(scene().getAttribute('src')).toBe(expectedAsset(constructionPath));
  expect(container.querySelector('.construction-overlays .gate-progress [role="progressbar"]')).not.toBeNull();expect(container.textContent).toContain('城牆 → Lv1');expect(container.textContent).toContain('施工中');
  await act(async()=>gate().click());dialog=container.querySelector('dialog')!;
- expect(dialog.querySelector('.wall-detail-art image')!.getAttribute('href')).toBe(assetURL(constructionPath));
+ expect(dialog.querySelector('.wall-detail-art image')!.getAttribute('href')).toBe(expectedAsset(constructionPath));
  await act(async()=>button('升級至 Lv2',dialog).click());const second=world.cities[0].economy!.construction[1];expect(second.startsAt).toBe(first.startsAt+first.durationMs);
  await act(async()=>gate().click());dialog=container.querySelector('dialog')!;
  expect(dialog.textContent).toContain('⏳ 排隊中 · Lv2');const queued=[...dialog.querySelectorAll<HTMLElement>('.construction-preview')].find(e=>e.textContent?.includes('排隊中'))!;
  await act(async()=>button('取消工程',queued).click());expect(world.cities[0].economy!.construction).toHaveLength(1);expect(world.cities[0].wallLevel).toBe(0);
  world=advanceFormal(world,first.startsAt+first.durationMs).world;await act(async()=>render());
- const finishedPath=finishedWallSceneArt(era);expect(existsSync('public/'+finishedPath)).toBe(true);expect(scene().getAttribute('src')).toBe(assetURL(finishedPath));expect(gate().getAttribute('aria-label')).toContain('城牆 1 級');expect(container.querySelector('.construction-overlays .gate-progress .construction-progress')).toBeNull();
- await act(async()=>gate().click());dialog=container.querySelector('dialog')!;expect(dialog.querySelector('.building-detail .badge')!.textContent).toBe('Lv1');expect(dialog.querySelector('.wall-detail-art image')!.getAttribute('href')).toBe(assetURL(finishedPath));
+ const finishedPath=finishedWallSceneArt(era);expect(existsSync('public/'+finishedPath)).toBe(true);expect(scene().getAttribute('src')).toBe(expectedAsset(finishedPath));expect(gate().getAttribute('aria-label')).toContain('城牆 1 級');expect(container.querySelector('.construction-overlays .gate-progress .construction-progress')).toBeNull();
+ await act(async()=>gate().click());dialog=container.querySelector('dialog')!;expect(dialog.querySelector('.building-detail .badge')!.textContent).toBe('Lv1');expect(dialog.querySelector('.wall-detail-art image')!.getAttribute('href')).toBe(expectedAsset(finishedPath));
  expect(world.cities[0].buildings).not.toHaveProperty('wall');expect(world.cities[0].economy!.slots).toEqual(initialSlots);
 });
 for(const layout of [false,true])it(`${layout?'mobile':'desktop'}: waiting wall keeps open scene and becomes construction art only after its shared lane is free`,async()=>{
  mobile=layout;make();submit({type:'field.upgrade',cityId:world.cities[0].id,slot:0});submit({type:'building.upgrade',cityId:world.cities[0].id,key:'wall'});
- const field=world.cities[0].economy!.construction[0],wall=world.cities[0].economy!.construction[1];await showTown();expect(scene().getAttribute('src')).toBe(assetURL('art/city-scene-dark-open.webp'));expect(container.querySelector('.construction-overlays .gate-progress [aria-label="等待施工"]')).not.toBeNull();
+ const field=world.cities[0].economy!.construction[0],wall=world.cities[0].economy!.construction[1];await showTown();expect(scene().getAttribute('src')).toBe(expectedAsset('art/city-scene-dark-open.webp'));expect(container.querySelector('.construction-overlays .gate-progress [aria-label="等待施工"]')).not.toBeNull();
  await act(async()=>gate().click());expect(container.querySelector('dialog')!.textContent).toContain('⏳ 排隊中 · Lv1');
- world=advanceFormal(world,field.startsAt+field.durationMs).world;await act(async()=>render());expect(scene().getAttribute('src')).toBe(assetURL(constructionWallSceneArt(0)));expect(container.querySelector('.construction-overlays .gate-progress [aria-label="等待施工"]')).toBeNull();expect(container.querySelector('.construction-overlays .gate-progress [role="progressbar"]')).not.toBeNull();expect(world.cities[0].wallLevel).toBe(0);
+ world=advanceFormal(world,field.startsAt+field.durationMs).world;await act(async()=>render());expect(scene().getAttribute('src')).toBe(expectedAsset(constructionWallSceneArt(0)));expect(container.querySelector('.construction-overlays .gate-progress [aria-label="等待施工"]')).toBeNull();expect(container.querySelector('.construction-overlays .gate-progress [role="progressbar"]')).not.toBeNull();expect(world.cities[0].wallLevel).toBe(0);
  world=advanceFormal(world,wall.startsAt+wall.durationMs).world;await act(async()=>render());expect(world.cities[0].wallLevel).toBe(1);expect(container.querySelector('.building-detail .badge')!.textContent).toBe('Lv1');
 });
 for(const layout of [false,true])it(`${layout?'mobile':'desktop'}: formal prerequisite, maximum15 and inherited queue refund notice stay visible`,async()=>{

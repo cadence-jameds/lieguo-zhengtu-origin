@@ -84,7 +84,9 @@ def read_record(root=ROOT):
  return r
 def accepts(path,predecessor,root=ROOT):
  from b10_r3_05_successor import accepts as next_accepts
- if path not in CHANGES:return False
+ if path not in CHANGES:
+  from home_art_ui_successor import accepts as presentation_accepts
+  return presentation_accepts(path,predecessor,root)
  r=read_record(root)
  return predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==r['changes'][path]['after'] or next_accepts(path,r['changes'][path]['after'],root))
 def accepts_adapter(path,before,root=ROOT):
