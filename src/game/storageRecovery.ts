@@ -44,8 +44,16 @@ function exclusiveProbe(name:string,version:number){return new Promise<void>((re
  r.onerror=e=>{e.preventDefault();finish(exclusive&&r.error?.name==='AbortError'?undefined:r.error??Error('無法檢查資料庫連線。'));};
 });}
 async function deleteOne(name:string):Promise<DeleteResult>{
- const db=await existingDatabase(name);if(!db)return {name,state:'absent',text:'資料庫已不存在。'};const version=db.version;db.close();
- await exclusiveProbe(name,version);
+ let db:IDBDatabase|undefined,unreadable=false;
+ try{db=await existingDatabase(name);}catch(e){
+  // A blocked/timed-out read may still own a queued request: never enqueue a
+  // destructive request behind it. Other read failures may be purged ONLY by
+  // this user-confirmed path, after both writer locks have been acquired.
+  if(/逾時|正在使用|blocked/.test(message(e)))throw e;
+  unreadable=true;
+ }
+ if(!db&&!unreadable)return {name,state:'absent',text:'資料庫已不存在。'};
+ if(db){const version=db.version;db.close();await exclusiveProbe(name,version);}
  const result=await new Promise<DeleteResult>((resolve)=>{
   let ended=false;const finish=(state:DeleteResult['state'],text:string)=>{if(ended)return;ended=true;clearTimeout(timer);resolve({name,state,text});};
   const timer=setTimeout(()=>finish('uncertain','刪除結果尚未確認；已停止後續項目，請關閉其他遊戲分頁後重新檢查。'),8000);

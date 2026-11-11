@@ -36,6 +36,9 @@ it('storage management shuts down the Worker and rejects sends before a real res
  const stopped=port;await act(async()=>engine.suspendForStorage());expect(stopped.terminated).toBe(true);expect(engine.busy).toBe(false);const count=stopped.sent.length;await act(async()=>engine.send({type:'sync'}));expect(stopped.sent).toHaveLength(count);
  await act(async()=>engine.retryLoad());expect(port).not.toBe(stopped);expect(port.sent[0]).toMatchObject({type:'load'});
 });
+it('restart fences the previous Worker synchronously, before React effect cleanup',async()=>{
+ const old=port;await act(async()=>{engine.retryLoad();expect(old.terminated).toBe(true);old.emit(state(w));});expect(engine.status).toBe('loading');expect(engine.world).toBe(null);
+});
 it('terminal Ack with the final world frame lost recovers without another tick or command; stale snapshots do not fake display convergence',async()=>{
  vi.useFakeTimers();try{
   await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'最後畫面'}));const sent=port.sent[0],initial=engine.world;

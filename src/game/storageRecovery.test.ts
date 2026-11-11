@@ -24,6 +24,10 @@ it('blocked exclusive probe issues no destructive request, including after the b
  const blocker=await seed(FORMAL_DB_NAME);blocker.onversionchange=()=>{};const remove=vi.spyOn(indexedDB,'deleteDatabase');
  const results=await deleteLocalCampaigns([FORMAL_DB_NAME],true,locks());expect(results[0].state).toBe('failed');expect(results[0].text).toContain('blocked');expect(remove).not.toHaveBeenCalled();blocker.close();await new Promise(r=>setTimeout(r,20));expect(await read(FORMAL_DB_NAME)).toEqual({synthetic:true});
 });
+it('explicit confirmed cleanup can remove an unreadable known DB, without treating it as an empty campaign',async()=>{
+ const db=await seed(FORMAL_DB_NAME);db.close();vi.spyOn(indexedDB,'open').mockImplementationOnce(()=>{throw new DOMException('injected unreadable database','UnknownError');});
+ const results=await deleteLocalCampaigns([FORMAL_DB_NAME],true,locks());expect(results[0].state).toBe('deleted');expect((await indexedDB.databases()).some(d=>d.name===FORMAL_DB_NAME)).toBe(false);
+});
 it('partial failure is reported and remaining databases are not attempted',async()=>{
  const names=[FORMAL_DB_NAME,'lieguo-formal-ledger-v1','lieguo-formal-stage2-time2'];for(const n of names){const db=await seed(n);db.close();}
  const original=indexedDB.deleteDatabase.bind(indexedDB);vi.spyOn(indexedDB,'deleteDatabase').mockImplementation(name=>{if(name!==names[1])return original(name);const q={error:new DOMException('injected quota','QuotaExceededError'),onerror:null as null|(()=>void)};queueMicrotask(()=>q.onerror?.());return q as unknown as IDBOpenDBRequest;});
