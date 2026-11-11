@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseCommit": "233130edd7608c455dc1ebe429aaad99db10b452",
-  "implementationCommit": "92793100a6e755db56e526431f86ea0aa9d39053",
+  "implementationCommit": "547e0bcb981c489380168bfa94ba0d3cd5873048",
   "changes": {
     "releases/notes/android-startup-storage-recovery.json": {
       "before": null,
@@ -13,7 +13,7 @@
     },
     "scripts/verify-startup-storage-browser.mjs": {
       "before": null,
-      "after": "74fcb3f9a454c43d7bf548e8b240f99a25629e5f98971d66fc59ac11bcae6842"
+      "after": "34ecfd7e3ce01434c8197a72bfbe004432faa991b4dc4aab24daea823dcba308"
     },
     "src/game/FormalHome.tsx": {
       "before": "5adb4cce348b70f6609cdbea6db5805443de487185c07330006ecb1d1e1b1f99",
@@ -25,11 +25,11 @@
     },
     "src/game/LocalCampaignManager.test.tsx": {
       "before": null,
-      "after": "a8e83007899642e9ff1b2015243df2f25ec5631511c3dc866ca2c46aa3746ff4"
+      "after": "d403b2b811df74fad4482b56a3c625bccf171ba4bd03e47c7e5b57014383c1bf"
     },
     "src/game/LocalCampaignManager.tsx": {
       "before": null,
-      "after": "acc58ff0eaddddccefbb6c588a7461aa7327da42e9c0a09ca71000899724782c"
+      "after": "3c6fe935a0c384fe27138c4fa9ff470d7d12e8c53e4e42297b9c4dce5dde1bd7"
     },
     "src/game/campaignStorage.ts": {
       "before": "15790ba6ea059fd9039870e1e7ac679b3e48f2f3f121375d6cd528566b89c823",
@@ -53,11 +53,11 @@
     },
     "src/game/storageRecovery.test.ts": {
       "before": null,
-      "after": "4a732b7a688db12604502f2ea1425ae7d2d992626e568dc9ac9e2d40dc7dad9c"
+      "after": "e03ce9d86d4fa6d90971b454003bb0771976391ed82abf589d451f63595277dd"
     },
     "src/game/storageRecovery.ts": {
       "before": null,
-      "after": "ecf25728ef595861f9c672d224f497aee93ddb40928a2bb1b565e6c84d9fa8bb"
+      "after": "79baeadf39ae41268a728cab69fd3eedf5cf5d06392e7fe26f30fc7464b2694a"
     },
     "src/game/useGame.ts": {
       "before": "09da931bfa6110f87316613d8267070bd9332205f834f09ddeb6a24fbb225f42",

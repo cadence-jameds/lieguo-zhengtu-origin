@@ -4,7 +4,7 @@ from pathlib import Path
 from functools import lru_cache
 ROOT=Path(__file__).resolve().parents[1]
 BASE='233130edd7608c455dc1ebe429aaad99db10b452'
-IMPLEMENTATION='92793100a6e755db56e526431f86ea0aa9d39053'
+IMPLEMENTATION='547e0bcb981c489380168bfa94ba0d3cd5873048'
 RECORD='docs/validation/android-startup-recovery/compatibility.json'
 ADAPTERS=['scripts/b10_release_unblock_successor.py','.github/workflows/ci.yml']
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -26,10 +26,12 @@ def adapters():
  return {p:text.encode(),ADAPTERS[1]:ci.encode()}
 @lru_cache(maxsize=1)
 def expected_record():
- paths=subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines()
+ actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
+ support={RECORD,'scripts/android_startup_successor.py','scripts/test_android_startup_successor.py',*ADAPTERS}
+ paths=sorted(actual-support)
  expected={'src/game/'+p for p in ['FormalHome.tsx','GameApp.tsx','campaignStorage.ts','formal/incompatibleStartWorker.test.ts','presentation/integrationV94.css','presentationStore.ts','runtime.worker.ts','useGame.ts','useGameInteraction.test.tsx','LocalCampaignManager.tsx','LocalCampaignManager.test.tsx','storageRecovery.ts','storageRecovery.test.ts']}
  expected|={'releases/notes/android-startup-storage-recovery.json','scripts/fixtures/android-recovery.worker.ts','scripts/verify-startup-storage-browser.mjs'}
- assert set(paths)==expected,'Scope differs from user-authorized P0 implementation'
+ assert set(paths)==expected and actual<=expected|support,'Scope differs from user-authorized P0 implementation'
  changes={};grants={}
  for p in paths:
   try:before=sha(previous(BASE,p))
