@@ -15,8 +15,10 @@ export function ProtectionStatus({world}:{world:WorldRead}){
   const place=()=>{
    const anchor=button.current?.getBoundingClientRect();if(!anchor)return;
    const edge=12,width=Math.min(350,window.innerWidth-edge*2),nav=document.querySelector('.mobile-nav')?.getBoundingClientRect(),bottom=Math.min(window.innerHeight-edge,nav?.top??Infinity),height=Math.min(360,(details.current?.scrollHeight??298)+2);
-   const below=bottom-anchor.bottom-8,above=anchor.top-edge-8,useBelow=below>=Math.min(height,360)||below>=above,maxHeight=Math.max(60,Math.min(360,useBelow?below:above));
-   const top=Math.max(edge,useBelow?anchor.bottom+8:anchor.top-8-Math.min(height,maxHeight));
+   const topEdge=Math.max(edge,(document.querySelector('.topbar')?.getBoundingClientRect().bottom??0)+8);
+   if(anchor.bottom<topEdge||anchor.top>bottom){setOpen(false);return;}
+   const below=bottom-anchor.bottom-8,above=anchor.top-topEdge-8,useBelow=below>=Math.min(height,360)||below>=above,maxHeight=Math.max(60,Math.min(360,useBelow?below:above));
+   const top=Math.max(topEdge,useBelow?anchor.bottom+8:anchor.top-8-Math.min(height,maxHeight));
    setPosition({left:Math.max(edge,Math.min(anchor.left,window.innerWidth-edge-width)),top,maxHeight});
   };
   place();const observer=new ResizeObserver(place);if(details.current)observer.observe(details.current);window.addEventListener('resize',place);window.addEventListener('scroll',place,true);
