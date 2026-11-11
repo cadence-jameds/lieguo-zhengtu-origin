@@ -1,0 +1,218 @@
+{
+  "pr62": {
+    "native": true,
+    "production": true,
+    "android": "NOT TESTED",
+    "browser": "154.0.8037.57",
+    "results": [
+      {
+        "name": "timeout → fresh Worker → recovery/new campaign",
+        "status": "PASS"
+      },
+      {
+        "name": "incompatible → new campaign without backup; compatible reload",
+        "status": "PASS"
+      },
+      {
+        "name": "legacy only → new campaign; old DB retained",
+        "status": "PASS"
+      },
+      {
+        "name": "startup Worker error → delete old DB with dead Runtime → new Worker",
+        "status": "PASS"
+      },
+      {
+        "name": "canceled loading → independent cleanup → engine reinitialized",
+        "status": "PASS"
+      },
+      {
+        "name": "unsupported current DB schema → explicit reset → new campaign",
+        "status": "PASS"
+      },
+      {
+        "name": "unreadable native open: only explicit confirmed cleanup removes data",
+        "status": "PASS"
+      },
+      {
+        "name": "blocked IDB: no deletion, no delayed destructive operation",
+        "status": "PASS"
+      },
+      {
+        "name": "partial native deletion reports each outcome; blocked old DB is retained",
+        "status": "PASS"
+      },
+      {
+        "name": "another writer: cannot delete current or old DB",
+        "status": "PASS"
+      },
+      {
+        "name": "retired Formal writer lock also prevents cleanup",
+        "status": "PASS"
+      },
+      {
+        "name": "corruption never authorizes overwrite; diagnostic/manager remain usable",
+        "status": "PASS"
+      },
+      {
+        "name": "real Runtime T2 quota failure does not claim success or lose old source",
+        "status": "PASS"
+      },
+      {
+        "name": "all selected cleanup preserves unrelated DB, UI settings, caches and SW",
+        "status": "PASS"
+      }
+    ]
+  },
+  "pr63": {
+    "browser": "154.0.8037.57",
+    "checks": [
+      {
+        "name": "cached second entry skips animation",
+        "status": "PASS",
+        "data": {
+          "animations": 0
+        }
+      },
+      {
+        "name": "cached art remains visible offline, including reload",
+        "status": "PASS",
+        "data": {
+          "missing": 0
+        }
+      },
+      {
+        "name": "evicted required resource incrementally refills",
+        "status": "PASS",
+        "data": {
+          "artRequests": 1,
+          "bytes": 501690
+        }
+      },
+      {
+        "name": "production SW prompt update downloads only changed/new art and retains unchanged cache",
+        "status": "PASS",
+        "data": {
+          "artRequests": 2,
+          "retainedUnchanged": 307
+        }
+      },
+      {
+        "name": "homepage / protection / normal commands 1440",
+        "status": "PASS",
+        "data": {
+          "positions": [
+            {
+              "text": "開始遊戲",
+              "x": 219,
+              "y": 563.78125,
+              "w": 224,
+              "h": 48
+            },
+            {
+              "text": "載入進度",
+              "x": 455,
+              "y": 563.78125,
+              "w": 224,
+              "h": 48
+            },
+            {
+              "text": "⚙ 設定",
+              "x": 219,
+              "y": 623.78125,
+              "w": 460,
+              "h": 48
+            },
+            {
+              "text": "管理本機戰役存檔",
+              "x": 219,
+              "y": 683.78125,
+              "w": 460,
+              "h": 48
+            }
+          ],
+          "cityFirstScreenMs": 2273.3729190000013,
+          "preparedOnEntry": 94,
+          "commandSaved": true,
+          "inboxInvisible": true
+        }
+      },
+      {
+        "name": "homepage / protection / normal commands 390",
+        "status": "PASS",
+        "data": {
+          "positions": [
+            {
+              "text": "開始遊戲",
+              "x": 39,
+              "y": 592.359375,
+              "w": 150,
+              "h": 48
+            },
+            {
+              "text": "載入進度",
+              "x": 201,
+              "y": 592.359375,
+              "w": 150,
+              "h": 48
+            },
+            {
+              "text": "⚙ 設定",
+              "x": 39,
+              "y": 652.359375,
+              "w": 312,
+              "h": 48
+            },
+            {
+              "text": "管理本機戰役存檔",
+              "x": 39,
+              "y": 712.359375,
+              "w": 312,
+              "h": 48
+            }
+          ],
+          "cityFirstScreenMs": 2143.407070000001,
+          "preparedOnEntry": 78,
+          "commandSaved": true,
+          "inboxInvisible": true
+        }
+      },
+      {
+        "name": "real foreground counts / fixed total / error retry while background continues",
+        "status": "PASS",
+        "data": {
+          "loaded": 7,
+          "total": 8,
+          "backgroundPreparedAtEntry": 40,
+          "required": [
+            "art/civilization-emblems-023.webp",
+            "art/formal/hud-unit-icons-v03015.png",
+            "art/outskirts-landscape-021.webp",
+            "art/cities-age-0.webp",
+            "art/field-farm.webp",
+            "art/field-lumber.webp",
+            "art/field-quarry.webp",
+            "art/field-mine.webp"
+          ]
+        }
+      },
+      {
+        "name": "failure of native command receive has recovery and retry preserves one committed effect",
+        "status": "PASS",
+        "data": {
+          "effects": 1
+        }
+      },
+      {
+        "name": "protection variants use native imports and hide after early release/expiry",
+        "status": "PASS",
+        "data": [
+          "short",
+          "rebirth",
+          "expired",
+          "early"
+        ]
+      }
+    ],
+    "errors": []
+  }
+}
