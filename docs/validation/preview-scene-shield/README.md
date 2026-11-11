@@ -83,6 +83,8 @@ Preview 的正常重算不再製造通知。既有 `CommandFailure` 僅在真正
 
 開發過程曾與瀏覽器並行執行原 Formal 預覽測試，因共用兩顆 CPU 超過既有 5 秒期限。未修改期限或斷言，停止其他負載後以相同期限重跑通過；最終完整回歸使用既有隔離腳本。新增瀏覽器驗證亦改為等待實際 durable commit，而非用固定 600ms 猜測保存完成；讀取該 transaction 中的 committed row，避免把後續合法 T3 修剪誤判成命令遺失。
 
+完整 CI 的第一次執行另發現盾牌詳情單元測試缺少版面 fixture：Happy DOM 回傳零尺寸，觸發正確的離開可視區域收合。已僅補上可視盾牌的 DOMRect，原倒數、展開、外部點擊、Escape、復國及到期斷言全部保留；產品程式與期限未改。Production Chromium 的實際版面檢查維持通過。修正後完整結果仍以 PR 最終 Checks／交付紀錄為準。
+
 ## 剩餘風險
 
 Android 真機未驗證：觸控手感、Chrome 網址列／軟鍵盤、OS 字型及低階 GPU／CPU／記憶體表現仍須實機回歸。畫面位置與點擊證據來自 Chromium 的手機 viewport／touch 模擬，不宣稱為 Android 真機截圖。全景模式在 320px 空間較緊，已檢查可見互動中心，仍建議真機確認手指操作。

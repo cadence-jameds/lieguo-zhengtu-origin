@@ -1,10 +1,23 @@
 {
   "schemaVersion": 1,
   "baseCommit": "96935268381f4e6366489b46e7a168b89fd78fcc",
-  "implementationCommit": "79378719148d5e76fc8d23fd2755360289056dcb",
+  "implementationCommit": "7e528e4e8b12fa90f476c9b6690ec672059ad813",
   "implementationSupport": [
     ".github/workflows/ci.yml",
+    "docs/validation/preview-scene-shield/1440x900-shield.png",
+    "docs/validation/preview-scene-shield/320x640-details.png",
+    "docs/validation/preview-scene-shield/320x640-shield.png",
+    "docs/validation/preview-scene-shield/390x844-details.png",
+    "docs/validation/preview-scene-shield/README.md",
+    "docs/validation/preview-scene-shield/after-390-25x-dialog.png",
+    "docs/validation/preview-scene-shield/after-390-shield.png",
+    "docs/validation/preview-scene-shield/before-390-25x-dialog.png",
+    "docs/validation/preview-scene-shield/before-390-shield.png",
+    "docs/validation/preview-scene-shield/browser-checks.json",
     "docs/validation/preview-scene-shield/compatibility.json",
+    "docs/validation/preview-scene-shield/measurements.json",
+    "docs/validation/preview-scene-shield/safety-browser-checks.json",
+    "scripts/android_startup_successor.py",
     "scripts/home_art_ui_successor.py",
     "scripts/preview_scene_successor.py",
     "scripts/test_preview_scene_successor.py"
@@ -76,7 +89,7 @@
     },
     "src/game/presentation/playerExperience.test.tsx": {
       "before": "0d9bd29c5ab718e4523143ab7529a52cf8cf9741a0ba20bb383db2a4fe9fd4a6",
-      "after": "3baea20d0a7861a0a8df724a74dbf5c653cadb9bd89c35bdad8de542b379567b"
+      "after": "658ba3ea27b55fa17fff332e078ad93fd77612016af95d2c1de7e00299cc7490"
     },
     "src/game/presentation/sceneProtectionPreview.test.tsx": {
       "before": null,

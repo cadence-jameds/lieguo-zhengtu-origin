@@ -4,7 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 BASE='96935268381f4e6366489b46e7a168b89fd78fcc'
-IMPLEMENTATION='79378719148d5e76fc8d23fd2755360289056dcb'
+IMPLEMENTATION='7e528e4e8b12fa90f476c9b6690ec672059ad813'
 RECORD='docs/validation/preview-scene-shield/compatibility.json'
 ADAPTERS=['scripts/home_art_ui_successor.py','.github/workflows/ci.yml','scripts/android_startup_successor.py']
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -45,6 +45,8 @@ SOURCES={
 def expected_record():
  actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
  support={RECORD,'scripts/preview_scene_successor.py','scripts/test_preview_scene_successor.py',*ADAPTERS}
+ # Review evidence never grants a gameplay/source change. Keep its paths finite.
+ support|={'docs/validation/preview-scene-shield/'+p for p in ['README.md','1440x900-shield.png','320x640-details.png','320x640-shield.png','390x844-details.png','after-390-25x-dialog.png','after-390-shield.png','before-390-25x-dialog.png','before-390-shield.png','browser-checks.json','measurements.json','safety-browser-checks.json']}
  assert actual-support==SOURCES and actual<=SOURCES|support,('Scope differs from the authorized preview/shield/copy task',actual-SOURCES-support)
  changes={};grants={}
  for p in sorted(SOURCES):
