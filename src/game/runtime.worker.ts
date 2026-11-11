@@ -1,3 +1,4 @@
+import {inspectCampaignStorage} from './campaignStorage';
 import {RetiredCommand} from './replayFence';
 import {prepareAdmissionMap} from './admissionMap';
 import {OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
@@ -30,7 +31,7 @@ export type RuntimeRequest=({type:'load'|'sync'|'snapshot'|'backups'|'away'|'res
  | {type:'cityIntel';cityId:string;generation?:number;queryId:string;campaignId:string;reportCursor:number;time:number}
  | {type:'reportStatus'}
  | {type:'reportAction';action:'read'|'clear';ids?:string[];filter?:ReportFilter}
- | {type:'reportPage';page:number;filter?:ReportFilter}) & {requestId?:string;stateMode?:'patch'|'projection-v2';visibilityAt?:number};
+ | {type:'reportPage';page:number;filter?:ReportFilter}) & {requestId?:string;startupRecovery?:boolean;stateMode?:'patch'|'projection-v2';visibilityAt?:number};
 let writer:WriterContext|undefined;
 let startWithoutWorld=false;
 const intake=new WeakMap<RuntimeRequest,Promise<InboxCommand>>();
@@ -71,6 +72,11 @@ async function handle(r:RuntimeRequest){
  if(r.type==='resume'&&world&&!away){state();return;}
  if(r.type==='load'||r.type==='resume'){
   if(!writer)writer=await acquireWriter();
+  if(r.type==='load'&&r.startupRecovery){
+   const stored=await inspectCampaignStorage();
+   if(stored!=='empty'&&stored!=='historical'){const token=await incompatibleStartToken();if(token){post({type:'error',text:OLD_CAMPAIGN_MESSAGE,incompatibleStartToken:token,legacyAvailable:await hasLegacyCampaign().catch(()=>false)});return;}throw Error('本機仍有尚未成功載入的戰役或命令；已保留原資料。請重新讀取，或在存檔管理明確確認刪除後再建立新戰役。');}
+   writer=await writerContext();world=null;startWithoutWorld=true;away=false;reanchor();state(true);return;
+  }
   if(r.type==='load'&&world&&!away)await advanceAndSave();
   away=true;
   let lastStage:'read'|'offline'|'save'|''='',lastEvents=-1;

@@ -39,6 +39,7 @@ export type ProjectionHealth={state:'empty'|'ready'|'recovering'|'blocked';reaso
 export class PresentationStore {
  private world:PresentationWorld|null=null;private head?:ProjectionHeader;private versions:VersionMap=emptyVersions();
  private listeners=new Set<()=>void>();private health:ProjectionHealth={state:'empty',reason:''};
+ reset(){this.world=null;this.head=undefined;this.versions=emptyVersions();this.health={state:'empty',reason:''};this.emit();}
  getWorld=()=>this.world;
  getHealth=()=>this.health;
  subscribe=(listener:()=>void)=>{this.listeners.add(listener);return()=>this.listeners.delete(listener);};

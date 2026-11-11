@@ -10,13 +10,13 @@ type StoredRow={kind?:string;data?:{format?:unknown;metadata?:Record<string,unkn
 function idbRequest<T>(request:IDBRequest<T>){return new Promise<T>((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(Error('無法讀取本機資料，原始資料保留。'));});}
 /** Dexie.exists() probes a missing DB via open/abort/deleteDatabase. This path
  * must remain strictly read only, including browsers without databases(). */
-async function existingDatabase(name:string):Promise<IDBDatabase|undefined>{
+export async function existingDatabase(name:string):Promise<IDBDatabase|undefined>{
  if(typeof indexedDB.databases==='function'&&!(await storageDeadline(indexedDB.databases())).some(db=>db.name===name))return;
  return new Promise((resolve,reject)=>{
   let ended=false,absent=false;const finish=(db?:IDBDatabase,error?:Error)=>{if(ended){db?.close();return;}ended=true;clearTimeout(timer);error?reject(error):resolve(db);};
   const timer=setTimeout(()=>finish(undefined,Error('讀取本機資料逾時，原始資料保留。')),8000);let request:IDBOpenDBRequest;try{request=indexedDB.open(name);}catch(error){finish(undefined,error instanceof Error?error:Error('無法讀取本機資料，原始資料保留。'));return;}
   request.onupgradeneeded=()=>{absent=true;request.transaction?.abort();}; // abort leaves an absent namespace absent
-  request.onsuccess=()=>finish(request.result);
+  request.onsuccess=()=>{request.result.onversionchange=()=>request.result.close();finish(request.result);};
   request.onerror=event=>{event.preventDefault();finish(undefined,absent?undefined:Error('無法讀取本機資料，原始資料保留。'));};
   request.onblocked=()=>finish(undefined,Error('本機資料正在使用中，請稍後重試；原始資料保留。'));
  });

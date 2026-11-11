@@ -26,6 +26,16 @@ beforeEach(async()=>{
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',FakeWorker);Object.defineProperty(navigator,'locks',{configurable:true,value:{}});w=createFormalFixture();container=document.createElement('div');document.body.append(container);root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>port.emit(state(w)));port.sent=[];
 });
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();delete (navigator as any).locks;vi.unstubAllGlobals();});
+it('stalled startup releases its session and retry creates a new Worker; old messages cannot complete it',async()=>{
+ vi.useFakeTimers();try{await act(async()=>engine.retryLoad());const stopped=port;await act(async()=>vi.advanceTimersByTimeAsync(30000));expect(stopped.terminated).toBe(true);expect(engine.status).toBe('error');
+ await act(async()=>engine.restartForNew());const restarted=port;expect(restarted).not.toBe(stopped);expect(restarted.sent[0]).toMatchObject({type:'load',startupRecovery:true});expect(engine.status).toBe('loading');
+ await act(async()=>stopped.emit(state(w)));expect(engine.status).toBe('loading');await act(async()=>restarted.emit(state(w)));expect(engine.status).toBe('ready');expect(engine.error).toBe('');
+ }finally{vi.useRealTimers();}
+});
+it('storage management shuts down the Worker and rejects sends before a real restart',async()=>{
+ const stopped=port;await act(async()=>engine.suspendForStorage());expect(stopped.terminated).toBe(true);expect(engine.busy).toBe(false);const count=stopped.sent.length;await act(async()=>engine.send({type:'sync'}));expect(stopped.sent).toHaveLength(count);
+ await act(async()=>engine.retryLoad());expect(port).not.toBe(stopped);expect(port.sent[0]).toMatchObject({type:'load'});
+});
 it('terminal Ack with the final world frame lost recovers without another tick or command; stale snapshots do not fake display convergence',async()=>{
  vi.useFakeTimers();try{
   await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'最後畫面'}));const sent=port.sent[0],initial=engine.world;
