@@ -1,3 +1,7 @@
+import {make,build,commit} from './formal/developmentTestSupport';
+import {fieldCost} from './formal/catalogB3';
+import {unitRecruitCost} from './formal/military';
+import {UNIT_CATALOG} from './formal/unitCatalog';
 import {expect,it} from 'vitest';
 import {constructionDependencyKey} from './constructionPreviewDependencies';
 import {constructionPreviewContext} from './constructionPreviewContext';
@@ -52,4 +56,16 @@ it('increasing insufficient stocks reuse the exact boundary; crossing any missin
  const funded=structuredClone(poor);funded.city.stock={...result.requiredResources};send(req(32,funded));expect(ports).toHaveLength(2);expect(done).toHaveLength(31);reply();expect(done.at(-1)!.results[0].status).toBe('ready');
  funded.city.stock.stone--;send(req(33,funded));expect(ports).toHaveLength(3);reply();expect(done.at(-1)!.results[0].status).toBe('invalid');
  }finally{controller.dispose();}
+});
+it('a real training command and cancellation update actual available stock independently of the construction queue',()=>{
+ const world=make(),city=world.cities[0];build(city,'barracks',1);city.population=400;
+ const payment=fieldCost(city.fields![0].resource,1),training=unitRecruitCost(world,city,UNIT_CATALOG.militia);
+ for(const k of resourceKeys)city.stock[k]=Math.max(payment[k],training[k]);
+ const before=constructionPreviewContext(world,city.id);expect(calculateConstructionPreview(before,{field:0}).status).toBe('ready');
+ const trained=commit(world,{type:'military.recruit',cityId:city.id,unitId:'militia',count:1}),after=constructionPreviewContext(trained,city.id);
+ expect(trained.cities[0].military!.queue).toHaveLength(1);expect(after.city.economy!.construction).toEqual(before.city.economy!.construction);
+ expect(constructionDependencyKey(before,target,true)).not.toBe(constructionDependencyKey(after,target,true));
+ const result=calculateConstructionPreview(after,{field:0});expect(result.status).toBe('invalid');if(result.status==='ready')throw Error('training already spent these resources');expect(result.reason).toBe('城市實際庫存不足。');
+ const cancelled=commit(trained,{type:'military.cancel',cityId:city.id,trainingCommandId:trained.cities[0].military!.queue[0].commandId}),restored=constructionPreviewContext(cancelled,city.id);
+ expect(cancelled.cities[0].military!.queue).toHaveLength(0);expect(constructionDependencyKey(after,target,true)).not.toBe(constructionDependencyKey(restored,target,true));
 });
