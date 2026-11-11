@@ -63,6 +63,8 @@ jobs:
           python3 scripts/test_android_startup_successor.py
           python3 scripts/home_art_ui_successor.py
           python3 scripts/test_home_art_ui_successor.py
+          python3 scripts/preview_scene_successor.py
+          python3 scripts/test_preview_scene_successor.py
           node scripts/verify-runtime-parity.mjs
           node scripts/verify-projection-boundaries.mjs
           node scripts/verify-preview-boundaries.mjs
