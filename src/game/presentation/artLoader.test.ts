@@ -20,3 +20,6 @@ it('request deadline aborts once and does not become an infinite retry',async()=
 it('quota/cache unavailable still downloads; HTML/HTTP errors never count as ready',async()=>{
  const broken={open:async()=>{throw Error('quota');}} as unknown as CacheStorage,loader=new ArtLoader(2,15000,broken,vi.fn(async url=>String(url).endsWith('valid')?image():new Response('<html>',{headers:{'Content-Type':'text/html'}})));loader.enqueue(['valid','bad']);await vi.waitFor(()=>expect(loader.progress(['valid','bad'])).toMatchObject({loaded:1,failed:['bad'],percent:50}));
 });
+it('explicit retry bypasses a cached HTTP error without reloading successful assets',async()=>{
+ const fetcher=vi.fn(async(_url:RequestInfo|URL,init?:RequestInit)=>init?.cache==='reload'?image():new Response('',{status:503})),loader=new ArtLoader(2,15000,undefined,fetcher);loader.enqueue(['required']);await vi.waitFor(()=>expect(loader.progress(['required']).failed).toEqual(['required']));expect(fetcher.mock.calls[0][1]?.cache).toBe('force-cache');loader.retry(['required']);await vi.waitFor(()=>expect(loader.progress(['required']).percent).toBe(100));expect(fetcher.mock.calls[1][1]?.cache).toBe('reload');expect(fetcher).toHaveBeenCalledTimes(2);
+});
