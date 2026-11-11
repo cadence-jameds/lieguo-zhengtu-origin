@@ -1,0 +1,20 @@
+{
+  "native": true,
+  "production": true,
+  "android": "NOT TESTED",
+  "browser": "154.0.8037.57",
+  "results": [
+    {
+      "name": "before: timeout leaves dead Worker lock and no recovery",
+      "status": "PASS"
+    }
+  ],
+  "version": "0.30.82",
+  "commitSha": "233130edd7608c455dc1ebe429aaad99db10b452",
+  "contentSha": "233130edd7608c455dc1ebe429aaad99db10b452",
+  "dirty": false,
+  "viewport": {
+    "width": 390,
+    "height": 844
+  }
+}

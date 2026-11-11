@@ -59,6 +59,8 @@ jobs:
           node scripts/test-deployment-isolation.mjs
           python3 scripts/b10_release_unblock_successor.py
           python3 scripts/test_b10_release_unblock_successor.py
+          python3 scripts/android_startup_successor.py
+          python3 scripts/test_android_startup_successor.py
           node scripts/verify-runtime-parity.mjs
           node scripts/verify-projection-boundaries.mjs
           node scripts/verify-preview-boundaries.mjs

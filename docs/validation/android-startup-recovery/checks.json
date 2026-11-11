@@ -1,0 +1,43 @@
+{
+  "base": "233130edd7608c455dc1ebe429aaad99db10b452",
+  "implementation": "547e0bcb981c489380168bfa94ba0d3cd5873048",
+  "testedHead": "de7c40cb4bacd221e83e72ef0815a1ae77f6c370",
+  "environment": {
+    "node": "22.23.4",
+    "cpuQuota": 2,
+    "memoryLimitBytes": 8589934592,
+    "workers": 2,
+    "heapLimitBytes": 2197815296
+  },
+  "directed": {
+    "passed": 109,
+    "failed": 0
+  },
+  "nativeProduction": {
+    "passed": 14,
+    "failed": 0,
+    "browser": "Chromium 154.0.8037.57",
+    "viewport": "390x844",
+    "android": "NOT TESTED"
+  },
+  "full": {
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "passed": 2533,
+    "failed": 0,
+    "skipped": 1,
+    "reportSha256": "95a341b4ff12fc21a1e6859f07367121ce3f1b3aca5b7b6b13918a8edf8bb48d"
+  },
+  "typecheck": "PASS",
+  "build": "PASS",
+  "pagesPaths": "PASS (CI environment flags supplied)",
+  "releaseAndWorkerIdentity": "PASS, dirty=false",
+  "initialCompleteSafetyCommands": {
+    "source": "bd306f6f8722732ffe09217700e6c1f37a3df313",
+    "commands": 31,
+    "result": "PASS",
+    "logSha256": "a56b8bbe9a08b11de9d092e1e185ac5c62e3ac6d8b50307fd908219965873ce8"
+  },
+  "finalFiniteSuccessorAndParentTamperTests": "PASS",
+  "ci": "See the PR current HEAD Verify; no old SHA result is substituted",
+  "notDeployed": true
+}

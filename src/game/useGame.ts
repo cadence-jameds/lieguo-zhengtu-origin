@@ -33,6 +33,8 @@ export function useGame(){
  const [offline,setOffline]=useState<OfflineSummary|null>(null);
  const [loadPhase,setLoadPhase]=useState('啟動世界引擎'),[loadProgress,setLoadProgress]=useState<number|null>(null),[loadEvents,setLoadEvents]=useState(0);
  const stopCurrentLoad=useRef<(()=>void)|null>(null);
+ const [engineGeneration,setEngineGeneration]=useState(0);const restartMode=useRef<'load'|'recovery'>('load');
+ const suspendRuntime=useRef<()=>Promise<void>>(async()=>{});
  const [commandRows,setCommandRows]=useState<CommandView[]>([]);
  const commandRequests=useRef(new Map<string,Extract<RuntimeRequest,{type:'command'}>&{retired?:true}>()),branch=useRef<number|undefined>(undefined);
  const latestCommandCampaign=useRef<string|undefined>(undefined);
@@ -99,9 +101,11 @@ export function useGame(){
  },[]);
  useEffect(()=>{
   try{const drafts:unknown=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')??'[]');if(Array.isArray(drafts))for(const raw of drafts){const parsed=orderSchema.safeParse(raw?.order);if(!parsed.success)continue;const r={...raw,type:'command',order:parsed.data} as Extract<RuntimeRequest,{type:'command'}>&{retired?:true};commandRequests.current.set(waitKey(r.order.campaignId,r.order.commandId),r);updateCommand(r.order.commandId,{order:r.order,state:r.retired?'retired':'receive-failed',text:r.retired?'此舊身份已關閉，原始操作保留；請核對目前世界後重新確認。':'上次操作尚未確認持久接收。請先查詢結果，再決定是否重送原命令。'});}}catch{/* Invalid/unavailable session storage does not authorize execution. */}
-  let disposed=false,release:(()=>void)|undefined;const abort=new AbortController();
+  let disposed=false,release:(()=>void)|undefined;let lockDone:Promise<void>=Promise.resolve();const abort=new AbortController();
+  const stopForStorage=async()=>{stopCurrentLoad.current?.();disposed=true;abort.abort();release?.();worker.current?.terminate();worker.current=null;stopCurrentLoad.current=null;rejectIntel();rejectSaves(new Error('引擎已停止；已持久接收的命令仍保留。'));requests.current.clear();commands.current.clear();blocking.current.clear();setBusy(false);setInputBusy(false);displayClock.stop();changeStatus('error');setError('世界引擎已停止，可管理本機存檔或重新讀取。');await lockDone;};
+  suspendRuntime.current=stopForStorage;
   if(!navigator.locks){changeStatus('error');setError('瀏覽器無法鎖定正式存檔，請使用支援 Web Locks 的瀏覽器。');return;}
-  void withSaveLock(navigator.locks,abort.signal,async()=>{
+  lockDone=withSaveLock(navigator.locks,abort.signal,async()=>{
    if(disposed)return;
    writerHeld.current=true;
    const w=new Worker(new URL('./runtime.worker.ts',import.meta.url),{type:'module'});worker.current=w;
@@ -110,11 +114,11 @@ export function useGame(){
    const clearWatchdog=()=>{clearTimeout(watchdog);watchdog=undefined;};
    const stop=(message:string)=>{
     if(worker.current!==w)return;
-    clearWatchdog();recovery.dispose();w.terminate();worker.current=null;loading=false;rejectIntel();rejectSaves(new Error(message));requests.current.clear();commands.current.clear();displayClock.stop();setBusy(false);blocking.current.clear();setInputBusy(false);setError(message);changeStatus('error');
+    clearWatchdog();recovery.dispose();w.terminate();worker.current=null;release?.();loading=false;rejectIntel();rejectSaves(new Error(message));requests.current.clear();commands.current.clear();displayClock.stop();setBusy(false);blocking.current.clear();setInputBusy(false);setError(message);changeStatus('error');
    };
-   const arm=()=>{clearWatchdog();watchdog=setTimeout(()=>stop('載入階段「'+loadStage+'」超過 30 秒沒有回應。已停止本次載入，原有存檔與回復點保留，請重新整理後重試。'),30000);};
+   const arm=()=>{clearWatchdog();watchdog=setTimeout(()=>stop('載入階段「'+loadStage+'」超過 30 秒沒有回應。已停止本次載入，原有存檔與回復點保留，可重新讀取、開始全新戰役或管理本機存檔。'),30000);};
    let loadStage='啟動世界引擎';
-   stopCurrentLoad.current=()=>stop('已停止載入，原有存檔與回復點保留，請重新整理後重試。');
+   stopCurrentLoad.current=()=>stop('已停止載入，原有存檔與回復點保留，可重新讀取、開始全新戰役或管理本機存檔。');
    setLoadPhase(loadStage);setLoadProgress(null);setLoadEvents(0);arm();
    w.onmessage=e=>{
     if(disposed||worker.current!==w)return;
@@ -180,11 +184,11 @@ export function useGame(){
      a.href=url;a.download='列國征途-formal-'+r.mode+'.realm-save';a.click();URL.revokeObjectURL(url);
     }
    };
-   w.onerror=e=>{loading=false;clearWatchdog();recovery.dispose();rejectIntel();rejectSaves(new Error(e.message));requests.current.clear();commands.current.clear();displayClock.stop();setError(e.message);changeStatus('error');setBusy(false);};w.postMessage({type:'load',stateMode:'projection-v2'});
-   await new Promise<void>(r=>{release=r;});writerHeld.current=false;recovery.dispose();w.terminate();worker.current=null;
-  },()=>{changeStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{writerHeld.current=false;if(!disposed){setError(String(e));changeStatus('error');}});
+   w.onerror=e=>stop(e.message||'Worker 啟動失敗；原始資料保留，請重試或管理本機存檔。');w.postMessage({type:'load',stateMode:'projection-v2',...(restartMode.current==='recovery'?{startupRecovery:true}:{})});
+   await new Promise<void>(r=>{release=r;});clearWatchdog();recovery.dispose();w.terminate();if(!worker.current||worker.current===w){writerHeld.current=false;if(worker.current===w)worker.current=null;}
+  },()=>{changeStatus('locked');setError('另一分頁持有正式存檔，請先關閉它。');}).catch(e=>{writerHeld.current=false;if(!disposed){worker.current?.terminate();worker.current=null;setBusy(false);blocking.current.clear();setInputBusy(false);setError(String(e));changeStatus('error');}});
   return()=>{clearTimeout(commandTimer.current);disposed=true;writerHeld.current=false;stopCurrentLoad.current=null;abort.abort();release?.();rejectIntel();rejectSaves(new Error('保存已中斷。'));requests.current.clear();commands.current.clear();displayClock.stop();};
- },[]);
+ },[engineGeneration]);
  useEffect(()=>{const change=()=>{if(document.hidden)displayClock.stop();worker.current?.postMessage({type:document.hidden?'away':'resume',...(document.hidden?{visibilityAt:performance.timeOrigin+performance.now()}:{})});};const hide=()=>{displayClock.stop();worker.current?.postMessage({type:'away',visibilityAt:performance.timeOrigin+performance.now()});};document.addEventListener('visibilitychange',change);window.addEventListener('pagehide',hide);return()=>{document.removeEventListener('visibilitychange',change);window.removeEventListener('pagehide',hide);};},[]);
  useEffect(()=>{
   for(const row of commandRows){const key=waitKey(row.order.campaignId,row.commandId);
@@ -206,6 +210,7 @@ export function useGame(){
  // before React commits the new target level shown by a construction button.
  const createIssue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{const g=renderedWorld.current;if(!g||!worker.current||!intakeIdentity.current||statusRef.current!=='ready'||blocking.current.size){setFeedback({kind:'error',text:'戰役尚未就緒或正在切換，操作未受理；請稍後確認。'});return;}const order:FormalOrder={commandId:playerCommandId(intakeIdentity.current!.epoch,++intakeIdentity.current!.sequence),campaignId:g.campaignId,issuerId:g.playerFactionId,issuedWorldTime:g.time,expectedRevision:payload.type==='governance.set'&&base?base.revision:g.revision,payload};send({type:'command',order,branch:g.projection.branch,projection:g.projection,...captureIntent(g,order),...(payload.type==='governance.set'?{governanceBase:base??governanceBase(g,payload.cityId)}:{playerBase:playerOrderBase(g,payload)})});return order;},[send]);
  const issue=useCallback((payload:FormalCommand,base?:GovernanceBase)=>{createIssue(payload,base);},[createIssue]);
+ const restartEngine=(mode:'load'|'recovery')=>{stopCurrentLoad.current?.();restartMode.current=mode;setIncompatibleStart(undefined);setError('');setNotice('');setFeedback({kind:'idle',text:''});intakeIdentity.current=undefined;branch.current=undefined;current.current=null;presentationStore.reset();setReports([]);setBackups([]);setOffline(null);setLoadPhase('啟動世界引擎');setLoadProgress(null);setLoadEvents(0);changeStatus('loading');setEngineGeneration(n=>n+1);};
  const importFile=async(file:File)=>{if(file.size>100*1024*1024){setError('存檔超過 100 MiB。');return;}send({type:'import',text:await file.text(),transitionId:crypto.randomUUID()});};
- return{confirmCommand:(row:CommandView)=>{if(row.order.campaignId!==renderedWorld.current?.campaignId){setFeedback({kind:'error',text:'原始操作屬於另一戰役，請返回原戰役核對，或在目前戰役重新選擇目標。'});return;}const created=createIssue(row.order.payload);if(created)forgetDraft(row.commandId,row.order.campaignId);},presentationStore,recoverProjection:()=>recoveryRef.current?.retry(),previewBranch:world?`${world.projection.campaignId}:${world.projection.branch}:${world.projection.writerEpoch}`:undefined,commandRows,inputBusy:inputBusy||status!=='ready',queryCommand:(row:CommandView)=>send({type:'commandQuery',campaignId:row.order.campaignId,commandId:row.order.commandId}),retryReceive:(row:CommandView)=>{const request=commandRequests.current.get(waitKey(row.order.campaignId,row.commandId));if(request&&!request.retired)send(request);else setFeedback({kind:'error',text:'請依原始操作內容重新確認。'});},legacyAvailable,campaignStatus,incompatibleStart,prepareUpdate,exportRawBackup,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),retryLoad:()=>window.location.reload()};
+ return{confirmCommand:(row:CommandView)=>{if(row.order.campaignId!==renderedWorld.current?.campaignId){setFeedback({kind:'error',text:'原始操作屬於另一戰役，請返回原戰役核對，或在目前戰役重新選擇目標。'});return;}const created=createIssue(row.order.payload);if(created)forgetDraft(row.commandId,row.order.campaignId);},presentationStore,recoverProjection:()=>recoveryRef.current?.retry(),previewBranch:world?`${world.projection.campaignId}:${world.projection.branch}:${world.projection.writerEpoch}`:undefined,commandRows,inputBusy:inputBusy||status!=='ready',queryCommand:(row:CommandView)=>send({type:'commandQuery',campaignId:row.order.campaignId,commandId:row.order.commandId}),retryReceive:(row:CommandView)=>{const request=commandRequests.current.get(waitKey(row.order.campaignId,row.commandId));if(request&&!request.retired)send(request);else setFeedback({kind:'error',text:'請依原始操作內容重新確認。'});},legacyAvailable,campaignStatus,incompatibleStart,prepareUpdate,exportRawBackup,feedback,reportEpoch,reportStatus,reportData,readCityIntel,offline,clearOffline:()=>setOffline(null),world,status,error,notice,busy,backups,reports,reportCount,transition,synced,sync,send,issue,importFile,loadPhase,loadProgress,loadEvents,cancelLoad:()=>stopCurrentLoad.current?.(),suspendForStorage:()=>suspendRuntime.current(),restartForNew:()=>restartEngine('recovery'),retryLoad:()=>restartEngine('load')};
 }

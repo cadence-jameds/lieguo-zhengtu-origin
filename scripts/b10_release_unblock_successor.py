@@ -58,17 +58,21 @@ def read_record(root=ROOT):
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned bounded-save proof or grant';return r
 def accepts(path,predecessor,root=ROOT):
  r=read_record(root);entry=r['changes'].get(path)
- return bool(entry and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==entry['after'])
+ if entry and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==entry['after']:return True
+ from android_startup_successor import accepts as child
+ return child(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
- if path not in ADAPTER_EDITS:return False
+ from android_startup_successor import accepts_adapter as child
+ if path not in ADAPTER_EDITS:return child(path,before,root)
  read_record(root)
- return before==previous(BASE,path) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return before==previous(BASE,path) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child(path,adapters()[path],root))
 def validate(root=ROOT):
+ from android_startup_successor import accepts as child, accepts_adapter as child_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unrecorded bounded-save edit',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded bounded-save edit',p)
  for section in ['invariants','historical']:
-  for p,d in r[section].items():assert sha((root/p).read_bytes())==d,('Changed preserved gameplay/source/evidence',p)
- for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed exact successor adapter',p)
+  for p,d in r[section].items():assert sha((root/p).read_bytes())==d or section=='invariants' and child(p,d,root),('Changed preserved gameplay/source/evidence',p)
+ for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Changed exact successor adapter',p)
  # Explicitly retain the original workload and deadlines. These checks supplement
  # the exact source hashes; they do not replace the full regression runner.
  assert 'historyFixture(150000)' in (root/'src/game/formal/persistence.test.ts').read_text()
