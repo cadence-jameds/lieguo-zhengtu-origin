@@ -5,7 +5,13 @@ import {deleteLocalCampaigns,exportSelectedCampaigns,inspectLocalCampaigns,type 
 /** Deliberately independent of the Runtime Worker and its request queue. */
 export function LocalCampaignManager({suspend,onClose,onComplete}:{suspend:()=>Promise<void>;onClose:()=>void;onComplete:()=>void}){
  const [rows,setRows]=useState<StorageEntry[]>([]),[selected,setSelected]=useState<string[]>([]),[confirm,setConfirm]=useState(false),[busy,setBusy]=useState(true),[error,setError]=useState(''),[results,setResults]=useState<DeleteResult[]>([]);
- const refresh=async()=>{const found=await inspectLocalCampaigns();setRows(found);setResults(old=>old.map(r=>r.state==='uncertain'&&found.find(x=>x.name===r.name)?.state==='absent'?{...r,state:'absent',text:'重新檢查已確認資料庫不存在。'}:r));};
+ const refresh=async()=>{const found=await inspectLocalCampaigns();setRows(found);setResults(old=>old.map(r=>{
+  if(r.state!=='uncertain')return r;const observed=found.find(x=>x.name===r.name);
+  if(observed?.state==='absent')return {...r,state:'absent',text:'重新檢查已確認資料庫不存在。'};
+  // A completed read-open is ordered after the pending delete request. If the
+  // DB is readable again, allow preserving it and leaving this recovery screen.
+  return observed?.state==='present'?{...r,state:'failed',text:'重新檢查資料庫仍存在，未確認清理完成；可重試或返回首頁。'}:r;
+ }));};
  useEffect(()=>{let active=true;void suspend().then(async()=>{if(active)await refresh();}).catch(e=>{if(active)setError(String(e));}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[]);
  const close=()=>{if(busy)return;if(results.some(r=>r.state==='uncertain')){setError('仍有未確認的刪除請求，請關閉其他遊戲分頁後重新檢查；尚未重新啟動引擎。');return;}onClose();};
  const backup=async()=>{setBusy(true);setError('');try{const text=await exportSelectedCampaigns(selected),url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='列國征途-刪除前原始備份.realm-save';a.click();URL.revokeObjectURL(url);}catch(e){setError(String(e));}finally{setBusy(false);}};
