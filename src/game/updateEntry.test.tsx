@@ -22,7 +22,7 @@ import {OLD_CAMPAIGN_MESSAGE} from './formal/saveCodec';
 it('old-campaign new start is enabled only after the current namespace is confirmed empty and legacy is historical',()=>{
  for(const campaignStatus of ['historical','checking','stored','incompatible','unreadable','empty'] as const){
   const html=renderToStaticMarkup(<Home {...props} campaignStatus={campaignStatus} error={OLD_CAMPAIGN_MESSAGE} legacyAvailable onExportLegacy={()=>{}}/>),box=document.createElement('div');box.innerHTML=html;
-  const start=[...box.querySelectorAll('button')].find(b=>b.textContent==='開始新遊戲')!;
+  const start=[...box.querySelectorAll('button')].find(b=>b.textContent==='開始遊戲')!;
   expect(start.disabled,campaignStatus).toBe(campaignStatus!=='historical');expect(html).toContain('匯出舊存檔備份');expect(html).not.toContain('尚無本機進度，請選擇開始新遊戲。');
  }
 });

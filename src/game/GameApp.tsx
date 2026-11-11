@@ -1,7 +1,10 @@
 import {LocalCampaignManager} from './LocalCampaignManager';
 import {Fragment} from 'react';
 import {PreviewBranchContext} from './presentation/useConstructionPreviews';
-import {CommandInbox} from './presentation/CommandInbox';
+import {CommandFailure} from './presentation/CommandFailure';
+import {ArtLoading} from './presentation/ArtLoading';
+import {artLoader} from './presentation/artLoader';
+import {COMMON_ART,GAME_ART,civilizationAssets,firstScreenArt} from './presentation/artInventory';
 import {JourneyGoals} from './presentation/JourneyGoals';
 import {claimableGrowthCount} from './formal/growthTasks';
 import {useMobileShortcuts} from './mobileNavigationPreferences';
@@ -22,7 +25,7 @@ import {CampaignSettings} from './presentation/CampaignSettings';
 import {DeveloperControls} from './presentation/DeveloperControls';
 import {effectiveSpeed} from './formal/playtest';
 import type {ArmyTarget} from './formal/combatModel';
-import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
+import {useCallback,useEffect,useMemo,useRef,useState,useSyncExternalStore} from 'react';
 import {useGame} from './useGame';
 import {Home} from './FormalHome';
 import {Start} from './presentation/Start';
@@ -47,6 +50,7 @@ import {CIV_NAMES,LABELS} from './presentation/artMap';
 import './presentation/playable.css';
 import './presentation/parity.css';
 import './presentation/integrationV94.css';
+const inactiveArtSubscribe=()=>()=>{};
 const MOBILE_QUERY='(max-width: 760px), (max-width: 1100px) and (pointer: coarse)';
 /** DEMO shell → Formal presentation → useGame → Worker → commands / persistence. */
 export default function GameApp(){
@@ -59,21 +63,27 @@ export default function GameApp(){
  useEffect(()=>{if(!awaitNew)return;if(engine.incompatibleStart||status==='ready'&&!world){setAwaitNew(false);setFresh(true);}else if(status==='error'||status==='locked')setAwaitNew(false);},[awaitNew,status,engine.incompatibleStart,world]);
  const taskReadyCount=world?claimableGrowthCount(world):0;
  const navigationReminders:NavigationReminders<View>={tasks:{count:taskReadyCount,attention:taskReadyCount>0},reports:{count:engine.reportStatus?.unread??0,attention:(engine.reportStatus?.alerts??0)>0}};
- const [lastFailure,setLastFailure]=useState(''),[showFailure,setShowFailure]=useState(false);
  const [quickPreference,setQuickPreference]=useQuickPreference();
  const [centerRequest,setCenterRequest]=useState(0),[armyMarchRequest,setArmyMarchRequest]=useState(0);
  const fileInput=useRef<HTMLInputElement>(null),waiting=useRef('');
  const clearPresentationDrafts=useCallback(()=>{setSelectedCity(undefined);setMapPoint(undefined);setTargetPoint(undefined);setArmyTarget(undefined);setArmyMarchRequest(0);setCenterRequest(0);setRename(false);setCityName('');setRestoreId(null);setResource(null);setPendingImport(null);setMore(false);setCustomizeNavigation(false);setView('city');},[]);
  usePresentationScopeReset(engine.previewBranch,clearPresentationDrafts);
  const owned=useMemo(()=>world?spatial(world).owned(world.playerFactionId):[],[world]),homeId=owned.find(c=>c.id===selectedCity)?.id??owned[0]?.id,homeSelector=useMemo(()=>cityScreenSelector(homeId),[homeId]),homeWorld=usePresentationSelector(engine.presentationStore,homeSelector),home=useMemo(()=>homeWorld&&homeId?citySnapshot(homeWorld,homeId):undefined,[homeWorld,homeId]),f=world?.factions.find(f=>f.id===world.playerFactionId);
+ const [entryAssets,setEntryAssets]=useState<string[]|null>(null);
+ const artVersion=useSyncExternalStore(entryAssets?artLoader.subscribe:inactiveArtSubscribe,()=>entryAssets?artLoader.snapshot():0,()=>0);
+ const entryGeneration=useRef(0);
+ useEffect(()=>{artLoader.enqueue(COMMON_ART,80);artLoader.enqueue(GAME_ART,-10);},[]);
+ useEffect(()=>{if(f)artLoader.enqueue(civilizationAssets(f.civilizationId),40);},[f?.civilizationId]);
+ const enterWorld=async()=>{const generation=++entryGeneration.current,paths=world?firstScreenArt(homeWorld??world,home):[];const p=await artLoader.inspect(paths);if(generation!==entryGeneration.current)return;if(p.remaining===0){setEntered(true);setFresh(false);}else setEntryAssets(paths);};
+ useEffect(()=>{if(entryAssets&&artLoader.progress(entryAssets).remaining===0){setEntryAssets(null);setFresh(false);setEntered(true);}},[entryAssets,artVersion]);
  const openRename=useCallback(()=>{if(home){setCityName(home.name);setRename(true);}},[home?.name]);
  const centerOpened=useCallback(()=>setCenterRequest(0),[]);
  const selectMapCity=useCallback((id:CityId)=>{setSelectedCity(id);setView('city');setMapPoint(undefined);setMore(false);setArmyMarchRequest(0);setTargetPoint(undefined);},[]);
  const selectMapLand=useCallback((p:{x:number;y:number})=>{setArmyTarget(undefined);setTargetPoint(p);setView('army');},[]);
 
  useEffect(()=>{const media=window.matchMedia(MOBILE_QUERY),change=()=>{setMobile(media.matches);setMore(false);setCustomizeNavigation(false);};media.addEventListener('change',change);return()=>media.removeEventListener('change',change);},[]);
- useEffect(()=>{if(engine.transition&&waiting.current===engine.transition){waiting.current='';setLastFailure('');setShowFailure(false);setToast('');clearPresentationDrafts();setFresh(false);setEntered(true);setView('city');setArmyMarchRequest(0);setSelectedCity(undefined);setTargetPoint(undefined);setArmyTarget(undefined);}},[engine.transition]);
- useEffect(()=>{const failed=engine.error||((engine.feedback.kind==='error'||engine.feedback.kind==='uncertain')?engine.feedback.text:'');if(failed)setLastFailure(failed);setToast(engine.error||engine.feedback.text||engine.notice);const duration=engine.error?6000:engine.feedback.text?feedbackDuration(engine.feedback.kind):6000;if(!duration)return;const id=setTimeout(()=>setToast(''),duration);return()=>clearTimeout(id);},[engine.error,engine.notice,engine.feedback]);
+ useEffect(()=>{if(engine.transition&&waiting.current===engine.transition){waiting.current='';setToast('');clearPresentationDrafts();void enterWorld();setView('city');setArmyMarchRequest(0);setSelectedCity(undefined);setTargetPoint(undefined);setArmyTarget(undefined);}},[engine.transition]);
+ useEffect(()=>{setToast(engine.error||engine.feedback.text||engine.notice);const duration=engine.error?6000:engine.feedback.text?feedbackDuration(engine.feedback.kind):6000;if(!duration)return;const id=setTimeout(()=>setToast(''),duration);return()=>clearTimeout(id);},[engine.error,engine.notice,engine.feedback]);
  const navigate=(v:View,entry?:'march')=>{setMapPoint(undefined);setView(v);setMore(false);setArmyMarchRequest(n=>entry==='march'?n+1:0);if(entry==='march'){setArmyTarget(undefined);setTargetPoint(undefined);}else if(v!=='army')setTargetPoint(undefined);};
  const transition=(type:'start'|'import'|'restore',data:Record<string,unknown>)=>{const id=crypto.randomUUID();waiting.current=id;if(type==='start')engine.send({type,seed:data.seed as number,speed:data.speed as number,name:data.name as string,civilizationId:data.civilizationId as string,offlineHours:data.offlineHours as 0|1|4|8|12,replaceIncompatible:engine.incompatibleStart,transitionId:id});else if(type==='restore')engine.send({type,id:data.id as number,transitionId:id});else engine.send({type,text:data.text as string,transitionId:id});};
  const importFile=async()=>{const file=pendingImport;if(!file)return;if(file.size>100*1024*1024){setToast('存檔超過 100 MiB。');return;}try{const text=await file.text();transition('import',{text});setPendingImport(null);}catch{setToast('無法讀取檔案，原戰役保留。');}};
@@ -85,12 +95,13 @@ export default function GameApp(){
  const fileControl=<input ref={fileInput} hidden type="file" accept=".realm-save,.json" onChange={e=>{const file=e.target.files?.[0];if(file)setPendingImport(file);e.target.value='';}}/>;
 
  const importModal=pendingImport&&<Dialog title="匯入戰役存檔" onClose={()=>setPendingImport(null)}><p>{pendingImport.name} · {(pendingImport.size/1024).toFixed(1)} KB</p><p>只接受正式戰役存檔。確認後驗證檢查碼、建立回復點並替換目前戰役；驗證失敗時保留原進度。</p><div className="dialog-actions"><button onClick={()=>setPendingImport(null)}>取消</button><button className="primary" disabled={busy||status==='locked'} onClick={()=>void importFile()}>確認匯入</button></div></Dialog>;
- const toastUI=<><ProjectionSyncNotice store={engine.presentationStore} onRetry={engine.recoverProjection}/><CommandInbox rows={engine.commandRows} onQuery={engine.queryCommand} onRetry={engine.retryReceive} onConfirm={engine.confirmCommand} onReload={engine.retryLoad}/>{toast&&<div className={'toast '+(engine.error||engine.feedback.kind==='error'?'error':'')} role="status" aria-live="polite">{toast}</div>}{lastFailure&&<button className="command-error-history" onClick={()=>setShowFailure(true)}>查看上次指令問題</button>}{showFailure&&<Dialog title="上次指令問題" onClose={()=>setShowFailure(false)}><p>{lastFailure}</p><button onClick={()=>setShowFailure(false)}>關閉</button></Dialog>}</>;
- if(manageStorage)return <LocalCampaignManager suspend={engine.suspendForStorage} onClose={()=>{setManageStorage(false);setEntered(false);setFresh(false);engine.retryLoad();}} onComplete={()=>{setManageStorage(false);setEntered(false);setFresh(false);setLastFailure('');setToast('');clearPresentationDrafts();engine.retryLoad();}}/>;
+ const toastUI=<><ProjectionSyncNotice store={engine.presentationStore} onRetry={engine.recoverProjection}/><CommandFailure rows={engine.commandRows} onQuery={engine.queryCommand} onRetry={engine.retryReceive} onReload={engine.retryLoad}/>{toast&&<div className={'toast '+(engine.error||engine.feedback.kind==='error'?'error':'')} role="status" aria-live="polite">{toast}</div>}</>;
+ if(manageStorage)return <LocalCampaignManager suspend={engine.suspendForStorage} onClose={()=>{setManageStorage(false);setEntered(false);setFresh(false);engine.retryLoad();}} onComplete={()=>{setManageStorage(false);setEntered(false);setFresh(false);setToast('');clearPresentationDrafts();engine.retryLoad();}}/>;
  if(status==='locked')return <div className="loading-screen"><BrandMark/><h1>戰役已在另一個分頁開啟</h1><p>{engine.error}</p><button onClick={engine.retryLoad}>重新取得寫入權並重試</button><button onClick={()=>setManageStorage(true)}>管理本機戰役存檔</button></div>;
+ if(entryAssets)return <><ArtLoading paths={entryAssets} onCancel={()=>{entryGeneration.current++;setEntryAssets(null);setFresh(false);setEntered(false);}}/>{toastUI}</>;
  if(fresh)return <><Start busy={busy||updates.updating} hasSave={!!world||!!engine.incompatibleStart||engine.campaignStatus==='historical'} incompatible={!!engine.incompatibleStart||engine.campaignStatus==='historical'} onClose={()=>setFresh(false)} onStart={(civilizationId,seed,speed,name,offlineHours)=>transition('start',{civilizationId,seed,speed,name,offlineHours})}/>{toastUI}</>;
  if(entered&&world&&!home&&f&&world.extinction?.extinct.includes(f.id))return <>{view==='reports'?<><button onClick={()=>setView('city')}>返回滅國畫面</button><FormalReportsView world={world} busy={busy||updates.updating} rows={engine.reports} data={engine.reportData} epoch={engine.reportEpoch} status={engine.reportStatus} send={engine.send} initialFilter="battle" onMap={()=>setView('city')}/></>:<RebirthView key={engine.previewBranch} world={world} issue={engine.issue} busy={engine.inputBusy||updates.updating} onHome={()=>setEntered(false)} onReports={()=>setView('reports')} onNew={()=>setFresh(true)} mobile={mobile} onLoad={()=>fileInput.current?.click()} onExport={()=>engine.send({type:'export',mode:'full'})}/>} {fileControl}{importModal}{toastUI}</>;
- if(!entered||!world||!home||!f)return <><Home onManageStorage={()=>setManageStorage(true)} canRecoverNew={status==='error'||status==='ready'} canReplaceIncompatible={!!engine.incompatibleStart} campaignStatus={engine.campaignStatus} onExportRaw={()=>void engine.exportRawBackup()} updateLabel={updateGate.label} updateReason={updateGate.reason} updateCode={updateGate.code} loadPhase={engine.loadPhase} loadProgress={engine.loadProgress} loadEvents={engine.loadEvents} onCancelLoad={engine.cancelLoad} updateStageLabel={updates.label} updatePhase={updates.phase} updateAvailable={updates.available} updating={updates.updating} updateDisabled={updateDisabled} onUpdate={confirmed=>{preserveHistory.current=confirmed===true;void updates.update().finally(()=>{preserveHistory.current=false;});}} onCheck={()=>void checkUpdate()} updateText={updateText} world={world} theme={theme} onThemeChange={setTheme} busy={busy||updates.updating} loading={status==='loading'} error={engine.error} onNew={startNew} onStart={()=>setEntered(true)} onRetry={engine.retryLoad} onExport={mode=>engine.send({type:'export',mode})} onExportLegacy={()=>engine.send({type:'exportLegacy'})} legacyAvailable={engine.legacyAvailable} onImport={()=>fileInput.current?.click()}/>{fileControl}{importModal}{toastUI}</>;
+ if(!entered||!world||!home||!f)return <><Home onManageStorage={()=>setManageStorage(true)} canRecoverNew={status==='error'||status==='ready'} canReplaceIncompatible={!!engine.incompatibleStart} campaignStatus={engine.campaignStatus} onExportRaw={()=>void engine.exportRawBackup()} updateLabel={updateGate.label} updateReason={updateGate.reason} updateCode={updateGate.code} loadPhase={engine.loadPhase} loadProgress={engine.loadProgress} loadEvents={engine.loadEvents} onCancelLoad={engine.cancelLoad} updateStageLabel={updates.label} updatePhase={updates.phase} updateAvailable={updates.available} updating={updates.updating} updateDisabled={updateDisabled} onUpdate={confirmed=>{preserveHistory.current=confirmed===true;void updates.update().finally(()=>{preserveHistory.current=false;});}} onCheck={()=>void checkUpdate()} updateText={updateText} world={world} theme={theme} onThemeChange={setTheme} busy={busy||updates.updating} loading={status==='loading'} error={engine.error} onNew={startNew} onStart={()=>void enterWorld()} onRetry={engine.retryLoad} onExport={mode=>engine.send({type:'export',mode})} onExportLegacy={()=>engine.send({type:'exportLegacy'})} legacyAvailable={engine.legacyAvailable} onImport={()=>fileInput.current?.click()}/>{fileControl}{importModal}{toastUI}</>;
  const props={world,city:home,issue:engine.issue,busy:engine.inputBusy||updates.updating},p=netProduction(world,home);
  return <Fragment key={engine.previewBranch}><PresentationStoreContext.Provider value={engine.presentationStore}><PreviewBranchContext.Provider value={String(engine.previewBranch??'unknown')}><TargetIntelContext.Provider value={engine.readCityIntel}><Shell world={world} city={home} cities={owned} mobile={mobile} view={view} onEra={()=>{navigate('city');setCenterRequest(n=>n+1);}} onView={navigate} onCity={id=>{setSelectedCity(id);setCityName('');setTargetPoint(undefined);}} onHome={()=>setEntered(false)} onResource={setResource} onMore={()=>setMore(true)} moreOpen={more} mobileShortcuts={shortcuts} navigationReminders={navigationReminders} busy={busy||updates.updating} unread={engine.reportStatus?.unread??0} alerts={engine.reportStatus?.alerts??0}>
  {view==='map'&&<FormalWorldMap key={engine.previewBranch} mobile={mobile} world={world} focusPoint={mapPoint} focusCityId={homeId} onSelect={selectMapCity} issue={engine.issue} busy={engine.inputBusy||updates.updating} onSettle={selectMapLand}/>}
