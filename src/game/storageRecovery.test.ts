@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import {afterEach,expect,it,vi} from 'vitest';
-import {campaignDatabases,deleteLocalCampaigns,exportSelectedCampaigns,inspectLocalCampaigns} from './storageRecovery';
-import {FORMAL_DB_NAME,FORMAL_WRITER_LOCK} from './formal/versions';
+import {campaignDatabases,campaignWriterLocks,deleteLocalCampaigns,exportSelectedCampaigns,inspectLocalCampaigns} from './storageRecovery';
+import {FORMAL_DB_NAME} from './formal/versions';
 const locks=(held='')=>({request:async(name:string,_options:unknown,run:(lock:unknown)=>Promise<unknown>)=>run(name===held?null:{name})}) as LockManager;
 const seed=(name:string)=>new Promise<IDBDatabase>((resolve,reject)=>{const r=indexedDB.open(name,1);r.onupgradeneeded=()=>r.result.createObjectStore('saves');r.onerror=()=>reject(r.error);r.onsuccess=()=>{const db=r.result,t=db.transaction('saves','readwrite');t.objectStore('saves').put({synthetic:true},'current');t.oncomplete=()=>resolve(db);};});
 const read=(name:string)=>new Promise<unknown>((resolve,reject)=>{const r=indexedDB.open(name);r.onerror=()=>reject(r.error);r.onsuccess=()=>{const d=r.result,t=d.transaction('saves','readonly'),q=t.objectStore('saves').get('current');q.onsuccess=()=>{d.close();resolve(q.result);};};});
@@ -17,7 +17,7 @@ it('requires explicit consent, and deletes only selected data after optionally e
  const archive=JSON.parse(await exportSelectedCampaigns([FORMAL_DB_NAME]));expect(Object.keys(archive.databases)).toEqual([FORMAL_DB_NAME]);
  const outcome=await deleteLocalCampaigns(['lieguo-formal-ledger-v1'],true,locks());expect(outcome[0].state).toBe('deleted');expect(await read(FORMAL_DB_NAME)).toEqual({synthetic:true});expect((await indexedDB.databases()).some(d=>d.name==='lieguo-formal-ledger-v1')).toBe(false);
 });
-it.each([FORMAL_WRITER_LOCK,'guozhan-river-valley-v020-writer'])('writer lock %s prevents every deletion',async held=>{
+it.each(campaignWriterLocks)('writer lock %s prevents every deletion',async held=>{
  const db=await seed(FORMAL_DB_NAME);db.close();const remove=vi.spyOn(indexedDB,'deleteDatabase');await expect(deleteLocalCampaigns([FORMAL_DB_NAME],true,locks(held))).rejects.toThrow('Writer Lock');expect(remove).not.toHaveBeenCalled();expect(await read(FORMAL_DB_NAME)).toEqual({synthetic:true});
 });
 it('blocked exclusive probe issues no destructive request, including after the blocker later closes',async()=>{

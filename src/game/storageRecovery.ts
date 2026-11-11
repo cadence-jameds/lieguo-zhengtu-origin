@@ -10,6 +10,8 @@ export const campaignDatabases=[
  {name:'guozhan-river-valley-v027',label:'舊版河谷戰役',scope:'此舊版戰役的全部資料'},
  {name:'guozhan-river-valley-v020',label:'早期河谷戰役',scope:'此舊版戰役的全部資料'},
 ] as const;
+// Pre-B10 Formal versions used their namespace as the writer-lock prefix.
+export const campaignWriterLocks=[...new Set([FORMAL_WRITER_LOCK,...campaignDatabases.map(d=>`${d.name}-writer`)])];
 export type StorageEntry={name:string;label:string;scope:string;state:'present'|'absent'|'unreadable';tables?:Record<string,number>;error?:string};
 export type DeleteResult={name:string;state:'deleted'|'absent'|'failed'|'uncertain'|'not-attempted';text:string};
 const message=(e:unknown)=>e instanceof Error?e.message:String(e);
@@ -69,8 +71,8 @@ async function deleteOne(name:string):Promise<DeleteResult>{
 }
 export async function deleteLocalCampaigns(names:readonly string[],confirmed:boolean,locks:LockManager):Promise<DeleteResult[]>{
  allowed(names);if(confirmed!==true)throw Error('尚未明確確認刪除；所有資料保留。');if(!locks)throw Error('瀏覽器不支援安全寫入鎖定，已停止刪除。');
- // New/retired Formal writers share one lock; pre-Formal pages use the second.
- const lockNames=[FORMAL_WRITER_LOCK,'guozhan-river-valley-v020-writer'];
+ // Current and retired generations use known, sometimes different writer locks.
+ const lockNames=campaignWriterLocks;
  const acquire=async(i:number):Promise<DeleteResult[]>=>i<lockNames.length?locks.request(lockNames[i],{ifAvailable:true},async lock=>{
   if(!lock)throw Error('另一分頁持有戰役 Writer Lock，已停止刪除；請先關閉該分頁。');return acquire(i+1);
  }):remove();
