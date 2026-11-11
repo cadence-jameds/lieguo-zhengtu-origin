@@ -17,10 +17,10 @@
 .rebirth-map-screen {height:100dvh;display:flex;flex-direction:column;min-width:0}
 .rebirth-map-screen>header {display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.5rem}
 .rebirth-map-screen>.world-map {flex:1;min-height:0}
-/* Anchor to the visible outskirts viewport, outside its scrolling/zoomed artwork. */
+/* One persistent Shell overlay follows view geometry without consuming layout height. */
 .city-scene-viewport{position:relative;isolation:isolate}
-.formal-protection-status{position:absolute;left:40%;top:8%;transform:translate(-50%,-50%);z-index:220;width:max-content}
-.formal-shell .city-scene-viewport .formal-protection-status .protection-shield{height:28px;min-height:28px;padding:3px 8px;border-radius:12px 12px 15px 15px;font-size:12px;line-height:20px;background:rgba(22,51,38,.88);color:#f0e5bd;border:1px solid #ac925c;box-shadow:0 2px 6px #0005;font-variant-numeric:tabular-nums;white-space:nowrap}
+.formal-protection-status{position:fixed;z-index:150;width:max-content}
+.formal-protection-status button.protection-shield{height:28px;min-height:28px;padding:3px 8px;border-radius:12px 12px 15px 15px;font-size:12px;line-height:20px;background:rgba(22,51,38,.88);color:#f0e5bd;border:1px solid #ac925c;box-shadow:0 2px 6px #0005;font-variant-numeric:tabular-nums;white-space:nowrap}
 .protection-details{position:fixed;z-index:160;width:min(350px,calc(100vw - 24px));box-sizing:border-box;overflow:auto;overscroll-behavior:contain;padding:14px;box-shadow:0 8px 24px #0008;font-size:14px;background:var(--surface,#1c2a22);color:var(--text,#eee8da);border:1px solid #ac925c;border-radius:8px}
 .protection-details>div{display:flex;justify-content:space-between;align-items:center}.protection-details p{line-height:1.65}
 .art-loading-screen{min-height:100dvh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at top,#343322,#111812 70%);color:var(--text)}
