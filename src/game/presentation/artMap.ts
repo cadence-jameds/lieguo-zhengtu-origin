@@ -70,6 +70,6 @@ export function cityPresentation(w:WorldRead,c:FormalCity){
  return{civ:civilizationArt(faction.civilizationId),formalCiv:faction.civilizationId,age,visualAge:visualAge(age),imperial:age===3,lots,fields,wall:c.wallLevel??0,wallJob:jobs.find(j=>j.target.kind==='building'&&j.target.key==='wall')};
 }
 export const constructionPercent=(j:Construction,time:number)=>Math.max(0,Math.min(100,(time-j.startsAt)/Math.max(1,j.durationMs)*100));
-export const assetURL=(path:string)=>globalThis.__FORMAL_EMBEDDED_ASSETS?.[path]??import.meta.env.BASE_URL+path;
+export {assetURL} from './artUrl';
 
 export const FIELD_NAMES={food:'農田',wood:'林地',stone:'石場',gold:'金礦'} as const;

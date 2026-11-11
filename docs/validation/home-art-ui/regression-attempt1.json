@@ -1,0 +1,80 @@
+{
+  "passed": 2512,
+  "failed": 18,
+  "skipped": 12,
+  "reportSha256": "7838ef389cd035e8b1179f21bcf36582e464b01a1ce6b4997dc9da44052b7fc7",
+  "failures": [
+    {
+      "test": "AI civilizations fight one another while retaining statistics instead of full AI-only reports",
+      "message": "Error: Test timed out in 60000ms."
+    },
+    {
+      "test": "every supported item has a native-world positive fixture and every declared counterexample executes against the real reducer",
+      "message": "Error: Test timed out in 60000ms."
+    },
+    {
+      "test": "T2/T4/T5/T6 Worker normal-1: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "T2/T4/T5/T6 Worker normal-25: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "T2/T4/T5/T6 Worker developer-50: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "T2/T4/T5/T6 Worker developer-100: offline freeze and rebirth publish only durable state; failure/retry, queued requests and first tick preserve the clock boundary",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "an actual failed IDB transaction preserves authority; terminal same-ID resend cannot execute and a confirmed new ID commits once",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "C4 due events and a player command share one atomic save with one authoritative revision",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "50 T1 rows and queries can complete behind a private T2, preserving FIFO and original payloads",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "a known durable result does not wait for a different command still entering T1",
+      "message": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "test": "desktop age0: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion",
+      "message": "AssertionError: expected '/art/city-scene-dark-construction-v2.…' to be '/art/city-scene-dark-construction-v2.…' // Object.is equality"
+    },
+    {
+      "test": "desktop age1: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion",
+      "message": "AssertionError: expected '/art/city-scene-feudal-construction-v…' to be '/art/city-scene-feudal-construction-v…' // Object.is equality"
+    },
+    {
+      "test": "desktop age3: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion",
+      "message": "AssertionError: expected '/art/unified/city-scene-imperial-cons…' to be '/art/unified/city-scene-imperial-cons…' // Object.is equality"
+    },
+    {
+      "test": "mobile age0: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion",
+      "message": "AssertionError: expected '/art/city-scene-dark-construction-v2.…' to be '/art/city-scene-dark-construction-v2.…' // Object.is equality"
+    },
+    {
+      "test": "mobile age1: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion",
+      "message": "AssertionError: expected '/art/city-scene-feudal-construction-v…' to be '/art/city-scene-feudal-construction-v…' // Object.is equality"
+    },
+    {
+      "test": "mobile age3: gate uses real wall commands, queued cancellation and unchanged DEMO art through completion",
+      "message": "AssertionError: expected '/art/unified/city-scene-imperial-cons…' to be '/art/unified/city-scene-imperial-cons…' // Object.is equality"
+    },
+    {
+      "test": "desktop: waiting wall keeps open scene and becomes construction art only after its shared lane is free",
+      "message": "AssertionError: expected '/art/city-scene-dark-open.webp?art=24…' to be '/art/city-scene-dark-open.webp' // Object.is equality"
+    },
+    {
+      "test": "mobile: waiting wall keeps open scene and becomes construction art only after its shared lane is free",
+      "message": "AssertionError: expected '/art/city-scene-dark-open.webp?art=24…' to be '/art/city-scene-dark-open.webp' // Object.is equality"
+    }
+  ]
+}

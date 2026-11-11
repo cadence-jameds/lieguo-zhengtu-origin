@@ -1,0 +1,332 @@
+{
+  "base": "db63881e2ffd617259d736e2c66342de791b331d",
+  "playableContent": "249197226a02863e01a400d1616ccca786d2a5bd",
+  "browser": "154.0.8037.57",
+  "networkDefinition": "server response body bytes actually sent, after gzip for text; excludes HTTP headers; browser/SW cache hits send zero body bytes",
+  "workbox": {
+    "before": {
+      "uniqueEntries": 394,
+      "rawResourceBytes": 74875327,
+      "manifestEntries": 395
+    },
+    "after": {
+      "uniqueEntries": 13,
+      "rawResourceBytes": 2696001,
+      "manifestEntries": 14
+    }
+  },
+  "inventory": {
+    "publicCount": 382,
+    "publicRawBytes": 72260827,
+    "productionCount": 307,
+    "productionRawBytes": 57660465,
+    "excludedCount": 75
+  },
+  "measurements": [
+    {
+      "name": "before first-home",
+      "elapsedMs": 12295.001716000002,
+      "requests": 406,
+      "networkBodyBytes": 75419992,
+      "artRequests": 383,
+      "artNetworkBodyBytes": 72803279,
+      "cacheEntries": {
+        "workbox-precache-v2-": 394
+      }
+    },
+    {
+      "name": "before city-first-screen-ready",
+      "ms": 1772.714444000001
+    },
+    {
+      "name": "before first-city",
+      "elapsedMs": 2222.2814830000025,
+      "requests": 0,
+      "networkBodyBytes": 0,
+      "artRequests": 0,
+      "artNetworkBodyBytes": 0,
+      "cacheEntries": {
+        "workbox-precache-v2-": 394
+      }
+    },
+    {
+      "name": "before second-home",
+      "elapsedMs": 3753.2151940000003,
+      "requests": 7,
+      "networkBodyBytes": 49295,
+      "artRequests": 0,
+      "artNetworkBodyBytes": 0,
+      "cacheEntries": {
+        "workbox-precache-v2-": 394
+      }
+    },
+    {
+      "name": "before second-city",
+      "elapsedMs": 574.773454000002,
+      "requests": 0,
+      "networkBodyBytes": 0,
+      "artRequests": 0,
+      "artNetworkBodyBytes": 0,
+      "cacheEntries": {
+        "workbox-precache-v2-": 394
+      }
+    },
+    {
+      "name": "after first-home",
+      "elapsedMs": 12639.229961999998,
+      "requests": 332,
+      "networkBodyBytes": 60323358,
+      "artRequests": 307,
+      "artNetworkBodyBytes": 57660269,
+      "cacheEntries": {
+        "lieguo-art-content-v1": 307,
+        "workbox-precache-v2-": 13
+      }
+    },
+    {
+      "name": "after city-first-screen-ready",
+      "ms": 1120.1891790000009
+    },
+    {
+      "name": "after first-city",
+      "elapsedMs": 1745.3326840000009,
+      "requests": 0,
+      "networkBodyBytes": 0,
+      "artRequests": 0,
+      "artNetworkBodyBytes": 0,
+      "cacheEntries": {
+        "lieguo-art-content-v1": 307,
+        "workbox-precache-v2-": 13
+      }
+    },
+    {
+      "name": "after second-home",
+      "elapsedMs": 3579.544750000001,
+      "requests": 9,
+      "networkBodyBytes": 65020,
+      "artRequests": 0,
+      "artNetworkBodyBytes": 0,
+      "cacheEntries": {
+        "lieguo-art-content-v1": 307,
+        "workbox-precache-v2-": 13
+      }
+    },
+    {
+      "name": "after second-city",
+      "elapsedMs": 1007.5727990000014,
+      "requests": 0,
+      "networkBodyBytes": 0,
+      "artRequests": 0,
+      "artNetworkBodyBytes": 0,
+      "cacheEntries": {
+        "lieguo-art-content-v1": 307,
+        "workbox-precache-v2-": 13
+      }
+    },
+    {
+      "name": "after missing-cache refill",
+      "elapsedMs": 2034.0244569999995,
+      "requests": 3,
+      "networkBodyBytes": 523061,
+      "artRequests": 1,
+      "artNetworkBodyBytes": 501690,
+      "cacheEntries": {
+        "lieguo-art-content-v1": 307,
+        "workbox-precache-v2-": 13
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "cached second entry skips animation",
+      "status": "PASS",
+      "data": {
+        "animations": 0
+      }
+    },
+    {
+      "name": "cached art remains visible offline, including reload",
+      "status": "PASS",
+      "data": {
+        "missing": 0
+      }
+    },
+    {
+      "name": "evicted required resource incrementally refills",
+      "status": "PASS",
+      "data": {
+        "artRequests": 1,
+        "bytes": 501690
+      }
+    },
+    {
+      "name": "homepage / protection / normal commands 1440",
+      "status": "PASS",
+      "data": {
+        "positions": [
+          {
+            "text": "開始遊戲",
+            "x": 219,
+            "y": 563.78125,
+            "w": 224,
+            "h": 48
+          },
+          {
+            "text": "載入進度",
+            "x": 455,
+            "y": 563.78125,
+            "w": 224,
+            "h": 48
+          },
+          {
+            "text": "⚙ 設定",
+            "x": 219,
+            "y": 623.78125,
+            "w": 460,
+            "h": 48
+          },
+          {
+            "text": "管理本機戰役存檔",
+            "x": 219,
+            "y": 683.78125,
+            "w": 460,
+            "h": 48
+          }
+        ],
+        "cityFirstScreenMs": 2108.1950829999987,
+        "preparedOnEntry": 80,
+        "commandSaved": true,
+        "inboxInvisible": true
+      }
+    },
+    {
+      "name": "homepage / protection / normal commands 390",
+      "status": "PASS",
+      "data": {
+        "positions": [
+          {
+            "text": "開始遊戲",
+            "x": 39,
+            "y": 592.359375,
+            "w": 150,
+            "h": 48
+          },
+          {
+            "text": "載入進度",
+            "x": 201,
+            "y": 592.359375,
+            "w": 150,
+            "h": 48
+          },
+          {
+            "text": "⚙ 設定",
+            "x": 39,
+            "y": 652.359375,
+            "w": 312,
+            "h": 48
+          },
+          {
+            "text": "管理本機戰役存檔",
+            "x": 39,
+            "y": 712.359375,
+            "w": 312,
+            "h": 48
+          }
+        ],
+        "cityFirstScreenMs": 2271.75142700001,
+        "preparedOnEntry": 101,
+        "commandSaved": true,
+        "inboxInvisible": true
+      }
+    },
+    {
+      "name": "real foreground counts / fixed total / error retry while background continues",
+      "status": "PASS",
+      "data": {
+        "loaded": 7,
+        "total": 8,
+        "backgroundPreparedAtEntry": 36,
+        "required": [
+          "art/civilization-emblems-023.webp",
+          "art/formal/hud-unit-icons-v03015.png",
+          "art/outskirts-landscape-021.webp",
+          "art/cities-age-0.webp",
+          "art/field-farm.webp",
+          "art/field-lumber.webp",
+          "art/field-quarry.webp",
+          "art/field-mine.webp"
+        ]
+      }
+    },
+    {
+      "name": "failure of native command receive has recovery and retry preserves one committed effect",
+      "status": "PASS",
+      "data": {
+        "effects": 1
+      }
+    },
+    {
+      "name": "protection variants use native imports and hide after early release/expiry",
+      "status": "PASS",
+      "data": [
+        "short",
+        "rebirth",
+        "expired",
+        "early"
+      ]
+    }
+  ],
+  "updates": [
+    {
+      "name": "legacy Workbox → content cache via official save-and-update flow",
+      "status": "PASS",
+      "requests": 21,
+      "networkBodyBytes": 736505,
+      "art": [],
+      "artRequests": 0,
+      "migratedArtKeys": 382,
+      "release": {
+        "version": "0.30.85",
+        "commitSha": "249197226a02863e01a400d1616ccca786d2a5bd",
+        "contentSha": "249197226a02863e01a400d1616ccca786d2a5bd",
+        "dirty": false
+      }
+    },
+    {
+      "name": "one changed + one new production image",
+      "status": "PASS",
+      "requests": 18,
+      "networkBodyBytes": 672122,
+      "art": [
+        {
+          "url": "/art/validation-added.svg?art=7151607fd76c1ba5878d",
+          "bodyBytes": 118
+        },
+        {
+          "url": "/art/formal/icon-slot.svg?art=6509affeab407f499ce4",
+          "bodyBytes": 224
+        }
+      ],
+      "artRequests": 2,
+      "artNetworkBodyBytes": 342,
+      "unchangedKeysRetained": 381,
+      "release": {
+        "version": "0.30.86",
+        "commitSha": "1722ab2f019e19fff650327b457e6951f169449c",
+        "contentSha": "1722ab2f019e19fff650327b457e6951f169449c",
+        "dirty": false
+      }
+    },
+    {
+      "name": "updated worker offline city and campaign retained",
+      "status": "PASS"
+    }
+  ],
+  "browserErrors": [],
+  "androidPhysical": "NOT TESTED",
+  "environment": {
+    "node": "24.19.0",
+    "cpuQuota": 2,
+    "memoryLimitBytes": 8589934592
+  }
+}

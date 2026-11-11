@@ -94,7 +94,9 @@ def accepts(path,predecessor,root=ROOT):
  return child_accepts(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
  from b10_release_unblock_successor import accepts_adapter as child_adapter
- if path not in ADAPTERS:return False
+ if path not in ADAPTERS:
+  from home_art_ui_successor import accepts_adapter as presentation_adapter
+  return presentation_adapter(path,before,root)
  read_record(root)
  if before!=previous(BASE,path):return prior.accepts_adapter(path,before,root)
  return (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child_adapter(path,adapters()[path],root))

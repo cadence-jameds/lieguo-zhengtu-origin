@@ -1,0 +1,40 @@
+{
+  "base": "db63881e2ffd617259d736e2c66342de791b331d",
+  "sourceAnchor": "9428b9cad8dbfafa929b5a5f9efde33bdb4bf3a2",
+  "playableContent": "249197226a02863e01a400d1616ccca786d2a5bd",
+  "full": {
+    "command": "node scripts/verify-in-isolation.mjs full",
+    "passed": 2545,
+    "failed": 0,
+    "skipped": 1,
+    "reportSha256": "8f4e83729cc71c0ca41d4529666c42f30e469ed85e18ad6a2ea495d539090b8c",
+    "testedSourceAnchor": "232f433ed15a2b87d83842639942b8a278e9fac1"
+  },
+  "targeted": {
+    "passed": 22,
+    "failed": 0
+  },
+  "typecheck": "PASS",
+  "rootBuild": "PASS",
+  "pagesBuild": "PASS",
+  "sourceSafety": "Pinned UI/art proof, parent successor and tamper rechecks PASS; full workflow runs again on current PR HEAD",
+  "ci": "See current PR HEAD checks",
+  "productionChromium": {
+    "playerExperience": 8,
+    "swUpdateOffline": 3,
+    "startupRecovery": 14,
+    "failures": 0,
+    "browser": "154.0.8037.57",
+    "startupRecoveryPages": 14
+  },
+  "androidPhysical": "NOT TESTED",
+  "merged": false,
+  "deployed": false,
+  "pagesPaths": "PASS",
+  "releaseAndWorkerIdentity": "PASS, explicit activation lifetime retained",
+  "environment": {
+    "node": "24.19.0",
+    "cpuQuota": 2,
+    "memoryLimitBytes": 8589934592
+  }
+}
