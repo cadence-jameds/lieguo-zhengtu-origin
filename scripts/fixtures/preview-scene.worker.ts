@@ -1,0 +1,5 @@
+// Synthetic Production Chromium fixtures only; never imported by the playable app.
+import {createFormalWorld} from '../../src/game/world';
+import {fieldCost} from '../../src/game/formal/catalogB3';
+import {encodeSave} from '../../src/game/formal/saveCodec';
+self.onmessage=async e=>{try{const w=createFormalWorld({campaign:crypto.randomUUID(),seed:884422,speed:e.data.speed??25,name:'預覽驗證領主',civilizationId:'civ_zhongguo',offlineHours:0});const c=w.cities.find(c=>c.ownerFactionId===w.playerFactionId)!;c.stock=e.data.mode==='near'?{food:600,wood:600,stone:fieldCost(c.fields![0].resource,c.fields![0].level+1).stone-4,gold:600}:e.data.mode==='rich'?{food:600,wood:600,stone:600,gold:600}:{food:0,wood:0,stone:0,gold:0};if(e.data.protection==='rebirth')w.factions.find(f=>f.id===w.playerFactionId)!.protectionKind='rebirth';if(e.data.protection==='ended')w.factions.find(f=>f.id===w.playerFactionId)!.protectionUntil=w.time;if(e.data.protection==='short')w.factions.find(f=>f.id===w.playerFactionId)!.protectionUntil=w.time+1000*(e.data.speed??25)*8;self.postMessage({result:await encodeSave(w)});}catch(e){self.postMessage({error:String(e)});}};

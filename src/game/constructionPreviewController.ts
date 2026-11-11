@@ -1,3 +1,4 @@
+import {constructionDependencyKey,translatePreviewResults} from './constructionPreviewDependencies';
 import {resourceKeys} from './formal/model';
 import {samePreviewStamp,type PreviewRequest,type PreviewResponse} from './constructionPreviewProtocol';
 type Port=Pick<Worker,'postMessage'|'terminate'|'onmessage'|'onerror'|'onmessageerror'>;
@@ -13,16 +14,14 @@ export class ConstructionPreviewController{
  request(channel:number,request:PreviewRequest,resolve:Work['resolve'],reject:Work['reject']){
   this.cancel(channel);
   // Compact context only, outside React render. Includes time, stock, slots, queues and qualification.
-  const {context}=request,c=context.city,e=c.economy;
+  const {context}=request,c=context.city;
   // Only actual admission dependencies form the cache. Empty-queue schedules are translation
   // invariant in time; ready entries can be reused while stocks still cover their exact payment.
-  const empty=e?.construction.length===0;
-  const cacheKey=JSON.stringify([request.campaignId,request.branch,context.version,empty?null:context.time,context.paused,context.issuerId,context.age,c.id,c.ownerFactionId,c.housing,c.buildings,c.fields,c.wallLevel,c.cityPromotionCompleted,e?.milestones,e?.slots,e?.construction,context.crafts,request.targets]);
+  const cacheKey=JSON.stringify([request.campaignId,request.branch,constructionDependencyKey(context,request.targets)]);
   const hit=this.cache.get(cacheKey);
-  if(hit&&hit.results.every(r=>r.status==='ready'?resourceKeys.every(k=>c.stock[k]>=r.quote.paidResources[k]):r.status==='invalid'&&(r.reason!=='城市實際庫存不足。'||resourceKeys.every(k=>c.stock[k]===hit.stock[k])))){
+  if(hit&&hit.results.every(r=>r.status==='ready'?resourceKeys.every(k=>c.stock[k]>=r.quote.paidResources[k]):r.status==='invalid'&&(r.reason!=='城市實際庫存不足。'||(r.requiredResources?resourceKeys.some(k=>c.stock[k]<r.requiredResources![k]):resourceKeys.every(k=>c.stock[k]===hit.stock[k]))))){
    this.metrics.cacheHits++;this.cache.delete(cacheKey);this.cache.set(cacheKey,hit);
-   const delta=empty?context.time-hit.time:0;
-   const results=hit.results.map(r=>r.status==='ready'?{...r,quote:{...r.quote,createdAt:context.time,startsAt:r.quote.startsAt+delta}}:r);
+   const results=translatePreviewResults(hit.results,hit.time,context);
    resolve({...request,results});return;
   }
   if(this.queue.size>=8){reject(new Error('預覽請求繁忙，請重新查詢。'));return;}
