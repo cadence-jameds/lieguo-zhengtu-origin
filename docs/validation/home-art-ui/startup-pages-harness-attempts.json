@@ -1,0 +1,83 @@
+{
+  "attempts": [
+    {
+      "file": "pages-startup-storage.json",
+      "results": [
+        {
+          "name": "timeout → fresh Worker → recovery/new campaign",
+          "status": "PASS"
+        },
+        {
+          "name": "incompatible → new campaign without backup; compatible reload",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy only → new campaign; old DB retained",
+          "status": "PASS"
+        },
+        {
+          "name": "startup Worker error → delete old DB with dead Runtime → new Worker",
+          "status": "PASS"
+        },
+        {
+          "name": "canceled loading → independent cleanup → engine reinitialized",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported current DB schema → explicit reset → new campaign",
+          "status": "PASS"
+        },
+        {
+          "name": "unreadable native open: only explicit confirmed cleanup removes data",
+          "status": "PASS"
+        },
+        {
+          "name": "blocked IDB: no deletion, no delayed destructive operation",
+          "status": "FAIL",
+          "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/IndexedDB 連線被其他分頁占用/) to be visible\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "file": "pages-startup-storage-recheck.json",
+      "results": [
+        {
+          "name": "timeout → fresh Worker → recovery/new campaign",
+          "status": "PASS"
+        },
+        {
+          "name": "incompatible → new campaign without backup; compatible reload",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy only → new campaign; old DB retained",
+          "status": "PASS"
+        },
+        {
+          "name": "startup Worker error → delete old DB with dead Runtime → new Worker",
+          "status": "PASS"
+        },
+        {
+          "name": "canceled loading → independent cleanup → engine reinitialized",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported current DB schema → explicit reset → new campaign",
+          "status": "PASS"
+        },
+        {
+          "name": "unreadable native open: only explicit confirmed cleanup removes data",
+          "status": "PASS"
+        },
+        {
+          "name": "blocked IDB: no deletion, no delayed destructive operation",
+          "status": "FAIL",
+          "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/IndexedDB 連線被其他分頁占用/) to be visible\u001b[22m\n"
+        }
+      ]
+    }
+  ],
+  "observed": "The SW navigation fallback served the game to an intended inert diagnostic tab. It acquired a writer lock; deletion was correctly refused and deleteCalls was empty.",
+  "fix": "Only diagnostic lab tabs bypass SW and assert the inert page title. Actual game tabs retain SW. Original storage assertions and deadlines remain unchanged.",
+  "final": "14/14 PASS with isolated diagnostic tabs"
+}

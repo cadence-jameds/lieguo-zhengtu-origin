@@ -1,0 +1,64 @@
+{
+  "native": true,
+  "production": true,
+  "android": "NOT TESTED",
+  "browser": "154.0.8037.57",
+  "results": [
+    {
+      "name": "timeout → fresh Worker → recovery/new campaign",
+      "status": "PASS"
+    },
+    {
+      "name": "incompatible → new campaign without backup; compatible reload",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy only → new campaign; old DB retained",
+      "status": "PASS"
+    },
+    {
+      "name": "startup Worker error → delete old DB with dead Runtime → new Worker",
+      "status": "PASS"
+    },
+    {
+      "name": "canceled loading → independent cleanup → engine reinitialized",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported current DB schema → explicit reset → new campaign",
+      "status": "PASS"
+    },
+    {
+      "name": "unreadable native open: only explicit confirmed cleanup removes data",
+      "status": "PASS"
+    },
+    {
+      "name": "blocked IDB: no deletion, no delayed destructive operation",
+      "status": "PASS"
+    },
+    {
+      "name": "partial native deletion reports each outcome; blocked old DB is retained",
+      "status": "PASS"
+    },
+    {
+      "name": "another writer: cannot delete current or old DB",
+      "status": "PASS"
+    },
+    {
+      "name": "retired Formal writer lock also prevents cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "corruption never authorizes overwrite; diagnostic/manager remain usable",
+      "status": "PASS"
+    },
+    {
+      "name": "real Runtime T2 quota failure does not claim success or lose old source",
+      "status": "PASS"
+    },
+    {
+      "name": "all selected cleanup preserves unrelated DB, UI settings, caches and SW",
+      "status": "PASS"
+    }
+  ]
+}

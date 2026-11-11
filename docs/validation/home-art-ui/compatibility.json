@@ -1,7 +1,15 @@
 {
   "schemaVersion": 1,
   "baseCommit": "db63881e2ffd617259d736e2c66342de791b331d",
-  "implementationCommit": "232f433ed15a2b87d83842639942b8a278e9fac1",
+  "implementationCommit": "9428b9cad8dbfafa929b5a5f9efde33bdb4bf3a2",
+  "implementationSupport": [
+    ".github/workflows/ci.yml",
+    "docs/validation/home-art-ui/compatibility.json",
+    "scripts/android_startup_successor.py",
+    "scripts/b10_r3_04_successor.py",
+    "scripts/home_art_ui_successor.py",
+    "scripts/test_home_art_ui_successor.py"
+  ],
   "changes": {
     "releases/notes/home-art-loading-ui.json": {
       "before": null,
@@ -17,7 +25,7 @@
     },
     "scripts/verify-startup-storage-browser.mjs": {
       "before": "34ecfd7e3ce01434c8197a72bfbe004432faa991b4dc4aab24daea823dcba308",
-      "after": "30819cd39683e83236d2ea5493cc7f0d5ee08b420df822a3456884ba7c077d09"
+      "after": "3ba66a0de16c06e34c3819b3923c0e9978d5abe76a19d86bb68cbf5e2b9e8e0d"
     },
     "src/game/FormalHome.tsx": {
       "before": "be085aedb1f38c9bbec7c10a6018c7b7d150d33304eb751b333dad5d21b453ca",
@@ -105,7 +113,7 @@
     },
     "src/game/presentation/wallDelta.test.tsx": {
       "before": "164c575a7a897d6e288221df53b9fa1b9a04dd4c1dd690d6d69bbbd9a8e42e76",
-      "after": "9ca3dc7c5641a1d67f1f1bc8ede51d455ad4027cfdefd962c387cc485ea0871c"
+      "after": "e44d70782c401664f44f18417d369b15dbf7a3ff232d63d390cb7d50245e7908"
     },
     "src/game/updateEntry.test.tsx": {
       "before": "1f569d48b43922d3e942e60ff8e5ae1a9565d1958eda674600c515114b54a47f",
@@ -850,6 +858,10 @@
     "scripts/b10_r3_04_successor.py": {
       "before": "afa92452416247468a8c8d96c9b98307a97a4c08901e999bdf583d52df61d5d9",
       "after": "613b9342732b7351983a8a43745e3926c0b384126942a6c5c48bc4d1f78c3313"
+    },
+    "scripts/b10_r3_06_successor.py": {
+      "before": "3b8555573ae6331f78b993e6c093aced62f73b8bcbfc139a2f69474b873f3b50",
+      "after": "32bf498c3db33cddfa39feacd12f0e41f1bcbf5f1a195089ac2e8552fd29fdc9"
     }
   }
 }
