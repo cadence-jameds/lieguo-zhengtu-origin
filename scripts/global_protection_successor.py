@@ -48,6 +48,11 @@ def followup_changes():
   try:before=sha(previous(FOLLOWUP_BASE,p))
   except subprocess.CalledProcessError:before=None
   changes[p]={'before':before,'after':sha(previous(FOLLOWUP_IMPLEMENTATION,p))}
+ # Preserve the original source pin and admit only this exact harness follow-up.
+ base,commit,p='bfa2498ab5394f2e05bcdfc45c4fbb72bda0377e','d8c06e128708c0edd168f7a1e0e56b85224dbd86','scripts/verify-preview-scene-browser.mjs'
+ assert subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',base,commit],text=True).splitlines()==[p],'Changed harness follow-up scope'
+ assert sha(previous(base,p))==changes[p]['after'],'Changed harness predecessor'
+ changes[p]['after']=sha(previous(commit,p))
  return changes
 def accepts_followup(path,predecessor,root=ROOT):
  v=followup_changes().get(path)
