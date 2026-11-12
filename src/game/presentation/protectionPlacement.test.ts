@@ -14,3 +14,8 @@ it('finds a narrow interior space when the perimeter is occupied, without coveri
  const p=shieldPlacement(bounds,84,28,[{left:0,top:0}],obstacles),box={...p,right:p.left+84,bottom:p.top+28};
  expect(p.left).toBeGreaterThanOrEqual(24);expect(p.top).toBeGreaterThanOrEqual(104);expect(obstacles.some(b=>overlaps(box,b))).toBe(false);
 });
+it('keeps the primary hit center accessible when transparent sprite hit boxes fill the entire viewport',()=>{
+ const bounds={left:0,top:0,right:120,bottom:100},p=shieldPlacement(bounds,84,28,[{left:18,top:36}],[bounds]);
+ expect(p.left<=60&&p.left+84>=60&&p.top<=50&&p.top+28>=50).toBe(false);
+ expect(p.top).toBeGreaterThanOrEqual(0);expect(p.top+28).toBeLessThanOrEqual(100);
+});
