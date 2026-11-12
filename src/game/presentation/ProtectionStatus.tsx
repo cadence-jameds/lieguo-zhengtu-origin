@@ -23,10 +23,10 @@ export function ProtectionStatus({world,view='city',cityId='',surfaceRef}:{world
    if(lastScene.current&&lastScene.current!==sceneKey)setOpenFor(undefined);lastScene.current=sceneKey;
    let point,anchor=view;
    if(view==='city'&&sceneBox&&sceneBox.width>0){
-    anchor=district;const preferred={left:Math.min(sceneBox.right-edge,bounds.right)-w,top:Math.min(sceneBox.bottom-edge,bounds.bottom)-h};
-    const inScene=sceneBox.bottom>bounds.top+h&&sceneBox.top<bounds.bottom-h;
+    anchor=district;const sceneBounds={left:Math.max(sceneBox.left+edge,bounds.left),top:Math.max(sceneBox.top+edge,bounds.top),right:Math.min(sceneBox.right-edge,bounds.right),bottom:Math.min(sceneBox.bottom-edge,bounds.bottom)};
+    const inScene=sceneBounds.right-sceneBounds.left>=w&&sceneBounds.bottom-sceneBounds.top>=h,preferred={left:sceneBounds.right-w,top:sceneBounds.bottom-h};
     if(!inScene)anchor='city';
-    point=shieldPlacement(bounds,w,h,inScene?[preferred]:[{left:bounds.right-w,top:bounds.bottom-h}],controls);
+    point=shieldPlacement(inScene?sceneBounds:bounds,w,h,inScene?[preferred]:[{left:bounds.right-w,top:bounds.bottom-h}],controls);
    }else if(view==='map'){
     const strip=box(surface?.querySelector('.context-strip'));
     if(strip&&strip.height>=h)point=shieldPlacement({left:strip.left+edge,right:strip.right-edge,top:strip.top+(strip.height-h)/2,bottom:strip.top+(strip.height+h)/2},w,h,[{left:strip.right-w-edge,top:strip.top+(strip.height-h)/2}],controls);
