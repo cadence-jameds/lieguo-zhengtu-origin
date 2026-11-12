@@ -8,5 +8,10 @@ export function shieldPlacement(bounds:ShieldBox,width:number,height:number,pref
  for(let y=bounds.bottom-height;y>=bounds.top;y-=height+6)candidates.push({left:bounds.right-width,top:y},{left:bounds.left,top:y});
  for(let x=bounds.right-width;x>=bounds.left;x-=width+6)candidates.push({left:x,top:bounds.top},{left:x,top:bounds.bottom-height});
  const points=candidates.map(clamp),score=(p:ShieldPoint)=>obstacles.reduce((n,b)=>n+(overlaps({...p,right:p.left+width,bottom:p.top+height},b)?1:0),0);
- return points.find(p=>score(p)===0)??points.reduce((best,p)=>score(p)<score(best)?p:best,points[0]??clamp({left:bounds.left,top:bounds.top}));
+ const clear=points.find(p=>score(p)===0);if(clear)return clear;
+ // A narrow free gap can fall between the perimeter samples. Try the actual
+ // control edges before choosing any position that overlaps an operation.
+ const xs=[bounds.left,bounds.right-width,...obstacles.flatMap(b=>[b.left-width-4,b.right+4])],ys=[bounds.top,bounds.bottom-height,...obstacles.flatMap(b=>[b.top-height-4,b.bottom+4])];
+ for(const y of ys)for(const x of xs){const p=clamp({left:x,top:y});if(score(p)===0)return p;}
+ return points.reduce((best,p)=>score(p)<score(best)?p:best,points[0]??clamp({left:bounds.left,top:bounds.top}));
 }
