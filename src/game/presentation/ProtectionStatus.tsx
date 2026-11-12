@@ -18,18 +18,15 @@ export function ProtectionStatus({world,view='city',cityId='',surfaceRef}:{world
    frame=0;const edge=8,w=button.current?.offsetWidth||84,h=28,main=box(surface),header=box(shell?.querySelector('.topbar')),nav=box(shell?.querySelector('.mobile-nav')),footer=box(shell?.querySelector('.statusbar'));
    const bounds:ShieldBox={left:Math.max(edge,viewport?.offsetLeft??0,main?.left??0)+edge,top:Math.max(edge,viewport?.offsetTop??0,header?.bottom??0,main?.top??0)+edge,right:Math.min((viewport?.offsetLeft??0)+(viewport?.width??window.innerWidth),main?.right??window.innerWidth)-edge,bottom:Math.min((viewport?.offsetTop??0)+(viewport?.height??window.innerHeight),nav?.top??footer?.top??window.innerHeight,main?.bottom??window.innerHeight)-edge};
    const visible=(el:Element)=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>bounds.top&&r.top<bounds.bottom&&r.right>bounds.left&&r.left<bounds.right;};
-   const local=[...(surface?.querySelectorAll('button,a,input,select,textarea,summary,[role=button],.context-strip>span')??[])].filter(visible),floats=[...document.querySelectorAll('.quick-settings-gear,.toast,.update-alert,.map-float-panel,.map-tools,.map-help,.formal-map-scale')].filter(visible),controls=[...local,...floats].map(el=>el.getBoundingClientRect());
+   const local=[...(surface?.querySelectorAll('button,a,input,select,textarea,summary,[role=button],.context-strip>span,.city-heading,.district-toolbar')??[])].filter(visible),floats=[...document.querySelectorAll('.quick-settings-gear,.toast,.update-alert,.map-float-panel,.map-tools,.map-help,.formal-map-scale')].filter(visible),controls=[...local,...floats].map(el=>el.getBoundingClientRect());
    scene=surface?.querySelector('.city-scene-viewport')??null;const sceneBox=box(scene),district=scene?.getAttribute('data-protection-scene')??'',sceneKey=view+':'+cityId+':'+district;
    if(lastScene.current&&lastScene.current!==sceneKey)setOpenFor(undefined);lastScene.current=sceneKey;
    let point,anchor=view;
    if(view==='city'&&sceneBox&&sceneBox.width>0){
-    anchor=district;const preferred={left:sceneBox.left+sceneBox.width*.4-w/2,top:sceneBox.top+sceneBox.height*.08-h/2};
-    // Resource sprites have transparent hit boxes. Preserve the requested mountain
-    // anchor; only other floating controls can displace it, never horizontal artwork scroll.
-    const inScene=preferred.top>=bounds.top&&preferred.top+h<=bounds.bottom;
-    const blockers=district==='outskirts'&&inScene?floats.map(el=>el.getBoundingClientRect()):controls;
+    anchor=district;const sceneBounds={left:Math.max(sceneBox.left+edge,bounds.left),top:Math.max(sceneBox.top+edge,bounds.top),right:Math.min(sceneBox.right-edge,bounds.right),bottom:Math.min(sceneBox.bottom-edge,bounds.bottom)};
+    const inScene=sceneBounds.right-sceneBounds.left>=w&&sceneBounds.bottom-sceneBounds.top>=h,preferred={left:sceneBounds.right-w,top:sceneBounds.bottom-h};
     if(!inScene)anchor='city';
-    point=shieldPlacement(bounds,w,h,inScene?[preferred]:[{left:bounds.right-w,top:bounds.bottom-h}],blockers);
+    point=shieldPlacement(inScene?sceneBounds:bounds,w,h,inScene?[preferred]:[{left:bounds.right-w,top:bounds.bottom-h}],controls);
    }else if(view==='map'){
     const strip=box(surface?.querySelector('.context-strip'));
     if(strip&&strip.height>=h)point=shieldPlacement({left:strip.left+edge,right:strip.right-edge,top:strip.top+(strip.height-h)/2,bottom:strip.top+(strip.height+h)/2},w,h,[{left:strip.right-w-edge,top:strip.top+(strip.height-h)/2}],controls);

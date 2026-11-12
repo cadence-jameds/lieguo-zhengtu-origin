@@ -35,6 +35,28 @@ def adapters():
  ci=previous(BASE,ADAPTERS[1]).decode();anchor='          python3 scripts/test_preview_scene_successor.py\n';ci=replace_once(ci,anchor,anchor+'          python3 scripts/global_protection_successor.py\n          python3 scripts/test_global_protection_successor.py\n')
  return {p:s.encode(),ADAPTERS[1]:ci.encode()}
 SOURCES={'releases/notes/preview-scene-shield.json','scripts/verify-preview-scene-browser.mjs','scripts/verify-global-protection-browser.mjs',*['src/game/presentation/'+p for p in ['CityScenes.tsx','ProtectionStatus.tsx','Shell.tsx','playable.css','playerExperience.test.tsx','sceneProtectionPreview.test.tsx','protectionPlacement.ts','protectionPlacement.test.ts']]}
+# Player-approved follow-up; merged source evidence stays immutable.
+FOLLOWUP_BASE='3cc66440942581aec2f85de02ce689634662abb8'
+FOLLOWUP_IMPLEMENTATION='02fbbdbe1f51ef507623c4957d8093926e9e7934'
+FOLLOWUP_SOURCES={'src/game/presentation/ProtectionStatus.tsx','src/game/presentation/protectionPlacement.ts','src/game/presentation/protectionPlacement.test.ts','scripts/verify-global-protection-browser.mjs','scripts/verify-preview-scene-browser.mjs','releases/notes/outskirts-adaptive-shield.json'}
+@lru_cache(maxsize=1)
+def followup_changes():
+ actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',FOLLOWUP_BASE,FOLLOWUP_IMPLEMENTATION],text=True).splitlines())
+ assert actual==FOLLOWUP_SOURCES,('Outskirts follow-up scope differs',actual^FOLLOWUP_SOURCES)
+ changes={}
+ for p in sorted(FOLLOWUP_SOURCES):
+  try:before=sha(previous(FOLLOWUP_BASE,p))
+  except subprocess.CalledProcessError:before=None
+  changes[p]={'before':before,'after':sha(previous(FOLLOWUP_IMPLEMENTATION,p))}
+ # Preserve the original source pin and admit only this exact harness follow-up.
+ base,commit,p='bfa2498ab5394f2e05bcdfc45c4fbb72bda0377e','d8c06e128708c0edd168f7a1e0e56b85224dbd86','scripts/verify-preview-scene-browser.mjs'
+ assert subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',base,commit],text=True).splitlines()==[p],'Changed harness follow-up scope'
+ assert sha(previous(base,p))==changes[p]['after'],'Changed harness predecessor'
+ changes[p]['after']=sha(previous(commit,p))
+ return changes
+def accepts_followup(path,predecessor,root=ROOT):
+ v=followup_changes().get(path)
+ return bool(v and v['before']==predecessor and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
 @lru_cache(maxsize=1)
 def expected_record():
  actual=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',BASE,IMPLEMENTATION],text=True).splitlines())
@@ -66,14 +88,15 @@ def read_record(root=ROOT):
 def accepts(path,predecessor,root=ROOT):
  if path not in SOURCES:return False
  r=read_record(root);v=r['changes'].get(path)
- return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
+ return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==v['after'] or accepts_followup(path,v['after'],root)))
 def accepts_adapter(path,before,root=ROOT):
  if path not in ADAPTERS:return False
  read_record(root)
  return before==previous(BASE,path) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unpinned global protection edit',p)
+ for p,v in followup_changes().items():assert sha((root/p).read_bytes())==v['after'],('Unpinned outskirts follow-up',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or accepts_followup(p,v['after'],root),('Unpinned global protection edit',p)
  for section in ['invariants','historical']:
   for p,v in r[section].items():assert sha((root/p).read_bytes())==v,('Preview/rules/storage/PWA/history changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b,('Unpinned global protection adapter',p)

@@ -4,7 +4,7 @@ import global_protection_successor as gate
 class GlobalProtectionSuccessorTests(unittest.TestCase):
  def setUp(self):
   t=tempfile.TemporaryDirectory(prefix='global-protection-proof-');self.addCleanup(t.cleanup);self.root=Path(t.name);r=gate.read_record()
-  for p in {gate.RECORD,*r['changes'],*r['invariants'],*r['historical'],*gate.ADAPTERS}:
+  for p in {gate.RECORD,*r['changes'],*r['invariants'],*r['historical'],*gate.ADAPTERS,*gate.FOLLOWUP_SOURCES}:
    out=self.root/p;out.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(gate.ROOT/p,out)
  def test_exact_sources_and_predecessors(self):
   r=gate.validate(self.root)
@@ -23,6 +23,12 @@ class GlobalProtectionSuccessorTests(unittest.TestCase):
     (self.root/gate.RECORD).write_text(json.dumps(r))
     with self.assertRaises(AssertionError):gate.validate(self.root)
     f.write_bytes(before);(self.root/gate.RECORD).write_bytes(original)
+ def test_followup_cannot_accept_unknown_hashes_or_unpinned_edits(self):
+  for p,v in gate.followup_changes().items():
+   self.assertFalse(gate.accepts_followup(p,'0'*64,self.root))
+   f=self.root/p;before=f.read_bytes();f.write_bytes(before+b'\n')
+   with self.assertRaises(AssertionError):gate.validate(self.root)
+   f.write_bytes(before)
  def test_exact_adapters_and_unknown_predecessors(self):
   for p in gate.ADAPTERS:
    self.assertTrue(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));self.assertFalse(gate.accepts_adapter(p,b'forged',self.root));f=self.root/p;f.write_bytes(f.read_bytes()+b'\n');self.assertFalse(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root))
