@@ -8,7 +8,6 @@
 @media(max-width:430px){.logistics-settings{padding:8px}.logistics-settings fieldset{padding:6px}.logistics-settings label{display:block}.logistics-settings input[type=checkbox]{width:auto}.logistics-settings input[type=number],.logistics-settings select{max-width:100%}}
 
 /* P0-C-10: protection is an isolated read-only ticker; defeat actions fit 320px. */
-.formal-protection-status {display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .8rem;padding:.45rem .8rem;background:var(--ui-4);font-size:.85rem}
 .formal-protection-status small {overflow-wrap:anywhere}
 .formal-defeat .defeat-content {width:min(100%,760px);box-sizing:border-box;min-width:0}
 .formal-defeat .settings-actions,.rebirth-candidates {display:flex;flex-wrap:wrap;gap:.5rem}
@@ -18,10 +17,11 @@
 .rebirth-map-screen {height:100dvh;display:flex;flex-direction:column;min-width:0}
 .rebirth-map-screen>header {display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.5rem}
 .rebirth-map-screen>.world-map {flex:1;min-height:0}
-/* A reserved narrow strip avoids covering map/city targets or mobile bottom controls. */
-.formal-protection-status{position:relative;display:flex;justify-content:flex-end;flex-wrap:nowrap;padding:2px 10px;background:transparent;z-index:25;min-height:34px}
-.protection-shield{min-height:30px;padding:4px 10px;border-radius:18px;font-size:12px;background:var(--ui-4);border:1px solid var(--border,#8d7955);font-variant-numeric:tabular-nums;white-space:nowrap}
-.protection-details{position:absolute;right:10px;top:100%;width:min(350px,calc(100vw - 24px));max-height:60dvh;overflow:auto;padding:14px;box-shadow:0 8px 24px #0008;font-size:14px}
+/* One persistent Shell overlay follows view geometry without consuming layout height. */
+.city-scene-viewport{position:relative;isolation:isolate}
+.formal-protection-status{position:fixed;z-index:150;width:max-content}
+.formal-protection-status button.protection-shield{height:28px;min-height:28px;padding:3px 8px;border-radius:12px 12px 15px 15px;font-size:12px;line-height:20px;background:rgba(22,51,38,.88);color:#f0e5bd;border:1px solid #ac925c;box-shadow:0 2px 6px #0005;font-variant-numeric:tabular-nums;white-space:nowrap}
+.protection-details{position:fixed;z-index:160;width:min(350px,calc(100vw - 24px));box-sizing:border-box;overflow:auto;overscroll-behavior:contain;padding:14px;box-shadow:0 8px 24px #0008;font-size:14px;background:var(--surface,#1c2a22);color:var(--text,#eee8da);border:1px solid #ac925c;border-radius:8px}
 .protection-details>div{display:flex;justify-content:space-between;align-items:center}.protection-details p{line-height:1.65}
 .art-loading-screen{min-height:100dvh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at top,#343322,#111812 70%);color:var(--text)}
 .art-loading-card{width:min(520px,100%);text-align:center;padding:32px 20px;border:1px solid #95784b;box-shadow:0 20px 80px #0007}

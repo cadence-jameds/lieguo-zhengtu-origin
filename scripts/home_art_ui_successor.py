@@ -76,19 +76,24 @@ def read_record(root=ROOT):
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned UI/art proof or scope';return r
 def accepts(path,predecessor,root=ROOT):
+ from preview_scene_successor import accepts as child
+ if child(path,predecessor,root):return True
  r=read_record(root);v=r['changes'].get(path)
  if v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after']:return True
  adapter=r['adapters'].get(path)
  return bool(adapter and predecessor==adapter['before'] and (root/path).exists() and sha((root/path).read_bytes())==adapter['after'])
 def accepts_adapter(path,before,root=ROOT):
  read_record(root)
- return path in ADAPTERS and before==previous(BASE,path) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ from preview_scene_successor import accepts_adapter as child
+ if path not in ADAPTERS:return child(path,before,root)
+ return before==previous(BASE,path) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child(path,adapters()[path],root))
 def validate(root=ROOT):
+ from preview_scene_successor import accepts as child, accepts_adapter as child_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unrecorded UI/art source edit',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded UI/art source edit',p)
  for section in ['invariants','historical']:
   for p,v in r[section].items():assert sha((root/p).read_bytes())==v,('Gameplay, data safety, art file or history changed',p)
- for p,b in adapters().items():assert (root/p).read_bytes()==b,('Unrecorded successor adapter',p)
+ for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Unrecorded successor adapter',p)
  # Release reply and update consent remain the existing implementation.
  config=(root/'vite.config.ts').read_text();old=previous(BASE,'vite.config.ts').decode()
  assert config.split('const workerReleaseSource=',1)[1].split('\n',1)[0]==old.split('const workerReleaseSource=',1)[1].split('\n',1)[0]

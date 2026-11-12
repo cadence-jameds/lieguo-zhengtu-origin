@@ -8,7 +8,7 @@ export type PreviewContext={version:1;time:number;paused:boolean;issuerId:string
 export type PreviewStamp={protocolVersion:1;campaignId:string;branch:string;revision:number;cityId:CityId;requestId:number;generation:number};
 export type PreviewRequest=PreviewStamp&{context:PreviewContext;targets:PreviewTarget[]};
 export type PreviewQuote=ReturnType<typeof quoteConstruction>;
-export type PreviewResult={status:'ready';quote:PreviewQuote}|{status:'invalid'|'unavailable';reason:string};
+export type PreviewResult={status:'ready';quote:PreviewQuote}|{status:'invalid'|'unavailable';reason:string;requiredResources?:Resources};
 export type PreviewResponse=PreviewStamp&{results:PreviewResult[]};
 export const previewTargetKey=(t:PreviewTarget)=>JSON.stringify(t);
 export function previewPayload(cityId:CityId,t:Exclude<PreviewTarget,{craftsmanId:string}>):BuildPayload{
