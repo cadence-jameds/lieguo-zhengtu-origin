@@ -24,12 +24,9 @@ export function ProtectionStatus({world,view='city',cityId='',surfaceRef}:{world
    let point,anchor=view;
    if(view==='city'&&sceneBox&&sceneBox.width>0){
     anchor=district;const preferred={left:sceneBox.left+sceneBox.width*.4-w/2,top:sceneBox.top+sceneBox.height*.08-h/2};
-    // Resource sprites have transparent hit boxes. Preserve the requested mountain
-    // anchor; only other floating controls can displace it, never horizontal artwork scroll.
     const inScene=preferred.top>=bounds.top&&preferred.top+h<=bounds.bottom;
-    const blockers=district==='outskirts'&&inScene?floats.map(el=>el.getBoundingClientRect()):controls;
     if(!inScene)anchor='city';
-    point=shieldPlacement(bounds,w,h,inScene?[preferred]:[{left:bounds.right-w,top:bounds.bottom-h}],blockers);
+    point=shieldPlacement(bounds,w,h,inScene?[preferred]:[{left:bounds.right-w,top:bounds.bottom-h}],controls);
    }else if(view==='map'){
     const strip=box(surface?.querySelector('.context-strip'));
     if(strip&&strip.height>=h)point=shieldPlacement({left:strip.left+edge,right:strip.right-edge,top:strip.top+(strip.height-h)/2,bottom:strip.top+(strip.height+h)/2},w,h,[{left:strip.right-w-edge,top:strip.top+(strip.height-h)/2}],controls);
