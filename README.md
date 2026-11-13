@@ -4,7 +4,7 @@
 
 **[開始遊玩 GitHub Pages 公開試玩版](https://cadence-jameds.github.io/lieguo-zhengtu-origin/)**
 
-![遊戲中的世界地圖](public/social/world-map.webp)
+![遊戲中的世界地圖](docs/maintenance/images/world-map.webp)
 
 *實際遊戲畫面：世界地圖，來自先前版本的 Chromium 驗證，介面可能與最新版本略有不同。[來源與其他畫面](docs/validation/global-protection/README.md)*
 
