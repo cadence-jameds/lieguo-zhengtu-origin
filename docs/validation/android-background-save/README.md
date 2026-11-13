@@ -1,6 +1,6 @@
 # B10 P0：Android 背景保存與玩家提示
 
-基準是 main `d5a6f544d87c0308c0105075f233bbfa0aeb1329`（已含 #62、#63、#64、#65）。主要可玩修改固定於 `d86bce6d86d3e05b786f9046d587426e13760ef6`，診斷相容性追補固定於 `4176cbebdaee698d3ddc2ecb77244cf50615dd1d`；本批獨立 Draft PR，不合併或部署。
+遊戲程式基準是 main `d5a6f544d87c0308c0105075f233bbfa0aeb1329`（已含 #62、#63、#64、#65）；交付前另同步最新 main `8b37f4d85e27f49d3d2a99d7cc9a10297d8d39d7`，新增內容僅為專案介紹／metadata，未改動遊戲程式。主要可玩修改固定於 `d86bce6d86d3e05b786f9046d587426e13760ef6`，診斷相容性追補固定於 `4176cbebdaee698d3ddc2ecb77244cf50615dd1d`；本批獨立 Draft PR，不合併或部署。
 
 ## 已確認的根因與錯誤路徑
 
@@ -63,6 +63,10 @@ Chromium 154、Production build、原生 Worker／IndexedDB。測試用故障只
 新增 39 項測試涵蓋時間有效範圍、精確 fence、所有資料表的回滾、舊 Recovery、正式讀取／匯出／匯入、T1 排在背景障礙之前、重複背景事件、保存健康分類、只有提交才能恢復、相同／不同診斷與收合入口。另保留既有 Worker／Durable Runtime／UI 測試；最終定向合計 8 檔、90 項全部通過。Typecheck／Production Build 已通過。
 
 新來源證明僅接受 21 份固定 payload、三份檔案的診斷相容性追補之精確提交及五份確定性 Gate adapter，所有其他原始碼、美術、PWA、保護、規則與歷史紀錄鎖定原值。舊的來源範圍負向測試及完整性記錄均保留；沒有修改舊測試或期限。新防竄改測試及四組既有來源／防竄改回歸已通過。
+
+2026-11-13 的最終 Production Chromium 複驗再次通過全部 9 組、60 次切換及 21 份幾何記錄；本目錄圖檔與 `browser-checks.json` 已更新，測試程式碼為 `bfd02f14bfe424156afe7138fd10679b3745f397`（後續同步 main 未變更任何遊戲程式）。
+
+[GitHub CI #522](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/runs/43374638340) 在 `bfd02f14bfe424156afe7138fd10679b3745f397` 全數通過：完整回歸 **2616 PASS／0 FAIL／1 SKIP**，以及 Typecheck、Build、Release、原有來源／防竄改／邊界 Gate。唯一 SKIP 為未提供的私人長局存檔。Cloud 本機初輪完整回歸曾因通知協定相容性失敗，修正後已由此完整 CI 重跑通過。另在 Cloud 逐檔定向重跑得到 128 PASS／2 FAIL；兩項 R3-06 一秒輪詢逾時在未修改 main 的同檔對照也為 8 PASS／2 FAIL，CI 完整回歸則通過，沒有放寬測試或期限。
 
 完整 Regression 使用原 `node scripts/verify-in-isolation.mjs full`；GitHub CI 另跑全部歷史／來源／邊界、Typecheck、Build、Release／Worker Identity 與防竄改 Gate。最終 PASS／FAIL／SKIP 數量與 CI URL 追加在 PR 交付紀錄，未把在跑的檢查先宣稱為 PASS。
 
