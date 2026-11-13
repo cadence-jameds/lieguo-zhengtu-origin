@@ -2,6 +2,10 @@
   "schemaVersion": 1,
   "baseCommit": "d5a6f544d87c0308c0105075f233bbfa0aeb1329",
   "implementationCommit": "d86bce6d86d3e05b786f9046d587426e13760ef6",
+  "diagnosticFollowup": {
+    "base": "9054b5c38d024469379885e7569f1e776f660471",
+    "commit": "4176cbebdaee698d3ddc2ecb77244cf50615dd1d"
+  },
   "changes": {
     "releases/notes/android-background-save.json": {
       "before": null,
@@ -73,7 +77,7 @@
     },
     "src/game/runtime.worker.ts": {
       "before": "b32e87ab8c18a28515f2ed5fc77da519087173cdd9c4b132b19dc1e647adbb41",
-      "after": "d63a3e5a8d2efe1befb324df820e15f50f452c90e956fb287b9a5b38a928535f"
+      "after": "64a60196eeda059dd872cb5f9c203231249fac57a0b65ea28ad76a608653c865"
     },
     "src/game/saveStatus.ts": {
       "before": null,
@@ -81,11 +85,11 @@
     },
     "src/game/useGame.ts": {
       "before": "9baca9f8bd8ad77abe4f3b77b04a7e8f024b0be7585fa21a5a753e02f0bf5715",
-      "after": "6ebc34bb82f749d04d005a8678d8dd7d03239985b65321ceeae5f9c14302c4b7"
+      "after": "042b80fc98b194352bbdc9c5830310f9cce2f8c602a355ab1e4b4b989aa616ef"
     },
     "src/game/useSaveNotices.test.tsx": {
       "before": null,
-      "after": "da404ca8e7e6cc4c7c0f58fc67f70c8f5d82d2aa63eca29699edda366f6e8011"
+      "after": "5055311f8ede0c4b811d26f6582c57a95b34c0352f777b285db4c5e1b5e6036e"
     }
   },
   "grants": {
