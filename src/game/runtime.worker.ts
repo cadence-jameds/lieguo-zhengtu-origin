@@ -1,5 +1,4 @@
 import {SaveHealth} from './saveStatus';
-import {playerMessage} from './playerMessage';
 import {inspectCampaignStorage} from './campaignStorage';
 import {RetiredCommand} from './replayFence';
 import {prepareAdmissionMap} from './admissionMap';
@@ -211,8 +210,8 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
 }
 async function runRequest(r:RuntimeRequest){
  try{await handle(r);}catch(error:unknown){
-  const text=playerMessage(error,'操作未完成，原始資料保留；請重新讀取或重試。');
-  if(error instanceof Error&&saveErrors.has(error)&&r.type!=='command')post({type:'saveRequestFailed',requestId:r.requestId,operation:r.type,text:'保存尚未完成，原始進度保留。'});
+  const text=error instanceof Error?error.message:'正式提交失敗。';
+  if(error instanceof Error&&saveErrors.has(error)&&r.type!=='command')post({type:'error',saveFailure:true,requestId:r.requestId,operation:r.type,text});
   else if(error instanceof QueryViewChanged)post({type:'notice',error:true,text});
   else if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',retired:error instanceof RetiredCommand,campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(error instanceof RetiredCommand?'舊身份已關閉，這次重送未執行：':existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
@@ -240,7 +239,7 @@ async function drain(){
    if(request){if(controls.has(request.type)){try{await queryQueue;await runRequest(request);}finally{controlPending--;}}else await runRequest(request);continue;}
    tickPending=false;tickRunning=true;
    try{if(!away)await advanceAndSave();}
-   catch(error:unknown){retryAt=performance.now()+1000;if(!(error instanceof Error&&saveErrors.has(error)))post({type:'notice',error:true,text:playerMessage(error,'世界更新暫時失敗，請重新同步。')});}
+   catch(error:unknown){retryAt=performance.now()+1000;post({type:'notice',error:true,saveFailure:error instanceof Error&&saveErrors.has(error),text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}
    finally{tickRunning=false;}
   }
  }finally{draining=false;}

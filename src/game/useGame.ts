@@ -146,7 +146,8 @@ export function useGame(){
     }
     const r=e.data;if(typeof r.legacyAvailable==='boolean')setLegacyAvailable(r.legacyAvailable);
     if(r.type==='saveStatus'){const prior=saveStatusRef.current;let next=r.status as SaveStatus;if(next.state==='healthy'||next.state==='recovered'){if(!r.committed)return;if(prior.state==='blocked'||prior.state==='retrying')next={...next,state:'recovered'};}saveStatusRef.current=next;setSaveStatus(next);return;}
-    if(r.type==='saveRequestFailed'){if(r.requestId)finishSave(r.requestId,new Error(r.text));if(r.operation==='load'||r.operation==='resume'){loading=false;clearWatchdog();displayClock.stop();changeStatus('error');setError('接續保存尚未完成，原始進度保留；請重新讀取。');}return;}
+    if(r.type==='saveRequestFailed'||r.type==='error'&&r.saveFailure){if(r.requestId)finishSave(r.requestId,new Error('保存尚未完成，原始進度保留。'));if(r.operation==='load'||r.operation==='resume'){loading=false;clearWatchdog();displayClock.stop();changeStatus('error');setError('接續保存尚未完成，原始進度保留；請重新讀取。');}return;}
+    if(r.type==='notice'&&r.saveFailure)return;
     if(r.type==='cityIntel'){const q=intelQueries.current.get(r.queryId);if(q){intelQueries.current.delete(r.queryId);if(r.error)q.reject(new Error(playerMessage(r.error,'暫時無法取得情報，請重試。')));else q.resolve(r.data);}return;}
     if(r.type==='requestDone'){finishSave(r.requestId,new Error('保存未完成，請稍後再試。'));requests.current.finish(r.requestId);blocking.current.delete(r.requestId);setInputBusy(blocking.current.size>0);setBusy(requests.current.busy);return;}
     if(r.type==='state'||r.type==='switched'||r.type==='switchFailed'){
