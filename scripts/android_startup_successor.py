@@ -58,6 +58,8 @@ def read_record(root=ROOT):
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned P0 proof or grants';return r
 def accepts(path,predecessor,root=ROOT):
  r=read_record(root);v=r['changes'].get(path)
+ from android_save_successor import accepts as hotfix
+ if hotfix(path,predecessor,root):return True
  if v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after']:return True
  from home_art_ui_successor import accepts as child
  return child(path,predecessor,root)
@@ -67,7 +69,9 @@ def accepts_adapter(path,before,root=ROOT):
  if path not in ADAPTERS:return child(path,before,root)
  return before==previous(BASE,path) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child(path,adapters()[path],root))
 def validate(root=ROOT):
- from home_art_ui_successor import accepts as child, accepts_adapter as child_adapter
+ from home_art_ui_successor import accepts as inherited, accepts_adapter as child_adapter
+ from android_save_successor import accepts as hotfix
+ def child(path,predecessor,root):return inherited(path,predecessor,root) or hotfix(path,predecessor,root)
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded P0 source edit',p)
  for section in ['invariants','historical']:

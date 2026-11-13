@@ -77,7 +77,7 @@ def read_record(root=ROOT):
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned UI/art proof or scope';return r
 def accepts(path,predecessor,root=ROOT):
  from android_save_successor import accepts as hotfix
- if hotfix(path,predecessor,root):return True
+ if path in read_record(root)['changes'] and hotfix(path,predecessor,root):return True
  from preview_scene_successor import accepts as child
  if child(path,predecessor,root):return True
  r=read_record(root);v=r['changes'].get(path)

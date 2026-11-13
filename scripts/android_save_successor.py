@@ -45,10 +45,13 @@ def adapters():
    s=edit(s,'\n return child(path,predecessor,root)\ndef accepts_adapter', '\n return child(path,predecessor,root) or hotfix(path,predecessor,root)\ndef accepts_adapter')
    s=edit(s,"assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded preview/scene edit',p)","assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root) or hotfix(p,v['after'],root),('Unrecorded preview/scene edit',p)")
   else:
-   s=edit(s,'def accepts(path,predecessor,root=ROOT):\n', 'def accepts(path,predecessor,root=ROOT):\n from android_save_successor import accepts as hotfix\n if hotfix(path,predecessor,root):return True\n')
+   s=edit(s,'def accepts(path,predecessor,root=ROOT):\n', "def accepts(path,predecessor,root=ROOT):\n from android_save_successor import accepts as hotfix\n if path in read_record(root)['changes'] and hotfix(path,predecessor,root):return True\n")
    s=edit(s,"assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded UI/art source edit',p)","assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root) or hotfix(p,v['after'],root),('Unrecorded UI/art source edit',p)")
   result[p]=s.encode()
- p=ADAPTERS[3];s=previous(BASE,p).decode();s=edit(s,"assert (root/p).read_text().split(\" if(r.type==='start'){\",1)[1]==previous(BASE,p).decode().split(\" if(r.type==='start'){\",1)[1],'Changed formal transitions/intake/T2/drain'", "assert (root/p).read_text().split(\" if(r.type==='start'){\",1)[1]==previous(BASE,p).decode().split(\" if(r.type==='start'){\",1)[1] or child(p,sha(previous(BASE,p)),root),'Changed formal transitions/intake/T2/drain'");result[p]=s.encode()
+ p=ADAPTERS[3];s=previous(BASE,p).decode()
+ s=edit(s,"def accepts(path,predecessor,root=ROOT):\n r=read_record(root);v=r['changes'].get(path)","def accepts(path,predecessor,root=ROOT):\n r=read_record(root);v=r['changes'].get(path)\n from android_save_successor import accepts as hotfix\n if hotfix(path,predecessor,root):return True")
+ s=edit(s,'from home_art_ui_successor import accepts as child, accepts_adapter as child_adapter', 'from home_art_ui_successor import accepts as inherited, accepts_adapter as child_adapter\n from android_save_successor import accepts as hotfix\n def child(path,predecessor,root):return inherited(path,predecessor,root) or hotfix(path,predecessor,root)')
+ s=edit(s,"assert (root/p).read_text().split(\" if(r.type==='start'){\",1)[1]==previous(BASE,p).decode().split(\" if(r.type==='start'){\",1)[1],'Changed formal transitions/intake/T2/drain'", "assert (root/p).read_text().split(\" if(r.type==='start'){\",1)[1]==previous(BASE,p).decode().split(\" if(r.type==='start'){\",1)[1] or child(p,sha(previous(BASE,p)),root),'Changed formal transitions/intake/T2/drain'");result[p]=s.encode()
  p=ADAPTERS[4];s=previous(BASE,p).decode();anchor='          python3 scripts/test_global_protection_successor.py\n';result[p]=edit(s,anchor,anchor+'          python3 scripts/android_save_successor.py\n          python3 scripts/test_android_save_successor.py\n').encode()
  return result
 @lru_cache(maxsize=1)
