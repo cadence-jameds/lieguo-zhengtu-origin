@@ -1,3 +1,4 @@
+import {SaveHealth} from './saveStatus';
 import {inspectCampaignStorage} from './campaignStorage';
 import {RetiredCommand} from './replayFence';
 import {prepareAdmissionMap} from './admissionMap';
@@ -53,6 +54,10 @@ const publish=(source:FormalWorld|null,data:Record<string,unknown>,snapshot=fals
 const post=(value:unknown)=>{const data=value as Record<string,unknown>;if(Object.hasOwn(data,'world')){const {world:source,...rest}=data;publish(source as FormalWorld|null,rest,true);}else notify(data);};
 const state=(snapshot=false)=>publish(world,{type:'state'},snapshot);
 const reanchor=()=>{anchor=performance.now();anchorTime=world?.time??0;lastSavedAt=anchor;retryAt=0;passiveRevisionBase=world?.revision??0;stream.reset();};
+const saveHealth=new SaveHealth(),saveErrors=new WeakSet<Error>();
+const saved=(verified=false)=>{const status=saveHealth.committed();if(status||verified)post({type:'saveStatus',status:status??{...saveHealth.status},committed:true});};
+const saveFailed=(cause:unknown)=>{const error=cause instanceof Error?cause:new Error(String(cause));saveErrors.add(error);const status=saveHealth.failure(error,!away);if(status)post({type:'saveStatus',status});return error;};
+async function persistWorld(...args:Parameters<typeof save>){try{const committed=await save(...args);saved();return committed;}catch(error){throw saveFailed(error);}}
 const targetTime=(now=performance.now())=>(world&&worldPaused(world))?world.time:anchorTime+Math.floor(Math.max(0,Math.min(now,foregroundFence??now)-anchor)*(world?effectiveSpeed(world):1));
 async function publishReportStatus(){if(!world)return;try{post({type:'reportStatus',data:await reportStatus(world)});}catch{post({type:'notice',text:'暫時無法讀取戰報通知，世界仍持續運行。'});}}
 async function advanceAndSave(target=targetTime(),wallAt?:number){
@@ -61,7 +66,7 @@ async function advanceAndSave(target=targetTime(),wallAt?:number){
  const hasEvents=world.events.some(e=>e.at<=target);
  // Only complete events yield. The draft remains private until this entire
  // target replay and its one durable transaction finish.
- const result=await advanceFormalCooperative(world,target,undefined,workBudget.advance),committed=await save(result.world,result.reports,world.revision,wallAt);
+ const result=await advanceFormalCooperative(world,target,undefined,workBudget.advance),committed=await persistWorld(result.world,result.reports,world.revision,wallAt);
  world=committed;if(worldPaused(world))reanchor();lastSavedAt=performance.now();retryAt=0;if(hasEvents)passiveRevisionBase=world.revision;state();if(result.reports.length)await publishReportStatus();
 }
 async function handle(r:RuntimeRequest){
@@ -80,7 +85,9 @@ async function handle(r:RuntimeRequest){
   if(r.type==='load'&&world&&!away)await advanceAndSave();
   away=true;
   let lastStage:'read'|'offline'|'save'|''='',lastEvents=-1;
+  let saving=false;
   const result=await loadWithOffline((stage,fraction,events)=>{
+   if(stage==='save')saving=true;
    if(stage!==lastStage){
     lastStage=stage;
     post({type:'phase',text:stage==='read'?'讀取與驗證本機存檔':stage==='offline'?'推進離線期間的世界':'原子保存接續進度'});
@@ -90,8 +97,9 @@ async function handle(r:RuntimeRequest){
     lastEvents=events;
     post({type:'progress',progress:fraction,events});
    }
-  },workBudget.advance);
-  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await save(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;startWithoutWorld=!loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
+  },workBudget.advance).catch(error=>{throw saving?saveFailed(error):error;});
+  if(result.game)saved(true);
+  let loaded=result.game;if(loaded&&!worldPaused(loaded)&&!loaded.fixture&&!loaded.autonomy){const draft=structuredClone(loaded);enableAutonomy(draft);draft.revision++;loaded=await persistWorld(draft,[],loaded.revision);}if(loaded)await prepareAdmissionMap(loaded);const loadedWriter=await writerContext();world=loaded;startWithoutWorld=!loaded;writer=loadedWriter;away=false;foregroundFence=undefined;reanchor();
   // Resume durable intake in its persisted order. Branch switches have already
   // terminalized old Pending atomically; a new writer rechecks original intent.
   const recovered=await pendingCommands(),recoveredRequests:RuntimeRequest[]=[];
@@ -108,12 +116,12 @@ async function handle(r:RuntimeRequest){
   if(!world&&!startWithoutWorld&&!r.replaceIncompatible)throw Error('戰役尚未安全讀取，請先重新讀取或確認版本不相容；原資料保留。');
   const name=r.name.trim();if(!name||name.length>24||/[\x00-\x1f\x7f]/.test(name))throw new Error('請輸入 1～24 字的名字。');
   const fixture=createFormalWorld({campaign:crypto.randomUUID(),seed:r.seed,speed:r.speed,name,civilizationId:r.civilizationId,offlineHours:r.offlineHours});
-  enableAutonomy(fixture);const committed=await startCampaign(fixture,r.replaceIncompatible);await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  enableAutonomy(fixture);const committed=await startCampaign(fixture,r.replaceIncompatible);await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;saved(true);writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='restore'||r.type==='import'){
   // Persistence performs history cleanup, Recovery, world and authority changes atomically.
   const committed=r.type==='restore'?await restore(r.id,true):await importSave(r.text,true);
-  await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
+  await prepareAdmissionMap(committed);const nextWriter=await writerContext();world=committed;saved(true);writer=nextWriter;away=false;foregroundFence=undefined;reanchor();post({type:'switched',transitionId:r.transitionId,world,branch:writer.branch});await publishReportStatus();return;
  }
  if(r.type==='cityIntel'){if(!world||r.campaignId!==world.campaignId){post({type:'cityIntel',queryId:r.queryId,error:'戰役已變更，請重新開啟情報窗。'});return;}if(r.generation!==undefined&&(!Number.isSafeInteger(r.generation)||r.generation<0))throw new Error('無效的據點世代。');if(!Number.isSafeInteger(r.reportCursor)||r.reportCursor<1||!Number.isSafeInteger(r.time)||r.time<0)throw new Error('無效的情報游標。');const snapshot={...world,time:Math.min(world.time,r.time),sequences:{...world.sequences,report:Math.min(world.sequences.report,r.reportCursor)}};post({type:'cityIntel',queryId:r.queryId,data:await readCityIntel(snapshot,r.cityId,r.generation)});return;}
  if(!world)throw new Error('請先建立正式世界。');
@@ -164,7 +172,7 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
      if(!order){
       const ack=confirmationAck(row,world.revision+1);admission.revision=world.revision+1;
       for(let i=commandHistory(world).length;i<commandHistory(admission).length;i++)commandHistory(admission)[i].committedRevision=admission.revision;
-      normalizeOutcomeRevisions(admission);world=await save(admission,catchupReports,world.revision,undefined,{row,ack});passiveRevisionBase=world.revision;
+      normalizeOutcomeRevisions(admission);world=await persistWorld(admission,catchupReports,world.revision,undefined,{row,ack});passiveRevisionBase=world.revision;
       post({type:'commandAck',ack,campaignId:row.campaignId});state();return;
      }
     }else if(target>world.time){admission=advanceFormal(world,target).world;admission.revision=world.revision;}
@@ -174,7 +182,7 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
     result.world.revision=world.revision+1;
     for(let i=commandHistory(world).length;i<commandHistory(result.world).length;i++)commandHistory(result.world)[i].committedRevision=Math.min(commandHistory(result.world)[i].committedRevision,result.world.revision);
     normalizeOutcomeRevisions(result.world);ack.revision=result.world.revision;
-    world=await save(result.world,[...catchupReports,...result.reports],world.revision,undefined,{row,ack});
+    world=await persistWorld(result.world,[...catchupReports,...result.reports],world.revision,undefined,{row,ack});
     if(['developer.configure','campaign.configure','player.rebirth','player.end'].includes(order.payload.type)||worldPaused(world))reanchor();
     lastSavedAt=performance.now();retryAt=0;passiveRevisionBase=world.revision;
    }else world=await finishCommand(row,ack,world.revision);
@@ -203,7 +211,8 @@ async function executeCommand(r:Extract<RuntimeRequest,{type:'command'}>){
 async function runRequest(r:RuntimeRequest){
  try{await handle(r);}catch(error:unknown){
   const text=error instanceof Error?error.message:'正式提交失敗。';
-  if(error instanceof QueryViewChanged)post({type:'notice',error:true,text});
+  if(error instanceof Error&&saveErrors.has(error)&&r.type!=='command')post({type:'error',saveFailure:true,requestId:r.requestId,operation:r.type,text});
+  else if(error instanceof QueryViewChanged)post({type:'notice',error:true,text});
   else if(r.type==='command'){const existing=await commandStatus(r.order.campaignId,r.order.commandId).catch(()=>undefined);post({type:'commandReceiveFailed',retired:error instanceof RetiredCommand,campaignId:r.order?.campaignId,commandId:r.order?.commandId,row:existing,text:(error instanceof RetiredCommand?'舊身份已關閉，這次重送未執行：':existing?'此重送未受理：':'命令未持久接收：')+text+' 原始操作保留，請查詢後確認。'});}
   else if(r.type==='start'||r.type==='import'||r.type==='restore')post({type:'switchFailed',transitionId:r.transitionId,world,text});
   else if(r.type==='reportPage'||r.type==='reportStatus'||r.type==='reportAction')post({type:'notice',text:'戰報操作暫時失敗，請重試。'});
@@ -230,7 +239,7 @@ async function drain(){
    if(request){if(controls.has(request.type)){try{await queryQueue;await runRequest(request);}finally{controlPending--;}}else await runRequest(request);continue;}
    tickPending=false;tickRunning=true;
    try{if(!away)await advanceAndSave();}
-   catch(error:unknown){retryAt=performance.now()+1000;post({type:'notice',error:true,text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}
+   catch(error:unknown){retryAt=performance.now()+1000;post({type:'notice',error:true,saveFailure:error instanceof Error&&saveErrors.has(error),text:error instanceof Error?error.message:'自動保存失敗，先前進度保留。'});}
    finally{tickRunning=false;}
   }
  }finally{draining=false;}
@@ -246,8 +255,9 @@ self.onmessage=(event:MessageEvent<RuntimeRequest>)=>{
   queryIntake.set(r,intakeQueue);queryQueue=queryQueue.then(()=>runRequest(r)).catch(()=>{});return;
  }
  if(controls.has(r.type))controlPending++;
- // Capture the visibility boundary before it can wait behind an atomic save.
- if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Math.max(0,Date.now()-(absolute-(performance.timeOrigin+foregroundFence)))});}
+ // Capture the high-precision boundary before it waits behind a save.
+ // Persistence quantizes only the final shared wall anchor, never this fence.
+ if(r.type==='away'&&!away){const received=performance.now(),absolute=performance.timeOrigin+received,at=Number.isFinite(r.visibilityAt)?Math.max(0,Math.min(received,r.visibilityAt!-performance.timeOrigin)):received;foregroundFence=Math.min(foregroundFence??at,at);awayBoundaries.set(r,{target:targetTime(foregroundFence),wallAt:Date.now()-(absolute-(performance.timeOrigin+foregroundFence))});}
  requests.push(r);
  if(r.type==='command'){
   post({type:'commandReceived',campaignId:r.order?.campaignId,commandId:r.order?.commandId,requestId:r.requestId});

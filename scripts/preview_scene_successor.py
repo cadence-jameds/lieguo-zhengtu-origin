@@ -75,22 +75,24 @@ def read_record(root=ROOT):
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned preview/scene proof or scope';return r
 def accepts(path,predecessor,root=ROOT):
+ from android_save_successor import accepts as hotfix
  from global_protection_successor import accepts as child
  if path not in SOURCES:return child(path,predecessor,root)
  r=read_record(root);v=r['changes'].get(path)
  if v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after']:return True
- return child(path,predecessor,root)
+ return child(path,predecessor,root) or hotfix(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
  from global_protection_successor import accepts_adapter as child
  if path not in ADAPTERS:return child(path,before,root)
  read_record(root)
  return before==previous(BASE,path) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child(path,adapters()[path],root))
 def validate(root=ROOT):
+ from android_save_successor import accepts as hotfix
  from global_protection_successor import accepts as child, accepts_adapter as child_adapter
  r=read_record(root)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded preview/scene edit',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root) or hotfix(p,v['after'],root),('Unrecorded preview/scene edit',p)
  for section in ['invariants','historical']:
-  for p,v in r[section].items():assert sha((root/p).read_bytes())==v,('Gameplay, Runtime, PWA, data safety or historical evidence changed',p)
+  for p,v in r[section].items():assert sha((root/p).read_bytes())==v or section=='invariants' and hotfix(p,v,root),('Gameplay, Runtime, PWA, data safety or historical evidence changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Unrecorded preview/scene adapter',p)
  return r
 if __name__=='__main__':validate();print('PASS: pinned preview/scene UI successor; all other src, Formal rules, B10 persistence/fence, PR62 storage recovery, PWA and art bytes preserved.')

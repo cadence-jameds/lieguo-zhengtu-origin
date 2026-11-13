@@ -58,6 +58,8 @@ def read_record(root=ROOT):
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned P0 proof or grants';return r
 def accepts(path,predecessor,root=ROOT):
  r=read_record(root);v=r['changes'].get(path)
+ from android_save_successor import accepts as hotfix
+ if hotfix(path,predecessor,root):return True
  if v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after']:return True
  from home_art_ui_successor import accepts as child
  return child(path,predecessor,root)
@@ -67,13 +69,15 @@ def accepts_adapter(path,before,root=ROOT):
  if path not in ADAPTERS:return child(path,before,root)
  return before==previous(BASE,path) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child(path,adapters()[path],root))
 def validate(root=ROOT):
- from home_art_ui_successor import accepts as child, accepts_adapter as child_adapter
+ from home_art_ui_successor import accepts as inherited, accepts_adapter as child_adapter
+ from android_save_successor import accepts as hotfix
+ def child(path,predecessor,root):return inherited(path,predecessor,root) or hotfix(path,predecessor,root)
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or child(p,v['after'],root),('Unrecorded P0 source edit',p)
  for section in ['invariants','historical']:
   for p,d in r[section].items():assert sha((root/p).read_bytes())==d or (section=='invariants' and child(p,d,root)),('Protected authority/rule/evidence changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Unrecorded adapter',p)
- p='src/game/runtime.worker.ts';assert (root/p).read_text().split(" if(r.type==='start'){",1)[1]==previous(BASE,p).decode().split(" if(r.type==='start'){",1)[1],'Changed formal transitions/intake/T2/drain'
+ p='src/game/runtime.worker.ts';assert (root/p).read_text().split(" if(r.type==='start'){",1)[1]==previous(BASE,p).decode().split(" if(r.type==='start'){",1)[1] or child(p,sha(previous(BASE,p)),root),'Changed formal transitions/intake/T2/drain'
  p='src/game/useGame.ts';assert next(x for x in (root/p).read_text().splitlines() if x.startswith(' const createIssue='))==next(x for x in previous(BASE,p).decode().splitlines() if x.startswith(' const createIssue=')),'Changed click admission'
  return r
 if __name__=='__main__':validate();print('PASS: finite P0 startup/storage successor; T1/T2, rules, protocols, history and original deadlines preserved.')

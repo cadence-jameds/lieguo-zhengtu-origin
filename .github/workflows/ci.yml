@@ -67,6 +67,8 @@ jobs:
           python3 scripts/test_preview_scene_successor.py
           python3 scripts/global_protection_successor.py
           python3 scripts/test_global_protection_successor.py
+          python3 scripts/android_save_successor.py
+          python3 scripts/test_android_save_successor.py
           node scripts/verify-runtime-parity.mjs
           node scripts/verify-projection-boundaries.mjs
           node scripts/verify-preview-boundaries.mjs

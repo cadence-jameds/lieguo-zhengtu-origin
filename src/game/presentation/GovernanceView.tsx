@@ -1,3 +1,4 @@
+import {playerMessage} from '../playerMessage';
 import type {WorldRead} from '../presentationModel';
 import {useEffect,useState} from 'react';
 import {governanceBase,type GovernanceBase} from '../governanceAdmission';
@@ -18,7 +19,7 @@ export function GovernorControls({world,city,issue,busy}:Props&{city:FormalCity}
  <label>治理方針<select aria-label="治理方針" disabled={locked} value={policy} onChange={e=>setPolicy(e.target.value as GovernancePolicy)}>{GOVERNANCE_POLICIES.map(p=><option key={p} value={p}>{GOVERNANCE_POLICY_LABELS[p]}</option>)}</select></label>
  <label>每世界小時支出上限<input type="number" min="0" disabled={locked} value={Number.isNaN(budget)?'':budget} onChange={e=>setBudget(e.target.valueAsNumber)}/></label>
  <label>每種資源最低保留量<input type="number" min="0" disabled={locked} value={Number.isNaN(reserve)?'':reserve} onChange={e=>setReserve(e.target.valueAsNumber)}/></label>
- <p>四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。</p><p>本小時已支出 {gov?Object.values(gov.spent).reduce((n,v)=>n+v,0):0} · {gov?.blocked??'等待委任'}</p>{!valid&&<p role="alert">預算與最低保留量須為非負整數。</p>}{error&&<p role="alert">{error}</p>}
+ <p>四資源支出合計上限；不合併其他城市庫存。設定預算不代表立即付款。</p><p>本小時已支出 {gov?Object.values(gov.spent).reduce((n,v)=>n+v,0):0} · {gov?.blocked??'等待委任'}</p>{!valid&&<p role="alert">預算與最低保留量須為非負整數。</p>}{error&&<p role="alert">{playerMessage(error,'治理設定暫時無法完成，請重試。')}</p>}
  <button disabled={locked||!qualified||!valid} onClick={()=>void submit(true)}>{gov?.enabled?'套用治理設定':'委任總督'}</button>{gov?.enabled&&<button disabled={locked} onClick={()=>void submit(false)}>停止總督</button>}</section>;
 }
 export function GovernanceView(props:Props){
