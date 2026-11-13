@@ -26,3 +26,14 @@
 .art-loading-screen{min-height:100dvh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at top,#343322,#111812 70%);color:var(--text)}
 .art-loading-card{width:min(520px,100%);text-align:center;padding:32px 20px;border:1px solid #95784b;box-shadow:0 20px 80px #0007}
 .art-loading-card h1{font-size:clamp(22px,5vw,30px)}.art-loading-card progress{width:100%;height:18px;accent-color:#bc9856}.art-loading-card small{display:block;margin-bottom:20px}.art-loading-card button{margin:6px}
+
+/* Compact player notices share the existing toast surface; recovery stays actionable. */
+.game-notice-region{position:fixed;z-index:180;display:grid;gap:6px;width:min(280px,calc(100vw - 16px));max-width:calc(100vw - 16px);overflow:auto;overscroll-behavior:contain;pointer-events:none}
+.game-notice-region .toast,.game-notice-region .projection-sync-notice{position:static;inset:auto;transform:none;width:100%;max-width:100%;margin:0;padding:9px 30px 9px 11px;border:1px solid #ac925c;border-radius:7px;background:rgba(22,51,38,.96);color:#f0e5bd;box-shadow:0 3px 12px #0006;font-size:13px;line-height:1.4;pointer-events:auto;overflow-wrap:anywhere;display:block}
+.game-notice-region .toast.error,.game-notice-region .save-notice[data-save-state=blocked]{border-color:#d5a465;background:rgba(33,49,34,.98);color:#ffdfad}
+.game-notice-region .toast{position:relative}.game-notice-region .notice-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.game-notice-region button{font-size:12px;min-height:28px;padding:3px 6px;line-height:1.3}.game-notice-region .notice-close{position:absolute;right:3px;top:3px;border:0;background:transparent;font-size:17px;padding:1px 6px;min-width:24px}
+.game-notice-region .notice-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.game-notice-region .notice-reopen{border:0;background:transparent;padding:0;color:inherit;width:100%;text-align:left}
+.game-notice-region .projection-sync-notice p{margin:4px 0;font-size:12px;line-height:1.4}
+
+.game-notice-region .notice-close::before{content:"×"}

@@ -1,3 +1,4 @@
+import {playerMessage} from '../playerMessage';
 import {PresentationStoreContext} from '../usePresentation';
 import type {WorldRead} from '../presentationModel';
 import {createContext,useContext,useEffect,useRef,useState,useCallback,useSyncExternalStore} from 'react';
@@ -63,7 +64,7 @@ export function useConstructionPreviews(renderedWorld:WorldRead,cityId:CityId|un
  return {status,results:current?.results??[],displayResults:scoped?.displayResults??[],error,retry:()=>retry(n=>n+1)};
 }
 export function PreviewStatus({preview}:{preview:ReturnType<typeof useConstructionPreviews>}){
- if(preview.status==='unavailable')return <p role="alert" className="construction-preview-status">暫時無法預估。{preview.error??''}<button onClick={preview.retry}>重新查詢預覽</button></p>;
+ if(preview.status==='unavailable')return <p role="alert" className="construction-preview-status">暫時無法預估。{playerMessage(preview.error??'','請稍後重新查詢。')}<button onClick={preview.retry}>重新查詢預覽</button></p>;
  if(preview.status==='loading'&&!preview.displayResults.length)return <p role="status" className="construction-preview-status">正在取得施工時間…</p>;
  // Costs, missing resources and qualifications already have dedicated live UI.
  // Routine recalculation has no player action and must not announce internal states.

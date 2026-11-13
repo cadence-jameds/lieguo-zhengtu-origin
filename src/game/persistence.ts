@@ -1,3 +1,4 @@
+import {persistenceTime} from './persistenceTime';
 import {createReplayFence,validateReplayFence,intakeEpoch,nextIntakeEpoch,acceptCommandIdentity,type ReplayFence} from './replayFence';
 import {assertCommandFactsTransition,evidenceReceipt,ensureCommandFacts,pruneCommandEvidence} from './formal/commandEvidence';
 import {commandHistory,pendingHistory,worldLedger,findReceipt,bindLedger,cachedLedger,emptyVerifiedLedger,prepareVerifiedLedger,verifyLedgerArchive,type VerifiedLedger,type OriginalResult,normalizeOutcomeRevisions} from './formal/commandLedger';
@@ -302,6 +303,7 @@ export class FormalPersistence {
   return a;
  }
  private async commit(input:FormalWorld,reportWrites:readonly FormalReport[],mode:'save'|'start'|'restore'|'import',expectedRevision?:number,savedAt=Date.now(),activateAI=false,command?:CommandCommit,portable?:{snapshots:VerifiedLedger[];heads:{campaignId:string;root:string}[];inbox:InboxCommand[];recovery:{at:number;label:string;data:FormalEnvelope}[];growthAuthority:DomainAuthority[]},replacementToken?:string):Promise<FormalWorld>{
+  savedAt=persistenceTime(savedAt);
   // Final encodeSave validates the entire stamped candidate before any writes.
   // Avoid validating the same 2.8MB world twice in this transaction.
   input=validateFormalWorld(input);ensureCommandFacts(input);validateReportHistory(input,reportWrites);if(command)command=structuredClone(command);
