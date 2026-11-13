@@ -1,0 +1,932 @@
+[
+  {
+    "name": "1X repeated visibility/pagehide, queued jobs, real authority/Recovery validation",
+    "status": "PASS",
+    "data": {
+      "cycles": 20,
+      "ai": 99,
+      "jobs": {
+        "construction": 1,
+        "training": 1,
+        "research": 1
+      },
+      "snapshots": [
+        {
+          "at": 1794546034133,
+          "time": 21
+        },
+        {
+          "at": 1794546036076,
+          "time": 1427
+        },
+        {
+          "at": 1794546037225,
+          "time": 2070
+        },
+        {
+          "at": 1794546038823,
+          "time": 2826
+        },
+        {
+          "at": 1794546039689,
+          "time": 3364
+        },
+        {
+          "at": 1794546040399,
+          "time": 3799
+        },
+        {
+          "at": 1794546040953,
+          "time": 4121
+        },
+        {
+          "at": 1794546041488,
+          "time": 4415
+        },
+        {
+          "at": 1794546042110,
+          "time": 4740
+        },
+        {
+          "at": 1794546042691,
+          "time": 5080
+        },
+        {
+          "at": 1794546043243,
+          "time": 5401
+        },
+        {
+          "at": 1794546043793,
+          "time": 5673
+        },
+        {
+          "at": 1794546044312,
+          "time": 5979
+        },
+        {
+          "at": 1794546044837,
+          "time": 6301
+        },
+        {
+          "at": 1794546045312,
+          "time": 6564
+        },
+        {
+          "at": 1794546045839,
+          "time": 6846
+        },
+        {
+          "at": 1794546046310,
+          "time": 7095
+        },
+        {
+          "at": 1794546046843,
+          "time": 7406
+        },
+        {
+          "at": 1794546047262,
+          "time": 7641
+        },
+        {
+          "at": 1794546047754,
+          "time": 7907
+        }
+      ],
+      "final": {
+        "at": 1794546048188,
+        "time": 8136
+      }
+    }
+  },
+  {
+    "name": "10X repeated visibility/pagehide, queued jobs, real authority/Recovery validation",
+    "status": "PASS",
+    "data": {
+      "cycles": 20,
+      "ai": 99,
+      "jobs": {
+        "construction": 1,
+        "training": 1,
+        "research": 1
+      },
+      "snapshots": [
+        {
+          "at": 1794546053890,
+          "time": 152
+        },
+        {
+          "at": 1794546056209,
+          "time": 18194
+        },
+        {
+          "at": 1794546057291,
+          "time": 24325
+        },
+        {
+          "at": 1794546058118,
+          "time": 29143
+        },
+        {
+          "at": 1794546058699,
+          "time": 32452
+        },
+        {
+          "at": 1794546059339,
+          "time": 35734
+        },
+        {
+          "at": 1794546059984,
+          "time": 39345
+        },
+        {
+          "at": 1794546060464,
+          "time": 41795
+        },
+        {
+          "at": 1794546060956,
+          "time": 44399
+        },
+        {
+          "at": 1794546061450,
+          "time": 47377
+        },
+        {
+          "at": 1794546061919,
+          "time": 49980
+        },
+        {
+          "at": 1794546062423,
+          "time": 53015
+        },
+        {
+          "at": 1794546062898,
+          "time": 55485
+        },
+        {
+          "at": 1794546063418,
+          "time": 58589
+        },
+        {
+          "at": 1794546063874,
+          "time": 60980
+        },
+        {
+          "at": 1794546064298,
+          "time": 63430
+        },
+        {
+          "at": 1794546064749,
+          "time": 65798
+        },
+        {
+          "at": 1794546065250,
+          "time": 68631
+        },
+        {
+          "at": 1794546065685,
+          "time": 71073
+        },
+        {
+          "at": 1794546066161,
+          "time": 73535
+        }
+      ],
+      "final": {
+        "at": 1794546066610,
+        "time": 75957
+      }
+    }
+  },
+  {
+    "name": "25X repeated visibility/pagehide, queued jobs, real authority/Recovery validation",
+    "status": "PASS",
+    "data": {
+      "cycles": 20,
+      "ai": 99,
+      "jobs": {
+        "construction": 1,
+        "training": 1,
+        "research": 1
+      },
+      "snapshots": [
+        {
+          "at": 1794546071993,
+          "time": 367
+        },
+        {
+          "at": 1794546074236,
+          "time": 43006
+        },
+        {
+          "at": 1794546075213,
+          "time": 57086
+        },
+        {
+          "at": 1794546075885,
+          "time": 65495
+        },
+        {
+          "at": 1794546076505,
+          "time": 73635
+        },
+        {
+          "at": 1794546077085,
+          "time": 82657
+        },
+        {
+          "at": 1794546077670,
+          "time": 91114
+        },
+        {
+          "at": 1794546078157,
+          "time": 98193
+        },
+        {
+          "at": 1794546078636,
+          "time": 104107
+        },
+        {
+          "at": 1794546079178,
+          "time": 112159
+        },
+        {
+          "at": 1794546079651,
+          "time": 118853
+        },
+        {
+          "at": 1794546080193,
+          "time": 126263
+        },
+        {
+          "at": 1794546081028,
+          "time": 133442
+        },
+        {
+          "at": 1794546081634,
+          "time": 141526
+        },
+        {
+          "at": 1794546082302,
+          "time": 153126
+        },
+        {
+          "at": 1794546082850,
+          "time": 160076
+        },
+        {
+          "at": 1794546084009,
+          "time": 174551
+        },
+        {
+          "at": 1794546085137,
+          "time": 188001
+        },
+        {
+          "at": 1794546085870,
+          "time": 199188
+        },
+        {
+          "at": 1794546086632,
+          "time": 206440
+        }
+      ],
+      "final": {
+        "at": 1794546087182,
+        "time": 213897
+      }
+    }
+  },
+  {
+    "name": "320px safe repeated technical notices across primary views",
+    "status": "PASS",
+    "data": [
+      {
+        "view": "city",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 8,
+        "y": 231.625,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 38,
+            "y": 329,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "map",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 32,
+        "y": 370,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 228,
+            "y": 162,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "army",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 32,
+        "y": 483.625,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 16,
+            "y": 164,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "research",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 32,
+        "y": 370,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 228,
+            "y": 164,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "legion",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 32,
+        "y": 164,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 228,
+            "y": 538,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "reports",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 8,
+        "y": 224,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 228,
+            "y": 538,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "town",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 8,
+        "y": 517.984375,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 574,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 260,
+            "y": 320,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 18,
+            "y": 334,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      }
+    ]
+  },
+  {
+    "name": "390px safe repeated technical notices across primary views",
+    "status": "PASS",
+    "data": [
+      {
+        "view": "city",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 102,
+        "y": 240.625,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 18,
+            "y": 329,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "map",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 102,
+        "y": 377.8125,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 298,
+            "y": 162,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "army",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 8,
+        "y": 198,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 16,
+            "y": 164,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "research",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 102,
+        "y": 164,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 298,
+            "y": 742,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "legion",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 102,
+        "y": 164,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 298,
+            "y": 742,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "reports",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 102,
+        "y": 377.8125,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 298,
+            "y": 742,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "town",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 8,
+        "y": 319,
+        "height": 38.1875,
+        "headerBottom": 156,
+        "navTop": 778,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 330,
+            "y": 422,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 288,
+            "y": 728.59375,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      }
+    ]
+  },
+  {
+    "name": "1440px safe repeated technical notices across primary views",
+    "status": "PASS",
+    "data": [
+      {
+        "view": "city",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 1152,
+        "y": 98,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 222,
+            "y": 632,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "map",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 1152,
+        "y": 405.8125,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 1078,
+            "y": 96,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "army",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 8,
+        "y": 140.6875,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 1348,
+            "y": 98,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "research",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 1152,
+        "y": 98,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 1348,
+            "y": 836,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "legion",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 1152,
+        "y": 98,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 1348,
+            "y": 836,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "reports",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 1152,
+        "y": 98,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 1348,
+            "y": 836,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      },
+      {
+        "view": "town",
+        "text": "操作未完成，請確認狀態後重試。",
+        "width": 280,
+        "x": 1152,
+        "y": 98,
+        "height": 38.1875,
+        "headerBottom": 90,
+        "navTop": 900,
+        "controls": [],
+        "floatBoxes": [
+          {
+            "kind": "quick-settings-gear",
+            "x": 1380,
+            "y": 450,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "kind": "formal-protection-status",
+            "x": 1318,
+            "y": 836,
+            "width": 83.71875,
+            "height": 28
+          }
+        ],
+        "toastCount": 1
+      }
+    ]
+  },
+  {
+    "name": "temporary abort retries automatically; recovered notification follows real atomic completion",
+    "status": "PASS",
+    "data": {
+      "rolledBackAtFailure": true,
+      "committedRevision": 1,
+      "realRecovery": true
+    }
+  },
+  {
+    "name": "persistent abort stays actionable after collapse and clears only after manual committed save",
+    "status": "PASS",
+    "data": {
+      "failedRevision": 0,
+      "committedRevision": 1,
+      "entryRetained": true
+    }
+  },
+  {
+    "name": "a foreground command persists once across immediate background/resume and native freeze",
+    "status": "PASS",
+    "data": {
+      "builds": 1,
+      "ai": 99,
+      "validAuthority": true
+    }
+  }
+]

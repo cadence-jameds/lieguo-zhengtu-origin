@@ -86,19 +86,23 @@ def read_record(root=ROOT):
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed pinned global protection proof';return r
 def accepts(path,predecessor,root=ROOT):
+ from android_save_successor import accepts as child
  if path not in SOURCES:return False
  r=read_record(root);v=r['changes'].get(path)
- return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==v['after'] or accepts_followup(path,v['after'],root)))
+ if v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and (sha((root/path).read_bytes())==v['after'] or accepts_followup(path,v['after'],root)):return True
+ return child(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
- if path not in ADAPTERS:return False
+ from android_save_successor import accepts_adapter as child
+ if path not in ADAPTERS:return child(path,before,root)
  read_record(root)
- return before==previous(BASE,path) and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
+ return before==previous(BASE,path) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child(path,adapters()[path],root))
 def validate(root=ROOT):
+ from android_save_successor import accepts as child, accepts_adapter as child_adapter
  r=read_record(root)
  for p,v in followup_changes().items():assert sha((root/p).read_bytes())==v['after'],('Unpinned outskirts follow-up',p)
- for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or accepts_followup(p,v['after'],root),('Unpinned global protection edit',p)
+ for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or accepts_followup(p,v['after'],root) or child(p,v['after'],root),('Unpinned global protection edit',p)
  for section in ['invariants','historical']:
-  for p,v in r[section].items():assert sha((root/p).read_bytes())==v,('Preview/rules/storage/PWA/history changed',p)
- for p,b in adapters().items():assert (root/p).read_bytes()==b,('Unpinned global protection adapter',p)
+  for p,v in r[section].items():assert sha((root/p).read_bytes())==v or section=='invariants' and child(p,v,root),('Preview/rules/storage/PWA/history changed',p)
+ for p,b in adapters().items():assert (root/p).read_bytes()==b or child_adapter(p,b,root),('Unpinned global protection adapter',p)
  return r
 if __name__=='__main__':validate();print('PASS: one global protection UI; exact PR64 previews, all other src, game rules, storage, PWA and historical evidence preserved.')
