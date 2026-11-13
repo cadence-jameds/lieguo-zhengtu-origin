@@ -8,6 +8,9 @@ IMPLEMENTATION='d86bce6d86d3e05b786f9046d587426e13760ef6'
 FOLLOWUP_BASE='9054b5c38d024469379885e7569f1e776f660471'
 FOLLOWUP='4176cbebdaee698d3ddc2ecb77244cf50615dd1d'
 FOLLOWUP_SOURCES={'src/game/runtime.worker.ts','src/game/useGame.ts','src/game/useSaveNotices.test.tsx'}
+NOTICE_BASE='c5825b7e68967700bdc62d14c2107a3dd7f23a3c'
+NOTICE_FOLLOWUP='152d18812691afa0ffda79e1612be99f9299af85'
+NOTICE_SOURCES={'src/game/presentation/GameNotices.tsx','src/game/presentation/gameNotices.test.tsx'}
 RECORD='docs/validation/android-background-save/compatibility.json'
 SOURCES={'releases/notes/android-background-save.json','scripts/fixtures/background-save.worker.ts','scripts/verify-background-save-browser.mjs',*['src/game/'+p for p in ['GameApp.tsx','LocalCampaignManager.tsx','ProjectionSyncNotice.tsx','commandFeedback.ts','persistence.ts','runtime.worker.ts','useGame.ts','persistenceTime.ts','persistenceTime.test.ts','playerMessage.ts','saveStatus.ts','useSaveNotices.test.tsx','formal/backgroundSaveHotfix.test.ts','presentation/GameNotices.tsx','presentation/gameNotices.test.tsx','presentation/GovernanceView.tsx','presentation/playable.css','presentation/useConstructionPreviews.tsx']]}
 ADAPTERS=['scripts/global_protection_successor.py','scripts/preview_scene_successor.py','scripts/home_art_ui_successor.py','scripts/android_startup_successor.py','.github/workflows/ci.yml']
@@ -65,10 +68,11 @@ def expected_record():
   try:before=sha(previous(BASE,p))
   except subprocess.CalledProcessError:before=None
   changes[p]={'before':before,'after':sha(previous(IMPLEMENTATION,p))};grants[p]=[before] if before else []
- followup=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',FOLLOWUP_BASE,FOLLOWUP],text=True).splitlines());assert followup==FOLLOWUP_SOURCES and followup<=SOURCES,'Unrequested protocol followup scope'
- for p in sorted(followup):
-  assert sha(previous(FOLLOWUP_BASE,p))==changes[p]['after'],('Changed followup predecessor',p)
-  changes[p]['after']=sha(previous(FOLLOWUP,p))
+ for base,commit,paths in [(FOLLOWUP_BASE,FOLLOWUP,FOLLOWUP_SOURCES),(NOTICE_BASE,NOTICE_FOLLOWUP,NOTICE_SOURCES)]:
+  followup=set(subprocess.check_output(['git','-C',str(ROOT),'diff','--name-only',base,commit],text=True).splitlines());assert followup==paths and followup<=SOURCES,'Unrequested followup scope'
+  for p in sorted(followup):
+   assert sha(previous(base,p))==changes[p]['after'],('Changed followup predecessor',p)
+   changes[p]['after']=sha(previous(commit,p))
  records=subprocess.check_output(['git','-C',str(ROOT),'ls-tree','-r','--name-only',BASE,'docs/validation'],text=True).splitlines()
  for p in records:
   if not p.endswith('/compatibility.json'):continue
@@ -87,7 +91,7 @@ def expected_record():
  historical={p:sha(previous(BASE,p)) for p in records if p.endswith('/compatibility.json')}
  for v in [95,96,97]:
   p=f'docs/b6-v{v}/河谷戰役_vNext_平衡重構討論_v{v}.md';historical[p]=sha(previous(BASE,p))
- result={'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'diagnosticFollowup':{'base':FOLLOWUP_BASE,'commit':FOLLOWUP},'changes':changes,'grants':grants,'adapterGrants':adapter_grants,'invariants':invariants,'historical':historical,'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
+ result={'schemaVersion':1,'baseCommit':BASE,'implementationCommit':IMPLEMENTATION,'diagnosticFollowup':{'base':FOLLOWUP_BASE,'commit':FOLLOWUP},'noticeFollowup':{'base':NOTICE_BASE,'commit':NOTICE_FOLLOWUP},'changes':changes,'grants':grants,'adapterGrants':adapter_grants,'invariants':invariants,'historical':historical,'adapters':{p:{'before':sha(previous(BASE,p)),'after':sha(b)} for p,b in adapters().items()}}
  previous.cache_clear();close_objects();return result
 
 def read_record(root=ROOT):

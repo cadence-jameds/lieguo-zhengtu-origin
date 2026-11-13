@@ -6,6 +6,10 @@
     "base": "9054b5c38d024469379885e7569f1e776f660471",
     "commit": "4176cbebdaee698d3ddc2ecb77244cf50615dd1d"
   },
+  "noticeFollowup": {
+    "base": "c5825b7e68967700bdc62d14c2107a3dd7f23a3c",
+    "commit": "152d18812691afa0ffda79e1612be99f9299af85"
+  },
   "changes": {
     "releases/notes/android-background-save.json": {
       "before": null,
@@ -57,7 +61,7 @@
     },
     "src/game/presentation/GameNotices.tsx": {
       "before": null,
-      "after": "918f351e0b0094d247fb5603920e1d4b1ed52bb3cbd97075b40d6c4c2f6cfbb8"
+      "after": "353c7ff980f10e6fd2847f5a4831e015f4e1a9b79f00ec3399e3aa4e85e76ef9"
     },
     "src/game/presentation/GovernanceView.tsx": {
       "before": "d6d32f598b6a6596cb31650adabd772f401416e0f887ad22aa355f837e9280c2",
@@ -65,7 +69,7 @@
     },
     "src/game/presentation/gameNotices.test.tsx": {
       "before": null,
-      "after": "942ae064d35dd70d99fea2ddf7c04c3990c71608f25c9a1089aa74e95ae6cd5b"
+      "after": "cadc3ee4bcbbf33d63a988aee0e6af4308b0085906d088996dd26f053dcd45f6"
     },
     "src/game/presentation/playable.css": {
       "before": "532921c8922b06bf80cf2a7b9bbb5d6cbbe97291df5433cc4bc9922900d8f9cb",
