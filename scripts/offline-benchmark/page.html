@@ -1,0 +1,50 @@
+<!doctype html><meta charset="utf-8"><title>B10 P0 私人離線 Benchmark</title>
+<h1>B10 P0 本機唯讀 Benchmark</h1>
+<p>選取私人備份後，只讀取檔案，匯入此 origin 下隨機命名的隔離資料庫。原檔案不會被寫入，正式遊戲 IndexedDB 不會被開啟或修改。結果只含數量、耗時、記憶體和去識別化量測。請保留此分頁直到完成。</p>
+<label>私人備份 <input id="file" type="file" accept=".json,.realm-save"></label>
+<label>離線時數 <select id="hours"><option>12</option><option>4</option><option>1</option></select></label>
+<button id="run">開始</button><button id="download" disabled>下載統計 JSON</button>
+<pre id="status">尚未執行。未選檔案時使用固定 seed 的 99 AI / 100 城市合成戰役。</pre>
+<script type="module">
+const profilerMode = 'BENCHMARK_MODE';
+window.openLabWorker = () => new Promise((resolve, reject) => {
+  const w = new Worker('/worker.mjs', {type: 'module'});
+  w.onerror = () => {w.terminate(); reject(Error('WORKER_FAILED'));};
+  w.onmessage = e => {if (e.data.type === 'ready') resolve(w);};
+});
+window.requestLab = (w, data) => new Promise((resolve, reject) => {
+  w.onmessage = e => {
+    if (e.data.type === 'result') resolve(e.data.value);
+    else if (e.data.type === 'error') reject(Error(e.data.code));
+  };
+  w.postMessage(data);
+});
+let output;
+document.querySelector('#run').onclick = async () => {
+  const button = document.querySelector('#run'), status = document.querySelector('#status'); button.disabled = true;
+  let p, w;
+  try {
+    const file = document.querySelector('#file').files[0];
+    if (file && file.size > 100 * 1024 * 1024) throw Error('FILE_TOO_LARGE');
+    const options = {ai: 99, speed: 25, hours: Number(document.querySelector('#hours').value), scenario: 'fresh'};
+    status.textContent = '建立隔離世界、依正式相容性與完整性規則驗證備份……';
+    w = await window.openLabWorker();
+    p = await window.requestLab(w, {action: 'prepare', options, text: file ? await file.text() : undefined}); w.terminate();
+    status.textContent = '推進世界並原子提交隔離資料庫。完成前請勿關閉分頁……';
+    w = await window.openLabWorker(); output = await window.requestLab(w, {action: 'measure', prepared: p, options}); w.terminate();
+    output.environment = {engine: 'Native browser DedicatedWorker / IndexedDB', userAgent: navigator.userAgent,
+      instrumentation: profilerMode === 'count' ? 'event counter/checksum only' : 'detailed bounded spans', profilerMode,
+      cpuThrottle: 'unmeasured', memory: 'not measured by this page; use desktop CDP runner for sampled worker heap'};
+    status.textContent = JSON.stringify({totalMs: output.totalMs, events: output.events, stages: output.stages}, null, 2);
+    document.querySelector('#download').disabled = false;
+  } catch {status.textContent = 'BENCHMARK_FAILED_SOURCE_UNCHANGED：相容性／完整性或執行失敗。原檔案保留；未輸出遊戲內容。';}
+  finally {
+    w?.terminate(); if (p) {const c = await window.openLabWorker(); try {await window.requestLab(c, {action: 'cleanup', prepared: p});} finally {c.terminate();}}
+    button.disabled = false;
+  }
+};
+document.querySelector('#download').onclick = () => {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(output, null, 2)], {type: 'application/json'}));
+  const a = document.createElement('a'); a.href = url; a.download = 'b10p0-statistics.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+</script>

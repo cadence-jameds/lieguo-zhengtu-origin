@@ -31,6 +31,8 @@ jobs:
       - name: Prepare deterministic release metadata
         run: npm run release:prepare
       - run: npm run typecheck
+      - name: Offline profiler isolation and bounded statistics
+        run: node --test scripts/offline-benchmark/metrics.test.mjs scripts/offline-benchmark/isolation.test.mjs
       - name: Verify art comparison IDs, columns and sources
         run: python3 scripts/check-art-boards.py
       - name: City display scale evidence

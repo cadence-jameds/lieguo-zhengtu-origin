@@ -1,0 +1,31 @@
+{
+  "typecheck": "passed",
+  "build": "passed",
+  "profilerIsolationTests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "fullRegression": {
+    "passed": 2604,
+    "failed": 1,
+    "skipped": 12,
+    "success": false,
+    "failedFile": "src/game/formal/offlineExtinctionClockWorkerDelta.test.ts",
+    "failure": "developer-100 polling wait assertion; exact cause not established"
+  },
+  "failedFileRetry": {
+    "passed": 4,
+    "failed": 0,
+    "fullSuitePassClaim": false
+  },
+  "nativeFinalSmoke": {
+    "speed": 1,
+    "hours": 1,
+    "events": 326,
+    "totalMs": 1545.6000000014901
+  },
+  "finalRawSourceValidation": "passed after new-instance StorageMeta check",
+  "productionSourceDiff": false,
+  "privateSourceBytesUnchanged": true,
+  "androidPhysicalDevice": "not executed"
+}

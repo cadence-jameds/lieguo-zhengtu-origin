@@ -1,0 +1,348 @@
+{
+  "format": "b10p0-offline-profile-v1",
+  "scenario": "private-local-backup",
+  "hours": 1,
+  "setupMs": 2367.961904,
+  "source": "private-local-backup",
+  "sourceFormat": "raw-current-database-archive",
+  "sourceRecovered": false,
+  "auxiliaryArchiveVerified": true,
+  "bytes": 5573724,
+  "initial": {
+    "factions": 100,
+    "ai": 88,
+    "registeredAI": 99,
+    "cities": 100,
+    "armies": 8,
+    "battles": 0,
+    "ledgerReceipts": 1155,
+    "commandEvidence": 149,
+    "aiDecisions": 15245,
+    "aiAccepted": 9140,
+    "aiRejected": 45,
+    "governors": 1,
+    "ledgerOutcomes": 1155,
+    "scheduled": 216,
+    "completedBuildingLevels": 2261
+  },
+  "speed": 25,
+  "offlineCapHours": 12,
+  "pendingInbox": 0,
+  "totalMs": 18270.472592,
+  "stages": {
+    "read": 184.1131819999996,
+    "offline": 17075.711409,
+    "save": 1010.4785860000011
+  },
+  "replayEventsPerSecond": 498.4858197775366,
+  "events": 8512,
+  "yields": {
+    "count": 1146,
+    "totalMs": 2583.4380929999743,
+    "maxObservedWorkSliceMs": 40.35649799999919,
+    "requestedBudgetMs": 8,
+    "note": "Whole events can exceed 8ms; timer wait includes host scheduling. Final validation/commit is outside replay yields."
+  },
+  "advancedWorldMs": 90000000,
+  "final": {
+    "factions": 100,
+    "ai": 79,
+    "registeredAI": 99,
+    "cities": 100,
+    "armies": 9,
+    "battles": 0,
+    "ledgerReceipts": 1155,
+    "commandEvidence": 173,
+    "aiDecisions": 17818,
+    "aiAccepted": 11026,
+    "aiRejected": 45,
+    "governors": 2,
+    "ledgerOutcomes": 1155,
+    "scheduled": 231,
+    "completedBuildingLevels": 2605
+  },
+  "statistics": {
+    "events": 8512,
+    "maximumObservedDimensions": {
+      "cities": 100,
+      "armies": 17,
+      "pendingReceipts": 1886,
+      "queue": 237
+    },
+    "aiCostByPendingReceipts": [],
+    "sampling": {
+      "method": "deterministic Algorithm R reservoir; inclusive durations; percentiles are sampled estimates",
+      "capacityPerLabel": 2048,
+      "p50Minimum": 20,
+      "p95Minimum": 100,
+      "p99Minimum": 1000
+    },
+    "operations": {
+      "yield:start": {
+        "calls": 1,
+        "inclusiveMs": 4.284045999999762,
+        "selfMs": 4.284045999999762,
+        "meanMs": 4.284045999999762,
+        "maxMs": 4.284045999999762,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "yield:event": {
+        "calls": 1145,
+        "inclusiveMs": 2570.8745290000224,
+        "selfMs": 2570.8745290000224,
+        "meanMs": 2.245305265502203,
+        "maxMs": 37.560183999999936,
+        "sampleCount": 1145,
+        "p50Ms": 1.1573819999975967,
+        "p95Ms": 9.438444999999774,
+        "p99Ms": 17.104763999999705
+      }
+    }
+  },
+  "checkpoints": {
+    "afterRead": {
+      "events": 0,
+      "maximumObservedDimensions": {
+        "cities": 100,
+        "armies": 17,
+        "pendingReceipts": 1886,
+        "queue": 237
+      },
+      "aiCostByPendingReceipts": [],
+      "sampling": {
+        "method": "deterministic Algorithm R reservoir; inclusive durations; percentiles are sampled estimates",
+        "capacityPerLabel": 2048,
+        "p50Minimum": 20,
+        "p95Minimum": 100,
+        "p99Minimum": 1000
+      },
+      "operations": {}
+    },
+    "afterReplay": {
+      "events": 8512,
+      "maximumObservedDimensions": {
+        "cities": 100,
+        "armies": 17,
+        "pendingReceipts": 1886,
+        "queue": 237
+      },
+      "aiCostByPendingReceipts": [],
+      "sampling": {
+        "method": "deterministic Algorithm R reservoir; inclusive durations; percentiles are sampled estimates",
+        "capacityPerLabel": 2048,
+        "p50Minimum": 20,
+        "p95Minimum": 100,
+        "p99Minimum": 1000
+      },
+      "operations": {
+        "yield:start": {
+          "calls": 1,
+          "inclusiveMs": 4.284045999999762,
+          "selfMs": 4.284045999999762,
+          "meanMs": 4.284045999999762,
+          "maxMs": 4.284045999999762,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "yield:event": {
+          "calls": 1145,
+          "inclusiveMs": 2570.8745290000224,
+          "selfMs": 2570.8745290000224,
+          "meanMs": 2.245305265502203,
+          "maxMs": 37.560183999999936,
+          "sampleCount": 1145,
+          "p50Ms": 1.1573819999975967,
+          "p95Ms": 9.438444999999774,
+          "p99Ms": 17.104763999999705
+        }
+      }
+    }
+  },
+  "progressSeries": [
+    {
+      "fraction": 0,
+      "events": 0,
+      "elapsedMs": 184.2951710000002
+    },
+    {
+      "fraction": 0.05180861111111111,
+      "events": 424,
+      "elapsedMs": 952.0309350000002
+    },
+    {
+      "fraction": 0.10121631111111111,
+      "events": 837,
+      "elapsedMs": 1709.2128289999996
+    },
+    {
+      "fraction": 0.15034891111111112,
+      "events": 1222,
+      "elapsedMs": 2501.814019
+    },
+    {
+      "fraction": 0.20028474444444444,
+      "events": 1738,
+      "elapsedMs": 3480.4518969999995
+    },
+    {
+      "fraction": 0.2509129888888889,
+      "events": 2096,
+      "elapsedMs": 4037.4716949999997
+    },
+    {
+      "fraction": 0.3010372777777778,
+      "events": 2489,
+      "elapsedMs": 4653.848634
+    },
+    {
+      "fraction": 0.35004172222222224,
+      "events": 2910,
+      "elapsedMs": 5340.8075659999995
+    },
+    {
+      "fraction": 0.40128677777777777,
+      "events": 3443,
+      "elapsedMs": 6170.768415999999
+    },
+    {
+      "fraction": 0.45028036666666665,
+      "events": 3878,
+      "elapsedMs": 6948.568512
+    },
+    {
+      "fraction": 0.5002341,
+      "events": 4288,
+      "elapsedMs": 7804.675348999999
+    },
+    {
+      "fraction": 0.5507652,
+      "events": 4699,
+      "elapsedMs": 8555.077317
+    },
+    {
+      "fraction": 0.6010188,
+      "events": 5180,
+      "elapsedMs": 9290.228136
+    },
+    {
+      "fraction": 0.6504146555555556,
+      "events": 5571,
+      "elapsedMs": 10087.209647
+    },
+    {
+      "fraction": 0.7008724888888889,
+      "events": 5977,
+      "elapsedMs": 11002.700077
+    },
+    {
+      "fraction": 0.7504183555555556,
+      "events": 6369,
+      "elapsedMs": 11932.044722999999
+    },
+    {
+      "fraction": 0.8003274222222222,
+      "events": 6854,
+      "elapsedMs": 12901.501301
+    },
+    {
+      "fraction": 0.8503030777777778,
+      "events": 7218,
+      "elapsedMs": 13834.224847999998
+    },
+    {
+      "fraction": 0.9011773666666667,
+      "events": 7614,
+      "elapsedMs": 14819.238717
+    },
+    {
+      "fraction": 0.9517032666666667,
+      "events": 8033,
+      "elapsedMs": 15873.745864
+    },
+    {
+      "fraction": 1,
+      "events": 8512,
+      "elapsedMs": 17179.197721
+    }
+  ],
+  "equivalence": {
+    "atomicReadback": true,
+    "fields": [
+      "armies",
+      "autonomy",
+      "campaignId",
+      "cities",
+      "clockMode",
+      "colonizationUnits",
+      "combat",
+      "commandFacts",
+      "completionReceipts",
+      "dimensions",
+      "economyVersion",
+      "events",
+      "extinction",
+      "factions",
+      "fixture",
+      "governors",
+      "growthTasks",
+      "kind",
+      "largeProjects",
+      "ledger",
+      "logistics",
+      "metadata",
+      "offlineHours",
+      "playerFactionId",
+      "researchProjects",
+      "revision",
+      "seed",
+      "sequences",
+      "settlements",
+      "speed",
+      "time",
+      "worldLayer",
+      "fullLedgerArchive",
+      "fullCommandReceipts",
+      "commandOutcomes",
+      "reportHistory"
+    ]
+  },
+  "limitations": [
+    "Import/setup excluded from load total",
+    "No renderer or WorldStream cost",
+    "No pending Inbox command execution after load",
+    "Single run unless repetitions supplied"
+  ],
+  "environment": {
+    "engine": "Node / fake-indexeddb (not native IndexedDB)",
+    "node": "v24.19.0",
+    "v8": "13.6.233.17-node.51",
+    "os": "Linux 6.18.57",
+    "architecture": "x64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "logicalCPUs": 3,
+    "availableParallelism": 2,
+    "head": "c8b3554ff9643b74b624e4e77f381653afcccc20",
+    "instrumentation": "event counter/checksum only",
+    "profilerMode": "count",
+    "explicitGCBeforeMeasurement": true,
+    "v8HeapLimitBytes": 2348810240,
+    "cgroupCPU": "200000 100000",
+    "cgroupMemoryLimitBytes": "8589934592"
+  },
+  "memory": {
+    "sampledPeakHeapBytes": 309123392,
+    "samples": 1813,
+    "intervalMs": 20,
+    "additionalSamples": "every 256 events and yield",
+    "gcMs": 1479.3041599960998,
+    "gcCount": 162,
+    "window": "timed load only; setup and readback excluded",
+    "note": "Sampled high-water mark, lower bound on true peak. Includes benchmark/bundle/profiler retained heap; excludes setup peak."
+  },
+  "worldAgeDaysAtStart": 5.38
+}

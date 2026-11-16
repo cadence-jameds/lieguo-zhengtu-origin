@@ -1,0 +1,76 @@
+{
+  "source": "private-local-backup",
+  "hours": 1,
+  "sequence": [
+    "count",
+    "sites",
+    "sites",
+    "count"
+  ],
+  "completeAuthoritativeFieldsSame": true,
+  "eventOrderSame": true,
+  "differences": [],
+  "fields": [
+    "armies",
+    "autonomy",
+    "campaignId",
+    "cities",
+    "clockMode",
+    "colonizationUnits",
+    "combat",
+    "commandFacts",
+    "completionReceipts",
+    "dimensions",
+    "economyVersion",
+    "events",
+    "extinction",
+    "factions",
+    "fixture",
+    "governors",
+    "growthTasks",
+    "kind",
+    "largeProjects",
+    "ledger",
+    "logistics",
+    "metadata",
+    "offlineHours",
+    "playerFactionId",
+    "researchProjects",
+    "revision",
+    "seed",
+    "sequences",
+    "settlements",
+    "speed",
+    "time",
+    "worldLayer",
+    "fullLedgerArchive",
+    "reportHistory"
+  ],
+  "rows": [
+    {
+      "mode": "event counter/checksum only",
+      "totalMs": 25474.41038,
+      "events": 8512,
+      "peak": 298783920
+    },
+    {
+      "mode": "detailed bounded spans",
+      "totalMs": 24325.211226,
+      "events": 8512,
+      "peak": 300035920
+    },
+    {
+      "mode": "detailed bounded spans",
+      "totalMs": 28160.996829000003,
+      "events": 8512,
+      "peak": 307198256
+    },
+    {
+      "mode": "event counter/checksum only",
+      "totalMs": 25868.010702,
+      "events": 8512,
+      "peak": 315603352
+    }
+  ],
+  "caveat": "Same shared 2-vCPU host with one matrix process active. Not a clean Android or isolated-host latency baseline."
+}
