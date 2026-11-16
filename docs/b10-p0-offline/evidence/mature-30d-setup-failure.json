@@ -1,0 +1,14 @@
+{
+  "source": "synthetic",
+  "scenario": "mature",
+  "maturityDaysRequested": 30,
+  "status": "failed-fixture-preparation",
+  "completeReplayMeasured": false,
+  "reason": "Node V8 heap out of memory during hourly FormalPersistence fixture preparation",
+  "lastGCObservedHeapMiB": 2038.7,
+  "processRelativeLastGCAtMs": 563549,
+  "fullOfflineTimeMs": null,
+  "events": null,
+  "cpuProfile": null,
+  "caveat": "Node/fake-indexeddb preparation, not an Android or completed replay measurement. No heap limit was raised to turn this into a pass."
+}

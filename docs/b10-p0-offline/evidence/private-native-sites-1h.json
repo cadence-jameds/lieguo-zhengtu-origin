@@ -1,0 +1,3035 @@
+{
+  "format": "b10p0-offline-profile-v1",
+  "scenario": "private-local-backup",
+  "hours": 1,
+  "setupMs": 2854.5,
+  "source": "private-local-backup",
+  "sourceFormat": "raw-current-database-archive",
+  "sourceRecovered": false,
+  "auxiliaryArchiveVerified": true,
+  "bytes": 5573724,
+  "initial": {
+    "factions": 100,
+    "ai": 88,
+    "registeredAI": 99,
+    "cities": 100,
+    "armies": 8,
+    "battles": 0,
+    "ledgerReceipts": 1155,
+    "commandEvidence": 149,
+    "aiDecisions": 15245,
+    "aiAccepted": 9140,
+    "aiRejected": 45,
+    "governors": 1,
+    "ledgerOutcomes": 1155,
+    "scheduled": 216,
+    "completedBuildingLevels": 2261
+  },
+  "speed": 25,
+  "offlineCapHours": 12,
+  "pendingInbox": 0,
+  "totalMs": 32777,
+  "stages": {
+    "read": 388.90000000037253,
+    "offline": 30507.39999999944,
+    "save": 1880.5
+  },
+  "replayEventsPerSecond": 279.0142719471392,
+  "events": 8512,
+  "yields": {
+    "count": 1525,
+    "totalMs": 7803.799999982119,
+    "maxObservedWorkSliceMs": 143.29999999981374,
+    "requestedBudgetMs": 8,
+    "note": "Whole events can exceed 8ms; timer wait includes host scheduling. Final validation/commit is outside replay yields."
+  },
+  "advancedWorldMs": 90000000,
+  "final": {
+    "factions": 100,
+    "ai": 79,
+    "registeredAI": 99,
+    "cities": 100,
+    "armies": 9,
+    "battles": 0,
+    "ledgerReceipts": 1155,
+    "commandEvidence": 173,
+    "aiDecisions": 17818,
+    "aiAccepted": 11026,
+    "aiRejected": 45,
+    "governors": 2,
+    "ledgerOutcomes": 1155,
+    "scheduled": 231,
+    "completedBuildingLevels": 2605
+  },
+  "statistics": {
+    "events": 8512,
+    "maximumObservedDimensions": {
+      "cities": 100,
+      "armies": 17,
+      "pendingReceipts": 1886,
+      "queue": 237
+    },
+    "aiCostByPendingReceipts": [
+      {
+        "minimumPendingReceipts": 0,
+        "maximumPendingReceipts": 1023,
+        "calls": 1409,
+        "inclusiveMs": 9171.100000011735,
+        "meanMs": 6.508942512428485
+      },
+      {
+        "minimumPendingReceipts": 1024,
+        "maximumPendingReceipts": 2047,
+        "calls": 1164,
+        "inclusiveMs": 9517.600000007078,
+        "meanMs": 8.17663230241158
+      }
+    ],
+    "sampling": {
+      "method": "deterministic Algorithm R reservoir; inclusive durations; percentiles are sampled estimates",
+      "capacityPerLabel": 2048,
+      "p50Minimum": 20,
+      "p95Minimum": 100,
+      "p99Minimum": 1000
+    },
+    "operations": {
+      "formal/canonical.ts:digest": {
+        "calls": 80,
+        "inclusiveMs": 229.90000000596046,
+        "selfMs": 229.90000000596046,
+        "meanMs": 2.873750000074506,
+        "maxMs": 35.90000000037253,
+        "sampleCount": 80,
+        "p50Ms": 0.7000000001862645,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "ledgerStore.ts:readLedgerArchive": {
+        "calls": 6,
+        "inclusiveMs": 65,
+        "selfMs": 65,
+        "meanMs": 10.833333333333334,
+        "maxMs": 14.200000000186265,
+        "sampleCount": 6,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "native:structuredClone": {
+        "calls": 851622,
+        "inclusiveMs": 11771.59999999497,
+        "selfMs": 11771.59999999497,
+        "meanMs": 0.013822564471085728,
+        "maxMs": 75.80000000074506,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/commandLedger.ts:verifyLedgerArchive": {
+        "calls": 3,
+        "inclusiveMs": 78.79999999981374,
+        "selfMs": 36.79999999888241,
+        "meanMs": 26.26666666660458,
+        "maxMs": 42.09999999962747,
+        "sampleCount": 3,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "ledgerStore.ts:readLedger": {
+        "calls": 3,
+        "inclusiveMs": 113.79999999981374,
+        "selfMs": 0.5,
+        "meanMs": 37.93333333327124,
+        "maxMs": 52.799999999813735,
+        "sampleCount": 3,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/commandLedger.ts:findReceipt": {
+        "calls": 4409,
+        "inclusiveMs": 252.60000001452863,
+        "selfMs": 252.60000001452863,
+        "meanMs": 0.057291902929128745,
+        "maxMs": 10.5,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.20000000018626451,
+        "p99Ms": 0.5
+      },
+      "formal/schema.ts:validateFormalWorld": {
+        "calls": 11,
+        "inclusiveMs": 503.19999999925494,
+        "selfMs": 496.0999999968335,
+        "meanMs": 45.74545454538681,
+        "maxMs": 153.29999999981374,
+        "sampleCount": 11,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/extinction.ts:reconcileExileSites": {
+        "calls": 8516,
+        "inclusiveMs": 4.899999998509884,
+        "selfMs": 4.899999998509884,
+        "meanMs": 0.0005753875056963227,
+        "maxMs": 0.20000000018626451,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/commandLedger.ts:commandHistory": {
+        "calls": 1910,
+        "inclusiveMs": 19.300000002607703,
+        "selfMs": 19.300000002607703,
+        "meanMs": 0.010104712043250107,
+        "maxMs": 3.2000000001862645,
+        "sampleCount": 1910,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/saveCodec.ts:decodeSave": {
+        "calls": 3,
+        "inclusiveMs": 384.5,
+        "selfMs": 1.900000000372529,
+        "meanMs": 128.16666666666666,
+        "maxMs": 225.70000000018626,
+        "sampleCount": 3,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "ledgerStore.ts:scanLedgerIdentity": {
+        "calls": 2,
+        "inclusiveMs": 140.49999999906868,
+        "selfMs": 140.49999999906868,
+        "meanMs": 70.24999999953434,
+        "maxMs": 76.3999999994412,
+        "sampleCount": 2,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "persistence.ts:sanitizeStoredReports": {
+        "calls": 1,
+        "inclusiveMs": 2.6000000005587935,
+        "selfMs": 2.6000000005587935,
+        "meanMs": 2.6000000005587935,
+        "maxMs": 2.6000000005587935,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "persistence.ts:loadAnchored": {
+        "calls": 1,
+        "inclusiveMs": 384.6000000005588,
+        "selfMs": 25,
+        "meanMs": 384.6000000005588,
+        "maxMs": 384.6000000005588,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "spatial:fullRebuild": {
+        "calls": 4086,
+        "inclusiveMs": 990.8000000230968,
+        "selfMs": 990.8000000230968,
+        "meanMs": 0.24248653940849163,
+        "maxMs": 6.2999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0.20000000018626451,
+        "p95Ms": 0.599999999627471,
+        "p99Ms": 2.099999999627471
+      },
+      "formal/spatial.ts:spatial": {
+        "calls": 1605832,
+        "inclusiveMs": 1680.7000000206754,
+        "selfMs": 629.5999999968335,
+        "meanMs": 0.001046622560778883,
+        "maxMs": 8.100000000558794,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/economy.ts:populationGrowth": {
+        "calls": 9668,
+        "inclusiveMs": 28.700000004842877,
+        "selfMs": 28.700000004842877,
+        "meanMs": 0.0029685560617338518,
+        "maxMs": 1.2000000001862645,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/growthTasks.ts:syncGrowthTasks": {
+        "calls": 91,
+        "inclusiveMs": 14.20000000204891,
+        "selfMs": 4.5,
+        "meanMs": 0.15604395606647153,
+        "maxMs": 2.8999999994412065,
+        "sampleCount": 91,
+        "p50Ms": 0.09999999962747097,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/offline.ts:offlinePlan": {
+        "calls": 1,
+        "inclusiveMs": 0.09999999962747097,
+        "selfMs": 0.09999999962747097,
+        "meanMs": 0.09999999962747097,
+        "maxMs": 0.09999999962747097,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "yield:start": {
+        "calls": 1,
+        "inclusiveMs": 4.2000000001862645,
+        "selfMs": 4.2000000001862645,
+        "meanMs": 4.2000000001862645,
+        "maxMs": 4.2000000001862645,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/commandLedger.ts:copyHistory": {
+        "calls": 1888,
+        "inclusiveMs": 80.10000001080334,
+        "selfMs": 49.50000001769513,
+        "meanMs": 0.04242584746334923,
+        "maxMs": 4.5,
+        "sampleCount": 1888,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.2999999998137355
+      },
+      "formal/worldDraft.ts:cloneWorldDraft": {
+        "calls": 2,
+        "inclusiveMs": 21.59999999962747,
+        "selfMs": 0.30000000074505806,
+        "meanMs": 10.799999999813735,
+        "maxMs": 12.099999999627471,
+        "sampleCount": 2,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/scheduler.ts:replace": {
+        "calls": 7556,
+        "inclusiveMs": 3668.300000029616,
+        "selfMs": 1519.9000000152737,
+        "meanMs": 0.48548173637236847,
+        "maxMs": 94.30000000074506,
+        "sampleCount": 2048,
+        "p50Ms": 0.20000000018626451,
+        "p95Ms": 1.7999999998137355,
+        "p99Ms": 4
+      },
+      "formal/victory.ts:hasVictoryCityShare": {
+        "calls": 10409,
+        "inclusiveMs": 335.80000000447035,
+        "selfMs": 335.80000000447035,
+        "meanMs": 0.03226054376063698,
+        "maxMs": 8.199999999254942,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.20000000018626451
+      },
+      "formal/scheduler.ts:discard": {
+        "calls": 10428,
+        "inclusiveMs": 13.900000002235174,
+        "selfMs": 9.000000000931323,
+        "meanMs": 0.0013329497508856132,
+        "maxMs": 3.199999999254942,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/victory.ts:reconcileVictory": {
+        "calls": 10409,
+        "inclusiveMs": 385.90000000037253,
+        "selfMs": 41.69999999459833,
+        "meanMs": 0.03707368623310333,
+        "maxMs": 8.199999999254942,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.20000000018626451
+      },
+      "formal/diplomacyReports.ts:diplomacySnapshot": {
+        "calls": 18190,
+        "inclusiveMs": 379.5999999791384,
+        "selfMs": 36.099999982863665,
+        "meanMs": 0.020868609124746473,
+        "maxMs": 6.800000000745058,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.2999999998137355
+      },
+      "formal/scheduler.ts:pop": {
+        "calls": 12362,
+        "inclusiveMs": 44.99999999906868,
+        "selfMs": 44.99999999906868,
+        "meanMs": 0.0036401876718224137,
+        "maxMs": 2.400000000372529,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/growthTasks.ts:captureGrowthEvent": {
+        "calls": 8512,
+        "inclusiveMs": 71.6000000005588,
+        "selfMs": 30.299999998882413,
+        "meanMs": 0.008411654135403993,
+        "maxMs": 8.400000000372529,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/governance.ts:handleGovernance": {
+        "calls": 8512,
+        "inclusiveMs": 355.7000000011176,
+        "selfMs": 18.200000000186265,
+        "meanMs": 0.041788063909905734,
+        "maxMs": 24.40000000037253,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.09999999962747097
+      },
+      "spatial:armyRefresh": {
+        "calls": 6003,
+        "inclusiveMs": 60.30000000074506,
+        "selfMs": 60.30000000074506,
+        "meanMs": 0.010044977511368493,
+        "maxMs": 7.6000000005587935,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/scheduler.ts:push": {
+        "calls": 12378,
+        "inclusiveMs": 78.79999997466803,
+        "selfMs": 78.79999997466803,
+        "meanMs": 0.006366133460548394,
+        "maxMs": 1.599999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/economy.ts:productionPerHour": {
+        "calls": 8913,
+        "inclusiveMs": 101.10000001639128,
+        "selfMs": 101.10000001639128,
+        "meanMs": 0.01134298216272762,
+        "maxMs": 2.599999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/economy.ts:administrationMultiplier": {
+        "calls": 8913,
+        "inclusiveMs": 35.39999998919666,
+        "selfMs": 29.09999999217689,
+        "meanMs": 0.003971726690137626,
+        "maxMs": 1,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/military.ts:armyUpkeep": {
+        "calls": 8913,
+        "inclusiveMs": 82.0999999968335,
+        "selfMs": 81.09999999776483,
+        "meanMs": 0.009211264444837148,
+        "maxMs": 4.2999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/economy.ts:settleCity": {
+        "calls": 12789,
+        "inclusiveMs": 333.0000000251457,
+        "selfMs": 85.80000001750886,
+        "meanMs": 0.026038001409425734,
+        "maxMs": 4.2999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.20000000018626451
+      },
+      "formal/aiKnowledge.ts:publicSituation": {
+        "calls": 3297,
+        "inclusiveMs": 137.89999999664724,
+        "selfMs": 137.89999999664724,
+        "meanMs": 0.041825902334439564,
+        "maxMs": 29.90000000037253,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.2999999998137355
+      },
+      "formal/aiActions.ts:updatePublicMemory": {
+        "calls": 2573,
+        "inclusiveMs": 175.29999999981374,
+        "selfMs": 55.9000000031665,
+        "meanMs": 0.06813058686351098,
+        "maxMs": 29.90000000037253,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.6000000005587935
+      },
+      "formal/autonomy.ts:economicChoices": {
+        "calls": 2608,
+        "inclusiveMs": 1066.2999999951571,
+        "selfMs": 1066.2999999951571,
+        "meanMs": 0.40885736196133327,
+        "maxMs": 16.40000000037253,
+        "sampleCount": 2048,
+        "p50Ms": 0.2999999998137355,
+        "p95Ms": 1.199999999254942,
+        "p99Ms": 2.900000000372529
+      },
+      "formal/autonomy.ts:chooseEconomic": {
+        "calls": 3472,
+        "inclusiveMs": 104.40000002551824,
+        "selfMs": 104.40000002551824,
+        "meanMs": 0.030069124431312856,
+        "maxMs": 17.59999999962747,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.20000000018626451
+      },
+      "formal/aiActions.ts:wonderDecision": {
+        "calls": 2573,
+        "inclusiveMs": 3.4000000013038516,
+        "selfMs": 3.4000000013038516,
+        "meanMs": 0.0013214146915288968,
+        "maxMs": 0.7999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/aiActions.ts:politicalDecision": {
+        "calls": 2573,
+        "inclusiveMs": 20.599999994970858,
+        "selfMs": 20.599999994970858,
+        "meanMs": 0.008006218420120816,
+        "maxMs": 3.2999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/aiActions.ts:militaryDecision": {
+        "calls": 2573,
+        "inclusiveMs": 173.09999998100102,
+        "selfMs": 144.8999999864027,
+        "meanMs": 0.06727555382083211,
+        "maxMs": 5.099999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.20000000018626451,
+        "p99Ms": 0.900000000372529
+      },
+      "formal/aiActions.ts:expansionDecision": {
+        "calls": 2573,
+        "inclusiveMs": 18.19999999459833,
+        "selfMs": 18.19999999459833,
+        "meanMs": 0.007073455108666277,
+        "maxMs": 2,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/scheduler.ts:snapshot": {
+        "calls": 5677,
+        "inclusiveMs": 3106.899999975227,
+        "selfMs": 1205.2999999662861,
+        "meanMs": 0.5472784921569891,
+        "maxMs": 28.200000000186265,
+        "sampleCount": 2048,
+        "p50Ms": 0.20000000018626451,
+        "p95Ms": 1.5,
+        "p99Ms": 3.7999999998137355
+      },
+      "formal/reducer.ts:replayClonePolicy": {
+        "calls": 1,
+        "inclusiveMs": 11.100000000558794,
+        "selfMs": 11.100000000558794,
+        "meanMs": 11.100000000558794,
+        "maxMs": 11.100000000558794,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/reducer.ts:cloneReplayCityDraft": {
+        "calls": 1577,
+        "inclusiveMs": 4936.599999997765,
+        "selfMs": 48.700000000186265,
+        "meanMs": 3.1303741280898953,
+        "maxMs": 23.399999999441206,
+        "sampleCount": 1577,
+        "p50Ms": 2.7000000001862645,
+        "p95Ms": 7.2999999998137355,
+        "p99Ms": 12.300000000745058
+      },
+      "formal/economy.ts:promoteCityQueues": {
+        "calls": 9154,
+        "inclusiveMs": 11.399999995715916,
+        "selfMs": 11.399999995715916,
+        "meanMs": 0.0012453572204190427,
+        "maxMs": 0.900000000372529,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.09999999962747097
+      },
+      "formal/breakthrough.ts:reconcileBreakthroughs": {
+        "calls": 10409,
+        "inclusiveMs": 5.600000001490116,
+        "selfMs": 5.600000001490116,
+        "meanMs": 0.0005379959651734188,
+        "maxMs": 0.7999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/wonderCondition.ts:reconcileWonders": {
+        "calls": 10409,
+        "inclusiveMs": 22.000000006519258,
+        "selfMs": 16.400000005029142,
+        "meanMs": 0.0021135555775309116,
+        "maxMs": 0.7999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "formal/modernCatchup.ts:reconcileCatchup": {
+        "calls": 10398,
+        "inclusiveMs": 10.399999999441206,
+        "selfMs": 10.399999999441206,
+        "meanMs": 0.001000192344627929,
+        "maxMs": 3.7999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/politics.ts:reconcilePoliticalEvents": {
+        "calls": 1887,
+        "inclusiveMs": 1.300000000745058,
+        "selfMs": 1.300000000745058,
+        "meanMs": 0.0006889242187308204,
+        "maxMs": 0.10000000055879354,
+        "sampleCount": 1887,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/diplomacyReports.ts:diplomacyChanges": {
+        "calls": 7791,
+        "inclusiveMs": 188.29999998398125,
+        "selfMs": 24.90000000037253,
+        "meanMs": 0.024168912846102075,
+        "maxMs": 5.099999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.20000000018626451
+      },
+      "formal/commandLedger.ts:appendReceipt": {
+        "calls": 1886,
+        "inclusiveMs": 257.2000000150874,
+        "selfMs": 222.00000000745058,
+        "meanMs": 0.1363732767842457,
+        "maxMs": 3.300000000745058,
+        "sampleCount": 1886,
+        "p50Ms": 0.09999999962747097,
+        "p95Ms": 0.2999999998137355,
+        "p99Ms": 1.2999999998137355
+      },
+      "formal/reducer.ts:submitOrderDraft": {
+        "calls": 1886,
+        "inclusiveMs": 14617.099999995902,
+        "selfMs": 321.2999999783933,
+        "meanMs": 7.750318133613946,
+        "maxMs": 119.20000000018626,
+        "sampleCount": 1886,
+        "p50Ms": 6.1000000005587935,
+        "p95Ms": 17,
+        "p99Ms": 28.59999999962747
+      },
+      "formal/endgameAI.ts:invalidateEndgameIntel": {
+        "calls": 10398,
+        "inclusiveMs": 8.900000001303852,
+        "selfMs": 8.900000001303852,
+        "meanMs": 0.0008559338335549001,
+        "maxMs": 1.400000000372529,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/spatial.ts:invalidateSpatial": {
+        "calls": 3098,
+        "inclusiveMs": 6.2999999998137355,
+        "selfMs": 6.2999999998137355,
+        "meanMs": 0.0020335700451303215,
+        "maxMs": 2.7999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/autonomy.ts:submitAutonomous": {
+        "calls": 2608,
+        "inclusiveMs": 15997.999999998137,
+        "selfMs": 109.50000001396984,
+        "meanMs": 6.134202453987016,
+        "maxMs": 140.20000000018626,
+        "sampleCount": 2048,
+        "p50Ms": 4.5,
+        "p95Ms": 20.600000000558794,
+        "p99Ms": 35.60000000055879
+      },
+      "formal/autonomy.ts:handleAutonomy": {
+        "calls": 8477,
+        "inclusiveMs": 17506.800000028685,
+        "selfMs": 133.90000002086163,
+        "meanMs": 2.065211749443044,
+        "maxMs": 142.70000000018626,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 13.400000000372529,
+        "p99Ms": 25.299999999813735
+      },
+      "formal/growthTasks.ts:recordGrowthEvent": {
+        "calls": 8512,
+        "inclusiveMs": 25.69999999459833,
+        "selfMs": 24.2999999942258,
+        "meanMs": 0.0030192669166586384,
+        "maxMs": 1,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.09999999962747097
+      },
+      "formal/extinction.ts:resolveExtinctions": {
+        "calls": 8512,
+        "inclusiveMs": 1610.300000009127,
+        "selfMs": 747.5999999912456,
+        "meanMs": 0.18917998120407978,
+        "maxMs": 6.7000000001862645,
+        "sampleCount": 2048,
+        "p50Ms": 0.10000000055879354,
+        "p95Ms": 0.5,
+        "p99Ms": 1.7000000001862645
+      },
+      "formal/autonomy.ts:retireAutonomy": {
+        "calls": 8512,
+        "inclusiveMs": 704.2999999886379,
+        "selfMs": 437.3999999789521,
+        "meanMs": 0.08274201127686065,
+        "maxMs": 28.09999999962747,
+        "sampleCount": 2048,
+        "p50Ms": 0.09999999962747097,
+        "p95Ms": 0.20000000018626451,
+        "p99Ms": 0.7000000001862645
+      },
+      "formal/governance.ts:retireGovernors": {
+        "calls": 8512,
+        "inclusiveMs": 52.10000000614673,
+        "selfMs": 47.20000000484288,
+        "meanMs": 0.006120770677413854,
+        "maxMs": 3.099999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0.10000000055879354
+      },
+      "event:ai.decide": {
+        "calls": 2573,
+        "inclusiveMs": 18688.700000018813,
+        "selfMs": 51.899999995715916,
+        "meanMs": 7.263389040038404,
+        "maxMs": 143.09999999962747,
+        "sampleCount": 2048,
+        "p50Ms": 5.3999999994412065,
+        "p95Ms": 23,
+        "p99Ms": 42.200000000186265
+      },
+      "yield:event": {
+        "calls": 1524,
+        "inclusiveMs": 7784.099999979138,
+        "selfMs": 7784.099999979138,
+        "meanMs": 5.107677165340642,
+        "maxMs": 37.200000000186265,
+        "sampleCount": 1524,
+        "p50Ms": 4.199999999254942,
+        "p95Ms": 10.900000000372529,
+        "p99Ms": 19.200000000186265
+      },
+      "formal/battles.ts:handleCombatEvent": {
+        "calls": 5904,
+        "inclusiveMs": 935.6999999862164,
+        "selfMs": 166.199999993667,
+        "meanMs": 0.15848577235538897,
+        "maxMs": 28.399999999441206,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.39999999944120646,
+        "p99Ms": 5.3999999994412065
+      },
+      "formal/modernCatchup.ts:handleCatchupEvent": {
+        "calls": 3697,
+        "inclusiveMs": 3.7999999998137355,
+        "selfMs": 3.7999999998137355,
+        "meanMs": 0.0010278604273231634,
+        "maxMs": 2.099999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/wonderCondition.ts:handleRepairEvent": {
+        "calls": 3697,
+        "inclusiveMs": 2.6000000052154064,
+        "selfMs": 2.6000000052154064,
+        "meanMs": 0.0007032729254031394,
+        "maxMs": 0.599999999627471,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/breakthrough.ts:handleBreakthroughEvent": {
+        "calls": 3697,
+        "inclusiveMs": 1.900000000372529,
+        "selfMs": 1.900000000372529,
+        "meanMs": 0.0005139302137875382,
+        "maxMs": 0.20000000018626451,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/wonder.ts:handleWonderEvent": {
+        "calls": 3697,
+        "inclusiveMs": 1.5,
+        "selfMs": 1.5,
+        "meanMs": 0.0004057343792263998,
+        "maxMs": 0.10000000055879354,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/economy.ts:handleEconomyEvent": {
+        "calls": 3697,
+        "inclusiveMs": 160.10000000428408,
+        "selfMs": 30.099999993108213,
+        "meanMs": 0.043305382743923204,
+        "maxMs": 4,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0.10000000055879354,
+        "p99Ms": 0.2999999998137355
+      },
+      "event:construction.complete": {
+        "calls": 1197,
+        "inclusiveMs": 555.8000000026077,
+        "selfMs": 36.700000015087426,
+        "meanMs": 0.4643274853822955,
+        "maxMs": 28.600000000558794,
+        "sampleCount": 1197,
+        "p50Ms": 0.2999999998137355,
+        "p95Ms": 1.2999999998137355,
+        "p99Ms": 3.8999999994412065
+      },
+      "formal/combatResolver.ts:exchange": {
+        "calls": 141,
+        "inclusiveMs": 20.90000000037253,
+        "selfMs": 20.90000000037253,
+        "meanMs": 0.14822695035725197,
+        "maxMs": 2.800000000745058,
+        "sampleCount": 141,
+        "p50Ms": 0.09999999962747097,
+        "p95Ms": 0.599999999627471,
+        "p99Ms": null
+      },
+      "formal/routing.ts:route": {
+        "calls": 508,
+        "inclusiveMs": 313.6999999983236,
+        "selfMs": 313.6999999983236,
+        "meanMs": 0.6175196850360701,
+        "maxMs": 7.900000000372529,
+        "sampleCount": 508,
+        "p50Ms": 0.39999999944120646,
+        "p95Ms": 2,
+        "p99Ms": null
+      },
+      "formal/armies.ts:scheduleMarch": {
+        "calls": 508,
+        "inclusiveMs": 347.8999999910593,
+        "selfMs": 29.099999996833503,
+        "meanMs": 0.6848425196674396,
+        "maxMs": 7.900000000372529,
+        "sampleCount": 508,
+        "p50Ms": 0.40000000037252903,
+        "p95Ms": 2.199999999254942,
+        "p99Ms": null
+      },
+      "formal/militaryPower.ts:invalidateMilitaryPower": {
+        "calls": 2181,
+        "inclusiveMs": 0.8999999975785613,
+        "selfMs": 0.8999999975785613,
+        "meanMs": 0.0004126547444193312,
+        "maxMs": 0.10000000055879354,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "event:army.arrive": {
+        "calls": 296,
+        "inclusiveMs": 576.3999999957159,
+        "selfMs": 10.09999999590218,
+        "meanMs": 1.947297297282824,
+        "maxMs": 15.099999999627471,
+        "sampleCount": 296,
+        "p50Ms": 1.2999999998137355,
+        "p95Ms": 5.400000000372529,
+        "p99Ms": null
+      },
+      "formal/military.ts:handleMilitaryEvent": {
+        "calls": 1650,
+        "inclusiveMs": 100.29999999701977,
+        "selfMs": 15.900000006891787,
+        "meanMs": 0.060787878786072586,
+        "maxMs": 2.599999999627471,
+        "sampleCount": 1650,
+        "p50Ms": 0,
+        "p95Ms": 0.20000000018626451,
+        "p99Ms": 0.5
+      },
+      "event:military.train": {
+        "calls": 1650,
+        "inclusiveMs": 690.7000000039116,
+        "selfMs": 50.800000010058284,
+        "meanMs": 0.41860606060843125,
+        "maxMs": 17.799999999813735,
+        "sampleCount": 1650,
+        "p50Ms": 0.2999999998137355,
+        "p95Ms": 1.099999999627471,
+        "p99Ms": 2.900000000372529
+      },
+      "formal/endgameAI.ts:computeThreats": {
+        "calls": 663,
+        "inclusiveMs": 2.3999999994412065,
+        "selfMs": 2.3999999994412065,
+        "meanMs": 0.0036199095014196178,
+        "maxMs": 1,
+        "sampleCount": 663,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": null
+      },
+      "formal/endgameAI.ts:publicWonderThreats": {
+        "calls": 707,
+        "inclusiveMs": 9.7999999942258,
+        "selfMs": 7.399999994784594,
+        "meanMs": 0.013861386130446676,
+        "maxMs": 2.2999999998137355,
+        "sampleCount": 707,
+        "p50Ms": 0,
+        "p95Ms": 0.09999999962747097,
+        "p99Ms": null
+      },
+      "event:army.return": {
+        "calls": 211,
+        "inclusiveMs": 183.4999999953434,
+        "selfMs": 4.899999997578561,
+        "meanMs": 0.8696682464234283,
+        "maxMs": 6.1000000005587935,
+        "sampleCount": 211,
+        "p50Ms": 0.599999999627471,
+        "p95Ms": 2.7000000001862645,
+        "p99Ms": null
+      },
+      "formal/reducer.ts:cloneReplayCommandDraft": {
+        "calls": 309,
+        "inclusiveMs": 2460.10000000149,
+        "selfMs": 5.800000007264316,
+        "meanMs": 7.961488673143981,
+        "maxMs": 78,
+        "sampleCount": 309,
+        "p50Ms": 6.5,
+        "p95Ms": 15.799999999813735,
+        "p99Ms": null
+      },
+      "formal/armies.ts:applyArmyCommand": {
+        "calls": 298,
+        "inclusiveMs": 229.69999998994172,
+        "selfMs": 16.999999994412065,
+        "meanMs": 0.7708053690937642,
+        "maxMs": 7.900000000372529,
+        "sampleCount": 298,
+        "p50Ms": 0.5,
+        "p95Ms": 2.3999999994412065,
+        "p99Ms": null
+      },
+      "formal/research.ts:completeAge": {
+        "calls": 9,
+        "inclusiveMs": 0.2000000011175871,
+        "selfMs": 0.2000000011175871,
+        "meanMs": 0.022222222346398566,
+        "maxMs": 0.10000000055879354,
+        "sampleCount": 9,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "event:age.complete": {
+        "calls": 9,
+        "inclusiveMs": 3.1000000005587935,
+        "selfMs": 0.09999999962747097,
+        "meanMs": 0.3444444445065326,
+        "maxMs": 0.900000000372529,
+        "sampleCount": 9,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/wildLifecycle.ts:populateWild": {
+        "calls": 35,
+        "inclusiveMs": 8.100000002421439,
+        "selfMs": 8.100000002421439,
+        "meanMs": 0.2314285714977554,
+        "maxMs": 1.300000000745058,
+        "sampleCount": 35,
+        "p50Ms": 0.19999999925494194,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/wildLifecycle.ts:respawnWild": {
+        "calls": 35,
+        "inclusiveMs": 506.59999999962747,
+        "selfMs": 497.8999999994412,
+        "meanMs": 14.474285714275071,
+        "maxMs": 28.399999999441206,
+        "sampleCount": 35,
+        "p50Ms": 13.099999999627471,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "event:wild.respawn": {
+        "calls": 35,
+        "inclusiveMs": 536.3999999975786,
+        "selfMs": 1.5000000009313226,
+        "meanMs": 15.325714285645102,
+        "maxMs": 30.5,
+        "sampleCount": 35,
+        "p50Ms": 13.600000000558794,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/autoLogistics.ts:runAutoLogistics": {
+        "calls": 2500,
+        "inclusiveMs": 0.9999999990686774,
+        "selfMs": 0.9999999990686774,
+        "meanMs": 0.00039999999962747097,
+        "maxMs": 0.2999999998137355,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "formal/autoLogistics.ts:runWonderAutoSupply": {
+        "calls": 2500,
+        "inclusiveMs": 1.400000000372529,
+        "selfMs": 1.400000000372529,
+        "meanMs": 0.0005600000001490116,
+        "maxMs": 0.20000000018626451,
+        "sampleCount": 2048,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0
+      },
+      "event:economy.settle": {
+        "calls": 2500,
+        "inclusiveMs": 846.8999999947846,
+        "selfMs": 60.99999999534339,
+        "meanMs": 0.33875999999791384,
+        "maxMs": 17.09999999962747,
+        "sampleCount": 2048,
+        "p50Ms": 0.20000000018626451,
+        "p95Ms": 0.8999999994412065,
+        "p99Ms": 2.2999999998137355
+      },
+      "event:governance.decide": {
+        "calls": 35,
+        "inclusiveMs": 370.6000000005588,
+        "selfMs": 2.2999999979510903,
+        "meanMs": 10.588571428587395,
+        "maxMs": 26.799999999813735,
+        "sampleCount": 35,
+        "p50Ms": 9.599999999627471,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/battles.ts:resolveCombatRound": {
+        "calls": 15,
+        "inclusiveMs": 49.200000000186265,
+        "selfMs": 21.20000000204891,
+        "meanMs": 3.2800000000124174,
+        "maxMs": 9.400000000372529,
+        "sampleCount": 15,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "event:combat.round": {
+        "calls": 5,
+        "inclusiveMs": 8.599999998696148,
+        "selfMs": 0,
+        "meanMs": 1.7199999997392297,
+        "maxMs": 3.599999999627471,
+        "sampleCount": 5,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/research.ts:startResearch": {
+        "calls": 1,
+        "inclusiveMs": 3.599999999627471,
+        "selfMs": 3.599999999627471,
+        "meanMs": 3.599999999627471,
+        "maxMs": 3.599999999627471,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/reducer.ts:completeResearch": {
+        "calls": 1,
+        "inclusiveMs": 1,
+        "selfMs": 0.2999999998137355,
+        "meanMs": 1,
+        "maxMs": 1,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "event:research.complete": {
+        "calls": 1,
+        "inclusiveMs": 1.3999999994412065,
+        "selfMs": 0.19999999925494194,
+        "meanMs": 1.3999999994412065,
+        "maxMs": 1.3999999994412065,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/politics.ts:reconcilePolitics": {
+        "calls": 1,
+        "inclusiveMs": 0,
+        "selfMs": 0,
+        "meanMs": 0,
+        "maxMs": 0,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/commandLedger.ts:normalizeOutcomeRevisions": {
+        "calls": 2,
+        "inclusiveMs": 13.900000000372529,
+        "selfMs": 6.300000003539026,
+        "meanMs": 6.9500000001862645,
+        "maxMs": 12.900000000372529,
+        "sampleCount": 2,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/commandEvidence.ts:pruneCommandEvidence": {
+        "calls": 5,
+        "inclusiveMs": 33.19999999925494,
+        "selfMs": 33.19999999925494,
+        "meanMs": 6.639999999850988,
+        "maxMs": 12.300000000745058,
+        "sampleCount": 5,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/reducer.ts:finishFormalAdvance": {
+        "calls": 1,
+        "inclusiveMs": 81.70000000018626,
+        "selfMs": 1.9999999990686774,
+        "meanMs": 81.70000000018626,
+        "maxMs": 81.70000000018626,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/reducer.ts:advanceFormalCooperative": {
+        "calls": 1,
+        "inclusiveMs": 30479.299999999814,
+        "selfMs": 133.80000001192093,
+        "meanMs": 30479.299999999814,
+        "maxMs": 30479.299999999814,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/offline.ts:finishOffline": {
+        "calls": 1,
+        "inclusiveMs": 1.5,
+        "selfMs": 0.6999999992549419,
+        "meanMs": 1.5,
+        "maxMs": 1.5,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/offline.ts:advanceOfflineCooperative": {
+        "calls": 1,
+        "inclusiveMs": 30490.89999999944,
+        "selfMs": 0.900000000372529,
+        "meanMs": 30490.89999999944,
+        "maxMs": 30490.89999999944,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/saveCodec.ts:validateReportHistory": {
+        "calls": 2,
+        "inclusiveMs": 1.7000000001862645,
+        "selfMs": 1.7000000001862645,
+        "meanMs": 0.8500000000931323,
+        "maxMs": 1.099999999627471,
+        "sampleCount": 2,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/commandLedger.ts:prepareVerifiedLedger": {
+        "calls": 1,
+        "inclusiveMs": 49.80000000074506,
+        "selfMs": 21.199999999254942,
+        "meanMs": 49.80000000074506,
+        "maxMs": 49.80000000074506,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "formal/saveCodec.ts:encodeSave": {
+        "calls": 3,
+        "inclusiveMs": 173.1000000005588,
+        "selfMs": 0,
+        "meanMs": 57.700000000186265,
+        "maxMs": 75.5,
+        "sampleCount": 3,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "ledgerStore.ts:writeLedger": {
+        "calls": 1,
+        "inclusiveMs": 175.20000000018626,
+        "selfMs": 111.1000000005588,
+        "meanMs": 175.20000000018626,
+        "maxMs": 175.20000000018626,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "ledgerStore.ts:publishLedgerHead": {
+        "calls": 1,
+        "inclusiveMs": 0.599999999627471,
+        "selfMs": 0.599999999627471,
+        "meanMs": 0.599999999627471,
+        "maxMs": 0.599999999627471,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      },
+      "persistence.ts:commit": {
+        "calls": 1,
+        "inclusiveMs": 1879.8999999994412,
+        "selfMs": 1118.799999997951,
+        "meanMs": 1879.8999999994412,
+        "maxMs": 1879.8999999994412,
+        "sampleCount": 1,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null
+      }
+    }
+  },
+  "checkpoints": {
+    "afterRead": {
+      "events": 0,
+      "maximumObservedDimensions": {
+        "cities": 100,
+        "armies": 17,
+        "pendingReceipts": 1886,
+        "queue": 237
+      },
+      "aiCostByPendingReceipts": [],
+      "sampling": {
+        "method": "deterministic Algorithm R reservoir; inclusive durations; percentiles are sampled estimates",
+        "capacityPerLabel": 2048,
+        "p50Minimum": 20,
+        "p95Minimum": 100,
+        "p99Minimum": 1000
+      },
+      "operations": {
+        "formal/canonical.ts:digest": {
+          "calls": 24,
+          "inclusiveMs": 48.299999999813735,
+          "selfMs": 48.299999999813735,
+          "meanMs": 2.012499999992239,
+          "maxMs": 25.700000000186265,
+          "sampleCount": 24,
+          "p50Ms": 0.900000000372529,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 10.200000000186265,
+          "selfMs": 10.200000000186265,
+          "meanMs": 10.200000000186265,
+          "maxMs": 10.200000000186265,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "native:structuredClone": {
+          "calls": 4,
+          "inclusiveMs": 3.1000000005587935,
+          "selfMs": 3.1000000005587935,
+          "meanMs": 0.7750000001396984,
+          "maxMs": 2.900000000372529,
+          "sampleCount": 4,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 42.09999999962747,
+          "selfMs": 18.700000000186265,
+          "meanMs": 42.09999999962747,
+          "maxMs": 42.09999999962747,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "ledgerStore.ts:readLedger": {
+          "calls": 1,
+          "inclusiveMs": 52.799999999813735,
+          "selfMs": 0.5,
+          "meanMs": 52.799999999813735,
+          "maxMs": 52.799999999813735,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandLedger.ts:findReceipt": {
+          "calls": 96,
+          "inclusiveMs": 0.7999999988824129,
+          "selfMs": 0.7999999988824129,
+          "meanMs": 0.008333333321691802,
+          "maxMs": 0.10000000055879354,
+          "sampleCount": 96,
+          "p50Ms": 0,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/schema.ts:validateFormalWorld": {
+          "calls": 2,
+          "inclusiveMs": 198.90000000037253,
+          "selfMs": 198.10000000149012,
+          "meanMs": 99.45000000018626,
+          "maxMs": 153.29999999981374,
+          "sampleCount": 2,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/extinction.ts:reconcileExileSites": {
+          "calls": 1,
+          "inclusiveMs": 0,
+          "selfMs": 0,
+          "meanMs": 0,
+          "maxMs": 0,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandLedger.ts:commandHistory": {
+          "calls": 3,
+          "inclusiveMs": 0,
+          "selfMs": 0,
+          "meanMs": 0,
+          "maxMs": 0,
+          "sampleCount": 3,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 225.70000000018626,
+          "selfMs": 1.099999999627471,
+          "meanMs": 225.70000000018626,
+          "maxMs": 225.70000000018626,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "ledgerStore.ts:scanLedgerIdentity": {
+          "calls": 1,
+          "inclusiveMs": 76.3999999994412,
+          "selfMs": 76.3999999994412,
+          "meanMs": 76.3999999994412,
+          "maxMs": 76.3999999994412,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "persistence.ts:sanitizeStoredReports": {
+          "calls": 1,
+          "inclusiveMs": 2.6000000005587935,
+          "selfMs": 2.6000000005587935,
+          "meanMs": 2.6000000005587935,
+          "maxMs": 2.6000000005587935,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "persistence.ts:loadAnchored": {
+          "calls": 1,
+          "inclusiveMs": 384.6000000005588,
+          "selfMs": 25,
+          "meanMs": 384.6000000005588,
+          "maxMs": 384.6000000005588,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "spatial:fullRebuild": {
+          "calls": 1,
+          "inclusiveMs": 2.2000000001862645,
+          "selfMs": 2.2000000001862645,
+          "meanMs": 2.2000000001862645,
+          "maxMs": 2.2000000001862645,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/spatial.ts:spatial": {
+          "calls": 2,
+          "inclusiveMs": 2.2000000001862645,
+          "selfMs": 0,
+          "meanMs": 1.1000000000931323,
+          "maxMs": 2.2000000001862645,
+          "sampleCount": 2,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/economy.ts:populationGrowth": {
+          "calls": 1,
+          "inclusiveMs": 0.09999999962747097,
+          "selfMs": 0.09999999962747097,
+          "meanMs": 0.09999999962747097,
+          "maxMs": 0.09999999962747097,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/growthTasks.ts:syncGrowthTasks": {
+          "calls": 1,
+          "inclusiveMs": 2.8999999994412065,
+          "selfMs": 0.599999999627471,
+          "meanMs": 2.8999999994412065,
+          "maxMs": 2.8999999994412065,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        }
+      }
+    },
+    "afterReplay": {
+      "events": 8512,
+      "maximumObservedDimensions": {
+        "cities": 100,
+        "armies": 17,
+        "pendingReceipts": 1886,
+        "queue": 237
+      },
+      "aiCostByPendingReceipts": [
+        {
+          "minimumPendingReceipts": 0,
+          "maximumPendingReceipts": 1023,
+          "calls": 1409,
+          "inclusiveMs": 9171.100000011735,
+          "meanMs": 6.508942512428485
+        },
+        {
+          "minimumPendingReceipts": 1024,
+          "maximumPendingReceipts": 2047,
+          "calls": 1164,
+          "inclusiveMs": 9517.600000007078,
+          "meanMs": 8.17663230241158
+        }
+      ],
+      "sampling": {
+        "method": "deterministic Algorithm R reservoir; inclusive durations; percentiles are sampled estimates",
+        "capacityPerLabel": 2048,
+        "p50Minimum": 20,
+        "p95Minimum": 100,
+        "p99Minimum": 1000
+      },
+      "operations": {
+        "formal/canonical.ts:digest": {
+          "calls": 24,
+          "inclusiveMs": 48.299999999813735,
+          "selfMs": 48.299999999813735,
+          "meanMs": 2.012499999992239,
+          "maxMs": 25.700000000186265,
+          "sampleCount": 24,
+          "p50Ms": 0.900000000372529,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "ledgerStore.ts:readLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 10.200000000186265,
+          "selfMs": 10.200000000186265,
+          "meanMs": 10.200000000186265,
+          "maxMs": 10.200000000186265,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "native:structuredClone": {
+          "calls": 842244,
+          "inclusiveMs": 11729.899999999441,
+          "selfMs": 11729.899999999441,
+          "meanMs": 0.01392696178304558,
+          "maxMs": 75.80000000074506,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/commandLedger.ts:verifyLedgerArchive": {
+          "calls": 1,
+          "inclusiveMs": 42.09999999962747,
+          "selfMs": 18.700000000186265,
+          "meanMs": 42.09999999962747,
+          "maxMs": 42.09999999962747,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "ledgerStore.ts:readLedger": {
+          "calls": 1,
+          "inclusiveMs": 52.799999999813735,
+          "selfMs": 0.5,
+          "meanMs": 52.799999999813735,
+          "maxMs": 52.799999999813735,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandLedger.ts:findReceipt": {
+          "calls": 3977,
+          "inclusiveMs": 249.80000001378357,
+          "selfMs": 249.80000001378357,
+          "meanMs": 0.062811164197582,
+          "maxMs": 10.5,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.20000000018626451,
+          "p99Ms": 0.6000000005587935
+        },
+        "formal/schema.ts:validateFormalWorld": {
+          "calls": 3,
+          "inclusiveMs": 264.79999999981374,
+          "selfMs": 260.69999999925494,
+          "meanMs": 88.26666666660458,
+          "maxMs": 153.29999999981374,
+          "sampleCount": 3,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/extinction.ts:reconcileExileSites": {
+          "calls": 8514,
+          "inclusiveMs": 4.79999999795109,
+          "selfMs": 4.79999999795109,
+          "meanMs": 0.0005637773077227027,
+          "maxMs": 0.20000000018626451,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/commandLedger.ts:commandHistory": {
+          "calls": 1892,
+          "inclusiveMs": 19.100000001490116,
+          "selfMs": 19.100000001490116,
+          "meanMs": 0.010095137421506403,
+          "maxMs": 3.2000000001862645,
+          "sampleCount": 1892,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/saveCodec.ts:decodeSave": {
+          "calls": 1,
+          "inclusiveMs": 225.70000000018626,
+          "selfMs": 1.099999999627471,
+          "meanMs": 225.70000000018626,
+          "maxMs": 225.70000000018626,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "ledgerStore.ts:scanLedgerIdentity": {
+          "calls": 1,
+          "inclusiveMs": 76.3999999994412,
+          "selfMs": 76.3999999994412,
+          "meanMs": 76.3999999994412,
+          "maxMs": 76.3999999994412,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "persistence.ts:sanitizeStoredReports": {
+          "calls": 1,
+          "inclusiveMs": 2.6000000005587935,
+          "selfMs": 2.6000000005587935,
+          "meanMs": 2.6000000005587935,
+          "maxMs": 2.6000000005587935,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "persistence.ts:loadAnchored": {
+          "calls": 1,
+          "inclusiveMs": 384.6000000005588,
+          "selfMs": 25,
+          "meanMs": 384.6000000005588,
+          "maxMs": 384.6000000005588,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "spatial:fullRebuild": {
+          "calls": 4085,
+          "inclusiveMs": 990.5000000232831,
+          "selfMs": 990.5000000232831,
+          "meanMs": 0.2424724602260179,
+          "maxMs": 6.2999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0.20000000018626451,
+          "p95Ms": 0.599999999627471,
+          "p99Ms": 2.099999999627471
+        },
+        "formal/spatial.ts:spatial": {
+          "calls": 1605830,
+          "inclusiveMs": 1680.4000000208616,
+          "selfMs": 629.5999999968335,
+          "meanMs": 0.0010464370450302097,
+          "maxMs": 8.100000000558794,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/economy.ts:populationGrowth": {
+          "calls": 9667,
+          "inclusiveMs": 28.700000004842877,
+          "selfMs": 28.700000004842877,
+          "meanMs": 0.0029688631431512235,
+          "maxMs": 1.2000000001862645,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/growthTasks.ts:syncGrowthTasks": {
+          "calls": 90,
+          "inclusiveMs": 13.900000002235174,
+          "selfMs": 4.5,
+          "meanMs": 0.1544444444692797,
+          "maxMs": 2.8999999994412065,
+          "sampleCount": 90,
+          "p50Ms": 0.09999999962747097,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/offline.ts:offlinePlan": {
+          "calls": 1,
+          "inclusiveMs": 0.09999999962747097,
+          "selfMs": 0.09999999962747097,
+          "meanMs": 0.09999999962747097,
+          "maxMs": 0.09999999962747097,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "yield:start": {
+          "calls": 1,
+          "inclusiveMs": 4.2000000001862645,
+          "selfMs": 4.2000000001862645,
+          "meanMs": 4.2000000001862645,
+          "maxMs": 4.2000000001862645,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandLedger.ts:copyHistory": {
+          "calls": 1887,
+          "inclusiveMs": 79.70000001136214,
+          "selfMs": 49.10000001825392,
+          "meanMs": 0.04223635400708115,
+          "maxMs": 4.5,
+          "sampleCount": 1887,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.2999999998137355
+        },
+        "formal/worldDraft.ts:cloneWorldDraft": {
+          "calls": 1,
+          "inclusiveMs": 9.5,
+          "selfMs": 0.30000000074505806,
+          "meanMs": 9.5,
+          "maxMs": 9.5,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/scheduler.ts:replace": {
+          "calls": 7556,
+          "inclusiveMs": 3668.300000029616,
+          "selfMs": 1519.9000000152737,
+          "meanMs": 0.48548173637236847,
+          "maxMs": 94.30000000074506,
+          "sampleCount": 2048,
+          "p50Ms": 0.20000000018626451,
+          "p95Ms": 1.7999999998137355,
+          "p99Ms": 4
+        },
+        "formal/victory.ts:hasVictoryCityShare": {
+          "calls": 10409,
+          "inclusiveMs": 335.80000000447035,
+          "selfMs": 335.80000000447035,
+          "meanMs": 0.03226054376063698,
+          "maxMs": 8.199999999254942,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.20000000018626451
+        },
+        "formal/scheduler.ts:discard": {
+          "calls": 10428,
+          "inclusiveMs": 13.900000002235174,
+          "selfMs": 9.000000000931323,
+          "meanMs": 0.0013329497508856132,
+          "maxMs": 3.199999999254942,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/victory.ts:reconcileVictory": {
+          "calls": 10409,
+          "inclusiveMs": 385.90000000037253,
+          "selfMs": 41.69999999459833,
+          "meanMs": 0.03707368623310333,
+          "maxMs": 8.199999999254942,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.20000000018626451
+        },
+        "formal/diplomacyReports.ts:diplomacySnapshot": {
+          "calls": 18190,
+          "inclusiveMs": 379.5999999791384,
+          "selfMs": 36.099999982863665,
+          "meanMs": 0.020868609124746473,
+          "maxMs": 6.800000000745058,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.2999999998137355
+        },
+        "formal/scheduler.ts:pop": {
+          "calls": 12362,
+          "inclusiveMs": 44.99999999906868,
+          "selfMs": 44.99999999906868,
+          "meanMs": 0.0036401876718224137,
+          "maxMs": 2.400000000372529,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/growthTasks.ts:captureGrowthEvent": {
+          "calls": 8512,
+          "inclusiveMs": 71.6000000005588,
+          "selfMs": 30.299999998882413,
+          "meanMs": 0.008411654135403993,
+          "maxMs": 8.400000000372529,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/governance.ts:handleGovernance": {
+          "calls": 8512,
+          "inclusiveMs": 355.7000000011176,
+          "selfMs": 18.200000000186265,
+          "meanMs": 0.041788063909905734,
+          "maxMs": 24.40000000037253,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097
+        },
+        "spatial:armyRefresh": {
+          "calls": 6003,
+          "inclusiveMs": 60.30000000074506,
+          "selfMs": 60.30000000074506,
+          "meanMs": 0.010044977511368493,
+          "maxMs": 7.6000000005587935,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/scheduler.ts:push": {
+          "calls": 12378,
+          "inclusiveMs": 78.79999997466803,
+          "selfMs": 78.79999997466803,
+          "meanMs": 0.006366133460548394,
+          "maxMs": 1.599999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/economy.ts:productionPerHour": {
+          "calls": 8913,
+          "inclusiveMs": 101.10000001639128,
+          "selfMs": 101.10000001639128,
+          "meanMs": 0.01134298216272762,
+          "maxMs": 2.599999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/economy.ts:administrationMultiplier": {
+          "calls": 8913,
+          "inclusiveMs": 35.39999998919666,
+          "selfMs": 29.09999999217689,
+          "meanMs": 0.003971726690137626,
+          "maxMs": 1,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/military.ts:armyUpkeep": {
+          "calls": 8913,
+          "inclusiveMs": 82.0999999968335,
+          "selfMs": 81.09999999776483,
+          "meanMs": 0.009211264444837148,
+          "maxMs": 4.2999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/economy.ts:settleCity": {
+          "calls": 12789,
+          "inclusiveMs": 333.0000000251457,
+          "selfMs": 85.80000001750886,
+          "meanMs": 0.026038001409425734,
+          "maxMs": 4.2999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.20000000018626451
+        },
+        "formal/aiKnowledge.ts:publicSituation": {
+          "calls": 3297,
+          "inclusiveMs": 137.89999999664724,
+          "selfMs": 137.89999999664724,
+          "meanMs": 0.041825902334439564,
+          "maxMs": 29.90000000037253,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.2999999998137355
+        },
+        "formal/aiActions.ts:updatePublicMemory": {
+          "calls": 2573,
+          "inclusiveMs": 175.29999999981374,
+          "selfMs": 55.9000000031665,
+          "meanMs": 0.06813058686351098,
+          "maxMs": 29.90000000037253,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.6000000005587935
+        },
+        "formal/autonomy.ts:economicChoices": {
+          "calls": 2608,
+          "inclusiveMs": 1066.2999999951571,
+          "selfMs": 1066.2999999951571,
+          "meanMs": 0.40885736196133327,
+          "maxMs": 16.40000000037253,
+          "sampleCount": 2048,
+          "p50Ms": 0.2999999998137355,
+          "p95Ms": 1.199999999254942,
+          "p99Ms": 2.900000000372529
+        },
+        "formal/autonomy.ts:chooseEconomic": {
+          "calls": 3472,
+          "inclusiveMs": 104.40000002551824,
+          "selfMs": 104.40000002551824,
+          "meanMs": 0.030069124431312856,
+          "maxMs": 17.59999999962747,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.20000000018626451
+        },
+        "formal/aiActions.ts:wonderDecision": {
+          "calls": 2573,
+          "inclusiveMs": 3.4000000013038516,
+          "selfMs": 3.4000000013038516,
+          "meanMs": 0.0013214146915288968,
+          "maxMs": 0.7999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/aiActions.ts:politicalDecision": {
+          "calls": 2573,
+          "inclusiveMs": 20.599999994970858,
+          "selfMs": 20.599999994970858,
+          "meanMs": 0.008006218420120816,
+          "maxMs": 3.2999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/aiActions.ts:militaryDecision": {
+          "calls": 2573,
+          "inclusiveMs": 173.09999998100102,
+          "selfMs": 144.8999999864027,
+          "meanMs": 0.06727555382083211,
+          "maxMs": 5.099999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.20000000018626451,
+          "p99Ms": 0.900000000372529
+        },
+        "formal/aiActions.ts:expansionDecision": {
+          "calls": 2573,
+          "inclusiveMs": 18.19999999459833,
+          "selfMs": 18.19999999459833,
+          "meanMs": 0.007073455108666277,
+          "maxMs": 2,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/scheduler.ts:snapshot": {
+          "calls": 5677,
+          "inclusiveMs": 3106.899999975227,
+          "selfMs": 1205.2999999662861,
+          "meanMs": 0.5472784921569891,
+          "maxMs": 28.200000000186265,
+          "sampleCount": 2048,
+          "p50Ms": 0.20000000018626451,
+          "p95Ms": 1.5,
+          "p99Ms": 3.7999999998137355
+        },
+        "formal/reducer.ts:replayClonePolicy": {
+          "calls": 1,
+          "inclusiveMs": 11.100000000558794,
+          "selfMs": 11.100000000558794,
+          "meanMs": 11.100000000558794,
+          "maxMs": 11.100000000558794,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/reducer.ts:cloneReplayCityDraft": {
+          "calls": 1577,
+          "inclusiveMs": 4936.599999997765,
+          "selfMs": 48.700000000186265,
+          "meanMs": 3.1303741280898953,
+          "maxMs": 23.399999999441206,
+          "sampleCount": 1577,
+          "p50Ms": 2.7000000001862645,
+          "p95Ms": 7.2999999998137355,
+          "p99Ms": 12.300000000745058
+        },
+        "formal/economy.ts:promoteCityQueues": {
+          "calls": 9154,
+          "inclusiveMs": 11.399999995715916,
+          "selfMs": 11.399999995715916,
+          "meanMs": 0.0012453572204190427,
+          "maxMs": 0.900000000372529,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097
+        },
+        "formal/breakthrough.ts:reconcileBreakthroughs": {
+          "calls": 10409,
+          "inclusiveMs": 5.600000001490116,
+          "selfMs": 5.600000001490116,
+          "meanMs": 0.0005379959651734188,
+          "maxMs": 0.7999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/wonderCondition.ts:reconcileWonders": {
+          "calls": 10409,
+          "inclusiveMs": 22.000000006519258,
+          "selfMs": 16.400000005029142,
+          "meanMs": 0.0021135555775309116,
+          "maxMs": 0.7999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "formal/modernCatchup.ts:reconcileCatchup": {
+          "calls": 10398,
+          "inclusiveMs": 10.399999999441206,
+          "selfMs": 10.399999999441206,
+          "meanMs": 0.001000192344627929,
+          "maxMs": 3.7999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/politics.ts:reconcilePoliticalEvents": {
+          "calls": 1887,
+          "inclusiveMs": 1.300000000745058,
+          "selfMs": 1.300000000745058,
+          "meanMs": 0.0006889242187308204,
+          "maxMs": 0.10000000055879354,
+          "sampleCount": 1887,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/diplomacyReports.ts:diplomacyChanges": {
+          "calls": 7791,
+          "inclusiveMs": 188.29999998398125,
+          "selfMs": 24.90000000037253,
+          "meanMs": 0.024168912846102075,
+          "maxMs": 5.099999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.20000000018626451
+        },
+        "formal/commandLedger.ts:appendReceipt": {
+          "calls": 1886,
+          "inclusiveMs": 257.2000000150874,
+          "selfMs": 222.00000000745058,
+          "meanMs": 0.1363732767842457,
+          "maxMs": 3.300000000745058,
+          "sampleCount": 1886,
+          "p50Ms": 0.09999999962747097,
+          "p95Ms": 0.2999999998137355,
+          "p99Ms": 1.2999999998137355
+        },
+        "formal/reducer.ts:submitOrderDraft": {
+          "calls": 1886,
+          "inclusiveMs": 14617.099999995902,
+          "selfMs": 321.2999999783933,
+          "meanMs": 7.750318133613946,
+          "maxMs": 119.20000000018626,
+          "sampleCount": 1886,
+          "p50Ms": 6.1000000005587935,
+          "p95Ms": 17,
+          "p99Ms": 28.59999999962747
+        },
+        "formal/endgameAI.ts:invalidateEndgameIntel": {
+          "calls": 10398,
+          "inclusiveMs": 8.900000001303852,
+          "selfMs": 8.900000001303852,
+          "meanMs": 0.0008559338335549001,
+          "maxMs": 1.400000000372529,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/spatial.ts:invalidateSpatial": {
+          "calls": 3098,
+          "inclusiveMs": 6.2999999998137355,
+          "selfMs": 6.2999999998137355,
+          "meanMs": 0.0020335700451303215,
+          "maxMs": 2.7999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/autonomy.ts:submitAutonomous": {
+          "calls": 2608,
+          "inclusiveMs": 15997.999999998137,
+          "selfMs": 109.50000001396984,
+          "meanMs": 6.134202453987016,
+          "maxMs": 140.20000000018626,
+          "sampleCount": 2048,
+          "p50Ms": 4.5,
+          "p95Ms": 20.600000000558794,
+          "p99Ms": 35.60000000055879
+        },
+        "formal/autonomy.ts:handleAutonomy": {
+          "calls": 8477,
+          "inclusiveMs": 17506.800000028685,
+          "selfMs": 133.90000002086163,
+          "meanMs": 2.065211749443044,
+          "maxMs": 142.70000000018626,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 13.400000000372529,
+          "p99Ms": 25.299999999813735
+        },
+        "formal/growthTasks.ts:recordGrowthEvent": {
+          "calls": 8512,
+          "inclusiveMs": 25.69999999459833,
+          "selfMs": 24.2999999942258,
+          "meanMs": 0.0030192669166586384,
+          "maxMs": 1,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097
+        },
+        "formal/extinction.ts:resolveExtinctions": {
+          "calls": 8512,
+          "inclusiveMs": 1610.300000009127,
+          "selfMs": 747.5999999912456,
+          "meanMs": 0.18917998120407978,
+          "maxMs": 6.7000000001862645,
+          "sampleCount": 2048,
+          "p50Ms": 0.10000000055879354,
+          "p95Ms": 0.5,
+          "p99Ms": 1.7000000001862645
+        },
+        "formal/autonomy.ts:retireAutonomy": {
+          "calls": 8512,
+          "inclusiveMs": 704.2999999886379,
+          "selfMs": 437.3999999789521,
+          "meanMs": 0.08274201127686065,
+          "maxMs": 28.09999999962747,
+          "sampleCount": 2048,
+          "p50Ms": 0.09999999962747097,
+          "p95Ms": 0.20000000018626451,
+          "p99Ms": 0.7000000001862645
+        },
+        "formal/governance.ts:retireGovernors": {
+          "calls": 8512,
+          "inclusiveMs": 52.10000000614673,
+          "selfMs": 47.20000000484288,
+          "meanMs": 0.006120770677413854,
+          "maxMs": 3.099999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000000055879354
+        },
+        "event:ai.decide": {
+          "calls": 2573,
+          "inclusiveMs": 18688.700000018813,
+          "selfMs": 51.899999995715916,
+          "meanMs": 7.263389040038404,
+          "maxMs": 143.09999999962747,
+          "sampleCount": 2048,
+          "p50Ms": 5.3999999994412065,
+          "p95Ms": 23,
+          "p99Ms": 42.200000000186265
+        },
+        "yield:event": {
+          "calls": 1524,
+          "inclusiveMs": 7784.099999979138,
+          "selfMs": 7784.099999979138,
+          "meanMs": 5.107677165340642,
+          "maxMs": 37.200000000186265,
+          "sampleCount": 1524,
+          "p50Ms": 4.199999999254942,
+          "p95Ms": 10.900000000372529,
+          "p99Ms": 19.200000000186265
+        },
+        "formal/battles.ts:handleCombatEvent": {
+          "calls": 5904,
+          "inclusiveMs": 935.6999999862164,
+          "selfMs": 166.199999993667,
+          "meanMs": 0.15848577235538897,
+          "maxMs": 28.399999999441206,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.39999999944120646,
+          "p99Ms": 5.3999999994412065
+        },
+        "formal/modernCatchup.ts:handleCatchupEvent": {
+          "calls": 3697,
+          "inclusiveMs": 3.7999999998137355,
+          "selfMs": 3.7999999998137355,
+          "meanMs": 0.0010278604273231634,
+          "maxMs": 2.099999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/wonderCondition.ts:handleRepairEvent": {
+          "calls": 3697,
+          "inclusiveMs": 2.6000000052154064,
+          "selfMs": 2.6000000052154064,
+          "meanMs": 0.0007032729254031394,
+          "maxMs": 0.599999999627471,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/breakthrough.ts:handleBreakthroughEvent": {
+          "calls": 3697,
+          "inclusiveMs": 1.900000000372529,
+          "selfMs": 1.900000000372529,
+          "meanMs": 0.0005139302137875382,
+          "maxMs": 0.20000000018626451,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/wonder.ts:handleWonderEvent": {
+          "calls": 3697,
+          "inclusiveMs": 1.5,
+          "selfMs": 1.5,
+          "meanMs": 0.0004057343792263998,
+          "maxMs": 0.10000000055879354,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/economy.ts:handleEconomyEvent": {
+          "calls": 3697,
+          "inclusiveMs": 160.10000000428408,
+          "selfMs": 30.099999993108213,
+          "meanMs": 0.043305382743923204,
+          "maxMs": 4,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0.10000000055879354,
+          "p99Ms": 0.2999999998137355
+        },
+        "event:construction.complete": {
+          "calls": 1197,
+          "inclusiveMs": 555.8000000026077,
+          "selfMs": 36.700000015087426,
+          "meanMs": 0.4643274853822955,
+          "maxMs": 28.600000000558794,
+          "sampleCount": 1197,
+          "p50Ms": 0.2999999998137355,
+          "p95Ms": 1.2999999998137355,
+          "p99Ms": 3.8999999994412065
+        },
+        "formal/combatResolver.ts:exchange": {
+          "calls": 141,
+          "inclusiveMs": 20.90000000037253,
+          "selfMs": 20.90000000037253,
+          "meanMs": 0.14822695035725197,
+          "maxMs": 2.800000000745058,
+          "sampleCount": 141,
+          "p50Ms": 0.09999999962747097,
+          "p95Ms": 0.599999999627471,
+          "p99Ms": null
+        },
+        "formal/routing.ts:route": {
+          "calls": 508,
+          "inclusiveMs": 313.6999999983236,
+          "selfMs": 313.6999999983236,
+          "meanMs": 0.6175196850360701,
+          "maxMs": 7.900000000372529,
+          "sampleCount": 508,
+          "p50Ms": 0.39999999944120646,
+          "p95Ms": 2,
+          "p99Ms": null
+        },
+        "formal/armies.ts:scheduleMarch": {
+          "calls": 508,
+          "inclusiveMs": 347.8999999910593,
+          "selfMs": 29.099999996833503,
+          "meanMs": 0.6848425196674396,
+          "maxMs": 7.900000000372529,
+          "sampleCount": 508,
+          "p50Ms": 0.40000000037252903,
+          "p95Ms": 2.199999999254942,
+          "p99Ms": null
+        },
+        "formal/militaryPower.ts:invalidateMilitaryPower": {
+          "calls": 2181,
+          "inclusiveMs": 0.8999999975785613,
+          "selfMs": 0.8999999975785613,
+          "meanMs": 0.0004126547444193312,
+          "maxMs": 0.10000000055879354,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "event:army.arrive": {
+          "calls": 296,
+          "inclusiveMs": 576.3999999957159,
+          "selfMs": 10.09999999590218,
+          "meanMs": 1.947297297282824,
+          "maxMs": 15.099999999627471,
+          "sampleCount": 296,
+          "p50Ms": 1.2999999998137355,
+          "p95Ms": 5.400000000372529,
+          "p99Ms": null
+        },
+        "formal/military.ts:handleMilitaryEvent": {
+          "calls": 1650,
+          "inclusiveMs": 100.29999999701977,
+          "selfMs": 15.900000006891787,
+          "meanMs": 0.060787878786072586,
+          "maxMs": 2.599999999627471,
+          "sampleCount": 1650,
+          "p50Ms": 0,
+          "p95Ms": 0.20000000018626451,
+          "p99Ms": 0.5
+        },
+        "event:military.train": {
+          "calls": 1650,
+          "inclusiveMs": 690.7000000039116,
+          "selfMs": 50.800000010058284,
+          "meanMs": 0.41860606060843125,
+          "maxMs": 17.799999999813735,
+          "sampleCount": 1650,
+          "p50Ms": 0.2999999998137355,
+          "p95Ms": 1.099999999627471,
+          "p99Ms": 2.900000000372529
+        },
+        "formal/endgameAI.ts:computeThreats": {
+          "calls": 663,
+          "inclusiveMs": 2.3999999994412065,
+          "selfMs": 2.3999999994412065,
+          "meanMs": 0.0036199095014196178,
+          "maxMs": 1,
+          "sampleCount": 663,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": null
+        },
+        "formal/endgameAI.ts:publicWonderThreats": {
+          "calls": 707,
+          "inclusiveMs": 9.7999999942258,
+          "selfMs": 7.399999994784594,
+          "meanMs": 0.013861386130446676,
+          "maxMs": 2.2999999998137355,
+          "sampleCount": 707,
+          "p50Ms": 0,
+          "p95Ms": 0.09999999962747097,
+          "p99Ms": null
+        },
+        "event:army.return": {
+          "calls": 211,
+          "inclusiveMs": 183.4999999953434,
+          "selfMs": 4.899999997578561,
+          "meanMs": 0.8696682464234283,
+          "maxMs": 6.1000000005587935,
+          "sampleCount": 211,
+          "p50Ms": 0.599999999627471,
+          "p95Ms": 2.7000000001862645,
+          "p99Ms": null
+        },
+        "formal/reducer.ts:cloneReplayCommandDraft": {
+          "calls": 309,
+          "inclusiveMs": 2460.10000000149,
+          "selfMs": 5.800000007264316,
+          "meanMs": 7.961488673143981,
+          "maxMs": 78,
+          "sampleCount": 309,
+          "p50Ms": 6.5,
+          "p95Ms": 15.799999999813735,
+          "p99Ms": null
+        },
+        "formal/armies.ts:applyArmyCommand": {
+          "calls": 298,
+          "inclusiveMs": 229.69999998994172,
+          "selfMs": 16.999999994412065,
+          "meanMs": 0.7708053690937642,
+          "maxMs": 7.900000000372529,
+          "sampleCount": 298,
+          "p50Ms": 0.5,
+          "p95Ms": 2.3999999994412065,
+          "p99Ms": null
+        },
+        "formal/research.ts:completeAge": {
+          "calls": 9,
+          "inclusiveMs": 0.2000000011175871,
+          "selfMs": 0.2000000011175871,
+          "meanMs": 0.022222222346398566,
+          "maxMs": 0.10000000055879354,
+          "sampleCount": 9,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "event:age.complete": {
+          "calls": 9,
+          "inclusiveMs": 3.1000000005587935,
+          "selfMs": 0.09999999962747097,
+          "meanMs": 0.3444444445065326,
+          "maxMs": 0.900000000372529,
+          "sampleCount": 9,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/wildLifecycle.ts:populateWild": {
+          "calls": 35,
+          "inclusiveMs": 8.100000002421439,
+          "selfMs": 8.100000002421439,
+          "meanMs": 0.2314285714977554,
+          "maxMs": 1.300000000745058,
+          "sampleCount": 35,
+          "p50Ms": 0.19999999925494194,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/wildLifecycle.ts:respawnWild": {
+          "calls": 35,
+          "inclusiveMs": 506.59999999962747,
+          "selfMs": 497.8999999994412,
+          "meanMs": 14.474285714275071,
+          "maxMs": 28.399999999441206,
+          "sampleCount": 35,
+          "p50Ms": 13.099999999627471,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "event:wild.respawn": {
+          "calls": 35,
+          "inclusiveMs": 536.3999999975786,
+          "selfMs": 1.5000000009313226,
+          "meanMs": 15.325714285645102,
+          "maxMs": 30.5,
+          "sampleCount": 35,
+          "p50Ms": 13.600000000558794,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/autoLogistics.ts:runAutoLogistics": {
+          "calls": 2500,
+          "inclusiveMs": 0.9999999990686774,
+          "selfMs": 0.9999999990686774,
+          "meanMs": 0.00039999999962747097,
+          "maxMs": 0.2999999998137355,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "formal/autoLogistics.ts:runWonderAutoSupply": {
+          "calls": 2500,
+          "inclusiveMs": 1.400000000372529,
+          "selfMs": 1.400000000372529,
+          "meanMs": 0.0005600000001490116,
+          "maxMs": 0.20000000018626451,
+          "sampleCount": 2048,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0
+        },
+        "event:economy.settle": {
+          "calls": 2500,
+          "inclusiveMs": 846.8999999947846,
+          "selfMs": 60.99999999534339,
+          "meanMs": 0.33875999999791384,
+          "maxMs": 17.09999999962747,
+          "sampleCount": 2048,
+          "p50Ms": 0.20000000018626451,
+          "p95Ms": 0.8999999994412065,
+          "p99Ms": 2.2999999998137355
+        },
+        "event:governance.decide": {
+          "calls": 35,
+          "inclusiveMs": 370.6000000005588,
+          "selfMs": 2.2999999979510903,
+          "meanMs": 10.588571428587395,
+          "maxMs": 26.799999999813735,
+          "sampleCount": 35,
+          "p50Ms": 9.599999999627471,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/battles.ts:resolveCombatRound": {
+          "calls": 15,
+          "inclusiveMs": 49.200000000186265,
+          "selfMs": 21.20000000204891,
+          "meanMs": 3.2800000000124174,
+          "maxMs": 9.400000000372529,
+          "sampleCount": 15,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "event:combat.round": {
+          "calls": 5,
+          "inclusiveMs": 8.599999998696148,
+          "selfMs": 0,
+          "meanMs": 1.7199999997392297,
+          "maxMs": 3.599999999627471,
+          "sampleCount": 5,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/research.ts:startResearch": {
+          "calls": 1,
+          "inclusiveMs": 3.599999999627471,
+          "selfMs": 3.599999999627471,
+          "meanMs": 3.599999999627471,
+          "maxMs": 3.599999999627471,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/reducer.ts:completeResearch": {
+          "calls": 1,
+          "inclusiveMs": 1,
+          "selfMs": 0.2999999998137355,
+          "meanMs": 1,
+          "maxMs": 1,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "event:research.complete": {
+          "calls": 1,
+          "inclusiveMs": 1.3999999994412065,
+          "selfMs": 0.19999999925494194,
+          "meanMs": 1.3999999994412065,
+          "maxMs": 1.3999999994412065,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/politics.ts:reconcilePolitics": {
+          "calls": 1,
+          "inclusiveMs": 0,
+          "selfMs": 0,
+          "meanMs": 0,
+          "maxMs": 0,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandLedger.ts:normalizeOutcomeRevisions": {
+          "calls": 1,
+          "inclusiveMs": 1,
+          "selfMs": 1,
+          "meanMs": 1,
+          "maxMs": 1,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/commandEvidence.ts:pruneCommandEvidence": {
+          "calls": 1,
+          "inclusiveMs": 12.300000000745058,
+          "selfMs": 12.300000000745058,
+          "meanMs": 12.300000000745058,
+          "maxMs": 12.300000000745058,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/reducer.ts:finishFormalAdvance": {
+          "calls": 1,
+          "inclusiveMs": 81.70000000018626,
+          "selfMs": 1.9999999990686774,
+          "meanMs": 81.70000000018626,
+          "maxMs": 81.70000000018626,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/reducer.ts:advanceFormalCooperative": {
+          "calls": 1,
+          "inclusiveMs": 30479.299999999814,
+          "selfMs": 133.80000001192093,
+          "meanMs": 30479.299999999814,
+          "maxMs": 30479.299999999814,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/offline.ts:finishOffline": {
+          "calls": 1,
+          "inclusiveMs": 1.5,
+          "selfMs": 0.6999999992549419,
+          "meanMs": 1.5,
+          "maxMs": 1.5,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        },
+        "formal/offline.ts:advanceOfflineCooperative": {
+          "calls": 1,
+          "inclusiveMs": 30490.89999999944,
+          "selfMs": 0.900000000372529,
+          "meanMs": 30490.89999999944,
+          "maxMs": 30490.89999999944,
+          "sampleCount": 1,
+          "p50Ms": null,
+          "p95Ms": null,
+          "p99Ms": null
+        }
+      }
+    }
+  },
+  "progressSeries": [
+    {
+      "fraction": 0,
+      "events": 0,
+      "elapsedMs": 389.1000000005588
+    },
+    {
+      "fraction": 0.050525877777777777,
+      "events": 418,
+      "elapsedMs": 1919.1000000005588
+    },
+    {
+      "fraction": 0.10080575555555556,
+      "events": 835,
+      "elapsedMs": 3446
+    },
+    {
+      "fraction": 0.15034891111111112,
+      "events": 1222,
+      "elapsedMs": 4901.300000000745
+    },
+    {
+      "fraction": 0.20085594444444443,
+      "events": 1739,
+      "elapsedMs": 6137.200000000186
+    },
+    {
+      "fraction": 0.2509129888888889,
+      "events": 2096,
+      "elapsedMs": 7097.200000000186
+    },
+    {
+      "fraction": 0.3003654,
+      "events": 2484,
+      "elapsedMs": 8800.600000000559
+    },
+    {
+      "fraction": 0.35004172222222224,
+      "events": 2910,
+      "elapsedMs": 10344.900000000373
+    },
+    {
+      "fraction": 0.4003304888888889,
+      "events": 3438,
+      "elapsedMs": 11658.200000000186
+    },
+    {
+      "fraction": 0.45086304444444447,
+      "events": 3880,
+      "elapsedMs": 12751.800000000745
+    },
+    {
+      "fraction": 0.5002341,
+      "events": 4288,
+      "elapsedMs": 14378.400000000373
+    },
+    {
+      "fraction": 0.5502515,
+      "events": 4696,
+      "elapsedMs": 15830.5
+    },
+    {
+      "fraction": 0.6009505111111111,
+      "events": 5179,
+      "elapsedMs": 17070.700000000186
+    },
+    {
+      "fraction": 0.6505629777777778,
+      "events": 5573,
+      "elapsedMs": 19455.300000000745
+    },
+    {
+      "fraction": 0.7005007222222223,
+      "events": 5973,
+      "elapsedMs": 20943.10000000056
+    },
+    {
+      "fraction": 0.7504183555555556,
+      "events": 6369,
+      "elapsedMs": 23159.800000000745
+    },
+    {
+      "fraction": 0.8003274222222222,
+      "events": 6854,
+      "elapsedMs": 24623.5
+    },
+    {
+      "fraction": 0.8503030777777778,
+      "events": 7218,
+      "elapsedMs": 25975.200000000186
+    },
+    {
+      "fraction": 0.9011773666666667,
+      "events": 7614,
+      "elapsedMs": 27495.200000000186
+    },
+    {
+      "fraction": 0.9500458777777778,
+      "events": 8030,
+      "elapsedMs": 28992.400000000373
+    },
+    {
+      "fraction": 1,
+      "events": 8512,
+      "elapsedMs": 30796.300000000745
+    }
+  ],
+  "cpuProfile": {
+    "durationMs": 32866.247,
+    "intervalUs": 1000,
+    "sampleCount": 26278,
+    "topLeafSamples": [
+      {
+        "operation": "(anonymous) @ lab.mjs",
+        "sampleMs": 10821.29599999996,
+        "percent": 32.92525611457846
+      },
+      {
+        "operation": "(idle) @ ",
+        "sampleMs": 7053.562999999977,
+        "percent": 21.461419066192672
+      },
+      {
+        "operation": "clock @ lab.mjs",
+        "sampleMs": 2249.0830000000033,
+        "percent": 6.843139102557109
+      },
+      {
+        "operation": "structuredClone @ ",
+        "sampleMs": 2156.2010000000028,
+        "percent": 6.560533059950539
+      },
+      {
+        "operation": "(garbage collector) @ ",
+        "sampleMs": 1783.1350000000018,
+        "percent": 5.425429316587324
+      },
+      {
+        "operation": "cloneReplayEvent @ lab.mjs",
+        "sampleMs": 1330.4140000000011,
+        "percent": 4.0479644664022665
+      },
+      {
+        "operation": "replace @ lab.mjs",
+        "sampleMs": 483.2300000000001,
+        "percent": 1.4702926074887712
+      },
+      {
+        "operation": "addSite @ lab.mjs",
+        "sampleMs": 401.89899999999966,
+        "percent": 1.222832044072448
+      },
+      {
+        "operation": "quota @ lab.mjs",
+        "sampleMs": 237.8690000000001,
+        "percent": 0.7237485922867923
+      },
+      {
+        "operation": "buildingLevel @ lab.mjs",
+        "sampleMs": 230.84199999999996,
+        "percent": 0.7023679947394053
+      },
+      {
+        "operation": "hasVictoryCityShare @ lab.mjs",
+        "sampleMs": 226.96300000000002,
+        "percent": 0.690565612800269
+      },
+      {
+        "operation": "leave @ lab.mjs",
+        "sampleMs": 219.22599999999989,
+        "percent": 0.6670247442611864
+      },
+      {
+        "operation": "resolveExtinctions @ lab.mjs",
+        "sampleMs": 211.39700000000008,
+        "percent": 0.6432039532837444
+      },
+      {
+        "operation": "researchRequirements @ lab.mjs",
+        "sampleMs": 209.7440000000001,
+        "percent": 0.6381744772988535
+      },
+      {
+        "operation": "record @ lab.mjs",
+        "sampleMs": 204.596,
+        "percent": 0.6225109912914608
+      },
+      {
+        "operation": "addCity @ lab.mjs",
+        "sampleMs": 204.17699999999996,
+        "percent": 0.6212361271428404
+      },
+      {
+        "operation": "_parse @ lab.mjs",
+        "sampleMs": 203.77000000000007,
+        "percent": 0.6199977746166152
+      },
+      {
+        "operation": "advanceOneEvent @ lab.mjs",
+        "sampleMs": 170.17000000000004,
+        "percent": 0.5177652319110242
+      },
+      {
+        "operation": "snapshot @ lab.mjs",
+        "sampleMs": 162.222,
+        "percent": 0.49358236734483246
+      },
+      {
+        "operation": "economicChoices @ lab.mjs",
+        "sampleMs": 152.21999999999994,
+        "percent": 0.46314993007872163
+      },
+      {
+        "operation": "spatial @ lab.mjs",
+        "sampleMs": 148.975,
+        "percent": 0.45327657885611333
+      },
+      {
+        "operation": "route @ lab.mjs",
+        "sampleMs": 147.791,
+        "percent": 0.4496740987798211
+      },
+      {
+        "operation": "compareEvents @ lab.mjs",
+        "sampleMs": 121.63099999999999,
+        "percent": 0.37007876195903955
+      },
+      {
+        "operation": "submitAutonomous @ lab.mjs",
+        "sampleMs": 118.921,
+        "percent": 0.3618332205682018
+      },
+      {
+        "operation": "SpatialIndex @ lab.mjs",
+        "sampleMs": 115.92999999999994,
+        "percent": 0.3527326986862842
+      },
+      {
+        "operation": "retireAutonomy @ lab.mjs",
+        "sampleMs": 107.09800000000003,
+        "percent": 0.325860144603672
+      },
+      {
+        "operation": "write @ lab.mjs",
+        "sampleMs": 102.79699999999995,
+        "percent": 0.31277377061031625
+      },
+      {
+        "operation": "(program) @ ",
+        "sampleMs": 102.16299999999997,
+        "percent": 0.3108447398937882
+      },
+      {
+        "operation": "handleAutonomy @ lab.mjs",
+        "sampleMs": 95.97,
+        "percent": 0.2920017001028441
+      },
+      {
+        "operation": "owned @ lab.mjs",
+        "sampleMs": 92.796,
+        "percent": 0.28234437597940526
+      }
+    ],
+    "note": "Statistical leaf samples, includes idle/GC; not inclusive operation spans. Profiler perturbs timing."
+  },
+  "equivalence": {
+    "atomicReadback": true,
+    "fields": [
+      "armies",
+      "autonomy",
+      "campaignId",
+      "cities",
+      "clockMode",
+      "colonizationUnits",
+      "combat",
+      "commandFacts",
+      "completionReceipts",
+      "dimensions",
+      "economyVersion",
+      "events",
+      "extinction",
+      "factions",
+      "fixture",
+      "governors",
+      "growthTasks",
+      "kind",
+      "largeProjects",
+      "ledger",
+      "logistics",
+      "metadata",
+      "offlineHours",
+      "playerFactionId",
+      "researchProjects",
+      "revision",
+      "seed",
+      "sequences",
+      "settlements",
+      "speed",
+      "time",
+      "worldLayer",
+      "fullLedgerArchive",
+      "fullCommandReceipts",
+      "commandOutcomes",
+      "reportHistory"
+    ]
+  },
+  "limitations": [
+    "Import/setup excluded from load total",
+    "No renderer or WorldStream cost",
+    "No pending Inbox command execution after load",
+    "Single run unless repetitions supplied"
+  ],
+  "worldAgeDaysAtStart": 5.38,
+  "workerPings": {
+    "calls": 655,
+    "totalMs": 6959.899999883026,
+    "maxMs": 226.29999999981374,
+    "over50Ms": 16,
+    "over100Ms": 5,
+    "over250Ms": 0,
+    "meanMs": 10.625801526538972,
+    "requestedIntervalMs": 50,
+    "note": "Synthetic round-trip message service, not T1/T2 command latency; includes page/Worker scheduling"
+  },
+  "environment": {
+    "engine": "Native Chromium DedicatedWorker / IndexedDB; fresh worker after seed",
+    "chromium": "154.0.8037.57",
+    "nodeDriver": "v24.19.0",
+    "os": "linux",
+    "architecture": "x64",
+    "cpuThrottle": 1,
+    "instrumentation": "detailed bounded spans",
+    "profilerMode": "detailed"
+  },
+  "memory": {
+    "sampledPeakHeapBytes": 95164276,
+    "samples": 648,
+    "intervalMs": 50,
+    "note": "Dedicated Worker Runtime.getHeapUsage; sampled lower bound, includes profiler; excludes setup/readback. External CDP sampling perturbs timings.",
+    "window": "collector-v1: load plus verification; setup excluded"
+  }
+}
