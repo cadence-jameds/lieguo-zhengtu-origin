@@ -13,7 +13,7 @@ const terminalFailure=(r:CommandView)=>r.state==='needs-confirmation'||r.state==
  * command payloads, retries, receipts or the durable result. */
 export function CommandFailure({rows,onQuery,onRetry,onReload}:{rows:CommandView[];onQuery:(r:CommandView)=>void;onRetry:(r:CommandView)=>void;onReload:()=>void}){
  const [dismissed,setDismissed]=useState(readDismissed);
- const row=rows.find(r=>(r.state==='receive-failed'||r.state==='blocked'||(terminalFailure(r)&&r.announceTerminalFailure))&&!dismissed.has(key(r)));
+ const row=rows.find(r=>!r.outsideActiveCampaign&&(r.state==='receive-failed'||r.state==='blocked'||(terminalFailure(r)&&r.announceTerminalFailure))&&!dismissed.has(key(r)));
  if(!row)return null;
  const done=terminalFailure(row);
  const close=()=>{

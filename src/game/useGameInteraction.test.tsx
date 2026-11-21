@@ -218,9 +218,12 @@ it('keeps old outcomes queryable without announcing them, but flags new or resum
  const resumed=order(w,'resume',{type:'city.rename',cityId:fixtureIds.support,name:'補做'});
  const ack=(order:typeof old)=>({commandId:order.commandId,status:'rejected',requiresConfirmation:true,revision:0,reason:'世界狀態已變更'});
  const historical={commandId:old.commandId,order:old,state:'needs-confirmation',sequence:1,ack:ack(old)};
+ const foreign={...historical,order:{...old,campaignId:'campaign:other'}};
+ await act(async()=>port.emit({type:'commandList',rows:[foreign]}));
+ expect(engine.commandRows.find(r=>r.order.campaignId===foreign.order.campaignId)?.outsideActiveCampaign).toBe(true);
  const pending={commandId:resumed.commandId,order:resumed,state:'pending',sequence:2};
  await act(async()=>port.emit({type:'commandList',rows:[historical,pending]}));
- const get=(id:string)=>engine.commandRows.find(r=>r.commandId===id)!;
+ const get=(id:string)=>engine.commandRows.find(r=>r.commandId===id&&r.order.campaignId===w.campaignId)!;
  expect(get(old.commandId)).toMatchObject({order:old,state:'needs-confirmation'});
  expect(get(old.commandId).announceTerminalFailure).toBeUndefined();
  await act(async()=>engine.queryCommand(get(old.commandId)));
