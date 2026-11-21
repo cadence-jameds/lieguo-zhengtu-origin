@@ -23,7 +23,7 @@ import {playerOrderBase} from './orderAdmission';
 import {displayClock} from './presentation/liveClock';
 import type {CityIntel} from './formal/combatModel';
 import {governanceBase,type GovernanceBase} from './governanceAdmission';
-export type CommandView={commandId:string;order:FormalOrder;state:InboxCommand['state']|'created'|'receive-failed'|'blocked'|'retired';text?:string;sequence?:number};
+export type CommandView={commandId:string;order:FormalOrder;state:InboxCommand['state']|'created'|'receive-failed'|'blocked'|'retired';text?:string;sequence?:number;announceTerminalFailure?:true};
 export function useGame(){
  const storeRef=useRef<PresentationStore|null>(null);if(!storeRef.current)storeRef.current=new PresentationStore();const presentationStore=storeRef.current;
  const recoveryRef=useRef<ProjectionRecovery|null>(null);
@@ -100,14 +100,14 @@ export function useGame(){
   const requestId=crypto.randomUUID();
   if(r.type==='command'){
    latestCommandCampaign.current=r.order.campaignId;commands.current.track(r.order.commandId);commandRequests.current.set(waitKey(r.order.campaignId,r.order.commandId),r);preserveDrafts();
-   updateCommand(r.order.commandId,{order:r.order,state:'created',text:'已建立，尚未持久保存。'});
+   updateCommand(r.order.commandId,{order:r.order,state:'created',announceTerminalFailure:true,text:'已建立，尚未持久保存。'});
    setError('');setNotice('指令受理中：已建立，尚未持久保存。');setFeedback({kind:'sending',text:'指令已建立，尚未持久保存。'});
   }
   if(['start','restore','import','reset','load'].includes(r.type)){blocking.current.add(requestId);setInputBusy(true);}
   requests.current.add(requestId);setBusy(true);worker.current.postMessage({...r,requestId});
  },[]);
  useEffect(()=>{
-  try{const drafts:unknown=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')??'[]');if(Array.isArray(drafts))for(const raw of drafts){const parsed=orderSchema.safeParse(raw?.order);if(!parsed.success)continue;const r={...raw,type:'command',order:parsed.data} as Extract<RuntimeRequest,{type:'command'}>&{retired?:true};commandRequests.current.set(waitKey(r.order.campaignId,r.order.commandId),r);updateCommand(r.order.commandId,{order:r.order,state:r.retired?'retired':'receive-failed',text:r.retired?'此舊身份已關閉，原始操作保留；請核對目前世界後重新確認。':'上次操作尚未確認持久接收。請先查詢結果，再決定是否重送原命令。'});}}catch{/* Invalid/unavailable session storage does not authorize execution. */}
+  try{const drafts:unknown=JSON.parse(sessionStorage.getItem('formal-command-drafts-v1')??'[]');if(Array.isArray(drafts))for(const raw of drafts){const parsed=orderSchema.safeParse(raw?.order);if(!parsed.success)continue;const r={...raw,type:'command',order:parsed.data} as Extract<RuntimeRequest,{type:'command'}>&{retired?:true};commandRequests.current.set(waitKey(r.order.campaignId,r.order.commandId),r);updateCommand(r.order.commandId,{order:r.order,state:r.retired?'retired':'receive-failed',...(!r.retired?{announceTerminalFailure:true}:{}),text:r.retired?'此舊身份已關閉，原始操作保留；請核對目前世界後重新確認。':'上次操作尚未確認持久接收。請先查詢結果，再決定是否重送原命令。'});}}catch{/* Invalid/unavailable session storage does not authorize execution. */}
   let disposed=false,release:(()=>void)|undefined;let lockDone:Promise<void>=Promise.resolve();const abort=new AbortController();
   const stopForStorage=async()=>{stopCurrentLoad.current?.();disposed=true;abort.abort();release?.();worker.current?.terminate();worker.current=null;stopCurrentLoad.current=null;rejectIntel();rejectSaves(new Error('引擎已停止；已持久接收的命令仍保留。'));requests.current.clear();commands.current.clear();blocking.current.clear();setBusy(false);setInputBusy(false);displayClock.stop();changeStatus('error');setError('世界引擎已停止，可管理本機存檔或重新讀取。');await lockDone;};
   suspendRuntime.current=stopForStorage;
@@ -174,11 +174,13 @@ export function useGame(){
     if(r.type==='synced'){finishSave(r.requestId);setSynced(n=>n+1);if(!commands.current.busy&&['healthy','recovered'].includes(saveStatusRef.current.state))setNotice('進度已保存。');}
     if(r.type==='commandReceived'&&(!r.campaignId||r.campaignId===latestCommandCampaign.current)&&commands.current.matches(r.commandId)){setNotice('指令已受理，尚未持久保存。');setFeedback({kind:'sending',text:'指令已受理，尚未持久保存。'});}
     if(r.type==='commandDurable'||r.type==='commandStatus'){
-     if(r.row){const row=r.row as InboxCommand;if(row.ack)recovery.observeAuthorityRevision(row.campaignId,row.ack.revision);forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
+     if(r.row){const row=r.row as InboxCommand;if(row.ack)recovery.observeAuthorityRevision(row.campaignId,row.ack.revision);forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,...(isWaiting(row.state)?{announceTerminalFailure:true as const}:{}),text:row.ack?.reason??(row.state==='pending'?'已持久接收，等待正式提交。':row.lastError)});
       if(row.ack&&row.order.campaignId===latestCommandCampaign.current&&commands.current.acknowledge(row.ack)){const feedback=feedbackForAck(row.ack);setNotice(feedback.text);setFeedback(feedback);}
       else if(row.order.campaignId===latestCommandCampaign.current&&commands.current.matches(row.commandId)&&!row.ack&&!waitExpired.current.has(waitKey(row.order.campaignId,row.commandId))){setNotice('指令已持久接收，等待正式提交。');setFeedback({kind:'pending',text:'指令已持久接收，等待正式提交。'});}}
     }
-    if(r.type==='commandList'){for(const row of r.rows as InboxCommand[]){forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,text:row.ack?.reason??row.lastError});}}
+    // Historical terminal rows are queryable, not fresh notifications. Pending work
+    // is actually resumed by the Worker and may still surface its new failure.
+    if(r.type==='commandList'){for(const row of r.rows as InboxCommand[]){forgetDraft(row.commandId,row.order.campaignId);updateCommand(row.commandId,{order:row.order,state:row.state,sequence:row.sequence,...(isWaiting(row.state)?{announceTerminalFailure:true as const}:{}),text:row.ack?.reason??row.lastError});}}
     if(r.type==='commandUnavailable'){
      const retired=r.availability!=='unreceived',request=commandRequests.current.get(waitKey(r.campaignId,r.commandId));if(retired&&request){request.retired=true;preserveDrafts();}
      updateCommand(r.commandId,{state:retired?'retired':'receive-failed',text:retired?'此舊身份已無可查詢的近期結果，且不能重新執行。請核對目前世界與原始操作後，再明確建立新命令。':'未找到此原命令的持久接收紀錄。原始操作保留，可重送同一命令。'},r.campaignId);
