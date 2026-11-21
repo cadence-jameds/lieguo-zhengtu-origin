@@ -1,6 +1,8 @@
+import {incomingSizes,incomingTendencies} from './incomingIntelligence';
+import {armyIdSchema} from './formal/combatSchema';
 import {z} from 'zod';
 import {reconcilePresentation} from './presentationSharing';
-import {presentationValueSchema,presentationBattleEffectSchema} from './formal/schema';
+import {presentationValueSchema,presentationBattleEffectSchema,cityIdSchema,factionIdSchema} from './formal/schema';
 import type {PresentationWorld} from './presentationModel';
 import {entityKeys,sectionKeys,entities,entityId,equalData,emptyVersions,type EntityKey,type SectionKey,type VersionMap,type ProjectionMessage,type ProjectionHeader} from './projectionProtocol';
 const number=z.number().int().nonnegative().safe(),text=z.string().min(1),identity=z.object({protocolVersion:z.literal(2),campaignId:text,branch:number,writerEpoch:number,sessionId:text,projectionSequence:number.positive(),revision:number}).strict();
@@ -12,7 +14,12 @@ const patchSchema=header.extend({kind:z.literal('patch'),entities:z.object(Objec
 const unwrap=(value:z.ZodTypeAny):z.ZodTypeAny=>value instanceof z.ZodOptional?unwrap(value.unwrap()):value;
 const mapSchema=unwrap(presentationValueSchema.shape.worldLayer) as z.AnyZodObject;
 const battleEffectsSchema=z.object({cursor:number,recent:z.array(presentationBattleEffectSchema).max(128)}).strict();
-const nextAtSchema=number.nullable(),derivedSchema=z.object({staticMapDigest:z.string().regex(/^[0-9a-f]{64}$/),castleSources:z.record(text),governance:z.record(z.string())}).strict();
+const alertSchema=z.object({
+ armyId:armyIdSchema,cityId:cityIdSchema,ownerFactionId:factionIdSchema,arrivalAt:number,
+ size:z.enum(incomingSizes).optional(),tendency:z.enum(incomingTendencies).optional(),
+ possibleSiege:z.literal(true).optional(),possibleJoint:z.literal(true).optional(),composition:z.array(text).max(2).optional(),
+}).strict();
+const nextAtSchema=number.nullable(),derivedSchema=z.object({staticMapDigest:z.string().regex(/^[0-9a-f]{64}$/),castleSources:z.record(text),governance:z.record(z.string()),incomingAlerts:z.array(alertSchema).optional()}).strict();
 function entityValue(key:EntityKey,value:unknown){const shape=key==='sites'?mapSchema.shape.wildSites:presentationValueSchema.shape[key],array=unwrap(shape) as z.ZodArray<z.ZodTypeAny>;const parsed=array.element.parse(value);if(!equalData(value,parsed))throw Error('實體資料包含不支援欄位。');return parsed;}
 function sectionValue(key:SectionKey,value:unknown){if(key==='staticMap')return value===undefined?undefined:mapSchema.omit({wildSites:true}).parse(value);if(key==='nextEventAt')return nextAtSchema.parse(value);if(key==='derived')return derivedSchema.parse(value);if(key==='battleEffects')return battleEffectsSchema.parse(value);return presentationValueSchema.shape[key].parse(value);}
 function readWorld(value:unknown,h:ProjectionHeader):PresentationWorld|null{

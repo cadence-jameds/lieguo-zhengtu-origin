@@ -1,5 +1,5 @@
 """Finite timestamp/notice hotfix. Historical proofs, rules and save formats stay pinned."""
-import atexit,hashlib,json,subprocess
+import atexit,hashlib,json,subprocess,sys
 from functools import lru_cache
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -99,6 +99,8 @@ def read_record(root=ROOT):
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed immutable Android save hotfix proof';return r
 def accepts(path,predecessor,root=ROOT):
+ from traditional_incoming_intelligence_successor import accepts as intel_successor
+ if intel_successor(path,predecessor,root):return True
  if path not in SOURCES:return False
  r=read_record(root);v=r['changes'].get(path)
  return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
@@ -107,13 +109,18 @@ def accepts_adapter(path,before,root=ROOT):
  r=read_record(root)
  return sha(before) in r['adapterGrants'][path] and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):
+ from traditional_incoming_intelligence_successor import accepts as intel_successor, validate as validate_intel
+ validate_intel(root)
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unpinned Android save hotfix',p)
  for section in ['invariants','historical']:
-  for p,h in r[section].items():assert sha((root/p).read_bytes())==h,('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
+  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and intel_successor(p,h,root),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed finite hotfix adapter',p)
  css='src/game/presentation/playable.css';assert (root/css).read_bytes().startswith(previous(BASE,css)),'Existing styles changed'
  p='src/game/persistence.ts';before=previous(BASE,p).decode();expected="import {persistenceTime} from './persistenceTime';\n"+before;expected=edit(expected,'  // Final encodeSave validates the entire stamped candidate before any writes.','  savedAt=persistenceTime(savedAt);\n  // Final encodeSave validates the entire stamped candidate before any writes.');assert (root/p).read_text()==expected,'Unrequested persistence transaction change'
  p='src/game/runtime.worker.ts';before=previous(BASE,p).decode();after=(root/p).read_text();assert next(x for x in before.splitlines() if x.startswith('const targetTime='))==next(x for x in after.splitlines() if x.startswith('const targetTime=')),'Changed world-time formula';assert before.split(' requests.push(r);',1)[1]==after.split(' requests.push(r);',1)[1],'Changed T1 intake, FIFO or tick scheduling'
  return r
-if __name__=='__main__':validate();print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
+if __name__=='__main__':
+ validate()
+ subprocess.run([sys.executable,str(ROOT/'scripts/test_traditional_incoming_intelligence_successor.py')],check=True)
+ print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')

@@ -1,3 +1,4 @@
+import type {PlayerIncomingAlert} from './incomingIntelligence';
 import type {ResolutionReceipt} from './formal/combatModel';
 import type {FormalWorld} from './formal/model';
 /** Presentation is a read model, never a reducer/persistence input. No authority
@@ -10,7 +11,7 @@ export type PresentationWorld=Omit<FormalWorld,'kind'|'commandFacts'|'ledger'|'c
  politics?:Omit<NonNullable<FormalWorld['politics']>,'randomCounter'>;
  growthTasks?:Omit<NonNullable<FormalWorld['growthTasks']>,'settledCities'|'autoShipments'>;
  battleEffects:{cursor:number;recent:ResolutionReceipt[]};
- derived:{staticMapDigest:string;castleSources:Record<string,string>;governance:Record<string,string>};
+ derived:{staticMapDigest:string;castleSources:Record<string,string>;governance:Record<string,string>;incomingAlerts?:PlayerIncomingAlert[]};
 };
 /** Shared pure read functions accept either an authoritative model or a view.
  * The union deliberately prevents accessing authority-only fields without proof. */
