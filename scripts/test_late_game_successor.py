@@ -10,14 +10,14 @@ class LateGameSuccessorTests(unittest.TestCase):
         td = tempfile.TemporaryDirectory(prefix='late-game-proof-')
         self.addCleanup(td.cleanup)
         self.root = Path(td.name)
-        for path in {*gate.SOURCES, gate.BOUNDARY}:
+        for path in {*gate.SOURCES, *gate.CHILD_SOURCES, gate.BOUNDARY}:
             dest = self.root / path
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes((gate.ROOT / path).read_bytes())
 
     def test_exact_files_and_known_path_specific_predecessors(self):
         record = gate.validate(self.root)
-        self.assertEqual(set(record['changes']), gate.SOURCES)
+        self.assertEqual(set(record['changes']), gate.SOURCES | gate.CHILD_SOURCES)
         for path, entry in record['changes'].items():
             if entry['before']:
                 self.assertTrue(gate.accepts(path, entry['before'], self.root))
@@ -27,8 +27,19 @@ class LateGameSuccessorTests(unittest.TestCase):
         self.assertFalse(gate.accepts(order, record['changes'][reducer]['before'], self.root))
         self.assertFalse(gate.accepts('src/game/formal/schema.ts', record['changes'][reducer]['before'], self.root))
 
+    def test_cooperation_child_accepts_only_exact_bytes_and_order_predecessors(self):
+        order = 'src/game/orderAdmission.ts'
+        previous = gate.previous(gate.CHILD_BASE, order)
+        target = self.root / order
+        self.assertTrue(gate.accepts(order, gate.sha(previous), self.root))
+        self.assertFalse(gate.accepts(order, gate.sha(gate.previous(gate.CHILD_BASE, 'src/game/formal/reducer.ts')), self.root))
+        target.write_bytes(previous)
+        self.assertFalse(gate.accepts(order, gate.sha(previous), self.root))
+        with self.assertRaisesRegex(AssertionError, order):
+            gate.validate(self.root)
+
     def test_tampering_fails_even_when_new_source_has_no_predecessor(self):
-        for path in ['src/game/formal/economy.ts', 'src/game/formal/logisticsRoute.ts', 'src/game/orderAdmission.ts']:
+        for path in sorted({'src/game/formal/economy.ts', 'src/game/formal/logisticsRoute.ts'} | gate.CHILD_SOURCES):
             target = self.root / path
             original = target.read_bytes()
             target.write_bytes(original + b'\n')

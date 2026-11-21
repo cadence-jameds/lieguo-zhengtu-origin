@@ -9,6 +9,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '0bd1a33bbfe173fc1e8b67a17eab66b5f4c3407f'
 IMPLEMENTATION = '109e8a13581f99122360e8fe9a94a21910228450'
+CHILD_BASE = '1e583c7ec5ac1e687d0e5494b2b294b404ac3279'
+CHILD_IMPLEMENTATION = '1b64cf4e2f162d83b3c60bcdcf3a48642c125bfa'
+CHILD_SOURCES = {
+    'src/game/orderAdmission.ts',
+    'src/game/formal/politicalAdmissionRuntime.test.ts',
+    'src/game/formal/routing.ts',
+}
 BOUNDARY = 'scripts/verify-projection-boundaries.mjs'
 SOURCES = {
     'docs/b10-p0-offline/LATE-LOGISTICS.md',
@@ -83,6 +90,23 @@ def exact_scope():
             before = None
         changes[path] = {'before': before, 'after': sha(previous(IMPLEMENTATION, path))}
         grants[path] = {before} if before else set()
+    assert git('rev-list', '--parents', '-n', '1', CHILD_IMPLEMENTATION).decode().split() == [CHILD_IMPLEMENTATION, CHILD_BASE], 'Incorrect cooperation predecessor'
+    actual = set(git('diff', '--name-only', CHILD_BASE, CHILD_IMPLEMENTATION).decode().splitlines())
+    assert actual == CHILD_SOURCES, ('Unexpected cooperation source scope', actual ^ CHILD_SOURCES)
+    # The fixed child parent is the released #70 proof, not a moving branch.
+    # Require it to contain the original exact implementation and adapter.
+    for path, change in changes.items():
+        assert sha(previous(CHILD_BASE, path)) == change['after'], ('Incorrect cooperation baseline', path)
+    assert previous(CHILD_BASE, BOUNDARY) == boundary_bytes(), 'Incorrect cooperation projection baseline'
+    for path in sorted(CHILD_SOURCES):
+        if path in changes:
+            grants[path].add(changes[path]['after'])
+        else:
+            before = sha(previous(BASE, path))
+            assert sha(previous(CHILD_BASE, path)) == before, ('Incorrect cooperation baseline', path)
+            changes[path] = {'before': before}
+            grants[path] = {before}
+        changes[path]['after'] = sha(previous(CHILD_IMPLEMENTATION, path))
     # Historical predecessors are sourced from the fixed baseline commit,
     # never from the live checkout, a submitted local hash, or another path.
     records = git('ls-tree', '-r', '--name-only', BASE, 'docs/validation').decode().splitlines()
@@ -107,7 +131,7 @@ def accepts(path, predecessor, root=ROOT):
     if path == BOUNDARY:
         base_bytes = previous(BASE, BOUNDARY)
         return predecessor == sha(base_bytes) and accepts_adapter(path, base_bytes, root)
-    if path not in SOURCES:
+    if path not in SOURCES | CHILD_SOURCES:
         return False
     changes, grants = exact_scope()
     target = root / path
@@ -126,4 +150,4 @@ def validate(root=ROOT):
 if __name__ == '__main__':
     record = validate()
     print(json.dumps(record) if '--boundary-record' in sys.argv else
-          f'PASS: exact late-game implementation at {IMPLEMENTATION} with historical gates unchanged.')
+          f'PASS: exact late-game implementation at {IMPLEMENTATION} and cooperation child {CHILD_IMPLEMENTATION} with historical gates unchanged.')
