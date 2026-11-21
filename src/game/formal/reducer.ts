@@ -44,7 +44,7 @@ export function orderFingerprint(order:FormalOrder):string {
 function report(w:FormalWorld,title:string,text:string,owner:FactionId=w.playerFactionId):FormalReport {
  const sequence=w.sequences.report++;return{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:owner,at:w.time,category:'research',title,text};
 }
-type ReplayAdmission={receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shareCommandFacts:boolean;fullCommandClone:boolean};
+type ReplayAdmission={offline:boolean;receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shareCommandFacts:boolean;fullCommandClone:boolean};
 /** Scan once before the first replay command draft. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
 function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'shareCommandFacts'|'fullCommandClone'> {
  const readonly=1,autonomy=2,mutable=4,facts=8,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
@@ -129,7 +129,7 @@ function replaySubmit(offline:boolean):Submit {
  // actual current graph once, immediately before its first command draft;
  // receipt indexing still starts at zero and follows the same replay order.
  let admission:ReplayAdmission|undefined;
- return(current,value)=>{admission??={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current,offline)};return submitOrderDraft(current,value,admission);};
+ return(current,value)=>{admission??={offline,receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current,offline)};return submitOrderDraft(current,value,admission);};
 }
 /** Keep the original public validation boundary observable exactly once. */
 function validateFormalDraft(w:FormalWorld){return withDraftShipmentSyntax(w,()=>validateFormalWorld(w));}
@@ -162,6 +162,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
   return receipt;
  };
  const p=order.payload;
+ let offlineDraftScheduler:EventScheduler|undefined;
  if(order.issuerId===w.playerFactionId)syncGrowthTasks(w);
  const city=spatial(w).cities.get(p.cityId);
  if(p.type!=='player.rebirth'&&p.type!=='player.end'&&p.type!=='campaign.configure'&&(!city||city.ownerFactionId!==order.issuerId))return reject('只能操作自己實際控制的城市。');
@@ -208,9 +209,11 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
    else if(p.type==='logistics.auto.set'||p.type==='logistics.configure')setAutoLogistics(w,city,p.rules,p.type==='logistics.configure'?p.settings:undefined);
    else if(p.type==='army.dispatch'||p.type==='army.recall'||p.type==='army.advance')applyArmyCommand(w,city,order,p,scheduler);
    else applyEconomyCommand(w,city,order,p,scheduler);
-   promoteCityQueues(w,city,scheduler);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcilePoliticalEvents(w,scheduler);w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
+   promoteCityQueues(w,city,scheduler);reconcileWonders(w,scheduler);reconcileCatchup(w,scheduler);reconcilePoliticalEvents(w,scheduler);if(replay?.offline)offlineDraftScheduler=scheduler;else w.events=scheduler.snapshot();}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}
  }
- {if(p.type==='politics'||p.type==='military.modernize'||p.type==='military.disband'||p.type==='settlement.dispatch'||p.type==='settlement.cancel')invalidateMilitaryPower(w);const s=new EventScheduler(w.events);reconcileVictory(w,s);w.events=s.snapshot();}
+ {if(p.type==='politics'||p.type==='military.modernize'||p.type==='military.disband'||p.type==='settlement.dispatch'||p.type==='settlement.cancel')invalidateMilitaryPower(w);// This scheduler is private to the accepted command draft. Reconcile victory before
+  // its single canonical snapshot rather than rebuilding an already-validated heap.
+  const s=offlineDraftScheduler??new EventScheduler(w.events);reconcileVictory(w,s);w.events=s.snapshot();}
  if(p.type==='politics'&&p.action==='war')endProtection(w,order.issuerId,'主動宣戰');
  reports.push(...protectionNotice(current,w,order.issuerId),...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;

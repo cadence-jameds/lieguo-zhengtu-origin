@@ -1,9 +1,8 @@
 import type {WorldRead} from '../presentationModel';
-import type {FormalWorld} from './model';
 import {passable,terrainAt,terrainTravelMultiplier} from './terrain';
 type Point={x:number;y:number};
 /** Shared by path selection, military segment snapshots and strict save validation. */
-export const segmentTravelDistance=(w:FormalWorld,from:Point,to:Point)=>Math.hypot(to.x-from.x,to.y-from.y)*terrainTravelMultiplier(terrainAt(w,to.x,to.y));
+export const segmentTravelDistance=(w:WorldRead,from:Point,to:Point)=>Math.hypot(to.x-from.x,to.y-from.y)*terrainTravelMultiplier(terrainAt(w,to.x,to.y));
 /** Indexed grid A*: explicit passability, no hard path/entity limit or illegal straight-line fallback. */
 export function route(w:WorldRead,from:Point,to:Point):{path:Point[];distance:number} {
  const width=w.dimensions.width,start=from.y*width+from.x,goal=to.y*width+to.x;

@@ -1,12 +1,15 @@
 import {admissionMapDigest} from './admissionMap';
 import type {WorldRead} from './presentationModel';
 import {commandHistory} from './formal/commandLedger';
-import type {FormalCommand,FormalOrder,FormalWorld} from './formal/model';
+import type {FormalCity,FormalCommand,FormalOrder,FormalWorld} from './formal/model';
 import {buildingKind,buildingLevel} from './formal/catalogB3';
 import {buildingRequirements} from './formal/buildingDetailData';
 import {spatial} from './formal/spatial';
 import {canReinforce} from './formal/armies';
-import {empireOf,diplomaticRelation,politicalScope} from './formal/politics';
+import {canCoordinate,embassy,empireOf,legionOf,diplomaticRelation,politicalLeader,politicalScope,type CooperationCommand,type PoliticalCommand} from './formal/politics';
+import {route,segmentTravelDistance} from './formal/routing';
+import {marchSeconds} from './formal/combatModifiers';
+import {UNIT_CATALOG} from './formal/unitCatalog';
 import {protectedFaction} from './formal/playtest';
 
 /** The UI records only the intended action's relevant preconditions.
@@ -14,6 +17,88 @@ import {protectedFaction} from './formal/playtest';
  * an unchanged player order. The formal reducer still validates all current
  * costs, ownership, queues and requirements at admission time. */
 export type PlayerOrderBase={revision:number;fingerprint:string};
+
+/** Stamp the political parties named by the click, not the global revision. */
+function politicalIntentState(w:WorldRead,p:PoliticalCommand):unknown[]{
+ const me=w.playerFactionId,politics=w.politics;
+ const request=p.requestId?politics?.requests.find(r=>r.id===p.requestId):undefined;
+ const subjects=[...new Set([me,p.target,request?.from,request?.to])].filter(id=>id!==undefined);
+ const party=(id:typeof me)=>{
+  const faction=w.factions.find(f=>f.id===id),legion=legionOf(w,id),empire=empireOf(w,id);
+  const constituentLegions=empire?.legions.map(legionId=>{
+   const group=politics?.legions.find(l=>l.id===legionId);
+   return [legionId,group?.leader,group?.members];
+  });
+  return [id,!!faction,w.cities.some(c=>c.ownerFactionId===id),legion?.id,legion?.leader,legion?.members,empire?.id,empire?.leader,constituentLegions];
+ };
+ const groups=subjects.map(party);
+ const diplomat=p.action==='war'||p.action==='peace'||p.action==='friendly-end'||p.action==='friendly-propose'||request?.kind==='friendly';
+ const scopes=new Set(subjects.map(id=>politicalScope(w,id))),relations=(politics?.relations??[]).filter(r=>scopes.has(r.a as typeof me)&&scopes.has(r.b as typeof me));
+ const requestKind=p.action==='friendly-propose'?'friendly':p.action==='legion-apply'?'application':p.action==='legion-invite'?'invitation':p.action==='empire-propose'?'empire':undefined;
+ const recipient=p.action==='legion-apply'&&p.target?legionOf(w,p.target)?.leader:p.target;
+ const peerRequests=recipient&&requestKind?(politics?.requests??[]).filter(r=>r.kind===requestKind&&r.from===me&&r.to===recipient):[];
+ if(diplomat)return [groups,subjects.map(id=>politicalLeader(w,id)),relations,request,
+  p.action==='friendly-propose'?peerRequests:null];
+ const relevantLegions=new Set(subjects.map(id=>legionOf(w,id)?.id).filter(Boolean));
+ const relevantEmpires=new Set(subjects.map(id=>empireOf(w,id)?.id).filter(Boolean));
+ const authorityMembers=new Set(subjects);
+ for(const group of politics?.legions??[])if(relevantLegions.has(group.id)||relevantEmpires.has(group.empireId??undefined))
+  for(const member of group.members)authorityMembers.add(member);
+ // Local prerequisites, not stocks, AI turn counters or the clock. The
+ // authority sets above also cover transfer/succession candidates.
+ const eligibility=[...authorityMembers].sort().map(id=>[id,w.factions.find(f=>f.id===id)?.age,embassy(w,id)]);
+ return [groups,eligibility,relations,request,peerRequests,
+  p.action==='legion-edit'?legionOf(w,me)?.name:null,p.action==='legion-edit'?legionOf(w,me)?.description:null];
+}
+
+/** Rebase only the same cooperation contract. Never include another
+ * faction's troop counts; special wonder missions still require fresh input. */
+function cooperationIntentState(w:WorldRead,city:FormalCity,p:CooperationCommand,mapDigest?:string):unknown[]|undefined {
+ const me=w.playerFactionId,faction=w.factions.find(f=>f.id===me)!;
+ const authority=(id:typeof me,level:13|14)=>{
+  const legion=legionOf(w,id),empire=empireOf(w,id);
+  return [legion?.id,legion?.leader,!!legion&&embassy(w,legion.leader)>=level,
+   empire?.id,empire?.leader,!!empire&&embassy(w,empire.leader)>=15];
+ };
+ const level=p.type==='defense.set'||p.type==='defense.dispatch'?13:14;
+ const ownAuthority=authority(me,level);
+ const reserve=w.politics?.reserves.find(r=>r.cityId===city.id);
+ const count=(id:string)=>city.military?.units[id]??0;
+ const selected=(units:Record<string,number>)=>Object.keys(units).sort().map(id=>[id,count(id)]);
+ if(p.type==='defense.set')return [ownAuthority,reserve,selected(p.units)];
+ const joint=p.type==='joint.join'?w.politics?.joints.find(j=>j.id===p.jointId):undefined;
+ if(p.type==='joint.join'&&!joint)return;
+ if((p.type==='joint.create'&&(p.mission==='wonder-destruction'||p.wonderPriority))||
+    (joint&&(joint.mission==='wonder-destruction'||joint.wonderPriority)))return;
+ const target=w.cities.find(c=>c.id===(p.type==='joint.join'?joint!.targetCityId:p.targetCityId));
+ if(!target)return;
+ const targetState=[target.id,target.x,target.y,target.ownerFactionId,politicalScope(w,target.ownerFactionId),
+  diplomaticRelation(w,me,target.ownerFactionId),canReinforce(w,me,target.ownerFactionId)];
+ const march=[city.x,city.y,faction.civilizationId,faction.age,faction.techIds,w.dimensions,
+  ...(mapDigest?[{version:2,staticMapDigest:mapDigest}]:[w.worldLayer?.terrain,w.worldLayer?.mountains])];
+ if(p.type==='defense.dispatch')return [ownAuthority,reserve,authority(target.ownerFactionId,level),
+  canCoordinate(w,me,target.ownerFactionId,13),targetState,march,
+  // All own troops can affect the reserve's minimum-garrison computation.
+  Object.entries(city.military?.units??{}).sort(([a],[b])=>a.localeCompare(b))];
+ const arrival=p.type==='joint.create'?p.arrivalAt:joint!.arrivalAt;
+ let window:'expired'|'can-arrive'|'too-late'='expired';
+ if(w.time<arrival){
+  const units=Object.fromEntries(Object.entries(p.units).filter(([,n])=>n>0));
+  if(!Object.keys(units).length||Object.keys(units).some(id=>!Object.hasOwn(UNIT_CATALOG,id)))return;
+  try{
+   const {path}=route(w,city,target),seconds=marchSeconds(units,faction);
+   let duration=0;for(let i=1;i<path.length;i++)duration+=segmentTravelDistance(w,path[i-1],path[i])*seconds*1000;
+   window=w.time+Math.max(1,Math.ceil(duration))<=arrival?'can-arrive':'too-late';
+  }catch{return;}
+ }
+ // Past or no-longer-reachable joins aren't silently replayed. A create with
+ // an immediate arrival request (the normal UI) still departs immediately.
+ if(joint&&window!=='can-arrive')return;
+ return [ownAuthority,targetState,march,selected(p.units),protectedFaction(w,target.ownerFactionId),window,
+  joint?[joint.id,joint.targetCityId,joint.initiator,joint.scope,joint.arrivalAt,joint.mission,joint.armyIds,
+   authority(joint.initiator,level),canCoordinate(w,me,joint.initiator,14),
+   joint.armyIds.map(id=>w.armies.find(a=>a.id===id)?.status)]:null];
+}
 
 function intentState(w:WorldRead,p:FormalCommand,mapDigest?:string):unknown[]|undefined {
  const city=w.cities.find(c=>c.id===p.cityId);
@@ -80,7 +165,9 @@ function intentState(w:WorldRead,p:FormalCommand,mapDigest?:string):unknown[]|un
     project?[empireOf(w,faction.id)?.id,project.projectId,project.owner,project.wonder?.phase,host?.id,host?.ownerFactionId,host?empireOf(w,host.ownerFactionId)?.id:null]:null];
   }
   case 'logistics.auto.set':return[city.autoLogistics,city.buildings,construction];
-  // No automatic admission for other combat, diplomacy, withdrawal,
+  case 'politics':return politicalIntentState(w,p);
+  case 'defense.set':case 'defense.dispatch':case 'joint.create':case 'joint.join':return cooperationIntentState(w,city,p,mapDigest);
+  // No automatic admission for other combat, withdrawal,
   // disbanding or cross-city movement.
   default:return;
  }
@@ -88,7 +175,7 @@ function intentState(w:WorldRead,p:FormalCommand,mapDigest?:string):unknown[]|un
 
 /** Immutable semantic intent stamp, not an authorization to skip validation. */
 export function playerOrderBase(w:WorldRead,p:FormalCommand,encoding?:1|2):PlayerOrderBase|undefined {
- const compact=p.type==='army.dispatch'&&(encoding===2||encoding!==1&&w.kind==='presentation'),mapDigest=compact?(w.kind==='presentation'?w.derived.staticMapDigest:admissionMapDigest(w)):undefined;
+ const compact=(p.type==='army.dispatch'||p.type==='defense.dispatch'||p.type==='joint.create'||p.type==='joint.join')&&(encoding===2||encoding!==1&&w.kind==='presentation'),mapDigest=compact?(w.kind==='presentation'?w.derived.staticMapDigest:admissionMapDigest(w)):undefined;
  if(compact&&!mapDigest)return;
  const state=intentState(w,p,mapDigest);
  if(!state)return;

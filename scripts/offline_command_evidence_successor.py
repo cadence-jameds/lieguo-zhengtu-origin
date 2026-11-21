@@ -48,5 +48,6 @@ def accepts(path, predecessor, root=ROOT):
 
 def validate(root=ROOT):
     targets, _ = exact_scope()
+    from late_game_successor import accepts as late_successor
     for path, expected in targets.items():
-        assert digest((root / path).read_bytes()) == expected, ('Unpinned offline optimization source', path)
+        assert digest((root / path).read_bytes()) == expected or path == REDUCER and late_successor(path, expected, root), ('Unpinned offline optimization source', path)

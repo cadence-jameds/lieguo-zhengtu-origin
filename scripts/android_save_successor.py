@@ -104,9 +104,11 @@ def accepts_android_save(path,predecessor,root=ROOT):
  return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
 def accepts(path,predecessor,root=ROOT):
  from offline_command_evidence_successor import accepts as offline_successor
- return accepts_android_save(path,predecessor,root) or offline_successor(path,predecessor,root)
+ from late_game_successor import accepts as late_successor
+ return accepts_android_save(path,predecessor,root) or offline_successor(path,predecessor,root) or late_successor(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
- if path not in ADAPTERS:return False
+ from late_game_successor import accepts_adapter as late_adapter
+ if path not in ADAPTERS:return late_adapter(path,before,root)
  r=read_record(root)
  return sha(before) in r['adapterGrants'][path] and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):
@@ -121,4 +123,8 @@ def validate(root=ROOT):
  return r
 if __name__=='__main__':
  from offline_command_evidence_successor import validate as validate_offline
- validate();validate_offline();print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
+ from late_game_successor import validate as validate_late
+ import sys
+ validate();validate_offline();validate_late()
+ subprocess.run([sys.executable, str(ROOT/'scripts/test_late_game_successor.py')], check=True)
+ print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
