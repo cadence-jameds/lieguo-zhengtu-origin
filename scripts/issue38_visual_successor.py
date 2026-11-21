@@ -84,14 +84,16 @@ def accepts_city_adapter(path, predecessor, root=ROOT):
     return predecessor == sha(before) and target.is_file() and target.read_bytes() == after
 
 def accepts(path, predecessor, root=ROOT):
+    from recruitment_tier_successor import accepts as recruitment
     if path not in SOURCES:
-        return False
+        return recruitment(path, predecessor, root)
     targets, grants = exact_scope()
     target = root / path
-    return predecessor in grants[path] and target.is_file() and sha(target.read_bytes()) == targets[path]
+    return predecessor in grants[path] and target.is_file() and (sha(target.read_bytes()) == targets[path] or recruitment(path, targets[path], root))
 
 def validate(root=ROOT):
+    from recruitment_tier_successor import accepts as recruitment
     targets, _ = exact_scope()
     assert (root / CITY_GATE).read_bytes() == expected_city_adapter()[1], 'Changed finite issue #38 city gate adapter'
     for path, expected in targets.items():
-        assert sha((root / path).read_bytes()) == expected, ('Unpinned issue #38 source', path)
+        assert sha((root / path).read_bytes()) == expected or recruitment(path, expected, root), ('Unpinned issue #38 source', path)

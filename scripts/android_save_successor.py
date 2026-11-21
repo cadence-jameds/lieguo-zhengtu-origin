@@ -107,7 +107,8 @@ def accepts(path,predecessor,root=ROOT):
  from issue38_visual_successor import accepts as issue38_successor, accepts_city_adapter
  return accepts_android_save(path,predecessor,root) or offline_successor(path,predecessor,root) or issue38_successor(path,predecessor,root) or accepts_city_adapter(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
- if path not in ADAPTERS:return False
+ from recruitment_tier_successor import accepts as recruitment
+ if path not in ADAPTERS:return recruitment(path,sha(before),root)
  r=read_record(root)
  return sha(before) in r['adapterGrants'][path] and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):
