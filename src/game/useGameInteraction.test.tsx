@@ -210,3 +210,29 @@ it('never confirms an old campaign draft against another campaign with matching 
  const other=structuredClone(w);other.campaignId='campaign:other' as typeof other.campaignId;await act(async()=>port.emit(state(other)));const sent=port.sent.length;
  await act(async()=>engine.confirmCommand(row));expect(port.sent).toHaveLength(sent);expect(engine.feedback.text).toContain('另一戰役');expect(sessionStorage.getItem('formal-command-drafts-v1')).toContain(original.commandId);
 });
+
+it('batch serializes one normal durable order per city; waits for authority and rendered revision before next',async()=>{
+ const {battlefield}=await import('./formal/combatTestSupport'),{build}=await import('./formal/developmentTestSupport');
+ const {ADMIN_COORDINATION}=await import('./administration');
+ const scenario=battlefield(),[a,b]=scenario.cities;
+ scenario.factions.find(f=>f.id===scenario.playerFactionId)!.techIds.push(ADMIN_COORDINATION);
+ b.ownerFactionId=scenario.playerFactionId;build(a,'townhall',1);build(b,'townhall',1);
+ await act(async()=>port.emit(state(scenario)));port.sent=[];
+ let result:ReturnType<typeof engine.applyGovernanceTemplate>|undefined;
+ await act(async()=>{result=engine.applyGovernanceTemplate([a.id,b.id],{name:'測試',policy:'reserve',budget:0,reserve:900});});
+ const sent=()=>port.sent.filter(r=>r.type==='command');
+ expect(sent()).toHaveLength(1);expect(sent()[0].order.payload).toMatchObject({type:'governance.set',cityId:a.id,enabled:false,budget:0});
+ const first=sent()[0].order;
+ await act(async()=>port.emit({type:'commandDurable',row:{campaignId:first.campaignId,commandId:first.commandId,order:first,state:'pending'}}));
+ expect(sent()).toHaveLength(1);
+ const ok=(o:typeof first,revision:number)=>({type:'commandAck',campaignId:o.campaignId,ack:{commandId:o.commandId,status:'committed',revision}});
+ await act(async()=>port.emit(ok(first,1)));
+ expect(sent()).toHaveLength(1);
+ const committed=structuredClone(scenario);committed.revision=1;
+ await act(async()=>port.emit(state(committed)));
+ await act(async()=>vi.waitFor(()=>expect(sent()).toHaveLength(2)));
+ const second=sent()[1].order;expect(second.expectedRevision).toBe(1);
+ expect(second.commandId).not.toBe(first.commandId);expect(second.payload).toMatchObject({type:'governance.set',cityId:b.id,reserve:900});
+ await act(async()=>{port.emit(ok(second,2));port.emit(state({...committed,revision:2}));});
+ await act(async()=>expect(await result).toEqual([{cityId:a.id,status:'applied'},{cityId:b.id,status:'applied'}]));
+});
