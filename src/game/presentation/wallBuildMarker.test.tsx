@@ -37,9 +37,15 @@ it.each([false,true])('shows the unbuilt wall action independently of scene labe
   expect(image()).toContain('dark-open');
   expect(gate().textContent).toBe('查看城牆工程');
   expect(gate().getAttribute('aria-label')).toBe('查看城牆工程');
+  // The wider queued label participates in the native button's intrinsic width.
+  // Leaving it absolutely positioned would paint outside the tap target on phones.
+  expect(gate().style.width).toBe('max-content');
+  expect(gate().style.minWidth).toBe('max(104px, 12%)');
+  expect(gate().querySelector<HTMLElement>('.wall-site-marker')!.style.position).toBe('');
   await act(async()=>gate().click());expect(onWall).toHaveBeenCalledTimes(2);
   await act(async()=>render(world,true,1));
   expect(gate().querySelector('.wall-site-marker')).toBeNull();
+  expect(gate().style.width).toBe('');
   expect(gate().querySelector('.town-level b')?.textContent).toBe('1');
  }finally{await act(async()=>root.unmount());host.remove();vi.unstubAllGlobals();}
 });

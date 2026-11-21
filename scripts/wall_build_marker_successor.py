@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'c8b3554ff9643b74b624e4e77f381653afcccc20'
 SCENE = 'src/game/presentation/CityScenes.tsx'
-RESULT = '472a51c2db0d5bf4d25bb068656345bcc6eac356acc948f09c06f79cb4e1ff56'
+RESULT = '92f79cc4c0137aa03e9065f05f8882c2e3496744dc4441aa98bc14f0bbc20ee2'
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
