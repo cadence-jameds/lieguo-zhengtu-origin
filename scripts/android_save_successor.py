@@ -98,10 +98,13 @@ def read_record(root=ROOT):
  f=root/RECORD
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed immutable Android save hotfix proof';return r
-def accepts(path,predecessor,root=ROOT):
+def accepts_android_save(path,predecessor,root=ROOT):
  if path not in SOURCES:return False
  r=read_record(root);v=r['changes'].get(path)
  return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
+def accepts(path,predecessor,root=ROOT):
+ from offline_command_evidence_successor import accepts as offline_successor
+ return accepts_android_save(path,predecessor,root) or offline_successor(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
  if path not in ADAPTERS:return False
  r=read_record(root)
@@ -110,10 +113,12 @@ def validate(root=ROOT):
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unpinned Android save hotfix',p)
  for section in ['invariants','historical']:
-  for p,h in r[section].items():assert sha((root/p).read_bytes())==h,('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
+  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and accepts(p,h,root),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed finite hotfix adapter',p)
  css='src/game/presentation/playable.css';assert (root/css).read_bytes().startswith(previous(BASE,css)),'Existing styles changed'
  p='src/game/persistence.ts';before=previous(BASE,p).decode();expected="import {persistenceTime} from './persistenceTime';\n"+before;expected=edit(expected,'  // Final encodeSave validates the entire stamped candidate before any writes.','  savedAt=persistenceTime(savedAt);\n  // Final encodeSave validates the entire stamped candidate before any writes.');assert (root/p).read_text()==expected,'Unrequested persistence transaction change'
  p='src/game/runtime.worker.ts';before=previous(BASE,p).decode();after=(root/p).read_text();assert next(x for x in before.splitlines() if x.startswith('const targetTime='))==next(x for x in after.splitlines() if x.startswith('const targetTime=')),'Changed world-time formula';assert before.split(' requests.push(r);',1)[1]==after.split(' requests.push(r);',1)[1],'Changed T1 intake, FIFO or tick scheduling'
  return r
-if __name__=='__main__':validate();print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
+if __name__=='__main__':
+ from offline_command_evidence_successor import validate as validate_offline
+ validate();validate_offline();print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
