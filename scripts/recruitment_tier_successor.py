@@ -7,7 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '1c8b0bb851d651a54cf1418ab7416e4279ce4448'
-RESULTS = {'scripts/recruit_input_successor.py': 'f2b171773aff7d8e464e4e4e1e143a5ffb5b484745a5930ea24d569267aa1e0a',
+RESULTS = {'scripts/b10_r3_05_successor.py': 'c3c3eb052d82aeddd5c75a0dc2df0e63a81bea224e4452a8ed9ac99e404b9734',
+ 'scripts/recruit_input_successor.py': 'f2b171773aff7d8e464e4e4e1e143a5ffb5b484745a5930ea24d569267aa1e0a',
  'src/game/presentation/recruitmentInput.test.tsx': '4ba65592a16dfd009595173078026b6ed3f1ec2530794fbf43cb2c97e9daa779',
  'src/game/presentation/DevelopmentViews.tsx': '6900dde573b457ac9bfe7d6c1435652d7f3d80ac871f00ee682e7e5b4d3fbe89',
  'src/game/presentation/RecruitmentForm.tsx': '411be03818eabbc46703fa5bd6e87fb4c4a7cecd83faa59fc7af0828feb6bd1e',
@@ -43,6 +44,8 @@ def predecessors():
                     for key in ('before', 'after', 'baseSha256', 'uiSha256', 'currentSha256'):
                         if isinstance(item.get(key), str):
                             permitted.add(item[key])
+    # R3-02's exact pinned adaptation of the historical recruitment witness.
+    values['scripts/recruit_input_successor.py'].add('218c4c4d1767552bbacc7e87a523a64503febba6e2952670d80a34312ba0bffc')
     return {source: frozenset(permitted) for source, permitted in values.items()}
 
 def accepts(path, predecessor, root=ROOT):
