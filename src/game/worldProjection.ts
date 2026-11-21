@@ -1,3 +1,4 @@
+import {projectPlayerIncoming} from './incomingIntelligence';
 import {admissionMapDigest} from './admissionMap';
 import type {FormalWorld,CommandReceipt} from './formal/model';
 import type {PresentationWorld,ProjectionIdentity} from './presentationModel';
@@ -50,6 +51,6 @@ export class WorldProjection {
 /** Pure field selection; the production builder above verifies the committed source first. */
 export function projectionValues(w:FormalWorld,id:ProjectionIdentity,derived:PresentationWorld['derived']):PresentationWorld{
  // Explicit fields: never spread an authority object or invoke its receipt getter.
-  return {kind:'presentation',presentationVersion:2,projection:id,nextEventAt:w.events.length?w.events.reduce((at,e)=>Math.min(at,e.at),Infinity):null,derived,
+  return {kind:'presentation',presentationVersion:2,projection:id,nextEventAt:w.events.length?w.events.reduce((at,e)=>Math.min(at,e.at),Infinity):null,derived:{...derived,incomingAlerts:projectPlayerIncoming(w)},
    metadata:w.metadata,campaignId:w.campaignId,economyVersion:w.economyVersion,growthTasks:w.growthTasks?{version:w.growthTasks.version,startedAt:w.growthTasks.startedAt,recordedThrough:w.growthTasks.recordedThrough,facts:w.growthTasks.facts,completed:w.growthTasks.completed,claimed:w.growthTasks.claimed}:undefined,victory:w.victory,modernAwareness:w.modernAwareness,governors:w.governors??[],extinction:w.extinction,politics:w.politics?{legions:w.politics.legions,empires:w.politics.empires,requests:w.politics.requests,relations:w.politics.relations,joints:w.politics.joints,reserves:w.politics.reserves}:undefined,developer:w.developer,worldLayer:w.worldLayer,seed:w.seed,speed:w.speed,time:w.time,offlineHours:w.offlineHours,clockMode:w.clockMode,dimensions:w.dimensions,playerFactionId:w.playerFactionId,revision:w.revision,sequences:w.sequences,factions:w.factions,cities:w.cities,armies:w.armies,researchProjects:w.researchProjects,largeProjects:w.largeProjects,logistics:w.logistics??[],settlements:w.settlements??[],colonizationUnits:w.colonizationUnits??[],combat:w.combat?{battles:w.combat.battles,statistics:w.combat.statistics}:undefined,battleEffects:{cursor:w.combat?.receipts.length??0,recent:w.combat?.receipts.slice(-128)??[]}};
 }
