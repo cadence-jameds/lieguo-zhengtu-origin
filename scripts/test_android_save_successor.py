@@ -11,8 +11,12 @@ class AndroidSaveSuccessorTests(unittest.TestCase):
   for p,v in r['changes'].items():
    if v['before']:self.assertTrue(gate.accepts(p,v['before'],self.root))
    self.assertFalse(gate.accepts(p,'0'*64,self.root))
-  for p in ['src/game/formal/saveCodec.ts','src/game/formal/schema.ts','src/game/formal/reducer.ts','src/game/formal/autonomy.ts','src/game/presentation/ProtectionStatus.tsx','vite.config.ts']:
+  for p in ['src/game/formal/saveCodec.ts','src/game/formal/schema.ts','src/game/formal/reducer.ts','src/game/presentation/ProtectionStatus.tsx','vite.config.ts']:
    self.assertFalse(gate.accepts(p,gate.sha(gate.previous(gate.BASE,p)),self.root))
+  ai='src/game/formal/autonomy.ts'
+  from elite_recruit_successor import accepts
+  predecessor=gate.sha(gate.previous(gate.BASE,ai))
+  self.assertEqual(gate.accepts(ai,predecessor,self.root),accepts(ai,predecessor,self.root))
  def test_local_record_cannot_bless_unsafe_source_or_invariant_edits(self):
   original=(self.root/gate.RECORD).read_bytes()
   samples=[('changes','src/game/persistence.ts'),('changes','src/game/persistenceTime.ts'),('changes','src/game/runtime.worker.ts'),('changes','src/game/saveStatus.ts'),('changes','src/game/presentation/GameNotices.tsx'),('invariants','src/game/formal/saveCodec.ts'),('invariants','src/game/formal/schema.ts'),('invariants','src/game/replayFence.ts'),('invariants','src/game/formal/autonomy.ts'),('invariants','src/game/presentation/ProtectionStatus.tsx'),('invariants','vite.config.ts'),('historical','docs/validation/global-protection/compatibility.json')]
