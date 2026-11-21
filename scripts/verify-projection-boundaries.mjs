@@ -7,8 +7,9 @@ const preserved=['src/game/formal/model.ts','src/game/formal/reducer.ts','src/ga
 const successor=JSON.parse(execFileSync('python3',['scripts/b10_r3_05_successor.py','--boundary-record'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
 const runtimeSuccessor=JSON.parse(execFileSync('python3',['scripts/b10_r3_06_successor.py','--boundary-record'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
 const boundedSuccessor=JSON.parse(execFileSync('python3',['scripts/b10_release_unblock_successor.py','--boundary-record'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
+const eliteRecruitment=JSON.parse(execFileSync('python3',['scripts/elite_recruit_successor.py','--boundary-admissions'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
 const bounded=p=>Object.hasOwn(boundedSuccessor.changes,p);
-const admitted=p=>bounded(p)||Object.hasOwn(successor.changes,p)||Object.hasOwn(runtimeSuccessor.changes,p);
+const admitted=p=>eliteRecruitment.includes(p)||bounded(p)||Object.hasOwn(successor.changes,p)||Object.hasOwn(runtimeSuccessor.changes,p);
 for(const p of preserved)if(!admitted(p))assert.equal(read(p),old(p),`Changed authority/rule contract: ${p}`);
 const changed=execFileSync('git',['diff','--name-only',base,'HEAD','--','src/game/formal'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim().split('\n').filter(p=>p.endsWith('.ts')&&!p.endsWith('.test.ts')&&!/Support\.ts$/.test(p)),intentional=new Set(['src/game/formal/economy.ts','src/game/formal/buildingDetailData.ts','src/game/formal/schema.ts','src/game/formal/growthTaskSchema.ts']);
 const js=s=>ts.transpileModule(s,{compilerOptions:{target:ts.ScriptTarget.ESNext,module:ts.ModuleKind.ESNext,removeComments:true}}).outputText;
