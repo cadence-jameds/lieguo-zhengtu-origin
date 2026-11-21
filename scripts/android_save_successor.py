@@ -99,7 +99,8 @@ def read_record(root=ROOT):
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed immutable Android save hotfix proof';return r
 def accepts(path,predecessor,root=ROOT):
- if path not in SOURCES:return False
+ from wall_build_marker_successor import accepts as wall_marker
+ if path not in SOURCES:return wall_marker(path,predecessor,root)
  r=read_record(root);v=r['changes'].get(path)
  return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
 def accepts_adapter(path,before,root=ROOT):
@@ -109,8 +110,9 @@ def accepts_adapter(path,before,root=ROOT):
 def validate(root=ROOT):
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'],('Unpinned Android save hotfix',p)
+ from wall_build_marker_successor import accepts as wall_marker
  for section in ['invariants','historical']:
-  for p,h in r[section].items():assert sha((root/p).read_bytes())==h,('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
+  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and wall_marker(p,h,root),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed finite hotfix adapter',p)
  css='src/game/presentation/playable.css';assert (root/css).read_bytes().startswith(previous(BASE,css)),'Existing styles changed'
  p='src/game/persistence.ts';before=previous(BASE,p).decode();expected="import {persistenceTime} from './persistenceTime';\n"+before;expected=edit(expected,'  // Final encodeSave validates the entire stamped candidate before any writes.','  savedAt=persistenceTime(savedAt);\n  // Final encodeSave validates the entire stamped candidate before any writes.');assert (root/p).read_text()==expected,'Unrequested persistence transaction change'
