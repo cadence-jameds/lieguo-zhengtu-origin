@@ -1,10 +1,11 @@
 import json,shutil,tempfile,unittest
 from pathlib import Path
 import android_save_successor as gate
+from traditional_incoming_intelligence_successor import SOURCES as INTEL_SOURCES
 class AndroidSaveSuccessorTests(unittest.TestCase):
  def setUp(self):
   t=tempfile.TemporaryDirectory(prefix='android-save-proof-');self.addCleanup(t.cleanup);self.root=Path(t.name);r=gate.read_record()
-  for p in {gate.RECORD,*r['changes'],*r['invariants'],*r['historical'],*gate.ADAPTERS}:
+  for p in {gate.RECORD,*r['changes'],*r['invariants'],*r['historical'],*gate.ADAPTERS,*INTEL_SOURCES}:
    out=self.root/p;out.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(gate.ROOT/p,out)
  def test_exact_pins_and_predecessors(self):
   r=gate.validate(self.root)
