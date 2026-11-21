@@ -24,6 +24,7 @@ HISTORICAL = {PROTECTED,'docs/validation/city-ui-successor/compatibility.json',
 def validate(root=ROOT):
  from b10_r3_02_successor import accepts as preview_accepts
  from b10_r3_04_successor import accepts as projection_accepts
+ from recruitment_tier_successor import accepts as tier_accepts
  record=json.loads((root/RECORD).read_text())
  assert record['schemaVersion']==1 and record['baseCommit']==BASE and record['uiCommit']==UI
  assert set(record['changes'])==SOURCES and set(record['invariants'])==INVARIANTS and set(record['historical'])==HISTORICAL
@@ -44,11 +45,11 @@ def validate(root=ROOT):
  assert set(record['evidence'])==witnesses
  for path,digest in record['evidence'].items():
   assert digest==sha(previous(root,UI,path)),('Changed original recruitment witness',path)
-  assert digest==sha((root/path).read_bytes()) or path=='src/game/presentation/RecruitmentForm.tsx' and projection_accepts(path,digest,root),('Changed recruitment witness',path)
+  assert digest==sha((root/path).read_bytes()) or path=='src/game/presentation/RecruitmentForm.tsx' and projection_accepts(path,digest,root) or tier_accepts(path,digest,root),('Changed recruitment witness',path)
  # Non-recruitment action previews and military/settlement presentation remain byte-identical.
  path='src/game/presentation/cityActions.ts'
  before=previous(root,BASE,path).decode();after=(root/path).read_text()
- if preview_accepts(path,record['changes'][path]['after'],root):after=previous(root,UI,path).decode()
+ if tier_accepts(path,record['changes'][path]['after'],root) or preview_accepts(path,record['changes'][path]['after'],root):after=previous(root,UI,path).decode()
  old_start=before.index('/** Actual recruitment scheduler preview');old_end=before.index('/** The real craftsman')
  new_start=after.index('/** Read-only UI arithmetic');new_end=after.index('/** The real craftsman')
  prefix=after[:new_start]

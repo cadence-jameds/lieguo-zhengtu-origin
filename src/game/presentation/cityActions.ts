@@ -1,13 +1,13 @@
 import type {WorldRead} from '../presentationModel';
 import {buildingRequirements,boostFieldRequirementText} from '../formal/buildingDetailData';
-import type {FormalCity} from '../formal/model';
+import type {FormalCity,FormalFaction} from '../formal/model';
 import {resourceKeys,zeroResources} from '../formal/model';
 import {BUILDING_CATALOG,buildingKind,buildingLevel,buildingCost,buildingDuration,fieldCost,fieldDuration} from '../formal/catalogB3';
 import {QUEUE_CAPACITY} from '../formal/economy';
 import {AGE_NAMES,LABELS} from './artMap';
 import {constructionPreviewContext} from '../constructionPreviewContext';
 import {calculateConstructionPreview} from '../constructionPreviewCompute';
-import {UNIT_CATALOG,ELITE_VARIANTS} from '../formal/unitCatalog';
+import {UNIT_CATALOG,ELITE_VARIANTS,type UnitDefinition} from '../formal/unitCatalog';
 import {unitRecruitCost,unitTrainingDuration} from '../formal/military';
 import {modernUnitAuthorized} from '../formal/modernAwareness';
 export const BUILDING_CATEGORIES=[
@@ -47,17 +47,25 @@ export function constructionAction(w:WorldRead,c:FormalCity,target:{key:string}|
  return {next,cost,duration:buildingDuration(kind,next,center),reasons};
 }
 
-/** Read-only UI arithmetic; the Worker remains the sole recruitment authority. */
-export function recruitmentConditions(w:WorldRead,c:FormalCity,unitId:string,count:number){
- const f=w.factions.find(f=>f.id===c.ownerFactionId)!,base=UNIT_CATALOG[unitId],elite=ELITE_VARIANTS[unitId]&&UNIT_CATALOG[ELITE_VARIANTS[unitId]];
- const d=elite&&f.techIds.includes(elite.eliteTech!)&&c.economy?.milestones.includes(elite.milestone)?elite:base;
- const unitCost=unitRecruitCost(w,c,d),cost={...unitCost},valid=Number.isSafeInteger(count)&&count>=1&&count<=100000,reasons:string[]=[];
- for(const r of resourceKeys)cost[r]*=valid?count:1;
+/** The UI uses these stable unlock conditions independently of current stock or queue occupancy. */
+export function recruitmentUnit(f:FormalFaction,c:FormalCity,unitId:string){
+ const base=UNIT_CATALOG[unitId],elite=ELITE_VARIANTS[unitId]&&UNIT_CATALOG[ELITE_VARIANTS[unitId]];
+ return elite&&f.techIds.includes(elite.eliteTech!)&&c.economy?.milestones.includes(elite.milestone)?elite:base;
+}
+export function recruitmentUnlockReasons(f:FormalFaction,c:FormalCity,d:UnitDefinition){
+ const reasons:string[]=[];
  if(d.era==='modern'&&!modernUnitAuthorized(f,d.id))reasons.push('需要完整現代軍事資格或此線逆向工程');
  if(d.era!=='modern'&&(f.age??0)<d.age)reasons.push(AGE_NAMES[d.age]+'時代');
  if(buildingLevel(c,d.producer)<1)reasons.push('需要'+LABELS[d.producer]);
  if(d.civilizationId&&d.civilizationId!==(c.castleCivilizationId??f.civilizationId))reasons.push('此城堡無外文明生產資格');
  if(d.eliteTech&&(!f.techIds.includes(d.eliteTech)||!c.economy?.milestones.includes(d.milestone)))reasons.push('本城尚未取得精銳生產資格');
+ return reasons;
+}
+/** Read-only UI arithmetic; the Worker remains the sole recruitment authority. */
+export function recruitmentConditions(w:WorldRead,c:FormalCity,unitId:string,count:number){
+ const f=w.factions.find(f=>f.id===c.ownerFactionId)!,d=recruitmentUnit(f,c,unitId);
+ const unitCost=unitRecruitCost(w,c,d),cost={...unitCost},valid=Number.isSafeInteger(count)&&count>=1&&count<=100000,reasons=recruitmentUnlockReasons(f,c,d);
+ for(const r of resourceKeys)cost[r]*=valid?count:1;
  if((c.military?.queue.length??0)>=QUEUE_CAPACITY)reasons.push('訓練佇列已滿');
  if(!valid)reasons.push('請輸入1～100000名');
  if(c.population<d.population*count)reasons.push('居民不足');

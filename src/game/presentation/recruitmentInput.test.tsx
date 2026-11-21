@@ -12,7 +12,7 @@ import {initialMilitary} from '../formal/military';
 import {researchCity} from '../formal/developmentTestSupport';
 import {displayClock} from './liveClock';
 let box:HTMLDivElement,root:Root;beforeEach(()=>{vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);box=document.createElement('div');document.body.append(box);root=createRoot(box);});afterEach(async()=>{await act(async()=>root.unmount());box.remove();displayClock.stop();vi.restoreAllMocks();vi.unstubAllGlobals();});
-function fixture(){const w=createFormalFixture({speed:25});w.armies=[];initializeEconomy(w);for(const c of w.cities)c.military=initialMilitary();researchCity(w,true);return w;}
+function fixture(){const w=createFormalFixture({speed:25});w.armies=[];initializeEconomy(w);for(const c of w.cities)c.military=initialMilitary();researchCity(w);return w;}
 async function edit(input:HTMLInputElement,value:string){await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,value);input.dispatchEvent(new Event('input',{bubbles:true}));});}
 for(const mobile of [false,true])it(`${mobile?'phone':'desktop'} keeps edits local, preserves leading zeros/empty drafts, and submits the original Worker command`,async()=>{
  const w=fixture(),issue=vi.fn();await act(async()=>root.render(<ArmyView world={w} city={w.cities[0]} issue={issue} busy={false} mobile={mobile}/>));
