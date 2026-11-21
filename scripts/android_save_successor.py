@@ -104,7 +104,8 @@ def accepts_android_save(path,predecessor,root=ROOT):
  return bool(v and predecessor in r['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==v['after'])
 def accepts(path,predecessor,root=ROOT):
  from offline_command_evidence_successor import accepts as offline_successor
- return accepts_android_save(path,predecessor,root) or offline_successor(path,predecessor,root)
+ from issue38_visual_successor import accepts as issue38_successor, accepts_city_adapter
+ return accepts_android_save(path,predecessor,root) or offline_successor(path,predecessor,root) or issue38_successor(path,predecessor,root) or accepts_city_adapter(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
  if path not in ADAPTERS:return False
  r=read_record(root)
@@ -121,4 +122,5 @@ def validate(root=ROOT):
  return r
 if __name__=='__main__':
  from offline_command_evidence_successor import validate as validate_offline
- validate();validate_offline();print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
+ from issue38_visual_successor import validate as validate_issue38
+ validate();validate_offline();validate_issue38();print('PASS: finite Android timestamp/notice hotfix; strict schema, atomic T1/T2/T3, rules, AI, Replay Fence, PWA, protection and historical evidence preserved.')
