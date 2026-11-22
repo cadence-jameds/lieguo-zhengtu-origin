@@ -27,4 +27,22 @@ class AndroidSaveSuccessorTests(unittest.TestCase):
  def test_exact_adapters_and_unknown_predecessors(self):
   for p in gate.ADAPTERS:
    self.assertTrue(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));self.assertFalse(gate.accepts_adapter(p,b'forged',self.root));f=self.root/p;f.write_bytes(f.read_bytes()+b'\n');self.assertFalse(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root))
+class AISettlementEscortProof(unittest.TestCase):
+ def test_exact_change_scope_and_tamper(self):
+  import ai_settlement_escort_successor as proof
+  with tempfile.TemporaryDirectory(prefix='escort-proof-') as directory:
+   root=Path(directory)
+   for path in proof.SCOPE:
+    f=root/path;f.parent.mkdir(parents=True,exist_ok=True);f.write_bytes((proof.ROOT/path).read_bytes())
+   proof.validate(root)
+   predecessor=proof.sha(proof.git('show',proof.BASE+':'+proof.SOURCE))
+   self.assertTrue(proof.accepts(proof.SOURCE,predecessor,root))
+   self.assertFalse(proof.accepts(proof.SOURCE,'0'*64,root))
+   self.assertFalse(proof.accepts('src/game/formal/autonomy.ts',predecessor,root))
+   for path in proof.SCOPE:
+    f=root/path;b=f.read_bytes();f.write_bytes(b+b'\n')
+    with self.assertRaises(AssertionError):proof.validate(root)
+    if path==proof.SOURCE:self.assertFalse(proof.accepts(path,predecessor,root))
+    f.write_bytes(b)
+
 if __name__=='__main__':unittest.main()
