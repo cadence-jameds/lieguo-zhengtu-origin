@@ -4,10 +4,13 @@ from pathlib import Path
 import hashlib
 import json
 import subprocess
+import sys
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'c8b3554ff9643b74b624e4e77f381653afcccc20'
 IMPLEMENTATION = 'a69a0700a3f6aa199ac9af72f7c6852504d26458'
 SOURCE = 'src/game/formal/aiActions.ts'
+BOUNDARY = 'scripts/verify-projection-boundaries.mjs'
+BOUNDARY_SHA = 'd55e9177aa79fad7009f34db9139225433ebcc1d0487394c4d6ac3229ff7c6b3'
 SCOPE = {SOURCE, 'src/game/formal/aiExpansionEscort.test.ts', 'releases/notes/ai-settlement-escort-rounding.json'}
 def git(*args):
     return subprocess.check_output(['git','-C',str(ROOT),*args])
@@ -43,3 +46,13 @@ def validate(root=ROOT):
     after,_=record()
     for path,digest in after.items():
         assert (root/path).is_file() and sha((root/path).read_bytes())==digest, ('Changed exact AI escort source/test/note',path)
+
+def accepts_boundary(path,before,root=ROOT):
+    return (path==BOUNDARY and before==git('show',BASE+':'+BOUNDARY)
+            and (root/path).is_file() and sha((root/path).read_bytes())==BOUNDARY_SHA)
+
+if __name__=='__main__':
+    assert sys.argv[1:]==['--boundary-admissions']
+    validate()
+    assert accepts_boundary(BOUNDARY,git('show',BASE+':'+BOUNDARY)), 'Changed exact projection boundary adapter'
+    print(json.dumps([SOURCE]))
