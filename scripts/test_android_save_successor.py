@@ -27,4 +27,25 @@ class AndroidSaveSuccessorTests(unittest.TestCase):
  def test_exact_adapters_and_unknown_predecessors(self):
   for p in gate.ADAPTERS:
    self.assertTrue(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));self.assertFalse(gate.accepts_adapter(p,b'forged',self.root));f=self.root/p;f.write_bytes(f.read_bytes()+b'\n');self.assertFalse(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root))
+class ReminderScopeTests(unittest.TestCase):
+ def test_exact_successor_and_negative_controls(self):
+  try:import command_notice_successor as notice
+  except ImportError:self.fail('Missing command reminder successor')
+  with tempfile.TemporaryDirectory(prefix='command-notice-proof-') as directory:
+   root=Path(directory)
+   after,grants=notice.records()
+   for path in after:
+    output=root/path;output.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(gate.ROOT/path,output)
+   notice.validate(root)
+   for path in notice.SOURCES:
+    predecessor=notice.sha(notice.original(notice.BASE,path));self.assertIn(predecessor,grants[path])
+    self.assertTrue(gate.accepts(path,predecessor,root));self.assertFalse(gate.accepts(path,'0'*64,root))
+    output=root/path;original=output.read_bytes()
+    try:
+     output.write_bytes(original+b'\n')
+     self.assertFalse(gate.accepts(path,predecessor,root))
+     with self.assertRaises(AssertionError):notice.validate(root)
+    finally:output.write_bytes(original)
+   unrelated='src/game/persistence.ts'
+   self.assertFalse(notice.accepts(unrelated,notice.sha(notice.original(notice.BASE,unrelated)),root))
 if __name__=='__main__':unittest.main()
