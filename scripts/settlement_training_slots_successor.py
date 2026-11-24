@@ -9,7 +9,6 @@ RESULTS={'scripts/verify-projection-boundaries.mjs': 'cdda3b08106601a62da79e03ea
  'src/game/FormalCityPanel.tsx': 'f685f40d588ef8ff124991d207af4e184aaf6f8078fc5807cd8e915f7aee778a',
  'src/game/FormalDevelopmentPanel.tsx': '861dc220b903ab388ff10cd2e3f3be4b279d34a4590a56028738061038e39265',
  'src/game/formal/aiActions.ts': '9b829b212ac0b1da9b544ea258fc55d9b98215011b5eae79a39639e6ff33206e',
- 'src/game/formal/autonomy.ts': 'c1fbd2f40bc4c4b234044d95dc1e3845e1c453ca9c5284b76ac989cfe41c01a4',
  'src/game/formal/military.ts': '7afdbc0d64bdbe24d3e922df93388704d68117772bee779d04930dc25fb902d9',
  'src/game/formal/settlement.ts': '7576d543f2cfb28d1164b0bff99de144d6b3eca3c145d2f79a0140e6e0955990',
  'src/game/formal/trainingSlots.ts': 'e7dede0ea127c6f6f811ab752bb6dd177e0055f2deebbd0dc121536c8b8d7f68',

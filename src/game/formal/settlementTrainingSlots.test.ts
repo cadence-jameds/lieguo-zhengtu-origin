@@ -70,3 +70,19 @@ it('AI avoids proposing preparation at shared capacity and reducer rejects expli
  const probe={...city,military:{...city.military!,queue:city.military!.queue.slice(1)}};
  expect(expansionDecision(w,probe,a)?.type).toBe('settlement.prepare');
 });
+it('one military job plus preparing settlers still lets a military governor recruit proactively',()=>{
+ let w=enqueue(fixture(),1);
+ const city=w.cities[0];
+ build(city,'townhall',1);
+ city.military!.units={spearman:5000,pikeman:5000,scout:100};
+ w=commit(w,prepare(w));
+ expect(trainingSlotsUsed(w,w.cities[0])).toBe(2);
+ w=commit(w,{type:'governance.set',cityId:city.id,enabled:true,policy:'military',budget:100000,reserve:0});
+ const at=w.governors![0].nextAt;
+ expect(at).toBeLessThan(w.cities[0].military!.queue[0].nextAt);
+ const after=advanceFormal(w,at).world;
+ expect(after.cities[0].military!.queue).toHaveLength(2);
+ expect(after.cities[0].military!.queue[0].unitId).toBe('baggage');
+ expect(after.settlements![0].phase).toBe('preparing');
+ expect(trainingSlotsUsed(after,after.cities[0])).toBe(3);
+});

@@ -1,4 +1,3 @@
-import {trainingSlotsUsed} from './trainingSlots';
 import {commandHistory,findReceipt,originalResult,recordOriginalRejection} from './commandLedger';
 import {reverseLine,militaryBudgetScore,modernResearchPriority,publicWonderThreats,invalidateEndgameIntel} from './endgameAI';
 import {inheritMilitaryPower} from './militaryPower';
@@ -58,7 +57,7 @@ export function economicChoices(w:FormalWorld,c:FormalCity,a:Agent):Choice[]{con
  if(!w.combat?.battles.some(b=>b.cityId===c.id))for(const [id,n] of Object.entries(c.military.units)){
   const target=modernizationTarget(id);if(!target||!modernUnitAuthorized(f,target.id)||n<=0)continue;const count=Math.min(n,10),cost=unitModernizationCost(target);for(const r of resourceKeys)cost[r]*=count;offer({type:'military.modernize',cityId:c.id,unitId:id,count},cost,3+a.traits.military,'military');
  }
- if(trainingSlotsUsed(w,c)<2&&c.population>220&&c.stock.food>250){
+ if(c.military.queue.length<2&&c.population>220&&c.stock.food>250){
   const stock=c.military.units,milestones=c.economy.milestones;
   const eliteQualified=(u:UnitDefinition)=>!!u.eliteTech&&f.techIds.includes(u.eliteTech)&&milestones.includes(u.milestone);
   for(const u of Object.values(UNIT_CATALOG)){
