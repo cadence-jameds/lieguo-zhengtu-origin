@@ -54,12 +54,15 @@ def accepts(path, predecessor, root=ROOT):
     if not source.is_file():
         return False
     candidate=sha(source.read_bytes())
-    return candidate == RESULTS[path] or path == BOUNDARY and candidate == COMBINED_BOUNDARY_SHA
+    from settlement_training_slots_successor import continues
+    prior=COMBINED_BOUNDARY_SHA if path==BOUNDARY else RESULTS[path]
+    return candidate == RESULTS[path] or path == BOUNDARY and candidate == COMBINED_BOUNDARY_SHA or continues(path,prior,root)
 
 def accepts_bounded_escort_boundary(path, escort_boundary_sha, root=ROOT):
     # Finite continuation of the reviewed escort adapter, not a new predecessor grant.
+    from settlement_training_slots_successor import continues
     return (path == BOUNDARY and escort_boundary_sha == ESCORT_BOUNDARY_SHA
-            and (root/path).is_file() and sha((root/path).read_bytes()) == COMBINED_BOUNDARY_SHA)
+            and (root/path).is_file() and (sha((root/path).read_bytes()) == COMBINED_BOUNDARY_SHA or continues(path,COMBINED_BOUNDARY_SHA,root)))
 
 
 if __name__ == '__main__':

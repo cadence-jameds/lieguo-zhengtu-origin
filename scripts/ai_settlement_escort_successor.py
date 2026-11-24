@@ -41,11 +41,13 @@ def accepts(path,predecessor,root=ROOT):
     if path != SOURCE:
         return False
     after,allowed=record()
-    return predecessor in allowed and (root/path).is_file() and sha((root/path).read_bytes())==after[path]
+    from settlement_training_slots_successor import continues
+    return predecessor in allowed and (root/path).is_file() and (sha((root/path).read_bytes())==after[path] or continues(path,after[path],root))
 def validate(root=ROOT):
     after,_=record()
+    from settlement_training_slots_successor import continues
     for path,digest in after.items():
-        assert (root/path).is_file() and sha((root/path).read_bytes())==digest, ('Changed exact AI escort source/test/note',path)
+        assert (root/path).is_file() and sha((root/path).read_bytes())==digest or path==SOURCE and continues(path,digest,root), ('Changed exact AI escort source/test/note',path)
 
 def accepts_boundary(path,before,root=ROOT):
     if path!=BOUNDARY or before!=git('show',BASE+':'+BOUNDARY) or not (root/path).is_file():

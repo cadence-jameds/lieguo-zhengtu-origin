@@ -1,3 +1,5 @@
+import {QUEUE_CAPACITY} from './queueCapacity';
+import {trainingSlotsUsed} from './trainingSlots';
 import {endgameFriendlyEnd,wonderDefense,repairDecision} from './endgameAI';
 import {breakthroughDecision} from './breakthrough';
 import {empireWonder,wonderRemaining} from './wonder';
@@ -61,7 +63,7 @@ function settlementEscort(c:FormalCity){
 }
 export function expansionDecision(w:FormalWorld,c:FormalCity,a:Agent):FormalCommand|undefined{if(!a.active||incomingAlerts(w,a.factionId).some(t=>t.ownerFactionId===a.factionId)||aiRandom(w.seed,a.factionId,a.decisions+400)>.08+a.traits.expansion*.3)return;const existing=w.settlements?.find(p=>p.sourceCityId===c.id&&p.phase!=='travelling');
  if(existing?.phase==='ready'){const escort=settlementEscort(c);if(!escort)return;const index=spatial(w);for(let i=0;i<32;i++){const angle=aiRandom(w.seed,a.factionId,a.decisions+410+i)*2*Math.PI,radius=3+i%8,x=Math.round(c.x+Math.cos(angle)*radius),y=Math.round(c.y+Math.sin(angle)*radius);if(x<0||x>383||y<0||y>383||!buildable(terrainAt(w,x,y)))continue;const cell=index.at(x,y);if(!cell.city&&!cell.site&&!cell.reservation)return{type:'settlement.dispatch',cityId:c.id,x,y,name:'新城'+(w.sequences.project%10000),escort};}}
- else if(!existing&&(w.factions.find(f=>f.id===a.factionId)?.age??0)>=2&&buildingLevel(c,'castle')>=1&&c.population>=2400&&resourceKeys.every(r=>c.stock[r]>=SETTLEMENT_COST[r]+100))return{type:'settlement.prepare',cityId:c.id};
+ else if(!existing&&trainingSlotsUsed(w,c)<QUEUE_CAPACITY&&(w.factions.find(f=>f.id===a.factionId)?.age??0)>=2&&buildingLevel(c,'castle')>=1&&c.population>=2400&&resourceKeys.every(r=>c.stock[r]>=SETTLEMENT_COST[r]+100))return{type:'settlement.prepare',cityId:c.id};
 }
 export function updatePublicMemory(w:FormalWorld,a:Agent,c:FormalCity){for(const n of publicSituation(w,a,c)){const m=memoryFor(w,a.factionId,n.ownerFactionId);if(m){m.threat=Math.min(1,n.population/Math.max(1,c.population)*.08+w.cities.filter(c=>c.ownerFactionId===n.ownerFactionId).length*.025);if(n.relation==='friendly')m.trust=Math.min(1,m.trust+.002);m.at=w.time;}}for(const info of a.intel)if(w.time-info.at>24*HOUR)info.units={};}
 
