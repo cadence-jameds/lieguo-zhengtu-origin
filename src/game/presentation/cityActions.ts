@@ -1,3 +1,4 @@
+import {trainingSlotsUsed} from '../formal/trainingSlots';
 import type {WorldRead} from '../presentationModel';
 import {buildingRequirements,boostFieldRequirementText} from '../formal/buildingDetailData';
 import type {FormalCity} from '../formal/model';
@@ -58,7 +59,7 @@ export function recruitmentConditions(w:WorldRead,c:FormalCity,unitId:string,cou
  if(buildingLevel(c,d.producer)<1)reasons.push('需要'+LABELS[d.producer]);
  if(d.civilizationId&&d.civilizationId!==(c.castleCivilizationId??f.civilizationId))reasons.push('此城堡無外文明生產資格');
  if(d.eliteTech&&(!f.techIds.includes(d.eliteTech)||!c.economy?.milestones.includes(d.milestone)))reasons.push('本城尚未取得精銳生產資格');
- if((c.military?.queue.length??0)>=QUEUE_CAPACITY)reasons.push('訓練佇列已滿');
+ if(trainingSlotsUsed(w,c)>=QUEUE_CAPACITY)reasons.push('訓練佇列已滿');
  if(!valid)reasons.push('請輸入1～100000名');
  if(c.population<d.population*count)reasons.push('居民不足');
  if(c.population>c.housing)reasons.push('住房不足');
