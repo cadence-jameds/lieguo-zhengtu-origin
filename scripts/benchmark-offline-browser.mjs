@@ -29,10 +29,15 @@ else {
   let browser, prepared, page, worker;
   try {
     const {chromium} = await import(process.env.PLAYWRIGHT_MODULE ?? '/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
-    browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH ?? '/usr/bin/chromium', headless: true, args: ['--no-sandbox']});
+    browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH ?? '/usr/bin/chromium', headless: true, chromiumSandbox: true});
     page = await browser.newPage(); await page.goto('http://127.0.0.1:' + server.address().port);
-    const options = {speed: Number(value('speed', 25)), hours: Number(value('hours', 12)), ai: Number(value('ai', 99)),
+    const options = {
+    syntheticSettingsSmoke:args.includes('--synthetic-settings-smoke'),
+    configureReplayCopy:args.includes('--configure-25x-copy'),
+    requireReplayExtent:args.includes('--require-25x-horizon'),
+    speed: Number(value('speed', 25)), hours: Number(value('hours', 12)), ai: Number(value('ai', 99)),
       scenario: value('scenario', 'fresh'), ledger: Number(value('ledger', 0)), seed: 90217};
+    if(options.syntheticSettingsSmoke&&(value('private')||options.hours!==1))throw Error('SMOKE_SYNTHETIC_ONE_HOUR_ONLY');
     let text;
     if (value('private')) {
       try {

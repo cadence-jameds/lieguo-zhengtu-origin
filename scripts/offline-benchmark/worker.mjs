@@ -27,6 +27,6 @@ self.onmessage = async ({data}) => {
       }
       postMessage({type: 'result', value});
     }
-  } catch (error) {postMessage({type: 'error', code: error?.message === 'Profiler spans overlap' ? 'PROFILER_SPAN_OVERLAP' : 'BENCHMARK_FAILED_SOURCE_UNCHANGED'});}
+  } catch (error) {postMessage({type: 'error', code: error?.message === 'Profiler spans overlap' ? 'PROFILER_SPAN_OVERLAP' : ['OFFLINE_STORED_SETTINGS_MISMATCH','OFFLINE_HORIZON_INVALID','OFFLINE_HORIZON_SHORT_WITHOUT_TERMINAL_STATE','POST_COMMIT_FRESH_CONNECTION_READBACK_FAILED'].includes(error?.message) ? error.message : 'BENCHMARK_FAILED_SOURCE_UNCHANGED'});}
 };
 postMessage({type: 'ready'});

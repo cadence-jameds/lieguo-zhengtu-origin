@@ -1,4 +1,4 @@
-import {commandHistory,findReceipt,originalResult,recordOriginalRejection} from './commandLedger';
+import {adoptReplayPendingMembership,commandHistory,findReceipt,originalResult,recordOriginalRejection} from './commandLedger';
 import {reverseLine,militaryBudgetScore,modernResearchPriority,publicWonderThreats,invalidateEndgameIntel} from './endgameAI';
 import {inheritMilitaryPower} from './militaryPower';
 import {catchupDecision} from './modernCatchup';
@@ -89,7 +89,7 @@ export function submitAutonomous(w:FormalWorld,s:EventScheduler,e:FormalEvent,fa
   w.events=s.snapshot();
   const t=submit(w,{commandId:id,campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]});
   if(t.ack?.status==='committed'){
-   Object.assign(w,t.world);inheritMilitaryPower(t.world,w);invalidateEndgameIntel(w);invalidateSpatial(w);s.replace(w.events);if(w.autonomy)w.autonomy.accepted++;
+   adoptReplayPendingMembership(w,t.world);Object.assign(w,t.world);inheritMilitaryPower(t.world,w);invalidateEndgameIntel(w);invalidateSpatial(w);s.replace(w.events);if(w.autonomy)w.autonomy.accepted++;
    reports.push(...t.reports.filter(r=>r.ownerFactionId===w.playerFactionId));
   }else{if(t.ack)recordOriginalRejection(w,{commandId:id,campaignId:w.campaignId,issuerId:factionId,issuedWorldTime:w.time,expectedRevision:w.revision,payload:commands[i]},t.ack);if(t.ack?.status!=='duplicate'&&w.autonomy)w.autonomy.rejected++;}
  }

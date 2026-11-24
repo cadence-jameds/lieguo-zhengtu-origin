@@ -41,7 +41,11 @@ if (args.includes('--matrix')) {
     await fs.writeFile(out, JSON.stringify({format: 'b10p0-matrix-v1', cases: results}, null, 2));
   }
 } else {
-  const options = {speed: Number(value('speed', 25)), hours: Number(value('hours', 12)), ai: Number(value('ai', 99)),
+  const options = {
+    syntheticSettingsSmoke:args.includes('--synthetic-settings-smoke'),
+    configureReplayCopy:args.includes('--configure-25x-copy'),
+    requireReplayExtent:args.includes('--require-25x-horizon'),
+    speed: Number(value('speed', 25)), hours: Number(value('hours', 12)), ai: Number(value('ai', 99)),
     scenario: value('scenario', 'fresh'), ledger: Number(value('ledger', 0)), seed: Number(value('seed', 90217)), cities: Number(value('cities', 100)), matureDays: Number(value('mature-days', 7))};
   if (![1, 10, 25].includes(options.speed) || ![0, 25, 50, 99].includes(options.ai) || ![1, 4, 12].includes(options.hours)
     || !['fresh', 'developed', 'combat', 'mature'].includes(options.scenario) || ![100, 200].includes(options.cities)
@@ -55,6 +59,7 @@ if (args.includes('--matrix')) {
   let prepared;
   try {
     const privateFile = value('private', undefined);
+    if(options.syntheticSettingsSmoke&&(privateFile||options.hours!==1))throw Error('SMOKE_SYNTHETIC_ONE_HOUR_ONLY');
     if (privateFile) {
       // Do not echo paths, data, IDs, parser diagnostics or game text to logs.
       try {

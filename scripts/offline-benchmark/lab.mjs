@@ -6,6 +6,7 @@ import {EventScheduler} from '../../src/game/formal/scheduler.ts';
 import {enableAutonomy} from '../../src/game/formal/autonomy.ts';
 import {advanceFormalCooperative, submitFormalOrder} from '../../src/game/formal/reducer.ts';
 import {advanceOffline} from '../../src/game/formal/offline.ts';
+import {worldPaused} from '../../src/game/formal/extinction.ts';
 import {FormalPersistence} from '../../src/game/persistence.ts';
 import {RuntimeWorkBudget} from '../../src/game/runtimeWorkBudget.ts';
 import {validateFormalWorld} from '../../src/game/formal/schema.ts';
@@ -17,6 +18,7 @@ import {HOUSING, BUILDING_CATALOG} from '../../src/game/formal/catalogB3.ts';
 import {spatial, invalidateSpatial} from '../../src/game/formal/spatial.ts';
 import {buildable, terrainAt} from '../../src/game/formal/terrain.ts';
 import {FORMAL_DB_NAME} from '../../src/game/formal/versions.ts';
+import {commandId} from '../../src/game/formal/ids.ts';
 import {Metrics} from './metrics.mjs';
 
 export const SAVED_AT = 1_800_000_000_000;
@@ -150,7 +152,34 @@ export async function synthetic({ai = 99, speed = 25, scenario = 'fresh', ledger
   return {world: w, reports: history};
 }
 
+/** Benchmark-only disposable database command. Never rewrites the source input. */
+export async function configureReplayCopy(p,w,savedAt){
+  if(w.speed===25&&w.offlineHours===12){
+    const draft=structuredClone(w);draft.revision++;
+    return p.save(draft,[],w.revision,savedAt);
+  }
+  const city=w.cities.find(c=>c.ownerFactionId===w.playerFactionId);
+  if(!city)throw Error('COPY_HAS_NO_PLAYER_CITY_FOR_SETTINGS_COMMAND');
+  const t=submitFormalOrder(w,{commandId:commandId('offline-horizon-smoke-config-'+w.revision),campaignId:w.campaignId,
+    issuerId:w.playerFactionId,issuedWorldTime:w.time,expectedRevision:w.revision,
+    payload:{type:'campaign.configure',cityId:city.id,speed:25,offlineHours:12}});
+  if(t.ack?.status!=='committed')throw Error('COPY_SETTINGS_COMMAND_REJECTED');
+  return p.save(t.world,t.reports,w.revision,savedAt);
+}
+export function verifyReplayExtent({speed,offlineCapHours,worldStart,hours,game,summary}){
+  if(speed!==25||offlineCapHours!==12||game?.speed!==25||game?.offlineHours!==12||summary?.capHours!==12)
+    throw Error('OFFLINE_STORED_SETTINGS_MISMATCH');
+  const expectedWorldMs=Math.min(12,hours)*HOUR*25,actualWorldMs=summary.advancedWorldMs;
+  if(!Number.isSafeInteger(actualWorldMs)||actualWorldMs<0||actualWorldMs>expectedWorldMs||game.time-worldStart!==actualWorldMs)
+    throw Error('OFFLINE_HORIZON_INVALID');
+  if(actualWorldMs===expectedWorldMs)return {kind:'full-horizon',expectedWorldMs,actualWorldMs};
+  if(worldPaused(game)&&game.extinction.defeat.at<=game.time)
+    return {kind:'terminal-player-defeat',expectedWorldMs,actualWorldMs};
+  throw Error('OFFLINE_HORIZON_SHORT_WITHOUT_TERMINAL_STATE');
+}
+
 export async function prepare(options, text) {
+  if(text!==undefined&&options.syntheticSettingsSmoke)throw Error('SMOKE_REJECTS_PRIVATE_INPUT');
   const suffix = 'b10p0-' + crypto.randomUUID(), start = performance.now();
   let p = store(suffix);
   try {
@@ -171,7 +200,8 @@ export async function prepare(options, text) {
       } else {await p.acquireWriter(); await p.importSave(text, false);}
     } else {
       await p.acquireWriter();
-      const fixture = await synthetic(options);
+      const fixture = await synthetic(options.syntheticSettingsSmoke?{...options,speed:3}:options);
+      if(options.syntheticSettingsSmoke)fixture.world.offlineHours=1;
       inputDimensions = dimensions(fixture.world);
       const e = await encodeSave(fixture.world, fixture.reports);
       const encoded = JSON.stringify(e); bytes = new TextEncoder().encode(encoded).length;
@@ -187,12 +217,22 @@ export async function prepare(options, text) {
       try {await audit.acquireWriter(); await audit.importSave(await p.exportStoredSave('full'), false); auxiliaryArchiveVerified = true;}
       finally {await audit.db.delete();}
     }
-    // Only the synthetic fixture's speed is controlled. Private saves preserve it.
-    const before = structuredClone(w); before.revision++;
-    w = await p.save(before, [], w.revision, SAVED_AT);
+    const sourceSettings={speed:w.speed,offlineCapHours:w.offlineHours};
+    if(options.configureReplayCopy)w=await configureReplayCopy(p,w,SAVED_AT);
+    else{
+      const before=structuredClone(w);before.revision++;
+      w=await p.save(before,[],w.revision,SAVED_AT);
+    }
+    if(options.requireReplayExtent){
+      p.db.close();p=store(suffix);
+      const checked=await p.loadSave();
+      if(checked.recovered||checked.game?.speed!==25||checked.game?.offlineHours!==12)
+        throw Error('OFFLINE_STORED_SETTINGS_MISMATCH');
+      w=checked.game;
+    }
     const initial = dimensions(w), snapshotChecksum = await digest(w);
     return {suffix, setupMs: performance.now() - start, source: text === undefined ? 'synthetic' : 'private-local-backup', sourceFormat, sourceRecovered, auxiliaryArchiveVerified, bytes,
-      inputDimensions, initial, snapshotChecksum, worldStart: w.time, speed: w.speed, offlineCapHours: w.offlineHours,
+      inputDimensions, initial, sourceSettings, snapshotChecksum, worldStart: w.time, speed: w.speed, offlineCapHours: w.offlineHours,
       pendingInbox: (await p.pendingCommands()).length};
   } catch (error) {await p.db.delete(); throw error;}
   finally {p.db.close();}
@@ -234,8 +274,16 @@ export async function measure(prepared, options = {}, observe, cpu) {
     if (!result.game || metrics.events !== processed) throw Error('Incomplete benchmark event accounting');
     const stats = metrics.result(), final = dimensions(result.game);
     // Full-authority readback and comparison are outside the timed load/commit.
-    const persisted = (await p.loadSave()).game;
-    const reports = await p.db.BattleReports.toArray();
+    p.db.close();
+    const reopened=store(prepared.suffix);
+    let persisted,reports;
+    try{
+      const loaded=await reopened.loadSave();
+      if(!loaded.game||loaded.recovered)throw Error('POST_COMMIT_FRESH_CONNECTION_READBACK_FAILED');
+      persisted=loaded.game;
+      reports=await reopened.db.BattleReports.toArray();
+    }finally{reopened.db.close();}
+    const replayExtent=options.requireReplayExtent?verifyReplayExtent({...prepared,hours:options.hours??12,game:persisted,summary:result.summary}):undefined;
     const proofFields = await fingerprints(result.game, reports);
     const persistedFields = await fingerprints(persisted, reports);
     if (canonicalJSON(proofFields) !== canonicalJSON(persistedFields)) throw Error('Atomic readback mismatch');
@@ -247,7 +295,7 @@ export async function measure(prepared, options = {}, observe, cpu) {
       yields: {count: yields, totalMs: yieldMs, maxObservedWorkSliceMs: maxSliceMs,
         requestedBudgetMs: 8, note: 'Whole events can exceed 8ms; timer wait includes host scheduling. Final validation/commit is outside replay yields.'},
       advancedWorldMs: result.summary.advancedWorldMs, final, statistics: stats, checkpoints, progressSeries, cpuProfile,
-      equivalence: {atomicReadback: true, fields: Object.keys(proofFields), fingerprints: proofFields},
+      replayExtent, equivalence: {atomicReadback: true, freshConnection: true, fields: Object.keys(proofFields), fingerprints: proofFields},
       limitations: ['Import/setup excluded from load total', 'No renderer or WorldStream cost', 'No pending Inbox command execution after load', 'Single run unless repetitions supplied']};
   } finally {delete globalThis.__b10p0; p.db.close();}
 }

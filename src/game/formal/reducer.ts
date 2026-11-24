@@ -1,5 +1,5 @@
 import {observeCommandEvidence,pruneCommandEvidence} from './commandEvidence';
-import {appendReceipt,commandHistory,copyHistory,pendingHistory,findReceipt,originalResult,normalizeOutcomeRevisions} from './commandLedger';
+import {beginReplayPendingMembership,endReplayPendingMembership,appendReceipt,commandHistory,copyHistory,pendingHistory,findReceipt,originalResult,normalizeOutcomeRevisions} from './commandLedger';
 import {endProtection,protectionNotice} from './protection';
 import {worldPaused} from './extinction';
 import {migrateV95Economy} from './economy';
@@ -44,9 +44,9 @@ export function orderFingerprint(order:FormalOrder):string {
 function report(w:FormalWorld,title:string,text:string,owner:FactionId=w.playerFactionId):FormalReport {
  const sequence=w.sequences.report++;return{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:owner,at:w.time,category:'research',title,text};
 }
-type ReplayAdmission={offline:boolean;receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shareCommandFacts:boolean;completedResearch?:WeakSet<ResearchProject>;fullCommandClone:boolean};
+type ReplayAdmission={offline:boolean;receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shippingPlainGraph:boolean;shareCommandFacts:boolean;completedResearch?:WeakSet<ResearchProject>;fullCommandClone:boolean};
 /** Scan once before the first replay command draft. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
-function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'shareCommandFacts'|'completedResearch'|'fullCommandClone'> {
+function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'shippingPlainGraph'|'shareCommandFacts'|'completedResearch'|'fullCommandClone'> {
  const readonly=1,autonomy=2,mutable=4,facts=8,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
  const duplicates=offline?new WeakSet<object>():undefined;
  let researchGraphPlain=true;
@@ -91,7 +91,7 @@ function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmis
  // Only initial completed identities are eligible. Do not trust newly completed
  // shallow spreads (their former mutable nested objects were not audited here).
  const completedResearch=duplicates&&researchGraphPlain&&!fullCommandClone?auditedCompletedResearch(current.researchProjects,duplicates,plain):undefined;
- return{fullCommandClone,completedResearch,shareCommandFacts:shareCommandFacts&&!fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
+ return{fullCommandClone,completedResearch,shippingPlainGraph:offline&&researchGraphPlain,shareCommandFacts:shareCommandFacts&&!fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
 }
 /** Completed projects are never edited by command handlers. Keep the original
  * native graph clone if any candidate node is shared or has non-data shape. */
@@ -136,10 +136,55 @@ function cloneReplayCityDraft(current:FormalWorld,index:number,shareCommandFacts
  copyHistory(current,w,true);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
+/** Eligible project funding and manual logistics share the same two-city write set.
+ * All post-handler project/politics/victory effects are still isolated. This
+ * deliberately leaves both original gameplay and full scheduler copies intact. */
+function cloneReplayShippingDraft(current:FormalWorld,order:FormalOrder,replay:ReplayAdmission):FormalWorld|undefined{
+ const p=order.payload;
+ if((p.type!=='wonder.ship'&&p.type!=='logistics.dispatch'&&p.type!=='breakthrough.ship')||!replay.offline||!replay.shippingPlainGraph||
+    !replay.shareCityDraft||!replay.shareAutonomy||!replay.shareCommandFacts||current.economyVersion!==95)return;
+ let destinationId;
+ if(p.type==='wonder.ship'){
+  const project=current.largeProjects[0];
+  if(current.largeProjects.length!==1||project.projectId!==p.projectId||project.kind!=='world-wonder'||project.wonder?.phase!=='funding'||project.catchup||project.repair||project.breakthrough)return;
+  destinationId=project.initiatingCityId;
+ }else if(p.type==='breakthrough.ship'){
+  // Only one linked, completed wonder and one funding breakthrough. The real
+  // handler still authorizes the city/empire and checks available caravans and
+  // in-transit cargo. All project, politics, victory and queue reconciliation
+  // runs unchanged on the private roots below.
+  if(current.largeProjects.length!==2)return;
+  const project=current.largeProjects.find(x=>x.projectId===p.projectId),b=project?.breakthrough;
+  if(!project||project.kind!=='civilization-breakthrough'||project.owner.kind!=='empire'||b?.phase!=='funding'||b.recaptureRequired||
+     project.wonder||project.repair||project.catchup)return;
+  const wonder=current.largeProjects.find(x=>x.projectId===b.wonderProjectId&&x!==project);
+  if(!wonder||wonder.kind!=='world-wonder'||wonder.owner.kind!=='empire'||wonder.owner.empireId!==project.owner.empireId||
+     wonder.initiatingCityId!==project.initiatingCityId||wonder.wonder?.phase!=='completed'||
+     (wonder.wonder.integrity&&wonder.wonder.integrity!=='intact')||wonder.wonder.recaptureRequired||
+     wonder.breakthrough||wonder.repair||wonder.catchup)return;
+  destinationId=project.initiatingCityId;
+ }else{
+  // This first slice deliberately does not prove arbitrary project mixes.
+  if(current.largeProjects.length>1||current.largeProjects.some(x=>x.kind!=='world-wonder'||x.wonder?.phase!=='funding'||x.catchup||x.repair||x.breakthrough))return;
+  destinationId=p.destinationCityId;
+ }
+ const source=current.cities.findIndex(c=>c.id===p.cityId),destination=current.cities.findIndex(c=>c.id===destinationId);
+ if(source<0||destination<0)return;
+ const {source:sourceDraft,destination:destinationDraft,...draft}=structuredClone({source:current.cities[source],destination:current.cities[destination],
+  sequences:current.sequences,politics:current.politics,growthTasks:current.growthTasks,victory:current.victory,largeProjects:current.largeProjects});
+ const w={...current,...draft,cities:current.cities.slice(),commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
+ for(const root of ['politics','growthTasks','victory'] as const)if(!Object.hasOwn(current,root))delete w[root];
+ // Both handlers only append here. Arrival/return runs later on the adopted draft.
+ if(current.logistics)w.logistics=current.logistics.slice();
+ if(current.combat)w.combat={...current.combat,receipts:current.combat.receipts.slice()};
+ w.cities[source]=sourceDraft;w.cities[destination]=destinationDraft;
+ copyHistory(current,w,true);inheritMilitaryPower(current,w);return w;
+}
 function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdmission):FormalWorld {
  if(!replay)return cloneWorldDraft(current);
  if(replay.fullCommandClone)return cloneWorldDraft(current);
  const type=order.payload.type;
+ if(type==='wonder.ship'||type==='logistics.dispatch'||type==='breakthrough.ship'){const draft=cloneReplayShippingDraft(current,order,replay);if(draft)return draft;}
  if(replay.shareCityDraft&&(type==='field.upgrade'||type==='building.upgrade'||type==='military.recruit')){
   const index=current.cities.findIndex(city=>city.id===order.payload.cityId);
   if(index>=0)return cloneReplayCityDraft(current,index,replay.shareCommandFacts);
@@ -160,7 +205,13 @@ function replaySubmit(offline:boolean):Submit {
  // actual current graph once, immediately before its first command draft;
  // receipt indexing still starts at zero and follows the same replay order.
  let admission:ReplayAdmission|undefined;
- return(current,value)=>{admission??={offline,receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current,offline)};return submitOrderDraft(current,value,admission);};
+ return(current,value)=>{
+  if(!admission){
+   admission={offline,receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current,offline)};
+   if(offline&&!admission.fullCommandClone)beginReplayPendingMembership(current);
+  }
+  return submitOrderDraft(current,value,admission);
+ };
 }
 /** Keep the original public validation boundary observable exactly once. */
 function validateFormalDraft(w:FormalWorld){return withDraftShipmentSyntax(w,()=>validateFormalWorld(w));}
@@ -310,6 +361,7 @@ function advanceOneEvent(w:FormalWorld,scheduler:EventScheduler,reports:FormalRe
   if('cityId' in e){const c=spatial(w).cities.get(e.cityId);if(c)promoteCityQueues(w,c,scheduler);}
 }
 function finishFormalAdvance(current:FormalWorld,w:FormalWorld,scheduler:EventScheduler,reports:FormalReport[],target:number):FormalTransition {
+ endReplayPendingMembership(w);
   const beforeReconcile=diplomacySnapshot(w);reconcilePolitics(w);reports.push(...diplomacyChanges(w,beforeReconcile));reconcilePoliticalEvents(w,scheduler);w.time=worldPaused(w)?w.time:target;reconcileWonders(w,scheduler);reconcileVictory(w,scheduler);w.events=scheduler.snapshot();w.revision=current.revision+1;
  for(const r of pendingHistory(w))if(r.committedRevision>w.revision)r.committedRevision=w.revision;
  normalizeOutcomeRevisions(w);
