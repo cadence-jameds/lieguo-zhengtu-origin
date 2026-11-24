@@ -1,4 +1,4 @@
-import {pruneCommandEvidence} from './commandEvidence';
+import {observeCommandEvidence,pruneCommandEvidence} from './commandEvidence';
 import {appendReceipt,commandHistory,copyHistory,pendingHistory,findReceipt,originalResult,normalizeOutcomeRevisions} from './commandLedger';
 import {endProtection,protectionNotice} from './protection';
 import {worldPaused} from './extinction';
@@ -44,19 +44,29 @@ export function orderFingerprint(order:FormalOrder):string {
 function report(w:FormalWorld,title:string,text:string,owner:FactionId=w.playerFactionId):FormalReport {
  const sequence=w.sequences.report++;return{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:owner,at:w.time,category:'research',title,text};
 }
-type ReplayAdmission={receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;fullCommandClone:boolean};
+type ReplayAdmission={receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shareCommandFacts:boolean;fullCommandClone:boolean};
 /** Scan once before the first replay command draft. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
-function replayClonePolicy(current:FormalWorld):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'fullCommandClone'> {
- const readonly=1,autonomy=2,mutable=4,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
+function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'shareCommandFacts'|'fullCommandClone'> {
+ const readonly=1,autonomy=2,mutable=4,facts=8,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
  let fullCommandClone=false,shareAutonomy=!!current.autonomy,shareCityDraft=true,nextOwner=0;
+ const data=current.commandFacts;
+ const plain=(value:unknown)=>!!value&&typeof value==='object'&&Object.getPrototypeOf(value)===Object.prototype;
+ let shareCommandFacts=!!(offline&&data&&plain(data)&&data.format===1&&
+  Number.isSafeInteger(data.effects)&&data.effects>=0&&data.effects<Number.MAX_SAFE_INTEGER&&
+  Number.isSafeInteger(data.foregroundRevision)&&data.foregroundRevision>=0&&
+  [data.evidence,data.origins,data.minimumOrigins,data.governance,data.minimumGovernance].every(plain)&&
+  (data.replayReservations===undefined||plain(data.replayReservations)));
  const collect=(roots:unknown[],domain:number,descend=true)=>{
   for(const root of roots){
    const owner=++nextOwner,pending=[root];
    while(pending.length){
     const value=pending.pop();if(value===null||typeof value!=='object')continue;
     const priorOwner=owners.get(value);if(priorOwner!==undefined&&priorOwner!==owner)shareCityDraft=false;else owners.set(value,owner);
-    const previous=ownership.get(value)??0;if(previous&domain)continue;
-    const owned=previous|domain;ownership.set(value,owned);
+    const previous=ownership.get(value)??0,owned=previous|domain;
+    // A repeated evidence node (within facts or across roots) needs the existing clone.
+    if(shareCommandFacts&&((previous!==0&&owned&facts)||!plain(value)&&!Array.isArray(value)))shareCommandFacts=false;
+    if((previous&domain)===domain)continue;
+    ownership.set(value,owned);
     if(owned&readonly&&owned&(autonomy|mutable))fullCommandClone=true;
     if(owned&autonomy&&owned&mutable)shareAutonomy=false;
     if(descend)for(const child of Object.values(value))pending.push(child);
@@ -68,27 +78,30 @@ function replayClonePolicy(current:FormalWorld):Pick<ReplayAdmission,'shareAuton
  // Register containers separately so each city has its own owner; combat receipt rows keep their readonly domain.
  collect([current.cities,current.combat],mutable,false);
  const body={...current,ledger:undefined,cities:undefined,worldLayer:undefined,commandReceipts:undefined,completionReceipts:undefined,autonomy:undefined,combat:current.combat?{...current.combat,receipts:undefined}:current.combat};
+ if(offline){delete body.commandFacts;collect([data],mutable|facts);}
  collect(Object.values(body),mutable);
  collect(current.cities,mutable);
- return{fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
+ return{fullCommandClone,shareCommandFacts:shareCommandFacts&&!fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
 }
 /** Only the isolated replay uses this draft. Commands never mutate worldLayer or existing receipt rows. */
-function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean):FormalWorld {
+function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean,shareCommandFacts:boolean):FormalWorld {
  const body={...current,commandReceipts:[],completionReceipts:[]};delete body.ledger;
  if(Object.hasOwn(current,'worldLayer'))body.worldLayer=undefined;
  if(shareAutonomy)body.autonomy=undefined;
+ if(shareCommandFacts)body.commandFacts=undefined;
  if(current.combat)body.combat={...current.combat,receipts:[]};
  const w=structuredClone(body) as FormalWorld;
  copyHistory(current,w,true);w.completionReceipts=current.completionReceipts.slice();
  if(Object.hasOwn(current,'worldLayer'))w.worldLayer=current.worldLayer;
  if(shareAutonomy)w.autonomy=current.autonomy;
+ if(shareCommandFacts)w.commandFacts=current.commandFacts;
  if(current.combat)w.combat!.receipts=current.combat.receipts.slice();
  inheritMilitaryPower(current,w);return w;
 }
 /** These three handlers, lazy settlement and queue promotion write only this city, sequences and political cleanup. */
-function cloneReplayCityDraft(current:FormalWorld,index:number):FormalWorld {
+function cloneReplayCityDraft(current:FormalWorld,index:number,shareCommandFacts:boolean):FormalWorld {
  const draft=structuredClone({city:current.cities[index],sequences:current.sequences,politics:current.politics});
- const w={...current,...(current.commandFacts?{commandFacts:structuredClone(current.commandFacts)}:{}),...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
+ const w={...current,...(!shareCommandFacts&&current.commandFacts?{commandFacts:structuredClone(current.commandFacts)}:{}),...(current.growthTasks?{growthTasks:structuredClone(current.growthTasks)}:{}),cities:current.cities.slice(),sequences:draft.sequences,commandReceipts:[] as CommandReceipt[],completionReceipts:current.completionReceipts.slice()};
  copyHistory(current,w,true);w.cities[index]=draft.city;if(Object.hasOwn(current,'politics'))w.politics=draft.politics;
  inheritMilitaryPower(current,w);return w;
 }
@@ -98,9 +111,9 @@ function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdm
  const type=order.payload.type;
  if(replay.shareCityDraft&&(type==='field.upgrade'||type==='building.upgrade'||type==='military.recruit')){
   const index=current.cities.findIndex(city=>city.id===order.payload.cityId);
-  if(index>=0)return cloneReplayCityDraft(current,index);
+  if(index>=0)return cloneReplayCityDraft(current,index,replay.shareCommandFacts);
  }
- return cloneReplayCommandDraft(current,replay.shareAutonomy&&type!=='politics');
+ return cloneReplayCommandDraft(current,replay.shareAutonomy&&type!=='politics',replay.shareCommandFacts);
 }
 function replayReceipt(current:FormalWorld,admission:ReplayAdmission,id:CommandId){
  if(current.ledger)return findReceipt(current,id);
@@ -111,12 +124,12 @@ function replayReceipt(current:FormalWorld,admission:ReplayAdmission,id:CommandI
  }
  return admission.receipts.get(id);
 }
-function replaySubmit():Submit {
+function replaySubmit(offline:boolean):Submit {
  // Logistics/clock-only replay needs no command draft policy. Inspect the
  // actual current graph once, immediately before its first command draft;
  // receipt indexing still starts at zero and follows the same replay order.
  let admission:ReplayAdmission|undefined;
- return(current,value)=>{admission??={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current)};return submitOrderDraft(current,value,admission);};
+ return(current,value)=>{admission??={receipts:new Map(),indexedReceipts:0,...replayClonePolicy(current,offline)};return submitOrderDraft(current,value,admission);};
 }
 /** Keep the original public validation boundary observable exactly once. */
 function validateFormalDraft(w:FormalWorld){return withDraftShipmentSyntax(w,()=>validateFormalWorld(w));}
@@ -140,6 +153,14 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(order.issuedWorldTime>current.time)return reject('命令時間超前於世界。');
  if(worldPaused(current)&&!['player.rebirth','player.end'].includes(order.payload.type))return reject('滅國期間世界已暫停。');
  const w=migrateV95Economy(cloneOrderDraft(current,order,replay)),reports:FormalReport[]=[];
+ // The outer offline reducer owns commandFacts after its initial clone. A command
+ // may read that graph, but only an accepted command writes evidence into it.
+ const deferEvidence=replay?.shareCommandFacts===true;
+ const appendOrderReceipt=()=>{
+  const receipt:CommandReceipt={commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'};
+  if(deferEvidence)commandHistory(w).push(receipt);else appendReceipt(w,receipt);
+  return receipt;
+ };
  const p=order.payload;
  if(order.issuerId===w.playerFactionId)syncGrowthTasks(w);
  const city=spatial(w).cities.get(p.cityId);
@@ -147,7 +168,7 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(city&&!worldPaused(w)&&p.type!=='campaign.configure')settleCity(w,city);
  if(p.type==='player.rebirth'||p.type==='player.end'){try{const scheduler=replay?EventScheduler.forReplay(w.events):new EventScheduler(w.events);applyExtinctionCommand(w,city,order,p,scheduler);w.events=scheduler.snapshot();
  // Restore the clock only on the accepted rebirth draft, after its active scheduler is captured.
- if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});if(!replay)validateFormalDraft(w);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
+ if(p.type==='player.rebirth')setClockMode(w,'foreground');w.revision++;const receipt=appendOrderReceipt();if(!replay)validateFormalDraft(w);if(deferEvidence)observeCommandEvidence(w,receipt);return{world:w,reports,ack:{commandId:order.commandId,status:'committed',revision:w.revision}};}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  if(!city)return reject('城市不存在。');
  if(p.type==='campaign.configure'){try{configureCampaign(w,order.issuerId,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
  else if(p.type==='developer.configure'){try{configureDeveloper(w,city,p);}catch(error){if(error instanceof RuleViolation)return reject(error.message);throw error;}}
@@ -193,8 +214,11 @@ function submitOrderDraft(current:FormalWorld,value:unknown,replay?:ReplayAdmiss
  if(p.type==='politics'&&p.action==='war')endProtection(w,order.issuerId,'主動宣戰');
  reports.push(...protectionNotice(current,w,order.issuerId),...diplomacyChanges(w,diplomacySnapshot(current)));
  w.revision++;
- appendReceipt(w,{commandId:order.commandId,issuerId:order.issuerId,fingerprint,committedRevision:w.revision,disposition:'applied'});
+ const written=appendOrderReceipt();
  recordGrowthCommand(w,order.issuerId,p);
+ // Growth tracking does not read commandFacts. Keep existing rows private until
+ // all potentially failing command work is done; no await or yield crosses here.
+ if(deferEvidence)observeCommandEvidence(w,written);
  // Replay admissions still use every command rule; the whole private draft is validated at its boundary.
  if(!replay)validateFormalDraft(w);
  const ack:CommandAck={commandId:order.commandId,status:'committed',revision:w.revision};
@@ -262,7 +286,7 @@ export function advanceFormal(current:FormalWorld,target:number):FormalTransitio
  if(!Number.isSafeInteger(target)||target<current.time)throw new Error('世界時間無效。');
  if(worldPaused(current))return{world:current,reports:[]};
  if(target===current.time&&(!current.events.length||current.events.every(e=>e.at>target)))return{world:current,reports:[]};
- const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit();syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(current.clockMode==='offline');syncGrowthTasks(w);reconcileVictory(w,scheduler);
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target)advanceOneEvent(w,scheduler,reports,submit);
  return finishFormalAdvance(current,w,scheduler,reports,target);
 }
@@ -277,7 +301,7 @@ export async function advanceFormalCooperative(current:FormalWorld,target:number
  // A queued input can start T1 before an expensive private-draft clone. This
  // checkpoint has no event/world mutations; the fixed logical target is kept.
  if(options.yieldBeforeStart)await(options.yieldControl?.('start')??new Promise<void>(resolve=>setTimeout(resolve,0)));
- const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit();syncGrowthTasks(w);reconcileVictory(w,scheduler);
+ const w=migrateV95Economy(reconcileExileSites(cloneWorldDraft(current))),scheduler=EventScheduler.forReplay(w.events),reports:FormalReport[]=[],submit=replaySubmit(current.clockMode==='offline');syncGrowthTasks(w);reconcileVictory(w,scheduler);
  let processed=0,lastYield=performance.now();
  while(!worldPaused(w)&&scheduler.peek()&&scheduler.peek()!.at<=target){
   advanceOneEvent(w,scheduler,reports,submit);processed++;
