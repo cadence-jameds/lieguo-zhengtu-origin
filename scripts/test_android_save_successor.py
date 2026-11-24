@@ -96,6 +96,7 @@ class EscortProjectionAdapterProof(unittest.TestCase):
 
 # Include exact branch-composition negatives in the existing immutable CI step.
 from test_elite_recruit_successor import ExactEliteSuccessor
+from test_wall_build_marker_successor import WallMarkerSuccessorTest
 from test_settlement_training_slots_successor import ExactSettlementTrainingSlots
 
 if __name__=='__main__':unittest.main()
