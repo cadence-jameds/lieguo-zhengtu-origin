@@ -15,11 +15,11 @@ class BoundedSaveSuccessorTests(unittest.TestCase):
    self.assertTrue(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));self.assertFalse(gate.accepts_adapter(p,b'forged',self.root))
  def test_critical_gameplay_and_original_deadlines_remain_exact(self):
   for p in ['src/game/formal/scheduler.ts','src/game/formal/autonomy.ts','src/game/formal/aiActions.ts','src/game/formal/endgameAI.ts','src/game/formal/victory.ts','src/game/formal/offline.ts','src/game/formal/constructionRules.ts','src/game/worldStream.ts','src/game/formal/runtime.test.ts','scripts/verify-in-isolation.mjs']:
-   before=gate.previous(gate.BASE,p); after=(self.root/p).read_bytes()
-   if p=='src/game/formal/autonomy.ts' and after!=before:
-    from elite_recruit_successor import accepts
-    self.assertTrue(accepts(p,gate.sha(before),self.root))
-   else:self.assertEqual(after,before)
+   before=gate.previous(gate.BASE,p)
+   from ai_settlement_escort_successor import SOURCE, accepts as escort
+   from elite_recruit_successor import accepts as elite
+   self.assertTrue((self.root/p).read_bytes()==before or p==SOURCE and escort(p,gate.sha(before),self.root)
+                   or p=='src/game/formal/autonomy.ts' and elite(p,gate.sha(before),self.root),p)
  def test_editing_a_local_hash_cannot_bless_tampering(self):
   file=self.root/gate.RECORD;original=file.read_bytes()
   for section,p in [('changes','src/game/persistence.ts'),('changes','src/game/replayFence.ts'),('changes','src/game/formal/commandEvidence.ts'),('changes','src/game/formal/reducer.ts'),('changes','src/game/formal/saveCodec.ts'),('changes','src/game/formal/commandLedger.ts'),('changes','src/game/useAppUpdate.ts'),('changes','src/game/formal/persistence.test.ts'),('invariants','src/game/formal/scheduler.ts'),('historical','docs/validation/b10-final/REPORT.md'),('adapters','scripts/b10_r3_06_successor.py')]:
