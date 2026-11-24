@@ -17,7 +17,9 @@ class BoundedSaveSuccessorTests(unittest.TestCase):
   for p in ['src/game/formal/scheduler.ts','src/game/formal/autonomy.ts','src/game/formal/aiActions.ts','src/game/formal/endgameAI.ts','src/game/formal/victory.ts','src/game/formal/offline.ts','src/game/formal/constructionRules.ts','src/game/worldStream.ts','src/game/formal/runtime.test.ts','scripts/verify-in-isolation.mjs']:
    before=gate.previous(gate.BASE,p)
    from ai_settlement_escort_successor import SOURCE, accepts as escort
-   self.assertTrue((self.root/p).read_bytes()==before or p==SOURCE and escort(p,gate.sha(before),self.root),p)
+   from elite_recruit_successor import accepts as elite
+   self.assertTrue((self.root/p).read_bytes()==before or p==SOURCE and escort(p,gate.sha(before),self.root)
+                   or p=='src/game/formal/autonomy.ts' and elite(p,gate.sha(before),self.root),p)
  def test_editing_a_local_hash_cannot_bless_tampering(self):
   file=self.root/gate.RECORD;original=file.read_bytes()
   for section,p in [('changes','src/game/persistence.ts'),('changes','src/game/replayFence.ts'),('changes','src/game/formal/commandEvidence.ts'),('changes','src/game/formal/reducer.ts'),('changes','src/game/formal/saveCodec.ts'),('changes','src/game/formal/commandLedger.ts'),('changes','src/game/useAppUpdate.ts'),('changes','src/game/formal/persistence.test.ts'),('invariants','src/game/formal/scheduler.ts'),('historical','docs/validation/b10-final/REPORT.md'),('adapters','scripts/b10_r3_06_successor.py')]:

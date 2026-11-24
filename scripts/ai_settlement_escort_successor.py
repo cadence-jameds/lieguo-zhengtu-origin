@@ -48,8 +48,12 @@ def validate(root=ROOT):
         assert (root/path).is_file() and sha((root/path).read_bytes())==digest, ('Changed exact AI escort source/test/note',path)
 
 def accepts_boundary(path,before,root=ROOT):
-    return (path==BOUNDARY and before==git('show',BASE+':'+BOUNDARY)
-            and (root/path).is_file() and sha((root/path).read_bytes())==BOUNDARY_SHA)
+    if path!=BOUNDARY or before!=git('show',BASE+':'+BOUNDARY) or not (root/path).is_file():
+        return False
+    if sha((root/path).read_bytes())==BOUNDARY_SHA:
+        return True
+    from elite_recruit_successor import accepts_bounded_escort_boundary
+    return accepts_bounded_escort_boundary(path,BOUNDARY_SHA,root)
 
 if __name__=='__main__':
     assert sys.argv[1:]==['--boundary-admissions']
