@@ -8,6 +8,8 @@ import {empireId,eventId,factionId} from './ids';
 import {createFormalFixture} from './fixture';
 import {order} from './testSupport';
 import {captureIntent,revalidateInbox,type InboxCommand} from '../durableCommands';
+import {battlefield,issue} from './combatTestSupport';
+import {build} from './developmentTestSupport';
 import {EventScheduler} from './scheduler';
 import {submitFormalOrder} from './reducer';
 import type {FormalCommand,FormalOrder,FormalWorld} from './model';
@@ -114,4 +116,93 @@ it('does not broaden a war to newly joined members of a subsidiary legion',()=>{
  expect(revalidateInbox(later,row)).toBeDefined();
  later.politics!.legions[1].members.push(enrolled);
  expect(revalidateInbox(later,row)).toBeUndefined();
+});
+
+/** Build the cooperation in the real reducer before exercising the Worker. */
+function cooperationFixture(type:'defense.set'|'defense.dispatch'|'joint.create'|'joint.join'){
+ let w=battlefield();w.speed=25;
+ for(const c of w.cities.slice(0,3)){w.factions.find(f=>f.id===c.ownerFactionId)!.age=2;build(c,'embassy',15);c.military!.units={militia:100};}
+ const act=(i:number,p:FormalCommand)=>{w=issue(w,p,w.cities[i].ownerFactionId).world;};
+ act(0,{type:'politics',cityId:w.cities[0].id,action:'legion-create',name:'聯防軍團'});
+ act(0,{type:'politics',cityId:w.cities[0].id,action:'legion-invite',target:w.cities[1].ownerFactionId});
+ act(1,{type:'politics',cityId:w.cities[1].id,action:'request-accept',requestId:w.politics!.requests[0].id});
+ const cityId=w.cities[0].id;
+ if(type==='defense.dispatch')act(0,{type:'defense.set',cityId,units:{militia:80},keep:40,enabled:true});
+ if(type==='joint.join')act(1,{type:'joint.create',cityId:w.cities[1].id,targetCityId:w.cities[2].id,units:{militia:50},arrivalAt:w.time+2*3600000});
+ const payload:FormalCommand=type==='defense.set'?{type,cityId,units:{militia:80},keep:40,enabled:true}:
+  type==='defense.dispatch'?{type,cityId,targetCityId:w.cities[1].id}:
+  type==='joint.create'?{type,cityId,targetCityId:w.cities[2].id,units:{militia:50},arrivalAt:w.time}:
+  {type,cityId,jointId:w.politics!.joints[0].id,units:{militia:50}};
+ return {w,payload};
+}
+it.each(['defense.set','defense.dispatch','joint.create','joint.join'] as const)('commits unchanged %s through the Worker after an unrelated catch-up event',async(type)=>{
+ const {w,payload}=cooperationFixture(type);
+ const marker=eventId(String(w.sequences.event++).padStart(16,'0'));
+ w.events=new EventScheduler([...w.events,{id:marker,type:'fixture.marker',at:w.time+10000,marker:'unrelated-cooperation-world-event'}]).snapshot();
+ await store.start(w);await boot();
+ const before=latest(),view=projectionBridge.store.getWorld()!;
+ expect(before.events.some(e=>e.id===marker)).toBe(true);
+ now=1000;
+ const o=order(before,'cooperation-order',payload),intent=captureIntent(view,o);
+ send({type:'command',order:o,...intent,branch:view.projection.branch,projection:view.projection,requestId:'cooperation'});
+ await until(()=>done('cooperation'));
+ const row=await store.commandStatus(o.campaignId,o.commandId);
+ expect(row!.state,row?.ack?.reason).toBe('committed');
+ expect(row!.order).toEqual(o);expect(row!.playerBase).toEqual(intent.playerBase);expect(ack(o)).toEqual(row!.ack);
+ const after=(await store.loadSave()).game!;
+ expect(after.events.some(e=>e.id===marker)).toBe(false);
+ expect(after.commandReceipts.filter(r=>r.commandId===o.commandId)).toHaveLength(1);
+ if(type==='defense.set')expect(after.politics?.reserves.find(r=>r.cityId===payload.cityId)).toMatchObject({keep:40,units:{militia:80},enabled:true});
+ else{
+  expect(after.armies.filter(a=>a.ownerFactionId===w.playerFactionId)).toHaveLength(1);
+  expect(after.cities[0].military?.units.militia).toBe(type==='defense.dispatch'?40:50);
+  if(type==='joint.join')expect(after.politics?.joints[0].armyIds).toHaveLength(2);
+ }
+});
+
+it('does not replay a reserve dispatch after changed garrison, reserve, authority, or city owner',()=>{
+ const {w,payload}=cooperationFixture('defense.dispatch'),row=pending(w,payload);
+ const later=structuredClone(w);later.revision++;later.time++;
+ expect(revalidateInbox(later,row)).toBeDefined();
+ const fewer=structuredClone(later);fewer.cities[0].military!.units.militia=70;
+ expect(revalidateInbox(fewer,row)).toBeUndefined();
+ const reserve=structuredClone(later);reserve.politics!.reserves[0].keep=60;
+ expect(revalidateInbox(reserve,row)).toBeUndefined();
+ const noRight=structuredClone(later);build(noRight.cities[0],'embassy',12);
+ expect(revalidateInbox(noRight,row)).toBeUndefined();
+ const transferred=structuredClone(later);transferred.cities[1].ownerFactionId=later.cities[2].ownerFactionId;
+ expect(revalidateInbox(transferred,row)).toBeUndefined();
+ expect(revalidateInbox(later,{...row,playerBase:undefined})).toBeUndefined();
+});
+
+it('does not replay a join when the group changes or the original rendezvous can no longer be reached',()=>{
+ const {w,payload}=cooperationFixture('joint.join'),row=pending(w,payload);
+ const later=structuredClone(w);later.revision++;later.time++;
+ expect(revalidateInbox(later,row)).toBeDefined();
+ const changed=structuredClone(later);changed.politics!.joints[0].arrivalAt++;
+ expect(revalidateInbox(changed,row)).toBeUndefined();
+ const expiring=structuredClone(later);expiring.time=w.politics!.joints[0].arrivalAt-1;
+ expect(revalidateInbox(expiring,row)).toBeUndefined();
+ const expired=structuredClone(expiring);expired.time++;
+ expect(revalidateInbox(expired,row)).toBeUndefined();
+ const invalidated=structuredClone(later);invalidated.armies.find(a=>a.id===w.politics!.joints[0].armyIds[0])!.status='returning';
+ expect(revalidateInbox(invalidated,row)).toBeUndefined();
+});
+
+it('leaves troop validation with the actual Worker reducer and does not spawn an invalid alliance army',async()=>{
+ const {w,payload}=cooperationFixture('joint.create');
+ if(payload.type!=='joint.create')throw new Error('expected joint.create fixture');
+ payload.units={militia:101};
+ const marker=eventId(String(w.sequences.event++).padStart(16,'0'));
+ w.events=new EventScheduler([...w.events,{id:marker,type:'fixture.marker',at:w.time+10000,marker:'stale-invalid-joint-event'}]).snapshot();
+ await store.start(w);await boot();
+ const before=latest(),view=projectionBridge.store.getWorld()!;
+ now=1000;
+ const o=order(before,'invalid-cooperation',payload),intent=captureIntent(view,o);
+ send({type:'command',order:o,...intent,branch:view.projection.branch,projection:view.projection,requestId:'invalid-cooperation'});
+ await until(()=>done('invalid-cooperation'));
+ const row=await store.commandStatus(o.campaignId,o.commandId);
+ expect(row!.state).toBe('rejected');expect(row!.ack?.reason).toBe('選取兵種不存在或城內兵力不足。');
+ expect((await store.loadSave()).game!.politics?.joints).toHaveLength(0);
+ expect((await store.loadSave()).game!.cities[0].military?.units.militia).toBe(100);
 });
