@@ -1,3 +1,4 @@
+import {EXILE_CAMP_ART} from './exileCampArt';
 import {eraAtlas,constructionArtPath,finishedWallSceneArt,constructionWallSceneArt,openWallSceneArt} from '../assets';
 import {CIV_ART,BUILDING_ALIAS,NEW_BUILDINGS,FIELD_ALIAS,unitArt,techArt,cityArtAge,cityPresentation} from './artMap';
 import {buildingImagePath,type VisualAge} from './artRegistry';
@@ -26,7 +27,7 @@ export function resourceArt(building:typeof FIELD_ALIAS[keyof typeof FIELD_ALIAS
 }
 export const miniatureArt=(age:number,wall:number)=>[age===3?'art/unified/cities-imperial.webp':`art/cities-age-${age}.webp`,...(wall>0?[age===3?'art/unified/wall-ring-imperial.webp':`art/wall-ring-${age}.webp`]:[])];
 export const COMMON_ART=['art/river-city.webp','art/civilization-emblems-023.webp','art/formal/hud-unit-icons-v03015.png','art/outskirts-landscape-021.webp','art/cities-age-0.webp','art/buildings-dark.webp','art/city-scene-dark-open.webp',...Object.values(FIELD_ALIAS).map(k=>`art/field-${k}.webp`)];
-export const MAP_ART=['art/world-riverbanks-0301.webp','art/world-terrain-023.webp','art/world-resources.webp','art/protection-dome.webp','art/world-trees-0299.webp','art/world-mountains-0299.webp','art/world-details-0299.webp'];
+export const MAP_ART=['art/world-riverbanks-0301.webp','art/world-terrain-023.webp','art/world-resources.webp',EXILE_CAMP_ART,'art/protection-dome.webp','art/world-trees-0299.webp','art/world-mountains-0299.webp','art/world-details-0299.webp'];
 export function civilizationAssets(civilizationId:string){
  const civ=CIV_ART[civilizationId]??civilizationId,paths:string[]=[];
  for(const age of [0,1,2,3] as const)for(const kind of [...Object.keys(BUILDING_ALIAS),...NEW_BUILDINGS])for(const constructing of [false,true])paths.push(...buildingArt(kind,civ,age,constructing));

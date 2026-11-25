@@ -70,7 +70,11 @@ def accepts(path,predecessor,root=ROOT):
  if path in ADAPTERS:return predecessor==sha(previous(BASE,path)) and (root/path).exists() and ((root/path).read_bytes()==adapters()[path] or child_adapter(path,adapters()[path],root))
  # Preserve the previous finite UI grants without delegating recursively.
  p=prior.read_record(root)
- return (path in prior.CHANGES and predecessor in p['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==p['changes'][path]['after']) or child_accepts(path,predecessor,root)
+ from exile_camp_successor import accepts as exile_camp
+ if path in prior.CHANGES and predecessor in p['grants'].get(path,[]) and (root/path).exists():
+  result=p['changes'][path]['after']
+  if sha((root/path).read_bytes())==result or exile_camp(path,result,root):return True
+ return child_accepts(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
  from b10_r3_06_successor import accepts_adapter as child_adapter
  if path not in ADAPTERS:return prior.accepts_adapter(path,before,root)
