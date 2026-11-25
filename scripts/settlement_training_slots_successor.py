@@ -28,7 +28,10 @@ def git(*args):
 def current(path,root=ROOT):
  if path not in RESULTS:return False
  f=root/path
- return f.is_file() and sha(f.read_bytes())==RESULTS.get(path)
+ if f.is_file() and sha(f.read_bytes())==RESULTS.get(path):return True
+ if path!=BOUNDARY:return False
+ from late_game_successor import accepts as late
+ return late(path,RESULTS[path],root)
 
 @lru_cache(maxsize=1)
 def predecessors():
