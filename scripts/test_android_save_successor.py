@@ -99,4 +99,16 @@ from test_elite_recruit_successor import ExactEliteSuccessor
 from test_settlement_training_slots_successor import ExactSettlementTrainingSlots
 from test_late_game_successor import LateGameSuccessorTests
 
+class HostileCaravanOverlayProof(unittest.TestCase):
+ def test_only_exact_overlay_from_known_versions(self):
+  import hostile_caravan_overlay_successor as cargo
+  with tempfile.TemporaryDirectory(prefix='hostile-caravan-proof-') as directory:
+   root=Path(directory);f=root/cargo.SOURCE;f.parent.mkdir(parents=True,exist_ok=True)
+   rendered=(cargo.ROOT/cargo.SOURCE).read_bytes();f.write_bytes(rendered)
+   for h in cargo.PREDECESSORS:self.assertTrue(gate.accepts(cargo.SOURCE,h,root))
+   self.assertFalse(cargo.accepts(cargo.SOURCE,'0'*64,root))
+   self.assertFalse(cargo.accepts('src/game/formal/economy.ts',next(iter(cargo.PREDECESSORS)),root))
+   f.write_bytes(rendered+b'\n')
+   for h in cargo.PREDECESSORS:self.assertFalse(cargo.accepts(cargo.SOURCE,h,root))
+
 if __name__=='__main__':unittest.main()
