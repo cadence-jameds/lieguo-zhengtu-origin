@@ -54,6 +54,53 @@ export function bindLedger(w:FormalWorld,s:VerifiedLedger,pending:CommandReceipt
  if(!proofs.has(s))throw Error('無效帳本證明。');remember(s);bindings.set(w,s);w.ledger={format:1,anchor:anchor(s),pending,outcomes};delete (w as Partial<FormalWorld>).commandReceipts;
  Object.defineProperty(w,'commandReceipts',{configurable:true,enumerable:false,get:()=>commandHistory(w)});return w;
 }
+/** Ephemeral membership for one detached synchronous offline replay. No stored
+ * ledger proof, ordered rows, or public history representation is replaced.
+ * Engine-owned pending rows are append-only while this lease is valid. Acquire
+ * only after the outer native replay clone, never on loader/import/public-world
+ * data. A command clone receives a private suffix, not permission to mutate
+ * the indexed prefix; only committed adoption merges it and retires siblings. */
+type ReplayPending={tail:CommandReceipt[];known:Map<string,CommandReceipt>;length:number;prefix?:number;parent?:ReplayPending;closed?:boolean};
+const replayPending=new WeakMap<FormalWorld,ReplayPending>();
+function boundReplayPending(w:FormalWorld){
+ const binding=replayPending.get(w);
+ if(binding&&!binding.closed&&binding.tail===w.ledger?.pending&&binding.length===binding.tail.length&&
+  (!binding.parent||!binding.parent.closed&&binding.parent.length===binding.prefix))return binding;
+ endReplayPendingMembership(w);return undefined;
+}
+export function beginReplayPendingMembership(w:FormalWorld){
+ endReplayPendingMembership(w);
+ const tail=w.ledger?.pending;
+ if(!Array.isArray(tail)||Object.getPrototypeOf(tail)!==Array.prototype)return;
+ const keys=Object.keys(tail);if(keys.length!==tail.length||!keys.every((k,i)=>k===String(i)))return;
+ const known=new Map<string,CommandReceipt>();
+ for(const row of tail){
+  if(!row||Object.getPrototypeOf(row)!==Object.prototype||typeof row.commandId!=='string')return;
+  if(!known.has(row.commandId))known.set(row.commandId,row);
+ }
+ replayPending.set(w,{tail,known,length:tail.length});
+}
+export function endReplayPendingMembership(w:FormalWorld){const b=replayPending.get(w);if(b)b.closed=true;replayPending.delete(w);}
+export function adoptReplayPendingMembership(target:FormalWorld,draft:FormalWorld){
+ const parent=boundReplayPending(target),binding=boundReplayPending(draft);
+ endReplayPendingMembership(target);endReplayPendingMembership(draft);
+ if(!parent||!binding||binding.parent!==parent||binding.prefix!==parent.length)return;
+ for(let i=binding.prefix;i<binding.length;i++){
+  const row=binding.tail[i];if(!parent.known.has(row.commandId))parent.known.set(row.commandId,row);
+ }
+ replayPending.set(target,{tail:binding.tail,known:parent.known,length:binding.length});
+}
+function indexedPendingFirst(binding:ReplayPending,id:string){
+ const known=binding.known.get(id);if(known)return known;
+ if(binding.prefix!==undefined)for(let i=binding.prefix;i<binding.tail.length;i++)if(binding.tail[i].commandId===id)return binding.tail[i];
+ return undefined;
+}
+function pendingFirst(w:FormalWorld,tail:CommandReceipt[],id:string){
+ const b=boundReplayPending(w);return b?.tail===tail?indexedPendingFirst(b,id):tail.find(r=>r.commandId===id);
+}
+function pendingHas(w:FormalWorld,tail:CommandReceipt[],id:string){
+ const b=boundReplayPending(w);return b?.tail===tail?!!indexedPendingFirst(b,id):tail.some(r=>r.commandId===id);
+}
 const views=new WeakSet<object>();
 export const isHistoryView=(v:unknown)=>!!v&&typeof v==='object'&&views.has(v);
 export function commandHistory(w:FormalWorld):CommandReceipt[]{
@@ -62,16 +109,27 @@ export function commandHistory(w:FormalWorld):CommandReceipt[]{
  const view=new Proxy([] as CommandReceipt[],{get(_t,key){
   if(key==='length')return s.count+tail.length;
   if(key===Symbol.iterator)return function*(){for(let i=0;i<s.count;i++)yield s.at(i)!;yield*tail;};
-  if(key==='push')return (...rows:CommandReceipt[])=>{for(const r of rows){if(s.result(r.commandId)||s.receipt(r.commandId)||tail.some(t=>t.commandId===r.commandId))throw Error('Duplicate ledger receipt');if(w.ledger!.outcomes)w.ledger!.outcomes=w.ledger!.outcomes.filter(o=>o.commandId!==r.commandId);tail.push(r);}return s.count+tail.length;};
+  if(key==='push')return (...rows:CommandReceipt[])=>{for(const r of rows){if(s.result(r.commandId)||s.receipt(r.commandId)||pendingHas(w,tail,r.commandId))throw Error('Duplicate ledger receipt');if(w.ledger!.outcomes)w.ledger!.outcomes=w.ledger!.outcomes.filter(o=>o.commandId!==r.commandId);const binding=boundReplayPending(w);
+   tail.push(r);
+   if(binding?.tail===tail){binding.length++;if(binding.prefix===undefined)binding.known.set(r.commandId,r);}
+  }return s.count+tail.length;};
   if(key==='slice')return (start=0,end=s.count+tail.length)=>Array.from(view).slice(start,end);
   if(typeof key==='string'&&/^\d+$/.test(key)){const i=Number(key);return i<s.count?s.at(i):tail[i-s.count];}
   if(key==='toJSON')return ()=>Array.from(view);
   return Reflect.get(Array.prototype,key);
  },has(_t,key){return typeof key==='string'&&/^\d+$/.test(key)?Number(key)<s.count+tail.length:key in Array.prototype;},ownKeys(){return [...Array.from({length:s.count+tail.length},(_,i)=>String(i)),'length'];},getOwnPropertyDescriptor(_t,key){if(key==='length')return {value:s.count+tail.length,writable:true,enumerable:false,configurable:false};if(typeof key==='string'&&/^\d+$/.test(key)&&Number(key)<s.count+tail.length)return {value:Number(key)<s.count?s.at(Number(key)):tail[Number(key)-s.count],enumerable:true,configurable:true,writable:false};},set(){throw Error('正式帳本歷史不可原地改寫。');}});views.add(view);return view;
 }
-export function copyHistory(source:FormalWorld,target:FormalWorld,shareReadonlyRows=false){if(source.ledger)bindLedger(target,worldLedger(source),shareReadonlyRows?source.ledger.pending.slice():source.ledger.pending.map(r=>({...r})),structuredClone(source.ledger.outcomes??[]));else target.commandReceipts=shareReadonlyRows?source.commandReceipts.slice():source.commandReceipts.map(r=>({...r}));return target;}
+export function copyHistory(source:FormalWorld,target:FormalWorld,shareReadonlyRows=false){
+ if(source.ledger){
+  const proof=worldLedger(source),tail=shareReadonlyRows?source.ledger.pending.slice():source.ledger.pending.map(r=>({...r}));
+  bindLedger(target,proof,tail,structuredClone(source.ledger.outcomes??[]));
+  const parent=shareReadonlyRows?boundReplayPending(source):undefined;
+  if(parent&&!parent.parent)replayPending.set(target,{tail,known:parent.known,length:tail.length,prefix:tail.length,parent});
+ }else target.commandReceipts=shareReadonlyRows?source.commandReceipts.slice():source.commandReceipts.map(r=>({...r}));
+ return target;
+}
 export function pendingHistory(w:FormalWorld){return w.ledger?w.ledger.pending:w.commandReceipts;}
-export function findReceipt(w:FormalWorld,id:string):CommandReceipt|undefined{if(w.commandFacts?.replayReservations?.[id]?.receipt)return w.commandFacts.replayReservations[id].receipt;return w.ledger?w.ledger.pending.find(r=>r.commandId===id)??worldLedger(w).receipt(id) as CommandReceipt|undefined:w.commandReceipts.find(r=>r.commandId===id);}
+export function findReceipt(w:FormalWorld,id:string):CommandReceipt|undefined{if(w.commandFacts?.replayReservations?.[id]?.receipt)return w.commandFacts.replayReservations[id].receipt;return w.ledger?pendingFirst(w,w.ledger.pending,id)??worldLedger(w).receipt(id) as CommandReceipt|undefined:w.commandReceipts.find(r=>r.commandId===id);}
 export function originalResult(w:FormalWorld,id:string){if(w.commandFacts?.replayReservations?.[id]?.result)return w.commandFacts.replayReservations[id].result;return w.ledger?worldLedger(w).result(id):undefined;}
 export function recordOriginalRejection(w:FormalWorld,order:FormalOrder,ack:CommandAck){if(!w.ledger||ack.status!=='rejected'||originalResult(w,order.commandId)||findReceipt(w,order.commandId)||w.ledger.outcomes?.some(r=>r.commandId===order.commandId))return;const r:OriginalResult={commandId:order.commandId,issuerId:order.issuerId,fingerprint:canonicalJSON({campaignId:order.campaignId,issuerId:order.issuerId,payload:order.payload}),state:ack.requiresConfirmation||ack.reason?.includes('重新確認')?'needs-confirmation':'rejected',ack:{...structuredClone(ack),...(ack.requiresConfirmation||ack.reason?.includes('重新確認')?{requiresConfirmation:true as const}:{})},order:structuredClone(order)};(w.ledger.outcomes??=[]).push(r);}
 export function normalizeOutcomeRevisions(w:FormalWorld){normalizeCommandEvidence(w,pendingHistory(w));for(const r of w.ledger?.outcomes??[])r.ack.revision=w.revision;}
