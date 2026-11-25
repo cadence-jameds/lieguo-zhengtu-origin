@@ -99,6 +99,8 @@ def read_record(root=ROOT):
  if not f.exists():f=ROOT/RECORD
  r=json.loads(f.read_text());assert r==expected_record(),'Changed immutable Android save hotfix proof';return r
 def accepts(path,predecessor,root=ROOT):
+ from issue38_visual_successor import accepts as visual, accepts_city_adapter
+ if visual(path,predecessor,root) or accepts_city_adapter(path,predecessor,root):return True
  from command_notice_successor import accepts as notice
  from ai_settlement_escort_successor import accepts as escort
  from settlement_training_slots_successor import accepts as slots
@@ -122,6 +124,7 @@ def accepts_adapter(path,before,root=ROOT):
  r=read_record(root)
  return sha(before) in r['adapterGrants'][path] and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):
+ from issue38_visual_successor import accepts as visual, validate as visual_validate
  from command_notice_successor import accepts as notice,validate as notice_validate
  from ai_settlement_escort_successor import BOUNDARY,accepts as escort,accepts_boundary,validate as escort_validate
  from elite_recruit_successor import accepts as elite
@@ -135,12 +138,13 @@ def validate(root=ROOT):
   from late_game_successor import validate as late_validate
   from exile_camp_successor import validate_assets as exile_validate
   exile_validate(root)
+  visual_validate(root)
   offline_validate(root);late_validate(root)
   notice_validate(root);escort_validate(root)
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or notice(p,v['after'],root) or community(p,v['after'],root),('Unpinned Android save hotfix',p)
  for section in ['invariants','historical']:
-  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and (exile_camp(p,h,root) or community(p,h,root) or cargo(p,h,root) or notice(p,h,root) or escort(p,h,root) or elite(p,h,root) or slots(p,h,root) or offline(p,h,root) or late(p,h,root) or p==BOUNDARY and h==sha(previous(BASE,p)) and accepts_boundary(p,previous(BASE,p),root)),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
+  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and (exile_camp(p,h,root) or visual(p,h,root) or community(p,h,root) or cargo(p,h,root) or notice(p,h,root) or escort(p,h,root) or elite(p,h,root) or slots(p,h,root) or offline(p,h,root) or late(p,h,root) or p==BOUNDARY and h==sha(previous(BASE,p)) and accepts_boundary(p,previous(BASE,p),root)),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed finite hotfix adapter',p)
  css='src/game/presentation/playable.css';assert (root/css).read_bytes().startswith(previous(BASE,css)),'Existing styles changed'
  p='src/game/persistence.ts';before=previous(BASE,p).decode();expected="import {persistenceTime} from './persistenceTime';\n"+before;expected=edit(expected,'  // Final encodeSave validates the entire stamped candidate before any writes.','  savedAt=persistenceTime(savedAt);\n  // Final encodeSave validates the entire stamped candidate before any writes.');assert (root/p).read_text()==expected,'Unrequested persistence transaction change'

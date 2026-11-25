@@ -50,6 +50,8 @@ def previous(root, commit, path):
 def pinned(root, path, recorded):
     assert recorded == sha(previous(root, UI, path)), ('Changed original UI witness', path)
     if recorded != sha((root / path).read_bytes()):
+        from issue38_visual_successor import accepts as issue38_accepts
+        if issue38_accepts(path, recorded, root):return
         from p0c10_successor import accepts as p0c10_accepts
         if p0c10_accepts(path, recorded, root):return
         from mobile_town_successor import accepts
@@ -127,6 +129,8 @@ def validate_ui_successor(root=ROOT):
 
 
 def accepts_ui_successor(path, predecessor_sha, root=ROOT):
+    from issue38_visual_successor import accepts as issue38_accepts
+    if issue38_accepts(path, predecessor_sha, root):return True
     from p0c10_successor import accepts as p0c10_accepts
     if p0c10_accepts(path, predecessor_sha, root):return True
     if path not in SOURCES:
