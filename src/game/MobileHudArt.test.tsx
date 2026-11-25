@@ -56,7 +56,7 @@ it('folds the actual mobile garrison while keeping resources and game content, a
 
 it('uses the common art at desktop while keeping the full rail and garrison',()=>{
  const w=createFormalFixture(),c=w.cities[0],el=document.createElement('div');
- el.innerHTML=renderToStaticMarkup(<Shell world={w} city={c} cities={[c]} mobile={false} view="reports" onView={noop} onCity={noop} onHome={noop} onResource={noop} onMore={noop} moreOpen={false} busy={false} unread={8} alerts={1} mobileShortcuts={[]}/>);
+ el.innerHTML=renderToStaticMarkup(<Shell world={w} city={c} cities={[c]} mobile={false} view="reports" onView={noop} onCity={noop} onHome={noop} onResource={noop} onMore={noop} moreOpen={false} busy={false} unread={8} alerts={1} mobileShortcuts={[]}>{null}</Shell>);
  expect(el.querySelectorAll('.desktop-layout .resource img.hud-pictogram')).toHaveLength(4);
  expect(el.querySelectorAll('.left-rail nav img.hud-pictogram')).toHaveLength(NAV.length);
  expect(el.querySelector('.left-rail .active.has-unread')?.textContent).toContain('8');
