@@ -16,6 +16,14 @@ CHILD_SOURCES = {
     'src/game/formal/politicalAdmissionRuntime.test.ts',
     'src/game/formal/routing.ts',
 }
+RESEARCH_BASE = '96a264576794b701f33a0f38fbb33a34c6fec457'
+RESEARCH_IMPLEMENTATION = 'be9220837061ad55a0058839677bf5c153b3b69e'
+RESEARCH_REDUCER = 'src/game/formal/reducer.ts'
+RESEARCH_ADDITIONS = {
+    'src/game/formal/offlineCompletedResearch.test.ts',
+    'releases/notes/offline-completed-research.json',
+}
+RESEARCH_SOURCES = {RESEARCH_REDUCER, *RESEARCH_ADDITIONS}
 BOUNDARY = 'scripts/verify-projection-boundaries.mjs'
 SOURCES = {
     'docs/b10-p0-offline/LATE-LOGISTICS.md',
@@ -120,6 +128,19 @@ def exact_scope():
                 if isinstance(h, str) and len(h) == 64:
                     allowed.add(h)
 
+    # This successor only changes the reducer and adds two previously absent files.
+    assert git('rev-list', '--parents', '-n', '1', RESEARCH_IMPLEMENTATION).decode().split() == [RESEARCH_IMPLEMENTATION, RESEARCH_BASE], 'Incorrect completed-research predecessor'
+    actual = set(git('diff', '--name-only', '--no-renames', RESEARCH_BASE, RESEARCH_IMPLEMENTATION).decode().splitlines())
+    assert actual == RESEARCH_SOURCES, ('Unexpected completed-research source scope', actual ^ RESEARCH_SOURCES)
+    for path, change in changes.items():
+        assert sha(previous(RESEARCH_BASE, path)) == change['after'], ('Incorrect completed-research baseline', path)
+    assert previous(RESEARCH_BASE, BOUNDARY) == boundary_bytes(), 'Incorrect completed-research projection baseline'
+    grants[RESEARCH_REDUCER].add(changes[RESEARCH_REDUCER]['after'])
+    changes[RESEARCH_REDUCER]['after'] = sha(previous(RESEARCH_IMPLEMENTATION, RESEARCH_REDUCER))
+    for path in sorted(RESEARCH_ADDITIONS):
+        assert not git('ls-tree', '-r', '--name-only', RESEARCH_BASE, '--', path), ('Expected new completed-research file', path)
+        changes[path] = {'before': None, 'after': sha(previous(RESEARCH_IMPLEMENTATION, path))}
+        grants[path] = set()
     return changes, {path: frozenset(values) for path, values in grants.items()}
 
 
@@ -132,7 +153,7 @@ def accepts(path, predecessor, root=ROOT):
     if path == BOUNDARY:
         base_bytes = previous(BASE, BOUNDARY)
         return predecessor == sha(base_bytes) and accepts_adapter(path, base_bytes, root)
-    if path not in SOURCES | CHILD_SOURCES:
+    if path not in SOURCES | CHILD_SOURCES | RESEARCH_SOURCES:
         return False
     changes, grants = exact_scope()
     target = root / path
@@ -151,4 +172,4 @@ def validate(root=ROOT):
 if __name__ == '__main__':
     record = validate()
     print(json.dumps(record) if '--boundary-record' in sys.argv else
-          f'PASS: exact late-game implementation at {IMPLEMENTATION} and cooperation child {CHILD_IMPLEMENTATION} with historical gates unchanged.')
+          f'PASS: exact late-game implementation at {IMPLEMENTATION} and cooperation child {CHILD_IMPLEMENTATION} and completed-research successor {RESEARCH_IMPLEMENTATION} with historical gates unchanged.')
