@@ -154,13 +154,17 @@ def accepts(path, predecessor, root=ROOT):
         base_bytes = previous(BASE, BOUNDARY)
         return predecessor == sha(base_bytes) and accepts_adapter(path, base_bytes, root)
     if path not in SOURCES | CHILD_SOURCES | RESEARCH_SOURCES:
-        return False
+        from special_unit_portraits_successor import accepts as portraits
+        return portraits(path, predecessor, root)
     changes, grants = exact_scope()
     target = root / path
     return predecessor in grants[path] and target.is_file() and sha(target.read_bytes()) == changes[path]['after']
 
 
 def validate(root=ROOT):
+    from special_unit_portraits_successor import validate as validate_portraits
+    if root == ROOT:
+        validate_portraits(root)
     changes, _ = exact_scope()
     for path, change in changes.items():
         target = root / path
