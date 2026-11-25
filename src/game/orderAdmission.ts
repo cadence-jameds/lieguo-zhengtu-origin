@@ -6,7 +6,7 @@ import {buildingKind,buildingLevel} from './formal/catalogB3';
 import {buildingRequirements} from './formal/buildingDetailData';
 import {spatial} from './formal/spatial';
 import {canReinforce} from './formal/armies';
-import {empireOf,diplomaticRelation,politicalScope} from './formal/politics';
+import {embassy,empireOf,legionOf,diplomaticRelation,politicalLeader,politicalScope,type PoliticalCommand} from './formal/politics';
 import {protectedFaction} from './formal/playtest';
 
 /** The UI records only the intended action's relevant preconditions.
@@ -14,6 +14,39 @@ import {protectedFaction} from './formal/playtest';
  * an unchanged player order. The formal reducer still validates all current
  * costs, ownership, queues and requirements at admission time. */
 export type PlayerOrderBase={revision:number;fingerprint:string};
+
+/** Stamp the political parties named by the click, not the global revision. */
+function politicalIntentState(w:WorldRead,p:PoliticalCommand):unknown[]{
+ const me=w.playerFactionId,politics=w.politics;
+ const request=p.requestId?politics?.requests.find(r=>r.id===p.requestId):undefined;
+ const subjects=[...new Set([me,p.target,request?.from,request?.to])].filter(id=>id!==undefined);
+ const party=(id:typeof me)=>{
+  const faction=w.factions.find(f=>f.id===id),legion=legionOf(w,id),empire=empireOf(w,id);
+  const constituentLegions=empire?.legions.map(legionId=>{
+   const group=politics?.legions.find(l=>l.id===legionId);
+   return [legionId,group?.leader,group?.members];
+  });
+  return [id,!!faction,w.cities.some(c=>c.ownerFactionId===id),legion?.id,legion?.leader,legion?.members,empire?.id,empire?.leader,constituentLegions];
+ };
+ const groups=subjects.map(party);
+ const diplomat=p.action==='war'||p.action==='peace'||p.action==='friendly-end'||p.action==='friendly-propose'||request?.kind==='friendly';
+ const scopes=new Set(subjects.map(id=>politicalScope(w,id))),relations=(politics?.relations??[]).filter(r=>scopes.has(r.a as typeof me)&&scopes.has(r.b as typeof me));
+ const requestKind=p.action==='friendly-propose'?'friendly':p.action==='legion-apply'?'application':p.action==='legion-invite'?'invitation':p.action==='empire-propose'?'empire':undefined;
+ const recipient=p.action==='legion-apply'&&p.target?legionOf(w,p.target)?.leader:p.target;
+ const peerRequests=recipient&&requestKind?(politics?.requests??[]).filter(r=>r.kind===requestKind&&r.from===me&&r.to===recipient):[];
+ if(diplomat)return [groups,subjects.map(id=>politicalLeader(w,id)),relations,request,
+  p.action==='friendly-propose'?peerRequests:null];
+ const relevantLegions=new Set(subjects.map(id=>legionOf(w,id)?.id).filter(Boolean));
+ const relevantEmpires=new Set(subjects.map(id=>empireOf(w,id)?.id).filter(Boolean));
+ const authorityMembers=new Set(subjects);
+ for(const group of politics?.legions??[])if(relevantLegions.has(group.id)||relevantEmpires.has(group.empireId??undefined))
+  for(const member of group.members)authorityMembers.add(member);
+ // Local prerequisites, not stocks, AI turn counters or the clock. The
+ // authority sets above also cover transfer/succession candidates.
+ const eligibility=[...authorityMembers].sort().map(id=>[id,w.factions.find(f=>f.id===id)?.age,embassy(w,id)]);
+ return [groups,eligibility,relations,request,peerRequests,
+  p.action==='legion-edit'?legionOf(w,me)?.name:null,p.action==='legion-edit'?legionOf(w,me)?.description:null];
+}
 
 function intentState(w:WorldRead,p:FormalCommand,mapDigest?:string):unknown[]|undefined {
  const city=w.cities.find(c=>c.id===p.cityId);
@@ -80,7 +113,8 @@ function intentState(w:WorldRead,p:FormalCommand,mapDigest?:string):unknown[]|un
     project?[empireOf(w,faction.id)?.id,project.projectId,project.owner,project.wonder?.phase,host?.id,host?.ownerFactionId,host?empireOf(w,host.ownerFactionId)?.id:null]:null];
   }
   case 'logistics.auto.set':return[city.autoLogistics,city.buildings,construction];
-  // No automatic admission for other combat, diplomacy, withdrawal,
+  case 'politics':return politicalIntentState(w,p);
+  // No automatic admission for other combat, withdrawal,
   // disbanding or cross-city movement.
   default:return;
  }
