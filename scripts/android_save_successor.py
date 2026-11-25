@@ -115,9 +115,10 @@ def accepts(path,predecessor,root=ROOT):
 def accepts_adapter(path,before,root=ROOT):
  from ai_settlement_escort_successor import accepts_boundary
  from late_game_successor import accepts_adapter as late_adapter
+ from recruitment_tier_successor import accepts as tier
  if path not in ADAPTERS:
   from elite_recruit_successor import accepts as elite
-  return accepts_boundary(path,before,root) or elite(path,sha(before),root) or late_adapter(path,before,root)
+  return accepts_boundary(path,before,root) or elite(path,sha(before),root) or late_adapter(path,before,root) or tier(path,sha(before),root)
  r=read_record(root)
  return sha(before) in r['adapterGrants'][path] and (root/path).exists() and (root/path).read_bytes()==adapters()[path]
 def validate(root=ROOT):

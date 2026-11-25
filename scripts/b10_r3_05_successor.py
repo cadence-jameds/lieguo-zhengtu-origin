@@ -73,6 +73,9 @@ def accepts(path,predecessor,root=ROOT):
  return (path in prior.CHANGES and predecessor in p['grants'].get(path,[]) and (root/path).exists() and sha((root/path).read_bytes())==p['changes'][path]['after']) or child_accepts(path,predecessor,root)
 def accepts_adapter(path,before,root=ROOT):
  from b10_r3_06_successor import accepts_adapter as child_adapter
+ if path=='scripts/recruit_input_successor.py':
+  from recruitment_tier_successor import accepts as tier_accepts
+  if tier_accepts(path,sha(before),root):return True
  if path not in ADAPTERS:return prior.accepts_adapter(path,before,root)
  read_record(root)
  if before!=previous(BASE,path):return prior.accepts_adapter(path,before,root)

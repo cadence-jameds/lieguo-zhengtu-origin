@@ -32,6 +32,9 @@ def current(path,root=ROOT):
  if path=='src/game/presentation/DevelopmentViews.tsx':
   from issue38_visual_successor import accepts as visual
   return visual(path,RESULTS[path],root)
+ if path=='src/game/presentation/cityActions.ts':
+  from recruitment_tier_successor import accepts as tier
+  return tier(path,RESULTS[path],root)
  if path!=BOUNDARY:return False
  from late_game_successor import accepts as late
  return late(path,RESULTS[path],root)
