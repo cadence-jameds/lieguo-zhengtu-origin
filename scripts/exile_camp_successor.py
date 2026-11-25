@@ -4,12 +4,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
-    'src/game/FormalWorldMap.tsx': ('54b1cc760466b3e2739c4a27d9202091b6c7df025811fca884ee9f51c34f8c16', '9ebc882915bcead741f9cfbb282bcb1537e3a841fa89a93e02f0d1f5d2d35b18'),
-    'src/game/presentation/artInventory.ts': ('29835822a874fb7d7274505192b0cb19e16143aca33ef4bc14a835709d8fd5f7', '4b5b268157578997510c838463670409756d9b7a8f5375742e6fae682399d012'),
+    'src/game/FormalWorldMap.tsx': ('54b1cc760466b3e2739c4a27d9202091b6c7df025811fca884ee9f51c34f8c16', 'dd92780efe7d21b66c985ab8858eab84731fc47ec5ece5df3a49e955fe8e0545'),
 }
 COMPANIONS = {
-    'src/game/presentation/exileCampArt.ts': 'e7d3ad5c8bb8d7004a32840185876f3f87a5a1c0c0808025931b0e20b475af05',
-    'public/art/world-exile-camp.webp': 'e23eb7a44c2fee9286ddb7851972a8b1bbb96f195c56f64a7e6209c533deed80',
+    'src/game/presentation/exileCampArt.ts': 'c60380dc2f3646f983be2140e283e9ecb9aebaf114d19e074806cc544b44a1b7',
+    'src/game/presentation/media/world-exile-camp.webp': 'e23eb7a44c2fee9286ddb7851972a8b1bbb96f195c56f64a7e6209c533deed80',
 }
 
 def matches(root, path, digest):

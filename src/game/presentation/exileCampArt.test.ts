@@ -1,6 +1,6 @@
 import {describe,expect,it} from 'vitest';
 import {EXILE_CAMP_ART,exileCampFrame,isExileCamp} from './exileCampArt';
-import {GAME_ART,MAP_ART} from './artInventory';
+import {MAP_ART} from './artInventory';
 import {mapNodeSize} from './mapViewRules';
 import {project} from './mapGeometry';
 
@@ -19,9 +19,8 @@ describe('exile camp map art',()=>{
   expect(frame.bottom.y-frame.height*(1-416/512)).toBeCloseTo(tileCenter.y+10*zoom,8);
   expect(frame.width).toBe(size*3.4);
  });
- it('includes both distinct WebPs in the offline map asset inventory',()=>{
-  expect(MAP_ART).toContain(EXILE_CAMP_ART);
+ it('uses the packaged WebP, separately from the regular resource atlas',()=>{
+  expect(EXILE_CAMP_ART).toMatch(/world-exile-camp\.webp/);
   expect(MAP_ART).toContain('art/world-resources.webp');
-  expect(GAME_ART.filter(path=>path===EXILE_CAMP_ART)).toHaveLength(1);
  });
 });

@@ -1,6 +1,8 @@
 import type {Point} from './mapGeometry';
 
-export const EXILE_CAMP_ART='art/world-exile-camp.webp';
+import campUrl from './media/world-exile-camp.webp?url';
+
+export const EXILE_CAMP_ART=campUrl;
 export const isExileCamp=(id:string)=>id.startsWith('wild:exile-');
 
 // Alpha footprint is centered on x=192 and has its lowest solid pixel at y=416
