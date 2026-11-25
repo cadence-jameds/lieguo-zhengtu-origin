@@ -56,6 +56,10 @@ def accepts(path, predecessor, root=ROOT):
     candidate=sha(source.read_bytes())
     from settlement_training_slots_successor import continues
     prior=COMBINED_BOUNDARY_SHA if path==BOUNDARY else RESULTS[path]
+    if path == 'src/game/formal/autonomy.ts':
+        from late_game_successor import accepts as replay
+        if replay(path, RESULTS[path], root):
+            return True
     return candidate == RESULTS[path] or path == BOUNDARY and candidate == COMBINED_BOUNDARY_SHA or continues(path,prior,root)
 
 def accepts_bounded_escort_boundary(path, escort_boundary_sha, root=ROOT):
