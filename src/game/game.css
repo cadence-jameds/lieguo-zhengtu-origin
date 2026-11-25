@@ -554,3 +554,9 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 @media(min-width:1351px){
  .formal-shell.desktop-layout .desktop-resource-pictogram .hud-pictogram{width:18px;height:18px}
 }
+
+/* Remove the garrison from layout while folded, not only from sight. */
+.formal-shell.mobile-layout .mobile-garrison{grid-column:1/-1;min-width:0}
+.formal-shell.mobile-layout .mobile-garrison-toggle{display:flex;justify-content:center;align-items:center;gap:5px;min-height:26px;width:100%;padding:2px 8px;border:0;border-block-start:1px solid var(--line);border-radius:0;background:transparent;color:var(--muted);font-size:11px;line-height:1.2}
+.mobile-garrison-toggle svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.mobile-garrison-toggle:focus-visible{outline-offset:-2px}
