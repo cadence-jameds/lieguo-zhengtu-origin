@@ -1,3 +1,5 @@
+import {QUEUE_CAPACITY} from './queueCapacity';
+import {trainingSlotsUsed} from './trainingSlots';
 import type {WorldRead} from '../presentationModel';
 import {cityId,projectId,sequenceKey} from './ids';
 import type {DevelopmentCommand,FormalCity,FormalEvent,FormalOrder,FormalWorld} from './model';
@@ -24,6 +26,7 @@ export function applySettlementCommand(w:FormalWorld,c:FormalCity,o:FormalOrder,
  const f=w.factions.find(f=>f.id===o.issuerId)!,projects=w.settlements??=[],existing=projects.find(p=>p.sourceCityId===c.id&&p.phase!=='travelling');
  if(p.type==='settlement.prepare'){
   requireRule(!existing&&(f.age??0)>=2&&buildingLevel(c,'castle')>=1&&c.population>=2000,'拓殖需要城堡時代、城堡及2000人口，且來源城不可有既存拓殖隊。');
+  requireRule(trainingSlotsUsed(w,c)<QUEUE_CAPACITY,`部隊訓練已達 ${QUEUE_CAPACITY} 項上限。`);
   spend(c,SETTLEMENT_COST);c.population-=400;const id=projectId(sequenceKey(w.sequences.project++)),prepDurationMs=Math.round(4*HOUR*producerMultiplier(buildingLevel(c,'castle'))),prepEventId=enqueue(w,s,{type:'settlement.ready',projectId:id,at:w.time+prepDurationMs});
   (w.settlements??=[]).push({projectId:id,commandId:o.commandId,ownerFactionId:o.issuerId,sourceCityId:c.id,phase:'preparing',population:400,resourcesPaid:{...SETTLEMENT_COST},startedAt:w.time,prepDurationMs,prepEventId});return;
  }

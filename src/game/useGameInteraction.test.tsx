@@ -8,6 +8,7 @@ import {fixtureStream} from './formal/projectionFixtureSupport';
 import {fixtureProjection} from './formal/projectionTestSupport';
 import type {FormalWorld} from './formal/model';
 import {governanceBase} from './governanceAdmission';
+import {order} from './formal/testSupport';
 import {playerOrderBase} from './orderAdmission';
 vi.mock('./saveLock',()=>({withSaveLock:async(_locks:unknown,_signal:unknown,run:()=>Promise<void>)=>run()}));
 let root:Root,container:HTMLDivElement,engine:ReturnType<typeof useGame>,port:FakeWorker,w:FormalWorld;
@@ -23,6 +24,7 @@ const state=(world:FormalWorld,base=0)=>({type:'state',commandEpoch:'1234567890a
 function expectDisplayed(source:FormalWorld){expect(engine.world).toEqual(fixtureProjection(source,engine.world!.projection));expect(engine.world).not.toHaveProperty('commandReceipts');expect(engine.world).not.toHaveProperty('ledger');}
 function Surface(){engine=useGame();return <button disabled={engine.inputBusy} onClick={()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'改名'})}>確認</button>;}
 beforeEach(async()=>{
+ sessionStorage.removeItem('formal-command-drafts-v1');
  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT',true);vi.stubGlobal('Worker',FakeWorker);Object.defineProperty(navigator,'locks',{configurable:true,value:{}});w=createFormalFixture();container=document.createElement('div');document.body.append(container);root=createRoot(container);await act(async()=>root.render(<Surface/>));await act(async()=>port.emit(state(w)));port.sent=[];
 });
 afterEach(async()=>{await act(async()=>root.unmount());container.remove();delete (navigator as any).locks;vi.unstubAllGlobals();});
@@ -209,4 +211,28 @@ it('never confirms an old campaign draft against another campaign with matching 
  await act(async()=>port.emit({type:'commandUnavailable',availability:'retired',campaignId:original.campaignId,commandId:original.commandId}));const row=engine.commandRows.at(-1)!;
  const other=structuredClone(w);other.campaignId='campaign:other' as typeof other.campaignId;await act(async()=>port.emit(state(other)));const sent=port.sent.length;
  await act(async()=>engine.confirmCommand(row));expect(port.sent).toHaveLength(sent);expect(engine.feedback.text).toContain('另一戰役');expect(sessionStorage.getItem('formal-command-drafts-v1')).toContain(original.commandId);
+});
+
+it('keeps old outcomes queryable without announcing them, but flags new or resumed conflicts',async()=>{
+ const old=order(w,'historical',{type:'city.rename',cityId:fixtureIds.home,name:'舊指令'});
+ const resumed=order(w,'resume',{type:'city.rename',cityId:fixtureIds.support,name:'補做'});
+ const ack=(order:typeof old)=>({commandId:order.commandId,status:'rejected',requiresConfirmation:true,revision:0,reason:'世界狀態已變更'});
+ const historical={commandId:old.commandId,order:old,state:'needs-confirmation',sequence:1,ack:ack(old)};
+ const foreign={...historical,order:{...old,campaignId:'campaign:other'}};
+ await act(async()=>port.emit({type:'commandList',rows:[foreign]}));
+ expect(engine.commandRows.find(r=>r.order.campaignId===foreign.order.campaignId)?.outsideActiveCampaign).toBe(true);
+ const pending={commandId:resumed.commandId,order:resumed,state:'pending',sequence:2};
+ await act(async()=>port.emit({type:'commandList',rows:[historical,pending]}));
+ const get=(id:string)=>engine.commandRows.find(r=>r.commandId===id&&r.order.campaignId===w.campaignId)!;
+ expect(get(old.commandId)).toMatchObject({order:old,state:'needs-confirmation'});
+ expect(get(old.commandId).announceTerminalFailure).toBeUndefined();
+ await act(async()=>engine.queryCommand(get(old.commandId)));
+ await act(async()=>{port.emit({type:'commandStatus',row:historical});port.emit({type:'commandAck',campaignId:w.campaignId,ack:ack(old)});});
+ expect(get(old.commandId).announceTerminalFailure).toBeUndefined();
+ await act(async()=>port.emit({type:'commandAck',campaignId:w.campaignId,ack:ack(resumed)}));
+ expect(get(resumed.commandId)).toMatchObject({order:resumed,state:'needs-confirmation',announceTerminalFailure:true});
+ await act(async()=>engine.issue({type:'city.rename',cityId:fixtureIds.home,name:'新指令'}));
+ const fresh=port.sent.at(-1)!.order;
+ await act(async()=>port.emit({type:'commandAck',campaignId:w.campaignId,ack:ack(fresh)}));
+ expect(get(fresh.commandId)).toMatchObject({order:fresh,state:'needs-confirmation',announceTerminalFailure:true});
 });

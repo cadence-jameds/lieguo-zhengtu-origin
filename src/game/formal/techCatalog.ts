@@ -1774,7 +1774,7 @@ export const TECH_CATALOG:Readonly<Record<string,TechDefinition>>=Object.freeze(
     "civilizationId": null,
     "scope": "modern-common",
     "category": "general",
-    "effect": "破障車破牆與自走火炮對建築／資源田／奇觀破壞 +20%（奇觀任務待B9-5整合）",
+    "effect": "破障車對城牆、自走火炮對建築、資源田與世界奇觀的破壞力 +20%。",
     "status": "CALIBRATE"
   },
   {

@@ -19,7 +19,7 @@ import {resourceKeys,zeroResources} from './model';
 import {buildingCost,buildingKind,buildingLevel,FIELD_PRODUCTION,fieldCost,HOUSING,storageCapacity,resourceBoostMultiplier,monasteryMultiplier,economyTechMultiplier,monasteryGoldPerHour} from './catalogB3';
 import {EventScheduler} from './scheduler';
 import {spatial} from './spatial';
-import {route} from './routing';
+import {logisticsRoute} from './logisticsRoute';
 import {armyUpkeep} from './military';
 import {HOUR} from './time';
 export {HOUR} from './time';
@@ -181,9 +181,10 @@ export function projectShipmentRecord(t:LogisticsShipment,projectId:ProjectId):S
 export function dispatchLogistics(w:FormalWorld,c:FormalCity,order:FormalOrder,destinationCityId:CityId,resources:Resources,s:EventScheduler,projectId?:ProjectId,purpose:LogisticsPurpose='manual'){
  requireRule(c.economy,'此操作需要正式城市經濟。');settleCity(w,c);
   const dest=spatial(w).cities.get(destinationCityId);requireRule(dest&&(projectId!==undefined||dest.id!==c.id)&&canReinforce(w,order.issuerId,dest.ownerFactionId)&&dest.economy,'目的地必須是自己或合法友方的另一座城市。');settleCity(w,dest);
-  const total=resourceKeys.reduce((n,r)=>n+resources[r],0),caravans=Math.ceil(total/CARAVAN_CAPACITY),busy=(w.logistics??[]).filter(t=>t.sourceCityId===c.id).reduce((n,t)=>n+t.caravans,0);
-  requireRule(total>0&&caravans<=buildingLevel(c,'market')-busy&&caravans<=logisticsAvailable(w,c,purpose,dest.id),'市場可用商隊不足。');const cap=storageCapacity(dest);if(!projectId)requireRule(resourceKeys.every(r=>resources[r]+dest.stock[r]+dest.economy!.reservedIncoming[r]<=cap),'目的地容量不足或已預約。');
-  const path=route(w,c,dest),f=w.factions.find(f=>f.id===order.issuerId)!,duration=Math.max(1,Math.ceil(path.distance*60000*(f.techIds.includes('logistics.dispatch')?.9:1))),arrivalAt=w.time+duration,returnAt=arrivalAt+duration;
+  const total=resourceKeys.reduce((n,r)=>n+resources[r],0),caravans=Math.ceil(total/CARAVAN_CAPACITY);
+  // Purpose availability already bounds total busy caravans by min(15, market level).
+  requireRule(total>0&&caravans<=logisticsAvailable(w,c,purpose,dest.id),'市場可用商隊不足。');const cap=storageCapacity(dest);if(!projectId)requireRule(resourceKeys.every(r=>resources[r]+dest.stock[r]+dest.economy!.reservedIncoming[r]<=cap),'目的地容量不足或已預約。');
+  const path=logisticsRoute(w,c,dest),f=w.factions.find(f=>f.id===order.issuerId)!,duration=Math.max(1,Math.ceil(path.distance*60000*(f.techIds.includes('logistics.dispatch')?.9:1))),arrivalAt=w.time+duration,returnAt=arrivalAt+duration;
   spend(c,resources);if(!projectId)for(const r of resourceKeys)dest.economy.reservedIncoming[r]+=resources[r];
   const id=shipmentId(sequenceKey(w.sequences.project++)),arrivalEventId=enqueue(w,s,{type:'logistics.arrive',shipmentId:id,at:arrivalAt}),returnEventId=enqueue(w,s,{type:'logistics.return',shipmentId:id,at:returnAt});
   (w.logistics??=[]).push({purpose,shipmentId:id,...(projectId?{projectId}:{}),commandId:order.commandId,sourceFactionId:order.issuerId,sourceCityId:c.id,destinationCityId:dest.id,resources:{...resources},caravans,path:path.path,distance:path.distance,dispatchedAt:w.time,arrivalAt,returnAt,arrivalEventId,returnEventId,phase:'outbound',authorizationSnapshot:{sourceCityOwnerFactionId:c.ownerFactionId,contributorEmpireId:f.empireId,checkedAt:w.time}});return;
