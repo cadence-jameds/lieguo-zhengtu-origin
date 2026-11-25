@@ -11,8 +11,21 @@ class AndroidSaveSuccessorTests(unittest.TestCase):
   for p,v in r['changes'].items():
    if v['before']:self.assertTrue(gate.accepts(p,v['before'],self.root))
    self.assertFalse(gate.accepts(p,'0'*64,self.root))
-  for p in ['src/game/formal/saveCodec.ts','src/game/formal/schema.ts','src/game/formal/reducer.ts','src/game/formal/autonomy.ts','src/game/presentation/ProtectionStatus.tsx','vite.config.ts']:
+  for p in ['src/game/formal/saveCodec.ts','src/game/formal/schema.ts','src/game/presentation/ProtectionStatus.tsx','vite.config.ts']:
    self.assertFalse(gate.accepts(p,gate.sha(gate.previous(gate.BASE,p)),self.root))
+  ai='src/game/formal/autonomy.ts'
+  from elite_recruit_successor import accepts
+  predecessor=gate.sha(gate.previous(gate.BASE,ai))
+  self.assertEqual(gate.accepts(ai,predecessor,self.root),accepts(ai,predecessor,self.root))
+ def test_offline_successor_grants_only_the_exact_reducer(self):
+  import offline_command_evidence_successor as child
+  child.validate(gate.ROOT)
+  p=child.REDUCER;before=gate.sha(gate.previous(gate.BASE,p));f=self.root/p
+  self.assertTrue(gate.accepts(p,before,self.root))
+  self.assertFalse(gate.accepts(p,'0'*64,self.root))
+  self.assertFalse(child.accepts('src/game/formal/scheduler.ts',before,self.root))
+  f.write_bytes(f.read_bytes()+b'\n');self.assertFalse(gate.accepts(p,before,self.root))
+  with self.assertRaises(AssertionError):gate.validate(self.root)
  def test_local_record_cannot_bless_unsafe_source_or_invariant_edits(self):
   original=(self.root/gate.RECORD).read_bytes()
   samples=[('changes','src/game/persistence.ts'),('changes','src/game/persistenceTime.ts'),('changes','src/game/runtime.worker.ts'),('changes','src/game/saveStatus.ts'),('changes','src/game/presentation/GameNotices.tsx'),('invariants','src/game/formal/saveCodec.ts'),('invariants','src/game/formal/schema.ts'),('invariants','src/game/replayFence.ts'),('invariants','src/game/formal/autonomy.ts'),('invariants','src/game/presentation/ProtectionStatus.tsx'),('invariants','vite.config.ts'),('historical','docs/validation/global-protection/compatibility.json')]
@@ -27,4 +40,63 @@ class AndroidSaveSuccessorTests(unittest.TestCase):
  def test_exact_adapters_and_unknown_predecessors(self):
   for p in gate.ADAPTERS:
    self.assertTrue(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root));self.assertFalse(gate.accepts_adapter(p,b'forged',self.root));f=self.root/p;f.write_bytes(f.read_bytes()+b'\n');self.assertFalse(gate.accepts_adapter(p,gate.previous(gate.BASE,p),self.root))
+class ReminderScopeTests(unittest.TestCase):
+ def test_exact_successor_and_negative_controls(self):
+  try:import command_notice_successor as notice
+  except ImportError:self.fail('Missing command reminder successor')
+  with tempfile.TemporaryDirectory(prefix='command-notice-proof-') as directory:
+   root=Path(directory)
+   after,grants=notice.records()
+   for path in after:
+    output=root/path;output.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(gate.ROOT/path,output)
+   notice.validate(root)
+   for path in notice.SOURCES:
+    predecessor=notice.sha(notice.original(notice.BASE,path));self.assertIn(predecessor,grants[path])
+    self.assertTrue(gate.accepts(path,predecessor,root));self.assertFalse(gate.accepts(path,'0'*64,root))
+    output=root/path;original=output.read_bytes()
+    try:
+     output.write_bytes(original+b'\n')
+     self.assertFalse(gate.accepts(path,predecessor,root))
+     with self.assertRaises(AssertionError):notice.validate(root)
+    finally:output.write_bytes(original)
+   unrelated='src/game/persistence.ts'
+   self.assertFalse(notice.accepts(unrelated,notice.sha(notice.original(notice.BASE,unrelated)),root))
+class AISettlementEscortProof(unittest.TestCase):
+ def test_exact_change_scope_and_tamper(self):
+  import ai_settlement_escort_successor as proof
+  with tempfile.TemporaryDirectory(prefix='escort-proof-') as directory:
+   root=Path(directory)
+   for path in proof.SCOPE:
+    f=root/path;f.parent.mkdir(parents=True,exist_ok=True);f.write_bytes((proof.ROOT/path).read_bytes())
+   proof.validate(root)
+   predecessor=proof.sha(proof.git('show',proof.BASE+':'+proof.SOURCE))
+   self.assertTrue(proof.accepts(proof.SOURCE,predecessor,root))
+   self.assertFalse(proof.accepts(proof.SOURCE,'0'*64,root))
+   self.assertFalse(proof.accepts('src/game/formal/autonomy.ts',predecessor,root))
+   for path in proof.SCOPE:
+    f=root/path;b=f.read_bytes();f.write_bytes(b+b'\n')
+    with self.assertRaises(AssertionError):proof.validate(root)
+    if path==proof.SOURCE:self.assertFalse(proof.accepts(path,predecessor,root))
+    f.write_bytes(b)
+
+class EscortProjectionAdapterProof(unittest.TestCase):
+ def test_only_exact_adapter_and_predecessor(self):
+  import ai_settlement_escort_successor as proof
+  with tempfile.TemporaryDirectory(prefix='escort-projection-proof-') as directory:
+   root=Path(directory);output=root/proof.BOUNDARY
+   output.parent.mkdir(parents=True,exist_ok=True)
+   good=(proof.ROOT/proof.BOUNDARY).read_bytes()
+   before=proof.git('show',proof.BASE+':'+proof.BOUNDARY)
+   output.write_bytes(good)
+   self.assertTrue(gate.accepts_adapter(proof.BOUNDARY,before,root))
+   self.assertFalse(gate.accepts_adapter(proof.BOUNDARY,before+b'\n',root))
+   self.assertFalse(gate.accepts_adapter('scripts/verify-runtime-parity.mjs',before,root))
+   output.write_bytes(good+b'\n')
+   self.assertFalse(gate.accepts_adapter(proof.BOUNDARY,before,root))
+
+# Include exact branch-composition negatives in the existing immutable CI step.
+from test_elite_recruit_successor import ExactEliteSuccessor
+from test_settlement_training_slots_successor import ExactSettlementTrainingSlots
+from test_late_game_successor import LateGameSuccessorTests
+
 if __name__=='__main__':unittest.main()
