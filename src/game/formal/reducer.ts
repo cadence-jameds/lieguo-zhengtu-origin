@@ -44,10 +44,12 @@ export function orderFingerprint(order:FormalOrder):string {
 function report(w:FormalWorld,title:string,text:string,owner:FactionId=w.playerFactionId):FormalReport {
  const sequence=w.sequences.report++;return{id:reportId(sequenceKey(sequence)),sequence,campaignId:w.campaignId,ownerFactionId:owner,at:w.time,category:'research',title,text};
 }
-type ReplayAdmission={offline:boolean;receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shareCommandFacts:boolean;fullCommandClone:boolean};
+type ReplayAdmission={offline:boolean;receipts:Map<CommandId,CommandReceipt>;indexedReceipts:number;shareAutonomy:boolean;shareCityDraft:boolean;shareCommandFacts:boolean;completedResearch?:WeakSet<ResearchProject>;fullCommandClone:boolean};
 /** Scan once before the first replay command draft. Engine writers add fresh snapshots/records and IDs, never cross-domain objects. */
-function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'shareCommandFacts'|'fullCommandClone'> {
+function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmission,'shareAutonomy'|'shareCityDraft'|'shareCommandFacts'|'completedResearch'|'fullCommandClone'> {
  const readonly=1,autonomy=2,mutable=4,facts=8,ownership=new WeakMap<object,number>(),owners=new WeakMap<object,number>();
+ const duplicates=offline?new WeakSet<object>():undefined;
+ let researchGraphPlain=true;
  let fullCommandClone=false,shareAutonomy=!!current.autonomy,shareCityDraft=true,nextOwner=0;
  const data=current.commandFacts;
  const plain=(value:unknown)=>!!value&&typeof value==='object'&&Object.getPrototypeOf(value)===Object.prototype;
@@ -63,6 +65,11 @@ function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmis
     const value=pending.pop();if(value===null||typeof value!=='object')continue;
     const priorOwner=owners.get(value);if(priorOwner!==undefined&&priorOwner!==owner)shareCityDraft=false;else owners.set(value,owner);
     const previous=ownership.get(value)??0,owned=previous|domain;
+    if(duplicates){
+     if(previous)duplicates.add(value);
+     // A Map/Set/etc. could hide a reference from Object.values.
+     if(!plain(value)&&!(Array.isArray(value)&&Object.getPrototypeOf(value)===Array.prototype))researchGraphPlain=false;
+    }
     // A repeated evidence node (within facts or across roots) needs the existing clone.
     if(shareCommandFacts&&((previous!==0&&owned&facts)||!plain(value)&&!Array.isArray(value)))shareCommandFacts=false;
     if((previous&domain)===domain)continue;
@@ -81,16 +88,40 @@ function replayClonePolicy(current:FormalWorld,offline:boolean):Pick<ReplayAdmis
  if(offline){delete body.commandFacts;collect([data],mutable|facts);}
  collect(Object.values(body),mutable);
  collect(current.cities,mutable);
- return{fullCommandClone,shareCommandFacts:shareCommandFacts&&!fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
+ // Only initial completed identities are eligible. Do not trust newly completed
+ // shallow spreads (their former mutable nested objects were not audited here).
+ const completedResearch=duplicates&&researchGraphPlain&&!fullCommandClone?auditedCompletedResearch(current.researchProjects,duplicates,plain):undefined;
+ return{fullCommandClone,completedResearch,shareCommandFacts:shareCommandFacts&&!fullCommandClone,shareAutonomy:shareAutonomy&&!fullCommandClone,shareCityDraft:shareCityDraft&&!fullCommandClone};
+}
+/** Completed projects are never edited by command handlers. Keep the original
+ * native graph clone if any candidate node is shared or has non-data shape. */
+function auditedCompletedResearch(projects:ResearchProject[],duplicates:WeakSet<object>,plain:(value:unknown)=>boolean){
+ if(!Array.isArray(projects)||Object.getPrototypeOf(projects)!==Array.prototype||duplicates.has(projects))return;
+ const selected=new WeakSet<ResearchProject>();let any=false;
+ for(const project of projects){
+  if(!plain(project)||!['funding','researching','completed'].includes(project.phase))return;
+  if(project.phase!=='completed')continue;
+  const pending:unknown[]=[project];
+  while(pending.length){
+   const value=pending.pop();
+   if(value===null||typeof value!=='object')continue;
+   if(duplicates.has(value)||!plain(value)&&!(Array.isArray(value)&&Object.getPrototypeOf(value)===Array.prototype))return;
+   for(const item of Object.values(value))pending.push(item);
+  }
+  selected.add(project);any=true;
+ }
+ return any?selected:undefined;
 }
 /** Only the isolated replay uses this draft. Commands never mutate worldLayer or existing receipt rows. */
-function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean,shareCommandFacts:boolean):FormalWorld {
- const body={...current,commandReceipts:[],completionReceipts:[]};delete body.ledger;
+function cloneReplayCommandDraft(current:FormalWorld,shareAutonomy:boolean,shareCommandFacts:boolean,completedResearch?:WeakSet<ResearchProject>):FormalWorld {
+ const body:Omit<FormalWorld,'researchProjects'>&{researchProjects:(ResearchProject|undefined)[]}={...current,commandReceipts:[],completionReceipts:[]};delete body.ledger;
  if(Object.hasOwn(current,'worldLayer'))body.worldLayer=undefined;
  if(shareAutonomy)body.autonomy=undefined;
  if(shareCommandFacts)body.commandFacts=undefined;
  if(current.combat)body.combat={...current.combat,receipts:[]};
+ if(completedResearch)body.researchProjects=current.researchProjects.map(p=>completedResearch.has(p)?undefined:p);
  const w=structuredClone(body) as FormalWorld;
+ if(completedResearch)for(const [i,p] of current.researchProjects.entries())if(completedResearch.has(p))w.researchProjects[i]=p;
  copyHistory(current,w,true);w.completionReceipts=current.completionReceipts.slice();
  if(Object.hasOwn(current,'worldLayer'))w.worldLayer=current.worldLayer;
  if(shareAutonomy)w.autonomy=current.autonomy;
@@ -113,7 +144,7 @@ function cloneOrderDraft(current:FormalWorld,order:FormalOrder,replay?:ReplayAdm
   const index=current.cities.findIndex(city=>city.id===order.payload.cityId);
   if(index>=0)return cloneReplayCityDraft(current,index,replay.shareCommandFacts);
  }
- return cloneReplayCommandDraft(current,replay.shareAutonomy&&type!=='politics',replay.shareCommandFacts);
+ return cloneReplayCommandDraft(current,replay.shareAutonomy&&type!=='politics',replay.shareCommandFacts,replay.completedResearch);
 }
 function replayReceipt(current:FormalWorld,admission:ReplayAdmission,id:CommandId){
  if(current.ledger)return findReceipt(current,id);
