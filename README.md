@@ -26,7 +26,9 @@
 
 ## 開發狀態
 
-這是持續開發中的公開試玩，並非正式驗收完成的產品。城市、地圖、軍隊及外交等入口已存在；完整長局、效能、離線恢復與裝置相容性仍需驗證。Android 存檔時間與玩家錯誤提示的修正仍在 [Draft PR #66](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/66)，不代表已合併或部署。既有 B5 E1 HOLD、Astra Gate 非 PASS 與實體手機待驗收的歷史證據仍保留；後續裁決以相關正式紀錄為準。
+這是持續開發中的公開試玩，並非正式驗收完成的產品。城市、地圖、軍隊及外交等入口已存在；完整長局、效能、離線恢復與裝置相容性仍需驗證。Android 背景存檔時間與錯誤提示的修正已在 [PR #66](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/66) 合併。這與 [Issue #18](https://github.com/cadence-jameds/lieguo-zhengtu-origin/issues/18) 的 Service Worker 更新問題不同；更新流程已有獨立修正（[#19](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/19)、[#36](https://github.com/cadence-jameds/lieguo-zhengtu-origin/pull/36)），原始 Android 實機情境仍待複核。既有 B5 E1 HOLD、Astra Gate 非 PASS 與實體手機待驗收的歷史證據仍保留；後續裁決以相關正式紀錄為準。
+
+[![目前部署版本、日期、更新重點及 Commit；點擊可讀文字紀錄](https://cadence-jameds.github.io/lieguo-zhengtu-origin/release/latest.svg)](https://cadence-jameds.github.io/lieguo-zhengtu-origin/release/)
 
 [線上版本與更新紀錄](https://cadence-jameds.github.io/lieguo-zhengtu-origin/release/) · [版本資料](https://cadence-jameds.github.io/lieguo-zhengtu-origin/version.json) · [CI](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/workflows/ci.yml) · [Pages 部署](https://github.com/cadence-jameds/lieguo-zhengtu-origin/actions/workflows/deploy-pages.yml)
 
