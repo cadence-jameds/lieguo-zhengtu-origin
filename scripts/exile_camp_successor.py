@@ -17,5 +17,9 @@ def matches(root, path, digest):
 
 def accepts(path, predecessor, root=ROOT):
     entry = SOURCES.get(path)
-    return bool(entry and predecessor == entry[0] and matches(root, path, entry[1])
-                and all(matches(root, p, h) for p, h in COMPANIONS.items()))
+    return bool(entry and predecessor == entry[0] and matches(root, path, entry[1]))
+
+
+def validate_assets(root=ROOT):
+    for path, digest in COMPANIONS.items():
+        assert matches(root, path, digest), ('Unexpected exile camp asset', path)
