@@ -98,6 +98,7 @@ class EscortProjectionAdapterProof(unittest.TestCase):
 from test_elite_recruit_successor import ExactEliteSuccessor
 from test_settlement_training_slots_successor import ExactSettlementTrainingSlots
 from test_late_game_successor import LateGameSuccessorTests
+from test_political_community_successor import PoliticalCommunitySuccessorTest
 
 class HostileCaravanOverlayProof(unittest.TestCase):
  def test_only_exact_overlay_from_known_versions(self):
