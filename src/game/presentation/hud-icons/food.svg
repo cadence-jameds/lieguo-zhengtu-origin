@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64"><defs><g id="ear"><path d="M0 37c2-10 2-16 1-27" fill="none" stroke="#c39851" stroke-width="2.3" stroke-linecap="round" /><path d="M1 13C-3 9-2 4 1 0c4 4 4 8 0 13ZM0 19c-7-1-9-5-9-10 6 1 9 5 9 10Zm2 1c1-6 4-9 9-10 0 5-3 9-9 10ZM0 27c-7-1-9-5-9-10 6 1 9 5 9 10Zm2 1c1-6 4-9 9-10 0 5-3 9-9 10Z" fill="url(#wheat)" stroke="#562e19" stroke-width="1" stroke-linejoin="round" /><path d="M1 3v8m-7 2 4 4m9-3-3 4m-11 4 5 4m10-4-4 4" fill="none" stroke="#fff0a7" opacity=".68" stroke-width="1" stroke-linecap="round" /></g>
+<linearGradient id="wheat" x2="0" y2="1"><stop stop-color="#fff2ac" /><stop offset=".45" stop-color="#eac66f" /><stop offset="1" stop-color="#a77432" /></linearGradient>
+<linearGradient id="cloth" x2="1" y2="1"><stop stop-color="#d28f72" /><stop offset=".52" stop-color="#ae6555" /><stop offset="1" stop-color="#723c36" /></linearGradient>
+</defs><g><ellipse cx="32" cy="56" rx="22" ry="4" fill="#0c120d" opacity=".65" />
+<path d="M32 56c-3-15-8-20-15-28M33 55c4-16 8-23 15-31m-15 33L31 29" fill="none" stroke="#a57b41" stroke-width="2.8" stroke-linecap="round" />
+<use xlink:href="#ear" transform="translate(11 13) rotate(-30) scale(.95)" /><use xlink:href="#ear" transform="translate(50 12) rotate(28) scale(.92)" /><use xlink:href="#ear" transform="translate(30 5) scale(1.06)" />
+<path d="m25 46 15 1-1 6-13-1Z" fill="url(#cloth)" stroke="#472b20" stroke-width="1.4" /><path d="m26 48 12 1" stroke="#edaf79" stroke-width="1.05" /><path d="m28 52-5 6 6-2 3 3 2-6" fill="#925547" stroke="#4d2b21" stroke-width="1.15" /></g>
+</svg>

@@ -539,3 +539,11 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 .home-entry-actions .home-settings-button{grid-column:1/-1;grid-row:2}
 .home-entry-actions .home-storage-button{grid-column:1/-1;grid-row:3}
 .home-entry-actions .home-recover{grid-column:1/-1;grid-row:4;white-space:normal}
+
+/* Accepted mobile art: keep the existing shortcut targets, scrolling and badges. */
+.hud-pictogram{display:block;width:24px;height:24px;flex:none;object-fit:contain;pointer-events:none}
+.hud-pictogram-label{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.mobile-more.mobile-more-single{grid-template-columns:minmax(0,1fr)}
+.mobile-nav-custom button>span:has(>.hud-pictogram){display:grid;place-items:center;line-height:1}
+.mobile-nav-custom .hud-pictogram{width:28px;height:28px}
+.mobile-resources .hud-pictogram{width:16px;height:16px}
