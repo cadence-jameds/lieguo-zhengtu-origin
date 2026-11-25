@@ -8,4 +8,51 @@ export class CivilianCache extends ArmyRouteCache {private reversed=new WeakMap<
  position(r:CivilianRoute,time:number){let lengths=this.distances.get(r.path);if(!lengths){lengths=[0];for(let i=1;i<r.path.length;i++)lengths.push(lengths[i-1]+Math.hypot(r.path[i].x-r.path[i-1].x,r.path[i].y-r.path[i-1].y));this.distances.set(r.path,lengths);}const distance=Math.max(0,Math.min(1,(time-r.start)/Math.max(1,r.end-r.start)))*lengths.at(-1)!;let lo=1,hi=lengths.length-1;while(lo<hi){const mid=(lo+hi)>>1;if(lengths[mid]<distance)lo=mid+1;else hi=mid;}const a=r.path[lo-1],b=r.path[lo],fraction=(distance-lengths[lo-1])/Math.max(.000001,lengths[lo]-lengths[lo-1]);return{x:a.x+(b.x-a.x)*fraction,y:a.y+(b.y-a.y)*fraction};}}
 /** IDs remain Shipment/Project/Craftsman identities; no fabricated ArmyId or DEMO march state. */
 export function civilianRoutes(w:WorldRead,cache:CivilianCache){const out:CivilianRoute[]=[];for(const s of w.logistics??[])out.push({id:s.shipmentId,owner:s.sourceFactionId,path:s.phase==='outbound'?s.path:cache.reverse(s.path),start:s.phase==='outbound'?s.dispatchedAt:s.arrivalAt,end:s.phase==='outbound'?s.arrivalAt:s.returnAt,glyph:'商'});for(const s of w.settlements??[])if(s.phase==='travelling'&&s.path&&s.arrivalAt&&s.distance)out.push({id:s.projectId,owner:s.ownerFactionId,path:s.path,start:s.arrivalAt-Math.max(1,Math.ceil(s.distance*45000)),end:s.arrivalAt,glyph:'拓'});for(const c of w.extinction?.craftsmen??[])if(c.eventId&&c.arrivalAt&&c.path.length>1)out.push({id:c.id,owner:c.ownerFactionId,path:c.path,start:c.departedAt,end:c.arrivalAt,glyph:'工'});return out;}
-export function paintCivilians(ctx:CanvasRenderingContext2D,w:WorldRead,time:number,cam:{x:number;y:number;z:number},width:number,height:number,screen:(p:Point)=>Point,cache:CivilianCache){let markers=0,animated=false;const ids=new Set<string>();for(const r of civilianRoutes(w,cache)){if(r.path.length<2)continue;ids.add(r.id);const geometry=cache.get(r.id,r.path,r.start,r.end);if(!routeVisible(geometry,cam,width,height))continue;if(time<r.end)animated=true;const p=screen(cache.position(r,time));if(p.x< -12||p.x>width+12||p.y< -12||p.y>height+12)continue;const own=r.owner===w.playerFactionId,color=own?'#e6c46b':{own:'#e6c46b',friendly:'#69cb7e',war:'#f0786d',neutral:'#bec1b7'}[diplomaticRelation(w,w.playerFactionId,r.owner)];ctx.save();ctx.translate(width/2-cam.x*cam.z,height/2-cam.y*cam.z);ctx.scale(cam.z,cam.z);ctx.strokeStyle=color+'88';ctx.lineWidth=1.5/cam.z;ctx.setLineDash([5/cam.z,5/cam.z]);if(geometry.path)ctx.stroke(geometry.path);else{ctx.beginPath();geometry.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();}ctx.restore();ctx.save();ctx.fillStyle=color;ctx.strokeStyle='#15251f';ctx.beginPath();ctx.arc(p.x,p.y,Math.max(3,Math.min(6,cam.z*5)),0,Math.PI*2);ctx.fill();ctx.stroke();if(own&&cam.z>=.4){ctx.font='10px system-ui';ctx.fillText(r.glyph,p.x+7,p.y);}ctx.restore();markers++;}cache.prune(ids);return{markers,animated,cacheSize:cache.size,hits:cache.hits,misses:cache.misses};}
+const hostileCargoColor='#ffab8c';
+const hostileCargoOutline='#321b1b';
+function strokeRoute(ctx:CanvasRenderingContext2D,path:Path2D|undefined){if(path)ctx.stroke(path);else ctx.stroke();}
+
+/** Geometry/visibility stay shared with other routes; only war logistics get a contrast treatment. */
+export function paintCivilians(ctx:CanvasRenderingContext2D,w:WorldRead,time:number,cam:{x:number;y:number;z:number},width:number,height:number,screen:(p:Point)=>Point,cache:CivilianCache){
+ let markers=0,animated=false;const ids=new Set<string>();
+ for(const r of civilianRoutes(w,cache)){
+  if(r.path.length<2)continue;
+  ids.add(r.id);const geometry=cache.get(r.id,r.path,r.start,r.end);
+  if(!routeVisible(geometry,cam,width,height))continue;
+  if(time<r.end)animated=true;
+  const p=screen(cache.position(r,time));
+  if(p.x< -12||p.x>width+12||p.y< -12||p.y>height+12)continue;
+  const own=r.owner===w.playerFactionId,relation=own?'own':diplomaticRelation(w,w.playerFactionId,r.owner);
+  const hostileCargo=r.glyph==='商'&&relation==='war';
+  const color={own:'#e6c46b',friendly:'#69cb7e',war:'#f0786d',neutral:'#bec1b7'}[relation];
+  ctx.save();ctx.translate(width/2-cam.x*cam.z,height/2-cam.y*cam.z);ctx.scale(cam.z,cam.z);
+  if(hostileCargo)ctx.lineJoin='round';
+  ctx.setLineDash(hostileCargo?[8/cam.z,5/cam.z]:[5/cam.z,5/cam.z]);
+  if(!geometry.path){ctx.beginPath();geometry.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));}
+  if(hostileCargo){ctx.strokeStyle=hostileCargoOutline;ctx.lineWidth=4.5/cam.z;strokeRoute(ctx,geometry.path);}
+  ctx.strokeStyle=hostileCargo?hostileCargoColor:color+'88';ctx.lineWidth=(hostileCargo?2.25:1.5)/cam.z;strokeRoute(ctx,geometry.path);
+  ctx.restore();
+  ctx.save();
+  if(hostileCargo){
+   // Keep a compact dot at distant zoom; near zoom uses a font-independent cart.
+   const showCart=cam.z>=.4;
+   ctx.fillStyle=showCart?hostileCargoOutline:hostileCargoColor;
+   ctx.strokeStyle=showCart?hostileCargoColor:hostileCargoOutline;
+   ctx.lineWidth=1.5;
+   ctx.beginPath();ctx.arc(p.x,p.y,showCart?7:4,0,Math.PI*2);ctx.fill();ctx.stroke();
+   if(showCart){
+    ctx.fillStyle=hostileCargoColor;
+    ctx.fillRect(p.x-3,p.y-3.5,6,4);
+    ctx.beginPath();
+    for(const dx of [-2,2]){ctx.moveTo(p.x+dx+1.15,p.y+2.5);ctx.arc(p.x+dx,p.y+2.5,1.15,0,Math.PI*2);}
+    ctx.fill();
+   }
+  }else{
+   ctx.fillStyle=color;ctx.strokeStyle='#15251f';ctx.beginPath();
+   ctx.arc(p.x,p.y,Math.max(3,Math.min(6,cam.z*5)),0,Math.PI*2);ctx.fill();ctx.stroke();
+   if(own&&cam.z>=.4){ctx.font='10px system-ui';ctx.fillText(r.glyph,p.x+7,p.y);}
+  }
+  ctx.restore();markers++;
+ }
+ cache.prune(ids);return{markers,animated,cacheSize:cache.size,hits:cache.hits,misses:cache.misses};
+}
