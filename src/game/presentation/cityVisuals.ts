@@ -1,5 +1,5 @@
 /** Presentation calibration only; never persisted in the world or save. */
-export const IMPERIAL_WORLD_SCALE=1.10;
+export const IMPERIAL_WORLD_SCALE=1.30;
 // Foot of the imperial center illustrations (477–478 / 512), excluding soft shadow.
 const CENTER_FOOT=477.5/512;
 export function worldCityVisual(age:number,size:number){

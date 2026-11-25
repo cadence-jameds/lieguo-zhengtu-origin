@@ -1,5 +1,6 @@
 import type {TerrainRead} from '../presentationModel';
 import {inverse,type Point} from './mapGeometry';
+import {worldCityVisual} from './cityVisuals';
 
 // v0.30.2 detail rules, with a separate LOD for a fitted 384×384 overview.
 export const MAP_DETAIL_MIN_ZOOM=.12,WILD_MAP_MIN_ZOOM=.22;
@@ -11,12 +12,14 @@ export function mapMarkerSize(zoom:number){
  const width=Math.max(1.5,Math.min(3,28*zoom));
  return {width,height:width/2};
 }
-export function mapHitExtent(city:boolean,zoom:number){
+export function mapHitExtent(city:boolean,zoom:number,age?:number){
  if(city&&!detailedMap(zoom)){const m=mapMarkerSize(zoom);return {x:m.width+2,above:m.height+2,below:m.height+2};}
- const size=mapNodeSize(city,zoom);return {x:size*1.8,above:size*2.8,below:size*.8};
+ const size=mapNodeSize(city,zoom);
+ if(city&&age===3){const art=worldCityVisual(age,size),bottom=size*.8+art.footOffset;return {x:art.width/2,above:art.width-bottom,below:bottom};}
+ return {x:size*1.8,above:size*2.8,below:size*.8};
 }
-export function mapHit(city:boolean,zoom:number,anchor:Point,pointer:Point){
- const e=mapHitExtent(city,zoom);
+export function mapHit(city:boolean,zoom:number,anchor:Point,pointer:Point,age?:number){
+ const e=mapHitExtent(city,zoom,age);
  return Math.abs(anchor.x-pointer.x)<e.x&&pointer.y>anchor.y-e.above&&pointer.y<anchor.y+e.below;
 }
 export function mapQueryBounds(camera:Point&{z:number},width:number,height:number,rect:{left:number;top:number;right:number;bottom:number}){
@@ -24,9 +27,15 @@ export function mapQueryBounds(camera:Point&{z:number},width:number,height:numbe
  return {minX:Math.floor(Math.min(...ps.map(p=>p.x))),minY:Math.floor(Math.min(...ps.map(p=>p.y))),maxX:Math.ceil(Math.max(...ps.map(p=>p.x))),maxY:Math.ceil(Math.max(...ps.map(p=>p.y)))};
 }
 export function mapPickBounds(camera:Point&{z:number},width:number,height:number,pointer:Point){
- const e=mapHitExtent(true,camera.z);
+ // Use the greatest city extent for the indexed spatial broad phase.
+ const e=mapHitExtent(true,camera.z,3);
  // Bounds describe possible anchors, hence above/below are reversed.
  return mapQueryBounds(camera,width,height,{left:pointer.x-e.x,top:pointer.y-e.below,right:pointer.x+e.x,bottom:pointer.y+e.above});
+}
+export function mapEntityViewport(zoom:number,width:number,height:number){
+ // A city anchor below the viewport can still have its imperial roof visible.
+ const imperial=mapHitExtent(true,zoom,3);
+ return {left:-70,top:-60,right:width+70,bottom:height+Math.max(60,imperial.above)};
 }
 export const MAP_TERRAIN_MARGIN=50;
 export function overviewGeometry(w:Pick<TerrainRead,'dimensions'>){
