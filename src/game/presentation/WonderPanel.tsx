@@ -12,7 +12,7 @@ import {empireWonder,wonderRemaining,WONDER_COST,wonderProgress} from '../formal
 import {Cost} from './UI';
 import {Countdown,LiveProgress} from './LiveValues';
 import {LABELS} from './artMap';
-export function WonderPanel({world:w,issue,busy}:{world:WorldRead;issue:(p:FormalCommand)=>void;busy:boolean}){
+export function WonderPanel({world:w,issue,busy,showBreakthrough=true}:{world:WorldRead;issue:(p:FormalCommand)=>void;busy:boolean;showBreakthrough?:boolean}){
  const [hostId,setHostId]=useState(''),[sourceId,setSourceId]=useState(''),[cargo,setCargo]=useState(zeroResources);
  const empire=empireOf(w,w.playerFactionId),owned=w.cities.filter(c=>c.ownerFactionId===w.playerFactionId),source=owned.find(c=>c.id===sourceId)??owned[0];
  if(!empire||!source)return null;
@@ -24,7 +24,7 @@ export function WonderPanel({world:w,issue,busy}:{world:WorldRead;issue:(p:Forma
  <p>承載城市：{w.cities.find(c=>c.id===p.initiatingCityId)?.name} · {state?.phase==='completed'?'已完成':state?.phase==='building'?'施工中':'籌資／運輸中'}</p>
  <p>工程池（已抵達）</p><Cost cost={p.poolResources}/><p>工程總需求</p><Cost cost={p.requiredResources}/>
  {state?.phase==='building'&&<>{state.clock?.activeSince===null?<p>奇觀施工暫停 · {Math.floor(wonderProgress(w,p))}%</p>:<><LiveProgress world={w} start={state.clock?state.clock.activeSince!-state.clock.workMs:state.startedAt!} duration={p.durationMs} label="世界奇觀施工進度"/><p>施工剩餘：<Countdown at={state.clock?state.clock.activeSince!+p.durationMs-state.clock.workMs:state.startedAt!+p.durationMs} world={w}/></p></>}</>}
- <WonderRepairPanel world={w} wonder={p} issue={issue} busy={busy}/>{state?.phase==='completed'&&<BreakthroughPanel world={w} wonder={p} issue={issue} busy={busy}/>}
+ <WonderRepairPanel world={w} wonder={p} issue={issue} busy={busy}/>{showBreakthrough&&state?.phase==='completed'&&<BreakthroughPanel world={w} wonder={p} issue={issue} busy={busy}/>}
  {state?.phase==='funding'&&<><p>尚可派送（已扣除在途預約）</p><Cost cost={remaining}/><label>奇觀資源來源城市<select aria-label="奇觀資源來源城市" value={source.id} onChange={e=>{setSourceId(e.target.value);setCargo(zeroResources());}}>{owned.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label><p>本城庫存</p><Cost cost={stock}/><LogisticsSettingsPanel key={source.id+JSON.stringify(source.logisticsSettings)+JSON.stringify(source.autoLogistics)} world={w} city={source} issue={issue} busy={busy} wonderProjectId={p.projectId}/><p>手動可用商隊 {logisticsAvailable(w,source)}/{caravans.total}（全部在途 {caravans.inTransit}），每支載量 2,000；到貨入池後空車返回。同城投入亦須經市場商隊交付。</p><div className="v94-unit-inputs">{resourceKeys.map(r=><label key={r}>{LABELS[r]}<input aria-label={'奇觀運送'+LABELS[r]} type="number" min={0} step={1} max={Math.min(stock[r],remaining[r])} value={Number.isFinite(cargo[r])?cargo[r]:''} onChange={e=>setCargo({...cargo,[r]:e.target.valueAsNumber})}/></label>)}</div><button disabled={busy||!valid} onClick={()=>{issue({type:'wonder.ship',cityId:source.id,projectId:p.projectId,resources:cargo});setCargo(zeroResources());}}>派出商隊投入奇觀</button></>}
  <h3>工程物流</h3>{(w.logistics??[]).filter(t=>t.projectId===p.projectId).map(t=><article key={t.shipmentId}><p>{w.cities.find(c=>c.id===t.sourceCityId)?.name} → 奇觀城市 · {t.phase==='outbound'?'載貨在途':'空車返程'} · <Countdown at={t.phase==='outbound'?t.arrivalAt:t.returnAt} world={w}/></p><Cost cost={t.resources}/></article>)}<p>已抵達 {p.shipments.filter(t=>t.phase==='arrived').length} 批 · 在途 {p.shipments.filter(t=>t.phase==='in-transit').length} 批</p>
  </>}
