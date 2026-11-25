@@ -77,6 +77,11 @@ it('remeasures on preference changes and honors reduced-motion for arrow scrolli
 });
 it('desktop keeps every existing feature and report indicator irrespective of mobile preferences',()=>{
  const w=createFormalFixture(),c=w.cities[0],html=renderToStaticMarkup(<Shell world={w} city={c} cities={[c]} mobile={false} view="reports" onView={noop} onCity={noop} onHome={noop} onResource={noop} onMore={noop} moreOpen={false} busy={false} unread={8} alerts={1} mobileShortcuts={[]}><p>內容</p></Shell>),el=document.createElement('div');el.innerHTML=html;expect(el.querySelectorAll('.left-rail nav button')).toHaveLength(NAV.length);expect(el.querySelector('.mobile-nav')).toBeNull();expect(el.querySelector('.left-rail .active.has-unread')?.textContent).toContain('8');
+ expect(el.querySelectorAll('.desktop-layout .resource img.hud-pictogram')).toHaveLength(4);
+ expect(el.querySelectorAll('.left-rail nav img.hud-pictogram')).toHaveLength(NAV.length);
+ expect(el.querySelector('.desktop-layout .resource')?.getAttribute('title')).toContain('庫存');
+ expect(el.querySelectorAll('.desktop-layout .garrison-cell')).toHaveLength(11);
+ expect(el.querySelector('.mobile-garrison-toggle')).toBeNull();
 });
 
 it('keeps the active shortcut clear of arrow gutters after orientation changes',async()=>{

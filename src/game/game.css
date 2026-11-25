@@ -547,3 +547,10 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 .mobile-nav-custom button>span:has(>.hud-pictogram){display:grid;place-items:center;line-height:1}
 .mobile-nav-custom .hud-pictogram{width:28px;height:28px}
 .mobile-resources .hud-pictogram{width:16px;height:16px}
+/* Match the existing desktop glyph slots; do not alter the header or rail layout. */
+.formal-shell.desktop-layout .left-rail nav .hud-pictogram{width:22px;height:22px}
+.formal-shell.desktop-layout .desktop-resource-pictogram{display:inline-flex;align-items:center;flex:none}
+.formal-shell.desktop-layout .desktop-resource-pictogram .hud-pictogram{width:16px;height:16px}
+@media(min-width:1351px){
+ .formal-shell.desktop-layout .desktop-resource-pictogram .hud-pictogram{width:18px;height:18px}
+}
