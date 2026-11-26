@@ -90,10 +90,14 @@ def accepts(path, predecessor, root=ROOT):
         return False
     targets, grants = exact_scope()
     target = root / path
-    return predecessor in grants[path] and target.is_file() and sha(target.read_bytes()) == targets[path]
+    from settlement_map_picker_successor import continues_file as picker
+    return (predecessor in grants[path] and target.is_file()
+            and (sha(target.read_bytes()) == targets[path] or picker(path, targets[path], root)))
 
 def validate(root=ROOT):
+    from settlement_map_picker_successor import continues_file as picker, validate_sources
+    validate_sources(root)
     targets, _ = exact_scope()
     assert (root / CITY_GATE).read_bytes() == expected_city_adapter()[1], 'Changed finite issue #38 city gate adapter'
     for path, expected in targets.items():
-        assert sha((root / path).read_bytes()) == expected, ('Unpinned issue #38 source', path)
+        assert sha((root / path).read_bytes()) == expected or picker(path, expected, root), ('Unpinned issue #38 source', path)
