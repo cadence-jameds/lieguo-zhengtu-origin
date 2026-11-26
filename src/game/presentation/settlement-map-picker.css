@@ -1,0 +1,7 @@
+.settlement-location{display:grid;gap:4px;width:100%}
+.settlement-location button{justify-self:stretch;min-height:44px}
+.settlement-location small{min-height:1.3em}
+dialog.settlement-map-dialog{width:min(1100px,calc(100vw - 20px));height:min(820px,calc(100dvh - 24px));max-height:calc(100dvh - 24px)}
+.settlement-map-dialog>.dialog-body{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.settlement-map-dialog .settlement-map-guide{margin:0;padding:8px 12px;flex:none}
+.settlement-map-dialog .formal-world-map{min-height:0;flex:1}
