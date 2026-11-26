@@ -10,10 +10,10 @@ it('imperial world enlargement keeps the visible base anchored at every map zoom
  for(const size of [5,8,12,20,36]){
   for(const age of [0,1,2])expect(worldCityVisual(age,size)).toEqual({scale:1,width:size*3.8,footOffset:0});
   const baseline=worldCityVisual(2,size),imperial=worldCityVisual(3,size);
-  expect(imperial.width/baseline.width).toBeCloseTo(1.10);
+  expect(imperial.width/baseline.width).toBeCloseTo(1.30);
   for(const foot of [477,478]){
    const before=-(1-foot/512)*baseline.width,after=imperial.footOffset-(1-foot/512)*imperial.width;
-   expect(Math.abs(after-before)).toBeLessThan(.02);
+   expect(Math.abs(after-before)).toBeLessThan(size*3.8*.30/1024+1e-10);
   }
  }
 });

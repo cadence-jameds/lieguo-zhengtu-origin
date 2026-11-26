@@ -9,5 +9,10 @@ PREDECESSORS = frozenset({
 })
 RESULT = '26a40bf9223eff7f71c9f408df590b4f22b309e45f2cc423b212f9161dc38ea5'
 
+CONSISTENT_WIDTH_RESULT = 'c9525bdcfc7aef0c1d0192d0aa465027a21b7c06b1edba916fb4191faa3c4d92'
+
 def accepts(path, predecessor, root=ROOT):
-    return path == SOURCE and predecessor in PREDECESSORS and (root/path).is_file() and sha256((root/path).read_bytes()).hexdigest() == RESULT
+    return path == SOURCE and (root/path).is_file() and (
+        (predecessor in PREDECESSORS and sha256((root/path).read_bytes()).hexdigest() == RESULT) or
+        (predecessor in PREDECESSORS | {RESULT} and sha256((root/path).read_bytes()).hexdigest() == CONSISTENT_WIDTH_RESULT)
+    )

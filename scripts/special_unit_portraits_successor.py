@@ -28,7 +28,10 @@ RESULTS={'releases/notes/special-unit-portraits.json': 'c93ac38a9e0fc74891645397
 
 def current(path,root=ROOT):
  target=root/path
- return path in RESULTS and target.is_file() and sha256(target.read_bytes()).hexdigest()==RESULTS[path]
+ if path in RESULTS and target.is_file() and sha256(target.read_bytes()).hexdigest()==RESULTS[path]:return True
+ if path!=DEVELOPMENT:return False
+ from issue38_visual_successor import accepts as visual
+ return visual(path,RESULTS[path],root)
 
 def accepts(path,predecessor,root=ROOT):
  # Only existing exact R3 path digests can be continued by this registered portrait.
