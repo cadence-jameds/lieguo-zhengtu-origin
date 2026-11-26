@@ -100,7 +100,7 @@ def read_record(root=ROOT):
  r=json.loads(f.read_text());assert r==expected_record(),'Changed immutable Android save hotfix proof';return r
 SETTLER_LAYOUT_CSS='src/game/presentation/playable.css'
 SETTLER_LAYOUT_PREDECESSOR='c312bccf13dd9b7109a5bdbfaf8c99e53b55163c8004cd527b48442febba8151'
-SETTLER_LAYOUT_RESULT='2e7c6dfb54d88a0455a8e8d6f950f1c422b9edd4df5ec5f24cc13a94960ad40c'
+SETTLER_LAYOUT_RESULT='8509e7c6cb0a914a4eae7370ab5566bbf08185353f8f6058de106db6db4a456e'
 def accepts_settler_layout(path,predecessor,root=ROOT):
  if path!=SETTLER_LAYOUT_CSS or not (root/path).is_file() or sha((root/path).read_bytes())!=SETTLER_LAYOUT_RESULT:return False
  r=read_record(root)

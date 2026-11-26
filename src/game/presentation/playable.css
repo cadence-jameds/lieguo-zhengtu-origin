@@ -43,8 +43,8 @@
  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;
  justify-content:stretch;justify-items:stretch;gap:10px;min-width:0;
 }
-.formal-development > .dialog-actions:has(> .colonization-escort) > input,
-.formal-development .colonization-escort input {width:100%;min-width:0;box-sizing:border-box}
+.formal-shell .formal-development > .dialog-actions:has(> .colonization-escort) > input,
+.formal-shell .formal-development > .dialog-actions > .colonization-escort > label > input {width:100%;min-width:0;max-width:none;box-sizing:border-box}
 .formal-development > .dialog-actions:has(> .colonization-escort) > :is(.name-input,.colonization-escort,button){grid-column:1/-1}
 .formal-development > .dialog-actions:has(> .colonization-escort) > .name-input{
  display:grid;grid-template-columns:minmax(0,1fr) 44px;align-items:center;min-width:0;margin:0;
@@ -58,9 +58,9 @@
 .formal-development .colonization-escort > legend{
  max-inline-size:100%;white-space:normal;overflow-wrap:anywhere;padding-inline:4px;box-sizing:border-box;
 }
-.formal-development .colonization-escort > label{
+.formal-shell .formal-development > .dialog-actions > .colonization-escort > label{
  display:grid;grid-template-columns:minmax(0,1fr) clamp(64px,28%,100px);
- align-items:center;column-gap:8px;min-width:0;margin:0;
+ align-items:center;column-gap:8px;min-width:0;max-width:none;margin:0;
 }
 .formal-development .colonization-escort > label > span{min-width:0;overflow-wrap:anywhere}
 .formal-development .colonization-escort > :is(small,p){margin:0;white-space:normal}
