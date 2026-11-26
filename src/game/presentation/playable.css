@@ -37,3 +37,31 @@
 .game-notice-region .projection-sync-notice p{margin:4px 0;font-size:12px;line-height:1.4}
 
 .game-notice-region .notice-close::before{content:"×"}
+
+/* Settlement dispatch is a two-column form, not a row of generic action buttons. */
+.formal-development > .dialog-actions:has(> .colonization-escort) {
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;
+ justify-content:stretch;justify-items:stretch;gap:10px;min-width:0;
+}
+.formal-shell .formal-development > .dialog-actions:has(> .colonization-escort) > input,
+.formal-shell .formal-development > .dialog-actions > .colonization-escort > label > input {width:100%;min-width:0;max-width:none;box-sizing:border-box}
+.formal-development > .dialog-actions:has(> .colonization-escort) > :is(.name-input,.colonization-escort,button){grid-column:1/-1}
+.formal-development > .dialog-actions:has(> .colonization-escort) > .name-input{
+ display:grid;grid-template-columns:minmax(0,1fr) 44px;align-items:center;min-width:0;margin:0;
+}
+.formal-development > .dialog-actions:has(> .colonization-escort) > .name-input > input{width:100%;box-sizing:border-box}
+.formal-development > .dialog-actions:has(> .colonization-escort) > .name-input > button{min-width:0;width:44px;padding-inline:0}
+.formal-development .colonization-escort{
+ display:grid;gap:8px;min-inline-size:0;max-inline-size:100%;box-sizing:border-box;
+ margin:0;padding:10px;border:1px solid var(--ui-90,#5b665d);border-radius:8px;
+}
+.formal-development .colonization-escort > legend{
+ max-inline-size:100%;white-space:normal;overflow-wrap:anywhere;padding-inline:4px;box-sizing:border-box;
+}
+.formal-shell .formal-development > .dialog-actions > .colonization-escort > label{
+ display:grid;grid-template-columns:minmax(0,1fr) clamp(64px,28%,100px);
+ align-items:center;column-gap:8px;min-width:0;max-width:none;margin:0;
+}
+.formal-development .colonization-escort > label > span{min-width:0;overflow-wrap:anywhere}
+.formal-development .colonization-escort > :is(small,p){margin:0;white-space:normal}
+.mobile-layout .formal-development > .dialog-actions:has(> .colonization-escort) input{min-height:44px}
