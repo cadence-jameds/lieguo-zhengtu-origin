@@ -24,6 +24,31 @@ RESEARCH_ADDITIONS = {
     'releases/notes/offline-completed-research.json',
 }
 RESEARCH_SOURCES = {RESEARCH_REDUCER, *RESEARCH_ADDITIONS}
+# This compiled source port preserves the measured drafts and current recruitment.
+# Pin its exact complete scope, but issue historical grants only on runtime paths.
+REPLAY_BASE = '1bcf7bb3156f044088341f92f06ef574fe3ba3cc'
+REPLAY_IMPLEMENTATION = '20914d171f72381f64585ad00e32706f48649e3a'
+REPLAY_RUNTIME = {
+    'src/game/formal/autonomy.ts',
+    'src/game/formal/commandLedger.ts',
+    RESEARCH_REDUCER,
+}
+REPLAY_SOURCES = {
+    *REPLAY_RUNTIME,
+    'releases/notes/offline-command-shipment-drafts.json',
+    'src/game/formal/offlineBreakthroughShippingDraft.test.ts',
+    'src/game/formal/offlinePendingMembershipRecovery.test.ts',
+    'src/game/formal/offlineShippingDraftRecovery.test.ts',
+}
+REPLAY_ART_WITNESSES = {
+    'docs/art-unification/city-fit/measurements.json',
+    'docs/art-unification/elite-review-20261029/protected.json',
+    'docs/art-unification/elite-review-20261029/browser-manifest.json',
+    'docs/art-unification/elite-final-20261030/browser-manifest.json',
+    'docs/art-unification/japan-approved-20261030/browser-manifest.json',
+    'docs/art-unification/player-feedback-20261029/protected.json',
+    'docs/art-unification/player-feedback-20261029/compatibility.json',
+}
 BOUNDARY = 'scripts/verify-projection-boundaries.mjs'
 SOURCES = {
     'docs/b10-p0-offline/LATE-LOGISTICS.md',
@@ -141,6 +166,41 @@ def exact_scope():
         assert not git('ls-tree', '-r', '--name-only', RESEARCH_BASE, '--', path), ('Expected new completed-research file', path)
         changes[path] = {'before': None, 'after': sha(previous(RESEARCH_IMPLEMENTATION, path))}
         grants[path] = set()
+    # Compose only after independently verifying the complete predecessor stack.
+    assert git('rev-list', '--parents', '-n', '1', REPLAY_IMPLEMENTATION).decode().split() == [REPLAY_IMPLEMENTATION, REPLAY_BASE], 'Incorrect replay work predecessor'
+    actual = set(git('diff', '--name-only', '--no-renames', REPLAY_BASE, REPLAY_IMPLEMENTATION).decode().splitlines())
+    assert actual == REPLAY_SOURCES, ('Unexpected replay work scope', actual ^ REPLAY_SOURCES)
+    for path, change in changes.items():
+        assert sha(previous(REPLAY_BASE, path)) == change['after'], ('Incorrect replay work baseline', path)
+    assert previous(REPLAY_BASE, BOUNDARY) == boundary_bytes(), 'Incorrect replay projection baseline'
+    for path in sorted(REPLAY_SOURCES):
+        if path not in changes:
+            try:
+                before = sha(previous(REPLAY_BASE, path))
+            except subprocess.CalledProcessError:
+                before = None
+            changes[path] = {'before': before}
+            grants[path] = {before} if before and path in REPLAY_RUNTIME else set()
+        else:
+            assert path in REPLAY_RUNTIME, ('Unexpected overlap with earlier gate', path)
+            grants[path].add(changes[path]['after'])
+        changes[path]['after'] = sha(previous(REPLAY_IMPLEMENTATION, path))
+    # These witnesses are historical Git objects, not live/editable manifests.
+    for record in git('ls-tree', '-r', '--name-only', REPLAY_BASE, 'docs/validation').decode().splitlines():
+        if not record.endswith('/compatibility.json'):
+            continue
+        proof = json.loads(previous(REPLAY_BASE, record))
+        for path in REPLAY_RUNTIME:
+            item = proof.get('changes', {}).get(path, {})
+            values = [proof.get('invariants', {}).get(path), item.get('before'), item.get('after'), *proof.get('grants', {}).get(path, [])]
+            grants[path].update(h for h in values if isinstance(h, str) and len(h) == 64)
+    for record in sorted(REPLAY_ART_WITNESSES):
+        proof = json.loads(previous(REPLAY_BASE, record))
+        for path in REPLAY_RUNTIME:
+            update = proof.get('updates', {}).get(path, {})
+            for h in [*(proof.get(section, {}).get(path) for section in ('files', 'sources', 'sourceFiles', 'renderFiles')), update.get('baselineSha256'), update.get('currentSha256')]:
+                if isinstance(h, str) and len(h) == 64:
+                    grants[path].add(h)
     return changes, {path: frozenset(values) for path, values in grants.items()}
 
 
@@ -153,7 +213,7 @@ def accepts(path, predecessor, root=ROOT):
     if path == BOUNDARY:
         base_bytes = previous(BASE, BOUNDARY)
         return predecessor == sha(base_bytes) and accepts_adapter(path, base_bytes, root)
-    if path not in SOURCES | CHILD_SOURCES | RESEARCH_SOURCES:
+    if path not in SOURCES | CHILD_SOURCES | RESEARCH_SOURCES | REPLAY_RUNTIME:
         from special_unit_portraits_successor import accepts as portraits
         return portraits(path, predecessor, root)
     changes, grants = exact_scope()

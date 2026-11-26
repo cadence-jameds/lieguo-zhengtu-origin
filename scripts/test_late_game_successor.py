@@ -10,16 +10,16 @@ class LateGameSuccessorTests(unittest.TestCase):
         td = tempfile.TemporaryDirectory(prefix='late-game-proof-')
         self.addCleanup(td.cleanup)
         self.root = Path(td.name)
-        for path in {*gate.SOURCES, *gate.CHILD_SOURCES, *gate.RESEARCH_SOURCES, gate.BOUNDARY}:
+        for path in {*gate.SOURCES, *gate.CHILD_SOURCES, *gate.RESEARCH_SOURCES, *gate.REPLAY_SOURCES, gate.BOUNDARY}:
             dest = self.root / path
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes((gate.ROOT / path).read_bytes())
 
     def test_exact_files_and_known_path_specific_predecessors(self):
         record = gate.validate(self.root)
-        self.assertEqual(set(record['changes']), gate.SOURCES | gate.CHILD_SOURCES | gate.RESEARCH_SOURCES)
+        self.assertEqual(set(record['changes']), gate.SOURCES | gate.CHILD_SOURCES | gate.RESEARCH_SOURCES | gate.REPLAY_SOURCES)
         for path, entry in record['changes'].items():
-            if entry['before']:
+            if entry['before'] and (path not in gate.REPLAY_SOURCES or path in gate.REPLAY_RUNTIME):
                 self.assertTrue(gate.accepts(path, entry['before'], self.root))
             self.assertFalse(gate.accepts(path, '0' * 64, self.root))
         reducer = 'src/game/formal/reducer.ts'
@@ -50,6 +50,26 @@ class LateGameSuccessorTests(unittest.TestCase):
         self.assertFalse(gate.accepts(path, outgoing, self.root))
         with self.assertRaisesRegex(AssertionError, path):
             gate.validate(self.root)
+
+    def test_replay_candidate_grants_exact_runtime_only_and_keeps_prior_scope(self):
+        runtime_grants = gate.exact_scope()[1]
+        for path in sorted(gate.REPLAY_SOURCES):
+            target = self.root / path
+            recorded = target.read_bytes()
+            if path in gate.REPLAY_RUNTIME:
+                preceding = gate.sha(gate.previous(gate.REPLAY_BASE, path))
+                self.assertTrue(gate.accepts(path, preceding, self.root), path)
+                wrong_path = next(p for p in gate.REPLAY_RUNTIME if p != path)
+                self.assertFalse(gate.accepts(path, gate.sha(gate.previous(gate.REPLAY_BASE, wrong_path)), self.root))
+                self.assertTrue(runtime_grants[path])
+            else:
+                self.assertFalse(runtime_grants[path], path)
+            target.write_bytes(recorded + b'\n')
+            with self.assertRaisesRegex(AssertionError, path):
+                gate.validate(self.root)
+            target.write_bytes(recorded)
+        self.assertFalse(gate.accepts('src/game/formal/scheduler.ts', '0' * 64, self.root))
+        self.assertTrue(gate.validate(self.root))
 
     def test_tampering_fails_even_when_new_source_has_no_predecessor(self):
         for path in sorted({'src/game/formal/economy.ts', 'src/game/formal/logisticsRoute.ts'} | gate.CHILD_SOURCES | gate.RESEARCH_SOURCES):
