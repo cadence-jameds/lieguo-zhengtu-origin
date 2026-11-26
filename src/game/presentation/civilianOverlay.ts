@@ -29,8 +29,7 @@ export function paintCivilians(ctx:CanvasRenderingContext2D,w:WorldRead,time:num
   if(hostileCargo)ctx.lineJoin='round';
   ctx.setLineDash(hostileCargo?[8/cam.z,5/cam.z]:[5/cam.z,5/cam.z]);
   if(!geometry.path){ctx.beginPath();geometry.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));}
-  if(hostileCargo){ctx.strokeStyle=hostileCargoOutline;ctx.lineWidth=4.5/cam.z;strokeRoute(ctx,geometry.path);}
-  ctx.strokeStyle=hostileCargo?hostileCargoColor:color+'88';ctx.lineWidth=(hostileCargo?2.25:1.5)/cam.z;strokeRoute(ctx,geometry.path);
+  ctx.strokeStyle=hostileCargo?hostileCargoColor:color+'88';ctx.lineWidth=1.5/cam.z;strokeRoute(ctx,geometry.path);
   ctx.restore();
   ctx.save();
   if(hostileCargo){
