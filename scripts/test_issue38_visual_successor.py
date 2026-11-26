@@ -40,18 +40,39 @@ class ExactVisualSuccessor(unittest.TestCase):
                 f = root / p
                 f.parent.mkdir(parents=True, exist_ok=True)
                 f.write_bytes((gate.ROOT / p).read_bytes())
+            picker.validate_sources(root)
             self.assertEqual(picker.PREDECESSORS[path], targets[path])
             for p, predecessor in picker.PREDECESSORS.items():
-                self.assertTrue(picker.accepts(p, predecessor, root))
-                self.assertFalse(picker.accepts(p, '0' * 64, root))
+                self.assertTrue(picker.continues_file(p, predecessor, root))
+                self.assertFalse(picker.continues_file(p, '0' * 64, root))
             for predecessor in grants[path]:
                 self.assertTrue(gate.accepts(path, predecessor, root))
             for p in picker.SOURCES:
                 f = root / p
                 original = f.read_bytes()
+                f.unlink()
+                with self.assertRaises(AssertionError):
+                    picker.validate_sources(root)
                 f.write_bytes(original + b'// altered')
-                self.assertFalse(gate.accepts(path, next(iter(grants[path])), root))
+                with self.assertRaises(AssertionError):
+                    picker.validate_sources(root)
                 f.write_bytes(original)
+            picker.validate_sources(root)
+
+    def test_sparse_guard_still_requires_exact_target_and_predecessor(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for p, predecessor in picker.PREDECESSORS.items():
+                file = root / p
+                file.parent.mkdir(parents=True, exist_ok=True)
+                self.assertFalse(picker.continues_file(p, predecessor, root))
+                exact = (gate.ROOT / p).read_bytes()
+                file.write_bytes(exact)
+                self.assertTrue(picker.continues_file(p, predecessor, root))
+                self.assertFalse(picker.continues_file(p, '0' * 64, root))
+                file.write_bytes(exact + b'// altered')
+                self.assertFalse(picker.continues_file(p, predecessor, root))
+                file.unlink()
 
 
 if __name__ == '__main__':

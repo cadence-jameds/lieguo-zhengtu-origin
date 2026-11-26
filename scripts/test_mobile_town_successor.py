@@ -5,7 +5,6 @@ import tempfile
 import unittest
 from pathlib import Path
 import mobile_town_successor as gate
-from settlement_map_picker_successor import SOURCES as PICKER_WITNESSES
 
 
 class MobileSuccessorTests(unittest.TestCase):
@@ -14,7 +13,7 @@ class MobileSuccessorTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         record = json.loads((gate.ROOT / gate.RECORD).read_text())
-        paths = {gate.RECORD, *record['changes'], *record['invariants'], *record['historical'], *record['evidence'], *PICKER_WITNESSES}
+        paths = {gate.RECORD, *record['changes'], *record['invariants'], *record['historical'], *record['evidence']}
         for path in paths:
             target = self.root / path
             target.parent.mkdir(parents=True, exist_ok=True)

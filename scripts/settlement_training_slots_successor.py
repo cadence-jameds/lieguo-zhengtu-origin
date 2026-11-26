@@ -30,7 +30,7 @@ def current(path,root=ROOT):
  f=root/path
  if f.is_file() and sha(f.read_bytes())==RESULTS.get(path):return True
  if path=='src/game/FormalDevelopmentPanel.tsx':
-  from settlement_map_picker_successor import accepts as picker
+  from settlement_map_picker_successor import continues_file as picker
   return picker(path,RESULTS[path],root)
  if path=='src/game/presentation/DevelopmentViews.tsx':
   from special_unit_portraits_successor import accepts as portraits
