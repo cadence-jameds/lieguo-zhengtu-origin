@@ -539,3 +539,24 @@ img.building-sprite{object-fit:contain;padding:3%;box-sizing:border-box}.map-too
 .home-entry-actions .home-settings-button{grid-column:1/-1;grid-row:2}
 .home-entry-actions .home-storage-button{grid-column:1/-1;grid-row:3}
 .home-entry-actions .home-recover{grid-column:1/-1;grid-row:4;white-space:normal}
+
+/* Accepted mobile art: keep the existing shortcut targets, scrolling and badges. */
+.hud-pictogram{display:block;width:24px;height:24px;flex:none;object-fit:contain;pointer-events:none}
+.hud-pictogram-label{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.mobile-more.mobile-more-single{grid-template-columns:minmax(0,1fr)}
+.mobile-nav-custom button>span:has(>.hud-pictogram){display:grid;place-items:center;line-height:1}
+.mobile-nav-custom .hud-pictogram{width:28px;height:28px}
+.mobile-resources .hud-pictogram{width:16px;height:16px}
+/* Match the existing desktop glyph slots; do not alter the header or rail layout. */
+.formal-shell.desktop-layout .left-rail nav .hud-pictogram{width:22px;height:22px}
+.formal-shell.desktop-layout .desktop-resource-pictogram{display:inline-flex;align-items:center;flex:none}
+.formal-shell.desktop-layout .desktop-resource-pictogram .hud-pictogram{width:16px;height:16px}
+@media(min-width:1351px){
+ .formal-shell.desktop-layout .desktop-resource-pictogram .hud-pictogram{width:18px;height:18px}
+}
+
+/* Remove the garrison from layout while folded, not only from sight. */
+.formal-shell.mobile-layout .mobile-garrison{grid-column:1/-1;min-width:0}
+.formal-shell.mobile-layout .mobile-garrison-toggle{display:flex;justify-content:center;align-items:center;gap:5px;min-height:26px;width:100%;padding:2px 8px;border:0;border-block-start:1px solid var(--line);border-radius:0;background:transparent;color:var(--muted);font-size:11px;line-height:1.2}
+.mobile-garrison-toggle svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.mobile-garrison-toggle:focus-visible{outline-offset:-2px}
