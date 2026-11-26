@@ -51,4 +51,7 @@ def accepts(path, predecessor, root=ROOT):
     if path not in RESULTS or predecessor not in predecessors()[path]:
         return False
     source = root / path
-    return source.is_file() and sha(source.read_bytes()) == RESULTS[path]
+    if source.is_file() and sha(source.read_bytes()) == RESULTS[path]:
+        return True
+    from hud_pictogram_successor import accepts as hud
+    return hud(path, RESULTS[path], root)

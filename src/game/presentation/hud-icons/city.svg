@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64"><defs><linearGradient id="jade" x2="0" y2="1"><stop stop-color="#a7b5a0" /><stop offset=".57" stop-color="#788c7a" /><stop offset="1" stop-color="#465d51" /></linearGradient>
+<g id="city-half">
+ <path d="M6 51V22l-2-3V11h4v4h3v-4h4v4h3v-4h4v8l-2 3v29Z" fill="url(#jade)" stroke="#263729" stroke-width="1.8" />
+ <path d="M6 19h14l-2 4H8Z" fill="#b9c2a0" stroke="#53634e" stroke-width="1.4" />
+ <path d="M8 50V23h6v27Z" fill="#a0ad91" fill-opacity=".68" />
+ <path d="M8 28h11m-11 6h11m-11 7h11m-11 5h11m-4-12v7" fill="none" stroke="#5c715e" stroke-width=".95" />
+ <path d="M11 30v-3a2 2 0 0 1 4 0v3Z" fill="#2d4437" stroke="#d5cb9b" stroke-width=".72" />
+ <path d="M7 12v5h4m4-5v5h4M8 23h9m-9 1v25" fill="none" stroke="#dae0b9" stroke-width="1" stroke-linecap="round" />
+ </g>
+ </defs><g stroke-linejoin="round">
+ <ellipse cx="32" cy="56" rx="29" ry="4" fill="#0c130d" opacity=".57" />
+ <path d="M3 50h58v5H3Z" fill="#56604c" stroke="#28342a" stroke-width="1.7" />
+ <path d="M17 50V27h4v-4h5v4h4v-4h4v4h4v-4h5v4h4v23Z" fill="#748676" stroke="#304335" stroke-width="2" />
+ <path d="M19 30h26v17H19Z" fill="#9ba48b" opacity=".48" />
+ <path d="M21 35h22m-22 5h22m-20 5h19m-11-14v4m-5 0v5m13 0v5" stroke="#506652" stroke-width="1.15" fill="none" />
+ <g id="city-half">
+ <path d="M6 51V22l-2-3V11h4v4h3v-4h4v4h3v-4h4v8l-2 3v29Z" fill="url(#jade)" stroke="#263729" stroke-width="1.8" />
+ <path d="M6 19h14l-2 4H8Z" fill="#b9c2a0" stroke="#53634e" stroke-width="1.4" />
+ <path d="M8 50V23h6v27Z" fill="#a0ad91" fill-opacity=".68" />
+ <path d="M8 28h11m-11 6h11m-11 7h11m-11 5h11m-4-12v7" fill="none" stroke="#5c715e" stroke-width=".95" />
+ <path d="M11 30v-3a2 2 0 0 1 4 0v3Z" fill="#2d4437" stroke="#d5cb9b" stroke-width=".72" />
+ <path d="M7 12v5h4m4-5v5h4M8 23h9m-9 1v25" fill="none" stroke="#dae0b9" stroke-width="1" stroke-linecap="round" />
+ </g>
+ <use xlink:href="#city-half" transform="translate(64 0) scale(-1 1)" />
+ <path d="M23 51V41a9 9 0 0 1 18 0v10Z" fill="#26362e" stroke="#465b49" stroke-width="1.5" />
+ <path d="M23 51V41a9 9 0 0 1 18 0v10" fill="none" stroke="#d1b988" stroke-width="2.6" />
+ <path d="M27 51V42a5 5 0 0 1 10 0v9" fill="#624e39" stroke="#333428" stroke-width="1.13" />
+ <path d="M32 39v11m-3-5h6" stroke="#ad8960" stroke-width=".96" />
+ <path d="M5 51h54" stroke="#cdbb8a" stroke-width="1.3" stroke-linecap="round" />
+</g>
+</svg>
