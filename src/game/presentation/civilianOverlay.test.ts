@@ -18,10 +18,11 @@ function render(owner=enemy,zoom=.55,merchant=true,offScreen=false){
  const result=paintCivilians(ctx as unknown as CanvasRenderingContext2D,w,45000,cam,320,200,screen,cache);
  return {ctx,result,strokes};
 }
-it('adds a dark casing, coral dashed route and cart silhouette to visible war logistics at 55%',()=>{
+it('keeps a single thin coral route and cart silhouette to visible war logistics at 55%',()=>{
  const {ctx,result,strokes}=render();
  expect(result).toMatchObject({markers:1,animated:true,cacheSize:1,misses:1});
- expect(strokes.slice(0,2)).toEqual([{style:'#321b1b',width:4.5/.55},{style:'#ffab8c',width:2.25/.55}]);
+ expect(strokes[0]).toEqual({style:'#ffab8c',width:1.5/.55});
+ expect(strokes).toHaveLength(2); // route and marker, no dark route casing
  expect(ctx.setLineDash).toHaveBeenCalledWith([8/.55,5/.55]);
  expect(ctx.arc.mock.calls[0][2]).toBe(7);
  expect(ctx.fillRect).toHaveBeenCalledTimes(1);
@@ -34,7 +35,8 @@ it('respects existing display culling and keeps a compact mark at distant zoom',
  const {ctx,strokes}=render(enemy,.18);
  expect(ctx.arc.mock.calls[0][2]).toBe(4);
  expect(ctx.fillRect).not.toHaveBeenCalled();
- expect(strokes[1].width*.18).toBeCloseTo(2.25);
+ expect(strokes[0].width*.18).toBeCloseTo(1.5);
+ expect(strokes).toHaveLength(2); // one route and one marker
 });
 it('does not restyle other civilian routes, including enemy settlers and own merchants',()=>{
  for(const [owner,merchant,style] of [[enemy,false,'#f0786d88'],[playerFactionId,true,'#e6c46b88'],[friend,true,'#69cb7e88'],[neutral,true,'#bec1b788']] as const){
@@ -45,7 +47,7 @@ it('does not restyle other civilian routes, including enemy settlers and own mer
   expect(ctx.fillText.mock.calls.length).toBe(owner===playerFactionId?1:0);
  }
 });
-it('uses the same cached native canvas path for both strokes',()=>{
+it('uses the same cached native canvas path for the single route',()=>{
  class TestPath {moveTo(){} lineTo(){}}
  vi.stubGlobal('Path2D',TestPath);
  try{const {ctx,result}=render();expect(result.markers).toBe(1);expect(ctx.lineTo).not.toHaveBeenCalled();}
