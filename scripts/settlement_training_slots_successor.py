@@ -32,6 +32,9 @@ def current(path,root=ROOT):
  if path=='src/game/presentation/DevelopmentViews.tsx':
   from special_unit_portraits_successor import accepts as portraits
   return portraits(path,RESULTS[path],root)
+ if path=='src/game/presentation/CityScenes.tsx':
+  from wall_build_marker_successor import continues_training_scene
+  return continues_training_scene(path,RESULTS[path],root)
  if path!=BOUNDARY:return False
  from late_game_successor import accepts as late
  return late(path,RESULTS[path],root)
