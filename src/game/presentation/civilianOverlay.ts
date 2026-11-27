@@ -1,3 +1,4 @@
+import {paintRouteStroke} from './mapRouteStyle';
 import type {WorldRead} from '../presentationModel';
 import type {FactionId} from '../formal/ids';
 import {type Point} from './mapGeometry';
@@ -9,10 +10,28 @@ export class CivilianCache extends ArmyRouteCache {private reversed=new WeakMap<
 /** IDs remain Shipment/Project/Craftsman identities; no fabricated ArmyId or DEMO march state. */
 export function civilianRoutes(w:WorldRead,cache:CivilianCache){const out:CivilianRoute[]=[];for(const s of w.logistics??[])out.push({id:s.shipmentId,owner:s.sourceFactionId,path:s.phase==='outbound'?s.path:cache.reverse(s.path),start:s.phase==='outbound'?s.dispatchedAt:s.arrivalAt,end:s.phase==='outbound'?s.arrivalAt:s.returnAt,glyph:'商'});for(const s of w.settlements??[])if(s.phase==='travelling'&&s.path&&s.arrivalAt&&s.distance)out.push({id:s.projectId,owner:s.ownerFactionId,path:s.path,start:s.arrivalAt-Math.max(1,Math.ceil(s.distance*45000)),end:s.arrivalAt,glyph:'拓'});for(const c of w.extinction?.craftsmen??[])if(c.eventId&&c.arrivalAt&&c.path.length>1)out.push({id:c.id,owner:c.ownerFactionId,path:c.path,start:c.departedAt,end:c.arrivalAt,glyph:'工'});return out;}
 const hostileCargoColor='#ffab8c';
-const hostileCargoOutline='#321b1b';
-function strokeRoute(ctx:CanvasRenderingContext2D,path:Path2D|undefined){if(path)ctx.stroke(path);else ctx.stroke();}
+function paintCivilianMarker(ctx:CanvasRenderingContext2D,p:Point,zoom:number,color:string,glyph:CivilianRoute['glyph'],hostileCargo:boolean){
+ const near=zoom>=.4;
+ ctx.fillStyle=near?(hostileCargo?'#321b1b':'#19251f'):color;
+ ctx.strokeStyle=near?color:(hostileCargo?'#321b1b':'#15251f');
+ ctx.lineWidth=near||hostileCargo?1.5:1;
+ ctx.beginPath();ctx.arc(p.x,p.y,near?7:(hostileCargo?4:Math.max(3,Math.min(6,zoom*5))),0,Math.PI*2);ctx.fill();ctx.stroke();
+ if(!near)return;
+ ctx.save();ctx.translate(p.x,p.y);ctx.fillStyle=color;
+ if(glyph==='商'){
+  // Same body and wheels as the original hostile-caravan mark.
+  ctx.fillRect(-3,-3.5,6,4);ctx.beginPath();
+  for(const dx of [-2,2]){ctx.moveTo(dx+1.15,2.5);ctx.arc(dx,2.5,1.15,0,Math.PI*2);}
+ }else if(glyph==='拓'){
+  // Roof with a door cut out of its silhouette.
+  ctx.beginPath();ctx.moveTo(-5,-.5);ctx.lineTo(0,-4.7);ctx.lineTo(5,-.5);ctx.lineTo(3.6,-.5);ctx.lineTo(3.6,3.6);ctx.lineTo(1,3.6);ctx.lineTo(1,.75);ctx.lineTo(-1,.75);ctx.lineTo(-1,3.6);ctx.lineTo(-3.6,3.6);ctx.lineTo(-3.6,-.5);ctx.closePath();
+ }else{
+  ctx.rotate(.52);ctx.beginPath();ctx.rect(-3.2,-3.9,6.4,3);ctx.rect(-1,-1,2,5);
+ }
+ ctx.fill();ctx.restore();
+}
 
-/** Geometry/visibility stay shared with other routes; only war logistics get a contrast treatment. */
+/** Geometry/visibility stay shared with other routes; all use the same contrast treatment. */
 export function paintCivilians(ctx:CanvasRenderingContext2D,w:WorldRead,time:number,cam:{x:number;y:number;z:number},width:number,height:number,screen:(p:Point)=>Point,cache:CivilianCache){
  let markers=0,animated=false;const ids=new Set<string>();
  for(const r of civilianRoutes(w,cache)){
@@ -26,31 +45,12 @@ export function paintCivilians(ctx:CanvasRenderingContext2D,w:WorldRead,time:num
   const hostileCargo=r.glyph==='商'&&relation==='war';
   const color={own:'#e6c46b',friendly:'#69cb7e',war:'#f0786d',neutral:'#bec1b7'}[relation];
   ctx.save();ctx.translate(width/2-cam.x*cam.z,height/2-cam.y*cam.z);ctx.scale(cam.z,cam.z);
-  if(hostileCargo)ctx.lineJoin='round';
-  ctx.setLineDash(hostileCargo?[8/cam.z,5/cam.z]:[5/cam.z,5/cam.z]);
   if(!geometry.path){ctx.beginPath();geometry.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));}
-  ctx.strokeStyle=hostileCargo?hostileCargoColor:color+'88';ctx.lineWidth=1.5/cam.z;strokeRoute(ctx,geometry.path);
+  const markerColor=hostileCargo?hostileCargoColor:color;
+  paintRouteStroke(ctx,geometry.path,cam.z,markerColor,hostileCargo);
   ctx.restore();
   ctx.save();
-  if(hostileCargo){
-   // Keep a compact dot at distant zoom; near zoom uses a font-independent cart.
-   const showCart=cam.z>=.4;
-   ctx.fillStyle=showCart?hostileCargoOutline:hostileCargoColor;
-   ctx.strokeStyle=showCart?hostileCargoColor:hostileCargoOutline;
-   ctx.lineWidth=1.5;
-   ctx.beginPath();ctx.arc(p.x,p.y,showCart?7:4,0,Math.PI*2);ctx.fill();ctx.stroke();
-   if(showCart){
-    ctx.fillStyle=hostileCargoColor;
-    ctx.fillRect(p.x-3,p.y-3.5,6,4);
-    ctx.beginPath();
-    for(const dx of [-2,2]){ctx.moveTo(p.x+dx+1.15,p.y+2.5);ctx.arc(p.x+dx,p.y+2.5,1.15,0,Math.PI*2);}
-    ctx.fill();
-   }
-  }else{
-   ctx.fillStyle=color;ctx.strokeStyle='#15251f';ctx.beginPath();
-   ctx.arc(p.x,p.y,Math.max(3,Math.min(6,cam.z*5)),0,Math.PI*2);ctx.fill();ctx.stroke();
-   if(own&&cam.z>=.4){ctx.font='10px system-ui';ctx.fillText(r.glyph,p.x+7,p.y);}
-  }
+  paintCivilianMarker(ctx,p,cam.z,markerColor,r.glyph,hostileCargo);
   ctx.restore();markers++;
  }
  cache.prune(ids);return{markers,animated,cacheSize:cache.size,hits:cache.hits,misses:cache.misses};

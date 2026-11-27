@@ -8,7 +8,13 @@ SOURCES = {'src/game/FormalDevelopmentPanel.tsx': '5fc00d06a0cc583ea557fa2d40d79
 
 def _matches(path, root):
     target = root / path
-    return target.is_file() and sha256(target.read_bytes()).hexdigest() == SOURCES[path]
+    exact = target.is_file() and sha256(target.read_bytes()).hexdigest() == SOURCES[path]
+    if exact:
+        return True
+    if path != 'src/game/FormalWorldMap.tsx':
+        return False
+    from world_map_readability_successor import accepts
+    return accepts(path, SOURCES[path], root)
 
 
 def continues_file(path, predecessor, root=ROOT):
