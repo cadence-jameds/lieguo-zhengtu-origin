@@ -1,3 +1,4 @@
+import {paintRouteStroke} from './mapRouteStyle';
 import {presentationScopeKey} from '../presentationModel';
 import type {WorldRead} from '../presentationModel';
 import type {MissionArmy} from '../formal/combatModel';
@@ -23,9 +24,9 @@ export function paintBattleMarker(ctx:CanvasRenderingContext2D,p:Point,zoom:numb
 export function paintArmies(ctx:CanvasRenderingContext2D,w:WorldRead,time:number,cam:{x:number;y:number;z:number},width:number,height:number,screen:(p:Point)=>Point,cache:ArmyRouteCache,reduced:boolean,clock:number){let routes=0,markers=0,animated=false;const ids=new Set<string>(),buckets=new Map<string,number>();
  for(const a of w.armies){if(!isMissionArmy(a)||!['outbound','returning','engaged'].includes(a.status))continue;ids.add(a.id);const r=cache.get(a.id,a.path,a.departedAt,a.arrivalAt);if(!routeVisible(r,cam,width,height))continue;
   if(a.status!=='engaged'&&time<a.arrivalAt)animated=true;
-  if(a.status!=='engaged'){ctx.save();ctx.translate(width/2-cam.x*cam.z,height/2-cam.y*cam.z);ctx.scale(cam.z,cam.z);ctx.strokeStyle=armyColor(w,a)+'88';ctx.lineWidth=1.5/cam.z;ctx.setLineDash([5/cam.z,5/cam.z]);if(r.path)ctx.stroke(r.path);else{ctx.beginPath();r.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();}ctx.restore();routes++;}
+  if(a.status!=='engaged'){ctx.save();ctx.translate(width/2-cam.x*cam.z,height/2-cam.y*cam.z);ctx.scale(cam.z,cam.z);if(!r.path){ctx.beginPath();r.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));}paintRouteStroke(ctx,r.path,cam.z,armyColor(w,a));ctx.restore();routes++;}
   const p=screen(armyPosition(a,time)!);if(p.x< -18||p.x>width+18||p.y< -18||p.y>height+18)continue;const bucket=Math.floor(p.x/12)+','+Math.floor(p.y/12),count=buckets.get(bucket)??0;buckets.set(bucket,count+1);if(cam.z<.25&&count>0)continue;
-  const size=Math.max(3,Math.min(7,cam.z*7+3));ctx.save();ctx.translate(p.x,p.y);ctx.rotate(armyHeading(a,time));ctx.fillStyle=armyColor(w,a);ctx.beginPath();ctx.moveTo(0,-size);ctx.lineTo(size*.85,size*.7);ctx.lineTo(-size*.85,size*.7);ctx.closePath();ctx.fill();ctx.restore();markers++;if(a.status==='engaged'){ctx.strokeStyle='#ffb783';ctx.beginPath();ctx.arc(p.x,p.y,10+(reduced?0:Math.sin(clock/220)*3),0,Math.PI*2);ctx.stroke();if(!reduced)animated=true;}else if(time<a.arrivalAt)animated=true;
+  const size=Math.max(3,Math.min(7,cam.z*7+3));ctx.save();ctx.translate(p.x,p.y);ctx.rotate(armyHeading(a,time));ctx.fillStyle=armyColor(w,a);ctx.beginPath();ctx.moveTo(0,-size);ctx.lineTo(size*.85,size*.7);ctx.lineTo(-size*.85,size*.7);ctx.closePath();ctx.strokeStyle='#18231d';ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();ctx.fill();ctx.restore();markers++;if(a.status==='engaged'){ctx.strokeStyle='#ffb783';ctx.beginPath();ctx.arc(p.x,p.y,10+(reduced?0:Math.sin(clock/220)*3),0,Math.PI*2);ctx.stroke();if(!reduced)animated=true;}else if(time<a.arrivalAt)animated=true;
  }cache.prune(ids);return{routes,markers,animated,cacheSize:cache.size,hits:cache.hits,misses:cache.misses};}
 
 /** Binary search of formal segment times; projection is the same45° map transform, with no route search. */

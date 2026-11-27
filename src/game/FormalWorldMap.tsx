@@ -23,7 +23,7 @@ import {INITIAL_ZOOM,MAX_ZOOM,MIN_ZOOM,overviewZoom} from './presentation/mapPai
 import {cityArtAge,civilizationIndex,SITE_INDEX,CIV_NAMES} from './presentation/artMap';
 import {mapSession,mapImage,drawTerrain} from './presentation/DemoMapCache';
 import {eraAtlas,eraBounds,worldCitySprite} from './assets';
-import {relationColor,politicalInfluence,drawPoliticalOverlay,drawMapBackground} from './presentation/mapRelations';
+import {relationColor,politicalInfluence,drawPoliticalOverlay,drawPoliticalLabels,drawMapBackground} from './presentation/mapRelations';
 import {ArmyDispatchDialog} from './presentation/CombatPanel';
 import {FormalTargetPanel} from './presentation/FormalTargetPanel';
 import {useTargetIntel} from './presentation/targetIntel';
@@ -73,7 +73,8 @@ function FormalWorldMap({world,focusCityId,focusPoint,onSelect,onSettle,onMissio
    const specialBounds=mapQueryBounds(cam,w,h,{left:0,top:0,right:w,bottom:h});
    const specialResult=visibleSpecialFields(g,specialBounds,screen,w,h,{...flags.current.special,enabled:flags.current.special.enabled&&Math.round(cam.z*100)>=100},specialCache.current);
    paintSpecialFields(ctx,specialResult.points,screen,'ground');
-   if(flags.current.territory)drawPoliticalOverlay(ctx,politicalInfluence(g),screen,{width:w,height:h,zoom:cam.z});
+   const influence=flags.current.territory?politicalInfluence(g):null;
+   if(influence)drawPoliticalOverlay(ctx,influence,screen,{width:w,height:h,zoom:cam.z});
    c.dataset.specialFields=JSON.stringify({visited:specialResult.visited,misses:specialResult.misses,markers:specialResult.points.length,lodHidden:specialResult.lodHidden,cacheSize:specialCache.current.size});
    const displayTime=worldPaused(g)?g.time:displayClock.projectTime(g.campaignId,g.time),idx=spatial(g),visible=idx.query(bounds),layers:{depth:number;draw:()=>void}[]=[],glyphs:MapGlyph[]=[];
    for(const city of visible.cities){const p=screen(city);if(p.x<viewport.left||p.x>viewport.right||p.y<viewport.top||p.y>viewport.bottom)continue;const age=cityArtAge(g,city);if(age!==3&&p.y>h+60)continue;const f=g.factions.find(f=>f.id===city.ownerFactionId)!,i=civilizationIndex(f.civilizationId),size=mapNodeSize(true,cam.z),visual=worldCityVisual(age,size),color=relationColor(g,city);layers.push({depth:city.x+city.y,draw:()=>{ctx.save();ctx.beginPath();const marker=mapMarkerSize(cam.z),rx=marker.width,ry=marker.height;ctx.moveTo(p.x,p.y-ry);ctx.lineTo(p.x+rx,p.y);ctx.lineTo(p.x,p.y+ry);ctx.lineTo(p.x-rx,p.y);ctx.closePath();ctx.fillStyle=color+'55';ctx.strokeStyle=color;ctx.lineWidth=detail?2.5:1;ctx.fill();ctx.stroke();const im=age===3?imperialCenters[i]:cities[age];if(detail){if(age===3)crop(im,worldCitySprite(i,age).crop,{x:p.x,y:p.y+size*.8+visual.footOffset},visual.width,visual.width);else crop(im,eraBounds(14+i,age),{x:p.x,y:p.y+size*.8},size*3.8,size*3.8);}if(detail&&protectedFaction(g,city.ownerFactionId,displayTime)){ctx.globalAlpha=.55;crop(dome,{x:0,y:0,w:dome.naturalWidth,h:dome.naturalHeight},{x:p.x,y:p.y+size*.85},size*5,size*5);ctx.globalAlpha=1;}
@@ -91,11 +92,12 @@ function FormalWorldMap({world,focusCityId,focusPoint,onSelect,onSettle,onMissio
    // is collected independently and must remain visible with labels hidden.
    paintMapGlyphs(ctx,glyphs);
    if(flags.current.hover){tilePath(ctx,flags.current.hover,screen);ctx.strokeStyle='#ffffffb0';ctx.setLineDash([3,2]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
-   // Last Canvas paint, above every label and marker.
+   // Combat stays above ordinary labels and markers; empire names are the top map layer.
    const impacts=battleImpacts.update(g,started,reduced);let visibleImpacts=0;for(const impact of impacts){const p=screen(impact.point);if(p.x< -40||p.x>w+40||p.y< -40||p.y>h+100)continue;paintBattleMarker(ctx,p,cam.z,started,false,true);visibleImpacts++;}
    let visibleBattles=0;for(const b of battleMarkers(g)){const p=screen(b.point);if(p.x< -40||p.x>w+40||p.y< -40||p.y>h+100)continue;paintBattleMarker(ctx,p,cam.z,started,reduced);visibleBattles++;}
+   if(influence)drawPoliticalLabels(ctx,influence,screen,{width:w,height:h,zoom:cam.z});
    if(armyPaint.animated||civilians.animated||visibleImpacts>0||!reduced&&visibleBattles||(g.logistics?.length??0)>0||g.settlements?.some(s=>s.phase==='travelling'))redraw.current();
-   c.dataset.armyOverlay=JSON.stringify({...armyPaint,civilianMarkers:civilians.markers,civilianCacheMisses:civilians.misses,visibleBattles,visibleImpacts,paintOrder:'terrain,politics,entities,routes,armies,labels,hover,battle-overlay'});
+   c.dataset.armyOverlay=JSON.stringify({...armyPaint,civilianMarkers:civilians.markers,civilianCacheMisses:civilians.misses,visibleBattles,visibleImpacts,territoryNamesLayer:influence?'foreground':undefined,paintOrder:'terrain,politics,entities,routes,armies,labels,hover,battle-overlay'});
    terrainCache.pump();const painted=sceneryCache.pump(4);if(painted)redraw.current();
    c.dataset.renderMs=(performance.now()-started).toFixed(2);c.dataset.backgroundRedraws=String(backgroundRedraws);c.dataset.terrainCache=JSON.stringify({tiles:terrainCache.cache.size,bytes:terrainCache.totalBytes,pending:terrainCache.pendingCount,hits:terrainCache.hits,misses:terrainCache.misses});c.dataset.sceneryCache=JSON.stringify({tiles:sceneryCache.cache.size,bytes:sceneryCache.bytes,pending:sceneryCache.pending.size,hits:sceneryCache.hits,misses:sceneryCache.misses,spriteDraws:sceneryCache.spriteDraws});c.dataset.camera=JSON.stringify(cam);
   };
