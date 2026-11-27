@@ -15,6 +15,13 @@ SOURCES = {
     'src/game/presentation/mapRouteStyle.test.ts': (None, '870a51ca297068aa0f1de1e8f557efdb30fb3ed694e89057d1c792c3c85a8fc5'),
 }
 
+# Original hashes already verified by the immutable R3-04 and art witnesses.
+# Admit exactly the existing historical route to this display-only successor.
+HISTORICAL_PREDECESSORS = {
+    'src/game/presentation/armyOverlay.ts': frozenset({'bee14e911243120f35b4756b06d198047e1dd91a23bbf9408d0dbfd5e56590f5'}),
+    'src/game/presentation/mapRelations.ts': frozenset({'cc5a4763a5e96aed46a0e40dfe0614d2714338fb0820f0143177a1e40797fa22'}),
+}
+
 def matches(path, root=ROOT):
     pin = SOURCES.get(path)
     target = root / path
@@ -22,7 +29,7 @@ def matches(path, root=ROOT):
 
 def accepts(path, predecessor, root=ROOT):
     pin = SOURCES.get(path)
-    return bool(pin and pin[0] and predecessor == pin[0] and matches(path, root))
+    return bool(pin and pin[0] and (predecessor == pin[0] or predecessor in HISTORICAL_PREDECESSORS.get(path, ())) and matches(path, root))
 
 def validate_sources(root=ROOT):
     for path in SOURCES:

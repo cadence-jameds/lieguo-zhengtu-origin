@@ -127,11 +127,13 @@ class WorldMapReadabilityProof(unittest.TestCase):
     self.assertTrue(leaf.matches(path,root))
     self.assertFalse(leaf.accepts(path,'0'*64,root))
     if before:self.assertTrue(leaf.accepts(path,before,root))
+    for h in leaf.HISTORICAL_PREDECESSORS.get(path,()):self.assertTrue(leaf.accepts(path,h,root))
     if path in picker.PREDECESSORS:self.assertTrue(picker.continues_file(path,picker.PREDECESSORS[path],root))
     if path==cargo.SOURCE:self.assertTrue(cargo.accepts(path,next(iter(cargo.PREDECESSORS)),root))
     f.write_bytes(exact+b'// tampered')
     self.assertFalse(leaf.matches(path,root))
     self.assertFalse(leaf.accepts(path,before,root))
+    for h in leaf.HISTORICAL_PREDECESSORS.get(path,()):self.assertFalse(leaf.accepts(path,h,root))
     if path in picker.PREDECESSORS:self.assertFalse(picker.continues_file(path,picker.PREDECESSORS[path],root))
    self.assertFalse(leaf.accepts('src/game/formal/routing.ts','0'*64,root))
 
