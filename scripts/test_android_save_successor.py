@@ -113,4 +113,26 @@ class HostileCaravanOverlayProof(unittest.TestCase):
    f.write_bytes(rendered+b'\n')
    for h in cargo.PREDECESSORS:self.assertFalse(cargo.accepts(cargo.SOURCE,h,root))
 
+class WorldMapReadabilityProof(unittest.TestCase):
+ def test_only_the_exact_presentational_tail_is_admitted(self):
+  import world_map_readability_successor as leaf
+  import settlement_map_picker_successor as picker
+  import hostile_caravan_overlay_successor as cargo
+  leaf.validate_sources()
+  with tempfile.TemporaryDirectory(prefix='world-map-proof-') as directory:
+   root=Path(directory)
+   for path,(before,_) in leaf.SOURCES.items():
+    f=root/path;f.parent.mkdir(parents=True,exist_ok=True)
+    exact=(leaf.ROOT/path).read_bytes();f.write_bytes(exact)
+    self.assertTrue(leaf.matches(path,root))
+    self.assertFalse(leaf.accepts(path,'0'*64,root))
+    if before:self.assertTrue(leaf.accepts(path,before,root))
+    if path in picker.PREDECESSORS:self.assertTrue(picker.continues_file(path,picker.PREDECESSORS[path],root))
+    if path==cargo.SOURCE:self.assertTrue(cargo.accepts(path,next(iter(cargo.PREDECESSORS)),root))
+    f.write_bytes(exact+b'// tampered')
+    self.assertFalse(leaf.matches(path,root))
+    self.assertFalse(leaf.accepts(path,before,root))
+    if path in picker.PREDECESSORS:self.assertFalse(picker.continues_file(path,picker.PREDECESSORS[path],root))
+   self.assertFalse(leaf.accepts('src/game/formal/routing.ts','0'*64,root))
+
 if __name__=='__main__':unittest.main()

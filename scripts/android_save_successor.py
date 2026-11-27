@@ -118,10 +118,11 @@ def accepts(path,predecessor,root=ROOT):
  from late_game_successor import accepts as late
  from offline_command_evidence_successor import accepts as offline
  from hostile_caravan_overlay_successor import accepts as cargo
+ from world_map_readability_successor import accepts as readability
  from exile_camp_successor import accepts as exile_camp
  from hud_pictogram_successor import accepts as hud
  from political_community_successor import accepts as community
- if exile_camp(path,predecessor,root) or hud(path,predecessor,root) or community(path,predecessor,root) or cargo(path,predecessor,root) or notice(path,predecessor,root) or escort(path,predecessor,root) or slots(path,predecessor,root) or wall(path,predecessor,root) or offline(path,predecessor,root) or late(path,predecessor,root):return True
+ if exile_camp(path,predecessor,root) or hud(path,predecessor,root) or community(path,predecessor,root) or cargo(path,predecessor,root) or readability(path,predecessor,root) or notice(path,predecessor,root) or escort(path,predecessor,root) or slots(path,predecessor,root) or wall(path,predecessor,root) or offline(path,predecessor,root) or late(path,predecessor,root):return True
  if path not in SOURCES:
   from elite_recruit_successor import accepts as elite
   return elite(path,predecessor,root)
@@ -145,6 +146,7 @@ def validate(root=ROOT):
  from late_game_successor import accepts as late
  from offline_command_evidence_successor import accepts as offline,validate as offline_validate
  from hostile_caravan_overlay_successor import accepts as cargo
+ from world_map_readability_successor import accepts as readability
  from exile_camp_successor import accepts as exile_camp
  from hud_pictogram_successor import accepts as hud
  from political_community_successor import accepts as community
@@ -153,12 +155,14 @@ def validate(root=ROOT):
   from exile_camp_successor import validate_assets as exile_validate
   exile_validate(root)
   visual_validate(root)
+  from world_map_readability_successor import validate_sources as validate_readability
+  validate_readability(root)
   offline_validate(root);late_validate(root)
   notice_validate(root);escort_validate(root)
  r=read_record(root)
  for p,v in r['changes'].items():assert sha((root/p).read_bytes())==v['after'] or notice(p,v['after'],root) or community(p,v['after'],root) or hud(p,v['after'],root) or accepts_settler_layout(p,v['after'],root),('Unpinned Android save hotfix',p)
  for section in ['invariants','historical']:
-  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and (exile_camp(p,h,root) or visual(p,h,root) or hud(p,h,root) or community(p,h,root) or cargo(p,h,root) or notice(p,h,root) or escort(p,h,root) or elite(p,h,root) or slots(p,h,root) or wall(p,h,root) or offline(p,h,root) or late(p,h,root) or p==BOUNDARY and h==sha(previous(BASE,p)) and accepts_boundary(p,previous(BASE,p),root)),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
+  for p,h in r[section].items():assert sha((root/p).read_bytes())==h or section=='invariants' and (exile_camp(p,h,root) or visual(p,h,root) or hud(p,h,root) or community(p,h,root) or cargo(p,h,root) or readability(p,h,root) or notice(p,h,root) or escort(p,h,root) or elite(p,h,root) or slots(p,h,root) or wall(p,h,root) or offline(p,h,root) or late(p,h,root) or p==BOUNDARY and h==sha(previous(BASE,p)) and accepts_boundary(p,previous(BASE,p),root)),('Rules/schema/AI/ledger/fence/PWA/protection/history changed',p)
  for p,b in adapters().items():assert (root/p).read_bytes()==b,('Changed finite hotfix adapter',p)
  css='src/game/presentation/playable.css';assert (root/css).read_bytes().startswith(previous(BASE,css)),'Existing styles changed'
  p='src/game/persistence.ts';before=previous(BASE,p).decode();expected="import {persistenceTime} from './persistenceTime';\n"+before;expected=edit(expected,'  // Final encodeSave validates the entire stamped candidate before any writes.','  savedAt=persistenceTime(savedAt);\n  // Final encodeSave validates the entire stamped candidate before any writes.');assert (root/p).read_text()==expected,'Unrequested persistence transaction change'
