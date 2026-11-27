@@ -4,9 +4,13 @@
 
 **[開始遊玩 GitHub Pages 公開試玩版](https://cadence-jameds.github.io/lieguo-zhengtu-origin/)**
 
-![遊戲中的世界地圖](docs/maintenance/images/world-map.webp)
+![世界地圖：河流、森林、聚落與野外資源據點](docs/maintenance/images/v0.31.6/world-map.webp)
 
-*實際遊戲畫面：世界地圖，來自先前版本的 Chromium 驗證，介面可能與最新版本略有不同。[來源與其他畫面](docs/validation/global-protection/README.md)*
+*世界地圖。以下畫面擷取自公開試玩版 v0.31.6 的桌面新戰役。*
+
+| 城市建設 | 科技研發 |
+| --- | --- |
+| [![城內的城市中心、建築空地與城牆入口](docs/maintenance/images/v0.31.6/town.webp)](docs/maintenance/images/v0.31.6/town.webp) | [![封建、城堡與帝王三個時代的傳統科技樹](docs/maintenance/images/v0.31.6/technology.webp)](docs/maintenance/images/v0.31.6/technology.webp) |
 
 ## 從城邦走向帝國
 
@@ -16,7 +20,7 @@
 - 使用軍團、帝國與外交介面處理勢力關係；不同情境的完整玩法仍需持續驗證。
 - 選擇戰役速度，離開後依設定補算有限的離線時間。這是本機模擬，並非伺服器持續運行。
 
-[城市建設畫面](docs/validation/global-protection/1440-town.png) · [軍隊畫面](docs/validation/global-protection/390-army.png) · [外交畫面](docs/validation/global-protection/390-diplomacy.png)
+[歷史驗證畫面：城市、軍隊與外交](docs/validation/global-protection/README.md)
 
 ## 開始與保存
 
