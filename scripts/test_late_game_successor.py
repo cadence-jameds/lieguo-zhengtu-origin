@@ -71,6 +71,27 @@ class LateGameSuccessorTests(unittest.TestCase):
         self.assertFalse(gate.accepts('src/game/formal/scheduler.ts', '0' * 64, self.root))
         self.assertTrue(gate.validate(self.root))
 
+    def test_route_reuse_only_continues_the_exact_reviewed_routing_file(self):
+        from exact_route_reuse_successor import ROUTING, PREDECESSOR, CANDIDATE, continues_file
+        target = self.root / ROUTING
+        pinned = target.read_bytes()
+        historical = gate.exact_scope()[0][ROUTING]['before']
+        self.assertEqual(gate.sha(pinned), CANDIDATE)
+        self.assertTrue(continues_file(ROUTING, PREDECESSOR, self.root))
+        self.assertFalse(continues_file(ROUTING, historical, self.root))
+        self.assertFalse(continues_file('src/game/formal/economy.ts', PREDECESSOR, self.root))
+        self.assertTrue(gate.accepts(ROUTING, historical, self.root))
+        target.write_bytes(pinned + b'\n')
+        self.assertFalse(gate.accepts(ROUTING, historical, self.root))
+        with self.assertRaisesRegex(AssertionError, ROUTING):
+            gate.validate(self.root)
+        original = gate.previous('bf4b520308dc06ef8934636398b9d7c83612e792', ROUTING)
+        self.assertEqual(gate.sha(original), PREDECESSOR)
+        target.write_bytes(original)
+        self.assertFalse(continues_file(ROUTING, PREDECESSOR, self.root))
+        self.assertTrue(gate.accepts(ROUTING, historical, self.root))
+        self.assertTrue(gate.validate(self.root))
+
     def test_tampering_fails_even_when_new_source_has_no_predecessor(self):
         for path in sorted({'src/game/formal/economy.ts', 'src/game/formal/logisticsRoute.ts'} | gate.CHILD_SOURCES | gate.RESEARCH_SOURCES):
             target = self.root / path

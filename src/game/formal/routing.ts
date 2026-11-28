@@ -3,8 +3,31 @@ import {passable,terrainAt,terrainTravelMultiplier} from './terrain';
 type Point={x:number;y:number};
 /** Shared by path selection, military segment snapshots and strict save validation. */
 export const segmentTravelDistance=(w:WorldRead,from:Point,to:Point)=>Math.hypot(to.x-from.x,to.y-from.y)*terrainTravelMultiplier(terrainAt(w,to.x,to.y));
+type Route={path:Point[];distance:number};
+const MAX_ROUTES=128,MAX_POINTS=16384;
+let active:{width:number;height:number;terrain:string|undefined;entries:Map<string,Route>;points:number}|undefined;
+const copyRoute=({path,distance}:Route):Route=>({path:path.map(({x,y})=>({x,y})),distance});
+/** Reuse exact directed A* results for the standard formal terrain. Cached points are private. */
+export function route(w:WorldRead,from:Point,to:Point):Route {
+ const {width,height}=w.dimensions,terrain=w.worldLayer?.terrain;
+ // Preserve original validation and behavior on anything outside the formal grid.
+ const valid=({x,y}:Point)=>Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<width&&y<height;
+ if(width!==384||height!==384||typeof terrain!=='string'||terrain.length!==width*height||!valid(from)||!valid(to))return searchRoute(w,from,to);
+ if(!active||active.width!==width||active.height!==height||active.terrain!==terrain)active={width,height,terrain,entries:new Map(),points:0};
+ const cache=active,key=`${from.y*width+from.x}>${to.y*width+to.x}`,hit=cache.entries.get(key);
+ // Entering water and the key tie-break depend on direction. No reverse reuse.
+ if(hit){cache.entries.delete(key);cache.entries.set(key,hit);return copyRoute(hit);}
+ const result=searchRoute(w,from,to);
+ if(result.path.length<=MAX_POINTS){
+  while(cache.entries.size>=MAX_ROUTES||cache.points+result.path.length>MAX_POINTS){
+   const oldest=cache.entries.keys().next().value!;cache.points-=cache.entries.get(oldest)!.path.length;cache.entries.delete(oldest);
+  }
+  cache.entries.set(key,copyRoute(result));cache.points+=result.path.length;
+ }
+ return result;
+}
 /** Indexed grid A*: explicit passability, no hard path/entity limit or illegal straight-line fallback. */
-export function route(w:WorldRead,from:Point,to:Point):{path:Point[];distance:number} {
+function searchRoute(w:WorldRead,from:Point,to:Point):{path:Point[];distance:number} {
  const width=w.dimensions.width,start=from.y*width+from.x,goal=to.y*width+to.x;
  if(!passable(terrainAt(w,from.x,from.y))||!passable(terrainAt(w,to.x,to.y)))throw new Error('No traversable route');
  const heap:{key:number;g:number;score:number}[]=[],cost=new Map<number,number>([[start,0]]),parent=new Map<number,number>();
