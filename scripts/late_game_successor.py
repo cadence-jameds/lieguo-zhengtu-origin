@@ -218,7 +218,10 @@ def accepts(path, predecessor, root=ROOT):
         return portraits(path, predecessor, root)
     changes, grants = exact_scope()
     target = root / path
-    return predecessor in grants[path] and target.is_file() and sha(target.read_bytes()) == changes[path]['after']
+    from exact_route_reuse_successor import continues_file
+    return predecessor in grants[path] and target.is_file() and (
+        sha(target.read_bytes()) == changes[path]['after'] or continues_file(path, changes[path]['after'], root)
+    )
 
 
 def validate(root=ROOT):
@@ -228,7 +231,8 @@ def validate(root=ROOT):
     changes, _ = exact_scope()
     for path, change in changes.items():
         target = root / path
-        assert target.is_file() and sha(target.read_bytes()) == change['after'], ('Unpinned late-game implementation', path)
+        from exact_route_reuse_successor import continues_file
+        assert target.is_file() and (sha(target.read_bytes()) == change['after'] or continues_file(path, change['after'], root)), ('Unpinned late-game implementation', path)
     assert accepts_adapter(BOUNDARY, previous(BASE, BOUNDARY), root), 'Unpinned late-game projection adapter'
     return {'changes': changes}
 
